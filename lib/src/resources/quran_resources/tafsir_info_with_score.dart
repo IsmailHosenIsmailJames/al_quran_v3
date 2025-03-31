@@ -7,7 +7,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6236,
       'score': 100,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al-Baghawi.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al-Baghawi.json.txt',
     },
     {
       'language': 'Arabic',
@@ -16,7 +16,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6177,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al_Saddi.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al_Saddi.json.txt',
     },
     {
       'language': 'Arabic',
@@ -25,7 +25,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 5278,
       'score': 84,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Muyassar.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Muyassar.json.txt',
     },
     {
       'language': 'Arabic',
@@ -34,7 +34,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6196,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_al-Tabari.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_al-Tabari.json.txt',
     },
     {
       'language': 'Arabic',
@@ -43,7 +43,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6108,
       'score': 97,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Al_Wasit.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Al_Wasit.json.txt',
     },
     {
       'language': 'Arabic',
@@ -52,7 +52,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6211,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Arabic_Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Arabic_Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
     },
     {
       'language': 'Arabic',
@@ -61,7 +61,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1738,
       'score': 27,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Asseraj_fi_Bayan_Gharib_AlQuran.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Asseraj_fi_Bayan_Gharib_AlQuran.json.txt',
     },
     {
       'language': 'Arabic',
@@ -70,7 +70,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6235,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al_Qurtubi.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Al_Qurtubi.json.txt',
     },
     {
       'language': 'Arabic',
@@ -79,7 +79,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6083,
       'score': 97,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Tanwir_al-Miqbas.json.txt'
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafseer_Tanwir_al-Miqbas.json.txt',
     },
     {
       'language': 'Arabic',
@@ -88,8 +88,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6205,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Ibn_Kathir.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Ibn_Kathir.json.txt',
+    },
   ],
   'Persian': [
     {
@@ -99,8 +99,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6234,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Persian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Persian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'Bosnian': [
     {
@@ -110,8 +110,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6220,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bosnian/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Bosnian/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Bengali': [
     {
@@ -121,7 +121,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 205,
       'score': 3,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Fathul_Majid.json.txt'
+          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Fathul_Majid.json.txt',
     },
     {
       'language': 'Bengali',
@@ -130,7 +130,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1914,
       'score': 30,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bengali/Tafseer_ibn_Kathir.json.txt'
+          'quranic_universal_library/compressed_tafsir/Bengali/Tafseer_ibn_Kathir.json.txt',
     },
     {
       'language': 'Bengali',
@@ -139,7 +139,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6235,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Abu_Bakr_Zakaria.json.txt'
+          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Abu_Bakr_Zakaria.json.txt',
     },
     {
       'language': 'Bengali',
@@ -148,7 +148,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6214,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bengali/Abridged_Explanation_of_the_Quran.json.txt'
+          'quranic_universal_library/compressed_tafsir/Bengali/Abridged_Explanation_of_the_Quran.json.txt',
     },
     {
       'language': 'Bengali',
@@ -157,8 +157,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6233,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Ahsanul_Bayaan.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Ahsanul_Bayaan.json.txt',
+    },
   ],
   'English': [
     {
@@ -168,7 +168,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1895,
       'score': 30,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/English/Tafsir_Ibn_Kathir_(abridged).json.txt'
+          'quranic_universal_library/compressed_tafsir/English/Tafsir_Ibn_Kathir_(abridged).json.txt',
     },
     {
       'language': 'English',
@@ -177,7 +177,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1952,
       'score': 31,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/English/Tazkirul_Quran(Maulana_Wahiduddin_Khan).json.txt'
+          'quranic_universal_library/compressed_tafsir/English/Tazkirul_Quran(Maulana_Wahiduddin_Khan).json.txt',
     },
     {
       'language': 'English',
@@ -186,7 +186,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 3037,
       'score': 48,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/English/Maarif-ul-Quran.json.txt'
+          'quranic_universal_library/compressed_tafsir/English/Maarif-ul-Quran.json.txt',
     },
     {
       'language': 'English',
@@ -195,8 +195,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6211,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/English/Al-Mukhtasar.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/English/Al-Mukhtasar.json.txt',
+    },
   ],
   'Spanish': [
     {
@@ -206,8 +206,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6219,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Spanish/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Spanish/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Italian': [
     {
@@ -217,8 +217,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6212,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Italian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Italian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'Chinese': [
     {
@@ -228,8 +228,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6214,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Chinese/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Chinese/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Kurdish': [
     {
@@ -239,8 +239,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6236,
       'score': 100,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Kurdish/Rebar_Kurdish_Tafsir.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Kurdish/Rebar_Kurdish_Tafsir.json.txt',
+    },
   ],
   'Malayalam': [
     {
@@ -250,8 +250,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6214,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Malayalam/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Malayalam/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'French': [
     {
@@ -261,8 +261,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6212,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/French/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/French/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Assamese': [
     {
@@ -272,8 +272,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6215,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Assamese/Assamese_Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Assamese/Assamese_Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Urdu': [
     {
@@ -283,7 +283,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 3995,
       'score': 64,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Urdu/Fi_Zilal_al-Quran.json.txt'
+          'quranic_universal_library/compressed_tafsir/Urdu/Fi_Zilal_al-Quran.json.txt',
     },
     {
       'language': 'Urdu',
@@ -292,7 +292,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 5073,
       'score': 81,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Urdu/Tafsir_Bayan_ul_Quran.json.txt'
+          'quranic_universal_library/compressed_tafsir/Urdu/Tafsir_Bayan_ul_Quran.json.txt',
     },
     {
       'language': 'Urdu',
@@ -301,7 +301,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1739,
       'score': 27,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Urdu/Tafsir_As-Saadi_-_Urdu.json.txt'
+          'quranic_universal_library/compressed_tafsir/Urdu/Tafsir_As-Saadi_-_Urdu.json.txt',
     },
     {
       'language': 'Urdu',
@@ -310,8 +310,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 1558,
       'score': 24,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Urdu/Tazkirul_Quran(Maulana_Wahiduddin_Khan).json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Urdu/Tazkirul_Quran(Maulana_Wahiduddin_Khan).json.txt',
+    },
   ],
   'Japanese': [
     {
@@ -321,8 +321,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6211,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Japanese/Abridged_Explanation_of_the_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Japanese/Abridged_Explanation_of_the_Quran.json.txt',
+    },
   ],
   'Turkish': [
     {
@@ -332,8 +332,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6222,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Turkish/Al-Mukhtasar_in_Interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Turkish/Al-Mukhtasar_in_Interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'Russian': [
     {
@@ -343,7 +343,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 4742,
       'score': 76,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Russian/Tafseer_Al_Saddi.json.txt'
+          'quranic_universal_library/compressed_tafsir/Russian/Tafseer_Al_Saddi.json.txt',
     },
     {
       'language': 'Russian',
@@ -352,7 +352,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6215,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Russian/Al-Mukhtasar.json.txt'
+          'quranic_universal_library/compressed_tafsir/Russian/Al-Mukhtasar.json.txt',
     },
     {
       'language': 'Russian',
@@ -361,8 +361,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 2101,
       'score': 33,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Russian/Tafsir_Ibn_Kathir.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Russian/Tafsir_Ibn_Kathir.json.txt',
+    },
   ],
   'Tagalog': [
     {
@@ -372,8 +372,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6212,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Tagalog/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Tagalog/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'Indonesian': [
     {
@@ -383,8 +383,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6212,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Indonesian/Al-Mukhtasar_in_Interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Indonesian/Al-Mukhtasar_in_Interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'vietnamese': [
     {
@@ -394,8 +394,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6221,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/vietnamese/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/vietnamese/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
+    },
   ],
   'Albanian': [
     {
@@ -405,8 +405,8 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 5604,
       'score': 89,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Albanian/Tafsir_As-Saadi.json.txt'
-    }
+          'quranic_universal_library/compressed_tafsir/Albanian/Tafsir_As-Saadi.json.txt',
+    },
   ],
   'Central_Khmer': [
     {
@@ -416,7 +416,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
       'hasTafsir': 6211,
       'score': 99,
       'full_path':
-          'quranic_universal_library/compressed_tafsir/Central_Khmer/Abridged_Explanation_of_the_Quran.json.txt'
-    }
-  ]
+          'quranic_universal_library/compressed_tafsir/Central_Khmer/Abridged_Explanation_of_the_Quran.json.txt',
+    },
+  ],
 };
