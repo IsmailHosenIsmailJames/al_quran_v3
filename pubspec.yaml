@@ -17,6 +17,7 @@ dependencies:
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.273
   intl: ^0.20.2
+  html: ^0.15.5
   
 
 dev_dependencies:
@@ -33,7 +34,17 @@ flutter:
     - assets/img/
     - assets/
     - assets/dev/
+    - assets/quran_script/
 
+  fonts:
+    - family: QPC_Hafs 
+      fonts:
+        - asset: assets/fonts/Quran/QPC Hafs font.ttf
 
+    - family: IndopakNastaleeq
+      fonts:
+        - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
-
+    - family: SurahNames
+      fonts:
+        - asset: assets/fonts/Quran/V4 Surah Name Font.ttf

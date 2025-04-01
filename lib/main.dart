@@ -1,15 +1,33 @@
+import 'dart:convert';
+
 import 'package:al_quran_v3/src/screen/setup/setup_page.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+Map<String, dynamic> tajweedScript = {};
+Map<String, dynamic> uthmaniScript = {};
+Map<String, dynamic> indopakScript = {};
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
+  tajweedScript = Map<String, dynamic>.from(
+    jsonDecode(
+      await rootBundle.loadString('assets/quran_script/QPC_Hafs_Tajweed.json'),
+    ),
+  );
+  uthmaniScript = Map<String, dynamic>.from(
+    jsonDecode(await rootBundle.loadString('assets/quran_script/Uthmani.json')),
+  );
+  indopakScript = Map<String, dynamic>.from(
+    jsonDecode(await rootBundle.loadString('assets/quran_script/Indopak.json')),
+  );
   runApp(MyApp(preferences: preferences));
 }
 

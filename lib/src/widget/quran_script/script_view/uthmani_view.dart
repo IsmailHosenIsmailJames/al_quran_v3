@@ -1,0 +1,23 @@
+import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
+import 'package:flutter/material.dart';
+
+class UthmaniView extends StatelessWidget {
+  final ScriptInfo scriptInfo;
+  const UthmaniView({super.key, required this.scriptInfo});
+
+  @override
+  Widget build(BuildContext context) {
+    List words =
+        uthmaniScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
+            .toString()];
+    return Text.rich(
+      style: TextStyle(fontSize: 24, fontFamily: 'QPC_Hafs'),
+      TextSpan(
+        children: List<InlineSpan>.generate(words.length, (index) {
+          return TextSpan(text: words[index]);
+        }),
+      ),
+    );
+  }
+}

@@ -8,6 +8,10 @@ import 'package:al_quran_v3/src/resources/quran_resources/word_by_word_translati
 import 'package:al_quran_v3/src/resources/translation/languages.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/simple_translation.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
+import 'package:al_quran_v3/src/theme/values/values.dart';
+import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
+import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
+import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -34,225 +38,363 @@ class _AppSetupPageState extends State<AppSetupPage> {
       fontSize: 16,
       fontWeight: FontWeight.bold,
     );
+
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/img/Quran_Logo_v3.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const Gap(30),
-              const Row(
-                children: [
-                  Icon(FluentIcons.settings_24_regular),
-                  Gap(10),
-                  Text(
-                    'Setup',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const Gap(10),
-              Container(
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(7),
-                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: 12,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 12,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '1',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Gap(8),
+                            Text('App Language', style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            hintText: "Select app language...",
+                          ),
+                          isExpanded: true,
+                          items: getAppLanguageDropdown(),
+                          onChanged: (value) {},
+                        ),
+
+                        const Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 12,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Gap(8),
+                            Text(
+                              'Quran Translation Language',
+                              style: titleStyle,
+                            ),
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          value: translationLanguage,
+                          items: getQuranTranslationLanguageDropDownList(),
+                          decoration: InputDecoration(
+                            hintText: "Select translation language...",
+                          ),
+                          isExpanded: true,
+                          onChanged: (value) {
+                            translationLanguage = value ?? 'English';
+                            translationBook = null;
+                            selectableTranslationBook =
+                                simpleTranslation[value];
+                            log(
+                              JsonEncoder.withIndent(
+                                ' ',
+                              ).convert(selectableTranslationBook),
+                              name: 'Selectable Translation Book',
+                            );
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '3',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Text('Quran Translation Book', style: titleStyle),
+                          ],
+                        ),
+
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTranslationBookDropDownList(),
+                          decoration: InputDecoration(
+                            hintText: "Select translation book...",
+                          ),
+                          isExpanded: true,
+                          onChanged: (value) {
+                            translationBook = value ?? '';
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '4',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Text('Quran Tafsir Language', style: titleStyle),
+                          ],
+                        ),
+
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTafsirLanguageDropDownList(),
+                          decoration: InputDecoration(
+                            hintText: "Select tafsir language...",
+                          ),
+                          isExpanded: true,
+                          onChanged: (value) {
+                            tafsirLanguage = value ?? '';
+                            selectableTafsirBook =
+                                tafsirInformationWithScore[value];
+
+                            log(value.toString());
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '5',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Text('Quran Tafsir Book', style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTafsirBookDropDownList(),
+                          decoration: InputDecoration(
+                            hintText: "Select tafsir book...",
+                          ),
+                          isExpanded: true,
+                          onChanged: (value) {
+                            translationBook = value ?? '';
+                            log(value.toString());
+                            setState(() {});
+                          },
+                        ),
+                        Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primaryColor,
+                              child: Text(
+                                '6',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Gap(8),
+                            Text('Quran Script & Style', style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        getScriptSelectionSegmentedButtons(),
+                        Gap(15),
+                        Center(
+                          child: ScriptProcessor(
+                            scriptInfo: ScriptInfo(
+                              surahNumber: 2,
+                              ayahNumber: 2,
+                              quranScriptType: selectedScript,
                             ),
                           ),
                         ),
-                        const Gap(8),
-                        Text('App Language', style: titleStyle),
                       ],
-                    ),
-                    const Gap(5),
-                    DropdownButtonFormField(
-                      decoration: InputDecoration(
-                        hintText: "Select app language...",
-                      ),
-                      isExpanded: true,
-                      items: getAppLanguageDropdown(),
-                      onChanged: (value) {},
-                    ),
-
-                    const Gap(15),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 12,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Text(
-                            '2',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const Gap(8),
-                        Text('Quran Translation Language', style: titleStyle),
-                      ],
-                    ),
-                    const Gap(5),
-                    DropdownButtonFormField(
-                      value: translationLanguage,
-                      items: getQuranTranslationLanguageDropDownList(),
-                      decoration: InputDecoration(
-                        hintText: "Select translation language...",
-                      ),
-                      isExpanded: true,
-                      onChanged: (value) {
-                        translationLanguage = value ?? 'English';
-                        translationBook = null;
-                        selectableTranslationBook = simpleTranslation[value];
-                        log(
-                          JsonEncoder.withIndent(
-                            ' ',
-                          ).convert(selectableTranslationBook),
-                          name: 'Selectable Translation Book',
-                        );
-                        setState(() {});
-                      },
-                    ),
-                    const Gap(15),
-
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 13,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Text(
-                            '3',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Gap(8),
-                        Text('Quran Translation Book', style: titleStyle),
-                      ],
-                    ),
-
-                    const Gap(5),
-                    DropdownButtonFormField(
-                      items: getQuranTranslationBookDropDownList(),
-                      decoration: InputDecoration(
-                        hintText: "Select translation book...",
-                      ),
-                      isExpanded: true,
-                      onChanged: (value) {
-                        translationBook = value ?? '';
-                        setState(() {});
-                      },
-                    ),
-                    const Gap(15),
-
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 13,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Text(
-                            '4',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Gap(8),
-                        Text('Quran Tafsir Language', style: titleStyle),
-                      ],
-                    ),
-
-                    const Gap(5),
-                    DropdownButtonFormField(
-                      items: getQuranTafsirLanguageDropDownList(),
-                      decoration: InputDecoration(
-                        hintText: "Select tafsir language...",
-                      ),
-                      isExpanded: true,
-                      onChanged: (value) {
-                        tafsirLanguage = value ?? '';
-                        selectableTafsirBook =
-                            tafsirInformationWithScore[value];
-
-                        log(value.toString());
-                        setState(() {});
-                      },
-                    ),
-                    const Gap(15),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 13,
-                          backgroundColor: AppColors.primaryColor,
-                          child: Text(
-                            '5',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Gap(8),
-                        Text('Quran Tafsir Book', style: titleStyle),
-                      ],
-                    ),
-                    const Gap(5),
-                    DropdownButtonFormField(
-                      items: getQuranTafsirBookDropDownList(),
-                      decoration: InputDecoration(
-                        hintText: "Select tafsir book...",
-                      ),
-                      isExpanded: true,
-                      onChanged: (value) {
-                        translationBook = value ?? '';
-                        log(value.toString());
-                        setState(() {});
-                      },
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.topRight,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: themeIconButton(context),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+  Row getScriptSelectionSegmentedButtons() {
+    return Row(
+      spacing: 5,
+      children: [
+        Expanded(
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  selectedScript == QuranScriptType.tajweed
+                      ? AppColors.primaryColor
+                      : Colors.grey.withValues(alpha: 0.2),
+              foregroundColor:
+                  selectedScript == QuranScriptType.tajweed
+                      ? Colors.white
+                      : AppColors.primaryColor,
+              padding: EdgeInsets.only(left: 8, right: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(roundedRadius),
+                  bottomLeft: Radius.circular(roundedRadius),
+                ),
+              ),
+              elevation: 0,
+              shadowColor: Colors.transparent,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedScript = QuranScriptType.tajweed;
+              });
+            },
+            label: Text(
+              "Tajweed",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            icon:
+                selectedScript == QuranScriptType.tajweed
+                    ? Icon(Icons.done_rounded)
+                    : null,
+          ),
+        ),
+        Expanded(
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  selectedScript == QuranScriptType.uthmani
+                      ? AppColors.primaryColor
+                      : Colors.grey.withValues(alpha: 0.2),
+              foregroundColor:
+                  selectedScript == QuranScriptType.uthmani
+                      ? Colors.white
+                      : AppColors.primaryColor,
+              padding: EdgeInsets.only(left: 8, right: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0),
+              ),
+              elevation: 0,
+              shadowColor: Colors.transparent,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedScript = QuranScriptType.uthmani;
+              });
+            },
+            label: Text(
+              'Uthmani',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            icon:
+                selectedScript == QuranScriptType.uthmani
+                    ? Icon(Icons.done_rounded)
+                    : null,
+          ),
+        ),
+        Expanded(
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  selectedScript == QuranScriptType.indopak
+                      ? AppColors.primaryColor
+                      : Colors.grey.withValues(alpha: 0.2),
+              foregroundColor:
+                  selectedScript == QuranScriptType.indopak
+                      ? Colors.white
+                      : AppColors.primaryColor,
+              padding: EdgeInsets.only(left: 8, right: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(roundedRadius),
+                  bottomRight: Radius.circular(roundedRadius),
+                ),
+              ),
+              elevation: 0,
+              shadowColor: Colors.transparent,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedScript = QuranScriptType.indopak;
+              });
+            },
+            label: Text(
+              "Indopak",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+
+            icon:
+                selectedScript == QuranScriptType.indopak
+                    ? Icon(Icons.done_rounded)
+                    : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  QuranScriptType selectedScript = QuranScriptType.tajweed;
 
   List<DropdownMenuItem>? getQuranTafsirBookDropDownList() {
     List<DropdownMenuItem> items = [];
@@ -433,6 +575,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       ],
     ),
   );
+
   Widget tafsirTag = Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
@@ -453,6 +596,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       ],
     ),
   );
+
   Widget wordByWordTag = Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
