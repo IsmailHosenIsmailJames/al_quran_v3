@@ -33,12 +33,17 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   void changeAppLanguage(String value) {
     appLanguage = value;
-    translationLanguage = appLanguage;
-    tafsirLanguage = appLanguage;
-    selectableTafsirBook =
-        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
-    selectableTranslationBook =
-        simpleTranslation[codeToLanguageMap[translationLanguage]];
+    String? languageName = codeToLanguageMap[appLanguage];
+    if (simpleTranslation.keys.contains(languageName)) {
+      translationLanguage = appLanguage;
+      selectableTranslationBook =
+          simpleTranslation[codeToLanguageMap[translationLanguage]];
+    }
+    if (tafsirInformationWithScore.keys.contains(languageName)) {
+      tafsirLanguage = appLanguage;
+      selectableTafsirBook =
+          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
+    }
   }
 
   void changeTranslationLanguage(String value) {
