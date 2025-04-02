@@ -1,5 +1,5 @@
 Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
-  'Arabic': [
+  'arabic': [
     {
       'language': 'Arabic',
       'name': 'تفسير البغوي',
@@ -91,7 +91,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Arabic/Tafsir_Ibn_Kathir.json.txt',
     },
   ],
-  'Persian': [
+  'persian': [
     {
       'language': 'Persian',
       'name': 'المختصر فی تفسیر قرآن کریم',
@@ -102,7 +102,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Persian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
     },
   ],
-  'Bosnian': [
+  'bosnian': [
     {
       'language': 'Bosnian',
       'name': 'Skraćeno tumačenje Kur\'ana',
@@ -113,7 +113,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Bosnian/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Bengali': [
+  'bengali': [
     {
       'language': 'Bengali',
       'name': 'তাফসীর ফাতহুল মাজীদ',
@@ -160,7 +160,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Bengali/Tafsir_Ahsanul_Bayaan.json.txt',
     },
   ],
-  'English': [
+  'english': [
     {
       'language': 'English',
       'name': 'Tafsir Ibn Kathir (Abridged)',
@@ -198,7 +198,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/English/Al-Mukhtasar.json.txt',
     },
   ],
-  'Spanish': [
+  'spanish': [
     {
       'language': 'Spanish',
       'name': 'Explicación Abreviada del Corán',
@@ -209,7 +209,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Spanish/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Italian': [
+  'italian': [
     {
       'language': 'Italian',
       'name': 'Al-Mukhtasar nell\'interpretazione del Nobile Corano',
@@ -220,7 +220,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Italian/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
     },
   ],
-  'Chinese': [
+  'chinese': [
     {
       'language': 'Chinese',
       'name': '古兰经简明注解',
@@ -231,7 +231,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Chinese/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Kurdish': [
+  'kurdish': [
     {
       'language': 'Kurdish',
       'name': 'تەفسیری کوردی ڕێبەر',
@@ -242,7 +242,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Kurdish/Rebar_Kurdish_Tafsir.json.txt',
     },
   ],
-  'Malayalam': [
+  'malayalam': [
     {
       'language': 'Malayalam',
       'name': 'ഖുർആനിന്റെ സംക്ഷിപ്ത വിശദീകരണം',
@@ -253,7 +253,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Malayalam/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'French': [
+  'french': [
     {
       'language': 'French',
       'name': 'Explication Abrégée du Coran',
@@ -264,7 +264,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/French/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Assamese': [
+  'assamese': [
     {
       'language': 'Assamese',
       'name': 'অসমীয়া কোৰআনৰ সংক্ষিপ্ত ব্যাখ্যা',
@@ -275,7 +275,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Assamese/Assamese_Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Urdu': [
+  'urdu': [
     {
       'language': 'Urdu',
       'name': 'فی ظلال القرآن',
@@ -313,7 +313,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Urdu/Tazkirul_Quran(Maulana_Wahiduddin_Khan).json.txt',
     },
   ],
-  'Japanese': [
+  'japanese': [
     {
       'language': 'Japanese',
       'name': '簡約クルアーン解説',
@@ -324,7 +324,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Japanese/Abridged_Explanation_of_the_Quran.json.txt',
     },
   ],
-  'Turkish': [
+  'turkish': [
     {
       'language': 'Turkish',
       'name': 'Muhtasar Kur\'an-ı Kerim Tefsiri',
@@ -335,7 +335,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Turkish/Al-Mukhtasar_in_Interpreting_the_Noble_Quran.json.txt',
     },
   ],
-  'Russian': [
+  'russian': [
     {
       'language': 'Russian',
       'name': 'Тафсир Ас-Саади',
@@ -364,7 +364,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Russian/Tafsir_Ibn_Kathir.json.txt',
     },
   ],
-  'Tagalog': [
+  'tagalog': [
     {
       'language': 'Tagalog',
       'name': 'Al-Mukhtasar sa Pagpapaliwanag ng Banal na Quran',
@@ -375,7 +375,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Tagalog/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
     },
   ],
-  'Indonesian': [
+  'indonesian': [
     {
       'language': 'Indonesian',
       'name': 'Tafsir Al-Mukhtasar',
@@ -397,7 +397,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/vietnamese/Al-Mukhtasar_in_interpreting_the_Noble_Quran.json.txt',
     },
   ],
-  'Albanian': [
+  'albanian': [
     {
       'language': 'Albanian',
       'name': 'Tefsiri i Sadit',
@@ -408,7 +408,7 @@ Map<String, List<Map<String, dynamic>>> tafsirInformationWithScore = {
           'quranic_universal_library/compressed_tafsir/Albanian/Tafsir_As-Saadi.json.txt',
     },
   ],
-  'Central_Khmer': [
+  'central_khmer': [
     {
       'language': 'Central Khmer',
       'name': 'ការពន្យល់ដោយសង្ខេបនៃគម្ពីរកូរ៉ាន',

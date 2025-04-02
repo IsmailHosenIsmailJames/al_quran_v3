@@ -12,7 +12,7 @@ class IndopakView extends StatelessWidget {
         indopakScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
     TextStyle quranStyle = TextStyle(
-      fontSize: 24,
+      fontSize: scriptInfo.fontSize ?? 24,
       fontFamily: 'IndopakNastaleeq',
     );
     return Text.rich(

@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
@@ -23,13 +22,44 @@ class AppSetupPage extends StatefulWidget {
 }
 
 class _AppSetupPageState extends State<AppSetupPage> {
-  String? translationLanguage;
-  String? translationBook;
-  String? tafsirLanguage;
-  String? tafsirBook;
-
   List<Map>? selectableTranslationBook;
   List<Map>? selectableTafsirBook;
+
+  late String appLanguage;
+  late String translationLanguage;
+  String? translationBook;
+  late String tafsirLanguage;
+  String? tafsirBook;
+
+  void changeAppLanguage(String value) {
+    appLanguage = value;
+    translationLanguage = appLanguage;
+    tafsirLanguage = appLanguage;
+    selectableTafsirBook =
+        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
+    selectableTranslationBook =
+        simpleTranslation[codeToLanguageMap[translationLanguage]];
+  }
+
+  void changeTranslationLanguage(String value) {
+    translationLanguage = value;
+    translationBook = null;
+    selectableTranslationBook =
+        simpleTranslation[codeToLanguageMap[translationLanguage]];
+  }
+
+  void changeTafsirLanguage(String value) {
+    tafsirLanguage = value;
+    tafsirBook = null;
+    selectableTafsirBook =
+        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
+  }
+
+  @override
+  void initState() {
+    changeAppLanguage(Platform.localeName.split('_')[0].toLowerCase());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +106,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: InputDecoration(
                             hintText: 'Select app language...',
                           ),
+                          value: appLanguage,
                           isExpanded: true,
                           items: getAppLanguageDropdown(),
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            changeAppLanguage(value.toString());
+                            setState(() {});
+                          },
                         ),
 
                         const Gap(15),
@@ -112,16 +146,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           isExpanded: true,
                           onChanged: (value) {
-                            translationLanguage = value ?? 'English';
-                            translationBook = null;
-                            selectableTranslationBook =
-                                simpleTranslation[value];
-                            log(
-                              JsonEncoder.withIndent(
-                                ' ',
-                              ).convert(selectableTranslationBook),
-                              name: 'Selectable Translation Book',
-                            );
+                            changeTranslationLanguage(value.toString());
                             setState(() {});
                           },
                         ),
@@ -152,6 +177,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: InputDecoration(
                             hintText: 'Select translation book...',
                           ),
+                          value: translationBook,
                           isExpanded: true,
                           onChanged: (value) {
                             translationBook = value ?? '';
@@ -185,13 +211,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: InputDecoration(
                             hintText: 'Select tafsir language...',
                           ),
+                          value: tafsirLanguage,
                           isExpanded: true,
                           onChanged: (value) {
-                            tafsirLanguage = value ?? '';
-                            selectableTafsirBook =
-                                tafsirInformationWithScore[value];
-
-                            log(value.toString());
+                            changeTafsirLanguage(value.toString());
                             setState(() {});
                           },
                         ),
@@ -221,9 +244,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             hintText: 'Select tafsir book...',
                           ),
                           isExpanded: true,
+                          value: tafsirBook,
                           onChanged: (value) {
-                            translationBook = value ?? '';
-                            log(value.toString());
+                            tafsirBook = value;
                             setState(() {});
                           },
                         ),
@@ -248,14 +271,36 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ),
                         const Gap(5),
                         getScriptSelectionSegmentedButtons(),
-                        Gap(15),
-                        Center(
+                        Gap(5),
+                        Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryColor.withValues(
+                              alpha: 0.07,
+                            ),
+                            borderRadius: BorderRadius.circular(roundedRadius),
+                          ),
                           child: ScriptProcessor(
                             scriptInfo: ScriptInfo(
                               surahNumber: 2,
                               ayahNumber: 2,
                               quranScriptType: selectedScript,
+                              fontSize: 20,
                             ),
+                          ),
+                        ),
+                        Gap(15),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryColor,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {},
+                            label: Text('Save & Download'),
+                            icon: Icon(Icons.download_rounded),
                           ),
                         ),
                       ],
@@ -433,12 +478,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
     tafsirInformationWithScore.forEach((key, value) {
       items.add(
         DropdownMenuItem(
-          value: key,
+          value: languageToCodeMap[key.toLowerCase()],
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (tafsirLanguage == key.toLowerCase())
+                if (tafsirLanguage == languageToCodeMap[key.toLowerCase()])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -465,15 +510,15 @@ class _AppSetupPageState extends State<AppSetupPage> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              // if (languageController.selectedLanguage.value == e['Code'])
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Icon(
-                  Icons.done_rounded,
-                  size: 18,
-                  color: AppColors.primaryColor,
+              if (appLanguage == e['Code'])
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Icon(
+                    Icons.done_rounded,
+                    size: 18,
+                    color: AppColors.primaryColor,
+                  ),
                 ),
-              ),
               Text(e['Native'] ?? ''),
               ...getSupportInfoForLanguageWidget(key: e['English'] ?? ''),
             ],
@@ -521,12 +566,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
     simpleTranslation.forEach((key, value) {
       items.add(
         DropdownMenuItem(
-          value: key,
+          value: languageToCodeMap[key.toLowerCase()],
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (translationLanguage == key.toLowerCase())
+                if (translationLanguage == languageToCodeMap[key.toLowerCase()])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(

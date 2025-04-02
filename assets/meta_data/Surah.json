@@ -1,0 +1,1028 @@
+{
+    "1": {
+        "id": 1,
+        "name": 1,
+        "name_simple": "Al-Fatihah",
+        "revelation_order": 5,
+        "revelation_place": "makkah",
+        "verses_count": 7,
+        "pages_range": "1-1"
+    },
+    "2": {
+        "id": 2,
+        "name": 2,
+        "name_simple": "Al-Baqarah",
+        "revelation_order": 87,
+        "revelation_place": "madinah",
+        "verses_count": 286,
+        "pages_range": "2-49"
+    },
+    "3": {
+        "id": 3,
+        "name": 3,
+        "name_simple": "Ali 'Imran",
+        "revelation_order": 89,
+        "revelation_place": "madinah",
+        "verses_count": 200,
+        "pages_range": "50-76"
+    },
+    "4": {
+        "id": 4,
+        "name": 4,
+        "name_simple": "An-Nisa",
+        "revelation_order": 92,
+        "revelation_place": "madinah",
+        "verses_count": 176,
+        "pages_range": "77-106"
+    },
+    "5": {
+        "id": 5,
+        "name": 5,
+        "name_simple": "Al-Ma'idah",
+        "revelation_order": 112,
+        "revelation_place": "madinah",
+        "verses_count": 120,
+        "pages_range": "106-127"
+    },
+    "6": {
+        "id": 6,
+        "name": 6,
+        "name_simple": "Al-An'am",
+        "revelation_order": 55,
+        "revelation_place": "makkah",
+        "verses_count": 165,
+        "pages_range": "128-150"
+    },
+    "7": {
+        "id": 7,
+        "name": 7,
+        "name_simple": "Al-A'raf",
+        "revelation_order": 39,
+        "revelation_place": "makkah",
+        "verses_count": 206,
+        "pages_range": "151-176"
+    },
+    "8": {
+        "id": 8,
+        "name": 8,
+        "name_simple": "Al-Anfal",
+        "revelation_order": 88,
+        "revelation_place": "madinah",
+        "verses_count": 75,
+        "pages_range": "177-186"
+    },
+    "9": {
+        "id": 9,
+        "name": 9,
+        "name_simple": "At-Tawbah",
+        "revelation_order": 113,
+        "revelation_place": "madinah",
+        "verses_count": 129,
+        "pages_range": "187-207"
+    },
+    "10": {
+        "id": 10,
+        "name": 10,
+        "name_simple": "Yunus",
+        "revelation_order": 51,
+        "revelation_place": "makkah",
+        "verses_count": 109,
+        "pages_range": "208-221"
+    },
+    "11": {
+        "id": 11,
+        "name": 11,
+        "name_simple": "Hud",
+        "revelation_order": 52,
+        "revelation_place": "makkah",
+        "verses_count": 123,
+        "pages_range": "221-235"
+    },
+    "12": {
+        "id": 12,
+        "name": 12,
+        "name_simple": "Yusuf",
+        "revelation_order": 53,
+        "revelation_place": "makkah",
+        "verses_count": 111,
+        "pages_range": "235-248"
+    },
+    "13": {
+        "id": 13,
+        "name": 13,
+        "name_simple": "Ar-Ra'd",
+        "revelation_order": 96,
+        "revelation_place": "madinah",
+        "verses_count": 43,
+        "pages_range": "249-255"
+    },
+    "14": {
+        "id": 14,
+        "name": 14,
+        "name_simple": "Ibrahim",
+        "revelation_order": 72,
+        "revelation_place": "makkah",
+        "verses_count": 52,
+        "pages_range": "255-261"
+    },
+    "15": {
+        "id": 15,
+        "name": 15,
+        "name_simple": "Al-Hijr",
+        "revelation_order": 54,
+        "revelation_place": "makkah",
+        "verses_count": 99,
+        "pages_range": "262-267"
+    },
+    "16": {
+        "id": 16,
+        "name": 16,
+        "name_simple": "An-Nahl",
+        "revelation_order": 70,
+        "revelation_place": "makkah",
+        "verses_count": 128,
+        "pages_range": "267-281"
+    },
+    "17": {
+        "id": 17,
+        "name": 17,
+        "name_simple": "Al-Isra",
+        "revelation_order": 50,
+        "revelation_place": "makkah",
+        "verses_count": 111,
+        "pages_range": "282-293"
+    },
+    "18": {
+        "id": 18,
+        "name": 18,
+        "name_simple": "Al-Kahf",
+        "revelation_order": 69,
+        "revelation_place": "makkah",
+        "verses_count": 110,
+        "pages_range": "293-304"
+    },
+    "19": {
+        "id": 19,
+        "name": 19,
+        "name_simple": "Maryam",
+        "revelation_order": 44,
+        "revelation_place": "makkah",
+        "verses_count": 98,
+        "pages_range": "305-312"
+    },
+    "20": {
+        "id": 20,
+        "name": 20,
+        "name_simple": "Taha",
+        "revelation_order": 45,
+        "revelation_place": "makkah",
+        "verses_count": 135,
+        "pages_range": "312-321"
+    },
+    "21": {
+        "id": 21,
+        "name": 21,
+        "name_simple": "Al-Anbya",
+        "revelation_order": 73,
+        "revelation_place": "makkah",
+        "verses_count": 112,
+        "pages_range": "322-331"
+    },
+    "22": {
+        "id": 22,
+        "name": 22,
+        "name_simple": "Al-Hajj",
+        "revelation_order": 103,
+        "revelation_place": "madinah",
+        "verses_count": 78,
+        "pages_range": "332-341"
+    },
+    "23": {
+        "id": 23,
+        "name": 23,
+        "name_simple": "Al-Mu'minun",
+        "revelation_order": 74,
+        "revelation_place": "makkah",
+        "verses_count": 118,
+        "pages_range": "342-349"
+    },
+    "24": {
+        "id": 24,
+        "name": 24,
+        "name_simple": "An-Nur",
+        "revelation_order": 102,
+        "revelation_place": "madinah",
+        "verses_count": 64,
+        "pages_range": "350-359"
+    },
+    "25": {
+        "id": 25,
+        "name": 25,
+        "name_simple": "Al-Furqan",
+        "revelation_order": 42,
+        "revelation_place": "makkah",
+        "verses_count": 77,
+        "pages_range": "359-366"
+    },
+    "26": {
+        "id": 26,
+        "name": 26,
+        "name_simple": "Ash-Shu'ara",
+        "revelation_order": 47,
+        "revelation_place": "makkah",
+        "verses_count": 227,
+        "pages_range": "367-376"
+    },
+    "27": {
+        "id": 27,
+        "name": 27,
+        "name_simple": "An-Naml",
+        "revelation_order": 48,
+        "revelation_place": "makkah",
+        "verses_count": 93,
+        "pages_range": "377-385"
+    },
+    "28": {
+        "id": 28,
+        "name": 28,
+        "name_simple": "Al-Qasas",
+        "revelation_order": 49,
+        "revelation_place": "makkah",
+        "verses_count": 88,
+        "pages_range": "385-396"
+    },
+    "29": {
+        "id": 29,
+        "name": 29,
+        "name_simple": "Al-'Ankabut",
+        "revelation_order": 85,
+        "revelation_place": "makkah",
+        "verses_count": 69,
+        "pages_range": "396-404"
+    },
+    "30": {
+        "id": 30,
+        "name": 30,
+        "name_simple": "Ar-Rum",
+        "revelation_order": 84,
+        "revelation_place": "makkah",
+        "verses_count": 60,
+        "pages_range": "404-410"
+    },
+    "31": {
+        "id": 31,
+        "name": 31,
+        "name_simple": "Luqman",
+        "revelation_order": 57,
+        "revelation_place": "makkah",
+        "verses_count": 34,
+        "pages_range": "411-414"
+    },
+    "32": {
+        "id": 32,
+        "name": 32,
+        "name_simple": "As-Sajdah",
+        "revelation_order": 75,
+        "revelation_place": "makkah",
+        "verses_count": 30,
+        "pages_range": "415-417"
+    },
+    "33": {
+        "id": 33,
+        "name": 33,
+        "name_simple": "Al-Ahzab",
+        "revelation_order": 90,
+        "revelation_place": "madinah",
+        "verses_count": 73,
+        "pages_range": "418-427"
+    },
+    "34": {
+        "id": 34,
+        "name": 34,
+        "name_simple": "Saba",
+        "revelation_order": 58,
+        "revelation_place": "makkah",
+        "verses_count": 54,
+        "pages_range": "428-434"
+    },
+    "35": {
+        "id": 35,
+        "name": 35,
+        "name_simple": "Fatir",
+        "revelation_order": 43,
+        "revelation_place": "makkah",
+        "verses_count": 45,
+        "pages_range": "434-440"
+    },
+    "36": {
+        "id": 36,
+        "name": 36,
+        "name_simple": "Ya-Sin",
+        "revelation_order": 41,
+        "revelation_place": "makkah",
+        "verses_count": 83,
+        "pages_range": "440-445"
+    },
+    "37": {
+        "id": 37,
+        "name": 37,
+        "name_simple": "As-Saffat",
+        "revelation_order": 56,
+        "revelation_place": "makkah",
+        "verses_count": 182,
+        "pages_range": "446-452"
+    },
+    "38": {
+        "id": 38,
+        "name": 38,
+        "name_simple": "Sad",
+        "revelation_order": 38,
+        "revelation_place": "makkah",
+        "verses_count": 88,
+        "pages_range": "453-458"
+    },
+    "39": {
+        "id": 39,
+        "name": 39,
+        "name_simple": "Az-Zumar",
+        "revelation_order": 59,
+        "revelation_place": "makkah",
+        "verses_count": 75,
+        "pages_range": "458-467"
+    },
+    "40": {
+        "id": 40,
+        "name": 40,
+        "name_simple": "Ghafir",
+        "revelation_order": 60,
+        "revelation_place": "makkah",
+        "verses_count": 85,
+        "pages_range": "467-476"
+    },
+    "41": {
+        "id": 41,
+        "name": 41,
+        "name_simple": "Fussilat",
+        "revelation_order": 61,
+        "revelation_place": "makkah",
+        "verses_count": 54,
+        "pages_range": "477-482"
+    },
+    "42": {
+        "id": 42,
+        "name": 42,
+        "name_simple": "Ash-Shuraa",
+        "revelation_order": 62,
+        "revelation_place": "makkah",
+        "verses_count": 53,
+        "pages_range": "483-489"
+    },
+    "43": {
+        "id": 43,
+        "name": 43,
+        "name_simple": "Az-Zukhruf",
+        "revelation_order": 63,
+        "revelation_place": "makkah",
+        "verses_count": 89,
+        "pages_range": "489-495"
+    },
+    "44": {
+        "id": 44,
+        "name": 44,
+        "name_simple": "Ad-Dukhan",
+        "revelation_order": 64,
+        "revelation_place": "makkah",
+        "verses_count": 59,
+        "pages_range": "496-498"
+    },
+    "45": {
+        "id": 45,
+        "name": 45,
+        "name_simple": "Al-Jathiyah",
+        "revelation_order": 65,
+        "revelation_place": "makkah",
+        "verses_count": 37,
+        "pages_range": "499-502"
+    },
+    "46": {
+        "id": 46,
+        "name": 46,
+        "name_simple": "Al-Ahqaf",
+        "revelation_order": 66,
+        "revelation_place": "makkah",
+        "verses_count": 35,
+        "pages_range": "502-506"
+    },
+    "47": {
+        "id": 47,
+        "name": 47,
+        "name_simple": "Muhammad",
+        "revelation_order": 95,
+        "revelation_place": "madinah",
+        "verses_count": 38,
+        "pages_range": "507-510"
+    },
+    "48": {
+        "id": 48,
+        "name": 48,
+        "name_simple": "Al-Fath",
+        "revelation_order": 111,
+        "revelation_place": "madinah",
+        "verses_count": 29,
+        "pages_range": "511-515"
+    },
+    "49": {
+        "id": 49,
+        "name": 49,
+        "name_simple": "Al-Hujurat",
+        "revelation_order": 106,
+        "revelation_place": "madinah",
+        "verses_count": 18,
+        "pages_range": "515-517"
+    },
+    "50": {
+        "id": 50,
+        "name": 50,
+        "name_simple": "Qaf",
+        "revelation_order": 34,
+        "revelation_place": "makkah",
+        "verses_count": 45,
+        "pages_range": "518-520"
+    },
+    "51": {
+        "id": 51,
+        "name": 51,
+        "name_simple": "Adh-Dhariyat",
+        "revelation_order": 67,
+        "revelation_place": "makkah",
+        "verses_count": 60,
+        "pages_range": "520-523"
+    },
+    "52": {
+        "id": 52,
+        "name": 52,
+        "name_simple": "At-Tur",
+        "revelation_order": 76,
+        "revelation_place": "makkah",
+        "verses_count": 49,
+        "pages_range": "523-525"
+    },
+    "53": {
+        "id": 53,
+        "name": 53,
+        "name_simple": "An-Najm",
+        "revelation_order": 23,
+        "revelation_place": "makkah",
+        "verses_count": 62,
+        "pages_range": "526-528"
+    },
+    "54": {
+        "id": 54,
+        "name": 54,
+        "name_simple": "Al-Qamar",
+        "revelation_order": 37,
+        "revelation_place": "makkah",
+        "verses_count": 55,
+        "pages_range": "528-531"
+    },
+    "55": {
+        "id": 55,
+        "name": 55,
+        "name_simple": "Ar-Rahman",
+        "revelation_order": 97,
+        "revelation_place": "madinah",
+        "verses_count": 78,
+        "pages_range": "531-534"
+    },
+    "56": {
+        "id": 56,
+        "name": 56,
+        "name_simple": "Al-Waqi'ah",
+        "revelation_order": 46,
+        "revelation_place": "makkah",
+        "verses_count": 96,
+        "pages_range": "534-537"
+    },
+    "57": {
+        "id": 57,
+        "name": 57,
+        "name_simple": "Al-Hadid",
+        "revelation_order": 94,
+        "revelation_place": "madinah",
+        "verses_count": 29,
+        "pages_range": "537-541"
+    },
+    "58": {
+        "id": 58,
+        "name": 58,
+        "name_simple": "Al-Mujadila",
+        "revelation_order": 105,
+        "revelation_place": "madinah",
+        "verses_count": 22,
+        "pages_range": "542-545"
+    },
+    "59": {
+        "id": 59,
+        "name": 59,
+        "name_simple": "Al-Hashr",
+        "revelation_order": 101,
+        "revelation_place": "madinah",
+        "verses_count": 24,
+        "pages_range": "545-548"
+    },
+    "60": {
+        "id": 60,
+        "name": 60,
+        "name_simple": "Al-Mumtahanah",
+        "revelation_order": 91,
+        "revelation_place": "madinah",
+        "verses_count": 13,
+        "pages_range": "549-551"
+    },
+    "61": {
+        "id": 61,
+        "name": 61,
+        "name_simple": "As-Saf",
+        "revelation_order": 109,
+        "revelation_place": "madinah",
+        "verses_count": 14,
+        "pages_range": "551-552"
+    },
+    "62": {
+        "id": 62,
+        "name": 62,
+        "name_simple": "Al-Jumu'ah",
+        "revelation_order": 110,
+        "revelation_place": "madinah",
+        "verses_count": 11,
+        "pages_range": "553-554"
+    },
+    "63": {
+        "id": 63,
+        "name": 63,
+        "name_simple": "Al-Munafiqun",
+        "revelation_order": 104,
+        "revelation_place": "madinah",
+        "verses_count": 11,
+        "pages_range": "554-555"
+    },
+    "64": {
+        "id": 64,
+        "name": 64,
+        "name_simple": "At-Taghabun",
+        "revelation_order": 108,
+        "revelation_place": "madinah",
+        "verses_count": 18,
+        "pages_range": "556-557"
+    },
+    "65": {
+        "id": 65,
+        "name": 65,
+        "name_simple": "At-Talaq",
+        "revelation_order": 99,
+        "revelation_place": "madinah",
+        "verses_count": 12,
+        "pages_range": "558-559"
+    },
+    "66": {
+        "id": 66,
+        "name": 66,
+        "name_simple": "At-Tahrim",
+        "revelation_order": 107,
+        "revelation_place": "madinah",
+        "verses_count": 12,
+        "pages_range": "560-561"
+    },
+    "67": {
+        "id": 67,
+        "name": 67,
+        "name_simple": "Al-Mulk",
+        "revelation_order": 77,
+        "revelation_place": "makkah",
+        "verses_count": 30,
+        "pages_range": "562-564"
+    },
+    "68": {
+        "id": 68,
+        "name": 68,
+        "name_simple": "Al-Qalam",
+        "revelation_order": 2,
+        "revelation_place": "makkah",
+        "verses_count": 52,
+        "pages_range": "564-566"
+    },
+    "69": {
+        "id": 69,
+        "name": 69,
+        "name_simple": "Al-Haqqah",
+        "revelation_order": 78,
+        "revelation_place": "makkah",
+        "verses_count": 52,
+        "pages_range": "566-568"
+    },
+    "70": {
+        "id": 70,
+        "name": 70,
+        "name_simple": "Al-Ma'arij",
+        "revelation_order": 79,
+        "revelation_place": "makkah",
+        "verses_count": 44,
+        "pages_range": "568-570"
+    },
+    "71": {
+        "id": 71,
+        "name": 71,
+        "name_simple": "Nuh",
+        "revelation_order": 71,
+        "revelation_place": "makkah",
+        "verses_count": 28,
+        "pages_range": "570-571"
+    },
+    "72": {
+        "id": 72,
+        "name": 72,
+        "name_simple": "Al-Jinn",
+        "revelation_order": 40,
+        "revelation_place": "makkah",
+        "verses_count": 28,
+        "pages_range": "572-573"
+    },
+    "73": {
+        "id": 73,
+        "name": 73,
+        "name_simple": "Al-Muzzammil",
+        "revelation_order": 3,
+        "revelation_place": "makkah",
+        "verses_count": 20,
+        "pages_range": "574-575"
+    },
+    "74": {
+        "id": 74,
+        "name": 74,
+        "name_simple": "Al-Muddaththir",
+        "revelation_order": 4,
+        "revelation_place": "makkah",
+        "verses_count": 56,
+        "pages_range": "575-577"
+    },
+    "75": {
+        "id": 75,
+        "name": 75,
+        "name_simple": "Al-Qiyamah",
+        "revelation_order": 31,
+        "revelation_place": "makkah",
+        "verses_count": 40,
+        "pages_range": "577-578"
+    },
+    "76": {
+        "id": 76,
+        "name": 76,
+        "name_simple": "Al-Insan",
+        "revelation_order": 98,
+        "revelation_place": "madinah",
+        "verses_count": 31,
+        "pages_range": "578-580"
+    },
+    "77": {
+        "id": 77,
+        "name": 77,
+        "name_simple": "Al-Mursalat",
+        "revelation_order": 33,
+        "revelation_place": "makkah",
+        "verses_count": 50,
+        "pages_range": "580-581"
+    },
+    "78": {
+        "id": 78,
+        "name": 78,
+        "name_simple": "An-Naba",
+        "revelation_order": 80,
+        "revelation_place": "makkah",
+        "verses_count": 40,
+        "pages_range": "582-583"
+    },
+    "79": {
+        "id": 79,
+        "name": 79,
+        "name_simple": "An-Nazi'at",
+        "revelation_order": 81,
+        "revelation_place": "makkah",
+        "verses_count": 46,
+        "pages_range": "583-584"
+    },
+    "80": {
+        "id": 80,
+        "name": 80,
+        "name_simple": "'Abasa",
+        "revelation_order": 24,
+        "revelation_place": "makkah",
+        "verses_count": 42,
+        "pages_range": "585-585"
+    },
+    "81": {
+        "id": 81,
+        "name": 81,
+        "name_simple": "At-Takwir",
+        "revelation_order": 7,
+        "revelation_place": "makkah",
+        "verses_count": 29,
+        "pages_range": "586-586"
+    },
+    "82": {
+        "id": 82,
+        "name": 82,
+        "name_simple": "Al-Infitar",
+        "revelation_order": 82,
+        "revelation_place": "makkah",
+        "verses_count": 19,
+        "pages_range": "587-587"
+    },
+    "83": {
+        "id": 83,
+        "name": 83,
+        "name_simple": "Al-Mutaffifin",
+        "revelation_order": 86,
+        "revelation_place": "makkah",
+        "verses_count": 36,
+        "pages_range": "587-589"
+    },
+    "84": {
+        "id": 84,
+        "name": 84,
+        "name_simple": "Al-Inshiqaq",
+        "revelation_order": 83,
+        "revelation_place": "makkah",
+        "verses_count": 25,
+        "pages_range": "589-589"
+    },
+    "85": {
+        "id": 85,
+        "name": 85,
+        "name_simple": "Al-Buruj",
+        "revelation_order": 27,
+        "revelation_place": "makkah",
+        "verses_count": 22,
+        "pages_range": "590-590"
+    },
+    "86": {
+        "id": 86,
+        "name": 86,
+        "name_simple": "At-Tariq",
+        "revelation_order": 36,
+        "revelation_place": "makkah",
+        "verses_count": 17,
+        "pages_range": "591-591"
+    },
+    "87": {
+        "id": 87,
+        "name": 87,
+        "name_simple": "Al-A'la",
+        "revelation_order": 8,
+        "revelation_place": "makkah",
+        "verses_count": 19,
+        "pages_range": "591-592"
+    },
+    "88": {
+        "id": 88,
+        "name": 88,
+        "name_simple": "Al-Ghashiyah",
+        "revelation_order": 68,
+        "revelation_place": "makkah",
+        "verses_count": 26,
+        "pages_range": "592-592"
+    },
+    "89": {
+        "id": 89,
+        "name": 89,
+        "name_simple": "Al-Fajr",
+        "revelation_order": 10,
+        "revelation_place": "makkah",
+        "verses_count": 30,
+        "pages_range": "593-594"
+    },
+    "90": {
+        "id": 90,
+        "name": 90,
+        "name_simple": "Al-Balad",
+        "revelation_order": 35,
+        "revelation_place": "makkah",
+        "verses_count": 20,
+        "pages_range": "594-594"
+    },
+    "91": {
+        "id": 91,
+        "name": 91,
+        "name_simple": "Ash-Shams",
+        "revelation_order": 26,
+        "revelation_place": "makkah",
+        "verses_count": 15,
+        "pages_range": "595-595"
+    },
+    "92": {
+        "id": 92,
+        "name": 92,
+        "name_simple": "Al-Layl",
+        "revelation_order": 9,
+        "revelation_place": "makkah",
+        "verses_count": 21,
+        "pages_range": "595-596"
+    },
+    "93": {
+        "id": 93,
+        "name": 93,
+        "name_simple": "Ad-Duhaa",
+        "revelation_order": 11,
+        "revelation_place": "makkah",
+        "verses_count": 11,
+        "pages_range": "596-596"
+    },
+    "94": {
+        "id": 94,
+        "name": 94,
+        "name_simple": "Ash-Sharh",
+        "revelation_order": 12,
+        "revelation_place": "makkah",
+        "verses_count": 8,
+        "pages_range": "596-596"
+    },
+    "95": {
+        "id": 95,
+        "name": 95,
+        "name_simple": "At-Tin",
+        "revelation_order": 28,
+        "revelation_place": "makkah",
+        "verses_count": 8,
+        "pages_range": "597-597"
+    },
+    "96": {
+        "id": 96,
+        "name": 96,
+        "name_simple": "Al-'Alaq",
+        "revelation_order": 1,
+        "revelation_place": "makkah",
+        "verses_count": 19,
+        "pages_range": "597-597"
+    },
+    "97": {
+        "id": 97,
+        "name": 97,
+        "name_simple": "Al-Qadr",
+        "revelation_order": 25,
+        "revelation_place": "makkah",
+        "verses_count": 5,
+        "pages_range": "598-598"
+    },
+    "98": {
+        "id": 98,
+        "name": 98,
+        "name_simple": "Al-Bayyinah",
+        "revelation_order": 100,
+        "revelation_place": "madinah",
+        "verses_count": 8,
+        "pages_range": "598-599"
+    },
+    "99": {
+        "id": 99,
+        "name": 99,
+        "name_simple": "Az-Zalzalah",
+        "revelation_order": 93,
+        "revelation_place": "madinah",
+        "verses_count": 8,
+        "pages_range": "599-599"
+    },
+    "100": {
+        "id": 100,
+        "name": 100,
+        "name_simple": "Al-'Adiyat",
+        "revelation_order": 14,
+        "revelation_place": "makkah",
+        "verses_count": 11,
+        "pages_range": "599-600"
+    },
+    "101": {
+        "id": 101,
+        "name": 101,
+        "name_simple": "Al-Qari'ah",
+        "revelation_order": 30,
+        "revelation_place": "makkah",
+        "verses_count": 11,
+        "pages_range": "600-600"
+    },
+    "102": {
+        "id": 102,
+        "name": 102,
+        "name_simple": "At-Takathur",
+        "revelation_order": 16,
+        "revelation_place": "makkah",
+        "verses_count": 8,
+        "pages_range": "600-600"
+    },
+    "103": {
+        "id": 103,
+        "name": 103,
+        "name_simple": "Al-'Asr",
+        "revelation_order": 13,
+        "revelation_place": "makkah",
+        "verses_count": 3,
+        "pages_range": "601-601"
+    },
+    "104": {
+        "id": 104,
+        "name": 104,
+        "name_simple": "Al-Humazah",
+        "revelation_order": 32,
+        "revelation_place": "makkah",
+        "verses_count": 9,
+        "pages_range": "601-601"
+    },
+    "105": {
+        "id": 105,
+        "name": 105,
+        "name_simple": "Al-Fil",
+        "revelation_order": 19,
+        "revelation_place": "makkah",
+        "verses_count": 5,
+        "pages_range": "601-601"
+    },
+    "106": {
+        "id": 106,
+        "name": 106,
+        "name_simple": "Quraysh",
+        "revelation_order": 29,
+        "revelation_place": "makkah",
+        "verses_count": 4,
+        "pages_range": "602-602"
+    },
+    "107": {
+        "id": 107,
+        "name": 107,
+        "name_simple": "Al-Ma'un",
+        "revelation_order": 17,
+        "revelation_place": "makkah",
+        "verses_count": 7,
+        "pages_range": "602-602"
+    },
+    "108": {
+        "id": 108,
+        "name": 108,
+        "name_simple": "Al-Kawthar",
+        "revelation_order": 15,
+        "revelation_place": "makkah",
+        "verses_count": 3,
+        "pages_range": "602-602"
+    },
+    "109": {
+        "id": 109,
+        "name": 109,
+        "name_simple": "Al-Kafirun",
+        "revelation_order": 18,
+        "revelation_place": "makkah",
+        "verses_count": 6,
+        "pages_range": "603-603"
+    },
+    "110": {
+        "id": 110,
+        "name": 110,
+        "name_simple": "An-Nasr",
+        "revelation_order": 114,
+        "revelation_place": "madinah",
+        "verses_count": 3,
+        "pages_range": "603-603"
+    },
+    "111": {
+        "id": 111,
+        "name": 111,
+        "name_simple": "Al-Masad",
+        "revelation_order": 6,
+        "revelation_place": "makkah",
+        "verses_count": 5,
+        "pages_range": "603-603"
+    },
+    "112": {
+        "id": 112,
+        "name": 112,
+        "name_simple": "Al-Ikhlas",
+        "revelation_order": 22,
+        "revelation_place": "makkah",
+        "verses_count": 4,
+        "pages_range": "604-604"
+    },
+    "113": {
+        "id": 113,
+        "name": 113,
+        "name_simple": "Al-Falaq",
+        "revelation_order": 20,
+        "revelation_place": "makkah",
+        "verses_count": 5,
+        "pages_range": "604-604"
+    },
+    "114": {
+        "id": 114,
+        "name": 114,
+        "name_simple": "An-Nas",
+        "revelation_order": 21,
+        "revelation_place": "makkah",
+        "verses_count": 6,
+        "pages_range": "604-604"
+    }
+}

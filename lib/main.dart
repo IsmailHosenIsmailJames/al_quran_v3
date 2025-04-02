@@ -13,19 +13,46 @@ Map<String, dynamic> tajweedScript = {};
 Map<String, dynamic> uthmaniScript = {};
 Map<String, dynamic> indopakScript = {};
 
+Map<String, dynamic> metaDataHizb = {};
+Map<String, dynamic> metaDataJuz = {};
+Map<String, dynamic> metaDataManzil = {};
+Map<String, dynamic> metaDataRub = {};
+Map<String, dynamic> metaDataRuku = {};
+Map<String, dynamic> metaDataSajda = {};
+Map<String, dynamic> metaDataSurah = {};
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  tajweedScript = Map<String, dynamic>.from(
-    jsonDecode(
-      await rootBundle.loadString('assets/quran_script/QPC_Hafs_Tajweed.json'),
-    ),
+  tajweedScript = jsonDecode(
+    await rootBundle.loadString('assets/quran_script/QPC_Hafs_Tajweed.json'),
   );
-  uthmaniScript = Map<String, dynamic>.from(
-    jsonDecode(await rootBundle.loadString('assets/quran_script/Uthmani.json')),
+  uthmaniScript = jsonDecode(
+    await rootBundle.loadString('assets/quran_script/Uthmani.json'),
   );
-  indopakScript = Map<String, dynamic>.from(
-    jsonDecode(await rootBundle.loadString('assets/quran_script/Indopak.json')),
+  indopakScript = jsonDecode(
+    await rootBundle.loadString('assets/quran_script/Indopak.json'),
+  );
+  metaDataHizb = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Hizb.json'),
+  );
+  metaDataJuz = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Juz.json'),
+  );
+  metaDataManzil = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Manzil.json'),
+  );
+  metaDataRub = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Rub.json'),
+  );
+  metaDataRuku = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Ruku.json'),
+  );
+  metaDataSajda = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Sajda.json'),
+  );
+  metaDataSurah = jsonDecode(
+    await rootBundle.loadString('assets/meta_data/Surah.json'),
   );
   runApp(MyApp(preferences: preferences));
 }
@@ -60,6 +87,7 @@ class MyApp extends StatelessWidget {
                 displayColor: Colors.white,
               ),
             ),
+            supportedLocales: [Locale('en'), Locale('bn')],
             themeMode: state,
             home: AppSetupPage(),
           );

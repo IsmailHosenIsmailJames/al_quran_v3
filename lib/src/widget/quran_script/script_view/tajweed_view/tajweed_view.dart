@@ -13,7 +13,10 @@ class TajweedView extends StatelessWidget {
     List words =
         tajweedScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
-    TextStyle quranStyle = TextStyle(fontSize: 24, fontFamily: 'QPC_Hafs');
+    TextStyle quranStyle = TextStyle(
+      fontSize: scriptInfo.fontSize ?? 24,
+      fontFamily: 'QPC_Hafs',
+    );
     return Text.rich(
       style: quranStyle,
       TextSpan(

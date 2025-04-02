@@ -35,6 +35,7 @@ flutter:
     - assets/
     - assets/dev/
     - assets/quran_script/
+    - assets/meta_data/
 
   fonts:
     - family: QPC_Hafs 
