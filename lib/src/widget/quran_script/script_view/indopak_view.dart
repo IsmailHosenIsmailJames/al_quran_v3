@@ -11,11 +11,15 @@ class IndopakView extends StatelessWidget {
     List words =
         indopakScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
+    TextStyle quranStyle = TextStyle(
+      fontSize: 24,
+      fontFamily: 'IndopakNastaleeq',
+    );
     return Text.rich(
       TextSpan(
-        style: TextStyle(fontSize: 24, fontFamily: 'IndopakNastaleeq'),
+        style: quranStyle,
         children: List<InlineSpan>.generate(words.length, (index) {
-          return TextSpan(text: words[index]);
+          return TextSpan(text: words[index] + ' ');
         }),
       ),
     );

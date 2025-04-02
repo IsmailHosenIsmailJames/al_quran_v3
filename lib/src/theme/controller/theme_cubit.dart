@@ -44,9 +44,9 @@ class ThemeCubit extends Cubit<ThemeMode> {
 
       try {
         await _prefs.setString(_themePreferenceKey, themeMode.toString());
-        log("Theme saved: ${themeMode.toString()}", name: 'ThemeCubit');
+        log('Theme saved: ${themeMode.toString()}', name: 'ThemeCubit');
       } catch (e) {
-        log("Error saving theme: $e", name: 'ThemeCubit');
+        log('Error saving theme: $e', name: 'ThemeCubit');
       }
     }
   }

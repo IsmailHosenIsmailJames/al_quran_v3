@@ -12,7 +12,6 @@ import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -75,7 +74,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         const Gap(5),
                         DropdownButtonFormField(
                           decoration: InputDecoration(
-                            hintText: "Select app language...",
+                            hintText: 'Select app language...',
                           ),
                           isExpanded: true,
                           items: getAppLanguageDropdown(),
@@ -109,7 +108,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           value: translationLanguage,
                           items: getQuranTranslationLanguageDropDownList(),
                           decoration: InputDecoration(
-                            hintText: "Select translation language...",
+                            hintText: 'Select translation language...',
                           ),
                           isExpanded: true,
                           onChanged: (value) {
@@ -151,7 +150,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         DropdownButtonFormField(
                           items: getQuranTranslationBookDropDownList(),
                           decoration: InputDecoration(
-                            hintText: "Select translation book...",
+                            hintText: 'Select translation book...',
                           ),
                           isExpanded: true,
                           onChanged: (value) {
@@ -184,7 +183,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         DropdownButtonFormField(
                           items: getQuranTafsirLanguageDropDownList(),
                           decoration: InputDecoration(
-                            hintText: "Select tafsir language...",
+                            hintText: 'Select tafsir language...',
                           ),
                           isExpanded: true,
                           onChanged: (value) {
@@ -219,7 +218,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         DropdownButtonFormField(
                           items: getQuranTafsirBookDropDownList(),
                           decoration: InputDecoration(
-                            hintText: "Select tafsir book...",
+                            hintText: 'Select tafsir book...',
                           ),
                           isExpanded: true,
                           onChanged: (value) {
@@ -311,7 +310,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
               });
             },
             label: Text(
-              "Tajweed",
+              'Tajweed',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             icon:
@@ -380,7 +379,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
               });
             },
             label: Text(
-              "Indopak",
+              'Indopak',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
 
@@ -448,7 +447,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                Text(languageNativeNames[key.toLowerCase()] ?? ""),
+                Text(languageNativeNames[key.toLowerCase()] ?? ''),
               ],
             ),
           ),
