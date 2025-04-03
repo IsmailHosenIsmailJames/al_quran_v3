@@ -26,6 +26,7 @@ dependencies:
   meta: ^1.16.0
   bloc: ^9.0.0
   dio: ^5.8.0+1
+  font_awesome_flutter: ^10.8.0
   
 
 dev_dependencies:
