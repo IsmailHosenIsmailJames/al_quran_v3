@@ -14,6 +14,7 @@ import 'package:al_quran_v3/src/screen/home/home_page.dart';
 import 'package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
+import 'package:al_quran_v3/src/widget/components/get_score_widget.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
@@ -703,6 +704,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
   List<DropdownMenuItem>? getQuranTafsirBookDropDownList() {
     List<DropdownMenuItem> items = [];
     if (selectableTafsirBook?.isEmpty ?? true) return null;
+    selectableTafsirBook?.sort(
+      (a, b) => (b['score'] as int).compareTo(a['score']),
+    );
     for (Map book in selectableTafsirBook ?? []) {
       items.add(
         DropdownMenuItem(
@@ -720,7 +724,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
+                buildScoreIndicator(
+                  percentage: (book['score'] as int).toDouble(),
+                  size: 20,
+                ),
+                const Gap(8),
                 Text(book['name'] ?? ''),
+
                 if (book['type'] == 'translation-with-footnote-tags')
                   footNoteTag,
               ],
