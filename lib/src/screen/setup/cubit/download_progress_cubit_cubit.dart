@@ -6,7 +6,7 @@ part 'download_progress_cubit_state.dart';
 class DownloadProgressCubitCubit extends Cubit<DownloadProgressCubitState> {
   DownloadProgressCubitCubit() : super(DownloadProgressCubitInitial());
 
-  void updateProgress(double percentage, String processName) {
+  void updateProgress(double? percentage, String processName) {
     emit(
       DownloadProgressCubitLoading(
         percentage: percentage,

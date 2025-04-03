@@ -454,7 +454,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           const Gap(10),
                           Text(
-                            '${state.processName} ${(state.percentage * 100).toStringAsFixed(2)}%',
+                            '${state.processName} ${state.percentage != null ? '${(state.percentage! * 100).toStringAsFixed(2)}%' : ''}',
                             style: const TextStyle(fontSize: 16),
                           ),
                         ],
@@ -467,7 +467,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         style: const TextStyle(fontSize: 16, color: Colors.red),
                       );
                     }
-                    return const SizedBox.shrink();
+                    return LinearProgressIndicator(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                      minHeight: 8,
+                    );
                   },
                 ),
               ),
@@ -501,16 +505,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
       return true;
     }
     try {
-      log(ApisUrls.base + translationBook!, name: 'http path');
-      dio.Response response = await dio.Dio().get(
-        ApisUrls.base + translationBook!,
-        onReceiveProgress: (count, total) {
-          context.read<DownloadProgressCubitCubit>().updateProgress(
-            count / total,
-            'Downloading Translation',
-          );
-        },
+      String base = ApisUrls.base;
+      log(base + translationBook!, name: 'http path');
+      context.read<DownloadProgressCubitCubit>().updateProgress(
+        null,
+        'Downloading Translation',
       );
+      dio.Response response = await dio.Dio().get(base + translationBook!);
 
       log(response.statusCode.toString(), name: 'Status');
       DateTime now = DateTime.now();
@@ -547,22 +548,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
       return true;
     }
     try {
-      log(ApisUrls.base + tafsirBook!, name: 'http path');
-      dio.Response response = await dio.Dio().get(
-        ApisUrls.base + translationBook!,
-        onReceiveProgress: (count, total) {
-          context.read<DownloadProgressCubitCubit>().updateProgress(
-            count / total,
-            'Downloading Tafsir',
-          );
-        },
+      String base = ApisUrls.base;
+      log(base + tafsirBook!, name: 'http path');
+      context.read<DownloadProgressCubitCubit>().updateProgress(
+        null,
+        'Downloading Tafsir',
       );
+      dio.Response response = await dio.Dio().get(base + translationBook!);
       log(response.statusCode.toString(), name: 'Status');
       DateTime now = DateTime.now();
       Map data = jsonDecode(decodeBZip2String(response.data));
       for (int i = 0; i < data.length; i++) {
         String key = data.keys.elementAt(i);
-        await tafsirBox.put(key, encodeToBZip2(jsonEncode(data[key]!)));
+        await tafsirBox.put(key, jsonEncode(data[key]!));
         context.read<DownloadProgressCubitCubit>().updateProgress(
           i / data.length,
           'Processing Tafsir',

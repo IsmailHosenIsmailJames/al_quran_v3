@@ -6,7 +6,7 @@ sealed class DownloadProgressCubitState {}
 final class DownloadProgressCubitInitial extends DownloadProgressCubitState {}
 
 final class DownloadProgressCubitLoading extends DownloadProgressCubitState {
-  final double percentage;
+  final double? percentage;
   final String processName;
 
   DownloadProgressCubitLoading({
