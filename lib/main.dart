@@ -83,12 +83,14 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light().copyWith(
               colorScheme: ColorScheme.fromSeed(
                 seedColor: AppColors.primaryColor,
+                brightness: Brightness.light,
               ),
               textTheme: GoogleFonts.notoSansTextTheme(),
             ),
             darkTheme: ThemeData.dark().copyWith(
               colorScheme: ColorScheme.fromSeed(
                 seedColor: AppColors.primaryColor,
+                brightness: Brightness.dark,
               ),
               textTheme: GoogleFonts.notoSansTextTheme().apply(
                 bodyColor: Colors.white,

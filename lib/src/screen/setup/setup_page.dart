@@ -417,7 +417,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
       await userBox.put('tafsir_book', tafsirBook);
       await userBox.put('selected_script', selectedScript.name);
 
-      showCupertinoDialog(
+      showDialog(
+        barrierDismissible: false,
         context: context,
         builder:
             (context) => Dialog(
