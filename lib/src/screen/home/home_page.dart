@@ -70,8 +70,8 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               _selectedIndex == 0
-                  ? FluentIcons.home_24_filled
-                  : FluentIcons.home_24_regular,
+                  ? FluentIcons.book_16_filled
+                  : FluentIcons.book_24_regular,
             ),
             label: 'Quran',
           ),
