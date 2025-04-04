@@ -53,10 +53,6 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
-    - family: SurahNames
-      fonts:
-        - asset: assets/fonts/Quran/V4 Surah Name Font.ttf
-
     - family: NotoSans
       fonts:
         - asset: assets/fonts/App/NotoSans-Bold.ttf
