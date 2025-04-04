@@ -8,7 +8,6 @@ import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -80,21 +79,22 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Al Quran',
-            theme: ThemeData.light().copyWith(
+            theme: ThemeData(
+              brightness: Brightness.light,
+              fontFamily: 'NotoSans',
+            ).copyWith(
               colorScheme: ColorScheme.fromSeed(
                 seedColor: AppColors.primaryColor,
                 brightness: Brightness.light,
               ),
-              textTheme: GoogleFonts.notoSansTextTheme(),
             ),
-            darkTheme: ThemeData.dark().copyWith(
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              fontFamily: 'NotoSans',
+            ).copyWith(
               colorScheme: ColorScheme.fromSeed(
                 seedColor: AppColors.primaryColor,
                 brightness: Brightness.dark,
-              ),
-              textTheme: GoogleFonts.notoSansTextTheme().apply(
-                bodyColor: Colors.white,
-                displayColor: Colors.white,
               ),
             ),
             supportedLocales: [const Locale('en'), const Locale('bn')],

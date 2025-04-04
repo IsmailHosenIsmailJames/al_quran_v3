@@ -13,7 +13,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_bloc: ^9.1.0
   shared_preferences: ^2.5.3
-  google_fonts: ^6.2.1
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.273
   intl: ^0.20.2
@@ -26,7 +25,6 @@ dependencies:
   meta: ^1.16.0
   bloc: ^9.0.0
   dio: ^5.8.0+1
-  font_awesome_flutter: ^10.8.0
   
 
 dev_dependencies:
@@ -58,3 +56,18 @@ flutter:
     - family: SurahNames
       fonts:
         - asset: assets/fonts/Quran/V4 Surah Name Font.ttf
+
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/App/NotoSans-Bold.ttf
+          weight: 700 
+        - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/App/NotoSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/App/NotoSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/App/NotoSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/App/NotoSans-SemiBold.ttf
+          weight: 600
