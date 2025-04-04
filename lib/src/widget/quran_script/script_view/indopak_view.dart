@@ -11,6 +11,11 @@ class IndopakView extends StatelessWidget {
     List words =
         indopakScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
+    if (scriptInfo.limitWord != null) {
+      if (!(scriptInfo.limitWord! >= words.length)) {
+        words = words.sublist(0, scriptInfo.limitWord);
+      }
+    }
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.fontSize ?? 24,
       fontFamily: 'IndopakNastaleeq',

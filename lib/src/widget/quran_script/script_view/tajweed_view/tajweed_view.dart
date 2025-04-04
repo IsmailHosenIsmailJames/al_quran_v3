@@ -13,6 +13,11 @@ class TajweedView extends StatelessWidget {
     List words =
         tajweedScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
+    if (scriptInfo.limitWord != null) {
+      if (!(scriptInfo.limitWord! >= words.length)) {
+        words = words.sublist(0, scriptInfo.limitWord);
+      }
+    }
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.fontSize ?? 24,
       fontFamily: 'QPC_Hafs',
