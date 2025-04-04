@@ -1,3 +1,6 @@
+import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +16,10 @@ class _QuranPageState extends State<QuranPage> {
   List<String> pagesName = ['Surah', 'Juz', 'Pages', 'Hizb', 'Ruku'];
   final PageController _pageController = PageController(initialPage: 0);
   int _pageIndex = 0;
+  List<SurahInfoModel> surahInfoList =
+      metaDataSurah.values
+          .map((value) => SurahInfoModel.fromMap(value))
+          .toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +75,7 @@ class _QuranPageState extends State<QuranPage> {
                 });
               },
               children: [
-                Container(),
+                SurahListView(surahInfoList: surahInfoList),
                 Container(),
                 Container(),
                 Container(),
