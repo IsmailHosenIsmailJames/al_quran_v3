@@ -1,20 +1,26 @@
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
+import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
+import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hive/hive.dart';
 
-class SurahListView extends StatelessWidget {
-  final List<SurahInfoModel> surahInfoList;
-  const SurahListView({super.key, required this.surahInfoList});
+class JuzListView extends StatelessWidget {
+  final List<JuzInfoModel> juzInfoList;
+  const JuzListView({super.key, required this.juzInfoList});
 
   @override
   Widget build(BuildContext context) {
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
+    QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
+      (element) => Hive.box('user').get('selected_script') == element.name,
+    );
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -24,8 +30,8 @@ class SurahListView extends StatelessWidget {
       interactive: true,
 
       child: ListView.builder(
-        itemCount: surahInfoList.length,
         controller: scrollController,
+        itemCount: juzInfoList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
@@ -37,6 +43,7 @@ class SurahListView extends StatelessWidget {
                 ),
                 backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
               ),
+
               onPressed: () {},
               child: Container(
                 padding: const EdgeInsets.only(
@@ -48,41 +55,35 @@ class SurahListView extends StatelessWidget {
                 height: 55,
                 child: Row(
                   children: [
-                    getIndexNumberWidget(
-                      context,
-                      index + 1,
-                      textColor: textColor,
-                    ),
-                    const Gap(15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Image.asset(
-                                surahInfoList[index].revelationPlace == 'makkah'
-                                    ? 'assets/img/kaaba_10171102.png'
-                                    : 'assets/img/masjid-al-nabawi_16183907.png',
-                              ),
-                            ),
-                            const Gap(3),
                             Text(
-                              surahInfoList[index].nameSimple,
+                              'Juz',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w500,
                                 color: textColor,
                               ),
                             ),
+                            const Gap(10),
+                            getIndexNumberWidget(
+                              context,
+                              index + 1,
+                              height: 25,
+                              width: 25,
+                              textColor: textColor,
+                            ),
                           ],
                         ),
-                        const Gap(5),
+                        const Gap(2),
                         Text(
-                          meaningOfSurahEnglish[index],
+                          "${listOfSurahNameEnglish[int.parse(juzInfoList[index].firstVerseKey.split(':')[0])]} ${juzInfoList[index].firstVerseKey}",
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light
@@ -92,25 +93,30 @@ class SurahListView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          surahInfoList[index].nameArabic,
-                          style: TextStyle(fontSize: 18, color: textColor),
-                        ),
-                        Text(
-                          '${surahInfoList[index].versesCount} Ayahs',
-                          style: TextStyle(
-                            color:
-                                brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [],
+                    ),
+                    const Spacer(),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: FittedBox(
+                        alignment: Alignment.centerRight,
+                        fit: BoxFit.scaleDown,
+                        child: ScriptProcessor(
+                          scriptInfo: ScriptInfo(
+                            surahNumber: int.parse(
+                              juzInfoList[index].firstVerseKey.split(':')[0],
+                            ),
+                            ayahNumber: int.parse(
+                              juzInfoList[index].firstVerseKey.split(':')[1],
+                            ),
+                            quranScriptType: quranScriptType,
+                            limitWord: 4,
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),

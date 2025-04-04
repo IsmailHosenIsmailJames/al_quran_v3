@@ -3,12 +3,14 @@ class ScriptInfo {
   int ayahNumber;
   QuranScriptType quranScriptType;
   double? fontSize;
+  int? limitWord;
 
   ScriptInfo({
     required this.surahNumber,
     required this.ayahNumber,
     required this.quranScriptType,
     this.fontSize,
+    this.limitWord,
   });
 }
 

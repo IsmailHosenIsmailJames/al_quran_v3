@@ -9,7 +9,7 @@ import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart';
 import 'package:al_quran_v3/src/resources/translation/languages.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/simple_translation.dart';
+import 'package:al_quran_v3/src/resources/meta_data/simple_translation.dart';
 import 'package:al_quran_v3/src/screen/home/home_page.dart';
 import 'package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
