@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parseFragment;
 import 'package:html/dom.dart' as dom;
@@ -42,7 +44,7 @@ TextSpan parseTajweedWord(
         if (ruleClass != null && currentThemeColors.containsKey(ruleClass)) {
           nextColor = currentThemeColors[ruleClass]!;
         } else if (ruleClass != null) {
-          print(
+          log(
             "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: $wordHtml",
           );
         }
