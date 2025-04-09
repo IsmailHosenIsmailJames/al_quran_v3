@@ -1,4 +1,5 @@
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
@@ -37,7 +38,19 @@ class SurahListView extends StatelessWidget {
                 ),
                 backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => QuranScriptView(
+                          startKey: '${index + 1}:1',
+                          endKey:
+                              '${index + 1}:${surahInfoList[index].versesCount}',
+                        ),
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.only(
                   left: 10,

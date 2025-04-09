@@ -1,4 +1,5 @@
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
@@ -44,7 +45,18 @@ class RukuListView extends StatelessWidget {
                 backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
               ),
 
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => QuranScriptView(
+                          startKey: rukuInfoList[index].firstVerseKey,
+                          endKey: rukuInfoList[index].lastVerseKey,
+                        ),
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.only(
                   left: 10,
@@ -83,7 +95,7 @@ class RukuListView extends StatelessWidget {
                         ),
                         const Gap(2),
                         Text(
-                          "${listOfSurahNameEnglish[int.parse(rukuInfoList[index].firstVerseKey.split(':')[0])]} ${rukuInfoList[index].firstVerseKey}",
+                          "${listOfSurahNameEnglish[int.parse(rukuInfoList[index].firstVerseKey.split(':')[0]) - 1]} ${rukuInfoList[index].firstVerseKey}",
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light
@@ -93,11 +105,7 @@ class RukuListView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [],
-                    ),
+
                     const Spacer(),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.55,

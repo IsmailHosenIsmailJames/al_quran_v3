@@ -1,5 +1,6 @@
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
@@ -46,7 +47,22 @@ class PageListView extends StatelessWidget {
                 ),
                 backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => QuranScriptView(
+                          startKey:
+                              convertAyahNumberToKey(
+                                pageInfoList[index].start,
+                              )!,
+                          endKey:
+                              convertAyahNumberToKey(pageInfoList[index].end)!,
+                        ),
+                  ),
+                );
+              },
               child: Container(
                 padding: const EdgeInsets.only(
                   left: 10,
@@ -95,11 +111,7 @@ class PageListView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [],
-                    ),
+
                     const Spacer(),
                     if (ayahKey != null)
                       SizedBox(
