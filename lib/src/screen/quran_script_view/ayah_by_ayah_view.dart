@@ -58,10 +58,11 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
     return ListView.builder(
       itemCount: ayahsList.length,
       itemBuilder: (context, index) {
+        // it is actually a surah number
         if (ayahsList[index].runtimeType == int) {
           return SurahInfoHeaderBuilder(
             surahInfoModel: SurahInfoModel.fromMap(
-              metaDataSurah.values.elementAt(ayahsList[index] as int),
+              metaDataSurah.values.elementAt((ayahsList[index] as int) - 1),
             ),
           );
         }
