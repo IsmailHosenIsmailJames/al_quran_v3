@@ -16,14 +16,14 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
         borderRadius: BorderRadius.circular(roundedRadius),
         color: AppColors.primaryColor.withValues(alpha: 0.1),
       ),
-      height: 100,
+      height: 120,
       child: Stack(
         children: [
           Row(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 120,
+                width: 120,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   image: DecorationImage(
@@ -44,9 +44,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     '${surahInfoModel.id}. ${surahInfoModel.nameSimple} ( ${surahInfoModel.nameArabic} )',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text('Revelation Order: ${surahInfoModel.revelationOrder}'),
                   Text('Verse Count: ${surahInfoModel.versesCount}'),
-                  const Gap(5),
+                  const Text('Translation: '),
+                  const Text('Tafsir: '),
                   SizedBox(
                     height: 25,
                     child: TextButton(

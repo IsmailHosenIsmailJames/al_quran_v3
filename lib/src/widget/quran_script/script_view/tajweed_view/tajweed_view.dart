@@ -24,6 +24,7 @@ class TajweedView extends StatelessWidget {
     );
     return Text.rich(
       style: quranStyle,
+      textDirection: TextDirection.rtl,
       TextSpan(
         children: List.generate(words.length, (index) {
           return parseTajweedWord(words[index] + ' ', quranStyle, context);
