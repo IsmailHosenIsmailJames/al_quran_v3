@@ -22,6 +22,7 @@ class UthmaniView extends StatelessWidget {
     );
     return Text.rich(
       style: quranStyle,
+      textDirection: TextDirection.rtl,
       TextSpan(
         children: List<InlineSpan>.generate(words.length, (index) {
           return TextSpan(text: words[index] + ' ');

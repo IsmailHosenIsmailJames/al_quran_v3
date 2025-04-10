@@ -21,6 +21,7 @@ class IndopakView extends StatelessWidget {
       fontFamily: 'IndopakNastaleeq',
     );
     return Text.rich(
+      textDirection: TextDirection.rtl,
       TextSpan(
         style: quranStyle,
         children: List<InlineSpan>.generate(words.length, (index) {
