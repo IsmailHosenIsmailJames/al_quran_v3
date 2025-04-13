@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
@@ -9,6 +11,7 @@ import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class AyahByAyahView extends StatefulWidget {
@@ -79,84 +82,156 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       (element) => Hive.box('user').get('selected_script') == element.name,
     );
 
-    return ScrollablePositionedList.builder(
-      itemScrollController: itemScrollController,
-      scrollOffsetController: scrollOffsetController,
-      itemPositionsListener: itemPositionsListener,
-      scrollOffsetListener: scrollOffsetListener,
-      itemCount: ayahsList.length,
-      itemBuilder: (context, index) {
-        // it is actually a surah number
-        if (ayahsList[index].runtimeType == int) {
-          return SurahInfoHeaderBuilder(
-            surahInfoModel: SurahInfoModel.fromMap(
-              metaDataSurah.values.elementAt((ayahsList[index] as int) - 1),
-            ),
-          );
-        }
-        int surahNumber = int.parse(ayahsList[index].toString().split(':')[0]);
-        int ayahNumber = int.parse(ayahsList[index].toString().split(':')[1]);
-        return Container(
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(roundedRadius),
-            color: AppColors.primaryColor.withValues(alpha: 0.1),
-          ),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        ScrollablePositionedList.builder(
+          itemScrollController: itemScrollController,
+          scrollOffsetController: scrollOffsetController,
+          itemPositionsListener: itemPositionsListener,
+          scrollOffsetListener: scrollOffsetListener,
+          itemCount: ayahsList.length,
 
+          itemBuilder: (context, index) {
+            log(itemPositionsListener.itemPositions.value.toString());
+            // it is actually a surah number
+            if (ayahsList[index].runtimeType == int) {
+              return SurahInfoHeaderBuilder(
+                surahInfoModel: SurahInfoModel.fromMap(
+                  metaDataSurah.values.elementAt((ayahsList[index] as int) - 1),
+                ),
+              );
+            }
+            int surahNumber = int.parse(
+              ayahsList[index].toString().split(':')[0],
+            );
+            int ayahNumber = int.parse(
+              ayahsList[index].toString().split(':')[1],
+            );
+            Map translationMap =
+                Hive.box('quran_translation').get(ayahsList[index]) ??
+                {'t': 'Translation Not Found'};
+            String translation = translationMap['t'] ?? 'Translation Not Found';
+            return Container(
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.only(
+                left: 5,
+                top: 5,
+                bottom: 5,
+                right: 10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(roundedRadius),
+                color: AppColors.primaryColor.withValues(alpha: 0.05),
+              ),
+              child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                      right: 5,
-                      bottom: 3,
-                      top: 3,
-                    ),
-                    child: Text(ayahNumber.toString()),
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    height: 30,
-                    width: 30,
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        foregroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                          side: BorderSide(color: AppColors.primaryColor),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        padding: const EdgeInsets.only(
+                          left: 5,
+                          right: 5,
+                          bottom: 3,
+                          top: 3,
+                        ),
+                        child: Text(ayahNumber.toString()),
+                      ),
+                      const Spacer(),
+                      SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: IconButton(
+                          style: IconButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            foregroundColor: AppColors.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(color: AppColors.primaryColor),
+                            ),
+                          ),
+                          onPressed: () {},
+                          icon: const Icon(Icons.play_arrow_rounded, size: 18),
                         ),
                       ),
-                      onPressed: () {},
-                      icon: const Icon(Icons.play_arrow_rounded, size: 18),
+                    ],
+                  ),
+                  const Gap(5),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ScriptProcessor(
+                      scriptInfo: ScriptInfo(
+                        surahNumber: surahNumber,
+                        ayahNumber: ayahNumber,
+                        quranScriptType: quranScriptType,
+                      ),
                     ),
+                  ),
+                  const Gap(5),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Translation:',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+                  const Gap(2),
+                  Text(
+                    translation,
+                    textDirection:
+                        intl.Bidi.hasAnyRtl(translation)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                   ),
                 ],
               ),
-              const Gap(5),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ScriptProcessor(
-                  scriptInfo: ScriptInfo(
-                    surahNumber: surahNumber,
-                    ayahNumber: ayahNumber,
-                    quranScriptType: quranScriptType,
-                  ),
-                ),
+            );
+          },
+        ),
+
+        Align(
+          alignment: Alignment.centerRight,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 50),
+            height: 1000,
+            width: 7,
+            margin: const EdgeInsets.only(right: 1),
+
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(roundedRadius),
+            ),
+            alignment: Alignment(
+              0,
+              itemPositionsListener.itemPositions.value.isEmpty
+                  ? -1
+                  : ((itemPositionsListener.itemPositions.value.first.index /
+                              ayahsList.length) *
+                          2) -
+                      1,
+            ),
+            child: Container(
+              height: 50,
+              width: 7,
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey.shade700
+                        : Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(roundedRadius),
               ),
-              Gap(5),
-            ],
+            ),
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }

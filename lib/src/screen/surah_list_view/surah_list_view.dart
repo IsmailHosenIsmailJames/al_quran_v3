@@ -47,7 +47,6 @@ class SurahListView extends StatelessWidget {
                           startKey: '${index + 1}:1',
                           endKey:
                               '${index + 1}:${surahInfoList[index].versesCount}',
-                          toScrollKey: '2:200',
                         ),
                   ),
                 );
