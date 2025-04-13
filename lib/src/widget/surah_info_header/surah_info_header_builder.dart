@@ -11,10 +11,10 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
-        color: AppColors.primaryColor.withValues(alpha: 0.1),
+        color: AppColors.primaryColor.withValues(alpha: 0.05),
       ),
       height: 120,
       child: Stack(
