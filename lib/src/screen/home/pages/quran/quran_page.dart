@@ -14,8 +14,7 @@ import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class QuranPage extends StatefulWidget {
-  final PageController pageController;
-  const QuranPage({super.key, required this.pageController});
+  const QuranPage({super.key});
 
   @override
   State<QuranPage> createState() => _QuranPageState();
@@ -23,7 +22,6 @@ class QuranPage extends StatefulWidget {
 
 class _QuranPageState extends State<QuranPage> {
   List<String> pagesName = ['Surah', 'Juz', 'Pages', 'Hizb', 'Ruku'];
-  final PageController _pageController = PageController(initialPage: 0);
   int _pageIndex = 0;
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values
@@ -66,11 +64,6 @@ class _QuranPageState extends State<QuranPage> {
                       ),
                     ),
                     onPressed: () async {
-                      _pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.linear,
-                      );
                       setState(() {
                         _pageIndex = index;
                       });
@@ -85,21 +78,14 @@ class _QuranPageState extends State<QuranPage> {
             ),
           ),
           Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (value) {
-                setState(() {
-                  _pageIndex = value;
-                });
-              },
-              children: [
-                SurahListView(surahInfoList: surahInfoList),
-                JuzListView(juzInfoList: juzInfoModelList),
-                PageListView(pageInfoList: pageInfoList),
-                HizbListView(hizbInfoList: hizbInfoList),
-                RukuListView(rukuInfoList: rukuInfoList),
-              ],
-            ),
+            child:
+                [
+                  SurahListView(surahInfoList: surahInfoList),
+                  JuzListView(juzInfoList: juzInfoModelList),
+                  PageListView(pageInfoList: pageInfoList),
+                  HizbListView(hizbInfoList: hizbInfoList),
+                  RukuListView(rukuInfoList: rukuInfoList),
+                ][_pageIndex],
           ),
         ],
       ),

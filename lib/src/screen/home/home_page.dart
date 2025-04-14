@@ -19,17 +19,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
-    _pageController.animateToPage(
-      index,
-      curve: Curves.linear,
-      duration: const Duration(milliseconds: 300),
-    );
     setState(() {
       _selectedIndex = index;
     });
   }
-
-  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +38,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        children: [
-          QuranPage(pageController: _pageController),
-          PrayerTimePage(pageController: _pageController),
-          QiblaDirection(pageController: _pageController),
-          AudioPage(pageController: _pageController),
-          SettingsPage(pageController: _pageController),
-        ],
-      ),
+      body:
+          [
+            QuranPage(),
+            PrayerTimePage(),
+            QiblaDirection(),
+            AudioPage(),
+            SettingsPage(),
+          ][_selectedIndex],
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

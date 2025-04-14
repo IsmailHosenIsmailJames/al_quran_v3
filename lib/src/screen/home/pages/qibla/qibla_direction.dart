@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QiblaDirection extends StatefulWidget {
-  final PageController pageController;
-  const QiblaDirection({super.key, required this.pageController});
+  const QiblaDirection({super.key});
 
   @override
   State<QiblaDirection> createState() => _QiblaDirectionState();

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 class SurahInfoModel {
   final int id;
-  final int name;
   final String nameSimple;
   final String nameArabic;
   final int revelationOrder;
@@ -12,7 +11,6 @@ class SurahInfoModel {
 
   SurahInfoModel({
     required this.id,
-    required this.name,
     required this.nameArabic,
     required this.nameSimple,
     required this.revelationOrder,
@@ -32,7 +30,6 @@ class SurahInfoModel {
     String? pagesRange,
   }) => SurahInfoModel(
     id: id ?? this.id,
-    name: name ?? this.name,
     nameSimple: nameSimple ?? this.nameSimple,
     revelationOrder: revelationOrder ?? this.revelationOrder,
     revelationPlace: revelationPlace ?? this.revelationPlace,
@@ -48,7 +45,6 @@ class SurahInfoModel {
 
   factory SurahInfoModel.fromMap(Map<String, dynamic> json) => SurahInfoModel(
     id: json['id'],
-    name: json['name'],
     nameSimple: json['name_simple'],
     revelationOrder: json['revelation_order'],
     revelationPlace: json['revelation_place'],
@@ -59,7 +55,6 @@ class SurahInfoModel {
 
   Map<String, dynamic> toMap() => {
     'id': id,
-    'name': name,
     'name_simple': nameSimple,
     'revelation_order': revelationOrder,
     'revelation_place': revelationPlace,
