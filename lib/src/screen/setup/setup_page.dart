@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:al_quran_v3/src/api/apis_urls.dart';
-import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/functions/encode_decode.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
@@ -732,9 +731,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
                 ),
                 const Gap(8),
                 Text(book['name'] ?? ''),
-
-                if (book['type'] == 'translation-with-footnote-tags')
-                  footNoteTag,
               ],
             ),
           ),
@@ -931,7 +927,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
 bool doesHaveFootNote(String language) {
   bool doesHaveFootNote = false;
-  for (Map map in simpleTranslation[capitalizeFirstLatter(language)] ?? []) {
+  for (Map map in simpleTranslation[language] ?? []) {
     if (map['type'] == 'translation-with-footnote-tags') {
       doesHaveFootNote = true;
       break;
@@ -947,6 +943,7 @@ bool doesHaveWordByWordTranslation(String language) {
       doesHaveWordByWordTranslation = true;
     }
   });
+
   return doesHaveWordByWordTranslation;
 }
 
