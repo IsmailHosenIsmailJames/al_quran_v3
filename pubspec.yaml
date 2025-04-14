@@ -1,7 +1,7 @@
 name: al_quran_v3
 description: "A new Flutter project."
 
-version: 1.0.0+1
+version: 3.0.0-dev-1+2
 
 environment:
   sdk: ^3.7.2
@@ -27,13 +27,15 @@ dependencies:
   dio: ^5.8.0+1
   scrollable_positioned_list: ^0.3.8
   flutter_widget_from_html: ^0.16.0
-  
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
+  icons_launcher: ^3.0.1
 
 
 flutter:
@@ -69,3 +71,17 @@ flutter:
           weight: 400
         - asset: assets/fonts/App/NotoSans-SemiBold.ttf
           weight: 600
+
+icons_launcher:
+  image_path: "assets/img/Quran_Logo_v3.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+  
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/img/Quran_Logo_v3.png"
+  min_sdk_android: 21 
