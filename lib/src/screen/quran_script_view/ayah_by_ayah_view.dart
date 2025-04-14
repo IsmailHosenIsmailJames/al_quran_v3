@@ -41,6 +41,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       ScrollOffsetListener.create();
 
   late List ayahsList;
+  bool supportsWordByWord = false;
   @override
   void initState() {
     int startSurahNumber = int.parse(widget.startKey.split(':')[0]);
@@ -65,6 +66,13 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         }
         ayahsList.add('$surah:$ayah');
       }
+    }
+
+    final metaDataOfWordByWord = Hive.box(
+      'quran_word_by_word',
+    ).get('meta_data', defaultValue: {});
+    if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
+      supportsWordByWord = true;
     }
 
     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
@@ -194,6 +202,11 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
     String translation = translationMap['t'] ?? 'Translation Not Found';
     translation = translation.replaceAll('>', '> ');
     Map footNote = translationMap['f'];
+    List ayahByAyahList = [];
+    if (supportsWordByWord) {
+      ayahByAyahList =
+          Hive.box('quran_word_by_word').get(ayahsList[index]) ?? [];
+    }
     return Container(
       padding: const EdgeInsets.all(5),
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
@@ -302,6 +315,8 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                 }),
               ),
             ),
+
+          if (supportsWordByWord) Text(ayahByAyahList.toString()),
         ],
       ),
     );

@@ -482,7 +482,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
       bool success1 = await downloadTranslationBook();
       bool success2 = await downloadTafsir();
-      if (success1 && success2) {
+      bool success3 = await downloadWordByWordTranslation(
+        codeToLanguageMap[translationLanguage ?? ''] ?? '',
+      );
+      if (success1 && success2 && success3) {
         userBox.put('is_setup_complete', true);
         // success and route to home
         Navigator.pushAndRemoveUntil(
@@ -496,6 +499,72 @@ class _AppSetupPageState extends State<AppSetupPage> {
           'Unable to download resources...',
         );
       }
+    }
+  }
+
+  Future<bool> downloadWordByWordTranslation(String translationLanguage) async {
+    log('Going to download word by word translation');
+    bool isSupportWordByWord = doesHaveWordByWordTranslation(
+      translationLanguage,
+    );
+    if (isSupportWordByWord) {
+      final wordByWordBox = await Hive.openBox('quran_word_by_word');
+      Map metaData = wordByWordBox.get('meta_data', defaultValue: {});
+      if (metaData['name'] == translationBook &&
+          metaData['language'] == translationLanguage) {
+        log('Word By Word Already downloaded');
+        return true;
+      }
+      try {
+        String? wordByWordTranslationDownloadURL;
+        wordByWordTranslation.forEach((key, value) {
+          if (translationLanguage.toLowerCase() == key.toLowerCase()) {
+            wordByWordTranslationDownloadURL = value[0]['full_path'];
+          }
+        });
+        String base = ApisUrls.base;
+        log(base + (wordByWordTranslationDownloadURL ?? ''), name: 'http path');
+        context.read<DownloadProgressCubitCubit>().updateProgress(
+          null,
+          'Downloading Word by Word Translation',
+        );
+
+        dio.Response response = await dio.Dio().get(
+          base + wordByWordTranslationDownloadURL!,
+          options: dio.Options(responseType: dio.ResponseType.plain),
+        );
+        log(response.statusCode.toString(), name: 'Status');
+        DateTime now = DateTime.now();
+        Map data = jsonDecode(decodeBZip2String(response.data));
+        log(data.toString(), name: 'Word by Word Translation');
+        if (data.isEmpty) {
+          log('Word by Word Translation is empty');
+          return false;
+        }
+        for (int i = 0; i < data.length; i++) {
+          String key = data.keys.elementAt(i);
+          await wordByWordBox.put(key, data[key]);
+          context.read<DownloadProgressCubitCubit>().updateProgress(
+            i / data.length,
+            'Processing Word by Word Translation',
+          );
+        }
+        await wordByWordBox.put('meta_data', {
+          'name': translationBook,
+          'language': translationLanguage,
+        });
+        log(
+          now.difference(DateTime.now()).inMilliseconds.abs().toString(),
+          name: 'Translation Process Time',
+        );
+        return true;
+      } catch (e) {
+        log(e.toString(), name: 'http error');
+        return false;
+      }
+    } else {
+      log('Word by word translation not supported');
+      return true;
     }
   }
 
