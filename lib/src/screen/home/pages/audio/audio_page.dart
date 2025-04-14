@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AudioPage extends StatefulWidget {
-  final PageController pageController;
-  const AudioPage({super.key, required this.pageController});
+  const AudioPage({super.key});
 
   @override
   State<AudioPage> createState() => _AudioPageState();

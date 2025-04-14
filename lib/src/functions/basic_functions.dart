@@ -18,3 +18,24 @@ String? convertAyahNumberToKey(int ayahNumber) {
   }
   return null;
 }
+
+int? convertKeyToAyahNumber(String ayahKey) {
+  // ayah Key example 1:1, 1:7, 2:100
+  List<String> parts = ayahKey.split(':');
+  if (parts.length != 2) {
+    return null;
+  }
+  int surahNumber = int.parse(parts[0]);
+  int ayahNumber = int.parse(parts[1]);
+  if (surahNumber < 1 || surahNumber > quranAyahCount.length) {
+    return null;
+  }
+  if (ayahNumber < 1 || ayahNumber > quranAyahCount[surahNumber - 1]) {
+    return null;
+  }
+  int sum = 0;
+  for (int i = 0; i < surahNumber - 1; i++) {
+    sum += quranAyahCount[i];
+  }
+  return sum + ayahNumber;
+}

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class PrayerTimePage extends StatefulWidget {
-  final PageController pageController;
-  const PrayerTimePage({super.key, required this.pageController});
+  const PrayerTimePage({super.key});
 
   @override
   State<PrayerTimePage> createState() => _PrayerTimePageState();
