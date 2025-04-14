@@ -26,6 +26,7 @@ dependencies:
   bloc: ^9.0.0
   dio: ^5.8.0+1
   scrollable_positioned_list: ^0.3.8
+  flutter_widget_from_html: ^0.16.0
   
 
 dev_dependencies:

@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -9,9 +8,9 @@ import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class AyahByAyahView extends StatefulWidget {
@@ -92,7 +91,6 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
           itemCount: ayahsList.length,
 
           itemBuilder: (context, index) {
-            log(itemPositionsListener.itemPositions.value.toString());
             // it is actually a surah number
             if (ayahsList[index].runtimeType == int) {
               return SurahInfoHeaderBuilder(
@@ -111,6 +109,8 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                 Hive.box('quran_translation').get(ayahsList[index]) ??
                 {'t': 'Translation Not Found'};
             String translation = translationMap['t'] ?? 'Translation Not Found';
+            translation = translation.replaceAll('>', '> ');
+            Map footNote = translationMap['f'];
             return Container(
               padding: const EdgeInsets.all(5),
               margin: const EdgeInsets.only(
@@ -184,13 +184,52 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                     ),
                   ),
                   const Gap(2),
-                  Text(
-                    translation,
-                    textDirection:
-                        intl.Bidi.hasAnyRtl(translation)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: HtmlWidget(
+                      capitalizeFirstLatter(translation),
+                      buildAsync: false,
+                    ),
                   ),
+                  if (footNote.keys.isNotEmpty) const Gap(8),
+                  if (footNote.keys.isNotEmpty)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Foot Note:',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ),
+                  const Gap(2),
+                  if (footNote.keys.isNotEmpty)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: List.generate(footNote.length, (index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${index + 1}. '),
+                              Container(
+                                decoration: const BoxDecoration(),
+                                padding: EdgeInsets.only(bottom: 5),
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                child: HtmlWidget(
+                                  buildAsync: false,
+                                  capitalizeFirstLatter(
+                                    footNote.values.elementAt(index),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
                 ],
               ),
             );
