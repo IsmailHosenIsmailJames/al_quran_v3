@@ -202,7 +202,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         {'t': 'Translation Not Found'};
     String translation = translationMap['t'] ?? 'Translation Not Found';
     translation = translation.replaceAll('>', '> ');
-    Map footNote = translationMap['f'] ?? {}; // TODO
+    Map footNote = translationMap['f'] ?? {};
     List wordByWord = [];
     if (supportsWordByWord) {
       wordByWord = Hive.box('quran_word_by_word').get(ayahsList[index]) ?? [];
