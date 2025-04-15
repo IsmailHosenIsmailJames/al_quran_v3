@@ -5,7 +5,10 @@ import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
+import '../home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 
 class SurahListView extends StatelessWidget {
   final List<SurahInfoModel> surahInfoList;
@@ -17,6 +20,18 @@ class SurahListView extends StatelessWidget {
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
     ScrollController scrollController = ScrollController();
+    double previousPixel = 0;
+    scrollController.addListener(() {
+      if (scrollController.position.pixels - previousPixel >
+          minScrollUiAudioUpdate) {
+        previousPixel = scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(false);
+      } else if (scrollController.position.pixels - previousPixel <
+          -minScrollUiAudioUpdate) {
+        previousPixel = scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(true);
+      }
+    });
 
     return Scrollbar(
       controller: scrollController,
@@ -25,6 +40,7 @@ class SurahListView extends StatelessWidget {
       interactive: true,
 
       child: ListView.builder(
+        padding: const EdgeInsets.only(bottom: 120),
         itemCount: surahInfoList.length,
         controller: scrollController,
         itemBuilder: (context, index) {

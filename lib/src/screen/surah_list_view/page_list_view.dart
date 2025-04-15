@@ -1,5 +1,6 @@
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
+import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 
@@ -24,7 +26,18 @@ class PageListView extends StatelessWidget {
       (element) => Hive.box('user').get('selected_script') == element.name,
     );
     ScrollController scrollController = ScrollController();
-
+    double previousPixel = 0;
+    scrollController.addListener(() {
+      if (scrollController.position.pixels - previousPixel >
+          minScrollUiAudioUpdate) {
+        previousPixel = scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(false);
+      } else if (scrollController.position.pixels - previousPixel <
+          -minScrollUiAudioUpdate) {
+        previousPixel = scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(true);
+      }
+    });
     return Scrollbar(
       controller: scrollController,
       radius: Radius.circular(roundedRadius),
@@ -32,6 +45,7 @@ class PageListView extends StatelessWidget {
       interactive: true,
 
       child: ListView.builder(
+        padding: const EdgeInsets.only(bottom: 120),
         itemCount: pageInfoList.length,
         controller: scrollController,
         itemBuilder: (context, index) {
