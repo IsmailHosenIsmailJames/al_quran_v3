@@ -20,6 +20,15 @@ class IndopakView extends StatelessWidget {
       fontSize: scriptInfo.fontSize ?? 24,
       fontFamily: 'IndopakNastaleeq',
     );
+    if (scriptInfo.wordIndex != null) {
+      return Text.rich(
+        style: quranStyle,
+        textDirection: TextDirection.rtl,
+        TextSpan(
+          children: [TextSpan(text: words[scriptInfo.wordIndex!] + ' ')],
+        ),
+      );
+    }
     return Text.rich(
       textDirection: TextDirection.rtl,
       TextSpan(

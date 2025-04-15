@@ -144,6 +144,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
   }
 
   final ScrollController _scrollController = ScrollController();
+  List<int> expandedForWordByWord = [];
 
   @override
   Widget build(BuildContext context) {
@@ -201,11 +202,10 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         {'t': 'Translation Not Found'};
     String translation = translationMap['t'] ?? 'Translation Not Found';
     translation = translation.replaceAll('>', '> ');
-    Map footNote = translationMap['f'];
-    List ayahByAyahList = [];
+    Map footNote = translationMap['f'] ?? {}; // TODO
+    List wordByWord = [];
     if (supportsWordByWord) {
-      ayahByAyahList =
-          Hive.box('quran_word_by_word').get(ayahsList[index]) ?? [];
+      wordByWord = Hive.box('quran_word_by_word').get(ayahsList[index]) ?? [];
     }
     return Container(
       padding: const EdgeInsets.all(5),
@@ -315,8 +315,75 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                 }),
               ),
             ),
+          if (supportsWordByWord)
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  expandedForWordByWord.contains(index)
+                      ? expandedForWordByWord.remove(index)
+                      : expandedForWordByWord.add(index);
+                });
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withValues(alpha: 0.05),
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                ),
+                padding: const EdgeInsets.only(left: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Word by Word:',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
 
-          if (supportsWordByWord) Text(ayahByAyahList.toString()),
+                    Icon(
+                      expandedForWordByWord.contains(index)
+                          ? Icons.arrow_drop_up
+                          : Icons.arrow_right,
+                      size: 24,
+                      color: Colors.grey.shade500,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          if (supportsWordByWord) const Gap(5),
+          if (supportsWordByWord)
+            SizedBox(
+              height: expandedForWordByWord.contains(index) ? null : 0,
+
+              child:
+                  expandedForWordByWord.contains(index)
+                      ? Wrap(
+                        spacing: 15,
+                        runSpacing: 8,
+
+                        textDirection: TextDirection.rtl,
+                        children: List.generate(wordByWord.length, (index) {
+                          return Column(
+                            children: [
+                              ScriptProcessor(
+                                scriptInfo: ScriptInfo(
+                                  surahNumber: surahNumber,
+                                  ayahNumber: ayahNumber,
+                                  quranScriptType: quranScriptType,
+                                  wordIndex: index,
+                                ),
+                              ),
+                              Text(wordByWord[index]),
+                            ],
+                          );
+                        }),
+                      )
+                      : null,
+            ),
         ],
       ),
     );
