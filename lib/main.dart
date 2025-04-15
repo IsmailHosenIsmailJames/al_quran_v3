@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:al_quran_v3/src/screen/home/home_page.dart';
+import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart';
 import 'package:al_quran_v3/src/screen/setup/setup_page.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => DownloadProgressCubitCubit()),
         BlocProvider(create: (context) => ThemeCubit(preferences)),
+        BlocProvider(create: (context) => AudioUiControllerCubit()),
       ],
 
       child: BlocBuilder<ThemeCubit, ThemeMode>(

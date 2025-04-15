@@ -19,6 +19,6 @@ class PageByPageView extends StatefulWidget {
 class _PageByPageViewState extends State<PageByPageView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Container();
   }
 }

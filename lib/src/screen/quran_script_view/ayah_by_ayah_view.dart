@@ -1,6 +1,7 @@
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
+import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -39,6 +40,8 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       ItemPositionsListener.create();
   final ScrollOffsetListener scrollOffsetListener =
       ScrollOffsetListener.create();
+
+  double previousPixel = 0.0;
 
   late List ayahsList;
   bool supportsWordByWord = false;
@@ -117,6 +120,15 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
     });
 
     _scrollController.addListener(() {
+      if (_scrollController.position.pixels - previousPixel >
+          minScrollUiAudioUpdate) {
+        previousPixel = _scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(false);
+      } else if (_scrollController.position.pixels - previousPixel <
+          -minScrollUiAudioUpdate) {
+        previousPixel = _scrollController.position.pixels;
+        context.read<AudioUiControllerCubit>().setExpanded(true);
+      }
       // Get item index from scroll offset
       int index =
           (_scrollController.offset /
