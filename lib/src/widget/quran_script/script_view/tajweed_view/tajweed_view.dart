@@ -22,6 +22,21 @@ class TajweedView extends StatelessWidget {
       fontSize: scriptInfo.fontSize ?? 24,
       fontFamily: 'QPC_Hafs',
     );
+    if (scriptInfo.wordIndex != null) {
+      return Text.rich(
+        style: quranStyle,
+        textDirection: TextDirection.rtl,
+        TextSpan(
+          children: [
+            parseTajweedWord(
+              words[scriptInfo.wordIndex!] + ' ',
+              quranStyle,
+              context,
+            ),
+          ],
+        ),
+      );
+    }
     return Text.rich(
       style: quranStyle,
       textDirection: TextDirection.rtl,
