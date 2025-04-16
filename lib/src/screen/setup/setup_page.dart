@@ -536,7 +536,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
         log(response.statusCode.toString(), name: 'Status');
         DateTime now = DateTime.now();
         Map data = jsonDecode(decodeBZip2String(response.data));
-        log(data.toString(), name: 'Word by Word Translation');
         if (data.isEmpty) {
           log('Word by Word Translation is empty');
           return false;

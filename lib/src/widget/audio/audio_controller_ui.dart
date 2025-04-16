@@ -36,8 +36,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   state.expanded
                       ? Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade900
-                          : Colors.grey.shade200
+                          : Colors.grey.shade100
                       : AppColors.primaryColor,
+              border: Border.all(color: AppColors.primaryColor, width: 0.5),
             ),
             child: Stack(
               children: [

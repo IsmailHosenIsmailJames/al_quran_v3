@@ -230,7 +230,6 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -348,7 +347,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Word by Word:',
+                      'Word by Word Translation:',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
@@ -374,23 +373,35 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
               child:
                   expandedForWordByWord.contains(index)
                       ? Wrap(
-                        spacing: 15,
-                        runSpacing: 8,
+                        spacing: 5,
+                        runSpacing: 5,
 
                         textDirection: TextDirection.rtl,
                         children: List.generate(wordByWord.length, (index) {
-                          return Column(
-                            children: [
-                              ScriptProcessor(
-                                scriptInfo: ScriptInfo(
-                                  surahNumber: surahNumber,
-                                  ayahNumber: ayahNumber,
-                                  quranScriptType: quranScriptType,
-                                  wordIndex: index,
-                                ),
+                          return Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor.withValues(
+                                alpha: 0.1,
                               ),
-                              Text(wordByWord[index]),
-                            ],
+                              borderRadius: BorderRadius.circular(
+                                roundedRadius,
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                ScriptProcessor(
+                                  scriptInfo: ScriptInfo(
+                                    surahNumber: surahNumber,
+                                    ayahNumber: ayahNumber,
+                                    quranScriptType: quranScriptType,
+                                    wordIndex: index,
+                                  ),
+                                ),
+                                const Gap(5),
+                                Text(wordByWord[index]),
+                              ],
+                            ),
                           );
                         }),
                       )
