@@ -90,6 +90,13 @@ class MyApp extends StatelessWidget {
                 seedColor: AppColors.primaryColor,
                 brightness: Brightness.light,
               ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                  foregroundColor: Colors.white,
+                  iconColor: Colors.white,
+                ),
+              ),
             ),
             darkTheme: ThemeData(
               brightness: Brightness.dark,
@@ -98,6 +105,13 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(
                 seedColor: AppColors.primaryColor,
                 brightness: Brightness.dark,
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                  foregroundColor: Colors.white,
+                  iconColor: Colors.white,
+                ),
               ),
             ),
             supportedLocales: [const Locale('en'), const Locale('bn')],
