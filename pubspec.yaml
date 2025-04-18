@@ -32,6 +32,7 @@ dependencies:
   geolocator: ^14.0.0
   vector_math: ^2.1.4
   geocoding: ^3.0.0
+  flutter_svg: ^2.0.17
 
 
 dev_dependencies:
