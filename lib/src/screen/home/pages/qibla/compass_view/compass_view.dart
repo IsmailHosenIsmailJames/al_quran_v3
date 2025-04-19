@@ -22,7 +22,7 @@ class CompassView extends CustomPainter {
     canvas.drawCircle(
       const Offset(0, 0),
       25,
-      degreeAnglePaint..color = grayColor.withValues(alpha: 0.4),
+      degreeAnglePaint..color = grayColor,
     );
 
     double degreeDistanceFromCenter = size.width / 2;
@@ -43,14 +43,14 @@ class CompassView extends CustomPainter {
 
     // draw angle lines
     for (int degree = 0; degree < 360; degree++) {
-      if (degree % 3 == 0) {
+      if (degree % 2 == 0) {
         bool is30 = degree % 30 == 0;
         bool is90 = degree % 90 == 0;
         double length = 5;
         degreeAnglePaint
           ..color = grayColor
           ..strokeCap = StrokeCap.round
-          ..strokeWidth = 1.5;
+          ..strokeWidth = 1;
         if (is30) {
           length = 10;
           degreeAnglePaint
