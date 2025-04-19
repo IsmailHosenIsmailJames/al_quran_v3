@@ -1,4 +1,5 @@
-import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
+import 'package:al_quran_v3/src/audio/model/audio_state_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +15,12 @@ class AudioControllerUi extends StatefulWidget {
 class _AudioControllerUiState extends State<AudioControllerUi> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AudioUiControllerCubit, AudioUiControllerState>(
+    return BlocBuilder<AudioStateCubit, AudioStateModel>(
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
             if (!state.expanded) {
-              context.read<AudioUiControllerCubit>().setExpanded(true);
+              context.read<AudioStateCubit>().setExpanded(true);
             }
           },
           child: AnimatedContainer(
@@ -65,9 +66,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         ),
                         onPressed: () {
                           if (state.expanded) {
-                            context.read<AudioUiControllerCubit>().setExpanded(
-                              false,
-                            );
+                            context.read<AudioStateCubit>().setExpanded(false);
                           }
                         },
                         icon: const Icon(Icons.close_fullscreen_rounded),

@@ -1,3 +1,4 @@
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
@@ -7,8 +8,6 @@ import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-
-import '../home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 
 class SurahListView extends StatelessWidget {
   final List<SurahInfoModel> surahInfoList;
@@ -25,11 +24,11 @@ class SurahListView extends StatelessWidget {
       if (scrollController.position.pixels - previousPixel >
           minScrollUiAudioUpdate) {
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(false);
+        context.read<AudioStateCubit>().setExpanded(false);
       } else if (scrollController.position.pixels - previousPixel <
           -minScrollUiAudioUpdate) {
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(true);
+        context.read<AudioStateCubit>().setExpanded(true);
       }
     });
 

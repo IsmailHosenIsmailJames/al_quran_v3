@@ -1,7 +1,7 @@
 import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
-import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -32,6 +32,33 @@ class AyahByAyahView extends StatefulWidget {
   State<AyahByAyahView> createState() => _AyahByAyahViewState();
 }
 
+List getListOfAyahKey({
+  required String startAyahKey,
+  required String endAyahKey,
+}) {
+  List ayahsList = [];
+  int startSurahNumber = int.parse(startAyahKey.split(':')[0]);
+  int startAyahNumber = int.parse(startAyahKey.split(':')[1]);
+  int endSurahNumber = int.parse(endAyahKey.split(':')[0]);
+  int endAyahNumber = int.parse(endAyahKey.split(':')[1]);
+
+  for (int surah = startSurahNumber; surah <= endSurahNumber; surah++) {
+    int startAyah = 1;
+    if (surah == startSurahNumber) startAyah = startAyahNumber;
+    int endAyah = quranAyahCount[surah - 1];
+    if (surah == endSurahNumber) {
+      endAyah = endAyahNumber;
+    }
+    for (int ayah = startAyah; ayah <= endAyah; ayah++) {
+      if (ayah == 1) {
+        ayahsList.add(surah);
+      }
+      ayahsList.add('$surah:$ayah');
+    }
+  }
+  return ayahsList;
+}
+
 class _AyahByAyahViewState extends State<AyahByAyahView> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ScrollOffsetController scrollOffsetController =
@@ -42,35 +69,21 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       ScrollOffsetListener.create();
 
   double previousPixel = 0.0;
+  int? indexToScroll;
 
   late List ayahsList;
   bool supportsWordByWord = false;
   @override
   void initState() {
-    int startSurahNumber = int.parse(widget.startKey.split(':')[0]);
-    int startAyahNumber = int.parse(widget.startKey.split(':')[1]);
-    int endSurahNumber = int.parse(widget.endKey.split(':')[0]);
-    int endAyahNumber = int.parse(widget.endKey.split(':')[1]);
-    int? indexToScroll;
-    ayahsList = [];
-    for (int surah = startSurahNumber; surah <= endSurahNumber; surah++) {
-      int startAyah = 1;
-      if (surah == startSurahNumber) startAyah = startAyahNumber;
-      int endAyah = quranAyahCount[surah - 1];
-      if (surah == endSurahNumber) {
-        endAyah = endAyahNumber;
-      }
-      for (int ayah = startAyah; ayah <= endAyah; ayah++) {
-        if (ayah == 1) {
-          ayahsList.add(surah);
-        }
-        if ('$surah:$ayah' == widget.toScrollKey) {
-          indexToScroll = ayahsList.length;
-        }
-        ayahsList.add('$surah:$ayah');
+    ayahsList = getListOfAyahKey(
+      startAyahKey: widget.startKey,
+      endAyahKey: widget.endKey,
+    );
+    for (int i = 0; i < ayahsList.length; i++) {
+      if (ayahsList[i] == widget.toScrollKey) {
+        indexToScroll = ayahsList.length;
       }
     }
-
     final metaDataOfWordByWord = Hive.box(
       'quran_word_by_word',
     ).get('meta_data', defaultValue: {});
@@ -123,11 +136,11 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       if (_scrollController.position.pixels - previousPixel >
           minScrollUiAudioUpdate) {
         previousPixel = _scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(false);
+        context.read<AudioStateCubit>().setExpanded(false);
       } else if (_scrollController.position.pixels - previousPixel <
           -minScrollUiAudioUpdate) {
         previousPixel = _scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(true);
+        context.read<AudioStateCubit>().setExpanded(true);
       }
       // Get item index from scroll offset
       int index =
@@ -257,7 +270,11 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                       side: BorderSide(color: AppColors.primaryColor),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AudioStateCubit>().playSingleAyah(
+                      ayahKey: ayahsList[index],
+                    );
+                  },
                   icon: const Icon(Icons.play_arrow_rounded, size: 18),
                 ),
               ),
@@ -375,14 +392,13 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                       ? Wrap(
                         spacing: 5,
                         runSpacing: 5,
-
                         textDirection: TextDirection.rtl,
                         children: List.generate(wordByWord.length, (index) {
                           return Container(
                             padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                               color: AppColors.primaryColor.withValues(
-                                alpha: 0.1,
+                                alpha: 0.05,
                               ),
                               borderRadius: BorderRadius.circular(
                                 roundedRadius,

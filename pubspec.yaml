@@ -34,6 +34,10 @@ dependencies:
   geocoding: ^3.0.0
   flutter_svg: ^2.0.17
   vibration: ^3.1.3
+  adhan: ^2.0.0+1
+  just_audio: ^0.9.46
+  just_audio_media_kit: ^2.1.0
+  just_audio_background: ^0.0.1-beta.16
 
 
 dev_dependencies:
