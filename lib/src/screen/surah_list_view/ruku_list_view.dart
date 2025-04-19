@@ -1,5 +1,5 @@
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -30,11 +30,11 @@ class RukuListView extends StatelessWidget {
       if (scrollController.position.pixels - previousPixel >
           minScrollUiAudioUpdate) {
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(false);
+        context.read<AudioStateCubit>().setExpanded(false);
       } else if (scrollController.position.pixels - previousPixel <
           -minScrollUiAudioUpdate) {
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(true);
+        context.read<AudioStateCubit>().setExpanded(true);
       }
     });
     return Scrollbar(

@@ -1,7 +1,11 @@
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
+import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
+import 'package:al_quran_v3/src/resources/quran_script/ayahs_len.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class SurahInfoHeaderBuilder extends StatelessWidget {
@@ -78,7 +82,12 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   backgroundColor: AppColors.primaryColor,
                   foregroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.read<AudioStateCubit>().playMultipleAyahAsPlaylist(
+                    startAyahKey: '${surahInfoModel.id}:1',
+                    endAyahKey: getEndAyahKeyFromSurahNumber(surahInfoModel.id),
+                  );
+                },
                 icon: const Icon(Icons.play_arrow_rounded),
               ),
             ),
@@ -87,4 +96,8 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
       ),
     );
   }
+}
+
+String getEndAyahKeyFromSurahNumber(int surah) {
+  return '$surah:${quranAyahCount[surah - 1]}';
 }

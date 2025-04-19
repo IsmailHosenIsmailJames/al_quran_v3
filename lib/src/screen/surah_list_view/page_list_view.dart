@@ -1,6 +1,6 @@
+import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/home/pages/audio/cubit/audio_ui_controller_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -30,12 +30,12 @@ class PageListView extends StatelessWidget {
     scrollController.addListener(() {
       if (scrollController.position.pixels - previousPixel >
           minScrollUiAudioUpdate) {
+        context.read<AudioStateCubit>().setExpanded(false);
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(false);
       } else if (scrollController.position.pixels - previousPixel <
           -minScrollUiAudioUpdate) {
+        context.read<AudioStateCubit>().setExpanded(true);
         previousPixel = scrollController.position.pixels;
-        context.read<AudioUiControllerCubit>().setExpanded(true);
       }
     });
     return Scrollbar(
