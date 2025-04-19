@@ -137,20 +137,15 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         );
   }
 
-  int latVibrateTimeStamp = 0;
   bool vibrateOnceEnter = false;
   void doVibrateThePhone() async {
-    int now = DateTime.now().millisecondsSinceEpoch;
-    if (hasVibrator &&
-        (now - latVibrateTimeStamp < 1000) &&
-        !vibrateOnceEnter) {
+    if (hasVibrator && !vibrateOnceEnter) {
       await Vibration.vibrate(
         amplitude: hasSupportAmplitude ? 200 : -1,
         duration: 100,
       );
       vibrateOnceEnter = true;
     }
-    latVibrateTimeStamp = now;
   }
 
   Widget getCompassRotationView(double direction, double kaabaAngle) {
