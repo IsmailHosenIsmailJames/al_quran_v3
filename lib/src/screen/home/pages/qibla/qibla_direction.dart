@@ -32,9 +32,11 @@ class _QiblaDirectionState extends State<QiblaDirection> {
       if (!value) {
         openAppSettings();
       } else {
-        setState(() {
-          isLocationPermissionAllowed = value;
-        });
+        if (!disposed) {
+          setState(() {
+            isLocationPermissionAllowed = value;
+          });
+        }
         log('Getting GPS location');
         final Position position = await Geolocator.getCurrentPosition();
         log('GPS location getting successful');
@@ -43,20 +45,22 @@ class _QiblaDirectionState extends State<QiblaDirection> {
           hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
         }
 
-        setState(() {
-          kaabaAngle = calculateQiblaAngle(
-            position.latitude,
-            position.longitude,
-          );
-          log('Kaaba Angle found at -> $kaabaAngle');
-          compassView = SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.width * 0.8,
-            child: CustomPaint(
-              painter: CompassView(context: context, kaabaAngle: kaabaAngle!),
-            ),
-          );
-        });
+        if (!disposed) {
+          setState(() {
+            kaabaAngle = calculateQiblaAngle(
+              position.latitude,
+              position.longitude,
+            );
+            log('Kaaba Angle found at -> $kaabaAngle');
+            compassView = SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.width * 0.8,
+              child: CustomPaint(
+                painter: CompassView(context: context, kaabaAngle: kaabaAngle!),
+              ),
+            );
+          });
+        }
       }
     });
     FlutterCompass.events?.listen((event) {});
@@ -71,6 +75,13 @@ class _QiblaDirectionState extends State<QiblaDirection> {
       permissionStatus = await Permission.locationWhenInUse.request();
     }
     return permissionStatus.isGranted;
+  }
+
+  bool disposed = false;
+  @override
+  void dispose() {
+    disposed = true;
+    super.dispose();
   }
 
   @override
