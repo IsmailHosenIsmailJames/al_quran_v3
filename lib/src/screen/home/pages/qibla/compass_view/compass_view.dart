@@ -16,7 +16,7 @@ class CompassView extends CustomPainter {
     canvas.translate(center.dx, center.dy);
     Paint degreeAnglePaint = Paint();
     Color grayColor =
-        Theme.of(context).brightness == Brightness.light
+        Theme.of(context).brightness != Brightness.light
             ? Colors.grey.shade500
             : Colors.grey.shade700;
     canvas.drawCircle(
@@ -29,27 +29,14 @@ class CompassView extends CustomPainter {
 
     // draw kaaba direction
     double radian = vector.radians(transformAngle(kaabaAngle));
-
-    double X = math.sin(radian) * (degreeDistanceFromCenter + 18);
-    double Y = math.cos(radian) * (degreeDistanceFromCenter + 18);
-
-    double maxX = math.sin(radian) * (degreeDistanceFromCenter + 31);
-    double maxY = math.cos(radian) * (degreeDistanceFromCenter + 31);
-
-    double minX = math.sin(radian) * (degreeDistanceFromCenter + 4);
-    double minY = math.cos(radian) * (degreeDistanceFromCenter + 4);
-
-    canvas.drawCircle(
-      Offset(X, Y),
-      10,
-      degreeAnglePaint..color = AppColors.primaryColor,
-    );
+    double maxX = math.sin(radian) * (degreeDistanceFromCenter + 50);
+    double maxY = math.cos(radian) * (degreeDistanceFromCenter + 50);
 
     canvas.drawLine(
       Offset(maxX, maxY),
-      Offset(minX, minY),
+      const Offset(0, 0),
       degreeAnglePaint
-        ..color = AppColors.primaryColor
+        ..color = grayColor
         ..strokeWidth = 4
         ..strokeCap = StrokeCap.round,
     );

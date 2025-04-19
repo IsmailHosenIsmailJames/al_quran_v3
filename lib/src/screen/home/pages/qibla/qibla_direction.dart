@@ -6,10 +6,12 @@ import 'package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_vie
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math.dart' as vector;
+import 'package:vibration/vibration.dart';
 
 class QiblaDirection extends StatefulWidget {
   const QiblaDirection({super.key});
@@ -22,6 +24,8 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   bool isLocationPermissionAllowed = false;
   double? kaabaAngle;
   Widget? compassView;
+  late bool hasVibrator;
+  late bool hasSupportAmplitude;
   @override
   void initState() {
     fetchPermissionStatus().then((value) async {
@@ -34,6 +38,11 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         log('Getting GPS location');
         final Position position = await Geolocator.getCurrentPosition();
         log('GPS location getting successful');
+        hasVibrator = await Vibration.hasVibrator();
+        if (hasVibrator) {
+          hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
+        }
+
         setState(() {
           kaabaAngle = calculateQiblaAngle(
             position.latitude,
@@ -114,7 +123,9 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                         child: Text('Device does not have sensors !'),
                       );
                     }
-
+                    if (direction < 0) {
+                      direction = 180 + (180 - direction.abs());
+                    }
                     return getCompassRotationView(direction, kaabaAngle!);
                   } else {
                     return const Text('Something went wrong');
@@ -126,40 +137,50 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         );
   }
 
+  int latVibrateTimeStamp = 0;
+  bool vibrateOnceEnter = false;
+  void doVibrateThePhone() async {
+    int now = DateTime.now().millisecondsSinceEpoch;
+    if (hasVibrator &&
+        (now - latVibrateTimeStamp < 1000) &&
+        !vibrateOnceEnter) {
+      await Vibration.vibrate(
+        amplitude: hasSupportAmplitude ? 200 : -1,
+        duration: 100,
+      );
+      vibrateOnceEnter = true;
+    }
+    latVibrateTimeStamp = now;
+  }
+
   Widget getCompassRotationView(double direction, double kaabaAngle) {
+    Color kaabaColor =
+        Theme.of(context).brightness == Brightness.light
+            ? Colors.black
+            : Colors.white;
+    if ((direction.abs() - kaabaAngle.abs()).abs() < 5) {
+      kaabaColor = AppColors.primaryColor;
+      doVibrateThePhone();
+    } else {
+      vibrateOnceEnter = false;
+    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
           child: SizedBox(
-            height: 30,
-            width: 30,
-            child: Stack(
-              children: [
-                Center(
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 100),
-                    height: 30,
-                    width: 4,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: CircleAvatar(backgroundColor: AppColors.primaryColor),
-                ),
-              ],
-            ),
+            height: 50,
+            width: 50,
+            // ignore: deprecated_member_use
+            child: SvgPicture.asset('assets/img/kaaba.svg', color: kaabaColor),
           ),
         ),
         const Gap(50),
         AnimatedRotation(
-          turns: direction / 360,
-          duration: const Duration(milliseconds: 80),
+          turns: (360 - direction).abs() / 360,
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.linear,
           child: compassView!,
         ),
       ],
