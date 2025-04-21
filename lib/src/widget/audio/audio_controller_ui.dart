@@ -54,24 +54,37 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     ),
                   ),
                 if (state.expanded)
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: IconButton(
-                        style: IconButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          iconSize: 15,
-                        ),
-                        onPressed: () {
-                          if (state.expanded) {
-                            context.read<AudioStateCubit>().setExpanded(false);
-                          }
-                        },
-                        icon: const Icon(Icons.close_fullscreen_rounded),
+                  Stack(
+                    children: [
+                      BlocBuilder<AudioStateCubit, AudioStateModel>(
+                        builder:
+                            (context, state) => Text(
+                              state.position.toString() +
+                                  state.ayahKey.toString(),
+                            ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: IconButton(
+                            style: IconButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              iconSize: 15,
+                            ),
+                            onPressed: () {
+                              if (state.expanded) {
+                                context.read<AudioStateCubit>().setExpanded(
+                                  false,
+                                );
+                              }
+                            },
+                            icon: const Icon(Icons.close_fullscreen_rounded),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
               ],
             ),
