@@ -1,5 +1,6 @@
 import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
+import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
@@ -136,11 +137,11 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       if (_scrollController.position.pixels - previousPixel >
           minScrollUiAudioUpdate) {
         previousPixel = _scrollController.position.pixels;
-        context.read<AudioStateCubit>().setExpanded(false);
+        context.read<AudioUiCubit>().expand(false);
       } else if (_scrollController.position.pixels - previousPixel <
           -minScrollUiAudioUpdate) {
         previousPixel = _scrollController.position.pixels;
-        context.read<AudioStateCubit>().setExpanded(true);
+        context.read<AudioUiCubit>().expand(true);
       }
       // Get item index from scroll offset
       int index =
@@ -271,7 +272,8 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                     ),
                   ),
                   onPressed: () {
-                    context.read<AudioStateCubit>().playSingleAyah(
+                    AudioPlayerManager.playSingleAyah(
+                      context: context,
                       ayahKey: ayahsList[index],
                     );
                   },
