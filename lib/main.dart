@@ -1,6 +1,12 @@
 import 'dart:convert';
 
-import 'package:al_quran_v3/src/audio/cubit/audio_state_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart';
+import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
+import 'package:al_quran_v3/src/audio/resources/every_ayah_com/recitations.dart';
+import 'package:al_quran_v3/src/audio/resources/quran_com/all_recitations.dart';
 import 'package:al_quran_v3/src/screen/home/home_page.dart';
 import 'package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart';
 import 'package:al_quran_v3/src/screen/setup/setup_page.dart';
@@ -74,7 +80,18 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => DownloadProgressCubitCubit()),
         BlocProvider(create: (context) => ThemeCubit(preferences)),
-        BlocProvider(create: (context) => AudioStateCubit()),
+        BlocProvider(create: (context) => AudioUiCubit()),
+        BlocProvider(create: (context) => PlayerPositionCubit()),
+        BlocProvider(create: (context) => AyahKeyCubit()),
+        BlocProvider(
+          create:
+              (context) => QuranReciterCubit(
+                initReciter: ReciterInfoModel.fromMap(
+                  Hive.box('user').get('reciter', defaultValue: null) ??
+                      recitationsListOfQuranCom[0],
+                ),
+              ),
+        ),
       ],
 
       child: BlocBuilder<ThemeCubit, ThemeMode>(
