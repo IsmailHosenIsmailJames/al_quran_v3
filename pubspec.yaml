@@ -39,6 +39,10 @@ dependencies:
   just_audio_media_kit: ^2.1.0
   just_audio_background: ^0.0.1-beta.16
   audio_video_progress_bar: ^2.0.3
+  dartx: ^1.2.0
+  fluttertoast: ^8.2.12
+  url_launcher: ^6.3.1
+
 
 
 dev_dependencies:
