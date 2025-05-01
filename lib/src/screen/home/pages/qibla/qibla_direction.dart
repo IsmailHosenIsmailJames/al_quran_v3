@@ -2,13 +2,17 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'dart:math' as math;
+import 'package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart';
+import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
+import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart';
+import 'package:al_quran_v3/src/screen/home/pages/location_handler/location_aquire.dart';
 import 'package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_view.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 import 'package:vibration/vibration.dart';
@@ -21,60 +25,34 @@ class QiblaDirection extends StatefulWidget {
 }
 
 class _QiblaDirectionState extends State<QiblaDirection> {
-  bool isLocationPermissionAllowed = false;
-  double? kaabaAngle;
   Widget? compassView;
   late bool hasVibrator;
   late bool hasSupportAmplitude;
   @override
   void initState() {
-    fetchPermissionStatus().then((value) async {
-      if (!value) {
-        openAppSettings();
-      } else {
-        if (!disposed) {
-          setState(() {
-            isLocationPermissionAllowed = value;
-          });
-        }
-        log('Getting GPS location');
-        final Position position = await Geolocator.getCurrentPosition();
-        log('GPS location getting successful');
-        hasVibrator = await Vibration.hasVibrator();
-        if (hasVibrator) {
-          hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
-        }
-
-        if (!disposed) {
-          setState(() {
-            kaabaAngle = calculateQiblaAngle(
-              position.latitude,
-              position.longitude,
-            );
-            log('Kaaba Angle found at -> $kaabaAngle');
-            compassView = SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.width * 0.8,
-              child: CustomPaint(
-                painter: CompassView(context: context, kaabaAngle: kaabaAngle!),
-              ),
-            );
-          });
-        }
-      }
-    });
-    FlutterCompass.events?.listen((event) {});
+    initStateCall();
     super.initState();
   }
 
-  Future<bool> fetchPermissionStatus() async {
-    PermissionStatus permissionStatus =
-        await Permission.locationWhenInUse.status;
-    if (!permissionStatus.isGranted) {
-      log('message');
-      permissionStatus = await Permission.locationWhenInUse.request();
+  Future<void> initStateCall() async {
+    LocationDataQiblaDataState? dataState =
+        context.read<LocationDataQiblaDataCubit>().state;
+    if (dataState.kaabaAngle != null) {
+      compassView = SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.width * 0.8,
+        child: CustomPaint(
+          painter: CompassView(
+            context: context,
+            kaabaAngle: dataState.kaabaAngle!,
+          ),
+        ),
+      );
     }
-    return permissionStatus.isGranted;
+    hasVibrator = await Vibration.hasVibrator();
+    if (hasVibrator) {
+      hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
+    }
   }
 
   bool disposed = false;
@@ -86,66 +64,50 @@ class _QiblaDirectionState extends State<QiblaDirection> {
 
   @override
   Widget build(BuildContext context) {
-    return !isLocationPermissionAllowed
-        ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                'We required Location Permission for get the Qibla Direction. Please allow location permission.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-            ),
-            const Gap(20),
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  fetchPermissionStatus();
-                },
-                label: const Text('Allow Location Permission'),
-                icon: const Icon(Icons.location_on),
-              ),
-            ),
-          ],
-        )
-        : kaabaAngle == null
-        ? Center(
-          child: CircularProgressIndicator(color: AppColors.primaryColor),
-        )
-        : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Gap(20),
-            Center(
-              child: StreamBuilder<CompassEvent>(
-                stream: FlutterCompass.events,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text('Unable to get compass data');
-                  }
-                  if (snapshot.hasData) {
-                    double? direction = snapshot.data?.heading;
-                    if (direction == null) {
-                      return const Center(
-                        child: Text('Device does not have sensors !'),
-                      );
-                    }
-                    if (direction < 0) {
-                      direction = 180 + (180 - direction.abs());
-                    }
-                    return getCompassRotationView(direction, kaabaAngle!);
-                  } else {
-                    return const Text('Something went wrong');
-                  }
-                },
-              ),
-            ),
-          ],
-        );
+    return BlocBuilder<LocationDataQiblaDataCubit, LocationDataQiblaDataState>(
+      builder: (context, state) {
+        return state.latLon == null
+            ? const LocationAcquire()
+            : state.kaabaAngle == null
+            ? Center(
+              child: CircularProgressIndicator(color: AppColors.primaryColor),
+            )
+            : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Gap(20),
+                Center(
+                  child: StreamBuilder<CompassEvent>(
+                    stream: FlutterCompass.events,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Unable to get compass data');
+                      }
+                      if (snapshot.hasData) {
+                        double? direction = snapshot.data?.heading;
+                        if (direction == null) {
+                          return const Center(
+                            child: Text('Device does not have sensors !'),
+                          );
+                        }
+                        if (direction < 0) {
+                          direction = 180 + (180 - direction.abs());
+                        }
+                        return getCompassRotationView(
+                          direction,
+                          state.kaabaAngle!,
+                        );
+                      } else {
+                        return const Text('Something went wrong');
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+      },
+    );
   }
 
   bool vibrateOnceEnter = false;
@@ -195,9 +157,6 @@ class _QiblaDirectionState extends State<QiblaDirection> {
 }
 
 double calculateQiblaAngle(double userLat, double userLon) {
-  const double kaabaLatDegrees = 21.422487;
-  const double kaabaLonDegrees = 39.826206;
-
   if (userLat == kaabaLatDegrees && userLon == kaabaLonDegrees) {
     return -1.0;
   }
