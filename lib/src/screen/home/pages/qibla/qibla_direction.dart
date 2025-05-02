@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'dart:math' as math;
 import 'package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 import 'package:vibration/vibration.dart';
 
@@ -25,7 +23,6 @@ class QiblaDirection extends StatefulWidget {
 }
 
 class _QiblaDirectionState extends State<QiblaDirection> {
-  Widget? compassView;
   late bool hasVibrator;
   late bool hasSupportAmplitude;
   @override
@@ -35,20 +32,6 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   }
 
   Future<void> initStateCall() async {
-    LocationDataQiblaDataState? dataState =
-        context.read<LocationDataQiblaDataCubit>().state;
-    if (dataState.kaabaAngle != null) {
-      compassView = SizedBox(
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.width * 0.8,
-        child: CustomPaint(
-          painter: CompassView(
-            context: context,
-            kaabaAngle: dataState.kaabaAngle!,
-          ),
-        ),
-      );
-    }
     hasVibrator = await Vibration.hasVibrator();
     if (hasVibrator) {
       hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
@@ -66,6 +49,21 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   Widget build(BuildContext context) {
     return BlocBuilder<LocationDataQiblaDataCubit, LocationDataQiblaDataState>(
       builder: (context, state) {
+        LocationDataQiblaDataState? dataState =
+            context.read<LocationDataQiblaDataCubit>().state;
+        Widget compassView = const SizedBox();
+        if (dataState.kaabaAngle != null) {
+          compassView = SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.width * 0.8,
+            child: CustomPaint(
+              painter: CompassView(
+                context: context,
+                kaabaAngle: dataState.kaabaAngle!,
+              ),
+            ),
+          );
+        }
         return state.latLon == null
             ? const LocationAcquire()
             : state.kaabaAngle == null
@@ -97,9 +95,10 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                         return getCompassRotationView(
                           direction,
                           state.kaabaAngle!,
+                          compassView,
                         );
                       } else {
-                        return const Text('Something went wrong');
+                        return const SizedBox();
                       }
                     },
                   ),
@@ -121,7 +120,11 @@ class _QiblaDirectionState extends State<QiblaDirection> {
     }
   }
 
-  Widget getCompassRotationView(double direction, double kaabaAngle) {
+  Widget getCompassRotationView(
+    double direction,
+    double kaabaAngle,
+    Widget compassView,
+  ) {
     Color kaabaColor =
         Theme.of(context).brightness == Brightness.light
             ? Colors.black
@@ -147,9 +150,9 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         const Gap(50),
         AnimatedRotation(
           turns: (360 - direction).abs() / 360,
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 50),
           curve: Curves.linear,
-          child: compassView!,
+          child: compassView,
         ),
       ],
     );

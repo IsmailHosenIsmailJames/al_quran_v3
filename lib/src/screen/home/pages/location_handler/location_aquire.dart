@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/map/choose_location_from_map.dart';
+import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/address_selection.dart';
+import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
 import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,7 +88,9 @@ class _LocationAcquireState extends State<LocationAcquire> {
                       : const Icon(Icons.gps_fixed_rounded),
             ),
           ),
-          const Gap(10),
+          const Gap(5),
+          const Align(alignment: Alignment.center, child: Text('Or')),
+          const Gap(5),
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
@@ -95,28 +98,21 @@ class _LocationAcquireState extends State<LocationAcquire> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ChooseLocationFromMap(),
+                    builder:
+                        (context) => BlocProvider(
+                          create: (context) => ManualLocationSelectionCubit(),
+                          child: const AddressSelection(),
+                        ),
                   ),
                 );
               },
-              label: const Text('Select from Map'),
-              icon: const Icon(Icons.map_rounded),
-            ),
-          ),
-          const Gap(5),
-          const Align(alignment: Alignment.center, child: Text('Or')),
-          const Gap(5),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () {},
               label: const Text('Select you City'),
               icon: const Icon(Icons.location_city_rounded),
             ),
           ),
           const Gap(20),
           Text(
-            'Note: If you don\'t want to use GPS or not feel secure, you can either select location from map or select your city.',
+            'Note: If you don\'t want to use GPS or not feel secure, you can select your city.',
             style: TextStyle(
               color: Colors.grey.shade500,
               fontWeight: FontWeight.w500,
