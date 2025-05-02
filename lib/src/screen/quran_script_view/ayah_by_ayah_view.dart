@@ -5,11 +5,13 @@ import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
 import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -37,7 +39,7 @@ List getListOfAyahKey({
   required String startAyahKey,
   required String endAyahKey,
 }) {
-  List ayahsList = [];
+  List ayahKeysList = [];
   int startSurahNumber = int.parse(startAyahKey.split(':')[0]);
   int startAyahNumber = int.parse(startAyahKey.split(':')[1]);
   int endSurahNumber = int.parse(endAyahKey.split(':')[0]);
@@ -52,12 +54,12 @@ List getListOfAyahKey({
     }
     for (int ayah = startAyah; ayah <= endAyah; ayah++) {
       if (ayah == 1) {
-        ayahsList.add(surah);
+        ayahKeysList.add(surah);
       }
-      ayahsList.add('$surah:$ayah');
+      ayahKeysList.add('$surah:$ayah');
     }
   }
-  return ayahsList;
+  return ayahKeysList;
 }
 
 class _AyahByAyahViewState extends State<AyahByAyahView> {
@@ -72,17 +74,17 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
   double previousPixel = 0.0;
   int? indexToScroll;
 
-  late List ayahsList;
+  late List ayahKeysList;
   bool supportsWordByWord = false;
   @override
   void initState() {
-    ayahsList = getListOfAyahKey(
+    ayahKeysList = getListOfAyahKey(
       startAyahKey: widget.startKey,
       endAyahKey: widget.endKey,
     );
-    for (int i = 0; i < ayahsList.length; i++) {
-      if (ayahsList[i] == widget.toScrollKey) {
-        indexToScroll = ayahsList.length;
+    for (int i = 0; i < ayahKeysList.length; i++) {
+      if (ayahKeysList[i] == widget.toScrollKey) {
+        indexToScroll = ayahKeysList.length;
       }
     }
     final metaDataOfWordByWord = Hive.box(
@@ -119,7 +121,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         int firstIndex = itemPositionsListener.itemPositions.value.first.index;
         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
           metaDataSurah.values.elementAt(
-            int.parse(ayahsList[firstIndex].toString().split(':')[0]) - 1,
+            int.parse(ayahKeysList[firstIndex].toString().split(':')[0]) - 1,
           ),
         );
         if (BlocProvider.of<AyahByAyahInScrollInfoCubit>(
@@ -147,12 +149,12 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       int index =
           (_scrollController.offset /
                   (_scrollController.position.maxScrollExtent /
-                      (ayahsList.length - 1)))
+                      (ayahKeysList.length - 1)))
               .round();
-      if (index < ayahsList.length && index >= 0) {
+      if (index < ayahKeysList.length && index >= 0) {
         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
           metaDataSurah.values.elementAt(
-            int.parse(ayahsList[index].toString().split(':')[0]) - 1,
+            int.parse(ayahKeysList[index].toString().split(':')[0]) - 1,
           ),
         );
         if (BlocProvider.of<AyahByAyahInScrollInfoCubit>(
@@ -186,7 +188,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
         interactive: true,
         child: ListView.builder(
           controller: _scrollController,
-          itemCount: ayahsList.length,
+          itemCount: ayahKeysList.length,
 
           itemBuilder: (context, index) {
             return getAyahCard(index, quranScriptType, context);
@@ -200,7 +202,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       scrollOffsetController: scrollOffsetController,
       itemPositionsListener: itemPositionsListener,
       scrollOffsetListener: scrollOffsetListener,
-      itemCount: ayahsList.length,
+      itemCount: ayahKeysList.length,
 
       itemBuilder: (context, index) {
         // it is actually a surah number
@@ -215,23 +217,24 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
     BuildContext context,
   ) {
     // it is actually a surah number
-    if (ayahsList[index].runtimeType == int) {
+    if (ayahKeysList[index].runtimeType == int) {
       SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        metaDataSurah.values.elementAt((ayahsList[index] as int) - 1),
+        metaDataSurah.values.elementAt((ayahKeysList[index] as int) - 1),
       );
       return SurahInfoHeaderBuilder(surahInfoModel: surahInfoModel);
     }
-    int surahNumber = int.parse(ayahsList[index].toString().split(':')[0]);
-    int ayahNumber = int.parse(ayahsList[index].toString().split(':')[1]);
+    int surahNumber = int.parse(ayahKeysList[index].toString().split(':')[0]);
+    int ayahNumber = int.parse(ayahKeysList[index].toString().split(':')[1]);
     Map translationMap =
-        Hive.box('quran_translation').get(ayahsList[index]) ??
+        Hive.box('quran_translation').get(ayahKeysList[index]) ??
         {'t': 'Translation Not Found'};
     String translation = translationMap['t'] ?? 'Translation Not Found';
     translation = translation.replaceAll('>', '> ');
     Map footNote = translationMap['f'] ?? {};
     List wordByWord = [];
     if (supportsWordByWord) {
-      wordByWord = Hive.box('quran_word_by_word').get(ayahsList[index]) ?? [];
+      wordByWord =
+          Hive.box('quran_word_by_word').get(ayahKeysList[index]) ?? [];
     }
     return Container(
       padding: const EdgeInsets.all(5),
@@ -243,7 +246,9 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       child: Column(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -259,6 +264,97 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                 child: Text(ayahNumber.toString()),
               ),
               const Spacer(),
+
+              SizedBox(
+                height: 30,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                                TafsirView(ayahKey: ayahKeysList[index]),
+                      ),
+                    );
+                  },
+                  child: const Text('Tafsir'),
+                ),
+              ),
+              const Gap(5),
+              SizedBox(
+                height: 30,
+                width: 30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    foregroundColor: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: AppColors.primaryColor),
+                    ),
+                  ),
+                  onPressed: () {},
+                  tooltip: 'Share',
+                  icon: const Icon(FluentIcons.share_24_filled, size: 18),
+                ),
+              ),
+              const Gap(5),
+              SizedBox(
+                height: 30,
+                width: 30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    foregroundColor: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: AppColors.primaryColor),
+                    ),
+                  ),
+                  onPressed: () {},
+                  tooltip: 'Copy',
+                  icon: const Icon(FluentIcons.copy_16_filled, size: 18),
+                ),
+              ),
+              const Gap(5),
+              SizedBox(
+                height: 30,
+                width: 30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    foregroundColor: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: AppColors.primaryColor),
+                    ),
+                  ),
+                  onPressed: () {},
+                  tooltip: 'Add Note',
+                  icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
+                ),
+              ),
+              const Gap(5),
+              SizedBox(
+                height: 30,
+                width: 30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    foregroundColor: AppColors.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                      side: BorderSide(color: AppColors.primaryColor),
+                    ),
+                  ),
+                  onPressed: () {},
+                  tooltip: 'Bookmark',
+                  icon: const Icon(Icons.bookmark_added, size: 18),
+                ),
+              ),
+              const Gap(5),
               SizedBox(
                 height: 30,
                 width: 30,
@@ -274,7 +370,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                   onPressed: () {
                     AudioPlayerManager.playSingleAyah(
                       context: context,
-                      ayahKey: ayahsList[index],
+                      ayahKey: ayahKeysList[index],
                     );
                   },
                   icon: const Icon(Icons.play_arrow_rounded, size: 18),
@@ -282,7 +378,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
               ),
             ],
           ),
-          const Gap(5),
+          const Gap(10),
           Align(
             alignment: Alignment.centerRight,
             child: ScriptProcessor(

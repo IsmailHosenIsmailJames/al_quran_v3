@@ -625,7 +625,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         null,
         'Downloading Tafsir',
       );
-      dio.Response response = await dio.Dio().get(base + translationBook!);
+      dio.Response response = await dio.Dio().get(base + tafsirBook!);
       log(response.statusCode.toString(), name: 'Status');
       DateTime now = DateTime.now();
       Map data = jsonDecode(decodeBZip2String(response.data));
