@@ -32,7 +32,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             coordinates: coordinates,
             calculationParameters: params,
             precision: true,
-            locationName: 'Asia/Kolkata',
+            locationName: 'Asia/Dhaka',
           );
           return Center(
             child: Text(
