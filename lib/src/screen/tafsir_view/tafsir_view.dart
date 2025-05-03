@@ -22,13 +22,16 @@ class _TafsirViewState extends State<TafsirView> {
   late SurahInfoModel surahInfoModel;
   @override
   void initState() {
+    initCallBack().then((value) {
+      setState(() {});
+    });
     surahInfoModel = SurahInfoModel.fromMap(
       metaDataSurah[widget.ayahKey.split(':').first],
     );
     super.initState();
   }
 
-  void initCallBack() {
+  Future<void> initCallBack() async {
     Box box = Hive.box('quran_tafsir');
     final rawData = box.get(widget.ayahKey, defaultValue: null);
     if (rawData != null) {
@@ -52,6 +55,7 @@ class _TafsirViewState extends State<TafsirView> {
         tafsirDataString = rawData;
       }
     }
+    return;
   }
 
   @override
