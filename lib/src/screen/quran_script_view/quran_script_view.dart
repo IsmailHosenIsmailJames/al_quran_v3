@@ -25,7 +25,7 @@ class QuranScriptView extends StatefulWidget {
 class _QuranScriptViewState extends State<QuranScriptView> {
   int _pageIndex = 0;
   List<String> pagesName = ['Ayah By Ayah', 'Page By Page'];
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(keepPage: true);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -104,6 +104,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                         _pageIndex = value;
                       });
                     },
+
                     children: [
                       AyahByAyahView(
                         startKey: widget.startKey,
