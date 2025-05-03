@@ -82,6 +82,9 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
       startAyahKey: widget.startKey,
       endAyahKey: widget.endKey,
     );
+    if (ayahKeysList.first.runtimeType == String) {
+      ayahKeysList.insert(0, int.parse(widget.startKey.split(':').first));
+    }
     for (int i = 0; i < ayahKeysList.length; i++) {
       if (ayahKeysList[i] == widget.toScrollKey) {
         indexToScroll = ayahKeysList.length;
