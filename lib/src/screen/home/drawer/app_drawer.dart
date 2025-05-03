@@ -3,6 +3,7 @@ import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -24,8 +25,11 @@ class _AppDrawerState extends State<AppDrawer> {
           ElevatedButton.icon(
             onPressed: () async {
               await Hive.deleteFromDisk();
+              await Hive.initFlutter();
               await Hive.openBox('quran_translation');
               await Hive.openBox('user');
+              await Hive.openBox('quran_word_by_word');
+              await Hive.openBox('quran_tafsir');
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const AppSetupPage()),

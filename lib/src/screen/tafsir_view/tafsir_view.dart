@@ -16,26 +16,20 @@ class TafsirView extends StatefulWidget {
 }
 
 class _TafsirViewState extends State<TafsirView> {
-  bool isLoading = true;
   String tafsirDataString = '';
   bool isLinkedToAnother = false;
   String? anotherAyahLinkKey;
   late SurahInfoModel surahInfoModel;
   @override
   void initState() {
-    initCallBack().then(
-      (value) => setState(() {
-        isLoading = false;
-      }),
-    );
     surahInfoModel = SurahInfoModel.fromMap(
       metaDataSurah[widget.ayahKey.split(':').first],
     );
     super.initState();
   }
 
-  Future<void> initCallBack() async {
-    Box box = await Hive.openBox('quran_tafsir');
+  void initCallBack() {
+    Box box = Hive.box('quran_tafsir');
     final rawData = box.get(widget.ayahKey, defaultValue: null);
     if (rawData != null) {
       try {
@@ -58,7 +52,6 @@ class _TafsirViewState extends State<TafsirView> {
         tafsirDataString = rawData;
       }
     }
-    await box.close();
   }
 
   @override
@@ -68,13 +61,11 @@ class _TafsirViewState extends State<TafsirView> {
         titleSpacing: 0,
         title: Text(
           '${surahInfoModel.nameSimple} ( ${surahInfoModel.nameArabic} ) - ${widget.ayahKey} ',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
       ),
       body:
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : isLinkedToAnother
+          isLinkedToAnother
               ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +91,7 @@ class _TafsirViewState extends State<TafsirView> {
                 ],
               )
               : SingleChildScrollView(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   top: 15,
                   left: 15,
                   right: 15,

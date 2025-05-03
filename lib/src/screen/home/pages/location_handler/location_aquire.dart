@@ -84,7 +84,12 @@ class _LocationAcquireState extends State<LocationAcquire> {
               label: const Text('Get form GPS'),
               icon:
                   isGPSLocationLoading
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
                       : const Icon(Icons.gps_fixed_rounded),
             ),
           ),

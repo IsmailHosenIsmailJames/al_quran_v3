@@ -43,6 +43,8 @@ dependencies:
   url_launcher: ^6.3.1
   path_provider: ^2.1.5
   prayers_times: ^0.0.6
+  share_plus: ^11.0.0
+  clipboard: ^0.1.3
 
 
 
@@ -64,6 +66,7 @@ flutter:
     - assets/dev/
     - assets/quran_script/
     - assets/meta_data/
+    - assets/address/
 
   fonts:
     - family: QPC_Hafs 
