@@ -645,11 +645,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
         now.difference(DateTime.now()).inMilliseconds.abs().toString(),
         name: 'Translation Process Time',
       );
-      tafsirBox.close();
       return true;
     } catch (e) {
       log(e.toString(), name: 'http error');
-      tafsirBox.close();
       return false;
     }
   }

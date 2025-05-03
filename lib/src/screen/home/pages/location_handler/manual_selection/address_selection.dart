@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
 
 import 'package:al_quran_v3/src/functions/encode_decode.dart';
 import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
@@ -8,10 +6,9 @@ import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_select
 import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/pages/city_selection.dart';
 import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/pages/countries_selection.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 
 class AddressSelection extends StatefulWidget {
   const AddressSelection({super.key});
@@ -28,27 +25,9 @@ class _AddressSelectionState extends State<AddressSelection> {
   }
 
   Future<void> downloadLocationResources() async {
-    String url =
-        'https://quran-backend-delta.vercel.app/locations/compressed/worldcities.json.txt';
-    Dio dio = Dio();
-    Directory directory = await getApplicationCacheDirectory();
-    Random random = Random();
-    int randomNumber = random.nextInt(1000000);
-    await dio.download(
-      url,
-      '${directory.path}/worldcities_$randomNumber.json.txt',
-      onReceiveProgress: (count, total) {
-        double progress = (count / 67362800).abs();
-        context.read<ManualLocationSelectionCubit>().changeData(
-          downloadProgress: progress,
-        );
-      },
-    );
     Map locationResources = jsonDecode(
       decodeBZip2String(
-        await File(
-          '${directory.path}/worldcities_$randomNumber.json.txt',
-        ).readAsString(),
+        await rootBundle.loadString('assets/address/cities_address.txt'),
       ),
     );
     context.read<ManualLocationSelectionCubit>().changeData(
