@@ -3,6 +3,7 @@ import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/ayah_by_ayah_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart';
 import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart';
@@ -84,6 +85,7 @@ class _PageByPageViewState extends State<PageByPageView> {
       int indexOfInt = ayahsKeys.indexWhere(
         (element) => element.runtimeType == int,
       );
+      pagesInfoWithSurahMetaData.add(pageInfo);
       if (indexOfInt != -1) {
         while (ayahsKeys.indexWhere((element) => element.runtimeType == int) !=
             -1) {
@@ -94,14 +96,16 @@ class _PageByPageViewState extends State<PageByPageView> {
           pagesInfoWithSurahMetaData.add(ayahsKeys[indexOfInt]);
           ayahsKeys = ayahsKeys.sublist(indexOfInt + 1, ayahsKeys.length);
         }
-        if (ayahsKeys.isNotEmpty) pagesInfoWithSurahMetaData.add(ayahsKeys);
+        if (ayahsKeys.isNotEmpty) {
+          pagesInfoWithSurahMetaData.add(ayahsKeys);
+        }
       } else {
         pagesInfoWithSurahMetaData.add(ayahsKeys);
       }
     }
 
     pagesInfoWithSurahMetaData.removeWhere((element) {
-      if (element.runtimeType != int) {
+      if (element.runtimeType == List<dynamic>) {
         if ((element as List).isEmpty) {
           return true;
         }
@@ -109,7 +113,8 @@ class _PageByPageViewState extends State<PageByPageView> {
       return false;
     });
 
-    if (pagesInfoWithSurahMetaData.first.runtimeType != int) {
+    if (pagesInfoWithSurahMetaData.first.runtimeType != int &&
+        pagesInfoWithSurahMetaData.first.runtimeType != PageInfoModel) {
       pagesInfoWithSurahMetaData.insert(
         0,
         int.parse(widget.startKey.split(':').first),
@@ -132,14 +137,30 @@ class _PageByPageViewState extends State<PageByPageView> {
           return SurahInfoHeaderBuilder(
             surahInfoModel: SurahInfoModel.fromMap(metaDataSurah['$current']),
           );
-        } else {
-          List<String> ayahsKeyOfPage = List<String>.from(
-            pagesInfoWithSurahMetaData[index],
-          );
+        } else if (current.runtimeType == List<dynamic>) {
+          List<String> ayahsKeyOfPage = List<String>.from(current);
           return QuranPagesRenderer(
             ayahsKey: ayahsKeyOfPage,
             quranScriptType: quranScriptType,
             baseStyle: const TextStyle(fontSize: 24),
+          );
+        } else {
+          return Container(
+            width: double.infinity,
+            height: 30,
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            color: AppColors.primaryColor.withValues(alpha: 0.1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Page: '),
+                Text(
+                  (current as PageInfoModel).pageNumber.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           );
         }
       },
