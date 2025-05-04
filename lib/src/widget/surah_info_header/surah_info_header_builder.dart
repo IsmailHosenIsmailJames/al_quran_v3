@@ -17,7 +17,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map translationMeta = Hive.box('quran_translation').get('meta_data');
-    final Map tafsirMeta = Hive.box('quran_tafsir').get('meta_data');
+    String tafsirMeta = Hive.box('user').get('tafsir_book');
     return Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
@@ -71,7 +71,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
-                      'Tafsir: ${tafsirMeta['name'].toString().split('/').last.replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                      'Tafsir: ${tafsirMeta.toString().split('/').last.replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),

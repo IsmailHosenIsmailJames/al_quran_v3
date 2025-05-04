@@ -37,7 +37,6 @@ Future<void> main() async {
   await Hive.openBox('quran_translation');
   await Hive.openBox('user');
   await Hive.openBox('quran_word_by_word');
-  await Hive.openBox('quran_tafsir');
   tajweedScript = jsonDecode(
     await rootBundle.loadString('assets/quran_script/QPC_Hafs_Tajweed.json'),
   );

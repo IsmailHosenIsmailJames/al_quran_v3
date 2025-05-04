@@ -32,8 +32,8 @@ class _TafsirViewState extends State<TafsirView> {
   }
 
   Future<void> initCallBack() async {
-    Box box = Hive.box('quran_tafsir');
-    final rawData = box.get(widget.ayahKey, defaultValue: null);
+    final box = await Hive.openLazyBox('quran_tafsir');
+    final rawData = await box.get(widget.ayahKey, defaultValue: null);
     if (rawData != null) {
       try {
         Map data = jsonDecode(rawData);
@@ -55,6 +55,7 @@ class _TafsirViewState extends State<TafsirView> {
         tafsirDataString = rawData;
       }
     }
+    await box.close();
     return;
   }
 
