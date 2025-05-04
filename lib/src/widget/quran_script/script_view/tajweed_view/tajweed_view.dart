@@ -52,7 +52,7 @@ class TajweedView extends StatelessWidget {
               },
               child: Text.rich(
                 TextSpan(
-                  children: [
+                  children: <InlineSpan>[
                     parseTajweedWord(words[index] + ' ', quranStyle, context),
                   ],
                 ),
