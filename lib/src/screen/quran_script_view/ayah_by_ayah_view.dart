@@ -14,7 +14,7 @@ import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -403,10 +403,7 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
           const Gap(2),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            child: HtmlWidget(
-              capitalizeFirstLatter(translation),
-              buildAsync: false,
-            ),
+            child: Html(data: capitalizeFirstLatter(translation)),
           ),
           if (footNote.keys.isNotEmpty) const Gap(8),
           if (footNote.keys.isNotEmpty)
@@ -432,9 +429,9 @@ class _AyahByAyahViewState extends State<AyahByAyahView> {
                         decoration: const BoxDecoration(),
                         padding: const EdgeInsets.only(bottom: 5),
                         width: MediaQuery.of(context).size.width * 0.85,
-                        child: HtmlWidget(
-                          buildAsync: false,
-                          capitalizeFirstLatter(
+
+                        child: Html(
+                          data: capitalizeFirstLatter(
                             footNote.values.elementAt(index),
                           ),
                         ),

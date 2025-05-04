@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:al_quran_v3/src/api/apis_urls.dart';
 import 'package:al_quran_v3/src/functions/encode_decode.dart';
+import 'package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart';
@@ -459,6 +460,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           Text(
                             '${state.processName} ${state.percentage != null ? '${(state.percentage! * 100).toStringAsFixed(2)}%' : ''}',
                             style: const TextStyle(fontSize: 16),
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       );
@@ -485,7 +487,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
       bool success3 = await downloadWordByWordTranslation(
         codeToLanguageMap[translationLanguage ?? ''] ?? '',
       );
-      if (success1 && success2 && success3) {
+      bool success4 = await downloadDefaultSegmentedQuranRecitation();
+      if (success1 && success2 && success3 && success4) {
         userBox.put('is_setup_complete', true);
         // success and route to home
         Navigator.pushAndRemoveUntil(
@@ -499,6 +502,35 @@ class _AppSetupPageState extends State<AppSetupPage> {
           'Unable to download resources...',
         );
       }
+    }
+  }
+
+  Future<bool> downloadDefaultSegmentedQuranRecitation() async {
+    String url = ApisUrls.base + defaultSegmentedQuranRecitation;
+    try {
+      context.read<DownloadProgressCubitCubit>().updateProgress(
+        null,
+        'Downloading Segmented Quran Recitation',
+      );
+      final response = await dio.Dio().get(url);
+      if (response.statusCode == 200) {
+        Box box = Hive.box('segmented_quran_recitation');
+        context.read<DownloadProgressCubitCubit>().updateProgress(
+          null,
+          'Processing Segmented Quran Recitation',
+        );
+        Map segmentsInfo = jsonDecode(decodeBZip2String(response.data));
+
+        for (final ayahKey in segmentsInfo.keys) {
+          await box.put(ayahKey, segmentsInfo[ayahKey]);
+        }
+        return true;
+      } else {
+        return false;
+      }
+    } on dio.DioException catch (e) {
+      log(e.message ?? 'Null Message');
+      return false;
     }
   }
 

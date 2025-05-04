@@ -39,3 +39,12 @@ int? convertKeyToAyahNumber(String ayahKey) {
   }
   return sum + ayahNumber;
 }
+
+String safeSubString(String str, int len, {String replacer = ''}) {
+  int strLen = str.length;
+  if (strLen > len) {
+    return str.substring(0, len) + replacer;
+  } else {
+    return str;
+  }
+}
