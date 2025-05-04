@@ -35,11 +35,11 @@ class TajweedPageRenderer extends StatelessWidget {
       }
     }
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(12.0),
 
       child: Text.rich(
         TextSpan(children: listOfTextSpan),
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.center,
         textDirection: TextDirection.rtl,
       ),
     );

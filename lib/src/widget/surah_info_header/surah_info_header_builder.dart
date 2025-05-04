@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
+import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
@@ -64,14 +65,22 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
-                      'Translation: ${translationMeta['name'].toString().split('/').last.replaceAll('.simple', '').replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                      safeSubString(
+                        'Translation: ${translationMeta['name'].toString().split('/').last.replaceAll('.simple', '').replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                        30,
+                        replacer: '...',
+                      ),
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
-                      'Tafsir: ${tafsirMeta.toString().split('/').last.replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                      safeSubString(
+                        'Tafsir: ${tafsirMeta.toString().split('/').last.replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                        30,
+                        replacer: '...',
+                      ),
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),

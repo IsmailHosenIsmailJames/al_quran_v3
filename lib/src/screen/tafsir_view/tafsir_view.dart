@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 
@@ -97,12 +97,12 @@ class _TafsirViewState extends State<TafsirView> {
               )
               : SingleChildScrollView(
                 padding: const EdgeInsets.only(
-                  top: 15,
-                  left: 15,
-                  right: 15,
-                  bottom: 100,
+                  top: 5,
+                  left: 5,
+                  right: 5,
+                  bottom: 50,
                 ),
-                child: HtmlWidget(tafsirDataString),
+                child: Html(data: tafsirDataString),
               ),
     );
   }

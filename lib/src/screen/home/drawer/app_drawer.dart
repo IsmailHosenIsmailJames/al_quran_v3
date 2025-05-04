@@ -30,6 +30,7 @@ class _AppDrawerState extends State<AppDrawer> {
               await Hive.openBox('user');
               await Hive.openBox('quran_word_by_word');
               await Hive.openBox('quran_tafsir');
+              await Hive.openBox('segmented_quran_recitation');
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const AppSetupPage()),
