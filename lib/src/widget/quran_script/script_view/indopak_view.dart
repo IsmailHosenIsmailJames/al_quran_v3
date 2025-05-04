@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,17 @@ class IndopakView extends StatelessWidget {
       TextSpan(
         style: quranStyle,
         children: List<InlineSpan>.generate(words.length, (index) {
-          return TextSpan(text: words[index] + ' ');
+          return WidgetSpan(
+            child: InkWell(
+              onTap: () {
+                log(words[index] + ' ');
+              },
+              child: Text.rich(
+                style: quranStyle,
+                TextSpan(text: words[index] + ' '),
+              ),
+            ),
+          );
         }),
       ),
     );
