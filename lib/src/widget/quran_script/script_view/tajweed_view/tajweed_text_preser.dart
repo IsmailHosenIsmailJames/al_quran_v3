@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parseFragment;
 import 'package:html/dom.dart' as dom;
@@ -7,11 +8,12 @@ import 'package:html/dom.dart' as dom;
 import 'color/tajweed_dark.dart';
 import 'color/tajweed_light.dart';
 
-TextSpan parseTajweedWord(
-  String wordHtml,
-  TextStyle baseStyle,
-  BuildContext context,
-) {
+TextSpan parseTajweedWord({
+  required String wordKey,
+  required String wordHtml,
+  required TextStyle baseStyle,
+  required BuildContext context,
+}) {
   List<TextSpan> spans = [];
   final brightness = Theme.of(context).brightness;
   final currentThemeColors =
@@ -31,8 +33,12 @@ TextSpan parseTajweedWord(
       spans.add(
         TextSpan(
           text: node.text,
-
           style: processingStyle.copyWith(color: currentColor),
+          recognizer:
+              TapGestureRecognizer()
+                ..onTap = () {
+                  log("${wordKey} -> ${wordHtml}");
+                },
         ),
       );
     } else if (node.nodeType == dom.Node.ELEMENT_NODE) {

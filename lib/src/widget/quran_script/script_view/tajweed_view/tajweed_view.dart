@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +26,12 @@ class TajweedView extends StatelessWidget {
       return Text.rich(
         style: quranStyle,
         textDirection: TextDirection.rtl,
-        TextSpan(
-          children: [
-            parseTajweedWord(
-              words[scriptInfo.wordIndex!] + ' ',
-              quranStyle,
-              context,
-            ),
-          ],
+        parseTajweedWord(
+          wordKey:
+              '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${scriptInfo.wordIndex}',
+          wordHtml: words[scriptInfo.wordIndex!] + ' ',
+          baseStyle: quranStyle,
+          context: context,
         ),
       );
     }
@@ -45,19 +41,12 @@ class TajweedView extends StatelessWidget {
 
       TextSpan(
         children: List<InlineSpan>.generate(words.length, (index) {
-          return WidgetSpan(
-            child: InkWell(
-              onTap: () {
-                log(words[index] + ' ');
-              },
-              child: Text.rich(
-                TextSpan(
-                  children: <InlineSpan>[
-                    parseTajweedWord(words[index] + ' ', quranStyle, context),
-                  ],
-                ),
-              ),
-            ),
+          return parseTajweedWord(
+            wordKey:
+                '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
+            wordHtml: words[index] + ' ',
+            baseStyle: quranStyle,
+            context: context,
           );
         }),
       ),

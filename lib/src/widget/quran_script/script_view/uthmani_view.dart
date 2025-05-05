@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class UthmaniView extends StatelessWidget {
@@ -37,17 +38,15 @@ class UthmaniView extends StatelessWidget {
       textDirection: TextDirection.rtl,
       TextSpan(
         children: List<InlineSpan>.generate(words.length, (index) {
-          return WidgetSpan(
-            child: InkWell(
-              onTap: () {
-                log(words[index] + ' ');
-              },
-              child: Text.rich(
-                style: quranStyle,
-                TextSpan(text: words[index] + ' '),
-                textDirection: TextDirection.rtl,
-              ),
-            ),
+          return TextSpan(
+            text: words[index] + ' ',
+            recognizer:
+                TapGestureRecognizer()
+                  ..onTap = () {
+                    log(
+                      '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1} -> ${words[index]}',
+                    );
+                  },
           );
         }),
       ),

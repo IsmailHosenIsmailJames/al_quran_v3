@@ -23,12 +23,13 @@ class TajweedPageRenderer extends StatelessWidget {
         for (var word in ayahWords) {
           listOfTextSpan.add(
             parseTajweedWord(
-              '$word ',
-              TextStyle(
+              wordKey: ayahKey,
+              wordHtml: '$word ',
+              baseStyle: TextStyle(
                 fontSize: baseTextStyle?.fontSize ?? 24,
                 fontFamily: baseTextStyle?.fontFamily ?? 'QPC_Hafs',
               ),
-              context,
+              context: context,
             ),
           );
         }
