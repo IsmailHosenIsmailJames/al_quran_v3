@@ -1,0 +1,28 @@
+{
+    "surah_number": 1,
+    "ayah_number": 1,
+    "audio_url": "https://audio-cdn.tarteel.ai/quran/alafasy/001001.mp3",
+    "duration": null,
+    "segments": [
+        [
+            1,
+            0,
+            560
+        ],
+        [
+            2,
+            760,
+            1200
+        ],
+        [
+            3,
+            2000,
+            2360
+        ],
+        [
+            4,
+            2680,
+            6120
+        ]
+    ]
+}

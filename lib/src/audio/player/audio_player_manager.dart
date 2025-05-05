@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
@@ -7,9 +8,11 @@ import 'package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/ayah_by_ayah_view.dart';
+import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 class AudioPlayerManager {
   static AudioPlayer audioPlayer = AudioPlayer();
@@ -17,15 +20,24 @@ class AudioPlayerManager {
     final playerPositionCubit = context.read<PlayerPositionCubit>();
 
     audioPlayer.positionStream.listen((event) {
-      playerPositionCubit.changeCurrentPosition(event);
+      if (durationToDecSec(playerPositionCubit.state.currentDuration) !=
+          durationToDecSec(event)) {
+        playerPositionCubit.changeCurrentPosition(event);
+      }
     });
 
     audioPlayer.durationStream.listen((event) {
-      playerPositionCubit.changeTotalDuration(event);
+      if (durationToDecSec(playerPositionCubit.state.totalDuration) !=
+          durationToDecSec(event)) {
+        playerPositionCubit.changeTotalDuration(event);
+      }
     });
 
     audioPlayer.bufferedPositionStream.listen((event) {
-      playerPositionCubit.changeBufferPosition(event);
+      if (durationToDecSec(playerPositionCubit.state.bufferDuration) !=
+          durationToDecSec(event)) {
+        playerPositionCubit.changeBufferPosition(event);
+      }
     });
 
     audioPlayer.currentIndexStream.listen((event) {
@@ -64,8 +76,19 @@ class AudioPlayerManager {
       quranReciterCubit.changeReciter(reciterInfoModel);
     }
 
+    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+      metaDataSurah[ayahKey.split(':').first],
+    );
+
     String audioURL = getUrlFromAyahKey(ayahKey, quranReciterCubit.state);
-    final audioSource = LockCachingAudioSource(Uri.parse(audioURL));
+    final audioSource = LockCachingAudioSource(
+      Uri.parse(audioURL),
+      tag: MediaItem(
+        id: ayahKey,
+        album: quranReciterCubit.state.name,
+        title: surahInfoModel.nameSimple,
+      ),
+    );
     await audioPlayer.setAudioSource(audioSource);
     await audioPlayer.play();
   }
@@ -110,16 +133,24 @@ class AudioPlayerManager {
 
     List<LockCachingAudioSource> listOfAudioSource = [];
     for (String ayahKey in ayahList) {
+      SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+        metaDataSurah[ayahKey.split(':').first],
+      );
       listOfAudioSource.add(
         LockCachingAudioSource(
           Uri.parse(getUrlFromAyahKey(ayahKey, quranReciterCubit.state)),
+          tag: MediaItem(
+            id: ayahKey,
+            album: quranReciterCubit.state.name,
+            title: surahInfoModel.nameSimple,
+          ),
         ),
       );
     }
 
     log('setAudioSource', name: 'Audio Player');
-    await audioPlayer.setAudioSource(
-      ConcatenatingAudioSource(children: listOfAudioSource),
+    await audioPlayer.setAudioSources(
+      listOfAudioSource,
       initialIndex: initialIndex,
     );
 
@@ -134,5 +165,13 @@ class AudioPlayerManager {
   static String ayahKeyToAudioAyahID(String ayahKey) {
     List<String> sections = ayahKey.split(':');
     return "${sections[0].padLeft(3, '0')}${sections[1].padLeft(3, '0')}";
+  }
+
+  static int? durationToDecSec(Duration? duration) {
+    if (duration == null) {
+      return null;
+    } else {
+      return duration.inMilliseconds ~/ 100;
+    }
   }
 }
