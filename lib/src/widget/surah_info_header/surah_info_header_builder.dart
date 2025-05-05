@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
+import 'package:al_quran_v3/src/screen/surah_info/surah_info_view.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
@@ -84,23 +85,39 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                       style: const TextStyle(fontSize: 12),
                     ),
                   ),
-                  SizedBox(
-                    height: 25,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        shape: const RoundedRectangleBorder(),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'more info',
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          decoration: TextDecoration.underline,
+                  if (Hive.box('surah_info').keys.isNotEmpty)
+                    SizedBox(
+                      height: 25,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: const RoundedRectangleBorder(),
+                        ),
+                        onPressed: () async {
+                          final String surahInfo =
+                              await Hive.box(
+                                'surah_info',
+                              ).get(surahInfoModel.id.toString())['text'];
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => SurahInfoView(
+                                    html: surahInfo,
+                                    surahInfoModel: surahInfoModel,
+                                  ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'more info',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ],

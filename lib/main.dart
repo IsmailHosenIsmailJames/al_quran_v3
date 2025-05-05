@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Map<String, dynamic> tajweedScript = {};
@@ -33,11 +34,17 @@ Map<String, dynamic> metaDataSurah = {};
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   await Hive.initFlutter();
   await Hive.openBox('quran_translation');
   await Hive.openBox('user');
   await Hive.openBox('quran_word_by_word');
   await Hive.openBox('segmented_quran_recitation');
+  await Hive.openBox('surah_info');
   tajweedScript = jsonDecode(
     await rootBundle.loadString('assets/quran_script/QPC_Hafs_Tajweed.json'),
   );

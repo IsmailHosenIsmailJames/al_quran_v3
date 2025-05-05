@@ -8,6 +8,7 @@ import 'package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart'
 import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
 import 'package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart';
+import 'package:al_quran_v3/src/resources/surah_info/info.dart';
 import 'package:al_quran_v3/src/resources/translation/languages.dart';
 import 'package:al_quran_v3/src/resources/meta_data/simple_translation.dart';
 import 'package:al_quran_v3/src/screen/home/home_page.dart';
@@ -631,6 +632,23 @@ class _AppSetupPageState extends State<AppSetupPage> {
         'name': translationBook,
         'language': translationLanguage,
       });
+
+      if (availableSurahInfoInLang.contains(translationLanguage)) {
+        context.read<DownloadProgressCubitCubit>().updateProgress(
+          null,
+          'Downloading Surah\'s Information',
+        );
+        final response = await dio.Dio().get(
+          '${ApisUrls.base}quranic_universal_library/surah_info/$translationLanguage.txt',
+        );
+        if (response.statusCode == 200) {
+          final box = Hive.box('surah_info');
+          Map data = jsonDecode(decodeBZip2String(response.data));
+          for (final key in data.keys) {
+            await box.put(key, data[key]);
+          }
+        }
+      }
       log(
         now.difference(DateTime.now()).inMilliseconds.abs().toString(),
         name: 'Translation Process Time',
