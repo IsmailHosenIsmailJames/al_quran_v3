@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
+import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +29,12 @@ class UthmaniPageRenderer extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    log('$ayahKey:${index + 1} -> ${words[index]}');
+                    showPopupWordFunction(
+                      context: context,
+                      wordKey: '$ayahKey:${index + 1}',
+                      word: words[index],
+                      scriptCategory: QuranScriptType.uthmani,
+                    );
                   },
           ),
         );

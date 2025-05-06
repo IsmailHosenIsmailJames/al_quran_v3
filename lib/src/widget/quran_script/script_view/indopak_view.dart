@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +41,12 @@ class IndopakView extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    log(
-                      '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1} -> ${words[index]}',
+                    showPopupWordFunction(
+                      context: context,
+                      wordKey:
+                          '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
+                      word: words[index],
+                      scriptCategory: QuranScriptType.indopak,
                     );
                   },
           );

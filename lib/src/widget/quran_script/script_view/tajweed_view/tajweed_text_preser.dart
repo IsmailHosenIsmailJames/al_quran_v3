@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
+import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' show parseFragment;
@@ -37,7 +39,12 @@ TextSpan parseTajweedWord({
           recognizer:
               TapGestureRecognizer()
                 ..onTap = () {
-                  log("${wordKey} -> ${wordHtml}");
+                  showPopupWordFunction(
+                    context: context,
+                    wordKey: wordKey,
+                    word: wordHtml,
+                    scriptCategory: QuranScriptType.tajweed,
+                  );
                 },
         ),
       );
