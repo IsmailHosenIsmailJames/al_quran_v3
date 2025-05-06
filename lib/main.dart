@@ -123,6 +123,9 @@ class MyApp extends StatelessWidget {
                   iconColor: Colors.white,
                 ),
               ),
+              bottomSheetTheme: BottomSheetThemeData(
+                backgroundColor: Colors.grey.shade100,
+              ),
             ),
             darkTheme: ThemeData(
               brightness: Brightness.dark,
@@ -138,6 +141,9 @@ class MyApp extends StatelessWidget {
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
                 ),
+              ),
+              bottomSheetTheme: const BottomSheetThemeData(
+                backgroundColor: Color.fromARGB(255, 15, 15, 15),
               ),
             ),
 
