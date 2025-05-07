@@ -16,6 +16,7 @@ import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:hive/hive.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -146,6 +147,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
             AyahByAyahInScrollInfoCubit,
             AyahByAyahInScrollInfoState
           >(
+            buildWhen: (previous, current) {
+              return previous.surahInfoModel?.toMap() !=
+                  current.surahInfoModel?.toMap();
+            },
             builder:
                 (context, state) => Text(
                   '${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )',
@@ -157,6 +162,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
               AyahByAyahInScrollInfoCubit,
               AyahByAyahInScrollInfoState
             >(
+              buildWhen: (previous, current) {
+                return previous.isAyahByAyah != current.isAyahByAyah;
+              },
               builder: (context, state) {
                 return IconButton(
                   style: IconButton.styleFrom(
@@ -200,12 +208,18 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     AyahByAyahInScrollInfoCubit,
                     AyahByAyahInScrollInfoState
                   >(
+                    buildWhen: (previous, current) {
+                      return previous.isAyahByAyah != current.isAyahByAyah;
+                    },
                     builder:
                         (context, state) =>
                             state.isAyahByAyah == true
                                 ? VisibilityDetector(
                                   key: Key(ayahsKeyOfPage.first),
                                   onVisibilityChanged: (info) {
+                                    if (!context.mounted) {
+                                      return;
+                                    }
                                     try {
                                       SurahInfoModel surahInfoModel =
                                           SurahInfoModel.fromMap(
@@ -238,6 +252,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
                                 : VisibilityDetector(
                                   key: Key(ayahsKeyOfPage.first),
                                   onVisibilityChanged: (info) {
+                                    if (!context.mounted) {
+                                      return;
+                                    }
                                     try {
                                       SurahInfoModel surahInfoModel =
                                           SurahInfoModel.fromMap(
@@ -262,22 +279,79 @@ class _PageByPageViewState extends State<QuranScriptView> {
                                 ),
                   );
                 } else {
-                  return Container(
-                    width: double.infinity,
-                    height: 30,
-                    margin: const EdgeInsets.only(top: 5, bottom: 5),
-                    color: AppColors.primaryColor.withValues(alpha: 0.1),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text('Page: '),
-                        Text(
-                          (current as PageInfoModel).pageNumber.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                  return BlocBuilder<
+                    AyahByAyahInScrollInfoCubit,
+                    AyahByAyahInScrollInfoState
+                  >(
+                    buildWhen:
+                        (previous, current) =>
+                            previous.isAyahByAyah != current.isAyahByAyah,
+                    builder:
+                        (context, state) => Container(
+                          width: double.infinity,
+                          height: 30,
+                          margin: const EdgeInsets.only(top: 5, bottom: 5),
+                          color: AppColors.primaryColor.withValues(alpha: 0.1),
+                          child: Row(
+                            mainAxisAlignment:
+                                state.isAyahByAyah
+                                    ? MainAxisAlignment.spaceBetween
+                                    : MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  const Gap(15),
+                                  const Text('Page: '),
+                                  Text(
+                                    (current as PageInfoModel).pageNumber
+                                        .toString(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Gap(15),
+                                ],
+                              ),
+                              if (state.isAyahByAyah)
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 3,
+                                    bottom: 3,
+                                    right: 15,
+                                  ),
+                                  child: IconButton(
+                                    style: IconButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          100,
+                                        ),
+                                        side: BorderSide(
+                                          color: AppColors.primaryColor,
+                                        ),
+                                      ),
+                                      padding: EdgeInsets.zero,
+                                    ),
+                                    onPressed: () {
+                                      context
+                                          .read<AyahByAyahInScrollInfoCubit>()
+                                          .setData(
+                                            isAyahByAyah: !state.isAyahByAyah,
+                                          );
+                                    },
+
+                                    icon: Icon(
+                                      state.isAyahByAyah
+                                          ? CupertinoIcons.book
+                                          : CupertinoIcons.list_bullet,
+                                      color: AppColors.primaryColor,
+                                      size: 18,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
                   );
                 }
               },

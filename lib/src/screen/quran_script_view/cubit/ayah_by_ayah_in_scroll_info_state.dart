@@ -23,6 +23,14 @@ class AyahByAyahInScrollInfoState {
       isAyahByAyah: isAyahByAyah ?? this.isAyahByAyah,
     );
   }
+
+  Map toMap() {
+    return {
+      'surahInfoModel': surahInfoModel?.toMap(),
+      'expandedForWordByWord': expandedForWordByWord,
+      'isAyahByAyah': isAyahByAyah,
+    };
+  }
 }
 
 final class AyahByAyahInScrollInfoInitial extends AyahByAyahInScrollInfoState {
