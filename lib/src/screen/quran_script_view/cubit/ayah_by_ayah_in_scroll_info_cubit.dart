@@ -19,12 +19,13 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
     List<String>? expandedForWordByWord,
     bool? isAyahByAyah,
   }) {
-    emit(
-      state.copyWith(
-        surahInfoModel: surahInfoModel,
-        expandedForWordByWord: expandedForWordByWord,
-        isAyahByAyah: isAyahByAyah,
-      ),
+    final newState = state.copyWith(
+      surahInfoModel: surahInfoModel,
+      expandedForWordByWord: expandedForWordByWord,
+      isAyahByAyah: isAyahByAyah,
     );
+    if (newState.toMap().toString() != state.toMap().toString()) {
+      emit(newState);
+    }
   }
 }
