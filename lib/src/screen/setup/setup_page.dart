@@ -525,6 +525,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
         for (final ayahKey in segmentsInfo.keys) {
           await box.put(ayahKey, segmentsInfo[ayahKey]);
         }
+        await Hive.box('segmented_quran_recitation').put('meta_data', {
+          'name': defaultSegmentedQuranRecitation,
+          'index': defaultSegmentedQuranRecitationIndex,
+        });
         return true;
       } else {
         return false;

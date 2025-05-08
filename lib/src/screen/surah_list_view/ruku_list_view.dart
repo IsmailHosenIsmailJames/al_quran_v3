@@ -136,6 +136,7 @@ class RukuListView extends StatelessWidget {
                             ),
                             quranScriptType: quranScriptType,
                             limitWord: 4,
+                            skipWordTap: true,
                           ),
                         ),
                       ),

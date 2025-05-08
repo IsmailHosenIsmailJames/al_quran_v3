@@ -153,7 +153,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
             },
             builder:
                 (context, state) => Text(
-                  '${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )',
+                  state.surahInfoModel?.nameSimple == null
+                      ? ''
+                      : '${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )',
                   style: const TextStyle(fontSize: 18),
                 ),
           ),
@@ -204,79 +206,107 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   );
                 } else if (current.runtimeType == List<dynamic>) {
                   List<String> ayahsKeyOfPage = List<String>.from(current);
+                  // find the page number
+                  PageInfoModel? previousPageInfo;
+                  if (index != 1) {
+                    if (pagesInfoWithSurahMetaData[index - 1].runtimeType ==
+                        PageInfoModel) {
+                      previousPageInfo = pagesInfoWithSurahMetaData[index - 1];
+                    } else if (index > 1 &&
+                        pagesInfoWithSurahMetaData[index - 2].runtimeType ==
+                            PageInfoModel) {
+                      log(
+                        pagesInfoWithSurahMetaData[index - 2].runtimeType
+                            .toString(),
+                      );
+                      previousPageInfo = pagesInfoWithSurahMetaData[index - 2];
+                    } else if (index > 2 &&
+                        pagesInfoWithSurahMetaData[index - 3].runtimeType ==
+                            PageInfoModel) {
+                      log(
+                        pagesInfoWithSurahMetaData[index - 3].runtimeType
+                            .toString(),
+                      );
+                      previousPageInfo = pagesInfoWithSurahMetaData[index - 3];
+                    }
+                  }
+
+                  int? pageNumber = previousPageInfo?.pageNumber;
+
                   return BlocBuilder<
                     AyahByAyahInScrollInfoCubit,
                     AyahByAyahInScrollInfoState
                   >(
                     buildWhen: (previous, current) {
-                      return previous.isAyahByAyah != current.isAyahByAyah;
+                      return previous.isAyahByAyah != current.isAyahByAyah ||
+                          previous.pageByPageList?.contains(pageNumber) !=
+                              current.pageByPageList?.contains(pageNumber);
                     },
-                    builder:
-                        (context, state) =>
-                            state.isAyahByAyah == true
-                                ? VisibilityDetector(
-                                  key: Key(ayahsKeyOfPage.first),
-                                  onVisibilityChanged: (info) {
-                                    if (!context.mounted) {
-                                      return;
-                                    }
-                                    try {
-                                      SurahInfoModel surahInfoModel =
-                                          SurahInfoModel.fromMap(
-                                            metaDataSurah[ayahsKeyOfPage.first
-                                                .split(':')
-                                                .first],
-                                          );
-                                      context
-                                          .read<AyahByAyahInScrollInfoCubit>()
-                                          .setData(
-                                            surahInfoModel: surahInfoModel,
-                                          );
-                                    } catch (e) {
-                                      log(e.toString());
-                                    }
-                                  },
-                                  child: Column(
-                                    children: List.generate(
-                                      ayahsKeyOfPage.length,
-                                      (idx) {
-                                        return getAyahByAyahCard(
-                                          ayahKey: ayahsKeyOfPage[idx],
-                                          quranScriptType: quranScriptType,
-                                          context: context,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                )
-                                : VisibilityDetector(
-                                  key: Key(ayahsKeyOfPage.first),
-                                  onVisibilityChanged: (info) {
-                                    if (!context.mounted) {
-                                      return;
-                                    }
-                                    try {
-                                      SurahInfoModel surahInfoModel =
-                                          SurahInfoModel.fromMap(
-                                            metaDataSurah[ayahsKeyOfPage.first
-                                                .split(':')
-                                                .first],
-                                          );
-                                      context
-                                          .read<AyahByAyahInScrollInfoCubit>()
-                                          .setData(
-                                            surahInfoModel: surahInfoModel,
-                                          );
-                                    } catch (e) {
-                                      log(e.toString());
-                                    }
-                                  },
-                                  child: QuranPagesRenderer(
-                                    ayahsKey: ayahsKeyOfPage,
-                                    quranScriptType: quranScriptType,
-                                    baseStyle: const TextStyle(fontSize: 24),
-                                  ),
-                                ),
+                    builder: (context, state) {
+                      bool isPageByPageThisPage =
+                          state.pageByPageList?.contains(pageNumber) == true;
+
+                      return state.isAyahByAyah == true &&
+                              isPageByPageThisPage == false
+                          ? VisibilityDetector(
+                            key: Key(ayahsKeyOfPage.first),
+                            onVisibilityChanged: (info) {
+                              if (!context.mounted) {
+                                return;
+                              }
+                              try {
+                                SurahInfoModel surahInfoModel =
+                                    SurahInfoModel.fromMap(
+                                      metaDataSurah[ayahsKeyOfPage.first
+                                          .split(':')
+                                          .first],
+                                    );
+                                context
+                                    .read<AyahByAyahInScrollInfoCubit>()
+                                    .setData(surahInfoModel: surahInfoModel);
+                              } catch (e) {
+                                log(e.toString());
+                              }
+                            },
+                            child: Column(
+                              children: List.generate(ayahsKeyOfPage.length, (
+                                idx,
+                              ) {
+                                return getAyahByAyahCard(
+                                  ayahKey: ayahsKeyOfPage[idx],
+                                  quranScriptType: quranScriptType,
+                                  context: context,
+                                );
+                              }),
+                            ),
+                          )
+                          : VisibilityDetector(
+                            key: Key(ayahsKeyOfPage.first),
+                            onVisibilityChanged: (info) {
+                              if (!context.mounted) {
+                                return;
+                              }
+                              try {
+                                SurahInfoModel surahInfoModel =
+                                    SurahInfoModel.fromMap(
+                                      metaDataSurah[ayahsKeyOfPage.first
+                                          .split(':')
+                                          .first],
+                                    );
+                                context
+                                    .read<AyahByAyahInScrollInfoCubit>()
+                                    .setData(surahInfoModel: surahInfoModel);
+                              } catch (e) {
+                                log(e.toString());
+                              }
+                            },
+                            child: QuranPagesRenderer(
+                              ayahsKey: ayahsKeyOfPage,
+                              quranScriptType: quranScriptType,
+                              baseStyle: const TextStyle(fontSize: 24),
+                            ),
+                          );
+                    },
                   );
                 } else {
                   return BlocBuilder<
@@ -285,7 +315,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   >(
                     buildWhen:
                         (previous, current) =>
-                            previous.isAyahByAyah != current.isAyahByAyah,
+                            (previous.isAyahByAyah != current.isAyahByAyah) ||
+                            (previous.pageByPageList != current.pageByPageList),
                     builder:
                         (context, state) => Container(
                           width: double.infinity,
@@ -315,34 +346,35 @@ class _PageByPageViewState extends State<QuranScriptView> {
                               ),
                               if (state.isAyahByAyah)
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 3,
-                                    bottom: 3,
-                                    right: 15,
-                                  ),
+                                  padding: const EdgeInsets.only(right: 15),
                                   child: IconButton(
                                     style: IconButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          100,
-                                        ),
-                                        side: BorderSide(
-                                          color: AppColors.primaryColor,
-                                        ),
-                                      ),
                                       padding: EdgeInsets.zero,
                                     ),
                                     onPressed: () {
+                                      List<int> pageByPageList =
+                                          state.pageByPageList?.toList() ?? [];
+
+                                      int pageNumber = (current).pageNumber;
+                                      if (pageByPageList.contains(pageNumber)) {
+                                        pageByPageList.remove(pageNumber);
+                                      } else {
+                                        pageByPageList.add(pageNumber);
+                                      }
                                       context
                                           .read<AyahByAyahInScrollInfoCubit>()
                                           .setData(
-                                            isAyahByAyah: !state.isAyahByAyah,
+                                            pageByPageList: pageByPageList,
                                           );
                                     },
 
                                     icon: Icon(
-                                      state.isAyahByAyah
-                                          ? CupertinoIcons.book
+                                      state.pageByPageList?.contains(
+                                                current.pageNumber,
+                                              ) ==
+                                              true
+                                          ? CupertinoIcons
+                                              .list_bullet_below_rectangle
                                           : CupertinoIcons.list_bullet,
                                       color: AppColors.primaryColor,
                                       size: 18,
