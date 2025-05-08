@@ -40,16 +40,18 @@ class UthmaniView extends StatelessWidget {
           return TextSpan(
             text: words[index] + ' ',
             recognizer:
-                TapGestureRecognizer()
-                  ..onTap = () {
-                    showPopupWordFunction(
-                      context: context,
-                      wordKey:
-                          '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
-                      word: words[index],
-                      scriptCategory: QuranScriptType.uthmani,
-                    );
-                  },
+                scriptInfo.skipWordTap == true
+                    ? null
+                    : (TapGestureRecognizer()
+                      ..onTap = () {
+                        showPopupWordFunction(
+                          context: context,
+                          wordKey:
+                              '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
+                          word: words[index],
+                          scriptCategory: QuranScriptType.uthmani,
+                        );
+                      }),
           );
         }),
       ),

@@ -254,7 +254,8 @@ Widget getAyahByAyahCard({
                   context
                       .read<AyahByAyahInScrollInfoCubit>()
                       .state
-                      .expandedForWordByWord ??
+                      .expandedForWordByWord
+                      ?.toList() ??
                   [];
 
               expandedForWordByWord.contains(ayahKey)

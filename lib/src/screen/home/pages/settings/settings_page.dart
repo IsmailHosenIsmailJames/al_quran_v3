@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
@@ -153,7 +154,27 @@ class _SettingsPageState extends State<SettingsPage> {
           ElevatedButton(
             onPressed: () async {
               final box = Hive.box('segmented_quran_recitation');
-              log(jsonEncode(box.get('1:1')));
+              Map metaData = box.get('meta_data');
+              Map getFirstAyah = box.get('1:1');
+              String name = metaData['name'];
+              String baseAudioUrl = getFirstAyah['audio_url'];
+              baseAudioUrl = baseAudioUrl.substring(
+                baseAudioUrl.lastIndexOf('/'),
+                baseAudioUrl.length,
+              );
+
+              ReciterInfoModel reciterInfoModel = ReciterInfoModel(
+                link: baseAudioUrl,
+                name: name
+                    .split('/')
+                    .last
+                    .replaceAll('ayah-recitation-', '')
+                    .replaceAll('.json.txt', '')
+                    .replaceAll('-', ' '),
+                supportWordSegmentation: true,
+              );
+
+              log(reciterInfoModel.toJson());
             },
             child: const Text('Test'),
           ),

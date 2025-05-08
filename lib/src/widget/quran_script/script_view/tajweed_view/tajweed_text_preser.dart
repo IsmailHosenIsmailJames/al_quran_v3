@@ -15,6 +15,7 @@ TextSpan parseTajweedWord({
   required String wordHtml,
   required TextStyle baseStyle,
   required BuildContext context,
+  bool? skipWordTap,
 }) {
   List<TextSpan> spans = [];
   final brightness = Theme.of(context).brightness;
@@ -37,15 +38,17 @@ TextSpan parseTajweedWord({
           text: node.text,
           style: processingStyle.copyWith(color: currentColor),
           recognizer:
-              TapGestureRecognizer()
-                ..onTap = () {
-                  showPopupWordFunction(
-                    context: context,
-                    wordKey: wordKey,
-                    word: wordHtml,
-                    scriptCategory: QuranScriptType.tajweed,
-                  );
-                },
+              skipWordTap == true
+                  ? null
+                  : (TapGestureRecognizer()
+                    ..onTap = () {
+                      showPopupWordFunction(
+                        context: context,
+                        wordKey: wordKey,
+                        word: wordHtml,
+                        scriptCategory: QuranScriptType.tajweed,
+                      );
+                    }),
         ),
       );
     } else if (node.nodeType == dom.Node.ELEMENT_NODE) {

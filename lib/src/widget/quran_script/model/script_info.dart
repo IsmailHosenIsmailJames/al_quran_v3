@@ -5,6 +5,7 @@ class ScriptInfo {
   double? fontSize;
   int? limitWord;
   int? wordIndex;
+  bool? skipWordTap;
 
   ScriptInfo({
     required this.surahNumber,
@@ -13,6 +14,7 @@ class ScriptInfo {
     this.fontSize,
     this.limitWord,
     this.wordIndex,
+    this.skipWordTap,
   });
 }
 

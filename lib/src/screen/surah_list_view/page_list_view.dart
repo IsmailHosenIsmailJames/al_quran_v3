@@ -139,6 +139,7 @@ class PageListView extends StatelessWidget {
                               ayahNumber: int.parse(ayahKey.split(':')[1]),
                               quranScriptType: quranScriptType,
                               limitWord: 3,
+                              skipWordTap: true,
                             ),
                           ),
                         ),

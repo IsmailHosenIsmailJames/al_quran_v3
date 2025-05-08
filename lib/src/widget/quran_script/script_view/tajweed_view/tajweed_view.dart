@@ -32,6 +32,7 @@ class TajweedView extends StatelessWidget {
           wordHtml: words[scriptInfo.wordIndex!] + ' ',
           baseStyle: quranStyle,
           context: context,
+          skipWordTap: scriptInfo.skipWordTap,
         ),
       );
     }
@@ -47,6 +48,7 @@ class TajweedView extends StatelessWidget {
             wordHtml: words[index] + ' ',
             baseStyle: quranStyle,
             context: context,
+            skipWordTap: scriptInfo.skipWordTap,
           );
         }),
       ),
