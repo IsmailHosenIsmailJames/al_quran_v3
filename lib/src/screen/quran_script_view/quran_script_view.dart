@@ -6,6 +6,7 @@ import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dar
 import 'package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/widget/audio/audio_controller_ui.dart';
@@ -46,6 +47,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
     if (startAyahNumber == null || endAyahNumber == null) return;
     bool checkedFirst = false;
     List<PageInfoModel> currentPagesToShow = [];
+    List allAyahsKey = [];
 
     for (int i = 0; i < quranPagesInfo.length; i++) {
       if (quranPagesInfo[i]['s']! >= startAyahNumber ||
@@ -123,12 +125,51 @@ class _PageByPageViewState extends State<QuranScriptView> {
       return false;
     });
 
+    for (final element in pagesInfoWithSurahMetaData) {
+      if (element.runtimeType == List<dynamic>) {
+        allAyahsKey.addAll(element);
+      }
+    }
+
     if (pagesInfoWithSurahMetaData.first.runtimeType != int &&
         pagesInfoWithSurahMetaData.first.runtimeType != PageInfoModel) {
       pagesInfoWithSurahMetaData.insert(
         0,
         int.parse(widget.startKey.split(':').first),
       );
+    }
+    int listLen = pagesInfoWithSurahMetaData.length;
+    for (int i = 0; i < listLen; i++) {
+      if (pagesInfoWithSurahMetaData[i].runtimeType == int) {
+        String endAyahKey = getEndAyahKeyFromSurahNumber(
+          pagesInfoWithSurahMetaData[i],
+        );
+        List allAyahsInThisSurah = getListOfAyahKey(
+          startAyahKey: '${pagesInfoWithSurahMetaData[i]}:1',
+          endAyahKey: endAyahKey,
+        );
+        String? start;
+        String? end;
+        for (final key in allAyahsInThisSurah) {
+          if (allAyahsKey.contains(key)) {
+            start ??= key;
+            end = key;
+          }
+        }
+        start ??= allAyahsInThisSurah.first;
+        end ??= allAyahsInThisSurah.last;
+        try {
+          pagesInfoWithSurahMetaData[i] = SurahHeaderInfoModel(
+            SurahInfoModel.fromMap(
+              metaDataSurah['${pagesInfoWithSurahMetaData[i]}'],
+            ),
+            start!,
+            end!,
+          );
+        } catch (e) {
+          log(e.toString());
+        }
+      }
     }
 
     super.initState();
@@ -198,12 +239,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
               itemCount: pagesInfoWithSurahMetaData.length,
               itemBuilder: (context, index) {
                 var current = pagesInfoWithSurahMetaData[index];
-                if (current.runtimeType == int) {
-                  return SurahInfoHeaderBuilder(
-                    surahInfoModel: SurahInfoModel.fromMap(
-                      metaDataSurah['$current'],
-                    ),
-                  );
+                if (current.runtimeType == SurahHeaderInfoModel) {
+                  return SurahInfoHeaderBuilder(headerInfoModel: current);
                 } else if (current.runtimeType == List<dynamic>) {
                   List<String> ayahsKeyOfPage = List<String>.from(current);
                   // find the page number
@@ -215,18 +252,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     } else if (index > 1 &&
                         pagesInfoWithSurahMetaData[index - 2].runtimeType ==
                             PageInfoModel) {
-                      log(
-                        pagesInfoWithSurahMetaData[index - 2].runtimeType
-                            .toString(),
-                      );
                       previousPageInfo = pagesInfoWithSurahMetaData[index - 2];
                     } else if (index > 2 &&
                         pagesInfoWithSurahMetaData[index - 3].runtimeType ==
                             PageInfoModel) {
-                      log(
-                        pagesInfoWithSurahMetaData[index - 3].runtimeType
-                            .toString(),
-                      );
                       previousPageInfo = pagesInfoWithSurahMetaData[index - 3];
                     }
                   }

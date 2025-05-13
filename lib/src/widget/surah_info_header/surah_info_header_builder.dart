@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart';
 import 'package:al_quran_v3/src/screen/surah_info/surah_info_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
 import 'package:dartx/dartx.dart';
@@ -13,8 +13,8 @@ import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class SurahInfoHeaderBuilder extends StatelessWidget {
-  final SurahInfoModel surahInfoModel;
-  const SurahInfoHeaderBuilder({super.key, required this.surahInfoModel});
+  final SurahHeaderInfoModel headerInfoModel;
+  const SurahInfoHeaderBuilder({super.key, required this.headerInfoModel});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,8 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   borderRadius: BorderRadius.circular(roundedRadius),
                   image: DecorationImage(
                     image: AssetImage(
-                      surahInfoModel.revelationPlace == 'madinah'
+                      headerInfoModel.surahInfoModel.revelationPlace ==
+                              'madinah'
                           ? 'assets/img/madina.jpeg'
                           : 'assets/img/makkah.jpg',
                     ),
@@ -51,14 +52,14 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${surahInfoModel.id}. ${surahInfoModel.nameSimple} ( ${surahInfoModel.nameArabic} )',
+                    '${headerInfoModel.surahInfoModel.id}. ${headerInfoModel.surahInfoModel.nameSimple} ( ${headerInfoModel.surahInfoModel.nameArabic} )',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Row(
                     children: [
                       const Text('Verse Count: '),
                       Text(
-                        surahInfoModel.versesCount.toString(),
+                        headerInfoModel.surahInfoModel.versesCount.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -95,16 +96,17 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         ),
                         onPressed: () async {
                           final String surahInfo =
-                              await Hive.box(
-                                'surah_info',
-                              ).get(surahInfoModel.id.toString())['text'];
+                              await Hive.box('surah_info').get(
+                                headerInfoModel.surahInfoModel.id.toString(),
+                              )['text'];
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder:
                                   (context) => SurahInfoView(
                                     html: surahInfo,
-                                    surahInfoModel: surahInfoModel,
+                                    surahInfoModel:
+                                        headerInfoModel.surahInfoModel,
                                   ),
                             ),
                           );
@@ -131,11 +133,8 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                 foregroundColor: Colors.white,
               ),
               onPressed: () {
-                String startAyahKey = '${surahInfoModel.id}:1';
-                String endAyahKey = getEndAyahKeyFromSurahNumber(
-                  surahInfoModel.id,
-                );
-
+                String startAyahKey = headerInfoModel.startAyahKey;
+                String endAyahKey = headerInfoModel.endAyahKey;
                 log(startAyahKey, name: 'Start Ayah Key');
                 log(endAyahKey, name: 'End Ayah Key');
 
