@@ -172,6 +172,27 @@ class _PageByPageViewState extends State<QuranScriptView> {
       }
     }
 
+    if (pagesInfoWithSurahMetaData[1].runtimeType != SurahHeaderInfoModel) {
+      String? end;
+      String startSurahNumber = widget.startKey.split(':').first;
+      for (int idx = 0; idx < allAyahsKey.length; idx++) {
+        String key = allAyahsKey[idx];
+        if (key.split(':').first != startSurahNumber) {
+          end = allAyahsKey[idx - 1];
+          break;
+        }
+      }
+      end ??= allAyahsKey.last;
+      pagesInfoWithSurahMetaData.insert(
+        1,
+        SurahHeaderInfoModel(
+          SurahInfoModel.fromMap(metaDataSurah[startSurahNumber]),
+          widget.startKey,
+          end!,
+        ),
+      );
+    }
+
     super.initState();
   }
 
