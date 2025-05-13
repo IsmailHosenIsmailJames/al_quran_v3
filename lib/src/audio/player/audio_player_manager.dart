@@ -4,11 +4,11 @@ import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -23,6 +23,37 @@ class AudioPlayerManager {
       if (durationToDecSec(playerPositionCubit.state.currentDuration) !=
           durationToDecSec(event)) {
         playerPositionCubit.changeCurrentPosition(event);
+      }
+    });
+
+    audioPlayer.errorStream.listen((event) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Audio Player Error'),
+            content: Text(event.message ?? 'Something went wrong'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
+    });
+
+    audioPlayer.processingStateStream.listen((event) {
+      if (ProcessingState.completed == event) {
+        log(event.toString());
+        playerPositionCubit.changeCurrentPosition(Duration.zero);
+        playerPositionCubit.changeTotalDuration(Duration.zero);
+        playerPositionCubit.changeBufferPosition(Duration.zero);
+        context.read<AudioUiCubit>().expand(false);
+        context.read<AudioUiCubit>().showUI(false);
       }
     });
 
@@ -53,16 +84,31 @@ class AudioPlayerManager {
   static Future<void> playSingleAyah({
     required BuildContext context,
     required String ayahKey,
-    ReciterInfoModel? reciterInfoModel,
+    required ReciterInfoModel reciterInfoModel,
   }) async {
     startListeningAudioPlayerState(context: context);
 
     final audioUICubit = context.read<AudioUiCubit>();
-    final quranReciterCubit = context.read<QuranReciterCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
-    audioUICubit.showUI(true);
+    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+      metaDataSurah[ayahKey.split(':').first],
+    );
+
+    String audioURL = getUrlFromAyahKey(ayahKey, reciterInfoModel);
+    log(audioURL);
+    final audioSource = LockCachingAudioSource(
+      Uri.parse(audioURL),
+      tag: MediaItem(
+        id: ayahKey,
+        album: reciterInfoModel.name,
+        title: surahInfoModel.nameSimple,
+      ),
+    );
+    await audioPlayer.stop();
+
     audioUICubit.expand(true);
+    audioUICubit.showUI(true);
 
     ayahKeyCubit.changeData(
       AyahKeyManagement(
@@ -72,24 +118,11 @@ class AudioPlayerManager {
         ayahList: [ayahKey],
       ),
     );
-    if (reciterInfoModel != null) {
-      quranReciterCubit.changeReciter(reciterInfoModel);
-    }
-
-    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-      metaDataSurah[ayahKey.split(':').first],
+    await audioPlayer.setAudioSource(
+      audioSource,
+      initialPosition: Duration.zero,
+      initialIndex: 0,
     );
-
-    String audioURL = getUrlFromAyahKey(ayahKey, quranReciterCubit.state);
-    final audioSource = LockCachingAudioSource(
-      Uri.parse(audioURL),
-      tag: MediaItem(
-        id: ayahKey,
-        album: quranReciterCubit.state.name,
-        title: surahInfoModel.nameSimple,
-      ),
-    );
-    await audioPlayer.setAudioSource(audioSource);
     await audioPlayer.play();
   }
 
@@ -98,20 +131,12 @@ class AudioPlayerManager {
     required String startAyahKey,
     required String endAyahKey,
     int initialIndex = 0,
-    ReciterInfoModel? reciterInfoModel,
+    required ReciterInfoModel reciterInfoModel,
   }) async {
     startListeningAudioPlayerState(context: context);
 
     final audioUICubit = context.read<AudioUiCubit>();
-    final quranReciterCubit = context.read<QuranReciterCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
-
-    audioUICubit.showUI(true);
-    audioUICubit.expand(true);
-
-    if (reciterInfoModel != null) {
-      quranReciterCubit.changeReciter(reciterInfoModel);
-    }
 
     List ayahList = getListOfAyahKey(
       startAyahKey: startAyahKey,
@@ -120,8 +145,29 @@ class AudioPlayerManager {
 
     ayahList.removeWhere((element) => element.runtimeType == int);
     ayahList = List<String>.from(ayahList);
-    log(ayahList.toString(), name: 'Ayah Playlist');
-    log(ayahList[initialIndex], name: 'Target Play');
+
+    List<LockCachingAudioSource> listOfAudioSource = [];
+    for (String ayahKey in ayahList) {
+      SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+        metaDataSurah[ayahKey.split(':').first],
+      );
+      listOfAudioSource.add(
+        LockCachingAudioSource(
+          Uri.parse(getUrlFromAyahKey(ayahKey, reciterInfoModel)),
+
+          tag: MediaItem(
+            id: ayahKey,
+            album: reciterInfoModel.name,
+            title: surahInfoModel.nameSimple,
+          ),
+        ),
+      );
+    }
+
+    await audioPlayer.stop();
+
+    audioUICubit.showUI(true);
+    audioUICubit.expand(true);
     ayahKeyCubit.changeData(
       AyahKeyManagement(
         start: ayahList.first,
@@ -131,30 +177,12 @@ class AudioPlayerManager {
       ),
     );
 
-    List<LockCachingAudioSource> listOfAudioSource = [];
-    for (String ayahKey in ayahList) {
-      SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        metaDataSurah[ayahKey.split(':').first],
-      );
-      listOfAudioSource.add(
-        LockCachingAudioSource(
-          Uri.parse(getUrlFromAyahKey(ayahKey, quranReciterCubit.state)),
-          tag: MediaItem(
-            id: ayahKey,
-            album: quranReciterCubit.state.name,
-            title: surahInfoModel.nameSimple,
-          ),
-        ),
-      );
-    }
-
-    log('setAudioSource', name: 'Audio Player');
     await audioPlayer.setAudioSources(
       listOfAudioSource,
       initialIndex: initialIndex,
+      shuffleOrder: DefaultShuffleOrder(),
     );
 
-    log('play', name: 'Audio Player');
     await audioPlayer.play();
   }
 
