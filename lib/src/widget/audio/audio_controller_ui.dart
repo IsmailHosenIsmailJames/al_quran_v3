@@ -61,45 +61,52 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       : AppColors.primaryColor,
               border: Border.all(color: AppColors.primaryColor, width: 0.5),
             ),
-            child: Stack(
-              children: [
-                if (!state.isExpanded)
-                  const SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: Icon(
-                      Icons.play_arrow_rounded,
-                      color: Colors.white,
-                      size: 36,
-                    ),
-                  ),
-                if (state.isExpanded)
-                  Stack(
-                    children: [
-                      getFullAudioControllerUI(),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: IconButton(
-                            style: IconButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              iconSize: 15,
+            child:
+                state.showUi
+                    ? Stack(
+                      children: [
+                        if (!state.isExpanded)
+                          const SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: Icon(
+                              Icons.play_arrow_rounded,
+                              color: Colors.white,
+                              size: 36,
                             ),
-                            onPressed: () {
-                              if (state.isExpanded) {
-                                context.read<AudioUiCubit>().expand(false);
-                              }
-                            },
-                            icon: const Icon(Icons.close_fullscreen_rounded),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
+                        if (state.isExpanded)
+                          Stack(
+                            children: [
+                              getFullAudioControllerUI(),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: IconButton(
+                                    style: IconButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      iconSize: 15,
+                                    ),
+                                    onPressed: () {
+                                      if (state.isExpanded) {
+                                        context.read<AudioUiCubit>().expand(
+                                          false,
+                                        );
+                                      }
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_fullscreen_rounded,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                      ],
+                    )
+                    : null,
           ),
         );
       },
