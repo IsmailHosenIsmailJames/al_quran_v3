@@ -1,6 +1,7 @@
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart';
 import 'package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart';
 import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/theme/values/values.dart';
@@ -167,9 +168,12 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {
+                  getSelectedReciterModel();
+
                   AudioPlayerManager.playSingleAyah(
                     context: context,
                     ayahKey: ayahKey,
+                    reciterInfoModel: context.read<SegmentedAudioCubit>().state,
                   );
                 },
                 icon: const Icon(Icons.play_arrow_rounded, size: 18),
