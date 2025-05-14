@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
@@ -149,7 +151,13 @@ Widget getAyahByAyahCard({
                     side: BorderSide(color: AppColors.primaryColor),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  log(
+                    Hive.box(
+                      'segmented_quran_recitation',
+                    ).get('1:1').toString(),
+                  );
+                },
                 tooltip: 'Bookmark',
                 icon: const Icon(Icons.bookmark_added, size: 18),
               ),

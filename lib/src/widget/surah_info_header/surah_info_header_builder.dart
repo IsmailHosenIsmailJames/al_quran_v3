@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
@@ -137,8 +135,6 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
               onPressed: () {
                 String startAyahKey = headerInfoModel.startAyahKey;
                 String endAyahKey = headerInfoModel.endAyahKey;
-                log(startAyahKey, name: 'Start Ayah Key');
-                log(endAyahKey, name: 'End Ayah Key');
 
                 AudioPlayerManager.playMultipleAyahAsPlaylist(
                   context: context,
