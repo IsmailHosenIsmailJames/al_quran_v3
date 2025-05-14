@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/audio/resources/quran_com/all_recitations.dart';
@@ -94,6 +95,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AyahKeyCubit()),
         BlocProvider(create: (context) => LocationDataQiblaDataCubit()),
         BlocProvider(create: (context) => SegmentedAudioCubit()),
+        BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(

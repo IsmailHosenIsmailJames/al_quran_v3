@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:al_quran_v3/main.dart';
+import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
+import 'package:al_quran_v3/src/audio/model/audio_controller_ui.dart';
+import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart';

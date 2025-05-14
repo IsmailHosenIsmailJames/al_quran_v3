@@ -4,6 +4,7 @@ import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
@@ -46,9 +47,13 @@ class AudioPlayerManager {
       );
     });
 
+    audioPlayer.playerEventStream.listen((event) {
+      log(event.toString(), name: "Audio Player Event");
+      context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
+    });
     audioPlayer.processingStateStream.listen((event) {
+      context.read<PlayerStateCubit>().changeState(processingState: event);
       if (ProcessingState.completed == event) {
-        log(event.toString());
         playerPositionCubit.changeCurrentPosition(Duration.zero);
         playerPositionCubit.changeTotalDuration(Duration.zero);
         playerPositionCubit.changeBufferPosition(Duration.zero);
@@ -118,11 +123,7 @@ class AudioPlayerManager {
         ayahList: [ayahKey],
       ),
     );
-    await audioPlayer.setAudioSource(
-      audioSource,
-      initialPosition: Duration.zero,
-      initialIndex: 0,
-    );
+    await audioPlayer.setAudioSource(audioSource, initialIndex: 0);
     await audioPlayer.play();
   }
 
@@ -131,6 +132,7 @@ class AudioPlayerManager {
     required String startAyahKey,
     required String endAyahKey,
     int initialIndex = 0,
+
     required ReciterInfoModel reciterInfoModel,
   }) async {
     startListeningAudioPlayerState(context: context);
