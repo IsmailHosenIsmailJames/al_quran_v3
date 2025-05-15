@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
@@ -182,6 +184,40 @@ class AudioPlayerManager {
     );
 
     if (instantPlay) await audioPlayer.play();
+  }
+
+  static Future<void> playWord({
+    required BuildContext context,
+    required String ayahKey,
+    required ReciterInfoModel reciter,
+    required Duration start,
+    required Duration end,
+    required SurahInfoModel surahInfoModel,
+  }) async {
+    await audioPlayer.stop();
+    context.read<AudioUiCubit>().expand(false);
+    context.read<AudioUiCubit>().showUI(false);
+    log(getUrlFromAyahKey(ayahKey, reciter));
+    await audioPlayer.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(getUrlFromAyahKey(ayahKey, reciter)),
+        tag: MediaItem(
+          id: ayahKey,
+          album: reciter.name,
+          title: surahInfoModel.nameSimple,
+        ),
+      ),
+    );
+    await audioPlayer.setClip(
+      start: start,
+      end: end,
+      tag: MediaItem(
+        id: ayahKey,
+        album: reciter.name,
+        title: surahInfoModel.nameSimple,
+      ),
+    );
+    audioPlayer.play();
   }
 
   static String getUrlFromAyahKey(String ayahKey, ReciterInfoModel reciter) {

@@ -20,10 +20,11 @@ class TajweedPageRenderer extends StatelessWidget {
           tajweedScript[ayahKey.split(':').first]?[ayahKey.split(':').last];
 
       if (ayahWords != null) {
-        for (var word in ayahWords) {
+        for (int i = 0; i < ayahWords.length; i++) {
+          String word = ayahWords[i];
           listOfTextSpan.add(
             parseTajweedWord(
-              wordKey: ayahKey,
+              wordKey: '$ayahKey:${i + 1}',
               wordHtml: '$word ',
               baseStyle: TextStyle(
                 fontSize: baseTextStyle?.fontSize ?? 24,

@@ -87,13 +87,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     ? Stack(
                       children: [
                         if (!state.isExpanded)
-                          const SizedBox(
+                          SizedBox(
                             height: 50,
                             width: 50,
-                            child: Icon(
-                              Icons.play_arrow_rounded,
-                              color: Colors.white,
-                              size: 36,
+                            child: BlocBuilder<PlayerStateCubit, PlayerState>(
+                              builder:
+                                  (context, state) => Icon(
+                                    state.isPlaying
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                    color: Colors.white,
+                                    size: 36,
+                                  ),
                             ),
                           ),
                         if (state.isExpanded)
