@@ -41,7 +41,7 @@ class PageListView extends StatelessWidget {
     return Scrollbar(
       controller: scrollController,
       radius: Radius.circular(roundedRadius),
-      thickness: 10,
+      thickness: 13,
       interactive: true,
 
       child: ListView.builder(
