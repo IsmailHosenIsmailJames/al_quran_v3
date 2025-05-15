@@ -1,3 +1,6 @@
+import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
+import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
@@ -126,24 +129,50 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.zero,
-                backgroundColor: AppColors.primaryColor,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () {
-                String startAyahKey = headerInfoModel.startAyahKey;
-                String endAyahKey = headerInfoModel.endAyahKey;
+            child: BlocBuilder<PlayerStateCubit, PlayerState>(
+              builder: (context, playerState) {
+                return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                  builder: (context, ayahKeyManagement) {
+                    bool isPlaying = playerState.isPlaying;
+                    bool isCurrentSurah =
+                        int.tryParse(
+                          ayahKeyManagement.current?.split(':')[0] ?? '',
+                        ) ==
+                        headerInfoModel.surahInfoModel.id;
+                    bool isCurrentPlaying = isPlaying && isCurrentSurah;
+                    return IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        backgroundColor: AppColors.primaryColor,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        if (isCurrentPlaying) {
+                          AudioPlayerManager.audioPlayer.pause();
+                        } else if (isCurrentSurah) {
+                          AudioPlayerManager.audioPlayer.play();
+                        } else {
+                          String startAyahKey = headerInfoModel.startAyahKey;
+                          String endAyahKey = headerInfoModel.endAyahKey;
 
-                AudioPlayerManager.playMultipleAyahAsPlaylist(
-                  context: context,
-                  startAyahKey: startAyahKey,
-                  endAyahKey: endAyahKey,
-                  reciterInfoModel: context.read<SegmentedAudioCubit>().state,
+                          AudioPlayerManager.playMultipleAyahAsPlaylist(
+                            context: context,
+                            startAyahKey: startAyahKey,
+                            endAyahKey: endAyahKey,
+                            reciterInfoModel:
+                                context.read<SegmentedAudioCubit>().state,
+                          );
+                        }
+                      },
+                      icon: Icon(
+                        isCurrentPlaying
+                            ? Icons.pause_rounded
+                            : Icons.play_arrow_rounded,
+                      ),
+                    );
+                  },
                 );
               },
-              icon: const Icon(Icons.play_arrow_rounded),
             ),
           ),
         ],

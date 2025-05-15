@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
@@ -10,7 +8,6 @@ import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
@@ -48,17 +45,13 @@ class AudioPlayerManager {
     });
 
     audioPlayer.playerEventStream.listen((event) {
-      log(event.toString(), name: "Audio Player Event");
       context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
     });
     audioPlayer.processingStateStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(processingState: event);
       if (ProcessingState.completed == event) {
         playerPositionCubit.changeCurrentPosition(Duration.zero);
-        playerPositionCubit.changeTotalDuration(Duration.zero);
-        playerPositionCubit.changeBufferPosition(Duration.zero);
-        context.read<AudioUiCubit>().expand(false);
-        context.read<AudioUiCubit>().showUI(false);
+        context.read<PlayerStateCubit>().changeState(isPlaying: false);
       }
     });
 
@@ -90,6 +83,7 @@ class AudioPlayerManager {
     required BuildContext context,
     required String ayahKey,
     required ReciterInfoModel reciterInfoModel,
+    bool instantPlay = true,
   }) async {
     startListeningAudioPlayerState(context: context);
 
@@ -101,7 +95,6 @@ class AudioPlayerManager {
     );
 
     String audioURL = getUrlFromAyahKey(ayahKey, reciterInfoModel);
-    log(audioURL);
     final audioSource = LockCachingAudioSource(
       Uri.parse(audioURL),
       tag: MediaItem(
@@ -114,6 +107,7 @@ class AudioPlayerManager {
 
     audioUICubit.expand(true);
     audioUICubit.showUI(true);
+    audioUICubit.isPlayList(false);
 
     ayahKeyCubit.changeData(
       AyahKeyManagement(
@@ -124,7 +118,7 @@ class AudioPlayerManager {
       ),
     );
     await audioPlayer.setAudioSource(audioSource, initialIndex: 0);
-    await audioPlayer.play();
+    if (instantPlay) await audioPlayer.play();
   }
 
   static Future<void> playMultipleAyahAsPlaylist({
@@ -132,7 +126,7 @@ class AudioPlayerManager {
     required String startAyahKey,
     required String endAyahKey,
     int initialIndex = 0,
-
+    bool instantPlay = true,
     required ReciterInfoModel reciterInfoModel,
   }) async {
     startListeningAudioPlayerState(context: context);
@@ -170,6 +164,8 @@ class AudioPlayerManager {
 
     audioUICubit.showUI(true);
     audioUICubit.expand(true);
+    audioUICubit.isPlayList(true);
+
     ayahKeyCubit.changeData(
       AyahKeyManagement(
         start: ayahList.first,
@@ -185,7 +181,7 @@ class AudioPlayerManager {
       shuffleOrder: DefaultShuffleOrder(),
     );
 
-    await audioPlayer.play();
+    if (instantPlay) await audioPlayer.play();
   }
 
   static String getUrlFromAyahKey(String ayahKey, ReciterInfoModel reciter) {

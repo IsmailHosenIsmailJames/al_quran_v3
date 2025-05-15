@@ -283,7 +283,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   interactive: true,
                   radius: const Radius.circular(10),
                   thickness: 13,
-                  thumbVisibility: true,
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: pagesInfoWithSurahMetaData.length,
