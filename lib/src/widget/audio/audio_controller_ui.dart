@@ -14,6 +14,7 @@ import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart' as just_audio;
 
 import '../../audio/cubit/player_state_cubit.dart';
 
@@ -30,24 +31,12 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Obtain the Cubit instance here.
-    // context.read<T>() is equivalent to BlocProvider.of<T>(context, listen: false)
-    // It's suitable for one-off access or when you don't need the widget to rebuild
-    // when the Cubit's state changes (which is often the case for dispose logic).
-    if (_myCubitInstance == null) {
-      // Only fetch if not already fetched
-      _myCubitInstance = context.read<AudioUiCubit>();
-      print(
-        "MyWidgetWithCubit: MyCubit instance obtained in didChangeDependencies.",
-      );
-    }
+    _myCubitInstance ??= context.read<AudioUiCubit>();
   }
 
   @override
   void dispose() {
-    print("MyWidgetWithCubit: Disposing...");
-    _myCubitInstance =
-        null; // Clear the reference (optional, but good practice)
+    _myCubitInstance = null;
     super.dispose();
   }
 
@@ -58,7 +47,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
         double height =
             state.showUi
                 ? state.isExpanded
-                    ? 200
+                    ? 120
                     : 50
                 : 0;
         double width =
@@ -128,6 +117,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                         );
                                       }
                                     },
+                                    tooltip: 'Close Audio Controller',
                                     icon: const Icon(
                                       Icons.close_fullscreen_rounded,
                                     ),
@@ -157,8 +147,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               buffered: state.bufferDuration ?? Duration.zero,
               total: state.totalDuration ?? Duration.zero,
               thumbCanPaintOutsideBar: false,
+              barHeight: 6,
               timeLabelLocation: TimeLabelLocation.sides,
-
               onSeek: (duration) {
                 AudioPlayerManager.audioPlayer.seek(duration);
               },
@@ -171,9 +161,10 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             if (state?.current != null &&
                 state?.end != null &&
                 state?.start != null) {
+              int currentSurahNumber = int.parse(state!.current!.split(':')[0]);
               List ayahList = getListOfAyahKey(
-                startAyahKey: state!.start!,
-                endAyahKey: state.end!,
+                startAyahKey: '$currentSurahNumber:1',
+                endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
               );
               ayahList.removeWhere((element) => element.runtimeType == int);
               return ayahList.length > 1
@@ -181,21 +172,38 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     children: [
                       Text(state.current!),
                       Expanded(
-                        child: Slider(
-                          value: ayahList.indexOf(state.current!).toDouble(),
-                          max: ayahList.length.toDouble() - 1,
-                          min: 0,
-                          divisions: ayahList.length - 1,
-                          onChanged: (value) {
-                            String ayahKey = ayahList[value.toInt()];
-                            context.read<AyahKeyCubit>().changeCurrentAyahKey(
-                              ayahKey,
-                            );
-                            AudioPlayerManager.audioPlayer.seek(
-                              Duration.zero,
-                              index: value.toInt(),
-                            );
-                          },
+                        child: SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            padding: const EdgeInsets.only(
+                              top: 3,
+                              bottom: 5,
+                              left: 10,
+                              right: 10,
+                            ),
+                          ),
+
+                          child: Slider(
+                            value: ayahList.indexOf(state.current!).toDouble(),
+                            max: ayahList.length.toDouble() - 1,
+                            min: 0,
+
+                            divisions: ayahList.length - 1,
+                            onChanged: (value) {
+                              String ayahKey = ayahList[value.toInt()];
+                              if ((state.ayahList?.length ?? 0) == 1) {
+                                AudioPlayerManager.playSingleAyah(
+                                  context: context,
+                                  ayahKey: ayahKey,
+                                  reciterInfoModel:
+                                      context.read<SegmentedAudioCubit>().state,
+                                );
+                              }
+                              AudioPlayerManager.audioPlayer.seek(
+                                Duration.zero,
+                                index: value.toInt(),
+                              );
+                            },
+                          ),
                         ),
                       ),
                       Text(state.end!),
@@ -222,11 +230,39 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               children: [
                 IconButton(
                   onPressed:
-                      currentPlayingIndex > 0
+                      int.parse(state?.current?.split(':').last ?? '0') > 1
                           ? () {
-                            AudioPlayerManager.audioPlayer.seekToPrevious();
+                            if (state?.ayahList?.length == 1) {
+                              int? currentSurahNumber = int.tryParse(
+                                state?.current?.split(':').first ?? '',
+                              );
+                              if (currentSurahNumber == null) return;
+                              List tempAyahList = getListOfAyahKey(
+                                startAyahKey: '$currentSurahNumber:1',
+                                endAyahKey: getEndAyahKeyFromSurahNumber(
+                                  currentSurahNumber,
+                                ),
+                              );
+                              tempAyahList.removeWhere(
+                                (element) => element.runtimeType == int,
+                              );
+                              int index = tempAyahList.indexOf(
+                                state?.current ?? '',
+                              );
+                              if (index != -1) {
+                                AudioPlayerManager.playSingleAyah(
+                                  context: context,
+                                  ayahKey: tempAyahList[index - 1],
+                                  reciterInfoModel:
+                                      context.read<SegmentedAudioCubit>().state,
+                                );
+                              }
+                            } else {
+                              AudioPlayerManager.audioPlayer.seekToPrevious();
+                            }
                           }
                           : null,
+                  tooltip: 'Previous',
                   icon: const Icon(Icons.skip_previous_rounded),
                 ),
                 IconButton(
@@ -238,16 +274,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       Duration(milliseconds: inMilSec),
                     );
                   },
+                  tooltip: 'Rewind',
                   icon: const Icon(Icons.replay_5_rounded),
                 ),
                 BlocBuilder<PlayerStateCubit, PlayerState>(
                   builder: (context, state) {
                     return IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         AudioPlayerManager.audioPlayer.playing
                             ? AudioPlayerManager.audioPlayer.pause()
                             : AudioPlayerManager.audioPlayer.play();
                       },
+                      tooltip: state.isPlaying ? 'Pause' : 'Play',
                       icon: Icon(
                         state.isPlaying
                             ? Icons.pause_rounded
@@ -275,6 +313,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       Duration(milliseconds: inMilSec),
                     );
                   },
+                  tooltip: 'Fast Forward',
+
                   icon: const Icon(Icons.forward_5_rounded),
                 ),
 
@@ -286,11 +326,73 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                   ) -
                                   1]
                           ? () {
-                            AudioPlayerManager.audioPlayer.seekToNext();
+                            if (state?.ayahList?.length == 1) {
+                              int? currentSurahNumber = int.tryParse(
+                                state?.current?.split(':').first ?? '',
+                              );
+                              if (currentSurahNumber == null) return;
+                              List tempAyahList = getListOfAyahKey(
+                                startAyahKey: '$currentSurahNumber:1',
+                                endAyahKey: getEndAyahKeyFromSurahNumber(
+                                  currentSurahNumber,
+                                ),
+                              );
+                              tempAyahList.removeWhere(
+                                (element) => element.runtimeType == int,
+                              );
+                              int index = tempAyahList.indexOf(
+                                state?.current ?? '',
+                              );
+                              if (index != -1) {
+                                AudioPlayerManager.playSingleAyah(
+                                  context: context,
+                                  ayahKey: tempAyahList[index + 1],
+                                  reciterInfoModel:
+                                      context.read<SegmentedAudioCubit>().state,
+                                );
+                              }
+                            } else {
+                              AudioPlayerManager.audioPlayer.seekToNext();
+                            }
                           }
                           : null,
+                  tooltip: 'Play Next Ayah',
                   icon: const Icon(Icons.skip_next_rounded),
                 ),
+
+                if (ayahList.length != 1)
+                  IconButton(
+                    onPressed: () {
+                      if (AudioPlayerManager.audioPlayer.loopMode ==
+                          just_audio.LoopMode.one) {
+                        AudioPlayerManager.audioPlayer.setLoopMode(
+                          just_audio.LoopMode.all,
+                        );
+                      } else if (AudioPlayerManager.audioPlayer.loopMode ==
+                          just_audio.LoopMode.all) {
+                        AudioPlayerManager.audioPlayer.setLoopMode(
+                          just_audio.LoopMode.off,
+                        );
+                      } else {
+                        AudioPlayerManager.audioPlayer.setLoopMode(
+                          just_audio.LoopMode.one,
+                        );
+                      }
+                    },
+                    tooltip: 'Repeat',
+                    icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
+                      just_audio.LoopMode.one => const Icon(
+                        Icons.repeat_one_rounded,
+                      ),
+                      just_audio.LoopMode.all => const Icon(
+                        Icons.repeat_rounded,
+                      ),
+                      just_audio.LoopMode.off => Icon(
+                        Icons.repeat_rounded,
+                        color: Colors.grey.withValues(alpha: 0.6),
+                      ),
+                    },
+                  ),
 
                 if (ayahList.length == 1)
                   IconButton(
@@ -314,9 +416,11 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         reciterInfoModel:
                             context.read<SegmentedAudioCubit>().state,
                         initialIndex: currentAyahNumber - 1,
+                        instantPlay: AudioPlayerManager.audioPlayer.playing,
                       );
                     },
-                    icon: const Icon(Icons.add),
+                    tooltip: 'Play As Playlist',
+                    icon: const Icon(Icons.playlist_play_rounded),
                   ),
               ],
             );

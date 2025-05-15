@@ -1,5 +1,9 @@
 import 'dart:developer';
 
+import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
+import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
+import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
 import 'package:al_quran_v3/src/functions/basic_functions.dart';
 import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
@@ -166,25 +170,57 @@ Widget getAyahByAyahCard({
             SizedBox(
               height: 30,
               width: 30,
-              child: IconButton(
-                style: IconButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primaryColor),
-                  ),
-                ),
-                onPressed: () {
-                  getSelectedReciterModel();
+              child: BlocBuilder<PlayerStateCubit, PlayerState>(
+                builder: (context, playerState) {
+                  return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                    builder: (context, ayahKeyManagement) {
+                      bool isPlaying = playerState.isPlaying;
+                      bool isCurrent = ayahKeyManagement.current == ayahKey;
 
-                  AudioPlayerManager.playSingleAyah(
-                    context: context,
-                    ayahKey: ayahKey,
-                    reciterInfoModel: context.read<SegmentedAudioCubit>().state,
+                      return IconButton(
+                        style: IconButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          foregroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(color: AppColors.primaryColor),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (isCurrent && isPlaying) {
+                            AudioPlayerManager.audioPlayer.pause();
+                          } else if (isCurrent) {
+                            AudioPlayerManager.audioPlayer.play();
+                          } else {
+                            bool isPlayList =
+                                context.read<AudioUiCubit>().state.isPlayList;
+                            if (isPlayList) {
+                              AudioPlayerManager.audioPlayer.seek(
+                                Duration.zero,
+                                index: ayahKeyManagement.ayahList?.indexOf(
+                                  ayahKey,
+                                ),
+                              );
+                            } else {
+                              AudioPlayerManager.playSingleAyah(
+                                context: context,
+                                ayahKey: ayahKey,
+                                reciterInfoModel:
+                                    context.read<SegmentedAudioCubit>().state,
+                              );
+                            }
+                          }
+                        },
+                        icon: Icon(
+                          isPlaying && isCurrent
+                              ? Icons.pause_rounded
+                              : Icons.play_arrow_rounded,
+                          size: 18,
+                        ),
+                      );
+                    },
                   );
                 },
-                icon: const Icon(Icons.play_arrow_rounded, size: 18),
               ),
             ),
           ],
