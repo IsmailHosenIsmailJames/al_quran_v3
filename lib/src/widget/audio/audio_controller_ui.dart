@@ -229,6 +229,17 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           : null,
                   icon: const Icon(Icons.skip_previous_rounded),
                 ),
+                IconButton(
+                  onPressed: () {
+                    Duration duration = AudioPlayerManager.audioPlayer.position;
+                    int inMilSec = duration.inMilliseconds - 5000;
+                    if (inMilSec < 0) inMilSec = 0;
+                    AudioPlayerManager.audioPlayer.seek(
+                      Duration(milliseconds: inMilSec),
+                    );
+                  },
+                  icon: const Icon(Icons.replay_5_rounded),
+                ),
                 BlocBuilder<PlayerStateCubit, PlayerState>(
                   builder: (context, state) {
                     return IconButton(
@@ -247,6 +258,27 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 ),
 
                 IconButton(
+                  onPressed: () {
+                    Duration? position =
+                        AudioPlayerManager.audioPlayer.position;
+
+                    Duration? maxDuration =
+                        AudioPlayerManager.audioPlayer.duration;
+
+                    AudioPlayerManager.audioPlayer.duration;
+                    int inMilSec = position.inMilliseconds + 5000;
+                    if ((maxDuration?.inMilliseconds ?? double.infinity) <
+                        inMilSec) {
+                      inMilSec = maxDuration?.inMilliseconds ?? 0;
+                    }
+                    AudioPlayerManager.audioPlayer.seek(
+                      Duration(milliseconds: inMilSec),
+                    );
+                  },
+                  icon: const Icon(Icons.forward_5_rounded),
+                ),
+
+                IconButton(
                   onPressed:
                       int.parse(state?.current?.split(':').last ?? '0') <
                               quranAyahCount[int.parse(
@@ -259,6 +291,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           : null,
                   icon: const Icon(Icons.skip_next_rounded),
                 ),
+
                 if (ayahList.length == 1)
                   IconButton(
                     onPressed: () {
