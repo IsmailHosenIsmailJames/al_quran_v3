@@ -40,55 +40,70 @@ class UthmaniView extends StatelessWidget {
       );
     }
 
-    return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+    String ayahKey = '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}';
+
+    Map? audioTimeStamp = Hive.box(
+      'segmented_quran_recitation',
+    ).get(ayahKey, defaultValue: null);
+    List<List>? segments;
+    if (audioTimeStamp != null) {
+      segments = List<List>.from(audioTimeStamp['segments']);
+    }
+
+    int highlightingWordIndex = -1;
+
+    return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
-        log(
-          (previous.current != current.current &&
-                  '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}' ==
-                      current.current)
-              .toString(),
-        );
-        return (previous.current != current.current);
-      },
-      builder: (context, ayahKeyCubitState) {
-        Map? audioTimeStamp;
-        if (ayahKeyCubitState.current != null) {
-          audioTimeStamp = Hive.box(
-            'segmented_quran_recitation',
-          ).get(ayahKeyCubitState.current, defaultValue: null);
-          // segments ->  [[1, 0, 560], [2, 760, 1200], [3, 2000, 2360], [4, 2680, 6120]]
+        String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
+        if (currentAyahKey == ayahKey) {
+          if (segments != null) {
+            for (List word in segments) {
+              word = word.map((e) => e.toInt()).toList();
+              if (Duration(milliseconds: word[1]) <
+                      (current.currentDuration ?? Duration.zero) &&
+                  Duration(milliseconds: word[2]) >
+                      (current.currentDuration ?? Duration.zero)) {
+                if (highlightingWordIndex != word[0]) {
+                  highlightingWordIndex = word[0];
+                  return true;
+                }
+                return false;
+              }
+            }
+          }
         }
-        log(audioTimeStamp.toString());
-        return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
-          builder: (context, positionState) {
-            return Text.rich(
-              style: quranStyle,
-              textDirection: TextDirection.rtl,
-              TextSpan(
-                children: List<InlineSpan>.generate(words.length, (index) {
-                  return TextSpan(
-                    style: TextStyle(
-                      backgroundColor: Colors.green.withValues(alpha: 0.15),
-                    ),
-                    text: words[index] + ' ',
-                    recognizer:
-                        scriptInfo.skipWordTap == true
-                            ? null
-                            : (TapGestureRecognizer()
-                              ..onTap = () {
-                                showPopupWordFunction(
-                                  context: context,
-                                  wordKey:
-                                      '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
-                                  word: words[index],
-                                  scriptCategory: QuranScriptType.uthmani,
-                                );
-                              }),
-                  );
-                }),
-              ),
-            );
-          },
+        return false;
+      },
+      builder: (context, positionState) {
+        return Text.rich(
+          style: quranStyle,
+          textDirection: TextDirection.rtl,
+          TextSpan(
+            children: List<InlineSpan>.generate(words.length, (index) {
+              return TextSpan(
+                style:
+                    highlightingWordIndex == (index + 1)
+                        ? TextStyle(
+                          backgroundColor: Colors.green.withValues(alpha: 0.15),
+                        )
+                        : null,
+                text: words[index] + ' ',
+                recognizer:
+                    scriptInfo.skipWordTap == true
+                        ? null
+                        : (TapGestureRecognizer()
+                          ..onTap = () {
+                            showPopupWordFunction(
+                              context: context,
+                              wordKey:
+                                  '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
+                              word: words[index],
+                              scriptCategory: QuranScriptType.uthmani,
+                            );
+                          }),
+              );
+            }),
+          ),
         );
       },
     );
