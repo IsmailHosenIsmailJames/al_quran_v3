@@ -3,21 +3,27 @@ import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
 import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
+import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class UthmaniView extends StatelessWidget {
+class NonTajweedScriptView extends StatelessWidget {
+  final bool isUthmani;
   final ScriptInfo scriptInfo;
-  const UthmaniView({super.key, required this.scriptInfo});
+  const NonTajweedScriptView({
+    super.key,
+    required this.scriptInfo,
+    required this.isUthmani,
+  });
 
   @override
   Widget build(BuildContext context) {
     List words =
-        uthmaniScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
-            .toString()];
+        (isUthmani ? uthmaniScript : indopakScript)[scriptInfo.surahNumber
+            .toString()][scriptInfo.ayahNumber.toString()];
     if (scriptInfo.limitWord != null) {
       if (!(scriptInfo.limitWord! >= words.length)) {
         words = words.sublist(0, scriptInfo.limitWord);
@@ -86,7 +92,9 @@ class UthmaniView extends StatelessWidget {
                 style:
                     highlightingWordIndex == (index + 1)
                         ? TextStyle(
-                          backgroundColor: Colors.green.withValues(alpha: 0.15),
+                          backgroundColor: AppColors.primaryColor.withValues(
+                            alpha: 0.15,
+                          ),
                         )
                         : null,
                 text: words[index] + ' ',

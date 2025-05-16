@@ -22,13 +22,15 @@ class QuranPagesRenderer extends StatelessWidget {
         ayahsKey: ayahsKey,
         baseTextStyle: baseStyle,
       ),
-      QuranScriptType.uthmani => UthmaniPageRenderer(
+      QuranScriptType.uthmani => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
         baseTextStyle: baseStyle,
+        isUthmani: true,
       ),
-      QuranScriptType.indopak => UthmaniPageRenderer(
+      QuranScriptType.indopak => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
         baseTextStyle: baseStyle,
+        isUthmani: false,
       ),
     };
   }
