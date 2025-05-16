@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
 import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:flutter/gestures.dart';
@@ -70,6 +67,11 @@ class UthmaniView extends StatelessWidget {
                 return false;
               }
             }
+          }
+        } else {
+          if (highlightingWordIndex != -1) {
+            highlightingWordIndex = -1;
+            return true;
           }
         }
         return false;
