@@ -181,7 +181,7 @@ class AudioPlayerManager {
     await audioPlayer.setAudioSources(
       listOfAudioSource,
       initialIndex: initialIndex,
-      // shuffleOrder: DefaultShuffleOrder(),
+      shuffleOrder: DefaultShuffleOrder(),
     );
 
     if (instantPlay) await audioPlayer.play();

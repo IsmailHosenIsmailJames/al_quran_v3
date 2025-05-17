@@ -53,7 +53,7 @@ class NonTajweedScriptView extends StatelessWidget {
       segments = List<List>.from(audioTimeStamp['segments']);
     }
 
-    int highlightingWordIndex = -1;
+    String? highlightingWordIndex;
 
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
@@ -66,8 +66,8 @@ class NonTajweedScriptView extends StatelessWidget {
                       (current.currentDuration ?? Duration.zero) &&
                   Duration(milliseconds: word[2]) >
                       (current.currentDuration ?? Duration.zero)) {
-                if (highlightingWordIndex != word[0]) {
-                  highlightingWordIndex = word[0];
+                if (highlightingWordIndex != '$currentAyahKey:${word[0]}') {
+                  highlightingWordIndex = '$currentAyahKey:${word[0]}';
                   return true;
                 }
                 return false;
@@ -75,8 +75,8 @@ class NonTajweedScriptView extends StatelessWidget {
             }
           }
         } else {
-          if (highlightingWordIndex != -1) {
-            highlightingWordIndex = -1;
+          if (highlightingWordIndex != null) {
+            highlightingWordIndex = null;
             return true;
           }
         }
@@ -90,7 +90,8 @@ class NonTajweedScriptView extends StatelessWidget {
             children: List<InlineSpan>.generate(words.length, (index) {
               return TextSpan(
                 style:
-                    highlightingWordIndex == (index + 1)
+                    highlightingWordIndex ==
+                            '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}'
                         ? TextStyle(
                           backgroundColor: AppColors.primaryColor.withValues(
                             alpha: 0.15,

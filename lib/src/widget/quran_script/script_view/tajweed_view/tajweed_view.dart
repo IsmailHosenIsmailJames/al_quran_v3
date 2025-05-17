@@ -39,8 +39,7 @@ class TajweedView extends StatelessWidget {
       segments = List<List>.from(audioTimeStamp['segments']);
     }
 
-    int highlightingWordIndex = -1;
-
+    String? highlightingWordIndex;
     if (scriptInfo.wordIndex != null) {
       return Text.rich(
         style: quranStyle,
@@ -67,8 +66,8 @@ class TajweedView extends StatelessWidget {
                       (current.currentDuration ?? Duration.zero) &&
                   Duration(milliseconds: word[2]) >
                       (current.currentDuration ?? Duration.zero)) {
-                if (highlightingWordIndex != word[0]) {
-                  highlightingWordIndex = word[0];
+                if (highlightingWordIndex != '$currentAyahKey:${word[0]}') {
+                  highlightingWordIndex = '$currentAyahKey:${word[0]}';
                   return true;
                 }
                 return false;
@@ -76,8 +75,8 @@ class TajweedView extends StatelessWidget {
             }
           }
         } else {
-          if (highlightingWordIndex != -1) {
-            highlightingWordIndex = -1;
+          if (highlightingWordIndex != null) {
+            highlightingWordIndex = null;
             return true;
           }
         }
@@ -96,7 +95,8 @@ class TajweedView extends StatelessWidget {
                 wordHtml: words[index] + ' ',
                 baseStyle: quranStyle.copyWith(
                   backgroundColor:
-                      (index + 1) == highlightingWordIndex
+                      highlightingWordIndex ==
+                              '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}'
                           ? AppColors.primaryColor.withValues(alpha: 0.2)
                           : null,
                 ),
