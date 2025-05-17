@@ -18,6 +18,6 @@ List<String> segmentedQuranRecitation = [
   '$baseOfAudio-yasser-al-dosari-murattal-hafs-961.json.txt',
 ];
 
-int defaultSegmentedQuranRecitationIndex = 10;
+int defaultSegmentedQuranRecitationIndex = 1;
 String defaultSegmentedQuranRecitation =
     segmentedQuranRecitation[defaultSegmentedQuranRecitationIndex];

@@ -192,9 +192,12 @@ Widget getAyahByAyahCard({
                           } else if (isCurrent) {
                             AudioPlayerManager.audioPlayer.play();
                           } else {
+                            log('Current Ayah: $ayahKey');
                             bool isPlayList =
                                 context.read<AudioUiCubit>().state.isPlayList;
-                            if (isPlayList) {
+                            if (isPlayList &&
+                                ayahKeyManagement.current?.split(':').first ==
+                                    ayahKey.split(':').first) {
                               AudioPlayerManager.audioPlayer.seek(
                                 Duration.zero,
                                 index: ayahKeyManagement.ayahList?.indexOf(
@@ -203,10 +206,10 @@ Widget getAyahByAyahCard({
                               );
                             } else {
                               AudioPlayerManager.playSingleAyah(
-                                context: context,
                                 ayahKey: ayahKey,
                                 reciterInfoModel:
                                     context.read<SegmentedAudioCubit>().state,
+                                instantPlay: true,
                               );
                             }
                           }
