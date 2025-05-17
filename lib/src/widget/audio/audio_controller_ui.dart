@@ -197,7 +197,6 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               String ayahKey = ayahList[value.toInt()];
                               if ((state.ayahList?.length ?? 0) == 1) {
                                 AudioPlayerManager.playSingleAyah(
-                                  context: context,
                                   ayahKey: ayahKey,
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
@@ -256,7 +255,6 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               );
                               if (index != -1) {
                                 AudioPlayerManager.playSingleAyah(
-                                  context: context,
                                   ayahKey: tempAyahList[index - 1],
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
@@ -350,7 +348,6 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               );
                               if (index != -1) {
                                 AudioPlayerManager.playSingleAyah(
-                                  context: context,
                                   ayahKey: tempAyahList[index + 1],
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
@@ -415,7 +412,6 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       String startAyahKey = '$surahNumber:1';
 
                       AudioPlayerManager.playMultipleAyahAsPlaylist(
-                        context: context,
                         startAyahKey: startAyahKey,
                         endAyahKey: endAyahKey,
                         reciterInfoModel:

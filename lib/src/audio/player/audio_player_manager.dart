@@ -14,7 +14,8 @@ import 'package:just_audio_background/just_audio_background.dart';
 
 class AudioPlayerManager {
   static AudioPlayer audioPlayer = AudioPlayer();
-  static startListeningAudioPlayerState({required BuildContext context}) {
+  static startListeningAudioPlayerState() {
+    final context = navigatorKey.currentContext!;
     final playerPositionCubit = context.read<PlayerPositionCubit>();
 
     audioPlayer.positionStream.listen((event) {
@@ -80,12 +81,13 @@ class AudioPlayerManager {
   }
 
   static Future<void> playSingleAyah({
-    required BuildContext context,
     required String ayahKey,
     required ReciterInfoModel reciterInfoModel,
     bool instantPlay = true,
   }) async {
-    startListeningAudioPlayerState(context: context);
+    startListeningAudioPlayerState();
+
+    final context = navigatorKey.currentContext!;
 
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
@@ -122,14 +124,15 @@ class AudioPlayerManager {
   }
 
   static Future<void> playMultipleAyahAsPlaylist({
-    required BuildContext context,
     required String startAyahKey,
     required String endAyahKey,
     int initialIndex = 0,
     bool instantPlay = true,
     required ReciterInfoModel reciterInfoModel,
   }) async {
-    startListeningAudioPlayerState(context: context);
+    startListeningAudioPlayerState();
+
+    final context = navigatorKey.currentContext!;
 
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();

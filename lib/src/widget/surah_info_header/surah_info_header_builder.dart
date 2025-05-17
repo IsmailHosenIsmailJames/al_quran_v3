@@ -156,7 +156,6 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           String endAyahKey = headerInfoModel.endAyahKey;
 
                           AudioPlayerManager.playMultipleAyahAsPlaylist(
-                            context: context,
                             startAyahKey: startAyahKey,
                             endAyahKey: endAyahKey,
                             reciterInfoModel:

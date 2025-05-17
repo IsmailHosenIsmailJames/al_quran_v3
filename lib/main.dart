@@ -80,6 +80,8 @@ Future<void> main() async {
   runApp(MyApp(preferences: preferences));
 }
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   final SharedPreferences preferences;
   const MyApp({super.key, required this.preferences});
@@ -110,6 +112,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, state) {
           return MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             title: 'Al Quran',
             theme: ThemeData(
