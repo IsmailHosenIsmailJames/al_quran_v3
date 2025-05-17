@@ -186,7 +186,7 @@ Widget getAyahByAyahCard({
                             side: BorderSide(color: AppColors.primaryColor),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (isCurrent && isPlaying) {
                             AudioPlayerManager.audioPlayer.pause();
                           } else if (isCurrent) {
@@ -198,12 +198,13 @@ Widget getAyahByAyahCard({
                             if (isPlayList &&
                                 ayahKeyManagement.current?.split(':').first ==
                                     ayahKey.split(':').first) {
-                              AudioPlayerManager.audioPlayer.seek(
+                              await AudioPlayerManager.audioPlayer.seek(
                                 Duration.zero,
                                 index: ayahKeyManagement.ayahList?.indexOf(
                                   ayahKey,
                                 ),
                               );
+                              AudioPlayerManager.audioPlayer.play();
                             } else {
                               AudioPlayerManager.playSingleAyah(
                                 ayahKey: ayahKey,
