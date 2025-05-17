@@ -24,27 +24,27 @@ class AudioPlayerManager {
       }
     });
 
-    // audioPlayer.errorStream.listen((event) {
-    //   showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return AlertDialog(
-    //         title: const Text('Audio Player Error'),
-    //         content: Text(event.message ?? 'Something went wrong'),
-    //         actions: [
-    //           TextButton(
-    //             onPressed: () {
-    //               Navigator.pop(context);
-    //             },
-    //             child: const Text('Ok'),
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // });
+    audioPlayer.errorStream.listen((event) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Audio Player Error'),
+            content: Text(event.message ?? 'Something went wrong'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
+    });
 
-    audioPlayer.playerStateStream.listen((event) {
+    audioPlayer.playerEventStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
     });
     audioPlayer.processingStateStream.listen((event) {
@@ -175,8 +175,8 @@ class AudioPlayerManager {
       ),
     );
 
-    await audioPlayer.setAudioSource(
-      ConcatenatingAudioSource(children: listOfAudioSource),
+    await audioPlayer.setAudioSources(
+      listOfAudioSource,
       initialIndex: initialIndex,
       // shuffleOrder: DefaultShuffleOrder(),
     );
