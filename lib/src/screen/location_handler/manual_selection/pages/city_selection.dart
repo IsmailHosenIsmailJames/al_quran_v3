@@ -1,19 +1,20 @@
-import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-class CountriesSelection extends StatefulWidget {
+class CitySelection extends StatefulWidget {
   final PageController pageController;
-  const CountriesSelection({super.key, required this.pageController});
+  const CitySelection({super.key, required this.pageController});
 
   @override
-  State<CountriesSelection> createState() => _CountriesSelectionState();
+  State<CitySelection> createState() => _CitySelectionState();
 }
 
-class _CountriesSelectionState extends State<CountriesSelection> {
+class _CitySelectionState extends State<CitySelection> {
   TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,22 +26,22 @@ class _CountriesSelectionState extends State<CountriesSelection> {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    widget.pageController.previousPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
                   },
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text(
-                  "Select Your Country",
-                  style: TextStyle(fontSize: 20),
-                ),
+                const Text("Select Your City", style: TextStyle(fontSize: 20)),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: "Search for a country",
+              hintText: "Search for a city",
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -58,32 +59,35 @@ class _CountriesSelectionState extends State<CountriesSelection> {
               ManualLocationSelectionState
             >(
               builder: (context, state) {
-                if (state.locationData == null) {
+                if (state.cityList == null) {
                   return const Text("Something went wrong");
                 }
-                List listOfCountry = state.locationData!.keys.toList();
+
                 return ListView.builder(
                   padding: const EdgeInsets.all(20),
-                  itemCount: listOfCountry.length,
+                  itemCount: state.cityList!.length,
                   itemBuilder: (context, index) {
-                    String countryName = listOfCountry[index];
+                    String cityName = state.cityList![index]["city"];
 
-                    if (countryName.toLowerCase().contains(
+                    if (cityName.toLowerCase().contains(
                       controller.text.toLowerCase().trim(),
                     )) {
                       return ListTile(
-                        title: Text(countryName),
+                        title: Text(cityName),
                         onTap: () {
                           context
-                              .read<ManualLocationSelectionCubit>()
-                              .changeData(
-                                adminMap: state.locationData![countryName],
-                                country: countryName,
+                              .read<LocationDataQiblaDataCubit>()
+                              .saveLocationData(
+                                LatLon(
+                                  latitude: double.parse(
+                                    state.cityList![index]["lat"],
+                                  ),
+                                  longitude: double.parse(
+                                    state.cityList![index]["lng"],
+                                  ),
+                                ),
                               );
-                          widget.pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
+                          Navigator.pop(context);
                         },
                       );
                     } else {

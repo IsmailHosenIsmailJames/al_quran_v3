@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:hive/hive.dart";
 
