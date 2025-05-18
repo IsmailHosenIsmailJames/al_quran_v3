@@ -225,7 +225,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
           builder: (context, state) {
             List ayahList = state?.ayahList ?? [];
             ayahList.removeWhere((element) => element.runtimeType == int);
-            int currentPlayingIndex = ayahList.indexOf(state?.current!);
+            int currentPlayingIndex = ayahList.indexOf(state?.current);
             if (currentPlayingIndex == -1) currentPlayingIndex = 0;
 
             return Row(
@@ -323,11 +323,14 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
 
                 IconButton(
                   onPressed:
-                      int.parse(state?.current?.split(':').last ?? '0') <
-                              quranAyahCount[int.parse(
-                                    ayahList.first.split(':').first,
-                                  ) -
-                                  1]
+                      (ayahList.isNotEmpty &&
+                              int.parse(
+                                    state?.current?.split(':').last ?? '0',
+                                  ) <
+                                  quranAyahCount[int.parse(
+                                        ayahList.first.split(':').first,
+                                      ) -
+                                      1])
                           ? () {
                             if (state?.ayahList?.length == 1) {
                               int? currentSurahNumber = int.tryParse(
