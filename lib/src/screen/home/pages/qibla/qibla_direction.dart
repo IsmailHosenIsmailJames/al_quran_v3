@@ -1,19 +1,19 @@
-import 'dart:async';
+import "dart:async";
 
-import 'dart:math' as math;
-import 'package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/location_aquire.dart';
-import 'package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_view.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_compass/flutter_compass.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:vector_math/vector_math.dart' as vector;
-import 'package:vibration/vibration.dart';
+import "dart:math" as math;
+import "package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/location_aquire.dart";
+import "package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_view.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_compass/flutter_compass.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:gap/gap.dart";
+import "package:vector_math/vector_math.dart" as vector;
+import "package:vibration/vibration.dart";
 
 class QiblaDirection extends StatefulWidget {
   const QiblaDirection({super.key});
@@ -80,13 +80,13 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                     stream: FlutterCompass.events,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text('Unable to get compass data');
+                        return const Text("Unable to get compass data");
                       }
                       if (snapshot.hasData) {
                         double? direction = snapshot.data?.heading;
                         if (direction == null) {
                           return const Center(
-                            child: Text('Device does not have sensors !'),
+                            child: Text("Device does not have sensors !"),
                           );
                         }
                         if (direction < 0) {
@@ -144,7 +144,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
             height: 50,
             width: 50,
             // ignore: deprecated_member_use
-            child: SvgPicture.asset('assets/img/kaaba.svg', color: kaabaColor),
+            child: SvgPicture.asset("assets/img/kaaba.svg", color: kaabaColor),
           ),
         ),
         const Gap(50),

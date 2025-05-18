@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class ReciterInfoModel {
   String link;
@@ -29,17 +29,17 @@ class ReciterInfoModel {
 
   factory ReciterInfoModel.fromMap(Map<String, dynamic> json) {
     return ReciterInfoModel(
-      link: json['link'],
-      name: json['name'],
-      supportWordSegmentation: json['supportWordSegmentation'],
+      link: json["link"],
+      name: json["name"],
+      supportWordSegmentation: json["supportWordSegmentation"],
     );
   }
 
   set expanded(bool expanded) {}
 
   Map<String, dynamic> toMap() => {
-    'link': link,
-    'name': name,
-    'supportWordSegmentation': supportWordSegmentation,
+    "link": link,
+    "name": name,
+    "supportWordSegmentation": supportWordSegmentation,
   };
 }

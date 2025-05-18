@@ -1,12 +1,12 @@
-import 'dart:developer';
-import 'dart:ui';
+import "dart:developer";
+import "dart:ui";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
-const String _themePreferenceKey = 'app_theme_mode';
+const String _themePreferenceKey = "app_theme_mode";
 
 class ThemeCubit extends Cubit<ThemeMode> {
   final SharedPreferences _prefs;
@@ -27,7 +27,7 @@ class ThemeCubit extends Cubit<ThemeMode> {
       } catch (e) {
         log(
           "Error loading theme: Invalid value '$savedThemeName'. Using system default.",
-          name: 'ThemeCubit',
+          name: "ThemeCubit",
         );
         initialMode = ThemeMode.system;
       }
@@ -44,9 +44,9 @@ class ThemeCubit extends Cubit<ThemeMode> {
 
       try {
         await _prefs.setString(_themePreferenceKey, themeMode.toString());
-        log('Theme saved: ${themeMode.toString()}', name: 'ThemeCubit');
+        log("Theme saved: ${themeMode.toString()}", name: "ThemeCubit");
       } catch (e) {
-        log('Error saving theme: $e', name: 'ThemeCubit');
+        log("Error saving theme: $e", name: "ThemeCubit");
       }
     }
   }

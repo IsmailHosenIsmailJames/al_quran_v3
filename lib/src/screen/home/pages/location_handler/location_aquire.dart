@@ -1,14 +1,14 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/address_selection.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gap/gap.dart';
-import 'package:geolocator/geolocator.dart';
+import "package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/address_selection.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
+import "package:gap/gap.dart";
+import "package:geolocator/geolocator.dart";
 
 class LocationAcquire extends StatefulWidget {
   const LocationAcquire({super.key});
@@ -28,12 +28,12 @@ class _LocationAcquireState extends State<LocationAcquire> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Get Prayer Times and Qibla',
+            "Get Prayer Times and Qibla",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const Gap(10),
           Text(
-            'Calculate Prayer Times and Qibla for Any Given Location.',
+            "Calculate Prayer Times and Qibla for Any Given Location.",
             style: TextStyle(
               color: Colors.grey.shade500,
               fontWeight: FontWeight.w500,
@@ -53,7 +53,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                       await Geolocator.isLocationServiceEnabled();
                   if (!isServiceAvailable) {
                     Fluttertoast.showToast(
-                      msg: 'Please enable location service',
+                      msg: "Please enable location service",
                     );
                     await Geolocator.openLocationSettings();
                   }
@@ -81,7 +81,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                   isGPSLocationLoading = false;
                 });
               },
-              label: const Text('Get form GPS'),
+              label: const Text("Get form GPS"),
               icon:
                   isGPSLocationLoading
                       ? const Center(
@@ -94,7 +94,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
             ),
           ),
           const Gap(5),
-          const Align(alignment: Alignment.center, child: Text('Or')),
+          const Align(alignment: Alignment.center, child: Text("Or")),
           const Gap(5),
           SizedBox(
             width: double.infinity,
@@ -111,13 +111,13 @@ class _LocationAcquireState extends State<LocationAcquire> {
                   ),
                 );
               },
-              label: const Text('Select you City'),
+              label: const Text("Select you City"),
               icon: const Icon(Icons.location_city_rounded),
             ),
           ),
           const Gap(20),
           Text(
-            'Note: If you don\'t want to use GPS or not feel secure, you can select your city.',
+            "Note: If you don't want to use GPS or not feel secure, you can select your city.",
             style: TextStyle(
               color: Colors.grey.shade500,
               fontWeight: FontWeight.w500,

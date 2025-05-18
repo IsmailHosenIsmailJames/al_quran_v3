@@ -1,8 +1,8 @@
-import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
+import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
 
 String capitalizeFirstLatter(String input) {
   if (input.isEmpty) {
-    return '';
+    return "";
   }
   return input[0].toUpperCase() + input.substring(1);
 }
@@ -13,7 +13,7 @@ String? convertAyahNumberToKey(int ayahNumber) {
     sum += quranAyahCount[i];
     if (ayahNumber <= sum) {
       sum = sum - quranAyahCount[i];
-      return '${i + 1}:${ayahNumber - sum}';
+      return "${i + 1}:${ayahNumber - sum}";
     }
   }
   return null;
@@ -21,7 +21,7 @@ String? convertAyahNumberToKey(int ayahNumber) {
 
 int? convertKeyToAyahNumber(String ayahKey) {
   // ayah Key example 1:1, 1:7, 2:100
-  List<String> parts = ayahKey.split(':');
+  List<String> parts = ayahKey.split(":");
   if (parts.length != 2) {
     return null;
   }
@@ -40,7 +40,7 @@ int? convertKeyToAyahNumber(String ayahKey) {
   return sum + ayahNumber;
 }
 
-String safeSubString(String str, int len, {String replacer = ''}) {
+String safeSubString(String str, int len, {String replacer = ""}) {
   int strLen = str.length;
   if (strLen > len) {
     return str.substring(0, len) + replacer;

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import "package:flutter/material.dart";
+import "dart:math" as math;
 
 Color _getColorForPercentage(double percentage) {
   final p = percentage.clamp(0.0, 100.0);
@@ -48,7 +48,7 @@ Widget buildScoreIndicator({
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
-              '${percentage.toStringAsFixed(0)}%',
+              "${percentage.toStringAsFixed(0)}%",
               style: textStyle,
               textAlign: TextAlign.center,
             ),

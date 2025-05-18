@@ -1,8 +1,8 @@
-import 'dart:math';
+import "dart:math";
 
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:flutter/material.dart';
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:flutter/material.dart";
 
 SizedBox getIndexNumberWidget(
   BuildContext context,

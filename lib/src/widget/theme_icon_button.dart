@@ -1,6 +1,6 @@
-import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
 Widget themeIconButton(BuildContext context) =>
     BlocBuilder<ThemeCubit, ThemeMode>(
@@ -10,7 +10,7 @@ Widget themeIconButton(BuildContext context) =>
             backgroundColor: Colors.grey.withValues(alpha: 0.1),
           ),
           color: Colors.green.shade600,
-          tooltip: 'Change Theme',
+          tooltip: "Change Theme",
           onPressed: () {
             final themeController = context.read<ThemeCubit>();
             if (state == ThemeMode.dark) {

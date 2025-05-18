@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class SegmentsInfoModel {
   final int? surahNumber;
@@ -36,24 +36,24 @@ class SegmentsInfoModel {
 
   factory SegmentsInfoModel.fromMap(Map<String, dynamic> json) =>
       SegmentsInfoModel(
-        surahNumber: json['surah_number'],
-        ayahNumber: json['ayah_number'],
-        audioUrl: json['audio_url'],
-        duration: json['duration'],
+        surahNumber: json["surah_number"],
+        ayahNumber: json["ayah_number"],
+        audioUrl: json["audio_url"],
+        duration: json["duration"],
         segments:
-            json['segments'] == null
+            json["segments"] == null
                 ? []
                 : List<List<int>>.from(
-                  json['segments']!.map((x) => List<int>.from(x.map((x) => x))),
+                  json["segments"]!.map((x) => List<int>.from(x.map((x) => x))),
                 ),
       );
 
   Map<String, dynamic> toMap() => {
-    'surah_number': surahNumber,
-    'ayah_number': ayahNumber,
-    'audio_url': audioUrl,
-    'duration': duration,
-    'segments':
+    "surah_number": surahNumber,
+    "ayah_number": ayahNumber,
+    "audio_url": audioUrl,
+    "duration": duration,
+    "segments":
         segments == null
             ? []
             : List<dynamic>.from(

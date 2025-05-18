@@ -1,15 +1,15 @@
-import 'package:al_quran_v3/src/functions/basic_functions.dart';
-import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:flutter/material.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 class PageListView extends StatelessWidget {
   final List<PageInfoModel> pageInfoList;
@@ -21,7 +21,7 @@ class PageListView extends StatelessWidget {
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
     QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
-      (element) => Hive.box('user').get('selected_script') == element.name,
+      (element) => Hive.box("user").get("selected_script") == element.name,
     );
     ScrollController scrollController = ScrollController();
 
@@ -83,7 +83,7 @@ class PageListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Page',
+                              "Page",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -102,7 +102,7 @@ class PageListView extends StatelessWidget {
                         ),
                         const Gap(2),
                         Text(
-                          '${listOfSurahNameEnglish[pageInfo.surahNumber - 1]} $ayahKey',
+                          "${listOfSurahNameEnglish[pageInfo.surahNumber - 1]} $ayahKey",
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light
@@ -122,8 +122,8 @@ class PageListView extends StatelessWidget {
                           fit: BoxFit.scaleDown,
                           child: ScriptProcessor(
                             scriptInfo: ScriptInfo(
-                              surahNumber: int.parse(ayahKey.split(':')[0]),
-                              ayahNumber: int.parse(ayahKey.split(':')[1]),
+                              surahNumber: int.parse(ayahKey.split(":")[0]),
+                              ayahNumber: int.parse(ayahKey.split(":")[1]),
                               quranScriptType: quranScriptType,
                               limitWord: 3,
                               skipWordTap: true,

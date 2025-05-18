@@ -1,12 +1,12 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:flutter/material.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -17,7 +17,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   QuranScriptType selectedScript = QuranScriptType.values.firstWhere(
-    (element) => Hive.box('user').get('selected_script') == element.name,
+    (element) => Hive.box("user").get("selected_script") == element.name,
   );
   @override
   Widget build(BuildContext context) {
@@ -52,14 +52,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   onPressed: () {
                     Hive.box(
-                      'user',
-                    ).put('selected_script', QuranScriptType.tajweed.name);
+                      "user",
+                    ).put("selected_script", QuranScriptType.tajweed.name);
                     setState(() {
                       selectedScript = QuranScriptType.tajweed;
                     });
                   },
                   label: const Text(
-                    'Tajweed',
+                    "Tajweed",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   icon:
@@ -88,15 +88,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   onPressed: () {
                     Hive.box(
-                      'user',
-                    ).put('selected_script', QuranScriptType.uthmani.name);
+                      "user",
+                    ).put("selected_script", QuranScriptType.uthmani.name);
 
                     setState(() {
                       selectedScript = QuranScriptType.uthmani;
                     });
                   },
                   label: const Text(
-                    'Uthmani',
+                    "Uthmani",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   icon:
@@ -128,15 +128,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   onPressed: () {
                     Hive.box(
-                      'user',
-                    ).put('selected_script', QuranScriptType.indopak.name);
+                      "user",
+                    ).put("selected_script", QuranScriptType.indopak.name);
 
                     setState(() {
                       selectedScript = QuranScriptType.indopak;
                     });
                   },
                   label: const Text(
-                    'Indopak',
+                    "Indopak",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
 
@@ -149,33 +149,33 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
 
-          Gap(30),
+          const Gap(30),
           ElevatedButton(
             onPressed: () async {
-              final box = Hive.box('segmented_quran_recitation');
-              Map metaData = box.get('meta_data');
-              Map getFirstAyah = box.get('1:1');
-              String name = metaData['name'];
-              String baseAudioUrl = getFirstAyah['audio_url'];
+              final box = Hive.box("segmented_quran_recitation");
+              Map metaData = box.get("meta_data");
+              Map getFirstAyah = box.get("1:1");
+              String name = metaData["name"];
+              String baseAudioUrl = getFirstAyah["audio_url"];
               baseAudioUrl = baseAudioUrl.substring(
-                baseAudioUrl.lastIndexOf('/'),
+                baseAudioUrl.lastIndexOf("/"),
                 baseAudioUrl.length,
               );
 
               ReciterInfoModel reciterInfoModel = ReciterInfoModel(
                 link: baseAudioUrl,
                 name: name
-                    .split('/')
+                    .split("/")
                     .last
-                    .replaceAll('ayah-recitation-', '')
-                    .replaceAll('.json.txt', '')
-                    .replaceAll('-', ' '),
+                    .replaceAll("ayah-recitation-", "")
+                    .replaceAll(".json.txt", "")
+                    .replaceAll("-", " "),
                 supportWordSegmentation: true,
               );
 
               log(reciterInfoModel.toJson());
             },
-            child: const Text('Test'),
+            child: const Text("Test"),
           ),
         ],
       ),

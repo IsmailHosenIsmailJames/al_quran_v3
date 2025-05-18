@@ -1,22 +1,22 @@
-import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/audio_controller_ui.dart';
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
-import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
-import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
-import 'package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart';
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart' as just_audio;
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:just_audio/just_audio.dart" as just_audio;
 
-import '../../audio/cubit/player_state_cubit.dart';
+import "../../audio/cubit/player_state_cubit.dart";
 
 class AudioControllerUi extends StatefulWidget {
   const AudioControllerUi({super.key});
@@ -122,7 +122,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                         );
                                       }
                                     },
-                                    tooltip: 'Close Audio Controller',
+                                    tooltip: "Close Audio Controller",
                                     icon: const Icon(
                                       Icons.close_fullscreen_rounded,
                                     ),
@@ -166,9 +166,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             if (state?.current != null &&
                 state?.end != null &&
                 state?.start != null) {
-              int currentSurahNumber = int.parse(state!.current!.split(':')[0]);
+              int currentSurahNumber = int.parse(state!.current!.split(":")[0]);
               List ayahList = getListOfAyahKey(
-                startAyahKey: '$currentSurahNumber:1',
+                startAyahKey: "$currentSurahNumber:1",
                 endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
               );
               ayahList.removeWhere((element) => element.runtimeType == int);
@@ -234,15 +234,15 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               children: [
                 IconButton(
                   onPressed:
-                      int.parse(state?.current?.split(':').last ?? '0') > 1
+                      int.parse(state?.current?.split(":").last ?? "0") > 1
                           ? () {
                             if (state?.ayahList?.length == 1) {
                               int? currentSurahNumber = int.tryParse(
-                                state?.current?.split(':').first ?? '',
+                                state?.current?.split(":").first ?? "",
                               );
                               if (currentSurahNumber == null) return;
                               List tempAyahList = getListOfAyahKey(
-                                startAyahKey: '$currentSurahNumber:1',
+                                startAyahKey: "$currentSurahNumber:1",
                                 endAyahKey: getEndAyahKeyFromSurahNumber(
                                   currentSurahNumber,
                                 ),
@@ -251,7 +251,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                 (element) => element.runtimeType == int,
                               );
                               int index = tempAyahList.indexOf(
-                                state?.current ?? '',
+                                state?.current ?? "",
                               );
                               if (index != -1) {
                                 AudioPlayerManager.playSingleAyah(
@@ -265,7 +265,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             }
                           }
                           : null,
-                  tooltip: 'Previous',
+                  tooltip: "Previous",
                   icon: const Icon(Icons.skip_previous_rounded),
                 ),
                 IconButton(
@@ -277,7 +277,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       Duration(milliseconds: inMilSec),
                     );
                   },
-                  tooltip: 'Rewind',
+                  tooltip: "Rewind",
                   icon: const Icon(Icons.replay_5_rounded),
                 ),
                 BlocBuilder<PlayerStateCubit, PlayerState>(
@@ -288,7 +288,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             ? AudioPlayerManager.audioPlayer.pause()
                             : AudioPlayerManager.audioPlayer.play();
                       },
-                      tooltip: state.isPlaying ? 'Pause' : 'Play',
+                      tooltip: state.isPlaying ? "Pause" : "Play",
                       icon: Icon(
                         state.isPlaying
                             ? Icons.pause_rounded
@@ -316,7 +316,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       Duration(milliseconds: inMilSec),
                     );
                   },
-                  tooltip: 'Fast Forward',
+                  tooltip: "Fast Forward",
 
                   icon: const Icon(Icons.forward_5_rounded),
                 ),
@@ -325,20 +325,20 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   onPressed:
                       (ayahList.isNotEmpty &&
                               int.parse(
-                                    state?.current?.split(':').last ?? '0',
+                                    state?.current?.split(":").last ?? "0",
                                   ) <
                                   quranAyahCount[int.parse(
-                                        ayahList.first.split(':').first,
+                                        ayahList.first.split(":").first,
                                       ) -
                                       1])
                           ? () {
                             if (state?.ayahList?.length == 1) {
                               int? currentSurahNumber = int.tryParse(
-                                state?.current?.split(':').first ?? '',
+                                state?.current?.split(":").first ?? "",
                               );
                               if (currentSurahNumber == null) return;
                               List tempAyahList = getListOfAyahKey(
-                                startAyahKey: '$currentSurahNumber:1',
+                                startAyahKey: "$currentSurahNumber:1",
                                 endAyahKey: getEndAyahKeyFromSurahNumber(
                                   currentSurahNumber,
                                 ),
@@ -347,7 +347,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                 (element) => element.runtimeType == int,
                               );
                               int index = tempAyahList.indexOf(
-                                state?.current ?? '',
+                                state?.current ?? "",
                               );
                               if (index != -1) {
                                 AudioPlayerManager.playSingleAyah(
@@ -361,7 +361,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             }
                           }
                           : null,
-                  tooltip: 'Play Next Ayah',
+                  tooltip: "Play Next Ayah",
                   icon: const Icon(Icons.skip_next_rounded),
                 ),
 
@@ -384,7 +384,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         );
                       }
                     },
-                    tooltip: 'Repeat',
+                    tooltip: "Repeat",
                     icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
                       just_audio.LoopMode.one => const Icon(
                         Icons.repeat_one_rounded,
@@ -403,16 +403,16 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   IconButton(
                     onPressed: () {
                       int surahNumber = int.parse(
-                        ayahList.first.split(':').first,
+                        ayahList.first.split(":").first,
                       );
                       int currentAyahNumber = int.parse(
-                        ayahList.first.split(':').last,
+                        ayahList.first.split(":").last,
                       );
                       String endAyahKey = getEndAyahKeyFromSurahNumber(
                         surahNumber,
                       );
 
-                      String startAyahKey = '$surahNumber:1';
+                      String startAyahKey = "$surahNumber:1";
 
                       AudioPlayerManager.playMultipleAyahAsPlaylist(
                         startAyahKey: startAyahKey,
@@ -423,7 +423,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         instantPlay: AudioPlayerManager.audioPlayer.playing,
                       );
                     },
-                    tooltip: 'Play As Playlist',
+                    tooltip: "Play As Playlist",
                     icon: const Icon(Icons.playlist_play_rounded),
                   ),
               ],

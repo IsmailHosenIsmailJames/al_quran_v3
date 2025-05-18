@@ -1,17 +1,17 @@
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:flutter/material.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:flutter/material.dart";
 
 class QuranPage extends StatefulWidget {
   const QuranPage({super.key});
@@ -21,7 +21,7 @@ class QuranPage extends StatefulWidget {
 }
 
 class _QuranPageState extends State<QuranPage> {
-  List<String> pagesName = ['Surah', 'Juz', 'Pages', 'Hizb', 'Ruku'];
+  List<String> pagesName = ["Surah", "Juz", "Pages", "Hizb", "Ruku"];
   int _pageIndex = 0;
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values

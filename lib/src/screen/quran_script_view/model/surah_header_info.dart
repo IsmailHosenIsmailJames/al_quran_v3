@@ -1,4 +1,4 @@
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 
 class SurahHeaderInfoModel {
   final SurahInfoModel surahInfoModel;

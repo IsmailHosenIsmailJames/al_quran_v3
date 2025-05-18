@@ -1,1 +1,1 @@
-List<String> availableSurahInfoInLang = ['en', 'it', 'ml', 'ta', 'ur'];
+List<String> availableSurahInfoInLang = ["en", "it", "ml", "ta", "ur"];

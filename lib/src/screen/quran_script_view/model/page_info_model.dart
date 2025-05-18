@@ -10,8 +10,8 @@ class PageInfoModel {
   });
 
   Map<String, dynamic> toMap() => {
-    'pageNumber': pageNumber,
-    'firstAyahNumber': firstAyahNumber,
-    'lastAyahNumber': lastAyahNumber,
+    "pageNumber": pageNumber,
+    "firstAyahNumber": firstAyahNumber,
+    "lastAyahNumber": lastAyahNumber,
   };
 }

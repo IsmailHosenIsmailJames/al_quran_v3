@@ -1,14 +1,14 @@
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/adapters.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:hive_flutter/adapters.dart";
 
 class NonTajweedScriptView extends StatelessWidget {
   final bool isUthmani;
@@ -31,26 +31,26 @@ class NonTajweedScriptView extends StatelessWidget {
     }
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.fontSize ?? 24,
-      fontFamily: 'QPC_Hafs',
+      fontFamily: "QPC_Hafs",
     );
     if (scriptInfo.wordIndex != null) {
       return Text.rich(
         style: quranStyle,
         textDirection: TextDirection.rtl,
         TextSpan(
-          children: [TextSpan(text: words[scriptInfo.wordIndex!] + ' ')],
+          children: [TextSpan(text: words[scriptInfo.wordIndex!] + " ")],
         ),
       );
     }
 
-    String ayahKey = '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}';
+    String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
 
     Map? audioTimeStamp = Hive.box(
-      'segmented_quran_recitation',
+      "segmented_quran_recitation",
     ).get(ayahKey, defaultValue: null);
     List<List>? segments;
     if (audioTimeStamp != null) {
-      segments = List<List>.from(audioTimeStamp['segments']);
+      segments = List<List>.from(audioTimeStamp["segments"]);
     }
 
     String? highlightingWordIndex;
@@ -66,8 +66,8 @@ class NonTajweedScriptView extends StatelessWidget {
                       (current.currentDuration ?? Duration.zero) &&
                   Duration(milliseconds: word[2]) >
                       (current.currentDuration ?? Duration.zero)) {
-                if (highlightingWordIndex != '$currentAyahKey:${word[0]}') {
-                  highlightingWordIndex = '$currentAyahKey:${word[0]}';
+                if (highlightingWordIndex != "$currentAyahKey:${word[0]}") {
+                  highlightingWordIndex = "$currentAyahKey:${word[0]}";
                   return true;
                 }
                 return false;
@@ -91,14 +91,14 @@ class NonTajweedScriptView extends StatelessWidget {
               return TextSpan(
                 style:
                     highlightingWordIndex ==
-                            '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}'
+                            "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
                         ? TextStyle(
                           backgroundColor: AppColors.primaryColor.withValues(
                             alpha: 0.15,
                           ),
                         )
                         : null,
-                text: words[index] + ' ',
+                text: words[index] + " ",
                 recognizer:
                     scriptInfo.skipWordTap == true
                         ? null
@@ -107,7 +107,7 @@ class NonTajweedScriptView extends StatelessWidget {
                             showPopupWordFunction(
                               context: context,
                               wordKey:
-                                  '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
+                                  "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}",
                               word: words[index],
                               scriptCategory: QuranScriptType.uthmani,
                             );

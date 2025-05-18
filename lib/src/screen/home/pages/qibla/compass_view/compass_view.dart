@@ -1,10 +1,10 @@
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:flutter/material.dart";
+import "dart:math" as math;
 
-import 'package:vector_math/vector_math.dart' as vector;
+import "package:vector_math/vector_math.dart" as vector;
 
-import '../qibla_direction.dart';
+import "../qibla_direction.dart";
 
 class CompassView extends CustomPainter {
   final BuildContext context;
@@ -101,7 +101,7 @@ class CompassView extends CustomPainter {
 
           // draw [W, N, E, S]
           if (is90) {
-            List<String> directionList = ['N', 'E', 'S', 'W'];
+            List<String> directionList = ["N", "E", "S", "W"];
             String direction = directionList[(degree / 90).toInt()];
             textPainter = TextPainter(
               text: TextSpan(

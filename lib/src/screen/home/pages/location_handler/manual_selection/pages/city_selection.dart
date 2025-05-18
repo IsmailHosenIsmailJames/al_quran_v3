@@ -1,9 +1,9 @@
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import "package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 
 class CitySelection extends StatefulWidget {
   final PageController pageController;
@@ -34,14 +34,14 @@ class _CitySelectionState extends State<CitySelection> {
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text('Select Your City', style: TextStyle(fontSize: 20)),
+                const Text("Select Your City", style: TextStyle(fontSize: 20)),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: 'Search for a city',
+              hintText: "Search for a city",
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -60,14 +60,14 @@ class _CitySelectionState extends State<CitySelection> {
             >(
               builder: (context, state) {
                 if (state.cityList == null) {
-                  return const Text('Something went wrong');
+                  return const Text("Something went wrong");
                 }
 
                 return ListView.builder(
                   padding: const EdgeInsets.all(20),
                   itemCount: state.cityList!.length,
                   itemBuilder: (context, index) {
-                    String cityName = state.cityList![index]['city'];
+                    String cityName = state.cityList![index]["city"];
 
                     if (cityName.toLowerCase().contains(
                       controller.text.toLowerCase().trim(),
@@ -80,10 +80,10 @@ class _CitySelectionState extends State<CitySelection> {
                               .saveLocationData(
                                 LatLon(
                                   latitude: double.parse(
-                                    state.cityList![index]['lat'],
+                                    state.cityList![index]["lat"],
                                   ),
                                   longitude: double.parse(
-                                    state.cityList![index]['lng'],
+                                    state.cityList![index]["lng"],
                                   ),
                                 ),
                               );

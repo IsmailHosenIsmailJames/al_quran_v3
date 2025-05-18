@@ -1,7 +1,7 @@
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 
 class CountriesSelection extends StatefulWidget {
   final PageController pageController;
@@ -31,7 +31,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
                 ),
                 const Gap(15),
                 const Text(
-                  'Select Your Country',
+                  "Select Your Country",
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -40,7 +40,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: 'Search for a country',
+              hintText: "Search for a country",
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -59,7 +59,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
             >(
               builder: (context, state) {
                 if (state.locationData == null) {
-                  return const Text('Something went wrong');
+                  return const Text("Something went wrong");
                 }
                 List listOfCountry = state.locationData!.keys.toList();
                 return ListView.builder(
