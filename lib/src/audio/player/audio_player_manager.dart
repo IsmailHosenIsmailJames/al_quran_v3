@@ -1,3 +1,5 @@
+import "dart:async";
+
 import 'package:al_quran_v3/main.dart';
 import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
 import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
@@ -7,14 +9,17 @@ import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
 import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
 import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 class AudioPlayerManager {
+  static bool isListening = false;
   static AudioPlayer audioPlayer = AudioPlayer();
   static startListeningAudioPlayerState() {
+    if (isListening) return;
     final context = navigatorKey.currentContext!;
     final playerPositionCubit = context.read<PlayerPositionCubit>();
 
@@ -106,6 +111,7 @@ class AudioPlayerManager {
       ),
     );
     await audioPlayer.stop();
+    await audioPlayer.clearAudioSources();
 
     audioUICubit.expand(true);
     audioUICubit.showUI(true);
@@ -164,6 +170,7 @@ class AudioPlayerManager {
     }
 
     await audioPlayer.stop();
+    await audioPlayer.clearAudioSources();
 
     audioUICubit.showUI(true);
     audioUICubit.expand(true);
@@ -187,39 +194,54 @@ class AudioPlayerManager {
     if (instantPlay) await audioPlayer.play();
   }
 
-  // static Future<void> playWord({
-  //   required BuildContext context,
-  //   required String ayahKey,
-  //   required ReciterInfoModel reciter,
-  //   required Duration start,
-  //   required Duration end,
-  //   required SurahInfoModel surahInfoModel,
-  // }) async {
-  //   await audioPlayer.stop();
-  //   context.read<AudioUiCubit>().expand(false);
-  //   context.read<AudioUiCubit>().showUI(false);
-  //   log(getUrlFromAyahKey(ayahKey, reciter));
-  //   await audioPlayer.setAudioSource(
-  //     AudioSource.uri(
-  //       Uri.parse(getUrlFromAyahKey(ayahKey, reciter)),
-  //       tag: MediaItem(
-  //         id: ayahKey,
-  //         album: reciter.name,
-  //         title: surahInfoModel.nameSimple,
-  //       ),
-  //     ),
-  //   );
-  //   await audioPlayer.setClip(
-  //     start: start,
-  //     end: end,
-  //     tag: MediaItem(
-  //       id: ayahKey,
-  //       album: reciter.name,
-  //       title: surahInfoModel.nameSimple,
-  //     ),
-  //   );
-  //   audioPlayer.play();
-  // }
+  static bool isWordPlaying = false;
+
+  static Future<void> playWord(String wordKey) async {
+    if (isWordPlaying) return;
+    isWordPlaying = true;
+    final context = navigatorKey.currentContext!;
+    AudioPlayer audioPlayerNew = AudioPlayer();
+    AudioSource audioSource = LockCachingAudioSource(
+      Uri.parse(
+        'https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3',
+      ),
+      tag: MediaItem(id: wordKey, title: wordKey),
+    );
+    await audioPlayer.stop();
+    await audioPlayer.dispose();
+    final audioUICubit = context.read<AudioUiCubit>();
+    audioUICubit.expand(false);
+    audioUICubit.showUI(false);
+    context.read<AyahKeyCubit>().changeData(
+      AyahKeyManagement(start: null, end: null, current: null),
+    );
+    final playerPositionCubit = context.read<PlayerPositionCubit>();
+    playerPositionCubit.changeCurrentPosition(Duration.zero);
+    playerPositionCubit.changeBufferPosition(Duration.zero);
+    playerPositionCubit.changeTotalDuration(Duration.zero);
+    context.read<PlayerStateCubit>().changeState(isPlaying: false);
+    isListening = false;
+    await audioPlayerNew.setAudioSource(audioSource);
+    await audioPlayerNew.play();
+    audioPlayerNew.playerStateStream.listen((event) async {
+      if (event.processingState == ProcessingState.completed) {
+        await audioPlayerNew.stop();
+        await audioPlayerNew.clearAudioSources();
+        await audioPlayerNew.dispose();
+        audioPlayer = AudioPlayer();
+        isWordPlaying = false;
+        context.read<WordPlayingStateCubit>().changeState(null);
+      }
+    });
+  }
+
+  static String wordKeyToAudioOfWordID(String wordKey) {
+    List<String> splitString = wordKey.split(':');
+    String surahNumber = splitString[0];
+    String ayahNumber = splitString[1];
+    String wordNumber = splitString[2];
+    return "${surahNumber.padLeft(3, "0")}_${ayahNumber.padLeft(3, "0")}_${wordNumber.padLeft(3, "0")}";
+  }
 
   static String getUrlFromAyahKey(String ayahKey, ReciterInfoModel reciter) {
     return '${reciter.link}/${ayahKeyToAudioAyahID(ayahKey)}.mp3';

@@ -1,7 +1,7 @@
 name: al_quran_v3
 description: "A new Flutter project."
 
-version: 3.0.0-dev-2+3
+version: 3.0.0-dev-3+4
 
 environment:
   sdk: ^3.7.2
@@ -47,7 +47,6 @@ dependencies:
   flutter_html: ^3.0.0
   visibility_detector: ^0.4.0+2
   font_awesome_flutter: ^10.8.0
-  get: ^5.0.0-release-candidate-9.3.2
 
 
 dev_dependencies:

@@ -1,8 +1,17 @@
+import 'dart:developer';
+
+import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
+import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
+import 'package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart';
 import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
 import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
 import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
+import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hive/hive.dart';
 
 class ShowPopupOfWord extends StatelessWidget {
   final String wordKey;
@@ -37,45 +46,34 @@ class ShowPopupOfWord extends StatelessWidget {
               ayahNumber: int.parse(wordKey.split(':')[1]),
               wordIndex: int.parse(wordKey.split(':')[2]) - 1,
               quranScriptType: scriptCategory,
+              fontSize: 40,
             ),
           ),
           const Gap(15),
-          // SizedBox(
-          //   height: 70,
-          //   width: 70,
-          //   child: IconButton(
-          //     style: IconButton.styleFrom(
-          //       backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
-          //       foregroundColor: AppColors.primaryColor,
-          //     ),
-          //     onPressed: () {
-          //       int surahNumber = int.parse(wordKey.split(':')[0]);
-          //       int ayahNumber = int.parse(wordKey.split(':')[1]);
-          //       int wordIndex = int.parse(wordKey.split(':')[2]) - 1;
-          //       ReciterInfoModel reciterInfoModel =
-          //           context.read<SegmentedAudioCubit>().state;
-
-          //       List? data =
-          //           Hive.box(
-          //             'segmented_quran_recitation',
-          //           ).get('$surahNumber:$ayahNumber')?['segments'];
-
-          //       if (data != null) {
-          //         List wordTimeData = data[wordIndex];
-          //         log(wordTimeData.toString());
-          //         AudioPlayerManager.playWord(
-          //           context: context,
-          //           ayahKey: '$surahNumber:$ayahNumber',
-          //           reciter: reciterInfoModel,
-          //           start: Duration(milliseconds: wordTimeData[1]),
-          //           end: Duration(milliseconds: wordTimeData[2]),
-          //           surahInfoModel: surahInfoModel,
-          //         );
-          //       }
-          //     },
-          //     icon: const Icon(Icons.play_arrow),
-          //   ),
-          // ),
+          SizedBox(
+            height: 70,
+            width: 70,
+            child: BlocBuilder<WordPlayingStateCubit, String?>(
+              builder: (context, state) {
+                log(state.toString());
+                return IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: AppColors.primaryColor.withValues(
+                      alpha: 0.05,
+                    ),
+                    foregroundColor: AppColors.primaryColor,
+                  ),
+                  onPressed: () {
+                    context.read<WordPlayingStateCubit>().changeState(wordKey);
+                    AudioPlayerManager.playWord(wordKey);
+                  },
+                  icon: Icon(
+                    state == wordKey ? Icons.pause_rounded : Icons.play_arrow,
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
