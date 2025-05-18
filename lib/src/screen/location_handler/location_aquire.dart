@@ -1,9 +1,9 @@
 import "dart:developer";
 
-import "package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/address_selection.dart";
-import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
-import "package:al_quran_v3/src/screen/home/pages/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/manual_selection/address_selection.dart";
+import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
