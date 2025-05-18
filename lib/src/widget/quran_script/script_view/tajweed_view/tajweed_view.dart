@@ -1,14 +1,14 @@
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:hive/hive.dart";
 
-import 'tajweed_text_preser.dart';
+import "tajweed_text_preser.dart";
 
 class TajweedView extends StatelessWidget {
   final ScriptInfo scriptInfo;
@@ -26,17 +26,17 @@ class TajweedView extends StatelessWidget {
     }
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.fontSize ?? 24,
-      fontFamily: 'QPC_Hafs',
+      fontFamily: "QPC_Hafs",
     );
 
-    String ayahKey = '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}';
+    String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
 
     Map? audioTimeStamp = Hive.box(
-      'segmented_quran_recitation',
+      "segmented_quran_recitation",
     ).get(ayahKey, defaultValue: null);
     List<List>? segments;
     if (audioTimeStamp != null) {
-      segments = List<List>.from(audioTimeStamp['segments']);
+      segments = List<List>.from(audioTimeStamp["segments"]);
     }
 
     String? highlightingWordIndex;
@@ -46,8 +46,8 @@ class TajweedView extends StatelessWidget {
         textDirection: TextDirection.rtl,
         parseTajweedWord(
           wordKey:
-              '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${scriptInfo.wordIndex}',
-          wordHtml: words[scriptInfo.wordIndex!] + ' ',
+              "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${scriptInfo.wordIndex}",
+          wordHtml: words[scriptInfo.wordIndex!] + " ",
           baseStyle: quranStyle,
           context: context,
           skipWordTap: scriptInfo.skipWordTap,
@@ -66,8 +66,8 @@ class TajweedView extends StatelessWidget {
                       (current.currentDuration ?? Duration.zero) &&
                   Duration(milliseconds: word[2]) >
                       (current.currentDuration ?? Duration.zero)) {
-                if (highlightingWordIndex != '$currentAyahKey:${word[0]}') {
-                  highlightingWordIndex = '$currentAyahKey:${word[0]}';
+                if (highlightingWordIndex != "$currentAyahKey:${word[0]}") {
+                  highlightingWordIndex = "$currentAyahKey:${word[0]}";
                   return true;
                 }
                 return false;
@@ -91,12 +91,12 @@ class TajweedView extends StatelessWidget {
             children: List<InlineSpan>.generate(words.length, (index) {
               return parseTajweedWord(
                 wordKey:
-                    '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}',
-                wordHtml: words[index] + ' ',
+                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}",
+                wordHtml: words[index] + " ",
                 baseStyle: quranStyle.copyWith(
                   backgroundColor:
                       highlightingWordIndex ==
-                              '${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}'
+                              "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
                           ? AppColors.primaryColor.withValues(alpha: 0.2)
                           : null,
                 ),

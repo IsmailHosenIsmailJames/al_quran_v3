@@ -1,31 +1,31 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
+import "dart:convert";
+import "dart:developer";
+import "dart:io";
 
-import 'package:al_quran_v3/src/api/apis_urls.dart';
-import 'package:al_quran_v3/src/functions/encode_decode.dart';
-import 'package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart';
-import 'package:al_quran_v3/src/resources/surah_info/info.dart';
-import 'package:al_quran_v3/src/resources/translation/languages.dart';
-import 'package:al_quran_v3/src/resources/meta_data/simple_translation.dart';
-import 'package:al_quran_v3/src/screen/home/home_page.dart';
-import 'package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/components/get_score_widget.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
-import 'package:al_quran_v3/src/widget/theme_icon_button.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
-import 'package:toastification/toastification.dart';
+import "package:al_quran_v3/src/api/apis_urls.dart";
+import "package:al_quran_v3/src/functions/encode_decode.dart";
+import "package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
+import "package:al_quran_v3/src/resources/surah_info/info.dart";
+import "package:al_quran_v3/src/resources/translation/languages.dart";
+import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
+import "package:al_quran_v3/src/screen/home/home_page.dart";
+import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:al_quran_v3/src/widget/theme_icon_button.dart";
+import "package:dio/dio.dart" as dio;
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
+import "package:toastification/toastification.dart";
 
 class AppSetupPage extends StatefulWidget {
   const AppSetupPage({super.key});
@@ -76,7 +76,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   @override
   void initState() {
     if (!kIsWeb) {
-      changeAppLanguage(Platform.localeName.split('_')[0].toLowerCase());
+      changeAppLanguage(Platform.localeName.split("_")[0].toLowerCase());
     }
     super.initState();
   }
@@ -113,7 +113,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 12,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '1',
+                                  "1",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -122,18 +122,18 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 ),
                               ),
                               const Gap(8),
-                              Text('App Language', style: titleStyle),
+                              Text("App Language", style: titleStyle),
                             ],
                           ),
                           const Gap(5),
                           DropdownButtonFormField(
                             decoration: const InputDecoration(
-                              hintText: 'Select app language...',
+                              hintText: "Select app language...",
                             ),
                             value: appLanguage,
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select one';
+                                return "Please select one";
                               } else {
                                 return null;
                               }
@@ -156,7 +156,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 12,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '2',
+                                  "2",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -166,7 +166,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                               const Gap(8),
                               Text(
-                                'Quran Translation Language',
+                                "Quran Translation Language",
                                 style: titleStyle,
                               ),
                             ],
@@ -176,11 +176,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             value: translationLanguage,
                             items: getQuranTranslationLanguageDropDownList(),
                             decoration: const InputDecoration(
-                              hintText: 'Select translation language...',
+                              hintText: "Select translation language...",
                             ),
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select one';
+                                return "Please select one";
                               } else {
                                 return null;
                               }
@@ -202,7 +202,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 13,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '3',
+                                  "3",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -211,7 +211,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 ),
                               ),
                               const Gap(8),
-                              Text('Quran Translation Book', style: titleStyle),
+                              Text("Quran Translation Book", style: titleStyle),
                             ],
                           ),
 
@@ -219,12 +219,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           DropdownButtonFormField(
                             items: getQuranTranslationBookDropDownList(),
                             decoration: const InputDecoration(
-                              hintText: 'Select translation book...',
+                              hintText: "Select translation book...",
                             ),
                             value: translationBook,
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select one';
+                                return "Please select one";
                               } else {
                                 return null;
                               }
@@ -234,7 +234,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
                             isExpanded: true,
                             onChanged: (value) {
-                              translationBook = value ?? '';
+                              translationBook = value ?? "";
                               setState(() {});
                             },
                           ),
@@ -246,7 +246,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 13,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '4',
+                                  "4",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -255,7 +255,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 ),
                               ),
                               const Gap(8),
-                              Text('Quran Tafsir Language', style: titleStyle),
+                              Text("Quran Tafsir Language", style: titleStyle),
                             ],
                           ),
 
@@ -263,12 +263,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           DropdownButtonFormField(
                             items: getQuranTafsirLanguageDropDownList(),
                             decoration: const InputDecoration(
-                              hintText: 'Select tafsir language...',
+                              hintText: "Select tafsir language...",
                             ),
                             value: tafsirLanguage,
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select one';
+                                return "Please select one";
                               } else {
                                 return null;
                               }
@@ -289,7 +289,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 13,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '5',
+                                  "5",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -298,20 +298,20 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 ),
                               ),
                               const Gap(8),
-                              Text('Quran Tafsir Book', style: titleStyle),
+                              Text("Quran Tafsir Book", style: titleStyle),
                             ],
                           ),
                           const Gap(5),
                           DropdownButtonFormField(
                             items: getQuranTafsirBookDropDownList(),
                             decoration: const InputDecoration(
-                              hintText: 'Select tafsir book...',
+                              hintText: "Select tafsir book...",
                             ),
                             isExpanded: true,
                             value: tafsirBook,
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select one';
+                                return "Please select one";
                               } else {
                                 return null;
                               }
@@ -330,7 +330,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 radius: 13,
                                 backgroundColor: AppColors.primaryColor,
                                 child: const Text(
-                                  '6',
+                                  "6",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
@@ -339,7 +339,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 ),
                               ),
                               const Gap(8),
-                              Text('Quran Script & Style', style: titleStyle),
+                              Text("Quran Script & Style", style: titleStyle),
                             ],
                           ),
                           const Gap(5),
@@ -374,7 +374,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 foregroundColor: Colors.white,
                               ),
                               onPressed: downloadResources,
-                              label: const Text('Save & Download'),
+                              label: const Text("Save & Download"),
                               icon: const Icon(Icons.download_rounded),
                             ),
                           ),
@@ -407,19 +407,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirBook == null) {
       toastification.show(
         context: context,
-        title: const Text('Please select required option'),
+        title: const Text("Please select required option"),
         autoCloseDuration: const Duration(seconds: 2),
         type: ToastificationType.error,
       );
     }
     if (fromKey.currentState?.validate() == true) {
-      final userBox = Hive.box('user');
-      await userBox.put('app_language', appLanguage);
-      await userBox.put('translation_language', translationLanguage);
-      await userBox.put('translation_book', translationBook);
-      await userBox.put('tafsir_language', tafsirLanguage);
-      await userBox.put('tafsir_book', tafsirBook);
-      await userBox.put('selected_script', selectedScript.name);
+      final userBox = Hive.box("user");
+      await userBox.put("app_language", appLanguage);
+      await userBox.put("translation_language", translationLanguage);
+      await userBox.put("translation_book", translationBook);
+      await userBox.put("tafsir_language", tafsirLanguage);
+      await userBox.put("tafsir_book", tafsirBook);
+      await userBox.put("selected_script", selectedScript.name);
 
       showDialog(
         barrierDismissible: false,
@@ -447,7 +447,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            'Just a moment...',
+                            "Just a moment...",
                             style: TextStyle(fontSize: 20),
                           ),
                           const Gap(20),
@@ -466,10 +466,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ],
                       );
                     } else if (state is DownloadProgressCubitSuccess) {
-                      return const Text('Success');
+                      return const Text("Success");
                     } else if (state is DownloadProgressCubitFailure) {
                       return Text(
-                        'Error: ${state.errorMessage}',
+                        "Error: ${state.errorMessage}",
                         style: const TextStyle(fontSize: 16, color: Colors.red),
                       );
                     }
@@ -486,11 +486,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
       bool success1 = await downloadTranslationBook();
       bool success2 = await downloadTafsir();
       bool success3 = await downloadWordByWordTranslation(
-        codeToLanguageMap[translationLanguage ?? ''] ?? '',
+        codeToLanguageMap[translationLanguage ?? ""] ?? "",
       );
       bool success4 = await downloadDefaultSegmentedQuranRecitation();
       if (success1 && success2 && success3 && success4) {
-        userBox.put('is_setup_complete', true);
+        userBox.put("is_setup_complete", true);
         // success and route to home
         Navigator.pushAndRemoveUntil(
           context,
@@ -500,7 +500,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       } else {
         // error and show 'Something went wrong' in cubit
         context.read<DownloadProgressCubitCubit>().failure(
-          'Unable to download resources...',
+          "Unable to download resources...",
         );
       }
     }
@@ -511,70 +511,70 @@ class _AppSetupPageState extends State<AppSetupPage> {
     try {
       context.read<DownloadProgressCubitCubit>().updateProgress(
         null,
-        'Downloading Segmented Quran Recitation',
+        "Downloading Segmented Quran Recitation",
       );
       final response = await dio.Dio().get(url);
       if (response.statusCode == 200) {
-        Box box = Hive.box('segmented_quran_recitation');
+        Box box = Hive.box("segmented_quran_recitation");
         context.read<DownloadProgressCubitCubit>().updateProgress(
           null,
-          'Processing Segmented Quran Recitation',
+          "Processing Segmented Quran Recitation",
         );
         Map segmentsInfo = jsonDecode(decodeBZip2String(response.data));
 
         for (final ayahKey in segmentsInfo.keys) {
           await box.put(ayahKey, segmentsInfo[ayahKey]);
         }
-        await Hive.box('segmented_quran_recitation').put('meta_data', {
-          'name': defaultSegmentedQuranRecitation,
-          'index': defaultSegmentedQuranRecitationIndex,
+        await Hive.box("segmented_quran_recitation").put("meta_data", {
+          "name": defaultSegmentedQuranRecitation,
+          "index": defaultSegmentedQuranRecitationIndex,
         });
         return true;
       } else {
         return false;
       }
     } on dio.DioException catch (e) {
-      log(e.message ?? 'Null Message');
+      log(e.message ?? "Null Message");
       return false;
     }
   }
 
   Future<bool> downloadWordByWordTranslation(String translationLanguage) async {
-    log('Going to download word by word translation');
+    log("Going to download word by word translation");
     bool isSupportWordByWord = doesHaveWordByWordTranslation(
       translationLanguage,
     );
     if (isSupportWordByWord) {
-      final wordByWordBox = await Hive.openBox('quran_word_by_word');
-      Map metaData = wordByWordBox.get('meta_data', defaultValue: {});
-      if (metaData['name'] == translationBook &&
-          metaData['language'] == translationLanguage) {
-        log('Word By Word Already downloaded');
+      final wordByWordBox = await Hive.openBox("quran_word_by_word");
+      Map metaData = wordByWordBox.get("meta_data", defaultValue: {});
+      if (metaData["name"] == translationBook &&
+          metaData["language"] == translationLanguage) {
+        log("Word By Word Already downloaded");
         return true;
       }
       try {
         String? wordByWordTranslationDownloadURL;
         wordByWordTranslation.forEach((key, value) {
           if (translationLanguage.toLowerCase() == key.toLowerCase()) {
-            wordByWordTranslationDownloadURL = value[0]['full_path'];
+            wordByWordTranslationDownloadURL = value[0]["full_path"];
           }
         });
         String base = ApisUrls.base;
-        log(base + (wordByWordTranslationDownloadURL ?? ''), name: 'http path');
+        log(base + (wordByWordTranslationDownloadURL ?? ""), name: "http path");
         context.read<DownloadProgressCubitCubit>().updateProgress(
           null,
-          'Downloading Word by Word Translation',
+          "Downloading Word by Word Translation",
         );
 
         dio.Response response = await dio.Dio().get(
           base + wordByWordTranslationDownloadURL!,
           options: dio.Options(responseType: dio.ResponseType.plain),
         );
-        log(response.statusCode.toString(), name: 'Status');
+        log(response.statusCode.toString(), name: "Status");
         DateTime now = DateTime.now();
         Map data = jsonDecode(decodeBZip2String(response.data));
         if (data.isEmpty) {
-          log('Word by Word Translation is empty');
+          log("Word by Word Translation is empty");
           return false;
         }
         for (int i = 0; i < data.length; i++) {
@@ -582,46 +582,46 @@ class _AppSetupPageState extends State<AppSetupPage> {
           await wordByWordBox.put(key, data[key]);
           context.read<DownloadProgressCubitCubit>().updateProgress(
             i / data.length,
-            'Processing Word by Word Translation',
+            "Processing Word by Word Translation",
           );
         }
-        await wordByWordBox.put('meta_data', {
-          'name': translationBook,
-          'language': translationLanguage,
+        await wordByWordBox.put("meta_data", {
+          "name": translationBook,
+          "language": translationLanguage,
         });
         log(
           now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-          name: 'Translation Process Time',
+          name: "Translation Process Time",
         );
         return true;
       } catch (e) {
-        log(e.toString(), name: 'http error');
+        log(e.toString(), name: "http error");
         return false;
       }
     } else {
-      log('Word by word translation not supported');
+      log("Word by word translation not supported");
       return true;
     }
   }
 
   Future<bool> downloadTranslationBook() async {
-    final translationBox = Hive.box('quran_translation');
-    Map metaData = translationBox.get('meta_data', defaultValue: {});
-    if (metaData['name'] == translationBook &&
-        metaData['language'] == translationLanguage) {
-      log('Already downloaded');
+    final translationBox = Hive.box("quran_translation");
+    Map metaData = translationBox.get("meta_data", defaultValue: {});
+    if (metaData["name"] == translationBook &&
+        metaData["language"] == translationLanguage) {
+      log("Already downloaded");
       return true;
     }
     try {
       String base = ApisUrls.base;
-      log(base + translationBook!, name: 'http path');
+      log(base + translationBook!, name: "http path");
       context.read<DownloadProgressCubitCubit>().updateProgress(
         null,
-        'Downloading Translation',
+        "Downloading Translation",
       );
       dio.Response response = await dio.Dio().get(base + translationBook!);
 
-      log(response.statusCode.toString(), name: 'Status');
+      log(response.statusCode.toString(), name: "Status");
       DateTime now = DateTime.now();
       Map data = jsonDecode(decodeBZip2String(response.data));
       for (int i = 0; i < data.length; i++) {
@@ -629,24 +629,24 @@ class _AppSetupPageState extends State<AppSetupPage> {
         await translationBox.put(key, data[key]);
         context.read<DownloadProgressCubitCubit>().updateProgress(
           i / data.length,
-          'Processing Translation',
+          "Processing Translation",
         );
       }
-      await translationBox.put('meta_data', {
-        'name': translationBook,
-        'language': translationLanguage,
+      await translationBox.put("meta_data", {
+        "name": translationBook,
+        "language": translationLanguage,
       });
 
       if (availableSurahInfoInLang.contains(translationLanguage)) {
         context.read<DownloadProgressCubitCubit>().updateProgress(
           null,
-          'Downloading Surah\'s Information',
+          "Downloading Surah's Information",
         );
         final response = await dio.Dio().get(
-          '${ApisUrls.base}quranic_universal_library/surah_info/$translationLanguage.txt',
+          "${ApisUrls.base}quranic_universal_library/surah_info/$translationLanguage.txt",
         );
         if (response.statusCode == 200) {
-          final box = Hive.box('surah_info');
+          final box = Hive.box("surah_info");
           Map data = jsonDecode(decodeBZip2String(response.data));
           for (final key in data.keys) {
             await box.put(key, data[key]);
@@ -655,32 +655,32 @@ class _AppSetupPageState extends State<AppSetupPage> {
       }
       log(
         now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-        name: 'Translation Process Time',
+        name: "Translation Process Time",
       );
       return true;
     } catch (e) {
-      log(e.toString(), name: 'http error');
+      log(e.toString(), name: "http error");
       return false;
     }
   }
 
   Future<bool> downloadTafsir() async {
-    final tafsirBox = await Hive.openBox('quran_tafsir');
-    final metaData = tafsirBox.get('meta_data', defaultValue: {});
-    if (metaData['name'] == tafsirBook &&
-        metaData['language'] == tafsirLanguage) {
-      log('Already downloaded');
+    final tafsirBox = await Hive.openBox("quran_tafsir");
+    final metaData = tafsirBox.get("meta_data", defaultValue: {});
+    if (metaData["name"] == tafsirBook &&
+        metaData["language"] == tafsirLanguage) {
+      log("Already downloaded");
       return true;
     }
     try {
       String base = ApisUrls.base;
-      log(base + tafsirBook!, name: 'http path');
+      log(base + tafsirBook!, name: "http path");
       context.read<DownloadProgressCubitCubit>().updateProgress(
         null,
-        'Downloading Tafsir',
+        "Downloading Tafsir",
       );
       dio.Response response = await dio.Dio().get(base + tafsirBook!);
-      log(response.statusCode.toString(), name: 'Status');
+      log(response.statusCode.toString(), name: "Status");
       DateTime now = DateTime.now();
       Map data = jsonDecode(decodeBZip2String(response.data));
       for (int i = 0; i < data.length; i++) {
@@ -688,20 +688,20 @@ class _AppSetupPageState extends State<AppSetupPage> {
         await tafsirBox.put(key, jsonEncode(data[key]!));
         context.read<DownloadProgressCubitCubit>().updateProgress(
           i / data.length,
-          'Processing Tafsir',
+          "Processing Tafsir",
         );
       }
-      await tafsirBox.put('meta_data', {
-        'name': tafsirBook,
-        'language': tafsirLanguage,
+      await tafsirBox.put("meta_data", {
+        "name": tafsirBook,
+        "language": tafsirLanguage,
       });
       log(
         now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-        name: 'Translation Process Time',
+        name: "Translation Process Time",
       );
       return true;
     } catch (e) {
-      log(e.toString(), name: 'http error');
+      log(e.toString(), name: "http error");
       return false;
     }
   }
@@ -737,7 +737,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
               });
             },
             label: const Text(
-              'Tajweed',
+              "Tajweed",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             icon:
@@ -770,7 +770,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
               });
             },
             label: const Text(
-              'Uthmani',
+              "Uthmani",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             icon:
@@ -806,7 +806,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
               });
             },
             label: const Text(
-              'Indopak',
+              "Indopak",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
 
@@ -826,17 +826,17 @@ class _AppSetupPageState extends State<AppSetupPage> {
     List<DropdownMenuItem> items = [];
     if (selectableTafsirBook?.isEmpty ?? true) return null;
     selectableTafsirBook?.sort(
-      (a, b) => (b['score'] as int).compareTo(a['score']),
+      (a, b) => (b["score"] as int).compareTo(a["score"]),
     );
     for (Map book in selectableTafsirBook ?? []) {
       items.add(
         DropdownMenuItem(
-          value: book['full_path'] ?? '',
+          value: book["full_path"] ?? "",
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (tafsirBook == book['full_path'])
+                if (tafsirBook == book["full_path"])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -846,11 +846,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ),
                   ),
                 buildScoreIndicator(
-                  percentage: (book['score'] as int).toDouble(),
+                  percentage: (book["score"] as int).toDouble(),
                   size: 20,
                 ),
                 const Gap(8),
-                Text(book['name'] ?? ''),
+                Text(book["name"] ?? ""),
               ],
             ),
           ),
@@ -880,7 +880,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                Text(languageNativeNames[key.toLowerCase()] ?? ''),
+                Text(languageNativeNames[key.toLowerCase()] ?? ""),
               ],
             ),
           ),
@@ -893,12 +893,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
   List<DropdownMenuItem<String>> getAppLanguageDropdown() {
     return used20LanguageMap.map((e) {
       return DropdownMenuItem(
-        value: e['Code'],
+        value: e["Code"],
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              if (appLanguage == e['Code'])
+              if (appLanguage == e["Code"])
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Icon(
@@ -907,8 +907,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     color: AppColors.primaryColor,
                   ),
                 ),
-              Text(e['Native'] ?? ''),
-              ...getSupportInfoForLanguageWidget(key: e['English'] ?? ''),
+              Text(e["Native"] ?? ""),
+              ...getSupportInfoForLanguageWidget(key: e["English"] ?? ""),
             ],
           ),
         ),
@@ -922,12 +922,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
     for (Map book in selectableTranslationBook ?? []) {
       items.add(
         DropdownMenuItem(
-          value: book['full_path'] ?? '',
+          value: book["full_path"] ?? "",
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (translationBook == book['full_path'])
+                if (translationBook == book["full_path"])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -936,8 +936,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                Text(book['name'] ?? ''),
-                if (book['type'] == 'translation-with-footnote-tags')
+                Text(book["name"] ?? ""),
+                if (book["type"] == "translation-with-footnote-tags")
                   footNoteTag,
               ],
             ),
@@ -968,7 +968,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                Text(languageNativeNames[key.toLowerCase()] ?? ''),
+                Text(languageNativeNames[key.toLowerCase()] ?? ""),
                 ...getSupportInfoForLanguageWidget(key: key.toLowerCase()),
               ],
             ),
@@ -1000,7 +1000,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       children: [
         Icon(Icons.done_rounded, color: Colors.white, size: 15),
         Gap(5),
-        Text('Footnote', style: TextStyle(color: Colors.white, fontSize: 12)),
+        Text("Footnote", style: TextStyle(color: Colors.white, fontSize: 12)),
       ],
     ),
   );
@@ -1018,7 +1018,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       children: [
         Icon(Icons.done_rounded, color: Colors.white, size: 15),
         Gap(5),
-        Text('Tafsir', style: TextStyle(color: Colors.white, fontSize: 12)),
+        Text("Tafsir", style: TextStyle(color: Colors.white, fontSize: 12)),
       ],
     ),
   );
@@ -1037,7 +1037,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         Icon(Icons.done_rounded, color: Colors.white, size: 15),
         Gap(5),
         Text(
-          'Word by Word',
+          "Word by Word",
           style: TextStyle(color: Colors.white, fontSize: 12),
         ),
       ],
@@ -1048,7 +1048,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 bool doesHaveFootNote(String language) {
   bool doesHaveFootNote = false;
   for (Map map in simpleTranslation[language] ?? []) {
-    if (map['type'] == 'translation-with-footnote-tags') {
+    if (map["type"] == "translation-with-footnote-tags") {
       doesHaveFootNote = true;
       break;
     }

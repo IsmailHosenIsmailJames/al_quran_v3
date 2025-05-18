@@ -1,7 +1,7 @@
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import "package:al_quran_v3/src/screen/home/pages/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 
 class AdministratorSelection extends StatefulWidget {
   final PageController pageController;
@@ -33,7 +33,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
                 ),
                 const Gap(15),
                 const Text(
-                  'Select Your Administrator',
+                  "Select Your Administrator",
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -42,7 +42,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: 'Search for a administrator',
+              hintText: "Search for a administrator",
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -61,7 +61,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
             >(
               builder: (context, state) {
                 if (state.adminMap == null) {
-                  return const Text('Something went wrong');
+                  return const Text("Something went wrong");
                 }
                 List listOfCountry = state.adminMap!.keys.toList();
                 return ListView.builder(

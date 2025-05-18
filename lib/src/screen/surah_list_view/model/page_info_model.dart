@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class PageInfoModel {
   final int start;
@@ -24,7 +24,7 @@ class PageInfoModel {
   String toJson() => json.encode(toMap());
 
   factory PageInfoModel.fromMap(Map<String, dynamic> json) =>
-      PageInfoModel(start: json['s'], end: json['e'], surahNumber: json['sn']);
+      PageInfoModel(start: json["s"], end: json["e"], surahNumber: json["sn"]);
 
-  Map<String, dynamic> toMap() => {'s': start, 'e': end, 'sn': surahNumber};
+  Map<String, dynamic> toMap() => {"s": start, "e": end, "sn": surahNumber};
 }

@@ -1,11 +1,11 @@
-import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import "package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:flutter/material.dart";
+import "package:gap/gap.dart";
 
 class SurahListView extends StatelessWidget {
   final List<SurahInfoModel> surahInfoList;
@@ -45,9 +45,9 @@ class SurahListView extends StatelessWidget {
                   MaterialPageRoute(
                     builder:
                         (context) => QuranScriptView(
-                          startKey: '${index + 1}:1',
+                          startKey: "${index + 1}:1",
                           endKey:
-                              '${index + 1}:${surahInfoList[index].versesCount}',
+                              "${index + 1}:${surahInfoList[index].versesCount}",
                         ),
                   ),
                 );
@@ -78,9 +78,9 @@ class SurahListView extends StatelessWidget {
                               height: 20,
                               width: 20,
                               child: Image.asset(
-                                surahInfoList[index].revelationPlace == 'makkah'
-                                    ? 'assets/img/kaaba_10171102.png'
-                                    : 'assets/img/masjid-al-nabawi_16183907.png',
+                                surahInfoList[index].revelationPlace == "makkah"
+                                    ? "assets/img/kaaba_10171102.png"
+                                    : "assets/img/masjid-al-nabawi_16183907.png",
                               ),
                             ),
                             const Gap(3),
@@ -116,7 +116,7 @@ class SurahListView extends StatelessWidget {
                           style: TextStyle(fontSize: 18, color: textColor),
                         ),
                         Text(
-                          '${surahInfoList[index].versesCount} Ayahs',
+                          "${surahInfoList[index].versesCount} Ayahs",
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light

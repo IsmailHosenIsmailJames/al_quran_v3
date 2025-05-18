@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class HizbModel {
   final int hizbNumber;
@@ -34,21 +34,21 @@ class HizbModel {
   String toJson() => json.encode(toMap());
 
   factory HizbModel.fromMap(Map<String, dynamic> json) => HizbModel(
-    hizbNumber: json['hizb_number'],
-    versesCount: json['verses_count'],
-    firstVerseKey: json['first_verse_key'],
-    lastVerseKey: json['last_verse_key'],
+    hizbNumber: json["hizb_number"],
+    versesCount: json["verses_count"],
+    firstVerseKey: json["first_verse_key"],
+    lastVerseKey: json["last_verse_key"],
     verseMapping: Map.from(
-      json['verse_mapping'],
+      json["verse_mapping"],
     ).map((k, v) => MapEntry<String, String>(k, v)),
   );
 
   Map<String, dynamic> toMap() => {
-    'hizb_number': hizbNumber,
-    'verses_count': versesCount,
-    'first_verse_key': firstVerseKey,
-    'last_verse_key': lastVerseKey,
-    'verse_mapping': Map.from(
+    "hizb_number": hizbNumber,
+    "verses_count": versesCount,
+    "first_verse_key": firstVerseKey,
+    "last_verse_key": lastVerseKey,
+    "verse_mapping": Map.from(
       verseMapping,
     ).map((k, v) => MapEntry<String, dynamic>(k, v)),
   };

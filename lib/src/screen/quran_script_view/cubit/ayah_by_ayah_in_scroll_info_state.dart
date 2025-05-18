@@ -1,4 +1,4 @@
-part of 'ayah_by_ayah_in_scroll_info_cubit.dart';
+part of "ayah_by_ayah_in_scroll_info_cubit.dart";
 
 class AyahByAyahInScrollInfoState {
   SurahInfoModel? surahInfoModel;
@@ -30,11 +30,11 @@ class AyahByAyahInScrollInfoState {
 
   static Map toMap(AyahByAyahInScrollInfoState ayahByAyahInScrollInfoState) {
     return {
-      'surahInfoModel': ayahByAyahInScrollInfoState.surahInfoModel?.toMap(),
-      'expandedForWordByWord':
+      "surahInfoModel": ayahByAyahInScrollInfoState.surahInfoModel?.toMap(),
+      "expandedForWordByWord":
           ayahByAyahInScrollInfoState.expandedForWordByWord,
-      'isAyahByAyah': ayahByAyahInScrollInfoState.isAyahByAyah,
-      'pageByPageList': ayahByAyahInScrollInfoState.pageByPageList,
+      "isAyahByAyah": ayahByAyahInScrollInfoState.isAyahByAyah,
+      "pageByPageList": ayahByAyahInScrollInfoState.pageByPageList,
     };
   }
 }

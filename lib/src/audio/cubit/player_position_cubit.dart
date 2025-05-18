@@ -1,5 +1,5 @@
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
 class PlayerPositionCubit extends Cubit<AudioPlayerPositionModel> {
   PlayerPositionCubit() : super(AudioPlayerPositionModel());

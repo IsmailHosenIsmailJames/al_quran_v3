@@ -1,26 +1,26 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/functions/basic_functions.dart';
-import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
-import 'package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/widget/audio/audio_controller_ui.dart';
-import 'package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart';
-import 'package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:visibility_detector/visibility_detector.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
+import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
+import "package:visibility_detector/visibility_detector.dart";
 
 class QuranScriptView extends StatefulWidget {
   final String startKey;
@@ -51,24 +51,24 @@ class _PageByPageViewState extends State<QuranScriptView> {
     List allAyahsKey = [];
 
     for (int i = 0; i < quranPagesInfo.length; i++) {
-      if (quranPagesInfo[i]['s']! >= startAyahNumber ||
-          quranPagesInfo[i]['e']! >= endAyahNumber) {
-        if (quranPagesInfo[i]['s']! - startAyahNumber > 0 && !checkedFirst) {
+      if (quranPagesInfo[i]["s"]! >= startAyahNumber ||
+          quranPagesInfo[i]["e"]! >= endAyahNumber) {
+        if (quranPagesInfo[i]["s"]! - startAyahNumber > 0 && !checkedFirst) {
           int ayahNumber =
-              quranPagesInfo[i]['s']! -
-              (quranPagesInfo[i]['s']! - startAyahNumber);
+              quranPagesInfo[i]["s"]! -
+              (quranPagesInfo[i]["s"]! - startAyahNumber);
           currentPagesToShow.add(
             PageInfoModel(
               pageNumber: i,
               firstAyahNumber: ayahNumber,
-              lastAyahNumber: quranPagesInfo[i - 1]['e']!,
+              lastAyahNumber: quranPagesInfo[i - 1]["e"]!,
             ),
           );
-        } else if (endAyahNumber <= quranPagesInfo[i]['e']!) {
+        } else if (endAyahNumber <= quranPagesInfo[i]["e"]!) {
           int firstAyahNumber =
-              quranPagesInfo[i]['s']! < startAyahNumber
+              quranPagesInfo[i]["s"]! < startAyahNumber
                   ? startAyahNumber
-                  : quranPagesInfo[i]['s']!;
+                  : quranPagesInfo[i]["s"]!;
           currentPagesToShow.add(
             PageInfoModel(
               pageNumber: i + 1,
@@ -81,8 +81,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
           currentPagesToShow.add(
             PageInfoModel(
               pageNumber: i + 1,
-              firstAyahNumber: quranPagesInfo[i]['s']!,
-              lastAyahNumber: quranPagesInfo[i]['e']!,
+              firstAyahNumber: quranPagesInfo[i]["s"]!,
+              lastAyahNumber: quranPagesInfo[i]["e"]!,
             ),
           );
         }
@@ -136,7 +136,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         pagesInfoWithSurahMetaData.first.runtimeType != PageInfoModel) {
       pagesInfoWithSurahMetaData.insert(
         0,
-        int.parse(widget.startKey.split(':').first),
+        int.parse(widget.startKey.split(":").first),
       );
     }
     int listLen = pagesInfoWithSurahMetaData.length;
@@ -146,7 +146,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
           pagesInfoWithSurahMetaData[i],
         );
         List allAyahsInThisSurah = getListOfAyahKey(
-          startAyahKey: '${pagesInfoWithSurahMetaData[i]}:1',
+          startAyahKey: "${pagesInfoWithSurahMetaData[i]}:1",
           endAyahKey: endAyahKey,
         );
         String? start;
@@ -162,7 +162,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         try {
           pagesInfoWithSurahMetaData[i] = SurahHeaderInfoModel(
             SurahInfoModel.fromMap(
-              metaDataSurah['${pagesInfoWithSurahMetaData[i]}'],
+              metaDataSurah["${pagesInfoWithSurahMetaData[i]}"],
             ),
             start!,
             end!,
@@ -175,10 +175,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
     if (pagesInfoWithSurahMetaData[1].runtimeType != SurahHeaderInfoModel) {
       String? end;
-      String startSurahNumber = widget.startKey.split(':').first;
+      String startSurahNumber = widget.startKey.split(":").first;
       for (int idx = 0; idx < allAyahsKey.length; idx++) {
         String key = allAyahsKey[idx];
-        if (key.split(':').first != startSurahNumber) {
+        if (key.split(":").first != startSurahNumber) {
           end = allAyahsKey[idx - 1];
           break;
         }
@@ -207,7 +207,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
   @override
   Widget build(BuildContext context) {
     QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
-      (element) => Hive.box('user').get('selected_script') == element.name,
+      (element) => Hive.box("user").get("selected_script") == element.name,
     );
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
@@ -224,8 +224,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
             builder:
                 (context, state) => Text(
                   state.surahInfoModel?.nameSimple == null
-                      ? ''
-                      : '${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )',
+                      ? ""
+                      : "${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )",
                   style: const TextStyle(fontSize: 18),
                 ),
           ),
@@ -351,7 +351,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   }
                   try {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                      metaDataSurah[ayahsKeyOfPage.first.split(':').first],
+                      metaDataSurah[ayahsKeyOfPage.first.split(":").first],
                     );
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
                       surahInfoModel: surahInfoModel,
@@ -378,7 +378,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   }
                   try {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                      metaDataSurah[ayahsKeyOfPage.first.split(':').first],
+                      metaDataSurah[ayahsKeyOfPage.first.split(":").first],
                     );
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
                       surahInfoModel: surahInfoModel,
@@ -420,7 +420,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   Row(
                     children: [
                       const Gap(15),
-                      const Text('Page: '),
+                      const Text("Page: "),
                       Text(
                         (current as PageInfoModel).pageNumber.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),

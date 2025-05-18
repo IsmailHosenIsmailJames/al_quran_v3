@@ -1,14 +1,14 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:html/parser.dart' show parseFragment;
-import 'package:html/dom.dart' as dom;
+import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:html/parser.dart" show parseFragment;
+import "package:html/dom.dart" as dom;
 
-import 'color/tajweed_dark.dart';
-import 'color/tajweed_light.dart';
+import "color/tajweed_dark.dart";
+import "color/tajweed_light.dart";
 
 TextSpan parseTajweedWord({
   required String wordKey,
@@ -55,8 +55,8 @@ TextSpan parseTajweedWord({
       dom.Element element = node as dom.Element;
       Color nextColor = currentColor;
 
-      if (element.localName == 'rule') {
-        String? ruleClass = element.attributes['class'];
+      if (element.localName == "rule") {
+        String? ruleClass = element.attributes["class"];
         if (ruleClass != null && currentThemeColors.containsKey(ruleClass)) {
           nextColor = currentThemeColors[ruleClass]!;
         } else if (ruleClass != null) {

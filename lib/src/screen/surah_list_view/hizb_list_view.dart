@@ -1,14 +1,14 @@
-import 'package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/components/get_surah_index_widget.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:flutter/material.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 class HizbListView extends StatelessWidget {
   final List<HizbModel> hizbInfoList;
@@ -20,7 +20,7 @@ class HizbListView extends StatelessWidget {
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
     QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
-      (element) => Hive.box('user').get('selected_script') == element.name,
+      (element) => Hive.box("user").get("selected_script") == element.name,
     );
     ScrollController scrollController = ScrollController();
 
@@ -77,7 +77,7 @@ class HizbListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Hizb',
+                              "Hizb",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500,
@@ -116,10 +116,10 @@ class HizbListView extends StatelessWidget {
                         child: ScriptProcessor(
                           scriptInfo: ScriptInfo(
                             surahNumber: int.parse(
-                              hizbInfoList[index].firstVerseKey.split(':')[0],
+                              hizbInfoList[index].firstVerseKey.split(":")[0],
                             ),
                             ayahNumber: int.parse(
-                              hizbInfoList[index].firstVerseKey.split(':')[1],
+                              hizbInfoList[index].firstVerseKey.split(":")[1],
                             ),
                             quranScriptType: quranScriptType,
                             limitWord: 4,

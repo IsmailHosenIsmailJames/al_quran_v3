@@ -1,48 +1,48 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
-import 'package:al_quran_v3/src/audio/player/audio_player_manager.dart';
-import 'package:al_quran_v3/src/functions/basic_functions.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart';
-import 'package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart';
-import 'package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:al_quran_v3/src/widget/quran_script/script_processor.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:gap/gap.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
+import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_html/flutter_html.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 Widget getAyahByAyahCard({
   required String ayahKey,
   required QuranScriptType quranScriptType,
   required BuildContext context,
 }) {
-  int surahNumber = int.parse(ayahKey.toString().split(':')[0]);
-  int ayahNumber = int.parse(ayahKey.toString().split(':')[1]);
+  int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
+  int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
   Map translationMap =
-      Hive.box('quran_translation').get(ayahKey) ??
-      {'t': 'Translation Not Found'};
-  String translation = translationMap['t'] ?? 'Translation Not Found';
-  translation = translation.replaceAll('>', '> ');
-  Map footNote = translationMap['f'] ?? {};
+      Hive.box("quran_translation").get(ayahKey) ??
+      {"t": "Translation Not Found"};
+  String translation = translationMap["t"] ?? "Translation Not Found";
+  translation = translation.replaceAll(">", "> ");
+  Map footNote = translationMap["f"] ?? {};
   List wordByWord = [];
   bool supportsWordByWord = false;
   final metaDataOfWordByWord = Hive.box(
-    'quran_word_by_word',
-  ).get('meta_data', defaultValue: {});
+    "quran_word_by_word",
+  ).get("meta_data", defaultValue: {});
   if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
     supportsWordByWord = true;
   }
   if (supportsWordByWord) {
-    wordByWord = Hive.box('quran_word_by_word').get(ayahKey) ?? [];
+    wordByWord = Hive.box("quran_word_by_word").get(ayahKey) ?? [];
   }
   return Container(
     padding: const EdgeInsets.all(5),
@@ -85,7 +85,7 @@ Widget getAyahByAyahCard({
                     ),
                   );
                 },
-                child: const Text('Tafsir'),
+                child: const Text("Tafsir"),
               ),
             ),
             const Gap(5),
@@ -102,7 +102,7 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {},
-                tooltip: 'Share',
+                tooltip: "Share",
                 icon: const Icon(FluentIcons.share_24_filled, size: 18),
               ),
             ),
@@ -120,7 +120,7 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {},
-                tooltip: 'Copy',
+                tooltip: "Copy",
                 icon: const Icon(FluentIcons.copy_16_filled, size: 18),
               ),
             ),
@@ -138,7 +138,7 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {},
-                tooltip: 'Add Note',
+                tooltip: "Add Note",
                 icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
               ),
             ),
@@ -158,11 +158,11 @@ Widget getAyahByAyahCard({
                 onPressed: () {
                   log(
                     Hive.box(
-                      'segmented_quran_recitation',
-                    ).get('1:1').toString(),
+                      "segmented_quran_recitation",
+                    ).get("1:1").toString(),
                   );
                 },
-                tooltip: 'Bookmark',
+                tooltip: "Bookmark",
                 icon: const Icon(Icons.bookmark_added, size: 18),
               ),
             ),
@@ -192,12 +192,12 @@ Widget getAyahByAyahCard({
                           } else if (isCurrent) {
                             AudioPlayerManager.audioPlayer.play();
                           } else {
-                            log('Current Ayah: $ayahKey');
+                            log("Current Ayah: $ayahKey");
                             bool isPlayList =
                                 context.read<AudioUiCubit>().state.isPlayList;
                             if (isPlayList &&
-                                ayahKeyManagement.current?.split(':').first ==
-                                    ayahKey.split(':').first) {
+                                ayahKeyManagement.current?.split(":").first ==
+                                    ayahKey.split(":").first) {
                               await AudioPlayerManager.audioPlayer.seek(
                                 Duration.zero,
                                 index: ayahKeyManagement.ayahList?.indexOf(
@@ -244,7 +244,7 @@ Widget getAyahByAyahCard({
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Translation:',
+            "Translation:",
             style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
           ),
         ),
@@ -258,7 +258,7 @@ Widget getAyahByAyahCard({
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Foot Note:',
+              "Foot Note:",
               style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
             ),
           ),
@@ -272,7 +272,7 @@ Widget getAyahByAyahCard({
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${index + 1}. '),
+                    Text("${index + 1}. "),
                     Container(
                       decoration: const BoxDecoration(),
                       padding: const EdgeInsets.only(bottom: 5),
@@ -319,7 +319,7 @@ Widget getAyahByAyahCard({
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Word by Word Translation:',
+                    "Word by Word Translation:",
                     style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
                   ),
 

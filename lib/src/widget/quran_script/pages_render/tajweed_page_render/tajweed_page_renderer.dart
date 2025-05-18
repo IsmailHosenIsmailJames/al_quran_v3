@@ -1,14 +1,14 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:hive/hive.dart";
 
 class TajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
@@ -26,18 +26,18 @@ class TajweedPageRenderer extends StatelessWidget {
 
     for (final ayahsKey in ayahsKey) {
       Map? audioTimeStamp = Hive.box(
-        'segmented_quran_recitation',
+        "segmented_quran_recitation",
       ).get(ayahsKey, defaultValue: null);
       List<List>? segments;
       if (audioTimeStamp != null) {
-        segments = List<List>.from(audioTimeStamp['segments']);
+        segments = List<List>.from(audioTimeStamp["segments"]);
       }
       if (segments != null) {
         audioSegmentsMap[ayahsKey] = segments;
       }
     }
 
-    String? wordKey = '';
+    String? wordKey = "";
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -53,8 +53,8 @@ class TajweedPageRenderer extends StatelessWidget {
                         (current.currentDuration ?? Duration.zero) &&
                     Duration(milliseconds: word[2]) >
                         (current.currentDuration ?? Duration.zero)) {
-                  if (wordKey != '$currentAyahKey:${word[0]}') {
-                    wordKey = '$currentAyahKey:${word[0]}';
+                  if (wordKey != "$currentAyahKey:${word[0]}") {
+                    wordKey = "$currentAyahKey:${word[0]}";
                     return true;
                   }
                   return false;
@@ -70,15 +70,15 @@ class TajweedPageRenderer extends StatelessWidget {
           return false;
         },
         builder: (context, positionState) {
-          log(wordKey.toString(), name: 'wordKey');
+          log(wordKey.toString(), name: "wordKey");
 
           return Text.rich(
             TextSpan(
               children:
                   ayahsKey.map((ayahKey) {
                     List words =
-                        tajweedScript[ayahKey.split(':').first]?[ayahKey
-                            .split(':')
+                        tajweedScript[ayahKey.split(":").first]?[ayahKey
+                            .split(":")
                             .last] ??
                         [];
 
@@ -87,14 +87,14 @@ class TajweedPageRenderer extends StatelessWidget {
                           List.generate(words.length, (index) {
                             String word = words[index];
                             return parseTajweedWord(
-                              wordKey: '$ayahKey:${index + 1}',
-                              wordHtml: '$word ',
+                              wordKey: "$ayahKey:${index + 1}",
+                              wordHtml: "$word ",
                               baseStyle: TextStyle(
                                 fontSize: baseTextStyle?.fontSize ?? 24,
                                 fontFamily:
-                                    baseTextStyle?.fontFamily ?? 'QPC_Hafs',
+                                    baseTextStyle?.fontFamily ?? "QPC_Hafs",
                                 backgroundColor:
-                                    wordKey == '$ayahKey:${index + 1}'
+                                    wordKey == "$ayahKey:${index + 1}"
                                         ? AppColors.primaryColor.withValues(
                                           alpha: 0.1,
                                         )
@@ -108,7 +108,7 @@ class TajweedPageRenderer extends StatelessWidget {
             ),
             style: TextStyle(
               fontSize: baseTextStyle?.fontSize ?? 24,
-              fontFamily: baseTextStyle?.fontFamily ?? 'QPC_Hafs',
+              fontFamily: baseTextStyle?.fontFamily ?? "QPC_Hafs",
               fontWeight: baseTextStyle?.fontWeight,
             ),
             textAlign: TextAlign.center,

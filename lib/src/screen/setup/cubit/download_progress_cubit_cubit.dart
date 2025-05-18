@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import "package:bloc/bloc.dart";
+import "package:meta/meta.dart";
 
-part 'download_progress_cubit_state.dart';
+part "download_progress_cubit_state.dart";
 
 class DownloadProgressCubitCubit extends Cubit<DownloadProgressCubitState> {
   DownloadProgressCubitCubit() : super(DownloadProgressCubitInitial());

@@ -1,4 +1,4 @@
-part of 'download_progress_cubit_cubit.dart';
+part of "download_progress_cubit_cubit.dart";
 
 @immutable
 sealed class DownloadProgressCubitState {}

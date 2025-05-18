@@ -1,19 +1,19 @@
 import "dart:async";
 
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_state_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/ayahkey_management.dart';
-import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
-import 'package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart';
-import 'package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:just_audio/just_audio.dart";
+import "package:just_audio_background/just_audio_background.dart";
 
 class AudioPlayerManager {
   static bool isListening = false;
@@ -35,14 +35,14 @@ class AudioPlayerManager {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Audio Player Error'),
-            content: Text(event.message ?? 'Something went wrong'),
+            title: const Text("Audio Player Error"),
+            content: Text(event.message ?? "Something went wrong"),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Ok'),
+                child: const Text("Ok"),
               ),
             ],
           );
@@ -98,7 +98,7 @@ class AudioPlayerManager {
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-      metaDataSurah[ayahKey.split(':').first],
+      metaDataSurah[ayahKey.split(":").first],
     );
 
     String audioURL = getUrlFromAyahKey(ayahKey, reciterInfoModel);
@@ -154,7 +154,7 @@ class AudioPlayerManager {
     List<LockCachingAudioSource> listOfAudioSource = [];
     for (String ayahKey in ayahList) {
       SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        metaDataSurah[ayahKey.split(':').first],
+        metaDataSurah[ayahKey.split(":").first],
       );
       listOfAudioSource.add(
         LockCachingAudioSource(
@@ -203,7 +203,7 @@ class AudioPlayerManager {
     AudioPlayer audioPlayerNew = AudioPlayer();
     AudioSource audioSource = LockCachingAudioSource(
       Uri.parse(
-        'https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3',
+        "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
       ),
       tag: MediaItem(id: wordKey, title: wordKey),
     );
@@ -236,7 +236,7 @@ class AudioPlayerManager {
   }
 
   static String wordKeyToAudioOfWordID(String wordKey) {
-    List<String> splitString = wordKey.split(':');
+    List<String> splitString = wordKey.split(":");
     String surahNumber = splitString[0];
     String ayahNumber = splitString[1];
     String wordNumber = splitString[2];
@@ -244,11 +244,11 @@ class AudioPlayerManager {
   }
 
   static String getUrlFromAyahKey(String ayahKey, ReciterInfoModel reciter) {
-    return '${reciter.link}/${ayahKeyToAudioAyahID(ayahKey)}.mp3';
+    return "${reciter.link}/${ayahKeyToAudioAyahID(ayahKey)}.mp3";
   }
 
   static String ayahKeyToAudioAyahID(String ayahKey) {
-    List<String> sections = ayahKey.split(':');
+    List<String> sections = ayahKey.split(":");
     return "${sections[0].padLeft(3, '0')}${sections[1].padLeft(3, '0')}";
   }
 

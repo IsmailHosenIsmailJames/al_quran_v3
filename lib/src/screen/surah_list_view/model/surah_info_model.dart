@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class SurahInfoModel {
   final int id;
@@ -44,22 +44,22 @@ class SurahInfoModel {
   String toJson() => json.encode(toMap());
 
   factory SurahInfoModel.fromMap(Map<String, dynamic> json) => SurahInfoModel(
-    id: json['id'],
-    nameSimple: json['name_simple'],
-    revelationOrder: json['revelation_order'],
-    revelationPlace: json['revelation_place'],
-    versesCount: json['verses_count'],
-    pagesRange: json['pages_range'],
-    nameArabic: json['name_arabic'],
+    id: json["id"],
+    nameSimple: json["name_simple"],
+    revelationOrder: json["revelation_order"],
+    revelationPlace: json["revelation_place"],
+    versesCount: json["verses_count"],
+    pagesRange: json["pages_range"],
+    nameArabic: json["name_arabic"],
   );
 
   Map<String, dynamic> toMap() => {
-    'id': id,
-    'name_simple': nameSimple,
-    'revelation_order': revelationOrder,
-    'revelation_place': revelationPlace,
-    'verses_count': versesCount,
-    'pages_range': pagesRange,
-    'name_arabic': nameArabic,
+    "id": id,
+    "name_simple": nameSimple,
+    "revelation_order": revelationOrder,
+    "revelation_place": revelationPlace,
+    "verses_count": versesCount,
+    "pages_range": pagesRange,
+    "name_arabic": nameArabic,
   };
 }

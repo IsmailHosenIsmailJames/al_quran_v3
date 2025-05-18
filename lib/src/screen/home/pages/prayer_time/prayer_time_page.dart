@@ -1,9 +1,9 @@
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/location_aquire.dart';
-import 'package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prayers_times/prayers_times.dart';
+import "package:al_quran_v3/src/screen/home/pages/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/location_aquire.dart";
+import "package:al_quran_v3/src/screen/home/pages/location_handler/model/location_data_qibla_data_state.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:prayers_times/prayers_times.dart";
 
 class PrayerTimePage extends StatefulWidget {
   const PrayerTimePage({super.key});
@@ -32,11 +32,11 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             coordinates: coordinates,
             calculationParameters: params,
             precision: true,
-            locationName: 'Asia/Dhaka',
+            locationName: "Asia/Dhaka",
           );
           return Center(
             child: Text(
-              '${prayerTimes.nextPrayer()} - ${TimeOfDay.fromDateTime(prayerTimes.timeForPrayer(prayerTimes.nextPrayer()) ?? DateTime.now()).format(context)}',
+              "${prayerTimes.nextPrayer()} - ${TimeOfDay.fromDateTime(prayerTimes.timeForPrayer(prayerTimes.nextPrayer()) ?? DateTime.now()).format(context)}",
             ),
           );
         }

@@ -1,5 +1,5 @@
-import 'package:al_quran_v3/src/audio/model/recitation_info_model.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranReciterCubit extends Cubit<ReciterInfoModel> {
   final ReciterInfoModel initReciter;

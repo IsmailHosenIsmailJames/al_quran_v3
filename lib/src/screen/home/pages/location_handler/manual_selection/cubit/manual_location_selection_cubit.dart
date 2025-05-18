@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:flutter_bloc/flutter_bloc.dart";
 
 class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
   ManualLocationSelectionCubit() : super(ManualLocationSelectionState());

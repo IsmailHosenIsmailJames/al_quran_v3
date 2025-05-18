@@ -1,16 +1,16 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/main.dart';
-import 'package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart';
-import 'package:al_quran_v3/src/audio/cubit/player_position_cubit.dart';
-import 'package:al_quran_v3/src/audio/model/audio_player_position_model.dart';
-import 'package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/widget/quran_script/model/script_info.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:hive/hive.dart";
 
 class NonTajweedPageRenderer extends StatelessWidget {
   final bool isUthmani;
@@ -30,18 +30,18 @@ class NonTajweedPageRenderer extends StatelessWidget {
 
     for (final ayahsKey in ayahsKey) {
       Map? audioTimeStamp = Hive.box(
-        'segmented_quran_recitation',
+        "segmented_quran_recitation",
       ).get(ayahsKey, defaultValue: null);
       List<List>? segments;
       if (audioTimeStamp != null) {
-        segments = List<List>.from(audioTimeStamp['segments']);
+        segments = List<List>.from(audioTimeStamp["segments"]);
       }
       if (segments != null) {
         audioSegmentsMap[ayahsKey] = segments;
       }
     }
 
-    String? wordKey = '';
+    String? wordKey = "";
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -57,8 +57,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
                         (current.currentDuration ?? Duration.zero) &&
                     Duration(milliseconds: word[2]) >
                         (current.currentDuration ?? Duration.zero)) {
-                  if (wordKey != '$currentAyahKey:${word[0]}') {
-                    wordKey = '$currentAyahKey:${word[0]}';
+                  if (wordKey != "$currentAyahKey:${word[0]}") {
+                    wordKey = "$currentAyahKey:${word[0]}";
                     return true;
                   }
                   return false;
@@ -74,15 +74,15 @@ class NonTajweedPageRenderer extends StatelessWidget {
           return false;
         },
         builder: (context, positionState) {
-          log(wordKey.toString(), name: 'wordKey');
+          log(wordKey.toString(), name: "wordKey");
           return Text.rich(
             TextSpan(
               children:
                   ayahsKey.map((ayahKey) {
                     List words =
                         (isUthmani ? uthmaniScript : indopakScript)[ayahKey
-                            .split(':')
-                            .first]?[ayahKey.split(':').last] ??
+                            .split(":")
+                            .first]?[ayahKey.split(":").last] ??
                         [];
 
                     return TextSpan(
@@ -90,9 +90,9 @@ class NonTajweedPageRenderer extends StatelessWidget {
                           List.generate(words.length, (index) {
                             String word = words[index];
                             return TextSpan(
-                              text: '$word ',
+                              text: "$word ",
                               style:
-                                  wordKey == '$ayahKey:${index + 1}'
+                                  wordKey == "$ayahKey:${index + 1}"
                                       ? TextStyle(
                                         backgroundColor: AppColors.primaryColor
                                             .withValues(alpha: 0.15),
@@ -104,7 +104,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                     ..onTap = () {
                                       showPopupWordFunction(
                                         context: context,
-                                        wordKey: '$ayahKey:${index + 1}',
+                                        wordKey: "$ayahKey:${index + 1}",
                                         word: words[index],
                                         scriptCategory: QuranScriptType.uthmani,
                                       );
@@ -116,7 +116,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
             ),
             style: TextStyle(
               fontSize: baseTextStyle?.fontSize ?? 24,
-              fontFamily: baseTextStyle?.fontFamily ?? 'QPC_Hafs',
+              fontFamily: baseTextStyle?.fontFamily ?? "QPC_Hafs",
               fontWeight: baseTextStyle?.fontWeight,
             ),
             textAlign: TextAlign.center,
