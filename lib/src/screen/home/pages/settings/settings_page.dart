@@ -22,162 +22,166 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            spacing: 5,
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        selectedScript == QuranScriptType.tajweed
-                            ? AppColors.primaryColor
-                            : Colors.grey.withValues(alpha: 0.2),
-                    foregroundColor:
-                        selectedScript == QuranScriptType.tajweed
-                            ? Colors.white
-                            : AppColors.primaryColor,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(roundedRadius),
-                        bottomLeft: Radius.circular(roundedRadius),
+      appBar: AppBar(title: const Text("Settings")),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              spacing: 5,
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          selectedScript == QuranScriptType.tajweed
+                              ? AppColors.primaryColor
+                              : Colors.grey.withValues(alpha: 0.2),
+                      foregroundColor:
+                          selectedScript == QuranScriptType.tajweed
+                              ? Colors.white
+                              : AppColors.primaryColor,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(roundedRadius),
+                          bottomLeft: Radius.circular(roundedRadius),
+                        ),
                       ),
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                     ),
-                    elevation: 0,
-                    shadowColor: Colors.transparent,
-                  ),
-                  onPressed: () {
-                    Hive.box(
-                      "user",
-                    ).put("selected_script", QuranScriptType.tajweed.name);
-                    setState(() {
-                      selectedScript = QuranScriptType.tajweed;
-                    });
-                  },
-                  label: const Text(
-                    "Tajweed",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  icon:
-                      selectedScript == QuranScriptType.tajweed
-                          ? const Icon(Icons.done_rounded)
-                          : null,
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        selectedScript == QuranScriptType.uthmani
-                            ? AppColors.primaryColor
-                            : Colors.grey.withValues(alpha: 0.2),
-                    foregroundColor:
-                        selectedScript == QuranScriptType.uthmani
-                            ? Colors.white
-                            : AppColors.primaryColor,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
+                    onPressed: () {
+                      Hive.box(
+                        "user",
+                      ).put("selected_script", QuranScriptType.tajweed.name);
+                      setState(() {
+                        selectedScript = QuranScriptType.tajweed;
+                      });
+                    },
+                    label: const Text(
+                      "Tajweed",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    elevation: 0,
-                    shadowColor: Colors.transparent,
+                    icon:
+                        selectedScript == QuranScriptType.tajweed
+                            ? const Icon(Icons.done_rounded)
+                            : null,
                   ),
-                  onPressed: () {
-                    Hive.box(
-                      "user",
-                    ).put("selected_script", QuranScriptType.uthmani.name);
-
-                    setState(() {
-                      selectedScript = QuranScriptType.uthmani;
-                    });
-                  },
-                  label: const Text(
-                    "Uthmani",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  icon:
-                      selectedScript == QuranScriptType.uthmani
-                          ? const Icon(Icons.done_rounded)
-                          : null,
                 ),
-              ),
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        selectedScript == QuranScriptType.indopak
-                            ? AppColors.primaryColor
-                            : Colors.grey.withValues(alpha: 0.2),
-                    foregroundColor:
-                        selectedScript == QuranScriptType.indopak
-                            ? Colors.white
-                            : AppColors.primaryColor,
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(roundedRadius),
-                        bottomRight: Radius.circular(roundedRadius),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          selectedScript == QuranScriptType.uthmani
+                              ? AppColors.primaryColor
+                              : Colors.grey.withValues(alpha: 0.2),
+                      foregroundColor:
+                          selectedScript == QuranScriptType.uthmani
+                              ? Colors.white
+                              : AppColors.primaryColor,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
                       ),
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                     ),
-                    elevation: 0,
-                    shadowColor: Colors.transparent,
-                  ),
-                  onPressed: () {
-                    Hive.box(
-                      "user",
-                    ).put("selected_script", QuranScriptType.indopak.name);
+                    onPressed: () {
+                      Hive.box(
+                        "user",
+                      ).put("selected_script", QuranScriptType.uthmani.name);
 
-                    setState(() {
-                      selectedScript = QuranScriptType.indopak;
-                    });
-                  },
-                  label: const Text(
-                    "Indopak",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                      setState(() {
+                        selectedScript = QuranScriptType.uthmani;
+                      });
+                    },
+                    label: const Text(
+                      "Uthmani",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    icon:
+                        selectedScript == QuranScriptType.uthmani
+                            ? const Icon(Icons.done_rounded)
+                            : null,
                   ),
-
-                  icon:
-                      selectedScript == QuranScriptType.indopak
-                          ? const Icon(Icons.done_rounded)
-                          : null,
                 ),
-              ),
-            ],
-          ),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          selectedScript == QuranScriptType.indopak
+                              ? AppColors.primaryColor
+                              : Colors.grey.withValues(alpha: 0.2),
+                      foregroundColor:
+                          selectedScript == QuranScriptType.indopak
+                              ? Colors.white
+                              : AppColors.primaryColor,
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(roundedRadius),
+                          bottomRight: Radius.circular(roundedRadius),
+                        ),
+                      ),
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                    ),
+                    onPressed: () {
+                      Hive.box(
+                        "user",
+                      ).put("selected_script", QuranScriptType.indopak.name);
 
-          const Gap(30),
-          ElevatedButton(
-            onPressed: () async {
-              final box = Hive.box("segmented_quran_recitation");
-              Map metaData = box.get("meta_data");
-              Map getFirstAyah = box.get("1:1");
-              String name = metaData["name"];
-              String baseAudioUrl = getFirstAyah["audio_url"];
-              baseAudioUrl = baseAudioUrl.substring(
-                baseAudioUrl.lastIndexOf("/"),
-                baseAudioUrl.length,
-              );
+                      setState(() {
+                        selectedScript = QuranScriptType.indopak;
+                      });
+                    },
+                    label: const Text(
+                      "Indopak",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
 
-              ReciterInfoModel reciterInfoModel = ReciterInfoModel(
-                link: baseAudioUrl,
-                name: name
-                    .split("/")
-                    .last
-                    .replaceAll("ayah-recitation-", "")
-                    .replaceAll(".json.txt", "")
-                    .replaceAll("-", " "),
-                supportWordSegmentation: true,
-              );
+                    icon:
+                        selectedScript == QuranScriptType.indopak
+                            ? const Icon(Icons.done_rounded)
+                            : null,
+                  ),
+                ),
+              ],
+            ),
 
-              log(reciterInfoModel.toJson());
-            },
-            child: const Text("Test"),
-          ),
-        ],
+            const Gap(30),
+            ElevatedButton(
+              onPressed: () async {
+                final box = Hive.box("segmented_quran_recitation");
+                Map metaData = box.get("meta_data");
+                Map getFirstAyah = box.get("1:1");
+                String name = metaData["name"];
+                String baseAudioUrl = getFirstAyah["audio_url"];
+                baseAudioUrl = baseAudioUrl.substring(
+                  baseAudioUrl.lastIndexOf("/"),
+                  baseAudioUrl.length,
+                );
+
+                ReciterInfoModel reciterInfoModel = ReciterInfoModel(
+                  link: baseAudioUrl,
+                  name: name
+                      .split("/")
+                      .last
+                      .replaceAll("ayah-recitation-", "")
+                      .replaceAll(".json.txt", "")
+                      .replaceAll("-", " "),
+                  supportWordSegmentation: true,
+                );
+
+                log(reciterInfoModel.toJson());
+              },
+              child: const Text("Test"),
+            ),
+          ],
+        ),
       ),
     );
   }

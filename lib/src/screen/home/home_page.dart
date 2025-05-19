@@ -7,8 +7,9 @@ import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:gap/gap.dart";
 
-import "pages/prayer_time/prayer_time_page.dart";
+import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,6 +38,16 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {},
             icon: const Icon(FluentIcons.search_28_regular),
           ),
+          const Gap(5),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            icon: const Icon(FluentIcons.settings_24_regular),
+          ),
         ],
       ),
       body: Stack(
@@ -46,7 +57,6 @@ class _HomePageState extends State<HomePage> {
             const PrayerTimePage(),
             const QiblaDirection(),
             const AudioPage(),
-            const SettingsPage(),
           ][_selectedIndex],
           const SafeArea(
             child: Align(
@@ -61,8 +71,8 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        showUnselectedLabels: false,
         selectedItemColor: AppColors.primaryColor,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -78,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   ? FluentIcons.clock_24_filled
                   : FluentIcons.clock_24_regular,
             ),
-            label: "Salah",
+            label: "Prayers",
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -95,14 +105,6 @@ class _HomePageState extends State<HomePage> {
                   : Icons.audiotrack_outlined,
             ),
             label: "Audio",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 4
-                  ? FluentIcons.settings_24_filled
-                  : FluentIcons.settings_24_regular,
-            ),
-            label: "Settings",
           ),
         ],
       ),
