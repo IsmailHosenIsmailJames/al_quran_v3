@@ -1,17 +1,8 @@
-import "dart:developer";
-
-import "package:adhan/adhan.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
 
 class PrayerTimeCanvas extends StatefulWidget {
-  final Coordinates coordinates;
-  final CalculationParameters parameters;
-  const PrayerTimeCanvas({
-    super.key,
-    required this.coordinates,
-    required this.parameters,
-  });
+  const PrayerTimeCanvas({super.key});
 
   @override
   State<PrayerTimeCanvas> createState() => _PrayerTimeCanvasState();
@@ -20,25 +11,8 @@ class PrayerTimeCanvas extends StatefulWidget {
 class _PrayerTimeCanvasState extends State<PrayerTimeCanvas> {
   @override
   Widget build(BuildContext context) {
-    final prayerTimes = PrayerTimes(
-      widget.coordinates,
-      DateComponents.from(DateTime.now()),
-      widget.parameters,
-    );
-    Prayer current = prayerTimes.nextPrayer();
-    log(current.name);
     return Row(
       children: [
-        Column(
-          children: [
-            Text(
-              TimeOfDay.fromDateTime(
-                prayerTimes.timeForPrayer(current)!,
-              ).format(context),
-            ),
-            Text(prayerTimes.fajr.timeZoneName),
-          ],
-        ),
         Container(
           height: 200,
           width: 200,
