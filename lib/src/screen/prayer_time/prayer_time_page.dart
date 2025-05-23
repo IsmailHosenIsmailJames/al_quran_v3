@@ -1,12 +1,11 @@
 import "dart:convert";
-import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/time_list_of_prayers.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -37,7 +36,10 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             );
           }
 
-          return const TimeListOfPrayers();
+          return TimeListOfPrayers(
+            lat: state.latLon!.latitude,
+            lon: state.latLon!.longitude,
+          );
         }
       },
     );
@@ -51,319 +53,77 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           FutureBuilder(
-            future: placemarkFromCoordinates(52.2165157, 6.9437819),
+            future: placemarkFromCoordinates(lat, lon),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 return const CircularProgressIndicator();
               } else if (snapshot.hasData) {
-                String? name;
-                String? street;
-                String? isoCountryCode;
                 String? country;
-                String? postalCode;
+
                 String? administrativeArea;
                 String? subAdministrativeArea;
-                String? locality;
-                String? subLocality;
-                String? thoroughfare;
-                String? subThoroughfare;
+
                 for (Placemark placemark in snapshot.data ?? []) {
-                  name ??= placemark.name;
-                  street ??= placemark.street;
-                  isoCountryCode ??= placemark.isoCountryCode;
                   country ??= placemark.country;
-                  postalCode ??= placemark.postalCode;
                   administrativeArea ??= placemark.administrativeArea;
                   subAdministrativeArea ??= placemark.subAdministrativeArea;
-                  locality ??= placemark.locality;
-                  subLocality ??= placemark.subLocality;
-                  thoroughfare ??= placemark.thoroughfare;
-                  subThoroughfare ??= placemark.subThoroughfare;
                 }
                 return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (name != null)
-                      Row(
+                    const Text(
+                      "Address: ",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const Gap(5),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.primaryColor),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.all(5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Name:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          Text(
+                            "$subAdministrativeArea, $administrativeArea, $country",
                           ),
                           const Gap(5),
-                          Text(
-                            name,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
+                          Row(
+                            children: [
+                              const Text(
+                                "Latitude: ",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              Text(lat.toString()),
+                            ],
+                          ),
+                          const Gap(5),
+                          Row(
+                            children: [
+                              const Text(
+                                "Longitude: ",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              Text(lon.toString()),
+                            ],
                           ),
                         ],
                       ),
-                    if (street != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Street:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            street,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (isoCountryCode != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Iso Country Code:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            isoCountryCode,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (country != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Country:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            country,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (postalCode != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Postal Code:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            postalCode,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (administrativeArea != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Administrative Area:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            administrativeArea,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (subAdministrativeArea != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "SubAdministrative Area:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            subAdministrativeArea,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (locality != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Locality:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            locality,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (subLocality != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Sub Locality:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            subLocality,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (thoroughfare != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Thoroughfare:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            thoroughfare,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    if (subThoroughfare != null)
-                      Row(
-                        children: [
-                          const Text(
-                            "Sub Thoroughfare:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const Gap(5),
-                          Text(
-                            subThoroughfare,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.grey.shade600
-                                      : Colors.grey.shade400,
-                            ),
-                          ),
-                        ],
-                      ),
+                    ),
                   ],
                 );
               }
               return Text("Lat: $lat, Lon: $lon");
             },
           ),
-          const Gap(10),
+          const Gap(30),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton.icon(
