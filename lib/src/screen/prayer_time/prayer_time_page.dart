@@ -1,9 +1,12 @@
 import "dart:convert";
+import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
+import "package:al_quran_v3/src/screen/prayer_time/time_list_of_prayers.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -34,13 +37,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             );
           }
 
-          return SingleChildScrollView(
-            child: Text(
-              const JsonEncoder.withIndent(
-                "    ",
-              ).convert(Hive.box("prayer_time_data").values.first),
-            ),
-          );
+          return const TimeListOfPrayers();
         }
       },
     );
