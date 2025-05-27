@@ -4,22 +4,26 @@ class ReciterInfoModel {
   String link;
   String name;
   bool? supportWordSegmentation;
+  String? source;
 
   ReciterInfoModel({
     required this.link,
     required this.name,
     this.supportWordSegmentation,
+    this.source,
   });
 
   ReciterInfoModel copyWith({
     String? link,
     String? name,
     bool? supportWordSegmentation,
+    String? source,
   }) => ReciterInfoModel(
     link: link ?? this.link,
     name: name ?? this.name,
     supportWordSegmentation:
         supportWordSegmentation ?? this.supportWordSegmentation,
+    source: source ?? this.source,
   );
 
   factory ReciterInfoModel.fromJson(String str) =>
@@ -32,6 +36,7 @@ class ReciterInfoModel {
       link: json["link"],
       name: json["name"],
       supportWordSegmentation: json["supportWordSegmentation"],
+      source: json["source"],
     );
   }
 
@@ -41,5 +46,6 @@ class ReciterInfoModel {
     "link": link,
     "name": name,
     "supportWordSegmentation": supportWordSegmentation,
+    "source": source,
   };
 }

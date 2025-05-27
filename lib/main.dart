@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/audio/resources/quran_com/all_recitations.dart";
+import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
               (context) => QuranReciterCubit(
                 initReciter: ReciterInfoModel.fromMap(
                   Hive.box("user").get("reciter", defaultValue: null) ??
-                      recitationsListOfQuranCom[0],
+                      recitationsInfoList[0],
                 ),
               ),
         ),
