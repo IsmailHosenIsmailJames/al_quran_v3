@@ -104,8 +104,12 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                     ..onTap = () {
                                       showPopupWordFunction(
                                         context: context,
-                                        wordKey: "$ayahKey:${index + 1}",
-                                        word: words[index],
+                                        initWordIndex: index,
+                                        wordKeys: List.generate(
+                                          words.length,
+                                          (index) => "$ayahKey:${index + 1}",
+                                        ),
+                                        words: List<String>.from(words),
                                         scriptCategory: QuranScriptType.uthmani,
                                       );
                                     },

@@ -104,11 +104,16 @@ class NonTajweedScriptView extends StatelessWidget {
                         ? null
                         : (TapGestureRecognizer()
                           ..onTap = () {
+                            List<String> wordsKey = List.generate(
+                              words.length,
+                              (i) =>
+                                  "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
+                            );
                             showPopupWordFunction(
                               context: context,
-                              wordKey:
-                                  "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}",
-                              word: words[index],
+                              wordKeys: wordsKey,
+                              initWordIndex: index,
+                              words: List<String>.from(words),
                               scriptCategory: QuranScriptType.uthmani,
                             );
                           }),
