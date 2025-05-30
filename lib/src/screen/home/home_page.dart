@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
-import "package:al_quran_v3/src/screen/home/pages/audio/audio_page.dart";
+import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
