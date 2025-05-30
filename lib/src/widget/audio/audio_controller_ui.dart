@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -44,14 +46,15 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   Widget build(BuildContext context) {
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
+        log(state.isInsideQuranPlayer.toString());
         double height =
-            state.showUi
+            (state.showUi && state.isInsideQuranPlayer)
                 ? state.isExpanded
                     ? 120
                     : 50
                 : 0;
         double width =
-            state.showUi
+            (state.showUi && state.isInsideQuranPlayer)
                 ? state.isExpanded
                     ? MediaQuery.of(context).size.width
                     : 50
@@ -83,7 +86,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               border: Border.all(color: AppColors.primaryColor, width: 0.5),
             ),
             child:
-                state.showUi
+                (state.showUi && state.isInsideQuranPlayer)
                     ? Stack(
                       children: [
                         if (!state.isExpanded)
@@ -200,6 +203,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                   ayahKey: ayahKey,
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
+                                  isInsideQuran: true,
                                 );
                               }
                               AudioPlayerManager.audioPlayer.seek(
@@ -232,6 +236,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: IconButton(
+                    style: IconButton.styleFrom(padding: EdgeInsets.all(0)),
+                    onPressed: () {
+                      AudioPlayerManager.stopListeningAudioPlayerState();
+                    },
+                    tooltip: "Stop & Close",
+                    icon: const Icon(Icons.close_rounded),
+                  ),
+                ),
                 IconButton(
                   onPressed:
                       int.parse(state?.current?.split(":").last ?? "0") > 1
@@ -258,6 +274,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                   ayahKey: tempAyahList[index - 1],
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
+                                  isInsideQuran: true,
                                 );
                               }
                             } else {
@@ -354,6 +371,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                   ayahKey: tempAyahList[index + 1],
                                   reciterInfoModel:
                                       context.read<SegmentedAudioCubit>().state,
+                                  isInsideQuran: true,
                                 );
                               }
                             } else {
@@ -421,6 +439,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             context.read<SegmentedAudioCubit>().state,
                         initialIndex: currentAyahNumber - 1,
                         instantPlay: AudioPlayerManager.audioPlayer.playing,
+                        isInsideQuran: true,
                       );
                     },
                     tooltip: "Play As Playlist",

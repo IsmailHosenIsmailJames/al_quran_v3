@@ -1,4 +1,5 @@
 import "dart:async";
+import "dart:developer";
 
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
@@ -18,19 +19,28 @@ import "package:just_audio_background/just_audio_background.dart";
 class AudioPlayerManager {
   static bool isListening = false;
   static AudioPlayer audioPlayer = AudioPlayer();
-  static startListeningAudioPlayerState() {
+
+  static StreamSubscription? positionStream;
+  static StreamSubscription? errorStream;
+  static StreamSubscription? playerEventStream;
+  static StreamSubscription? processingStateStream;
+  static StreamSubscription? durationStream;
+  static StreamSubscription? bufferedPositionStream;
+  static StreamSubscription? currentIndexStream;
+  static void startListeningAudioPlayerState() {
     if (isListening) return;
+    isListening = true;
     final context = navigatorKey.currentContext!;
     final playerPositionCubit = context.read<PlayerPositionCubit>();
 
-    audioPlayer.positionStream.listen((event) {
+    positionStream = audioPlayer.positionStream.listen((event) {
       if (durationToDecSec(playerPositionCubit.state.currentDuration) !=
           durationToDecSec(event)) {
         playerPositionCubit.changeCurrentPosition(event);
       }
     });
 
-    audioPlayer.errorStream.listen((event) {
+    errorStream = audioPlayer.errorStream.listen((event) {
       showDialog(
         context: context,
         builder: (context) {
@@ -50,10 +60,10 @@ class AudioPlayerManager {
       );
     });
 
-    audioPlayer.playerEventStream.listen((event) {
+    playerEventStream = audioPlayer.playerEventStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
     });
-    audioPlayer.processingStateStream.listen((event) {
+    processingStateStream = audioPlayer.processingStateStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(processingState: event);
       if (ProcessingState.completed == event) {
         playerPositionCubit.changeCurrentPosition(Duration.zero);
@@ -61,21 +71,21 @@ class AudioPlayerManager {
       }
     });
 
-    audioPlayer.durationStream.listen((event) {
+    durationStream = audioPlayer.durationStream.listen((event) {
       if (durationToDecSec(playerPositionCubit.state.totalDuration) !=
           durationToDecSec(event)) {
         playerPositionCubit.changeTotalDuration(event);
       }
     });
 
-    audioPlayer.bufferedPositionStream.listen((event) {
+    bufferedPositionStream = audioPlayer.bufferedPositionStream.listen((event) {
       if (durationToDecSec(playerPositionCubit.state.bufferDuration) !=
           durationToDecSec(event)) {
         playerPositionCubit.changeBufferPosition(event);
       }
     });
 
-    audioPlayer.currentIndexStream.listen((event) {
+    currentIndexStream = audioPlayer.currentIndexStream.listen((event) {
       if (event != null) {
         final ayahKeyCubit = context.read<AyahKeyCubit>();
         ayahKeyCubit.changeCurrentAyahKey(
@@ -85,9 +95,32 @@ class AudioPlayerManager {
     });
   }
 
+  static void stopListeningAudioPlayerState() async {
+    log(isListening.toString());
+    if (!isListening) return;
+    isListening = false;
+    positionStream?.cancel();
+    errorStream?.cancel();
+    playerEventStream?.cancel();
+    processingStateStream?.cancel();
+    durationStream?.cancel();
+    bufferedPositionStream?.cancel();
+    currentIndexStream?.cancel();
+    final audioUICubit = navigatorKey.currentContext!.read<AudioUiCubit>();
+    audioUICubit.expand(false);
+    audioUICubit.showUI(false);
+    audioUICubit.isPlayList(false);
+    audioUICubit.changeIsInsideQuran(false);
+    await audioPlayer.stop();
+    await audioPlayer.clearAudioSources();
+    await audioPlayer.dispose();
+    audioPlayer = AudioPlayer();
+  }
+
   static Future<void> playSingleAyah({
     required String ayahKey,
     required ReciterInfoModel reciterInfoModel,
+    required bool isInsideQuran,
     bool instantPlay = true,
   }) async {
     startListeningAudioPlayerState();
@@ -116,6 +149,7 @@ class AudioPlayerManager {
     audioUICubit.expand(true);
     audioUICubit.showUI(true);
     audioUICubit.isPlayList(false);
+    audioUICubit.changeIsInsideQuran(isInsideQuran);
 
     ayahKeyCubit.changeData(
       AyahKeyManagement(
@@ -132,9 +166,10 @@ class AudioPlayerManager {
   static Future<void> playMultipleAyahAsPlaylist({
     required String startAyahKey,
     required String endAyahKey,
+    required bool isInsideQuran,
+    required ReciterInfoModel reciterInfoModel,
     int initialIndex = 0,
     bool instantPlay = true,
-    required ReciterInfoModel reciterInfoModel,
   }) async {
     startListeningAudioPlayerState();
 
@@ -175,6 +210,7 @@ class AudioPlayerManager {
     audioUICubit.showUI(true);
     audioUICubit.expand(true);
     audioUICubit.isPlayList(true);
+    audioUICubit.changeIsInsideQuran(isInsideQuran);
 
     ayahKeyCubit.changeData(
       AyahKeyManagement(

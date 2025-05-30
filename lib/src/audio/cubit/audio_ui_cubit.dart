@@ -8,6 +8,7 @@ class AudioUiCubit extends Cubit<AudioControllerUiState> {
           isExpanded: false,
           showUi: false,
           isPlayList: false,
+          isInsideQuranPlayer: false,
         ),
       );
 
@@ -21,5 +22,9 @@ class AudioUiCubit extends Cubit<AudioControllerUiState> {
 
   void isPlayList(bool toChange) {
     emit(state.copyWith(isPlayList: toChange));
+  }
+
+  void changeIsInsideQuran(bool toChange) {
+    emit(state.copyWith(isInsideQuranPlayer: toChange));
   }
 }
