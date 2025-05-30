@@ -16,6 +16,7 @@ import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
 import "../../audio/cubit/player_state_cubit.dart";
@@ -67,7 +68,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             }
           },
           child: AnimatedContainer(
-            margin: const EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             padding: const EdgeInsets.all(5),
             duration: const Duration(milliseconds: 300),
             height: height,
@@ -175,6 +176,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
               );
               ayahList.removeWhere((element) => element.runtimeType == int);
+
               return ayahList.length > 1
                   ? Row(
                     children: [
@@ -214,7 +216,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           ),
                         ),
                       ),
-                      Text(state.end!),
+                      Text(ayahList.last!),
                     ],
                   )
                   : const SizedBox();
@@ -225,230 +227,253 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
           },
         ),
 
-        BlocBuilder<AyahKeyCubit, AyahKeyManagement?>(
-          builder: (context, state) {
-            List ayahList = state?.ayahList ?? [];
-            ayahList.removeWhere((element) => element.runtimeType == int);
-            int currentPlayingIndex = ayahList.indexOf(state?.current);
-            if (currentPlayingIndex == -1) currentPlayingIndex = 0;
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: BlocBuilder<AyahKeyCubit, AyahKeyManagement?>(
+            builder: (context, state) {
+              List ayahList = state?.ayahList ?? [];
+              ayahList.removeWhere((element) => element.runtimeType == int);
+              int currentPlayingIndex = ayahList.indexOf(state?.current);
+              if (currentPlayingIndex == -1) currentPlayingIndex = 0;
 
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30,
-                  width: 30,
-                  child: IconButton(
-                    style: IconButton.styleFrom(padding: EdgeInsets.all(0)),
-                    onPressed: () {
-                      AudioPlayerManager.stopListeningAudioPlayerState();
-                    },
-                    tooltip: "Stop & Close",
-                    icon: const Icon(Icons.close_rounded),
-                  ),
-                ),
-                IconButton(
-                  onPressed:
-                      int.parse(state?.current?.split(":").last ?? "0") > 1
-                          ? () {
-                            if (state?.ayahList?.length == 1) {
-                              int? currentSurahNumber = int.tryParse(
-                                state?.current?.split(":").first ?? "",
-                              );
-                              if (currentSurahNumber == null) return;
-                              List tempAyahList = getListOfAyahKey(
-                                startAyahKey: "$currentSurahNumber:1",
-                                endAyahKey: getEndAyahKeyFromSurahNumber(
-                                  currentSurahNumber,
-                                ),
-                              );
-                              tempAyahList.removeWhere(
-                                (element) => element.runtimeType == int,
-                              );
-                              int index = tempAyahList.indexOf(
-                                state?.current ?? "",
-                              );
-                              if (index != -1) {
-                                AudioPlayerManager.playSingleAyah(
-                                  ayahKey: tempAyahList[index - 1],
-                                  reciterInfoModel:
-                                      context.read<SegmentedAudioCubit>().state,
-                                  isInsideQuran: true,
-                                );
-                              }
-                            } else {
-                              AudioPlayerManager.audioPlayer.seekToPrevious();
-                            }
-                          }
-                          : null,
-                  tooltip: "Previous",
-                  icon: const Icon(Icons.skip_previous_rounded),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Duration duration = AudioPlayerManager.audioPlayer.position;
-                    int inMilSec = duration.inMilliseconds - 5000;
-                    if (inMilSec < 0) inMilSec = 0;
-                    AudioPlayerManager.audioPlayer.seek(
-                      Duration(milliseconds: inMilSec),
-                    );
-                  },
-                  tooltip: "Rewind",
-                  icon: const Icon(Icons.replay_5_rounded),
-                ),
-                BlocBuilder<PlayerStateCubit, PlayerState>(
-                  builder: (context, state) {
-                    return IconButton(
-                      onPressed: () async {
-                        AudioPlayerManager.audioPlayer.playing
-                            ? AudioPlayerManager.audioPlayer.pause()
-                            : AudioPlayerManager.audioPlayer.play();
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        iconSize: 18,
+                      ),
+                      onPressed: () {
+                        AudioPlayerManager.stopListeningAudioPlayerState();
                       },
-                      tooltip: state.isPlaying ? "Pause" : "Play",
-                      icon: Icon(
-                        state.isPlaying
-                            ? Icons.pause_rounded
-                            : Icons.play_arrow_rounded,
-                      ),
-                    );
-                  },
-                ),
-
-                IconButton(
-                  onPressed: () {
-                    Duration? position =
-                        AudioPlayerManager.audioPlayer.position;
-
-                    Duration? maxDuration =
-                        AudioPlayerManager.audioPlayer.duration;
-
-                    AudioPlayerManager.audioPlayer.duration;
-                    int inMilSec = position.inMilliseconds + 5000;
-                    if ((maxDuration?.inMilliseconds ?? double.infinity) <
-                        inMilSec) {
-                      inMilSec = maxDuration?.inMilliseconds ?? 0;
-                    }
-                    AudioPlayerManager.audioPlayer.seek(
-                      Duration(milliseconds: inMilSec),
-                    );
-                  },
-                  tooltip: "Fast Forward",
-
-                  icon: const Icon(Icons.forward_5_rounded),
-                ),
-
-                IconButton(
-                  onPressed:
-                      (ayahList.isNotEmpty &&
-                              int.parse(
-                                    state?.current?.split(":").last ?? "0",
-                                  ) <
-                                  quranAyahCount[int.parse(
-                                        ayahList.first.split(":").first,
-                                      ) -
-                                      1])
-                          ? () {
-                            if (state?.ayahList?.length == 1) {
-                              int? currentSurahNumber = int.tryParse(
-                                state?.current?.split(":").first ?? "",
-                              );
-                              if (currentSurahNumber == null) return;
-                              List tempAyahList = getListOfAyahKey(
-                                startAyahKey: "$currentSurahNumber:1",
-                                endAyahKey: getEndAyahKeyFromSurahNumber(
-                                  currentSurahNumber,
-                                ),
-                              );
-                              tempAyahList.removeWhere(
-                                (element) => element.runtimeType == int,
-                              );
-                              int index = tempAyahList.indexOf(
-                                state?.current ?? "",
-                              );
-                              if (index != -1) {
-                                AudioPlayerManager.playSingleAyah(
-                                  ayahKey: tempAyahList[index + 1],
-                                  reciterInfoModel:
-                                      context.read<SegmentedAudioCubit>().state,
-                                  isInsideQuran: true,
+                      tooltip: "Stop & Close",
+                      icon: const Icon(Icons.close_rounded),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed:
+                        int.parse(state?.current?.split(":").last ?? "0") > 1
+                            ? () {
+                              if (state?.ayahList?.length == 1) {
+                                int? currentSurahNumber = int.tryParse(
+                                  state?.current?.split(":").first ?? "",
                                 );
+                                if (currentSurahNumber == null) return;
+                                List tempAyahList = getListOfAyahKey(
+                                  startAyahKey: "$currentSurahNumber:1",
+                                  endAyahKey: getEndAyahKeyFromSurahNumber(
+                                    currentSurahNumber,
+                                  ),
+                                );
+                                tempAyahList.removeWhere(
+                                  (element) => element.runtimeType == int,
+                                );
+                                int index = tempAyahList.indexOf(
+                                  state?.current ?? "",
+                                );
+                                if (index != -1) {
+                                  AudioPlayerManager.playSingleAyah(
+                                    ayahKey: tempAyahList[index - 1],
+                                    reciterInfoModel:
+                                        context
+                                            .read<SegmentedAudioCubit>()
+                                            .state,
+                                    isInsideQuran: true,
+                                  );
+                                }
+                              } else {
+                                AudioPlayerManager.audioPlayer.seekToPrevious();
                               }
-                            } else {
-                              AudioPlayerManager.audioPlayer.seekToNext();
                             }
-                          }
-                          : null,
-                  tooltip: "Play Next Ayah",
-                  icon: const Icon(Icons.skip_next_rounded),
-                ),
+                            : null,
+                    tooltip: "Previous",
+                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
 
-                if (ayahList.length != 1)
+                    icon: const Icon(Icons.skip_previous_rounded),
+                  ),
                   IconButton(
                     onPressed: () {
-                      if (AudioPlayerManager.audioPlayer.loopMode ==
-                          just_audio.LoopMode.one) {
-                        AudioPlayerManager.audioPlayer.setLoopMode(
-                          just_audio.LoopMode.all,
-                        );
-                      } else if (AudioPlayerManager.audioPlayer.loopMode ==
-                          just_audio.LoopMode.all) {
-                        AudioPlayerManager.audioPlayer.setLoopMode(
-                          just_audio.LoopMode.off,
-                        );
-                      } else {
-                        AudioPlayerManager.audioPlayer.setLoopMode(
-                          just_audio.LoopMode.one,
-                        );
+                      Duration duration =
+                          AudioPlayerManager.audioPlayer.position;
+                      int inMilSec = duration.inMilliseconds - 5000;
+                      if (inMilSec < 0) inMilSec = 0;
+                      AudioPlayerManager.audioPlayer.seek(
+                        Duration(milliseconds: inMilSec),
+                      );
+                    },
+                    tooltip: "Rewind",
+                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                    icon: const Icon(Icons.replay_5_rounded),
+                  ),
+                  BlocBuilder<PlayerStateCubit, PlayerState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        onPressed: () async {
+                          AudioPlayerManager.audioPlayer.playing
+                              ? AudioPlayerManager.audioPlayer.pause()
+                              : AudioPlayerManager.audioPlayer.play();
+                        },
+                        tooltip: state.isPlaying ? "Pause" : "Play",
+                        iconSize: 40,
+                        style: IconButton.styleFrom(
+                          padding: const EdgeInsets.all(5),
+                        ),
+                        icon: Icon(
+                          state.isPlaying
+                              ? Icons.pause_rounded
+                              : Icons.play_arrow_rounded,
+                        ),
+                      );
+                    },
+                  ),
+
+                  IconButton(
+                    onPressed: () {
+                      Duration? position =
+                          AudioPlayerManager.audioPlayer.position;
+
+                      Duration? maxDuration =
+                          AudioPlayerManager.audioPlayer.duration;
+
+                      AudioPlayerManager.audioPlayer.duration;
+                      int inMilSec = position.inMilliseconds + 5000;
+                      if ((maxDuration?.inMilliseconds ?? double.infinity) <
+                          inMilSec) {
+                        inMilSec = maxDuration?.inMilliseconds ?? 0;
                       }
+                      AudioPlayerManager.audioPlayer.seek(
+                        Duration(milliseconds: inMilSec),
+                      );
                     },
-                    tooltip: "Repeat",
-                    icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
-                      just_audio.LoopMode.one => const Icon(
-                        Icons.repeat_one_rounded,
-                      ),
-                      just_audio.LoopMode.all => const Icon(
-                        Icons.repeat_rounded,
-                      ),
-                      just_audio.LoopMode.off => Icon(
-                        Icons.repeat_rounded,
-                        color: Colors.grey.withValues(alpha: 0.6),
-                      ),
-                    },
+                    tooltip: "Fast Forward",
+                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                    icon: const Icon(Icons.forward_5_rounded),
                   ),
 
-                if (ayahList.length == 1)
                   IconButton(
-                    onPressed: () {
-                      int surahNumber = int.parse(
-                        ayahList.first.split(":").first,
-                      );
-                      int currentAyahNumber = int.parse(
-                        ayahList.first.split(":").last,
-                      );
-                      String endAyahKey = getEndAyahKeyFromSurahNumber(
-                        surahNumber,
-                      );
-
-                      String startAyahKey = "$surahNumber:1";
-
-                      AudioPlayerManager.playMultipleAyahAsPlaylist(
-                        startAyahKey: startAyahKey,
-                        endAyahKey: endAyahKey,
-                        reciterInfoModel:
-                            context.read<SegmentedAudioCubit>().state,
-                        initialIndex: currentAyahNumber - 1,
-                        instantPlay: AudioPlayerManager.audioPlayer.playing,
-                        isInsideQuran: true,
-                      );
-                    },
-                    tooltip: "Play As Playlist",
-                    icon: const Icon(Icons.playlist_play_rounded),
+                    onPressed:
+                        (ayahList.isNotEmpty &&
+                                int.parse(
+                                      state?.current?.split(":").last ?? "0",
+                                    ) <
+                                    quranAyahCount[int.parse(
+                                          ayahList.first.split(":").first,
+                                        ) -
+                                        1])
+                            ? () {
+                              if (state?.ayahList?.length == 1) {
+                                int? currentSurahNumber = int.tryParse(
+                                  state?.current?.split(":").first ?? "",
+                                );
+                                if (currentSurahNumber == null) return;
+                                List tempAyahList = getListOfAyahKey(
+                                  startAyahKey: "$currentSurahNumber:1",
+                                  endAyahKey: getEndAyahKeyFromSurahNumber(
+                                    currentSurahNumber,
+                                  ),
+                                );
+                                tempAyahList.removeWhere(
+                                  (element) => element.runtimeType == int,
+                                );
+                                int index = tempAyahList.indexOf(
+                                  state?.current ?? "",
+                                );
+                                if (index != -1) {
+                                  AudioPlayerManager.playSingleAyah(
+                                    ayahKey: tempAyahList[index + 1],
+                                    reciterInfoModel:
+                                        context
+                                            .read<SegmentedAudioCubit>()
+                                            .state,
+                                    isInsideQuran: true,
+                                  );
+                                }
+                              } else {
+                                AudioPlayerManager.audioPlayer.seekToNext();
+                              }
+                            }
+                            : null,
+                    tooltip: "Play Next Ayah",
+                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                    icon: const Icon(Icons.skip_next_rounded),
                   ),
-              ],
-            );
-          },
+
+                  if (ayahList.length != 1)
+                    IconButton(
+                      onPressed: () {
+                        if (AudioPlayerManager.audioPlayer.loopMode ==
+                            just_audio.LoopMode.one) {
+                          AudioPlayerManager.audioPlayer.setLoopMode(
+                            just_audio.LoopMode.all,
+                          );
+                        } else if (AudioPlayerManager.audioPlayer.loopMode ==
+                            just_audio.LoopMode.all) {
+                          AudioPlayerManager.audioPlayer.setLoopMode(
+                            just_audio.LoopMode.off,
+                          );
+                        } else {
+                          AudioPlayerManager.audioPlayer.setLoopMode(
+                            just_audio.LoopMode.one,
+                          );
+                        }
+                      },
+                      tooltip: "Repeat",
+                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                      icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
+                        just_audio.LoopMode.one => const Icon(
+                          Icons.repeat_one_rounded,
+                        ),
+                        just_audio.LoopMode.all => const Icon(
+                          Icons.repeat_rounded,
+                        ),
+                        just_audio.LoopMode.off => Icon(
+                          Icons.repeat_rounded,
+                          color: Colors.grey.withValues(alpha: 0.6),
+                        ),
+                      },
+                    ),
+
+                  if (ayahList.length == 1)
+                    IconButton(
+                      onPressed: () {
+                        int surahNumber = int.parse(
+                          ayahList.first.split(":").first,
+                        );
+                        int currentAyahNumber = int.parse(
+                          ayahList.first.split(":").last,
+                        );
+                        String endAyahKey = getEndAyahKeyFromSurahNumber(
+                          surahNumber,
+                        );
+
+                        String startAyahKey = "$surahNumber:1";
+
+                        AudioPlayerManager.playMultipleAyahAsPlaylist(
+                          startAyahKey: startAyahKey,
+                          endAyahKey: endAyahKey,
+                          reciterInfoModel:
+                              context.read<SegmentedAudioCubit>().state,
+                          initialIndex: currentAyahNumber - 1,
+                          instantPlay: AudioPlayerManager.audioPlayer.playing,
+                          isInsideQuran: true,
+                        );
+                      },
+                      tooltip: "Play As Playlist",
+                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                      icon: const Icon(Icons.playlist_play_rounded),
+                    ),
+                ],
+              );
+            },
+          ),
         ),
+
+        const Gap(5),
       ],
     );
   }

@@ -35,7 +35,7 @@ class _AudioPageState extends State<AudioPage> {
             style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
           SizedBox(
-            height: 28,
+            height: 35,
             child: TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
@@ -57,13 +57,13 @@ class _AudioPageState extends State<AudioPage> {
               ),
             ),
           ),
-          const Gap(10),
+          const Gap(15),
           const Text(
             "Reciter: ",
             style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
           SizedBox(
-            height: 28,
+            height: 35,
             child: TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
