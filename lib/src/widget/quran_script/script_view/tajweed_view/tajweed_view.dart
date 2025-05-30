@@ -45,12 +45,13 @@ class TajweedView extends StatelessWidget {
         style: quranStyle,
         textDirection: TextDirection.rtl,
         parseTajweedWord(
-          wordKey:
-              "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${scriptInfo.wordIndex}",
-          wordHtml: words[scriptInfo.wordIndex!] + " ",
+          wordIndex: scriptInfo.wordIndex,
+          words: List<String>.from(words),
           baseStyle: quranStyle,
           context: context,
-          skipWordTap: scriptInfo.skipWordTap,
+          surahNumber: scriptInfo.surahNumber,
+          ayahNumber: scriptInfo.ayahNumber,
+          skipWordTap: scriptInfo.skipWordTap ?? false,
         ),
       );
     }
@@ -90,9 +91,8 @@ class TajweedView extends StatelessWidget {
           TextSpan(
             children: List<InlineSpan>.generate(words.length, (index) {
               return parseTajweedWord(
-                wordKey:
-                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}",
-                wordHtml: words[index] + " ",
+                wordIndex: index,
+                words: List<String>.from(words),
                 baseStyle: quranStyle.copyWith(
                   backgroundColor:
                       highlightingWordIndex ==
@@ -101,7 +101,9 @@ class TajweedView extends StatelessWidget {
                           : null,
                 ),
                 context: context,
-                skipWordTap: scriptInfo.skipWordTap,
+                surahNumber: scriptInfo.surahNumber,
+                ayahNumber: scriptInfo.ayahNumber,
+                skipWordTap: scriptInfo.skipWordTap ?? false,
               );
             }),
           ),

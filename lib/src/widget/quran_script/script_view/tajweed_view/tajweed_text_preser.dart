@@ -11,11 +11,13 @@ import "color/tajweed_dark.dart";
 import "color/tajweed_light.dart";
 
 TextSpan parseTajweedWord({
-  required String wordKey,
-  required String wordHtml,
   required TextStyle baseStyle,
   required BuildContext context,
-  bool? skipWordTap,
+  required List<String> words,
+  required int surahNumber,
+  required int ayahNumber,
+  required bool skipWordTap,
+  required wordIndex,
 }) {
   List<TextSpan> spans = [];
   final brightness = Theme.of(context).brightness;
@@ -42,10 +44,15 @@ TextSpan parseTajweedWord({
                   ? null
                   : (TapGestureRecognizer()
                     ..onTap = () {
+                      List<String> wordKeys = List.generate(
+                        words.length,
+                        (index) => "$surahNumber:$ayahNumber:${index + 1}",
+                      );
                       showPopupWordFunction(
                         context: context,
-                        wordKey: wordKey,
-                        word: wordHtml,
+                        wordKeys: wordKeys,
+                        initWordIndex: wordIndex,
+                        words: List<String>.from(words),
                         scriptCategory: QuranScriptType.tajweed,
                       );
                     }),
@@ -61,7 +68,7 @@ TextSpan parseTajweedWord({
           nextColor = currentThemeColors[ruleClass]!;
         } else if (ruleClass != null) {
           log(
-            "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: $wordHtml",
+            "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: ${'${words[wordIndex]} '}",
           );
         }
       }
@@ -74,7 +81,7 @@ TextSpan parseTajweedWord({
     }
   }
 
-  for (var node in parseFragment(wordHtml).nodes) {
+  for (var node in parseFragment("${words[wordIndex]} ").nodes) {
     processNode(node, defaultColor);
   }
 

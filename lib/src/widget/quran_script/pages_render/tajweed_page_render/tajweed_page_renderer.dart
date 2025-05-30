@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
@@ -85,10 +86,8 @@ class TajweedPageRenderer extends StatelessWidget {
                     return TextSpan(
                       children:
                           List.generate(words.length, (index) {
-                            String word = words[index];
                             return parseTajweedWord(
-                              wordKey: "$ayahKey:${index + 1}",
-                              wordHtml: "$word ",
+                              wordIndex: index,
                               baseStyle: TextStyle(
                                 fontSize: baseTextStyle?.fontSize ?? 24,
                                 fontFamily:
@@ -100,6 +99,10 @@ class TajweedPageRenderer extends StatelessWidget {
                                         )
                                         : null,
                               ),
+                              surahNumber: ayahKey.split(":").first.toInt(),
+                              ayahNumber: ayahKey.split(":").last.toInt(),
+                              skipWordTap: false,
+                              words: List<String>.from(words),
                               context: context,
                             );
                           }).toList(),

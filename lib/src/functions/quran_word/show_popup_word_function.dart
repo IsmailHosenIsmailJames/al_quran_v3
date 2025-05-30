@@ -6,19 +6,21 @@ import "package:flutter/material.dart";
 
 void showPopupWordFunction({
   required BuildContext context,
-  required String wordKey,
-  required String word,
+  required List<String> wordKeys,
+  required List<String> words,
+  required int initWordIndex,
   required QuranScriptType scriptCategory,
 }) {
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah[wordKey.split(":").first],
+    metaDataSurah[wordKeys.first.split(":").first],
   );
   showModalBottomSheet(
     context: context,
     builder:
         (context) => ShowPopupOfWord(
-          wordKey: wordKey,
-          word: word,
+          wordKeys: wordKeys,
+          words: words,
+          initWordIndex: initWordIndex,
           scriptCategory: scriptCategory,
           surahInfoModel: surahInfoModel,
         ),
