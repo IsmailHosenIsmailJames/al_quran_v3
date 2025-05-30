@@ -133,6 +133,7 @@ class MyApp extends StatelessWidget {
                   backgroundColor: AppColors.primaryColor,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
+                  elevation: 0,
                 ),
               ),
               bottomSheetTheme: BottomSheetThemeData(
@@ -152,6 +153,7 @@ class MyApp extends StatelessWidget {
                   backgroundColor: AppColors.primaryColor,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
+                  elevation: 0,
                 ),
               ),
               bottomSheetTheme: const BottomSheetThemeData(
