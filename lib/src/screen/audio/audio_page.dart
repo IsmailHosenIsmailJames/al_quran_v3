@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
@@ -43,7 +44,9 @@ class _AudioPageState extends State<AudioPage> {
                   borderRadius: BorderRadius.zero,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                popupJumpToAyah(context, "2:5");
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
