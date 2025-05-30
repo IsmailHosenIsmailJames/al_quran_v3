@@ -294,7 +294,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
             const SafeArea(
               child: Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomRight,
                 child: AudioControllerUi(),
               ),
             ),

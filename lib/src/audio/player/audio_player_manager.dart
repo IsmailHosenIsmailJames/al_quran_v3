@@ -95,7 +95,7 @@ class AudioPlayerManager {
     });
   }
 
-  static void stopListeningAudioPlayerState() async {
+  static Future<void> stopListeningAudioPlayerState() async {
     log(isListening.toString());
     if (!isListening) return;
     isListening = false;
@@ -111,6 +111,17 @@ class AudioPlayerManager {
     audioUICubit.showUI(false);
     audioUICubit.isPlayList(false);
     audioUICubit.changeIsInsideQuran(false);
+    navigatorKey.currentContext!.read<AyahKeyCubit>().changeData(
+      AyahKeyManagement(start: null, end: null, current: null),
+    );
+    final playerPositionCubit =
+        navigatorKey.currentContext!.read<PlayerPositionCubit>();
+    playerPositionCubit.changeCurrentPosition(Duration.zero);
+    playerPositionCubit.changeBufferPosition(Duration.zero);
+    playerPositionCubit.changeTotalDuration(Duration.zero);
+    navigatorKey.currentContext!.read<PlayerStateCubit>().changeState(
+      isPlaying: false,
+    );
     await audioPlayer.stop();
     await audioPlayer.clearAudioSources();
     await audioPlayer.dispose();
@@ -243,19 +254,9 @@ class AudioPlayerManager {
       ),
       tag: MediaItem(id: wordKey, title: wordKey),
     );
-    await audioPlayer.stop();
-    await audioPlayer.dispose();
-    final audioUICubit = context.read<AudioUiCubit>();
-    audioUICubit.expand(false);
-    audioUICubit.showUI(false);
-    context.read<AyahKeyCubit>().changeData(
-      AyahKeyManagement(start: null, end: null, current: null),
-    );
-    final playerPositionCubit = context.read<PlayerPositionCubit>();
-    playerPositionCubit.changeCurrentPosition(Duration.zero);
-    playerPositionCubit.changeBufferPosition(Duration.zero);
-    playerPositionCubit.changeTotalDuration(Duration.zero);
-    context.read<PlayerStateCubit>().changeState(isPlaying: false);
+
+    await stopListeningAudioPlayerState();
+
     isListening = false;
     await audioPlayerNew.setAudioSource(audioSource);
     await audioPlayerNew.play();
@@ -267,6 +268,7 @@ class AudioPlayerManager {
         audioPlayer = AudioPlayer();
         isWordPlaying = false;
         context.read<WordPlayingStateCubit>().changeState(null);
+        await stopListeningAudioPlayerState();
       }
     });
   }
