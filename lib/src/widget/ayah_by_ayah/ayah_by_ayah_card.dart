@@ -211,6 +211,7 @@ Widget getAyahByAyahCard({
                                 reciterInfoModel:
                                     context.read<SegmentedAudioCubit>().state,
                                 instantPlay: true,
+                                isInsideQuran: true,
                               );
                             }
                           }

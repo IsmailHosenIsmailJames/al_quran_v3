@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
@@ -14,6 +15,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
+import "package:just_audio/just_audio.dart" as just_audio;
 
 class SurahInfoHeaderBuilder extends StatelessWidget {
   final SurahHeaderInfoModel headerInfoModel;
@@ -147,9 +149,17 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
-                        if (isCurrentPlaying) {
+                        bool isPlayList =
+                            context.read<AudioUiCubit>().state.isPlayList;
+                        bool isCompleted =
+                            playerState.state ==
+                            just_audio.ProcessingState.completed;
+
+                        if (isCurrentPlaying && isPlayList && !isCompleted) {
                           AudioPlayerManager.audioPlayer.pause();
-                        } else if (isCurrentSurah) {
+                        } else if (isCurrentSurah &&
+                            isPlayList &&
+                            !isCompleted) {
                           AudioPlayerManager.audioPlayer.play();
                         } else {
                           String startAyahKey = headerInfoModel.startAyahKey;
@@ -160,6 +170,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             endAyahKey: endAyahKey,
                             reciterInfoModel:
                                 context.read<SegmentedAudioCubit>().state,
+                            isInsideQuran: true,
                           );
                         }
                       },
