@@ -6,7 +6,15 @@ import "package:gap/gap.dart";
 
 class JumpToAyahView extends StatefulWidget {
   final String initAyahKey;
-  const JumpToAyahView({super.key, required this.initAyahKey});
+  final bool isAudioPlayer;
+  final Function(String ayahKey)? onPlaySelected;
+
+  const JumpToAyahView({
+    super.key,
+    required this.initAyahKey,
+    required this.isAudioPlayer,
+    this.onPlaySelected,
+  });
 
   @override
   State<JumpToAyahView> createState() => _JumpToAyahViewState();
@@ -198,27 +206,46 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Jump to Tafsir"),
-                  ),
-                ),
-                const Gap(10),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text("Jump to Ayah"),
-                  ),
-                ),
-              ],
+          if (widget.isAudioPlayer)
+            Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+                top: 5,
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  widget.onPlaySelected!("$surahNumber:$ayahNumber");
+                },
+                label: const Text("Play From Selected Ayah"),
+                icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
+              ),
             ),
-          ),
+          if (!widget.isAudioPlayer)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Jump to Tafsir"),
+                    ),
+                  ),
+                  const Gap(10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Jump to Ayah"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
