@@ -1,16 +1,19 @@
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -44,8 +47,30 @@ class _AudioPageState extends State<AudioPage> {
                   borderRadius: BorderRadius.zero,
                 ),
               ),
-              onPressed: () {
-                popupJumpToAyah(context, "2:5");
+              onPressed: () async {
+                int surahNumber = "2:5".split(":")[0].toInt();
+                int ayahNumber = "2:5".split(":")[1].toInt();
+                await popupJumpToAyah(
+                  context: context,
+                  initAyahKey: "$surahNumber:$ayahNumber",
+                  isAudioPlayer: true,
+                  onPlaySelected: (ayahKey) {
+                    String startAyahKey = "${ayahKey.split(":")[0]}:1";
+                    String endAyahKey = getEndAyahKeyFromSurahNumber(
+                      int.parse(ayahKey.split(":")[0]),
+                    );
+                    int toStartIndex = ayahKey.split(":")[1].toInt() - 1;
+
+                    AudioPlayerManager.playMultipleAyahAsPlaylist(
+                      startAyahKey: startAyahKey,
+                      endAyahKey: endAyahKey,
+                      isInsideQuran: false,
+                      instantPlay: true,
+                      initialIndex: toStartIndex,
+                      reciterInfoModel: context.read<QuranReciterCubit>().state,
+                    );
+                  },
+                );
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,17 +99,22 @@ class _AudioPageState extends State<AudioPage> {
                   borderRadius: BorderRadius.zero,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                popupChangeReciter(context, 0);
+              },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    safeSubString(
-                      ReciterInfoModel.fromMap(recitationsInfoList[0]).name,
-                      25,
-                      replacer: "...",
-                    ),
-                    style: const TextStyle(fontSize: 16),
+                  BlocBuilder<QuranReciterCubit, ReciterInfoModel>(
+                    builder:
+                        (context, state) => Text(
+                          safeSubString(
+                            context.read<QuranReciterCubit>().state.name,
+                            25,
+                            replacer: "...",
+                          ),
+                          style: const TextStyle(fontSize: 16),
+                        ),
                   ),
                   const Gap(10),
                   const Icon(Icons.arrow_drop_down_rounded, size: 30),
@@ -113,7 +143,7 @@ class _AudioPageState extends State<AudioPage> {
               ),
             ),
           ),
-          Gap(10),
+          Gap(20),
           BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
             builder: (context, state) {
               return ProgressBar(
