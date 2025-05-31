@@ -174,11 +174,22 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           );
                         }
                       },
-                      icon: Icon(
-                        isCurrentPlaying
-                            ? Icons.pause_rounded
-                            : Icons.play_arrow_rounded,
-                      ),
+                      icon:
+                          (playerState.state ==
+                                      just_audio.ProcessingState.loading &&
+                                  isCurrentSurah)
+                              ? const Padding(
+                                padding: EdgeInsets.all(3.0),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 4,
+                                ),
+                              )
+                              : Icon(
+                                isCurrentPlaying
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
+                              ),
                     );
                   },
                 );

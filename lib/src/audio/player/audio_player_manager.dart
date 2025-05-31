@@ -135,6 +135,9 @@ class AudioPlayerManager {
     bool instantPlay = true,
   }) async {
     startListeningAudioPlayerState();
+    if (audioPlayer.processingState == ProcessingState.loading) {
+      await audioPlayer.clearAudioSources();
+    }
 
     final context = navigatorKey.currentContext!;
 
@@ -183,7 +186,9 @@ class AudioPlayerManager {
     bool instantPlay = true,
   }) async {
     startListeningAudioPlayerState();
-
+    if (audioPlayer.processingState == ProcessingState.loading) {
+      await audioPlayer.clearAudioSources();
+    }
     final context = navigatorKey.currentContext!;
 
     final audioUICubit = context.read<AudioUiCubit>();
@@ -247,7 +252,7 @@ class AudioPlayerManager {
     if (isWordPlaying) return;
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;
-    AudioPlayer audioPlayerNew = AudioPlayer();
+
     AudioSource audioSource = LockCachingAudioSource(
       Uri.parse(
         "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
@@ -258,13 +263,13 @@ class AudioPlayerManager {
     await stopListeningAudioPlayerState();
 
     isListening = false;
-    await audioPlayerNew.setAudioSource(audioSource);
-    await audioPlayerNew.play();
-    audioPlayerNew.playerStateStream.listen((event) async {
+    await audioPlayer.setAudioSource(audioSource);
+    await audioPlayer.play();
+    audioPlayer.playerStateStream.listen((event) async {
       if (event.processingState == ProcessingState.completed) {
-        await audioPlayerNew.stop();
-        await audioPlayerNew.clearAudioSources();
-        await audioPlayerNew.dispose();
+        await audioPlayer.stop();
+        await audioPlayer.clearAudioSources();
+        await audioPlayer.dispose();
         audioPlayer = AudioPlayer();
         isWordPlaying = false;
         context.read<WordPlayingStateCubit>().changeState(null);
