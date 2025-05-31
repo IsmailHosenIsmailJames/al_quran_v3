@@ -19,6 +19,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
+import "package:just_audio/just_audio.dart" as just_audio;
 
 Widget getAyahByAyahCard({
   required String ayahKey,
@@ -216,12 +217,22 @@ Widget getAyahByAyahCard({
                             }
                           }
                         },
-                        icon: Icon(
-                          isPlaying && isCurrent
-                              ? Icons.pause_rounded
-                              : Icons.play_arrow_rounded,
-                          size: 18,
-                        ),
+                        icon:
+                            (isCurrent &&
+                                    playerState.state ==
+                                        just_audio.ProcessingState.loading)
+                                ? const Padding(
+                                  padding: EdgeInsets.all(3.0),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 3,
+                                  ),
+                                )
+                                : Icon(
+                                  isPlaying && isCurrent
+                                      ? Icons.pause_rounded
+                                      : Icons.play_arrow_rounded,
+                                  size: 18,
+                                ),
                       );
                     },
                   );
