@@ -5,12 +5,18 @@ class ReciterInfoModel {
   String name;
   bool? supportWordSegmentation;
   String? source;
+  String? style;
+  String? img;
+  String? bio;
 
   ReciterInfoModel({
     required this.link,
     required this.name,
     this.supportWordSegmentation,
     this.source,
+    this.style,
+    this.img,
+    this.bio,
   });
 
   ReciterInfoModel copyWith({
@@ -18,12 +24,18 @@ class ReciterInfoModel {
     String? name,
     bool? supportWordSegmentation,
     String? source,
+    String? style,
+    String? img,
+    String? bio,
   }) => ReciterInfoModel(
     link: link ?? this.link,
     name: name ?? this.name,
     supportWordSegmentation:
         supportWordSegmentation ?? this.supportWordSegmentation,
     source: source ?? this.source,
+    style: style ?? this.style,
+    img: img ?? this.img,
+    bio: bio ?? this.bio,
   );
 
   factory ReciterInfoModel.fromJson(String str) =>
@@ -37,6 +49,9 @@ class ReciterInfoModel {
       name: json["name"],
       supportWordSegmentation: json["supportWordSegmentation"],
       source: json["source"],
+      style: json["style"],
+      img: json["img"],
+      bio: json["bio"],
     );
   }
 
@@ -47,5 +62,8 @@ class ReciterInfoModel {
     "name": name,
     "supportWordSegmentation": supportWordSegmentation,
     "source": source,
+    "style": style,
+    "img": img,
+    "bio": bio,
   };
 }
