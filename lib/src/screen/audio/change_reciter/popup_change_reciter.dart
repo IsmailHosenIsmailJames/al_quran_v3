@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 Future<void> popupChangeReciter(
   BuildContext context,
   int initReciterIndex,
+  Function(int index) onReciterChanged,
 ) async {
   await showDialog(
     context: context,
@@ -17,7 +18,10 @@ Future<void> popupChangeReciter(
           bottom: 20,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        child: ChangeReciter(initReciterIndex: initReciterIndex),
+        child: ChangeReciter(
+          initReciterIndex: initReciterIndex,
+          onReciterChanged: onReciterChanged,
+        ),
       );
     },
   );
