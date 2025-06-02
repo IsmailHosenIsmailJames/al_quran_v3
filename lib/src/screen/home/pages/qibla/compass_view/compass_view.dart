@@ -54,12 +54,12 @@ class CompassView extends CustomPainter {
         if (is30) {
           length = 10;
           degreeAnglePaint
-            ..color = AppColors.primaryColor
+            ..color = AppColors.primary
             ..strokeWidth = 2;
         }
         if (is90) {
           degreeAnglePaint
-            ..color = AppColors.primaryColor
+            ..color = AppColors.primary
             ..strokeWidth = 3;
           length = 15;
         }
@@ -84,7 +84,7 @@ class CompassView extends CustomPainter {
               text: degree.toString(),
               style: TextStyle(
                 fontSize: is90 ? 14 : 12,
-                color: is90 ? AppColors.primaryColor : grayColor,
+                color: is90 ? AppColors.primary : grayColor,
               ),
             ),
             textAlign: TextAlign.center,
@@ -108,7 +108,7 @@ class CompassView extends CustomPainter {
                 text: direction,
                 style: TextStyle(
                   fontSize: is90 ? 18 : 12,
-                  color: AppColors.primaryColor,
+                  color: AppColors.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),

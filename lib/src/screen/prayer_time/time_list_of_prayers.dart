@@ -48,7 +48,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       fontWeight: FontWeight.w500,
     );
     return Container(
-      color: AppColors.primaryColor.withValues(alpha: 0.2),
+      color: AppColors.primaryShade100,
       child: Column(
         children: [
           Padding(
@@ -231,11 +231,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           decoration:
                               isThisIsCurrentPrayer
                                   ? BoxDecoration(
-                                    color: AppColors.primaryColor.withValues(
+                                    color: AppColors.primary.withValues(
                                       alpha: 0.1,
                                     ),
                                     border: Border.all(
-                                      color: AppColors.primaryColor,
+                                      color: AppColors.primary,
                                     ),
                                     borderRadius: BorderRadius.circular(
                                       roundedRadius,

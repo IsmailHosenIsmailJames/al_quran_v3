@@ -94,7 +94,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                               style:
                                   wordKey == "$ayahKey:${index + 1}"
                                       ? TextStyle(
-                                        backgroundColor: AppColors.primaryColor
+                                        backgroundColor: AppColors.primary
                                             .withValues(alpha: 0.15),
                                       )
                                       : null,

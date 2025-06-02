@@ -95,7 +95,7 @@ class NonTajweedScriptView extends StatelessWidget {
                     highlightingWordIndex ==
                             "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
                         ? TextStyle(
-                          backgroundColor: AppColors.primaryColor.withValues(
+                          backgroundColor: AppColors.primary.withValues(
                             alpha: 0.15,
                           ),
                         )

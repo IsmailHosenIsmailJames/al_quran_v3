@@ -142,7 +142,7 @@ class _AudioPageState extends State<AudioPage> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(roundedRadius),
-              color: AppColors.primaryColor.withValues(alpha: 0.1),
+              color: AppColors.primaryShade100,
             ),
             child: InkWell(
               onTap: () async {
@@ -196,7 +196,7 @@ class _AudioPageState extends State<AudioPage> {
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(roundedRadius),
-                color: AppColors.primaryColor.withValues(alpha: 0.1),
+                color: AppColors.primaryShade100,
               ),
               child: ScriptProcessor(
                 scriptInfo: ScriptInfo(

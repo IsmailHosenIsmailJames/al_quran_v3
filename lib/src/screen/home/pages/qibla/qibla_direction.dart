@@ -67,9 +67,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         return state.latLon == null
             ? const LocationAcquire()
             : state.kaabaAngle == null
-            ? Center(
-              child: CircularProgressIndicator(color: AppColors.primaryColor),
-            )
+            ? Center(child: CircularProgressIndicator(color: AppColors.primary))
             : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,7 +128,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
             ? Colors.black
             : Colors.white;
     if ((direction.abs() - kaabaAngle.abs()).abs() < 5) {
-      kaabaColor = AppColors.primaryColor;
+      kaabaColor = AppColors.primary;
       doVibrateThePhone();
     } else {
       vibrateOnceEnter = false;

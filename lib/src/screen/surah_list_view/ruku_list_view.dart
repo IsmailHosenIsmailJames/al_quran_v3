@@ -43,7 +43,7 @@ class RukuListView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
-                backgroundColor: AppColors.primaryColor.withValues(alpha: 0.05),
+                backgroundColor: AppColors.primary.withValues(alpha: 0.05),
               ),
 
               onPressed: () {

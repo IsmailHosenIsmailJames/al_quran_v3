@@ -120,9 +120,10 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                         builder: (context, state) {
                           return OutlinedButton.icon(
                             style: IconButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor
-                                  .withValues(alpha: 0.05),
-                              foregroundColor: AppColors.primaryColor,
+                              backgroundColor: AppColors.primary.withValues(
+                                alpha: 0.05,
+                              ),
+                              foregroundColor: AppColors.primary,
                             ),
                             onPressed: () {
                               context.read<WordPlayingStateCubit>().changeState(

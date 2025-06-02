@@ -50,7 +50,7 @@ Widget getAyahByAyahCard({
     margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
-      color: AppColors.primaryColor.withValues(alpha: 0.05),
+      color: AppColors.primary.withValues(alpha: 0.05),
     ),
     child: Column(
       children: [
@@ -61,7 +61,7 @@ Widget getAyahByAyahCard({
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.primaryColor.withValues(alpha: 0.5),
+                color: AppColors.primary.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(roundedRadius - 4),
               ),
               padding: const EdgeInsets.only(
@@ -96,10 +96,10 @@ Widget getAyahByAyahCard({
               child: IconButton(
                 style: IconButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primaryColor,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primaryColor),
+                    side: BorderSide(color: AppColors.primary),
                   ),
                 ),
                 onPressed: () {},
@@ -114,10 +114,10 @@ Widget getAyahByAyahCard({
               child: IconButton(
                 style: IconButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primaryColor,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primaryColor),
+                    side: BorderSide(color: AppColors.primary),
                   ),
                 ),
                 onPressed: () {},
@@ -132,10 +132,10 @@ Widget getAyahByAyahCard({
               child: IconButton(
                 style: IconButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primaryColor,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primaryColor),
+                    side: BorderSide(color: AppColors.primary),
                   ),
                 ),
                 onPressed: () {},
@@ -150,10 +150,10 @@ Widget getAyahByAyahCard({
               child: IconButton(
                 style: IconButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primaryColor,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primaryColor),
+                    side: BorderSide(color: AppColors.primary),
                   ),
                 ),
                 onPressed: () {
@@ -181,10 +181,10 @@ Widget getAyahByAyahCard({
                       return IconButton(
                         style: IconButton.styleFrom(
                           padding: EdgeInsets.zero,
-                          foregroundColor: AppColors.primaryColor,
+                          foregroundColor: AppColors.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(color: AppColors.primaryColor),
+                            side: BorderSide(color: AppColors.primary),
                           ),
                         ),
                         onPressed: () async {
@@ -322,7 +322,7 @@ Widget getAyahByAyahCard({
             behavior: HitTestBehavior.translucent,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.primaryColor.withValues(alpha: 0.05),
+                color: AppColors.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(roundedRadius),
               ),
               padding: const EdgeInsets.only(left: 5),
@@ -372,7 +372,7 @@ Widget getAyahByAyahCard({
                               return Container(
                                 padding: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                  color: AppColors.primaryColor.withValues(
+                                  color: AppColors.primary.withValues(
                                     alpha: 0.05,
                                   ),
                                   borderRadius: BorderRadius.circular(

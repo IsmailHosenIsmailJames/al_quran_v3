@@ -27,7 +27,7 @@ SizedBox getIndexNumberWidget(
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(roundedRadius - 3),
-              border: Border.all(color: AppColors.primaryColor),
+              border: Border.all(color: AppColors.primary),
             ),
           ),
         ),

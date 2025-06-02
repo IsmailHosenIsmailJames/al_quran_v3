@@ -111,7 +111,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 12,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "1",
                                   style: TextStyle(
@@ -154,7 +154,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 12,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "2",
                                   style: TextStyle(
@@ -200,7 +200,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 13,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "3",
                                   style: TextStyle(
@@ -244,7 +244,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 13,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "4",
                                   style: TextStyle(
@@ -287,7 +287,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 13,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "5",
                                   style: TextStyle(
@@ -328,7 +328,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             children: [
                               CircleAvatar(
                                 radius: 13,
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 child: const Text(
                                   "6",
                                   style: TextStyle(
@@ -349,9 +349,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: AppColors.primaryColor.withValues(
-                                alpha: 0.07,
-                              ),
+                              color: AppColors.primary.withValues(alpha: 0.07),
                               borderRadius: BorderRadius.circular(
                                 roundedRadius,
                               ),
@@ -370,7 +368,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             width: double.infinity,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primaryColor,
+                                backgroundColor: AppColors.primary,
                                 foregroundColor: Colors.white,
                               ),
                               onPressed: downloadResources,
@@ -453,7 +451,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           const Gap(20),
                           LinearProgressIndicator(
                             value: state.percentage,
-                            color: AppColors.primaryColor,
+                            color: AppColors.primary,
                             borderRadius: BorderRadius.circular(roundedRadius),
                             minHeight: 8,
                           ),
@@ -474,7 +472,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       );
                     }
                     return LinearProgressIndicator(
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(roundedRadius),
                       minHeight: 8,
                     );
@@ -715,12 +713,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor:
                   selectedScript == QuranScriptType.tajweed
-                      ? AppColors.primaryColor
-                      : Colors.grey.withValues(alpha: 0.2),
+                      ? AppColors.primary
+                      : AppColors.mutedGray,
               foregroundColor:
                   selectedScript == QuranScriptType.tajweed
                       ? Colors.white
-                      : AppColors.primaryColor,
+                      : AppColors.primary,
               padding: const EdgeInsets.only(left: 8, right: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -751,12 +749,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor:
                   selectedScript == QuranScriptType.uthmani
-                      ? AppColors.primaryColor
-                      : Colors.grey.withValues(alpha: 0.2),
+                      ? AppColors.primary
+                      : AppColors.mutedGray,
               foregroundColor:
                   selectedScript == QuranScriptType.uthmani
                       ? Colors.white
-                      : AppColors.primaryColor,
+                      : AppColors.primary,
               padding: const EdgeInsets.only(left: 8, right: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),
@@ -784,12 +782,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor:
                   selectedScript == QuranScriptType.indopak
-                      ? AppColors.primaryColor
-                      : Colors.grey.withValues(alpha: 0.2),
+                      ? AppColors.primary
+                      : AppColors.mutedGray,
               foregroundColor:
                   selectedScript == QuranScriptType.indopak
                       ? Colors.white
-                      : AppColors.primaryColor,
+                      : AppColors.primary,
               padding: const EdgeInsets.only(left: 8, right: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -842,7 +840,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                 buildScoreIndicator(
@@ -877,7 +875,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
@@ -904,7 +902,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   child: Icon(
                     Icons.done_rounded,
                     size: 18,
-                    color: AppColors.primaryColor,
+                    color: AppColors.primary,
                   ),
                 ),
               Text(e["Native"] ?? ""),
@@ -933,7 +931,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                 Text(book["name"] ?? ""),
@@ -965,7 +963,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primaryColor,
+                      color: AppColors.primary,
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
@@ -991,7 +989,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primaryColor,
+      color: AppColors.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(
@@ -1009,7 +1007,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primaryColor,
+      color: AppColors.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(
@@ -1027,7 +1025,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primaryColor,
+      color: AppColors.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(

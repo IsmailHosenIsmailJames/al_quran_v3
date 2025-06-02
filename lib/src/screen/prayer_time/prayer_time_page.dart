@@ -84,7 +84,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
                     const Gap(5),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.primaryColor),
+                        border: Border.all(color: AppColors.primary),
                         borderRadius: BorderRadius.circular(roundedRadius),
                       ),
                       padding: const EdgeInsets.all(5),
