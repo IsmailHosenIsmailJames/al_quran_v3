@@ -1,9 +1,12 @@
+import "dart:developer";
+
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
@@ -13,10 +16,13 @@ import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
+import "package:cached_network_image/cached_network_image.dart";
 import "package:dartx/dartx.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:url_launcher/url_launcher.dart";
 
 class AudioPage extends StatefulWidget {
   const AudioPage({super.key});
@@ -26,30 +32,121 @@ class AudioPage extends StatefulWidget {
 }
 
 class _AudioPageState extends State<AudioPage> {
+  int selectedReciter = 0;
+  String currentAyahKEy = "2:5";
+
   @override
   Widget build(BuildContext context) {
+    ReciterInfoModel reciterInfoModel = ReciterInfoModel.fromMap(
+      recitationsInfoList[selectedReciter],
+    );
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Surah: ",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          SizedBox(
-            height: 35,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
+          Row(
+            children: [
+              SizedBox(
+                height: 120,
+                width: 90,
+                child:
+                    reciterInfoModel.img != null
+                        ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            imageUrl: reciterInfoModel.img!,
+                            errorWidget:
+                                (context, url, error) => const Icon(
+                                  FluentIcons.person_24_regular,
+                                  size: 60,
+                                  color: Colors.grey,
+                                ),
+                            progressIndicatorBuilder:
+                                (context, url, progress) =>
+                                    CircularProgressIndicator(
+                                      value: progress.progress,
+                                    ),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                        : const Icon(
+                          FluentIcons.person_24_regular,
+                          size: 60,
+                          color: Colors.grey,
+                        ),
               ),
-              onPressed: () async {
-                int surahNumber = "2:5".split(":")[0].toInt();
-                int ayahNumber = "2:5".split(":")[1].toInt();
+              const Gap(10),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      popupChangeReciter(context, selectedReciter, (index) {
+                        log(index.toString());
+                      });
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        BlocBuilder<QuranReciterCubit, ReciterInfoModel>(
+                          builder:
+                              (context, state) => Text(
+                                safeSubString(
+                                  context.read<QuranReciterCubit>().state.name,
+                                  25,
+                                  replacer: "...",
+                                ),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                        ),
+                        const Gap(10),
+                        const Icon(Icons.arrow_drop_down_rounded, size: 30),
+                      ],
+                    ),
+                  ),
+                  Text("Style: ${reciterInfoModel.style}"),
+                  Text("Source: ${reciterInfoModel.source}"),
+                  if (reciterInfoModel.bio != null)
+                    Row(
+                      children: [
+                        const Text("More: "),
+                        SizedBox(
+                          height: 20,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.zero,
+                              ),
+                            ),
+                            onPressed: () {
+                              launchUrl(
+                                Uri.parse(reciterInfoModel.bio!),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            },
+                            child: Text(Uri.parse(reciterInfoModel.bio!).host),
+                          ),
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+            ],
+          ),
+          const Gap(10),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.primaryColor.withValues(alpha: 0.1),
+            ),
+            child: InkWell(
+              onTap: () async {
+                int surahNumber = currentAyahKEy.split(":")[0].toInt();
+                int ayahNumber = currentAyahKEy.split(":")[1].toInt();
                 await popupJumpToAyah(
                   context: context,
                   initAyahKey: "$surahNumber:$ayahNumber",
@@ -72,52 +169,20 @@ class _AudioPageState extends State<AudioPage> {
                   },
                 );
               },
+              borderRadius: BorderRadius.circular(10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${SurahInfoModel.fromMap(metaDataSurah["2"]).nameSimple} - 2:5",
-                    style: const TextStyle(fontSize: 16),
+                    "${SurahInfoModel.fromMap(metaDataSurah["2"]).nameSimple} - $currentAyahKEy",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const Gap(10),
-                  const Icon(Icons.arrow_drop_down_rounded, size: 30),
-                ],
-              ),
-            ),
-          ),
-          const Gap(15),
-          const Text(
-            "Reciter: ",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          SizedBox(
-            height: 35,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-              ),
-              onPressed: () {
-                popupChangeReciter(context, 0, (index) {});
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocBuilder<QuranReciterCubit, ReciterInfoModel>(
-                    builder:
-                        (context, state) => Text(
-                          safeSubString(
-                            context.read<QuranReciterCubit>().state.name,
-                            25,
-                            replacer: "...",
-                          ),
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                  ),
-                  const Gap(10),
-                  const Icon(Icons.arrow_drop_down_rounded, size: 30),
+                  const Gap(15),
+                  const Icon(Icons.arrow_drop_down_rounded, size: 40),
                 ],
               ),
             ),
@@ -134,16 +199,17 @@ class _AudioPageState extends State<AudioPage> {
               ),
               child: ScriptProcessor(
                 scriptInfo: ScriptInfo(
-                  surahNumber: 2,
-                  ayahNumber: 5,
+                  surahNumber: currentAyahKEy.split(":")[0].toInt(),
+                  ayahNumber: currentAyahKEy.split(":")[1].toInt(),
                   quranScriptType: QuranScriptType.tajweed,
                   fontSize: 26,
+                  textAlign: TextAlign.center,
                   skipWordTap: true,
                 ),
               ),
             ),
           ),
-          Gap(20),
+          const Gap(20),
           BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
             builder: (context, state) {
               return ProgressBar(
