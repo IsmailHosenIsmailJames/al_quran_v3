@@ -88,9 +88,7 @@ class AudioPlayerManager {
     currentIndexStream = audioPlayer.currentIndexStream.listen((event) {
       if (event != null) {
         final ayahKeyCubit = context.read<AyahKeyCubit>();
-        ayahKeyCubit.changeCurrentAyahKey(
-          ayahKeyCubit.state.ayahList?[event] ?? ayahKeyCubit.state.current!,
-        );
+        ayahKeyCubit.changeCurrentAyahKey(ayahKeyCubit.state.ayahList[event]);
       }
     });
   }
@@ -111,9 +109,7 @@ class AudioPlayerManager {
     audioUICubit.showUI(false);
     audioUICubit.isPlayList(false);
     audioUICubit.changeIsInsideQuran(false);
-    navigatorKey.currentContext!.read<AyahKeyCubit>().changeData(
-      AyahKeyManagement(start: null, end: null, current: null),
-    );
+
     final playerPositionCubit =
         navigatorKey.currentContext!.read<PlayerPositionCubit>();
     playerPositionCubit.changeCurrentPosition(Duration.zero);

@@ -197,11 +197,11 @@ Widget getAyahByAyahCard({
                             bool isPlayList =
                                 context.read<AudioUiCubit>().state.isPlayList;
                             if (isPlayList &&
-                                ayahKeyManagement.current?.split(":").first ==
+                                ayahKeyManagement.current.split(":").first ==
                                     ayahKey.split(":").first) {
                               await AudioPlayerManager.audioPlayer.seek(
                                 Duration.zero,
-                                index: ayahKeyManagement.ayahList?.indexOf(
+                                index: ayahKeyManagement.ayahList.indexOf(
                                   ayahKey,
                                 ),
                               );

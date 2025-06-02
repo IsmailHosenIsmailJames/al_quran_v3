@@ -170,7 +170,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             if (state?.current != null &&
                 state?.end != null &&
                 state?.start != null) {
-              int currentSurahNumber = int.parse(state!.current!.split(":")[0]);
+              int currentSurahNumber = int.parse(state!.current.split(":")[0]);
               List ayahList = getListOfAyahKey(
                 startAyahKey: "$currentSurahNumber:1",
                 endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
@@ -180,7 +180,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               return ayahList.length > 1
                   ? Row(
                     children: [
-                      Text(state.current!),
+                      Text(state.current),
                       Expanded(
                         child: SliderTheme(
                           data: SliderTheme.of(context).copyWith(
@@ -193,14 +193,14 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           ),
 
                           child: Slider(
-                            value: ayahList.indexOf(state.current!).toDouble(),
+                            value: ayahList.indexOf(state.current).toDouble(),
                             max: ayahList.length.toDouble() - 1,
                             min: 0,
 
                             divisions: ayahList.length - 1,
                             onChanged: (value) {
                               String ayahKey = ayahList[value.toInt()];
-                              if ((state.ayahList?.length ?? 0) == 1) {
+                              if ((state.ayahList.length) == 1) {
                                 AudioPlayerManager.playSingleAyah(
                                   ayahKey: ayahKey,
                                   reciterInfoModel:
@@ -257,11 +257,11 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   ),
                   IconButton(
                     onPressed:
-                        int.parse(state?.current?.split(":").last ?? "0") > 1
+                        int.parse(state?.current.split(":").last ?? "0") > 1
                             ? () {
-                              if (state?.ayahList?.length == 1) {
+                              if (state?.ayahList.length == 1) {
                                 int? currentSurahNumber = int.tryParse(
-                                  state?.current?.split(":").first ?? "",
+                                  state?.current.split(":").first ?? "",
                                 );
                                 if (currentSurahNumber == null) return;
                                 List tempAyahList = getListOfAyahKey(
@@ -359,16 +359,16 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     onPressed:
                         (ayahList.isNotEmpty &&
                                 int.parse(
-                                      state?.current?.split(":").last ?? "0",
+                                      state?.current.split(":").last ?? "0",
                                     ) <
                                     quranAyahCount[int.parse(
                                           ayahList.first.split(":").first,
                                         ) -
                                         1])
                             ? () {
-                              if (state?.ayahList?.length == 1) {
+                              if (state?.ayahList.length == 1) {
                                 int? currentSurahNumber = int.tryParse(
-                                  state?.current?.split(":").first ?? "",
+                                  state?.current.split(":").first ?? "",
                                 );
                                 if (currentSurahNumber == null) return;
                                 List tempAyahList = getListOfAyahKey(

@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SegmentedAudioCubit()),
         BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(create: (context) => WordPlayingStateCubit()),
-        BlocProvider(create: (context) => AudioTabScreenCubit()),
+        BlocProvider(create: (context) => AudioTabReciterCubit()),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(
