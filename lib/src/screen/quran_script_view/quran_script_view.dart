@@ -243,7 +243,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   style: IconButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
-                      side: BorderSide(color: AppColors.primaryColor),
+                      side: BorderSide(color: AppColors.primary),
                     ),
                   ),
                   onPressed: () {
@@ -256,7 +256,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     state.isAyahByAyah
                         ? CupertinoIcons.book
                         : CupertinoIcons.list_bullet,
-                    color: AppColors.primaryColor,
+                    color: AppColors.primary,
                   ),
                 );
               },
@@ -410,7 +410,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               width: double.infinity,
               height: 30,
               margin: const EdgeInsets.only(top: 5, bottom: 5),
-              color: AppColors.primaryColor.withValues(alpha: 0.1),
+              color: AppColors.primaryShade100,
               child: Row(
                 mainAxisAlignment:
                     state.isAyahByAyah
@@ -454,7 +454,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                                   true
                               ? CupertinoIcons.list_bullet_below_rectangle
                               : CupertinoIcons.list_bullet,
-                          color: AppColors.primaryColor,
+                          color: AppColors.primary,
                           size: 18,
                         ),
                       ),

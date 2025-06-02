@@ -33,7 +33,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
           height: 50,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.primaryColor.withValues(alpha: 0.1),
+            color: AppColors.primaryShade100,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(roundedRadius),
               topRight: Radius.circular(roundedRadius),
@@ -72,12 +72,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color:
-                      selectedIndex == index
-                          ? AppColors.primaryColor.withValues(alpha: 0.1)
-                          : null,
+                      selectedIndex == index ? AppColors.primaryShade100 : null,
                   border:
                       selectedIndex == index
-                          ? Border.all(color: AppColors.primaryColor)
+                          ? Border.all(color: AppColors.primary)
                           : null,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
@@ -94,7 +92,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
                         height: 85,
                         width: 65,
                         decoration: BoxDecoration(
-                          color: AppColors.primaryColor.withValues(alpha: 0.1),
+                          color: AppColors.primaryShade100,
                           borderRadius: BorderRadius.circular(roundedRadius),
                         ),
                         child:

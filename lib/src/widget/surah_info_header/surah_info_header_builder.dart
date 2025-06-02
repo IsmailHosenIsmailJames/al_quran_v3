@@ -29,7 +29,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
-        color: AppColors.primaryColor.withValues(alpha: 0.05),
+        color: AppColors.primary.withValues(alpha: 0.05),
       ),
       height: 120,
       child: Stack(
@@ -119,7 +119,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         child: Text(
                           "more info",
                           style: TextStyle(
-                            color: AppColors.primaryColor,
+                            color: AppColors.primary,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -145,7 +145,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     return IconButton(
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        backgroundColor: AppColors.primaryColor,
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

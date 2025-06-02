@@ -125,12 +125,12 @@ class MyApp extends StatelessWidget {
               fontFamily: "NotoSans",
             ).copyWith(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.primaryColor,
+                seedColor: AppColors.primary,
                 brightness: Brightness.light,
               ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
                   elevation: 0,
@@ -145,12 +145,12 @@ class MyApp extends StatelessWidget {
               fontFamily: "NotoSans",
             ).copyWith(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.primaryColor,
+                seedColor: AppColors.primary,
                 brightness: Brightness.dark,
               ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
                   elevation: 0,

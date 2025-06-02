@@ -49,7 +49,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 topLeft: Radius.circular(roundedRadius),
                 topRight: Radius.circular(roundedRadius),
               ),
-              color: AppColors.primaryColor.withValues(alpha: 0.1),
+              color: AppColors.primaryShade100,
             ),
             width: double.infinity,
             height: 50,
@@ -92,7 +92,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(roundedRadius),
-                          color: AppColors.primaryColor.withValues(alpha: 0.1),
+                          color: AppColors.primaryShade100,
                         ),
                         child: TextFormField(
                           controller: textEditingController,
@@ -133,8 +133,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       ),
                                       backgroundColor:
                                           index == surahNumber - 1
-                                              ? AppColors.primaryColor
-                                                  .withValues(alpha: 0.2)
+                                              ? AppColors.primary.withValues(
+                                                alpha: 0.2,
+                                              )
                                               : Colors.transparent,
                                       foregroundColor:
                                           Theme.of(context).brightness ==
@@ -188,9 +189,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             ),
                             backgroundColor:
                                 index == ayahNumber - 1
-                                    ? AppColors.primaryColor.withValues(
-                                      alpha: 0.2,
-                                    )
+                                    ? AppColors.primary.withValues(alpha: 0.2)
                                     : Colors.transparent,
                             foregroundColor:
                                 Theme.of(context).brightness == Brightness.dark

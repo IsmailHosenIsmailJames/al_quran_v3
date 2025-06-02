@@ -37,12 +37,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           selectedScript == QuranScriptType.tajweed
-                              ? AppColors.primaryColor
-                              : Colors.grey.withValues(alpha: 0.2),
+                              ? AppColors.primary
+                              : AppColors.mutedGray,
                       foregroundColor:
                           selectedScript == QuranScriptType.tajweed
                               ? Colors.white
-                              : AppColors.primaryColor,
+                              : AppColors.primary,
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -76,12 +76,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           selectedScript == QuranScriptType.uthmani
-                              ? AppColors.primaryColor
-                              : Colors.grey.withValues(alpha: 0.2),
+                              ? AppColors.primary
+                              : AppColors.mutedGray,
                       foregroundColor:
                           selectedScript == QuranScriptType.uthmani
                               ? Colors.white
-                              : AppColors.primaryColor,
+                              : AppColors.primary,
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
@@ -113,12 +113,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           selectedScript == QuranScriptType.indopak
-                              ? AppColors.primaryColor
-                              : Colors.grey.withValues(alpha: 0.2),
+                              ? AppColors.primary
+                              : AppColors.mutedGray,
                       foregroundColor:
                           selectedScript == QuranScriptType.indopak
                               ? Colors.white
-                              : AppColors.primaryColor,
+                              : AppColors.primary,
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(

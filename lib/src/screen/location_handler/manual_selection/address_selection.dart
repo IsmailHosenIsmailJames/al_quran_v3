@@ -54,7 +54,7 @@ class _AddressSelectionState extends State<AddressSelection> {
                 children: [
                   LinearProgressIndicator(
                     value: state.downloadProgress,
-                    color: AppColors.primaryColor,
+                    color: AppColors.primary,
                   ),
                   const SizedBox(height: 20),
                   Text(

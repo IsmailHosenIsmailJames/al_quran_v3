@@ -83,8 +83,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       ? Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade900
                           : Colors.grey.shade100
-                      : AppColors.primaryColor,
-              border: Border.all(color: AppColors.primaryColor, width: 0.5),
+                      : AppColors.primary,
+              border: Border.all(color: AppColors.primary, width: 0.5),
             ),
             child:
                 (state.showUi && state.isInsideQuranPlayer)

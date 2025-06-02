@@ -53,12 +53,12 @@ class _QuranPageState extends State<QuranPage> {
                       shadowColor: Colors.transparent,
                       backgroundColor:
                           _pageIndex == index
-                              ? AppColors.primaryColor
+                              ? AppColors.primary
                               : Colors.transparent,
                       foregroundColor:
                           _pageIndex == index
                               ? Colors.white
-                              : AppColors.primaryColor,
+                              : AppColors.primary,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.zero,
                       ),
