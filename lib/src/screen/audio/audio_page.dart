@@ -253,7 +253,7 @@ class _AudioPageState extends State<AudioPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "${SurahInfoModel.fromMap(metaDataSurah["2"]).nameSimple} - ${ayahKeyState.current}",
+                              "${SurahInfoModel.fromMap(metaDataSurah[ayahKeyState.current.split(":")[0]]).nameSimple} - ${ayahKeyState.current}",
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
