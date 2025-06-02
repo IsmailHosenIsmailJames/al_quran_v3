@@ -10,8 +10,8 @@ import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
 class ChangeReciter extends StatefulWidget {
-  final int initReciterIndex;
-  final Function(int index) onReciterChanged;
+  final ReciterInfoModel initReciterIndex;
+  final Function(ReciterInfoModel index) onReciterChanged;
   const ChangeReciter({
     super.key,
     required this.initReciterIndex,
@@ -24,7 +24,7 @@ class ChangeReciter extends StatefulWidget {
 
 class _ChangeReciterState extends State<ChangeReciter> {
   ScrollController scrollController = ScrollController();
-  late int selectedIndex = widget.initReciterIndex;
+  late ReciterInfoModel selectedReciter = widget.initReciterIndex;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -72,9 +72,11 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color:
-                      selectedIndex == index ? AppColors.primaryShade100 : null,
+                      selectedReciter.link == reciterInfoModel.link
+                          ? AppColors.primaryShade100
+                          : null,
                   border:
-                      selectedIndex == index
+                      selectedReciter.link == reciterInfoModel.link
                           ? Border.all(color: AppColors.primary)
                           : null,
                   borderRadius: BorderRadius.circular(roundedRadius),
@@ -82,7 +84,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedIndex = index;
+                      selectedReciter = reciterInfoModel;
                     });
                   },
                   behavior: HitTestBehavior.translucent,
@@ -186,7 +188,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
               ),
             ),
             onPressed: () {
-              widget.onReciterChanged(selectedIndex);
+              widget.onReciterChanged(selectedReciter);
             },
             icon: const Icon(Icons.done),
             label: const Text("Save"),

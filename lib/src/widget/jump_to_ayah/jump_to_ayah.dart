@@ -179,29 +179,33 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             metaDataSurah[surahNumber.toString()],
                           ).versesCount,
                       itemBuilder: (context, index) {
-                        return TextButton(
-                          style: TextButton.styleFrom(
-                            alignment: Alignment.center,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                roundedRadius,
+                        return SizedBox(
+                          height: 35,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              alignment: Alignment.center,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  roundedRadius,
+                                ),
                               ),
+                              backgroundColor:
+                                  index == ayahNumber - 1
+                                      ? AppColors.primary.withValues(alpha: 0.2)
+                                      : Colors.transparent,
+                              foregroundColor:
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black,
                             ),
-                            backgroundColor:
-                                index == ayahNumber - 1
-                                    ? AppColors.primary.withValues(alpha: 0.2)
-                                    : Colors.transparent,
-                            foregroundColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
+                            onPressed: () {
+                              setState(() {
+                                ayahNumber = index + 1;
+                              });
+                            },
+                            child: Text((index + 1).toString()),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              ayahNumber = index + 1;
-                            });
-                          },
-                          child: Text((index + 1).toString()),
                         );
                       },
                     ),
