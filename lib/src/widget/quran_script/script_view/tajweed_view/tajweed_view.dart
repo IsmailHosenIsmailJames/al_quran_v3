@@ -44,6 +44,7 @@ class TajweedView extends StatelessWidget {
       return Text.rich(
         style: quranStyle,
         textDirection: TextDirection.rtl,
+        textAlign: scriptInfo.textAlign,
         parseTajweedWord(
           wordIndex: scriptInfo.wordIndex,
           words: List<String>.from(words),
@@ -87,7 +88,7 @@ class TajweedView extends StatelessWidget {
         return Text.rich(
           style: quranStyle,
           textDirection: TextDirection.rtl,
-
+          textAlign: scriptInfo.textAlign,
           TextSpan(
             children: List<InlineSpan>.generate(words.length, (index) {
               return parseTajweedWord(

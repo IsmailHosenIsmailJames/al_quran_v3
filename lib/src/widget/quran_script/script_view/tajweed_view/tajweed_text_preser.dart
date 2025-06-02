@@ -39,6 +39,7 @@ TextSpan parseTajweedWord({
         TextSpan(
           text: node.text,
           style: processingStyle.copyWith(color: currentColor),
+
           recognizer:
               skipWordTap == true
                   ? null
