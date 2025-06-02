@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
+import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SegmentedAudioCubit()),
         BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(create: (context) => WordPlayingStateCubit()),
+        BlocProvider(create: (context) => AudioTabScreenCubit()),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(
