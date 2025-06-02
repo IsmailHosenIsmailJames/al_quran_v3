@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/jump_to_ayah.dart";
 import "package:flutter/material.dart";
 
@@ -19,7 +20,9 @@ Future<void> popupJumpToAyah({
           bottom: 20,
         ),
 
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(roundedRadius),
+        ),
         child: JumpToAyahView(
           initAyahKey: initAyahKey,
 

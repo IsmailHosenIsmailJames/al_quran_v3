@@ -18,7 +18,7 @@ class _PrayerTimeCanvasState extends State<PrayerTimeCanvas> {
           width: 200,
           padding: const EdgeInsets.all(25),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(1000),
+            borderRadius: BorderRadius.circular(200),
             color: AppColors.primaryColor.withValues(alpha: 0.2),
           ),
           alignment: Alignment.center,

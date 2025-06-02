@@ -62,7 +62,7 @@ Widget getAyahByAyahCard({
             Container(
               decoration: BoxDecoration(
                 color: AppColors.primaryColor.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(roundedRadius - 4),
               ),
               padding: const EdgeInsets.only(
                 left: 5,

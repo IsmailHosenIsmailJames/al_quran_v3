@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
@@ -41,7 +42,7 @@ class _AudioPageState extends State<AudioPage> {
       recitationsInfoList[selectedReciter],
     );
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,12 +50,12 @@ class _AudioPageState extends State<AudioPage> {
           Row(
             children: [
               SizedBox(
-                height: 120,
-                width: 90,
+                height: 100,
+                width: 80,
                 child:
                     reciterInfoModel.img != null
                         ? ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(roundedRadius),
                           child: CachedNetworkImage(
                             imageUrl: reciterInfoModel.img!,
                             errorWidget:
@@ -96,13 +97,13 @@ class _AudioPageState extends State<AudioPage> {
                               (context, state) => Text(
                                 safeSubString(
                                   context.read<QuranReciterCubit>().state.name,
-                                  25,
+                                  20,
                                   replacer: "...",
                                 ),
                                 style: const TextStyle(fontSize: 16),
                               ),
                         ),
-                        const Gap(10),
+                        const Gap(5),
                         const Icon(Icons.arrow_drop_down_rounded, size: 30),
                       ],
                     ),
@@ -140,7 +141,7 @@ class _AudioPageState extends State<AudioPage> {
           const Gap(10),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(roundedRadius),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
             ),
             child: InkWell(
@@ -169,7 +170,7 @@ class _AudioPageState extends State<AudioPage> {
                   },
                 );
               },
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(roundedRadius),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +195,7 @@ class _AudioPageState extends State<AudioPage> {
               alignment: Alignment.center,
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(roundedRadius),
                 color: AppColors.primaryColor.withValues(alpha: 0.1),
               ),
               child: ScriptProcessor(

@@ -2,6 +2,7 @@ import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -33,9 +34,9 @@ class _ChangeReciterState extends State<ChangeReciter> {
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColors.primaryColor.withValues(alpha: 0.1),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(roundedRadius),
+              topRight: Radius.circular(roundedRadius),
             ),
           ),
           child: Stack(
@@ -78,7 +79,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
                       selectedIndex == index
                           ? Border.all(color: AppColors.primaryColor)
                           : null,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 child: GestureDetector(
                   onTap: () {
@@ -94,12 +95,14 @@ class _ChangeReciterState extends State<ChangeReciter> {
                         width: 65,
                         decoration: BoxDecoration(
                           color: AppColors.primaryColor.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(roundedRadius),
                         ),
                         child:
                             reciterInfoModel.img != null
                                 ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(9),
+                                  borderRadius: BorderRadius.circular(
+                                    roundedRadius,
+                                  ),
                                   child: CachedNetworkImage(
                                     imageUrl: reciterInfoModel.img!,
                                     errorWidget:
@@ -181,7 +184,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
               elevation: 0,
               padding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(roundedRadius),
               ),
             ),
             onPressed: () {

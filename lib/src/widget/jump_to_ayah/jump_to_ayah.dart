@@ -1,6 +1,7 @@
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:gap/gap.dart";
 
@@ -31,7 +32,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(roundedRadius),
         color:
             Theme.of(context).brightness == Brightness.dark
                 ? Colors.grey.shade900
@@ -44,9 +45,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(roundedRadius),
+                topRight: Radius.circular(roundedRadius),
               ),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
             ),
@@ -90,7 +91,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           bottom: 10,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(roundedRadius),
                           color: AppColors.primaryColor.withValues(alpha: 0.1),
                         ),
                         child: TextFormField(
@@ -109,7 +110,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         child: Scrollbar(
                           controller: surahScrollController,
                           interactive: true,
-                          radius: const Radius.circular(10),
+                          radius: Radius.circular(roundedRadius),
                           thickness: 10,
                           child: ListView.builder(
                             controller: surahScrollController,
@@ -126,7 +127,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     style: TextButton.styleFrom(
                                       alignment: Alignment.centerLeft,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(
+                                          roundedRadius,
+                                        ),
                                       ),
                                       backgroundColor:
                                           index == surahNumber - 1
@@ -164,7 +167,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                   child: Scrollbar(
                     controller: ayahScrollController,
                     interactive: true,
-                    radius: const Radius.circular(10),
+                    radius: Radius.circular(roundedRadius),
                     thickness: 10,
                     child: ListView.builder(
                       controller: ayahScrollController,
@@ -179,7 +182,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           style: TextButton.styleFrom(
                             alignment: Alignment.center,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(
+                                roundedRadius,
+                              ),
                             ),
                             backgroundColor:
                                 index == ayahNumber - 1
@@ -216,6 +221,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ),
               width: MediaQuery.of(context).size.width,
               child: OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                   widget.onPlaySelected!("$surahNumber:$ayahNumber");

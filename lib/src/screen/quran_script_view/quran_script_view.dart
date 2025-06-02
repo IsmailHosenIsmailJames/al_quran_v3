@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.d
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -281,7 +282,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                 : Scrollbar(
                   controller: scrollController,
                   interactive: true,
-                  radius: const Radius.circular(10),
+                  radius: Radius.circular(roundedRadius),
                   thickness: 13,
                   child: ListView.builder(
                     controller: scrollController,

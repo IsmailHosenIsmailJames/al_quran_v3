@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -48,7 +49,9 @@ class _CountriesSelectionState extends State<CountriesSelection> {
               elevation: const WidgetStatePropertyAll(0),
               leading: const Icon(Icons.search),
               shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                ),
               ),
             ),
           ),
