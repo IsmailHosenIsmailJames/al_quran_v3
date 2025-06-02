@@ -83,8 +83,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               ? Colors.white
                               : AppColors.primaryColor,
                       padding: const EdgeInsets.only(left: 8, right: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
                       ),
                       elevation: 0,
                       shadowColor: Colors.transparent,

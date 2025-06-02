@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -151,9 +152,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(roundedRadius),
+                  topRight: Radius.circular(roundedRadius),
                 ),
                 color: Theme.of(context).colorScheme.surface,
               ),
@@ -236,7 +237,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                     border: Border.all(
                                       color: AppColors.primaryColor,
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(
+                                      roundedRadius,
+                                    ),
                                   )
                                   : null,
                           child: Row(
