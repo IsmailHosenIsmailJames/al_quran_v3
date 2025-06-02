@@ -137,9 +137,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   builder: (context, ayahKeyManagement) {
                     bool isPlaying = playerState.isPlaying;
                     bool isCurrentSurah =
-                        int.tryParse(
-                          ayahKeyManagement.current?.split(":")[0] ?? "",
-                        ) ==
+                        int.tryParse(ayahKeyManagement.current.split(":")[0]) ==
                         headerInfoModel.surahInfoModel.id;
                     bool isCurrentPlaying = isPlaying && isCurrentSurah;
                     return IconButton(
