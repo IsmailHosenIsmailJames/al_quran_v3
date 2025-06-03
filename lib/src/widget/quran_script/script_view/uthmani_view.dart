@@ -58,6 +58,7 @@ class NonTajweedScriptView extends StatelessWidget {
 
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
+        if (scriptInfo.showWordHighlights == false) return false;
         String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
         if (currentAyahKey == ayahKey) {
           if (segments != null) {
@@ -95,9 +96,10 @@ class NonTajweedScriptView extends StatelessWidget {
                     highlightingWordIndex ==
                             "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
                         ? TextStyle(
-                          backgroundColor: AppColors.primary.withValues(
-                            alpha: 0.15,
-                          ),
+                          backgroundColor:
+                              scriptInfo.showWordHighlights == false
+                                  ? null
+                                  : AppColors.primary.withValues(alpha: 0.15),
                         )
                         : null,
                 text: words[index] + " ",
