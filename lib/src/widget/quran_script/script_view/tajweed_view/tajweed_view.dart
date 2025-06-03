@@ -1,4 +1,5 @@
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
@@ -59,7 +60,10 @@ class TajweedView extends StatelessWidget {
 
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
-        if (scriptInfo.showWordHighlights == false) return false;
+        if (scriptInfo.showWordHighlights == false ||
+            context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
+          return false;
+        }
         String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
         if (currentAyahKey == ayahKey) {
           if (segments != null) {

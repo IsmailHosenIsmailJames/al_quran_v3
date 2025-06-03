@@ -139,7 +139,14 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     bool isCurrentSurah =
                         int.tryParse(ayahKeyManagement.current.split(":")[0]) ==
                         headerInfoModel.surahInfoModel.id;
-                    bool isCurrentPlaying = isPlaying && isCurrentSurah;
+                    bool isCurrentPlaying =
+                        isPlaying &&
+                        isCurrentSurah &&
+                        context
+                                .read<AudioUiCubit>()
+                                .state
+                                .isInsideQuranPlayer ==
+                            true;
                     return IconButton(
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.zero,
@@ -153,7 +160,24 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             playerState.state ==
                             just_audio.ProcessingState.completed;
 
-                        if (isCurrentPlaying && isPlayList && !isCompleted) {
+                        if (context
+                                .read<AudioUiCubit>()
+                                .state
+                                .isInsideQuranPlayer ==
+                            false) {
+                          String startAyahKey = headerInfoModel.startAyahKey;
+                          String endAyahKey = headerInfoModel.endAyahKey;
+
+                          AudioPlayerManager.playMultipleAyahAsPlaylist(
+                            startAyahKey: startAyahKey,
+                            endAyahKey: endAyahKey,
+                            reciterInfoModel:
+                                context.read<SegmentedAudioCubit>().state,
+                            isInsideQuran: true,
+                          );
+                        } else if (isCurrentPlaying &&
+                            isPlayList &&
+                            !isCompleted) {
                           AudioPlayerManager.audioPlayer.pause();
                         } else if (isCurrentSurah &&
                             isPlayList &&

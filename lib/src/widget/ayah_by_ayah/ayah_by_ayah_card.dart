@@ -176,7 +176,13 @@ Widget getAyahByAyahCard({
                   return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
                     builder: (context, ayahKeyManagement) {
                       bool isPlaying = playerState.isPlaying;
-                      bool isCurrent = ayahKeyManagement.current == ayahKey;
+                      bool isCurrent =
+                          ayahKeyManagement.current == ayahKey &&
+                          context
+                                  .read<AudioUiCubit>()
+                                  .state
+                                  .isInsideQuranPlayer ==
+                              true;
 
                       return IconButton(
                         style: IconButton.styleFrom(
@@ -188,7 +194,19 @@ Widget getAyahByAyahCard({
                           ),
                         ),
                         onPressed: () async {
-                          if (isCurrent && isPlaying) {
+                          if (context
+                                  .read<AudioUiCubit>()
+                                  .state
+                                  .isInsideQuranPlayer ==
+                              false) {
+                            AudioPlayerManager.playSingleAyah(
+                              ayahKey: ayahKey,
+                              reciterInfoModel:
+                                  context.read<SegmentedAudioCubit>().state,
+                              instantPlay: true,
+                              isInsideQuran: true,
+                            );
+                          } else if (isCurrent && isPlaying) {
                             AudioPlayerManager.audioPlayer.pause();
                           } else if (isCurrent) {
                             AudioPlayerManager.audioPlayer.play();
