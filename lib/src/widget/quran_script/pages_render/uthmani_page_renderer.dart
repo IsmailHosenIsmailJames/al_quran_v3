@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
@@ -47,6 +48,9 @@ class NonTajweedPageRenderer extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
         buildWhen: (previous, current) {
+          if (context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
+            return false;
+          }
           String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
           if (ayahsKey.contains(currentAyahKey)) {
             List? segments = audioSegmentsMap[currentAyahKey];

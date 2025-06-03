@@ -30,5 +30,8 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
         AyahByAyahInScrollInfoState.toMap(state).toString()) {
       emit(newState);
     }
+    if (isAyahByAyah != null) {
+      Hive.box("user").put("isAyahByAyah", isAyahByAyah);
+    }
   }
 }
