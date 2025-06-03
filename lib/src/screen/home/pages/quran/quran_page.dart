@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
@@ -35,57 +37,89 @@ class _QuranPageState extends State<QuranPage> {
       metaDataHizb.values.map((e) => HizbModel.fromMap(e)).toList();
   List<RukuInfoModel> rukuInfoList =
       metaDataRuku.values.map((e) => RukuInfoModel.fromMap(e)).toList();
+  PageController pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
+    log(pageController.position.minScrollExtent.toString());
+    log(pageController.position.maxScrollExtent.toString());
+    log(pageController.position.pixels.toString());
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: 30,
-            child: Row(
-              children: List.generate(pagesName.length, (index) {
-                return Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      elevation: 0,
-                      shadowColor: Colors.transparent,
-                      backgroundColor:
-                          _pageIndex == index
-                              ? AppColors.primary
-                              : Colors.transparent,
-                      foregroundColor:
-                          _pageIndex == index
-                              ? Colors.white
-                              : AppColors.primary,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                    ),
-                    onPressed: () async {
-                      setState(() {
-                        _pageIndex = index;
-                      });
-                    },
-                    child: Text(
-                      pagesName[index],
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+          Container(
+            height: 35,
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: AppColors.primaryShade100,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Stack(
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  alignment: Alignment(
+                    [-1, -0.5, 0, 0.5, 1][_pageIndex].toDouble(),
+                    0,
                   ),
-                );
-              }),
+                  curve: Curves.easeInOut,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryShade200,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    height: 30,
+                    width: (MediaQuery.of(context).size.width - 10) / 5,
+                  ),
+                ),
+                Row(
+                  children: List.generate(pagesName.length, (index) {
+                    return Expanded(
+                      child: TextButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          elevation: 0,
+                        ),
+                        onPressed: () async {
+                          pageController.animateToPage(
+                            index,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: Text(
+                          pagesName[index],
+                          style: TextStyle(
+                            fontWeight:
+                                _pageIndex == index
+                                    ? FontWeight.bold
+                                    : FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child:
-                [
-                  SurahListView(surahInfoList: surahInfoList),
-                  JuzListView(juzInfoList: juzInfoModelList),
-                  PageListView(pageInfoList: pageInfoList),
-                  HizbListView(hizbInfoList: hizbInfoList),
-                  RukuListView(rukuInfoList: rukuInfoList),
-                ][_pageIndex],
+            child: PageView(
+              onPageChanged: (index) {
+                setState(() {
+                  _pageIndex = index;
+                });
+              },
+              controller: pageController,
+              children: [
+                SurahListView(surahInfoList: surahInfoList),
+                JuzListView(juzInfoList: juzInfoModelList),
+                PageListView(pageInfoList: pageInfoList),
+                HizbListView(hizbInfoList: hizbInfoList),
+                RukuListView(rukuInfoList: rukuInfoList),
+              ],
+            ),
           ),
         ],
       ),
