@@ -8,6 +8,7 @@ class ScriptInfo {
   TextAlign? textAlign;
   int? limitWord;
   int? wordIndex;
+  bool? showWordHighlights;
   bool? skipWordTap;
 
   ScriptInfo({
@@ -19,6 +20,7 @@ class ScriptInfo {
     this.limitWord,
     this.wordIndex,
     this.skipWordTap,
+    this.showWordHighlights,
   });
 }
 

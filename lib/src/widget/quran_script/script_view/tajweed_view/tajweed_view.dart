@@ -59,6 +59,7 @@ class TajweedView extends StatelessWidget {
 
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
+        if (scriptInfo.showWordHighlights == false) return false;
         String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
         if (currentAyahKey == ayahKey) {
           if (segments != null) {
@@ -96,7 +97,9 @@ class TajweedView extends StatelessWidget {
                 words: List<String>.from(words),
                 baseStyle: quranStyle.copyWith(
                   backgroundColor:
-                      highlightingWordIndex ==
+                      scriptInfo.showWordHighlights == false
+                          ? null
+                          : highlightingWordIndex ==
                               "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
                           ? AppColors.primaryShade100
                           : null,
