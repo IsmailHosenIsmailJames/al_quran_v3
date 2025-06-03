@@ -518,7 +518,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
           null,
           "Processing Segmented Quran Recitation",
         );
-        Map segmentsInfo = jsonDecode(decodeBZip2String(response.data));
+        Map segmentsInfo = await compute(
+          (message) => jsonDecode(decodeBZip2String(message)),
+          response.data,
+        );
 
         for (final ayahKey in segmentsInfo.keys) {
           await box.put(ayahKey, segmentsInfo[ayahKey]);
@@ -570,7 +573,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
         );
         log(response.statusCode.toString(), name: "Status");
         DateTime now = DateTime.now();
-        Map data = jsonDecode(decodeBZip2String(response.data));
+        Map data = await compute(
+          (message) => jsonDecode(decodeBZip2String(message)),
+          response.data,
+        );
         if (data.isEmpty) {
           log("Word by Word Translation is empty");
           return false;
@@ -621,7 +627,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
       log(response.statusCode.toString(), name: "Status");
       DateTime now = DateTime.now();
-      Map data = jsonDecode(decodeBZip2String(response.data));
+      Map data = await compute(
+        (message) => jsonDecode(decodeBZip2String(message)),
+        response.data,
+      );
       for (int i = 0; i < data.length; i++) {
         String key = data.keys.elementAt(i);
         await translationBox.put(key, data[key]);
@@ -645,7 +654,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
         );
         if (response.statusCode == 200) {
           final box = Hive.box("surah_info");
-          Map data = jsonDecode(decodeBZip2String(response.data));
+          Map data = await compute(
+            (message) => jsonDecode(decodeBZip2String(message)),
+            response.data,
+          );
           for (final key in data.keys) {
             await box.put(key, data[key]);
           }
@@ -680,7 +692,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       dio.Response response = await dio.Dio().get(base + tafsirBook!);
       log(response.statusCode.toString(), name: "Status");
       DateTime now = DateTime.now();
-      Map data = jsonDecode(decodeBZip2String(response.data));
+      Map data = await compute(
+        (message) => jsonDecode(decodeBZip2String(message)),
+        response.data,
+      );
       for (int i = 0; i < data.length; i++) {
         String key = data.keys.elementAt(i);
         await tafsirBox.put(key, jsonEncode(data[key]!));

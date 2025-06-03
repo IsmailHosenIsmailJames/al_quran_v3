@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -9,7 +10,7 @@ Widget themeIconButton(BuildContext context) =>
           style: IconButton.styleFrom(
             backgroundColor: Colors.grey.withValues(alpha: 0.1),
           ),
-          color: Colors.green.shade600,
+          color: AppColors.primary,
           tooltip: "Change Theme",
           onPressed: () {
             final themeController = context.read<ThemeCubit>();

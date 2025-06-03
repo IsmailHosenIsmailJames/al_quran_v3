@@ -5,5 +5,5 @@ class AppColors {
   static Color primaryShade100 = primary.withValues(alpha: 0.1);
   static Color primaryShade200 = primary.withValues(alpha: 0.2);
   static Color secondary = Colors.orange;
-  static Color mutedGray = AppColors.mutedGray;
+  static Color mutedGray = Colors.grey.withValues(alpha: 0.2);
 }
