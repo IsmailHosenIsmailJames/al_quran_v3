@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
@@ -41,9 +39,6 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
-    log(pageController.position.minScrollExtent.toString());
-    log(pageController.position.maxScrollExtent.toString());
-    log(pageController.position.pixels.toString());
     return Scaffold(
       body: Column(
         children: [
@@ -82,11 +77,7 @@ class _QuranPageState extends State<QuranPage> {
                           elevation: 0,
                         ),
                         onPressed: () async {
-                          pageController.animateToPage(
-                            index,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
+                          pageController.jumpToPage(index);
                         },
                         child: Text(
                           pagesName[index],
