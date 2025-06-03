@@ -1,7 +1,7 @@
 name: al_quran_v3
 description: "A new Flutter project."
 
-version: 3.0.0-dev-3+4
+version: 3.0.0-dev-6+6
 
 environment:
   sdk: ^3.7.2
