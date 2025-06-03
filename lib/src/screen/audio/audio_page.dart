@@ -322,6 +322,7 @@ class _AudioPageState extends State<AudioPage> {
                             fontSize: 24,
                             textAlign: TextAlign.center,
                             skipWordTap: true,
+                            showWordHighlights: false,
                           ),
                         ),
                         const Gap(5),
@@ -361,15 +362,22 @@ class _AudioPageState extends State<AudioPage> {
                     onPressed:
                         currentIndex > 0
                             ? () {
-                              AudioPlayerManager.playMultipleAyahAsPlaylist(
-                                startAyahKey: ayahKeyState.ayahList.first,
-                                endAyahKey: ayahKeyState.ayahList.last,
-                                isInsideQuran: false,
-                                reciterInfoModel:
-                                    context.read<AudioTabReciterCubit>().state,
-                                instantPlay: true,
-                                initialIndex: currentIndex - 1,
-                              );
+                              if (AudioPlayerManager.audioPlayer.audioSource ==
+                                  null) {
+                                AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                  startAyahKey: ayahKeyState.ayahList.first,
+                                  endAyahKey: ayahKeyState.ayahList.last,
+                                  isInsideQuran: false,
+                                  reciterInfoModel:
+                                      context
+                                          .read<AudioTabReciterCubit>()
+                                          .state,
+                                  instantPlay: true,
+                                  initialIndex: currentIndex - 1,
+                                );
+                              } else {
+                                AudioPlayerManager.audioPlayer.seekToPrevious();
+                              }
                             }
                             : null,
                   ),
@@ -377,20 +385,23 @@ class _AudioPageState extends State<AudioPage> {
 
                   IconButton(
                     icon: const Icon(Icons.replay_5_rounded),
-                    onPressed: () {
-                      Duration? duration =
-                          AudioPlayerManager.audioPlayer.duration;
-                      Duration position =
-                          AudioPlayerManager.audioPlayer.position;
-                      position = position - const Duration(seconds: 5);
-                      if (duration == null) {
-                        return;
-                      }
-                      if (position < Duration.zero) {
-                        position = Duration.zero;
-                      }
-                      AudioPlayerManager.audioPlayer.seek(position);
-                    },
+                    onPressed:
+                        AudioPlayerManager.audioPlayer.audioSource == null
+                            ? null
+                            : () {
+                              Duration? duration =
+                                  AudioPlayerManager.audioPlayer.duration;
+                              Duration position =
+                                  AudioPlayerManager.audioPlayer.position;
+                              position = position - const Duration(seconds: 5);
+                              if (duration == null) {
+                                return;
+                              }
+                              if (position < Duration.zero) {
+                                position = Duration.zero;
+                              }
+                              AudioPlayerManager.audioPlayer.seek(position);
+                            },
                   ),
                   const Gap(8),
                   SizedBox(
@@ -438,20 +449,23 @@ class _AudioPageState extends State<AudioPage> {
                   const Gap(8),
                   IconButton(
                     icon: const Icon(Icons.forward_5_rounded),
-                    onPressed: () {
-                      Duration? duration =
-                          AudioPlayerManager.audioPlayer.duration;
-                      Duration position =
-                          AudioPlayerManager.audioPlayer.position;
-                      position = position + const Duration(seconds: 5);
-                      if (duration == null) {
-                        return;
-                      }
-                      if (position > duration) {
-                        position = duration;
-                      }
-                      AudioPlayerManager.audioPlayer.seek(position);
-                    },
+                    onPressed:
+                        AudioPlayerManager.audioPlayer.audioSource == null
+                            ? null
+                            : () {
+                              Duration? duration =
+                                  AudioPlayerManager.audioPlayer.duration;
+                              Duration position =
+                                  AudioPlayerManager.audioPlayer.position;
+                              position = position + const Duration(seconds: 5);
+                              if (duration == null) {
+                                return;
+                              }
+                              if (position > duration) {
+                                position = duration;
+                              }
+                              AudioPlayerManager.audioPlayer.seek(position);
+                            },
                   ),
                   const Gap(5),
                   IconButton(
@@ -459,21 +473,28 @@ class _AudioPageState extends State<AudioPage> {
                     onPressed:
                         currentIndex < (ayahKeyState.ayahList.length - 1)
                             ? () {
-                              AudioPlayerManager.playMultipleAyahAsPlaylist(
-                                startAyahKey: ayahKeyState.ayahList.first,
-                                endAyahKey: ayahKeyState.ayahList.last,
-                                isInsideQuran: false,
-                                reciterInfoModel:
-                                    context.read<AudioTabReciterCubit>().state,
-                                instantPlay: true,
-                                initialIndex: currentIndex + 1,
-                              );
+                              if (AudioPlayerManager.audioPlayer.audioSource ==
+                                  null) {
+                                AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                  startAyahKey: ayahKeyState.ayahList.first,
+                                  endAyahKey: ayahKeyState.ayahList.last,
+                                  isInsideQuran: false,
+                                  reciterInfoModel:
+                                      context
+                                          .read<AudioTabReciterCubit>()
+                                          .state,
+                                  instantPlay: true,
+                                  initialIndex: currentIndex + 1,
+                                );
+                              } else {
+                                AudioPlayerManager.audioPlayer.seekToNext();
+                              }
                             }
                             : null,
                   ),
                 ],
               ),
-              Gap(10),
+              const Gap(10),
             ],
           ),
         );
