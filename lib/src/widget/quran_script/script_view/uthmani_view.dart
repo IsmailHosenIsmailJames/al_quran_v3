@@ -99,7 +99,7 @@ class NonTajweedScriptView extends StatelessWidget {
                           backgroundColor:
                               scriptInfo.showWordHighlights == false
                                   ? null
-                                  : AppColors.primary.withValues(alpha: 0.15),
+                                  : AppColors.primaryShade200,
                         )
                         : null,
                 text: words[index] + " ",

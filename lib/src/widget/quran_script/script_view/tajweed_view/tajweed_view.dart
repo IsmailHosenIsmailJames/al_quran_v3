@@ -101,7 +101,7 @@ class TajweedView extends StatelessWidget {
                           ? null
                           : highlightingWordIndex ==
                               "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
-                          ? AppColors.primaryShade100
+                          ? AppColors.primaryShade200
                           : null,
                 ),
                 context: context,

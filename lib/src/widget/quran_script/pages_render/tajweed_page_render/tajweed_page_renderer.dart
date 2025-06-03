@@ -94,9 +94,7 @@ class TajweedPageRenderer extends StatelessWidget {
                                     baseTextStyle?.fontFamily ?? "QPC_Hafs",
                                 backgroundColor:
                                     wordKey == "$ayahKey:${index + 1}"
-                                        ? AppColors.primary.withValues(
-                                          alpha: 0.1,
-                                        )
+                                        ? AppColors.primaryShade200
                                         : null,
                               ),
                               surahNumber: ayahKey.split(":").first.toInt(),
