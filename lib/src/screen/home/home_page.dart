@@ -4,7 +4,6 @@ import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
-import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:gap/gap.dart";
@@ -50,22 +49,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
+      body:
           [
             const QuranPage(),
             const PrayerTimePage(),
             const QiblaDirection(),
             const AudioPage(),
           ][_selectedIndex],
-          const SafeArea(
-            child: Align(
-              alignment: Alignment(0.9, 0.95),
-              child: AudioControllerUi(),
-            ),
-          ),
-        ],
-      ),
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
