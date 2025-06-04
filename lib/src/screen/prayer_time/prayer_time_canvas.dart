@@ -154,17 +154,7 @@ class CirclePainter extends CustomPainter {
     final currentIconY =
         center.dy + (mainCircleRadius + 28) * math.sin(currentIconAngle);
 
-    final isDay = _isTimeBetween(
-      TimeOfDay.fromDateTime(DateTime.now()),
-      sunriseTime,
-      sunsetTime,
-    );
-
-    if (isDay) {
-      _drawText(canvas, Offset(currentIconX, currentIconY), "☀️", 18);
-    } else {
-      _drawText(canvas, Offset(currentIconX, currentIconY), "🌙", 18);
-    }
+    _drawText(canvas, Offset(currentIconX, currentIconY), "☀️", 18);
 
     final double earthRadius = mainCircleRadius / 2.5;
     final Offset earthCenter = center;
@@ -186,18 +176,6 @@ class CirclePainter extends CustomPainter {
     );
 
     canvas.drawArc(earthRect, startAngle, sweepAngle, true, nightPaint);
-  }
-
-  bool _isTimeBetween(TimeOfDay current, TimeOfDay start, TimeOfDay end) {
-    final currentMinutes = current.hour * 60 + current.minute;
-    final startMinutes = start.hour * 60 + start.minute;
-    final endMinutes = end.hour * 60 + end.minute;
-
-    if (startMinutes <= endMinutes) {
-      return currentMinutes >= startMinutes && currentMinutes < endMinutes;
-    } else {
-      return currentMinutes >= startMinutes || currentMinutes < endMinutes;
-    }
   }
 
   double _timeToAngle(TimeOfDay time) {
