@@ -66,6 +66,8 @@ class SurahListView extends StatelessWidget {
                       context,
                       index + 1,
                       textColor: textColor,
+                      height: 40,
+                      width: 40,
                     ),
                     const Gap(15),
                     Column(
