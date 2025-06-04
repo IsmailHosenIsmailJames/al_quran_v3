@@ -1,15 +1,21 @@
+import "dart:async";
 import "dart:developer";
+import "dart:io";
 
-import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:alarm/alarm.dart";
+import "package:alarm/model/alarm_settings.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
 import "package:hive/hive.dart";
 import "package:intl/intl.dart";
+import "package:permission_handler/permission_handler.dart";
 
 import "models/prayer_model_of_day.dart";
 
@@ -48,113 +54,204 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       fontWeight: FontWeight.w500,
     );
     return Container(
-      color: AppColors.primaryShade100,
+      color: AppColors.primaryDark,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Address:",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  const Gap(10),
+                  const Icon(
+                    FluentIcons.location_24_regular,
+                    color: Colors.white,
+                  ),
+                  const Gap(5),
+                  FutureBuilder(
+                    future: placemarkFromCoordinates(widget.lat, widget.lon),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.active) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        String? country;
 
-                    FutureBuilder(
-                      future: placemarkFromCoordinates(widget.lat, widget.lon),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.active) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasData) {
-                          String? country;
+                        String? administrativeArea;
+                        String? subAdministrativeArea;
 
-                          String? administrativeArea;
-                          String? subAdministrativeArea;
-
-                          for (Placemark placemark in snapshot.data ?? []) {
-                            country ??= placemark.country;
-                            administrativeArea ??= placemark.administrativeArea;
-                            subAdministrativeArea ??=
-                                placemark.subAdministrativeArea;
-                          }
-                          return Text(
-                            "$subAdministrativeArea, $administrativeArea",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          );
+                        for (Placemark placemark in snapshot.data ?? []) {
+                          country ??= placemark.country;
+                          administrativeArea ??= placemark.administrativeArea;
+                          subAdministrativeArea ??=
+                              placemark.subAdministrativeArea;
                         }
-                        return Text("Lat: ${widget.lat}, Lon: ${widget.lon}");
-                      },
+                        return Text(
+                          "$subAdministrativeArea",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                      return const Text("");
+                    },
+                  ),
+
+                  const Spacer(),
+
+                  IconButton(
+                    onPressed: () async {
+                      await Permission.notification.request();
+                      await Permission.accessNotificationPolicy.request();
+                      await Permission.scheduleExactAlarm.request();
+
+                      final alarmSettings = AlarmSettings(
+                        id: 42,
+                        dateTime: DateTime.now().add(
+                          const Duration(seconds: 30),
+                        ),
+                        assetAudioPath:
+                            "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
+                        loopAudio: true,
+                        vibrate: true,
+                        warningNotificationOnKill: Platform.isIOS,
+                        androidFullScreenIntent: true,
+                        volumeSettings: VolumeSettings.fade(
+                          volume: 1,
+                          fadeDuration: const Duration(seconds: 5),
+                          volumeEnforced: true,
+                        ),
+                        notificationSettings: const NotificationSettings(
+                          title: "This is the title",
+                          body: "This is the body",
+                          stopButton: "Stop the alarm",
+                          icon: "notification_icon",
+                          iconColor: Color(0xff862778),
+                        ),
+                      );
+
+                      await Alarm.set(alarmSettings: alarmSettings);
+                      Fluttertoast.showToast(msg: "Alarm Set");
+                    },
+                    icon: const Icon(
+                      Icons.my_location_rounded,
+                      color: Colors.white,
                     ),
-                    const Gap(5),
-                    const Text("Method:", style: TextStyle(color: Colors.grey)),
-                    Text(
-                      defaultCalculationMethod.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  bottom: 10,
+                  right: 30,
+                  top: 10,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Duhur".toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            const TimeOfDay(
+                              hour: 11,
+                              minute: 59,
+                            ).format(context),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "Left",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward_rounded,
+                                size: 18,
+                                color: Colors.white,
+                              ),
+                              const Gap(5),
+                              StreamBuilder(
+                                stream: Stream.periodic(
+                                  const Duration(seconds: 1),
+                                  (timer) {
+                                    return DateTime.now();
+                                  },
+                                ),
+                                builder: (context, snapshot) {
+                                  DateTime targetTime = DateTime.now();
+                                  targetTime = targetTime.copyWith(
+                                    hour: 11,
+                                    minute: 58,
+                                    second: 0,
+                                  );
+                                  if (targetTime.isBefore(DateTime.now())) {
+                                    targetTime = targetTime.add(
+                                      const Duration(days: 1),
+                                    );
+                                  }
+                                  Duration timeLeft = targetTime.difference(
+                                    DateTime.now(),
+                                  );
+                                  String hours = timeLeft.inHours
+                                      .toString()
+                                      .padLeft(2, "0");
+                                  String minutes = timeLeft.inMinutes
+                                      .remainder(60)
+                                      .toString()
+                                      .padLeft(2, "0");
+                                  String seconds = timeLeft.inSeconds
+                                      .remainder(60)
+                                      .toString()
+                                      .padLeft(2, "0");
+                                  return Text(
+                                    "$hours:$minutes:$seconds",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    FutureBuilder(
-                      future: placemarkFromCoordinates(
-                        defaultCalculationMethod.location.latitude,
-                        defaultCalculationMethod.location.longitude,
-                      ),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.active) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasData) {
-                          String? country;
-
-                          String? administrativeArea;
-                          String? subAdministrativeArea;
-
-                          for (Placemark placemark in snapshot.data ?? []) {
-                            country ??= placemark.country;
-                            administrativeArea ??= placemark.administrativeArea;
-                            subAdministrativeArea ??=
-                                placemark.subAdministrativeArea;
-                          }
-                          return Text(
-                            "$subAdministrativeArea, $administrativeArea, $country",
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          );
-                        }
-                        return Text("Lat: ${widget.lat}, Lon: ${widget.lon},");
-                      },
-                    ),
+                    const Expanded(flex: 6, child: PrayerTimeCanvas()),
                   ],
                 ),
-                const Spacer(),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(FluentIcons.my_location_24_filled),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const Gap(5),
+          const Gap(20),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(roundedRadius),
-                  topRight: Radius.circular(roundedRadius),
+                  topLeft: Radius.circular(roundedRadius + 12),
+                  topRight: Radius.circular(roundedRadius + 12),
                 ),
                 color: Theme.of(context).colorScheme.surface,
               ),
