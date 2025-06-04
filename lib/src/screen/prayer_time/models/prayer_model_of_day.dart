@@ -1,11 +1,15 @@
 import "dart:convert";
 
 class PrayerModelOfDay {
-  Timings? timings;
-  Date? date;
-  Meta? meta;
+  Timings timings;
+  Date date;
+  Meta meta;
 
-  PrayerModelOfDay({this.timings, this.date, this.meta});
+  PrayerModelOfDay({
+    required this.timings,
+    required this.date,
+    required this.meta,
+  });
 
   PrayerModelOfDay copyWith({Timings? timings, Date? date, Meta? meta}) =>
       PrayerModelOfDay(
@@ -21,34 +25,30 @@ class PrayerModelOfDay {
 
   factory PrayerModelOfDay.fromMap(Map<String, dynamic> json) =>
       PrayerModelOfDay(
-        timings:
-            json["timings"] == null
-                ? null
-                : Timings.fromMap(Map<String, dynamic>.from(json["timings"])),
-        date:
-            json["date"] == null
-                ? null
-                : Date.fromMap(Map<String, dynamic>.from(json["date"])),
-        meta:
-            json["meta"] == null
-                ? null
-                : Meta.fromMap(Map<String, dynamic>.from(json["meta"])),
+        timings: Timings.fromMap(Map<String, dynamic>.from(json["timings"])),
+        date: Date.fromMap(Map<String, dynamic>.from(json["date"])),
+        meta: Meta.fromMap(Map<String, dynamic>.from(json["meta"])),
       );
 
   Map<String, dynamic> toMap() => {
-    "timings": timings?.toMap(),
-    "date": date?.toMap(),
-    "meta": meta?.toMap(),
+    "timings": timings.toMap(),
+    "date": date.toMap(),
+    "meta": meta.toMap(),
   };
 }
 
 class Date {
-  String? readable;
-  String? timestamp;
-  Gregorian? gregorian;
-  Hijri? hijri;
+  String readable;
+  String timestamp;
+  Gregorian gregorian;
+  Hijri hijri;
 
-  Date({this.readable, this.timestamp, this.gregorian, this.hijri});
+  Date({
+    required this.readable,
+    required this.timestamp,
+    required this.gregorian,
+    required this.hijri,
+  });
 
   Date copyWith({
     String? readable,
@@ -69,21 +69,15 @@ class Date {
   factory Date.fromMap(Map<String, dynamic> json) => Date(
     readable: json["readable"],
     timestamp: json["timestamp"],
-    gregorian:
-        json["gregorian"] == null
-            ? null
-            : Gregorian.fromMap(Map<String, dynamic>.from(json["gregorian"])),
-    hijri:
-        json["hijri"] == null
-            ? null
-            : Hijri.fromMap(Map<String, dynamic>.from(json["hijri"])),
+    gregorian: Gregorian.fromMap(Map<String, dynamic>.from(json["gregorian"])),
+    hijri: Hijri.fromMap(Map<String, dynamic>.from(json["hijri"])),
   );
 
   Map<String, dynamic> toMap() => {
     "readable": readable,
     "timestamp": timestamp,
-    "gregorian": gregorian?.toMap(),
-    "hijri": hijri?.toMap(),
+    "gregorian": gregorian.toMap(),
+    "hijri": hijri.toMap(),
   };
 }
 

@@ -1,9 +1,7 @@
-import "dart:convert";
-
-import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/time_list_of_prayers.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -13,7 +11,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
 import "package:hive_flutter/hive_flutter.dart";
-import "package:http/http.dart";
 
 class PrayerTimePage extends StatefulWidget {
   const PrayerTimePage({super.key});
@@ -23,6 +20,8 @@ class PrayerTimePage extends StatefulWidget {
 }
 
 class _PrayerTimePageState extends State<PrayerTimePage> {
+  bool isPrayerTimeDownloading = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocationDataQiblaDataCubit, LocationDataQiblaDataState>(
@@ -130,7 +129,13 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(elevation: 0),
               onPressed: () async {
-                downloadPrayerDataFromAPI(lat, lon);
+                setState(() {
+                  isPrayerTimeDownloading = true;
+                });
+                await PrayersTimeFunction.downloadPrayerDataFromAPI(lat, lon);
+                setState(() {
+                  isPrayerTimeDownloading = false;
+                });
               },
               icon:
                   isPrayerTimeDownloading == true
@@ -147,29 +152,5 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
         ],
       ),
     );
-  }
-
-  bool isPrayerTimeDownloading = false;
-
-  Future<void> downloadPrayerDataFromAPI(double lat, double lon) async {
-    setState(() {
-      isPrayerTimeDownloading = true;
-    });
-    final response = await get(
-      Uri.parse(
-        "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon",
-      ),
-    );
-
-    if (response.statusCode == 200) {
-      Map infoList = jsonDecode(response.body)["data"];
-      for (var key in infoList.keys) {
-        await Hive.box("prayer_time_data").put(key, infoList[key]);
-      }
-    }
-
-    setState(() {
-      isPrayerTimeDownloading = false;
-    });
   }
 }

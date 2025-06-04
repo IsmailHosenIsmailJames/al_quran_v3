@@ -1,21 +1,15 @@
 import "dart:async";
-import "dart:developer";
-import "dart:io";
 
+import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:alarm/alarm.dart";
-import "package:alarm/model/alarm_settings.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
-import "package:hive/hive.dart";
 import "package:intl/intl.dart";
-import "package:permission_handler/permission_handler.dart";
 
 import "models/prayer_model_of_day.dart";
 
@@ -29,21 +23,9 @@ class TimeListOfPrayers extends StatefulWidget {
 }
 
 class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
-  int monthNumber = DateTime.now().month;
-  List prayerTimeMapData = [];
-
   @override
   void initState() {
-    prayerTimeMapData = Hive.box(
-      "prayer_time_data",
-    ).get("$monthNumber", defaultValue: []);
-    if (monthNumber < 12) {
-      prayerTimeMapData.addAll(
-        Hive.box(
-          "prayer_time_data",
-        ).get("${monthNumber + 1}", defaultValue: []),
-      );
-    }
+    PrayersTimeFunction.loadPrayersData();
     super.initState();
   }
 
@@ -101,37 +83,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
 
                   IconButton(
                     onPressed: () async {
-                      await Permission.notification.request();
-                      await Permission.accessNotificationPolicy.request();
-                      await Permission.scheduleExactAlarm.request();
-
-                      final alarmSettings = AlarmSettings(
-                        id: 42,
-                        dateTime: DateTime.now().add(
-                          const Duration(seconds: 30),
-                        ),
-                        assetAudioPath:
-                            "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
-                        loopAudio: true,
-                        vibrate: true,
-                        warningNotificationOnKill: Platform.isIOS,
-                        androidFullScreenIntent: true,
-                        volumeSettings: VolumeSettings.fade(
-                          volume: 1,
-                          fadeDuration: const Duration(seconds: 5),
-                          volumeEnforced: true,
-                        ),
-                        notificationSettings: const NotificationSettings(
-                          title: "This is the title",
-                          body: "This is the body",
-                          stopButton: "Stop the alarm",
-                          icon: "notification_icon",
-                          iconColor: Color(0xff862778),
-                        ),
+                      PrayersTimeFunction.nextPrayerName(
+                        PrayersTimeFunction.getTodaysPrayerTime(
+                          DateTime.now(),
+                        )!,
                       );
-
-                      await Alarm.set(alarmSettings: alarmSettings);
-                      Fluttertoast.showToast(msg: "Alarm Set");
                     },
                     icon: const Icon(
                       Icons.my_location_rounded,
@@ -150,102 +106,15 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ),
                 child: Row(
                   children: [
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Duhur".toUpperCase(),
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            const TimeOfDay(
-                              hour: 11,
-                              minute: 59,
-                            ).format(context),
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              const Text(
-                                "Left",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_rounded,
-                                size: 18,
-                                color: Colors.white,
-                              ),
-                              const Gap(5),
-                              StreamBuilder(
-                                stream: Stream.periodic(
-                                  const Duration(seconds: 1),
-                                  (timer) {
-                                    return DateTime.now();
-                                  },
-                                ),
-                                builder: (context, snapshot) {
-                                  DateTime targetTime = DateTime.now();
-                                  targetTime = targetTime.copyWith(
-                                    hour: 11,
-                                    minute: 58,
-                                    second: 0,
-                                  );
-                                  if (targetTime.isBefore(DateTime.now())) {
-                                    targetTime = targetTime.add(
-                                      const Duration(days: 1),
-                                    );
-                                  }
-                                  Duration timeLeft = targetTime.difference(
-                                    DateTime.now(),
-                                  );
-                                  String hours = timeLeft.inHours
-                                      .toString()
-                                      .padLeft(2, "0");
-                                  String minutes = timeLeft.inMinutes
-                                      .remainder(60)
-                                      .toString()
-                                      .padLeft(2, "0");
-                                  String seconds = timeLeft.inSeconds
-                                      .remainder(60)
-                                      .toString()
-                                      .padLeft(2, "0");
-                                  return Text(
-                                    "$hours:$minutes:$seconds",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    getNextPrayerTimeWidget(context),
+                    Gap(10),
                     const Expanded(flex: 6, child: PrayerTimeCanvas()),
                   ],
                 ),
               ),
             ],
           ),
-          const Gap(20),
+          const Gap(30),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
@@ -257,16 +126,19 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               ),
               child: ListView.builder(
                 padding: const EdgeInsets.all(15),
-                itemCount: prayerTimeMapData.length,
                 itemBuilder: (context, index) {
-                  PrayerModelOfDay prayerModelOfDay = PrayerModelOfDay.fromMap(
-                    Map<String, dynamic>.from(prayerTimeMapData[index]),
-                  );
+                  PrayerModelOfDay? prayerModelOfDay =
+                      PrayersTimeFunction.getTodaysPrayerTime(
+                        DateTime.now().add(Duration(days: index)),
+                      );
+                  if (prayerModelOfDay == null) {
+                    return Text("${DateTime.now()} Found Empty");
+                  }
                   DateTime? dateOfThis;
-                  if (prayerModelOfDay.date?.gregorian?.date != null) {
+                  if (prayerModelOfDay.date.gregorian.date != null) {
                     dateOfThis = DateFormat(
                       "dd-MM-yyyy",
-                    ).tryParse(prayerModelOfDay.date!.gregorian!.date!);
+                    ).tryParse(prayerModelOfDay.date.gregorian.date!);
                   }
                   if (dateOfThis == null ||
                       dateOfThis.isBefore(
@@ -275,32 +147,17 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     return const SizedBox();
                   }
 
-                  String? fajr = prayerModelOfDay.timings?.fajr;
-                  String? dhuhr = prayerModelOfDay.timings?.dhuhr;
-                  String? asr = prayerModelOfDay.timings?.asr;
-                  String? maghrib = prayerModelOfDay.timings?.maghrib;
-                  String? isha = prayerModelOfDay.timings?.isha;
-                  String? midnight = prayerModelOfDay.timings?.midnight;
-                  String? sunrise = prayerModelOfDay.timings?.sunrise;
-                  String? sunset = prayerModelOfDay.timings?.sunset;
-                  String? imsak = prayerModelOfDay.timings?.imsak;
-
-                  List<Map<String, dynamic>> listOfTimes = [
-                    {"name": "Fajr", "time": timeOfDay(fajr)},
-                    {"name": "Sunrise", "time": timeOfDay(sunrise)},
-                    {"name": "Dhuhr", "time": timeOfDay(dhuhr)},
-                    {"name": "Asr", "time": timeOfDay(asr)},
-                    {"name": "Sunset", "time": timeOfDay(sunset)},
-                    {"name": "Maghrib", "time": timeOfDay(maghrib)},
-                    {"name": "Isha", "time": timeOfDay(isha)},
-                    {"name": "Midnight", "time": timeOfDay(midnight)},
-                    {"name": "Imsak", "time": timeOfDay(imsak)},
-                  ];
+                  Map<PrayerModelTimesType, TimeOfDay> mapOfTimes =
+                      PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
+                  PrayerModelTimesType nextPrayer =
+                      PrayersTimeFunction.nextPrayerName(prayerModelOfDay);
 
                   bool isToday = dateOfThis.isAtSameDayAs(DateTime.now());
                   int? indexOfCurrentPrayer;
                   if (isToday) {
-                    indexOfCurrentPrayer = getCurrentPrayerIndex(listOfTimes);
+                    indexOfCurrentPrayer = PrayerModelTimesType.values.indexOf(
+                      nextPrayer,
+                    );
                   }
                   return Column(
                     children: [
@@ -321,7 +178,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         ),
                       ),
                       const Divider(),
-                      ...List.generate(listOfTimes.length, (i) {
+                      ...List.generate(mapOfTimes.length, (i) {
                         bool isThisIsCurrentPrayer = i == indexOfCurrentPrayer;
                         return Container(
                           padding: const EdgeInsets.only(left: 5, right: 5),
@@ -343,34 +200,31 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                listOfTimes[i]["name"]!,
+                                mapOfTimes.keys.elementAt(i).name.capitalize(),
                                 style: textStyleOfTimes,
                               ),
                               const Spacer(),
                               Text(
-                                (listOfTimes[i]["time"] as TimeOfDay?)?.format(
-                                      context,
-                                    ) ??
-                                    "N/A",
+                                mapOfTimes.values.elementAt(i).format(context),
                                 style: textStyleOfTimes,
                               ),
                               const Gap(10),
-                              SizedBox(
-                                height: 36,
-                                width: 36,
-                                child:
-                                    !isToday
-                                        ? null
-                                        : IconButton(
-                                          padding: EdgeInsets.zero,
-                                          style: IconButton.styleFrom(
-                                            padding: EdgeInsets.zero,
-                                          ),
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                            Icons.volume_up_outlined,
-                                          ),
-                                        ),
+                              const SizedBox(
+                                height: 30,
+                                // width: 36,
+                                // child:
+                                //     !isToday
+                                //         ? null
+                                //         : IconButton(
+                                //           padding: EdgeInsets.zero,
+                                //           style: IconButton.styleFrom(
+                                //             padding: EdgeInsets.zero,
+                                //           ),
+                                //           onPressed: () {},
+                                //           icon: const Icon(
+                                //             Icons.volume_up_outlined,
+                                //           ),
+                                //         ),
                               ),
                             ],
                           ),
@@ -388,17 +242,86 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     );
   }
 
-  TimeOfDay? timeOfDay(String? time) {
-    if (time == null) return null;
-    TimeOfDay? timeOfDay;
-    try {
-      final timeString = (time).split(" ")[0];
-      final dateTime = DateFormat("HH:mm").parse(timeString);
-      timeOfDay = TimeOfDay.fromDateTime(dateTime);
-    } catch (e) {
-      log("Error parsing time: $time, Error: $e");
-    }
-    return timeOfDay;
+  Expanded getNextPrayerTimeWidget(BuildContext context) {
+    return Expanded(
+      flex: 4,
+      child: FittedBox(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              PrayersTimeFunction.nextPrayerName(
+                PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
+              ).name.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              PrayersTimeFunction.nextPrayerTime(
+                PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
+              ).format(context),
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Row(
+              children: [
+                const Text(
+                  "Left",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const Gap(5),
+                const Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 12,
+                  color: Colors.white,
+                ),
+                const Gap(5),
+                StreamBuilder(
+                  stream: Stream.periodic(const Duration(seconds: 1), (timer) {
+                    return DateTime.now();
+                  }),
+                  builder: (context, snapshot) {
+                    DateTime targetTime = snapshot.data as DateTime;
+                    TimeOfDay nextPrayerTime =
+                        PrayersTimeFunction.nextPrayerTime(
+                          PrayersTimeFunction.getTodaysPrayerTime(targetTime)!,
+                        );
+
+                    Duration timeUntilNextPrayer = DateTime.now()
+                        .copyWith(
+                          hour: nextPrayerTime.hour,
+                          minute: nextPrayerTime.minute,
+                          second: 0,
+                        )
+                        .difference(targetTime);
+
+                    return Text(
+                      "${timeUntilNextPrayer.inHours.toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inMinutes % 60).toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inSeconds % 60).toString().padLeft(2, '0')}",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   int? getCurrentPrayerIndex(List<Map<String, dynamic>> listOfTimes) {
