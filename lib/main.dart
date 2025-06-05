@@ -93,6 +93,7 @@ Future<void> main() async {
     "set_prayer_time_reminder",
     frequency: const Duration(hours: 1),
   );
+  await setReminderForPrayers();
   runApp(MyApp(preferences: preferences));
 }
 
