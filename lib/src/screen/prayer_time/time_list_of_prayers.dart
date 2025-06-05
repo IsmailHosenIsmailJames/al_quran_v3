@@ -7,9 +7,12 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
 import "package:intl/intl.dart";
+import "package:permission_handler/permission_handler.dart";
+import "package:workmanager/workmanager.dart";
 
 import "models/prayer_model_of_day.dart";
 
@@ -23,9 +26,12 @@ class TimeListOfPrayers extends StatefulWidget {
 }
 
 class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
+  late List<PrayerModelTimesType> listOfPrayersToReminder;
   @override
   void initState() {
     PrayersTimeFunction.loadPrayersData();
+    listOfPrayersToReminder =
+        PrayersTimeFunction.getListOfPrayerToRemember() ?? [];
     super.initState();
   }
 
@@ -82,13 +88,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   const Spacer(),
 
                   IconButton(
-                    onPressed: () async {
-                      PrayersTimeFunction.nextPrayerName(
-                        PrayersTimeFunction.getTodaysPrayerTime(
-                          DateTime.now(),
-                        )!,
-                      );
-                    },
+                    onPressed: () async {},
                     icon: const Icon(
                       Icons.my_location_rounded,
                       color: Colors.white,
@@ -107,7 +107,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 child: Row(
                   children: [
                     getNextPrayerTimeWidget(context),
-                    Gap(10),
+                    const Gap(10),
                     const Expanded(flex: 6, child: PrayerTimeCanvas()),
                   ],
                 ),
@@ -180,6 +180,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       const Divider(),
                       ...List.generate(mapOfTimes.length, (i) {
                         bool isThisIsCurrentPrayer = i == indexOfCurrentPrayer;
+                        PrayerModelTimesType prayerModelType = mapOfTimes.keys
+                            .elementAt(i);
                         return Container(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           decoration:
@@ -200,7 +202,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                mapOfTimes.keys.elementAt(i).name.capitalize(),
+                                prayerModelType.name.capitalize(),
                                 style: textStyleOfTimes,
                               ),
                               const Spacer(),
@@ -209,22 +211,60 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 style: textStyleOfTimes,
                               ),
                               const Gap(10),
-                              const SizedBox(
-                                height: 30,
-                                // width: 36,
-                                // child:
-                                //     !isToday
-                                //         ? null
-                                //         : IconButton(
-                                //           padding: EdgeInsets.zero,
-                                //           style: IconButton.styleFrom(
-                                //             padding: EdgeInsets.zero,
-                                //           ),
-                                //           onPressed: () {},
-                                //           icon: const Icon(
-                                //             Icons.volume_up_outlined,
-                                //           ),
-                                //         ),
+                              SizedBox(
+                                height: isToday ? 40 : 30,
+                                width: isToday ? 50 : 0,
+                                child:
+                                    !isToday
+                                        ? null
+                                        : Switch.adaptive(
+                                          thumbIcon:
+                                              WidgetStateProperty.resolveWith<
+                                                Icon?
+                                              >((Set<WidgetState> states) {
+                                                if (states.contains(
+                                                  WidgetState.selected,
+                                                )) {
+                                                  return const Icon(
+                                                    FluentIcons
+                                                        .alert_on_24_regular,
+                                                  );
+                                                }
+                                                return const Icon(
+                                                  FluentIcons
+                                                      .alert_off_24_regular,
+                                                );
+                                              }),
+                                          value: listOfPrayersToReminder
+                                              .contains(prayerModelType),
+                                          onChanged: (value) async {
+                                            if (value) {
+                                              PermissionStatus status =
+                                                  await Permission.notification
+                                                      .request();
+                                              if (status ==
+                                                  PermissionStatus.granted) {
+                                                await PrayersTimeFunction.addPrayerToReminder(
+                                                  prayerModelType,
+                                                );
+                                              } else {
+                                                Fluttertoast.showToast(
+                                                  msg:
+                                                      "Please allow notification permission to use this feature",
+                                                );
+                                              }
+                                            } else {
+                                              await PrayersTimeFunction.removePrayerToReminder(
+                                                prayerModelType,
+                                              );
+                                            }
+                                            setState(() {
+                                              listOfPrayersToReminder =
+                                                  PrayersTimeFunction.getListOfPrayerToRemember() ??
+                                                  [];
+                                            });
+                                          },
+                                        ),
                               ),
                             ],
                           ),
