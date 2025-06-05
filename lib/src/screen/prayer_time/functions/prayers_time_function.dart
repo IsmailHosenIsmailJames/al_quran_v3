@@ -4,14 +4,19 @@ import "dart:developer";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:flutter/material.dart";
-import "package:hive/hive.dart";
 import "package:http/http.dart";
 import "package:intl/intl.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
 class PrayersTimeFunction {
+  static SharedPreferences? prayerTimePreferences;
   static Map<int, List<PrayerModelOfDay>> prayerTimeMapData = {};
 
-  static Future<void> downloadPrayerDataFromAPI(double lat, double lon) async {
+  static Future<void> init() async {
+    prayerTimePreferences = await SharedPreferences.getInstance();
+  }
+
+  static Future<bool> downloadPrayerDataFromAPI(double lat, double lon) async {
     final response = await get(
       Uri.parse(
         "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon",
@@ -20,26 +25,39 @@ class PrayersTimeFunction {
 
     if (response.statusCode == 200) {
       Map infoList = jsonDecode(response.body)["data"];
-      for (var key in infoList.keys) {
-        await Hive.box("prayer_time_data").put(key, infoList[key]);
+      for (String key in infoList.keys) {
+        await prayerTimePreferences!.setString(key, jsonEncode(infoList[key]));
       }
+      return true;
     }
+    return false;
   }
 
   static void loadPrayersData() {
     for (int i = 1; i <= 12; i++) {
-      List temPrayerTimeMapData = Hive.box(
-        "prayer_time_data",
-      ).get("$i", defaultValue: []);
-      prayerTimeMapData.addAll({
-        i:
-            temPrayerTimeMapData
-                .map(
-                  (e) => PrayerModelOfDay.fromMap(Map<String, dynamic>.from(e)),
-                )
-                .toList(),
-      });
+      String? temPrayerTimeMapData = prayerTimePreferences!.getString("$i");
+      if (temPrayerTimeMapData != null) {
+        prayerTimeMapData.addAll({
+          i:
+              List.from(jsonDecode(temPrayerTimeMapData))
+                  .map(
+                    (e) =>
+                        PrayerModelOfDay.fromMap(Map<String, dynamic>.from(e)),
+                  )
+                  .toList(),
+        });
+      }
     }
+  }
+
+  static bool checkIsDataExits() {
+    for (int i = 1; i <= 12; i++) {
+      String? temPrayerTimeMapData = prayerTimePreferences?.getString("$i");
+      if (temPrayerTimeMapData != null) {
+        return true;
+      }
+    }
+    return false;
   }
 
   static PrayerModelOfDay? getTodaysPrayerTime(DateTime date) {
