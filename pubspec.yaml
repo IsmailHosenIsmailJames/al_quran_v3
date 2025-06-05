@@ -96,7 +96,7 @@ flutter:
           weight: 600
 
 icons_launcher:
-  image_path: "assets/img/Quran_Logo_v3.png"
+  image_path: "assets/img/Quran_Logo_v3.jpg"
   platforms:
     android:
       enable: true
@@ -106,5 +106,5 @@ icons_launcher:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/img/Quran_Logo_v3.png"
+  image_path: "assets/img/Quran_Logo_v3.jpg"
   min_sdk_android: 21 
