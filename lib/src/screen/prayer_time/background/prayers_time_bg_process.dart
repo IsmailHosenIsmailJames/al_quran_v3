@@ -21,7 +21,7 @@ Future<void> setReminderForPrayers() async {
   await PrayersTimeFunction.init();
   if (PrayersTimeFunction.checkIsDataExits()) {
     log("Prayer Time data not configured yet");
-    return Future.value(true);
+    return;
   }
   PrayersTimeFunction.loadPrayersData();
   await Alarm.init();
@@ -30,9 +30,11 @@ Future<void> setReminderForPrayers() async {
       PrayersTimeFunction.getPrayerTimings(
         PrayersTimeFunction.getTodaysPrayerTime(now)!,
       );
+  List<PrayerModelTimesType> listOfPrayerReminder =
+      PrayersTimeFunction.getListOfPrayerToRemember() ?? [];
   for (PrayerModelTimesType key in prayerTimings.keys) {
-    if (!(PrayersTimeFunction.getListOfPrayerToRemember()?.contains(key) ==
-        true)) {
+    if (!(listOfPrayerReminder.contains(key) == true)) {
+      removeAllReminderAccordingType(key);
       continue;
     }
     int alarmID =
@@ -68,6 +70,17 @@ Future<void> setReminderForPrayers() async {
           ),
         ),
       );
+    }
+  }
+}
+
+Future<void> removeAllReminderAccordingType(PrayerModelTimesType type) async {
+  List<AlarmSettings> alarmSettings = await Alarm.getAlarms();
+  for (AlarmSettings alarm in alarmSettings) {
+    if (alarm.id.toString().startsWith(
+      PrayerModelTimesType.values.indexOf(type).toString(),
+    )) {
+      await Alarm.stop(alarm.id);
     }
   }
 }
