@@ -1,4 +1,3 @@
-import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
@@ -19,17 +18,18 @@ void callbackDispatcher() {
 
 Future<void> setReminderForPrayers() async {
   await PrayersTimeFunction.init();
-  if (PrayersTimeFunction.checkIsDataExits()) {
-    log("Prayer Time data not configured yet");
+  if (!PrayersTimeFunction.checkIsDataExits()) {
     return;
   }
   PrayersTimeFunction.loadPrayersData();
   await Alarm.init();
   DateTime now = DateTime.now();
+  var getTodaysPrayerTime = PrayersTimeFunction.getTodaysPrayerTime(now);
+  if (getTodaysPrayerTime == null) {
+    return;
+  }
   Map<PrayerModelTimesType, TimeOfDay> prayerTimings =
-      PrayersTimeFunction.getPrayerTimings(
-        PrayersTimeFunction.getTodaysPrayerTime(now)!,
-      );
+      PrayersTimeFunction.getPrayerTimings(getTodaysPrayerTime);
   List<PrayerModelTimesType> listOfPrayerReminder =
       PrayersTimeFunction.getListOfPrayerToRemember() ?? [];
   for (PrayerModelTimesType key in prayerTimings.keys) {

@@ -52,8 +52,8 @@ class PrayersTimeFunction {
 
   static bool checkIsDataExits() {
     for (int i = 1; i <= 12; i++) {
-      String? temPrayerTimeMapData = prayerTimePreferences?.getString("$i");
-      if (temPrayerTimeMapData != null) {
+      String? data = prayerTimePreferences?.getString("$i");
+      if (data != null) {
         return true;
       }
     }
