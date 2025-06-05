@@ -257,6 +257,10 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             await PrayersTimeFunction.addPrayerToReminder(
                               prayerModelType,
                             );
+                            Fluttertoast.showToast(
+                              msg:
+                                  "Reminder for ${prayerModelType.name.capitalize()} added",
+                            );
                           } else {
                             Fluttertoast.showToast(
                               msg:
@@ -268,6 +272,10 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             prayerModelType,
                           );
                           await setReminderForPrayers();
+                          Fluttertoast.showToast(
+                            msg:
+                                "Reminder for ${prayerModelType.name.capitalize()} removed",
+                          );
                         }
 
                         setState(() {
