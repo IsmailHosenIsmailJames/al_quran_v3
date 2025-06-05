@@ -41,8 +41,9 @@ Future<void> setReminderForPrayers() async {
         "${PrayerModelTimesType.values.indexOf(key)}${now.year % 1000}${now.month}${now.day}"
             .toInt();
     AlarmSettings? previousAlarm = await Alarm.getAlarm(alarmID);
-    if (previousAlarm == null) {
-      TimeOfDay timeOfDay = prayerTimings[key]!;
+    TimeOfDay timeOfDay = prayerTimings[key]!;
+    if (previousAlarm == null &&
+        timeOfDay.isAfter(TimeOfDay.fromDateTime(now))) {
       Alarm.set(
         alarmSettings: AlarmSettings(
           id: alarmID,
