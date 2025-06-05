@@ -23,7 +23,7 @@
     <!-- alarm -->
 
     <application
-        android:label="al_quran_v3"
+        android:label="Al Quran V3"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"

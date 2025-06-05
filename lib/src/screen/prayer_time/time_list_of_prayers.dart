@@ -88,7 +88,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   const Spacer(),
 
                   IconButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      // TODO: Add logic to update the user's current location and get Prayers Time data
+                    },
                     icon: const Icon(
                       Icons.my_location_rounded,
                       color: Colors.white,
