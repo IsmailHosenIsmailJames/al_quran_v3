@@ -127,6 +127,39 @@ class PrayersTimeFunction {
     }
     return timeOfDayFromString;
   }
+
+  static Future<void> addPrayerToReminder(PrayerModelTimesType type) async {
+    List<String> previousTimeList =
+        prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
+    if (!previousTimeList.contains(type.name)) {
+      previousTimeList.add(type.name);
+      await prayerTimePreferences?.setStringList(
+        "prayer_time_to_remind",
+        previousTimeList,
+      );
+    }
+  }
+
+  static Future<void> removePrayerToReminder(PrayerModelTimesType type) async {
+    List<String> previousTimeList =
+        prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
+    previousTimeList.remove(type.name);
+    await prayerTimePreferences?.setStringList(
+      "prayer_time_to_remind",
+      previousTimeList,
+    );
+  }
+
+  static List<PrayerModelTimesType>? getListOfPrayerToRemember() {
+    return prayerTimePreferences
+        ?.getStringList("prayer_time_to_remind")
+        ?.map(
+          (e) => PrayerModelTimesType.values.firstWhere(
+            (element) => element.name == e,
+          ),
+        )
+        .toList();
+  }
 }
 
 enum PrayerModelTimesType { fajr, sunrise, dhuhr, asr, maghrib, isha, midnight }

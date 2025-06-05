@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
@@ -24,6 +25,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "package:workmanager/workmanager.dart";
 
 Map<String, dynamic> tajweedScript = {};
 Map<String, dynamic> uthmaniScript = {};
@@ -82,7 +84,15 @@ Future<void> main() async {
   metaDataSurah = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Surah.json"),
   );
+
   await PrayersTimeFunction.init();
+
+  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().registerPeriodicTask(
+    "prayer_time_bg",
+    "set_prayer_time_reminder",
+    frequency: const Duration(hours: 1),
+  );
   runApp(MyApp(preferences: preferences));
 }
 
