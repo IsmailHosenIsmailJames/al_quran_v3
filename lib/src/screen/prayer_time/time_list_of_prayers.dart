@@ -292,6 +292,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     return DateTime.now();
                   }),
                   builder: (context, snapshot) {
+                    TextStyle textStyle = const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    );
+                    if (!snapshot.hasData) {
+                      return Text("00:00:00", style: textStyle);
+                    }
                     DateTime targetTime = snapshot.data as DateTime;
                     TimeOfDay nextPrayerTime =
                         PrayersTimeFunction.nextPrayerTime(
@@ -308,11 +316,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
 
                     return Text(
                       "${timeUntilNextPrayer.inHours.toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inMinutes % 60).toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inSeconds % 60).toString().padLeft(2, '0')}",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: textStyle,
                     );
                   },
                 ),
