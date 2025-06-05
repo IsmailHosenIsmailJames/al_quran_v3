@@ -10,7 +10,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
-import "package:hive_flutter/hive_flutter.dart";
 
 class PrayerTimePage extends StatefulWidget {
   const PrayerTimePage({super.key});
@@ -29,7 +28,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
         if (state.latLon == null) {
           return const LocationAcquire();
         } else {
-          if (Hive.box("prayer_time_data").keys.isEmpty) {
+          if (PrayersTimeFunction.checkIsDataExits() == false) {
             return downloadPrayerTimeWidget(
               state.latLon!.latitude,
               state.latLon!.longitude,
