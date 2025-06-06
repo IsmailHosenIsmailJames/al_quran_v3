@@ -87,7 +87,7 @@ Future<void> main() async {
 
   await PrayersTimeFunction.init();
 
-  await Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+  await Workmanager().initialize(callbackDispatcher);
   await Workmanager().registerPeriodicTask(
     "prayer_time_bg",
     "set_prayer_time_reminder",
