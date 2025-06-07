@@ -80,6 +80,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
+    - family: me_quran_volt_newmet
+      fonts:
+        - asset: assets/fonts/Quran/me_quran_volt_newmet.ttf
+
     - family: NotoSans
       fonts:
         - asset: assets/fonts/App/NotoSans-Bold.ttf
