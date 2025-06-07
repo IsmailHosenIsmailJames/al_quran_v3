@@ -17,6 +17,7 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -109,35 +110,15 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {
-                  SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                    metaDataSurah[ayahKey.split(":").first],
-                  );
-
-                  List quranScriptWord =
-                      tajweedScript[surahNumber.toString()][ayahNumber
-                          .toString()];
-                  if (quranScriptType == QuranScriptType.tajweed) {}
-                  String footNoteAsString = "\n";
-                  if (footNote.isNotEmpty) {
-                    footNote.forEach((key, value) {
-                      footNoteAsString += "$key. $value\n";
-                    });
-                  }
-
-                  SharePlus.instance.share(
-                    ShareParams(
-                      text:
-                          """${surahInfoModel.nameSimple} (${surahInfoModel.nameArabic}) - $ayahKey
-
-${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}
-
-$translation
-
-${footNote.isNotEmpty ? footNoteAsString : ""}
-""",
-                      subject: "subject",
-                      title: "title",
+                  showShareBottomDialog(
+                    context,
+                    ayahKey,
+                    SurahInfoModel.fromMap(
+                      metaDataSurah[surahNumber.toString()],
                     ),
+                    quranScriptType,
+                    translation,
+                    footNote,
                   );
                 },
                 tooltip: "Share",

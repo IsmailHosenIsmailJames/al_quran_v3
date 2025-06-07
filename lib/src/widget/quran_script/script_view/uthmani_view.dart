@@ -56,7 +56,48 @@ class NonTajweedScriptView extends StatelessWidget {
     }
 
     String? highlightingWordIndex;
-
+    if (scriptInfo.forImage == true) {
+      return Text.rich(
+        style: quranStyle,
+        textDirection: TextDirection.rtl,
+        textAlign: scriptInfo.textAlign,
+        TextSpan(
+          children: List<InlineSpan>.generate(words.length, (index) {
+            return TextSpan(
+              style:
+                  highlightingWordIndex ==
+                          "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
+                      ? TextStyle(
+                        backgroundColor:
+                            scriptInfo.showWordHighlights == false
+                                ? null
+                                : AppColors.primaryShade200,
+                      )
+                      : null,
+              text: words[index] + " ",
+              recognizer:
+                  scriptInfo.skipWordTap == true
+                      ? null
+                      : (TapGestureRecognizer()
+                        ..onTap = () {
+                          List<String> wordsKey = List.generate(
+                            words.length,
+                            (i) =>
+                                "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
+                          );
+                          showPopupWordFunction(
+                            context: context,
+                            wordKeys: wordsKey,
+                            initWordIndex: index,
+                            words: List<String>.from(words),
+                            scriptCategory: QuranScriptType.uthmani,
+                          );
+                        }),
+            );
+          }),
+        ),
+      );
+    }
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
         if (scriptInfo.showWordHighlights == false ||

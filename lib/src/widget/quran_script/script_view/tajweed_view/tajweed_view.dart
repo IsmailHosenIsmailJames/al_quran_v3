@@ -58,6 +58,35 @@ class TajweedView extends StatelessWidget {
       );
     }
 
+    if (scriptInfo.forImage == true) {
+      return Text.rich(
+        style: quranStyle,
+        textDirection: TextDirection.rtl,
+        textAlign: scriptInfo.textAlign,
+        TextSpan(
+          children: List<InlineSpan>.generate(words.length, (index) {
+            return parseTajweedWord(
+              wordIndex: index,
+              words: List<String>.from(words),
+              baseStyle: quranStyle.copyWith(
+                backgroundColor:
+                    scriptInfo.showWordHighlights == false
+                        ? null
+                        : highlightingWordIndex ==
+                            "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
+                        ? AppColors.primaryShade200
+                        : null,
+              ),
+              context: context,
+              surahNumber: scriptInfo.surahNumber,
+              ayahNumber: scriptInfo.ayahNumber,
+              skipWordTap: scriptInfo.skipWordTap ?? false,
+            );
+          }),
+        ),
+      );
+    }
+
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
         if (scriptInfo.showWordHighlights == false ||

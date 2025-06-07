@@ -10,6 +10,7 @@ class ScriptInfo {
   int? wordIndex;
   bool? showWordHighlights;
   bool? skipWordTap;
+  bool? forImage;
 
   ScriptInfo({
     required this.surahNumber,
@@ -21,6 +22,7 @@ class ScriptInfo {
     this.wordIndex,
     this.skipWordTap,
     this.showWordHighlights,
+    this.forImage,
   });
 }
 
