@@ -43,7 +43,3 @@ This application is built using Flutter, ensuring a cross-platform experience on
 *   **User Feedback**: `fluttertoast` and `toastification` for providing in-app messages and notifications.
 
 We aim to create a beautiful, feature-rich, and user-friendly interface for an enhanced Quran and prayer experience.
-
----
-
-**(Optional: You can later add sections for Tech Stack details, How to Contribute, License, etc.)**
