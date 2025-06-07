@@ -69,7 +69,7 @@ TextSpan parseTajweedWord({
           nextColor = currentThemeColors[ruleClass]!;
         } else if (ruleClass != null) {
           log(
-            "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: ${'${words[wordIndex]} '}",
+            "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: ${words[wordIndex]} ",
           );
         }
       }
@@ -87,4 +87,35 @@ TextSpan parseTajweedWord({
   }
 
   return TextSpan(children: spans, style: processingStyle);
+}
+
+String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
+  List<String> plainWords = [];
+  for (String wordWithTajweed in tajweedWords) {
+    // Ensure the word is treated as a fragment of HTML
+    // The .text property of the document fragment will concatenate all text nodes
+    final documentFragment = parseFragment(wordWithTajweed);
+    // documentFragment.text alone might not be sufficient if words are like "word1<tag>word2</tag>"
+    // and we want "word1word2". The .text gives the text content of the node and its descendants.
+    // Iterating through nodes and getting text content directly is more robust for fragments.
+    String textContent = "";
+    void extractText(dom.Node node) {
+      if (node.nodeType == dom.Node.TEXT_NODE) {
+        textContent += node.text ?? "";
+      } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
+        for (var childNode in node.nodes) {
+          extractText(childNode);
+        }
+      }
+    }
+
+    for (var node in documentFragment.nodes) {
+      extractText(node);
+    }
+    plainWords.add(textContent);
+  }
+  // Join the plain words with spaces. If the last word is an ayah number,
+  // it might be desirable to not add a space before it, but the example shows "رَّحِيمِ, ١"
+  // so a simple join with space is fine.
+  return plainWords.join(" ").trim();
 }
