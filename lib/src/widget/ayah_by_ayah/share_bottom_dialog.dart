@@ -9,6 +9,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
+import "package:hive_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
@@ -135,6 +136,9 @@ void showShareBottomDialog(
                   .captureFromWidget(
                     getAyahCardForShareAsImage(
                       context,
+                      Hive.box(
+                        "user",
+                      ).get("show_mac_os_window_like_icon", defaultValue: true),
                       ayahKey,
                       surahInfoModel,
                       quranScriptType,
