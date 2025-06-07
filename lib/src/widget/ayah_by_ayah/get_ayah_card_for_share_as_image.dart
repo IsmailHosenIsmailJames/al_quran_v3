@@ -11,6 +11,7 @@ import "../quran_script/script_processor.dart";
 
 Widget getAyahCardForShareAsImage(
   BuildContext context,
+  bool showMacOsWindowLikeIcon,
   String ayahKey,
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
@@ -30,16 +31,17 @@ Widget getAyahCardForShareAsImage(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
-          children: [
-            CircleAvatar(backgroundColor: Colors.red, radius: 5),
-            Gap(7),
-            CircleAvatar(backgroundColor: Colors.yellow, radius: 5),
-            Gap(7),
-            CircleAvatar(backgroundColor: Colors.green, radius: 5),
-          ],
-        ),
-        const Gap(10),
+        if (showMacOsWindowLikeIcon)
+          const Row(
+            children: [
+              CircleAvatar(backgroundColor: Colors.red, radius: 5),
+              Gap(7),
+              CircleAvatar(backgroundColor: Colors.yellow, radius: 5),
+              Gap(7),
+              CircleAvatar(backgroundColor: Colors.green, radius: 5),
+            ],
+          ),
+        if (showMacOsWindowLikeIcon) const Gap(10),
         Text(
           "${surahInfoModel.nameSimple} - $ayahKey",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
