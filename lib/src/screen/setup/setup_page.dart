@@ -675,8 +675,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   Future<bool> downloadTafsir() async {
-    final tafsirBox = await Hive.openBox("quran_tafsir");
-    final metaData = tafsirBox.get("meta_data", defaultValue: {});
+    final tafsirBox = await Hive.openLazyBox("quran_tafsir");
+    final metaData = await tafsirBox.get("meta_data", defaultValue: {});
     if (metaData["name"] == tafsirBook &&
         metaData["language"] == tafsirLanguage) {
       log("Already downloaded");
@@ -712,6 +712,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         now.difference(DateTime.now()).inMilliseconds.abs().toString(),
         name: "Translation Process Time",
       );
+      await tafsirBox.close();
       return true;
     } catch (e) {
       log(e.toString(), name: "http error");
