@@ -1,6 +1,6 @@
+import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -172,7 +172,19 @@ void showShareBottomDialog(
           ),
           TextButton(
             style: textButtonStyle,
-            onPressed: () {},
+            onPressed: () async {
+              String? tafsir = await getTafsirFromDb(
+                ayahKey,
+                returnAyahKeyIfLinked: false,
+              );
+              await SharePlus.instance.share(
+                ShareParams(
+                  text:
+                      "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                ),
+              );
+              Navigator.pop(context);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

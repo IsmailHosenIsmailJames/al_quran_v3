@@ -1,11 +1,11 @@
-import "dart:convert";
-
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+
+import "../../functions/get_tafsir_from_db.dart";
 
 class TafsirView extends StatefulWidget {
   final String ayahKey;
@@ -18,45 +18,24 @@ class TafsirView extends StatefulWidget {
 class _TafsirViewState extends State<TafsirView> {
   String tafsirDataString = "";
   bool isLinkedToAnother = false;
-  String? anotherAyahLinkKey;
+  String anotherAyahLinkKey = "";
   late SurahInfoModel surahInfoModel;
   @override
   void initState() {
-    initCallBack().then((value) {
+    getTafsirFromDb(widget.ayahKey).then((value) {
+      if (value?.split(":").first.isInt == true &&
+          value?.split(":").last.isInt == true) {
+        isLinkedToAnother = true;
+        anotherAyahLinkKey = value!;
+      } else {
+        tafsirDataString = value ?? "";
+      }
       setState(() {});
     });
     surahInfoModel = SurahInfoModel.fromMap(
       metaDataSurah[widget.ayahKey.split(":").first],
     );
     super.initState();
-  }
-
-  Future<void> initCallBack() async {
-    final box = await Hive.openLazyBox("quran_tafsir");
-    final rawData = await box.get(widget.ayahKey, defaultValue: null);
-    if (rawData != null) {
-      try {
-        Map data = jsonDecode(rawData);
-        String? text = data["text"];
-        if (text == null) {
-          tafsirDataString = "Not Found";
-        } else if (text.split(":").length == 2) {
-          if (int.tryParse(text.split(":")[0]) != null &&
-              int.tryParse(text.split(":")[1]) != null) {
-            isLinkedToAnother = true;
-            anotherAyahLinkKey = text;
-          } else {
-            tafsirDataString = text;
-          }
-        } else {
-          tafsirDataString = text;
-        }
-      } catch (e) {
-        tafsirDataString = rawData;
-      }
-    }
-    await box.close();
-    return;
   }
 
   @override
@@ -83,7 +62,7 @@ class _TafsirViewState extends State<TafsirView> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return TafsirView(ayahKey: anotherAyahLinkKey!);
+                            return TafsirView(ayahKey: anotherAyahLinkKey);
                           },
                         ),
                         (route) {
