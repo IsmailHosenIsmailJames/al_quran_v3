@@ -181,7 +181,15 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await popupJumpToAyah(
+                      context: context,
+                      initAyahKey: "1:1",
+                      isAudioPlayer: false,
+                      selectMultipleAndShare: true,
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.share_multiple_24_filled,
                     color: AppColors.primary,
