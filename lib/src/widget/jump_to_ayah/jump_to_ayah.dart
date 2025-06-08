@@ -1,18 +1,22 @@
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:flutter/material.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 
 class JumpToAyahView extends StatefulWidget {
-  final String initAyahKey;
+  final String? initAyahKey;
   final bool isAudioPlayer;
   final Function(String ayahKey)? onPlaySelected;
 
   const JumpToAyahView({
     super.key,
-    required this.initAyahKey,
+    this.initAyahKey,
     required this.isAudioPlayer,
     this.onPlaySelected,
   });
@@ -22,8 +26,8 @@ class JumpToAyahView extends StatefulWidget {
 }
 
 class _JumpToAyahViewState extends State<JumpToAyahView> {
-  late int surahNumber = int.parse(widget.initAyahKey.split(":")[0]);
-  late int ayahNumber = int.parse(widget.initAyahKey.split(":")[1]);
+  late int? surahNumber = int.tryParse(widget.initAyahKey?.split(":")[0] ?? "");
+  late int? ayahNumber = int.tryParse(widget.initAyahKey?.split(":")[1] ?? "");
   ScrollController surahScrollController = ScrollController();
   ScrollController ayahScrollController = ScrollController();
   TextEditingController textEditingController = TextEditingController();
@@ -132,7 +136,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                         ),
                                       ),
                                       backgroundColor:
-                                          index == surahNumber - 1
+                                          index == (surahNumber ?? 0) - 1
                                               ? AppColors.primary.withValues(
                                                 alpha: 0.2,
                                               )
@@ -175,9 +179,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       padding: const EdgeInsets.all(10),
 
                       itemCount:
-                          SurahInfoModel.fromMap(
-                            metaDataSurah[surahNumber.toString()],
-                          ).versesCount,
+                          surahNumber != null
+                              ? SurahInfoModel.fromMap(
+                                metaDataSurah[surahNumber.toString()],
+                              ).versesCount
+                              : 0,
                       itemBuilder: (context, index) {
                         return SizedBox(
                           height: 35,
@@ -190,7 +196,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 ),
                               ),
                               backgroundColor:
-                                  index == ayahNumber - 1
+                                  index == (ayahNumber ?? 0) - 1
                                       ? AppColors.primary.withValues(alpha: 0.2)
                                       : Colors.transparent,
                               foregroundColor:
@@ -244,16 +250,50 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Jump to Tafsir"),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        if (surahNumber != null && ayahNumber != null) {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => TafsirView(
+                                    ayahKey: "$surahNumber:$ayahNumber",
+                                  ),
+                            ),
+                          );
+                        } else {
+                          Fluttertoast.showToast(msg: "Please Select One");
+                        }
+                      },
+                      child: const Text("To Tafsir"),
                     ),
                   ),
                   const Gap(10),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Jump to Ayah"),
+                      onPressed: () {
+                        if (surahNumber != null && ayahNumber != null) {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => QuranScriptView(
+                                    startKey: "$surahNumber:1",
+                                    endKey: getEndAyahKeyFromSurahNumber(
+                                      surahNumber!,
+                                    ),
+                                    toScrollKey: "$surahNumber:$ayahNumber",
+                                  ),
+                            ),
+                          );
+                        } else {
+                          Fluttertoast.showToast(msg: "Please Select One");
+                        }
+                      },
+                      child: const Text("To Ayah"),
                     ),
                   ),
                 ],

@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 
 Future<void> popupJumpToAyah({
   required BuildContext context,
-  required String initAyahKey,
+  String? initAyahKey,
   required bool isAudioPlayer,
   Function(String ayahKey)? onPlaySelected,
 }) async {
@@ -25,7 +25,6 @@ Future<void> popupJumpToAyah({
         ),
         child: JumpToAyahView(
           initAyahKey: initAyahKey,
-
           isAudioPlayer: isAudioPlayer,
           onPlaySelected: onPlaySelected,
         ),

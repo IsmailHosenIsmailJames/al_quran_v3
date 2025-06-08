@@ -279,7 +279,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   itemPositionsListener: itemPositionsListener,
                   scrollOffsetController: scrollOffsetController,
                   scrollOffsetListener: scrollOffsetListener,
-                  initialScrollIndex: 0,
+                  initialScrollIndex:
+                      (int.tryParse(widget.toScrollKey!.split(":").last) ?? 1) -
+                      1,
                   semanticChildCount: pagesInfoWithSurahMetaData.length,
 
                   itemBuilder: (context, index) {
