@@ -8,7 +8,7 @@ Widget themeIconButton(BuildContext context) =>
       builder: (context, state) {
         return IconButton(
           style: IconButton.styleFrom(
-            backgroundColor: Colors.grey.withValues(alpha: 0.1),
+            backgroundColor: AppColors.primaryShade100,
           ),
           color: AppColors.primary,
           tooltip: "Change Theme",
