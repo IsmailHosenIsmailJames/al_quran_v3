@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -12,6 +13,7 @@ import "package:gap/gap.dart";
 class JumpToAyahView extends StatefulWidget {
   final String? initAyahKey;
   final bool isAudioPlayer;
+  final bool? selectMultipleAndShare;
   final Function(String ayahKey)? onPlaySelected;
 
   const JumpToAyahView({
@@ -19,6 +21,7 @@ class JumpToAyahView extends StatefulWidget {
     this.initAyahKey,
     required this.isAudioPlayer,
     this.onPlaySelected,
+    this.selectMultipleAndShare,
   });
 
   @override
@@ -31,6 +34,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   ScrollController surahScrollController = ScrollController();
   ScrollController ayahScrollController = ScrollController();
   TextEditingController textEditingController = TextEditingController();
+  List<String> selectedAyahKeys = [];
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +63,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             height: 50,
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Text(
-                    "Jump To Ayah",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    widget.selectMultipleAndShare == true
+                        ? "Share Select Ayahs"
+                        : "Jump To Ayah",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
 
@@ -79,12 +88,70 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             ),
           ),
 
+          if (widget.selectMultipleAndShare == true) const Gap(8),
+          if (widget.selectMultipleAndShare == true)
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsetsGeometry.only(left: 10),
+              child: Text("Selected: ${selectedAyahKeys.length}"),
+            ),
+          if (widget.selectMultipleAndShare == true) const Gap(5),
+
+          if (widget.selectMultipleAndShare == true &&
+              selectedAyahKeys.isNotEmpty)
+            Stack(
+              children: [
+                Container(
+                  height: 40,
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                    color: AppColors.primaryShade100,
+                  ),
+
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(left: 10, right: 30),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: selectedAyahKeys.length,
+                    itemBuilder: (context, index) {
+                      return Center(
+                        child: Text(
+                          "${selectedAyahKeys[index]}${selectedAyahKeys.length == index + 1 ? "" : ", "}",
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    height: 40,
+                    child: IconButton(
+                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        selectedAyahKeys.clear();
+                        setState(() {});
+                      },
+                      icon: Icon(Icons.close, color: AppColors.primary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+          if (widget.selectMultipleAndShare == true &&
+              selectedAyahKeys.isNotEmpty)
+            const Gap(5),
+
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.65,
+                  width:
+                      MediaQuery.of(context).size.width *
+                      (widget.selectMultipleAndShare == true ? 0.6 : 0.65),
                   child: Column(
                     children: [
                       Container(
@@ -166,9 +233,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                     ],
                   ),
                 ),
-                const VerticalDivider(),
+                const VerticalDivider(width: 1),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
+                  width:
+                      MediaQuery.of(context).size.width *
+                      (widget.selectMultipleAndShare == true ? 0.3 : 0.2),
                   child: Scrollbar(
                     controller: ayahScrollController,
                     interactive: true,
@@ -196,7 +265,12 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 ),
                               ),
                               backgroundColor:
-                                  index == (ayahNumber ?? 0) - 1
+                                  (index == (ayahNumber ?? 0) - 1) ||
+                                          (widget.selectMultipleAndShare ==
+                                                  true &&
+                                              selectedAyahKeys.contains(
+                                                "$surahNumber:${index + 1}",
+                                              ))
                                       ? AppColors.primary.withValues(alpha: 0.2)
                                       : Colors.transparent,
                               foregroundColor:
@@ -206,11 +280,37 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       : Colors.black,
                             ),
                             onPressed: () {
-                              setState(() {
+                              if (widget.selectMultipleAndShare == true) {
+                                if (selectedAyahKeys.contains(
+                                  "$surahNumber:${index + 1}",
+                                )) {
+                                  selectedAyahKeys.remove(
+                                    "$surahNumber:${index + 1}",
+                                  );
+                                } else {
+                                  selectedAyahKeys.add(
+                                    "$surahNumber:${index + 1}",
+                                  );
+                                }
+                              } else {
                                 ayahNumber = index + 1;
-                              });
+                              }
+                              setState(() {});
                             },
-                            child: Text((index + 1).toString()),
+                            child: Row(
+                              children: [
+                                if (widget.selectMultipleAndShare == true)
+                                  selectedAyahKeys.contains(
+                                        "$surahNumber:${index + 1}",
+                                      )
+                                      ? const Icon(Icons.check_box_rounded)
+                                      : const Icon(
+                                        Icons.check_box_outline_blank_rounded,
+                                      ),
+                                const Gap(20),
+                                Text((index + 1).toString()),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -220,6 +320,28 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ],
             ),
           ),
+          if (widget.selectMultipleAndShare == true)
+            Row(
+              children: [
+                const Gap(5),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(FluentIcons.image_24_regular),
+                    label: const Text("As Image"),
+                  ),
+                ),
+                const Gap(10),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(FluentIcons.textbox_16_regular),
+                    label: const Text("As Text"),
+                  ),
+                ),
+                const Gap(5),
+              ],
+            ),
           if (widget.isAudioPlayer)
             Container(
               padding: const EdgeInsets.only(
@@ -243,7 +365,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
               ),
             ),
-          if (!widget.isAudioPlayer)
+          if (!widget.isAudioPlayer && widget.selectMultipleAndShare != true)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
