@@ -50,6 +50,8 @@ dependencies:
   cached_network_image: ^3.4.1
   workmanager: ^0.6.0
   screenshot: ^3.0.0
+  device_info_plus: ^11.4.0
+  package_info_plus: ^8.3.0
 
 dev_dependencies:
   flutter_test:

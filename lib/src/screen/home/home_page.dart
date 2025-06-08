@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
 import "../prayer_time/prayer_time_page.dart";
@@ -30,23 +31,29 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: SvgPicture.string(
+            """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
+              BlendMode.srcIn,
+            ),
+            height: 30,
+            width: 30,
+            fit: BoxFit.cover,
+          ),
+        ),
         title: const Text("Al Quran"),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(FluentIcons.search_28_regular),
+            icon: const Icon(FluentIcons.search_28_filled),
           ),
           const Gap(5),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
-            icon: const Icon(FluentIcons.settings_24_regular),
-          ),
         ],
       ),
       body:
