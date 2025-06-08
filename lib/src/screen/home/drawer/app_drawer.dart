@@ -1,13 +1,12 @@
+import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
-import "package:device_info_plus/device_info_plus.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
-import 'package:package_info_plus/package_info_plus.dart';
+import "package:package_info_plus/package_info_plus.dart";
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -105,7 +104,14 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(20),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.settings_24_filled,
                     color: AppColors.primary,

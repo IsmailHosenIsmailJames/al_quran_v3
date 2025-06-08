@@ -2,7 +2,6 @@ import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
-import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -31,20 +30,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: SvgPicture.string(
-            """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
-              BlendMode.srcIn,
-            ),
-            height: 30,
-            width: 30,
-            fit: BoxFit.cover,
-          ),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              tooltip: "Open navigation menu",
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: SvgPicture.string(
+                """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.grey.shade100
+                      : Colors.grey.shade800,
+                  BlendMode.srcIn,
+                ),
+                height: 28,
+                width: 28,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
         ),
         title: const Text("Al Quran"),
         centerTitle: true,
