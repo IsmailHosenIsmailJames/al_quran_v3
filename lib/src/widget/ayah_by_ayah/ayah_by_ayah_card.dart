@@ -9,16 +9,13 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
-import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -26,7 +23,6 @@ import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
-import "package:share_plus/share_plus.dart";
 
 Widget getAyahByAyahCard({
   required String ayahKey,
@@ -123,24 +119,6 @@ Widget getAyahByAyahCard({
                 },
                 tooltip: "Share",
                 icon: const Icon(FluentIcons.share_24_filled, size: 18),
-              ),
-            ),
-            const Gap(5),
-            SizedBox(
-              height: 30,
-              width: 30,
-              child: IconButton(
-                style: IconButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primary),
-                  ),
-                ),
-                onPressed: () {},
-                tooltip: "Copy",
-                icon: const Icon(FluentIcons.copy_16_filled, size: 18),
               ),
             ),
             const Gap(5),
