@@ -58,37 +58,58 @@ class _AudioPageState extends State<AudioPage> {
                 builder:
                     (context, audioTabScreenState) => Row(
                       children: [
-                        SizedBox(
-                          height: 100,
-                          width: 80,
-                          child:
-                              audioTabScreenState.img != null
-                                  ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                      roundedRadius,
-                                    ),
-                                    child: CachedNetworkImage(
-                                      imageUrl: audioTabScreenState.img!,
-                                      errorWidget:
-                                          (context, url, error) => const Icon(
-                                            FluentIcons.person_24_regular,
-                                            size: 60,
-                                            color: Colors.grey,
-                                          ),
-                                      progressIndicatorBuilder:
-                                          (context, url, progress) => Center(
-                                            child: CircularProgressIndicator(
-                                              value: progress.progress,
+                        GestureDetector(
+                          onTap: () {
+                            popupChangeReciter(context, audioTabScreenState, (
+                              ReciterInfoModel reciterInfoModel,
+                            ) async {
+                              context
+                                  .read<AudioTabReciterCubit>()
+                                  .changeReciter(reciterInfoModel);
+                              AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                startAyahKey: ayahKeyState.ayahList.first,
+                                endAyahKey: ayahKeyState.ayahList.last,
+                                isInsideQuran: false,
+                                reciterInfoModel: reciterInfoModel,
+                                initialIndex: currentIndex,
+                                instantPlay:
+                                    AudioPlayerManager.audioPlayer.playing,
+                              );
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: SizedBox(
+                            height: 100,
+                            width: 80,
+                            child:
+                                audioTabScreenState.img != null
+                                    ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        roundedRadius,
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: audioTabScreenState.img!,
+                                        errorWidget:
+                                            (context, url, error) => const Icon(
+                                              FluentIcons.person_24_regular,
+                                              size: 60,
+                                              color: Colors.grey,
                                             ),
-                                          ),
-                                      fit: BoxFit.cover,
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) => Center(
+                                              child: CircularProgressIndicator(
+                                                value: progress.progress,
+                                              ),
+                                            ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                    : const Icon(
+                                      FluentIcons.person_24_regular,
+                                      size: 60,
+                                      color: Colors.grey,
                                     ),
-                                  )
-                                  : const Icon(
-                                    FluentIcons.person_24_regular,
-                                    size: 60,
-                                    color: Colors.grey,
-                                  ),
+                          ),
                         ),
                         const Gap(10),
                         Column(
