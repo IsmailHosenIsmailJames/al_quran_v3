@@ -1,6 +1,7 @@
 import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -102,6 +103,17 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 ),
                 const Gap(20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 18),
+                  child: Text(
+                    "Main Menu",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                Divider(height: 10, color: AppColors.mutedGray),
                 ListTile(
                   minTileHeight: 40,
                   onTap: () async {
@@ -150,6 +162,38 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await popupJumpToAyah(
+                      context: context,
+                      isAudioPlayer: false,
+                    );
+                  },
+                  leading: Icon(
+                    FluentIcons.arrow_turn_down_right_20_filled,
+                    color: AppColors.primary,
+                  ),
+                  title: const Text(
+                    "Jump to Ayah",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ),
+                const Gap(5),
+                ListTile(
+                  minTileHeight: 40,
+                  onTap: () async {},
+                  leading: Icon(
+                    FluentIcons.share_multiple_24_filled,
+                    color: AppColors.primary,
+                  ),
+                  title: const Text(
+                    "Share Multiple Ayah",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ),
+                const Gap(5),
+                ListTile(
+                  minTileHeight: 40,
                   onTap: () async {},
                   leading: Icon(
                     Icons.favorite_rounded,
@@ -160,8 +204,18 @@ class _AppDrawerState extends State<AppDrawer> {
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
-                const Gap(5),
-
+                const Gap(15),
+                const Padding(
+                  padding: EdgeInsets.only(left: 18),
+                  child: Text(
+                    "Others",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                Divider(height: 10, color: AppColors.mutedGray),
                 ListTile(
                   minTileHeight: 40,
                   onTap: () async {},
