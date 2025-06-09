@@ -52,6 +52,7 @@ dependencies:
   screenshot: ^3.0.0
   device_info_plus: ^11.4.0
   package_info_plus: ^8.3.0
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:
