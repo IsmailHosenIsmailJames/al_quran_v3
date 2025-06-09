@@ -188,8 +188,8 @@ void showShareBottomDialog(
                       constraints: const BoxConstraints(
                         minHeight: 500,
                         maxHeight: 3000,
-                        minWidth: 500,
-                        maxWidth: 800,
+                        minWidth: 300,
+                        maxWidth: 500,
                       ),
                       context: context,
                       pixelRatio: getPixelRatioForImage(
