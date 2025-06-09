@@ -162,25 +162,34 @@ void showShareBottomDialog(
             width: double.infinity,
             child: TextButton.icon(
               style: textButtonStyle,
-              onPressed: () {
-                ScreenshotController screenshotController =
-                    ScreenshotController();
-                screenshotController
+              onPressed: () async {
+                final imageBinary = await screenshotController
                     .captureFromLongWidget(
-                      getAyahCardForShareAsImage(
+                      InheritedTheme.captureAll(
                         context,
-                        Hive.box("user").get(
-                          "show_mac_os_window_like_icon",
-                          defaultValue: true,
+                        Material(
+                          child: getAyahCardForShareAsImage(
+                            context,
+                            Hive.box("user").get(
+                              "show_mac_os_window_like_icon",
+                              defaultValue: true,
+                            ),
+                            ayahKey,
+                            surahInfoModel,
+                            quranScriptType,
+                            getPlainTextAyahFromTajweedWords(
+                              List<String>.from(quranScriptWord),
+                            ),
+                            translation,
+                            footNote,
+                          ),
                         ),
-                        ayahKey,
-                        surahInfoModel,
-                        quranScriptType,
-                        getPlainTextAyahFromTajweedWords(
-                          List<String>.from(quranScriptWord),
-                        ),
-                        translation,
-                        footNote,
+                      ),
+                      constraints: const BoxConstraints(
+                        minHeight: 500,
+                        maxHeight: 3000,
+                        minWidth: 500,
+                        maxWidth: 800,
                       ),
                       context: context,
                       pixelRatio: getPixelRatioForImage(
@@ -190,17 +199,21 @@ void showShareBottomDialog(
                             translation +
                             footNoteAsString,
                       ),
-                    )
-                    .then((imageBinary) async {
-                      await SharePlus.instance.share(
-                        ShareParams(
-                          files: [
-                            XFile.fromData(imageBinary, mimeType: "image/png"),
-                          ],
-                        ),
-                      );
-                      Navigator.pop(context);
-                    });
+                      delay: const Duration(milliseconds: 200),
+                    );
+                screenshotController = ScreenshotController();
+                await SharePlus.instance.share(
+                  ShareParams(
+                    files: [XFile.fromData(imageBinary, mimeType: "image/png")],
+                    fileNameOverrides: [
+                      "${surahInfoModel.nameSimple} - $ayahKey.png",
+                    ],
+                    downloadFallbackEnabled: false,
+                    mailToFallbackEnabled: false,
+                  ),
+                );
+
+                Navigator.pop(context);
               },
               icon: Icon(FluentIcons.image_24_regular, color: color),
               label: Text("Share as Image", style: TextStyle(color: color)),

@@ -89,7 +89,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   final fromKey = GlobalKey<FormState>();
 
-  String selectedAyahKey = "5:2";
+  String selectedAyahKey = "2:2";
 
   @override
   Widget build(BuildContext context) {

@@ -9,10 +9,10 @@ import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_build
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_spinkit/flutter_spinkit.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
-import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../screen/settings/cubit/quran_script_type_cubit.dart";
@@ -109,8 +109,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             ),
           if (widget.selectMultipleAndShare == true) const Gap(5),
 
-          if (widget.selectMultipleAndShare == true &&
-              selectedAyahKeys.isNotEmpty)
+          if (widget.selectMultipleAndShare == true)
             Stack(
               children: [
                 Container(
@@ -121,18 +120,25 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                     color: AppColors.primaryShade100,
                   ),
 
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(left: 10, right: 30),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: selectedAyahKeys.length,
-                    itemBuilder: (context, index) {
-                      return Center(
-                        child: Text(
-                          "${selectedAyahKeys[index]}${selectedAyahKeys.length == index + 1 ? "" : ", "}",
-                        ),
-                      );
-                    },
-                  ),
+                  child:
+                      selectedAyahKeys.isEmpty
+                          ? Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: const Text("Selection Empty"),
+                          )
+                          : ListView.builder(
+                            padding: const EdgeInsets.only(left: 10, right: 30),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: selectedAyahKeys.length,
+                            itemBuilder: (context, index) {
+                              return Center(
+                                child: Text(
+                                  "${selectedAyahKeys[index]}${selectedAyahKeys.length == index + 1 ? "" : ", "}",
+                                ),
+                              );
+                            },
+                          ),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -340,9 +346,39 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () async {
-                      ScreenshotController screenshotController =
-                          ScreenshotController();
                       List<XFile> files = [];
+                      List<String> fileNames = [];
+                      showDialog(
+                        context: context,
+                        builder:
+                            (context) => Dialog(
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              child: Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SpinKitFoldingCube(
+                                        color: AppColors.primary,
+                                      ),
+                                      const Gap(20),
+                                      const Text(
+                                        "Generating Image... Please Wait",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                      );
+
                       for (String ayahKey in selectedAyahKeys) {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                           metaDataSurah[ayahKey.split(":").first],
@@ -384,20 +420,31 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
 
                         var imageData = await screenshotController
                             .captureFromLongWidget(
-                              getAyahCardForShareAsImage(
+                              InheritedTheme.captureAll(
                                 context,
-                                Hive.box("user").get(
-                                  "show_mac_os_window_like_icon",
-                                  defaultValue: true,
+                                Material(
+                                  child: getAyahCardForShareAsImage(
+                                    context,
+                                    Hive.box("user").get(
+                                      "show_mac_os_window_like_icon",
+                                      defaultValue: true,
+                                    ),
+                                    ayahKey,
+                                    surahInfoModel,
+                                    context.read<QuranScriptTypeCubit>().state,
+                                    getPlainTextAyahFromTajweedWords(
+                                      List<String>.from(quranScriptWord),
+                                    ),
+                                    translation,
+                                    footNote,
+                                  ),
                                 ),
-                                ayahKey,
-                                surahInfoModel,
-                                context.read<QuranScriptTypeCubit>().state,
-                                getPlainTextAyahFromTajweedWords(
-                                  List<String>.from(quranScriptWord),
-                                ),
-                                translation,
-                                footNote,
+                              ),
+                              constraints: const BoxConstraints(
+                                minHeight: 500,
+                                maxHeight: 3000,
+                                minWidth: 500,
+                                maxWidth: 800,
                               ),
                               context: context,
                               pixelRatio: getPixelRatioForImage(
@@ -407,15 +454,25 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     translation +
                                     footNoteAsString,
                               ),
-                              delay: Duration.zero,
+                              delay: const Duration(milliseconds: 200),
                             );
                         files.add(
                           XFile.fromData(imageData, mimeType: "image/png"),
                         );
+                        fileNames.add(
+                          "${surahInfoModel.nameSimple} - $ayahKey.png",
+                        );
+                        await Future.delayed(const Duration(milliseconds: 300));
                       }
-
-                      await SharePlus.instance.share(ShareParams(files: files));
                       Navigator.pop(context);
+                      await SharePlus.instance.share(
+                        ShareParams(
+                          files: files,
+                          fileNameOverrides: fileNames,
+                          downloadFallbackEnabled: false,
+                          mailToFallbackEnabled: false,
+                        ),
+                      );
                     },
                     icon: const Icon(FluentIcons.image_24_regular),
                     label: const Text("As Image"),

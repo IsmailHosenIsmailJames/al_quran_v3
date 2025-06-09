@@ -6,9 +6,12 @@ import "package:flutter/material.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
+import "package:screenshot/screenshot.dart";
 
 import "../quran_script/model/script_info.dart";
 import "../quran_script/script_processor.dart";
+
+ScreenshotController screenshotController = ScreenshotController();
 
 Widget getAyahCardForShareAsImage(
   BuildContext context,
@@ -26,6 +29,7 @@ Widget getAyahCardForShareAsImage(
 
   return Container(
     padding: const EdgeInsets.all(10.0),
+    margin: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
       border: Border.all(color: AppColors.primary),
@@ -34,7 +38,6 @@ Widget getAyahCardForShareAsImage(
               ? Colors.grey.shade900
               : Colors.grey.shade100,
     ),
-    width: MediaQuery.of(context).size.width,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -42,6 +45,7 @@ Widget getAyahCardForShareAsImage(
       children: [
         if (showMacOsWindowLikeIcon)
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -94,7 +98,7 @@ Widget getAyahCardForShareAsImage(
           style: TextStyle(fontSize: 12, color: Colors.grey),
         ),
         const Gap(10),
-        Text(translation),
+        Html(data: translation),
         keepFootNote ? const Gap(10) : const Gap(0),
         if (keepFootNote)
           ...List.generate(footNote.length, (index) {
@@ -102,7 +106,13 @@ Widget getAyahCardForShareAsImage(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("${footNote.keys.toList()[index]}."),
+                Text(
+                  "${index + 1}.",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
                 Html(data: footNote.values.toList()[index]),
                 const Gap(5),
               ],
