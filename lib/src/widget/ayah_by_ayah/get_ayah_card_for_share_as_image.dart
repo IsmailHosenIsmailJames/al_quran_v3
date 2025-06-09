@@ -82,7 +82,7 @@ Widget getAyahCardForShareAsImage(
         ),
         const Gap(20),
         Align(
-          alignment: Alignment.centerRight,
+          alignment: Alignment.center,
           child: ScriptProcessor(
             scriptInfo: ScriptInfo(
               surahNumber: ayahKey.split(":").first.toInt(),
