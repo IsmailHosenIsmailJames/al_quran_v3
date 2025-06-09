@@ -97,7 +97,6 @@ Widget getAyahCardForShareAsImage(
           "Translation:",
           style: TextStyle(fontSize: 12, color: Colors.grey),
         ),
-        const Gap(10),
         Html(data: translation),
         keepFootNote ? const Gap(10) : const Gap(0),
         if (keepFootNote)

@@ -7,7 +7,6 @@ import "package:flutter/material.dart";
 void showPopupWordFunction({
   required BuildContext context,
   required List<String> wordKeys,
-  required List<String> words,
   required int initWordIndex,
   required QuranScriptType scriptCategory,
 }) {
@@ -19,7 +18,6 @@ void showPopupWordFunction({
     builder:
         (context) => ShowPopupOfWord(
           wordKeys: wordKeys,
-          words: words,
           initWordIndex: initWordIndex,
           scriptCategory: scriptCategory,
           surahInfoModel: surahInfoModel,
