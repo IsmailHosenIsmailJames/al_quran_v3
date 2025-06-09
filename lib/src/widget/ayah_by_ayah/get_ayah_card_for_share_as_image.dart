@@ -5,6 +5,7 @@ import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 import "../quran_script/model/script_info.dart";
 import "../quran_script/script_processor.dart";
@@ -19,11 +20,19 @@ Widget getAyahCardForShareAsImage(
   String translation,
   Map footNote,
 ) {
+  bool keepFootNote = Hive.box(
+    "user",
+  ).get("keep_foot_note_on_share", defaultValue: true);
+
   return Container(
     padding: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
       border: Border.all(color: AppColors.primary),
+      color:
+          Theme.of(context).brightness == Brightness.dark
+              ? Colors.grey.shade900
+              : Colors.grey.shade100,
     ),
     width: MediaQuery.of(context).size.width,
     child: Column(
@@ -32,13 +41,34 @@ Widget getAyahCardForShareAsImage(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showMacOsWindowLikeIcon)
-          const Row(
+          Row(
             children: [
-              CircleAvatar(backgroundColor: Colors.red, radius: 5),
-              Gap(7),
-              CircleAvatar(backgroundColor: Colors.yellow, radius: 5),
-              Gap(7),
-              CircleAvatar(backgroundColor: Colors.green, radius: 5),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                height: 5,
+                width: 5,
+              ),
+              const Gap(7),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                height: 5,
+                width: 5,
+              ),
+              const Gap(7),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                height: 5,
+                width: 5,
+              ),
             ],
           ),
         if (showMacOsWindowLikeIcon) const Gap(10),
@@ -65,16 +95,19 @@ Widget getAyahCardForShareAsImage(
         ),
         const Gap(10),
         Text(translation),
-        const Gap(10),
-        ...List.generate(footNote.length, (index) {
-          return Column(
-            children: [
-              Text("${footNote.keys.toList()[index]}."),
-              Html(data: footNote.values.toList()[index]),
-              const Gap(5),
-            ],
-          );
-        }),
+        keepFootNote ? const Gap(10) : const Gap(0),
+        if (keepFootNote)
+          ...List.generate(footNote.length, (index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("${footNote.keys.toList()[index]}."),
+                Html(data: footNote.values.toList()[index]),
+                const Gap(5),
+              ],
+            );
+          }),
       ],
     ),
   );

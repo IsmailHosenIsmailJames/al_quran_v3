@@ -166,7 +166,7 @@ void showShareBottomDialog(
                 ScreenshotController screenshotController =
                     ScreenshotController();
                 screenshotController
-                    .captureFromWidget(
+                    .captureFromLongWidget(
                       getAyahCardForShareAsImage(
                         context,
                         Hive.box("user").get(
@@ -183,6 +183,14 @@ void showShareBottomDialog(
                         footNote,
                       ),
                       context: context,
+                      pixelRatio: getPixelRatioForImage(
+                        getPlainTextAyahFromTajweedWords(
+                              List<String>.from(quranScriptWord),
+                            ) +
+                            translation +
+                            footNoteAsString,
+                      ),
+                      delay: const Duration(milliseconds: 100),
                     )
                     .then((imageBinary) async {
                       await SharePlus.instance.share(
@@ -252,4 +260,8 @@ void showShareBottomDialog(
       );
     },
   );
+}
+
+double getPixelRatioForImage(String text) {
+  return text.split(" ").length / 50;
 }
