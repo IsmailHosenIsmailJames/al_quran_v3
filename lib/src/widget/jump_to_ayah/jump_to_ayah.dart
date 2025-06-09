@@ -443,8 +443,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               constraints: const BoxConstraints(
                                 minHeight: 500,
                                 maxHeight: 3000,
-                                minWidth: 500,
-                                maxWidth: 800,
+                                minWidth: 300,
+                                maxWidth: 500,
                               ),
                               context: context,
                               pixelRatio: getPixelRatioForImage(
@@ -454,7 +454,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     translation +
                                     footNoteAsString,
                               ),
-                              delay: const Duration(milliseconds: 200),
+                              delay: const Duration(milliseconds: 50),
                             );
                         files.add(
                           XFile.fromData(imageData, mimeType: "image/png"),
@@ -462,7 +462,6 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         fileNames.add(
                           "${surahInfoModel.nameSimple} - $ayahKey.png",
                         );
-                        await Future.delayed(const Duration(milliseconds: 300));
                       }
                       Navigator.pop(context);
                       await SharePlus.instance.share(
