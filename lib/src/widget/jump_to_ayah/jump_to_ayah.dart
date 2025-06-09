@@ -4,17 +4,22 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
+
+import "../../screen/settings/cubit/quran_script_type_cubit.dart";
 
 class JumpToAyahView extends StatefulWidget {
   final String? initAyahKey;
   final bool isAudioPlayer;
   final bool? selectMultipleAndShare;
   final Function(String ayahKey)? onPlaySelected;
+  final Function(String ayahKey)? onSelectAyah;
 
   const JumpToAyahView({
     super.key,
@@ -22,6 +27,7 @@ class JumpToAyahView extends StatefulWidget {
     required this.isAudioPlayer,
     this.onPlaySelected,
     this.selectMultipleAndShare,
+    this.onSelectAyah,
   });
 
   @override
@@ -254,10 +260,13 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ).versesCount
                               : 0,
                       itemBuilder: (context, index) {
-                        return SizedBox(
+                        return Container(
                           height: 35,
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: TextButton(
                             style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+
                               alignment: Alignment.center,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
@@ -298,6 +307,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               setState(() {});
                             },
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 if (widget.selectMultipleAndShare == true)
                                   selectedAyahKeys.contains(
@@ -307,7 +318,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       : const Icon(
                                         Icons.check_box_outline_blank_rounded,
                                       ),
-                                const Gap(20),
+                                if (widget.selectMultipleAndShare == true)
+                                  const Gap(20),
                                 Text((index + 1).toString()),
                               ],
                             ),
@@ -334,7 +346,16 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 const Gap(10),
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      String text = "";
+                      for (String ayahKey in selectedAyahKeys) {
+                        SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+                          metaDataSurah[ayahKey.split(":").first],
+                        );
+                        QuranScriptType quranScriptType =
+                            context.read<QuranScriptTypeCubit>().state;
+                      }
+                    },
                     icon: const Icon(FluentIcons.textbox_16_regular),
                     label: const Text("As Text"),
                   ),
@@ -371,51 +392,59 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        if (surahNumber != null && ayahNumber != null) {
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => TafsirView(
-                                    ayahKey: "$surahNumber:$ayahNumber",
-                                  ),
-                            ),
-                          );
-                        } else {
-                          Fluttertoast.showToast(msg: "Please Select One");
-                        }
-                      },
-                      child: const Text("To Tafsir"),
+                  if (widget.onSelectAyah == null)
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          if (surahNumber != null && ayahNumber != null) {
+                            Navigator.pop(context);
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => TafsirView(
+                                      ayahKey: "$surahNumber:$ayahNumber",
+                                    ),
+                              ),
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: "Please Select One");
+                          }
+                        },
+                        child: const Text("To Tafsir"),
+                      ),
                     ),
-                  ),
-                  const Gap(10),
+                  if (widget.onSelectAyah == null) const Gap(10),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
                         if (surahNumber != null && ayahNumber != null) {
                           Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => QuranScriptView(
-                                    startKey: "$surahNumber:1",
-                                    endKey: getEndAyahKeyFromSurahNumber(
-                                      surahNumber!,
+                          if (widget.onSelectAyah != null) {
+                            widget.onSelectAyah!("$surahNumber:$ayahNumber");
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => QuranScriptView(
+                                      startKey: "$surahNumber:1",
+                                      endKey: getEndAyahKeyFromSurahNumber(
+                                        surahNumber!,
+                                      ),
+                                      toScrollKey: "$surahNumber:$ayahNumber",
                                     ),
-                                    toScrollKey: "$surahNumber:$ayahNumber",
-                                  ),
-                            ),
-                          );
+                              ),
+                            );
+                          }
                         } else {
                           Fluttertoast.showToast(msg: "Please Select One");
                         }
                       },
-                      child: const Text("To Ayah"),
+                      child: Text(
+                        widget.onSelectAyah != null ? "Select Ayah" : "To Ayah",
+                      ),
                     ),
                   ),
                 ],
