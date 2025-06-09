@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 import "dart:io";
 
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart";
@@ -13,12 +14,15 @@ import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
+import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
+import "package:dartx/dartx.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -26,6 +30,8 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:toastification/toastification.dart";
+
+import "../settings/cubit/quran_script_type_cubit.dart";
 
 class AppSetupPage extends StatefulWidget {
   const AppSetupPage({super.key});
@@ -82,6 +88,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   final fromKey = GlobalKey<FormState>();
+
+  String selectedAyahKey = "5:2";
 
   @override
   Widget build(BuildContext context) {
@@ -344,7 +352,42 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           const Gap(5),
                           getScriptSelectionSegmentedButtons(),
-                          const Gap(5),
+
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () async {
+                                await popupJumpToAyah(
+                                  context: context,
+                                  isAudioPlayer: false,
+                                  initAyahKey: selectedAyahKey,
+                                  onSelectAyah: (ayahKey) {
+                                    setState(() {
+                                      selectedAyahKey = ayahKey;
+                                    });
+                                  },
+                                );
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "${SurahInfoModel.fromMap(metaDataSurah[selectedAyahKey.split(":").first]).nameSimple} - $selectedAyahKey",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Gap(5),
+                                  const Icon(
+                                    Icons.arrow_drop_down_rounded,
+                                    size: 28,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
                           Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(10),
@@ -354,13 +397,25 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 roundedRadius,
                               ),
                             ),
-                            child: ScriptProcessor(
-                              scriptInfo: ScriptInfo(
-                                surahNumber: 2,
-                                ayahNumber: 2,
-                                quranScriptType: selectedScript,
-                                fontSize: 20,
-                              ),
+                            child: BlocBuilder<
+                              QuranScriptTypeCubit,
+                              QuranScriptType
+                            >(
+                              builder: (context, quranScriptTypeState) {
+                                return ScriptProcessor(
+                                  scriptInfo: ScriptInfo(
+                                    surahNumber:
+                                        selectedAyahKey
+                                            .split(":")
+                                            .first
+                                            .toInt(),
+                                    ayahNumber:
+                                        selectedAyahKey.split(":").last.toInt(),
+                                    quranScriptType: quranScriptTypeState,
+                                    fontSize: 24,
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const Gap(15),
@@ -720,120 +775,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
     }
   }
 
-  Row getScriptSelectionSegmentedButtons() {
-    return Row(
-      spacing: 5,
-      children: [
-        Expanded(
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  selectedScript == QuranScriptType.tajweed
-                      ? AppColors.primary
-                      : AppColors.mutedGray,
-              foregroundColor:
-                  selectedScript == QuranScriptType.tajweed
-                      ? Colors.white
-                      : AppColors.primary,
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(roundedRadius),
-                  bottomLeft: Radius.circular(roundedRadius),
-                ),
-              ),
-              elevation: 0,
-              shadowColor: Colors.transparent,
-            ),
-            onPressed: () {
-              setState(() {
-                selectedScript = QuranScriptType.tajweed;
-              });
-            },
-            label: const Text(
-              "Tajweed",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            icon:
-                selectedScript == QuranScriptType.tajweed
-                    ? const Icon(Icons.done_rounded)
-                    : null,
-          ),
-        ),
-        Expanded(
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  selectedScript == QuranScriptType.uthmani
-                      ? AppColors.primary
-                      : AppColors.mutedGray,
-              foregroundColor:
-                  selectedScript == QuranScriptType.uthmani
-                      ? Colors.white
-                      : AppColors.primary,
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              elevation: 0,
-              shadowColor: Colors.transparent,
-            ),
-            onPressed: () {
-              setState(() {
-                selectedScript = QuranScriptType.uthmani;
-              });
-            },
-            label: const Text(
-              "Uthmani",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            icon:
-                selectedScript == QuranScriptType.uthmani
-                    ? const Icon(Icons.done_rounded)
-                    : null,
-          ),
-        ),
-        Expanded(
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  selectedScript == QuranScriptType.indopak
-                      ? AppColors.primary
-                      : AppColors.mutedGray,
-              foregroundColor:
-                  selectedScript == QuranScriptType.indopak
-                      ? Colors.white
-                      : AppColors.primary,
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(roundedRadius),
-                  bottomRight: Radius.circular(roundedRadius),
-                ),
-              ),
-              elevation: 0,
-              shadowColor: Colors.transparent,
-            ),
-            onPressed: () {
-              setState(() {
-                selectedScript = QuranScriptType.indopak;
-              });
-            },
-            label: const Text(
-              "Indopak",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-
-            icon:
-                selectedScript == QuranScriptType.indopak
-                    ? const Icon(Icons.done_rounded)
-                    : null,
-          ),
-        ),
-      ],
-    );
-  }
-
   QuranScriptType selectedScript = QuranScriptType.tajweed;
 
   List<DropdownMenuItem>? getQuranTafsirBookDropDownList() {
@@ -1089,4 +1030,63 @@ bool doesHaveTafsirSupport(String language) {
     }
   });
   return doesHaveTafsirSupport;
+}
+
+Widget getScriptSelectionSegmentedButtons() {
+  return BlocBuilder<QuranScriptTypeCubit, QuranScriptType>(
+    builder:
+        (context, quranScriptTypeState) => Row(
+          spacing: 5,
+          children: List.generate(QuranScriptType.values.length, (index) {
+            QuranScriptType currentQuranScriptType =
+                QuranScriptType.values[index];
+            return Expanded(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      quranScriptTypeState == currentQuranScriptType
+                          ? AppColors.primary
+                          : AppColors.mutedGray,
+                  foregroundColor:
+                      quranScriptTypeState == currentQuranScriptType
+                          ? Colors.white
+                          : AppColors.primary,
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0 == index ? roundedRadius : 0),
+                      bottomLeft: Radius.circular(
+                        0 == index ? roundedRadius : 0,
+                      ),
+                      topRight: Radius.circular(2 == index ? roundedRadius : 0),
+                      bottomRight: Radius.circular(
+                        2 == index ? roundedRadius : 0,
+                      ),
+                    ),
+                  ),
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
+                ),
+                onPressed: () {
+                  Hive.box(
+                    "user",
+                  ).put("selected_script", currentQuranScriptType.name);
+
+                  context.read<QuranScriptTypeCubit>().setQuranScriptType(
+                    currentQuranScriptType,
+                  );
+                },
+                label: Text(
+                  currentQuranScriptType.name.capitalize(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                icon:
+                    quranScriptTypeState == currentQuranScriptType
+                        ? const Icon(Icons.done_rounded)
+                        : null,
+              ),
+            );
+          }),
+        ),
+  );
 }

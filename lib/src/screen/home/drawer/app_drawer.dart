@@ -1,4 +1,3 @@
-import "package:al_quran_v3/src/screen/home/pages/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -8,6 +7,8 @@ import "package:flutter/material.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
+
+import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
