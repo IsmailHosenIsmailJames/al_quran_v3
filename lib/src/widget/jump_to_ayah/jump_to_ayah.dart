@@ -11,8 +11,11 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
+import "package:hive/hive.dart";
+import "package:share_plus/share_plus.dart";
 
 import "../../screen/settings/cubit/quran_script_type_cubit.dart";
+import "../quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 
 class JumpToAyahView extends StatefulWidget {
   final String? initAyahKey;
@@ -146,9 +149,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ],
             ),
 
-          if (widget.selectMultipleAndShare == true &&
-              selectedAyahKeys.isNotEmpty)
-            const Gap(5),
+          if (widget.selectMultipleAndShare == true) const Divider(),
 
           Expanded(
             child: Row(
@@ -274,13 +275,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 ),
                               ),
                               backgroundColor:
-                                  (index == (ayahNumber ?? 0) - 1) ||
-                                          (widget.selectMultipleAndShare ==
-                                                  true &&
-                                              selectedAyahKeys.contains(
-                                                "$surahNumber:${index + 1}",
-                                              ))
-                                      ? AppColors.primary.withValues(alpha: 0.2)
+                                  (index == (ayahNumber ?? 0) - 1) &&
+                                          (widget.selectMultipleAndShare !=
+                                              true)
+                                      ? AppColors.primaryShade300
                                       : Colors.transparent,
                               foregroundColor:
                                   Theme.of(context).brightness ==
@@ -352,9 +350,46 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                           metaDataSurah[ayahKey.split(":").first],
                         );
-                        QuranScriptType quranScriptType =
-                            context.read<QuranScriptTypeCubit>().state;
+                        Map translationMap =
+                            Hive.box("quran_translation").get(ayahKey) ??
+                            {"t": "Translation Not Found"};
+                        String translation =
+                            translationMap["t"] ?? "Translation Not Found";
+                        translation = translation.replaceAll(">", "> ");
+                        Map footNote = translationMap["f"] ?? {};
+                        String footNoteAsString = "\n";
+                        if (footNote.isNotEmpty) {
+                          footNote.forEach((key, value) {
+                            footNoteAsString += "$key. $value\n";
+                          });
+                        }
+                        List quranScriptWord = [];
+                        switch (context.read<QuranScriptTypeCubit>().state) {
+                          case QuranScriptType.tajweed:
+                            {
+                              quranScriptWord =
+                                  tajweedScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                          case QuranScriptType.uthmani:
+                            {
+                              quranScriptWord =
+                                  uthmaniScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                          case QuranScriptType.indopak:
+                            {
+                              quranScriptWord =
+                                  indopakScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                        }
+                        text +=
+                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
                       }
+
+                      await SharePlus.instance.share(ShareParams(text: text));
+                      Navigator.pop(context);
                     },
                     icon: const Icon(FluentIcons.textbox_16_regular),
                     label: const Text("As Text"),
