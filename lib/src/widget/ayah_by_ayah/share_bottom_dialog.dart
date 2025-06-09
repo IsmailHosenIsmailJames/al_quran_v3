@@ -190,7 +190,6 @@ void showShareBottomDialog(
                             translation +
                             footNoteAsString,
                       ),
-                      delay: const Duration(milliseconds: 100),
                     )
                     .then((imageBinary) async {
                       await SharePlus.instance.share(
@@ -262,6 +261,8 @@ void showShareBottomDialog(
   );
 }
 
-double getPixelRatioForImage(String text) {
-  return text.split(" ").length / 50;
+double? getPixelRatioForImage(String text) {
+  double ratio = text.split(" ").length / 50;
+  if (ratio < 5) return 5;
+  return ratio;
 }
