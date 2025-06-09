@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_type_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
@@ -117,6 +118,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(create: (context) => WordPlayingStateCubit()),
         BlocProvider(create: (context) => AudioTabReciterCubit()),
+        BlocProvider(create: (context) => QuranScriptTypeCubit()),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(
