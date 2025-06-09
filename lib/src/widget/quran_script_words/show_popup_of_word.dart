@@ -4,20 +4,20 @@ import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 
 class ShowPopupOfWord extends StatefulWidget {
   final List<String> wordKeys;
-  final List<String> words;
   final QuranScriptType scriptCategory;
   final SurahInfoModel surahInfoModel;
   final int initWordIndex;
   const ShowPopupOfWord({
     super.key,
     required this.wordKeys,
-    required this.words,
     required this.scriptCategory,
     required this.surahInfoModel,
     required this.initWordIndex,
@@ -33,6 +33,21 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
   late int currentWordIndex = widget.initWordIndex;
   @override
   Widget build(BuildContext context) {
+    List wordByWord = [];
+    bool supportsWordByWord = false;
+    final metaDataOfWordByWord = Hive.box(
+      "quran_word_by_word",
+    ).get("meta_data", defaultValue: {});
+    if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
+      supportsWordByWord = true;
+    }
+    if (supportsWordByWord) {
+      wordByWord =
+          Hive.box("quran_word_by_word").get(
+            "${widget.wordKeys.first.split(":")[0]}:${widget.wordKeys.first.split(":")[1]}",
+          ) ??
+          [];
+    }
     return Container(
       decoration: const BoxDecoration(),
       padding: const EdgeInsets.all(15),
@@ -114,8 +129,13 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                           skipWordTap: true,
                         ),
                       ),
+                      const Gap(10),
+                      if (supportsWordByWord)
+                        Text(
+                          wordByWord[index].toString().capitalize(),
+                          style: const TextStyle(fontSize: 26),
+                        ),
                       const Gap(15),
-
                       BlocBuilder<WordPlayingStateCubit, String?>(
                         builder: (context, state) {
                           return OutlinedButton.icon(

@@ -89,7 +89,6 @@ class NonTajweedScriptView extends StatelessWidget {
                             context: context,
                             wordKeys: wordsKey,
                             initWordIndex: index,
-                            words: List<String>.from(words),
                             scriptCategory: QuranScriptType.uthmani,
                           );
                         }),
@@ -162,7 +161,6 @@ class NonTajweedScriptView extends StatelessWidget {
                               context: context,
                               wordKeys: wordsKey,
                               initWordIndex: index,
-                              words: List<String>.from(words),
                               scriptCategory: QuranScriptType.uthmani,
                             );
                           }),

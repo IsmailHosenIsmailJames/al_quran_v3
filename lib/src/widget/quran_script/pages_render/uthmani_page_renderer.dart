@@ -113,7 +113,6 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                           words.length,
                                           (index) => "$ayahKey:${index + 1}",
                                         ),
-                                        words: List<String>.from(words),
                                         scriptCategory: QuranScriptType.uthmani,
                                       );
                                     },

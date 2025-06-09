@@ -53,7 +53,6 @@ TextSpan parseTajweedWord({
                         context: context,
                         wordKeys: wordKeys,
                         initWordIndex: wordIndex,
-                        words: List<String>.from(words),
                         scriptCategory: QuranScriptType.tajweed,
                       );
                     }),
