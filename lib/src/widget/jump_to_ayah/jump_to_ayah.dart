@@ -12,9 +12,12 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
+import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../screen/settings/cubit/quran_script_type_cubit.dart";
+import "../ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
+import "../ayah_by_ayah/share_bottom_dialog.dart";
 import "../quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 
 class JumpToAyahView extends StatefulWidget {
@@ -333,15 +336,92 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
           if (widget.selectMultipleAndShare == true)
             Row(
               children: [
-                // const Gap(5),
-                // Expanded(
-                //   child: OutlinedButton.icon(
-                //     onPressed: () {},
-                //     icon: const Icon(FluentIcons.image_24_regular),
-                //     label: const Text("As Image"),
-                //   ),
-                // ),
-                // const Gap(10),
+                const Gap(5),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      ScreenshotController screenshotController =
+                          ScreenshotController();
+                      List<XFile> files = [];
+                      for (String ayahKey in selectedAyahKeys) {
+                        SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+                          metaDataSurah[ayahKey.split(":").first],
+                        );
+                        Map translationMap =
+                            Hive.box("quran_translation").get(ayahKey) ??
+                            {"t": "Translation Not Found"};
+                        String translation =
+                            translationMap["t"] ?? "Translation Not Found";
+                        translation = translation.replaceAll(">", "> ");
+                        Map footNote = translationMap["f"] ?? {};
+                        String footNoteAsString = "\n";
+                        if (footNote.isNotEmpty) {
+                          footNote.forEach((key, value) {
+                            footNoteAsString += "$key. $value\n";
+                          });
+                        }
+                        List quranScriptWord = [];
+                        switch (context.read<QuranScriptTypeCubit>().state) {
+                          case QuranScriptType.tajweed:
+                            {
+                              quranScriptWord =
+                                  tajweedScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                          case QuranScriptType.uthmani:
+                            {
+                              quranScriptWord =
+                                  uthmaniScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                          case QuranScriptType.indopak:
+                            {
+                              quranScriptWord =
+                                  indopakScript[surahNumber
+                                      .toString()][ayahNumber.toString()];
+                            }
+                        }
+
+                        var imageData = await screenshotController
+                            .captureFromLongWidget(
+                              getAyahCardForShareAsImage(
+                                context,
+                                Hive.box("user").get(
+                                  "show_mac_os_window_like_icon",
+                                  defaultValue: true,
+                                ),
+                                ayahKey,
+                                surahInfoModel,
+                                context.read<QuranScriptTypeCubit>().state,
+                                getPlainTextAyahFromTajweedWords(
+                                  List<String>.from(quranScriptWord),
+                                ),
+                                translation,
+                                footNote,
+                              ),
+                              context: context,
+                              pixelRatio: getPixelRatioForImage(
+                                getPlainTextAyahFromTajweedWords(
+                                      List<String>.from(quranScriptWord),
+                                    ) +
+                                    translation +
+                                    footNoteAsString,
+                              ),
+                              delay: Duration.zero,
+                            );
+                        files.add(
+                          XFile.fromData(imageData, mimeType: "image/png"),
+                        );
+                      }
+
+                      await SharePlus.instance.share(ShareParams(files: files));
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(FluentIcons.image_24_regular),
+                    label: const Text("As Image"),
+                  ),
+                ),
+                const Gap(10),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () async {
