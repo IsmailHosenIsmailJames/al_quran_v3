@@ -8,6 +8,7 @@ import "package:clipboard/clipboard.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
@@ -15,6 +16,7 @@ import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../../main.dart";
+import "../../screen/settings/cubit/quran_script_type_cubit.dart";
 import "../../screen/surah_list_view/model/surah_info_model.dart";
 
 void showShareBottomDialog(
@@ -33,8 +35,25 @@ void showShareBottomDialog(
   int surahNumber = ayahKey.split(":").first.toInt();
   int ayahNumber = ayahKey.split(":").last.toInt();
 
-  List quranScriptWord =
-      tajweedScript[surahNumber.toString()][ayahNumber.toString()];
+  List quranScriptWord = [];
+  switch (context.read<QuranScriptTypeCubit>().state) {
+    case QuranScriptType.tajweed:
+      {
+        quranScriptWord =
+            tajweedScript[surahNumber.toString()][ayahNumber.toString()];
+      }
+    case QuranScriptType.uthmani:
+      {
+        quranScriptWord =
+            uthmaniScript[surahNumber.toString()][ayahNumber.toString()];
+      }
+    case QuranScriptType.indopak:
+      {
+        quranScriptWord =
+            indopakScript[surahNumber.toString()][ayahNumber.toString()];
+      }
+  }
+
   if (quranScriptType == QuranScriptType.tajweed) {}
   String footNoteAsString = "\n";
   if (footNote.isNotEmpty) {
