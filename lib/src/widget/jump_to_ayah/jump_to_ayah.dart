@@ -333,15 +333,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
           if (widget.selectMultipleAndShare == true)
             Row(
               children: [
-                const Gap(5),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(FluentIcons.image_24_regular),
-                    label: const Text("As Image"),
-                  ),
-                ),
-                const Gap(10),
+                // const Gap(5),
+                // Expanded(
+                //   child: OutlinedButton.icon(
+                //     onPressed: () {},
+                //     icon: const Icon(FluentIcons.image_24_regular),
+                //     label: const Text("As Image"),
+                //   ),
+                // ),
+                // const Gap(10),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () async {
