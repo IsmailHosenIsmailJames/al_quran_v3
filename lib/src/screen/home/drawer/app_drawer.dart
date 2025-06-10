@@ -344,16 +344,20 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 40,
                   width: 40,
                   child: IconButton(
-                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppColors.primaryShade100,
+                    ),
                     onPressed: () {},
-                    icon: const Icon(SimpleIcons.github, color: Colors.black),
+                    icon: const Icon(SimpleIcons.github),
                   ),
                 ),
                 SizedBox(
                   height: 40,
                   width: 40,
                   child: IconButton(
-                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppColors.primaryShade100,
+                    ),
                     onPressed: () {},
                     icon: const Icon(
                       SimpleIcons.discord,
@@ -366,7 +370,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   width: 40,
                   child: IconButton(
                     style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: AppColors.primaryShade100,
                       padding: EdgeInsets.zero,
                     ),
                     onPressed: () {},
@@ -377,7 +381,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 40,
                   width: 40,
                   child: IconButton(
-                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppColors.primaryShade100,
+                    ),
                     onPressed: () {},
                     icon: const Icon(
                       SimpleIcons.facebook,
@@ -389,7 +395,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   height: 40,
                   width: 40,
                   child: IconButton(
-                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppColors.primaryShade100,
+                    ),
                     onPressed: () {},
                     icon: SvgPicture.asset(
                       "assets/img/linkedin-svgrepo-com.svg",
