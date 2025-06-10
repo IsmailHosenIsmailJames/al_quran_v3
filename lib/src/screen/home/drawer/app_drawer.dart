@@ -9,6 +9,7 @@ import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:simple_icons/simple_icons.dart";
+import "package:url_launcher/url_launcher.dart";
 
 import "../../settings/settings_page.dart";
 
@@ -347,7 +348,15 @@ class _AppDrawerState extends State<AppDrawer> {
                     style: IconButton.styleFrom(
                       backgroundColor: AppColors.primaryShade100,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // open source code of the project
+                      launchUrl(
+                        Uri.parse(
+                          "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
+                        ),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
                     icon: const Icon(SimpleIcons.github),
                   ),
                 ),
@@ -358,7 +367,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     style: IconButton.styleFrom(
                       backgroundColor: AppColors.primaryShade100,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // invitation of discord community of this project
+                      launchUrl(
+                        Uri.parse("https://discord.gg/BcyaF8jHR9"),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
                     icon: const Icon(
                       SimpleIcons.discord,
                       color: Color(0xff5865f2),
@@ -373,35 +388,14 @@ class _AppDrawerState extends State<AppDrawer> {
                       backgroundColor: AppColors.primaryShade100,
                       padding: EdgeInsets.zero,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // mail to me in gmail: "md.ismailhosenismailjames@gmail.com"
+                      launchUrl(
+                        Uri.parse("mailto:md.ismailhosenismailjames@gmail.com"),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
                     icon: SvgPicture.asset("assets/img/gmail.svg"),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primaryShade100,
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(
-                      SimpleIcons.facebook,
-                      color: Color(0xff1877F2),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primaryShade100,
-                    ),
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/img/linkedin-svgrepo-com.svg",
-                    ),
                   ),
                 ),
               ],
