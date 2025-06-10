@@ -4,9 +4,11 @@ import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
+import "package:simple_icons/simple_icons.dart";
 
 import "../../settings/settings_page.dart";
 
@@ -316,6 +318,82 @@ class _AppDrawerState extends State<AppDrawer> {
                   title: const Text(
                     "Reset the App",
                     style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.only(
+              top: 5,
+              bottom: 10,
+              right: 10,
+              left: 10,
+            ),
+            decoration: BoxDecoration(
+              color:
+                  Theme.of(context).brightness == Brightness.light
+                      ? Colors.grey.shade100
+                      : Colors.grey.shade900,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {},
+                    icon: const Icon(SimpleIcons.github, color: Colors.black),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {},
+                    icon: const Icon(
+                      SimpleIcons.discord,
+                      color: Color(0xff5865f2),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      padding: EdgeInsets.zero,
+                    ),
+                    onPressed: () {},
+                    icon: SvgPicture.asset("assets/img/gmail.svg"),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {},
+                    icon: const Icon(
+                      SimpleIcons.facebook,
+                      color: Color(0xff1877F2),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: IconButton(
+                    style: IconButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      "assets/img/linkedin-svgrepo-com.svg",
+                    ),
                   ),
                 ),
               ],
