@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -8,6 +9,7 @@ import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
+import "package:share_plus/share_plus.dart"; // Added import
 import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
@@ -230,7 +232,19 @@ class _AppDrawerState extends State<AppDrawer> {
                 Divider(height: 10, color: AppColors.mutedGray),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    // share the app
+                    final String appLink =
+                        "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran";
+                    final String message =
+                        "Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah's words. Download here: $appLink";
+                    await SharePlus.instance.share(
+                      ShareParams(
+                        text: message,
+                        subject: "Check out this Al Quran App!",
+                      ),
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.share_24_filled,
                     color: AppColors.primary,
@@ -243,7 +257,15 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    // lunch the app in play to give review
+                    launchUrl(
+                      Uri.parse(
+                        "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                      ),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
                   leading: Icon(
                     Icons.star_rate_rounded,
                     color: AppColors.primary,
@@ -269,7 +291,14 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    String policyUrl =
+                        "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605";
+                    launchUrl(
+                      Uri.parse(policyUrl),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
                   leading: Icon(Icons.policy_rounded, color: AppColors.primary),
                   title: const Text(
                     "Privacy Policy",
@@ -279,7 +308,14 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutAppPage(),
+                      ),
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.info_24_filled,
                     color: AppColors.primary,
