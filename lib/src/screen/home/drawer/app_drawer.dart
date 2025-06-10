@@ -293,28 +293,48 @@ class _AppDrawerState extends State<AppDrawer> {
                 ListTile(
                   minTileHeight: 40,
                   onTap: () async {
-                    await Hive.deleteFromDisk();
-                    await Hive.initFlutter();
-                    await Hive.openBox("quran_translation");
-                    await Hive.openBox("user");
-                    await Hive.openBox("quran_word_by_word");
-                    await Hive.openBox("quran_tafsir");
-                    await Hive.openBox("segmented_quran_recitation");
-                    await Hive.openBox("surah_info");
-
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AppSetupPage(),
-                      ),
-                      (route) {
-                        return false;
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog.adaptive(
+                          insetPadding: const EdgeInsets.all(10),
+                          title: const Text(
+                            "Reset App Data",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          content: const Text(
+                            "Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.",
+                          ),
+                          actions: <Widget>[
+                            TextButton.icon(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              label: const Text("Cancel"),
+                              icon: const Icon(Icons.close_rounded),
+                            ),
+                            TextButton.icon(
+                              onPressed: () async {
+                                Navigator.of(context).pop();
+                                await _resetApp();
+                              },
+                              icon: const Icon(
+                                FluentIcons.arrow_reset_24_filled,
+                                color: Colors.red,
+                              ),
+                              label: const Text(
+                                "Reset",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        );
                       },
                     );
                   },
-                  leading: Icon(
+                  leading: const Icon(
                     FluentIcons.arrow_reset_24_filled,
-                    color: AppColors.primary,
+                    color: Colors.red,
                   ),
                   title: const Text(
                     "Reset the App",
@@ -403,6 +423,25 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _resetApp() async {
+    await Hive.deleteFromDisk();
+    await Hive.initFlutter();
+    await Hive.openBox("quran_translation");
+    await Hive.openBox("user");
+    await Hive.openBox("quran_word_by_word");
+    await Hive.openBox("quran_tafsir");
+    await Hive.openBox("segmented_quran_recitation");
+    await Hive.openBox("surah_info");
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const AppSetupPage()),
+      (route) {
+        return false;
+      },
     );
   }
 }
