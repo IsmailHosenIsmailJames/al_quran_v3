@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/pins/pins_page.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
@@ -55,6 +56,8 @@ Future<void> main() async {
   await Hive.openBox("quran_word_by_word");
   await Hive.openBox("segmented_quran_recitation");
   await Hive.openBox("surah_info");
+  await Hive.openBox(CollectionType.notes.name);
+  await Hive.openBox(CollectionType.pinned.name);
   tajweedScript = jsonDecode(
     await rootBundle.loadString("assets/quran_script/QPC_Hafs_Tajweed.json"),
   );
