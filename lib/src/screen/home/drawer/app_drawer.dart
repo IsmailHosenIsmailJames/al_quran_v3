@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
+import "package:al_quran_v3/src/screen/pins/pins_page.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
@@ -143,7 +144,17 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => const PinsPage(
+                              collectionType: CollectionType.notes,
+                            ),
+                      ),
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.note_24_filled,
                     color: AppColors.primary,
@@ -156,13 +167,23 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => const PinsPage(
+                              collectionType: CollectionType.pinned,
+                            ),
+                      ),
+                    );
+                  },
                   leading: Icon(
                     FluentIcons.pin_24_filled,
                     color: AppColors.primary,
                   ),
                   title: const Text(
-                    "Pins",
+                    "Pinned",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
