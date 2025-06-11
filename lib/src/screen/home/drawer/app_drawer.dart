@@ -1,6 +1,7 @@
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -278,7 +279,10 @@ class _AppDrawerState extends State<AppDrawer> {
                 const Gap(5),
                 ListTile(
                   minTileHeight: 40,
-                  onTap: () async {},
+                  onTap: () async {
+                    Navigator.pop(context);
+                    showBugReportDialog(context);
+                  },
                   leading: Icon(
                     FluentIcons.bug_24_filled,
                     color: AppColors.primary,
