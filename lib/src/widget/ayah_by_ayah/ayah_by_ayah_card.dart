@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/add_note_popup/add_note_popup.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
@@ -136,7 +137,9 @@ Widget getAyahByAyahCard({
                     side: BorderSide(color: AppColors.primary),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  showAddNotePopup(context, ayahKey);
+                },
                 tooltip: "Add Note",
                 icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
               ),
