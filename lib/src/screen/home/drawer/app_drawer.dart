@@ -1,5 +1,4 @@
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/pins/pins_page.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
@@ -15,6 +14,7 @@ import "package:share_plus/share_plus.dart"; // Added import
 import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
+import "../../collections/collection_page.dart";
 import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
@@ -149,7 +149,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder:
-                            (context) => const PinsPage(
+                            (context) => const CollectionPage(
                               collectionType: CollectionType.notes,
                             ),
                       ),
@@ -172,7 +172,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder:
-                            (context) => const PinsPage(
+                            (context) => const CollectionPage(
                               collectionType: CollectionType.pinned,
                             ),
                       ),

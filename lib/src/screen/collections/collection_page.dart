@@ -5,15 +5,15 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
-class PinsPage extends StatefulWidget {
+class CollectionPage extends StatefulWidget {
   final CollectionType collectionType;
-  const PinsPage({super.key, required this.collectionType});
+  const CollectionPage({super.key, required this.collectionType});
 
   @override
-  State<PinsPage> createState() => _PinsPageState();
+  State<CollectionPage> createState() => _CollectionPageState();
 }
 
-class _PinsPageState extends State<PinsPage> {
+class _CollectionPageState extends State<CollectionPage> {
   TextEditingController searchTextFieldController = TextEditingController();
   List listOfPinned = [];
   @override
