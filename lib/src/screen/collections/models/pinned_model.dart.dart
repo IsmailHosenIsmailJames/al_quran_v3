@@ -1,25 +1,22 @@
 import "dart:convert";
 
-class NoteModel {
+class PinnedModel {
   String id;
-  List<String> ayahKey;
-  String text;
+  String ayahKey;
   DateTime createdAt;
   DateTime updatedAt;
 
-  NoteModel({
+  PinnedModel({
     required this.id,
     required this.ayahKey,
-    required this.text,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory NoteModel.fromJson(Map<String, dynamic> json) {
-    return NoteModel(
+  factory PinnedModel.fromJson(Map<String, dynamic> json) {
+    return PinnedModel(
       id: json["id"] as String,
-      ayahKey: List<String>.from(json["ayahKey"] ?? []),
-      text: json["text"] as String,
+      ayahKey: json["ayahKey"],
       createdAt: DateTime.parse(json["createdAt"] as String),
       updatedAt: DateTime.parse(json["updatedAt"] as String),
     );
@@ -29,7 +26,6 @@ class NoteModel {
     return {
       "id": id,
       "ayahKey": ayahKey,
-      "text": text,
       "createdAt": createdAt.toIso8601String(),
       "updatedAt": updatedAt.toIso8601String(),
     };
@@ -37,21 +33,19 @@ class NoteModel {
 
   String toJsonString() => json.encode(toJson());
 
-  factory NoteModel.fromJsonString(String jsonString) =>
-      NoteModel.fromJson(json.decode(jsonString) as Map<String, dynamic>);
+  factory PinnedModel.fromJsonString(String jsonString) =>
+      PinnedModel.fromJson(json.decode(jsonString) as Map<String, dynamic>);
 
-  NoteModel copyWith({
+  PinnedModel copyWith({
     String? id,
-    List<String>? ayahKey,
-    String? text,
+    String? ayahKey,
     List<String>? collectionIds,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return NoteModel(
+    return PinnedModel(
       id: id ?? this.id,
       ayahKey: ayahKey ?? this.ayahKey,
-      text: text ?? this.text,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

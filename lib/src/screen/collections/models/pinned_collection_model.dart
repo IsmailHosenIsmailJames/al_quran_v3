@@ -1,36 +1,36 @@
 import "dart:convert";
 
-import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
+import "package:al_quran_v3/src/screen/collections/models/pinned_model.dart.dart";
 
-class NoteCollectionModel {
+class PinnedCollectionModel {
   String id;
   String name;
   String colorHex;
-  List<NoteModel> notes;
+  List<PinnedModel> pinned;
   DateTime createdAt;
   DateTime updatedAt;
 
-  NoteCollectionModel({
+  PinnedCollectionModel({
     required this.id,
     required this.name,
     this.colorHex = "808080",
-    required this.notes,
+    required this.pinned,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory NoteCollectionModel.fromJson(Map<String, dynamic> json) {
-    return NoteCollectionModel(
+  factory PinnedCollectionModel.fromJson(Map<String, dynamic> json) {
+    return PinnedCollectionModel(
       id: json["id"] as String,
       name: json["name"] as String,
       colorHex: json["colorHex"] as String? ?? "808080",
       createdAt: DateTime.parse(json["createdAt"] as String),
       updatedAt: DateTime.parse(json["updatedAt"] as String),
-      notes:
-          ((json["notes"] ?? []) as List<dynamic>)
+      pinned:
+          ((json["pinned"] ?? []) as List<dynamic>)
               .map(
                 (noteJson) =>
-                    NoteModel.fromJson(Map<String, dynamic>.from(noteJson)),
+                    PinnedModel.fromJson(Map<String, dynamic>.from(noteJson)),
               )
               .toList(),
     );
@@ -41,7 +41,7 @@ class NoteCollectionModel {
       "id": id,
       "name": name,
       "colorHex": colorHex,
-      "notes": notes.map((note) => note.toJson()).toList(),
+      "pinned": pinned.map((note) => note.toJson()).toList(),
       "createdAt": createdAt.toIso8601String(),
       "updatedAt": updatedAt.toIso8601String(),
     };
@@ -49,24 +49,24 @@ class NoteCollectionModel {
 
   String toJsonString() => json.encode(toJson());
 
-  factory NoteCollectionModel.fromJsonString(String jsonString) =>
-      NoteCollectionModel.fromJson(
+  factory PinnedCollectionModel.fromJsonString(String jsonString) =>
+      PinnedCollectionModel.fromJson(
         json.decode(jsonString) as Map<String, dynamic>,
       );
 
-  NoteCollectionModel copyWith({
+  PinnedCollectionModel copyWith({
     String? id,
     String? name,
     String? colorHex,
-    List<NoteModel>? notes,
+    List<PinnedModel>? pinned,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return NoteCollectionModel(
+    return PinnedCollectionModel(
       id: id ?? this.id,
       name: name ?? this.name,
       colorHex: colorHex ?? this.colorHex,
-      notes: notes ?? this.notes,
+      pinned: pinned ?? this.pinned,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
