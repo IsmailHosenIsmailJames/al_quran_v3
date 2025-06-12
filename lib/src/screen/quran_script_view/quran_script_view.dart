@@ -196,8 +196,56 @@ class _PageByPageViewState extends State<QuranScriptView> {
       );
     }
 
+    for (int i = 0; i < allAyahsKey.length; i++) {
+      log(allAyahsKey[i].toString());
+      ayahKeyToKey["${allAyahsKey[i]}"] = GlobalKey();
+    }
+
+    if (widget.toScrollKey != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        // Recalculate targetIndex here if pagesInfoWithSurahMetaData is populated late
+        int? targetIndex;
+        for (int i = 0; i < pagesInfoWithSurahMetaData.length; i++) {
+          var currentItemData = pagesInfoWithSurahMetaData[i];
+          if (currentItemData is List<dynamic> && currentItemData.isNotEmpty) {
+            List<String> ayahsKeyOfPage = List<String>.from(currentItemData);
+            // Assuming widget.toScrollKey might be the first key of a block
+            if (ayahsKeyOfPage.first == widget.toScrollKey) {
+              targetIndex = i;
+              break;
+            }
+            // Or if it can be any key within the block
+            if (ayahsKeyOfPage.contains(widget.toScrollKey)) {
+              targetIndex = i;
+              break;
+            }
+          }
+        }
+
+        if (targetIndex != null && itemScrollController.isAttached) {
+          await itemScrollController.scrollTo(
+            index: targetIndex,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.linear,
+          );
+          final GlobalKey? specificAyahKey = ayahKeyToKey[widget.toScrollKey!];
+          if (specificAyahKey != null &&
+              specificAyahKey.currentContext != null) {
+            Scrollable.ensureVisible(
+              specificAyahKey.currentContext!,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOutCubic,
+              alignment: 0.0,
+            );
+          }
+        }
+      });
+    }
+
     super.initState();
   }
+
+  Map<String, GlobalKey> ayahKeyToKey = {};
 
   ItemScrollController itemScrollController = ItemScrollController();
   ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
@@ -279,9 +327,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   itemPositionsListener: itemPositionsListener,
                   scrollOffsetController: scrollOffsetController,
                   scrollOffsetListener: scrollOffsetListener,
-                  initialScrollIndex:
-                      (int.tryParse(widget.toScrollKey!.split(":").last) ?? 1) -
-                      1,
                   semanticChildCount: pagesInfoWithSurahMetaData.length,
 
                   itemBuilder: (context, index) {
@@ -373,6 +418,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                 child: Column(
                   children: List.generate(ayahsKeyOfPage.length, (idx) {
                     return getAyahByAyahCard(
+                      key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                       ayahKey: ayahsKeyOfPage[idx],
                       quranScriptType: quranScriptType,
                       context: context,
