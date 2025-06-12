@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/add_note_popup/add_note_popup.dart";
+import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
@@ -24,6 +24,8 @@ import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
+
+import "../add_collection_popup/add_note_popup.dart";
 
 Widget getAyahByAyahCard({
   dynamic key,
@@ -158,14 +160,10 @@ Widget getAyahByAyahCard({
                   ),
                 ),
                 onPressed: () {
-                  log(
-                    Hive.box(
-                      "segmented_quran_recitation",
-                    ).get("1:1").toString(),
-                  );
+                  showAddToPinnedPopup(context, ayahKey);
                 },
-                tooltip: "Bookmark",
-                icon: const Icon(Icons.bookmark_added, size: 18),
+                tooltip: "Pin to Collection",
+                icon: const Icon(FluentIcons.pin_24_filled, size: 18),
               ),
             ),
             const Gap(5),
