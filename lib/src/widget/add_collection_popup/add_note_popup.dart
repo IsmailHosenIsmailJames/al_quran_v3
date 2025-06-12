@@ -1,15 +1,18 @@
-import 'dart:developer';
+import "package:al_quran_v3/src/screen/collections/collection_page.dart";
+import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
+import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:fluttertoast/fluttertoast.dart";
+import "package:gap/gap.dart";
+import "package:hive/hive.dart";
+import "package:uuid/uuid.dart";
 
-import 'package:al_quran_v3/src/screen/collections/models/note_collection_model.dart';
-import 'package:al_quran_v3/src/screen/collections/models/note_model.dart';
-import 'package:al_quran_v3/src/theme/colors/app_colors.dart';
-import 'package:al_quran_v3/src/theme/values/values.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-// import 'package:uuid/uuid.dart'; // For generating unique IDs
-// var uuid = Uuid();
+import "../../screen/collections/common_function.dart";
+
+var uuid = const Uuid();
 
 Future<void> showAddNotePopup(BuildContext context, String ayahKey) async {
   showDialog(
@@ -40,70 +43,20 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   final _noteEditingController = TextEditingController();
   final _newCollectionNameController = TextEditingController();
 
-  bool _selectCollectionStep = false;
-  bool _addNewCollectionStep = false;
+  bool _selectNoteCollectionStep = false;
+  bool _addNewNoteCollectionStep = false;
 
-  List<NoteCollectionModel> _availableCollections = [];
-  final Set<String> _selectedCollectionIds = {};
+  List<NoteCollectionModel> _availableNoteCollections = [];
+  final Set<String> _selectedNoteCollectionIds = {};
 
   @override
   void initState() {
     super.initState();
-    _fetchCollections();
-  }
-
-  void _fetchCollections() {
-    // TODO: Fetch existing collections from your data source (e.g., Hive)
-    // For now, using placeholder data
-    setState(() {
-      _availableCollections = [
-        NoteCollectionModel(
-          id: "col1",
-          name: "Reflections",
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        ),
-        NoteCollectionModel(
-          id: "col2",
-          name: "Favourites",
-          colorHex: "FFAB00",
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        ),
-      ];
+    fetchNoteCollections().then((value) {
+      setState(() {
+        _availableNoteCollections = value;
+      });
     });
-  }
-
-  void _handleAddNewCollection() {
-    if (_newCollectionNameController.text.trim().isEmpty) {
-      // Optionally, show an error if the name is empty
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Collection name cannot be empty.")),
-      );
-      return;
-    }
-    final now = DateTime.now();
-    // String newId = uuid.v4(); // TODO: Generate Unique ID
-    String newId =
-        "col_${DateTime.now().millisecondsSinceEpoch}"; // Placeholder ID
-
-    final newCollection = NoteCollectionModel(
-      id: newId,
-      name: _newCollectionNameController.text.trim(),
-      // colorHex: // TODO: Add a color picker or default color logic
-      createdAt: now,
-      updatedAt: now,
-    );
-
-    // TODO: Save the newCollection to your data source (e.g., Hive)
-    // For UI update, add to local list and select it
-    setState(() {
-      _availableCollections.add(newCollection);
-      _selectedCollectionIds.add(newCollection.id);
-      _newCollectionNameController.clear();
-      _addNewCollectionStep = false; // Hide the input field after adding
-    });
-    log("Added new collection: ${newCollection.toJsonString()}");
   }
 
   void _handleSaveNote() {
@@ -115,26 +68,28 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
     }
 
     final now = DateTime.now();
-    // String newNoteId = uuid.v4(); // TODO: Generate Unique ID
-    String newNoteId =
-        "note_${DateTime.now().millisecondsSinceEpoch}"; // Placeholder ID
+    String newNoteId = uuid.v4();
 
     final newNote = NoteModel(
       id: newNoteId,
-      ayahKey: widget.ayahKey, // Use the ayahKey from the widget
+      ayahKey: [widget.ayahKey], // Use the ayahKey from the widget
       text: _noteEditingController.text.trim(),
-      collectionIds: _selectedCollectionIds.toList(),
       createdAt: now,
       updatedAt: now,
     );
 
-    // TODO: Save the newNote to your data source (e.g., Hive)
-    log("Saving note: ${newNote.toJsonString()}");
+    final notesBox = Hive.box(CollectionType.notes.name);
+    for (String collectionID in _selectedNoteCollectionIds) {
+      NoteCollectionModel collection = NoteCollectionModel.fromJson(
+        Map<String, dynamic>.from(notesBox.get(collectionID)),
+      );
+      collection.updatedAt = now;
+      collection.notes.add(newNote);
+      notesBox.put(collectionID, collection.toJson());
+    }
 
     Navigator.pop(context); // Close the dialog
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text("Note saved successfully!")));
+    Fluttertoast.showToast(msg: "Note saved successfully!");
   }
 
   @override
@@ -157,18 +112,18 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
               const Icon(FluentIcons.note_add_24_regular),
               const Gap(10),
               Text(
-                _selectCollectionStep ? "Select Collections" : "Add Note",
+                _selectNoteCollectionStep ? "Select Collections" : "Add Note",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
-              if (_selectCollectionStep && !_addNewCollectionStep)
+              if (_selectNoteCollectionStep && !_addNewNoteCollectionStep)
                 TextButton.icon(
                   onPressed: () {
                     setState(() {
-                      _addNewCollectionStep = true;
+                      _addNewNoteCollectionStep = true;
                     });
                   },
                   iconAlignment: IconAlignment.end,
@@ -179,13 +134,13 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
           ),
           const Divider(),
           // Animated visibility for collection selection step
-          if (_selectCollectionStep)
+          if (_selectNoteCollectionStep)
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: _addNewCollectionStep ? 270 : 220, // Adjusted height
+              height: _addNewNoteCollectionStep ? 270 : 220, // Adjusted height
               child: Column(
                 children: [
-                  if (_addNewCollectionStep)
+                  if (_addNewNoteCollectionStep)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: SizedBox(
@@ -222,7 +177,25 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                   backgroundColor: AppColors.primaryShade100,
                                   foregroundColor: AppColors.primary,
                                 ),
-                                onPressed: _handleAddNewCollection,
+                                onPressed: () async {
+                                  NoteCollectionModel? newCollection =
+                                      await handleAddNewNoteCollection(
+                                        _newCollectionNameController.text
+                                            .trim(),
+                                      );
+                                  if (newCollection != null) {
+                                    setState(() {
+                                      _availableNoteCollections.add(
+                                        newCollection,
+                                      );
+                                      _selectedNoteCollectionIds.add(
+                                        newCollection.id,
+                                      );
+                                      _newCollectionNameController.clear();
+                                      _addNewNoteCollectionStep = false;
+                                    });
+                                  }
+                                },
                                 icon: const Icon(Icons.done_rounded),
                               ),
                             ),
@@ -230,18 +203,20 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                         ),
                       ),
                     ),
-                  if (_addNewCollectionStep) const Gap(10),
+                  if (_addNewNoteCollectionStep) const Gap(10),
                   Expanded(
                     child:
-                        _availableCollections.isEmpty && !_addNewCollectionStep
+                        _availableNoteCollections.isEmpty &&
+                                !_addNewNoteCollectionStep
                             ? const Center(
                               child: Text("No collections yet. Add a new one!"),
                             )
                             : ListView.builder(
-                              itemCount: _availableCollections.length,
+                              itemCount: _availableNoteCollections.length,
                               itemBuilder: (context, index) {
-                                final collection = _availableCollections[index];
-                                final isSelected = _selectedCollectionIds
+                                final collection =
+                                    _availableNoteCollections[index];
+                                final isSelected = _selectedNoteCollectionIds
                                     .contains(collection.id);
                                 return ListTile(
                                   minTileHeight: 40,
@@ -252,7 +227,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                     ),
                                   ),
                                   title: Text(collection.name),
-                                  // subtitle: Text("${collection.noteCount} notes"), // TODO: Add note count to collection model if needed
+                                  subtitle: Text(
+                                    "${collection.notes.length} notes",
+                                  ),
                                   trailing: IconButton(
                                     icon: Icon(
                                       isSelected
@@ -267,11 +244,11 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                     onPressed: () {
                                       setState(() {
                                         if (isSelected) {
-                                          _selectedCollectionIds.remove(
+                                          _selectedNoteCollectionIds.remove(
                                             collection.id,
                                           );
                                         } else {
-                                          _selectedCollectionIds.add(
+                                          _selectedNoteCollectionIds.add(
                                             collection.id,
                                           );
                                         }
@@ -281,11 +258,11 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                   onTap: () {
                                     setState(() {
                                       if (isSelected) {
-                                        _selectedCollectionIds.remove(
+                                        _selectedNoteCollectionIds.remove(
                                           collection.id,
                                         );
                                       } else {
-                                        _selectedCollectionIds.add(
+                                        _selectedNoteCollectionIds.add(
                                           collection.id,
                                         );
                                       }
@@ -298,7 +275,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                 ],
               ),
             ),
-          if (!_selectCollectionStep)
+          if (!_selectNoteCollectionStep)
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -322,7 +299,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
             height: 45,
             child: Row(
               children: [
-                if (_selectCollectionStep) // Add a back button for the collection step
+                if (_selectNoteCollectionStep) // Add a back button for the collection step
                   SizedBox(
                     width: 60,
                     child: IconButton(
@@ -332,14 +309,14 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                       icon: const Icon(Icons.arrow_back_rounded),
                       onPressed: () {
                         setState(() {
-                          _selectCollectionStep = false;
-                          _addNewCollectionStep =
+                          _selectNoteCollectionStep = false;
+                          _addNewNoteCollectionStep =
                               false; // Also reset this if going back
                         });
                       },
                     ),
                   ),
-                Gap(10),
+                const Gap(10),
                 Expanded(
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
@@ -348,7 +325,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                       ),
                     ),
                     onPressed: () {
-                      if (!_selectCollectionStep) {
+                      if (!_selectNoteCollectionStep) {
                         if (_noteEditingController.text.trim().isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -358,23 +335,27 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                           return;
                         }
                         setState(() {
-                          _selectCollectionStep = true;
+                          _selectNoteCollectionStep = true;
                         });
                       } else {
-                        _handleSaveNote();
+                        if (_selectedNoteCollectionIds.isEmpty) {
+                          Fluttertoast.showToast(msg: "No Collection selected");
+                        } else {
+                          _handleSaveNote();
+                        }
                       }
                     },
                     iconAlignment:
-                        _selectCollectionStep
+                        _selectNoteCollectionStep
                             ? IconAlignment.start
                             : IconAlignment.end,
                     icon: Icon(
-                      _selectCollectionStep
+                      _selectNoteCollectionStep
                           ? Icons.done_all_rounded
                           : Icons.arrow_forward_rounded,
                     ),
                     label: Text(
-                      _selectCollectionStep
+                      _selectNoteCollectionStep
                           ? "Save Note"
                           : "Next: Select Collections",
                     ),
@@ -386,5 +367,31 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
         ],
       ),
     );
+  }
+}
+
+Future<void> saveDemoNoteCollection() async {
+  final box = Hive.box(CollectionType.notes.name);
+  if (box.values.isEmpty) {
+    List<NoteCollectionModel> collections = [
+      NoteCollectionModel(
+        id: "col1",
+        name: "Reflections",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        notes: [],
+      ),
+      NoteCollectionModel(
+        id: "col2",
+        name: "Favourites",
+        colorHex: "FFAB00",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        notes: [],
+      ),
+    ];
+    for (NoteCollectionModel model in collections) {
+      await box.put(model.id, model.toJson());
+    }
   }
 }
