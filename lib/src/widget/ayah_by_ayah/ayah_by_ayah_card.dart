@@ -25,6 +25,7 @@ import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
 Widget getAyahByAyahCard({
+  dynamic key,
   required String ayahKey,
   required QuranScriptType quranScriptType,
   required BuildContext context,
@@ -49,6 +50,7 @@ Widget getAyahByAyahCard({
     wordByWord = Hive.box("quran_word_by_word").get(ayahKey) ?? [];
   }
   return Container(
+    key: key,
     padding: const EdgeInsets.all(5),
     margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
     decoration: BoxDecoration(
