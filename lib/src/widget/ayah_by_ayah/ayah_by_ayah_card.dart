@@ -32,6 +32,7 @@ Widget getAyahByAyahCard({
   required String ayahKey,
   required QuranScriptType quranScriptType,
   required BuildContext context,
+  bool? showFullKey,
 }) {
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
@@ -52,6 +53,9 @@ Widget getAyahByAyahCard({
   if (supportsWordByWord) {
     wordByWord = Hive.box("quran_word_by_word").get(ayahKey) ?? [];
   }
+  SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+    metaDataSurah["$surahNumber"],
+  );
   return Container(
     key: key,
     padding: const EdgeInsets.all(5),
@@ -69,7 +73,7 @@ Widget getAyahByAyahCard({
           children: [
             Container(
               decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.5),
+                color: AppColors.primaryShade300,
                 borderRadius: BorderRadius.circular(roundedRadius - 4),
               ),
               padding: const EdgeInsets.only(
@@ -78,7 +82,11 @@ Widget getAyahByAyahCard({
                 bottom: 3,
                 top: 3,
               ),
-              child: Text(ayahNumber.toString()),
+              child: Text(
+                showFullKey == true
+                    ? "${surahInfoModel.nameSimple}\nAyah: $ayahKey"
+                    : ayahNumber.toString(),
+              ),
             ),
             const Spacer(),
 
