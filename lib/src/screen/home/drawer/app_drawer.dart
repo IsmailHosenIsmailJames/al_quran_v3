@@ -6,12 +6,12 @@ import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-import "package:flutter_svg/svg.dart";
+// import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart"; // Added import
-import "package:simple_icons/simple_icons.dart";
+// import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "../../collections/collection_page.dart";
@@ -405,83 +405,83 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
-
-          Container(
-            padding: const EdgeInsets.only(
-              top: 5,
-              bottom: 10,
-              right: 10,
-              left: 10,
-            ),
-            decoration: BoxDecoration(
-              color:
-                  Theme.of(context).brightness == Brightness.light
-                      ? Colors.grey.shade100
-                      : Colors.grey.shade900,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primaryShade100,
-                    ),
-                    onPressed: () {
-                      // open source code of the project
-                      launchUrl(
-                        Uri.parse(
-                          "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
-                        ),
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
-                    icon: const Icon(SimpleIcons.github),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primaryShade100,
-                    ),
-                    onPressed: () {
-                      // invitation of discord community of this project
-                      launchUrl(
-                        Uri.parse("https://discord.gg/BcyaF8jHR9"),
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
-                    icon: const Icon(
-                      SimpleIcons.discord,
-                      color: Color(0xff5865f2),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primaryShade100,
-                      padding: EdgeInsets.zero,
-                    ),
-                    onPressed: () {
-                      // mail to me in gmail: "md.ismailhosenismailjames@gmail.com"
-                      launchUrl(
-                        Uri.parse("mailto:md.ismailhosenismailjames@gmail.com"),
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
-                    icon: SvgPicture.asset("assets/img/gmail.svg"),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // security issue : project moved to closed source
+          // Container(
+          //   padding: const EdgeInsets.only(
+          //     top: 5,
+          //     bottom: 10,
+          //     right: 10,
+          //     left: 10,
+          //   ),
+          //   decoration: BoxDecoration(
+          //     color:
+          //         Theme.of(context).brightness == Brightness.light
+          //             ? Colors.grey.shade100
+          //             : Colors.grey.shade900,
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       SizedBox(
+          //         height: 40,
+          //         width: 40,
+          //         child: IconButton(
+          //           style: IconButton.styleFrom(
+          //             backgroundColor: AppColors.primaryShade100,
+          //           ),
+          //           onPressed: () {
+          //             // open source code of the project
+          //             launchUrl(
+          //               Uri.parse(
+          //                 "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
+          //               ),
+          //               mode: LaunchMode.externalApplication,
+          //             );
+          //           },
+          //           icon: const Icon(SimpleIcons.github),
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: 40,
+          //         width: 40,
+          //         child: IconButton(
+          //           style: IconButton.styleFrom(
+          //             backgroundColor: AppColors.primaryShade100,
+          //           ),
+          //           onPressed: () {
+          //             // invitation of discord community of this project
+          //             launchUrl(
+          //               Uri.parse("https://discord.gg/BcyaF8jHR9"),
+          //               mode: LaunchMode.externalApplication,
+          //             );
+          //           },
+          //           icon: const Icon(
+          //             SimpleIcons.discord,
+          //             color: Color(0xff5865f2),
+          //           ),
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: 40,
+          //         width: 40,
+          //         child: IconButton(
+          //           style: IconButton.styleFrom(
+          //             backgroundColor: AppColors.primaryShade100,
+          //             padding: EdgeInsets.zero,
+          //           ),
+          //           onPressed: () {
+          //             // mail to me in gmail: "md.ismailhosenismailjames@gmail.com"
+          //             launchUrl(
+          //               Uri.parse("mailto:md.ismailhosenismailjames@gmail.com"),
+          //               mode: LaunchMode.externalApplication,
+          //             );
+          //           },
+          //           icon: SvgPicture.asset("assets/img/gmail.svg"),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

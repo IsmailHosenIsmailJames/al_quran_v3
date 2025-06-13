@@ -39,35 +39,36 @@ Future<void> showBugReportDialog(BuildContext context) async {
             ),
             const Divider(),
             const Gap(10),
-            ListTile(
-              minTileHeight: 40,
-              onTap: () async {
-                final Uri githubUrl = Uri.parse(
-                  "https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues/new?body=**Device%20Information:**%0A$deviceInfoString%0A%0A**App%20Information:**%0A$appInfoString%0A%0A**Describe%20the%20bug:**%0A%0A**To%20Reproduce:**%0A%0A**Expected%20behavior:**%0A%0A**Screenshots%20(optional):**",
-                );
-                if (!await launchUrl(githubUrl)) {}
-                Navigator.pop(context);
-              },
-              leading: const Icon(SimpleIcons.github),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text("On Github"),
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: AppColors.primaryShade100,
-                    ),
-                    child: Text(
-                      "Recommended",
-                      style: TextStyle(color: AppColors.primary, fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // security issue. Project back to closed source
+            // ListTile(
+            //   minTileHeight: 40,
+            //   onTap: () async {
+            //     final Uri githubUrl = Uri.parse(
+            //       "https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues/new?body=**Device%20Information:**%0A$deviceInfoString%0A%0A**App%20Information:**%0A$appInfoString%0A%0A**Describe%20the%20bug:**%0A%0A**To%20Reproduce:**%0A%0A**Expected%20behavior:**%0A%0A**Screenshots%20(optional):**",
+            //     );
+            //     if (!await launchUrl(githubUrl)) {}
+            //     Navigator.pop(context);
+            //   },
+            //   leading: const Icon(SimpleIcons.github),
+            //   title: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       const Text("On Github"),
+            //       Container(
+            //         padding: const EdgeInsets.all(4),
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(30),
+            //           color: AppColors.primaryShade100,
+            //         ),
+            //         child: Text(
+            //           "Recommended",
+            //           style: TextStyle(color: AppColors.primary, fontSize: 12),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const Gap(5),
             ListTile(
               onTap: () async {
