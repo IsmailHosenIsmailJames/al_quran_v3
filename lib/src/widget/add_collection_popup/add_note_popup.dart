@@ -221,7 +221,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                 return ListTile(
                                   minTileHeight: 40,
                                   leading: Icon(
-                                    Icons.folder_rounded,
+                                    FluentIcons.folder_24_filled,
                                     color: Color(
                                       int.parse("0xFF${collection.colorHex}"),
                                     ),
