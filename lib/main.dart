@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:io";
 
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
@@ -28,6 +29,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
 Map<String, dynamic> tajweedScript = {};
@@ -44,7 +46,22 @@ Map<String, dynamic> metaDataSurah = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Alarm.init();
+  if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(600, 900),
+      maximumSize: Size(1000, 1900),
+      minimumSize: Size(400, 700),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.normal,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   await JustAudioBackground.init(
     androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
@@ -90,15 +107,18 @@ Future<void> main() async {
     await rootBundle.loadString("assets/meta_data/Surah.json"),
   );
 
-  await PrayersTimeFunction.init();
+  if (Platform.isIOS || Platform.isAndroid) {
+    await Alarm.init();
+    await PrayersTimeFunction.init();
+    await Workmanager().initialize(callbackDispatcher);
+    await Workmanager().registerPeriodicTask(
+      "prayer_time_bg",
+      "set_prayer_time_reminder",
+      frequency: const Duration(hours: 1),
+    );
+    await setReminderForPrayers();
+  }
 
-  await Workmanager().initialize(callbackDispatcher);
-  await Workmanager().registerPeriodicTask(
-    "prayer_time_bg",
-    "set_prayer_time_reminder",
-    frequency: const Duration(hours: 1),
-  );
-  await setReminderForPrayers();
   runApp(MyApp(preferences: preferences));
 }
 
