@@ -4,7 +4,7 @@ class ScriptInfo {
   int surahNumber;
   int ayahNumber;
   QuranScriptType quranScriptType;
-  double? fontSize;
+  TextStyle? textStyle;
   TextAlign? textAlign;
   int? limitWord;
   int? wordIndex;
@@ -16,7 +16,7 @@ class ScriptInfo {
     required this.surahNumber,
     required this.ayahNumber,
     required this.quranScriptType,
-    this.fontSize,
+    this.textStyle,
     this.textAlign,
     this.limitWord,
     this.wordIndex,

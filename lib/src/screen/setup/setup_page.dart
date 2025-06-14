@@ -412,7 +412,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                     ayahNumber:
                                         selectedAyahKey.split(":").last.toInt(),
                                     quranScriptType: quranScriptTypeState,
-                                    fontSize: 24,
+                                    textStyle: const TextStyle(fontSize: 24),
                                   ),
                                 );
                               },

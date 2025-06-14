@@ -340,7 +340,7 @@ class _AudioPageState extends State<AudioPage> {
                             ayahNumber:
                                 ayahKeyState.current.split(":")[1].toInt(),
                             quranScriptType: QuranScriptType.tajweed,
-                            fontSize: 24,
+                            textStyle: const TextStyle(fontSize: 24),
                             textAlign: TextAlign.center,
                             skipWordTap: true,
                             showWordHighlights: false,
