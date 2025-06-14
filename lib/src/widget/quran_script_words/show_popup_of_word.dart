@@ -125,7 +125,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                               int.parse(widget.wordKeys[index].split(":")[2]) -
                               1,
                           quranScriptType: widget.scriptCategory,
-                          fontSize: 40,
+                          textStyle: const TextStyle(fontSize: 40),
                           skipWordTap: true,
                         ),
                       ),
@@ -133,7 +133,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                       if (supportsWordByWord)
                         Text(
                           wordByWord[index].toString().capitalize(),
-                          style: const TextStyle(fontSize: 26),
+                          style: const TextStyle(fontSize: 22),
                         ),
                       const Gap(15),
                       BlocBuilder<WordPlayingStateCubit, String?>(

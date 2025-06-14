@@ -84,7 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       surahNumber: selectedAyahKey.split(":").first.toInt(),
                       ayahNumber: selectedAyahKey.split(":").last.toInt(),
                       quranScriptType: quranScriptTypeState,
-                      fontSize: 24,
+                      textStyle: const TextStyle(fontSize: 24),
                     ),
                   );
                 },
