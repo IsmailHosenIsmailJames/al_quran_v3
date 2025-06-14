@@ -1,3 +1,5 @@
+import "dart:io";
+
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
@@ -65,8 +67,8 @@ class _HomePageState extends State<HomePage> {
       body:
           [
             const QuranPage(),
-            const PrayerTimePage(),
-            const QiblaDirection(),
+            if (Platform.isIOS || Platform.isAndroid) const PrayerTimePage(),
+            if (Platform.isIOS || Platform.isAndroid) const QiblaDirection(),
             const AudioPage(),
           ][_selectedIndex],
 
@@ -85,22 +87,24 @@ class _HomePageState extends State<HomePage> {
             ),
             label: "Quran",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 1
-                  ? FluentIcons.clock_24_filled
-                  : FluentIcons.clock_24_regular,
+          if (Platform.isIOS || Platform.isAndroid)
+            BottomNavigationBarItem(
+              icon: Icon(
+                _selectedIndex == 1
+                    ? FluentIcons.clock_24_filled
+                    : FluentIcons.clock_24_regular,
+              ),
+              label: "Prayers",
             ),
-            label: "Prayers",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 2
-                  ? FluentIcons.compass_northwest_24_filled
-                  : FluentIcons.compass_northwest_24_regular,
+          if (Platform.isIOS || Platform.isAndroid)
+            BottomNavigationBarItem(
+              icon: Icon(
+                _selectedIndex == 2
+                    ? FluentIcons.compass_northwest_24_filled
+                    : FluentIcons.compass_northwest_24_regular,
+              ),
+              label: "Qibla",
             ),
-            label: "Qibla",
-          ),
           BottomNavigationBarItem(
             icon: Icon(
               _selectedIndex == 3

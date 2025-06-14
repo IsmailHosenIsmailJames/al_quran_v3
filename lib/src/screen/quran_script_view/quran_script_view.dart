@@ -197,7 +197,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
     }
 
     for (int i = 0; i < allAyahsKey.length; i++) {
-      log(allAyahsKey[i].toString());
       ayahKeyToKey["${allAyahsKey[i]}"] = GlobalKey();
     }
 
