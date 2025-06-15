@@ -6,12 +6,12 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart";
+import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/resources/surah_info/info.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
-import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -24,12 +24,13 @@ import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:dartx/dartx.dart";
 import "package:dio/dio.dart" as dio;
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
-import "package:toastification/toastification.dart";
 
 import "../settings/cubit/quran_script_type_cubit.dart";
 
@@ -99,6 +100,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: downloadResources,
+        tooltip: "Save and Download",
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+        child: const Icon(FluentIcons.arrow_download_24_filled),
+      ),
       body: Stack(
         children: [
           SafeArea(
@@ -418,19 +426,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               },
                             ),
                           ),
-                          const Gap(15),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                foregroundColor: Colors.white,
-                              ),
-                              onPressed: downloadResources,
-                              label: const Text("Save & Download"),
-                              icon: const Icon(Icons.download_rounded),
-                            ),
-                          ),
+                          const Gap(80),
                         ],
                       ),
                     ],
@@ -458,12 +454,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirLanguage == null ||
         translationBook == null ||
         tafsirBook == null) {
-      toastification.show(
-        context: context,
-        title: const Text("Please select required option"),
-        autoCloseDuration: const Duration(seconds: 2),
-        type: ToastificationType.error,
-      );
+      Fluttertoast.showToast(msg: "Please select required option");
     }
     if (fromKey.currentState?.validate() == true) {
       final userBox = Hive.box("user");
