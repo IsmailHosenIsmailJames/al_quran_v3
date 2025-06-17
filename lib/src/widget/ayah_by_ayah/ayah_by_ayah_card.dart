@@ -4,11 +4,11 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -225,7 +225,7 @@ Widget getAyahByAyahCard({
                                     ayahKey: ayahKey,
                                     reciterInfoModel:
                                         context
-                                            .read<SegmentedAudioCubit>()
+                                            .read<SegmentedQuranReciterCubit>()
                                             .state,
                                     instantPlay: true,
                                     isInsideQuran: true,
@@ -258,7 +258,9 @@ Widget getAyahByAyahCard({
                                       ayahKey: ayahKey,
                                       reciterInfoModel:
                                           context
-                                              .read<SegmentedAudioCubit>()
+                                              .read<
+                                                SegmentedQuranReciterCubit
+                                              >()
                                               .state,
                                       instantPlay: true,
                                       isInsideQuran: true,

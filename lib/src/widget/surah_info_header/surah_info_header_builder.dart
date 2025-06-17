@@ -1,11 +1,11 @@
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
@@ -172,7 +172,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             startAyahKey: startAyahKey,
                             endAyahKey: endAyahKey,
                             reciterInfoModel:
-                                context.read<SegmentedAudioCubit>().state,
+                                context
+                                    .read<SegmentedQuranReciterCubit>()
+                                    .state,
                             isInsideQuran: true,
                           );
                         } else if (isCurrentPlaying &&
@@ -191,7 +193,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             startAyahKey: startAyahKey,
                             endAyahKey: endAyahKey,
                             reciterInfoModel:
-                                context.read<SegmentedAudioCubit>().state,
+                                context
+                                    .read<SegmentedQuranReciterCubit>()
+                                    .state,
                             isInsideQuran: true,
                           );
                         }

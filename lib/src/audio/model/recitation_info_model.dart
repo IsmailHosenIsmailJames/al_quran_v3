@@ -8,6 +8,7 @@ class ReciterInfoModel {
   String? style;
   String? img;
   String? bio;
+  String? segmentsUrl;
 
   ReciterInfoModel({
     required this.link,
@@ -17,6 +18,7 @@ class ReciterInfoModel {
     this.style,
     this.img,
     this.bio,
+    this.segmentsUrl,
   });
 
   ReciterInfoModel copyWith({
@@ -27,6 +29,7 @@ class ReciterInfoModel {
     String? style,
     String? img,
     String? bio,
+    String? segmentsUrl,
   }) => ReciterInfoModel(
     link: link ?? this.link,
     name: name ?? this.name,
@@ -36,6 +39,7 @@ class ReciterInfoModel {
     style: style ?? this.style,
     img: img ?? this.img,
     bio: bio ?? this.bio,
+    segmentsUrl: segmentsUrl ?? this.segmentsUrl,
   );
 
   factory ReciterInfoModel.fromJson(String str) =>
@@ -52,6 +56,7 @@ class ReciterInfoModel {
       style: json["style"],
       img: json["img"],
       bio: json["bio"],
+      segmentsUrl: json["segments_url"],
     );
   }
 
@@ -65,5 +70,6 @@ class ReciterInfoModel {
     "style": style,
     "img": img,
     "bio": bio,
+    "segments_url": segmentsUrl,
   };
 }
