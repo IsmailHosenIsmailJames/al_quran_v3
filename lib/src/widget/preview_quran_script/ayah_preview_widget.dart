@@ -36,7 +36,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget() {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${SurahInfoModel.fromMap(metaDataSurah[quranViewState.ayahKey.split(":").first]).nameSimple} - $quranViewState",
+                      "${SurahInfoModel.fromMap(metaDataSurah[quranViewState.ayahKey.split(":").first]).nameSimple} - ${quranViewState.ayahKey}",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -65,7 +65,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget() {
                         quranViewState.ayahKey.split(":").first.toInt(),
                     ayahNumber: quranViewState.ayahKey.split(":").last.toInt(),
                     quranScriptType: quranViewState.quranScriptType,
-                    textStyle: const TextStyle(fontSize: 24),
+                    textStyle: TextStyle(fontSize: quranViewState.fontSize),
                   ),
                 );
               },

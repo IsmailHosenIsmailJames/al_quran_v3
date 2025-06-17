@@ -1,7 +1,5 @@
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 
 class ListOfAyahsViews extends StatefulWidget {
   final List<String> ayahsKey;
@@ -25,8 +23,6 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
         itemBuilder: (context, index) {
           return getAyahByAyahCard(
             ayahKey: widget.ayahsKey[index],
-            quranScriptType:
-                context.read<QuranViewCubit>().state.quranScriptType,
             context: context,
             showFullKey: true,
           );
