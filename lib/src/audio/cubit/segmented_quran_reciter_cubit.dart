@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -29,6 +27,5 @@ List<ReciterInfoModel> getSegmentsSupportedReciters() {
       recitationsInfoList.map((e) => ReciterInfoModel.fromMap(e)).toList();
   recitations =
       recitations.where((element) => element.segmentsUrl != null).toList();
-  log(recitations.toString(), name: "segments reciters");
   return recitations;
 }

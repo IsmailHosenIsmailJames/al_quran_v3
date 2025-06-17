@@ -10,6 +10,7 @@ import "package:gap/gap.dart";
 
 BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
   bool showHeaderOptions = true,
+  bool showOnlyAyah = false,
 }) {
   return BlocBuilder<QuranViewCubit, QuranViewState>(
     builder: (context, quranViewState) {
@@ -53,6 +54,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
             ayahKey: quranViewState.ayahKey,
             context: context,
             showTopOptions: false,
+            showOnlyAyah: showOnlyAyah,
           ),
         ],
       );
