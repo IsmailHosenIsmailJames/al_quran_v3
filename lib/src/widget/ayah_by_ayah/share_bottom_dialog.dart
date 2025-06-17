@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
@@ -16,7 +17,6 @@ import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../../main.dart";
-import "../../screen/settings/cubit/quran_script_type_cubit.dart";
 import "../../screen/surah_list_view/model/surah_info_model.dart";
 
 void showShareBottomDialog(
@@ -36,7 +36,7 @@ void showShareBottomDialog(
   int ayahNumber = ayahKey.split(":").last.toInt();
 
   List quranScriptWord = [];
-  switch (context.read<QuranScriptTypeCubit>().state) {
+  switch (context.read<QuranViewCubit>().state.quranScriptType) {
     case QuranScriptType.tajweed:
       {
         quranScriptWord =

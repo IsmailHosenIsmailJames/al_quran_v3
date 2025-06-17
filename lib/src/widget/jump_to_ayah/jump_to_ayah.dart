@@ -1,5 +1,6 @@
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
@@ -15,7 +16,6 @@ import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:share_plus/share_plus.dart";
 
-import "../../screen/settings/cubit/quran_script_type_cubit.dart";
 import "../ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "../ayah_by_ayah/share_bottom_dialog.dart";
 import "../quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -397,7 +397,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           });
                         }
                         List quranScriptWord = [];
-                        switch (context.read<QuranScriptTypeCubit>().state) {
+                        switch (context
+                            .read<QuranViewCubit>()
+                            .state
+                            .quranScriptType) {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
@@ -431,7 +434,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     ),
                                     ayahKey,
                                     surahInfoModel,
-                                    context.read<QuranScriptTypeCubit>().state,
+                                    context
+                                        .read<QuranViewCubit>()
+                                        .state
+                                        .quranScriptType,
                                     getPlainTextAyahFromTajweedWords(
                                       List<String>.from(quranScriptWord),
                                     ),
@@ -500,7 +506,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           });
                         }
                         List quranScriptWord = [];
-                        switch (context.read<QuranScriptTypeCubit>().state) {
+                        switch (context
+                            .read<QuranViewCubit>()
+                            .state
+                            .quranScriptType) {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
