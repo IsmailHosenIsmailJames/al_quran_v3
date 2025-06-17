@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.dart";
 import "package:flutter/material.dart";

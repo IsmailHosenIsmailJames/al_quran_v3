@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/tajweed_page_render/tajweed_page_renderer.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/uthmani_page_renderer.dart";
