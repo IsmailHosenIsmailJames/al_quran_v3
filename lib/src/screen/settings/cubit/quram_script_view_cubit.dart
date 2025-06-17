@@ -13,6 +13,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           fontSize: Hive.box(
             "user",
           ).get("preview_quran_script_font_size", defaultValue: 24.0),
+          translationFontSize: Hive.box(
+            "user",
+          ).get("preview_translation_font_size", defaultValue: 14.0),
           lineHeight: Hive.box(
             "user",
           ).get("quran_script_heigh_of_line", defaultValue: 2.0),
@@ -45,5 +48,10 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   void changeQuranScriptType(QuranScriptType quranScriptType) {
     Hive.box("user").put("selected_quran_script_type", quranScriptType.name);
     emit(state.copyWith(quranScriptType: quranScriptType));
+  }
+
+  void changeTranslationFontSize(double fontSize) {
+    Hive.box("user").put("preview_translation_font_size", fontSize);
+    emit(state.copyWith(translationFontSize: fontSize));
   }
 }

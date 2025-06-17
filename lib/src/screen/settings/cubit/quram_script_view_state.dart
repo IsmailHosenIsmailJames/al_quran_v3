@@ -5,11 +5,13 @@ class QuranViewState {
   double fontSize;
   double lineHeight;
   QuranScriptType quranScriptType;
+  double translationFontSize;
   QuranViewState({
     required this.ayahKey,
     required this.fontSize,
     required this.lineHeight,
     required this.quranScriptType,
+    required this.translationFontSize,
   });
 
   QuranViewState copyWith({
@@ -17,12 +19,14 @@ class QuranViewState {
     double? fontSize,
     double? lineHeight,
     QuranScriptType? quranScriptType,
+    double? translationFontSize,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
       fontSize: fontSize ?? this.fontSize,
       lineHeight: lineHeight ?? this.lineHeight,
       quranScriptType: quranScriptType ?? this.quranScriptType,
+      translationFontSize: translationFontSize ?? this.translationFontSize,
     );
   }
 }

@@ -359,7 +359,24 @@ class _AudioPageState extends State<AudioPage> {
                         const Divider(height: 5),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: Html(data: capitalizeFirstLatter(translation)),
+                          child: BlocBuilder<QuranViewCubit, QuranViewState>(
+                            builder: (context, state) {
+                              return Html(
+                                data: capitalizeFirstLatter(translation),
+                                style: {
+                                  "*": Style(
+                                    fontSize: FontSize(
+                                      state.translationFontSize,
+                                    ),
+                                    margin: Margins.zero,
+                                    padding: HtmlPaddings.zero,
+                                    alignment: Alignment.center,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
