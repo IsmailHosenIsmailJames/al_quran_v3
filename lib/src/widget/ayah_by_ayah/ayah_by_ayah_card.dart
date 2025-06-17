@@ -35,6 +35,7 @@ Widget getAyahByAyahCard({
   required BuildContext context,
   bool? showFullKey,
   bool showTopOptions = true,
+  bool showOnlyAyah = false,
 }) {
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
@@ -310,29 +311,31 @@ Widget getAyahByAyahCard({
               ),
             ),
             const Gap(5),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Translation:",
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+            if (!showOnlyAyah)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Translation:",
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                ),
               ),
-            ),
-            const Gap(5),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Html(
-                data: capitalizeFirstLatter(translation),
-                style: {
-                  "*": Style(
-                    fontSize: FontSize(state.translationFontSize),
-                    margin: Margins.zero,
-                    padding: HtmlPaddings.zero,
-                  ),
-                },
+            if (!showOnlyAyah) const Gap(5),
+            if (!showOnlyAyah)
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Html(
+                  data: capitalizeFirstLatter(translation),
+                  style: {
+                    "*": Style(
+                      fontSize: FontSize(state.translationFontSize),
+                      margin: Margins.zero,
+                      padding: HtmlPaddings.zero,
+                    ),
+                  },
+                ),
               ),
-            ),
-            if (footNote.keys.isNotEmpty) const Gap(8),
-            if (footNote.keys.isNotEmpty)
+            if (footNote.keys.isNotEmpty && !showOnlyAyah) const Gap(8),
+            if (footNote.keys.isNotEmpty && !showOnlyAyah)
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -341,7 +344,8 @@ Widget getAyahByAyahCard({
                 ),
               ),
             const Gap(5),
-            if (footNote.keys.isNotEmpty)
+
+            if (footNote.keys.isNotEmpty && !showOnlyAyah)
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(

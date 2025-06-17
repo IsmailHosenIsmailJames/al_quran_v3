@@ -355,7 +355,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           const Gap(5),
                           getScriptSelectionSegmentedButtons(),
-                          getAyahPreviewWidget(),
+                          getAyahPreviewWidget(
+                            showHeaderOptions: true,
+                            showOnlyAyah: true,
+                          ),
 
                           const Gap(80),
                         ],
