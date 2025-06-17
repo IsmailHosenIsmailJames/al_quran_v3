@@ -1,8 +1,11 @@
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -81,16 +84,25 @@ Widget getAyahCardForShareAsImage(
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         const Gap(20),
-        Align(
-          alignment: Alignment.center,
-          child: ScriptProcessor(
-            scriptInfo: ScriptInfo(
-              surahNumber: ayahKey.split(":").first.toInt(),
-              ayahNumber: ayahKey.split(":").last.toInt(),
-              quranScriptType: quranScriptType,
-              forImage: true,
-            ),
-          ),
+        BlocBuilder<QuranViewCubit, QuranViewState>(
+          builder: (context, quranViewState) {
+            return Align(
+              alignment: Alignment.center,
+              child: ScriptProcessor(
+                scriptInfo: ScriptInfo(
+                  surahNumber: ayahKey.split(":").first.toInt(),
+                  ayahNumber: ayahKey.split(":").last.toInt(),
+                  quranScriptType: quranScriptType,
+
+                  textStyle: TextStyle(
+                    fontSize: quranViewState.fontSize,
+                    height: quranViewState.lineHeight,
+                  ),
+                  forImage: true,
+                ),
+              ),
+            );
+          },
         ),
         const Gap(15),
         const Text(

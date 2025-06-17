@@ -9,6 +9,8 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
@@ -30,7 +32,6 @@ import "../add_collection_popup/add_note_popup.dart";
 Widget getAyahByAyahCard({
   dynamic key,
   required String ayahKey,
-  required QuranScriptType quranScriptType,
   required BuildContext context,
   bool? showFullKey,
 }) {
@@ -109,29 +110,33 @@ Widget getAyahByAyahCard({
             SizedBox(
               height: 30,
               width: 30,
-              child: IconButton(
-                style: IconButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  foregroundColor: AppColors.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    side: BorderSide(color: AppColors.primary),
-                  ),
-                ),
-                onPressed: () {
-                  showShareBottomDialog(
-                    context,
-                    ayahKey,
-                    SurahInfoModel.fromMap(
-                      metaDataSurah[surahNumber.toString()],
+              child: BlocBuilder<QuranViewCubit, QuranViewState>(
+                builder: (context, state) {
+                  return IconButton(
+                    style: IconButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      foregroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        side: BorderSide(color: AppColors.primary),
+                      ),
                     ),
-                    quranScriptType,
-                    translation,
-                    footNote,
+                    onPressed: () {
+                      showShareBottomDialog(
+                        context,
+                        ayahKey,
+                        SurahInfoModel.fromMap(
+                          metaDataSurah[surahNumber.toString()],
+                        ),
+                        state.quranScriptType,
+                        translation,
+                        footNote,
+                      );
+                    },
+                    tooltip: "Share",
+                    icon: const Icon(FluentIcons.share_24_filled, size: 18),
                   );
                 },
-                tooltip: "Share",
-                icon: const Icon(FluentIcons.share_24_filled, size: 18),
               ),
             ),
             const Gap(5),
@@ -269,12 +274,20 @@ Widget getAyahByAyahCard({
         const Gap(10),
         Align(
           alignment: Alignment.centerRight,
-          child: ScriptProcessor(
-            scriptInfo: ScriptInfo(
-              surahNumber: surahNumber,
-              ayahNumber: ayahNumber,
-              quranScriptType: quranScriptType,
-            ),
+          child: BlocBuilder<QuranViewCubit, QuranViewState>(
+            builder: (context, state) {
+              return ScriptProcessor(
+                scriptInfo: ScriptInfo(
+                  surahNumber: surahNumber,
+                  ayahNumber: ayahNumber,
+                  quranScriptType: state.quranScriptType,
+                  textStyle: TextStyle(
+                    fontSize: state.fontSize,
+                    height: state.lineHeight,
+                  ),
+                ),
+              );
+            },
           ),
         ),
         const Gap(5),
@@ -406,13 +419,22 @@ Widget getAyahByAyahCard({
                                 ),
                                 child: Column(
                                   children: [
-                                    ScriptProcessor(
-                                      scriptInfo: ScriptInfo(
-                                        surahNumber: surahNumber,
-                                        ayahNumber: ayahNumber,
-                                        quranScriptType: quranScriptType,
-                                        wordIndex: index,
-                                      ),
+                                    BlocBuilder<QuranViewCubit, QuranViewState>(
+                                      builder: (context, state) {
+                                        return ScriptProcessor(
+                                          scriptInfo: ScriptInfo(
+                                            surahNumber: surahNumber,
+                                            ayahNumber: ayahNumber,
+                                            quranScriptType:
+                                                state.quranScriptType,
+                                            wordIndex: index,
+                                            textStyle: TextStyle(
+                                              fontSize: state.fontSize,
+                                              height: state.lineHeight,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                     const Gap(5),
                                     Text(wordByWord[index]),

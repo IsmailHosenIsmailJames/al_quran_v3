@@ -5,7 +5,6 @@ import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
@@ -33,8 +32,8 @@ class NonTajweedScriptView extends StatelessWidget {
     }
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.textStyle?.fontSize ?? 24,
+      height: scriptInfo.textStyle?.height ?? 2,
       fontFamily: isUthmani ? "me_quran_volt_newmet" : "IndopakNastaleeq",
-      height: context.read<QuranViewCubit>().state.lineHeight,
     );
     if (scriptInfo.wordIndex != null) {
       return Text.rich(

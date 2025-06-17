@@ -8,19 +8,19 @@ import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 import "package:visibility_detector/visibility_detector.dart";
 
@@ -261,9 +261,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
   @override
   Widget build(BuildContext context) {
-    QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
-      (element) => Hive.box("user").get("selected_script") == element.name,
-    );
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
@@ -329,7 +326,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   semanticChildCount: pagesInfoWithSurahMetaData.length,
 
                   itemBuilder: (context, index) {
-                    return getElementWidget(index, quranScriptType);
+                    return getElementWidget(index);
                   },
                 )
                 : Scrollbar(
@@ -341,7 +338,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     controller: scrollController,
                     itemCount: pagesInfoWithSurahMetaData.length,
                     itemBuilder: (context, index) {
-                      return getElementWidget(index, quranScriptType);
+                      return getElementWidget(index);
                     },
                   ),
                 ),
@@ -358,7 +355,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
     );
   }
 
-  Widget getElementWidget(int index, QuranScriptType quranScriptType) {
+  Widget getElementWidget(int index) {
     var current = pagesInfoWithSurahMetaData[index];
     if (current.runtimeType == SurahHeaderInfoModel) {
       return SurahInfoHeaderBuilder(headerInfoModel: current);
@@ -419,7 +416,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     return getAyahByAyahCard(
                       key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                       ayahKey: ayahsKeyOfPage[idx],
-                      quranScriptType: quranScriptType,
                       context: context,
                     );
                   }),
@@ -442,10 +438,17 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     log(e.toString());
                   }
                 },
-                child: QuranPagesRenderer(
-                  ayahsKey: ayahsKeyOfPage,
-                  quranScriptType: quranScriptType,
-                  baseStyle: const TextStyle(fontSize: 24),
+                child: BlocBuilder<QuranViewCubit, QuranViewState>(
+                  builder: (context, state) {
+                    return QuranPagesRenderer(
+                      ayahsKey: ayahsKeyOfPage,
+                      quranScriptType: state.quranScriptType,
+                      baseStyle: TextStyle(
+                        fontSize: state.fontSize,
+                        height: state.lineHeight,
+                      ),
+                    );
+                  },
                 ),
               );
         },

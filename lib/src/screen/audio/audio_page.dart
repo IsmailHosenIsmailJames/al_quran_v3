@@ -10,6 +10,8 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
@@ -333,18 +335,25 @@ class _AudioPageState extends State<AudioPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ScriptProcessor(
-                          scriptInfo: ScriptInfo(
-                            surahNumber:
-                                ayahKeyState.current.split(":")[0].toInt(),
-                            ayahNumber:
-                                ayahKeyState.current.split(":")[1].toInt(),
-                            quranScriptType: QuranScriptType.tajweed,
-                            textStyle: const TextStyle(fontSize: 24),
-                            textAlign: TextAlign.center,
-                            skipWordTap: true,
-                            showWordHighlights: false,
-                          ),
+                        BlocBuilder<QuranViewCubit, QuranViewState>(
+                          builder: (context, state) {
+                            return ScriptProcessor(
+                              scriptInfo: ScriptInfo(
+                                surahNumber:
+                                    ayahKeyState.current.split(":")[0].toInt(),
+                                ayahNumber:
+                                    ayahKeyState.current.split(":")[1].toInt(),
+                                quranScriptType: state.quranScriptType,
+                                textStyle: TextStyle(
+                                  fontSize: state.fontSize,
+                                  height: state.lineHeight,
+                                ),
+                                textAlign: TextAlign.center,
+                                skipWordTap: true,
+                                showWordHighlights: false,
+                              ),
+                            );
+                          },
                         ),
                         const Gap(5),
                         const Divider(height: 5),
