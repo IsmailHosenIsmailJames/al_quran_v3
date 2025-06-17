@@ -12,6 +12,8 @@ import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translati
 import "package:al_quran_v3/src/resources/surah_info/info.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -28,8 +30,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
-
-import "../settings/cubit/quran_script_type_cubit.dart";
 
 class AppSetupPage extends StatefulWidget {
   const AppSetupPage({super.key});
@@ -955,9 +955,9 @@ bool doesHaveTafsirSupport(String language) {
 }
 
 Widget getScriptSelectionSegmentedButtons() {
-  return BlocBuilder<QuranScriptTypeCubit, QuranScriptType>(
+  return BlocBuilder<QuranViewCubit, QuranViewState>(
     builder:
-        (context, quranScriptTypeState) => Row(
+        (context, quranViewState) => Row(
           spacing: 5,
           children: List.generate(QuranScriptType.values.length, (index) {
             QuranScriptType currentQuranScriptType =
@@ -966,11 +966,11 @@ Widget getScriptSelectionSegmentedButtons() {
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      quranScriptTypeState == currentQuranScriptType
+                      quranViewState.quranScriptType == currentQuranScriptType
                           ? AppColors.primary
                           : AppColors.mutedGray,
                   foregroundColor:
-                      quranScriptTypeState == currentQuranScriptType
+                      quranViewState.quranScriptType == currentQuranScriptType
                           ? Colors.white
                           : AppColors.primary,
                   padding: const EdgeInsets.only(left: 8, right: 8),
@@ -994,7 +994,7 @@ Widget getScriptSelectionSegmentedButtons() {
                     "user",
                   ).put("selected_script", currentQuranScriptType.name);
 
-                  context.read<QuranScriptTypeCubit>().setQuranScriptType(
+                  context.read<QuranViewCubit>().changeQuranScriptType(
                     currentQuranScriptType,
                   );
                 },
@@ -1003,7 +1003,7 @@ Widget getScriptSelectionSegmentedButtons() {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 icon:
-                    quranScriptTypeState == currentQuranScriptType
+                    quranViewState.quranScriptType == currentQuranScriptType
                         ? const Icon(Icons.done_rounded)
                         : null,
               ),

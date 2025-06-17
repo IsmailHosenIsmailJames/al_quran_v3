@@ -1,10 +1,10 @@
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_type_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
-import "package:al_quran_v3/src/widget/preview_quran_script/cubit/preview_quran_script_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:dartx/dartx.dart";
@@ -12,9 +12,9 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-BlocBuilder<PreviewQuranScriptAyahCubit, String> getAyahPreviewWidget() {
-  return BlocBuilder<PreviewQuranScriptAyahCubit, String>(
-    builder: (context, ayahState) {
+BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget() {
+  return BlocBuilder<QuranViewCubit, QuranViewState>(
+    builder: (context, quranViewState) {
       return Column(
         children: [
           Row(
@@ -26,11 +26,9 @@ BlocBuilder<PreviewQuranScriptAyahCubit, String> getAyahPreviewWidget() {
                   await popupJumpToAyah(
                     context: context,
                     isAudioPlayer: false,
-                    initAyahKey: ayahState,
+                    initAyahKey: quranViewState.ayahKey,
                     onSelectAyah: (ayahKey) {
-                      context.read<PreviewQuranScriptAyahCubit>().changeAyah(
-                        ayahKey,
-                      );
+                      context.read<QuranViewCubit>().changeAyah(ayahKey);
                     },
                   );
                 },
@@ -38,7 +36,7 @@ BlocBuilder<PreviewQuranScriptAyahCubit, String> getAyahPreviewWidget() {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${SurahInfoModel.fromMap(metaDataSurah[ayahState.split(":").first]).nameSimple} - $ayahState",
+                      "${SurahInfoModel.fromMap(metaDataSurah[quranViewState.ayahKey.split(":").first]).nameSimple} - $quranViewState",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -59,13 +57,14 @@ BlocBuilder<PreviewQuranScriptAyahCubit, String> getAyahPreviewWidget() {
               color: AppColors.primary.withValues(alpha: 0.07),
               borderRadius: BorderRadius.circular(roundedRadius),
             ),
-            child: BlocBuilder<QuranScriptTypeCubit, QuranScriptType>(
-              builder: (context, quranScriptTypeState) {
+            child: BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, quranViewState) {
                 return ScriptProcessor(
                   scriptInfo: ScriptInfo(
-                    surahNumber: ayahState.split(":").first.toInt(),
-                    ayahNumber: ayahState.split(":").last.toInt(),
-                    quranScriptType: quranScriptTypeState,
+                    surahNumber:
+                        quranViewState.ayahKey.split(":").first.toInt(),
+                    ayahNumber: quranViewState.ayahKey.split(":").last.toInt(),
+                    quranScriptType: quranViewState.quranScriptType,
                     textStyle: const TextStyle(fontSize: 24),
                   ),
                 );

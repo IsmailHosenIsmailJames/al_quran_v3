@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_type_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
@@ -177,7 +177,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     // log(widget.noteCollectionModel.toString()); // Remove for production
 
     late QuranScriptType quranScriptType =
-        context.read<QuranScriptTypeCubit>().state;
+        context.read<QuranViewCubit>().state.quranScriptType;
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
