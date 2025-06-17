@@ -1,8 +1,13 @@
+String baseOfSegmentsAudioResource =
+    "audio/audio_with_segments_compressed/ayah-recitation";
+
 List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Abdul_Basit_Murattal_64kbps",
     "name": "Abdul Basit Abdus Samad",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-abdul-basit-abdul-samad-murattal-hafs-950.json.txt",
     "img":
         "https://www.assabile.com/media/person/200x256/abdelbasset-abdessamad.png",
     "bio":
@@ -13,6 +18,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://verses.quran.foundation/AbdulBaset/Mujawwad/mp3",
     "name": "Abdul Basit Abdus Samad",
     "style": "Mujawwad",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-abdul-basit-abdul-samad-mujawwad-hafs-949.json.txt",
     "img":
         "https://www.assabile.com/media/person/200x256/abdelbasset-abdessamad.png",
     "bio":
@@ -45,6 +52,9 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps",
     "name": "Abdur-Rahman as-Sudais",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-abdul-rahman-al-sudais-murattal-hafs-951.json.txt",
+
     "img":
         "https://www.assabile.com/media/person/200x256/abdul-rahman-al-sudais.png",
     "bio":
@@ -56,6 +66,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/Abu_Bakr_Ash-Shaatree_64kbps",
     "name": "Abu Bakr al-Shatri",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-abu-bakr-al-shatri-murattal-hafs-952.json.txt",
     "img":
         "https://www.assabile.com/media/person/200x256/abu-bakr-al-shatri.png",
     "bio":
@@ -76,6 +88,9 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://verses.quran.foundation/Alafasy/mp3",
     "name": "Mishari Rashid Alafasy",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-mishari-rashid-al-afasy-murattal-hafs-953.json.txt",
+
     "img":
         "https://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
     "bio":
@@ -86,6 +101,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Ghamadi_40kbps",
     "name": "Saad Al-Ghamdi",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-saad-al-ghamdi-murattal-hafs-954.json.txt",
     "style": "Murattal",
     "img": "https://www.assabile.com/media/person/200x256/saad-el-ghamidi.png",
     "bio": "https://www.assabile.com/saad-el-ghamidi-4/saad-el-ghamidi.htm",
@@ -96,6 +113,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/Hani_Rifai_64kbps",
     "name": "Hani ar-Rifai",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-hani-ar-rifai-recitation-murattal-hafs-68.json.txt",
     "img": "https://www.assabile.com/media/person/200x256/hani-ar-rifai.png",
     "bio": "https://www.assabile.com/hani-ar-rifai-86/hani-ar-rifai.htm",
     "source": "EveryAyah.com",
@@ -105,6 +124,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/Husary_Mujawwad_64kbps",
     "name": "Mahmoud Khalil Al-Husary",
     "style": "Mujawwad",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-mahmoud-khalil-al-husary-mujawwad-hafs-956.json.txt",
     "img":
         "https://www.assabile.com/media/person/200x256/mahmoud-khalil-al-hussary.png",
     "bio":
@@ -115,6 +136,9 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://mirrors.quranicaudio.com/everyayah/Husary_64kbps",
     "name": "Mahmoud Khalil Al-Husary",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-mahmoud-khalil-al-husary-murattal-hafs-957.json.txt",
+
     "img":
         "https://www.assabile.com/media/person/200x256/mahmoud-khalil-al-hussary.png",
     "bio":
@@ -146,6 +170,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/Maher_AlMuaiqly_64kbps",
     "name": "Maher Al Muaiqly",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-maher-al-mu-aiqly-murattal-hafs-948.json.txt",
     "img": "https://www.assabile.com/media/person/200x256/maher-al-mueaqly.png",
     "bio": "https://www.assabile.com/maher-al-mueaqly-33/maher-al-mueaqly.htm",
     "source": "EveryAyah.com",
@@ -154,6 +180,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Minshawy_Murattal_128kbps",
     "name": "Mohamed Siddiq al-Minshawi",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-muhammad-siddiq-al-minshawi-murattal-hafs-959.json.txt",
     "style": "Murattal",
     "img":
         "https://www.assabile.com/media/person/200x256/mohamed-seddik-el-menchaoui.png",
@@ -202,6 +230,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Saood_ash-Shuraym_64kbps",
     "name": "Sa'ud ash-Shuraym",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-saud-al-shuraim-murattal-hafs-960.json.txt",
     "style": "Murattal",
     "img": "https://www.assabile.com/media/person/200x256/saoud-shuraim.png",
     "bio": "https://www.assabile.com/saud-shuraim-11/saud-shuraim.htm",
@@ -281,6 +311,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link": "https://everyayah.com/data/khalefa_al_tunaiji_64kbps",
     "name": "Khalifa Al-Tunaiji",
     "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-khalifa-al-tunaiji-murattal-hafs-958.json.txt",
     "img":
         "https://www.assabile.com/media/person/200x256/khalifa-al-tunaiji.png",
     "bio":
@@ -334,6 +366,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Yasser_Ad-Dussary_128kbps",
     "name": "Yasser Ad-Dussary",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-yasser-al-dosari-murattal-hafs-961.json.txt",
     "style": "Murattal",
     "img":
         "https://www.assabile.com/media/person/200x256/yasser-al-dossari.png",
@@ -417,6 +451,8 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "link":
         "https://mirrors.quranicaudio.com/everyayah/Mohammad_al_Tablaway_128kbps/",
     "name": "Mohamed al-Tablawi",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-mohamed-al-tablawi-recitation-murattal-hafs-73.json.txt",
     "style": "Mujawwad",
     "img": "https://www.assabile.com/media/person/200x256/mohamed-tablawi.png",
     "bio": "https://www.assabile.com/mohamed-tablawi-31/mohamed-tablawi.htm",

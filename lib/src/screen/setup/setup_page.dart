@@ -3,8 +3,8 @@ import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
-import "package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
@@ -482,7 +482,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   Future<bool> downloadDefaultSegmentedQuranRecitation() async {
-    String url = ApisUrls.base + defaultSegmentedQuranRecitation;
+    String url =
+        ApisUrls.base +
+        context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!;
     try {
       context.read<DownloadProgressCubitCubit>().updateProgress(
         null,
@@ -503,10 +505,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
         for (final ayahKey in segmentsInfo.keys) {
           await box.put(ayahKey, segmentsInfo[ayahKey]);
         }
-        await Hive.box("segmented_quran_recitation").put("meta_data", {
-          "name": defaultSegmentedQuranRecitation,
-          "index": defaultSegmentedQuranRecitationIndex,
-        });
+        await Hive.box("segmented_quran_recitation").put(
+          "meta_data",
+          context.read<SegmentedQuranReciterCubit>().state.toMap(),
+        );
         return true;
       } else {
         return false;

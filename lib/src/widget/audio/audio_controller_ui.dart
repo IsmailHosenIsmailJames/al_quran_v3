@@ -3,13 +3,13 @@ import "dart:developer";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/segmented_audio_cubit.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
@@ -204,7 +204,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                 AudioPlayerManager.playSingleAyah(
                                   ayahKey: ayahKey,
                                   reciterInfoModel:
-                                      context.read<SegmentedAudioCubit>().state,
+                                      context
+                                          .read<SegmentedQuranReciterCubit>()
+                                          .state,
                                   isInsideQuran: true,
                                 );
                               }
@@ -281,7 +283,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                     ayahKey: tempAyahList[index - 1],
                                     reciterInfoModel:
                                         context
-                                            .read<SegmentedAudioCubit>()
+                                            .read<SegmentedQuranReciterCubit>()
                                             .state,
                                     isInsideQuran: true,
                                   );
@@ -388,7 +390,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                     ayahKey: tempAyahList[index + 1],
                                     reciterInfoModel:
                                         context
-                                            .read<SegmentedAudioCubit>()
+                                            .read<SegmentedQuranReciterCubit>()
                                             .state,
                                     isInsideQuran: true,
                                   );
@@ -457,7 +459,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           startAyahKey: startAyahKey,
                           endAyahKey: endAyahKey,
                           reciterInfoModel:
-                              context.read<SegmentedAudioCubit>().state,
+                              context.read<SegmentedQuranReciterCubit>().state,
                           initialIndex: currentAyahNumber - 1,
                           instantPlay: AudioPlayerManager.audioPlayer.playing,
                           isInsideQuran: true,
