@@ -2,7 +2,6 @@ import "dart:convert";
 import "dart:developer";
 import "dart:io";
 
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/resources/audio/segmented_quran_recitation.dart";
@@ -14,13 +13,11 @@ import "package:al_quran_v3/src/resources/surah_info/info.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
-import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
+import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/theme_icon_button.dart";
 import "package:dartx/dartx.dart";
 import "package:dio/dio.dart" as dio;
@@ -89,8 +86,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   final fromKey = GlobalKey<FormState>();
-
-  String selectedAyahKey = "2:2";
 
   @override
   Widget build(BuildContext context) {
@@ -360,72 +355,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           const Gap(5),
                           getScriptSelectionSegmentedButtons(),
+                          getAyahPreviewWidget(),
 
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () async {
-                                await popupJumpToAyah(
-                                  context: context,
-                                  isAudioPlayer: false,
-                                  initAyahKey: selectedAyahKey,
-                                  onSelectAyah: (ayahKey) {
-                                    setState(() {
-                                      selectedAyahKey = ayahKey;
-                                    });
-                                  },
-                                );
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "${SurahInfoModel.fromMap(metaDataSurah[selectedAyahKey.split(":").first]).nameSimple} - $selectedAyahKey",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Gap(5),
-                                  const Icon(
-                                    Icons.arrow_drop_down_rounded,
-                                    size: 28,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary.withValues(alpha: 0.07),
-                              borderRadius: BorderRadius.circular(
-                                roundedRadius,
-                              ),
-                            ),
-                            child: BlocBuilder<
-                              QuranScriptTypeCubit,
-                              QuranScriptType
-                            >(
-                              builder: (context, quranScriptTypeState) {
-                                return ScriptProcessor(
-                                  scriptInfo: ScriptInfo(
-                                    surahNumber:
-                                        selectedAyahKey
-                                            .split(":")
-                                            .first
-                                            .toInt(),
-                                    ayahNumber:
-                                        selectedAyahKey.split(":").last.toInt(),
-                                    quranScriptType: quranScriptTypeState,
-                                    textStyle: const TextStyle(fontSize: 24),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
                           const Gap(80),
                         ],
                       ),

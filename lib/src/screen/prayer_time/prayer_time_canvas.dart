@@ -30,9 +30,9 @@ class _PrayerTimeCanvasState extends State<PrayerTimeCanvas> {
 
             TimeOfDay(hour: 20, minute: 13),
           ],
-          sunriseTime: TimeOfDay(hour: 5, minute: 12),
+          sunriseTime: const TimeOfDay(hour: 5, minute: 12),
 
-          sunsetTime: TimeOfDay(hour: 18, minute: 46),
+          sunsetTime: const TimeOfDay(hour: 18, minute: 46),
         ),
       ),
     );
