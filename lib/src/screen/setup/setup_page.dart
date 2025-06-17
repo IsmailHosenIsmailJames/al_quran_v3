@@ -12,8 +12,8 @@ import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translati
 import "package:al_quran_v3/src/resources/surah_info/info.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";

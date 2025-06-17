@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_flutter/hive_flutter.dart";

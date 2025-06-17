@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quram_script_view_state.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
