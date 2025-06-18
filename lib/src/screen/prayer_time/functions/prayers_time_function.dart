@@ -17,11 +17,11 @@ class PrayersTimeFunction {
     prayerTimePreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> downloadPrayerDataFromAPI(
-    double lat,
-    double lon,
-    CalculationMethod calculationMethod,
-  ) async {
+  static Future<bool> downloadPrayerDataFromAPI({
+    required double lat,
+    required double lon,
+    required CalculationMethod calculationMethod,
+  }) async {
     final response = await get(
       Uri.parse(
         "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon&method=${calculationMethod.id}",
