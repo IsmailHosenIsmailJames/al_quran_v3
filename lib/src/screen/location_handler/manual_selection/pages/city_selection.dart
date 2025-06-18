@@ -79,7 +79,7 @@ class _CitySelectionState extends State<CitySelection> {
                         title: Text(cityName),
                         onTap: () {
                           context
-                              .read<LocationDataQiblaDataCubit>()
+                              .read<LocationQiblaPrayerDataCubit>()
                               .saveLocationData(
                                 LatLon(
                                   latitude: double.parse(

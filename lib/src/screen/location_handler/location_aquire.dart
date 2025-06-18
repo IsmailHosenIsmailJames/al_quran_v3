@@ -67,12 +67,14 @@ class _LocationAcquireState extends State<LocationAcquire> {
                   if (permission == LocationPermission.whileInUse ||
                       permission == LocationPermission.always) {
                     Position position = await Geolocator.getCurrentPosition();
-                    context.read<LocationDataQiblaDataCubit>().saveLocationData(
-                      LatLon(
-                        latitude: position.latitude,
-                        longitude: position.longitude,
-                      ),
-                    );
+                    context
+                        .read<LocationQiblaPrayerDataCubit>()
+                        .saveLocationData(
+                          LatLon(
+                            latitude: position.latitude,
+                            longitude: position.longitude,
+                          ),
+                        );
                   }
                 } catch (e) {
                   log(e.toString());
