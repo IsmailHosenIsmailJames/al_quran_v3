@@ -69,22 +69,24 @@ Widget getAddressView({
           ),
         );
       }
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            "Address: ",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-          ),
-          const Gap(5),
-          Text("Lat: $lat, Lon: $long"),
-        ],
-      );
+      return justAddress
+          ? const SizedBox()
+          : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "Address: ",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                ),
+              ),
+              const Gap(5),
+              Text("Lat: $lat, Lon: $long"),
+            ],
+          );
     },
   );
 }
