@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:flutter/material.dart";
 import "package:http/http.dart";
@@ -16,10 +17,14 @@ class PrayersTimeFunction {
     prayerTimePreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> downloadPrayerDataFromAPI(double lat, double lon) async {
+  static Future<bool> downloadPrayerDataFromAPI(
+    double lat,
+    double lon,
+    CalculationMethod calculationMethod,
+  ) async {
     final response = await get(
       Uri.parse(
-        "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon",
+        "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon&method=${calculationMethod.id}",
       ),
     );
 
