@@ -27,5 +27,9 @@ List<ReciterInfoModel> getSegmentsSupportedReciters() {
       recitationsInfoList.map((e) => ReciterInfoModel.fromMap(e)).toList();
   recitations =
       recitations.where((element) => element.segmentsUrl != null).toList();
+  recitations =
+      recitations
+          .map((e) => e.copyWith(supportWordSegmentation: true))
+          .toList();
   return recitations;
 }

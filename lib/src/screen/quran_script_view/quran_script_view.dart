@@ -42,6 +42,7 @@ class QuranScriptView extends StatefulWidget {
 
 class _PageByPageViewState extends State<QuranScriptView> {
   List<dynamic> pagesInfoWithSurahMetaData = [];
+  List allAyahsKey = [];
   @override
   void initState() {
     int? startAyahNumber = convertKeyToAyahNumber(widget.startKey);
@@ -50,7 +51,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
     if (startAyahNumber == null || endAyahNumber == null) return;
     bool checkedFirst = false;
     List<PageInfoModel> currentPagesToShow = [];
-    List allAyahsKey = [];
 
     for (int i = 0; i < quranPagesInfo.length; i++) {
       if (quranPagesInfo[i]["s"]! >= startAyahNumber ||
@@ -196,6 +196,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
       );
     }
 
+    context.read<AyahByAyahInScrollInfoCubit>().setData(
+      dropdownAyahKey: widget.toScrollKey ?? allAyahsKey.first,
+    );
+
     for (int i = 0; i < allAyahsKey.length; i++) {
       ayahKeyToKey["${allAyahsKey[i]}"] = GlobalKey();
     }
@@ -203,45 +207,46 @@ class _PageByPageViewState extends State<QuranScriptView> {
     if (widget.toScrollKey != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         // Recalculate targetIndex here if pagesInfoWithSurahMetaData is populated late
-        int? targetIndex;
-        for (int i = 0; i < pagesInfoWithSurahMetaData.length; i++) {
-          var currentItemData = pagesInfoWithSurahMetaData[i];
-          if (currentItemData is List<dynamic> && currentItemData.isNotEmpty) {
-            List<String> ayahsKeyOfPage = List<String>.from(currentItemData);
-            // Assuming widget.toScrollKey might be the first key of a block
-            if (ayahsKeyOfPage.first == widget.toScrollKey) {
-              targetIndex = i;
-              break;
-            }
-            // Or if it can be any key within the block
-            if (ayahsKeyOfPage.contains(widget.toScrollKey)) {
-              targetIndex = i;
-              break;
-            }
-          }
-        }
-
-        if (targetIndex != null && itemScrollController.isAttached) {
-          await itemScrollController.scrollTo(
-            index: targetIndex,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.linear,
-          );
-          final GlobalKey? specificAyahKey = ayahKeyToKey[widget.toScrollKey!];
-          if (specificAyahKey != null &&
-              specificAyahKey.currentContext != null) {
-            Scrollable.ensureVisible(
-              specificAyahKey.currentContext!,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOutCubic,
-              alignment: 0.0,
-            );
-          }
-        }
+        await scrollToAyah(widget.toScrollKey!);
       });
     }
 
     super.initState();
+  }
+
+  Future<void> scrollToAyah(String ayahKey) async {
+    int? targetIndex;
+    for (int i = 0; i < pagesInfoWithSurahMetaData.length; i++) {
+      var currentItemData = pagesInfoWithSurahMetaData[i];
+      if (currentItemData is List<dynamic> && currentItemData.isNotEmpty) {
+        List<String> ayahsKeyOfPage = List<String>.from(currentItemData);
+        // Assuming ayahKey might be the first key of a block
+        if (ayahsKeyOfPage.first == ayahKey) {
+          targetIndex = i;
+          break;
+        }
+        // Or if it can be any key within the block
+        if (ayahsKeyOfPage.contains(ayahKey)) {
+          targetIndex = i;
+          break;
+        }
+      }
+    }
+
+    log(targetIndex.toString(), name: "Target Index");
+
+    if (targetIndex != null && itemScrollController.isAttached) {
+      itemScrollController.jumpTo(index: targetIndex);
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final GlobalKey? specificAyahKey = ayahKeyToKey[ayahKey];
+        if (specificAyahKey != null && specificAyahKey.currentContext != null) {
+          await Scrollable.ensureVisible(
+            specificAyahKey.currentContext!,
+            alignment: 0.0,
+          );
+        }
+      });
+    }
   }
 
   Map<String, GlobalKey> ayahKeyToKey = {};
@@ -265,21 +270,70 @@ class _PageByPageViewState extends State<QuranScriptView> {
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
         appBar: AppBar(
-          title: BlocBuilder<
-            AyahByAyahInScrollInfoCubit,
-            AyahByAyahInScrollInfoState
-          >(
-            buildWhen: (previous, current) {
-              return previous.surahInfoModel?.toMap() !=
-                  current.surahInfoModel?.toMap();
-            },
-            builder:
-                (context, state) => Text(
-                  state.surahInfoModel?.nameSimple == null
-                      ? ""
-                      : "${state.surahInfoModel?.nameSimple} ( ${state.surahInfoModel?.nameArabic} )",
-                  style: const TextStyle(fontSize: 18),
+          title: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                BlocBuilder<
+                  AyahByAyahInScrollInfoCubit,
+                  AyahByAyahInScrollInfoState
+                >(
+                  buildWhen: (previous, current) {
+                    return previous.surahInfoModel?.toMap() !=
+                        current.surahInfoModel?.toMap();
+                  },
+                  builder:
+                      (context, state) => Text(
+                        state.surahInfoModel?.nameSimple == null
+                            ? ""
+                            : "${state.surahInfoModel?.nameSimple}",
+                        style: const TextStyle(fontSize: 18),
+                      ),
                 ),
+                const Gap(10),
+                Container(
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryShade200,
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                  ),
+                  child: BlocBuilder<
+                    AyahByAyahInScrollInfoCubit,
+                    AyahByAyahInScrollInfoState
+                  >(
+                    builder: (context, state) {
+                      return DropdownButtonFormField(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.zero,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(left: 5, right: 5),
+                        ),
+                        isExpanded: false,
+
+                        value: state.dropdownAyahKey,
+                        items: List.generate(allAyahsKey.length, (index) {
+                          return DropdownMenuItem(
+                            value: allAyahsKey[index],
+                            child: Center(child: Text(allAyahsKey[index])),
+                          );
+                        }),
+                        onChanged: (value) async {
+                          await scrollToAyah(value.toString());
+                          WidgetsBinding.instance.addPostFrameCallback((
+                            _,
+                          ) async {
+                            context.read<AyahByAyahInScrollInfoCubit>().setData(
+                              dropdownAyahKey: value.toString(),
+                            );
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             BlocBuilder<
@@ -316,32 +370,18 @@ class _PageByPageViewState extends State<QuranScriptView> {
         ),
         body: Stack(
           children: [
-            widget.toScrollKey != null
-                ? ScrollablePositionedList.builder(
-                  itemCount: pagesInfoWithSurahMetaData.length,
-                  itemScrollController: itemScrollController,
-                  itemPositionsListener: itemPositionsListener,
-                  scrollOffsetController: scrollOffsetController,
-                  scrollOffsetListener: scrollOffsetListener,
-                  semanticChildCount: pagesInfoWithSurahMetaData.length,
+            ScrollablePositionedList.builder(
+              itemCount: pagesInfoWithSurahMetaData.length,
+              itemScrollController: itemScrollController,
+              itemPositionsListener: itemPositionsListener,
+              scrollOffsetController: scrollOffsetController,
+              scrollOffsetListener: scrollOffsetListener,
+              semanticChildCount: pagesInfoWithSurahMetaData.length,
 
-                  itemBuilder: (context, index) {
-                    return getElementWidget(index);
-                  },
-                )
-                : Scrollbar(
-                  controller: scrollController,
-                  interactive: true,
-                  radius: Radius.circular(roundedRadius),
-                  thickness: 13,
-                  child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: pagesInfoWithSurahMetaData.length,
-                    itemBuilder: (context, index) {
-                      return getElementWidget(index);
-                    },
-                  ),
-                ),
+              itemBuilder: (context, index) {
+                return getElementWidget(index);
+              },
+            ),
 
             const SafeArea(
               child: Align(
@@ -404,8 +444,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                       metaDataSurah[ayahsKeyOfPage.first.split(":").first],
                     );
+
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
                       surahInfoModel: surahInfoModel,
+                      dropdownAyahKey: ayahsKeyOfPage.first,
                     );
                   } catch (e) {
                     log(e.toString());

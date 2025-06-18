@@ -5,12 +5,14 @@ class AyahByAyahInScrollInfoState {
   List<String>? expandedForWordByWord;
   bool isAyahByAyah;
   List<int>? pageByPageList;
+  String? dropdownAyahKey;
 
   AyahByAyahInScrollInfoState({
     this.surahInfoModel,
     this.expandedForWordByWord,
     this.pageByPageList,
     required this.isAyahByAyah,
+    this.dropdownAyahKey,
   });
 
   AyahByAyahInScrollInfoState copyWith({
@@ -18,6 +20,7 @@ class AyahByAyahInScrollInfoState {
     List<String>? expandedForWordByWord,
     bool? isAyahByAyah,
     List<int>? pageByPageList,
+    String? dropdownAyahKey,
   }) {
     return AyahByAyahInScrollInfoState(
       surahInfoModel: surahInfoModel ?? this.surahInfoModel,
@@ -25,6 +28,7 @@ class AyahByAyahInScrollInfoState {
           expandedForWordByWord ?? this.expandedForWordByWord,
       isAyahByAyah: isAyahByAyah ?? this.isAyahByAyah,
       pageByPageList: pageByPageList ?? this.pageByPageList,
+      dropdownAyahKey: dropdownAyahKey ?? this.dropdownAyahKey,
     );
   }
 
@@ -35,6 +39,7 @@ class AyahByAyahInScrollInfoState {
           ayahByAyahInScrollInfoState.expandedForWordByWord,
       "isAyahByAyah": ayahByAyahInScrollInfoState.isAyahByAyah,
       "pageByPageList": ayahByAyahInScrollInfoState.pageByPageList,
+      "dropdownAyahKey": ayahByAyahInScrollInfoState.dropdownAyahKey,
     };
   }
 }
