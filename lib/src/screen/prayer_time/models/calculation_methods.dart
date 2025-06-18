@@ -34,11 +34,14 @@ class CalculationMethod {
       CalculationMethod(
         id: json["id"],
         name: json["name"],
-        params: json["params"] == null ? null : Params.fromMap(json["params"]),
+        params:
+            json["params"] == null
+                ? null
+                : Params.fromMap(Map<String, dynamic>.from(json["params"])),
         location:
             json["location"] == null
                 ? null
-                : Location.fromMap(json["location"]),
+                : Location.fromMap(Map<String, dynamic>.from(json["location"])),
       );
 
   Map<String, dynamic> toMap() => {
