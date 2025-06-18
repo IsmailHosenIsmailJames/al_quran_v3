@@ -1,14 +1,11 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/time_list_of_prayers.dart";
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:al_quran_v3/src/widget/prayers/prayer_calculation_method_info_widget.dart";
+import "package:al_quran_v3/src/widget/prayers/select_calculation_method.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -26,9 +23,12 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LocationDataQiblaDataCubit, LocationDataQiblaDataState>(
+    return BlocBuilder<
+      LocationQiblaPrayerDataCubit,
+      LocationQiblaPrayerDataState
+    >(
       builder: (context, state) {
-        if (state.latLon == null) {
+        if (state.latLon == null || state.calculationMethod == null) {
           return const LocationAcquire();
         } else {
           if (PrayersTimeFunction.checkIsDataExits() == false) {
@@ -48,13 +48,6 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
   }
 
   Widget downloadPrayerTimeWidget(double lat, double lon) {
-    CalculationMethod selectedCalculationMethod = findClosestCalculationMethod(
-      lat,
-      lon,
-    );
-    log(selectedCalculationMethod.id.toString(), name: "Calculation Method");
-    log(selectedCalculationMethod.name.toString(), name: "Calculation Method");
-
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -78,16 +71,46 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
             ],
           ),
           const Gap(15),
-          const Text(
-            "Calculation Method: ",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Calculation Method: ",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 30,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                  ),
+                  onPressed: () async {
+                    await showCalculationMethodPopup(context, (
+                      calculationMethod,
+                    ) {
+                      context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .saveCalculationMethod(calculationMethod);
+
+                      Navigator.pop(context);
+                    });
+                  },
+                  child: const Text("Change"),
+                ),
+              ),
+            ],
           ),
           const Gap(5),
-          getPrayerCalculationMethodInfoWidget(selectedCalculationMethod),
+          getPrayerCalculationMethodInfoWidget(
+            context
+                .read<LocationQiblaPrayerDataCubit>()
+                .state
+                .calculationMethod!,
+          ),
           const Gap(30),
           SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -100,7 +123,10 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
                 await PrayersTimeFunction.downloadPrayerDataFromAPI(
                   lat,
                   lon,
-                  selectedCalculationMethod,
+                  context
+                      .read<LocationQiblaPrayerDataCubit>()
+                      .state
+                      .calculationMethod!,
                 );
                 setState(() {
                   isPrayerTimeDownloading = false;

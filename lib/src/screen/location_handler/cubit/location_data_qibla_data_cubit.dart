@@ -1,17 +1,28 @@
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
-class LocationDataQiblaDataCubit extends Cubit<LocationDataQiblaDataState> {
-  LocationDataQiblaDataCubit() : super(getSavedLocation());
+class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
+  LocationQiblaPrayerDataCubit() : super(getSavedLocation());
+
   void saveLocationData(LatLon latLon) {
-    LocationDataQiblaDataState data = LocationDataQiblaDataState();
-    data.latLon = latLon;
-    data.kaabaAngle = calculateQiblaAngle(latLon.latitude, latLon.longitude);
-    emit(data);
     Hive.box("user").put("user_location", latLon.toJson());
+    emit(
+      state.copyWith(
+        latLon: latLon,
+        kaabaAngle: calculateQiblaAngle(latLon.latitude, latLon.longitude),
+      ),
+    );
+  }
+
+  void saveCalculationMethod(CalculationMethod calculationMethod) {
+    Hive.box(
+      "user",
+    ).put("selected_prayer_calculation_method", calculationMethod.toMap());
+    emit(state.copyWith(calculationMethod: calculationMethod));
   }
 }

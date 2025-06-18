@@ -1,11 +1,11 @@
 import "dart:async";
-
 import "dart:math" as math;
+
 import "package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_view.dart";
+import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -47,10 +47,13 @@ class _QiblaDirectionState extends State<QiblaDirection> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LocationDataQiblaDataCubit, LocationDataQiblaDataState>(
+    return BlocBuilder<
+      LocationQiblaPrayerDataCubit,
+      LocationQiblaPrayerDataState
+    >(
       builder: (context, state) {
-        LocationDataQiblaDataState? dataState =
-            context.read<LocationDataQiblaDataCubit>().state;
+        LocationQiblaPrayerDataState? dataState =
+            context.read<LocationQiblaPrayerDataCubit>().state;
         Widget compassView = const SizedBox();
         if (dataState.kaabaAngle != null) {
           compassView = SizedBox(

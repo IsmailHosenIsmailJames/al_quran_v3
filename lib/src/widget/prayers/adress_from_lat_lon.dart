@@ -29,45 +29,47 @@ Widget getAddressView({
           subAdministrativeArea ??= placemark.subAdministrativeArea;
         }
 
-        return Container(
-          decoration:
-              keepDecoration
-                  ? BoxDecoration(
-                    border: Border.all(color: AppColors.primary),
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                  )
-                  : null,
-          padding: keepPadding ? const EdgeInsets.all(5) : null,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("$subAdministrativeArea, $administrativeArea, $country"),
-              if (!justAddress) const Gap(5),
-              if (!justAddress)
-                Row(
-                  children: [
-                    const Text(
-                      "Latitude: ",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(lat.toString()),
-                  ],
-                ),
-              if (!justAddress) const Gap(5),
-              if (!justAddress)
-                Row(
-                  children: [
-                    const Text(
-                      "Longitude: ",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(long.toString()),
-                  ],
-                ),
-            ],
-          ),
-        );
+        return justAddress
+            ? Text("$subAdministrativeArea, $administrativeArea, $country")
+            : Container(
+              decoration:
+                  keepDecoration
+                      ? BoxDecoration(
+                        border: Border.all(color: AppColors.primary),
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                      )
+                      : null,
+              padding: keepPadding ? const EdgeInsets.all(5) : null,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("$subAdministrativeArea, $administrativeArea, $country"),
+                  const Gap(5),
+
+                  Row(
+                    children: [
+                      const Text(
+                        "Latitude: ",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(lat.toString()),
+                    ],
+                  ),
+                  const Gap(5),
+
+                  Row(
+                    children: [
+                      const Text(
+                        "Longitude: ",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(long.toString()),
+                    ],
+                  ),
+                ],
+              ),
+            );
       }
       return justAddress
           ? const SizedBox()
