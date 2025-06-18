@@ -1,5 +1,6 @@
 import "dart:async";
 
+import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
@@ -19,6 +20,7 @@ import "models/prayer_model_of_day.dart";
 class TimeListOfPrayers extends StatefulWidget {
   final double lat;
   final double lon;
+
   const TimeListOfPrayers({super.key, required this.lat, required this.lon});
 
   @override
@@ -27,6 +29,7 @@ class TimeListOfPrayers extends StatefulWidget {
 
 class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
   late List<PrayerModelTimesType> listOfPrayersToReminder;
+
   @override
   void initState() {
     PrayersTimeFunction.loadPrayersData();
@@ -89,7 +92,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
 
                   IconButton(
                     onPressed: () async {
-                      // TODO: Add logic to update the user's current location and get Prayers Time data
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LocationAcquire(),
+                        ),
+                      );
                     },
                     icon: const Icon(
                       Icons.my_location_rounded,
