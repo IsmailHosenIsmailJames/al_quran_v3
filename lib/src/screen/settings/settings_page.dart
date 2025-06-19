@@ -34,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Text("Quran Script", style: titleStyle),
                 const Gap(7),
                 getScriptSelectionSegmentedButtons(),
-                const Gap(10),
+                const Gap(20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -43,17 +43,23 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
 
-                Slider.adaptive(
-                  value: quranViewState.fontSize,
-                  max: 60,
-                  min: 10,
-                  divisions: 100,
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().changeFontSize(
-                      value.toPrecision(2),
-                    );
-                  },
+                const Gap(10),
+
+                SliderTheme(
+                  data: const SliderThemeData(padding: EdgeInsets.zero),
+                  child: Slider.adaptive(
+                    value: quranViewState.fontSize,
+                    max: 60,
+                    min: 10,
+                    divisions: 100,
+                    onChanged: (value) {
+                      context.read<QuranViewCubit>().changeFontSize(
+                        value.toPrecision(2),
+                      );
+                    },
+                  ),
                 ),
+                const Gap(20),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,22 +72,28 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
 
-                Slider.adaptive(
-                  value: quranViewState.lineHeight,
-                  max: 5,
-                  min: 0.7,
-                  divisions: 100,
+                const Gap(10),
 
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().changeLineHeight(
-                      value.toPrecision(2),
-                    );
-                  },
+                SliderTheme(
+                  data: const SliderThemeData(padding: EdgeInsets.zero),
+                  child: Slider.adaptive(
+                    value: quranViewState.lineHeight,
+                    max: 5,
+                    min: 0.7,
+                    divisions: 100,
+
+                    onChanged: (value) {
+                      context.read<QuranViewCubit>().changeLineHeight(
+                        value.toPrecision(2),
+                      );
+                    },
+                  ),
                 ),
+                const Gap(20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Translation Font Size", style: titleStyle),
+                    Text("Translation & Tafsir Font Size", style: titleStyle),
                     Text(
                       quranViewState.translationFontSize.toString(),
                       style: titleStyle,
@@ -89,16 +101,23 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
 
-                Slider.adaptive(
-                  value: quranViewState.translationFontSize,
-                  max: 60,
-                  min: 8,
-                  divisions: 100,
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().changeTranslationFontSize(
-                      value.toPrecision(2),
-                    );
-                  },
+                const Gap(10),
+
+                SliderTheme(
+                  data: const SliderThemeData(padding: EdgeInsets.zero),
+                  child: Slider.adaptive(
+                    value: quranViewState.translationFontSize,
+                    max: 60,
+                    min: 8,
+
+                    divisions: 100,
+
+                    onChanged: (value) {
+                      context.read<QuranViewCubit>().changeTranslationFontSize(
+                        value.toPrecision(2),
+                      );
+                    },
+                  ),
                 ),
                 const Gap(5),
                 getAyahPreviewWidget(),
