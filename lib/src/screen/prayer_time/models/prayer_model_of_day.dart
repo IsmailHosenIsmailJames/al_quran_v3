@@ -531,8 +531,8 @@ class Location {
 }
 
 class Params {
-  int? fajr;
-  int? isha;
+  dynamic fajr;
+  dynamic isha;
 
   Params({this.fajr, this.isha});
 

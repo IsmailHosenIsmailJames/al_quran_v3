@@ -4,6 +4,8 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/address_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
+import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -11,7 +13,9 @@ import "package:gap/gap.dart";
 import "package:geolocator/geolocator.dart";
 
 class LocationAcquire extends StatefulWidget {
-  const LocationAcquire({super.key});
+  final bool moveToDownload;
+
+  const LocationAcquire({super.key, this.moveToDownload = false});
 
   @override
   State<LocationAcquire> createState() => _LocationAcquireState();
@@ -19,6 +23,7 @@ class LocationAcquire extends StatefulWidget {
 
 class _LocationAcquireState extends State<LocationAcquire> {
   bool isGPSLocationLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +81,28 @@ class _LocationAcquireState extends State<LocationAcquire> {
                               longitude: position.longitude,
                             ),
                           );
+                      context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .saveCalculationMethod(
+                            findClosestCalculationMethod(
+                              position.latitude,
+                              position.longitude,
+                            ),
+                          );
+                      if (widget.moveToDownload) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => DownloadDataForPrayerView(
+                                  lat: position.latitude,
+                                  long: position.longitude,
+                                  moveToDownload: widget.moveToDownload,
+                                ),
+                          ),
+                        );
+                        return;
+                      }
                     }
                   } catch (e) {
                     log(e.toString());
@@ -109,7 +136,9 @@ class _LocationAcquireState extends State<LocationAcquire> {
                       builder:
                           (context) => BlocProvider(
                             create: (context) => ManualLocationSelectionCubit(),
-                            child: const AddressSelection(),
+                            child: AddressSelection(
+                              moveToDownloadPage: widget.moveToDownload,
+                            ),
                           ),
                     ),
                   );

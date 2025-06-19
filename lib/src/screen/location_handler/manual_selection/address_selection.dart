@@ -11,7 +11,8 @@ import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class AddressSelection extends StatefulWidget {
-  const AddressSelection({super.key});
+  final bool moveToDownloadPage;
+  const AddressSelection({super.key, this.moveToDownloadPage = false});
 
   @override
   State<AddressSelection> createState() => _AddressSelectionState();
@@ -74,7 +75,10 @@ class _AddressSelectionState extends State<AddressSelection> {
             children: [
               CountriesSelection(pageController: pageController),
               AdministratorSelection(pageController: pageController),
-              CitySelection(pageController: pageController),
+              CitySelection(
+                pageController: pageController,
+                moveToDownload: widget.moveToDownloadPage,
+              ),
             ],
             onPageChanged: (index) {
               context.read<ManualLocationSelectionCubit>().changeData(

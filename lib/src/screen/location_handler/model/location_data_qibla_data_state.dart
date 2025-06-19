@@ -5,21 +5,26 @@ class LocationQiblaPrayerDataState {
   LatLon? latLon;
   double? kaabaAngle;
   CalculationMethod? calculationMethod;
+  bool isDataExits;
+
   LocationQiblaPrayerDataState({
     this.latLon,
     this.kaabaAngle,
     this.calculationMethod,
+    this.isDataExits = false,
   });
 
   LocationQiblaPrayerDataState copyWith({
     LatLon? latLon,
     double? kaabaAngle,
     CalculationMethod? calculationMethod,
+    bool? isDataExits,
   }) {
     return LocationQiblaPrayerDataState(
       latLon: latLon ?? this.latLon,
       kaabaAngle: kaabaAngle ?? this.kaabaAngle,
       calculationMethod: calculationMethod ?? this.calculationMethod,
+      isDataExits: isDataExits ?? this.isDataExits,
     );
   }
 }

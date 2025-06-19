@@ -19,7 +19,6 @@ Widget getAddressView({
         return const CircularProgressIndicator();
       } else if (snapshot.hasData) {
         String? country;
-
         String? administrativeArea;
         String? subAdministrativeArea;
 
@@ -46,7 +45,6 @@ Widget getAddressView({
                 children: [
                   Text("$subAdministrativeArea, $administrativeArea, $country"),
                   const Gap(5),
-
                   Row(
                     children: [
                       const Text(
@@ -57,7 +55,6 @@ Widget getAddressView({
                     ],
                   ),
                   const Gap(5),
-
                   Row(
                     children: [
                       const Text(
@@ -77,16 +74,26 @@ Widget getAddressView({
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "Address: ",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    "Latitude: ",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  Text(lat.toString()),
+                ],
               ),
               const Gap(5),
-              Text("Lat: $lat, Lon: $long"),
+
+              Row(
+                children: [
+                  const Text(
+                    "Longitude: ",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  Text(long.toString()),
+                ],
+              ),
             ],
           );
     },

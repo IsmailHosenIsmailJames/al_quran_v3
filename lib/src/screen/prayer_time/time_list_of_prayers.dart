@@ -1,5 +1,6 @@
 import "dart:async";
 
+import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
@@ -9,9 +10,11 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
+import "package:hive/hive.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 
@@ -95,7 +98,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LocationAcquire(),
+                          builder:
+                              (context) =>
+                                  const LocationAcquire(moveToDownload: true),
                         ),
                       );
                     },
@@ -103,6 +108,23 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       Icons.my_location_rounded,
                       color: Colors.white,
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      final sharedPreferences =
+                          PrayersTimeFunction.prayerTimePreferences;
+                      await sharedPreferences?.clear();
+                      await (await Hive.openBox(
+                        'user',
+                      )).delete("user_location");
+                      await (await Hive.openBox(
+                        'user',
+                      )).delete("selected_prayer_calculation_method");
+                      context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .checkPrayerDataExits();
+                    },
+                    icon: Icon(Icons.lock_reset),
                   ),
                 ],
               ),
