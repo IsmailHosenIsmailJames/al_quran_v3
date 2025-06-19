@@ -29,16 +29,20 @@ class PrayersTimeFunction {
     );
 
     if (response.statusCode == 200) {
+      prayerTimePreferences!.clear();
       Map infoList = jsonDecode(response.body)["data"];
       for (String key in infoList.keys) {
         await prayerTimePreferences!.setString(key, jsonEncode(infoList[key]));
       }
+      await prayerTimePreferences?.reload();
+      loadPrayersData();
       return true;
     }
     return false;
   }
 
   static void loadPrayersData() {
+    prayerTimeMapData.clear();
     for (int i = 1; i <= 12; i++) {
       String? temPrayerTimeMapData = prayerTimePreferences!.getString("$i");
       if (temPrayerTimeMapData != null) {

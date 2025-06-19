@@ -97,7 +97,10 @@ class _CitySelectionState extends State<CitySelection> {
                           );
                           context
                               .read<LocationQiblaPrayerDataCubit>()
-                              .saveLocationData(latLon);
+                              .saveLocationData(
+                                latLon,
+                                save: !widget.moveToDownload,
+                              );
                           context
                               .read<LocationQiblaPrayerDataCubit>()
                               .saveCalculationMethod(
@@ -105,6 +108,7 @@ class _CitySelectionState extends State<CitySelection> {
                                   latLon.latitude,
                                   latLon.longitude,
                                 ),
+                                save: !widget.moveToDownload,
                               );
 
                           Navigator.pop(context);

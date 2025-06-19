@@ -11,20 +11,34 @@ import "../../prayer_time/functions/prayers_time_function.dart";
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit() : super(getSavedLocation());
 
-  void saveLocationData(LatLon latLon) {
-    Hive.box("user").put("user_location", latLon.toJson());
+  void alignWithDatabase() {
+    emit(getSavedLocation());
+  }
+
+  void saveLocationData(LatLon? latLon, {bool save = true}) {
+    if (save) {
+      Hive.box("user").put("user_location", latLon?.toJson());
+    }
     emit(
       state.copyWith(
         latLon: latLon,
-        kaabaAngle: calculateQiblaAngle(latLon.latitude, latLon.longitude),
+        kaabaAngle:
+            latLon == null
+                ? null
+                : calculateQiblaAngle(latLon.latitude, latLon.longitude),
       ),
     );
   }
 
-  void saveCalculationMethod(CalculationMethod calculationMethod) {
-    Hive.box(
-      "user",
-    ).put("selected_prayer_calculation_method", calculationMethod.toMap());
+  void saveCalculationMethod(
+    CalculationMethod? calculationMethod, {
+    bool save = true,
+  }) {
+    if (save) {
+      Hive.box(
+        "user",
+      ).put("selected_prayer_calculation_method", calculationMethod?.toMap());
+    }
     emit(state.copyWith(calculationMethod: calculationMethod));
   }
 

@@ -27,6 +27,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.moveToDownload ? AppBar() : null,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -49,6 +50,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
             const Gap(30),
             SizedBox(
               width: double.infinity,
+              height: 50,
               child: OutlinedButton.icon(
                 onPressed: () async {
                   setState(() {
@@ -80,6 +82,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                               latitude: position.latitude,
                               longitude: position.longitude,
                             ),
+                            save: !widget.moveToDownload,
                           );
                       context
                           .read<LocationQiblaPrayerDataCubit>()
@@ -88,6 +91,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                               position.latitude,
                               position.longitude,
                             ),
+                            save: !widget.moveToDownload,
                           );
                       if (widget.moveToDownload) {
                         Navigator.pushReplacement(
