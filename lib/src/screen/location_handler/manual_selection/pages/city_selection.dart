@@ -1,14 +1,22 @@
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
+import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
 class CitySelection extends StatefulWidget {
+  final bool moveToDownload;
   final PageController pageController;
-  const CitySelection({super.key, required this.pageController});
+
+  const CitySelection({
+    super.key,
+    required this.pageController,
+    this.moveToDownload = false,
+  });
 
   @override
   State<CitySelection> createState() => _CitySelectionState();
@@ -16,6 +24,7 @@ class CitySelection extends StatefulWidget {
 
 class _CitySelectionState extends State<CitySelection> {
   TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -78,19 +87,40 @@ class _CitySelectionState extends State<CitySelection> {
                       return ListTile(
                         title: Text(cityName),
                         onTap: () {
+                          LatLon latLon = LatLon(
+                            latitude: double.parse(
+                              state.cityList![index]["lat"],
+                            ),
+                            longitude: double.parse(
+                              state.cityList![index]["lng"],
+                            ),
+                          );
                           context
                               .read<LocationQiblaPrayerDataCubit>()
-                              .saveLocationData(
-                                LatLon(
-                                  latitude: double.parse(
-                                    state.cityList![index]["lat"],
-                                  ),
-                                  longitude: double.parse(
-                                    state.cityList![index]["lng"],
-                                  ),
+                              .saveLocationData(latLon);
+                          context
+                              .read<LocationQiblaPrayerDataCubit>()
+                              .saveCalculationMethod(
+                                findClosestCalculationMethod(
+                                  latLon.latitude,
+                                  latLon.longitude,
                                 ),
                               );
+
                           Navigator.pop(context);
+                          if (widget.moveToDownload) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => DownloadDataForPrayerView(
+                                      lat: latLon.latitude,
+                                      long: latLon.longitude,
+                                      moveToDownload: widget.moveToDownload,
+                                    ),
+                              ),
+                            );
+                          }
                         },
                       );
                     } else {

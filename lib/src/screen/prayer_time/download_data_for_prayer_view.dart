@@ -12,11 +12,13 @@ import "../location_handler/cubit/location_data_qibla_data_cubit.dart";
 class DownloadDataForPrayerView extends StatefulWidget {
   final double lat;
   final double long;
+  final bool moveToDownload;
 
   const DownloadDataForPrayerView({
     super.key,
     required this.lat,
     required this.long,
+    this.moveToDownload = false,
   });
 
   @override
@@ -112,6 +114,12 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                             .state
                             .calculationMethod!,
                   );
+                  context
+                      .read<LocationQiblaPrayerDataCubit>()
+                      .checkPrayerDataExits();
+                  if (widget.moveToDownload) {
+                    Navigator.pop(context);
+                  }
                   setState(() {
                     isPrayerTimeDownloading = false;
                   });

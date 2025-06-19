@@ -2,7 +2,6 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/time_list_of_prayers.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -25,7 +24,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
         if (state.latLon == null || state.calculationMethod == null) {
           return const LocationAcquire();
         } else {
-          if (PrayersTimeFunction.checkIsDataExits() == false) {
+          if (state.isDataExits == false) {
             return DownloadDataForPrayerView(
               lat: state.latLon!.latitude,
               long: state.latLon!.longitude,

@@ -6,6 +6,8 @@ import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.da
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
+import "../../prayer_time/functions/prayers_time_function.dart";
+
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit() : super(getSavedLocation());
 
@@ -24,5 +26,9 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       "user",
     ).put("selected_prayer_calculation_method", calculationMethod.toMap());
     emit(state.copyWith(calculationMethod: calculationMethod));
+  }
+
+  void checkPrayerDataExits() {
+    emit(state.copyWith(isDataExits: PrayersTimeFunction.checkIsDataExits()));
   }
 }
