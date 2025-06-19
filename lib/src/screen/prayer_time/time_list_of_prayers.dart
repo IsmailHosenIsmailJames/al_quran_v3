@@ -7,14 +7,13 @@ import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_functi
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:geocoding/geocoding.dart";
-import "package:hive/hive.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 
@@ -61,41 +60,19 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     color: Colors.white,
                   ),
                   const Gap(5),
-                  FutureBuilder(
-                    future: placemarkFromCoordinates(widget.lat, widget.lon),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.active) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasData) {
-                        String? country;
-
-                        String? administrativeArea;
-                        String? subAdministrativeArea;
-
-                        for (Placemark placemark in snapshot.data ?? []) {
-                          country ??= placemark.country;
-                          administrativeArea ??= placemark.administrativeArea;
-                          subAdministrativeArea ??=
-                              placemark.subAdministrativeArea;
-                        }
-                        return Text(
-                          "$subAdministrativeArea",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        );
-                      }
-                      return const Text("");
-                    },
+                  getAddressView(
+                    lat: widget.lat,
+                    long: widget.lon,
+                    keepPadding: false,
+                    justAddress: true,
+                    keepDecoration: false,
                   ),
 
                   const Spacer(),
 
                   IconButton(
                     onPressed: () async {
-                      Navigator.push(
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -103,28 +80,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                   const LocationAcquire(moveToDownload: true),
                         ),
                       );
+                      context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .alignWithDatabase();
                     },
                     icon: const Icon(
                       Icons.my_location_rounded,
                       color: Colors.white,
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      final sharedPreferences =
-                          PrayersTimeFunction.prayerTimePreferences;
-                      await sharedPreferences?.clear();
-                      await (await Hive.openBox(
-                        'user',
-                      )).delete("user_location");
-                      await (await Hive.openBox(
-                        'user',
-                      )).delete("selected_prayer_calculation_method");
-                      context
-                          .read<LocationQiblaPrayerDataCubit>()
-                          .checkPrayerDataExits();
-                    },
-                    icon: Icon(Icons.lock_reset),
                   ),
                 ],
               ),

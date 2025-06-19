@@ -1,3 +1,5 @@
+import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -32,15 +34,15 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.moveToDownload ? AppBar() : null,
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
                   "Address: ",
@@ -50,10 +52,39 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                     color: Colors.grey,
                   ),
                 ),
-                const Gap(5),
-                getAddressView(lat: widget.lat, long: widget.long),
+                SizedBox(
+                  height: 30,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                    ),
+                    onPressed: () async {
+                      if (widget.moveToDownload) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => LocationAcquire(
+                                  moveToDownload: widget.moveToDownload,
+                                ),
+                          ),
+                        );
+                      } else {
+                        context
+                            .read<LocationQiblaPrayerDataCubit>()
+                            .saveLocationData(
+                              null,
+                              save: !widget.moveToDownload,
+                            );
+                      }
+                    },
+                    child: const Text("Change"),
+                  ),
+                ),
               ],
             ),
+            const Gap(5),
+            getAddressView(lat: widget.lat, long: widget.long),
             const Gap(15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,18 +136,23 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                   setState(() {
                     isPrayerTimeDownloading = true;
                   });
+                  var cubit = context.read<LocationQiblaPrayerDataCubit>();
                   await PrayersTimeFunction.downloadPrayerDataFromAPI(
                     lat: widget.lat,
                     lon: widget.long,
-                    calculationMethod:
-                        context
-                            .read<LocationQiblaPrayerDataCubit>()
-                            .state
-                            .calculationMethod!,
+                    calculationMethod: cubit.state.calculationMethod!,
                   );
-                  context
-                      .read<LocationQiblaPrayerDataCubit>()
-                      .checkPrayerDataExits();
+                  cubit.saveLocationData(
+                    LatLon(latitude: widget.lat, longitude: widget.long),
+                    save: true,
+                  );
+                  cubit.saveCalculationMethod(
+                    cubit.state.calculationMethod,
+                    save: true,
+                  );
+                  cubit.alignWithDatabase();
+
+                  cubit.checkPrayerDataExits();
                   if (widget.moveToDownload) {
                     Navigator.pop(context);
                   }
