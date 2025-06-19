@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -15,12 +16,14 @@ class DownloadDataForPrayerView extends StatefulWidget {
   final double lat;
   final double long;
   final bool moveToDownload;
+  final bool showCalculationMethodPopupAtOnInit;
 
   const DownloadDataForPrayerView({
     super.key,
     required this.lat,
     required this.long,
     this.moveToDownload = false,
+    this.showCalculationMethodPopupAtOnInit = false,
   });
 
   @override
@@ -30,6 +33,21 @@ class DownloadDataForPrayerView extends StatefulWidget {
 
 class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
   bool isPrayerTimeDownloading = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (widget.showCalculationMethodPopupAtOnInit) {
+        showCalculationMethodPopup(context, (calculationMethod) {
+          context.read<LocationQiblaPrayerDataCubit>().saveCalculationMethod(
+            calculationMethod,
+          );
+          Navigator.pop(context);
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,11 +138,15 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
               ],
             ),
             const Gap(5),
-            getPrayerCalculationMethodInfoWidget(
-              context
-                  .read<LocationQiblaPrayerDataCubit>()
-                  .state
-                  .calculationMethod!,
+            BlocBuilder<
+              LocationQiblaPrayerDataCubit,
+              LocationQiblaPrayerDataState
+            >(
+              builder: (context, state) {
+                return getPrayerCalculationMethodInfoWidget(
+                  state.calculationMethod!,
+                );
+              },
             ),
             const Gap(30),
             SizedBox(
