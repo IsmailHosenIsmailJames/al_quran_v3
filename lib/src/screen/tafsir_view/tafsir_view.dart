@@ -1,7 +1,12 @@
+import "dart:developer";
+
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 
@@ -23,6 +28,8 @@ class _TafsirViewState extends State<TafsirView> {
   @override
   void initState() {
     getTafsirFromDb(widget.ayahKey).then((value) {
+      log(value.toString());
+      value = value?.toString().replaceAll('"', "");
       if (value?.split(":").first.isInt == true &&
           value?.split(":").last.isInt == true) {
         isLinkedToAnother = true;
@@ -30,6 +37,7 @@ class _TafsirViewState extends State<TafsirView> {
       } else {
         tafsirDataString = value ?? "";
       }
+      log(isLinkedToAnother.toString());
       setState(() {});
     });
     surahInfoModel = SurahInfoModel.fromMap(
@@ -54,34 +62,51 @@ class _TafsirViewState extends State<TafsirView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Tafsir will found at : $anotherAyahLinkKey"),
+                  Center(
+                    child: Text("Tafsir will found at : $anotherAyahLinkKey"),
+                  ),
                   const Gap(20),
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return TafsirView(ayahKey: anotherAyahLinkKey);
+                  Center(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return TafsirView(ayahKey: anotherAyahLinkKey);
+                            },
+                          ),
+                          (route) {
+                            return true;
                           },
-                        ),
-                        (route) {
-                          return true;
-                        },
-                      );
-                    },
-                    child: Text("Jump to $anotherAyahLinkKey"),
+                        );
+                      },
+                      child: Text("Jump to $anotherAyahLinkKey"),
+                    ),
                   ),
                 ],
               )
               : SingleChildScrollView(
                 padding: const EdgeInsets.only(
-                  top: 5,
-                  left: 5,
-                  right: 5,
+                  top: 12,
+                  left: 12,
+                  right: 12,
                   bottom: 50,
                 ),
-                child: Html(data: tafsirDataString),
+                child: BlocBuilder<QuranViewCubit, QuranViewState>(
+                  builder: (context, state) {
+                    return Html(
+                      data: tafsirDataString,
+                      style: {
+                        "*": Style(
+                          padding: HtmlPaddings.zero,
+                          margin: Margins.zero,
+                          fontSize: FontSize(state.fontSize),
+                        ),
+                      },
+                    );
+                  },
+                ),
               ),
     );
   }
