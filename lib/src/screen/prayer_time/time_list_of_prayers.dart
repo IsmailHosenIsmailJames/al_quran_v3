@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -111,86 +112,105 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           ),
           const Gap(30),
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(roundedRadius + 12),
-                  topRight: Radius.circular(roundedRadius + 12),
-                ),
-                color: Theme.of(context).colorScheme.surface,
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(roundedRadius + 10),
+                topRight: Radius.circular(roundedRadius + 10),
               ),
-              child: ListView.builder(
-                padding: const EdgeInsets.all(15),
-                itemBuilder: (context, index) {
-                  PrayerModelOfDay? prayerModelOfDay =
-                      PrayersTimeFunction.getTodaysPrayerTime(
-                        DateTime.now().add(Duration(days: index)),
-                      );
-                  if (prayerModelOfDay == null) {
-                    return Text("${DateTime.now()} Found Empty");
-                  }
-                  DateTime? dateOfThis;
-                  if (prayerModelOfDay.date.gregorian.date != null) {
-                    dateOfThis = DateFormat(
-                      "dd-MM-yyyy",
-                    ).tryParse(prayerModelOfDay.date.gregorian.date!);
-                  }
-                  if (dateOfThis == null ||
-                      dateOfThis.isBefore(
-                        DateTime.now().subtract(const Duration(days: 1)),
-                      )) {
-                    return const SizedBox();
-                  }
-
-                  Map<PrayerModelTimesType, TimeOfDay> mapOfTimes =
-                      PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
-                  PrayerModelTimesType nextPrayer =
-                      PrayersTimeFunction.nextPrayerName(prayerModelOfDay);
-
-                  bool isToday = dateOfThis.isAtSameDayAs(DateTime.now());
-                  int? indexOfCurrentPrayer;
-                  if (isToday) {
-                    indexOfCurrentPrayer = PrayerModelTimesType.values.indexOf(
-                      nextPrayer,
-                    );
-                  }
-                  return Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          isToday
-                              ? "Today"
-                              : DateFormat.yMMMEd().format(dateOfThis),
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color:
-                                Theme.of(context).brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
-                          ),
-                        ),
-                      ),
-                      const Divider(),
-                      ...List.generate(mapOfTimes.length, (i) {
-                        bool isThisIsCurrentPrayer = i == indexOfCurrentPrayer;
-                        PrayerModelTimesType prayerModelType = mapOfTimes.keys
-                            .elementAt(i);
-                        return getRowWidgetForEachPrayer(
-                          isThisIsCurrentPrayer,
-                          prayerModelType,
-                          textStyleOfTimes,
-                          mapOfTimes,
-                          i,
-                          context,
-                          isToday,
+              child: Container(
+                color: Theme.of(context).colorScheme.surface,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(15),
+                  itemBuilder: (context, index) {
+                    PrayerModelOfDay? prayerModelOfDay =
+                        PrayersTimeFunction.getTodaysPrayerTime(
+                          DateTime.now().add(Duration(days: index)),
                         );
-                      }),
-                      const Gap(30),
-                    ],
-                  );
-                },
+                    if (prayerModelOfDay == null) {
+                      return Text("${DateTime.now()} Found Empty");
+                    }
+                    DateTime? dateOfThis;
+                    if (prayerModelOfDay.date.gregorian.date != null) {
+                      dateOfThis = DateFormat(
+                        "dd-MM-yyyy",
+                      ).tryParse(prayerModelOfDay.date.gregorian.date!);
+                    }
+                    if (dateOfThis == null ||
+                        dateOfThis.isBefore(
+                          DateTime.now().subtract(const Duration(days: 1)),
+                        )) {
+                      return const SizedBox();
+                    }
+
+                    Map<PrayerModelTimesType, TimeOfDay> mapOfTimes =
+                        PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
+                    PrayerModelTimesType nextPrayer =
+                        PrayersTimeFunction.nextPrayerName(prayerModelOfDay);
+
+                    bool isToday = dateOfThis.isAtSameDayAs(DateTime.now());
+                    int? indexOfCurrentPrayer;
+                    if (isToday) {
+                      indexOfCurrentPrayer = PrayerModelTimesType.values
+                          .indexOf(nextPrayer);
+                    }
+                    return Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              isToday
+                                  ? "Today"
+                                  : DateFormat.yMMMEd().format(dateOfThis),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.grey.shade600
+                                        : Colors.grey.shade400,
+                              ),
+                            ),
+                            if (isToday)
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => const PrayerSettings(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  FluentIcons.settings_24_filled,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                          ],
+                        ),
+                        const Divider(),
+                        ...List.generate(mapOfTimes.length, (i) {
+                          bool isThisIsCurrentPrayer =
+                              i == indexOfCurrentPrayer;
+                          PrayerModelTimesType prayerModelType = mapOfTimes.keys
+                              .elementAt(i);
+                          return getRowWidgetForEachPrayer(
+                            isThisIsCurrentPrayer,
+                            prayerModelType,
+                            textStyleOfTimes,
+                            mapOfTimes,
+                            i,
+                            context,
+                            isToday,
+                          );
+                        }),
+                        const Gap(30),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
