@@ -30,6 +30,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "package:timezone/data/latest_all.dart" as tz;
 import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
@@ -47,6 +48,8 @@ Map<String, dynamic> metaDataSurah = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
@@ -146,7 +149,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AudioTabReciterCubit()),
         BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
-        BlocProvider(create: (context) => PrayerReminderCubit(),),
+        BlocProvider(create: (context) => PrayerReminderCubit()),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(
