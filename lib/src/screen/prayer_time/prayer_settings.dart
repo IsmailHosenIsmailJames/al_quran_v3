@@ -90,6 +90,89 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           Text("Adjust Reminder Time", style: titleStyle),
           const Gap(5),
           getAdjustReminderWidget(),
+          const Gap(15),
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: Text("Enforce Alarm's Sound", style: titleStyle),
+              ),
+              const Spacer(),
+              BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+                builder: (context, prayerReminderState) {
+                  return Switch.adaptive(
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                      Set<WidgetState> states,
+                    ) {
+                      return Icon(
+                        states.contains(WidgetState.selected)
+                            ? Icons.done_rounded
+                            : Icons.close_rounded,
+                        color: Colors.white,
+                      );
+                    }),
+                    value: prayerReminderState.enforceAlarmSound,
+                    onChanged: (value) {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderEnforceSound(value);
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+
+          const Gap(5),
+          const Text(
+            "If enabled, This feature will play the alarm at the volume set here, "
+            "even if your phone's sound is low. "
+            "This ensures you don't miss the alarm due to low phone volume.",
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
+          const Gap(10),
+          BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+            builder: (context, prayerReminderState) {
+              if (prayerReminderState.enforceAlarmSound) {
+                return Row(
+                  children: [
+                    Text("Volume", style: titleStyle),
+                    const Spacer(),
+                    Text(
+                      prayerReminderState.soundVolume.toStringAsFixed(2),
+                      style: titleStyle,
+                    ),
+                  ],
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          const Gap(5),
+          BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+            builder: (context, prayerReminderState) {
+              if (prayerReminderState.enforceAlarmSound) {
+                return SliderTheme(
+                  data: const SliderThemeData(padding: EdgeInsets.zero),
+                  child: Slider(
+                    value: prayerReminderState.soundVolume,
+                    min: 0.0,
+                    max: 1.0,
+                    divisions: 50,
+                    onChanged: (value) {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderSoundVolume(value);
+                    },
+                  ),
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
         ],
       ),
     );
