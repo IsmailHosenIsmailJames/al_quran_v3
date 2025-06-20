@@ -204,4 +204,11 @@ class PrayersTimeFunction {
     }
     return previousReminderModes;
   }
+
+  static Future<Map<PrayerModelTimesType, PrayerReminderType>>
+  setReminderModes(ReminderTypeWithPrayModel data)async{
+    await prayerTimePreferences!.setString("previousReminderModes_${data.prayerTimesType.name}", data.reminderType.name);
+    return getPreviousReminderModes();
+    
+  }
 }
