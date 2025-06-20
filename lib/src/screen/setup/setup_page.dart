@@ -107,264 +107,262 @@ class _AppSetupPageState extends State<AppSetupPage> {
           SafeArea(
             child: Form(
               key: fromKey,
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 12,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "1",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                  top: 60,
+                  bottom: 60,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 12,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "1",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Gap(8),
-                              Text("App Language", style: titleStyle),
-                            ],
-                          ),
-                          const Gap(5),
-                          DropdownButtonFormField(
-                            decoration: const InputDecoration(
-                              hintText: "Select app language...",
                             ),
-                            value: appLanguage,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select one";
-                              } else {
-                                return null;
-                              }
-                            },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-
-                            isExpanded: true,
-                            items: getAppLanguageDropdown(),
-                            onChanged: (value) {
-                              changeAppLanguage(value.toString());
-                              setState(() {});
-                            },
+                            const Gap(8),
+                            Text("App Language", style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            hintText: "Select app language...",
                           ),
+                          value: appLanguage,
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please select one";
+                            } else {
+                              return null;
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
 
-                          const Gap(15),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 12,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "2",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          isExpanded: true,
+                          items: getAppLanguageDropdown(),
+                          onChanged: (value) {
+                            changeAppLanguage(value.toString());
+                            setState(() {});
+                          },
+                        ),
+
+                        const Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 12,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "2",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Gap(8),
-                              Text(
-                                "Quran Translation Language",
-                                style: titleStyle,
-                              ),
-                            ],
-                          ),
-                          const Gap(5),
-                          DropdownButtonFormField(
-                            value: translationLanguage,
-                            items: getQuranTranslationLanguageDropDownList(),
-                            decoration: const InputDecoration(
-                              hintText: "Select translation language...",
                             ),
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select one";
-                              } else {
-                                return null;
-                              }
-                            },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-
-                            isExpanded: true,
-                            onChanged: (value) {
-                              changeTranslationLanguage(value.toString());
-                              setState(() {});
-                            },
-                          ),
-                          const Gap(15),
-
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 13,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "3",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const Gap(8),
-                              Text("Quran Translation Book", style: titleStyle),
-                            ],
-                          ),
-
-                          const Gap(5),
-                          DropdownButtonFormField(
-                            items: getQuranTranslationBookDropDownList(),
-                            decoration: const InputDecoration(
-                              hintText: "Select translation book...",
+                            const Gap(8),
+                            Text(
+                              "Quran Translation Language",
+                              style: titleStyle,
                             ),
-                            value: translationBook,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select one";
-                              } else {
-                                return null;
-                              }
-                            },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-
-                            isExpanded: true,
-                            onChanged: (value) {
-                              translationBook = value ?? "";
-                              setState(() {});
-                            },
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          value: translationLanguage,
+                          items: getQuranTranslationLanguageDropDownList(),
+                          decoration: const InputDecoration(
+                            hintText: "Select translation language...",
                           ),
-                          const Gap(15),
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please select one";
+                            } else {
+                              return null;
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
 
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 13,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "4",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          isExpanded: true,
+                          onChanged: (value) {
+                            changeTranslationLanguage(value.toString());
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "3",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Gap(8),
-                              Text("Quran Tafsir Language", style: titleStyle),
-                            ],
-                          ),
-
-                          const Gap(5),
-                          DropdownButtonFormField(
-                            items: getQuranTafsirLanguageDropDownList(),
-                            decoration: const InputDecoration(
-                              hintText: "Select tafsir language...",
                             ),
-                            value: tafsirLanguage,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select one";
-                              } else {
-                                return null;
-                              }
-                            },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            const Gap(8),
+                            Text("Quran Translation Book", style: titleStyle),
+                          ],
+                        ),
 
-                            isExpanded: true,
-                            onChanged: (value) {
-                              changeTafsirLanguage(value.toString());
-                              setState(() {});
-                            },
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTranslationBookDropDownList(),
+                          decoration: const InputDecoration(
+                            hintText: "Select translation book...",
                           ),
-                          const Gap(15),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 13,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "5",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          value: translationBook,
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please select one";
+                            } else {
+                              return null;
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                          isExpanded: true,
+                          onChanged: (value) {
+                            translationBook = value ?? "";
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "4",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Gap(8),
-                              Text("Quran Tafsir Book", style: titleStyle),
-                            ],
-                          ),
-                          const Gap(5),
-                          DropdownButtonFormField(
-                            items: getQuranTafsirBookDropDownList(),
-                            decoration: const InputDecoration(
-                              hintText: "Select tafsir book...",
                             ),
-                            isExpanded: true,
-                            value: tafsirBook,
-                            validator: (value) {
-                              if (value == null) {
-                                return "Please select one";
-                              } else {
-                                return null;
-                              }
-                            },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            onChanged: (value) {
-                              tafsirBook = value;
-                              setState(() {});
-                            },
+                            const Gap(8),
+                            Text("Quran Tafsir Language", style: titleStyle),
+                          ],
+                        ),
+
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTafsirLanguageDropDownList(),
+                          decoration: const InputDecoration(
+                            hintText: "Select tafsir language...",
                           ),
-                          const Gap(15),
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 13,
-                                backgroundColor: AppColors.primary,
-                                child: const Text(
-                                  "6",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          value: tafsirLanguage,
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please select one";
+                            } else {
+                              return null;
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                          isExpanded: true,
+                          onChanged: (value) {
+                            changeTafsirLanguage(value.toString());
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "5",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Gap(8),
-                              Text("Quran Script & Style", style: titleStyle),
-                            ],
+                            ),
+                            const Gap(8),
+                            Text("Quran Tafsir Book", style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        DropdownButtonFormField(
+                          items: getQuranTafsirBookDropDownList(),
+                          decoration: const InputDecoration(
+                            hintText: "Select tafsir book...",
                           ),
-                          const Gap(5),
-                          getScriptSelectionSegmentedButtons(),
-                          getAyahPreviewWidget(
-                            showHeaderOptions: true,
-                            showOnlyAyah: true,
-                          ),
+                          isExpanded: true,
+                          value: tafsirBook,
+                          validator: (value) {
+                            if (value == null) {
+                              return "Please select one";
+                            } else {
+                              return null;
+                            }
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (value) {
+                            tafsirBook = value;
+                            setState(() {});
+                          },
+                        ),
+                        const Gap(15),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 13,
+                              backgroundColor: AppColors.primary,
+                              child: const Text(
+                                "6",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Gap(8),
+                            Text("Quran Script & Style", style: titleStyle),
+                          ],
+                        ),
+                        const Gap(5),
+                        getScriptSelectionSegmentedButtons(),
+                        getAyahPreviewWidget(
+                          showHeaderOptions: true,
+                          showOnlyAyah: true,
+                        ),
 
-                          const Gap(80),
-                        ],
-                      ),
-                    ],
-                  ),
+                        const Gap(80),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
