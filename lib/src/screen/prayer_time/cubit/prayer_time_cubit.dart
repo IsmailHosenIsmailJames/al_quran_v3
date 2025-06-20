@@ -11,6 +11,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
           prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
           previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
           reminderTimeAdjustment: PrayersTimeFunction.getAdjustReminderTime(),
+          enforceAlarmSound: PrayersTimeFunction.getEnforceAlarmSound(),
+          soundVolume: PrayersTimeFunction.getSoundVolume(),
         ),
       );
 
@@ -53,5 +55,15 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
           timeInMinutes,
         );
     emit(state.copyWith(reminderTimeAdjustment: reminderTimeAdjustment));
+  }
+
+  void setReminderEnforceSound(bool value) async {
+    await PrayersTimeFunction.setEnforceAlarmSound(value);
+    emit(state.copyWith(enforceAlarmSound: value));
+  }
+
+  void setReminderSoundVolume(double value) async {
+    await PrayersTimeFunction.setSoundVolume(value);
+    emit(state.copyWith(soundVolume: value));
   }
 }

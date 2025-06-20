@@ -240,4 +240,20 @@ class PrayersTimeFunction {
     );
     return getAdjustReminderTime();
   }
+
+  static Future<void> setEnforceAlarmSound(bool value) async {
+    await prayerTimePreferences!.setBool("reminderEnforceAlarmSound", value);
+  }
+
+  static bool getEnforceAlarmSound() {
+    return prayerTimePreferences!.getBool("reminderEnforceAlarmSound") ?? false;
+  }
+
+  static Future<void> setSoundVolume(double value) async {
+    await prayerTimePreferences!.setDouble("reminderSoundVolume", value);
+  }
+
+  static double getSoundVolume() {
+    return prayerTimePreferences!.getDouble("reminderSoundVolume") ?? 1.0;
+  }
 }
