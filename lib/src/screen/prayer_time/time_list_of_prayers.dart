@@ -54,6 +54,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         children: [
           Column(
             children: [
+              const Gap(7),
               Row(
                 children: [
                   const Gap(10),
@@ -62,12 +63,16 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     color: Colors.white,
                   ),
                   const Gap(5),
-                  getAddressView(
-                    lat: widget.lat,
-                    long: widget.lon,
-                    keepPadding: false,
-                    justAddress: true,
-                    keepDecoration: false,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: getAddressView(
+                      lat: widget.lat,
+                      long: widget.lon,
+                      keepPadding: false,
+                      justAddress: true,
+                      keepDecoration: false,
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
 
                   const Spacer(),

@@ -42,6 +42,7 @@ Widget getAddressView({
   bool keepDecoration = true,
   bool keepPadding = true,
   bool justAddress = false,
+  TextStyle? style,
 }) {
   return FutureBuilder<String?>(
     future: fetchFormattedAddress(lat, long),
@@ -49,16 +50,16 @@ Widget getAddressView({
       if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {
         // Show a generic loading indicator only if we are not in 'justAddress' mode,
         // otherwise, let it be handled by the parent if needed.
-        return const Text("Loading...");
+        return Text("Loading...", style: style);
       } else if (snapshot.hasError && !justAddress) {
         // Show error only if not in 'justAddress' mode
-        return const Text("Error fetching address");
+        return Text("Error fetching address", style: style);
       }
 
       final String? address = snapshot.data;
 
       if (justAddress) {
-        return Text(address ?? "Address not available");
+        return Text(address ?? "Address not available", style: style);
       }
 
       // Full view with address, lat, and long
@@ -75,19 +76,29 @@ Widget getAddressView({
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(address ?? "Address not available"),
+            Text(address ?? "Address not available", style: style),
             const Gap(5),
             Row(
               children: [
-                const Text("Latitude: ", style: TextStyle(color: Colors.grey)),
-                Text(lat.toString()),
+                Text(
+                  "Latitude: ",
+                  style: (style ?? const TextStyle()).copyWith(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(lat.toString(), style: style),
               ],
             ),
             const Gap(5),
             Row(
               children: [
-                const Text("Longitude: ", style: TextStyle(color: Colors.grey)),
-                Text(long.toString()),
+                Text(
+                  "Longitude: ",
+                  style: (style ?? const TextStyle()).copyWith(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(long.toString(), style: style),
               ],
             ),
           ],
