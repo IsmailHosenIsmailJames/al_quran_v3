@@ -279,60 +279,70 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 child:
                     !isToday
                         ? null
-                        : Switch.adaptive(
-                          thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                            Set<WidgetState> states,
-                          ) {
-                            if (states.contains(WidgetState.selected)) {
-                              return Icon(
-                                defaultWhenEnable.reminderType ==
-                                        PrayerReminderType.notification
-                                    ? FluentIcons.alert_on_24_regular
-                                    : Icons.alarm_on_rounded,
-                              );
-                            }
-                            return Icon(
-                              defaultWhenEnable.reminderType ==
-                                      PrayerReminderType.notification
-                                  ? FluentIcons.alert_off_24_regular
-                                  : Icons.alarm_off_rounded,
-                            );
-                          }),
-                          value: isCurrentToRemind,
-                          onChanged: (value) async {
-                            if (value) {
-                              PermissionStatus status =
-                                  await Permission.notification.request();
-                              if (status == PermissionStatus.granted) {
-                                context
-                                    .read<PrayerReminderCubit>()
-                                    .addPrayerToRemember(defaultWhenEnable);
-                                Fluttertoast.showToast(
-                                  msg:
-                                      "Reminder for ${prayerModelType.name.capitalize()} added",
-                                );
-                              } else {
-                                Fluttertoast.showToast(
-                                  msg:
-                                      "Please allow notification permission to use this feature",
-                                );
-                              }
-                            } else {
-                              await PrayersTimeFunction.removePrayerToReminder(
-                                currentReminder!,
-                              );
-                              await setReminderForPrayers();
-                              Fluttertoast.showToast(
-                                msg:
-                                    "Reminder for ${prayerModelType.name.capitalize()} removed",
-                              );
-                            }
-                          },
+                        : getPrayerReminderSwitch(
+                          defaultWhenEnable,
+                          isCurrentToRemind,
+                          context,
+                          prayerModelType,
+                          currentReminder,
                         ),
               ),
             ],
           ),
         );
+      },
+    );
+  }
+
+  Switch getPrayerReminderSwitch(
+    ReminderTypeWithPrayModel defaultWhenEnable,
+    bool isCurrentToRemind,
+    BuildContext context,
+    PrayerModelTimesType prayerModelType,
+    ReminderTypeWithPrayModel? currentReminder,
+  ) {
+    return Switch.adaptive(
+      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.selected)) {
+          return Icon(
+            defaultWhenEnable.reminderType == PrayerReminderType.notification
+                ? FluentIcons.alert_on_24_regular
+                : Icons.alarm_on_rounded,
+          );
+        }
+        return Icon(
+          defaultWhenEnable.reminderType == PrayerReminderType.notification
+              ? FluentIcons.alert_off_24_regular
+              : Icons.alarm_off_rounded,
+        );
+      }),
+      value: isCurrentToRemind,
+      onChanged: (value) async {
+        if (value) {
+          PermissionStatus status = await Permission.notification.request();
+          if (status == PermissionStatus.granted) {
+            context.read<PrayerReminderCubit>().addPrayerToRemember(
+              defaultWhenEnable,
+            );
+            Fluttertoast.showToast(
+              msg: "Reminder for ${prayerModelType.name.capitalize()} added",
+            );
+          } else {
+            Fluttertoast.showToast(
+              msg: "Please allow notification permission to use this feature",
+            );
+          }
+        } else {
+          context.read<PrayerReminderCubit>().removePrayerToRemember(
+            currentReminder!,
+          );
+          await setReminderForPrayers();
+          Fluttertoast.showToast(
+            msg: "Reminder for ${prayerModelType.name.capitalize()} removed",
+          );
+        }
       },
     );
   }
