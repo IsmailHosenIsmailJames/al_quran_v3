@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:bloc/bloc.dart";
 
@@ -9,6 +10,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
         PrayerReminderState(
           prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
           previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
+          reminderTimeAdjustment: PrayersTimeFunction.getAdjustReminderTime(),
         ),
       );
 
@@ -39,5 +41,17 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   void setReminderMode(ReminderTypeWithPrayModel data) async {
     var reminderModes = await PrayersTimeFunction.setReminderModes(data);
     emit(state.copyWith(previousReminderModes: reminderModes));
+  }
+
+  void setReminderTimeAdjustment(
+    PrayerModelTimesType prayerType,
+    int timeInMinutes,
+  ) async {
+    final reminderTimeAdjustment =
+        await PrayersTimeFunction.setAdjustReminderTime(
+          prayerType,
+          timeInMinutes,
+        );
+    emit(state.copyWith(reminderTimeAdjustment: reminderTimeAdjustment));
   }
 }
