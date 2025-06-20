@@ -4,10 +4,14 @@ import "dart:developer";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:flutter/material.dart";
 import "package:http/http.dart";
 import "package:intl/intl.dart";
 import "package:shared_preferences/shared_preferences.dart";
+
+import "../models/prayer_types.dart";
+import "../models/reminder_type.dart";
 
 class PrayersTimeFunction {
   static SharedPreferences? prayerTimePreferences;
@@ -137,38 +141,67 @@ class PrayersTimeFunction {
     return timeOfDayFromString;
   }
 
-  static Future<void> addPrayerToReminder(PrayerModelTimesType type) async {
-    List<String> previousTimeList =
-        prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
-    if (!previousTimeList.contains(type.name)) {
-      previousTimeList.add(type.name);
-      await prayerTimePreferences?.setStringList(
-        "prayer_time_to_remind",
-        previousTimeList,
-      );
-    }
-  }
+  static Future<void> addPrayerToReminder(
+    ReminderTypeWithPrayModel data,
+  ) async {
+    List<ReminderTypeWithPrayModel> reminderTypeWithPrayModels =
+        getListOfPrayerToRemember();
+    reminderTypeWithPrayModels.removeWhere(
+      (element) => element.prayerTimesType == data.prayerTimesType,
+    );
+    reminderTypeWithPrayModels.add(data);
 
-  static Future<void> removePrayerToReminder(PrayerModelTimesType type) async {
-    List<String> previousTimeList =
-        prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
-    previousTimeList.remove(type.name);
+    await prayerTimePreferences?.setString(
+      "previousReminderModes_${data.prayerTimesType.name}",
+      data.reminderType.name,
+    );
+
     await prayerTimePreferences?.setStringList(
       "prayer_time_to_remind",
-      previousTimeList,
+      reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
     );
   }
 
-  static List<PrayerModelTimesType>? getListOfPrayerToRemember() {
-    return prayerTimePreferences
-        ?.getStringList("prayer_time_to_remind")
-        ?.map(
-          (e) => PrayerModelTimesType.values.firstWhere(
-            (element) => element.name == e,
+  static Future<void> removePrayerToReminder(
+    ReminderTypeWithPrayModel data,
+  ) async {
+    List<ReminderTypeWithPrayModel> reminderTypeWithPrayModels =
+        getListOfPrayerToRemember();
+    reminderTypeWithPrayModels.removeWhere(
+      (element) => element.prayerTimesType == data.prayerTimesType,
+    );
+    await prayerTimePreferences?.setStringList(
+      "prayer_time_to_remind",
+      reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
+    );
+  }
+
+  static List<ReminderTypeWithPrayModel> getListOfPrayerToRemember() {
+    return (prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [])
+        .map(
+          (e) => ReminderTypeWithPrayModel.fromJson(
+            Map<String, dynamic>.from(jsonDecode(e)),
           ),
         )
         .toList();
   }
-}
 
-enum PrayerModelTimesType { fajr, sunrise, dhuhr, asr, maghrib, isha, midnight }
+  static Map<PrayerModelTimesType, PrayerReminderType>
+  getPreviousReminderModes() {
+    Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes = {};
+    for (PrayerModelTimesType prayerModelTimesType
+        in PrayerModelTimesType.values) {
+      previousReminderModes.addAll({
+        prayerModelTimesType: PrayerReminderType.values.firstWhere(
+          (element) =>
+              element.name ==
+              (prayerTimePreferences!.getString(
+                    "previousReminderModes_${prayerModelTimesType.name}",
+                  ) ??
+                  PrayerReminderType.alarm.name),
+        ),
+      });
+    }
+    return previousReminderModes;
+  }
+}
