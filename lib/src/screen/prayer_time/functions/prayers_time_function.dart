@@ -205,10 +205,39 @@ class PrayersTimeFunction {
     return previousReminderModes;
   }
 
-  static Future<Map<PrayerModelTimesType, PrayerReminderType>>
-  setReminderModes(ReminderTypeWithPrayModel data)async{
-    await prayerTimePreferences!.setString("previousReminderModes_${data.prayerTimesType.name}", data.reminderType.name);
+  static Future<Map<PrayerModelTimesType, PrayerReminderType>> setReminderModes(
+    ReminderTypeWithPrayModel data,
+  ) async {
+    await prayerTimePreferences!.setString(
+      "previousReminderModes_${data.prayerTimesType.name}",
+      data.reminderType.name,
+    );
     return getPreviousReminderModes();
-    
+  }
+
+  static Map<PrayerModelTimesType, int> getAdjustReminderTime() {
+    Map<PrayerModelTimesType, int> reminderTimeAdjustment = {};
+    for (PrayerModelTimesType prayerModelTimesType
+        in PrayerModelTimesType.values) {
+      reminderTimeAdjustment.addAll({
+        prayerModelTimesType:
+            prayerTimePreferences!.getInt(
+              "reminderTimeAdjustment_${prayerModelTimesType.name}",
+            ) ??
+            0,
+      });
+    }
+    return reminderTimeAdjustment;
+  }
+
+  static Future<Map<PrayerModelTimesType, int>> setAdjustReminderTime(
+    PrayerModelTimesType prayerType,
+    int timeInMinutes,
+  ) async {
+    await prayerTimePreferences!.setInt(
+      "reminderTimeAdjustment_${prayerType.name}",
+      timeInMinutes,
+    );
+    return getAdjustReminderTime();
   }
 }

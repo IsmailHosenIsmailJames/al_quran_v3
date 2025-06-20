@@ -86,7 +86,94 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           Text("Reminder Settings", style: titleStyle),
           const Gap(5),
           getDropPrayerSettings(),
+          const Gap(20),
+          Text("Adjust Reminder Time", style: titleStyle),
+          const Gap(5),
+          getAdjustReminderWidget(),
         ],
+      ),
+    );
+  }
+
+  Widget getAdjustReminderWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.primaryShade300),
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+      padding: const EdgeInsets.all(5),
+      child: BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+        builder: (context, prayerReminderState) {
+          return Column(
+            children: List.generate(PrayerModelTimesType.values.length, (
+              index,
+            ) {
+              PrayerModelTimesType currentPrayerType =
+                  PrayerModelTimesType.values[index];
+
+              int currentTimeInMinutes =
+                  prayerReminderState
+                      .reminderTimeAdjustment[currentPrayerType] ??
+                  0;
+
+              return Container(
+                decoration: BoxDecoration(
+                  color:
+                      index.isEven
+                          ? AppColors.primaryShade100
+                          : AppColors.primaryShade200,
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                ),
+                padding: const EdgeInsets.only(left: 10, right: 5),
+                margin: const EdgeInsets.only(bottom: 2, top: 2),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      PrayerModelTimesType.values[index].name.capitalize,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setReminderTimeAdjustment(
+                              PrayerModelTimesType.values[index],
+                              --currentTimeInMinutes,
+                            );
+                      },
+                      icon: const Icon(FluentIcons.subtract_24_regular),
+                    ),
+                    const Gap(10),
+                    Text(
+                      currentTimeInMinutes.toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Text("  Min."),
+                    const Gap(10),
+                    IconButton(
+                      onPressed: () {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setReminderTimeAdjustment(
+                              PrayerModelTimesType.values[index],
+                              ++currentTimeInMinutes,
+                            );
+                      },
+                      icon: const Icon(FluentIcons.add_24_regular),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          );
+        },
       ),
     );
   }
@@ -94,7 +181,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   Widget getDropPrayerSettings() {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primary),
+        border: Border.all(color: AppColors.primaryShade300),
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       padding: const EdgeInsets.all(5),

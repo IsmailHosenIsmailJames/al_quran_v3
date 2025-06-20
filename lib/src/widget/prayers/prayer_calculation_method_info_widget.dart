@@ -12,7 +12,7 @@ Widget getPrayerCalculationMethodInfoWidget(
 ) {
   return Container(
     decoration: BoxDecoration(
-      border: Border.all(color: AppColors.primary),
+      border: Border.all(color: AppColors.primaryShade300),
       borderRadius: BorderRadius.circular(roundedRadius),
     ),
     padding: const EdgeInsets.all(5),
