@@ -57,7 +57,7 @@ class CirclePainter extends CustomPainter {
 
     final paint =
         Paint()
-          ..color = Colors.white
+          ..color = Colors.white.withValues(alpha: 0.3)
           ..strokeWidth = circleStockWidth
           ..style = PaintingStyle.stroke;
 
@@ -115,7 +115,7 @@ class CirclePainter extends CustomPainter {
 
     final prayerMarkerPaint =
         Paint()
-          ..color = Colors.grey
+          ..color = Colors.white
           ..style = PaintingStyle.fill;
 
     const double prayerMarkerRadius = 3.0;
