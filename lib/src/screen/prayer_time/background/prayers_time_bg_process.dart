@@ -1,12 +1,15 @@
 import "dart:io";
 
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:alarm/alarm.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:workmanager/workmanager.dart";
+
+import "../models/prayer_types.dart";
 
 @pragma("vm:entry-point")
 void callbackDispatcher() {
@@ -30,10 +33,12 @@ Future<void> setReminderForPrayers() async {
   }
   Map<PrayerModelTimesType, TimeOfDay> prayerTimings =
       PrayersTimeFunction.getPrayerTimings(getTodaysPrayerTime);
-  List<PrayerModelTimesType> listOfPrayerReminder =
-      PrayersTimeFunction.getListOfPrayerToRemember() ?? [];
+  List<ReminderTypeWithPrayModel> listOfPrayerReminder =
+      PrayersTimeFunction.getListOfPrayerToRemember();
   for (PrayerModelTimesType key in prayerTimings.keys) {
-    if (!(listOfPrayerReminder.contains(key) == true)) {
+    if (!(listOfPrayerReminder
+        .where((element) => element.prayerTimesType == key)
+        .isNotEmpty)) {
       removeAllReminderAccordingType(key);
       continue;
     }
