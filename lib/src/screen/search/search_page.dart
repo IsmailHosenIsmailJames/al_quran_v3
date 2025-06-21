@@ -1,7 +1,18 @@
+import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
+import "package:al_quran_v3/src/screen/search/models/search_options.dart";
+import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:flex_color_picker/flex_color_picker.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+
+import "cubit/search_cubit.dart";
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final bool popup;
+
+  const SearchPage({super.key, this.popup = false});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -10,6 +21,108 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text("Search")));
+    return Scaffold(
+      appBar:
+          widget.popup
+              ? null
+              : AppBar(
+                title: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(FluentIcons.search_24_filled, size: 30),
+                    Gap(15),
+                    Text("Quran Search"),
+                  ],
+                ),
+              ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (widget.popup)
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(FluentIcons.search_24_filled, size: 30),
+                  Text(
+                    "Quran Search",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            if (widget.popup) const Gap(20),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppColors.primaryShade100,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: AppColors.primaryShade300),
+              ),
+
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: "Search",
+                  prefixIcon: Icon(FluentIcons.search_24_filled),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+            const Gap(10),
+            searchFieldSelector(),
+
+            const Gap(10),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(FluentIcons.search_24_filled),
+                label: const Text("Search Now"),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget searchFieldSelector() {
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: List.generate(SearchFields.values.length, (index) {
+            SearchFields currentSearchField = SearchFields.values.elementAt(
+              index,
+            );
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Checkbox(
+                  value: currentSearchField == state.searchFields,
+                  onChanged: (value) {
+                    context.read<SearchCubit>().changeSearchField(
+                      currentSearchField,
+                    );
+                  },
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<SearchCubit>().changeSearchField(
+                      currentSearchField,
+                    );
+                  },
+                  child: Text(currentSearchField.name.capitalize),
+                ),
+              ],
+            );
+          }),
+        );
+      },
+    );
   }
 }
