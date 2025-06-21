@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
+import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
@@ -47,7 +48,7 @@ Map<String, dynamic> metaDataSurah = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await initAwesomeNotification();
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
@@ -129,6 +130,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   final SharedPreferences preferences;
+
   const MyApp({super.key, required this.preferences});
 
   @override
