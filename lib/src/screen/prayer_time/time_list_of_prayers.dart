@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/functions/permissions_for_notifications.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -20,7 +21,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
-import "package:permission_handler/permission_handler.dart";
 
 import "models/prayer_model_of_day.dart";
 import "models/prayer_types.dart";
@@ -321,8 +321,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       value: isCurrentToRemind,
       onChanged: (value) async {
         if (value) {
-          PermissionStatus status = await Permission.notification.request();
-          if (status == PermissionStatus.granted) {
+          if (await requestPermissionForReminder()) {
             context.read<PrayerReminderCubit>().addPrayerToRemember(
               defaultWhenEnable,
             );
