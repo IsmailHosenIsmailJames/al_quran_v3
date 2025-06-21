@@ -329,12 +329,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         ),
                       ),
                       onChanged: (value) {
-                        context.read<PrayerReminderCubit>().setReminderMode(
-                          ReminderTypeWithPrayModel(
-                            prayerTimesType: currentPrayerType,
-                            reminderType: value!,
-                          ),
+                        var cubit = context.read<PrayerReminderCubit>();
+                        var data = ReminderTypeWithPrayModel(
+                          prayerTimesType: currentPrayerType,
+                          reminderType: value!,
                         );
+                        cubit.setReminderMode(data);
                       },
                     ),
                   ],
