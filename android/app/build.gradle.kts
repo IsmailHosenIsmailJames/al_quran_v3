@@ -33,18 +33,18 @@ android {
         applicationId = "com.ismail_hosen_james.al_bayan_quran"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 21
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
     }
 
-    // packagingOptions {
-    //    jniLibs {
-    //        useLegacyPackaging = true
-    //    }
-    // }
+     packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+     }
 
     signingConfigs {
         create("release") {
