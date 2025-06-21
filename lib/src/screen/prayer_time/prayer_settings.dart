@@ -108,7 +108,6 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         states.contains(WidgetState.selected)
                             ? Icons.done_rounded
                             : Icons.close_rounded,
-                        color: Colors.white,
                       );
                     }),
                     value: prayerReminderState.enforceAlarmSound,
