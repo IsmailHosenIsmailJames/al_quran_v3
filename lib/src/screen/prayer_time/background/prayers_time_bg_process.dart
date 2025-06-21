@@ -1,9 +1,13 @@
 import "dart:io";
 
+import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
+import "package:al_quran_v3/src/notification/set_notification.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:alarm/alarm.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
@@ -35,47 +39,75 @@ Future<void> setReminderForPrayers() async {
       PrayersTimeFunction.getPrayerTimings(getTodaysPrayerTime);
   List<ReminderTypeWithPrayModel> listOfPrayerReminder =
       PrayersTimeFunction.getListOfPrayerToRemember();
+  Map<PrayerModelTimesType, int> adjustTimings =
+      PrayersTimeFunction.getAdjustReminderTime();
   for (PrayerModelTimesType key in prayerTimings.keys) {
-    if (!(listOfPrayerReminder
-        .where((element) => element.prayerTimesType == key)
-        .isNotEmpty)) {
+    int currentAdjustTiming = adjustTimings[key] ?? 0;
+    var currentReminder = listOfPrayerReminder.firstOrNullWhere(
+      (element) => element.prayerTimesType == key,
+    );
+    if (currentReminder == null) {
       removeAllReminderAccordingType(key);
       continue;
     }
-    int alarmID =
+
+    int reminderID =
         "${PrayerModelTimesType.values.indexOf(key)}${now.year % 1000}${now.month}${now.day}"
             .toInt();
-    AlarmSettings? previousAlarm = await Alarm.getAlarm(alarmID);
     TimeOfDay timeOfDay = prayerTimings[key]!;
-    if (previousAlarm == null &&
-        timeOfDay.isAfter(TimeOfDay.fromDateTime(now))) {
-      Alarm.set(
-        alarmSettings: AlarmSettings(
-          id: alarmID,
-          dateTime: now.copyWith(
-            hour: timeOfDay.hour,
-            minute: timeOfDay.minute,
-          ),
-          assetAudioPath: "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
-          loopAudio: false,
-          vibrate: true,
-          warningNotificationOnKill: Platform.isIOS,
-          androidFullScreenIntent: false,
-          volumeSettings: VolumeSettings.fade(
-            volume: 1,
-            fadeDuration: const Duration(seconds: 3),
-            volumeEnforced: true,
-          ),
-          notificationSettings: NotificationSettings(
-            title: "It's time of ${key.name.capitalize()}",
-            body:
-                "${key.name.capitalize()} is at ${DateFormat.Hms().format(now.copyWith(hour: timeOfDay.hour, minute: timeOfDay.minute))}",
-            stopButton: "Stop the Adhan",
-            icon: "notification_icon",
-            iconColor: AppColors.primary,
-          ),
-        ),
+    DateTime reminderTime = now.copyWith(
+      hour: timeOfDay.hour,
+      minute: timeOfDay.minute,
+    );
+    if (currentAdjustTiming >= 0) {
+      reminderTime = reminderTime.add(Duration(minutes: currentAdjustTiming));
+    } else {
+      reminderTime = reminderTime.subtract(
+        Duration(minutes: currentAdjustTiming.abs()),
       );
+    }
+
+    String reminderTitle = "It's time of ${key.name.capitalize()}";
+    String reminderBody =
+        "${key.name.capitalize()} is at ${DateFormat.Hms().format(now.copyWith(hour: timeOfDay.hour, minute: timeOfDay.minute))}";
+
+    if (currentReminder.reminderType == PrayerReminderType.notification) {
+      await initAwesomeNotification();
+      await setPrayerNotifications(
+        id: reminderID,
+        title: reminderTitle,
+        body: reminderBody,
+        time: reminderTime,
+        data: currentReminder,
+      );
+    } else {
+      AlarmSettings? previousAlarm = await Alarm.getAlarm(reminderID);
+      if (previousAlarm == null &&
+          timeOfDay.isAfter(TimeOfDay.fromDateTime(now))) {
+        Alarm.set(
+          alarmSettings: AlarmSettings(
+            id: reminderID,
+            dateTime: reminderTime,
+            assetAudioPath: "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
+            loopAudio: false,
+            vibrate: true,
+            warningNotificationOnKill: Platform.isIOS,
+            androidFullScreenIntent: false,
+            volumeSettings: VolumeSettings.fade(
+              volume: PrayersTimeFunction.getSoundVolume(),
+              fadeDuration: const Duration(seconds: 2),
+              volumeEnforced: PrayersTimeFunction.getEnforceAlarmSound(),
+            ),
+            notificationSettings: NotificationSettings(
+              title: reminderTitle,
+              body: reminderBody,
+              stopButton: "Stop the Adhan",
+              icon: "notification_icon",
+              iconColor: AppColors.primary,
+            ),
+          ),
+        );
+      }
     }
   }
 }
@@ -89,4 +121,20 @@ Future<void> removeAllReminderAccordingType(PrayerModelTimesType type) async {
       await Alarm.stop(alarm.id);
     }
   }
+
+  List<NotificationModel> notifications =
+      await AwesomeNotifications().listScheduledNotifications();
+  for (NotificationModel notificationModel in notifications) {
+    if (notificationModel.content?.id != null &&
+        notificationModel.content!.id.toString().startsWith(
+          PrayerModelTimesType.values.indexOf(type).toString(),
+        )) {
+      await AwesomeNotifications().cancel(notificationModel.content!.id!);
+    }
+  }
+}
+
+Future<void> removeAllReminder() async {
+  await AwesomeNotifications().cancelAllSchedules();
+  await Alarm.stopAll();
 }

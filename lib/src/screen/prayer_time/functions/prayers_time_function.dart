@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
+import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -39,6 +40,8 @@ class PrayersTimeFunction {
         await prayerTimePreferences!.setString(key, jsonEncode(infoList[key]));
       }
       await prayerTimePreferences?.reload();
+      await removeAllReminder();
+      await setReminderForPrayers();
       loadPrayersData();
       return true;
     }
@@ -160,11 +163,13 @@ class PrayersTimeFunction {
       "prayer_time_to_remind",
       reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
     );
+    await setReminderForPrayers();
   }
 
   static Future<void> removePrayerToReminder(
     ReminderTypeWithPrayModel data,
   ) async {
+    await removeAllReminderAccordingType(data.prayerTimesType);
     List<ReminderTypeWithPrayModel> reminderTypeWithPrayModels =
         getListOfPrayerToRemember();
     reminderTypeWithPrayModels.removeWhere(
@@ -174,6 +179,7 @@ class PrayersTimeFunction {
       "prayer_time_to_remind",
       reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
     );
+    await setReminderForPrayers();
   }
 
   static List<ReminderTypeWithPrayModel> getListOfPrayerToRemember() {
@@ -212,6 +218,8 @@ class PrayersTimeFunction {
       "previousReminderModes_${data.prayerTimesType.name}",
       data.reminderType.name,
     );
+    await removeAllReminder();
+    await setReminderForPrayers();
     return getPreviousReminderModes();
   }
 
@@ -238,11 +246,15 @@ class PrayersTimeFunction {
       "reminderTimeAdjustment_${prayerType.name}",
       timeInMinutes,
     );
+    await removeAllReminder();
+    await setReminderForPrayers();
     return getAdjustReminderTime();
   }
 
   static Future<void> setEnforceAlarmSound(bool value) async {
     await prayerTimePreferences!.setBool("reminderEnforceAlarmSound", value);
+    await removeAllReminder();
+    await setReminderForPrayers();
   }
 
   static bool getEnforceAlarmSound() {
@@ -251,6 +263,8 @@ class PrayersTimeFunction {
 
   static Future<void> setSoundVolume(double value) async {
     await prayerTimePreferences!.setDouble("reminderSoundVolume", value);
+    await removeAllReminder();
+    await setReminderForPrayers();
   }
 
   static double getSoundVolume() {
