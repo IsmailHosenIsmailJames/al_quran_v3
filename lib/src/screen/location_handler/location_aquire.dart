@@ -132,6 +132,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
             const Gap(5),
             SizedBox(
               width: double.infinity,
+              height: 50,
               child: OutlinedButton.icon(
                 onPressed: () {
                   Navigator.push(
