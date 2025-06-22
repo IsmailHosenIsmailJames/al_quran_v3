@@ -57,6 +57,7 @@ dependencies:
   flex_color_picker: ^3.7.1
   window_manager: ^0.5.0
   awesome_notifications: ^0.10.1
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
