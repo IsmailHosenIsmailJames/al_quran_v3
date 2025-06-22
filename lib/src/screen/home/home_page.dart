@@ -5,9 +5,12 @@ import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/search/search_page.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
@@ -21,13 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,57 +66,75 @@ class _HomePageState extends State<HomePage> {
           const Gap(5),
         ],
       ),
-      body:
-          [
-            const QuranPage(),
-            if (Platform.isIOS || Platform.isAndroid) const PrayerTimePage(),
-            if (Platform.isIOS || Platform.isAndroid) const QiblaDirection(),
-            const AudioPage(),
-          ][_selectedIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 0
-                  ? FluentIcons.book_16_filled
-                  : FluentIcons.book_24_regular,
-            ),
-            label: "Quran",
-          ),
-          if (Platform.isIOS || Platform.isAndroid)
-            BottomNavigationBarItem(
-              icon: Icon(
-                _selectedIndex == 1
-                    ? FluentIcons.clock_24_filled
-                    : FluentIcons.clock_24_regular,
-              ),
-              label: "Prayers",
-            ),
-          if (Platform.isIOS || Platform.isAndroid)
-            BottomNavigationBarItem(
-              icon: Icon(
-                _selectedIndex == 2
-                    ? FluentIcons.compass_northwest_24_filled
-                    : FluentIcons.compass_northwest_24_regular,
-              ),
-              label: "Qibla",
-            ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 3
-                  ? Icons.audiotrack_rounded
-                  : Icons.audiotrack_outlined,
-            ),
-            label: "Audio",
-          ),
-        ],
+      body: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+        buildWhen: (previous, current) {
+          return previous.tabIndex != current.tabIndex;
+        },
+        builder:
+            (context, state) =>
+                [
+                  const QuranPage(),
+                  if (Platform.isIOS || Platform.isAndroid)
+                    const PrayerTimePage(),
+                  if (Platform.isIOS || Platform.isAndroid)
+                    const QiblaDirection(),
+                  const AudioPage(),
+                ][state.tabIndex],
       ),
+
+      bottomNavigationBar:
+          BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+            buildWhen: (previous, current) {
+              return previous.tabIndex != current.tabIndex;
+            },
+            builder: (context, state) {
+              return BottomNavigationBar(
+                currentIndex: state.tabIndex,
+                onTap: context.read<OthersSettingsCubit>().setTabIndex,
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: AppColors.primary,
+                selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      state.tabIndex == 0
+                          ? FluentIcons.book_16_filled
+                          : FluentIcons.book_24_regular,
+                    ),
+                    label: "Quran",
+                  ),
+                  if (Platform.isIOS || Platform.isAndroid)
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        state.tabIndex == 1
+                            ? FluentIcons.clock_24_filled
+                            : FluentIcons.clock_24_regular,
+                      ),
+                      label: "Prayers",
+                    ),
+                  if (Platform.isIOS || Platform.isAndroid)
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        state.tabIndex == 2
+                            ? FluentIcons.compass_northwest_24_filled
+                            : FluentIcons.compass_northwest_24_regular,
+                      ),
+                      label: "Qibla",
+                    ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      state.tabIndex == 3
+                          ? Icons.audiotrack_rounded
+                          : Icons.audiotrack_outlined,
+                    ),
+                    label: "Audio",
+                  ),
+                ],
+              );
+            },
+          ),
     );
   }
 }

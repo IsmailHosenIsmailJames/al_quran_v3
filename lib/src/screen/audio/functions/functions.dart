@@ -1,4 +1,3 @@
-import "dart:developer";
 import "dart:io";
 import "dart:math" as math;
 
@@ -16,15 +15,11 @@ Future<int> getCacheSize(Directory cacheDir) async {
   int totalSize = 0;
 
   if (cacheDir.existsSync()) {
-    int i = 0;
     cacheDir.listSync().forEach((file) {
-      log(i.toString());
-      i++;
       if (file is File) {
         totalSize += file.lengthSync();
       }
     });
-    log("all $i");
   }
 
   return totalSize;
