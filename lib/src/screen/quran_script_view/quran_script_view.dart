@@ -8,15 +8,16 @@ import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -293,22 +294,20 @@ class _PageByPageViewState extends State<QuranScriptView> {
                 const Gap(10),
                 Container(
                   width: 80,
+                  height: 40,
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryShade200,
-                    borderRadius: BorderRadius.circular(roundedRadius),
+                    color: AppColors.primaryShade100,
+                    borderRadius: BorderRadius.circular(100),
                   ),
                   child: BlocBuilder<
                     AyahByAyahInScrollInfoCubit,
                     AyahByAyahInScrollInfoState
                   >(
                     builder: (context, state) {
-                      return DropdownButtonFormField(
+                      return DropdownButton(
                         alignment: Alignment.center,
                         padding: EdgeInsets.zero,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(left: 5, right: 5),
-                        ),
                         isExpanded: false,
 
                         value: state.dropdownAyahKey,
@@ -346,10 +345,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
               builder: (context, state) {
                 return IconButton(
                   style: IconButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                      side: BorderSide(color: AppColors.primary),
-                    ),
+                    backgroundColor: AppColors.primaryShade100,
+                    foregroundColor: AppColors.primary,
                   ),
                   onPressed: () {
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
@@ -361,10 +358,25 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     state.isAyahByAyah
                         ? CupertinoIcons.book
                         : CupertinoIcons.list_bullet,
-                    color: AppColors.primary,
                   ),
                 );
               },
+            ),
+            IconButton(
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.primaryShade100,
+                foregroundColor: AppColors.primary,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => const QuranScriptSettings(asPage: true),
+                  ),
+                );
+              },
+              icon: const Icon(FluentIcons.settings_24_filled),
             ),
           ],
         ),
