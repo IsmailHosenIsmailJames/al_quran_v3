@@ -16,9 +16,9 @@ import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
-import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -36,6 +36,7 @@ Widget getAyahByAyahCard({
   bool? showFullKey,
   bool showTopOptions = true,
   bool showOnlyAyah = false,
+  bool keepMargin = true,
 }) {
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
@@ -64,7 +65,10 @@ Widget getAyahByAyahCard({
       return Container(
         key: key,
         padding: const EdgeInsets.all(5),
-        margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
+        margin:
+            keepMargin
+                ? const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10)
+                : null,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(roundedRadius),
           color: AppColors.primary.withValues(alpha: 0.05),

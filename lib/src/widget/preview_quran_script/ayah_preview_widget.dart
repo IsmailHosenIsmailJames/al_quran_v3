@@ -1,9 +1,9 @@
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -54,6 +54,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
             ayahKey: quranViewState.ayahKey,
             context: context,
             showTopOptions: false,
+            keepMargin: false,
             showOnlyAyah: showOnlyAyah,
           ),
         ],
