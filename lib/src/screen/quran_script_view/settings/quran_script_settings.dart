@@ -9,6 +9,7 @@ import "../../settings/cubit/quran_script_view_state.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
+
   const QuranScriptSettings({super.key, this.asPage = false});
 
   @override
@@ -20,6 +21,7 @@ class QuranScriptSettings extends StatelessWidget {
 
     Widget bodyWidget = BlocBuilder<QuranViewCubit, QuranViewState>(
       builder: (context, quranViewState) {
+        final cubit = context.read<QuranViewCubit>();
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,9 +97,7 @@ class QuranScriptSettings extends StatelessWidget {
                 value: quranViewState.translationFontSize,
                 max: 60,
                 min: 8,
-
                 divisions: 100,
-
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeTranslationFontSize(
                     value.toPrecision(2),
@@ -105,19 +105,148 @@ class QuranScriptSettings extends StatelessWidget {
                 },
               ),
             ),
+            const Gap(10),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Quran Ayah",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: !quranViewState.hideQuranAyah,
+              onChanged: (value) {
+                cubit.setViewOptions(hideQuranAyah: !value);
+              },
+            ),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Translation",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: !quranViewState.hideTranslation,
+              onChanged: (value) {
+                cubit.setViewOptions(hideTranslation: !value);
+              },
+            ),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Word By Word",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: !quranViewState.hideWordByWord,
+              onChanged: (value) {
+                cubit.setViewOptions(hideWordByWord: !value);
+              },
+            ),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Foot Note",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: !quranViewState.hideFootnote,
+              onChanged: (value) {
+                cubit.setViewOptions(hideFootnote: !value);
+              },
+            ),
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Top Toolbar",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: !quranViewState.hideToolbar,
+              onChanged: (value) {
+                cubit.setViewOptions(hideToolbar: !value);
+              },
+            ),
+
+            SwitchListTile(
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                "Keep Open Word By Word",
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              value: quranViewState.alwaysOpenWordByWord,
+              onChanged: (value) {
+                cubit.setViewOptions(alwaysOpenWordByWord: value);
+              },
+            ),
+
             const Gap(5),
-            getAyahPreviewWidget(),
+            getAyahPreviewWidget(showHeaderOptions: true),
           ],
         );
       },
     );
+
     return asPage
         ? Scaffold(
-          appBar:
-              asPage
-                  ? AppBar(title: const Text("Quran Script Settings"))
-                  : null,
-          body: Padding(padding: const EdgeInsets.all(10), child: bodyWidget),
+          appBar: AppBar(title: const Text("Quran Script Settings")),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: 60,
+            ),
+            child: bodyWidget,
+          ),
         )
         : bodyWidget;
   }

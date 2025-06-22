@@ -53,7 +53,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
           getAyahByAyahCard(
             ayahKey: quranViewState.ayahKey,
             context: context,
-            showTopOptions: false,
+            showTopOptions: showHeaderOptions,
             keepMargin: false,
             showOnlyAyah: showOnlyAyah,
           ),

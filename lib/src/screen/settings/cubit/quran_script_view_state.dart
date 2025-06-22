@@ -6,12 +6,24 @@ class QuranViewState {
   double lineHeight;
   QuranScriptType quranScriptType;
   double translationFontSize;
+  bool hideFootnote;
+  bool hideWordByWord;
+  bool hideTranslation;
+  bool hideToolbar;
+  bool hideQuranAyah;
+  bool alwaysOpenWordByWord;
   QuranViewState({
     required this.ayahKey,
     required this.fontSize,
     required this.lineHeight,
     required this.quranScriptType,
     required this.translationFontSize,
+    this.hideFootnote = false,
+    this.hideWordByWord = false,
+    this.hideTranslation = false,
+    this.hideToolbar = false,
+    this.hideQuranAyah = false,
+    this.alwaysOpenWordByWord = false,
   });
 
   QuranViewState copyWith({
@@ -20,6 +32,12 @@ class QuranViewState {
     double? lineHeight,
     QuranScriptType? quranScriptType,
     double? translationFontSize,
+    bool? hideFootnote,
+    bool? hideWordByWord,
+    bool? hideTranslation,
+    bool? hideToolbar,
+    bool? hideQuranAyah,
+    bool? alwaysOpenWordByWord,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -27,6 +45,12 @@ class QuranViewState {
       lineHeight: lineHeight ?? this.lineHeight,
       quranScriptType: quranScriptType ?? this.quranScriptType,
       translationFontSize: translationFontSize ?? this.translationFontSize,
+      hideFootnote: hideFootnote ?? this.hideFootnote,
+      hideWordByWord: hideWordByWord ?? this.hideWordByWord,
+      hideTranslation: hideTranslation ?? this.hideTranslation,
+      hideToolbar: hideToolbar ?? this.hideToolbar,
+      hideQuranAyah: hideQuranAyah ?? this.hideQuranAyah,
+      alwaysOpenWordByWord: alwaysOpenWordByWord ?? this.alwaysOpenWordByWord,
     );
   }
 }

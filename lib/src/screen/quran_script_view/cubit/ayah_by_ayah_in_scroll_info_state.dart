@@ -43,7 +43,3 @@ class AyahByAyahInScrollInfoState {
     };
   }
 }
-
-final class AyahByAyahInScrollInfoInitial extends AyahByAyahInScrollInfoState {
-  AyahByAyahInScrollInfoInitial({required super.isAyahByAyah});
-}
