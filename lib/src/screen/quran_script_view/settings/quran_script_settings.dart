@@ -8,7 +8,8 @@ import "../../settings/cubit/quran_script_view_cubit.dart";
 import "../../settings/cubit/quran_script_view_state.dart";
 
 class QuranScriptSettings extends StatelessWidget {
-  const QuranScriptSettings({super.key});
+  final bool asPage;
+  const QuranScriptSettings({super.key, this.asPage = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,8 @@ class QuranScriptSettings extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w500,
     );
-    return BlocBuilder<QuranViewCubit, QuranViewState>(
+
+    Widget bodyWidget = BlocBuilder<QuranViewCubit, QuranViewState>(
       builder: (context, quranViewState) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -109,5 +111,14 @@ class QuranScriptSettings extends StatelessWidget {
         );
       },
     );
+    return asPage
+        ? Scaffold(
+          appBar:
+              asPage
+                  ? AppBar(title: const Text("Quran Script Settings"))
+                  : null,
+          body: Padding(padding: const EdgeInsets.all(10), child: bodyWidget),
+        )
+        : bodyWidget;
   }
 }
