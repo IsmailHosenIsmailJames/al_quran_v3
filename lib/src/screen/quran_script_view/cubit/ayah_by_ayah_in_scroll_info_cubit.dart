@@ -7,7 +7,7 @@ part "ayah_by_ayah_in_scroll_info_state.dart";
 class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
   AyahByAyahInScrollInfoCubit()
     : super(
-        AyahByAyahInScrollInfoInitial(
+        AyahByAyahInScrollInfoState(
           isAyahByAyah: Hive.box(
             "user",
           ).get("isAyahByAyah", defaultValue: true),
