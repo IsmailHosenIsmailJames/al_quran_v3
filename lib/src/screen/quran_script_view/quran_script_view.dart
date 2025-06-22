@@ -271,70 +271,61 @@ class _PageByPageViewState extends State<QuranScriptView> {
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
         appBar: AppBar(
-          title: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                BlocBuilder<
-                  AyahByAyahInScrollInfoCubit,
-                  AyahByAyahInScrollInfoState
-                >(
-                  buildWhen: (previous, current) {
-                    return previous.surahInfoModel?.toMap() !=
-                        current.surahInfoModel?.toMap();
-                  },
-                  builder:
-                      (context, state) => Text(
-                        state.surahInfoModel?.nameSimple == null
-                            ? ""
-                            : "${state.surahInfoModel?.nameSimple}",
-                        style: const TextStyle(fontSize: 18),
-                      ),
+          title: BlocBuilder<
+            AyahByAyahInScrollInfoCubit,
+            AyahByAyahInScrollInfoState
+          >(
+            buildWhen: (previous, current) {
+              return previous.surahInfoModel?.toMap() !=
+                  current.surahInfoModel?.toMap();
+            },
+            builder:
+                (context, state) => Text(
+                  state.surahInfoModel?.nameSimple == null
+                      ? ""
+                      : "${state.surahInfoModel?.nameSimple}",
+                  style: const TextStyle(fontSize: 18),
                 ),
-                const Gap(10),
-                Container(
-                  width: 80,
-                  height: 40,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryShade100,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: BlocBuilder<
-                    AyahByAyahInScrollInfoCubit,
-                    AyahByAyahInScrollInfoState
-                  >(
-                    builder: (context, state) {
-                      return DropdownButton(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.zero,
-                        isExpanded: false,
-
-                        value: state.dropdownAyahKey,
-                        items: List.generate(allAyahsKey.length, (index) {
-                          return DropdownMenuItem(
-                            value: allAyahsKey[index],
-                            child: Center(child: Text(allAyahsKey[index])),
-                          );
-                        }),
-                        onChanged: (value) async {
-                          await scrollToAyah(value.toString());
-                          WidgetsBinding.instance.addPostFrameCallback((
-                            _,
-                          ) async {
-                            context.read<AyahByAyahInScrollInfoCubit>().setData(
-                              dropdownAyahKey: value.toString(),
-                            );
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
           ),
           actions: [
+            Container(
+              width: 80,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: AppColors.primaryShade100,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: BlocBuilder<
+                AyahByAyahInScrollInfoCubit,
+                AyahByAyahInScrollInfoState
+              >(
+                builder: (context, state) {
+                  return DropdownButton(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.zero,
+                    isExpanded: false,
+
+                    value: state.dropdownAyahKey,
+                    items: List.generate(allAyahsKey.length, (index) {
+                      return DropdownMenuItem(
+                        value: allAyahsKey[index],
+                        child: Center(child: Text(allAyahsKey[index])),
+                      );
+                    }),
+                    onChanged: (value) async {
+                      await scrollToAyah(value.toString());
+                      WidgetsBinding.instance.addPostFrameCallback((_) async {
+                        context.read<AyahByAyahInScrollInfoCubit>().setData(
+                          dropdownAyahKey: value.toString(),
+                        );
+                      });
+                    },
+                  );
+                },
+              ),
+            ),
+            const Gap(5),
             BlocBuilder<
               AyahByAyahInScrollInfoCubit,
               AyahByAyahInScrollInfoState
@@ -379,6 +370,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               icon: const Icon(FluentIcons.settings_24_filled),
             ),
           ],
+          titleSpacing: 0,
         ),
         body: Stack(
           children: [
