@@ -39,8 +39,6 @@ Widget getAyahByAyahCard({
   bool showOnlyAyah = false,
   bool keepMargin = true,
 }) {
-  ThemeState themeState = context.read<ThemeCubit>().state;
-
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
   Map translationMap =
@@ -63,88 +61,106 @@ Widget getAyahByAyahCard({
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah["$surahNumber"],
   );
-  return BlocBuilder<QuranViewCubit, QuranViewState>(
-    builder: (context, quranViewState) {
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        key: key,
-        padding: const EdgeInsets.all(5),
-        margin:
-            keepMargin
-                ? const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10)
-                : null,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(roundedRadius),
-          border: Border.all(color: themeState.primaryShade200),
-        ),
-        child: Column(
-          children: [
-            if (!(showTopOptions == false) && !quranViewState.hideToolbar)
-              getToolbarWidget(
-                showFullKey,
-                surahInfoModel,
-                ayahKey,
-                ayahNumber,
-                context,
-                surahNumber,
-                translation,
-                footNote,
-              ),
-            if (!quranViewState.hideQuranAyah) const Gap(10),
-            if (!quranViewState.hideQuranAyah)
-              quranAyahWidget(surahNumber, ayahNumber, quranViewState),
-            if (!showOnlyAyah && !quranViewState.hideTranslation) const Gap(5),
-            if (!showOnlyAyah && !quranViewState.hideTranslation)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Translation:",
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-                ),
-              ),
-            if (!showOnlyAyah && !quranViewState.hideTranslation) const Gap(5),
-            if (!showOnlyAyah && !quranViewState.hideTranslation)
-              getTranslationWidget(context, translation, quranViewState),
-            if (footNote.keys.isNotEmpty &&
-                !showOnlyAyah &&
-                !quranViewState.hideFootnote)
-              const Gap(8),
-            if (footNote.keys.isNotEmpty &&
-                !showOnlyAyah &&
-                !quranViewState.hideFootnote)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Foot Note:",
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-                ),
-              ),
-            if (footNote.keys.isNotEmpty &&
-                !showOnlyAyah &&
-                !quranViewState.hideFootnote)
-              const Gap(5),
+  return BlocBuilder<ThemeCubit, ThemeState>(
+    builder: (context, themeState) {
+      return BlocBuilder<QuranViewCubit, QuranViewState>(
+        builder: (context, quranViewState) {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            key: key,
+            padding: const EdgeInsets.all(5),
+            margin:
+                keepMargin
+                    ? const EdgeInsets.only(
+                      left: 5,
+                      top: 5,
+                      bottom: 5,
+                      right: 10,
+                    )
+                    : null,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(roundedRadius),
+              border: Border.all(color: themeState.primaryShade200),
+            ),
+            child: Column(
+              children: [
+                if (!(showTopOptions == false) && !quranViewState.hideToolbar)
+                  getToolbarWidget(
+                    showFullKey,
+                    surahInfoModel,
+                    ayahKey,
+                    ayahNumber,
+                    context,
+                    surahNumber,
+                    translation,
+                    footNote,
+                    themeState,
+                  ),
+                if (!quranViewState.hideQuranAyah) const Gap(10),
+                if (!quranViewState.hideQuranAyah)
+                  quranAyahWidget(surahNumber, ayahNumber, quranViewState),
+                if (!showOnlyAyah && !quranViewState.hideTranslation)
+                  const Gap(5),
+                if (!showOnlyAyah && !quranViewState.hideTranslation)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Translation:",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+                if (!showOnlyAyah && !quranViewState.hideTranslation)
+                  const Gap(5),
+                if (!showOnlyAyah && !quranViewState.hideTranslation)
+                  getTranslationWidget(context, translation, quranViewState),
+                if (footNote.keys.isNotEmpty &&
+                    !showOnlyAyah &&
+                    !quranViewState.hideFootnote)
+                  const Gap(8),
+                if (footNote.keys.isNotEmpty &&
+                    !showOnlyAyah &&
+                    !quranViewState.hideFootnote)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Foot Note:",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ),
+                if (footNote.keys.isNotEmpty &&
+                    !showOnlyAyah &&
+                    !quranViewState.hideFootnote)
+                  const Gap(5),
 
-            if (footNote.keys.isNotEmpty &&
-                !showOnlyAyah &&
-                !quranViewState.hideFootnote)
-              getFootNoteWidget(footNote, context, quranViewState),
-            if (supportsWordByWord &&
-                !quranViewState.alwaysOpenWordByWord &&
-                !quranViewState.hideWordByWord)
-              getWordByWordExpandCloseWidget(context, ayahKey),
-            if (supportsWordByWord && !quranViewState.hideWordByWord)
-              const Gap(5),
-            if (supportsWordByWord && !quranViewState.hideWordByWord)
-              getWordByWordWidget(
-                context,
-                ayahKey,
-                quranViewState,
-                wordByWord,
-                surahNumber,
-                ayahNumber,
-              ),
-          ],
-        ),
+                if (footNote.keys.isNotEmpty &&
+                    !showOnlyAyah &&
+                    !quranViewState.hideFootnote)
+                  getFootNoteWidget(footNote, context, quranViewState),
+                if (supportsWordByWord &&
+                    !quranViewState.alwaysOpenWordByWord &&
+                    !quranViewState.hideWordByWord)
+                  getWordByWordExpandCloseWidget(context, ayahKey),
+                if (supportsWordByWord && !quranViewState.hideWordByWord)
+                  const Gap(5),
+                if (supportsWordByWord && !quranViewState.hideWordByWord)
+                  getWordByWordWidget(
+                    context,
+                    ayahKey,
+                    quranViewState,
+                    wordByWord,
+                    surahNumber,
+                    ayahNumber,
+                  ),
+              ],
+            ),
+          );
+        },
       );
     },
   );
@@ -365,8 +381,8 @@ Row getToolbarWidget(
   int surahNumber,
   String translation,
   Map<dynamic, dynamic> footNote,
+  ThemeState themeState,
 ) {
-  ThemeState themeState = context.read<ThemeCubit>().state;
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.center,
