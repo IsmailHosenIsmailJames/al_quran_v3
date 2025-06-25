@@ -6,7 +6,6 @@ import "package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_vie
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_compass/flutter_compass.dart";
@@ -14,6 +13,9 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:vector_math/vector_math.dart" as vector;
 import "package:vibration/vibration.dart";
+
+import "../../../../theme/controller/theme_cubit.dart";
+import "../../../../theme/controller/theme_state.dart";
 
 class QiblaDirection extends StatefulWidget {
   const QiblaDirection({super.key});
@@ -47,6 +49,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
       LocationQiblaPrayerDataState
@@ -61,6 +64,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
             height: MediaQuery.of(context).size.width * 0.8,
             child: CustomPaint(
               painter: CompassView(
+                themeState,
                 context: context,
                 kaabaAngle: dataState.kaabaAngle!,
               ),
@@ -70,7 +74,9 @@ class _QiblaDirectionState extends State<QiblaDirection> {
         return state.latLon == null
             ? const LocationAcquire()
             : state.kaabaAngle == null
-            ? Center(child: CircularProgressIndicator(color: AppColors.primary))
+            ? Center(
+              child: CircularProgressIndicator(color: themeState.primary),
+            )
             : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,6 +103,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                           direction,
                           state.kaabaAngle!,
                           compassView,
+                          themeState,
                         );
                       } else {
                         return const SizedBox();
@@ -125,13 +132,14 @@ class _QiblaDirectionState extends State<QiblaDirection> {
     double direction,
     double kaabaAngle,
     Widget compassView,
+    ThemeState themeState,
   ) {
     Color kaabaColor =
         Theme.of(context).brightness == Brightness.light
             ? Colors.black
             : Colors.white;
     if ((direction.abs() - kaabaAngle.abs()).abs() < 5) {
-      kaabaColor = AppColors.primary;
+      kaabaColor = themeState.primary;
       doVibrateThePhone();
     } else {
       vibrateOnceEnter = false;

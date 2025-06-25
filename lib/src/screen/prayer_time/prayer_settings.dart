@@ -4,13 +4,14 @@ import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-import "../../theme/colors/app_colors.dart";
+import "../../theme/controller/theme_cubit.dart";
 import "../../theme/values/values.dart";
 import "../../widget/prayers/prayer_calculation_method_info_widget.dart";
 import "../location_handler/cubit/location_data_qibla_data_cubit.dart";
@@ -30,6 +31,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       fontSize: 18,
       fontWeight: FontWeight.w500,
     );
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Prayer Settings")),
       body: ListView(
@@ -78,6 +81,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           >(
             builder: (context, state) {
               return getPrayerCalculationMethodInfoWidget(
+                context,
                 state.calculationMethod!,
               );
             },
@@ -85,11 +89,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           const Gap(20),
           Text("Reminder Settings", style: titleStyle),
           const Gap(5),
-          getDropPrayerSettings(),
+          getDropPrayerSettings(themeState),
           const Gap(20),
           Text("Adjust Reminder Time", style: titleStyle),
           const Gap(5),
-          getAdjustReminderWidget(),
+          getAdjustReminderWidget(themeState),
           const Gap(15),
           Row(
             children: [
@@ -177,10 +181,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget getAdjustReminderWidget() {
+  Widget getAdjustReminderWidget(ThemeState themeState) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primaryShade300),
+        border: Border.all(color: themeState.primaryShade300),
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       padding: const EdgeInsets.all(5),
@@ -202,8 +206,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 decoration: BoxDecoration(
                   color:
                       index.isEven
-                          ? AppColors.primaryShade100
-                          : AppColors.primaryShade200,
+                          ? themeState.primaryShade100
+                          : themeState.primaryShade200,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 padding: const EdgeInsets.only(left: 10, right: 5),
@@ -260,10 +264,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget getDropPrayerSettings() {
+  Widget getDropPrayerSettings(ThemeState themeState) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primaryShade300),
+        border: Border.all(color: themeState.primaryShade300),
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       padding: const EdgeInsets.all(5),
@@ -285,8 +289,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 decoration: BoxDecoration(
                   color:
                       index.isEven
-                          ? AppColors.primaryShade100
-                          : AppColors.primaryShade200,
+                          ? themeState.primaryShade100
+                          : themeState.primaryShade200,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 padding: const EdgeInsets.only(left: 10, right: 5),

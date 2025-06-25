@@ -12,7 +12,6 @@ import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_s
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
@@ -24,6 +23,9 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 import "package:visibility_detector/visibility_detector.dart";
+
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 class QuranScriptView extends StatefulWidget {
   final String startKey;
@@ -267,6 +269,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
@@ -293,7 +296,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               height: 40,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.primaryShade100,
+                color: themeState.primaryShade100,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: BlocBuilder<
@@ -336,8 +339,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
               builder: (context, state) {
                 return IconButton(
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColors.primaryShade100,
-                    foregroundColor: AppColors.primary,
+                    backgroundColor: themeState.primaryShade100,
+                    foregroundColor: themeState.primary,
                   ),
                   onPressed: () {
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
@@ -355,8 +358,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
             ),
             IconButton(
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.primaryShade100,
-                foregroundColor: AppColors.primary,
+                backgroundColor: themeState.primaryShade100,
+                foregroundColor: themeState.primary,
               ),
               onPressed: () {
                 Navigator.push(
@@ -513,7 +516,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               width: double.infinity,
               height: 30,
               margin: const EdgeInsets.only(top: 5, bottom: 5),
-              color: AppColors.primaryShade100,
+              color: context.read<ThemeCubit>().state.primaryShade100,
               child: Row(
                 mainAxisAlignment:
                     state.isAyahByAyah
@@ -557,7 +560,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                                   true
                               ? CupertinoIcons.list_bullet_below_rectangle
                               : CupertinoIcons.list_bullet,
-                          color: AppColors.primary,
+                          color: context.read<ThemeCubit>().state.primary,
                           size: 18,
                         ),
                       ),
