@@ -39,6 +39,7 @@ Future<void> showCalculationMethodPopup(
                               onSelect(current);
                             },
                             child: getPrayerCalculationMethodInfoWidget(
+                              context,
                               current,
                             ),
                           ),

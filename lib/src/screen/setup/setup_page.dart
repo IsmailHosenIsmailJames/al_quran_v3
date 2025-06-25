@@ -15,12 +15,11 @@ import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/theme_icon_button.dart";
+import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:dartx/dartx.dart";
 import "package:dio/dio.dart" as dio;
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -30,6 +29,9 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
+
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 class AppSetupPage extends StatefulWidget {
   const AppSetupPage({super.key});
@@ -77,6 +79,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
   }
 
+  late ThemeState themeState = context.read<ThemeCubit>().state;
+
   @override
   void initState() {
     if (!kIsWeb) {
@@ -98,7 +102,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: downloadResources,
         tooltip: "Save and Download",
-        backgroundColor: AppColors.primary,
+        backgroundColor: themeState.primary,
         foregroundColor: Colors.white,
         child: const Icon(FluentIcons.arrow_download_24_filled),
       ),
@@ -126,7 +130,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 12,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "1",
                                 style: TextStyle(
@@ -168,7 +172,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 12,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "2",
                                 style: TextStyle(
@@ -213,7 +217,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 13,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "3",
                                 style: TextStyle(
@@ -256,7 +260,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 13,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "4",
                                 style: TextStyle(
@@ -298,7 +302,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 13,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "5",
                                 style: TextStyle(
@@ -338,7 +342,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           children: [
                             CircleAvatar(
                               radius: 13,
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: themeState.primary,
                               child: const Text(
                                 "6",
                                 style: TextStyle(
@@ -353,7 +357,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ],
                         ),
                         const Gap(5),
-                        getScriptSelectionSegmentedButtons(),
+                        getScriptSelectionSegmentedButtons(context),
                         getAyahPreviewWidget(
                           showHeaderOptions: true,
                           showOnlyAyah: true,
@@ -429,7 +433,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           const Gap(20),
                           LinearProgressIndicator(
                             value: state.percentage,
-                            color: AppColors.primary,
+                            color: themeState.primary,
                             borderRadius: BorderRadius.circular(roundedRadius),
                             minHeight: 8,
                           ),
@@ -450,7 +454,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       );
                     }
                     return LinearProgressIndicator(
-                      color: AppColors.primary,
+                      color: themeState.primary,
                       borderRadius: BorderRadius.circular(roundedRadius),
                       minHeight: 8,
                     );
@@ -722,7 +726,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primary,
+                      color: themeState.primary,
                     ),
                   ),
                 buildScoreIndicator(
@@ -757,7 +761,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primary,
+                      color: themeState.primary,
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
@@ -784,7 +788,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   child: Icon(
                     Icons.done_rounded,
                     size: 18,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                 ),
               Text(e["Native"] ?? ""),
@@ -813,7 +817,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primary,
+                      color: themeState.primary,
                     ),
                   ),
                 Text(book["name"] ?? ""),
@@ -845,7 +849,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     child: Icon(
                       Icons.done_rounded,
                       size: 18,
-                      color: AppColors.primary,
+                      color: themeState.primary,
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
@@ -867,11 +871,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
     ];
   }
 
-  Widget footNoteTag = Container(
+  late Widget footNoteTag = Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primary,
+      color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(
@@ -885,11 +889,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
     ),
   );
 
-  Widget tafsirTag = Container(
+  late Widget tafsirTag = Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primary,
+      color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(
@@ -903,11 +907,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
     ),
   );
 
-  Widget wordByWordTag = Container(
+  late Widget wordByWordTag = Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
-      color: AppColors.primary,
+      color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
     child: const Row(
@@ -957,7 +961,8 @@ bool doesHaveTafsirSupport(String language) {
   return doesHaveTafsirSupport;
 }
 
-Widget getScriptSelectionSegmentedButtons() {
+Widget getScriptSelectionSegmentedButtons(BuildContext context) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   return BlocBuilder<QuranViewCubit, QuranViewState>(
     builder:
         (context, quranViewState) => Row(
@@ -970,12 +975,12 @@ Widget getScriptSelectionSegmentedButtons() {
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       quranViewState.quranScriptType == currentQuranScriptType
-                          ? AppColors.primary
-                          : AppColors.mutedGray,
+                          ? themeState.primary
+                          : themeState.mutedGray,
                   foregroundColor:
                       quranViewState.quranScriptType == currentQuranScriptType
                           ? Colors.white
-                          : AppColors.primary,
+                          : themeState.primary,
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
