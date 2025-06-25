@@ -13,7 +13,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
-import "../../theme/controller/theme_cubit.dart";
 import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
@@ -92,7 +91,6 @@ class _HomePageState extends State<HomePage> {
                 currentIndex: state.tabIndex,
                 onTap: context.read<OthersSettingsCubit>().setTabIndex,
                 type: BottomNavigationBarType.fixed,
-                selectedItemColor: context.read<ThemeCubit>().state.primary,
                 selectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),

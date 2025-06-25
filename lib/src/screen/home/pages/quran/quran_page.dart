@@ -42,62 +42,65 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            height: 35,
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color: themeState.primaryShade100,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Stack(
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  alignment: Alignment(
-                    [-1, -0.5, 0, 0.5, 1][_pageIndex].toDouble(),
-                    0,
-                  ),
-                  curve: Curves.easeInOut,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: themeState.primaryShade200,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    height: 30,
-                    width: (MediaQuery.of(context).size.width - 10) / 5,
-                  ),
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              return Container(
+                height: 35,
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: themeState.primaryShade100,
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                Row(
-                  children: List.generate(pagesName.length, (index) {
-                    return Expanded(
-                      child: TextButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          elevation: 0,
-                        ),
-                        onPressed: () async {
-                          pageController.jumpToPage(index);
-                        },
-                        child: Text(
-                          pagesName[index],
-                          style: TextStyle(
-                            fontWeight:
-                                _pageIndex == index
-                                    ? FontWeight.bold
-                                    : FontWeight.w500,
-                          ),
-                        ),
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      alignment: Alignment(
+                        [-1, -0.5, 0, 0.5, 1][_pageIndex].toDouble(),
+                        0,
                       ),
-                    );
-                  }),
+                      curve: Curves.easeInOut,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: themeState.primaryShade200,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        height: 30,
+                        width: (MediaQuery.of(context).size.width - 10) / 5,
+                      ),
+                    ),
+                    Row(
+                      children: List.generate(pagesName.length, (index) {
+                        return Expanded(
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              elevation: 0,
+                            ),
+                            onPressed: () async {
+                              pageController.jumpToPage(index);
+                            },
+                            child: Text(
+                              pagesName[index],
+                              style: TextStyle(
+                                fontWeight:
+                                    _pageIndex == index
+                                        ? FontWeight.bold
+                                        : FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
           Expanded(
             child: PageView(
