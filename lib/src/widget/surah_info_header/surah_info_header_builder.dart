@@ -8,7 +8,6 @@ import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
@@ -17,19 +16,23 @@ import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
+
 class SurahInfoHeaderBuilder extends StatelessWidget {
   final SurahHeaderInfoModel headerInfoModel;
   const SurahInfoHeaderBuilder({super.key, required this.headerInfoModel});
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     final Map translationMeta = Hive.box("quran_translation").get("meta_data");
     String tafsirMeta = Hive.box("user").get("tafsir_book");
     return Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
-        color: AppColors.primary.withValues(alpha: 0.05),
+        color: themeState.primary.withValues(alpha: 0.05),
       ),
       height: 120,
       child: Stack(
@@ -119,7 +122,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         child: Text(
                           "more info",
                           style: TextStyle(
-                            color: AppColors.primary,
+                            color: themeState.primary,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -150,7 +153,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     return IconButton(
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        backgroundColor: AppColors.primary,
+                        backgroundColor: themeState.primary,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {

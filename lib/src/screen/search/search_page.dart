@@ -1,12 +1,13 @@
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
 import "package:al_quran_v3/src/screen/search/models/search_options.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "cubit/search_cubit.dart";
 
 class SearchPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       appBar:
           widget.popup
@@ -57,9 +59,9 @@ class _SearchPageState extends State<SearchPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
               decoration: BoxDecoration(
-                color: AppColors.primaryShade100,
+                color: themeState.primaryShade100,
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: AppColors.primaryShade300),
+                border: Border.all(color: themeState.primaryShade300),
               ),
 
               child: TextFormField(

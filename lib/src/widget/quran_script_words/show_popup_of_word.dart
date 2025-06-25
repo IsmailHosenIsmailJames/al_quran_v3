@@ -1,6 +1,5 @@
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
@@ -9,6 +8,9 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
+
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 class ShowPopupOfWord extends StatefulWidget {
   final List<String> wordKeys;
@@ -33,6 +35,8 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
   late int currentWordIndex = widget.initWordIndex;
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     List wordByWord = [];
     bool supportsWordByWord = false;
     final metaDataOfWordByWord = Hive.box(
@@ -140,10 +144,10 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                         builder: (context, state) {
                           return OutlinedButton.icon(
                             style: IconButton.styleFrom(
-                              backgroundColor: AppColors.primary.withValues(
+                              backgroundColor: themeState.primary.withValues(
                                 alpha: 0.05,
                               ),
-                              foregroundColor: AppColors.primary,
+                              foregroundColor: themeState.primary,
                             ),
                             onPressed: () {
                               context.read<WordPlayingStateCubit>().changeState(

@@ -1,6 +1,5 @@
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -18,6 +17,8 @@ import "package:share_plus/share_plus.dart";
 
 import "../../../main.dart";
 import "../../screen/surah_list_view/model/surah_info_model.dart";
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 void showShareBottomDialog(
   BuildContext context,
@@ -28,6 +29,8 @@ void showShareBottomDialog(
   String translation,
   Map footNote,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
+
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah[ayahKey.split(":").first],
   );
@@ -90,7 +93,7 @@ void showShareBottomDialog(
                 topLeft: Radius.circular(roundedRadius + 5),
                 topRight: Radius.circular(roundedRadius + 5),
               ),
-              color: AppColors.primaryShade100,
+              color: themeState.primaryShade100,
             ),
             child: Stack(
               children: [
@@ -142,9 +145,9 @@ void showShareBottomDialog(
                 ),
               ),
               IconButton(
-                color: AppColors.primary,
+                color: themeState.primary,
                 style: IconButton.styleFrom(
-                  backgroundColor: AppColors.primaryShade200,
+                  backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
                   await FlutterClipboard.copy(
@@ -247,9 +250,9 @@ void showShareBottomDialog(
                 ),
               ),
               IconButton(
-                color: AppColors.primary,
+                color: themeState.primary,
                 style: IconButton.styleFrom(
-                  backgroundColor: AppColors.primaryShade200,
+                  backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
                   String? tafsir = await getTafsirFromDb(
