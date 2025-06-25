@@ -1,13 +1,16 @@
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
+
+import "../../../theme/controller/theme_cubit.dart";
+import "../../../theme/controller/theme_state.dart";
 
 class ChangeReciter extends StatefulWidget {
   final ReciterInfoModel initReciterIndex;
@@ -27,13 +30,14 @@ class _ChangeReciterState extends State<ChangeReciter> {
   late ReciterInfoModel selectedReciter = widget.initReciterIndex;
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Column(
       children: [
         Container(
           height: 50,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.primaryShade100,
+            color: themeState.primaryShade100,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(roundedRadius),
               topRight: Radius.circular(roundedRadius),
@@ -73,11 +77,11 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 decoration: BoxDecoration(
                   color:
                       selectedReciter.link == reciterInfoModel.link
-                          ? AppColors.primaryShade100
+                          ? themeState.primaryShade100
                           : null,
                   border:
                       selectedReciter.link == reciterInfoModel.link
-                          ? Border.all(color: AppColors.primary)
+                          ? Border.all(color: themeState.primary)
                           : null,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
@@ -94,7 +98,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
                         height: 85,
                         width: 65,
                         decoration: BoxDecoration(
-                          color: AppColors.primaryShade100,
+                          color: themeState.primaryShade100,
                           borderRadius: BorderRadius.circular(roundedRadius),
                         ),
                         child:

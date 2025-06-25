@@ -13,7 +13,6 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.da
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
@@ -27,6 +26,8 @@ import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "../add_collection_popup/add_note_popup.dart";
 
 Widget getAyahByAyahCard({
@@ -38,6 +39,8 @@ Widget getAyahByAyahCard({
   bool showOnlyAyah = false,
   bool keepMargin = true,
 }) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
+
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
   Map translationMap =
@@ -72,7 +75,7 @@ Widget getAyahByAyahCard({
                 : null,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(roundedRadius),
-          border: Border.all(color: AppColors.primaryShade200),
+          border: Border.all(color: themeState.primaryShade200),
         ),
         child: Column(
           children: [
@@ -133,6 +136,7 @@ Widget getAyahByAyahCard({
               const Gap(5),
             if (supportsWordByWord && !quranViewState.hideWordByWord)
               getWordByWordWidget(
+                context,
                 ayahKey,
                 quranViewState,
                 wordByWord,
@@ -147,12 +151,14 @@ Widget getAyahByAyahCard({
 }
 
 Align getWordByWordWidget(
+  BuildContext context,
   String ayahKey,
   QuranViewState quranViewState,
   List<dynamic> wordByWord,
   int surahNumber,
   int ayahNumber,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   return Align(
     alignment: Alignment.centerRight,
     child: BlocBuilder<
@@ -178,7 +184,7 @@ Align getWordByWordWidget(
                         return Container(
                           padding: const EdgeInsets.all(3),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.05),
+                            color: themeState.primary.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(roundedRadius),
                           ),
                           child: Column(
@@ -217,6 +223,7 @@ GestureDetector getWordByWordExpandCloseWidget(
   BuildContext context,
   String ayahKey,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   return GestureDetector(
     onTap: () {
       List<String> expandedForWordByWord =
@@ -237,7 +244,7 @@ GestureDetector getWordByWordExpandCloseWidget(
     behavior: HitTestBehavior.translucent,
     child: Container(
       decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.05),
+        color: themeState.primary.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       padding: const EdgeInsets.only(left: 5),
@@ -359,6 +366,7 @@ Row getToolbarWidget(
   String translation,
   Map<dynamic, dynamic> footNote,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.center,
@@ -366,7 +374,7 @@ Row getToolbarWidget(
     children: [
       Container(
         decoration: BoxDecoration(
-          color: AppColors.primaryShade300,
+          color: themeState.primaryShade300,
           borderRadius: BorderRadius.circular(roundedRadius - 4),
         ),
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
@@ -401,10 +409,10 @@ Row getToolbarWidget(
             return IconButton(
               style: IconButton.styleFrom(
                 padding: EdgeInsets.zero,
-                foregroundColor: AppColors.primary,
+                foregroundColor: themeState.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
-                  side: BorderSide(color: AppColors.primary),
+                  side: BorderSide(color: themeState.primary),
                 ),
               ),
               onPressed: () {
@@ -430,10 +438,10 @@ Row getToolbarWidget(
         child: IconButton(
           style: IconButton.styleFrom(
             padding: EdgeInsets.zero,
-            foregroundColor: AppColors.primary,
+            foregroundColor: themeState.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100),
-              side: BorderSide(color: AppColors.primary),
+              side: BorderSide(color: themeState.primary),
             ),
           ),
           onPressed: () async {
@@ -450,10 +458,10 @@ Row getToolbarWidget(
         child: IconButton(
           style: IconButton.styleFrom(
             padding: EdgeInsets.zero,
-            foregroundColor: AppColors.primary,
+            foregroundColor: themeState.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100),
-              side: BorderSide(color: AppColors.primary),
+              side: BorderSide(color: themeState.primary),
             ),
           ),
           onPressed: () {
@@ -502,13 +510,14 @@ IconButton getPlayButtonWidget(
   AyahKeyManagement ayahKeyManagement,
   PlayerState playerState,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   return IconButton(
     style: IconButton.styleFrom(
       padding: EdgeInsets.zero,
-      foregroundColor: AppColors.primary,
+      foregroundColor: themeState.primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(100),
-        side: BorderSide(color: AppColors.primary),
+        side: BorderSide(color: themeState.primary),
       ),
     ),
     onPressed: () async {

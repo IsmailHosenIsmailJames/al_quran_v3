@@ -1,7 +1,6 @@
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
@@ -11,6 +10,8 @@ import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:screenshot/screenshot.dart";
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "../quran_script/model/script_info.dart";
 import "../quran_script/script_processor.dart";
 
@@ -26,6 +27,7 @@ Widget getAyahCardForShareAsImage(
   String translation,
   Map footNote,
 ) {
+  ThemeState themeState = context.read<ThemeCubit>().state;
   bool keepFootNote = Hive.box(
     "user",
   ).get("keep_foot_note_on_share", defaultValue: true);
@@ -35,7 +37,7 @@ Widget getAyahCardForShareAsImage(
     margin: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
-      border: Border.all(color: AppColors.primary),
+      border: Border.all(color: themeState.primary),
       color:
           Theme.of(context).brightness == Brightness.dark
               ? Colors.grey.shade900

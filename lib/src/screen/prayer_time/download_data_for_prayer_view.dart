@@ -144,6 +144,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
             >(
               builder: (context, state) {
                 return getPrayerCalculationMethodInfoWidget(
+                  context,
                   state.calculationMethod!,
                 );
               },
