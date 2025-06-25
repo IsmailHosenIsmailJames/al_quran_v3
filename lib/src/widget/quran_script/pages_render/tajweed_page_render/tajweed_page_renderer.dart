@@ -5,12 +5,14 @@ import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
+
+import "../../../../theme/controller/theme_cubit.dart";
+import "../../../../theme/controller/theme_state.dart";
 
 class TajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
@@ -24,6 +26,8 @@ class TajweedPageRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     Map<String, List> audioSegmentsMap = {};
 
     for (final ayahsKey in ayahsKey) {
@@ -98,7 +102,7 @@ class TajweedPageRenderer extends StatelessWidget {
                                     baseTextStyle?.fontFamily ?? "QPC_Hafs",
                                 backgroundColor:
                                     wordKey == "$ayahKey:${index + 1}"
-                                        ? AppColors.primaryShade200
+                                        ? themeState.primaryShade200
                                         : null,
                               ),
                               surahNumber: ayahKey.split(":").first.toInt(),

@@ -3,13 +3,14 @@ import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
+import "../../../../theme/controller/theme_cubit.dart";
+import "../../../../theme/controller/theme_state.dart";
 import "tajweed_text_preser.dart";
 
 class TajweedView extends StatelessWidget {
@@ -18,6 +19,7 @@ class TajweedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     List words =
         tajweedScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
@@ -76,7 +78,7 @@ class TajweedView extends StatelessWidget {
                         ? null
                         : highlightingWordIndex ==
                             "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
-                        ? AppColors.primaryShade200
+                        ? themeState.primaryShade200
                         : null,
               ),
               context: context,
@@ -136,7 +138,7 @@ class TajweedView extends StatelessWidget {
                           ? null
                           : highlightingWordIndex ==
                               "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
-                          ? AppColors.primaryShade200
+                          ? themeState.primaryShade200
                           : null,
                 ),
                 context: context,

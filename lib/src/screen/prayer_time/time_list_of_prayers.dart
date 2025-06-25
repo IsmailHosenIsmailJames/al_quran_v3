@@ -11,7 +11,6 @@ import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:dartx/dartx.dart";
@@ -22,6 +21,8 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "models/prayer_model_of_day.dart";
 import "models/prayer_types.dart";
 
@@ -48,8 +49,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       fontSize: 16,
       fontWeight: FontWeight.w500,
     );
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     return Container(
-      color: AppColors.primaryDark,
+      color: Color.alphaBlend(
+        themeState.primary.withValues(alpha: 0.5),
+        Colors.black,
+      ),
       child: Column(
         children: [
           Column(
@@ -191,7 +197,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 },
                                 icon: Icon(
                                   FluentIcons.settings_24_filled,
-                                  color: AppColors.primary,
+                                  color: themeState.primary,
                                 ),
                               ),
                           ],
@@ -210,6 +216,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             i,
                             context,
                             isToday,
+                            themeState,
                           );
                         }),
                         const Gap(30),
@@ -233,6 +240,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     int i,
     BuildContext context,
     bool isToday,
+    ThemeState themeState,
   ) {
     return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
       builder: (context, prayerReminderState) {
@@ -258,8 +266,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           decoration:
               isThisIsCurrentPrayer
                   ? BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    border: Border.all(color: AppColors.primary),
+                    color: themeState.primary.withValues(alpha: 0.1),
+                    border: Border.all(color: themeState.primary),
                     borderRadius: BorderRadius.circular(roundedRadius),
                   )
                   : null,
