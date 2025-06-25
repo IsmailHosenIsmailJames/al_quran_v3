@@ -12,10 +12,19 @@ class ThemeSettings extends StatelessWidget {
 
   static List<Color> appColor = [
     defaultPrimary,
-    const Color(0xFF2196F3),
-    const Color(0xFF673AB7),
-    const Color(0xFFFF9800),
-    const Color(0xFF37474F),
+    Colors.blue,
+    Colors.deepPurple,
+    Colors.orange,
+    Colors.blueGrey,
+
+    // New Additions
+    Colors.green, // A natural, calming green
+    Colors.red, // A classic, bold red
+    Colors.indigo, // A deep, professional blue
+    Colors.brown, // An earthy, warm tone
+    Colors.pink, // A vibrant, warm option
+    Colors.amber, // A bright, golden color
+    Colors.cyan, // A fresh, bright blue
   ];
 
   @override
