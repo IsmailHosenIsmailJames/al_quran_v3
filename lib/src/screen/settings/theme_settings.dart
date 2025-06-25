@@ -20,33 +20,36 @@ class ThemeSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(appColor.length, (index) {
-          Color current = appColor[index];
-          bool isSelected = themeState.primary.toARGB32() == current.toARGB32();
-          return Padding(
-            padding: const EdgeInsets.all(5),
-            child: InkWell(
-              onTap: () {
-                context.read<ThemeCubit>().changePrimaryColor(current);
-              },
-              child: Container(
-                height: 40,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: current,
-                  borderRadius: BorderRadius.circular(roundedRadius),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, themeState) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(appColor.length, (index) {
+              Color current = appColor[index];
+              bool isSelected =
+                  themeState.primary.toARGB32() == current.toARGB32();
+              return Padding(
+                padding: const EdgeInsets.all(5),
+                child: InkWell(
+                  onTap: () {
+                    context.read<ThemeCubit>().changePrimaryColor(current);
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      color: current,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                    ),
+                    child: isSelected ? const Icon(Icons.done) : null,
+                  ),
                 ),
-                child: isSelected ? const Icon(Icons.done) : null,
-              ),
-            ),
-          );
-        }),
-      ),
+              );
+            }),
+          ),
+        );
+      },
     );
   }
 }

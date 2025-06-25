@@ -1,6 +1,5 @@
 import "dart:ui";
 
-import "package:al_quran_v3/src/screen/settings/theme_settings.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -57,11 +56,9 @@ class ThemeFunctions {
     preferences!.setInt("color_primary", colorString);
   }
 
-  static ThemeState getThemeState() {
-    Color primary = getColorFromDB() ?? defaultPrimary;
-
+  static ThemeState getThemeState(Color primary, ThemeMode mode) {
     return ThemeState(
-      themeMode: loadThemeMode(),
+      themeMode: mode,
       primary: primary,
       primaryShade100: primary.withValues(alpha: 0.1),
       primaryShade200: primary.withValues(alpha: 0.2),
