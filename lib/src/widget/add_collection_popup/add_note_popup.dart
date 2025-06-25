@@ -1,16 +1,18 @@
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:uuid/uuid.dart";
 
 import "../../screen/collections/common_function.dart";
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 var uuid = const Uuid();
 
@@ -33,6 +35,7 @@ Future<void> showAddNotePopup(BuildContext context, String ayahKey) async {
 
 class AddNoteWidget extends StatefulWidget {
   final String ayahKey;
+
   const AddNoteWidget({super.key, required this.ayahKey});
 
   @override
@@ -72,7 +75,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
 
     final newNote = NoteModel(
       id: newNoteId,
-      ayahKey: [widget.ayahKey], // Use the ayahKey from the widget
+      ayahKey: [widget.ayahKey],
+      // Use the ayahKey from the widget
       text: _noteEditingController.text.trim(),
       createdAt: now,
       updatedAt: now,
@@ -101,6 +105,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -154,7 +159,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                   right: 10,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.primaryShade100,
+                                  color: themeState.primaryShade100,
                                   borderRadius: BorderRadius.circular(
                                     roundedRadius,
                                   ),
@@ -174,8 +179,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                               width: 60,
                               child: IconButton(
                                 style: IconButton.styleFrom(
-                                  backgroundColor: AppColors.primaryShade100,
-                                  foregroundColor: AppColors.primary,
+                                  backgroundColor: themeState.primaryShade100,
+                                  foregroundColor: themeState.primary,
                                 ),
                                 onPressed: () async {
                                   NoteCollectionModel? newCollection =
@@ -238,7 +243,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                               .check_box_outline_blank_rounded,
                                       color:
                                           isSelected
-                                              ? AppColors.primary
+                                              ? themeState.primary
                                               : Colors.grey,
                                     ),
                                     onPressed: () {
@@ -279,7 +284,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: AppColors.primaryShade100,
+                color: themeState.primaryShade100,
                 borderRadius: BorderRadius.circular(roundedRadius),
               ),
               child: TextFormField(
@@ -304,7 +309,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                     width: 60,
                     child: IconButton(
                       style: IconButton.styleFrom(
-                        backgroundColor: AppColors.primaryShade100,
+                        backgroundColor: themeState.primaryShade100,
                       ),
                       icon: const Icon(Icons.arrow_back_rounded),
                       onPressed: () {

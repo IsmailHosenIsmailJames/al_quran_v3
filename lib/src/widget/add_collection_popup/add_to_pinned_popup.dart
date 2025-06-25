@@ -1,15 +1,17 @@
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 
 import "../../screen/collections/common_function.dart";
 import "../../screen/collections/models/pinned_model.dart.dart";
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "add_note_popup.dart";
 
 Future<void> showAddToPinnedPopup(BuildContext context, String ayahKey) async {
@@ -31,6 +33,7 @@ Future<void> showAddToPinnedPopup(BuildContext context, String ayahKey) async {
 
 class AddToPinnedWidget extends StatefulWidget {
   final String ayahKey;
+
   const AddToPinnedWidget({super.key, required this.ayahKey});
 
   @override
@@ -88,6 +91,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -137,7 +141,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                 right: 10,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.primaryShade100,
+                                color: themeState.primaryShade100,
                                 borderRadius: BorderRadius.circular(
                                   roundedRadius,
                                 ),
@@ -157,8 +161,8 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                             width: 60,
                             child: IconButton(
                               style: IconButton.styleFrom(
-                                backgroundColor: AppColors.primaryShade100,
-                                foregroundColor: AppColors.primary,
+                                backgroundColor: themeState.primaryShade100,
+                                foregroundColor: themeState.primary,
                               ),
                               onPressed: () async {
                                 handleAddNewCollection(
@@ -217,7 +221,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                         : Icons.check_box_outline_blank_rounded,
                                     color:
                                         isSelected
-                                            ? AppColors.primary
+                                            ? themeState.primary
                                             : Colors.grey,
                                   ),
                                   onPressed: () {

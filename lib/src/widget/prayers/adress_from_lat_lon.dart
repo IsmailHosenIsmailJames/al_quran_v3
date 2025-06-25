@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:geocoding/geocoding.dart";
 
-import "../../theme/colors/app_colors.dart";
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "../../theme/values/values.dart";
 
 /// Fetches and formats a human-readable address from latitude and longitude.
@@ -47,6 +49,7 @@ Widget getAddressView({
   return FutureBuilder<String?>(
     future: fetchFormattedAddress(lat, long),
     builder: (context, snapshot) {
+      ThemeState themeState = context.read<ThemeCubit>().state;
       if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {
         // Show a generic loading indicator only if we are not in 'justAddress' mode,
         // otherwise, let it be handled by the parent if needed.
@@ -67,7 +70,7 @@ Widget getAddressView({
         decoration:
             keepDecoration
                 ? BoxDecoration(
-                  border: Border.all(color: AppColors.primary),
+                  border: Border.all(color: themeState.primary),
                   borderRadius: BorderRadius.circular(roundedRadius),
                 )
                 : null,

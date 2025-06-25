@@ -9,12 +9,11 @@ import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
-import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -31,6 +30,8 @@ import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
 import "package:url_launcher/url_launcher.dart";
+
+import "../../theme/controller/theme_cubit.dart";
 
 class AudioPage extends StatefulWidget {
   const AudioPage({super.key});
@@ -248,7 +249,8 @@ class _AudioPageState extends State<AudioPage> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(roundedRadius),
-                          color: AppColors.primaryShade100,
+                          color:
+                              context.read<ThemeCubit>().state.primaryShade100,
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -305,7 +307,7 @@ class _AudioPageState extends State<AudioPage> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(roundedRadius),
-                    color: AppColors.primaryShade100,
+                    color: context.read<ThemeCubit>().state.primaryShade100,
                   ),
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(5),

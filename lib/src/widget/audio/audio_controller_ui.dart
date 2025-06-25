@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
@@ -20,6 +19,8 @@ import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
 import "../../audio/cubit/player_state_cubit.dart";
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 
 class AudioControllerUi extends StatefulWidget {
   const AudioControllerUi({super.key});
@@ -45,6 +46,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
         log(state.isInsideQuranPlayer.toString());
@@ -83,8 +85,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       ? Theme.of(context).brightness == Brightness.dark
                           ? Colors.grey.shade900
                           : Colors.grey.shade100
-                      : AppColors.primary,
-              border: Border.all(color: AppColors.primary, width: 0.5),
+                      : themeState.primary,
+              border: Border.all(color: themeState.primary, width: 0.5),
             ),
             child:
                 (state.showUi && state.isInsideQuranPlayer)
