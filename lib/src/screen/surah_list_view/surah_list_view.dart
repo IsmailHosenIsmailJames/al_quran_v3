@@ -1,14 +1,17 @@
 import "package:al_quran_v3/src/resources/meta_data/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+
+import "../../theme/controller/theme_cubit.dart";
 
 class SurahListView extends StatelessWidget {
   final List<SurahInfoModel> surahInfoList;
+
   const SurahListView({super.key, required this.surahInfoList});
 
   @override
@@ -37,7 +40,11 @@ class SurahListView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
-                backgroundColor: AppColors.primary.withValues(alpha: 0.05),
+                backgroundColor: context
+                    .read<ThemeCubit>()
+                    .state
+                    .primary
+                    .withValues(alpha: 0.05),
               ),
               onPressed: () {
                 Navigator.push(

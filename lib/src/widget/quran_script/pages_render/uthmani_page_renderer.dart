@@ -6,12 +6,14 @@ import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
+
+import "../../../theme/controller/theme_cubit.dart";
+import "../../../theme/controller/theme_state.dart";
 
 class NonTajweedPageRenderer extends StatelessWidget {
   final bool isUthmani;
@@ -27,6 +29,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     Map<String, List> audioSegmentsMap = {};
 
     for (final ayahsKey in ayahsKey) {
@@ -99,7 +103,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                   wordKey == "$ayahKey:${index + 1}"
                                       ? TextStyle(
                                         backgroundColor:
-                                            AppColors.primaryShade200,
+                                            themeState.primaryShade200,
                                       )
                                       : null,
 
