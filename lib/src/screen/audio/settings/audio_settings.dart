@@ -1,5 +1,6 @@
 import "dart:io";
 
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -19,29 +20,33 @@ class AudioSettings extends StatefulWidget {
 class _AudioSettingsState extends State<AudioSettings> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(7),
-      decoration: BoxDecoration(
-        color: context.read<ThemeCubit>().state.primaryShade100,
-        borderRadius: BorderRadius.circular(7),
-      ),
-      child: FutureBuilder(
-        future: getCategorizedCacheFilesWithSize(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Map<String, List<Map<String, dynamic>>> data = snapshot.data!;
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, themeState) {
+        return Container(
+          padding: const EdgeInsets.all(7),
+          decoration: BoxDecoration(
+            color: themeState.primaryShade100,
+            borderRadius: BorderRadius.circular(7),
+          ),
+          child: FutureBuilder(
+            future: getCategorizedCacheFilesWithSize(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                Map<String, List<Map<String, dynamic>>> data = snapshot.data!;
 
-            List<String> keys = data.keys.toList();
+                List<String> keys = data.keys.toList();
 
-            return getListOfCacheWidget(keys, data);
-          } else if (snapshot.hasError) {
-            return const Center(child: Text("Cache Not Found"));
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return const SizedBox();
-        },
-      ),
+                return getListOfCacheWidget(keys, data);
+              } else if (snapshot.hasError) {
+                return const Center(child: Text("Cache Not Found"));
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return const SizedBox();
+            },
+          ),
+        );
+      },
     );
   }
 
