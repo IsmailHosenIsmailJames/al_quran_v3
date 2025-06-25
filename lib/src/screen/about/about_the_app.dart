@@ -1,5 +1,7 @@
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:simple_icons/simple_icons.dart";
@@ -9,6 +11,7 @@ class AboutAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       extendBody: true,
       appBar: AppBar(title: const Text("About Al Quran")),
@@ -23,7 +26,10 @@ class AboutAppPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   boxShadow: [
-                    BoxShadow(color: AppColors.primaryShade300, blurRadius: 50),
+                    BoxShadow(
+                      color: themeState.primaryShade300,
+                      blurRadius: 50,
+                    ),
                   ],
                 ),
                 child: ClipRRect(
@@ -85,7 +91,7 @@ class AboutAppPage extends StatelessWidget {
             const Gap(10),
             Card(
               elevation: 0,
-              color: AppColors.primaryShade100, // Adjusted opacity
+              color: themeState.primaryShade100, // Adjusted opacity
               margin: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -97,7 +103,7 @@ class AboutAppPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                 ),
               ),
@@ -282,7 +288,7 @@ class AboutAppPage extends StatelessWidget {
     </g>
 </svg>""",
                 colorFilter: ColorFilter.mode(
-                  AppColors.primary,
+                  themeState.primary,
                   BlendMode.srcIn,
                 ),
               ),
@@ -294,7 +300,7 @@ class AboutAppPage extends StatelessWidget {
             const Gap(30),
             Card(
               elevation: 0,
-              color: AppColors.primaryShade100,
+              color: themeState.primaryShade100,
               margin: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -306,7 +312,7 @@ class AboutAppPage extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.favorite_rounded,
-                      color: AppColors.primary,
+                      color: themeState.primary,
                       size: 40,
                     ),
                     const Gap(15),
@@ -316,7 +322,7 @@ class AboutAppPage extends StatelessWidget {
                         context,
                       ).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                        color: themeState.primary,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -352,6 +358,7 @@ class FeatureTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
@@ -362,7 +369,7 @@ class FeatureTile extends StatelessWidget {
         tileColor: Theme.of(context).colorScheme.secondaryContainer.withValues(
           alpha: 0.3,
         ), // Using theme color
-        leading: Icon(icon, color: AppColors.primary, size: 32),
+        leading: Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -389,6 +396,7 @@ class PlatformTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
@@ -399,7 +407,7 @@ class PlatformTile extends StatelessWidget {
         tileColor: Theme.of(context).colorScheme.secondaryContainer.withValues(
           alpha: 0.3,
         ), // Using theme color
-        leading: alterNative ?? Icon(icon, color: AppColors.primary, size: 32),
+        leading: alterNative ?? Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(

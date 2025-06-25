@@ -5,10 +5,11 @@ import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/m
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/pages/administrator_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/pages/city_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/pages/countries_selection.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+
+import "../../../theme/controller/theme_cubit.dart";
 
 class AddressSelection extends StatefulWidget {
   final bool moveToDownloadPage;
@@ -55,7 +56,7 @@ class _AddressSelectionState extends State<AddressSelection> {
                 children: [
                   LinearProgressIndicator(
                     value: state.downloadProgress,
-                    color: AppColors.primary,
+                    color: context.read<ThemeCubit>().state.primary,
                   ),
                   const SizedBox(height: 20),
                   Text(

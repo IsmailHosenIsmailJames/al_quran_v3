@@ -1,19 +1,19 @@
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
-import "package:al_quran_v3/src/widget/theme_icon_button.dart";
+import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-// import "package:flutter_svg/svg.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
-import "package:share_plus/share_plus.dart"; // Added import
-// import "package:simple_icons/simple_icons.dart";
+import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
 
+import "../../../theme/controller/theme_cubit.dart";
+import "../../../theme/controller/theme_state.dart";
 import "../../collections/collection_page.dart";
 import "../../settings/settings_page.dart";
 
@@ -42,6 +42,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Drawer(
       child: Column(
         children: [
@@ -59,7 +60,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             borderRadius: BorderRadius.circular(100),
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.primaryShade200,
+                                color: themeState.primaryShade200,
                                 blurRadius: 40,
                                 spreadRadius: 0,
                               ),
@@ -77,8 +78,8 @@ class _AppDrawerState extends State<AppDrawer> {
                             children: [
                               IconButton(
                                 style: IconButton.styleFrom(
-                                  backgroundColor: AppColors.primaryShade100,
-                                  foregroundColor: AppColors.primary,
+                                  backgroundColor: themeState.primaryShade100,
+                                  foregroundColor: themeState.primary,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -121,7 +122,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                   ),
                 ),
-                Divider(height: 10, color: AppColors.mutedGray),
+                Divider(height: 10, color: themeState.mutedGray),
                 ListTile(
                   minTileHeight: 40,
                   onTap: () async {
@@ -134,7 +135,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.settings_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Settings",
@@ -157,7 +158,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.note_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Notes",
@@ -180,7 +181,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.pin_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Pinned",
@@ -199,7 +200,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.arrow_turn_down_right_20_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Jump to Ayah",
@@ -220,7 +221,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.share_multiple_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Share Multiple Ayah",
@@ -233,7 +234,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   onTap: () async {},
                   leading: Icon(
                     Icons.favorite_rounded,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Donation Us",
@@ -251,7 +252,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                   ),
                 ),
-                Divider(height: 10, color: AppColors.mutedGray),
+                Divider(height: 10, color: themeState.mutedGray),
                 ListTile(
                   minTileHeight: 40,
                   onTap: () async {
@@ -269,7 +270,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.share_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Share this App",
@@ -290,7 +291,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     Icons.star_rate_rounded,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Give Rating",
@@ -306,7 +307,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.bug_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "Bug Report",
@@ -324,7 +325,10 @@ class _AppDrawerState extends State<AppDrawer> {
                       mode: LaunchMode.externalApplication,
                     );
                   },
-                  leading: Icon(Icons.policy_rounded, color: AppColors.primary),
+                  leading: Icon(
+                    Icons.policy_rounded,
+                    color: themeState.primary,
+                  ),
                   title: const Text(
                     "Privacy Policy",
                     style: TextStyle(fontWeight: FontWeight.w500),
@@ -343,7 +347,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   },
                   leading: Icon(
                     FluentIcons.info_24_filled,
-                    color: AppColors.primary,
+                    color: themeState.primary,
                   ),
                   title: const Text(
                     "About the App",
@@ -405,83 +409,6 @@ class _AppDrawerState extends State<AppDrawer> {
               ],
             ),
           ),
-          // security issue : project moved to closed source
-          // Container(
-          //   padding: const EdgeInsets.only(
-          //     top: 5,
-          //     bottom: 10,
-          //     right: 10,
-          //     left: 10,
-          //   ),
-          //   decoration: BoxDecoration(
-          //     color:
-          //         Theme.of(context).brightness == Brightness.light
-          //             ? Colors.grey.shade100
-          //             : Colors.grey.shade900,
-          //   ),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     children: [
-          //       SizedBox(
-          //         height: 40,
-          //         width: 40,
-          //         child: IconButton(
-          //           style: IconButton.styleFrom(
-          //             backgroundColor: AppColors.primaryShade100,
-          //           ),
-          //           onPressed: () {
-          //             // open source code of the project
-          //             launchUrl(
-          //               Uri.parse(
-          //                 "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
-          //               ),
-          //               mode: LaunchMode.externalApplication,
-          //             );
-          //           },
-          //           icon: const Icon(SimpleIcons.github),
-          //         ),
-          //       ),
-          //       SizedBox(
-          //         height: 40,
-          //         width: 40,
-          //         child: IconButton(
-          //           style: IconButton.styleFrom(
-          //             backgroundColor: AppColors.primaryShade100,
-          //           ),
-          //           onPressed: () {
-          //             // invitation of discord community of this project
-          //             launchUrl(
-          //               Uri.parse("https://discord.gg/BcyaF8jHR9"),
-          //               mode: LaunchMode.externalApplication,
-          //             );
-          //           },
-          //           icon: const Icon(
-          //             SimpleIcons.discord,
-          //             color: Color(0xff5865f2),
-          //           ),
-          //         ),
-          //       ),
-          //       SizedBox(
-          //         height: 40,
-          //         width: 40,
-          //         child: IconButton(
-          //           style: IconButton.styleFrom(
-          //             backgroundColor: AppColors.primaryShade100,
-          //             padding: EdgeInsets.zero,
-          //           ),
-          //           onPressed: () {
-          //             // mail to me in gmail: "md.ismailhosenismailjames@gmail.com"
-          //             launchUrl(
-          //               Uri.parse("mailto:md.ismailhosenismailjames@gmail.com"),
-          //               mode: LaunchMode.externalApplication,
-          //             );
-          //           },
-          //           icon: SvgPicture.asset("assets/img/gmail.svg"),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
