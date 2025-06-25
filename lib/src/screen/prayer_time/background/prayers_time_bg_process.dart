@@ -12,7 +12,6 @@ import "package:intl/intl.dart";
 import "package:workmanager/workmanager.dart";
 
 import "../../../notification/init_awesome_notification.dart";
-import "../../../theme/colors/app_colors.dart";
 import "../models/prayer_model_of_day.dart";
 import "../models/prayer_types.dart";
 
@@ -174,7 +173,6 @@ Future<void> setReminderAlarm(
         body: reminderBody,
         stopButton: "Stop the Adhan",
         icon: "notification_icon",
-        iconColor: AppColors.primary,
       ),
     ),
   );

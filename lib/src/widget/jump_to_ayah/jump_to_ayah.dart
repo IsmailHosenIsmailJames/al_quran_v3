@@ -3,7 +3,6 @@ import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart"
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
@@ -16,6 +15,8 @@ import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:share_plus/share_plus.dart";
 
+import "../../theme/controller/theme_cubit.dart";
+import "../../theme/controller/theme_state.dart";
 import "../ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "../ayah_by_ayah/share_bottom_dialog.dart";
 import "../quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -50,6 +51,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
@@ -69,7 +72,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 topLeft: Radius.circular(roundedRadius),
                 topRight: Radius.circular(roundedRadius),
               ),
-              color: AppColors.primaryShade100,
+              color: themeState.primaryShade100,
             ),
             width: double.infinity,
             height: 50,
@@ -117,7 +120,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                   margin: const EdgeInsets.only(left: 10, right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(roundedRadius),
-                    color: AppColors.primaryShade100,
+                    color: themeState.primaryShade100,
                   ),
 
                   child:
@@ -151,7 +154,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         selectedAyahKeys.clear();
                         setState(() {});
                       },
-                      icon: Icon(Icons.close, color: AppColors.primary),
+                      icon: Icon(Icons.close, color: themeState.primary),
                     ),
                   ),
                 ),
@@ -179,7 +182,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(roundedRadius),
-                          color: AppColors.primaryShade100,
+                          color: themeState.primaryShade100,
                         ),
                         child: TextFormField(
                           controller: textEditingController,
@@ -220,7 +223,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       ),
                                       backgroundColor:
                                           index == (surahNumber ?? 0) - 1
-                                              ? AppColors.primary.withValues(
+                                              ? themeState.primary.withValues(
                                                 alpha: 0.2,
                                               )
                                               : Colors.transparent,
@@ -287,7 +290,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                   (index == (ayahNumber ?? 0) - 1) &&
                                           (widget.selectMultipleAndShare !=
                                               true)
-                                      ? AppColors.primaryShade300
+                                      ? themeState.primaryShade300
                                       : Colors.transparent,
                               foregroundColor:
                                   Theme.of(context).brightness ==
@@ -365,7 +368,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       SpinKitFoldingCube(
-                                        color: AppColors.primary,
+                                        color: themeState.primary,
                                       ),
                                       const Gap(20),
                                       const Text(

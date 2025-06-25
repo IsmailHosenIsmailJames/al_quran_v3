@@ -10,8 +10,11 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+
+import "../../../../theme/controller/theme_cubit.dart";
+import "../../../../theme/controller/theme_state.dart";
 
 class QuranPage extends StatefulWidget {
   const QuranPage({super.key});
@@ -39,6 +42,7 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       body: Column(
         children: [
@@ -47,7 +51,7 @@ class _QuranPageState extends State<QuranPage> {
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
-              color: AppColors.primaryShade100,
+              color: themeState.primaryShade100,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Stack(
@@ -61,7 +65,7 @@ class _QuranPageState extends State<QuranPage> {
                   curve: Curves.easeInOut,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: AppColors.primaryShade200,
+                      color: themeState.primaryShade200,
                       borderRadius: BorderRadius.circular(100),
                     ),
                     height: 30,

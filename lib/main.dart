@@ -23,8 +23,9 @@ import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:alarm/alarm.dart";
 import "package:flutter/material.dart";
@@ -32,7 +33,6 @@ import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
-import "package:shared_preferences/shared_preferences.dart";
 import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
@@ -67,7 +67,6 @@ Future<void> main() async {
       await windowManager.focus();
     });
   }
-  SharedPreferences preferences = await SharedPreferences.getInstance();
   await JustAudioBackground.init(
     androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
     androidNotificationChannelName: "Audio playback",
@@ -112,6 +111,8 @@ Future<void> main() async {
     await rootBundle.loadString("assets/meta_data/Surah.json"),
   );
 
+  await ThemeFunctions.initThemeFunction();
+
   if (Platform.isIOS || Platform.isAndroid) {
     await Alarm.init();
     await PrayersTimeFunction.init();
@@ -125,22 +126,20 @@ Future<void> main() async {
   }
   getSegmentsSupportedReciters();
 
-  runApp(MyApp(preferences: preferences));
+  runApp(const MyApp());
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  final SharedPreferences preferences;
-
-  const MyApp({super.key, required this.preferences});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DownloadProgressCubitCubit()),
-        BlocProvider(create: (context) => ThemeCubit(preferences)),
+        BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
         BlocProvider(create: (context) => AyahKeyCubit()),
@@ -152,8 +151,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
         BlocProvider(create: (context) => PrayerReminderCubit()),
-        BlocProvider(create: (context) => SearchCubit(),),
-        BlocProvider(create: (context) => OthersSettingsCubit(),),
+        BlocProvider(create: (context) => SearchCubit()),
+        BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(
           create:
               (context) => QuranReciterCubit(
@@ -165,7 +164,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
 
-      child: BlocBuilder<ThemeCubit, ThemeMode>(
+      child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
             navigatorKey: navigatorKey,
@@ -176,12 +175,12 @@ class MyApp extends StatelessWidget {
               fontFamily: "NotoSans",
             ).copyWith(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.primary,
+                seedColor: state.primary,
                 brightness: Brightness.light,
               ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: state.primary,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
                   elevation: 0,
@@ -196,12 +195,12 @@ class MyApp extends StatelessWidget {
               fontFamily: "NotoSans",
             ).copyWith(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.primary,
+                seedColor: state.primary,
                 brightness: Brightness.dark,
               ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: state.primary,
                   foregroundColor: Colors.white,
                   iconColor: Colors.white,
                   elevation: 0,
@@ -213,7 +212,7 @@ class MyApp extends StatelessWidget {
             ),
 
             supportedLocales: [const Locale("en"), const Locale("bn")],
-            themeMode: state,
+            themeMode: state.themeMode,
             home:
                 Hive.box("user").get("is_setup_complete", defaultValue: false)
                     ? const HomePage()

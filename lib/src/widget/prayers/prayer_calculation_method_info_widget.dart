@@ -2,17 +2,21 @@ import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.da
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-import "../../theme/colors/app_colors.dart";
+import "../../theme/controller/theme_cubit.dart";
 import "../../theme/values/values.dart";
 
 Widget getPrayerCalculationMethodInfoWidget(
+  BuildContext context,
   CalculationMethod calculationMethod,
 ) {
   return Container(
     decoration: BoxDecoration(
-      border: Border.all(color: AppColors.primaryShade300),
+      border: Border.all(
+        color: context.read<ThemeCubit>().state.primaryShade300,
+      ),
       borderRadius: BorderRadius.circular(roundedRadius),
     ),
     padding: const EdgeInsets.all(5),
@@ -67,7 +71,7 @@ Widget getPrayerCalculationMethodInfoWidget(
               if (currentValue == null) return const SizedBox();
               return Container(
                 decoration: BoxDecoration(
-                  color: AppColors.primaryShade100,
+                  color: context.read<ThemeCubit>().state.primaryShade100,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 padding: const EdgeInsets.only(
