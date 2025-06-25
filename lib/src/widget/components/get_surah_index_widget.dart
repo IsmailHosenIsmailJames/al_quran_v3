@@ -1,6 +1,8 @@
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+
+import "../../theme/controller/theme_cubit.dart";
 
 SizedBox getIndexNumberWidget(
   BuildContext context,
@@ -20,7 +22,7 @@ SizedBox getIndexNumberWidget(
           height: height ?? 35,
           width: width ?? 35,
           colorFilter: ColorFilter.mode(
-            AppColors.primaryShade300,
+            context.read<ThemeCubit>().state.primaryShade300,
             BlendMode.srcIn,
           ),
         ),

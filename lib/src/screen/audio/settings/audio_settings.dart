@@ -1,11 +1,12 @@
 import "dart:io";
 
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
 
-import "../../../theme/colors/app_colors.dart";
+import "../../../theme/controller/theme_cubit.dart";
 import "../functions/functions.dart";
 
 class AudioSettings extends StatefulWidget {
@@ -21,7 +22,7 @@ class _AudioSettingsState extends State<AudioSettings> {
     return Container(
       padding: const EdgeInsets.all(7),
       decoration: BoxDecoration(
-        color: AppColors.primaryShade100,
+        color: context.read<ThemeCubit>().state.primaryShade100,
         borderRadius: BorderRadius.circular(7),
       ),
       child: FutureBuilder(

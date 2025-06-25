@@ -1,7 +1,7 @@
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
-import "package:flutter/material.dart";
 import "dart:math" as math;
 
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:flutter/material.dart";
 import "package:vector_math/vector_math.dart" as vector;
 
 import "../qibla_direction.dart";
@@ -9,7 +9,12 @@ import "../qibla_direction.dart";
 class CompassView extends CustomPainter {
   final BuildContext context;
   final double kaabaAngle;
-  CompassView({required this.context, required this.kaabaAngle});
+  final ThemeState themeState;
+  CompassView(
+    this.themeState, {
+    required this.context,
+    required this.kaabaAngle,
+  });
   @override
   void paint(Canvas canvas, Size size) {
     Offset center = Offset(size.height / 2, size.width / 2);
@@ -54,12 +59,12 @@ class CompassView extends CustomPainter {
         if (is30) {
           length = 10;
           degreeAnglePaint
-            ..color = AppColors.primary
+            ..color = themeState.primary
             ..strokeWidth = 2;
         }
         if (is90) {
           degreeAnglePaint
-            ..color = AppColors.primary
+            ..color = themeState.primary
             ..strokeWidth = 3;
           length = 15;
         }
@@ -84,7 +89,7 @@ class CompassView extends CustomPainter {
               text: degree.toString(),
               style: TextStyle(
                 fontSize: is90 ? 14 : 12,
-                color: is90 ? AppColors.primary : grayColor,
+                color: is90 ? themeState.primary : grayColor,
               ),
             ),
             textAlign: TextAlign.center,
@@ -108,7 +113,7 @@ class CompassView extends CustomPainter {
                 text: direction,
                 style: TextStyle(
                   fontSize: is90 ? 18 : 12,
-                  color: AppColors.primary,
+                  color: themeState.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),

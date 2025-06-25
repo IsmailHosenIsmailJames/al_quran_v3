@@ -1,13 +1,15 @@
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:device_info_plus/device_info_plus.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
+
+import "../../theme/controller/theme_cubit.dart";
 
 Future<void> showBugReportDialog(BuildContext context) async {
   final deviceInfo = DeviceInfoPlugin();
@@ -29,7 +31,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(FluentIcons.bug_24_filled, color: AppColors.primary),
+                Icon(
+                  FluentIcons.bug_24_filled,
+                  color: context.read<ThemeCubit>().state.primary,
+                ),
                 const Gap(10),
                 const Text(
                   "Bug Report",

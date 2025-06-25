@@ -3,19 +3,22 @@ import "package:al_quran_v3/src/screen/collections/common_function.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/sorting_methods_type.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 
+import "../../theme/controller/theme_cubit.dart";
+
 class CollectionPage extends StatefulWidget {
   final CollectionType collectionType;
+
   const CollectionPage({super.key, required this.collectionType});
 
   @override
@@ -156,7 +159,9 @@ class _CollectionPageState extends State<CollectionPage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Divider(color: AppColors.mutedGray),
+                          Divider(
+                            color: context.read<ThemeCubit>().state.mutedGray,
+                          ),
                           Expanded(
                             child: ListView.builder(
                               itemCount: SortingMethodsType.values.length,
@@ -178,7 +183,10 @@ class _CollectionPageState extends State<CollectionPage> {
                                         : Icons.radio_button_off,
                                     color:
                                         current.name == sortMethod
-                                            ? AppColors.primary
+                                            ? context
+                                                .read<ThemeCubit>()
+                                                .state
+                                                .primary
                                             : null,
                                   ),
                                   title: Text(current.toReadableString()),

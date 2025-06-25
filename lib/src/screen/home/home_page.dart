@@ -7,13 +7,13 @@ import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/search/search_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
-import "package:al_quran_v3/src/theme/colors/app_colors.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
+import "../../theme/controller/theme_cubit.dart";
 import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 currentIndex: state.tabIndex,
                 onTap: context.read<OthersSettingsCubit>().setTabIndex,
                 type: BottomNavigationBarType.fixed,
-                selectedItemColor: AppColors.primary,
+                selectedItemColor: context.read<ThemeCubit>().state.primary,
                 selectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
