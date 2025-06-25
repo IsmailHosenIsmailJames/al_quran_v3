@@ -20,60 +20,63 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 10.0,
-          right: 10,
-          top: 10,
-          bottom: 50,
-        ),
+      body: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              left: 10.0,
+              right: 10,
+              top: 10,
+              bottom: 50,
+            ),
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "App Theme",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "App Theme",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Divider(color: themeState.primaryShade300),
+                const ThemeSettings(),
+                const Gap(20),
+                const Text(
+                  "Quran Style",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Divider(color: themeState.primaryShade300),
+                const Gap(5),
+                const Text(
+                  "Quran Style",
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
+                const Gap(7),
+                getScriptSelectionSegmentedButtons(context),
+                const Gap(20),
+                const QuranScriptSettings(),
+                const Gap(30),
+                const Text(
+                  "Audio Cached",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Divider(color: themeState.primaryShade300),
+                const Gap(5),
+                const AudioSettings(),
+                const Gap(30),
+                const Text(
+                  "Others",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Divider(color: themeState.primaryShade300),
+                const Gap(5),
+                const OthersSettings(),
+              ],
             ),
-            Divider(color: themeState.primaryShade300),
-            const ThemeSettings(),
-            const Gap(20),
-            const Text(
-              "Quran Style",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Divider(color: themeState.primaryShade300),
-            const Gap(5),
-            const Text(
-              "Quran Style",
-              style: TextStyle(fontWeight: FontWeight.w500),
-            ),
-            const Gap(7),
-            getScriptSelectionSegmentedButtons(context),
-            const Gap(20),
-            const QuranScriptSettings(),
-            const Gap(30),
-            const Text(
-              "Audio Cached",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Divider(color: themeState.primaryShade300),
-            const Gap(5),
-            const AudioSettings(),
-            const Gap(30),
-            const Text(
-              "Others",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Divider(color: themeState.primaryShade300),
-            const Gap(5),
-            const OthersSettings(),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
