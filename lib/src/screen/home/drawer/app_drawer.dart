@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
+import "package:al_quran_v3/src/screen/quran_resources/quran_resources.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -222,6 +223,27 @@ class _AppDrawerState extends State<AppDrawer> {
                       minTileHeight: 40,
                       onTap: () async {
                         Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const QuranResources(),
+                          ),
+                        );
+                      },
+                      leading: Icon(
+                        FluentIcons.arrow_download_24_filled,
+                        color: themeState.primary,
+                      ),
+                      title: const Text(
+                        "Quran Resources",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const Gap(5),
+                    ListTile(
+                      minTileHeight: 40,
+                      onTap: () async {
+                        Navigator.pop(context);
                         await popupJumpToAyah(
                           context: context,
                           initAyahKey: "1:1",
@@ -407,7 +429,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           },
                         );
                       },
-                      leading:  Icon(
+                      leading: Icon(
                         FluentIcons.arrow_reset_24_filled,
                         color: themeState.primary,
                       ),
@@ -436,7 +458,6 @@ class _AppDrawerState extends State<AppDrawer> {
     await Hive.openLazyBox("quran_tafsir");
     await Hive.openBox("segmented_quran_recitation");
     await Hive.openBox("surah_info");
-
 
     Navigator.pushAndRemoveUntil(
       context,
