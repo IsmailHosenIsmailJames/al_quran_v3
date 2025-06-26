@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
@@ -9,6 +10,7 @@ import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
@@ -78,6 +80,8 @@ Future<void> main() async {
   await Hive.openBox("quran_word_by_word");
   await Hive.openBox("segmented_quran_recitation");
   await Hive.openBox("surah_info");
+  await QuranTranslationFunction.init();
+  log(Hive.box('user').keys.toString());
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   tajweedScript = jsonDecode(
