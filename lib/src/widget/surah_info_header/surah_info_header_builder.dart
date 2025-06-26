@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
@@ -26,7 +27,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    final Map translationMeta = Hive.box("quran_translation").get("meta_data");
+    final Map translationMeta = QuranTranslationFunction.getMetaInfo();
     String tafsirMeta = Hive.box("user").get("tafsir_book");
     return Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),

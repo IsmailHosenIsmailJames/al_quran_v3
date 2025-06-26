@@ -170,7 +170,7 @@ class QuranTranslationFunction {
   }
 
   static Map getTranslation(String ayahKey) {
-    return openedTranslationBox?.get(ayahKey) ?? {};
+    return openedTranslationBox?.get(ayahKey) ?? {"t": "Translation Not Found"};
   }
 
   static Map getMetaInfo() {
