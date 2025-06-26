@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
@@ -426,6 +427,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Future<void> _resetApp() async {
+    await QuranTranslationFunction.close();
     await Hive.deleteFromDisk();
     await Hive.initFlutter();
     await Hive.openBox("quran_translation");
@@ -434,6 +436,7 @@ class _AppDrawerState extends State<AppDrawer> {
     await Hive.openLazyBox("quran_tafsir");
     await Hive.openBox("segmented_quran_recitation");
     await Hive.openBox("surah_info");
+
 
     Navigator.pushAndRemoveUntil(
       context,
