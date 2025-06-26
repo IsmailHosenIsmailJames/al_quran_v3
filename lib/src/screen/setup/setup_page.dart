@@ -5,11 +5,11 @@ import "dart:io";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
-import "package:al_quran_v3/src/resources/surah_info/info.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -463,7 +463,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
               ),
             ),
       );
-      bool success1 = await downloadTranslationBook();
+      bool success1 = await QuranTranslationFunction.downloadResources(
+        context: context,
+        translationBook: translationBook,
+        translationLanguage: translationLanguage,
+        isSetupProcess: true,
+      );
       bool success2 = await downloadTafsir();
       bool success3 = await downloadWordByWordTranslation(
         codeToLanguageMap[translationLanguage ?? ""] ?? "",
@@ -479,6 +484,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         );
       } else {
         // error and show 'Something went wrong' in cubit
+        log([success1, success2, success3, success4].toString());
         context.read<DownloadProgressCubitCubit>().failure(
           "Unable to download resources...",
         );
@@ -589,72 +595,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
     } else {
       log("Word by word translation not supported");
       return true;
-    }
-  }
-
-  Future<bool> downloadTranslationBook() async {
-    final translationBox = Hive.box("quran_translation");
-    Map metaData = translationBox.get("meta_data", defaultValue: {});
-    if (metaData["name"] == translationBook &&
-        metaData["language"] == translationLanguage) {
-      log("Already downloaded");
-      return true;
-    }
-    try {
-      String base = ApisUrls.base;
-      log(base + translationBook!, name: "http path");
-      context.read<DownloadProgressCubitCubit>().updateProgress(
-        null,
-        "Downloading Translation",
-      );
-      dio.Response response = await dio.Dio().get(base + translationBook!);
-
-      log(response.statusCode.toString(), name: "Status");
-      DateTime now = DateTime.now();
-      Map data = await compute(
-        (message) => jsonDecode(decodeBZip2String(message)),
-        response.data,
-      );
-      for (int i = 0; i < data.length; i++) {
-        String key = data.keys.elementAt(i);
-        await translationBox.put(key, data[key]);
-        context.read<DownloadProgressCubitCubit>().updateProgress(
-          i / data.length,
-          "Processing Translation",
-        );
-      }
-      await translationBox.put("meta_data", {
-        "name": translationBook,
-        "language": translationLanguage,
-      });
-
-      if (availableSurahInfoInLang.contains(translationLanguage)) {
-        context.read<DownloadProgressCubitCubit>().updateProgress(
-          null,
-          "Downloading Surah's Information",
-        );
-        final response = await dio.Dio().get(
-          "${ApisUrls.base}quranic_universal_library/surah_info/$translationLanguage.txt",
-        );
-        if (response.statusCode == 200) {
-          final box = Hive.box("surah_info");
-          Map data = await compute(
-            (message) => jsonDecode(decodeBZip2String(message)),
-            response.data,
-          );
-          for (final key in data.keys) {
-            await box.put(key, data[key]);
-          }
-        }
-      }
-      log(
-        now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-        name: "Translation Process Time",
-      );
-      return true;
-    } catch (e) {
-      log(e.toString(), name: "http error");
-      return false;
     }
   }
 
