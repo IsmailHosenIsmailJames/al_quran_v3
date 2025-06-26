@@ -86,6 +86,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     if (!kIsWeb) {
       changeAppLanguage(Platform.localeName.split("_")[0].toLowerCase());
     }
+    QuranTranslationFunction.init();
     super.initState();
   }
 

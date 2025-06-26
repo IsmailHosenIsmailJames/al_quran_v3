@@ -25,6 +25,8 @@ class QuranTranslationFunction {
           translationBook: translationSelection["name"],
         ),
       );
+    }else{
+      log("translationSelection not found");
     }
   }
 
@@ -146,6 +148,7 @@ class QuranTranslationFunction {
         await downloadSurahInfo(translationLanguage);
       }
       log("downloadResources", name: "downloadResources");
+      await init();
       return true;
     } catch (e) {
       log(e.toString(), name: "downloadResources");
