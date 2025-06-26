@@ -16,15 +16,13 @@ class ThemeSettings extends StatelessWidget {
     Colors.deepPurple,
     Colors.orange,
     Colors.blueGrey,
-
-    // New Additions
-    Colors.green, // A natural, calming green
-    Colors.red, // A classic, bold red
-    Colors.indigo, // A deep, professional blue
-    Colors.brown, // An earthy, warm tone
-    Colors.pink, // A vibrant, warm option
-    Colors.amber, // A bright, golden color
-    Colors.cyan, // A fresh, bright blue
+    Colors.green,
+    Colors.red,
+    Colors.indigo,
+    Colors.brown,
+    Colors.pink,
+    Colors.amber,
+    Colors.cyan,
   ];
 
   @override
@@ -51,7 +49,10 @@ class ThemeSettings extends StatelessWidget {
                       color: current,
                       borderRadius: BorderRadius.circular(roundedRadius),
                     ),
-                    child: isSelected ? const Icon(Icons.done) : null,
+                    child:
+                        isSelected
+                            ? const Icon(Icons.done, color: Colors.white)
+                            : null,
                   ),
                 ),
               );
