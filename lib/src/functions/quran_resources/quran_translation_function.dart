@@ -25,7 +25,7 @@ class QuranTranslationFunction {
           translationBook: translationSelection["name"],
         ),
       );
-    }else{
+    } else {
       log("translationSelection not found");
     }
   }
@@ -61,6 +61,36 @@ class QuranTranslationFunction {
       "language": translationLanguage,
     });
     await userBox.put("downloaded_translation_books", downloadedBooks);
+  }
+
+  static List<Map> getDownloadedTranslationBooks() {
+    final userBox = Hive.box("user");
+    return List<Map>.from(
+      userBox.get("downloaded_translation_books", defaultValue: []),
+    );
+  }
+
+  static Future<void> removeToListAlreadyDownloaded(
+    String translationBook,
+    String translationLanguage,
+  ) async {
+    final userBox = Hive.box("user");
+    List<Map> downloadedBooks = List<Map>.from(
+      userBox.get("downloaded_translation_books", defaultValue: []),
+    );
+    for (Map book in downloadedBooks) {
+      if (book["name"] == translationBook &&
+          book["language"] == translationLanguage) {
+        downloadedBooks.remove(book);
+        await userBox.put("downloaded_translation_books", downloadedBooks);
+        break;
+      }
+    }
+  }
+
+  static Future<void> removeTranslationSelection() async {
+    final userBox = Hive.box("user");
+    await userBox.delete("selected_translation");
   }
 
   static Future<void> setTranslationSelection(
