@@ -360,6 +360,7 @@ Align quranAyahWidget(
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
         quranScriptType: quranViewState.quranScriptType,
+        showWordHighlights: quranViewState.enableWordByWordHighlight == true,
         textStyle: TextStyle(
           fontSize: quranViewState.fontSize,
           height: quranViewState.lineHeight,

@@ -17,11 +17,13 @@ import "../../../../theme/controller/theme_state.dart";
 class TajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
+  final bool? enableWordByWordHighlight;
 
   const TajweedPageRenderer({
     super.key,
     required this.ayahsKey,
     this.baseTextStyle,
+    this.enableWordByWordHighlight,
   });
 
   @override
@@ -49,6 +51,7 @@ class TajweedPageRenderer extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
         buildWhen: (previous, current) {
+          if (enableWordByWordHighlight != true) return false;
           if (context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
             return false;
           }
@@ -101,7 +104,8 @@ class TajweedPageRenderer extends StatelessWidget {
                                 fontFamily:
                                     baseTextStyle?.fontFamily ?? "QPC_Hafs",
                                 backgroundColor:
-                                    wordKey == "$ayahKey:${index + 1}"
+                                    (wordKey == "$ayahKey:${index + 1}" &&
+                                            enableWordByWordHighlight == true)
                                         ? themeState.primaryShade200
                                         : null,
                               ),

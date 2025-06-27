@@ -488,13 +488,15 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   }
                 },
                 child: BlocBuilder<QuranViewCubit, QuranViewState>(
-                  builder: (context, state) {
+                  builder: (context, quranViewState) {
                     return QuranPagesRenderer(
                       ayahsKey: ayahsKeyOfPage,
-                      quranScriptType: state.quranScriptType,
+                      quranScriptType: quranViewState.quranScriptType,
+                      enableWordByWordHighlight:
+                          quranViewState.enableWordByWordHighlight == true,
                       baseStyle: TextStyle(
-                        fontSize: state.fontSize,
-                        height: state.lineHeight,
+                        fontSize: quranViewState.fontSize,
+                        height: quranViewState.lineHeight,
                       ),
                     );
                   },
