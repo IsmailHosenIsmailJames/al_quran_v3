@@ -29,7 +29,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
   }
 
   Future<void> _loadInitialData() async {
-    await WordByWordFunction.init(); // Ensure function is initialized
+    await WordByWordFunction.init();
     setState(() {
       downloadedLanguages =
           WordByWordFunction.getDownloadedWordByWordLanguages();
@@ -53,7 +53,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
           );
 
           if (wbwInfo == null) {
-            return const SizedBox.shrink(); // Should not happen if data is consistent
+            return const SizedBox.shrink();
           }
 
           bool isDownloaded = downloadedLanguages.contains(languageKey);
@@ -85,12 +85,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                     await WordByWordFunction.setSelectedWordByWordLanguage(
                       languageKey,
                     );
-                    // No need to call _loadInitialData here as setSelectedWordByWordLanguage handles init
-                    // and we already updated the local state.
                   } else {
-                    // Optionally, allow deselecting
-                    // await WordByWordFunction.removeSelectedWordByWordLanguage();
-                    // _loadInitialData();
                     log("Language '$languageKey' is already selected.");
                   }
                 } else {
@@ -106,12 +101,11 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                     languageKey: languageKey,
                   );
                   if (success) {
-                    // After download, also select it
                     await WordByWordFunction.setSelectedWordByWordLanguage(
                       languageKey,
                     );
                   }
-                  // Refresh data regardless of success to reflect download status
+
                   await _loadInitialData();
                   setState(() {
                     downloadingLanguageKey = null;
@@ -168,7 +162,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                                     size: 28,
                                   )
                                   : Icon(
-                                    Icons.check_circle_outline_rounded,
+                                    Icons.circle_outlined,
                                     color: Colors.grey[600],
                                     size: 28,
                                   )
