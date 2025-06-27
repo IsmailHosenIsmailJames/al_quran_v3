@@ -1,209 +1,175 @@
-import "dart:developer";
+import 'dart:developer';
 
-import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart"; // Changed
-import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:dartx/dartx.dart";
-import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import 'package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart';
+import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
+import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
+import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
+import 'package:al_quran_v3/src/theme/controller/theme_state.dart';
+import 'package:dartx/dartx.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TafsirResources extends StatefulWidget {
-  // Changed
-  const TafsirResources({super.key}); // Changed
+  const TafsirResources({super.key});
 
   @override
-  State<TafsirResources> createState() => _TafsirResourcesState(); // Changed
+  State<TafsirResources> createState() => _TafsirResourcesState();
 }
 
 class _TafsirResourcesState extends State<TafsirResources> {
-  // Changed
-  List<String> expandedLanguageKey = [];
-  List<Map> downloadedTafsirs = // Changed
-      QuranTafsirFunction.getDownloadedTafsirBooks(); // Changed
-  Map? selectedTafsir = QuranTafsirFunction.getTafsirSelection(); // Changed
-
+  List<Map> downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+  Map? selectedTafsir = QuranTafsirFunction.getTafsirSelection();
   Map? downloadingData;
+
+  void _refreshData() {
+    setState(() {
+      downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+      selectedTafsir = QuranTafsirFunction.getTafsirSelection();
+      downloadingData = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
+    ThemeState themeState = context.watch<ThemeCubit>().state;
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
       child: Column(
         children: List.generate(tafsirInformationWithScore.length, (index) {
-          // Changed
-          String keyOfMap = tafsirInformationWithScore.keys.elementAt(
-            index,
-          ); // Changed
-          List<Map<String, dynamic>> value =
-              tafsirInformationWithScore[keyOfMap]!; // Changed
+          String languageKey = tafsirInformationWithScore.keys.elementAt(index);
+          List<Map<String, dynamic>> booksInLanguage =
+              tafsirInformationWithScore[languageKey]!;
 
-          return Column(
-            children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(roundedRadius),
-                onTap: () {
-                  setState(() {
-                    if (expandedLanguageKey.contains(keyOfMap)) {
-                      expandedLanguageKey.remove(keyOfMap);
-                    } else {
-                      expandedLanguageKey.add(keyOfMap);
-                    }
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        languageNativeNames[keyOfMap] ?? "",
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Icon(
-                        expandedLanguageKey.contains(keyOfMap)
-                            ? Icons.keyboard_arrow_up
-                            : Icons.keyboard_arrow_down,
-                      ),
-                    ],
-                  ),
+          return Card(
+            margin: const EdgeInsets.symmetric(vertical: 4.0),
+            child: ExpansionTile(
+              key: PageStorageKey(languageKey),
+              title: Text(
+                languageNativeNames[languageKey] ?? languageKey,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
+              childrenPadding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 4.0,
+              ),
+              children:
+                  booksInLanguage.map((bookData) {
+                    Map? matchedTafsir = downloadedTafsirs.firstOrNullWhere(
+                      (element) => element["name"] == bookData["full_path"],
+                    );
+                    bool needDownload = matchedTafsir == null;
+                    bool isSelected = false;
+                    if (!needDownload && selectedTafsir != null) {
+                      if (selectedTafsir!["name"] == matchedTafsir["name"] &&
+                          selectedTafsir!["language"] ==
+                              matchedTafsir["language"]) {
+                        isSelected = true;
+                      }
+                    }
 
-              if (expandedLanguageKey.contains(keyOfMap))
-                getBooksList(themeState, value, context),
-            ],
+                    bool isDownloading = false;
+                    if (downloadingData != null) {
+                      if (downloadingData!["full_path"] ==
+                          bookData["full_path"]) {
+                        isDownloading = true;
+                      }
+                    }
+                    return _buildBookListTile(
+                      bookData,
+                      isSelected,
+                      needDownload,
+                      isDownloading,
+                      themeState,
+                    );
+                  }).toList(),
+            ),
           );
         }),
       ),
     );
   }
 
-  Container getBooksList(
-    ThemeState themeState,
-    List<Map<String, dynamic>> value,
-    BuildContext context,
-  ) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: themeState.primaryShade100),
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      margin: const EdgeInsets.all(5),
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: List.generate(value.length, (index) {
-          Map<String, dynamic> data = value[index];
-          Map? matchedTafsir = downloadedTafsirs.firstOrNullWhere(
-            // Changed
-            (element) => element["name"] == data["full_path"],
-          );
-          bool needDownload = matchedTafsir == null; // Changed
-          bool isSelected = false;
-          if (!needDownload && selectedTafsir != null) {
-            // Changed
-            if (selectedTafsir!["name"] == matchedTafsir["name"] && // Changed
-                selectedTafsir!["language"] == // Changed
-                    matchedTafsir["language"]) {
-              // Changed
-              isSelected = true;
-            }
-          }
-
-          bool isDownloading = false;
-          if (downloadingData != null) {
-            if (downloadingData!["full_path"] == data["full_path"]) {
-              isDownloading = true;
-            }
-          }
-
-          return getBookWidget(
-            isSelected,
-            needDownload,
-            data,
-            context,
-            isDownloading,
-          );
-        }),
-      ),
-    );
-  }
-
-  InkWell getBookWidget(
+  Widget _buildBookListTile(
+    Map<String, dynamic> bookData,
     bool isSelected,
     bool needDownload,
-    Map<String, dynamic> data,
-    BuildContext context,
     bool isDownloading,
+    ThemeState themeState,
   ) {
-    return InkWell(
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 2.0,
+      ),
+      title: Text(bookData["name"] ?? ""),
+      trailing: SizedBox(
+        height: 30,
+        width: 30,
+        child:
+            isDownloading
+                ? CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
+                )
+                : needDownload
+                ? Icon(
+                  FluentIcons.arrow_download_24_regular,
+                  color: themeState.primary,
+                )
+                : isSelected
+                ? Icon(
+                  Icons.check_circle_rounded,
+                  color: themeState.primary,
+                  size: 26,
+                )
+                : Icon(
+                  Icons.circle_outlined,
+                  color: Colors.grey[600],
+                  size: 26,
+                ),
+      ),
       onTap: () async {
+        if (isDownloading) return;
+
         if (!isSelected && !needDownload) {
-          QuranTafsirFunction.setTafsirSelection(
-            // Changed
-            data["full_path"],
-            data["language"],
+          await QuranTafsirFunction.setTafsirSelection(
+            bookData["full_path"],
+            bookData["language"],
           );
-          selectedTafsir = // Changed
-              QuranTafsirFunction.getTafsirSelection(); // Changed
-          setState(() {});
+          _refreshData();
         } else if (isSelected) {
-          log("Already Selected");
+          log("Already Selected: ${bookData['name']}");
         } else {
           setState(() {
-            downloadingData = data;
+            downloadingData = bookData;
           });
-          log(downloadingData.toString(), name: "downloadingData");
+          log(
+            "Downloading Tafsir: ${bookData['name']}",
+            name: "TafsirResourcesUI",
+          );
           await QuranTafsirFunction.downloadResources(
-            // Changed
             context: context,
             isSetupProcess: false,
-            tafsirBook: data["full_path"], // Changed
-            tafsirLanguage: data["language"], // Changed
+            tafsirBook: bookData["full_path"],
+            tafsirLanguage: bookData["language"],
           );
-          downloadedTafsirs = // Changed
-              QuranTafsirFunction.getDownloadedTafsirBooks(); // Changed
-          downloadingData = null;
-          setState(() {});
+
+          if (await QuranTafsirFunction.isAlreadyDownloaded(
+            bookData["full_path"],
+            bookData["language"],
+          )) {
+            await QuranTafsirFunction.setTafsirSelection(
+              bookData["full_path"],
+              bookData["language"],
+            );
+          }
+          _refreshData();
         }
       },
-
-      borderRadius: BorderRadius.circular(roundedRadius),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: Text(data["name"] ?? "")),
-            SizedBox(
-              height: 30,
-              width: 30,
-              child:
-                  isDownloading
-                      ? const CircularProgressIndicator(strokeWidth: 3)
-                      : needDownload
-                      ? const Icon(FluentIcons.arrow_download_24_filled)
-                      : isSelected
-                      ? Icon(
-                        Icons.check_box_rounded,
-                        color: context.read<ThemeCubit>().state.primary,
-                      )
-                      : const Icon(
-                        Icons.check_box_outline_blank_rounded,
-                        color: Colors.grey,
-                      ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
