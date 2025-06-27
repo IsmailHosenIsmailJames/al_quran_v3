@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
@@ -20,6 +22,10 @@ class _TranslationResourcesState extends State<TranslationResources> {
   List<String> expandedLanguageKey = [];
   List<Map> downloadedTranslation =
       QuranTranslationFunction.getDownloadedTranslationBooks();
+  Map? selectedResources = QuranTranslationFunction.getTranslationSelection();
+
+  Map? downloadingData;
+
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -27,8 +33,8 @@ class _TranslationResourcesState extends State<TranslationResources> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: List.generate(simpleTranslation.length, (index) {
-          String key = simpleTranslation.keys.elementAt(index);
-          List<Map<String, dynamic>> value = simpleTranslation[key]!;
+          String keyOfMap = simpleTranslation.keys.elementAt(index);
+          List<Map<String, dynamic>> value = simpleTranslation[keyOfMap]!;
 
           return Column(
             children: [
@@ -36,10 +42,10 @@ class _TranslationResourcesState extends State<TranslationResources> {
                 borderRadius: BorderRadius.circular(roundedRadius),
                 onTap: () {
                   setState(() {
-                    if (expandedLanguageKey.contains(key)) {
-                      expandedLanguageKey.remove(key);
+                    if (expandedLanguageKey.contains(keyOfMap)) {
+                      expandedLanguageKey.remove(keyOfMap);
                     } else {
-                      expandedLanguageKey.add(key);
+                      expandedLanguageKey.add(keyOfMap);
                     }
                   });
                 },
@@ -49,14 +55,14 @@ class _TranslationResourcesState extends State<TranslationResources> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        languageNativeNames[key] ?? "",
+                        languageNativeNames[keyOfMap] ?? "",
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       Icon(
-                        expandedLanguageKey.contains(key)
+                        expandedLanguageKey.contains(keyOfMap)
                             ? Icons.keyboard_arrow_up
                             : Icons.keyboard_arrow_down,
                       ),
@@ -65,69 +71,127 @@ class _TranslationResourcesState extends State<TranslationResources> {
                 ),
               ),
 
-              if (expandedLanguageKey.contains(key))
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: themeState.primaryShade100),
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                  ),
-                  margin: const EdgeInsets.all(5),
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: List.generate(value.length, (index) {
-                      Map<String, dynamic> data = value[index];
-                      return InkWell(
-                        onTap: () {},
-
-                        borderRadius: BorderRadius.circular(roundedRadius),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(child: Text(data["name"] ?? "")),
-                              downloadedTranslation.firstOrNullWhere(
-                                        (element) =>
-                                            element["name"] ==
-                                            data["full_path"],
-                                      ) ==
-                                      null
-                                  ? const SizedBox(
-                                    height: 30,
-                                    width: 50,
-                                    child: Center(
-                                      child: Icon(
-                                        FluentIcons.arrow_download_24_filled,
-                                      ),
-                                    ),
-                                  )
-                                  : SizedBox(
-                                    height: 30,
-                                    width: 50,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "Use",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
+              if (expandedLanguageKey.contains(keyOfMap))
+                getBooksList(themeState, value, context),
             ],
           );
         }),
+      ),
+    );
+  }
+
+  Container getBooksList(
+    ThemeState themeState,
+    List<Map<String, dynamic>> value,
+    BuildContext context,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: themeState.primaryShade100),
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+      margin: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: List.generate(value.length, (index) {
+          Map<String, dynamic> data = value[index];
+          Map? matchedResources = downloadedTranslation.firstOrNullWhere(
+            (element) => element["name"] == data["full_path"],
+          );
+          bool needDownload = matchedResources == null;
+          bool isSelected = false;
+          if (!needDownload && selectedResources != null) {
+            if (selectedResources!["name"] == matchedResources["name"] &&
+                selectedResources!["language"] ==
+                    matchedResources["language"]) {
+              isSelected = true;
+            }
+          }
+
+          bool isDownloading = false;
+          if (downloadingData != null) {
+            if (downloadingData!["full_path"] == data["full_path"]) {
+              isDownloading = true;
+            }
+          }
+
+          return getBookWidget(
+            isSelected,
+            needDownload,
+            data,
+            context,
+            isDownloading,
+          );
+        }),
+      ),
+    );
+  }
+
+  InkWell getBookWidget(
+    bool isSelected,
+    bool needDownload,
+    Map<String, dynamic> data,
+    BuildContext context,
+    bool isDownloading,
+  ) {
+    return InkWell(
+      onTap: () async {
+        if (!isSelected && !needDownload) {
+          QuranTranslationFunction.setTranslationSelection(
+            data["full_path"],
+            data["language"],
+          );
+          selectedResources =
+              QuranTranslationFunction.getTranslationSelection();
+          setState(() {});
+        } else if (isSelected) {
+          log("Already Selected");
+        } else {
+          setState(() {
+            downloadingData = data;
+          });
+          log(downloadingData.toString(), name: "downloadingData");
+          await QuranTranslationFunction.downloadResources(
+            context: context,
+            isSetupProcess: false,
+            translationBook: data["full_path"],
+            translationLanguage: data["language"],
+          );
+          downloadedTranslation =
+              QuranTranslationFunction.getDownloadedTranslationBooks();
+          downloadingData = null;
+          setState(() {});
+        }
+      },
+
+      borderRadius: BorderRadius.circular(roundedRadius),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: Text(data["name"] ?? "")),
+            SizedBox(
+              height: 30,
+              width: 30,
+              child:
+                  isDownloading
+                      ? const CircularProgressIndicator(strokeWidth: 3)
+                      : needDownload
+                      ? const Icon(FluentIcons.arrow_download_24_filled)
+                      : isSelected
+                      ? Icon(
+                        Icons.check_box_rounded,
+                        color: context.read<ThemeCubit>().state.primary,
+                      )
+                      : const Icon(
+                        Icons.check_box_outline_blank_rounded,
+                        color: Colors.grey,
+                      ),
+            ),
+          ],
+        ),
       ),
     );
   }

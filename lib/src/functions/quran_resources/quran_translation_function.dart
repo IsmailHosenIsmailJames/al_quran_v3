@@ -102,6 +102,7 @@ class QuranTranslationFunction {
       "name": translationBook,
       "language": translationLanguage,
     });
+    await init();
   }
 
   static Map? getTranslationSelection() {
