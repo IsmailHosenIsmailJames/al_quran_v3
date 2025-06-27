@@ -8,7 +8,6 @@ import "package:gap/gap.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
-import "../setup/setup_page.dart";
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -49,13 +48,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Divider(color: themeState.primaryShade300),
                 const Gap(5),
-                const Text(
-                  "Quran Style",
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
-                const Gap(7),
-                getScriptSelectionSegmentedButtons(context),
-                const Gap(20),
                 const QuranScriptSettings(),
                 const Gap(30),
                 const Text(

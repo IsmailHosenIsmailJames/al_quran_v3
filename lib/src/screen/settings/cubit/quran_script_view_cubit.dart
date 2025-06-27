@@ -46,6 +46,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           alwaysOpenWordByWord: Hive.box(
             "user",
           ).get("view_alwaysOpenWordByWord", defaultValue: false),
+          enableWordByWordHighlight: Hive.box(
+            "user",
+          ).get("view_enableWordByWordHighlight", defaultValue: true),
         ),
       );
 
@@ -81,6 +84,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     bool? hideToolbar,
     bool? hideQuranAyah,
     bool? alwaysOpenWordByWord,
+    bool? enableWordByWordHighlight,
   }) {
     // if all are false, show toast that must be selected one
     final newState = state.copyWith(
@@ -90,6 +94,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
       hideToolbar: hideToolbar,
       hideQuranAyah: hideQuranAyah,
       alwaysOpenWordByWord: alwaysOpenWordByWord,
+      enableWordByWordHighlight: enableWordByWordHighlight,
     );
     if (newState.hideWordByWord == true &&
         newState.hideTranslation == true &&
