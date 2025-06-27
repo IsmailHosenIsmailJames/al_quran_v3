@@ -14,10 +14,13 @@ class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
         ),
       );
 
-  void changeReciter(ReciterInfoModel reciter) {
+  void changeReciter(ReciterInfoModel reciter) async {
     if (reciter.segmentsUrl == null) {
       assert(true, "Segments is not supported");
     }
+    await Hive.box(
+      "segmented_quran_recitation",
+    ).put("meta_data", reciter.toMap());
     emit(reciter);
   }
 }

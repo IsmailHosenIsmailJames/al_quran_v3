@@ -1,4 +1,7 @@
+import "dart:developer";
+
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
@@ -167,9 +170,27 @@ class _AudioPageState extends State<AudioPage> {
               return IconButton(
                 onPressed: () async {
                   if (AudioPlayerManager.audioPlayer.audioSource == null) {
+                    List<String> ayahKeysToPlay = ayahKeyState.ayahList;
+                    if (ayahKeyState.ayahList.length == 1) {
+                      String surahNumber =
+                          ayahKeyState.ayahList.first.split(":")[0];
+                      String startAyahKey = ayahKeyState.ayahList.first;
+                      String endAyahKey = getEndAyahKeyFromSurahNumber(
+                        int.parse(surahNumber),
+                      );
+                      List<dynamic> temList = getListOfAyahKey(
+                        startAyahKey: startAyahKey,
+                        endAyahKey: endAyahKey,
+                      );
+                      temList.removeWhere(
+                        (element) => element.runtimeType != String,
+                      );
+                      ayahKeysToPlay = List<String>.from(temList);
+                    }
+
                     AudioPlayerManager.playMultipleAyahAsPlaylist(
-                      startAyahKey: ayahKeyState.ayahList.first,
-                      endAyahKey: ayahKeyState.ayahList.last,
+                      startAyahKey: ayahKeysToPlay.first,
+                      endAyahKey: ayahKeysToPlay.last,
                       isInsideQuran: false,
                       initialIndex: currentIndex,
                       instantPlay: true,
@@ -178,6 +199,11 @@ class _AudioPageState extends State<AudioPage> {
                     );
 
                     return;
+                  } else if (context
+                      .read<AudioUiCubit>()
+                      .state
+                      .isInsideQuranPlayer) {
+                    log("Inside Quran Player");
                   }
                   AudioPlayerManager.audioPlayer.playing
                       ? AudioPlayerManager.audioPlayer.pause()
