@@ -140,6 +140,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PageTransitionsTheme pageTransitionsTheme =
+        const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+          },
+        );
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DownloadProgressCubitCubit()),
@@ -178,6 +188,7 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.light,
               fontFamily: "NotoSans",
             ).copyWith(
+              pageTransitionsTheme: pageTransitionsTheme,
               colorScheme: ColorScheme.fromSeed(
                 seedColor: state.primary,
                 brightness: Brightness.light,
@@ -198,6 +209,7 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark,
               fontFamily: "NotoSans",
             ).copyWith(
+              pageTransitionsTheme: pageTransitionsTheme,
               colorScheme: ColorScheme.fromSeed(
                 seedColor: state.primary,
                 brightness: Brightness.dark,
