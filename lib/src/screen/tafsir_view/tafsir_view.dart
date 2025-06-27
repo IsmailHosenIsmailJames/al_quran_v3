@@ -57,7 +57,11 @@ class _TafsirViewState extends State<TafsirView> {
         ),
       ),
       body:
-          isLinkedToAnother
+          tafsirDataString.isEmpty
+              ? Center(
+                child: Text("Tafsir is not available for ${widget.ayahKey}"),
+              )
+              : isLinkedToAnother
               ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

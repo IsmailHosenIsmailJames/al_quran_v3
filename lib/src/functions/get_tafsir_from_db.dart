@@ -17,7 +17,7 @@ Future<String?> getTafsirFromDb(
       final String? text = data["text"] as String?;
 
       if (text == null) {
-        return "Tafsir not found";
+        return null;
       }
 
       final parts = text.split(":");
