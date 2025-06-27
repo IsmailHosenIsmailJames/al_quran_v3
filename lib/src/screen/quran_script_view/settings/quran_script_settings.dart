@@ -1,3 +1,9 @@
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -6,6 +12,7 @@ import "package:screenshot/screenshot.dart";
 import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
 import "../../settings/cubit/quran_script_view_cubit.dart";
 import "../../settings/cubit/quran_script_view_state.dart";
+import "../../setup/setup_page.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
@@ -26,6 +33,10 @@ class QuranScriptSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text("Quran Style", style: titleStyle),
+            const Gap(7),
+            getScriptSelectionSegmentedButtons(context),
+            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -230,6 +241,40 @@ class QuranScriptSettings extends StatelessWidget {
 
             const Gap(5),
             getAyahPreviewWidget(showHeaderOptions: true),
+
+            const Gap(10),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text("Word By Word Highlight"),
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+
+              value: quranViewState.enableWordByWordHighlight,
+              onChanged: (value) {
+                cubit.setViewOptions(enableWordByWordHighlight: value);
+              },
+            ),
+            if (quranViewState.enableWordByWordHighlight)
+              BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+                builder: (context, reciter) {
+                  return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                    builder: (context, ayahState) {
+                      return buildReciterOverViewWidget(
+                        context,
+                        reciter,
+                        ayahState,
+                      );
+                    },
+                  );
+                },
+              ),
           ],
         );
       },
@@ -249,5 +294,40 @@ class QuranScriptSettings extends StatelessWidget {
           ),
         )
         : bodyWidget;
+  }
+
+  Widget buildReciterOverViewWidget(
+    BuildContext context,
+    ReciterInfoModel reciter,
+    AyahKeyManagement ayahState,
+  ) {
+    return getReciterWidget(
+      context: context,
+      audioTabScreenState: reciter,
+      ayahKeyState: ayahState,
+      isWordByWord: true,
+      onReciterChanged: (reciterInfoModel) async {
+        context.read<SegmentedQuranReciterCubit>().changeReciter(
+          reciterInfoModel,
+        );
+        if (AudioPlayerManager.audioPlayer.playing) {
+          if (AudioPlayerManager.audioPlayer.audioSources.length > 1) {
+            await AudioPlayerManager.playMultipleAyahAsPlaylist(
+              startAyahKey: ayahState.start,
+              endAyahKey: ayahState.end,
+              isInsideQuran: true,
+              reciterInfoModel: reciterInfoModel,
+            );
+          } else {
+            AudioPlayerManager.playSingleAyah(
+              ayahKey: ayahState.current,
+              reciterInfoModel: reciterInfoModel,
+              isInsideQuran: true,
+            );
+          }
+        }
+        Navigator.pop(context);
+      },
+    );
   }
 }
