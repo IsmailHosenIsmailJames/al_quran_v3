@@ -5,6 +5,7 @@ import "dart:io";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
@@ -470,7 +471,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
         translationLanguage: translationLanguage,
         isSetupProcess: true,
       );
-      bool success2 = await downloadTafsir();
+      bool success2 = await QuranTafsirFunction.downloadResources(
+        context: context,
+        tafsirBook: tafsirBook,
+        tafsirLanguage: tafsirLanguage,
+        isSetupProcess: true,
+      );
       bool success3 = await downloadWordByWordTranslation(
         codeToLanguageMap[translationLanguage ?? ""] ?? "",
       );
@@ -596,52 +602,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
     } else {
       log("Word by word translation not supported");
       return true;
-    }
-  }
-
-  Future<bool> downloadTafsir() async {
-    final tafsirBox = await Hive.openLazyBox("quran_tafsir");
-    final metaData = await tafsirBox.get("meta_data", defaultValue: {});
-    if (metaData["name"] == tafsirBook &&
-        metaData["language"] == tafsirLanguage) {
-      log("Already downloaded");
-      return true;
-    }
-    try {
-      String base = ApisUrls.base;
-      log(base + tafsirBook!, name: "http path");
-      context.read<DownloadProgressCubitCubit>().updateProgress(
-        null,
-        "Downloading Tafsir",
-      );
-      dio.Response response = await dio.Dio().get(base + tafsirBook!);
-      log(response.statusCode.toString(), name: "Status");
-      DateTime now = DateTime.now();
-      Map data = await compute(
-        (message) => jsonDecode(decodeBZip2String(message)),
-        response.data,
-      );
-      for (int i = 0; i < data.length; i++) {
-        String key = data.keys.elementAt(i);
-        await tafsirBox.put(key, jsonEncode(data[key]!));
-        context.read<DownloadProgressCubitCubit>().updateProgress(
-          i / data.length,
-          "Processing Tafsir",
-        );
-      }
-      await tafsirBox.put("meta_data", {
-        "name": tafsirBook,
-        "language": tafsirLanguage,
-      });
-      log(
-        now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-        name: "Translation Process Time",
-      );
-      await tafsirBox.close();
-      return true;
-    } catch (e) {
-      log(e.toString(), name: "http error");
-      return false;
     }
   }
 
