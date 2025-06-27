@@ -48,7 +48,7 @@ class _TafsirResourcesState extends State<TafsirResources> {
               title: Text(
                 languageNativeNames[languageKey] ?? languageKey,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
               ),

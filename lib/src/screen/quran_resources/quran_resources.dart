@@ -12,83 +12,70 @@ class QuranResources extends StatefulWidget {
   State<QuranResources> createState() => _QuranResourcesState();
 }
 
-class _QuranResourcesState extends State<QuranResources> {
-  List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
-  int pageIndex = 0;
-  late PageController pageController = PageController(initialPage: pageIndex);
+class _QuranResourcesState extends State<QuranResources>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  final List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = TabController(length: pagesName.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeState = context.watch<ThemeCubit>().state;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Quran Resources")),
       body: Column(
         children: [
-          Container(
-            height: 35,
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              color: context.read<ThemeCubit>().state.primaryShade100,
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Stack(
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  alignment: Alignment([-1, 0, 1][pageIndex].toDouble(), 0),
-                  curve: Curves.easeInOut,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: context.read<ThemeCubit>().state.primaryShade200,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    height: 30,
-                    width: (MediaQuery.of(context).size.width - 10) / 3,
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                color: themeState.primaryShade100,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                indicator: BoxDecoration(
+                  color: themeState.primaryShade200,
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                Row(
-                  children: List.generate(pagesName.length, (index) {
-                    return Expanded(
-                      child: TextButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          elevation: 0,
-                        ),
-                        onPressed: () async {
-                          pageController.animateToPage(
-                            index,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn,
-                          );
-                        },
-                        child: Text(
-                          pagesName[index],
-                          style: TextStyle(
-                            fontWeight:
-                                pageIndex == index
-                                    ? FontWeight.bold
-                                    : FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
+                indicatorSize: TabBarIndicatorSize.tab,
+
+                labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                unselectedLabelColor:
+                    Theme.of(context).colorScheme.onSurfaceVariant,
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                unselectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.w500,
                 ),
-              ],
+                tabs: pagesName.map((name) => Tab(text: name)).toList(),
+                dividerColor: Colors.transparent,
+              ),
             ),
           ),
 
           Expanded(
-            child: PageView(
-              controller: pageController,
-              onPageChanged: (value) {
-                setState(() {
-                  pageIndex = value;
-                });
-              },
-              children: [
-                const TranslationResources(),
-                const TafsirResources(),
-                const WordByWordResources(),
+            child: TabBarView(
+              controller: _tabController,
+              physics: const ClampingScrollPhysics(),
+              children: const [
+                TranslationResources(),
+                TafsirResources(),
+                WordByWordResources(),
               ],
             ),
           ),
