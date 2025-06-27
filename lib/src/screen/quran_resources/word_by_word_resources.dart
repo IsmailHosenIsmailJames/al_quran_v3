@@ -127,7 +127,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                           Text(
                             wbwInfo["name"] ?? languageKey,
                             style: const TextStyle(
-                              fontSize: 17,
+                              fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
