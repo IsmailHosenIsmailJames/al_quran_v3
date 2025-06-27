@@ -1,51 +1,39 @@
-import "dart:convert";
-import "package:hive/hive.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 
 Future<String?> getTafsirFromDb(
   String ayahKey, {
   bool returnAyahKeyIfLinked = true,
 }) async {
-  LazyBox? box;
-  try {
-    box = await Hive.openLazyBox("quran_tafsir");
-    String currentAyahKey = ayahKey;
+  String currentAyahKey = ayahKey;
 
-    for (int i = 0; i < 5; i++) {
-      final rawData = await box.get(currentAyahKey, defaultValue: null);
+  for (int i = 0; i < 5; i++) {
+    Map? data = await QuranTafsirFunction.getTafsir(currentAyahKey);
 
-      if (rawData == null) {
-        return null;
+    if (data == null) {
+      return null;
+    }
+
+    try {
+      final String? text = data["text"] as String?;
+
+      if (text == null) {
+        return "Tafsir not found";
       }
 
-      if (rawData is! String) {
-        return null;
-      }
-
-      try {
-        final Map<String, dynamic> data = jsonDecode(rawData);
-        final String? text = data["text"] as String?;
-
-        if (text == null) {
-          return "Not Found";
-        }
-
-        final parts = text.split(":");
-        if (parts.length == 2 &&
-            int.tryParse(parts[0]) != null &&
-            int.tryParse(parts[1]) != null) {
-          if (returnAyahKeyIfLinked) {
-            return text;
-          }
-          currentAyahKey = text;
-        } else {
+      final parts = text.split(":");
+      if (parts.length == 2 &&
+          int.tryParse(parts[0]) != null &&
+          int.tryParse(parts[1]) != null) {
+        if (returnAyahKeyIfLinked) {
           return text;
         }
-      } catch (e) {
-        return rawData;
+        currentAyahKey = text;
+      } else {
+        return text;
       }
+    } catch (e) {
+      return null;
     }
-    return null;
-  } finally {
-    await box?.close();
   }
+  return null;
 }

@@ -101,7 +101,7 @@ class _TafsirViewState extends State<TafsirView> {
                         "*": Style(
                           padding: HtmlPaddings.zero,
                           margin: Margins.zero,
-                          fontSize: FontSize(state.fontSize),
+                          fontSize: FontSize(state.translationFontSize),
                         ),
                       },
                     );
