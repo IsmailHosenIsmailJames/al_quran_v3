@@ -1,9 +1,9 @@
 import "dart:io";
-import "package:flutter/material.dart";
 
 import "package:alarm/model/alarm_settings.dart";
 import "package:alarm/model/notification_settings.dart";
 import "package:alarm/model/volume_settings.dart";
+import "package:flutter/material.dart";
 
 final alarmSettings = AlarmSettings(
   id: 42,
@@ -12,7 +12,7 @@ final alarmSettings = AlarmSettings(
   loopAudio: true,
   vibrate: true,
   warningNotificationOnKill: Platform.isIOS,
-  androidFullScreenIntent: true,
+  androidFullScreenIntent: false,
   volumeSettings: VolumeSettings.fade(
     volume: 0.8,
     fadeDuration: const Duration(seconds: 5),

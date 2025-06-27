@@ -1,11 +1,12 @@
 import "dart:async";
 import "dart:math" as math;
 
-import "package:al_quran_v3/src/resources/meta_data/kaaba_location_data.dart";
-import "package:al_quran_v3/src/screen/home/pages/qibla/compass_view/compass_view.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/qibla/compass_view/compass_view.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_compass/flutter_compass.dart";
@@ -14,8 +15,8 @@ import "package:gap/gap.dart";
 import "package:vector_math/vector_math.dart" as vector;
 import "package:vibration/vibration.dart";
 
-import "../../../../theme/controller/theme_cubit.dart";
-import "../../../../theme/controller/theme_state.dart";
+const double kaabaLatDegrees = 21.422487;
+const double kaabaLonDegrees = 39.826206;
 
 class QiblaDirection extends StatefulWidget {
   const QiblaDirection({super.key});

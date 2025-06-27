@@ -2,16 +2,14 @@ import "dart:io";
 
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
-import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
-import "package:al_quran_v3/src/screen/search/search_page.dart";
+import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:gap/gap.dart";
 
 import "../prayer_time/prayer_time_page.dart";
 
@@ -53,16 +51,16 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Al Quran"),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchPage()),
-              );
-            },
-            icon: const Icon(FluentIcons.search_28_filled),
-          ),
-          const Gap(5),
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const SearchPage()),
+          //     );
+          //   },
+          //   icon: const Icon(FluentIcons.search_28_filled),
+          // ),
+          // const Gap(5),
         ],
       ),
       body: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(

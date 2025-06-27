@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/resources/meta_data/quran_ayah_count.dart";
+import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 
 List getListOfAyahKey({
   required String startAyahKey,
