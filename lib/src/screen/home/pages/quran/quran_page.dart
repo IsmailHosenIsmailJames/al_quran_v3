@@ -23,9 +23,9 @@ class QuranPage extends StatefulWidget {
   State<QuranPage> createState() => _QuranPageState();
 }
 
-class _QuranPageState extends State<QuranPage> {
+class _QuranPageState extends State<QuranPage>
+    with SingleTickerProviderStateMixin {
   List<String> pagesName = ["Surah", "Juz", "Pages", "Hizb", "Ruku"];
-  int _pageIndex = 0;
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values
           .map((value) => SurahInfoModel.fromMap(value))
@@ -38,7 +38,12 @@ class _QuranPageState extends State<QuranPage> {
       metaDataHizb.values.map((e) => HizbModel.fromMap(e)).toList();
   List<RukuInfoModel> rukuInfoList =
       metaDataRuku.values.map((e) => RukuInfoModel.fromMap(e)).toList();
-  PageController pageController = PageController(initialPage: 0);
+  late final TabController _tabController;
+  @override
+  void initState() {
+    _tabController = TabController(length: pagesName.length, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,69 +52,42 @@ class _QuranPageState extends State<QuranPage> {
         children: [
           BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, themeState) {
-              return Container(
-                height: 35,
-                margin: const EdgeInsets.all(5),
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: themeState.primaryShade100,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Stack(
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      alignment: Alignment(
-                        [-1, -0.5, 0, 0.5, 1][_pageIndex].toDouble(),
-                        0,
-                      ),
-                      curve: Curves.easeInOut,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: themeState.primaryShade200,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        height: 30,
-                        width: (MediaQuery.of(context).size.width - 10) / 5,
-                      ),
+              return Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: themeState.primaryShade100,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: TabBar(
+                    controller: _tabController,
+                    indicator: BoxDecoration(
+                      color: themeState.primaryShade200,
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                    Row(
-                      children: List.generate(pagesName.length, (index) {
-                        return Expanded(
-                          child: TextButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              elevation: 0,
-                            ),
-                            onPressed: () async {
-                              pageController.jumpToPage(index);
-                            },
-                            child: Text(
-                              pagesName[index],
-                              style: TextStyle(
-                                fontWeight:
-                                    _pageIndex == index
-                                        ? FontWeight.bold
-                                        : FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
+                    labelPadding: EdgeInsets.zero,
+                    indicatorSize: TabBarIndicatorSize.tab,
+
+                    labelColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                    unselectedLabelColor:
+                        Theme.of(context).colorScheme.onSurfaceVariant,
+                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    unselectedLabelStyle: const TextStyle(
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
+                    tabs: pagesName.map((name) => Tab(text: name)).toList(),
+                    dividerColor: Colors.transparent,
+                  ),
                 ),
               );
             },
           ),
           Expanded(
-            child: PageView(
-              onPageChanged: (index) {
-                setState(() {
-                  _pageIndex = index;
-                });
-              },
-              controller: pageController,
+            child: TabBarView(
+              controller: _tabController,
+              physics: const ClampingScrollPhysics(),
               children: [
                 SurahListView(surahInfoList: surahInfoList),
                 JuzListView(juzInfoList: juzInfoModelList),
