@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
@@ -477,8 +478,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirLanguage: tafsirLanguage,
         isSetupProcess: true,
       );
-      bool success3 = await downloadWordByWordTranslation(
-        codeToLanguageMap[translationLanguage ?? ""] ?? "",
+      bool success3 = await WordByWordFunction.downloadResource(
+        context: context,
+        languageKey: codeToLanguageMap[translationLanguage ?? ""] ?? "",
+        isSetupProcess: true,
       );
       bool success4 = await downloadDefaultSegmentedQuranRecitation();
       if (success1 && success2 && success3 && success4) {
@@ -534,74 +537,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
     } on dio.DioException catch (e) {
       log(e.message ?? "Null Message");
       return false;
-    }
-  }
-
-  Future<bool> downloadWordByWordTranslation(String translationLanguage) async {
-    log("Going to download word by word translation");
-    bool isSupportWordByWord = doesHaveWordByWordTranslation(
-      translationLanguage,
-    );
-    if (isSupportWordByWord) {
-      final wordByWordBox = await Hive.openBox("quran_word_by_word");
-      Map metaData = wordByWordBox.get("meta_data", defaultValue: {});
-      if (metaData["name"] == translationBook &&
-          metaData["language"] == translationLanguage) {
-        log("Word By Word Already downloaded");
-        return true;
-      }
-      try {
-        String? wordByWordTranslationDownloadURL;
-        wordByWordTranslation.forEach((key, value) {
-          if (translationLanguage.toLowerCase() == key.toLowerCase()) {
-            wordByWordTranslationDownloadURL = value[0]["full_path"];
-          }
-        });
-        String base = ApisUrls.base;
-        log(base + (wordByWordTranslationDownloadURL ?? ""), name: "http path");
-        context.read<DownloadProgressCubitCubit>().updateProgress(
-          null,
-          "Downloading Word by Word Translation",
-        );
-
-        dio.Response response = await dio.Dio().get(
-          base + wordByWordTranslationDownloadURL!,
-          options: dio.Options(responseType: dio.ResponseType.plain),
-        );
-        log(response.statusCode.toString(), name: "Status");
-        DateTime now = DateTime.now();
-        Map data = await compute(
-          (message) => jsonDecode(decodeBZip2String(message)),
-          response.data,
-        );
-        if (data.isEmpty) {
-          log("Word by Word Translation is empty");
-          return false;
-        }
-        for (int i = 0; i < data.length; i++) {
-          String key = data.keys.elementAt(i);
-          await wordByWordBox.put(key, data[key]);
-          context.read<DownloadProgressCubitCubit>().updateProgress(
-            i / data.length,
-            "Processing Word by Word Translation",
-          );
-        }
-        await wordByWordBox.put("meta_data", {
-          "name": translationBook,
-          "language": translationLanguage,
-        });
-        log(
-          now.difference(DateTime.now()).inMilliseconds.abs().toString(),
-          name: "Translation Process Time",
-        );
-        return true;
-      } catch (e) {
-        log(e.toString(), name: "http error");
-        return false;
-      }
-    } else {
-      log("Word by word translation not supported");
-      return true;
     }
   }
 
