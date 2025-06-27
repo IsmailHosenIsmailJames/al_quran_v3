@@ -19,12 +19,14 @@ class NonTajweedPageRenderer extends StatelessWidget {
   final bool isUthmani;
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
+  final bool? enableWordByWordHighlight;
 
   const NonTajweedPageRenderer({
     super.key,
     required this.ayahsKey,
     this.baseTextStyle,
     required this.isUthmani,
+    this.enableWordByWordHighlight,
   });
 
   @override
@@ -52,6 +54,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
         buildWhen: (previous, current) {
+          if (enableWordByWordHighlight != true) return false;
+
           if (context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
             return false;
           }
@@ -100,7 +104,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
                             return TextSpan(
                               text: "$word ",
                               style:
-                                  wordKey == "$ayahKey:${index + 1}"
+                                  (wordKey == "$ayahKey:${index + 1}" &&
+                                          enableWordByWordHighlight == true)
                                       ? TextStyle(
                                         backgroundColor:
                                             themeState.primaryShade200,

@@ -9,12 +9,14 @@ class QuranPagesRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final QuranScriptType quranScriptType;
   final TextStyle? baseStyle;
+  final bool? enableWordByWordHighlight;
 
   const QuranPagesRenderer({
     super.key,
     required this.ayahsKey,
     required this.quranScriptType,
     this.baseStyle,
+    this.enableWordByWordHighlight,
   });
 
   @override
