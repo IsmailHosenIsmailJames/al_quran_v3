@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
-import "package:al_quran_v3/src/screen/audio/change_reciter/popup_change_reciter.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
@@ -21,18 +20,16 @@ import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
-import "package:cached_network_image/cached_network_image.dart";
 import "package:dartx/dartx.dart";
-import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
-import "package:url_launcher/url_launcher.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
+import "../../widget/audio/reciter_overview.dart";
 
 class AudioPage extends StatefulWidget {
   const AudioPage({super.key});
@@ -64,10 +61,10 @@ class _AudioPageState extends State<AudioPage> {
                   BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
                     builder: (context, audioTabScreenState) {
                       return getReciterWidget(
-                        audioTabScreenState,
-                        context,
-                        ayahKeyState,
-                        currentIndex,
+                        context: context,
+                        audioTabScreenState: audioTabScreenState,
+                        ayahKeyState: ayahKeyState,
+                        currentIndex: currentIndex,
                       );
                     },
                   ),
@@ -422,119 +419,6 @@ class _AudioPageState extends State<AudioPage> {
                   }
                   : null,
           icon: const Icon(Icons.arrow_forward_ios_rounded),
-        ),
-      ],
-    );
-  }
-
-  Row getReciterWidget(
-    ReciterInfoModel audioTabScreenState,
-    BuildContext context,
-    AyahKeyManagement ayahKeyState,
-    int currentIndex,
-  ) {
-    return Row(
-      children: [
-        SizedBox(
-          height: 100,
-          width: 80,
-          child:
-              audioTabScreenState.img != null
-                  ? ClipRRect(
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    child: CachedNetworkImage(
-                      imageUrl: audioTabScreenState.img!,
-                      errorWidget:
-                          (context, url, error) => const Icon(
-                            FluentIcons.person_24_regular,
-                            size: 60,
-                            color: Colors.grey,
-                          ),
-                      progressIndicatorBuilder:
-                          (context, url, progress) => Center(
-                            child: CircularProgressIndicator(
-                              value: progress.progress,
-                            ),
-                          ),
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                  : const Icon(
-                    FluentIcons.person_24_regular,
-                    size: 60,
-                    color: Colors.grey,
-                  ),
-        ),
-        const Gap(10),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                popupChangeReciter(context, audioTabScreenState, (
-                  ReciterInfoModel reciterInfoModel,
-                ) async {
-                  context.read<AudioTabReciterCubit>().changeReciter(
-                    reciterInfoModel,
-                  );
-                  AudioPlayerManager.playMultipleAyahAsPlaylist(
-                    startAyahKey: ayahKeyState.ayahList.first,
-                    endAyahKey: ayahKeyState.ayahList.last,
-                    isInsideQuran: false,
-                    reciterInfoModel: reciterInfoModel,
-                    initialIndex: currentIndex,
-                    instantPlay: AudioPlayerManager.audioPlayer.playing,
-                  );
-                  Navigator.pop(context);
-                });
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  BlocBuilder<QuranReciterCubit, ReciterInfoModel>(
-                    builder:
-                        (context, state) => Text(
-                          safeSubString(
-                            context.read<QuranReciterCubit>().state.name,
-                            20,
-                            replacer: "...",
-                          ),
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                  ),
-                  const Gap(5),
-                  const Icon(Icons.arrow_drop_down_rounded, size: 30),
-                ],
-              ),
-            ),
-            Text("Style: ${audioTabScreenState.style}"),
-            Text("Source: ${audioTabScreenState.source}"),
-            if (audioTabScreenState.bio != null)
-              Row(
-                children: [
-                  const Text("More: "),
-                  SizedBox(
-                    height: 20,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                      ),
-                      onPressed: () {
-                        launchUrl(
-                          Uri.parse(audioTabScreenState.bio!),
-                          mode: LaunchMode.externalApplication,
-                        );
-                      },
-                      child: Text(Uri.parse(audioTabScreenState.bio!).host),
-                    ),
-                  ),
-                ],
-              ),
-          ],
         ),
       ],
     );

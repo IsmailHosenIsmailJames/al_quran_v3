@@ -6,8 +6,10 @@ import "package:flutter/material.dart";
 Future<void> popupChangeReciter(
   BuildContext context,
   ReciterInfoModel initReciter,
-  Function(ReciterInfoModel index) onReciterChanged,
-) async {
+
+  Function(ReciterInfoModel index) onReciterChanged, {
+  bool? isWordByWord,
+}) async {
   await showDialog(
     context: context,
 
@@ -25,6 +27,7 @@ Future<void> popupChangeReciter(
         child: ChangeReciter(
           initReciterIndex: initReciter,
           onReciterChanged: onReciterChanged,
+          isWordByWord: isWordByWord,
         ),
       );
     },

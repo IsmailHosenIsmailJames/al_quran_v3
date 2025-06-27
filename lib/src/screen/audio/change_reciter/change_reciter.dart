@@ -14,11 +14,13 @@ import "../../../theme/controller/theme_state.dart";
 
 class ChangeReciter extends StatefulWidget {
   final ReciterInfoModel initReciterIndex;
+  final bool? isWordByWord;
   final Function(ReciterInfoModel index) onReciterChanged;
   const ChangeReciter({
     super.key,
     required this.initReciterIndex,
     required this.onReciterChanged,
+    this.isWordByWord,
   });
 
   @override
@@ -28,6 +30,25 @@ class ChangeReciter extends StatefulWidget {
 class _ChangeReciterState extends State<ChangeReciter> {
   ScrollController scrollController = ScrollController();
   late ReciterInfoModel selectedReciter = widget.initReciterIndex;
+
+  late List<ReciterInfoModel> recitersListCurrent;
+
+  @override
+  void initState() {
+    if (widget.isWordByWord == true) {
+      recitersListCurrent =
+          recitationsInfoList
+              .map((e) => ReciterInfoModel.fromMap(e))
+              .toList()
+              .where((element) => element.segmentsUrl != null)
+              .toList();
+    } else {
+      recitersListCurrent =
+          recitationsInfoList.map((e) => ReciterInfoModel.fromMap(e)).toList();
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -65,13 +86,11 @@ class _ChangeReciterState extends State<ChangeReciter> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: recitationsInfoList.length,
+            itemCount: recitersListCurrent.length,
             controller: scrollController,
             padding: const EdgeInsets.all(5),
             itemBuilder: (context, index) {
-              ReciterInfoModel reciterInfoModel = ReciterInfoModel.fromMap(
-                recitationsInfoList[index],
-              );
+              ReciterInfoModel reciterInfoModel =recitersListCurrent[index];
               return Container(
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
