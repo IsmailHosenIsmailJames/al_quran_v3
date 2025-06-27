@@ -1,4 +1,3 @@
-import "package:al_quran_v3/src/screen/home/pages/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
@@ -6,6 +5,7 @@ import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.da
 import "package:hive/hive.dart";
 
 import "../../prayer_time/functions/prayers_time_function.dart";
+import "../../qibla/qibla_direction.dart";
 
 LocationQiblaPrayerDataState getSavedLocation() {
   LocationQiblaPrayerDataState data = LocationQiblaPrayerDataState();

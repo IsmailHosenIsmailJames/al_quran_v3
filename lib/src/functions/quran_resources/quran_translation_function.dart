@@ -8,7 +8,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
 import "../../api/apis_urls.dart";
-import "../../resources/surah_info/info.dart";
+import "../../resources/quran_resources/available_surah_info_lang.dart";
 import "../../screen/setup/cubit/download_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 

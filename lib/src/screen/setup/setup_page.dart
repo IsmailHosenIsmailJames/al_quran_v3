@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
+import "package:al_quran_v3/src/resources/quran_resources/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";

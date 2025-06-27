@@ -12,5 +12,5 @@ Future<void> initAwesomeNotification() async {
       importance: NotificationImportance.High,
       defaultPrivacy: NotificationPrivacy.Public,
     ),
-  ], debug: true);
+  ], debug: false);
 }

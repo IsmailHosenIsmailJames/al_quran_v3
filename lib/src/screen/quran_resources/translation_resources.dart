@@ -1,7 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/resources/meta_data/simple_translation.dart";
+import "package:al_quran_v3/src/resources/quran_resources/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";

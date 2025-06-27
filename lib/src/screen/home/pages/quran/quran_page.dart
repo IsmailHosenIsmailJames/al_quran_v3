@@ -1,5 +1,5 @@
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/resources/meta_data/quran_pages_info.dart";
+import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
