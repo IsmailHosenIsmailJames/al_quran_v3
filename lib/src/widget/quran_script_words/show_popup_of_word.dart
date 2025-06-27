@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
@@ -7,7 +8,6 @@ import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -39,15 +39,13 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
 
     List wordByWord = [];
     bool supportsWordByWord = false;
-    final metaDataOfWordByWord = Hive.box(
-      "quran_word_by_word",
-    ).get("meta_data", defaultValue: {});
+    final metaDataOfWordByWord = WordByWordFunction.getMetaInfo();
     if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
       supportsWordByWord = true;
     }
     if (supportsWordByWord) {
       wordByWord =
-          Hive.box("quran_word_by_word").get(
+          WordByWordFunction.getAyahWordByWordData(
             "${widget.wordKeys.first.split(":")[0]}:${widget.wordKeys.first.split(":")[1]}",
           ) ??
           [];
@@ -137,7 +135,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                       if (supportsWordByWord)
                         Text(
                           wordByWord[index].toString().capitalize(),
-                          style: const TextStyle(fontSize: 22),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       const Gap(15),
                       BlocBuilder<WordPlayingStateCubit, String?>(
