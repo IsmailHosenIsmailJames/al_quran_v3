@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
@@ -24,7 +25,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
 import "../../theme/controller/theme_cubit.dart";
@@ -48,14 +48,12 @@ Widget getAyahByAyahCard({
   Map footNote = translationMap["f"] ?? {};
   List wordByWord = [];
   bool supportsWordByWord = false;
-  final metaDataOfWordByWord = Hive.box(
-    "quran_word_by_word",
-  ).get("meta_data", defaultValue: {});
+  final metaDataOfWordByWord = WordByWordFunction.getMetaInfo();
   if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
     supportsWordByWord = true;
   }
   if (supportsWordByWord) {
-    wordByWord = Hive.box("quran_word_by_word").get(ayahKey) ?? [];
+    wordByWord = WordByWordFunction.getAyahWordByWordData(ayahKey) ?? [];
   }
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah["$surahNumber"],
