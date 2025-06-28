@@ -44,8 +44,7 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
         wordByWordTranslation.values
             .map((e) => TranslationBookModel.fromMap(e))
             .toList();
-    TranslationBookModel? selectedWbW =
-        WordByWordFunction.getSelectedWordByWordBook();
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -53,8 +52,9 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
           TranslationBookModel current = availableWbWBooks[index];
 
           bool isDownloaded = downloadedWbW.any(
-            (element) => selectedWbW?.fullPath == element.fullPath,
+            (element) => element.fullPath == current.fullPath,
           );
+
           bool isSelected = selectedWbw?.fullPath == current.fullPath;
           bool isDownloading = downloadingWbW?.fullPath == current.fullPath;
 

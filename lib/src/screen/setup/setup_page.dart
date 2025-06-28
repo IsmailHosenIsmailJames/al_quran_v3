@@ -516,8 +516,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       TranslationBookModel? supportedWbW = wordByWordTranslation.values
           .map((e) => TranslationBookModel.fromMap(e))
           .firstOrNullWhere(
-            (element) => element.language == language.toLowerCase(),
+            (element) =>
+                element.language.toLowerCase() == language.toLowerCase(),
           );
+      log(supportedWbW?.fullPath ?? "Null", name: "WBW Full Path");
       bool success3 =
           supportedWbW != null
               ? await WordByWordFunction.downloadResource(
