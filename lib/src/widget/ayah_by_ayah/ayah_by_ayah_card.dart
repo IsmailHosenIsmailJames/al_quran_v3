@@ -42,14 +42,14 @@ Widget getAyahByAyahCard({
 }) {
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  Map translationMap = QuranTranslationFunction.getTranslation(ayahKey);
-  String translation = translationMap["t"] ?? "Translation Not Found";
+  Map? translationMap = QuranTranslationFunction.getTranslation(ayahKey);
+  String translation = translationMap?["t"] ?? "Translation Not Found";
   translation = translation.replaceAll(">", "> ");
-  Map footNote = translationMap["f"] ?? {};
+  Map footNote = translationMap?["f"] ?? {};
   List wordByWord = [];
   bool supportsWordByWord = false;
-  final metaDataOfWordByWord = WordByWordFunction.getMetaInfo();
-  if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
+  final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
+  if (metaDataOfWordByWord != null) {
     supportsWordByWord = true;
   }
   if (supportsWordByWord) {

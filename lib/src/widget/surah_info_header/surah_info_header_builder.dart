@@ -5,12 +5,14 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -27,8 +29,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    final Map translationMeta = QuranTranslationFunction.getMetaInfo();
-    String tafsirMeta = Hive.box("user").get("tafsir_book");
+    final TranslationBookModel? translationMeta =
+        QuranTranslationFunction.getMetaInfo();
+    TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
     return Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
@@ -77,7 +80,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
                       safeSubString(
-                        'Translation: ${translationMeta['name'].toString().split('/').last.replaceAll('.simple', '').replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                        "Translation: ${translationMeta?.name.toString()}",
                         30,
                         replacer: "...",
                       ),
@@ -88,7 +91,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
                       safeSubString(
-                        'Tafsir: ${tafsirMeta.toString().split('/').last.replaceAll('.json.txt', '').replaceAll('_', ' ').capitalize()}',
+                        'Tafsir: ${tafsirSelected?.name ?? "Not Found"}',
                         30,
                         replacer: "...",
                       ),

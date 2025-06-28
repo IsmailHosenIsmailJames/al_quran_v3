@@ -10,8 +10,10 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:gap/gap.dart";
 
 import "../prayer_time/prayer_time_page.dart";
+import "../search/search_page.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,16 +53,16 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Al Quran"),
         centerTitle: true,
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => const SearchPage()),
-          //     );
-          //   },
-          //   icon: const Icon(FluentIcons.search_28_filled),
-          // ),
-          // const Gap(5),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
+              );
+            },
+            icon: const Icon(FluentIcons.search_28_filled),
+          ),
+          const Gap(5),
         ],
       ),
       body: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(

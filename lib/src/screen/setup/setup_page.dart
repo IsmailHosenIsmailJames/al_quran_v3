@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
@@ -504,21 +504,28 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
       bool success1 = await QuranTranslationFunction.downloadResources(
         context: context,
-        translationFullPath: processState.tafsirBookModel?.fullPath,
-        languageCode: translationLanguageCode,
+        translationBook: processState.translationBookModel!,
         isSetupProcess: true,
       );
       bool success2 = await QuranTafsirFunction.downloadResources(
         context: context,
-        tafsirFullPath: processState.tafsirBookModel?.fullPath,
-        languageCode: tafsirLanguageCode,
+        tafsirBook: processState.tafsirBookModel!,
         isSetupProcess: true,
       );
-      bool success3 = await WordByWordFunction.downloadResource(
-        context: context,
-        languageKey: codeToLanguageMap[translationLanguageCode ?? ""] ?? "",
-        isSetupProcess: true,
-      );
+      String language = codeToLanguageMap[translationLanguageCode ?? ""] ?? "";
+      TranslationBookModel? supportedWbW = wordByWordTranslation.values
+          .map((e) => TranslationBookModel.fromMap(e))
+          .firstOrNullWhere(
+            (element) => element.language == language.toLowerCase(),
+          );
+      bool success3 =
+          supportedWbW != null
+              ? await WordByWordFunction.downloadResource(
+                context: context,
+                book: supportedWbW,
+                isSetupProcess: true,
+              )
+              : true;
       bool success4 = await downloadDefaultSegmentedQuranRecitation();
       if (success1 && success2 && success3 && success4) {
         userBox.put("is_setup_complete", true);

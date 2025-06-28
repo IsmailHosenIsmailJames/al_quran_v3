@@ -1,7 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -10,17 +11,18 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-class TafsirResources extends StatefulWidget {
-  const TafsirResources({super.key});
+class TafsirResourcesView extends StatefulWidget {
+  const TafsirResourcesView({super.key});
 
   @override
-  State<TafsirResources> createState() => _TafsirResourcesState();
+  State<TafsirResourcesView> createState() => _TafsirResourcesViewState();
 }
 
-class _TafsirResourcesState extends State<TafsirResources> {
-  List<Map> downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
-  Map? selectedTafsir = QuranTafsirFunction.getTafsirSelection();
-  Map? downloadingData;
+class _TafsirResourcesViewState extends State<TafsirResourcesView> {
+  List<TafsirBookModel> downloadedTafsirs =
+      QuranTafsirFunction.getDownloadedTafsirBooks();
+  TafsirBookModel? selectedTafsir = QuranTafsirFunction.getTafsirSelection();
+  TafsirBookModel? downloadingData;
 
   void _refreshData() {
     setState(() {
@@ -38,8 +40,11 @@ class _TafsirResourcesState extends State<TafsirResources> {
       child: Column(
         children: List.generate(tafsirInformationWithScore.length, (index) {
           String languageKey = tafsirInformationWithScore.keys.elementAt(index);
-          List<Map<String, dynamic>> booksInLanguage =
-              tafsirInformationWithScore[languageKey]!;
+          List<TafsirBookModel> booksInLanguage =
+              tafsirInformationWithScore[languageKey]
+                  ?.map((e) => TafsirBookModel.fromMap(e))
+                  .toList() ??
+              [];
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 4.0),
@@ -59,23 +64,21 @@ class _TafsirResourcesState extends State<TafsirResources> {
               ),
               children:
                   booksInLanguage.map((bookData) {
-                    Map? matchedTafsir = downloadedTafsirs.firstOrNullWhere(
-                      (element) => element["name"] == bookData["full_path"],
-                    );
+                    TafsirBookModel? matchedTafsir = downloadedTafsirs
+                        .firstOrNullWhere(
+                          (element) => element.fullPath == bookData.fullPath,
+                        );
                     bool needDownload = matchedTafsir == null;
                     bool isSelected = false;
                     if (!needDownload && selectedTafsir != null) {
-                      if (selectedTafsir!["name"] == matchedTafsir["name"] &&
-                          selectedTafsir!["language"] ==
-                              matchedTafsir["language"]) {
+                      if (selectedTafsir?.fullPath == matchedTafsir.fullPath) {
                         isSelected = true;
                       }
                     }
 
                     bool isDownloading = false;
                     if (downloadingData != null) {
-                      if (downloadingData!["full_path"] ==
-                          bookData["full_path"]) {
+                      if (downloadingData?.fullPath == bookData.fullPath) {
                         isDownloading = true;
                       }
                     }
@@ -95,7 +98,7 @@ class _TafsirResourcesState extends State<TafsirResources> {
   }
 
   Widget _buildBookListTile(
-    Map<String, dynamic> bookData,
+    TafsirBookModel tafsirBook,
     bool isSelected,
     bool needDownload,
     bool isDownloading,
@@ -106,7 +109,7 @@ class _TafsirResourcesState extends State<TafsirResources> {
         horizontal: 8.0,
         vertical: 2.0,
       ),
-      title: Text(bookData["name"] ?? ""),
+      title: Text(tafsirBook.name),
       trailing: SizedBox(
         height: 30,
         width: 30,
@@ -137,36 +140,26 @@ class _TafsirResourcesState extends State<TafsirResources> {
         if (isDownloading) return;
 
         if (!isSelected && !needDownload) {
-          await QuranTafsirFunction.setTafsirSelection(
-            bookData["full_path"],
-            bookData["language"],
-          );
+          await QuranTafsirFunction.setTafsirSelection(tafsirBook);
           _refreshData();
         } else if (isSelected) {
-          log("Already Selected: ${bookData['name']}");
+          log("Already Selected: ${tafsirBook.name}");
         } else {
           setState(() {
-            downloadingData = bookData;
+            downloadingData = tafsirBook;
           });
           log(
-            "Downloading Tafsir: ${bookData['name']}",
-            name: "TafsirResourcesUI",
+            "Downloading Tafsir: ${tafsirBook.name}",
+            name: "TafsirResourcesViewUI",
           );
           await QuranTafsirFunction.downloadResources(
             context: context,
             isSetupProcess: false,
-            tafsirBook: bookData["full_path"],
-            tafsirLanguage: bookData["language"],
+            tafsirBook: tafsirBook,
           );
 
-          if (await QuranTafsirFunction.isAlreadyDownloaded(
-            bookData["full_path"],
-            bookData["language"],
-          )) {
-            await QuranTafsirFunction.setTafsirSelection(
-              bookData["full_path"],
-              bookData["language"],
-            );
+          if (await QuranTafsirFunction.isAlreadyDownloaded(tafsirBook)) {
+            await QuranTafsirFunction.setTafsirSelection(tafsirBook);
           }
           _refreshData();
         }

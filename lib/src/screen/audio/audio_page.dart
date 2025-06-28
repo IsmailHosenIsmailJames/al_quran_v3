@@ -50,10 +50,11 @@ class _AudioPageState extends State<AudioPage> {
           builder: (context, ayahKeyState) {
             int currentIndex =
                 int.parse(ayahKeyState.current.split(":")[1]) - 1;
-            Map translationMap = QuranTranslationFunction.getTranslation(
+            Map? translationMap = QuranTranslationFunction.getTranslation(
               ayahKeyState.current,
             );
-            String translation = translationMap["t"] ?? "Translation Not Found";
+            String translation =
+                translationMap?["t"] ?? "Translation Not Found";
             translation = translation.replaceAll(">", "> ");
             return Padding(
               padding: const EdgeInsets.all(10),
