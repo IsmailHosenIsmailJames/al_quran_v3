@@ -1,14 +1,14 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/language_code.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart';
-import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
-import 'package:al_quran_v3/src/theme/controller/theme_state.dart';
-import 'package:dartx/dartx.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:dartx/dartx.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
 class TafsirResources extends StatefulWidget {
   const TafsirResources({super.key});
@@ -43,6 +43,7 @@ class _TafsirResourcesState extends State<TafsirResources> {
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 4.0),
+            elevation: 0,
             child: ExpansionTile(
               key: PageStorageKey(languageKey),
               title: Text(

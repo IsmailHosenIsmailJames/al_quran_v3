@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart"
     as wbw_data_source;
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -62,6 +63,7 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 6),
+            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(roundedRadius),
               side: BorderSide(
@@ -134,11 +136,8 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                           if (wbwInfo["language"] != null &&
                               wbwInfo["language"] != wbwInfo["name"])
                             Text(
-                              wbwInfo["language"],
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: themeState.primaryShade100,
-                              ),
+                              languageNativeNames[languageKey] ??
+                                  wbwInfo["language"],
                             ),
                         ],
                       ),
