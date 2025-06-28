@@ -8,15 +8,18 @@ import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
+import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
+import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.dart";
@@ -43,42 +46,54 @@ class AppSetupPage extends StatefulWidget {
 }
 
 class _AppSetupPageState extends State<AppSetupPage> {
-  List<Map>? selectableTranslationBook;
-  List<Map>? selectableTafsirBook;
+  List<TranslationBookModel>? selectableTranslationBook;
+  List<TafsirBookModel>? selectableTafsirBook;
 
   String? appLanguage;
-  String? translationLanguage;
-  String? translationBook;
-  String? tafsirLanguage;
-  String? tafsirBook;
+  String? translationLanguageCode;
+  String? tafsirLanguageCode;
 
   void changeAppLanguage(String value) {
     appLanguage = value;
     String? languageName = codeToLanguageMap[appLanguage];
-    if (simpleTranslation.keys.contains(languageName)) {
-      translationLanguage = appLanguage;
+
+    if (translationResources.keys.contains(languageName)) {
+      translationLanguageCode = appLanguage;
       selectableTranslationBook =
-          simpleTranslation[codeToLanguageMap[translationLanguage]];
+          translationResources[codeToLanguageMap[translationLanguageCode]]
+              ?.map((e) => TranslationBookModel.fromMap(e))
+              .toList() ??
+          [];
     }
+
     if (tafsirInformationWithScore.keys.contains(languageName)) {
-      tafsirLanguage = appLanguage;
+      tafsirLanguageCode = appLanguage;
       selectableTafsirBook =
-          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
+          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
+              ?.map((e) => TafsirBookModel.fromMap(e))
+              .toList() ??
+          [];
     }
   }
 
   void changeTranslationLanguage(String value) {
-    translationLanguage = value;
-    translationBook = null;
+    translationLanguageCode = value;
+    context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
     selectableTranslationBook =
-        simpleTranslation[codeToLanguageMap[translationLanguage]];
+        translationResources[codeToLanguageMap[translationLanguageCode]]
+            ?.map((e) => TranslationBookModel.fromMap(e))
+            .toList() ??
+        [];
   }
 
   void changeTafsirLanguage(String value) {
-    tafsirLanguage = value;
-    tafsirBook = null;
+    tafsirLanguageCode = value;
+    context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
     selectableTafsirBook =
-        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguage]];
+        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
+            ?.map((e) => TafsirBookModel.fromMap(e))
+            .toList() ??
+        [];
   }
 
   late ThemeState themeState = context.read<ThemeCubit>().state;
@@ -103,7 +118,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: downloadResources,
+        onPressed: () {
+          downloadResources(context.read<ResourcesProgressCubitCubit>().state);
+        },
         tooltip: "Save and Download",
         backgroundColor: themeState.primary,
         foregroundColor: Colors.white,
@@ -194,7 +211,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ),
                         const Gap(5),
                         DropdownButtonFormField(
-                          value: translationLanguage,
+                          value: translationLanguageCode,
                           items: getQuranTranslationLanguageDropDownList(),
                           decoration: const InputDecoration(
                             hintText: "Select translation language...",
@@ -236,25 +253,36 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ),
 
                         const Gap(5),
-                        DropdownButtonFormField(
-                          items: getQuranTranslationBookDropDownList(),
-                          decoration: const InputDecoration(
-                            hintText: "Select translation book...",
-                          ),
-                          value: translationBook,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Please select one";
-                            } else {
-                              return null;
-                            }
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        BlocBuilder<
+                          ResourcesProgressCubitCubit,
+                          ResourcesProgressCubitState
+                        >(
+                          builder: (context, resourcesProcessState) {
+                            return DropdownButtonFormField(
+                              items: getQuranTranslationBookDropDownList(
+                                resourcesProcessState,
+                              ),
+                              decoration: const InputDecoration(
+                                hintText: "Select translation book...",
+                              ),
+                              value: resourcesProcessState.translationBookModel,
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please select one";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
 
-                          isExpanded: true,
-                          onChanged: (value) {
-                            translationBook = value ?? "";
-                            setState(() {});
+                              isExpanded: true,
+                              onChanged: (value) {
+                                context
+                                    .read<ResourcesProgressCubitCubit>()
+                                    .changeTranslationBook(value);
+                              },
+                            );
                           },
                         ),
                         const Gap(15),
@@ -284,7 +312,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: const InputDecoration(
                             hintText: "Select tafsir language...",
                           ),
-                          value: tafsirLanguage,
+                          value: tafsirLanguageCode,
                           validator: (value) {
                             if (value == null) {
                               return "Please select one";
@@ -320,24 +348,35 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ],
                         ),
                         const Gap(5),
-                        DropdownButtonFormField(
-                          items: getQuranTafsirBookDropDownList(),
-                          decoration: const InputDecoration(
-                            hintText: "Select tafsir book...",
-                          ),
-                          isExpanded: true,
-                          value: tafsirBook,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Please select one";
-                            } else {
-                              return null;
-                            }
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          onChanged: (value) {
-                            tafsirBook = value;
-                            setState(() {});
+                        BlocBuilder<
+                          ResourcesProgressCubitCubit,
+                          ResourcesProgressCubitState
+                        >(
+                          builder: (context, processState) {
+                            return DropdownButtonFormField(
+                              items: getQuranTafsirBookDropDownList(
+                                processState,
+                              ),
+                              decoration: const InputDecoration(
+                                hintText: "Select tafsir book...",
+                              ),
+                              isExpanded: true,
+                              value: processState.tafsirBookModel,
+                              validator: (value) {
+                                if (value == null) {
+                                  return "Please select one";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              onChanged: (value) {
+                                context
+                                    .read<ResourcesProgressCubitCubit>()
+                                    .changeTafsirBook(value);
+                              },
+                            );
                           },
                         ),
                         const Gap(15),
@@ -388,21 +427,18 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
   }
 
-  Future<void> downloadResources() async {
-    if (translationLanguage == null ||
-        tafsirLanguage == null ||
-        translationBook == null ||
-        tafsirBook == null) {
+  Future<void> downloadResources(
+    ResourcesProgressCubitState processState,
+  ) async {
+    if (translationLanguageCode == null ||
+        tafsirLanguageCode == null ||
+        processState.translationBookModel == null ||
+        processState.tafsirBookModel == null) {
       Fluttertoast.showToast(msg: "Please select required option");
     }
     if (fromKey.currentState?.validate() == true) {
       final userBox = Hive.box("user");
       await userBox.put("app_language", appLanguage);
-      await userBox.put("translation_language", translationLanguage);
-      await userBox.put("translation_book", translationBook);
-      await userBox.put("tafsir_language", tafsirLanguage);
-      await userBox.put("tafsir_book", tafsirBook);
-      await userBox.put("selected_script", selectedScript.name);
 
       showDialog(
         barrierDismissible: false,
@@ -420,11 +456,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: BlocBuilder<
-                  DownloadProgressCubitCubit,
-                  DownloadProgressCubitState
+                  ResourcesProgressCubitCubit,
+                  ResourcesProgressCubitState
                 >(
                   builder: (context, state) {
-                    if (state is DownloadProgressCubitLoading) {
+                    if (state.onProcess == true) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -448,9 +484,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                         ],
                       );
-                    } else if (state is DownloadProgressCubitSuccess) {
+                    } else if (state.isSuccess == true) {
                       return const Text("Success");
-                    } else if (state is DownloadProgressCubitFailure) {
+                    } else if (state.errorMessage != null) {
                       return Text(
                         "Error: ${state.errorMessage}",
                         style: const TextStyle(fontSize: 16, color: Colors.red),
@@ -468,19 +504,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
       bool success1 = await QuranTranslationFunction.downloadResources(
         context: context,
-        translationBook: translationBook,
-        translationLanguage: translationLanguage,
+        translationFullPath: processState.tafsirBookModel?.fullPath,
+        languageCode: translationLanguageCode,
         isSetupProcess: true,
       );
       bool success2 = await QuranTafsirFunction.downloadResources(
         context: context,
-        tafsirBook: tafsirBook,
-        tafsirLanguage: tafsirLanguage,
+        tafsirFullPath: processState.tafsirBookModel?.fullPath,
+        languageCode: tafsirLanguageCode,
         isSetupProcess: true,
       );
       bool success3 = await WordByWordFunction.downloadResource(
         context: context,
-        languageKey: codeToLanguageMap[translationLanguage ?? ""] ?? "",
+        languageKey: codeToLanguageMap[translationLanguageCode ?? ""] ?? "",
         isSetupProcess: true,
       );
       bool success4 = await downloadDefaultSegmentedQuranRecitation();
@@ -495,7 +531,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       } else {
         // error and show 'Something went wrong' in cubit
         log([success1, success2, success3, success4].toString());
-        context.read<DownloadProgressCubitCubit>().failure(
+        context.read<ResourcesProgressCubitCubit>().failure(
           "Unable to download resources...",
         );
       }
@@ -507,14 +543,14 @@ class _AppSetupPageState extends State<AppSetupPage> {
         ApisUrls.base +
         context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!;
     try {
-      context.read<DownloadProgressCubitCubit>().updateProgress(
+      context.read<ResourcesProgressCubitCubit>().updateProgress(
         null,
         "Downloading Segmented Quran Recitation",
       );
       final response = await dio.Dio().get(url);
       if (response.statusCode == 200) {
         Box box = Hive.box("segmented_quran_recitation");
-        context.read<DownloadProgressCubitCubit>().updateProgress(
+        context.read<ResourcesProgressCubitCubit>().updateProgress(
           null,
           "Processing Segmented Quran Recitation",
         );
@@ -542,21 +578,21 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   QuranScriptType selectedScript = QuranScriptType.tajweed;
 
-  List<DropdownMenuItem>? getQuranTafsirBookDropDownList() {
-    List<DropdownMenuItem> items = [];
+  List<DropdownMenuItem<TafsirBookModel>>? getQuranTafsirBookDropDownList(
+    ResourcesProgressCubitState processState,
+  ) {
+    List<DropdownMenuItem<TafsirBookModel>> items = [];
     if (selectableTafsirBook?.isEmpty ?? true) return null;
-    selectableTafsirBook?.sort(
-      (a, b) => (b["score"] as int).compareTo(a["score"]),
-    );
-    for (Map book in selectableTafsirBook ?? []) {
+    selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
+    for (TafsirBookModel book in selectableTafsirBook ?? []) {
       items.add(
         DropdownMenuItem(
-          value: book["full_path"] ?? "",
+          value: book,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (tafsirBook == book["full_path"])
+                if (processState.tafsirBookModel?.fullPath == book.fullPath)
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -565,12 +601,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: themeState.primary,
                     ),
                   ),
-                buildScoreIndicator(
-                  percentage: (book["score"] as int).toDouble(),
-                  size: 20,
-                ),
+                buildScoreIndicator(percentage: book.score, size: 20),
                 const Gap(8),
-                Text(book["name"] ?? ""),
+                Text(book.name),
               ],
             ),
           ),
@@ -591,7 +624,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (tafsirLanguage == languageToCodeMap[key.toLowerCase()])
+                if (tafsirLanguageCode == languageToCodeMap[key.toLowerCase()])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -636,18 +669,21 @@ class _AppSetupPageState extends State<AppSetupPage> {
     }).toList();
   }
 
-  List<DropdownMenuItem>? getQuranTranslationBookDropDownList() {
-    List<DropdownMenuItem> items = [];
+  List<DropdownMenuItem>? getQuranTranslationBookDropDownList(
+    ResourcesProgressCubitState resourcesProcessState,
+  ) {
+    List<DropdownMenuItem<TranslationBookModel>> items = [];
     if (selectableTranslationBook?.isEmpty ?? true) return null;
-    for (Map book in selectableTranslationBook ?? []) {
+    for (TranslationBookModel book in selectableTranslationBook ?? []) {
       items.add(
         DropdownMenuItem(
-          value: book["full_path"] ?? "",
+          value: book,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (translationBook == book["full_path"])
+                if (resourcesProcessState.translationBookModel?.fullPath ==
+                    book.fullPath)
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -656,8 +692,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       color: themeState.primary,
                     ),
                   ),
-                Text(book["name"] ?? ""),
-                if (book["type"] == "translation-with-footnote-tags")
+                Text(book.name),
+                if (book.type == TranslationResourcesType.withFootnoteTags)
                   footNoteTag,
               ],
             ),
@@ -671,7 +707,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   List<DropdownMenuItem> getQuranTranslationLanguageDropDownList() {
     List<DropdownMenuItem> items = [];
-    simpleTranslation.forEach((key, value) {
+    translationResources.forEach((key, value) {
       items.add(
         DropdownMenuItem(
           value: languageToCodeMap[key.toLowerCase()],
@@ -679,7 +715,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                if (translationLanguage == languageToCodeMap[key.toLowerCase()])
+                if (translationLanguageCode ==
+                    languageToCodeMap[key.toLowerCase()])
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Icon(
@@ -767,7 +804,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
 bool doesHaveFootNote(String language) {
   bool doesHaveFootNote = false;
-  for (Map map in simpleTranslation[language] ?? []) {
+  for (Map map in translationResources[language] ?? []) {
     if (map["type"] == "translation-with-footnote-tags") {
       doesHaveFootNote = true;
       break;
