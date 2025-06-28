@@ -15,22 +15,49 @@ class _OthersSettingsState extends State<OthersSettings> {
   Widget build(BuildContext context) {
     return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
       builder: (context, state) {
-        return SwitchListTile(
-          title: const Text("Remember Last Tab"),
-          thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-            Set<WidgetState> states,
-          ) {
-            return Icon(
-              states.contains(WidgetState.selected)
-                  ? Icons.done_rounded
-                  : Icons.close_rounded,
-            );
-          }),
-          contentPadding: EdgeInsets.zero,
-          value: state.rememberLastTab,
-          onChanged: (value) {
-            context.read<OthersSettingsCubit>().setRememberLastTab(value);
-          },
+        return Column(
+          children: [
+            SwitchListTile(
+              title: const Text("Remember Home Tab"),
+              subtitle: const Text(
+                "App will remember the last opened tab in the home screen.",
+              ),
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              value: state.rememberLastTab,
+              onChanged: (value) {
+                context.read<OthersSettingsCubit>().setRememberLastTab(value);
+              },
+            ),
+            SwitchListTile(
+              title: const Text("Wake Lock"),
+              subtitle: const Text(
+                "Prevent the screen from turning off automatically.",
+              ),
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+              contentPadding: EdgeInsets.zero,
+              value: state.wakeLock,
+              onChanged: (value) {
+                context.read<OthersSettingsCubit>().setWakeLock(value);
+              },
+            ),
+          ],
         );
       },
     );
