@@ -1,18 +1,18 @@
-import "package:al_quran_v3/src/screen/quran_resources/tafsir_resources.dart";
-import "package:al_quran_v3/src/screen/quran_resources/translation_resources.dart";
-import "package:al_quran_v3/src/screen/quran_resources/word_by_word_resources.dart";
+import "package:al_quran_v3/src/screen/quran_resources/tafsir_resources_view.dart";
+import "package:al_quran_v3/src/screen/quran_resources/translation_resources_view.dart";
+import "package:al_quran_v3/src/screen/quran_resources/word_by_word_resources_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-class QuranResources extends StatefulWidget {
-  const QuranResources({super.key});
+class QuranResourcesView extends StatefulWidget {
+  const QuranResourcesView({super.key});
 
   @override
-  State<QuranResources> createState() => _QuranResourcesState();
+  State<QuranResourcesView> createState() => _QuranResourcesViewState();
 }
 
-class _QuranResourcesState extends State<QuranResources>
+class _QuranResourcesViewState extends State<QuranResourcesView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
@@ -73,9 +73,9 @@ class _QuranResourcesState extends State<QuranResources>
               controller: _tabController,
               physics: const ClampingScrollPhysics(),
               children: const [
-                TranslationResources(),
-                TafsirResources(),
-                WordByWordResources(),
+                TranslationResourcesView(),
+                TafsirResourcesView(),
+                WordByWordResourcesView(),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -387,8 +388,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            Hive.box("quran_translation").get(ayahKey) ??
-                            {"t": "Translation Not Found"};
+                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";
                         translation = translation.replaceAll(">", "> ");
@@ -496,8 +497,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            Hive.box("quran_translation").get(ayahKey) ??
-                            {"t": "Translation Not Found"};
+                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";
                         translation = translation.replaceAll(">", "> ");

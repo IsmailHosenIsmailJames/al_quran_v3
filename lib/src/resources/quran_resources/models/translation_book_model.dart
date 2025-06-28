@@ -60,4 +60,4 @@ class TranslationBookModel {
   };
 }
 
-enum TranslationResourcesType { simple, withFootnoteTags }
+enum TranslationResourcesType { simple, withFootnoteTags, wordByWord }

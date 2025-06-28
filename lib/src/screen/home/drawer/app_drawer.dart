@@ -1,6 +1,6 @@
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/quran_resources/quran_resources.dart";
+import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -226,7 +226,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const QuranResources(),
+                            builder: (context) => const QuranResourcesView(),
                           ),
                         );
                       },
@@ -452,9 +452,7 @@ class _AppDrawerState extends State<AppDrawer> {
     await QuranTranslationFunction.close();
     await Hive.deleteFromDisk();
     await Hive.initFlutter();
-    await Hive.openBox("quran_translation");
     await Hive.openBox("user");
-    await Hive.openBox("quran_word_by_word");
     await Hive.openLazyBox("quran_tafsir");
     await Hive.openBox("segmented_quran_recitation");
     await Hive.openBox("surah_info");

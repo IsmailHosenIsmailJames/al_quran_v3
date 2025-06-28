@@ -1,9 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
-import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart"
-    as wbw_data_source;
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -11,17 +10,18 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-class WordByWordResources extends StatefulWidget {
-  const WordByWordResources({super.key});
+class WordByWordResourcesView extends StatefulWidget {
+  const WordByWordResourcesView({super.key});
 
   @override
-  State<WordByWordResources> createState() => _WordByWordResourcesState();
+  State<WordByWordResourcesView> createState() =>
+      _WordByWordResourcesViewState();
 }
 
-class _WordByWordResourcesState extends State<WordByWordResources> {
-  List<String> downloadedLanguages = [];
-  String? selectedLanguage;
-  String? downloadingLanguageKey;
+class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
+  List<TranslationBookModel> downloadedWbW = [];
+  TranslationBookModel? selectedWbw;
+  TranslationBookModel? downloadingWbW;
 
   @override
   void initState() {
@@ -32,34 +32,31 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
   Future<void> _loadInitialData() async {
     await WordByWordFunction.init();
     setState(() {
-      downloadedLanguages =
-          WordByWordFunction.getDownloadedWordByWordLanguages();
-      selectedLanguage = WordByWordFunction.getSelectedWordByWordLanguage();
+      downloadedWbW = WordByWordFunction.getDownloadedWordByWordBooks();
+      selectedWbw = WordByWordFunction.getSelectedWordByWordBook();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
-    List<String> availableLanguageKeys =
-        wbw_data_source.wordByWordTranslation.keys.toList();
-
+    List<TranslationBookModel> availableWbWBooks =
+        wordByWordTranslation.values
+            .map((e) => TranslationBookModel.fromMap(e))
+            .toList();
+    TranslationBookModel? selectedWbW =
+        WordByWordFunction.getSelectedWordByWordBook();
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
       child: Column(
-        children: List.generate(availableLanguageKeys.length, (index) {
-          String languageKey = availableLanguageKeys[index];
-          Map<String, dynamic>? wbwInfo = WordByWordFunction.getLanguageInfo(
-            languageKey,
+        children: List.generate(availableWbWBooks.length, (index) {
+          TranslationBookModel current = availableWbWBooks[index];
+
+          bool isDownloaded = downloadedWbW.any(
+            (element) => selectedWbW?.fullPath == element.fullPath,
           );
-
-          if (wbwInfo == null) {
-            return const SizedBox.shrink();
-          }
-
-          bool isDownloaded = downloadedLanguages.contains(languageKey);
-          bool isSelected = selectedLanguage == languageKey;
-          bool isDownloading = downloadingLanguageKey == languageKey;
+          bool isSelected = selectedWbw?.fullPath == current.fullPath;
+          bool isDownloading = downloadingWbW?.fullPath == current.fullPath;
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 6),
@@ -82,35 +79,32 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                 if (isDownloaded) {
                   if (!isSelected) {
                     setState(() {
-                      selectedLanguage = languageKey;
+                      selectedWbw = current;
                     });
-                    await WordByWordFunction.setSelectedWordByWordLanguage(
-                      languageKey,
-                    );
+                    await WordByWordFunction.setSelectedWordByWordBook(current);
                   } else {
-                    log("Language '$languageKey' is already selected.");
+                    log("Language '${current.name}' is already selected.");
                   }
                 } else {
                   setState(() {
-                    downloadingLanguageKey = languageKey;
+                    downloadingWbW = current;
                   });
                   log(
-                    "Starting download for: $languageKey",
+                    "Starting download for: ${current.name}",
                     name: "WbWResourcesUI",
                   );
                   bool success = await WordByWordFunction.downloadResource(
                     context: context,
-                    languageKey: languageKey,
+                    book: current,
+                    isSetupProcess: false,
                   );
                   if (success) {
-                    await WordByWordFunction.setSelectedWordByWordLanguage(
-                      languageKey,
-                    );
+                    await WordByWordFunction.setSelectedWordByWordBook(current);
                   }
 
                   await _loadInitialData();
                   setState(() {
-                    downloadingLanguageKey = null;
+                    downloadingWbW = null;
                   });
                 }
               },
@@ -127,18 +121,14 @@ class _WordByWordResourcesState extends State<WordByWordResources> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            wbwInfo["name"] ?? languageKey,
+                            current.name,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          if (wbwInfo["language"] != null &&
-                              wbwInfo["language"] != wbwInfo["name"])
-                            Text(
-                              languageNativeNames[languageKey] ??
-                                  wbwInfo["language"],
-                            ),
+
+                          Text(current.language),
                         ],
                       ),
                     ),

@@ -1,3 +1,7 @@
+import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
 import "package:al_quran_v3/src/screen/search/models/search_options.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
@@ -20,9 +24,10 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  late ThemeState themeState = context.read<ThemeCubit>().state;
+
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       appBar:
           widget.popup
@@ -74,6 +79,97 @@ class _SearchPageState extends State<SearchPage> {
             ),
             const Gap(10),
             searchFieldSelector(),
+            const Gap(10),
+
+            BlocBuilder<SearchCubit, SearchState>(
+              builder: (context, state) {
+                if (state.searchFields == SearchFields.translation) {
+                  List<TranslationBookModel> downloaded =
+                      QuranTranslationFunction.getDownloadedTranslationBooks();
+
+                  return Column(
+                    children: List.generate(downloaded.length, (index) {
+                      TranslationBookModel current = downloaded[index];
+                      bool isSelected = state.selectedTranslationBoxName
+                          .contains(
+                            QuranTranslationFunction.getTranslationBoxName(
+                              translationBook: current,
+                            ),
+                          );
+
+                      return ListTile(
+                        title: Text(current.name),
+                        subtitle: Text(current.language),
+                        trailing:
+                            isSelected
+                                ? Icon(
+                                  Icons.check_circle,
+                                  color: themeState.primary,
+                                )
+                                : const Icon(
+                                  Icons.circle_outlined,
+                                  color: Colors.grey,
+                                ),
+                        onTap: () {
+                          if (isSelected) {
+                            context
+                                .read<SearchCubit>()
+                                .removeTranslationBoxName(current);
+                          } else {
+                            context.read<SearchCubit>().addTranslationBoxName(
+                              current,
+                            );
+                          }
+                        },
+                      );
+                    }),
+                  );
+                } else if (state.searchFields == SearchFields.tafsir) {
+                  List<TafsirBookModel> downloaded =
+                      QuranTafsirFunction.getDownloadedTafsirBooks();
+
+                  return Column(
+                    children: List.generate(downloaded.length, (index) {
+                      TafsirBookModel current = downloaded[index];
+
+                      bool isSelected = state.selectedTafsirBoxName.contains(
+                        QuranTafsirFunction.getTafsirBoxName(
+                          tafsirBook: current,
+                        ),
+                      );
+
+                      return ListTile(
+                        title: Text(current.name),
+                        subtitle: Text(current.language),
+                        trailing:
+                            isSelected
+                                ? Icon(
+                                  Icons.check_circle,
+                                  color: themeState.primary,
+                                )
+                                : const Icon(
+                                  Icons.circle_outlined,
+                                  color: Colors.grey,
+                                ),
+                        onTap: () {
+                          if (isSelected) {
+                            context.read<SearchCubit>().addTafsirBoxName(
+                              current,
+                            );
+                          } else {
+                            context.read<SearchCubit>().addTafsirBoxName(
+                              current,
+                            );
+                          }
+                        },
+                      );
+                    }),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
 
             const Gap(10),
             SizedBox(

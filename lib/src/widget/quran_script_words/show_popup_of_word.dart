@@ -39,8 +39,8 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
 
     List wordByWord = [];
     bool supportsWordByWord = false;
-    final metaDataOfWordByWord = WordByWordFunction.getMetaInfo();
-    if (metaDataOfWordByWord != null && metaDataOfWordByWord.isNotEmpty) {
+    final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
+    if (metaDataOfWordByWord != null) {
       supportsWordByWord = true;
     }
     if (supportsWordByWord) {

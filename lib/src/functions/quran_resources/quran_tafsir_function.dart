@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:developer";
 
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -8,26 +9,21 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
 import "../../api/apis_urls.dart";
-import "../../screen/setup/cubit/download_progress_cubit_cubit.dart";
+import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
 class QuranTafsirFunction {
   static LazyBox? openedTafsirBox;
 
-  static Future<void> init({Map? tafsirInfo}) async {
+  static Future<void> init({TafsirBookModel? tafsirBook}) async {
     // Ensure the user box is open
     if (!Hive.isBoxOpen("user")) {
       await Hive.openBox("user");
     }
-    Map? tafsirSelection = tafsirInfo ?? getTafsirSelection();
+    TafsirBookModel? tafsirSelection = tafsirBook ?? getTafsirSelection();
     log(tafsirSelection.toString(), name: "getTafsirSelection");
-    if (tafsirSelection != null &&
-        tafsirSelection["name"] != null &&
-        tafsirSelection["language"] != null) {
-      final boxName = getTafsirBoxName(
-        tafsirBook: tafsirSelection["name"],
-        tafsirLanguage: tafsirSelection["language"],
-      );
+    if (tafsirSelection != null) {
+      final boxName = getTafsirBoxName(tafsirBook: tafsirSelection);
       if (await Hive.boxExists(boxName)) {
         openedTafsirBox = await Hive.openLazyBox(boxName);
         log("Tafsir box '$boxName' opened.", name: "QuranTafsirFunction.init");
@@ -46,79 +42,70 @@ class QuranTafsirFunction {
     }
   }
 
-  static String getTafsirBoxName({
-    required String tafsirBook,
-    required String tafsirLanguage,
-  }) {
-    // Sanitize the tafsirBook and tafsirLanguage to ensure they are valid box names
-    String sanitizedBook = tafsirBook
+  static String getTafsirBoxName({required TafsirBookModel tafsirBook}) {
+    // Sanitize the tafsirFullPath and languageCode to ensure they are valid box names
+    String sanitizedBook = tafsirBook.fullPath
         .split("/")
         .last
         .replaceAll(RegExp(r"[^\w\.-]"), "_");
-    String sanitizedLanguage = tafsirLanguage.replaceAll(
-      RegExp(r"[^\w\.-]"),
-      "_",
-    );
-    return "tafsir_${sanitizedLanguage}_$sanitizedBook";
+
+    return "tafsir_${tafsirBook.language}_$sanitizedBook";
   }
 
-  static Future<bool> isAlreadyDownloaded(
-    String tafsirBook,
-    String tafsirLanguage,
-  ) async {
-    final userBox = Hive.box("user");
-    List<Map> downloadedBooks = List<Map>.from(
-      userBox.get("downloaded_tafsir_books", defaultValue: []),
-    );
-    for (Map book in downloadedBooks) {
-      if (book["name"] == tafsirBook && book["language"] == tafsirLanguage) {
+  static String? getSelectedTafsirBoxName() {
+    TafsirBookModel? tafsirSelection = getTafsirSelection();
+    if (tafsirSelection != null) {
+      final boxName = getTafsirBoxName(tafsirBook: tafsirSelection);
+      return boxName;
+    }
+    return null;
+  }
+
+  static Future<bool> isAlreadyDownloaded(TafsirBookModel tafsirBook) async {
+    List<TafsirBookModel> downloadedBooks = getDownloadedTafsirBooks();
+    for (TafsirBookModel book in downloadedBooks) {
+      if (book.fullPath == tafsirBook.fullPath) {
         // Additionally verify if the box actually exists
-        final boxName = getTafsirBoxName(
-          tafsirBook: tafsirBook,
-          tafsirLanguage: tafsirLanguage,
-        );
+        final boxName = getTafsirBoxName(tafsirBook: tafsirBook);
         return await Hive.boxExists(boxName);
       }
     }
     return false;
   }
 
-  static Future<void> setToListAlreadyDownloaded(
-    String tafsirBook,
-    String tafsirLanguage,
-  ) async {
+  static Future<void> setToListAlreadyDownloaded({
+    required TafsirBookModel tafsirBook,
+  }) async {
     final userBox = Hive.box("user");
-    List<Map> downloadedBooks = List<Map>.from(
-      userBox.get("downloaded_tafsir_books", defaultValue: []),
-    );
+    List<TafsirBookModel> downloadedBooks = getDownloadedTafsirBooks();
     // Avoid duplicates
-    if (!downloadedBooks.any(
-      (book) =>
-          book["name"] == tafsirBook && book["language"] == tafsirLanguage,
-    )) {
-      downloadedBooks.add({"name": tafsirBook, "language": tafsirLanguage});
-      await userBox.put("downloaded_tafsir_books", downloadedBooks);
+    if (!downloadedBooks.any((book) => book.fullPath == tafsirBook.fullPath)) {
+      downloadedBooks.add(tafsirBook);
+      await userBox.put(
+        "downloaded_tafsir_books",
+        downloadedBooks.map((e) => e.toMap()).toList(),
+      );
     }
   }
 
-  static List<Map> getDownloadedTafsirBooks() {
+  static List<TafsirBookModel> getDownloadedTafsirBooks() {
     final userBox = Hive.box("user");
     return List<Map>.from(
-      userBox.get("downloaded_tafsir_books", defaultValue: []),
-    );
+          userBox.get("downloaded_tafsir_books", defaultValue: []),
+        )
+        .map((e) => TafsirBookModel.fromMap(Map<String, dynamic>.from(e)))
+        .toList();
   }
 
   static Future<void> removeTafsirFromListDownloaded(
-    String tafsirBook,
-    String tafsirLanguage,
+    TafsirBookModel tafsirBook,
+    String languageCode,
   ) async {
     final userBox = Hive.box("user");
-    List<Map> downloadedBooks = List<Map>.from(
-      userBox.get("downloaded_tafsir_books", defaultValue: []),
-    );
+    List<TafsirBookModel> downloadedBooks = getDownloadedTafsirBooks();
     bool changed = false;
     downloadedBooks.removeWhere((book) {
-      if (book["name"] == tafsirBook && book["language"] == tafsirLanguage) {
+      if (tafsirBook.fullPath == book.fullPath) {
         changed = true;
         return true;
       }
@@ -126,14 +113,14 @@ class QuranTafsirFunction {
     });
 
     if (changed) {
-      await userBox.put("downloaded_tafsir_books", downloadedBooks);
+      await userBox.put(
+        "downloaded_tafsir_books",
+        downloadedBooks.map((e) => e.toMap()).toList(),
+      );
     }
 
     // Also delete the Hive box for this tafsir
-    final tafsirBoxName = getTafsirBoxName(
-      tafsirBook: tafsirBook,
-      tafsirLanguage: tafsirLanguage,
-    );
+    final tafsirBoxName = getTafsirBoxName(tafsirBook: tafsirBook);
     if (await Hive.boxExists(tafsirBoxName)) {
       // Close the box if it's the currently opened one
       if (openedTafsirBox?.name == tafsirBoxName) {
@@ -147,22 +134,18 @@ class QuranTafsirFunction {
     }
   }
 
-  static Future<void> setTafsirSelection(
-    String tafsirBook,
-    String tafsirLanguage,
-  ) async {
+  static Future<void> setTafsirSelection(TafsirBookModel tafsirBook) async {
     final userBox = Hive.box("user");
-    await userBox.put("selected_tafsir", {
-      "name": tafsirBook,
-      "language": tafsirLanguage,
-    });
+    await userBox.put("selected_tafsir", tafsirBook.toMap());
     // Re-initialize to open the newly selected tafsir
-    await init(tafsirInfo: {"name": tafsirBook, "language": tafsirLanguage});
+    await init(tafsirBook: tafsirBook);
   }
 
-  static Map? getTafsirSelection() {
+  static TafsirBookModel? getTafsirSelection() {
     final userBox = Hive.box("user");
-    return userBox.get("selected_tafsir");
+    return TafsirBookModel.fromMap(
+      Map<String, dynamic>.from(userBox.get("selected_tafsir")),
+    );
   }
 
   static Future<void> removeTafsirSelection() async {
@@ -174,34 +157,30 @@ class QuranTafsirFunction {
 
   static Future<bool> downloadResources({
     required BuildContext context,
-    String? tafsirBook,
-    String? tafsirLanguage,
+    TafsirBookModel? tafsirBook,
     bool isSetupProcess = false, // Standardized parameter name
   }) async {
-    if (tafsirBook == null || tafsirLanguage == null) {
+    if (tafsirBook == null) {
       log("Tafsir book or language is null.", name: "downloadResources");
       return false;
     }
 
-    final cubit = context.read<DownloadProgressCubitCubit>();
+    final cubit = context.read<ResourcesProgressCubitCubit>();
 
-    if (await isAlreadyDownloaded(tafsirBook, tafsirLanguage)) {
+    if (await isAlreadyDownloaded(tafsirBook)) {
       log(
-        "Tafsir '$tafsirBook' for language '$tafsirLanguage' is already downloaded.",
+        "Tafsir '${tafsirBook.fullPath}'  is already downloaded.",
         name: "downloadResources",
       );
       if (isSetupProcess) {
         // Also set as current selection if in setup
-        await setTafsirSelection(tafsirBook, tafsirLanguage);
+        await setTafsirSelection(tafsirBook);
       }
       await init(); // Ensure it's initialized if it was already downloaded
       return true;
     }
 
-    final tafsirBoxName = getTafsirBoxName(
-      tafsirBook: tafsirBook,
-      tafsirLanguage: tafsirLanguage,
-    );
+    final tafsirBoxName = getTafsirBoxName(tafsirBook: tafsirBook);
 
     log(
       "Starting download for Tafsir Box: $tafsirBoxName",
@@ -232,68 +211,56 @@ class QuranTafsirFunction {
       }
     }
 
-    try {
-      String base = ApisUrls.base;
-      cubit.updateProgress(null, "Downloading Tafsir");
-      dio.Response response = await dio.Dio().get(
-        base + tafsirBook,
-      ); // Ensure ApisUrls.base ends with '/' or tafsirBook starts with one
+    // try {
+    String base = ApisUrls.base;
+    cubit.updateProgress(null, "Downloading Tafsir");
+    dio.Response response = await dio.Dio().get(
+      base + tafsirBook.fullPath,
+    ); // Ensure ApisUrls.base ends with '/' or tafsirFullPath starts with one
 
-      Map data = await compute(
-        (message) => jsonDecode(decodeBZip2String(message)),
-        response.data,
-      );
+    Map data = await compute(
+      (message) => jsonDecode(decodeBZip2String(message)),
+      response.data,
+    );
 
-      // It's generally faster to use putAll for many entries if Hive supports it directly with LazyBox
-      // However, for progress reporting, iterating is fine.
-      int totalEntries = data.length;
-      int processedEntries = 0;
-      for (String key in data.keys) {
-        await tafsirBox.put(key, data[key]);
-        processedEntries++;
-        if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          // Update progress periodically
-          cubit.updateProgress(
-            processedEntries / totalEntries,
-            "Processing Tafsir",
-          );
-        }
+    // It's generally faster to use putAll for many entries if Hive supports it directly with LazyBox
+    // However, for progress reporting, iterating is fine.
+    int totalEntries = data.length;
+    int processedEntries = 0;
+    for (String key in data.keys) {
+      await tafsirBox.put(key, data[key]);
+      processedEntries++;
+      if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
+        // Update progress periodically
+        cubit.updateProgress(
+          processedEntries / totalEntries,
+          "Processing Tafsir",
+        );
       }
-
-      await tafsirBox.put("meta_data", {
-        "name": tafsirBook,
-        "language": tafsirLanguage,
-        "download_date": DateTime.now().toIso8601String(),
-      });
-
-      await setToListAlreadyDownloaded(tafsirBook, tafsirLanguage);
-      if (isSetupProcess) {
-        await setTafsirSelection(tafsirBook, tafsirLanguage);
-      }
-
-      log(
-        "Tafsir '$tafsirBook' downloaded and processed successfully.",
-        name: "downloadResources",
-      );
-      await init(); // Initialize with the new data
-      return true;
-    } catch (e, s) {
-      log(
-        "Error downloading or processing Tafsir '$tafsirBook': $e\n$s",
-        name: "downloadResources",
-      );
-      cubit.updateProgress(null, "Error downloading Tafsir");
-      return false;
     }
+
+    await tafsirBox.put("meta_data", tafsirBook.toMap());
+
+    await setToListAlreadyDownloaded(tafsirBook: tafsirBook);
+    if (isSetupProcess) {
+      await setTafsirSelection(tafsirBook);
+    }
+
+    log(
+      "Tafsir '${tafsirBook.fullPath}' downloaded and processed successfully.",
+      name: "downloadResources",
+    );
+    await init(); // Initialize with the new data
+    return true;
   }
 
   static Future<Map?> getTafsir(String ayahKey) async {
     if (openedTafsirBox == null || !openedTafsirBox!.isOpen) {
       log("Tafsir box is not open or available.", name: "getTafsir");
 
-      Map? currentSelection = getTafsirSelection();
+      TafsirBookModel? currentSelection = getTafsirSelection();
       if (currentSelection != null) {
-        await init(tafsirInfo: currentSelection);
+        await init(tafsirBook: currentSelection);
         if (openedTafsirBox == null || !openedTafsirBox!.isOpen) {
           return {"error": "Tafsir not available."};
         }
@@ -307,25 +274,6 @@ class QuranTafsirFunction {
       log("Error fetching Tafsir for $ayahKey: $e", name: "getTafsir");
       return {"error": "Error fetching Tafsir."};
     }
-  }
-
-  static Map? getMetaInfo() {
-    if (openedTafsirBox != null && openedTafsirBox!.isOpen) {
-      // This will be slow with LazyBox if not awaited.
-      // For frequent access, consider loading meta_data during init.
-      // However, Hive's get is synchronous if the key is in memory.
-      // Let's assume it might not be and make it async to be safe.
-      // For LazyBox, all reads are async.
-      // return openedTafsirBox!.get("meta_data") as Map?; // This won't work directly
-      // Instead, you'd have to make this async or load meta_data into a variable at init
-      log(
-        "getMetaInfo requires an async call for LazyBox or pre-loading meta_data.",
-        name: "getMetaInfo",
-      );
-      return null; // Or implement an async version: static Future<Map?> getMetaInfoAsync() async {...}
-    }
-    log("Tafsir box is not open. Cannot get meta info.", name: "getMetaInfo");
-    return null;
   }
 
   static Future<Map?> getMetaInfoAsync() async {

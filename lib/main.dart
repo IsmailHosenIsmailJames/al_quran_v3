@@ -75,9 +75,7 @@ Future<void> main() async {
     androidNotificationOngoing: true,
   );
   await Hive.initFlutter();
-  await Hive.openBox("quran_translation");
   await Hive.openBox("user");
-  await Hive.openBox("quran_word_by_word");
   await Hive.openBox("segmented_quran_recitation");
   await Hive.openBox("surah_info");
   await QuranTranslationFunction.init();

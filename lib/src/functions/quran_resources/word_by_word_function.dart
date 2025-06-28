@@ -2,122 +2,152 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
-import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/download_progress_cubit_cubit.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart"; // Correct import
+// Remove if wordByWordTranslation is no longer the primary source of truth after refactoring
+// import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
+import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:flutter/material.dart"; // Still needed for BuildContext
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
-import "../encode_decode.dart"; // Assuming you have this for bzip2 decoding
+import "../encode_decode.dart";
 
 class WordByWordFunction {
   static Box? openedWordByWordBox;
-  static const String _userBoxKeyDownloaded = "downloaded_wbw_languages";
-  static const String _userBoxKeySelected = "selected_wbw_language";
 
-  static Future<void> init({String? languageKey}) async {
+  // User box keys will now store maps, not just language strings
+  static const String _userBoxKeyDownloaded = "downloaded_wbw_books";
+  static const String _userBoxKeySelected = "selected_wbw_book";
+
+  static Future<void> init({TranslationBookModel? book}) async {
     if (!Hive.isBoxOpen("user")) {
       await Hive.openBox("user");
     }
-    final userBox = Hive.box("user");
-    String? selectedLanguage = languageKey ?? userBox.get(_userBoxKeySelected);
+    TranslationBookModel? selectedBook = book ?? getSelectedWordByWordBook();
 
     log(
-      "Selected WbW Language for init: $selectedLanguage",
+      "Selected WbW Book for init: ${selectedBook?.toMap()}",
       name: "WbWFunction.init",
     );
 
-    if (selectedLanguage != null) {
-      final boxName = getWordByWordBoxName(selectedLanguage);
+    if (selectedBook != null) {
+      // Ensure it's a wordByWord type, though selection should ideally filter this
+      if (selectedBook.type != TranslationResourcesType.wordByWord) {
+        log(
+          "Book ${selectedBook.name} is not a wordByWord type. Clearing selection.",
+          name: "WbWFunction.init",
+        );
+        if (book == null) await removeSelectedWordByWordBook();
+        return;
+      }
+      final boxName = getWordByWordBoxName(selectedBook);
       if (await Hive.boxExists(boxName)) {
         await close(); // Close any previously opened box
         openedWordByWordBox = await Hive.openBox(boxName);
         log(
-          "Opened WbW box for '$selectedLanguage': $boxName",
+          "Opened WbW box for '${selectedBook.name}': $boxName",
           name: "WbWFunction.init",
         );
       } else {
         log(
-          "WbW box '$boxName' for language '$selectedLanguage' does not exist.",
+          "WbW box '$boxName' for book '${selectedBook.name}' (path: ${selectedBook.fullPath}) language '${selectedBook.language}' does not exist.",
           name: "WbWFunction.init",
         );
-        // It might have been selected but deleted, so clear selection
-        if (languageKey == null) {
-          // only clear if not explicitly trying to init this key
-          await removeSelectedWordByWordLanguage();
+        if (book == null) {
+          await removeSelectedWordByWordBook();
         }
       }
     } else {
-      log("No WbW language selected.", name: "WbWFunction.init");
-      await close(); // Ensure any open box is closed if nothing is selected
+      log("No WbW book selected.", name: "WbWFunction.init");
+      await close();
     }
   }
 
-  static String getWordByWordBoxName(String languageKey) {
-    // Sanitize languageKey if necessary, though keys from wordByWordTranslation should be simple
-    final sanitizedKey = languageKey.replaceAll(RegExp(r"[^\w]"), "_");
-    return "wbw_$sanitizedKey";
+  static String getWordByWordBoxName(TranslationBookModel book) {
+    // Ensure it's a wordByWord type before proceeding (optional assertion)
+    // assert(book.type == TranslationResourcesType.wordByWord);
+    String sanitizedIdentifier = (book.fileName.isNotEmpty
+            ? book.fileName
+            : book.fullPath.split("/").last)
+        .replaceAll(RegExp(r"[^\w\.-]"), "_");
+
+    return "wbw_${book.language}_$sanitizedIdentifier";
   }
 
-  static Future<bool> isLanguageDownloaded(String languageKey) async {
+  static Future<bool> isBookDownloaded(TranslationBookModel book) async {
+    // assert(book.type == TranslationResourcesType.wordByWord);
     final userBox = Hive.box("user");
-    List<String> downloadedLanguages = List<String>.from(
-      userBox.get(_userBoxKeyDownloaded, defaultValue: []),
+    List<dynamic> downloadedList = userBox.get(
+      _userBoxKeyDownloaded,
+      defaultValue: [],
     );
-    if (downloadedLanguages.contains(languageKey)) {
-      final boxName = getWordByWordBoxName(languageKey);
-      return await Hive.boxExists(boxName);
+    List<TranslationBookModel> downloadedBooks =
+        downloadedList
+            .map((e) => TranslationBookModel.fromMap(e as Map<String, dynamic>))
+            .where((b) => b.type == TranslationResourcesType.wordByWord)
+            .toList();
+
+    for (TranslationBookModel downloadedBook in downloadedBooks) {
+      if (downloadedBook.fullPath == book.fullPath &&
+          downloadedBook.language == book.language) {
+        final boxName = getWordByWordBoxName(book);
+        return await Hive.boxExists(boxName);
+      }
     }
     return false;
   }
 
-  static Future<void> setLanguageAsDownloaded(String languageKey) async {
+  static Future<void> setBookAsDownloaded(TranslationBookModel book) async {
+    // assert(book.type == TranslationResourcesType.wordByWord);
     final userBox = Hive.box("user");
-    List<String> downloadedLanguages = List<String>.from(
-      userBox.get(_userBoxKeyDownloaded, defaultValue: []),
-    );
-    if (!downloadedLanguages.contains(languageKey)) {
-      downloadedLanguages.add(languageKey);
-      await userBox.put(_userBoxKeyDownloaded, downloadedLanguages);
+    List<TranslationBookModel> downloadedList = getDownloadedWordByWordBooks();
+
+    if (!downloadedList.any((bMap) => bMap.fullPath == book.fullPath)) {
+      downloadedList.add(book);
+      await userBox.put(
+        _userBoxKeyDownloaded,
+        downloadedList.map((e) => e.toMap()).toList(),
+      );
       log(
-        "Language '$languageKey' marked as downloaded.",
-        name: "WbWFunction.setLanguageAsDownloaded",
+        "Book '${book.name}' marked as downloaded WbW.",
+        name: "WbWFunction.setBookAsDownloaded",
       );
     }
   }
 
-  static List<String> getDownloadedWordByWordLanguages() {
+  static List<TranslationBookModel> getDownloadedWordByWordBooks() {
     final userBox = Hive.box("user");
-    return List<String>.from(
-      userBox.get(_userBoxKeyDownloaded, defaultValue: []),
+    List<dynamic> downloadedList = userBox.get(
+      _userBoxKeyDownloaded,
+      defaultValue: [],
     );
+    return downloadedList
+        .map((e) => TranslationBookModel.fromMap(e as Map<String, dynamic>))
+        .where((b) => b.type == TranslationResourcesType.wordByWord)
+        .toList();
   }
 
-  static Map<String, dynamic>? getLanguageInfo(String languageKey) {
-    if (wordByWordTranslation.containsKey(languageKey)) {
-      // wordByWordTranslation stores a list with one map, so take the first element
-      return wordByWordTranslation[languageKey]!.first;
-    }
-    return null;
-  }
+  // getLanguageInfo might be deprecated if all info now comes from TranslationBookModel
+  // static Map<String, dynamic>? getLanguageInfo(String languageKey) { ... }
 
-  static Future<void> removeLanguageFromDownloaded(String languageKey) async {
-    final userBox = Hive.box("user");
-    List<String> downloadedLanguages = List<String>.from(
-      userBox.get(_userBoxKeyDownloaded, defaultValue: []),
+  static Future<void> removeBookFromDownloaded(
+    TranslationBookModel bookToRemove,
+  ) async {
+    // assert(bookToRemove.type == TranslationResourcesType.wordByWord);
+
+    List<TranslationBookModel> downloadedMapList =
+        getDownloadedWordByWordBooks();
+
+    downloadedMapList.removeWhere(
+      (bMap) => bMap.fullPath == bookToRemove.fullPath,
     );
-    if (downloadedLanguages.contains(languageKey)) {
-      downloadedLanguages.remove(languageKey);
-      await userBox.put(_userBoxKeyDownloaded, downloadedLanguages);
-      log(
-        "Language '$languageKey' removed from downloaded list.",
-        name: "WbWFunction.removeLanguageFromDownloaded",
-      );
-    }
 
-    final boxName = getWordByWordBoxName(languageKey);
+    await Hive.box("user").put(_userBoxKeyDownloaded, downloadedMapList);
+
+    final boxName = getWordByWordBoxName(bookToRemove);
+
     if (await Hive.boxExists(boxName)) {
       if (openedWordByWordBox?.name == boxName) {
         await close();
@@ -125,94 +155,110 @@ class WordByWordFunction {
       await Hive.deleteBoxFromDisk(boxName);
       log(
         "Deleted WbW box: $boxName",
-        name: "WbWFunction.removeLanguageFromDownloaded",
+        name: "WbWFunction.removeBookFromDownloaded",
       );
     }
 
-    // If the removed language was selected, clear the selection
-    if (getSelectedWordByWordLanguage() == languageKey) {
-      await removeSelectedWordByWordLanguage();
+    final selectedBook = getSelectedWordByWordBook();
+    if (selectedBook != null &&
+        selectedBook.fullPath == bookToRemove.fullPath &&
+        selectedBook.language == bookToRemove.language) {
+      await removeSelectedWordByWordBook();
     }
   }
 
-  static Future<void> setSelectedWordByWordLanguage(String languageKey) async {
+  static Future<void> setSelectedWordByWordBook(
+    TranslationBookModel book,
+  ) async {
+    if (book.type != TranslationResourcesType.wordByWord) {
+      log(
+        "Cannot select non-wbw book '${book.name}' as WbW.",
+        name: "WbWFunction.setSelectedWordByWordBook",
+      );
+      return;
+    }
     final userBox = Hive.box("user");
-    await userBox.put(_userBoxKeySelected, languageKey);
+    await userBox.put(_userBoxKeySelected, book.toMap());
     log(
-      "Language '$languageKey' set as selected WbW.",
-      name: "WbWFunction.setSelectedWordByWordLanguage",
+      "Book '${book.name}' set as selected WbW.",
+      name: "WbWFunction.setSelectedWordByWordBook",
     );
-    await init(
-      languageKey: languageKey,
-    ); // Re-initialize with the new selection
+    await init(book: book);
   }
 
-  static String? getSelectedWordByWordLanguage() {
+  static TranslationBookModel? getSelectedWordByWordBook() {
     final userBox = Hive.box("user");
-    return userBox.get(_userBoxKeySelected);
+    final Map<String, dynamic>? bookMap =
+        userBox.get(_userBoxKeySelected)?.cast<String, dynamic>();
+    if (bookMap != null) {
+      final book = TranslationBookModel.fromMap(bookMap);
+      // Ensure it is indeed a wordByWord type
+      if (book.type == TranslationResourcesType.wordByWord) return book;
+      // If not, it's an invalid selection, log and return null (or clear it)
+      log(
+        "Selected WbW book is not of type wordByWord. Invalid selection.",
+        name: "WbWFunction.getSelectedWordByWordBook",
+      );
+      // userBox.delete(_userBoxKeySelected); // Optionally clear invalid selection
+      return null;
+    }
+    return null;
   }
 
-  static Future<void> removeSelectedWordByWordLanguage() async {
+  static Future<void> removeSelectedWordByWordBook() async {
     final userBox = Hive.box("user");
     await userBox.delete(_userBoxKeySelected);
     log(
-      "Selected WbW language removed.",
-      name: "WbWFunction.removeSelectedWordByWordLanguage",
+      "Selected WbW book removed.",
+      name: "WbWFunction.removeSelectedWordByWordBook",
     );
-    await close(); // Close any opened box
+    await close();
   }
 
   static Future<bool> downloadResource({
     required BuildContext context,
-    required String languageKey, // e.g., "english", "hindi"
+    required TranslationBookModel book, // Now takes the full model
     bool isSetupProcess = false,
   }) async {
-    final cubit = context.read<DownloadProgressCubitCubit>();
-
-    if (await isLanguageDownloaded(languageKey)) {
+    if (book.type != TranslationResourcesType.wordByWord) {
       log(
-        "WbW for '$languageKey' is already downloaded.",
+        "Download requested for non-WbW book: ${book.name}",
         name: "WbWFunction.downloadResource",
       );
-      if (isSetupProcess && getSelectedWordByWordLanguage() != languageKey) {
-        await setSelectedWordByWordLanguage(languageKey);
-      } else if (getSelectedWordByWordLanguage() == languageKey &&
+      // Optionally notify cubit of an error here
+      return false;
+    }
+
+    final cubit = context.read<ResourcesProgressCubitCubit>();
+
+    if (await isBookDownloaded(book)) {
+      log(
+        "WbW book '${book.name}' is already downloaded.",
+        name: "WbWFunction.downloadResource",
+      );
+      final currentSelection = getSelectedWordByWordBook();
+      if (isSetupProcess &&
+          (currentSelection == null ||
+              currentSelection.fullPath != book.fullPath)) {
+        await setSelectedWordByWordBook(book);
+      } else if (currentSelection?.fullPath == book.fullPath &&
+          currentSelection?.language == book.language &&
           openedWordByWordBox == null) {
-        // If selected but box is not open (e.g. after app restart)
-        await init(languageKey: languageKey);
+        await init(book: book);
       }
       return true;
     }
 
-    final languageData = wordByWordTranslation[languageKey];
-    if (languageData == null || languageData.isEmpty) {
-      log(
-        "No WbW data found for language key '$languageKey' in data source.",
-        name: "WbWFunction.downloadResource",
-      );
-      cubit.updateProgress(null, "Error: WbW for $languageKey not found");
-      return false;
-    }
-    // Assuming one entry per language key
-    final Map<String, dynamic> wbwInfo = languageData.first;
-    final String? filePath = wbwInfo["full_path"] as String?;
+    // The 'filePath' now comes from book.fullPath
+    // The 'wbwInfo' map ('name', etc.) comes from book.name, book.language etc.
 
-    if (filePath == null) {
-      log(
-        "File path for '$languageKey' is null.",
-        name: "WbWFunction.downloadResource",
-      );
-      cubit.updateProgress(null, "Error: File path for $languageKey missing");
-      return false;
-    }
-
-    final boxName = getWordByWordBoxName(languageKey);
+    final boxName = getWordByWordBoxName(book);
     log(
-      "Starting download for WbW '$languageKey', Box: $boxName, Path: $filePath",
+      "Starting download for WbW '${book.name}', Box: $boxName, Path: ${book.fullPath}",
       name: "WbWFunction.downloadResource",
     );
 
-    Box? newBox; // Use a temporary variable for the new box
+    Box? newBox;
     try {
       newBox = await Hive.openBox(boxName);
     } catch (e) {
@@ -228,31 +274,32 @@ class WordByWordFunction {
           "Failed to open Hive box '$boxName' even after delete: $e2",
           name: "WbWFunction.downloadResource",
         );
-        cubit.updateProgress(null, "Error preparing WbW storage");
+        cubit.updateProgress(
+          null,
+          "Error preparing WbW storage for ${book.name}",
+        );
         return false;
       }
     }
 
     try {
-      final String downloadUrl = ApisUrls.base + filePath;
-      cubit.updateProgress(0.0, "Downloading WbW: ${wbwInfo['name']}");
+      final String downloadUrl = ApisUrls.base + book.fullPath;
+      cubit.updateProgress(0.0, "Downloading WbW: ${book.name}");
 
       dio.Response response = await dio.Dio().get(
         downloadUrl,
         onReceiveProgress: (received, total) {
           if (total != -1) {
             double progress = received / total;
-            // Cap progress at 0.5 for download part, remaining for processing
             cubit.updateProgress(
               progress * 0.5,
-              "Downloading WbW: ${wbwInfo['name']}",
+              "Downloading WbW: ${book.name}",
             );
           }
         },
       );
 
-      cubit.updateProgress(0.5, "Processing WbW: ${wbwInfo['name']}");
-      // Assuming the response.data is the bzip2 compressed string
+      cubit.updateProgress(0.5, "Processing WbW: ${book.name}");
       Map<String, dynamic> jsonData = await compute(
         (data) =>
             jsonDecode(decodeBZip2String(data as String))
@@ -264,47 +311,42 @@ class WordByWordFunction {
       int processedEntries = 0;
 
       for (var entry in jsonData.entries) {
-        await newBox.put(entry.key, entry.value); // ayahKey: List<WordData>
+        await newBox.put(entry.key, entry.value);
         processedEntries++;
         if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          // Progress from 0.5 to 1.0 for processing
           cubit.updateProgress(
             0.5 + (processedEntries / totalEntries * 0.5),
-            "Processing WbW data",
+            "Processing WbW data for ${book.name}",
           );
         }
       }
 
       await newBox.put("meta_data", {
-        ...wbwInfo, // Store all info from word_by_word_translation.dart
+        ...book.toMap(), // Store all info from the TranslationBookModel
         "download_date": DateTime.now().toIso8601String(),
-        "language_key": languageKey,
       });
 
-      await setLanguageAsDownloaded(languageKey);
+      await setBookAsDownloaded(book);
+      final currentSelection = getSelectedWordByWordBook();
       if (isSetupProcess) {
-        await setSelectedWordByWordLanguage(languageKey);
-      } else if (getSelectedWordByWordLanguage() == languageKey) {
-        // If it was already selected, re-init to open the newly downloaded box
-        await init(languageKey: languageKey);
+        await setSelectedWordByWordBook(book);
+      } else if (currentSelection?.fullPath == book.fullPath &&
+          currentSelection?.language == book.language) {
+        await init(book: book);
       }
 
       log(
-        "WbW for '$languageKey' downloaded and processed successfully.",
+        "WbW for '${book.name}' downloaded and processed successfully.",
         name: "WbWFunction.downloadResource",
       );
-      cubit.updateProgress(1.0, "WbW: ${wbwInfo['name']} Downloaded");
+      cubit.updateProgress(1.0, "WbW: ${book.name} Downloaded");
       return true;
     } catch (e, s) {
       log(
-        "Error downloading/processing WbW for '$languageKey': $e\n$s",
+        "Error downloading/processing WbW for '${book.name}': $e\n$s",
         name: "WbWFunction.downloadResource",
       );
-      cubit.updateProgress(
-        null,
-        "Error downloading WbW for ${wbwInfo['name']}",
-      );
-      // Clean up partially downloaded box
+      cubit.updateProgress(null, "Error downloading WbW for ${book.name}");
       if (newBox.isOpen) {
         await newBox.close();
       }
@@ -316,13 +358,11 @@ class WordByWordFunction {
   static List? getAyahWordByWordData(String ayahKey) {
     if (openedWordByWordBox != null && openedWordByWordBox!.isOpen) {
       if (openedWordByWordBox!.containsKey(ayahKey)) {
-        // Data is typically stored as Map<String, List<Map<String, dynamic>>>
-        // but Hive might return it as Map<dynamic, dynamic>
         var data = openedWordByWordBox!.get(ayahKey);
-        return data;
+        return data as List?; // Assuming it's stored as a List
       } else {
         log(
-          "No WbW data found for ayah '$ayahKey' in the current box.",
+          "No WbW data found for ayah '$ayahKey' in the current box: ${openedWordByWordBox!.name}",
           name: "WbWFunction.getAyahWordByWordData",
         );
         return null;
@@ -331,21 +371,6 @@ class WordByWordFunction {
     log(
       "WbW box is not open or available.",
       name: "WbWFunction.getAyahWordByWordData",
-    );
-    return null;
-  }
-
-  static Map<String, dynamic>? getMetaInfo() {
-    if (openedWordByWordBox != null && openedWordByWordBox!.isOpen) {
-      var meta = openedWordByWordBox!.get("meta_data");
-      log(meta.toString(), name: "wbw-meta");
-      if (meta is Map) {
-        return Map<String, dynamic>.from(meta);
-      }
-    }
-    log(
-      "WbW box not open or meta_data not found.",
-      name: "WbWFunction.getMetaInfo",
     );
     return null;
   }

@@ -1,4 +1,4 @@
-Map<String, List<Map<String, dynamic>>> simpleTranslation = {
+Map<String, List<Map<String, dynamic>>> translationResources = {
   "bulgarian": [
     {
       "language": "Bulgarian",
@@ -55,7 +55,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Macedonian_scholars.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Macedonian/Macedonian_scholars.translation-with-footnote-tags.json.txt",
     },
@@ -165,7 +165,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Fadel_Soliman,_Bridges’_translation.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.translation-with-footnote-tags.json.txt",
     },
@@ -211,7 +211,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.translation-with-footnote-tags.json.txt",
     },
@@ -230,7 +230,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Saheeh_International.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/English/Saheeh_International.translation-with-footnote-tags.json.txt",
     },
@@ -340,7 +340,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Tafheem-ul-Quran_-_Abul_Ala_Maududi.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.translation-with-footnote-tags.json.txt",
     },
@@ -367,7 +367,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "M. A. S. Abdel Haleem",
       "file_name": "Abdul_Haleem.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/English/Abdul_Haleem.translation-with-footnote-tags.json.txt",
     },
@@ -397,7 +397,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Noor_International_Center.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Spanish/Noor_International_Center.translation-with-footnote-tags.json.txt",
     },
@@ -416,7 +416,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
     },
@@ -495,7 +495,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Abdullah_Hassan_Yacoub.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.translation-with-footnote-tags.json.txt",
     },
@@ -507,7 +507,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Hamza_Roberto_Piccardo.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.translation-with-footnote-tags.json.txt",
     },
@@ -612,7 +612,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Maulana_Azizul_Haque_al-Umari.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.translation-with-footnote-tags.json.txt",
     },
@@ -717,7 +717,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Shaykh_Abu_Rahimah_Mikael_Aykyuni.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.translation-with-footnote-tags.json.txt",
     },
@@ -738,7 +738,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Lithuanian_Translation.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Lithuanian/Lithuanian_Translation.translation-with-footnote-tags.json.txt",
     },
@@ -848,7 +848,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/French/Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
     },
@@ -857,7 +857,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Rashid Maash",
       "file_name": "Rashid_Maash.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/French/Rashid_Maash.translation-with-footnote-tags.json.txt",
     },
@@ -876,7 +876,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Muhammad_Hamidullah.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/French/Muhammad_Hamidullah.translation-with-footnote-tags.json.txt",
     },
@@ -928,7 +928,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Shaykh_Rafeequl_Islam_Habibur-Rahman.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.translation-with-footnote-tags.json.txt",
     },
@@ -939,7 +939,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Магомед Магомедов",
       "file_name": "Magomed_Magomedov.translation-with-footnote-tags.json.txt",
       "score": 96.7,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Chechen/Magomed_Magomedov.translation-with-footnote-tags.json.txt",
     },
@@ -998,7 +998,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Khawaja_Mirof_&_Khawaja_Mir.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.translation-with-footnote-tags.json.txt",
     },
@@ -1010,7 +1010,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "The_Rwanda_Muslims_Association_team.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.translation-with-footnote-tags.json.txt",
     },
@@ -1050,7 +1050,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.translation-with-footnote-tags.json.txt",
     },
@@ -1069,7 +1069,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Maulana_Muhammad_Junagarhi.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.translation-with-footnote-tags.json.txt",
     },
@@ -1115,7 +1115,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).translation-with-footnote-tags.json.txt",
     },
@@ -1174,7 +1174,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Islamic_and_Cultural_League.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.translation-with-footnote-tags.json.txt",
     },
@@ -1225,7 +1225,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Abubakar_Mahmood_Jummi.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.translation-with-footnote-tags.json.txt",
     },
@@ -1274,7 +1274,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Trung tâm Ruwwad",
       "file_name": "Ruwwad_Center.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Vietnamese/Ruwwad_Center.translation-with-footnote-tags.json.txt",
     },
@@ -1363,7 +1363,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Abdul Hamid Silika",
       "file_name": "Abdul_Hamid_Silika.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Yau/Abdul_Hamid_Silika.translation-with-footnote-tags.json.txt",
     },
@@ -1493,7 +1493,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Kannada_Translation.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Kannada/Kannada_Translation.translation-with-footnote-tags.json.txt",
     },
@@ -1502,7 +1502,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "ಶೇಖ್ ಈಸಾ ಗಾರ್ಸಿಯಾ [?]",
       "file_name": "Sheikh_Isa_Garcia.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Kannada/Sheikh_Isa_Garcia.translation-with-footnote-tags.json.txt",
     },
@@ -1556,7 +1556,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.translation-with-footnote-tags.json.txt",
     },
@@ -1593,7 +1593,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Muhammad_Sodik_Muhammad_Yusuf.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.translation-with-footnote-tags.json.txt",
     },
@@ -1602,7 +1602,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Alauddin Mansur",
       "file_name": "Alauddin_Mansour.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Alauddin_Mansour.translation-with-footnote-tags.json.txt",
     },
@@ -1657,7 +1657,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "King_Fahad_Quran_Complex.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.translation-with-footnote-tags.json.txt",
     },
@@ -1666,7 +1666,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Perusahaan Sabiq",
       "file_name": "The_Sabiq_company.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Indonesian/The_Sabiq_company.translation-with-footnote-tags.json.txt",
     },
@@ -1685,7 +1685,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "file_name":
           "Indonesian_Islamic_affairs_ministry.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.translation-with-footnote-tags.json.txt",
     },
@@ -1752,7 +1752,7 @@ Map<String, List<Map<String, dynamic>>> simpleTranslation = {
       "name": "Hasan Efendi Nahi",
       "file_name": "Hasan_Efendi_Nahi.translation-with-footnote-tags.json.txt",
       "score": 100.0,
-      "type": "translation-with-footnote-tags",
+      "type": "withFootnoteTags",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.translation-with-footnote-tags.json.txt",
     },
