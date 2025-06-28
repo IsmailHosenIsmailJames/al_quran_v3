@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
@@ -8,7 +9,6 @@ import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 
@@ -21,9 +21,8 @@ class RukuListView extends StatelessWidget {
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType = QuranScriptType.values.firstWhere(
-      (element) => Hive.box("user").get("selected_script") == element.name,
-    );
+    QuranScriptType quranScriptType =
+        context.read<QuranViewCubit>().state.quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(

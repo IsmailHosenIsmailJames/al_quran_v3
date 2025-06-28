@@ -424,6 +424,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       .toString()][ayahNumber.toString()];
                             }
                         }
+                        TextStyle scriptTextStyle = TextStyle(
+                          fontSize:
+                              context.read<QuranViewCubit>().state.fontSize,
+                          height:
+                              context.read<QuranViewCubit>().state.lineHeight,
+                        );
+
+                        Brightness brightness = Theme.of(context).brightness;
+                        Color primary = themeState.primary;
 
                         var imageData = await screenshotController
                             .captureFromLongWidget(
@@ -431,7 +440,6 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 context,
                                 Material(
                                   child: getAyahCardForShareAsImage(
-                                    context,
                                     Hive.box("user").get(
                                       "show_mac_os_window_like_icon",
                                       defaultValue: true,
@@ -447,6 +455,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     ),
                                     translation,
                                     footNote,
+                                    scriptTextStyle,
+                                    brightness,
+                                    primary,
                                   ),
                                 ),
                               ),
