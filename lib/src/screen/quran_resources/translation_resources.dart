@@ -1,8 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/simple_translation.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_code.dart";
+import "package:al_quran_v3/src/resources/quran_resources/simple_translation.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:dartx/dartx.dart";
@@ -46,6 +46,7 @@ class _TranslationResourcesState extends State<TranslationResources> {
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 4.0),
+            elevation: 0,
             child: ExpansionTile(
               key: PageStorageKey(languageKey),
               title: Text(
