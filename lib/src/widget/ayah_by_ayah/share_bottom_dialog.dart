@@ -166,13 +166,18 @@ void showShareBottomDialog(
             child: TextButton.icon(
               style: textButtonStyle,
               onPressed: () async {
+                TextStyle scriptTextStyle = TextStyle(
+                  fontSize: context.read<QuranViewCubit>().state.fontSize,
+                  height: context.read<QuranViewCubit>().state.lineHeight,
+                );
+                Brightness brightness = Theme.of(context).brightness;
+                Color primary = themeState.primary;
                 final imageBinary = await screenshotController
                     .captureFromLongWidget(
                       InheritedTheme.captureAll(
                         context,
                         Material(
                           child: getAyahCardForShareAsImage(
-                            context,
                             Hive.box("user").get(
                               "show_mac_os_window_like_icon",
                               defaultValue: true,
@@ -185,6 +190,9 @@ void showShareBottomDialog(
                             ),
                             translation,
                             footNote,
+                            scriptTextStyle,
+                            brightness,
+                            primary,
                           ),
                         ),
                       ),

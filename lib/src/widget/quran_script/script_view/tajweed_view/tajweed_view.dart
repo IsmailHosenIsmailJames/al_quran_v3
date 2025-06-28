@@ -3,7 +3,6 @@ import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -19,7 +18,6 @@ class TajweedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
     List words =
         tajweedScript[scriptInfo.surahNumber.toString()][scriptInfo.ayahNumber
             .toString()];
@@ -28,11 +26,9 @@ class TajweedView extends StatelessWidget {
         words = words.sublist(0, scriptInfo.limitWord);
       }
     }
-    TextStyle quranStyle = TextStyle(
-      fontSize: scriptInfo.textStyle?.fontSize ?? 24,
-      height: context.read<QuranViewCubit>().state.lineHeight,
-      fontFamily: "QPC_Hafs",
-    );
+    TextStyle quranStyle =
+        scriptInfo.textStyle?.copyWith(fontFamily: "QPC_Hafs") ??
+        const TextStyle();
 
     String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
 
@@ -72,15 +68,7 @@ class TajweedView extends StatelessWidget {
             return parseTajweedWord(
               wordIndex: index,
               words: List<String>.from(words),
-              baseStyle: quranStyle.copyWith(
-                backgroundColor:
-                    scriptInfo.showWordHighlights == false
-                        ? null
-                        : highlightingWordIndex ==
-                            "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}"
-                        ? themeState.primaryShade200
-                        : null,
-              ),
+              baseStyle: quranStyle,
               context: context,
               surahNumber: scriptInfo.surahNumber,
               ayahNumber: scriptInfo.ayahNumber,
@@ -90,6 +78,8 @@ class TajweedView extends StatelessWidget {
         ),
       );
     }
+
+    ThemeState themeState = context.read<ThemeCubit>().state;
 
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       buildWhen: (previous, current) {
