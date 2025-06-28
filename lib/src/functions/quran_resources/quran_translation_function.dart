@@ -177,7 +177,10 @@ class QuranTranslationFunction {
     bool isSetupProcess = false,
   }) async {
     final cubit = context.read<ResourcesProgressCubitCubit>();
-
+    cubit.updateProgress(
+      null,
+      "Downloading Translation: ${translationBook.name}",
+    );
     if (await isAlreadyDownloaded(translationBook)) {
       log(
         "Translation '${translationBook.name}' (path: ${translationBook.fullPath}) for language '${translationBook.language}' is already downloaded.",

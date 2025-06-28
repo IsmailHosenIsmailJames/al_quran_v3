@@ -3,7 +3,11 @@ import "package:al_quran_v3/src/functions/quran_resources/quran_translation_func
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
+import "package:al_quran_v3/src/screen/search/functions/search_function.dart";
+import "package:al_quran_v3/src/screen/search/models/search_catagory.dart";
 import "package:al_quran_v3/src/screen/search/models/search_options.dart";
+import "package:al_quran_v3/src/screen/search/search_result_view.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -25,6 +29,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   late ThemeState themeState = context.read<ThemeCubit>().state;
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +48,18 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (widget.popup)
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(FluentIcons.search_24_filled, size: 30),
                   Text(
                     "Quran Search",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
@@ -77,7 +83,12 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-            const Gap(10),
+            const Gap(20),
+            const Text(
+              "Search In",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+            const Gap(5),
             searchFieldSelector(),
             const Gap(10),
 
@@ -170,13 +181,34 @@ class _SearchPageState extends State<SearchPage> {
                 }
               },
             ),
+            const Gap(10),
+            const Text(
+              "Search By",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+            const Gap(5),
+            getSearchTypeSelectorWidget(),
 
             const Gap(10),
             SizedBox(
               width: MediaQuery.of(context).size.width,
 
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  dynamic searchRes = SearchFunction.search(
+                    textEditingController.text.trim(),
+                    context.read<SearchCubit>().state.searchFields,
+                    context.read<SearchCubit>().state.searchCatagory,
+                    context.read<QuranViewCubit>().state.quranScriptType,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => SearchResultView(searchRes: searchRes),
+                    ),
+                  );
+                },
                 icon: const Icon(FluentIcons.search_24_filled),
                 label: const Text("Search Now"),
               ),
@@ -187,12 +219,49 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  Widget getSearchTypeSelectorWidget() {
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return Wrap(
+          spacing: 5,
+          runSpacing: 5,
+          children: List.generate(SearchCatagory.values.length, (index) {
+            SearchCatagory currentSearchField = SearchCatagory.values.elementAt(
+              index,
+            );
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Checkbox(
+                  value: currentSearchField == state.searchCatagory,
+                  onChanged: (value) {
+                    context.read<SearchCubit>().changeSearchCatagory(
+                      currentSearchField,
+                    );
+                  },
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<SearchCubit>().changeSearchCatagory(
+                      currentSearchField,
+                    );
+                  },
+                  child: Text(currentSearchField.name.capitalize),
+                ),
+              ],
+            );
+          }),
+        );
+      },
+    );
+  }
+
   Widget searchFieldSelector() {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         return Wrap(
-          spacing: 10,
-          runSpacing: 10,
+          spacing: 5,
+          runSpacing: 5,
           children: List.generate(SearchFields.values.length, (index) {
             SearchFields currentSearchField = SearchFields.values.elementAt(
               index,
