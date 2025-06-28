@@ -11,7 +11,7 @@ class ResourcesProgressCubitCubit extends Cubit<ResourcesProgressCubitState> {
   }
 
   void success() {
-    emit(state.copyWith(isSuccess: true));
+    emit(ResourcesProgressCubitState());
   }
 
   void failure(String errorMessage) {

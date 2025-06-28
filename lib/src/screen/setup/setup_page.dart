@@ -440,6 +440,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
       final userBox = Hive.box("user");
       await userBox.put("app_language", appLanguage);
 
+      context.read<ResourcesProgressCubitCubit>().onProcess();
+
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -487,9 +489,24 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     } else if (state.isSuccess == true) {
                       return const Text("Success");
                     } else if (state.errorMessage != null) {
-                      return Text(
-                        "Error: ${state.errorMessage}",
-                        style: const TextStyle(fontSize: 16, color: Colors.red),
+                      return Column(
+                        children: [
+                          Text(
+                            "${state.errorMessage}",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                            ),
+                          ),
+                          const Gap(10),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              downloadResources(processState);
+                            },
+                            child: const Text("Retry"),
+                          ),
+                        ],
                       );
                     }
                     return LinearProgressIndicator(
@@ -537,11 +554,14 @@ class _AppSetupPageState extends State<AppSetupPage> {
           MaterialPageRoute(builder: (context) => const HomePage()),
           (route) => false,
         );
+
+        // clear process state
+        context.read<ResourcesProgressCubitCubit>().success();
       } else {
         // error and show 'Something went wrong' in cubit
         log([success1, success2, success3, success4].toString());
         context.read<ResourcesProgressCubitCubit>().failure(
-          "Unable to download resources...",
+          "Unable to download resources...\nSomething went wrong",
         );
       }
     }

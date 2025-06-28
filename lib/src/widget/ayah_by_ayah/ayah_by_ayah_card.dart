@@ -220,7 +220,12 @@ Align getWordByWordWidget(
                                 },
                               ),
                               const Gap(5),
-                              Text(wordByWord[index]),
+                              Text(
+                                wordByWord[index],
+                                style: TextStyle(
+                                  fontSize: quranViewState.translationFontSize,
+                                ),
+                              ),
                             ],
                           ),
                         );

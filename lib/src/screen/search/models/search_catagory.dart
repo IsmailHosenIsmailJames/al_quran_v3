@@ -1,4 +1,4 @@
-enum SearchCatagory { normal, exact, partials }
+enum SearchCatagory { normal, exact, partial }
 
 extension SearchCatagoryExtension on SearchCatagory {
   static SearchCatagory fromString(String value) {
@@ -8,7 +8,7 @@ extension SearchCatagoryExtension on SearchCatagory {
       case "exact":
         return SearchCatagory.exact;
       case "partials":
-        return SearchCatagory.partials;
+        return SearchCatagory.partial;
       default:
         throw ArgumentError("Invalid search field: $value");
     }

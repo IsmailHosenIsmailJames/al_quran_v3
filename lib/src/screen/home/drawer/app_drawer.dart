@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
+import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
@@ -263,13 +264,20 @@ class _AppDrawerState extends State<AppDrawer> {
                     const Gap(5),
                     ListTile(
                       minTileHeight: 40,
-                      onTap: () async {},
+                      onTap: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DonateUsView(),
+                          ),
+                        );
+                      },
                       leading: Icon(
                         Icons.favorite_rounded,
                         color: themeState.primary,
                       ),
                       title: const Text(
-                        "Donation Us",
+                        "Donate Us",
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
@@ -438,6 +446,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
+                    const Gap(50),
                   ],
                 ),
               ),
