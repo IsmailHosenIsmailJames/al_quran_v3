@@ -63,7 +63,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 ],
                               ),
                               child: Image.asset(
-                                "assets/img/Quran_Logo_v3.png",
+                                "assets/img/logo.png",
                                 color: themeState.primary,
                               ),
                             ),

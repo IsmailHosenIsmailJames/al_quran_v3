@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
-            title: "Al Quran",
+            title: "Al Quran Audio",
             theme: ThemeData(
               brightness: Brightness.light,
               fontFamily: "NotoSans",
