@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
@@ -247,7 +246,6 @@ class AudioPlayerManager {
   static Future<void> playWord(String wordKey) async {
     if (isWordPlaying) return;
     isWordPlaying = true;
-    final context = navigatorKey.currentContext!;
 
     AudioSource audioSource = LockCachingAudioSource(
       Uri.parse(
@@ -268,7 +266,6 @@ class AudioPlayerManager {
         await audioPlayer.dispose();
         audioPlayer = AudioPlayer();
         isWordPlaying = false;
-        context.read<WordPlayingStateCubit>().changeState(null);
         await stopListeningAudioPlayerState();
       }
     });

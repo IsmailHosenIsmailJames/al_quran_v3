@@ -10,10 +10,10 @@ import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/functions/basic_functions.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -21,12 +21,10 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
-import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
 
@@ -44,70 +42,65 @@ class AudioPage extends StatefulWidget {
 class _AudioPageState extends State<AudioPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, themeState) {
-        return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-          builder: (context, ayahKeyState) {
-            int currentIndex =
-                int.parse(ayahKeyState.current.split(":")[1]) - 1;
-            Map? translationMap = QuranTranslationFunction.getTranslation(
-              ayahKeyState.current,
-            );
-            String translation =
-                translationMap?["t"] ?? "Translation Not Found";
-            translation = translation.replaceAll(">", "> ");
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
-                    builder: (context, audioTabScreenState) {
-                      return getReciterWidget(
-                        context: context,
-                        audioTabScreenState: audioTabScreenState,
-                        ayahKeyState: ayahKeyState,
-                        currentIndex: currentIndex,
-                      );
-                    },
-                  ),
-                  const Gap(10),
-                  getSurahInfoAndController(ayahKeyState, context),
+    return Scaffold(
+      appBar: AppBar(title: const Text("Al Quran Audio"), centerTitle: true),
+      drawer: const AppDrawer(),
+      body: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+            builder: (context, ayahKeyState) {
+              int currentIndex =
+                  int.parse(ayahKeyState.current.split(":")[1]) - 1;
 
-                  const Gap(10),
-                  Expanded(
-                    child: getAyahAndTranslation(
-                      context,
-                      ayahKeyState,
-                      translation,
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
+                      builder: (context, audioTabScreenState) {
+                        return getReciterWidget(
+                          context: context,
+                          audioTabScreenState: audioTabScreenState,
+                          ayahKeyState: ayahKeyState,
+                          currentIndex: currentIndex,
+                        );
+                      },
                     ),
-                  ),
-                  const Gap(20),
-                  BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
-                    builder: (context, state) {
-                      return ProgressBar(
-                        progress: state.currentDuration ?? Duration.zero,
-                        buffered: state.bufferDuration ?? Duration.zero,
-                        total: state.totalDuration ?? Duration.zero,
-                        thumbCanPaintOutsideBar: false,
-                        barHeight: 6,
-                        timeLabelLocation: TimeLabelLocation.sides,
-                        onSeek: (duration) {
-                          AudioPlayerManager.audioPlayer.seek(duration);
-                        },
-                      );
-                    },
-                  ),
-                  const Gap(10),
-                  getAudioController(currentIndex, ayahKeyState, context),
-                  const Gap(10),
-                ],
-              ),
-            );
-          },
-        );
-      },
+                    const Gap(10),
+                    getSurahInfoAndController(ayahKeyState, context),
+
+                    const Gap(10),
+                    Expanded(
+                      child: getAyahAndTranslation(context, ayahKeyState),
+                    ),
+                    const Gap(20),
+                    BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
+                      builder: (context, state) {
+                        return ProgressBar(
+                          progress: state.currentDuration ?? Duration.zero,
+                          buffered: state.bufferDuration ?? Duration.zero,
+                          total: state.totalDuration ?? Duration.zero,
+                          thumbCanPaintOutsideBar: false,
+                          barHeight: 6,
+                          timeLabelLocation: TimeLabelLocation.sides,
+                          onSeek: (duration) {
+                            AudioPlayerManager.audioPlayer.seek(duration);
+                          },
+                        );
+                      },
+                    ),
+                    const Gap(10),
+                    getAudioController(currentIndex, ayahKeyState, context),
+                    const Gap(10),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -274,7 +267,6 @@ class _AudioPageState extends State<AudioPage> {
   Container getAyahAndTranslation(
     BuildContext context,
     AyahKeyManagement ayahKeyState,
-    String translation,
   ) {
     return Container(
       alignment: Alignment.center,
@@ -295,38 +287,13 @@ class _AudioPageState extends State<AudioPage> {
                   scriptInfo: ScriptInfo(
                     surahNumber: ayahKeyState.current.split(":")[0].toInt(),
                     ayahNumber: ayahKeyState.current.split(":")[1].toInt(),
-                    quranScriptType: state.quranScriptType,
-                    textStyle: TextStyle(
-                      fontSize: state.fontSize,
-                      height: state.lineHeight,
-                    ),
+                    textStyle: TextStyle(fontSize: state.fontSize),
                     textAlign: TextAlign.center,
                     skipWordTap: true,
                     showWordHighlights: false,
                   ),
                 );
               },
-            ),
-            const Gap(5),
-            const Divider(height: 5),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: BlocBuilder<QuranViewCubit, QuranViewState>(
-                builder: (context, state) {
-                  return Html(
-                    data: capitalizeFirstLatter(translation),
-                    style: {
-                      "*": Style(
-                        fontSize: FontSize(state.translationFontSize),
-                        margin: Margins.zero,
-                        padding: HtmlPaddings.zero,
-                        alignment: Alignment.center,
-                        textAlign: TextAlign.center,
-                      ),
-                    },
-                  );
-                },
-              ),
             ),
           ],
         ),
@@ -450,4 +417,8 @@ class _AudioPageState extends State<AudioPage> {
       ],
     );
   }
+}
+
+String getEndAyahKeyFromSurahNumber(int surah) {
+  return "$surah:${quranAyahCount[surah - 1]}";
 }

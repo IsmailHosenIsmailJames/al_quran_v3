@@ -6,7 +6,6 @@ Future<void> popupJumpToAyah({
   required BuildContext context,
   String? initAyahKey,
   required bool isAudioPlayer,
-  bool? selectMultipleAndShare,
   Function(String ayahKey)? onPlaySelected,
   final Function(String ayahKey)? onSelectAyah,
 }) async {
@@ -29,7 +28,6 @@ Future<void> popupJumpToAyah({
           initAyahKey: initAyahKey,
           isAudioPlayer: isAudioPlayer,
           onPlaySelected: onPlaySelected,
-          selectMultipleAndShare: selectMultipleAndShare,
           onSelectAyah: onSelectAyah,
         ),
       );

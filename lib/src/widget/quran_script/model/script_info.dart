@@ -3,7 +3,6 @@ import "package:flutter/cupertino.dart";
 class ScriptInfo {
   int surahNumber;
   int ayahNumber;
-  QuranScriptType quranScriptType;
   TextStyle? textStyle;
   TextAlign? textAlign;
   int? limitWord;
@@ -15,7 +14,6 @@ class ScriptInfo {
   ScriptInfo({
     required this.surahNumber,
     required this.ayahNumber,
-    required this.quranScriptType,
     this.textStyle,
     this.textAlign,
     this.limitWord,
@@ -25,5 +23,3 @@ class ScriptInfo {
     this.forImage,
   });
 }
-
-enum QuranScriptType { tajweed, uthmani, indopak }

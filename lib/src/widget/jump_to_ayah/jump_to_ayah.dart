@@ -1,31 +1,15 @@
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
-import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_spinkit/flutter_spinkit.dart";
-import "package:fluttertoast/fluttertoast.dart";
-import "package:gap/gap.dart";
-import "package:hive/hive.dart";
-import "package:share_plus/share_plus.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
-import "../ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
-import "../ayah_by_ayah/share_bottom_dialog.dart";
-import "../quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 
 class JumpToAyahView extends StatefulWidget {
   final String? initAyahKey;
   final bool isAudioPlayer;
-  final bool? selectMultipleAndShare;
   final Function(String ayahKey)? onPlaySelected;
   final Function(String ayahKey)? onSelectAyah;
 
@@ -34,7 +18,6 @@ class JumpToAyahView extends StatefulWidget {
     this.initAyahKey,
     required this.isAudioPlayer,
     this.onPlaySelected,
-    this.selectMultipleAndShare,
     this.onSelectAyah,
   });
 
@@ -79,15 +62,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             height: 50,
             child: Stack(
               children: [
-                Center(
+                const Center(
                   child: Text(
-                    widget.selectMultipleAndShare == true
-                        ? "Share Select Ayahs"
-                        : "Jump To Ayah",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    "Jump To Ayah",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
 
@@ -104,74 +82,12 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             ),
           ),
 
-          if (widget.selectMultipleAndShare == true) const Gap(8),
-          if (widget.selectMultipleAndShare == true)
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsetsGeometry.only(left: 10),
-              child: Text("Selected: ${selectedAyahKeys.length}"),
-            ),
-          if (widget.selectMultipleAndShare == true) const Gap(5),
-
-          if (widget.selectMultipleAndShare == true)
-            Stack(
-              children: [
-                Container(
-                  height: 40,
-                  margin: const EdgeInsets.only(left: 10, right: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    color: themeState.primaryShade100,
-                  ),
-
-                  child:
-                      selectedAyahKeys.isEmpty
-                          ? Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: const Text("Selection Empty"),
-                          )
-                          : ListView.builder(
-                            padding: const EdgeInsets.only(left: 10, right: 30),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: selectedAyahKeys.length,
-                            itemBuilder: (context, index) {
-                              return Center(
-                                child: Text(
-                                  "${selectedAyahKeys[index]}${selectedAyahKeys.length == index + 1 ? "" : ", "}",
-                                ),
-                              );
-                            },
-                          ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SizedBox(
-                    height: 40,
-                    child: IconButton(
-                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        selectedAyahKeys.clear();
-                        setState(() {});
-                      },
-                      icon: Icon(Icons.close, color: themeState.primary),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-          if (widget.selectMultipleAndShare == true) const Divider(),
-
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width:
-                      MediaQuery.of(context).size.width *
-                      (widget.selectMultipleAndShare == true ? 0.6 : 0.65),
+                  width: MediaQuery.of(context).size.width * 0.65,
                   child: Column(
                     children: [
                       Container(
@@ -255,9 +171,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 ),
                 const VerticalDivider(width: 1),
                 SizedBox(
-                  width:
-                      MediaQuery.of(context).size.width *
-                      (widget.selectMultipleAndShare == true ? 0.3 : 0.2),
+                  width: MediaQuery.of(context).size.width * 0.2,
                   child: Scrollbar(
                     controller: ayahScrollController,
                     interactive: true,
@@ -288,9 +202,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 ),
                               ),
                               backgroundColor:
-                                  (index == (ayahNumber ?? 0) - 1) &&
-                                          (widget.selectMultipleAndShare !=
-                                              true)
+                                  (index == (ayahNumber ?? 0) - 1)
                                       ? themeState.primaryShade300
                                       : Colors.transparent,
                               foregroundColor:
@@ -300,40 +212,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       : Colors.black,
                             ),
                             onPressed: () {
-                              if (widget.selectMultipleAndShare == true) {
-                                if (selectedAyahKeys.contains(
-                                  "$surahNumber:${index + 1}",
-                                )) {
-                                  selectedAyahKeys.remove(
-                                    "$surahNumber:${index + 1}",
-                                  );
-                                } else {
-                                  selectedAyahKeys.add(
-                                    "$surahNumber:${index + 1}",
-                                  );
-                                }
-                              } else {
-                                ayahNumber = index + 1;
-                              }
+                              ayahNumber = index + 1;
                               setState(() {});
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                if (widget.selectMultipleAndShare == true)
-                                  selectedAyahKeys.contains(
-                                        "$surahNumber:${index + 1}",
-                                      )
-                                      ? const Icon(Icons.check_box_rounded)
-                                      : const Icon(
-                                        Icons.check_box_outline_blank_rounded,
-                                      ),
-                                if (widget.selectMultipleAndShare == true)
-                                  const Gap(20),
-                                Text((index + 1).toString()),
-                              ],
-                            ),
+                            child: Text((index + 1).toString()),
                           ),
                         );
                       },
@@ -343,221 +225,6 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ],
             ),
           ),
-          if (widget.selectMultipleAndShare == true)
-            Row(
-              children: [
-                const Gap(5),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () async {
-                      List<XFile> files = [];
-                      List<String> fileNames = [];
-                      showDialog(
-                        context: context,
-                        builder:
-                            (context) => Dialog(
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              child: Center(
-                                child: Container(
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SpinKitFoldingCube(
-                                        color: themeState.primary,
-                                      ),
-                                      const Gap(20),
-                                      const Text(
-                                        "Generating Image... Please Wait",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                      );
-
-                      for (String ayahKey in selectedAyahKeys) {
-                        SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                          metaDataSurah[ayahKey.split(":").first],
-                        );
-                        Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
-                            {};
-                        String translation =
-                            translationMap["t"] ?? "Translation Not Found";
-                        translation = translation.replaceAll(">", "> ");
-                        Map footNote = translationMap["f"] ?? {};
-                        String footNoteAsString = "\n";
-                        if (footNote.isNotEmpty) {
-                          footNote.forEach((key, value) {
-                            footNoteAsString += "$key. $value\n";
-                          });
-                        }
-                        List quranScriptWord = [];
-                        switch (context
-                            .read<QuranViewCubit>()
-                            .state
-                            .quranScriptType) {
-                          case QuranScriptType.tajweed:
-                            {
-                              quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.uthmani:
-                            {
-                              quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.indopak:
-                            {
-                              quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                        }
-                        TextStyle scriptTextStyle = TextStyle(
-                          fontSize:
-                              context.read<QuranViewCubit>().state.fontSize,
-                          height:
-                              context.read<QuranViewCubit>().state.lineHeight,
-                        );
-
-                        Brightness brightness = Theme.of(context).brightness;
-                        Color primary = themeState.primary;
-
-                        var imageData = await screenshotController
-                            .captureFromLongWidget(
-                              InheritedTheme.captureAll(
-                                context,
-                                Material(
-                                  child: getAyahCardForShareAsImage(
-                                    Hive.box("user").get(
-                                      "show_mac_os_window_like_icon",
-                                      defaultValue: true,
-                                    ),
-                                    ayahKey,
-                                    surahInfoModel,
-                                    context
-                                        .read<QuranViewCubit>()
-                                        .state
-                                        .quranScriptType,
-                                    getPlainTextAyahFromTajweedWords(
-                                      List<String>.from(quranScriptWord),
-                                    ),
-                                    translation,
-                                    footNote,
-                                    scriptTextStyle,
-                                    brightness,
-                                    primary,
-                                  ),
-                                ),
-                              ),
-                              constraints: const BoxConstraints(
-                                minHeight: 500,
-                                maxHeight: 3000,
-                                minWidth: 300,
-                                maxWidth: 500,
-                              ),
-                              context: context,
-                              pixelRatio: getPixelRatioForImage(
-                                getPlainTextAyahFromTajweedWords(
-                                      List<String>.from(quranScriptWord),
-                                    ) +
-                                    translation +
-                                    footNoteAsString,
-                              ),
-                              delay: const Duration(milliseconds: 50),
-                            );
-                        files.add(
-                          XFile.fromData(imageData, mimeType: "image/png"),
-                        );
-                        fileNames.add(
-                          "${surahInfoModel.nameSimple} - $ayahKey.png",
-                        );
-                      }
-                      Navigator.pop(context);
-                      await SharePlus.instance.share(
-                        ShareParams(
-                          files: files,
-                          fileNameOverrides: fileNames,
-                          downloadFallbackEnabled: false,
-                          mailToFallbackEnabled: false,
-                        ),
-                      );
-                    },
-                    icon: const Icon(FluentIcons.image_24_regular),
-                    label: const Text("As Image"),
-                  ),
-                ),
-                const Gap(10),
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      String text = "";
-                      for (String ayahKey in selectedAyahKeys) {
-                        SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                          metaDataSurah[ayahKey.split(":").first],
-                        );
-                        Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
-                            {};
-                        String translation =
-                            translationMap["t"] ?? "Translation Not Found";
-                        translation = translation.replaceAll(">", "> ");
-                        Map footNote = translationMap["f"] ?? {};
-                        String footNoteAsString = "\n";
-                        if (footNote.isNotEmpty) {
-                          footNote.forEach((key, value) {
-                            footNoteAsString += "$key. $value\n";
-                          });
-                        }
-                        List quranScriptWord = [];
-                        switch (context
-                            .read<QuranViewCubit>()
-                            .state
-                            .quranScriptType) {
-                          case QuranScriptType.tajweed:
-                            {
-                              quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.uthmani:
-                            {
-                              quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.indopak:
-                            {
-                              quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                        }
-                        text +=
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
-                      }
-
-                      await SharePlus.instance.share(ShareParams(text: text));
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(FluentIcons.textbox_16_regular),
-                    label: const Text("As Text"),
-                  ),
-                ),
-                const Gap(5),
-              ],
-            ),
           if (widget.isAudioPlayer)
             Container(
               padding: const EdgeInsets.only(
@@ -579,70 +246,6 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 },
                 label: const Text("Play From Selected Ayah"),
                 icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
-              ),
-            ),
-          if (!widget.isAudioPlayer && widget.selectMultipleAndShare != true)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  if (widget.onSelectAyah == null)
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          if (surahNumber != null && ayahNumber != null) {
-                            Navigator.pop(context);
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => TafsirView(
-                                      ayahKey: "$surahNumber:$ayahNumber",
-                                    ),
-                              ),
-                            );
-                          } else {
-                            Fluttertoast.showToast(msg: "Please Select One");
-                          }
-                        },
-                        child: const Text("To Tafsir"),
-                      ),
-                    ),
-                  if (widget.onSelectAyah == null) const Gap(10),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (surahNumber != null && ayahNumber != null) {
-                          Navigator.pop(context);
-                          if (widget.onSelectAyah != null) {
-                            widget.onSelectAyah!("$surahNumber:$ayahNumber");
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => QuranScriptView(
-                                      startKey: "$surahNumber:1",
-                                      endKey: getEndAyahKeyFromSurahNumber(
-                                        surahNumber!,
-                                      ),
-                                      toScrollKey: "$surahNumber:$ayahNumber",
-                                    ),
-                              ),
-                            );
-                          }
-                        } else {
-                          Fluttertoast.showToast(msg: "Please Select One");
-                        }
-                      },
-                      child: Text(
-                        widget.onSelectAyah != null ? "Select Ayah" : "To Ayah",
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
         ],
