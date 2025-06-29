@@ -3,7 +3,6 @@ import "package:al_quran_v3/src/functions/quran_resources/quran_translation_func
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
-import "package:al_quran_v3/src/screen/search/functions/search_function.dart";
 import "package:al_quran_v3/src/screen/search/models/search_catagory.dart";
 import "package:al_quran_v3/src/screen/search/models/search_options.dart";
 import "package:al_quran_v3/src/screen/search/search_result_view.dart";
@@ -195,11 +194,10 @@ class _SearchPageState extends State<SearchPage> {
 
               child: ElevatedButton.icon(
                 onPressed: () {
-                  dynamic searchRes = SearchFunction.search(
-                    textEditingController.text.trim(),
-                    context.read<SearchCubit>().state.searchFields,
-                    context.read<SearchCubit>().state.searchCatagory,
-                    context.read<QuranViewCubit>().state.quranScriptType,
+                  dynamic searchRes = context.read<SearchCubit>().search(
+                    searchQuery: textEditingController.text.trim(),
+                    scriptType:
+                        context.read<QuranViewCubit>().state.quranScriptType,
                   );
                   Navigator.push(
                     context,
