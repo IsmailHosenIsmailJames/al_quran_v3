@@ -1,12 +1,10 @@
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:hive/hive.dart";
 
 import "../../../../theme/controller/theme_cubit.dart";
 import "../../../../theme/controller/theme_state.dart";
@@ -29,16 +27,6 @@ class TajweedView extends StatelessWidget {
     TextStyle quranStyle =
         scriptInfo.textStyle?.copyWith(fontFamily: "QPC_Hafs") ??
         const TextStyle();
-
-    String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
-
-    Map? audioTimeStamp = Hive.box(
-      "segmented_quran_recitation",
-    ).get(ayahKey, defaultValue: null);
-    List<List>? segments;
-    if (audioTimeStamp != null) {
-      segments = List<List>.from(audioTimeStamp["segments"]);
-    }
 
     String? highlightingWordIndex;
     if (scriptInfo.wordIndex != null) {
@@ -87,28 +75,10 @@ class TajweedView extends StatelessWidget {
             context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
           return false;
         }
-        String? currentAyahKey = context.read<AyahKeyCubit>().state.current;
-        if (currentAyahKey == ayahKey) {
-          if (segments != null) {
-            for (List word in segments) {
-              word = word.map((e) => e.toInt()).toList();
-              if (Duration(milliseconds: word[1]) <
-                      (current.currentDuration ?? Duration.zero) &&
-                  Duration(milliseconds: word[2]) >
-                      (current.currentDuration ?? Duration.zero)) {
-                if (highlightingWordIndex != "$currentAyahKey:${word[0]}") {
-                  highlightingWordIndex = "$currentAyahKey:${word[0]}";
-                  return true;
-                }
-                return false;
-              }
-            }
-          }
-        } else {
-          if (highlightingWordIndex != null) {
-            highlightingWordIndex = null;
-            return true;
-          }
+
+        if (highlightingWordIndex != null) {
+          highlightingWordIndex = null;
+          return true;
         }
         return false;
       },

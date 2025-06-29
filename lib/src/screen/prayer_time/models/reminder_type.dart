@@ -1,1 +1,0 @@
-enum PrayerReminderType { notification, alarm }

@@ -1,23 +1,15 @@
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
-import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
-import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
-import "../../collections/collection_page.dart";
 import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
@@ -124,17 +116,6 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                     ),
                     const Gap(20),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 18),
-                      child: Text(
-                        "Main Menu",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    Divider(height: 10, color: themeState.mutedGray),
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
@@ -154,145 +135,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => const CollectionPage(
-                                  collectionType: CollectionType.notes,
-                                ),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.note_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Notes",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => const CollectionPage(
-                                  collectionType: CollectionType.pinned,
-                                ),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.pin_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Pinned",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.pop(context);
-                        await popupJumpToAyah(
-                          context: context,
-                          isAudioPlayer: false,
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.arrow_turn_down_right_20_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Jump to Ayah",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const QuranResourcesView(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.arrow_download_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Quran Resources",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.pop(context);
-                        await popupJumpToAyah(
-                          context: context,
-                          initAyahKey: "1:1",
-                          isAudioPlayer: false,
-                          selectMultipleAndShare: true,
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.share_multiple_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Share Multiple Ayah",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DonateUsView(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        Icons.favorite_rounded,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Donate Us",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(15),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 18),
-                      child: Text(
-                        "Others",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    Divider(height: 10, color: themeState.mutedGray),
+
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
@@ -374,78 +217,6 @@ class _AppDrawerState extends State<AppDrawer> {
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AboutAppPage(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.info_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "About the App",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog.adaptive(
-                              insetPadding: const EdgeInsets.all(10),
-                              title: const Text(
-                                "Reset App Data",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                              content: const Text(
-                                "Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.",
-                              ),
-                              actions: <Widget>[
-                                TextButton.icon(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  label: const Text("Cancel"),
-                                  icon: const Icon(Icons.close_rounded),
-                                ),
-                                TextButton.icon(
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                    await _resetApp();
-                                  },
-                                  icon: const Icon(
-                                    FluentIcons.arrow_reset_24_filled,
-                                    color: Colors.red,
-                                  ),
-                                  label: const Text(
-                                    "Reset",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.arrow_reset_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "Reset the App",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
                     const Gap(50),
                   ],
                 ),
@@ -453,24 +224,6 @@ class _AppDrawerState extends State<AppDrawer> {
             ],
           ),
         );
-      },
-    );
-  }
-
-  Future<void> _resetApp() async {
-    await QuranTranslationFunction.close();
-    await Hive.deleteFromDisk();
-    await Hive.initFlutter();
-    await Hive.openBox("user");
-    await Hive.openLazyBox("quran_tafsir");
-    await Hive.openBox("segmented_quran_recitation");
-    await Hive.openBox("surah_info");
-
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const AppSetupPage()),
-      (route) {
-        return false;
       },
     );
   }
