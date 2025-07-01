@@ -1,4 +1,4 @@
-package com.ismail_hosen.al_quran_audio
+package com.ismail_hosen.quran_audio
 
 import io.flutter.embedding.android.FlutterActivity
 

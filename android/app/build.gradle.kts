@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.ismail_hosen.al_quran_audio"
+    namespace = "com.ismail_hosen.quran_audio"
     compileSdk = 36
     ndkVersion = "27.0.12077973"
 
@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.ismail_hosen.al_quran_audio"
+        applicationId = "com.ismail_hosen.quran_audio"
         minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
