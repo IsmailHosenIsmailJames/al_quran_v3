@@ -4,10 +4,11 @@ packages:
   alarm:
     dependency: "direct main"
     description:
-      name: alarm
-      sha256: "1eef91f0b803a2370137e0dada9c7c24cc31edf4f1c30b06442dcf486cc192e0"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "3b7fe33766e0521091a6673a8181003240cb3b7c"
+      url: "https://github.com/IsmailHosenIsmailJames/alarm.git"
+    source: git
     version: "5.1.4"
   archive:
     dependency: "direct main"
