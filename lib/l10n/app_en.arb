@@ -1,0 +1,139 @@
+{
+  "@@locale": "en",
+  "appTitle": "Al Quran Audio",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "settingsPageTitle": "Settings",
+  "settingsQuranFontSize": "Quran Font Size",
+  "settingsAppTheme": "App Theme",
+  "settingsAppLanguage": "App Language",
+  "settingsAudioCached": "Audio Cached",
+  "audioPageTitle": "Al Quran Audio",
+  "audioPlayerTooltipPlay": "Play",
+  "audioPlayerTooltipPause": "Pause",
+  "audioPageSurahAyahDisplay": "{surahName} - {ayahKey}",
+  "@audioPageSurahAyahDisplay": {
+    "description": "Display for Surah name and Ayah number",
+    "placeholders": {
+      "surahName": {
+        "type": "String",
+        "example": "Al-Fatihah"
+      },
+      "ayahKey": {
+        "type": "String",
+        "example": "1:1"
+      }
+    }
+  },
+  "changeReciterTitle": "Select Reciter",
+  "reciterStyleLabel": "Style: {style}",
+  "@reciterStyleLabel": {
+    "placeholders": {
+      "style": { "type": "String", "example": "Murattal" }
+    }
+  },
+  "reciterSourceLabel": "Source: {source}",
+  "@reciterSourceLabel": {
+    "placeholders": {
+      "source": { "type": "String", "example": "Everyayah.com" }
+    }
+  },
+  "reciterMoreInfoLabel": "More: ",
+  "saveButtonLabel": "Save",
+  "audioSettingsCacheNotFound": "Cache Not Found",
+  "audioSettingsCacheSizeLabel": "Cache Size",
+  "audioSettingsErrorLabel": "Error: {error}",
+  "@audioSettingsErrorLabel": {
+    "placeholders": { "error": { "type": "String", "example": "Disk full" } }
+  },
+  "audioSettingsCleanButtonLabel": "Clean",
+  "audioSettingsLastModifiedLabel": "Last Modified",
+  "timeAgo1Year": "1 Year ago",
+  "timeAgo6Months": "6 Months ago",
+  "timeAgo3Months": "3 Months ago",
+  "timeAgo2Months": "2 Months ago",
+  "timeAgo1Month": "1 Month ago",
+  "timeAgo3Weeks": "3 Weeks ago",
+  "timeAgo2Weeks": "2 Weeks ago",
+  "timeAgo1Week": "1 Week ago",
+  "timeAgo6Days": "6 Days ago",
+  "timeAgo5Days": "5 Days ago",
+  "timeAgo4Days": "4 Days ago",
+  "timeAgo3Days": "3 Days ago",
+  "timeAgo2Days": "2 Days ago",
+  "timeAgo1Day": "1 Day ago",
+  "timeToday": "Today",
+  "drawerVersionLoading": "Loading...",
+  "drawerAppNameSubtitle": "Al Quran",
+  "drawerSettingsTitle": "Settings",
+  "drawerShareAppTitle": "Share this App",
+  "drawerShareAppSubject": "Check out this Al Quran App!",
+  "drawerShareAppBody": "Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah's words. Download here: {appLink}",
+  "@drawerShareAppBody": {
+    "description": "The message body for sharing the app",
+    "placeholders": {
+      "appLink": {
+        "type": "String",
+        "example": "https://play.google.com/store/apps/details?id=com.example.app"
+      }
+    }
+  },
+  "drawerGiveRatingTitle": "Give Rating",
+  "drawerBugReportTitle": "Bug Report",
+  "drawerPrivacyPolicyTitle": "Privacy Policy",
+
+  "bugReportDialogTitle": "Bug Report",
+  "bugReportEmailSubject": "Bug Report - Al Quran Audio",
+  "bugReportEmailBodyDeviceInfo": "Device Information:",
+  "bugReportEmailBodyAppInfo": "App Information:",
+  "bugReportEmailBodyDescribeBug": "Describe the bug:",
+  "bugReportEmailBodyToReproduce": "To Reproduce:",
+  "bugReportEmailBodyExpectedBehavior": "Expected behavior:",
+  "bugReportEmailBodyScreenshots": "Screenshots (optional):",
+  "bugReportOptionEmail": "Through Email",
+  "bugReportOptionDiscord": "On Discord",
+
+  "deviceInfoPlatformWeb": "Platform: Web",
+  "deviceInfoBrowser": "Browser: {browserName}",
+  "@deviceInfoBrowser": { "placeholders": { "browserName": { "type": "String" } } },
+  "deviceInfoUserAgent": "User Agent: {userAgent}",
+  "@deviceInfoUserAgent": { "placeholders": { "userAgent": { "type": "String" } } },
+  "deviceInfoPlatformAndroid": "Platform: Android",
+  "deviceInfoDevice": "Device: {deviceName}",
+  "@deviceInfoDevice": { "placeholders": { "deviceName": { "type": "String" } } },
+  "deviceInfoManufacturer": "Manufacturer: {manufacturerName}",
+  "@deviceInfoManufacturer": { "placeholders": { "manufacturerName": { "type": "String" } } },
+  "deviceInfoOsVersion": "OS Version: {osVersion}",
+  "@deviceInfoOsVersion": { "placeholders": { "osVersion": { "type": "String" } } },
+  "deviceInfoSdkVersion": "SDK Version: {sdkVersion}",
+  "@deviceInfoSdkVersion": { "placeholders": { "sdkVersion": { "type": "String" } } },
+  "deviceInfoPlatformIOS": "Platform: iOS",
+  "deviceInfoModel": "Model: {modelName}",
+  "@deviceInfoModel": { "placeholders": { "modelName": { "type": "String" } } },
+  "deviceInfoPlatformLinux": "Platform: Linux",
+  "deviceInfoName": "Name: {name}",
+  "@deviceInfoName": { "placeholders": { "name": { "type": "String" } } },
+  "deviceInfoVersion": "Version: {version}",
+  "@deviceInfoVersion": { "placeholders": { "version": { "type": "String" } } },
+  "deviceInfoPlatformMacOS": "Platform: macOS",
+  "deviceInfoPlatformWindows": "Platform: Windows",
+  "deviceInfoComputerName": "Computer Name: {computerName}",
+  "@deviceInfoComputerName": { "placeholders": { "computerName": { "type": "String" } } },
+  "deviceInfoError": "Error getting device info: {error}",
+  "@deviceInfoError": { "placeholders": { "error": { "type": "String" } } },
+  "deviceInfoUnknownPlatform": "Unknown platform",
+
+  "appInfoAppName": "App Name: {appName}",
+  "@appInfoAppName": { "placeholders": { "appName": { "type": "String" } } },
+  "appInfoPackageName": "Package Name: {packageName}",
+  "@appInfoPackageName": { "placeholders": { "packageName": { "type": "String" } } },
+  "appInfoBuildNumber": "Build Number: {buildNumber}",
+  "@appInfoBuildNumber": { "placeholders": { "buildNumber": { "type": "String" } } },
+
+  "jumpToAyahDialogTitle": "Jump To Ayah",
+  "jumpToAyahSearchSurahHint": "Search for a surah",
+  "jumpToAyahPlayButtonLabel": "Play From Selected Ayah",
+
+  "themeIconButtonTooltip": "Change Theme"
+}

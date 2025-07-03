@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -36,6 +37,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
 
     return Container(
       decoration: BoxDecoration(
@@ -62,10 +64,13 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             height: 50,
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Text(
-                    "Jump To Ayah",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    l10n.jumpToAyahDialogTitle, // Localized text
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
 
@@ -103,9 +108,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         child: TextFormField(
                           controller: textEditingController,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hintText: "Search for a surah",
+                          decoration: InputDecoration(
+                            // Localized text
+                            prefixIcon: const Icon(Icons.search),
+                            hintText: l10n.jumpToAyahSearchSurahHint,
                             border: InputBorder.none,
                           ),
                           onChanged: (value) {
@@ -244,7 +250,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                   Navigator.pop(context);
                   widget.onPlaySelected!("$surahNumber:$ayahNumber");
                 },
-                label: const Text("Play From Selected Ayah"),
+                label: Text(l10n.jumpToAyahPlayButtonLabel), // Localized text
                 icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
               ),
             ),

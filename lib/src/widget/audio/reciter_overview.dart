@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -22,6 +23,8 @@ Widget getReciterWidget({
   int? currentIndex,
   bool? isWordByWord,
 }) {
+  final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
+
   return InkWell(
     borderRadius: BorderRadius.circular(roundedRadius),
     onTap: () {
@@ -104,12 +107,16 @@ Widget getReciterWidget({
                 const Icon(Icons.arrow_drop_down_rounded, size: 30),
               ],
             ),
-            Text("Style: ${audioTabScreenState.style}"),
-            Text("Source: ${audioTabScreenState.source}"),
+            Text(
+              l10n.reciterStyleLabel(audioTabScreenState.style.toString()),
+            ), // Localized text
+            Text(
+              l10n.reciterSourceLabel(audioTabScreenState.source.toString()),
+            ), // Localized text
             if (audioTabScreenState.bio != null)
               Row(
                 children: [
-                  const Text("More: "),
+                  Text(l10n.reciterMoreInfoLabel), // Localized text
                   SizedBox(
                     height: 20,
                     child: TextButton(
