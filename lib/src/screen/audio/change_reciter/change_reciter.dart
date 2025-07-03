@@ -8,6 +8,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
+import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
@@ -52,6 +53,8 @@ class _ChangeReciterState extends State<ChangeReciter> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+
     return Column(
       children: [
         Container(
@@ -66,10 +69,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
           ),
           child: Stack(
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  "Select Reciter",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  l10n.changeReciterTitle, // Localized title
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               Align(
@@ -161,12 +164,12 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text("Style: ${reciterInfoModel.style}"),
-                          Text("Source: ${reciterInfoModel.source}"),
+                          Text(l10n.reciterStyleLabel(reciterInfoModel.style)), // Localized Style
+                          Text(l10n.reciterSourceLabel(reciterInfoModel.source)), // Localized Source
                           if (reciterInfoModel.bio != null)
                             Row(
                               children: [
-                                const Text("More: "),
+                                Text(l10n.reciterMoreInfoLabel), // Localized More
                                 SizedBox(
                                   height: 20,
                                   child: TextButton(
@@ -214,7 +217,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
               widget.onReciterChanged(selectedReciter);
             },
             icon: const Icon(Icons.done),
-            label: const Text("Save"),
+            label: Text(l10n.saveButtonLabel), // Localized Save
           ),
         ),
       ],
