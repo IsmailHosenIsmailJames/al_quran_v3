@@ -19,10 +19,12 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   void addPrayerToRemember(
     ReminderTypeWithPrayModel prayerModelTimesType,
   ) async {
+    List<ReminderTypeWithPrayModel> list = state.prayerToRemember;
+    list.add(prayerModelTimesType);
+    emit(state.copyWith(prayerToRemember: list));
     await PrayersTimeFunction.addPrayerToReminder(prayerModelTimesType);
     emit(
       state.copyWith(
-        prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
         previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
@@ -31,10 +33,12 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   void removePrayerToRemember(
     ReminderTypeWithPrayModel prayerModelTimesType,
   ) async {
+    List<ReminderTypeWithPrayModel> list = state.prayerToRemember;
+    list.remove(prayerModelTimesType);
+    emit(state.copyWith(prayerToRemember: list));
     await PrayersTimeFunction.removePrayerToReminder(prayerModelTimesType);
     emit(
       state.copyWith(
-        prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
         previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
