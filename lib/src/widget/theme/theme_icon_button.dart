@@ -2,14 +2,16 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
-Widget themeIconButton(BuildContext context) =>
-    BlocBuilder<ThemeCubit, ThemeState>(
+Widget themeIconButton(BuildContext context) { // Removed => for multi-line body
+  final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+  return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
         return IconButton(
           style: IconButton.styleFrom(backgroundColor: state.primaryShade100),
           color: state.primary,
-          tooltip: "Change Theme",
+          tooltip: l10n.themeIconButtonTooltip, // Localized tooltip
           onPressed: () {
             final themeController = context.read<ThemeCubit>();
             if (state.themeMode == ThemeMode.dark) {
