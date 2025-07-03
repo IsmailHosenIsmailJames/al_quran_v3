@@ -1,0 +1,12 @@
+{
+  "@@locale": "en",
+  "appTitle": "Al Quran Audio",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "settingsPageTitle": "Settings",
+  "settingsQuranFontSize": "Quran Font Size",
+  "settingsAppTheme": "App Theme",
+  "settingsAppLanguage": "App Language",
+  "settingsAudioCached": "Audio Cached"
+}
