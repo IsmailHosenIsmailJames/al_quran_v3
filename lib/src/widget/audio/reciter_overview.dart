@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -13,8 +14,6 @@ import "../../functions/basic_functions.dart";
 import "../../screen/audio/change_reciter/popup_change_reciter.dart";
 import "../../screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "../../theme/values/values.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
-
 
 Widget getReciterWidget({
   required ReciterInfoModel audioTabScreenState,
@@ -24,7 +23,7 @@ Widget getReciterWidget({
   int? currentIndex,
   bool? isWordByWord,
 }) {
-  final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+  final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
 
   return InkWell(
     borderRadius: BorderRadius.circular(roundedRadius),
@@ -108,8 +107,12 @@ Widget getReciterWidget({
                 const Icon(Icons.arrow_drop_down_rounded, size: 30),
               ],
             ),
-            Text(l10n.reciterStyleLabel(audioTabScreenState.style)), // Localized text
-            Text(l10n.reciterSourceLabel(audioTabScreenState.source)), // Localized text
+            Text(
+              l10n.reciterStyleLabel(audioTabScreenState.style.toString()),
+            ), // Localized text
+            Text(
+              l10n.reciterSourceLabel(audioTabScreenState.source.toString()),
+            ), // Localized text
             if (audioTabScreenState.bio != null)
               Row(
                 children: [

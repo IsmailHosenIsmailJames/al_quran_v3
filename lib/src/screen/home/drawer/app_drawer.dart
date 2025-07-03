@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -7,7 +8,6 @@ import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
@@ -21,7 +21,8 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  String _version = ""; // Will be set by _initPackageInfo or use l10n.drawerVersionLoading
+  String _version =
+      ""; // Will be set by _initPackageInfo or use l10n.drawerVersionLoading
   bool _versionIsLoading = true;
 
   @override
@@ -42,9 +43,10 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
-    if (_versionIsLoading && _version.isEmpty) { // Set initial loading text via l10n if not already set
-        _version = l10n.drawerVersionLoading;
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
+    if (_versionIsLoading && _version.isEmpty) {
+      // Set initial loading text via l10n if not already set
+      _version = l10n.drawerVersionLoading;
     }
 
     return BlocBuilder<ThemeCubit, ThemeState>(
@@ -152,11 +154,14 @@ class _AppDrawerState extends State<AppDrawer> {
                         // share the app
                         final String appLink =
                             "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran";
-                        final String message = l10n.drawerShareAppBody(appLink); // Localized text
+                        final String message = l10n.drawerShareAppBody(
+                          appLink,
+                        ); // Localized text
                         await SharePlus.instance.share(
                           ShareParams(
                             text: message,
-                            subject: l10n.drawerShareAppSubject, // Localized text
+                            subject:
+                                l10n.drawerShareAppSubject, // Localized text
                           ),
                         );
                       },
