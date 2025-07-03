@@ -35,6 +35,9 @@ dependencies:
   share_plus: ^11.0.0
   simple_icons: ^14.6.1
   shared_preferences: ^2.5.3
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
+  intl: ^0.19.0            # Add this line
 
 dev_dependencies:
   flutter_test:
