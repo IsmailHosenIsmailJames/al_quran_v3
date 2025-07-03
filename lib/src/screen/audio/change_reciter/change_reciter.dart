@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
@@ -8,7 +9,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
@@ -53,7 +53,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
 
     return Column(
       children: [
@@ -72,7 +72,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
               Center(
                 child: Text(
                   l10n.changeReciterTitle, // Localized title
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Align(
@@ -93,7 +96,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
             controller: scrollController,
             padding: const EdgeInsets.all(5),
             itemBuilder: (context, index) {
-              ReciterInfoModel reciterInfoModel =recitersListCurrent[index];
+              ReciterInfoModel reciterInfoModel = recitersListCurrent[index];
               return Container(
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -164,12 +167,22 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(l10n.reciterStyleLabel(reciterInfoModel.style)), // Localized Style
-                          Text(l10n.reciterSourceLabel(reciterInfoModel.source)), // Localized Source
+                          Text(
+                            l10n.reciterStyleLabel(
+                              reciterInfoModel.style.toString(),
+                            ),
+                          ), // Localized Style
+                          Text(
+                            l10n.reciterSourceLabel(
+                              reciterInfoModel.source.toString(),
+                            ),
+                          ), // Localized Source
                           if (reciterInfoModel.bio != null)
                             Row(
                               children: [
-                                Text(l10n.reciterMoreInfoLabel), // Localized More
+                                Text(
+                                  l10n.reciterMoreInfoLabel,
+                                ), // Localized More
                                 SizedBox(
                                   height: 20,
                                   child: TextButton(

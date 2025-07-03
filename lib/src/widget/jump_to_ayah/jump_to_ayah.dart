@@ -1,10 +1,9 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
-
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -38,7 +37,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
 
     return Container(
       decoration: BoxDecoration(
@@ -68,7 +67,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 Center(
                   child: Text(
                     l10n.jumpToAyahDialogTitle, // Localized text
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
 
@@ -106,7 +108,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         child: TextFormField(
                           controller: textEditingController,
-                          decoration: InputDecoration( // Localized text
+                          decoration: InputDecoration(
+                            // Localized text
                             prefixIcon: const Icon(Icons.search),
                             hintText: l10n.jumpToAyahSearchSurahHint,
                             border: InputBorder.none,

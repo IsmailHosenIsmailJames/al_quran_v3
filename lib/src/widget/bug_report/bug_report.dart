@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:device_info_plus/device_info_plus.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
@@ -8,16 +9,18 @@ import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
 import "../../theme/controller/theme_cubit.dart";
 
 Future<void> showBugReportDialog(BuildContext context) async {
-  final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+  final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
   final deviceInfo = DeviceInfoPlugin();
   final packageInfo = await PackageInfo.fromPlatform();
 
-  String deviceInfoString = await _getDeviceInfoString(deviceInfo, l10n); // Pass l10n
+  String deviceInfoString = await _getDeviceInfoString(
+    deviceInfo,
+    l10n,
+  ); // Pass l10n
   String appInfoString = _getAppInfoString(packageInfo, l10n); // Pass l10n
 
   await showModalBottomSheet(
@@ -25,7 +28,7 @@ Future<void> showBugReportDialog(BuildContext context) async {
     builder: (context) {
       // It's good practice to get l10n from this builder's context too,
       // if showModalBottomSheet creates a new route/subtree with its own Localizations.
-      final bottomSheetL10n = AppLocalizations.of(context)!;
+      final bottomSheetL10n = AppLocalizations.of(context);
 
       return Container(
         decoration: const BoxDecoration(),
@@ -45,7 +48,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 const Gap(10),
                 Text(
                   bottomSheetL10n.bugReportDialogTitle, // Localized text
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -57,7 +63,8 @@ Future<void> showBugReportDialog(BuildContext context) async {
                   scheme: "mailto",
                   path: "md.ismailhosenismailjames@gmail.com",
                   query: _encodeQueryParameters(<String, String>{
-                    "subject": bottomSheetL10n.bugReportEmailSubject, // Localized text
+                    "subject":
+                        bottomSheetL10n.bugReportEmailSubject, // Localized text
                     "body":
                         "${bottomSheetL10n.bugReportEmailBodyDeviceInfo}\n$deviceInfoString\n\n"
                         "${bottomSheetL10n.bugReportEmailBodyAppInfo}\n$appInfoString\n\n"
@@ -76,7 +83,9 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 width: 25,
                 child: SvgPicture.asset("assets/img/gmail.svg"),
               ),
-              title: Text(bottomSheetL10n.bugReportOptionEmail), // Localized text
+              title: Text(
+                bottomSheetL10n.bugReportOptionEmail,
+              ), // Localized text
             ),
             const Gap(5),
             ListTile(
@@ -92,7 +101,9 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 SimpleIcons.discord,
                 color: Color(0xff5865f2),
               ),
-              title: Text(bottomSheetL10n.bugReportOptionDiscord), // Localized text
+              title: Text(
+                bottomSheetL10n.bugReportOptionDiscord,
+              ), // Localized text
             ),
           ],
         ),
@@ -110,7 +121,11 @@ String? _encodeQueryParameters(Map<String, String> params) {
       .join("&");
 }
 
-Future<String> _getDeviceInfoString(DeviceInfoPlugin deviceInfo, AppLocalizations l10n) async { // Pass l10n
+Future<String> _getDeviceInfoString(
+  DeviceInfoPlugin deviceInfo,
+  AppLocalizations l10n,
+) async {
+  // Pass l10n
   try {
     if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
@@ -121,7 +136,7 @@ Future<String> _getDeviceInfoString(DeviceInfoPlugin deviceInfo, AppLocalization
         return "${l10n.deviceInfoPlatformAndroid}\n${l10n.deviceInfoDevice(androidInfo.model)}\n${l10n.deviceInfoManufacturer(androidInfo.manufacturer)}\n${l10n.deviceInfoOsVersion(androidInfo.version.release)}\n${l10n.deviceInfoSdkVersion(androidInfo.version.sdkInt.toString())}";
       } else if (defaultTargetPlatform == TargetPlatform.iOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-        return "${l10n.deviceInfoPlatformIOS}\n${l10n.deviceInfoDevice(iosInfo.name ?? "")}\n${l10n.deviceInfoModel(iosInfo.model ?? "")}\n${l10n.deviceInfoOsVersion(iosInfo.systemVersion ?? "")}";
+        return "${l10n.deviceInfoPlatformIOS}\n${l10n.deviceInfoDevice(iosInfo.name)}\n${l10n.deviceInfoModel(iosInfo.model)}\n${l10n.deviceInfoOsVersion(iosInfo.systemVersion)}";
       } else if (defaultTargetPlatform == TargetPlatform.linux) {
         LinuxDeviceInfo linuxInfo = await deviceInfo.linuxInfo;
         return "${l10n.deviceInfoPlatformLinux}\n${l10n.deviceInfoName(linuxInfo.name)}\n${l10n.deviceInfoVersion(linuxInfo.version ?? "")}";
@@ -139,7 +154,8 @@ Future<String> _getDeviceInfoString(DeviceInfoPlugin deviceInfo, AppLocalization
   return l10n.deviceInfoUnknownPlatform;
 }
 
-String _getAppInfoString(PackageInfo packageInfo, AppLocalizations l10n) { // Pass l10n
+String _getAppInfoString(PackageInfo packageInfo, AppLocalizations l10n) {
+  // Pass l10n
   String appName = packageInfo.appName;
   String packageName = packageInfo.packageName;
   String version = packageInfo.version;

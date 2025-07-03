@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
@@ -27,7 +28,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
+import "package:permission_handler/permission_handler.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -42,11 +43,20 @@ class AudioPage extends StatefulWidget {
 
 class _AudioPageState extends State<AudioPage> {
   @override
+  void initState() {
+    Permission.notification.request();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.audioPageTitle), centerTitle: true), // Localized title
+      appBar: AppBar(
+        title: Text(l10n.audioPageTitle),
+        centerTitle: true,
+      ), // Localized title
       drawer: const AppDrawer(),
       body: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {
@@ -112,6 +122,7 @@ class _AudioPageState extends State<AudioPage> {
     AyahKeyManagement ayahKeyState,
     BuildContext context,
   ) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
 
@@ -206,7 +217,10 @@ class _AudioPageState extends State<AudioPage> {
                       ? AudioPlayerManager.audioPlayer.pause()
                       : AudioPlayerManager.audioPlayer.play();
                 },
-                tooltip: state.isPlaying ? l10n.audioPlayerTooltipPause : l10n.audioPlayerTooltipPlay, // Localized tooltips
+                tooltip:
+                    state.isPlaying
+                        ? l10n.audioPlayerTooltipPause
+                        : l10n.audioPlayerTooltipPlay, // Localized tooltips
                 iconSize: 45,
                 style: IconButton.styleFrom(padding: const EdgeInsets.all(5)),
                 icon:
@@ -308,6 +322,7 @@ class _AudioPageState extends State<AudioPage> {
     AyahKeyManagement ayahKeyState,
     BuildContext context,
   ) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -377,9 +392,12 @@ class _AudioPageState extends State<AudioPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    l10n.audioPageSurahAyahDisplay( // Localized text with parameters
-                      SurahInfoModel.fromMap(metaDataSurah[ayahKeyState.current.split(":")[0]]).nameSimple,
-                      ayahKeyState.current
+                    l10n.audioPageSurahAyahDisplay(
+                      // Localized text with parameters
+                      SurahInfoModel.fromMap(
+                        metaDataSurah[ayahKeyState.current.split(":")[0]],
+                      ).nameSimple,
+                      ayahKeyState.current,
                     ),
                     style: const TextStyle(
                       fontSize: 16,

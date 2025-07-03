@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
@@ -7,7 +8,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/language_cubit.dart"; // Import LanguageCubit
-import "package:al_quran_v3/app_localizations.dart"; // Corrected Import AppLocalizations
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -22,7 +22,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsPageTitle)), // Localized title
       body: BlocBuilder<ThemeCubit, ThemeState>(
@@ -42,7 +42,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text( // Localized text
+                    Text(
+                      // Localized text
                       l10n.settingsQuranFontSize,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
@@ -81,17 +82,25 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 const Gap(10),
-                Text( // Localized text
+                Text(
+                  // Localized text
                   l10n.settingsAppTheme,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const ThemeSettings(),
                 const Gap(10),
                 // Language Selection Section
-                Text( // Localized text
+                Text(
+                  // Localized text
                   l10n.settingsAppLanguage,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 BlocBuilder<LanguageCubit, LanguageState>(
@@ -100,12 +109,13 @@ class _SettingsPageState extends State<SettingsPage> {
                     return DropdownButton<String>(
                       value: languageState.locale.languageCode,
                       isExpanded: true,
-                      items: languageCubit.supportedLanguages.map((Language lang) {
-                        return DropdownMenuItem<String>(
-                          value: lang.code,
-                          child: Text(lang.name),
-                        );
-                      }).toList(),
+                      items:
+                          languageCubit.supportedLanguages.map((Language lang) {
+                            return DropdownMenuItem<String>(
+                              value: lang.code,
+                              child: Text(lang.name),
+                            );
+                          }).toList(),
                       onChanged: (String? newCode) {
                         if (newCode != null) {
                           languageCubit.changeLanguage(newCode);
@@ -115,9 +125,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 const Gap(10),
-                Text( // Localized text
+                Text(
+                  // Localized text
                   l10n.settingsAudioCached,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const Gap(5),

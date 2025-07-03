@@ -1,12 +1,12 @@
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
-import "package:al_quran_v3/app_localizations.dart"; // Import AppLocalizations
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../functions/functions.dart";
@@ -21,7 +21,7 @@ class AudioSettings extends StatefulWidget {
 class _AudioSettingsState extends State<AudioSettings> {
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
 
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
@@ -39,7 +39,9 @@ class _AudioSettingsState extends State<AudioSettings> {
                 List<String> keys = data.keys.toList();
                 return getListOfCacheWidget(keys, data, l10n); // Pass l10n
               } else if (snapshot.hasError) {
-                return Center(child: Text(l10n.audioSettingsCacheNotFound)); // Localized text
+                return Center(
+                  child: Text(l10n.audioSettingsCacheNotFound),
+                ); // Localized text
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -61,7 +63,10 @@ class _AudioSettingsState extends State<AudioSettings> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 100, child: Text(l10n.audioSettingsCacheSizeLabel)), // Localized text
+            SizedBox(
+              width: 100,
+              child: Text(l10n.audioSettingsCacheSizeLabel),
+            ), // Localized text
             SizedBox(
               width: 100,
               child: FutureBuilder<int>(
@@ -70,7 +75,9 @@ class _AudioSettingsState extends State<AudioSettings> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    return Text(l10n.audioSettingsErrorLabel(snapshot.error.toString())); // Localized text
+                    return Text(
+                      l10n.audioSettingsErrorLabel(snapshot.error.toString()),
+                    ); // Localized text
                   } else {
                     return Text(formatBytes(snapshot.data ?? 0));
                   }
@@ -91,7 +98,9 @@ class _AudioSettingsState extends State<AudioSettings> {
                   }
                   setState(() {});
                 },
-                child: Text(l10n.audioSettingsCleanButtonLabel), // Localized text
+                child: Text(
+                  l10n.audioSettingsCleanButtonLabel,
+                ), // Localized text
               ),
             ),
           ],
@@ -100,8 +109,14 @@ class _AudioSettingsState extends State<AudioSettings> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 100, child: Text(l10n.audioSettingsLastModifiedLabel)), // Localized text
-            SizedBox(width: 100, child: Text(l10n.audioSettingsCacheSizeLabel)), // Localized text
+            SizedBox(
+              width: 100,
+              child: Text(l10n.audioSettingsLastModifiedLabel),
+            ), // Localized text
+            SizedBox(
+              width: 100,
+              child: Text(l10n.audioSettingsCacheSizeLabel),
+            ), // Localized text
             const Gap(100),
           ],
         ),
@@ -115,7 +130,10 @@ class _AudioSettingsState extends State<AudioSettings> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 100, child: Text(keys[index])), // This key is already localized by getTheTimeKey
+              SizedBox(
+                width: 100,
+                child: Text(keys[index]),
+              ), // This key is already localized by getTheTimeKey
               SizedBox(
                 width: 100,
                 child: Text((formatBytes(fileSize, 2)).toString()),
@@ -132,7 +150,9 @@ class _AudioSettingsState extends State<AudioSettings> {
                       }
                       setState(() {});
                     },
-                    child: Text(l10n.audioSettingsCleanButtonLabel), // Localized text
+                    child: Text(
+                      l10n.audioSettingsCleanButtonLabel,
+                    ), // Localized text
                   ),
                 ),
               ),
@@ -145,14 +165,14 @@ class _AudioSettingsState extends State<AudioSettings> {
 }
 
 Future<Map<String, List<Map<String, dynamic>>>>
-    getCategorizedCacheFilesWithSize(BuildContext context) async { // Pass context
-  final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+getCategorizedCacheFilesWithSize(BuildContext context) async {
+  // Pass context
+  final l10n = AppLocalizations.of(context); // Get AppLocalizations instance
   Map<String, List<Map<String, dynamic>>> categorizedFiles = {};
   final cacheDir = Directory(
     join((await getTemporaryDirectory()).path, "just_audio_cache", "remote"),
   );
-  final files =
-      cacheDir.listSync().whereType<File>();
+  final files = cacheDir.listSync().whereType<File>();
 
   final now = DateTime.now();
 
@@ -173,7 +193,8 @@ Future<Map<String, List<Map<String, dynamic>>>>
   return categorizedFiles;
 }
 
-String getTheTimeKey(int distanceInDay, AppLocalizations l10n) { // Add l10n parameter and correct logic/typos
+String getTheTimeKey(int distanceInDay, AppLocalizations l10n) {
+  // Add l10n parameter and correct logic/typos
   if (distanceInDay > 365) {
     return l10n.timeAgo1Year;
   } else if (distanceInDay > 182) {
@@ -190,19 +211,27 @@ String getTheTimeKey(int distanceInDay, AppLocalizations l10n) { // Add l10n par
     return l10n.timeAgo2Weeks;
   } else if (distanceInDay > 7) {
     return l10n.timeAgo1Week; // Corrected "1 Weeks ago" to "1 Week ago"
-  } else if (distanceInDay == 7) { // Handle exactly 1 week
+  } else if (distanceInDay == 7) {
+    // Handle exactly 1 week
     return l10n.timeAgo1Week;
-  } else if (distanceInDay > 1) { // Handle 2-6 days
-     // This part needs specific keys if we want "X Days ago"
-     // For simplicity, using existing keys or we can add more specific ones.
-     // Let's use a switch for clarity for 2-6 days or more specific keys.
+  } else if (distanceInDay > 1) {
+    // Handle 2-6 days
+    // This part needs specific keys if we want "X Days ago"
+    // For simplicity, using existing keys or we can add more specific ones.
+    // Let's use a switch for clarity for 2-6 days or more specific keys.
     switch (distanceInDay) {
-      case 6: return l10n.timeAgo6Days;
-      case 5: return l10n.timeAgo5Days;
-      case 4: return l10n.timeAgo4Days;
-      case 3: return l10n.timeAgo3Days;
-      case 2: return l10n.timeAgo2Days;
-      default: return l10n.timeAgo1Day; // Fallback, though logic should cover 2-6
+      case 6:
+        return l10n.timeAgo6Days;
+      case 5:
+        return l10n.timeAgo5Days;
+      case 4:
+        return l10n.timeAgo4Days;
+      case 3:
+        return l10n.timeAgo3Days;
+      case 2:
+        return l10n.timeAgo2Days;
+      default:
+        return l10n.timeAgo1Day; // Fallback, though logic should cover 2-6
     }
   } else if (distanceInDay == 1) {
     return l10n.timeAgo1Day;
