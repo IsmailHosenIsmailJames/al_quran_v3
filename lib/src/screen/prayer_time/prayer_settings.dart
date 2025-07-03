@@ -255,6 +255,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         onChanged: (double value) {
                           context
                               .read<PrayerReminderCubit>()
+                              .setUIReminderTimeAdjustment(
+                                currentPrayerType,
+                                value.round(),
+                              );
+                        },
+                        onChangeEnd: (value) {
+                          context
+                              .read<PrayerReminderCubit>()
                               .setReminderTimeAdjustment(
                                 currentPrayerType,
                                 value.round(),
