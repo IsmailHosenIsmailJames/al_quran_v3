@@ -61,6 +61,15 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     emit(state.copyWith(reminderTimeAdjustment: reminderTimeAdjustment));
   }
 
+  void setUIReminderTimeAdjustment(
+    PrayerModelTimesType prayerType,
+    int timeInMinutes,
+  ) async {
+    Map<PrayerModelTimesType, int> adjustment = state.reminderTimeAdjustment;
+    adjustment[prayerType] = timeInMinutes;
+    emit(state.copyWith(reminderTimeAdjustment: adjustment));
+  }
+
   void setReminderEnforceSound(bool value) async {
     await PrayersTimeFunction.setEnforceAlarmSound(value);
     emit(state.copyWith(enforceAlarmSound: value));
