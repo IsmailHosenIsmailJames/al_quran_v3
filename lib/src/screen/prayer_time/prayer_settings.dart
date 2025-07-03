@@ -210,49 +210,57 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           : themeState.primaryShade200,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
-                padding: const EdgeInsets.only(left: 10, right: 5),
-                margin: const EdgeInsets.only(bottom: 2, top: 2),
-                child: Row(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 3,
+                ), // Added some vertical margin
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.stretch, // Make slider take full width
                   children: <Widget>[
-                    Text(
-                      PrayerModelTimesType.values[index].name.capitalize,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          currentPrayerType.name.capitalize,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          _getAdjustmentText(currentTimeInMinutes),
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: themeState.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(5), // Reduced gap for a tighter look
+                    SliderTheme(
+                      data: const SliderThemeData(padding: EdgeInsets.zero),
+                      child: Slider(
+                        value: currentTimeInMinutes.toDouble(),
+                        min: -60.0,
+                        max: 60.0,
+                        divisions: 120,
+                        label: _getAdjustmentText(currentTimeInMinutes.round()),
+                        activeColor: themeState.primary,
+                        inactiveColor: themeState.primaryShade300,
+                        onChanged: (double value) {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setReminderTimeAdjustment(
+                                currentPrayerType,
+                                value.round(),
+                              );
+                        },
                       ),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setReminderTimeAdjustment(
-                              PrayerModelTimesType.values[index],
-                              --currentTimeInMinutes,
-                            );
-                      },
-                      icon: const Icon(FluentIcons.subtract_24_regular),
-                    ),
-                    const Gap(10),
-                    Text(
-                      currentTimeInMinutes.toString(),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Text("  Min."),
-                    const Gap(10),
-                    IconButton(
-                      onPressed: () {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setReminderTimeAdjustment(
-                              PrayerModelTimesType.values[index],
-                              ++currentTimeInMinutes,
-                            );
-                      },
-                      icon: const Icon(FluentIcons.add_24_regular),
                     ),
                   ],
                 ),
@@ -349,5 +357,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
         },
       ),
     );
+  }
+
+  String _getAdjustmentText(int minutes) {
+    if (minutes == 0) return "At prayer time";
+    if (minutes < 0) return "${minutes.abs()} min before";
+    return "$minutes min after";
   }
 }
