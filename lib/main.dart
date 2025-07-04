@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
+import "package:al_quran_v3/src/screen/app_languages/cubit/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
@@ -129,13 +130,16 @@ Future<void> main() async {
   }
   getSegmentsSupportedReciters();
 
-  runApp(const MyApp());
+  Locale? initialLocale = await LanguageCubit.getInitialLocale();
+
+  runApp(MyApp(initialLocale: initialLocale));
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale? initialLocale;
+  const MyApp({super.key, required this.initialLocale});
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +155,12 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create:
+              (context) => LanguageCubit(
+                initialLocale ?? Localizations.localeOf(context),
+              ),
+        ),
         BlocProvider(create: (context) => ResourcesProgressCubitCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
@@ -177,63 +187,71 @@ class MyApp extends StatelessWidget {
         ),
       ],
 
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, state) {
-          return MaterialApp(
-            navigatorKey: navigatorKey,
-            debugShowCheckedModeBanner: false,
-            onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              fontFamily: "NotoSans",
-            ).copyWith(
-              pageTransitionsTheme: pageTransitionsTheme,
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: state.primary,
-                brightness: Brightness.light,
-              ),
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: state.primary,
-                  foregroundColor: Colors.white,
-                  iconColor: Colors.white,
-                  elevation: 0,
-                ),
-              ),
-              bottomSheetTheme: BottomSheetThemeData(
-                backgroundColor: Colors.grey.shade100,
-              ),
+      child: BlocBuilder<LanguageCubit, LanguageState>(
+        builder:
+            (context, languageState) => BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, themeState) {
+                return MaterialApp(
+                  navigatorKey: navigatorKey,
+                  debugShowCheckedModeBanner: false,
+                  locale: languageState.locale,
+                  onGenerateTitle:
+                      (context) => AppLocalizations.of(context).appTitle,
+                  theme: ThemeData(
+                    brightness: Brightness.light,
+                    fontFamily: "NotoSans",
+                  ).copyWith(
+                    pageTransitionsTheme: pageTransitionsTheme,
+                    colorScheme: ColorScheme.fromSeed(
+                      seedColor: themeState.primary,
+                      brightness: Brightness.light,
+                    ),
+                    elevatedButtonTheme: ElevatedButtonThemeData(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: themeState.primary,
+                        foregroundColor: Colors.white,
+                        iconColor: Colors.white,
+                        elevation: 0,
+                      ),
+                    ),
+                    bottomSheetTheme: BottomSheetThemeData(
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  darkTheme: ThemeData(
+                    brightness: Brightness.dark,
+                    fontFamily: "NotoSans",
+                  ).copyWith(
+                    pageTransitionsTheme: pageTransitionsTheme,
+                    colorScheme: ColorScheme.fromSeed(
+                      seedColor: themeState.primary,
+                      brightness: Brightness.dark,
+                    ),
+                    elevatedButtonTheme: ElevatedButtonThemeData(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: themeState.primary,
+                        foregroundColor: Colors.white,
+                        iconColor: Colors.white,
+                        elevation: 0,
+                      ),
+                    ),
+                    bottomSheetTheme: const BottomSheetThemeData(
+                      backgroundColor: Color.fromARGB(255, 15, 15, 15),
+                    ),
+                  ),
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  themeMode: themeState.themeMode,
+                  home:
+                      Hive.box(
+                            "user",
+                          ).get("is_setup_complete", defaultValue: false)
+                          ? const HomePage()
+                          : const AppSetupPage(),
+                );
+              },
             ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              fontFamily: "NotoSans",
-            ).copyWith(
-              pageTransitionsTheme: pageTransitionsTheme,
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: state.primary,
-                brightness: Brightness.dark,
-              ),
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: state.primary,
-                  foregroundColor: Colors.white,
-                  iconColor: Colors.white,
-                  elevation: 0,
-                ),
-              ),
-              bottomSheetTheme: const BottomSheetThemeData(
-                backgroundColor: Color.fromARGB(255, 15, 15, 15),
-              ),
-            ),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            themeMode: state.themeMode,
-            home:
-                Hive.box("user").get("is_setup_complete", defaultValue: false)
-                    ? const HomePage()
-                    : const AppSetupPage(),
-          );
-        },
       ),
     );
   }
