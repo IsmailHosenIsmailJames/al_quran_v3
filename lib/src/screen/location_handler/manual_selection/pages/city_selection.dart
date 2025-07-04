@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calcula
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 class CitySelection extends StatefulWidget {
@@ -27,6 +28,7 @@ class _CitySelectionState extends State<CitySelection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Column(
         children: [
@@ -44,14 +46,14 @@ class _CitySelectionState extends State<CitySelection> {
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text("Select Your City", style: TextStyle(fontSize: 20)),
+                Text(l10n.selectYourCityTitle, style: const TextStyle(fontSize: 20)),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: "Search for a city",
+              hintText: l10n.searchForCityHint,
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -72,7 +74,7 @@ class _CitySelectionState extends State<CitySelection> {
             >(
               builder: (context, state) {
                 if (state.cityList == null) {
-                  return const Text("Something went wrong");
+                  return Text(l10n.somethingWentWrongError);
                 }
 
                 return ListView.builder(

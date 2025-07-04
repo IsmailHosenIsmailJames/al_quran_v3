@@ -2,6 +2,7 @@ import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/m
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 class CountriesSelection extends StatefulWidget {
@@ -17,6 +18,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Column(
         children: [
@@ -31,9 +33,9 @@ class _CountriesSelectionState extends State<CountriesSelection> {
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text(
-                  "Select Your Country",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  l10n.selectYourCountryTitle,
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),
@@ -41,7 +43,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: "Search for a country",
+              hintText: l10n.searchForCountryHint,
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -62,7 +64,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
             >(
               builder: (context, state) {
                 if (state.locationData == null) {
-                  return const Text("Something went wrong");
+                  return Text(l10n.somethingWentWrongError);
                 }
                 List listOfCountry = state.locationData!.keys.toList();
                 return ListView.builder(

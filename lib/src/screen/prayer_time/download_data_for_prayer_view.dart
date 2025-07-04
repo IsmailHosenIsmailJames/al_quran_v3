@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_functi
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 import "../../widget/prayers/adress_from_lat_lon.dart";
@@ -51,6 +52,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: widget.moveToDownload ? AppBar() : null,
       body: Padding(
@@ -62,9 +64,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Address: ",
-                  style: TextStyle(
+                Text(
+                  l10n.addressLabel,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
@@ -96,7 +98,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                             );
                       }
                     },
-                    child: const Text("Change"),
+                    child: Text(l10n.changeButtonLabel),
                   ),
                 ),
               ],
@@ -107,9 +109,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Calculation Method: ",
-                  style: TextStyle(
+                Text(
+                  l10n.calculationMethodLabel,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
@@ -132,7 +134,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                         Navigator.pop(context);
                       });
                     },
-                    child: const Text("Change"),
+                    child: Text(l10n.changeButtonLabel),
                   ),
                 ),
               ],
@@ -194,7 +196,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                           ),
                         )
                         : const Icon(FluentIcons.arrow_download_24_filled),
-                label: const Text("Download Prayer Time"),
+                label: Text(l10n.downloadPrayerTimeButtonLabel),
               ),
             ),
           ],

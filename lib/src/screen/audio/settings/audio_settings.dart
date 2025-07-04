@@ -3,6 +3,7 @@ import "dart:io";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
@@ -20,6 +21,7 @@ class AudioSettings extends StatefulWidget {
 class _AudioSettingsState extends State<AudioSettings> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return Container(
@@ -29,16 +31,16 @@ class _AudioSettingsState extends State<AudioSettings> {
             borderRadius: BorderRadius.circular(7),
           ),
           child: FutureBuilder(
-            future: getCategorizedCacheFilesWithSize(),
+            future: getCategorizedCacheFilesWithSize(l10n),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Map<String, List<Map<String, dynamic>>> data = snapshot.data!;
 
                 List<String> keys = data.keys.toList();
 
-                return getListOfCacheWidget(keys, data);
+                return getListOfCacheWidget(keys, data, l10n);
               } else if (snapshot.hasError) {
-                return const Center(child: Text("Cache Not Found"));
+                return Center(child: Text(l10n.cacheNotFound));
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -53,13 +55,14 @@ class _AudioSettingsState extends State<AudioSettings> {
   Column getListOfCacheWidget(
     List<String> keys,
     Map<String, List<Map<String, dynamic>>> data,
+    AppLocalizations l10n,
   ) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SizedBox(width: 100, child: Text("Cache Size")),
+            SizedBox(width: 100, child: Text(l10n.cacheSizeLabel)),
             SizedBox(
               width: 100,
               child: FutureBuilder<int>(
@@ -68,7 +71,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    return Text("Error: ${snapshot.error}");
+                    return Text(l10n.errorLabel.replaceFirst('{errorMessage}', snapshot.error.toString()));
                   } else {
                     return Text(formatBytes(snapshot.data ?? 0));
                   }
@@ -90,18 +93,18 @@ class _AudioSettingsState extends State<AudioSettings> {
                   }
                   setState(() {});
                 },
-                child: const Text("Clean"),
+                child: Text(l10n.cleanButtonLabel),
               ),
             ),
           ],
         ),
         const Divider(),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 100, child: Text("Last Modified")),
-            SizedBox(width: 100, child: Text("Cache Size")),
-            Gap(100),
+            SizedBox(width: 100, child: Text(l10n.lastModifiedLabel)),
+            SizedBox(width: 100, child: Text(l10n.cacheSizeLabel)),
+            const Gap(100),
           ],
         ),
         const Gap(10),
@@ -133,7 +136,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                       }
                       setState(() {});
                     },
-                    child: const Text("Clean"),
+                    child: Text(l10n.cleanButtonLabel),
                   ),
                 ),
               ),
@@ -146,7 +149,7 @@ class _AudioSettingsState extends State<AudioSettings> {
 }
 
 Future<Map<String, List<Map<String, dynamic>>>>
-getCategorizedCacheFilesWithSize() async {
+    getCategorizedCacheFilesWithSize(AppLocalizations l10n) async {
   Map<String, List<Map<String, dynamic>>> categorizedFiles = {};
   final cacheDir = Directory(
     join((await getTemporaryDirectory()).path, "just_audio_cache", "remote"),
@@ -167,7 +170,7 @@ getCategorizedCacheFilesWithSize() async {
 
     final fileInfo = {"path": file.path, "size": fileSize};
 
-    String timeKey = getTheTimeKey(differenceInDays);
+    String timeKey = getTheTimeKey(differenceInDays, l10n);
     List<Map<String, dynamic>> tem = categorizedFiles[timeKey] ?? [];
     tem.add(fileInfo);
     categorizedFiles[timeKey] = tem;
@@ -176,38 +179,38 @@ getCategorizedCacheFilesWithSize() async {
   return categorizedFiles;
 }
 
-String getTheTimeKey(int distanceInDay) {
+String getTheTimeKey(int distanceInDay, AppLocalizations l10n) {
   String timeKey = "";
   if (distanceInDay > 365) {
-    timeKey = "1 Year ago";
+    timeKey = l10n.timeAgo1Year;
   } else if (distanceInDay > 182) {
-    timeKey = "6 Months ago";
+    timeKey = l10n.timeAgo6Months;
   } else if (distanceInDay > 91) {
-    timeKey = "3 Months ago";
+    timeKey = l10n.timeAgo3Months;
   } else if (distanceInDay > 60) {
-    timeKey = "2 Months ago";
+    timeKey = l10n.timeAgo2Months;
   } else if (distanceInDay > 30) {
-    timeKey = "1 Month ago";
+    timeKey = l10n.timeAgo1Month;
   } else if (distanceInDay > 21) {
-    timeKey = "3 Weeks ag0";
+    timeKey = l10n.timeAgo3Weeks;
   } else if (distanceInDay > 14) {
-    timeKey = "2 Weeks ago";
+    timeKey = l10n.timeAgo2Weeks;
   } else if (distanceInDay > 7) {
-    timeKey = "1 Weeks ago";
+    timeKey = l10n.timeAgo1Week;
   } else if (distanceInDay > 6) {
-    timeKey = "6 Days ago";
+    timeKey = l10n.timeAgo6Days;
   } else if (distanceInDay > 5) {
-    timeKey = "5 Days ago";
+    timeKey = l10n.timeAgo5Days;
   } else if (distanceInDay > 4) {
-    timeKey = "4 Days ago";
+    timeKey = l10n.timeAgo4Days;
   } else if (distanceInDay > 3) {
-    timeKey = "3 Days ago";
+    timeKey = l10n.timeAgo3Days;
   } else if (distanceInDay > 2) {
-    timeKey = "2 Days ago";
+    timeKey = l10n.timeAgo2Days;
   } else if (distanceInDay > 1) {
-    timeKey = "1 Day ago";
+    timeKey = l10n.timeAgo1Day;
   } else {
-    timeKey = "Today";
+    timeKey = l10n.timeToday;
   }
   return timeKey;
 }

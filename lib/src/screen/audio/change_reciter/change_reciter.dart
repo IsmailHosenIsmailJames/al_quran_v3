@@ -6,6 +6,7 @@ import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
@@ -52,6 +53,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -66,10 +68,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
           ),
           child: Stack(
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  "Select Reciter",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  l10n.selectReciterTitle,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               Align(
@@ -161,12 +163,12 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text("Style: ${reciterInfoModel.style}"),
-                          Text("Source: ${reciterInfoModel.source}"),
+                          Text(l10n.reciterStyleLabel.replaceFirst('{styleName}', reciterInfoModel.style ?? '')),
+                          Text(l10n.reciterSourceLabel.replaceFirst('{sourceName}', reciterInfoModel.source ?? '')),
                           if (reciterInfoModel.bio != null)
                             Row(
                               children: [
-                                const Text("More: "),
+                                Text(l10n.reciterMoreInfoLabel),
                                 SizedBox(
                                   height: 20,
                                   child: TextButton(
@@ -214,7 +216,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
               widget.onReciterChanged(selectedReciter);
             },
             icon: const Icon(Icons.done),
-            label: const Text("Save"),
+            label: Text(l10n.saveButtonLabel),
           ),
         ),
       ],

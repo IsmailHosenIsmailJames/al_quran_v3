@@ -27,6 +27,7 @@ import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
 
@@ -44,6 +45,7 @@ class AudioPage extends StatefulWidget {
 class _AudioPageState extends State<AudioPage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
@@ -54,7 +56,7 @@ class _AudioPageState extends State<AudioPage> {
               ayahKeyState.current,
             );
             String translation =
-                translationMap?["t"] ?? "Translation Not Found";
+                translationMap?["t"] ?? l10n.translationNotFound;
             translation = translation.replaceAll(">", "> ");
             return Padding(
               padding: const EdgeInsets.all(10),
@@ -210,7 +212,7 @@ class _AudioPageState extends State<AudioPage> {
                       ? AudioPlayerManager.audioPlayer.pause()
                       : AudioPlayerManager.audioPlayer.play();
                 },
-                tooltip: state.isPlaying ? "Pause" : "Play",
+                tooltip: state.isPlaying ? l10n.pauseTooltip : l10n.playTooltip,
                 iconSize: 45,
                 style: IconButton.styleFrom(padding: const EdgeInsets.all(5)),
                 icon:

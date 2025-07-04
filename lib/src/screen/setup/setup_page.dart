@@ -31,6 +31,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -115,13 +116,14 @@ class _AppSetupPageState extends State<AppSetupPage> {
       fontSize: 16,
       fontWeight: FontWeight.bold,
     );
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          downloadResources(context.read<ResourcesProgressCubitCubit>().state);
+          downloadResources(context.read<ResourcesProgressCubitCubit>().state, l10n);
         },
-        tooltip: "Save and Download",
+        tooltip: l10n.saveAndDownloadTooltip,
         backgroundColor: themeState.primary,
         foregroundColor: Colors.white,
         child: const Icon(FluentIcons.arrow_download_24_filled),
@@ -161,18 +163,18 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("App Language", style: titleStyle),
+                            Text(l10n.appLanguageLabel, style: titleStyle),
                           ],
                         ),
                         const Gap(5),
                         DropdownButtonFormField(
-                          decoration: const InputDecoration(
-                            hintText: "Select app language...",
+                          decoration: InputDecoration(
+                            hintText: l10n.selectAppLanguageHint,
                           ),
                           value: appLanguage,
                           validator: (value) {
                             if (value == null) {
-                              return "Please select one";
+                              return l10n.pleaseSelectOneValidator;
                             } else {
                               return null;
                             }
@@ -180,7 +182,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
 
                           isExpanded: true,
-                          items: getAppLanguageDropdown(),
+                          items: getAppLanguageDropdown(l10n),
                           onChanged: (value) {
                             changeAppLanguage(value.toString());
                             setState(() {});
@@ -204,7 +206,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             ),
                             const Gap(8),
                             Text(
-                              "Quran Translation Language",
+                              l10n.quranTranslationLanguageLabel,
                               style: titleStyle,
                             ),
                           ],
@@ -212,13 +214,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         const Gap(5),
                         DropdownButtonFormField(
                           value: translationLanguageCode,
-                          items: getQuranTranslationLanguageDropDownList(),
-                          decoration: const InputDecoration(
-                            hintText: "Select translation language...",
+                          items: getQuranTranslationLanguageDropDownList(l10n),
+                          decoration: InputDecoration(
+                            hintText: l10n.selectTranslationLanguageHint,
                           ),
                           validator: (value) {
                             if (value == null) {
-                              return "Please select one";
+                              return l10n.pleaseSelectOneValidator;
                             } else {
                               return null;
                             }
@@ -248,7 +250,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("Quran Translation Book", style: titleStyle),
+                            Text(l10n.quranTranslationBookLabel, style: titleStyle),
                           ],
                         ),
 
@@ -260,15 +262,15 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           builder: (context, resourcesProcessState) {
                             return DropdownButtonFormField(
                               items: getQuranTranslationBookDropDownList(
-                                resourcesProcessState,
+                                resourcesProcessState, l10n
                               ),
-                              decoration: const InputDecoration(
-                                hintText: "Select translation book...",
+                              decoration: InputDecoration(
+                                hintText: l10n.selectTranslationBookHint,
                               ),
                               value: resourcesProcessState.translationBookModel,
                               validator: (value) {
                                 if (value == null) {
-                                  return "Please select one";
+                                  return l10n.pleaseSelectOneValidator;
                                 } else {
                                   return null;
                                 }
@@ -302,20 +304,20 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("Quran Tafsir Language", style: titleStyle),
+                            Text(l10n.quranTafsirLanguageLabel, style: titleStyle),
                           ],
                         ),
 
                         const Gap(5),
                         DropdownButtonFormField(
-                          items: getQuranTafsirLanguageDropDownList(),
-                          decoration: const InputDecoration(
-                            hintText: "Select tafsir language...",
+                          items: getQuranTafsirLanguageDropDownList(l10n),
+                          decoration: InputDecoration(
+                            hintText: l10n.selectTafsirLanguageHint,
                           ),
                           value: tafsirLanguageCode,
                           validator: (value) {
                             if (value == null) {
-                              return "Please select one";
+                              return l10n.pleaseSelectOneValidator;
                             } else {
                               return null;
                             }
@@ -344,7 +346,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("Quran Tafsir Book", style: titleStyle),
+                            Text(l10n.quranTafsirBookLabel, style: titleStyle),
                           ],
                         ),
                         const Gap(5),
@@ -355,16 +357,16 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           builder: (context, processState) {
                             return DropdownButtonFormField(
                               items: getQuranTafsirBookDropDownList(
-                                processState,
+                                processState, l10n
                               ),
-                              decoration: const InputDecoration(
-                                hintText: "Select tafsir book...",
+                              decoration: InputDecoration(
+                                hintText: l10n.selectTafsirBookHint,
                               ),
                               isExpanded: true,
                               value: processState.tafsirBookModel,
                               validator: (value) {
                                 if (value == null) {
-                                  return "Please select one";
+                                  return l10n.pleaseSelectOneValidator;
                                 } else {
                                   return null;
                                 }
@@ -395,11 +397,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("Quran Script & Style", style: titleStyle),
+                            Text(l10n.quranScriptStyleLabel, style: titleStyle),
                           ],
                         ),
                         const Gap(5),
-                        getScriptSelectionSegmentedButtons(context),
+                        getScriptSelectionSegmentedButtons(context, l10n),
                         getAyahPreviewWidget(
                           showHeaderOptions: true,
                           showOnlyAyah: true,
@@ -429,12 +431,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   Future<void> downloadResources(
     ResourcesProgressCubitState processState,
+    AppLocalizations l10n,
   ) async {
     if (translationLanguageCode == null ||
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
         processState.tafsirBookModel == null) {
-      Fluttertoast.showToast(msg: "Please select required option");
+      Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator); // Re-using validator message for this
     }
     if (fromKey.currentState?.validate() == true) {
       final userBox = Hive.box("user");
@@ -467,9 +470,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Just a moment...",
-                            style: TextStyle(fontSize: 20),
+                          Text(
+                            l10n.justAMomentDialogTitle,
+                            style: const TextStyle(fontSize: 20),
                           ),
                           const Gap(20),
                           LinearProgressIndicator(
@@ -480,19 +483,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ),
                           const Gap(10),
                           Text(
-                            '${state.processName} ${state.percentage != null ? '${(state.percentage! * 100).toStringAsFixed(2)}%' : ''}',
+                            '${state.processName} ${state.percentage != null ? '${(state.percentage! * 100).toStringAsFixed(2)}%' : ''}', // processName is dynamic
                             style: const TextStyle(fontSize: 16),
                             textAlign: TextAlign.center,
                           ),
                         ],
                       );
                     } else if (state.isSuccess == true) {
-                      return const Text("Success");
+                      return Text(l10n.successDialogMessage);
                     } else if (state.errorMessage != null) {
                       return Column(
                         children: [
                           Text(
-                            "${state.errorMessage}",
+                            "${state.errorMessage}", // This is a dynamic error message
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.red,
@@ -502,9 +505,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              downloadResources(processState);
+                              downloadResources(processState, l10n);
                             },
-                            child: const Text("Retry"),
+                            child: Text(l10n.retryButtonLabel),
                           ),
                         ],
                       );
@@ -545,7 +548,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                 isSetupProcess: true,
               )
               : true;
-      bool success4 = await downloadDefaultSegmentedQuranRecitation();
+      bool success4 = await downloadDefaultSegmentedQuranRecitation(l10n);
       if (success1 && success2 && success3 && success4) {
         userBox.put("is_setup_complete", true);
         // success and route to home
@@ -561,27 +564,27 @@ class _AppSetupPageState extends State<AppSetupPage> {
         // error and show 'Something went wrong' in cubit
         log([success1, success2, success3, success4].toString());
         context.read<ResourcesProgressCubitCubit>().failure(
-          "Unable to download resources...\nSomething went wrong",
+          l10n.unableToDownloadResourcesError,
         );
       }
     }
   }
 
-  Future<bool> downloadDefaultSegmentedQuranRecitation() async {
+  Future<bool> downloadDefaultSegmentedQuranRecitation(AppLocalizations l10n) async {
     String url =
         ApisUrls.base +
         context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!;
     try {
       context.read<ResourcesProgressCubitCubit>().updateProgress(
         null,
-        "Downloading Segmented Quran Recitation",
+        l10n.downloadingSegmentedQuranRecitationProgress,
       );
       final response = await dio.Dio().get(url);
       if (response.statusCode == 200) {
         Box box = Hive.box("segmented_quran_recitation");
         context.read<ResourcesProgressCubitCubit>().updateProgress(
           null,
-          "Processing Segmented Quran Recitation",
+          l10n.processingSegmentedQuranRecitationProgress,
         );
         Map segmentsInfo = await compute(
           (message) => jsonDecode(decodeBZip2String(message)),
@@ -608,7 +611,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   QuranScriptType selectedScript = QuranScriptType.tajweed;
 
   List<DropdownMenuItem<TafsirBookModel>>? getQuranTafsirBookDropDownList(
-    ResourcesProgressCubitState processState,
+    ResourcesProgressCubitState processState, AppLocalizations l10n
   ) {
     List<DropdownMenuItem<TafsirBookModel>> items = [];
     if (selectableTafsirBook?.isEmpty ?? true) return null;
@@ -643,7 +646,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<DropdownMenuItem>? getQuranTafsirLanguageDropDownList() {
+  List<DropdownMenuItem>? getQuranTafsirLanguageDropDownList(AppLocalizations l10n) {
     List<DropdownMenuItem> items = [];
     tafsirInformationWithScore.forEach((key, value) {
       items.add(
@@ -672,7 +675,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<DropdownMenuItem<String>> getAppLanguageDropdown() {
+  List<DropdownMenuItem<String>> getAppLanguageDropdown(AppLocalizations l10n) {
     return usedAppLanguageMap.map((e) {
       return DropdownMenuItem(
         value: e["Code"],
@@ -690,7 +693,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   ),
                 ),
               Text(e["Native"] ?? ""),
-              ...getSupportInfoForLanguageWidget(key: e["English"] ?? ""),
+              ...getSupportInfoForLanguageWidget(key: e["English"] ?? "", l10n: l10n),
             ],
           ),
         ),
@@ -699,7 +702,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   List<DropdownMenuItem>? getQuranTranslationBookDropDownList(
-    ResourcesProgressCubitState resourcesProcessState,
+    ResourcesProgressCubitState resourcesProcessState, AppLocalizations l10n
   ) {
     List<DropdownMenuItem<TranslationBookModel>> items = [];
     if (selectableTranslationBook?.isEmpty ?? true) return null;
@@ -723,7 +726,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   ),
                 Text(book.name),
                 if (book.type == TranslationResourcesType.withFootnoteTags)
-                  footNoteTag,
+                  getFootNoteTag(l10n),
               ],
             ),
           ),
@@ -734,7 +737,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<DropdownMenuItem> getQuranTranslationLanguageDropDownList() {
+  List<DropdownMenuItem> getQuranTranslationLanguageDropDownList(AppLocalizations l10n) {
     List<DropdownMenuItem> items = [];
     translationResources.forEach((key, value) {
       items.add(
@@ -755,7 +758,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
-                ...getSupportInfoForLanguageWidget(key: key.toLowerCase()),
+                ...getSupportInfoForLanguageWidget(key: key.toLowerCase(), l10n: l10n),
               ],
             ),
           ),
@@ -765,66 +768,66 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<Widget> getSupportInfoForLanguageWidget({required String key}) {
+  List<Widget> getSupportInfoForLanguageWidget({required String key, required AppLocalizations l10n}) {
     return [
-      if (doesHaveFootNote(key.toLowerCase())) footNoteTag,
-      if (doesHaveTafsirSupport(key.toLowerCase())) tafsirTag,
-      if (doesHaveWordByWordTranslation(key.toLowerCase())) wordByWordTag,
+      if (doesHaveFootNote(key.toLowerCase())) getFootNoteTag(l10n),
+      if (doesHaveTafsirSupport(key.toLowerCase())) getTafsirTag(l10n),
+      if (doesHaveWordByWordTranslation(key.toLowerCase())) getWordByWordTag(l10n),
     ];
   }
 
-  late Widget footNoteTag = Container(
+  Widget getFootNoteTag(AppLocalizations l10n) => Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
       color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
-    child: const Row(
+    child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        Gap(5),
-        Text("Footnote", style: TextStyle(color: Colors.white, fontSize: 12)),
+        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
+        const Gap(5),
+        Text(l10n.footnoteTag, style: const TextStyle(color: Colors.white, fontSize: 12)),
       ],
     ),
   );
 
-  late Widget tafsirTag = Container(
+  Widget getTafsirTag(AppLocalizations l10n) => Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
       color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
-    child: const Row(
+    child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        Gap(5),
-        Text("Tafsir", style: TextStyle(color: Colors.white, fontSize: 12)),
+        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
+        const Gap(5),
+        Text(l10n.tafsirTag, style: const TextStyle(color: Colors.white, fontSize: 12)),
       ],
     ),
   );
 
-  late Widget wordByWordTag = Container(
+  Widget getWordByWordTag(AppLocalizations l10n) => Container(
     padding: const EdgeInsets.only(left: 7, right: 7),
     margin: const EdgeInsets.only(left: 5, right: 5),
     decoration: BoxDecoration(
       color: themeState.primary,
       borderRadius: BorderRadius.circular(100),
     ),
-    child: const Row(
+    child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        Gap(5),
+        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
+        const Gap(5),
         Text(
-          "Word by Word",
-          style: TextStyle(color: Colors.white, fontSize: 12),
+          l10n.wordByWordTag,
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
       ],
     ),
@@ -863,7 +866,7 @@ bool doesHaveTafsirSupport(String language) {
   return doesHaveTafsirSupport;
 }
 
-Widget getScriptSelectionSegmentedButtons(BuildContext context) {
+Widget getScriptSelectionSegmentedButtons(BuildContext context, AppLocalizations l10n) {
   return BlocBuilder<ThemeCubit, ThemeState>(
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
@@ -873,6 +876,19 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
               children: List.generate(QuranScriptType.values.length, (index) {
                 QuranScriptType currentQuranScriptType =
                     QuranScriptType.values[index];
+                String buttonText;
+                switch (currentQuranScriptType) {
+                  case QuranScriptType.uthmani:
+                    buttonText = l10n.quranScriptUthmani;
+                    break;
+                  case QuranScriptType.indopak:
+                    buttonText = l10n.quranScriptIndopak;
+                    break;
+                  case QuranScriptType.tajweed: // Assuming QPC Hafs is Tajweed
+                    buttonText = l10n.quranScriptQpch;
+                    break;
+                }
+
                 return Expanded(
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
@@ -917,7 +933,7 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       );
                     },
                     label: Text(
-                      currentQuranScriptType.name.capitalize(),
+                      buttonText,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     icon:

@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_compass/flutter_compass.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -51,6 +52,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
       LocationQiblaPrayerDataState
@@ -68,6 +70,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                 themeState,
                 context: context,
                 kaabaAngle: dataState.kaabaAngle!,
+                l10n: l10n,
               ),
             ),
           );
@@ -88,13 +91,13 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                     stream: FlutterCompass.events,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text("Unable to get compass data");
+                        return Text(l10n.unableToGetCompassData);
                       }
                       if (snapshot.hasData) {
                         double? direction = snapshot.data?.heading;
                         if (direction == null) {
-                          return const Center(
-                            child: Text("Device does not have sensors !"),
+                          return Center(
+                            child: Text(l10n.deviceDoesNotHaveSensors),
                           );
                         }
                         if (direction < 0) {

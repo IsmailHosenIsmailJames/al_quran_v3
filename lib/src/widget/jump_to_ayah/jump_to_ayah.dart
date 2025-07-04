@@ -11,6 +11,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -53,6 +54,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -82,8 +84,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 Center(
                   child: Text(
                     widget.selectMultipleAndShare == true
-                        ? "Share Select Ayahs"
-                        : "Jump To Ayah",
+                        ? l10n.shareSelectedAyahsTitle
+                        : l10n.drawerJumpToAyah, // Re-use existing key
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -109,7 +111,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsetsGeometry.only(left: 10),
-              child: Text("Selected: ${selectedAyahKeys.length}"),
+              child: Text(l10n.selectedCountLabel.replaceFirst('{count}', selectedAyahKeys.length.toString())),
             ),
           if (widget.selectMultipleAndShare == true) const Gap(5),
 
@@ -129,7 +131,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           ? Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: const Text("Selection Empty"),
+                            child: Text(l10n.selectionEmptyLabel),
                           )
                           : ListView.builder(
                             padding: const EdgeInsets.only(left: 10, right: 30),
@@ -187,9 +189,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         child: TextFormField(
                           controller: textEditingController,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hintText: "Search for a surah",
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search),
+                            hintText: l10n.searchForSurahHint,
                             border: InputBorder.none,
                           ),
                           onChanged: (value) {
@@ -211,7 +213,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               final surah = SurahInfoModel.fromMap(
                                 metaDataSurah[(index + 1).toString()],
                               );
-                              return surah.toJson().contains(
+                              return surah.toJson().contains( // This search logic might need adjustment for localization if surah names are localized
                                     textEditingController.text,
                                   )
                                   ? TextButton(
@@ -241,7 +243,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                         textEditingController.text = "";
                                       });
                                     },
-                                    child: Text(
+                                    child: Text( // Surah names are proper names, usually not localized in this context
                                       "${index + 1}. ${surah.nameSimple}",
                                     ),
                                   )
@@ -372,8 +374,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                         color: themeState.primary,
                                       ),
                                       const Gap(20),
-                                      const Text(
-                                        "Generating Image... Please Wait",
+                                      Text(
+                                        l10n.generatingImagePleaseWait,
                                         textAlign: TextAlign.center,
                                       ),
                                     ],
@@ -391,7 +393,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             QuranTranslationFunction.getTranslation(ayahKey) ??
                             {};
                         String translation =
-                            translationMap["t"] ?? "Translation Not Found";
+                            translationMap["t"] ?? l10n.translationNotFound;
                         translation = translation.replaceAll(">", "> ");
                         Map footNote = translationMap["f"] ?? {};
                         String footNoteAsString = "\n";
@@ -408,20 +410,17 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  tajweedScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? []; // Added null checks
                             }
                           case QuranScriptType.uthmani:
                             {
                               quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  uthmaniScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
                             }
                           case QuranScriptType.indopak:
                             {
                               quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  indopakScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
                             }
                         }
                         TextStyle scriptTextStyle = TextStyle(
@@ -495,7 +494,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       );
                     },
                     icon: const Icon(FluentIcons.image_24_regular),
-                    label: const Text("As Image"),
+                    label: Text(l10n.asImageButtonLabel),
                   ),
                 ),
                 const Gap(10),
@@ -511,7 +510,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             QuranTranslationFunction.getTranslation(ayahKey) ??
                             {};
                         String translation =
-                            translationMap["t"] ?? "Translation Not Found";
+                            translationMap["t"] ?? l10n.translationNotFound;
                         translation = translation.replaceAll(">", "> ");
                         Map footNote = translationMap["f"] ?? {};
                         String footNoteAsString = "\n";
@@ -528,31 +527,28 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  tajweedScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
                             }
                           case QuranScriptType.uthmani:
                             {
                               quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  uthmaniScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
                             }
                           case QuranScriptType.indopak:
                             {
                               quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
+                                  indopakScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
                             }
                         }
                         text +=
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
+                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
                       }
 
                       await SharePlus.instance.share(ShareParams(text: text));
                       Navigator.pop(context);
                     },
                     icon: const Icon(FluentIcons.textbox_16_regular),
-                    label: const Text("As Text"),
+                    label: Text(l10n.asTextButtonLabel),
                   ),
                 ),
                 const Gap(5),
@@ -577,7 +573,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                   Navigator.pop(context);
                   widget.onPlaySelected!("$surahNumber:$ayahNumber");
                 },
-                label: const Text("Play From Selected Ayah"),
+                label: Text(l10n.playFromSelectedAyahButtonLabel),
                 icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
               ),
             ),
@@ -604,10 +600,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ),
                             );
                           } else {
-                            Fluttertoast.showToast(msg: "Please Select One");
+                            Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator);
                           }
                         },
-                        child: const Text("To Tafsir"),
+                        child: Text(l10n.toTafsirButtonLabel),
                       ),
                     ),
                   if (widget.onSelectAyah == null) const Gap(10),
@@ -634,11 +630,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             );
                           }
                         } else {
-                          Fluttertoast.showToast(msg: "Please Select One");
+                          Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator);
                         }
                       },
                       child: Text(
-                        widget.onSelectAyah != null ? "Select Ayah" : "To Ayah",
+                        widget.onSelectAyah != null ? l10n.selectAyahButtonLabel : l10n.toAyahButtonLabel,
                       ),
                     ),
                   ),

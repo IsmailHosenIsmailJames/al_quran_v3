@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 class CollectionContentView extends StatefulWidget {
@@ -42,7 +43,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     super.initState();
   }
 
-  Widget _buildEmptyState(String message) {
+  Widget _buildEmptyState(String message, AppLocalizations l10n) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -56,7 +57,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             ),
             const Gap(16),
             Text(
-              message,
+              message, // This message comes from the localized strings already
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
             ),
@@ -66,7 +67,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     );
   }
 
-  Widget _buildNoteItem(NoteModel noteModel, BuildContext context) {
+  Widget _buildNoteItem(NoteModel noteModel, BuildContext context, AppLocalizations l10n) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -82,7 +83,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Note:",
+              l10n.noteLabel,
               style: textTheme.titleSmall?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -102,7 +103,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             if (noteModel.ayahKey.isNotEmpty) ...[
               const Gap(12),
               Text(
-                "Linked Ayahs:",
+                l10n.linkedAyahsLabel,
                 style: textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
@@ -170,6 +171,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
@@ -199,25 +201,21 @@ class _CollectionContentViewState extends State<CollectionContentView> {
           // Use Builder to ensure context is correct for Theme
           if (widget.noteCollectionModel != null) {
             if (widget.noteCollectionModel!.notes.isEmpty) {
-              return _buildEmptyState(
-                "This note collection is empty.\nAdd some notes to see them here.",
-              );
+              return _buildEmptyState(l10n.emptyNoteCollectionMessage, l10n);
             }
             return ListView.separated(
               padding: const EdgeInsets.all(12.0),
               itemCount: widget.noteCollectionModel!.notes.length,
               itemBuilder: (context, index) {
                 NoteModel noteModel = widget.noteCollectionModel!.notes[index];
-                return _buildNoteItem(noteModel, context);
+                return _buildNoteItem(noteModel, context, l10n);
               },
               separatorBuilder:
                   (context, index) => const Gap(0), // Cards have own margin
             );
           } else if (widget.pinnedCollectionModel != null) {
             if (widget.pinnedCollectionModel!.pinned.isEmpty) {
-              return _buildEmptyState(
-                "No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.",
-              );
+              return _buildEmptyState(l10n.emptyPinnedCollectionMessage, l10n);
             }
             return ListView.builder(
               itemCount: widget.pinnedCollectionModel!.pinned.length,
@@ -231,7 +229,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             );
           }
           return _buildEmptyState(
-            "No content available.",
+            l10n.noContentAvailableMessage, l10n
           ); // Fallback, should not happen due to asserts
         },
       ),

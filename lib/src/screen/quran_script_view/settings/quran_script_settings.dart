@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
@@ -25,6 +26,7 @@ class QuranScriptSettings extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w500,
     );
+    final l10n = AppLocalizations.of(context)!;
 
     Widget bodyWidget = BlocBuilder<QuranViewCubit, QuranViewState>(
       builder: (context, quranViewState) {
@@ -33,14 +35,14 @@ class QuranScriptSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Quran Style", style: titleStyle),
+            Text(l10n.quranStyleLabel, style: titleStyle),
             const Gap(7),
-            getScriptSelectionSegmentedButtons(context),
+            getScriptSelectionSegmentedButtons(context, l10n),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Quran Font Size", style: titleStyle),
+                Text(l10n.quranFontSizeLabel, style: titleStyle),
                 Text(quranViewState.fontSize.toString(), style: titleStyle),
               ],
             ),
@@ -66,7 +68,7 @@ class QuranScriptSettings extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Quran Line Height", style: titleStyle),
+                Text(l10n.quranLineHeightLabel, style: titleStyle),
                 Text(quranViewState.lineHeight.toString(), style: titleStyle),
               ],
             ),
@@ -92,7 +94,7 @@ class QuranScriptSettings extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Translation & Tafsir Font Size", style: titleStyle),
+                Text(l10n.translationTafsirFontSizeLabel, style: titleStyle),
                 Text(
                   quranViewState.translationFontSize.toString(),
                   style: titleStyle,
@@ -128,9 +130,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Quran Ayah",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.quranAyahLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideQuranAyah,
               onChanged: (value) {
@@ -148,9 +150,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Translation",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.translationLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideTranslation,
               onChanged: (value) {
@@ -168,9 +170,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Word By Word",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.wordByWordLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideWordByWord,
               onChanged: (value) {
@@ -188,9 +190,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Foot Note",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.footNoteLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideFootnote,
               onChanged: (value) {
@@ -208,9 +210,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Top Toolbar",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.topToolbarLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideToolbar,
               onChanged: (value) {
@@ -229,9 +231,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Keep Open Word By Word",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                l10n.keepOpenWordByWordLabel,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: quranViewState.alwaysOpenWordByWord,
               onChanged: (value) {
@@ -240,12 +242,12 @@ class QuranScriptSettings extends StatelessWidget {
             ),
 
             const Gap(5),
-            getAyahPreviewWidget(showHeaderOptions: true),
+            getAyahPreviewWidget(showHeaderOptions: true), // Assuming this widget handles its own internal localization or doesn't need it
 
             const Gap(10),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text("Word By Word Highlight"),
+              title: Text(l10n.wordByWordHighlightLabel),
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
                 Set<WidgetState> states,
               ) {
@@ -282,7 +284,7 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          appBar: AppBar(title: const Text("Quran Script Settings")),
+          appBar: AppBar(title: Text(l10n.quranScriptSettingsTitle)),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 10,

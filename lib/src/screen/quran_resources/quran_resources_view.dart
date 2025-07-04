@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/screen/quran_resources/translation_resources_vie
 import "package:al_quran_v3/src/screen/quran_resources/word_by_word_resources_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranResourcesView extends StatefulWidget {
@@ -15,13 +16,18 @@ class QuranResourcesView extends StatefulWidget {
 class _QuranResourcesViewState extends State<QuranResourcesView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-
-  final List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
+  List<String> pagesName = []; // Will be initialized in didChangeDependencies
 
   @override
-  void initState() {
-    super.initState();
-
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Initialize l10n dependent strings here
+    final l10n = AppLocalizations.of(context)!;
+    pagesName = [
+      l10n.translationTabLabel,
+      l10n.tafsirTabLabel,
+      l10n.wordByWordTabLabel
+    ];
     _tabController = TabController(length: pagesName.length, vsync: this);
   }
 
@@ -34,9 +40,21 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
+
+    // Ensure pagesName is initialized if didChangeDependencies was not called yet
+    // (e.g. in some hot reload scenarios, though less common with TabController init there)
+    if (pagesName.isEmpty) {
+      pagesName = [
+        l10n.translationTabLabel,
+        l10n.tafsirTabLabel,
+        l10n.wordByWordTabLabel
+      ];
+    }
+
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Quran Resources")),
+      appBar: AppBar(title: Text(l10n.quranResourcesTitle)),
       body: Column(
         children: [
           Padding(

@@ -14,6 +14,7 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -47,6 +48,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
         log(state.isInsideQuranPlayer.toString());
@@ -110,7 +112,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         if (state.isExpanded)
                           Stack(
                             children: [
-                              getFullAudioControllerUI(),
+                              getFullAudioControllerUI(l10n),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: SizedBox(
@@ -128,7 +130,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                         );
                                       }
                                     },
-                                    tooltip: "Close Audio Controller",
+                                    tooltip: l10n.closeAudioControllerTooltip,
                                     icon: const Icon(
                                       Icons.close_fullscreen_rounded,
                                     ),
@@ -146,7 +148,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
     );
   }
 
-  Widget getFullAudioControllerUI() {
+  Widget getFullAudioControllerUI(AppLocalizations l10n) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,7 +257,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       onPressed: () {
                         AudioPlayerManager.stopListeningAudioPlayerState();
                       },
-                      tooltip: "Stop & Close",
+                      tooltip: l10n.stopAndCloseTooltip,
                       icon: const Icon(Icons.close_rounded),
                     ),
                   ),
@@ -295,7 +297,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               }
                             }
                             : null,
-                    tooltip: "Previous",
+                    tooltip: l10n.previousTooltip,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
 
                     icon: const Icon(Icons.skip_previous_rounded),
@@ -310,25 +312,25 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         Duration(milliseconds: inMilSec),
                       );
                     },
-                    tooltip: "Rewind",
+                    tooltip: l10n.rewindTooltip,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.replay_5_rounded),
                   ),
                   BlocBuilder<PlayerStateCubit, PlayerState>(
-                    builder: (context, state) {
+                    builder: (context, playerState) { // Renamed state to playerState to avoid conflict
                       return IconButton(
                         onPressed: () async {
                           AudioPlayerManager.audioPlayer.playing
                               ? AudioPlayerManager.audioPlayer.pause()
                               : AudioPlayerManager.audioPlayer.play();
                         },
-                        tooltip: state.isPlaying ? "Pause" : "Play",
+                        tooltip: playerState.isPlaying ? l10n.pauseTooltip : l10n.playTooltip,
                         iconSize: 40,
                         style: IconButton.styleFrom(
                           padding: const EdgeInsets.all(5),
                         ),
                         icon: Icon(
-                          state.isPlaying
+                          playerState.isPlaying
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
                         ),
@@ -354,7 +356,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         Duration(milliseconds: inMilSec),
                       );
                     },
-                    tooltip: "Fast Forward",
+                    tooltip: l10n.fastForwardTooltip,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.forward_5_rounded),
                   ),
@@ -402,7 +404,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               }
                             }
                             : null,
-                    tooltip: "Play Next Ayah",
+                    tooltip: l10n.playNextAyahTooltip,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.skip_next_rounded),
                   ),
@@ -426,7 +428,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           );
                         }
                       },
-                      tooltip: "Repeat",
+                      tooltip: l10n.repeatTooltip,
                       style: IconButton.styleFrom(padding: EdgeInsets.zero),
                       icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
                         just_audio.LoopMode.one => const Icon(
@@ -467,7 +469,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           isInsideQuran: true,
                         );
                       },
-                      tooltip: "Play As Playlist",
+                      tooltip: l10n.playAsPlaylistTooltip,
                       style: IconButton.styleFrom(padding: EdgeInsets.zero),
                       icon: const Icon(Icons.playlist_play_rounded),
                     ),

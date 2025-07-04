@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/taj
 import "package:clipboard/clipboard.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -30,6 +31,7 @@ void showShareBottomDialog(
   Map footNote,
 ) {
   ThemeState themeState = context.read<ThemeCubit>().state;
+  final l10n = AppLocalizations.of(context)!;
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah[ayahKey.split(":").first],
@@ -57,7 +59,7 @@ void showShareBottomDialog(
       }
   }
 
-  if (quranScriptType == QuranScriptType.tajweed) {}
+  // if (quranScriptType == QuranScriptType.tajweed) {} // This line seems to do nothing
   String footNoteAsString = "\n";
   if (footNote.isNotEmpty) {
     footNote.forEach((key, value) {
@@ -97,16 +99,16 @@ void showShareBottomDialog(
             ),
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.share_24_regular),
-                      Gap(20),
+                      const Icon(FluentIcons.share_24_regular),
+                      const Gap(20),
                       Text(
-                        "Share",
-                        style: TextStyle(
+                        l10n.shareDialogTitle,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
@@ -136,12 +138,12 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                       ),
                     );
                   },
                   icon: Icon(FluentIcons.text_field_24_regular, color: color),
-                  label: Text("Share as Text", style: TextStyle(color: color)),
+                  label: Text(l10n.shareAsTextButtonLabel, style: TextStyle(color: color)),
                 ),
               ),
               IconButton(
@@ -151,9 +153,9 @@ void showShareBottomDialog(
                 ),
                 onPressed: () async {
                   await FlutterClipboard.copy(
-                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
-                  await Fluttertoast.showToast(msg: "Copied with Tafsir");
+                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsirToast.replaceFirst("Tafsir", "")); // Assuming "Copied" part needs localization
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),
@@ -227,7 +229,7 @@ void showShareBottomDialog(
                 Navigator.pop(context);
               },
               icon: Icon(FluentIcons.image_24_regular, color: color),
-              label: Text("Share as Image", style: TextStyle(color: color)),
+              label: Text(l10n.shareAsImageButtonLabel, style: TextStyle(color: color)),
             ),
           ),
 
@@ -244,7 +246,7 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \n${l10n.viewTafsirButtonLabel}:\n${tafsir ?? l10n.tafsirNotFound}",
                       ),
                     );
 
@@ -252,7 +254,7 @@ void showShareBottomDialog(
                   },
                   icon: Icon(FluentIcons.book_24_regular, color: color),
                   label: Text(
-                    "Share with Tafsir",
+                    l10n.shareWithTafsirButtonLabel,
                     style: TextStyle(color: color),
                   ),
                 ),
@@ -268,9 +270,9 @@ void showShareBottomDialog(
                     returnAyahKeyIfLinked: false,
                   );
                   await FlutterClipboard.copy(
-                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \n${l10n.viewTafsirButtonLabel}:\n${tafsir ?? l10n.tafsirNotFound}",
                   );
-                  Fluttertoast.showToast(msg: "Copied with Tafsir");
+                  Fluttertoast.showToast(msg: l10n.copiedWithTafsirToast);
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),

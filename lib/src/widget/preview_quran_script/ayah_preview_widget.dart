@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
@@ -14,13 +15,14 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
 }) {
   return BlocBuilder<QuranViewCubit, QuranViewState>(
     builder: (context, quranViewState) {
+      final l10n = AppLocalizations.of(context)!;
       return Column(
         children: [
           if (!(showHeaderOptions == false))
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Preview", style: TextStyle(color: Colors.grey)),
+                Text(l10n.previewLabel, style: const TextStyle(color: Colors.grey)),
                 TextButton(
                   onPressed: () async {
                     await popupJumpToAyah(

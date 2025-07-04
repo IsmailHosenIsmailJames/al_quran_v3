@@ -24,6 +24,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
@@ -42,8 +43,9 @@ Widget getAyahByAyahCard({
 }) {
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
+  final l10n = AppLocalizations.of(context)!; // Add this line
   Map? translationMap = QuranTranslationFunction.getTranslation(ayahKey);
-  String translation = translationMap?["t"] ?? "Translation Not Found";
+  String translation = translationMap?["t"] ?? l10n.translationNotFound;
   translation = translation.replaceAll(">", "> ");
   Map footNote = translationMap?["f"] ?? {};
   List wordByWord = [];
@@ -92,6 +94,7 @@ Widget getAyahByAyahCard({
                     translation,
                     footNote,
                     themeState,
+                    l10n,
                   ),
                 if (!quranViewState.hideQuranAyah) const Gap(10),
                 if (!quranViewState.hideQuranAyah)
@@ -102,7 +105,7 @@ Widget getAyahByAyahCard({
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Translation:",
+                      l10n.translationLabelColon,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
@@ -123,7 +126,7 @@ Widget getAyahByAyahCard({
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Foot Note:",
+                      l10n.footNoteLabelColon,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
@@ -142,7 +145,7 @@ Widget getAyahByAyahCard({
                 if (supportsWordByWord &&
                     !quranViewState.alwaysOpenWordByWord &&
                     !quranViewState.hideWordByWord)
-                  getWordByWordExpandCloseWidget(context, ayahKey),
+                  getWordByWordExpandCloseWidget(context, ayahKey, l10n),
                 if (supportsWordByWord && !quranViewState.hideWordByWord)
                   const Gap(5),
                 if (supportsWordByWord && !quranViewState.hideWordByWord)
@@ -240,6 +243,7 @@ Align getWordByWordWidget(
 GestureDetector getWordByWordExpandCloseWidget(
   BuildContext context,
   String ayahKey,
+  AppLocalizations l10n,
 ) {
   ThemeState themeState = context.read<ThemeCubit>().state;
   return GestureDetector(
@@ -271,7 +275,7 @@ GestureDetector getWordByWordExpandCloseWidget(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Word by Word Translation:",
+            l10n.wordByWordTranslationLabel,
             style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
           ),
 
@@ -385,6 +389,7 @@ Row getToolbarWidget(
   String translation,
   Map<dynamic, dynamic> footNote,
   ThemeState themeState,
+  AppLocalizations l10n,
 ) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -416,7 +421,7 @@ Row getToolbarWidget(
               ),
             );
           },
-          child: const Text("Tafsir"),
+          child: Text(l10n.viewTafsirButtonLabel),
         ),
       ),
       const Gap(5),
@@ -444,7 +449,7 @@ Row getToolbarWidget(
                   footNote,
                 );
               },
-              tooltip: "Share",
+              tooltip: l10n.shareTooltip,
               icon: const Icon(FluentIcons.share_24_filled, size: 18),
             );
           },
@@ -466,7 +471,7 @@ Row getToolbarWidget(
           onPressed: () async {
             showAddNotePopup(context, ayahKey);
           },
-          tooltip: "Add Note",
+          tooltip: l10n.addNoteTitle,
           icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
         ),
       ),
@@ -486,7 +491,7 @@ Row getToolbarWidget(
           onPressed: () {
             showAddToPinnedPopup(context, ayahKey);
           },
-          tooltip: "Pin to Collection",
+          tooltip: l10n.pinToCollectionTooltip,
           icon: const Icon(FluentIcons.pin_24_filled, size: 18),
         ),
       ),

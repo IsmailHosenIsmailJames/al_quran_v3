@@ -16,6 +16,7 @@ import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -49,6 +50,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       fontSize: 16,
       fontWeight: FontWeight.w500,
     );
+    final l10n = AppLocalizations.of(context)!;
 
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
@@ -116,7 +118,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     ),
                     child: Row(
                       children: [
-                        getNextPrayerTimeWidget(context),
+                              getNextPrayerTimeWidget(context, l10n),
                         const Gap(10),
                         const Expanded(flex: 6, child: PrayerTimeCanvas()),
                       ],
@@ -141,7 +143,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               DateTime.now().add(Duration(days: index)),
                             );
                         if (prayerModelOfDay == null) {
-                          return Text("${DateTime.now()} Found Empty");
+                                return Text(l10n.prayerDataNotFoundForDate.replaceFirst(
+                                    '{date}', DateTime.now().toString()));
                         }
                         DateTime? dateOfThis;
                         if (prayerModelOfDay.date.gregorian.date != null) {
@@ -178,7 +181,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               children: [
                                 Text(
                                   isToday
-                                      ? "Today"
+                                            ? l10n.todayLabel
                                       : DateFormat.yMMMEd().format(dateOfThis),
                                   style: TextStyle(
                                     fontSize: 22,
@@ -225,6 +228,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 context,
                                 isToday,
                                 themeState,
+                                      l10n,
                               );
                             }),
                             const Gap(30),
@@ -251,6 +255,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     BuildContext context,
     bool isToday,
     ThemeState themeState,
+          AppLocalizations l10n,
   ) {
     return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
       builder: (context, prayerReminderState) {
@@ -284,7 +289,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(prayerModelType.name.capitalize(), style: textStyleOfTimes),
+                    Text(prayerModelType.name.capitalize(), style: textStyleOfTimes), // Assuming prayer names don't need full localization beyond capitalization
               const Spacer(),
               Text(
                 mapOfTimes.values.elementAt(i).format(context),
@@ -303,6 +308,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           context,
                           prayerModelType,
                           currentReminder,
+                                l10n,
                         ),
               ),
             ],
@@ -318,6 +324,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     BuildContext context,
     PrayerModelTimesType prayerModelType,
     ReminderTypeWithPrayModel? currentReminder,
+          AppLocalizations l10n,
   ) {
     return Switch.adaptive(
       thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
@@ -344,11 +351,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               defaultWhenEnable,
             );
             Fluttertoast.showToast(
-              msg: "Reminder for ${prayerModelType.name.capitalize()} added",
+                    msg: l10n.reminderAddedToast.replaceFirst(
+                        '{prayerName}', prayerModelType.name.capitalize()),
             );
           } else {
             Fluttertoast.showToast(
-              msg: "Please allow notification permission to use this feature",
+                    msg: l10n.allowNotificationPermissionToast,
             );
           }
         } else {
@@ -357,14 +365,15 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           );
           await setReminderForPrayers();
           Fluttertoast.showToast(
-            msg: "Reminder for ${prayerModelType.name.capitalize()} removed",
+                  msg: l10n.reminderRemovedToast.replaceFirst(
+                      '{prayerName}', prayerModelType.name.capitalize()),
           );
         }
       },
     );
   }
 
-  Expanded getNextPrayerTimeWidget(BuildContext context) {
+        Expanded getNextPrayerTimeWidget(BuildContext context, AppLocalizations l10n) {
     return Expanded(
       flex: 4,
       child: FittedBox(
@@ -373,7 +382,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              PrayersTimeFunction.nextPrayerName(
+                    PrayersTimeFunction.nextPrayerName( // Prayer name, assuming direct use
                 PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
               ).name.toUpperCase(),
               style: const TextStyle(
@@ -383,7 +392,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               ),
             ),
             Text(
-              PrayersTimeFunction.nextPrayerTime(
+                    PrayersTimeFunction.nextPrayerTime( // Prayer time, format driven by locale
                 PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
               ).format(context),
               style: const TextStyle(
@@ -394,9 +403,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
             ),
             Row(
               children: [
-                const Text(
-                  "Left",
-                  style: TextStyle(
+                      Text(
+                        l10n.timeLeftLabel,
+                        style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -420,7 +429,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       fontWeight: FontWeight.bold,
                     );
                     if (!snapshot.hasData) {
-                      return Text("00:00:00", style: textStyle);
+                            return Text("00:00:00", style: textStyle); // Placeholder, not for direct localization
                     }
                     DateTime targetTime = snapshot.data as DateTime;
                     TimeOfDay nextPrayerTime =
@@ -436,7 +445,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         )
                         .difference(targetTime);
 
-                    return Text(
+                          return Text( // Time format, not direct localization
                       "${timeUntilNextPrayer.inHours.toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inMinutes % 60).toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inSeconds % 60).toString().padLeft(2, '0')}",
                       style: textStyle,
                     );

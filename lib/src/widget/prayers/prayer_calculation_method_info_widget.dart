@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -12,6 +13,22 @@ Widget getPrayerCalculationMethodInfoWidget(
   BuildContext context,
   CalculationMethod calculationMethod,
 ) {
+  final l10n = AppLocalizations.of(context)!;
+  String getParamDisplayName(String key) {
+    switch (key) {
+      case "fajrAngle":
+        return l10n.fajrAngleParam;
+      case "ishaAngle":
+        return l10n.ishaAngleParam;
+      case "ishaInterval":
+        return l10n.ishaIntervalParam;
+      case "maghribAngle":
+        return l10n.maghribAngleParam;
+      default:
+        return key.capitalize;
+    }
+  }
+
   return Container(
     decoration: BoxDecoration(
       border: Border.all(
@@ -28,7 +45,7 @@ Widget getPrayerCalculationMethodInfoWidget(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text("Name: ", style: TextStyle(color: Colors.grey)),
+            Text(l10n.nameLabelColon, style: const TextStyle(color: Colors.grey)),
             Expanded(child: Text(calculationMethod.name.toString())),
           ],
         ),
@@ -37,7 +54,7 @@ Widget getPrayerCalculationMethodInfoWidget(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text("Location: ", style: TextStyle(color: Colors.grey)),
+              Text(l10n.locationLabelColon, style: const TextStyle(color: Colors.grey)),
               Expanded(
                 child: getAddressView(
                   lat: calculationMethod.location!.latitude,
@@ -51,7 +68,7 @@ Widget getPrayerCalculationMethodInfoWidget(
           ),
         const Gap(5),
         if (calculationMethod.params != null)
-          const Text("Parameters: ", style: TextStyle(color: Colors.grey)),
+          Text(l10n.parametersLabelColon, style: const TextStyle(color: Colors.grey)),
         const Gap(5),
         if (calculationMethod.params != null)
           Wrap(
@@ -86,7 +103,7 @@ Widget getPrayerCalculationMethodInfoWidget(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "${currentKey.capitalize}: ",
+                      "${getParamDisplayName(currentKey)}: ",
                       style: const TextStyle(color: Colors.grey),
                     ),
                     Text(currentValue),

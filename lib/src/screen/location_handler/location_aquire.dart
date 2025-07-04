@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geolocator/geolocator.dart";
@@ -26,6 +27,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: widget.moveToDownload ? AppBar() : null,
       body: Padding(
@@ -34,13 +36,13 @@ class _LocationAcquireState extends State<LocationAcquire> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Get Prayer Times and Qibla",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.getPrayerTimesQiblaTitle,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Gap(10),
             Text(
-              "Calculate Prayer Times and Qibla for Any Given Location.",
+              l10n.calculatePrayerTimesQiblaSubtitle,
               style: TextStyle(
                 color: Colors.grey.shade500,
                 fontWeight: FontWeight.w500,
@@ -61,7 +63,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                         await Geolocator.isLocationServiceEnabled();
                     if (!isServiceAvailable) {
                       Fluttertoast.showToast(
-                        msg: "Please enable location service",
+                        msg: l10n.enableLocationServiceToast,
                       );
                       await Geolocator.openLocationSettings();
                     }
@@ -115,7 +117,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                     isGPSLocationLoading = false;
                   });
                 },
-                label: const Text("Get form GPS"),
+                label: Text(l10n.getFromGPSButtonLabel),
                 icon:
                     isGPSLocationLoading
                         ? const Center(
@@ -128,7 +130,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
               ),
             ),
             const Gap(5),
-            const Align(alignment: Alignment.center, child: Text("Or")),
+            Align(alignment: Alignment.center, child: Text(l10n.orLabel)),
             const Gap(5),
             SizedBox(
               width: double.infinity,
@@ -148,13 +150,13 @@ class _LocationAcquireState extends State<LocationAcquire> {
                     ),
                   );
                 },
-                label: const Text("Select you City"),
+                label: Text(l10n.selectYourCityButtonLabel),
                 icon: const Icon(Icons.location_city_rounded),
               ),
             ),
             const Gap(20),
             Text(
-              "Note: If you don't want to use GPS or not feel secure, you can select your city.",
+              l10n.locationNote,
               style: TextStyle(
                 color: Colors.grey.shade500,
                 fontWeight: FontWeight.w500,

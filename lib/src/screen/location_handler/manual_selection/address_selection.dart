@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/screen/location_handler/manual_selection/pages/c
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 import "../../../theme/controller/theme_cubit.dart";
 
@@ -41,6 +42,7 @@ class _AddressSelectionState extends State<AddressSelection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: BlocBuilder<
         ManualLocationSelectionCubit,
@@ -60,7 +62,7 @@ class _AddressSelectionState extends State<AddressSelection> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    "Downloading location resources...",
+                    l10n.downloadingLocationResources,
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontWeight: FontWeight.w500,

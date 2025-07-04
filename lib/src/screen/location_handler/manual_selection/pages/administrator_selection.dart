@@ -2,6 +2,7 @@ import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/m
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 class AdministratorSelection extends StatefulWidget {
@@ -16,6 +17,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Column(
         children: [
@@ -33,9 +35,9 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text(
-                  "Select Your Administrator",
-                  style: TextStyle(fontSize: 20),
+                Text(
+                  l10n.selectYourAdministratorTitle,
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),
@@ -43,7 +45,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: "Search for a administrator",
+              hintText: l10n.searchForAdministratorHint,
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -64,7 +66,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
             >(
               builder: (context, state) {
                 if (state.adminMap == null) {
-                  return const Text("Something went wrong");
+                  return Text(l10n.somethingWentWrongError);
                 }
                 List listOfCountry = state.adminMap!.keys.toList();
                 return ListView.builder(

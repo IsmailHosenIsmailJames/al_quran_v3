@@ -20,6 +20,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 import "package:visibility_detector/visibility_detector.dart";
@@ -270,6 +271,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
@@ -529,7 +531,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   Row(
                     children: [
                       const Gap(15),
-                      const Text("Page: "),
+                      Text(l10n.pageLabel),
                       Text(
                         (current as PageInfoModel).pageNumber.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),

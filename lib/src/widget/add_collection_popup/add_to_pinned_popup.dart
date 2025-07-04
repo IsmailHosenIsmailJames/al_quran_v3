@@ -5,6 +5,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 
@@ -58,7 +59,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
     });
   }
 
-  void _handleSavePinned() {
+  void _handleSavePinned(AppLocalizations l10n) {
     final now = DateTime.now();
     String newPinnedId = uuid.v4();
 
@@ -80,7 +81,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
     }
 
     Navigator.pop(context); // Close the dialog
-    Fluttertoast.showToast(msg: "Pinned saved successfully!");
+    Fluttertoast.showToast(msg: l10n.pinnedSavedSuccessfully);
   }
 
   @override
@@ -92,6 +93,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -102,9 +104,9 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
             children: [
               const Icon(FluentIcons.pin_24_filled),
               const Gap(10),
-              const Text(
-                "Add To Pinned",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              Text(
+                l10n.addToPinnedTitle,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               const Spacer(),
               if (!_addNewPinnedCollectionStep)
@@ -116,7 +118,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                   },
                   iconAlignment: IconAlignment.end,
                   icon: const Icon(FluentIcons.add_24_regular),
-                  label: const Text("New"),
+                  label: Text(l10n.newButtonLabel),
                 ),
             ],
           ),
@@ -149,8 +151,8 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                               child: TextFormField(
                                 controller: _newCollectionNameController,
                                 autofocus: true,
-                                decoration: const InputDecoration(
-                                  hintText: "Write collection name...",
+                                decoration: InputDecoration(
+                                  hintText: l10n.writeCollectionNameHint,
                                   border: InputBorder.none,
                                 ),
                               ),
@@ -192,8 +194,8 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                   child:
                       _availablePinnedCollections.isEmpty &&
                               !_addNewPinnedCollectionStep
-                          ? const Center(
-                            child: Text("No collections yet. Add a new one!"),
+                          ? Center(
+                            child: Text(l10n.noCollectionsYet),
                           )
                           : ListView.builder(
                             itemCount: _availablePinnedCollections.length,
@@ -212,7 +214,8 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                 ),
                                 title: Text(collection.name),
                                 subtitle: Text(
-                                  "${collection.pinned.length} pinned",
+                                  l10n.pinnedItemsCount.replaceFirst(
+                                      '{count}', collection.pinned.length.toString()),
                                 ),
                                 trailing: IconButton(
                                   icon: Icon(
@@ -269,14 +272,14 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
               ),
               onPressed: () {
                 if (_selectedPinnedCollectionIds.isEmpty) {
-                  Fluttertoast.showToast(msg: "No Collection selected");
+                  Fluttertoast.showToast(msg: l10n.noCollectionSelectedToast);
                 } else {
-                  _handleSavePinned();
+                  _handleSavePinned(l10n);
                 }
               },
               iconAlignment: IconAlignment.end,
               icon: const Icon(Icons.done_all_rounded),
-              label: const Text("Save Pinned"),
+              label: Text(l10n.savePinnedButtonLabel),
             ),
           ),
         ],
@@ -285,20 +288,20 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
   }
 }
 
-Future<void> saveDemoPinnedCollection() async {
+Future<void> saveDemoPinnedCollection() async { // Assuming l10n is not available or needed here for demo data
   final box = Hive.box(CollectionType.pinned.name);
   if (box.values.isEmpty) {
     List<PinnedCollectionModel> collections = [
       PinnedCollectionModel(
         id: "col1",
-        name: "Reflections",
+        name: "Reflections", // Potentially AppLocalizations.of(context)!.demoCollectionReflections if context available
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         pinned: [],
       ),
       PinnedCollectionModel(
         id: "col2",
-        name: "Favourites",
+        name: "Favourites", // Potentially AppLocalizations.of(context)!.demoCollectionFavourites if context available
         colorHex: "FFAB00",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),

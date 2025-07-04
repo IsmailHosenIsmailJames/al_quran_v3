@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:geocoding/geocoding.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -50,19 +51,20 @@ Widget getAddressView({
     future: fetchFormattedAddress(lat, long),
     builder: (context, snapshot) {
       ThemeState themeState = context.read<ThemeCubit>().state;
+      final l10n = AppLocalizations.of(context)!;
       if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {
         // Show a generic loading indicator only if we are not in 'justAddress' mode,
         // otherwise, let it be handled by the parent if needed.
-        return Text("Loading...", style: style);
+        return Text(l10n.addressLoading, style: style);
       } else if (snapshot.hasError && !justAddress) {
         // Show error only if not in 'justAddress' mode
-        return Text("Error fetching address", style: style);
+        return Text(l10n.errorFetchingAddress, style: style);
       }
 
       final String? address = snapshot.data;
 
       if (justAddress) {
-        return Text(address ?? "Address not available", style: style);
+        return Text(address ?? l10n.addressNotAvailable, style: style);
       }
 
       // Full view with address, lat, and long
@@ -79,12 +81,12 @@ Widget getAddressView({
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(address ?? "Address not available", style: style),
+            Text(address ?? l10n.addressNotAvailable, style: style),
             const Gap(5),
             Row(
               children: [
                 Text(
-                  "Latitude: ",
+                  l10n.latitudeLabel,
                   style: (style ?? const TextStyle()).copyWith(
                     color: Colors.grey,
                   ),
@@ -96,7 +98,7 @@ Widget getAddressView({
             Row(
               children: [
                 Text(
-                  "Longitude: ",
+                  l10n.longitudeLabel,
                   style: (style ?? const TextStyle()).copyWith(
                     color: Colors.grey,
                   ),

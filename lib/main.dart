@@ -33,6 +33,8 @@ import "package:alarm/alarm.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_localizations/flutter_localizations.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:window_manager/window_manager.dart";
@@ -181,8 +183,16 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
-
-            onGenerateTitle: (context) => "Al Quran App",
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // English
+            ],
+            onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
             theme: ThemeData(
               brightness: Brightness.light,
               fontFamily: "NotoSans",
