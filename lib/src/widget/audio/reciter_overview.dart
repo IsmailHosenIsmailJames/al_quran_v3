@@ -6,7 +6,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
-import "../../audio/cubit/quran_reciter_cubit.dart";
 import "../../audio/model/recitation_info_model.dart";
 import "../../audio/player/audio_player_manager.dart";
 import "../../functions/basic_functions.dart";
@@ -89,16 +88,9 @@ Widget getReciterWidget({
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                BlocBuilder<QuranReciterCubit, ReciterInfoModel>(
-                  builder:
-                      (context, state) => Text(
-                        safeSubString(
-                          context.read<QuranReciterCubit>().state.name,
-                          20,
-                          replacer: "...",
-                        ),
-                        style: const TextStyle(fontSize: 16),
-                      ),
+                Text(
+                  safeSubString(audioTabScreenState.name, 20, replacer: "..."),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 const Gap(5),
                 const Icon(Icons.arrow_drop_down_rounded, size: 30),

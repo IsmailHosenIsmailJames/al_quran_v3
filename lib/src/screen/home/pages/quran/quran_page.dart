@@ -61,6 +61,7 @@ class _QuranPageState extends State<QuranPage>
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: TabBar(
+                    splashBorderRadius: BorderRadius.circular(100),
                     controller: _tabController,
                     indicator: BoxDecoration(
                       color: themeState.primaryShade200,

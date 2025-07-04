@@ -48,6 +48,7 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
                 borderRadius: BorderRadius.circular(100),
               ),
               child: TabBar(
+                splashBorderRadius: BorderRadius.circular(100),
                 controller: _tabController,
                 indicator: BoxDecoration(
                   color: themeState.primaryShade200,
