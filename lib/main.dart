@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -181,7 +182,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
-            title: "Al Quran",
+            onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
             theme: ThemeData(
               brightness: Brightness.light,
               fontFamily: "NotoSans",
@@ -224,8 +225,8 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Color.fromARGB(255, 15, 15, 15),
               ),
             ),
-
-            supportedLocales: [const Locale("en"), const Locale("bn")],
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             themeMode: state.themeMode,
             home:
                 Hive.box("user").get("is_setup_complete", defaultValue: false)

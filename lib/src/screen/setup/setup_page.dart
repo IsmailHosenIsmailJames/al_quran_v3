@@ -673,7 +673,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   List<DropdownMenuItem<String>> getAppLanguageDropdown() {
-    return used20LanguageMap.map((e) {
+    return usedAppLanguageMap.map((e) {
       return DropdownMenuItem(
         value: e["Code"],
         child: SingleChildScrollView(
