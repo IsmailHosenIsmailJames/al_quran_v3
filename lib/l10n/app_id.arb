@@ -1,0 +1,7 @@
+{
+  "@@locale": "id",
+  "appTitle": "Al-Qur'an",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
