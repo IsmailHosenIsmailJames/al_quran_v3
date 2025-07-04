@@ -1,6 +1,5 @@
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/app_languages/app_languages.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
@@ -152,26 +151,6 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                       title: const Text(
                         "Settings",
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AppLanguages(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        Icons.translate_rounded,
-                        color: themeState.primary,
-                      ),
-                      title: const Text(
-                        "App Languages",
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),

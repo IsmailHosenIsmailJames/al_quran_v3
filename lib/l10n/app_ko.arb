@@ -1,7 +1,0 @@
-{
-  "@@locale": "ko",
-  "appTitle": "쿠란",
-  "@appTitle": {
-    "description": "The title of the application"
-  }
-}

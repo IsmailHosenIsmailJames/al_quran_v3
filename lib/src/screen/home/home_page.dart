@@ -1,4 +1,3 @@
-import "package:al_quran_v3/l10n/app_localizations.dart";
 import "dart:io";
 
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
         leading: Builder(
           builder: (context) {
             return IconButton(
-              tooltip: AppLocalizations.of(context).openNavigationMenu,
+              tooltip: "Open Drawer",
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -49,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-        title: Text(AppLocalizations.of(context).appTitle),
+        title: Text("Al Quran"),
         centerTitle: true,
         // TODO : Develop Search Functionality. Due for later
         // actions: [
@@ -101,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                           ? FluentIcons.book_16_filled
                           : FluentIcons.book_24_regular,
                     ),
-                    label: AppLocalizations.of(context).quran,
+                    label: "Quran",
                   ),
                   if (Platform.isIOS || Platform.isAndroid)
                     BottomNavigationBarItem(
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                             ? FluentIcons.clock_24_filled
                             : FluentIcons.clock_24_regular,
                       ),
-                      label: AppLocalizations.of(context).prayers,
+                      label: "Prayer",
                     ),
                   if (Platform.isIOS || Platform.isAndroid)
                     BottomNavigationBarItem(
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                             ? FluentIcons.compass_northwest_24_filled
                             : FluentIcons.compass_northwest_24_regular,
                       ),
-                      label: AppLocalizations.of(context).qibla,
+                      label: "Qibla",
                     ),
                   BottomNavigationBarItem(
                     icon: Icon(
@@ -127,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                           ? Icons.audiotrack_rounded
                           : Icons.audiotrack_outlined,
                     ),
-                    label: AppLocalizations.of(context).audio,
+                    label: "Audio",
                   ),
                 ],
               );
