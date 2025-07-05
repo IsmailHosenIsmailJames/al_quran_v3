@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -342,10 +341,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               ),
                               const Gap(10),
                               Text(
-                                PrayerReminderType
-                                    .values[index]
-                                    .name
-                                    .capitalize,
+                                localizedReminderName(
+                                  context,
+                                  PrayerReminderType.values[index],
+                                ),
                               ),
                               const Gap(7),
                             ],

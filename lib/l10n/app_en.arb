@@ -525,5 +525,8 @@
     "asr": "Asr",
     "maghrib": "Maghrib",
     "isha": "Isha",
-    "midnight": "Midnight"
+    "midnight": "Midnight",
+    "alarm": "Alarm",
+    "notification": "Notification",
+    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}"
 }

@@ -1,7 +1,7 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
-import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -47,6 +47,7 @@ Widget getPrayerCalculationMethodInfoWidget(
               ),
               Expanded(
                 child: getAddressView(
+                  context: context,
                   lat: calculationMethod.location!.latitude,
                   long: calculationMethod.location!.longitude,
                   keepDecoration: false,

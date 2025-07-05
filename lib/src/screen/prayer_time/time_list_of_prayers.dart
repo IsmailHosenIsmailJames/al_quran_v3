@@ -3,6 +3,7 @@ import "dart:async";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/format_time_of_day.dart";
 import "package:al_quran_v3/src/functions/localizedPrayerName.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
@@ -74,6 +75,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: getAddressView(
+                          context: context,
                           lat: widget.lat,
                           long: widget.lon,
                           keepPadding: false,
@@ -185,7 +187,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 Text(
                                   isToday
                                       ? l10n.today
-                                      : DateFormat.yMMMEd().format(dateOfThis),
+                                      : DateFormat.yMMMEd(
+                                        l10n.localeName,
+                                      ).format(dateOfThis),
                                   style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
@@ -387,9 +391,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              PrayersTimeFunction.nextPrayerName(
-                PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
-              ).name.toUpperCase(),
+              localizedPrayerName(
+                context,
+                PrayersTimeFunction.nextPrayerName(
+                  PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
+                ),
+              ).toUpperCase(),
               style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
@@ -452,9 +459,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           second: 0,
                         )
                         .difference(targetTime);
-
+                    String pad = localizedNumber(context, 0);
                     return Text(
-                      "${timeUntilNextPrayer.inHours.toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inMinutes % 60).toString().padLeft(2, '0')}:${(timeUntilNextPrayer.inSeconds % 60).toString().padLeft(2, '0')}",
+                      "${localizedNumber(context, timeUntilNextPrayer.inHours).padLeft(2, pad)}:${localizedNumber(context, timeUntilNextPrayer.inMinutes % 60).padLeft(2, pad)}:${localizedNumber(context, timeUntilNextPrayer.inSeconds % 60).padLeft(2, pad)}",
                       style: textStyle,
                     );
                   },
