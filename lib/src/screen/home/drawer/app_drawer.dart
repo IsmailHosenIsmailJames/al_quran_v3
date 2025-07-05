@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
@@ -28,7 +29,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  String _version = "Loading...";
+  String _version = "";
 
   @override
   void initState() {
@@ -45,6 +46,10 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    if (_version.isEmpty) {
+      _version = l10n.versionLoading;
+    }
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return Drawer(
@@ -104,10 +109,10 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                     ),
                     const Gap(15),
-                    const Center(
+                    Center(
                       child: Text(
-                        "Al Quran",
-                        style: TextStyle(
+                        l10n.alQuran,
+                        style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w500,
                         ),
@@ -124,11 +129,11 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                     ),
                     const Gap(20),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 18),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18),
                       child: Text(
-                        "Main Menu",
-                        style: TextStyle(
+                        l10n.mainMenu,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,
                         ),
@@ -149,9 +154,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.settings_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Settings",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.settings,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -172,9 +177,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.note_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Notes",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.notes,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -195,9 +200,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.pin_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Pinned",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.pinned,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -214,9 +219,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.arrow_turn_down_right_20_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Jump to Ayah",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.jumpToAyah,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -235,9 +240,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.arrow_download_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Quran Resources",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.quranResources,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -256,9 +261,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.share_multiple_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Share Multiple Ayah",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.shareMultipleAyah,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -276,17 +281,17 @@ class _AppDrawerState extends State<AppDrawer> {
                         Icons.favorite_rounded,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Donate Us",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.donateUs,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(15),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 18),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18),
                       child: Text(
-                        "Others",
-                        style: TextStyle(
+                        l10n.others,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,
                         ),
@@ -297,14 +302,13 @@ class _AppDrawerState extends State<AppDrawer> {
                       minTileHeight: 40,
                       onTap: () async {
                         // share the app
-                        final String appLink =
+                        const String appLink =
                             "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran";
-                        final String message =
-                            "Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah's words. Download here: $appLink";
+                        final String message = l10n.shareAppBody(appLink);
                         await SharePlus.instance.share(
                           ShareParams(
                             text: message,
-                            subject: "Check out this Al Quran App!",
+                            subject: l10n.shareAppSubject,
                           ),
                         );
                       },
@@ -312,9 +316,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.share_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Share this App",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.shareThisApp,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -333,9 +337,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         Icons.star_rate_rounded,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Give Rating",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.giveRating,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -349,9 +353,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.bug_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Bug Report",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.bugReport,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -369,9 +373,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         Icons.policy_rounded,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Privacy Policy",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.privacyPolicy,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -389,9 +393,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.info_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "About the App",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.aboutTheApp,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(5),
@@ -403,19 +407,17 @@ class _AppDrawerState extends State<AppDrawer> {
                           builder: (BuildContext context) {
                             return AlertDialog.adaptive(
                               insetPadding: const EdgeInsets.all(10),
-                              title: const Text(
-                                "Reset App Data",
-                                style: TextStyle(color: Colors.red),
+                              title: Text(
+                                l10n.resetAppWarningTitle,
+                                style: const TextStyle(color: Colors.red),
                               ),
-                              content: const Text(
-                                "Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.",
-                              ),
+                              content: Text(l10n.resetAppWarningMessage),
                               actions: <Widget>[
                                 TextButton.icon(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  label: const Text("Cancel"),
+                                  label: Text(l10n.cancel),
                                   icon: const Icon(Icons.close_rounded),
                                 ),
                                 TextButton.icon(
@@ -427,9 +429,9 @@ class _AppDrawerState extends State<AppDrawer> {
                                     FluentIcons.arrow_reset_24_filled,
                                     color: Colors.red,
                                   ),
-                                  label: const Text(
-                                    "Reset",
-                                    style: TextStyle(color: Colors.red),
+                                  label: Text(
+                                    l10n.reset,
+                                    style: const TextStyle(color: Colors.red),
                                   ),
                                 ),
                               ],
@@ -441,9 +443,9 @@ class _AppDrawerState extends State<AppDrawer> {
                         FluentIcons.arrow_reset_24_filled,
                         color: themeState.primary,
                       ),
-                      title: const Text(
-                        "Reset the App",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                      title: Text(
+                        l10n.resetTheApp,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
                     const Gap(50),

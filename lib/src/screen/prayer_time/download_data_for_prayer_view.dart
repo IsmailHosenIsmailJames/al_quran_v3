@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
@@ -51,6 +52,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: widget.moveToDownload ? AppBar() : null,
       body: Padding(
@@ -62,9 +64,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Address: ",
-                  style: TextStyle(
+                Text(
+                  l10n.address,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
@@ -96,7 +98,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                             );
                       }
                     },
-                    child: const Text("Change"),
+                    child: Text(l10n.change),
                   ),
                 ),
               ],
@@ -107,9 +109,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Calculation Method: ",
-                  style: TextStyle(
+                Text(
+                  l10n.calculationMethod,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey,
@@ -132,7 +134,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                         Navigator.pop(context);
                       });
                     },
-                    child: const Text("Change"),
+                    child: Text(l10n.change),
                   ),
                 ),
               ],
@@ -194,7 +196,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                           ),
                         )
                         : const Icon(FluentIcons.arrow_download_24_filled),
-                label: const Text("Download Prayer Time"),
+                label: Text(l10n.downloadPrayerTime),
               ),
             ),
           ],

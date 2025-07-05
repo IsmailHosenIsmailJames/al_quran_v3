@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive/hive.dart";
@@ -115,9 +116,12 @@ Future<List<NoteCollectionModel>> fetchNoteCollections() async {
   return availableNoteCollections;
 }
 
-Future<NoteCollectionModel?> handleAddNewNoteCollection(String noteText) async {
+Future<NoteCollectionModel?> handleAddNewNoteCollection(
+  String noteText,
+  AppLocalizations l10n,
+) async {
   if (noteText.isEmpty) {
-    Fluttertoast.showToast(msg: "Collection name cannot be empty.");
+    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
     return null;
   }
   final now = DateTime.now();
@@ -133,13 +137,16 @@ Future<NoteCollectionModel?> handleAddNewNoteCollection(String noteText) async {
 
   final noteCollectionModel = Hive.box(CollectionType.notes.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
-  Fluttertoast.showToast(msg: "Added New Collection");
+  Fluttertoast.showToast(msg: l10n.addedNewCollection);
   return newCollection;
 }
 
-Future<PinnedCollectionModel?> handleAddNewCollection(String text) async {
+Future<PinnedCollectionModel?> handleAddNewCollection(
+  String text,
+  AppLocalizations l10n,
+) async {
   if (text.isEmpty) {
-    Fluttertoast.showToast(msg: "Collection name cannot be empty.");
+    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
     return null;
   }
   final now = DateTime.now();
@@ -156,7 +163,7 @@ Future<PinnedCollectionModel?> handleAddNewCollection(String text) async {
   final noteCollectionModel = Hive.box(CollectionType.pinned.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
 
-  Fluttertoast.showToast(msg: "Added New Collection");
+  Fluttertoast.showToast(msg: l10n.addedNewCollection);
   return newCollection;
 }
 

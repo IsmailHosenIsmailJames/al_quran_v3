@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
@@ -25,7 +26,7 @@ class QuranPage extends StatefulWidget {
 
 class _QuranPageState extends State<QuranPage>
     with SingleTickerProviderStateMixin {
-  List<String> pagesName = ["Surah", "Juz", "Pages", "Hizb", "Ruku"];
+  List<String> pagesName = [];
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values
           .map((value) => SurahInfoModel.fromMap(value))
@@ -41,8 +42,15 @@ class _QuranPageState extends State<QuranPage>
   late final TabController _tabController;
   @override
   void initState() {
-    _tabController = TabController(length: pagesName.length, vsync: this);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    final l10n = AppLocalizations.of(context);
+    pagesName = [l10n.surah, l10n.juz, l10n.pages, l10n.hizb, l10n.ruku];
+    _tabController = TabController(length: pagesName.length, vsync: this);
+    super.didChangeDependencies();
   }
 
   @override

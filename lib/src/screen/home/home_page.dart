@@ -1,5 +1,6 @@
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
@@ -23,13 +24,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
         leading: Builder(
           builder: (context) {
             return IconButton(
-              tooltip: "Open Drawer",
+              tooltip: l10n.openDrawerTooltip,
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-        title: Text("Al Quran"),
+        title: Text(l10n.alQuran),
         centerTitle: true,
         // TODO : Develop Search Functionality. Due for later
         // actions: [
@@ -100,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                           ? FluentIcons.book_16_filled
                           : FluentIcons.book_24_regular,
                     ),
-                    label: "Quran",
+                    label: l10n.quran,
                   ),
                   if (Platform.isIOS || Platform.isAndroid)
                     BottomNavigationBarItem(
@@ -109,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             ? FluentIcons.clock_24_filled
                             : FluentIcons.clock_24_regular,
                       ),
-                      label: "Prayer",
+                      label: l10n.prayer,
                     ),
                   if (Platform.isIOS || Platform.isAndroid)
                     BottomNavigationBarItem(
@@ -118,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                             ? FluentIcons.compass_northwest_24_filled
                             : FluentIcons.compass_northwest_24_regular,
                       ),
-                      label: "Qibla",
+                      label: l10n.qibla,
                     ),
                   BottomNavigationBarItem(
                     icon: Icon(
@@ -126,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                           ? Icons.audiotrack_rounded
                           : Icons.audiotrack_outlined,
                     ),
-                    label: "Audio",
+                    label: l10n.audio,
                   ),
                 ],
               );

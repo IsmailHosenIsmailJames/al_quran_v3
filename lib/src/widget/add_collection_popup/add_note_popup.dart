@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
@@ -187,6 +188,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                       await handleAddNewNoteCollection(
                                         _newCollectionNameController.text
                                             .trim(),
+                                        AppLocalizations.of(context),
                                       );
                                   if (newCollection != null) {
                                     setState(() {

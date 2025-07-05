@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
@@ -27,6 +28,7 @@ class PrayerSettings extends StatefulWidget {
 class _PrayerSettingsState extends State<PrayerSettings> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     TextStyle titleStyle = const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w500,
@@ -34,7 +36,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     ThemeState themeState = context.read<ThemeCubit>().state;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Prayer Settings")),
+      appBar: AppBar(title: Text(l10n.prayerSettings)),
       body: ListView(
         padding: const EdgeInsets.only(
           left: 15,
@@ -46,7 +48,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Calculation Method: ", style: titleStyle),
+              Text(l10n.calculationMethod, style: titleStyle),
               SizedBox(
                 height: 30,
                 child: TextButton(
@@ -69,7 +71,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       ),
                     );
                   },
-                  child: const Text("Change"),
+                  child: Text(l10n.change),
                 ),
               ),
             ],
@@ -87,19 +89,19 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             },
           ),
           const Gap(20),
-          Text("Reminder Settings", style: titleStyle),
+          Text(l10n.reminderSettings, style: titleStyle),
           const Gap(5),
           getDropPrayerSettings(themeState),
           const Gap(20),
-          Text("Adjust Reminder Time", style: titleStyle),
+          Text(l10n.adjustReminderTime, style: titleStyle),
           const Gap(5),
-          getAdjustReminderWidget(themeState),
+          getAdjustReminderWidget(themeState, l10n),
           const Gap(15),
           Row(
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
-                child: Text("Enforce Alarm's Sound", style: titleStyle),
+                child: Text(l10n.enforceAlarmSound, style: titleStyle),
               ),
               const Spacer(),
               BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
@@ -127,11 +129,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           ),
 
           const Gap(5),
-          const Text(
-            "If enabled, This feature will play the alarm at the volume set here, "
-            "even if your phone's sound is low. "
-            "This ensures you don't miss the alarm due to low phone volume.",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
+          Text(
+            l10n.enforceAlarmSoundDescription,
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
             textAlign: TextAlign.center,
           ),
           const Gap(10),
@@ -140,7 +140,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               if (prayerReminderState.enforceAlarmSound) {
                 return Row(
                   children: [
-                    Text("Volume", style: titleStyle),
+                    Text(l10n.volume, style: titleStyle),
                     const Spacer(),
                     Text(
                       prayerReminderState.soundVolume.toStringAsFixed(2),
@@ -181,7 +181,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget getAdjustReminderWidget(ThemeState themeState) {
+  Widget getAdjustReminderWidget(ThemeState themeState, AppLocalizations l10n) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: themeState.primaryShade300),
@@ -232,7 +232,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           ),
                         ),
                         Text(
-                          _getAdjustmentText(currentTimeInMinutes),
+                          _getAdjustmentText(currentTimeInMinutes, l10n),
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -249,7 +249,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         min: -60.0,
                         max: 60.0,
                         divisions: 120,
-                        label: _getAdjustmentText(currentTimeInMinutes.round()),
+                        label: _getAdjustmentText(
+                          currentTimeInMinutes.round(),
+                          l10n,
+                        ),
                         activeColor: themeState.primary,
                         inactiveColor: themeState.primaryShade300,
                         onChanged: (double value) {
@@ -367,9 +370,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  String _getAdjustmentText(int minutes) {
-    if (minutes == 0) return "At prayer time";
-    if (minutes < 0) return "${minutes.abs()} min before";
-    return "$minutes min after";
+  String _getAdjustmentText(int minutes, AppLocalizations l10n) {
+    if (minutes == 0) return l10n.atPrayerTime;
+    if (minutes < 0) {
+      return l10n.minBefore(minutes.abs());
+    }
+    return l10n.minAfter(minutes);
   }
 }

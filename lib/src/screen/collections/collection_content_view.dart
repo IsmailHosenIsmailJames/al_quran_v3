@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -67,6 +68,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
   }
 
   Widget _buildNoteItem(NoteModel noteModel, BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -82,7 +84,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Note:",
+              l10n.note,
               style: textTheme.titleSmall?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -102,7 +104,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             if (noteModel.ayahKey.isNotEmpty) ...[
               const Gap(12),
               Text(
-                "Linked Ayahs:",
+                l10n.linkedAyahs,
                 style: textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
@@ -169,6 +171,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -199,9 +202,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
           // Use Builder to ensure context is correct for Theme
           if (widget.noteCollectionModel != null) {
             if (widget.noteCollectionModel!.notes.isEmpty) {
-              return _buildEmptyState(
-                "This note collection is empty.\nAdd some notes to see them here.",
-              );
+              return _buildEmptyState(l10n.emptyNoteCollection);
             }
             return ListView.separated(
               padding: const EdgeInsets.all(12.0),
@@ -215,9 +216,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             );
           } else if (widget.pinnedCollectionModel != null) {
             if (widget.pinnedCollectionModel!.pinned.isEmpty) {
-              return _buildEmptyState(
-                "No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.",
-              );
+              return _buildEmptyState(l10n.emptyPinnedCollection);
             }
             return ListView.builder(
               itemCount: widget.pinnedCollectionModel!.pinned.length,
@@ -231,7 +230,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             );
           }
           return _buildEmptyState(
-            "No content available.",
+            l10n.noContentAvailable,
           ); // Fallback, should not happen due to asserts
         },
       ),

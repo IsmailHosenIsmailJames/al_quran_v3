@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
@@ -11,10 +12,11 @@ class AboutAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(title: const Text("About Al Quran")),
+      appBar: AppBar(title: Text(l10n.aboutAlQuran)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -49,7 +51,7 @@ class AboutAppPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    "Al Quran (Tafsir, Prayer, Qibla, Audio)",
+                    l10n.appFullName,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -59,7 +61,7 @@ class AboutAppPage extends StatelessWidget {
                 const Gap(15),
                 Center(
                   child: Text(
-                    "A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.",
+                    l10n.appDescription,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
@@ -79,7 +81,7 @@ class AboutAppPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "Note: Quran texts, Tafsir, translations, and audio resources are sourced from Quran.com, Everyayah.com, and other verified open sources.",
+                  l10n.dataSourcesNote,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
@@ -99,7 +101,7 @@ class AboutAppPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "This app has been built to seek the pleasure of Allah. Therefore, it is and always will be completely Ad-Free.",
+                  l10n.adFreePromise,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
@@ -112,110 +114,96 @@ class AboutAppPage extends StatelessWidget {
             const Divider(thickness: 1.5),
             const Gap(30),
             Text(
-              "Core Features",
+              l10n.coreFeatures,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            const Text(
-              "Explore the key functionalities that make Al Quran v3 an indispensable tool for your daily Islamic practices:",
-            ),
+            Text(l10n.coreFeaturesDescription),
             const Gap(15),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.access_time_filled_rounded,
-              title: "Prayer Times & Alerts",
-              subtitle:
-                  "Accurate prayer timings for any location worldwide using various calculation methods. Set reminders with Adhan notifications.",
+              title: l10n.prayerTimesTitle,
+              subtitle: l10n.prayerTimesDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.explore_rounded,
-              title: "Qibla Direction",
-              subtitle:
-                  "Easily find the Qibla direction with a clear and accurate compass view.",
+              title: l10n.qiblaDirectionTitle,
+              subtitle: l10n.qiblaDirectionDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.translate_rounded,
-              title: "Quran Translation & Tafsir",
-              subtitle:
-                  "Access 120+ translation books (including word-by-word) in 69 languages, and 30+ Tafsir books.",
+              title: l10n.translationTafsirTitle,
+              subtitle: l10n.translationTafsirDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.record_voice_over_rounded,
-              title: "Word by Word Audio & Highlighting",
-              subtitle:
-                  "Follow along with synchronized word-by-word audio recitation and highlighting for an immersive learning experience.",
+              title: l10n.wordByWordAudioTitle,
+              subtitle: l10n.wordByWordAudioDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.audiotrack_rounded,
-              title: "Ayah Audio Recitation",
-              subtitle:
-                  "Listen to full Ayah recitations from over 40+ renowned reciters.",
+              title: l10n.ayahAudioRecitationTitle,
+              subtitle: l10n.ayahAudioRecitationDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.cloud_upload_rounded,
-              title: "Notes with Cloud Backup",
-              subtitle:
-                  "Save personal notes and reflections, securely backed up to the cloud (feature in development/coming soon).", // Assuming it's still planned or existing
+              title: l10n.notesCloudBackupTitle,
+              subtitle: l10n.notesCloudBackupDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.screen_share_rounded,
-              title: "Cross-Platform Support",
-              subtitle: "Supported on Android, Web, Linux, and Windows.",
+              title: l10n.crossPlatformSupportTitle,
+              subtitle: l10n.crossPlatformSupportDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.phonelink_setup_rounded,
-              title: "Background Audio Playback",
-              subtitle:
-                  "Continue listening to Quran recitation even when the app is in the background.",
+              title: l10n.backgroundAudioPlaybackTitle,
+              subtitle: l10n.backgroundAudioPlaybackDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.offline_bolt_rounded,
-              title: "Audio & Data Caching",
-              subtitle:
-                  "Improved playback and offline capabilities with robust audio and Quran data caching.",
+              title: l10n.audioDataCachingTitle,
+              subtitle: l10n.audioDataCachingDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.brush_rounded, // Changed Icon
-              title: "Minimalistic & Clean Interface",
-              subtitle:
-                  "Easy to navigate interface with focus on user experience and readability.",
+              title: l10n.minimalisticInterfaceTitle,
+              subtitle: l10n.minimalisticInterfaceDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.memory_rounded, // Changed Icon
-              title: "Optimized Performance & Size",
-              subtitle:
-                  "A feature-rich application designed to be lightweight and performant.",
+              title: l10n.optimizedPerformanceTitle,
+              subtitle: l10n.optimizedPerformanceDescription,
             ),
             const Gap(30),
             const Divider(thickness: 1.5),
             const Gap(30),
             Text(
-              "Language Support",
+              l10n.languageSupport,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            const Text(
-              "This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):",
-            ),
+            Text(l10n.languageSupportDescription),
             const Gap(15),
-            const Wrap(
+            Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
               children: [
-                Chip(label: Text("English")),
-                Chip(label: Text("Arabic")),
-                Chip(label: Text("Urdu")),
-                Chip(label: Text("French")),
-                Chip(label: Text("German")),
-                Chip(label: Text("Spanish")),
-                Chip(label: Text("Indonesian")),
-                Chip(label: Text("Malay")),
-                Chip(label: Text("Turkish")),
-                Chip(label: Text("Bengali")),
-                Chip(label: Text("Russian")),
+                Chip(label: Text(l10n.english)),
+                Chip(label: Text(l10n.arabic)),
+                Chip(label: Text(l10n.urdu)),
+                Chip(label: Text(l10n.french)),
+                Chip(label: Text(l10n.german)),
+                Chip(label: Text(l10n.spanish)),
+                Chip(label: Text(l10n.indonesian)),
+                Chip(label: Text(l10n.malay)),
+                Chip(label: Text(l10n.turkish)),
+                Chip(label: Text(l10n.bengali)),
+                Chip(label: Text(l10n.russian)),
                 // Add more as relevant
               ],
             ),
@@ -223,57 +211,51 @@ class AboutAppPage extends StatelessWidget {
             const Divider(thickness: 1.5),
             const Gap(30),
             Text(
-              "Technology & Resources",
+              l10n.technologyAndResources,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            const Text(
-              "This app is built using cutting-edge technologies and reliable resources:",
-            ),
+            Text(l10n.technologyAndResourcesDescription),
             const Gap(15),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.flutter_dash_rounded,
-              title: "Flutter Framework",
-              subtitle:
-                  "Built with Flutter for a beautiful, natively compiled, multi-platform experience from a single codebase.",
+              title: l10n.flutterFrameworkTitle,
+              subtitle: l10n.flutterFrameworkDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.audiotrack_rounded,
-              title: "Advanced Audio Engine",
-              subtitle:
-                  "Powered by the `just_audio` and `just_audio_background` Flutter packages for robust audio playback and control.",
+              title: l10n.advancedAudioEngineTitle,
+              subtitle: l10n.advancedAudioEngineDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.storage_rounded,
-              title: "Reliable Quran Data",
-              subtitle:
-                  "Al Quran texts, translations, tafsirs, and audio are sourced from verified open APIs and databases like Quran.com & Everyayah.com.",
+              title: l10n.reliableQuranDataTitle,
+              subtitle: l10n.reliableQuranDataDescription,
             ),
-            const FeatureTile(
+            FeatureTile(
               icon: Icons.notifications_active_rounded,
-              title: "Prayer Time Engine",
-              subtitle:
-                  "Utilizes established calculation methods for accurate prayer times. Notifications handled by `flutter_local_notifications` and background tasks.",
+              title: l10n.prayerTimeEngineTitle,
+              subtitle: l10n.prayerTimeEngineDescription,
             ),
             const Gap(30),
             const Divider(thickness: 1.5),
             const Gap(30),
             Text(
-              "Cross Platform Support",
+              l10n.crossPlatformSupport,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            const Text("Enjoy seamless access across various platforms:"),
+            Text(l10n.crossPlatformSupportDescription2),
             const Gap(15),
-            const PlatformTile(icon: SimpleIcons.android, title: "Android"),
-            const PlatformTile(icon: SimpleIcons.ios, title: "iOS"),
-            const PlatformTile(icon: SimpleIcons.macos, title: "macOS"),
-            const PlatformTile(icon: SimpleIcons.googlechrome, title: "Web"),
-            const PlatformTile(icon: SimpleIcons.linux, title: "Linux"),
+            PlatformTile(icon: SimpleIcons.android, title: l10n.android),
+            PlatformTile(icon: SimpleIcons.ios, title: l10n.ios),
+            PlatformTile(icon: SimpleIcons.macos, title: l10n.macos),
+            PlatformTile(icon: SimpleIcons.googlechrome, title: l10n.web),
+            PlatformTile(icon: SimpleIcons.linux, title: l10n.linux),
             PlatformTile(
               alterNative: SvgPicture.string(
                 """<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -292,7 +274,7 @@ class AboutAppPage extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
-              title: "Windows",
+              title: l10n.windows,
             ),
 
             const Gap(30),
@@ -317,7 +299,7 @@ class AboutAppPage extends StatelessWidget {
                     ),
                     const Gap(15),
                     Text(
-                      "Our Lifetime Promise",
+                      l10n.ourLifetimePromise,
                       style: Theme.of(
                         context,
                       ).textTheme.headlineSmall?.copyWith(
@@ -328,7 +310,7 @@ class AboutAppPage extends StatelessWidget {
                     ),
                     const Gap(15),
                     Text(
-                      "I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.",
+                      l10n.lifetimePromiseDescription,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(),
                     ),
