@@ -1,6 +1,7 @@
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -31,7 +32,7 @@ class _AudioSettingsState extends State<AudioSettings> {
             borderRadius: BorderRadius.circular(7),
           ),
           child: FutureBuilder(
-            future: getCategorizedCacheFilesWithSize(l10n),
+            future: getCategorizedCacheFilesWithSize(context, l10n),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 Map<String, List<Map<String, dynamic>>> data = snapshot.data!;
@@ -149,7 +150,7 @@ class _AudioSettingsState extends State<AudioSettings> {
 }
 
 Future<Map<String, List<Map<String, dynamic>>>>
-getCategorizedCacheFilesWithSize(AppLocalizations l10n) async {
+getCategorizedCacheFilesWithSize(BuildContext context, AppLocalizations l10n) async {
   Map<String, List<Map<String, dynamic>>> categorizedFiles = {};
   final cacheDir = Directory(
     join((await getTemporaryDirectory()).path, "just_audio_cache", "remote"),
@@ -170,7 +171,7 @@ getCategorizedCacheFilesWithSize(AppLocalizations l10n) async {
 
     final fileInfo = {"path": file.path, "size": fileSize};
 
-    String timeKey = getTheTimeKey(l10n, differenceInDays);
+    String timeKey = getTheTimeKey(context, l10n, differenceInDays);
     List<Map<String, dynamic>> tem = categorizedFiles[timeKey] ?? [];
     tem.add(fileInfo);
     categorizedFiles[timeKey] = tem;
@@ -179,36 +180,40 @@ getCategorizedCacheFilesWithSize(AppLocalizations l10n) async {
   return categorizedFiles;
 }
 
-String getTheTimeKey(AppLocalizations l10n, int distanceInDay) {
+String getTheTimeKey(
+  BuildContext context,
+  AppLocalizations l10n,
+  int distanceInDay,
+) {
   String timeKey = "";
   if (distanceInDay > 365) {
     timeKey = l10n.oneYearAgo; //"1 Year ago";
   } else if (distanceInDay > 182) {
-    timeKey = l10n.sixMonthsAgo;
+    timeKey = l10n.monthsAgo(localizedNumber(context, 6));
   } else if (distanceInDay > 91) {
-    timeKey = l10n.threeMonthsAgo; //"3 Months ago";
+    timeKey = l10n.monthsAgo(localizedNumber(context, 3)); //"3 Months ago";
   } else if (distanceInDay > 60) {
-    timeKey = l10n.twoMonthsAgo; //"2 Months ago";
+    timeKey = l10n.monthsAgo(localizedNumber(context, 2)); //"2 Months ago";
   } else if (distanceInDay > 30) {
-    timeKey = l10n.oneMonthAgo; //"1 Month ago";
+    timeKey = l10n.monthsAgo(localizedNumber(context, 1)); //"1 Month ago";
   } else if (distanceInDay > 21) {
-    timeKey = l10n.threeWeeksAgo; //"3 Weeks ag0";
+    timeKey = l10n.weeksAgo(localizedNumber(context, 3)); //"3 Weeks ag0";
   } else if (distanceInDay > 14) {
-    timeKey = l10n.twoWeeksAgo; //"2 Weeks ago";
+    timeKey = l10n.weeksAgo(localizedNumber(context, 2)); //"2 Weeks ago";
   } else if (distanceInDay > 7) {
-    timeKey = l10n.oneWeekAgo; //"1 Weeks ago";
+    timeKey = l10n.weeksAgo(localizedNumber(context, 1)); //"1 Weeks ago";
   } else if (distanceInDay > 6) {
-    timeKey = l10n.sixDaysAgo; //"6 Days ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 6)); //"6 Days ago";
   } else if (distanceInDay > 5) {
-    timeKey = l10n.fiveDaysAgo; //"5 Days ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 5)); //"5 Days ago";
   } else if (distanceInDay > 4) {
-    timeKey = l10n.fourDaysAgo; //"4 Days ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 4)); //"4 Days ago";
   } else if (distanceInDay > 3) {
-    timeKey = l10n.threeDaysAgo; //"3 Days ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 3)); //"3 Days ago";
   } else if (distanceInDay > 2) {
-    timeKey = l10n.twoDaysAgo; //"2 Days ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 2)); //"2 Days ago";
   } else if (distanceInDay > 1) {
-    timeKey = l10n.oneDayAgo; //"1 Day ago";
+    timeKey = l10n.daysAgo(localizedNumber(context, 1)); //"1 Day ago";
   } else {
     timeKey = l10n.today; //"Today";
   }

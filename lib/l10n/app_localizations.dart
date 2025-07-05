@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_ar.dart';
 import 'app_localizations_bn.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_ur.dart';
 
 // ignore_for_file: type=lint
 
@@ -94,8 +96,10 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('ar'),
     Locale('bn'),
     Locale('en'),
+    Locale('ur'),
   ];
 
   /// No description provided for @tafsirAppBarTitle.
@@ -1500,83 +1504,29 @@ abstract class AppLocalizations {
   /// **'1 Year ago'**
   String get oneYearAgo;
 
-  /// No description provided for @sixMonthsAgo.
+  /// No description provided for @monthsAgo.
   ///
   /// In en, this message translates to:
-  /// **'6 Months ago'**
-  String get sixMonthsAgo;
+  /// **'{number} Months ago'**
+  String monthsAgo(String number);
 
-  /// No description provided for @threeMonthsAgo.
+  /// No description provided for @weeksAgo.
   ///
   /// In en, this message translates to:
-  /// **'3 Months ago'**
-  String get threeMonthsAgo;
+  /// **'{number} Weeks ago'**
+  String weeksAgo(String number);
 
-  /// No description provided for @twoMonthsAgo.
+  /// No description provided for @daysAgo.
   ///
   /// In en, this message translates to:
-  /// **'2 Months ago'**
-  String get twoMonthsAgo;
+  /// **'{number} Days ago'**
+  String daysAgo(String number);
 
-  /// No description provided for @oneMonthAgo.
+  /// No description provided for @hoursAgo.
   ///
   /// In en, this message translates to:
-  /// **'1 Month ago'**
-  String get oneMonthAgo;
-
-  /// No description provided for @threeWeeksAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'3 Weeks ago'**
-  String get threeWeeksAgo;
-
-  /// No description provided for @twoWeeksAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'2 Weeks ago'**
-  String get twoWeeksAgo;
-
-  /// No description provided for @oneWeekAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'1 Week ago'**
-  String get oneWeekAgo;
-
-  /// No description provided for @sixDaysAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'6 Days ago'**
-  String get sixDaysAgo;
-
-  /// No description provided for @fiveDaysAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'5 Days ago'**
-  String get fiveDaysAgo;
-
-  /// No description provided for @fourDaysAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'4 Days ago'**
-  String get fourDaysAgo;
-
-  /// No description provided for @threeDaysAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'3 Days ago'**
-  String get threeDaysAgo;
-
-  /// No description provided for @twoDaysAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'2 Days ago'**
-  String get twoDaysAgo;
-
-  /// No description provided for @oneDayAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'1 Day ago'**
-  String get oneDayAgo;
+  /// **'{hour} Hours ago'**
+  String hoursAgo(Object hour);
 
   /// No description provided for @aboutAlQuran.
   ///
@@ -1978,7 +1928,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['bn', 'en'].contains(locale.languageCode);
+      <String>['ar', 'bn', 'en', 'ur'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1987,10 +1937,14 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'ar':
+      return AppLocalizationsAr();
     case 'bn':
       return AppLocalizationsBn();
     case 'en':
       return AppLocalizationsEn();
+    case 'ur':
+      return AppLocalizationsUr();
   }
 
   throw FlutterError(
