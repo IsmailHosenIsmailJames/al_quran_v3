@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -47,6 +48,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    AppLocalizations l10n = AppLocalizations.of(context);
+
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
         log(state.isInsideQuranPlayer.toString());
@@ -110,7 +113,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         if (state.isExpanded)
                           Stack(
                             children: [
-                              getFullAudioControllerUI(),
+                              getFullAudioControllerUI(l10n),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: SizedBox(
@@ -128,7 +131,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                         );
                                       }
                                     },
-                                    tooltip: "Close Audio Controller",
+                                    tooltip: l10n.closeAudioController,
                                     icon: const Icon(
                                       Icons.close_fullscreen_rounded,
                                     ),
@@ -146,7 +149,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
     );
   }
 
-  Widget getFullAudioControllerUI() {
+  Widget getFullAudioControllerUI(AppLocalizations l10n) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,7 +258,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       onPressed: () {
                         AudioPlayerManager.stopListeningAudioPlayerState();
                       },
-                      tooltip: "Stop & Close",
+                      tooltip: l10n.stopAndClose,
                       icon: const Icon(Icons.close_rounded),
                     ),
                   ),
@@ -295,7 +298,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               }
                             }
                             : null,
-                    tooltip: "Previous",
+                    tooltip: l10n.previous,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
 
                     icon: const Icon(Icons.skip_previous_rounded),
@@ -310,7 +313,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         Duration(milliseconds: inMilSec),
                       );
                     },
-                    tooltip: "Rewind",
+                    tooltip: l10n.rewind,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.replay_5_rounded),
                   ),
@@ -322,7 +325,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               ? AudioPlayerManager.audioPlayer.pause()
                               : AudioPlayerManager.audioPlayer.play();
                         },
-                        tooltip: state.isPlaying ? "Pause" : "Play",
+                        tooltip: state.isPlaying ? l10n.pause : l10n.play,
                         iconSize: 40,
                         style: IconButton.styleFrom(
                           padding: const EdgeInsets.all(5),
@@ -354,7 +357,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         Duration(milliseconds: inMilSec),
                       );
                     },
-                    tooltip: "Fast Forward",
+                    tooltip: l10n.fastForward,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.forward_5_rounded),
                   ),
@@ -402,7 +405,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                               }
                             }
                             : null,
-                    tooltip: "Play Next Ayah",
+                    tooltip: l10n.playNextAyah,
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
                     icon: const Icon(Icons.skip_next_rounded),
                   ),
@@ -426,7 +429,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           );
                         }
                       },
-                      tooltip: "Repeat",
+                      tooltip: l10n.repeat,
                       style: IconButton.styleFrom(padding: EdgeInsets.zero),
                       icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
                         just_audio.LoopMode.one => const Icon(
@@ -467,7 +470,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                           isInsideQuran: true,
                         );
                       },
-                      tooltip: "Play As Playlist",
+                      tooltip: l10n.playAsPlaylist,
                       style: IconButton.styleFrom(padding: EdgeInsets.zero),
                       icon: const Icon(Icons.playlist_play_rounded),
                     ),

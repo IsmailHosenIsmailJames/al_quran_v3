@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -6,7 +7,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
-import "../../audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "../../audio/player/audio_player_manager.dart";
 import "../../functions/basic_functions.dart";
 import "../../screen/audio/change_reciter/popup_change_reciter.dart";
@@ -21,6 +22,7 @@ Widget getReciterWidget({
   int? currentIndex,
   bool? isWordByWord,
 }) {
+  AppLocalizations l10n = AppLocalizations.of(context);
   return InkWell(
     borderRadius: BorderRadius.circular(roundedRadius),
     onTap: () {
@@ -96,12 +98,12 @@ Widget getReciterWidget({
                 const Icon(Icons.arrow_drop_down_rounded, size: 30),
               ],
             ),
-            Text("Style: ${audioTabScreenState.style}"),
-            Text("Source: ${audioTabScreenState.source}"),
+            Text(l10n.style(audioTabScreenState.style ?? "")),
+            Text(l10n.source(audioTabScreenState.source ?? "")),
             if (audioTabScreenState.bio != null)
               Row(
                 children: [
-                  const Text("More: "),
+                  Text(l10n.more),
                   SizedBox(
                     height: 20,
                     child: TextButton(

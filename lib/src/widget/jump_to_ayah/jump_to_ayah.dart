@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -54,6 +55,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
 
+    AppLocalizations l10n = AppLocalizations.of(context);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
@@ -82,8 +85,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                 Center(
                   child: Text(
                     widget.selectMultipleAndShare == true
-                        ? "Share Select Ayahs"
-                        : "Jump To Ayah",
+                        ? l10n.shareSelectAyahs
+                        : l10n.jumpToAyah,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -129,7 +132,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           ? Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: const Text("Selection Empty"),
+                            child: Text(l10n.selectionEmpty),
                           )
                           : ListView.builder(
                             padding: const EdgeInsets.only(left: 10, right: 30),
@@ -187,9 +190,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         ),
                         child: TextFormField(
                           controller: textEditingController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             prefixIcon: Icon(Icons.search),
-                            hintText: "Search for a surah",
+                            hintText: l10n.searchForASurah,
                             border: InputBorder.none,
                           ),
                           onChanged: (value) {
@@ -372,8 +375,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                         color: themeState.primary,
                                       ),
                                       const Gap(20),
-                                      const Text(
-                                        "Generating Image... Please Wait",
+                                      Text(
+                                        l10n.generatingImagePleaseWait,
                                         textAlign: TextAlign.center,
                                       ),
                                     ],
@@ -495,7 +498,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       );
                     },
                     icon: const Icon(FluentIcons.image_24_regular),
-                    label: const Text("As Image"),
+                    label: Text(l10n.asImage),
                   ),
                 ),
                 const Gap(10),
@@ -552,7 +555,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       Navigator.pop(context);
                     },
                     icon: const Icon(FluentIcons.textbox_16_regular),
-                    label: const Text("As Text"),
+                    label: Text(l10n.asText),
                   ),
                 ),
                 const Gap(5),
@@ -577,7 +580,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                   Navigator.pop(context);
                   widget.onPlaySelected!("$surahNumber:$ayahNumber");
                 },
-                label: const Text("Play From Selected Ayah"),
+                label: Text(l10n.playFromSelectedAyah),
                 icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
               ),
             ),
@@ -604,10 +607,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ),
                             );
                           } else {
-                            Fluttertoast.showToast(msg: "Please Select One");
+                            Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
                           }
                         },
-                        child: const Text("To Tafsir"),
+                        child: Text(l10n.toTafsir),
                       ),
                     ),
                   if (widget.onSelectAyah == null) const Gap(10),
@@ -634,11 +637,13 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             );
                           }
                         } else {
-                          Fluttertoast.showToast(msg: "Please Select One");
+                          Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
                         }
                       },
                       child: Text(
-                        widget.onSelectAyah != null ? "Select Ayah" : "To Ayah",
+                        widget.onSelectAyah != null
+                            ? l10n.selectAyah
+                            : l10n.toAyah,
                       ),
                     ),
                   ),

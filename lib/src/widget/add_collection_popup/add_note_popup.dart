@@ -66,7 +66,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   void _handleSaveNote() {
     if (_noteEditingController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Note content cannot be empty.")),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).noteContentCannotBeEmpty),
+        ),
       );
       return;
     }
@@ -94,7 +96,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
     }
 
     Navigator.pop(context); // Close the dialog
-    Fluttertoast.showToast(msg: "Note saved successfully!");
+    Fluttertoast.showToast(
+      msg: AppLocalizations.of(context).noteSavedSuccessfully,
+    );
   }
 
   @override
@@ -107,6 +111,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    AppLocalizations l10n = AppLocalizations.of(context);
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -118,7 +124,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
               const Icon(FluentIcons.note_add_24_regular),
               const Gap(10),
               Text(
-                _selectNoteCollectionStep ? "Select Collections" : "Add Note",
+                _selectNoteCollectionStep
+                    ? l10n.selectCollections
+                    : l10n.addNote,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -134,7 +142,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                   },
                   iconAlignment: IconAlignment.end,
                   icon: const Icon(FluentIcons.add_24_regular),
-                  label: const Text("New"),
+                  label: Text(l10n.newText),
                 ),
             ],
           ),
@@ -168,8 +176,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                 child: TextFormField(
                                   controller: _newCollectionNameController,
                                   autofocus: true,
-                                  decoration: const InputDecoration(
-                                    hintText: "Write collection name...",
+                                  decoration: InputDecoration(
+                                    hintText: l10n.writeCollectionName,
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -188,7 +196,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                       await handleAddNewNoteCollection(
                                         _newCollectionNameController.text
                                             .trim(),
-                                        AppLocalizations.of(context),
+                                        l10n,
                                       );
                                   if (newCollection != null) {
                                     setState(() {
@@ -213,10 +221,11 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                   if (_addNewNoteCollectionStep) const Gap(10),
                   Expanded(
                     child:
-                        _availableNoteCollections.isEmpty &&
-                                !_addNewNoteCollectionStep
-                            ? const Center(
-                              child: Text("No collections yet. Add a new one!"),
+                        (_availableNoteCollections.isEmpty &&
+                                !_addNewNoteCollectionStep &&
+                                _addNewNoteCollectionStep)
+                            ? Center(
+                              child: Text(l10n.noCollectionsYetAddANewOne),
                             )
                             : ListView.builder(
                               itemCount: _availableNoteCollections.length,
@@ -335,8 +344,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                       if (!_selectNoteCollectionStep) {
                         if (_noteEditingController.text.trim().isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please write your note first."),
+                            SnackBar(
+                              content: Text(l10n.pleaseWriteYourNoteFirst),
                             ),
                           );
                           return;
@@ -346,7 +355,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                         });
                       } else {
                         if (_selectedNoteCollectionIds.isEmpty) {
-                          Fluttertoast.showToast(msg: "No Collection selected");
+                          Fluttertoast.showToast(
+                            msg: l10n.noCollectionSelected,
+                          );
                         } else {
                           _handleSaveNote();
                         }
@@ -363,8 +374,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                     ),
                     label: Text(
                       _selectNoteCollectionStep
-                          ? "Save Note"
-                          : "Next: Select Collections",
+                          ? l10n.saveNote
+                          : l10n.nextSelectCollections,
                     ),
                   ),
                 ),
