@@ -53,6 +53,7 @@ Map<String, dynamic> metaDataRuku = {};
 Map<String, dynamic> metaDataSajda = {};
 Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
+Map<String, dynamic> surahMeaningLocalization = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -120,6 +121,12 @@ Future<void> main() async {
   surahNameLocalization = jsonDecode(
     await rootBundle.loadString(
       "assets/meta_data/surah_name_localization.json",
+    ),
+  );
+
+  surahMeaningLocalization = jsonDecode(
+    await rootBundle.loadString(
+      "assets/meta_data/surah_meaning_localization.json",
     ),
   );
 

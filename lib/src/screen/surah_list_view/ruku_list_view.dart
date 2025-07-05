@@ -17,6 +17,7 @@ import "../../theme/controller/theme_cubit.dart";
 
 class RukuListView extends StatelessWidget {
   final List<RukuInfoModel> rukuInfoList;
+
   const RukuListView({super.key, required this.rukuInfoList});
 
   @override
@@ -125,14 +126,14 @@ class RukuListView extends StatelessWidget {
                       ],
                     ),
 
-                    const Spacer(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.55,
+                    const Gap(10),
+                    Expanded(
                       child: FittedBox(
                         alignment: Alignment.centerRight,
                         fit: BoxFit.scaleDown,
                         child: ScriptProcessor(
                           scriptInfo: ScriptInfo(
+                            textStyle: const TextStyle(fontSize: 20),
                             surahNumber: int.parse(
                               rukuInfoList[index].firstVerseKey.split(":")[0],
                             ),

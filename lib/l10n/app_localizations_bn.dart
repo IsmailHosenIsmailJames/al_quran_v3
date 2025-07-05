@@ -53,7 +53,7 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String ayahsCount(int count) {
+  String ayahsCount(String count) {
     return '$count টি আয়াত';
   }
 

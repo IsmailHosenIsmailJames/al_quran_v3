@@ -17,6 +17,7 @@ import "../../theme/controller/theme_cubit.dart";
 
 class JuzListView extends StatelessWidget {
   final List<JuzInfoModel> juzInfoList;
+
   const JuzListView({super.key, required this.juzInfoList});
 
   @override
@@ -124,15 +125,14 @@ class JuzListView extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    const Spacer(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.55,
+                    const Gap(10),
+                    Expanded(
                       child: FittedBox(
                         alignment: Alignment.centerRight,
                         fit: BoxFit.scaleDown,
                         child: ScriptProcessor(
                           scriptInfo: ScriptInfo(
+                            textStyle: const TextStyle(fontSize: 20),
                             surahNumber: int.parse(
                               juzInfoList[index].firstVerseKey.split(":")[0],
                             ),

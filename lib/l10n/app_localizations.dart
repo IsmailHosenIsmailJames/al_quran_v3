@@ -166,7 +166,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{count} Ayahs'**
-  String ayahsCount(int count);
+  String ayahsCount(String count);
 
   /// No description provided for @saveAndDownload.
   ///
