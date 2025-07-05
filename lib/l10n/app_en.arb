@@ -58,7 +58,7 @@
     "@ayahsCount": {
         "placeholders": {
             "count": {
-                "type": "int"
+                "type": "String"
             }
         }
     },

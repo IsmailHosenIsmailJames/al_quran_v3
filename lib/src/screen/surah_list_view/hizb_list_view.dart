@@ -124,14 +124,14 @@ class HizbListView extends StatelessWidget {
                       ],
                     ),
 
-                    const Spacer(),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.55,
+                    const Gap(10),
+                    Expanded(
                       child: FittedBox(
                         alignment: Alignment.centerRight,
                         fit: BoxFit.scaleDown,
                         child: ScriptProcessor(
                           scriptInfo: ScriptInfo(
+                            textStyle: const TextStyle(fontSize: 20),
                             surahNumber: int.parse(
                               hizbInfoList[index].firstVerseKey.split(":")[0],
                             ),

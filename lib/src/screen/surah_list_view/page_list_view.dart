@@ -18,6 +18,7 @@ import "../../theme/controller/theme_cubit.dart";
 
 class PageListView extends StatelessWidget {
   final List<PageInfoModel> pageInfoList;
+
   const PageListView({super.key, required this.pageInfoList});
 
   @override
@@ -128,15 +129,14 @@ class PageListView extends StatelessWidget {
                       ],
                     ),
 
-                    const Spacer(),
-
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
+                    const Gap(10),
+                    Expanded(
                       child: FittedBox(
                         alignment: Alignment.centerRight,
                         fit: BoxFit.scaleDown,
                         child: ScriptProcessor(
                           scriptInfo: ScriptInfo(
+                            textStyle: const TextStyle(fontSize: 20),
                             surahNumber: int.parse(ayahKey.split(":")[0]),
                             ayahNumber: int.parse(ayahKey.split(":")[1]),
                             quranScriptType: quranScriptType,
