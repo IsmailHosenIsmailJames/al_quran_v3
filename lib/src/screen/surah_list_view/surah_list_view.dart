@@ -123,7 +123,7 @@ class SurahListView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          surahInfoList[index].nameArabic,
+                          getSurahNameArabic(surahInfoList[index].id),
                           style: TextStyle(fontSize: 18, color: textColor),
                         ),
                         Text(

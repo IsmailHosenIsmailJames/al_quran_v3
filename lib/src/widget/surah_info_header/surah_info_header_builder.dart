@@ -26,6 +26,7 @@ import "../../theme/controller/theme_state.dart";
 
 class SurahInfoHeaderBuilder extends StatelessWidget {
   final SurahHeaderInfoModel headerInfoModel;
+
   const SurahInfoHeaderBuilder({super.key, required this.headerInfoModel});
 
   @override
@@ -67,7 +68,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${headerInfoModel.surahInfoModel.nameArabic} )",
+                    "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${getSurahNameArabic(headerInfoModel.surahInfoModel.id)} )",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Row(

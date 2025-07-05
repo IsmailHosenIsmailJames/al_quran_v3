@@ -22,7 +22,7 @@ class SurahInfoView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${getSurahName(context, surahInfoModel.id)} (${surahInfoModel.nameArabic})",
+          "${getSurahName(context, surahInfoModel.id)} (${getSurahNameArabic(surahInfoModel.id)})",
         ),
       ),
       body: SingleChildScrollView(

@@ -58,7 +58,7 @@ class _TafsirViewState extends State<TafsirView> {
         title: Text(
           appLocalizations.tafsirAppBarTitle(
             getSurahName(context, surahInfoModel.id),
-            surahInfoModel.nameArabic,
+            getSurahNameArabic(surahInfoModel.id),
             widget.ayahKey,
           ),
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
