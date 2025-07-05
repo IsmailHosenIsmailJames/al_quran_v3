@@ -330,7 +330,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text("Quran Tafsir Language", style: titleStyle),
+                            Text(
+                              appLocalizations.quranTafsirLanguage,
+                              style: titleStyle,
+                            ),
                           ],
                         ),
 
@@ -728,7 +731,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     color: themeState.primary,
                   ),
                 ),
-              Text(e["Native"] ?? ""),
+              Text("${e["Native"] ?? ""} (${e["English"] ?? ""})"),
               ...getSupportInfoForLanguageWidget(key: e["English"] ?? ""),
             ],
           ),
