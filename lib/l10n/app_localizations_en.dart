@@ -1051,4 +1051,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get midnight => 'Midnight';
+
+  @override
+  String get alarm => 'Alarm';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String formattedAddress(
+    Object administrativeArea,
+    Object country,
+    Object subAdministrativeArea,
+  ) {
+    return '$subAdministrativeArea, $administrativeArea, $country';
+  }
 }

@@ -1991,6 +1991,28 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Midnight'**
   String get midnight;
+
+  /// No description provided for @alarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm'**
+  String get alarm;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// No description provided for @formattedAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'{subAdministrativeArea}, {administrativeArea}, {country}'**
+  String formattedAddress(
+    Object administrativeArea,
+    Object country,
+    Object subAdministrativeArea,
+  );
 }
 
 class _AppLocalizationsDelegate

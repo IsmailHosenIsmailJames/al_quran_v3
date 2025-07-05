@@ -314,5 +314,8 @@
     "asr": "আসর",
     "maghrib": "মাগরিব",
     "isha": "ইশা",
-    "midnight": "মধ্যরাত"
+    "midnight": "মধ্যরাত",
+    "alarm": "অ্যালার্ম",
+    "notification": "বিজ্ঞপ্তি",
+    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}"
 }

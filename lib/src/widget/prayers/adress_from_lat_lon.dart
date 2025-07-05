@@ -12,25 +12,20 @@ import "../../theme/values/values.dart";
 ///
 /// Returns a string in the format "SubAdministrativeArea, AdministrativeArea, Country"
 /// or null if the address cannot be determined or an error occurs.
-Future<String?> fetchFormattedAddress(double lat, double long) async {
+Future<String?> fetchFormattedAddress(
+  BuildContext context,
+  double lat,
+  double long,
+) async {
   try {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
     if (placemarks.isNotEmpty) {
       Placemark place = placemarks.first;
-      // Construct the address, handling potentially null fields
-      List<String> addressParts = [];
-      if (place.subAdministrativeArea != null &&
-          place.subAdministrativeArea!.isNotEmpty) {
-        addressParts.add(place.subAdministrativeArea!);
-      }
-      if (place.administrativeArea != null &&
-          place.administrativeArea!.isNotEmpty) {
-        addressParts.add(place.administrativeArea!);
-      }
-      if (place.country != null && place.country!.isNotEmpty) {
-        addressParts.add(place.country!);
-      }
-      return addressParts.join(", ");
+      return AppLocalizations.of(context).formattedAddress(
+        place.subAdministrativeArea ?? "",
+        place.administrativeArea ?? "",
+        place.country ?? "",
+      );
     }
   } catch (e) {
     // Log the error or handle it as needed
@@ -40,6 +35,7 @@ Future<String?> fetchFormattedAddress(double lat, double long) async {
 }
 
 Widget getAddressView({
+  required BuildContext context,
   required double lat,
   required double long,
   bool keepDecoration = true,
@@ -48,7 +44,7 @@ Widget getAddressView({
   TextStyle? style,
 }) {
   return FutureBuilder<String?>(
-    future: fetchFormattedAddress(lat, long),
+    future: fetchFormattedAddress(context, lat, long),
     builder: (context, snapshot) {
       ThemeState themeState = context.read<ThemeCubit>().state;
       if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {

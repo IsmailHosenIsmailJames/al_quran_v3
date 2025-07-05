@@ -1054,4 +1054,19 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get midnight => 'মধ্যরাত';
+
+  @override
+  String get alarm => 'অ্যালার্ম';
+
+  @override
+  String get notification => 'বিজ্ঞপ্তি';
+
+  @override
+  String formattedAddress(
+    Object administrativeArea,
+    Object country,
+    Object subAdministrativeArea,
+  ) {
+    return '$subAdministrativeArea, $administrativeArea, $country';
+  }
 }
