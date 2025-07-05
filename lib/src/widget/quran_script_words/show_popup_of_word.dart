@@ -1,6 +1,7 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
@@ -78,7 +79,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                 ),
               ),
               Text(
-                "${widget.surahInfoModel.nameSimple} - ${widget.wordKeys[currentWordIndex]}",
+                "${getSurahName(context, widget.surahInfoModel.id)} - ${widget.wordKeys[currentWordIndex]}",
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

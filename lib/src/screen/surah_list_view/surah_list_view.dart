@@ -96,7 +96,7 @@ class SurahListView extends StatelessWidget {
                             ),
                             const Gap(3),
                             Text(
-                              surahInfoList[index].nameSimple,
+                              getSurahName(context, surahInfoList[index].id),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,

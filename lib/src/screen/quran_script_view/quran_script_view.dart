@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
@@ -289,10 +290,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
             },
             builder:
                 (context, state) => Text(
-                  state.surahInfoModel?.nameSimple == null
+                  state.surahInfoModel == null
                       ? ""
                       : appLocalizations.surahName(
-                        state.surahInfoModel!.nameSimple,
+                        getSurahName(context, state.surahInfoModel!.id),
                       ),
                   style: const TextStyle(fontSize: 18),
                 ),

@@ -1,7 +1,8 @@
 import "dart:developer";
 
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -56,7 +57,7 @@ class _TafsirViewState extends State<TafsirView> {
         titleSpacing: 0,
         title: Text(
           appLocalizations.tafsirAppBarTitle(
-            surahInfoModel.nameSimple,
+            getSurahName(context, surahInfoModel.id),
             surahInfoModel.nameArabic,
             widget.ayahKey,
           ),
@@ -66,7 +67,9 @@ class _TafsirViewState extends State<TafsirView> {
       body:
           tafsirDataString.isEmpty
               ? Center(
-                child: Text(appLocalizations.tafsirNotAvailable(widget.ayahKey)),
+                child: Text(
+                  appLocalizations.tafsirNotAvailable(widget.ayahKey),
+                ),
               )
               : isLinkedToAnother
               ? Column(
@@ -74,7 +77,9 @@ class _TafsirViewState extends State<TafsirView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text(appLocalizations.tafsirFoundAt(anotherAyahLinkKey)),
+                    child: Text(
+                      appLocalizations.tafsirFoundAt(anotherAyahLinkKey),
+                    ),
                   ),
                   const Gap(20),
                   Center(
@@ -92,7 +97,9 @@ class _TafsirViewState extends State<TafsirView> {
                           },
                         );
                       },
-                      child: Text(appLocalizations.tafsirJumpTo(anotherAyahLinkKey)),
+                      child: Text(
+                        appLocalizations.tafsirJumpTo(anotherAyahLinkKey),
+                      ),
                     ),
                   ),
                 ],

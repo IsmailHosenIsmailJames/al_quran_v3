@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -245,7 +246,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       });
                                     },
                                     child: Text(
-                                      "${index + 1}. ${surah.nameSimple}",
+                                      "${index + 1}. ${getSurahName(context, surah.id)}",
                                     ),
                                   )
                                   : const SizedBox();
@@ -484,7 +485,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           XFile.fromData(imageData, mimeType: "image/png"),
                         );
                         fileNames.add(
-                          "${surahInfoModel.nameSimple} - $ayahKey.png",
+                          "${getSurahName(context, surahInfoModel.id)} - $ayahKey.png",
                         );
                       }
                       Navigator.pop(context);
@@ -548,7 +549,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             }
                         }
                         text +=
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
+                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
                       }
 
                       await SharePlus.instance.share(ShareParams(text: text));

@@ -1,6 +1,7 @@
-import "package:al_quran_v3/l10n/app_localizations.dart";
 import "dart:math" as math;
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:vector_math/vector_math.dart" as vector;
@@ -89,7 +90,7 @@ class CompassView extends CustomPainter {
           // Draw angle text
           TextPainter textPainter = TextPainter(
             text: TextSpan(
-              text: degree.toString(),
+              text: localizedNumber(context, degree),
               style: TextStyle(
                 fontSize: is90 ? 14 : 12,
                 color: is90 ? themeState.primary : grayColor,

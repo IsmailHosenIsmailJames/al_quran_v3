@@ -1,10 +1,11 @@
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/get_localized_ayah_key.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -40,7 +41,7 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "${SurahInfoModel.fromMap(metaDataSurah[quranViewState.ayahKey.split(":").first]).nameSimple} - ${quranViewState.ayahKey}",
+                        "${getSurahName(context, quranViewState.ayahKey.split(":").first.toInt())} - ${getAyahLocalized(context, quranViewState.ayahKey)}",
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

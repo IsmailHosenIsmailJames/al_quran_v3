@@ -1,4 +1,5 @@
 import "package:flutter/cupertino.dart";
+import 'package:al_quran_v3/l10n/app_localizations.dart';
 
 class ScriptInfo {
   int surahNumber;
@@ -27,3 +28,17 @@ class ScriptInfo {
 }
 
 enum QuranScriptType { tajweed, uthmani, indopak }
+
+String getLocalizedQuranScriptType(
+  BuildContext context,
+  QuranScriptType quranScriptType,
+) {
+  switch (quranScriptType) {
+    case QuranScriptType.tajweed:
+      return AppLocalizations.of(context).quranScriptTajweed;
+    case QuranScriptType.uthmani:
+      return AppLocalizations.of(context).quranScriptUthmani;
+    case QuranScriptType.indopak:
+      return AppLocalizations.of(context).quranScriptIndopak;
+  }
+}

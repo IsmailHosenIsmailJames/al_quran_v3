@@ -3,7 +3,6 @@ import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
@@ -947,7 +946,10 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       );
                     },
                     label: Text(
-                      currentQuranScriptType.name.capitalize(),
+                      getLocalizedQuranScriptType(
+                        context,
+                        currentQuranScriptType,
+                      ).capitalize(),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     icon:
