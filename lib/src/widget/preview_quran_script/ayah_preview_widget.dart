@@ -1,4 +1,5 @@
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -20,7 +21,10 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Preview", style: TextStyle(color: Colors.grey)),
+                Text(
+                  AppLocalizations.of(context).preview,
+                  style: const TextStyle(color: Colors.grey),
+                ),
                 TextButton(
                   onPressed: () async {
                     await popupJumpToAyah(

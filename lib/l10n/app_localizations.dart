@@ -344,6 +344,168 @@ abstract class AppLocalizations {
   /// **'Quran Style'**
   String get quranStyle;
 
+  /// No description provided for @changeTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Theme'**
+  String get changeTheme;
+
+  /// No description provided for @verseCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Verse Count: '**
+  String get verseCount;
+
+  /// No description provided for @translation.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation'**
+  String get translation;
+
+  /// No description provided for @tafsirNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Found'**
+  String get tafsirNotFound;
+
+  /// No description provided for @moreInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'more info'**
+  String get moreInfo;
+
+  /// No description provided for @playAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Audio'**
+  String get playAudio;
+
+  /// No description provided for @preview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get preview;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @errorFetchingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Error fetching address'**
+  String get errorFetchingAddress;
+
+  /// No description provided for @addressNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Address not available'**
+  String get addressNotAvailable;
+
+  /// No description provided for @latitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Latitude: '**
+  String get latitude;
+
+  /// No description provided for @longitude.
+  ///
+  /// In en, this message translates to:
+  /// **'Longitude: '**
+  String get longitude;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name: '**
+  String get name;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location: '**
+  String get location;
+
+  /// No description provided for @parameters.
+  ///
+  /// In en, this message translates to:
+  /// **'Parameters: '**
+  String get parameters;
+
+  /// No description provided for @selectCalculationMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Calculation Method'**
+  String get selectCalculationMethod;
+
+  /// No description provided for @shareSelectAyahs.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Select Ayahs'**
+  String get shareSelectAyahs;
+
+  /// No description provided for @selectionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Selection Empty'**
+  String get selectionEmpty;
+
+  /// No description provided for @generatingImagePleaseWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating Image... Please Wait'**
+  String get generatingImagePleaseWait;
+
+  /// No description provided for @asImage.
+  ///
+  /// In en, this message translates to:
+  /// **'As Image'**
+  String get asImage;
+
+  /// No description provided for @asText.
+  ///
+  /// In en, this message translates to:
+  /// **'As Text'**
+  String get asText;
+
+  /// No description provided for @playFromSelectedAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Play From Selected Ayah'**
+  String get playFromSelectedAyah;
+
+  /// No description provided for @toTafsir.
+  ///
+  /// In en, this message translates to:
+  /// **'To Tafsir'**
+  String get toTafsir;
+
+  /// No description provided for @selectAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Ayah'**
+  String get selectAyah;
+
+  /// No description provided for @toAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'To Ayah'**
+  String get toAyah;
+
+  /// No description provided for @searchForASurah.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a surah'**
+  String get searchForASurah;
+
+  /// No description provided for @bugReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bug Report'**
+  String get bugReportTitle;
+
   /// No description provided for @audioCached.
   ///
   /// In en, this message translates to:
@@ -385,12 +547,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quran Ayah'**
   String get quranAyah;
-
-  /// No description provided for @translation.
-  ///
-  /// In en, this message translates to:
-  /// **'Translation'**
-  String get translation;
 
   /// No description provided for @topToolbar.
   ///
@@ -1058,6 +1214,210 @@ abstract class AppLocalizations {
   /// **'Translation Not Found'**
   String get translationNotFound;
 
+  /// No description provided for @translationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation:'**
+  String get translationTitle;
+
+  /// No description provided for @footNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Foot Note:'**
+  String get footNoteTitle;
+
+  /// No description provided for @wordByWordTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Word by Word Translation:'**
+  String get wordByWordTranslation;
+
+  /// No description provided for @tafsirButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Tafsir'**
+  String get tafsirButton;
+
+  /// No description provided for @shareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareButton;
+
+  /// No description provided for @addNoteButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Note'**
+  String get addNoteButton;
+
+  /// No description provided for @pinToCollectionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin to Collection'**
+  String get pinToCollectionButton;
+
+  /// No description provided for @shareAsText.
+  ///
+  /// In en, this message translates to:
+  /// **'Share as Text'**
+  String get shareAsText;
+
+  /// No description provided for @copiedWithTafsir.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied with Tafsir'**
+  String get copiedWithTafsir;
+
+  /// No description provided for @shareAsImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share as Image'**
+  String get shareAsImage;
+
+  /// No description provided for @shareWithTafsir.
+  ///
+  /// In en, this message translates to:
+  /// **'Share with Tafsir'**
+  String get shareWithTafsir;
+
+  /// No description provided for @notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Not found'**
+  String get notFound;
+
+  /// No description provided for @noteContentCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Note content cannot be empty.'**
+  String get noteContentCannotBeEmpty;
+
+  /// No description provided for @noteSavedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Note saved successfully!'**
+  String get noteSavedSuccessfully;
+
+  /// No description provided for @selectCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Collections'**
+  String get selectCollections;
+
+  /// No description provided for @addNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Note'**
+  String get addNote;
+
+  /// No description provided for @writeCollectionName.
+  ///
+  /// In en, this message translates to:
+  /// **'Write collection name...'**
+  String get writeCollectionName;
+
+  /// No description provided for @noCollectionsYetAddANewOne.
+  ///
+  /// In en, this message translates to:
+  /// **'No collections yet. Add a new one!'**
+  String get noCollectionsYetAddANewOne;
+
+  /// No description provided for @pleaseWriteYourNoteFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Please write your note first.'**
+  String get pleaseWriteYourNoteFirst;
+
+  /// No description provided for @noCollectionSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No Collection selected'**
+  String get noCollectionSelected;
+
+  /// No description provided for @saveNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Note'**
+  String get saveNote;
+
+  /// No description provided for @nextSelectCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Select Collections'**
+  String get nextSelectCollections;
+
+  /// No description provided for @addToPinned.
+  ///
+  /// In en, this message translates to:
+  /// **'Add To Pinned'**
+  String get addToPinned;
+
+  /// No description provided for @pinnedSavedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinned saved successfully!'**
+  String get pinnedSavedSuccessfully;
+
+  /// No description provided for @savePinned.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Pinned'**
+  String get savePinned;
+
+  /// No description provided for @closeAudioController.
+  ///
+  /// In en, this message translates to:
+  /// **'Close Audio Controller'**
+  String get closeAudioController;
+
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @rewind.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewind'**
+  String get rewind;
+
+  /// No description provided for @fastForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast Forward'**
+  String get fastForward;
+
+  /// No description provided for @playNextAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Play Next Ayah'**
+  String get playNextAyah;
+
+  /// No description provided for @repeat.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat'**
+  String get repeat;
+
+  /// No description provided for @playAsPlaylist.
+  ///
+  /// In en, this message translates to:
+  /// **'Play As Playlist'**
+  String get playAsPlaylist;
+
+  /// No description provided for @style.
+  ///
+  /// In en, this message translates to:
+  /// **'Style: {style}'**
+  String style(String style);
+
+  /// No description provided for @stopAndClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop & Close'**
+  String get stopAndClose;
+
   /// No description provided for @play.
   ///
   /// In en, this message translates to:
@@ -1076,17 +1436,17 @@ abstract class AppLocalizations {
   /// **'Select Reciter'**
   String get selectReciter;
 
-  /// No description provided for @style.
-  ///
-  /// In en, this message translates to:
-  /// **'Style: {style}'**
-  String style(String style);
-
   /// No description provided for @source.
   ///
   /// In en, this message translates to:
   /// **'Source: {source}'**
   String source(String source);
+
+  /// No description provided for @newText.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get newText;
 
   /// No description provided for @more.
   ///

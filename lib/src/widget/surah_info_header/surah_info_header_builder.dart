@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
@@ -29,6 +30,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    AppLocalizations l10n = AppLocalizations.of(context);
     final TranslationBookModel? translationMeta =
         QuranTranslationFunction.getMetaInfo();
     TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
@@ -69,7 +71,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Text("Verse Count: "),
+                      Text(l10n.verseCount),
                       Text(
                         headerInfoModel.surahInfoModel.versesCount.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -80,7 +82,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
                       safeSubString(
-                        "Translation: ${translationMeta?.name.toString()}",
+                        "${l10n.translation}: ${translationMeta?.name.toString()}",
                         30,
                         replacer: "...",
                       ),
@@ -91,7 +93,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
                       safeSubString(
-                        'Tafsir: ${tafsirSelected?.name ?? "Not Found"}',
+                        'Tafsir: ${tafsirSelected?.name ?? l10n.tafsirNotFound}',
                         30,
                         replacer: "...",
                       ),
@@ -124,7 +126,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "more info",
+                          l10n.moreInfo,
                           style: TextStyle(
                             color: themeState.primary,
                             decoration: TextDecoration.underline,

@@ -155,6 +155,87 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quranStyle => 'Quran Style';
 
   @override
+  String get changeTheme => 'Change Theme';
+
+  @override
+  String get verseCount => 'Verse Count: ';
+
+  @override
+  String get translation => 'Translation';
+
+  @override
+  String get tafsirNotFound => 'Not Found';
+
+  @override
+  String get moreInfo => 'more info';
+
+  @override
+  String get playAudio => 'Play Audio';
+
+  @override
+  String get preview => 'Preview';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get errorFetchingAddress => 'Error fetching address';
+
+  @override
+  String get addressNotAvailable => 'Address not available';
+
+  @override
+  String get latitude => 'Latitude: ';
+
+  @override
+  String get longitude => 'Longitude: ';
+
+  @override
+  String get name => 'Name: ';
+
+  @override
+  String get location => 'Location: ';
+
+  @override
+  String get parameters => 'Parameters: ';
+
+  @override
+  String get selectCalculationMethod => 'Select Calculation Method';
+
+  @override
+  String get shareSelectAyahs => 'Share Select Ayahs';
+
+  @override
+  String get selectionEmpty => 'Selection Empty';
+
+  @override
+  String get generatingImagePleaseWait => 'Generating Image... Please Wait';
+
+  @override
+  String get asImage => 'As Image';
+
+  @override
+  String get asText => 'As Text';
+
+  @override
+  String get playFromSelectedAyah => 'Play From Selected Ayah';
+
+  @override
+  String get toTafsir => 'To Tafsir';
+
+  @override
+  String get selectAyah => 'Select Ayah';
+
+  @override
+  String get toAyah => 'To Ayah';
+
+  @override
+  String get searchForASurah => 'Search for a surah';
+
+  @override
+  String get bugReportTitle => 'Bug Report';
+
+  @override
   String get audioCached => 'Audio Cached';
 
   @override
@@ -175,9 +256,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quranAyah => 'Quran Ayah';
-
-  @override
-  String get translation => 'Translation';
 
   @override
   String get topToolbar => 'Top Toolbar';
@@ -559,6 +637,110 @@ class AppLocalizationsEn extends AppLocalizations {
   String get translationNotFound => 'Translation Not Found';
 
   @override
+  String get translationTitle => 'Translation:';
+
+  @override
+  String get footNoteTitle => 'Foot Note:';
+
+  @override
+  String get wordByWordTranslation => 'Word by Word Translation:';
+
+  @override
+  String get tafsirButton => 'Tafsir';
+
+  @override
+  String get shareButton => 'Share';
+
+  @override
+  String get addNoteButton => 'Add Note';
+
+  @override
+  String get pinToCollectionButton => 'Pin to Collection';
+
+  @override
+  String get shareAsText => 'Share as Text';
+
+  @override
+  String get copiedWithTafsir => 'Copied with Tafsir';
+
+  @override
+  String get shareAsImage => 'Share as Image';
+
+  @override
+  String get shareWithTafsir => 'Share with Tafsir';
+
+  @override
+  String get notFound => 'Not found';
+
+  @override
+  String get noteContentCannotBeEmpty => 'Note content cannot be empty.';
+
+  @override
+  String get noteSavedSuccessfully => 'Note saved successfully!';
+
+  @override
+  String get selectCollections => 'Select Collections';
+
+  @override
+  String get addNote => 'Add Note';
+
+  @override
+  String get writeCollectionName => 'Write collection name...';
+
+  @override
+  String get noCollectionsYetAddANewOne => 'No collections yet. Add a new one!';
+
+  @override
+  String get pleaseWriteYourNoteFirst => 'Please write your note first.';
+
+  @override
+  String get noCollectionSelected => 'No Collection selected';
+
+  @override
+  String get saveNote => 'Save Note';
+
+  @override
+  String get nextSelectCollections => 'Next: Select Collections';
+
+  @override
+  String get addToPinned => 'Add To Pinned';
+
+  @override
+  String get pinnedSavedSuccessfully => 'Pinned saved successfully!';
+
+  @override
+  String get savePinned => 'Save Pinned';
+
+  @override
+  String get closeAudioController => 'Close Audio Controller';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get rewind => 'Rewind';
+
+  @override
+  String get fastForward => 'Fast Forward';
+
+  @override
+  String get playNextAyah => 'Play Next Ayah';
+
+  @override
+  String get repeat => 'Repeat';
+
+  @override
+  String get playAsPlaylist => 'Play As Playlist';
+
+  @override
+  String style(String style) {
+    return 'Style: $style';
+  }
+
+  @override
+  String get stopAndClose => 'Stop & Close';
+
+  @override
   String get play => 'Play';
 
   @override
@@ -568,14 +750,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectReciter => 'Select Reciter';
 
   @override
-  String style(String style) {
-    return 'Style: $style';
-  }
-
-  @override
   String source(String source) {
     return 'Source: $source';
   }
+
+  @override
+  String get newText => 'New';
 
   @override
   String get more => 'More: ';

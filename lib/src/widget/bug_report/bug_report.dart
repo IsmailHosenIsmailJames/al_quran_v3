@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:device_info_plus/device_info_plus.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
@@ -36,8 +37,8 @@ Future<void> showBugReportDialog(BuildContext context) async {
                   color: context.read<ThemeCubit>().state.primary,
                 ),
                 const Gap(10),
-                const Text(
-                  "Bug Report",
+                Text(
+                  AppLocalizations.of(context).bugReportTitle,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],

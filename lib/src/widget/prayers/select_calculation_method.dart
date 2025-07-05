@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/resources/list_of_methods.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -17,9 +18,12 @@ Future<void> showCalculationMethodPopup(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const Text(
-                "Select Calculation Method",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              Text(
+                AppLocalizations.of(context).selectCalculationMethod,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const Divider(),
               Expanded(

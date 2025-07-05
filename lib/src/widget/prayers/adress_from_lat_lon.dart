@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -53,16 +54,22 @@ Widget getAddressView({
       if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {
         // Show a generic loading indicator only if we are not in 'justAddress' mode,
         // otherwise, let it be handled by the parent if needed.
-        return Text("Loading...", style: style);
+        return Text(AppLocalizations.of(context).loading, style: style);
       } else if (snapshot.hasError && !justAddress) {
         // Show error only if not in 'justAddress' mode
-        return Text("Error fetching address", style: style);
+        return Text(
+          AppLocalizations.of(context).errorFetchingAddress,
+          style: style,
+        );
       }
 
       final String? address = snapshot.data;
 
       if (justAddress) {
-        return Text(address ?? "Address not available", style: style);
+        return Text(
+          address ?? AppLocalizations.of(context).addressNotAvailable,
+          style: style,
+        );
       }
 
       // Full view with address, lat, and long
@@ -79,12 +86,15 @@ Widget getAddressView({
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(address ?? "Address not available", style: style),
+            Text(
+              address ?? AppLocalizations.of(context).addressNotAvailable,
+              style: style,
+            ),
             const Gap(5),
             Row(
               children: [
                 Text(
-                  "Latitude: ",
+                  AppLocalizations.of(context).latitude,
                   style: (style ?? const TextStyle()).copyWith(
                     color: Colors.grey,
                   ),
@@ -96,7 +106,7 @@ Widget getAddressView({
             Row(
               children: [
                 Text(
-                  "Longitude: ",
+                  AppLocalizations.of(context).longitude,
                   style: (style ?? const TextStyle()).copyWith(
                     color: Colors.grey,
                   ),

@@ -1,3 +1,4 @@
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -15,7 +16,7 @@ import "package:hive_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
-import "../../../main.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "../../screen/surah_list_view/model/surah_info_model.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -30,6 +31,7 @@ void showShareBottomDialog(
   Map footNote,
 ) {
   ThemeState themeState = context.read<ThemeCubit>().state;
+  AppLocalizations l10n = AppLocalizations.of(context);
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah[ayahKey.split(":").first],
@@ -97,16 +99,16 @@ void showShareBottomDialog(
             ),
             child: Stack(
               children: [
-                const Center(
+                Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(FluentIcons.share_24_regular),
-                      Gap(20),
+                      const Icon(FluentIcons.share_24_regular),
+                      const Gap(20),
                       Text(
-                        "Share",
-                        style: TextStyle(
+                        l10n.shareButton,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
@@ -141,7 +143,7 @@ void showShareBottomDialog(
                     );
                   },
                   icon: Icon(FluentIcons.text_field_24_regular, color: color),
-                  label: Text("Share as Text", style: TextStyle(color: color)),
+                  label: Text(l10n.shareAsText, style: TextStyle(color: color)),
                 ),
               ),
               IconButton(
@@ -153,7 +155,7 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
-                  await Fluttertoast.showToast(msg: "Copied with Tafsir");
+                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),
@@ -227,7 +229,7 @@ void showShareBottomDialog(
                 Navigator.pop(context);
               },
               icon: Icon(FluentIcons.image_24_regular, color: color),
-              label: Text("Share as Image", style: TextStyle(color: color)),
+              label: Text(l10n.shareAsImage, style: TextStyle(color: color)),
             ),
           ),
 
@@ -252,7 +254,7 @@ void showShareBottomDialog(
                   },
                   icon: Icon(FluentIcons.book_24_regular, color: color),
                   label: Text(
-                    "Share with Tafsir",
+                    l10n.shareWithTafsir,
                     style: TextStyle(color: color),
                   ),
                 ),
@@ -270,7 +272,7 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
                   );
-                  Fluttertoast.showToast(msg: "Copied with Tafsir");
+                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),

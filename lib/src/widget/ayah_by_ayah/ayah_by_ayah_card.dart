@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
@@ -40,10 +41,12 @@ Widget getAyahByAyahCard({
   bool showOnlyAyah = false,
   bool keepMargin = true,
 }) {
+  AppLocalizations? l10n = AppLocalizations.of(context);
+
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
   Map? translationMap = QuranTranslationFunction.getTranslation(ayahKey);
-  String translation = translationMap?["t"] ?? "Translation Not Found";
+  String translation = translationMap?["t"] ?? l10n.translationNotFound;
   translation = translation.replaceAll(">", "> ");
   Map footNote = translationMap?["f"] ?? {};
   List wordByWord = [];
@@ -102,7 +105,7 @@ Widget getAyahByAyahCard({
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Translation:",
+                      l10n.translationTitle,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
@@ -123,7 +126,7 @@ Widget getAyahByAyahCard({
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Foot Note:",
+                      l10n.footNoteTitle,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
@@ -242,6 +245,7 @@ GestureDetector getWordByWordExpandCloseWidget(
   String ayahKey,
 ) {
   ThemeState themeState = context.read<ThemeCubit>().state;
+  AppLocalizations l10n = AppLocalizations.of(context);
   return GestureDetector(
     onTap: () {
       List<String> expandedForWordByWord =
@@ -271,7 +275,7 @@ GestureDetector getWordByWordExpandCloseWidget(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Word by Word Translation:",
+            l10n.wordByWordTranslation,
             style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
           ),
 
@@ -386,6 +390,7 @@ Row getToolbarWidget(
   Map<dynamic, dynamic> footNote,
   ThemeState themeState,
 ) {
+  AppLocalizations l10n = AppLocalizations.of(context);
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.center,
@@ -416,7 +421,7 @@ Row getToolbarWidget(
               ),
             );
           },
-          child: const Text("Tafsir"),
+          child: Text(l10n.tafsirButton),
         ),
       ),
       const Gap(5),
@@ -444,7 +449,7 @@ Row getToolbarWidget(
                   footNote,
                 );
               },
-              tooltip: "Share",
+              tooltip: l10n.shareButton,
               icon: const Icon(FluentIcons.share_24_filled, size: 18),
             );
           },
@@ -466,7 +471,7 @@ Row getToolbarWidget(
           onPressed: () async {
             showAddNotePopup(context, ayahKey);
           },
-          tooltip: "Add Note",
+          tooltip: l10n.addNoteButton,
           icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
         ),
       ),
@@ -486,7 +491,7 @@ Row getToolbarWidget(
           onPressed: () {
             showAddToPinnedPopup(context, ayahKey);
           },
-          tooltip: "Pin to Collection",
+          tooltip: l10n.pinToCollectionButton,
           icon: const Icon(FluentIcons.pin_24_filled, size: 18),
         ),
       ),

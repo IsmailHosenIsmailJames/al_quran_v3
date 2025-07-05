@@ -1,6 +1,7 @@
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -28,7 +29,10 @@ Widget getPrayerCalculationMethodInfoWidget(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text("Name: ", style: TextStyle(color: Colors.grey)),
+            Text(
+              AppLocalizations.of(context).name,
+              style: const TextStyle(color: Colors.grey),
+            ),
             Expanded(child: Text(calculationMethod.name.toString())),
           ],
         ),
@@ -37,7 +41,10 @@ Widget getPrayerCalculationMethodInfoWidget(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text("Location: ", style: TextStyle(color: Colors.grey)),
+              Text(
+                AppLocalizations.of(context).location,
+                style: const TextStyle(color: Colors.grey),
+              ),
               Expanded(
                 child: getAddressView(
                   lat: calculationMethod.location!.latitude,
@@ -51,7 +58,10 @@ Widget getPrayerCalculationMethodInfoWidget(
           ),
         const Gap(5),
         if (calculationMethod.params != null)
-          const Text("Parameters: ", style: TextStyle(color: Colors.grey)),
+          Text(
+            AppLocalizations.of(context).parameters,
+            style: const TextStyle(color: Colors.grey),
+          ),
         const Gap(5),
         if (calculationMethod.params != null)
           Wrap(
