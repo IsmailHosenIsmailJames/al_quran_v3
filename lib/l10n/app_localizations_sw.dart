@@ -19,33 +19,33 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String tafsirNotAvailable(String ayahKey) {
-    return 'Tafsir is not available for $ayahKey';
+    return 'Tafsiri haipatikani kwa $ayahKey';
   }
 
   @override
   String tafsirFoundAt(String anotherAyahLinkKey) {
-    return 'Tafsir will found at : $anotherAyahLinkKey';
+    return 'Tafsiri itapatikana kwenye: $anotherAyahLinkKey';
   }
 
   @override
   String tafsirJumpTo(String anotherAyahLinkKey) {
-    return 'Jump to $anotherAyahLinkKey';
+    return 'Rukia $anotherAyahLinkKey';
   }
 
   @override
-  String get hizb => 'Hizb';
+  String get hizb => 'Hizbu';
 
   @override
-  String get juz => 'Juz';
+  String get juz => 'Juzu';
 
   @override
-  String get page => 'Page';
+  String get page => 'Ukurasa';
 
   @override
-  String get ruku => 'Ruku';
+  String get ruku => 'Rukuu';
 
   @override
-  String get languageSettings => 'Language Settings';
+  String get languageSettings => 'Mipangilio ya Lugha';
 
   @override
   String surahAyah(String surahName, String ayahKey) {
@@ -54,50 +54,50 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String ayahsCount(String count) {
-    return '$count Ayahs';
+    return 'Aya $count';
   }
 
   @override
-  String get saveAndDownload => 'Save and Download';
+  String get saveAndDownload => 'Hifadhi na Upakue';
 
   @override
-  String get appLanguage => 'App Language';
+  String get appLanguage => 'Lugha ya Programu';
 
   @override
-  String get selectAppLanguage => 'Select app language...';
+  String get selectAppLanguage => 'Chagua lugha ya programu...';
 
   @override
-  String get pleaseSelectOne => 'Please select one';
+  String get pleaseSelectOne => 'Tafadhali chagua moja';
 
   @override
-  String get quranTranslationLanguage => 'Quran Translation Language';
+  String get quranTranslationLanguage => 'Lugha ya Tafsiri ya Qur\'ani';
 
   @override
-  String get selectTranslationLanguage => 'Select translation language...';
+  String get selectTranslationLanguage => 'Chagua lugha ya tafsiri...';
 
   @override
-  String get quranTranslationBook => 'Quran Translation Book';
+  String get quranTranslationBook => 'Kitabu cha Tafsiri ya Qur\'ani';
 
   @override
-  String get selectTranslationBook => 'Select translation book...';
+  String get selectTranslationBook => 'Chagua kitabu cha tafsiri...';
 
   @override
-  String get quranTafsirLanguage => 'Quran Tafsir Language';
+  String get quranTafsirLanguage => 'Lugha ya Tafsiri ya Kina (Tafsiri)';
 
   @override
-  String get selectTafsirLanguage => 'Select tafsir language...';
+  String get selectTafsirLanguage => 'Chagua lugha ya tafsiri ya kina...';
 
   @override
-  String get quranTafsirBook => 'Quran Tafsir Book';
+  String get quranTafsirBook => 'Kitabu cha Tafsiri ya Kina';
 
   @override
-  String get selectTafsirBook => 'Select tafsir book...';
+  String get selectTafsirBook => 'Chagua kitabu cha tafsiri ya kina...';
 
   @override
-  String get quranScriptAndStyle => 'Quran Script & Style';
+  String get quranScriptAndStyle => 'Mwandiko na Mtindo wa Qur\'ani';
 
   @override
-  String get justAMoment => 'Just a moment...';
+  String get justAMoment => 'Subiri kidogo...';
 
   @override
   String processProgress(String processName, String percentage) {
@@ -105,172 +105,173 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get success => 'Success';
+  String get success => 'Imefanikiwa';
 
   @override
-  String get retry => 'Retry';
+  String get retry => 'Jaribu Tena';
 
   @override
   String get unableToDownloadResources =>
-      'Unable to download resources...\nSomething went wrong';
+      'Imeshindwa kupakua nyenzo...\nKuna tatizo limetokea';
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Downloading Segmented Quran Recitation';
+      'Inapakua usomaji wa Qur\'ani kwa sehemu';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Processing Segmented Quran Recitation';
+      'Inachakata usomaji wa Qur\'ani kwa sehemu';
 
   @override
-  String get footnote => 'Footnote';
+  String get footnote => 'Tanbihi';
 
   @override
-  String get tafsir => 'Tafsir';
+  String get tafsir => 'Tafsiri';
 
   @override
-  String get wordByWord => 'Word by Word';
+  String get wordByWord => 'Neno kwa Neno';
 
   @override
-  String get pleaseSelectRequiredOption => 'Please select required option';
+  String get pleaseSelectRequiredOption =>
+      'Tafadhali chagua chaguo linalohitajika';
 
   @override
-  String get rememberHomeTab => 'Remember Home Tab';
+  String get rememberHomeTab => 'Kumbuka Kichupo cha Mwanzo';
 
   @override
   String get rememberHomeTabSubtitle =>
-      'App will remember the last opened tab in the home screen.';
+      'Programu itakumbuka kichupo cha mwisho kilichofunguliwa kwenye skrini ya mwanzo.';
 
   @override
-  String get wakeLock => 'Wake Lock';
+  String get wakeLock => 'Zuia Skrini Isizime';
 
   @override
-  String get wakeLockSubtitle =>
-      'Prevent the screen from turning off automatically.';
+  String get wakeLockSubtitle => 'Zuia skrini isizime yenyewe.';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Mipangilio';
 
   @override
-  String get appTheme => 'App Theme';
+  String get appTheme => 'Mandhari ya Programu';
 
   @override
-  String get quranStyle => 'Quran Style';
+  String get quranStyle => 'Mtindo wa Qur\'ani';
 
   @override
-  String get changeTheme => 'Change Theme';
+  String get changeTheme => 'Badilisha Mandhari';
 
   @override
-  String get verseCount => 'Verse Count: ';
+  String get verseCount => 'Idadi ya Aya: ';
 
   @override
-  String get translation => 'Translation';
+  String get translation => 'Tafsiri';
 
   @override
-  String get tafsirNotFound => 'Not Found';
+  String get tafsirNotFound => 'Haikupatikana';
 
   @override
-  String get moreInfo => 'more info';
+  String get moreInfo => 'Maelezo zaidi';
 
   @override
-  String get playAudio => 'Play Audio';
+  String get playAudio => 'Cheza Sauti';
 
   @override
-  String get preview => 'Preview';
+  String get preview => 'Onyesho la awali';
 
   @override
-  String get loading => 'Loading...';
+  String get loading => 'Inapakia...';
 
   @override
-  String get errorFetchingAddress => 'Error fetching address';
+  String get errorFetchingAddress => 'Hitilafu kupata anwani';
 
   @override
-  String get addressNotAvailable => 'Address not available';
+  String get addressNotAvailable => 'Anwani haipatikani';
 
   @override
-  String get latitude => 'Latitude: ';
+  String get latitude => 'Latitudo: ';
 
   @override
-  String get longitude => 'Longitude: ';
+  String get longitude => 'Longitudo: ';
 
   @override
-  String get name => 'Name: ';
+  String get name => 'Jina: ';
 
   @override
-  String get location => 'Location: ';
+  String get location => 'Mahali: ';
 
   @override
-  String get parameters => 'Parameters: ';
+  String get parameters => 'Vigezo: ';
 
   @override
-  String get selectCalculationMethod => 'Select Calculation Method';
+  String get selectCalculationMethod => 'Chagua Njia ya Kukokotoa';
 
   @override
-  String get shareSelectAyahs => 'Share Select Ayahs';
+  String get shareSelectAyahs => 'Shiriki Aya Zilizochaguliwa';
 
   @override
-  String get selectionEmpty => 'Selection Empty';
+  String get selectionEmpty => 'Hakuna Ulichochagua';
 
   @override
-  String get generatingImagePleaseWait => 'Generating Image... Please Wait';
+  String get generatingImagePleaseWait =>
+      'Inatengeneza Picha... Tafadhali Subiri';
 
   @override
-  String get asImage => 'As Image';
+  String get asImage => 'Kama Picha';
 
   @override
-  String get asText => 'As Text';
+  String get asText => 'Kama Maandishi';
 
   @override
-  String get playFromSelectedAyah => 'Play From Selected Ayah';
+  String get playFromSelectedAyah => 'Cheza Kutoka Aya Uliyochagua';
 
   @override
-  String get toTafsir => 'To Tafsir';
+  String get toTafsir => 'Kwenye Tafsiri';
 
   @override
-  String get selectAyah => 'Select Ayah';
+  String get selectAyah => 'Chagua Aya';
 
   @override
-  String get toAyah => 'To Ayah';
+  String get toAyah => 'Kwenye Aya';
 
   @override
-  String get searchForASurah => 'Search for a surah';
+  String get searchForASurah => 'Tafuta sura';
 
   @override
-  String get bugReportTitle => 'Bug Report';
+  String get bugReportTitle => 'Ripoti ya Hitilafu';
 
   @override
-  String get audioCached => 'Audio Cached';
+  String get audioCached => 'Sauti Imehifadhiwa Kwenye Akiba';
 
   @override
-  String get others => 'Others';
+  String get others => 'Nyinginezo';
 
   @override
   String get quranTranslationAyahOneMustEnabled =>
-      'Quran|Translation|Ayah, One Must Enabled';
+      'Qur\'ani|Tafsiri|Aya, Lazima Moja Iwashwe';
 
   @override
-  String get quranFontSize => 'Quran Font Size';
+  String get quranFontSize => 'Ukubwa wa Mwandiko wa Qur\'ani';
 
   @override
-  String get quranLineHeight => 'Quran Line Height';
+  String get quranLineHeight => 'Nafasi kati ya Mistari ya Qur\'ani';
 
   @override
-  String get translationAndTafsirFontSize => 'Translation & Tafsir Font Size';
+  String get translationAndTafsirFontSize => 'Ukubwa wa Mwandiko wa Tafsiri';
 
   @override
-  String get quranAyah => 'Quran Ayah';
+  String get quranAyah => 'Aya ya Qur\'ani';
 
   @override
-  String get topToolbar => 'Top Toolbar';
+  String get topToolbar => 'Upau wa Zana wa Juu';
 
   @override
-  String get keepOpenWordByWord => 'Keep Open Word By Word';
+  String get keepOpenWordByWord => 'Acha Wazi Neno kwa Neno';
 
   @override
-  String get wordByWordHighlight => 'Word By Word Highlight';
+  String get wordByWordHighlight => 'Kuangaza Neno kwa Neno';
 
   @override
-  String get quranScriptSettings => 'Quran Script Settings';
+  String get quranScriptSettings => 'Mipangilio ya Mwandiko wa Qur\'ani';
 
   @override
   String surahName(String nameSimple) {
@@ -278,21 +279,21 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get pageNumber => 'Page: ';
+  String get pageNumber => 'Ukurasa: ';
 
   @override
-  String get quranResources => 'Quran Resources';
+  String get quranResources => 'Nyenzo za Qur\'ani';
 
   @override
   String alreadySelected(String name) {
-    return 'Language \'$name\' is already selected.';
+    return 'Lugha ya \'$name\' tayari imechaguliwa.';
   }
 
   @override
-  String get unableToGetCompassData => 'Unable to get compass data';
+  String get unableToGetCompassData => 'Imeshindwa kupata data ya dira';
 
   @override
-  String get deviceDoesNotHaveSensors => 'Device does not have sensors !';
+  String get deviceDoesNotHaveSensors => 'Kifaa hakina vitambuzi!';
 
   @override
   String get north => 'N';
@@ -307,652 +308,656 @@ class AppLocalizationsSw extends AppLocalizations {
   String get west => 'W';
 
   @override
-  String get address => 'Address: ';
+  String get address => 'Anwani: ';
 
   @override
-  String get change => 'Change';
+  String get change => 'Badilisha';
 
   @override
-  String get calculationMethod => 'Calculation Method: ';
+  String get calculationMethod => 'Njia ya Kukokotoa: ';
 
   @override
-  String get downloadPrayerTime => 'Download Prayer Time';
+  String get downloadPrayerTime => 'Pakua Nyakati za Swala';
 
   @override
   String get calculationMethodsListEmpty =>
-      'The list of calculation methods is empty.';
+      'Orodha ya njia za kukokotoa haina kitu.';
 
   @override
   String get noCalculationMethodWithLocationData =>
-      'Could not find any calculation method with location data.';
+      'Haikuweza kupata njia yoyote ya kukokotoa na data ya eneo.';
 
   @override
-  String get prayerSettings => 'Prayer Settings';
+  String get prayerSettings => 'Mipangilio ya Swala';
 
   @override
-  String get reminderSettings => 'Reminder Settings';
+  String get reminderSettings => 'Mipangilio ya Vikumbusho';
 
   @override
-  String get adjustReminderTime => 'Adjust Reminder Time';
+  String get adjustReminderTime => 'Rekebisha Muda wa Kikumbusho';
 
   @override
-  String get enforceAlarmSound => 'Enforce Alarm\'s Sound';
+  String get enforceAlarmSound => 'Lazimisha Sauti ya Kengele';
 
   @override
   String get enforceAlarmSoundDescription =>
-      'If enabled, This feature will play the alarm at the volume set here, even if your phone\'s sound is low. This ensures you don\'t miss the alarm due to low phone volume.';
+      'Ikiwashwa, kipengele hiki kitacheza kengele kwa sauti iliyowekwa hapa, hata kama sauti ya simu yako iko chini. Hii inahakikisha hutakosa kengele kwa sababu ya sauti ndogo ya simu.';
 
   @override
-  String get volume => 'Volume';
+  String get volume => 'Sauti';
 
   @override
-  String get atPrayerTime => 'At prayer time';
+  String get atPrayerTime => 'Wakati wa swala';
 
   @override
   String minBefore(int minutes) {
-    return '$minutes min before';
+    return 'Dakika $minutes kabla';
   }
 
   @override
   String minAfter(int minutes) {
-    return '$minutes min after';
+    return 'Dakika $minutes baada ya';
   }
 
   @override
   String prayerTimeIsAt(String prayerName, String prayerTime) {
-    return '$prayerName is at $prayerTime';
+    return 'Wakati wa $prayerName ni saa $prayerTime';
   }
 
   @override
   String itsTimeOf(String prayerName) {
-    return 'It\'s time of $prayerName';
+    return 'Ni wakati wa $prayerName';
   }
 
   @override
-  String get stopTheAdhan => 'Stop the Adhan';
+  String get stopTheAdhan => 'Sitisha Adhana';
 
   @override
   String dateFoundEmpty(String date) {
-    return '$date Found Empty';
+    return '$date Haikupatikana';
   }
 
   @override
-  String get today => 'Today';
+  String get today => 'Leo';
 
   @override
-  String get left => 'Left';
+  String get left => 'Imebaki';
 
   @override
   String reminderAdded(String prayerName) {
-    return 'Reminder for $prayerName added';
+    return 'Kikumbusho cha $prayerName kimeongezwa';
   }
 
   @override
   String get allowNotificationPermission =>
-      'Please allow notification permission to use this feature';
+      'Tafadhali ruhusu idhini ya arifa kutumia kipengele hiki';
 
   @override
   String reminderRemoved(String prayerName) {
-    return 'Reminder for $prayerName removed';
+    return 'Kikumbusho cha $prayerName kimeondolewa';
   }
 
   @override
-  String get getPrayerTimesAndQibla => 'Get Prayer Times and Qibla';
+  String get getPrayerTimesAndQibla => 'Pata Nyakati za Swala na Qibla';
 
   @override
   String get getPrayerTimesAndQiblaDescription =>
-      'Calculate Prayer Times and Qibla for Any Given Location.';
+      'Kokotoa Nyakati za Swala na Qibla kwa Eneo Lolote.';
 
   @override
-  String get getFromGPS => 'Get form GPS';
+  String get getFromGPS => 'Pata kutoka GPS';
 
   @override
-  String get or => 'Or';
+  String get or => 'Au';
 
   @override
-  String get selectYourCity => 'Select you City';
+  String get selectYourCity => 'Chagua Jiji lako';
 
   @override
   String get noteAboutGPS =>
-      'Note: If you don\'t want to use GPS or not feel secure, you can select your city.';
+      'Kumbuka: Ikiwa hutaki kutumia GPS au hujisikii salama, unaweza kuchagua jiji lako.';
 
   @override
-  String get downloadingLocationResources =>
-      'Downloading location resources...';
+  String get downloadingLocationResources => 'Inapakua nyenzo za eneo...';
 
   @override
-  String get somethingWentWrong => 'Something went wrong';
+  String get somethingWentWrong => 'Kuna tatizo limetokea';
 
   @override
-  String get selectYourCountry => 'Select Your Country';
+  String get selectYourCountry => 'Chagua Nchi Yako';
 
   @override
-  String get searchForACountry => 'Search for a country';
+  String get searchForACountry => 'Tafuta nchi';
 
   @override
-  String get selectYourAdministrator => 'Select Your Administrator';
+  String get selectYourAdministrator => 'Chagua Mkoa Wako';
 
   @override
-  String get searchForAnAdministrator => 'Search for a administrator';
+  String get searchForAnAdministrator => 'Tafuta mkoa';
 
   @override
-  String get searchForACity => 'Search for a city';
+  String get searchForACity => 'Tafuta jiji';
 
   @override
-  String get pleaseEnableLocationService => 'Please enable location service';
+  String get pleaseEnableLocationService => 'Tafadhali washa huduma ya eneo';
 
   @override
-  String get donateUs => 'Donate Us';
+  String get donateUs => 'Tuchangie';
 
   @override
-  String get underDevelopment => 'Under development';
+  String get underDevelopment => 'Inaendelezwa';
 
   @override
-  String get versionLoading => 'Loading...';
+  String get versionLoading => 'Inapakia...';
 
   @override
-  String get alQuran => 'Al Quran';
+  String get alQuran => 'Al Qur\'an';
 
   @override
-  String get mainMenu => 'Main Menu';
+  String get mainMenu => 'Menyu Kuu';
 
   @override
-  String get notes => 'Notes';
+  String get notes => 'Dondoo';
 
   @override
-  String get pinned => 'Pinned';
+  String get pinned => 'Zilizobandikwa';
 
   @override
-  String get jumpToAyah => 'Jump to Ayah';
+  String get jumpToAyah => 'Rukia Aya';
 
   @override
-  String get shareMultipleAyah => 'Share Multiple Ayah';
+  String get shareMultipleAyah => 'Shiriki Aya Nyingi';
 
   @override
-  String get shareThisApp => 'Share this App';
+  String get shareThisApp => 'Shiriki Programu Hii';
 
   @override
-  String get giveRating => 'Give Rating';
+  String get giveRating => 'Toa Ukadiriaji';
 
   @override
-  String get bugReport => 'Bug Report';
+  String get bugReport => 'Ripoti ya Hitilafu';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'Sera ya Faragha';
 
   @override
-  String get aboutTheApp => 'About the App';
+  String get aboutTheApp => 'Kuhusu Programu';
 
   @override
-  String get resetTheApp => 'Reset the App';
+  String get resetTheApp => 'Weka Upya Programu';
 
   @override
-  String get resetAppWarningTitle => 'Reset App Data';
+  String get resetAppWarningTitle => 'Weka Upya Data ya Programu';
 
   @override
   String get resetAppWarningMessage =>
-      'Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.';
+      'Una uhakika unataka kuweka upya programu? Data zako zote zitapotea, na utahitaji kuiweka programu upya tangu mwanzo.';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Ghairi';
 
   @override
-  String get reset => 'Reset';
+  String get reset => 'Weka Upya';
 
   @override
-  String get shareAppSubject => 'Check out this Al Quran App!';
+  String get shareAppSubject => 'Tazama Programu hii ya Al Qur\'an!';
 
   @override
   String shareAppBody(String appLink) {
-    return 'Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah\'s words. Download here: $appLink';
+    return 'Assalamu alaykum! Tazama programu hii ya Al Qur\'an kwa usomaji na tafakari ya kila siku. Inasaidia kuungana na maneno ya Mwenyezi Mungu. Pakua hapa: $appLink';
   }
 
   @override
-  String get openDrawerTooltip => 'Open Drawer';
+  String get openDrawerTooltip => 'Fungua Droo';
 
   @override
-  String get quran => 'Quran';
+  String get quran => 'Qur\'ani';
 
   @override
-  String get prayer => 'Prayer';
+  String get prayer => 'Swala';
 
   @override
   String get qibla => 'Qibla';
 
   @override
-  String get audio => 'Audio';
+  String get audio => 'Sauti';
 
   @override
-  String get surah => 'Surah';
+  String get surah => 'Sura';
 
   @override
-  String get pages => 'Pages';
+  String get pages => 'Kurasa';
 
   @override
-  String get note => 'Note:';
+  String get note => 'Kumbuka:';
 
   @override
-  String get linkedAyahs => 'Linked Ayahs:';
+  String get linkedAyahs => 'Aya Zinazohusiana:';
 
   @override
   String get emptyNoteCollection =>
-      'This note collection is empty.\nAdd some notes to see them here.';
+      'Mkusanyiko huu wa dondoo hauna kitu.\nOngeza dondoo ili zionekane hapa.';
 
   @override
   String get emptyPinnedCollection =>
-      'No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.';
+      'Hakuna Aya zilizobandikwa kwenye mkusanyiko huu.\nBandika Aya ili zionekane hapa.';
 
   @override
-  String get noContentAvailable => 'No content available.';
+  String get noContentAvailable => 'Hakuna maudhui yanayopatikana.';
 
   @override
   String failedToLoadCollections(String error) {
-    return 'Failed to load collections: $error';
+    return 'Imeshindwa kupakia makusanyo: $error';
   }
 
   @override
   String searchByCollectionName(String collectionType) {
-    return 'Search By $collectionType Name...';
+    return 'Tafuta kwa Jina la $collectionType...';
   }
 
   @override
-  String get sortBy => 'Sort by';
+  String get sortBy => 'Panga kwa';
 
   @override
   String noCollectionAddedYet(String collectionType) {
-    return 'No $collectionType added yet';
+    return 'Hakuna $collectionType iliyoongezwa bado';
   }
 
   @override
   String pinnedItemsCount(int count) {
-    return '$count pinned items';
+    return 'Vipengee $count vilivyobandikwa';
   }
 
   @override
   String notesCount(int count) {
-    return '$count notes';
+    return 'Dondoo $count';
   }
 
   @override
-  String get emptyNameNotAllowed => 'Empty name not allowed';
+  String get emptyNameNotAllowed => 'Jina tupu haliruhusiwi';
 
   @override
   String updatedTo(String collectionName) {
-    return 'Updated to $collectionName';
+    return 'Imesasishwa kuwa $collectionName';
   }
 
   @override
-  String get changeName => 'Change Name';
+  String get changeName => 'Badilisha Jina';
 
   @override
-  String get changeColor => 'Change Color';
+  String get changeColor => 'Badilisha Rangi';
 
   @override
-  String get colorUpdated => 'Color updated';
+  String get colorUpdated => 'Rangi imesasishwa';
 
   @override
   String collectionDeleted(String collectionName) {
-    return '$collectionName Deleted';
+    return '$collectionName Imefutwa';
   }
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Futa';
 
   @override
-  String get save => 'Save';
+  String get save => 'Hifadhi';
 
   @override
-  String get collectionNameCannotBeEmpty => 'Collection name cannot be empty.';
+  String get collectionNameCannotBeEmpty =>
+      'Jina la mkusanyiko haliwezi kuwa tupu.';
 
   @override
-  String get addedNewCollection => 'Added New Collection';
+  String get addedNewCollection => 'Mkusanyiko Mpya Umeongezwa';
 
   @override
   String ayahCount(int count) {
-    return '$count Ayah';
+    return 'Aya $count';
   }
 
   @override
-  String get byNameAtoZ => 'Name A-Z';
+  String get byNameAtoZ => 'Jina A-Z';
 
   @override
-  String get byNameZtoA => 'Name Z-A';
+  String get byNameZtoA => 'Jina Z-A';
 
   @override
-  String get byElementNumberAscending => 'Element Number Ascending';
+  String get byElementNumberAscending => 'Nambari ya Kipengee Kupanda';
 
   @override
-  String get byElementNumberDescending => 'Element Number Descending';
+  String get byElementNumberDescending => 'Nambari ya Kipengee Kushuka';
 
   @override
-  String get byUpdateDateAscending => 'Update Date Ascending';
+  String get byUpdateDateAscending => 'Tarehe ya Usasishaji Kupanda';
 
   @override
-  String get byUpdateDateDescending => 'Update Date Descending';
+  String get byUpdateDateDescending => 'Tarehe ya Usasishaji Kushuka';
 
   @override
-  String get byCreateDateAscending => 'Create Date Ascending';
+  String get byCreateDateAscending => 'Tarehe ya Kuundwa Kupanda';
 
   @override
-  String get byCreateDateDescending => 'Create Date Descending';
+  String get byCreateDateDescending => 'Tarehe ya Kuundwa Kushuka';
 
   @override
-  String get translationNotFound => 'Translation Not Found';
+  String get translationNotFound => 'Tafsiri Haikupatikana';
 
   @override
-  String get translationTitle => 'Translation:';
+  String get translationTitle => 'Tafsiri:';
 
   @override
-  String get footNoteTitle => 'Foot Note:';
+  String get footNoteTitle => 'Tanbihi:';
 
   @override
-  String get wordByWordTranslation => 'Word by Word Translation:';
+  String get wordByWordTranslation => 'Tafsiri Neno kwa Neno:';
 
   @override
-  String get tafsirButton => 'Tafsir';
+  String get tafsirButton => 'Tafsiri';
 
   @override
-  String get shareButton => 'Share';
+  String get shareButton => 'Shiriki';
 
   @override
-  String get addNoteButton => 'Add Note';
+  String get addNoteButton => 'Ongeza Dondoo';
 
   @override
-  String get pinToCollectionButton => 'Pin to Collection';
+  String get pinToCollectionButton => 'Bandika kwenye Mkusanyiko';
 
   @override
-  String get shareAsText => 'Share as Text';
+  String get shareAsText => 'Shiriki kama Maandishi';
 
   @override
-  String get copiedWithTafsir => 'Copied with Tafsir';
+  String get copiedWithTafsir => 'Imenakiliwa na Tafsiri';
 
   @override
-  String get shareAsImage => 'Share as Image';
+  String get shareAsImage => 'Shiriki kama Picha';
 
   @override
-  String get shareWithTafsir => 'Share with Tafsir';
+  String get shareWithTafsir => 'Shiriki na Tafsiri';
 
   @override
-  String get notFound => 'Not found';
+  String get notFound => 'Haikupatikana';
 
   @override
-  String get noteContentCannotBeEmpty => 'Note content cannot be empty.';
+  String get noteContentCannotBeEmpty =>
+      'Maudhui ya dondoo hayawezi kuwa tupu.';
 
   @override
-  String get noteSavedSuccessfully => 'Note saved successfully!';
+  String get noteSavedSuccessfully => 'Dondoo limehifadhiwa kikamilifu!';
 
   @override
-  String get selectCollections => 'Select Collections';
+  String get selectCollections => 'Chagua Makusanyo';
 
   @override
-  String get addNote => 'Add Note';
+  String get addNote => 'Ongeza Dondoo';
 
   @override
-  String get writeCollectionName => 'Write collection name...';
+  String get writeCollectionName => 'Andika jina la mkusanyiko...';
 
   @override
-  String get noCollectionsYetAddANewOne => 'No collections yet. Add a new one!';
+  String get noCollectionsYetAddANewOne =>
+      'Hakuna makusanyo bado. Ongeza jipya!';
 
   @override
-  String get pleaseWriteYourNoteFirst => 'Please write your note first.';
+  String get pleaseWriteYourNoteFirst => 'Tafadhali andika dondoo lako kwanza.';
 
   @override
-  String get noCollectionSelected => 'No Collection selected';
+  String get noCollectionSelected => 'Hakuna Mkusanyiko uliochaguliwa';
 
   @override
-  String get saveNote => 'Save Note';
+  String get saveNote => 'Hifadhi Dondoo';
 
   @override
-  String get nextSelectCollections => 'Next: Select Collections';
+  String get nextSelectCollections => 'Inayofuata: Chagua Makusanyo';
 
   @override
-  String get addToPinned => 'Add To Pinned';
+  String get addToPinned => 'Ongeza kwenye Zilizobandikwa';
 
   @override
-  String get pinnedSavedSuccessfully => 'Pinned saved successfully!';
+  String get pinnedSavedSuccessfully =>
+      'Imehifadhiwa kikamilifu kwenye zilizobandikwa!';
 
   @override
-  String get savePinned => 'Save Pinned';
+  String get savePinned => 'Hifadhi Zilizobandikwa';
 
   @override
-  String get closeAudioController => 'Close Audio Controller';
+  String get closeAudioController => 'Funga Kidhibiti cha Sauti';
 
   @override
-  String get previous => 'Previous';
+  String get previous => 'Iliyopita';
 
   @override
-  String get rewind => 'Rewind';
+  String get rewind => 'Rudisha Nyuma';
 
   @override
-  String get fastForward => 'Fast Forward';
+  String get fastForward => 'Songesha Mbele';
 
   @override
-  String get playNextAyah => 'Play Next Ayah';
+  String get playNextAyah => 'Cheza Aya Inayofuata';
 
   @override
-  String get repeat => 'Repeat';
+  String get repeat => 'Rudia';
 
   @override
-  String get playAsPlaylist => 'Play As Playlist';
+  String get playAsPlaylist => 'Cheza kama Orodha ya Kucheza';
 
   @override
   String style(String style) {
-    return 'Style: $style';
+    return 'Mtindo: $style';
   }
 
   @override
-  String get stopAndClose => 'Stop & Close';
+  String get stopAndClose => 'Sitisha na Funga';
 
   @override
-  String get play => 'Play';
+  String get play => 'Cheza';
 
   @override
-  String get pause => 'Pause';
+  String get pause => 'Sitisha';
 
   @override
-  String get selectReciter => 'Select Reciter';
+  String get selectReciter => 'Chagua Msomaji';
 
   @override
   String source(String source) {
-    return 'Source: $source';
+    return 'Chanzo: $source';
   }
 
   @override
-  String get newText => 'New';
+  String get newText => 'Mpya';
 
   @override
-  String get more => 'More: ';
+  String get more => 'Zaidi: ';
 
   @override
-  String get cacheNotFound => 'Cache Not Found';
+  String get cacheNotFound => 'Akiba Haikupatikana';
 
   @override
-  String get cacheSize => 'Cache Size';
+  String get cacheSize => 'Ukubwa wa Akiba';
 
   @override
   String error(String error) {
-    return 'Error: $error';
+    return 'Hitilafu: $error';
   }
 
   @override
-  String get clean => 'Clean';
+  String get clean => 'Safisha';
 
   @override
-  String get lastModified => 'Last Modified';
+  String get lastModified => 'Ilibadilishwa Mwisho';
 
   @override
-  String get oneYearAgo => '1 Year ago';
+  String get oneYearAgo => 'Mwaka 1 uliopita';
 
   @override
   String monthsAgo(String number) {
-    return '$number Months ago';
+    return 'Miezi $number iliyopita';
   }
 
   @override
   String weeksAgo(String number) {
-    return '$number Weeks ago';
+    return 'Wiki $number zilizopita';
   }
 
   @override
   String daysAgo(String number) {
-    return '$number Days ago';
+    return 'Siku $number zilizopita';
   }
 
   @override
   String hoursAgo(Object hour) {
-    return '$hour Hours ago';
+    return 'Saa $hour zilizopita';
   }
 
   @override
-  String get aboutAlQuran => 'About Al Quran';
+  String get aboutAlQuran => 'Kuhusu Al Qur\'an';
 
   @override
-  String get appFullName => 'Al Quran (Tafsir, Prayer, Qibla, Audio)';
+  String get appFullName => 'Al Qur\'an (Tafsiri, Swala, Qibla, Sauti)';
 
   @override
   String get appDescription =>
-      'A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.';
+      'Programu kamili ya Kiislamu kwa ajili ya Android, iOS, MacOS, Web, Linux na Windows, inayotoa usomaji wa Qur\'ani na Tafsiri ya Kina & tafsiri nyingi (ikiwemo neno kwa neno), nyakati za swala duniani kote na arifa, dira ya Qibla, na usomaji wa sauti wa neno kwa neno uliolandanishwa.';
 
   @override
   String get dataSourcesNote =>
-      'Note: Quran texts, Tafsir, translations, and audio resources are sourced from Quran.com, Everyayah.com, and other verified open sources.';
+      'Kumbuka: Maandishi ya Qur\'ani, Tafsiri, tafsiri nyingine, na nyenzo za sauti zinatokana na Quran.com, Everyayah.com, na vyanzo vingine vilivyothibitishwa vya wazi.';
 
   @override
   String get adFreePromise =>
-      'This app has been built to seek the pleasure of Allah. Therefore, it is and always will be completely Ad-Free.';
+      'Programu hii imejengwa ili kutafuta radhi za Mwenyezi Mungu. Kwa hivyo, haina na daima haitakuwa na matangazo kabisa.';
 
   @override
-  String get coreFeatures => 'Core Features';
+  String get coreFeatures => 'Vipengele Muhimu';
 
   @override
   String get coreFeaturesDescription =>
-      'Explore the key functionalities that make Al Quran v3 an indispensable tool for your daily Islamic practices:';
+      'Gundua utendaji muhimu unaoifanya Al Qur\'an v3 kuwa zana muhimu kwa ajili ya matendo yako ya Kiislamu ya kila siku:';
 
   @override
-  String get prayerTimesTitle => 'Prayer Times & Alerts';
+  String get prayerTimesTitle => 'Nyakati za Swala na Vikumbusho';
 
   @override
   String get prayerTimesDescription =>
-      'Accurate prayer timings for any location worldwide using various calculation methods. Set reminders with Adhan notifications.';
+      'Nyakati sahihi za swala kwa eneo lolote duniani kote kwa kutumia njia mbalimbali za kukokotoa. Weka vikumbusho na arifa za Adhana.';
 
   @override
-  String get qiblaDirectionTitle => 'Qibla Direction';
+  String get qiblaDirectionTitle => 'Mwelekeo wa Qibla';
 
   @override
   String get qiblaDirectionDescription =>
-      'Easily find the Qibla direction with a clear and accurate compass view.';
+      'Pata mwelekeo wa Qibla kwa urahisi na mwonekano wa dira ulio wazi na sahihi.';
 
   @override
-  String get translationTafsirTitle => 'Quran Translation & Tafsir';
+  String get translationTafsirTitle => 'Tafsiri ya Qur\'ani na Tafsiri ya Kina';
 
   @override
   String get translationTafsirDescription =>
-      'Access 120+ translation books (including word-by-word) in 69 languages, and 30+ Tafsir books.';
+      'Fikia vitabu vya tafsiri zaidi ya 120 (ikiwemo neno kwa neno) katika lugha 69, na vitabu vya Tafsiri ya Kina zaidi ya 30.';
 
   @override
-  String get wordByWordAudioTitle => 'Word by Word Audio & Highlighting';
+  String get wordByWordAudioTitle => 'Sauti na Kuangaza Neno kwa Neno';
 
   @override
   String get wordByWordAudioDescription =>
-      'Follow along with synchronized word-by-word audio recitation and highlighting for an immersive learning experience.';
+      'Fuatilia pamoja na usomaji wa sauti wa neno kwa neno uliolandanishwa na kuangazwa kwa ajili ya uzoefu wa kujifunza unaovutia.';
 
   @override
-  String get ayahAudioRecitationTitle => 'Ayah Audio Recitation';
+  String get ayahAudioRecitationTitle => 'Usomaji wa Sauti wa Aya';
 
   @override
   String get ayahAudioRecitationDescription =>
-      'Listen to full Ayah recitations from over 40+ renowned reciters.';
+      'Sikiliza usomaji kamili wa Aya kutoka kwa wasomaji maarufu zaidi ya 40.';
 
   @override
-  String get notesCloudBackupTitle => 'Notes with Cloud Backup';
+  String get notesCloudBackupTitle => 'Dondoo na Hifadhi ya Wingu';
 
   @override
   String get notesCloudBackupDescription =>
-      'Save personal notes and reflections, securely backed up to the cloud (feature in development/coming soon).';
+      'Hifadhi dondoo na tafakari za kibinafsi, zikihifadhiwa kwa usalama kwenye wingu (kipengele kinachoendelezwa/kinakuja hivi karibuni).';
 
   @override
-  String get crossPlatformSupportTitle => 'Cross-Platform Support';
+  String get crossPlatformSupportTitle => 'Usaidizi wa Majukwaa Mbalimbali';
 
   @override
   String get crossPlatformSupportDescription =>
-      'Supported on Android, Web, Linux, and Windows.';
+      'Inatumika kwenye Android, Web, Linux, na Windows.';
 
   @override
-  String get backgroundAudioPlaybackTitle => 'Background Audio Playback';
+  String get backgroundAudioPlaybackTitle =>
+      'Uchezaji wa Sauti Chini kwa Chini';
 
   @override
   String get backgroundAudioPlaybackDescription =>
-      'Continue listening to Quran recitation even when the app is in the background.';
+      'Endelea kusikiliza usomaji wa Qur\'ani hata wakati programu iko chini kwa chini.';
 
   @override
-  String get audioDataCachingTitle => 'Audio & Data Caching';
+  String get audioDataCachingTitle => 'Uhifadhi wa Sauti na Data';
 
   @override
   String get audioDataCachingDescription =>
-      'Improved playback and offline capabilities with robust audio and Quran data caching.';
+      'Uchezaji ulioboreshwa na uwezo wa nje ya mtandao na uhifadhi thabiti wa sauti na data ya Qur\'ani.';
 
   @override
-  String get minimalisticInterfaceTitle => 'Minimalistic & Clean Interface';
+  String get minimalisticInterfaceTitle => 'Muonekano Rahisi na Safi';
 
   @override
   String get minimalisticInterfaceDescription =>
-      'Easy to navigate interface with focus on user experience and readability.';
+      'Muonekano rahisi wa kutumia unaozingatia uzoefu wa mtumiaji na usomaji.';
 
   @override
-  String get optimizedPerformanceTitle => 'Optimized Performance & Size';
+  String get optimizedPerformanceTitle => 'Utendaji na Ukubwa Ulioboreshwa';
 
   @override
   String get optimizedPerformanceDescription =>
-      'A feature-rich application designed to be lightweight and performant.';
+      'Programu yenye vipengele vingi iliyoundwa kuwa nyepesi na yenye utendaji mzuri.';
 
   @override
-  String get languageSupport => 'Language Support';
+  String get languageSupport => 'Usaidizi wa Lugha';
 
   @override
   String get languageSupportDescription =>
-      'This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):';
+      'Programu hii imeundwa kupatikana kwa hadhira ya kimataifa na usaidizi wa lugha zifuatazo (na zaidi zinaongezwa kila mara):';
 
   @override
-  String get technologyAndResources => 'Technology & Resources';
+  String get technologyAndResources => 'Teknolojia na Nyenzo';
 
   @override
   String get technologyAndResourcesDescription =>
-      'This app is built using cutting-edge technologies and reliable resources:';
+      'Programu hii imejengwa kwa kutumia teknolojia za kisasa na nyenzo za kuaminika:';
 
   @override
-  String get flutterFrameworkTitle => 'Flutter Framework';
+  String get flutterFrameworkTitle => 'Mfumo wa Flutter';
 
   @override
   String get flutterFrameworkDescription =>
-      'Built with Flutter for a beautiful, natively compiled, multi-platform experience from a single codebase.';
+      'Imejengwa na Flutter kwa ajili ya uzoefu mzuri, uliokusanywa asilia, wa majukwaa mbalimbali kutoka kwa msingi mmoja wa msimbo.';
 
   @override
-  String get advancedAudioEngineTitle => 'Advanced Audio Engine';
+  String get advancedAudioEngineTitle => 'Injini ya Sauti ya Hali ya Juu';
 
   @override
   String get advancedAudioEngineDescription =>
-      'Powered by the `just_audio` and `just_audio_background` Flutter packages for robust audio playback and control.';
+      'Inaendeshwa na vifurushi vya Flutter `just_audio` na `just_audio_background` kwa uchezaji na udhibiti thabiti wa sauti.';
 
   @override
-  String get reliableQuranDataTitle => 'Reliable Quran Data';
+  String get reliableQuranDataTitle => 'Data ya Kuaminika ya Qur\'ani';
 
   @override
   String get reliableQuranDataDescription =>
-      'Al Quran texts, translations, tafsirs, and audio are sourced from verified open APIs and databases like Quran.com & Everyayah.com.';
+      'Maandishi ya Al Qur\'an, tafsiri, tafsiri za kina, na sauti zinatokana na API za wazi zilizothibitishwa na hifadhidata kama Quran.com & Everyayah.com.';
 
   @override
-  String get prayerTimeEngineTitle => 'Prayer Time Engine';
+  String get prayerTimeEngineTitle => 'Injini ya Nyakati za Swala';
 
   @override
   String get prayerTimeEngineDescription =>
-      'Utilizes established calculation methods for accurate prayer times. Notifications handled by `flutter_local_notifications` and background tasks.';
+      'Inatumia njia za kukokotoa zilizothibitishwa kwa nyakati sahihi za swala. Arifa zinashughulikiwa na `flutter_local_notifications` na kazi za chini kwa chini.';
 
   @override
-  String get crossPlatformSupport => 'Cross Platform Support';
+  String get crossPlatformSupport => 'Usaidizi wa Majukwaa Mbalimbali';
 
   @override
   String get crossPlatformSupportDescription2 =>
-      'Enjoy seamless access across various platforms:';
+      'Furahia ufikiaji usio na mshono kwenye majukwaa mbalimbali:';
 
   @override
   String get android => 'Android';
@@ -964,7 +969,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get macos => 'macOS';
 
   @override
-  String get web => 'Web';
+  String get web => 'Wavuti';
 
   @override
   String get linux => 'Linux';
@@ -973,38 +978,38 @@ class AppLocalizationsSw extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Our Lifetime Promise';
+  String get ourLifetimePromise => 'Ahadi Yetu ya Maisha';
 
   @override
   String get lifetimePromiseDescription =>
-      'I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.';
+      'Binafsi naahidi kutoa usaidizi na matengenezo endelevu kwa programu hii katika maisha yangu yote, In Sha Allah. Lengo langu ni kuhakikisha programu hii inabaki kuwa nyenzo yenye manufaa kwa Umma kwa miaka ijayo.';
 
   @override
-  String get fajr => 'Fajr';
+  String get fajr => 'Alfajiri';
 
   @override
-  String get sunrise => 'Sunrise';
+  String get sunrise => 'Macheo';
 
   @override
-  String get dhuhr => 'Dhuhr';
+  String get dhuhr => 'Adhuhuri';
 
   @override
-  String get asr => 'Asr';
+  String get asr => 'Alasiri';
 
   @override
-  String get maghrib => 'Maghrib';
+  String get maghrib => 'Magharibi';
 
   @override
   String get isha => 'Isha';
 
   @override
-  String get midnight => 'Midnight';
+  String get midnight => 'Usiku wa Manane';
 
   @override
-  String get alarm => 'Alarm';
+  String get alarm => 'Kengele';
 
   @override
-  String get notification => 'Notification';
+  String get notification => 'Arifa';
 
   @override
   String formattedAddress(

@@ -1,4 +1,5 @@
 {
+  "@@locale": "yo",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Tafsir kò sí fún {ayahKey}",
   "tafsirFoundAt": "Tafsir wà ní: {anotherAyahLinkKey}",

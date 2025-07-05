@@ -1,4 +1,5 @@
-{ "@@locale": "ps",
+{
+  "@@locale": "ps",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "د {ayahKey} لپاره تفسیر شتون نلري",
   "tafsirFoundAt": "تفسیر به په دې ځای کې وموندل شي: {anotherAyahLinkKey}",

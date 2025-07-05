@@ -1,4 +1,5 @@
 {
+  "@@locale": "ms",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Tafsir tidak tersedia untuk {ayahKey}",
   "tafsirFoundAt": "Tafsir boleh didapati di: {anotherAyahLinkKey}",

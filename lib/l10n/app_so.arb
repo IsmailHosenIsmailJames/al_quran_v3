@@ -1,4 +1,5 @@
 {
+  "@@locale": "so",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Tafsiir looma hayo {ayahKey}",
   "tafsirFoundAt": "Tafsiirka waxaad ka heli kartaa: {anotherAyahLinkKey}",

@@ -1,4 +1,5 @@
 {
+  "@@locale": "zh",
   "tafsirAppBarTitle": "{nameSimple}（{nameArabic}）- {ayahKey}",
   "tafsirNotAvailable": "{ayahKey} 无可用经注",
   "tafsirFoundAt": "经注位于：{anotherAyahLinkKey}",
