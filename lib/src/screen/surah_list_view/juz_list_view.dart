@@ -72,7 +72,7 @@ class JuzListView extends StatelessWidget {
                   top: 3,
                   bottom: 3,
                 ),
-                height: 55,
+                height: 60,
                 child: Row(
                   children: [
                     Column(
@@ -105,8 +105,11 @@ class JuzListView extends StatelessWidget {
                         Text(
                           appLocalizations.surahAyah(
                             listOfSurahNameEnglish[int.parse(
-                              juzInfoList[index].firstVerseKey.split(':')[0],
-                            ) - 1],
+                                  juzInfoList[index].firstVerseKey.split(
+                                    ':',
+                                  )[0],
+                                ) -
+                                1],
                             juzInfoList[index].firstVerseKey,
                           ),
                           style: TextStyle(

@@ -78,7 +78,7 @@ class PageListView extends StatelessWidget {
                   top: 3,
                   bottom: 3,
                 ),
-                height: 55,
+                height: 60,
                 child: Row(
                   children: [
                     Column(
