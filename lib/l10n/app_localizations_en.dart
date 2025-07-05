@@ -784,43 +784,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get oneYearAgo => '1 Year ago';
 
   @override
-  String get sixMonthsAgo => '6 Months ago';
+  String monthsAgo(String number) {
+    return '$number Months ago';
+  }
 
   @override
-  String get threeMonthsAgo => '3 Months ago';
+  String weeksAgo(String number) {
+    return '$number Weeks ago';
+  }
 
   @override
-  String get twoMonthsAgo => '2 Months ago';
+  String daysAgo(String number) {
+    return '$number Days ago';
+  }
 
   @override
-  String get oneMonthAgo => '1 Month ago';
-
-  @override
-  String get threeWeeksAgo => '3 Weeks ago';
-
-  @override
-  String get twoWeeksAgo => '2 Weeks ago';
-
-  @override
-  String get oneWeekAgo => '1 Week ago';
-
-  @override
-  String get sixDaysAgo => '6 Days ago';
-
-  @override
-  String get fiveDaysAgo => '5 Days ago';
-
-  @override
-  String get fourDaysAgo => '4 Days ago';
-
-  @override
-  String get threeDaysAgo => '3 Days ago';
-
-  @override
-  String get twoDaysAgo => '2 Days ago';
-
-  @override
-  String get oneDayAgo => '1 Day ago';
+  String hoursAgo(Object hour) {
+    return '$hour Hours ago';
+  }
 
   @override
   String get aboutAlQuran => 'About Al Quran';

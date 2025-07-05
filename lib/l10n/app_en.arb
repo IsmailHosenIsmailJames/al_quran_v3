@@ -1,525 +1,536 @@
 {
-    "@@locale": "en",
-    "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
-    "@tafsirAppBarTitle": {
-        "placeholders": {
-            "nameSimple": {
-                "type": "String"
-            },
-            "nameArabic": {
-                "type": "String"
-            },
-            "ayahKey": {
-                "type": "String"
-            }
-        }
-    },
-    "tafsirNotAvailable": "Tafsir is not available for {ayahKey}",
-    "@tafsirNotAvailable": {
-        "placeholders": {
-            "ayahKey": {
-                "type": "String"
-            }
-        }
-    },
-    "tafsirFoundAt": "Tafsir will found at : {anotherAyahLinkKey}",
-    "@tafsirFoundAt": {
-        "placeholders": {
-            "anotherAyahLinkKey": {
-                "type": "String"
-            }
-        }
-    },
-    "tafsirJumpTo": "Jump to {anotherAyahLinkKey}",
-    "@tafsirJumpTo": {
-        "placeholders": {
-            "anotherAyahLinkKey": {
-                "type": "String"
-            }
-        }
-    },
-    "hizb": "Hizb",
-    "juz": "Juz",
-    "page": "Page",
-    "ruku": "Ruku",
-    "languageSettings" : "Language Settings",
-    "surahAyah": "{surahName} {ayahKey}",
-    "@surahAyah": {
-        "placeholders": {
-            "surahName": {
-                "type": "String"
-            },
-            "ayahKey": {
-                "type": "String"
-            }
-        }
-    },
-    "ayahsCount": "{count} Ayahs",
-    "@ayahsCount": {
-        "placeholders": {
-            "count": {
-                "type": "String"
-            }
-        }
-    },
-    "saveAndDownload": "Save and Download",
-    "appLanguage": "App Language",
-    "selectAppLanguage": "Select app language...",
-    "pleaseSelectOne": "Please select one",
-    "quranTranslationLanguage": "Quran Translation Language",
-    "selectTranslationLanguage": "Select translation language...",
-    "quranTranslationBook": "Quran Translation Book",
-    "selectTranslationBook": "Select translation book...",
-    "quranTafsirLanguage": "Quran Tafsir Language",
-    "selectTafsirLanguage": "Select tafsir language...",
-    "quranTafsirBook": "Quran Tafsir Book",
-    "selectTafsirBook": "Select tafsir book...",
-    "quranScriptAndStyle": "Quran Script & Style",
-    "justAMoment": "Just a moment...",
-    "processProgress": "{processName} {percentage}",
-    "@processProgress": {
-        "placeholders": {
-            "processName": {
-                "type": "String"
-            },
-            "percentage": {
-                "type": "String"
-            }
-        }
-    },
-    "success": "Success",
-    "retry": "Retry",
-    "unableToDownloadResources": "Unable to download resources...\nSomething went wrong",
-    "downloadingSegmentedQuranRecitation": "Downloading Segmented Quran Recitation",
-    "processingSegmentedQuranRecitation": "Processing Segmented Quran Recitation",
-    "footnote": "Footnote",
-    "tafsir": "Tafsir",
-    "wordByWord": "Word by Word",
-    "pleaseSelectRequiredOption": "Please select required option",
-    "rememberHomeTab": "Remember Home Tab",
-    "rememberHomeTabSubtitle": "App will remember the last opened tab in the home screen.",
-    "wakeLock": "Wake Lock",
-    "wakeLockSubtitle": "Prevent the screen from turning off automatically.",
-    "settings": "Settings",
-    "appTheme": "App Theme",
-    "quranStyle": "Quran Style",
-    "changeTheme": "Change Theme",
-    "verseCount": "Verse Count: ",
-    "translation": "Translation",
-    "tafsirNotFound": "Not Found",
-    "moreInfo": "more info",
-    "playAudio": "Play Audio",
-    "preview": "Preview",
-    "loading": "Loading...",
-    "errorFetchingAddress": "Error fetching address",
-    "addressNotAvailable": "Address not available",
-    "latitude": "Latitude: ",
-    "longitude": "Longitude: ",
-    "name": "Name: ",
-    "location": "Location: ",
-    "parameters": "Parameters: ",
-    "selectCalculationMethod": "Select Calculation Method",
-    "shareSelectAyahs": "Share Select Ayahs",
-    "selectionEmpty": "Selection Empty",
-    "generatingImagePleaseWait": "Generating Image... Please Wait",
-    "asImage": "As Image",
-    "asText": "As Text",
-    "playFromSelectedAyah": "Play From Selected Ayah",
-    "toTafsir": "To Tafsir",
-    "selectAyah": "Select Ayah",
-    "toAyah": "To Ayah",
-    "searchForASurah": "Search for a surah",
-    "bugReportTitle": "Bug Report",
-    "audioCached": "Audio Cached",
-    "others": "Others",
-    "quranTranslationAyahOneMustEnabled": "Quran|Translation|Ayah, One Must Enabled",
-    "quranFontSize": "Quran Font Size",
-    "quranLineHeight": "Quran Line Height",
-    "translationAndTafsirFontSize": "Translation & Tafsir Font Size",
-    "quranAyah": "Quran Ayah",
-    "topToolbar": "Top Toolbar",
-    "keepOpenWordByWord": "Keep Open Word By Word",
-    "wordByWordHighlight": "Word By Word Highlight",
-    "quranScriptSettings": "Quran Script Settings",
-    "surahName": "{nameSimple}",
-    "@surahName": {
-        "placeholders": {
-            "nameSimple": {
-                "type": "String"
-            }
-        }
-    },
-    "pageNumber": "Page: ",
-    "quranResources": "Quran Resources",
-    "alreadySelected": "Language '{name}' is already selected.",
-    "@alreadySelected": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "unableToGetCompassData": "Unable to get compass data",
-    "deviceDoesNotHaveSensors": "Device does not have sensors !",
-    "north": "N",
-    "east": "E",
-    "south": "S",
-    "west": "W",
-    "address": "Address: ",
-    "change": "Change",
-    "calculationMethod": "Calculation Method: ",
-    "downloadPrayerTime": "Download Prayer Time",
-    "calculationMethodsListEmpty": "The list of calculation methods is empty.",
-    "noCalculationMethodWithLocationData": "Could not find any calculation method with location data.",
-    "prayerSettings": "Prayer Settings",
-    "reminderSettings": "Reminder Settings",
-    "adjustReminderTime": "Adjust Reminder Time",
-    "enforceAlarmSound": "Enforce Alarm's Sound",
-    "enforceAlarmSoundDescription": "If enabled, This feature will play the alarm at the volume set here, even if your phone's sound is low. This ensures you don't miss the alarm due to low phone volume.",
-    "volume": "Volume",
-    "atPrayerTime": "At prayer time",
-    "minBefore": "{minutes} min before",
-    "@minBefore": {
-        "placeholders": {
-            "minutes": {
-                "type": "int"
-            }
-        }
-    },
-    "minAfter": "{minutes} min after",
-    "@minAfter": {
-        "placeholders": {
-            "minutes": {
-                "type": "int"
-            }
-        }
-    },
-    "prayerTimeIsAt": "{prayerName} is at {prayerTime}",
-    "@prayerTimeIsAt": {
-        "placeholders": {
-            "prayerName": {
-                "type": "String"
-            },
-            "prayerTime": {
-                "type": "String"
-            }
-        }
-    },
-    "itsTimeOf": "It's time of {prayerName}",
-    "@itsTimeOf": {
-        "placeholders": {
-            "prayerName": {
-                "type": "String"
-            }
-        }
-    },
-    "stopTheAdhan": "Stop the Adhan",
-    "dateFoundEmpty": "{date} Found Empty",
-    "@dateFoundEmpty": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "today": "Today",
-    "left": "Left",
-    "reminderAdded": "Reminder for {prayerName} added",
-    "@reminderAdded": {
-        "placeholders": {
-            "prayerName": {
-                "type": "String"
-            }
-        }
-    },
-    "allowNotificationPermission": "Please allow notification permission to use this feature",
-    "reminderRemoved": "Reminder for {prayerName} removed",
-    "@reminderRemoved": {
-        "placeholders": {
-            "prayerName": {
-                "type": "String"
-            }
-        }
-    },
-    "getPrayerTimesAndQibla": "Get Prayer Times and Qibla",
-    "getPrayerTimesAndQiblaDescription": "Calculate Prayer Times and Qibla for Any Given Location.",
-    "getFromGPS": "Get form GPS",
-    "or": "Or",
-    "selectYourCity": "Select you City",
-    "noteAboutGPS": "Note: If you don't want to use GPS or not feel secure, you can select your city.",
-    "downloadingLocationResources": "Downloading location resources...",
-    "somethingWentWrong": "Something went wrong",
-    "selectYourCountry": "Select Your Country",
-    "searchForACountry": "Search for a country",
-    "selectYourAdministrator": "Select Your Administrator",
-    "searchForAnAdministrator": "Search for a administrator",
-    "searchForACity": "Search for a city",
-    "pleaseEnableLocationService": "Please enable location service",
-    "donateUs": "Donate Us",
-    "underDevelopment": "Under development",
-    "versionLoading": "Loading...",
-    "alQuran": "Al Quran",
-    "mainMenu": "Main Menu",
-    "notes": "Notes",
-    "pinned": "Pinned",
-    "jumpToAyah": "Jump to Ayah",
-    "shareMultipleAyah": "Share Multiple Ayah",
-    "shareThisApp": "Share this App",
-    "giveRating": "Give Rating",
-    "bugReport": "Bug Report",
-    "privacyPolicy": "Privacy Policy",
-    "aboutTheApp": "About the App",
-    "resetTheApp": "Reset the App",
-    "resetAppWarningTitle": "Reset App Data",
-    "resetAppWarningMessage": "Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.",
-    "cancel": "Cancel",
-    "reset": "Reset",
-    "shareAppSubject": "Check out this Al Quran App!",
-    "shareAppBody": "Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah's words. Download here: {appLink}",
-    "@shareAppBody": {
-        "placeholders": {
-            "appLink": {
-                "type": "String"
-            }
-        }
-    },
-    "openDrawerTooltip": "Open Drawer",
-    "quran": "Quran",
-    "prayer": "Prayer",
-    "qibla": "Qibla",
-    "audio": "Audio",
-    "surah": "Surah",
-    "pages": "Pages",
-    "note": "Note:",
-    "linkedAyahs": "Linked Ayahs:",
-    "emptyNoteCollection": "This note collection is empty.\nAdd some notes to see them here.",
-    "emptyPinnedCollection": "No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.",
-    "noContentAvailable": "No content available.",
-    "failedToLoadCollections": "Failed to load collections: {error}",
-    "@failedToLoadCollections": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "searchByCollectionName": "Search By {collectionType} Name...",
-    "@searchByCollectionName": {
-        "placeholders": {
-            "collectionType": {
-                "type": "String"
-            }
-        }
-    },
-    "sortBy": "Sort by",
-    "noCollectionAddedYet": "No {collectionType} added yet",
-    "@noCollectionAddedYet": {
-        "placeholders": {
-            "collectionType": {
-                "type": "String"
-            }
-        }
-    },
-    "pinnedItemsCount": "{count} pinned items",
-    "@pinnedItemsCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "notesCount": "{count} notes",
-    "@notesCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "emptyNameNotAllowed": "Empty name not allowed",
-    "updatedTo": "Updated to {collectionName}",
-    "@updatedTo": {
-        "placeholders": {
-            "collectionName": {
-                "type": "String"
-            }
-        }
-    },
-    "changeName": "Change Name",
-    "changeColor": "Change Color",
-    "colorUpdated": "Color updated",
-    "collectionDeleted": "{collectionName} Deleted",
-    "@collectionDeleted": {
-        "placeholders": {
-            "collectionName": {
-                "type": "String"
-            }
-        }
-    },
-    "delete": "Delete",
-    "save": "Save",
-    "collectionNameCannotBeEmpty": "Collection name cannot be empty.",
-    "addedNewCollection": "Added New Collection",
-    "ayahCount": "{count} Ayah",
-    "@ayahCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "byNameAtoZ": "Name A-Z",
-    "byNameZtoA": "Name Z-A",
-    "byElementNumberAscending": "Element Number Ascending",
-    "byElementNumberDescending": "Element Number Descending",
-    "byUpdateDateAscending": "Update Date Ascending",
-    "byUpdateDateDescending": "Update Date Descending",
-    "byCreateDateAscending": "Create Date Ascending",
-    "byCreateDateDescending": "Create Date Descending",
-    "translationNotFound": "Translation Not Found",
-    "translationTitle": "Translation:",
-    "footNoteTitle": "Foot Note:",
-    "wordByWordTranslation": "Word by Word Translation:",
-    "tafsirButton": "Tafsir",
-    "shareButton": "Share",
-    "addNoteButton": "Add Note",
-    "pinToCollectionButton": "Pin to Collection",
-    "shareAsText": "Share as Text",
-    "copiedWithTafsir": "Copied with Tafsir",
-    "shareAsImage": "Share as Image",
-    "shareWithTafsir": "Share with Tafsir",
-    "notFound": "Not found",
-    "noteContentCannotBeEmpty": "Note content cannot be empty.",
-    "noteSavedSuccessfully": "Note saved successfully!",
-    "selectCollections": "Select Collections",
-    "addNote": "Add Note",
-    "writeCollectionName": "Write collection name...",
-    "noCollectionsYetAddANewOne": "No collections yet. Add a new one!",
-    "pleaseWriteYourNoteFirst": "Please write your note first.",
-    "noCollectionSelected": "No Collection selected",
-    "saveNote": "Save Note",
-    "nextSelectCollections": "Next: Select Collections",
-    "addToPinned": "Add To Pinned",
-    "pinnedSavedSuccessfully": "Pinned saved successfully!",
-    "savePinned": "Save Pinned",
-    "closeAudioController": "Close Audio Controller",
-    "previous": "Previous",
-    "rewind": "Rewind",
-    "fastForward": "Fast Forward",
-    "playNextAyah": "Play Next Ayah",
-    "repeat": "Repeat",
-    "playAsPlaylist": "Play As Playlist",
-    "style": "Style: {style}",
-    "@style": {
-        "placeholders": {
-            "style": {
-                "type": "String"
-            }
-        }
-    },
-    "stopAndClose": "Stop & Close",
-    "play": "Play",
-    "pause": "Pause",
-    "selectReciter": "Select Reciter",
-    "source": "Source: {source}",
-    "@source": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "newText" : "New",
-    "more": "More: ",
-    "cacheNotFound": "Cache Not Found",
-    "cacheSize": "Cache Size",
-    "error": "Error: {error}",
-    "@error": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "clean": "Clean",
-    "lastModified": "Last Modified",
-    "oneYearAgo": "1 Year ago",
-    "sixMonthsAgo": "6 Months ago",
-    "threeMonthsAgo": "3 Months ago",
-    "twoMonthsAgo": "2 Months ago",
-    "oneMonthAgo": "1 Month ago",
-    "threeWeeksAgo": "3 Weeks ago",
-    "twoWeeksAgo": "2 Weeks ago",
-    "oneWeekAgo": "1 Week ago",
-    "sixDaysAgo": "6 Days ago",
-    "fiveDaysAgo": "5 Days ago",
-    "fourDaysAgo": "4 Days ago",
-    "threeDaysAgo": "3 Days ago",
-    "twoDaysAgo": "2 Days ago",
-    "oneDayAgo": "1 Day ago",
-    "aboutAlQuran": "About Al Quran",
-    "appFullName": "Al Quran (Tafsir, Prayer, Qibla, Audio)",
-    "appDescription": "A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.",
-    "dataSourcesNote": "Note: Quran texts, Tafsir, translations, and audio resources are sourced from Quran.com, Everyayah.com, and other verified open sources.",
-    "adFreePromise": "This app has been built to seek the pleasure of Allah. Therefore, it is and always will be completely Ad-Free.",
-    "coreFeatures": "Core Features",
-    "coreFeaturesDescription": "Explore the key functionalities that make Al Quran v3 an indispensable tool for your daily Islamic practices:",
-    "prayerTimesTitle": "Prayer Times & Alerts",
-    "prayerTimesDescription": "Accurate prayer timings for any location worldwide using various calculation methods. Set reminders with Adhan notifications.",
-    "qiblaDirectionTitle": "Qibla Direction",
-    "qiblaDirectionDescription": "Easily find the Qibla direction with a clear and accurate compass view.",
-    "translationTafsirTitle": "Quran Translation & Tafsir",
-    "translationTafsirDescription": "Access 120+ translation books (including word-by-word) in 69 languages, and 30+ Tafsir books.",
-    "wordByWordAudioTitle": "Word by Word Audio & Highlighting",
-    "wordByWordAudioDescription": "Follow along with synchronized word-by-word audio recitation and highlighting for an immersive learning experience.",
-    "ayahAudioRecitationTitle": "Ayah Audio Recitation",
-    "ayahAudioRecitationDescription": "Listen to full Ayah recitations from over 40+ renowned reciters.",
-    "notesCloudBackupTitle": "Notes with Cloud Backup",
-    "notesCloudBackupDescription": "Save personal notes and reflections, securely backed up to the cloud (feature in development/coming soon).",
-    "crossPlatformSupportTitle": "Cross-Platform Support",
-    "crossPlatformSupportDescription": "Supported on Android, Web, Linux, and Windows.",
-    "backgroundAudioPlaybackTitle": "Background Audio Playback",
-    "backgroundAudioPlaybackDescription": "Continue listening to Quran recitation even when the app is in the background.",
-    "audioDataCachingTitle": "Audio & Data Caching",
-    "audioDataCachingDescription": "Improved playback and offline capabilities with robust audio and Quran data caching.",
-    "minimalisticInterfaceTitle": "Minimalistic & Clean Interface",
-    "minimalisticInterfaceDescription": "Easy to navigate interface with focus on user experience and readability.",
-    "optimizedPerformanceTitle": "Optimized Performance & Size",
-    "optimizedPerformanceDescription": "A feature-rich application designed to be lightweight and performant.",
-    "languageSupport": "Language Support",
-    "languageSupportDescription": "This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):",
-
-    "technologyAndResources": "Technology & Resources",
-    "technologyAndResourcesDescription": "This app is built using cutting-edge technologies and reliable resources:",
-    "flutterFrameworkTitle": "Flutter Framework",
-    "flutterFrameworkDescription": "Built with Flutter for a beautiful, natively compiled, multi-platform experience from a single codebase.",
-    "advancedAudioEngineTitle": "Advanced Audio Engine",
-    "advancedAudioEngineDescription": "Powered by the `just_audio` and `just_audio_background` Flutter packages for robust audio playback and control.",
-    "reliableQuranDataTitle": "Reliable Quran Data",
-    "reliableQuranDataDescription": "Al Quran texts, translations, tafsirs, and audio are sourced from verified open APIs and databases like Quran.com & Everyayah.com.",
-    "prayerTimeEngineTitle": "Prayer Time Engine",
-    "prayerTimeEngineDescription": "Utilizes established calculation methods for accurate prayer times. Notifications handled by `flutter_local_notifications` and background tasks.",
-    "crossPlatformSupport": "Cross Platform Support",
-    "crossPlatformSupportDescription2": "Enjoy seamless access across various platforms:",
-    "android": "Android",
-    "ios": "iOS",
-    "macos": "macOS",
-    "web": "Web",
-    "linux": "Linux",
-    "windows": "Windows",
-    "ourLifetimePromise": "Our Lifetime Promise",
-    "lifetimePromiseDescription": "I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.",
-    "fajr": "Fajr",
-    "sunrise": "Sunrise",
-    "dhuhr": "Dhuhr",
-    "asr": "Asr",
-    "maghrib": "Maghrib",
-    "isha": "Isha",
-    "midnight": "Midnight",
-    "alarm": "Alarm",
-    "notification": "Notification",
-    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
-    "quranScriptTajweed": "Tajweed",
-    "quranScriptUthmani": "Uthmani",
-    "quranScriptIndopak": "Indopak"
+  "@@locale": "en",
+  "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirNotAvailable": "Tafsir is not available for {ayahKey}",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "Tafsir will found at : {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "Jump to {anotherAyahLinkKey}",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "hizb": "Hizb",
+  "juz": "Juz",
+  "page": "Page",
+  "ruku": "Ruku",
+  "languageSettings": "Language Settings",
+  "surahAyah": "{surahName} {ayahKey}",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "ayahsCount": "{count} Ayahs",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "Save and Download",
+  "appLanguage": "App Language",
+  "selectAppLanguage": "Select app language...",
+  "pleaseSelectOne": "Please select one",
+  "quranTranslationLanguage": "Quran Translation Language",
+  "selectTranslationLanguage": "Select translation language...",
+  "quranTranslationBook": "Quran Translation Book",
+  "selectTranslationBook": "Select translation book...",
+  "quranTafsirLanguage": "Quran Tafsir Language",
+  "selectTafsirLanguage": "Select tafsir language...",
+  "quranTafsirBook": "Quran Tafsir Book",
+  "selectTafsirBook": "Select tafsir book...",
+  "quranScriptAndStyle": "Quran Script & Style",
+  "justAMoment": "Just a moment...",
+  "processProgress": "{processName} {percentage}",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
+  "success": "Success",
+  "retry": "Retry",
+  "unableToDownloadResources": "Unable to download resources...\nSomething went wrong",
+  "downloadingSegmentedQuranRecitation": "Downloading Segmented Quran Recitation",
+  "processingSegmentedQuranRecitation": "Processing Segmented Quran Recitation",
+  "footnote": "Footnote",
+  "tafsir": "Tafsir",
+  "wordByWord": "Word by Word",
+  "pleaseSelectRequiredOption": "Please select required option",
+  "rememberHomeTab": "Remember Home Tab",
+  "rememberHomeTabSubtitle": "App will remember the last opened tab in the home screen.",
+  "wakeLock": "Wake Lock",
+  "wakeLockSubtitle": "Prevent the screen from turning off automatically.",
+  "settings": "Settings",
+  "appTheme": "App Theme",
+  "quranStyle": "Quran Style",
+  "changeTheme": "Change Theme",
+  "verseCount": "Verse Count: ",
+  "translation": "Translation",
+  "tafsirNotFound": "Not Found",
+  "moreInfo": "more info",
+  "playAudio": "Play Audio",
+  "preview": "Preview",
+  "loading": "Loading...",
+  "errorFetchingAddress": "Error fetching address",
+  "addressNotAvailable": "Address not available",
+  "latitude": "Latitude: ",
+  "longitude": "Longitude: ",
+  "name": "Name: ",
+  "location": "Location: ",
+  "parameters": "Parameters: ",
+  "selectCalculationMethod": "Select Calculation Method",
+  "shareSelectAyahs": "Share Select Ayahs",
+  "selectionEmpty": "Selection Empty",
+  "generatingImagePleaseWait": "Generating Image... Please Wait",
+  "asImage": "As Image",
+  "asText": "As Text",
+  "playFromSelectedAyah": "Play From Selected Ayah",
+  "toTafsir": "To Tafsir",
+  "selectAyah": "Select Ayah",
+  "toAyah": "To Ayah",
+  "searchForASurah": "Search for a surah",
+  "bugReportTitle": "Bug Report",
+  "audioCached": "Audio Cached",
+  "others": "Others",
+  "quranTranslationAyahOneMustEnabled": "Quran|Translation|Ayah, One Must Enabled",
+  "quranFontSize": "Quran Font Size",
+  "quranLineHeight": "Quran Line Height",
+  "translationAndTafsirFontSize": "Translation & Tafsir Font Size",
+  "quranAyah": "Quran Ayah",
+  "topToolbar": "Top Toolbar",
+  "keepOpenWordByWord": "Keep Open Word By Word",
+  "wordByWordHighlight": "Word By Word Highlight",
+  "quranScriptSettings": "Quran Script Settings",
+  "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
+  "pageNumber": "Page: ",
+  "quranResources": "Quran Resources",
+  "alreadySelected": "Language '{name}' is already selected.",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unableToGetCompassData": "Unable to get compass data",
+  "deviceDoesNotHaveSensors": "Device does not have sensors !",
+  "north": "N",
+  "east": "E",
+  "south": "S",
+  "west": "W",
+  "address": "Address: ",
+  "change": "Change",
+  "calculationMethod": "Calculation Method: ",
+  "downloadPrayerTime": "Download Prayer Time",
+  "calculationMethodsListEmpty": "The list of calculation methods is empty.",
+  "noCalculationMethodWithLocationData": "Could not find any calculation method with location data.",
+  "prayerSettings": "Prayer Settings",
+  "reminderSettings": "Reminder Settings",
+  "adjustReminderTime": "Adjust Reminder Time",
+  "enforceAlarmSound": "Enforce Alarm's Sound",
+  "enforceAlarmSoundDescription": "If enabled, This feature will play the alarm at the volume set here, even if your phone's sound is low. This ensures you don't miss the alarm due to low phone volume.",
+  "volume": "Volume",
+  "atPrayerTime": "At prayer time",
+  "minBefore": "{minutes} min before",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "minAfter": "{minutes} min after",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} is at {prayerTime}",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "It's time of {prayerName}",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "stopTheAdhan": "Stop the Adhan",
+  "dateFoundEmpty": "{date} Found Empty",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "today": "Today",
+  "left": "Left",
+  "reminderAdded": "Reminder for {prayerName} added",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "Please allow notification permission to use this feature",
+  "reminderRemoved": "Reminder for {prayerName} removed",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "Get Prayer Times and Qibla",
+  "getPrayerTimesAndQiblaDescription": "Calculate Prayer Times and Qibla for Any Given Location.",
+  "getFromGPS": "Get form GPS",
+  "or": "Or",
+  "selectYourCity": "Select you City",
+  "noteAboutGPS": "Note: If you don't want to use GPS or not feel secure, you can select your city.",
+  "downloadingLocationResources": "Downloading location resources...",
+  "somethingWentWrong": "Something went wrong",
+  "selectYourCountry": "Select Your Country",
+  "searchForACountry": "Search for a country",
+  "selectYourAdministrator": "Select Your Administrator",
+  "searchForAnAdministrator": "Search for a administrator",
+  "searchForACity": "Search for a city",
+  "pleaseEnableLocationService": "Please enable location service",
+  "donateUs": "Donate Us",
+  "underDevelopment": "Under development",
+  "versionLoading": "Loading...",
+  "alQuran": "Al Quran",
+  "mainMenu": "Main Menu",
+  "notes": "Notes",
+  "pinned": "Pinned",
+  "jumpToAyah": "Jump to Ayah",
+  "shareMultipleAyah": "Share Multiple Ayah",
+  "shareThisApp": "Share this App",
+  "giveRating": "Give Rating",
+  "bugReport": "Bug Report",
+  "privacyPolicy": "Privacy Policy",
+  "aboutTheApp": "About the App",
+  "resetTheApp": "Reset the App",
+  "resetAppWarningTitle": "Reset App Data",
+  "resetAppWarningMessage": "Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.",
+  "cancel": "Cancel",
+  "reset": "Reset",
+  "shareAppSubject": "Check out this Al Quran App!",
+  "shareAppBody": "Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah's words. Download here: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "Open Drawer",
+  "quran": "Quran",
+  "prayer": "Prayer",
+  "qibla": "Qibla",
+  "audio": "Audio",
+  "surah": "Surah",
+  "pages": "Pages",
+  "note": "Note:",
+  "linkedAyahs": "Linked Ayahs:",
+  "emptyNoteCollection": "This note collection is empty.\nAdd some notes to see them here.",
+  "emptyPinnedCollection": "No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.",
+  "noContentAvailable": "No content available.",
+  "failedToLoadCollections": "Failed to load collections: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "Search By {collectionType} Name...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "sortBy": "Sort by",
+  "noCollectionAddedYet": "No {collectionType} added yet",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "pinnedItemsCount": "{count} pinned items",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notesCount": "{count} notes",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "Empty name not allowed",
+  "updatedTo": "Updated to {collectionName}",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "changeName": "Change Name",
+  "changeColor": "Change Color",
+  "colorUpdated": "Color updated",
+  "collectionDeleted": "{collectionName} Deleted",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "delete": "Delete",
+  "save": "Save",
+  "collectionNameCannotBeEmpty": "Collection name cannot be empty.",
+  "addedNewCollection": "Added New Collection",
+  "ayahCount": "{count} Ayah",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "byNameAtoZ": "Name A-Z",
+  "byNameZtoA": "Name Z-A",
+  "byElementNumberAscending": "Element Number Ascending",
+  "byElementNumberDescending": "Element Number Descending",
+  "byUpdateDateAscending": "Update Date Ascending",
+  "byUpdateDateDescending": "Update Date Descending",
+  "byCreateDateAscending": "Create Date Ascending",
+  "byCreateDateDescending": "Create Date Descending",
+  "translationNotFound": "Translation Not Found",
+  "translationTitle": "Translation:",
+  "footNoteTitle": "Foot Note:",
+  "wordByWordTranslation": "Word by Word Translation:",
+  "tafsirButton": "Tafsir",
+  "shareButton": "Share",
+  "addNoteButton": "Add Note",
+  "pinToCollectionButton": "Pin to Collection",
+  "shareAsText": "Share as Text",
+  "copiedWithTafsir": "Copied with Tafsir",
+  "shareAsImage": "Share as Image",
+  "shareWithTafsir": "Share with Tafsir",
+  "notFound": "Not found",
+  "noteContentCannotBeEmpty": "Note content cannot be empty.",
+  "noteSavedSuccessfully": "Note saved successfully!",
+  "selectCollections": "Select Collections",
+  "addNote": "Add Note",
+  "writeCollectionName": "Write collection name...",
+  "noCollectionsYetAddANewOne": "No collections yet. Add a new one!",
+  "pleaseWriteYourNoteFirst": "Please write your note first.",
+  "noCollectionSelected": "No Collection selected",
+  "saveNote": "Save Note",
+  "nextSelectCollections": "Next: Select Collections",
+  "addToPinned": "Add To Pinned",
+  "pinnedSavedSuccessfully": "Pinned saved successfully!",
+  "savePinned": "Save Pinned",
+  "closeAudioController": "Close Audio Controller",
+  "previous": "Previous",
+  "rewind": "Rewind",
+  "fastForward": "Fast Forward",
+  "playNextAyah": "Play Next Ayah",
+  "repeat": "Repeat",
+  "playAsPlaylist": "Play As Playlist",
+  "style": "Style: {style}",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "stopAndClose": "Stop & Close",
+  "play": "Play",
+  "pause": "Pause",
+  "selectReciter": "Select Reciter",
+  "source": "Source: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "newText": "New",
+  "more": "More: ",
+  "cacheNotFound": "Cache Not Found",
+  "cacheSize": "Cache Size",
+  "error": "Error: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "clean": "Clean",
+  "lastModified": "Last Modified",
+  "oneYearAgo": "1 Year ago",
+  "monthsAgo": "{number} Months ago",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "weeksAgo": "{number} Weeks ago",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "daysAgo": "{number} Days ago",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursAgo": "{hour} Hours ago",
+  "aboutAlQuran": "About Al Quran",
+  "appFullName": "Al Quran (Tafsir, Prayer, Qibla, Audio)",
+  "appDescription": "A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.",
+  "dataSourcesNote": "Note: Quran texts, Tafsir, translations, and audio resources are sourced from Quran.com, Everyayah.com, and other verified open sources.",
+  "adFreePromise": "This app has been built to seek the pleasure of Allah. Therefore, it is and always will be completely Ad-Free.",
+  "coreFeatures": "Core Features",
+  "coreFeaturesDescription": "Explore the key functionalities that make Al Quran v3 an indispensable tool for your daily Islamic practices:",
+  "prayerTimesTitle": "Prayer Times & Alerts",
+  "prayerTimesDescription": "Accurate prayer timings for any location worldwide using various calculation methods. Set reminders with Adhan notifications.",
+  "qiblaDirectionTitle": "Qibla Direction",
+  "qiblaDirectionDescription": "Easily find the Qibla direction with a clear and accurate compass view.",
+  "translationTafsirTitle": "Quran Translation & Tafsir",
+  "translationTafsirDescription": "Access 120+ translation books (including word-by-word) in 69 languages, and 30+ Tafsir books.",
+  "wordByWordAudioTitle": "Word by Word Audio & Highlighting",
+  "wordByWordAudioDescription": "Follow along with synchronized word-by-word audio recitation and highlighting for an immersive learning experience.",
+  "ayahAudioRecitationTitle": "Ayah Audio Recitation",
+  "ayahAudioRecitationDescription": "Listen to full Ayah recitations from over 40+ renowned reciters.",
+  "notesCloudBackupTitle": "Notes with Cloud Backup",
+  "notesCloudBackupDescription": "Save personal notes and reflections, securely backed up to the cloud (feature in development/coming soon).",
+  "crossPlatformSupportTitle": "Cross-Platform Support",
+  "crossPlatformSupportDescription": "Supported on Android, Web, Linux, and Windows.",
+  "backgroundAudioPlaybackTitle": "Background Audio Playback",
+  "backgroundAudioPlaybackDescription": "Continue listening to Quran recitation even when the app is in the background.",
+  "audioDataCachingTitle": "Audio & Data Caching",
+  "audioDataCachingDescription": "Improved playback and offline capabilities with robust audio and Quran data caching.",
+  "minimalisticInterfaceTitle": "Minimalistic & Clean Interface",
+  "minimalisticInterfaceDescription": "Easy to navigate interface with focus on user experience and readability.",
+  "optimizedPerformanceTitle": "Optimized Performance & Size",
+  "optimizedPerformanceDescription": "A feature-rich application designed to be lightweight and performant.",
+  "languageSupport": "Language Support",
+  "languageSupportDescription": "This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):",
+  "technologyAndResources": "Technology & Resources",
+  "technologyAndResourcesDescription": "This app is built using cutting-edge technologies and reliable resources:",
+  "flutterFrameworkTitle": "Flutter Framework",
+  "flutterFrameworkDescription": "Built with Flutter for a beautiful, natively compiled, multi-platform experience from a single codebase.",
+  "advancedAudioEngineTitle": "Advanced Audio Engine",
+  "advancedAudioEngineDescription": "Powered by the `just_audio` and `just_audio_background` Flutter packages for robust audio playback and control.",
+  "reliableQuranDataTitle": "Reliable Quran Data",
+  "reliableQuranDataDescription": "Al Quran texts, translations, tafsirs, and audio are sourced from verified open APIs and databases like Quran.com & Everyayah.com.",
+  "prayerTimeEngineTitle": "Prayer Time Engine",
+  "prayerTimeEngineDescription": "Utilizes established calculation methods for accurate prayer times. Notifications handled by `flutter_local_notifications` and background tasks.",
+  "crossPlatformSupport": "Cross Platform Support",
+  "crossPlatformSupportDescription2": "Enjoy seamless access across various platforms:",
+  "android": "Android",
+  "ios": "iOS",
+  "macos": "macOS",
+  "web": "Web",
+  "linux": "Linux",
+  "windows": "Windows",
+  "ourLifetimePromise": "Our Lifetime Promise",
+  "lifetimePromiseDescription": "I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.",
+  "fajr": "Fajr",
+  "sunrise": "Sunrise",
+  "dhuhr": "Dhuhr",
+  "asr": "Asr",
+  "maghrib": "Maghrib",
+  "isha": "Isha",
+  "midnight": "Midnight",
+  "alarm": "Alarm",
+  "notification": "Notification",
+  "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "quranScriptTajweed": "Tajweed",
+  "quranScriptUthmani": "Uthmani",
+  "quranScriptIndopak": "Indopak"
 }
