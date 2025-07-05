@@ -68,7 +68,7 @@ class SurahListView extends StatelessWidget {
                   top: 3,
                   bottom: 3,
                 ),
-                height: 55,
+                height: 60,
                 child: Row(
                   children: [
                     getIndexNumberWidget(
@@ -127,7 +127,9 @@ class SurahListView extends StatelessWidget {
                           style: TextStyle(fontSize: 18, color: textColor),
                         ),
                         Text(
-                          appLocalizations.ayahsCount(surahInfoList[index].versesCount),
+                          appLocalizations.ayahsCount(
+                            surahInfoList[index].versesCount,
+                          ),
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light

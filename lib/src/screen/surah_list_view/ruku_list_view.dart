@@ -72,7 +72,7 @@ class RukuListView extends StatelessWidget {
                   top: 3,
                   bottom: 3,
                 ),
-                height: 55,
+                height: 60,
                 child: Row(
                   children: [
                     Column(
@@ -105,8 +105,11 @@ class RukuListView extends StatelessWidget {
                         Text(
                           appLocalizations.surahAyah(
                             listOfSurahNameEnglish[int.parse(
-                              rukuInfoList[index].firstVerseKey.split(':')[0],
-                            ) - 1],
+                                  rukuInfoList[index].firstVerseKey.split(
+                                    ':',
+                                  )[0],
+                                ) -
+                                1],
                             rukuInfoList[index].firstVerseKey,
                           ),
                           style: TextStyle(
