@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
@@ -6,7 +7,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:uuid/uuid.dart";
@@ -65,9 +65,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
 
   void _handleSaveNote(AppLocalizations l10n) {
     if (_noteEditingController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.noteContentCannotBeEmpty)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.noteContentCannotBeEmpty)));
       return;
     }
 
@@ -119,7 +119,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
               const Icon(FluentIcons.note_add_24_regular),
               const Gap(10),
               Text(
-                _selectNoteCollectionStep ? l10n.selectCollectionsTitle : l10n.addNoteTitle,
+                _selectNoteCollectionStep
+                    ? l10n.selectCollectionsTitle
+                    : l10n.addNoteTitle,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -215,9 +217,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                     child:
                         _availableNoteCollections.isEmpty &&
                                 !_addNewNoteCollectionStep
-                            ? Center(
-                              child: Text(l10n.noCollectionsYet),
-                            )
+                            ? Center(child: Text(l10n.noCollectionsYet))
                             : ListView.builder(
                               itemCount: _availableNoteCollections.length,
                               itemBuilder: (context, index) {
@@ -235,8 +235,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                   ),
                                   title: Text(collection.name),
                                   subtitle: Text(
-                                    l10n.notesCount.replaceFirst(
-                                        '{count}', collection.notes.length.toString()),
+                                    l10n.notesCount(
+                                      collection.notes.length.toString(),
+                                    ),
                                   ),
                                   trailing: IconButton(
                                     icon: Icon(
@@ -296,8 +297,10 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                 minLines: 4,
                 autofocus: true,
                 autocorrect: true,
-                decoration: InputDecoration( // TODO: Add hint text for note input if needed
-                  hintText: "Write your note here...", // Placeholder, consider localizing if needed
+                decoration: InputDecoration(
+                  // TODO: Add hint text for note input if needed
+                  hintText:
+                      "Write your note here...", // Placeholder, consider localizing if needed
                   border: InputBorder.none,
                 ),
               ),
@@ -347,7 +350,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                         });
                       } else {
                         if (_selectedNoteCollectionIds.isEmpty) {
-                          Fluttertoast.showToast(msg: l10n.noCollectionSelectedToast);
+                          Fluttertoast.showToast(
+                            msg: l10n.noCollectionSelectedToast,
+                          );
                         } else {
                           _handleSaveNote(l10n);
                         }
@@ -378,20 +383,23 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   }
 }
 
-Future<void> saveDemoNoteCollection() async { // Assuming l10n is not available or needed here for demo data
+Future<void> saveDemoNoteCollection() async {
+  // Assuming l10n is not available or needed here for demo data
   final box = Hive.box(CollectionType.notes.name);
   if (box.values.isEmpty) {
     List<NoteCollectionModel> collections = [
       NoteCollectionModel(
         id: "col1",
-        name: "Reflections", // Potentially AppLocalizations.of(context)!.demoCollectionReflections if context available
+        name:
+            "Reflections", // Potentially AppLocalizations.of(context)!.demoCollectionReflections if context available
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         notes: [],
       ),
       NoteCollectionModel(
         id: "col2",
-        name: "Favourites", // Potentially AppLocalizations.of(context)!.demoCollectionFavourites if context available
+        name:
+            "Favourites", // Potentially AppLocalizations.of(context)!.demoCollectionFavourites if context available
         colorHex: "FFAB00",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),

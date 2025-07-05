@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -5,7 +6,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 
@@ -106,7 +106,10 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
               const Gap(10),
               Text(
                 l10n.addToPinnedTitle,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const Spacer(),
               if (!_addNewPinnedCollectionStep)
@@ -194,9 +197,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                   child:
                       _availablePinnedCollections.isEmpty &&
                               !_addNewPinnedCollectionStep
-                          ? Center(
-                            child: Text(l10n.noCollectionsYet),
-                          )
+                          ? Center(child: Text(l10n.noCollectionsYet))
                           : ListView.builder(
                             itemCount: _availablePinnedCollections.length,
                             itemBuilder: (context, index) {
@@ -214,8 +215,9 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                 ),
                                 title: Text(collection.name),
                                 subtitle: Text(
-                                  l10n.pinnedItemsCount.replaceFirst(
-                                      '{count}', collection.pinned.length.toString()),
+                                  l10n.pinnedItemsCount(
+                                    collection.pinned.length.toString(),
+                                  ),
                                 ),
                                 trailing: IconButton(
                                   icon: Icon(
@@ -288,20 +290,23 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
   }
 }
 
-Future<void> saveDemoPinnedCollection() async { // Assuming l10n is not available or needed here for demo data
+Future<void> saveDemoPinnedCollection() async {
+  // Assuming l10n is not available or needed here for demo data
   final box = Hive.box(CollectionType.pinned.name);
   if (box.values.isEmpty) {
     List<PinnedCollectionModel> collections = [
       PinnedCollectionModel(
         id: "col1",
-        name: "Reflections", // Potentially AppLocalizations.of(context)!.demoCollectionReflections if context available
+        name:
+            "Reflections", // Potentially AppLocalizations.of(context)!.demoCollectionReflections if context available
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         pinned: [],
       ),
       PinnedCollectionModel(
         id: "col2",
-        name: "Favourites", // Potentially AppLocalizations.of(context)!.demoCollectionFavourites if context available
+        name:
+            "Favourites", // Potentially AppLocalizations.of(context)!.demoCollectionFavourites if context available
         colorHex: "FFAB00",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),

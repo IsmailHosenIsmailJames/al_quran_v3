@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
@@ -6,7 +7,6 @@ import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
@@ -71,7 +71,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
               Center(
                 child: Text(
                   l10n.selectReciterTitle,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Align(
@@ -92,7 +95,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
             controller: scrollController,
             padding: const EdgeInsets.all(5),
             itemBuilder: (context, index) {
-              ReciterInfoModel reciterInfoModel =recitersListCurrent[index];
+              ReciterInfoModel reciterInfoModel = recitersListCurrent[index];
               return Container(
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -163,8 +166,16 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(l10n.reciterStyleLabel.replaceFirst('{styleName}', reciterInfoModel.style ?? '')),
-                          Text(l10n.reciterSourceLabel.replaceFirst('{sourceName}', reciterInfoModel.source ?? '')),
+                          Text(
+                            l10n.reciterStyleLabel(
+                              reciterInfoModel.style ?? '',
+                            ),
+                          ),
+                          Text(
+                            l10n.reciterSourceLabel(
+                              reciterInfoModel.source ?? '',
+                            ),
+                          ),
                           if (reciterInfoModel.bio != null)
                             Row(
                               children: [

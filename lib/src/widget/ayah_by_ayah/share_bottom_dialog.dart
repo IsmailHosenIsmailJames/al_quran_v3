@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -7,7 +8,6 @@ import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/taj
 import "package:clipboard/clipboard.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -143,7 +143,10 @@ void showShareBottomDialog(
                     );
                   },
                   icon: Icon(FluentIcons.text_field_24_regular, color: color),
-                  label: Text(l10n.shareAsTextButtonLabel, style: TextStyle(color: color)),
+                  label: Text(
+                    l10n.shareAsTextButtonLabel,
+                    style: TextStyle(color: color),
+                  ),
                 ),
               ),
               IconButton(
@@ -155,7 +158,9 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n${l10n.translationLabelColon}\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
-                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsirToast.replaceFirst("Tafsir", "")); // Assuming "Copied" part needs localization
+                  await Fluttertoast.showToast(
+                    msg: l10n.copiedWithTafsirToast.replaceFirst("Tafsir", ""),
+                  ); // Assuming "Copied" part needs localization
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),
@@ -180,6 +185,7 @@ void showShareBottomDialog(
                         context,
                         Material(
                           child: getAyahCardForShareAsImage(
+                            l10n,
                             Hive.box("user").get(
                               "show_mac_os_window_like_icon",
                               defaultValue: true,
@@ -229,7 +235,10 @@ void showShareBottomDialog(
                 Navigator.pop(context);
               },
               icon: Icon(FluentIcons.image_24_regular, color: color),
-              label: Text(l10n.shareAsImageButtonLabel, style: TextStyle(color: color)),
+              label: Text(
+                l10n.shareAsImageButtonLabel,
+                style: TextStyle(color: color),
+              ),
             ),
           ),
 

@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -10,7 +11,6 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 class CollectionContentView extends StatefulWidget {
@@ -67,7 +67,11 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     );
   }
 
-  Widget _buildNoteItem(NoteModel noteModel, BuildContext context, AppLocalizations l10n) {
+  Widget _buildNoteItem(
+    NoteModel noteModel,
+    BuildContext context,
+    AppLocalizations l10n,
+  ) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -229,7 +233,8 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             );
           }
           return _buildEmptyState(
-            l10n.noContentAvailableMessage, l10n
+            l10n.noContentAvailableMessage,
+            l10n,
           ); // Fallback, should not happen due to asserts
         },
       ),

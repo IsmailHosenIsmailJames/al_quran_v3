@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
@@ -124,7 +125,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "more info",
+                          AppLocalizations.of(context)!.moreInfoLabel,
                           style: TextStyle(
                             color: themeState.primary,
                             decoration: TextDecoration.underline,

@@ -1,9 +1,9 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/widget/prayers/adress_from_lat_lon.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -45,7 +45,10 @@ Widget getPrayerCalculationMethodInfoWidget(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(l10n.nameLabelColon, style: const TextStyle(color: Colors.grey)),
+            Text(
+              l10n.nameLabelColon,
+              style: const TextStyle(color: Colors.grey),
+            ),
             Expanded(child: Text(calculationMethod.name.toString())),
           ],
         ),
@@ -54,7 +57,10 @@ Widget getPrayerCalculationMethodInfoWidget(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(l10n.locationLabelColon, style: const TextStyle(color: Colors.grey)),
+              Text(
+                l10n.locationLabelColon,
+                style: const TextStyle(color: Colors.grey),
+              ),
               Expanded(
                 child: getAddressView(
                   lat: calculationMethod.location!.latitude,
@@ -68,7 +74,10 @@ Widget getPrayerCalculationMethodInfoWidget(
           ),
         const Gap(5),
         if (calculationMethod.params != null)
-          Text(l10n.parametersLabelColon, style: const TextStyle(color: Colors.grey)),
+          Text(
+            l10n.parametersLabelColon,
+            style: const TextStyle(color: Colors.grey),
+          ),
         const Gap(5),
         if (calculationMethod.params != null)
           Wrap(

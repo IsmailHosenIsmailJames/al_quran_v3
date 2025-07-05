@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
@@ -6,7 +7,6 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
@@ -242,7 +242,9 @@ class QuranScriptSettings extends StatelessWidget {
             ),
 
             const Gap(5),
-            getAyahPreviewWidget(showHeaderOptions: true), // Assuming this widget handles its own internal localization or doesn't need it
+            getAyahPreviewWidget(
+              showHeaderOptions: true,
+            ), // Assuming this widget handles its own internal localization or doesn't need it
 
             const Gap(10),
             SwitchListTile(

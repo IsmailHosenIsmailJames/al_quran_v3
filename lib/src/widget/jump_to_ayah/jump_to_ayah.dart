@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -11,7 +12,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -111,7 +111,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsetsGeometry.only(left: 10),
-              child: Text(l10n.selectedCountLabel.replaceFirst('{count}', selectedAyahKeys.length.toString())),
+              child: Text(
+                l10n.selectedCountLabel(selectedAyahKeys.length.toString()),
+              ),
             ),
           if (widget.selectMultipleAndShare == true) const Gap(5),
 
@@ -213,7 +215,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               final surah = SurahInfoModel.fromMap(
                                 metaDataSurah[(index + 1).toString()],
                               );
-                              return surah.toJson().contains( // This search logic might need adjustment for localization if surah names are localized
+                              return surah.toJson().contains(
+                                    // This search logic might need adjustment for localization if surah names are localized
                                     textEditingController.text,
                                   )
                                   ? TextButton(
@@ -243,7 +246,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                         textEditingController.text = "";
                                       });
                                     },
-                                    child: Text( // Surah names are proper names, usually not localized in this context
+                                    child: Text(
+                                      // Surah names are proper names, usually not localized in this context
                                       "${index + 1}. ${surah.nameSimple}",
                                     ),
                                   )
@@ -410,17 +414,26 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
-                                  tajweedScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? []; // Added null checks
+                                  tajweedScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  []; // Added null checks
                             }
                           case QuranScriptType.uthmani:
                             {
                               quranScriptWord =
-                                  uthmaniScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
+                                  uthmaniScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  [];
                             }
                           case QuranScriptType.indopak:
                             {
                               quranScriptWord =
-                                  indopakScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
+                                  indopakScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  [];
                             }
                         }
                         TextStyle scriptTextStyle = TextStyle(
@@ -439,6 +452,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 context,
                                 Material(
                                   child: getAyahCardForShareAsImage(
+                                    l10n,
                                     Hive.box("user").get(
                                       "show_mac_os_window_like_icon",
                                       defaultValue: true,
@@ -527,17 +541,26 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           case QuranScriptType.tajweed:
                             {
                               quranScriptWord =
-                                  tajweedScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
+                                  tajweedScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  [];
                             }
                           case QuranScriptType.uthmani:
                             {
                               quranScriptWord =
-                                  uthmaniScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
+                                  uthmaniScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  [];
                             }
                           case QuranScriptType.indopak:
                             {
                               quranScriptWord =
-                                  indopakScript[ayahKey.split(":").first]?[ayahKey.split(":").last] ?? [];
+                                  indopakScript[ayahKey
+                                      .split(":")
+                                      .first]?[ayahKey.split(":").last] ??
+                                  [];
                             }
                         }
                         text +=
@@ -600,7 +623,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ),
                             );
                           } else {
-                            Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator);
+                            Fluttertoast.showToast(
+                              msg: l10n.pleaseSelectOneValidator,
+                            );
                           }
                         },
                         child: Text(l10n.toTafsirButtonLabel),
@@ -630,11 +655,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             );
                           }
                         } else {
-                          Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator);
+                          Fluttertoast.showToast(
+                            msg: l10n.pleaseSelectOneValidator,
+                          );
                         }
                       },
                       child: Text(
-                        widget.onSelectAyah != null ? l10n.selectAyahButtonLabel : l10n.toAyahButtonLabel,
+                        widget.onSelectAyah != null
+                            ? l10n.selectAyahButtonLabel
+                            : l10n.toAyahButtonLabel,
                       ),
                     ),
                   ),

@@ -1,9 +1,9 @@
 import "dart:math" as math;
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:vector_math/vector_math.dart" as vector;
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 import "../qibla_direction.dart";
 
@@ -113,7 +113,7 @@ class CompassView extends CustomPainter {
               l10n.compassNorth,
               l10n.compassEast,
               l10n.compassSouth,
-              l10n.compassWest
+              l10n.compassWest,
             ];
             String direction = directionList[(degree / 90).toInt()];
             textPainter = TextPainter(

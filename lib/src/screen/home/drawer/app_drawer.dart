@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
@@ -9,7 +10,6 @@ import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
@@ -310,7 +310,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         // share the app
                         final String appLink =
                             "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran";
-                        final String message = l10n.drawerShareMessage.replaceFirst('{appLink}', appLink);
+                        final String message = l10n.drawerShareMessage(appLink);
                         await SharePlus.instance.share(
                           ShareParams(
                             text: message,

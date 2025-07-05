@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_content_view.dart";
 import "package:al_quran_v3/src/screen/collections/common_function.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -10,7 +11,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -113,10 +113,11 @@ class _CollectionPageState extends State<CollectionPage> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   prefixIcon: const Icon(FluentIcons.search_24_regular),
-                  hintText: l10n.searchByCollectionNameHint.replaceFirst(
-                      '{collectionTypeName}',
-                      StringCapitalizeExtension(widget.collectionType.name)
-                          .capitalize()),
+                  hintText: l10n.searchByCollectionNameHint(
+                    StringCapitalizeExtension(
+                      widget.collectionType.name,
+                    ).capitalize(),
+                  ),
                 ),
               ),
             ),
@@ -193,7 +194,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                             : null,
                                   ),
                                   title: Text(
-                                    current.toReadableString(l10n),
+                                    SortingMethodsTypeExtension(
+                                      current,
+                                    ).toReadableString(l10n),
                                   ),
                                 );
                               },
@@ -231,8 +234,11 @@ class _CollectionPageState extends State<CollectionPage> {
             ),
             const Gap(20),
             Text(
-              l10n.noCollectionAddedYet.replaceFirst('{collectionTypeName}',
-                  StringCapitalizeExtension(widget.collectionType.name).capitalize()),
+              l10n.noCollectionAddedYet(
+                StringCapitalizeExtension(
+                  widget.collectionType.name,
+                ).capitalize(),
+              ),
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
@@ -301,9 +307,13 @@ class _CollectionPageState extends State<CollectionPage> {
                       itemBuilder: (BuildContext context, int index) {
                         return isNotes
                             ? _getNoteCollectionWidget(
-                                _filteredNoteCollection[index], l10n)
+                              _filteredNoteCollection[index],
+                              l10n,
+                            )
                             : _getPinnedCollectionWidget(
-                                _filteredPinnedCollection[index], l10n);
+                              _filteredPinnedCollection[index],
+                              l10n,
+                            );
                       },
                     )
                     : _buildEmptyState(svgColor, l10n),
@@ -336,8 +346,9 @@ class _CollectionPageState extends State<CollectionPage> {
           pinnedCollectionModel.name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        subtitle: Text(l10n.pinnedItemsCount
-            .replaceFirst('{count}', pinnedCollectionModel.pinned.length.toString())),
+        subtitle: Text(
+          l10n.pinnedItemsCount(pinnedCollectionModel.pinned.length.toString()),
+        ),
         trailing: PopupMenuButton(
           itemBuilder: (context) {
             return [
@@ -379,9 +390,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
-                                      msg: l10n.updatedToCollectionName
-                                          .replaceFirst('{collectionName}',
-                                              pinnedCollectionModel.name),
+                                      msg: l10n.updatedToCollectionName(
+                                        pinnedCollectionModel.name,
+                                      ),
                                     );
                                   },
                                   label: Text(l10n.saveButtonLabel),
@@ -428,15 +439,20 @@ class _CollectionPageState extends State<CollectionPage> {
                   await _fetchData();
 
                   Fluttertoast.showToast(
-                    msg: l10n.collectionNameDeleted.replaceFirst(
-                        '{collectionName}', pinnedCollectionModel.name),
+                    msg: l10n.collectionNameDeleted(pinnedCollectionModel.name),
                   );
                 },
                 child: Row(
                   children: [
-                    const Icon(FluentIcons.delete_24_regular, color: Colors.red),
+                    const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.red,
+                    ),
                     const Gap(8),
-                    Text(l10n.deleteMenu, style: const TextStyle(color: Colors.red)),
+                    Text(
+                      l10n.deleteMenu,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ],
                 ),
               ),
@@ -460,7 +476,9 @@ class _CollectionPageState extends State<CollectionPage> {
   }
 
   Widget _getNoteCollectionWidget(
-      NoteCollectionModel noteCollectionModel, AppLocalizations l10n) {
+    NoteCollectionModel noteCollectionModel,
+    AppLocalizations l10n,
+  ) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       shape: RoundedRectangleBorder(
@@ -481,8 +499,9 @@ class _CollectionPageState extends State<CollectionPage> {
           noteCollectionModel.name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        subtitle: Text(l10n.notesCount
-            .replaceFirst('{count}', noteCollectionModel.notes.length.toString())),
+        subtitle: Text(
+          l10n.notesCount(noteCollectionModel.notes.length.toString()),
+        ),
         trailing: PopupMenuButton(
           itemBuilder: (context) {
             return [
@@ -524,9 +543,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
-                                      msg: l10n.updatedToCollectionName
-                                          .replaceFirst('{collectionName}',
-                                              noteCollectionModel.name),
+                                      msg: l10n.updatedToCollectionName(
+                                        noteCollectionModel.name,
+                                      ),
                                     );
                                   },
                                   label: Text(l10n.saveButtonLabel),
@@ -573,15 +592,20 @@ class _CollectionPageState extends State<CollectionPage> {
                   await _fetchData();
 
                   Fluttertoast.showToast(
-                    msg: l10n.collectionNameDeleted.replaceFirst(
-                        '{collectionName}', noteCollectionModel.name),
+                    msg: l10n.collectionNameDeleted(noteCollectionModel.name),
                   );
                 },
                 child: Row(
                   children: [
-                    const Icon(FluentIcons.delete_24_regular, color: Colors.red),
+                    const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.red,
+                    ),
                     const Gap(8),
-                    Text(l10n.deleteMenu, style: const TextStyle(color: Colors.red)),
+                    Text(
+                      l10n.deleteMenu,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ],
                 ),
               ),
@@ -609,22 +633,22 @@ enum CollectionType { pinned, notes }
 extension SortingMethodsTypeExtension on SortingMethodsType {
   String toReadableString(AppLocalizations l10n) {
     switch (this) {
-      case SortingMethodsType.byNameAsc:
+      case SortingMethodsType.byNameAtoZ:
         return l10n.sortingByNameAsc;
-      case SortingMethodsType.byNameDesc:
+      case SortingMethodsType.byNameZtoA:
         return l10n.sortingByNameDesc;
-      case SortingMethodsType.byDateNewest:
+      case SortingMethodsType.byCreateDateAscending:
         return l10n.sortingByDateNewest;
-      case SortingMethodsType.byDateOldest:
+      case SortingMethodsType.byCreateDateDescending:
         return l10n.sortingByDateOldest;
-      case SortingMethodsType.byColor:
-        return l10n.sortingByColor;
-      case SortingMethodsType.itemCountAsc:
+      case SortingMethodsType.byElementNumberAscending:
         return l10n.sortingByItemCountAsc;
-      case SortingMethodsType.itemCountDesc:
+      case SortingMethodsType.byElementNumberDescending:
         return l10n.sortingByItemCountDesc;
-      default:
-        return "";
+      case SortingMethodsType.byUpdateDateAscending:
+        return l10n.sortingByDateNewest;
+      case SortingMethodsType.byUpdateDateDescending:
+        return l10n.sortingByDateOldest;
     }
   }
 }

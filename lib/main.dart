@@ -1,6 +1,6 @@
 import "dart:convert";
 import "dart:io";
-
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -34,7 +34,6 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:window_manager/window_manager.dart";
@@ -192,7 +191,8 @@ class MyApp extends StatelessWidget {
             supportedLocales: const [
               Locale('en'), // English
             ],
-            onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+            onGenerateTitle:
+                (context) => AppLocalizations.of(context)!.appTitle,
             theme: ThemeData(
               brightness: Brightness.light,
               fontFamily: "NotoSans",

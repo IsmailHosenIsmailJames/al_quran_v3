@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
@@ -20,7 +21,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 import "package:visibility_detector/visibility_detector.dart";
@@ -388,7 +388,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               semanticChildCount: pagesInfoWithSurahMetaData.length,
 
               itemBuilder: (context, index) {
-                return getElementWidget(index);
+                return getElementWidget(l10n, index);
               },
             ),
 
@@ -404,7 +404,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
     );
   }
 
-  Widget getElementWidget(int index) {
+  Widget getElementWidget(AppLocalizations l10n, int index) {
     var current = pagesInfoWithSurahMetaData[index];
     if (current.runtimeType == SurahHeaderInfoModel) {
       return SurahInfoHeaderBuilder(headerInfoModel: current);

@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
@@ -13,6 +14,7 @@ import "../quran_script/script_processor.dart";
 ScreenshotController screenshotController = ScreenshotController();
 
 Widget getAyahCardForShareAsImage(
+  AppLocalizations l10n,
   bool showMacOsWindowLikeIcon,
   String ayahKey,
   SurahInfoModel surahInfoModel,
@@ -96,9 +98,9 @@ Widget getAyahCardForShareAsImage(
           ),
         ),
         const Gap(15),
-        const Text(
-          "Translation:",
-          style: TextStyle(fontSize: 12, color: Colors.grey),
+        Text(
+          l10n.translationLabelColon,
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
         Html(data: translation),
         keepFootNote ? const Gap(10) : const Gap(0),

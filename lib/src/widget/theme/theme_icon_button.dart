@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
@@ -9,7 +10,7 @@ Widget themeIconButton(BuildContext context) =>
         return IconButton(
           style: IconButton.styleFrom(backgroundColor: state.primaryShade100),
           color: state.primary,
-          tooltip: "Change Theme",
+          tooltip: AppLocalizations.of(context)!.changeThemeTooltip,
           onPressed: () {
             final themeController = context.read<ThemeCubit>();
             if (state.themeMode == ThemeMode.dark) {

@@ -320,5 +320,17 @@
   "ishaIntervalParam": "IshaInterval",
   "maghribAngleParam": "MaghribAngle",
   "selectCalculationMethodTitle": "Select Calculation Method",
-  "previewLabel": "Preview"
+  "previewLabel": "Preview",
+  "playAudioLabel": "Play Audio",
+  "verseCountLabel": "Verse Count: ",
+  "moreInfoLabel": "more info",
+  "changeThemeTooltip": "Change Theme",
+  "quranSearchTitle": "Quran Search",
+  "searchHint": "Search",
+  "searchInLabel": "Search In",
+  "searchByLabel": "Search By",
+  "searchNowButtonLabel": "Search Now",
+  "searchResultTitle": "Search Result",
+  "underDevelopmentLabel": "Under Development"
+ 
 }

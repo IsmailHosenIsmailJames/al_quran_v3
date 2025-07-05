@@ -1,9 +1,9 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:device_info_plus/device_info_plus.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
@@ -40,7 +40,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 const Gap(10),
                 Text(
                   l10n.drawerBugReport, // Re-use existing key
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
@@ -81,7 +84,8 @@ Future<void> showBugReportDialog(BuildContext context) async {
               onTap: () async {
                 final Uri emailLaunchUri = Uri(
                   scheme: "mailto",
-                  path: "md.ismailhosenismailjames@gmail.com", // This email should probably not be hardcoded
+                  path:
+                      "md.ismailhosenismailjames@gmail.com", // This email should probably not be hardcoded
                   query: _encodeQueryParameters(<String, String>{
                     "subject": l10n.bugReportEmailSubject,
                     "body":
@@ -133,7 +137,10 @@ String? _encodeQueryParameters(Map<String, String> params) {
       .join("&");
 }
 
-Future<String> _getDeviceInfoString(DeviceInfoPlugin deviceInfo, AppLocalizations l10n) async {
+Future<String> _getDeviceInfoString(
+  DeviceInfoPlugin deviceInfo,
+  AppLocalizations l10n,
+) async {
   try {
     if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
@@ -157,7 +164,7 @@ Future<String> _getDeviceInfoString(DeviceInfoPlugin deviceInfo, AppLocalization
       }
     }
   } catch (e) {
-    return l10n.errorGettingDeviceInfo.replaceFirst('{error}', e.toString());
+    return l10n.errorGettingDeviceInfo(e.toString());
   }
   return l10n.unknownPlatform;
 }

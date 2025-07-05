@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -101,7 +102,7 @@ Widget getReciterWidget({
             if (audioTabScreenState.bio != null)
               Row(
                 children: [
-                  const Text("More: "),
+                  Text(AppLocalizations.of(context)!.reciterMoreInfoLabel),
                   SizedBox(
                     height: 20,
                     child: TextButton(

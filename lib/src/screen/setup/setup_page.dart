@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
@@ -31,7 +32,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
@@ -121,7 +121,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          downloadResources(context.read<ResourcesProgressCubitCubit>().state, l10n);
+          downloadResources(
+            context.read<ResourcesProgressCubitCubit>().state,
+            l10n,
+          );
         },
         tooltip: l10n.saveAndDownloadTooltip,
         backgroundColor: themeState.primary,
@@ -250,7 +253,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text(l10n.quranTranslationBookLabel, style: titleStyle),
+                            Text(
+                              l10n.quranTranslationBookLabel,
+                              style: titleStyle,
+                            ),
                           ],
                         ),
 
@@ -262,7 +268,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           builder: (context, resourcesProcessState) {
                             return DropdownButtonFormField(
                               items: getQuranTranslationBookDropDownList(
-                                resourcesProcessState, l10n
+                                resourcesProcessState,
+                                l10n,
                               ),
                               decoration: InputDecoration(
                                 hintText: l10n.selectTranslationBookHint,
@@ -304,7 +311,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               ),
                             ),
                             const Gap(8),
-                            Text(l10n.quranTafsirLanguageLabel, style: titleStyle),
+                            Text(
+                              l10n.quranTafsirLanguageLabel,
+                              style: titleStyle,
+                            ),
                           ],
                         ),
 
@@ -357,7 +367,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           builder: (context, processState) {
                             return DropdownButtonFormField(
                               items: getQuranTafsirBookDropDownList(
-                                processState, l10n
+                                processState,
+                                l10n,
                               ),
                               decoration: InputDecoration(
                                 hintText: l10n.selectTafsirBookHint,
@@ -437,7 +448,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
         processState.tafsirBookModel == null) {
-      Fluttertoast.showToast(msg: l10n.pleaseSelectOneValidator); // Re-using validator message for this
+      Fluttertoast.showToast(
+        msg: l10n.pleaseSelectOneValidator,
+      ); // Re-using validator message for this
     }
     if (fromKey.currentState?.validate() == true) {
       final userBox = Hive.box("user");
@@ -570,7 +583,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
     }
   }
 
-  Future<bool> downloadDefaultSegmentedQuranRecitation(AppLocalizations l10n) async {
+  Future<bool> downloadDefaultSegmentedQuranRecitation(
+    AppLocalizations l10n,
+  ) async {
     String url =
         ApisUrls.base +
         context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!;
@@ -611,7 +626,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
   QuranScriptType selectedScript = QuranScriptType.tajweed;
 
   List<DropdownMenuItem<TafsirBookModel>>? getQuranTafsirBookDropDownList(
-    ResourcesProgressCubitState processState, AppLocalizations l10n
+    ResourcesProgressCubitState processState,
+    AppLocalizations l10n,
   ) {
     List<DropdownMenuItem<TafsirBookModel>> items = [];
     if (selectableTafsirBook?.isEmpty ?? true) return null;
@@ -646,7 +662,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<DropdownMenuItem>? getQuranTafsirLanguageDropDownList(AppLocalizations l10n) {
+  List<DropdownMenuItem>? getQuranTafsirLanguageDropDownList(
+    AppLocalizations l10n,
+  ) {
     List<DropdownMenuItem> items = [];
     tafsirInformationWithScore.forEach((key, value) {
       items.add(
@@ -693,7 +711,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   ),
                 ),
               Text(e["Native"] ?? ""),
-              ...getSupportInfoForLanguageWidget(key: e["English"] ?? "", l10n: l10n),
+              ...getSupportInfoForLanguageWidget(
+                key: e["English"] ?? "",
+                l10n: l10n,
+              ),
             ],
           ),
         ),
@@ -702,7 +723,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   List<DropdownMenuItem>? getQuranTranslationBookDropDownList(
-    ResourcesProgressCubitState resourcesProcessState, AppLocalizations l10n
+    ResourcesProgressCubitState resourcesProcessState,
+    AppLocalizations l10n,
   ) {
     List<DropdownMenuItem<TranslationBookModel>> items = [];
     if (selectableTranslationBook?.isEmpty ?? true) return null;
@@ -737,7 +759,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<DropdownMenuItem> getQuranTranslationLanguageDropDownList(AppLocalizations l10n) {
+  List<DropdownMenuItem> getQuranTranslationLanguageDropDownList(
+    AppLocalizations l10n,
+  ) {
     List<DropdownMenuItem> items = [];
     translationResources.forEach((key, value) {
       items.add(
@@ -758,7 +782,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ),
                   ),
                 Text(languageNativeNames[key.toLowerCase()] ?? ""),
-                ...getSupportInfoForLanguageWidget(key: key.toLowerCase(), l10n: l10n),
+                ...getSupportInfoForLanguageWidget(
+                  key: key.toLowerCase(),
+                  l10n: l10n,
+                ),
               ],
             ),
           ),
@@ -768,11 +795,15 @@ class _AppSetupPageState extends State<AppSetupPage> {
     return items;
   }
 
-  List<Widget> getSupportInfoForLanguageWidget({required String key, required AppLocalizations l10n}) {
+  List<Widget> getSupportInfoForLanguageWidget({
+    required String key,
+    required AppLocalizations l10n,
+  }) {
     return [
       if (doesHaveFootNote(key.toLowerCase())) getFootNoteTag(l10n),
       if (doesHaveTafsirSupport(key.toLowerCase())) getTafsirTag(l10n),
-      if (doesHaveWordByWordTranslation(key.toLowerCase())) getWordByWordTag(l10n),
+      if (doesHaveWordByWordTranslation(key.toLowerCase()))
+        getWordByWordTag(l10n),
     ];
   }
 
@@ -789,7 +820,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       children: [
         const Icon(Icons.done_rounded, color: Colors.white, size: 15),
         const Gap(5),
-        Text(l10n.footnoteTag, style: const TextStyle(color: Colors.white, fontSize: 12)),
+        Text(
+          l10n.footnoteTag,
+          style: const TextStyle(color: Colors.white, fontSize: 12),
+        ),
       ],
     ),
   );
@@ -807,7 +841,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       children: [
         const Icon(Icons.done_rounded, color: Colors.white, size: 15),
         const Gap(5),
-        Text(l10n.tafsirTag, style: const TextStyle(color: Colors.white, fontSize: 12)),
+        Text(
+          l10n.tafsirTag,
+          style: const TextStyle(color: Colors.white, fontSize: 12),
+        ),
       ],
     ),
   );
@@ -866,7 +903,10 @@ bool doesHaveTafsirSupport(String language) {
   return doesHaveTafsirSupport;
 }
 
-Widget getScriptSelectionSegmentedButtons(BuildContext context, AppLocalizations l10n) {
+Widget getScriptSelectionSegmentedButtons(
+  BuildContext context,
+  AppLocalizations l10n,
+) {
   return BlocBuilder<ThemeCubit, ThemeState>(
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(

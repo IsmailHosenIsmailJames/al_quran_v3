@@ -1,9 +1,9 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/resources/list_of_methods.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/prayers/prayer_calculation_method_info_widget.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 Future<void> showCalculationMethodPopup(
   BuildContext context,
@@ -21,7 +21,10 @@ Future<void> showCalculationMethodPopup(
             children: [
               Text(
                 l10n.selectCalculationMethodTitle,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const Divider(),
               Expanded(

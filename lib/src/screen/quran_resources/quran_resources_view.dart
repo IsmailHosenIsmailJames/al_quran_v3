@@ -1,9 +1,9 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/quran_resources/tafsir_resources_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/translation_resources_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/word_by_word_resources_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranResourcesView extends StatefulWidget {
@@ -26,7 +26,7 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
     pagesName = [
       l10n.translationTabLabel,
       l10n.tafsirTabLabel,
-      l10n.wordByWordTabLabel
+      l10n.wordByWordTabLabel,
     ];
     _tabController = TabController(length: pagesName.length, vsync: this);
   }
@@ -48,10 +48,9 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
       pagesName = [
         l10n.translationTabLabel,
         l10n.tafsirTabLabel,
-        l10n.wordByWordTabLabel
+        l10n.wordByWordTabLabel,
       ];
     }
-
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.quranResourcesTitle)),

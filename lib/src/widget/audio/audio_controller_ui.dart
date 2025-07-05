@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -14,7 +15,6 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -317,14 +317,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     icon: const Icon(Icons.replay_5_rounded),
                   ),
                   BlocBuilder<PlayerStateCubit, PlayerState>(
-                    builder: (context, playerState) { // Renamed state to playerState to avoid conflict
+                    builder: (context, playerState) {
+                      // Renamed state to playerState to avoid conflict
                       return IconButton(
                         onPressed: () async {
                           AudioPlayerManager.audioPlayer.playing
                               ? AudioPlayerManager.audioPlayer.pause()
                               : AudioPlayerManager.audioPlayer.play();
                         },
-                        tooltip: playerState.isPlaying ? l10n.pauseTooltip : l10n.playTooltip,
+                        tooltip:
+                            playerState.isPlaying
+                                ? l10n.pauseTooltip
+                                : l10n.playTooltip,
                         iconSize: 40,
                         style: IconButton.styleFrom(
                           padding: const EdgeInsets.all(5),

@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
@@ -8,7 +9,6 @@ import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -225,7 +225,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentPrayerType.name.capitalize, // Assuming prayer names don't need full localization beyond capitalization
+                          currentPrayerType
+                              .name
+                              .capitalize, // Assuming prayer names don't need full localization beyond capitalization
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -249,7 +251,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         min: -60.0,
                         max: 60.0,
                         divisions: 120,
-                        label: _getAdjustmentText(currentTimeInMinutes.round(), l10n),
+                        label: _getAdjustmentText(
+                          currentTimeInMinutes.round(),
+                          l10n,
+                        ),
                         activeColor: themeState.primary,
                         inactiveColor: themeState.primaryShade300,
                         onChanged: (double value) {
@@ -315,7 +320,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      currentPrayerType.name.capitalize, // Assuming prayer names don't need full localization beyond capitalization
+                      currentPrayerType
+                          .name
+                          .capitalize, // Assuming prayer names don't need full localization beyond capitalization
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -338,7 +345,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               ),
                               const Gap(10),
                               Text(
-                                PrayerReminderType.values[index] == PrayerReminderType.notification ? l10n.reminderTypeNotification : l10n.reminderTypeAlarm,
+                                PrayerReminderType.values[index] ==
+                                        PrayerReminderType.notification
+                                    ? l10n.reminderTypeNotification
+                                    : l10n.reminderTypeAlarm,
                               ),
                               const Gap(7),
                             ],
@@ -366,7 +376,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
   String _getAdjustmentText(int minutes, AppLocalizations l10n) {
     if (minutes == 0) return l10n.atPrayerTimeLabel;
-    if (minutes < 0) return l10n.minutesBeforePrayerLabel.replaceFirst("{minutes}", minutes.abs().toString());
-    return l10n.minutesAfterPrayerLabel.replaceFirst("{minutes}", minutes.toString());
+    if (minutes < 0)
+      return l10n.minutesBeforePrayerLabel(minutes.abs().toString());
+    return l10n.minutesAfterPrayerLabel(minutes.toString());
   }
 }

@@ -1,7 +1,7 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -120,9 +120,7 @@ class AboutAppPage extends StatelessWidget {
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            Text(
-              l10n.coreFeaturesDescription,
-            ),
+            Text(l10n.coreFeaturesDescription),
             const Gap(15),
             FeatureTile(
               icon: Icons.access_time_filled_rounded,
@@ -189,9 +187,7 @@ class AboutAppPage extends StatelessWidget {
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            Text(
-              l10n.languageSupportDescription,
-            ),
+            Text(l10n.languageSupportDescription),
             const Gap(15),
             Wrap(
               spacing: 8.0,
@@ -221,9 +217,7 @@ class AboutAppPage extends StatelessWidget {
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            Text(
-              l10n.technologyResourcesDescription,
-            ),
+            Text(l10n.technologyResourcesDescription),
             const Gap(15),
             FeatureTile(
               icon: Icons.flutter_dash_rounded,
@@ -257,10 +251,16 @@ class AboutAppPage extends StatelessWidget {
             const Gap(15),
             Text(l10n.crossPlatformSupportPlatformsDescription),
             const Gap(15),
-            PlatformTile(icon: SimpleIcons.android, title: l10n.platformAndroid),
+            PlatformTile(
+              icon: SimpleIcons.android,
+              title: l10n.platformAndroid,
+            ),
             PlatformTile(icon: SimpleIcons.ios, title: l10n.platformIOS),
             PlatformTile(icon: SimpleIcons.macos, title: l10n.platformMacOS),
-            PlatformTile(icon: SimpleIcons.googlechrome, title: l10n.platformWeb),
+            PlatformTile(
+              icon: SimpleIcons.googlechrome,
+              title: l10n.platformWeb,
+            ),
             PlatformTile(icon: SimpleIcons.linux, title: l10n.platformLinux),
             PlatformTile(
               alterNative: SvgPicture.string(
