@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
@@ -21,6 +22,7 @@ import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -404,8 +406,8 @@ Row getToolbarWidget(
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
         child: Text(
           showFullKey == true
-              ? "${surahInfoModel.nameSimple}\nAyah: $ayahKey"
-              : ayahNumber.toString(),
+              ? "${surahInfoModel.nameSimple}\nAyah: ${localizedNumber(context, ayahKey.split(":").first.toInt())}:${localizedNumber(context, ayahNumber)}"
+              : localizedNumber(context, ayahNumber),
         ),
       ),
       const Spacer(),

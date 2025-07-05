@@ -150,6 +150,12 @@ abstract class AppLocalizations {
   /// **'Ruku'**
   String get ruku;
 
+  /// No description provided for @languageSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Settings'**
+  String get languageSettings;
+
   /// No description provided for @surahAyah.
   ///
   /// In en, this message translates to:
@@ -1943,6 +1949,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.'**
   String get lifetimePromiseDescription;
+
+  /// No description provided for @fajr.
+  ///
+  /// In en, this message translates to:
+  /// **'Fajr'**
+  String get fajr;
+
+  /// No description provided for @sunrise.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunrise'**
+  String get sunrise;
+
+  /// No description provided for @dhuhr.
+  ///
+  /// In en, this message translates to:
+  /// **'Dhuhr'**
+  String get dhuhr;
+
+  /// No description provided for @asr.
+  ///
+  /// In en, this message translates to:
+  /// **'Asr'**
+  String get asr;
+
+  /// No description provided for @maghrib.
+  ///
+  /// In en, this message translates to:
+  /// **'Maghrib'**
+  String get maghrib;
+
+  /// No description provided for @isha.
+  ///
+  /// In en, this message translates to:
+  /// **'Isha'**
+  String get isha;
+
+  /// No description provided for @midnight.
+  ///
+  /// In en, this message translates to:
+  /// **'Midnight'**
+  String get midnight;
 }
 
 class _AppLocalizationsDelegate

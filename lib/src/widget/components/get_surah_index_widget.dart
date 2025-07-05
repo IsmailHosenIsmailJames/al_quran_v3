@@ -1,6 +1,8 @@
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:intl/intl.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 
@@ -31,7 +33,9 @@ SizedBox getIndexNumberWidget(
           child: Center(
             child: FittedBox(
               child: Text(
-                index.toString(),
+                NumberFormat.decimalPattern(
+                  context.read<LanguageCubit>().state.locale.languageCode,
+                ).format(index),
                 style: TextStyle(
                   fontSize: 16,
                   color: textColor,
