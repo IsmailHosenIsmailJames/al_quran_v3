@@ -1,4 +1,5 @@
 {
+  "@@locale": "ta",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "{ayahKey} வசனத்திற்கு தஃப்ஸீர் இல்லை",
   "tafsirFoundAt": "தஃப்ஸீர் இங்கே காணப்படும் : {anotherAyahLinkKey}",

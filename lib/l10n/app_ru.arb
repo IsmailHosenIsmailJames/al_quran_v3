@@ -1,4 +1,5 @@
 {
+  "@@locale": "ru",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Тафсир для {ayahKey} недоступен",
   "tafsirFoundAt": "Тафсир находится в: {anotherAyahLinkKey}",

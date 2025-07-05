@@ -1,4 +1,5 @@
 {
+  "@@locale": "ja",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "{ayahKey} のタフスィールはありません",
   "tafsirFoundAt": "タフスィールはこちらにあります：{anotherAyahLinkKey}",

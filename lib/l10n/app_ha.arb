@@ -1,4 +1,5 @@
 {
+  "@@locale": "ha",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Babu Tafsiri don {ayahKey}",
   "tafsirFoundAt": "Za a samu Tafsiri a: {anotherAyahLinkKey}",

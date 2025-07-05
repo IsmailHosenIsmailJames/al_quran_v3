@@ -1,4 +1,5 @@
 {
+  "@@locale": "ku",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Tefsîr ji bo {ayahKey} tune ye",
   "tafsirFoundAt": "Tefsîr li vir tê dîtin: {anotherAyahLinkKey}",

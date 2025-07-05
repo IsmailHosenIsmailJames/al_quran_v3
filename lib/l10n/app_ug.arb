@@ -1,4 +1,5 @@
 {
+  "@@locale": "ug",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "{ayahKey} ئۈچۈن تەپسىر يوق",
   "tafsirFoundAt": "تەپسىرنى بۇ يەردىن تاپالايسىز: {anotherAyahLinkKey}",

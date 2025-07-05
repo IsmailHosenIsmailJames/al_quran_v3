@@ -1,4 +1,5 @@
 {
+  "@@locale": "vi",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
   "tafsirNotAvailable": "Tafsir không có sẵn cho {ayahKey}",
   "tafsirFoundAt": "Tafsir có thể được tìm thấy tại: {anotherAyahLinkKey}",
