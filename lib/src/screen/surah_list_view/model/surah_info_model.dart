@@ -2,7 +2,6 @@ import "dart:convert";
 
 class SurahInfoModel {
   final int id;
-  final String nameArabic;
   final int revelationOrder;
   final String revelationPlace;
   final int versesCount;
@@ -10,7 +9,6 @@ class SurahInfoModel {
 
   SurahInfoModel({
     required this.id,
-    required this.nameArabic,
     required this.revelationOrder,
     required this.revelationPlace,
     required this.versesCount,
@@ -19,7 +17,6 @@ class SurahInfoModel {
 
   SurahInfoModel copyWith({
     int? id,
-    String? nameArabic,
     int? revelationOrder,
     String? revelationPlace,
     int? versesCount,
@@ -30,7 +27,6 @@ class SurahInfoModel {
     revelationPlace: revelationPlace ?? this.revelationPlace,
     versesCount: versesCount ?? this.versesCount,
     pagesRange: pagesRange ?? this.pagesRange,
-    nameArabic: nameArabic ?? this.nameArabic,
   );
 
   factory SurahInfoModel.fromJson(String str) =>
@@ -40,19 +36,17 @@ class SurahInfoModel {
 
   factory SurahInfoModel.fromMap(Map<String, dynamic> json) => SurahInfoModel(
     id: json["id"],
-    revelationOrder: json["revelation_order"],
-    revelationPlace: json["revelation_place"],
-    versesCount: json["verses_count"],
-    pagesRange: json["pages_range"],
-    nameArabic: json["name_arabic"],
+    revelationOrder: json["ro"], // ro -> revelation_order
+    revelationPlace: json["rp"], // rp -> revelation_place
+    versesCount: json["vc"], // vc -> verses_count
+    pagesRange: json["pr"], // pr -> pages_range
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
-    "revelation_order": revelationOrder,
-    "revelation_place": revelationPlace,
-    "verses_count": versesCount,
-    "pages_range": pagesRange,
-    "name_arabic": nameArabic,
+    "ro": revelationOrder, // ro -> revelation_order
+    "rp": revelationPlace, // rp -> revelation_place
+    "vc": versesCount, // vc -> verses_count
+    "pr": pagesRange, // pr -> pages_range
   };
 }

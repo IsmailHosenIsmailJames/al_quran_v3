@@ -52,6 +52,7 @@ Map<String, dynamic> metaDataRub = {};
 Map<String, dynamic> metaDataRuku = {};
 Map<String, dynamic> metaDataSajda = {};
 Map<String, dynamic> metaDataSurah = {};
+Map<String, dynamic> surahNameLocalization = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -116,6 +117,12 @@ Future<void> main() async {
     await rootBundle.loadString("assets/meta_data/Surah.json"),
   );
 
+  surahNameLocalization = jsonDecode(
+    await rootBundle.loadString(
+      "assets/meta_data/surah_name_localization.json",
+    ),
+  );
+
   await ThemeFunctions.initThemeFunction();
 
   if (Platform.isIOS || Platform.isAndroid) {
@@ -140,7 +147,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   final Locale initialLocale;
+
   const MyApp({super.key, required this.initialLocale});
+
   @override
   Widget build(BuildContext context) {
     final PageTransitionsTheme pageTransitionsTheme =
