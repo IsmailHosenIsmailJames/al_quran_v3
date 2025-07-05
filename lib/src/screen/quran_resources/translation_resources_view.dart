@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
@@ -38,6 +39,7 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
@@ -94,6 +96,7 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
                     }
 
                     return _buildBookListTile(
+                      appLocalizations,
                       bookData,
                       isSelected,
                       needDownload,
@@ -109,6 +112,7 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
   }
 
   Widget _buildBookListTile(
+    AppLocalizations appLocalizations,
     TranslationBookModel translationBook,
     bool isSelected,
     bool needDownload,
@@ -154,7 +158,10 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
           QuranTranslationFunction.setTranslationSelection(translationBook);
           _refreshData();
         } else if (isSelected) {
-          log("Already Selected: ${translationBook.name}");
+          log(
+            appLocalizations.alreadySelected(translationBook.name),
+            name: "TranslationResourcesViewUI",
+          );
         } else {
           setState(() {
             downloadingData = translationBook;

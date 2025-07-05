@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -25,6 +26,7 @@ class _TafsirViewState extends State<TafsirView> {
   bool isLinkedToAnother = false;
   String anotherAyahLinkKey = "";
   late SurahInfoModel surahInfoModel;
+  late AppLocalizations appLocalizations;
   @override
   void initState() {
     getTafsirFromDb(widget.ayahKey).then((value) {
@@ -48,18 +50,23 @@ class _TafsirViewState extends State<TafsirView> {
 
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
         title: Text(
-          "${surahInfoModel.nameSimple} ( ${surahInfoModel.nameArabic} ) - ${widget.ayahKey} ",
+          appLocalizations.tafsirAppBarTitle(
+            surahInfoModel.nameSimple,
+            surahInfoModel.nameArabic,
+            widget.ayahKey,
+          ),
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
       ),
       body:
           tafsirDataString.isEmpty
               ? Center(
-                child: Text("Tafsir is not available for ${widget.ayahKey}"),
+                child: Text(appLocalizations.tafsirNotAvailable(widget.ayahKey)),
               )
               : isLinkedToAnother
               ? Column(
@@ -67,7 +74,7 @@ class _TafsirViewState extends State<TafsirView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text("Tafsir will found at : $anotherAyahLinkKey"),
+                    child: Text(appLocalizations.tafsirFoundAt(anotherAyahLinkKey)),
                   ),
                   const Gap(20),
                   Center(
@@ -85,7 +92,7 @@ class _TafsirViewState extends State<TafsirView> {
                           },
                         );
                       },
-                      child: Text("Jump to $anotherAyahLinkKey"),
+                      child: Text(appLocalizations.tafsirJumpTo(anotherAyahLinkKey)),
                     ),
                   ),
                 ],

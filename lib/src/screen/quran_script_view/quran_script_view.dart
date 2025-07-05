@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
@@ -46,6 +47,7 @@ class QuranScriptView extends StatefulWidget {
 class _PageByPageViewState extends State<QuranScriptView> {
   List<dynamic> pagesInfoWithSurahMetaData = [];
   List allAyahsKey = [];
+  late AppLocalizations appLocalizations;
   @override
   void initState() {
     int? startAyahNumber = convertKeyToAyahNumber(widget.startKey);
@@ -270,6 +272,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    appLocalizations = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
@@ -285,8 +288,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
             builder:
                 (context, state) => Text(
                   state.surahInfoModel?.nameSimple == null
-                      ? ""
-                      : "${state.surahInfoModel?.nameSimple}",
+                      ? "" : appLocalizations.surahName(
+                        state.surahInfoModel!.nameSimple,
+                      ),
                   style: const TextStyle(fontSize: 18),
                 ),
           ),
@@ -529,7 +533,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   Row(
                     children: [
                       const Gap(15),
-                      const Text("Page: "),
+                      Text(appLocalizations.page),
                       Text(
                         (current as PageInfoModel).pageNumber.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),

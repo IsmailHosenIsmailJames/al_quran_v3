@@ -1,0 +1,141 @@
+{
+    "@@locale": "en",
+    "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
+    "@tafsirAppBarTitle": {
+        "placeholders": {
+            "nameSimple": {
+                "type": "String"
+            },
+            "nameArabic": {
+                "type": "String"
+            },
+            "ayahKey": {
+                "type": "String"
+            }
+        }
+    },
+    "tafsirNotAvailable": "Tafsir is not available for {ayahKey}",
+    "@tafsirNotAvailable": {
+        "placeholders": {
+            "ayahKey": {
+                "type": "String"
+            }
+        }
+    },
+    "tafsirFoundAt": "Tafsir will found at : {anotherAyahLinkKey}",
+    "@tafsirFoundAt": {
+        "placeholders": {
+            "anotherAyahLinkKey": {
+                "type": "String"
+            }
+        }
+    },
+    "tafsirJumpTo": "Jump to {anotherAyahLinkKey}",
+    "@tafsirJumpTo": {
+        "placeholders": {
+            "anotherAyahLinkKey": {
+                "type": "String"
+            }
+        }
+    },
+    "hizb": "Hizb",
+    "juz": "Juz",
+    "page": "Page",
+    "ruku": "Ruku",
+    "surahAyah": "{surahName} {ayahKey}",
+    "@surahAyah": {
+        "placeholders": {
+            "surahName": {
+                "type": "String"
+            },
+            "ayahKey": {
+                "type": "String"
+            }
+        }
+    },
+    "ayahsCount": "{count} Ayahs",
+    "@ayahsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "saveAndDownload": "Save and Download",
+    "appLanguage": "App Language",
+    "selectAppLanguage": "Select app language...",
+    "pleaseSelectOne": "Please select one",
+    "quranTranslationLanguage": "Quran Translation Language",
+    "selectTranslationLanguage": "Select translation language...",
+    "quranTranslationBook": "Quran Translation Book",
+    "selectTranslationBook": "Select translation book...",
+    "quranTafsirLanguage": "Quran Tafsir Language",
+    "selectTafsirLanguage": "Select tafsir language...",
+    "quranTafsirBook": "Quran Tafsir Book",
+    "selectTafsirBook": "Select tafsir book...",
+    "quranScriptAndStyle": "Quran Script & Style",
+    "justAMoment": "Just a moment...",
+    "processProgress": "{processName} {percentage}",
+    "@processProgress": {
+        "placeholders": {
+            "processName": {
+                "type": "String"
+            },
+            "percentage": {
+                "type": "String"
+            }
+        }
+    },
+    "success": "Success",
+    "retry": "Retry",
+    "unableToDownloadResources": "Unable to download resources...\nSomething went wrong",
+    "downloadingSegmentedQuranRecitation": "Downloading Segmented Quran Recitation",
+    "processingSegmentedQuranRecitation": "Processing Segmented Quran Recitation",
+    "footnote": "Footnote",
+    "tafsir": "Tafsir",
+    "wordByWord": "Word by Word",
+    "pleaseSelectRequiredOption": "Please select required option",
+    "rememberHomeTab": "Remember Home Tab",
+    "rememberHomeTabSubtitle": "App will remember the last opened tab in the home screen.",
+    "wakeLock": "Wake Lock",
+    "wakeLockSubtitle": "Prevent the screen from turning off automatically.",
+    "settings": "Settings",
+    "appTheme": "App Theme",
+    "quranStyle": "Quran Style",
+    "audioCached": "Audio Cached",
+    "others": "Others",
+    "quranTranslationAyahOneMustEnabled": "Quran|Translation|Ayah, One Must Enabled",
+    "quranFontSize": "Quran Font Size",
+    "quranLineHeight": "Quran Line Height",
+    "translationAndTafsirFontSize": "Translation & Tafsir Font Size",
+    "quranAyah": "Quran Ayah",
+    "translation": "Translation",
+    "topToolbar": "Top Toolbar",
+    "keepOpenWordByWord": "Keep Open Word By Word",
+    "wordByWordHighlight": "Word By Word Highlight",
+    "quranScriptSettings": "Quran Script Settings",
+    "surahName": "{nameSimple}",
+    "@surahName": {
+        "placeholders": {
+            "nameSimple": {
+                "type": "String"
+            }
+        }
+    },
+    "pageNumber": "Page: ",
+    "quranResources": "Quran Resources",
+    "alreadySelected": "Language '{name}' is already selected.",
+    "@alreadySelected": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "unableToGetCompassData": "Unable to get compass data",
+    "deviceDoesNotHaveSensors": "Device does not have sensors !",
+    "north": "N",
+    "east": "E",
+    "south": "S",
+    "west": "W"
+}

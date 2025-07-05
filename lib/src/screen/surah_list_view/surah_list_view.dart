@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -16,6 +17,7 @@ class SurahListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
@@ -125,7 +127,7 @@ class SurahListView extends StatelessWidget {
                           style: TextStyle(fontSize: 18, color: textColor),
                         ),
                         Text(
-                          "${surahInfoList[index].versesCount} Ayahs",
+                          appLocalizations.ayahsCount(surahInfoList[index].versesCount),
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light

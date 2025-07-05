@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:flutter/material.dart";
@@ -11,16 +12,18 @@ class OthersSettings extends StatefulWidget {
 }
 
 class _OthersSettingsState extends State<OthersSettings> {
+  late AppLocalizations appLocalizations;
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
     return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
       builder: (context, state) {
         return Column(
           children: [
             SwitchListTile(
-              title: const Text("Remember Home Tab"),
-              subtitle: const Text(
-                "App will remember the last opened tab in the home screen.",
+              title: Text(appLocalizations.rememberHomeTab),
+              subtitle: Text(
+                appLocalizations.rememberHomeTabSubtitle,
               ),
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
                 Set<WidgetState> states,
@@ -38,9 +41,9 @@ class _OthersSettingsState extends State<OthersSettings> {
               },
             ),
             SwitchListTile(
-              title: const Text("Wake Lock"),
-              subtitle: const Text(
-                "Prevent the screen from turning off automatically.",
+              title: Text(appLocalizations.wakeLock),
+              subtitle: Text(
+                appLocalizations.wakeLockSubtitle,
               ),
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
                 Set<WidgetState> states,
