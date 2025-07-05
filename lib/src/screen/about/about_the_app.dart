@@ -1,4 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
+import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
@@ -192,20 +194,14 @@ class AboutAppPage extends StatelessWidget {
             Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
-              children: [
-                Chip(label: Text(l10n.english)),
-                Chip(label: Text(l10n.arabic)),
-                Chip(label: Text(l10n.urdu)),
-                Chip(label: Text(l10n.french)),
-                Chip(label: Text(l10n.german)),
-                Chip(label: Text(l10n.spanish)),
-                Chip(label: Text(l10n.indonesian)),
-                Chip(label: Text(l10n.malay)),
-                Chip(label: Text(l10n.turkish)),
-                Chip(label: Text(l10n.bengali)),
-                Chip(label: Text(l10n.russian)),
-                // Add more as relevant
-              ],
+              children: List.generate(
+                usedAppLanguageMap.length,
+                (index) => Chip(
+                  label: Text(
+                    AppLanguage.fromMap(usedAppLanguageMap[index]).native,
+                  ),
+                ),
+              ),
             ),
             const Gap(30),
             const Divider(thickness: 1.5),

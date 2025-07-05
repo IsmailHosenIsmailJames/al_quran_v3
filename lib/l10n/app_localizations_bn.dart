@@ -935,39 +935,6 @@ class AppLocalizationsBn extends AppLocalizations {
       'এই অ্যাপ্লিকেশনটি বিশ্বব্যাপী দর্শকদের জন্য তৈরি করা হয়েছে এবং নিম্নলিখিত ভাষাগুলিকে সমর্থন করে (এবং আরও ভাষা ক্রমাগত যোগ করা হচ্ছে):';
 
   @override
-  String get english => 'ইংরেজি';
-
-  @override
-  String get arabic => 'আরবি';
-
-  @override
-  String get urdu => 'উর্দু';
-
-  @override
-  String get french => 'ফরাসি';
-
-  @override
-  String get german => 'জার্মান';
-
-  @override
-  String get spanish => 'স্প্যানিশ';
-
-  @override
-  String get indonesian => 'ইন্দোনেশিয়ান';
-
-  @override
-  String get malay => 'মালয়';
-
-  @override
-  String get turkish => 'তুর্কি';
-
-  @override
-  String get bengali => 'বাংলা';
-
-  @override
-  String get russian => 'রাশিয়ান';
-
-  @override
   String get technologyAndResources => 'প্রযুক্তি ও রিসোর্স';
 
   @override
