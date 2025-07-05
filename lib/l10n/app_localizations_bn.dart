@@ -45,6 +45,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get ruku => 'রুকু';
 
   @override
+  String get languageSettings => 'ভাষা সেটিংস';
+
+  @override
   String surahAyah(String surahName, String ayahKey) {
     return '$surahName $ayahKey';
   }
@@ -1030,4 +1033,25 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get lifetimePromiseDescription =>
       'আমি ব্যক্তিগতভাবে আমার সারাজীবন এই অ্যাপ্লিকেশনটির জন্য ক্রমাগত সমর্থন এবং রক্ষণাবেক্ষণ প্রদানের প্রতিশ্রুতি দিচ্ছি, ইনশাআল্লাহ। আমার লক্ষ্য হলো এই অ্যাপটি যাতে আগামী বছরগুলিতে উম্মাহর জন্য একটি উপকারী সম্পদ হিসেবে থাকে তা নিশ্চিত করা।';
+
+  @override
+  String get fajr => 'ফজর';
+
+  @override
+  String get sunrise => 'সূর্যোদয়';
+
+  @override
+  String get dhuhr => 'যোহর';
+
+  @override
+  String get asr => 'আসর';
+
+  @override
+  String get maghrib => 'মাগরিব';
+
+  @override
+  String get isha => 'ইশা';
+
+  @override
+  String get midnight => 'মধ্যরাত';
 }

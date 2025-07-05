@@ -7,10 +7,12 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
+import "../../functions/number_localization.dart";
 import "../../theme/controller/theme_cubit.dart";
 
 class HizbListView extends StatelessWidget {
@@ -38,6 +40,11 @@ class HizbListView extends StatelessWidget {
         controller: scrollController,
         itemCount: hizbInfoList.length,
         itemBuilder: (context, index) {
+          HizbModel current = hizbInfoList[index];
+          String firstKey = current.firstVerseKey;
+
+          int surahNumber = firstKey.split(":").first.toInt();
+          int ayahNumber = firstKey.split(":").last.toInt();
           return Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
             child: TextButton(
@@ -104,13 +111,8 @@ class HizbListView extends StatelessWidget {
                         const Gap(2),
                         Text(
                           appLocalizations.surahAyah(
-                            listOfSurahNameEnglish[int.parse(
-                                  hizbInfoList[index].firstVerseKey.split(
-                                    ':',
-                                  )[0],
-                                ) -
-                                1],
-                            hizbInfoList[index].firstVerseKey,
+                            "${listOfSurahNameEnglish[surahNumber - 1]} -",
+                            "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                           ),
                           style: TextStyle(
                             color:

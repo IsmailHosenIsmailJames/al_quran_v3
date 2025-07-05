@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/localizedPrayerName.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
@@ -225,7 +226,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentPrayerType.name.capitalize,
+                          localizedPrayerName(context, currentPrayerType),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -318,7 +319,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      currentPrayerType.name.capitalize,
+                      localizedPrayerName(context, currentPrayerType),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

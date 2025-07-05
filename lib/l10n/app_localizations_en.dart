@@ -45,6 +45,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ruku => 'Ruku';
 
   @override
+  String get languageSettings => 'Language Settings';
+
+  @override
   String surahAyah(String surahName, String ayahKey) {
     return '$surahName $ayahKey';
   }
@@ -1027,4 +1030,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get lifetimePromiseDescription =>
       'I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.';
+
+  @override
+  String get fajr => 'Fajr';
+
+  @override
+  String get sunrise => 'Sunrise';
+
+  @override
+  String get dhuhr => 'Dhuhr';
+
+  @override
+  String get asr => 'Asr';
+
+  @override
+  String get maghrib => 'Maghrib';
+
+  @override
+  String get isha => 'Isha';
+
+  @override
+  String get midnight => 'Midnight';
 }

@@ -4,6 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
@@ -17,6 +18,7 @@ import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
@@ -288,7 +290,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
             builder:
                 (context, state) => Text(
                   state.surahInfoModel?.nameSimple == null
-                      ? "" : appLocalizations.surahName(
+                      ? ""
+                      : appLocalizations.surahName(
                         state.surahInfoModel!.nameSimple,
                       ),
                   style: const TextStyle(fontSize: 18),
@@ -315,9 +318,16 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
                     value: state.dropdownAyahKey,
                     items: List.generate(allAyahsKey.length, (index) {
+                      List<String> ayahData = allAyahsKey[index]
+                          .toString()
+                          .split(":");
                       return DropdownMenuItem(
                         value: allAyahsKey[index],
-                        child: Center(child: Text(allAyahsKey[index])),
+                        child: Center(
+                          child: Text(
+                            "${localizedNumber(context, ayahData.first.toInt())}:${localizedNumber(context, ayahData.last.toInt())}",
+                          ),
+                        ),
                       );
                     }),
                     onChanged: (value) async {
@@ -535,7 +545,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
                       const Gap(15),
                       Text(appLocalizations.page),
                       Text(
-                        (current as PageInfoModel).pageNumber.toString(),
+                        " - ${localizedNumber(context, (current as PageInfoModel).pageNumber)}",
+
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const Gap(15),

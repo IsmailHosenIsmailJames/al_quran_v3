@@ -42,6 +42,7 @@
     "juz": "Juz",
     "page": "Page",
     "ruku": "Ruku",
+    "languageSettings" : "Language Settings",
     "surahAyah": "{surahName} {ayahKey}",
     "@surahAyah": {
         "placeholders": {
@@ -517,5 +518,12 @@
     "linux": "Linux",
     "windows": "Windows",
     "ourLifetimePromise": "Our Lifetime Promise",
-    "lifetimePromiseDescription": "I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come."
+    "lifetimePromiseDescription": "I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.",
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha",
+    "midnight": "Midnight"
 }

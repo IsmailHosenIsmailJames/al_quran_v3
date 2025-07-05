@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/functions/quran_resources/quran_translation_func
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
+import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -143,6 +144,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -163,6 +165,28 @@ class _AppDrawerState extends State<AppDrawer> {
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AppLanguageSettings(),
+                          ),
+                        );
+                      },
+                      leading: Icon(
+                        Icons.translate_rounded,
+                        color: themeState.primary,
+                      ),
+                      title: Text(
+                        l10n.languageSettings,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const Gap(5),
+                    ListTile(
+                      minTileHeight: 40,
+                      onTap: () async {
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -186,6 +210,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

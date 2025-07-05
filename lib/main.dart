@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:io";
 
+import 'package:al_quran_v3/l10n/app_localizations.dart';
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -14,8 +15,6 @@ import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.
 import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:al_quran_v3/l10n/app_localizations.dart';
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
@@ -36,6 +35,7 @@ import "package:alarm/alarm.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import 'package:flutter_localizations/flutter_localizations.dart';
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:window_manager/window_manager.dart";
@@ -190,7 +190,7 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 navigatorKey: navigatorKey,
                 debugShowCheckedModeBanner: false,
-                locale: Locale('bn'),
+                locale: languageState.locale,
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
