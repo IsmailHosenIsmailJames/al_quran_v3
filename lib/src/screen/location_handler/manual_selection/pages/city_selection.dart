@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
@@ -27,6 +28,7 @@ class _CitySelectionState extends State<CitySelection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SafeArea(
       child: Column(
         children: [
@@ -44,14 +46,14 @@ class _CitySelectionState extends State<CitySelection> {
                   icon: const Icon(Icons.arrow_back),
                 ),
                 const Gap(15),
-                const Text("Select Your City", style: TextStyle(fontSize: 20)),
+                Text(l10n.selectYourCity, style: const TextStyle(fontSize: 20)),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SearchBar(
-              hintText: "Search for a city",
+              hintText: l10n.searchForACity,
               controller: controller,
               onChanged: (value) {
                 setState(() {});
@@ -72,7 +74,7 @@ class _CitySelectionState extends State<CitySelection> {
             >(
               builder: (context, state) {
                 if (state.cityList == null) {
-                  return const Text("Something went wrong");
+                  return Text(l10n.somethingWentWrong);
                 }
 
                 return ListView.builder(

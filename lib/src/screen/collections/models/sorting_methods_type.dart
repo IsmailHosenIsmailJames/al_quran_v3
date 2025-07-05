@@ -1,3 +1,5 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
+
 enum SortingMethodsType {
   byNameAtoZ,
   byNameZtoA,
@@ -10,24 +12,24 @@ enum SortingMethodsType {
 }
 
 extension SortingMethodsTypeToString on SortingMethodsType {
-  String toReadableString() {
+  String toReadableString(AppLocalizations l10n) {
     switch (this) {
       case SortingMethodsType.byNameAtoZ:
-        return "Name A-Z";
+        return l10n.byNameAtoZ;
       case SortingMethodsType.byNameZtoA:
-        return "Name Z-A";
+        return l10n.byNameZtoA;
       case SortingMethodsType.byElementNumberAscending:
-        return "Element Number Ascending";
+        return l10n.byElementNumberAscending;
       case SortingMethodsType.byElementNumberDescending:
-        return "Element Number Descending";
+        return l10n.byElementNumberDescending;
       case SortingMethodsType.byUpdateDateAscending:
-        return "Update Date Ascending";
+        return l10n.byUpdateDateAscending;
       case SortingMethodsType.byUpdateDateDescending:
-        return "Update Date Descending";
+        return l10n.byUpdateDateDescending;
       case SortingMethodsType.byCreateDateAscending:
-        return "Create Date Ascending";
+        return l10n.byCreateDateAscending;
       case SortingMethodsType.byCreateDateDescending:
-        return "Create Date Descending";
+        return l10n.byCreateDateDescending;
     }
   }
 }

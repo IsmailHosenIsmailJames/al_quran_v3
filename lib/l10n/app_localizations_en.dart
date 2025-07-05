@@ -224,4 +224,627 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get west => 'W';
+
+  @override
+  String get address => 'Address: ';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get calculationMethod => 'Calculation Method: ';
+
+  @override
+  String get downloadPrayerTime => 'Download Prayer Time';
+
+  @override
+  String get calculationMethodsListEmpty =>
+      'The list of calculation methods is empty.';
+
+  @override
+  String get noCalculationMethodWithLocationData =>
+      'Could not find any calculation method with location data.';
+
+  @override
+  String get prayerSettings => 'Prayer Settings';
+
+  @override
+  String get reminderSettings => 'Reminder Settings';
+
+  @override
+  String get adjustReminderTime => 'Adjust Reminder Time';
+
+  @override
+  String get enforceAlarmSound => 'Enforce Alarm\'s Sound';
+
+  @override
+  String get enforceAlarmSoundDescription =>
+      'If enabled, This feature will play the alarm at the volume set here, even if your phone\'s sound is low. This ensures you don\'t miss the alarm due to low phone volume.';
+
+  @override
+  String get volume => 'Volume';
+
+  @override
+  String get atPrayerTime => 'At prayer time';
+
+  @override
+  String minBefore(int minutes) {
+    return '$minutes min before';
+  }
+
+  @override
+  String minAfter(int minutes) {
+    return '$minutes min after';
+  }
+
+  @override
+  String prayerTimeIsAt(String prayerName, String prayerTime) {
+    return '$prayerName is at $prayerTime';
+  }
+
+  @override
+  String itsTimeOf(String prayerName) {
+    return 'It\'s time of $prayerName';
+  }
+
+  @override
+  String get stopTheAdhan => 'Stop the Adhan';
+
+  @override
+  String dateFoundEmpty(String date) {
+    return '$date Found Empty';
+  }
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get left => 'Left';
+
+  @override
+  String reminderAdded(String prayerName) {
+    return 'Reminder for $prayerName added';
+  }
+
+  @override
+  String get allowNotificationPermission =>
+      'Please allow notification permission to use this feature';
+
+  @override
+  String reminderRemoved(String prayerName) {
+    return 'Reminder for $prayerName removed';
+  }
+
+  @override
+  String get getPrayerTimesAndQibla => 'Get Prayer Times and Qibla';
+
+  @override
+  String get getPrayerTimesAndQiblaDescription =>
+      'Calculate Prayer Times and Qibla for Any Given Location.';
+
+  @override
+  String get getFromGPS => 'Get form GPS';
+
+  @override
+  String get or => 'Or';
+
+  @override
+  String get selectYourCity => 'Select you City';
+
+  @override
+  String get noteAboutGPS =>
+      'Note: If you don\'t want to use GPS or not feel secure, you can select your city.';
+
+  @override
+  String get downloadingLocationResources =>
+      'Downloading location resources...';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get selectYourCountry => 'Select Your Country';
+
+  @override
+  String get searchForACountry => 'Search for a country';
+
+  @override
+  String get selectYourAdministrator => 'Select Your Administrator';
+
+  @override
+  String get searchForAnAdministrator => 'Search for a administrator';
+
+  @override
+  String get searchForACity => 'Search for a city';
+
+  @override
+  String get pleaseEnableLocationService => 'Please enable location service';
+
+  @override
+  String get donateUs => 'Donate Us';
+
+  @override
+  String get underDevelopment => 'Under development';
+
+  @override
+  String get versionLoading => 'Loading...';
+
+  @override
+  String get alQuran => 'Al Quran';
+
+  @override
+  String get mainMenu => 'Main Menu';
+
+  @override
+  String get notes => 'Notes';
+
+  @override
+  String get pinned => 'Pinned';
+
+  @override
+  String get jumpToAyah => 'Jump to Ayah';
+
+  @override
+  String get shareMultipleAyah => 'Share Multiple Ayah';
+
+  @override
+  String get shareThisApp => 'Share this App';
+
+  @override
+  String get giveRating => 'Give Rating';
+
+  @override
+  String get bugReport => 'Bug Report';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get aboutTheApp => 'About the App';
+
+  @override
+  String get resetTheApp => 'Reset the App';
+
+  @override
+  String get resetAppWarningTitle => 'Reset App Data';
+
+  @override
+  String get resetAppWarningMessage =>
+      'Are you sure you want to reset the app? All your data will be lost, and you will need to set up the app from the beginning.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get shareAppSubject => 'Check out this Al Quran App!';
+
+  @override
+  String shareAppBody(String appLink) {
+    return 'Assalamualaikum! Check out this Al Quran app for daily reading and reflection. It helps connect with Allah\'s words. Download here: $appLink';
+  }
+
+  @override
+  String get openDrawerTooltip => 'Open Drawer';
+
+  @override
+  String get quran => 'Quran';
+
+  @override
+  String get prayer => 'Prayer';
+
+  @override
+  String get qibla => 'Qibla';
+
+  @override
+  String get audio => 'Audio';
+
+  @override
+  String get surah => 'Surah';
+
+  @override
+  String get pages => 'Pages';
+
+  @override
+  String get note => 'Note:';
+
+  @override
+  String get linkedAyahs => 'Linked Ayahs:';
+
+  @override
+  String get emptyNoteCollection =>
+      'This note collection is empty.\nAdd some notes to see them here.';
+
+  @override
+  String get emptyPinnedCollection =>
+      'No Ayahs pinned to this collection yet.\nPin Ayahs to see them here.';
+
+  @override
+  String get noContentAvailable => 'No content available.';
+
+  @override
+  String failedToLoadCollections(String error) {
+    return 'Failed to load collections: $error';
+  }
+
+  @override
+  String searchByCollectionName(String collectionType) {
+    return 'Search By $collectionType Name...';
+  }
+
+  @override
+  String get sortBy => 'Sort by';
+
+  @override
+  String noCollectionAddedYet(String collectionType) {
+    return 'No $collectionType added yet';
+  }
+
+  @override
+  String pinnedItemsCount(int count) {
+    return '$count pinned items';
+  }
+
+  @override
+  String notesCount(int count) {
+    return '$count notes';
+  }
+
+  @override
+  String get emptyNameNotAllowed => 'Empty name not allowed';
+
+  @override
+  String updatedTo(String collectionName) {
+    return 'Updated to $collectionName';
+  }
+
+  @override
+  String get changeName => 'Change Name';
+
+  @override
+  String get changeColor => 'Change Color';
+
+  @override
+  String get colorUpdated => 'Color updated';
+
+  @override
+  String collectionDeleted(String collectionName) {
+    return '$collectionName Deleted';
+  }
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get collectionNameCannotBeEmpty => 'Collection name cannot be empty.';
+
+  @override
+  String get addedNewCollection => 'Added New Collection';
+
+  @override
+  String ayahCount(int count) {
+    return '$count Ayah';
+  }
+
+  @override
+  String get byNameAtoZ => 'Name A-Z';
+
+  @override
+  String get byNameZtoA => 'Name Z-A';
+
+  @override
+  String get byElementNumberAscending => 'Element Number Ascending';
+
+  @override
+  String get byElementNumberDescending => 'Element Number Descending';
+
+  @override
+  String get byUpdateDateAscending => 'Update Date Ascending';
+
+  @override
+  String get byUpdateDateDescending => 'Update Date Descending';
+
+  @override
+  String get byCreateDateAscending => 'Create Date Ascending';
+
+  @override
+  String get byCreateDateDescending => 'Create Date Descending';
+
+  @override
+  String get translationNotFound => 'Translation Not Found';
+
+  @override
+  String get play => 'Play';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get selectReciter => 'Select Reciter';
+
+  @override
+  String style(String style) {
+    return 'Style: $style';
+  }
+
+  @override
+  String source(String source) {
+    return 'Source: $source';
+  }
+
+  @override
+  String get more => 'More: ';
+
+  @override
+  String get cacheNotFound => 'Cache Not Found';
+
+  @override
+  String get cacheSize => 'Cache Size';
+
+  @override
+  String error(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get clean => 'Clean';
+
+  @override
+  String get lastModified => 'Last Modified';
+
+  @override
+  String get oneYearAgo => '1 Year ago';
+
+  @override
+  String get sixMonthsAgo => '6 Months ago';
+
+  @override
+  String get threeMonthsAgo => '3 Months ago';
+
+  @override
+  String get twoMonthsAgo => '2 Months ago';
+
+  @override
+  String get oneMonthAgo => '1 Month ago';
+
+  @override
+  String get threeWeeksAgo => '3 Weeks ago';
+
+  @override
+  String get twoWeeksAgo => '2 Weeks ago';
+
+  @override
+  String get oneWeekAgo => '1 Week ago';
+
+  @override
+  String get sixDaysAgo => '6 Days ago';
+
+  @override
+  String get fiveDaysAgo => '5 Days ago';
+
+  @override
+  String get fourDaysAgo => '4 Days ago';
+
+  @override
+  String get threeDaysAgo => '3 Days ago';
+
+  @override
+  String get twoDaysAgo => '2 Days ago';
+
+  @override
+  String get oneDayAgo => '1 Day ago';
+
+  @override
+  String get aboutAlQuran => 'About Al Quran';
+
+  @override
+  String get appFullName => 'Al Quran (Tafsir, Prayer, Qibla, Audio)';
+
+  @override
+  String get appDescription =>
+      'A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.';
+
+  @override
+  String get dataSourcesNote =>
+      'Note: Quran texts, Tafsir, translations, and audio resources are sourced from Quran.com, Everyayah.com, and other verified open sources.';
+
+  @override
+  String get adFreePromise =>
+      'This app has been built to seek the pleasure of Allah. Therefore, it is and always will be completely Ad-Free.';
+
+  @override
+  String get coreFeatures => 'Core Features';
+
+  @override
+  String get coreFeaturesDescription =>
+      'Explore the key functionalities that make Al Quran v3 an indispensable tool for your daily Islamic practices:';
+
+  @override
+  String get prayerTimesTitle => 'Prayer Times & Alerts';
+
+  @override
+  String get prayerTimesDescription =>
+      'Accurate prayer timings for any location worldwide using various calculation methods. Set reminders with Adhan notifications.';
+
+  @override
+  String get qiblaDirectionTitle => 'Qibla Direction';
+
+  @override
+  String get qiblaDirectionDescription =>
+      'Easily find the Qibla direction with a clear and accurate compass view.';
+
+  @override
+  String get translationTafsirTitle => 'Quran Translation & Tafsir';
+
+  @override
+  String get translationTafsirDescription =>
+      'Access 120+ translation books (including word-by-word) in 69 languages, and 30+ Tafsir books.';
+
+  @override
+  String get wordByWordAudioTitle => 'Word by Word Audio & Highlighting';
+
+  @override
+  String get wordByWordAudioDescription =>
+      'Follow along with synchronized word-by-word audio recitation and highlighting for an immersive learning experience.';
+
+  @override
+  String get ayahAudioRecitationTitle => 'Ayah Audio Recitation';
+
+  @override
+  String get ayahAudioRecitationDescription =>
+      'Listen to full Ayah recitations from over 40+ renowned reciters.';
+
+  @override
+  String get notesCloudBackupTitle => 'Notes with Cloud Backup';
+
+  @override
+  String get notesCloudBackupDescription =>
+      'Save personal notes and reflections, securely backed up to the cloud (feature in development/coming soon).';
+
+  @override
+  String get crossPlatformSupportTitle => 'Cross-Platform Support';
+
+  @override
+  String get crossPlatformSupportDescription =>
+      'Supported on Android, Web, Linux, and Windows.';
+
+  @override
+  String get backgroundAudioPlaybackTitle => 'Background Audio Playback';
+
+  @override
+  String get backgroundAudioPlaybackDescription =>
+      'Continue listening to Quran recitation even when the app is in the background.';
+
+  @override
+  String get audioDataCachingTitle => 'Audio & Data Caching';
+
+  @override
+  String get audioDataCachingDescription =>
+      'Improved playback and offline capabilities with robust audio and Quran data caching.';
+
+  @override
+  String get minimalisticInterfaceTitle => 'Minimalistic & Clean Interface';
+
+  @override
+  String get minimalisticInterfaceDescription =>
+      'Easy to navigate interface with focus on user experience and readability.';
+
+  @override
+  String get optimizedPerformanceTitle => 'Optimized Performance & Size';
+
+  @override
+  String get optimizedPerformanceDescription =>
+      'A feature-rich application designed to be lightweight and performant.';
+
+  @override
+  String get languageSupport => 'Language Support';
+
+  @override
+  String get languageSupportDescription =>
+      'This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get urdu => 'Urdu';
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get german => 'German';
+
+  @override
+  String get spanish => 'Spanish';
+
+  @override
+  String get indonesian => 'Indonesian';
+
+  @override
+  String get malay => 'Malay';
+
+  @override
+  String get turkish => 'Turkish';
+
+  @override
+  String get bengali => 'Bengali';
+
+  @override
+  String get russian => 'Russian';
+
+  @override
+  String get technologyAndResources => 'Technology & Resources';
+
+  @override
+  String get technologyAndResourcesDescription =>
+      'This app is built using cutting-edge technologies and reliable resources:';
+
+  @override
+  String get flutterFrameworkTitle => 'Flutter Framework';
+
+  @override
+  String get flutterFrameworkDescription =>
+      'Built with Flutter for a beautiful, natively compiled, multi-platform experience from a single codebase.';
+
+  @override
+  String get advancedAudioEngineTitle => 'Advanced Audio Engine';
+
+  @override
+  String get advancedAudioEngineDescription =>
+      'Powered by the `just_audio` and `just_audio_background` Flutter packages for robust audio playback and control.';
+
+  @override
+  String get reliableQuranDataTitle => 'Reliable Quran Data';
+
+  @override
+  String get reliableQuranDataDescription =>
+      'Al Quran texts, translations, tafsirs, and audio are sourced from verified open APIs and databases like Quran.com & Everyayah.com.';
+
+  @override
+  String get prayerTimeEngineTitle => 'Prayer Time Engine';
+
+  @override
+  String get prayerTimeEngineDescription =>
+      'Utilizes established calculation methods for accurate prayer times. Notifications handled by `flutter_local_notifications` and background tasks.';
+
+  @override
+  String get crossPlatformSupport => 'Cross Platform Support';
+
+  @override
+  String get crossPlatformSupportDescription2 =>
+      'Enjoy seamless access across various platforms:';
+
+  @override
+  String get android => 'Android';
+
+  @override
+  String get ios => 'iOS';
+
+  @override
+  String get macos => 'macOS';
+
+  @override
+  String get web => 'Web';
+
+  @override
+  String get linux => 'Linux';
+
+  @override
+  String get windows => 'Windows';
+
+  @override
+  String get ourLifetimePromise => 'Our Lifetime Promise';
+
+  @override
+  String get lifetimePromiseDescription =>
+      'I personally promise to provide continuous support and maintenance for this application throughout my life, In Sha Allah. My goal is to ensure this app remains a beneficial resource for the Ummah for years to come.';
 }

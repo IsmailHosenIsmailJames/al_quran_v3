@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 
 class DonateUsView extends StatefulWidget {
@@ -10,9 +11,10 @@ class DonateUsView extends StatefulWidget {
 class _DonateUsViewState extends State<DonateUsView> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Donate Us")),
-      body: const Center(child: Text("Under developent")),
+      appBar: AppBar(title: Text(l10n.donateUs)),
+      body: Center(child: Text(l10n.underDevelopment)),
     );
   }
 }

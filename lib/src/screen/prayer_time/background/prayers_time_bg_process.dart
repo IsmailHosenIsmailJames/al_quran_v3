@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -24,6 +25,9 @@ void callbackDispatcher() {
 }
 
 Future<void> setReminderForPrayers() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final l10n = await AppLocalizations.delegate.load(const Locale("en"));
+
   await PrayersTimeFunction.init();
   if (!PrayersTimeFunction.checkIsDataExits()) {
     return;
@@ -101,9 +105,11 @@ Future<void> setReminderForPrayers() async {
               .toInt();
 
       // create notification or alarm title and body
-      String reminderTitle = "It's time of ${prayType.name.capitalize()}";
-      String reminderBody =
-          "${prayType.name.capitalize()} is at ${DateFormat.Hms().format(reminderTime)}";
+      String reminderTitle = l10n.itsTimeOf(prayType.name.capitalize());
+      String reminderBody = l10n.prayerTimeIsAt(
+        prayType.name.capitalize(),
+        DateFormat.Hms().format(reminderTime),
+      );
 
       if (currentReminder.reminderType == PrayerReminderType.notification) {
         // check is notification already set
@@ -141,6 +147,7 @@ Future<void> setReminderForPrayers() async {
             reminderTime,
             reminderTitle,
             reminderBody,
+            l10n,
           );
         }
       }
@@ -153,6 +160,7 @@ Future<void> setReminderAlarm(
   DateTime reminderTime,
   String reminderTitle,
   String reminderBody,
+  AppLocalizations l10n,
 ) async {
   Alarm.set(
     alarmSettings: AlarmSettings(
@@ -171,7 +179,7 @@ Future<void> setReminderAlarm(
       notificationSettings: NotificationSettings(
         title: reminderTitle,
         body: reminderBody,
-        stopButton: "Stop the Adhan",
+        stopButton: l10n.stopTheAdhan,
         icon: "notification_icon",
       ),
     ),

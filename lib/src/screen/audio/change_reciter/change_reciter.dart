@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
@@ -51,6 +52,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Column(
       children: [
@@ -66,10 +68,13 @@ class _ChangeReciterState extends State<ChangeReciter> {
           ),
           child: Stack(
             children: [
-              const Center(
+              Center(
                 child: Text(
-                  "Select Reciter",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  l10n.selectReciter,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Align(
@@ -90,7 +95,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
             controller: scrollController,
             padding: const EdgeInsets.all(5),
             itemBuilder: (context, index) {
-              ReciterInfoModel reciterInfoModel =recitersListCurrent[index];
+              ReciterInfoModel reciterInfoModel = recitersListCurrent[index];
               return Container(
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -161,12 +166,14 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text("Style: ${reciterInfoModel.style}"),
-                          Text("Source: ${reciterInfoModel.source}"),
+                          if (reciterInfoModel.style != null)
+                            Text(l10n.style(reciterInfoModel.style!)),
+                          if (reciterInfoModel.source != null)
+                            Text(l10n.source(reciterInfoModel.source!)),
                           if (reciterInfoModel.bio != null)
                             Row(
                               children: [
-                                const Text("More: "),
+                                Text(l10n.more),
                                 SizedBox(
                                   height: 20,
                                   child: TextButton(
@@ -214,7 +221,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
               widget.onReciterChanged(selectedReciter);
             },
             icon: const Icon(Icons.done),
-            label: const Text("Save"),
+            label: Text(l10n.save),
           ),
         ),
       ],

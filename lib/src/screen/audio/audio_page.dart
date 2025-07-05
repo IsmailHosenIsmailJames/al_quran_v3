@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
@@ -44,6 +45,7 @@ class AudioPage extends StatefulWidget {
 class _AudioPageState extends State<AudioPage> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
@@ -54,7 +56,7 @@ class _AudioPageState extends State<AudioPage> {
               ayahKeyState.current,
             );
             String translation =
-                translationMap?["t"] ?? "Translation Not Found";
+                translationMap?["t"] ?? l10n.translationNotFound;
             translation = translation.replaceAll(">", "> ");
             return Padding(
               padding: const EdgeInsets.all(10),
@@ -100,7 +102,7 @@ class _AudioPageState extends State<AudioPage> {
                     },
                   ),
                   const Gap(10),
-                  getAudioController(currentIndex, ayahKeyState, context),
+                  getAudioController(currentIndex, ayahKeyState, context, l10n),
                   const Gap(10),
                 ],
               ),
@@ -115,6 +117,7 @@ class _AudioPageState extends State<AudioPage> {
     int currentIndex,
     AyahKeyManagement ayahKeyState,
     BuildContext context,
+    AppLocalizations l10n,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -210,7 +213,7 @@ class _AudioPageState extends State<AudioPage> {
                       ? AudioPlayerManager.audioPlayer.pause()
                       : AudioPlayerManager.audioPlayer.play();
                 },
-                tooltip: state.isPlaying ? "Pause" : "Play",
+                tooltip: state.isPlaying ? l10n.pause : l10n.play,
                 iconSize: 45,
                 style: IconButton.styleFrom(padding: const EdgeInsets.all(5)),
                 icon:

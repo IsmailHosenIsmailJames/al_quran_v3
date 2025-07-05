@@ -1,5 +1,6 @@
 import "dart:convert";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/pages/administrator_selection.dart";
@@ -41,6 +42,7 @@ class _AddressSelectionState extends State<AddressSelection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: BlocBuilder<
         ManualLocationSelectionCubit,
@@ -60,7 +62,7 @@ class _AddressSelectionState extends State<AddressSelection> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    "Downloading location resources...",
+                    l10n.downloadingLocationResources,
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontWeight: FontWeight.w500,

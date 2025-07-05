@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -167,6 +168,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                               onPressed: () async {
                                 handleAddNewCollection(
                                   _newCollectionNameController.text.trim(),
+                                  AppLocalizations.of(context),
                                 ).then((value) {
                                   if (value != null) {
                                     setState(() {

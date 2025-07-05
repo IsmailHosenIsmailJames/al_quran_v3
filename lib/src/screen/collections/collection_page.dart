@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_content_view.dart";
 import "package:al_quran_v3/src/screen/collections/common_function.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -51,6 +52,7 @@ class _CollectionPageState extends State<CollectionPage> {
   }
 
   Future<void> _fetchData() async {
+    final l10n = AppLocalizations.of(context);
     setState(() {
       _isLoading = true;
       _errorMessage = null;
@@ -65,7 +67,7 @@ class _CollectionPageState extends State<CollectionPage> {
       }
     } catch (e) {
       setState(() {
-        _errorMessage = "Failed to load collections: ${e.toString()}";
+        _errorMessage = l10n.failedToLoadCollections(e.toString());
       });
     } finally {
       setState(() {
@@ -95,7 +97,7 @@ class _CollectionPageState extends State<CollectionPage> {
     });
   }
 
-  Widget _buildSearchAndFilterBar(Color svgColor) {
+  Widget _buildSearchAndFilterBar(Color svgColor, AppLocalizations l10n) {
     return Container(
       height: 45,
       margin: const EdgeInsets.all(15.0),
@@ -112,8 +114,11 @@ class _CollectionPageState extends State<CollectionPage> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   prefixIcon: const Icon(FluentIcons.search_24_regular),
-                  hintText:
-                      "Search By ${StringCapitalizeExtension(widget.collectionType.name).capitalize()} Name...",
+                  hintText: l10n.searchByCollectionName(
+                    StringCapitalizeExtension(
+                      widget.collectionType.name,
+                    ).capitalize(),
+                  ),
                 ),
               ),
             ),
@@ -152,9 +157,9 @@ class _CollectionPageState extends State<CollectionPage> {
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
-                          const Text(
-                            "Sort by",
-                            style: TextStyle(
+                          Text(
+                            l10n.sortBy,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -189,7 +194,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                                 .primary
                                             : null,
                                   ),
-                                  title: Text(current.toReadableString()),
+                                  title: Text(current.toReadableString(l10n)),
                                 );
                               },
                             ),
@@ -207,7 +212,7 @@ class _CollectionPageState extends State<CollectionPage> {
     );
   }
 
-  Widget _buildEmptyState(Color svgColor) {
+  Widget _buildEmptyState(Color svgColor, AppLocalizations l10n) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -226,7 +231,7 @@ class _CollectionPageState extends State<CollectionPage> {
             ),
             const Gap(20),
             Text(
-              "No ${widget.collectionType.name} added yet",
+              l10n.noCollectionAddedYet(widget.collectionType.name),
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
@@ -239,6 +244,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     Color svgColor =
         Theme.of(context).brightness == Brightness.dark
             ? Colors.grey.shade100
@@ -266,7 +272,7 @@ class _CollectionPageState extends State<CollectionPage> {
       ),
       body: Column(
         children: [
-          _buildSearchAndFilterBar(svgColor),
+          _buildSearchAndFilterBar(svgColor, l10n),
           Expanded(
             child:
                 _isLoading
@@ -295,13 +301,15 @@ class _CollectionPageState extends State<CollectionPage> {
                         return isNotes
                             ? _getNoteCollectionWidget(
                               _filteredNoteCollection[index],
+                              l10n,
                             )
                             : _getPinnedCollectionWidget(
                               _filteredPinnedCollection[index],
+                              l10n,
                             );
                       },
                     )
-                    : _buildEmptyState(svgColor),
+                    : _buildEmptyState(svgColor, l10n),
           ),
         ],
       ),
@@ -310,6 +318,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
   Widget _getPinnedCollectionWidget(
     PinnedCollectionModel pinnedCollectionModel,
+    AppLocalizations l10n,
   ) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
@@ -330,7 +339,9 @@ class _CollectionPageState extends State<CollectionPage> {
           pinnedCollectionModel.name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        subtitle: Text("${pinnedCollectionModel.pinned.length} pinned items"),
+        subtitle: Text(
+          l10n.pinnedItemsCount(pinnedCollectionModel.pinned.length),
+        ),
         trailing: PopupMenuButton(
           itemBuilder: (context) {
             return [
@@ -359,7 +370,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
                                       Fluttertoast.showToast(
-                                        msg: "Empty name not allowed",
+                                        msg: l10n.emptyNameNotAllowed,
                                       );
                                       return;
                                     }
@@ -372,11 +383,12 @@ class _CollectionPageState extends State<CollectionPage> {
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
-                                      msg:
-                                          "Updated to ${pinnedCollectionModel.name}",
+                                      msg: l10n.updatedTo(
+                                        pinnedCollectionModel.name,
+                                      ),
                                     );
                                   },
-                                  label: const Text("Save"),
+                                  label: Text(l10n.save),
                                   icon: const Icon(Icons.done),
                                 ),
                               ),
@@ -387,11 +399,11 @@ class _CollectionPageState extends State<CollectionPage> {
                     },
                   );
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.edit_24_regular),
-                    Gap(8),
-                    Text("Change Name"),
+                    const Icon(FluentIcons.edit_24_regular),
+                    const Gap(8),
+                    Text(l10n.changeName),
                   ],
                 ),
               ),
@@ -404,13 +416,13 @@ class _CollectionPageState extends State<CollectionPage> {
                   pinnedCollectionModel.colorHex = selectedColor.hex;
                   await savePinnedCollectionModelAsMap(pinnedCollectionModel);
                   await _fetchData();
-                  Fluttertoast.showToast(msg: "Color updated");
+                  Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.color_24_regular),
-                    Gap(8),
-                    Text("Change Color"),
+                    const Icon(FluentIcons.color_24_regular),
+                    const Gap(8),
+                    Text(l10n.changeColor),
                   ],
                 ),
               ),
@@ -420,14 +432,20 @@ class _CollectionPageState extends State<CollectionPage> {
                   await _fetchData();
 
                   Fluttertoast.showToast(
-                    msg: "${pinnedCollectionModel.name} Deleted",
+                    msg: l10n.collectionDeleted(pinnedCollectionModel.name),
                   );
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.delete_24_regular, color: Colors.red),
-                    Gap(8),
-                    Text("Delete", style: TextStyle(color: Colors.red)),
+                    const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.red,
+                    ),
+                    const Gap(8),
+                    Text(
+                      l10n.delete,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ],
                 ),
               ),
@@ -450,7 +468,10 @@ class _CollectionPageState extends State<CollectionPage> {
     );
   }
 
-  Widget _getNoteCollectionWidget(NoteCollectionModel noteCollectionModel) {
+  Widget _getNoteCollectionWidget(
+    NoteCollectionModel noteCollectionModel,
+    AppLocalizations l10n,
+  ) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       shape: RoundedRectangleBorder(
@@ -471,7 +492,7 @@ class _CollectionPageState extends State<CollectionPage> {
           noteCollectionModel.name,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        subtitle: Text("${noteCollectionModel.notes.length} notes"),
+        subtitle: Text(l10n.notesCount(noteCollectionModel.notes.length)),
         trailing: PopupMenuButton(
           itemBuilder: (context) {
             return [
@@ -500,7 +521,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
                                       Fluttertoast.showToast(
-                                        msg: "Empty name not allowed",
+                                        msg: l10n.emptyNameNotAllowed,
                                       );
                                       return;
                                     }
@@ -513,11 +534,12 @@ class _CollectionPageState extends State<CollectionPage> {
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
-                                      msg:
-                                          "Updated to ${noteCollectionModel.name}",
+                                      msg: l10n.updatedTo(
+                                        noteCollectionModel.name,
+                                      ),
                                     );
                                   },
-                                  label: const Text("Save"),
+                                  label: Text(l10n.save),
                                   icon: const Icon(Icons.done),
                                 ),
                               ),
@@ -528,11 +550,11 @@ class _CollectionPageState extends State<CollectionPage> {
                     },
                   );
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.edit_24_regular),
-                    Gap(8),
-                    Text("Change Name"),
+                    const Icon(FluentIcons.edit_24_regular),
+                    const Gap(8),
+                    Text(l10n.changeName),
                   ],
                 ),
               ),
@@ -545,13 +567,13 @@ class _CollectionPageState extends State<CollectionPage> {
                   noteCollectionModel.colorHex = selectedColor.hex;
                   await saveNoteCollectionModelAsMap(noteCollectionModel);
                   await _fetchData();
-                  Fluttertoast.showToast(msg: "Color updated");
+                  Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.color_24_regular),
-                    Gap(8),
-                    Text("Change Color"),
+                    const Icon(FluentIcons.color_24_regular),
+                    const Gap(8),
+                    Text(l10n.changeColor),
                   ],
                 ),
               ),
@@ -561,14 +583,20 @@ class _CollectionPageState extends State<CollectionPage> {
                   await _fetchData();
 
                   Fluttertoast.showToast(
-                    msg: "${noteCollectionModel.name} Deleted",
+                    msg: l10n.collectionDeleted(noteCollectionModel.name),
                   );
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(FluentIcons.delete_24_regular, color: Colors.red),
-                    Gap(8),
-                    Text("Delete", style: TextStyle(color: Colors.red)),
+                    const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.red,
+                    ),
+                    const Gap(8),
+                    Text(
+                      l10n.delete,
+                      style: const TextStyle(color: Colors.red),
+                    ),
                   ],
                 ),
               ),
