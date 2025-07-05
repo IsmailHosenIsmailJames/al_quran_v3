@@ -1,6 +1,5 @@
 import "dart:convert";
 import "dart:developer";
-import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
@@ -16,6 +15,7 @@ import "package:al_quran_v3/src/resources/quran_resources/models/translation_boo
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -57,9 +57,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   late AppLocalizations appLocalizations;
 
-  void changeAppLanguage(String value) {
-    appLanguage = value;
+  void changeAppLanguage(String languageCode) {
+    appLanguage = languageCode;
     String? languageName = codeToLanguageMap[appLanguage];
+    context.read<LanguageCubit>().changeLanguage(languageCode);
 
     if (translationResources.keys.contains(languageName)) {
       translationLanguageCode = appLanguage;
@@ -68,6 +69,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
               ?.map((e) => TranslationBookModel.fromMap(e))
               .toList() ??
           [];
+      selectableTranslationBook?.sort((a, b) => a.score.compareTo(b.score));
+      if (selectableTranslationBook?.isNotEmpty == true) {
+        context.read<ResourcesProgressCubitCubit>().changeTranslationBook(
+          selectableTranslationBook!.first,
+        );
+      }
     }
 
     if (tafsirInformationWithScore.keys.contains(languageName)) {
@@ -77,6 +84,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
               ?.map((e) => TafsirBookModel.fromMap(e))
               .toList() ??
           [];
+      selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
+      if (selectableTafsirBook?.isNotEmpty == true) {
+        context.read<ResourcesProgressCubitCubit>().changeTafsirBook(
+          selectableTafsirBook!.first,
+        );
+      }
     }
   }
 
@@ -105,7 +118,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
   @override
   void initState() {
     if (!kIsWeb) {
-      changeAppLanguage(Platform.localeName.split("_")[0].toLowerCase());
+      changeAppLanguage(
+        context.read<LanguageCubit>().state.locale.languageCode,
+      );
     }
     QuranTranslationFunction.init();
     super.initState();
