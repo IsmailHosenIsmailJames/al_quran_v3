@@ -6,6 +6,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/functions/encode_decode.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
@@ -155,9 +156,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 12,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "1",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 1),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -200,9 +201,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 12,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "2",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 2),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -246,9 +247,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 13,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "3",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 3),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -304,9 +305,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 13,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "4",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 4),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -346,9 +347,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 13,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "5",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 5),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -400,9 +401,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             CircleAvatar(
                               radius: 13,
                               backgroundColor: themeState.primary,
-                              child: const Text(
-                                "6",
-                                style: TextStyle(
+                              child: Text(
+                                localizedNumber(context, 6),
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
