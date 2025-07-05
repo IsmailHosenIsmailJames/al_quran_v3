@@ -112,7 +112,7 @@ class JuzListView extends StatelessWidget {
                         const Gap(2),
                         Text(
                           appLocalizations.surahAyah(
-                            "${listOfSurahNameEnglish[surahNumber - 1]} -",
+                            "${getSurahName(context, surahNumber)} -",
                             "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                           ),
                           style: TextStyle(
