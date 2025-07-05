@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
@@ -40,6 +41,7 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     List<TranslationBookModel> availableWbWBooks =
         wordByWordTranslation.values
             .map((e) => TranslationBookModel.fromMap(e))
@@ -83,7 +85,7 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
                     });
                     await WordByWordFunction.setSelectedWordByWordBook(current);
                   } else {
-                    log("Language '${current.name}' is already selected.");
+                    log(appLocalizations.alreadySelected(current.name));
                   }
                 } else {
                   setState(() {

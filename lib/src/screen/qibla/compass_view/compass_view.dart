@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "dart:math" as math;
 
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -10,10 +11,12 @@ class CompassView extends CustomPainter {
   final BuildContext context;
   final double kaabaAngle;
   final ThemeState themeState;
+  final AppLocalizations appLocalizations;
   CompassView(
     this.themeState, {
     required this.context,
     required this.kaabaAngle,
+    required this.appLocalizations,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -106,7 +109,12 @@ class CompassView extends CustomPainter {
 
           // draw [W, N, E, S]
           if (is90) {
-            List<String> directionList = ["N", "E", "S", "W"];
+            List<String> directionList = [
+              appLocalizations.north,
+              appLocalizations.east,
+              appLocalizations.south,
+              appLocalizations.west,
+            ];
             String direction = directionList[(degree / 90).toInt()];
             textPainter = TextPainter(
               text: TextSpan(

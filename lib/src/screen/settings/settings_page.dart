@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/others_settings.dart";
@@ -17,10 +18,12 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  late AppLocalizations appLocalizations;
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Settings")),
+      appBar: AppBar(title: Text(appLocalizations.settings)),
       body: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {
           return SingleChildScrollView(
@@ -35,32 +38,44 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "App Theme",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                Text(
+                  appLocalizations.appTheme,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const ThemeSettings(),
                 const Gap(20),
-                const Text(
-                  "Quran Style",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                Text(
+                  appLocalizations.quranStyle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const Gap(5),
                 const QuranScriptSettings(),
                 const Gap(30),
-                const Text(
-                  "Audio Cached",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                Text(
+                  appLocalizations.audioCached,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const Gap(5),
                 const AudioSettings(),
                 const Gap(30),
-                const Text(
-                  "Others",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                Text(
+                  appLocalizations.others,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 Divider(color: themeState.primaryShade300),
                 const Gap(5),

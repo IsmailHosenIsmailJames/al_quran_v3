@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
@@ -21,6 +22,7 @@ class QuranScriptSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     TextStyle titleStyle = const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
@@ -33,14 +35,14 @@ class QuranScriptSettings extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Quran Style", style: titleStyle),
+            Text(appLocalizations.quranStyle, style: titleStyle),
             const Gap(7),
             getScriptSelectionSegmentedButtons(context),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Quran Font Size", style: titleStyle),
+                Text(appLocalizations.quranFontSize, style: titleStyle),
                 Text(quranViewState.fontSize.toString(), style: titleStyle),
               ],
             ),
@@ -66,7 +68,7 @@ class QuranScriptSettings extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Quran Line Height", style: titleStyle),
+                Text(appLocalizations.quranLineHeight, style: titleStyle),
                 Text(quranViewState.lineHeight.toString(), style: titleStyle),
               ],
             ),
@@ -92,7 +94,10 @@ class QuranScriptSettings extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Translation & Tafsir Font Size", style: titleStyle),
+                Text(
+                  appLocalizations.translationAndTafsirFontSize,
+                  style: titleStyle,
+                ),
                 Text(
                   quranViewState.translationFontSize.toString(),
                   style: titleStyle,
@@ -128,9 +133,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Quran Ayah",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.quranAyah,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideQuranAyah,
               onChanged: (value) {
@@ -148,9 +153,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Translation",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.translation,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideTranslation,
               onChanged: (value) {
@@ -168,9 +173,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Word By Word",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.wordByWord,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideWordByWord,
               onChanged: (value) {
@@ -188,9 +193,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Foot Note",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.footnote,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideFootnote,
               onChanged: (value) {
@@ -208,9 +213,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Top Toolbar",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.topToolbar,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: !quranViewState.hideToolbar,
               onChanged: (value) {
@@ -229,9 +234,9 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               }),
               contentPadding: EdgeInsets.zero,
-              title: const Text(
-                "Keep Open Word By Word",
-                style: TextStyle(fontWeight: FontWeight.w500),
+              title: Text(
+                appLocalizations.keepOpenWordByWord,
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               value: quranViewState.alwaysOpenWordByWord,
               onChanged: (value) {
@@ -245,7 +250,7 @@ class QuranScriptSettings extends StatelessWidget {
             const Gap(10),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text("Word By Word Highlight"),
+              title: Text(appLocalizations.wordByWordHighlight),
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
                 Set<WidgetState> states,
               ) {
@@ -282,7 +287,7 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          appBar: AppBar(title: const Text("Quran Script Settings")),
+          appBar: AppBar(title: Text(appLocalizations.quranScriptSettings)),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 10,

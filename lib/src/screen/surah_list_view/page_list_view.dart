@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -19,6 +20,7 @@ class PageListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
@@ -88,7 +90,7 @@ class PageListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "Page",
+                              appLocalizations.page,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -107,7 +109,10 @@ class PageListView extends StatelessWidget {
                         ),
                         const Gap(2),
                         Text(
-                          "${listOfSurahNameEnglish[pageInfo.surahNumber - 1]} $ayahKey",
+                          appLocalizations.surahAyah(
+                            listOfSurahNameEnglish[pageInfo.surahNumber - 1],
+                            ayahKey ?? "",
+                          ),
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light

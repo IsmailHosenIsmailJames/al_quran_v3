@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "dart:async";
 import "dart:math" as math;
 
@@ -28,6 +29,7 @@ class QiblaDirection extends StatefulWidget {
 class _QiblaDirectionState extends State<QiblaDirection> {
   late bool hasVibrator;
   late bool hasSupportAmplitude;
+  late AppLocalizations appLocalizations;
   @override
   void initState() {
     initStateCall();
@@ -51,6 +53,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    appLocalizations = AppLocalizations.of(context);
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
       LocationQiblaPrayerDataState
@@ -68,6 +71,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                 themeState,
                 context: context,
                 kaabaAngle: dataState.kaabaAngle!,
+                appLocalizations: appLocalizations,
               ),
             ),
           );
@@ -88,13 +92,13 @@ class _QiblaDirectionState extends State<QiblaDirection> {
                     stream: FlutterCompass.events,
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return const Text("Unable to get compass data");
+                        return Text(appLocalizations.unableToGetCompassData);
                       }
                       if (snapshot.hasData) {
                         double? direction = snapshot.data?.heading;
                         if (direction == null) {
-                          return const Center(
-                            child: Text("Device does not have sensors !"),
+                          return Center(
+                            child: Text(appLocalizations.deviceDoesNotHaveSensors),
                           );
                         }
                         if (direction < 0) {

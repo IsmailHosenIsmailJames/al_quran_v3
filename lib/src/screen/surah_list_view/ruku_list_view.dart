@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -18,6 +19,7 @@ class RukuListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
@@ -82,7 +84,7 @@ class RukuListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "Ruku",
+                              appLocalizations.ruku,
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500,
@@ -101,7 +103,12 @@ class RukuListView extends StatelessWidget {
                         ),
                         const Gap(2),
                         Text(
-                          "${listOfSurahNameEnglish[int.parse(rukuInfoList[index].firstVerseKey.split(':')[0]) - 1]} ${rukuInfoList[index].firstVerseKey}",
+                          appLocalizations.surahAyah(
+                            listOfSurahNameEnglish[int.parse(
+                              rukuInfoList[index].firstVerseKey.split(':')[0],
+                            ) - 1],
+                            rukuInfoList[index].firstVerseKey,
+                          ),
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light

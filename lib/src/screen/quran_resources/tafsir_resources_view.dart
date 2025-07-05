@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
@@ -35,6 +36,8 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
       child: Column(
@@ -83,6 +86,7 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                       }
                     }
                     return _buildBookListTile(
+                      appLocalizations,
                       bookData,
                       isSelected,
                       needDownload,
@@ -98,6 +102,7 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
   }
 
   Widget _buildBookListTile(
+    AppLocalizations appLocalizations,
     TafsirBookModel tafsirBook,
     bool isSelected,
     bool needDownload,
@@ -143,7 +148,10 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
           await QuranTafsirFunction.setTafsirSelection(tafsirBook);
           _refreshData();
         } else if (isSelected) {
-          log("Already Selected: ${tafsirBook.name}");
+          log(
+            appLocalizations.alreadySelected(tafsirBook.name),
+            name: "TafsirResourcesViewUI",
+          );
         } else {
           setState(() {
             downloadingData = tafsirBook;
