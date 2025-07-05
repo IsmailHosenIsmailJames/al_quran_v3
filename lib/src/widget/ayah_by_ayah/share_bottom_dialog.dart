@@ -1,5 +1,7 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
@@ -16,7 +18,6 @@ import "package:hive_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
-import "package:al_quran_v3/l10n/app_localizations.dart";
 import "../../screen/surah_list_view/model/surah_info_model.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -138,7 +139,7 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                       ),
                     );
                   },
@@ -153,7 +154,7 @@ void showShareBottomDialog(
                 ),
                 onPressed: () async {
                   await FlutterClipboard.copy(
-                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
@@ -219,7 +220,7 @@ void showShareBottomDialog(
                   ShareParams(
                     files: [XFile.fromData(imageBinary, mimeType: "image/png")],
                     fileNameOverrides: [
-                      "${surahInfoModel.nameSimple} - $ayahKey.png",
+                      "${getSurahName(context, surahInfoModel.id)} - $ayahKey.png",
                     ],
                     downloadFallbackEnabled: false,
                     mailToFallbackEnabled: false,
@@ -246,7 +247,7 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
                       ),
                     );
 
@@ -270,7 +271,7 @@ void showShareBottomDialog(
                     returnAyahKeyIfLinked: false,
                   );
                   await FlutterClipboard.copy(
-                    "${surahInfoModel.nameSimple} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);

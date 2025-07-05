@@ -1,5 +1,6 @@
 import "dart:developer";
 
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
@@ -21,7 +22,7 @@ class SurahInfoView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${surahInfoModel.nameSimple} (${surahInfoModel.nameArabic})",
+          "${getSurahName(context, surahInfoModel.id)} (${surahInfoModel.nameArabic})",
         ),
       ),
       body: SingleChildScrollView(

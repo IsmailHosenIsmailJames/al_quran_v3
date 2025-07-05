@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -43,7 +44,10 @@ class QuranScriptSettings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(appLocalizations.quranFontSize, style: titleStyle),
-                Text(quranViewState.fontSize.toString(), style: titleStyle),
+                Text(
+                  localizedNumber(context, quranViewState.fontSize),
+                  style: titleStyle,
+                ),
               ],
             ),
 
@@ -69,7 +73,7 @@ class QuranScriptSettings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(appLocalizations.quranLineHeight, style: titleStyle),
-                Text(quranViewState.lineHeight.toString(), style: titleStyle),
+                Text(localizedNumber(context, quranViewState.lineHeight), style: titleStyle),
               ],
             ),
 
@@ -99,7 +103,7 @@ class QuranScriptSettings extends StatelessWidget {
                   style: titleStyle,
                 ),
                 Text(
-                  quranViewState.translationFontSize.toString(),
+                  localizedNumber(context, quranViewState.translationFontSize),
                   style: titleStyle,
                 ),
               ],

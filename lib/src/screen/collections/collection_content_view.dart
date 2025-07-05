@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
@@ -143,7 +144,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                             );
                             return Chip(
                               label: Text(
-                                "${surahInfo.nameSimple} - $key",
+                                "${getSurahName(context, surahInfo.id)} - $key",
                                 style: textTheme.labelSmall,
                               ),
                               padding: const EdgeInsets.symmetric(

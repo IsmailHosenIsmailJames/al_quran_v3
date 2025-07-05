@@ -1,7 +1,6 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
@@ -12,13 +11,13 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/functions/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -411,7 +410,7 @@ class _AudioPageState extends State<AudioPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${SurahInfoModel.fromMap(metaDataSurah[ayahKeyState.current.split(":")[0]]).nameSimple} - ${getAyahLocalized(ayahKeyState.current)}",
+                    "${getSurahName(context, ayahKeyState.current.split(":").first.toInt())} - ${getAyahLocalized(context, ayahKeyState.current)}",
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -453,10 +452,5 @@ class _AudioPageState extends State<AudioPage> {
         ),
       ],
     );
-  }
-
-  String getAyahLocalized(String ayahKey) {
-    List<String> split = ayahKey.split(":");
-    return "${localizedNumber(context, split.first.toInt())}:${localizedNumber(context, split.last.toInt())}";
   }
 }

@@ -324,7 +324,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get noCalculationMethodWithLocationData =>
-      'অবস্থানের ডেটা সহ কোনো গণনা পদ্ধতি খুঁজে পাওয়া যায়নি।';
+      'অবস্থানের ডেটা সহ কোনো গণনা পদ্ধতি খুঁজে পাওয়া হয়নি।';
 
   @override
   String get prayerSettings => 'নামাজের সেটিংস';
@@ -427,7 +427,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get selectYourCountry => 'আপনার দেশ নির্বাচন করুন';
 
   @override
-  String get searchForACountry => 'একটি দেশ খুঁজুন';
+  String get searchForACountry => 'একটি সূরা খুঁজুন';
 
   @override
   String get selectYourAdministrator => 'আপনার প্রশাসনিক অঞ্চল নির্বাচন করুন';
@@ -790,7 +790,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get sixMonthsAgo => '৬ মাস আগে';
 
   @override
-  String get threeMonthsAgo => '৩ মাস আগে';
+  String get threeMonthsAgo => '৩ সপ্তাহ আগে';
 
   @override
   String get twoMonthsAgo => '২ মাস আগে';
@@ -993,7 +993,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get reliableQuranDataDescription =>
-      'আল কুরআনের টেক্সট, অনুবাদ, তাফসির এবং অডিও Quran.com ও Everyayah.com-এর মতো যাচাইকৃত উন্মুক্ত এপিআই এবং ডেটাবেস থেকে সংগ্রহ করা হয়েছে।';
+      'আল কুরআনের টেক্সট, অনুবাদ, তাফসির এবং অডিও Quran.com ও Everyayah.com-এর মতো যাচাইকৃত উন্মুক্ত এপিআই এবং ডেটাবেস থেকে সংগ্রহ করা হয়েছে।';
 
   @override
   String get prayerTimeEngineTitle => 'নামাজের সময় ইঞ্জিন';
@@ -1032,7 +1032,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      'আমি ব্যক্তিগতভাবে আমার সারাজীবন এই অ্যাপ্লিকেশনটির জন্য ক্রমাগত সমর্থন এবং রক্ষণাবেক্ষণ প্রদানের প্রতিশ্রুতি দিচ্ছি, ইনশাআল্লাহ। আমার লক্ষ্য হলো এই অ্যাপটি যাতে আগামী বছরগুলিতে উম্মাহর জন্য একটি উপকারী সম্পদ হিসেবে থাকে তা নিশ্চিত করা।';
+      'আমি ব্যক্তিগতভাবে আমার সারাজীবন এই অ্যাপ্লিকেশনটির জন্য ক্রমাগত সমর্থন এবং রক্ষণাবেক্ষণ প্রদানের প্রতিশ্রুতি দিচ্ছি, ইনশাআল্লাহ। আমার লক্ষ্য হলো এই অ্যাপটি যাতে আগামী বছরগুলিতে উম্মাহর জন্য একটি উপকারী সম্পদ হিসেবে থাকে তা নিশ্চিত করে।';
 
   @override
   String get fajr => 'ফজর';
@@ -1069,4 +1069,13 @@ class AppLocalizationsBn extends AppLocalizations {
   ) {
     return '$subAdministrativeArea, $administrativeArea, $country';
   }
+
+  @override
+  String get quranScriptTajweed => 'তাজবীদ';
+
+  @override
+  String get quranScriptUthmani => 'উসমানী';
+
+  @override
+  String get quranScriptIndopak => 'ইন্দোপাক';
 }

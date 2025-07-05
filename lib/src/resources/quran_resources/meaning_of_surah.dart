@@ -1,3 +1,20 @@
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+
+String getSurahName(BuildContext? context, int index) {
+  context ??= navigatorKey.currentContext!;
+  Locale locale = context.read<LanguageCubit>().state.locale;
+  return listOfSurahNameEnglish[index - 1];
+}
+
+String getSurahMeaning(BuildContext? context, int index) {
+  context ??= navigatorKey.currentContext!;
+  Locale locale = context.read<LanguageCubit>().state.locale;
+  return meaningOfSurahEnglish[index - 1];
+}
+
 List<String> meaningOfSurahEnglish = [
   "The Opening",
   "The Cow",

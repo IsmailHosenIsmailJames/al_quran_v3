@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
@@ -7,7 +8,7 @@ import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
@@ -66,7 +67,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${headerInfoModel.surahInfoModel.id}. ${headerInfoModel.surahInfoModel.nameSimple} ( ${headerInfoModel.surahInfoModel.nameArabic} )",
+                    "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${headerInfoModel.surahInfoModel.nameArabic} )",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Row(

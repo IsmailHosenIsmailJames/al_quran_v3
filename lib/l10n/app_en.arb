@@ -528,5 +528,8 @@
     "midnight": "Midnight",
     "alarm": "Alarm",
     "notification": "Notification",
-    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}"
+    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+    "quranScriptTajweed": "Tajweed",
+    "quranScriptUthmani": "Uthmani",
+    "quranScriptIndopak": "Indopak"
 }

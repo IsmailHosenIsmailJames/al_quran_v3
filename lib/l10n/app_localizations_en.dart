@@ -1066,4 +1066,13 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return '$subAdministrativeArea, $administrativeArea, $country';
   }
+
+  @override
+  String get quranScriptTajweed => 'Tajweed';
+
+  @override
+  String get quranScriptUthmani => 'Uthmani';
+
+  @override
+  String get quranScriptIndopak => 'Indopak';
 }

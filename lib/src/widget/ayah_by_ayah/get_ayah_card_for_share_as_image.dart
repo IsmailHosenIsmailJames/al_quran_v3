@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
@@ -78,7 +79,7 @@ Widget getAyahCardForShareAsImage(
           ),
         if (showMacOsWindowLikeIcon) const Gap(10),
         Text(
-          "${surahInfoModel.nameSimple} - $ayahKey",
+          "${getSurahName(null, surahInfoModel.id)} - $ayahKey",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         const Gap(20),

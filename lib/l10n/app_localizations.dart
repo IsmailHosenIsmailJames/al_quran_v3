@@ -2013,6 +2013,24 @@ abstract class AppLocalizations {
     Object country,
     Object subAdministrativeArea,
   );
+
+  /// No description provided for @quranScriptTajweed.
+  ///
+  /// In en, this message translates to:
+  /// **'Tajweed'**
+  String get quranScriptTajweed;
+
+  /// No description provided for @quranScriptUthmani.
+  ///
+  /// In en, this message translates to:
+  /// **'Uthmani'**
+  String get quranScriptUthmani;
+
+  /// No description provided for @quranScriptIndopak.
+  ///
+  /// In en, this message translates to:
+  /// **'Indopak'**
+  String get quranScriptIndopak;
 }
 
 class _AppLocalizationsDelegate
