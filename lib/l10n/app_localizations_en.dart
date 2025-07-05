@@ -932,39 +932,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'This application is designed to be accessible to a global audience with support for the following languages (and more are continuously being added):';
 
   @override
-  String get english => 'English';
-
-  @override
-  String get arabic => 'Arabic';
-
-  @override
-  String get urdu => 'Urdu';
-
-  @override
-  String get french => 'French';
-
-  @override
-  String get german => 'German';
-
-  @override
-  String get spanish => 'Spanish';
-
-  @override
-  String get indonesian => 'Indonesian';
-
-  @override
-  String get malay => 'Malay';
-
-  @override
-  String get turkish => 'Turkish';
-
-  @override
-  String get bengali => 'Bengali';
-
-  @override
-  String get russian => 'Russian';
-
-  @override
   String get technologyAndResources => 'Technology & Resources';
 
   @override
