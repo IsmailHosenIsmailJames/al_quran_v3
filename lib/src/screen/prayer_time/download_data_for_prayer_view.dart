@@ -33,8 +33,6 @@ class DownloadDataForPrayerView extends StatefulWidget {
 }
 
 class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
-  bool isPrayerTimeDownloading = false;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -162,10 +160,8 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(elevation: 0),
                 onPressed: () async {
-                  setState(() {
-                    isPrayerTimeDownloading = true;
-                  });
                   var cubit = context.read<LocationQiblaPrayerDataCubit>();
+                  cubit.changePrayerTimeDownloading(true);
                   await PrayersTimeFunction.downloadPrayerDataFromAPI(
                     lat: widget.lat,
                     lon: widget.long,
@@ -185,12 +181,14 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                   if (widget.moveToDownload) {
                     Navigator.pop(context);
                   }
-                  setState(() {
-                    isPrayerTimeDownloading = false;
-                  });
+                  cubit.changePrayerTimeDownloading(false);
                 },
-                icon:
-                    isPrayerTimeDownloading == true
+                icon: BlocBuilder<
+                  LocationQiblaPrayerDataCubit,
+                  LocationQiblaPrayerDataState
+                >(
+                  builder: (context, state) {
+                    return state.isPrayerTimeDownloading == true
                         ? const Center(
                           child: Padding(
                             padding: EdgeInsets.all(5),
@@ -199,7 +197,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                             ),
                           ),
                         )
-                        : const Icon(FluentIcons.arrow_download_24_filled),
+                        : const Icon(FluentIcons.arrow_download_24_filled);
+                  },
+                ),
                 label: Text(l10n.downloadPrayerTime),
               ),
             ),
