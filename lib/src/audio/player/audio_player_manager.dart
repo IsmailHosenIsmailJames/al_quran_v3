@@ -16,6 +16,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
 import "package:just_audio_background/just_audio_background.dart";
+import "package:permission_handler/permission_handler.dart";
 
 class AudioPlayerManager {
   static bool isListening = false;
@@ -131,6 +132,7 @@ class AudioPlayerManager {
     required bool isInsideQuran,
     bool instantPlay = true,
   }) async {
+    Permission.notification.request();
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
       await audioPlayer.clearAudioSources();
@@ -182,6 +184,7 @@ class AudioPlayerManager {
     int initialIndex = 0,
     bool instantPlay = true,
   }) async {
+    Permission.notification.request();
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
       await audioPlayer.clearAudioSources();
@@ -247,6 +250,7 @@ class AudioPlayerManager {
 
   static Future<void> playWord(String wordKey) async {
     if (isWordPlaying) return;
+    Permission.notification.request();
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;
 

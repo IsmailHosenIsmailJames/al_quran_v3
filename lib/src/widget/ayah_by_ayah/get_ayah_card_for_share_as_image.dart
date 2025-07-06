@@ -1,3 +1,5 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -14,6 +16,7 @@ import "../quran_script/script_processor.dart";
 ScreenshotController screenshotController = ScreenshotController();
 
 Widget getAyahCardForShareAsImage(
+  BuildContext context,
   bool showMacOsWindowLikeIcon,
   String ayahKey,
   SurahInfoModel surahInfoModel,
@@ -25,6 +28,8 @@ Widget getAyahCardForShareAsImage(
   Brightness brightness,
   Color primary,
 ) {
+  AppLocalizations l10n = AppLocalizations.of(context);
+
   bool keepFootNote = Hive.box(
     "user",
   ).get("keep_foot_note_on_share", defaultValue: true);
@@ -79,7 +84,7 @@ Widget getAyahCardForShareAsImage(
           ),
         if (showMacOsWindowLikeIcon) const Gap(10),
         Text(
-          "${getSurahName(null, surahInfoModel.id)} - $ayahKey",
+          "${getSurahName(null, surahInfoModel.id)} - ${getAyahLocalized(context, ayahKey)}",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         const Gap(20),
@@ -97,11 +102,17 @@ Widget getAyahCardForShareAsImage(
           ),
         ),
         const Gap(15),
-        const Text(
-          "Translation:",
-          style: TextStyle(fontSize: 12, color: Colors.grey),
+        Text(
+          l10n.translation,
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
-        Html(data: translation),
+        MediaQuery(
+          data: MediaQuery.of(context),
+          child: Directionality(
+            textDirection: Directionality.of(context),
+            child: Html(data: translation),
+          ),
+        ),
         keepFootNote ? const Gap(10) : const Gap(0),
         if (keepFootNote)
           ...List.generate(footNote.length, (index) {
@@ -116,7 +127,13 @@ Widget getAyahCardForShareAsImage(
                     decoration: TextDecoration.underline,
                   ),
                 ),
-                Html(data: footNote.values.toList()[index]),
+                MediaQuery(
+                  data: MediaQuery.of(context),
+                  child: Directionality(
+                    textDirection: Directionality.of(context),
+                    child: Html(data: footNote.values.toList()[index]),
+                  ),
+                ),
                 const Gap(5),
               ],
             );

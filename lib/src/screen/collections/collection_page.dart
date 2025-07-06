@@ -52,7 +52,6 @@ class _CollectionPageState extends State<CollectionPage> {
   }
 
   Future<void> _fetchData() async {
-    final l10n = AppLocalizations.of(context);
     setState(() {
       _isLoading = true;
       _errorMessage = null;
@@ -242,6 +241,14 @@ class _CollectionPageState extends State<CollectionPage> {
     );
   }
 
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    l10n = AppLocalizations.of(context);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -260,7 +267,9 @@ class _CollectionPageState extends State<CollectionPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          StringCapitalizeExtension(widget.collectionType.name).capitalize(),
+          StringCapitalizeExtension(
+            widget.collectionType.name == "notes" ? l10n.notes : l10n.pinned,
+          ).capitalize(),
         ),
         // actions: [
         //   IconButton(
