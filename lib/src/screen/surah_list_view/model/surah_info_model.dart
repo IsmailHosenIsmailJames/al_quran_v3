@@ -6,6 +6,7 @@ class SurahInfoModel {
   final String revelationPlace;
   final int versesCount;
   final String pagesRange;
+  final bool noBismillah;
 
   SurahInfoModel({
     required this.id,
@@ -13,6 +14,7 @@ class SurahInfoModel {
     required this.revelationPlace,
     required this.versesCount,
     required this.pagesRange,
+    this.noBismillah = false,
   });
 
   SurahInfoModel copyWith({
@@ -21,12 +23,14 @@ class SurahInfoModel {
     String? revelationPlace,
     int? versesCount,
     String? pagesRange,
+    bool? noBismillah,
   }) => SurahInfoModel(
     id: id ?? this.id,
     revelationOrder: revelationOrder ?? this.revelationOrder,
     revelationPlace: revelationPlace ?? this.revelationPlace,
     versesCount: versesCount ?? this.versesCount,
     pagesRange: pagesRange ?? this.pagesRange,
+    noBismillah: noBismillah ?? this.noBismillah,
   );
 
   factory SurahInfoModel.fromJson(String str) =>
@@ -40,6 +44,7 @@ class SurahInfoModel {
     revelationPlace: json["rp"], // rp -> revelation_place
     versesCount: json["vc"], // vc -> verses_count
     pagesRange: json["pr"], // pr -> pages_range
+    noBismillah: json["noBismillah"] ?? false,
   );
 
   Map<String, dynamic> toMap() => {
@@ -48,5 +53,6 @@ class SurahInfoModel {
     "rp": revelationPlace, // rp -> revelation_place
     "vc": versesCount, // vc -> verses_count
     "pr": pagesRange, // pr -> pages_range
+    "noBismillah": noBismillah,
   };
 }
