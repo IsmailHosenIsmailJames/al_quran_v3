@@ -43,76 +43,87 @@ Widget getAddressView({
   bool justAddress = false,
   TextStyle? style,
 }) {
-  return FutureBuilder<String?>(
-    future: fetchFormattedAddress(context, lat, long),
-    builder: (context, snapshot) {
-      ThemeState themeState = context.read<ThemeCubit>().state;
-      if (snapshot.connectionState == ConnectionState.waiting && !justAddress) {
-        // Show a generic loading indicator only if we are not in 'justAddress' mode,
-        // otherwise, let it be handled by the parent if needed.
-        return Text(AppLocalizations.of(context).loading, style: style);
-      } else if (snapshot.hasError && !justAddress) {
-        // Show error only if not in 'justAddress' mode
-        return Text(
-          AppLocalizations.of(context).errorFetchingAddress,
-          style: style,
-        );
-      }
+  return SizedBox(
+    height: keepDecoration == true ? 100 : null,
+    child: FutureBuilder<String?>(
+      future: fetchFormattedAddress(context, lat, long),
+      builder: (context, snapshot) {
+        ThemeState themeState = context.read<ThemeCubit>().state;
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            !justAddress) {
+          // Show a generic loading indicator only if we are not in 'justAddress' mode,
+          // otherwise, let it be handled by the parent if needed.
+          return Text(AppLocalizations.of(context).loading, style: style);
+        } else if (snapshot.hasError && !justAddress) {
+          // Show error only if not in 'justAddress' mode
+          return Text(
+            AppLocalizations.of(context).errorFetchingAddress,
+            style: style,
+          );
+        }
 
-      final String? address = snapshot.data;
+        final String? address = snapshot.data;
 
-      if (justAddress) {
-        return Text(
-          address ?? AppLocalizations.of(context).addressNotAvailable,
-          style: style,
-        );
-      }
+        if (justAddress) {
+          return Text(
+            address ?? AppLocalizations.of(context).addressNotAvailable,
+            style: style,
+          );
+        }
 
-      // Full view with address, lat, and long
-      return Container(
-        decoration:
-            keepDecoration
-                ? BoxDecoration(
-                  border: Border.all(color: themeState.primary),
-                  borderRadius: BorderRadius.circular(roundedRadius),
-                )
-                : null,
-        padding: keepPadding ? const EdgeInsets.all(5) : null,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              address ?? AppLocalizations.of(context).addressNotAvailable,
-              style: style,
-            ),
-            const Gap(5),
-            Row(
+        // Full view with address, lat, and long
+        return Container(
+          height: 100,
+          alignment: Alignment.topLeft,
+          decoration:
+              keepDecoration
+                  ? BoxDecoration(
+                    border: Border.all(color: themeState.primaryShade300),
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                  )
+                  : null,
+          padding: keepPadding ? const EdgeInsets.all(5) : null,
+          child: FittedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  AppLocalizations.of(context).latitude,
-                  style: (style ?? const TextStyle()).copyWith(
-                    color: Colors.grey,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Text(
+                    address ?? AppLocalizations.of(context).addressNotAvailable,
+                    style: style,
                   ),
                 ),
-                Text(lat.toString(), style: style),
-              ],
-            ),
-            const Gap(5),
-            Row(
-              children: [
-                Text(
-                  AppLocalizations.of(context).longitude,
-                  style: (style ?? const TextStyle()).copyWith(
-                    color: Colors.grey,
-                  ),
+                const Gap(5),
+                Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).latitude,
+                      style: (style ?? const TextStyle()).copyWith(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(lat.toString(), style: style),
+                  ],
                 ),
-                Text(long.toString(), style: style),
+                const Gap(5),
+                Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).longitude,
+                      style: (style ?? const TextStyle()).copyWith(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(long.toString(), style: style),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
-      );
-    },
+          ),
+        );
+      },
+    ),
   );
 }
