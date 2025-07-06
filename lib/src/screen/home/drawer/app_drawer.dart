@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
+import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -485,6 +486,9 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Future<void> _resetApp() async {
+    context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
+    context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
+
     await QuranTranslationFunction.close();
     await Hive.deleteFromDisk();
     await Hive.initFlutter();
