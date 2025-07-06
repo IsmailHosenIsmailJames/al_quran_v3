@@ -19,15 +19,14 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     if (save) {
       Hive.box("user").put("user_location", latLon?.toJson());
     }
-    emit(
-      state.copyWith(
-        latLon: latLon,
-        kaabaAngle:
-            latLon == null
-                ? null
-                : calculateQiblaAngle(latLon.latitude, latLon.longitude),
-      ),
-    );
+    LocationQiblaPrayerDataState newState = state.copyWith();
+    newState.latLon = latLon;
+    newState.kaabaAngle =
+        latLon == null
+            ? null
+            : calculateQiblaAngle(latLon.latitude, latLon.longitude);
+
+    emit(newState);
   }
 
   void saveCalculationMethod(
