@@ -13,8 +13,12 @@ import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_mod
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -36,7 +40,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
     final TranslationBookModel? translationMeta =
         QuranTranslationFunction.getMetaInfo();
     TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
-    return Container(
+    Widget surahInfoHeader = Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
@@ -236,6 +240,41 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
         ],
       ),
     );
+
+    if (!headerInfoModel.surahInfoModel.noBismillah) {
+      return Column(
+        children: [
+          surahInfoHeader,
+
+          Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
+            child: BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, state) {
+                return ScriptProcessor(
+                  scriptInfo: ScriptInfo(
+                    surahNumber: 1,
+                    ayahNumber: 1,
+                    quranScriptType: state.quranScriptType,
+                    textStyle: TextStyle(
+                      fontSize: state.fontSize,
+                      height: state.lineHeight,
+                    ),
+                    limitWord: 4,
+                    textAlign: TextAlign.center,
+                    skipWordTap: false,
+                    showWordHighlights: false,
+                  ),
+                );
+              },
+            ),
+          ),
+          const Gap(10),
+        ],
+      );
+    } else {
+      return surahInfoHeader;
+    }
   }
 }
 
