@@ -181,6 +181,7 @@ void showShareBottomDialog(
                         context,
                         Material(
                           child: getAyahCardForShareAsImage(
+                            context,
                             Hive.box("user").get(
                               "show_mac_os_window_like_icon",
                               defaultValue: true,

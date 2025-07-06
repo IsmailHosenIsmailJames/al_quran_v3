@@ -1,5 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -246,7 +247,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       });
                                     },
                                     child: Text(
-                                      "${index + 1}. ${getSurahName(context, surah.id)}",
+                                      "${localizedNumber(context, index + 1)}. ${getSurahName(context, surah.id)}",
                                     ),
                                   )
                                   : const SizedBox();
@@ -335,7 +336,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                       ),
                                 if (widget.selectMultipleAndShare == true)
                                   const Gap(20),
-                                Text((index + 1).toString()),
+                                Text(localizedNumber(context, index + 1)),
                               ],
                             ),
                           ),
@@ -444,6 +445,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 context,
                                 Material(
                                   child: getAyahCardForShareAsImage(
+                                    context,
                                     Hive.box("user").get(
                                       "show_mac_os_window_like_icon",
                                       defaultValue: true,

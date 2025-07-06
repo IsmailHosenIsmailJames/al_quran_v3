@@ -46,7 +46,7 @@ class PageListView extends StatelessWidget {
           final ayahKey = convertAyahNumberToKey(pageInfo.start);
 
           int surahNumber = ayahKey!.split(":").first.toInt();
-          int ayahNumber = ayahKey.split(":").last.toInt();
+          // int ayahNumber = ayahKey.split(":").last.toInt();
           return Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
             child: TextButton(
