@@ -6,7 +6,6 @@ import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
-import "package:al_quran_v3/src/screen/tajweed_color_introduction/tajweed_color_introduction.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
@@ -185,28 +184,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                     ),
                     const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => const TajweedColorIntroduction(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        Icons.color_lens_rounded,
-                        color: themeState.primary,
-                      ),
-                      title: Text(
-                        "Tajweed Color",
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
+
                     ListTile(
                       minTileHeight: 40,
                       onTap: () async {
