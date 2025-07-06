@@ -137,6 +137,7 @@
   "pinned": "Nîşankirî",
   "jumpToAyah": "Biçe ser Ayetê",
   "shareMultipleAyah": "Gelek Ayetan Parve Bike",
+  "shareThisApp": "Vê Sepanê Parve Bike",
   "giveRating": "Binirxîne",
   "bugReport": "Rapora Çewtiyê",
   "privacyPolicy": "Polîtîkaya Nepenîtiyê",
@@ -299,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
   "quranScriptTajweed": "Tecwîd",
   "quranScriptUthmani": "Usmanî",
-  "quranScriptIndopak": "Indopak"
+  "quranScriptIndopak": "Indopak",
+  "sajdaAyah": "Ayeta Secdê",
+  "required": "Pêwîst",
+  "optional": "Bijarî"
 }

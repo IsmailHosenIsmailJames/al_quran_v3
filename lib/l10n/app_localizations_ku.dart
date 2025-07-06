@@ -471,7 +471,7 @@ class AppLocalizationsKu extends AppLocalizations {
   String get shareMultipleAyah => 'Gelek Ayetan Parve Bike';
 
   @override
-  String get shareThisApp => 'Share this App';
+  String get shareThisApp => 'Vê Sepanê Parve Bike';
 
   @override
   String get giveRating => 'Binirxîne';
@@ -804,7 +804,7 @@ class AppLocalizationsKu extends AppLocalizations {
   }
 
   @override
-  String hoursAgo(Object hour) {
+  String hoursAgo(int hour) {
     return '$hour Saet berê';
   }
 
@@ -1014,9 +1014,9 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String formattedAddress(
-    Object administrativeArea,
-    Object country,
-    Object subAdministrativeArea,
+    String subAdministrativeArea,
+    String administrativeArea,
+    String country,
   ) {
     return '$subAdministrativeArea, $administrativeArea, $country';
   }
@@ -1029,4 +1029,13 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get quranScriptIndopak => 'Indopak';
+
+  @override
+  String get sajdaAyah => 'Ayeta Secdê';
+
+  @override
+  String get required => 'Pêwîst';
+
+  @override
+  String get optional => 'Bijarî';
 }

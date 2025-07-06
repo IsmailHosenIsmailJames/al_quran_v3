@@ -793,7 +793,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String weeksAgo(String number) {
-    return '৩ সপ্তাহ আগে';
+    return '$number সপ্তাহ আগে';
   }
 
   @override
@@ -802,8 +802,8 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String hoursAgo(Object hour) {
-    return '$hour Hours ago';
+  String hoursAgo(int hour) {
+    return '$hour ঘন্টা আগে';
   }
 
   @override
@@ -1011,9 +1011,9 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String formattedAddress(
-    Object administrativeArea,
-    Object country,
-    Object subAdministrativeArea,
+    String subAdministrativeArea,
+    String administrativeArea,
+    String country,
   ) {
     return '$subAdministrativeArea, $administrativeArea, $country';
   }
@@ -1026,4 +1026,13 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get quranScriptIndopak => 'ইন্দোপাক';
+
+  @override
+  String get sajdaAyah => 'সিজদা আয়াত';
+
+  @override
+  String get required => 'আবশ্যক';
+
+  @override
+  String get optional => 'ঐচ্ছিক';
 }

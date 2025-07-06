@@ -807,7 +807,7 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String hoursAgo(Object hour) {
+  String hoursAgo(int hour) {
     return 'Hace $hour horas';
   }
 
@@ -1017,9 +1017,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String formattedAddress(
-    Object administrativeArea,
-    Object country,
-    Object subAdministrativeArea,
+    String subAdministrativeArea,
+    String administrativeArea,
+    String country,
   ) {
     return '$subAdministrativeArea, $administrativeArea, $country';
   }
@@ -1032,4 +1032,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get quranScriptIndopak => 'Indopak';
+
+  @override
+  String get sajdaAyah => 'Aleya de Sayda';
+
+  @override
+  String get required => 'Obligatorio';
+
+  @override
+  String get optional => 'Opcional';
 }

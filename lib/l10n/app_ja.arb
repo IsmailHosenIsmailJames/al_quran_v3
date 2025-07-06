@@ -300,5 +300,8 @@
   "formattedAddress": "{country}、{administrativeArea}、{subAdministrativeArea}",
   "quranScriptTajweed": "タジュウィード",
   "quranScriptUthmani": "ウスマーン体",
-  "quranScriptIndopak": "インドパク体"
+  "quranScriptIndopak": "インドパク体",
+  "sajdaAyah": "サジダの節",
+  "required": "必須",
+  "optional": "任意"
 }

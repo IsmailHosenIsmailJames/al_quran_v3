@@ -50,7 +50,7 @@ Map<String, dynamic> metaDataJuz = {};
 Map<String, dynamic> metaDataManzil = {};
 Map<String, dynamic> metaDataRub = {};
 Map<String, dynamic> metaDataRuku = {};
-Map<String, dynamic> metaDataSajda = {};
+List<Map> metaDataSajda = [];
 Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
 Map<String, dynamic> surahMeaningLocalization = {};
@@ -111,8 +111,8 @@ Future<void> main() async {
   metaDataRuku = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Ruku.json"),
   );
-  metaDataSajda = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Sajda.json"),
+  metaDataSajda = List<Map>.from(
+    jsonDecode(await rootBundle.loadString("assets/meta_data/Sajda.json")),
   );
   metaDataSurah = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Surah.json"),

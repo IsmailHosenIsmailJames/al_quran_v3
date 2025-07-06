@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
   "quranScriptTajweed": "Təcvid",
   "quranScriptUthmani": "Osman",
-  "quranScriptIndopak": "İndopak"
+  "quranScriptIndopak": "İndopak",
+  "sajdaAyah": "Səcdə Ayəsi",
+  "required": "Vacib",
+  "optional": "İstəyə bağlı"
 }

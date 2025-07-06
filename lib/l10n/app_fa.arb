@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}، {administrativeArea}، {country}",
   "quranScriptTajweed": "تجوید",
   "quranScriptUthmani": "عثمان طه",
-  "quranScriptIndopak": "ایندپاک"
+  "quranScriptIndopak": "ایندپاک",
+  "sajdaAyah": "آیه سجده",
+  "required": "واجب",
+  "optional": "مستحب"
 }

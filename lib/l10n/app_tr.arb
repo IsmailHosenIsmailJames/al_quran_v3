@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
   "quranScriptTajweed": "Tecvidli",
   "quranScriptUthmani": "Osmanlı Hattı",
-  "quranScriptIndopak": "Indopak"
+  "quranScriptIndopak": "Indopak",
+  "sajdaAyah": "Secde Ayeti",
+  "required": "Vacip",
+  "optional": "İsteğe Bağlı"
 }

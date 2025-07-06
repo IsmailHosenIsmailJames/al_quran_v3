@@ -469,6 +469,13 @@
     }
   },
   "hoursAgo": "{hour} Hours ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
   "aboutAlQuran": "About Al Quran",
   "appFullName": "Al Quran (Tafsir, Prayer, Qibla, Audio)",
   "appDescription": "A comprehensive Islamic application for Android, iOS, MacOS, Web, Linux and Windows, offering Quran reading with Tafsir & multiple translations (including word-by-word), worldwide prayer times with notifications, Qibla compass, and synchronized word-by-word audio recitation.",
@@ -530,7 +537,23 @@
   "alarm": "Alarm",
   "notification": "Notification",
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
   "quranScriptTajweed": "Tajweed",
   "quranScriptUthmani": "Uthmani",
-  "quranScriptIndopak": "Indopak"
+  "quranScriptIndopak": "Indopak",
+  "sajdaAyah": "Sajda Ayah",
+  "required": "Required",
+  "optional": "Optional"
 }
