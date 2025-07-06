@@ -300,5 +300,8 @@
   "formattedAddress": "{country} {administrativeArea} {subAdministrativeArea}",
   "quranScriptTajweed": "타즈위드",
   "quranScriptUthmani": "우스마니체",
-  "quranScriptIndopak": "인도파크체"
+  "quranScriptIndopak": "인도파크체",
+  "sajdaAyah": "사즈다 구절",
+  "required": "필수",
+  "optional": "선택"
 }

@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}，{administrativeArea}，{country}",
   "quranScriptTajweed": "泰吉威德",
   "quranScriptUthmani": "奥斯曼体",
-  "quranScriptIndopak": "印度-巴基斯坦体"
+  "quranScriptIndopak": "印度-巴基斯坦体",
+  "sajdaAyah": "叩头节",
+  "required": "必须",
+  "optional": "可选"
 }

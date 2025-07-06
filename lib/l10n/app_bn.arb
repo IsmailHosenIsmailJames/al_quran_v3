@@ -241,7 +241,7 @@
             }
         }
     },
-    "weeksAgo": "৩ সপ্তাহ আগে",
+    "weeksAgo": "{number} সপ্তাহ আগে",
     "@weeksAgo": {
         "placeholders": {
             "number": {
@@ -257,6 +257,7 @@
             }
         }
     },
+    "hoursAgo": "{hour} ঘন্টা আগে",
     "aboutAlQuran": "আল কুরআন সম্পর্কে",
     "appFullName": "আল কুরআন (তাফসির, নামাজ, কিবলা, অডিও)",
     "appDescription": "অ্যান্ড্রয়েড, আইওএস, ম্যাকওএস, ওয়েব, লিনাক্স এবং উইন্ডোজের জন্য একটি পূর্ণাঙ্গ ইসলামিক অ্যাপ্লিকেশন, যা তাফসির এবং একাধিক অনুবাদসহ (শব্দে-শব্দে সহ) কুরআন পড়ার সুবিধা, নোটিফিকেশনসহ বিশ্বব্যাপী নামাজের সময়, কিবলা কম্পাস এবং শব্দে-শব্দে অডিও তিলাওয়াত শোনার সুযোগ দেয়।",
@@ -320,5 +321,8 @@
     "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
     "quranScriptTajweed": "তাজবীদ",
     "quranScriptUthmani": "উসমানী",
-    "quranScriptIndopak": "ইন্দোপাক"
+    "quranScriptIndopak": "ইন্দোপাক",
+    "sajdaAyah": "সিজদা আয়াত",
+    "required": "আবশ্যক",
+    "optional": "ঐচ্ছিক"
 }

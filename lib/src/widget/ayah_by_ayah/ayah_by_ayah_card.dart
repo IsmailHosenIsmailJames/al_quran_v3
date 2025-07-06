@@ -64,6 +64,17 @@ Widget getAyahByAyahCard({
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah["$surahNumber"],
   );
+
+  bool isSajdaAyah = false;
+  bool isSajdaRequired = false;
+  for (Map sajdaAyah in metaDataSajda) {
+    if (sajdaAyah["verse_key"] == ayahKey) {
+      isSajdaAyah = true;
+      isSajdaRequired = sajdaAyah["required"];
+      break;
+    }
+  }
+
   return BlocBuilder<ThemeCubit, ThemeState>(
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
@@ -104,17 +115,56 @@ Widget getAyahByAyahCard({
                   quranAyahWidget(surahNumber, ayahNumber, quranViewState),
                 if (!showOnlyAyah && !quranViewState.hideTranslation)
                   const Gap(5),
+                if (isSajdaAyah)
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                    ),
+                    height: 35,
+
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          height: 25,
+                          width: 25,
+                          image: const AssetImage("assets/img/sajadah.png"),
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.grey.shade900
+                                  : Colors.white,
+                          colorBlendMode: BlendMode.srcIn,
+                        ),
+                        const Gap(10),
+                        Text(
+                          l10n.sajdaAyah,
+                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        const Gap(8),
+                        const Text("-"),
+                        const Gap(8),
+                        Text(
+                          isSajdaRequired ? l10n.required : l10n.optional,
+                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (isSajdaAyah) const Gap(5),
                 if (!showOnlyAyah && !quranViewState.hideTranslation)
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      l10n.translationTitle, // TODO: add translation book name
+                      l10n.translationTitle,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,
                       ),
                     ),
                   ),
+
                 if (!showOnlyAyah && !quranViewState.hideTranslation)
                   const Gap(5),
                 if (!showOnlyAyah && !quranViewState.hideTranslation)

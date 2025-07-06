@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}، {administrativeArea}، {country}",
   "quranScriptTajweed": "تجوید",
   "quranScriptUthmani": "عثماني",
-  "quranScriptIndopak": "انډوپاک"
+  "quranScriptIndopak": "انډوپاک",
+  "sajdaAyah": "د سجدې آیت",
+  "required": "واجب",
+  "optional": "اختیاري"
 }

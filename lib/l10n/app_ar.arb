@@ -258,6 +258,7 @@
       }
     }
   },
+  "hoursAgo": "منذ {hour} ساعات",
   "aboutAlQuran": "عن تطبيق القرآن",
   "appFullName": "القرآن الكريم (تفسير، صلاة، قبلة، صوتيات)",
   "appDescription": "تطبيق إسلامي شامل لأنظمة أندرويد، iOS، ماك، الويب، لينكس، وويندوز، يوفر قراءة القرآن مع التفسير وترجمات متعددة (بما في ذلك كلمة بكلمة)، وأوقات صلاة عالمية مع إشعارات، وبوصلة القبلة، وتلاوة صوتية متزامنة كلمة بكلمة.",
@@ -321,5 +322,8 @@
   "formattedAddress": "{subAdministrativeArea}، {administrativeArea}، {country}",
   "quranScriptTajweed": "تجويد",
   "quranScriptUthmani": "عثماني",
-  "quranScriptIndopak": "هندي-باكستاني"
+  "quranScriptIndopak": "هندي-باكستاني",
+  "sajdaAyah": "آية سجدة",
+  "required": "واجبة",
+  "optional": "مستحبة"
 }

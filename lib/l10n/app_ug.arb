@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
   "quranScriptTajweed": "تەجۋىد",
   "quranScriptUthmani": "ئوسمانى",
-  "quranScriptIndopak": "ھىندى-پاك"
+  "quranScriptIndopak": "ھىندى-پاك",
+  "sajdaAyah": "سەجدە ئايىتى",
+  "required": "ۋاجىپ",
+  "optional": "ئىختىيارىي"
 }

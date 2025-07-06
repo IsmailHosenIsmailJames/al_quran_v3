@@ -1,17 +1,1 @@
-{
-  "ar": [
-    "hoursAgo"
-  ],
-
-  "bn": [
-    "hoursAgo"
-  ],
-
-  "ku": [
-    "shareThisApp"
-  ],
-
-  "ur": [
-    "hoursAgo"
-  ]
-}
+{}

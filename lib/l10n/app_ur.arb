@@ -257,6 +257,7 @@
       }
     }
   },
+  "hoursAgo": "{hour} گھنٹے پہلے",
   "aboutAlQuran": "القرآن کے بارے میں",
   "appFullName": "القرآن (تفسیر، نماز، قبلہ، آڈیو)",
   "appDescription": "اینڈرائیڈ، آئی او ایس، میک او ایس، ویب، لینکس اور ونڈوز کے لیے ایک جامع اسلامی ایپلیکیشن، جو تفسیر اور متعدد تراجم (بشمول لفظ بہ لفظ) کے ساتھ قرآن پڑھنے کی سہولت، اطلاعات کے ساتھ دنیا بھر میں نماز کے اوقات، قبلہ کمپاس، اور ہم آہنگ لفظ بہ لفظ آڈیو تلاوت پیش کرتی ہے۔",
@@ -320,5 +321,8 @@
   "formattedAddress": "{subAdministrativeArea}، {administrativeArea}، {country}",
   "quranScriptTajweed": "تجوید",
   "quranScriptUthmani": "عثمانی",
-  "quranScriptIndopak": "انڈوپاک"
+  "quranScriptIndopak": "انڈوپاک",
+  "sajdaAyah": "سجدہ آیت",
+  "required": "واجب",
+  "optional": "اختیاری"
 }

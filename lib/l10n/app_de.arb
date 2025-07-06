@@ -300,5 +300,8 @@
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
   "quranScriptTajweed": "Tadschwīd",
   "quranScriptUthmani": "Uthmani",
-  "quranScriptIndopak": "Indo-Pak"
+  "quranScriptIndopak": "Indo-Pak",
+  "sajdaAyah": "Sajda-Vers",
+  "required": "Erforderlich",
+  "optional": "Optional"
 }

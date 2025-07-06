@@ -1578,7 +1578,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{hour} Hours ago'**
-  String hoursAgo(Object hour);
+  String hoursAgo(int hour);
 
   /// No description provided for @aboutAlQuran.
   ///
@@ -1945,9 +1945,9 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{subAdministrativeArea}, {administrativeArea}, {country}'**
   String formattedAddress(
-    Object administrativeArea,
-    Object country,
-    Object subAdministrativeArea,
+    String subAdministrativeArea,
+    String administrativeArea,
+    String country,
   );
 
   /// No description provided for @quranScriptTajweed.
@@ -1967,6 +1967,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Indopak'**
   String get quranScriptIndopak;
+
+  /// No description provided for @sajdaAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Sajda Ayah'**
+  String get sajdaAyah;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
 }
 
 class _AppLocalizationsDelegate
