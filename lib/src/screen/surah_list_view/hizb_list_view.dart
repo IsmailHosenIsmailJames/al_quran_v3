@@ -53,11 +53,9 @@ class HizbListView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
-                backgroundColor: context
-                    .read<ThemeCubit>()
-                    .state
-                    .primary
-                    .withValues(alpha: 0.05),
+                side: BorderSide(
+                  color: context.read<ThemeCubit>().state.primaryShade200,
+                ),
               ),
 
               onPressed: () {
