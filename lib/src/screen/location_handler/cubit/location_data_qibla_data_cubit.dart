@@ -45,4 +45,8 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   void checkPrayerDataExits() {
     emit(state.copyWith(isDataExits: PrayersTimeFunction.checkIsDataExits()));
   }
+
+  void changePrayerTimeDownloading(bool value) {
+    emit(state.copyWith(isPrayerTimeDownloading: value));
+  }
 }

@@ -22,7 +22,7 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
                 IconButton(
@@ -34,10 +34,15 @@ class _AdministratorSelectionState extends State<AdministratorSelection> {
                   },
                   icon: const Icon(Icons.arrow_back),
                 ),
-                const Gap(15),
-                Text(
-                  l10n.selectYourAdministrator,
-                  style: const TextStyle(fontSize: 20),
+                const Gap(10),
+                Expanded(
+                  child: Text(
+                    l10n.selectYourAdministrator,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ],
             ),

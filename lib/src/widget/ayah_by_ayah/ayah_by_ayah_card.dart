@@ -108,7 +108,7 @@ Widget getAyahByAyahCard({
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      l10n.translationTitle,
+                      l10n.translationTitle, // TODO: add translation book name
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey.shade500,

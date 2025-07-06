@@ -95,7 +95,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 120 - 30,
                     child: Text(
                       safeSubString(
-                        'Tafsir: ${tafsirSelected?.name ?? l10n.tafsirNotFound}',
+                        "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",
                         30,
                         replacer: "...",
                       ),
