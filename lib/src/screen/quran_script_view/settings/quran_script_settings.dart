@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -5,11 +7,16 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
+import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
+import "package:hive/hive.dart";
 import "package:screenshot/screenshot.dart";
 
 import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
@@ -295,7 +302,28 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          appBar: AppBar(title: Text(appLocalizations.quranScriptSettings)),
+          appBar: AppBar(
+            title: Text(appLocalizations.quranScriptSettings),
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  log(
+                    SegmentedResourcesManager.getOpenSegmentsReciter()?.name
+                            .toString() ??
+                        "Null",
+                  );
+
+                  log(
+                    (await Hive.openBox(
+                      SegmentedResourcesManager.getSelectedDataBoxName()
+                          .toString(),
+                    )).get("meta_data"),
+                  );
+                },
+                icon: Icon(Icons.check),
+              ),
+            ],
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 10,
@@ -314,38 +342,59 @@ class QuranScriptSettings extends StatelessWidget {
     ReciterInfoModel reciter,
     AyahKeyManagement ayahState,
   ) {
-    return getReciterWidget(
-      context: context,
-      audioTabScreenState: reciter,
-      ayahKeyState: ayahState,
-      isWordByWord: true,
-      onReciterChanged: (reciterInfoModel) async {
-        Navigator.pop(context);
-        bool isSuccess = await context
-            .read<SegmentedQuranReciterCubit>()
-            .changeReciter(context, reciterInfoModel);
+    AppLocalizations l10n = AppLocalizations.of(context);
+    return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+      builder: (context, state) {
+        Widget toReturn = getReciterWidget(
+          context: context,
+          audioTabScreenState: reciter,
+          ayahKeyState: ayahState,
+          isWordByWord: true,
+          onReciterChanged: (reciterInfoModel) async {
+            Navigator.pop(context);
+            bool isSuccess = await context
+                .read<SegmentedQuranReciterCubit>()
+                .changeReciter(context, reciterInfoModel);
 
-        if (!isSuccess) {
-          Fluttertoast.showToast(msg: "Failed to download segments");
-          return;
-        }
+            if (!isSuccess) {
+              Fluttertoast.showToast(msg: l10n.unableToDownloadResources);
+              return;
+            } else {
+              Fluttertoast.showToast(msg: l10n.success);
+            }
 
-        if (AudioPlayerManager.audioPlayer.playing) {
-          if (AudioPlayerManager.audioPlayer.audioSources.length > 1) {
-            await AudioPlayerManager.playMultipleAyahAsPlaylist(
-              startAyahKey: ayahState.start,
-              endAyahKey: ayahState.end,
-              isInsideQuran: true,
-              reciterInfoModel: reciterInfoModel,
-            );
-          } else {
-            AudioPlayerManager.playSingleAyah(
-              ayahKey: ayahState.current,
-              reciterInfoModel: reciterInfoModel,
-              isInsideQuran: true,
-            );
-          }
+            if (AudioPlayerManager.audioPlayer.playing) {
+              if (AudioPlayerManager.audioPlayer.audioSources.length > 1) {
+                await AudioPlayerManager.playMultipleAyahAsPlaylist(
+                  startAyahKey: ayahState.start,
+                  endAyahKey: ayahState.end,
+                  isInsideQuran: true,
+                  reciterInfoModel: reciterInfoModel,
+                );
+              } else {
+                AudioPlayerManager.playSingleAyah(
+                  ayahKey: ayahState.current,
+                  reciterInfoModel: reciterInfoModel,
+                  isInsideQuran: true,
+                );
+              }
+            }
+          },
+        );
+        if (state.isDownloading) {
+          return Container(
+                decoration: BoxDecoration(
+                  color: context.read<ThemeCubit>().state.primaryShade300,
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                ),
+                child: toReturn,
+              )
+              .animate(onPlay: (controller) => controller.repeat())
+              .shimmer(duration: 1200.ms, color: const Color(0x80000000))
+              .animate()
+              .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad);
         }
+        return toReturn;
       },
     );
   }
