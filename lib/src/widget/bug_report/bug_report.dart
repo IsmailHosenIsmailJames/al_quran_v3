@@ -102,7 +102,7 @@ Future<void> showBugReportDialog(BuildContext context) async {
             ListTile(
               onTap: () async {
                 final Uri discordUrl = Uri.parse(
-                  "https://discord.com/channels/1381934392347463730/1381941031766986754",
+                  "https://discord.gg/BcyaF8jHR9",
                 );
                 // It's not straightforward to prefill messages in Discord channels via URL.
                 // This will just open the channel. User needs to paste the info manually.
