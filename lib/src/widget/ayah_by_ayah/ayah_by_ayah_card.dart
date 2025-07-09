@@ -12,6 +12,7 @@ import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
+import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -230,66 +231,84 @@ Align getWordByWordWidget(
   ThemeState themeState = context.read<ThemeCubit>().state;
   return Align(
     alignment: Alignment.centerRight,
-    child: BlocBuilder<
-      AyahByAyahInScrollInfoCubit,
-      AyahByAyahInScrollInfoState
-    >(
-      builder:
-          (context, state) => SizedBox(
-            height:
-                (state.expandedForWordByWord?.contains(ayahKey) == true ||
-                        quranViewState.alwaysOpenWordByWord)
-                    ? null
-                    : 0,
+    child:
+        BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
+          builder:
+              (context, state) => SizedBox(
+                height:
+                    (state.expandedForWordByWord?.contains(ayahKey) == true ||
+                            quranViewState.alwaysOpenWordByWord)
+                        ? null
+                        : 0,
 
-            child:
-                (state.expandedForWordByWord?.contains(ayahKey) == true ||
-                        quranViewState.alwaysOpenWordByWord)
-                    ? Wrap(
-                      spacing: 5,
-                      runSpacing: 5,
-                      textDirection: TextDirection.rtl,
-                      children: List.generate(wordByWord.length, (index) {
-                        return Container(
-                          padding: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            color: themeState.primary.withValues(alpha: 0.05),
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                          ),
-                          child: Column(
-                            children: [
-                              BlocBuilder<QuranViewCubit, QuranViewState>(
-                                builder: (context, quranViewState) {
-                                  return ScriptProcessor(
-                                    scriptInfo: ScriptInfo(
-                                      surahNumber: surahNumber,
-                                      ayahNumber: ayahNumber,
-                                      quranScriptType:
-                                          quranViewState.quranScriptType,
-                                      wordIndex: index,
-                                      textStyle: TextStyle(
-                                        fontSize: quranViewState.fontSize,
-                                        height: quranViewState.lineHeight,
+                child:
+                    (state.expandedForWordByWord?.contains(ayahKey) == true ||
+                            quranViewState.alwaysOpenWordByWord)
+                        ? Wrap(
+                          spacing: 5,
+                          runSpacing: 5,
+                          textDirection: TextDirection.rtl,
+                          children: List.generate(wordByWord.length, (index) {
+                            return InkWell(
+                              radius: roundedRadius,
+                              onTap: () async {
+                                List<String> wordsKey = List.generate(
+                                  wordByWord.length,
+                                  (i) => "$surahNumber:$ayahNumber:${i + 1}",
+                                );
+                                showPopupWordFunction(
+                                  context: context,
+                                  wordKeys: wordsKey,
+                                  initWordIndex: index,
+                                  scriptCategory: QuranScriptType.uthmani,
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  color: themeState.primary.withValues(
+                                    alpha: 0.05,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    roundedRadius,
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    BlocBuilder<QuranViewCubit, QuranViewState>(
+                                      builder: (context, quranViewState) {
+                                        return ScriptProcessor(
+                                          scriptInfo: ScriptInfo(
+                                            surahNumber: surahNumber,
+                                            ayahNumber: ayahNumber,
+                                            quranScriptType:
+                                                quranViewState.quranScriptType,
+                                            wordIndex: index,
+                                            textStyle: TextStyle(
+                                              fontSize: quranViewState.fontSize,
+                                              height: quranViewState.lineHeight,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const Gap(5),
+                                    Text(
+                                      wordByWord[index],
+                                      style: TextStyle(
+                                        fontSize:
+                                            quranViewState.translationFontSize,
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
-                              const Gap(5),
-                              Text(
-                                wordByWord[index],
-                                style: TextStyle(
-                                  fontSize: quranViewState.translationFontSize,
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        );
-                      }),
-                    )
-                    : null,
-          ),
-    ),
+                            );
+                          }),
+                        )
+                        : null,
+              ),
+        ),
   );
 }
 
@@ -364,6 +383,7 @@ Align getFootNoteWidget(
           children: [
             CircleAvatar(
               radius: 12,
+              backgroundColor: context.read<ThemeCubit>().state.primaryShade300,
               child: Text(
                 localizedNumber(context, index + 1),
                 style: const TextStyle(fontSize: 12),
