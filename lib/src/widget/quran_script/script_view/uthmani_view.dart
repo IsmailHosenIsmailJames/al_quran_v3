@@ -52,10 +52,6 @@ class NonTajweedScriptView extends StatelessWidget {
 
     String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
 
-    List<List>? segments = context
-        .read<SegmentedQuranReciterCubit>()
-        .getAyahSegments(ayahKey);
-
     String? highlightingWordIndex;
     if (scriptInfo.forImage == true) {
       return Text.rich(
@@ -100,6 +96,9 @@ class NonTajweedScriptView extends StatelessWidget {
     }
     return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
       builder: (context, segmentsReciterState) {
+        List<List>? segments = context
+            .read<SegmentedQuranReciterCubit>()
+            .getAyahSegments(ayahKey);
         return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
           buildWhen: (previous, current) {
             if (scriptInfo.showWordHighlights == false ||

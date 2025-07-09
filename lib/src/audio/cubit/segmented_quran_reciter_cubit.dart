@@ -18,7 +18,8 @@ class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
     if (reciter.segmentsUrl == null) {
       assert(true, "Segments is not supported");
     }
-    emit(state.copyWith(isDownloading: true));
+    ReciterInfoModel previousReciter = state.copyWith(isDownloading: false);
+    emit(reciter.copyWith(isDownloading: true));
     bool isSuccess = await SegmentedResourcesManager.downloadResources(
       context,
       reciter.segmentsUrl!,
@@ -28,6 +29,7 @@ class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
       emit(reciter);
       return true;
     }
+    emit(previousReciter);
     return false;
   }
 

@@ -54,6 +54,10 @@ class SegmentedResourcesManager {
     return Hive.box("user").get(_selectedBox, defaultValue: null);
   }
 
+  static Future<void> saveSelectedBox(String boxName) async {
+    await Hive.box("user").put(_selectedBox, boxName);
+  }
+
   static List<String> getDownloadedBoxesNames() {
     return List<String>.from(
       Hive.box("user").get(_allBoxKey, defaultValue: []),
@@ -69,7 +73,7 @@ class SegmentedResourcesManager {
       }
     }
     // save selected box to user DB
-    await Hive.box("user").put(_selectedBox, toOpenBox);
+    saveSelectedBox(toOpenBox);
     // open selected box
     _segmentsBox = await Hive.openBox(toOpenBox);
   }
@@ -99,7 +103,7 @@ class SegmentedResourcesManager {
         for (final ayahKey in segmentsInfo.keys) {
           await _segmentsBox!.put(ayahKey, segmentsInfo[ayahKey]);
         }
-        await Hive.box(boxName).put(
+        await _segmentsBox?.put(
           _metaKey,
           context.read<SegmentedQuranReciterCubit>().state.toJson(),
         );

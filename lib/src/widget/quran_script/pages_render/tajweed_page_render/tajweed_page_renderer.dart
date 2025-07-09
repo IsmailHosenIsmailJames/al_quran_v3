@@ -31,24 +31,24 @@ class TajweedPageRenderer extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
 
-    Map<String, List> audioSegmentsMap = {};
-
-    for (final ayahKey in ayahsKey) {
-      List<List>? segments = context
-          .read<SegmentedQuranReciterCubit>()
-          .getAyahSegments(ayahKey);
-
-      if (segments != null) {
-        audioSegmentsMap[ayahKey] = segments;
-      }
-    }
-
     String? wordKey = "";
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
         builder: (context, segmentsReciterState) {
+          Map<String, List> audioSegmentsMap = {};
+
+          for (final ayahKey in ayahsKey) {
+            List<List>? segments = context
+                .read<SegmentedQuranReciterCubit>()
+                .getAyahSegments(ayahKey);
+
+            if (segments != null) {
+              audioSegmentsMap[ayahKey] = segments;
+            }
+          }
+
           return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
             buildWhen: (previous, current) {
               if (enableWordByWordHighlight != true) return false;
