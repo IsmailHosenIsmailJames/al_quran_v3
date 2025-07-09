@@ -1,13 +1,11 @@
-import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/functions/encode_decode.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
@@ -28,7 +26,6 @@ import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:dartx/dartx.dart";
-import "package:dio/dio.dart" as dio;
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -510,7 +507,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
                 isSetupProcess: true,
               )
               : true;
-      bool success4 = await downloadDefaultSegmentedQuranRecitation();
+      bool success4 = await SegmentedResourcesManager.downloadResources(
+        context,
+        context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!,
+      );
       if (success1 && success2 && success3 && success4) {
         userBox.put("is_setup_complete", true);
         // success and route to home
@@ -614,44 +614,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
         ),
       ),
     );
-  }
-
-  Future<bool> downloadDefaultSegmentedQuranRecitation() async {
-    String url =
-        ApisUrls.base +
-        context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!;
-    try {
-      context.read<ResourcesProgressCubitCubit>().updateProgress(
-        null,
-        appLocalizations.downloadingSegmentedQuranRecitation,
-      );
-      final response = await dio.Dio().get(url);
-      if (response.statusCode == 200) {
-        Box box = Hive.box("segmented_quran_recitation");
-        context.read<ResourcesProgressCubitCubit>().updateProgress(
-          null,
-          appLocalizations.processingSegmentedQuranRecitation,
-        );
-        Map segmentsInfo = await compute(
-          (message) => jsonDecode(decodeBZip2String(message)),
-          response.data,
-        );
-
-        for (final ayahKey in segmentsInfo.keys) {
-          await box.put(ayahKey, segmentsInfo[ayahKey]);
-        }
-        await Hive.box("segmented_quran_recitation").put(
-          "meta_data",
-          context.read<SegmentedQuranReciterCubit>().state.toMap(),
-        );
-        return true;
-      } else {
-        return false;
-      }
-    } on dio.DioException catch (e) {
-      log(e.message ?? "Null Message");
-      return false;
-    }
   }
 
   QuranScriptType selectedScript = QuranScriptType.tajweed;

@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/notification/init_awesome_notification.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
@@ -87,6 +88,7 @@ Future<void> main() async {
   await WordByWordFunction.init();
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
+  await SegmentedResourcesManager.init();
   tajweedScript = jsonDecode(
     await rootBundle.loadString("assets/quran_script/QPC_Hafs_Tajweed.json"),
   );
@@ -143,7 +145,6 @@ Future<void> main() async {
     );
     await setReminderForPrayers();
   }
-  getSegmentsSupportedReciters();
 
   final initialLocale = await LanguageCubit.getInitialLocale();
 

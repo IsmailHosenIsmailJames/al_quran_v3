@@ -85,7 +85,9 @@ class WordByWordFunction {
     );
     List<TranslationBookModel> downloadedBooks =
         downloadedList
-            .map((e) => TranslationBookModel.fromMap(e as Map<String, dynamic>))
+            .map(
+              (e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)),
+            )
             .where((b) => b.type == TranslationResourcesType.wordByWord)
             .toList();
 
