@@ -65,7 +65,14 @@ class AudioPlayerManager {
     playerEventStream = audioPlayer.playerEventStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
     });
-    processingStateStream = audioPlayer.processingStateStream.listen((event) {
+    processingStateStream = audioPlayer.processingStateStream.listen((
+      event,
+    ) async {
+      if (event == ProcessingState.completed) {
+        await audioPlayer.pause();
+        await audioPlayer.seek(Duration.zero, index: 0);
+        context.read<AudioUiCubit>().expand(false);
+      }
       context.read<PlayerStateCubit>().changeState(processingState: event);
       if (ProcessingState.completed == event) {
         playerPositionCubit.changeCurrentPosition(Duration.zero);

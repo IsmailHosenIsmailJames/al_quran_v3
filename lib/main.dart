@@ -6,10 +6,7 @@ import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/audio/resources/recitations.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
@@ -188,16 +185,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
-
-        BlocProvider(
-          create:
-              (context) => QuranReciterCubit(
-                initReciter: ReciterInfoModel.fromMap(
-                  Hive.box("user").get("reciter", defaultValue: null) ??
-                      recitationsInfoList[0],
-                ),
-              ),
-        ),
       ],
 
       child: BlocBuilder<LanguageCubit, LanguageState>(
