@@ -1041,4 +1041,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get optional => 'Optional';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Hinweis: Geplante Benachrichtigungen oder Erinnerungen können aufgrund von Hintergrundprozessbeschränkungen Ihres Betriebssystems verpasst werden. Zum Beispiel: Origin OS von Vivo, One UI von Samsung, ColorOS von Oppo usw. beenden manchmal geplante Benachrichtigungen oder Erinnerungen. Bitte überprüfen Sie Ihre Betriebssystemeinstellungen, um die App von Hintergrundprozessen auszunehmen.';
 }

@@ -1033,4 +1033,8 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get optional => 'Sunat';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Nota: Pemberitahuan atau Peringatan yang dijadualkan mungkin terlepas kerana sekatan proses latar belakang OS telefon anda. Contohnya: Origin OS Vivo, One UI Samsung, ColorOS Oppo dll kadangkala mematikan Pemberitahuan atau Peringatan yang dijadualkan. Sila semak tetapan OS anda untuk memastikan apl tidak disekat daripada proses latar belakang.';
 }

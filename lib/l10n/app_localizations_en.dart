@@ -1032,4 +1032,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get optional => 'Optional';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Note: Scheduled Notification or Reminder can be missed due to your phone\'s OS background process restrictions. For example: Vivo\'s Origin OS, Samsung\'s One UI, Oppo\'s ColorOS etc. are sometimes kills scheduled Notification or Reminder . Please check your OS settings for make app not restricted from background process.';
 }

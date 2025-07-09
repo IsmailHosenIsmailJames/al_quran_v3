@@ -1043,4 +1043,8 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get optional => 'Facoltativo';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Nota: le notifiche o i promemoria programmati potrebbero non essere visualizzati a causa delle restrizioni dei processi in background del sistema operativo del telefono. Ad esempio: Origin OS di Vivo, One UI di Samsung, ColorOS di Oppo, ecc. a volte interrompono le notifiche o i promemoria programmati. Controlla le impostazioni del tuo sistema operativo per consentire all\'app di non essere limitata dai processi in background.';
 }

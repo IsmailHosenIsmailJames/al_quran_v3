@@ -1037,4 +1037,8 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get optional => 'Hiari';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Kumbuka: Arifa Iliyoratibiwa au Kikumbusho kinaweza kukosekana kwa sababu ya vizuizi vya mchakato wa usuli wa Mfumo wa Uendeshaji wa simu yako. Kwa mfano: Mfumo wa Uendeshaji wa Origin wa Vivo, One UI wa Samsung, ColorOS ya Oppo n.k. wakati mwingine huzima Arifa Iliyoratibiwa au Kikumbusho. Tafadhali angalia mipangilio ya Mfumo wako wa Uendeshaji ili kufanya programu isizuiliwe kutoka kwa mchakato wa usuli.';
 }

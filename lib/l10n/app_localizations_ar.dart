@@ -1032,4 +1032,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get optional => 'مستحبة';
+
+  @override
+  String get notificationScheduleWarning =>
+      'ملاحظة: قد يتم تفويت الإشعار المجدول أو التذكير بسبب قيود عمليات الخلفية في نظام تشغيل هاتفك. على سبيل المثال: نظام Origin OS من Vivo، و One UI من Samsung، و ColorOS من Oppo وما إلى ذلك، تقتل أحيانًا الإشعار المجدول أو التذكير. يرجى التحقق من إعدادات نظام التشغيل لديك لجعل التطبيق غير مقيد من عمليات الخلفية.';
 }
