@@ -5,7 +5,8 @@ import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
@@ -64,13 +65,30 @@ class _AudioPageState extends State<AudioPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
-                    builder: (context, audioTabScreenState) {
-                      return getReciterWidget(
-                        context: context,
-                        audioTabScreenState: audioTabScreenState,
-                        ayahKeyState: ayahKeyState,
-                        currentIndex: currentIndex,
+                  BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+                    builder: (context, audioUIState) {
+                      return BlocBuilder<
+                        SegmentedQuranReciterCubit,
+                        ReciterInfoModel
+                      >(
+                        builder: (context, quranInsideReciter) {
+                          return BlocBuilder<
+                            AudioTabReciterCubit,
+                            ReciterInfoModel
+                          >(
+                            builder: (context, audioTabReciter) {
+                              return getReciterWidget(
+                                context: context,
+                                audioTabScreenState:
+                                    audioUIState.isInsideQuranPlayer
+                                        ? quranInsideReciter
+                                        : audioTabReciter,
+                                ayahKeyState: ayahKeyState,
+                                currentIndex: currentIndex,
+                              );
+                            },
+                          );
+                        },
                       );
                     },
                   ),
@@ -393,7 +411,8 @@ class _AudioPageState extends State<AudioPage> {
                     isInsideQuran: false,
                     instantPlay: true,
                     initialIndex: toStartIndex,
-                    reciterInfoModel: context.read<QuranReciterCubit>().state,
+                    reciterInfoModel:
+                        context.read<SegmentedQuranReciterCubit>().state,
                   );
                 },
               );
