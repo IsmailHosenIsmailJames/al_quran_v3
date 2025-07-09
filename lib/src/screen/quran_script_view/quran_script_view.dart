@@ -2,7 +2,6 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
@@ -265,12 +264,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
   ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
 
   ScrollController scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    AudioPlayerManager.stopListeningAudioPlayerState();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

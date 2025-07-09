@@ -9,6 +9,7 @@ class ReciterInfoModel {
   String? img;
   String? bio;
   String? segmentsUrl;
+  bool isDownloading;
 
   ReciterInfoModel({
     required this.link,
@@ -19,6 +20,7 @@ class ReciterInfoModel {
     this.img,
     this.bio,
     this.segmentsUrl,
+    this.isDownloading = false,
   });
 
   ReciterInfoModel copyWith({
@@ -30,6 +32,7 @@ class ReciterInfoModel {
     String? img,
     String? bio,
     String? segmentsUrl,
+    bool? isDownloading,
   }) => ReciterInfoModel(
     link: link ?? this.link,
     name: name ?? this.name,
@@ -40,6 +43,7 @@ class ReciterInfoModel {
     img: img ?? this.img,
     bio: bio ?? this.bio,
     segmentsUrl: segmentsUrl ?? this.segmentsUrl,
+    isDownloading: isDownloading ?? this.isDownloading,
   );
 
   factory ReciterInfoModel.fromJson(String str) =>

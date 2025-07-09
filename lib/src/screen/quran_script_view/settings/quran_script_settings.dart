@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
@@ -73,7 +74,10 @@ class QuranScriptSettings extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(appLocalizations.quranLineHeight, style: titleStyle),
-                Text(localizedNumber(context, quranViewState.lineHeight), style: titleStyle),
+                Text(
+                  localizedNumber(context, quranViewState.lineHeight),
+                  style: titleStyle,
+                ),
               ],
             ),
 
@@ -316,9 +320,16 @@ class QuranScriptSettings extends StatelessWidget {
       ayahKeyState: ayahState,
       isWordByWord: true,
       onReciterChanged: (reciterInfoModel) async {
-        context.read<SegmentedQuranReciterCubit>().changeReciter(
-          reciterInfoModel,
-        );
+        Navigator.pop(context);
+        bool isSuccess = await context
+            .read<SegmentedQuranReciterCubit>()
+            .changeReciter(context, reciterInfoModel);
+
+        if (!isSuccess) {
+          Fluttertoast.showToast(msg: "Failed to download segments");
+          return;
+        }
+
         if (AudioPlayerManager.audioPlayer.playing) {
           if (AudioPlayerManager.audioPlayer.audioSources.length > 1) {
             await AudioPlayerManager.playMultipleAyahAsPlaylist(
@@ -335,7 +346,6 @@ class QuranScriptSettings extends StatelessWidget {
             );
           }
         }
-        Navigator.pop(context);
       },
     );
   }
