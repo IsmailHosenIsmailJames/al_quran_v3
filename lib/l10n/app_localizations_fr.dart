@@ -1045,4 +1045,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get optional => 'Optionnel';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Remarque : les notifications ou rappels planifiés peuvent être manqués en raison des restrictions de processus d\'arrière-plan de votre système d\'exploitation. Par exemple : Origin OS de Vivo, One UI de Samsung, ColorOS d\'Oppo, etc. suppriment parfois les notifications ou rappels planifiés. Veuillez vérifier les paramètres de votre système d\'操作系统 pour que l\'application ne soit pas limitée par les processus d\'arrière-plan.';
 }

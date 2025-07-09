@@ -1032,4 +1032,8 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get optional => 'Ерікті';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Ескерту: Жоспарланған хабарландыру немесе еске салғыш телефонның ОЖ фондық процесс шектеулеріне байланысты өткізіліп кетуі мүмкін. Мысалы: Vivo-ның Origin ОЖ, Samsung-тың One UI, Oppo-ның ColorOS және т.б. кейде жоспарланған хабарландыруды немесе еске салғышты тоқтатады. Қолданбаның фондық процестен шектелмеуі үшін ОЖ параметрлерін тексеріңіз.';
 }

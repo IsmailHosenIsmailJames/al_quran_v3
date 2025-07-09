@@ -1038,4 +1038,8 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get optional => 'Bijarî';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Têbînî: Dibe ku Agahdariya Plankirî an Bîranîn ji ber sînorkirinên pêvajoya paşîn a OS-ya têlefona we winda bibe. Mînak: Origin OS-a Vivo, One UI-ya Samsung, ColorOS-a Oppo û hwd carinan Agahdariya Plankîrî an Bîranînê dikujin. Ji kerema xwe mîhengên OS-ya xwe kontrol bikin da ku sepan ji pêvajoya paşîn neyê sînorkirin.';
 }

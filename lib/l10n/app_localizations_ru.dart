@@ -1079,4 +1079,8 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get optional => 'Желательный';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Примечание. Запланированные уведомления или напоминания могут быть пропущены из-за ограничений фоновых процессов вашей ОС. Например: Origin OS от Vivo, One UI от Samsung, ColorOS от Oppo и т. д. иногда отключают запланированные уведомления или напоминания. Пожалуйста, проверьте настройки вашей ОС, чтобы приложение не было ограничено в фоновых процессах.';
 }

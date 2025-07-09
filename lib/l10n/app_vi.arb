@@ -303,5 +303,6 @@
   "quranScriptIndopak": "Indopak",
   "sajdaAyah": "Ayah Sajda",
   "required": "Bắt buộc",
-  "optional": "Tùy chọn"
+  "optional": "Tùy chọn",
+  "notificationScheduleWarning": "Lưu ý: Thông báo hoặc Lời nhắc đã lên lịch có thể bị bỏ lỡ do các hạn chế về quy trình nền của hệ điều hành trên điện thoại của bạn. Ví dụ: Origin OS của Vivo, One UI của Samsung, ColorOS của Oppo, v.v. đôi khi sẽ hủy Thông báo hoặc Lời nhắc đã lên lịch. Vui lòng kiểm tra cài đặt hệ điều hành của bạn để ứng dụng không bị hạn chế khỏi quy trình nền."
 }

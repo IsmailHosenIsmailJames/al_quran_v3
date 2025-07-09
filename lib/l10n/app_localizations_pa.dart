@@ -1032,4 +1032,8 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get optional => 'ਵਿਕਲਪਿਕ';
+
+  @override
+  String get notificationScheduleWarning =>
+      'ਨੋਟ: ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ OS ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਪਾਬੰਦੀਆਂ ਕਾਰਨ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਖੁੰਝ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਨ ਲਈ: Vivo ਦਾ Origin OS, Samsung ਦਾ One UI, Oppo ਦਾ ColorOS ਆਦਿ ਕਈ ਵਾਰ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਨੂੰ ਬੰਦ ਕਰ ਦਿੰਦੇ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਐਪ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਤੋਂ ਪ੍ਰਤਿਬੰਧਿਤ ਨਾ ਕਰਨ ਲਈ ਆਪਣੀਆਂ OS ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।';
 }

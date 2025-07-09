@@ -1002,4 +1002,8 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get optional => '可选';
+
+  @override
+  String get notificationScheduleWarning =>
+      '注意：由于手机操作系统的后台进程限制，预定的通知或提醒可能会被错过。例如：Vivo的Origin OS、三星的One UI、Oppo的ColorOS等有时会终止预定的通知或提醒。请检查您的操作系统设置，以使应用程序不受后台进程的限制。';
 }

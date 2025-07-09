@@ -1037,4 +1037,8 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get optional => 'İstəyə bağlı';
+
+  @override
+  String get notificationScheduleWarning =>
+      'Qeyd: Planlaşdırılmış Bildiriş və ya Xatırlatma telefonunuzun ƏS arxa fon proses məhdudiyyətləri səbəbindən əldən verilə bilər. Məsələn: Vivo-nun Origin ƏS, Samsung-un One UI, Oppo-nun ColorOS və s. bəzən planlaşdırılmış Bildiriş və ya Xatırlatmanı dayandırır. Tətbiqin arxa fon prosesindən məhdudlaşdırılmaması üçün lütfən ƏS parametrlərinizi yoxlayın.';
 }
