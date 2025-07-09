@@ -392,7 +392,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               scrollOffsetController: scrollOffsetController,
               scrollOffsetListener: scrollOffsetListener,
               semanticChildCount: pagesInfoWithSurahMetaData.length,
-
+              padding: const EdgeInsets.only(bottom: 200),
               itemBuilder: (context, index) {
                 return getElementWidget(index);
               },
