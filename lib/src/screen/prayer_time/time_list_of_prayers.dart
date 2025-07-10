@@ -336,7 +336,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     ReminderTypeWithPrayModel? currentReminder,
     AppLocalizations l10n,
   ) {
-    return Switch.adaptive(
+    return Switch(
       thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
         Set<WidgetState> states,
       ) {
@@ -386,6 +386,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     return Expanded(
       flex: 4,
       child: FittedBox(
+        fit: BoxFit.scaleDown,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
