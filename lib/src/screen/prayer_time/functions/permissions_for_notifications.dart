@@ -1,4 +1,5 @@
 import "dart:developer";
+import "dart:io";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:permission_handler/permission_handler.dart";
@@ -9,15 +10,19 @@ Future<bool> requestPermissionForReminder() async {
   if (isPermissionGranted) {
     return true;
   }
-  PermissionStatus statusNotification = await Permission.notification.request();
-  PermissionStatus statusAlarm = await Permission.scheduleExactAlarm.request();
+
   bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
   if (!isAllowed) {
     isAllowed =
         await AwesomeNotifications().requestPermissionToSendNotifications();
   }
 
-  if (statusNotification.isGranted && statusAlarm.isGranted && isAllowed) {
+  PermissionStatus statusAlarm = PermissionStatus.granted;
+  if (Platform.isAndroid) {
+    statusAlarm = await Permission.scheduleExactAlarm.request();
+  }
+
+  if (isAllowed && statusAlarm.isGranted) {
     log("All Permission is Granted", name: "Permission");
     isPermissionGranted = true;
     return true;
