@@ -56,7 +56,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
 
     return Scaffold(
       appBar: widget.moveToDownload ? AppBar() : null,
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
