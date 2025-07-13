@@ -92,6 +92,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
 
+    - family: AlQuranNeov5x1 
+      fonts:
+        - asset: assets/fonts/Quran/AlQuranNeov5x1.ttf
+
     - family: IndopakNastaleeq
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
