@@ -265,6 +265,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     skipWordTap: false,
                     showWordHighlights: false,
                   ),
+                  themeState: context.read<ThemeCubit>().state,
                 );
               },
             ),

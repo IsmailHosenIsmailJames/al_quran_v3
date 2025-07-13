@@ -11,21 +11,21 @@ import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
 
 class NonTajweedScriptView extends StatelessWidget {
   final bool isUthmani;
   final ScriptInfo scriptInfo;
+  final ThemeState themeState;
   const NonTajweedScriptView({
     super.key,
     required this.scriptInfo,
     required this.isUthmani,
+    required this.themeState,
   });
 
   @override
   Widget build(BuildContext context) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
     List words =
         (isUthmani ? uthmaniScript : indopakScript)[scriptInfo.surahNumber
             .toString()][scriptInfo.ayahNumber.toString()];

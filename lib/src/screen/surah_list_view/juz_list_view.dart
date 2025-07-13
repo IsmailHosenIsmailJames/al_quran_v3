@@ -141,6 +141,7 @@ class JuzListView extends StatelessWidget {
                             limitWord: 4,
                             skipWordTap: true,
                           ),
+                          themeState: context.read<ThemeCubit>().state,
                         ),
                       ),
                     ),

@@ -437,7 +437,6 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         );
 
                         Brightness brightness = Theme.of(context).brightness;
-                        Color primary = themeState.primary;
 
                         var imageData = await screenshotController
                             .captureFromLongWidget(
@@ -463,7 +462,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     footNote,
                                     scriptTextStyle,
                                     brightness,
-                                    primary,
+                                    themeState,
                                   ),
                                 ),
                               ),

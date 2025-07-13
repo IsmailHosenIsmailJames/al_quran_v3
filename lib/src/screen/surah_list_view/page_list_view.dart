@@ -141,6 +141,7 @@ class PageListView extends StatelessWidget {
                             limitWord: 3,
                             skipWordTap: true,
                           ),
+                          themeState: context.read<ThemeCubit>().state,
                         ),
                       ),
                     ),
