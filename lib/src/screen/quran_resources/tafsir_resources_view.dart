@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_mod
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -48,6 +49,7 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                   ?.map((e) => TafsirBookModel.fromMap(e))
                   .toList() ??
               [];
+          booksInLanguage.sort((a, b) => b.score.compareTo(a.score));
 
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 4.0),
@@ -114,6 +116,7 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
         horizontal: 8.0,
         vertical: 2.0,
       ),
+      leading: buildScoreIndicator(percentage: tafsirBook.score, size: 32),
       title: Text(tafsirBook.name),
       trailing: SizedBox(
         height: 30,
