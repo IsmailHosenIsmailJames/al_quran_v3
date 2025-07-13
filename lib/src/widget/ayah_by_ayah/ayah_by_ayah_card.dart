@@ -116,7 +116,12 @@ Widget getAyahByAyahCard({
                   ),
                 if (!quranViewState.hideQuranAyah) const Gap(10),
                 if (!quranViewState.hideQuranAyah)
-                  quranAyahWidget(surahNumber, ayahNumber, quranViewState),
+                  quranAyahWidget(
+                    surahNumber,
+                    ayahNumber,
+                    quranViewState,
+                    themeState,
+                  ),
                 if (!showOnlyAyah && !quranViewState.hideTranslation)
                   const Gap(5),
                 if (isSajdaAyah)
@@ -363,6 +368,7 @@ SizedBox getAyahWordByWord(
                                   height: quranViewState.lineHeight,
                                 ),
                               ),
+                              themeState: themeState,
                             );
                           },
                         ),
@@ -508,6 +514,7 @@ Align quranAyahWidget(
   int surahNumber,
   int ayahNumber,
   QuranViewState quranViewState,
+  ThemeState themeState,
 ) {
   return Align(
     alignment: Alignment.centerRight,
@@ -522,6 +529,7 @@ Align quranAyahWidget(
           height: quranViewState.lineHeight,
         ),
       ),
+      themeState: themeState,
     ),
   );
 }

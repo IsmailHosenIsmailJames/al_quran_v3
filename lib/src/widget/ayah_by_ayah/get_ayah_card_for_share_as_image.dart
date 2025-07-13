@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/functions/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
@@ -26,7 +27,7 @@ Widget getAyahCardForShareAsImage(
   Map footNote,
   TextStyle scriptTextStyle,
   Brightness brightness,
-  Color primary,
+  ThemeState themeState,
 ) {
   AppLocalizations l10n = AppLocalizations.of(context);
 
@@ -39,7 +40,7 @@ Widget getAyahCardForShareAsImage(
     margin: const EdgeInsets.all(10.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
-      border: Border.all(color: primary),
+      border: Border.all(color: themeState.primary),
       color:
           brightness == Brightness.dark
               ? Colors.grey.shade900
@@ -99,6 +100,7 @@ Widget getAyahCardForShareAsImage(
               textStyle: scriptTextStyle,
               forImage: true,
             ),
+            themeState: themeState,
           ),
         ),
         const Gap(15),

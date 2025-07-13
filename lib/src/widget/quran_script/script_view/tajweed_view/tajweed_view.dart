@@ -9,13 +9,17 @@ import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-import "../../../../theme/controller/theme_cubit.dart";
 import "../../../../theme/controller/theme_state.dart";
 import "tajweed_text_preser.dart";
 
 class TajweedView extends StatelessWidget {
   final ScriptInfo scriptInfo;
-  const TajweedView({super.key, required this.scriptInfo});
+  final ThemeState themeState;
+  const TajweedView({
+    super.key,
+    required this.scriptInfo,
+    required this.themeState,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +78,6 @@ class TajweedView extends StatelessWidget {
         ),
       );
     }
-
-    ThemeState themeState = context.read<ThemeCubit>().state;
 
     return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
       builder: (context, segmentsReciterState) {

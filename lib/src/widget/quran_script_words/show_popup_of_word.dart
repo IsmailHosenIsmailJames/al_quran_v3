@@ -132,6 +132,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                           textStyle: const TextStyle(fontSize: 40),
                           skipWordTap: true,
                         ),
+                        themeState: context.read<ThemeCubit>().state,
                       ),
                       const Gap(10),
                       if (supportsWordByWord)

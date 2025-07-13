@@ -325,6 +325,7 @@ class _AudioPageState extends State<AudioPage> {
                     skipWordTap: true,
                     showWordHighlights: false,
                   ),
+                  themeState: context.read<ThemeCubit>().state,
                 );
               },
             ),
