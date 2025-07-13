@@ -24,7 +24,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="Al Quran"
+        android:label="Quran's Tafsir, Audio and Prayer"
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
