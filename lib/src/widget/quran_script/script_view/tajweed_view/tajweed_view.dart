@@ -28,8 +28,11 @@ class TajweedView extends StatelessWidget {
       }
     }
     TextStyle quranStyle =
-        scriptInfo.textStyle?.copyWith(fontFamily: "QPC_Hafs") ??
-        const TextStyle();
+        scriptInfo.textStyle?.copyWith(
+          fontFamily: "QPC_Hafs",
+          letterSpacing: 0,
+        ) ??
+        const TextStyle(letterSpacing: 0, fontFamily: "QPC_Hafs");
 
     String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
 

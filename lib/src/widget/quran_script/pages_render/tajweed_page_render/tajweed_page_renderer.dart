@@ -105,6 +105,7 @@ class TajweedPageRenderer extends StatelessWidget {
                                     fontSize: baseTextStyle?.fontSize ?? 24,
                                     fontFamily:
                                         baseTextStyle?.fontFamily ?? "QPC_Hafs",
+                                    height: baseTextStyle?.height,
                                     backgroundColor:
                                         (wordKey == "$ayahKey:${index + 1}" &&
                                                 enableWordByWordHighlight ==
@@ -126,8 +127,9 @@ class TajweedPageRenderer extends StatelessWidget {
                   fontSize: baseTextStyle?.fontSize ?? 24,
                   fontFamily: baseTextStyle?.fontFamily ?? "QPC_Hafs",
                   fontWeight: baseTextStyle?.fontWeight,
+                  letterSpacing: 0,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               );
             },

@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.1.7+53
+version: 3.1.8+54
 
 environment:
   sdk: ^3.7.2
@@ -92,13 +92,13 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
 
-    - family: AlQuranNeov5x1 
+    - family: AlQuranNeov5x1
       fonts:
         - asset: assets/fonts/Quran/AlQuranNeov5x1.ttf
 
-    - family: IndopakNastaleeq
-      fonts:
-        - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+    # - family: IndopakNastaleeq
+    #   fonts:
+    #     - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
     - family: me_quran_volt_newmet
       fonts:

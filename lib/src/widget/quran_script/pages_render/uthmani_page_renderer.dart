@@ -136,10 +136,12 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   fontSize: baseTextStyle?.fontSize ?? 24,
                   fontFamily:
                       baseTextStyle?.fontFamily ??
-                      (isUthmani ? "me_quran_volt_newmet" : "IndopakNastaleeq"),
+                      (isUthmani ? "me_quran_volt_newmet" : "AlQuranNeov5x1"),
                   fontWeight: baseTextStyle?.fontWeight,
+                  height: baseTextStyle?.height,
+                  letterSpacing: 0,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               );
             },
