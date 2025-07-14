@@ -133,11 +133,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     const Gap(20),
                     Padding(
                       padding: const EdgeInsets.only(left: 18),
-                      child: Text(
-                        l10n.mainMenu,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
+                      child: SafeArea(
+                        child: Text(
+                          l10n.mainMenu,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -316,11 +318,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     const Gap(15),
                     Padding(
                       padding: const EdgeInsets.only(left: 18),
-                      child: Text(
-                        l10n.others,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
+                      child: SafeArea(
+                        child: Text(
+                          l10n.others,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
