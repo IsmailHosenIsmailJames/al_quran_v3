@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_pr
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:http/http.dart";
 import "package:intl/intl.dart";
@@ -198,19 +199,29 @@ class PrayersTimeFunction {
 
   static Map<PrayerModelTimesType, PrayerReminderType>
   getPreviousReminderModes() {
-    Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes = {};
+    Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes = {
+      PrayerModelTimesType.fajr: PrayerReminderType.alarm,
+      PrayerModelTimesType.sunrise: PrayerReminderType.notification,
+      PrayerModelTimesType.dhuhr: PrayerReminderType.alarm,
+      PrayerModelTimesType.asr: PrayerReminderType.alarm,
+      PrayerModelTimesType.maghrib: PrayerReminderType.alarm,
+      PrayerModelTimesType.isha: PrayerReminderType.alarm,
+      PrayerModelTimesType.midnight: PrayerReminderType.notification,
+    };
+
     for (PrayerModelTimesType prayerModelTimesType
         in PrayerModelTimesType.values) {
-      previousReminderModes.addAll({
-        prayerModelTimesType: PrayerReminderType.values.firstWhere(
-          (element) =>
-              element.name ==
-              (prayerTimePreferences!.getString(
-                    "previousReminderModes_${prayerModelTimesType.name}",
-                  ) ??
-                  PrayerReminderType.alarm.name),
-        ),
+      PrayerReminderType? type = PrayerReminderType.values.firstOrNullWhere((
+        element,
+      ) {
+        return element.name ==
+            (prayerTimePreferences!.getString(
+              "previousReminderModes_${prayerModelTimesType.name}",
+            ));
       });
+      if (type != null) {
+        previousReminderModes[prayerModelTimesType] = type;
+      }
     }
     return previousReminderModes;
   }
