@@ -5,7 +5,6 @@ import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -67,80 +66,70 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                 ),
               ),
               const Gap(7),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${getSurahNameArabic(headerInfoModel.surahInfoModel.id)} )",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    children: [
-                      Text(l10n.verseCount),
-                      Text(
-                        headerInfoModel.surahInfoModel.versesCount.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 120 - 30,
-                    child: Text(
-                      safeSubString(
-                        "${l10n.translation}: ${translationMeta?.name.toString()}",
-                        30,
-                        replacer: "...",
-                      ),
-                      style: const TextStyle(fontSize: 12),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${getSurahNameArabic(headerInfoModel.surahInfoModel.id)} )",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width - 120 - 30,
-                    child: Text(
-                      safeSubString(
-                        "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",
-                        30,
-                        replacer: "...",
-                      ),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  if (Hive.box("surah_info").keys.isNotEmpty)
-                    SizedBox(
-                      height: 25,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: const RoundedRectangleBorder(),
+                    Row(
+                      children: [
+                        Text(l10n.verseCount),
+                        Text(
+                          headerInfoModel.surahInfoModel.versesCount.toString(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () async {
-                          final String surahInfo =
-                              await Hive.box("surah_info").get(
-                                headerInfoModel.surahInfoModel.id.toString(),
-                              )["text"];
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => SurahInfoView(
-                                    html: surahInfo,
-                                    surahInfoModel:
-                                        headerInfoModel.surahInfoModel,
-                                  ),
+                      ],
+                    ),
+                    Text(
+                      "${l10n.translation}: ${translationMeta?.name.toString()}",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    if (Hive.box("surah_info").keys.isNotEmpty)
+                      SizedBox(
+                        height: 25,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: const RoundedRectangleBorder(),
+                          ),
+                          onPressed: () async {
+                            final String surahInfo =
+                                await Hive.box("surah_info").get(
+                                  headerInfoModel.surahInfoModel.id.toString(),
+                                )["text"];
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => SurahInfoView(
+                                      html: surahInfo,
+                                      surahInfoModel:
+                                          headerInfoModel.surahInfoModel,
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            l10n.moreInfo,
+                            style: TextStyle(
+                              color: themeState.primary,
+                              decoration: TextDecoration.underline,
                             ),
-                          );
-                        },
-                        child: Text(
-                          l10n.moreInfo,
-                          style: TextStyle(
-                            color: themeState.primary,
-                            decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

@@ -9,7 +9,6 @@ import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -116,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey.shade800
                     : Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(roundedRadius),
+            borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.shade400,
