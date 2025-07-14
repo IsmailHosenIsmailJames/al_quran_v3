@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dar
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
@@ -50,6 +51,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
   List<dynamic> pagesInfoWithSurahMetaData = [];
   List allAyahsKey = [];
   late AppLocalizations appLocalizations;
+  int? _lastFirstVisibleItemIndex;
+  double? _lastFirstVisibleItemLeadingEdge;
   @override
   void initState() {
     int? startAyahNumber = convertKeyToAyahNumber(widget.startKey);
@@ -218,7 +221,39 @@ class _PageByPageViewState extends State<QuranScriptView> {
       });
     }
 
-    itemPositionsListener.itemPositions.addListener(() {});
+    itemPositionsListener.itemPositions.addListener(() {
+      final positions = itemPositionsListener.itemPositions.value;
+      if (positions.isEmpty) return;
+
+      final firstItem = positions.first;
+      bool? isScrollingToDown;
+
+      if (_lastFirstVisibleItemIndex != null &&
+          _lastFirstVisibleItemLeadingEdge != null) {
+        if (firstItem.index > _lastFirstVisibleItemIndex!) {
+          isScrollingToDown = true;
+        } else if (firstItem.index < _lastFirstVisibleItemIndex!) {
+          isScrollingToDown = false;
+        } else {
+          if (firstItem.itemLeadingEdge < _lastFirstVisibleItemLeadingEdge!) {
+            isScrollingToDown = true;
+          } else if (firstItem.itemLeadingEdge >
+              _lastFirstVisibleItemLeadingEdge!) {
+            isScrollingToDown = false;
+          }
+        }
+        if (isScrollingToDown != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            context.read<LandscapeScrollEffect>().changeState(
+              isScrollingToDown!,
+            );
+          });
+        }
+      }
+
+      _lastFirstVisibleItemIndex = firstItem.index;
+      _lastFirstVisibleItemLeadingEdge = firstItem.itemLeadingEdge;
+    });
 
     super.initState();
   }
@@ -275,6 +310,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
+
       child: Scaffold(
         appBar:
             isLandScape
@@ -291,35 +327,29 @@ class _PageByPageViewState extends State<QuranScriptView> {
                 ),
         body: Stack(
           children: [
-            SafeArea(
-              child: ScrollablePositionedList.builder(
-                itemCount: pagesInfoWithSurahMetaData.length,
-                itemScrollController: itemScrollController,
-                itemPositionsListener: itemPositionsListener,
-                scrollOffsetController: scrollOffsetController,
-                scrollOffsetListener: scrollOffsetListener,
-                semanticChildCount: pagesInfoWithSurahMetaData.length,
-                padding: EdgeInsets.only(
-                  bottom: 200,
-                  top: isLandScape ? 50 : 0,
-                ),
-                itemBuilder: (context, index) {
-                  return getElementWidget(index);
-                },
-              ),
+            ScrollablePositionedList.builder(
+              itemCount: pagesInfoWithSurahMetaData.length,
+              itemScrollController: itemScrollController,
+              itemPositionsListener: itemPositionsListener,
+              scrollOffsetController: scrollOffsetController,
+              scrollOffsetListener: scrollOffsetListener,
+              semanticChildCount: pagesInfoWithSurahMetaData.length,
+              padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
+              itemBuilder: (context, index) {
+                return SafeArea(child: getElementWidget(index));
+              },
             ),
             if (isLandScape)
               SafeArea(
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: BlocBuilder<
-                    AyahByAyahInScrollInfoCubit,
-                    AyahByAyahInScrollInfoState
-                  >(
-                    builder: (context, ayahScrollState) {
+                  child: BlocBuilder<LandscapeScrollEffect, bool>(
+                    builder: (context, isScrollDown) {
                       return AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        width: 335,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        margin: const EdgeInsets.only(left: 10),
+                        width: isScrollDown ? 50 : 335,
                         height: 50,
                         decoration: BoxDecoration(
                           color:
@@ -335,32 +365,36 @@ class _PageByPageViewState extends State<QuranScriptView> {
                             ),
                           ],
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.arrow_back_rounded),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(Icons.arrow_back_rounded),
+                                ),
+                                SizedBox(
+                                  width: 100,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: appBarTitle(),
+                                  ),
+                                ),
+                                const Gap(5),
+                                getAyahsDropDown(themeState),
+                                const Gap(5),
+
+                                getChangesViewButton(themeState),
+
+                                getSettingsButton(themeState, context),
+                              ],
                             ),
-
-                            SizedBox(
-                              width: 100,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: appBarTitle(),
-                              ),
-                            ),
-                            const Gap(5),
-
-                            getAyahsDropDown(themeState),
-                            const Gap(5),
-
-                            getChangesViewButton(themeState),
-
-                            getSettingsButton(themeState, context),
-                          ],
+                          ),
                         ),
                       );
                     },
@@ -380,8 +414,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
     );
   }
 
-  BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>
-  appBarTitle() {
+  Widget appBarTitle() {
     return BlocBuilder<
       AyahByAyahInScrollInfoCubit,
       AyahByAyahInScrollInfoState

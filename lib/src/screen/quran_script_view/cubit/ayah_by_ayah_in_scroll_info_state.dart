@@ -21,6 +21,7 @@ class AyahByAyahInScrollInfoState {
     bool? isAyahByAyah,
     List<int>? pageByPageList,
     String? dropdownAyahKey,
+    bool? isScrollingToDown,
   }) {
     return AyahByAyahInScrollInfoState(
       surahInfoModel: surahInfoModel ?? this.surahInfoModel,
