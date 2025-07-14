@@ -34,53 +34,55 @@ class _SettingsPageState extends State<SettingsPage> {
               bottom: 50,
             ),
 
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  appLocalizations.appTheme,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    appLocalizations.appTheme,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Divider(color: themeState.primaryShade300),
-                const ThemeSettings(),
-                const Gap(20),
-                Text(
-                  appLocalizations.quranStyle,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                  Divider(color: themeState.primaryShade300),
+                  const ThemeSettings(),
+                  const Gap(20),
+                  Text(
+                    appLocalizations.quranStyle,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Divider(color: themeState.primaryShade300),
-                const Gap(5),
-                const QuranScriptSettings(),
-                const Gap(30),
-                Text(
-                  appLocalizations.audioCached,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const QuranScriptSettings(),
+                  const Gap(30),
+                  Text(
+                    appLocalizations.audioCached,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Divider(color: themeState.primaryShade300),
-                const Gap(5),
-                const AudioSettings(),
-                const Gap(30),
-                Text(
-                  appLocalizations.others,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const AudioSettings(),
+                  const Gap(30),
+                  Text(
+                    appLocalizations.others,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Divider(color: themeState.primaryShade300),
-                const Gap(5),
-                const OthersSettings(),
-              ],
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const OthersSettings(),
+                ],
+              ),
             ),
           );
         },
