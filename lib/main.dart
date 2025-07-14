@@ -20,6 +20,7 @@ import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_pr
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -185,6 +186,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
+        BlocProvider(create: (context) => LandscapeScrollEffect()),
       ],
 
       child: BlocBuilder<LanguageCubit, LanguageState>(
