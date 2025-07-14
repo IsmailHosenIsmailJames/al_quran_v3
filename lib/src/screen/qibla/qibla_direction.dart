@@ -53,72 +53,83 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    bool isLandScape = width > height;
     appLocalizations = AppLocalizations.of(context);
-    return BlocBuilder<
-      LocationQiblaPrayerDataCubit,
-      LocationQiblaPrayerDataState
-    >(
-      builder: (context, state) {
-        LocationQiblaPrayerDataState? dataState =
-            context.read<LocationQiblaPrayerDataCubit>().state;
-        Widget compassView = const SizedBox();
-        if (dataState.kaabaAngle != null) {
-          compassView = SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.width * 0.8,
-            child: CustomPaint(
-              painter: CompassView(
-                themeState,
-                context: context,
-                kaabaAngle: dataState.kaabaAngle!,
-                appLocalizations: appLocalizations,
-              ),
-            ),
-          );
-        }
-        return state.latLon == null
-            ? const LocationAcquire()
-            : state.kaabaAngle == null
-            ? Center(
-              child: CircularProgressIndicator(color: themeState.primary),
-            )
-            : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Gap(20),
-                Center(
-                  child: StreamBuilder<CompassEvent>(
-                    stream: FlutterCompass.events,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text(appLocalizations.unableToGetCompassData);
-                      }
-                      if (snapshot.hasData) {
-                        double? direction = snapshot.data?.heading;
-                        if (direction == null) {
-                          return Center(
-                            child: Text(appLocalizations.deviceDoesNotHaveSensors),
-                          );
-                        }
-                        if (direction < 0) {
-                          direction = 180 + (180 - direction.abs());
-                        }
-                        return getCompassRotationView(
-                          direction,
-                          state.kaabaAngle!,
-                          compassView,
-                          themeState,
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
+    return Center(
+      child: SingleChildScrollView(
+        child: BlocBuilder<
+          LocationQiblaPrayerDataCubit,
+          LocationQiblaPrayerDataState
+        >(
+          builder: (context, state) {
+            LocationQiblaPrayerDataState? dataState =
+                context.read<LocationQiblaPrayerDataCubit>().state;
+            Widget compassView = const SizedBox();
+            if (dataState.kaabaAngle != null) {
+              compassView = SizedBox(
+                width: isLandScape ? height * 0.6 : width * 0.8,
+                height: isLandScape ? height * 0.6 : width * 0.8,
+                child: CustomPaint(
+                  painter: CompassView(
+                    themeState,
+                    context: context,
+                    kaabaAngle: dataState.kaabaAngle!,
+                    appLocalizations: appLocalizations,
                   ),
                 ),
-              ],
-            );
-      },
+              );
+            }
+            return state.latLon == null
+                ? const LocationAcquire()
+                : state.kaabaAngle == null
+                ? Center(
+                  child: CircularProgressIndicator(color: themeState.primary),
+                )
+                : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Gap(20),
+                    Center(
+                      child: StreamBuilder<CompassEvent>(
+                        stream: FlutterCompass.events,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text(
+                              appLocalizations.unableToGetCompassData,
+                            );
+                          }
+                          if (snapshot.hasData) {
+                            double? direction = snapshot.data?.heading;
+                            if (direction == null) {
+                              return Center(
+                                child: Text(
+                                  appLocalizations.deviceDoesNotHaveSensors,
+                                ),
+                              );
+                            }
+                            if (direction < 0) {
+                              direction = 180 + (180 - direction.abs());
+                            }
+                            return getCompassRotationView(
+                              direction,
+                              state.kaabaAngle!,
+                              compassView,
+                              themeState,
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                );
+          },
+        ),
+      ),
     );
   }
 

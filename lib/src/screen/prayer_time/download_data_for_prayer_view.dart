@@ -56,177 +56,187 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
 
     return Scaffold(
       appBar: widget.moveToDownload ? AppBar() : null,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(roundedRadius),
-                border: Border.all(
-                  color: context.read<ThemeCubit>().state.secondary,
-                ),
-              ),
-              child: Text(
-                l10n.notificationScheduleWarning,
-                style: TextStyle(
-                  color: context.read<ThemeCubit>().state.secondary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            const Gap(10),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  l10n.address,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(15.0),
+          child: SafeArea(
+            child: SizedBox(
+              width: 500,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                      border: Border.all(
+                        color: context.read<ThemeCubit>().state.secondary,
+                      ),
                     ),
-                    onPressed: () async {
-                      if (widget.moveToDownload) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => LocationAcquire(
-                                  moveToDownload: widget.moveToDownload,
+                    child: Text(
+                      l10n.notificationScheduleWarning,
+                      style: TextStyle(
+                        color: context.read<ThemeCubit>().state.secondary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  const Gap(10),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        l10n.address,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                          ),
+                          onPressed: () async {
+                            if (widget.moveToDownload) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => LocationAcquire(
+                                        moveToDownload: widget.moveToDownload,
+                                      ),
                                 ),
-                          ),
-                        );
-                      } else {
-                        context
-                            .read<LocationQiblaPrayerDataCubit>()
-                            .saveLocationData(
-                              null,
-                              save: !widget.moveToDownload,
-                            );
-                      }
-                    },
-                    child: Text(l10n.change),
+                              );
+                            } else {
+                              context
+                                  .read<LocationQiblaPrayerDataCubit>()
+                                  .saveLocationData(
+                                    null,
+                                    save: !widget.moveToDownload,
+                                  );
+                            }
+                          },
+                          child: Text(l10n.change),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const Gap(5),
-            getAddressView(
-              context: context,
-              lat: widget.lat,
-              long: widget.long,
-            ),
-            const Gap(15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  l10n.calculationMethod,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                    ),
-                    onPressed: () async {
-                      await showCalculationMethodPopup(context, (
-                        calculationMethod,
-                      ) {
-                        context
-                            .read<LocationQiblaPrayerDataCubit>()
-                            .saveCalculationMethod(calculationMethod);
-
-                        Navigator.pop(context);
-                      });
-                    },
-                    child: Text(l10n.change),
-                  ),
-                ),
-              ],
-            ),
-            const Gap(5),
-            BlocBuilder<
-              LocationQiblaPrayerDataCubit,
-              LocationQiblaPrayerDataState
-            >(
-              builder: (context, state) {
-                return getPrayerCalculationMethodInfoWidget(
-                  context,
-                  state.calculationMethod!,
-                );
-              },
-            ),
-            const Gap(30),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(elevation: 0),
-                onPressed: () async {
-                  var cubit = context.read<LocationQiblaPrayerDataCubit>();
-                  cubit.changePrayerTimeDownloading(true);
-                  await PrayersTimeFunction.downloadPrayerDataFromAPI(
+                  const Gap(5),
+                  getAddressView(
+                    context: context,
                     lat: widget.lat,
-                    lon: widget.long,
-                    calculationMethod: cubit.state.calculationMethod!,
-                  );
-                  cubit.saveLocationData(
-                    LatLon(latitude: widget.lat, longitude: widget.long),
-                    save: true,
-                  );
-                  cubit.saveCalculationMethod(
-                    cubit.state.calculationMethod,
-                    save: true,
-                  );
-                  cubit.alignWithDatabase();
-
-                  cubit.checkPrayerDataExits();
-                  if (widget.moveToDownload) {
-                    Navigator.pop(context);
-                  }
-                  cubit.changePrayerTimeDownloading(false);
-                },
-                icon: BlocBuilder<
-                  LocationQiblaPrayerDataCubit,
-                  LocationQiblaPrayerDataState
-                >(
-                  builder: (context, state) {
-                    return state.isPrayerTimeDownloading == true
-                        ? const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(5),
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
+                    long: widget.long,
+                  ),
+                  const Gap(15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        l10n.calculationMethod,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
                           ),
-                        )
-                        : const Icon(FluentIcons.arrow_download_24_filled);
-                  },
-                ),
-                label: Text(l10n.downloadPrayerTime),
+                          onPressed: () async {
+                            await showCalculationMethodPopup(context, (
+                              calculationMethod,
+                            ) {
+                              context
+                                  .read<LocationQiblaPrayerDataCubit>()
+                                  .saveCalculationMethod(calculationMethod);
+
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: Text(l10n.change),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(5),
+                  BlocBuilder<
+                    LocationQiblaPrayerDataCubit,
+                    LocationQiblaPrayerDataState
+                  >(
+                    builder: (context, state) {
+                      return getPrayerCalculationMethodInfoWidget(
+                        context,
+                        state.calculationMethod!,
+                      );
+                    },
+                  ),
+                  const Gap(30),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(elevation: 0),
+                      onPressed: () async {
+                        var cubit =
+                            context.read<LocationQiblaPrayerDataCubit>();
+                        cubit.changePrayerTimeDownloading(true);
+                        await PrayersTimeFunction.downloadPrayerDataFromAPI(
+                          lat: widget.lat,
+                          lon: widget.long,
+                          calculationMethod: cubit.state.calculationMethod!,
+                        );
+                        cubit.saveLocationData(
+                          LatLon(latitude: widget.lat, longitude: widget.long),
+                          save: true,
+                        );
+                        cubit.saveCalculationMethod(
+                          cubit.state.calculationMethod,
+                          save: true,
+                        );
+                        cubit.alignWithDatabase();
+
+                        cubit.checkPrayerDataExits();
+                        if (widget.moveToDownload) {
+                          Navigator.pop(context);
+                        }
+                        cubit.changePrayerTimeDownloading(false);
+                      },
+                      icon: BlocBuilder<
+                        LocationQiblaPrayerDataCubit,
+                        LocationQiblaPrayerDataState
+                      >(
+                        builder: (context, state) {
+                          return state.isPrayerTimeDownloading == true
+                              ? const Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                              : const Icon(
+                                FluentIcons.arrow_download_24_filled,
+                              );
+                        },
+                      ),
+                      label: Text(l10n.downloadPrayerTime),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

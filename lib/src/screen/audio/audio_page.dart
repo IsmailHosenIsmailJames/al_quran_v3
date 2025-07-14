@@ -46,6 +46,9 @@ class AudioPage extends StatefulWidget {
 class _AudioPageState extends State<AudioPage> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    bool isLandScape = width > height;
     final l10n = AppLocalizations.of(context);
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
@@ -61,69 +64,123 @@ class _AudioPageState extends State<AudioPage> {
             translation = translation.replaceAll(">", "> ");
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BlocBuilder<AudioUiCubit, AudioControllerUiState>(
-                    builder: (context, audioUIState) {
-                      return BlocBuilder<
-                        SegmentedQuranReciterCubit,
-                        ReciterInfoModel
-                      >(
-                        builder: (context, quranInsideReciter) {
-                          return BlocBuilder<
-                            AudioTabReciterCubit,
-                            ReciterInfoModel
-                          >(
-                            builder: (context, audioTabReciter) {
-                              return getReciterWidget(
-                                context: context,
-                                audioTabScreenState:
-                                    audioUIState.isInsideQuranPlayer
-                                        ? quranInsideReciter
-                                        : audioTabReciter,
-                                ayahKeyState: ayahKeyState,
-                                currentIndex: currentIndex,
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  const Gap(10),
-                  getSurahInfoAndController(ayahKeyState, context),
+              child:
+                  isLandScape
+                      ? SafeArea(
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: width * 0.45,
+                              child: ListView(
+                                children: [
+                                  getCurrentReciterViewWidget(
+                                    ayahKeyState,
+                                    currentIndex,
+                                  ),
+                                  getSurahInfoAndController(
+                                    ayahKeyState,
+                                    context,
+                                  ),
+                                  const Gap(20),
+                                  getAudioProgressBar(),
+                                  const Gap(10),
+                                  getAudioController(
+                                    currentIndex,
+                                    ayahKeyState,
+                                    context,
+                                    l10n,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Gap(10),
+                            Expanded(
+                              child: getAyahAndTranslation(
+                                context,
+                                ayahKeyState,
+                                translation,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getCurrentReciterViewWidget(
+                            ayahKeyState,
+                            currentIndex,
+                          ),
+                          const Gap(10),
+                          getSurahInfoAndController(ayahKeyState, context),
 
-                  const Gap(10),
-                  Expanded(
-                    child: getAyahAndTranslation(
-                      context,
-                      ayahKeyState,
-                      translation,
-                    ),
-                  ),
-                  const Gap(20),
-                  BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
-                    builder: (context, state) {
-                      return ProgressBar(
-                        progress: state.currentDuration ?? Duration.zero,
-                        buffered: state.bufferDuration ?? Duration.zero,
-                        total: state.totalDuration ?? Duration.zero,
-                        thumbCanPaintOutsideBar: false,
-                        barHeight: 6,
-                        timeLabelLocation: TimeLabelLocation.sides,
-                        onSeek: (duration) {
-                          AudioPlayerManager.audioPlayer.seek(duration);
-                        },
-                      );
-                    },
-                  ),
-                  const Gap(10),
-                  getAudioController(currentIndex, ayahKeyState, context, l10n),
-                  const Gap(10),
-                ],
-              ),
+                          const Gap(10),
+                          Expanded(
+                            child: getAyahAndTranslation(
+                              context,
+                              ayahKeyState,
+                              translation,
+                            ),
+                          ),
+                          const Gap(20),
+                          getAudioProgressBar(),
+                          const Gap(10),
+                          getAudioController(
+                            currentIndex,
+                            ayahKeyState,
+                            context,
+                            l10n,
+                          ),
+                          const Gap(10),
+                        ],
+                      ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>
+  getAudioProgressBar() {
+    return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
+      builder: (context, state) {
+        return ProgressBar(
+          progress: state.currentDuration ?? Duration.zero,
+          buffered: state.bufferDuration ?? Duration.zero,
+          total: state.totalDuration ?? Duration.zero,
+          thumbCanPaintOutsideBar: false,
+          barHeight: 6,
+          timeLabelLocation: TimeLabelLocation.sides,
+          onSeek: (duration) {
+            AudioPlayerManager.audioPlayer.seek(duration);
+          },
+        );
+      },
+    );
+  }
+
+  BlocBuilder<AudioUiCubit, AudioControllerUiState> getCurrentReciterViewWidget(
+    AyahKeyManagement ayahKeyState,
+    int currentIndex,
+  ) {
+    return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+      builder: (context, audioUIState) {
+        return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+          builder: (context, quranInsideReciter) {
+            return BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
+              builder: (context, audioTabReciter) {
+                return getReciterWidget(
+                  context: context,
+                  audioTabScreenState:
+                      audioUIState.isInsideQuranPlayer
+                          ? quranInsideReciter
+                          : audioTabReciter,
+                  ayahKeyState: ayahKeyState,
+                  currentIndex: currentIndex,
+                );
+              },
             );
           },
         );
