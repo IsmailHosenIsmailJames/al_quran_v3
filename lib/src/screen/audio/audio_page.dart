@@ -361,7 +361,7 @@ class _AudioPageState extends State<AudioPage> {
         color: context.read<ThemeCubit>().state.primaryShade100,
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 80),
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
