@@ -283,6 +283,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       isToday,
                       themeState,
                       l10n,
+                      isLandScape,
                     );
                   }),
                   const Gap(30),
@@ -305,6 +306,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     bool isToday,
     ThemeState themeState,
     AppLocalizations l10n,
+    bool isLandScape,
   ) {
     return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
       builder: (context, prayerReminderState) {
@@ -348,23 +350,22 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 style: textStyleOfTimes,
               ),
               const Gap(10),
-              SafeArea(
-                child: SizedBox(
-                  height: isToday ? 40 : 30,
-                  width: isToday ? 50 : 0,
-                  child:
-                      !isToday
-                          ? null
-                          : getPrayerReminderSwitch(
-                            defaultWhenEnable,
-                            isCurrentToRemind,
-                            context,
-                            prayerModelType,
-                            currentReminder,
-                            l10n,
-                          ),
-                ),
+              SizedBox(
+                height: isToday ? 40 : 30,
+                width: isToday ? 50 : 0,
+                child:
+                    !isToday
+                        ? null
+                        : getPrayerReminderSwitch(
+                          defaultWhenEnable,
+                          isCurrentToRemind,
+                          context,
+                          prayerModelType,
+                          currentReminder,
+                          l10n,
+                        ),
               ),
+              if (isLandScape) const SafeArea(child: SizedBox()),
             ],
           ),
         );
