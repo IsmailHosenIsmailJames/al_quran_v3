@@ -218,6 +218,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
       });
     }
 
+    itemPositionsListener.itemPositions.addListener(() {});
+
     super.initState();
   }
 
@@ -263,140 +265,108 @@ class _PageByPageViewState extends State<QuranScriptView> {
   ScrollOffsetController scrollOffsetController = ScrollOffsetController();
   ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
 
-  ScrollController scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     appLocalizations = AppLocalizations.of(context);
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    bool isLandScape = width > height;
+
     return BlocProvider(
       create: (context) => AyahByAyahInScrollInfoCubit(),
       child: Scaffold(
-        appBar: AppBar(
-          title: BlocBuilder<
-            AyahByAyahInScrollInfoCubit,
-            AyahByAyahInScrollInfoState
-          >(
-            buildWhen: (previous, current) {
-              return previous.surahInfoModel?.toMap() !=
-                  current.surahInfoModel?.toMap();
-            },
-            builder:
-                (context, state) => Text(
-                  state.surahInfoModel == null
-                      ? ""
-                      : appLocalizations.surahName(
-                        getSurahName(context, state.surahInfoModel!.id),
-                      ),
-                  style: const TextStyle(fontSize: 18),
+        appBar:
+            isLandScape
+                ? null
+                : AppBar(
+                  title: appBarTitle(),
+                  actions: [
+                    getAyahsDropDown(themeState),
+                    const Gap(5),
+                    getChangesViewButton(themeState),
+                    getSettingsButton(themeState, context),
+                  ],
+                  titleSpacing: 0,
                 ),
-          ),
-          actions: [
-            Container(
-              width: 80,
-              height: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: themeState.primaryShade100,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: BlocBuilder<
-                AyahByAyahInScrollInfoCubit,
-                AyahByAyahInScrollInfoState
-              >(
-                builder: (context, state) {
-                  return DropdownButton(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.zero,
-                    isExpanded: false,
-
-                    value: state.dropdownAyahKey,
-                    items: List.generate(allAyahsKey.length, (index) {
-                      List<String> ayahData = allAyahsKey[index]
-                          .toString()
-                          .split(":");
-                      return DropdownMenuItem(
-                        value: allAyahsKey[index],
-                        child: Center(
-                          child: Text(
-                            "${localizedNumber(context, ayahData.first.toInt())}:${localizedNumber(context, ayahData.last.toInt())}",
-                          ),
-                        ),
-                      );
-                    }),
-                    onChanged: (value) async {
-                      await scrollToAyah(value.toString());
-                      WidgetsBinding.instance.addPostFrameCallback((_) async {
-                        context.read<AyahByAyahInScrollInfoCubit>().setData(
-                          dropdownAyahKey: value.toString(),
-                        );
-                      });
-                    },
-                  );
+        body: Stack(
+          children: [
+            SafeArea(
+              child: ScrollablePositionedList.builder(
+                itemCount: pagesInfoWithSurahMetaData.length,
+                itemScrollController: itemScrollController,
+                itemPositionsListener: itemPositionsListener,
+                scrollOffsetController: scrollOffsetController,
+                scrollOffsetListener: scrollOffsetListener,
+                semanticChildCount: pagesInfoWithSurahMetaData.length,
+                padding: EdgeInsets.only(
+                  bottom: 200,
+                  top: isLandScape ? 50 : 0,
+                ),
+                itemBuilder: (context, index) {
+                  return getElementWidget(index);
                 },
               ),
             ),
-            const Gap(5),
-            BlocBuilder<
-              AyahByAyahInScrollInfoCubit,
-              AyahByAyahInScrollInfoState
-            >(
-              buildWhen: (previous, current) {
-                return previous.isAyahByAyah != current.isAyahByAyah;
-              },
-              builder: (context, state) {
-                return IconButton(
-                  style: IconButton.styleFrom(
-                    backgroundColor: themeState.primaryShade100,
-                    foregroundColor: themeState.primary,
-                  ),
-                  onPressed: () {
-                    context.read<AyahByAyahInScrollInfoCubit>().setData(
-                      isAyahByAyah: !state.isAyahByAyah,
-                    );
-                  },
+            if (isLandScape)
+              SafeArea(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: BlocBuilder<
+                    AyahByAyahInScrollInfoCubit,
+                    AyahByAyahInScrollInfoState
+                  >(
+                    builder: (context, ayahScrollState) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        width: 335,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey.shade800
+                                  : Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(100),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade400,
+                              blurRadius: 10,
+                              offset: const Offset(-3, 0),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back_rounded),
+                            ),
 
-                  icon: Icon(
-                    state.isAyahByAyah
-                        ? CupertinoIcons.book
-                        : CupertinoIcons.list_bullet,
+                            SizedBox(
+                              width: 100,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: appBarTitle(),
+                              ),
+                            ),
+                            const Gap(5),
+
+                            getAyahsDropDown(themeState),
+                            const Gap(5),
+
+                            getChangesViewButton(themeState),
+
+                            getSettingsButton(themeState, context),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-            IconButton(
-              style: IconButton.styleFrom(
-                backgroundColor: themeState.primaryShade100,
-                foregroundColor: themeState.primary,
+                ),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => const QuranScriptSettings(asPage: true),
-                  ),
-                );
-              },
-              icon: const Icon(FluentIcons.settings_24_filled),
-            ),
-          ],
-          titleSpacing: 0,
-        ),
-        body: Stack(
-          children: [
-            ScrollablePositionedList.builder(
-              itemCount: pagesInfoWithSurahMetaData.length,
-              itemScrollController: itemScrollController,
-              itemPositionsListener: itemPositionsListener,
-              scrollOffsetController: scrollOffsetController,
-              scrollOffsetListener: scrollOffsetListener,
-              semanticChildCount: pagesInfoWithSurahMetaData.length,
-              padding: const EdgeInsets.only(bottom: 200),
-              itemBuilder: (context, index) {
-                return getElementWidget(index);
-              },
-            ),
 
             const SafeArea(
               child: Align(
@@ -406,6 +376,122 @@ class _PageByPageViewState extends State<QuranScriptView> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>
+  appBarTitle() {
+    return BlocBuilder<
+      AyahByAyahInScrollInfoCubit,
+      AyahByAyahInScrollInfoState
+    >(
+      buildWhen: (previous, current) {
+        return previous.surahInfoModel?.toMap() !=
+            current.surahInfoModel?.toMap();
+      },
+      builder:
+          (context, state) => Text(
+            state.surahInfoModel == null
+                ? ""
+                : appLocalizations.surahName(
+                  getSurahName(context, state.surahInfoModel!.id),
+                ),
+            style: const TextStyle(fontSize: 18),
+          ),
+    );
+  }
+
+  IconButton getSettingsButton(ThemeState themeState, BuildContext context) {
+    return IconButton(
+      style: IconButton.styleFrom(
+        backgroundColor: themeState.primaryShade100,
+        foregroundColor: themeState.primary,
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const QuranScriptSettings(asPage: true),
+          ),
+        );
+      },
+      icon: const Icon(FluentIcons.settings_24_filled),
+    );
+  }
+
+  BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>
+  getChangesViewButton(ThemeState themeState) {
+    return BlocBuilder<
+      AyahByAyahInScrollInfoCubit,
+      AyahByAyahInScrollInfoState
+    >(
+      buildWhen: (previous, current) {
+        return previous.isAyahByAyah != current.isAyahByAyah;
+      },
+      builder: (context, state) {
+        return IconButton(
+          style: IconButton.styleFrom(
+            backgroundColor: themeState.primaryShade100,
+            foregroundColor: themeState.primary,
+          ),
+          onPressed: () {
+            context.read<AyahByAyahInScrollInfoCubit>().setData(
+              isAyahByAyah: !state.isAyahByAyah,
+            );
+          },
+
+          icon: Icon(
+            state.isAyahByAyah
+                ? CupertinoIcons.book
+                : CupertinoIcons.list_bullet,
+          ),
+        );
+      },
+    );
+  }
+
+  Container getAyahsDropDown(ThemeState themeState) {
+    return Container(
+      width: 80,
+      height: 40,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: BlocBuilder<
+        AyahByAyahInScrollInfoCubit,
+        AyahByAyahInScrollInfoState
+      >(
+        builder: (context, state) {
+          return DropdownButton(
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            isExpanded: false,
+
+            value: state.dropdownAyahKey,
+            items: List.generate(allAyahsKey.length, (index) {
+              List<String> ayahData = allAyahsKey[index].toString().split(":");
+              return DropdownMenuItem(
+                value: allAyahsKey[index],
+                child: Center(
+                  child: Text(
+                    "${localizedNumber(context, ayahData.first.toInt())}:${localizedNumber(context, ayahData.last.toInt())}",
+                  ),
+                ),
+              );
+            }),
+            onChanged: (value) async {
+              await scrollToAyah(value.toString());
+              WidgetsBinding.instance.addPostFrameCallback((_) async {
+                context.read<AyahByAyahInScrollInfoCubit>().setData(
+                  dropdownAyahKey: value.toString(),
+                );
+              });
+            },
+          );
+        },
       ),
     );
   }
