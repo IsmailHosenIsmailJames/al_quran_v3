@@ -469,7 +469,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
             alignment: Alignment.center,
             padding: EdgeInsets.zero,
             isExpanded: false,
-
+            underline: const SizedBox(),
             value: state.dropdownAyahKey,
             items: List.generate(allAyahsKey.length, (index) {
               List<String> ayahData = allAyahsKey[index].toString().split(":");
