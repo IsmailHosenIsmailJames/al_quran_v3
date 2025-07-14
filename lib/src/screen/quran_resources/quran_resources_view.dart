@@ -74,9 +74,9 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
               controller: _tabController,
               physics: const ClampingScrollPhysics(),
               children: const [
-                TranslationResourcesView(),
-                TafsirResourcesView(),
-                WordByWordResourcesView(),
+                SafeArea(child: TranslationResourcesView()),
+                SafeArea(child: TafsirResourcesView()),
+                SafeArea(child: WordByWordResourcesView()),
               ],
             ),
           ),

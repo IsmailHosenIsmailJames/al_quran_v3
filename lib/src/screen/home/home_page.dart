@@ -111,14 +111,14 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           margin: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-            color:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade800
-                    : Colors.grey.shade100,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.shade400,
+                color:
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey.shade900
+                        : Colors.grey.shade400,
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),

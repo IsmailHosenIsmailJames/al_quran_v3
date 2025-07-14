@@ -37,146 +37,148 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.prayerSettings)),
-      body: ListView(
-        padding: const EdgeInsets.only(
-          left: 15,
-          right: 15,
-          top: 15,
-          bottom: 80,
-        ),
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(l10n.calculationMethod, style: titleStyle),
-              SizedBox(
-                height: 30,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.only(
+            left: 15,
+            right: 15,
+            top: 15,
+            bottom: 80,
+          ),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(l10n.calculationMethod, style: titleStyle),
+                SizedBox(
+                  height: 30,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                    ),
+                    onPressed: () async {
+                      var state =
+                          context.read<LocationQiblaPrayerDataCubit>().state;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => DownloadDataForPrayerView(
+                                lat: state.latLon!.latitude,
+                                long: state.latLon!.latitude,
+                                showCalculationMethodPopupAtOnInit: true,
+                                moveToDownload: true,
+                              ),
+                        ),
+                      );
+                    },
+                    child: Text(l10n.change),
                   ),
-                  onPressed: () async {
-                    var state =
-                        context.read<LocationQiblaPrayerDataCubit>().state;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => DownloadDataForPrayerView(
-                              lat: state.latLon!.latitude,
-                              long: state.latLon!.latitude,
-                              showCalculationMethodPopupAtOnInit: true,
-                              moveToDownload: true,
-                            ),
-                      ),
+                ),
+              ],
+            ),
+            const Gap(5),
+            BlocBuilder<
+              LocationQiblaPrayerDataCubit,
+              LocationQiblaPrayerDataState
+            >(
+              builder: (context, state) {
+                return getPrayerCalculationMethodInfoWidget(
+                  context,
+                  state.calculationMethod!,
+                );
+              },
+            ),
+            const Gap(20),
+            Text(l10n.reminderSettings, style: titleStyle),
+            const Gap(5),
+            getDropPrayerSettings(themeState),
+            const Gap(20),
+            Text(l10n.adjustReminderTime, style: titleStyle),
+            const Gap(5),
+            getAdjustReminderWidget(themeState, l10n),
+            const Gap(15),
+            Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Text(l10n.enforceAlarmSound, style: titleStyle),
+                ),
+                const Spacer(),
+                BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+                  builder: (context, prayerReminderState) {
+                    return Switch.adaptive(
+                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                        Set<WidgetState> states,
+                      ) {
+                        return Icon(
+                          states.contains(WidgetState.selected)
+                              ? Icons.done_rounded
+                              : Icons.close_rounded,
+                        );
+                      }),
+                      value: prayerReminderState.enforceAlarmSound,
+                      onChanged: (value) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setReminderEnforceSound(value);
+                      },
                     );
                   },
-                  child: Text(l10n.change),
                 ),
-              ),
-            ],
-          ),
-          const Gap(5),
-          BlocBuilder<
-            LocationQiblaPrayerDataCubit,
-            LocationQiblaPrayerDataState
-          >(
-            builder: (context, state) {
-              return getPrayerCalculationMethodInfoWidget(
-                context,
-                state.calculationMethod!,
-              );
-            },
-          ),
-          const Gap(20),
-          Text(l10n.reminderSettings, style: titleStyle),
-          const Gap(5),
-          getDropPrayerSettings(themeState),
-          const Gap(20),
-          Text(l10n.adjustReminderTime, style: titleStyle),
-          const Gap(5),
-          getAdjustReminderWidget(themeState, l10n),
-          const Gap(15),
-          Row(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Text(l10n.enforceAlarmSound, style: titleStyle),
-              ),
-              const Spacer(),
-              BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-                builder: (context, prayerReminderState) {
-                  return Switch.adaptive(
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                      Set<WidgetState> states,
-                    ) {
-                      return Icon(
-                        states.contains(WidgetState.selected)
-                            ? Icons.done_rounded
-                            : Icons.close_rounded,
-                      );
-                    }),
-                    value: prayerReminderState.enforceAlarmSound,
-                    onChanged: (value) {
-                      context
-                          .read<PrayerReminderCubit>()
-                          .setReminderEnforceSound(value);
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          const Gap(5),
-          Text(
-            l10n.enforceAlarmSoundDescription,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-            textAlign: TextAlign.center,
-          ),
-          const Gap(10),
-          BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-            builder: (context, prayerReminderState) {
-              if (prayerReminderState.enforceAlarmSound) {
-                return Row(
-                  children: [
-                    Text(l10n.volume, style: titleStyle),
-                    const Spacer(),
-                    Text(
-                      prayerReminderState.soundVolume.toStringAsFixed(2),
-                      style: titleStyle,
+            const Gap(5),
+            Text(
+              l10n.enforceAlarmSoundDescription,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            const Gap(10),
+            BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+              builder: (context, prayerReminderState) {
+                if (prayerReminderState.enforceAlarmSound) {
+                  return Row(
+                    children: [
+                      Text(l10n.volume, style: titleStyle),
+                      const Spacer(),
+                      Text(
+                        prayerReminderState.soundVolume.toStringAsFixed(2),
+                        style: titleStyle,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+            const Gap(5),
+            BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+              builder: (context, prayerReminderState) {
+                if (prayerReminderState.enforceAlarmSound) {
+                  return SliderTheme(
+                    data: const SliderThemeData(padding: EdgeInsets.zero),
+                    child: Slider(
+                      value: prayerReminderState.soundVolume,
+                      min: 0.0,
+                      max: 1.0,
+                      divisions: 50,
+                      onChanged: (value) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setReminderSoundVolume(value);
+                      },
                     ),
-                  ],
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-          const Gap(5),
-          BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-            builder: (context, prayerReminderState) {
-              if (prayerReminderState.enforceAlarmSound) {
-                return SliderTheme(
-                  data: const SliderThemeData(padding: EdgeInsets.zero),
-                  child: Slider(
-                    value: prayerReminderState.soundVolume,
-                    min: 0.0,
-                    max: 1.0,
-                    divisions: 50,
-                    onChanged: (value) {
-                      context
-                          .read<PrayerReminderCubit>()
-                          .setReminderSoundVolume(value);
-                    },
-                  ),
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-        ],
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -365,7 +365,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           l10n,
                         ),
               ),
-              if (isLandScape) const SafeArea(child: SizedBox()),
+              if (isLandScape)
+                const SizedBox(height: 1, child: SafeArea(child: SizedBox())),
             ],
           ),
         );
