@@ -246,9 +246,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       data: const SliderThemeData(padding: EdgeInsets.zero),
                       child: Slider(
                         value: currentTimeInMinutes.toDouble(),
-                        min: -60.0,
-                        max: 60.0,
-                        divisions: 120,
+                        min: -120.0,
+                        max: 120.0,
+                        divisions: 240,
                         label: _getAdjustmentText(
                           currentTimeInMinutes.round(),
                           l10n,
