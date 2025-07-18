@@ -143,9 +143,9 @@ class QuranTafsirFunction {
 
   static TafsirBookModel? getTafsirSelection() {
     final userBox = Hive.box("user");
-    return TafsirBookModel.fromMap(
-      Map<String, dynamic>.from(userBox.get("selected_tafsir")),
-    );
+    final selectedTafsir = userBox.get("selected_tafsir");
+    if (selectedTafsir == null) return null;
+    return TafsirBookModel.fromMap(Map<String, dynamic>.from(selectedTafsir));
   }
 
   static Future<void> removeTafsirSelection() async {

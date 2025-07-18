@@ -27,6 +27,7 @@ class SegmentedResourcesManager {
   }
 
   static List? getAyahSegments(String ayahKey) {
+    if (_segmentsBox?.isOpen == false) return null;
     Map? audioTimeStamp = _segmentsBox?.get(ayahKey, defaultValue: null);
     List<List>? segments;
     if (audioTimeStamp != null) {
