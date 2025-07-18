@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
