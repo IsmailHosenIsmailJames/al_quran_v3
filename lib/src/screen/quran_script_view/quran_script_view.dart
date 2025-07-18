@@ -4,16 +4,16 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
-import "package:al_quran_v3/src/functions/quran_word/ayahs_key/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/functions/quran_ayahs_function/get_page_number.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
@@ -55,57 +55,38 @@ class _PageByPageViewState extends State<QuranScriptView> {
   double? _lastFirstVisibleItemLeadingEdge;
   @override
   void initState() {
-    int? startAyahNumber = convertKeyToAyahNumber(widget.startKey);
-    int? endAyahNumber = convertKeyToAyahNumber(widget.endKey);
+    var listOfAyahs = getListOfAyahKey(
+      startAyahKey: widget.startKey,
+      endAyahKey: widget.endKey,
+    );
+    listOfAyahs.removeWhere((element) => element.runtimeType == int);
+    listOfAyahs = List<String>.from(listOfAyahs);
 
-    if (startAyahNumber == null || endAyahNumber == null) return;
-    bool checkedFirst = false;
-    List<PageInfoModel> currentPagesToShow = [];
+    Map<int, List<String>> pagesMap = {};
 
-    for (int i = 0; i < quranPagesInfo.length; i++) {
-      if (quranPagesInfo[i]["s"]! >= startAyahNumber ||
-          quranPagesInfo[i]["e"]! >= endAyahNumber) {
-        if (quranPagesInfo[i]["s"]! - startAyahNumber > 0 && !checkedFirst) {
-          int ayahNumber =
-              quranPagesInfo[i]["s"]! -
-              (quranPagesInfo[i]["s"]! - startAyahNumber);
-          currentPagesToShow.add(
-            PageInfoModel(
-              pageNumber: i,
-              firstAyahNumber: ayahNumber,
-              lastAyahNumber: quranPagesInfo[i - 1]["e"]!,
-            ),
-          );
-        } else if (endAyahNumber <= quranPagesInfo[i]["e"]!) {
-          int firstAyahNumber =
-              quranPagesInfo[i]["s"]! < startAyahNumber
-                  ? startAyahNumber
-                  : quranPagesInfo[i]["s"]!;
-          currentPagesToShow.add(
-            PageInfoModel(
-              pageNumber: i + 1,
-              firstAyahNumber: firstAyahNumber,
-              lastAyahNumber: endAyahNumber,
-            ),
-          );
-          break;
-        } else {
-          currentPagesToShow.add(
-            PageInfoModel(
-              pageNumber: i + 1,
-              firstAyahNumber: quranPagesInfo[i]["s"]!,
-              lastAyahNumber: quranPagesInfo[i]["e"]!,
-            ),
-          );
-        }
-        checkedFirst = true;
-      }
+    for (String ayahKey in listOfAyahs) {
+      int pageNum = getPageNumber(ayahKey)!;
+      List<String> ayahKeyListOnPage = pagesMap[pageNum] ?? [];
+      ayahKeyListOnPage.add(ayahKey);
+      pagesMap[pageNum] = ayahKeyListOnPage;
     }
+
+    List<PageInfoModel> currentPagesToShow = [];
+    pagesMap.forEach((key, value) {
+      currentPagesToShow.add(
+        PageInfoModel(
+          start: convertKeyToAyahNumber(value.first)!,
+          end: convertKeyToAyahNumber(value.last)!,
+          surahNumber: value.first.split(":").first.toInt(),
+          pageNumber: key,
+        ),
+      );
+    });
 
     for (PageInfoModel pageInfo in currentPagesToShow) {
       List ayahsKeys = getListOfAyahKey(
-        startAyahKey: convertAyahNumberToKey(pageInfo.firstAyahNumber)!,
-        endAyahKey: convertAyahNumberToKey(pageInfo.lastAyahNumber)!,
+        startAyahKey: convertAyahNumberToKey(pageInfo.start)!,
+        endAyahKey: convertAyahNumberToKey(pageInfo.end)!,
       );
       int indexOfInt = ayahsKeys.indexWhere(
         (element) => element.runtimeType == int,
@@ -128,6 +109,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
         pagesInfoWithSurahMetaData.add(ayahsKeys);
       }
     }
+
+    log(pagesInfoWithSurahMetaData.toString());
 
     pagesInfoWithSurahMetaData.removeWhere((element) {
       if (element.runtimeType == List<dynamic>) {
@@ -553,7 +536,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         }
       }
 
-      int? pageNumber = previousPageInfo?.pageNumber;
+      int? pageNumber = previousPageInfo?.start;
 
       return BlocBuilder<
         AyahByAyahInScrollInfoCubit,
