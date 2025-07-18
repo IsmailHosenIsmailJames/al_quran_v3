@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:developer";
 
+import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -26,6 +27,13 @@ class QuranTranslationFunction {
       bookToOpen?.toMap().toString() ?? "No translation selected",
       name: "QuranTranslationFunction.init",
     );
+
+    // open surah info box if not already open
+    String infoBoxName =
+        "surah_info_${languageToCodeMap[bookToOpen?.language.toLowerCase()]}";
+    if (!Hive.isBoxOpen(infoBoxName)) {
+      await Hive.openBox(infoBoxName);
+    }
 
     if (bookToOpen != null) {
       final boxName = getTranslationBoxName(translationBook: bookToOpen);
@@ -53,6 +61,18 @@ class QuranTranslationFunction {
       );
       await close(); // Ensure any open box is closed if nothing is selected
     }
+  }
+
+  static bool isInfoAvailable() {
+    final boxName =
+        "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
+    return Hive.box(boxName).isNotEmpty;
+  }
+
+  static String getInfoOfSurah(String id) {
+    final boxName =
+        "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
+    return Hive.box(boxName).get(id)["text"];
   }
 
   static Future<bool> isAlreadyDownloaded(TranslationBookModel book) async {
@@ -271,12 +291,21 @@ class QuranTranslationFunction {
         await setTranslationSelection(translationBook);
       }
 
-      if (availableSurahInfoInLang.contains(translationBook.language)) {
+      if (availableSurahInfoInLang.contains(
+        languageToCodeMap[translationBook.language.toLowerCase()],
+      )) {
         cubit.updateProgress(
           null,
           "Downloading Surah's Info (${translationBook.language})",
         );
-        await downloadSurahInfo(translationBook.language);
+        await downloadSurahInfo(
+          languageToCodeMap[translationBook.language.toLowerCase()]!,
+        );
+      } else {
+        log(
+          "Skipping downloading Surah's Info (${translationBook.language})",
+          name: "downloadSurahInfo",
+        );
       }
 
       log(
@@ -306,6 +335,7 @@ class QuranTranslationFunction {
 
   static Future<void> downloadSurahInfo(String languageCode) async {
     final surahInfoBoxName = "surah_info_$languageCode";
+    log("Downloading surah info for $languageCode", name: "downloadSurahInfo");
     // Check if box exists and is not empty
     if (await Hive.boxExists(surahInfoBoxName)) {
       var box = await Hive.openBox(surahInfoBoxName);
@@ -325,12 +355,14 @@ class QuranTranslationFunction {
         "${ApisUrls.base}quranic_universal_library/surah_info/$languageCode.txt",
       );
       if (response.statusCode == 200) {
+        log(surahInfoBoxName);
         final box = await Hive.openBox(surahInfoBoxName);
         Map data = await compute(
           (message) => jsonDecode(decodeBZip2String(message as String)),
           response.data,
         );
         for (final key in data.keys) {
+          log(key);
           await box.put(key, data[key]);
         }
         // await box.close(); // Close after writing

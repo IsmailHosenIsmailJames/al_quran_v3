@@ -21,7 +21,6 @@ import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive_flutter/hive_flutter.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
 import "../../theme/controller/theme_cubit.dart";
@@ -94,7 +93,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 12),
                     ),
-                    if (Hive.box("surah_info").keys.isNotEmpty)
+                    if (QuranTranslationFunction.isInfoAvailable())
                       SizedBox(
                         height: 25,
                         child: TextButton(
@@ -104,9 +103,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           ),
                           onPressed: () async {
                             final String surahInfo =
-                                await Hive.box("surah_info").get(
+                                QuranTranslationFunction.getInfoOfSurah(
                                   headerInfoModel.surahInfoModel.id.toString(),
-                                )["text"];
+                                );
                             Navigator.push(
                               context,
                               MaterialPageRoute(

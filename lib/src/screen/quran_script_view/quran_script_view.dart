@@ -110,8 +110,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
       }
     }
 
-    log(pagesInfoWithSurahMetaData.toString());
-
     pagesInfoWithSurahMetaData.removeWhere((element) {
       if (element.runtimeType == List<dynamic>) {
         if ((element as List).isEmpty) {
