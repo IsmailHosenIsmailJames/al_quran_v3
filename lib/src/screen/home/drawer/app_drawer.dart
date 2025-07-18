@@ -1,11 +1,8 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
@@ -13,7 +10,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:hive_flutter/hive_flutter.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
@@ -429,56 +425,6 @@ class _AppDrawerState extends State<AppDrawer> {
                         style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog.adaptive(
-                              insetPadding: const EdgeInsets.all(10),
-                              title: Text(
-                                l10n.resetAppWarningTitle,
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                              content: Text(l10n.resetAppWarningMessage),
-                              actions: <Widget>[
-                                TextButton.icon(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  label: Text(l10n.cancel),
-                                  icon: const Icon(Icons.close_rounded),
-                                ),
-                                TextButton.icon(
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                    await _resetApp();
-                                  },
-                                  icon: const Icon(
-                                    FluentIcons.arrow_reset_24_filled,
-                                    color: Colors.red,
-                                  ),
-                                  label: Text(
-                                    l10n.reset,
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      leading: Icon(
-                        FluentIcons.arrow_reset_24_filled,
-                        color: themeState.primary,
-                      ),
-                      title: Text(
-                        l10n.resetTheApp,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
                     const Gap(50),
                   ],
                 ),
@@ -486,27 +432,6 @@ class _AppDrawerState extends State<AppDrawer> {
             ],
           ),
         );
-      },
-    );
-  }
-
-  Future<void> _resetApp() async {
-    context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
-    context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
-
-    await QuranTranslationFunction.close();
-    await Hive.deleteFromDisk();
-    await Hive.initFlutter();
-    await Hive.openBox("user");
-    await Hive.openLazyBox("quran_tafsir");
-    await Hive.openBox("segmented_quran_recitation");
-    await Hive.openBox("surah_info");
-
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const AppSetupPage()),
-      (route) {
-        return false;
       },
     );
   }

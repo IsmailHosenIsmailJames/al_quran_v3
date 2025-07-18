@@ -81,7 +81,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   await Hive.openBox("user");
   await Hive.openBox("segmented_quran_recitation");
-  await Hive.openBox("surah_info");
+
   await QuranTranslationFunction.init();
   await WordByWordFunction.init();
   await Hive.openBox(CollectionType.notes.name);
