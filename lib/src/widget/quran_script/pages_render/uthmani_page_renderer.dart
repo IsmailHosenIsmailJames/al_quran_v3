@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -46,6 +46,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
             List<List>? segments = context
                 .read<SegmentedQuranReciterCubit>()
                 .getAyahSegments(ayahKey);
+
             if (segments != null) {
               audioSegmentsMap[ayahKey] = segments;
             }
@@ -60,6 +61,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
               }
               String? currentAyahKey =
                   context.read<AyahKeyCubit>().state.current;
+              log(currentAyahKey.toString(), name: "currentAyahKey");
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -86,7 +88,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
               return false;
             },
             builder: (context, positionState) {
-              log(wordKey.toString(), name: "wordKey");
+              log((wordKey ?? "yfgfgh").toString(), name: "Word Keyiu");
               return Text.rich(
                 TextSpan(
                   children:
@@ -124,7 +126,10 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                                   "$ayahKey:${index + 1}",
                                             ),
                                             scriptCategory:
-                                                QuranScriptType.uthmani,
+                                                context
+                                                    .read<QuranViewCubit>()
+                                                    .state
+                                                    .quranScriptType,
                                           );
                                         },
                                 );
