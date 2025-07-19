@@ -1,10 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/functions/match_string/search_pattern_in_text.dart";
+import "package:al_quran_v3/src/functions/filter/filter_surah.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -19,7 +18,6 @@ import "package:flutter_spinkit/flutter_spinkit.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
-import "package:intl/intl.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -58,36 +56,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values.map((e) => SurahInfoModel.fromMap(e)).toList();
 
-  List<SurahInfoModel> getFilteredSurah(String filterString) {
-    Map<double, SurahInfoModel> mapOfFilteredSurah = {};
-
-    if (filterString.isNotEmpty) {
-      for (int i = 0; i < surahInfoList.length; i++) {
-        double matched = searchPatternInText(
-          filterString.toLowerCase(),
-          "${surahInfoList[i].id} ${getSurahName(context, surahInfoList[i].id)} ${NumberFormat.decimalPattern(context.read<LanguageCubit>().state.locale.languageCode).format(surahInfoList[i].id)}"
-              .toLowerCase(),
-        );
-        if (matched > 40) {
-          mapOfFilteredSurah[matched] = surahInfoList[i];
-        }
-      }
-    } else {
-      return surahInfoList;
-    }
-    List<double> matchedValue = mapOfFilteredSurah.keys.toList();
-    matchedValue.sort((a, b) => b.compareTo(a));
-    List<SurahInfoModel> surahInfoToReturn = [];
-    for (var element in matchedValue) {
-      surahInfoToReturn.add(mapOfFilteredSurah[element]!);
-    }
-    return surahInfoToReturn;
-  }
-
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     List<SurahInfoModel> filteredSurah = getFilteredSurah(
+      context,
       surahSearchController.text.trim(),
     );
     AppLocalizations l10n = AppLocalizations.of(context);
@@ -240,34 +213,39 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             padding: const EdgeInsets.all(10),
                             itemBuilder: (context, index) {
                               SurahInfoModel surah = filteredSurah[index];
-                              return TextButton(
-                                style: TextButton.styleFrom(
-                                  alignment: Alignment.centerLeft,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                      roundedRadius,
+                              return SizedBox(
+                                height: surah.id == surahNumber ? 40 : 30,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        roundedRadius,
+                                      ),
                                     ),
+                                    backgroundColor:
+                                        surah.id == surahNumber
+                                            ? themeState.primary.withValues(
+                                              alpha: 0.2,
+                                            )
+                                            : Colors.transparent,
+                                    foregroundColor:
+                                        Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.white
+                                            : Colors.black,
+                                    padding: const EdgeInsets.only(left: 10),
                                   ),
-                                  backgroundColor:
-                                      surah.id == surahNumber
-                                          ? themeState.primary.withValues(
-                                            alpha: 0.2,
-                                          )
-                                          : Colors.transparent,
-                                  foregroundColor:
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? Colors.white
-                                          : Colors.black,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    surahNumber = surah.id;
-                                    ayahNumber = 1;
-                                  });
-                                },
-                                child: Text(
-                                  "${localizedNumber(context, surah.id)}. ${getSurahName(context, surah.id)}",
+
+                                  onPressed: () {
+                                    setState(() {
+                                      surahNumber = surah.id;
+                                      ayahNumber = 1;
+                                    });
+                                  },
+                                  child: Text(
+                                    "${localizedNumber(context, surah.id)}. ${getSurahName(context, surah.id)}",
+                                  ),
                                 ),
                               );
                             },
@@ -299,7 +277,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               : 0,
                       itemBuilder: (context, index) {
                         return Container(
-                          height: 35,
+                          height:
+                              (index == (ayahNumber ?? 0) - 1) &&
+                                      (widget.selectMultipleAndShare != true)
+                                  ? 40
+                                  : 30,
                           padding: const EdgeInsets.only(bottom: 5),
                           child: TextButton(
                             style: TextButton.styleFrom(
