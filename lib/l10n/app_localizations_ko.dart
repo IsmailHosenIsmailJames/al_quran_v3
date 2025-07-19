@@ -1023,4 +1023,7 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       '참고: 휴대폰 OS의 백그라운드 프로세스 제한으로 인해 예약된 알림이나 미리 알림을 놓칠 수 있습니다. 예: Vivo의 Origin OS, Samsung의 One UI, Oppo의 ColorOS 등은 때때로 예약된 알림이나 미리 알림을 종료합니다. 앱이 백그라운드 프로세스에서 제한되지 않도록 OS 설정을 확인하십시오.';
+
+  @override
+  String get scrollWithRecitation => '낭송으로 스크롤';
 }

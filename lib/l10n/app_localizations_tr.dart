@@ -1038,4 +1038,7 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Not: Telefonunuzun işletim sisteminin arka plan işlem kısıtlamaları nedeniyle zamanlanmış Bildirim veya Hatırlatma kaçırılabilir. Örneğin: Vivo\'nun Origin OS\'u, Samsung\'un One UI\'ı, Oppo\'nun ColorOS\'u vb. bazen zamanlanmış Bildirim veya Hatırlatmayı sonlandırır. Uygulamanın arka plan işleminden kısıtlanmaması için lütfen işletim sistemi ayarlarınızı kontrol edin.';
+
+  @override
+  String get scrollWithRecitation => 'Okunuşla Kaydır';
 }

@@ -291,6 +291,25 @@ class QuranScriptSettings extends StatelessWidget {
                   );
                 },
               ),
+            const Gap(10),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(appLocalizations.scrollWithRecitation),
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                Set<WidgetState> states,
+              ) {
+                return Icon(
+                  states.contains(WidgetState.selected)
+                      ? Icons.done_rounded
+                      : Icons.close_rounded,
+                );
+              }),
+
+              value: quranViewState.scrollWithRecitation,
+              onChanged: (value) {
+                cubit.setViewOptions(scrollWithRecitation: value);
+              },
+            ),
           ],
         );
       },

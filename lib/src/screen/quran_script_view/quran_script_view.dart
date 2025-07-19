@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/functions/basic_functions.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
@@ -234,6 +235,12 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
       _lastFirstVisibleItemIndex = firstItem.index;
       _lastFirstVisibleItemLeadingEdge = firstItem.itemLeadingEdge;
+    });
+
+    context.read<AyahKeyCubit>().stream.listen((event) {
+      if (context.read<QuranViewCubit>().state.scrollWithRecitation) {
+        scrollToAyah(event.current);
+      }
     });
 
     super.initState();

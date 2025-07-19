@@ -1046,4 +1046,7 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Observação: notificações ou lembretes agendados podem ser perdidos devido às restrições de processo em segundo plano do sistema operacional do seu telefone. Por exemplo: Origin OS da Vivo, One UI da Samsung, ColorOS do Oppo, etc., às vezes encerram notificações ou lembretes agendados. Verifique as configurações do seu sistema operacional para que o aplicativo não seja restringido do processo em segundo plano.';
+
+  @override
+  String get scrollWithRecitation => 'Rolar com recitação';
 }

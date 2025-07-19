@@ -1036,4 +1036,7 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Catatan: Notifikasi atau Pengingat terjadwal dapat terlewatkan karena batasan proses latar belakang OS ponsel Anda. Misalnya: Origin OS dari Vivo, One UI dari Samsung, ColorOS dari Oppo, dll. terkadang mematikan Notifikasi atau Pengingat terjadwal. Silakan periksa pengaturan OS Anda agar aplikasi tidak dibatasi dari proses latar belakang.';
+
+  @override
+  String get scrollWithRecitation => 'Gulir dengan Bacaan';
 }

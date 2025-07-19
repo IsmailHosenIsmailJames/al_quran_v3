@@ -1037,4 +1037,7 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'توجه: اعلان یا یادآوری برنامه ریزی شده ممکن است به دلیل محدودیت های فرآیندهای پس زمینه سیستم عامل تلفن شما از دست برود. به عنوان مثال: سیستم عامل Origin ویوو، One UI سامسونگ، ColorOS اوپو و غیره گاهی اوقات اعلان یا یادآوری برنامه ریزی شده را از بین می برند. لطفاً تنظیمات سیستم عامل خود را بررسی کنید تا برنامه از فرآیندهای پس زمینه محدود نشود.';
+
+  @override
+  String get scrollWithRecitation => 'پیمایش با تلاوت';
 }

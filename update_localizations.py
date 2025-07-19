@@ -2,35 +2,35 @@ import json
 import os
 
 translations = {
-    "ar": """ملاحظة: قد يتم تفويت الإشعار المجدول أو التذكير بسبب قيود عمليات الخلفية في نظام تشغيل هاتفك. على سبيل المثال: نظام Origin OS من Vivo، و One UI من Samsung، و ColorOS من Oppo وما إلى ذلك، تقتل أحيانًا الإشعار المجدول أو التذكير. يرجى التحقق من إعدادات نظام التشغيل لديك لجعل التطبيق غير مقيد من عمليات الخلفية.""",
-    "az": """Qeyd: Planlaşdırılmış Bildiriş və ya Xatırlatma telefonunuzun ƏS arxa fon proses məhdudiyyətləri səbəbindən əldən verilə bilər. Məsələn: Vivo-nun Origin ƏS, Samsung-un One UI, Oppo-nun ColorOS və s. bəzən planlaşdırılmış Bildiriş və ya Xatırlatmanı dayandırır. Tətbiqin arxa fon prosesindən məhdudlaşdırılmaması üçün lütfən ƏS parametrlərinizi yoxlayın.""",
-    "bn": """দ্রষ্টব্য: আপনার ফোনের ওএস ব্যাকগ্রাউন্ড প্রসেস সীমাবদ্ধতার কারণে নির্ধারিত বিজ্ঞপ্তি বা অনুস্মারক মিস হতে পারে। উদাহরণস্বরূপ: Vivo-এর Origin OS, Samsung-এর One UI, Oppo-এর ColorOS ইত্যাদি কখনও কখনও নির্ধারিত বিজ্ঞপ্তি বা অনুস্মারক বন্ধ করে দেয়। অ্যাপটিকে ব্যাকগ্রাউন্ড প্রসেস থেকে সীমাবদ্ধ না করার জন্য অনুগ্রহ করে আপনার ওএস সেটিংস পরীক্ষা করুন।""",
-    "de": """Hinweis: Geplante Benachrichtigungen oder Erinnerungen können aufgrund von Hintergrundprozessbeschränkungen Ihres Betriebssystems verpasst werden. Zum Beispiel: Origin OS von Vivo, One UI von Samsung, ColorOS von Oppo usw. beenden manchmal geplante Benachrichtigungen oder Erinnerungen. Bitte überprüfen Sie Ihre Betriebssystemeinstellungen, um die App von Hintergrundprozessen auszunehmen.""",
-    "es": """Nota: Las notificaciones o recordatorios programados pueden perderse debido a las restricciones de procesos en segundo plano del sistema operativo de su teléfono. Por ejemplo: Origin OS de Vivo, One UI de Samsung, ColorOS de Oppo, etc., a veces eliminan las notificaciones o recordatorios programados. Verifique la configuración de su sistema operativo para que la aplicación no esté restringida de los procesos en segundo plano.""",
-    "fa": """توجه: اعلان یا یادآوری برنامه ریزی شده ممکن است به دلیل محدودیت های فرآیندهای پس زمینه سیستم عامل تلفن شما از دست برود. به عنوان مثال: سیستم عامل Origin ویوو، One UI سامسونگ، ColorOS اوپو و غیره گاهی اوقات اعلان یا یادآوری برنامه ریزی شده را از بین می برند. لطفاً تنظیمات سیستم عامل خود را بررسی کنید تا برنامه از فرآیندهای پس زمینه محدود نشود.""",
-    "fr": """Remarque : les notifications ou rappels planifiés peuvent être manqués en raison des restrictions de processus d'arrière-plan de votre système d'exploitation. Par exemple : Origin OS de Vivo, One UI de Samsung, ColorOS d'Oppo, etc. suppriment parfois les notifications ou rappels planifiés. Veuillez vérifier les paramètres de votre système d'操作系统 pour que l'application ne soit pas limitée par les processus d'arrière-plan.""",
-    "ha": """Lura: Ana iya rasa Jadawalin Sanarwa ko Tunatarwa saboda ƙuntatawa na aikin baya na OS na wayarka. Misali: Vivo's Origin OS, Samsung's One UI, Oppo's ColorOS da sauransu wani lokacin suna kashe Jadawalin Sanarwa ko Tunatarwa. Da fatan za a duba saitunan OS don sanya app ba a takura shi daga aikin baya ba.""",
-    "hi": """नोट: आपके फ़ोन के OS बैकग्राउंड प्रोसेस प्रतिबंधों के कारण अनुसूचित अधिसूचना या अनुस्मारक छूट सकता है। उदाहरण के लिए: वीवो का ओरिजिन ओएस, सैमसंग का वन यूआई, ओप्पो का कलरओएस आदि कभी-कभी अनुसूचित अधिसूचना या अनुस्मारक को समाप्त कर देते हैं। कृपया ऐप को बैकग्राउंड प्रोसेस से प्रतिबंधित न करने के लिए अपनी ओएस सेटिंग्स जांचें।""",
-    "id": """Catatan: Notifikasi atau Pengingat terjadwal dapat terlewatkan karena batasan proses latar belakang OS ponsel Anda. Misalnya: Origin OS dari Vivo, One UI dari Samsung, ColorOS dari Oppo, dll. terkadang mematikan Notifikasi atau Pengingat terjadwal. Silakan periksa pengaturan OS Anda agar aplikasi tidak dibatasi dari proses latar belakang.""",
-    "it": """Nota: le notifiche o i promemoria programmati potrebbero non essere visualizzati a causa delle restrizioni dei processi in background del sistema operativo del telefono. Ad esempio: Origin OS di Vivo, One UI di Samsung, ColorOS di Oppo, ecc. a volte interrompono le notifiche o i promemoria programmati. Controlla le impostazioni del tuo sistema operativo per consentire all'app di non essere limitata dai processi in background.""",
-    "ja": """注意：スマートフォンのOSのバックグラウンドプロセス制限により、スケジュールされた通知やリマインダーが見逃される可能性があります。例：VivoのOrigin OS、SamsungのOne UI、OppoのColorOSなどは、スケジュールされた通知やリマインダーを強制終了することがあります。アプリがバックグラウンドプロセスから制限されないように、OSの設定を確認してください。""",
-    "kk": """Ескерту: Жоспарланған хабарландыру немесе еске салғыш телефонның ОЖ фондық процесс шектеулеріне байланысты өткізіліп кетуі мүмкін. Мысалы: Vivo-ның Origin ОЖ, Samsung-тың One UI, Oppo-ның ColorOS және т.б. кейде жоспарланған хабарландыруды немесе еске салғышты тоқтатады. Қолданбаның фондық процестен шектелмеуі үшін ОЖ параметрлерін тексеріңіз.""",
-    "ko": """참고: 휴대폰 OS의 백그라운드 프로세스 제한으로 인해 예약된 알림이나 미리 알림을 놓칠 수 있습니다. 예: Vivo의 Origin OS, Samsung의 One UI, Oppo의 ColorOS 등은 때때로 예약된 알림이나 미리 알림을 종료합니다. 앱이 백그라운드 프로세스에서 제한되지 않도록 OS 설정을 확인하십시오.""",
-    "ku": """Têbînî: Dibe ku Agahdariya Plankirî an Bîranîn ji ber sînorkirinên pêvajoya paşîn a OS-ya têlefona we winda bibe. Mînak: Origin OS-a Vivo, One UI-ya Samsung, ColorOS-a Oppo û hwd carinan Agahdariya Plankîrî an Bîranînê dikujin. Ji kerema xwe mîhengên OS-ya xwe kontrol bikin da ku sepan ji pêvajoya paşîn neyê sînorkirin.""",
-    "ms": """Nota: Pemberitahuan atau Peringatan yang dijadualkan mungkin terlepas kerana sekatan proses latar belakang OS telefon anda. Contohnya: Origin OS Vivo, One UI Samsung, ColorOS Oppo dll kadangkala mematikan Pemberitahuan atau Peringatan yang dijadualkan. Sila semak tetapan OS anda untuk memastikan apl tidak disekat daripada proses latar belakang.""",
-    "pa": """ਨੋਟ: ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ OS ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਪਾਬੰਦੀਆਂ ਕਾਰਨ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਖੁੰਝ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਨ ਲਈ: Vivo ਦਾ Origin OS, Samsung ਦਾ One UI, Oppo ਦਾ ColorOS ਆਦਿ ਕਈ ਵਾਰ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਨੂੰ ਬੰਦ ਕਰ ਦਿੰਦੇ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਐਪ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਤੋਂ ਪ੍ਰਤਿਬੰਧਿਤ ਨਾ ਕਰਨ ਲਈ ਆਪਣੀਆਂ OS ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।""",
-    "ps": """یادونه: ستاسو د تلیفون د عامل سیسټم د شالید پروسې محدودیتونو له امله مهالویش شوی خبرتیا یا یادونه له لاسه ورکیدلی شي. د مثال په توګه: د ویوو اوریجن عامل سیسټم، د سامسنګ ون یو آی، د اوپو کلر عامل سیسټم او داسې نور کله ناکله مهالویش شوی خبرتیا یا یادونه وژني. مهرباني وکړئ د خپل عامل سیسټم تنظیمات وګورئ ترڅو اپلیکیشن د شالید پروسې څخه محدود نه شي.""",
-    "pt": """Observação: notificações ou lembretes agendados podem ser perdidos devido às restrições de processo em segundo plano do sistema operacional do seu telefone. Por exemplo: Origin OS da Vivo, One UI da Samsung, ColorOS do Oppo, etc., às vezes encerram notificações ou lembretes agendados. Verifique as configurações do seu sistema operacional para que o aplicativo não seja restringido do processo em segundo plano.""",
-    "ru": """Примечание. Запланированные уведомления или напоминания могут быть пропущены из-за ограничений фоновых процессов вашей ОС. Например: Origin OS от Vivo, One UI от Samsung, ColorOS от Oppo и т. д. иногда отключают запланированные уведомления или напоминания. Пожалуйста, проверьте настройки вашей ОС, чтобы приложение не было ограничено в фоновых процессах.""",
-    "so": """Ogeysiis: Ogeysiiska Jadwalka ah ama Xusuusinta waa la tabi karaa sababtoo ah xaddidaadaha habka asalka ee OS-ka taleefankaaga. Tusaale ahaan: Vivo's Origin OS, Samsung's One UI, Oppo's ColorOS iwm mararka qaarkood waxay dilaan Ogeysiiska Jadwalka ah ama Xusuusinta. Fadlan hubi dejinta OS-kaaga si aad app-ka uga dhigto mid aan laga xaddidin habka asalka.""",
-    "sw": """Kumbuka: Arifa Iliyoratibiwa au Kikumbusho kinaweza kukosekana kwa sababu ya vizuizi vya mchakato wa usuli wa Mfumo wa Uendeshaji wa simu yako. Kwa mfano: Mfumo wa Uendeshaji wa Origin wa Vivo, One UI wa Samsung, ColorOS ya Oppo n.k. wakati mwingine huzima Arifa Iliyoratibiwa au Kikumbusho. Tafadhali angalia mipangilio ya Mfumo wako wa Uendeshaji ili kufanya programu isizuiliwe kutoka kwa mchakato wa usuli.""",
-    "ta": """குறிப்பு: உங்கள் தொலைபேசியின் OS பின்னணி செயல்முறை கட்டுப்பாடுகள் காரணமாக திட்டமிடப்பட்ட அறிவிப்பு அல்லது நினைவூட்டல் தவறவிடப்படலாம். எடுத்துக்காட்டாக: Vivo-வின் Origin OS, Samsung-ன் One UI, Oppo-வின் ColorOS போன்றவை சில நேரங்களில் திட்டமிடப்பட்ட அறிவிப்பு அல்லது நினைவூட்டலைக் கொன்றுவிடுகின்றன. பயன்பாட்டை பின்னணி செயல்முறையிலிருந்து கட்டுப்படுத்தாமல் இருக்க உங்கள் OS அமைப்புகளைச் சரிபார்க்கவும்.""",
-    "tr": """Not: Telefonunuzun işletim sisteminin arka plan işlem kısıtlamaları nedeniyle zamanlanmış Bildirim veya Hatırlatma kaçırılabilir. Örneğin: Vivo'nun Origin OS'u, Samsung'un One UI'ı, Oppo'nun ColorOS'u vb. bazen zamanlanmış Bildirim veya Hatırlatmayı sonlandırır. Uygulamanın arka plan işleminden kısıtlanmaması için lütfen işletim sistemi ayarlarınızı kontrol edin.""",
-    "ug": """دىققەت: تېلېفونىڭىزنىڭ مەشغۇلات سىستېمىسىنىڭ ئارقا كۆرۈنۈش جەريانى چەكلىمىسى سەۋەبىدىن پىلانلانغان ئۇقتۇرۇش ياكى ئەسكەرتىش قولدىن كېتىپ قېلىشى مۇمكىن. مەسىلەن: Vivo نىڭ Origin مەشغۇلات سىستېمىسى ، سامسۇڭنىڭ One UI ، Oppo نىڭ ColorOS قاتارلىقلار بەزىدە پىلانلانغان ئۇقتۇرۇش ياكى ئەسكەرتىشنى ئۆلتۈرىدۇ. ئەپنىڭ ئارقا كۆرۈنۈش جەريانىدىن چەكلەنمەسلىكى ئۈچۈن مەشغۇلات سىستېمىسى تەڭشىكىڭىزنى تەكشۈرۈڭ.""",
-    "ur": """نوٹ: آپ کے فون کے OS کے پس منظر کے عمل کی پابندیوں کی وجہ سے طے شدہ اطلاع یا یاد دہانی چھوٹ سکتی ہے۔ مثال کے طور پر: Vivo کا Origin OS، Samsung کا One UI، Oppo کا ColorOS وغیرہ بعض اوقات طے شدہ اطلاع یا یاد دہانی کو ختم کر دیتے ہیں۔ براہ کرم اپنی OS کی ترتیبات کو چیک کریں تاکہ ایپ کو پس منظر کے عمل سے प्रतिबंधित نہ کیا جائے۔""",
-    "vi": """Lưu ý: Thông báo hoặc Lời nhắc đã lên lịch có thể bị bỏ lỡ do các hạn chế về quy trình nền của hệ điều hành trên điện thoại của bạn. Ví dụ: Origin OS của Vivo, One UI của Samsung, ColorOS của Oppo, v.v. đôi khi sẽ hủy Thông báo hoặc Lời nhắc đã lên lịch. Vui lòng kiểm tra cài đặt hệ điều hành của bạn để ứng dụng không bị hạn chế khỏi quy trình nền.""",
-    "yo": """Akiyesi: Ifitonileti ti a ṣeto tabi olurannileti le padanu nitori awọn ihamọ ilana isale OS foonu rẹ. Fun apẹẹrẹ: Vivo's Origin OS, Samsung's One UI, Oppo's ColorOS ati be be lo nigbakan pa Ifitonileti ti a seto tabi olurannileti. Jọwọ ṣayẹwo awọn eto OS rẹ lati jẹ ki app ko ni ihamọ lati ilana isale.""",
-    "zh": """注意：由于手机操作系统的后台进程限制，预定的通知或提醒可能会被错过。例如：Vivo的Origin OS、三星的One UI、Oppo的ColorOS等有时会终止预定的通知或提醒。请检查您的操作系统设置，以使应用程序不受后台进程的限制。"""
+    "ar": "التمرير مع التلاوة",
+    "az": "Tilavətlə Sürüşdürün",
+    "bn": "তিলাওয়াতের সাথে স্ক্রোল করুন",
+    "de": "Scrollen mit Rezitation",
+    "es": "Desplazarse con recitación",
+    "fa": "پیمایش با تلاوت",
+    "fr": "Faire défiler avec récitation",
+    "ha": "Gungura da Karatu",
+    "hi": "सस्वर पाठ के साथ स्क्रॉल करें",
+    "id": "Gulir dengan Bacaan",
+    "it": "Scorri con la recitazione",
+    "ja": "朗読でスクロール",
+    "kk": "Оқумен айналдыру",
+    "ko": "낭송으로 스크롤",
+    "ku": "Bi xwendinê bigerin",
+    "ms": "Tatal dengan Bacaan",
+    "pa": "ਪਾਠ ਦੇ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰੋ",
+    "ps": "د تلاوت سره سکرول کړئ",
+    "pt": "Rolar com recitação",
+    "ru": "Прокрутка с чтением",
+    "so": "Ku rogrogasho akhris",
+    "sw": "Tembeza na Kisomo",
+    "ta": "పారాయణంతో స్క్రోల్ చేయండి",
+    "tr": "Okunuşla Kaydır",
+    "ug": "قىرائەت بىلەن سىيرىڭ",
+    "ur": "تلاوت کے ساتھ سکرول کریں۔",
+    "vi": "Cuộn với đọc thuộc lòng",
+    "yo": "Yi lọ pẹlu kika",
+    "zh": "滚动背诵"
 }
 
 for lang, translation in translations.items():
@@ -44,9 +44,9 @@ for lang, translation in translations.items():
                 if content_before_brace.endswith(','):
                     content_before_brace = content_before_brace.rstrip(',')
                 
-                new_key_value = f'"notificationScheduleWarning": {json.dumps(translation, ensure_ascii=False)}'
+                new_key_value = f'"scrollWithRecitation": {json.dumps(translation, ensure_ascii=False)}'
                 
-                if f'"notificationScheduleWarning":' not in content_before_brace:
+                if f'"scrollWithRecitation":' not in content_before_brace:
                     new_content = content_before_brace + ',\n  ' + new_key_value + '\n}'
                     f.seek(0)
                     f.write(new_content)

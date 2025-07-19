@@ -1036,4 +1036,7 @@ class AppLocalizationsYo extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Akiyesi: Ifitonileti ti a ṣeto tabi olurannileti le padanu nitori awọn ihamọ ilana isale OS foonu rẹ. Fun apẹẹrẹ: Vivo\'s Origin OS, Samsung\'s One UI, Oppo\'s ColorOS ati be be lo nigbakan pa Ifitonileti ti a seto tabi olurannileti. Jọwọ ṣayẹwo awọn eto OS rẹ lati jẹ ki app ko ni ihamọ lati ilana isale.';
+
+  @override
+  String get scrollWithRecitation => 'Yi lọ pẹlu kika';
 }
