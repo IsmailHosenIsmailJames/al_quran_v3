@@ -1,6 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
+import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
@@ -11,8 +14,10 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 
 import "../../../../theme/controller/theme_cubit.dart";
 import "../../../../theme/controller/theme_state.dart";
@@ -61,10 +66,80 @@ class _QuranPageState extends State<QuranPage>
       l10n.hizb,
       l10n.ruku,
     ];
+    ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
+            Row(
+              children: [
+                const Gap(10),
+                Text(
+                  "Quick Access",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const Gap(10),
+                IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: themeState.primaryShade100,
+                    foregroundColor: themeState.primary,
+                  ),
+                  onPressed: () {},
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+              child: BlocBuilder<QuickAccessCubit, List<QuickAccessModel>>(
+                builder: (context, quickAccessList) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: quickAccessList.length,
+                    itemBuilder: (context, index) {
+                      QuickAccessModel quickAccessModel =
+                          quickAccessList[index];
+
+                      SurahInfoModel surahInfo = SurahInfoModel.fromMap(
+                        metaDataSurah[quickAccessModel.surahNumber.toString()],
+                      );
+
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 5.0),
+                        child: TextButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => QuranScriptView(
+                                      startKey: "${surahInfo.id}:1",
+                                      endKey:
+                                          "${surahInfo.id}:${surahInfo.versesCount}",
+                                      toScrollKey:
+                                          quickAccessModel.scrollIndex != null
+                                              ? "${surahInfo.id}:${quickAccessModel.scrollIndex}"
+                                              : null,
+                                    ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(FluentIcons.flash_24_regular),
+                          label: Text(
+                            getSurahName(context, surahInfo.id) +
+                                (quickAccessModel.scrollIndex != null
+                                    ? " - ${quickAccessModel.scrollIndex}"
+                                    : ""),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            const Gap(10),
+
             BlocBuilder<ThemeCubit, ThemeState>(
               builder: (context, themeState) {
                 return Padding(
