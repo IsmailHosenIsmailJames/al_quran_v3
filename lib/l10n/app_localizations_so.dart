@@ -1041,4 +1041,7 @@ class AppLocalizationsSo extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Ogeysiis: Ogeysiiska Jadwalka ah ama Xusuusinta waa la tabi karaa sababtoo ah xaddidaadaha habka asalka ee OS-ka taleefankaaga. Tusaale ahaan: Vivo\'s Origin OS, Samsung\'s One UI, Oppo\'s ColorOS iwm mararka qaarkood waxay dilaan Ogeysiiska Jadwalka ah ama Xusuusinta. Fadlan hubi dejinta OS-kaaga si aad app-ka uga dhigto mid aan laga xaddidin habka asalka.';
+
+  @override
+  String get scrollWithRecitation => 'Ku rogrogasho akhris';
 }

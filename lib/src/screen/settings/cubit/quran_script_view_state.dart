@@ -13,6 +13,7 @@ class QuranViewState {
   bool hideQuranAyah;
   bool alwaysOpenWordByWord;
   bool enableWordByWordHighlight;
+  bool scrollWithRecitation;
   QuranViewState({
     required this.ayahKey,
     required this.fontSize,
@@ -26,6 +27,7 @@ class QuranViewState {
     this.hideQuranAyah = false,
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
+    this.scrollWithRecitation = true,
   });
 
   QuranViewState copyWith({
@@ -41,6 +43,7 @@ class QuranViewState {
     bool? hideQuranAyah,
     bool? alwaysOpenWordByWord,
     bool? enableWordByWordHighlight,
+    bool? scrollWithRecitation,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -56,6 +59,7 @@ class QuranViewState {
       alwaysOpenWordByWord: alwaysOpenWordByWord ?? this.alwaysOpenWordByWord,
       enableWordByWordHighlight:
           enableWordByWordHighlight ?? this.enableWordByWordHighlight,
+      scrollWithRecitation: scrollWithRecitation ?? this.scrollWithRecitation,
     );
   }
 }

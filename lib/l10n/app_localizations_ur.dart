@@ -1036,4 +1036,7 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'نوٹ: آپ کے فون کے OS کے پس منظر کے عمل کی پابندیوں کی وجہ سے طے شدہ اطلاع یا یاد دہانی چھوٹ سکتی ہے۔ مثال کے طور پر: Vivo کا Origin OS، Samsung کا One UI، Oppo کا ColorOS وغیرہ بعض اوقات طے شدہ اطلاع یا یاد دہانی کو ختم کر دیتے ہیں۔ براہ کرم اپنی OS کی ترتیبات کو چیک کریں تاکہ ایپ کو پس منظر کے عمل سے प्रतिबंधित نہ کیا جائے۔';
+
+  @override
+  String get scrollWithRecitation => 'تلاوت کے ساتھ سکرول کریں۔';
 }

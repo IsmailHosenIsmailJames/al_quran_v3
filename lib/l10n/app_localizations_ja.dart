@@ -1023,4 +1023,7 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       '注意：スマートフォンのOSのバックグラウンドプロセス制限により、スケジュールされた通知やリマインダーが見逃される可能性があります。例：VivoのOrigin OS、SamsungのOne UI、OppoのColorOSなどは、スケジュールされた通知やリマインダーを強制終了することがあります。アプリがバックグラウンドプロセスから制限されないように、OSの設定を確認してください。';
+
+  @override
+  String get scrollWithRecitation => '朗読でスクロール';
 }

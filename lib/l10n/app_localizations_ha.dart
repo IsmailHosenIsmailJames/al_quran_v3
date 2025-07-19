@@ -1040,4 +1040,7 @@ class AppLocalizationsHa extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Lura: Ana iya rasa Jadawalin Sanarwa ko Tunatarwa saboda ƙuntatawa na aikin baya na OS na wayarka. Misali: Vivo\'s Origin OS, Samsung\'s One UI, Oppo\'s ColorOS da sauransu wani lokacin suna kashe Jadawalin Sanarwa ko Tunatarwa. Da fatan za a duba saitunan OS don sanya app ba a takura shi daga aikin baya ba.';
+
+  @override
+  String get scrollWithRecitation => 'Gungura da Karatu';
 }

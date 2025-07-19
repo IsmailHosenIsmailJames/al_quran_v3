@@ -1991,6 +1991,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Note: Scheduled Notification or Reminder can be missed due to your phone\'s OS background process restrictions. For example: Vivo\'s Origin OS, Samsung\'s One UI, Oppo\'s ColorOS etc. are sometimes kills scheduled Notification or Reminder . Please check your OS settings for make app not restricted from background process.'**
   String get notificationScheduleWarning;
+
+  /// No description provided for @scrollWithRecitation.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll with Recitation'**
+  String get scrollWithRecitation;
 }
 
 class _AppLocalizationsDelegate

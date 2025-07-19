@@ -1045,4 +1045,7 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get notificationScheduleWarning =>
       'Nota: Las notificaciones o recordatorios programados pueden perderse debido a las restricciones de procesos en segundo plano del sistema operativo de su teléfono. Por ejemplo: Origin OS de Vivo, One UI de Samsung, ColorOS de Oppo, etc., a veces eliminan las notificaciones o recordatorios programados. Verifique la configuración de su sistema operativo para que la aplicación no esté restringida de los procesos en segundo plano.';
+
+  @override
+  String get scrollWithRecitation => 'Desplazarse con recitación';
 }
