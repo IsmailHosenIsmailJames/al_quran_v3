@@ -1,28 +1,70 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/functions/match_string/search_pattern_in_text.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:intl/intl.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 
-class SurahListView extends StatelessWidget {
+class SurahListView extends StatefulWidget {
   final List<SurahInfoModel> surahInfoList;
 
   const SurahListView({super.key, required this.surahInfoList});
 
   @override
+  State<SurahListView> createState() => _SurahListViewState();
+}
+
+class _SurahListViewState extends State<SurahListView> {
+  TextEditingController searchController = TextEditingController();
+
+  List<SurahInfoModel> getFilteredSurah(String filterString) {
+    Map<double, SurahInfoModel> mapOfFilteredSurah = {};
+    if (filterString.isNotEmpty) {
+      for (int i = 0; i < widget.surahInfoList.length; i++) {
+        double matched = searchPatternInText(
+          filterString.toLowerCase(),
+          "${widget.surahInfoList[i].id} ${getSurahName(context, widget.surahInfoList[i].id)} ${NumberFormat.decimalPattern(context.read<LanguageCubit>().state.locale.languageCode).format(widget.surahInfoList[i].id)}"
+              .toLowerCase(),
+        );
+        if (matched > 40) {
+          mapOfFilteredSurah[matched] = widget.surahInfoList[i];
+        }
+      }
+    } else {
+      return widget.surahInfoList;
+    }
+    List<double> matchedValue = mapOfFilteredSurah.keys.toList();
+    matchedValue.sort((a, b) => b.compareTo(a));
+    List<SurahInfoModel> surahInfoToReturn = [];
+    for (var element in matchedValue) {
+      surahInfoToReturn.add(mapOfFilteredSurah[element]!);
+    }
+    return surahInfoToReturn;
+  }
+
+  ScrollController scrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) {
-    AppLocalizations appLocalizations = AppLocalizations.of(context);
+    AppLocalizations l10n = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
     Color textColor =
         brightness == Brightness.light ? Colors.black : Colors.white;
-    ScrollController scrollController = ScrollController();
+    List<SurahInfoModel> filteredSurah = getFilteredSurah(
+      searchController.text.trim(),
+    );
+    ThemeState themeState = context.read<ThemeCubit>().state;
 
     return Scrollbar(
       controller: scrollController,
@@ -32,9 +74,28 @@ class SurahListView extends StatelessWidget {
 
       child: ListView.builder(
         padding: const EdgeInsets.only(bottom: 120),
-        itemCount: surahInfoList.length,
+        itemCount: filteredSurah.length + 1,
         controller: scrollController,
         itemBuilder: (context, index) {
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 5),
+              child: SearchBar(
+                elevation: WidgetStateProperty.all<double?>(0),
+                hintText: l10n.searchForASurah,
+                controller: searchController,
+                backgroundColor: WidgetStateProperty.all<Color?>(
+                  themeState.primaryShade100,
+                ),
+                leading: const Icon(FluentIcons.search_24_filled),
+                onChanged: (value) {
+                  setState(() {});
+                },
+              ),
+            );
+          }
+          index--;
+
           return Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
             child: TextButton(
@@ -55,7 +116,7 @@ class SurahListView extends StatelessWidget {
                         (context) => QuranScriptView(
                           startKey: "${index + 1}:1",
                           endKey:
-                              "${index + 1}:${surahInfoList[index].versesCount}",
+                              "${index + 1}:${filteredSurah[index].versesCount}",
                         ),
                   ),
                 );
@@ -72,7 +133,7 @@ class SurahListView extends StatelessWidget {
                   children: [
                     getIndexNumberWidget(
                       context,
-                      index + 1,
+                      filteredSurah[index].id,
                       textColor: textColor,
                       height: 40,
                       width: 40,
@@ -88,14 +149,14 @@ class SurahListView extends StatelessWidget {
                               height: 20,
                               width: 20,
                               child: Image.asset(
-                                surahInfoList[index].revelationPlace == "makkah"
+                                filteredSurah[index].revelationPlace == "makkah"
                                     ? "assets/img/kaaba_10171102.png"
                                     : "assets/img/masjid-al-nabawi_16183907.png",
                               ),
                             ),
                             const Gap(3),
                             Text(
-                              getSurahName(context, surahInfoList[index].id),
+                              getSurahName(context, filteredSurah[index].id),
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -106,7 +167,7 @@ class SurahListView extends StatelessWidget {
                         ),
                         const Gap(5),
                         Text(
-                          getSurahMeaning(context, surahInfoList[index].id),
+                          getSurahMeaning(context, filteredSurah[index].id),
                           style: TextStyle(
                             color:
                                 brightness == Brightness.light
@@ -122,14 +183,14 @@ class SurahListView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          getSurahNameArabic(surahInfoList[index].id),
+                          getSurahNameArabic(filteredSurah[index].id),
                           style: TextStyle(fontSize: 18, color: textColor),
                         ),
                         Text(
-                          appLocalizations.ayahsCount(
+                          l10n.ayahsCount(
                             localizedNumber(
                               context,
-                              surahInfoList[index].versesCount,
+                              filteredSurah[index].versesCount,
                             ),
                           ),
                           style: TextStyle(
