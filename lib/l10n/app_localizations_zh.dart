@@ -1009,4 +1009,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => '滚动背诵';
+
+  @override
+  String get quickAccess => '快速访问';
 }

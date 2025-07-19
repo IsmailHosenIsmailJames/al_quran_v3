@@ -1042,4 +1042,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Cuộn với đọc thuộc lòng';
+
+  @override
+  String get quickAccess => 'Truy cập nhanh';
 }

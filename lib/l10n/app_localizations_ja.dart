@@ -1026,4 +1026,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => '朗読でスクロール';
+
+  @override
+  String get quickAccess => 'クイックアクセス';
 }

@@ -1044,4 +1044,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Tembeza na Kisomo';
+
+  @override
+  String get quickAccess => 'Ufikiaji wa Haraka';
 }

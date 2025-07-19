@@ -1039,4 +1039,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'تلاوت کے ساتھ سکرول کریں۔';
+
+  @override
+  String get quickAccess => 'فوری رسائی';
 }

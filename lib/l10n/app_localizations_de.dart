@@ -1048,4 +1048,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Scrollen mit Rezitation';
+
+  @override
+  String get quickAccess => 'Schnellzugriff';
 }

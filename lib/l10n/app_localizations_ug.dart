@@ -1043,4 +1043,7 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'قىرائەت بىلەن سىيرىڭ';
+
+  @override
+  String get quickAccess => 'تېز زىيارەت';
 }

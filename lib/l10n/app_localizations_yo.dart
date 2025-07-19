@@ -1039,4 +1039,7 @@ class AppLocalizationsYo extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Yi lọ pẹlu kika';
+
+  @override
+  String get quickAccess => 'Wiwọle Yara';
 }

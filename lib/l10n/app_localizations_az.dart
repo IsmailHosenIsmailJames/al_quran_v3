@@ -1044,4 +1044,7 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Tilavətlə Sürüşdürün';
+
+  @override
+  String get quickAccess => 'Sürətli Giriş';
 }

@@ -1039,4 +1039,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'ਪਾਠ ਦੇ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰੋ';
+
+  @override
+  String get quickAccess => 'ਤੁਰੰਤ ਪਹੁੰਚ';
 }

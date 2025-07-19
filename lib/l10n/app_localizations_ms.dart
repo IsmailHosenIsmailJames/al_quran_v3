@@ -1040,4 +1040,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Tatal dengan Bacaan';
+
+  @override
+  String get quickAccess => 'Akses Pantas';
 }

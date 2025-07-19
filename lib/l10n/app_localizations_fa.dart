@@ -1040,4 +1040,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'پیمایش با تلاوت';
+
+  @override
+  String get quickAccess => 'دسترسی سریع';
 }

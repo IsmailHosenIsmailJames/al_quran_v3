@@ -1038,4 +1038,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'د تلاوت سره سکرول کړئ';
+
+  @override
+  String get quickAccess => 'چټک لاسرسی';
 }

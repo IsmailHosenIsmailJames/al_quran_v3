@@ -1039,4 +1039,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Gulir dengan Bacaan';
+
+  @override
+  String get quickAccess => 'Akses Cepat';
 }

@@ -1044,4 +1044,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Ku rogrogasho akhris';
+
+  @override
+  String get quickAccess => 'Helitaan Degdeg ah';
 }

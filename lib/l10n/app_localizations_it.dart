@@ -1050,4 +1050,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Scorri con la recitazione';
+
+  @override
+  String get quickAccess => 'Accesso rapido';
 }

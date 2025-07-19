@@ -1026,4 +1026,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => '낭송으로 스크롤';
+
+  @override
+  String get quickAccess => '빠른 접근';
 }
