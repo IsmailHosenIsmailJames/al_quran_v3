@@ -15,6 +15,7 @@ import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
+import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
@@ -187,6 +188,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),
+        BlocProvider(create: (context) => QuickAccessCubit()),
       ],
 
       child: BlocBuilder<LanguageCubit, LanguageState>(
