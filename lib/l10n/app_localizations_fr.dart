@@ -1052,4 +1052,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Faire défiler avec récitation';
+
+  @override
+  String get quickAccess => 'Accès rapide';
 }

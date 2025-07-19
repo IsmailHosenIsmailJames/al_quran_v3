@@ -1042,4 +1042,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'তিলাওয়াতের সাথে স্ক্রোল করুন';
+
+  @override
+  String get quickAccess => 'দ্রুত অ্যাক্সেস';
 }

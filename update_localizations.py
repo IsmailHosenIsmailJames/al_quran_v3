@@ -2,35 +2,35 @@ import json
 import os
 
 translations = {
-    "ar": "التمرير مع التلاوة",
-    "az": "Tilavətlə Sürüşdürün",
-    "bn": "তিলাওয়াতের সাথে স্ক্রোল করুন",
-    "de": "Scrollen mit Rezitation",
-    "es": "Desplazarse con recitación",
-    "fa": "پیمایش با تلاوت",
-    "fr": "Faire défiler avec récitation",
-    "ha": "Gungura da Karatu",
-    "hi": "सस्वर पाठ के साथ स्क्रॉल करें",
-    "id": "Gulir dengan Bacaan",
-    "it": "Scorri con la recitazione",
-    "ja": "朗読でスクロール",
-    "kk": "Оқумен айналдыру",
-    "ko": "낭송으로 스크롤",
-    "ku": "Bi xwendinê bigerin",
-    "ms": "Tatal dengan Bacaan",
-    "pa": "ਪਾਠ ਦੇ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰੋ",
-    "ps": "د تلاوت سره سکرول کړئ",
-    "pt": "Rolar com recitação",
-    "ru": "Прокрутка с чтением",
-    "so": "Ku rogrogasho akhris",
-    "sw": "Tembeza na Kisomo",
-    "ta": "పారాయణంతో స్క్రోల్ చేయండి",
-    "tr": "Okunuşla Kaydır",
-    "ug": "قىرائەت بىلەن سىيرىڭ",
-    "ur": "تلاوت کے ساتھ سکرول کریں۔",
-    "vi": "Cuộn với đọc thuộc lòng",
-    "yo": "Yi lọ pẹlu kika",
-    "zh": "滚动背诵"
+    "ar": "الوصول السريع",
+    "az": "Sürətli Giriş",
+    "bn": "দ্রুত অ্যাক্সেস",
+    "de": "Schnellzugriff",
+    "es": "Acceso rápido",
+    "fa": "دسترسی سریع",
+    "fr": "Accès rapide",
+    "ha": "Samun Sauri",
+    "hi": "त्वरित पहुँच",
+    "id": "Akses Cepat",
+    "it": "Accesso rapido",
+    "ja": "クイックアクセス",
+    "kk": "Жылдам қатынау",
+    "ko": "빠른 접근",
+    "ku": "Gihîştina Lezgîn",
+    "ms": "Akses Pantas",
+    "pa": "ਤੁਰੰਤ ਪਹੁੰਚ",
+    "ps": "چټک لاسرسی",
+    "pt": "Acesso rápido",
+    "ru": "Быстрый доступ",
+    "so": "Helitaan Degdeg ah",
+    "sw": "Ufikiaji wa Haraka",
+    "ta": "விரைவான அணுகல்",
+    "tr": "Hızlı Erişim",
+    "ug": "تېز زىيارەت",
+    "ur": "فوری رسائی",
+    "vi": "Truy cập nhanh",
+    "yo": "Wiwọle Yara",
+    "zh": "快速访问"
 }
 
 for lang, translation in translations.items():
@@ -44,9 +44,9 @@ for lang, translation in translations.items():
                 if content_before_brace.endswith(','):
                     content_before_brace = content_before_brace.rstrip(',')
                 
-                new_key_value = f'"scrollWithRecitation": {json.dumps(translation, ensure_ascii=False)}'
+                new_key_value = f'"quickAccess": {json.dumps(translation, ensure_ascii=False)}'
                 
-                if f'"scrollWithRecitation":' not in content_before_brace:
+                if f'"quickAccess":' not in content_before_brace:
                     new_content = content_before_brace + ',\n  ' + new_key_value + '\n}'
                     f.seek(0)
                     f.write(new_content)

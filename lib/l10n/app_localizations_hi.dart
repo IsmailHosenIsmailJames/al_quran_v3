@@ -1040,4 +1040,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'सस्वर पाठ के साथ स्क्रॉल करें';
+
+  @override
+  String get quickAccess => 'त्वरित पहुँच';
 }

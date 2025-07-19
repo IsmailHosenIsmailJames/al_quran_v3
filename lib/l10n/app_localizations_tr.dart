@@ -1041,4 +1041,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Okunuşla Kaydır';
+
+  @override
+  String get quickAccess => 'Hızlı Erişim';
 }

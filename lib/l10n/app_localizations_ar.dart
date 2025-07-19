@@ -1039,4 +1039,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'التمرير مع التلاوة';
+
+  @override
+  String get quickAccess => 'الوصول السريع';
 }

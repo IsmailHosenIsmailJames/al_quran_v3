@@ -1043,4 +1043,7 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Gungura da Karatu';
+
+  @override
+  String get quickAccess => 'Samun Sauri';
 }

@@ -1997,6 +1997,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scroll with Recitation'**
   String get scrollWithRecitation;
+
+  /// No description provided for @quickAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Access'**
+  String get quickAccess;
 }
 
 class _AppLocalizationsDelegate

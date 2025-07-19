@@ -1086,4 +1086,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Прокрутка с чтением';
+
+  @override
+  String get quickAccess => 'Быстрый доступ';
 }

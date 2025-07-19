@@ -1045,4 +1045,7 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Bi xwendinê bigerin';
+
+  @override
+  String get quickAccess => 'Gihîştina Lezgîn';
 }

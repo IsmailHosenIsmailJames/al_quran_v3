@@ -1054,4 +1054,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'పారాయణంతో స్క్రోల్ చేయండి';
+
+  @override
+  String get quickAccess => 'விரைவான அணுகல்';
 }

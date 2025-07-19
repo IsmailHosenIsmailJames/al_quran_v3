@@ -75,7 +75,7 @@ class _QuranPageState extends State<QuranPage>
               children: [
                 const Gap(10),
                 Text(
-                  "Quick Access",
+                  l10n.quickAccess,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const Gap(10),

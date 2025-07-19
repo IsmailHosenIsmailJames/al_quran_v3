@@ -1039,4 +1039,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get scrollWithRecitation => 'Оқумен айналдыру';
+
+  @override
+  String get quickAccess => 'Жылдам қатынау';
 }
