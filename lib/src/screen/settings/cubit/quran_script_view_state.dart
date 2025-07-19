@@ -27,7 +27,7 @@ class QuranViewState {
     this.hideQuranAyah = false,
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
-    this.scrollWithRecitation = true,
+    this.scrollWithRecitation = false,
   });
 
   QuranViewState copyWith({
