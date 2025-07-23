@@ -1,12 +1,15 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/filter/filter_surah.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:al_quran_v3/src/widget/quick_access/quick_access_popup.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -52,20 +55,103 @@ class _SurahListViewState extends State<SurahListView> {
         controller: scrollController,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
-              child: SearchBar(
-                elevation: WidgetStateProperty.all<double?>(0),
-                hintText: l10n.searchForASurah,
-                controller: searchController,
-                backgroundColor: WidgetStateProperty.all<Color?>(
-                  themeState.primaryShade100,
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    const Gap(10),
+                    Text(
+                      l10n.quickAccess,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const Gap(10),
+                    IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: themeState.primaryShade100,
+                        foregroundColor: themeState.primary,
+                      ),
+                      onPressed: () {
+                        showQuickAccessPopup(context);
+                      },
+                      icon: const Icon(FluentIcons.edit_24_regular),
+                    ),
+                  ],
                 ),
-                leading: const Icon(FluentIcons.search_24_filled),
-                onChanged: (value) {
-                  setState(() {});
-                },
-              ),
+                SizedBox(
+                  height: 40,
+                  child: BlocBuilder<QuickAccessCubit, List<QuickAccessModel>>(
+                    builder: (context, quickAccessList) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: quickAccessList.length,
+                        itemBuilder: (context, index) {
+                          QuickAccessModel quickAccessModel =
+                              quickAccessList[index];
+
+                          SurahInfoModel surahInfo = SurahInfoModel.fromMap(
+                            metaDataSurah[quickAccessModel.surahNumber
+                                .toString()],
+                          );
+
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 5.0),
+                            child: TextButton.icon(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => QuranScriptView(
+                                          startKey: "${surahInfo.id}:1",
+                                          endKey:
+                                              "${surahInfo.id}:${surahInfo.versesCount}",
+                                          toScrollKey:
+                                              quickAccessModel.scrollIndex !=
+                                                      null
+                                                  ? "${surahInfo.id}:${quickAccessModel.scrollIndex}"
+                                                  : null,
+                                        ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(FluentIcons.flash_24_regular),
+                              label: Text(
+                                getSurahName(context, surahInfo.id) +
+                                    ((quickAccessModel.scrollIndex != null &&
+                                            quickAccessModel.scrollIndex != 0)
+                                        ? " - ${localizedNumber(context, quickAccessModel.scrollIndex)}"
+                                        : ""),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+                const Gap(10),
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 5,
+                    bottom: 5,
+                    left: 5,
+                    right: 5,
+                  ),
+                  child: SearchBar(
+                    elevation: WidgetStateProperty.all<double?>(0),
+                    hintText: l10n.searchForASurah,
+                    controller: searchController,
+                    backgroundColor: WidgetStateProperty.all<Color?>(
+                      themeState.primaryShade100,
+                    ),
+                    leading: const Icon(FluentIcons.search_24_filled),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ],
             );
           }
           index--;
