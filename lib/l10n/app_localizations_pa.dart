@@ -1042,4 +1042,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get quickAccess => 'ਤੁਰੰਤ ਪਹੁੰਚ';
+
+  @override
+  String get initiallyScrollAyah => 'ਸ਼ੁਰੂ ਵਿੱਚ ਆਯਾਹ \'ਤੇ ਸਕ੍ਰੋਲ ਕਰੋ';
 }

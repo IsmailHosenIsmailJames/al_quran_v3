@@ -1042,4 +1042,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get quickAccess => 'Жылдам қатынау';
+
+  @override
+  String get initiallyScrollAyah => 'Бастапқыда аятқа жылжыңыз';
 }

@@ -1052,4 +1052,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get quickAccess => 'Acesso rápido';
+
+  @override
+  String get initiallyScrollAyah => 'Inicialmente, role para o ayah';
 }

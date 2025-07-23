@@ -1042,4 +1042,7 @@ class AppLocalizationsYo extends AppLocalizations {
 
   @override
   String get quickAccess => 'Wiwọle Yara';
+
+  @override
+  String get initiallyScrollAyah => 'Wiwọle Yara';
 }

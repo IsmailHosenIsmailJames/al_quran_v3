@@ -1047,4 +1047,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get quickAccess => 'Helitaan Degdeg ah';
+
+  @override
+  String get initiallyScrollAyah => 'Marka hore u gudub aayadda';
 }

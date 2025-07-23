@@ -1042,4 +1042,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get quickAccess => 'Akses Cepat';
+
+  @override
+  String get initiallyScrollAyah => 'Awalnya gulir ke ayat';
 }

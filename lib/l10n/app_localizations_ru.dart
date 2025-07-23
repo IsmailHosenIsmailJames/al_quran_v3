@@ -1089,4 +1089,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quickAccess => 'Быстрый доступ';
+
+  @override
+  String get initiallyScrollAyah => 'Первоначально прокрутите до аята';
 }

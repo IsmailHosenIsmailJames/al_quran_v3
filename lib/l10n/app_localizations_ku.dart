@@ -1048,4 +1048,7 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get quickAccess => 'Gihîştina Lezgîn';
+
+  @override
+  String get initiallyScrollAyah => 'Di destpêkê de biçin ayetê';
 }

@@ -1046,4 +1046,7 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get quickAccess => 'Samun Sauri';
+
+  @override
+  String get initiallyScrollAyah => 'Da farko gungura zuwa ayah';
 }

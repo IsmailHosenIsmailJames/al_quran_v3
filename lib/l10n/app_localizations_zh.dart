@@ -1012,4 +1012,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get quickAccess => '快速访问';
+
+  @override
+  String get initiallyScrollAyah => '最初滚动到 ayah';
 }

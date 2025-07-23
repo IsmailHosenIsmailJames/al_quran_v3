@@ -1044,4 +1044,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get quickAccess => 'Hızlı Erişim';
+
+  @override
+  String get initiallyScrollAyah => 'Başlangıçta ayete gidin';
 }

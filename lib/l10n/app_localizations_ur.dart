@@ -1042,4 +1042,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get quickAccess => 'فوری رسائی';
+
+  @override
+  String get initiallyScrollAyah => 'ابتدائی طور پر آیت پر سکرول کریں';
 }

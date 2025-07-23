@@ -1053,4 +1053,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get quickAccess => 'Accesso rapido';
+
+  @override
+  String get initiallyScrollAyah => 'Inizialmente scorri fino all\'ayah';
 }
