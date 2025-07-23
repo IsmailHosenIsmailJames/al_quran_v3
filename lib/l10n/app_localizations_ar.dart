@@ -1042,4 +1042,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quickAccess => 'الوصول السريع';
+
+  @override
+  String get initiallyScrollAyah => 'التمرير في البداية إلى الآية';
 }

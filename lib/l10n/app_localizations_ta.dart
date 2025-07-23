@@ -1057,4 +1057,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get quickAccess => 'விரைவான அணுகல்';
+
+  @override
+  String get initiallyScrollAyah => 'ஆரம்பத்தில் ஆயாவுக்கு உருட்டவும்';
 }

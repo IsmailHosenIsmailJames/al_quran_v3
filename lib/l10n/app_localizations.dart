@@ -2003,6 +2003,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quick Access'**
   String get quickAccess;
+
+  /// No description provided for @initiallyScrollAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Initially scroll to ayah'**
+  String get initiallyScrollAyah;
 }
 
 class _AppLocalizationsDelegate

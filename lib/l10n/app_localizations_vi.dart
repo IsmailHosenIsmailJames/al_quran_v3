@@ -1045,4 +1045,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get quickAccess => 'Truy cập nhanh';
+
+  @override
+  String get initiallyScrollAyah => 'Ban đầu cuộn đến ayah';
 }

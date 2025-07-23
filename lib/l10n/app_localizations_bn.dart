@@ -1045,4 +1045,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get quickAccess => 'দ্রুত অ্যাক্সেস';
+
+  @override
+  String get initiallyScrollAyah => 'প্রাথমিকভাবে আয়াতে স্ক্রোল করুন';
 }

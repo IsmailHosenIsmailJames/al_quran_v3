@@ -1043,4 +1043,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get quickAccess => 'त्वरित पहुँच';
+
+  @override
+  String get initiallyScrollAyah => 'शुरू में आयत पर स्क्रॉल करें';
 }

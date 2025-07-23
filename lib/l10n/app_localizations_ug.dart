@@ -1046,4 +1046,7 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get quickAccess => 'تېز زىيارەت';
+
+  @override
+  String get initiallyScrollAyah => 'ئالدى بىلەن ئايەتكە سürün';
 }

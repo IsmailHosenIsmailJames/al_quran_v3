@@ -1047,4 +1047,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get quickAccess => 'Ufikiaji wa Haraka';
+
+  @override
+  String get initiallyScrollAyah => 'Awali tembeza hadi kwenye ayah';
 }

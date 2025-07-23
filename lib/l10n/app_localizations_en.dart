@@ -1042,4 +1042,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quickAccess => 'Quick Access';
+
+  @override
+  String get initiallyScrollAyah => 'Initially scroll to ayah';
 }

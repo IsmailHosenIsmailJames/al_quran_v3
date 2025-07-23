@@ -1029,4 +1029,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get quickAccess => '빠른 접근';
+
+  @override
+  String get initiallyScrollAyah => '처음에 ayah로 스크롤';
 }

@@ -1043,4 +1043,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get quickAccess => 'Akses Pantas';
+
+  @override
+  String get initiallyScrollAyah => 'Tatal pada mulanya ke ayah';
 }

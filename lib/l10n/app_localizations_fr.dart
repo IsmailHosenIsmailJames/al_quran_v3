@@ -1055,4 +1055,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get quickAccess => 'Accès rapide';
+
+  @override
+  String get initiallyScrollAyah =>
+      'Faire défiler initialement jusqu\'à l\'ayah';
 }

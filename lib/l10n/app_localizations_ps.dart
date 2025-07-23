@@ -1041,4 +1041,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get quickAccess => 'چټک لاسرسی';
+
+  @override
+  String get initiallyScrollAyah => 'په پیل کې آیت ته سکرول کړئ';
 }

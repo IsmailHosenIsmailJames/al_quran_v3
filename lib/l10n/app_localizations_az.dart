@@ -1047,4 +1047,7 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get quickAccess => 'Sürətli Giriş';
+
+  @override
+  String get initiallyScrollAyah => 'Başlanğıcda ayəyə sürüşdürün';
 }

@@ -1043,4 +1043,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get quickAccess => 'دسترسی سریع';
+
+  @override
+  String get initiallyScrollAyah => 'در ابتدا به آیه بروید';
 }
