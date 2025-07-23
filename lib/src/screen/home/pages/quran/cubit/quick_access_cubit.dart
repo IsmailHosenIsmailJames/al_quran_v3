@@ -115,7 +115,7 @@ class QuickAccessModel {
   Map<String, dynamic> toMap() {
     return {
       "surahNumber": surahNumber,
-      "ayahs": scrollIndex,
+      "scrollIndex": scrollIndex,
       "createdAt": createdAt.toIso8601String(),
     };
   }
