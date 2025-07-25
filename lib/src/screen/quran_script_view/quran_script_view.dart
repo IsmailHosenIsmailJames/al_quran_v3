@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
@@ -54,6 +55,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
   late AppLocalizations appLocalizations;
   int? _lastFirstVisibleItemIndex;
   double? _lastFirstVisibleItemLeadingEdge;
+  StreamSubscription? _ayahKeyCubitSubscription;
   @override
   void initState() {
     var listOfAyahs = getListOfAyahKey(
@@ -198,6 +200,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
     if (widget.toScrollKey != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
         // Recalculate targetIndex here if pagesInfoWithSurahMetaData is populated late
         await scrollToAyah(widget.toScrollKey!);
       });
@@ -226,6 +229,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         }
         if (isScrollingToDown != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
             context.read<LandscapeScrollEffect>().changeState(
               isScrollingToDown!,
             );
@@ -237,9 +241,24 @@ class _PageByPageViewState extends State<QuranScriptView> {
       _lastFirstVisibleItemLeadingEdge = firstItem.itemLeadingEdge;
     });
 
-    context.read<AyahKeyCubit>().stream.listen((event) {
+    _ayahKeyCubitSubscription = context.read<AyahKeyCubit>().stream.listen((
+      event,
+    ) {
       if (context.read<QuranViewCubit>().state.scrollWithRecitation) {
-        scrollToAyah(event.current);
+        int? pageNumber = getPageNumber(event.current);
+        final scrollState = context.read<AyahByAyahInScrollInfoCubit>().state;
+        if (!scrollState.isAyahByAyah ||
+            scrollState.pageByPageList?.contains(pageNumber) == true) {
+          if (pageNumber != null) {
+            if (pageNumber !=
+                context.read<AyahKeyCubit>().state.lastScrolledPageNumber) {
+              context.read<AyahKeyCubit>().changeLastScrolledPage(pageNumber);
+              scrollToAyah(event.current);
+            }
+          }
+        } else {
+          scrollToAyah(event.current);
+        }
       }
     });
 
@@ -287,6 +306,12 @@ class _PageByPageViewState extends State<QuranScriptView> {
   ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
   ScrollOffsetController scrollOffsetController = ScrollOffsetController();
   ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
+
+  @override
+  void dispose() {
+    _ayahKeyCubitSubscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

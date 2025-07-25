@@ -36,4 +36,8 @@ class AyahKeyCubit extends Cubit<AyahKeyManagement> {
     Hive.box("user").put("last_ayah_ayah_list", ayahData.ayahList);
     Hive.box("user").put("last_ayah_current", ayahData.current);
   }
+
+  void changeLastScrolledPage(int page) {
+    emit(state.copyWith(lastScrolledPageNumber: page));
+  }
 }
