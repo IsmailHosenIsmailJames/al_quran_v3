@@ -246,9 +246,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
     ) {
       if (context.read<QuranViewCubit>().state.scrollWithRecitation) {
         int? pageNumber = getPageNumber(event.current);
-        final scrollState = context.read<AyahByAyahInScrollInfoCubit>().state;
-        if (!scrollState.isAyahByAyah ||
-            scrollState.pageByPageList?.contains(pageNumber) == true) {
+        if (!(latestState?.isAyahByAyah == true) ||
+            latestState?.pageByPageList?.contains(pageNumber) == true) {
           if (pageNumber != null) {
             if (pageNumber !=
                 context.read<AyahKeyCubit>().state.lastScrolledPageNumber) {
@@ -264,6 +263,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
     super.initState();
   }
+
+  AyahByAyahInScrollInfoState? latestState;
 
   Future<void> scrollToAyah(String ayahKey) async {
     int? targetIndex;
@@ -437,15 +438,17 @@ class _PageByPageViewState extends State<QuranScriptView> {
         return previous.surahInfoModel?.toMap() !=
             current.surahInfoModel?.toMap();
       },
-      builder:
-          (context, state) => Text(
-            state.surahInfoModel == null
-                ? ""
-                : appLocalizations.surahName(
-                  getSurahName(context, state.surahInfoModel!.id),
-                ),
-            style: const TextStyle(fontSize: 18),
-          ),
+      builder: (context, state) {
+        latestState = state;
+        return Text(
+          state.surahInfoModel == null
+              ? ""
+              : appLocalizations.surahName(
+                getSurahName(context, state.surahInfoModel!.id),
+              ),
+          style: const TextStyle(fontSize: 18),
+        );
+      },
     );
   }
 
@@ -477,6 +480,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         return previous.isAyahByAyah != current.isAyahByAyah;
       },
       builder: (context, state) {
+        latestState = state;
         return IconButton(
           style: IconButton.styleFrom(
             backgroundColor: themeState.primaryShade100,
@@ -512,6 +516,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         AyahByAyahInScrollInfoState
       >(
         builder: (context, state) {
+          latestState = state;
           return DropdownButton(
             alignment: Alignment.center,
             padding: EdgeInsets.zero,
@@ -578,6 +583,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   current.pageByPageList?.contains(pageNumber);
         },
         builder: (context, state) {
+          latestState = state;
           bool isPageByPageThisPage =
               state.pageByPageList?.contains(pageNumber) == true;
 
@@ -654,64 +660,66 @@ class _PageByPageViewState extends State<QuranScriptView> {
             (previous, current) =>
                 (previous.isAyahByAyah != current.isAyahByAyah) ||
                 (previous.pageByPageList != current.pageByPageList),
-        builder:
-            (context, state) => Container(
-              width: double.infinity,
-              height: 30,
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              color: context.read<ThemeCubit>().state.primaryShade100,
-              child: Row(
-                mainAxisAlignment:
-                    state.isAyahByAyah
-                        ? MainAxisAlignment.spaceBetween
-                        : MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      const Gap(15),
-                      Text(appLocalizations.page),
-                      Text(
-                        " - ${localizedNumber(context, (current as PageInfoModel).pageNumber)}",
+        builder: (context, state) {
+          latestState = state;
+          return Container(
+            width: double.infinity,
+            height: 30,
+            margin: const EdgeInsets.only(top: 5, bottom: 5),
+            color: context.read<ThemeCubit>().state.primaryShade100,
+            child: Row(
+              mainAxisAlignment:
+                  state.isAyahByAyah
+                      ? MainAxisAlignment.spaceBetween
+                      : MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    const Gap(15),
+                    Text(appLocalizations.page),
+                    Text(
+                      " - ${localizedNumber(context, (current as PageInfoModel).pageNumber)}",
 
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const Gap(15),
-                    ],
-                  ),
-                  if (state.isAyahByAyah)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15),
-                      child: IconButton(
-                        style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                        onPressed: () {
-                          List<int> pageByPageList =
-                              state.pageByPageList?.toList() ?? [];
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const Gap(15),
+                  ],
+                ),
+                if (state.isAyahByAyah)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15),
+                    child: IconButton(
+                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                      onPressed: () {
+                        List<int> pageByPageList =
+                            state.pageByPageList?.toList() ?? [];
 
-                          int pageNumber = (current).pageNumber;
-                          if (pageByPageList.contains(pageNumber)) {
-                            pageByPageList.remove(pageNumber);
-                          } else {
-                            pageByPageList.add(pageNumber);
-                          }
-                          context.read<AyahByAyahInScrollInfoCubit>().setData(
-                            pageByPageList: pageByPageList,
-                          );
-                        },
+                        int pageNumber = (current).pageNumber;
+                        if (pageByPageList.contains(pageNumber)) {
+                          pageByPageList.remove(pageNumber);
+                        } else {
+                          pageByPageList.add(pageNumber);
+                        }
+                        context.read<AyahByAyahInScrollInfoCubit>().setData(
+                          pageByPageList: pageByPageList,
+                        );
+                      },
 
-                        icon: Icon(
-                          state.pageByPageList?.contains(current.pageNumber) ==
-                                  true
-                              ? CupertinoIcons.list_bullet_below_rectangle
-                              : CupertinoIcons.list_bullet,
-                          color: context.read<ThemeCubit>().state.primary,
-                          size: 18,
-                        ),
+                      icon: Icon(
+                        state.pageByPageList?.contains(current.pageNumber) ==
+                                true
+                            ? CupertinoIcons.list_bullet_below_rectangle
+                            : CupertinoIcons.list_bullet,
+                        color: context.read<ThemeCubit>().state.primary,
+                        size: 18,
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
+          );
+        },
       );
     }
   }
