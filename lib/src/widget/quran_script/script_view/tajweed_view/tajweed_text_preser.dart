@@ -1,10 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:html/parser.dart" show parseFragment;
 import "package:html/dom.dart" as dom;
 
@@ -54,11 +52,6 @@ TextSpan parseTajweedWord({
                         context: context,
                         wordKeys: wordKeys,
                         initWordIndex: wordIndex,
-                        scriptCategory:
-                            context
-                                .read<QuranViewCubit>()
-                                .state
-                                .quranScriptType,
                       );
                     }),
         ),
