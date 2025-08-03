@@ -68,10 +68,12 @@ class _PageByPageViewState extends State<QuranScriptView> {
     Map<int, List<String>> pagesMap = {};
 
     for (String ayahKey in listOfAyahs) {
-      int pageNum = getPageNumber(ayahKey)!;
-      List<String> ayahKeyListOnPage = pagesMap[pageNum] ?? [];
-      ayahKeyListOnPage.add(ayahKey);
-      pagesMap[pageNum] = ayahKeyListOnPage;
+      int? pageNum = getPageNumber(ayahKey);
+      if (pageNum != null) {
+        List<String> ayahKeyListOnPage = pagesMap[pageNum] ?? [];
+        ayahKeyListOnPage.add(ayahKey);
+        pagesMap[pageNum] = ayahKeyListOnPage;
+      }
     }
 
     List<PageInfoModel> currentPagesToShow = [];

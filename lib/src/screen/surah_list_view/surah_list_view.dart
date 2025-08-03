@@ -174,9 +174,9 @@ class _SurahListViewState extends State<SurahListView> {
                   MaterialPageRoute(
                     builder:
                         (context) => QuranScriptView(
-                          startKey: "${index + 1}:1",
+                          startKey: "${filteredSurah[index].id}:1",
                           endKey:
-                              "${index + 1}:${filteredSurah[index].versesCount}",
+                              "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
                         ),
                   ),
                 );
