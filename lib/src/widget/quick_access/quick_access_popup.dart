@@ -178,6 +178,7 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                                         items: List.generate(
                                           surahInfoModel.versesCount,
                                           (index) {
+                                            index++;
                                             return DropdownMenuItem(
                                               value: index,
                                               child: Text(
@@ -193,7 +194,7 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                                                 QuickAccessModel(
                                                   surahNumber:
                                                       surahInfoModel.id,
-                                                  scrollIndex: value!,
+                                                  scrollIndex: value,
                                                   createdAt: DateTime.now(),
                                                 ),
                                               );

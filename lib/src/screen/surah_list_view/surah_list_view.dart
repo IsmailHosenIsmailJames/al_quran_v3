@@ -92,6 +92,11 @@ class _SurahListViewState extends State<SurahListView> {
                             metaDataSurah[quickAccessModel.surahNumber
                                 .toString()],
                           );
+                          String? scrollTo =
+                              ((quickAccessModel.scrollIndex != null) &&
+                                      (quickAccessModel.scrollIndex! > 1))
+                                  ? "${surahInfo.id}:${quickAccessModel.scrollIndex}"
+                                  : null;
 
                           return Padding(
                             padding: const EdgeInsets.only(right: 5.0),
@@ -105,11 +110,7 @@ class _SurahListViewState extends State<SurahListView> {
                                           startKey: "${surahInfo.id}:1",
                                           endKey:
                                               "${surahInfo.id}:${surahInfo.versesCount}",
-                                          toScrollKey:
-                                              quickAccessModel.scrollIndex !=
-                                                      null
-                                                  ? "${surahInfo.id}:${quickAccessModel.scrollIndex}"
-                                                  : null,
+                                          toScrollKey: scrollTo,
                                         ),
                                   ),
                                 );
@@ -117,8 +118,7 @@ class _SurahListViewState extends State<SurahListView> {
                               icon: const Icon(FluentIcons.flash_24_regular),
                               label: Text(
                                 getSurahName(context, surahInfo.id) +
-                                    ((quickAccessModel.scrollIndex != null &&
-                                            quickAccessModel.scrollIndex != 0)
+                                    (scrollTo != null
                                         ? " - ${localizedNumber(context, quickAccessModel.scrollIndex)}"
                                         : ""),
                               ),
