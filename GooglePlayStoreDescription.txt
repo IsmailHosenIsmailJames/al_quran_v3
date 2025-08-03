@@ -1,0 +1,45 @@
+Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion
+
+Join tens of thousands of Muslims worldwide on a spiritual journey with Al Quran, your all-in-one, feature-rich companion for daily Islamic practice. Designed for a seamless and beautiful experience, this app is your accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.
+
+KEY FEATURES
+
+📖 POWERFUL QURAN READER
+• Multiple Scripts: Read in Uthmani, Indopak, and QPC Hafs with Tajweed scripts. Switch easily to your preferred style.
+• Easy Navigation: Instantly jump to any Surah, Juz, Page, Hizb, or Ruku.
+• Offline Translations & Tafsirs: Access a huge library of resources. Download for offline reading and switch between them seamlessly.
+• Word-by-Word Analysis: Deepen your understanding with word-by-word meanings and audio. Tap any word to learn its translation and pronunciation.
+• Complete Offline Access: All your downloaded scripts, translations, and audio are available without an internet connection.
+
+🕌 ACCURATE PRAYER TIMES & QIBLA
+• Precise Timings: Get accurate prayer times for your location (using latitude/longitude) or any city worldwide.
+• Customizable Adhan Alerts: Never miss a prayer with beautiful, customizable Adhan notifications and reminders.
+• Qibla Compass: Find the Qibla direction instantly with our simple and accurate compass.
+
+🔊 IMMERSIVE AUDIO EXPERIENCE
+• Renowned Reciters: Listen to verse-by-verse recitations from a variety of famous Qaris.
+• Word-by-Word Audio: Perfect your Tajweed and pronunciation by listening to each word individually.
+• Background Play: Continue listening to the Quran even when the app is in the background. Downloaded audio is cached for offline playback.
+
+✍️ PERSONALIZE YOUR STUDY
+• Notes & Collections: Capture your reflections by taking notes on any Ayah. Organize them into personal collections.
+• Pin Your Favorites: Pin important Ayahs to custom collections by topic or theme for quick and easy access.
+• Customize Your View: Tailor the app with flexible themes, colors, font sizes, and line heights for a comfortable reading experience.
+
+🌐 SUPPORTED LANGUAGES
+
+App Interface:
+Arabic, Urdu, Bengali, Indonesian, Turkish, Persian, Punjabi, Pashto, Hausa, Malay, French, Yoruba, Kurdish, Somali, Russian, Swahili, Azerbaijani, Uyghur, Kazakh, English, Hindi, Spanish, Portuguese, Chinese, Japanese, German, Korean, Vietnamese, Tamil, Italian.
+
+Quran Translation:
+Bulgarian, Persian, Macedonian, Kashmiri, Bosnian, Amharic, Bengali, English, Spanish, Divehi, Uighur, Somali, Italian, Serbian, Kazakh, Amazigh, Marathi, Telugu, Ukrainian, Hindi, Chinese, Maltese, Kurdish, Gujarati, Sindhi, Asante, Yoruba, Lithuanian, Portuguese, German, Bambara, Malayalam, French, Nepali, Ganda, Assamese, Chechen, Polish, Tajik, Kinyarwanda, Urdu, Central Khmer, Romanian, Swahili, Hausa, Japanese, Vietnamese, Tatar, Hebrew, Turkish, Yao, Russian, Czech, Thai, Azeri, Finnish, Kannada, Tagalog, Norwegian, Korean, Uzbek, Oromo, Pashto, Sinhala, Indonesian, Dutch, Albanian, Malay, Tamil, Swedish, Maranao.
+
+Quran Tafsir:
+Arabic, Persian, Bengali, English, Spanish, Italian, Chinese, Kurdish, Malayalam, French, Assamese, Urdu, Japanese, Turkish, Russian, Tagalog, Indonesian, Vietnamese, Albanian, Central Khmer.
+
+Word By Word:
+Persian, Bengali, English, Hindi, Urdu, Turkish, Indonesian, Tamil.
+
+Built with Flutter, Al Quran offers a consistent, high-quality experience across all your devices.
+
+Download Al Quran today to deepen your connection with the Holy Quran and enhance your daily worship. Join our growing community!

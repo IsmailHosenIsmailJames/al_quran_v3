@@ -340,7 +340,6 @@ SizedBox getAyahWordByWord(
                       context: context,
                       wordKeys: wordsKey,
                       initWordIndex: index,
-                      scriptCategory: QuranScriptType.uthmani,
                     );
                   },
                   child: Container(

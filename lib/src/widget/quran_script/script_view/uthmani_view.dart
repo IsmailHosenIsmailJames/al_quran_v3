@@ -6,7 +6,6 @@ import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
@@ -88,11 +87,6 @@ class NonTajweedScriptView extends StatelessWidget {
                             context: context,
                             wordKeys: wordsKey,
                             initWordIndex: index,
-                            scriptCategory:
-                                context
-                                    .read<QuranViewCubit>()
-                                    .state
-                                    .quranScriptType,
                           );
                         }),
             );
@@ -170,7 +164,6 @@ class NonTajweedScriptView extends StatelessWidget {
                                   context: context,
                                   wordKeys: wordsKey,
                                   initWordIndex: index,
-                                  scriptCategory: QuranScriptType.uthmani,
                                 );
                               }),
                   );

@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
@@ -16,13 +17,11 @@ import "../../theme/controller/theme_state.dart";
 
 class ShowPopupOfWord extends StatefulWidget {
   final List<String> wordKeys;
-  final QuranScriptType scriptCategory;
   final SurahInfoModel surahInfoModel;
   final int initWordIndex;
   const ShowPopupOfWord({
     super.key,
     required this.wordKeys,
-    required this.scriptCategory,
     required this.surahInfoModel,
     required this.initWordIndex,
   });
@@ -38,6 +37,8 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    QuranScriptType scriptType =
+        context.read<QuranViewCubit>().state.quranScriptType;
 
     List wordByWord = [];
     bool supportsWordByWord = false;
@@ -128,7 +129,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                           wordIndex:
                               int.parse(widget.wordKeys[index].split(":")[2]) -
                               1,
-                          quranScriptType: widget.scriptCategory,
+                          quranScriptType: scriptType,
                           textStyle: const TextStyle(fontSize: 40),
                           skipWordTap: true,
                         ),
