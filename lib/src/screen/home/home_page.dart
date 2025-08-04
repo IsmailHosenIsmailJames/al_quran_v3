@@ -1,5 +1,3 @@
-import "dart:io";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
@@ -153,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                                 .read<OthersSettingsCubit>()
                                 .setTabIndex(0),
                       ),
-                      if (Platform.isIOS || Platform.isAndroid) const Gap(5),
+
                       IconButton(
                         icon: Icon(
                           state.tabIndex == 1

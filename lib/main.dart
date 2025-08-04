@@ -1,5 +1,4 @@
 import "dart:convert";
-import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
@@ -34,8 +33,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
-import "package:window_manager/window_manager.dart";
-// import "package:workmanager/workmanager.dart";
 
 Map<String, dynamic> tajweedScript = {};
 Map<String, dynamic> uthmaniScript = {};
@@ -53,22 +50,7 @@ Map<String, dynamic> surahMeaningLocalization = {};
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
-    await windowManager.ensureInitialized();
-    WindowOptions windowOptions = const WindowOptions(
-      size: Size(600, 900),
-      maximumSize: Size(1000, 1900),
-      minimumSize: Size(400, 700),
-      center: true,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.normal,
-    );
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
-    });
-  }
+
   await JustAudioBackground.init(
     androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
     androidNotificationChannelName: "Audio playback",
