@@ -57,7 +57,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_animate: ^4.5.2
-  location: ^8.0.1
   toastification: ^3.0.3
 
 dev_dependencies:
