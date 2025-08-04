@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/get_tafsir_from_db.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -12,7 +13,6 @@ import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
@@ -156,7 +156,7 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
-                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
+                  showToastNotification(context, msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),
@@ -273,7 +273,7 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
                   );
-                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
+                  showToastNotification(context, msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),

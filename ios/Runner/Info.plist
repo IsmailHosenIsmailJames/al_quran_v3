@@ -44,6 +44,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location for find out Qibla direction and Calculate Prayers times based on user location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs access to your location to calculate prayer times and provide accurate Qibla direction.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

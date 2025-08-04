@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/functions/quran_resources/word_by_word_function.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
@@ -30,7 +31,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 
@@ -468,7 +468,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
         processState.tafsirBookModel == null) {
-      Fluttertoast.showToast(msg: appLocalizations.pleaseSelectRequiredOption);
+      showToastNotification(
+        context,
+        msg: appLocalizations.pleaseSelectRequiredOption,
+        isError: true,
+      );
     }
     if (fromKey.currentState?.validate() == true) {
       final userBox = Hive.box("user");

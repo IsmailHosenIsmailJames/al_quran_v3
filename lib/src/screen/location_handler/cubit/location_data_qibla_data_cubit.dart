@@ -6,7 +6,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
 import "../../prayer_time/functions/prayers_time_function.dart";
-import "../../qibla/qibla_direction.dart";
 
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit() : super(getSavedLocation());
@@ -21,10 +20,6 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
     LocationQiblaPrayerDataState newState = state.copyWith();
     newState.latLon = latLon;
-    newState.kaabaAngle =
-        latLon == null
-            ? null
-            : calculateQiblaAngle(latLon.latitude, latLon.longitude);
 
     emit(newState);
   }

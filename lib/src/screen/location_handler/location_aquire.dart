@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/address_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
@@ -9,7 +10,6 @@ import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:geolocator/geolocator.dart";
 
@@ -69,8 +69,10 @@ class _LocationAcquireState extends State<LocationAcquire> {
                           bool isServiceAvailable =
                               await Geolocator.isLocationServiceEnabled();
                           if (!isServiceAvailable) {
-                            Fluttertoast.showToast(
+                            showToastNotification(
+                              context,
                               msg: l10n.pleaseEnableLocationService,
+                              isError: true,
                             );
                             await Geolocator.openLocationSettings();
                           }

@@ -1,9 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_flutter/hive_flutter.dart";
 
 class QuranViewCubit extends Cubit<QuranViewState> {
@@ -106,11 +106,13 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     if (newState.hideWordByWord == true &&
         newState.hideTranslation == true &&
         newState.hideQuranAyah == true) {
-      Fluttertoast.showToast(
+      showToastNotification(
+        navigatorKey.currentContext!,
         msg:
             AppLocalizations.of(
               navigatorKey.currentContext!,
             ).quranTranslationAyahOneMustEnabled,
+        isError: true,
       );
       return;
     }
