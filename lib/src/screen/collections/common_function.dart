@@ -1,6 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:flutter/material.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:hive/hive.dart";
 
 import "../../widget/add_collection_popup/add_note_popup.dart";
@@ -117,11 +117,16 @@ Future<List<NoteCollectionModel>> fetchNoteCollections() async {
 }
 
 Future<NoteCollectionModel?> handleAddNewNoteCollection(
+  BuildContext context,
   String noteText,
   AppLocalizations l10n,
 ) async {
   if (noteText.isEmpty) {
-    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
+    showToastNotification(
+      context,
+      msg: l10n.collectionNameCannotBeEmpty,
+      isError: true,
+    );
     return null;
   }
   final now = DateTime.now();
@@ -137,16 +142,21 @@ Future<NoteCollectionModel?> handleAddNewNoteCollection(
 
   final noteCollectionModel = Hive.box(CollectionType.notes.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
-  Fluttertoast.showToast(msg: l10n.addedNewCollection);
+  showToastNotification(context, msg: l10n.addedNewCollection);
   return newCollection;
 }
 
 Future<PinnedCollectionModel?> handleAddNewCollection(
+  BuildContext context,
   String text,
   AppLocalizations l10n,
 ) async {
   if (text.isEmpty) {
-    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
+    showToastNotification(
+      context,
+      msg: l10n.collectionNameCannotBeEmpty,
+      isError: true,
+    );
     return null;
   }
   final now = DateTime.now();
@@ -163,7 +173,7 @@ Future<PinnedCollectionModel?> handleAddNewCollection(
   final noteCollectionModel = Hive.box(CollectionType.pinned.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
 
-  Fluttertoast.showToast(msg: l10n.addedNewCollection);
+  showToastNotification(context, msg: l10n.addedNewCollection);
   return newCollection;
 }
 

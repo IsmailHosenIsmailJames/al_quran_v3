@@ -3,14 +3,12 @@ import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.da
 
 class LocationQiblaPrayerDataState {
   LatLon? latLon;
-  double? kaabaAngle;
   CalculationMethod? calculationMethod;
   bool isDataExits;
   bool? isPrayerTimeDownloading;
 
   LocationQiblaPrayerDataState({
     this.latLon,
-    this.kaabaAngle,
     this.calculationMethod,
     this.isDataExits = false,
     this.isPrayerTimeDownloading = false,
@@ -25,7 +23,6 @@ class LocationQiblaPrayerDataState {
   }) {
     return LocationQiblaPrayerDataState(
       latLon: latLon ?? this.latLon,
-      kaabaAngle: kaabaAngle ?? this.kaabaAngle,
       calculationMethod: calculationMethod ?? this.calculationMethod,
       isDataExits: isDataExits ?? this.isDataExits,
       isPrayerTimeDownloading:

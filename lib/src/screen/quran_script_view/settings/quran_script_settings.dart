@@ -5,13 +5,13 @@ import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
@@ -351,10 +351,14 @@ class QuranScriptSettings extends StatelessWidget {
                 .changeReciter(context, reciterInfoModel);
 
             if (!isSuccess) {
-              Fluttertoast.showToast(msg: l10n.unableToDownloadResources);
+              showToastNotification(
+                context,
+                msg: l10n.unableToDownloadResources,
+                isError: true,
+              );
               return;
             } else {
-              Fluttertoast.showToast(msg: l10n.success);
+              showToastNotification(context, msg: l10n.success);
             }
 
             if (AudioPlayerManager.audioPlayer.playing) {

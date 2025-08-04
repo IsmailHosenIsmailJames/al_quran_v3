@@ -6,13 +6,7 @@ import "package:al_quran_v3/src/functions/localizedPrayerName.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/permissions_for_notifications.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -21,7 +15,6 @@ import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
 
@@ -308,120 +301,34 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     AppLocalizations l10n,
     bool isLandScape,
   ) {
-    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-      builder: (context, prayerReminderState) {
-        List<ReminderTypeWithPrayModel> listOfToRemind =
-            prayerReminderState.prayerToRemember;
-
-        ReminderTypeWithPrayModel? currentReminder = listOfToRemind
-            .firstOrNullWhere(
-              (element) => element.prayerTimesType == prayerModelType,
-            );
-
-        bool isCurrentToRemind = currentReminder != null;
-
-        ReminderTypeWithPrayModel defaultWhenEnable = ReminderTypeWithPrayModel(
-          reminderType:
-              prayerReminderState.previousReminderModes[prayerModelType] ??
-              PrayerReminderType.alarm,
-          prayerTimesType: prayerModelType,
-        );
-
-        return Container(
-          padding: const EdgeInsets.only(left: 5, right: 5),
-          decoration:
-              isThisIsCurrentPrayer
-                  ? BoxDecoration(
-                    color: themeState.primary.withValues(alpha: 0.1),
-                    border: Border.all(color: themeState.primary),
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                  )
-                  : null,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                localizedPrayerName(context, prayerModelType),
-                style: textStyleOfTimes,
-              ),
-              const Spacer(),
-              Text(
-                formatTimeOfDay(context, mapOfTimes.values.elementAt(i)),
-                style: textStyleOfTimes,
-              ),
-              const Gap(10),
-              SizedBox(
-                height: isToday ? 40 : 30,
-                width: isToday ? 50 : 0,
-                child:
-                    !isToday
-                        ? null
-                        : getPrayerReminderSwitch(
-                          defaultWhenEnable,
-                          isCurrentToRemind,
-                          context,
-                          prayerModelType,
-                          currentReminder,
-                          l10n,
-                        ),
-              ),
-              if (isLandScape)
-                const SizedBox(height: 1, child: SafeArea(child: SizedBox())),
-            ],
+    return Container(
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      decoration:
+          isThisIsCurrentPrayer
+              ? BoxDecoration(
+                color: themeState.primary.withValues(alpha: 0.1),
+                border: Border.all(color: themeState.primary),
+                borderRadius: BorderRadius.circular(roundedRadius),
+              )
+              : null,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            localizedPrayerName(context, prayerModelType),
+            style: textStyleOfTimes,
           ),
-        );
-      },
-    );
-  }
+          const Spacer(),
+          Text(
+            formatTimeOfDay(context, mapOfTimes.values.elementAt(i)),
+            style: textStyleOfTimes,
+          ),
+          const Gap(10),
 
-  Switch getPrayerReminderSwitch(
-    ReminderTypeWithPrayModel defaultWhenEnable,
-    bool isCurrentToRemind,
-    BuildContext context,
-    PrayerModelTimesType prayerModelType,
-    ReminderTypeWithPrayModel? currentReminder,
-    AppLocalizations l10n,
-  ) {
-    return Switch(
-      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.selected)) {
-          return Icon(
-            defaultWhenEnable.reminderType == PrayerReminderType.notification
-                ? FluentIcons.alert_on_24_regular
-                : Icons.alarm_on_rounded,
-          );
-        }
-        return Icon(
-          defaultWhenEnable.reminderType == PrayerReminderType.notification
-              ? FluentIcons.alert_off_24_regular
-              : Icons.alarm_off_rounded,
-        );
-      }),
-      value: isCurrentToRemind,
-      onChanged: (value) async {
-        if (value) {
-          if (await requestPermissionForReminder()) {
-            context.read<PrayerReminderCubit>().addPrayerToRemember(
-              defaultWhenEnable,
-            );
-            Fluttertoast.showToast(
-              msg: l10n.reminderAdded(prayerModelType.name.capitalize()),
-            );
-          } else {
-            Fluttertoast.showToast(msg: l10n.allowNotificationPermission);
-          }
-        } else {
-          context.read<PrayerReminderCubit>().removePrayerToRemember(
-            currentReminder!,
-          );
-          await setReminderForPrayers();
-          Fluttertoast.showToast(
-            msg: l10n.reminderRemoved(prayerModelType.name.capitalize()),
-          );
-        }
-      },
+          if (isLandScape)
+            const SizedBox(height: 1, child: SafeArea(child: SizedBox())),
+        ],
+      ),
     );
   }
 

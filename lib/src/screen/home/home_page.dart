@@ -4,9 +4,9 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
-import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
+import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -67,11 +67,9 @@ class _HomePageState extends State<HomePage> {
                 (context, state) =>
                     [
                       const QuranPage(),
-                      if (Platform.isIOS || Platform.isAndroid)
-                        const PrayerTimePage(),
-                      if (Platform.isIOS || Platform.isAndroid)
-                        const QiblaDirection(),
+                      const PrayerTimePage(),
                       const AudioPage(),
+                      const SettingsPage(),
                     ][state.tabIndex],
           ),
           if (isFloatingNav) appFloatingNav(l10n),
@@ -156,58 +154,57 @@ class _HomePageState extends State<HomePage> {
                                 .setTabIndex(0),
                       ),
                       if (Platform.isIOS || Platform.isAndroid) const Gap(5),
-                      if (Platform.isIOS || Platform.isAndroid)
-                        IconButton(
-                          icon: Icon(
-                            state.tabIndex == 1
-                                ? FluentIcons.clock_24_filled
-                                : FluentIcons.clock_24_regular,
-                          ),
-                          style: IconButton.styleFrom(
-                            foregroundColor:
-                                state.tabIndex == 1
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.grey,
-                            backgroundColor:
-                                state.tabIndex == 1
-                                    ? themeState.primaryShade200
-                                    : null,
-                          ),
-                          tooltip: "Prayer Time",
-                          onPressed:
-                              () => context
-                                  .read<OthersSettingsCubit>()
-                                  .setTabIndex(1),
+                      IconButton(
+                        icon: Icon(
+                          state.tabIndex == 1
+                              ? FluentIcons.clock_24_filled
+                              : FluentIcons.clock_24_regular,
                         ),
-                      if (Platform.isIOS || Platform.isAndroid) const Gap(5),
-                      if (Platform.isIOS || Platform.isAndroid)
-                        IconButton(
-                          icon: Icon(
-                            state.tabIndex == 2
-                                ? FluentIcons.compass_northwest_24_filled
-                                : FluentIcons.compass_northwest_24_regular,
-                          ),
-                          style: IconButton.styleFrom(
-                            foregroundColor:
-                                state.tabIndex == 2
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.grey,
-                            backgroundColor:
-                                state.tabIndex == 2
-                                    ? themeState.primaryShade200
-                                    : null,
-                          ),
-                          tooltip: "Qibla Direction",
-                          onPressed:
-                              () => context
-                                  .read<OthersSettingsCubit>()
-                                  .setTabIndex(2),
+                        style: IconButton.styleFrom(
+                          foregroundColor:
+                              state.tabIndex == 1
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.grey,
+                          backgroundColor:
+                              state.tabIndex == 1
+                                  ? themeState.primaryShade200
+                                  : null,
                         ),
+                        tooltip: l10n.prayer,
+                        onPressed:
+                            () => context
+                                .read<OthersSettingsCubit>()
+                                .setTabIndex(1),
+                      ),
+
+                      IconButton(
+                        icon: Icon(
+                          state.tabIndex == 2
+                              ? Icons.audiotrack_rounded
+                              : Icons.audiotrack_outlined,
+                        ),
+                        style: IconButton.styleFrom(
+                          foregroundColor:
+                              state.tabIndex == 2
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.grey,
+                          backgroundColor:
+                              state.tabIndex == 2
+                                  ? themeState.primaryShade200
+                                  : null,
+                        ),
+                        tooltip: l10n.audio,
+                        onPressed:
+                            () => context
+                                .read<OthersSettingsCubit>()
+                                .setTabIndex(2),
+                      ),
+
                       IconButton(
                         icon: Icon(
                           state.tabIndex == 3
-                              ? Icons.audiotrack_rounded
-                              : Icons.audiotrack_outlined,
+                              ? Icons.settings_rounded
+                              : Icons.settings_outlined,
                         ),
                         style: IconButton.styleFrom(
                           foregroundColor:
@@ -219,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                                   ? themeState.primaryShade200
                                   : null,
                         ),
-                        tooltip: "Audio",
+                        tooltip: l10n.settings,
                         onPressed:
                             () => context
                                 .read<OthersSettingsCubit>()
@@ -259,24 +256,15 @@ class _HomePageState extends State<HomePage> {
               ),
               label: l10n.quran,
             ),
-            if (Platform.isIOS || Platform.isAndroid)
-              BottomNavigationBarItem(
-                icon: Icon(
-                  state.tabIndex == 1
-                      ? FluentIcons.clock_24_filled
-                      : FluentIcons.clock_24_regular,
-                ),
-                label: l10n.prayer,
+            BottomNavigationBarItem(
+              icon: Icon(
+                state.tabIndex == 1
+                    ? FluentIcons.clock_24_filled
+                    : FluentIcons.clock_24_regular,
               ),
-            if (Platform.isIOS || Platform.isAndroid)
-              BottomNavigationBarItem(
-                icon: Icon(
-                  state.tabIndex == 2
-                      ? FluentIcons.compass_northwest_24_filled
-                      : FluentIcons.compass_northwest_24_regular,
-                ),
-                label: l10n.qibla,
-              ),
+              label: l10n.prayer,
+            ),
+
             BottomNavigationBarItem(
               icon: Icon(
                 state.tabIndex == 3
@@ -284,6 +272,14 @@ class _HomePageState extends State<HomePage> {
                     : Icons.audiotrack_outlined,
               ),
               label: l10n.audio,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                state.tabIndex == 3
+                    ? Icons.settings_rounded
+                    : Icons.settings_outlined,
+              ),
+              label: l10n.settings,
             ),
           ],
         );

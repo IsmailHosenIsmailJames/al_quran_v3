@@ -3,6 +3,7 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/functions/filter/filter_surah.dart";
 import "package:al_quran_v3/src/functions/number_localization.dart";
 import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -15,7 +16,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
-import "package:fluttertoast/fluttertoast.dart";
+// import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:share_plus/share_plus.dart";
@@ -610,7 +611,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ),
                             );
                           } else {
-                            Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                            showToastNotification(
+                              context,
+                              msg: l10n.pleaseSelectOne,
+                              isError: true,
+                            );
                           }
                         },
                         child: Text(l10n.toTafsir),
@@ -640,7 +645,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             );
                           }
                         } else {
-                          Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                          showToastNotification(
+                            context,
+                            msg: l10n.pleaseSelectOne,
+                            isError: true,
+                          );
                         }
                       },
                       child: Text(

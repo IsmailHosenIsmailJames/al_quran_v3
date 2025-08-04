@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationUsageDescription</key>
-	<string>This app needs access to location for find out Qibla direction and Calculate Prayers times based on user location.</string>
-	<key>com.apple.security.personal-information.location</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -32,10 +28,11 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-    	<key>NSAllowsArbitraryLoads</key>
-    	<true/>
-	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs access to your location to calculate prayer times.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+	<string>I need it </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Because My app needs access to your location to calculate prayer times based on your location.</string>
 </dict>
 </plist>

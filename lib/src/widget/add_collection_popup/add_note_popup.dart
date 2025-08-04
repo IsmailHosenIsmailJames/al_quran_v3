@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/notification/app_toast_notification.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
@@ -6,7 +7,6 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive/hive.dart";
 import "package:uuid/uuid.dart";
@@ -96,7 +96,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
     }
 
     Navigator.pop(context); // Close the dialog
-    Fluttertoast.showToast(
+    showToastNotification(
+      context,
       msg: AppLocalizations.of(context).noteSavedSuccessfully,
     );
   }
@@ -194,6 +195,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                 onPressed: () async {
                                   NoteCollectionModel? newCollection =
                                       await handleAddNewNoteCollection(
+                                        context,
                                         _newCollectionNameController.text
                                             .trim(),
                                         l10n,
@@ -355,7 +357,8 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                         });
                       } else {
                         if (_selectedNoteCollectionIds.isEmpty) {
-                          Fluttertoast.showToast(
+                          showToastNotification(
+                            context,
                             msg: l10n.noCollectionSelected,
                           );
                         } else {
