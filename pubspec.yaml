@@ -116,9 +116,12 @@ icons_launcher:
       enable: true
     ios:
       enable: true
+    web:
+      enable: true
   
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
+  web: true
   image_path: "assets/img/Quran_Logo_v3.png"
   min_sdk_android: 21 

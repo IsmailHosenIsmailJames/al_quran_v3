@@ -23,7 +23,7 @@
     
     <application
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="Quran's Tafsir, Audio and Prayer"
         android:usesCleartextTraffic="true"
         android:allowBackup="false"
