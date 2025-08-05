@@ -33,7 +33,6 @@ import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:hive_flutter/adapters.dart";
-import "package:just_audio_background/just_audio_background.dart";
 import "package:window_manager/window_manager.dart";
 // import "package:workmanager/workmanager.dart";
 
@@ -69,11 +68,7 @@ Future<void> main() async {
       await windowManager.focus();
     });
   }
-  await JustAudioBackground.init(
-    androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
-    androidNotificationChannelName: "Audio playback",
-    androidNotificationOngoing: true,
-  );
+
   await Hive.initFlutter();
   await Hive.openBox("user");
   await Hive.openBox("segmented_quran_recitation");

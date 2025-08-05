@@ -9,13 +9,10 @@ import "package:al_quran_v3/src/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
-import "package:just_audio_background/just_audio_background.dart";
 import "package:permission_handler/permission_handler.dart";
 
 class AudioPlayerManager {
@@ -150,19 +147,8 @@ class AudioPlayerManager {
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
-    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-      metaDataSurah[ayahKey.split(":").first],
-    );
-
     String audioURL = getUrlFromAyahKey(ayahKey, reciterInfoModel);
-    final audioSource = LockCachingAudioSource(
-      Uri.parse(audioURL),
-      tag: MediaItem(
-        id: ayahKey,
-        album: reciterInfoModel.name,
-        title: getSurahName(context, surahInfoModel.id),
-      ),
-    );
+    final audioSource = AudioSource.uri(Uri.parse(audioURL));
     await audioPlayer.stop();
     await audioPlayer.clearAudioSources();
 
@@ -209,20 +195,11 @@ class AudioPlayerManager {
     ayahList.removeWhere((element) => element.runtimeType == int);
     ayahList = List<String>.from(ayahList);
 
-    List<LockCachingAudioSource> listOfAudioSource = [];
+    List<AudioSource> listOfAudioSource = [];
     for (String ayahKey in ayahList) {
-      SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        metaDataSurah[ayahKey.split(":").first],
-      );
       listOfAudioSource.add(
-        LockCachingAudioSource(
+        AudioSource.uri(
           Uri.parse(getUrlFromAyahKey(ayahKey, reciterInfoModel)),
-
-          tag: MediaItem(
-            id: ayahKey,
-            album: reciterInfoModel.name,
-            title: getSurahName(context, surahInfoModel.id),
-          ),
         ),
       );
     }
@@ -261,11 +238,10 @@ class AudioPlayerManager {
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;
 
-    AudioSource audioSource = LockCachingAudioSource(
+    AudioSource audioSource = AudioSource.uri(
       Uri.parse(
         "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
       ),
-      tag: MediaItem(id: wordKey, title: wordKey),
     );
 
     await stopListeningAudioPlayerState();
