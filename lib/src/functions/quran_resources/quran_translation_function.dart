@@ -255,7 +255,7 @@ class QuranTranslationFunction {
       dio.Response response = await dio.Dio().get(
         base + translationBook.fullPath,
         onReceiveProgress: (received, total) {
-          if (total != -1) {
+          if (total > 0) {
             double progress = received / total;
             cubit.updateProgress(
               progress * 0.5,

@@ -33,6 +33,42 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background-color: #FFFFFF; /* White background */
+    }
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #008000; /* Green loader */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-top: 20px;
+      font-family: sans-serif;
+      font-size: 18px;
+      color: black; /* Black text */
+    }
+  </style>
+  <div class="loading-container">
+    <div class="loader"></div>
+    <p class="loading-text">Loading essential assets...</p>
+  </div>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

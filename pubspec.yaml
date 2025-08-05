@@ -75,7 +75,6 @@ flutter:
     - assets/quran_script/
     - assets/meta_data/
     - assets/address/
-    - assets/adhan/
 
   fonts:
     - family: QPC_Hafs 
