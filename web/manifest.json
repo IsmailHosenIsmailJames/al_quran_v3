@@ -1,6 +1,6 @@
 {
-    "name": "al_quran_v3",
-    "short_name": "al_quran_v3",
+    "name": "Al Quran With Tafsir, Audio & Prayer",
+    "short_name": "Al Quran",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
