@@ -25,6 +25,7 @@ import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:dartx/dartx.dart";
@@ -90,6 +91,7 @@ Widget getAyahByAyahCard({
               if (!context.mounted) {
                 return;
               }
+              context.read<QuranHistoryCubit>().addHistory(ayahKey);
               try {
                 SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                   metaDataSurah[ayahKey.split(":").first],

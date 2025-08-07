@@ -19,6 +19,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dar
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:dartx/dartx.dart";
@@ -605,6 +606,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   if (!context.mounted) {
                     return;
                   }
+                  context.read<QuranHistoryCubit>().addHistory(
+                    ayahsKeyOfPage.first,
+                  );
+
                   try {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                       metaDataSurah[ayahsKeyOfPage.first.split(":").first],
