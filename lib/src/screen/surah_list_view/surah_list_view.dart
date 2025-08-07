@@ -322,8 +322,9 @@ class _SurahListViewState extends State<SurahListView> {
                   builder:
                       (context) => QuranScriptView(
                         startKey: "${historyModel.surahNumber}:1",
-                        endKey:
-                            "${historyModel.surahNumber}:${getEndAyahKeyFromSurahNumber(historyModel.surahNumber)}",
+                        endKey: getEndAyahKeyFromSurahNumber(
+                          historyModel.surahNumber,
+                        ),
                         toScrollKey:
                             "${historyModel.surahNumber}:${historyModel.ayahNumber}",
                       ),
