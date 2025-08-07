@@ -9,7 +9,10 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/widget/quick_access/quick_access_popup.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -57,6 +60,37 @@ class _SurahListViewState extends State<SurahListView> {
           if (index == 0) {
             return Column(
               children: [
+                BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
+                  builder: (context, history) {
+                    return history.history.isEmpty
+                        ? Container()
+                        : Column(
+                          children: [
+                            const Gap(10),
+                            Row(
+                              children: [
+                                const Gap(10),
+                                const Icon(FluentIcons.history_24_regular),
+                                const Gap(10),
+                                Text(
+                                  "History",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
+
+                            const Gap(5),
+
+                            SizedBox(
+                              height: 40,
+                              child: getHistoryWidget(history),
+                            ),
+                          ],
+                        );
+                  },
+                ),
+
                 Row(
                   children: [
                     const Gap(10),
@@ -269,6 +303,40 @@ class _SurahListViewState extends State<SurahListView> {
           );
         },
       ),
+    );
+  }
+
+  Widget getHistoryWidget(QuranHistoryState history) {
+    return ListView.builder(
+      itemCount: history.history.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        HistoryElement historyModel = history.history.reversed.toList()[index];
+        return Padding(
+          padding: const EdgeInsets.only(right: 5.0),
+          child: TextButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => QuranScriptView(
+                        startKey: "${historyModel.surahNumber}:1",
+                        endKey:
+                            "${historyModel.surahNumber}:${getEndAyahKeyFromSurahNumber(historyModel.surahNumber)}",
+                        toScrollKey:
+                            "${historyModel.surahNumber}:${historyModel.ayahNumber}",
+                      ),
+                ),
+              );
+            },
+            icon: const Icon(FluentIcons.history_24_regular),
+            label: Text(
+              "${getSurahName(context, historyModel.surahNumber)} - ${localizedNumber(context, historyModel.ayahNumber)}",
+            ),
+          ),
+        );
+      },
     );
   }
 }

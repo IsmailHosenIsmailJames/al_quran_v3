@@ -30,6 +30,7 @@ import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:alarm/alarm.dart";
 import "package:flutter/material.dart";
@@ -189,6 +190,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),
         BlocProvider(create: (context) => QuickAccessCubit()),
+        BlocProvider(create: (context) => QuranHistoryCubit()),
       ],
 
       child: BlocBuilder<LanguageCubit, LanguageState>(
