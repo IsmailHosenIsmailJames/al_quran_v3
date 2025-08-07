@@ -590,8 +590,17 @@ class _PageByPageViewState extends State<QuranScriptView> {
               state.pageByPageList?.contains(pageNumber) == true;
 
           return state.isAyahByAyah == true && isPageByPageThisPage == false
-              ? VisibilityDetector(
-                key: Key(ayahsKeyOfPage.first),
+              ? Column(
+                children: List.generate(ayahsKeyOfPage.length, (idx) {
+                  return getAyahByAyahCard(
+                    key: ayahKeyToKey[ayahsKeyOfPage[idx]],
+                    ayahKey: ayahsKeyOfPage[idx],
+                    context: context,
+                  );
+                }),
+              )
+              : VisibilityDetector(
+                key: Key("page-$index}"),
                 onVisibilityChanged: (info) {
                   if (!context.mounted) {
                     return;
@@ -600,37 +609,9 @@ class _PageByPageViewState extends State<QuranScriptView> {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                       metaDataSurah[ayahsKeyOfPage.first.split(":").first],
                     );
-
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
                       surahInfoModel: surahInfoModel,
                       dropdownAyahKey: ayahsKeyOfPage.first,
-                    );
-                  } catch (e) {
-                    log(e.toString());
-                  }
-                },
-                child: Column(
-                  children: List.generate(ayahsKeyOfPage.length, (idx) {
-                    return getAyahByAyahCard(
-                      key: ayahKeyToKey[ayahsKeyOfPage[idx]],
-                      ayahKey: ayahsKeyOfPage[idx],
-                      context: context,
-                    );
-                  }),
-                ),
-              )
-              : VisibilityDetector(
-                key: Key(ayahsKeyOfPage.first),
-                onVisibilityChanged: (info) {
-                  if (!context.mounted) {
-                    return;
-                  }
-                  try {
-                    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                      metaDataSurah[ayahsKeyOfPage.first.split(":").first],
-                    );
-                    context.read<AyahByAyahInScrollInfoCubit>().setData(
-                      surahInfoModel: surahInfoModel,
                     );
                   } catch (e) {
                     log(e.toString());
