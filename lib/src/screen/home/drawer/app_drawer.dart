@@ -282,27 +282,6 @@ class _AppDrawerState extends State<AppDrawer> {
                       minTileHeight: 40,
                       onTap: () async {
                         Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TajweedGuideScreen(),
-                          ),
-                        );
-                      },
-                      leading: Icon(
-                        Icons.book_rounded,
-                        color: themeState.primary,
-                      ),
-                      title: Text(
-                        l10n.tajweedGuide,
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    const Gap(5),
-                    ListTile(
-                      minTileHeight: 40,
-                      onTap: () async {
-                        Navigator.pop(context);
                         await popupJumpToAyah(
                           context: context,
                           initAyahKey: "1:1",
@@ -316,6 +295,27 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                       title: Text(
                         l10n.shareMultipleAyah,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const Gap(5),
+                    ListTile(
+                      minTileHeight: 40,
+                      onTap: () async {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TajweedGuideScreen(),
+                          ),
+                        );
+                      },
+                      leading: Icon(
+                        Icons.book_rounded,
+                        color: themeState.primary,
+                      ),
+                      title: Text(
+                        l10n.tajweedGuide,
                         style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                     ),
