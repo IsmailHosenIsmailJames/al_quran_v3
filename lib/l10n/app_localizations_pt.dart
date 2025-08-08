@@ -1055,4 +1055,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Inicialmente, role para o ayah';
+
+  @override
+  String get tajweedGuide => 'Guia de Tajweed';
 }

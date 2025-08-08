@@ -1046,4 +1046,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'शुरू में आयत पर स्क्रॉल करें';
+
+  @override
+  String get tajweedGuide => 'तजवीद गाइड';
 }

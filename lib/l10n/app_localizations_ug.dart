@@ -1049,4 +1049,7 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'ئالدى بىلەن ئايەتكە سürün';
+
+  @override
+  String get tajweedGuide => 'تەجۋىد قوللانمىسى';
 }

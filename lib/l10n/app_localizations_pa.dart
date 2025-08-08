@@ -1045,4 +1045,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'ਸ਼ੁਰੂ ਵਿੱਚ ਆਯਾਹ \'ਤੇ ਸਕ੍ਰੋਲ ਕਰੋ';
+
+  @override
+  String get tajweedGuide => 'ਤਜਵੀਦ ਗਾਈਡ';
 }
