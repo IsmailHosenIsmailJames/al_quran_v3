@@ -25,6 +25,7 @@ import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:dartx/dartx.dart";
@@ -34,6 +35,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
+import "package:visibility_detector/visibility_detector.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -83,143 +85,164 @@ Widget getAyahByAyahCard({
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
         builder: (context, quranViewState) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            key: key,
-            padding: const EdgeInsets.all(5),
-            margin:
-                keepMargin
-                    ? const EdgeInsets.only(
-                      left: 5,
-                      top: 5,
-                      bottom: 5,
-                      right: 10,
-                    )
-                    : null,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(roundedRadius),
-              border: Border.all(color: themeState.primaryShade200),
-            ),
-            child: Column(
-              children: [
-                if (!(showTopOptions == false) && !quranViewState.hideToolbar)
-                  getToolbarWidget(
-                    showFullKey,
-                    surahInfoModel,
-                    ayahKey,
-                    ayahNumber,
-                    context,
-                    surahNumber,
-                    translation,
-                    footNote,
-                    themeState,
-                  ),
-                if (!quranViewState.hideQuranAyah) const Gap(10),
-                if (!quranViewState.hideQuranAyah)
-                  quranAyahWidget(
-                    surahNumber,
-                    ayahNumber,
-                    quranViewState,
-                    themeState,
-                  ),
-                if (!showOnlyAyah && !quranViewState.hideTranslation)
-                  const Gap(5),
-                if (isSajdaAyah)
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.red),
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                    ),
-                    height: 35,
+          return VisibilityDetector(
+            key: Key(ayahKey),
+            onVisibilityChanged: (info) {
+              if (!context.mounted) {
+                return;
+              }
+              context.read<QuranHistoryCubit>().addHistory(ayahKey);
+              try {
+                SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+                  metaDataSurah[ayahKey.split(":").first],
+                );
 
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          height: 25,
-                          width: 25,
-                          image: const AssetImage("assets/img/sajadah.png"),
-                          color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? Colors.grey.shade900
-                                  : Colors.white,
-                          colorBlendMode: BlendMode.srcIn,
-                        ),
-                        const Gap(10),
-                        Text(
-                          l10n.sajdaAyah,
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        const Gap(8),
-                        const Text("-"),
-                        const Gap(8),
-                        Text(
-                          isSajdaRequired ? l10n.required : l10n.optional,
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                context.read<AyahByAyahInScrollInfoCubit>().setData(
+                  surahInfoModel: surahInfoModel,
+                  dropdownAyahKey: ayahKey,
+                );
+              } catch (e) {
+                log(e.toString());
+              }
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              key: key,
+              padding: const EdgeInsets.all(5),
+              margin:
+                  keepMargin
+                      ? const EdgeInsets.only(
+                        left: 5,
+                        top: 5,
+                        bottom: 5,
+                        right: 10,
+                      )
+                      : null,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(roundedRadius),
+                border: Border.all(color: themeState.primaryShade200),
+              ),
+              child: Column(
+                children: [
+                  if (!(showTopOptions == false) && !quranViewState.hideToolbar)
+                    getToolbarWidget(
+                      showFullKey,
+                      surahInfoModel,
+                      ayahKey,
+                      ayahNumber,
+                      context,
+                      surahNumber,
+                      translation,
+                      footNote,
+                      themeState,
                     ),
-                  ),
-                if (isSajdaAyah) const Gap(5),
-                if (!showOnlyAyah && !quranViewState.hideTranslation)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      l10n.translationTitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade500,
+                  if (!quranViewState.hideQuranAyah) const Gap(10),
+                  if (!quranViewState.hideQuranAyah)
+                    quranAyahWidget(
+                      surahNumber,
+                      ayahNumber,
+                      quranViewState,
+                      themeState,
+                    ),
+                  if (!showOnlyAyah && !quranViewState.hideTranslation)
+                    const Gap(5),
+                  if (isSajdaAyah)
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red),
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                      ),
+                      height: 35,
+
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            height: 25,
+                            width: 25,
+                            image: const AssetImage("assets/img/sajadah.png"),
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.grey.shade900
+                                    : Colors.white,
+                            colorBlendMode: BlendMode.srcIn,
+                          ),
+                          const Gap(10),
+                          Text(
+                            l10n.sajdaAyah,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          const Gap(8),
+                          const Text("-"),
+                          const Gap(8),
+                          Text(
+                            isSajdaRequired ? l10n.required : l10n.optional,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-
-                if (!showOnlyAyah && !quranViewState.hideTranslation)
-                  const Gap(5),
-                if (!showOnlyAyah && !quranViewState.hideTranslation)
-                  getTranslationWidget(context, translation, quranViewState),
-                if (footNote.keys.isNotEmpty &&
-                    !showOnlyAyah &&
-                    !quranViewState.hideFootnote)
-                  const Gap(8),
-                if (footNote.keys.isNotEmpty &&
-                    !showOnlyAyah &&
-                    !quranViewState.hideFootnote)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      l10n.footNoteTitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade500,
+                  if (isSajdaAyah) const Gap(5),
+                  if (!showOnlyAyah && !quranViewState.hideTranslation)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        l10n.translationTitle,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade500,
+                        ),
                       ),
                     ),
-                  ),
-                if (footNote.keys.isNotEmpty &&
-                    !showOnlyAyah &&
-                    !quranViewState.hideFootnote)
-                  const Gap(5),
 
-                if (footNote.keys.isNotEmpty &&
-                    !showOnlyAyah &&
-                    !quranViewState.hideFootnote)
-                  getFootNoteWidget(footNote, context, quranViewState),
-                if (supportsWordByWord &&
-                    !quranViewState.alwaysOpenWordByWord &&
-                    !quranViewState.hideWordByWord)
-                  getWordByWordExpandCloseWidget(context, ayahKey),
-                if (supportsWordByWord && !quranViewState.hideWordByWord)
-                  const Gap(5),
-                if (supportsWordByWord && !quranViewState.hideWordByWord)
-                  getWordByWordWidget(
-                    context,
-                    ayahKey,
-                    quranViewState,
-                    wordByWord,
-                    surahNumber,
-                    ayahNumber,
-                  ),
-              ],
+                  if (!showOnlyAyah && !quranViewState.hideTranslation)
+                    const Gap(5),
+                  if (!showOnlyAyah && !quranViewState.hideTranslation)
+                    getTranslationWidget(context, translation, quranViewState),
+                  if (footNote.keys.isNotEmpty &&
+                      !showOnlyAyah &&
+                      !quranViewState.hideFootnote)
+                    const Gap(8),
+                  if (footNote.keys.isNotEmpty &&
+                      !showOnlyAyah &&
+                      !quranViewState.hideFootnote)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        l10n.footNoteTitle,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade500,
+                        ),
+                      ),
+                    ),
+                  if (footNote.keys.isNotEmpty &&
+                      !showOnlyAyah &&
+                      !quranViewState.hideFootnote)
+                    const Gap(5),
+
+                  if (footNote.keys.isNotEmpty &&
+                      !showOnlyAyah &&
+                      !quranViewState.hideFootnote)
+                    getFootNoteWidget(footNote, context, quranViewState),
+                  if (supportsWordByWord &&
+                      !quranViewState.alwaysOpenWordByWord &&
+                      !quranViewState.hideWordByWord)
+                    getWordByWordExpandCloseWidget(context, ayahKey),
+                  if (supportsWordByWord && !quranViewState.hideWordByWord)
+                    const Gap(5),
+                  if (supportsWordByWord && !quranViewState.hideWordByWord)
+                    getWordByWordWidget(
+                      context,
+                      ayahKey,
+                      quranViewState,
+                      wordByWord,
+                      surahNumber,
+                      ayahNumber,
+                    ),
+                ],
+              ),
             ),
           );
         },

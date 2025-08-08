@@ -1015,4 +1015,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => '最初滚动到 ayah';
+
+  @override
+  String get tajweedGuide => '泰吉威德指南';
 }

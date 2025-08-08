@@ -2,6 +2,37 @@ import json
 import os
 
 translations = {
+    "tajweedGuide": {
+        "ar": "دليل التجويد",
+        "az": "Təcvid Bələdçisi",
+        "bn": "তাজবীদ গাইড",
+        "de": "Tajweed-Anleitung",
+        "es": "Guía de Tajweed",
+        "fa": "راهنمای تجوید",
+        "fr": "Guide du Tajweed",
+        "ha": "Jagoran Tajwidi",
+        "hi": "तजवीद गाइड",
+        "id": "Panduan Tajwid",
+        "it": "Guida al Tajweed",
+        "ja": "タジュウィードガイド",
+        "kk": "Тәжуид нұсқаулығы",
+        "ko": "타지위드 가이드",
+        "ku": "Rêberê Tecwîdê",
+        "ms": "Panduan Tajwid",
+        "pa": "ਤਜਵੀਦ ਗਾਈਡ",
+        "ps": "د تجوید لارښود",
+        "pt": "Guia de Tajweed",
+        "ru": "Руководство по таджвиду",
+        "so": "Hagaha Tajweedka",
+        "sw": "Mwongozo wa Tajweed",
+        "ta": "தஜ்வீத் வழிகாட்டி",
+        "tr": "Tecvid Rehberi",
+        "ug": "تەجۋىد قوللانمىسى",
+        "ur": "تجوید گائیڈ",
+        "vi": "Hướng dẫn Tajweed",
+        "yo": "Itọsọna Tajweed",
+        "zh": "泰吉威德指南"
+    },
     "initiallyScrollAyah": {
         "ar": "التمرير في البداية إلى الآية",
         "az": "Başlanğıcda ayəyə sürüşdürün",

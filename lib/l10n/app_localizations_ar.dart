@@ -1045,4 +1045,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'التمرير في البداية إلى الآية';
+
+  @override
+  String get tajweedGuide => 'دليل التجويد';
 }

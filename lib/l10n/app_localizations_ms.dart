@@ -1046,4 +1046,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Tatal pada mulanya ke ayah';
+
+  @override
+  String get tajweedGuide => 'Panduan Tajwid';
 }

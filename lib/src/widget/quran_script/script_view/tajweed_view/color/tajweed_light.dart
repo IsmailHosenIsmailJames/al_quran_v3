@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 // --- Color Constants Definition ---
 
@@ -26,27 +26,3 @@ const Color lightIqlab = Color(0xFF26bffd);
 const Color lightCustomAlefMaksora = Color(
   0xFF6a0dad,
 ); // Assigning a distinct purple
-
-// --- Maps for Rule Classes to Colors ---
-
-final Map<String, Color> lightThemeTajweedColors = {
-  "ham_wasl": lightHamWasl,
-  "custom-alef-maksora": lightCustomAlefMaksora, // Added
-  "madda_obligatory_monfasel": lightMaddaObligatoryMonfasel,
-  "madda_obligatory_mottasel": lightMaddaObligatoryMottasel,
-  "ikhafa_shafawi": lightIkhafaShafawi,
-  "idgham_mutaqaribayn": lightIdghamMutaqaribayn,
-  "ikhafa": lightIkhafa,
-  "slnt": lightSlnt,
-  "madda_normal": lightMaddaNormal,
-  "iqlab": lightIqlab,
-  "laam_shamsiyah": lightLaamShamsiyah,
-  "idgham_wo_ghunnah": lightIdghamWoGhunnah,
-  "idgham_ghunnah": lightIdghamGhunnah,
-  "madda_necessary": lightMaddaNecessary,
-  "qalaqah": lightQalaqah,
-  "idgham_mutajanisayn": lightIdghamMutajanisayn,
-  "madda_permissible": lightMaddaPermissible,
-  "ghunnah": lightGhunnah,
-  "idgham_shafawi": lightIdghamShafawi,
-};

@@ -1045,4 +1045,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'ابتدائی طور پر آیت پر سکرول کریں';
+
+  @override
+  String get tajweedGuide => 'تجوید گائیڈ';
 }

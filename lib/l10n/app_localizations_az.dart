@@ -1050,4 +1050,7 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Başlanğıcda ayəyə sürüşdürün';
+
+  @override
+  String get tajweedGuide => 'Təcvid Bələdçisi';
 }

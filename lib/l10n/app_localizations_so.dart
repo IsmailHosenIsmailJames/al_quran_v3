@@ -1050,4 +1050,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Marka hore u gudub aayadda';
+
+  @override
+  String get tajweedGuide => 'Hagaha Tajweedka';
 }
