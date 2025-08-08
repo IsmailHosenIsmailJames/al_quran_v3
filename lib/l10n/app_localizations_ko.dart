@@ -1032,4 +1032,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => '처음에 ayah로 스크롤';
+
+  @override
+  String get tajweedGuide => '타지위드 가이드';
 }

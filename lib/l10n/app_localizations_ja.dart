@@ -1032,4 +1032,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => '最初にアヤにスクロールします';
+
+  @override
+  String get tajweedGuide => 'タジュウィードガイド';
 }

@@ -1051,4 +1051,7 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Di destpêkê de biçin ayetê';
+
+  @override
+  String get tajweedGuide => 'Rêberê Tecwîdê';
 }

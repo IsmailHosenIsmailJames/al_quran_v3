@@ -1054,4 +1054,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Zuerst zu Ayah scrollen';
+
+  @override
+  String get tajweedGuide => 'Tajweed-Anleitung';
 }

@@ -2009,6 +2009,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Initially scroll to ayah'**
   String get initiallyScrollAyah;
+
+  /// No description provided for @tajweedGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Tajweed Guide'**
+  String get tajweedGuide;
 }
 
 class _AppLocalizationsDelegate

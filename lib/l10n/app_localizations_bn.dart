@@ -1048,4 +1048,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'প্রাথমিকভাবে আয়াতে স্ক্রোল করুন';
+
+  @override
+  String get tajweedGuide => 'তাজবীদ গাইড';
 }

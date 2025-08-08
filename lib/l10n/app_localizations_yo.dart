@@ -1045,4 +1045,7 @@ class AppLocalizationsYo extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Wiwọle Yara';
+
+  @override
+  String get tajweedGuide => 'Itọsọna Tajweed';
 }

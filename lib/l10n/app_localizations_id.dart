@@ -1045,4 +1045,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Awalnya gulir ke ayat';
+
+  @override
+  String get tajweedGuide => 'Panduan Tajwid';
 }
