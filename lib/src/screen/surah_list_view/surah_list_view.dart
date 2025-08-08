@@ -71,7 +71,7 @@ class _SurahListViewState extends State<SurahListView> {
                               children: [
                                 const Gap(10),
                                 const Icon(FluentIcons.history_24_regular),
-                                const Gap(10),
+                                const Gap(5),
                                 Text(
                                   "History",
                                   style:
@@ -86,6 +86,7 @@ class _SurahListViewState extends State<SurahListView> {
                               height: 40,
                               child: getHistoryWidget(history),
                             ),
+                            const Gap(10),
                           ],
                         );
                   },
@@ -94,6 +95,8 @@ class _SurahListViewState extends State<SurahListView> {
                 Row(
                   children: [
                     const Gap(10),
+                    const Icon(FluentIcons.flash_24_regular),
+                    const Gap(5),
                     Text(
                       l10n.quickAccess,
                       style: Theme.of(context).textTheme.titleMedium,
@@ -133,8 +136,15 @@ class _SurahListViewState extends State<SurahListView> {
                                   : null;
 
                           return Padding(
-                            padding: const EdgeInsets.only(right: 5.0),
+                            padding: const EdgeInsets.only(left: 10),
                             child: TextButton.icon(
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    context
+                                        .read<ThemeCubit>()
+                                        .state
+                                        .primaryShade100,
+                              ),
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -149,7 +159,6 @@ class _SurahListViewState extends State<SurahListView> {
                                   ),
                                 );
                               },
-                              icon: const Icon(FluentIcons.flash_24_regular),
                               label: Text(
                                 getSurahName(context, surahInfo.id) +
                                     (scrollTo != null
@@ -313,8 +322,11 @@ class _SurahListViewState extends State<SurahListView> {
       itemBuilder: (context, index) {
         HistoryElement historyModel = history.history.reversed.toList()[index];
         return Padding(
-          padding: const EdgeInsets.only(right: 5.0),
+          padding: const EdgeInsets.only(left: 10),
           child: TextButton.icon(
+            style: TextButton.styleFrom(
+              backgroundColor: context.read<ThemeCubit>().state.primaryShade100,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -331,7 +343,6 @@ class _SurahListViewState extends State<SurahListView> {
                 ),
               );
             },
-            icon: const Icon(FluentIcons.history_24_regular),
             label: Text(
               "${getSurahName(context, historyModel.surahNumber)} - ${localizedNumber(context, historyModel.ayahNumber)}",
             ),
