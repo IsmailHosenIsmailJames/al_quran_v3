@@ -1050,4 +1050,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Awali tembeza hadi kwenye ayah';
+
+  @override
+  String get tajweedGuide => 'Mwongozo wa Tajweed';
 }

@@ -1044,4 +1044,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'په پیل کې آیت ته سکرول کړئ';
+
+  @override
+  String get tajweedGuide => 'د تجوید لارښود';
 }

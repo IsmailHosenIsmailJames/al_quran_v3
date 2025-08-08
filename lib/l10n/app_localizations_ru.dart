@@ -1092,4 +1092,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Первоначально прокрутите до аята';
+
+  @override
+  String get tajweedGuide => 'Руководство по таджвиду';
 }

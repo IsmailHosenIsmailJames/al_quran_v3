@@ -1049,4 +1049,7 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Da farko gungura zuwa ayah';
+
+  @override
+  String get tajweedGuide => 'Jagoran Tajwidi';
 }

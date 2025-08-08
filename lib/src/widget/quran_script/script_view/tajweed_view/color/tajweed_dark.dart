@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 // Dark Theme Colors (Adjusted for contrast)
 const Color darkMaddaNecessary = Color(0xFFe65aa7);
@@ -22,25 +22,3 @@ const Color darkIqlab = Color(0xFF60d0ff);
 const Color darkCustomAlefMaksora = Color(
   0xFFb070f0,
 ); // Lighter purple for dark theme
-
-final Map<String, Color> darkThemeTajweedColors = {
-  "ham_wasl": darkHamWasl,
-  "custom-alef-maksora": darkCustomAlefMaksora, // Added
-  "madda_obligatory_monfasel": darkMaddaObligatoryMonfasel,
-  "madda_obligatory_mottasel": darkMaddaObligatoryMottasel,
-  "ikhafa_shafawi": darkIkhafaShafawi,
-  "idgham_mutaqaribayn": darkIdghamMutaqaribayn,
-  "ikhafa": darkIkhafa,
-  "slnt": darkSlnt,
-  "madda_normal": darkMaddaNormal,
-  "iqlab": darkIqlab,
-  "laam_shamsiyah": darkLaamShamsiyah,
-  "idgham_wo_ghunnah": darkIdghamWoGhunnah,
-  "idgham_ghunnah": darkIdghamGhunnah,
-  "madda_necessary": darkMaddaNecessary,
-  "qalaqah": darkQalaqah,
-  "idgham_mutajanisayn": darkIdghamMutajanisayn,
-  "madda_permissible": darkMaddaPermissible,
-  "ghunnah": darkGhunnah,
-  "idgham_shafawi": darkIdghamShafawi,
-};

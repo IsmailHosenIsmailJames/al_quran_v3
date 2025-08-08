@@ -1047,4 +1047,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Başlangıçta ayete gidin';
+
+  @override
+  String get tajweedGuide => 'Tecvid Rehberi';
 }
