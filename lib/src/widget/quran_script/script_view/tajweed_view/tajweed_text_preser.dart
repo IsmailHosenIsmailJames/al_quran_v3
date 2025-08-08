@@ -1,13 +1,11 @@
 import "dart:developer";
 
 import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_rules.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:html/parser.dart" show parseFragment;
 import "package:html/dom.dart" as dom;
-
-import "color/tajweed_dark.dart";
-import "color/tajweed_light.dart";
 
 TextSpan parseTajweedWord({
   required TextStyle baseStyle,
@@ -20,10 +18,46 @@ TextSpan parseTajweedWord({
 }) {
   List<TextSpan> spans = [];
   final brightness = Theme.of(context).brightness;
-  final currentThemeColors =
-      brightness == Brightness.light
-          ? lightThemeTajweedColors
-          : darkThemeTajweedColors;
+  final bool isLight = brightness == Brightness.light;
+
+  final Map<String, Color> currentThemeColors = {
+    GhunnahRule.key: isLight ? GhunnahRule.lightColor : GhunnahRule.darkColor,
+    IdghamShafawiRule.key:
+        isLight ? IdghamShafawiRule.lightColor : IdghamShafawiRule.darkColor,
+    IqlabRule.key: isLight ? IqlabRule.lightColor : IqlabRule.darkColor,
+    IkhafaShafawiRule.key:
+        isLight ? IkhafaShafawiRule.lightColor : IkhafaShafawiRule.darkColor,
+    QalqalahRule.key: isLight ? QalqalahRule.lightColor : QalqalahRule.darkColor,
+    IdghamGhunnahRule.key:
+        isLight ? IdghamGhunnahRule.lightColor : IdghamGhunnahRule.darkColor,
+    IdghamWoGhunnahRule.key:
+        isLight ? IdghamWoGhunnahRule.lightColor : IdghamWoGhunnahRule.darkColor,
+    IkhafaRule.key: isLight ? IkhafaRule.lightColor : IkhafaRule.darkColor,
+    MaddTabiiRule.key:
+        isLight ? MaddTabiiRule.lightColor : MaddTabiiRule.darkColor,
+    MaddLazimRule.key:
+        isLight ? MaddLazimRule.lightColor : MaddLazimRule.darkColor,
+    MaddLeenRule.key: isLight ? MaddLeenRule.lightColor : MaddLeenRule.darkColor,
+    MaddWajibMuttasilRule.key: isLight
+        ? MaddWajibMuttasilRule.lightColor
+        : MaddWajibMuttasilRule.darkColor,
+    MaddJaizMunfasilRule.key: isLight
+        ? MaddJaizMunfasilRule.lightColor
+        : MaddJaizMunfasilRule.darkColor,
+    HamWaslRule.key: isLight ? HamWaslRule.lightColor : HamWaslRule.darkColor,
+    LaamShamsiyahRule.key:
+        isLight ? LaamShamsiyahRule.lightColor : LaamShamsiyahRule.darkColor,
+    SlntRule.key: isLight ? SlntRule.lightColor : SlntRule.darkColor,
+    IdghamMutajanisaynRule.key: isLight
+        ? IdghamMutajanisaynRule.lightColor
+        : IdghamMutajanisaynRule.darkColor,
+    IdghamMutaqaribaynRule.key: isLight
+        ? IdghamMutaqaribaynRule.lightColor
+        : IdghamMutaqaribaynRule.darkColor,
+    CustomAlefMaksoraRule.key: isLight
+        ? CustomAlefMaksoraRule.lightColor
+        : CustomAlefMaksoraRule.darkColor,
+  };
 
   final defaultColor =
       baseStyle.color ??
@@ -38,22 +72,20 @@ TextSpan parseTajweedWord({
         TextSpan(
           text: node.text,
           style: processingStyle.copyWith(color: currentColor),
-
-          recognizer:
-              skipWordTap == true
-                  ? null
-                  : (TapGestureRecognizer()
-                    ..onTap = () {
-                      List<String> wordKeys = List.generate(
-                        words.length,
-                        (index) => "$surahNumber:$ayahNumber:${index + 1}",
-                      );
-                      showPopupWordFunction(
-                        context: context,
-                        wordKeys: wordKeys,
-                        initWordIndex: wordIndex,
-                      );
-                    }),
+          recognizer: skipWordTap == true
+              ? null
+              : (TapGestureRecognizer()
+                ..onTap = () {
+                  List<String> wordKeys = List.generate(
+                    words.length,
+                    (index) => "$surahNumber:$ayahNumber:${index + 1}",
+                  );
+                  showPopupWordFunction(
+                    context: context,
+                    wordKeys: wordKeys,
+                    initWordIndex: wordIndex,
+                  );
+                }),
         ),
       );
     } else if (node.nodeType == dom.Node.ELEMENT_NODE) {

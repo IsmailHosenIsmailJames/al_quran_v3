@@ -1046,4 +1046,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'در ابتدا به آیه بروید';
+
+  @override
+  String get tajweedGuide => 'راهنمای تجوید';
 }

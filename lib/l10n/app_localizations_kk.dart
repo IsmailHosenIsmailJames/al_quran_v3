@@ -1045,4 +1045,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Бастапқыда аятқа жылжыңыз';
+
+  @override
+  String get tajweedGuide => 'Тәжуид нұсқаулығы';
 }

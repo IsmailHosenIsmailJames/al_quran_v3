@@ -1060,4 +1060,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'ஆரம்பத்தில் ஆயாவுக்கு உருட்டவும்';
+
+  @override
+  String get tajweedGuide => 'தஜ்வீத் வழிகாட்டி';
 }

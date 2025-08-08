@@ -1048,4 +1048,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Ban đầu cuộn đến ayah';
+
+  @override
+  String get tajweedGuide => 'Hướng dẫn Tajweed';
 }

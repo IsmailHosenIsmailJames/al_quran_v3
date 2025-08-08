@@ -1054,4 +1054,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get initiallyScrollAyah => 'Desplazarse inicialmente a la aleya';
+
+  @override
+  String get tajweedGuide => 'Guía de Tajweed';
 }
