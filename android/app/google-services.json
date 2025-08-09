@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562324718404",
+    "project_id": "alquranwithaudio",
+    "storage_bucket": "alquranwithaudio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562324718404:android:edab7cc24328618369cd11",
+        "android_client_info": {
+          "package_name": "com.ismail_hosen_james.al_bayan_quran"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvNykaA8z6YaQ3wVS1kOLpnOMZI91d8vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
