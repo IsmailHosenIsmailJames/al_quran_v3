@@ -1,15 +1,15 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
-import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
-import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/model/audio_controller_ui.dart";
+import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
@@ -19,7 +19,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
-import "../../audio/cubit/player_state_cubit.dart";
+import "../../core/audio/cubit/player_state_cubit.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 

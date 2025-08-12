@@ -12,7 +12,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 
-import "../../functions/get_tafsir_from_db.dart";
+import "../../utils/get_tafsir_from_db.dart";
 
 class TafsirView extends StatefulWidget {
   final String ayahKey;

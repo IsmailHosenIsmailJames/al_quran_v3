@@ -1,7 +1,7 @@
 import "dart:math" as math;
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:vector_math/vector_math.dart" as vector;

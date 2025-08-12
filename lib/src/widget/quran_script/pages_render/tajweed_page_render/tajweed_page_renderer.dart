@@ -1,12 +1,12 @@
 import "dart:developer";
 
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";

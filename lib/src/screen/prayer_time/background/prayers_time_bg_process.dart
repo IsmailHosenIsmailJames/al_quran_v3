@@ -12,7 +12,7 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:workmanager/workmanager.dart";
 
-import "../../../notification/init_awesome_notification.dart";
+import "../../../core/notification/init_awesome_notification.dart";
 import "../models/prayer_model_of_day.dart";
 import "../models/prayer_types.dart";
 

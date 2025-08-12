@@ -1,11 +1,11 @@
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/player_position_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/functions/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
@@ -37,7 +37,7 @@ class NonTajweedScriptView extends StatelessWidget {
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.textStyle?.fontSize ?? 24,
       height: scriptInfo.textStyle?.height ?? 2,
-      fontFamily: isUthmani ? "me_quran_volt_newmet" : "AlQuranNeov5x1",
+      fontFamily: isUthmani ? "KFGQPC-Uthmanic-HAFS-Regular" : "AlQuranNeov5x1",
       letterSpacing: 0,
     );
     if (scriptInfo.wordIndex != null) {

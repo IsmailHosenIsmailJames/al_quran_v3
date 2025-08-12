@@ -103,9 +103,9 @@ flutter:
     #   fonts:
     #     - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
-    - family: me_quran_volt_newmet
+    - family: KFGQPC-Uthmanic-HAFS-Regular
       fonts:
-        - asset: assets/fonts/Quran/me_quran_volt_newmet.ttf
+        - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
 
     - family: NotoSans
       fonts:

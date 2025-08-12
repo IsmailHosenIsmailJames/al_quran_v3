@@ -1,5 +1,5 @@
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 

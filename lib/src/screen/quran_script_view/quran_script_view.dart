@@ -3,11 +3,11 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/functions/basic_functions.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
-import "package:al_quran_v3/src/functions/quran_ayahs_function/gen_ayahs_key.dart";
-import "package:al_quran_v3/src/functions/quran_ayahs_function/get_page_number.dart";
+import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/utils/basic_functions.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/get_page_number.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";

@@ -12,7 +12,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-import "../../functions/number_localization.dart";
+import "../../utils/number_localization.dart";
 import "../../theme/controller/theme_cubit.dart";
 
 class HizbListView extends StatelessWidget {

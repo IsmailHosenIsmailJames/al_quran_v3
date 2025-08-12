@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -8,8 +8,8 @@ import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "../../audio/player/audio_player_manager.dart";
-import "../../functions/basic_functions.dart";
+import "../../core/audio/player/audio_player_manager.dart";
+import "../../utils/basic_functions.dart";
 import "../../screen/audio/change_reciter/popup_change_reciter.dart";
 import "../../screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "../../theme/values/values.dart";

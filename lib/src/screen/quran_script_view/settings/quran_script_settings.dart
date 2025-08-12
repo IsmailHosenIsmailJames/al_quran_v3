@@ -1,10 +1,10 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";

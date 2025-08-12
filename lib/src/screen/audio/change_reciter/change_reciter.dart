@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/audio/resources/recitations.dart";
-import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/core/audio/resources/recitations.dart";
+import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";

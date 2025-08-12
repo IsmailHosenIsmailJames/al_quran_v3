@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/functions/basic_functions.dart";
+import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 
 int? getPageNumber(String ayahKey) {

@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive/hive.dart";
 
