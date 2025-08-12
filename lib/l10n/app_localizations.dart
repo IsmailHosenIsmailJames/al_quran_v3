@@ -2015,6 +2015,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tajweed Guide'**
   String get tajweedGuide;
+
+  /// No description provided for @configuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration'**
+  String get configuration;
+
+  /// No description provided for @restoreFromBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore From Backup'**
+  String get restoreFromBackup;
 }
 
 class _AppLocalizationsDelegate

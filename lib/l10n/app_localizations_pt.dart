@@ -1058,4 +1058,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Guia de Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

@@ -1053,4 +1053,10 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Təcvid Bələdçisi';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

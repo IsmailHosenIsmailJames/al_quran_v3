@@ -94,21 +94,29 @@ class _AppSetupPageState extends State<AppSetupPage> {
   void changeTranslationLanguage(String value) {
     translationLanguageCode = value;
     context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
-    selectableTranslationBook =
-        translationResources[codeToLanguageMap[translationLanguageCode]]
-            ?.map((e) => TranslationBookModel.fromMap(e))
-            .toList() ??
-        [];
+    setState(() {});
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      selectableTranslationBook =
+          translationResources[codeToLanguageMap[translationLanguageCode]]
+              ?.map((e) => TranslationBookModel.fromMap(e))
+              .toList() ??
+          [];
+    });
+
+    log(selectableTranslationBook.toString(), name: "Sleeted Book :");
   }
 
   void changeTafsirLanguage(String value) {
     tafsirLanguageCode = value;
     context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
-    selectableTafsirBook =
-        tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
-            ?.map((e) => TafsirBookModel.fromMap(e))
-            .toList() ??
-        [];
+    setState(() {});
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      selectableTafsirBook =
+          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
+              ?.map((e) => TafsirBookModel.fromMap(e))
+              .toList() ??
+          [];
+    });
   }
 
   late ThemeState themeState = context.read<ThemeCubit>().state;
@@ -449,18 +457,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
             ),
           ),
           Align(
-            alignment: Alignment.topRight,
+            alignment: Alignment.topLeft,
             child: SafeArea(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Gap(10),
+                  SizedBox(
+                    height: 40,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: TextButton.icon(
                           style: IconButton.styleFrom(
                             backgroundColor: themeState.primaryShade100,
                             foregroundColor: themeState.primary,
@@ -468,13 +477,26 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           onPressed: () {
                             // TODO: async configuration data from cloud
                           },
-                          icon: const Icon(Icons.cloud_download_rounded),
+                          icon: const Icon(Icons.cloud_sync),
+                          label: Text(appLocalizations.restoreFromBackup),
                         ),
-                        themeIconButton(context),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  const Gap(10),
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: themeIconButton(context),
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
+                ],
               ),
             ),
           ),

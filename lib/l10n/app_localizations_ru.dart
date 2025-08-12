@@ -1095,4 +1095,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Руководство по таджвиду';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

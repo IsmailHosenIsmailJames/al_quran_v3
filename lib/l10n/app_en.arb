@@ -560,5 +560,7 @@
   "scrollWithRecitation":"Scroll with Recitation",
   "quickAccess":"Quick Access",
   "initiallyScrollAyah":"Initially scroll to ayah",
-  "tajweedGuide": "Tajweed Guide"
+  "tajweedGuide": "Tajweed Guide",
+  "configuration" : "Configuration",
+  "restoreFromBackup": "Restore From Backup"
 }

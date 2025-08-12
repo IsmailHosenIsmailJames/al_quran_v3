@@ -1057,4 +1057,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Guía de Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

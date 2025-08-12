@@ -1018,4 +1018,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tajweedGuide => '泰吉威德指南';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

@@ -1053,4 +1053,10 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Mwongozo wa Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

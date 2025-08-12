@@ -1048,4 +1048,10 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Тәжуид нұсқаулығы';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

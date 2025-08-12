@@ -1054,4 +1054,10 @@ class AppLocalizationsKu extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Rêberê Tecwîdê';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

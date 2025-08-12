@@ -1048,4 +1048,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Panduan Tajwid';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }
