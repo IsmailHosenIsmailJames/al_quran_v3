@@ -12,7 +12,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
         QuranViewState(
           ayahKey: Hive.box(
             "user",
-          ).get("preview_quran_script_ayah", defaultValue: "2:2"),
+          ).get("preview_quran_script_ayah", defaultValue: "1:1"),
           fontSize: Hive.box(
             "user",
           ).get("preview_quran_script_font_size", defaultValue: 24.0),

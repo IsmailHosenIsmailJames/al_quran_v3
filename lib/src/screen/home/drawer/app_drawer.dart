@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";

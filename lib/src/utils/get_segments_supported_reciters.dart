@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/audio/resources/recitations.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/core/audio/resources/recitations.dart";
 
 List<ReciterInfoModel> getSegmentsSupportedReciters() {
   List<ReciterInfoModel> recitations =

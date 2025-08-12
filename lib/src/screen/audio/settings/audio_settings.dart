@@ -1,7 +1,7 @@
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -150,7 +150,10 @@ class _AudioSettingsState extends State<AudioSettings> {
 }
 
 Future<Map<String, List<Map<String, dynamic>>>>
-getCategorizedCacheFilesWithSize(BuildContext context, AppLocalizations l10n) async {
+getCategorizedCacheFilesWithSize(
+  BuildContext context,
+  AppLocalizations l10n,
+) async {
   Map<String, List<Map<String, dynamic>>> categorizedFiles = {};
   final cacheDir = Directory(
     join((await getTemporaryDirectory()).path, "just_audio_cache", "remote"),

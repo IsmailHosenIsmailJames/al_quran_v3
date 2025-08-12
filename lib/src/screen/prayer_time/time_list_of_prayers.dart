@@ -1,9 +1,9 @@
 import "dart:async";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/functions/format_time_of_day.dart";
-import "package:al_quran_v3/src/functions/localizedPrayerName.dart";
-import "package:al_quran_v3/src/functions/number_localization.dart";
+import "package:al_quran_v3/src/utils/format_time_of_day.dart";
+import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";

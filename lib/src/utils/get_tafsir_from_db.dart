@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 
 Future<String?> getTafsirFromDb(
   String ayahKey, {

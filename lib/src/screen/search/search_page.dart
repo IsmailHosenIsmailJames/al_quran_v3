@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/functions/quran_resources/quran_tafsir_function.dart";
-import "package:al_quran_v3/src/functions/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";

@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/audio/model/audio_controller_ui.dart";
+import "package:al_quran_v3/src/core/audio/model/audio_controller_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class AudioUiCubit extends Cubit<AudioControllerUiState> {

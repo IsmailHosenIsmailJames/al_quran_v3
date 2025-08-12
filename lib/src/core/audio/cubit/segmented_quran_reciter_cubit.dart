@@ -1,6 +1,6 @@
-import "package:al_quran_v3/src/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/functions/get_segments_supported_reciters.dart";
-import "package:al_quran_v3/src/functions/quran_resources/segmented_resources_manager.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/utils/get_segments_supported_reciters.dart";
+import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
