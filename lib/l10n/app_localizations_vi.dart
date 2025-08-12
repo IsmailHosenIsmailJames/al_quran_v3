@@ -1051,4 +1051,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Hướng dẫn Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

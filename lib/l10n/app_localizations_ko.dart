@@ -1035,4 +1035,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get tajweedGuide => '타지위드 가이드';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

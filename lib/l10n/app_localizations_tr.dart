@@ -1050,4 +1050,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Tecvid Rehberi';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

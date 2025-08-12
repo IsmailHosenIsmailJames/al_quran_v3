@@ -1052,4 +1052,10 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Jagoran Tajwidi';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

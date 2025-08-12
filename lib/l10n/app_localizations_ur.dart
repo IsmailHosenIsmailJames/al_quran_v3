@@ -1048,4 +1048,10 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'تجوید گائیڈ';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

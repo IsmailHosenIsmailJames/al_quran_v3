@@ -1047,4 +1047,10 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'د تجوید لارښود';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

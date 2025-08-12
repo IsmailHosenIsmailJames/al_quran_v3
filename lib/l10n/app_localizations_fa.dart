@@ -1049,4 +1049,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'راهنمای تجوید';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

@@ -1062,4 +1062,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Guide du Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

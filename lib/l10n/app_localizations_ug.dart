@@ -1052,4 +1052,10 @@ class AppLocalizationsUg extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'تەجۋىد قوللانمىسى';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

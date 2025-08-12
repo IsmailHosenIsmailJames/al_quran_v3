@@ -1035,4 +1035,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'タジュウィードガイド';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

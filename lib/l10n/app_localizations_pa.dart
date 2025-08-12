@@ -1048,4 +1048,10 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'ਤਜਵੀਦ ਗਾਈਡ';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

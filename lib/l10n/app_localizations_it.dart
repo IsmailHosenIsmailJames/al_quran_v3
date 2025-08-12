@@ -1059,4 +1059,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Guida al Tajweed';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

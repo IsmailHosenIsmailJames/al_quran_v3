@@ -1063,4 +1063,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'தஜ்வீத் வழிகாட்டி';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

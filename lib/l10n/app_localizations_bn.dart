@@ -1051,4 +1051,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'তাজবীদ গাইড';
+
+  @override
+  String get configuration => 'Configuration';
+
+  @override
+  String get restoreFromBackup => 'Restore From Backup';
 }

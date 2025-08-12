@@ -1,1 +1,146 @@
-{}
+{
+  "ar": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "az": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "bn": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "de": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "es": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "fa": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "fr": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ha": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "hi": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "id": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "it": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ja": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "kk": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ko": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ku": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ms": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "pa": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ps": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "pt": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ru": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "so": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "sw": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ta": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "tr": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ug": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "ur": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "vi": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "yo": [
+    "configuration",
+    "restoreFromBackup"
+  ],
+
+  "zh": [
+    "configuration",
+    "restoreFromBackup"
+  ]
+}
