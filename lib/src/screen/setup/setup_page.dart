@@ -3,6 +3,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/screen/auth/login_screen.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
@@ -475,7 +476,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             foregroundColor: themeState.primary,
                           ),
                           onPressed: () {
-                            // TODO: async configuration data from cloud
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
                           },
                           icon: const Icon(Icons.cloud_sync),
                           label: Text(appLocalizations.restoreFromBackup),
