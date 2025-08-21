@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
+import "package:google_sign_in/google_sign_in.dart";
 
 import "../../utils/email_validity_checker.dart";
 
@@ -36,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _isSigningIn = true;
     });
 
-    final UserCredential? userCredential = await _authService.signInWithGoogle();
+    final UserCredential? userCredential =
+        await _authService.signInWithGoogle();
 
     if (mounted) {
       setState(() {
@@ -46,13 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
       if (userCredential != null) {
         // Navigate to home screen or show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Signed in as ${userCredential.user?.displayName}")),
+          SnackBar(
+            content: Text("Signed in as ${userCredential.user?.displayName}"),
+          ),
         );
       } else {
         // Show error message
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Google Sign-In failed.")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Google Sign-In failed.")));
       }
     }
   }
@@ -165,9 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const Gap(20),
-                  _isSigningIn
-                      ? const Center(child: CircularProgressIndicator())
-                      : OutlinedButton.icon(
+                  if (GoogleSignIn.instance.supportsAuthenticate())
+                    _isSigningIn
+                        ? const Center(child: CircularProgressIndicator())
+                        : OutlinedButton.icon(
                           onPressed: _signInWithGoogle,
                           icon: SvgPicture.asset(
                             "assets/img/gmail.svg",
@@ -218,4 +223,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

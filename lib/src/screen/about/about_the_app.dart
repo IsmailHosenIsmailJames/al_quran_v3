@@ -1,5 +1,4 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -75,7 +74,8 @@ class AboutAppPage extends StatelessWidget {
             const Gap(30),
             Card(
               elevation: 0,
-              color: Colors.red.withValues(alpha: 0.05), // Adjusted opacity
+              color: Colors.red.withValues(alpha: 0.05),
+              // Adjusted opacity
               margin: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -95,7 +95,8 @@ class AboutAppPage extends StatelessWidget {
             const Gap(10),
             Card(
               elevation: 0,
-              color: themeState.primaryShade100, // Adjusted opacity
+              color: themeState.primaryShade100,
+              // Adjusted opacity
               margin: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -196,11 +197,7 @@ class AboutAppPage extends StatelessWidget {
               runSpacing: 8.0,
               children: List.generate(
                 usedAppLanguageMap.length,
-                (index) => Chip(
-                  label: Text(
-                    AppLanguage.fromMap(usedAppLanguageMap[index]).native,
-                  ),
-                ),
+                (index) => Chip(label: Text(usedAppLanguageMap[index].native)),
               ),
             ),
             const Gap(30),
@@ -341,12 +338,12 @@ class FeatureTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
         contentPadding: const EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ), // Slightly more rounded
-        tileColor: Theme.of(context).colorScheme.secondaryContainer.withValues(
-          alpha: 0.3,
-        ), // Using theme color
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        // Slightly more rounded
+        tileColor: Theme.of(
+          context,
+        ).colorScheme.secondaryContainer.withValues(alpha: 0.3),
+        // Using theme color
         leading: Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,
@@ -379,12 +376,12 @@ class PlatformTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
         contentPadding: const EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ), // Slightly more rounded
-        tileColor: Theme.of(context).colorScheme.secondaryContainer.withValues(
-          alpha: 0.3,
-        ), // Using theme color
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        // Slightly more rounded
+        tileColor: Theme.of(
+          context,
+        ).colorScheme.secondaryContainer.withValues(alpha: 0.3),
+        // Using theme color
         leading: alterNative ?? Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,

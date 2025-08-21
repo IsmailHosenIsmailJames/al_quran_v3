@@ -3,7 +3,6 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/screen/auth/login_screen.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
@@ -56,10 +55,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   late AppLocalizations appLocalizations;
 
-  void changeAppLanguage(String languageCode) {
-    appLanguage = languageCode;
+  void changeAppLanguage(MyAppLocalization localeInfo) {
+    appLanguage = localeInfo.locale.languageCode;
     String? languageName = codeToLanguageMap[appLanguage];
-    context.read<LanguageCubit>().changeLanguage(languageCode);
+    context.read<LanguageCubit>().changeLanguage(localeInfo);
 
     if (translationResources.keys.contains(languageName)) {
       translationLanguageCode = appLanguage;
@@ -125,9 +124,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   @override
   void initState() {
     if (!kIsWeb) {
-      changeAppLanguage(
-        context.read<LanguageCubit>().state.locale.languageCode,
-      );
+      changeAppLanguage(context.read<LanguageCubit>().state);
     }
     QuranTranslationFunction.init();
     super.initState();
@@ -199,7 +196,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: InputDecoration(
                             hintText: appLocalizations.selectAppLanguage,
                           ),
-                          value: appLanguage,
+                          initialValue: appLanguage,
                           validator: (value) {
                             if (value == null) {
                               return appLocalizations.pleaseSelectOne;
@@ -212,7 +209,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           isExpanded: true,
                           items: getAppLanguageDropdown(),
                           onChanged: (value) {
-                            changeAppLanguage(value.toString());
+                            changeAppLanguage(
+                              usedAppLanguageMap.firstOrNullWhere(
+                                    (element) =>
+                                        element.locale.languageCode == value,
+                                  ) ??
+                                  usedAppLanguageMap.first,
+                            );
                             setState(() {});
                           },
                         ),
@@ -241,7 +244,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ),
                         const Gap(5),
                         DropdownButtonFormField(
-                          value: translationLanguageCode,
+                          initialValue: translationLanguageCode,
                           items: getQuranTranslationLanguageDropDownList(),
                           decoration: InputDecoration(
                             hintText:
@@ -300,7 +303,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 hintText:
                                     appLocalizations.selectTranslationBook,
                               ),
-                              value: resourcesProcessState.translationBookModel,
+                              initialValue:
+                                  resourcesProcessState.translationBookModel,
                               validator: (value) {
                                 if (value == null) {
                                   return "Please select one";
@@ -350,7 +354,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           decoration: InputDecoration(
                             hintText: appLocalizations.selectTafsirLanguage,
                           ),
-                          value: tafsirLanguageCode,
+                          initialValue: tafsirLanguageCode,
                           validator: (value) {
                             if (value == null) {
                               return appLocalizations.pleaseSelectOne;
@@ -402,7 +406,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 hintText: appLocalizations.selectTafsirBook,
                               ),
                               isExpanded: true,
-                              value: processState.tafsirBookModel,
+                              initialValue: processState.tafsirBookModel,
                               validator: (value) {
                                 if (value == null) {
                                   return "Please select one";
@@ -458,38 +462,38 @@ class _AppSetupPageState extends State<AppSetupPage> {
             ),
           ),
           Align(
-            alignment: Alignment.topLeft,
+            alignment: Alignment.topRight,
             child: SafeArea(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Gap(10),
-                  SizedBox(
-                    height: 40,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                        child: TextButton.icon(
-                          style: IconButton.styleFrom(
-                            backgroundColor: themeState.primaryShade100,
-                            foregroundColor: themeState.primary,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.cloud_sync),
-                          label: Text(appLocalizations.restoreFromBackup),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Gap(10),
+                  // SizedBox(
+                  //   height: 40,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(100),
+                  //     child: BackdropFilter(
+                  //       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  //       child: TextButton.icon(
+                  //         style: IconButton.styleFrom(
+                  //           backgroundColor: themeState.primaryShade100,
+                  //           foregroundColor: themeState.primary,
+                  //         ),
+                  //         onPressed: () {
+                  //           Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //               builder: (context) => const LoginScreen(),
+                  //             ),
+                  //           );
+                  //         },
+                  //         icon: const Icon(Icons.cloud_sync),
+                  //         label: Text(appLocalizations.restoreFromBackup),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const Gap(10),
                   SizedBox(
                     width: 40,
                     height: 40,
@@ -736,12 +740,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
   List<DropdownMenuItem<String>> getAppLanguageDropdown() {
     return usedAppLanguageMap.map((e) {
       return DropdownMenuItem(
-        value: e["Code"],
+        value: e.locale.languageCode,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              if (appLanguage == e["Code"])
+              if (appLanguage == e.locale.languageCode)
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Icon(
@@ -750,8 +754,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     color: themeState.primary,
                   ),
                 ),
-              Text("${e["Native"] ?? ""} (${e["English"] ?? ""})"),
-              ...getSupportInfoForLanguageWidget(key: e["English"] ?? ""),
+              Text("${e.english} (${e.native})"),
+              ...getSupportInfoForLanguageWidget(key: e.english),
             ],
           ),
         ),

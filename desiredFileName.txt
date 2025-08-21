@@ -1,146 +1,169 @@
 {
   "ar": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "az": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "bn": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "de": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "es": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "fa": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "fr": [
     "configuration",
-    "restoreFromBackup"
-  ],
-
-  "ha": [
-    "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "hi": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "id": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "it": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ja": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "kk": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ko": [
     "configuration",
-    "restoreFromBackup"
-  ],
-
-  "ku": [
-    "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ms": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "pa": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ps": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "pt": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ru": [
     "configuration",
-    "restoreFromBackup"
-  ],
-
-  "so": [
-    "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "sw": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ta": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "tr": [
     "configuration",
-    "restoreFromBackup"
-  ],
-
-  "ug": [
-    "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "ur": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "vi": [
     "configuration",
-    "restoreFromBackup"
-  ],
-
-  "yo": [
-    "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ],
 
   "zh": [
     "configuration",
-    "restoreFromBackup"
+    "restoreFromBackup",
+    "history",
+    "search"
   ]
 }

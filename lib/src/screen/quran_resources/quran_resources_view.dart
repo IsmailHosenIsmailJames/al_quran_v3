@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/quran_resources/tafsir_resources_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/translation_resources_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/word_by_word_resources_view.dart";
@@ -34,9 +35,9 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
-
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Quran Resources")),
+      appBar: AppBar(title: Text(appLocalizations.quranResources)),
       body: Column(
         children: [
           Padding(
