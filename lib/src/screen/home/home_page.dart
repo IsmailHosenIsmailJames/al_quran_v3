@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
+import "package:al_quran_v3/src/screen/search/search_page.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     double width = MediaQuery.of(context).size.width;
+    ThemeState themeState = context.watch<ThemeCubit>().state;
     bool isFloatingNav = width > 600;
     return Scaffold(
       drawer: const AppDrawer(),
@@ -43,19 +45,32 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text(l10n.alQuran),
                 centerTitle: true,
-                // TODO : Develop Search Functionality. Due for later
-                // actions: [
-                //   IconButton(
-                //     onPressed: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(builder: (context) => const SearchPage()),
-                //       );
-                //     },
-                //     icon: const Icon(FluentIcons.search_28_filled),
-                //   ),
-                //   const Gap(5),
-                // ],
+
+                actions: [
+                  // TODO : Develop Search Functionality. Due for later
+                  IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: themeState.primaryShade100,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(FluentIcons.search_28_filled),
+                  ),
+                  IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: themeState.primaryShade100,
+                    ),
+                    onPressed: () {},
+                    icon: const Icon(FluentIcons.person_12_filled),
+                  ),
+                  const Gap(5),
+                ],
               ),
       body: Stack(
         children: [

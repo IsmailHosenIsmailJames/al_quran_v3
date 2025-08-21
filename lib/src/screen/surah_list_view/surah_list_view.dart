@@ -73,7 +73,7 @@ class _SurahListViewState extends State<SurahListView> {
                                 const Icon(FluentIcons.history_24_regular),
                                 const Gap(5),
                                 Text(
-                                  "History",
+                                  l10n.history,
                                   style:
                                       Theme.of(context).textTheme.titleMedium,
                                 ),

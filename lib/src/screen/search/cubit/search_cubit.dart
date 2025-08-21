@@ -3,7 +3,6 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/screen/search/cubit/search_state.dart";
-import "package:al_quran_v3/src/screen/search/functions/search_function.dart";
 import "package:al_quran_v3/src/screen/search/models/search_catagory.dart";
 import "package:al_quran_v3/src/screen/search/models/search_options.dart";
 import "package:al_quran_v3/src/screen/search/models/search_result_model.dart";
@@ -98,11 +97,6 @@ class SearchCubit extends Cubit<SearchState> {
     required String searchQuery,
     required QuranScriptType scriptType,
   }) async {
-    return await SearchFunction.search(
-      searchQuery: searchQuery,
-      searchField: state.searchFields,
-      searchCatagory: state.searchCatagory,
-      quranScriptType: scriptType,
-    );
+    return [];
   }
 }

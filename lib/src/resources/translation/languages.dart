@@ -1,32 +1,200 @@
-List<Map<String, String>> usedAppLanguageMap = [
-  {"English": "Arabic", "Native": "العربية", "Code": "ar"},
-  {"English": "Urdu", "Native": "اُردُو", "Code": "ur"},
-  {"English": "Bengali", "Native": "বাংলা", "Code": "bn"},
-  {"English": "Indonesian", "Native": "Bahasa Indonesia", "Code": "id"},
-  {"English": "Turkish", "Native": "Türkçe", "Code": "tr"},
-  {"English": "Persian", "Native": "فارسی", "Code": "fa"},
-  {"English": "Punjabi", "Native": "ਪੰਜਾਬੀ", "Code": "pa"},
-  {"English": "Pashto", "Native": "پښتو", "Code": "ps"},
-  {"English": "Hausa", "Native": "Hausa", "Code": "ha"},
-  {"English": "Malay", "Native": "Bahasa Melayu", "Code": "ms"},
-  {"English": "French", "Native": "Français", "Code": "fr"},
-  {"English": "Yoruba", "Native": "Yorùbá", "Code": "yo"},
-  {"English": "Kurdish", "Native": "Kurdî", "Code": "ku"},
-  {"English": "Somali", "Native": "Soomaali", "Code": "so"},
-  {"English": "Russian", "Native": "Русский", "Code": "ru"},
-  {"English": "Swahili", "Native": "Kiswahili", "Code": "sw"},
-  {"English": "Azerbaijani", "Native": "Azərbaycanca", "Code": "az"},
-  {"English": "Uyghur", "Native": "ئۇيغۇرچە", "Code": "ug"},
-  {"English": "Kazakh", "Native": "Қазақ тілі", "Code": "kk"},
-  {"English": "English", "Native": "English", "Code": "en"},
-  {"English": "Hindi", "Native": "हिन्दी", "Code": "hi"},
-  {"English": "Spanish", "Native": "Español", "Code": "es"},
-  {"English": "Portuguese", "Native": "Português", "Code": "pt"},
-  {"English": "Chinese", "Native": "中文", "Code": "zh"},
-  {"English": "Japanese", "Native": "日本語", "Code": "ja"},
-  {"English": "German", "Native": "Deutsch", "Code": "de"},
-  {"English": "Korean", "Native": "한국어", "Code": "ko"},
-  {"English": "Vietnamese", "Native": "Tiếng Việt", "Code": "vi"},
-  {"English": "Tamil", "Native": "தமிழ்", "Code": "ta"},
-  {"English": "Italian", "Native": "Italiano", "Code": "it"},
+import "dart:ui";
+
+List<MyAppLocalization> usedAppLanguageMap = [
+  MyAppLocalization(
+    english: "English",
+    native: "English",
+    locale: const Locale("en", "US"),
+  ),
+
+  MyAppLocalization(
+    english: "Arabic",
+    native: "العربية",
+    locale: const Locale("ar"),
+  ),
+
+  MyAppLocalization(
+    english: "Urdu",
+    native: "اُردُو",
+    locale: const Locale("ur", "PK"),
+  ),
+
+  MyAppLocalization(
+    english: "Bengali",
+    native: "বাংলা",
+    locale: const Locale("bn", "BD"),
+  ),
+
+  MyAppLocalization(
+    english: "Indonesian",
+    native: "Bahasa Indonesia",
+    locale: const Locale("id"),
+  ),
+
+  MyAppLocalization(
+    english: "Turkish",
+    native: "Türkçe",
+    locale: const Locale("tr"),
+  ),
+
+  MyAppLocalization(
+    english: "Persian",
+    native: "فارسی",
+    locale: const Locale("fa", "IR"),
+  ),
+
+  MyAppLocalization(
+    english: "Punjabi",
+    native: "ਪੰਜਾਬੀ",
+    locale: const Locale("pa", "IN"),
+  ),
+
+  MyAppLocalization(
+    english: "Pashto",
+    native: "پښتو",
+    locale: const Locale("ps", "AF"),
+  ),
+
+  MyAppLocalization(
+    english: "Malay",
+    native: "Bahasa Melayu",
+    locale: const Locale("ms", "MY"),
+  ),
+
+  MyAppLocalization(
+    english: "French",
+    native: "Français",
+    locale: const Locale("fr", "FR"),
+  ),
+
+  MyAppLocalization(
+    english: "Russian",
+    native: "Русский",
+    locale: const Locale("ru", "RU"),
+  ),
+
+  MyAppLocalization(
+    english: "Swahili",
+    native: "Kiswahili",
+    locale: const Locale("sw", "KE"),
+  ),
+
+  MyAppLocalization(
+    english: "Azerbaijani",
+    native: "Azərbaycanca",
+    locale: const Locale("az", "AZ"),
+  ),
+
+  MyAppLocalization(
+    english: "Kazakh",
+    native: "Қазақ тілі",
+    locale: const Locale("kk", "KZ"),
+  ),
+
+  MyAppLocalization(
+    english: "Hindi",
+    native: "हिन्दी",
+    locale: const Locale("hi", "IN"),
+  ),
+
+  MyAppLocalization(
+    english: "Spanish",
+    native: "Español",
+    locale: const Locale("es", "ES"),
+  ),
+
+  MyAppLocalization(
+    english: "Portuguese",
+    native: "Português",
+    locale: const Locale("pt", "PT"),
+  ),
+
+  MyAppLocalization(
+    english: "Chinese",
+    native: "中文",
+    locale: const Locale("zh", "CN"),
+  ),
+
+  MyAppLocalization(
+    english: "Japanese",
+    native: "日本語",
+    locale: const Locale("ja"),
+  ),
+
+  MyAppLocalization(
+    english: "German",
+    native: "Deutsch",
+    locale: const Locale("de"),
+  ),
+
+  MyAppLocalization(
+    english: "Korean",
+    native: "한국어",
+    locale: const Locale("ko"),
+  ),
+
+  MyAppLocalization(
+    english: "Vietnamese",
+    native: "Tiếng Việt",
+    locale: const Locale("vi", "VN"),
+  ),
+
+  MyAppLocalization(
+    english: "Tamil",
+    native: "தமிழ்",
+    locale: const Locale("ta", "IN"),
+  ),
+
+  MyAppLocalization(
+    english: "Italian",
+    native: "Italiano",
+    locale: const Locale("it"),
+  ),
 ];
+
+class MyAppLocalization {
+  String english;
+  String native;
+  Locale locale;
+
+  MyAppLocalization({
+    required this.english,
+    required this.native,
+    required this.locale,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "english": english,
+      "native": native,
+      "locale": {
+        "languageCode": locale.languageCode,
+        "countryCode": locale.countryCode,
+      },
+    };
+  }
+
+  factory MyAppLocalization.fromJson(Map<String, dynamic> json) {
+    return MyAppLocalization(
+      english: json["english"] as String,
+      native: json["native"] as String,
+      locale: Locale(
+        json["locale"]["languageCode"] as String,
+        json["locale"]["countryCode"] as String?,
+      ),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is MyAppLocalization &&
+        other.english == english &&
+        other.native == native &&
+        other.locale == locale;
+  }
+
+  @override
+  int get hashCode => english.hashCode ^ native.hashCode ^ locale.hashCode;
+}

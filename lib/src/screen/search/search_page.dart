@@ -1,3 +1,4 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
@@ -18,9 +19,7 @@ import "../../theme/controller/theme_state.dart";
 import "cubit/search_cubit.dart";
 
 class SearchPage extends StatefulWidget {
-  final bool popup;
-
-  const SearchPage({super.key, this.popup = false});
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -32,21 +31,10 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
+
     return Scaffold(
-      appBar:
-          widget.popup
-              ? null
-              : AppBar(
-                title: const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(FluentIcons.search_24_filled, size: 30),
-                    Gap(15),
-                    Text("Quran Search"),
-                  ],
-                ),
-              ),
+      appBar: AppBar(title: Text(appLocalizations.search)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -54,18 +42,6 @@ class _SearchPageState extends State<SearchPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (widget.popup)
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Quran Search",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            if (widget.popup) const Gap(20),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
               decoration: BoxDecoration(
@@ -75,9 +51,15 @@ class _SearchPageState extends State<SearchPage> {
               ),
 
               child: TextFormField(
+                controller: textEditingController,
+
                 decoration: const InputDecoration(
                   hintText: "Search",
                   prefixIcon: Icon(FluentIcons.search_24_filled),
+                  prefixIconConstraints: BoxConstraints(
+                    minWidth: 0,
+                    minHeight: 0,
+                  ),
                   border: InputBorder.none,
                 ),
               ),
@@ -194,6 +176,10 @@ class _SearchPageState extends State<SearchPage> {
 
               child: ElevatedButton.icon(
                 onPressed: () {
+                  if (textEditingController.text.isEmpty) {
+                    return;
+                  }
+
                   dynamic searchRes = context.read<SearchCubit>().search(
                     searchQuery: textEditingController.text.trim(),
                     scriptType:

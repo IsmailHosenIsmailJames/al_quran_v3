@@ -92,7 +92,7 @@ flutter:
     - assets/adhan/
 
   fonts:
-    - family: QPC_Hafs 
+    - family: QPC_Hafs
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
 
@@ -100,9 +100,9 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/AlQuranNeov5x1.ttf
 
-    # - family: IndopakNastaleeq
-    #   fonts:
-    #     - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+    - family: IndopakNastaleeq
+      fonts:
+        - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
     - family: KFGQPC-Uthmanic-HAFS-Regular
       fonts:
@@ -111,7 +111,7 @@ flutter:
     - family: NotoSans
       fonts:
         - asset: assets/fonts/App/NotoSans-Bold.ttf
-          weight: 700 
+          weight: 700
         - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
           weight: 200
         - asset: assets/fonts/App/NotoSans-Light.ttf
@@ -130,7 +130,7 @@ icons_launcher:
       enable: true
     ios:
       enable: true
-  
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

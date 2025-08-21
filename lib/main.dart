@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -146,7 +147,7 @@ Future<void> main() async {
     await setReminderForPrayers();
   }
 
-  final initialLocale = await LanguageCubit.getInitialLocale();
+  MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
   runApp(MyApp(initialLocale: initialLocale));
 }
@@ -154,7 +155,7 @@ Future<void> main() async {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  final Locale initialLocale;
+  final MyAppLocalization initialLocale;
 
   const MyApp({super.key, required this.initialLocale});
 
@@ -193,7 +194,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => QuranHistoryCubit()),
       ],
 
-      child: BlocBuilder<LanguageCubit, LanguageState>(
+      child: BlocBuilder<LanguageCubit, MyAppLocalization>(
         builder: (context, languageState) {
           return BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, themeState) {
