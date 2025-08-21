@@ -13,27 +13,22 @@ import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fa.dart';
 import 'app_localizations_fr.dart';
-import 'app_localizations_ha.dart';
 import 'app_localizations_hi.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
 import 'app_localizations_kk.dart';
 import 'app_localizations_ko.dart';
-import 'app_localizations_ku.dart';
 import 'app_localizations_ms.dart';
 import 'app_localizations_pa.dart';
 import 'app_localizations_ps.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
-import 'app_localizations_so.dart';
 import 'app_localizations_sw.dart';
 import 'app_localizations_ta.dart';
 import 'app_localizations_tr.dart';
-import 'app_localizations_ug.dart';
 import 'app_localizations_ur.dart';
 import 'app_localizations_vi.dart';
-import 'app_localizations_yo.dart';
 import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
@@ -130,27 +125,22 @@ abstract class AppLocalizations {
     Locale('es'),
     Locale('fa'),
     Locale('fr'),
-    Locale('ha'),
     Locale('hi'),
     Locale('id'),
     Locale('it'),
     Locale('ja'),
     Locale('kk'),
     Locale('ko'),
-    Locale('ku'),
     Locale('ms'),
     Locale('pa'),
     Locale('ps'),
     Locale('pt'),
     Locale('ru'),
-    Locale('so'),
     Locale('sw'),
     Locale('ta'),
     Locale('tr'),
-    Locale('ug'),
     Locale('ur'),
     Locale('vi'),
-    Locale('yo'),
     Locale('zh'),
   ];
 
@@ -2027,6 +2017,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restore From Backup'**
   String get restoreFromBackup;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
 }
 
 class _AppLocalizationsDelegate
@@ -2048,27 +2050,22 @@ class _AppLocalizationsDelegate
     'es',
     'fa',
     'fr',
-    'ha',
     'hi',
     'id',
     'it',
     'ja',
     'kk',
     'ko',
-    'ku',
     'ms',
     'pa',
     'ps',
     'pt',
     'ru',
-    'so',
     'sw',
     'ta',
     'tr',
-    'ug',
     'ur',
     'vi',
-    'yo',
     'zh',
   ].contains(locale.languageCode);
 
@@ -2095,8 +2092,6 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsFa();
     case 'fr':
       return AppLocalizationsFr();
-    case 'ha':
-      return AppLocalizationsHa();
     case 'hi':
       return AppLocalizationsHi();
     case 'id':
@@ -2109,8 +2104,6 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsKk();
     case 'ko':
       return AppLocalizationsKo();
-    case 'ku':
-      return AppLocalizationsKu();
     case 'ms':
       return AppLocalizationsMs();
     case 'pa':
@@ -2121,22 +2114,16 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
-    case 'so':
-      return AppLocalizationsSo();
     case 'sw':
       return AppLocalizationsSw();
     case 'ta':
       return AppLocalizationsTa();
     case 'tr':
       return AppLocalizationsTr();
-    case 'ug':
-      return AppLocalizationsUg();
     case 'ur':
       return AppLocalizationsUr();
     case 'vi':
       return AppLocalizationsVi();
-    case 'yo':
-      return AppLocalizationsYo();
     case 'zh':
       return AppLocalizationsZh();
   }

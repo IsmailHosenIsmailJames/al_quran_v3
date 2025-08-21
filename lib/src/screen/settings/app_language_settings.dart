@@ -16,13 +16,14 @@ class AppLanguageSettings extends StatefulWidget {
 
 class _AppLanguageSettingsState extends State<AppLanguageSettings> {
   ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.languageSettings)),
-      body: BlocBuilder<LanguageCubit, LanguageState>(
+      body: BlocBuilder<LanguageCubit, MyAppLocalization>(
         builder: (context, languageState) {
           return Scrollbar(
             controller: scrollController,
@@ -33,9 +34,7 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
               controller: scrollController,
               itemCount: usedAppLanguageMap.length,
               itemBuilder: (context, index) {
-                AppLanguage current = AppLanguage.fromMap(
-                  usedAppLanguageMap[index],
-                );
+                MyAppLocalization current = usedAppLanguageMap[index];
                 return Container(
                   color:
                       index % 2 == 1
@@ -46,15 +45,14 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                     title: Text(current.native),
                     subtitle: Text(current.english),
                     leading: Icon(
-                      languageState.locale.languageCode == current.code
+                      languageState.locale.languageCode ==
+                              current.locale.countryCode
                           ? Icons.check_circle_rounded
                           : Icons.circle_outlined,
                       color: themeState.primary,
                     ),
                     onTap: () {
-                      context.read<LanguageCubit>().changeLanguage(
-                        current.code,
-                      );
+                      context.read<LanguageCubit>().changeLanguage(current);
                     },
                   ),
                 );

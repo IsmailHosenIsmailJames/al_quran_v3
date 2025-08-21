@@ -1054,4 +1054,10 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get restoreFromBackup => 'Restore From Backup';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get search => 'Search';
 }
