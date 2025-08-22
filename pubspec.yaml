@@ -1,7 +1,7 @@
 name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran with Recitation"
 
-version: 2.0.0+16
+version: 2.0.0+17
 
 environment:
   sdk: ^3.7.2
@@ -35,8 +35,8 @@ dependencies:
   share_plus: ^11.0.0
   simple_icons: ^14.6.1
   shared_preferences: ^2.5.3
-  flutter_localizations: 
-    sdk: flutter             
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -58,14 +58,14 @@ flutter:
 
 
   fonts:
-    - family: QPC_Hafs 
+    - family: QPC_Hafs
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
 
     - family: NotoSans
       fonts:
         - asset: assets/fonts/App/NotoSans-Bold.ttf
-          weight: 700 
+          weight: 700
         - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
           weight: 200
         - asset: assets/fonts/App/NotoSans-Light.ttf
@@ -84,7 +84,7 @@ icons_launcher:
       enable: true
     ios:
       enable: true
-  
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
