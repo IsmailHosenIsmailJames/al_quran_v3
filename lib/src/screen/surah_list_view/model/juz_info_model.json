@@ -1,9 +1,9 @@
 {
-    "juz_number": 30,
-    "verses_count": 564,
-    "first_verse_key": "78:1",
-    "last_verse_key": "114:6",
-    "verse_mapping": {
+    "jn": 30,
+    "vc": 564,
+   "fvk": "78:1",
+    "lvk": "114:6",
+    "vm": {
         "78": "1-40",
         "79": "1-46",
         "80": "1-42",

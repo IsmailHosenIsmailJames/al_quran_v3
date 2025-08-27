@@ -1,10 +1,10 @@
 {
-    "ruku_number": 1,
-    "surah_ruku_number": 1,
-    "verses_count": 7,
-    "first_verse_key": "1:1",
-    "last_verse_key": "1:7",
-    "verse_mapping": {
+    "rn": 1,
+    "srn": 1,
+    "vc": 7,
+   "fvk": "1:1",
+    "lvk": "1:7",
+    "vm": {
         "1": "1-7"
     }
 }

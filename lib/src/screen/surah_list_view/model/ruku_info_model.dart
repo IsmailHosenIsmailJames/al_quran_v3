@@ -39,24 +39,22 @@ class RukuInfoModel {
   String toJson() => json.encode(toMap());
 
   factory RukuInfoModel.fromMap(Map<String, dynamic> json) => RukuInfoModel(
-    rukuNumber: json["ruku_number"],
-    surahRukuNumber: json["surah_ruku_number"],
-    versesCount: json["verses_count"],
-    firstVerseKey: json["first_verse_key"],
-    lastVerseKey: json["last_verse_key"],
+    rukuNumber: json["rn"], // ruku_number
+    surahRukuNumber: json["srn"], // surah_ruku_number
+    versesCount: json["vc"], // verses_count
+    firstVerseKey: json["fvk"], // first_verse_key
+    lastVerseKey: json["lvk"], // last_verse_key
     verseMapping: Map.from(
-      json["verse_mapping"],
+      json["vm"], // verse_mapping
     ).map((k, v) => MapEntry<String, String>(k, v)),
   );
 
   Map<String, dynamic> toMap() => {
-    "ruku_number": rukuNumber,
-    "surah_ruku_number": surahRukuNumber,
-    "verses_count": versesCount,
-    "first_verse_key": firstVerseKey,
-    "last_verse_key": lastVerseKey,
-    "verse_mapping": Map.from(
-      verseMapping,
-    ).map((k, v) => MapEntry<String, dynamic>(k, v)),
+    "rn": rukuNumber,
+    "srn": surahRukuNumber,
+    "vc": versesCount,
+    "fvk": firstVerseKey,
+    "lvk": lastVerseKey,
+    "vm": Map.from(verseMapping).map((k, v) => MapEntry<String, dynamic>(k, v)),
   };
 }
