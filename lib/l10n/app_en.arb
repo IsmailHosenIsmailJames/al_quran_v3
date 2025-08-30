@@ -571,5 +571,7 @@
   "notUseAudioStreamDesc": "Download audio for offline use and reduce data consumption.",
   "audioSettings": "Audio Settings",
   "playbackSpeed": "Playback Speed",
-  "playbackSpeedDesc": "Adjust the speed of the Quran Recitation."
+  "playbackSpeedDesc": "Adjust the speed of the Quran Recitation.",
+  "waitForCurrentDownloadToFinish": "Please wait for the current download to finish.",
+  "areYouSure": "Are you sure?"
 }

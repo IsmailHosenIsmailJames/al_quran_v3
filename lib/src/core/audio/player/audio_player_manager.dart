@@ -1,5 +1,6 @@
 import "dart:async";
 import "dart:developer";
+import "dart:io";
 
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
@@ -13,15 +14,21 @@ import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
 import "package:just_audio_background/just_audio_background.dart";
+import "package:path/path.dart";
 import "package:permission_handler/permission_handler.dart";
+import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
 
 class AudioPlayerManager {
   static bool isListening = false;
+  static bool isWordPlaying = false;
+
   static AudioPlayer audioPlayer = AudioPlayer();
+  static CancelToken? _downloadCancelToken;
 
   static StreamSubscription? positionStream;
   static StreamSubscription? errorStream;
@@ -30,6 +37,7 @@ class AudioPlayerManager {
   static StreamSubscription? durationStream;
   static StreamSubscription? bufferedPositionStream;
   static StreamSubscription? currentIndexStream;
+
   static void startListeningAudioPlayerState() {
     if (isListening) return;
     isListening = true;
@@ -134,6 +142,114 @@ class AudioPlayerManager {
     audioPlayer = AudioPlayer();
   }
 
+  static void cancelDownload() {
+    _downloadCancelToken?.cancel();
+  }
+
+  static Future<void> downloadSurah({
+    required SurahInfoModel surahInfoModel,
+    required ReciterInfoModel reciterInfoModel,
+    required AudioDownloadCubit audioDownloadCubit,
+  }) async {
+    audioDownloadCubit.updateIsDownloading(true);
+    audioDownloadCubit.updateProgress(0.0);
+    _downloadCancelToken = CancelToken();
+    for (int i = 1; i <= surahInfoModel.versesCount; i++) {
+      String expectedPath = getExpectedAudioFileLocation(
+        surahInfoModel: surahInfoModel,
+        ayahNumber: i,
+        reciterInfoModel: reciterInfoModel,
+      );
+      log(expectedPath);
+      if (!await File(expectedPath).exists()) {
+        String url = getUrlOfAudioFromAyahKey(
+          "${surahInfoModel.id}:$i",
+          reciterInfoModel,
+        );
+        try {
+          Dio dio = Dio();
+          await dio.download(
+            url,
+            expectedPath,
+            cancelToken: _downloadCancelToken,
+            options: Options(
+              receiveTimeout: const Duration(seconds: 60),
+              sendTimeout: const Duration(seconds: 60),
+            ),
+            deleteOnError: true,
+            onReceiveProgress: (count, total) {
+              if (total != -1) {
+                audioDownloadCubit.updateProgress(
+                  (i - 1 + (count / total)) / surahInfoModel.versesCount,
+                );
+              }
+            },
+          );
+        } catch (e) {
+          log(e.toString());
+          if (e is DioException && e.type == DioExceptionType.cancel) {
+            if (await File(expectedPath).exists()) {
+              await File(expectedPath).delete();
+            }
+          }
+          audioDownloadCubit.updateIsDownloading(false);
+          audioDownloadCubit.updateProgress(0.0);
+          audioDownloadCubit.updateDownloadingSurahNumber(0);
+          return;
+        }
+      }
+      if (_downloadCancelToken?.isCancelled == true) {
+        return;
+      }
+      audioDownloadCubit.updateProgress(i / surahInfoModel.versesCount);
+    }
+  }
+
+  static String getExpectedAudioFileLocation({
+    required SurahInfoModel surahInfoModel,
+    required int ayahNumber,
+    required ReciterInfoModel reciterInfoModel,
+  }) {
+    return join(
+      applicationDataPath!.path,
+      "recitations",
+      reciterInfoModel.name,
+      reciterInfoModel.style,
+      surahInfoModel.id.toString().padLeft(3, "0"),
+      "${ayahNumber.toString().padLeft(3, "0")}.mp3",
+    );
+  }
+
+  static String getExpectedSurahDirectoryLocation({
+    required SurahInfoModel surahInfoModel,
+    required ReciterInfoModel reciterInfoModel,
+  }) {
+    return join(
+      applicationDataPath!.path,
+      "recitations",
+      reciterInfoModel.name,
+      reciterInfoModel.style,
+      surahInfoModel.id.toString().padLeft(3, "0"),
+    );
+  }
+
+  static Future<String?> getDownloadedPathOfSurah({
+    required SurahInfoModel surahInfoModel,
+    required int ayahNumber,
+    required ReciterInfoModel reciterInfoModel,
+  }) async {
+    String expectedPath = getExpectedAudioFileLocation(
+      surahInfoModel: surahInfoModel,
+      ayahNumber: ayahNumber,
+      reciterInfoModel: reciterInfoModel,
+    );
+    if (await File(expectedPath).exists()) {
+      return expectedPath;
+    } else {
+      return null;
+    }
+  }
+
   static Future<void> playSingleAyah({
     required String ayahKey,
     required ReciterInfoModel reciterInfoModel,
@@ -157,15 +273,13 @@ class AudioPlayerManager {
       metaDataSurah[ayahKey.split(":").first],
     );
 
-    String audioURL = getUrlFromAyahKey(ayahKey, reciterInfoModel);
-    final audioSource = LockCachingAudioSource(
-      Uri.parse(audioURL),
-      tag: MediaItem(
-        id: ayahKey,
-        album: reciterInfoModel.name,
-        title: getSurahName(context, surahInfoModel.id),
-      ),
+    final audioSource = await getAudioSourceFromAyahKey(
+      context,
+      ayahKey,
+      surahInfoModel,
+      reciterInfoModel,
     );
+
     await audioPlayer.stop();
     await audioPlayer.clearAudioSources();
 
@@ -215,20 +329,17 @@ class AudioPlayerManager {
     ayahList.removeWhere((element) => element.runtimeType == int);
     ayahList = List<String>.from(ayahList);
 
-    List<LockCachingAudioSource> listOfAudioSource = [];
+    List<AudioSource> listOfAudioSource = [];
     for (String ayahKey in ayahList) {
       SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
         metaDataSurah[ayahKey.split(":").first],
       );
       listOfAudioSource.add(
-        LockCachingAudioSource(
-          Uri.parse(getUrlFromAyahKey(ayahKey, reciterInfoModel)),
-
-          tag: MediaItem(
-            id: ayahKey,
-            album: reciterInfoModel.name,
-            title: getSurahName(context, surahInfoModel.id),
-          ),
+        await getAudioSourceFromAyahKey(
+          context,
+          ayahKey,
+          surahInfoModel,
+          reciterInfoModel,
         ),
       );
     }
@@ -259,8 +370,6 @@ class AudioPlayerManager {
     await audioPlayer.setSpeed(playbackSpeed);
     if (instantPlay) await audioPlayer.play();
   }
-
-  static bool isWordPlaying = false;
 
   static Future<void> playWord(String wordKey) async {
     if (isWordPlaying) return;
@@ -301,7 +410,42 @@ class AudioPlayerManager {
     return "${surahNumber.padLeft(3, "0")}_${ayahNumber.padLeft(3, "0")}_${wordNumber.padLeft(3, "0")}";
   }
 
-  static String getUrlFromAyahKey(String ayahKey, ReciterInfoModel reciter) {
+  static Future<AudioSource> getAudioSourceFromAyahKey(
+    BuildContext context,
+    String ayahKey,
+    SurahInfoModel surahInfoModel,
+    ReciterInfoModel reciter,
+  ) async {
+    String? audioFilePath = await getDownloadedPathOfSurah(
+      surahInfoModel: surahInfoModel,
+      ayahNumber: int.parse(ayahKey.split(":").last),
+      reciterInfoModel: reciter,
+    );
+    if (audioFilePath != null) {
+      return AudioSource.file(
+        audioFilePath,
+        tag: MediaItem(
+          id: ayahKey,
+          album: reciter.name,
+          title: getSurahName(context, surahInfoModel.id),
+        ),
+      );
+    } else {
+      return LockCachingAudioSource(
+        Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+        tag: MediaItem(
+          id: ayahKey,
+          album: reciter.name,
+          title: getSurahName(context, surahInfoModel.id),
+        ),
+      );
+    }
+  }
+
+  static String getUrlOfAudioFromAyahKey(
+    String ayahKey,
+    ReciterInfoModel reciter,
+  ) {
     return "${reciter.link}/${ayahKeyToAudioAyahID(ayahKey)}.mp3";
   }
 

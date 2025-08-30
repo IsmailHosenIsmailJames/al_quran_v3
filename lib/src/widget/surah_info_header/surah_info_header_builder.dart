@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -18,6 +19,7 @@ import "package:al_quran_v3/src/screen/surah_info/surah_info_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -150,75 +152,102 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                                 .state
                                 .isInsideQuranPlayer ==
                             true;
-                    return IconButton(
-                      style: IconButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        backgroundColor: themeState.primary,
-                        foregroundColor: Colors.white,
-                      ),
-                      onPressed: () {
-                        bool isPlayList =
-                            context.read<AudioUiCubit>().state.isPlayList;
-                        bool isCompleted =
-                            playerState.state ==
-                            just_audio.ProcessingState.completed;
-
-                        if (context
-                                .read<AudioUiCubit>()
-                                .state
-                                .isInsideQuranPlayer ==
-                            false) {
-                          String startAyahKey = headerInfoModel.startAyahKey;
-                          String endAyahKey = headerInfoModel.endAyahKey;
-
-                          AudioPlayerManager.playMultipleAyahAsPlaylist(
-                            startAyahKey: startAyahKey,
-                            endAyahKey: endAyahKey,
-                            reciterInfoModel:
-                                context
-                                    .read<SegmentedQuranReciterCubit>()
-                                    .state,
-                            isInsideQuran: true,
-                          );
-                        } else if (isCurrentPlaying &&
-                            isPlayList &&
-                            !isCompleted) {
-                          AudioPlayerManager.audioPlayer.pause();
-                        } else if (isCurrentSurah &&
-                            isPlayList &&
-                            !isCompleted) {
-                          AudioPlayerManager.audioPlayer.play();
-                        } else {
-                          String startAyahKey = headerInfoModel.startAyahKey;
-                          String endAyahKey = headerInfoModel.endAyahKey;
-
-                          AudioPlayerManager.playMultipleAyahAsPlaylist(
-                            startAyahKey: startAyahKey,
-                            endAyahKey: endAyahKey,
-                            reciterInfoModel:
-                                context
-                                    .read<SegmentedQuranReciterCubit>()
-                                    .state,
-                            isInsideQuran: true,
-                          );
-                        }
-                      },
-                      icon:
-                          (playerState.state ==
-                                      just_audio.ProcessingState.loading &&
-                                  isCurrentSurah)
-                              ? const Padding(
-                                padding: EdgeInsets.all(3.0),
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 4,
-                                ),
-                              )
-                              : Icon(
-                                isCurrentPlaying
-                                    ? Icons.pause_rounded
-                                    : Icons.play_arrow_rounded,
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          style: IconButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            backgroundColor: themeState.primary,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => const AudioDownloadScreen(),
                               ),
+                            );
+                          },
+                          icon: const Icon(
+                            FluentIcons.arrow_download_24_filled,
+                          ),
+                        ),
+                        IconButton(
+                          style: IconButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            backgroundColor: themeState.primary,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {
+                            bool isPlayList =
+                                context.read<AudioUiCubit>().state.isPlayList;
+                            bool isCompleted =
+                                playerState.state ==
+                                just_audio.ProcessingState.completed;
+
+                            if (context
+                                    .read<AudioUiCubit>()
+                                    .state
+                                    .isInsideQuranPlayer ==
+                                false) {
+                              String startAyahKey =
+                                  headerInfoModel.startAyahKey;
+                              String endAyahKey = headerInfoModel.endAyahKey;
+
+                              AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                startAyahKey: startAyahKey,
+                                endAyahKey: endAyahKey,
+                                reciterInfoModel:
+                                    context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                isInsideQuran: true,
+                              );
+                            } else if (isCurrentPlaying &&
+                                isPlayList &&
+                                !isCompleted) {
+                              AudioPlayerManager.audioPlayer.pause();
+                            } else if (isCurrentSurah &&
+                                isPlayList &&
+                                !isCompleted) {
+                              AudioPlayerManager.audioPlayer.play();
+                            } else {
+                              String startAyahKey =
+                                  headerInfoModel.startAyahKey;
+                              String endAyahKey = headerInfoModel.endAyahKey;
+
+                              AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                startAyahKey: startAyahKey,
+                                endAyahKey: endAyahKey,
+                                reciterInfoModel:
+                                    context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                isInsideQuran: true,
+                              );
+                            }
+                          },
+                          icon:
+                              (playerState.state ==
+                                          just_audio.ProcessingState.loading &&
+                                      isCurrentSurah)
+                                  ? const Padding(
+                                    padding: EdgeInsets.all(3.0),
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 4,
+                                    ),
+                                  )
+                                  : Icon(
+                                    isCurrentPlaying
+                                        ? Icons.pause_rounded
+                                        : Icons.play_arrow_rounded,
+                                  ),
+                        ),
+                      ],
                     );
                   },
                 );

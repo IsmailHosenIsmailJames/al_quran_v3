@@ -1042,6 +1042,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get scrollWithRecitation => 'پیمایش با تلاوت';
 
   @override
+  String get scrollWithRecitationDesc =>
+      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
+
+  @override
   String get quickAccess => 'دسترسی سریع';
 
   @override
@@ -1061,4 +1065,31 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get search => 'Search';
+
+  @override
+  String get useAudioStream => 'Use Audio Stream';
+
+  @override
+  String get useAudioStreamDesc =>
+      'Stream audio directly from the internet instead of downloading.';
+
+  @override
+  String get notUseAudioStreamDesc =>
+      'Download audio for offline use and reduce data consumption.';
+
+  @override
+  String get audioSettings => 'Audio Settings';
+
+  @override
+  String get playbackSpeed => 'Playback Speed';
+
+  @override
+  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+
+  @override
+  String get waitForCurrentDownloadToFinish =>
+      'Please wait for the current download to finish.';
+
+  @override
+  String get areYouSure => 'Are you sure?';
 }

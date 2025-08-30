@@ -1,6 +1,5 @@
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
