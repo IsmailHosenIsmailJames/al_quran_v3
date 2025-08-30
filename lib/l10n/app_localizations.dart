@@ -1988,6 +1988,12 @@ abstract class AppLocalizations {
   /// **'Scroll with Recitation'**
   String get scrollWithRecitation;
 
+  /// No description provided for @scrollWithRecitationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.'**
+  String get scrollWithRecitationDesc;
+
   /// No description provided for @quickAccess.
   ///
   /// In en, this message translates to:
@@ -2029,6 +2035,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
+
+  /// No description provided for @useAudioStream.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Audio Stream'**
+  String get useAudioStream;
+
+  /// No description provided for @useAudioStreamDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stream audio directly from the internet instead of downloading.'**
+  String get useAudioStreamDesc;
+
+  /// No description provided for @notUseAudioStreamDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Download audio for offline use and reduce data consumption.'**
+  String get notUseAudioStreamDesc;
+
+  /// No description provided for @audioSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio Settings'**
+  String get audioSettings;
+
+  /// No description provided for @playbackSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback Speed'**
+  String get playbackSpeed;
+
+  /// No description provided for @playbackSpeedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust the speed of the Quran Recitation.'**
+  String get playbackSpeedDesc;
+
+  /// No description provided for @waitForCurrentDownloadToFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for the current download to finish.'**
+  String get waitForCurrentDownloadToFinish;
+
+  /// No description provided for @areYouSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure?'**
+  String get areYouSure;
 }
 
 class _AppLocalizationsDelegate

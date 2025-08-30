@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
+import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -40,6 +41,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:hive_flutter/adapters.dart";
 import "package:just_audio_background/just_audio_background.dart";
+import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
@@ -56,6 +58,8 @@ List<Map> metaDataSajda = [];
 Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
 Map<String, dynamic> surahMeaningLocalization = {};
+
+Directory? applicationDataPath;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,6 +94,15 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
+
+  if (Platform.isAndroid) {
+    applicationDataPath = await getExternalStorageDirectory();
+  } else if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+    applicationDataPath = await getDownloadsDirectory();
+  } else {
+    // Fallback for platforms where user-accessible folders are restricted
+    applicationDataPath = await getApplicationDocumentsDirectory();
+  }
   tajweedScript = jsonDecode(
     await rootBundle.loadString("assets/quran_script/QPC_Hafs_Tajweed.json"),
   );
@@ -192,6 +205,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LandscapeScrollEffect()),
         BlocProvider(create: (context) => QuickAccessCubit()),
         BlocProvider(create: (context) => QuranHistoryCubit()),
+        BlocProvider(create: (context) => AudioDownloadCubit()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(

@@ -10,7 +10,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "az": [
@@ -24,7 +26,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "bn": [
@@ -38,7 +42,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "de": [
@@ -52,7 +58,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "es": [
@@ -66,7 +74,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "fa": [
@@ -80,7 +90,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "fr": [
@@ -94,7 +106,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "hi": [
@@ -108,7 +122,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "id": [
@@ -122,7 +138,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "it": [
@@ -136,7 +154,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ja": [
@@ -150,7 +170,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "kk": [
@@ -164,7 +186,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ko": [
@@ -178,7 +202,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ms": [
@@ -192,7 +218,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "pa": [
@@ -206,7 +234,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ps": [
@@ -220,7 +250,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "pt": [
@@ -234,7 +266,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ru": [
@@ -248,7 +282,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "sw": [
@@ -262,7 +298,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ta": [
@@ -276,7 +314,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "tr": [
@@ -290,7 +330,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "ur": [
@@ -304,7 +346,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "vi": [
@@ -318,7 +362,9 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ],
 
   "zh": [
@@ -332,6 +378,8 @@
     "notUseAudioStreamDesc",
     "audioSettings",
     "playbackSpeed",
-    "playbackSpeedDesc"
+    "playbackSpeedDesc",
+    "waitForCurrentDownloadToFinish",
+    "areYouSure"
   ]
 }
