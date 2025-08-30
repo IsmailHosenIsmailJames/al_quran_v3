@@ -569,5 +569,7 @@
   "useAudioStream": "Use Audio Stream",
   "useAudioStreamDesc": "Stream audio directly from the internet instead of downloading.",
   "notUseAudioStreamDesc": "Download audio for offline use and reduce data consumption.",
-  "audioSettings": "Audio Settings"
+  "audioSettings": "Audio Settings",
+  "playbackSpeed": "Playback Speed",
+  "playbackSpeedDesc": "Adjust the speed of the Quran Recitation."
 }
