@@ -12,6 +12,7 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
+import "package:screenshot/screenshot.dart";
 
 import "../../../theme/controller/theme_cubit.dart";
 import "../functions/functions.dart";
@@ -103,13 +104,120 @@ class _AudioSettingsState extends State<AudioSettings> {
                 );
               },
             ),
+            BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, quranViewState) {
+                double currentSpeed = quranViewState.playbackSpeed;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.playbackSpeed,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Gap(5),
+                    Text(
+                      l10n.playbackSpeedDesc,
+                      style: TextStyle(
+                        color: Theme.of(context).hintColor,
+                        fontSize: 13,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove_circle_outline),
+                          tooltip: l10n.playbackSpeedDesc,
+                          onPressed:
+                              currentSpeed > 0.5
+                                  ? () async {
+                                    double value = (currentSpeed - 0.05).clamp(
+                                      0.5,
+                                      2.0,
+                                    );
+                                    context
+                                        .read<QuranViewCubit>()
+                                        .setViewOptions(playbackSpeed: value);
+                                    await AudioPlayerManager.audioPlayer
+                                        .setSpeed(value);
+                                    Fluttertoast.showToast(
+                                      msg:
+                                          "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                                    );
+                                  }
+                                  : null,
+                        ),
+                        Text(
+                          "${currentSpeed.toStringAsFixed(2)}x",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+
+                        IconButton(
+                          icon: const Icon(Icons.add_circle_outline),
+                          onPressed:
+                              currentSpeed < 2.0
+                                  ? () async {
+                                    double value = (currentSpeed + 0.05).clamp(
+                                      0.5,
+                                      2.0,
+                                    );
+                                    context
+                                        .read<QuranViewCubit>()
+                                        .setViewOptions(playbackSpeed: value);
+                                    await AudioPlayerManager.audioPlayer
+                                        .setSpeed(value);
+                                    Fluttertoast.showToast(
+                                      msg:
+                                          "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                                    );
+                                  }
+                                  : null,
+                        ),
+                        const Gap(10),
+                        Expanded(
+                          child: Slider(
+                            value: currentSpeed,
+                            min: 0.5,
+                            max: 2.0,
+                            divisions: 30,
+                            padding: EdgeInsets.zero,
+                            label: "${currentSpeed.toStringAsFixed(1)}x",
+                            onChangeEnd: (value) async {
+                              await AudioPlayerManager.audioPlayer.setSpeed(
+                                value.toPrecision(2),
+                              );
+                              Fluttertoast.showToast(
+                                msg:
+                                    "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                              );
+                            },
+                            onChanged: (value) {
+                              context.read<QuranViewCubit>().setViewOptions(
+                                playbackSpeed: double.parse(
+                                  value.toStringAsFixed(1),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
             const Gap(10),
             Text(
               l10n.audioCached,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            Divider(color: context.read<ThemeCubit>().state.primaryShade300),
-            const Gap(5),
+            const Gap(10),
+
             Container(
               padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(

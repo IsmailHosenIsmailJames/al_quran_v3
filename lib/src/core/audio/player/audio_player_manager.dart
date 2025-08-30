@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -150,6 +151,8 @@ class AudioPlayerManager {
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
+    double playbackSpeed = context.read<QuranViewCubit>().state.playbackSpeed;
+
     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
       metaDataSurah[ayahKey.split(":").first],
     );
@@ -180,6 +183,7 @@ class AudioPlayerManager {
       ),
     );
     await audioPlayer.setAudioSource(audioSource, initialIndex: 0);
+    await audioPlayer.setSpeed(playbackSpeed);
     if (instantPlay) await audioPlayer.play();
   }
 
@@ -200,6 +204,8 @@ class AudioPlayerManager {
 
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
+
+    double playbackSpeed = context.read<QuranViewCubit>().state.playbackSpeed;
 
     List ayahList = getListOfAyahKey(
       startAyahKey: startAyahKey,
@@ -250,6 +256,7 @@ class AudioPlayerManager {
       shuffleOrder: DefaultShuffleOrder(),
     );
 
+    await audioPlayer.setSpeed(playbackSpeed);
     if (instantPlay) await audioPlayer.play();
   }
 

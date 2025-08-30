@@ -57,6 +57,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           useAudioStream: Hive.box(
             "user",
           ).get("use_audio_stream", defaultValue: true),
+          playbackSpeed: Hive.box(
+            "user",
+          ).get("playback_speed", defaultValue: 1.0),
         ),
       );
 
@@ -95,6 +98,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     bool? enableWordByWordHighlight,
     bool? scrollWithRecitation,
     bool? useAudioStream,
+    double? playbackSpeed,
   }) {
     // if all are false, show toast that must be selected one
     QuranViewState newState = state.copyWith(
@@ -107,6 +111,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
       enableWordByWordHighlight: enableWordByWordHighlight,
       scrollWithRecitation: scrollWithRecitation,
       useAudioStream: useAudioStream,
+      playbackSpeed: playbackSpeed,
     );
     if (newState.hideWordByWord == true &&
         newState.hideTranslation == true &&
@@ -147,6 +152,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     }
     if (useAudioStream != null) {
       Hive.box("user").put("use_audio_stream", useAudioStream);
+    }
+    if (playbackSpeed != null) {
+      Hive.box("user").put("playback_speed", playbackSpeed);
     }
 
     emit(newState);

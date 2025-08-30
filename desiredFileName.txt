@@ -8,7 +8,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "az": [
@@ -20,7 +22,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "bn": [
@@ -32,7 +36,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "de": [
@@ -44,7 +50,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "es": [
@@ -56,7 +64,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "fa": [
@@ -68,7 +78,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "fr": [
@@ -80,7 +92,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "hi": [
@@ -92,7 +106,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "id": [
@@ -104,7 +120,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "it": [
@@ -116,7 +134,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ja": [
@@ -128,7 +148,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "kk": [
@@ -140,7 +162,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ko": [
@@ -152,7 +176,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ms": [
@@ -164,7 +190,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "pa": [
@@ -176,7 +204,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ps": [
@@ -188,7 +218,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "pt": [
@@ -200,7 +232,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ru": [
@@ -212,7 +246,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "sw": [
@@ -224,7 +260,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ta": [
@@ -236,7 +274,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "tr": [
@@ -248,7 +288,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "ur": [
@@ -260,7 +302,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "vi": [
@@ -272,7 +316,9 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ],
 
   "zh": [
@@ -284,6 +330,8 @@
     "useAudioStream",
     "useAudioStreamDesc",
     "notUseAudioStreamDesc",
-    "audioSettings"
+    "audioSettings",
+    "playbackSpeed",
+    "playbackSpeedDesc"
   ]
 }
