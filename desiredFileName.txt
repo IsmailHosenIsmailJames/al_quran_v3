@@ -1,169 +1,289 @@
 {
   "ar": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "az": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "bn": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "de": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "es": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "fa": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "fr": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "hi": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "id": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "it": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ja": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "kk": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ko": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ms": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "pa": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ps": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "pt": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ru": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "sw": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ta": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "tr": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "ur": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "vi": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ],
 
   "zh": [
+    "scrollWithRecitationDesc",
     "configuration",
     "restoreFromBackup",
     "history",
-    "search"
+    "search",
+    "useAudioStream",
+    "useAudioStreamDesc",
+    "notUseAudioStreamDesc",
+    "audioSettings"
   ]
 }

@@ -558,11 +558,16 @@
   "optional": "Optional",
   "notificationScheduleWarning": "Note: Scheduled Notification or Reminder can be missed due to your phone's OS background process restrictions. For example: Vivo's Origin OS, Samsung's One UI, Oppo's ColorOS etc. are sometimes kills scheduled Notification or Reminder . Please check your OS settings for make app not restricted from background process.",
   "scrollWithRecitation": "Scroll with Recitation",
+  "scrollWithRecitationDesc": "When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.",
   "quickAccess": "Quick Access",
   "initiallyScrollAyah": "Initially scroll to ayah",
   "tajweedGuide": "Tajweed Guide",
   "configuration": "Configuration",
   "restoreFromBackup": "Restore From Backup",
   "history": "History",
-  "search": "Search"
+  "search": "Search",
+  "useAudioStream": "Use Audio Stream",
+  "useAudioStreamDesc": "Stream audio directly from the internet instead of downloading.",
+  "notUseAudioStreamDesc": "Download audio for offline use and reduce data consumption.",
+  "audioSettings": "Audio Settings"
 }

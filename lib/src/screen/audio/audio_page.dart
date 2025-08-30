@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dar
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
@@ -26,6 +27,7 @@ import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:dartx/dartx.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
@@ -161,30 +163,51 @@ class _AudioPageState extends State<AudioPage> {
     );
   }
 
-  BlocBuilder<AudioUiCubit, AudioControllerUiState> getCurrentReciterViewWidget(
+  Widget getCurrentReciterViewWidget(
     AyahKeyManagement ayahKeyState,
     int currentIndex,
   ) {
-    return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
-      builder: (context, audioUIState) {
-        return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-          builder: (context, quranInsideReciter) {
-            return BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
-              builder: (context, audioTabReciter) {
-                return getReciterWidget(
-                  context: context,
-                  audioTabScreenState:
-                      audioUIState.isInsideQuranPlayer
-                          ? quranInsideReciter
-                          : audioTabReciter,
-                  ayahKeyState: ayahKeyState,
-                  currentIndex: currentIndex,
+    return Stack(
+      children: [
+        BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+          builder: (context, audioUIState) {
+            return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+              builder: (context, quranInsideReciter) {
+                return BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
+                  builder: (context, audioTabReciter) {
+                    return getReciterWidget(
+                      context: context,
+                      audioTabScreenState:
+                          audioUIState.isInsideQuranPlayer
+                              ? quranInsideReciter
+                              : audioTabReciter,
+                      ayahKeyState: ayahKeyState,
+                      currentIndex: currentIndex,
+                    );
+                  },
                 );
               },
             );
           },
-        );
-      },
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            style: IconButton.styleFrom(
+              backgroundColor: context.read<ThemeCubit>().state.primaryShade100,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AudioSettings(needAppBar: true),
+                ),
+              );
+            },
+            icon: const Icon(FluentIcons.settings_24_filled),
+          ),
+        ),
+      ],
     );
   }
 
