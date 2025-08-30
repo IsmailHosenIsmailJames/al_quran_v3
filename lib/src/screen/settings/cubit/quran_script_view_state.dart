@@ -14,6 +14,7 @@ class QuranViewState {
   bool alwaysOpenWordByWord;
   bool enableWordByWordHighlight;
   bool scrollWithRecitation;
+  bool useAudioStream;
   QuranViewState({
     required this.ayahKey,
     required this.fontSize,
@@ -28,6 +29,7 @@ class QuranViewState {
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
     this.scrollWithRecitation = false,
+    this.useAudioStream = true,
   });
 
   QuranViewState copyWith({
@@ -44,6 +46,7 @@ class QuranViewState {
     bool? alwaysOpenWordByWord,
     bool? enableWordByWordHighlight,
     bool? scrollWithRecitation,
+    bool? useAudioStream,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -60,6 +63,7 @@ class QuranViewState {
       enableWordByWordHighlight:
           enableWordByWordHighlight ?? this.enableWordByWordHighlight,
       scrollWithRecitation: scrollWithRecitation ?? this.scrollWithRecitation,
+      useAudioStream: useAudioStream ?? this.useAudioStream,
     );
   }
 }

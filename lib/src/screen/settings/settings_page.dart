@@ -61,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   const QuranScriptSettings(),
                   const Gap(30),
                   Text(
-                    appLocalizations.audioCached,
+                    appLocalizations.audioSettings,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

@@ -1,10 +1,14 @@
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
@@ -13,7 +17,8 @@ import "../../../theme/controller/theme_cubit.dart";
 import "../functions/functions.dart";
 
 class AudioSettings extends StatefulWidget {
-  const AudioSettings({super.key});
+  final bool needAppBar;
+  const AudioSettings({super.key, this.needAppBar = false});
 
   @override
   State<AudioSettings> createState() => _AudioSettingsState();
@@ -23,31 +28,115 @@ class _AudioSettingsState extends State<AudioSettings> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    return widget.needAppBar
+        ? Scaffold(
+          appBar: AppBar(title: Text(l10n.audioSettings)),
+
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: mainUI(l10n),
+          ),
+        )
+        : mainUI(l10n);
+  }
+
+  BlocBuilder<ThemeCubit, ThemeState> mainUI(AppLocalizations l10n) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
-        return Container(
-          padding: const EdgeInsets.all(7),
-          decoration: BoxDecoration(
-            color: themeState.primaryShade100,
-            borderRadius: BorderRadius.circular(7),
-          ),
-          child: FutureBuilder(
-            future: getCategorizedCacheFilesWithSize(context, l10n),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                Map<String, List<Map<String, dynamic>>> data = snapshot.data!;
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, quranViewState) {
+                return SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.scrollWithRecitation),
+                  subtitle: Text(l10n.scrollWithRecitationDesc),
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                    Set<WidgetState> states,
+                  ) {
+                    return Icon(
+                      states.contains(WidgetState.selected)
+                          ? Icons.done_rounded
+                          : Icons.close_rounded,
+                    );
+                  }),
 
-                List<String> keys = data.keys.toList();
+                  value: quranViewState.scrollWithRecitation,
+                  onChanged: (value) {
+                    context.read<QuranViewCubit>().setViewOptions(
+                      scrollWithRecitation: value,
+                    );
+                  },
+                );
+              },
+            ),
+            BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, quranViewState) {
+                return SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l10n.useAudioStream),
+                  subtitle: Text(l10n.useAudioStreamDesc),
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                    Set<WidgetState> states,
+                  ) {
+                    return Icon(
+                      states.contains(WidgetState.selected)
+                          ? Icons.done_rounded
+                          : Icons.close_rounded,
+                    );
+                  }),
 
-                return getListOfCacheWidget(keys, data, l10n);
-              } else if (snapshot.hasError) {
-                return Center(child: Text(l10n.cacheNotFound));
-              } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return const SizedBox();
-            },
-          ),
+                  value: quranViewState.useAudioStream,
+                  onChanged: (value) {
+                    context.read<QuranViewCubit>().setViewOptions(
+                      useAudioStream: value,
+                    );
+                    if (value) {
+                      Fluttertoast.showToast(msg: l10n.useAudioStreamDesc);
+                    } else {
+                      Fluttertoast.showToast(msg: l10n.notUseAudioStreamDesc);
+                    }
+                    AudioPlayerManager.stopListeningAudioPlayerState();
+                  },
+                );
+              },
+            ),
+            const Gap(10),
+            Text(
+              l10n.audioCached,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            Divider(color: context.read<ThemeCubit>().state.primaryShade300),
+            const Gap(5),
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                color: themeState.primaryShade100,
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: FutureBuilder(
+                future: getCategorizedCacheFilesWithSize(context, l10n),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    Map<String, List<Map<String, dynamic>>> data =
+                        snapshot.data!;
+
+                    List<String> keys = data.keys.toList();
+
+                    return getListOfCacheWidget(keys, data, l10n);
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text(l10n.cacheNotFound));
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return const SizedBox();
+                },
+              ),
+            ),
+          ],
         );
       },
     );
