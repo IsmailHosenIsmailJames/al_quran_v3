@@ -64,6 +64,8 @@ class QuranScriptSettings extends StatelessWidget {
                 max: 60,
                 min: 10,
                 divisions: 100,
+                label: context.read<QuranViewCubit>().state.fontSize.toString(),
+
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeFontSize(
                     value.toPrecision(2),
@@ -93,7 +95,8 @@ class QuranScriptSettings extends StatelessWidget {
                 max: 5,
                 min: 0.7,
                 divisions: 100,
-
+                label:
+                    context.read<QuranViewCubit>().state.lineHeight.toString(),
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeLineHeight(
                     value.toPrecision(2),
@@ -125,6 +128,12 @@ class QuranScriptSettings extends StatelessWidget {
                 max: 60,
                 min: 8,
                 divisions: 100,
+                label:
+                    context
+                        .read<QuranViewCubit>()
+                        .state
+                        .translationFontSize
+                        .toString(),
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeTranslationFontSize(
                     value.toPrecision(2),
