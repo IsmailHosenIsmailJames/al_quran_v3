@@ -38,8 +38,7 @@ class NonTajweedScriptView extends StatelessWidget {
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.textStyle?.fontSize ?? 24,
       height: scriptInfo.textStyle?.height ?? 2,
-      fontFamily:
-          isUthmani ? "KFGQPC-Uthmanic-HAFS-Regular" : "IndopakNastaleeq",
+      fontFamily: isUthmani ? "QPC_Hafs" : "IndopakNastaleeq",
       letterSpacing: 0,
     );
     if (scriptInfo.wordIndex != null) {
@@ -140,6 +139,8 @@ class NonTajweedScriptView extends StatelessWidget {
               textAlign: scriptInfo.textAlign,
               TextSpan(
                 children: List<InlineSpan>.generate(words.length, (index) {
+                  bool isLastWord = index == (words.length - 1);
+
                   return TextSpan(
                     style:
                         highlightingWordIndex ==
@@ -149,8 +150,11 @@ class NonTajweedScriptView extends StatelessWidget {
                                   scriptInfo.showWordHighlights == false
                                       ? null
                                       : themeState.primaryShade200,
+                              fontFamily: isLastWord ? "QPC_Hafs" : null,
                             )
-                            : null,
+                            : TextStyle(
+                              fontFamily: isLastWord ? "QPC_Hafs" : null,
+                            ),
                     text: words[index] + " ",
                     recognizer:
                         scriptInfo.skipWordTap == true

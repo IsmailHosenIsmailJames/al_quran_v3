@@ -87,7 +87,6 @@ class NonTajweedPageRenderer extends StatelessWidget {
               return false;
             },
             builder: (context, positionState) {
-              log((wordKey ?? "yfgfgh").toString(), name: "Word Keyiu");
               return Text.rich(
                 TextSpan(
                   children:
@@ -102,6 +101,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
                           children:
                               List.generate(words.length, (index) {
                                 String word = words[index];
+                                bool isLastWord = index == (words.length - 1);
+
                                 return TextSpan(
                                   text: "$word ",
                                   style:
@@ -110,8 +111,13 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                           ? TextStyle(
                                             backgroundColor:
                                                 themeState.primaryShade200,
+                                            fontFamily:
+                                                isLastWord ? "QPC_Hafs" : null,
                                           )
-                                          : null,
+                                          : TextStyle(
+                                            fontFamily:
+                                                isLastWord ? "QPC_Hafs" : null,
+                                          ),
 
                                   recognizer:
                                       TapGestureRecognizer()
@@ -135,7 +141,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   fontSize: baseTextStyle?.fontSize ?? 24,
                   fontFamily:
                       baseTextStyle?.fontFamily ??
-                      (isUthmani ? "me_quran_volt_newmet" : "AlQuranNeov5x1"),
+                      (isUthmani ? "QPC_Hafs" : "AlQuranNeov5x1"),
                   fontWeight: baseTextStyle?.fontWeight,
                   height: baseTextStyle?.height,
                   letterSpacing: 0,
