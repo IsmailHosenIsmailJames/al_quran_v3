@@ -308,5 +308,19 @@
   "scrollWithRecitation": "پیمایش با تلاوت",
   "quickAccess": "دسترسی سریع",
   "initiallyScrollAyah": "در ابتدا به آیه بروید",
-  "tajweedGuide": "راهنمای تجوید"
+  "tajweedGuide": "راهنمای تجوید",
+  "scrollWithRecitationDesc": "هنگامی که فعال باشد، آیه قرآن به طور خودکار همزمان با تلاوت صوتی پیمایش می شود.",
+  "configuration": "پیکربندی",
+  "restoreFromBackup": "بازیابی از پشتیبان",
+  "history": "تاریخ",
+  "search": "جستجو کردن",
+  "useAudioStream": "از جریان صوتی استفاده کنید",
+  "useAudioStreamDesc": "به جای بارگیری، صدا را مستقیماً از اینترنت پخش کنید.",
+  "notUseAudioStreamDesc": "صدا را برای استفاده آفلاین بارگیری کنید و مصرف داده را کاهش دهید.",
+  "audioSettings": "تنظیمات صوتی",
+  "playbackSpeed": "سرعت پخش",
+  "playbackSpeedDesc": "سرعت تلاوت قرآن را تنظیم کنید.",
+  "waitForCurrentDownloadToFinish": "لطفا منتظر بمانید تا بارگیری فعلی تمام شود.",
+  "areYouSure": "مطمئنی؟",
+  "checkYourInternetConnection": "اتصال اینترنت خود را بررسی کنید."
 }

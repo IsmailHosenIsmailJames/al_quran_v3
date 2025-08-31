@@ -1050,10 +1050,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get scrollWithRecitation => 'Desplazarse con recitación';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Acceso rápido';
 
   @override
@@ -1063,44 +1059,49 @@ class AppLocalizationsEs extends AppLocalizations {
   String get tajweedGuide => 'Guía de Tajweed';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Cuando está habilitado, el ayah del Corán se desplazará automáticamente en sincronía con la recitación de audio.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Configuración';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Restaurar desde copia de seguridad';
 
   @override
-  String get search => 'Search';
+  String get history => 'Historia';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Buscar';
+
+  @override
+  String get useAudioStream => 'Usar transmisión de audio';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Transmita audio directamente desde Internet en lugar de descargarlo.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Descargue audio para usarlo sin conexión y reduzca el consumo de datos.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Configuraciones de audio';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Velocidad de reproducción';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc =>
+      'Ajusta la velocidad de la recitación del Corán.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Espere a que finalice la descarga actual.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => '¿Estás seguro?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection => 'Revisa tu conexión a internet.';
 }

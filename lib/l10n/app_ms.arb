@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Tatal dengan Bacaan",
   "quickAccess": "Akses Pantas",
   "initiallyScrollAyah": "Tatal pada mulanya ke ayah",
-  "tajweedGuide": "Panduan Tajwid"
+  "tajweedGuide": "Panduan Tajwid",
+  "scrollWithRecitationDesc": "Apabila didayakan, ayat al-Quran akan menatal secara automatik selari dengan bacaan audio.",
+  "configuration": "Konfigurasi",
+  "restoreFromBackup": "Pulihkan Daripada Sandaran",
+  "history": "Sejarah",
+  "search": "Cari",
+  "useAudioStream": "Gunakan Strim Audio",
+  "useAudioStreamDesc": "Strim audio terus dari internet dan bukannya memuat turun.",
+  "notUseAudioStreamDesc": "Muat turun audio untuk kegunaan luar talian dan kurangkan penggunaan data.",
+  "audioSettings": "Tetapan Audio",
+  "playbackSpeed": "Kelajuan Main Semula",
+  "playbackSpeedDesc": "Laraskan kelajuan Bacaan al-Quran.",
+  "waitForCurrentDownloadToFinish": "Sila tunggu muat turun semasa selesai.",
+  "areYouSure": "Adakah anda pasti?",
+  "checkYourInternetConnection": "Periksa sambungan internet anda."
 }

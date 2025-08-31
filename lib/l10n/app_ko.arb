@@ -308,5 +308,19 @@
   "scrollWithRecitation": "낭송으로 스크롤",
   "quickAccess": "빠른 접근",
   "initiallyScrollAyah": "처음에 ayah로 스크롤",
-  "tajweedGuide": "타지위드 가이드"
+  "tajweedGuide": "타지위드 가이드",
+  "scrollWithRecitationDesc": "활성화되면 꾸란 아야가 오디오 암송과 동기화되어 자동으로 스크롤됩니다.",
+  "configuration": "구성",
+  "restoreFromBackup": "백업에서 복원",
+  "history": "역사",
+  "search": "검색",
+  "useAudioStream": "오디오 스트림 사용",
+  "useAudioStreamDesc": "다운로드하는 대신 인터넷에서 직접 오디오를 스트리밍합니다.",
+  "notUseAudioStreamDesc": "오프라인 사용을 위해 오디오를 다운로드하고 데이터 소비를 줄입니다.",
+  "audioSettings": "오디오 설정",
+  "playbackSpeed": "재생 속도",
+  "playbackSpeedDesc": "꾸란 암송 속도를 조정하십시오.",
+  "waitForCurrentDownloadToFinish": "현재 다운로드가 완료될 때까지 기다리십시오.",
+  "areYouSure": "확실합니까?",
+  "checkYourInternetConnection": "인터넷 연결을 확인하십시오."
 }

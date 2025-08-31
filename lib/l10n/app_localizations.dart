@@ -1988,12 +1988,6 @@ abstract class AppLocalizations {
   /// **'Scroll with Recitation'**
   String get scrollWithRecitation;
 
-  /// No description provided for @scrollWithRecitationDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.'**
-  String get scrollWithRecitationDesc;
-
   /// No description provided for @quickAccess.
   ///
   /// In en, this message translates to:
@@ -2011,6 +2005,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tajweed Guide'**
   String get tajweedGuide;
+
+  /// No description provided for @scrollWithRecitationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.'**
+  String get scrollWithRecitationDesc;
 
   /// No description provided for @configuration.
   ///

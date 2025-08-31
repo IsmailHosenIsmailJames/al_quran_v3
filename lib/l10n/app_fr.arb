@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Faire défiler avec récitation",
   "quickAccess": "Accès rapide",
   "initiallyScrollAyah": "Faire défiler initialement jusqu'à l'ayah",
-  "tajweedGuide": "Guide du Tajweed"
+  "tajweedGuide": "Guide du Tajweed",
+  "scrollWithRecitationDesc": "Lorsqu'il est activé, l'ayah du Coran défilera automatiquement en synchronisation avec la récitation audio.",
+  "configuration": "Configuration",
+  "restoreFromBackup": "Restaurer à partir d'une sauvegarde",
+  "history": "Histoire",
+  "search": "Rechercher",
+  "useAudioStream": "Utiliser le flux audio",
+  "useAudioStreamDesc": "Diffusez de l'audio directement depuis Internet au lieu de le télécharger.",
+  "notUseAudioStreamDesc": "Téléchargez l'audio pour une utilisation hors ligne et réduisez la consommation de données.",
+  "audioSettings": "Paramètres audio",
+  "playbackSpeed": "Vitesse de lecture",
+  "playbackSpeedDesc": "Ajustez la vitesse de la récitation du Coran.",
+  "waitForCurrentDownloadToFinish": "Veuillez attendre la fin du téléchargement en cours.",
+  "areYouSure": "Es-tu sûr?",
+  "checkYourInternetConnection": "Vérifiez votre connexion Internet."
 }

@@ -1044,10 +1044,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get scrollWithRecitation => 'তিলাওয়াতের সাথে স্ক্রোল করুন';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'দ্রুত অ্যাক্সেস';
 
   @override
@@ -1057,44 +1053,49 @@ class AppLocalizationsBn extends AppLocalizations {
   String get tajweedGuide => 'তাজবীদ গাইড';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'সক্ষম করা হলে, কুরআনের আয়াতটি অডিও تلاوتের সাথে সিঙ্কে স্বয়ংক্রিয়ভাবে স্ক্রোল হবে।';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'কনফিগারেশন';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'ব্যাকআপ থেকে পুনরুদ্ধার করুন';
 
   @override
-  String get search => 'Search';
+  String get history => 'ইতিহাস';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'অনুসন্ধান করুন';
+
+  @override
+  String get useAudioStream => 'অডিও স্ট্রিম ব্যবহার করুন';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'ডাউনলোড করার পরিবর্তে সরাসরি ইন্টারনেট থেকে অডিও স্ট্রিম করুন।';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'অফলাইন ব্যবহারের জন্য অডিও ডাউনলোড করুন এবং ডেটা খরচ কমান।';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'অডিও সেটিংস';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'প্লেব্যাক গতি';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'কুরআন তেলাওয়াতের গতি সামঞ্জস্য করুন।';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'বর্তমান ডাউনলোড শেষ হওয়ার জন্য অনুগ্রহ করে অপেক্ষা করুন।';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'আপনি কি নিশ্চিত?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection =>
+      'আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।';
 }

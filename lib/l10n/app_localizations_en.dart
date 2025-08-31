@@ -1041,10 +1041,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scrollWithRecitation => 'Scroll with Recitation';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Quick Access';
 
   @override
@@ -1052,6 +1048,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tajweedGuide => 'Tajweed Guide';
+
+  @override
+  String get scrollWithRecitationDesc =>
+      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
 
   @override
   String get configuration => 'Configuration';

@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Прокрутка с чтением",
   "quickAccess": "Быстрый доступ",
   "initiallyScrollAyah": "Первоначально прокрутите до аята",
-  "tajweedGuide": "Руководство по таджвиду"
+  "tajweedGuide": "Руководство по таджвиду",
+  "scrollWithRecitationDesc": "При включении аят Корана будет автоматически прокручиваться синхронно с аудио-декламацией.",
+  "configuration": "Конфигурация",
+  "restoreFromBackup": "Восстановить из резервной копии",
+  "history": "История",
+  "search": "Поиск",
+  "useAudioStream": "Использовать аудиопоток",
+  "useAudioStreamDesc": "Потоковое аудио прямо из Интернета вместо загрузки.",
+  "notUseAudioStreamDesc": "Загрузите аудио для использования в автономном режиме и сократите потребление данных.",
+  "audioSettings": "Настройки аудио",
+  "playbackSpeed": "Скорость воспроизведения",
+  "playbackSpeedDesc": "Отрегулируйте скорость чтения Корана.",
+  "waitForCurrentDownloadToFinish": "Пожалуйста, подождите, пока текущая загрузка не завершится.",
+  "areYouSure": "Вы уверены?",
+  "checkYourInternetConnection": "Проверьте подключение к Интернету."
 }

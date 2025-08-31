@@ -1041,10 +1041,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get scrollWithRecitation => 'Gulir dengan Bacaan';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Akses Cepat';
 
   @override
@@ -1054,44 +1050,48 @@ class AppLocalizationsId extends AppLocalizations {
   String get tajweedGuide => 'Panduan Tajwid';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Saat diaktifkan, ayat Alquran akan otomatis bergulir selaras dengan pembacaan audio.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Konfigurasi';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Pulihkan Dari Cadangan';
 
   @override
-  String get search => 'Search';
+  String get history => 'Sejarah';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Cari';
+
+  @override
+  String get useAudioStream => 'Gunakan Aliran Audio';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Streaming audio langsung dari internet, bukan mengunduh.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Unduh audio untuk penggunaan offline dan kurangi konsumsi data.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Pengaturan Audio';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Kecepatan Putar';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'Sesuaikan kecepatan Bacaan Alquran.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Harap tunggu hingga unduhan saat ini selesai.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'Apakah kamu yakin?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection => 'Periksa koneksi internet Anda.';
 }

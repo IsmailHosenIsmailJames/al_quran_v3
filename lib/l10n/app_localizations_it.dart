@@ -1052,10 +1052,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get scrollWithRecitation => 'Scorri con la recitazione';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Accesso rapido';
 
   @override
@@ -1065,44 +1061,50 @@ class AppLocalizationsIt extends AppLocalizations {
   String get tajweedGuide => 'Guida al Tajweed';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Quando abilitato, l\'ayah del Corano scorrerà automaticamente in sincronia con la recitazione audio.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Configurazione';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Ripristina da backup';
 
   @override
-  String get search => 'Search';
+  String get history => 'Storia';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Ricerca';
+
+  @override
+  String get useAudioStream => 'Usa streaming audio';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Riproduci l\'audio in streaming directly da Internet invece di scaricarlo.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Scarica l\'audio per l\'utilizzo offline e riduci il consumo di dati.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Impostazioni audio';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Velocità di riproduzione';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc =>
+      'Regola la velocità della recitazione del Corano.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Attendi il completamento del download corrente.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'Sei sicuro?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection =>
+      'Controlla la tua connessione internet.';
 }

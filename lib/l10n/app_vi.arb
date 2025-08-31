@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Cuộn với đọc thuộc lòng",
   "quickAccess": "Truy cập nhanh",
   "initiallyScrollAyah": "Ban đầu cuộn đến ayah",
-  "tajweedGuide": "Hướng dẫn Tajweed"
+  "tajweedGuide": "Hướng dẫn Tajweed",
+  "scrollWithRecitationDesc": "Khi được bật, ayah Kinh Qur'an sẽ tự động cuộn đồng bộ với phần đọc lại âm thanh.",
+  "configuration": "Cấu hình",
+  "restoreFromBackup": "Khôi phục từ bản sao lưu",
+  "history": "Lịch sử",
+  "search": "Tìm kiếm",
+  "useAudioStream": "Sử dụng luồng âm thanh",
+  "useAudioStreamDesc": "Truyền phát âm thanh trực tiếp từ internet thay vì tải xuống.",
+  "notUseAudioStreamDesc": "Tải xuống âm thanh để sử dụng ngoại tuyến và giảm mức tiêu thụ dữ liệu.",
+  "audioSettings": "Cài đặt âm thanh",
+  "playbackSpeed": "Tốc độ phát lại",
+  "playbackSpeedDesc": "Điều chỉnh tốc độ đọc Kinh Qur'an.",
+  "waitForCurrentDownloadToFinish": "Vui lòng đợi quá trình tải xuống hiện tại kết thúc.",
+  "areYouSure": "Bạn có chắc không?",
+  "checkYourInternetConnection": "Kiểm tra kết nối internet của bạn."
 }

@@ -1028,10 +1028,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get scrollWithRecitation => '낭송으로 스크롤';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => '빠른 접근';
 
   @override
@@ -1041,44 +1037,45 @@ class AppLocalizationsKo extends AppLocalizations {
   String get tajweedGuide => '타지위드 가이드';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      '활성화되면 꾸란 아야가 오디오 암송과 동기화되어 자동으로 스크롤됩니다.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => '구성';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => '백업에서 복원';
 
   @override
-  String get search => 'Search';
+  String get history => '역사';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => '검색';
 
   @override
-  String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+  String get useAudioStream => '오디오 스트림 사용';
 
   @override
-  String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+  String get useAudioStreamDesc => '다운로드하는 대신 인터넷에서 직접 오디오를 스트리밍합니다.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get notUseAudioStreamDesc => '오프라인 사용을 위해 오디오를 다운로드하고 데이터 소비를 줄입니다.';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get audioSettings => '오디오 설정';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeed => '재생 속도';
 
   @override
-  String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+  String get playbackSpeedDesc => '꾸란 암송 속도를 조정하십시오.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get waitForCurrentDownloadToFinish => '현재 다운로드가 완료될 때까지 기다리십시오.';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get areYouSure => '확실합니까?';
+
+  @override
+  String get checkYourInternetConnection => '인터넷 연결을 확인하십시오.';
 }
