@@ -2089,6 +2089,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your internet connection.'**
   String get checkYourInternetConnection;
+
+  /// No description provided for @audioDownloadAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Need to download {requiredDownload} of {totalVersesCount} ayahs.'**
+  String audioDownloadAlert(int requiredDownload, int totalVersesCount);
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// No description provided for @audioDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio Download'**
+  String get audioDownload;
 }
 
 class _AppLocalizationsDelegate

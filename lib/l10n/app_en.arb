@@ -574,5 +574,18 @@
   "playbackSpeedDesc": "Adjust the speed of the Quran Recitation.",
   "waitForCurrentDownloadToFinish": "Please wait for the current download to finish.",
   "areYouSure": "Are you sure?",
-  "checkYourInternetConnection":"Check your internet connection."
+  "checkYourInternetConnection": "Check your internet connection.",
+  "audioDownloadAlert": "Need to download {requiredDownload} of {totalVersesCount} ayahs.",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
+  "download": "Download",
+  "audioDownload": "Audio Download"
 }

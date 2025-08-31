@@ -87,7 +87,7 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
       searchController.text.trim(),
     );
     return Scaffold(
-      appBar: AppBar(title: const Text("Audio Download")),
+      appBar: AppBar(title: Text(l10n.audioDownload)),
       body: ListView(
         padding: const EdgeInsets.all(12.0),
         children: [

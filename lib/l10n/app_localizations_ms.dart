@@ -1095,4 +1095,15 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get checkYourInternetConnection => 'Periksa sambungan internet anda.';
+
+  @override
+  String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
+    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+  }
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get audioDownload => 'Audio Download';
 }

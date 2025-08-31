@@ -1095,4 +1095,15 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get checkYourInternetConnection =>
       'Интернет қосылымыңызды тексеріңіз.';
+
+  @override
+  String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
+    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+  }
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get audioDownload => 'Audio Download';
 }

@@ -2,19 +2,23 @@ import "dart:async";
 import "dart:developer";
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:dio/dio.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
@@ -205,7 +209,7 @@ class AudioPlayerManager {
     }
   }
 
-  Future<int> getFilesCount(
+  static Future<int> getFilesCount(
     ReciterInfoModel reciter,
     SurahInfoModel surah,
   ) async {
@@ -278,8 +282,12 @@ class AudioPlayerManager {
       await audioPlayer.clearAudioSources();
     }
 
-    final context = navigatorKey.currentContext!;
+    final BuildContext context = navigatorKey.currentContext!;
 
+    if (await shouldContinuePlaying(context, reciterInfoModel, ayahKey) ==
+        false) {
+      return;
+    }
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
@@ -317,6 +325,78 @@ class AudioPlayerManager {
     if (instantPlay) await audioPlayer.play();
   }
 
+  static Future<bool> shouldContinuePlaying(
+    BuildContext context,
+    ReciterInfoModel reciterInfoModel,
+    String startAyahKey,
+  ) async {
+    log("Checking existing Download");
+    bool useAudioStream = context.read<QuranViewCubit>().state.useAudioStream;
+    if (useAudioStream == false) {
+      SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+        Map<String, dynamic>.from(metaDataSurah[startAyahKey.split(":").first]),
+      );
+      int count = await getFilesCount(reciterInfoModel, surahInfoModel);
+      if (count >= surahInfoModel.versesCount) {
+        log(
+          "Already $count/${surahInfoModel.versesCount} ayahs downloaded",
+          name: "Audio",
+        );
+        return true;
+      } else {
+        log("Need to download some ayahs");
+
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              insetPadding: const EdgeInsets.all(10),
+              title: Text(
+                AppLocalizations.of(context).audioDownloadAlert(
+                  surahInfoModel.versesCount - count,
+                  surahInfoModel.versesCount,
+                ),
+              ),
+              actions: [
+                TextButton.icon(
+                  style: TextButton.styleFrom(foregroundColor: Colors.red),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close),
+                  label: Text(AppLocalizations.of(context).cancel),
+                ),
+                TextButton.icon(
+                  style: TextButton.styleFrom(foregroundColor: Colors.green),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => AudioDownloadScreen(
+                              initDownloadSurah: surahInfoModel,
+                              reciterInfoModel:
+                                  context
+                                      .read<SegmentedQuranReciterCubit>()
+                                      .state,
+                            ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(FluentIcons.arrow_download_24_regular),
+                  label: Text(AppLocalizations.of(context).download),
+                ),
+              ],
+            );
+          },
+        );
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
   static Future<void> playMultipleAyahAsPlaylist({
     required String startAyahKey,
     required String endAyahKey,
@@ -330,8 +410,14 @@ class AudioPlayerManager {
     if (audioPlayer.processingState == ProcessingState.loading) {
       await audioPlayer.clearAudioSources();
     }
-    final context = navigatorKey.currentContext!;
 
+    // check usr preference : Use Audio Stream
+
+    final BuildContext context = navigatorKey.currentContext!;
+    if (await shouldContinuePlaying(context, reciterInfoModel, startAyahKey) ==
+        false) {
+      return;
+    }
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
 
