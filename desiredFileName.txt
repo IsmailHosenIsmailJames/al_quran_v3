@@ -1,1 +1,145 @@
-{}
+{
+  "ar": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "az": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "bn": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "de": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "es": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "fa": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "fr": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "hi": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "id": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "it": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ja": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "kk": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ko": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ms": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "pa": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ps": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "pt": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ru": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "sw": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ta": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "tr": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "ur": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "vi": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ],
+
+  "zh": [
+    "audioDownloadAlert",
+    "download",
+    "audioDownload"
+  ]
+}

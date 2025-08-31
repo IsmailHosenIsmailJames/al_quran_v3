@@ -1097,4 +1097,15 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get checkYourInternetConnection =>
       'İnternet bağlantınızı kontrol edin.';
+
+  @override
+  String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
+    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+  }
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get audioDownload => 'Audio Download';
 }
