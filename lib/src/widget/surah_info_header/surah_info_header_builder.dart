@@ -167,7 +167,16 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => const AudioDownloadScreen(),
+                                    (context) => AudioDownloadScreen(
+                                      initDownloadSurah:
+                                          headerInfoModel.surahInfoModel,
+                                      reciterInfoModel:
+                                          context
+                                              .read<
+                                                SegmentedQuranReciterCubit
+                                              >()
+                                              .state,
+                                    ),
                               ),
                             );
                           },

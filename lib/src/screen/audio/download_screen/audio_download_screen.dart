@@ -1,8 +1,10 @@
+import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
@@ -21,7 +23,13 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 
 class AudioDownloadScreen extends StatefulWidget {
-  const AudioDownloadScreen({super.key});
+  final SurahInfoModel? initDownloadSurah;
+  final ReciterInfoModel? reciterInfoModel;
+  const AudioDownloadScreen({
+    super.key,
+    this.initDownloadSurah,
+    this.reciterInfoModel,
+  });
 
   @override
   State<AudioDownloadScreen> createState() => _AudioDownloadScreenState();
@@ -29,6 +37,42 @@ class AudioDownloadScreen extends StatefulWidget {
 
 class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
   final TextEditingController searchController = TextEditingController();
+  Map<int, GlobalKey> keysOfAllSurah = {};
+  @override
+  void initState() {
+    for (int i = 0; i < 114; i++) {
+      keysOfAllSurah.addAll({i + 1: GlobalKey()});
+    }
+    // scroll after widgets build complete
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (widget.reciterInfoModel != null) {
+        context.read<AudioTabReciterCubit>().changeReciter(
+          widget.reciterInfoModel!,
+        );
+      }
+      log("Changes reciter", name: "Audio");
+      if (widget.initDownloadSurah != null) {
+        final key = keysOfAllSurah[widget.initDownloadSurah!.id];
+        log(key?.currentContext.toString() ?? "null");
+        if (key != null && key.currentContext != null) {
+          await Scrollable.ensureVisible(
+            key.currentContext!,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+          log("Scrolling finished to specific surah");
+          await onDownloadButtonPressed(
+            context,
+            AppLocalizations.of(context),
+            widget.initDownloadSurah!,
+          );
+        }
+      } else {
+        log("No Surah required to download", name: "Audio");
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,14 +156,12 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
     AudioDownloadState state,
     ThemeState themeState,
   ) {
-    final dir = Directory(
-      AudioPlayerManager.getExpectedSurahDirectoryLocation(
-        surahInfoModel: filteredSurah[index],
-        reciterInfoModel: context.read<AudioTabReciterCubit>().state,
-      ),
-    );
     return FutureBuilder(
-      future: getFilesCount(dir),
+      key: keysOfAllSurah[filteredSurah[index].id],
+      future: getFilesCount(
+        context.read<AudioTabReciterCubit>().state,
+        filteredSurah[index],
+      ),
       builder: (context, snapshot) {
         bool isAllDownloaded =
             filteredSurah[index].versesCount <= (snapshot.data?.toInt() ?? 0);
@@ -164,7 +206,19 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                                       foregroundColor: Colors.red,
                                     ),
                                     onPressed: () async {
-                                      final files = dir.listSync();
+                                      final files =
+                                          Directory(
+                                            AudioPlayerManager.getExpectedSurahDirectoryLocation(
+                                              surahInfoModel:
+                                                  filteredSurah[index],
+                                              reciterInfoModel:
+                                                  context
+                                                      .read<
+                                                        AudioTabReciterCubit
+                                                      >()
+                                                      .state,
+                                            ),
+                                          ).listSync();
                                       for (final e in files) {
                                         await e.delete();
                                       }
@@ -226,28 +280,11 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                       backgroundColor: themeState.primaryShade100,
                     ),
                     onPressed: () async {
-                      final audioDownloadCubit =
-                          context.read<AudioDownloadCubit>();
-                      if (audioDownloadCubit.state.isDownloading) {
-                        Fluttertoast.showToast(
-                          msg: l10n.waitForCurrentDownloadToFinish,
-                        );
-                        return;
-                      }
-
-                      audioDownloadCubit.updateIsDownloading(true);
-                      audioDownloadCubit.updateDownloadingSurahNumber(
-                        filteredSurah[index].id,
+                      await onDownloadButtonPressed(
+                        context,
+                        l10n,
+                        filteredSurah[index],
                       );
-
-                      await AudioPlayerManager.downloadSurah(
-                        surahInfoModel: filteredSurah[index],
-                        reciterInfoModel:
-                            context.read<AudioTabReciterCubit>().state,
-                        audioDownloadCubit: audioDownloadCubit,
-                      );
-                      audioDownloadCubit.updateIsDownloading(false);
-                      audioDownloadCubit.updateDownloadingSurahNumber(0);
                     },
                     icon: const Icon(FluentIcons.arrow_download_24_filled),
                   ),
@@ -256,7 +293,41 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
     );
   }
 
-  Future<int> getFilesCount(Directory dir) async {
+  Future<void> onDownloadButtonPressed(
+    BuildContext context,
+    AppLocalizations l10n,
+    SurahInfoModel surah,
+  ) async {
+    final audioDownloadCubit = context.read<AudioDownloadCubit>();
+    if (audioDownloadCubit.state.isDownloading) {
+      Fluttertoast.showToast(msg: l10n.waitForCurrentDownloadToFinish);
+      return;
+    }
+
+    audioDownloadCubit.updateIsDownloading(true);
+    audioDownloadCubit.updateDownloadingSurahNumber(surah.id);
+
+    log("Downloading Audio Files", name: "Audio");
+
+    await AudioPlayerManager.downloadSurah(
+      surahInfoModel: surah,
+      reciterInfoModel: context.read<AudioTabReciterCubit>().state,
+      audioDownloadCubit: audioDownloadCubit,
+    );
+    audioDownloadCubit.updateIsDownloading(false);
+    audioDownloadCubit.updateDownloadingSurahNumber(0);
+    return;
+  }
+
+  Future<int> getFilesCount(
+    ReciterInfoModel reciter,
+    SurahInfoModel surah,
+  ) async {
+    String path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
+      surahInfoModel: surah,
+      reciterInfoModel: reciter,
+    );
+    final dir = Directory(path);
     if (await dir.exists()) {
       return dir.listSync().length;
     } else {

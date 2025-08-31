@@ -205,6 +205,22 @@ class AudioPlayerManager {
     }
   }
 
+  Future<int> getFilesCount(
+    ReciterInfoModel reciter,
+    SurahInfoModel surah,
+  ) async {
+    String path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
+      surahInfoModel: surah,
+      reciterInfoModel: reciter,
+    );
+    final dir = Directory(path);
+    if (await dir.exists()) {
+      return dir.listSync().length;
+    } else {
+      return 0;
+    }
+  }
+
   static String getExpectedAudioFileLocation({
     required SurahInfoModel surahInfoModel,
     required int ayahNumber,
