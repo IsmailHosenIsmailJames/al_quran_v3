@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Ajuste a velocidade da Recitação do Alcorão.",
   "waitForCurrentDownloadToFinish": "Aguarde o download atual terminar.",
   "areYouSure": "Você tem certeza?",
-  "checkYourInternetConnection": "Verifique sua conexão com a internet."
+  "checkYourInternetConnection": "Verifique sua conexão com a internet.",
+  "audioDownload": "Download de áudio",
+  "download": "Baixar",
+  "audioDownloadAlert": "Precisa baixar {requiredDownload} de {totalVersesCount} ayahs."
 }

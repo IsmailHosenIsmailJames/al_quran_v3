@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "د قرآن کریم د تلاوت سرعت تنظیم کړئ.",
   "waitForCurrentDownloadToFinish": "مهرباني وکړئ د اوسني ډاونلوډ پای ته رسیدو ته انتظار وکړئ.",
   "areYouSure": "ایا ته ډاډه یې؟",
-  "checkYourInternetConnection": "خپل انټرنیټ اتصال وګورئ."
+  "checkYourInternetConnection": "خپل انټرنیټ اتصال وګورئ.",
+  "audioDownload": "آډیو ډاونلوډ",
+  "download": "ډاونلوډ",
+  "audioDownloadAlert": "د {totalVersesCount} آیتونو څخه {requiredDownload} ډاونلوډ کولو ته اړتیا لرئ."
 }

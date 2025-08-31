@@ -1101,12 +1101,12 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '$totalVersesCount আয়াতের মধ্যে $requiredDownload টি ডাউনলোড করতে হবে।';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'ডাউনলোড';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'অডিও ডাউনলোড';
 }

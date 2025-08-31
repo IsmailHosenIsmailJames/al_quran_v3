@@ -1063,12 +1063,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '需要下载 $totalVersesCount 节经文中的 $requiredDownload 节。';
   }
 
   @override
-  String get download => 'Download';
+  String get download => '下载';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => '音频下载';
 }

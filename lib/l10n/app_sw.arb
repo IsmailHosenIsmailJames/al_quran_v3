@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Rekebisha kasi ya Usomaji wa Kurani.",
   "waitForCurrentDownloadToFinish": "Tafadhali subiri upakuaji wa sasa ukamilike.",
   "areYouSure": "Una uhakika?",
-  "checkYourInternetConnection": "Angalia muunganisho wako wa intaneti."
+  "checkYourInternetConnection": "Angalia muunganisho wako wa intaneti.",
+  "audioDownload": "Upakuaji wa Sauti",
+  "download": "Pakua",
+  "audioDownloadAlert": "Unahitaji kupakua {requiredDownload} kati ya {totalVersesCount} ayah."
 }

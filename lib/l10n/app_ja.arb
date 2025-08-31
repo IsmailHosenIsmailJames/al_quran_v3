@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "コーランの朗読の速度を調整します。",
   "waitForCurrentDownloadToFinish": "現在のダウンロードが完了するまでお待ちください。",
   "areYouSure": "本気ですか？",
-  "checkYourInternetConnection": "インターネット接続を確認してください。"
+  "checkYourInternetConnection": "インターネット接続を確認してください。",
+  "audioDownload": "オーディオのダウンロード",
+  "download": "ダウンロード",
+  "audioDownloadAlert": "{totalVersesCount}アーヤのうち{requiredDownload}をダウンロードする必要があります。"
 }

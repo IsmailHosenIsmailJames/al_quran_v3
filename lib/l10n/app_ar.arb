@@ -344,5 +344,8 @@
   "playbackSpeedDesc": "ضبط سرعة تلاوة القرآن.",
   "waitForCurrentDownloadToFinish": "يرجى الانتظار حتى ينتهي التنزيل الحالي.",
   "areYouSure": "هل أنت متأكد؟",
-  "checkYourInternetConnection": "تحقق من اتصالك بالإنترنت."
+  "checkYourInternetConnection": "تحقق من اتصالك بالإنترنت.",
+  "audioDownload": "تحميل الصوت",
+  "download": "تحميل",
+  "audioDownloadAlert": "تحتاج إلى تحميل {requiredDownload} من {totalVersesCount} آيات."
 }

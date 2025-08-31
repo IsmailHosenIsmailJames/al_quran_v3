@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Quran tilavətinin sürətini tənzimləyin.",
   "waitForCurrentDownloadToFinish": "Zəhmət olmasa, cari endirmənin bitməsini gözləyin.",
   "areYouSure": "Əminsiniz?",
-  "checkYourInternetConnection": "İnternet bağlantınızı yoxlayın."
+  "checkYourInternetConnection": "İnternet bağlantınızı yoxlayın.",
+  "audioDownload": "Səs Yükləmə",
+  "download": "Yüklə",
+  "audioDownloadAlert": "{totalVersesCount} ayədən {requiredDownload} yükləmək lazımdır."
 }

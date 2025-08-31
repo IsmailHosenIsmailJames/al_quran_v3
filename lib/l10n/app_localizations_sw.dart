@@ -1103,12 +1103,12 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return 'Unahitaji kupakua $requiredDownload kati ya $totalVersesCount ayah.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'Pakua';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'Upakuaji wa Sauti';
 }

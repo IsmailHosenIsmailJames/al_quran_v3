@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "꾸란 암송 속도를 조정하십시오.",
   "waitForCurrentDownloadToFinish": "현재 다운로드가 완료될 때까지 기다리십시오.",
   "areYouSure": "확실합니까?",
-  "checkYourInternetConnection": "인터넷 연결을 확인하십시오."
+  "checkYourInternetConnection": "인터넷 연결을 확인하십시오.",
+  "audioDownload": "오디오 다운로드",
+  "download": "다운로드",
+  "audioDownloadAlert": "{totalVersesCount}개의 아야 중 {requiredDownload}개를 다운로드해야 합니다."
 }
