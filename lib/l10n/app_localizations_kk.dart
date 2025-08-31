@@ -1098,12 +1098,12 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '$totalVersesCount аяттың $requiredDownload жүктеп алу қажет.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'Жүктеп алу';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'Аудио жүктеу';
 }

@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "调整古兰经背诵的速度。",
   "waitForCurrentDownloadToFinish": "请等待当前下载完成。",
   "areYouSure": "你确定吗？",
-  "checkYourInternetConnection": "检查您的网络连接。"
+  "checkYourInternetConnection": "检查您的网络连接。",
+  "audioDownload": "音频下载",
+  "download": "下载",
+  "audioDownloadAlert": "需要下载 {totalVersesCount} 节经文中的 {requiredDownload} 节。"
 }

@@ -343,5 +343,8 @@
   "playbackSpeedDesc": "قرآن کی تلاوت کی رفتار کو ایڈجسٹ کریں۔",
   "waitForCurrentDownloadToFinish": "براہ کرم موجودہ ڈاؤن لوڈ کے ختم ہونے کا انتظار کریں۔",
   "areYouSure": "کیا تمہیں یقین ہے؟",
-  "checkYourInternetConnection": "اپنا انٹرنیٹ کنکشن چیک کریں۔"
+  "checkYourInternetConnection": "اپنا انٹرنیٹ کنکشن چیک کریں۔",
+  "audioDownload": "آڈیو ڈاؤن لوڈ",
+  "download": "ڈاؤن لوڈ",
+  "audioDownloadAlert": "{totalVersesCount} آیات میں سے {requiredDownload} ڈاؤن لوڈ کرنے کی ضرورت ہے۔"
 }

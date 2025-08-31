@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "कुरान पाठ की गति को समायोजित करें।",
   "waitForCurrentDownloadToFinish": "कृपया वर्तमान डाउनलोड समाप्त होने की प्रतीक्षा करें।",
   "areYouSure": "क्या आपको यकीन है?",
-  "checkYourInternetConnection": "अपना इंटरनेट कनेक्शन जांचें।"
+  "checkYourInternetConnection": "अपना इंटरनेट कनेक्शन जांचें।",
+  "audioDownload": "ऑडियो डाउनलोड",
+  "download": "डाउनलोड",
+  "audioDownloadAlert": "{totalVersesCount} आयतों में से {requiredDownload} डाउनलोड करने की आवश्यकता है।"
 }

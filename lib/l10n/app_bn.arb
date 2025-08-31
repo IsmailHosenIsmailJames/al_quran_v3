@@ -343,5 +343,8 @@
   "playbackSpeedDesc": "কুরআন তেলাওয়াতের গতি সামঞ্জস্য করুন।",
   "waitForCurrentDownloadToFinish": "বর্তমান ডাউনলোড শেষ হওয়ার জন্য অনুগ্রহ করে অপেক্ষা করুন।",
   "areYouSure": "আপনি কি নিশ্চিত?",
-  "checkYourInternetConnection": "আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।"
+  "checkYourInternetConnection": "আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।",
+  "audioDownload": "অডিও ডাউনলোড",
+  "download": "ডাউনলোড",
+  "audioDownloadAlert": "{totalVersesCount} আয়াতের মধ্যে {requiredDownload} টি ডাউনলোড করতে হবে।"
 }

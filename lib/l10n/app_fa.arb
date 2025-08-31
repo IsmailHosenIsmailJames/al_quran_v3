@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "سرعت تلاوت قرآن را تنظیم کنید.",
   "waitForCurrentDownloadToFinish": "لطفا منتظر بمانید تا بارگیری فعلی تمام شود.",
   "areYouSure": "مطمئنی؟",
-  "checkYourInternetConnection": "اتصال اینترنت خود را بررسی کنید."
+  "checkYourInternetConnection": "اتصال اینترنت خود را بررسی کنید.",
+  "audioDownload": "دانلود صوتی",
+  "download": "دانلود",
+  "audioDownloadAlert": "نیاز به دانلود {requiredDownload} از {totalVersesCount} آیه است."
 }

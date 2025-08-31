@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Ajusta la velocidad de la recitación del Corán.",
   "waitForCurrentDownloadToFinish": "Espere a que finalice la descarga actual.",
   "areYouSure": "¿Estás seguro?",
-  "checkYourInternetConnection": "Revisa tu conexión a internet."
+  "checkYourInternetConnection": "Revisa tu conexión a internet.",
+  "audioDownload": "Descarga de audio",
+  "download": "Descargar",
+  "audioDownloadAlert": "Necesitas descargar {requiredDownload} de {totalVersesCount} aleyas."
 }

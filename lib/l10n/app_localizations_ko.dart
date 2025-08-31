@@ -1081,12 +1081,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '$totalVersesCount개의 아야 중 $requiredDownload개를 다운로드해야 합니다.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => '다운로드';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => '오디오 다운로드';
 }

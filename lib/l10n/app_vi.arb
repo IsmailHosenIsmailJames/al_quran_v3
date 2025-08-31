@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Điều chỉnh tốc độ đọc Kinh Qur'an.",
   "waitForCurrentDownloadToFinish": "Vui lòng đợi quá trình tải xuống hiện tại kết thúc.",
   "areYouSure": "Bạn có chắc không?",
-  "checkYourInternetConnection": "Kiểm tra kết nối internet của bạn."
+  "checkYourInternetConnection": "Kiểm tra kết nối internet của bạn.",
+  "audioDownload": "Tải xuống âm thanh",
+  "download": "Tải xuống",
+  "audioDownloadAlert": "Cần tải xuống {requiredDownload} trong tổng số {totalVersesCount} ayah."
 }

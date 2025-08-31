@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Отрегулируйте скорость чтения Корана.",
   "waitForCurrentDownloadToFinish": "Пожалуйста, подождите, пока текущая загрузка не завершится.",
   "areYouSure": "Вы уверены?",
-  "checkYourInternetConnection": "Проверьте подключение к Интернету."
+  "checkYourInternetConnection": "Проверьте подключение к Интернету.",
+  "audioDownload": "Загрузка аудио",
+  "download": "Скачать",
+  "audioDownloadAlert": "Необходимо загрузить {requiredDownload} из {totalVersesCount} аятов."
 }

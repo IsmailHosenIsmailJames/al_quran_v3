@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Kuran Okuma hızını ayarlayın.",
   "waitForCurrentDownloadToFinish": "Lütfen mevcut indirmenin bitmesini bekleyin.",
   "areYouSure": "Emin misin?",
-  "checkYourInternetConnection": "İnternet bağlantınızı kontrol edin."
+  "checkYourInternetConnection": "İnternet bağlantınızı kontrol edin.",
+  "audioDownload": "Ses İndirme",
+  "download": "İndir",
+  "audioDownloadAlert": "{totalVersesCount} ayetten {requiredDownload} tanesini indirmeniz gerekiyor."
 }

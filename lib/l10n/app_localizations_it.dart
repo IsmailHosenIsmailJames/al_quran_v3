@@ -1110,12 +1110,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return 'Necessario scaricare $requiredDownload di $totalVersesCount ayah.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'Scarica';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'Download audio';
 }

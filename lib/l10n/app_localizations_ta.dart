@@ -1114,12 +1114,12 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '$totalVersesCount வசனங்களில் $requiredDownload வசனங்களைப் பதிவிறக்க வேண்டும்.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'பதிவிறக்க';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'ஆடியோ பதிவிறக்கம்';
 }

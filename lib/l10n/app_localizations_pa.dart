@@ -1097,12 +1097,12 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return '$totalVersesCount ਆਇਤਾਂ ਵਿੱਚੋਂ $requiredDownload ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'ਡਾਊਨਲੋਡ';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'ਆਡੀਓ ਡਾਊਨਲੋਡ';
 }

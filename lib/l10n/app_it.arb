@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Regola la velocità della recitazione del Corano.",
   "waitForCurrentDownloadToFinish": "Attendi il completamento del download corrente.",
   "areYouSure": "Sei sicuro?",
-  "checkYourInternetConnection": "Controlla la tua connessione internet."
+  "checkYourInternetConnection": "Controlla la tua connessione internet.",
+  "audioDownload": "Download audio",
+  "download": "Scarica",
+  "audioDownloadAlert": "Necessario scaricare {requiredDownload} di {totalVersesCount} ayah."
 }

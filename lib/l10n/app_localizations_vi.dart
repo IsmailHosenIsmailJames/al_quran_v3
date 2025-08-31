@@ -1101,12 +1101,12 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Need to download $requiredDownload of $totalVersesCount ayahs.';
+    return 'Cần tải xuống $requiredDownload trong tổng số $totalVersesCount ayah.';
   }
 
   @override
-  String get download => 'Download';
+  String get download => 'Tải xuống';
 
   @override
-  String get audioDownload => 'Audio Download';
+  String get audioDownload => 'Tải xuống âm thanh';
 }

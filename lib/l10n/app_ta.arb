@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "குர்ஆன் பாராயணத்தின் வேகத்தைச் சரிசெய்யவும்.",
   "waitForCurrentDownloadToFinish": "தற்போதைய பதிவிறக்கம் முடிவடையும் வரை காத்திருக்கவும்.",
   "areYouSure": "உனக்கு உறுதியாக தெரியுமா?",
-  "checkYourInternetConnection": "உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்."
+  "checkYourInternetConnection": "உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்.",
+  "audioDownload": "ஆடியோ பதிவிறக்கம்",
+  "download": "பதிவிறக்க",
+  "audioDownloadAlert": "{totalVersesCount} வசனங்களில் {requiredDownload} வசனங்களைப் பதிவிறக்க வேண்டும்."
 }

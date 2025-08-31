@@ -322,5 +322,8 @@
   "playbackSpeedDesc": "Passen Sie die Geschwindigkeit der Koranrezitation an.",
   "waitForCurrentDownloadToFinish": "Bitte warten Sie, bis der aktuelle Download abgeschlossen ist.",
   "areYouSure": "Bist du sicher?",
-  "checkYourInternetConnection": "Überprüfen Sie Ihre Internetverbindung."
+  "checkYourInternetConnection": "Überprüfen Sie Ihre Internetverbindung.",
+  "audioDownload": "Audio-Download",
+  "download": "Herunterladen",
+  "audioDownloadAlert": "Muss {requiredDownload} von {totalVersesCount} Ayahs herunterladen."
 }
