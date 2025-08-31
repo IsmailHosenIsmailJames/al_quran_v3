@@ -1106,4 +1106,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get areYouSure => 'Are you sure?';
+
+  @override
+  String get checkYourInternetConnection => 'Check your internet connection.';
 }

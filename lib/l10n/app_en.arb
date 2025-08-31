@@ -573,5 +573,6 @@
   "playbackSpeed": "Playback Speed",
   "playbackSpeedDesc": "Adjust the speed of the Quran Recitation.",
   "waitForCurrentDownloadToFinish": "Please wait for the current download to finish.",
-  "areYouSure": "Are you sure?"
+  "areYouSure": "Are you sure?",
+  "checkYourInternetConnection":"Check your internet connection."
 }

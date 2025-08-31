@@ -38,7 +38,7 @@ class NonTajweedScriptView extends StatelessWidget {
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.textStyle?.fontSize ?? 24,
       height: scriptInfo.textStyle?.height ?? 2,
-      fontFamily: isUthmani ? "QPC_Hafs" : "IndopakNastaleeq",
+      fontFamily: isUthmani ? "QPC_Hafs" : "AlQuranNeov5x1",
       letterSpacing: 0,
     );
     if (scriptInfo.wordIndex != null) {
