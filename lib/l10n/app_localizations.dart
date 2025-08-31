@@ -2083,6 +2083,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure?'**
   String get areYouSure;
+
+  /// No description provided for @checkYourInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your internet connection.'**
+  String get checkYourInternetConnection;
 }
 
 class _AppLocalizationsDelegate

@@ -64,10 +64,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_animate: ^4.5.2
-  firebase_core: ^4.0.0
-  cloud_firestore: ^6.0.0
-  firebase_auth: ^6.0.0
-  google_sign_in: ^7.1.1
+  # firebase_core: ^4.0.0
+  # cloud_firestore: ^6.0.0
+  # firebase_auth: ^6.0.0
+  # google_sign_in: ^7.1.1
 
 dev_dependencies:
   flutter_test:
@@ -88,7 +88,6 @@ flutter:
     - assets/dev/
     - assets/quran_script/
     - assets/meta_data/
-    - assets/address/
     - assets/adhan/
 
   fonts:
@@ -100,22 +99,22 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/AlQuranNeov5x1.ttf
 
-    - family: IndopakNastaleeq
-      fonts:
-        - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+    # - family: IndopakNastaleeq
+    #   fonts:
+    #     - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
 
-    - family: KFGQPC-Uthmanic-HAFS-Regular
-      fonts:
-        - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
+    # - family: KFGQPC-Uthmanic-HAFS-Regular
+    #   fonts:
+    #     - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
 
     - family: NotoSans
       fonts:
         - asset: assets/fonts/App/NotoSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/App/NotoSans-Light.ttf
-          weight: 300
+        # - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
+        #   weight: 200
+        # - asset: assets/fonts/App/NotoSans-Light.ttf
+        #   weight: 300
         - asset: assets/fonts/App/NotoSans-Medium.ttf
           weight: 500
         - asset: assets/fonts/App/NotoSans-Regular.ttf

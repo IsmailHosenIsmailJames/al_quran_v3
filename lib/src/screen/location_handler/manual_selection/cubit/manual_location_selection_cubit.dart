@@ -11,6 +11,9 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
     String? city,
     List? cityList,
     Map? locationData,
+    bool? isLoading,
+    bool? isError,
+    bool? isSuccess,
   }) {
     emit(
       state.copyWith(
@@ -21,6 +24,9 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
         locationData: locationData,
         adminMap: adminMap,
         cityList: cityList,
+        isLoading: isLoading,
+        isError: isError,
+        isSuccess: isSuccess,
       ),
     );
   }
@@ -34,6 +40,9 @@ class ManualLocationSelectionState {
   Map? locationData;
   Map? adminMap;
   List? cityList;
+  bool isLoading = true;
+  bool isError = false;
+  bool isSuccess = false;
 
   ManualLocationSelectionState({
     this.downloadProgress,
@@ -43,6 +52,9 @@ class ManualLocationSelectionState {
     this.locationData,
     this.adminMap,
     this.cityList,
+    this.isLoading = true,
+    this.isError = false,
+    this.isSuccess = false,
   });
 
   ManualLocationSelectionState copyWith({
@@ -53,6 +65,9 @@ class ManualLocationSelectionState {
     Map? locationData,
     Map? adminMap,
     List? cityList,
+    bool? isLoading,
+    bool? isError,
+    bool? isSuccess,
   }) {
     return ManualLocationSelectionState(
       downloadProgress: downloadProgress ?? this.downloadProgress,
@@ -62,6 +77,9 @@ class ManualLocationSelectionState {
       locationData: locationData ?? this.locationData,
       adminMap: adminMap ?? this.adminMap,
       cityList: cityList ?? this.cityList,
+      isLoading: isLoading ?? this.isLoading,
+      isError: isError ?? this.isError,
+      isSuccess: isSuccess ?? this.isSuccess,
     );
   }
 }

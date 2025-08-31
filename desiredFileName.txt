@@ -12,7 +12,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "az": [
@@ -28,7 +29,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "bn": [
@@ -44,7 +46,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "de": [
@@ -60,7 +63,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "es": [
@@ -76,7 +80,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "fa": [
@@ -92,7 +97,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "fr": [
@@ -108,7 +114,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "hi": [
@@ -124,7 +131,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "id": [
@@ -140,7 +148,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "it": [
@@ -156,7 +165,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ja": [
@@ -172,7 +182,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "kk": [
@@ -188,7 +199,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ko": [
@@ -204,7 +216,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ms": [
@@ -220,7 +233,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "pa": [
@@ -236,7 +250,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ps": [
@@ -252,7 +267,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "pt": [
@@ -268,7 +284,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ru": [
@@ -284,7 +301,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "sw": [
@@ -300,7 +318,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ta": [
@@ -316,7 +335,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "tr": [
@@ -332,7 +352,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "ur": [
@@ -348,7 +369,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "vi": [
@@ -364,7 +386,8 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ],
 
   "zh": [
@@ -380,6 +403,7 @@
     "playbackSpeed",
     "playbackSpeedDesc",
     "waitForCurrentDownloadToFinish",
-    "areYouSure"
+    "areYouSure",
+    "checkYourInternetConnection"
   ]
 }
