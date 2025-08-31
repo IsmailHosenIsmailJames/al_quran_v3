@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Okunuşla Kaydır",
   "quickAccess": "Hızlı Erişim",
   "initiallyScrollAyah": "Başlangıçta ayete gidin",
-  "tajweedGuide": "Tecvid Rehberi"
+  "tajweedGuide": "Tecvid Rehberi",
+  "scrollWithRecitationDesc": "Etkinleştirildiğinde, Kur'an ayeti sesli okumayla senkronize olarak otomatik olarak kaydırılacaktır.",
+  "configuration": "Yapılandırma",
+  "restoreFromBackup": "Yedekten Geri Yükle",
+  "history": "Tarih",
+  "search": "Aramak",
+  "useAudioStream": "Ses Akışını Kullan",
+  "useAudioStreamDesc": "İndirmek yerine doğrudan internetten ses akışı yapın.",
+  "notUseAudioStreamDesc": "Çevrimdışı kullanım için ses indirin ve veri tüketimini azaltın.",
+  "audioSettings": "Ses Ayarları",
+  "playbackSpeed": "Oynatma Hızı",
+  "playbackSpeedDesc": "Kuran Okuma hızını ayarlayın.",
+  "waitForCurrentDownloadToFinish": "Lütfen mevcut indirmenin bitmesini bekleyin.",
+  "areYouSure": "Emin misin?",
+  "checkYourInternetConnection": "İnternet bağlantınızı kontrol edin."
 }

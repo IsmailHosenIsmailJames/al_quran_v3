@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Tilavətlə Sürüşdürün",
   "quickAccess": "Sürətli Giriş",
   "initiallyScrollAyah": "Başlanğıcda ayəyə sürüşdürün",
-  "tajweedGuide": "Təcvid Bələdçisi"
+  "tajweedGuide": "Təcvid Bələdçisi",
+  "scrollWithRecitationDesc": "Aktiv olduqda, Quran ayəsi səsli tilavət ilə sinxron olaraq avtomatik sürüşdürüləcək.",
+  "configuration": "Konfiqurasiya",
+  "restoreFromBackup": "Yedəkdən Geri Yüklə",
+  "history": "Tarix",
+  "search": "Axtarış",
+  "useAudioStream": "Audio Axınından istifadə edin",
+  "useAudioStreamDesc": "Yükləmək əvəzinə internetdən birbaşa səs axını.",
+  "notUseAudioStreamDesc": "Oflayn istifadə üçün audio yükləyin və məlumat istehlakını azaldın.",
+  "audioSettings": "Səs Parametrləri",
+  "playbackSpeed": "Oynatma Sürəti",
+  "playbackSpeedDesc": "Quran tilavətinin sürətini tənzimləyin.",
+  "waitForCurrentDownloadToFinish": "Zəhmət olmasa, cari endirmənin bitməsini gözləyin.",
+  "areYouSure": "Əminsiniz?",
+  "checkYourInternetConnection": "İnternet bağlantınızı yoxlayın."
 }

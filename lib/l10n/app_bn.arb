@@ -329,5 +329,19 @@
     "scrollWithRecitation": "তিলাওয়াতের সাথে স্ক্রোল করুন",
     "quickAccess": "দ্রুত অ্যাক্সেস",
   "initiallyScrollAyah": "প্রাথমিকভাবে আয়াতে স্ক্রোল করুন",
-  "tajweedGuide": "তাজবীদ গাইড"
+  "tajweedGuide": "তাজবীদ গাইড",
+  "scrollWithRecitationDesc": "সক্ষম করা হলে, কুরআনের আয়াতটি অডিও تلاوتের সাথে সিঙ্কে স্বয়ংক্রিয়ভাবে স্ক্রোল হবে।",
+  "configuration": "কনফিগারেশন",
+  "restoreFromBackup": "ব্যাকআপ থেকে পুনরুদ্ধার করুন",
+  "history": "ইতিহাস",
+  "search": "অনুসন্ধান করুন",
+  "useAudioStream": "অডিও স্ট্রিম ব্যবহার করুন",
+  "useAudioStreamDesc": "ডাউনলোড করার পরিবর্তে সরাসরি ইন্টারনেট থেকে অডিও স্ট্রিম করুন।",
+  "notUseAudioStreamDesc": "অফলাইন ব্যবহারের জন্য অডিও ডাউনলোড করুন এবং ডেটা খরচ কমান।",
+  "audioSettings": "অডিও সেটিংস",
+  "playbackSpeed": "প্লেব্যাক গতি",
+  "playbackSpeedDesc": "কুরআন তেলাওয়াতের গতি সামঞ্জস্য করুন।",
+  "waitForCurrentDownloadToFinish": "বর্তমান ডাউনলোড শেষ হওয়ার জন্য অনুগ্রহ করে অপেক্ষা করুন।",
+  "areYouSure": "আপনি কি নিশ্চিত?",
+  "checkYourInternetConnection": "আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।"
 }

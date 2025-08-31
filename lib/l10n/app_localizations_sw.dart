@@ -1046,10 +1046,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get scrollWithRecitation => 'Tembeza na Kisomo';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Ufikiaji wa Haraka';
 
   @override
@@ -1059,44 +1055,49 @@ class AppLocalizationsSw extends AppLocalizations {
   String get tajweedGuide => 'Mwongozo wa Tajweed';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Inapowashwa, ayah ya Kurani itasonga kiotomatiki sanjari na usomaji wa sauti.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Usanidi';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Rejesha Kutoka kwa Hifadhi Nakala';
 
   @override
-  String get search => 'Search';
+  String get history => 'Historia';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Tafuta';
+
+  @override
+  String get useAudioStream => 'Tumia Mtiririko wa Sauti';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Tiririsha sauti moja kwa moja kutoka kwa mtandao badala ya kupakua.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Pakua sauti kwa matumizi ya nje ya mtandao na upunguze matumizi ya data.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Mipangilio ya Sauti';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Kasi ya Uchezaji';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'Rekebisha kasi ya Usomaji wa Kurani.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Tafadhali subiri upakuaji wa sasa ukamilike.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'Una uhakika?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection =>
+      'Angalia muunganisho wako wa intaneti.';
 }

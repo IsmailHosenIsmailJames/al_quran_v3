@@ -1044,10 +1044,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get scrollWithRecitation => 'Cuộn với đọc thuộc lòng';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Truy cập nhanh';
 
   @override
@@ -1057,44 +1053,49 @@ class AppLocalizationsVi extends AppLocalizations {
   String get tajweedGuide => 'Hướng dẫn Tajweed';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Khi được bật, ayah Kinh Qur\'an sẽ tự động cuộn đồng bộ với phần đọc lại âm thanh.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Cấu hình';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Khôi phục từ bản sao lưu';
 
   @override
-  String get search => 'Search';
+  String get history => 'Lịch sử';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Tìm kiếm';
+
+  @override
+  String get useAudioStream => 'Sử dụng luồng âm thanh';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Truyền phát âm thanh trực tiếp từ internet thay vì tải xuống.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Tải xuống âm thanh để sử dụng ngoại tuyến và giảm mức tiêu thụ dữ liệu.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Cài đặt âm thanh';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Tốc độ phát lại';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'Điều chỉnh tốc độ đọc Kinh Qur\'an.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Vui lòng đợi quá trình tải xuống hiện tại kết thúc.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'Bạn có chắc không?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection =>
+      'Kiểm tra kết nối internet của bạn.';
 }

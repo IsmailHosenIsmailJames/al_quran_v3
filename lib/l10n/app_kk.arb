@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Оқумен айналдыру",
   "quickAccess": "Жылдам қатынау",
   "initiallyScrollAyah": "Бастапқыда аятқа жылжыңыз",
-  "tajweedGuide": "Тәжуид нұсқаулығы"
+  "tajweedGuide": "Тәжуид нұсқаулығы",
+  "scrollWithRecitationDesc": "Қосылған кезде, Құран аяты аудио оқумен синхронды түрде автоматты түрде жылжиды.",
+  "configuration": "Конфигурация",
+  "restoreFromBackup": "Сақтық көшірмеден қалпына келтіру",
+  "history": "Тарих",
+  "search": "Іздеу",
+  "useAudioStream": "Аудио ағынын пайдалану",
+  "useAudioStreamDesc": "Жүктеп алудың орнына интернеттен тікелей аудио ағыны.",
+  "notUseAudioStreamDesc": "Офлайн пайдалану үшін аудионы жүктеп алыңыз және деректерді тұтынуды азайтыңыз.",
+  "audioSettings": "Аудио параметрлері",
+  "playbackSpeed": "Ойнату жылдамдығы",
+  "playbackSpeedDesc": "Құран оқу жылдамдығын реттеңіз.",
+  "waitForCurrentDownloadToFinish": "Ағымдағы жүктеп алудың аяқталуын күтіңіз.",
+  "areYouSure": "Сіз сенімдісіз бе?",
+  "checkYourInternetConnection": "Интернет қосылымыңызды тексеріңіз."
 }

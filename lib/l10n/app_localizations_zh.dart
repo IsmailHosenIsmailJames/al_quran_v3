@@ -1011,10 +1011,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get scrollWithRecitation => '滚动背诵';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => '快速访问';
 
   @override
@@ -1024,44 +1020,44 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tajweedGuide => '泰吉威德指南';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc => '启用后，古兰经经文将与音频朗诵同步自动滚动。';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => '配置';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => '从备份还原';
 
   @override
-  String get search => 'Search';
+  String get history => '历史';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => '搜索';
 
   @override
-  String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+  String get useAudioStream => '使用音频流';
 
   @override
-  String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+  String get useAudioStreamDesc => '直接从互联网流式传输音频而不是下载。';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get notUseAudioStreamDesc => '下载音频以供离线使用并减少数据消耗。';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get audioSettings => '音频设置';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeed => '播放速度';
 
   @override
-  String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+  String get playbackSpeedDesc => '调整古兰经背诵的速度。';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get waitForCurrentDownloadToFinish => '请等待当前下载完成。';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get areYouSure => '你确定吗？';
+
+  @override
+  String get checkYourInternetConnection => '检查您的网络连接。';
 }

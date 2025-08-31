@@ -308,5 +308,19 @@
   "scrollWithRecitation": "د تلاوت سره سکرول کړئ",
   "quickAccess": "چټک لاسرسی",
   "initiallyScrollAyah": "په پیل کې آیت ته سکرول کړئ",
-  "tajweedGuide": "د تجوید لارښود"
+  "tajweedGuide": "د تجوید لارښود",
+  "scrollWithRecitationDesc": "کله چې فعال شي، د قرآن آیت به په اتوماتيک ډول د آډیو تلاوت سره په همغږۍ کې سکرول شي.",
+  "configuration": "تشکیلات",
+  "restoreFromBackup": "له بیک اپ څخه بحال کړئ",
+  "history": "تاریخ",
+  "search": "پلټنه",
+  "useAudioStream": "د آډیو جریان وکاروئ",
+  "useAudioStreamDesc": "د ډاونلوډ کولو پرځای مستقیم له انټرنیټ څخه آډیو جریان کړئ.",
+  "notUseAudioStreamDesc": "د آفلاین کارونې لپاره آډیو ډاونلوډ کړئ او د معلوماتو مصرف کم کړئ.",
+  "audioSettings": "د آډیو تنظیمات",
+  "playbackSpeed": "د پلې بیک سرعت",
+  "playbackSpeedDesc": "د قرآن کریم د تلاوت سرعت تنظیم کړئ.",
+  "waitForCurrentDownloadToFinish": "مهرباني وکړئ د اوسني ډاونلوډ پای ته رسیدو ته انتظار وکړئ.",
+  "areYouSure": "ایا ته ډاډه یې؟",
+  "checkYourInternetConnection": "خپل انټرنیټ اتصال وګورئ."
 }

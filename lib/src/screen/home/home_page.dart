@@ -48,27 +48,27 @@ class _HomePageState extends State<HomePage> {
 
                 actions: [
                   // TODO : Develop Search Functionality. Due for later
-                  IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: themeState.primaryShade100,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SearchPage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(FluentIcons.search_28_filled),
-                  ),
-                  IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: themeState.primaryShade100,
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(FluentIcons.person_12_filled),
-                  ),
+                  // IconButton(
+                  //   style: IconButton.styleFrom(
+                  //     backgroundColor: themeState.primaryShade100,
+                  //   ),
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const SearchPage(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: const Icon(FluentIcons.search_28_filled),
+                  // ),
+                  // IconButton(
+                  //   style: IconButton.styleFrom(
+                  //     backgroundColor: themeState.primaryShade100,
+                  //   ),
+                  //   onPressed: () {},
+                  //   icon: const Icon(FluentIcons.person_12_filled),
+                  // ),
                   const Gap(5),
                 ],
               ),

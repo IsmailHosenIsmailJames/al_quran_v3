@@ -330,5 +330,19 @@
   "scrollWithRecitation": "التمرير مع التلاوة",
   "quickAccess": "الوصول السريع",
   "initiallyScrollAyah": "التمرير في البداية إلى الآية",
-  "tajweedGuide": "دليل التجويد"
+  "tajweedGuide": "دليل التجويد",
+  "scrollWithRecitationDesc": "عند التمكين، سيتم تمرير آية القرآن تلقائيًا بالتزامن مع تلاوة الصوت.",
+  "configuration": "إعدادات",
+  "restoreFromBackup": "استعادة من نسخة احتياطية",
+  "history": "سجل",
+  "search": "بحث",
+  "useAudioStream": "استخدام تيار الصوت",
+  "useAudioStreamDesc": "بث الصوت مباشرة من الإنترنت بدلاً من التنزيل.",
+  "notUseAudioStreamDesc": "قم بتنزيل الصوت للاستخدام في وضع عدم الاتصال وتقليل استهلاك البيانات.",
+  "audioSettings": "إعدادات الصوت",
+  "playbackSpeed": "سرعة التشغيل",
+  "playbackSpeedDesc": "ضبط سرعة تلاوة القرآن.",
+  "waitForCurrentDownloadToFinish": "يرجى الانتظار حتى ينتهي التنزيل الحالي.",
+  "areYouSure": "هل أنت متأكد؟",
+  "checkYourInternetConnection": "تحقق من اتصالك بالإنترنت."
 }

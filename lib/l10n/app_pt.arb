@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Rolar com recitação",
   "quickAccess": "Acesso rápido",
   "initiallyScrollAyah": "Inicialmente, role para o ayah",
-  "tajweedGuide": "Guia de Tajweed"
+  "tajweedGuide": "Guia de Tajweed",
+  "scrollWithRecitationDesc": "Quando ativado, o ayah do Alcorão rolará automaticamente em sincronia com a recitação de áudio.",
+  "configuration": "Configuração",
+  "restoreFromBackup": "Restaurar do backup",
+  "history": "História",
+  "search": "Procurar",
+  "useAudioStream": "Usar fluxo de áudio",
+  "useAudioStreamDesc": "Transmita áudio diretamente da Internet em vez de fazer o download.",
+  "notUseAudioStreamDesc": "Baixe o áudio para uso offline e reduza o consumo de dados.",
+  "audioSettings": "Configurações de áudio",
+  "playbackSpeed": "Velocidade de reprodução",
+  "playbackSpeedDesc": "Ajuste a velocidade da Recitação do Alcorão.",
+  "waitForCurrentDownloadToFinish": "Aguarde o download atual terminar.",
+  "areYouSure": "Você tem certeza?",
+  "checkYourInternetConnection": "Verifique sua conexão com a internet."
 }

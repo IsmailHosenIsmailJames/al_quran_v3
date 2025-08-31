@@ -308,5 +308,19 @@
   "scrollWithRecitation": "朗読でスクロール",
   "quickAccess": "クイックアクセス",
   "initiallyScrollAyah": "最初にアヤにスクロールします",
-  "tajweedGuide": "タジュウィードガイド"
+  "tajweedGuide": "タジュウィードガイド",
+  "scrollWithRecitationDesc": "有効にすると、コーランのアヤは音声の朗読と同期して自動的にスクロールします。",
+  "configuration": "構成",
+  "restoreFromBackup": "バックアップから復元",
+  "history": "歴史",
+  "search": "検索",
+  "useAudioStream": "オーディオストリームを使用する",
+  "useAudioStreamDesc": "ダウンロードする代わりに、インターネットから直接オーディオをストリーミングします。",
+  "notUseAudioStreamDesc": "オフラインで使用するためにオーディオをダウンロードし、データ消費量を削減します。",
+  "audioSettings": "オーディオ設定",
+  "playbackSpeed": "再生速度",
+  "playbackSpeedDesc": "コーランの朗読の速度を調整します。",
+  "waitForCurrentDownloadToFinish": "現在のダウンロードが完了するまでお待ちください。",
+  "areYouSure": "本気ですか？",
+  "checkYourInternetConnection": "インターネット接続を確認してください。"
 }

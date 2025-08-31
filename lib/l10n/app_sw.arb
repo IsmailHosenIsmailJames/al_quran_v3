@@ -308,5 +308,19 @@
   "scrollWithRecitation": "Tembeza na Kisomo",
   "quickAccess": "Ufikiaji wa Haraka",
   "initiallyScrollAyah": "Awali tembeza hadi kwenye ayah",
-  "tajweedGuide": "Mwongozo wa Tajweed"
+  "tajweedGuide": "Mwongozo wa Tajweed",
+  "scrollWithRecitationDesc": "Inapowashwa, ayah ya Kurani itasonga kiotomatiki sanjari na usomaji wa sauti.",
+  "configuration": "Usanidi",
+  "restoreFromBackup": "Rejesha Kutoka kwa Hifadhi Nakala",
+  "history": "Historia",
+  "search": "Tafuta",
+  "useAudioStream": "Tumia Mtiririko wa Sauti",
+  "useAudioStreamDesc": "Tiririsha sauti moja kwa moja kutoka kwa mtandao badala ya kupakua.",
+  "notUseAudioStreamDesc": "Pakua sauti kwa matumizi ya nje ya mtandao na upunguze matumizi ya data.",
+  "audioSettings": "Mipangilio ya Sauti",
+  "playbackSpeed": "Kasi ya Uchezaji",
+  "playbackSpeedDesc": "Rekebisha kasi ya Usomaji wa Kurani.",
+  "waitForCurrentDownloadToFinish": "Tafadhali subiri upakuaji wa sasa ukamilike.",
+  "areYouSure": "Una uhakika?",
+  "checkYourInternetConnection": "Angalia muunganisho wako wa intaneti."
 }

@@ -1028,10 +1028,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get scrollWithRecitation => '朗読でスクロール';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'クイックアクセス';
 
   @override
@@ -1041,44 +1037,46 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tajweedGuide => 'タジュウィードガイド';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      '有効にすると、コーランのアヤは音声の朗読と同期して自動的にスクロールします。';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => '構成';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'バックアップから復元';
 
   @override
-  String get search => 'Search';
+  String get history => '歴史';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => '検索';
 
   @override
-  String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+  String get useAudioStream => 'オーディオストリームを使用する';
+
+  @override
+  String get useAudioStreamDesc => 'ダウンロードする代わりに、インターネットから直接オーディオをストリーミングします。';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'オフラインで使用するためにオーディオをダウンロードし、データ消費量を削減します。';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'オーディオ設定';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => '再生速度';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'コーランの朗読の速度を調整します。';
 
   @override
-  String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+  String get waitForCurrentDownloadToFinish => '現在のダウンロードが完了するまでお待ちください。';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => '本気ですか？';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection => 'インターネット接続を確認してください。';
 }

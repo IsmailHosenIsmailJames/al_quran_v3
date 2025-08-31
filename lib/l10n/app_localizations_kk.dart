@@ -1041,10 +1041,6 @@ class AppLocalizationsKk extends AppLocalizations {
   String get scrollWithRecitation => 'Оқумен айналдыру';
 
   @override
-  String get scrollWithRecitationDesc =>
-      'When enabled, the Quran ayah will automatically scroll in sync with the audio recitation.';
-
-  @override
   String get quickAccess => 'Жылдам қатынау';
 
   @override
@@ -1054,44 +1050,49 @@ class AppLocalizationsKk extends AppLocalizations {
   String get tajweedGuide => 'Тәжуид нұсқаулығы';
 
   @override
-  String get configuration => 'Configuration';
+  String get scrollWithRecitationDesc =>
+      'Қосылған кезде, Құран аяты аудио оқумен синхронды түрде автоматты түрде жылжиды.';
 
   @override
-  String get restoreFromBackup => 'Restore From Backup';
+  String get configuration => 'Конфигурация';
 
   @override
-  String get history => 'History';
+  String get restoreFromBackup => 'Сақтық көшірмеден қалпына келтіру';
 
   @override
-  String get search => 'Search';
+  String get history => 'Тарих';
 
   @override
-  String get useAudioStream => 'Use Audio Stream';
+  String get search => 'Іздеу';
+
+  @override
+  String get useAudioStream => 'Аудио ағынын пайдалану';
 
   @override
   String get useAudioStreamDesc =>
-      'Stream audio directly from the internet instead of downloading.';
+      'Жүктеп алудың орнына интернеттен тікелей аудио ағыны.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Download audio for offline use and reduce data consumption.';
+      'Офлайн пайдалану үшін аудионы жүктеп алыңыз және деректерді тұтынуды азайтыңыз.';
 
   @override
-  String get audioSettings => 'Audio Settings';
+  String get audioSettings => 'Аудио параметрлері';
 
   @override
-  String get playbackSpeed => 'Playback Speed';
+  String get playbackSpeed => 'Ойнату жылдамдығы';
 
   @override
-  String get playbackSpeedDesc => 'Adjust the speed of the Quran Recitation.';
+  String get playbackSpeedDesc => 'Құран оқу жылдамдығын реттеңіз.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'Please wait for the current download to finish.';
+      'Ағымдағы жүктеп алудың аяқталуын күтіңіз.';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get areYouSure => 'Сіз сенімдісіз бе?';
 
   @override
-  String get checkYourInternetConnection => 'Check your internet connection.';
+  String get checkYourInternetConnection =>
+      'Интернет қосылымыңызды тексеріңіз.';
 }
