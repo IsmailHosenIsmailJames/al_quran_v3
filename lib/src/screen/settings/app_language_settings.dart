@@ -46,7 +46,7 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                     subtitle: Text(current.english),
                     leading: Icon(
                       languageState.locale.languageCode ==
-                              current.locale.countryCode
+                              current.locale.languageCode
                           ? Icons.check_circle_rounded
                           : Icons.circle_outlined,
                       color: themeState.primary,

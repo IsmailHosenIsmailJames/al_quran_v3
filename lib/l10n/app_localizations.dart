@@ -1988,19 +1988,19 @@ abstract class AppLocalizations {
   /// **'Scroll with Recitation'**
   String get scrollWithRecitation;
 
-  /// Title for quick access section
+  /// No description provided for @quickAccess.
   ///
   /// In en, this message translates to:
   /// **'Quick Access'**
   String get quickAccess;
 
-  /// A setting to initially scroll to a specific ayah when opening a surah.
+  /// No description provided for @initiallyScrollAyah.
   ///
   /// In en, this message translates to:
   /// **'Initially scroll to ayah'**
   String get initiallyScrollAyah;
 
-  /// A guide for the rules of Quranic recitation.
+  /// No description provided for @tajweedGuide.
   ///
   /// In en, this message translates to:
   /// **'Tajweed Guide'**
@@ -2096,13 +2096,13 @@ abstract class AppLocalizations {
   /// **'Need to download {requiredDownload} of {totalVersesCount} ayahs.'**
   String audioDownloadAlert(int requiredDownload, int totalVersesCount);
 
-  /// Button text to start a download.
+  /// No description provided for @download.
   ///
   /// In en, this message translates to:
   /// **'Download'**
   String get download;
 
-  /// Title for the audio download screen.
+  /// No description provided for @audioDownload.
   ///
   /// In en, this message translates to:
   /// **'Audio Download'**
