@@ -3,7 +3,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -17,15 +17,9 @@ import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translati
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
-import "package:al_quran_v3/src/widget/preview_quran_script/ayah_preview_widget.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
@@ -46,14 +40,11 @@ class AppSetupPage extends StatefulWidget {
 }
 
 class _AppSetupPageState extends State<AppSetupPage> {
-  List<TranslationBookModel>? selectableTranslationBook;
   List<TafsirBookModel>? selectableTafsirBook;
 
   String? appLanguage;
   String? translationLanguageCode;
   String? tafsirLanguageCode;
-
-  late AppLocalizations appLocalizations;
 
   void changeAppLanguage(MyAppLocalization localeInfo) {
     appLanguage = localeInfo.locale.languageCode;
@@ -62,17 +53,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
     if (translationResources.keys.contains(languageName)) {
       translationLanguageCode = appLanguage;
-      selectableTranslationBook =
-          translationResources[codeToLanguageMap[translationLanguageCode]]
-              ?.map((e) => TranslationBookModel.fromMap(e))
-              .toList() ??
-          [];
-      selectableTranslationBook?.sort((a, b) => a.score.compareTo(b.score));
-      if (selectableTranslationBook?.isNotEmpty == true) {
-        context.read<ResourcesProgressCubitCubit>().changeTranslationBook(
-          selectableTranslationBook!.first,
-        );
-      }
+
+      context.read<ResourcesProgressCubitCubit>().changeTranslationBook(
+        translationResources[codeToLanguageMap[translationLanguageCode]]
+            ?.map((e) => TranslationBookModel.fromMap(e))
+            .toList()
+            .first,
+      );
     }
 
     if (tafsirInformationWithScore.keys.contains(languageName)) {
@@ -94,22 +81,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
   void changeTranslationLanguage(String value) {
     translationLanguageCode = value;
     context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
-    setState(() {});
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      selectableTranslationBook =
-          translationResources[codeToLanguageMap[translationLanguageCode]]
-              ?.map((e) => TranslationBookModel.fromMap(e))
-              .toList() ??
-          [];
-    });
-
-    log(selectableTranslationBook.toString(), name: "Sleeted Book :");
   }
 
   void changeTafsirLanguage(String value) {
     tafsirLanguageCode = value;
     context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
-    setState(() {});
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       selectableTafsirBook =
           tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
@@ -131,381 +108,241 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   final fromKey = GlobalKey<FormState>();
+  final ScrollController _scrollController = ScrollController();
+
+  Widget getFeaturesMark(String name) {
+    return Container(
+      padding: const EdgeInsets.only(left: 7, right: 7),
+      margin: const EdgeInsets.only(left: 5, right: 5),
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Icon(Icons.done_rounded, size: 15),
+          const Gap(5),
+          Text(name, style: const TextStyle(fontSize: 12)),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextStyle titleStyle = const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    );
-    appLocalizations = AppLocalizations.of(context);
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          downloadResources(context.read<ResourcesProgressCubitCubit>().state);
-        },
-        tooltip: appLocalizations.saveAndDownload,
-        backgroundColor: themeState.primary,
-        foregroundColor: Colors.white,
-        child: const Icon(FluentIcons.arrow_download_24_filled),
-      ),
       body: Stack(
         children: [
           SafeArea(
             child: Form(
               key: fromKey,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                  top: 60,
-                  bottom: 60,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 12,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 1),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.appLanguage,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-                        const Gap(5),
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            hintText: appLocalizations.selectAppLanguage,
-                          ),
-                          initialValue: appLanguage,
-                          validator: (value) {
-                            if (value == null) {
-                              return appLocalizations.pleaseSelectOne;
-                            } else {
-                              return null;
-                            }
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-
-                          isExpanded: true,
-                          items: getAppLanguageDropdown(),
-                          onChanged: (value) {
-                            changeAppLanguage(
-                              usedAppLanguageMap.firstOrNullWhere(
-                                    (element) =>
-                                        element.locale.languageCode == value,
-                                  ) ??
-                                  usedAppLanguageMap.first,
-                            );
-                            setState(() {});
-                          },
-                        ),
-
-                        const Gap(15),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 12,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 2),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.quranTranslationLanguage,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-                        const Gap(5),
-                        DropdownButtonFormField(
-                          initialValue: translationLanguageCode,
-                          items: getQuranTranslationLanguageDropDownList(),
-                          decoration: InputDecoration(
-                            hintText:
-                                appLocalizations.selectTranslationLanguage,
-                          ),
-                          validator: (value) {
-                            if (value == null) {
-                              return appLocalizations.pleaseSelectOne;
-                            } else {
-                              return null;
-                            }
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-
-                          isExpanded: true,
-                          onChanged: (value) {
-                            changeTranslationLanguage(value.toString());
-                            setState(() {});
-                          },
-                        ),
-                        const Gap(15),
-
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 13,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 3),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.quranTranslationBook,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-
-                        const Gap(5),
-                        BlocBuilder<
-                          ResourcesProgressCubitCubit,
-                          ResourcesProgressCubitState
-                        >(
-                          builder: (context, resourcesProcessState) {
-                            return DropdownButtonFormField(
-                              items: getQuranTranslationBookDropDownList(
-                                resourcesProcessState,
-                              ),
-                              decoration: InputDecoration(
-                                hintText:
-                                    appLocalizations.selectTranslationBook,
-                              ),
-                              initialValue:
-                                  resourcesProcessState.translationBookModel,
-                              validator: (value) {
-                                if (value == null) {
-                                  return "Please select one";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-
-                              isExpanded: true,
-                              onChanged: (value) {
-                                context
-                                    .read<ResourcesProgressCubitCubit>()
-                                    .changeTranslationBook(value);
-                              },
-                            );
-                          },
-                        ),
-                        const Gap(15),
-
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 13,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 4),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.quranTafsirLanguage,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-
-                        const Gap(5),
-                        DropdownButtonFormField(
-                          items: getQuranTafsirLanguageDropDownList(),
-                          decoration: InputDecoration(
-                            hintText: appLocalizations.selectTafsirLanguage,
-                          ),
-                          initialValue: tafsirLanguageCode,
-                          validator: (value) {
-                            if (value == null) {
-                              return appLocalizations.pleaseSelectOne;
-                            } else {
-                              return null;
-                            }
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-
-                          isExpanded: true,
-                          onChanged: (value) {
-                            changeTafsirLanguage(value.toString());
-                            setState(() {});
-                          },
-                        ),
-                        const Gap(15),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 13,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 5),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.quranTafsirBook,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-                        const Gap(5),
-                        BlocBuilder<
-                          ResourcesProgressCubitCubit,
-                          ResourcesProgressCubitState
-                        >(
-                          builder: (context, processState) {
-                            return DropdownButtonFormField(
-                              items: getQuranTafsirBookDropDownList(
-                                processState,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: appLocalizations.selectTafsirBook,
-                              ),
-                              isExpanded: true,
-                              initialValue: processState.tafsirBookModel,
-                              validator: (value) {
-                                if (value == null) {
-                                  return "Please select one";
-                                } else {
-                                  return null;
-                                }
-                              },
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              onChanged: (value) {
-                                context
-                                    .read<ResourcesProgressCubitCubit>()
-                                    .changeTafsirBook(value);
-                              },
-                            );
-                          },
-                        ),
-                        const Gap(15),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 13,
-                              backgroundColor: themeState.primary,
-                              child: Text(
-                                localizedNumber(context, 6),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Text(
-                              appLocalizations.quranScriptAndStyle,
-                              style: titleStyle,
-                            ),
-                          ],
-                        ),
-                        const Gap(5),
-                        getScriptSelectionSegmentedButtons(context),
-                        getAyahPreviewWidget(
-                          showHeaderOptions: true,
-                          showOnlyAyah: true,
-                        ),
-
-                        const Gap(80),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: SafeArea(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Gap(10),
-                  // SizedBox(
-                  //   height: 40,
-                  //   child: ClipRRect(
-                  //     borderRadius: BorderRadius.circular(100),
-                  //     child: BackdropFilter(
-                  //       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  //       child: TextButton.icon(
-                  //         style: IconButton.styleFrom(
-                  //           backgroundColor: themeState.primaryShade100,
-                  //           foregroundColor: themeState.primary,
-                  //         ),
-                  //         onPressed: () {
-                  //           Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //               builder: (context) => const LoginScreen(),
-                  //             ),
-                  //           );
-                  //         },
-                  //         icon: const Icon(Icons.cloud_sync),
-                  //         label: Text(appLocalizations.restoreFromBackup),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // const Gap(10),
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                        child: themeIconButton(context),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      appLocalizations.appLanguage,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  const Gap(10),
+                  Divider(height: 1, color: themeState.primaryShade200),
+                  Expanded(
+                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                      builder: (context, state) {
+                        return RadioGroup<MyAppLocalization>(
+                          groupValue: state,
+                          onChanged: (value) {
+                            if (value != null) {
+                              changeAppLanguage(value);
+                            }
+                          },
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            itemCount: usedAppLanguageMap.length,
+                            itemBuilder: (context, index) {
+                              final MyAppLocalization appLoc =
+                                  usedAppLanguageMap[index];
+                              return RadioListTile<MyAppLocalization>(
+                                value: appLoc,
+                                title: Text(appLoc.native),
+                                subtitle: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(appLoc.english),
+                                      const Gap(7),
+                                      if (doesHaveFootNote(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          appLocalizations.footnote,
+                                        ),
+                                      if (doesHaveTafsirSupport(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          appLocalizations.tafsir,
+                                        ),
+                                      if (doesHaveWordByWordTranslation(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          appLocalizations.wordByWord,
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  BlocBuilder<
+                    ResourcesProgressCubitCubit,
+                    ResourcesProgressCubitState
+                  >(
+                    builder:
+                        (context, state) => Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.circular(roundedRadius),
+                            boxShadow: [
+                              BoxShadow(
+                                color: themeState.mutedGray,
+                                blurRadius: 10,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.translation,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .translationBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: false,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
+                                  ),
+                                ],
+                              ),
+                              const Gap(10),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.tafsir,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .tafsirBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: true,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
+                                  ),
+                                ],
+                              ),
+                              const Gap(10),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton.icon(
+                                  onPressed: () {
+                                    downloadResources(
+                                      context
+                                          .read<ResourcesProgressCubitCubit>()
+                                          .state,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    FluentIcons.arrow_download_24_filled,
+                                  ),
+                                  label: Text(appLocalizations.saveAndDownload),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                  ),
                 ],
               ),
             ),
@@ -518,6 +355,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Future<void> downloadResources(
     ResourcesProgressCubitState processState,
   ) async {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
+
     if (translationLanguageCode == null ||
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
@@ -589,6 +428,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Dialog dialogForShowDownloadProcess(
     ResourcesProgressCubitState processState,
   ) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     return Dialog(
       insetPadding: const EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
@@ -669,237 +509,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
       ),
     );
   }
-
-  QuranScriptType selectedScript = QuranScriptType.tajweed;
-
-  List<DropdownMenuItem<TafsirBookModel>>? getQuranTafsirBookDropDownList(
-    ResourcesProgressCubitState processState,
-  ) {
-    List<DropdownMenuItem<TafsirBookModel>> items = [];
-    if (selectableTafsirBook?.isEmpty ?? true) return null;
-    selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
-    for (TafsirBookModel book in selectableTafsirBook ?? []) {
-      items.add(
-        DropdownMenuItem(
-          value: book,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                if (processState.tafsirBookModel?.fullPath == book.fullPath)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Icon(
-                      Icons.done_rounded,
-                      size: 18,
-                      color: themeState.primary,
-                    ),
-                  ),
-                buildScoreIndicator(percentage: book.score, size: 20),
-                const Gap(8),
-                Text(book.name),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    return items;
-  }
-
-  List<DropdownMenuItem>? getQuranTafsirLanguageDropDownList() {
-    List<DropdownMenuItem> items = [];
-    tafsirInformationWithScore.forEach((key, value) {
-      items.add(
-        DropdownMenuItem(
-          value: languageToCodeMap[key.toLowerCase()],
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                if (tafsirLanguageCode == languageToCodeMap[key.toLowerCase()])
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Icon(
-                      Icons.done_rounded,
-                      size: 18,
-                      color: themeState.primary,
-                    ),
-                  ),
-                Text(languageNativeNames[key.toLowerCase()] ?? ""),
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-    return items;
-  }
-
-  List<DropdownMenuItem<String>> getAppLanguageDropdown() {
-    return usedAppLanguageMap.map((e) {
-      return DropdownMenuItem(
-        value: e.locale.languageCode,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              if (appLanguage == e.locale.languageCode)
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Icon(
-                    Icons.done_rounded,
-                    size: 18,
-                    color: themeState.primary,
-                  ),
-                ),
-              Text("${e.english} (${e.native})"),
-              ...getSupportInfoForLanguageWidget(key: e.english),
-            ],
-          ),
-        ),
-      );
-    }).toList();
-  }
-
-  List<DropdownMenuItem>? getQuranTranslationBookDropDownList(
-    ResourcesProgressCubitState resourcesProcessState,
-  ) {
-    List<DropdownMenuItem<TranslationBookModel>> items = [];
-    if (selectableTranslationBook?.isEmpty ?? true) return null;
-    for (TranslationBookModel book in selectableTranslationBook ?? []) {
-      items.add(
-        DropdownMenuItem(
-          value: book,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                if (resourcesProcessState.translationBookModel?.fullPath ==
-                    book.fullPath)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Icon(
-                      Icons.done_rounded,
-                      size: 18,
-                      color: themeState.primary,
-                    ),
-                  ),
-                Text(book.name),
-                if (book.type == TranslationResourcesType.withFootnoteTags)
-                  footNoteTag,
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    return items;
-  }
-
-  List<DropdownMenuItem> getQuranTranslationLanguageDropDownList() {
-    List<DropdownMenuItem> items = [];
-    translationResources.forEach((key, value) {
-      items.add(
-        DropdownMenuItem(
-          value: languageToCodeMap[key.toLowerCase()],
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                if (translationLanguageCode ==
-                    languageToCodeMap[key.toLowerCase()])
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Icon(
-                      Icons.done_rounded,
-                      size: 18,
-                      color: themeState.primary,
-                    ),
-                  ),
-                Text(languageNativeNames[key.toLowerCase()] ?? ""),
-                ...getSupportInfoForLanguageWidget(key: key.toLowerCase()),
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-    return items;
-  }
-
-  List<Widget> getSupportInfoForLanguageWidget({required String key}) {
-    return [
-      if (doesHaveFootNote(key.toLowerCase())) footNoteTag,
-      if (doesHaveTafsirSupport(key.toLowerCase())) tafsirTag,
-      if (doesHaveWordByWordTranslation(key.toLowerCase())) wordByWordTag,
-    ];
-  }
-
-  late Widget footNoteTag = Container(
-    padding: const EdgeInsets.only(left: 7, right: 7),
-    margin: const EdgeInsets.only(left: 5, right: 5),
-    decoration: BoxDecoration(
-      color: themeState.primary,
-      borderRadius: BorderRadius.circular(100),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        const Gap(5),
-        Text(
-          appLocalizations.footnote,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
-      ],
-    ),
-  );
-
-  late Widget tafsirTag = Container(
-    padding: const EdgeInsets.only(left: 7, right: 7),
-    margin: const EdgeInsets.only(left: 5, right: 5),
-    decoration: BoxDecoration(
-      color: themeState.primary,
-      borderRadius: BorderRadius.circular(100),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        const Gap(5),
-        Text(
-          appLocalizations.tafsir,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
-      ],
-    ),
-  );
-
-  late Widget wordByWordTag = Container(
-    padding: const EdgeInsets.only(left: 7, right: 7),
-    margin: const EdgeInsets.only(left: 5, right: 5),
-    decoration: BoxDecoration(
-      color: themeState.primary,
-      borderRadius: BorderRadius.circular(100),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Icon(Icons.done_rounded, color: Colors.white, size: 15),
-        const Gap(5),
-        Text(
-          appLocalizations.wordByWord,
-          style: const TextStyle(color: Colors.white, fontSize: 12),
-        ),
-      ],
-    ),
-  );
 }
 
 bool doesHaveFootNote(String language) {
@@ -932,77 +541,4 @@ bool doesHaveTafsirSupport(String language) {
     }
   });
   return doesHaveTafsirSupport;
-}
-
-Widget getScriptSelectionSegmentedButtons(BuildContext context) {
-  return BlocBuilder<ThemeCubit, ThemeState>(
-    builder: (context, themeState) {
-      return BlocBuilder<QuranViewCubit, QuranViewState>(
-        builder:
-            (context, quranViewState) => Row(
-              spacing: 5,
-              children: List.generate(QuranScriptType.values.length, (index) {
-                QuranScriptType currentQuranScriptType =
-                    QuranScriptType.values[index];
-                return Expanded(
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          quranViewState.quranScriptType ==
-                                  currentQuranScriptType
-                              ? themeState.primary
-                              : Colors.transparent,
-                      foregroundColor:
-                          quranViewState.quranScriptType ==
-                                  currentQuranScriptType
-                              ? Colors.white
-                              : themeState.primary,
-                      side: BorderSide(color: themeState.primary),
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                            0 == index ? roundedRadius : 0,
-                          ),
-                          bottomLeft: Radius.circular(
-                            0 == index ? roundedRadius : 0,
-                          ),
-                          topRight: Radius.circular(
-                            2 == index ? roundedRadius : 0,
-                          ),
-                          bottomRight: Radius.circular(
-                            2 == index ? roundedRadius : 0,
-                          ),
-                        ),
-                      ),
-                      elevation: 0,
-                      shadowColor: Colors.transparent,
-                    ),
-                    onPressed: () {
-                      Hive.box(
-                        "user",
-                      ).put("selected_script", currentQuranScriptType.name);
-
-                      context.read<QuranViewCubit>().changeQuranScriptType(
-                        currentQuranScriptType,
-                      );
-                    },
-                    label: Text(
-                      getLocalizedQuranScriptType(
-                        context,
-                        currentQuranScriptType,
-                      ).capitalize(),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    icon:
-                        quranViewState.quranScriptType == currentQuranScriptType
-                            ? const Icon(Icons.done_rounded)
-                            : null,
-                  ),
-                );
-              }),
-            ),
-      );
-    },
-  );
 }
