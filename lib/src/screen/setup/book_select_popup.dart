@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_stat
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -25,6 +26,73 @@ class BookSelectPopup extends StatefulWidget {
 
 class _BookSelectPopupState extends State<BookSelectPopup> {
   final TextEditingController _textEditingController = TextEditingController();
+  late final Map<String, List<Map<String, dynamic>>> _allBooks;
+  Map<String, List<Map<String, dynamic>>> _filteredBooks = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _allBooks =
+        widget.isTafsir ? tafsirInformationWithScore : translationResources;
+    _filteredBooks = _allBooks;
+  }
+
+  void _filterBooks(String query) {
+    if (query.isEmpty) {
+      setState(() {
+        _filteredBooks = _allBooks;
+      });
+      return;
+    }
+
+    final Map<String, List<Map<String, dynamic>>> tempFiltered = {};
+    final lowerCaseQuery = query.toLowerCase();
+
+    _allBooks.forEach((language, books) {
+      final List<Map<String, dynamic>> matchedBooks = [];
+
+      final languageNative = languageNativeNames[language] ?? '';
+      final langMatchScore = searchPatternInText(
+        lowerCaseQuery,
+        language.toLowerCase(),
+      );
+      final langNativeMatchScore = searchPatternInText(
+        lowerCaseQuery,
+        languageNative.toLowerCase(),
+      );
+
+      if (langMatchScore > 70 || langNativeMatchScore > 70) {
+        matchedBooks.addAll(books);
+      } else {
+        for (final bookMap in books) {
+          final book =
+              widget.isTafsir
+                  ? TafsirBookModel.fromMap(bookMap)
+                  : TranslationBookModel.fromMap(bookMap);
+
+          final searchableText =
+              (widget.isTafsir
+                      ? (book as TafsirBookModel).name
+                      : (book as TranslationBookModel).name)
+                  .toLowerCase();
+          final score = searchPatternInText(lowerCaseQuery, searchableText);
+
+          if (score > 40) {
+            matchedBooks.add(bookMap);
+          }
+        }
+      }
+
+      if (matchedBooks.isNotEmpty) {
+        tempFiltered[language] = matchedBooks;
+      }
+    });
+
+    setState(() {
+      _filteredBooks = tempFiltered;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -52,26 +120,18 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                   hintText: appLocalizations.search,
                   border: InputBorder.none,
                 ),
-                onChanged: (value) {},
+                onChanged: _filterBooks,
               ),
             ),
             Divider(color: themeState.primaryShade300, height: 1),
             Expanded(
               child: ScrollablePositionedList.builder(
                 padding: const EdgeInsets.all(15),
-                itemCount:
-                    widget.isTafsir
-                        ? tafsirInformationWithScore.length
-                        : translationResources.length,
+                itemCount: _filteredBooks.length,
                 itemBuilder: (context, index) {
-                  String language =
-                      widget.isTafsir
-                          ? tafsirInformationWithScore.keys.elementAt(index)
-                          : translationResources.keys.elementAt(index);
-                  List<Map<String, dynamic>> books =
-                      widget.isTafsir
-                          ? tafsirInformationWithScore.values.elementAt(index)
-                          : translationResources.values.elementAt(index);
+                  String language = _filteredBooks.keys.elementAt(index);
+                  List<Map<String, dynamic>> books = _filteredBooks.values
+                      .elementAt(index);
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -145,7 +205,6 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                                       style: const TextStyle(fontSize: 14),
                                     ),
                                   ),
-
                                   (widget.isTafsir
                                           ? book == state.tafsirBookModel
                                           : state.translationBookModel == book)
