@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -9,7 +10,6 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.da
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -406,30 +406,12 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             footNoteAsString += "$key. $value\n";
                           });
                         }
-                        List quranScriptWord = [];
-                        switch (context
-                            .read<QuranViewCubit>()
-                            .state
-                            .quranScriptType) {
-                          case QuranScriptType.tajweed:
-                            {
-                              quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.uthmani:
-                            {
-                              quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.indopak:
-                            {
-                              quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                        }
+                        List quranScriptWord = getWordListOfAyah(
+                          context.read<QuranViewCubit>().state.quranScriptType,
+                          ayahKey.split(":").first,
+                          ayahKey.split(":").last,
+                        );
+
                         TextStyle scriptTextStyle = TextStyle(
                           fontSize:
                               context.read<QuranViewCubit>().state.fontSize,
@@ -526,30 +508,11 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             footNoteAsString += "$key. $value\n";
                           });
                         }
-                        List quranScriptWord = [];
-                        switch (context
-                            .read<QuranViewCubit>()
-                            .state
-                            .quranScriptType) {
-                          case QuranScriptType.tajweed:
-                            {
-                              quranScriptWord =
-                                  tajweedScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.uthmani:
-                            {
-                              quranScriptWord =
-                                  uthmaniScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                          case QuranScriptType.indopak:
-                            {
-                              quranScriptWord =
-                                  indopakScript[surahNumber
-                                      .toString()][ayahNumber.toString()];
-                            }
-                        }
+                        List quranScriptWord = getWordListOfAyah(
+                          context.read<QuranViewCubit>().state.quranScriptType,
+                          ayahKey.split(":").first,
+                          ayahKey.split(":").last,
+                        );
                         text +=
                             "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
                       }

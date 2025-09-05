@@ -4,11 +4,11 @@ import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:clipboard/clipboard.dart";
-import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -38,27 +38,11 @@ void showShareBottomDialog(
     metaDataSurah[ayahKey.split(":").first],
   );
 
-  int surahNumber = ayahKey.split(":").first.toInt();
-  int ayahNumber = ayahKey.split(":").last.toInt();
-
-  List quranScriptWord = [];
-  switch (context.read<QuranViewCubit>().state.quranScriptType) {
-    case QuranScriptType.tajweed:
-      {
-        quranScriptWord =
-            tajweedScript[surahNumber.toString()][ayahNumber.toString()];
-      }
-    case QuranScriptType.uthmani:
-      {
-        quranScriptWord =
-            uthmaniScript[surahNumber.toString()][ayahNumber.toString()];
-      }
-    case QuranScriptType.indopak:
-      {
-        quranScriptWord =
-            indopakScript[surahNumber.toString()][ayahNumber.toString()];
-      }
-  }
+  List quranScriptWord = getWordListOfAyah(
+    context.read<QuranViewCubit>().state.quranScriptType,
+    ayahKey.split(":").first,
+    ayahKey.split(":").last,
+  );
 
   if (quranScriptType == QuranScriptType.tajweed) {}
   String footNoteAsString = "\n";

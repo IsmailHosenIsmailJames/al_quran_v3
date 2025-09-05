@@ -45,9 +45,9 @@ import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
-Map<String, dynamic> tajweedScript = {};
-Map<String, dynamic> uthmaniScript = {};
-Map<String, dynamic> indopakScript = {};
+Map<String, dynamic> tajweedQuranScriptCompressed = {};
+Map<String, dynamic> uthmaniQuranScript = {};
+Map<String, dynamic> indopakQuranScript = {};
 
 Map<String, dynamic> metaDataHizb = {};
 Map<String, dynamic> metaDataJuz = {};
@@ -103,13 +103,15 @@ Future<void> main() async {
     // Fallback for platforms where user-accessible folders are restricted
     applicationDataPath = await getApplicationDocumentsDirectory();
   }
-  tajweedScript = jsonDecode(
-    await rootBundle.loadString("assets/quran_script/QPC_Hafs_Tajweed.json"),
+  tajweedQuranScriptCompressed = jsonDecode(
+    await rootBundle.loadString(
+      "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
+    ),
   );
-  uthmaniScript = jsonDecode(
+  uthmaniQuranScript = jsonDecode(
     await rootBundle.loadString("assets/quran_script/Uthmani.json"),
   );
-  indopakScript = jsonDecode(
+  indopakQuranScript = jsonDecode(
     await rootBundle.loadString("assets/quran_script/Indopak.json"),
   );
   metaDataHizb = jsonDecode(
