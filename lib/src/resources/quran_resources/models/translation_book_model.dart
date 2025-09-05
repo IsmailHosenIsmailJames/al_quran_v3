@@ -58,6 +58,27 @@ class TranslationBookModel {
     "type": type.name,
     "full_path": fullPath,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TranslationBookModel &&
+          runtimeType == other.runtimeType &&
+          language == other.language &&
+          name == other.name &&
+          fileName == other.fileName &&
+          score == other.score &&
+          type == other.type &&
+          fullPath == other.fullPath;
+
+  @override
+  int get hashCode =>
+      language.hashCode ^
+      name.hashCode ^
+      fileName.hashCode ^
+      score.hashCode ^
+      type.hashCode ^
+      fullPath.hashCode;
 }
 
 enum TranslationResourcesType { simple, withFootnoteTags, wordByWord }

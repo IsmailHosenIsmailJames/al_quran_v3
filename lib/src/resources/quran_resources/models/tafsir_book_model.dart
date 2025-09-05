@@ -55,4 +55,25 @@ class TafsirBookModel {
     "score": score,
     "full_path": fullPath,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TafsirBookModel &&
+          runtimeType == other.runtimeType &&
+          language == other.language &&
+          name == other.name &&
+          totalAyahs == other.totalAyahs &&
+          hasTafsir == other.hasTafsir &&
+          score == other.score &&
+          fullPath == other.fullPath;
+
+  @override
+  int get hashCode =>
+      language.hashCode ^
+      name.hashCode ^
+      totalAyahs.hashCode ^
+      hasTafsir.hashCode ^
+      score.hashCode ^
+      fullPath.hashCode;
 }

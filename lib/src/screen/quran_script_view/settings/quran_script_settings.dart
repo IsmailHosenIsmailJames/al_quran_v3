@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
+import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -18,7 +19,6 @@ import "package:screenshot/screenshot.dart";
 import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
 import "../../settings/cubit/quran_script_view_cubit.dart";
 import "../../settings/cubit/quran_script_view_state.dart";
-import "../../setup/setup_page.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
