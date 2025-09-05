@@ -1,13 +1,14 @@
 import "dart:developer";
 
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -91,11 +92,13 @@ class NonTajweedPageRenderer extends StatelessWidget {
                 TextSpan(
                   children:
                       ayahsKey.map((ayahKey) {
-                        List words =
-                            (isUthmani ? uthmaniScript : indopakScript)[ayahKey
-                                .split(":")
-                                .first]?[ayahKey.split(":").last] ??
-                            [];
+                        List words = getWordListOfAyah(
+                          isUthmani
+                              ? QuranScriptType.uthmani
+                              : QuranScriptType.indopak,
+                          ayahKey.split(":").first,
+                          ayahKey.split(":").last,
+                        );
 
                         return TextSpan(
                           children:

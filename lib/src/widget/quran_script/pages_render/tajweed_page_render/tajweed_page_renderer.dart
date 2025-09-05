@@ -1,12 +1,13 @@
 import "dart:developer";
 
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
@@ -90,11 +91,11 @@ class TajweedPageRenderer extends StatelessWidget {
                 TextSpan(
                   children:
                       ayahsKey.map((ayahKey) {
-                        List words =
-                            tajweedScript[ayahKey.split(":").first]?[ayahKey
-                                .split(":")
-                                .last] ??
-                            [];
+                        List words = getWordListOfAyah(
+                          QuranScriptType.tajweed,
+                          ayahKey.split(":").first,
+                          ayahKey.split(":").last,
+                        );
 
                         return TextSpan(
                           children:
