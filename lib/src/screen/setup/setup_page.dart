@@ -263,6 +263,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   TextButton(
                                     onPressed: () {
                                       showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.8,
                                         context: context,
                                         builder: (context) {
                                           return const BookSelectPopup(
@@ -310,6 +313,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   TextButton(
                                     onPressed: () {
                                       showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.8,
                                         context: context,
                                         builder: (context) {
                                           return const BookSelectPopup(
