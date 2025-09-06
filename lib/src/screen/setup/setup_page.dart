@@ -3,6 +3,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
@@ -107,7 +108,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
     super.initState();
   }
 
-  final fromKey = GlobalKey<FormState>();
   final ScrollController _scrollController = ScrollController();
 
   Widget getFeaturesMark(String name) {
@@ -135,225 +135,203 @@ class _AppSetupPageState extends State<AppSetupPage> {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Form(
-              key: fromKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      appLocalizations.appLanguage,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  Divider(height: 1, color: themeState.primaryShade200),
-                  Expanded(
-                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-                      builder: (context, state) {
-                        return RadioGroup<MyAppLocalization>(
-                          groupValue: state,
-                          onChanged: (value) {
-                            if (value != null) {
-                              changeAppLanguage(value);
-                            }
-                          },
-                          child: ListView.builder(
-                            controller: _scrollController,
-                            itemCount: usedAppLanguageMap.length,
-                            itemBuilder: (context, index) {
-                              final MyAppLocalization appLoc =
-                                  usedAppLanguageMap[index];
-                              return RadioListTile<MyAppLocalization>(
-                                value: appLoc,
-                                title: Text(appLoc.native),
-                                subtitle: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      Text(appLoc.english),
-                                      const Gap(7),
-                                      if (doesHaveFootNote(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          appLocalizations.footnote,
-                                        ),
-                                      if (doesHaveTafsirSupport(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          appLocalizations.tafsir,
-                                        ),
-                                      if (doesHaveWordByWordTranslation(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          appLocalizations.wordByWord,
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
+      appBar: AppBar(
+        title: Text(appLocalizations.appLanguage),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            icon: const Icon(FluentIcons.settings_24_regular),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                builder: (context, state) {
+                  return RadioGroup<MyAppLocalization>(
+                    groupValue: state,
+                    onChanged: (value) {
+                      if (value != null) {
+                        changeAppLanguage(value);
+                      }
+                    },
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: usedAppLanguageMap.length,
+                      itemBuilder: (context, index) {
+                        final MyAppLocalization appLoc =
+                            usedAppLanguageMap[index];
+                        return RadioListTile<MyAppLocalization>(
+                          value: appLoc,
+                          title: Text(appLoc.native),
+                          subtitle: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Text(appLoc.english),
+                                const Gap(7),
+                                if (doesHaveFootNote(
+                                  appLoc.english.toLowerCase(),
+                                ))
+                                  getFeaturesMark(appLocalizations.footnote),
+                                if (doesHaveTafsirSupport(
+                                  appLoc.english.toLowerCase(),
+                                ))
+                                  getFeaturesMark(appLocalizations.tafsir),
+                                if (doesHaveWordByWordTranslation(
+                                  appLoc.english.toLowerCase(),
+                                ))
+                                  getFeaturesMark(appLocalizations.wordByWord),
+                              ],
+                            ),
                           ),
                         );
                       },
                     ),
-                  ),
-
-                  BlocBuilder<
-                    ResourcesProgressCubitCubit,
-                    ResourcesProgressCubitState
-                  >(
-                    builder:
-                        (context, state) => Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                            boxShadow: [
-                              BoxShadow(
-                                color: themeState.mutedGray,
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.translation,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
-                                        ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubitCubit
-                                                  >()
-                                                  .state
-                                                  .translationBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.8,
-                                        context: context,
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: false,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.tafsir,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
-                                        ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubitCubit
-                                                  >()
-                                                  .state
-                                                  .tafsirBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.8,
-                                        context: context,
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: true,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    downloadResources(
-                                      context
-                                          .read<ResourcesProgressCubitCubit>()
-                                          .state,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    FluentIcons.arrow_download_24_filled,
-                                  ),
-                                  label: Text(appLocalizations.saveAndDownload),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-          ),
-        ],
+
+            BlocBuilder<
+              ResourcesProgressCubitCubit,
+              ResourcesProgressCubitState
+            >(
+              builder:
+                  (context, state) => Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                      boxShadow: [
+                        BoxShadow(color: themeState.mutedGray, blurRadius: 10),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    appLocalizations.translation,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    context
+                                            .read<ResourcesProgressCubitCubit>()
+                                            .state
+                                            .translationBookModel
+                                            ?.name ??
+                                        "",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  useSafeArea: true,
+                                  scrollControlDisabledMaxHeightRatio: 0.8,
+                                  context: context,
+                                  builder: (context) {
+                                    return const BookSelectPopup(
+                                      isTafsir: false,
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text(appLocalizations.change),
+                            ),
+                          ],
+                        ),
+                        const Gap(10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    appLocalizations.tafsir,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Theme.of(context).hintColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    context
+                                            .read<ResourcesProgressCubitCubit>()
+                                            .state
+                                            .tafsirBookModel
+                                            ?.name ??
+                                        "",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  useSafeArea: true,
+                                  scrollControlDisabledMaxHeightRatio: 0.8,
+                                  context: context,
+                                  builder: (context) {
+                                    return const BookSelectPopup(
+                                      isTafsir: true,
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text(appLocalizations.change),
+                            ),
+                          ],
+                        ),
+                        const Gap(10),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              downloadResources(
+                                context
+                                    .read<ResourcesProgressCubitCubit>()
+                                    .state,
+                              );
+                            },
+                            icon: const Icon(
+                              FluentIcons.arrow_download_24_filled,
+                            ),
+                            label: Text(appLocalizations.saveAndDownload),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -369,65 +347,62 @@ class _AppSetupPageState extends State<AppSetupPage> {
         processState.tafsirBookModel == null) {
       Fluttertoast.showToast(msg: appLocalizations.pleaseSelectRequiredOption);
     }
-    if (fromKey.currentState?.validate() == true) {
-      final userBox = Hive.box("user");
-      await userBox.put("app_language", appLanguage);
+    final userBox = Hive.box("user");
+    await userBox.put("app_language", appLanguage);
 
-      context.read<ResourcesProgressCubitCubit>().onProcess();
+    context.read<ResourcesProgressCubitCubit>().onProcess();
 
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) => dialogForShowDownloadProcess(processState),
-      );
-      bool success1 = await QuranTranslationFunction.downloadResources(
-        context: context,
-        translationBook: processState.translationBookModel!,
-        isSetupProcess: true,
-      );
-      bool success2 = await QuranTafsirFunction.downloadResources(
-        context: context,
-        tafsirBook: processState.tafsirBookModel!,
-        isSetupProcess: true,
-      );
-      String language = codeToLanguageMap[translationLanguageCode ?? ""] ?? "";
-      TranslationBookModel? supportedWbW = wordByWordTranslation.values
-          .map((e) => TranslationBookModel.fromMap(e))
-          .firstOrNullWhere(
-            (element) =>
-                element.language.toLowerCase() == language.toLowerCase(),
-          );
-      log(supportedWbW?.fullPath ?? "Null", name: "WBW Full Path");
-      bool success3 =
-          supportedWbW != null
-              ? await WordByWordFunction.downloadResource(
-                context: context,
-                book: supportedWbW,
-                isSetupProcess: true,
-              )
-              : true;
-      bool success4 = await SegmentedResourcesManager.downloadResources(
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => dialogForShowDownloadProcess(processState),
+    );
+    bool success1 = await QuranTranslationFunction.downloadResources(
+      context: context,
+      translationBook: processState.translationBookModel!,
+      isSetupProcess: true,
+    );
+    bool success2 = await QuranTafsirFunction.downloadResources(
+      context: context,
+      tafsirBook: processState.tafsirBookModel!,
+      isSetupProcess: true,
+    );
+    String language = codeToLanguageMap[translationLanguageCode ?? ""] ?? "";
+    TranslationBookModel? supportedWbW = wordByWordTranslation.values
+        .map((e) => TranslationBookModel.fromMap(e))
+        .firstOrNullWhere(
+          (element) => element.language.toLowerCase() == language.toLowerCase(),
+        );
+    log(supportedWbW?.fullPath ?? "Null", name: "WBW Full Path");
+    bool success3 =
+        supportedWbW != null
+            ? await WordByWordFunction.downloadResource(
+              context: context,
+              book: supportedWbW,
+              isSetupProcess: true,
+            )
+            : true;
+    bool success4 = await SegmentedResourcesManager.downloadResources(
+      context,
+      context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!,
+    );
+    if (success1 && success2 && success3 && success4) {
+      userBox.put("is_setup_complete", true);
+      // success and route to home
+      Navigator.pushAndRemoveUntil(
         context,
-        context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false,
       );
-      if (success1 && success2 && success3 && success4) {
-        userBox.put("is_setup_complete", true);
-        // success and route to home
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-          (route) => false,
-        );
 
-        // clear process state
-        context.read<ResourcesProgressCubitCubit>().success();
-      } else {
-        // error and show 'Something went wrong' in cubit
-        log([success1, success2, success3, success4].toString());
-        context.read<ResourcesProgressCubitCubit>().failure(
-          appLocalizations.unableToDownloadResources,
-        );
-      }
+      // clear process state
+      context.read<ResourcesProgressCubitCubit>().success();
+    } else {
+      // error and show 'Something went wrong' in cubit
+      log([success1, success2, success3, success4].toString());
+      context.read<ResourcesProgressCubitCubit>().failure(
+        appLocalizations.unableToDownloadResources,
+      );
     }
   }
 
