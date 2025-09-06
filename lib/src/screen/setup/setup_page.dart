@@ -1,5 +1,4 @@
 import "dart:developer";
-import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -110,26 +109,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   final ScrollController _scrollController = ScrollController();
 
-  Widget getFeaturesMark(String name) {
-    return Container(
-      padding: const EdgeInsets.only(left: 7, right: 7),
-      margin: const EdgeInsets.only(left: 5, right: 5),
-      decoration: BoxDecoration(
-        color: themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(Icons.done_rounded, size: 15),
-          const Gap(5),
-          Text(name, style: const TextStyle(fontSize: 12)),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
@@ -183,15 +162,24 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                 if (doesHaveFootNote(
                                   appLoc.english.toLowerCase(),
                                 ))
-                                  getFeaturesMark(appLocalizations.footnote),
+                                  getFeaturesMark(
+                                    context,
+                                    appLocalizations.footnote,
+                                  ),
                                 if (doesHaveTafsirSupport(
                                   appLoc.english.toLowerCase(),
                                 ))
-                                  getFeaturesMark(appLocalizations.tafsir),
+                                  getFeaturesMark(
+                                    context,
+                                    appLocalizations.tafsir,
+                                  ),
                                 if (doesHaveWordByWordTranslation(
                                   appLoc.english.toLowerCase(),
                                 ))
-                                  getFeaturesMark(appLocalizations.wordByWord),
+                                  getFeaturesMark(
+                                    context,
+                                    appLocalizations.wordByWord,
+                                  ),
                               ],
                             ),
                           ),
@@ -251,8 +239,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               onPressed: () {
                                 showModalBottomSheet(
                                   useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.8,
+                                  scrollControlDisabledMaxHeightRatio: 0.85,
                                   context: context,
+                                  showDragHandle: true,
                                   builder: (context) {
                                     return const BookSelectPopup(
                                       isTafsir: false,
@@ -296,8 +285,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                               onPressed: () {
                                 showModalBottomSheet(
                                   useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.8,
+                                  scrollControlDisabledMaxHeightRatio: 0.85,
                                   context: context,
+                                  showDragHandle: true,
                                   builder: (context) {
                                     return const BookSelectPopup(
                                       isTafsir: true,
@@ -522,4 +512,42 @@ bool doesHaveTafsirSupport(String language) {
     }
   });
   return doesHaveTafsirSupport;
+}
+
+Widget getFeaturesMark(
+  BuildContext context,
+  String name, {
+  bool asColumn = false,
+}) {
+  return Container(
+    padding:
+        asColumn
+            ? const EdgeInsets.only(left: 3, right: 3, bottom: 2)
+            : const EdgeInsets.only(left: 7, right: 7),
+    margin: const EdgeInsets.only(left: 5, right: 5),
+    decoration: BoxDecoration(
+      color: context.read<ThemeCubit>().state.primaryShade100,
+      borderRadius:
+          asColumn ? BorderRadius.circular(5) : BorderRadius.circular(100),
+    ),
+    child:
+        asColumn
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.done_rounded, size: 15),
+                Text(name, style: const TextStyle(fontSize: 12)),
+              ],
+            )
+            : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.done_rounded, size: 15),
+                const Gap(5),
+                Text(name, style: const TextStyle(fontSize: 12)),
+              ],
+            ),
+  );
 }
