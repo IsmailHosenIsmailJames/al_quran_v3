@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
+import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -139,7 +140,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
         return Column(
           children: [
             Container(
-              margin: const EdgeInsets.all(15.0),
+              margin: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 color: themeState.primaryShade100,
@@ -182,17 +183,19 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                           Text(
                             (languageNativeNames[language] ?? "").capitalize(),
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const Gap(10),
-                          Text("( ${language.capitalize()} )"),
+                          Text(
+                            "( ${language.capitalize()} )",
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ],
                       ),
                       const Gap(5),
-                      Divider(height: 1, color: themeState.primaryShade200),
-                      const Gap(5),
+
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,31 +234,67 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                                 ),
                               ),
                               padding: const EdgeInsets.only(
-                                left: 15,
+                                left: 20,
                                 top: 10,
                                 bottom: 10,
                               ),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: Text(
-                                      widget.isTafsir
-                                          ? (book as TafsirBookModel).name
-                                              .capitalize()
-                                          : (book as TranslationBookModel).name
-                                              .capitalize(),
-                                      style: const TextStyle(fontSize: 14),
-                                    ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          widget.isTafsir
+                                              ? (book as TafsirBookModel).name
+                                                  .capitalize()
+                                              : (book as TranslationBookModel)
+                                                  .name
+                                                  .capitalize(),
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color:
+                                                (widget.isTafsir
+                                                        ? book ==
+                                                            state
+                                                                .tafsirBookModel
+                                                        : state.translationBookModel ==
+                                                            book)
+                                                    ? themeState.primary
+                                                    : null,
+                                            fontWeight:
+                                                (widget.isTafsir
+                                                        ? book ==
+                                                            state
+                                                                .tafsirBookModel
+                                                        : state.translationBookModel ==
+                                                            book)
+                                                    ? FontWeight.w600
+                                                    : null,
+                                          ),
+                                        ),
+                                      ),
+                                      if (!widget.isTafsir &&
+                                          (book as TranslationBookModel).type ==
+                                              TranslationResourcesType
+                                                  .withFootnoteTags)
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.footnote,
+                                          asColumn: true,
+                                        ),
+
+                                      (widget.isTafsir
+                                              ? book == state.tafsirBookModel
+                                              : state.translationBookModel ==
+                                                  book)
+                                          ? Icon(
+                                            Icons.check_circle,
+                                            color: themeState.primary,
+                                          )
+                                          : const SizedBox(),
+                                      const Gap(7),
+                                    ],
                                   ),
-                                  (widget.isTafsir
-                                          ? book == state.tafsirBookModel
-                                          : state.translationBookModel == book)
-                                      ? Icon(
-                                        Icons.check_circle,
-                                        color: themeState.primary,
-                                      )
-                                      : const SizedBox(),
-                                  const Gap(7),
                                 ],
                               ),
                             ),
