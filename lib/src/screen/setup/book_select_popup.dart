@@ -24,73 +24,107 @@ class BookSelectPopup extends StatefulWidget {
   State<BookSelectPopup> createState() => _BookSelectPopupState();
 }
 
+class ScoreDetails {
+  double score;
+  Map<String, dynamic> data;
+  ScoreDetails({required this.score, required this.data});
+}
+
 class _BookSelectPopupState extends State<BookSelectPopup> {
   final TextEditingController _textEditingController = TextEditingController();
   late final Map<String, List<Map<String, dynamic>>> _allBooks;
-  Map<String, List<Map<String, dynamic>>> _filteredBooks = {};
+  final ItemScrollController _itemScrollController = ItemScrollController();
 
   @override
   void initState() {
     super.initState();
     _allBooks =
         widget.isTafsir ? tafsirInformationWithScore : translationResources;
-    _filteredBooks = _allBooks;
-  }
 
-  void _filterBooks(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        _filteredBooks = _allBooks;
-      });
-      return;
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final state = context.read<ResourcesProgressCubitCubit>().state;
+      final selectedBook =
+          widget.isTafsir ? state.tafsirBookModel : state.translationBookModel;
 
-    final Map<String, List<Map<String, dynamic>>> tempFiltered = {};
-    final lowerCaseQuery = query.toLowerCase();
+      if (selectedBook != null) {
+        String? targetLanguage;
 
-    _allBooks.forEach((language, books) {
-      final List<Map<String, dynamic>> matchedBooks = [];
+        for (final entry in _allBooks.entries) {
+          final language = entry.key;
+          final books = entry.value;
 
-      final languageNative = languageNativeNames[language] ?? '';
-      final langMatchScore = searchPatternInText(
-        lowerCaseQuery,
-        language.toLowerCase(),
-      );
-      final langNativeMatchScore = searchPatternInText(
-        lowerCaseQuery,
-        languageNative.toLowerCase(),
-      );
+          final bookFound = books.any((bookMap) {
+            final book =
+                widget.isTafsir
+                    ? TafsirBookModel.fromMap(bookMap)
+                    : TranslationBookModel.fromMap(bookMap);
+            return book == selectedBook;
+          });
 
-      if (langMatchScore > 70 || langNativeMatchScore > 70) {
-        matchedBooks.addAll(books);
-      } else {
-        for (final bookMap in books) {
-          final book =
-              widget.isTafsir
-                  ? TafsirBookModel.fromMap(bookMap)
-                  : TranslationBookModel.fromMap(bookMap);
+          if (bookFound) {
+            targetLanguage = language;
+            break;
+          }
+        }
 
-          final searchableText =
-              (widget.isTafsir
-                      ? (book as TafsirBookModel).name
-                      : (book as TranslationBookModel).name)
-                  .toLowerCase();
-          final score = searchPatternInText(lowerCaseQuery, searchableText);
+        if (targetLanguage != null) {
+          final languages = _allBooks.keys.toList();
+          final languageIndex = languages.indexOf(targetLanguage);
 
-          if (score > 40) {
-            matchedBooks.add(bookMap);
+          if (languageIndex != -1) {
+            _itemScrollController.scrollTo(
+              index: languageIndex,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
           }
         }
       }
+    });
+  }
 
-      if (matchedBooks.isNotEmpty) {
-        tempFiltered[language] = matchedBooks;
+  void _filterBooks(String query) {
+    final lowerCaseQuery = query.toLowerCase();
+
+    List<ScoreDetails> scoreDetails = [];
+
+    for (int index = 0; index < _allBooks.length; index++) {
+      String language = _allBooks.keys.elementAt(index);
+      List<Map<String, dynamic>> books = _allBooks.values.elementAt(index);
+
+      final languageNative = languageNativeNames[language] ?? "";
+
+      for (final bookMap in books) {
+        String searchableText =
+            widget.isTafsir
+                ? TafsirBookModel.fromMap(bookMap).name
+                : TranslationBookModel.fromMap(bookMap).name;
+
+        final score = searchPatternInText(
+          lowerCaseQuery,
+          "$languageNative $language $searchableText",
+        );
+
+        scoreDetails.add(ScoreDetails(score: score, data: bookMap));
       }
-    });
+    }
 
-    setState(() {
-      _filteredBooks = tempFiltered;
-    });
+    scoreDetails.sort((a, b) => b.score.compareTo(a.score));
+
+    String language =
+        widget.isTafsir
+            ? TafsirBookModel.fromMap(scoreDetails.first.data).language
+            : TranslationBookModel.fromMap(scoreDetails.first.data).language;
+    int index = _allBooks.keys.toList().indexOf(language.toLowerCase());
+    if (index != -1) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _itemScrollController.scrollTo(
+          index: index,
+          duration: const Duration(milliseconds: 200),
+        );
+      });
+    }
   }
 
   @override
@@ -114,24 +148,30 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                 controller: _textEditingController,
                 textAlign: TextAlign.start,
                 textAlignVertical: TextAlignVertical.center,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   prefixIcon: const Icon(Icons.search),
                   hintText: appLocalizations.search,
                   border: InputBorder.none,
                 ),
-                onChanged: _filterBooks,
+                onEditingComplete: () {
+                  _filterBooks(_textEditingController.text);
+                },
               ),
             ),
             Divider(color: themeState.primaryShade300, height: 1),
             Expanded(
               child: ScrollablePositionedList.builder(
+                itemScrollController: _itemScrollController,
                 padding: const EdgeInsets.all(15),
-                itemCount: _filteredBooks.length,
+                itemCount: _allBooks.length,
                 itemBuilder: (context, index) {
-                  String language = _filteredBooks.keys.elementAt(index);
-                  List<Map<String, dynamic>> books = _filteredBooks.values
-                      .elementAt(index);
+                  String language = _allBooks.keys.elementAt(index);
+                  List<Map<String, dynamic>> books = _allBooks.values.elementAt(
+                    index,
+                  );
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -150,7 +190,9 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                           Text("( ${language.capitalize()} )"),
                         ],
                       ),
-                      const Gap(10),
+                      const Gap(5),
+                      Divider(height: 1, color: themeState.primaryShade200),
+                      const Gap(5),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
