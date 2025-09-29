@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.da
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
-import "package:hive_flutter/hive_flutter.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 class QuranViewCubit extends Cubit<QuranViewState> {
   QuranViewCubit()

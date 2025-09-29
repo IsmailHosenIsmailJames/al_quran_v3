@@ -27,7 +27,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";

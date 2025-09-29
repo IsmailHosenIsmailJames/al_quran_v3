@@ -10,7 +10,7 @@ import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart"; // Still needed for BuildContext
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../encode_decode.dart";
 
