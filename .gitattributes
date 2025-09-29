@@ -1,0 +1,4 @@
+# Prevent environment-specific files from being merged from dev to main
+android/app/build.gradle.kts merge=ours
+android/app/src/main/AndroidManifest.xml merge=ours
+android/app/src/main/kotlin/com/ismail_hosen_james/al_quran_v3/MainActivity.kt merge=ours
