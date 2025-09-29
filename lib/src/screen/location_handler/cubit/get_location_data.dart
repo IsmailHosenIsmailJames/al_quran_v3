@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../prayer_time/functions/prayers_time_function.dart";
 import "../../qibla/qibla_direction.dart";

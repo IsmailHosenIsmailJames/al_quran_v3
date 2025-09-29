@@ -39,7 +39,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
-import "package:hive_flutter/adapters.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";

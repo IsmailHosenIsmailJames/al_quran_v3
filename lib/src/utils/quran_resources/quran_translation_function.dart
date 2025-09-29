@@ -6,7 +6,7 @@ import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
 import "../../resources/quran_resources/available_surah_info_lang.dart";

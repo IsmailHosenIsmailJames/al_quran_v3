@@ -14,7 +14,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive_flutter/hive_flutter.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 

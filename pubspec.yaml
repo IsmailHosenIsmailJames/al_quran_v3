@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.6.0+61
+version: 4.0.0+62
 
 environment:
   sdk: ^3.7.2
@@ -20,8 +20,6 @@ dependencies:
   html: ^0.15.5
   http: ^1.4.0
   archive: ^4.0.5
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   meta: ^1.16.0
   bloc: ^9.0.0
   dio: ^5.8.0+1
@@ -38,10 +36,10 @@ dependencies:
   just_audio_background: ^0.0.1-beta.17
   audio_video_progress_bar: ^2.0.3
   dartx: ^1.2.0
-  fluttertoast: ^8.2.12
+  fluttertoast: ^9.0.0
   url_launcher: ^6.3.1
   path_provider: ^2.1.5
-  share_plus: ^11.0.0
+  share_plus: ^12.0.0
   clipboard: ^2.0.2
   flutter_html: ^3.0.0
   visibility_detector: ^0.4.0+2
@@ -51,8 +49,8 @@ dependencies:
   cached_network_image: ^3.4.1
   workmanager: ^0.9.0+2
   screenshot: ^3.0.0
-  device_info_plus: ^11.4.0
-  package_info_plus: ^8.3.0
+  device_info_plus: ^12.1.0
+  package_info_plus: ^9.0.0
   flutter_spinkit: ^5.2.1
   simple_icons: ^14.6.1
   uuid: ^4.5.1
@@ -64,6 +62,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_animate: ^4.5.2
+  hive_ce: 2.13.2
+  hive_ce_flutter: 2.3.2
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0

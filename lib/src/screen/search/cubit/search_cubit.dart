@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/screen/search/models/search_options.dart";
 import "package:al_quran_v3/src/screen/search/models/search_result_model.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:bloc/bloc.dart";
-import "package:hive_flutter/hive_flutter.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit()

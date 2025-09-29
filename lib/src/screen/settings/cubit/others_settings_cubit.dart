@@ -2,7 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:bloc/bloc.dart";
-import "package:hive_flutter/hive_flutter.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:wakelock_plus/wakelock_plus.dart";
 
 class OthersSettingsCubit extends Cubit<OthersSettingsState> {
