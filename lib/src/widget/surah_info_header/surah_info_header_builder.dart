@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -37,8 +36,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations l10n = AppLocalizations.of(context);
-    final TranslationBookModel? translationMeta =
-        QuranTranslationFunction.getMetaInfo();
+
     TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
     Widget surahInfoHeader = Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
@@ -85,10 +83,14 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      "${l10n.translation}: ${translationMeta?.name.toString()}",
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 12),
+                    FutureBuilder(
+                      future: QuranTranslationFunction.getMetaInfo(),
+                      builder:
+                          (context, snapshot) => Text(
+                            "${l10n.translation}: ${snapshot.data?.name.toString() ?? ""}",
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 12),
+                          ),
                     ),
                     Text(
                       "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",

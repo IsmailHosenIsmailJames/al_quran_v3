@@ -15,7 +15,7 @@ import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
 class QuranTranslationFunction {
-  static Box? openedTranslationBox;
+  static LazyBox? openedTranslationBox;
 
   static Future<void> init({TranslationBookModel? translationBook}) async {
     if (!Hive.isBoxOpen("user")) {
@@ -39,7 +39,7 @@ class QuranTranslationFunction {
       final boxName = getTranslationBoxName(translationBook: bookToOpen);
       if (await Hive.boxExists(boxName)) {
         await close(); // Close any previously opened box
-        openedTranslationBox = await Hive.openBox(boxName);
+        openedTranslationBox = await Hive.openLazyBox(boxName);
         log(
           "Opened translation box: $boxName",
           name: "QuranTranslationFunction.init",
@@ -384,7 +384,7 @@ class QuranTranslationFunction {
     }
   }
 
-  static Map? getTranslation(String ayahKey) {
+  static Future<Map?> getTranslation(String ayahKey) async {
     if (openedTranslationBox == null || !openedTranslationBox!.isOpen) {
       log("Translation box is not open or available.", name: "getTranslation");
       TranslationBookModel? currentSelection = getTranslationSelection();
@@ -398,16 +398,18 @@ class QuranTranslationFunction {
       }
       return {"t": "Translation Not Selected"};
     }
-    return openedTranslationBox!.get(
+    return await openedTranslationBox!.get(
       ayahKey,
       defaultValue: {"t": "Translation Not Found For Ayah"},
     );
   }
 
-  static TranslationBookModel? getMetaInfo() {
+  static Future<TranslationBookModel?> getMetaInfo() async {
     if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
       final Map<String, dynamic>? metaMap =
-          openedTranslationBox!.get("meta_data")?.cast<String, dynamic>();
+          (await openedTranslationBox!.get(
+            "meta_data",
+          ))?.cast<String, dynamic>();
       if (metaMap != null) {
         return TranslationBookModel.fromMap(metaMap);
       }

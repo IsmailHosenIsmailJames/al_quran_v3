@@ -30,6 +30,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
+import "package:shimmer/shimmer.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -54,12 +55,7 @@ class _AudioPageState extends State<AudioPage> {
           builder: (context, ayahKeyState) {
             int currentIndex =
                 int.parse(ayahKeyState.current.split(":")[1]) - 1;
-            Map? translationMap = QuranTranslationFunction.getTranslation(
-              ayahKeyState.current,
-            );
-            String translation =
-                translationMap?["t"] ?? l10n.translationNotFound;
-            translation = translation.replaceAll(">", "> ");
+
             return Padding(
               padding: const EdgeInsets.all(10),
               child:
@@ -94,10 +90,9 @@ class _AudioPageState extends State<AudioPage> {
                             ),
                             const Gap(10),
                             Expanded(
-                              child: getAyahAndTranslation(
+                              child: getAyahAndTranslationWithShimmer(
                                 context,
                                 ayahKeyState,
-                                translation,
                               ),
                             ),
                           ],
@@ -117,10 +112,9 @@ class _AudioPageState extends State<AudioPage> {
 
                           const Gap(10),
                           Expanded(
-                            child: getAyahAndTranslation(
+                            child: getAyahAndTranslationWithShimmer(
                               context,
                               ayahKeyState,
-                              translation,
                             ),
                           ),
                           const Gap(20),
@@ -157,6 +151,33 @@ class _AudioPageState extends State<AudioPage> {
             AudioPlayerManager.audioPlayer.seek(duration);
           },
         );
+      },
+    );
+  }
+
+  Widget getAyahAndTranslationWithShimmer(
+    BuildContext context,
+    AyahKeyManagement ayahKeyState,
+  ) {
+    return FutureBuilder(
+      future: QuranTranslationFunction.getTranslation(ayahKeyState.current),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.connectionState != ConnectionState.done) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: getAyahAndTranslation(
+              context,
+              ayahKeyState,
+              "", // Empty translation for shimmer
+            ),
+          );
+        }
+        String translation =
+            asyncSnapshot.data?["t"] ??
+            AppLocalizations.of(context).translationNotFound;
+        translation = translation.replaceAll(">", "> ");
+        return getAyahAndTranslation(context, ayahKeyState, translation);
       },
     );
   }

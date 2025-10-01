@@ -64,6 +64,7 @@ dependencies:
   flutter_animate: ^4.5.2
   hive_ce: 2.13.2
   hive_ce_flutter: 2.3.2
+  shimmer: ^3.0.0
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0
