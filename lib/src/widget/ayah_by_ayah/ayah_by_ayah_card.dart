@@ -13,7 +13,6 @@ import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -49,15 +48,15 @@ Widget getAyahByAyahCard({
   bool showTopOptions = true,
   bool showOnlyAyah = false,
   bool keepMargin = true,
+  required Map translationMap,
 }) {
   AppLocalizations? l10n = AppLocalizations.of(context);
 
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  Map? translationMap = QuranTranslationFunction.getTranslation(ayahKey);
-  String translation = translationMap?["t"] ?? l10n.translationNotFound;
+  String translation = translationMap["t"] ?? l10n.translationNotFound;
   translation = translation.replaceAll(">", "> ");
-  Map footNote = translationMap?["f"] ?? {};
+  Map footNote = translationMap["f"] ?? {};
   List wordByWord = [];
   bool supportsWordByWord = false;
   final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();

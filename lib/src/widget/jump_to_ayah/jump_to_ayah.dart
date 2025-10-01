@@ -394,7 +394,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            (await QuranTranslationFunction.getTranslation(
+                              ayahKey,
+                            )) ??
                             {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";
@@ -496,7 +498,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            (await QuranTranslationFunction.getTranslation(
+                              ayahKey,
+                            )) ??
                             {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";

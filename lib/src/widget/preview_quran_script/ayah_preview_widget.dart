@@ -3,12 +3,14 @@ import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:shimmer/shimmer.dart";
 
 BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
   bool showHeaderOptions = true,
@@ -55,12 +57,34 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
               ],
             ),
 
-          getAyahByAyahCard(
-            ayahKey: quranViewState.ayahKey,
-            context: context,
-            showTopOptions: showHeaderOptions,
-            keepMargin: false,
-            showOnlyAyah: showOnlyAyah,
+          FutureBuilder(
+            future: QuranTranslationFunction.getTranslation(
+              quranViewState.ayahKey,
+            ),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: getAyahByAyahCard(
+                    ayahKey: quranViewState.ayahKey,
+                    context: context,
+                    showTopOptions: showHeaderOptions,
+                    keepMargin: false,
+                    showOnlyAyah: showOnlyAyah,
+                    translationMap: const {}, // Empty map for shimmer
+                  ),
+                );
+              }
+              return getAyahByAyahCard(
+                ayahKey: quranViewState.ayahKey,
+                context: context,
+                showTopOptions: showHeaderOptions,
+                keepMargin: false,
+                showOnlyAyah: showOnlyAyah,
+                translationMap: snapshot.data ?? {},
+              );
+            },
           ),
         ],
       );

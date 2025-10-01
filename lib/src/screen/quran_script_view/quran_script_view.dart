@@ -17,6 +17,7 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.da
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/widget/audio/audio_controller_ui.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
@@ -29,6 +30,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
+import "package:shimmer/shimmer.dart";
 import "package:visibility_detector/visibility_detector.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -593,10 +595,31 @@ class _PageByPageViewState extends State<QuranScriptView> {
           return state.isAyahByAyah == true && isPageByPageThisPage == false
               ? Column(
                 children: List.generate(ayahsKeyOfPage.length, (idx) {
-                  return getAyahByAyahCard(
-                    key: ayahKeyToKey[ayahsKeyOfPage[idx]],
-                    ayahKey: ayahsKeyOfPage[idx],
-                    context: context,
+                  return FutureBuilder(
+                    future: QuranTranslationFunction.getTranslation(
+                      ayahsKeyOfPage[idx],
+                    ),
+                    builder: (context, asyncSnapshot) {
+                      if (asyncSnapshot.connectionState !=
+                          ConnectionState.done) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: getAyahByAyahCard(
+                            key: ayahKeyToKey[ayahsKeyOfPage[idx]],
+                            ayahKey: ayahsKeyOfPage[idx],
+                            context: context,
+                            translationMap: const {},
+                          ),
+                        );
+                      }
+                      return getAyahByAyahCard(
+                        key: ayahKeyToKey[ayahsKeyOfPage[idx]],
+                        ayahKey: ayahsKeyOfPage[idx],
+                        context: context,
+                        translationMap: asyncSnapshot.data ?? {},
+                      );
+                    },
                   );
                 }),
               )
