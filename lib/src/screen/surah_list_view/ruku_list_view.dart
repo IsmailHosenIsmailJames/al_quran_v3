@@ -15,7 +15,6 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:shimmer/shimmer.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 
@@ -37,24 +36,7 @@ class RukuListView extends StatelessWidget {
 
       builder: (context, asyncSnapshot) {
         if (asyncSnapshot.connectionState != ConnectionState.done) {
-          return Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder:
-                  (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(roundedRadius),
-                      ),
-                    ),
-                  ),
-            ),
-          );
+          return const SizedBox(height: 250);
         }
         Map metaDataRuku = jsonDecode(asyncSnapshot.data!);
 

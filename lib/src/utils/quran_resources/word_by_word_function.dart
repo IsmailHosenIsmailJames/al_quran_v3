@@ -15,7 +15,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "../encode_decode.dart";
 
 class WordByWordFunction {
-  static Box? openedWordByWordBox;
+  static LazyBox? openedWordByWordBox;
 
   // User box keys will now store maps, not just language strings
   static const String _userBoxKeyDownloaded = "downloaded_wbw_books";
@@ -45,7 +45,7 @@ class WordByWordFunction {
       final boxName = getWordByWordBoxName(selectedBook);
       if (await Hive.boxExists(boxName)) {
         await close(); // Close any previously opened box
-        openedWordByWordBox = await Hive.openBox(boxName);
+        openedWordByWordBox = await Hive.openLazyBox(boxName);
         log(
           "Opened WbW box for '${selectedBook.name}': $boxName",
           name: "WbWFunction.init",
@@ -261,9 +261,9 @@ class WordByWordFunction {
       name: "WbWFunction.downloadResource",
     );
 
-    Box? newBox;
+    LazyBox? newBox;
     try {
-      newBox = await Hive.openBox(boxName);
+      newBox = await Hive.openLazyBox(boxName);
     } catch (e) {
       log(
         "Error opening Hive box '$boxName' for WbW: $e. Trying to delete and reopen.",
@@ -271,7 +271,7 @@ class WordByWordFunction {
       );
       try {
         await Hive.deleteBoxFromDisk(boxName);
-        newBox = await Hive.openBox(boxName);
+        newBox = await Hive.openLazyBox(boxName);
       } catch (e2) {
         log(
           "Failed to open Hive box '$boxName' even after delete: $e2",
@@ -358,10 +358,10 @@ class WordByWordFunction {
     }
   }
 
-  static List? getAyahWordByWordData(String ayahKey) {
+  static Future<List?> getAyahWordByWordData(String ayahKey) async {
     if (openedWordByWordBox != null && openedWordByWordBox!.isOpen) {
       if (openedWordByWordBox!.containsKey(ayahKey)) {
-        var data = openedWordByWordBox!.get(ayahKey);
+        var data = await openedWordByWordBox!.get(ayahKey);
         return data as List?; // Assuming it's stored as a List
       } else {
         log(

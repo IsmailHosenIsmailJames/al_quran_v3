@@ -1,8 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:flutter/material.dart";
-import "package:shimmer/shimmer.dart";
 
 class ListOfAyahsViews extends StatefulWidget {
   final List<String> ayahsKey;
@@ -22,27 +21,17 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
         itemCount: widget.ayahsKey.length,
         itemBuilder: (context, index) {
           return FutureBuilder(
-            future: QuranTranslationFunction.getTranslation(
-              widget.ayahsKey[index],
-            ),
+            future: getTranslationWithWordByWord(widget.ayahsKey[index]),
             builder: (context, asyncSnapshot) {
               if (asyncSnapshot.connectionState != ConnectionState.done) {
-                return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
-                  child: getAyahByAyahCard(
-                    ayahKey: widget.ayahsKey[index],
-                    context: context,
-                    showFullKey: true,
-                    translationMap: const {},
-                  ),
-                );
+                return const SizedBox(height: 250);
               }
               return getAyahByAyahCard(
                 ayahKey: widget.ayahsKey[index],
                 context: context,
                 showFullKey: true,
-                translationMap: asyncSnapshot.data ?? {},
+                translationMap: asyncSnapshot.data?.translation ?? {},
+                wordByWord: asyncSnapshot.data?.wordByWord ?? [],
               );
             },
           );

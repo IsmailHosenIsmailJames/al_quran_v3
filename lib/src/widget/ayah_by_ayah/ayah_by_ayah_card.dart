@@ -49,6 +49,7 @@ Widget getAyahByAyahCard({
   bool showOnlyAyah = false,
   bool keepMargin = true,
   required Map translationMap,
+  required List wordByWord,
 }) {
   AppLocalizations? l10n = AppLocalizations.of(context);
 
@@ -57,15 +58,12 @@ Widget getAyahByAyahCard({
   String translation = translationMap["t"] ?? l10n.translationNotFound;
   translation = translation.replaceAll(">", "> ");
   Map footNote = translationMap["f"] ?? {};
-  List wordByWord = [];
   bool supportsWordByWord = false;
   final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
   if (metaDataOfWordByWord != null) {
     supportsWordByWord = true;
   }
-  if (supportsWordByWord) {
-    wordByWord = WordByWordFunction.getAyahWordByWordData(ayahKey) ?? [];
-  }
+
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah["$surahNumber"],
   );
@@ -362,6 +360,11 @@ SizedBox getAyahWordByWord(
                       context: context,
                       wordKeys: wordsKey,
                       initWordIndex: index,
+                      wordByWordList:
+                          await WordByWordFunction.getAyahWordByWordData(
+                            "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                          ) ??
+                          [],
                     );
                   },
                   child: Container(

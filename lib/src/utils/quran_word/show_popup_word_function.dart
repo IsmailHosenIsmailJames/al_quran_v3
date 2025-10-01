@@ -7,6 +7,7 @@ void showPopupWordFunction({
   required BuildContext context,
   required List<String> wordKeys,
   required int initWordIndex,
+  required List wordByWordList,
 }) {
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah[wordKeys.first.split(":").first],
@@ -18,6 +19,7 @@ void showPopupWordFunction({
           wordKeys: wordKeys,
           initWordIndex: initWordIndex,
           surahInfoModel: surahInfoModel,
+          wordByWord: wordByWordList,
         ),
   );
 }

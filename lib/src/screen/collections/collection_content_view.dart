@@ -9,12 +9,11 @@ import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:gap/gap.dart";
-import "package:shimmer/shimmer.dart";
 
 class CollectionContentView extends StatefulWidget {
   final NoteCollectionModel? noteCollectionModel;
@@ -225,33 +224,24 @@ class _CollectionContentViewState extends State<CollectionContentView> {
               itemCount: widget.pinnedCollectionModel!.pinned.length,
               itemBuilder: (context, index) {
                 return FutureBuilder(
-                  future: QuranTranslationFunction.getTranslation(
+                  future: getTranslationWithWordByWord(
                     widget.pinnedCollectionModel!.pinned[index].ayahKey,
                   ),
                   builder: (context, asyncSnapshot) {
-                    if (asyncSnapshot.connectionState !=
-                        ConnectionState.done) {
-                      return Shimmer.fromColors(
-                        baseColor: Colors.grey.shade300,
-                        highlightColor: Colors.grey.shade100,
-                        child: getAyahByAyahCard(
-                          ayahKey: widget
-                              .pinnedCollectionModel!.pinned[index].ayahKey,
-                          context: context,
-                          showFullKey: true,
-                          translationMap: const {},
-                        ),
-                      );
+                    if (asyncSnapshot.connectionState != ConnectionState.done) {
+                      return const SizedBox(height: 250);
                     }
                     return getAyahByAyahCard(
                       ayahKey:
                           widget.pinnedCollectionModel!.pinned[index].ayahKey,
                       context: context,
                       showFullKey: true,
-                      translationMap: asyncSnapshot.data ?? {},
+                      translationMap: asyncSnapshot.data?.translation ?? {},
+                      wordByWord: asyncSnapshot.data?.wordByWord ?? [],
                     );
                   },
-                );              },
+                );
+              },
             );
           }
           return _buildEmptyState(
