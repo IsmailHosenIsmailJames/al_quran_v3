@@ -1,3 +1,4 @@
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -53,14 +54,15 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       elevation: 0,
                       shadowColor: Colors.transparent,
                     ),
-                    onPressed: () {
-                      Hive.box(
+                    onPressed: () async {
+                      await Hive.box(
                         "user",
                       ).put("selected_script", currentQuranScriptType.name);
 
                       context.read<QuranViewCubit>().changeQuranScriptType(
                         currentQuranScriptType,
                       );
+                      await loadQuranScript();
                     },
                     label: Text(
                       getLocalizedQuranScriptType(

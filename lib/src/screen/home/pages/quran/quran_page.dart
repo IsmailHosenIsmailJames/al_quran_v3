@@ -3,10 +3,8 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/ruku_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart";
@@ -34,10 +32,6 @@ class _QuranPageState extends State<QuranPage>
       metaDataJuz.values.map((e) => JuzInfoModel.fromMap(e)).toList();
   List<PageInfoModel> pageInfoList =
       quranPagesInfo.map((e) => PageInfoModel.fromMap(e)).toList();
-  List<HizbModel> hizbInfoList =
-      metaDataHizb.values.map((e) => HizbModel.fromMap(e)).toList();
-  List<RukuInfoModel> rukuInfoList =
-      metaDataRuku.values.map((e) => RukuInfoModel.fromMap(e)).toList();
   late final TabController _tabController;
   @override
   void initState() {
@@ -108,8 +102,8 @@ class _QuranPageState extends State<QuranPage>
                   SurahListView(surahInfoList: surahInfoList),
                   JuzListView(juzInfoList: juzInfoModelList),
                   PageListView(pageInfoList: pageInfoList),
-                  HizbListView(hizbInfoList: hizbInfoList),
-                  RukuListView(rukuInfoList: rukuInfoList),
+                  const HizbListView(),
+                  const RukuListView(),
                 ],
               ),
             ),

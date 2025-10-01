@@ -33,6 +33,7 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:alarm/alarm.dart";
 import "package:flutter/material.dart";
@@ -45,19 +46,40 @@ import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
 import "package:workmanager/workmanager.dart";
 
-Map<String, dynamic> tajweedQuranScriptCompressed = {};
-Map<String, dynamic> uthmaniQuranScript = {};
-Map<String, dynamic> indopakQuranScript = {};
+Map<String, dynamic> quranScript = {};
 
-Map<String, dynamic> metaDataHizb = {};
 Map<String, dynamic> metaDataJuz = {};
-Map<String, dynamic> metaDataManzil = {};
-Map<String, dynamic> metaDataRub = {};
-Map<String, dynamic> metaDataRuku = {};
 List<Map> metaDataSajda = [];
 Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
 Map<String, dynamic> surahMeaningLocalization = {};
+
+Future<void> loadQuranScript() async {
+  QuranScriptType scriptType = QuranScriptType.values.firstWhere(
+    (element) =>
+        Hive.box("user").get(
+          "selected_quran_script_type",
+          defaultValue: QuranScriptType.values.first.name,
+        ) ==
+        element.name,
+  );
+  switch (scriptType) {
+    case QuranScriptType.tajweed:
+      quranScript = jsonDecode(
+        await rootBundle.loadString(
+          "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
+        ),
+      );
+    case QuranScriptType.uthmani:
+      quranScript = jsonDecode(
+        await rootBundle.loadString("assets/quran_script/Uthmani.json"),
+      );
+    case QuranScriptType.indopak:
+      quranScript = jsonDecode(
+        await rootBundle.loadString("assets/quran_script/Indopak.json"),
+      );
+  }
+}
 
 Directory? applicationDataPath;
 
@@ -103,34 +125,11 @@ Future<void> main() async {
     // Fallback for platforms where user-accessible folders are restricted
     applicationDataPath = await getApplicationDocumentsDirectory();
   }
-  tajweedQuranScriptCompressed = jsonDecode(
-    await rootBundle.loadString(
-      "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
-    ),
-  );
-  uthmaniQuranScript = jsonDecode(
-    await rootBundle.loadString("assets/quran_script/Uthmani.json"),
-  );
-  indopakQuranScript = jsonDecode(
-    await rootBundle.loadString("assets/quran_script/Indopak.json"),
-  );
-  metaDataHizb = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Hizb.json"),
-  );
+
+  await loadQuranScript();
+
   metaDataJuz = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Juz.json"),
-  );
-  metaDataManzil = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Manzil.json"),
-  );
-  metaDataRub = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Rub.json"),
-  );
-  metaDataRuku = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Ruku.json"),
-  );
-  metaDataSajda = List<Map>.from(
-    jsonDecode(await rootBundle.loadString("assets/meta_data/Sajda.json")),
   );
   metaDataSurah = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Surah.json"),
