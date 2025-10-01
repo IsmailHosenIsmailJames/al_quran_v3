@@ -32,7 +32,7 @@ class QuranTranslationFunction {
     String infoBoxName =
         "surah_info_${languageToCodeMap[bookToOpen?.language.toLowerCase()]}";
     if (!Hive.isBoxOpen(infoBoxName)) {
-      await Hive.openBox(infoBoxName);
+      await Hive.openLazyBox(infoBoxName);
     }
 
     if (bookToOpen != null) {
@@ -66,13 +66,13 @@ class QuranTranslationFunction {
   static bool isInfoAvailable() {
     final boxName =
         "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
-    return Hive.box(boxName).isNotEmpty;
+    return Hive.lazyBox(boxName).isNotEmpty;
   }
 
-  static String getInfoOfSurah(String id) {
+  static Future<String> getInfoOfSurah(String id) async {
     final boxName =
         "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
-    return Hive.box(boxName).get(id)["text"];
+    return (await Hive.lazyBox(boxName).get(id))["text"];
   }
 
   static Future<bool> isAlreadyDownloaded(TranslationBookModel book) async {
@@ -227,9 +227,9 @@ class QuranTranslationFunction {
       name: "downloadResources",
     );
 
-    Box? newTranslationBox;
+    LazyBox? newTranslationBox;
     try {
-      newTranslationBox = await Hive.openBox(translationBoxName);
+      newTranslationBox = await Hive.openLazyBox(translationBoxName);
     } catch (e) {
       log(
         "Error opening Box '$translationBoxName': $e. Trying to delete and reopen.",
@@ -237,7 +237,7 @@ class QuranTranslationFunction {
       );
       try {
         await Hive.deleteBoxFromDisk(translationBoxName);
-        newTranslationBox = await Hive.openBox(translationBoxName);
+        newTranslationBox = await Hive.openLazyBox(translationBoxName);
       } catch (e2) {
         log(
           "Failed to open Box '$translationBoxName' even after delete: $e2",
@@ -338,7 +338,7 @@ class QuranTranslationFunction {
     log("Downloading surah info for $languageCode", name: "downloadSurahInfo");
     // Check if box exists and is not empty
     if (await Hive.boxExists(surahInfoBoxName)) {
-      var box = await Hive.openBox(surahInfoBoxName);
+      var box = await Hive.openLazyBox(surahInfoBoxName);
       if (box.isNotEmpty) {
         log(
           "Surah info for $languageCode already exists and is not empty.",
@@ -356,7 +356,7 @@ class QuranTranslationFunction {
       );
       if (response.statusCode == 200) {
         log(surahInfoBoxName);
-        final box = await Hive.openBox(surahInfoBoxName);
+        final box = await Hive.openLazyBox(surahInfoBoxName);
         Map data = await compute(
           (message) => jsonDecode(decodeBZip2String(message as String)),
           response.data,

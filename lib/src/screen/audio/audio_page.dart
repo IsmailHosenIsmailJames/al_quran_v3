@@ -30,7 +30,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
-import "package:shimmer/shimmer.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -163,15 +162,7 @@ class _AudioPageState extends State<AudioPage> {
       future: QuranTranslationFunction.getTranslation(ayahKeyState.current),
       builder: (context, asyncSnapshot) {
         if (asyncSnapshot.connectionState != ConnectionState.done) {
-          return Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: getAyahAndTranslation(
-              context,
-              ayahKeyState,
-              "", // Empty translation for shimmer
-            ),
-          );
+          return const SizedBox(height: 250);
         }
         String translation =
             asyncSnapshot.data?["t"] ??

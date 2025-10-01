@@ -14,7 +14,6 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:shimmer/shimmer.dart";
 
 import "../../utils/number_localization.dart";
 import "../../theme/controller/theme_cubit.dart";
@@ -42,24 +41,7 @@ class HizbListView extends StatelessWidget {
         future: rootBundle.loadString("assets/meta_data/Hizb.json"),
         builder: (context, asyncSnapshot) {
           if (asyncSnapshot.connectionState != ConnectionState.done) {
-            return Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder:
-                    (context, index) => Padding(
-                      padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(roundedRadius),
-                        ),
-                      ),
-                    ),
-              ),
-            );
+            return const SizedBox();
           }
           Map hizbData = jsonDecode(asyncSnapshot.data!);
           List<HizbModel> hizbInfoList =

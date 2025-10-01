@@ -107,7 +107,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           ),
                           onPressed: () async {
                             final String surahInfo =
-                                QuranTranslationFunction.getInfoOfSurah(
+                                await QuranTranslationFunction.getInfoOfSurah(
                                   headerInfoModel.surahInfoModel.id.toString(),
                                 );
                             Navigator.push(

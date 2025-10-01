@@ -19,11 +19,13 @@ class ShowPopupOfWord extends StatefulWidget {
   final List<String> wordKeys;
   final SurahInfoModel surahInfoModel;
   final int initWordIndex;
+  final List wordByWord;
   const ShowPopupOfWord({
     super.key,
     required this.wordKeys,
     required this.surahInfoModel,
     required this.initWordIndex,
+    required this.wordByWord,
   });
   @override
   State<ShowPopupOfWord> createState() => _ShowPopupOfWordState();
@@ -39,20 +41,12 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
     ThemeState themeState = context.read<ThemeCubit>().state;
     QuranScriptType scriptType =
         context.read<QuranViewCubit>().state.quranScriptType;
-
-    List wordByWord = [];
     bool supportsWordByWord = false;
     final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
     if (metaDataOfWordByWord != null) {
       supportsWordByWord = true;
     }
-    if (supportsWordByWord) {
-      wordByWord =
-          WordByWordFunction.getAyahWordByWordData(
-            "${widget.wordKeys.first.split(":")[0]}:${widget.wordKeys.first.split(":")[1]}",
-          ) ??
-          [];
-    }
+
     return Container(
       decoration: const BoxDecoration(),
       padding: const EdgeInsets.all(15),
@@ -138,7 +132,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                       const Gap(10),
                       if (supportsWordByWord)
                         Text(
-                          wordByWord[index].toString().capitalize(),
+                          widget.wordByWord[index].toString().capitalize(),
                           style: const TextStyle(fontSize: 18),
                         ),
                       const Gap(15),

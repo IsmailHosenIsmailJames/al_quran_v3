@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
@@ -80,7 +81,7 @@ class NonTajweedScriptView extends StatelessWidget {
                   scriptInfo.skipWordTap == true
                       ? null
                       : (TapGestureRecognizer()
-                        ..onTap = () {
+                        ..onTap = () async {
                           List<String> wordsKey = List.generate(
                             words.length,
                             (i) =>
@@ -90,6 +91,11 @@ class NonTajweedScriptView extends StatelessWidget {
                             context: context,
                             wordKeys: wordsKey,
                             initWordIndex: index,
+                            wordByWordList:
+                                await WordByWordFunction.getAyahWordByWordData(
+                                  "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                                ) ??
+                                [],
                           );
                         }),
             );
@@ -162,7 +168,7 @@ class NonTajweedScriptView extends StatelessWidget {
                         scriptInfo.skipWordTap == true
                             ? null
                             : (TapGestureRecognizer()
-                              ..onTap = () {
+                              ..onTap = () async {
                                 List<String> wordsKey = List.generate(
                                   words.length,
                                   (i) =>
@@ -172,6 +178,11 @@ class NonTajweedScriptView extends StatelessWidget {
                                   context: context,
                                   wordKeys: wordsKey,
                                   initWordIndex: index,
+                                  wordByWordList:
+                                      await WordByWordFunction.getAyahWordByWordData(
+                                        "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                                      ) ??
+                                      [],
                                 );
                               }),
                   );
