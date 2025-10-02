@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -17,7 +18,7 @@ Widget getReciterViewWidget(
   AyahKeyManagement ayahKeyState,
   int currentIndex, {
   bool showSettingsIconButton = true,
-  bool showDownloadIconButton = true,
+  bool showDownloadIconButton = kIsWeb ? false : true,
 }) {
   return Stack(
     children: [

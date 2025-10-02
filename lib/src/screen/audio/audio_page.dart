@@ -64,27 +64,29 @@ class _AudioPageState extends State<AudioPage> {
                           children: [
                             SizedBox(
                               width: width * 0.45,
-                              child: ListView(
-                                children: [
-                                  getReciterViewWidget(
-                                    context,
-                                    ayahKeyState,
-                                    currentIndex,
-                                  ),
-                                  getSurahInfoAndController(
-                                    ayahKeyState,
-                                    context,
-                                  ),
-                                  const Gap(20),
-                                  getAudioProgressBar(),
-                                  const Gap(10),
-                                  getAudioController(
-                                    currentIndex,
-                                    ayahKeyState,
-                                    context,
-                                    l10n,
-                                  ),
-                                ],
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    getReciterViewWidget(
+                                      context,
+                                      ayahKeyState,
+                                      currentIndex,
+                                    ),
+                                    getSurahInfoAndController(
+                                      ayahKeyState,
+                                      context,
+                                    ),
+                                    const Gap(20),
+                                    getAudioProgressBar(),
+                                    const Gap(10),
+                                    getAudioController(
+                                      currentIndex,
+                                      ayahKeyState,
+                                      context,
+                                      l10n,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             const Gap(10),

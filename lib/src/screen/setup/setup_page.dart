@@ -22,7 +22,6 @@ import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_stat
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -100,9 +99,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   @override
   void initState() {
-    if (!kIsWeb) {
-      changeAppLanguage(context.read<LanguageCubit>().state);
-    }
+    changeAppLanguage(context.read<LanguageCubit>().state);
     QuranTranslationFunction.init();
     super.initState();
   }
@@ -330,12 +327,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
     ResourcesProgressCubitState processState,
   ) async {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-
     if (translationLanguageCode == null ||
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
         processState.tafsirBookModel == null) {
       Fluttertoast.showToast(msg: appLocalizations.pleaseSelectRequiredOption);
+      return;
     }
     final userBox = Hive.box("user");
     await userBox.put("app_language", appLanguage);
