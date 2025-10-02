@@ -349,7 +349,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
 
                       AudioPlayerManager.audioPlayer.duration;
                       int inMilSec = position.inMilliseconds + 5000;
-                      if ((maxDuration?.inMilliseconds ?? double.infinity) <
+                      if ((maxDuration?.inMilliseconds ??
+                              MediaQuery.of(context).size.width) <
                           inMilSec) {
                         inMilSec = maxDuration?.inMilliseconds ?? 0;
                       }

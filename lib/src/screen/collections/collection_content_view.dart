@@ -93,7 +93,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             ),
             const Gap(4),
             Container(
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerHighest.withValues(
@@ -125,7 +125,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   );
                 },
                 child: Container(
-                  width: double.infinity,
+                  width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: colorScheme.surfaceContainerHighest.withValues(

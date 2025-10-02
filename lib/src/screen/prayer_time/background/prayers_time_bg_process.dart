@@ -1,5 +1,4 @@
 import "dart:convert";
-import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
@@ -12,7 +11,8 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:workmanager/workmanager.dart";
 
-import "../../../core/notification/init_awesome_notification.dart";
+import "../../../../main.dart";
+import "../../../platform_services.dart";
 import "../models/prayer_model_of_day.dart";
 import "../models/prayer_types.dart";
 
@@ -169,7 +169,7 @@ Future<void> setReminderAlarm(
       assetAudioPath: "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
       loopAudio: false,
       vibrate: true,
-      warningNotificationOnKill: Platform.isIOS,
+      warningNotificationOnKill: platformOwn == PlatformOwn.isIos,
       androidFullScreenIntent: false,
       volumeSettings: VolumeSettings.fade(
         volume: PrayersTimeFunction.getSoundVolume(),

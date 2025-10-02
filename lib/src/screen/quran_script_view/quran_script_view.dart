@@ -663,7 +663,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         builder: (context, state) {
           latestState = state;
           return Container(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             height: 30,
             margin: const EdgeInsets.only(top: 5, bottom: 5),
             color: context.read<ThemeCubit>().state.primaryShade100,

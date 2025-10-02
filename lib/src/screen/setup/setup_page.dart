@@ -301,7 +301,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         ),
                         const Gap(10),
                         SizedBox(
-                          width: double.infinity,
+                          width: MediaQuery.of(context).size.width,
                           child: ElevatedButton.icon(
                             onPressed: () {
                               downloadResources(
@@ -345,6 +345,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     showDialog(
       barrierDismissible: false,
       context: context,
+      fullscreenDialog: true,
       builder: (context) => dialogForShowDownloadProcess(processState),
     );
     bool success1 = await QuranTranslationFunction.downloadResources(
@@ -396,86 +397,85 @@ class _AppSetupPageState extends State<AppSetupPage> {
     }
   }
 
-  Dialog dialogForShowDownloadProcess(
+  Widget dialogForShowDownloadProcess(
     ResourcesProgressCubitState processState,
   ) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    return Dialog(
-      insetPadding: const EdgeInsets.all(10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-
-        height: 150,
-        width: double.infinity,
-        alignment: Alignment.center,
-        child: BlocBuilder<
-          ResourcesProgressCubitCubit,
-          ResourcesProgressCubitState
-        >(
-          builder: (context, state) {
-            if (state.onProcess == true) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    appLocalizations.justAMoment,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  const Gap(20),
-                  LinearProgressIndicator(
-                    value:
-                        (state.percentage == null ||
-                                state.percentage == 0.0 ||
-                                state.percentage == 1.0)
-                            ? null
-                            : state.percentage,
-                    color: themeState.primary,
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    minHeight: 8,
-                  ),
-                  const Gap(10),
-                  Text(
-                    appLocalizations.processProgress(
-                      state.processName ?? "",
-                      state.percentage != null
-                          ? "${(state.percentage! * 100).toStringAsFixed(2)}%"
-                          : "",
+    return PopScope(
+      canPop: false,
+      child: Dialog(
+        insetPadding: const EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(roundedRadius),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width,
+          child: BlocBuilder<
+            ResourcesProgressCubitCubit,
+            ResourcesProgressCubitState
+          >(
+            builder: (context, state) {
+              if (state.onProcess == true) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      appLocalizations.justAMoment,
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    style: const TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    const Gap(20),
+                    CircularProgressIndicator(
+                      value:
+                          (state.percentage == null ||
+                                  state.percentage == 0.0 ||
+                                  state.percentage == 1.0)
+                              ? null
+                              : state.percentage,
+                      color: themeState.primary,
+                    ),
+                    const Gap(10),
+                    Text(
+                      appLocalizations.processProgress(
+                        state.processName ?? "",
+                        state.percentage != null
+                            ? "${(state.percentage! * 100).toStringAsFixed(2)}%"
+                            : "",
+                      ),
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              } else if (state.isSuccess == true) {
+                return Text(appLocalizations.success);
+              } else if (state.errorMessage != null) {
+                return Column(
+                  children: [
+                    Text(
+                      "${state.errorMessage}",
+                      style: const TextStyle(fontSize: 16, color: Colors.red),
+                    ),
+                    const Gap(10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        downloadResources(processState);
+                      },
+                      child: Text(appLocalizations.retry),
+                    ),
+                  ],
+                );
+              }
+              return LinearProgressIndicator(
+                color: themeState.primary,
+                borderRadius: BorderRadius.circular(roundedRadius),
+                minHeight: 8,
               );
-            } else if (state.isSuccess == true) {
-              return Text(appLocalizations.success);
-            } else if (state.errorMessage != null) {
-              return Column(
-                children: [
-                  Text(
-                    "${state.errorMessage}",
-                    style: const TextStyle(fontSize: 16, color: Colors.red),
-                  ),
-                  const Gap(10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      downloadResources(processState);
-                    },
-                    child: Text(appLocalizations.retry),
-                  ),
-                ],
-              );
-            }
-            return LinearProgressIndicator(
-              color: themeState.primary,
-              borderRadius: BorderRadius.circular(roundedRadius),
-              minHeight: 8,
-            );
-          },
+            },
+          ),
         ),
       ),
     );

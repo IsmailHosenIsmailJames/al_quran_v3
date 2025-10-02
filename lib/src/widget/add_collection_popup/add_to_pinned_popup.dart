@@ -266,7 +266,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
           ),
           const Gap(10),
           SizedBox(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

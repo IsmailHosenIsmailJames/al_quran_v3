@@ -58,7 +58,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
 
                   const Gap(30),
                   SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: OutlinedButton.icon(
                       onPressed: () async {
@@ -141,7 +141,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                   Align(alignment: Alignment.center, child: Text(l10n.or)),
                   const Gap(5),
                   SizedBox(
-                    width: double.infinity,
+                    width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: OutlinedButton.icon(
                       onPressed: () {

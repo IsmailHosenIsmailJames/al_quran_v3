@@ -1,8 +1,10 @@
 import "dart:developer";
-import "dart:io";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:permission_handler/permission_handler.dart";
+
+import "../../../../main.dart";
+import "../../../platform_services_stub.dart";
 
 bool isPermissionGranted = false;
 
@@ -18,7 +20,7 @@ Future<bool> requestPermissionForReminder() async {
   }
 
   PermissionStatus statusAlarm = PermissionStatus.granted;
-  if (Platform.isAndroid) {
+  if (platformOwn == PlatformOwn.isAndroid) {
     statusAlarm = await Permission.scheduleExactAlarm.request();
   }
 
