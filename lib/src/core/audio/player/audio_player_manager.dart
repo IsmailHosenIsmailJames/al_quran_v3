@@ -19,6 +19,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:dio/dio.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
@@ -489,12 +490,20 @@ class AudioPlayerManager {
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;
 
-    AudioSource audioSource = LockCachingAudioSource(
-      Uri.parse(
-        "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
-      ),
-      tag: MediaItem(id: wordKey, title: wordKey),
-    );
+    AudioSource audioSource =
+        kIsWeb
+            ? AudioSource.uri(
+              Uri.parse(
+                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+              ),
+              tag: MediaItem(id: wordKey, title: wordKey),
+            )
+            : LockCachingAudioSource(
+              Uri.parse(
+                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+              ),
+              tag: MediaItem(id: wordKey, title: wordKey),
+            );
 
     await stopListeningAudioPlayerState();
 
@@ -543,14 +552,23 @@ class AudioPlayerManager {
         ),
       );
     } else {
-      return LockCachingAudioSource(
-        Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
-        tag: MediaItem(
-          id: ayahKey,
-          album: reciter.name,
-          title: getSurahName(context, surahInfoModel.id),
-        ),
-      );
+      return kIsWeb
+          ? AudioSource.uri(
+            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+            tag: MediaItem(
+              id: ayahKey,
+              album: reciter.name,
+              title: getSurahName(context, surahInfoModel.id),
+            ),
+          )
+          : LockCachingAudioSource(
+            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+            tag: MediaItem(
+              id: ayahKey,
+              album: reciter.name,
+              title: getSurahName(context, surahInfoModel.id),
+            ),
+          );
     }
   }
 
