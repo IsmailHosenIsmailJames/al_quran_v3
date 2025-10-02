@@ -206,19 +206,19 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                                       foregroundColor: Colors.red,
                                     ),
                                     onPressed: () async {
-                                      final files =
-                                          Directory(
-                                            AudioPlayerManager.getExpectedSurahDirectoryLocation(
-                                              surahInfoModel:
-                                                  filteredSurah[index],
-                                              reciterInfoModel:
-                                                  context
-                                                      .read<
-                                                        AudioTabReciterCubit
-                                                      >()
-                                                      .state,
-                                            ),
-                                          ).listSync();
+                                      String? path =
+                                          AudioPlayerManager.getExpectedSurahDirectoryLocation(
+                                            surahInfoModel:
+                                                filteredSurah[index],
+                                            reciterInfoModel:
+                                                context
+                                                    .read<
+                                                      AudioTabReciterCubit
+                                                    >()
+                                                    .state,
+                                          );
+                                      if (path == null) return;
+                                      final files = Directory(path).listSync();
                                       for (final e in files) {
                                         await e.delete();
                                       }
@@ -323,10 +323,11 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
     ReciterInfoModel reciter,
     SurahInfoModel surah,
   ) async {
-    String path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
+    String? path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
       surahInfoModel: surah,
       reciterInfoModel: reciter,
     );
+    if (path == null) return 0;
     final dir = Directory(path);
     if (await dir.exists()) {
       return dir.listSync().length;

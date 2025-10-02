@@ -86,7 +86,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ),
               color: themeState.primaryShade100,
             ),
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             height: 50,
             child: Stack(
               children: [

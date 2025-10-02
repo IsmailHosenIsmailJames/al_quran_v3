@@ -25,7 +25,7 @@ Future<void> showBugReportDialog(BuildContext context) async {
         decoration: const BoxDecoration(),
         padding: const EdgeInsets.all(10),
         height: 300,
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             Row(

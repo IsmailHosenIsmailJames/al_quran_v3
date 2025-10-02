@@ -10,7 +10,7 @@ CalculationMethod findClosestCalculationMethod(double userLat, double userLon) {
   }
 
   CalculationMethod? closestMethod;
-  double minDistance = double.infinity;
+  double minDistance = 10000000000;
 
   for (final method in prayerTimeCalculationMethodModelList) {
     if (method.location == null) {

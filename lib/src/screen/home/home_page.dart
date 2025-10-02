@@ -1,6 +1,5 @@
-import "dart:io";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/platform_services_stub.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
@@ -15,6 +14,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
+import "../../../main.dart";
 import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
@@ -81,9 +81,11 @@ class _HomePageState extends State<HomePage> {
                 (context, state) =>
                     [
                       const QuranPage(),
-                      if (Platform.isIOS || Platform.isAndroid)
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
                         const PrayerTimePage(),
-                      if (Platform.isIOS || Platform.isAndroid)
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
                         const QiblaDirection(),
                       const AudioPage(),
                     ][state.tabIndex],
@@ -169,8 +171,11 @@ class _HomePageState extends State<HomePage> {
                                 .read<OthersSettingsCubit>()
                                 .setTabIndex(0),
                       ),
-                      if (Platform.isIOS || Platform.isAndroid) const Gap(5),
-                      if (Platform.isIOS || Platform.isAndroid)
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
+                        const Gap(5),
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
                         IconButton(
                           icon: Icon(
                             state.tabIndex == 1
@@ -193,8 +198,11 @@ class _HomePageState extends State<HomePage> {
                                   .read<OthersSettingsCubit>()
                                   .setTabIndex(1),
                         ),
-                      if (Platform.isIOS || Platform.isAndroid) const Gap(5),
-                      if (Platform.isIOS || Platform.isAndroid)
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
+                        const Gap(5),
+                      if (platformOwn == PlatformOwn.isIos ||
+                          platformOwn == PlatformOwn.isAndroid)
                         IconButton(
                           icon: Icon(
                             state.tabIndex == 2
@@ -273,7 +281,8 @@ class _HomePageState extends State<HomePage> {
               ),
               label: l10n.quran,
             ),
-            if (Platform.isIOS || Platform.isAndroid)
+            if (platformOwn == PlatformOwn.isIos ||
+                platformOwn == PlatformOwn.isAndroid)
               BottomNavigationBarItem(
                 icon: Icon(
                   state.tabIndex == 1
@@ -282,7 +291,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 label: l10n.prayer,
               ),
-            if (Platform.isIOS || Platform.isAndroid)
+            if (platformOwn == PlatformOwn.isIos ||
+                platformOwn == PlatformOwn.isAndroid)
               BottomNavigationBarItem(
                 icon: Icon(
                   state.tabIndex == 2

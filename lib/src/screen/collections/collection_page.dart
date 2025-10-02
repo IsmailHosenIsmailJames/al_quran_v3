@@ -374,7 +374,7 @@ class _CollectionPageState extends State<CollectionPage> {
                               ),
                               const Gap(15),
                               SizedBox(
-                                width: double.infinity,
+                                width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
@@ -525,7 +525,7 @@ class _CollectionPageState extends State<CollectionPage> {
                               ),
                               const Gap(15),
                               SizedBox(
-                                width: double.infinity,
+                                width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {

@@ -149,7 +149,7 @@ void showShareBottomDialog(
             ],
           ),
           SizedBox(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             child: TextButton.icon(
               style: textButtonStyle,
               onPressed: () async {

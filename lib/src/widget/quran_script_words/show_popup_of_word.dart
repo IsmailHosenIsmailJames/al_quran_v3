@@ -51,7 +51,7 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
       decoration: const BoxDecoration(),
       padding: const EdgeInsets.all(15),
       height: 300,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           Row(
