@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:developer";
 
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
@@ -8,6 +9,7 @@ import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.da
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/utils/encode_decode.dart";
 import "package:dartx/dartx.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:flutter/material.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:http/http.dart";
@@ -30,22 +32,32 @@ class PrayersTimeFunction {
     required CalculationMethod calculationMethod,
   }) async {
     await init();
-    final response = await get(
-      Uri.parse(
-        "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon&method=${calculationMethod.id}",
-      ),
-    );
+    String url =
+        "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon&method=${calculationMethod.id}";
+    log(url, name: "API");
+    final response = await get(Uri.parse(url));
+
+    log(response.body.substring(0, 500), name: "body");
+    log(response.statusCode.toString(), name: "STatus Code");
 
     if (response.statusCode == 200) {
       Map infoList = jsonDecode(response.body)["data"];
       for (String key in infoList.keys) {
+        log("Process -> $key");
         LazyBox lazyBox = await Hive.openLazyBox("prayer_$key");
         await lazyBox.put(key, encodeToBZip2(jsonEncode(infoList[key])));
         await lazyBox.close();
       }
-      await removeAllReminder();
-      await setReminderForPrayers();
-      await loadPrayersData();
+
+      if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+          platformOwn == platform_services.PlatformOwn.isIos) {
+        await removeAllReminder();
+        log("removeAllReminder");
+        await setReminderForPrayers();
+        log("setReminderForPrayers");
+        await loadPrayersData();
+        log("loadPrayersData");
+      }
       return true;
     }
     return false;

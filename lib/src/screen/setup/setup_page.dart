@@ -474,7 +474,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
   }
 
-  double getProgressValue(ResourcesProgressCubitState state) {
+  double? getProgressValue(ResourcesProgressCubitState state) {
     try {
       double? value =
           (state.percentage == null ||
@@ -482,10 +482,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   state.percentage == 1.0)
               ? null
               : state.percentage;
-      value ??= 0;
-
+      if (value == null) return null;
       if (value > 1) {
-        return 1;
+        return null;
       }
       return value;
     } on Exception catch (_) {
