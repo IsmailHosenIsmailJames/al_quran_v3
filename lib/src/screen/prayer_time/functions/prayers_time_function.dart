@@ -55,9 +55,9 @@ class PrayersTimeFunction {
         log("removeAllReminder");
         await setReminderForPrayers();
         log("setReminderForPrayers");
-        await loadPrayersData();
-        log("loadPrayersData");
       }
+      await loadPrayersData();
+      log("loadPrayersData");
       return true;
     }
     return false;

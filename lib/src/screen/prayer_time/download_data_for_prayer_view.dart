@@ -174,6 +174,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                     LocationQiblaPrayerDataState
                   >(
                     builder: (context, state) {
+                      if (state.calculationMethod == null) {
+                        return const SizedBox();
+                      }
                       return getPrayerCalculationMethodInfoWidget(
                         context,
                         state.calculationMethod!,
