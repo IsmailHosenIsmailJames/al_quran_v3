@@ -402,7 +402,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       value: isCurrentToRemind,
       onChanged: (value) async {
         if (value) {
-          if (await requestPermissionForReminder()) {
+          if (await requestPermissionForReminder(
+            defaultWhenEnable.reminderType == PrayerReminderType.alarm,
+          )) {
             context.read<PrayerReminderCubit>().addPrayerToRemember(
               defaultWhenEnable,
             );

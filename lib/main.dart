@@ -9,6 +9,8 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
+import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
+import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -38,6 +40,9 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
+
+import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "src/screen/prayer_time/functions/prayers_time_function.dart";
 
 Map<String, dynamic> quranScript = {};
 
@@ -126,17 +131,41 @@ Future<void> main() async {
 
   await ThemeFunctions.initThemeFunction();
 
+  PrayerReminderState prayerReminderState = PrayerReminderState(
+    prayerToRemember: await PrayersTimeFunction.getListOfPrayerToRemember(),
+    previousReminderModes: await PrayersTimeFunction.getPreviousReminderModes(),
+    reminderTimeAdjustment: await PrayersTimeFunction.getAdjustReminderTime(),
+    enforceAlarmSound: await PrayersTimeFunction.getEnforceAlarmSound(),
+    soundVolume: await PrayersTimeFunction.getSoundVolume(),
+  );
+
+  LocationQiblaPrayerDataState locationQiblaPrayerDataState =
+      await getSavedLocation();
+
   MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
-  runApp(MyApp(initialLocale: initialLocale));
+  runApp(
+    MyApp(
+      initialLocale: initialLocale,
+      prayerReminderState: prayerReminderState,
+      locationQiblaPrayerDataState: locationQiblaPrayerDataState,
+    ),
+  );
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   final MyAppLocalization initialLocale;
+  final PrayerReminderState prayerReminderState;
+  final LocationQiblaPrayerDataState locationQiblaPrayerDataState;
 
-  const MyApp({super.key, required this.initialLocale});
+  const MyApp({
+    super.key,
+    required this.initialLocale,
+    required this.prayerReminderState,
+    required this.locationQiblaPrayerDataState,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,14 +186,22 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
         BlocProvider(create: (context) => AyahKeyCubit()),
-        BlocProvider(create: (context) => LocationQiblaPrayerDataCubit()),
+        BlocProvider(
+          create:
+              (context) => LocationQiblaPrayerDataCubit(
+                initState: locationQiblaPrayerDataState,
+              ),
+        ),
         BlocProvider(create: (context) => SegmentedQuranReciterCubit()),
         BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(create: (context) => WordPlayingStateCubit()),
         BlocProvider(create: (context) => AudioTabReciterCubit()),
         BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
-        BlocProvider(create: (context) => PrayerReminderCubit()),
+        BlocProvider(
+          create:
+              (context) => PrayerReminderCubit(initState: prayerReminderState),
+        ),
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),

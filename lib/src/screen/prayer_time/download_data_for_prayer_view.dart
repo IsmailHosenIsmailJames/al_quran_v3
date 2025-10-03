@@ -203,9 +203,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                           cubit.state.calculationMethod,
                           save: true,
                         );
-                        cubit.alignWithDatabase();
+                        await cubit.alignWithDatabase();
 
-                        cubit.checkPrayerDataExits();
+                        await cubit.checkPrayerDataExits();
                         if (widget.moveToDownload) {
                           Navigator.pop(context);
                         }
