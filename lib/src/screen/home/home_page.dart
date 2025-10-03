@@ -84,10 +84,11 @@ class _HomePageState extends State<HomePage> {
                     [
                       const QuranPage(),
                       const PrayerTimePage(),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        const QiblaDirection(),
+                      (platformOwn == platform_services.PlatformOwn.isIos ||
+                              platformOwn ==
+                                  platform_services.PlatformOwn.isAndroid)
+                          ? const QiblaDirection()
+                          : const SizedBox(),
                       const AudioPage(),
                       if (kIsWeb) const SettingsPage(),
                     ][state.tabIndex],
@@ -253,25 +254,25 @@ class _HomePageState extends State<HomePage> {
                       ),
                       IconButton(
                         icon: Icon(
-                          state.tabIndex == 3
+                          state.tabIndex == 4
                               ? Icons.settings
                               : Icons.settings_outlined,
                         ),
                         style: IconButton.styleFrom(
                           foregroundColor:
-                              state.tabIndex == 3
+                              state.tabIndex == 4
                                   ? Theme.of(context).colorScheme.primary
                                   : Colors.grey,
                           backgroundColor:
-                              state.tabIndex == 3
+                              state.tabIndex == 4
                                   ? themeState.primaryShade200
                                   : null,
                         ),
-                        tooltip: "Audio",
+                        tooltip: "Settings",
                         onPressed:
                             () => context
                                 .read<OthersSettingsCubit>()
-                                .setTabIndex(3),
+                                .setTabIndex(4),
                       ),
                     ],
                   );
