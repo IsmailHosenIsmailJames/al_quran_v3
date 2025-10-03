@@ -79,14 +79,18 @@ platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await platform_services.initAwesomeNotification();
   await platform_services.initializePlatform();
 
-  await JustAudioBackground.init(
-    androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
-    androidNotificationChannelName: "Audio playback",
-    androidNotificationOngoing: true,
-  );
+  if (platformOwn != platform_services.PlatformOwn.isLinux &&
+      platformOwn != platform_services.PlatformOwn.isWindows) {
+    await platform_services.initAwesomeNotification();
+
+    await JustAudioBackground.init(
+      androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
+      androidNotificationChannelName: "Audio playback",
+      androidNotificationOngoing: true,
+    );
+  }
   await Hive.initFlutter();
   await Hive.openBox("user");
   await Hive.openBox("segmented_quran_recitation");

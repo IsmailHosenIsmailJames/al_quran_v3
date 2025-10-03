@@ -39,7 +39,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 const Gap(10),
                 Text(
                   AppLocalizations.of(context).bugReportTitle,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

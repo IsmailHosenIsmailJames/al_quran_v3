@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 // Dark Theme Colors (Adjusted for contrast)
 const Color darkMaddaNecessary = Color(0xFFe65aa7);

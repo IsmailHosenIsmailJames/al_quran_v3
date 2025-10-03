@@ -1,5 +1,5 @@
 import "package:flutter/cupertino.dart";
-import 'package:al_quran_v3/l10n/app_localizations.dart';
+import "package:al_quran_v3/l10n/app_localizations.dart";
 
 class ScriptInfo {
   int surahNumber;
