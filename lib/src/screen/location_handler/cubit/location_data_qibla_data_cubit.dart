@@ -9,10 +9,12 @@ import "../../prayer_time/functions/prayers_time_function.dart";
 import "../../qibla/qibla_direction.dart";
 
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
-  LocationQiblaPrayerDataCubit() : super(getSavedLocation());
+  LocationQiblaPrayerDataCubit({
+    required LocationQiblaPrayerDataState initState,
+  }) : super(initState);
 
-  void alignWithDatabase() {
-    emit(getSavedLocation());
+  Future<void> alignWithDatabase() async {
+    emit(await getSavedLocation());
   }
 
   void saveLocationData(LatLon? latLon, {bool save = true}) {
@@ -41,8 +43,10 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     emit(state.copyWith(calculationMethod: calculationMethod));
   }
 
-  void checkPrayerDataExits() {
-    emit(state.copyWith(isDataExits: PrayersTimeFunction.checkIsDataExits()));
+  Future<void> checkPrayerDataExits() async {
+    emit(
+      state.copyWith(isDataExits: await PrayersTimeFunction.checkIsDataExits()),
+    );
   }
 
   void changePrayerTimeDownloading(bool value) {

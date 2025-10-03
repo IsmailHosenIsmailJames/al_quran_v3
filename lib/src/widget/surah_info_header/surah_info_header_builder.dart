@@ -19,6 +19,7 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -158,34 +159,35 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        IconButton(
-                          style: IconButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: themeState.primary,
-                            foregroundColor: Colors.white,
+                        if (!kIsWeb)
+                          IconButton(
+                            style: IconButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor: themeState.primary,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => AudioDownloadScreen(
+                                        initDownloadSurah:
+                                            headerInfoModel.surahInfoModel,
+                                        reciterInfoModel:
+                                            context
+                                                .read<
+                                                  SegmentedQuranReciterCubit
+                                                >()
+                                                .state,
+                                      ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(
+                              FluentIcons.arrow_download_24_filled,
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => AudioDownloadScreen(
-                                      initDownloadSurah:
-                                          headerInfoModel.surahInfoModel,
-                                      reciterInfoModel:
-                                          context
-                                              .read<
-                                                SegmentedQuranReciterCubit
-                                              >()
-                                              .state,
-                                    ),
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            FluentIcons.arrow_download_24_filled,
-                          ),
-                        ),
                         IconButton(
                           style: IconButton.styleFrom(
                             padding: EdgeInsets.zero,

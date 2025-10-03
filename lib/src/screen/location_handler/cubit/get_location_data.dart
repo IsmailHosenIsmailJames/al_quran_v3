@@ -7,7 +7,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "../../prayer_time/functions/prayers_time_function.dart";
 import "../../qibla/qibla_direction.dart";
 
-LocationQiblaPrayerDataState getSavedLocation() {
+Future<LocationQiblaPrayerDataState> getSavedLocation() async {
   LocationQiblaPrayerDataState data = LocationQiblaPrayerDataState();
   final jsonLocation = Hive.box(
     "user",
@@ -34,7 +34,7 @@ LocationQiblaPrayerDataState getSavedLocation() {
     );
 
     data.calculationMethod = CalculationMethod.fromMap(calculationMethod);
-    data.isDataExits = PrayersTimeFunction.checkIsDataExits();
+    data.isDataExits = await PrayersTimeFunction.checkIsDataExits();
   }
   return data;
 }

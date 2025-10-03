@@ -1,5 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/platform_services_stub.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
@@ -83,11 +83,13 @@ class _HomePageState extends State<HomePage> {
                 (context, state) =>
                     [
                       const QuranPage(),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         const PrayerTimePage(),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         const QiblaDirection(),
                       const AudioPage(),
                       if (kIsWeb) const SettingsPage(),
@@ -174,11 +176,13 @@ class _HomePageState extends State<HomePage> {
                                 .read<OthersSettingsCubit>()
                                 .setTabIndex(0),
                       ),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         const Gap(5),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         IconButton(
                           icon: Icon(
                             state.tabIndex == 1
@@ -201,11 +205,13 @@ class _HomePageState extends State<HomePage> {
                                   .read<OthersSettingsCubit>()
                                   .setTabIndex(1),
                         ),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         const Gap(5),
-                      if (platformOwn == PlatformOwn.isIos ||
-                          platformOwn == PlatformOwn.isAndroid)
+                      if (platformOwn == platform_services.PlatformOwn.isIos ||
+                          platformOwn ==
+                              platform_services.PlatformOwn.isAndroid)
                         IconButton(
                           icon: Icon(
                             state.tabIndex == 2
@@ -306,8 +312,8 @@ class _HomePageState extends State<HomePage> {
               ),
               label: l10n.quran,
             ),
-            if (platformOwn == PlatformOwn.isIos ||
-                platformOwn == PlatformOwn.isAndroid)
+            if (platformOwn == platform_services.PlatformOwn.isIos ||
+                platformOwn == platform_services.PlatformOwn.isAndroid)
               BottomNavigationBarItem(
                 icon: Icon(
                   state.tabIndex == 1
@@ -316,8 +322,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 label: l10n.prayer,
               ),
-            if (platformOwn == PlatformOwn.isIos ||
-                platformOwn == PlatformOwn.isAndroid)
+            if (platformOwn == platform_services.PlatformOwn.isIos ||
+                platformOwn == platform_services.PlatformOwn.isAndroid)
               BottomNavigationBarItem(
                 icon: Icon(
                   state.tabIndex == 2

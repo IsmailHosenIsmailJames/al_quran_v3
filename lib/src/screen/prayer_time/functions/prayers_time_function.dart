@@ -6,21 +6,22 @@ import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_pr
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
+import "package:al_quran_v3/src/utils/encode_decode.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:http/http.dart";
 import "package:intl/intl.dart";
-import "package:shared_preferences/shared_preferences.dart";
 
 import "../models/prayer_types.dart";
 import "../models/reminder_type.dart";
 
 class PrayersTimeFunction {
-  static SharedPreferences? prayerTimePreferences;
+  static final String _dataBoxName = "prayer_data";
   static Map<int, List<PrayerModelOfDay>> prayerTimeMapData = {};
 
   static Future<void> init() async {
-    prayerTimePreferences = await SharedPreferences.getInstance();
+    await Hive.initFlutter();
   }
 
   static Future<bool> downloadPrayerDataFromAPI({
@@ -28,6 +29,7 @@ class PrayersTimeFunction {
     required double lon,
     required CalculationMethod calculationMethod,
   }) async {
+    await init();
     final response = await get(
       Uri.parse(
         "${ApisUrls.basePrayerTime}calendar/${DateTime.now().year}?latitude=$lat&longitude=$lon&method=${calculationMethod.id}",
@@ -35,24 +37,41 @@ class PrayersTimeFunction {
     );
 
     if (response.statusCode == 200) {
-      prayerTimePreferences!.clear();
       Map infoList = jsonDecode(response.body)["data"];
       for (String key in infoList.keys) {
-        await prayerTimePreferences!.setString(key, jsonEncode(infoList[key]));
+        LazyBox lazyBox = await Hive.openLazyBox("prayer_$key");
+        await lazyBox.put(key, encodeToBZip2(jsonEncode(infoList[key])));
+        await lazyBox.close();
       }
-      await prayerTimePreferences?.reload();
       await removeAllReminder();
       await setReminderForPrayers();
-      loadPrayersData();
+      await loadPrayersData();
       return true;
     }
     return false;
   }
 
-  static void loadPrayersData() {
+  static Future<void> loadPrayersData() async {
+    await init();
+
+    int currentMonth = DateTime.now().month;
+    int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
+    int nextMonth = currentMonth == 12 ? 1 : currentMonth + 1;
+
     prayerTimeMapData.clear();
-    for (int i = 1; i <= 12; i++) {
-      String? temPrayerTimeMapData = prayerTimePreferences!.getString("$i");
+    for (int i in [previousMonth, currentMonth, nextMonth]) {
+      LazyBox lazyBox = await Hive.openLazyBox("prayer_$i");
+
+      String? temPrayerTimeMapData = await lazyBox.get(
+        "$i",
+        defaultValue: null,
+      );
+
+      temPrayerTimeMapData =
+          temPrayerTimeMapData == null
+              ? null
+              : decodeBZip2String(temPrayerTimeMapData);
+
       if (temPrayerTimeMapData != null) {
         prayerTimeMapData.addAll({
           i:
@@ -67,14 +86,14 @@ class PrayersTimeFunction {
     }
   }
 
-  static bool checkIsDataExits() {
+  static Future<bool> checkIsDataExits() async {
+    await init();
+
+    List<bool> listOfInfo = [];
     for (int i = 1; i <= 12; i++) {
-      String? data = prayerTimePreferences?.getString("$i");
-      if (data != null) {
-        return true;
-      }
+      listOfInfo.add(await Hive.boxExists("prayer_$i"));
     }
-    return false;
+    return listOfInfo.contains(false) ? false : true;
   }
 
   static PrayerModelOfDay? getTodaysPrayerTime(DateTime date) {
@@ -148,44 +167,60 @@ class PrayersTimeFunction {
   static Future<void> addPrayerToReminder(
     ReminderTypeWithPrayModel data,
   ) async {
+    await init();
+
     List<ReminderTypeWithPrayModel> reminderTypeWithPrayModels =
-        getListOfPrayerToRemember();
+        await getListOfPrayerToRemember();
     reminderTypeWithPrayModels.removeWhere(
       (element) => element.prayerTimesType == data.prayerTimesType,
     );
     reminderTypeWithPrayModels.add(data);
 
-    await prayerTimePreferences?.setString(
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
+    await lazyBox.put(
       "previousReminderModes_${data.prayerTimesType.name}",
       data.reminderType.name,
     );
 
-    await prayerTimePreferences?.setStringList(
+    await lazyBox.put(
       "prayer_time_to_remind",
       reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
     );
-    setReminderForPrayers();
+
+    lazyBox.close();
+
+    await setReminderForPrayers();
   }
 
   static Future<void> removePrayerToReminder(
     ReminderTypeWithPrayModel data,
   ) async {
+    await init();
+
     await removeAllReminderAccordingType(data.prayerTimesType);
     List<ReminderTypeWithPrayModel> reminderTypeWithPrayModels =
-        getListOfPrayerToRemember();
+        await getListOfPrayerToRemember();
     reminderTypeWithPrayModels.removeWhere(
       (element) => element.prayerTimesType == data.prayerTimesType,
     );
-    await prayerTimePreferences?.setStringList(
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
+    await lazyBox.put(
       "prayer_time_to_remind",
       reminderTypeWithPrayModels.map((e) => jsonEncode(e.toJson())).toList(),
     );
     await setReminderForPrayers();
   }
 
-  static List<ReminderTypeWithPrayModel> getListOfPrayerToRemember() {
+  static Future<List<ReminderTypeWithPrayModel>>
+  getListOfPrayerToRemember() async {
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
     List<String> rawPrayerRemind =
-        prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
+        await lazyBox.get("prayer_time_to_remind") ?? [];
     List<ReminderTypeWithPrayModel> prayerRemind =
         rawPrayerRemind
             .map(
@@ -194,11 +229,14 @@ class PrayersTimeFunction {
               ),
             )
             .toList();
+    await lazyBox.close();
     return prayerRemind;
   }
 
-  static Map<PrayerModelTimesType, PrayerReminderType>
-  getPreviousReminderModes() {
+  static Future<Map<PrayerModelTimesType, PrayerReminderType>>
+  getPreviousReminderModes() async {
+    await init();
+
     Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes = {
       PrayerModelTimesType.fajr: PrayerReminderType.alarm,
       PrayerModelTimesType.sunrise: PrayerReminderType.notification,
@@ -209,49 +247,65 @@ class PrayersTimeFunction {
       PrayerModelTimesType.midnight: PrayerReminderType.notification,
     };
 
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
     for (PrayerModelTimesType prayerModelTimesType
         in PrayerModelTimesType.values) {
-      PrayerReminderType? type = PrayerReminderType.values.firstOrNullWhere((
-        element,
-      ) {
-        return element.name ==
-            (prayerTimePreferences!.getString(
-              "previousReminderModes_${prayerModelTimesType.name}",
-            ));
-      });
+      String? storedTypeName = await lazyBox.get(
+        "previousReminderModes_${prayerModelTimesType.name}",
+      );
+      PrayerReminderType? type = PrayerReminderType.values.firstOrNullWhere(
+        (element) => element.name == storedTypeName,
+      );
       if (type != null) {
         previousReminderModes[prayerModelTimesType] = type;
       }
     }
+
+    await lazyBox.close();
+
     return previousReminderModes;
   }
 
   static Future<Map<PrayerModelTimesType, PrayerReminderType>> setReminderModes(
     ReminderTypeWithPrayModel data,
   ) async {
-    await prayerTimePreferences!.setString(
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
+    await lazyBox.put(
       "previousReminderModes_${data.prayerTimesType.name}",
       data.reminderType.name,
     );
+
+    lazyBox.close();
+
     await removePrayerToReminder(data);
-    addPrayerToReminder(data);
-    removeAllReminder();
-    setReminderForPrayers();
+    await addPrayerToReminder(data);
+    await removeAllReminder();
+    await setReminderForPrayers();
     return getPreviousReminderModes();
   }
 
-  static Map<PrayerModelTimesType, int> getAdjustReminderTime() {
+  static Future<Map<PrayerModelTimesType, int>> getAdjustReminderTime() async {
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
     Map<PrayerModelTimesType, int> reminderTimeAdjustment = {};
     for (PrayerModelTimesType prayerModelTimesType
         in PrayerModelTimesType.values) {
       reminderTimeAdjustment.addAll({
         prayerModelTimesType:
-            prayerTimePreferences!.getInt(
+            await lazyBox.get(
               "reminderTimeAdjustment_${prayerModelTimesType.name}",
             ) ??
             0,
       });
     }
+
+    await lazyBox.close();
     return reminderTimeAdjustment;
   }
 
@@ -259,32 +313,57 @@ class PrayersTimeFunction {
     PrayerModelTimesType prayerType,
     int timeInMinutes,
   ) async {
-    await prayerTimePreferences!.setInt(
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+
+    await lazyBox.put(
       "reminderTimeAdjustment_${prayerType.name}",
       timeInMinutes,
     );
-    removeAllReminder();
-    setReminderForPrayers();
+
+    await lazyBox.close();
+
+    await removeAllReminder();
+    await setReminderForPrayers();
     return getAdjustReminderTime();
   }
 
   static Future<void> setEnforceAlarmSound(bool value) async {
-    await prayerTimePreferences!.setBool("reminderEnforceAlarmSound", value);
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+    await lazyBox.put("reminderEnforceAlarmSound", value);
+    await lazyBox.close();
     removeAllReminder();
     setReminderForPrayers();
   }
 
-  static bool getEnforceAlarmSound() {
-    return prayerTimePreferences!.getBool("reminderEnforceAlarmSound") ?? false;
+  static Future<bool> getEnforceAlarmSound() async {
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+    bool toReturn = await lazyBox.get("reminderEnforceAlarmSound") ?? false;
+    await lazyBox.close();
+    return toReturn;
   }
 
   static Future<void> setSoundVolume(double value) async {
-    await prayerTimePreferences!.setDouble("reminderSoundVolume", value);
-    removeAllReminder();
-    setReminderForPrayers();
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+    await lazyBox.put("reminderSoundVolume", value);
+    await lazyBox.close();
+    await removeAllReminder();
+    await setReminderForPrayers();
   }
 
-  static double getSoundVolume() {
-    return prayerTimePreferences!.getDouble("reminderSoundVolume") ?? 1.0;
+  static Future<double> getSoundVolume() async {
+    await init();
+
+    LazyBox lazyBox = await Hive.openLazyBox(_dataBoxName);
+    double toReturn = await lazyBox.get("reminderSoundVolume") ?? 1.0;
+    await lazyBox.close();
+    return toReturn;
   }
 }
