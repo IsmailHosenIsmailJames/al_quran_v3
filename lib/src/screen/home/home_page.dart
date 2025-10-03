@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -30,9 +31,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    ThemeState themeState = context.read<ThemeCubit>().state;
     double width = MediaQuery.of(context).size.width;
-    ThemeState themeState = context.watch<ThemeCubit>().state;
     bool isFloatingNav = width > 600;
+    bool isJustDrawerIcon = width < 800;
     return Scaffold(
       drawer: const AppDrawer(),
       appBar:
@@ -46,58 +48,198 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text(l10n.alQuran),
                 centerTitle: true,
-
-                actions: [
-                  // TODO : Develop Search Functionality. Due for later
-                  // IconButton(
-                  //   style: IconButton.styleFrom(
-                  //     backgroundColor: themeState.primaryShade100,
-                  //   ),
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const SearchPage(),
-                  //       ),
-                  //     );
-                  //   },
-                  //   icon: const Icon(FluentIcons.search_28_filled),
-                  // ),
-                  // IconButton(
-                  //   style: IconButton.styleFrom(
-                  //     backgroundColor: themeState.primaryShade100,
-                  //   ),
-                  //   onPressed: () {},
-                  //   icon: const Icon(FluentIcons.person_12_filled),
-                  // ),
-                  const Gap(5),
-                ],
               ),
-      body: Stack(
+      body: Row(
         children: [
-          BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-            buildWhen: (previous, current) {
-              return previous.tabIndex != current.tabIndex;
-            },
-            builder:
-                (context, state) =>
-                    [
-                      const QuranPage(),
-                      const PrayerTimePage(),
-                      (platformOwn == platform_services.PlatformOwn.isIos ||
+          if (isFloatingNav)
+            Column(
+              children: [
+                Expanded(
+                  child: AnimatedContainer(
+                    decoration: BoxDecoration(
+                      color: themeState.primaryShade100,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                    ),
+                    margin: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      left: 10,
+                      right: 5,
+                    ),
+                    padding: const EdgeInsets.only(left: 5),
+                    width: isJustDrawerIcon ? 70 : 270,
+                    duration: const Duration(milliseconds: 200),
+                    child: drawerSection(
+                      context: context,
+                      isDesktop: true,
+                      isJustIcon: isJustDrawerIcon,
+                    ),
+                  ),
+                ),
+                AnimatedContainer(
+                  decoration: BoxDecoration(
+                    color: themeState.primaryShade100,
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                  ),
+                  margin: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 5,
+                  ),
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                    left: 5,
+                    right: 5,
+                  ),
+                  width: isJustDrawerIcon ? 70 : 270,
+                  duration: const Duration(milliseconds: 200),
+                  child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+                    builder: (context, state) {
+                      return Column(
+                        spacing: 7,
+                        children: [
+                          desktopNav(
+                            themeState,
+                            0,
+                            state,
+                            "Al Quran",
+                            FluentIcons.book_24_filled,
+                            FluentIcons.book_24_regular,
+                            isJustDrawerIcon,
+                            isJustDrawerIcon ? 70 : 270,
+                          ),
+                          desktopNav(
+                            themeState,
+                            1,
+                            state,
+                            "Prayer Time",
+                            FluentIcons.clock_24_filled,
+                            FluentIcons.clock_24_regular,
+                            isJustDrawerIcon,
+                            isJustDrawerIcon ? 70 : 270,
+                          ),
+                          if (platformOwn ==
+                                  platform_services.PlatformOwn.isAndroid ||
                               platformOwn ==
-                                  platform_services.PlatformOwn.isAndroid)
-                          ? const QiblaDirection()
-                          : const SizedBox(),
-                      const AudioPage(),
-                      if (kIsWeb) const SettingsPage(),
-                    ][state.tabIndex],
+                                  platform_services.PlatformOwn.isIos)
+                            desktopNav(
+                              themeState,
+                              2,
+                              state,
+                              "Qibla Compass",
+                              FluentIcons.compass_northwest_24_filled,
+                              FluentIcons.compass_northwest_24_regular,
+                              isJustDrawerIcon,
+                              isJustDrawerIcon ? 70 : 270,
+                            ),
+
+                          desktopNav(
+                            themeState,
+                            3,
+                            state,
+                            "Quran Audio",
+                            Icons.audiotrack_rounded,
+                            Icons.audiotrack_outlined,
+                            isJustDrawerIcon,
+                            isJustDrawerIcon ? 70 : 270,
+                          ),
+                          if (!(platformOwn ==
+                                  platform_services.PlatformOwn.isAndroid ||
+                              platformOwn ==
+                                  platform_services.PlatformOwn.isIos))
+                            desktopNav(
+                              themeState,
+                              4,
+                              state,
+                              "Settings",
+                              Icons.settings,
+                              Icons.settings_outlined,
+                              isJustDrawerIcon,
+                              isJustDrawerIcon ? 70 : 270,
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          if (isFloatingNav) const VerticalDivider(),
+          Expanded(
+            flex: 2,
+            child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+              buildWhen: (previous, current) {
+                return previous.tabIndex != current.tabIndex;
+              },
+              builder:
+                  (context, state) =>
+                      [
+                        const QuranPage(),
+                        const PrayerTimePage(),
+                        if (platformOwn ==
+                                platform_services.PlatformOwn.isIos ||
+                            platformOwn ==
+                                platform_services.PlatformOwn.isAndroid)
+                          const QiblaDirection(),
+
+                        const AudioPage(),
+                        if (kIsWeb) const SettingsPage(),
+                      ][state.tabIndex],
+            ),
           ),
-          if (isFloatingNav) appFloatingNav(l10n),
         ],
       ),
 
       bottomNavigationBar: isFloatingNav ? null : appBottomNav(l10n),
+    );
+  }
+
+  Widget desktopNav(
+    ThemeState themeState,
+    int index,
+    OthersSettingsState state,
+    String title,
+    IconData selectedIcon,
+    IconData unSelectedIcon,
+    bool isJustIcon,
+    double width,
+  ) {
+    return SizedBox(
+      width: width,
+      height: 40,
+      child: ElevatedButton(
+        style: IconButton.styleFrom(
+          padding: EdgeInsets.zero,
+          foregroundColor:
+              state.tabIndex == index ? Colors.white : themeState.primary,
+          backgroundColor:
+              state.tabIndex == index ? themeState.primary : Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(roundedRadius),
+            side: BorderSide(color: themeState.primary),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment:
+              isJustIcon ? MainAxisAlignment.center : MainAxisAlignment.start,
+          children: [
+            if (!isJustIcon) const Gap(10),
+            if (!isJustIcon) const Gap(10),
+            Icon(
+              state.tabIndex == index ? selectedIcon : unSelectedIcon,
+              color:
+                  state.tabIndex == index ? Colors.white : themeState.primary,
+            ),
+            if (!isJustIcon) const Gap(10),
+            if (!isJustIcon) Text(title),
+          ],
+        ),
+        onPressed: () {
+          context.read<OthersSettingsCubit>().setTabIndex(index);
+        },
+      ),
     );
   }
 
