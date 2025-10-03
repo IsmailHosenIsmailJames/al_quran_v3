@@ -1,4 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/platform_services.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
@@ -66,24 +68,25 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                      border: Border.all(
-                        color: context.read<ThemeCubit>().state.secondary,
+                  if (platformOwn == PlatformOwn.isAndroid)
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                        border: Border.all(
+                          color: context.read<ThemeCubit>().state.secondary,
+                        ),
+                      ),
+                      child: Text(
+                        l10n.notificationScheduleWarning,
+                        style: TextStyle(
+                          color: context.read<ThemeCubit>().state.secondary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
-                    child: Text(
-                      l10n.notificationScheduleWarning,
-                      style: TextStyle(
-                        color: context.read<ThemeCubit>().state.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
                   const Gap(10),
 
                   Row(
