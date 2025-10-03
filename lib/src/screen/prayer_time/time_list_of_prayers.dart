@@ -1,6 +1,7 @@
 import "dart:async";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
@@ -25,6 +26,7 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
 
+import "../../../main.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 import "models/prayer_model_of_day.dart";
@@ -350,21 +352,23 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 style: textStyleOfTimes,
               ),
               const Gap(10),
-              SizedBox(
-                height: isToday ? 40 : 30,
-                width: isToday ? 50 : 0,
-                child:
-                    !isToday
-                        ? null
-                        : getPrayerReminderSwitch(
-                          defaultWhenEnable,
-                          isCurrentToRemind,
-                          context,
-                          prayerModelType,
-                          currentReminder,
-                          l10n,
-                        ),
-              ),
+              if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                  platformOwn == platform_services.PlatformOwn.isIos)
+                SizedBox(
+                  height: isToday ? 40 : 30,
+                  width: isToday ? 50 : 0,
+                  child:
+                      !isToday
+                          ? null
+                          : getPrayerReminderSwitch(
+                            defaultWhenEnable,
+                            isCurrentToRemind,
+                            context,
+                            prayerModelType,
+                            currentReminder,
+                            l10n,
+                          ),
+                ),
               if (isLandScape)
                 const SizedBox(height: 1, child: SafeArea(child: SizedBox())),
             ],

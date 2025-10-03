@@ -83,10 +83,7 @@ class _HomePageState extends State<HomePage> {
                 (context, state) =>
                     [
                       const QuranPage(),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        const PrayerTimePage(),
+                      const PrayerTimePage(),
                       if (platformOwn == platform_services.PlatformOwn.isIos ||
                           platformOwn ==
                               platform_services.PlatformOwn.isAndroid)
@@ -180,31 +177,29 @@ class _HomePageState extends State<HomePage> {
                           platformOwn ==
                               platform_services.PlatformOwn.isAndroid)
                         const Gap(5),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        IconButton(
-                          icon: Icon(
-                            state.tabIndex == 1
-                                ? FluentIcons.clock_24_filled
-                                : FluentIcons.clock_24_regular,
-                          ),
-                          style: IconButton.styleFrom(
-                            foregroundColor:
-                                state.tabIndex == 1
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.grey,
-                            backgroundColor:
-                                state.tabIndex == 1
-                                    ? themeState.primaryShade200
-                                    : null,
-                          ),
-                          tooltip: "Prayer Time",
-                          onPressed:
-                              () => context
-                                  .read<OthersSettingsCubit>()
-                                  .setTabIndex(1),
+
+                      IconButton(
+                        icon: Icon(
+                          state.tabIndex == 1
+                              ? FluentIcons.clock_24_filled
+                              : FluentIcons.clock_24_regular,
                         ),
+                        style: IconButton.styleFrom(
+                          foregroundColor:
+                              state.tabIndex == 1
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Colors.grey,
+                          backgroundColor:
+                              state.tabIndex == 1
+                                  ? themeState.primaryShade200
+                                  : null,
+                        ),
+                        tooltip: "Prayer Time",
+                        onPressed:
+                            () => context
+                                .read<OthersSettingsCubit>()
+                                .setTabIndex(1),
+                      ),
                       if (platformOwn == platform_services.PlatformOwn.isIos ||
                           platformOwn ==
                               platform_services.PlatformOwn.isAndroid)
@@ -312,16 +307,15 @@ class _HomePageState extends State<HomePage> {
               ),
               label: l10n.quran,
             ),
-            if (platformOwn == platform_services.PlatformOwn.isIos ||
-                platformOwn == platform_services.PlatformOwn.isAndroid)
-              BottomNavigationBarItem(
-                icon: Icon(
-                  state.tabIndex == 1
-                      ? FluentIcons.clock_24_filled
-                      : FluentIcons.clock_24_regular,
-                ),
-                label: l10n.prayer,
+
+            BottomNavigationBarItem(
+              icon: Icon(
+                state.tabIndex == 1
+                    ? FluentIcons.clock_24_filled
+                    : FluentIcons.clock_24_regular,
               ),
+              label: l10n.prayer,
+            ),
             if (platformOwn == platform_services.PlatformOwn.isIos ||
                 platformOwn == platform_services.PlatformOwn.isAndroid)
               BottomNavigationBarItem(
