@@ -425,13 +425,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ),
                     const Gap(20),
                     CircularProgressIndicator(
-                      value:
-                          (state.percentage == null ||
-                                  state.percentage == 0.0 ||
-                                  state.percentage == 1.0)
-                              ? null
-                              : state.percentage,
+                      value: getProgressValue(state),
                       color: themeState.primary,
+                      backgroundColor: themeState.primaryShade200,
                     ),
                     const Gap(10),
                     Text(
@@ -476,6 +472,25 @@ class _AppSetupPageState extends State<AppSetupPage> {
         ),
       ),
     );
+  }
+
+  double getProgressValue(ResourcesProgressCubitState state) {
+    try {
+      double? value =
+          (state.percentage == null ||
+                  state.percentage == 0.0 ||
+                  state.percentage == 1.0)
+              ? null
+              : state.percentage;
+      value ??= 0;
+
+      if (value > 1) {
+        return 1;
+      }
+      return value;
+    } on Exception catch (_) {
+      return 0;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'color/tajweed_dark.dart';
-import 'color/tajweed_light.dart';
+import "color/tajweed_dark.dart";
+import "color/tajweed_light.dart";
 
 /// A utility class to access all Tajweed rule definitions.
 class TajweedRules {
