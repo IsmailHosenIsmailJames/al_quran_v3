@@ -178,14 +178,17 @@ class _HomePageState extends State<HomePage> {
                       [
                         const QuranPage(),
                         const PrayerTimePage(),
-                        if (platformOwn ==
-                                platform_services.PlatformOwn.isIos ||
-                            platformOwn ==
-                                platform_services.PlatformOwn.isAndroid)
-                          const QiblaDirection(),
+                        (platformOwn == platform_services.PlatformOwn.isIos ||
+                                platformOwn ==
+                                    platform_services.PlatformOwn.isAndroid)
+                            ? const QiblaDirection()
+                            : const SizedBox(),
 
                         const AudioPage(),
-                        if (kIsWeb) const SettingsPage(),
+                        if (!(platformOwn ==
+                                platform_services.PlatformOwn.isAndroid ||
+                            platformOwn == platform_services.PlatformOwn.isIos))
+                          const SettingsPage(),
                       ][state.tabIndex],
             ),
           ),

@@ -46,11 +46,14 @@ class _AudioPageState extends State<AudioPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    bool isLandScape = width > height;
+    bool isLandScape = width > 1000;
     final l10n = AppLocalizations.of(context);
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+          buildWhen: (previous, current) {
+           return previous.current != current.current;
+          },
           builder: (context, ayahKeyState) {
             int currentIndex =
                 int.parse(ayahKeyState.current.split(":")[1]) - 1;
@@ -62,8 +65,7 @@ class _AudioPageState extends State<AudioPage> {
                       ? SafeArea(
                         child: Row(
                           children: [
-                            SizedBox(
-                              width: width * 0.45,
+                            Expanded(
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
