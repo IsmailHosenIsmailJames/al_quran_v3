@@ -81,6 +81,9 @@ Widget getAyahByAyahCard({
   return BlocBuilder<ThemeCubit, ThemeState>(
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
+        buildWhen: (previous, current) {
+          return current.ayahKey != previous.ayahKey;
+        },
         builder: (context, quranViewState) {
           return VisibilityDetector(
             key: Key(ayahKey),

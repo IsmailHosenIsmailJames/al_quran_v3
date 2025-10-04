@@ -192,6 +192,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
         BlocProvider(create: (context) => AyahKeyCubit()),
+        BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
         BlocProvider(
           create:
               (context) => LocationQiblaPrayerDataCubit(
