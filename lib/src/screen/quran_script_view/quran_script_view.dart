@@ -4,6 +4,7 @@ import "dart:developer";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
@@ -60,6 +61,13 @@ class _PageByPageViewState extends State<QuranScriptView> {
   StreamSubscription? _ayahKeyCubitSubscription;
   @override
   void initState() {
+    String firstAyahInfo = widget.toScrollKey ?? widget.startKey;
+    context.read<AyahByAyahInScrollInfoCubit>().setData(
+      dropdownAyahKey: firstAyahInfo,
+      surahInfoModel: SurahInfoModel.fromMap(
+        metaDataSurah[firstAyahInfo.split(":").first],
+      ),
+    );
     var listOfAyahs = getListOfAyahKey(
       startAyahKey: widget.startKey,
       endAyahKey: widget.endKey,
@@ -194,10 +202,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
       );
     }
 
-    context.read<AyahByAyahInScrollInfoCubit>().setData(
-      dropdownAyahKey: widget.toScrollKey ?? allAyahsKey.first,
-    );
-
     for (int i = 0; i < allAyahsKey.length; i++) {
       ayahKeyToKey["${allAyahsKey[i]}"] = GlobalKey();
     }
@@ -318,6 +322,10 @@ class _PageByPageViewState extends State<QuranScriptView> {
     super.dispose();
   }
 
+  ItemScrollController itemScrollControllerSideBar = ItemScrollController();
+  ItemPositionsListener itemPositionsListenerSidebar =
+      ItemPositionsListener.create();
+
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -326,110 +334,187 @@ class _PageByPageViewState extends State<QuranScriptView> {
     double height = MediaQuery.of(context).size.height;
     bool isLandScape = width > height;
 
-    return BlocProvider(
-      create: (context) => AyahByAyahInScrollInfoCubit(),
-
-      child: Scaffold(
-        appBar:
-            isLandScape
-                ? null
-                : AppBar(
-                  title: appBarTitle(),
-                  actions: [
-                    getAyahsDropDown(themeState),
-                    const Gap(5),
-                    getChangesViewButton(themeState),
-                    getSettingsButton(themeState, context),
-                  ],
-                  titleSpacing: 0,
-                ),
-        body: Stack(
-          children: [
-            ScrollablePositionedList.builder(
-              itemCount: pagesInfoWithSurahMetaData.length,
-              itemScrollController: itemScrollController,
-              itemPositionsListener: itemPositionsListener,
-              scrollOffsetController: scrollOffsetController,
-              scrollOffsetListener: scrollOffsetListener,
-              semanticChildCount: pagesInfoWithSurahMetaData.length,
-              padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
-              itemBuilder: (context, index) {
-                return SafeArea(child: getElementWidget(index));
-              },
-            ),
-            if (isLandScape)
-              SafeArea(
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: BlocBuilder<LandscapeScrollEffect, bool>(
-                    builder: (context, isScrollDown) {
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        margin: const EdgeInsets.only(left: 10),
-                        width: isScrollDown ? 50 : 335,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: BorderRadius.circular(100),
-                          boxShadow: [
-                            BoxShadow(
-                              color:
-                                  Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? Colors.grey.shade900
-                                      : Colors.grey.shade400,
-                              blurRadius: 10,
-                              offset: const Offset(-3, 0),
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(Icons.arrow_back_rounded),
+    return Scaffold(
+      appBar:
+          isLandScape
+              ? null
+              : AppBar(
+                title: appBarTitle(),
+                actions: [
+                  getAyahsDropDown(themeState),
+                  const Gap(5),
+                  getChangesViewButton(themeState),
+                  getSettingsButton(themeState, context),
+                ],
+                titleSpacing: 0,
+              ),
+      body: Stack(
+        children: [
+          isLandScape
+              ? Row(
+                children: [
+                  SafeArea(
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: themeState.primaryShade100),
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                      ),
+                      width: 80,
+                      child: BlocBuilder<
+                        AyahByAyahInScrollInfoCubit,
+                        AyahByAyahInScrollInfoState
+                      >(
+                        buildWhen: (previous, current) {
+                          bool shouldBuild =
+                              previous.dropdownAyahKey !=
+                              current.dropdownAyahKey;
+                          if (shouldBuild) {
+                            int selectedIndex = allAyahsKey.indexOf(
+                              current.dropdownAyahKey,
+                            );
+                            WidgetsBinding.instance.addPostFrameCallback((
+                              _,
+                            ) async {
+                              final visibleIndex =
+                                  itemPositionsListenerSidebar
+                                      .itemPositions
+                                      .value
+                                      .map((e) => e.index)
+                                      .toList();
+                              log(visibleIndex.toString());
+                              if (!visibleIndex.contains(selectedIndex)) {
+                                itemScrollControllerSideBar.scrollTo(
+                                  index:
+                                      selectedIndex != -1 ? selectedIndex : 0,
+                                  duration: const Duration(milliseconds: 200),
+                                );
+                              }
+                            });
+                          }
+                          return shouldBuild;
+                        },
+                        builder: (context, state) {
+                          int selectedIndex = allAyahsKey.indexOf(
+                            state.dropdownAyahKey,
+                          );
+                          return ScrollablePositionedList.builder(
+                            itemCount: allAyahsKey.length,
+                            initialScrollIndex:
+                                selectedIndex != -1 ? selectedIndex : 0,
+                            itemScrollController: itemScrollControllerSideBar,
+                            itemPositionsListener: itemPositionsListenerSidebar,
+                            itemBuilder: (context, index) {
+                              return TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      selectedIndex == index
+                                          ? themeState.primary
+                                          : themeState.primaryShade100,
+                                  foregroundColor:
+                                      selectedIndex == index
+                                          ? Colors.white
+                                          : themeState.primary,
                                 ),
-                                SizedBox(
-                                  width: 100,
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: appBarTitle(),
-                                  ),
+                                onPressed: () {},
+                                child: Text(allAyahsKey[index].toString()),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(child: ayahPositionedListPart(isLandScape)),
+                ],
+              )
+              : ayahPositionedListPart(isLandScape),
+          if (isLandScape)
+            SafeArea(
+              child: Align(
+                alignment: const Alignment(-.65, -1),
+                child: BlocBuilder<LandscapeScrollEffect, bool>(
+                  builder: (context, isScrollDown) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      margin: const EdgeInsets.only(left: 10),
+                      width: isScrollDown ? 50 : 260,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.grey.shade900
+                                    : Colors.grey.shade400,
+                            blurRadius: 10,
+                            offset: const Offset(-3, 0),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.arrow_back_rounded),
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: appBarTitle(),
                                 ),
-                                const Gap(5),
-                                getAyahsDropDown(themeState),
-                                const Gap(5),
+                              ),
+                              const Gap(5),
+                              if (!isLandScape) getAyahsDropDown(themeState),
+                              if (!isLandScape) const Gap(5),
 
-                                getChangesViewButton(themeState),
+                              getChangesViewButton(themeState),
 
-                                getSettingsButton(themeState, context),
-                              ],
-                            ),
+                              getSettingsButton(themeState, context),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-
-            const SafeArea(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: AudioControllerUi(),
-              ),
             ),
-          ],
-        ),
+
+          const SafeArea(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: AudioControllerUi(),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  ScrollablePositionedList ayahPositionedListPart(bool isLandScape) {
+    return ScrollablePositionedList.builder(
+      itemCount: pagesInfoWithSurahMetaData.length,
+      itemScrollController: itemScrollController,
+      itemPositionsListener: itemPositionsListener,
+      scrollOffsetController: scrollOffsetController,
+      scrollOffsetListener: scrollOffsetListener,
+      semanticChildCount: pagesInfoWithSurahMetaData.length,
+      padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
+      itemBuilder: (context, index) {
+        return SafeArea(child: getElementWidget(index));
+      },
     );
   }
 
