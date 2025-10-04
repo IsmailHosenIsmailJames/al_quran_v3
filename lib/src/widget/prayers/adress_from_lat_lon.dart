@@ -65,9 +65,12 @@ Widget getAddressView({
         final String? address = snapshot.data;
 
         if (justAddress) {
-          return Text(
-            address ?? AppLocalizations.of(context).addressNotAvailable,
-            style: style,
+          return SizedBox(
+            width: 240,
+            child: Text(
+              address ?? AppLocalizations.of(context).addressNotAvailable,
+              style: style,
+            ),
           );
         }
 

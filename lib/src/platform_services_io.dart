@@ -29,7 +29,6 @@ Future<void> initializePlatform() async {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       size: Size(801, 900),
-      maximumSize: Size(1000, 1900),
       minimumSize: Size(400, 700),
       center: true,
       backgroundColor: Colors.transparent,

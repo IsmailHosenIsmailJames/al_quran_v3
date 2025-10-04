@@ -40,6 +40,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
+import "package:just_audio_media_kit/just_audio_media_kit.dart";
 
 import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "src/screen/prayer_time/functions/prayers_time_function.dart";
@@ -95,6 +96,11 @@ Future<void> main() async {
       androidNotificationChannelName: "Audio playback",
       androidNotificationOngoing: true,
     );
+  } else {
+    // by default, windows and linux are enabled
+    JustAudioMediaKit.ensureInitialized();
+    JustAudioMediaKit.bufferSize = 8 * 1024 * 1024; // 8 MB
+    JustAudioMediaKit.title = "Al Quran Audio";
   }
   await Hive.initFlutter();
   await Hive.openBox("user");
