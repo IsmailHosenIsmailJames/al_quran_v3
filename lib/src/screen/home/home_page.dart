@@ -33,12 +33,19 @@ class _HomePageState extends State<HomePage> {
     final l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
     double width = MediaQuery.of(context).size.width;
-    bool isFloatingNav = width > 600;
+    double height = MediaQuery.of(context).size.height;
+    bool isSideNav = width > 600;
     bool isJustDrawerIcon = width < 800;
+    bool isMobileHeight = false;
+    if (height < 500) {
+      isMobileHeight = true;
+      isJustDrawerIcon = true;
+    }
+
     return Scaffold(
       drawer: const AppDrawer(),
       appBar:
-          isFloatingNav
+          isSideNav
               ? null
               : AppBar(
                 leading: Builder(
@@ -51,122 +58,37 @@ class _HomePageState extends State<HomePage> {
               ),
       body: Row(
         children: [
-          if (isFloatingNav)
-            Column(
-              children: [
-                Expanded(
-                  child: AnimatedContainer(
-                    decoration: BoxDecoration(
-                      color: themeState.primaryShade100,
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                    ),
-                    margin: const EdgeInsets.only(
-                      top: 10,
-                      bottom: 10,
-                      left: 10,
-                      right: 5,
-                    ),
-                    padding: const EdgeInsets.only(left: 5),
-                    width: isJustDrawerIcon ? 70 : 270,
-                    duration: const Duration(milliseconds: 200),
-                    child: drawerSection(
-                      context: context,
-                      isDesktop: true,
-                      isJustIcon: isJustDrawerIcon,
-                    ),
-                  ),
-                ),
-                AnimatedContainer(
-                  decoration: BoxDecoration(
-                    color: themeState.primaryShade100,
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                  ),
-                  margin: const EdgeInsets.only(
-                    top: 10,
-                    bottom: 10,
-                    left: 10,
-                    right: 5,
-                  ),
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    bottom: 10,
-                    left: 5,
-                    right: 5,
-                  ),
-                  width: isJustDrawerIcon ? 70 : 270,
-                  duration: const Duration(milliseconds: 200),
-                  child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-                    builder: (context, state) {
-                      return Column(
-                        spacing: 7,
+          if (isSideNav)
+            SafeArea(
+              child:
+                  isMobileHeight
+                      ? Row(
                         children: [
-                          desktopNav(
+                          drawerInSidebar(
                             themeState,
-                            0,
-                            state,
-                            "Al Quran",
-                            FluentIcons.book_24_filled,
-                            FluentIcons.book_24_regular,
                             isJustDrawerIcon,
-                            isJustDrawerIcon ? 70 : 270,
+                            context,
                           ),
-                          desktopNav(
-                            themeState,
-                            1,
-                            state,
-                            "Prayer Time",
-                            FluentIcons.clock_24_filled,
-                            FluentIcons.clock_24_regular,
-                            isJustDrawerIcon,
-                            isJustDrawerIcon ? 70 : 270,
+                          SizedBox(
+                            width: 65,
+                            child: navsInSidebar(themeState, isJustDrawerIcon),
                           ),
-                          if (platformOwn ==
-                                  platform_services.PlatformOwn.isAndroid ||
-                              platformOwn ==
-                                  platform_services.PlatformOwn.isIos)
-                            desktopNav(
-                              themeState,
-                              2,
-                              state,
-                              "Qibla Compass",
-                              FluentIcons.compass_northwest_24_filled,
-                              FluentIcons.compass_northwest_24_regular,
-                              isJustDrawerIcon,
-                              isJustDrawerIcon ? 70 : 270,
-                            ),
-
-                          desktopNav(
-                            themeState,
-                            3,
-                            state,
-                            "Quran Audio",
-                            Icons.audiotrack_rounded,
-                            Icons.audiotrack_outlined,
-                            isJustDrawerIcon,
-                            isJustDrawerIcon ? 70 : 270,
-                          ),
-                          if (!(platformOwn ==
-                                  platform_services.PlatformOwn.isAndroid ||
-                              platformOwn ==
-                                  platform_services.PlatformOwn.isIos))
-                            desktopNav(
-                              themeState,
-                              4,
-                              state,
-                              "Settings",
-                              Icons.settings,
-                              Icons.settings_outlined,
-                              isJustDrawerIcon,
-                              isJustDrawerIcon ? 70 : 270,
-                            ),
                         ],
-                      );
-                    },
-                  ),
-                ),
-              ],
+                      )
+                      : Column(
+                        children: [
+                          Expanded(
+                            child: drawerInSidebar(
+                              themeState,
+                              isJustDrawerIcon,
+                              context,
+                            ),
+                          ),
+                          navsInSidebar(themeState, isJustDrawerIcon),
+                        ],
+                      ),
             ),
-          if (isFloatingNav) const VerticalDivider(),
+          if (isSideNav) const VerticalDivider(),
           Expanded(
             flex: 2,
             child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
@@ -195,7 +117,110 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      bottomNavigationBar: isFloatingNav ? null : appBottomNav(l10n),
+      bottomNavigationBar: isSideNav ? null : appBottomNav(l10n),
+    );
+  }
+
+  AnimatedContainer navsInSidebar(
+    ThemeState themeState,
+    bool isJustDrawerIcon,
+  ) {
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 5),
+      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 5),
+      width: isJustDrawerIcon ? 70 : 270,
+      duration: const Duration(milliseconds: 200),
+      child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 7,
+            children: [
+              desktopNav(
+                themeState,
+                0,
+                state,
+                "Al Quran",
+                FluentIcons.book_24_filled,
+                FluentIcons.book_24_regular,
+                isJustDrawerIcon,
+                isJustDrawerIcon ? 70 : 270,
+              ),
+              desktopNav(
+                themeState,
+                1,
+                state,
+                "Prayer Time",
+                FluentIcons.clock_24_filled,
+                FluentIcons.clock_24_regular,
+                isJustDrawerIcon,
+                isJustDrawerIcon ? 70 : 270,
+              ),
+              if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                  platformOwn == platform_services.PlatformOwn.isIos)
+                desktopNav(
+                  themeState,
+                  2,
+                  state,
+                  "Qibla Compass",
+                  FluentIcons.compass_northwest_24_filled,
+                  FluentIcons.compass_northwest_24_regular,
+                  isJustDrawerIcon,
+                  isJustDrawerIcon ? 70 : 270,
+                ),
+
+              desktopNav(
+                themeState,
+                3,
+                state,
+                "Quran Audio",
+                Icons.audiotrack_rounded,
+                Icons.audiotrack_outlined,
+                isJustDrawerIcon,
+                isJustDrawerIcon ? 70 : 270,
+              ),
+              if (!(platformOwn == platform_services.PlatformOwn.isAndroid ||
+                  platformOwn == platform_services.PlatformOwn.isIos))
+                desktopNav(
+                  themeState,
+                  4,
+                  state,
+                  "Settings",
+                  Icons.settings,
+                  Icons.settings_outlined,
+                  isJustDrawerIcon,
+                  isJustDrawerIcon ? 70 : 270,
+                ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  AnimatedContainer drawerInSidebar(
+    ThemeState themeState,
+    bool isJustDrawerIcon,
+    BuildContext context,
+  ) {
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 5),
+      padding: const EdgeInsets.only(left: 5),
+      width: isJustDrawerIcon ? 70 : 270,
+      duration: const Duration(milliseconds: 200),
+      child: drawerSection(
+        context: context,
+        isDesktop: true,
+        isJustIcon: isJustDrawerIcon,
+      ),
     );
   }
 

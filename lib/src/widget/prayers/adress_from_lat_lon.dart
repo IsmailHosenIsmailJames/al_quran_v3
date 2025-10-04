@@ -66,7 +66,7 @@ Widget getAddressView({
 
         if (justAddress) {
           return SizedBox(
-            width: 240,
+            width: 200,
             child: Text(
               address ?? AppLocalizations.of(context).addressNotAvailable,
               style: style,

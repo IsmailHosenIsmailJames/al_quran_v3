@@ -57,7 +57,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       fontWeight: FontWeight.w500,
     );
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
     bool isLandScape = width > 900;
+    if (height < 600) {
+      isLandScape = width > 600;
+    }
 
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
@@ -76,12 +81,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           isLandScape,
                         ),
                       ),
-                      const Gap(10),
                       Expanded(
-                        child: SafeArea(
-                          child: SingleChildScrollView(
-                            child: headerOfPrayerTimesAndCanvas(context, l10n),
-                          ),
+                        child: SingleChildScrollView(
+                          child: headerOfPrayerTimesAndCanvas(context, l10n),
                         ),
                       ),
                     ],
@@ -152,7 +154,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
             ),
           ],
         ),
-
+        const Gap(30),
         Padding(
           padding: const EdgeInsets.only(
             left: 10,

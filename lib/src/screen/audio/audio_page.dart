@@ -47,12 +47,15 @@ class _AudioPageState extends State<AudioPage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     bool isLandScape = width > 1000;
+    if (height < 600) {
+      isLandScape = true;
+    }
     final l10n = AppLocalizations.of(context);
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
           buildWhen: (previous, current) {
-           return previous.current != current.current;
+            return previous.current != current.current;
           },
           builder: (context, ayahKeyState) {
             int currentIndex =
@@ -62,44 +65,44 @@ class _AudioPageState extends State<AudioPage> {
               padding: const EdgeInsets.all(10),
               child:
                   isLandScape
-                      ? SafeArea(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    getReciterViewWidget(
-                                      context,
-                                      ayahKeyState,
-                                      currentIndex,
-                                    ),
-                                    getSurahInfoAndController(
-                                      ayahKeyState,
-                                      context,
-                                    ),
-                                    const Gap(20),
-                                    getAudioProgressBar(),
-                                    const Gap(10),
-                                    getAudioController(
-                                      currentIndex,
-                                      ayahKeyState,
-                                      context,
-                                      l10n,
-                                    ),
-                                  ],
-                                ),
+                      ? Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  getReciterViewWidget(
+                                    context,
+                                    ayahKeyState,
+                                    currentIndex,
+                                  ),
+                                  getSurahInfoAndController(
+                                    ayahKeyState,
+                                    context,
+                                  ),
+                                  const Gap(20),
+                                  getAudioProgressBar(),
+                                  const Gap(10),
+                                  getAudioController(
+                                    currentIndex,
+                                    ayahKeyState,
+                                    context,
+                                    l10n,
+                                  ),
+                                ],
                               ),
                             ),
-                            const Gap(10),
-                            Expanded(
-                              child: getAyahAndTranslationWithShimmer(
-                                context,
-                                ayahKeyState,
-                              ),
+                          ),
+                          const Gap(10),
+                          Expanded(
+                            flex: 3,
+                            child: getAyahAndTranslationWithShimmer(
+                              context,
+                              ayahKeyState,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       )
                       : Column(
                         mainAxisAlignment: MainAxisAlignment.start,
