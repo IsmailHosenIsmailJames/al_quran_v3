@@ -192,6 +192,7 @@ Widget drawerSection({
                 ),
               );
             },
+
             leading: Icon(Icons.translate_rounded, color: themeState.primary),
             title:
                 isJustIcon
