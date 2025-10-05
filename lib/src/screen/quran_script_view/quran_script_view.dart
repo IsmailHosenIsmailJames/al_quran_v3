@@ -211,6 +211,12 @@ class _PageByPageViewState extends State<QuranScriptView> {
         if (!mounted) return;
         // Recalculate targetIndex here if pagesInfoWithSurahMetaData is populated late
         await scrollToAyah(widget.toScrollKey!);
+        int surahNumber = widget.startKey.split(":").first.toInt();
+        itemScrollControllerSurahName.scrollTo(
+          index: surahNumber - 1,
+          duration: const Duration(milliseconds: 200),
+          alignment: 0.5,
+        );
       });
     }
 
@@ -313,8 +319,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
   ItemScrollController itemScrollController = ItemScrollController();
   ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
-  ScrollOffsetController scrollOffsetController = ScrollOffsetController();
-  ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
+  ItemScrollController itemScrollControllerSurahName = ItemScrollController();
 
   @override
   void dispose() {
@@ -332,7 +337,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
     appLocalizations = AppLocalizations.of(context);
     double width = MediaQuery.of(context).size.width;
     bool isLandScape = width > 600;
-    bool isExtendedSidebar = width > 800;
 
     return Scaffold(
       appBar:
@@ -350,126 +354,66 @@ class _PageByPageViewState extends State<QuranScriptView> {
               ),
       body: Stack(
         children: [
-          isLandScape
-              ? Row(
-                children: [
-                  if (isExtendedSidebar)
-                    SafeArea(
-                      right: false,
-                      child: AnimatedContainer(
-                        width: isExtendedSidebar ? 200 : 0,
-                        duration: const Duration(milliseconds: 200),
-                        margin: const EdgeInsets.only(
-                          left: 10,
-                          right: 5,
-                          bottom: 5,
-                          top: 5,
-                        ),
+          Row(
+            children: [
+              if (isLandScape)
+                SafeArea(
+                  child: SizedBox(
+                    width: 250,
+                    child: Column(
+                      children: [
+                        const Gap(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
 
-                        decoration: BoxDecoration(
-                          border: Border.all(color: themeState.primaryShade100),
-                          borderRadius: BorderRadius.circular(roundedRadius),
-                        ),
-                        child: ListView.builder(
-                          itemCount: 114,
-                          padding: const EdgeInsets.all(5),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) => QuranScriptView(
-                                            startKey: "${index + 1}:1",
-                                            endKey:
-                                                getEndAyahKeyFromSurahNumber(
-                                                  index + 1,
-                                                ),
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  "${localizedNumber(context, index + 1)}. ${getSurahName(context, index + 1)}",
-                                ),
+                          children: [
+                            const Gap(10),
+                            IconButton(
+                              style: IconButton.styleFrom(
+                                backgroundColor: themeState.primaryShade100,
                               ),
-                            );
-                          },
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back_rounded),
+                            ),
+                            const Gap(15),
+                            getChangesViewButton(themeState),
+                            const Gap(15),
+                            getSettingsButton(themeState, context),
+                          ],
                         ),
-                      ),
-                    ),
-                  if (isExtendedSidebar) const Gap(5),
-                  if (isLandScape) SafeArea(child: ayahSidebar(themeState)),
-                  Expanded(child: ayahPositionedListPart(isLandScape)),
-                ],
-              )
-              : ayahPositionedListPart(isLandScape),
-          if (isLandScape)
-            SafeArea(
-              child: Align(
-                alignment: const Alignment(-1, -1),
-                child: BlocBuilder<LandscapeScrollEffect, bool>(
-                  builder: (context, isScrollDown) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      margin: const EdgeInsets.only(left: 10),
-                      width: isScrollDown ? 50 : 260,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(100),
-                        boxShadow: [
-                          BoxShadow(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.grey.shade900
-                                    : Colors.grey.shade400,
-                            blurRadius: 10,
-                            offset: const Offset(-3, 0),
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
+                        Expanded(
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.arrow_back_rounded),
+                              Expanded(
+                                flex: 2,
+                                child: surahListSidebar(themeState),
                               ),
-                              SizedBox(
-                                width: 100,
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: appBarTitle(),
-                                ),
-                              ),
-                              const Gap(5),
-                              if (!isLandScape) getAyahsDropDown(themeState),
-                              if (!isLandScape) const Gap(5),
-
-                              getChangesViewButton(themeState),
-
-                              getSettingsButton(themeState, context),
+                              Expanded(child: ayahSidebar(themeState)),
                             ],
                           ),
                         ),
-                      ),
-                    );
+                      ],
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: PositionedSurahBuilder(
+                  isLandScape: isLandScape,
+                  pagesInfoWithSurahMetaData: pagesInfoWithSurahMetaData,
+                  itemScrollController: itemScrollController,
+                  itemPositionsListener: itemPositionsListener,
+                  appLocalizations: appLocalizations,
+                  ayahKeyToKey: ayahKeyToKey,
+                  onStateChange: (state) {
+                    latestState = state;
                   },
                 ),
               ),
-            ),
-
+            ],
+          ),
           const SafeArea(
             child: Align(
               alignment: Alignment.bottomRight,
@@ -477,6 +421,70 @@ class _PageByPageViewState extends State<QuranScriptView> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container surahListSidebar(ThemeState themeState) {
+    return Container(
+      margin: const EdgeInsets.all(5),
+
+      decoration: BoxDecoration(
+        border: Border.all(color: themeState.primaryShade100),
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+      child: BlocBuilder<
+        AyahByAyahInScrollInfoCubit,
+        AyahByAyahInScrollInfoState
+      >(
+        builder:
+            (context, state) => ScrollablePositionedList.builder(
+              itemScrollController: itemScrollControllerSurahName,
+              itemCount: 114,
+              padding: const EdgeInsets.all(5),
+              itemBuilder: (context, index) {
+                bool isCurrent =
+                    state.dropdownAyahKey?.split(":").first.toInt() ==
+                    index + 1;
+                return Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      alignment: Alignment.centerLeft,
+                      backgroundColor:
+                          isCurrent
+                              ? themeState.primary
+                              : themeState.primaryShade100,
+                      foregroundColor:
+                          isCurrent ? Colors.white : themeState.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                      ),
+                    ),
+                    onPressed: () {
+                      itemScrollControllerSurahName.scrollTo(
+                        index: index,
+                        duration: const Duration(milliseconds: 200),
+                        alignment: 0.5,
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => QuranScriptView(
+                                startKey: "${index + 1}:1",
+                                endKey: getEndAyahKeyFromSurahNumber(index + 1),
+                              ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "${localizedNumber(context, index + 1)}. ${getSurahName(context, index + 1)}",
+                    ),
+                  ),
+                );
+              },
+            ),
       ),
     );
   }
@@ -489,76 +497,64 @@ class _PageByPageViewState extends State<QuranScriptView> {
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       width: 80,
-      child:
-          BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
-            buildWhen: (previous, current) {
-              bool shouldBuild =
-                  previous.dropdownAyahKey != current.dropdownAyahKey;
-              if (shouldBuild) {
-                int selectedIndex = allAyahsKey.indexOf(
-                  current.dropdownAyahKey,
+      child: BlocBuilder<
+        AyahByAyahInScrollInfoCubit,
+        AyahByAyahInScrollInfoState
+      >(
+        buildWhen: (previous, current) {
+          bool shouldBuild =
+              previous.dropdownAyahKey != current.dropdownAyahKey;
+          if (shouldBuild) {
+            int selectedIndex = allAyahsKey.indexOf(current.dropdownAyahKey);
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              final visibleIndex =
+                  itemPositionsListenerSidebar.itemPositions.value
+                      .map((e) => e.index)
+                      .toList();
+              if (!visibleIndex.contains(selectedIndex)) {
+                itemScrollControllerSideBar.scrollTo(
+                  index: selectedIndex != -1 ? selectedIndex : 0,
+                  duration: const Duration(milliseconds: 200),
                 );
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  final visibleIndex =
-                      itemPositionsListenerSidebar.itemPositions.value
-                          .map((e) => e.index)
-                          .toList();
-                  if (!visibleIndex.contains(selectedIndex)) {
-                    itemScrollControllerSideBar.scrollTo(
-                      index: selectedIndex != -1 ? selectedIndex : 0,
-                      duration: const Duration(milliseconds: 200),
-                    );
-                  }
-                });
               }
-              return shouldBuild;
-            },
-            builder: (context, state) {
-              int selectedIndex = allAyahsKey.indexOf(state.dropdownAyahKey);
-              return ScrollablePositionedList.builder(
-                itemCount: allAyahsKey.length,
-                itemScrollController: itemScrollControllerSideBar,
-                itemPositionsListener: itemPositionsListenerSidebar,
-                padding: const EdgeInsets.all(5),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 5),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor:
-                            selectedIndex == index
-                                ? themeState.primary
-                                : themeState.primaryShade100,
-                        foregroundColor:
-                            selectedIndex == index
-                                ? Colors.white
-                                : themeState.primary,
-                      ),
-                      onPressed: () {
-                        scrollToAyah(allAyahsKey[index]);
-                      },
-                      child: Text(allAyahsKey[index].toString()),
+            });
+          }
+          return shouldBuild;
+        },
+        builder: (context, state) {
+          int selectedIndex = allAyahsKey.indexOf(state.dropdownAyahKey);
+          return ScrollablePositionedList.builder(
+            itemCount: allAyahsKey.length,
+            itemScrollController: itemScrollControllerSideBar,
+            itemPositionsListener: itemPositionsListenerSidebar,
+            padding: const EdgeInsets.all(5),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:
+                        selectedIndex == index
+                            ? themeState.primary
+                            : themeState.primaryShade100,
+                    foregroundColor:
+                        selectedIndex == index
+                            ? Colors.white
+                            : themeState.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(roundedRadius),
                     ),
-                  );
-                },
+                  ),
+                  onPressed: () {
+                    scrollToAyah(allAyahsKey[index]);
+                  },
+                  child: Text(allAyahsKey[index].toString().split(":").last),
+                ),
               );
             },
-          ),
-    );
-  }
-
-  ScrollablePositionedList ayahPositionedListPart(bool isLandScape) {
-    return ScrollablePositionedList.builder(
-      itemCount: pagesInfoWithSurahMetaData.length,
-      itemScrollController: itemScrollController,
-      itemPositionsListener: itemPositionsListener,
-      scrollOffsetController: scrollOffsetController,
-      scrollOffsetListener: scrollOffsetListener,
-      semanticChildCount: pagesInfoWithSurahMetaData.length,
-      padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
-      itemBuilder: (context, index) {
-        return SafeArea(child: getElementWidget(index));
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -680,8 +676,26 @@ class _PageByPageViewState extends State<QuranScriptView> {
       ),
     );
   }
+}
 
-  Widget getElementWidget(int index) {
+class AyahElementWidget extends StatelessWidget {
+  final List pagesInfoWithSurahMetaData;
+  final int index;
+  final AppLocalizations appLocalizations;
+  final Map<String, GlobalKey<State<StatefulWidget>>> ayahKeyToKey;
+  final Function(AyahByAyahInScrollInfoState state) onStateChange;
+
+  const AyahElementWidget({
+    super.key,
+    required this.index,
+    required this.pagesInfoWithSurahMetaData,
+    required this.appLocalizations,
+    required this.onStateChange,
+    required this.ayahKeyToKey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     var current = pagesInfoWithSurahMetaData[index];
     if (current.runtimeType == SurahHeaderInfoModel) {
       return SurahInfoHeaderBuilder(headerInfoModel: current);
@@ -716,7 +730,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                   current.pageByPageList?.contains(pageNumber);
         },
         builder: (context, state) {
-          latestState = state;
+          onStateChange(state);
           bool isPageByPageThisPage =
               state.pageByPageList?.contains(pageNumber) == true;
 
@@ -790,7 +804,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
                 (previous.isAyahByAyah != current.isAyahByAyah) ||
                 (previous.pageByPageList != current.pageByPageList),
         builder: (context, state) {
-          latestState = state;
+          onStateChange(state);
           return Container(
             width: MediaQuery.of(context).size.width,
             height: 30,
@@ -851,5 +865,48 @@ class _PageByPageViewState extends State<QuranScriptView> {
         },
       );
     }
+  }
+}
+
+class PositionedSurahBuilder extends StatelessWidget {
+  final bool isLandScape;
+  final List<dynamic> pagesInfoWithSurahMetaData;
+  final ItemScrollController itemScrollController;
+  final ItemPositionsListener itemPositionsListener;
+  final AppLocalizations appLocalizations;
+  final Map<String, GlobalKey<State<StatefulWidget>>> ayahKeyToKey;
+  final Function(AyahByAyahInScrollInfoState state) onStateChange;
+
+  const PositionedSurahBuilder({
+    super.key,
+    required this.isLandScape,
+    required this.pagesInfoWithSurahMetaData,
+    required this.itemScrollController,
+    required this.itemPositionsListener,
+    required this.appLocalizations,
+    required this.onStateChange,
+    required this.ayahKeyToKey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollablePositionedList.builder(
+      itemCount: pagesInfoWithSurahMetaData.length,
+      itemScrollController: itemScrollController,
+      itemPositionsListener: itemPositionsListener,
+      semanticChildCount: pagesInfoWithSurahMetaData.length,
+      padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
+      itemBuilder: (context, index) {
+        return SafeArea(
+          child: AyahElementWidget(
+            index: index,
+            pagesInfoWithSurahMetaData: pagesInfoWithSurahMetaData,
+            appLocalizations: appLocalizations,
+            onStateChange: onStateChange,
+            ayahKeyToKey: ayahKeyToKey,
+          ),
+        );
+      },
+    );
   }
 }
