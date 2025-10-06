@@ -110,73 +110,108 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
-    bool isLargeScreen = MediaQuery.of(context).size.width > 600;
-
     return Scaffold(
-      appBar:
-          isLargeScreen
-              ? null
-              : AppBar(
-                title: Text(appLocalizations.appLanguage),
-                centerTitle: true,
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SettingsPage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(FluentIcons.settings_24_regular),
-                  ),
-                ],
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text(appLocalizations.appLanguage),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            icon: const Icon(FluentIcons.settings_24_regular),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Row(
           children: [
-            if (isLargeScreen)
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      appLocalizations.appLanguage,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            Expanded(
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: [
+                      BoxShadow(
+                        color: themeState.primaryShade200,
+                        blurRadius: 150,
+                        spreadRadius: 0,
                       ),
-                    ),
-                    const Gap(10),
-                    Expanded(child: listOfLanguages(appLocalizations)),
-                  ],
+                    ],
+                  ),
+                  child: Image.asset(
+                    "assets/img/Quran_Logo_v3.png",
+                    color: themeState.primary,
+                  ),
                 ),
               ),
+            ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (!isLargeScreen) listOfLanguages(appLocalizations),
-
-                  if (isLargeScreen)
-                    Row(
-                      children: [
-                        const Spacer(),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SettingsPage(),
-                              ),
-                            );
+                  Expanded(
+                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                      builder: (context, state) {
+                        return RadioGroup<MyAppLocalization>(
+                          groupValue: state,
+                          onChanged: (value) {
+                            if (value != null) {
+                              changeAppLanguage(value);
+                            }
                           },
-                          icon: const Icon(FluentIcons.settings_24_regular),
-                        ),
-                      ],
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            itemCount: usedAppLanguageMap.length,
+                            itemBuilder: (context, index) {
+                              final MyAppLocalization appLoc =
+                                  usedAppLanguageMap[index];
+                              return RadioListTile<MyAppLocalization>(
+                                value: appLoc,
+                                title: Text(appLoc.native),
+                                subtitle: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(appLoc.english),
+                                      const Gap(7),
+                                      if (doesHaveFootNote(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.footnote,
+                                        ),
+                                      if (doesHaveTafsirSupport(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.tafsir,
+                                        ),
+                                      if (doesHaveWordByWordTranslation(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.wordByWord,
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
-                  if (isLargeScreen) const Gap(10),
+                  ),
+
                   BlocBuilder<
                     ResourcesProgressCubitCubit,
                     ResourcesProgressCubitState
@@ -184,9 +219,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     builder:
                         (context, state) => Container(
                           padding: const EdgeInsets.all(10),
-                          margin:
-                              isLargeScreen ? const EdgeInsets.all(10) : null,
-                          height: isLargeScreen ? 200 : null,
                           decoration: BoxDecoration(
                             color: Theme.of(context).scaffoldBackgroundColor,
                             borderRadius: BorderRadius.circular(roundedRadius),
@@ -198,7 +230,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             ],
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
@@ -327,51 +359,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Expanded listOfLanguages(AppLocalizations appLocalizations) {
-    return Expanded(
-      child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-        builder: (context, state) {
-          return RadioGroup<MyAppLocalization>(
-            groupValue: state,
-            onChanged: (value) {
-              if (value != null) {
-                changeAppLanguage(value);
-              }
-            },
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: usedAppLanguageMap.length,
-              itemBuilder: (context, index) {
-                final MyAppLocalization appLoc = usedAppLanguageMap[index];
-                return RadioListTile<MyAppLocalization>(
-                  value: appLoc,
-                  title: Text(appLoc.native),
-                  subtitle: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Text(appLoc.english),
-                        const Gap(7),
-                        if (doesHaveFootNote(appLoc.english.toLowerCase()))
-                          getFeaturesMark(context, appLocalizations.footnote),
-                        if (doesHaveTafsirSupport(appLoc.english.toLowerCase()))
-                          getFeaturesMark(context, appLocalizations.tafsir),
-                        if (doesHaveWordByWordTranslation(
-                          appLoc.english.toLowerCase(),
-                        ))
-                          getFeaturesMark(context, appLocalizations.wordByWord),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          );
-        },
       ),
     );
   }
