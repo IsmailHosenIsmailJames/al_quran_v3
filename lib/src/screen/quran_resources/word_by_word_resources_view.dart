@@ -144,6 +144,11 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                   themeState.primary,
                                 ),
+                                backgroundColor:
+                                    context
+                                        .read<ThemeCubit>()
+                                        .state
+                                        .primaryShade100,
                               )
                               : isDownloaded
                               ? isSelected

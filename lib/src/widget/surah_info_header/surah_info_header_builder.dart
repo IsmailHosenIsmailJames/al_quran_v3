@@ -247,11 +247,16 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               (playerState.state ==
                                           just_audio.ProcessingState.loading &&
                                       isCurrentSurah)
-                                  ? const Padding(
-                                    padding: EdgeInsets.all(3.0),
+                                  ? Padding(
+                                    padding: const EdgeInsets.all(3.0),
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                       strokeWidth: 4,
+                                      backgroundColor:
+                                          context
+                                              .read<ThemeCubit>()
+                                              .state
+                                              .primaryShade100,
                                     ),
                                   )
                                   : Icon(

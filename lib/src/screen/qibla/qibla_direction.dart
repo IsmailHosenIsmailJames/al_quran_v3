@@ -84,7 +84,11 @@ class _QiblaDirectionState extends State<QiblaDirection> {
               ? const LocationAcquire()
               : state.kaabaAngle == null
               ? Center(
-                child: CircularProgressIndicator(color: themeState.primary),
+                child: CircularProgressIndicator(
+                  color: themeState.primary,
+                  backgroundColor:
+                      context.read<ThemeCubit>().state.primaryShade100,
+                ),
               )
               : Column(
                 mainAxisAlignment: MainAxisAlignment.center,

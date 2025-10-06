@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/m
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -131,10 +132,16 @@ class _LocationAcquireState extends State<LocationAcquire> {
                         label: Text(l10n.getFromGPS),
                         icon:
                             isGPSLocationLoading
-                                ? const Center(
+                                ? Center(
                                   child: Padding(
-                                    padding: EdgeInsets.all(3.0),
-                                    child: CircularProgressIndicator(),
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: CircularProgressIndicator(
+                                      backgroundColor:
+                                          context
+                                              .read<ThemeCubit>()
+                                              .state
+                                              .primaryShade100,
+                                    ),
                                   ),
                                 )
                                 : const Icon(Icons.gps_fixed_rounded),

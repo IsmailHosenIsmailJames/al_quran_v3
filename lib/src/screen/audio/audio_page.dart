@@ -285,7 +285,10 @@ class _AudioPageState extends State<AudioPage> {
                 style: IconButton.styleFrom(padding: const EdgeInsets.all(5)),
                 icon:
                     state.state == ProcessingState.loading
-                        ? const CircularProgressIndicator()
+                        ? CircularProgressIndicator(
+                          backgroundColor:
+                              context.read<ThemeCubit>().state.primaryShade100,
+                        )
                         : Icon(
                           state.isPlaying
                               ? Icons.pause_rounded

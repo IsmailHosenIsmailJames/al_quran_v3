@@ -761,9 +761,13 @@ IconButton getPlayButtonWidget(
     },
     icon:
         (isCurrent && playerState.state == just_audio.ProcessingState.loading)
-            ? const Padding(
-              padding: EdgeInsets.all(3.0),
-              child: CircularProgressIndicator(strokeWidth: 3),
+            ? Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: CircularProgressIndicator(
+                strokeWidth: 3,
+                backgroundColor:
+                    context.read<ThemeCubit>().state.primaryShade100,
+              ),
             )
             : Icon(
               isPlaying && isCurrent

@@ -223,11 +223,16 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                       >(
                         builder: (context, state) {
                           return state.isPrayerTimeDownloading == true
-                              ? const Center(
+                              ? Center(
                                 child: Padding(
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
+                                    backgroundColor:
+                                        context
+                                            .read<ThemeCubit>()
+                                            .state
+                                            .primaryShade100,
                                   ),
                                 ),
                               )

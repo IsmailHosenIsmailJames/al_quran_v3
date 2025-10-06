@@ -285,7 +285,12 @@ class _CollectionPageState extends State<CollectionPage> {
           Expanded(
             child:
                 _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor:
+                            context.read<ThemeCubit>().state.primaryShade100,
+                      ),
+                    )
                     : _errorMessage != null
                     ? Center(
                       child: Padding(
