@@ -109,7 +109,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-
+    bool isLandscape = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -130,26 +130,28 @@ class _AppSetupPageState extends State<AppSetupPage> {
       body: SafeArea(
         child: Row(
           children: [
-            Expanded(
-              child: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: [
-                      BoxShadow(
-                        color: themeState.primaryShade200,
-                        blurRadius: 150,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Image.asset(
-                    "assets/img/Quran_Logo_v3.png",
-                    color: themeState.primary,
+            if (isLandscape)
+              Expanded(
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      boxShadow: [
+                        BoxShadow(
+                          color: themeState.primaryShade200,
+                          blurRadius: 150,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      "assets/img/Quran_Logo_v3.png",
+                      color: themeState.primary,
+                    ),
                   ),
                 ),
               ),
-            ),
+            const VerticalDivider(),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

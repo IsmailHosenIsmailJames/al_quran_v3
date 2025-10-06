@@ -131,6 +131,20 @@ icons_launcher:
       enable: true
     ios:
       enable: true
+    web:
+      enable: true
+    macos:
+      enable: true
+      image_path: "assets/img/Quran_Logo_v3.png"
+
+    windows:
+      enable: false
+      image_path: "assets/img/Quran_Logo_v3.png"
+
+    linux:
+      enable: true
+      image_path: "assets/img/Quran_Logo_v3.png"
+
 
 flutter_launcher_icons:
   android: "launcher_icon"
