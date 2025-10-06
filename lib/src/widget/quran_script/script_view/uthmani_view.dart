@@ -151,13 +151,15 @@ class NonTajweedScriptView extends StatelessWidget {
 
                   return TextSpan(
                     style:
-                        highlightingWordIndex ==
-                                "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
+                        (segmentsReciterState.showAyahHilight == null ||
+                                scriptInfo.showWordHighlights == false)
+                            ? null
+                            : (highlightingWordIndex ==
+                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}" ||
+                                segmentsReciterState.showAyahHilight ==
+                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}")
                             ? TextStyle(
-                              backgroundColor:
-                                  scriptInfo.showWordHighlights == false
-                                      ? null
-                                      : themeState.primaryShade200,
+                              backgroundColor: themeState.primaryShade200,
                               fontFamily: isLastWord ? "QPC_Hafs" : null,
                             )
                             : TextStyle(

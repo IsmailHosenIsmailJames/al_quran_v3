@@ -38,6 +38,7 @@ class TajweedPageRenderer extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
         builder: (context, segmentsReciterState) {
+          log(segmentsReciterState.showAyahHilight.toString(), name: "TemHi");
           Map<String, List> audioSegmentsMap = {};
 
           for (final ayahKey in ayahsKey) {
@@ -85,8 +86,6 @@ class TajweedPageRenderer extends StatelessWidget {
               return false;
             },
             builder: (context, positionState) {
-              log(wordKey.toString(), name: "wordKey");
-
               return Text.rich(
                 TextSpan(
                   children:
@@ -109,8 +108,11 @@ class TajweedPageRenderer extends StatelessWidget {
                                     height: baseTextStyle?.height,
                                     backgroundColor:
                                         (wordKey == "$ayahKey:${index + 1}" &&
-                                                enableWordByWordHighlight ==
-                                                    true)
+                                                    enableWordByWordHighlight ==
+                                                        true) ||
+                                                segmentsReciterState
+                                                        .showAyahHilight ==
+                                                    ayahKey
                                             ? themeState.primaryShade200
                                             : null,
                                   ),

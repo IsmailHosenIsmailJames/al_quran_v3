@@ -22,4 +22,8 @@ class ThemeCubit extends Cubit<ThemeState> {
     await ThemeFunctions.setColorToDB(color);
     emit(ThemeFunctions.getThemeState(color, state.themeMode));
   }
+
+  void refresh() {
+    emit(state.copyWith());
+  }
 }

@@ -55,6 +55,7 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       shadowColor: Colors.transparent,
                     ),
                     onPressed: () async {
+                      await loadQuranScript(currentQuranScriptType);
                       await Hive.box(
                         "user",
                       ).put("selected_script", currentQuranScriptType.name);
@@ -62,7 +63,6 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       context.read<QuranViewCubit>().changeQuranScriptType(
                         currentQuranScriptType,
                       );
-                      await loadQuranScript();
                     },
                     label: Text(
                       getLocalizedQuranScriptType(

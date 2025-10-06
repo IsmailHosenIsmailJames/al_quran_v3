@@ -53,15 +53,7 @@ Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
 Map<String, dynamic> surahMeaningLocalization = {};
 
-Future<void> loadQuranScript() async {
-  QuranScriptType scriptType = QuranScriptType.values.firstWhere(
-    (element) =>
-        Hive.box("user").get(
-          "selected_quran_script_type",
-          defaultValue: QuranScriptType.values.first.name,
-        ) ==
-        element.name,
-  );
+Future<void> loadQuranScript(QuranScriptType scriptType) async {
   switch (scriptType) {
     case QuranScriptType.tajweed:
       quranScript = jsonDecode(
@@ -114,7 +106,16 @@ Future<void> main() async {
 
   applicationDataPath = await platform_services.getApplicationDataPath();
 
-  await loadQuranScript();
+  await loadQuranScript(
+    QuranScriptType.values.firstWhere(
+      (element) =>
+          Hive.box("user").get(
+            "selected_quran_script_type",
+            defaultValue: QuranScriptType.values.first.name,
+          ) ==
+          element.name,
+    ),
+  );
 
   metaDataJuz = jsonDecode(
     await rootBundle.loadString("assets/meta_data/Juz.json"),

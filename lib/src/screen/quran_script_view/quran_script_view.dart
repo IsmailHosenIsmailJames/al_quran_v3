@@ -4,6 +4,8 @@ import "dart:developer";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
@@ -520,7 +522,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
           return shouldBuild;
         },
         builder: (context, state) {
-          int selectedIndex = allAyahsKey.indexOf(state.dropdownAyahKey);
           return ScrollablePositionedList.builder(
             itemCount: allAyahsKey.length,
             itemScrollController: itemScrollControllerSideBar,
@@ -529,25 +530,36 @@ class _PageByPageViewState extends State<QuranScriptView> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor:
-                        selectedIndex == index
-                            ? themeState.primary
-                            : themeState.primaryShade100,
-                    foregroundColor:
-                        selectedIndex == index
-                            ? Colors.white
-                            : themeState.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(roundedRadius),
+                child:
+                    BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+                      builder:
+                          (context, state) => TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor:
+                                  state.showAyahHilight == allAyahsKey[index]
+                                      ? themeState.primary
+                                      : themeState.primaryShade100,
+                              foregroundColor:
+                                  state.showAyahHilight == allAyahsKey[index]
+                                      ? Colors.white
+                                      : themeState.primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  roundedRadius,
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              scrollToAyah(allAyahsKey[index]);
+                              context
+                                  .read<SegmentedQuranReciterCubit>()
+                                  .temporaryHilightAyah(allAyahsKey[index]);
+                            },
+                            child: Text(
+                              allAyahsKey[index].toString().split(":").last,
+                            ),
+                          ),
                     ),
-                  ),
-                  onPressed: () {
-                    scrollToAyah(allAyahsKey[index]);
-                  },
-                  child: Text(allAyahsKey[index].toString().split(":").last),
-                ),
               );
             },
           );
