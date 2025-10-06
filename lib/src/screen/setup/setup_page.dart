@@ -110,215 +110,268 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(appLocalizations.appLanguage),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
-            icon: const Icon(FluentIcons.settings_24_regular),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-                builder: (context, state) {
-                  return RadioGroup<MyAppLocalization>(
-                    groupValue: state,
-                    onChanged: (value) {
-                      if (value != null) {
-                        changeAppLanguage(value);
-                      }
-                    },
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: usedAppLanguageMap.length,
-                      itemBuilder: (context, index) {
-                        final MyAppLocalization appLoc =
-                            usedAppLanguageMap[index];
-                        return RadioListTile<MyAppLocalization>(
-                          value: appLoc,
-                          title: Text(appLoc.native),
-                          subtitle: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Text(appLoc.english),
-                                const Gap(7),
-                                if (doesHaveFootNote(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.footnote,
-                                  ),
-                                if (doesHaveTafsirSupport(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.tafsir,
-                                  ),
-                                if (doesHaveWordByWordTranslation(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.wordByWord,
-                                  ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
+    bool isLargeScreen = MediaQuery.of(context).size.width > 600;
 
-            BlocBuilder<
-              ResourcesProgressCubitCubit,
-              ResourcesProgressCubitState
-            >(
-              builder:
-                  (context, state) => Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                      boxShadow: [
-                        BoxShadow(color: themeState.mutedGray, blurRadius: 10),
+    return Scaffold(
+      appBar:
+          isLargeScreen
+              ? null
+              : AppBar(
+                title: Text(appLocalizations.appLanguage),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(FluentIcons.settings_24_regular),
+                  ),
+                ],
+              ),
+      body: SafeArea(
+        child: Row(
+          children: [
+            if (isLargeScreen)
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(
+                      appLocalizations.appLanguage,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Gap(10),
+                    Expanded(child: listOfLanguages(appLocalizations)),
+                  ],
+                ),
+              ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (!isLargeScreen) listOfLanguages(appLocalizations),
+
+                  if (isLargeScreen)
+                    Row(
+                      children: [
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SettingsPage(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(FluentIcons.settings_24_regular),
+                        ),
                       ],
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                  if (isLargeScreen) const Gap(10),
+                  BlocBuilder<
+                    ResourcesProgressCubitCubit,
+                    ResourcesProgressCubitState
+                  >(
+                    builder:
+                        (context, state) => Container(
+                          padding: const EdgeInsets.all(10),
+                          margin:
+                              isLargeScreen ? const EdgeInsets.all(10) : null,
+                          height: isLargeScreen ? 200 : null,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.circular(roundedRadius),
+                            boxShadow: [
+                              BoxShadow(
+                                color: themeState.mutedGray,
+                                blurRadius: 10,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  Text(
-                                    appLocalizations.translation,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context).hintColor,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.translation,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .translationBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    context
-                                            .read<ResourcesProgressCubitCubit>()
-                                            .state
-                                            .translationBookModel
-                                            ?.name ??
-                                        "",
-                                    style: const TextStyle(fontSize: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.85,
+                                        context: context,
+                                        showDragHandle: true,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: false,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
                                   ),
                                 ],
                               ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.85,
-                                  context: context,
-                                  showDragHandle: true,
-                                  builder: (context) {
-                                    return const BookSelectPopup(
-                                      isTafsir: false,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Text(appLocalizations.change),
-                            ),
-                          ],
-                        ),
-                        const Gap(10),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              const Gap(10),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    appLocalizations.tafsir,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context).hintColor,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.tafsir,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .tafsirBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    context
-                                            .read<ResourcesProgressCubitCubit>()
-                                            .state
-                                            .tafsirBookModel
-                                            ?.name ??
-                                        "",
-                                    style: const TextStyle(fontSize: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.85,
+                                        context: context,
+                                        showDragHandle: true,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: true,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
                                   ),
                                 ],
                               ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.85,
-                                  context: context,
-                                  showDragHandle: true,
-                                  builder: (context) {
-                                    return const BookSelectPopup(
-                                      isTafsir: true,
+                              const Gap(10),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton.icon(
+                                  onPressed: () {
+                                    downloadResources(
+                                      context
+                                          .read<ResourcesProgressCubitCubit>()
+                                          .state,
                                     );
                                   },
-                                );
-                              },
-                              child: Text(appLocalizations.change),
-                            ),
-                          ],
-                        ),
-                        const Gap(10),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              downloadResources(
-                                context
-                                    .read<ResourcesProgressCubitCubit>()
-                                    .state,
-                              );
-                            },
-                            icon: const Icon(
-                              FluentIcons.arrow_download_24_filled,
-                            ),
-                            label: Text(appLocalizations.saveAndDownload),
+                                  icon: const Icon(
+                                    FluentIcons.arrow_download_24_filled,
+                                  ),
+                                  label: Text(appLocalizations.saveAndDownload),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
                   ),
+                ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Expanded listOfLanguages(AppLocalizations appLocalizations) {
+    return Expanded(
+      child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+        builder: (context, state) {
+          return RadioGroup<MyAppLocalization>(
+            groupValue: state,
+            onChanged: (value) {
+              if (value != null) {
+                changeAppLanguage(value);
+              }
+            },
+            child: ListView.builder(
+              controller: _scrollController,
+              itemCount: usedAppLanguageMap.length,
+              itemBuilder: (context, index) {
+                final MyAppLocalization appLoc = usedAppLanguageMap[index];
+                return RadioListTile<MyAppLocalization>(
+                  value: appLoc,
+                  title: Text(appLoc.native),
+                  subtitle: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Text(appLoc.english),
+                        const Gap(7),
+                        if (doesHaveFootNote(appLoc.english.toLowerCase()))
+                          getFeaturesMark(context, appLocalizations.footnote),
+                        if (doesHaveTafsirSupport(appLoc.english.toLowerCase()))
+                          getFeaturesMark(context, appLocalizations.tafsir),
+                        if (doesHaveWordByWordTranslation(
+                          appLoc.english.toLowerCase(),
+                        ))
+                          getFeaturesMark(context, appLocalizations.wordByWord),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
