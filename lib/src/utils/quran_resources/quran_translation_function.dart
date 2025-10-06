@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -156,6 +157,7 @@ class QuranTranslationFunction {
   }
 
   static Future<void> setTranslationSelection(TranslationBookModel book) async {
+    cacheOfAyahKeys.clear();
     final userBox = Hive.box("user");
     await userBox.put("selected_translation", book.toMap());
     await init(translationBook: book);
@@ -422,6 +424,7 @@ class QuranTranslationFunction {
   }
 
   static Future<void> close() async {
+    cacheOfAyahKeys.clear();
     if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
       await openedTranslationBox!.close();
       log(
