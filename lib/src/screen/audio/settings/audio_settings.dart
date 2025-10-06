@@ -52,31 +52,6 @@ class _AudioSettingsState extends State<AudioSettings> {
               builder: (context, quranViewState) {
                 return SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text(l10n.scrollWithRecitation),
-                  subtitle: Text(l10n.scrollWithRecitationDesc),
-                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                    Set<WidgetState> states,
-                  ) {
-                    return Icon(
-                      states.contains(WidgetState.selected)
-                          ? Icons.done_rounded
-                          : Icons.close_rounded,
-                    );
-                  }),
-
-                  value: quranViewState.scrollWithRecitation,
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().setViewOptions(
-                      scrollWithRecitation: value,
-                    );
-                  },
-                );
-              },
-            ),
-            BlocBuilder<QuranViewCubit, QuranViewState>(
-              builder: (context, quranViewState) {
-                return SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
                   title: Text(l10n.useAudioStream),
                   subtitle: Text(l10n.useAudioStreamDesc),
                   thumbIcon: WidgetStateProperty.resolveWith<Icon?>((

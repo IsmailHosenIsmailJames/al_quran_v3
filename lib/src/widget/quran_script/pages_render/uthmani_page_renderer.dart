@@ -111,7 +111,11 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                   text: "$word ",
                                   style:
                                       (wordKey == "$ayahKey:${index + 1}" &&
-                                              enableWordByWordHighlight == true)
+                                                  enableWordByWordHighlight ==
+                                                      true) ||
+                                              segmentsReciterState
+                                                      .showAyahHilight ==
+                                                  ayahKey
                                           ? TextStyle(
                                             backgroundColor:
                                                 themeState.primaryShade200,

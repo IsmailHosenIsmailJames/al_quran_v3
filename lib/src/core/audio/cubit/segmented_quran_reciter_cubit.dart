@@ -38,4 +38,12 @@ class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
     List? segments = SegmentedResourcesManager.getAyahSegments(ayahKey);
     return segments == null ? null : List<List>.from(segments);
   }
+
+  void temporaryHilightAyah(String ayah) async {
+    emit(state.copyWith(showAyahHilight: ayah));
+  }
+
+  void refresh() {
+    emit(state.copyWith());
+  }
 }
