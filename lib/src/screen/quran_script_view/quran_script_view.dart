@@ -358,7 +358,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
             children: [
               if (isLandScape)
                 SafeArea(
-                  right: false,
                   child: SizedBox(
                     width: 250,
                     child: Column(
@@ -497,7 +496,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
         border: Border.all(color: themeState.primaryShade100),
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
-      width: 80,
       child: BlocBuilder<
         AyahByAyahInScrollInfoCubit,
         AyahByAyahInScrollInfoState
@@ -922,6 +920,7 @@ class PositionedSurahBuilder extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 200, top: isLandScape ? 50 : 0),
       itemBuilder: (context, index) {
         return SafeArea(
+          left: false,
           child: AyahElementWidget(
             index: index,
             pagesInfoWithSurahMetaData: pagesInfoWithSurahMetaData,
