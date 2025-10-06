@@ -213,7 +213,12 @@ class _AudioSettingsState extends State<AudioSettings> {
                     return Center(child: Text(l10n.cacheNotFound));
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor:
+                            context.read<ThemeCubit>().state.primaryShade100,
+                      ),
+                    );
                   }
                   return const SizedBox();
                 },
@@ -242,7 +247,10 @@ class _AudioSettingsState extends State<AudioSettings> {
                 future: justAudioCache(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return CircularProgressIndicator(
+                      backgroundColor:
+                          context.read<ThemeCubit>().state.primaryShade100,
+                    );
                   } else if (snapshot.hasError) {
                     return Text(l10n.error(snapshot.error.toString()));
                   } else {

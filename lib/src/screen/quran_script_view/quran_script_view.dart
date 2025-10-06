@@ -358,6 +358,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
             children: [
               if (isLandScape)
                 SafeArea(
+                  right: false,
                   child: SizedBox(
                     width: 250,
                     child: Column(

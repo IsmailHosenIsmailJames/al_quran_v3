@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -71,6 +72,11 @@ Widget getReciterWidget({
                           (context, url, progress) => Center(
                             child: CircularProgressIndicator(
                               value: progress.progress,
+                              backgroundColor:
+                                  context
+                                      .read<ThemeCubit>()
+                                      .state
+                                      .primaryShade100,
                             ),
                           ),
                       fit: BoxFit.cover,

@@ -143,6 +143,11 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                         (context, url, progress) => Center(
                                           child: CircularProgressIndicator(
                                             value: progress.progress,
+                                            backgroundColor:
+                                                context
+                                                    .read<ThemeCubit>()
+                                                    .state
+                                                    .primaryShade100,
                                           ),
                                         ),
                                     fit: BoxFit.cover,
