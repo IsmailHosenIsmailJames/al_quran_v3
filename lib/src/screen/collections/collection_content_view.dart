@@ -223,24 +223,41 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             return ListView.builder(
               itemCount: widget.pinnedCollectionModel!.pinned.length,
               itemBuilder: (context, index) {
-                return FutureBuilder(
-                  future: getTranslationWithWordByWord(
-                    widget.pinnedCollectionModel!.pinned[index].ayahKey,
-                  ),
-                  builder: (context, asyncSnapshot) {
-                    if (asyncSnapshot.connectionState != ConnectionState.done) {
-                      return const SizedBox(height: 250);
-                    }
-                    return getAyahByAyahCard(
+                final TranslationWithWordByWord? translationData =
+                    getTranslationFromCache(
+                      widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                    );
+                return translationData != null
+                    ? getAyahByAyahCard(
                       ayahKey:
                           widget.pinnedCollectionModel!.pinned[index].ayahKey,
                       context: context,
                       showFullKey: true,
-                      translationMap: asyncSnapshot.data?.translation ?? {},
-                      wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                      translationMap: translationData.translation ?? {},
+                      wordByWord: translationData.wordByWord ?? [],
+                    )
+                    : FutureBuilder(
+                      future: getTranslationWithWordByWord(
+                        widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                      ),
+                      builder: (context, asyncSnapshot) {
+                        if (asyncSnapshot.connectionState !=
+                            ConnectionState.done) {
+                          return const SizedBox(height: 250);
+                        }
+                        return getAyahByAyahCard(
+                          ayahKey:
+                              widget
+                                  .pinnedCollectionModel!
+                                  .pinned[index]
+                                  .ayahKey,
+                          context: context,
+                          showFullKey: true,
+                          translationMap: asyncSnapshot.data?.translation ?? {},
+                          wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                        );
+                      },
                     );
-                  },
-                );
               },
             );
           }

@@ -299,8 +299,6 @@ class _PageByPageViewState extends State<QuranScriptView> {
       }
     }
 
-    log(targetIndex.toString(), name: "Target Index");
-
     if (targetIndex != null && itemScrollController.isAttached) {
       itemScrollController.jumpTo(index: targetIndex);
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -737,22 +735,35 @@ class AyahElementWidget extends StatelessWidget {
           return state.isAyahByAyah == true && isPageByPageThisPage == false
               ? Column(
                 children: List.generate(ayahsKeyOfPage.length, (idx) {
-                  return FutureBuilder(
-                    future: getTranslationWithWordByWord(ayahsKeyOfPage[idx]),
-                    builder: (context, asyncSnapshot) {
-                      if (asyncSnapshot.connectionState !=
-                          ConnectionState.done) {
-                        return const SizedBox(height: 250);
-                      }
-                      return getAyahByAyahCard(
+                  final TranslationWithWordByWord? translationData =
+                      getTranslationFromCache(ayahsKeyOfPage[idx]);
+                  return translationData != null
+                      ? getAyahByAyahCard(
                         key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                         ayahKey: ayahsKeyOfPage[idx],
                         context: context,
-                        translationMap: asyncSnapshot.data?.translation ?? {},
-                        wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                        translationMap: translationData.translation ?? {},
+                        wordByWord: translationData.wordByWord ?? [],
+                      )
+                      : FutureBuilder(
+                        future: getTranslationWithWordByWord(
+                          ayahsKeyOfPage[idx],
+                        ),
+                        builder: (context, asyncSnapshot) {
+                          if (asyncSnapshot.connectionState !=
+                              ConnectionState.done) {
+                            return const SizedBox(height: 250);
+                          }
+                          return getAyahByAyahCard(
+                            key: ayahKeyToKey[ayahsKeyOfPage[idx]],
+                            ayahKey: ayahsKeyOfPage[idx],
+                            context: context,
+                            translationMap:
+                                asyncSnapshot.data?.translation ?? {},
+                            wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                          );
+                        },
                       );
-                    },
-                  );
                 }),
               )
               : VisibilityDetector(

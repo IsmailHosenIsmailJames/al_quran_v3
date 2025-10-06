@@ -17,6 +17,8 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
 }) {
   return BlocBuilder<QuranViewCubit, QuranViewState>(
     builder: (context, quranViewState) {
+      final TranslationWithWordByWord? translationWithWordByWord =
+          getTranslationFromCache(quranViewState.ayahKey);
       return Column(
         children: [
           if (!(showHeaderOptions == false))
@@ -56,23 +58,33 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
               ],
             ),
 
-          FutureBuilder(
-            future: getTranslationWithWordByWord(quranViewState.ayahKey),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return const SizedBox(height: 250);
-              }
-              return getAyahByAyahCard(
+          translationWithWordByWord != null
+              ? getAyahByAyahCard(
                 ayahKey: quranViewState.ayahKey,
                 context: context,
                 showTopOptions: showHeaderOptions,
                 keepMargin: false,
                 showOnlyAyah: showOnlyAyah,
-                translationMap: snapshot.data?.translation ?? {},
-                wordByWord: snapshot.data?.wordByWord ?? [],
-              );
-            },
-          ),
+                translationMap: translationWithWordByWord.translation ?? {},
+                wordByWord: translationWithWordByWord.wordByWord ?? [],
+              )
+              : FutureBuilder(
+                future: getTranslationWithWordByWord(quranViewState.ayahKey),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return const SizedBox(height: 250);
+                  }
+                  return getAyahByAyahCard(
+                    ayahKey: quranViewState.ayahKey,
+                    context: context,
+                    showTopOptions: showHeaderOptions,
+                    keepMargin: false,
+                    showOnlyAyah: showOnlyAyah,
+                    translationMap: snapshot.data?.translation ?? {},
+                    wordByWord: snapshot.data?.wordByWord ?? [],
+                  );
+                },
+              ),
         ],
       );
     },

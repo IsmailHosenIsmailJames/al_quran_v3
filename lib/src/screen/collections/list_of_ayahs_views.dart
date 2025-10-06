@@ -20,21 +20,31 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
       body: ListView.builder(
         itemCount: widget.ayahsKey.length,
         itemBuilder: (context, index) {
-          return FutureBuilder(
-            future: getTranslationWithWordByWord(widget.ayahsKey[index]),
-            builder: (context, asyncSnapshot) {
-              if (asyncSnapshot.connectionState != ConnectionState.done) {
-                return const SizedBox(height: 250);
-              }
-              return getAyahByAyahCard(
+          final TranslationWithWordByWord? translationData =
+              getTranslationFromCache(widget.ayahsKey[index]);
+          return translationData != null
+              ? getAyahByAyahCard(
                 ayahKey: widget.ayahsKey[index],
                 context: context,
                 showFullKey: true,
-                translationMap: asyncSnapshot.data?.translation ?? {},
-                wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                translationMap: translationData.translation ?? {},
+                wordByWord: translationData.wordByWord ?? [],
+              )
+              : FutureBuilder(
+                future: getTranslationWithWordByWord(widget.ayahsKey[index]),
+                builder: (context, asyncSnapshot) {
+                  if (asyncSnapshot.connectionState != ConnectionState.done) {
+                    return const SizedBox(height: 250);
+                  }
+                  return getAyahByAyahCard(
+                    ayahKey: widget.ayahsKey[index],
+                    context: context,
+                    showFullKey: true,
+                    translationMap: asyncSnapshot.data?.translation ?? {},
+                    wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                  );
+                },
               );
-            },
-          );
         },
       ),
     );
