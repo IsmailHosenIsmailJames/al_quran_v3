@@ -1,9 +1,10 @@
-import "dart:io";
-
 import "package:alarm/model/alarm_settings.dart";
 import "package:alarm/model/notification_settings.dart";
 import "package:alarm/model/volume_settings.dart";
 import "package:flutter/material.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
+
+import "../../../main.dart";
 
 final alarmSettings = AlarmSettings(
   id: 42,
@@ -11,7 +12,7 @@ final alarmSettings = AlarmSettings(
   assetAudioPath: "assets/alarm.mp3",
   loopAudio: true,
   vibrate: true,
-  warningNotificationOnKill: Platform.isIOS,
+  warningNotificationOnKill: platformOwn == platform_services.PlatformOwn.isIos,
   androidFullScreenIntent: false,
   volumeSettings: VolumeSettings.fade(
     volume: 0.8,

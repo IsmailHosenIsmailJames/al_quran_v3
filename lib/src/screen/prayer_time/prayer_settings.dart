@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
@@ -12,6 +13,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
+import "../../../main.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/values/values.dart";
 import "../../widget/prayers/prayer_calculation_method_info_widget.dart";
@@ -90,93 +92,107 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               },
             ),
             const Gap(20),
-            Text(l10n.reminderSettings, style: titleStyle),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              Text(l10n.reminderSettings, style: titleStyle),
             const Gap(5),
-            getDropPrayerSettings(themeState),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              getDropPrayerSettings(themeState),
             const Gap(20),
             Text(l10n.adjustReminderTime, style: titleStyle),
             const Gap(5),
-            getAdjustReminderWidget(themeState, l10n),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              getAdjustReminderWidget(themeState, l10n),
             const Gap(15),
-            Row(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Text(l10n.enforceAlarmSound, style: titleStyle),
-                ),
-                const Spacer(),
-                BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-                  builder: (context, prayerReminderState) {
-                    return Switch.adaptive(
-                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                        Set<WidgetState> states,
-                      ) {
-                        return Icon(
-                          states.contains(WidgetState.selected)
-                              ? Icons.done_rounded
-                              : Icons.close_rounded,
-                        );
-                      }),
-                      value: prayerReminderState.enforceAlarmSound,
-                      onChanged: (value) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setReminderEnforceSound(value);
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Text(l10n.enforceAlarmSound, style: titleStyle),
+                  ),
+                  const Spacer(),
+                  BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+                    builder: (context, prayerReminderState) {
+                      return Switch.adaptive(
+                        thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                          Set<WidgetState> states,
+                        ) {
+                          return Icon(
+                            states.contains(WidgetState.selected)
+                                ? Icons.done_rounded
+                                : Icons.close_rounded,
+                          );
+                        }),
+                        value: prayerReminderState.enforceAlarmSound,
+                        onChanged: (value) {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setReminderEnforceSound(value);
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
 
             const Gap(5),
-            Text(
-              l10n.enforceAlarmSoundDescription,
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              Text(
+                l10n.enforceAlarmSoundDescription,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
             const Gap(10),
-            BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-              builder: (context, prayerReminderState) {
-                if (prayerReminderState.enforceAlarmSound) {
-                  return Row(
-                    children: [
-                      Text(l10n.volume, style: titleStyle),
-                      const Spacer(),
-                      Text(
-                        prayerReminderState.soundVolume.toStringAsFixed(2),
-                        style: titleStyle,
-                      ),
-                    ],
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+                builder: (context, prayerReminderState) {
+                  if (prayerReminderState.enforceAlarmSound) {
+                    return Row(
+                      children: [
+                        Text(l10n.volume, style: titleStyle),
+                        const Spacer(),
+                        Text(
+                          prayerReminderState.soundVolume.toStringAsFixed(2),
+                          style: titleStyle,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
             const Gap(5),
-            BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-              builder: (context, prayerReminderState) {
-                if (prayerReminderState.enforceAlarmSound) {
-                  return SliderTheme(
-                    data: const SliderThemeData(padding: EdgeInsets.zero),
-                    child: Slider(
-                      value: prayerReminderState.soundVolume,
-                      min: 0.0,
-                      max: 1.0,
-                      divisions: 50,
-                      onChanged: (value) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setReminderSoundVolume(value);
-                      },
-                    ),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
+            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                platformOwn == platform_services.PlatformOwn.isIos)
+              BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+                builder: (context, prayerReminderState) {
+                  if (prayerReminderState.enforceAlarmSound) {
+                    return SliderTheme(
+                      data: const SliderThemeData(padding: EdgeInsets.zero),
+                      child: Slider(
+                        value: prayerReminderState.soundVolume,
+                        min: 0.0,
+                        max: 1.0,
+                        divisions: 50,
+                        onChanged: (value) {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setReminderSoundVolume(value);
+                        },
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
           ],
         ),
       ),

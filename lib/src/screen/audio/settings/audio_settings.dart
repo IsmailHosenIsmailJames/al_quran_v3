@@ -52,31 +52,6 @@ class _AudioSettingsState extends State<AudioSettings> {
               builder: (context, quranViewState) {
                 return SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text(l10n.scrollWithRecitation),
-                  subtitle: Text(l10n.scrollWithRecitationDesc),
-                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                    Set<WidgetState> states,
-                  ) {
-                    return Icon(
-                      states.contains(WidgetState.selected)
-                          ? Icons.done_rounded
-                          : Icons.close_rounded,
-                    );
-                  }),
-
-                  value: quranViewState.scrollWithRecitation,
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().setViewOptions(
-                      scrollWithRecitation: value,
-                    );
-                  },
-                );
-              },
-            ),
-            BlocBuilder<QuranViewCubit, QuranViewState>(
-              builder: (context, quranViewState) {
-                return SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
                   title: Text(l10n.useAudioStream),
                   subtitle: Text(l10n.useAudioStreamDesc),
                   thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
@@ -238,7 +213,12 @@ class _AudioSettingsState extends State<AudioSettings> {
                     return Center(child: Text(l10n.cacheNotFound));
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor:
+                            context.read<ThemeCubit>().state.primaryShade100,
+                      ),
+                    );
                   }
                   return const SizedBox();
                 },
@@ -267,7 +247,10 @@ class _AudioSettingsState extends State<AudioSettings> {
                 future: justAudioCache(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return CircularProgressIndicator(
+                      backgroundColor:
+                          context.read<ThemeCubit>().state.primaryShade100,
+                    );
                   } else if (snapshot.hasError) {
                     return Text(l10n.error(snapshot.error.toString()));
                   } else {

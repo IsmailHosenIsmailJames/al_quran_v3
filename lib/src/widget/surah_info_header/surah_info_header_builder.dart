@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -20,6 +19,7 @@ import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -37,8 +37,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations l10n = AppLocalizations.of(context);
-    final TranslationBookModel? translationMeta =
-        QuranTranslationFunction.getMetaInfo();
+
     TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
     Widget surahInfoHeader = Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
@@ -85,10 +84,14 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      "${l10n.translation}: ${translationMeta?.name.toString()}",
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 12),
+                    FutureBuilder(
+                      future: QuranTranslationFunction.getMetaInfo(),
+                      builder:
+                          (context, snapshot) => Text(
+                            "${l10n.translation}: ${snapshot.data?.name.toString() ?? ""}",
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 12),
+                          ),
                     ),
                     Text(
                       "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",
@@ -105,7 +108,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           ),
                           onPressed: () async {
                             final String surahInfo =
-                                QuranTranslationFunction.getInfoOfSurah(
+                                await QuranTranslationFunction.getInfoOfSurah(
                                   headerInfoModel.surahInfoModel.id.toString(),
                                 );
                             Navigator.push(
@@ -156,34 +159,35 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        IconButton(
-                          style: IconButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: themeState.primary,
-                            foregroundColor: Colors.white,
+                        if (!kIsWeb)
+                          IconButton(
+                            style: IconButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              backgroundColor: themeState.primary,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => AudioDownloadScreen(
+                                        initDownloadSurah:
+                                            headerInfoModel.surahInfoModel,
+                                        reciterInfoModel:
+                                            context
+                                                .read<
+                                                  SegmentedQuranReciterCubit
+                                                >()
+                                                .state,
+                                      ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(
+                              FluentIcons.arrow_download_24_filled,
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => AudioDownloadScreen(
-                                      initDownloadSurah:
-                                          headerInfoModel.surahInfoModel,
-                                      reciterInfoModel:
-                                          context
-                                              .read<
-                                                SegmentedQuranReciterCubit
-                                              >()
-                                              .state,
-                                    ),
-                              ),
-                            );
-                          },
-                          icon: const Icon(
-                            FluentIcons.arrow_download_24_filled,
-                          ),
-                        ),
                         IconButton(
                           style: IconButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -243,11 +247,16 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               (playerState.state ==
                                           just_audio.ProcessingState.loading &&
                                       isCurrentSurah)
-                                  ? const Padding(
-                                    padding: EdgeInsets.all(3.0),
+                                  ? Padding(
+                                    padding: const EdgeInsets.all(3.0),
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                       strokeWidth: 4,
+                                      backgroundColor:
+                                          context
+                                              .read<ThemeCubit>()
+                                              .state
+                                              .primaryShade100,
                                     ),
                                   )
                                   : Icon(

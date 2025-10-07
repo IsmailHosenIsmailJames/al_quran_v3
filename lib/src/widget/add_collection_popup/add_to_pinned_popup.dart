@@ -7,7 +7,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../screen/collections/common_function.dart";
 import "../../screen/collections/models/pinned_model.dart.dart";
@@ -266,7 +266,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
           ),
           const Gap(10),
           SizedBox(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

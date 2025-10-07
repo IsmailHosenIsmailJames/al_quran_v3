@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/gestures.dart";
@@ -110,7 +111,11 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                   text: "$word ",
                                   style:
                                       (wordKey == "$ayahKey:${index + 1}" &&
-                                              enableWordByWordHighlight == true)
+                                                  enableWordByWordHighlight ==
+                                                      true) ||
+                                              segmentsReciterState
+                                                      .showAyahHilight ==
+                                                  ayahKey
                                           ? TextStyle(
                                             backgroundColor:
                                                 themeState.primaryShade200,
@@ -124,15 +129,20 @@ class NonTajweedPageRenderer extends StatelessWidget {
 
                                   recognizer:
                                       TapGestureRecognizer()
-                                        ..onTap = () {
+                                        ..onTap = () async {
+                                          final wordKey = List.generate(
+                                            words.length,
+                                            (index) => "$ayahKey:${index + 1}",
+                                          );
                                           showPopupWordFunction(
                                             context: context,
                                             initWordIndex: index,
-                                            wordKeys: List.generate(
-                                              words.length,
-                                              (index) =>
-                                                  "$ayahKey:${index + 1}",
-                                            ),
+                                            wordKeys: wordKey,
+                                            wordByWordList:
+                                                await WordByWordFunction.getAyahWordByWordData(
+                                                  "${wordKey.first.split(":")[0]}:${wordKey.first.split(":")[1]}",
+                                                ) ??
+                                                [],
                                           );
                                         },
                                 );

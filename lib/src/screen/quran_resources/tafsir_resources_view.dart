@@ -126,6 +126,8 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                 ? CircularProgressIndicator(
                   strokeWidth: 2.5,
                   valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
+                  backgroundColor:
+                      context.read<ThemeCubit>().state.primaryShade100,
                 )
                 : needDownload
                 ? Icon(

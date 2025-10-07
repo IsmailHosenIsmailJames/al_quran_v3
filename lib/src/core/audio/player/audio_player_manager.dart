@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/platform_services.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
@@ -159,11 +160,14 @@ class AudioPlayerManager {
     audioDownloadCubit.updateProgress(0.0);
     _downloadCancelToken = CancelToken();
     for (int i = 1; i <= surahInfoModel.versesCount; i++) {
-      String expectedPath = getExpectedAudioFileLocation(
+      String? expectedPath = getExpectedAudioFileLocation(
         surahInfoModel: surahInfoModel,
         ayahNumber: i,
         reciterInfoModel: reciterInfoModel,
       );
+      if (expectedPath == null) {
+        return;
+      }
       log(expectedPath);
       if (!await File(expectedPath).exists()) {
         String url = getUrlOfAudioFromAyahKey(
@@ -213,10 +217,13 @@ class AudioPlayerManager {
     ReciterInfoModel reciter,
     SurahInfoModel surah,
   ) async {
-    String path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
+    String? path = AudioPlayerManager.getExpectedSurahDirectoryLocation(
       surahInfoModel: surah,
       reciterInfoModel: reciter,
     );
+    if (path == null) {
+      return 0;
+    }
     final dir = Directory(path);
     if (await dir.exists()) {
       return dir.listSync().length;
@@ -225,32 +232,36 @@ class AudioPlayerManager {
     }
   }
 
-  static String getExpectedAudioFileLocation({
+  static String? getExpectedAudioFileLocation({
     required SurahInfoModel surahInfoModel,
     required int ayahNumber,
     required ReciterInfoModel reciterInfoModel,
   }) {
-    return join(
-      applicationDataPath!.path,
-      "recitations",
-      reciterInfoModel.name,
-      reciterInfoModel.style,
-      surahInfoModel.id.toString().padLeft(3, "0"),
-      "${ayahNumber.toString().padLeft(3, "0")}.mp3",
-    );
+    return applicationDataPath == null
+        ? null
+        : join(
+          applicationDataPath!,
+          "recitations",
+          reciterInfoModel.name,
+          reciterInfoModel.style,
+          surahInfoModel.id.toString().padLeft(3, "0"),
+          "${ayahNumber.toString().padLeft(3, "0")}.mp3",
+        );
   }
 
-  static String getExpectedSurahDirectoryLocation({
+  static String? getExpectedSurahDirectoryLocation({
     required SurahInfoModel surahInfoModel,
     required ReciterInfoModel reciterInfoModel,
   }) {
-    return join(
-      applicationDataPath!.path,
-      "recitations",
-      reciterInfoModel.name,
-      reciterInfoModel.style,
-      surahInfoModel.id.toString().padLeft(3, "0"),
-    );
+    return applicationDataPath == null
+        ? null
+        : join(
+          applicationDataPath!,
+          "recitations",
+          reciterInfoModel.name,
+          reciterInfoModel.style,
+          surahInfoModel.id.toString().padLeft(3, "0"),
+        );
   }
 
   static Future<String?> getDownloadedPathOfSurah({
@@ -258,12 +269,12 @@ class AudioPlayerManager {
     required int ayahNumber,
     required ReciterInfoModel reciterInfoModel,
   }) async {
-    String expectedPath = getExpectedAudioFileLocation(
+    String? expectedPath = getExpectedAudioFileLocation(
       surahInfoModel: surahInfoModel,
       ayahNumber: ayahNumber,
       reciterInfoModel: reciterInfoModel,
     );
-    if (await File(expectedPath).exists()) {
+    if (expectedPath != null && await File(expectedPath).exists()) {
       return expectedPath;
     } else {
       return null;
@@ -276,7 +287,10 @@ class AudioPlayerManager {
     required bool isInsideQuran,
     bool instantPlay = true,
   }) async {
-    Permission.notification.request();
+    if (platformOwn == PlatformOwn.isIos ||
+        platformOwn == PlatformOwn.isAndroid) {
+      Permission.notification.request();
+    }
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
       await audioPlayer.clearAudioSources();
@@ -405,7 +419,10 @@ class AudioPlayerManager {
     int initialIndex = 0,
     bool instantPlay = true,
   }) async {
-    Permission.notification.request();
+    if (platformOwn == PlatformOwn.isIos ||
+        platformOwn == PlatformOwn.isAndroid) {
+      Permission.notification.request();
+    }
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
       await audioPlayer.clearAudioSources();
@@ -475,16 +492,28 @@ class AudioPlayerManager {
 
   static Future<void> playWord(String wordKey) async {
     if (isWordPlaying) return;
-    Permission.notification.request();
+    if (platformOwn == PlatformOwn.isIos ||
+        platformOwn == PlatformOwn.isAndroid) {
+      Permission.notification.request();
+    }
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;
 
-    AudioSource audioSource = LockCachingAudioSource(
-      Uri.parse(
-        "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
-      ),
-      tag: MediaItem(id: wordKey, title: wordKey),
-    );
+    AudioSource audioSource =
+        !(platformOwn == PlatformOwn.isIos ||
+                platformOwn == PlatformOwn.isAndroid ||
+                platformOwn == PlatformOwn.isMac)
+            ? AudioSource.uri(
+              Uri.parse(
+                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+              ),
+            )
+            : LockCachingAudioSource(
+              Uri.parse(
+                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+              ),
+              tag: MediaItem(id: wordKey, title: wordKey),
+            );
 
     await stopListeningAudioPlayerState();
 
@@ -524,23 +553,32 @@ class AudioPlayerManager {
       reciterInfoModel: reciter,
     );
     if (audioFilePath != null) {
-      return AudioSource.file(
-        audioFilePath,
-        tag: MediaItem(
-          id: ayahKey,
-          album: reciter.name,
-          title: getSurahName(context, surahInfoModel.id),
-        ),
-      );
+      return (platformOwn == PlatformOwn.isLinux ||
+              platformOwn == PlatformOwn.isWindows)
+          ? AudioSource.file(audioFilePath)
+          : AudioSource.file(
+            audioFilePath,
+            tag: MediaItem(
+              id: ayahKey,
+              album: reciter.name,
+              title: getSurahName(context, surahInfoModel.id),
+            ),
+          );
     } else {
-      return LockCachingAudioSource(
-        Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
-        tag: MediaItem(
-          id: ayahKey,
-          album: reciter.name,
-          title: getSurahName(context, surahInfoModel.id),
-        ),
-      );
+      return (platformOwn == PlatformOwn.isIos ||
+              platformOwn == PlatformOwn.isAndroid ||
+              platformOwn == PlatformOwn.isMac)
+          ? LockCachingAudioSource(
+            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+            tag: MediaItem(
+              id: ayahKey,
+              album: reciter.name,
+              title: getSurahName(context, surahInfoModel.id),
+            ),
+          )
+          : AudioSource.uri(
+            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+          );
     }
   }
 

@@ -1,4 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/platform_services.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
@@ -66,24 +68,25 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                      border: Border.all(
-                        color: context.read<ThemeCubit>().state.secondary,
+                  if (platformOwn == PlatformOwn.isAndroid)
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                        border: Border.all(
+                          color: context.read<ThemeCubit>().state.secondary,
+                        ),
+                      ),
+                      child: Text(
+                        l10n.notificationScheduleWarning,
+                        style: TextStyle(
+                          color: context.read<ThemeCubit>().state.secondary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
-                    child: Text(
-                      l10n.notificationScheduleWarning,
-                      style: TextStyle(
-                        color: context.read<ThemeCubit>().state.secondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
                   const Gap(10),
 
                   Row(
@@ -174,6 +177,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                     LocationQiblaPrayerDataState
                   >(
                     builder: (context, state) {
+                      if (state.calculationMethod == null) {
+                        return const SizedBox();
+                      }
                       return getPrayerCalculationMethodInfoWidget(
                         context,
                         state.calculationMethod!,
@@ -203,9 +209,9 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                           cubit.state.calculationMethod,
                           save: true,
                         );
-                        cubit.alignWithDatabase();
+                        await cubit.alignWithDatabase();
 
-                        cubit.checkPrayerDataExits();
+                        await cubit.checkPrayerDataExits();
                         if (widget.moveToDownload) {
                           Navigator.pop(context);
                         }
@@ -217,11 +223,16 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                       >(
                         builder: (context, state) {
                           return state.isPrayerTimeDownloading == true
-                              ? const Center(
+                              ? Center(
                                 child: Padding(
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
+                                    backgroundColor:
+                                        context
+                                            .read<ThemeCubit>()
+                                            .state
+                                            .primaryShade100,
                                   ),
                                 ),
                               )

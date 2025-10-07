@@ -46,30 +46,31 @@ class _AudioPageState extends State<AudioPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    bool isLandScape = width > height;
+    bool isLandScape = width > 1000;
+    if (height < 600) {
+      isLandScape = true;
+    }
     final l10n = AppLocalizations.of(context);
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+          buildWhen: (previous, current) {
+            return previous.current != current.current;
+          },
           builder: (context, ayahKeyState) {
             int currentIndex =
                 int.parse(ayahKeyState.current.split(":")[1]) - 1;
-            Map? translationMap = QuranTranslationFunction.getTranslation(
-              ayahKeyState.current,
-            );
-            String translation =
-                translationMap?["t"] ?? l10n.translationNotFound;
-            translation = translation.replaceAll(">", "> ");
+
             return Padding(
               padding: const EdgeInsets.all(10),
               child:
                   isLandScape
-                      ? SafeArea(
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: width * 0.45,
-                              child: ListView(
+                      ? Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: SingleChildScrollView(
+                              child: Column(
                                 children: [
                                   getReciterViewWidget(
                                     context,
@@ -92,16 +93,16 @@ class _AudioPageState extends State<AudioPage> {
                                 ],
                               ),
                             ),
-                            const Gap(10),
-                            Expanded(
-                              child: getAyahAndTranslation(
-                                context,
-                                ayahKeyState,
-                                translation,
-                              ),
+                          ),
+                          const Gap(10),
+                          Expanded(
+                            flex: 3,
+                            child: getAyahAndTranslationWithShimmer(
+                              context,
+                              ayahKeyState,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       )
                       : Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -117,10 +118,9 @@ class _AudioPageState extends State<AudioPage> {
 
                           const Gap(10),
                           Expanded(
-                            child: getAyahAndTranslation(
+                            child: getAyahAndTranslationWithShimmer(
                               context,
                               ayahKeyState,
-                              translation,
                             ),
                           ),
                           const Gap(20),
@@ -157,6 +157,25 @@ class _AudioPageState extends State<AudioPage> {
             AudioPlayerManager.audioPlayer.seek(duration);
           },
         );
+      },
+    );
+  }
+
+  Widget getAyahAndTranslationWithShimmer(
+    BuildContext context,
+    AyahKeyManagement ayahKeyState,
+  ) {
+    return FutureBuilder(
+      future: QuranTranslationFunction.getTranslation(ayahKeyState.current),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.connectionState != ConnectionState.done) {
+          return const SizedBox(height: 250);
+        }
+        String translation =
+            asyncSnapshot.data?["t"] ??
+            AppLocalizations.of(context).translationNotFound;
+        translation = translation.replaceAll(">", "> ");
+        return getAyahAndTranslation(context, ayahKeyState, translation);
       },
     );
   }
@@ -266,7 +285,10 @@ class _AudioPageState extends State<AudioPage> {
                 style: IconButton.styleFrom(padding: const EdgeInsets.all(5)),
                 icon:
                     state.state == ProcessingState.loading
-                        ? const CircularProgressIndicator()
+                        ? CircularProgressIndicator(
+                          backgroundColor:
+                              context.read<ThemeCubit>().state.primaryShade100,
+                        )
                         : Icon(
                           state.isPlaying
                               ? Icons.pause_rounded

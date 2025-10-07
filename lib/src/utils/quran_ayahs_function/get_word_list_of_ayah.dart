@@ -9,9 +9,7 @@ List<String> getWordListOfAyah(
 ) {
   switch (type) {
     case QuranScriptType.tajweed:
-      List<String> compressed = List<String>.from(
-        tajweedQuranScriptCompressed[surah][ayah],
-      );
+      List<String> compressed = List<String>.from(quranScript[surah][ayah]);
       for (int i = 0; i < compressed.length; i++) {
         for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
           compressed[i] = compressed[i].replaceAll("r$j", tajweedRulesList[j]);
@@ -20,9 +18,9 @@ List<String> getWordListOfAyah(
       return compressed;
 
     case QuranScriptType.uthmani:
-      return List<String>.from(uthmaniQuranScript[surah][ayah]);
+      return List<String>.from(quranScript[surah][ayah]);
 
     case QuranScriptType.indopak:
-      return List<String>.from(indopakQuranScript[surah][ayah]);
+      return List<String>.from(quranScript[surah][ayah]);
   }
 }

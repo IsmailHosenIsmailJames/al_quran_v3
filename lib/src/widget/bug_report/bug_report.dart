@@ -25,7 +25,7 @@ Future<void> showBugReportDialog(BuildContext context) async {
         decoration: const BoxDecoration(),
         padding: const EdgeInsets.all(10),
         height: 300,
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
             Row(
@@ -39,7 +39,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 const Gap(10),
                 Text(
                   AppLocalizations.of(context).bugReportTitle,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

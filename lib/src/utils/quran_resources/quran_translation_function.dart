@@ -2,11 +2,12 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
 import "../../resources/quran_resources/available_surah_info_lang.dart";
@@ -15,7 +16,7 @@ import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
 class QuranTranslationFunction {
-  static Box? openedTranslationBox;
+  static LazyBox? openedTranslationBox;
 
   static Future<void> init({TranslationBookModel? translationBook}) async {
     if (!Hive.isBoxOpen("user")) {
@@ -32,14 +33,14 @@ class QuranTranslationFunction {
     String infoBoxName =
         "surah_info_${languageToCodeMap[bookToOpen?.language.toLowerCase()]}";
     if (!Hive.isBoxOpen(infoBoxName)) {
-      await Hive.openBox(infoBoxName);
+      await Hive.openLazyBox(infoBoxName);
     }
 
     if (bookToOpen != null) {
       final boxName = getTranslationBoxName(translationBook: bookToOpen);
       if (await Hive.boxExists(boxName)) {
         await close(); // Close any previously opened box
-        openedTranslationBox = await Hive.openBox(boxName);
+        openedTranslationBox = await Hive.openLazyBox(boxName);
         log(
           "Opened translation box: $boxName",
           name: "QuranTranslationFunction.init",
@@ -66,13 +67,13 @@ class QuranTranslationFunction {
   static bool isInfoAvailable() {
     final boxName =
         "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
-    return Hive.box(boxName).isNotEmpty;
+    return Hive.lazyBox(boxName).isNotEmpty;
   }
 
-  static String getInfoOfSurah(String id) {
+  static Future<String> getInfoOfSurah(String id) async {
     final boxName =
         "surah_info_${languageToCodeMap[getTranslationSelection()?.language.toLowerCase()]}";
-    return Hive.box(boxName).get(id)["text"];
+    return (await Hive.lazyBox(boxName).get(id))["text"];
   }
 
   static Future<bool> isAlreadyDownloaded(TranslationBookModel book) async {
@@ -156,6 +157,7 @@ class QuranTranslationFunction {
   }
 
   static Future<void> setTranslationSelection(TranslationBookModel book) async {
+    cacheOfAyahKeys.clear();
     final userBox = Hive.box("user");
     await userBox.put("selected_translation", book.toMap());
     await init(translationBook: book);
@@ -227,9 +229,9 @@ class QuranTranslationFunction {
       name: "downloadResources",
     );
 
-    Box? newTranslationBox;
+    LazyBox? newTranslationBox;
     try {
-      newTranslationBox = await Hive.openBox(translationBoxName);
+      newTranslationBox = await Hive.openLazyBox(translationBoxName);
     } catch (e) {
       log(
         "Error opening Box '$translationBoxName': $e. Trying to delete and reopen.",
@@ -237,7 +239,7 @@ class QuranTranslationFunction {
       );
       try {
         await Hive.deleteBoxFromDisk(translationBoxName);
-        newTranslationBox = await Hive.openBox(translationBoxName);
+        newTranslationBox = await Hive.openLazyBox(translationBoxName);
       } catch (e2) {
         log(
           "Failed to open Box '$translationBoxName' even after delete: $e2",
@@ -338,7 +340,7 @@ class QuranTranslationFunction {
     log("Downloading surah info for $languageCode", name: "downloadSurahInfo");
     // Check if box exists and is not empty
     if (await Hive.boxExists(surahInfoBoxName)) {
-      var box = await Hive.openBox(surahInfoBoxName);
+      var box = await Hive.openLazyBox(surahInfoBoxName);
       if (box.isNotEmpty) {
         log(
           "Surah info for $languageCode already exists and is not empty.",
@@ -356,7 +358,7 @@ class QuranTranslationFunction {
       );
       if (response.statusCode == 200) {
         log(surahInfoBoxName);
-        final box = await Hive.openBox(surahInfoBoxName);
+        final box = await Hive.openLazyBox(surahInfoBoxName);
         Map data = await compute(
           (message) => jsonDecode(decodeBZip2String(message as String)),
           response.data,
@@ -384,7 +386,7 @@ class QuranTranslationFunction {
     }
   }
 
-  static Map? getTranslation(String ayahKey) {
+  static Future<Map?> getTranslation(String ayahKey) async {
     if (openedTranslationBox == null || !openedTranslationBox!.isOpen) {
       log("Translation box is not open or available.", name: "getTranslation");
       TranslationBookModel? currentSelection = getTranslationSelection();
@@ -398,16 +400,18 @@ class QuranTranslationFunction {
       }
       return {"t": "Translation Not Selected"};
     }
-    return openedTranslationBox!.get(
+    return await openedTranslationBox!.get(
       ayahKey,
       defaultValue: {"t": "Translation Not Found For Ayah"},
     );
   }
 
-  static TranslationBookModel? getMetaInfo() {
+  static Future<TranslationBookModel?> getMetaInfo() async {
     if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
       final Map<String, dynamic>? metaMap =
-          openedTranslationBox!.get("meta_data")?.cast<String, dynamic>();
+          (await openedTranslationBox!.get(
+            "meta_data",
+          ))?.cast<String, dynamic>();
       if (metaMap != null) {
         return TranslationBookModel.fromMap(metaMap);
       }
@@ -420,6 +424,7 @@ class QuranTranslationFunction {
   }
 
   static Future<void> close() async {
+    cacheOfAyahKeys.clear();
     if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
       await openedTranslationBox!.close();
       log(

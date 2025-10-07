@@ -17,7 +17,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:share_plus/share_plus.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -86,7 +86,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
               ),
               color: themeState.primaryShade100,
             ),
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             height: 50,
             child: Stack(
               children: [
@@ -394,7 +394,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            (await QuranTranslationFunction.getTranslation(
+                              ayahKey,
+                            )) ??
                             {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";
@@ -496,7 +498,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           metaDataSurah[ayahKey.split(":").first],
                         );
                         Map translationMap =
-                            QuranTranslationFunction.getTranslation(ayahKey) ??
+                            (await QuranTranslationFunction.getTranslation(
+                              ayahKey,
+                            )) ??
                             {};
                         String translation =
                             translationMap["t"] ?? "Translation Not Found";

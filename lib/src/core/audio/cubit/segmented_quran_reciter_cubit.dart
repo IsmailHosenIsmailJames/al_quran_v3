@@ -1,8 +1,9 @@
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/utils/get_segments_supported_reciters.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+
+import "../../../utils/get_segments_supported_reciters.dart";
 
 class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
   SegmentedQuranReciterCubit()
@@ -36,5 +37,13 @@ class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
   List<List>? getAyahSegments(String ayahKey) {
     List? segments = SegmentedResourcesManager.getAyahSegments(ayahKey);
     return segments == null ? null : List<List>.from(segments);
+  }
+
+  void temporaryHilightAyah(String ayah) async {
+    emit(state.copyWith(showAyahHilight: ayah));
+  }
+
+  void refresh() {
+    emit(state.copyWith());
   }
 }

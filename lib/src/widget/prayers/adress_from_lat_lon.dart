@@ -65,9 +65,12 @@ Widget getAddressView({
         final String? address = snapshot.data;
 
         if (justAddress) {
-          return Text(
-            address ?? AppLocalizations.of(context).addressNotAvailable,
-            style: style,
+          return SizedBox(
+            width: 200,
+            child: Text(
+              address ?? AppLocalizations.of(context).addressNotAvailable,
+              style: style,
+            ),
           );
         }
 
@@ -89,7 +92,6 @@ Widget getAddressView({
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 40,
                   child: Text(
                     address ?? AppLocalizations.of(context).addressNotAvailable,
                     style: style,

@@ -16,7 +16,7 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
-import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
+// import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
 import "../../settings/cubit/quran_script_view_cubit.dart";
 import "../../settings/cubit/quran_script_view_state.dart";
 
@@ -264,9 +264,8 @@ class QuranScriptSettings extends StatelessWidget {
               },
             ),
 
-            const Gap(5),
-            getAyahPreviewWidget(showHeaderOptions: true),
-
+            //  const Gap(5),
+            //  getAyahPreviewWidget(showHeaderOptions: true),
             const Gap(10),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
@@ -286,20 +285,52 @@ class QuranScriptSettings extends StatelessWidget {
                 cubit.setViewOptions(enableWordByWordHighlight: value);
               },
             ),
-            if (quranViewState.enableWordByWordHighlight)
-              BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-                builder: (context, reciter) {
-                  return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-                    builder: (context, ayahState) {
-                      return buildReciterOverViewWidget(
-                        context,
-                        reciter,
-                        ayahState,
-                      );
-                    },
-                  );
-                },
-              ),
+            const Gap(10),
+
+            Text(
+              appLocalizations.selectReciter,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const Gap(10),
+            BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+              builder: (context, reciter) {
+                return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                  builder: (context, ayahState) {
+                    return buildReciterOverViewWidget(
+                      context,
+                      reciter,
+                      ayahState,
+                    );
+                  },
+                );
+              },
+            ),
+            const Gap(10),
+            BlocBuilder<QuranViewCubit, QuranViewState>(
+              builder: (context, quranViewState) {
+                return SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(appLocalizations.scrollWithRecitation),
+                  subtitle: Text(appLocalizations.scrollWithRecitationDesc),
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                    Set<WidgetState> states,
+                  ) {
+                    return Icon(
+                      states.contains(WidgetState.selected)
+                          ? Icons.done_rounded
+                          : Icons.close_rounded,
+                    );
+                  }),
+
+                  value: quranViewState.scrollWithRecitation,
+                  onChanged: (value) {
+                    context.read<QuranViewCubit>().setViewOptions(
+                      scrollWithRecitation: value,
+                    );
+                  },
+                );
+              },
+            ),
             const Gap(10),
           ],
         );

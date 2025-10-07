@@ -1,7 +1,7 @@
 import "dart:convert";
-import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -12,7 +12,8 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:workmanager/workmanager.dart";
 
-import "../../../core/notification/init_awesome_notification.dart";
+import "../../../../main.dart";
+import "../../../platform_services.dart";
 import "../models/prayer_model_of_day.dart";
 import "../models/prayer_types.dart";
 
@@ -28,8 +29,7 @@ Future<void> setReminderForPrayers() async {
   WidgetsFlutterBinding.ensureInitialized();
   final l10n = await AppLocalizations.delegate.load(const Locale("en"));
 
-  await PrayersTimeFunction.init();
-  if (!PrayersTimeFunction.checkIsDataExits()) {
+  if (!(await PrayersTimeFunction.checkIsDataExits())) {
     return;
   }
   PrayersTimeFunction.loadPrayersData();
@@ -54,10 +54,10 @@ Future<void> setReminderForPrayers() async {
       PrayersTimeFunction.getPrayerTimings(nextDayPrayerData);
 
   List<ReminderTypeWithPrayModel> listToReminder =
-      PrayersTimeFunction.getListOfPrayerToRemember();
+      await PrayersTimeFunction.getListOfPrayerToRemember();
 
   Map<PrayerModelTimesType, int> adjustTimings =
-      PrayersTimeFunction.getAdjustReminderTime();
+      await PrayersTimeFunction.getAdjustReminderTime();
 
   for (int i = 0; i < todayTimings.length; i++) {
     PrayerModelTimesType prayType = todayTimings.keys.elementAt(i);
@@ -169,12 +169,13 @@ Future<void> setReminderAlarm(
       assetAudioPath: "assets/adhan/adhan_by_Ahamed_al_Nafees.mp3",
       loopAudio: false,
       vibrate: true,
-      warningNotificationOnKill: Platform.isIOS,
+      warningNotificationOnKill:
+          platformOwn == platform_services.PlatformOwn.isIos,
       androidFullScreenIntent: false,
       volumeSettings: VolumeSettings.fade(
-        volume: PrayersTimeFunction.getSoundVolume(),
+        volume: await PrayersTimeFunction.getSoundVolume(),
         fadeDuration: const Duration(seconds: 2),
-        volumeEnforced: PrayersTimeFunction.getEnforceAlarmSound(),
+        volumeEnforced: await PrayersTimeFunction.getEnforceAlarmSound(),
       ),
       notificationSettings: NotificationSettings(
         title: reminderTitle,

@@ -58,7 +58,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
       children: [
         Container(
           height: 50,
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: themeState.primaryShade100,
             borderRadius: BorderRadius.only(
@@ -143,6 +143,11 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                         (context, url, progress) => Center(
                                           child: CircularProgressIndicator(
                                             value: progress.progress,
+                                            backgroundColor:
+                                                context
+                                                    .read<ThemeCubit>()
+                                                    .state
+                                                    .primaryShade100,
                                           ),
                                         ),
                                     fit: BoxFit.cover,
@@ -208,7 +213,7 @@ class _ChangeReciterState extends State<ChangeReciter> {
 
         Container(
           padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width,
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               elevation: 0,

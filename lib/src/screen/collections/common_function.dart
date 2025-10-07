@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flutter/material.dart";
 import "package:fluttertoast/fluttertoast.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../widget/add_collection_popup/add_note_popup.dart";
 import "../../widget/add_collection_popup/add_to_pinned_popup.dart";

@@ -22,12 +22,11 @@ import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_stat
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
@@ -100,9 +99,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   @override
   void initState() {
-    if (!kIsWeb) {
-      changeAppLanguage(context.read<LanguageCubit>().state);
-    }
+    changeAppLanguage(context.read<LanguageCubit>().state);
     QuranTranslationFunction.init();
     super.initState();
   }
@@ -112,9 +109,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-
+    bool isLandscape = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(appLocalizations.appLanguage),
         centerTitle: true,
         actions: [
@@ -130,195 +128,236 @@ class _AppSetupPageState extends State<AppSetupPage> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Row(
           children: [
+            if (isLandscape)
+              Expanded(
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      boxShadow: [
+                        BoxShadow(
+                          color: themeState.primaryShade200,
+                          blurRadius: 150,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      "assets/img/Quran_Logo_v3.png",
+                      color: themeState.primary,
+                    ),
+                  ),
+                ),
+              ),
+            const VerticalDivider(),
             Expanded(
-              child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-                builder: (context, state) {
-                  return RadioGroup<MyAppLocalization>(
-                    groupValue: state,
-                    onChanged: (value) {
-                      if (value != null) {
-                        changeAppLanguage(value);
-                      }
-                    },
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: usedAppLanguageMap.length,
-                      itemBuilder: (context, index) {
-                        final MyAppLocalization appLoc =
-                            usedAppLanguageMap[index];
-                        return RadioListTile<MyAppLocalization>(
-                          value: appLoc,
-                          title: Text(appLoc.native),
-                          subtitle: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Text(appLoc.english),
-                                const Gap(7),
-                                if (doesHaveFootNote(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.footnote,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                      builder: (context, state) {
+                        return RadioGroup<MyAppLocalization>(
+                          groupValue: state,
+                          onChanged: (value) {
+                            if (value != null) {
+                              changeAppLanguage(value);
+                            }
+                          },
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            itemCount: usedAppLanguageMap.length,
+                            itemBuilder: (context, index) {
+                              final MyAppLocalization appLoc =
+                                  usedAppLanguageMap[index];
+                              return RadioListTile<MyAppLocalization>(
+                                value: appLoc,
+                                title: Text(appLoc.native),
+                                subtitle: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Text(appLoc.english),
+                                      const Gap(7),
+                                      if (doesHaveFootNote(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.footnote,
+                                        ),
+                                      if (doesHaveTafsirSupport(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.tafsir,
+                                        ),
+                                      if (doesHaveWordByWordTranslation(
+                                        appLoc.english.toLowerCase(),
+                                      ))
+                                        getFeaturesMark(
+                                          context,
+                                          appLocalizations.wordByWord,
+                                        ),
+                                    ],
                                   ),
-                                if (doesHaveTafsirSupport(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.tafsir,
-                                  ),
-                                if (doesHaveWordByWordTranslation(
-                                  appLoc.english.toLowerCase(),
-                                ))
-                                  getFeaturesMark(
-                                    context,
-                                    appLocalizations.wordByWord,
-                                  ),
-                              ],
-                            ),
+                                ),
+                              );
+                            },
                           ),
                         );
                       },
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
 
-            BlocBuilder<
-              ResourcesProgressCubitCubit,
-              ResourcesProgressCubitState
-            >(
-              builder:
-                  (context, state) => Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                      boxShadow: [
-                        BoxShadow(color: themeState.mutedGray, blurRadius: 10),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                  BlocBuilder<
+                    ResourcesProgressCubitCubit,
+                    ResourcesProgressCubitState
+                  >(
+                    builder:
+                        (context, state) => Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.circular(roundedRadius),
+                            boxShadow: [
+                              BoxShadow(
+                                color: themeState.mutedGray,
+                                blurRadius: 10,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  Text(
-                                    appLocalizations.translation,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context).hintColor,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.translation,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .translationBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    context
-                                            .read<ResourcesProgressCubitCubit>()
-                                            .state
-                                            .translationBookModel
-                                            ?.name ??
-                                        "",
-                                    style: const TextStyle(fontSize: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.85,
+                                        context: context,
+                                        showDragHandle: true,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: false,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
                                   ),
                                 ],
                               ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.85,
-                                  context: context,
-                                  showDragHandle: true,
-                                  builder: (context) {
-                                    return const BookSelectPopup(
-                                      isTafsir: false,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Text(appLocalizations.change),
-                            ),
-                          ],
-                        ),
-                        const Gap(10),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              const Gap(10),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    appLocalizations.tafsir,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context).hintColor,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          appLocalizations.tafsir,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Theme.of(context).hintColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          context
+                                                  .read<
+                                                    ResourcesProgressCubitCubit
+                                                  >()
+                                                  .state
+                                                  .tafsirBookModel
+                                                  ?.name ??
+                                              "",
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    context
-                                            .read<ResourcesProgressCubitCubit>()
-                                            .state
-                                            .tafsirBookModel
-                                            ?.name ??
-                                        "",
-                                    style: const TextStyle(fontSize: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        useSafeArea: true,
+                                        scrollControlDisabledMaxHeightRatio:
+                                            0.85,
+                                        context: context,
+                                        showDragHandle: true,
+                                        builder: (context) {
+                                          return const BookSelectPopup(
+                                            isTafsir: true,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(appLocalizations.change),
                                   ),
                                 ],
                               ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  useSafeArea: true,
-                                  scrollControlDisabledMaxHeightRatio: 0.85,
-                                  context: context,
-                                  showDragHandle: true,
-                                  builder: (context) {
-                                    return const BookSelectPopup(
-                                      isTafsir: true,
+                              const Gap(10),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton.icon(
+                                  onPressed: () {
+                                    downloadResources(
+                                      context
+                                          .read<ResourcesProgressCubitCubit>()
+                                          .state,
                                     );
                                   },
-                                );
-                              },
-                              child: Text(appLocalizations.change),
-                            ),
-                          ],
-                        ),
-                        const Gap(10),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              downloadResources(
-                                context
-                                    .read<ResourcesProgressCubitCubit>()
-                                    .state,
-                              );
-                            },
-                            icon: const Icon(
-                              FluentIcons.arrow_download_24_filled,
-                            ),
-                            label: Text(appLocalizations.saveAndDownload),
+                                  icon: const Icon(
+                                    FluentIcons.arrow_download_24_filled,
+                                  ),
+                                  label: Text(appLocalizations.saveAndDownload),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
                   ),
+                ],
+              ),
             ),
           ],
         ),
@@ -330,12 +369,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
     ResourcesProgressCubitState processState,
   ) async {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-
     if (translationLanguageCode == null ||
         tafsirLanguageCode == null ||
         processState.translationBookModel == null ||
         processState.tafsirBookModel == null) {
       Fluttertoast.showToast(msg: appLocalizations.pleaseSelectRequiredOption);
+      return;
     }
     final userBox = Hive.box("user");
     await userBox.put("app_language", appLanguage);
@@ -345,6 +384,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     showDialog(
       barrierDismissible: false,
       context: context,
+      fullscreenDialog: true,
       builder: (context) => dialogForShowDownloadProcess(processState),
     );
     bool success1 = await QuranTranslationFunction.downloadResources(
@@ -396,89 +436,102 @@ class _AppSetupPageState extends State<AppSetupPage> {
     }
   }
 
-  Dialog dialogForShowDownloadProcess(
+  Widget dialogForShowDownloadProcess(
     ResourcesProgressCubitState processState,
   ) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    return Dialog(
-      insetPadding: const EdgeInsets.all(10),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-
-        height: 150,
-        width: double.infinity,
-        alignment: Alignment.center,
-        child: BlocBuilder<
-          ResourcesProgressCubitCubit,
-          ResourcesProgressCubitState
-        >(
-          builder: (context, state) {
-            if (state.onProcess == true) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    appLocalizations.justAMoment,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  const Gap(20),
-                  LinearProgressIndicator(
-                    value:
-                        (state.percentage == null ||
-                                state.percentage == 0.0 ||
-                                state.percentage == 1.0)
-                            ? null
-                            : state.percentage,
-                    color: themeState.primary,
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    minHeight: 8,
-                  ),
-                  const Gap(10),
-                  Text(
-                    appLocalizations.processProgress(
-                      state.processName ?? "",
-                      state.percentage != null
-                          ? "${(state.percentage! * 100).toStringAsFixed(2)}%"
-                          : "",
+    return PopScope(
+      canPop: false,
+      child: Dialog(
+        insetPadding: const EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(roundedRadius),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width,
+          child: BlocBuilder<
+            ResourcesProgressCubitCubit,
+            ResourcesProgressCubitState
+          >(
+            builder: (context, state) {
+              if (state.onProcess == true) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      appLocalizations.justAMoment,
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    style: const TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                    const Gap(20),
+                    CircularProgressIndicator(
+                      value: getProgressValue(state),
+                      color: themeState.primary,
+                      backgroundColor: themeState.primaryShade200,
+                    ),
+                    const Gap(10),
+                    Text(
+                      appLocalizations.processProgress(
+                        state.processName ?? "",
+                        state.percentage != null
+                            ? "${(state.percentage! * 100).toStringAsFixed(2)}%"
+                            : "",
+                      ),
+                      style: const TextStyle(fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              } else if (state.isSuccess == true) {
+                return Text(appLocalizations.success);
+              } else if (state.errorMessage != null) {
+                return Column(
+                  children: [
+                    Text(
+                      "${state.errorMessage}",
+                      style: const TextStyle(fontSize: 16, color: Colors.red),
+                    ),
+                    const Gap(10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        downloadResources(processState);
+                      },
+                      child: Text(appLocalizations.retry),
+                    ),
+                  ],
+                );
+              }
+              return LinearProgressIndicator(
+                color: themeState.primary,
+                borderRadius: BorderRadius.circular(roundedRadius),
+                minHeight: 8,
               );
-            } else if (state.isSuccess == true) {
-              return Text(appLocalizations.success);
-            } else if (state.errorMessage != null) {
-              return Column(
-                children: [
-                  Text(
-                    "${state.errorMessage}",
-                    style: const TextStyle(fontSize: 16, color: Colors.red),
-                  ),
-                  const Gap(10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      downloadResources(processState);
-                    },
-                    child: Text(appLocalizations.retry),
-                  ),
-                ],
-              );
-            }
-            return LinearProgressIndicator(
-              color: themeState.primary,
-              borderRadius: BorderRadius.circular(roundedRadius),
-              minHeight: 8,
-            );
-          },
+            },
+          ),
         ),
       ),
     );
+  }
+
+  double? getProgressValue(ResourcesProgressCubitState state) {
+    try {
+      double? value =
+          (state.percentage == null ||
+                  state.percentage == 0.0 ||
+                  state.percentage == 1.0)
+              ? null
+              : state.percentage;
+      if (value == null) return null;
+      if (value > 1) {
+        return null;
+      }
+      return value;
+    } on Exception catch (_) {
+      return 0;
+    }
   }
 }
 

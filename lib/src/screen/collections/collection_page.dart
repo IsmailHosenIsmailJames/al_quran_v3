@@ -13,7 +13,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:hive/hive.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 
@@ -285,7 +285,12 @@ class _CollectionPageState extends State<CollectionPage> {
           Expanded(
             child:
                 _isLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor:
+                            context.read<ThemeCubit>().state.primaryShade100,
+                      ),
+                    )
                     : _errorMessage != null
                     ? Center(
                       child: Padding(
@@ -374,7 +379,7 @@ class _CollectionPageState extends State<CollectionPage> {
                               ),
                               const Gap(15),
                               SizedBox(
-                                width: double.infinity,
+                                width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
@@ -525,7 +530,7 @@ class _CollectionPageState extends State<CollectionPage> {
                               ),
                               const Gap(15),
                               SizedBox(
-                                width: double.infinity,
+                                width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {

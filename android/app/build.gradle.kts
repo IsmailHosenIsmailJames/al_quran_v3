@@ -18,7 +18,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.ismail_hosen_james.al_bayan_quran"
+    namespace = "com.ismail_hosen_james.al_bayan_quran.dev"
     compileSdk = 36
     ndkVersion = "27.0.12077973"
 
@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.ismail_hosen_james.al_bayan_quran"
+        applicationId = "com.ismail_hosen_james.al_bayan_quran.dev"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdkVersion(flutter.minSdkVersion)

@@ -1,3 +1,4 @@
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -7,7 +8,7 @@ import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:hive_flutter/hive_flutter.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 Widget getScriptSelectionSegmentedButtons(BuildContext context) {
   return BlocBuilder<ThemeCubit, ThemeState>(
@@ -53,8 +54,9 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       elevation: 0,
                       shadowColor: Colors.transparent,
                     ),
-                    onPressed: () {
-                      Hive.box(
+                    onPressed: () async {
+                      await loadQuranScript(currentQuranScriptType);
+                      await Hive.box(
                         "user",
                       ).put("selected_script", currentQuranScriptType.name);
 
