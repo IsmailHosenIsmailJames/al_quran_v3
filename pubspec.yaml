@@ -79,6 +79,17 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.3
   icons_launcher: ^3.0.1
   flutter_gen: ^5.10.0
+  msix: ^3.16.12
+
+msix_config:
+  display_name: "Quran's Tafsir, Audio and Prayer"
+  publisher_display_name: "MD. Ismail Hosen"
+  identity_name: MD.IsmailHosen.com.ismail.al-quran
+  publisher: "CN=B9F6AC9B-F4A4-426C-9C75-82E3872E24AB"
+  msix_version: 3.7.0.0
+  logo_path: "assets\\img\\Quran_Logo_v3.png"
+  capabilities: "internetClient, location"
+  store: true
 
 
 flutter:
