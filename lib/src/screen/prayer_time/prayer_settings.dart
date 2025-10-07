@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -401,9 +402,19 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   String _getAdjustmentText(int minutes, AppLocalizations l10n) {
     if (minutes == 0) return l10n.atPrayerTime;
     if (minutes < 0) {
-      return l10n.minBefore(minutes);
+      return l10n
+          .minBefore(minutes)
+          .replaceFirst(
+            minutes.toString(),
+            localizedNumber(context, minutes.abs()),
+          );
     }
-    return l10n.minAfter(minutes);
+    return l10n
+        .minAfter(minutes)
+        .replaceFirst(
+          minutes.toString(),
+          localizedNumber(context, minutes.abs()),
+        );
   }
 
   String _getTimeText(
