@@ -103,6 +103,7 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
+  await PrayersTimeFunction.init();
 
   applicationDataPath = await platform_services.getApplicationDataPath();
 
@@ -139,11 +140,11 @@ Future<void> main() async {
   await ThemeFunctions.initThemeFunction();
 
   PrayerReminderState prayerReminderState = PrayerReminderState(
-    prayerToRemember: await PrayersTimeFunction.getListOfPrayerToRemember(),
-    previousReminderModes: await PrayersTimeFunction.getPreviousReminderModes(),
-    reminderTimeAdjustment: await PrayersTimeFunction.getAdjustReminderTime(),
-    enforceAlarmSound: await PrayersTimeFunction.getEnforceAlarmSound(),
-    soundVolume: await PrayersTimeFunction.getSoundVolume(),
+    prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
+    previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
+    reminderTimeAdjustment: PrayersTimeFunction.getAdjustReminderTime(),
+    enforceAlarmSound: PrayersTimeFunction.getEnforceAlarmSound(),
+    soundVolume: PrayersTimeFunction.getSoundVolume(),
   );
 
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
