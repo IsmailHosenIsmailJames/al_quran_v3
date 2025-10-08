@@ -256,7 +256,11 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: BottomSheetThemeData(
                     backgroundColor: Colors.grey.shade100,
                   ),
-                  textTheme: GoogleFonts.notoSansTextTheme(),
+                  textTheme: GoogleFonts.notoSansTextTheme().apply(
+                    bodyColor: Colors.black,
+                    displayColor: Colors.black,
+                    decorationColor: Colors.black,
+                  ),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
@@ -275,7 +279,11 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: const BottomSheetThemeData(
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
-                  textTheme: GoogleFonts.notoSansTextTheme(),
+                  textTheme: GoogleFonts.notoSansTextTheme().apply(
+                    bodyColor: Colors.white,
+                    displayColor: Colors.white,
+                    decorationColor: Colors.white,
+                  ),
                 ),
                 themeMode: themeState.themeMode,
                 home:
