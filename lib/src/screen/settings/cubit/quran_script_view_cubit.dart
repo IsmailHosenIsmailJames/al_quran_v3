@@ -53,7 +53,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           ).get("view_enableWordByWordHighlight", defaultValue: true),
           scrollWithRecitation: Hive.box(
             "user",
-          ).get("view_scrollWithRecitation", defaultValue: false),
+          ).get("view_scrollWithRecitation", defaultValue: true),
           useAudioStream: Hive.box(
             "user",
           ).get("use_audio_stream", defaultValue: true),
