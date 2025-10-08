@@ -66,6 +66,7 @@ dependencies:
   flutter_animate: ^4.5.2
   hive_ce: 2.13.2
   hive_ce_flutter: 2.3.2
+  google_fonts: ^6.3.2
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0
@@ -112,28 +113,28 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/AlQuranNeov5x1.ttf
 
-    # - family: IndopakNastaleeq
-    #   fonts:
-    #     - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
-
-    # - family: KFGQPC-Uthmanic-HAFS-Regular
-    #   fonts:
-    #     - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
-
-    - family: NotoSans
+    - family: IndopakNastaleeq
       fonts:
-        - asset: assets/fonts/App/NotoSans-Bold.ttf
-          weight: 700
-        # - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
-        #   weight: 200
-        # - asset: assets/fonts/App/NotoSans-Light.ttf
-        #   weight: 300
-        - asset: assets/fonts/App/NotoSans-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/App/NotoSans-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/App/NotoSans-SemiBold.ttf
-          weight: 600
+        - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+
+    - family: KFGQPC-Uthmanic-HAFS-Regular
+      fonts:
+        - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
+
+    # - family: NotoSans
+    #   fonts:
+    #     - asset: assets/fonts/App/NotoSans-Bold.ttf
+    #       weight: 700
+    #     # - asset: assets/fonts/App/NotoSans-ExtraLight.ttf
+    #     #   weight: 200
+    #     # - asset: assets/fonts/App/NotoSans-Light.ttf
+    #     #   weight: 300
+    #     - asset: assets/fonts/App/NotoSans-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/App/NotoSans-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/App/NotoSans-SemiBold.ttf
+    #       weight: 600
 
 icons_launcher:
   image_path: "assets/img/Quran_Logo_v3.png"

@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -38,6 +39,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
+import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
@@ -103,6 +105,7 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
+  await PrayersTimeFunction.init();
 
   applicationDataPath = await platform_services.getApplicationDataPath();
 
@@ -139,11 +142,11 @@ Future<void> main() async {
   await ThemeFunctions.initThemeFunction();
 
   PrayerReminderState prayerReminderState = PrayerReminderState(
-    prayerToRemember: await PrayersTimeFunction.getListOfPrayerToRemember(),
-    previousReminderModes: await PrayersTimeFunction.getPreviousReminderModes(),
-    reminderTimeAdjustment: await PrayersTimeFunction.getAdjustReminderTime(),
-    enforceAlarmSound: await PrayersTimeFunction.getEnforceAlarmSound(),
-    soundVolume: await PrayersTimeFunction.getSoundVolume(),
+    prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
+    previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
+    reminderTimeAdjustment: PrayersTimeFunction.getAdjustReminderTime(),
+    enforceAlarmSound: PrayersTimeFunction.getEnforceAlarmSound(),
+    soundVolume: PrayersTimeFunction.getSoundVolume(),
   );
 
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
@@ -217,6 +220,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => QuickAccessCubit()),
         BlocProvider(create: (context) => QuranHistoryCubit()),
         BlocProvider(create: (context) => AudioDownloadCubit()),
+        BlocProvider(create: (context) => AyahToHighlight(null)),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(
@@ -235,10 +239,7 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 onGenerateTitle: (context) => "Al Quran App",
-                theme: ThemeData(
-                  brightness: Brightness.light,
-                  fontFamily: "NotoSans",
-                ).copyWith(
+                theme: ThemeData(brightness: Brightness.light).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
@@ -255,11 +256,9 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: BottomSheetThemeData(
                     backgroundColor: Colors.grey.shade100,
                   ),
+                  textTheme: GoogleFonts.notoSansTextTheme(),
                 ),
-                darkTheme: ThemeData(
-                  brightness: Brightness.dark,
-                  fontFamily: "NotoSans",
-                ).copyWith(
+                darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
@@ -276,6 +275,7 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: const BottomSheetThemeData(
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
+                  textTheme: GoogleFonts.notoSansTextTheme(),
                 ),
                 themeMode: themeState.themeMode,
                 home:

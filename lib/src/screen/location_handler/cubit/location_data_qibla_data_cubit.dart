@@ -45,7 +45,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
 
   Future<void> checkPrayerDataExits() async {
     emit(
-      state.copyWith(isDataExits: await PrayersTimeFunction.checkIsDataExits()),
+      state.copyWith(isDataExits: PrayersTimeFunction.checkIsDataExits()),
     );
   }
 

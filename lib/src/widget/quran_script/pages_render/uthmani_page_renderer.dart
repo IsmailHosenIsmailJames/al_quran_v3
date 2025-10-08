@@ -22,6 +22,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
   final bool? enableWordByWordHighlight;
+  final String? highlightAyah;
 
   const NonTajweedPageRenderer({
     super.key,
@@ -29,6 +30,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
     this.baseTextStyle,
     required this.isUthmani,
     this.enableWordByWordHighlight,
+    this.highlightAyah,
   });
 
   @override

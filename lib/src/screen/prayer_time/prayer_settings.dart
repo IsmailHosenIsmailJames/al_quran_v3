@@ -46,9 +46,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            top: 15,
+            left: 10,
+            right: 10,
+            top: 10,
             bottom: 80,
           ),
           children: [
@@ -149,7 +149,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               Text(
                 l10n.enforceAlarmSoundDescription,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
               ),
             const Gap(10),
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
