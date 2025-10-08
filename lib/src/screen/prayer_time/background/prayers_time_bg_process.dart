@@ -29,7 +29,7 @@ Future<void> setReminderForPrayers() async {
   WidgetsFlutterBinding.ensureInitialized();
   final l10n = await AppLocalizations.delegate.load(const Locale("en"));
 
-  if (!(await PrayersTimeFunction.checkIsDataExits())) {
+  if (!(PrayersTimeFunction.checkIsDataExits())) {
     return;
   }
   PrayersTimeFunction.loadPrayersData();
@@ -54,10 +54,10 @@ Future<void> setReminderForPrayers() async {
       PrayersTimeFunction.getPrayerTimings(nextDayPrayerData);
 
   List<ReminderTypeWithPrayModel> listToReminder =
-      await PrayersTimeFunction.getListOfPrayerToRemember();
+      PrayersTimeFunction.getListOfPrayerToRemember();
 
   Map<PrayerModelTimesType, int> adjustTimings =
-      await PrayersTimeFunction.getAdjustReminderTime();
+      PrayersTimeFunction.getAdjustReminderTime();
 
   for (int i = 0; i < todayTimings.length; i++) {
     PrayerModelTimesType prayType = todayTimings.keys.elementAt(i);
@@ -173,9 +173,9 @@ Future<void> setReminderAlarm(
           platformOwn == platform_services.PlatformOwn.isIos,
       androidFullScreenIntent: false,
       volumeSettings: VolumeSettings.fade(
-        volume: await PrayersTimeFunction.getSoundVolume(),
+        volume: PrayersTimeFunction.getSoundVolume(),
         fadeDuration: const Duration(seconds: 2),
-        volumeEnforced: await PrayersTimeFunction.getEnforceAlarmSound(),
+        volumeEnforced: PrayersTimeFunction.getEnforceAlarmSound(),
       ),
       notificationSettings: NotificationSettings(
         title: reminderTitle,

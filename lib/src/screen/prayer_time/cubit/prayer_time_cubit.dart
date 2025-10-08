@@ -18,7 +18,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     emit(
       state.copyWith(
         previousReminderModes:
-            await PrayersTimeFunction.getPreviousReminderModes(),
+            PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
   }
@@ -33,7 +33,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     emit(
       state.copyWith(
         previousReminderModes:
-            await PrayersTimeFunction.getPreviousReminderModes(),
+            PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
   }

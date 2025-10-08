@@ -1,5 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
+import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
@@ -8,6 +10,7 @@ import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -19,6 +22,7 @@ import "../../theme/values/values.dart";
 import "../../widget/prayers/prayer_calculation_method_info_widget.dart";
 import "../location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "../location_handler/model/location_data_qibla_data_state.dart";
+import "functions/prayers_time_function.dart";
 
 class PrayerSettings extends StatefulWidget {
   const PrayerSettings({super.key});
@@ -42,9 +46,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            top: 15,
+            left: 10,
+            right: 10,
+            top: 10,
             bottom: 80,
           ),
           children: [
@@ -145,7 +149,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               Text(
                 l10n.enforceAlarmSoundDescription,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
               ),
             const Gap(10),
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
@@ -200,6 +204,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   }
 
   Widget getAdjustReminderWidget(ThemeState themeState, AppLocalizations l10n) {
+    PrayerModelOfDay? prayerModelOfDay =
+        PrayersTimeFunction.getTodaysPrayerTime(DateTime.now());
+    Map<PrayerModelTimesType, TimeOfDay>? mapOfTimes =
+        prayerModelOfDay == null
+            ? null
+            : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: themeState.primaryShade300),
@@ -219,7 +229,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   prayerReminderState
                       .reminderTimeAdjustment[currentPrayerType] ??
                   0;
-
+              TimeOfDay actualPrayerTime =
+                  mapOfTimes?[currentPrayerType] ?? TimeOfDay.now();
               return Container(
                 decoration: BoxDecoration(
                   color:
@@ -249,12 +260,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+
                         Text(
-                          _getAdjustmentText(currentTimeInMinutes, l10n),
-                          style: TextStyle(
+                          "${_getAdjustmentText(currentTimeInMinutes, l10n)} - ${_getTimeText(actualPrayerTime, currentTimeInMinutes, l10n)}",
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
-                            color: themeState.primary,
                           ),
                         ),
                       ],
@@ -391,8 +402,30 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   String _getAdjustmentText(int minutes, AppLocalizations l10n) {
     if (minutes == 0) return l10n.atPrayerTime;
     if (minutes < 0) {
-      return l10n.minBefore(minutes.abs());
+      return l10n
+          .minBefore(minutes)
+          .replaceFirst(
+            minutes.toString(),
+            localizedNumber(context, minutes.abs()),
+          );
     }
-    return l10n.minAfter(minutes);
+    return l10n
+        .minAfter(minutes)
+        .replaceFirst(
+          minutes.toString(),
+          localizedNumber(context, minutes.abs()),
+        );
+  }
+
+  String _getTimeText(
+    TimeOfDay currentPrayerTime,
+    int minutes,
+    AppLocalizations l10n,
+  ) {
+    currentPrayerTime = TimeOfDay(
+      hour: currentPrayerTime.hour,
+      minute: currentPrayerTime.minute + minutes,
+    );
+    return formatTimeOfDay(context, currentPrayerTime);
   }
 }

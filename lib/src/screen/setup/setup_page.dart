@@ -151,7 +151,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   ),
                 ),
               ),
-            const VerticalDivider(),
+            if (isLandscape) const VerticalDivider(),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

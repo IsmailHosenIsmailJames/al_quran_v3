@@ -34,7 +34,7 @@ Future<LocationQiblaPrayerDataState> getSavedLocation() async {
     );
 
     data.calculationMethod = CalculationMethod.fromMap(calculationMethod);
-    data.isDataExits = await PrayersTimeFunction.checkIsDataExits();
+    data.isDataExits = PrayersTimeFunction.checkIsDataExits();
   }
   return data;
 }
