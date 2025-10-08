@@ -1122,4 +1122,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get audioDownload => 'ஆடியோ பதிவிறக்கம்';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

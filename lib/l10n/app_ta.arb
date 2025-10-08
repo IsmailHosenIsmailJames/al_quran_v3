@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்.",
   "audioDownload": "ஆடியோ பதிவிறக்கம்",
   "download": "பதிவிறக்க",
-  "audioDownloadAlert": "{totalVersesCount} வசனங்களில் {requiredDownload} வசனங்களைப் பதிவிறக்க வேண்டும்."
+  "audioDownloadAlert": "{totalVersesCount} வசனங்களில் {requiredDownload} வசனங்களைப் பதிவிறக்க வேண்டும்.",
+  "am": "AM",
+  "pm": "PM"
 }

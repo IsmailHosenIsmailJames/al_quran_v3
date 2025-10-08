@@ -1111,4 +1111,10 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get audioDownload => 'Upakuaji wa Sauti';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

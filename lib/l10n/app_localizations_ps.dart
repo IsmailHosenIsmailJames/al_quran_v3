@@ -1104,4 +1104,10 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get audioDownload => 'آډیو ډاونلوډ';
+
+  @override
+  String get am => 'سهار';
+
+  @override
+  String get pm => 'غرمه';
 }

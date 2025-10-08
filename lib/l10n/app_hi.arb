@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "अपना इंटरनेट कनेक्शन जांचें।",
   "audioDownload": "ऑडियो डाउनलोड",
   "download": "डाउनलोड",
-  "audioDownloadAlert": "{totalVersesCount} आयतों में से {requiredDownload} डाउनलोड करने की आवश्यकता है।"
+  "audioDownloadAlert": "{totalVersesCount} आयतों में से {requiredDownload} डाउनलोड करने की आवश्यकता है।",
+  "am": "AM",
+  "pm": "PM"
 }

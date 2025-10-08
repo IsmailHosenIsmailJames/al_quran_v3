@@ -2107,6 +2107,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Audio Download'**
   String get audioDownload;
+
+  /// No description provided for @am.
+  ///
+  /// In en, this message translates to:
+  /// **'AM'**
+  String get am;
+
+  /// No description provided for @pm.
+  ///
+  /// In en, this message translates to:
+  /// **'PM'**
+  String get pm;
 }
 
 class _AppLocalizationsDelegate

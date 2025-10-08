@@ -346,5 +346,7 @@
   "checkYourInternetConnection": "আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।",
   "audioDownload": "অডিও ডাউনলোড",
   "download": "ডাউনলোড",
-  "audioDownloadAlert": "{totalVersesCount} আয়াতের মধ্যে {requiredDownload} টি ডাউনলোড করতে হবে।"
+  "audioDownloadAlert": "{totalVersesCount} আয়াতের মধ্যে {requiredDownload} টি ডাউনলোড করতে হবে।",
+  "am": "AM",
+  "pm": "PM"
 }

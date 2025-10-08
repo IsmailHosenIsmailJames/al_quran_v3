@@ -347,5 +347,7 @@
   "checkYourInternetConnection": "تحقق من اتصالك بالإنترنت.",
   "audioDownload": "تحميل الصوت",
   "download": "تحميل",
-  "audioDownloadAlert": "تحتاج إلى تحميل {requiredDownload} من {totalVersesCount} آيات."
+  "audioDownloadAlert": "تحتاج إلى تحميل {requiredDownload} من {totalVersesCount} آيات.",
+  "am": "صباحًا",
+  "pm": "مساءً"
 }

@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "インターネット接続を確認してください。",
   "audioDownload": "オーディオのダウンロード",
   "download": "ダウンロード",
-  "audioDownloadAlert": "{totalVersesCount}アーヤのうち{requiredDownload}をダウンロードする必要があります。"
+  "audioDownloadAlert": "{totalVersesCount}アーヤのうち{requiredDownload}をダウンロードする必要があります。",
+  "am": "午前",
+  "pm": "午後"
 }

@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "İnternet bağlantınızı yoxlayın.",
   "audioDownload": "Səs Yükləmə",
   "download": "Yüklə",
-  "audioDownloadAlert": "{totalVersesCount} ayədən {requiredDownload} yükləmək lazımdır."
+  "audioDownloadAlert": "{totalVersesCount} ayədən {requiredDownload} yükləmək lazımdır.",
+  "am": "AM",
+  "pm": "PM"
 }
