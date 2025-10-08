@@ -6,6 +6,7 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
@@ -30,6 +31,7 @@ import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter/rendering.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
@@ -61,6 +63,8 @@ class _PageByPageViewState extends State<QuranScriptView> {
   int? _lastFirstVisibleItemIndex;
   double? _lastFirstVisibleItemLeadingEdge;
   StreamSubscription? _ayahKeyCubitSubscription;
+  String? scrolledAyahOnAudioPlay;
+
   @override
   void initState() {
     String firstAyahInfo = widget.toScrollKey ?? widget.startKey;
@@ -212,7 +216,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (!mounted) return;
         // Recalculate targetIndex here if pagesInfoWithSurahMetaData is populated late
-        await scrollToAyah(widget.toScrollKey!);
+        scrollToAyah(widget.toScrollKey!);
         int surahNumber = widget.startKey.split(":").first.toInt();
         itemScrollControllerSurahName.scrollTo(
           index: surahNumber - 1,
@@ -260,6 +264,13 @@ class _PageByPageViewState extends State<QuranScriptView> {
     _ayahKeyCubitSubscription = context.read<AyahKeyCubit>().stream.listen((
       event,
     ) {
+      context.read<AyahToHighlight>().changeAyah(event.current);
+      if (scrolledAyahOnAudioPlay != null &&
+          event.current == scrolledAyahOnAudioPlay) {
+        return;
+      }
+      scrolledAyahOnAudioPlay = event.current;
+
       if (context.read<QuranViewCubit>().state.scrollWithRecitation) {
         int? pageNumber = getPageNumber(event.current);
         if (!(latestState?.isAyahByAyah == true) ||
@@ -282,7 +293,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
 
   AyahByAyahInScrollInfoState? latestState;
 
-  Future<void> scrollToAyah(String ayahKey) async {
+  void scrollToAyah(String ayahKey) {
     int? targetIndex;
     for (int i = 0; i < pagesInfoWithSurahMetaData.length; i++) {
       var currentItemData = pagesInfoWithSurahMetaData[i];
@@ -302,14 +313,51 @@ class _PageByPageViewState extends State<QuranScriptView> {
     }
 
     if (targetIndex != null && itemScrollController.isAttached) {
-      itemScrollController.jumpTo(index: targetIndex);
+      final visibleIndices = itemPositionsListener.itemPositions.value.map(
+        (pos) => pos.index,
+      );
+      if (!visibleIndices.contains(targetIndex)) {
+        itemScrollController.jumpTo(index: targetIndex);
+      }
+
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         final GlobalKey? specificAyahKey = ayahKeyToKey[ayahKey];
         if (specificAyahKey != null && specificAyahKey.currentContext != null) {
-          await Scrollable.ensureVisible(
-            specificAyahKey.currentContext!,
-            alignment: 0.0,
-          );
+          final RenderObject? object =
+              specificAyahKey.currentContext!.findRenderObject();
+          if (object != null) {
+            final RenderAbstractViewport viewport = RenderAbstractViewport.of(
+              object,
+            );
+            final ScrollableState scrollableState = Scrollable.of(
+              specificAyahKey.currentContext!,
+            );
+            final ScrollPosition position = scrollableState.position;
+            final double viewportDimension = position.viewportDimension;
+
+            final RevealedOffset revealedOffset = viewport.getOffsetToReveal(
+              object,
+              0.0,
+            );
+
+            final double widgetTop = revealedOffset.offset;
+            final double widgetHeight = object.paintBounds.height;
+            final double widgetBottom = widgetTop + widgetHeight;
+
+            final double viewportTop = position.pixels;
+            final double viewportBottom = viewportTop + viewportDimension;
+
+            final bool isFullyVisible =
+                (widgetTop >= viewportTop) && (widgetBottom <= viewportBottom);
+
+            if (!isFullyVisible) {
+              await Scrollable.ensureVisible(
+                specificAyahKey.currentContext!,
+                alignment: 0.0,
+                duration: const Duration(milliseconds: 300),
+              );
+            }
+          }
         }
       });
     }
@@ -673,7 +721,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
               );
             }),
             onChanged: (value) async {
-              await scrollToAyah(value.toString());
+              scrollToAyah(value.toString());
               WidgetsBinding.instance.addPostFrameCallback((_) async {
                 context.read<AyahByAyahInScrollInfoCubit>().setData(
                   dropdownAyahKey: value.toString(),
@@ -801,15 +849,24 @@ class AyahElementWidget extends StatelessWidget {
                 },
                 child: BlocBuilder<QuranViewCubit, QuranViewState>(
                   builder: (context, quranViewState) {
-                    return QuranPagesRenderer(
-                      ayahsKey: ayahsKeyOfPage,
-                      quranScriptType: quranViewState.quranScriptType,
-                      enableWordByWordHighlight:
-                          quranViewState.enableWordByWordHighlight == true,
-                      baseStyle: TextStyle(
-                        fontSize: quranViewState.fontSize,
-                        height: quranViewState.lineHeight,
-                      ),
+                    return BlocBuilder<AyahToHighlight, String?>(
+                      buildWhen: (previous, current) {
+                        log("message");
+                        return current != previous;
+                      },
+                      builder: (context, ayahToHighlightState) {
+                        return QuranPagesRenderer(
+                          ayahsKey: ayahsKeyOfPage,
+                          quranScriptType: quranViewState.quranScriptType,
+                          enableWordByWordHighlight:
+                              quranViewState.enableWordByWordHighlight == true,
+                          highlightAyah: ayahToHighlightState,
+                          baseStyle: TextStyle(
+                            fontSize: quranViewState.fontSize,
+                            height: quranViewState.lineHeight,
+                          ),
+                        );
+                      },
                     );
                   },
                 ),

@@ -19,6 +19,7 @@ import "../../../../theme/controller/theme_state.dart";
 class TajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
+  final String? highlightAyah;
   final bool? enableWordByWordHighlight;
 
   const TajweedPageRenderer({
@@ -26,6 +27,7 @@ class TajweedPageRenderer extends StatelessWidget {
     required this.ayahsKey,
     this.baseTextStyle,
     this.enableWordByWordHighlight,
+    this.highlightAyah,
   });
 
   @override
@@ -33,6 +35,8 @@ class TajweedPageRenderer extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
 
     String? wordKey = "";
+
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -97,6 +101,14 @@ class TajweedPageRenderer extends StatelessWidget {
                         );
 
                         return TextSpan(
+                          style: TextStyle(
+                            backgroundColor:
+                                highlightAyah == ayahKey
+                                    ? isDark
+                                        ? Colors.white.withValues(alpha: 0.05)
+                                        : Colors.black.withValues(alpha: 0.05)
+                                    : null,
+                          ),
                           children:
                               List.generate(words.length, (index) {
                                 return parseTajweedWord(
