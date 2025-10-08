@@ -54,6 +54,7 @@ class PrayersTimeFunction {
     int currentMont = DateTime.now().month;
     for (int index = 0; index < 3; index++) {
       int i = currentMont + index;
+      i = i % 12;
       String? temPrayerTimeMapData = prayerTimePreferences!.getString("$i");
       if (temPrayerTimeMapData != null) {
         prayerTimeMapData.addAll({
