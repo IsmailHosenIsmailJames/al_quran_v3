@@ -35,6 +35,7 @@ import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -96,7 +97,16 @@ Future<void> main() async {
     JustAudioMediaKit.bufferSize = 8 * 1024 * 1024; // 8 MB
     JustAudioMediaKit.title = "Al Quran Audio";
   }
-  await Hive.initFlutter();
+  applicationDataPath = await platform_services.getApplicationDataPath();
+
+  if (platformOwn == platform_services.PlatformOwn.isWindows ||
+      platformOwn == platform_services.PlatformOwn.isLinux ||
+      platformOwn == platform_services.PlatformOwn.isMac) {
+    Hive.init("${applicationDataPath!}/db");
+  } else {
+    await Hive.initFlutter();
+  }
+
   await Hive.openBox("user");
   await Hive.openBox("segmented_quran_recitation");
 
@@ -106,8 +116,6 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
   await PrayersTimeFunction.init();
-
-  applicationDataPath = await platform_services.getApplicationDataPath();
 
   await loadQuranScript(
     QuranScriptType.values.firstWhere(
