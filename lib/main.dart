@@ -39,6 +39,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
+import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
@@ -238,10 +239,7 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 onGenerateTitle: (context) => "Al Quran App",
-                theme: ThemeData(
-                  brightness: Brightness.light,
-                  fontFamily: "NotoSans",
-                ).copyWith(
+                theme: ThemeData(brightness: Brightness.light).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
@@ -258,11 +256,9 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: BottomSheetThemeData(
                     backgroundColor: Colors.grey.shade100,
                   ),
+                  textTheme: GoogleFonts.notoSansTextTheme(),
                 ),
-                darkTheme: ThemeData(
-                  brightness: Brightness.dark,
-                  fontFamily: "NotoSans",
-                ).copyWith(
+                darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
@@ -279,6 +275,7 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: const BottomSheetThemeData(
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
+                  textTheme: GoogleFonts.notoSansTextTheme(),
                 ),
                 themeMode: themeState.themeMode,
                 home:
