@@ -28,8 +28,7 @@ Future<void> initializePlatform() async {
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(801, 900),
-      minimumSize: Size(400, 700),
+      minimumSize: Size(400, 600),
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
