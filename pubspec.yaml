@@ -75,6 +75,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_to_debian: ^2.0.2
+
 
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.3
