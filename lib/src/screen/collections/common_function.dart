@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
 import "package:flutter/material.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../widget/add_collection_popup/add_note_popup.dart";
@@ -121,7 +122,12 @@ Future<NoteCollectionModel?> handleAddNewNoteCollection(
   AppLocalizations l10n,
 ) async {
   if (noteText.isEmpty) {
-    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
+    if (navigatorKey.currentState?.context != null) {
+      showToastMessage(
+        context: navigatorKey.currentState!.context,
+        msg: l10n.collectionNameCannotBeEmpty,
+      );
+    }
     return null;
   }
   final now = DateTime.now();
@@ -137,8 +143,14 @@ Future<NoteCollectionModel?> handleAddNewNoteCollection(
 
   final noteCollectionModel = Hive.box(CollectionType.notes.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
-  Fluttertoast.showToast(msg: l10n.addedNewCollection);
-  return newCollection;
+  if (navigatorKey.currentState?.context != null) {
+    showToastMessage(
+      context: navigatorKey.currentState!.context,
+      msg: l10n.addedNewCollection,
+    );
+    return newCollection;
+  }
+  return null;
 }
 
 Future<PinnedCollectionModel?> handleAddNewCollection(
@@ -146,7 +158,12 @@ Future<PinnedCollectionModel?> handleAddNewCollection(
   AppLocalizations l10n,
 ) async {
   if (text.isEmpty) {
-    Fluttertoast.showToast(msg: l10n.collectionNameCannotBeEmpty);
+    if (navigatorKey.currentState?.context != null) {
+      showToastMessage(
+        context: navigatorKey.currentState!.context,
+        msg: l10n.collectionNameCannotBeEmpty,
+      );
+    }
     return null;
   }
   final now = DateTime.now();
@@ -163,7 +180,12 @@ Future<PinnedCollectionModel?> handleAddNewCollection(
   final noteCollectionModel = Hive.box(CollectionType.pinned.name);
   await noteCollectionModel.put(newCollection.id, newCollection.toJson());
 
-  Fluttertoast.showToast(msg: l10n.addedNewCollection);
+  if (navigatorKey.currentState?.context != null) {
+    showToastMessage(
+      context: navigatorKey.currentState!.context,
+      msg: l10n.addedNewCollection,
+    );
+  }
   return newCollection;
 }
 

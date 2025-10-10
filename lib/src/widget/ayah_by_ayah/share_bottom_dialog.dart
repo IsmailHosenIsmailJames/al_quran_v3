@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart"
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -12,7 +13,6 @@ import "package:clipboard/clipboard.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
@@ -140,7 +140,11 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
                   );
-                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
+                  showToastMessage(
+                    context: context,
+                    msg: l10n.copiedWithTafsir,
+                    state: 1,
+                  );
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),
@@ -257,7 +261,11 @@ void showShareBottomDialog(
                   await FlutterClipboard.copy(
                     "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
                   );
-                  await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
+                  showToastMessage(
+                    context: context,
+                    msg: l10n.copiedWithTafsir,
+                    state: 1,
+                  );
                   Navigator.pop(context);
                 },
                 icon: const Icon(FluentIcons.copy_24_regular),

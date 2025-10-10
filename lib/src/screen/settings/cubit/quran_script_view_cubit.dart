@@ -3,7 +3,7 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 class QuranViewCubit extends Cubit<QuranViewState> {
@@ -116,12 +116,15 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     if (newState.hideWordByWord == true &&
         newState.hideTranslation == true &&
         newState.hideQuranAyah == true) {
-      Fluttertoast.showToast(
-        msg:
-            AppLocalizations.of(
-              navigatorKey.currentContext!,
-            ).quranTranslationAyahOneMustEnabled,
-      );
+      if (navigatorKey.currentState?.context != null) {
+        showToastMessage(
+          context: navigatorKey.currentState!.context,
+          msg:
+              AppLocalizations.of(
+                navigatorKey.currentContext!,
+              ).quranTranslationAyahOneMustEnabled,
+        );
+      }
       return;
     }
     if (hideFootnote != null) {

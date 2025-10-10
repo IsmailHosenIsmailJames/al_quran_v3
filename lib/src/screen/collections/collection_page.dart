@@ -11,7 +11,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
@@ -383,7 +383,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
-                                      Fluttertoast.showToast(
+                                      showToastMessage(
+                                        context: context,
                                         msg: l10n.emptyNameNotAllowed,
                                       );
                                       return;
@@ -396,7 +397,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                     );
                                     await _fetchData();
                                     Navigator.pop(context);
-                                    Fluttertoast.showToast(
+                                    showToastMessage(
+                                      context: context,
                                       msg: l10n.updatedTo(
                                         pinnedCollectionModel.name,
                                       ),
@@ -430,7 +432,7 @@ class _CollectionPageState extends State<CollectionPage> {
                   pinnedCollectionModel.colorHex = selectedColor.hex;
                   await savePinnedCollectionModelAsMap(pinnedCollectionModel);
                   await _fetchData();
-                  Fluttertoast.showToast(msg: l10n.colorUpdated);
+                  showToastMessage(context: context, msg: l10n.colorUpdated);
                 },
                 child: Row(
                   children: [
@@ -445,7 +447,8 @@ class _CollectionPageState extends State<CollectionPage> {
                   await deleteNoteCollectionByID(pinnedCollectionModel.id);
                   await _fetchData();
 
-                  Fluttertoast.showToast(
+                  showToastMessage(
+                    context: context,
                     msg: l10n.collectionDeleted(pinnedCollectionModel.name),
                   );
                 },
@@ -534,7 +537,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
                                     if (nameController.text.trim().isEmpty) {
-                                      Fluttertoast.showToast(
+                                      showToastMessage(
+                                        context: context,
                                         msg: l10n.emptyNameNotAllowed,
                                       );
                                       return;
@@ -547,7 +551,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                     );
                                     await _fetchData();
                                     Navigator.pop(context);
-                                    Fluttertoast.showToast(
+                                    showToastMessage(
+                                      context: context,
                                       msg: l10n.updatedTo(
                                         noteCollectionModel.name,
                                       ),
@@ -581,7 +586,7 @@ class _CollectionPageState extends State<CollectionPage> {
                   noteCollectionModel.colorHex = selectedColor.hex;
                   await saveNoteCollectionModelAsMap(noteCollectionModel);
                   await _fetchData();
-                  Fluttertoast.showToast(msg: l10n.colorUpdated);
+                  showToastMessage(context: context, msg: l10n.colorUpdated);
                 },
                 child: Row(
                   children: [
@@ -596,7 +601,8 @@ class _CollectionPageState extends State<CollectionPage> {
                   await deleteNoteCollectionByID(noteCollectionModel.id);
                   await _fetchData();
 
-                  Fluttertoast.showToast(
+                  showToastMessage(
+                    context: context,
                     msg: l10n.collectionDeleted(noteCollectionModel.name),
                   );
                 },

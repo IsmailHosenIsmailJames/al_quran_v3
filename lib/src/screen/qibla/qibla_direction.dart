@@ -1,5 +1,4 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "dart:async";
 import "dart:math" as math;
 
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
@@ -14,7 +13,6 @@ import "package:flutter_compass/flutter_compass.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:vector_math/vector_math.dart" as vector;
-import "package:vibration/vibration.dart";
 
 const double kaabaLatDegrees = 21.422487;
 const double kaabaLonDegrees = 39.826206;
@@ -32,15 +30,7 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   late AppLocalizations appLocalizations;
   @override
   void initState() {
-    initStateCall();
     super.initState();
-  }
-
-  Future<void> initStateCall() async {
-    hasVibrator = await Vibration.hasVibrator();
-    if (hasVibrator) {
-      hasSupportAmplitude = await Vibration.hasCustomVibrationsSupport();
-    }
   }
 
   bool disposed = false;
@@ -134,15 +124,6 @@ class _QiblaDirectionState extends State<QiblaDirection> {
   }
 
   bool vibrateOnceEnter = false;
-  void doVibrateThePhone() async {
-    if (hasVibrator && !vibrateOnceEnter) {
-      await Vibration.vibrate(
-        amplitude: hasSupportAmplitude ? 200 : -1,
-        duration: 100,
-      );
-      vibrateOnceEnter = true;
-    }
-  }
 
   Widget getCompassRotationView(
     double direction,
@@ -156,7 +137,6 @@ class _QiblaDirectionState extends State<QiblaDirection> {
             : Colors.white;
     if ((direction.abs() - kaabaAngle.abs()).abs() < 5) {
       kaabaColor = themeState.primary;
-      doVibrateThePhone();
     } else {
       vibrateOnceEnter = false;
     }

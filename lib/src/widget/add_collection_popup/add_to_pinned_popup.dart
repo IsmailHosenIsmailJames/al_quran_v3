@@ -2,10 +2,10 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
@@ -81,8 +81,10 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
     }
 
     Navigator.pop(context); // Close the dialog
-    Fluttertoast.showToast(
+    showToastMessage(
+      context: context,
       msg: AppLocalizations.of(context).pinnedSavedSuccessfully,
+      state: 1,
     );
   }
 
@@ -275,7 +277,10 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
               ),
               onPressed: () {
                 if (_selectedPinnedCollectionIds.isEmpty) {
-                  Fluttertoast.showToast(msg: l10n.noCollectionSelected);
+                  showToastMessage(
+                    context: context,
+                    msg: l10n.noCollectionSelected,
+                  );
                 } else {
                   _handleSavePinned();
                 }

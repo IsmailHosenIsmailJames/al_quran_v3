@@ -132,11 +132,7 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                     ],
                   ),
                   const Gap(5),
-                  getAddressView(
-                    context: context,
-                    lat: widget.lat,
-                    long: widget.long,
-                  ),
+
                   const Gap(15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

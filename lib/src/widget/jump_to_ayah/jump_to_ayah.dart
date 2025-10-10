@@ -10,12 +10,12 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.da
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_spinkit/flutter_spinkit.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:share_plus/share_plus.dart";
@@ -577,7 +577,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                               ),
                             );
                           } else {
-                            Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                            showToastMessage(
+                              context: context,
+                              msg: l10n.pleaseSelectOne,
+                            );
                           }
                         },
                         child: Text(l10n.toTafsir),
@@ -607,7 +610,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             );
                           }
                         } else {
-                          Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                          showToastMessage(
+                            context: context,
+                            msg: l10n.pleaseSelectOne,
+                          );
                         }
                       },
                       child: Text(

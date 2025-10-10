@@ -19,7 +19,7 @@ import "package:al_quran_v3/src/widget/components/reciter_overview.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:gap/gap.dart";
 
 class AudioDownloadScreen extends StatefulWidget {
@@ -300,7 +300,10 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
   ) async {
     final audioDownloadCubit = context.read<AudioDownloadCubit>();
     if (audioDownloadCubit.state.isDownloading) {
-      Fluttertoast.showToast(msg: l10n.waitForCurrentDownloadToFinish);
+      showToastMessage(
+        context: context,
+        msg: l10n.waitForCurrentDownloadToFinish,
+      );
       return;
     }
 

@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/permissions_for_notifications.dart";
@@ -22,7 +21,7 @@ import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
 
@@ -116,23 +115,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
+            const Row(
               children: [
-                const Gap(10),
-                const Icon(
-                  FluentIcons.location_24_regular,
-                  color: Colors.white,
-                ),
-                const Gap(5),
-                getAddressView(
-                  context: context,
-                  lat: widget.lat,
-                  long: widget.lon,
-                  keepPadding: false,
-                  justAddress: true,
-                  keepDecoration: false,
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
-                ),
+                Gap(10),
+                Icon(FluentIcons.location_24_regular, color: Colors.white),
+                Gap(5),
               ],
             ),
             const SizedBox(),
@@ -393,26 +380,30 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       value: isCurrentToRemind,
       onChanged: (value) async {
         if (value) {
-          if (await requestPermissionForReminder(
-            defaultWhenEnable.reminderType == PrayerReminderType.alarm,
-          )) {
-            context.read<PrayerReminderCubit>().addPrayerToRemember(
-              defaultWhenEnable,
-            );
-            Fluttertoast.showToast(
-              msg: l10n.reminderAdded(prayerModelType.name.capitalize()),
-            );
-          } else {
-            Fluttertoast.showToast(msg: l10n.allowNotificationPermission);
-          }
-        } else {
-          context.read<PrayerReminderCubit>().removePrayerToRemember(
-            currentReminder!,
-          );
-          await setReminderForPrayers();
-          Fluttertoast.showToast(
-            msg: l10n.reminderRemoved(prayerModelType.name.capitalize()),
-          );
+          //   if (await requestPermissionForReminder(
+          //     defaultWhenEnable.reminderType == PrayerReminderType.alarm,
+          //   )) {
+          //     context.read<PrayerReminderCubit>().addPrayerToRemember(
+          //       defaultWhenEnable,
+          //     );
+          //     showToastMessage(
+          //       context: context,
+          //       msg: l10n.reminderAdded(prayerModelType.name.capitalize()),
+          //     );
+          //   } else {
+          //     showToastMessage(
+          //       context: context,
+          //       msg: l10n.allowNotificationPermission,
+          //     );
+          //   }
+          // } else {
+          //   context.read<PrayerReminderCubit>().removePrayerToRemember(
+          //     currentReminder!,
+          //   );
+          //   showToastMessage(
+          //     context: context,
+          //     msg: l10n.reminderRemoved(prayerModelType.name.capitalize()),
+          //   );
         }
       },
     );

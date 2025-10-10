@@ -25,7 +25,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:path/path.dart";
-import "package:permission_handler/permission_handler.dart";
+// import "package:permission_handler/permission_handler.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
 
 class AudioPlayerManager {
@@ -289,7 +289,7 @@ class AudioPlayerManager {
   }) async {
     if (platformOwn == PlatformOwn.isIos ||
         platformOwn == PlatformOwn.isAndroid) {
-      Permission.notification.request();
+      // Permission.notification.request();
     }
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
@@ -421,7 +421,7 @@ class AudioPlayerManager {
   }) async {
     if (platformOwn == PlatformOwn.isIos ||
         platformOwn == PlatformOwn.isAndroid) {
-      Permission.notification.request();
+      // Permission.notification.request();
     }
     startListeningAudioPlayerState();
     if (audioPlayer.processingState == ProcessingState.loading) {
@@ -494,7 +494,7 @@ class AudioPlayerManager {
     if (isWordPlaying) return;
     if (platformOwn == PlatformOwn.isIos ||
         platformOwn == PlatformOwn.isAndroid) {
-      Permission.notification.request();
+      // Permission.notification.request();
     }
     isWordPlaying = true;
     final context = navigatorKey.currentContext!;

@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_seg
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:gap/gap.dart";
 import "package:screenshot/screenshot.dart";
 
@@ -373,10 +373,13 @@ class QuranScriptSettings extends StatelessWidget {
                 .changeReciter(context, reciterInfoModel);
 
             if (!isSuccess) {
-              Fluttertoast.showToast(msg: l10n.unableToDownloadResources);
+              showToastMessage(
+                context: context,
+                msg: l10n.unableToDownloadResources,
+              );
               return;
             } else {
-              Fluttertoast.showToast(msg: l10n.success);
+              showToastMessage(context: context, msg: l10n.success);
             }
 
             if (AudioPlayerManager.audioPlayer.playing) {

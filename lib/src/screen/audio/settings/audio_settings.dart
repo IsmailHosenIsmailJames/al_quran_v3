@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
+import "package:al_quran_v3/src/utils/show_toast_message.dart";
 import "package:gap/gap.dart";
 import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
@@ -70,9 +70,15 @@ class _AudioSettingsState extends State<AudioSettings> {
                       useAudioStream: value,
                     );
                     if (value) {
-                      Fluttertoast.showToast(msg: l10n.useAudioStreamDesc);
+                      showToastMessage(
+                        context: context,
+                        msg: l10n.useAudioStreamDesc,
+                      );
                     } else {
-                      Fluttertoast.showToast(msg: l10n.notUseAudioStreamDesc);
+                      showToastMessage(
+                        context: context,
+                        msg: l10n.notUseAudioStreamDesc,
+                      );
                     }
                     AudioPlayerManager.stopListeningAudioPlayerState();
                   },
@@ -117,7 +123,8 @@ class _AudioSettingsState extends State<AudioSettings> {
                                         .setViewOptions(playbackSpeed: value);
                                     await AudioPlayerManager.audioPlayer
                                         .setSpeed(value);
-                                    Fluttertoast.showToast(
+                                    showToastMessage(
+                                      context: context,
                                       msg:
                                           "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
                                     );
@@ -146,7 +153,8 @@ class _AudioSettingsState extends State<AudioSettings> {
                                         .setViewOptions(playbackSpeed: value);
                                     await AudioPlayerManager.audioPlayer
                                         .setSpeed(value);
-                                    Fluttertoast.showToast(
+                                    showToastMessage(
+                                      context: context,
                                       msg:
                                           "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
                                     );
@@ -166,7 +174,8 @@ class _AudioSettingsState extends State<AudioSettings> {
                               await AudioPlayerManager.audioPlayer.setSpeed(
                                 value.toPrecision(2),
                               );
-                              Fluttertoast.showToast(
+                              showToastMessage(
+                                context: context,
                                 msg:
                                     "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
                               );
