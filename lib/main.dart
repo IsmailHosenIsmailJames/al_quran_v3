@@ -35,7 +35,6 @@ import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -173,6 +172,82 @@ Future<void> main() async {
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+TextTheme getTextTheme(Locale locale, bool isDarkMode) {
+  TextTheme baseTextTheme;
+  switch (locale.languageCode) {
+    case 'ar':
+    case 'fa':
+    case 'ug': // Uighur
+      baseTextTheme = GoogleFonts.notoSansArabicTextTheme();
+      break;
+    case 'ur':
+      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme();
+      break;
+    case 'bn':
+    case 'as': // Assamese
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+      break;
+    case 'hi':
+    case 'mr': // Marathi
+    case 'ne': // Nepali
+      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme();
+      break;
+    case 'ja':
+      baseTextTheme = GoogleFonts.notoSansJpTextTheme();
+      break;
+    case 'ko':
+      baseTextTheme = GoogleFonts.notoSansKrTextTheme();
+      break;
+    case 'zh':
+      baseTextTheme = GoogleFonts.notoSansScTextTheme();
+      break;
+    case 'ta': // Tamil
+      baseTextTheme = GoogleFonts.notoSansTamilTextTheme();
+      break;
+    case 'te': // Telugu
+      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme();
+      break;
+    case 'kn': // Kannada
+      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme();
+      break;
+    case 'ml': // Malayalam
+      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme();
+      break;
+    case 'gu': // Gujarati
+      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme();
+      break;
+    case 'si': // Sinhala
+      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme();
+      break;
+    case 'th': // Thai
+      baseTextTheme = GoogleFonts.notoSansThaiTextTheme();
+      break;
+    case 'km': // Khmer
+      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme();
+      break;
+    case 'he': // Hebrew
+      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme();
+      break;
+    case 'am': // Amharic
+      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme();
+      break;
+    case 'dv': // Divehi
+      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme();
+      break;
+    case 'zgh': // Amazigh
+      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme();
+      break;
+    default:
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+  }
+
+  return baseTextTheme.apply(
+    bodyColor: isDarkMode ? Colors.white : Colors.black,
+    displayColor: isDarkMode ? Colors.white : Colors.black,
+    decorationColor: isDarkMode ? Colors.white : Colors.black,
+  );
+}
+
 class MyApp extends StatelessWidget {
   final MyAppLocalization initialLocale;
   final PrayerReminderState prayerReminderState;
@@ -264,11 +339,7 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: BottomSheetThemeData(
                     backgroundColor: Colors.grey.shade100,
                   ),
-                  textTheme: GoogleFonts.notoSansTextTheme().apply(
-                    bodyColor: Colors.black,
-                    displayColor: Colors.black,
-                    decorationColor: Colors.black,
-                  ),
+                  textTheme: getTextTheme(languageState.locale, false),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
@@ -287,11 +358,7 @@ class MyApp extends StatelessWidget {
                   bottomSheetTheme: const BottomSheetThemeData(
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
-                  textTheme: GoogleFonts.notoSansTextTheme().apply(
-                    bodyColor: Colors.white,
-                    displayColor: Colors.white,
-                    decorationColor: Colors.white,
-                  ),
+                  textTheme: getTextTheme(languageState.locale, true),
                 ),
                 themeMode: themeState.themeMode,
                 home:

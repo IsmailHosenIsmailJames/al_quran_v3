@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
@@ -42,7 +40,6 @@ class TajweedPageRenderer extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
         builder: (context, segmentsReciterState) {
-          log(segmentsReciterState.showAyahHilight.toString(), name: "TemHi");
           Map<String, List> audioSegmentsMap = {};
 
           for (final ayahKey in ayahsKey) {
