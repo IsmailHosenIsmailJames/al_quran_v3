@@ -99,11 +99,13 @@ class _HomePageState extends State<HomePage> {
                   (context, state) =>
                       [
                         const QuranPage(),
-                        const PrayerTimePage(),
+                        (kIsWeb) ? const SizedBox() : const PrayerTimePage(),
                         (platformOwn == platform_services.PlatformOwn.isIos ||
                                 platformOwn ==
                                     platform_services.PlatformOwn.isAndroid)
                             ? const QiblaDirection()
+                            : (kIsWeb && !isSideNav)
+                            ? const AudioPage()
                             : const SizedBox(),
 
                         const AudioPage(),
@@ -125,6 +127,7 @@ class _HomePageState extends State<HomePage> {
     ThemeState themeState,
     bool isJustDrawerIcon,
   ) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
     return AnimatedContainer(
       decoration: BoxDecoration(
         color: themeState.primaryShade100,
@@ -144,29 +147,30 @@ class _HomePageState extends State<HomePage> {
                 themeState,
                 0,
                 state,
-                "Al Quran",
+                appLocalizations.alQuran,
                 FluentIcons.book_24_filled,
                 FluentIcons.book_24_regular,
                 isJustDrawerIcon,
                 isJustDrawerIcon ? 70 : 270,
               ),
-              desktopNav(
-                themeState,
-                1,
-                state,
-                "Prayer Time",
-                FluentIcons.clock_24_filled,
-                FluentIcons.clock_24_regular,
-                isJustDrawerIcon,
-                isJustDrawerIcon ? 70 : 270,
-              ),
+              if (!kIsWeb)
+                desktopNav(
+                  themeState,
+                  1,
+                  state,
+                  appLocalizations.prayer,
+                  FluentIcons.clock_24_filled,
+                  FluentIcons.clock_24_regular,
+                  isJustDrawerIcon,
+                  isJustDrawerIcon ? 70 : 270,
+                ),
               if (platformOwn == platform_services.PlatformOwn.isAndroid ||
                   platformOwn == platform_services.PlatformOwn.isIos)
                 desktopNav(
                   themeState,
                   2,
                   state,
-                  "Qibla Compass",
+                  appLocalizations.qibla,
                   FluentIcons.compass_northwest_24_filled,
                   FluentIcons.compass_northwest_24_regular,
                   isJustDrawerIcon,
@@ -177,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                 themeState,
                 3,
                 state,
-                "Quran Audio",
+                appLocalizations.audio,
                 Icons.audiotrack_rounded,
                 Icons.audiotrack_outlined,
                 isJustDrawerIcon,
@@ -189,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                   themeState,
                   4,
                   state,
-                  "Settings",
+                  appLocalizations.settings,
                   Icons.settings,
                   Icons.settings_outlined,
                   isJustDrawerIcon,
@@ -248,6 +252,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadiusGeometry.circular(roundedRadius),
             side: BorderSide(color: themeState.primary),
           ),
+          shadowColor: Colors.transparent,
         ),
         child: Row(
           mainAxisAlignment:
