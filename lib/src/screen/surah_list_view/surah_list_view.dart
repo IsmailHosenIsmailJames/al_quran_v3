@@ -286,8 +286,12 @@ class _SurahListViewState extends State<SurahListView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          getSurahNameArabic(filteredSurah[index].id),
-                          style: TextStyle(fontSize: 18, color: textColor),
+                          "surah${filteredSurah[index].id.toString().padLeft(3, '0')}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: textColor,
+                            fontFamily: "surah-name-v1",
+                          ),
                         ),
                         Text(
                           l10n.ayahsCount(
