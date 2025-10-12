@@ -28,6 +28,297 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget> getBody() {
+    switch (platformOwn) {
+      case platform_services.PlatformOwn.isAndroid:
+      case platform_services.PlatformOwn.isIos:
+        return const [
+          QuranPage(),
+          PrayerTimePage(),
+          QiblaDirection(),
+          AudioPage(),
+        ];
+      case platform_services.PlatformOwn.isWindows:
+      case platform_services.PlatformOwn.isMac:
+      case platform_services.PlatformOwn.isLinux:
+        return const [
+          QuranPage(),
+          PrayerTimePage(),
+          AudioPage(),
+          SettingsPage(),
+        ];
+      case platform_services.PlatformOwn.isWeb:
+        return const [QuranPage(), AudioPage(), SettingsPage()];
+      default:
+        return const [QuranPage(), AudioPage(), SettingsPage()];
+    }
+  }
+
+  List<BottomNavigationBarItem> getBottomNavItems(
+    int tabIndex,
+    AppLocalizations l10n,
+  ) {
+    switch (platformOwn) {
+      case platform_services.PlatformOwn.isAndroid:
+      case platform_services.PlatformOwn.isIos:
+        return [
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 0
+                  ? FluentIcons.book_16_filled
+                  : FluentIcons.book_24_regular,
+            ),
+            label: l10n.quran,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 1
+                  ? FluentIcons.clock_24_filled
+                  : FluentIcons.clock_24_regular,
+            ),
+            label: l10n.prayer,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 2
+                  ? FluentIcons.compass_northwest_24_filled
+                  : FluentIcons.compass_northwest_24_regular,
+            ),
+            label: l10n.qibla,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 3
+                  ? Icons.audiotrack_rounded
+                  : Icons.audiotrack_outlined,
+            ),
+            label: l10n.audio,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWindows:
+      case platform_services.PlatformOwn.isMac:
+      case platform_services.PlatformOwn.isLinux:
+        return [
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 0
+                  ? FluentIcons.book_16_filled
+                  : FluentIcons.book_24_regular,
+            ),
+            label: l10n.quran,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 1
+                  ? FluentIcons.clock_24_filled
+                  : FluentIcons.clock_24_regular,
+            ),
+            label: l10n.prayer,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 2
+                  ? Icons.audiotrack_rounded
+                  : Icons.audiotrack_outlined,
+            ),
+            label: l10n.audio,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 3 ? Icons.settings : Icons.settings_outlined,
+            ),
+            label: l10n.settings,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWeb:
+        return [
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 0
+                  ? FluentIcons.book_16_filled
+                  : FluentIcons.book_24_regular,
+            ),
+            label: l10n.quran,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 1
+                  ? Icons.audiotrack_rounded
+                  : Icons.audiotrack_outlined,
+            ),
+            label: l10n.audio,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 2 ? Icons.settings : Icons.settings_outlined,
+            ),
+            label: l10n.settings,
+          ),
+        ];
+      default:
+        return [
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 0
+                  ? FluentIcons.book_16_filled
+                  : FluentIcons.book_24_regular,
+            ),
+            label: l10n.quran,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 1
+                  ? Icons.audiotrack_rounded
+                  : Icons.audiotrack_outlined,
+            ),
+            label: l10n.audio,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              tabIndex == 2 ? Icons.settings : Icons.settings_outlined,
+            ),
+            label: l10n.settings,
+          ),
+        ];
+    }
+  }
+
+  List<Widget> sideNavBar(
+    bool isJustIcon,
+    OthersSettingsState state,
+    AppLocalizations appLocalizations,
+  ) {
+    switch (platformOwn) {
+      case platform_services.PlatformOwn.isAndroid:
+      case platform_services.PlatformOwn.isIos:
+        return [
+          desktopNav(
+            0,
+            state,
+            appLocalizations.alQuran,
+            FluentIcons.book_24_filled,
+            FluentIcons.book_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            1,
+            state,
+            appLocalizations.prayer,
+            FluentIcons.clock_24_filled,
+            FluentIcons.clock_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            2,
+            state,
+            appLocalizations.qibla,
+            FluentIcons.compass_northwest_24_filled,
+            FluentIcons.compass_northwest_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            3,
+            state,
+            appLocalizations.audio,
+            Icons.audiotrack_rounded,
+            Icons.audiotrack_outlined,
+            isJustIcon,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWindows:
+      case platform_services.PlatformOwn.isMac:
+      case platform_services.PlatformOwn.isLinux:
+        return [
+          desktopNav(
+            0,
+            state,
+            appLocalizations.alQuran,
+            FluentIcons.book_24_filled,
+            FluentIcons.book_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            1,
+            state,
+            appLocalizations.prayer,
+            FluentIcons.clock_24_filled,
+            FluentIcons.clock_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            2,
+            state,
+            appLocalizations.audio,
+            Icons.audiotrack_rounded,
+            Icons.audiotrack_outlined,
+            isJustIcon,
+          ),
+          desktopNav(
+            3,
+            state,
+            appLocalizations.settings,
+            Icons.settings,
+            Icons.settings_outlined,
+            isJustIcon,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWeb:
+        return [
+          desktopNav(
+            0,
+            state,
+            appLocalizations.alQuran,
+            FluentIcons.book_24_filled,
+            FluentIcons.book_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            1,
+            state,
+            appLocalizations.audio,
+            Icons.audiotrack_rounded,
+            Icons.audiotrack_outlined,
+            isJustIcon,
+          ),
+          desktopNav(
+            2,
+            state,
+            appLocalizations.settings,
+            Icons.settings,
+            Icons.settings_outlined,
+            isJustIcon,
+          ),
+        ];
+      default:
+        return [
+          desktopNav(
+            0,
+            state,
+            appLocalizations.alQuran,
+            FluentIcons.book_24_filled,
+            FluentIcons.book_24_regular,
+            isJustIcon,
+          ),
+          desktopNav(
+            1,
+            state,
+            appLocalizations.audio,
+            Icons.audiotrack_rounded,
+            Icons.audiotrack_outlined,
+            isJustIcon,
+          ),
+          desktopNav(
+            2,
+            state,
+            appLocalizations.settings,
+            Icons.settings,
+            Icons.settings_outlined,
+            isJustIcon,
+          ),
+        ];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -95,25 +386,7 @@ class _HomePageState extends State<HomePage> {
               buildWhen: (previous, current) {
                 return previous.tabIndex != current.tabIndex;
               },
-              builder:
-                  (context, state) =>
-                      [
-                        const QuranPage(),
-                        (kIsWeb) ? const SizedBox() : const PrayerTimePage(),
-                        (platformOwn == platform_services.PlatformOwn.isIos ||
-                                platformOwn ==
-                                    platform_services.PlatformOwn.isAndroid)
-                            ? const QiblaDirection()
-                            : (kIsWeb && !isSideNav)
-                            ? const AudioPage()
-                            : const SizedBox(),
-
-                        const AudioPage(),
-                        if (!(platformOwn ==
-                                platform_services.PlatformOwn.isAndroid ||
-                            platformOwn == platform_services.PlatformOwn.isIos))
-                          const SettingsPage(),
-                      ][state.tabIndex],
+              builder: (context, state) => getBody()[state.tabIndex],
             ),
           ),
         ],
@@ -142,64 +415,7 @@ class _HomePageState extends State<HomePage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 7,
-            children: [
-              desktopNav(
-                themeState,
-                0,
-                state,
-                appLocalizations.alQuran,
-                FluentIcons.book_24_filled,
-                FluentIcons.book_24_regular,
-                isJustDrawerIcon,
-                isJustDrawerIcon ? 70 : 270,
-              ),
-              if (!kIsWeb)
-                desktopNav(
-                  themeState,
-                  1,
-                  state,
-                  appLocalizations.prayer,
-                  FluentIcons.clock_24_filled,
-                  FluentIcons.clock_24_regular,
-                  isJustDrawerIcon,
-                  isJustDrawerIcon ? 70 : 270,
-                ),
-              if (platformOwn == platform_services.PlatformOwn.isAndroid ||
-                  platformOwn == platform_services.PlatformOwn.isIos)
-                desktopNav(
-                  themeState,
-                  2,
-                  state,
-                  appLocalizations.qibla,
-                  FluentIcons.compass_northwest_24_filled,
-                  FluentIcons.compass_northwest_24_regular,
-                  isJustDrawerIcon,
-                  isJustDrawerIcon ? 70 : 270,
-                ),
-
-              desktopNav(
-                themeState,
-                3,
-                state,
-                appLocalizations.audio,
-                Icons.audiotrack_rounded,
-                Icons.audiotrack_outlined,
-                isJustDrawerIcon,
-                isJustDrawerIcon ? 70 : 270,
-              ),
-              if (!(platformOwn == platform_services.PlatformOwn.isAndroid ||
-                  platformOwn == platform_services.PlatformOwn.isIos))
-                desktopNav(
-                  themeState,
-                  4,
-                  state,
-                  appLocalizations.settings,
-                  Icons.settings,
-                  Icons.settings_outlined,
-                  isJustDrawerIcon,
-                  isJustDrawerIcon ? 70 : 270,
-                ),
-            ],
+            children: sideNavBar(isJustDrawerIcon, state, appLocalizations),
           );
         },
       ),
@@ -229,15 +445,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget desktopNav(
-    ThemeState themeState,
     int index,
     OthersSettingsState state,
     String title,
     IconData selectedIcon,
     IconData unSelectedIcon,
     bool isJustIcon,
-    double width,
   ) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+    double width = isJustIcon ? 70 : 270;
+
     return SizedBox(
       width: width,
       height: 40,
@@ -474,52 +691,7 @@ class _HomePageState extends State<HomePage> {
           onTap: context.read<OthersSettingsCubit>().setTabIndex,
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                state.tabIndex == 0
-                    ? FluentIcons.book_16_filled
-                    : FluentIcons.book_24_regular,
-              ),
-              label: l10n.quran,
-            ),
-
-            BottomNavigationBarItem(
-              icon: Icon(
-                state.tabIndex == 1
-                    ? FluentIcons.clock_24_filled
-                    : FluentIcons.clock_24_regular,
-              ),
-              label: l10n.prayer,
-            ),
-            if (platformOwn == platform_services.PlatformOwn.isIos ||
-                platformOwn == platform_services.PlatformOwn.isAndroid)
-              BottomNavigationBarItem(
-                icon: Icon(
-                  state.tabIndex == 2
-                      ? FluentIcons.compass_northwest_24_filled
-                      : FluentIcons.compass_northwest_24_regular,
-                ),
-                label: l10n.qibla,
-              ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                state.tabIndex == 3
-                    ? Icons.audiotrack_rounded
-                    : Icons.audiotrack_outlined,
-              ),
-              label: l10n.audio,
-            ),
-            if (kIsWeb)
-              BottomNavigationBarItem(
-                icon: Icon(
-                  state.tabIndex == 4
-                      ? Icons.settings
-                      : Icons.settings_outlined,
-                ),
-                label: l10n.settings,
-              ),
-          ],
+          items: getBottomNavItems(state.tabIndex, l10n),
         );
       },
     );
