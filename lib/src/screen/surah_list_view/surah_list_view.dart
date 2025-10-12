@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
@@ -33,6 +35,7 @@ class _SurahListViewState extends State<SurahListView> {
   TextEditingController searchController = TextEditingController();
 
   ScrollController scrollController = ScrollController();
+  Timer? _debounce;
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +193,10 @@ class _SurahListViewState extends State<SurahListView> {
                     ),
                     leading: const Icon(FluentIcons.search_24_filled),
                     onChanged: (value) {
-                      setState(() {});
+                      _debounce?.cancel();
+                      _debounce = Timer(const Duration(milliseconds: 300), () {
+                        if (mounted) setState(() {});
+                      });
                     },
                   ),
                 ),
