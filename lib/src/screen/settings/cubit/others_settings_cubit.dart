@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:bloc/bloc.dart";
+import "package:flutter/foundation.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:wakelock_plus/wakelock_plus.dart";
 
@@ -12,7 +13,10 @@ class OthersSettingsCubit extends Cubit<OthersSettingsState> {
           rememberLastTab: Hive.box(
             "user",
           ).get("remember_last_tab", defaultValue: true),
-          tabIndex: Hive.box("user").get("last_tab_index", defaultValue: 0),
+          tabIndex:
+              kIsWeb
+                  ? 0
+                  : Hive.box("user").get("last_tab_index", defaultValue: 0),
           wakeLock: Hive.box("user").get("keep_wake_lock", defaultValue: false),
         ),
       ) {
