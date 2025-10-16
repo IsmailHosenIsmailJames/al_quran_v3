@@ -168,6 +168,7 @@ Future<void> main() async {
       locationQiblaPrayerDataState: locationQiblaPrayerDataState,
     ),
   );
+  platform_services.hideLoadingIndicator();
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

@@ -48,8 +48,106 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .loading-container {
+        text-align: center;
+    }
+
+    .logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        animation: pulse 2s infinite ease-in-out;
+    }
+
+    .loading-text {
+        color: #FFFFFF;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 24px;
+        margin-top: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .loading-dots span {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #FFFFFF;
+        margin: 0 5px;
+        animation: dot-pulse 1.5s infinite ease-in-out;
+    }
+
+    .loading-dots span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .loading-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .loading-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .first-time-message {
+        color: #CCCCCC;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+        }
+        70% {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px 20px rgba(255, 255, 255, 0);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+
+    @keyframes dot-pulse {
+        0%, 80%, 100% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        40% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+    }
+  </style>
 </head>
 <body>
+  <div id="loading-indicator" class="loading-container">
+    <img src="assets/img/Quran_Logo_v3.png" alt="Al Quran Logo" class="logo">
+    <div class="loading-text">Loading Al Quran</div>
+    <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="first-time-message">This may take a moment on your first visit.</div>
+  </div>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

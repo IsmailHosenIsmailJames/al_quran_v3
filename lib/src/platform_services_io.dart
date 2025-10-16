@@ -9,6 +9,10 @@ import "package:workmanager/workmanager.dart";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 
+void hideLoadingIndicator() {
+  // no-op
+}
+
 Future<void> initAwesomeNotification() async {
   await AwesomeNotifications().initialize(null, [
     NotificationChannel(

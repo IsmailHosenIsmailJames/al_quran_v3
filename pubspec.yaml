@@ -67,6 +67,7 @@ dependencies:
   hive_ce: 2.13.2
   hive_ce_flutter: 2.3.2
   google_fonts: ^6.3.2
+  web: ^1.1.1
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0
