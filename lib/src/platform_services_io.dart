@@ -9,6 +9,10 @@ import "package:workmanager/workmanager.dart";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 
+void hideLoadingIndicator() {
+  // no-op
+}
+
 Future<void> initAwesomeNotification() async {
   await AwesomeNotifications().initialize(null, [
     NotificationChannel(
@@ -28,8 +32,8 @@ Future<void> initializePlatform() async {
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(801, 900),
-      minimumSize: Size(400, 700),
+      title: "Al-Quran's Tafsir, Audio, Prayer Time",
+      minimumSize: Size(400, 600),
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,

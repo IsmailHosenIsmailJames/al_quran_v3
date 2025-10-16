@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "İnternet bağlantınızı kontrol edin.",
   "audioDownload": "Ses İndirme",
   "download": "İndir",
-  "audioDownloadAlert": "{totalVersesCount} ayetten {requiredDownload} tanesini indirmeniz gerekiyor."
+  "audioDownloadAlert": "{totalVersesCount} ayetten {requiredDownload} tanesini indirmeniz gerekiyor.",
+  "am": "ÖÖ",
+  "pm": "ÖS"
 }

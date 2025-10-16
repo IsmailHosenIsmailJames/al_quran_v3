@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Controlla la tua connessione internet.",
   "audioDownload": "Download audio",
   "download": "Scarica",
-  "audioDownloadAlert": "Necessario scaricare {requiredDownload} di {totalVersesCount} ayah."
+  "audioDownloadAlert": "Necessario scaricare {requiredDownload} di {totalVersesCount} ayah.",
+  "am": "AM",
+  "pm": "PM"
 }

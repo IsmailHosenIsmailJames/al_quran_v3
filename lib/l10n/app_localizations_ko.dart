@@ -1089,4 +1089,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get audioDownload => '오디오 다운로드';
+
+  @override
+  String get am => '오전';
+
+  @override
+  String get pm => '오후';
 }

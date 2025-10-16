@@ -1110,4 +1110,10 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get audioDownload => 'Səs Yükləmə';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

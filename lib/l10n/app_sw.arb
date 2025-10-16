@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Angalia muunganisho wako wa intaneti.",
   "audioDownload": "Upakuaji wa Sauti",
   "download": "Pakua",
-  "audioDownloadAlert": "Unahitaji kupakua {requiredDownload} kati ya {totalVersesCount} ayah."
+  "audioDownloadAlert": "Unahitaji kupakua {requiredDownload} kati ya {totalVersesCount} ayah.",
+  "am": "AM",
+  "pm": "PM"
 }

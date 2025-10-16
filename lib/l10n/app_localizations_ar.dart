@@ -1105,4 +1105,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get audioDownload => 'تحميل الصوت';
+
+  @override
+  String get am => 'صباحًا';
+
+  @override
+  String get pm => 'مساءً';
 }

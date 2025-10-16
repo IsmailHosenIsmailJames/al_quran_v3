@@ -21,9 +21,7 @@ List<SurahInfoModel> getFilteredSurah(
         "${surahInfoList[i].id} ${getSurahName(context, surahInfoList[i].id)} ${NumberFormat.decimalPattern(context.read<LanguageCubit>().state.locale.languageCode).format(surahInfoList[i].id)}"
             .toLowerCase(),
       );
-      if (matched > 40) {
-        mapOfFilteredSurah[matched] = surahInfoList[i];
-      }
+      mapOfFilteredSurah[matched] = surahInfoList[i];
     }
   } else {
     return surahInfoList;

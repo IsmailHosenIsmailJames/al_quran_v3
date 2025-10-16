@@ -1,0 +1,18 @@
+name: al-quran-v3
+base: core22
+version: '0.0.1'
+summary: Al Quran App
+description: |
+  A feature-rich Quran app for all platforms.
+
+grade: stable
+confinement: strict
+
+parts:
+  al-quran-v3:
+    plugin: flutter
+    source: .
+
+apps:
+  al-quran-v3:
+    command: al_quran_v3

@@ -72,14 +72,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               isLandScape
                   ? Row(
                     children: [
-                      Expanded(
-                        child: listOfPrayerTimeWidget(
-                          context,
-                          l10n,
-                          themeState,
-                          textStyleOfTimes,
-                          isLandScape,
-                        ),
+                      listOfPrayerTimeWidget(
+                        context,
+                        l10n,
+                        themeState,
+                        textStyleOfTimes,
+                        isLandScape,
                       ),
                       Expanded(
                         child: SingleChildScrollView(

@@ -1115,4 +1115,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get audioDownload => 'Descarga de audio';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

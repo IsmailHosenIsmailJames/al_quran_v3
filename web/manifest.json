@@ -1,11 +1,11 @@
 {
-    "name": "al_quran_v3",
-    "short_name": "al_quran_v3",
+    "name": "Al Quran Tafsir, Audio & Salat",
+    "short_name": "Al Quran",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Join tens of thousands of Muslims worldwide on a spiritual journey with Al Quran, your all-in-one, feature-rich companion for daily Islamic practice.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

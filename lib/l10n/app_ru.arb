@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Проверьте подключение к Интернету.",
   "audioDownload": "Загрузка аудио",
   "download": "Скачать",
-  "audioDownloadAlert": "Необходимо загрузить {requiredDownload} из {totalVersesCount} аятов."
+  "audioDownloadAlert": "Необходимо загрузить {requiredDownload} из {totalVersesCount} аятов.",
+  "am": "AM",
+  "pm": "PM"
 }

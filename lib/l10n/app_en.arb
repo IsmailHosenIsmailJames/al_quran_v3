@@ -587,5 +587,7 @@
     }
   },
   "download": "Download",
-  "audioDownload": "Audio Download"
+  "audioDownload": "Audio Download",
+  "am": "AM",
+  "pm": "PM"
 }
