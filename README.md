@@ -124,7 +124,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  Clone the repo
     ```sh
-    git clone https://github.com/your_username/al_quran_v3.git
+    git clone https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
     ```
 2.  Install packages
     ```sh
