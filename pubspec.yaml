@@ -154,7 +154,7 @@ icons_launcher:
       enable: true
     macos:
       enable: true
-      image_path: "assets/img/Quran_Logo_v3.png"
+      image_path: "assets/img/Quran_Logo_v3.jpg"
 
     windows:
       enable: false
