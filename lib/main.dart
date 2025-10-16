@@ -101,8 +101,7 @@ Future<void> main() async {
   applicationDataPath = await platform_services.getApplicationDataPath();
 
   if (platformOwn == platform_services.PlatformOwn.isWindows ||
-      platformOwn == platform_services.PlatformOwn.isLinux ||
-      platformOwn == platform_services.PlatformOwn.isMac) {
+      platformOwn == platform_services.PlatformOwn.isLinux) {
     Hive.init("${applicationDataPath!}/db");
   } else {
     await Hive.initFlutter();
