@@ -1117,4 +1117,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get audioDownload => 'Download de áudio';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

@@ -1109,4 +1109,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get audioDownload => 'অডিও ডাউনলোড';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

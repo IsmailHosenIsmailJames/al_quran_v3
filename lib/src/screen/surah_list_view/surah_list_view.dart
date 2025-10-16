@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
@@ -14,6 +16,7 @@ import "package:al_quran_v3/src/widget/history/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/widget/quick_access/quick_access_popup.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -33,6 +36,7 @@ class _SurahListViewState extends State<SurahListView> {
   TextEditingController searchController = TextEditingController();
 
   ScrollController scrollController = ScrollController();
+  Timer? _debounce;
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +194,10 @@ class _SurahListViewState extends State<SurahListView> {
                     ),
                     leading: const Icon(FluentIcons.search_24_filled),
                     onChanged: (value) {
-                      setState(() {});
+                      _debounce?.cancel();
+                      _debounce = Timer(const Duration(milliseconds: 300), () {
+                        if (mounted) setState(() {});
+                      });
                     },
                   ),
                 ),
@@ -212,17 +219,23 @@ class _SurahListViewState extends State<SurahListView> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey: "${filteredSurah[index].id}:1",
-                          endKey:
-                              "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
-                        ),
-                  ),
-                );
+                if (kIsWeb) {
+                  List<String> path = ["quran", "audio", "settings"];
+                  String pathName = "/quran/${filteredSurah[index].id}";
+                  Navigator.pushReplacementNamed(context, pathName);
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => QuranScriptView(
+                            startKey: "${filteredSurah[index].id}:1",
+                            endKey:
+                                "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
+                          ),
+                    ),
+                  );
+                }
               },
               child: Container(
                 padding: const EdgeInsets.only(
@@ -286,8 +299,12 @@ class _SurahListViewState extends State<SurahListView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          getSurahNameArabic(filteredSurah[index].id),
-                          style: TextStyle(fontSize: 18, color: textColor),
+                          "surah${filteredSurah[index].id.toString().padLeft(3, '0')}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: textColor,
+                            fontFamily: "surah-name-v1",
+                          ),
                         ),
                         Text(
                           l10n.ayahsCount(

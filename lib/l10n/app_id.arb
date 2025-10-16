@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Periksa koneksi internet Anda.",
   "audioDownload": "Unduhan Audio",
   "download": "Unduh",
-  "audioDownloadAlert": "Perlu mengunduh {requiredDownload} dari {totalVersesCount} ayat."
+  "audioDownloadAlert": "Perlu mengunduh {requiredDownload} dari {totalVersesCount} ayat.",
+  "am": "AM",
+  "pm": "PM"
 }

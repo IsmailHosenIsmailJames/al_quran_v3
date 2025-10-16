@@ -71,9 +71,24 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)} ( ${getSurahNameArabic(headerInfoModel.surahInfoModel.id)} )",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text:
+                                "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)}  - ",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(
+                            text:
+                                "surah${headerInfoModel.surahInfoModel.id.toString().padLeft(3, '0')}",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontFamily: "surah-name-v1",
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [

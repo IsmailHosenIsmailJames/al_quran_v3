@@ -1153,4 +1153,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get audioDownload => 'Загрузка аудио';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

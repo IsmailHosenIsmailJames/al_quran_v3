@@ -17,7 +17,7 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
-  final List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
+  List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
 
   @override
   void initState() {
@@ -36,6 +36,11 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
+    pagesName = [
+      appLocalizations.translation,
+      appLocalizations.tafsir,
+      appLocalizations.wordByWord,
+    ];
     return Scaffold(
       appBar: AppBar(title: Text(appLocalizations.quranResources)),
       body: Column(

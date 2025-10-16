@@ -1106,4 +1106,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get audioDownload => 'Muat Turun Audio';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

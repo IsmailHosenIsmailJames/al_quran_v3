@@ -1106,4 +1106,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get audioDownload => 'دانلود صوتی';
+
+  @override
+  String get am => 'ق.ظ';
+
+  @override
+  String get pm => 'ب.ظ';
 }
