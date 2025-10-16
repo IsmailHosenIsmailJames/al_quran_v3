@@ -16,6 +16,7 @@ import "package:al_quran_v3/src/widget/history/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/widget/quick_access/quick_access_popup.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -218,17 +219,23 @@ class _SurahListViewState extends State<SurahListView> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey: "${filteredSurah[index].id}:1",
-                          endKey:
-                              "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
-                        ),
-                  ),
-                );
+                if (kIsWeb) {
+                  List<String> path = ["quran", "audio", "settings"];
+                  String pathName = "/quran/${filteredSurah[index].id}";
+                  Navigator.pushReplacementNamed(context, pathName);
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => QuranScriptView(
+                            startKey: "${filteredSurah[index].id}:1",
+                            endKey:
+                                "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
+                          ),
+                    ),
+                  );
+                }
               },
               child: Container(
                 padding: const EdgeInsets.only(

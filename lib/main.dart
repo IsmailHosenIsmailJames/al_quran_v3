@@ -12,6 +12,7 @@ import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_downloa
 import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -35,6 +36,7 @@ import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -176,66 +178,66 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   TextTheme baseTextTheme;
   switch (locale.languageCode) {
-    case 'ar':
-    case 'fa':
-    case 'ug': // Uighur
+    case "ar":
+    case "fa":
+    case "ug": // Uighur
       baseTextTheme = GoogleFonts.notoSansArabicTextTheme();
       break;
-    case 'ur':
+    case "ur":
       baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme();
       break;
-    case 'bn':
-    case 'as': // Assamese
+    case "bn":
+    case "as": // Assamese
       baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
       break;
-    case 'hi':
-    case 'mr': // Marathi
-    case 'ne': // Nepali
+    case "hi":
+    case "mr": // Marathi
+    case "ne": // Nepali
       baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme();
       break;
-    case 'ja':
+    case "ja":
       baseTextTheme = GoogleFonts.notoSansJpTextTheme();
       break;
-    case 'ko':
+    case "ko":
       baseTextTheme = GoogleFonts.notoSansKrTextTheme();
       break;
-    case 'zh':
+    case "zh":
       baseTextTheme = GoogleFonts.notoSansScTextTheme();
       break;
-    case 'ta': // Tamil
+    case "ta": // Tamil
       baseTextTheme = GoogleFonts.notoSansTamilTextTheme();
       break;
-    case 'te': // Telugu
+    case "te": // Telugu
       baseTextTheme = GoogleFonts.notoSansTeluguTextTheme();
       break;
-    case 'kn': // Kannada
+    case "kn": // Kannada
       baseTextTheme = GoogleFonts.notoSansKannadaTextTheme();
       break;
-    case 'ml': // Malayalam
+    case "ml": // Malayalam
       baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme();
       break;
-    case 'gu': // Gujarati
+    case "gu": // Gujarati
       baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme();
       break;
-    case 'si': // Sinhala
+    case "si": // Sinhala
       baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme();
       break;
-    case 'th': // Thai
+    case "th": // Thai
       baseTextTheme = GoogleFonts.notoSansThaiTextTheme();
       break;
-    case 'km': // Khmer
+    case "km": // Khmer
       baseTextTheme = GoogleFonts.notoSansKhmerTextTheme();
       break;
-    case 'he': // Hebrew
+    case "he": // Hebrew
       baseTextTheme = GoogleFonts.notoSansHebrewTextTheme();
       break;
-    case 'am': // Amharic
+    case "am": // Amharic
       baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme();
       break;
-    case 'dv': // Divehi
+    case "dv": // Divehi
       baseTextTheme = GoogleFonts.notoSansThaanaTextTheme();
       break;
-    case 'zgh': // Amazigh
+    case "zgh": // Amazigh
       baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme();
       break;
     default:
@@ -362,12 +364,72 @@ class MyApp extends StatelessWidget {
                   textTheme: getTextTheme(languageState.locale, true),
                 ),
                 themeMode: themeState.themeMode,
-                home:
-                    Hive.box(
-                          "user",
-                        ).get("is_setup_complete", defaultValue: false)
-                        ? const HomePage()
-                        : const AppSetupPage(),
+
+                onGenerateRoute: (settings) {
+                  bool isSetupComplete = Hive.box(
+                    "user",
+                  ).get("is_setup_complete", defaultValue: false);
+
+                  if (isSetupComplete) {
+                    if (settings.name?.startsWith("/home") ?? false) {
+                      int index = 0;
+                      if (settings.name == "/home/quran") {
+                        index = 0;
+                      } else if (settings.name == "/home/audio") {
+                        index = 1;
+                      } else if (settings.name == "/home/settings") {
+                        index = 2;
+                      }
+
+                      context.read<OthersSettingsCubit>().setTabIndex(index);
+
+                      return MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                        settings: RouteSettings(name: settings.name),
+                      );
+                    } else if ((settings.name?.startsWith("/quran/") ??
+                            false) ||
+                        (int.tryParse(settings.name!.split("/quran/").last) ??
+                                0) <=
+                            114) {
+                      String surahAyahNumber =
+                          settings.name!.split("/quran/").last;
+                      int surahNumber = int.tryParse(surahAyahNumber) ?? 1;
+                      int ayhNumber = 1;
+                      if (surahAyahNumber.split("/").length > 1) {
+                        surahNumber =
+                            int.tryParse(surahAyahNumber.split("/").first) ?? 1;
+                        ayhNumber =
+                            int.tryParse(surahAyahNumber.split("/").last) ?? 1;
+                      }
+                      return MaterialPageRoute(
+                        builder:
+                            (context) => QuranScriptView(
+                              startKey: "$surahNumber:1",
+                              endKey: getEndAyahKeyFromSurahNumber(surahNumber),
+                              toScrollKey: "$surahNumber:$ayhNumber",
+                            ),
+                        settings: RouteSettings(
+                          name: "/quran/$surahNumber/$ayhNumber",
+                        ),
+                      );
+                    } else if (settings.name == "/setup") {
+                      return MaterialPageRoute(
+                        builder: (context) => const AppSetupPage(),
+                        settings: RouteSettings(name: AppSetupPage.path),
+                      );
+                    } else {
+                      return MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                        settings: const RouteSettings(name: "/home"),
+                      );
+                    }
+                  }
+                  return MaterialPageRoute(
+                    builder: (context) => const AppSetupPage(),
+                    settings: RouteSettings(name: AppSetupPage.path),
+                  );
+                },
               );
             },
           );
