@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.7.0+63
+version: 3.8.0+65
 
 environment:
   sdk: ^3.7.2
@@ -67,6 +67,7 @@ dependencies:
   hive_ce: 2.13.2
   hive_ce_flutter: 2.3.2
   google_fonts: ^6.3.2
+  web: ^1.1.1
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0
@@ -75,6 +76,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_to_debian: ^2.0.2
+
 
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.3
@@ -87,7 +90,7 @@ msix_config:
   publisher_display_name: "MD. Ismail Hosen"
   identity_name: MD.IsmailHosen.com.ismail.al-quran
   publisher: "CN=B9F6AC9B-F4A4-426C-9C75-82E3872E24AB"
-  msix_version: 3.7.0.0
+  msix_version: 3.8.0.0
   logo_path: "assets\\img\\Quran_Logo_v3.png"
   capabilities: "internetClient, location"
   store: true
@@ -116,6 +119,10 @@ flutter:
     - family: IndopakNastaleeq
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+    - family: surah-name-v1
+      fonts:
+        - asset: assets/fonts/Quran/surah-name-v1.ttf
+
 
     - family: KFGQPC-Uthmanic-HAFS-Regular
       fonts:

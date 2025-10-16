@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Kiểm tra kết nối internet của bạn.",
   "audioDownload": "Tải xuống âm thanh",
   "download": "Tải xuống",
-  "audioDownloadAlert": "Cần tải xuống {requiredDownload} trong tổng số {totalVersesCount} ayah."
+  "audioDownloadAlert": "Cần tải xuống {requiredDownload} trong tổng số {totalVersesCount} ayah.",
+  "am": "SA",
+  "pm": "CH"
 }

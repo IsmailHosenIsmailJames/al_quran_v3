@@ -1,9 +1,17 @@
 import "package:flutter/foundation.dart";
+import "package:web/web.dart" as web;
 
 Future<void> initAwesomeNotification() async {}
 
 Future<void> initializePlatform() async {
   // No-op for web
+}
+
+void hideLoadingIndicator() {
+  final loadingIndicator = web.document.getElementById("loading-indicator");
+  if (loadingIndicator != null) {
+    loadingIndicator.remove();
+  }
 }
 
 Future<String?> getApplicationDataPath() async {

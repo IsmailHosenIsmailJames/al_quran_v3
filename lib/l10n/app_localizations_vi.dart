@@ -1109,4 +1109,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get audioDownload => 'Tải xuống âm thanh';
+
+  @override
+  String get am => 'SA';
+
+  @override
+  String get pm => 'CH';
 }

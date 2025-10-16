@@ -1090,4 +1090,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get audioDownload => 'オーディオのダウンロード';
+
+  @override
+  String get am => '午前';
+
+  @override
+  String get pm => '午後';
 }

@@ -346,5 +346,7 @@
   "checkYourInternetConnection": "اپنا انٹرنیٹ کنکشن چیک کریں۔",
   "audioDownload": "آڈیو ڈاؤن لوڈ",
   "download": "ڈاؤن لوڈ",
-  "audioDownloadAlert": "{totalVersesCount} آیات میں سے {requiredDownload} ڈاؤن لوڈ کرنے کی ضرورت ہے۔"
+  "audioDownloadAlert": "{totalVersesCount} آیات میں سے {requiredDownload} ڈاؤن لوڈ کرنے کی ضرورت ہے۔",
+  "am": "صبح",
+  "pm": "شام"
 }

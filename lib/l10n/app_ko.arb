@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "인터넷 연결을 확인하십시오.",
   "audioDownload": "오디오 다운로드",
   "download": "다운로드",
-  "audioDownloadAlert": "{totalVersesCount}개의 아야 중 {requiredDownload}개를 다운로드해야 합니다."
+  "audioDownloadAlert": "{totalVersesCount}개의 아야 중 {requiredDownload}개를 다운로드해야 합니다.",
+  "am": "오전",
+  "pm": "오후"
 }

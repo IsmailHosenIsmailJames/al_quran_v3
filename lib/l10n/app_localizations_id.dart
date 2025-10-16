@@ -1105,4 +1105,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get audioDownload => 'Unduhan Audio';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

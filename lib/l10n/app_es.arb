@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Revisa tu conexión a internet.",
   "audioDownload": "Descarga de audio",
   "download": "Descargar",
-  "audioDownloadAlert": "Necesitas descargar {requiredDownload} de {totalVersesCount} aleyas."
+  "audioDownloadAlert": "Necesitas descargar {requiredDownload} de {totalVersesCount} aleyas.",
+  "am": "AM",
+  "pm": "PM"
 }

@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Интернет қосылымыңызды тексеріңіз.",
   "audioDownload": "Аудио жүктеу",
   "download": "Жүктеп алу",
-  "audioDownloadAlert": "{totalVersesCount} аяттың {requiredDownload} жүктеп алу қажет."
+  "audioDownloadAlert": "{totalVersesCount} аяттың {requiredDownload} жүктеп алу қажет.",
+  "am": "AM",
+  "pm": "PM"
 }

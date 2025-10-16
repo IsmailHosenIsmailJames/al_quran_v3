@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "检查您的网络连接。",
   "audioDownload": "音频下载",
   "download": "下载",
-  "audioDownloadAlert": "需要下载 {totalVersesCount} 节经文中的 {requiredDownload} 节。"
+  "audioDownloadAlert": "需要下载 {totalVersesCount} 节经文中的 {requiredDownload} 节。",
+  "am": "上午",
+  "pm": "下午"
 }
