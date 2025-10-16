@@ -1108,4 +1108,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get audioDownload => 'Ses İndirme';
+
+  @override
+  String get am => 'ÖÖ';
+
+  @override
+  String get pm => 'ÖS';
 }

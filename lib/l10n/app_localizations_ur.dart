@@ -1105,4 +1105,10 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get audioDownload => 'آڈیو ڈاؤن لوڈ';
+
+  @override
+  String get am => 'صبح';
+
+  @override
+  String get pm => 'شام';
 }

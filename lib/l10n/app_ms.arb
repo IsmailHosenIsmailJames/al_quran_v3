@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "Periksa sambungan internet anda.",
   "audioDownload": "Muat Turun Audio",
   "download": "Muat turun",
-  "audioDownloadAlert": "Perlu memuat turun {requiredDownload} daripada {totalVersesCount} ayahs."
+  "audioDownloadAlert": "Perlu memuat turun {requiredDownload} daripada {totalVersesCount} ayahs.",
+  "am": "AM",
+  "pm": "PM"
 }

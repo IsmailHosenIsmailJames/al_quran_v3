@@ -32,6 +32,7 @@ import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 
 class AppSetupPage extends StatefulWidget {
+  static String path = "/setup";
   const AppSetupPage({super.key});
 
   @override
@@ -421,7 +422,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       // success and route to home
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+          settings: RouteSettings(name: HomePage.path),
+        ),
         (route) => false,
       );
 

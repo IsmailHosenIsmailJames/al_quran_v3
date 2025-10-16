@@ -1,6 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/home/donate_us/donate_us_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
@@ -339,24 +338,6 @@ Widget drawerSection({
                     ? null
                     : Text(
                       l10n.tajweedGuide,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-          ),
-          const Gap(5),
-          ListTile(
-            minTileHeight: 40,
-            onTap: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const DonateUsView()),
-              );
-            },
-            leading: Icon(Icons.favorite_rounded, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.donateUs,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
           ),

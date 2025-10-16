@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "اتصال اینترنت خود را بررسی کنید.",
   "audioDownload": "دانلود صوتی",
   "download": "دانلود",
-  "audioDownloadAlert": "نیاز به دانلود {requiredDownload} از {totalVersesCount} آیه است."
+  "audioDownloadAlert": "نیاز به دانلود {requiredDownload} از {totalVersesCount} آیه است.",
+  "am": "ق.ظ",
+  "pm": "ب.ظ"
 }

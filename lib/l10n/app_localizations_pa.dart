@@ -1105,4 +1105,10 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get audioDownload => 'ਆਡੀਓ ਡਾਊਨਲੋਡ';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
 }

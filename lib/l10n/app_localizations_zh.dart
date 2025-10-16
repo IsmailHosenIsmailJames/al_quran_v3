@@ -1071,4 +1071,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get audioDownload => '音频下载';
+
+  @override
+  String get am => '上午';
+
+  @override
+  String get pm => '下午';
 }

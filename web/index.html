@@ -18,21 +18,136 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  
+  <!-- SEO Meta Tags -->
+  <title>Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion</title>
+  <meta name="description" content="Join tens of thousands of Muslims worldwide on a spiritual journey with Al Quran, your all-in-one, feature-rich companion for daily Islamic practice. Designed for a seamless and beautiful experience, this app is your accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
+  <meta name="keywords" content="Al Quran, Tafsir, Audio Quran, Salat, Prayer Times, Qibla, Islamic Companion, Muslim, Holy Quran, Quran Reader, Uthmani, Indopak, Tajweed, Quran Translation, Quran Audio, Adhan, Qibla Compass">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion">
+  <meta property="og:description" content="Your all-in-one, feature-rich companion for daily Islamic practice. An accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:url" content="https://alquranwithaudio.web.app/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion">
+  <meta name="twitter:description" content="Your all-in-one, feature-rich companion for daily Islamic practice. An accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="al_quran_v3">
+  <meta name="apple-mobile-web-app-title" content="Al Quran">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>al_quran_v3</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .loading-container {
+        text-align: center;
+    }
+
+    .logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        animation: pulse 2s infinite ease-in-out;
+    }
+
+    .loading-text {
+        color: #FFFFFF;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 24px;
+        margin-top: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .loading-dots span {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #FFFFFF;
+        margin: 0 5px;
+        animation: dot-pulse 1.5s infinite ease-in-out;
+    }
+
+    .loading-dots span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .loading-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .loading-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    .first-time-message {
+        color: #CCCCCC;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+        }
+        70% {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px 20px rgba(255, 255, 255, 0);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+
+    @keyframes dot-pulse {
+        0%, 80%, 100% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        40% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+    }
+  </style>
 </head>
 <body>
+  <div id="loading-indicator" class="loading-container">
+    <img src="icons/Icon-512.png" alt="Al Quran Logo" class="logo">
+    <div class="loading-text">Loading Al Quran</div>
+    <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="first-time-message">This may take a moment on your first visit.</div>
+  </div>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

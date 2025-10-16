@@ -325,5 +325,7 @@
   "checkYourInternetConnection": "خپل انټرنیټ اتصال وګورئ.",
   "audioDownload": "آډیو ډاونلوډ",
   "download": "ډاونلوډ",
-  "audioDownloadAlert": "د {totalVersesCount} آیتونو څخه {requiredDownload} ډاونلوډ کولو ته اړتیا لرئ."
+  "audioDownloadAlert": "د {totalVersesCount} آیتونو څخه {requiredDownload} ډاونلوډ کولو ته اړتیا لرئ.",
+  "am": "سهار",
+  "pm": "غرمه"
 }
