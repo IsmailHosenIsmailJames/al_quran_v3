@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/release
 lib/src/api
 *.dmg
+AppDir/usr/bin

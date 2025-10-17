@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
@@ -94,9 +95,13 @@ Future<void> main() async {
     );
   } else {
     // by default, windows and linux are enabled
-    JustAudioMediaKit.ensureInitialized();
-    JustAudioMediaKit.bufferSize = 8 * 1024 * 1024; // 8 MB
-    JustAudioMediaKit.title = "Al Quran Audio";
+    try {
+      JustAudioMediaKit.ensureInitialized();
+      JustAudioMediaKit.bufferSize = 8 * 1024 * 1024; // 8 MB
+      JustAudioMediaKit.title = "Al Quran Audio";
+    } catch (e) {
+      log("Unable To Config JustAudioMediaKit with error: $e");
+    }
   }
   applicationDataPath = await platform_services.getApplicationDataPath();
 
