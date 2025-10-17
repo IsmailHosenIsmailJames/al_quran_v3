@@ -45,4 +45,5 @@ app.*.map.json
 /android/app/release
 lib/src/api
 *.dmg
+*.deb
 AppDir/usr/bin
