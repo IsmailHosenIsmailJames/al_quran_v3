@@ -219,23 +219,17 @@ class _SurahListViewState extends State<SurahListView> {
                 ),
               ),
               onPressed: () {
-                if (kIsWeb) {
-                  List<String> path = ["quran", "audio", "settings"];
-                  String pathName = "/quran/${filteredSurah[index].id}";
-                  Navigator.pushReplacementNamed(context, pathName);
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => QuranScriptView(
-                            startKey: "${filteredSurah[index].id}:1",
-                            endKey:
-                                "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
-                          ),
-                    ),
-                  );
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => QuranScriptView(
+                          startKey: "${filteredSurah[index].id}:1",
+                          endKey:
+                              "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
+                        ),
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.only(
