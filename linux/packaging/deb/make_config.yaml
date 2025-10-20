@@ -1,0 +1,40 @@
+display_name: Quran's Tafsir, Audio and Prayer
+package_name: quran-tafsir
+maintainer:
+  name: MD. Ismail Hosen
+  email: md.ismailhosenismailjames@gmail.com
+priority: optional
+section: x11
+installed_size: 26604
+essential: true
+dependencies:
+  - libmpv-dev
+icon: assets/img/Quran_Logo_v3.png
+
+postinstall_scripts:
+  - echo "The application is installed"
+postuninstall_scripts:
+  - echo "The application is uninstalled. Felling sad to see you go. Consider Giving Feedback"
+
+keywords:
+  - Flutter
+  - Holy Quran
+  - prayer times
+  - Islamic practices
+  - Tafsir
+  - Audio
+  - Quran
+  - Islam
+
+generic_name: A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices.
+
+categories:
+  - Education
+  - Religion
+  - Audio
+  - Media
+
+startup_notify: true
+# You can also specify [metainfo](https://freedesktop.org/software/appstream/docs/chap-Quickstart.html) file
+# which contains metadata of the app.
+# metainfo: linux/packaging/myappid.appdata.xml

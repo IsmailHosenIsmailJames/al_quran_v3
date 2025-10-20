@@ -21,7 +21,6 @@ import "../../../main.dart";
 import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
-  static String path = "/home";
   const HomePage({super.key});
 
   @override
@@ -690,13 +689,7 @@ class _HomePageState extends State<HomePage> {
         return BottomNavigationBar(
           currentIndex: state.tabIndex,
           onTap: (index) {
-            if (kIsWeb) {
-              List<String> path = ["quran", "audio", "settings"];
-              String pathName = "/home/${path[index]}";
-              Navigator.pushReplacementNamed(context, pathName);
-            } else {
-              context.read<OthersSettingsCubit>().setTabIndex(index);
-            }
+            context.read<OthersSettingsCubit>().setTabIndex(index);
           },
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
