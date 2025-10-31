@@ -25,7 +25,6 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
-import "package:al_quran_v3/src/screen/search/cubit/search_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
@@ -113,7 +112,9 @@ Future<void> main() async {
   await Hive.openBox("user");
   await Hive.openBox("segmented_quran_recitation");
 
-  await QuranTranslationFunction.init();
+  MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
+
+  await QuranTranslationFunction.init(locale: initialLocale.locale);
   await WordByWordFunction.init();
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
@@ -162,8 +163,6 @@ Future<void> main() async {
 
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
       await getSavedLocation();
-
-  MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
   runApp(
     MyApp(
@@ -301,7 +300,6 @@ class MyApp extends StatelessWidget {
           create:
               (context) => PrayerReminderCubit(initState: prayerReminderState),
         ),
-        BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),

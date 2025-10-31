@@ -65,7 +65,8 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
                 showTopOptions: showHeaderOptions,
                 keepMargin: false,
                 showOnlyAyah: showOnlyAyah,
-                translationMap: translationWithWordByWord.translation ?? {},
+                translationListWithInfo:
+                    translationWithWordByWord.translationList,
                 wordByWord: translationWithWordByWord.wordByWord ?? [],
               )
               : FutureBuilder(
@@ -80,7 +81,8 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
                     showTopOptions: showHeaderOptions,
                     keepMargin: false,
                     showOnlyAyah: showOnlyAyah,
-                    translationMap: snapshot.data?.translation ?? {},
+                    translationListWithInfo:
+                        snapshot.data?.translationList ?? [],
                     wordByWord: snapshot.data?.wordByWord ?? [],
                   );
                 },

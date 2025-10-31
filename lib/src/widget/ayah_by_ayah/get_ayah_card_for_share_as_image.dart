@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -23,8 +24,9 @@ Widget getAyahCardForShareAsImage(
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
   String arabic,
-  String translation,
-  Map footNote,
+  List<String> translation,
+  List<Map> footNote,
+  List<TranslationBookModel?> booksInfo,
   TextStyle scriptTextStyle,
   Brightness brightness,
   ThemeState themeState,
@@ -112,7 +114,7 @@ Widget getAyahCardForShareAsImage(
           data: MediaQuery.of(context),
           child: Directionality(
             textDirection: Directionality.of(context),
-            child: Html(data: translation),
+            child: Html(data: translation.toString()),
           ),
         ),
         keepFootNote ? const Gap(10) : const Gap(0),
@@ -133,7 +135,7 @@ Widget getAyahCardForShareAsImage(
                   data: MediaQuery.of(context),
                   child: Directionality(
                     textDirection: Directionality.of(context),
-                    child: Html(data: footNote.values.toList()[index]),
+                    child: Html(data: (footNote.toList()[index]).toString()),
                   ),
                 ),
                 const Gap(5),
