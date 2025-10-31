@@ -406,23 +406,6 @@ class QuranTranslationFunction {
     );
   }
 
-  static Future<TranslationBookModel?> getMetaInfo() async {
-    if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
-      final Map<String, dynamic>? metaMap =
-          (await openedTranslationBox!.get(
-            "meta_data",
-          ))?.cast<String, dynamic>();
-      if (metaMap != null) {
-        return TranslationBookModel.fromMap(metaMap);
-      }
-    }
-    log(
-      "Translation box not open or meta_data not found.",
-      name: "getMetaInfo",
-    );
-    return null;
-  }
-
   static Future<void> close() async {
     cacheOfAyahKeys.clear();
     if (openedTranslationBox != null && openedTranslationBox!.isOpen) {
