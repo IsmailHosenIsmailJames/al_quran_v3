@@ -1,8 +1,10 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -11,6 +13,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -393,21 +396,42 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                           metaDataSurah[ayahKey.split(":").first],
                         );
-                        Map translationMap =
-                            (await QuranTranslationFunction.getTranslation(
+                        List<TranslationOfAyah> translationsListWithInfoList =
+                            await QuranTranslationFunction.getTranslation(
                               ayahKey,
-                            )) ??
-                            {};
-                        String translation =
-                            translationMap["t"] ?? "Translation Not Found";
-                        translation = translation.replaceAll(">", "> ");
-                        Map footNote = translationMap["f"] ?? {};
-                        String footNoteAsString = "\n";
-                        if (footNote.isNotEmpty) {
-                          footNote.forEach((key, value) {
-                            footNoteAsString += "$key. $value\n";
-                          });
-                        }
+                            );
+
+                        List<TranslationBookModel?> translationBookInfoList =
+                            translationsListWithInfoList
+                                .map<TranslationBookModel?>((e) => e.bookInfo)
+                                .toList();
+                        List<String> translationList =
+                            translationsListWithInfoList
+                                .map<String>(
+                                  (e) =>
+                                      e.translation?["t"] ??
+                                      "Translation Not Found",
+                                )
+                                .toList();
+                        translationList =
+                            translationList
+                                .map((e) => e.replaceAll(">", "> "))
+                                .toList();
+                        List<Map> footNoteList =
+                            translationsListWithInfoList
+                                .map<Map>((e) => e.translation?["f"] ?? {})
+                                .toList();
+                        List<Map<int, String>> footNoteAsStringMap = [];
+                        footNoteList.mapIndexed((index, footNote) {
+                          String footNoteAsString = "\n";
+                          if (footNote.isNotEmpty) {
+                            footNote.forEach((key, value) {
+                              footNoteAsString += "$key. $value\n";
+                            });
+                          }
+                          footNoteAsStringMap.add({index: footNoteAsString});
+                        });
+
                         List quranScriptWord = getWordListOfAyah(
                           context.read<QuranViewCubit>().state.quranScriptType,
                           ayahKey.split(":").first,
@@ -443,8 +467,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                     getPlainTextAyahFromTajweedWords(
                                       List<String>.from(quranScriptWord),
                                     ),
-                                    translation,
-                                    footNote,
+                                    translationList,
+                                    footNoteAsStringMap,
+                                    translationBookInfoList,
                                     scriptTextStyle,
                                     brightness,
                                     themeState,
@@ -462,8 +487,8 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                 getPlainTextAyahFromTajweedWords(
                                       List<String>.from(quranScriptWord),
                                     ) +
-                                    translation +
-                                    footNoteAsString,
+                                    translationList.toString() +
+                                    footNoteAsStringMap.toString(),
                               ),
                               delay: const Duration(milliseconds: 50),
                             );
@@ -497,28 +522,62 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                           metaDataSurah[ayahKey.split(":").first],
                         );
-                        Map translationMap =
-                            (await QuranTranslationFunction.getTranslation(
+                        List<TranslationOfAyah> translationsListWithInfoList =
+                            await QuranTranslationFunction.getTranslation(
                               ayahKey,
-                            )) ??
-                            {};
-                        String translation =
-                            translationMap["t"] ?? "Translation Not Found";
-                        translation = translation.replaceAll(">", "> ");
-                        Map footNote = translationMap["f"] ?? {};
-                        String footNoteAsString = "\n";
-                        if (footNote.isNotEmpty) {
-                          footNote.forEach((key, value) {
-                            footNoteAsString += "$key. $value\n";
-                          });
-                        }
+                            );
+
+                        List<TranslationBookModel?> translationBookInfoList =
+                            translationsListWithInfoList
+                                .map<TranslationBookModel?>((e) => e.bookInfo)
+                                .toList();
+                        List<String> translationList =
+                            translationsListWithInfoList
+                                .map<String>(
+                                  (e) =>
+                                      e.translation?["t"] ??
+                                      "Translation Not Found",
+                                )
+                                .toList();
+                        translationList =
+                            translationList
+                                .map((e) => e.replaceAll(">", "> "))
+                                .toList();
+                        List<Map> footNoteList =
+                            translationsListWithInfoList
+                                .map<Map>((e) => e.translation?["f"] ?? {})
+                                .toList();
+                        List<Map<int, String>> footNoteAsStringMap = [];
+                        footNoteList.mapIndexed((index, footNote) {
+                          String footNoteAsString = "\n";
+                          if (footNote.isNotEmpty) {
+                            footNote.forEach((key, value) {
+                              footNoteAsString += "$key. $value\n";
+                            });
+                          }
+                          footNoteAsStringMap.add({index: footNoteAsString});
+                        });
+
                         List quranScriptWord = getWordListOfAyah(
                           context.read<QuranViewCubit>().state.quranScriptType,
                           ayahKey.split(":").first,
                           ayahKey.split(":").last,
                         );
+
+                        String translationString = "\n";
+                        for (
+                          int i = 0;
+                          i < translationBookInfoList.length;
+                          i++
+                        ) {
+                          translationString += translationList[i];
+                          translationString += "\n";
+                          footNoteAsStringMap[i].forEach((key, value) {
+                            translationString += "$key. $value";
+                          });
+                        }
                         text +=
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
+                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translationString\n";
                       }
 
                       await SharePlus.instance.share(ShareParams(text: text));

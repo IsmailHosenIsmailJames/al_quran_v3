@@ -801,7 +801,8 @@ class AyahElementWidget extends StatelessWidget {
                         key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                         ayahKey: ayahsKeyOfPage[idx],
                         context: context,
-                        translationMap: translationData.translation ?? {},
+                        translationListWithInfo:
+                            translationData.translationList,
                         wordByWord: translationData.wordByWord ?? [],
                       )
                       : FutureBuilder(
@@ -817,8 +818,8 @@ class AyahElementWidget extends StatelessWidget {
                             key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                             ayahKey: ayahsKeyOfPage[idx],
                             context: context,
-                            translationMap:
-                                asyncSnapshot.data?.translation ?? {},
+                            translationListWithInfo:
+                                asyncSnapshot.data?.translationList ?? [],
                             wordByWord: asyncSnapshot.data?.wordByWord ?? [],
                           );
                         },

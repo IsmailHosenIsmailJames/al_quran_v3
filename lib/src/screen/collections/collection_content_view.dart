@@ -233,7 +233,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                           widget.pinnedCollectionModel!.pinned[index].ayahKey,
                       context: context,
                       showFullKey: true,
-                      translationMap: translationData.translation ?? {},
+                      translationListWithInfo: translationData.translationList,
                       wordByWord: translationData.wordByWord ?? [],
                     )
                     : FutureBuilder(
@@ -253,7 +253,8 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                   .ayahKey,
                           context: context,
                           showFullKey: true,
-                          translationMap: asyncSnapshot.data?.translation ?? {},
+                          translationListWithInfo:
+                              asyncSnapshot.data?.translationList ?? [],
                           wordByWord: asyncSnapshot.data?.wordByWord ?? [],
                         );
                       },
