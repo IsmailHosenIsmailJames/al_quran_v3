@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -96,7 +97,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (QuranTranslationFunction.isInfoAvailable())
+                    if (QuranTranslationFunction.isInfoAvailable(
+                      context.read<LanguageCubit>().state.locale,
+                    ))
                       SizedBox(
                         height: 25,
                         child: TextButton(
@@ -107,6 +110,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           onPressed: () async {
                             final String surahInfo =
                                 await QuranTranslationFunction.getInfoOfSurah(
+                                  context.read<LanguageCubit>().state.locale,
                                   headerInfoModel.surahInfoModel.id.toString(),
                                 );
                             Navigator.push(

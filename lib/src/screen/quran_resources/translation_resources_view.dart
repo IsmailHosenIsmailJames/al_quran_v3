@@ -23,15 +23,15 @@ class TranslationResourcesView extends StatefulWidget {
 class _TranslationResourcesViewState extends State<TranslationResourcesView> {
   List<TranslationBookModel> downloadedTranslation =
       QuranTranslationFunction.getDownloadedTranslationBooks();
-  TranslationBookModel? selectedResources =
-      QuranTranslationFunction.getTranslationSelection();
+  // TranslationBookModel? selectedResources =
+  // QuranTranslationFunction.getTranslationSelection();
   TranslationBookModel? downloadingData;
 
   void _refreshData() {
     setState(() {
       downloadedTranslation =
           QuranTranslationFunction.getDownloadedTranslationBooks();
-      selectedResources = QuranTranslationFunction.getTranslationSelection();
+      // selectedResources = QuranTranslationFunction.getTranslationSelection();
       downloadingData = null;
     });
   }
@@ -81,12 +81,12 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
                         );
                     bool needDownload = matchedResources == null;
                     bool isSelected = false;
-                    if (!needDownload && selectedResources != null) {
-                      if (selectedResources!.fullPath ==
-                          matchedResources.fullPath) {
-                        isSelected = true;
-                      }
-                    }
+                    // if (!needDownload && selectedResources != null) {
+                    //   if (selectedResources!.fullPath ==
+                    //       matchedResources.fullPath) {
+                    //     isSelected = true;
+                    //   }
+                    // }
 
                     bool isDownloading = false;
                     if (downloadingData != null) {

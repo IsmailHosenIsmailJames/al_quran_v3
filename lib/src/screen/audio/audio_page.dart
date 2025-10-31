@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/utils/basic_functions.dart";
+// import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
@@ -172,7 +172,7 @@ class _AudioPageState extends State<AudioPage> {
           return const SizedBox(height: 250);
         }
         String translation =
-            asyncSnapshot.data?["t"] ??
+            asyncSnapshot.data?.first.translation?["t"] ??
             AppLocalizations.of(context).translationNotFound;
         translation = translation.replaceAll(">", "> ");
         return getAyahAndTranslation(context, ayahKeyState, translation);
@@ -388,7 +388,7 @@ class _AudioPageState extends State<AudioPage> {
               child: BlocBuilder<QuranViewCubit, QuranViewState>(
                 builder: (context, state) {
                   return Html(
-                    data: capitalizeFirstLatter(translation),
+                    data: translation.capitalize(),
                     style: {
                       "*": Style(
                         fontSize: FontSize(state.translationFontSize),

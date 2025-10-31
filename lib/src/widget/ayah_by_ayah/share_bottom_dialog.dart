@@ -1,5 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -28,8 +29,9 @@ void showShareBottomDialog(
 
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
-  String translation,
-  Map footNote,
+  List<String> translation,
+  List<Map> footNote,
+  List<TranslationBookModel?> booksInfo,
 ) {
   ThemeState themeState = context.read<ThemeCubit>().state;
   AppLocalizations l10n = AppLocalizations.of(context);
@@ -46,11 +48,11 @@ void showShareBottomDialog(
 
   if (quranScriptType == QuranScriptType.tajweed) {}
   String footNoteAsString = "\n";
-  if (footNote.isNotEmpty) {
-    footNote.forEach((key, value) {
-      footNoteAsString += "$key. $value\n";
-    });
-  }
+  // if (footNote.isNotEmpty) {
+  //   footNote.forEach((key, value) {
+  //     footNoteAsString += "$key. $value\n";
+  //   });
+  // }
   ButtonStyle textButtonStyle = TextButton.styleFrom(
     shape: const RoundedRectangleBorder(),
     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -177,6 +179,7 @@ void showShareBottomDialog(
                             ),
                             translation,
                             footNote,
+                            booksInfo,
                             scriptTextStyle,
                             brightness,
                             themeState,
@@ -194,7 +197,7 @@ void showShareBottomDialog(
                         getPlainTextAyahFromTajweedWords(
                               List<String>.from(quranScriptWord),
                             ) +
-                            translation +
+                            translation.toString() +
                             footNoteAsString,
                       ),
                       delay: const Duration(milliseconds: 200),
