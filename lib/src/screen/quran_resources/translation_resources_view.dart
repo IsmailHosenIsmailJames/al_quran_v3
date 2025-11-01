@@ -23,17 +23,23 @@ class TranslationResourcesView extends StatefulWidget {
 class _TranslationResourcesViewState extends State<TranslationResourcesView> {
   List<TranslationBookModel> downloadedTranslation =
       QuranTranslationFunction.getDownloadedTranslationBooks();
-  // TranslationBookModel? selectedResources =
-  // QuranTranslationFunction.getTranslationSelection();
+  List<TranslationBookModel?>? selectedResources;
+
   TranslationBookModel? downloadingData;
 
-  void _refreshData() {
-    setState(() {
-      downloadedTranslation =
-          QuranTranslationFunction.getDownloadedTranslationBooks();
-      // selectedResources = QuranTranslationFunction.getTranslationSelection();
-      downloadingData = null;
-    });
+  void _refreshData() async {
+    selectedResources =
+        await QuranTranslationFunction.getTranslationSelections();
+    downloadedTranslation =
+        QuranTranslationFunction.getDownloadedTranslationBooks();
+    downloadingData = null;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _refreshData();
+    super.initState();
   }
 
   @override
@@ -41,74 +47,81 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
     ThemeState themeState = context.watch<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-      child: Column(
-        children: List.generate(translationResources.length, (index) {
-          String languageKey = translationResources.keys.elementAt(index);
-          List<TranslationBookModel> booksInLanguage =
-              translationResources[languageKey]
-                  ?.map(
-                    (e) => TranslationBookModel.fromMap(
-                      Map<String, dynamic>.from(e),
+    return selectedResources == null
+        ? const SizedBox()
+        : SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+          child: Column(
+            children: List.generate(translationResources.length, (index) {
+              String languageKey = translationResources.keys.elementAt(index);
+              List<TranslationBookModel> booksInLanguage =
+                  translationResources[languageKey]
+                      ?.map(
+                        (e) => TranslationBookModel.fromMap(
+                          Map<String, dynamic>.from(e),
+                        ),
+                      )
+                      .toList() ??
+                  [];
+
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4.0),
+                elevation: 0,
+                child: ExpansionTile(
+                  key: PageStorageKey(languageKey),
+                  title: Text(
+                    languageNativeNames[languageKey] ?? languageKey,
+
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                     ),
-                  )
-                  .toList() ??
-              [];
+                  ),
+                  childrenPadding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 4.0,
+                  ),
+                  children:
+                      booksInLanguage.map((bookData) {
+                        TranslationBookModel? matchedResources =
+                            downloadedTranslation.firstOrNullWhere(
+                              (element) =>
+                                  element.fullPath == bookData.fullPath,
+                            );
+                        bool needDownload = matchedResources == null;
+                        bool isSelected = false;
+                        if (!needDownload && selectedResources != null) {
+                          if (selectedResources?.any(
+                                (element) =>
+                                    element?.fullPath ==
+                                    matchedResources.fullPath,
+                              ) ==
+                              true) {
+                            isSelected = true;
+                          }
+                        }
 
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 4.0),
-            elevation: 0,
-            child: ExpansionTile(
-              key: PageStorageKey(languageKey),
-              title: Text(
-                languageNativeNames[languageKey] ?? languageKey,
+                        bool isDownloading = false;
+                        if (downloadingData != null) {
+                          if (downloadingData!.fullPath == bookData.fullPath) {
+                            isDownloading = true;
+                          }
+                        }
 
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              childrenPadding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 4.0,
-              ),
-              children:
-                  booksInLanguage.map((bookData) {
-                    TranslationBookModel? matchedResources =
-                        downloadedTranslation.firstOrNullWhere(
-                          (element) => element.fullPath == bookData.fullPath,
+                        return _buildBookListTile(
+                          appLocalizations,
+                          bookData,
+                          isSelected,
+                          needDownload,
+                          isDownloading,
+                          themeState,
                         );
-                    bool needDownload = matchedResources == null;
-                    bool isSelected = false;
-                    // if (!needDownload && selectedResources != null) {
-                    //   if (selectedResources!.fullPath ==
-                    //       matchedResources.fullPath) {
-                    //     isSelected = true;
-                    //   }
-                    // }
-
-                    bool isDownloading = false;
-                    if (downloadingData != null) {
-                      if (downloadingData!.fullPath == bookData.fullPath) {
-                        isDownloading = true;
-                      }
-                    }
-
-                    return _buildBookListTile(
-                      appLocalizations,
-                      bookData,
-                      isSelected,
-                      needDownload,
-                      isDownloading,
-                      themeState,
-                    );
-                  }).toList(),
-            ),
-          );
-        }),
-      ),
-    );
+                      }).toList(),
+                ),
+              );
+            }),
+          ),
+        );
   }
 
   Widget _buildBookListTile(
@@ -178,7 +191,9 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
           if (await QuranTranslationFunction.isAlreadyDownloaded(
             translationBook,
           )) {
-            QuranTranslationFunction.setTranslationSelection(translationBook);
+            await QuranTranslationFunction.setTranslationSelection(
+              translationBook,
+            );
           }
           _refreshData();
         }

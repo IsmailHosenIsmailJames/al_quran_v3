@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dar
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
@@ -71,16 +72,23 @@ Widget getAyahByAyahCard({
       translationListWithInfo
           .map<Map>((e) => e.translation?["f"] ?? {})
           .toList();
+  log(footNoteList.toString(), name: "XYZ");
   List<Map<int, String>> footNoteAsStringMap = [];
-  footNoteList.mapIndexed((index, footNote) {
+  for (int index = 0; index < footNoteList.length; index++) {
+    Map footNote = footNoteList[index];
     String footNoteAsString = "\n";
     if (footNote.isNotEmpty) {
       footNote.forEach((key, value) {
         footNoteAsString += "$key. $value\n";
       });
     }
-    footNoteAsStringMap.add({index: footNoteAsString});
-  });
+    if (footNote.isNotEmpty) {
+      footNoteAsStringMap.add({index: footNoteAsString});
+    } else {
+      footNoteAsStringMap.add({});
+    }
+  }
+
   bool supportsWordByWord = false;
   final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
   if (metaDataOfWordByWord != null) {
@@ -227,6 +235,19 @@ Widget getAyahByAyahCard({
                         ),
                       if (isSajdaAyah) const Gap(5),
 
+                      if (!showOnlyAyah && !quranViewState.hideTranslation)
+                        const Gap(5),
+                      if (!showOnlyAyah && !quranViewState.hideTranslation)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            l10n.translationTitle,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade500,
+                            ),
+                          ),
+                        ),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
                         const Gap(5),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
@@ -545,20 +566,11 @@ Widget getTranslationWithFootNoteWidget(
   return Column(
     children: List.generate(translationBookInfoList.length, (index) {
       String translation = translationList[index];
-      Map<int, String> footNote =
-          footNoteAsStringMap.length >= index ? {} : footNoteAsStringMap[index];
+      Map<int, String> footNote = footNoteAsStringMap[index];
       TranslationBookModel? bookModel = translationBookInfoList[index];
 
       return Column(
         children: [
-          if (!showOnlyAyah && !quranViewState.hideTranslation)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                l10n.translationTitle,
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-              ),
-            ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Html(
@@ -572,6 +584,7 @@ Widget getTranslationWithFootNoteWidget(
               },
             ),
           ),
+
           if (footNote.keys.isNotEmpty &&
               !showOnlyAyah &&
               !quranViewState.hideFootnote)
@@ -591,23 +604,29 @@ Widget getTranslationWithFootNoteWidget(
               !quranViewState.hideFootnote)
             const Gap(5),
 
-          if (footNote.keys.isNotEmpty &&
+          if (footNote.isNotEmpty &&
               !showOnlyAyah &&
               !quranViewState.hideFootnote)
             getFootNoteWidget(footNote, context, quranViewState),
-
           const Gap(5),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(height: 2, width: 30, color: Colors.grey),
+              Container(height: 1, width: 25, color: Colors.grey),
               const Gap(7),
               Text(
                 bookModel?.name ?? bookModel?.fileName.split("/").last ?? "",
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
               ),
+              if (bookModel?.language != null)
+                Text(
+                  " (${languageNativeNames[bookModel!.language.toLowerCase()] ?? ""})",
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                ),
             ],
           ),
+          const Gap(5),
         ],
       );
     }),
