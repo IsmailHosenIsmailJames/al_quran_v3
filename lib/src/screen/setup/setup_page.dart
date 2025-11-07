@@ -2,8 +2,10 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -53,7 +55,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     if (translationResources.keys.contains(languageName)) {
       translationLanguageCode = appLanguage;
 
-      context.read<ResourcesProgressCubitCubit>().changeTranslationBook(
+      context.read<ResourcesProgressCubit>().changeTranslationBook(
         translationResources[codeToLanguageMap[translationLanguageCode]]
             ?.map((e) => TranslationBookModel.fromMap(e))
             .toList()
@@ -70,7 +72,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
           [];
       selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
       if (selectableTafsirBook?.isNotEmpty == true) {
-        context.read<ResourcesProgressCubitCubit>().changeTafsirBook(
+        context.read<ResourcesProgressCubit>().changeTafsirBook(
           selectableTafsirBook!.first,
         );
       }
@@ -79,12 +81,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   void changeTranslationLanguage(String value) {
     translationLanguageCode = value;
-    context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
+    context.read<ResourcesProgressCubit>().changeTranslationBook(null);
   }
 
   void changeTafsirLanguage(String value) {
     tafsirLanguageCode = value;
-    context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
+    context.read<ResourcesProgressCubit>().changeTafsirBook(null);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       selectableTafsirBook =
@@ -95,12 +97,63 @@ class _AppSetupPageState extends State<AppSetupPage> {
     });
   }
 
+  Future<void> writeQuranScript() async {
+    final userBox = Hive.box("user");
+    final isQuranScripProcessed = userBox.get(
+      "writeQuranScript",
+      defaultValue: false,
+    );
+
+    final String? quranScripVersion = userBox.get("writeQuranScriptVersion");
+    if (isQuranScripProcessed == true) {
+      if (quranScripVersion == QuranScriptFunction.quranScriptVersion) {
+        return;
+      }
+    }
+    showDialog(
+      barrierDismissible: false,
+      fullscreenDialog: true,
+      context: context,
+      builder: (context) => dialogForShowDownloadProcess(),
+    );
+
+    final ResourcesProgressCubit resourcesProgressCubit =
+        context.read<ResourcesProgressCubit>();
+
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    resourcesProgressCubit.updateProgress(0.01, l10n.optimizingQuranScript);
+
+    await QuranScriptFunction.writeQuranScript(
+      onProgress: (progress) {
+        resourcesProgressCubit.updateProgress(
+          progress / 100,
+          l10n.optimizingQuranScript,
+        );
+      },
+    );
+
+    await QuranScriptFunction.initQuranScript(
+      context.read<QuranViewCubit>().state.quranScriptType,
+    );
+
+    Navigator.pop(context);
+
+    if (userBox.get("is_setup_complete", defaultValue: false)) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false,
+      );
+    }
+  }
+
   late ThemeState themeState = context.read<ThemeCubit>().state;
 
   @override
   void initState() {
     changeAppLanguage(context.read<LanguageCubit>().state);
-    QuranTranslationFunction.init();
+    QuranTranslationFunction.init().then((value) => writeQuranScript());
+
     super.initState();
   }
 
@@ -215,7 +268,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                   ),
 
                   BlocBuilder<
-                    ResourcesProgressCubitCubit,
+                    ResourcesProgressCubit,
                     ResourcesProgressCubitState
                   >(
                     builder:
@@ -254,7 +307,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         Text(
                                           context
                                                   .read<
-                                                    ResourcesProgressCubitCubit
+                                                    ResourcesProgressCubit
                                                   >()
                                                   .state
                                                   .translationBookModel
@@ -305,7 +358,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         Text(
                                           context
                                                   .read<
-                                                    ResourcesProgressCubitCubit
+                                                    ResourcesProgressCubit
                                                   >()
                                                   .state
                                                   .tafsirBookModel
@@ -342,7 +395,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   onPressed: () {
                                     downloadResources(
                                       context
-                                          .read<ResourcesProgressCubitCubit>()
+                                          .read<ResourcesProgressCubit>()
                                           .state,
                                     );
                                   },
@@ -379,13 +432,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
     final userBox = Hive.box("user");
     await userBox.put("app_language", appLanguage);
 
-    context.read<ResourcesProgressCubitCubit>().onProcess();
+    context.read<ResourcesProgressCubit>().onProcess();
 
     showDialog(
       barrierDismissible: false,
       context: context,
       fullscreenDialog: true,
-      builder: (context) => dialogForShowDownloadProcess(processState),
+      builder: (context) => dialogForShowDownloadProcess(),
     );
     bool success1 = await QuranTranslationFunction.downloadResources(
       context: context,
@@ -426,19 +479,17 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
 
       // clear process state
-      context.read<ResourcesProgressCubitCubit>().success();
+      context.read<ResourcesProgressCubit>().success();
     } else {
       // error and show 'Something went wrong' in cubit
       log([success1, success2, success3, success4].toString());
-      context.read<ResourcesProgressCubitCubit>().failure(
+      context.read<ResourcesProgressCubit>().failure(
         appLocalizations.unableToDownloadResources,
       );
     }
   }
 
-  Widget dialogForShowDownloadProcess(
-    ResourcesProgressCubitState processState,
-  ) {
+  Widget dialogForShowDownloadProcess() {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     return PopScope(
       canPop: false,
@@ -451,7 +502,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: BlocBuilder<
-            ResourcesProgressCubitCubit,
+            ResourcesProgressCubit,
             ResourcesProgressCubitState
           >(
             builder: (context, state) {
@@ -497,7 +548,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        downloadResources(processState);
+                        downloadResources(
+                          context.read<ResourcesProgressCubit>().state,
+                        );
                       },
                       child: Text(appLocalizations.retry),
                     ),
