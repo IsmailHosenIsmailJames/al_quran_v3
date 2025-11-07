@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:dartx/dartx.dart";
@@ -91,7 +91,7 @@ class TajweedPageRenderer extends StatelessWidget {
                 TextSpan(
                   children:
                       ayahsKey.map((ayahKey) {
-                        List words = getWordListOfAyah(
+                        List words = QuranScriptFunction.getWordListOfAyah(
                           QuranScriptType.tajweed,
                           ayahKey.split(":").first,
                           ayahKey.split(":").last,

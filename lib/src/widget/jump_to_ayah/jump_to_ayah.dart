@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -408,11 +408,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             footNoteAsString += "$key. $value\n";
                           });
                         }
-                        List quranScriptWord = getWordListOfAyah(
-                          context.read<QuranViewCubit>().state.quranScriptType,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
+                        List quranScriptWord =
+                            QuranScriptFunction.getWordListOfAyah(
+                              context
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .quranScriptType,
+                              ayahKey.split(":").first,
+                              ayahKey.split(":").last,
+                            );
 
                         TextStyle scriptTextStyle = TextStyle(
                           fontSize:
@@ -512,11 +516,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                             footNoteAsString += "$key. $value\n";
                           });
                         }
-                        List quranScriptWord = getWordListOfAyah(
-                          context.read<QuranViewCubit>().state.quranScriptType,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
+                        List quranScriptWord =
+                            QuranScriptFunction.getWordListOfAyah(
+                              context
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .quranScriptType,
+                              ayahKey.split(":").first,
+                              ayahKey.split(":").last,
+                            );
                         text +=
                             "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}\n";
                       }

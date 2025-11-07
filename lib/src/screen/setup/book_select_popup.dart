@@ -44,7 +44,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      final state = context.read<ResourcesProgressCubitCubit>().state;
+      final state = context.read<ResourcesProgressCubit>().state;
       final selectedBook =
           widget.isTafsir ? state.tafsirBookModel : state.translationBookModel;
 
@@ -132,10 +132,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    return BlocBuilder<
-      ResourcesProgressCubitCubit,
-      ResourcesProgressCubitState
-    >(
+    return BlocBuilder<ResourcesProgressCubit, ResourcesProgressCubitState>(
       builder: (context, state) {
         return Column(
           children: [
@@ -210,10 +207,10 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                             onTap: () {
                               widget.isTafsir
                                   ? context
-                                      .read<ResourcesProgressCubitCubit>()
+                                      .read<ResourcesProgressCubit>()
                                       .changeTafsirBook(book as TafsirBookModel)
                                   : context
-                                      .read<ResourcesProgressCubitCubit>()
+                                      .read<ResourcesProgressCubit>()
                                       .changeTranslationBook(
                                         book as TranslationBookModel,
                                       );
