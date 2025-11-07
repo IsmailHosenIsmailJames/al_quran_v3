@@ -1077,4 +1077,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get pm => '下午';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

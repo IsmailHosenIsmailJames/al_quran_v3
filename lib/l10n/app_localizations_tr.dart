@@ -1114,4 +1114,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get pm => 'ÖS';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

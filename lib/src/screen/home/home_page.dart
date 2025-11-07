@@ -6,12 +6,13 @@ import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
@@ -346,6 +347,17 @@ class _HomePageState extends State<HomePage> {
                 ),
                 title: Text(l10n.alQuran),
                 centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () async {
+                      await QuranScriptFunction.writeQuranScript();
+                      QuranScriptFunction.initQuranScript(
+                        context.read<QuranViewCubit>().state.quranScriptType,
+                      );
+                    },
+                    icon: const Icon(Icons.repeat),
+                  ),
+                ],
               ),
       body: Row(
         children: [
