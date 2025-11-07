@@ -3,8 +3,8 @@ import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
@@ -432,11 +432,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           footNoteAsStringMap.add({index: footNoteAsString});
                         });
 
-                        List quranScriptWord = getWordListOfAyah(
-                          context.read<QuranViewCubit>().state.quranScriptType,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
+                        List quranScriptWord =
+                            QuranScriptFunction.getWordListOfAyah(
+                              context
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .quranScriptType,
+                              ayahKey.split(":").first,
+                              ayahKey.split(":").last,
+                            );
 
                         TextStyle scriptTextStyle = TextStyle(
                           fontSize:
@@ -558,11 +562,15 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           footNoteAsStringMap.add({index: footNoteAsString});
                         });
 
-                        List quranScriptWord = getWordListOfAyah(
-                          context.read<QuranViewCubit>().state.quranScriptType,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
+                        List quranScriptWord =
+                            QuranScriptFunction.getWordListOfAyah(
+                              context
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .quranScriptType,
+                              ayahKey.split(":").first,
+                              ayahKey.split(":").last,
+                            );
 
                         String translationString = "\n";
                         for (
