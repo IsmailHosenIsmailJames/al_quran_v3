@@ -1112,4 +1112,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get pm => 'ب.ظ';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

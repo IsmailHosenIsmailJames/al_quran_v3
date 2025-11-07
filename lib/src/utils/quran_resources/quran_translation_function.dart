@@ -198,7 +198,7 @@ class QuranTranslationFunction {
     required TranslationBookModel translationBook,
     bool isSetupProcess = false,
   }) async {
-    final cubit = context.read<ResourcesProgressCubitCubit>();
+    final cubit = context.read<ResourcesProgressCubit>();
     cubit.updateProgress(
       null,
       "Downloading Translation: ${translationBook.name}",

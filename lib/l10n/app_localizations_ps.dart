@@ -1110,4 +1110,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get pm => 'غرمه';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

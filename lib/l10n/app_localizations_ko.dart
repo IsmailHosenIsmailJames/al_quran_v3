@@ -1095,4 +1095,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get pm => '오후';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

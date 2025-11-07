@@ -1096,4 +1096,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get pm => '午後';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }
