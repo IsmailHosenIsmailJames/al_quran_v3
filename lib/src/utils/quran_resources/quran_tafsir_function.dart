@@ -165,7 +165,7 @@ class QuranTafsirFunction {
       return false;
     }
 
-    final cubit = context.read<ResourcesProgressCubitCubit>();
+    final cubit = context.read<ResourcesProgressCubit>();
     cubit.updateProgress(null, "Downloading Translation: ${tafsirBook.name}");
 
     if (await isAlreadyDownloaded(tafsirBook)) {

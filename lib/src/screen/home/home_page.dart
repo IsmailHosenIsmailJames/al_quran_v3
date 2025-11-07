@@ -11,7 +11,6 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";

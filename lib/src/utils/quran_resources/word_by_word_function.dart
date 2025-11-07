@@ -231,7 +231,7 @@ class WordByWordFunction {
       return false;
     }
 
-    final cubit = context.read<ResourcesProgressCubitCubit>();
+    final cubit = context.read<ResourcesProgressCubit>();
     cubit.updateProgress(null, "Downloading WbW: ${book.name}");
 
     if (await isBookDownloaded(book)) {

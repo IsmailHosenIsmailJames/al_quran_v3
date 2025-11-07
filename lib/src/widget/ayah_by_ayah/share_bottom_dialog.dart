@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -40,7 +40,7 @@ void showShareBottomDialog(
     metaDataSurah[ayahKey.split(":").first],
   );
 
-  List quranScriptWord = getWordListOfAyah(
+  List quranScriptWord = QuranScriptFunction.getWordListOfAyah(
     context.read<QuranViewCubit>().state.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
