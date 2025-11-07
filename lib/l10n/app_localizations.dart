@@ -2119,6 +2119,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PM'**
   String get pm;
+
+  /// No description provided for @optimizingQuranScript.
+  ///
+  /// In en, this message translates to:
+  /// **'Optimizing Quran Script'**
+  String get optimizingQuranScript;
 }
 
 class _AppLocalizationsDelegate

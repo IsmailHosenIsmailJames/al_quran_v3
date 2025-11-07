@@ -1159,4 +1159,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get pm => 'PM';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }

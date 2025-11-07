@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_downloa
 import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -47,32 +48,11 @@ import "package:just_audio_media_kit/just_audio_media_kit.dart";
 import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "src/screen/prayer_time/functions/prayers_time_function.dart";
 
-Map<String, dynamic> quranScript = {};
-
 Map<String, dynamic> metaDataJuz = {};
 List<Map> metaDataSajda = [];
 Map<String, dynamic> metaDataSurah = {};
 Map<String, dynamic> surahNameLocalization = {};
 Map<String, dynamic> surahMeaningLocalization = {};
-
-Future<void> loadQuranScript(QuranScriptType scriptType) async {
-  switch (scriptType) {
-    case QuranScriptType.tajweed:
-      quranScript = jsonDecode(
-        await rootBundle.loadString(
-          "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
-        ),
-      );
-    case QuranScriptType.uthmani:
-      quranScript = jsonDecode(
-        await rootBundle.loadString("assets/quran_script/Uthmani.json"),
-      );
-    case QuranScriptType.indopak:
-      quranScript = jsonDecode(
-        await rootBundle.loadString("assets/quran_script/Indopak.json"),
-      );
-  }
-}
 
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
@@ -121,15 +101,13 @@ Future<void> main() async {
   await SegmentedResourcesManager.init();
   await PrayersTimeFunction.init();
 
-  await loadQuranScript(
-    QuranScriptType.values.firstWhere(
-      (element) =>
-          Hive.box("user").get(
-            "selected_quran_script_type",
-            defaultValue: QuranScriptType.values.first.name,
-          ) ==
-          element.name,
-    ),
+  final scriptOnDb = Hive.box("user").get(
+    "selected_quran_script_type",
+    defaultValue: QuranScriptType.values.first.name,
+  );
+
+  await QuranScriptFunction.initQuranScript(
+    QuranScriptType.values.firstWhere((element) => scriptOnDb == element.name),
   );
 
   metaDataJuz = jsonDecode(
@@ -266,6 +244,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userBox = Hive.box("user");
+
     final PageTransitionsTheme pageTransitionsTheme =
         const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -278,7 +258,7 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ResourcesProgressCubitCubit()),
+        BlocProvider(create: (context) => ResourcesProgressCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
@@ -365,9 +345,7 @@ class MyApp extends StatelessWidget {
                 ),
                 themeMode: themeState.themeMode,
                 home:
-                    Hive.box(
-                          "user",
-                        ).get("is_setup_complete", defaultValue: false)
+                    isSetupComplete(userBox)
                         ? const HomePage()
                         : const AppSetupPage(),
               );
@@ -376,5 +354,12 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  bool isSetupComplete(Box userBox) {
+    return userBox.get("writeQuranScript", defaultValue: false) &&
+        userBox.get("is_setup_complete", defaultValue: false) &&
+        (userBox.get("writeQuranScriptVersion") ==
+            QuranScriptFunction.quranScriptVersion);
   }
 }

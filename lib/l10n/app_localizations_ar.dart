@@ -1111,4 +1111,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pm => 'مساءً';
+
+  @override
+  String get optimizingQuranScript => 'Optimizing Quran Script';
 }
