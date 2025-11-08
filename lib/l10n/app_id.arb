@@ -327,5 +327,6 @@
   "download": "Unduh",
   "audioDownloadAlert": "Perlu mengunduh {requiredDownload} dari {totalVersesCount} ayat.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Mengoptimalkan Skrip Quran"
 }

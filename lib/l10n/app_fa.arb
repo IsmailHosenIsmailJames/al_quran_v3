@@ -327,5 +327,6 @@
   "download": "دانلود",
   "audioDownloadAlert": "نیاز به دانلود {requiredDownload} از {totalVersesCount} آیه است.",
   "am": "ق.ظ",
-  "pm": "ب.ظ"
+  "pm": "ب.ظ",
+  "optimizingQuranScript": "بهینه سازی اسکریپت قرآن"
 }

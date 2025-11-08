@@ -304,7 +304,7 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                onGenerateTitle: (context) => "Al Quran App",
+                onGenerateTitle: (context) => "Quran's Tafsir, Audio & Prayer",
                 theme: ThemeData(brightness: Brightness.light).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
