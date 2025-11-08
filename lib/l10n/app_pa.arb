@@ -1,332 +1,594 @@
 {
   "@@locale": "pa",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
   "tafsirNotAvailable": "{ayahKey} ਲਈ ਤਫਸੀਰ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
-  "tafsirFoundAt": "ਤਫਸੀਰ ਇੱਥੇ ਮਿਲੇਗੀ: {anotherAyahLinkKey}",
-  "tafsirJumpTo": "{anotherAyahLinkKey} 'ਤੇ ਜਾਓ",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "ਤਫਸੀਰ ਮਿਲੇਗੀ: {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "{anotherAyahLinkKey} ਵੱਲ ਜਾਓ",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
   "hizb": "ਹਿਜ਼ਬ",
   "juz": "ਜੁਜ਼",
   "page": "ਸਫ਼ਾ",
   "ruku": "ਰੁਕੂ",
   "languageSettings": "ਭਾਸ਼ਾ ਸੈਟਿੰਗਾਂ",
   "surahAyah": "{surahName} {ayahKey}",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
   "ayahsCount": "{count} ਆਇਤਾਂ",
-  "saveAndDownload": "ਸੇਵ ਅਤੇ ਡਾਊਨਲੋਡ ਕਰੋ",
-  "appLanguage": "ਐਪ ਦੀ ਭਾਸ਼ਾ",
-  "selectAppLanguage": "ਐਪ ਦੀ ਭਾਸ਼ਾ ਚੁਣੋ...",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "ਸੇਵ ਅਤੇ ਡਾਊਨਲੋਡ",
+  "appLanguage": "ਐਪ ਭਾਸ਼ਾ",
+  "selectAppLanguage": "ਐਪ ਭਾਸ਼ਾ ਚੁਣੋ...",
   "pleaseSelectOne": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਚੁਣੋ",
-  "quranTranslationLanguage": "ਕੁਰਾਨ ਅਨੁਵਾਦ ਦੀ ਭਾਸ਼ਾ",
-  "selectTranslationLanguage": "ਅਨੁਵਾਦ ਦੀ ਭਾਸ਼ਾ ਚੁਣੋ...",
-  "quranTranslationBook": "ਕੁਰਾਨ ਅਨੁਵਾਦ ਦੀ ਕਿਤਾਬ",
-  "selectTranslationBook": "ਅਨੁਵਾਦ ਦੀ ਕਿਤਾਬ ਚੁਣੋ...",
-  "quranTafsirLanguage": "ਕੁਰਾਨ ਤਫਸੀਰ ਦੀ ਭਾਸ਼ਾ",
-  "selectTafsirLanguage": "ਤਫਸੀਰ ਦੀ ਭਾਸ਼ਾ ਚੁਣੋ...",
-  "quranTafsirBook": "ਕੁਰਾਨ ਤਫਸੀਰ ਦੀ ਕਿਤਾਬ",
-  "selectTafsirBook": "ਤਫਸੀਰ ਦੀ ਕਿਤਾਬ ਚੁਣੋ...",
-  "quranScriptAndStyle": "ਕੁਰਾਨ ਲਿਪੀ ਅਤੇ ਸ਼ੈਲੀ",
-  "justAMoment": "ਬਸ ਇੱਕ ਪਲ...",
+  "quranTranslationLanguage": "ਕੁਰਾਨ ਅਨੁਵਾਦ ਭਾਸ਼ਾ",
+  "selectTranslationLanguage": "ਅਨੁਵਾਦ ਭਾਸ਼ਾ ਚੁਣੋ...",
+  "quranTranslationBook": "ਕੁਰਾਨ ਅਨੁਵਾਦ ਕਿਤਾਬ",
+  "selectTranslationBook": "ਅਨੁਵਾਦ ਕਿਤਾਬ ਚੁਣੋ...",
+  "quranTafsirLanguage": "ਕੁਰਾਨ ਤਫਸੀਰ ਭਾਸ਼ਾ",
+  "selectTafsirLanguage": "ਤਫਸੀਰ ਭਾਸ਼ਾ ਚੁਣੋ...",
+  "quranTafsirBook": "ਕੁਰਾਨ ਤਫਸੀਰ ਕਿਤਾਬ",
+  "selectTafsirBook": "ਤਫਸੀਰ ਕਿਤਾਬ ਚੁਣੋ...",
+  "quranScriptAndStyle": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਅਤੇ ਸਟਾਈਲ",
+  "justAMoment": "ਬੱਸ ਇੱਕ ਪਲ...",
   "processProgress": "{processName} {percentage}",
-  "success": "ਸਫਲ",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
+  "success": "ਸਫਲਤਾ",
   "retry": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
   "unableToDownloadResources": "ਸਰੋਤ ਡਾਊਨਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ...\nਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
-  "downloadingSegmentedQuranRecitation": "ਖੰਡਿਤ ਕੁਰਾਨ ਪਾਠ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
-  "processingSegmentedQuranRecitation": "ਖੰਡਿਤ ਕੁਰਾਨ ਪਾਠ ਦੀ ਪ੍ਰੋਸੈਸਿੰਗ ਹੋ ਰਹੀ ਹੈ",
+  "downloadingSegmentedQuranRecitation": "ਸੈਗਮੈਂਟਿਡ ਕੁਰਾਨ ਤਲਾਵਤ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ",
+  "processingSegmentedQuranRecitation": "ਸੈਗਮੈਂਟਿਡ ਕੁਰਾਨ ਤਲਾਵਤ ਪ੍ਰੋਸੈਸਿੰਗ ਕਰ ਰਿਹਾ ਹੈ",
   "footnote": "ਫੁਟਨੋਟ",
   "tafsir": "ਤਫਸੀਰ",
-  "wordByWord": "ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ",
+  "wordByWord": "ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ",
   "pleaseSelectRequiredOption": "ਕਿਰਪਾ ਕਰਕੇ ਲੋੜੀਂਦਾ ਵਿਕਲਪ ਚੁਣੋ",
-  "rememberHomeTab": "ਹੋਮ ਟੈਬ ਨੂੰ ਯਾਦ ਰੱਖੋ",
-  "rememberHomeTabSubtitle": "ਐਪ ਹੋਮ ਸਕ੍ਰੀਨ 'ਤੇ ਆਖਰੀ ਖੋਲ੍ਹੀ ਗਈ ਟੈਬ ਨੂੰ ਯਾਦ ਰੱਖੇਗੀ।",
-  "wakeLock": "ਸਕ੍ਰੀਨ ਨੂੰ ਚਾਲੂ ਰੱਖੋ",
+  "rememberHomeTab": "ਹੋਮ ਟੈਬ ਯਾਦ ਰੱਖੋ",
+  "rememberHomeTabSubtitle": "ਐਪ ਹੋਮ ਸਕ੍ਰੀਨ ਵਿੱਚ ਆਖਰੀ ਖੋਲ੍ਹੀ ਟੈਬ ਨੂੰ ਯਾਦ ਰੱਖੇਗੀ।",
+  "wakeLock": "ਵੇਕ ਲਾਕ",
   "wakeLockSubtitle": "ਸਕ੍ਰੀਨ ਨੂੰ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋਣ ਤੋਂ ਰੋਕੋ।",
   "settings": "ਸੈਟਿੰਗਾਂ",
   "appTheme": "ਐਪ ਥੀਮ",
-  "quranStyle": "ਕੁਰਾਨ ਸ਼ੈਲੀ",
+  "quranStyle": "ਕੁਰਾਨ ਸਟਾਈਲ",
   "changeTheme": "ਥੀਮ ਬਦਲੋ",
-  "verseCount": "ਆਇਤਾਂ ਦੀ ਗਿਣਤੀ: ",
+  "verseCount": "ਆਇਤ ਗਿਣਤੀ: ",
   "translation": "ਅਨੁਵਾਦ",
-  "tafsirNotFound": "ਨਹੀਂ ਮਿਲਿਆ",
+  "tafsirNotFound": "ਨਹੀਂ ਮਿਲੀ",
   "moreInfo": "ਹੋਰ ਜਾਣਕਾਰੀ",
   "playAudio": "ਆਡੀਓ ਚਲਾਓ",
-  "preview": "ਪੂਰਵ-ਦ੍ਰਿਸ਼",
-  "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
-  "errorFetchingAddress": "ਪਤਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ",
-  "addressNotAvailable": "ਪਤਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
-  "latitude": "ਅਕਸ਼ਾਂਸ਼: ",
-  "longitude": "ਰੇਖਾਂਸ਼: ",
+  "preview": "ਪ੍ਰੀਵਿਊ",
+  "loading": "ਲੋਡਿੰਗ...",
+  "errorFetchingAddress": "ਪਤਾ ਲੈਣ ਵਿੱਚ ਗਲਤੀ",
+  "addressNotAvailable": "ਪਤਾ ਉਪਲਬਧ ਨਹੀਂ",
+  "latitude": "ਲੈਟੀਟਿਊਡ: ",
+  "longitude": "ਲੌਂਗੀਟਿਊਡ: ",
   "name": "ਨਾਮ: ",
   "location": "ਸਥਾਨ: ",
-  "parameters": "ਮਾਪਦੰਡ: ",
+  "parameters": "ਪੈਰਾਮੀਟਰ: ",
   "selectCalculationMethod": "ਗਣਨਾ ਵਿਧੀ ਚੁਣੋ",
   "shareSelectAyahs": "ਚੁਣੀਆਂ ਆਇਤਾਂ ਸਾਂਝੀਆਂ ਕਰੋ",
   "selectionEmpty": "ਚੋਣ ਖਾਲੀ ਹੈ",
-  "generatingImagePleaseWait": "ਚਿੱਤਰ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ... ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ",
+  "generatingImagePleaseWait": "ਚਿੱਤਰ ਬਣਾ ਰਿਹਾ ਹੈ... ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ",
   "asImage": "ਚਿੱਤਰ ਵਜੋਂ",
   "asText": "ਟੈਕਸਟ ਵਜੋਂ",
-  "playFromSelectedAyah": "ਚੁਣੀ ਹੋਈ ਆਇਤ ਤੋਂ ਚਲਾਓ",
-  "toTafsir": "ਤਫਸੀਰ 'ਤੇ ਜਾਓ",
+  "playFromSelectedAyah": "ਚੁਣੀ ਆਇਤ ਤੋਂ ਚਲਾਓ",
+  "toTafsir": "ਤਫਸੀਰ ਵੱਲ",
   "selectAyah": "ਆਇਤ ਚੁਣੋ",
-  "toAyah": "ਆਇਤ 'ਤੇ ਜਾਓ",
-  "searchForASurah": "ਇੱਕ ਸੂਰਾ ਦੀ ਖੋਜ ਕਰੋ",
-  "bugReportTitle": "ਬੱਗ ਦੀ ਰਿਪੋਰਟ",
-  "audioCached": "ਆਡੀਓ ਕੈਸ਼ ਹੋ ਗਿਆ ਹੈ",
+  "toAyah": "ਆਇਤ ਵੱਲ",
+  "searchForASurah": "ਸੂਰਹ ਖੋਜੋ",
+  "bugReportTitle": "ਬੱਗ ਰਿਪੋਰਟ",
+  "audioCached": "ਆਡੀਓ ਕੈਸ਼ ਕੀਤੀ ਗਈ",
   "others": "ਹੋਰ",
-  "quranTranslationAyahOneMustEnabled": "ਕੁਰਾਨ|ਅਨੁਵਾਦ|ਆਇਤ, ਇੱਕ ਲਾਜ਼ਮੀ ਤੌਰ 'ਤੇ ਯੋਗ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
-  "quranFontSize": "ਕੁਰਾਨ ਫੌਂਟ ਦਾ ਆਕਾਰ",
-  "quranLineHeight": "ਕੁਰਾਨ ਲਾਈਨ ਦੀ ਉਚਾਈ",
-  "translationAndTafsirFontSize": "ਅਨੁਵਾਦ ਅਤੇ ਤਫਸੀਰ ਫੌਂਟ ਦਾ ਆਕਾਰ",
-  "quranAyah": "ਕੁਰਾਨ ਦੀ ਆਇਤ",
-  "topToolbar": "ਸਿਖਰ ਟੂਲਬਾਰ",
-  "keepOpenWordByWord": "ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਖੁੱਲ੍ਹਾ ਰੱਖੋ",
-  "wordByWordHighlight": "ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਹਾਈਲਾਈਟ",
-  "quranScriptSettings": "ਕੁਰਾਨ ਲਿਪੀ ਦੀਆਂ ਸੈਟਿੰਗਾਂ",
+  "quranTranslationAyahOneMustEnabled": "ਕੁਰਾਨ|ਅਨੁਵਾਦ|ਆਇਤ, ਇੱਕ ਨੂੰ ਚਾਲੂ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ",
+  "quranFontSize": "ਕੁਰਾਨ ਫੌਂਟ ਸਾਈਜ਼",
+  "quranLineHeight": "ਕੁਰਾਨ ਲਾਈਨ ਉਚਾਈ",
+  "translationAndTafsirFontSize": "ਅਨੁਵਾਦ ਅਤੇ ਤਫਸੀਰ ਫੌਂਟ ਸਾਈਜ਼",
+  "quranAyah": "ਕੁਰਾਨ ਆਇਤ",
+  "topToolbar": "ਟਾਪ ਟੂਲਬਾਰ",
+  "keepOpenWordByWord": "ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਖੁੱਲ੍ਹਾ ਰੱਖੋ",
+  "wordByWordHighlight": "ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਹਾਈਲਾਈਟ",
+  "quranScriptSettings": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਸੈਟਿੰਗਾਂ",
   "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
   "pageNumber": "ਸਫ਼ਾ: ",
-  "quranResources": "ਕੁਰਾਨ ਦੇ ਸਰੋਤ",
-  "alreadySelected": "ਭਾਸ਼ਾ '{name}' ਪਹਿਲਾਂ ਹੀ ਚੁਣੀ ਹੋਈ ਹੈ।",
-  "unableToGetCompassData": "ਕੰਪਾਸ ਡਾਟਾ ਪ੍ਰਾਪਤ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ",
+  "quranResources": "ਕੁਰਾਨ ਸਰੋਤ",
+  "alreadySelected": "ਭਾਸ਼ਾ '{name}' ਪਹਿਲਾਂ ਹੀ ਚੁਣੀ ਗਈ ਹੈ।",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unableToGetCompassData": "ਕੰਪਾਸ ਡਾਟਾ ਲੈਣ ਵਿੱਚ ਅਸਮਰੱਥ",
   "deviceDoesNotHaveSensors": "ਡਿਵਾਈਸ ਵਿੱਚ ਸੈਂਸਰ ਨਹੀਂ ਹਨ!",
-  "north": "ਉੱ",
-  "east": "ਪੂ",
-  "south": "ਦੱ",
-  "west": "ਪੱ",
+  "north": "ਉੱਤਰ",
+  "east": "ਪੂਰਬ",
+  "south": "ਦੱਖਣ",
+  "west": "ਪੱਛਮ",
   "address": "ਪਤਾ: ",
   "change": "ਬਦਲੋ",
   "calculationMethod": "ਗਣਨਾ ਵਿਧੀ: ",
-  "downloadPrayerTime": "ਨਮਾਜ਼ ਦਾ ਸਮਾਂ ਡਾਊਨਲੋਡ ਕਰੋ",
+  "downloadPrayerTime": "ਨਮਾਜ਼ ਸਮਾਂ ਡਾਊਨਲੋਡ ਕਰੋ",
   "calculationMethodsListEmpty": "ਗਣਨਾ ਵਿਧੀਆਂ ਦੀ ਸੂਚੀ ਖਾਲੀ ਹੈ।",
-  "noCalculationMethodWithLocationData": "ਸਥਾਨ ਡੇਟਾ ਨਾਲ ਕੋਈ ਗਣਨਾ ਵਿਧੀ ਨਹੀਂ ਮਿਲੀ।",
+  "noCalculationMethodWithLocationData": "ਸਥਾਨ ਡਾਟਾ ਨਾਲ ਕੋਈ ਗਣਨਾ ਵਿਧੀ ਨਹੀਂ ਮਿਲੀ।",
   "prayerSettings": "ਨਮਾਜ਼ ਸੈਟਿੰਗਾਂ",
-  "reminderSettings": "ਰੀਮਾਈਂਡਰ ਸੈਟਿੰਗਾਂ",
-  "adjustReminderTime": "ਰੀਮਾਈਂਡਰ ਦਾ ਸਮਾਂ ਵਿਵਸਥਿਤ ਕਰੋ",
+  "reminderSettings": "ਰਿਮਾਈਂਡਰ ਸੈਟਿੰਗਾਂ",
+  "adjustReminderTime": "ਰਿਮਾਈਂਡਰ ਸਮਾਂ ਅਡਜੱਸਟ ਕਰੋ",
   "enforceAlarmSound": "ਅਲਾਰਮ ਦੀ ਆਵਾਜ਼ ਨੂੰ ਲਾਗੂ ਕਰੋ",
-  "enforceAlarmSoundDescription": "ਜੇਕਰ ਚਾਲੂ ਕੀਤਾ ਜਾਵੇ, ਤਾਂ ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਅਲਾਰਮ ਨੂੰ ਇੱਥੇ ਸੈੱਟ ਕੀਤੇ ਵਾਲੀਅਮ 'ਤੇ ਵਜਾਏਗੀ, ਭਾਵੇਂ ਤੁਹਾਡੇ ਫ਼ੋਨ ਦਾ ਵਾਲੀਅਮ ਘੱਟ ਹੋਵੇ। ਇਸ ਨਾਲ ਇਹ ਯਕੀਨੀ ਹੋ ਜਾਵੇਗਾ ਕਿ ਤੁਸੀਂ ਫ਼ੋਨ ਦਾ ਵਾਲੀਅਮ ਘੱਟ ਹੋਣ ਕਾਰਨ ਅਲਾਰਮ ਸੁਣਨ ਤੋਂ ਵਾਂਝੇ ਨਹੀਂ ਰਹੋਗੇ।",
-  "volume": "ਆਵਾਜ਼",
-  "atPrayerTime": "ਨਮਾਜ਼ ਦੇ ਸਮੇਂ",
+  "enforceAlarmSoundDescription": "ਜੇ ਚਾਲੂ ਕੀਤਾ ਗਿਆ, ਤਾਂ ਇਹ ਫੀਚਰ ਅਲਾਰਮ ਨੂੰ ਇੱਥੇ ਸੈੱਟ ਵਾਲੀ ਵਾਲੀਊਮ ਤੇ ਚਲਾਏਗਾ, ਭਾਵੇਂ ਤੁਹਾਡੇ ਫੋਨ ਦੀ ਆਵਾਜ਼ ਘੱਟ ਹੋਵੇ। ਇਹ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਘੱਟ ਫੋਨ ਵਾਲੀਊਮ ਕਰਕੇ ਅਲਾਰਮ ਨੂੰ ਮਿਸ ਨਾ ਕਰੋ।",
+  "volume": "ਵਾਲੀਊਮ",
+  "atPrayerTime": "ਨਮਾਜ਼ ਸਮੇਂ ਤੇ",
   "minBefore": "{minutes} ਮਿੰਟ ਪਹਿਲਾਂ",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "minAfter": "{minutes} ਮਿੰਟ ਬਾਅਦ",
-  "prayerTimeIsAt": "{prayerName} ਦਾ ਸਮਾਂ {prayerTime} ਵਜੇ ਹੈ",
-  "itsTimeOf": "{prayerName} ਦਾ ਸਮਾਂ ਹੋ ਗਿਆ ਹੈ",
-  "stopTheAdhan": "ਅਜ਼ਾਨ ਨੂੰ ਰੋਕੋ",
-  "dateFoundEmpty": "{date} ਖਾਲੀ ਪਾਇਆ ਗਿਆ",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} {prayerTime} ਤੇ ਹੈ",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "{prayerName} ਦਾ ਸਮਾਂ ਹੈ",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "stopTheAdhan": "ਅਜ਼ਾਨ ਰੋਕੋ",
+  "dateFoundEmpty": "{date} ਖਾਲੀ ਮਿਲੀ",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "today": "ਅੱਜ",
   "left": "ਬਾਕੀ",
-  "reminderAdded": "{prayerName} ਲਈ ਰੀਮਾਈਂਡਰ ਜੋੜਿਆ ਗਿਆ",
-  "allowNotificationPermission": "ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਸੂਚਨਾ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ",
-  "reminderRemoved": "{prayerName} ਲਈ ਰੀਮਾਈਂਡਰ ਹਟਾ ਦਿੱਤਾ ਗਿਆ",
-  "getPrayerTimesAndQibla": "ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਅਤੇ ਕਿਬਲਾ ਪ੍ਰਾਪਤ ਕਰੋ",
-  "getPrayerTimesAndQiblaDescription": "ਕਿਸੇ ਵੀ ਦਿੱਤੇ ਸਥਾਨ ਲਈ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਅਤੇ ਕਿਬਲਾ ਦੀ ਗਣਨਾ ਕਰੋ।",
-  "getFromGPS": "GPS ਤੋਂ ਪ੍ਰਾਪਤ ਕਰੋ",
+  "reminderAdded": "{prayerName} ਲਈ ਰਿਮਾਈਂਡਰ ਜੋੜਿਆ ਗਿਆ",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "ਇਸ ਫੀਚਰ ਨੂੰ ਵਰਤਣ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਪਰਮਿਸ਼ਨ ਨੂੰ ਮਨਜ਼ੂਰ ਕਰੋ",
+  "reminderRemoved": "{prayerName} ਲਈ ਰਿਮਾਈਂਡਰ ਹਟਾਇਆ ਗਿਆ",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "ਨਮਾਜ਼ ਸਮਾਂ ਅਤੇ ਕਿਬਲਾ ਲਵੋ",
+  "getPrayerTimesAndQiblaDescription": "ਕਿਸੇ ਵੀ ਦਿੱਤੇ ਸਥਾਨ ਲਈ ਨਮਾਜ਼ ਸਮਾਂ ਅਤੇ ਕਿਬਲਾ ਗਣਨਾ ਕਰੋ।",
+  "getFromGPS": "ਜੀਪੀਐੱਸ ਤੋਂ ਲਵੋ",
   "or": "ਜਾਂ",
   "selectYourCity": "ਆਪਣਾ ਸ਼ਹਿਰ ਚੁਣੋ",
-  "noteAboutGPS": "ਨੋਟ: ਜੇਕਰ ਤੁਸੀਂ GPS ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਜਾਂ ਸੁਰੱਖਿਅਤ ਮਹਿਸੂਸ ਨਹੀਂ ਕਰਦੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਆਪਣਾ ਸ਼ਹਿਰ ਚੁਣ ਸਕਦੇ ਹੋ।",
-  "downloadingLocationResources": "ਸਥਾਨ ਦੇ ਸਰੋਤ ਡਾਊਨਲੋਡ ਹੋ ਰਹੇ ਹਨ...",
+  "noteAboutGPS": "ਨੋਟ: ਜੇ ਤੁਸੀਂ ਜੀਪੀਐੱਸ ਨੂੰ ਵਰਤਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ ਜਾਂ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਮਹਿਸੂਸ ਕਰਦੇ, ਤਾਂ ਤੁਸੀਂ ਆਪਣਾ ਸ਼ਹਿਰ ਚੁਣ ਸਕਦੇ ਹੋ।",
+  "downloadingLocationResources": "ਸਥਾਨ ਸਰੋਤ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ...",
   "somethingWentWrong": "ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ",
   "selectYourCountry": "ਆਪਣਾ ਦੇਸ਼ ਚੁਣੋ",
-  "searchForACountry": "ਇੱਕ ਦੇਸ਼ ਦੀ ਖੋਜ ਕਰੋ",
-  "selectYourAdministrator": "ਆਪਣਾ ਪ੍ਰਸ਼ਾਸਕ ਚੁਣੋ",
-  "searchForAnAdministrator": "ਇੱਕ ਪ੍ਰਸ਼ਾਸਕ ਦੀ ਖੋਜ ਕਰੋ",
-  "searchForACity": "ਇੱਕ ਸ਼ਹਿਰ ਦੀ ਖੋਜ ਕਰੋ",
-  "pleaseEnableLocationService": "ਕਿਰਪਾ ਕਰਕੇ ਸਥਾਨ ਸੇਵਾ ਨੂੰ ਚਾਲੂ ਕਰੋ",
+  "searchForACountry": "ਦੇਸ਼ ਖੋਜੋ",
+  "selectYourAdministrator": "ਆਪਣਾ ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਚੁਣੋ",
+  "searchForAnAdministrator": "ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਖੋਜੋ",
+  "searchForACity": "ਸ਼ਹਿਰ ਖੋਜੋ",
+  "pleaseEnableLocationService": "ਕਿਰਪਾ ਕਰਕੇ ਸਥਾਨ ਸੇਵਾ ਚਾਲੂ ਕਰੋ",
   "donateUs": "ਸਾਨੂੰ ਦਾਨ ਕਰੋ",
   "underDevelopment": "ਵਿਕਾਸ ਅਧੀਨ",
-  "versionLoading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
+  "versionLoading": "ਲੋਡਿੰਗ...",
   "alQuran": "ਅਲ ਕੁਰਾਨ",
-  "mainMenu": "ਮੁੱਖ ਮੇਨੂ",
+  "mainMenu": "ਮੁੱਖ ਮੀਨੂੰ",
   "notes": "ਨੋਟਸ",
-  "pinned": "ਪਿੰਨ ਕੀਤਾ",
-  "jumpToAyah": "ਆਇਤ 'ਤੇ ਜਾਓ",
+  "pinned": "ਪਿੰਨ ਕੀਤੇ",
+  "jumpToAyah": "ਆਇਤ ਵੱਲ ਜਾਓ",
   "shareMultipleAyah": "ਕਈ ਆਇਤਾਂ ਸਾਂਝੀਆਂ ਕਰੋ",
   "shareThisApp": "ਇਸ ਐਪ ਨੂੰ ਸਾਂਝਾ ਕਰੋ",
   "giveRating": "ਰੇਟਿੰਗ ਦਿਓ",
-  "bugReport": "ਬੱਗ ਦੀ ਰਿਪੋਰਟ ਕਰੋ",
-  "privacyPolicy": "ਗੋਪਨੀਯਤਾ ਨੀਤੀ",
+  "bugReport": "ਬੱਗ ਰਿਪੋਰਟ",
+  "privacyPolicy": "ਪ੍ਰਾਈਵੇਸੀ ਪਾਲਿਸੀ",
   "aboutTheApp": "ਐਪ ਬਾਰੇ",
-  "resetTheApp": "ਐਪ ਨੂੰ ਰੀਸੈਟ ਕਰੋ",
-  "resetAppWarningTitle": "ਐਪ ਡੇਟਾ ਨੂੰ ਰੀਸੈਟ ਕਰੋ",
-  "resetAppWarningMessage": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਐਪ ਨੂੰ ਰੀਸੈਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਤੁਹਾਡਾ ਸਾਰਾ ਡੇਟਾ ਮਿਟ ਜਾਵੇਗਾ, ਅਤੇ ਤੁਹਾਨੂੰ ਐਪ ਨੂੰ ਸ਼ੁਰੂ ਤੋਂ ਸੈਟ ਅਪ ਕਰਨ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।",
+  "resetTheApp": "ਐਪ ਰੀਸੈੱਟ ਕਰੋ",
+  "resetAppWarningTitle": "ਐਪ ਡਾਟਾ ਰੀਸੈੱਟ ਕਰੋ",
+  "resetAppWarningMessage": "ਕੀ ਤੁਸੀਂ ਐਪ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਤੁਹਾਡਾ ਸਾਰਾ ਡਾਟਾ ਗੁਆਚ ਜਾਵੇਗਾ, ਅਤੇ ਤੁਹਾਨੂੰ ਐਪ ਨੂੰ ਸ਼ੁਰੂ ਤੋਂ ਸੈੱਟ ਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।",
   "cancel": "ਰੱਦ ਕਰੋ",
-  "reset": "ਰੀਸੈਟ",
-  "shareAppSubject": "ਇਸ ਅਲ ਕੁਰਾਨ ਐਪ ਨੂੰ ਦੇਖੋ!",
-  "shareAppBody": "ਅਸਲਾਮੁਅਲੈਕੁਮ! ਰੋਜ਼ਾਨਾ ਪੜ੍ਹਨ ਅਤੇ ਵਿਚਾਰ ਕਰਨ ਲਈ ਇਸ ਅਲ ਕੁਰਾਨ ਐਪ ਨੂੰ ਦੇਖੋ। ਇਹ ਅੱਲ੍ਹਾ ਦੇ ਸ਼ਬਦਾਂ ਨਾਲ ਜੁੜਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ। ਇੱਥੋਂ ਡਾਊਨਲੋਡ ਕਰੋ: {appLink}",
-  "openDrawerTooltip": "ਦਰਾਜ਼ ਖੋਲ੍ਹੋ",
+  "reset": "ਰੀਸੈੱਟ",
+  "shareAppSubject": "ਇਸ ਅਲ ਕੁਰਾਨ ਐਪ ਨੂੰ ਵੇਖੋ!",
+  "shareAppBody": "ਅੱਸਲਾਮੁ ਅਲੈਕੁਮ! ਰੋਜ਼ਾਨਾ ਪੜ੍ਹਨ ਅਤੇ ਵਿਚਾਰ ਲਈ ਇਸ ਅਲ ਕੁਰਾਨ ਐਪ ਨੂੰ ਵੇਖੋ। ਇਹ ਅੱਲ੍ਹਾ ਦੇ ਸ਼ਬਦਾਂ ਨਾਲ ਜੁੜਨ ਵਿੱਚ ਮਦਦ ਕਰਦੀ ਹੈ। ਇੱਥੇ ਡਾਊਨਲੋਡ ਕਰੋ: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "ਡ੍ਰਾਅਰ ਖੋਲ੍ਹੋ",
   "quran": "ਕੁਰਾਨ",
   "prayer": "ਨਮਾਜ਼",
   "qibla": "ਕਿਬਲਾ",
   "audio": "ਆਡੀਓ",
-  "surah": "ਸੂਰਾ",
+  "surah": "ਸੂਰਹ",
   "pages": "ਸਫ਼ੇ",
   "note": "ਨੋਟ:",
-  "linkedAyahs": "ਜੁੜੀਆਂ ਆਇਤਾਂ:",
-  "emptyNoteCollection": "ਇਹ ਨੋਟ ਸੰਗ੍ਰਹਿ ਖਾਲੀ ਹੈ।\nਇੱਥੇ ਉਹਨਾਂ ਨੂੰ ਦੇਖਣ ਲਈ ਕੁਝ ਨੋਟਸ ਸ਼ਾਮਲ ਕਰੋ।",
-  "emptyPinnedCollection": "ਇਸ ਸੰਗ੍ਰਹਿ ਵਿੱਚ ਅਜੇ ਤੱਕ ਕੋਈ ਆਇਤ ਪਿੰਨ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ।\nਇੱਥੇ ਉਹਨਾਂ ਨੂੰ ਦੇਖਣ ਲਈ ਆਇਤਾਂ ਨੂੰ ਪਿੰਨ ਕਰੋ।",
-  "noContentAvailable": "ਕੋਈ ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।",
-  "failedToLoadCollections": "ਸੰਗ੍ਰਹਿ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: {error}",
-  "searchByCollectionName": "{collectionType} ਨਾਮ ਦੁਆਰਾ ਖੋਜ ਕਰੋ...",
-  "sortBy": "ਇਸ ਅਨੁਸਾਰ ਕ੍ਰਮਬੱਧ ਕਰੋ",
-  "noCollectionAddedYet": "ਅਜੇ ਤੱਕ ਕੋਈ {collectionType} ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ",
-  "pinnedItemsCount": "{count} ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ",
+  "linkedAyahs": "ਲਿੰਕ ਕੀਤੀਆਂ ਆਇਤਾਂ:",
+  "emptyNoteCollection": "ਇਹ ਨੋਟ ਕਲੈਕਸ਼ਨ ਖਾਲੀ ਹੈ।\nਇੱਥੇ ਵੇਖਣ ਲਈ ਕੁਝ ਨੋਟ ਜੋੜੋ।",
+  "emptyPinnedCollection": "ਇਸ ਕਲੈਕਸ਼ਨ ਵਿੱਚ ਅਜੇ ਕੋਈ ਆਇਤ ਪਿੰਨ ਨਹੀਂ ਕੀਤੀ।\nਇੱਥੇ ਵੇਖਣ ਲਈ ਆਇਤਾਂ ਪਿੰਨ ਕਰੋ।",
+  "noContentAvailable": "ਕੋਈ ਸਮੱਗਰੀ ਉਪਲਬਧ ਨਹੀਂ।",
+  "failedToLoadCollections": "ਕਲੈਕਸ਼ਨ ਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "{collectionType} ਨਾਮ ਨਾਲ ਖੋਜੋ...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "sortBy": "ਸੌਰਟ ਕਰੋ",
+  "noCollectionAddedYet": "ਅਜੇ ਕੋਈ {collectionType} ਨਹੀਂ ਜੋੜਿਆ ਗਿਆ",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "pinnedItemsCount": "{count} ਪਿੰਨ ਕੀਤੇ ਆਈਟਮ",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "notesCount": "{count} ਨੋਟਸ",
-  "emptyNameNotAllowed": "ਖਾਲੀ ਨਾਮ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ",
-  "updatedTo": "{collectionName} ਵਿੱਚ ਅੱਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "ਖਾਲੀ ਨਾਮ ਮਨਜ਼ੂਰ ਨਹੀਂ",
+  "updatedTo": "{collectionName} ਵਿੱਚ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "changeName": "ਨਾਮ ਬਦਲੋ",
   "changeColor": "ਰੰਗ ਬਦਲੋ",
-  "colorUpdated": "ਰੰਗ ਅੱਪਡੇਟ ਹੋ ਗਿਆ ਹੈ",
+  "colorUpdated": "ਰੰਗ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
   "collectionDeleted": "{collectionName} ਮਿਟਾਇਆ ਗਿਆ",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "delete": "ਮਿਟਾਓ",
-  "save": "ਸੇਵ ਕਰੋ",
-  "collectionNameCannotBeEmpty": "ਸੰਗ੍ਰਹਿ ਦਾ ਨਾਮ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ।",
-  "addedNewCollection": "ਨਵਾਂ ਸੰਗ੍ਰਹਿ ਜੋੜਿਆ ਗਿਆ",
+  "save": "ਸੇਵ",
+  "collectionNameCannotBeEmpty": "ਕਲੈਕਸ਼ਨ ਨਾਮ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ।",
+  "addedNewCollection": "ਨਵੀਂ ਕਲੈਕਸ਼ਨ ਜੋੜੀ ਗਈ",
   "ayahCount": "{count} ਆਇਤ",
-  "byNameAtoZ": "ਨਾਮ ਅ-ੜ",
-  "byNameZtoA": "ਨਾਮ ੜ-ਅ",
-  "byElementNumberAscending": "ਤੱਤ ਨੰਬਰ ਵੱਧਦਾ",
-  "byElementNumberDescending": "ਤੱਤ ਨੰਬਰ ਘੱਟਦਾ",
-  "byUpdateDateAscending": "ਅੱਪਡੇਟ ਮਿਤੀ ਵੱਧਦੀ",
-  "byUpdateDateDescending": "ਅੱਪਡੇਟ ਮਿਤੀ ਘੱਟਦੀ",
-  "byCreateDateAscending": "ਬਣਾਉਣ ਦੀ ਮਿਤੀ ਵੱਧਦੀ",
-  "byCreateDateDescending": "ਬਣਾਉਣ ਦੀ ਮਿਤੀ ਘੱਟਦੀ",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "byNameAtoZ": "ਨਾਮ A-Z",
+  "byNameZtoA": "ਨਾਮ Z-A",
+  "byElementNumberAscending": "ਐਲੀਮੈਂਟ ਨੰਬਰ ਵਧਦਾ",
+  "byElementNumberDescending": "ਐਲੀਮੈਂਟ ਨੰਬਰ ਘਟਦਾ",
+  "byUpdateDateAscending": "ਅਪਡੇਟ ਮਿਤੀ ਵਧਦੀ",
+  "byUpdateDateDescending": "ਅਪਡੇਟ ਮਿਤੀ ਘਟਦੀ",
+  "byCreateDateAscending": "ਬਣਾਉਣ ਮਿਤੀ ਵਧਦੀ",
+  "byCreateDateDescending": "ਬਣਾਉਣ ਮਿਤੀ ਘਟਦੀ",
   "translationNotFound": "ਅਨੁਵਾਦ ਨਹੀਂ ਮਿਲਿਆ",
   "translationTitle": "ਅਨੁਵਾਦ:",
   "footNoteTitle": "ਫੁਟ ਨੋਟ:",
-  "wordByWordTranslation": "ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਅਨੁਵਾਦ:",
+  "wordByWordTranslation": "ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਅਨੁਵਾਦ:",
   "tafsirButton": "ਤਫਸੀਰ",
   "shareButton": "ਸਾਂਝਾ ਕਰੋ",
-  "addNoteButton": "ਨੋਟ ਸ਼ਾਮਲ ਕਰੋ",
-  "pinToCollectionButton": "ਸੰਗ੍ਰਹਿ ਵਿੱਚ ਪਿੰਨ ਕਰੋ",
+  "addNoteButton": "ਨੋਟ ਜੋੜੋ",
+  "pinToCollectionButton": "ਕਲੈਕਸ਼ਨ ਵਿੱਚ ਪਿੰਨ ਕਰੋ",
   "shareAsText": "ਟੈਕਸਟ ਵਜੋਂ ਸਾਂਝਾ ਕਰੋ",
   "copiedWithTafsir": "ਤਫਸੀਰ ਨਾਲ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
   "shareAsImage": "ਚਿੱਤਰ ਵਜੋਂ ਸਾਂਝਾ ਕਰੋ",
   "shareWithTafsir": "ਤਫਸੀਰ ਨਾਲ ਸਾਂਝਾ ਕਰੋ",
   "notFound": "ਨਹੀਂ ਮਿਲਿਆ",
-  "noteContentCannotBeEmpty": "ਨੋਟ ਦੀ ਸਮੱਗਰੀ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦੀ।",
+  "noteContentCannotBeEmpty": "ਨੋਟ ਸਮੱਗਰੀ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦੀ।",
   "noteSavedSuccessfully": "ਨੋਟ ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਕੀਤਾ ਗਿਆ!",
-  "selectCollections": "ਸੰਗ੍ਰਹਿ ਚੁਣੋ",
-  "addNote": "ਨੋਟ ਸ਼ਾਮਲ ਕਰੋ",
-  "writeCollectionName": "ਸੰਗ੍ਰਹਿ ਦਾ ਨਾਮ ਲਿਖੋ...",
-  "noCollectionsYetAddANewOne": "ਅਜੇ ਤੱਕ ਕੋਈ ਸੰਗ੍ਰਹਿ ਨਹੀਂ ਹੈ। ਇੱਕ ਨਵਾਂ ਸ਼ਾਮਲ ਕਰੋ!",
+  "selectCollections": "ਕਲੈਕਸ਼ਨ ਚੁਣੋ",
+  "addNote": "ਨੋਟ ਜੋੜੋ",
+  "writeCollectionName": "ਕਲੈਕਸ਼ਨ ਨਾਮ ਲਿਖੋ...",
+  "noCollectionsYetAddANewOne": "ਅਜੇ ਕੋਈ ਕਲੈਕਸ਼ਨ ਨਹੀਂ। ਨਵੀਂ ਜੋੜੋ!",
   "pleaseWriteYourNoteFirst": "ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਆਪਣਾ ਨੋਟ ਲਿਖੋ।",
-  "noCollectionSelected": "ਕੋਈ ਸੰਗ੍ਰਹਿ ਨਹੀਂ ਚੁਣਿਆ ਗਿਆ",
+  "noCollectionSelected": "ਕੋਈ ਕਲੈਕਸ਼ਨ ਚੁਣੀ ਨਹੀਂ ਗਈ",
   "saveNote": "ਨੋਟ ਸੇਵ ਕਰੋ",
-  "nextSelectCollections": "ਅੱਗੇ: ਸੰਗ੍ਰਹਿ ਚੁਣੋ",
-  "addToPinned": "ਪਿੰਨ ਕੀਤੇ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ",
+  "nextSelectCollections": "ਅਗਲਾ: ਕਲੈਕਸ਼ਨ ਚੁਣੋ",
+  "addToPinned": "ਪਿੰਨ ਵਿੱਚ ਜੋੜੋ",
   "pinnedSavedSuccessfully": "ਪਿੰਨ ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਕੀਤਾ ਗਿਆ!",
-  "savePinned": "ਪਿੰਨ ਕੀਤੇ ਨੂੰ ਸੇਵ ਕਰੋ",
+  "savePinned": "ਪਿੰਨ ਸੇਵ ਕਰੋ",
   "closeAudioController": "ਆਡੀਓ ਕੰਟਰੋਲਰ ਬੰਦ ਕਰੋ",
   "previous": "ਪਿਛਲਾ",
-  "rewind": "ਪਿੱਛੇ ਕਰੋ",
-  "fastForward": "ਅੱਗੇ ਵਧਾਓ",
+  "rewind": "ਰੀਵਾਈਂਡ",
+  "fastForward": "ਫਾਸਟ ਫਾਰਵਰਡ",
   "playNextAyah": "ਅਗਲੀ ਆਇਤ ਚਲਾਓ",
   "repeat": "ਦੁਹਰਾਓ",
   "playAsPlaylist": "ਪਲੇਲਿਸਟ ਵਜੋਂ ਚਲਾਓ",
-  "style": "ਸ਼ੈਲੀ: {style}",
+  "style": "ਸਟਾਈਲ: {style}",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
   "stopAndClose": "ਰੋਕੋ ਅਤੇ ਬੰਦ ਕਰੋ",
   "play": "ਚਲਾਓ",
   "pause": "ਰੋਕੋ",
-  "selectReciter": "ਕਰੀ ਚੁਣੋ",
+  "selectReciter": "ਕਾਰੀ ਚੁਣੋ",
   "source": "ਸਰੋਤ: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "newText": "ਨਵਾਂ",
   "more": "ਹੋਰ: ",
-  "cacheNotFound": "ਕੈਸ਼ ਨਹੀਂ ਮਿਲਿਆ",
-  "cacheSize": "ਕੈਸ਼ ਦਾ ਆਕਾਰ",
+  "cacheNotFound": "ਕੈਸ਼ ਨਹੀਂ ਮਿਲੀ",
+  "cacheSize": "ਕੈਸ਼ ਸਾਈਜ਼",
   "error": "ਗਲਤੀ: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "clean": "ਸਾਫ਼ ਕਰੋ",
-  "lastModified": "ਆਖਰੀ ਸੋਧ",
+  "lastModified": "ਆਖਰੀ ਸੰਸ਼ੋਧਿਤ",
   "oneYearAgo": "1 ਸਾਲ ਪਹਿਲਾਂ",
   "monthsAgo": "{number} ਮਹੀਨੇ ਪਹਿਲਾਂ",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "weeksAgo": "{number} ਹਫ਼ਤੇ ਪਹਿਲਾਂ",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "daysAgo": "{number} ਦਿਨ ਪਹਿਲਾਂ",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "hoursAgo": "{hour} ਘੰਟੇ ਪਹਿਲਾਂ",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
   "aboutAlQuran": "ਅਲ ਕੁਰਾਨ ਬਾਰੇ",
   "appFullName": "ਅਲ ਕੁਰਾਨ (ਤਫਸੀਰ, ਨਮਾਜ਼, ਕਿਬਲਾ, ਆਡੀਓ)",
-  "appDescription": "ਐਂਡਰੌਇਡ, ਆਈਓਐਸ, ਮੈਕਓਐਸ, ਵੈੱਬ, ਲੀਨਕਸ ਅਤੇ ਵਿੰਡੋਜ਼ ਲਈ ਇੱਕ ਵਿਆਪਕ ਇਸਲਾਮੀ ਐਪਲੀਕੇਸ਼ਨ, ਜੋ ਤਫਸੀਰ ਅਤੇ ਕਈ ਅਨੁਵਾਦਾਂ (ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਸਮੇਤ) ਨਾਲ ਕੁਰਾਨ ਪੜ੍ਹਨ, ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਨਾਲ ਦੁਨੀਆ ਭਰ ਦੇ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ, ਕਿਬਲਾ ਕੰਪਾਸ, ਅਤੇ ਸਮਕਾਲੀ ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਆਡੀਓ ਪਾਠ ਦੀ ਪੇਸ਼ਕਸ਼ ਕਰਦੀ ਹੈ।",
-  "dataSourcesNote": "ਨੋਟ: ਕੁਰਾਨ ਦੇ ਪਾਠ, ਤਫਸੀਰ, ਅਨੁਵਾਦ, ਅਤੇ ਆਡੀਓ ਸਰੋਤ Quran.com, Everyayah.com, ਅਤੇ ਹੋਰ ਪ੍ਰਮਾਣਿਤ ਖੁੱਲ੍ਹੇ ਸਰੋਤਾਂ ਤੋਂ ਲਏ ਗਏ ਹਨ।",
-  "adFreePromise": "ਇਹ ਐਪ ਅੱਲ੍ਹਾ ਦੀ ਰਜ਼ਾ ਹਾਸਲ ਕਰਨ ਲਈ ਬਣਾਈ ਗਈ ਹੈ। ਇਸ ਲਈ, ਇਹ ਪੂਰੀ ਤਰ੍ਹਾਂ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਹੈ ਅਤੇ ਹਮੇਸ਼ਾ ਰਹੇਗੀ।",
-  "coreFeatures": "ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
-  "coreFeaturesDescription": "ਉਹਨਾਂ ਮੁੱਖ ਕਾਰਜਕੁਸ਼ਲਤਾਵਾਂ ਦੀ ਪੜਚੋਲ ਕਰੋ ਜੋ ਅਲ ਕੁਰਾਨ v3 ਨੂੰ ਤੁਹਾਡੇ ਰੋਜ਼ਾਨਾ ਇਸਲਾਮੀ ਅਭਿਆਸਾਂ ਲਈ ਇੱਕ ਲਾਜ਼ਮੀ ਸਾਧਨ ਬਣਾਉਂਦੀਆਂ ਹਨ:",
-  "prayerTimesTitle": "ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਅਤੇ ਅਲਰਟ",
-  "prayerTimesDescription": "ਵੱਖ-ਵੱਖ ਗਣਨਾ ਵਿਧੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਦੁਨੀਆ ਭਰ ਦੇ ਕਿਸੇ ਵੀ ਸਥਾਨ ਲਈ ਸਹੀ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ। ਅਜ਼ਾਨ ਸੂਚਨਾਵਾਂ ਨਾਲ ਰੀਮਾਈਂਡਰ ਸੈਟ ਕਰੋ।",
-  "qiblaDirectionTitle": "ਕਿਬਲਾ ਦੀ ਦਿਸ਼ਾ",
-  "qiblaDirectionDescription": "ਇੱਕ ਸਪਸ਼ਟ ਅਤੇ ਸਹੀ ਕੰਪਾਸ ਦ੍ਰਿਸ਼ ਨਾਲ ਕਿਬਲਾ ਦੀ ਦਿਸ਼ਾ ਆਸਾਨੀ ਨਾਲ ਲੱਭੋ।",
+  "appDescription": "ਐਂਡਰਾਇਡ, ਆਈਓਐੱਸ, ਮੈਕਓਐੱਸ, ਵੈੱਬ, ਲਿਨਕਸ ਅਤੇ ਵਿੰਡੋਜ਼ ਲਈ ਇੱਕ ਵਿਆਪਕ ਇਸਲਾਮੀ ਐਪਲੀਕੇਸ਼ਨ, ਜੋ ਕੁਰਾਨ ਪੜ੍ਹਨ ਨਾਲ ਤਫਸੀਰ ਅਤੇ ਕਈ ਅਨੁਵਾਦਾਂ (ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਸਮੇਤ), ਵਿਸ਼ਵ ਵਿਆਪੀ ਨਮਾਜ਼ ਸਮਾਂ ਨਾਲ ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ, ਕਿਬਲਾ ਕੰਪਾਸ, ਅਤੇ ਸਿੰਕ੍ਰੋਨਾਈਜ਼ਡ ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਆਡੀਓ ਤਲਾਵਤ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।",
+  "dataSourcesNote": "ਨੋਟ: ਕੁਰਾਨ ਟੈਕਸਟ, ਤਫਸੀਰ, ਅਨੁਵਾਦ ਅਤੇ ਆਡੀਓ ਸਰੋਤ ਕੁਰਾਨ.ਕਾਮ, ਏਵਰੀਆਯਾਹ.ਕਾਮ ਅਤੇ ਹੋਰ ਪ੍ਰਮਾਣਿਤ ਓਪਨ ਸਰੋਤਾਂ ਤੋਂ ਲਏ ਗਏ ਹਨ।",
+  "adFreePromise": "ਇਹ ਐਪ ਅੱਲ੍ਹਾ ਦੀ ਖੁਸ਼ੀ ਲਈ ਬਣਾਈ ਗਈ ਹੈ। ਇਸ ਲਈ, ਇਹ ਪੂਰੀ ਤਰ੍ਹਾਂ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਹੈ ਅਤੇ ਹਮੇਸ਼ਾ ਰਹੇਗੀ।",
+  "coreFeatures": "ਮੁੱਖ ਫੀਚਰਾਂ",
+  "coreFeaturesDescription": "ਅਲ ਕੁਰਾਨ v3 ਨੂੰ ਤੁਹਾਡੀ ਰੋਜ਼ਾਨਾ ਇਸਲਾਮੀ ਅਭਿਆਸਾਂ ਲਈ ਇੱਕ ਅਨਿੱਖੜਵਾਂ ਔਜ਼ਾਰ ਬਣਾਉਣ ਵਾਲੀਆਂ ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਦੀ ਪੜਚੋਲ ਕਰੋ:",
+  "prayerTimesTitle": "ਨਮਾਜ਼ ਸਮਾਂ ਅਤੇ ਅਲਰਟਸ",
+  "prayerTimesDescription": "ਕਿਸੇ ਵੀ ਸਥਾਨ ਲਈ ਵੱਖ ਵੱਖ ਗਣਨਾ ਵਿਧੀਆਂ ਵਰਤ ਕੇ ਸਹੀ ਨਮਾਜ਼ ਸਮਾਂ। ਅਜ਼ਾਨ ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਨਾਲ ਰਿਮਾਈਂਡਰ ਸੈੱਟ ਕਰੋ।",
+  "qiblaDirectionTitle": "ਕਿਬਲਾ ਦਿਸ਼ਾ",
+  "qiblaDirectionDescription": "ਸਾਫ਼ ਅਤੇ ਸਹੀ ਕੰਪਾਸ ਵਿਊ ਨਾਲ ਕਿਬਲਾ ਦਿਸ਼ਾ ਆਸਾਨੀ ਨਾਲ ਲੱਭੋ।",
   "translationTafsirTitle": "ਕੁਰਾਨ ਅਨੁਵਾਦ ਅਤੇ ਤਫਸੀਰ",
-  "translationTafsirDescription": "69 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ 120+ ਅਨੁਵਾਦ ਕਿਤਾਬਾਂ (ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਸਮੇਤ), ਅਤੇ 30+ ਤਫਸੀਰ ਕਿਤਾਬਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ।",
-  "wordByWordAudioTitle": "ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਆਡੀਓ ਅਤੇ ਹਾਈਲਾਈਟਿੰਗ",
-  "wordByWordAudioDescription": "ਇੱਕ ਡੂੰਘੇ ਸਿੱਖਣ ਦੇ ਤਜਰਬੇ ਲਈ ਸਮਕਾਲੀ ਸ਼ਬਦ-ਬ-ਸ਼ਬਦ ਆਡੀਓ ਪਾਠ ਅਤੇ ਹਾਈਲਾਈਟਿੰਗ ਦੇ ਨਾਲ-ਨਾਲ ਚੱਲੋ।",
-  "ayahAudioRecitationTitle": "ਆਇਤ ਆਡੀਓ ਪਾਠ",
-  "ayahAudioRecitationDescription": "40+ ਤੋਂ ਵੱਧ ਪ੍ਰਸਿੱਧ ਕਰੀਆਂ ਤੋਂ ਪੂਰੀ ਆਇਤ ਦੇ ਪਾਠ ਸੁਣੋ।",
-  "notesCloudBackupTitle": "ਕਲਾਉਡ ਬੈਕਅਪ ਨਾਲ ਨੋਟਸ",
-  "notesCloudBackupDescription": "ਨਿੱਜੀ ਨੋਟਸ ਅਤੇ ਵਿਚਾਰਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ, ਕਲਾਉਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਬੈਕਅੱਪ ਕੀਤਾ ਗਿਆ (ਵਿਸ਼ੇਸ਼ਤਾ ਵਿਕਾਸ ਅਧੀਨ/ਜਲਦੀ ਆ ਰਹੀ ਹੈ)।",
-  "crossPlatformSupportTitle": "ਕਰਾਸ-ਪਲੇਟਫਾਰਮ ਸਹਾਇਤਾ",
-  "crossPlatformSupportDescription": "ਐਂਡਰੌਇਡ, ਵੈੱਬ, ਲੀਨਕਸ, ਅਤੇ ਵਿੰਡੋਜ਼ 'ਤੇ ਸਮਰਥਿਤ।",
-  "backgroundAudioPlaybackTitle": "ਬੈਕਗ੍ਰਾਉਂਡ ਆਡੀਓ ਪਲੇਬੈਕ",
-  "backgroundAudioPlaybackDescription": "ਜਦੋਂ ਐਪ ਬੈਕਗ੍ਰਾਉਂਡ ਵਿੱਚ ਹੋਵੇ ਤਾਂ ਵੀ ਕੁਰਾਨ ਦਾ ਪਾਠ ਸੁਣਨਾ ਜਾਰੀ ਰੱਖੋ।",
+  "translationTafsirDescription": "69 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ 120+ ਅਨੁਵਾਦ ਕਿਤਾਬਾਂ (ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਸਮੇਤ), ਅਤੇ 30+ ਤਫਸੀਰ ਕਿਤਾਬਾਂ ਤੱਕ ਪਹੁੰਚ।",
+  "wordByWordAudioTitle": "ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਆਡੀਓ ਅਤੇ ਹਾਈਲਾਈਟਿੰਗ",
+  "wordByWordAudioDescription": "ਇੱਕ ਡੂੰਘੀ ਸਿੱਖਣ ਅਨੁਭਵ ਲਈ ਸਿੰਕ੍ਰੋਨਾਈਜ਼ਡ ਸ਼ਬਦ ਨਾਲ ਸ਼ਬਦ ਆਡੀਓ ਤਲਾਵਤ ਅਤੇ ਹਾਈਲਾਈਟਿੰਗ ਨਾਲ ਨਾਲ ਚੱਲੋ।",
+  "ayahAudioRecitationTitle": "ਆਇਤ ਆਡੀਓ ਤਲਾਵਤ",
+  "ayahAudioRecitationDescription": "40+ ਪ੍ਰਸਿੱਧ ਰੈਸਾਈਟਰਾਂ ਤੋਂ ਪੂਰੀ ਆਇਤ ਤਲਾਵਤਾਂ ਸੁਣੋ।",
+  "notesCloudBackupTitle": "ਨੋਟਸ ਨਾਲ ਕਲਾਊਡ ਬੈਕਅੱਪ",
+  "notesCloudBackupDescription": "ਨਿੱਜੀ ਨੋਟਸ ਅਤੇ ਵਿਚਾਰ ਸੇਵ ਕਰੋ, ਕਲਾਊਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਬੈਕਅੱਪ (ਫੀਚਰ ਵਿਕਾਸ ਅਧੀਨ/ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ)।",
+  "crossPlatformSupportTitle": "ਕਰਾਸ-ਪਲੇਟਫਾਰਮ ਸਪੋਰਟ",
+  "crossPlatformSupportDescription": "ਐਂਡਰਾਇਡ, ਵੈੱਬ, ਲਿਨਕਸ ਅਤੇ ਵਿੰਡੋਜ਼ ਤੇ ਸਪੋਰਟ ਕੀਤਾ ਗਿਆ।",
+  "backgroundAudioPlaybackTitle": "ਬੈਕਗ੍ਰਾਊਂਡ ਆਡੀਓ ਪਲੇਬੈਕ",
+  "backgroundAudioPlaybackDescription": "ਐਪ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਹੋਣ ਤੇ ਵੀ ਕੁਰਾਨ ਤਲਾਵਤ ਸੁਣਨਾ ਜਾਰੀ ਰੱਖੋ।",
   "audioDataCachingTitle": "ਆਡੀਓ ਅਤੇ ਡਾਟਾ ਕੈਸ਼ਿੰਗ",
-  "audioDataCachingDescription": "ਮਜ਼ਬੂਤ ਆਡੀਓ ਅਤੇ ਕੁਰਾਨ ਡਾਟਾ ਕੈਸ਼ਿੰਗ ਨਾਲ ਬਿਹਤਰ ਪਲੇਬੈਕ ਅਤੇ ਔਫਲਾਈਨ ਸਮਰੱਥਾਵਾਂ।",
-  "minimalisticInterfaceTitle": "ਘੱਟੋ-ਘੱਟ ਅਤੇ ਸਾਫ਼ ਇੰਟਰਫੇਸ",
-  "minimalisticInterfaceDescription": "ਉਪਭੋਗਤਾ ਅਨੁਭਵ ਅਤੇ ਪੜ੍ਹਨਯੋਗਤਾ 'ਤੇ ਧਿਆਨ ਕੇਂਦ੍ਰਤ ਕਰਨ ਵਾਲਾ ਨੈਵੀਗੇਟ ਕਰਨ ਵਿੱਚ ਆਸਾਨ ਇੰਟਰਫੇਸ।",
-  "optimizedPerformanceTitle": "ਅਨੁਕੂਲਿਤ ਪ੍ਰਦਰਸ਼ਨ ਅਤੇ ਆਕਾਰ",
-  "optimizedPerformanceDescription": "ਇੱਕ ਵਿਸ਼ੇਸ਼ਤਾ-ਅਮੀਰ ਐਪਲੀਕੇਸ਼ਨ ਜੋ ਹਲਕਾ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨਕਾਰੀ ਹੋਣ ਲਈ ਤਿਆਰ ਕੀਤੀ ਗਈ ਹੈ।",
-  "languageSupport": "ਭਾਸ਼ਾ ਸਹਾਇਤਾ",
-  "languageSupportDescription": "ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਹੇਠ ਲਿਖੀਆਂ ਭਾਸ਼ਾਵਾਂ (ਅਤੇ ਹੋਰ ਲਗਾਤਾਰ ਸ਼ਾਮਲ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ) ਦੇ ਸਮਰਥਨ ਨਾਲ ਇੱਕ ਗਲੋਬਲ ਦਰਸ਼ਕਾਂ ਲਈ ਪਹੁੰਚਯੋਗ ਹੋਣ ਲਈ ਤਿਆਰ ਕੀਤੀ ਗਈ ਹੈ:",
+  "audioDataCachingDescription": "ਮਜ਼ਬੂਤ ਆਡੀਓ ਅਤੇ ਕੁਰਾਨ ਡਾਟਾ ਕੈਸ਼ਿੰਗ ਨਾਲ ਬਿਹਤਰ ਪਲੇਬੈਕ ਅਤੇ ਆਫਲਾਈਨ ਸਮਰੱਥਾਵਾਂ।",
+  "minimalisticInterfaceTitle": "ਮਿਨੀਮਲਿਸਟਿਕ ਅਤੇ ਸਾਫ਼ ਇੰਟਰਫੇਸ",
+  "minimalisticInterfaceDescription": "ਯੂਜ਼ਰ ਅਨੁਭਵ ਅਤੇ ਪੜ੍ਹਨਯੋਗਤਾ ਤੇ ਧਿਆਨ ਨਾਲ ਆਸਾਨ ਨੈਵੀਗੇਸ਼ਨ ਇੰਟਰਫੇਸ।",
+  "optimizedPerformanceTitle": "ਅਨੁਕੂਲਿਤ ਪ੍ਰਦਰਸ਼ਨ ਅਤੇ ਸਾਈਜ਼",
+  "optimizedPerformanceDescription": "ਇੱਕ ਫੀਚਰ-ਰਿਚ ਐਪਲੀਕੇਸ਼ਨ ਜੋ ਹਲਕੀ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨਸ਼ੀਲ ਬਣਾਈ ਗਈ ਹੈ।",
+  "languageSupport": "ਭਾਸ਼ਾ ਸਪੋਰਟ",
+  "languageSupportDescription": "ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਵਿਸ਼ਵ ਵਿਆਪੀ ਦਰਸ਼ਕਾਂ ਲਈ ਪਹੁੰਚਯੋਗ ਬਣਾਈ ਗਈ ਹੈ ਜਿਸ ਵਿੱਚ ਹੇਠ ਲਿਖੀਆਂ ਭਾਸ਼ਾਵਾਂ ਲਈ ਸਪੋਰਟ ਹੈ (ਅਤੇ ਹੋਰ ਨਿਰੰਤਰ ਜੋੜੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ):",
   "technologyAndResources": "ਤਕਨਾਲੋਜੀ ਅਤੇ ਸਰੋਤ",
-  "technologyAndResourcesDescription": "ਇਹ ਐਪ ਅਤਿ-ਆਧੁਨਿਕ ਤਕਨਾਲੋਜੀਆਂ ਅਤੇ ਭਰੋਸੇਯੋਗ ਸਰੋਤਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਬਣਾਈ ਗਈ ਹੈ:",
-  "flutterFrameworkTitle": "ਫਲਟਰ ਫਰੇਮਵਰਕ",
-  "flutterFrameworkDescription": "ਇੱਕ ਸਿੰਗਲ ਕੋਡਬੇਸ ਤੋਂ ਇੱਕ ਸੁੰਦਰ, ਨੇਟਿਵ ਤੌਰ 'ਤੇ ਕੰਪਾਇਲ ਕੀਤੇ, ਬਹੁ-ਪਲੇਟਫਾਰਮ ਅਨੁਭਵ ਲਈ ਫਲਟਰ ਨਾਲ ਬਣਾਇਆ ਗਿਆ ਹੈ।",
-  "advancedAudioEngineTitle": "ਉੱਨਤ ਆਡੀਓ ਇੰਜਣ",
-  "advancedAudioEngineDescription": "ਮਜ਼ਬੂਤ ਆਡੀਓ ਪਲੇਬੈਕ ਅਤੇ ਨਿਯੰਤਰਣ ਲਈ `just_audio` ਅਤੇ `just_audio_background` ਫਲਟਰ ਪੈਕੇਜਾਂ ਦੁਆਰਾ ਸੰਚਾਲਿਤ।",
+  "technologyAndResourcesDescription": "ਇਹ ਐਪ ਅੱਤ ਅਧੁਨਿਕ ਤਕਨਾਲੋਜੀਆਂ ਅਤੇ ਭਰੋਸੇਯੋਗ ਸਰੋਤਾਂ ਨਾਲ ਬਣਾਈ ਗਈ ਹੈ:",
+  "flutterFrameworkTitle": "ਫਲੱਟਰ ਫਰੇਮਵਰਕ",
+  "flutterFrameworkDescription": "ਫਲੱਟਰ ਨਾਲ ਬਣਾਈ ਗਈ ਇੱਕ ਸੁੰਦਰ, ਨੇਟਿਵਲੀ ਕੰਪਾਇਲਡ, ਮਲਟੀ-ਪਲੇਟਫਾਰਮ ਅਨੁਭਵ ਲਈ ਇੱਕ ਸਿੰਗਲ ਕੋਡਬੇਸ ਤੋਂ।",
+  "advancedAudioEngineTitle": "ਅਡਵਾਂਸਡ ਆਡੀਓ ਇੰਜਣ",
+  "advancedAudioEngineDescription": "ਜਸਟ_ਆਡੀਓ ਅਤੇ ਜਸਟ_ਆਡੀਓ_ਬੈਕਗ੍ਰਾਊਂਡ ਫਲੱਟਰ ਪੈਕੇਜਾਂ ਨਾਲ ਸੰਚਾਲਿਤ ਮਜ਼ਬੂਤ ਆਡੀਓ ਪਲੇਬੈਕ ਅਤੇ ਕੰਟਰੋਲ ਲਈ।",
   "reliableQuranDataTitle": "ਭਰੋਸੇਯੋਗ ਕੁਰਾਨ ਡਾਟਾ",
-  "reliableQuranDataDescription": "ਅਲ ਕੁਰਾਨ ਦੇ ਪਾਠ, ਅਨੁਵਾਦ, ਤਫਸੀਰ, ਅਤੇ ਆਡੀਓ Quran.com ਅਤੇ Everyayah.com ਵਰਗੇ ਪ੍ਰਮਾਣਿਤ ਖੁੱਲ੍ਹੇ APIs ਅਤੇ ਡੇਟਾਬੇਸ ਤੋਂ ਪ੍ਰਾਪਤ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।",
-  "prayerTimeEngineTitle": "ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਦਾ ਇੰਜਣ",
-  "prayerTimeEngineDescription": "ਸਹੀ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਲਈ ਸਥਾਪਿਤ ਗਣਨਾ ਵਿਧੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ। ਸੂਚਨਾਵਾਂ `flutter_local_notifications` ਅਤੇ ਬੈਕਗ੍ਰਾਉਂਡ ਕਾਰਜਾਂ ਦੁਆਰਾ ਸੰਭਾਲੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।",
-  "crossPlatformSupport": "ਕਰਾਸ ਪਲੇਟਫਾਰਮ ਸਹਾਇਤਾ",
-  "crossPlatformSupportDescription2": "ਵੱਖ-ਵੱਖ ਪਲੇਟਫਾਰਮਾਂ 'ਤੇ ਸਹਿਜ ਪਹੁੰਚ ਦਾ ਆਨੰਦ ਮਾਣੋ:",
-  "android": "ਐਂਡਰੌਇਡ",
-  "ios": "iOS",
-  "macos": "macOS",
+  "reliableQuranDataDescription": "ਅਲ ਕੁਰਾਨ ਟੈਕਸਟ, ਅਨੁਵਾਦ, ਤਫਸੀਰ ਅਤੇ ਆਡੀਓ ਪ੍ਰਮਾਣਿਤ ਓਪਨ ਏਪੀਆਈ ਅਤੇ ਡੇਟਾਬੇਸ ਜਿਵੇਂ ਕੁਰਾਨ.ਕਾਮ ਅਤੇ ਏਵਰੀਆਯਾਹ.ਕਾਮ ਤੋਂ ਲਏ ਗਏ ਹਨ।",
+  "prayerTimeEngineTitle": "ਨਮਾਜ਼ ਸਮਾਂ ਇੰਜਣ",
+  "prayerTimeEngineDescription": "ਸਹੀ ਨਮਾਜ਼ ਸਮਾਂ ਲਈ ਸਥਾਪਿਤ ਗਣਨਾ ਵਿਧੀਆਂ ਵਰਤਦਾ ਹੈ। ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਫਲੱਟਰ_ਲੋਕਲ_ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਅਤੇ ਬੈਕਗ੍ਰਾਊਂਡ ਟਾਸਕਾਂ ਨਾਲ ਸੰਭਾਲੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।",
+  "crossPlatformSupport": "ਕਰਾਸ ਪਲੇਟਫਾਰਮ ਸਪੋਰਟ",
+  "crossPlatformSupportDescription2": "ਵੱਖ ਵੱਖ ਪਲੇਟਫਾਰਮਾਂ ਤੇ ਸੀਮਲੈੱਸ ਪਹੁੰਚ ਦਾ ਆਨੰਦ ਲਓ:",
+  "android": "ਐਂਡਰਾਇਡ",
+  "ios": "ਆਈਓਐੱਸ",
+  "macos": "ਮੈਕਓਐੱਸ",
   "web": "ਵੈੱਬ",
-  "linux": "ਲੀਨਕਸ",
+  "linux": "ਲਿਨਕਸ",
   "windows": "ਵਿੰਡੋਜ਼",
   "ourLifetimePromise": "ਸਾਡਾ ਜੀਵਨ ਭਰ ਦਾ ਵਾਅਦਾ",
-  "lifetimePromiseDescription": "ਮੈਂ ਨਿੱਜੀ ਤੌਰ 'ਤੇ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਆਪਣੀ ਪੂਰੀ ਜ਼ਿੰਦਗੀ, ਇੰਸ਼ਾਅੱਲ੍ਹਾ, ਨਿਰੰਤਰ ਸਹਾਇਤਾ ਅਤੇ ਰੱਖ-ਰਖਾਅ ਪ੍ਰਦਾਨ ਕਰਨ ਦਾ ਵਾਅਦਾ ਕਰਦਾ ਹਾਂ। ਮੇਰਾ ਟੀਚਾ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣਾ ਹੈ ਕਿ ਇਹ ਐਪ ਆਉਣ ਵਾਲੇ ਸਾਲਾਂ ਲਈ ਉੱਮਤ ਲਈ ਇੱਕ ਲਾਭਦਾਇਕ ਸਰੋਤ ਬਣਿਆ ਰਹੇ।",
+  "lifetimePromiseDescription": "ਮੈਂ ਵਿਅਕਤੀਗਤ ਤੌਰ ਤੇ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਨਿਰੰਤਰ ਸਪੋਰਟ ਅਤੇ ਮੇਨਟੇਨੈਂਸ ਪ੍ਰਦਾਨ ਕਰਨ ਦਾ ਵਾਅਦਾ ਕਰਦਾ ਹਾਂ, ਇੰਸ਼ਾ ਅੱਲ੍ਹਾ। ਮੇਰਾ ਟੀਚਾ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣਾ ਹੈ ਕਿ ਇਹ ਐਪ ਆਉਣ ਵਾਲੇ ਸਾਲਾਂ ਲਈ ਉਮਮਾ ਲਈ ਲਾਭਕਾਰੀ ਸਰੋਤ ਰਹੇ।",
   "fajr": "ਫਜਰ",
   "sunrise": "ਸੂਰਜ ਚੜ੍ਹਨਾ",
-  "dhuhr": "ਜ਼ੁਹਰ",
+  "dhuhr": "ਜ਼ੋਹਰ",
   "asr": "ਅਸਰ",
-  "maghrib": "ਮਗ਼ਰਿਬ",
-  "isha": "ਈਸ਼ਾ",
+  "maghrib": "ਮਗਰਿਬ",
+  "isha": "ਇਸ਼ਾ",
   "midnight": "ਅੱਧੀ ਰਾਤ",
   "alarm": "ਅਲਾਰਮ",
-  "notification": "ਸੂਚਨਾ",
+  "notification": "ਨੋਟੀਫਿਕੇਸ਼ਨ",
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
   "quranScriptTajweed": "ਤਜਵੀਦ",
-  "quranScriptUthmani": "ਉਸਮਾਨੀ",
+  "quranScriptUthmani": "ਉਥਮਾਨੀ",
   "quranScriptIndopak": "ਇੰਡੋਪਾਕ",
   "sajdaAyah": "ਸਜਦਾ ਆਇਤ",
-  "required": "ਜ਼ਰੂਰੀ",
-  "optional": "ਵਿਕਲਪਿਕ",
-  "notificationScheduleWarning": "ਨੋਟ: ਤੁਹਾਡੇ ਫ਼ੋਨ ਦੇ OS ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਪਾਬੰਦੀਆਂ ਕਾਰਨ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਖੁੰਝ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਨ ਲਈ: Vivo ਦਾ Origin OS, Samsung ਦਾ One UI, Oppo ਦਾ ColorOS ਆਦਿ ਕਈ ਵਾਰ ਅਨੁਸੂਚਿਤ ਸੂਚਨਾ ਜਾਂ ਰੀਮਾਈਂਡਰ ਨੂੰ ਬੰਦ ਕਰ ਦਿੰਦੇ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਐਪ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰਕਿਰਿਆ ਤੋਂ ਪ੍ਰਤਿਬੰਧਿਤ ਨਾ ਕਰਨ ਲਈ ਆਪਣੀਆਂ OS ਸੈਟਿੰਗਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।",
-  "scrollWithRecitation": "ਪਾਠ ਦੇ ਨਾਲ ਸਕ੍ਰੋਲ ਕਰੋ",
-  "quickAccess": "ਤੁਰੰਤ ਪਹੁੰਚ",
-  "initiallyScrollAyah": "ਸ਼ੁਰੂ ਵਿੱਚ ਆਯਾਹ 'ਤੇ ਸਕ੍ਰੋਲ ਕਰੋ",
+  "required": "ਲੋੜੀਂਦਾ",
+  "optional": "ਵਿਕਲਪੀ",
+  "notificationScheduleWarning": "ਨੋਟ: ਸ਼ੈਡਿਊਲਡ ਨੋਟੀਫਿਕੇਸ਼ਨ ਜਾਂ ਰਿਮਾਈਂਡਰ ਤੁਹਾਡੇ ਫੋਨ ਦੇ ਓਐੱਸ ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰੋਸੈੱਸ ਪਾਬੰਦੀਆਂ ਕਰਕੇ ਮਿਸ ਹੋ ਸਕਦੇ ਹਨ। ਉਦਾਹਰਣ ਵਜੋਂ: ਵੀਵੋ ਦਾ ਓਰਿਜਿਨ ਓਐੱਸ, ਸੈਮਸੰਗ ਦਾ ਵਨ ਯੂਆਈ, ਓਪੋ ਦਾ ਕਲਰਓਐੱਸ ਆਦਿ ਕਈ ਵਾਰ ਸ਼ੈਡਿਊਲਡ ਨੋਟੀਫਿਕੇਸ਼ਨ ਜਾਂ ਰਿਮਾਈਂਡਰ ਨੂੰ ਮਾਰ ਦਿੰਦੇ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਓਐੱਸ ਸੈਟਿੰਗਾਂ ਨੂੰ ਚੈੱਕ ਕਰੋ ਤਾਂ ਜੋ ਐਪ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਪ੍ਰੋਸੈੱਸ ਤੋਂ ਪਾਬੰਦੀ ਨਾ ਲਗਾਈ ਜਾਵੇ।",
+  "scrollWithRecitation": "ਤਲਾਵਤ ਨਾਲ ਸਕ੍ਰੌਲ ਕਰੋ",
+  "quickAccess": "ਤੇਜ਼ ਪਹੁੰਚ",
+  "initiallyScrollAyah": "ਸ਼ੁਰੂ ਵਿੱਚ ਆਇਤ ਵੱਲ ਸਕ੍ਰੌਲ ਕਰੋ",
   "tajweedGuide": "ਤਜਵੀਦ ਗਾਈਡ",
-  "scrollWithRecitationDesc": "ਜਦੋਂ ਸਮਰੱਥ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਕੁਰਾਨ ਦੀ ਆਇਤ ਆਡੀਓ ਪਾਠ ਦੇ ਨਾਲ ਸਿੰਕ ਵਿੱਚ ਆਪਣੇ ਆਪ ਸਕ੍ਰੋਲ ਹੋ ਜਾਵੇਗੀ।",
-  "configuration": "ਸੰਰਚਨਾ",
+  "scrollWithRecitationDesc": "ਚਾਲੂ ਕੀਤੇ ਜਾਣ ਤੇ, ਕੁਰਾਨ ਆਇਤ ਆਡੀਓ ਤਲਾਵਤ ਨਾਲ ਸਿੰਕ ਵਿੱਚ ਆਪਣੇ ਆਪ ਸਕ੍ਰੌਲ ਕਰੇਗੀ।",
+  "configuration": "ਕੌਂਫਿਗਰੇਸ਼ਨ",
   "restoreFromBackup": "ਬੈਕਅੱਪ ਤੋਂ ਰੀਸਟੋਰ ਕਰੋ",
   "history": "ਇਤਿਹਾਸ",
   "search": "ਖੋਜ",
-  "useAudioStream": "ਆਡੀਓ ਸਟ੍ਰੀਮ ਦੀ ਵਰਤੋਂ ਕਰੋ",
-  "useAudioStreamDesc": "ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਬਜਾਏ ਇੰਟਰਨੈਟ ਤੋਂ ਸਿੱਧਾ ਆਡੀਓ ਸਟ੍ਰੀਮ ਕਰੋ।",
-  "notUseAudioStreamDesc": "ਔਫਲਾਈਨ ਵਰਤੋਂ ਲਈ ਆਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ ਅਤੇ ਡਾਟਾ ਦੀ ਖਪਤ ਘਟਾਓ।",
-  "audioSettings": "ਆਡੀਓ ਸੈਟਿੰਗਜ਼",
+  "useAudioStream": "ਆਡੀਓ ਸਟ੍ਰੀਮ ਵਰਤੋ",
+  "useAudioStreamDesc": "ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਬਜਾਏ ਇੰਟਰਨੈੱਟ ਤੋਂ ਸਿੱਧਾ ਆਡੀਓ ਸਟ੍ਰੀਮ ਕਰੋ।",
+  "notUseAudioStreamDesc": "ਆਫਲਾਈਨ ਵਰਤੋਂ ਲਈ ਆਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ ਅਤੇ ਡਾਟਾ ਖਪਤ ਘਟਾਓ।",
+  "audioSettings": "ਆਡੀਓ ਸੈਟਿੰਗਾਂ",
   "playbackSpeed": "ਪਲੇਬੈਕ ਸਪੀਡ",
-  "playbackSpeedDesc": "ਕੁਰਾਨ ਪਾਠ ਦੀ ਗਤੀ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰੋ।",
-  "waitForCurrentDownloadToFinish": "ਕਿਰਪਾ ਕਰਕੇ ਮੌਜੂਦਾ ਡਾਊਨਲੋਡ ਦੇ ਮੁਕੰਮਲ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੋ।",
-  "areYouSure": "ਕੀ ਤੁਹਾਨੂੰ ਯਕੀਨ ਹੈ?",
-  "checkYourInternetConnection": "ਆਪਣਾ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਚੈੱਕ ਕਰੋ।",
-  "audioDownload": "ਆਡੀਓ ਡਾਊਨਲੋਡ",
+  "playbackSpeedDesc": "ਕੁਰਾਨ ਤਲਾਵਤ ਦੀ ਸਪੀਡ ਅਡਜੱਸਟ ਕਰੋ।",
+  "waitForCurrentDownloadToFinish": "ਕਿਰਪਾ ਕਰਕੇ ਮੌਜੂਦਾ ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੋ।",
+  "areYouSure": "ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਹੋ?",
+  "checkYourInternetConnection": "ਆਪਣਾ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਚੈੱਕ ਕਰੋ।",
+  "audioDownloadAlert": "{totalVersesCount} ਆਇਤਾਂ ਵਿੱਚੋਂ {requiredDownload} ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
   "download": "ਡਾਊਨਲੋਡ",
-  "audioDownloadAlert": "{totalVersesCount} ਆਇਤਾਂ ਵਿੱਚੋਂ {requiredDownload} ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।",
-  "am": "AM",
-  "pm": "PM",
-  "optimizingQuranScript": "ਕੁਰਾਨ ਸਕਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾ ਰਿਹਾ ਹੈ"
+  "audioDownload": "ਆਡੀਓ ਡਾਊਨਲੋਡ",
+  "am": "ਸਵੇਰੇ",
+  "pm": "ਸ਼ਾਮ ਨੂੰ",
+  "optimizingQuranScript": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਰਿਹਾ ਹੈ"
 }
