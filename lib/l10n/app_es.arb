@@ -1,54 +1,115 @@
 {
   "@@locale": "es",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
-  "tafsirNotAvailable": "El Tafsir no está disponible para {ayahKey}",
-  "tafsirFoundAt": "El Tafsir se encuentra en: {anotherAyahLinkKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirNotAvailable": "El tafsir no está disponible para {ayahKey}",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "El tafsir se encuentra en: {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
   "tafsirJumpTo": "Ir a {anotherAyahLinkKey}",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
   "hizb": "Hizb",
   "juz": "Juz",
   "page": "Página",
   "ruku": "Ruku",
-  "languageSettings": "Configuración de Idioma",
-  "surahAyah": "{surahName}, {ayahKey}",
-  "ayahsCount": "{count} Aleyas",
-  "saveAndDownload": "Guardar y Descargar",
-  "appLanguage": "Idioma de la App",
-  "selectAppLanguage": "Seleccionar idioma de la app...",
-  "pleaseSelectOne": "Por favor, seleccione uno",
-  "quranTranslationLanguage": "Idioma de Traducción del Corán",
-  "selectTranslationLanguage": "Seleccionar idioma de traducción...",
-  "quranTranslationBook": "Libro de Traducción del Corán",
-  "selectTranslationBook": "Seleccionar libro de traducción...",
-  "quranTafsirLanguage": "Idioma del Tafsir del Corán",
-  "selectTafsirLanguage": "Seleccionar idioma del tafsir...",
-  "quranTafsirBook": "Libro de Tafsir del Corán",
-  "selectTafsirBook": "Seleccionar libro de tafsir...",
-  "quranScriptAndStyle": "Escritura y Estilo del Corán",
+  "languageSettings": "Configuración de idioma",
+  "surahAyah": "{surahName} {ayahKey}",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "ayahsCount": "{count} aleyas",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "Guardar y descargar",
+  "appLanguage": "Idioma de la app",
+  "selectAppLanguage": "Selecciona el idioma de la app...",
+  "pleaseSelectOne": "Por favor, selecciona uno",
+  "quranTranslationLanguage": "Idioma de traducción del Corán",
+  "selectTranslationLanguage": "Selecciona el idioma de traducción...",
+  "quranTranslationBook": "Libro de traducción del Corán",
+  "selectTranslationBook": "Selecciona el libro de traducción...",
+  "quranTafsirLanguage": "Idioma de tafsir del Corán",
+  "selectTafsirLanguage": "Selecciona el idioma de tafsir...",
+  "quranTafsirBook": "Libro de tafsir del Corán",
+  "selectTafsirBook": "Selecciona el libro de tafsir...",
+  "quranScriptAndStyle": "Estilo y script del Corán",
   "justAMoment": "Un momento...",
   "processProgress": "{processName} {percentage}",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
   "success": "Éxito",
   "retry": "Reintentar",
-  "unableToDownloadResources": "No se pudieron descargar los recursos...\nAlgo salió mal",
-  "downloadingSegmentedQuranRecitation": "Descargando Recitación Segmentada del Corán",
-  "processingSegmentedQuranRecitation": "Procesando Recitación Segmentada del Corán",
+  "unableToDownloadResources": "No se pueden descargar los recursos...\nAlgo salió mal",
+  "downloadingSegmentedQuranRecitation": "Descargando recitación segmentada del Corán",
+  "processingSegmentedQuranRecitation": "Procesando recitación segmentada del Corán",
   "footnote": "Nota al pie",
   "tafsir": "Tafsir",
-  "wordByWord": "Palabra por Palabra",
-  "pleaseSelectRequiredOption": "Por favor, seleccione la opción requerida",
-  "rememberHomeTab": "Recordar Pestaña de Inicio",
+  "wordByWord": "Palabra por palabra",
+  "pleaseSelectRequiredOption": "Por favor, selecciona la opción requerida",
+  "rememberHomeTab": "Recordar pestaña de inicio",
   "rememberHomeTabSubtitle": "La app recordará la última pestaña abierta en la pantalla de inicio.",
-  "wakeLock": "Mantener Pantalla Encendida",
+  "wakeLock": "Bloqueo de pantalla",
   "wakeLockSubtitle": "Evita que la pantalla se apague automáticamente.",
-  "settings": "Configuración",
-  "appTheme": "Tema de la App",
+  "settings": "Configuraciones",
+  "appTheme": "Tema de la app",
   "quranStyle": "Estilo del Corán",
-  "changeTheme": "Cambiar Tema",
-  "verseCount": "Número de Aleyas: ",
+  "changeTheme": "Cambiar tema",
+  "verseCount": "Número de versos: ",
   "translation": "Traducción",
-  "tafsirNotFound": "No Encontrado",
+  "tafsirNotFound": "No encontrado",
   "moreInfo": "más info",
-  "playAudio": "Reproducir Audio",
-  "preview": "Vista Previa",
+  "playAudio": "Reproducir audio",
+  "preview": "Vista previa",
   "loading": "Cargando...",
   "errorFetchingAddress": "Error al obtener la dirección",
   "addressNotAvailable": "Dirección no disponible",
@@ -57,34 +118,48 @@
   "name": "Nombre: ",
   "location": "Ubicación: ",
   "parameters": "Parámetros: ",
-  "selectCalculationMethod": "Seleccionar Método de Cálculo",
-  "shareSelectAyahs": "Compartir Aleyas Seleccionadas",
-  "selectionEmpty": "Selección Vacía",
-  "generatingImagePleaseWait": "Generando imagen... Por favor, espere",
-  "asImage": "Como Imagen",
-  "asText": "Como Texto",
-  "playFromSelectedAyah": "Reproducir desde la Aleya Seleccionada",
-  "toTafsir": "Ir al Tafsir",
-  "selectAyah": "Seleccionar Aleya",
-  "toAyah": "Ir a la Aleya",
+  "selectCalculationMethod": "Selecciona el método de cálculo",
+  "shareSelectAyahs": "Compartir aleyas seleccionadas",
+  "selectionEmpty": "Selección vacía",
+  "generatingImagePleaseWait": "Generando imagen... Por favor espera",
+  "asImage": "Como imagen",
+  "asText": "Como texto",
+  "playFromSelectedAyah": "Reproducir desde la aleya seleccionada",
+  "toTafsir": "A tafsir",
+  "selectAyah": "Selecciona aleya",
+  "toAyah": "A aleya",
   "searchForASurah": "Buscar una sura",
-  "bugReportTitle": "Informe de Error",
-  "audioCached": "Audio en Caché",
+  "bugReportTitle": "Reporte de error",
+  "audioCached": "Audio en caché",
   "others": "Otros",
-  "quranTranslationAyahOneMustEnabled": "Corán|Traducción|Aleya, al menos uno debe estar habilitado",
-  "quranFontSize": "Tamaño de Fuente del Corán",
-  "quranLineHeight": "Altura de Línea del Corán",
-  "translationAndTafsirFontSize": "Tamaño de Fuente de Traducción y Tafsir",
+  "quranTranslationAyahOneMustEnabled": "Corán|Traducción|Aleya, uno debe estar activado",
+  "quranFontSize": "Tamaño de fuente del Corán",
+  "quranLineHeight": "Altura de línea del Corán",
+  "translationAndTafsirFontSize": "Tamaño de fuente de traducción y tafsir",
   "quranAyah": "Aleya del Corán",
-  "topToolbar": "Barra de Herramientas Superior",
-  "keepOpenWordByWord": "Mantener Abierto Palabra por Palabra",
-  "wordByWordHighlight": "Resaltado Palabra por Palabra",
-  "quranScriptSettings": "Configuración de Escritura del Corán",
+  "topToolbar": "Barra superior",
+  "keepOpenWordByWord": "Mantener abierto palabra por palabra",
+  "wordByWordHighlight": "Resaltar palabra por palabra",
+  "quranScriptSettings": "Configuraciones de script del Corán",
   "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
   "pageNumber": "Página: ",
   "quranResources": "Recursos del Corán",
   "alreadySelected": "El idioma '{name}' ya está seleccionado.",
-  "unableToGetCompassData": "No se pudieron obtener los datos de la brújula",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unableToGetCompassData": "No se pueden obtener datos de la brújula",
   "deviceDoesNotHaveSensors": "¡El dispositivo no tiene sensores!",
   "north": "N",
   "east": "E",
@@ -92,64 +167,123 @@
   "west": "O",
   "address": "Dirección: ",
   "change": "Cambiar",
-  "calculationMethod": "Método de Cálculo: ",
-  "downloadPrayerTime": "Descargar Horarios de Oración",
+  "calculationMethod": "Método de cálculo: ",
+  "downloadPrayerTime": "Descargar horarios de oración",
   "calculationMethodsListEmpty": "La lista de métodos de cálculo está vacía.",
-  "noCalculationMethodWithLocationData": "No se encontró ningún método de cálculo con los datos de ubicación.",
-  "prayerSettings": "Configuración de Oración",
-  "reminderSettings": "Configuración de Recordatorios",
-  "adjustReminderTime": "Ajustar Hora del Recordatorio",
-  "enforceAlarmSound": "Forzar Sonido de la Alarma",
-  "enforceAlarmSoundDescription": "Si está activada, esta función reproducirá la alarma al volumen establecido aquí, incluso si el sonido de su teléfono está bajo. Esto asegura que no se pierda la alarma debido al bajo volumen del teléfono.",
+  "noCalculationMethodWithLocationData": "No se encontró ningún método de cálculo con datos de ubicación.",
+  "prayerSettings": "Configuraciones de oración",
+  "reminderSettings": "Configuraciones de recordatorios",
+  "adjustReminderTime": "Ajustar tiempo de recordatorio",
+  "enforceAlarmSound": "Forzar sonido de alarma",
+  "enforceAlarmSoundDescription": "Si está activado, esta función reproducirá la alarma al volumen establecido aquí, incluso si el sonido de tu teléfono está bajo. Esto asegura que no te pierdas la alarma por volumen bajo.",
   "volume": "Volumen",
   "atPrayerTime": "A la hora de la oración",
   "minBefore": "{minutes} min antes",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "minAfter": "{minutes} min después",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "prayerTimeIsAt": "{prayerName} es a las {prayerTime}",
-  "itsTimeOf": "Es la hora de {prayerName}",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "Es hora de {prayerName}",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
   "stopTheAdhan": "Detener el Adhan",
-  "dateFoundEmpty": "{date} Encontrado Vacío",
+  "dateFoundEmpty": "{date} encontrado vacío",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "today": "Hoy",
-  "left": "Quedan",
-  "reminderAdded": "Recordatorio para {prayerName} añadido",
-  "allowNotificationPermission": "Por favor, permita el permiso de notificaciones para usar esta función",
+  "left": "Restante",
+  "reminderAdded": "Recordatorio para {prayerName} agregado",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "Por favor, permite el permiso de notificaciones para usar esta función",
   "reminderRemoved": "Recordatorio para {prayerName} eliminado",
-  "getPrayerTimesAndQibla": "Obtener Horarios de Oración y Qibla",
-  "getPrayerTimesAndQiblaDescription": "Calcular los horarios de oración y la Qibla para cualquier ubicación.",
-  "getFromGPS": "Obtener desde GPS",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "Obtener horarios de oración y Qibla",
+  "getPrayerTimesAndQiblaDescription": "Calcula horarios de oración y Qibla para cualquier ubicación dada.",
+  "getFromGPS": "Obtener del GPS",
   "or": "O",
-  "selectYourCity": "Seleccione su Ciudad",
-  "noteAboutGPS": "Nota: Si no desea usar el GPS o no se siente seguro, puede seleccionar su ciudad.",
+  "selectYourCity": "Selecciona tu ciudad",
+  "noteAboutGPS": "Nota: Si no quieres usar GPS o no te sientes seguro, puedes seleccionar tu ciudad.",
   "downloadingLocationResources": "Descargando recursos de ubicación...",
   "somethingWentWrong": "Algo salió mal",
-  "selectYourCountry": "Seleccione su País",
+  "selectYourCountry": "Selecciona tu país",
   "searchForACountry": "Buscar un país",
-  "selectYourAdministrator": "Seleccione su Administrador",
+  "selectYourAdministrator": "Selecciona tu administrador",
   "searchForAnAdministrator": "Buscar un administrador",
   "searchForACity": "Buscar una ciudad",
-  "pleaseEnableLocationService": "Por favor, active el servicio de ubicación",
-  "donateUs": "Dónanos",
+  "pleaseEnableLocationService": "Por favor, activa el servicio de ubicación",
+  "donateUs": "Donar",
   "underDevelopment": "En desarrollo",
   "versionLoading": "Cargando...",
-  "alQuran": "Al Quran",
-  "mainMenu": "Menú Principal",
+  "alQuran": "Al Corán",
+  "mainMenu": "Menú principal",
   "notes": "Notas",
   "pinned": "Fijados",
-  "jumpToAyah": "Ir a la Aleya",
-  "shareMultipleAyah": "Compartir Múltiples Aleyas",
-  "shareThisApp": "Compartir esta App",
-  "giveRating": "Calificar",
-  "bugReport": "Informe de Error",
-  "privacyPolicy": "Política de Privacidad",
-  "aboutTheApp": "Acerca de la App",
-  "resetTheApp": "Restablecer la App",
-  "resetAppWarningTitle": "Restablecer Datos de la App",
-  "resetAppWarningMessage": "¿Estás seguro de que quieres restablecer la aplicación? Todos tus datos se perderán y tendrás que configurar la aplicación desde el principio.",
+  "jumpToAyah": "Ir a aleya",
+  "shareMultipleAyah": "Compartir múltiples aleyas",
+  "shareThisApp": "Compartir esta app",
+  "giveRating": "Dar calificación",
+  "bugReport": "Reporte de error",
+  "privacyPolicy": "Política de privacidad",
+  "aboutTheApp": "Sobre la app",
+  "resetTheApp": "Restablecer la app",
+  "resetAppWarningTitle": "Restablecer datos de la app",
+  "resetAppWarningMessage": "¿Estás seguro de que quieres restablecer la app? Todos tus datos se perderán y tendrás que configurar la app desde el principio.",
   "cancel": "Cancelar",
   "reset": "Restablecer",
-  "shareAppSubject": "¡Echa un vistazo a esta app de Al Quran!",
-  "shareAppBody": "¡As-salamu alaykum! Echa un vistazo a esta app de Al Quran para la lectura y reflexión diaria. Ayuda a conectar con las palabras de Allah. Descárgala aquí: {appLink}",
-  "openDrawerTooltip": "Abrir Menú",
+  "shareAppSubject": "¡Mira esta app de Al Corán!",
+  "shareAppBody": "¡Assalamualaikum! Mira esta app de Al Corán para lectura y reflexión diaria. Ayuda a conectar con las palabras de Allah. Descárgala aquí: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "Abrir cajón",
   "quran": "Corán",
   "prayer": "Oración",
   "qibla": "Qibla",
@@ -157,137 +291,242 @@
   "surah": "Sura",
   "pages": "Páginas",
   "note": "Nota:",
-  "linkedAyahs": "Aleyas Vinculadas:",
-  "emptyNoteCollection": "Esta colección de notas está vacía.\nAñade algunas notas para verlas aquí.",
-  "emptyPinnedCollection": "Aún no hay aleyas fijadas en esta colección.\nFija aleyas para verlas aquí.",
+  "linkedAyahs": "Aleyas vinculadas:",
+  "emptyNoteCollection": "Esta colección de notas está vacía.\nAgrega algunas notas para verlas aquí.",
+  "emptyPinnedCollection": "No hay aleyas fijadas en esta colección aún.\nFija aleyas para verlas aquí.",
   "noContentAvailable": "No hay contenido disponible.",
-  "failedToLoadCollections": "Error al cargar las colecciones: {error}",
-  "searchByCollectionName": "Buscar por Nombre de {collectionType}...",
+  "failedToLoadCollections": "Error al cargar colecciones: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "Buscar por nombre de {collectionType}...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "sortBy": "Ordenar por",
-  "noCollectionAddedYet": "Aún no se ha añadido ninguna {collectionType}",
+  "noCollectionAddedYet": "No se ha agregado {collectionType} aún",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "pinnedItemsCount": "{count} elementos fijados",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "notesCount": "{count} notas",
-  "emptyNameNotAllowed": "No se permite un nombre vacío",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "Nombre vacío no permitido",
   "updatedTo": "Actualizado a {collectionName}",
-  "changeName": "Cambiar Nombre",
-  "changeColor": "Cambiar Color",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "changeName": "Cambiar nombre",
+  "changeColor": "Cambiar color",
   "colorUpdated": "Color actualizado",
-  "collectionDeleted": "{collectionName} Eliminada",
+  "collectionDeleted": "{collectionName} eliminado",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "delete": "Eliminar",
   "save": "Guardar",
   "collectionNameCannotBeEmpty": "El nombre de la colección no puede estar vacío.",
-  "addedNewCollection": "Nueva Colección Añadida",
-  "ayahCount": "{count} Aleya",
+  "addedNewCollection": "Nueva colección agregada",
+  "ayahCount": "{count} aleya",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "byNameAtoZ": "Nombre A-Z",
   "byNameZtoA": "Nombre Z-A",
-  "byElementNumberAscending": "Número de Elemento Ascendente",
-  "byElementNumberDescending": "Número de Elemento Descendente",
-  "byUpdateDateAscending": "Fecha de Actualización Ascendente",
-  "byUpdateDateDescending": "Fecha de Actualización Descendente",
-  "byCreateDateAscending": "Fecha de Creación Ascendente",
-  "byCreateDateDescending": "Fecha de Creación Descendente",
-  "translationNotFound": "Traducción No Encontrada",
+  "byElementNumberAscending": "Número de elemento ascendente",
+  "byElementNumberDescending": "Número de elemento descendente",
+  "byUpdateDateAscending": "Fecha de actualización ascendente",
+  "byUpdateDateDescending": "Fecha de actualización descendente",
+  "byCreateDateAscending": "Fecha de creación ascendente",
+  "byCreateDateDescending": "Fecha de creación descendente",
+  "translationNotFound": "Traducción no encontrada",
   "translationTitle": "Traducción:",
-  "footNoteTitle": "Nota al Pie:",
-  "wordByWordTranslation": "Traducción Palabra por Palabra:",
+  "footNoteTitle": "Nota al pie:",
+  "wordByWordTranslation": "Traducción palabra por palabra:",
   "tafsirButton": "Tafsir",
   "shareButton": "Compartir",
-  "addNoteButton": "Añadir Nota",
-  "pinToCollectionButton": "Fijar a Colección",
-  "shareAsText": "Compartir como Texto",
-  "copiedWithTafsir": "Copiado con Tafsir",
-  "shareAsImage": "Compartir como Imagen",
-  "shareWithTafsir": "Compartir con Tafsir",
+  "addNoteButton": "Agregar nota",
+  "pinToCollectionButton": "Fijar a colección",
+  "shareAsText": "Compartir como texto",
+  "copiedWithTafsir": "Copiado con tafsir",
+  "shareAsImage": "Compartir como imagen",
+  "shareWithTafsir": "Compartir con tafsir",
   "notFound": "No encontrado",
   "noteContentCannotBeEmpty": "El contenido de la nota no puede estar vacío.",
   "noteSavedSuccessfully": "¡Nota guardada con éxito!",
-  "selectCollections": "Seleccionar Colecciones",
-  "addNote": "Añadir Nota",
+  "selectCollections": "Selecciona colecciones",
+  "addNote": "Agregar nota",
   "writeCollectionName": "Escribe el nombre de la colección...",
-  "noCollectionsYetAddANewOne": "Aún no hay colecciones. ¡Añade una nueva!",
+  "noCollectionsYetAddANewOne": "No hay colecciones aún. ¡Agrega una nueva!",
   "pleaseWriteYourNoteFirst": "Por favor, escribe tu nota primero.",
-  "noCollectionSelected": "Ninguna colección seleccionada",
-  "saveNote": "Guardar Nota",
-  "nextSelectCollections": "Siguiente: Seleccionar Colecciones",
-  "addToPinned": "Añadir a Fijados",
+  "noCollectionSelected": "No se seleccionó colección",
+  "saveNote": "Guardar nota",
+  "nextSelectCollections": "Siguiente: Selecciona colecciones",
+  "addToPinned": "Agregar a fijados",
   "pinnedSavedSuccessfully": "¡Fijado guardado con éxito!",
-  "savePinned": "Guardar Fijado",
-  "closeAudioController": "Cerrar Controlador de Audio",
+  "savePinned": "Guardar fijado",
+  "closeAudioController": "Cerrar controlador de audio",
   "previous": "Anterior",
   "rewind": "Rebobinar",
-  "fastForward": "Avance Rápido",
-  "playNextAyah": "Reproducir Siguiente Aleya",
+  "fastForward": "Avanzar rápido",
+  "playNextAyah": "Reproducir siguiente aleya",
   "repeat": "Repetir",
-  "playAsPlaylist": "Reproducir como Lista",
+  "playAsPlaylist": "Reproducir como lista",
   "style": "Estilo: {style}",
-  "stopAndClose": "Detener y Cerrar",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "stopAndClose": "Detener y cerrar",
   "play": "Reproducir",
-  "pause": "Pausa",
-  "selectReciter": "Seleccionar Recitador",
+  "pause": "Pausar",
+  "selectReciter": "Selecciona recitador",
   "source": "Fuente: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "newText": "Nuevo",
   "more": "Más: ",
-  "cacheNotFound": "Caché No Encontrado",
-  "cacheSize": "Tamaño del Caché",
+  "cacheNotFound": "Caché no encontrado",
+  "cacheSize": "Tamaño de caché",
   "error": "Error: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "clean": "Limpiar",
-  "lastModified": "Última Modificación",
+  "lastModified": "Última modificación",
   "oneYearAgo": "Hace 1 año",
   "monthsAgo": "Hace {number} meses",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "weeksAgo": "Hace {number} semanas",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "daysAgo": "Hace {number} días",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "hoursAgo": "Hace {hour} horas",
-  "aboutAlQuran": "Acerca de Al Quran",
-  "appFullName": "Al Quran (Tafsir, Oración, Qibla, Audio)",
-  "appDescription": "Una completa aplicación islámica para Android, iOS, MacOS, Web, Linux y Windows, que ofrece la lectura del Corán con Tafsir y múltiples traducciones (incluida palabra por palabra), horarios de oración mundiales con notificaciones, brújula de Qibla y recitación de audio sincronizada palabra por palabra.",
-  "dataSourcesNote": "Nota: Los textos del Corán, Tafsir, traducciones y recursos de audio provienen de Quran.com, Everyayah.com y otras fuentes abiertas verificadas.",
-  "adFreePromise": "Esta aplicación ha sido creada para buscar el agrado de Allah. Por lo tanto, es y siempre será completamente Libre de Anuncios.",
-  "coreFeatures": "Características Principales",
-  "coreFeaturesDescription": "Explore las funcionalidades clave que hacen de Al Quran v3 una herramienta indispensable para sus prácticas islámicas diarias:",
-  "prayerTimesTitle": "Horarios de Oración y Alertas",
-  "prayerTimesDescription": "Horarios de oración precisos para cualquier lugar del mundo utilizando varios métodos de cálculo. Establezca recordatorios con notificaciones de Adhan.",
-  "qiblaDirectionTitle": "Dirección de la Qibla",
-  "qiblaDirectionDescription": "Encuentre fácilmente la dirección de la Qibla con una vista de brújula clara y precisa.",
-  "translationTafsirTitle": "Traducción y Tafsir del Corán",
-  "translationTafsirDescription": "Acceda a más de 120 libros de traducción (incluida palabra por palabra) en 69 idiomas, y más de 30 libros de Tafsir.",
-  "wordByWordAudioTitle": "Audio y Resaltado Palabra por Palabra",
-  "wordByWordAudioDescription": "Siga la recitación de audio sincronizada palabra por palabra y el resaltado para una experiencia de aprendizaje inmersiva.",
-  "ayahAudioRecitationTitle": "Recitación de Audio de Aleyas",
-  "ayahAudioRecitationDescription": "Escuche recitaciones completas de aleyas de más de 40 recitadores de renombre.",
-  "notesCloudBackupTitle": "Notas con Copia de Seguridad en la Nube",
-  "notesCloudBackupDescription": "Guarde notas y reflexiones personales, respaldadas de forma segura en la nube (función en desarrollo/próximamente).",
-  "crossPlatformSupportTitle": "Soporte Multiplataforma",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutAlQuran": "Sobre Al Corán",
+  "appFullName": "Al Corán (Tafsir, Oración, Qibla, Audio)",
+  "appDescription": "Una aplicación islámica completa para Android, iOS, MacOS, Web, Linux y Windows, que ofrece lectura del Corán con tafsir y múltiples traducciones (incluyendo palabra por palabra), horarios de oración mundiales con notificaciones, brújula Qibla y recitación de audio sincronizada palabra por palabra.",
+  "dataSourcesNote": "Nota: Los textos del Corán, tafsir, traducciones y recursos de audio provienen de Quran.com, Everyayah.com y otras fuentes abiertas verificadas.",
+  "adFreePromise": "Esta app se ha creado para buscar el placer de Allah. Por lo tanto, es y siempre será completamente libre de anuncios.",
+  "coreFeatures": "Funciones principales",
+  "coreFeaturesDescription": "Explora las funcionalidades clave que hacen de Al Corán v3 una herramienta indispensable para tus prácticas islámicas diarias:",
+  "prayerTimesTitle": "Horarios de oración y alertas",
+  "prayerTimesDescription": "Horarios de oración precisos para cualquier ubicación mundial usando varios métodos de cálculo. Configura recordatorios con notificaciones de Adhan.",
+  "qiblaDirectionTitle": "Dirección Qibla",
+  "qiblaDirectionDescription": "Encuentra fácilmente la dirección Qibla con una vista de brújula clara y precisa.",
+  "translationTafsirTitle": "Traducción y tafsir del Corán",
+  "translationTafsirDescription": "Accede a más de 120 libros de traducción (incluyendo palabra por palabra) en 69 idiomas y más de 30 libros de tafsir.",
+  "wordByWordAudioTitle": "Audio y resaltado palabra por palabra",
+  "wordByWordAudioDescription": "Sigue con recitación de audio sincronizada palabra por palabra y resaltado para una experiencia de aprendizaje inmersiva.",
+  "ayahAudioRecitationTitle": "Recitación de audio de aleya",
+  "ayahAudioRecitationDescription": "Escucha recitaciones completas de aleyas de más de 40 recitadores renombrados.",
+  "notesCloudBackupTitle": "Notas con respaldo en la nube",
+  "notesCloudBackupDescription": "Guarda notas y reflexiones personales, respaldadas de forma segura en la nube (función en desarrollo/próximamente).",
+  "crossPlatformSupportTitle": "Soporte multiplataforma",
   "crossPlatformSupportDescription": "Soportado en Android, Web, Linux y Windows.",
-  "backgroundAudioPlaybackTitle": "Reproducción de Audio en Segundo Plano",
-  "backgroundAudioPlaybackDescription": "Continúe escuchando la recitación del Corán incluso cuando la aplicación está en segundo plano.",
-  "audioDataCachingTitle": "Caché de Audio y Datos",
-  "audioDataCachingDescription": "Reproducción mejorada y capacidades sin conexión con un robusto almacenamiento en caché de audio y datos del Corán.",
-  "minimalisticInterfaceTitle": "Interfaz Minimalista y Limpia",
-  "minimalisticInterfaceDescription": "Interfaz fácil de navegar con enfoque en la experiencia del usuario y la legibilidad.",
-  "optimizedPerformanceTitle": "Rendimiento y Tamaño Optimizados",
+  "backgroundAudioPlaybackTitle": "Reproducción de audio en segundo plano",
+  "backgroundAudioPlaybackDescription": "Continúa escuchando la recitación del Corán incluso cuando la app está en segundo plano.",
+  "audioDataCachingTitle": "Caché de audio y datos",
+  "audioDataCachingDescription": "Mejora la reproducción y capacidades offline con caché robusto de audio y datos del Corán.",
+  "minimalisticInterfaceTitle": "Interfaz minimalista y limpia",
+  "minimalisticInterfaceDescription": "Interfaz fácil de navegar con enfoque en la experiencia del usuario y legibilidad.",
+  "optimizedPerformanceTitle": "Rendimiento y tamaño optimizados",
   "optimizedPerformanceDescription": "Una aplicación rica en funciones diseñada para ser ligera y de alto rendimiento.",
-  "languageSupport": "Soporte de Idiomas",
+  "languageSupport": "Soporte de idiomas",
   "languageSupportDescription": "Esta aplicación está diseñada para ser accesible a una audiencia global con soporte para los siguientes idiomas (y se agregan más continuamente):",
-  "technologyAndResources": "Tecnología y Recursos",
-  "technologyAndResourcesDescription": "Esta aplicación está construida utilizando tecnologías de vanguardia y recursos confiables:",
+  "technologyAndResources": "Tecnología y recursos",
+  "technologyAndResourcesDescription": "Esta app se construye usando tecnologías de vanguardia y recursos confiables:",
   "flutterFrameworkTitle": "Framework Flutter",
-  "flutterFrameworkDescription": "Construido con Flutter para una experiencia multiplataforma hermosa, compilada nativamente, desde una única base de código.",
-  "advancedAudioEngineTitle": "Motor de Audio Avanzado",
-  "advancedAudioEngineDescription": "Potenciado por los paquetes de Flutter `just_audio` y `just_audio_background` para una reproducción y control de audio robustos.",
-  "reliableQuranDataTitle": "Datos Confiables del Corán",
-  "reliableQuranDataDescription": "Los textos, traducciones, tafsirs y audios de Al Quran provienen de APIs y bases de datos abiertas verificadas como Quran.com y Everyayah.com.",
-  "prayerTimeEngineTitle": "Motor de Horarios de Oración",
-  "prayerTimeEngineDescription": "Utiliza métodos de cálculo establecidos para horarios de oración precisos. Las notificaciones se manejan con `flutter_local_notifications` y tareas en segundo plano.",
-  "crossPlatformSupport": "Soporte Multiplataforma",
-  "crossPlatformSupportDescription2": "Disfrute de un acceso sin interrupciones en varias plataformas:",
+  "flutterFrameworkDescription": "Construida con Flutter para una experiencia hermosa, compilada nativamente y multiplataforma desde un solo código base.",
+  "advancedAudioEngineTitle": "Motor de audio avanzado",
+  "advancedAudioEngineDescription": "Impulsado por los paquetes Flutter `just_audio` y `just_audio_background` para reproducción y control de audio robustos.",
+  "reliableQuranDataTitle": "Datos del Corán confiables",
+  "reliableQuranDataDescription": "Textos del Corán, traducciones, tafsirs y audio provienen de APIs abiertas verificadas y bases de datos como Quran.com y Everyayah.com.",
+  "prayerTimeEngineTitle": "Motor de horarios de oración",
+  "prayerTimeEngineDescription": "Utiliza métodos de cálculo establecidos para horarios de oración precisos. Notificaciones manejadas por `flutter_local_notifications` y tareas en segundo plano.",
+  "crossPlatformSupport": "Soporte multiplataforma",
+  "crossPlatformSupportDescription2": "Disfruta de acceso fluido en varias plataformas:",
   "android": "Android",
   "ios": "iOS",
   "macos": "macOS",
   "web": "Web",
   "linux": "Linux",
   "windows": "Windows",
-  "ourLifetimePromise": "Nuestra Promesa de por Vida",
-  "lifetimePromiseDescription": "Personalmente prometo brindar soporte y mantenimiento continuo para esta aplicación durante toda mi vida, In Sha Allah. Mi objetivo es asegurar que esta aplicación siga siendo un recurso beneficioso para la Ummah en los años venideros.",
+  "ourLifetimePromise": "Nuestra promesa de por vida",
+  "lifetimePromiseDescription": "Prometo personalmente proporcionar soporte y mantenimiento continuo para esta aplicación durante toda mi vida, In Sha Allah. Mi objetivo es asegurar que esta app siga siendo un recurso beneficioso para la Ummah por años.",
   "fajr": "Fajr",
   "sunrise": "Amanecer",
   "dhuhr": "Dhuhr",
@@ -298,35 +537,58 @@
   "alarm": "Alarma",
   "notification": "Notificación",
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
   "quranScriptTajweed": "Tajweed",
   "quranScriptUthmani": "Uthmani",
   "quranScriptIndopak": "Indopak",
-  "sajdaAyah": "Aleya de Sayda",
-  "required": "Obligatorio",
+  "sajdaAyah": "Aleya de sajda",
+  "required": "Requerido",
   "optional": "Opcional",
-  "notificationScheduleWarning": "Nota: Las notificaciones o recordatorios programados pueden perderse debido a las restricciones de procesos en segundo plano del sistema operativo de su teléfono. Por ejemplo: Origin OS de Vivo, One UI de Samsung, ColorOS de Oppo, etc., a veces eliminan las notificaciones o recordatorios programados. Verifique la configuración de su sistema operativo para que la aplicación no esté restringida de los procesos en segundo plano.",
-  "scrollWithRecitation": "Desplazarse con recitación",
+  "notificationScheduleWarning": "Nota: La notificación programada o recordatorio puede fallar debido a restricciones del proceso en segundo plano de tu teléfono. Por ejemplo: Origin OS de Vivo, One UI de Samsung, ColorOS de Oppo a veces eliminan notificaciones o recordatorios programados. Por favor, revisa la configuración de tu OS para que la app no esté restringida en procesos en segundo plano.",
+  "scrollWithRecitation": "Desplazar con recitación",
   "quickAccess": "Acceso rápido",
-  "initiallyScrollAyah": "Desplazarse inicialmente a la aleya",
-  "tajweedGuide": "Guía de Tajweed",
-  "scrollWithRecitationDesc": "Cuando está habilitado, el ayah del Corán se desplazará automáticamente en sincronía con la recitación de audio.",
+  "initiallyScrollAyah": "Desplazar inicialmente a aleya",
+  "tajweedGuide": "Guía de tajweed",
+  "scrollWithRecitationDesc": "Cuando está activado, la aleya del Corán se desplazará automáticamente en sincronía con la recitación de audio.",
   "configuration": "Configuración",
-  "restoreFromBackup": "Restaurar desde copia de seguridad",
-  "history": "Historia",
+  "restoreFromBackup": "Restaurar desde respaldo",
+  "history": "Historial",
   "search": "Buscar",
   "useAudioStream": "Usar transmisión de audio",
-  "useAudioStreamDesc": "Transmita audio directamente desde Internet en lugar de descargarlo.",
-  "notUseAudioStreamDesc": "Descargue audio para usarlo sin conexión y reduzca el consumo de datos.",
+  "useAudioStreamDesc": "Transmite audio directamente desde internet en lugar de descargar.",
+  "notUseAudioStreamDesc": "Descarga audio para uso offline y reduce el consumo de datos.",
   "audioSettings": "Configuraciones de audio",
   "playbackSpeed": "Velocidad de reproducción",
   "playbackSpeedDesc": "Ajusta la velocidad de la recitación del Corán.",
-  "waitForCurrentDownloadToFinish": "Espere a que finalice la descarga actual.",
+  "waitForCurrentDownloadToFinish": "Por favor, espera a que termine la descarga actual.",
   "areYouSure": "¿Estás seguro?",
   "checkYourInternetConnection": "Revisa tu conexión a internet.",
-  "audioDownload": "Descarga de audio",
-  "download": "Descargar",
   "audioDownloadAlert": "Necesitas descargar {requiredDownload} de {totalVersesCount} aleyas.",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
+  "download": "Descargar",
+  "audioDownload": "Descarga de audio",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "Optimizando el guion del Corán"
+  "optimizingQuranScript": "Optimizando script del Corán"
 }
