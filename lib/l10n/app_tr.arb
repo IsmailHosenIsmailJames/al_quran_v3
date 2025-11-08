@@ -327,5 +327,6 @@
   "download": "İndir",
   "audioDownloadAlert": "{totalVersesCount} ayetten {requiredDownload} tanesini indirmeniz gerekiyor.",
   "am": "ÖÖ",
-  "pm": "ÖS"
+  "pm": "ÖS",
+  "optimizingQuranScript": "Kuran Metnini Optimize Etme"
 }

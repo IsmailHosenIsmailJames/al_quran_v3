@@ -327,5 +327,6 @@
   "download": "Muat turun",
   "audioDownloadAlert": "Perlu memuat turun {requiredDownload} daripada {totalVersesCount} ayahs.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Mengoptimumkan Skrip Quran"
 }

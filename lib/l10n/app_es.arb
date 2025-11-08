@@ -327,5 +327,6 @@
   "download": "Descargar",
   "audioDownloadAlert": "Necesitas descargar {requiredDownload} de {totalVersesCount} aleyas.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Optimizando el guion del Corán"
 }

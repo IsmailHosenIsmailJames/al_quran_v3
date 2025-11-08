@@ -327,5 +327,6 @@
   "download": "Tải xuống",
   "audioDownloadAlert": "Cần tải xuống {requiredDownload} trong tổng số {totalVersesCount} ayah.",
   "am": "SA",
-  "pm": "CH"
+  "pm": "CH",
+  "optimizingQuranScript": "Tối ưu hóa kịch bản Kinh Qur'an"
 }

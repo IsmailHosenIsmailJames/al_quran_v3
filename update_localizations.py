@@ -63,6 +63,38 @@ translations = {
         "vi": "CH",
         "yo": "PM",
         "zh": "下午"
+    },
+    "optimizingQuranScript": {
+        "am": "የቁርኣን ስክሪፕት ማመቻቸት",
+        "ar": "تحسين نص القرآن",
+        "az": "Quran Mətninin Optimallaşdırılması",
+        "bn": "কুরআনের স্ক্রিপ্ট অপ্টিমাইজ করা হচ্ছে",
+        "de": "Optimierung des Koranskripts",
+        "es": "Optimizando el guion del Corán",
+        "fa": "بهینه سازی اسکریپت قرآن",
+        "fr": "Optimisation du script du Coran",
+        "ha": "Ingantaccen Rubutun Alqur'ani",
+        "hi": "कुरान स्क्रिप्ट का अनुकूलन",
+        "id": "Mengoptimalkan Skrip Quran",
+        "it": "Ottimizzazione dello script del Corano",
+        "ja": "コーランのスクリプトを最適化しています",
+        "kk": "Құран сценарийін оңтайландыру",
+        "ko": "쿠란 스크립트 최적화",
+        "ku": "Optimîzekirina skrîpta Quranê",
+        "ms": "Mengoptimumkan Skrip Quran",
+        "pa": "ਕੁਰਾਨ ਸਕਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾ ਰਿਹਾ ਹੈ",
+        "ps": "د قرآن سکریپټ اصلاح کول",
+        "pt": "Otimizando o Roteiro do Alcorão",
+        "ru": "Оптимизация сценария Корана",
+        "so": "Hagaajinta Qoraalka Qur'aanka",
+        "sw": "Inaboresha Hati ya Kurani",
+        "ta": "குர்ஆன் ஸ்கிரிப்டை மேம்படுத்துகிறது",
+        "tr": "Kuran Metnini Optimize Etme",
+        "ug": "قۇرئان قوليازمىسىنى ئەلالاشتۇرۇش",
+        "ur": "قرآن اسکرپٹ کو بہتر بنانا",
+        "vi": "Tối ưu hóa kịch bản Kinh Qur'an",
+        "yo": "Iṣapejuwe Iwe afọwọkọ Al-Qur’an",
+        "zh": "优化古兰经脚本"
     }
 }
 

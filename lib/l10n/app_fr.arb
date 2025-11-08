@@ -327,5 +327,6 @@
   "download": "Télécharger",
   "audioDownloadAlert": "Nécessité de télécharger {requiredDownload} des {totalVersesCount} ayahs.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Optimisation du script du Coran"
 }
