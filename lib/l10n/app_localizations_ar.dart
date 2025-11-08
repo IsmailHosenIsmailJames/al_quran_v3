@@ -14,22 +14,22 @@ class AppLocalizationsAr extends AppLocalizations {
     String nameArabic,
     String ayahKey,
   ) {
-    return 'تفسير $nameSimple ($nameArabic) - $ayahKey';
+    return '$nameSimple ($nameArabic) - $ayahKey';
   }
 
   @override
   String tafsirNotAvailable(String ayahKey) {
-    return 'التفسير غير متوفر للآية $ayahKey';
+    return 'التفسير غير متوفر لـ $ayahKey';
   }
 
   @override
   String tafsirFoundAt(String anotherAyahLinkKey) {
-    return 'يمكنك إيجاد التفسير في: $anotherAyahLinkKey';
+    return 'التفسير موجود في: $anotherAyahLinkKey';
   }
 
   @override
   String tafsirJumpTo(String anotherAyahLinkKey) {
-    return 'الانتقال إلى $anotherAyahLinkKey';
+    return 'انتقل إلى $anotherAyahLinkKey';
   }
 
   @override
@@ -58,7 +58,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'حفظ وتنزيل';
+  String get saveAndDownload => 'احفظ ونزل';
 
   @override
   String get appLanguage => 'لغة التطبيق';
@@ -67,7 +67,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectAppLanguage => 'اختر لغة التطبيق...';
 
   @override
-  String get pleaseSelectOne => 'الرجاء اختيار واحد';
+  String get pleaseSelectOne => 'يرجى اختيار واحد';
 
   @override
   String get quranTranslationLanguage => 'لغة ترجمة القرآن';
@@ -94,10 +94,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectTafsirBook => 'اختر كتاب التفسير...';
 
   @override
-  String get quranScriptAndStyle => 'خط القرآن ونمطه';
+  String get quranScriptAndStyle => 'نص القرآن وأسلوبه';
 
   @override
-  String get justAMoment => 'لحظة من فضلك...';
+  String get justAMoment => 'لحظة فقط...';
 
   @override
   String processProgress(String processName, String percentage) {
@@ -105,13 +105,14 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get success => 'تم بنجاح';
+  String get success => 'نجاح';
 
   @override
-  String get retry => 'إعادة المحاولة';
+  String get retry => 'أعد المحاولة';
 
   @override
-  String get unableToDownloadResources => 'تعذر تنزيل الموارد...\nحدث خطأ ما';
+  String get unableToDownloadResources =>
+      'غير قادر على تنزيل الموارد...\nحدث خطأ ما';
 
   @override
   String get downloadingSegmentedQuranRecitation =>
@@ -122,7 +123,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'جاري معالجة تلاوة القرآن المقسمة';
 
   @override
-  String get footnote => 'حاشية';
+  String get footnote => 'هامش';
 
   @override
   String get tafsir => 'تفسير';
@@ -131,32 +132,32 @@ class AppLocalizationsAr extends AppLocalizations {
   String get wordByWord => 'كلمة بكلمة';
 
   @override
-  String get pleaseSelectRequiredOption => 'الرجاء تحديد الخيار المطلوب';
+  String get pleaseSelectRequiredOption => 'يرجى اختيار الخيار المطلوب';
 
   @override
   String get rememberHomeTab => 'تذكر علامة التبويب الرئيسية';
 
   @override
   String get rememberHomeTabSubtitle =>
-      'سيقوم التطبيق بتذكر آخر علامة تبويب تم فتحها في الشاشة الرئيسية.';
+      'سيحتفظ التطبيق بآخر علامة تبويب مفتوحة في الشاشة الرئيسية.';
 
   @override
-  String get wakeLock => 'إبقاء الشاشة قيد التشغيل';
+  String get wakeLock => 'قفل الاستيقاظ';
 
   @override
-  String get wakeLockSubtitle => 'منع الشاشة من الإطفاء تلقائياً.';
+  String get wakeLockSubtitle => 'منع الشاشة من الإغلاق تلقائيًا.';
 
   @override
   String get settings => 'الإعدادات';
 
   @override
-  String get appTheme => 'مظهر التطبيق';
+  String get appTheme => 'سمة التطبيق';
 
   @override
-  String get quranStyle => 'نمط القرآن';
+  String get quranStyle => 'أسلوب القرآن';
 
   @override
-  String get changeTheme => 'تغيير المظهر';
+  String get changeTheme => 'تغيير السمة';
 
   @override
   String get verseCount => 'عدد الآيات: ';
@@ -165,7 +166,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get translation => 'ترجمة';
 
   @override
-  String get tafsirNotFound => 'لم يتم العثور عليه';
+  String get tafsirNotFound => 'غير موجود';
 
   @override
   String get moreInfo => 'مزيد من المعلومات';
@@ -204,14 +205,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectCalculationMethod => 'اختر طريقة الحساب';
 
   @override
-  String get shareSelectAyahs => 'مشاركة الآيات المحددة';
+  String get shareSelectAyahs => 'مشاركة الآيات المختارة';
 
   @override
-  String get selectionEmpty => 'التحديد فارغ';
+  String get selectionEmpty => 'الاختيار فارغ';
 
   @override
-  String get generatingImagePleaseWait =>
-      'جاري إنشاء الصورة... الرجاء الانتظار';
+  String get generatingImagePleaseWait => 'جاري إنشاء الصورة... يرجى الانتظار';
 
   @override
   String get asImage => 'كصورة';
@@ -220,32 +220,32 @@ class AppLocalizationsAr extends AppLocalizations {
   String get asText => 'كنص';
 
   @override
-  String get playFromSelectedAyah => 'تشغيل من الآية المحددة';
+  String get playFromSelectedAyah => 'تشغيل من الآية المختارة';
 
   @override
   String get toTafsir => 'إلى التفسير';
 
   @override
-  String get selectAyah => 'تحديد آية';
+  String get selectAyah => 'اختر آية';
 
   @override
-  String get toAyah => 'إلى الآية';
+  String get toAyah => 'إلى آية';
 
   @override
   String get searchForASurah => 'ابحث عن سورة';
 
   @override
-  String get bugReportTitle => 'الإبلاغ عن خطأ';
+  String get bugReportTitle => 'تقرير خطأ';
 
   @override
-  String get audioCached => 'الصوتيات المخزنة مؤقتاً';
+  String get audioCached => 'الصوت المخزن مؤقتًا';
 
   @override
-  String get others => 'أخرى';
+  String get others => 'آخرون';
 
   @override
   String get quranTranslationAyahOneMustEnabled =>
-      'القرآن|الترجمة|الآية، يجب تفعيل واحد على الأقل';
+      'القرآن|الترجمة|الآية، يجب تمكين واحد';
 
   @override
   String get quranFontSize => 'حجم خط القرآن';
@@ -257,19 +257,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get translationAndTafsirFontSize => 'حجم خط الترجمة والتفسير';
 
   @override
-  String get quranAyah => 'آية قرآنية';
+  String get quranAyah => 'آية القرآن';
 
   @override
-  String get topToolbar => 'الشريط العلوي';
+  String get topToolbar => 'شريط الأدوات العلوي';
 
   @override
-  String get keepOpenWordByWord => 'إبقاء (كلمة بكلمة) مفتوحاً';
+  String get keepOpenWordByWord => 'ابق مفتوحًا كلمة بكلمة';
 
   @override
-  String get wordByWordHighlight => 'تمييز كلمة بكلمة';
+  String get wordByWordHighlight => 'تسليط الضوء كلمة بكلمة';
 
   @override
-  String get quranScriptSettings => 'إعدادات خط القرآن';
+  String get quranScriptSettings => 'إعدادات نص القرآن';
 
   @override
   String surahName(String nameSimple) {
@@ -277,33 +277,33 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get pageNumber => 'صفحة: ';
+  String get pageNumber => 'رقم الصفحة: ';
 
   @override
   String get quranResources => 'موارد القرآن';
 
   @override
   String alreadySelected(String name) {
-    return 'اللغة \'$name\' محددة بالفعل.';
+    return 'اللغة \'$name\' مختارة بالفعل.';
   }
 
   @override
-  String get unableToGetCompassData => 'تعذر الحصول على بيانات البوصلة';
+  String get unableToGetCompassData => 'غير قادر على الحصول على بيانات البوصلة';
 
   @override
   String get deviceDoesNotHaveSensors => 'الجهاز لا يحتوي على مستشعرات!';
 
   @override
-  String get north => 'ش';
+  String get north => 'شمال';
 
   @override
-  String get east => 'ق';
+  String get east => 'شرق';
 
   @override
-  String get south => 'ج';
+  String get south => 'جنوب';
 
   @override
-  String get west => 'غ';
+  String get west => 'غرب';
 
   @override
   String get address => 'العنوان: ';
@@ -322,7 +322,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noCalculationMethodWithLocationData =>
-      'تعذر العثور على أي طريقة حساب ببيانات الموقع.';
+      'لم يتم العثور على أي طريقة حساب مع بيانات الموقع.';
 
   @override
   String get prayerSettings => 'إعدادات الصلاة';
@@ -334,31 +334,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get adjustReminderTime => 'ضبط وقت التذكير';
 
   @override
-  String get enforceAlarmSound => 'فرض صوت المنبه';
+  String get enforceAlarmSound => 'فرض صوت الإنذار';
 
   @override
   String get enforceAlarmSoundDescription =>
-      'عند التفعيل، ستقوم هذه الميزة بتشغيل المنبه بمستوى الصوت المحدد هنا، حتى لو كان صوت هاتفك منخفضًا. هذا يضمن عدم تفويت المنبه بسبب انخفاض صوت الهاتف.';
+      'إذا تم تمكينه، سيقوم هذا الميزة بتشغيل الإنذار بحجم الصوت المحدد هنا، حتى لو كان صوت هاتفك منخفضًا. هذا يضمن عدم تفويت الإنذار بسبب انخفاض حجم الهاتف.';
 
   @override
-  String get volume => 'مستوى الصوت';
+  String get volume => 'الصوت';
 
   @override
   String get atPrayerTime => 'في وقت الصلاة';
 
   @override
   String minBefore(int minutes) {
-    return 'قبل بـ $minutes دقيقة';
+    return '$minutes دقيقة قبل';
   }
 
   @override
   String minAfter(int minutes) {
-    return 'بعد بـ $minutes دقيقة';
+    return '$minutes دقيقة بعد';
   }
 
   @override
   String prayerTimeIsAt(String prayerName, String prayerTime) {
-    return 'موعد $prayerName في $prayerTime';
+    return '$prayerName في $prayerTime';
   }
 
   @override
@@ -367,42 +367,42 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get stopTheAdhan => 'إيقاف الأذان';
+  String get stopTheAdhan => 'أوقف الأذان';
 
   @override
   String dateFoundEmpty(String date) {
-    return '$date فارغ';
+    return '$date وجد فارغًا';
   }
 
   @override
   String get today => 'اليوم';
 
   @override
-  String get left => 'المتبقي';
+  String get left => 'باقي';
 
   @override
   String reminderAdded(String prayerName) {
-    return 'تمت إضافة تذكير لصلاة $prayerName';
+    return 'تم إضافة تذكير لـ $prayerName';
   }
 
   @override
   String get allowNotificationPermission =>
-      'الرجاء السماح بإذن الإشعارات لاستخدام هذه الميزة';
+      'يرجى السماح بإذن الإشعارات لاستخدام هذه الميزة';
 
   @override
   String reminderRemoved(String prayerName) {
-    return 'تمت إزالة تذكير صلاة $prayerName';
+    return 'تم إزالة تذكير $prayerName';
   }
 
   @override
-  String get getPrayerTimesAndQibla => 'الحصول على أوقات الصلاة والقبلة';
+  String get getPrayerTimesAndQibla => 'احصل على أوقات الصلاة والقبلة';
 
   @override
   String get getPrayerTimesAndQiblaDescription =>
-      'حساب أوقات الصلاة والقبلة لأي موقع محدد.';
+      'احسب أوقات الصلاة والقبلة لأي موقع معين.';
 
   @override
-  String get getFromGPS => 'الحصول من GPS';
+  String get getFromGPS => 'احصل من GPS';
 
   @override
   String get or => 'أو';
@@ -412,7 +412,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noteAboutGPS =>
-      'ملاحظة: إذا كنت لا ترغب في استخدام GPS أو لا تشعر بالأمان، يمكنك اختيار مدينتك.';
+      'ملاحظة: إذا كنت لا تريد استخدام GPS أو لا تشعر بالأمان، يمكنك اختيار مدينتك.';
 
   @override
   String get downloadingLocationResources => 'جاري تنزيل موارد الموقع...';
@@ -427,16 +427,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchForACountry => 'ابحث عن بلد';
 
   @override
-  String get selectYourAdministrator => 'اختر منطقتك الإدارية';
+  String get selectYourAdministrator => 'اختر الإدارة الخاصة بك';
 
   @override
-  String get searchForAnAdministrator => 'ابحث عن منطقة إدارية';
+  String get searchForAnAdministrator => 'ابحث عن إدارة';
 
   @override
   String get searchForACity => 'ابحث عن مدينة';
 
   @override
-  String get pleaseEnableLocationService => 'الرجاء تفعيل خدمة الموقع';
+  String get pleaseEnableLocationService => 'يرجى تمكين خدمة الموقع';
 
   @override
   String get donateUs => 'تبرع لنا';
@@ -448,7 +448,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get versionLoading => 'جاري التحميل...';
 
   @override
-  String get alQuran => 'القرآن الكريم';
+  String get alQuran => 'القرآن';
 
   @override
   String get mainMenu => 'القائمة الرئيسية';
@@ -457,22 +457,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notes => 'ملاحظات';
 
   @override
-  String get pinned => 'المثبتة';
+  String get pinned => 'مثبت';
 
   @override
-  String get jumpToAyah => 'الانتقال إلى آية';
+  String get jumpToAyah => 'انتقل إلى آية';
 
   @override
-  String get shareMultipleAyah => 'مشاركة عدة آيات';
+  String get shareMultipleAyah => 'مشاركة آيات متعددة';
 
   @override
-  String get shareThisApp => 'شارك هذا التطبيق';
+  String get shareThisApp => 'مشاركة هذا التطبيق';
 
   @override
-  String get giveRating => 'تقييم التطبيق';
+  String get giveRating => 'أعطِ تقييمًا';
 
   @override
-  String get bugReport => 'الإبلاغ عن خطأ';
+  String get bugReport => 'تقرير خطأ';
 
   @override
   String get privacyPolicy => 'سياسة الخصوصية';
@@ -481,79 +481,79 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aboutTheApp => 'عن التطبيق';
 
   @override
-  String get resetTheApp => 'إعادة ضبط التطبيق';
+  String get resetTheApp => 'إعادة تعيين التطبيق';
 
   @override
-  String get resetAppWarningTitle => 'إعادة ضبط بيانات التطبيق';
+  String get resetAppWarningTitle => 'إعادة تعيين بيانات التطبيق';
 
   @override
   String get resetAppWarningMessage =>
-      'هل أنت متأكد أنك تريد إعادة ضبط التطبيق؟ ستفقد جميع بياناتك، وستحتاج إلى إعداد التطبيق من البداية.';
+      'هل أنت متأكد من إعادة تعيين التطبيق؟ سيتم فقدان جميع بياناتك، وسيتعين عليك إعداد التطبيق من البداية.';
 
   @override
   String get cancel => 'إلغاء';
 
   @override
-  String get reset => 'إعادة ضبط';
+  String get reset => 'إعادة تعيين';
 
   @override
-  String get shareAppSubject => 'اطلع على تطبيق القرآن الكريم هذا!';
+  String get shareAppSubject => 'تحقق من تطبيق القرآن هذا!';
 
   @override
   String shareAppBody(String appLink) {
-    return 'السلام عليكم! اطلع على تطبيق القرآن الكريم هذا للقراءة والتأمل اليومي. يساعد على التواصل مع كلمات الله. قم بالتحميل من هنا: $appLink';
+    return 'السلام عليكم! تحقق من تطبيق القرآن هذا للقراءة اليومية والتأمل. يساعد في الاتصال بكلمات الله. نزل من هنا: $appLink';
   }
 
   @override
-  String get openDrawerTooltip => 'فتح القائمة';
+  String get openDrawerTooltip => 'افتح الدرج';
 
   @override
-  String get quran => 'القرآن';
+  String get quran => 'قرآن';
 
   @override
-  String get prayer => 'الصلاة';
+  String get prayer => 'صلاة';
 
   @override
-  String get qibla => 'القبلة';
+  String get qibla => 'قبلة';
 
   @override
-  String get audio => 'الصوتيات';
+  String get audio => 'صوت';
 
   @override
-  String get surah => 'السور';
+  String get surah => 'سورة';
 
   @override
-  String get pages => 'الصفحات';
+  String get pages => 'صفحات';
 
   @override
   String get note => 'ملاحظة:';
 
   @override
-  String get linkedAyahs => 'الآيات المرتبطة:';
+  String get linkedAyahs => 'آيات مرتبطة:';
 
   @override
   String get emptyNoteCollection =>
-      'مجموعة الملاحظات هذه فارغة.\nأضف بعض الملاحظات لرؤيتها هنا.';
+      'هذه المجموعة من الملاحظات فارغة.\nأضف بعض الملاحظات لرؤيتها هنا.';
 
   @override
   String get emptyPinnedCollection =>
-      'لم يتم تثبيت أي آيات في هذه المجموعة بعد.\nثبّت آيات لرؤيتها هنا.';
+      'لم يتم تثبيت أي آيات في هذه المجموعة بعد.\nثبت الآيات لرؤيتها هنا.';
 
   @override
-  String get noContentAvailable => 'لا يوجد محتوى متاح.';
+  String get noContentAvailable => 'لا يوجد محتوى متوفر.';
 
   @override
   String failedToLoadCollections(String error) {
-    return 'فشل تحميل المجموعات: $error';
+    return 'فشل في تحميل المجموعات: $error';
   }
 
   @override
   String searchByCollectionName(String collectionType) {
-    return 'ابحث باسم $collectionType...';
+    return 'ابحث حسب اسم $collectionType...';
   }
 
   @override
-  String get sortBy => 'فرز حسب';
+  String get sortBy => 'ترتيب حسب';
 
   @override
   String noCollectionAddedYet(String collectionType) {
@@ -562,16 +562,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String pinnedItemsCount(int count) {
-    return '$count عنصر مثبت';
+    return '$count عناصر مثبتة';
   }
 
   @override
   String notesCount(int count) {
-    return '$count ملاحظة';
+    return '$count ملاحظات';
   }
 
   @override
-  String get emptyNameNotAllowed => 'الاسم الفارغ غير مسموح به';
+  String get emptyNameNotAllowed => 'الاسم الفارغ غير مسموح';
 
   @override
   String updatedTo(String collectionName) {
@@ -589,7 +589,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String collectionDeleted(String collectionName) {
-    return 'تم حذف $collectionName';
+    return '$collectionName محذوف';
   }
 
   @override
@@ -600,10 +600,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get collectionNameCannotBeEmpty =>
-      'اسم المجموعة لا يمكن أن يكون فارغاً.';
+      'اسم المجموعة لا يمكن أن يكون فارغًا.';
 
   @override
-  String get addedNewCollection => 'تمت إضافة مجموعة جديدة';
+  String get addedNewCollection => 'تم إضافة مجموعة جديدة';
 
   @override
   String ayahCount(int count) {
@@ -611,37 +611,37 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get byNameAtoZ => 'الاسم من أ-ي';
+  String get byNameAtoZ => 'الاسم أ-ي';
 
   @override
-  String get byNameZtoA => 'الاسم من ي-أ';
+  String get byNameZtoA => 'الاسم ي-أ';
 
   @override
-  String get byElementNumberAscending => 'رقم العنصر تصاعدياً';
+  String get byElementNumberAscending => 'رقم العنصر تصاعدي';
 
   @override
-  String get byElementNumberDescending => 'رقم العنصر تنازلياً';
+  String get byElementNumberDescending => 'رقم العنصر تنازلي';
 
   @override
-  String get byUpdateDateAscending => 'تاريخ التحديث تصاعدياً';
+  String get byUpdateDateAscending => 'تاريخ التحديث تصاعدي';
 
   @override
-  String get byUpdateDateDescending => 'تاريخ التحديث تنازلياً';
+  String get byUpdateDateDescending => 'تاريخ التحديث تنازلي';
 
   @override
-  String get byCreateDateAscending => 'تاريخ الإنشاء تصاعدياً';
+  String get byCreateDateAscending => 'تاريخ الإنشاء تصاعدي';
 
   @override
-  String get byCreateDateDescending => 'تاريخ الإنشاء تنازلياً';
+  String get byCreateDateDescending => 'تاريخ الإنشاء تنازلي';
 
   @override
   String get translationNotFound => 'الترجمة غير موجودة';
 
   @override
-  String get translationTitle => 'الترجمة:';
+  String get translationTitle => 'ترجمة:';
 
   @override
-  String get footNoteTitle => 'الحاشية:';
+  String get footNoteTitle => 'هامش:';
 
   @override
   String get wordByWordTranslation => 'ترجمة كلمة بكلمة:';
@@ -656,7 +656,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get addNoteButton => 'إضافة ملاحظة';
 
   @override
-  String get pinToCollectionButton => 'تثبيت في مجموعة';
+  String get pinToCollectionButton => 'تثبيت في المجموعة';
 
   @override
   String get shareAsText => 'مشاركة كنص';
@@ -675,7 +675,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noteContentCannotBeEmpty =>
-      'محتوى الملاحظة لا يمكن أن يكون فارغاً.';
+      'محتوى الملاحظة لا يمكن أن يكون فارغًا.';
 
   @override
   String get noteSavedSuccessfully => 'تم حفظ الملاحظة بنجاح!';
@@ -690,11 +690,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get writeCollectionName => 'اكتب اسم المجموعة...';
 
   @override
-  String get noCollectionsYetAddANewOne =>
-      'لا توجد مجموعات بعد. أضف واحدة جديدة!';
+  String get noCollectionsYetAddANewOne => 'لا مجموعات بعد. أضف واحدة جديدة!';
 
   @override
-  String get pleaseWriteYourNoteFirst => 'الرجاء كتابة ملاحظتك أولاً.';
+  String get pleaseWriteYourNoteFirst => 'يرجى كتابة ملاحظتك أولاً.';
 
   @override
   String get noCollectionSelected => 'لم يتم اختيار مجموعة';
@@ -706,25 +705,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nextSelectCollections => 'التالي: اختر المجموعات';
 
   @override
-  String get addToPinned => 'إضافة إلى المثبتة';
+  String get addToPinned => 'إضافة إلى المثبت';
 
   @override
-  String get pinnedSavedSuccessfully => 'تم حفظ التثبيت بنجاح!';
+  String get pinnedSavedSuccessfully => 'تم حفظ المثبت بنجاح!';
 
   @override
-  String get savePinned => 'حفظ المثبتة';
+  String get savePinned => 'حفظ المثبت';
 
   @override
-  String get closeAudioController => 'إغلاق وحدة التحكم بالصوت';
+  String get closeAudioController => 'أغلق متحكم الصوت';
 
   @override
   String get previous => 'السابق';
 
   @override
-  String get rewind => 'إرجاع';
+  String get rewind => 'إعادة';
 
   @override
-  String get fastForward => 'تقديم';
+  String get fastForward => 'تقديم سريع';
 
   @override
   String get playNextAyah => 'تشغيل الآية التالية';
@@ -737,11 +736,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String style(String style) {
-    return 'النمط: $style';
+    return 'أسلوب: $style';
   }
 
   @override
-  String get stopAndClose => 'إيقاف وإغلاق';
+  String get stopAndClose => 'أوقف وأغلق';
 
   @override
   String get play => 'تشغيل';
@@ -764,10 +763,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get more => 'المزيد: ';
 
   @override
-  String get cacheNotFound => 'لم يتم العثور على ذاكرة التخزين المؤقت';
+  String get cacheNotFound => 'المخزن المؤقت غير موجود';
 
   @override
-  String get cacheSize => 'حجم ذاكرة التخزين المؤقت';
+  String get cacheSize => 'حجم المخزن المؤقت';
 
   @override
   String error(String error) {
@@ -781,7 +780,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get lastModified => 'آخر تعديل';
 
   @override
-  String get oneYearAgo => 'منذ سنة';
+  String get oneYearAgo => 'منذ عام واحد';
 
   @override
   String monthsAgo(String number) {
@@ -804,74 +803,74 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get aboutAlQuran => 'عن تطبيق القرآن';
+  String get aboutAlQuran => 'عن القرآن';
 
   @override
-  String get appFullName => 'القرآن الكريم (تفسير، صلاة، قبلة، صوتيات)';
+  String get appFullName => 'القرآن (تفسير، صلاة، قبلة، صوت)';
 
   @override
   String get appDescription =>
-      'تطبيق إسلامي شامل لأنظمة أندرويد، iOS، ماك، الويب، لينكس، وويندوز، يوفر قراءة القرآن مع التفسير وترجمات متعددة (بما في ذلك كلمة بكلمة)، وأوقات صلاة عالمية مع إشعارات، وبوصلة القبلة، وتلاوة صوتية متزامنة كلمة بكلمة.';
+      'تطبيق إسلامي شامل لأندرويد، iOS، macOS، الويب، لينكس وويندوز، يقدم قراءة القرآن مع تفسير وترجمات متعددة (بما في ذلك كلمة بكلمة)، أوقات الصلاة في جميع أنحاء العالم مع إشعارات، بوصلة القبلة، وتلاوة صوتية متزامنة كلمة بكلمة.';
 
   @override
   String get dataSourcesNote =>
-      'ملاحظة: نصوص القرآن، التفسير، الترجمات، والموارد الصوتية مأخوذة من Quran.com، و Everyayah.com، ومصادر أخرى مفتوحة وموثوقة.';
+      'ملاحظة: نصوص القرآن، التفسير، الترجمات، والموارد الصوتية مستمدة من Quran.com، Everyayah.com، ومصادر مفتوحة موثوقة أخرى.';
 
   @override
   String get adFreePromise =>
-      'تم بناء هذا التطبيق ابتغاءً لمرضاة الله. لذلك، هو وسيظل دائماً خالياً تماماً من الإعلانات.';
+      'تم بناء هذا التطبيق للحصول على رضا الله. لذلك، هو ودائمًا سيكون خاليًا تمامًا من الإعلانات.';
 
   @override
   String get coreFeatures => 'الميزات الأساسية';
 
   @override
   String get coreFeaturesDescription =>
-      'استكشف الوظائف الرئيسية التي تجعل تطبيق القرآن v3 أداة لا غنى عنها لممارساتك الإسلامية اليومية:';
+      'استكشف الوظائف الرئيسية التي تجعل القرآن v3 أداة لا غنى عنها لممارساتك الإسلامية اليومية:';
 
   @override
   String get prayerTimesTitle => 'أوقات الصلاة والتنبيهات';
 
   @override
   String get prayerTimesDescription =>
-      'أوقات صلاة دقيقة لأي مكان في العالم باستخدام طرق حساب متنوعة. قم بتعيين تذكيرات مع إشعارات الأذان.';
+      'أوقات صلاة دقيقة لأي موقع في العالم باستخدام طرق حساب متنوعة. قم بتعيين تذكيرات مع إشعارات الأذان.';
 
   @override
   String get qiblaDirectionTitle => 'اتجاه القبلة';
 
   @override
   String get qiblaDirectionDescription =>
-      'اعثر بسهولة على اتجاه القبلة مع عرض بوصلة واضح ودقيق.';
+      'ابحث عن اتجاه القبلة بسهولة مع عرض بوصلة واضح ودقيق.';
 
   @override
-  String get translationTafsirTitle => 'ترجمة القرآن والتفسير';
+  String get translationTafsirTitle => 'ترجمة القرآن وتفسيره';
 
   @override
   String get translationTafsirDescription =>
-      'الوصول إلى أكثر من 120 كتاب ترجمة (بما في ذلك كلمة بكلمة) بـ 69 لغة، وأكثر من 30 كتاب تفسير.';
+      'الوصول إلى أكثر من 120 كتاب ترجمة (بما في ذلك كلمة بكلمة) في 69 لغة، وأكثر من 30 كتاب تفسير.';
 
   @override
-  String get wordByWordAudioTitle => 'صوتيات كلمة بكلمة وتمييز';
+  String get wordByWordAudioTitle => 'صوت كلمة بكلمة وتسليط الضوء';
 
   @override
   String get wordByWordAudioDescription =>
-      'تابع التلاوة الصوتية المتزامنة كلمة بكلمة مع التمييز لتجربة تعليمية غامرة.';
+      'تابع مع تلاوة صوتية متزامنة كلمة بكلمة وتسليط الضوء لتجربة تعلم غامرة.';
 
   @override
-  String get ayahAudioRecitationTitle => 'تلاوة صوتية للآيات';
+  String get ayahAudioRecitationTitle => 'تلاوة صوتية للآية';
 
   @override
   String get ayahAudioRecitationDescription =>
-      'استمع إلى تلاوات كاملة للآيات من أكثر من 40 قارئاً مشهوراً.';
+      'استمع إلى تلاوات آيات كاملة من أكثر من 40 قارئ مشهور.';
 
   @override
   String get notesCloudBackupTitle => 'ملاحظات مع نسخ احتياطي سحابي';
 
   @override
   String get notesCloudBackupDescription =>
-      'احفظ الملاحظات والتأملات الشخصية، مع نسخ احتياطي آمن على السحابة (الميزة قيد التطوير/قادمة قريباً).';
+      'احفظ ملاحظاتك الشخصية وتأملاتك، مدعومة بشكل آمن في السحابة (ميزة قيد التطوير/قادمة قريبًا).';
 
   @override
-  String get crossPlatformSupportTitle => 'دعم متعدد المنصات';
+  String get crossPlatformSupportTitle => 'دعم عبر المنصات';
 
   @override
   String get crossPlatformSupportDescription =>
@@ -885,74 +884,74 @@ class AppLocalizationsAr extends AppLocalizations {
       'استمر في الاستماع إلى تلاوة القرآن حتى عندما يكون التطبيق في الخلفية.';
 
   @override
-  String get audioDataCachingTitle => 'تخزين مؤقت للصوت والبيانات';
+  String get audioDataCachingTitle => 'تخزين الصوت والبيانات مؤقتًا';
 
   @override
   String get audioDataCachingDescription =>
-      'تشغيل محسّن وإمكانيات غير متصلة بالإنترنت مع تخزين مؤقت قوي لبيانات الصوت والقرآن.';
+      'تحسين التشغيل والقدرات دون اتصال مع تخزين قوي للصوت وبيانات القرآن.';
 
   @override
   String get minimalisticInterfaceTitle => 'واجهة بسيطة ونظيفة';
 
   @override
   String get minimalisticInterfaceDescription =>
-      'واجهة سهلة التنقل مع التركيز على تجربة المستخدم وسهولة القراءة.';
+      'واجهة سهلة التنقل مع التركيز على تجربة المستخدم والقراءة.';
 
   @override
-  String get optimizedPerformanceTitle => 'أداء وحجم محسن';
+  String get optimizedPerformanceTitle => 'أداء محسن وحجم';
 
   @override
   String get optimizedPerformanceDescription =>
-      'تطبيق غني بالميزات مصمم ليكون خفيف الوزن وعالي الأداء.';
+      'تطبيق غني بالميزات مصمم ليكون خفيف الوزن وفعال.';
 
   @override
   String get languageSupport => 'دعم اللغات';
 
   @override
   String get languageSupportDescription =>
-      'تم تصميم هذا التطبيق ليكون متاحاً لجمهور عالمي مع دعم اللغات التالية (ويتم إضافة المزيد باستمرار):';
+      'تم تصميم هذا التطبيق ليكون متاحًا لجمهور عالمي مع دعم اللغات التالية (ومزيد منها يتم إضافته باستمرار):';
 
   @override
-  String get technologyAndResources => 'التقنيات والمصادر';
+  String get technologyAndResources => 'التكنولوجيا والموارد';
 
   @override
   String get technologyAndResourcesDescription =>
-      'تم بناء هذا التطبيق باستخدام أحدث التقنيات والمصادر الموثوقة:';
+      'تم بناء هذا التطبيق باستخدام تقنيات حديثة وموارد موثوقة:';
 
   @override
-  String get flutterFrameworkTitle => 'إطار عمل فلاتر (Flutter)';
+  String get flutterFrameworkTitle => 'إطار عمل فلاتر';
 
   @override
   String get flutterFrameworkDescription =>
-      'مبني باستخدام فلاتر لتجربة جميلة، مجمّعة أصليًا، ومتعددة المنصات من قاعدة كود واحدة.';
+      'مبني باستخدام فلاتر لتجربة جميلة، مترجمة أصلاً، متعددة المنصات من قاعدة كود واحدة.';
 
   @override
-  String get advancedAudioEngineTitle => 'محرك صوتي متقدم';
+  String get advancedAudioEngineTitle => 'محرك صوت متقدم';
 
   @override
   String get advancedAudioEngineDescription =>
-      'مدعوم بحزم فلاتر `just_audio` و `just_audio_background` لتشغيل وتحكم صوتي قوي.';
+      'مدعوم بحزم فلاتر `just_audio` و`just_audio_background` لتشغيل وتحكم صوتي قوي.';
 
   @override
-  String get reliableQuranDataTitle => 'بيانات قرآنية موثوقة';
+  String get reliableQuranDataTitle => 'بيانات قرآن موثوقة';
 
   @override
   String get reliableQuranDataDescription =>
-      'نصوص القرآن الكريم، الترجمات، التفاسير، والصوتيات مأخوذة من واجهات برمجة تطبيقات وقواعد بيانات مفتوحة وموثوقة مثل Quran.com و Everyayah.com.';
+      'نصوص القرآن، الترجمات، التفاسير، والصوت مستمدة من واجهات برمجة تطبيقات مفتوحة موثوقة و قواعد بيانات مثل Quran.com وEveryayah.com.';
 
   @override
   String get prayerTimeEngineTitle => 'محرك أوقات الصلاة';
 
   @override
   String get prayerTimeEngineDescription =>
-      'يستخدم طرق حساب معتمدة لأوقات صلاة دقيقة. يتم التعامل مع الإشعارات بواسطة `flutter_local_notifications` والمهام الخلفية.';
+      'يستخدم طرق حساب مثبتة لأوقات صلاة دقيقة. الإشعارات تدار بواسطة `flutter_local_notifications` والمهام الخلفية.';
 
   @override
-  String get crossPlatformSupport => 'دعم متعدد المنصات';
+  String get crossPlatformSupport => 'دعم عبر المنصات';
 
   @override
   String get crossPlatformSupportDescription2 =>
-      'استمتع بوصول سلس عبر مختلف المنصات:';
+      'استمتع بالوصول السلس عبر منصات مختلفة:';
 
   @override
   String get android => 'أندرويد';
@@ -977,31 +976,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      'أتعهد شخصياً بتقديم الدعم والصيانة المستمرة لهذا التطبيق طوال حياتي، إن شاء الله. هدفي هو ضمان أن يظل هذا التطبيق مورداً نافعاً للأمة لسنوات قادمة.';
+      'أعد شخصيًا بدعم وصيانة مستمرة لهذا التطبيق طوال حياتي، إن شاء الله. هدفي هو التأكد من أن هذا التطبيق يظل مصدرًا مفيدًا للأمة لسنوات قادمة.';
 
   @override
-  String get fajr => 'الفجر';
+  String get fajr => 'فجر';
 
   @override
-  String get sunrise => 'الشروق';
+  String get sunrise => 'شروق';
 
   @override
-  String get dhuhr => 'الظهر';
+  String get dhuhr => 'ظهر';
 
   @override
-  String get asr => 'العصر';
+  String get asr => 'عصر';
 
   @override
-  String get maghrib => 'المغرب';
+  String get maghrib => 'مغرب';
 
   @override
-  String get isha => 'العشاء';
+  String get isha => 'عشاء';
 
   @override
   String get midnight => 'منتصف الليل';
 
   @override
-  String get alarm => 'منبه';
+  String get alarm => 'إنذار';
 
   @override
   String get notification => 'إشعار';
@@ -1022,59 +1021,59 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quranScriptUthmani => 'عثماني';
 
   @override
-  String get quranScriptIndopak => 'هندي-باكستاني';
+  String get quranScriptIndopak => 'إندوباك';
 
   @override
   String get sajdaAyah => 'آية سجدة';
 
   @override
-  String get required => 'واجبة';
+  String get required => 'مطلوب';
 
   @override
-  String get optional => 'مستحبة';
+  String get optional => 'اختياري';
 
   @override
   String get notificationScheduleWarning =>
-      'ملاحظة: قد يتم تفويت الإشعار المجدول أو التذكير بسبب قيود عمليات الخلفية في نظام تشغيل هاتفك. على سبيل المثال: نظام Origin OS من Vivo، و One UI من Samsung، و ColorOS من Oppo وما إلى ذلك، تقتل أحيانًا الإشعار المجدول أو التذكير. يرجى التحقق من إعدادات نظام التشغيل لديك لجعل التطبيق غير مقيد من عمليات الخلفية.';
+      'ملاحظة: قد يتم تفويت إشعار أو تذكير مجدول بسبب قيود عملية الخلفية في نظام تشغيل هاتفك. على سبيل المثال: Origin OS من Vivo، One UI من Samsung، ColorOS من Oppo إلخ. أحيانًا تقتل الإشعارات أو التذكيرات المجدولة. يرجى التحقق من إعدادات نظام التشغيل الخاص بك لجعل التطبيق غير مقيد من عمليات الخلفية.';
 
   @override
   String get scrollWithRecitation => 'التمرير مع التلاوة';
 
   @override
-  String get quickAccess => 'الوصول السريع';
+  String get quickAccess => 'وصول سريع';
 
   @override
-  String get initiallyScrollAyah => 'التمرير في البداية إلى الآية';
+  String get initiallyScrollAyah => 'التمرير الأولي إلى الآية';
 
   @override
   String get tajweedGuide => 'دليل التجويد';
 
   @override
   String get scrollWithRecitationDesc =>
-      'عند التمكين، سيتم تمرير آية القرآن تلقائيًا بالتزامن مع تلاوة الصوت.';
+      'عند تمكينه، سيتحرك الآية القرآنية تلقائيًا متزامنًا مع التلاوة الصوتية.';
 
   @override
-  String get configuration => 'إعدادات';
+  String get configuration => 'التكوين';
 
   @override
-  String get restoreFromBackup => 'استعادة من نسخة احتياطية';
+  String get restoreFromBackup => 'استعادة من النسخ الاحتياطي';
 
   @override
-  String get history => 'سجل';
+  String get history => 'التاريخ';
 
   @override
   String get search => 'بحث';
 
   @override
-  String get useAudioStream => 'استخدام تيار الصوت';
+  String get useAudioStream => 'استخدام تدفق الصوت';
 
   @override
   String get useAudioStreamDesc =>
-      'بث الصوت مباشرة من الإنترنت بدلاً من التنزيل.';
+      'تدفق الصوت مباشرة من الإنترنت بدلاً من التنزيل.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'قم بتنزيل الصوت للاستخدام في وضع عدم الاتصال وتقليل استهلاك البيانات.';
+      'تنزيل الصوت للاستخدام دون اتصال وتقليل استهلاك البيانات.';
 
   @override
   String get audioSettings => 'إعدادات الصوت';
@@ -1097,21 +1096,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'تحتاج إلى تحميل $requiredDownload من $totalVersesCount آيات.';
+    return 'يحتاج إلى تنزيل $requiredDownload من $totalVersesCount آيات.';
   }
 
   @override
-  String get download => 'تحميل';
+  String get download => 'تنزيل';
 
   @override
-  String get audioDownload => 'تحميل الصوت';
+  String get audioDownload => 'تنزيل الصوت';
 
   @override
-  String get am => 'صباحًا';
+  String get am => 'ص';
 
   @override
-  String get pm => 'مساءً';
+  String get pm => 'م';
 
   @override
-  String get optimizingQuranScript => 'Optimizing Quran Script';
+  String get optimizingQuranScript => 'تحسين نص القرآن';
 }
