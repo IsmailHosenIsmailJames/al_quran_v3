@@ -38,7 +38,6 @@ class QuranScriptFunction {
       for (String surahKey in quranScriptMap.keys) {
         Map surahMap = quranScriptMap[surahKey] as Map;
         for (final ayahKey in surahMap.keys) {
-          log('"$surahKey:$ayahKey"', name: "Key");
           await quranBox.put("$surahKey:$ayahKey", surahMap[ayahKey]);
           processed++;
           if (onProgress != null) {

@@ -1117,5 +1117,5 @@ class AppLocalizationsVi extends AppLocalizations {
   String get pm => 'CH';
 
   @override
-  String get optimizingQuranScript => 'Optimizing Quran Script';
+  String get optimizingQuranScript => 'Tối ưu hóa kịch bản Kinh Qur\'an';
 }

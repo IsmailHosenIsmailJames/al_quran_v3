@@ -114,15 +114,6 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
   "bengali": [
     {
       "language": "Bengali",
-      "name": "শেখ মুজিবুর রহমান",
-      "file_name": "Sheikh_Mujibur_Rahman.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.simple.json.txt",
-    },
-    {
-      "language": "Bengali",
       "name": "তাফসীরে তাইসীরুল কুরআন",
       "file_name": "Taisirul_Quran.simple.json.txt",
       "score": 100.0,
@@ -138,6 +129,15 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "type": "simple",
       "full_path":
           "quranic_universal_library/translation/compressed_translation_simple/Bengali/Rawai_Al-bayan.simple.json.txt",
+    },
+    {
+      "language": "Bengali",
+      "name": "শেখ মুজিবুর রহমান",
+      "file_name": "Sheikh_Mujibur_Rahman.simple.json.txt",
+      "score": 100.0,
+      "type": "simple",
+      "full_path":
+          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.simple.json.txt",
     },
     {
       "language": "Bengali",
