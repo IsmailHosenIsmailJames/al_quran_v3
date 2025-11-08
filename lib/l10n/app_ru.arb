@@ -327,5 +327,6 @@
   "download": "Скачать",
   "audioDownloadAlert": "Необходимо загрузить {requiredDownload} из {totalVersesCount} аятов.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Оптимизация сценария Корана"
 }

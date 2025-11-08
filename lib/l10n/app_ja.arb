@@ -327,5 +327,6 @@
   "download": "ダウンロード",
   "audioDownloadAlert": "{totalVersesCount}アーヤのうち{requiredDownload}をダウンロードする必要があります。",
   "am": "午前",
-  "pm": "午後"
+  "pm": "午後",
+  "optimizingQuranScript": "コーランのスクリプトを最適化しています"
 }

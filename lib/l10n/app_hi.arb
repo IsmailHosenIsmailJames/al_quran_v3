@@ -327,5 +327,6 @@
   "download": "डाउनलोड",
   "audioDownloadAlert": "{totalVersesCount} आयतों में से {requiredDownload} डाउनलोड करने की आवश्यकता है।",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "कुरान स्क्रिप्ट का अनुकूलन"
 }

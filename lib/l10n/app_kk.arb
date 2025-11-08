@@ -327,5 +327,6 @@
   "download": "Жүктеп алу",
   "audioDownloadAlert": "{totalVersesCount} аяттың {requiredDownload} жүктеп алу қажет.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Құран сценарийін оңтайландыру"
 }
