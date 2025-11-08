@@ -5,7 +5,7 @@ Map<String, String> languageToCodeMap = {
   "kashmiri": "ks",
   "bosnian": "bs",
   "amharic": "am",
-  "bengali": "bn", // done
+  "bengali": "bn",
   "english": "en",
   "spanish": "es",
   "divehi": "dv",
@@ -19,7 +19,7 @@ Map<String, String> languageToCodeMap = {
   "telugu": "te",
   "ukrainian": "uk",
   "hindi": "hi",
-  "chinese": "zh", // done
+  "chinese": "zh",
   "maltese": "mt",
   "kurdish": "ku",
   "gujarati": "gu",
@@ -39,7 +39,7 @@ Map<String, String> languageToCodeMap = {
   "polish": "pl",
   "tajik": "tg",
   "kinyarwanda": "rw",
-  "urdu": "ur", // done
+  "urdu": "ur",
   "central_khmer": "km",
   "romanian": "ro",
   "swahili": "sw",
@@ -70,7 +70,7 @@ Map<String, String> languageToCodeMap = {
   "tamil": "ta",
   "swedish": "sv",
   "maranao": "mrn",
-  "arabic": "ar", // done
+  "arabic": "ar",
 };
 
 Map<String, String> codeToLanguageMap = {
