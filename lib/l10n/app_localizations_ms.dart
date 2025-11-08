@@ -36,13 +36,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get hizb => 'Hizb';
 
   @override
-  String get juz => 'Juz\'';
+  String get juz => 'Juz';
 
   @override
-  String get page => 'Muka Surat';
+  String get page => 'Halaman';
 
   @override
-  String get ruku => 'Ruku\'';
+  String get ruku => 'Ruku';
 
   @override
   String get languageSettings => 'Tetapan Bahasa';
@@ -70,34 +70,34 @@ class AppLocalizationsMs extends AppLocalizations {
   String get pleaseSelectOne => 'Sila pilih satu';
 
   @override
-  String get quranTranslationLanguage => 'Bahasa Terjemahan Quran';
+  String get quranTranslationLanguage => 'Bahasa Terjemahan Al-Quran';
 
   @override
   String get selectTranslationLanguage => 'Pilih bahasa terjemahan...';
 
   @override
-  String get quranTranslationBook => 'Buku Terjemahan Quran';
+  String get quranTranslationBook => 'Buku Terjemahan Al-Quran';
 
   @override
   String get selectTranslationBook => 'Pilih buku terjemahan...';
 
   @override
-  String get quranTafsirLanguage => 'Bahasa Tafsir Quran';
+  String get quranTafsirLanguage => 'Bahasa Tafsir Al-Quran';
 
   @override
   String get selectTafsirLanguage => 'Pilih bahasa tafsir...';
 
   @override
-  String get quranTafsirBook => 'Buku Tafsir Quran';
+  String get quranTafsirBook => 'Buku Tafsir Al-Quran';
 
   @override
   String get selectTafsirBook => 'Pilih buku tafsir...';
 
   @override
-  String get quranScriptAndStyle => 'Skrip & Gaya Quran';
+  String get quranScriptAndStyle => 'Skrip & Gaya Al-Quran';
 
   @override
-  String get justAMoment => 'Sekejap...';
+  String get justAMoment => 'Sebentar sahaja...';
 
   @override
   String processProgress(String processName, String percentage) {
@@ -112,18 +112,18 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get unableToDownloadResources =>
-      'Tidak dapat memuat turun sumber...\nSesuatu telah berlaku';
+      'Tidak dapat muat turun sumber...\nSesuatu tidak kena';
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Memuat turun Bacaan Quran Bersegmen';
+      'Muat Turun Bacaan Al-Quran Bersegmen';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Memproses Bacaan Quran Bersegmen';
+      'Memproses Bacaan Al-Quran Bersegmen';
 
   @override
-  String get footnote => 'Nota kaki';
+  String get footnote => 'Catatan Kaki';
 
   @override
   String get tafsir => 'Tafsir';
@@ -139,14 +139,13 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get rememberHomeTabSubtitle =>
-      'Aplikasi akan mengingati tab terakhir yang dibuka di skrin utama.';
+      'Aplikasi akan ingat tab terakhir yang dibuka di skrin utama.';
 
   @override
-  String get wakeLock => 'Skrin Sentiasa Hidup';
+  String get wakeLock => 'Kunci Bangun';
 
   @override
-  String get wakeLockSubtitle =>
-      'Elakkan skrin daripada terpadam secara automatik.';
+  String get wakeLockSubtitle => 'Cegah skrin mati secara automatik.';
 
   @override
   String get settings => 'Tetapan';
@@ -155,7 +154,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get appTheme => 'Tema Aplikasi';
 
   @override
-  String get quranStyle => 'Gaya Quran';
+  String get quranStyle => 'Gaya Al-Quran';
 
   @override
   String get changeTheme => 'Tukar Tema';
@@ -167,22 +166,22 @@ class AppLocalizationsMs extends AppLocalizations {
   String get translation => 'Terjemahan';
 
   @override
-  String get tafsirNotFound => 'Tidak Ditemui';
+  String get tafsirNotFound => 'Tidak Dijumpai';
 
   @override
   String get moreInfo => 'maklumat lanjut';
 
   @override
-  String get playAudio => 'Mainkan Audio';
+  String get playAudio => 'Main Audio';
 
   @override
   String get preview => 'Pratonton';
 
   @override
-  String get loading => 'Memuatkan...';
+  String get loading => 'Sedang Memuat...';
 
   @override
-  String get errorFetchingAddress => 'Ralat mendapatkan alamat';
+  String get errorFetchingAddress => 'Ralat mengambil alamat';
 
   @override
   String get addressNotAvailable => 'Alamat tidak tersedia';
@@ -203,7 +202,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get parameters => 'Parameter: ';
 
   @override
-  String get selectCalculationMethod => 'Pilih Kaedah Kiraan';
+  String get selectCalculationMethod => 'Pilih Kaedah Pengiraan';
 
   @override
   String get shareSelectAyahs => 'Kongsi Ayat Terpilih';
@@ -221,7 +220,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get asText => 'Sebagai Teks';
 
   @override
-  String get playFromSelectedAyah => 'Main dari Ayat Terpilih';
+  String get playFromSelectedAyah => 'Main Dari Ayat Terpilih';
 
   @override
   String get toTafsir => 'Ke Tafsir';
@@ -239,38 +238,38 @@ class AppLocalizationsMs extends AppLocalizations {
   String get bugReportTitle => 'Laporan Pepijat';
 
   @override
-  String get audioCached => 'Audio Dicache';
+  String get audioCached => 'Audio Dikache';
 
   @override
   String get others => 'Lain-lain';
 
   @override
   String get quranTranslationAyahOneMustEnabled =>
-      'Quran|Terjemahan|Ayat, Satu Mesti Diaktifkan';
+      'Al-Quran|Terjemahan|Ayat, Satu Mesti Diaktifkan';
 
   @override
-  String get quranFontSize => 'Saiz Fon Quran';
+  String get quranFontSize => 'Saiz Fon Al-Quran';
 
   @override
-  String get quranLineHeight => 'Ketinggian Baris Quran';
+  String get quranLineHeight => 'Ketinggian Baris Al-Quran';
 
   @override
   String get translationAndTafsirFontSize => 'Saiz Fon Terjemahan & Tafsir';
 
   @override
-  String get quranAyah => 'Ayat Quran';
+  String get quranAyah => 'Ayat Al-Quran';
 
   @override
   String get topToolbar => 'Bar Alat Atas';
 
   @override
-  String get keepOpenWordByWord => 'Kekalkan Paparan Perkataan demi Perkataan';
+  String get keepOpenWordByWord => 'Biarkan Terbuka Perkataan demi Perkataan';
 
   @override
-  String get wordByWordHighlight => 'Serlahan Perkataan demi Perkataan';
+  String get wordByWordHighlight => 'Sorotan Perkataan demi Perkataan';
 
   @override
-  String get quranScriptSettings => 'Tetapan Skrip Quran';
+  String get quranScriptSettings => 'Tetapan Skrip Al-Quran';
 
   @override
   String surahName(String nameSimple) {
@@ -278,21 +277,21 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get pageNumber => 'Muka Surat: ';
+  String get pageNumber => 'Halaman: ';
 
   @override
-  String get quranResources => 'Sumber Quran';
+  String get quranResources => 'Sumber Al-Quran';
 
   @override
   String alreadySelected(String name) {
-    return 'Bahasa \'$name\' telah pun dipilih.';
+    return 'Bahasa \'$name\' sudah dipilih.';
   }
 
   @override
-  String get unableToGetCompassData => 'Tidak dapat memperoleh data kompas';
+  String get unableToGetCompassData => 'Tidak dapat mendapatkan data kompas';
 
   @override
-  String get deviceDoesNotHaveSensors => 'Peranti tidak mempunyai penderia!';
+  String get deviceDoesNotHaveSensors => 'Peranti tidak mempunyai sensor!';
 
   @override
   String get north => 'U';
@@ -313,18 +312,17 @@ class AppLocalizationsMs extends AppLocalizations {
   String get change => 'Tukar';
 
   @override
-  String get calculationMethod => 'Kaedah Kiraan: ';
+  String get calculationMethod => 'Kaedah Pengiraan: ';
 
   @override
   String get downloadPrayerTime => 'Muat Turun Waktu Solat';
 
   @override
-  String get calculationMethodsListEmpty =>
-      'Senarai kaedah kiraan adalah kosong.';
+  String get calculationMethodsListEmpty => 'Senarai kaedah pengiraan kosong.';
 
   @override
   String get noCalculationMethodWithLocationData =>
-      'Tidak dapat mencari sebarang kaedah kiraan dengan data lokasi.';
+      'Tidak dapat mencari kaedah pengiraan dengan data lokasi.';
 
   @override
   String get prayerSettings => 'Tetapan Solat';
@@ -336,11 +334,11 @@ class AppLocalizationsMs extends AppLocalizations {
   String get adjustReminderTime => 'Laraskan Masa Peringatan';
 
   @override
-  String get enforceAlarmSound => 'Kuatkuasakan Bunyi Penggera';
+  String get enforceAlarmSound => 'Paksa Bunyi Penggera';
 
   @override
   String get enforceAlarmSoundDescription =>
-      'Jika diaktifkan, ciri ini akan memainkan penggera pada kelantangan yang ditetapkan di sini, walaupun bunyi telefon anda rendah. Ini memastikan anda tidak terlepas penggera disebabkan kelantangan telefon yang rendah.';
+      'Jika diaktifkan, ciri ini akan mainkan penggera pada kelantangan yang ditetapkan di sini, walaupun bunyi telefon anda rendah. Ini memastikan anda tidak terlepas penggera kerana kelantangan telefon rendah.';
 
   @override
   String get volume => 'Kelantangan';
@@ -365,7 +363,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String itsTimeOf(String prayerName) {
-    return 'Sudah masuk waktu $prayerName';
+    return 'Masa untuk $prayerName';
   }
 
   @override
@@ -373,14 +371,14 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String dateFoundEmpty(String date) {
-    return '$date Ditemui Kosong';
+    return '$date Dijumpai Kosong';
   }
 
   @override
   String get today => 'Hari Ini';
 
   @override
-  String get left => 'Berbaki';
+  String get left => 'Baki';
 
   @override
   String reminderAdded(String prayerName) {
@@ -401,7 +399,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get getPrayerTimesAndQiblaDescription =>
-      'Kira Waktu Solat dan Kiblat untuk Sebarang Lokasi yang Diberikan.';
+      'Kira Waktu Solat dan Kiblat untuk Mana-mana Lokasi.';
 
   @override
   String get getFromGPS => 'Dapatkan dari GPS';
@@ -410,17 +408,17 @@ class AppLocalizationsMs extends AppLocalizations {
   String get or => 'Atau';
 
   @override
-  String get selectYourCity => 'Pilih Bandar anda';
+  String get selectYourCity => 'Pilih Bandar Anda';
 
   @override
   String get noteAboutGPS =>
-      'Nota: Jika anda tidak mahu menggunakan GPS atau tidak berasa selamat, anda boleh memilih bandar anda.';
+      'Nota: Jika anda tidak mahu gunakan GPS atau tidak rasa selamat, anda boleh pilih bandar anda.';
 
   @override
-  String get downloadingLocationResources => 'Memuat turun sumber lokasi...';
+  String get downloadingLocationResources => 'Muat turun sumber lokasi...';
 
   @override
-  String get somethingWentWrong => 'Sesuatu telah berlaku';
+  String get somethingWentWrong => 'Sesuatu tidak kena';
 
   @override
   String get selectYourCountry => 'Pilih Negara Anda';
@@ -441,13 +439,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get pleaseEnableLocationService => 'Sila aktifkan perkhidmatan lokasi';
 
   @override
-  String get donateUs => 'Sumbangan';
+  String get donateUs => 'Dermakan Kepada Kami';
 
   @override
-  String get underDevelopment => 'Dalam pembangunan';
+  String get underDevelopment => 'Sedang Dibangunkan';
 
   @override
-  String get versionLoading => 'Memuatkan...';
+  String get versionLoading => 'Sedang Memuat...';
 
   @override
   String get alQuran => 'Al-Quran';
@@ -459,13 +457,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get notes => 'Nota';
 
   @override
-  String get pinned => 'Disemat';
+  String get pinned => 'Dipinkan';
 
   @override
   String get jumpToAyah => 'Lompat ke Ayat';
 
   @override
-  String get shareMultipleAyah => 'Kongsi Berbilang Ayat';
+  String get shareMultipleAyah => 'Kongsi Beberapa Ayat';
 
   @override
   String get shareThisApp => 'Kongsi Aplikasi Ini';
@@ -480,37 +478,37 @@ class AppLocalizationsMs extends AppLocalizations {
   String get privacyPolicy => 'Dasar Privasi';
 
   @override
-  String get aboutTheApp => 'Mengenai Aplikasi';
+  String get aboutTheApp => 'Tentang Aplikasi';
 
   @override
-  String get resetTheApp => 'Set Semula Aplikasi';
+  String get resetTheApp => 'Tetapkan Semula Aplikasi';
 
   @override
-  String get resetAppWarningTitle => 'Set Semula Data Aplikasi';
+  String get resetAppWarningTitle => 'Tetapkan Semula Data Aplikasi';
 
   @override
   String get resetAppWarningMessage =>
-      'Adakah anda pasti mahu menetapkan semula aplikasi? Semua data anda akan hilang, dan anda perlu menyediakan aplikasi dari awal.';
+      'Adakah anda pasti mahu tetapkan semula aplikasi? Semua data anda akan hilang, dan anda perlu tetapkan aplikasi dari awal.';
 
   @override
   String get cancel => 'Batal';
 
   @override
-  String get reset => 'Set Semula';
+  String get reset => 'Tetapkan Semula';
 
   @override
-  String get shareAppSubject => 'Jom cuba Aplikasi Al-Quran ini!';
+  String get shareAppSubject => 'Lihat Aplikasi Al-Quran Ini!';
 
   @override
   String shareAppBody(String appLink) {
-    return 'Assalamualaikum! Jom cuba aplikasi Al-Quran ini untuk bacaan dan renungan harian. Ia membantu mendekatkan diri dengan kalam Allah. Muat turun di sini: $appLink';
+    return 'Assalamualaikum! Lihat aplikasi Al-Quran ini untuk bacaan dan renungan harian. Ia membantu hubung dengan kalam Allah. Muat turun di sini: $appLink';
   }
 
   @override
   String get openDrawerTooltip => 'Buka Laci';
 
   @override
-  String get quran => 'Quran';
+  String get quran => 'Al-Quran';
 
   @override
   String get prayer => 'Solat';
@@ -535,18 +533,18 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get emptyNoteCollection =>
-      'Koleksi nota ini kosong.\nTambah beberapa nota untuk melihatnya di sini.';
+      'Koleksi nota ini kosong.\nTambah nota untuk lihat di sini.';
 
   @override
   String get emptyPinnedCollection =>
-      'Tiada Ayat yang disemat pada koleksi ini lagi.\nSematkan Ayat untuk melihatnya di sini.';
+      'Tiada ayat dipinkan ke koleksi ini lagi.\nPinkan ayat untuk lihat di sini.';
 
   @override
   String get noContentAvailable => 'Tiada kandungan tersedia.';
 
   @override
   String failedToLoadCollections(String error) {
-    return 'Gagal memuatkan koleksi: $error';
+    return 'Gagal muat koleksi: $error';
   }
 
   @override
@@ -555,16 +553,16 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get sortBy => 'Isih ikut';
+  String get sortBy => 'Susun mengikut';
 
   @override
   String noCollectionAddedYet(String collectionType) {
-    return 'Belum ada $collectionType ditambah';
+    return 'Tiada $collectionType ditambah lagi';
   }
 
   @override
   String pinnedItemsCount(int count) {
-    return '$count item disemat';
+    return '$count item dipinkan';
   }
 
   @override
@@ -577,7 +575,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String updatedTo(String collectionName) {
-    return 'Dikemas kini kepada $collectionName';
+    return 'Dikemas kini ke $collectionName';
   }
 
   @override
@@ -604,7 +602,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get collectionNameCannotBeEmpty => 'Nama koleksi tidak boleh kosong.';
 
   @override
-  String get addedNewCollection => 'Koleksi Baharu Ditambah';
+  String get addedNewCollection => 'Tambah Koleksi Baru';
 
   @override
   String ayahCount(int count) {
@@ -630,19 +628,19 @@ class AppLocalizationsMs extends AppLocalizations {
   String get byUpdateDateDescending => 'Tarikh Kemas Kini Menurun';
 
   @override
-  String get byCreateDateAscending => 'Tarikh Dicipta Menaik';
+  String get byCreateDateAscending => 'Tarikh Cipta Menaik';
 
   @override
-  String get byCreateDateDescending => 'Tarikh Dicipta Menurun';
+  String get byCreateDateDescending => 'Tarikh Cipta Menurun';
 
   @override
-  String get translationNotFound => 'Terjemahan Tidak Ditemui';
+  String get translationNotFound => 'Terjemahan Tidak Dijumpai';
 
   @override
   String get translationTitle => 'Terjemahan:';
 
   @override
-  String get footNoteTitle => 'Nota Kaki:';
+  String get footNoteTitle => 'Catatan Kaki:';
 
   @override
   String get wordByWordTranslation => 'Terjemahan Perkataan demi Perkataan:';
@@ -657,7 +655,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get addNoteButton => 'Tambah Nota';
 
   @override
-  String get pinToCollectionButton => 'Pin ke Koleksi';
+  String get pinToCollectionButton => 'Pinkan ke Koleksi';
 
   @override
   String get shareAsText => 'Kongsi sebagai Teks';
@@ -672,13 +670,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get shareWithTafsir => 'Kongsi dengan Tafsir';
 
   @override
-  String get notFound => 'Tidak ditemui';
+  String get notFound => 'Tidak dijumpai';
 
   @override
   String get noteContentCannotBeEmpty => 'Kandungan nota tidak boleh kosong.';
 
   @override
-  String get noteSavedSuccessfully => 'Nota berjaya disimpan!';
+  String get noteSavedSuccessfully => 'Nota disimpan berjaya!';
 
   @override
   String get selectCollections => 'Pilih Koleksi';
@@ -691,10 +689,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get noCollectionsYetAddANewOne =>
-      'Belum ada koleksi. Tambah yang baharu!';
+      'Tiada koleksi lagi. Tambah yang baru!';
 
   @override
-  String get pleaseWriteYourNoteFirst => 'Sila tulis nota anda dahulu.';
+  String get pleaseWriteYourNoteFirst => 'Sila tulis nota anda dulu.';
 
   @override
   String get noCollectionSelected => 'Tiada Koleksi dipilih';
@@ -706,13 +704,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get nextSelectCollections => 'Seterusnya: Pilih Koleksi';
 
   @override
-  String get addToPinned => 'Tambah ke Disemat';
+  String get addToPinned => 'Tambah Ke Dipinkan';
 
   @override
-  String get pinnedSavedSuccessfully => 'Semat berjaya disimpan!';
+  String get pinnedSavedSuccessfully => 'Dipinkan disimpan berjaya!';
 
   @override
-  String get savePinned => 'Simpan Sematan';
+  String get savePinned => 'Simpan Dipinkan';
 
   @override
   String get closeAudioController => 'Tutup Pengawal Audio';
@@ -733,7 +731,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get repeat => 'Ulang';
 
   @override
-  String get playAsPlaylist => 'Main sebagai Senarai Main';
+  String get playAsPlaylist => 'Main Sebagai Senarai Main';
 
   @override
   String style(String style) {
@@ -750,7 +748,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get pause => 'Jeda';
 
   @override
-  String get selectReciter => 'Pilih Qari';
+  String get selectReciter => 'Pilih Pembaca';
 
   @override
   String source(String source) {
@@ -758,13 +756,13 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get newText => 'Baharu';
+  String get newText => 'Baru';
 
   @override
-  String get more => 'Lagi: ';
+  String get more => 'Lebih: ';
 
   @override
-  String get cacheNotFound => 'Cache Tidak Ditemui';
+  String get cacheNotFound => 'Cache Tidak Dijumpai';
 
   @override
   String get cacheSize => 'Saiz Cache';
@@ -775,10 +773,10 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get clean => 'Bersihkan';
+  String get clean => 'Bersih';
 
   @override
-  String get lastModified => 'Terakhir Diubah suai';
+  String get lastModified => 'Terakhir Diubah';
 
   @override
   String get oneYearAgo => '1 Tahun lalu';
@@ -804,43 +802,43 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get aboutAlQuran => 'Mengenai Al-Quran';
+  String get aboutAlQuran => 'Tentang Al-Quran';
 
   @override
   String get appFullName => 'Al-Quran (Tafsir, Solat, Kiblat, Audio)';
 
   @override
   String get appDescription =>
-      'Aplikasi Islamik yang komprehensif untuk Android, iOS, MacOS, Web, Linux dan Windows, menawarkan bacaan Al-Quran dengan Tafsir & pelbagai terjemahan (termasuk perkataan demi perkataan), waktu solat seluruh dunia dengan pemberitahuan, kompas Kiblat, dan bacaan audio perkataan demi perkataan yang disegerakkan.';
+      'Aplikasi Islam komprehensif untuk Android, iOS, MacOS, Web, Linux dan Windows, menawarkan bacaan Al-Quran dengan Tafsir & pelbagai terjemahan (termasuk perkataan demi perkataan), waktu solat seluruh dunia dengan pemberitahuan, kompas Kiblat, dan bacaan audio perkataan demi perkataan yang diselaraskan.';
 
   @override
   String get dataSourcesNote =>
-      'Nota: Teks Al-Quran, Tafsir, terjemahan, dan sumber audio diperoleh daripada Quran.com, Everyayah.com, dan sumber terbuka lain yang disahkan.';
+      'Nota: Teks Al-Quran, Tafsir, terjemahan, dan sumber audio diambil dari Quran.com, Everyayah.com, dan sumber terbuka yang disahkan lain.';
 
   @override
   String get adFreePromise =>
-      'Aplikasi ini dibina untuk mencari keredhaan Allah. Oleh itu, ia adalah dan akan sentiasa bebas Iklan sepenuhnya.';
+      'Aplikasi ini dibina untuk mencari keredhaan Allah. Oleh itu, ia adalah dan sentiasa bebas iklan sepenuhnya.';
 
   @override
-  String get coreFeatures => 'Ciri-ciri Teras';
+  String get coreFeatures => 'Ciri Utama';
 
   @override
   String get coreFeaturesDescription =>
-      'Terokai fungsi-fungsi utama yang menjadikan Al-Quran v3 sebagai alat yang amat diperlukan untuk amalan Islam harian anda:';
+      'Terokai fungsi utama yang menjadikan Al-Quran v3 alat penting untuk amalan Islam harian anda:';
 
   @override
-  String get prayerTimesTitle => 'Waktu Solat & Peringatan';
+  String get prayerTimesTitle => 'Waktu Solat & Amaran';
 
   @override
   String get prayerTimesDescription =>
-      'Waktu solat yang tepat untuk sebarang lokasi di seluruh dunia menggunakan pelbagai kaedah pengiraan. Tetapkan peringatan dengan pemberitahuan Azan.';
+      'Waktu solat tepat untuk mana-mana lokasi di dunia menggunakan pelbagai kaedah pengiraan. Tetapkan peringatan dengan pemberitahuan Azan.';
 
   @override
   String get qiblaDirectionTitle => 'Arah Kiblat';
 
   @override
   String get qiblaDirectionDescription =>
-      'Cari arah Kiblat dengan mudah melalui paparan kompas yang jelas dan tepat.';
+      'Cari arah Kiblat dengan mudah dengan paparan kompas yang jelas dan tepat.';
 
   @override
   String get translationTafsirTitle => 'Terjemahan & Tafsir Al-Quran';
@@ -850,26 +848,25 @@ class AppLocalizationsMs extends AppLocalizations {
       'Akses 120+ buku terjemahan (termasuk perkataan demi perkataan) dalam 69 bahasa, dan 30+ buku Tafsir.';
 
   @override
-  String get wordByWordAudioTitle =>
-      'Audio & Serlahan Perkataan demi Perkataan';
+  String get wordByWordAudioTitle => 'Audio & Sorotan Perkataan demi Perkataan';
 
   @override
   String get wordByWordAudioDescription =>
-      'Ikuti bacaan audio perkataan demi perkataan yang disegerakkan dan diserlahkan untuk pengalaman pembelajaran yang mendalam.';
+      'Ikuti bacaan audio perkataan demi perkataan yang diselaraskan dan sorotan untuk pengalaman pembelajaran mendalam.';
 
   @override
   String get ayahAudioRecitationTitle => 'Bacaan Audio Ayat';
 
   @override
   String get ayahAudioRecitationDescription =>
-      'Dengarkan bacaan ayat penuh daripada lebih 40+ qari terkenal.';
+      'Dengar bacaan ayat penuh dari lebih 40+ pembaca terkenal.';
 
   @override
   String get notesCloudBackupTitle => 'Nota dengan Sandaran Awan';
 
   @override
   String get notesCloudBackupDescription =>
-      'Simpan nota peribadi dan renungan, disandarkan dengan selamat ke awan (ciri dalam pembangunan/akan datang).';
+      'Simpan nota dan renungan peribadi, disandarkan dengan selamat ke awan (ciri dalam pembangunan/akan datang).';
 
   @override
   String get crossPlatformSupportTitle => 'Sokongan Pelbagai Platform';
@@ -883,70 +880,70 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get backgroundAudioPlaybackDescription =>
-      'Teruskan mendengar bacaan Al-Quran walaupun aplikasi berada di latar belakang.';
+      'Teruskan mendengar bacaan Al-Quran walaupun aplikasi di latar belakang.';
 
   @override
-  String get audioDataCachingTitle => 'Caching Audio & Data';
+  String get audioDataCachingTitle => 'Cache Audio & Data';
 
   @override
   String get audioDataCachingDescription =>
-      'Keupayaan main balik dan luar talian yang lebih baik dengan caching data audio dan Al-Quran yang mantap.';
+      'Main semula yang lebih baik dan keupayaan luar talian dengan cache audio dan data Al-Quran yang kukuh.';
 
   @override
   String get minimalisticInterfaceTitle => 'Antara Muka Minimalis & Bersih';
 
   @override
   String get minimalisticInterfaceDescription =>
-      'Antara muka yang mudah dinavigasi dengan tumpuan kepada pengalaman pengguna dan kebolehbacaan.';
+      'Antara muka mudah dinavigasi dengan fokus pada pengalaman pengguna dan kebolehbacaan.';
 
   @override
-  String get optimizedPerformanceTitle => 'Prestasi & Saiz yang Dioptimumkan';
+  String get optimizedPerformanceTitle => 'Prestasi & Saiz Dioptimumkan';
 
   @override
   String get optimizedPerformanceDescription =>
-      'Aplikasi yang kaya dengan ciri-ciri direka untuk menjadi ringan dan berprestasi tinggi.';
+      'Aplikasi kaya ciri direka untuk ringan dan berprestasi.';
 
   @override
   String get languageSupport => 'Sokongan Bahasa';
 
   @override
   String get languageSupportDescription =>
-      'Aplikasi ini direka bentuk untuk boleh diakses oleh audiens global dengan sokongan untuk bahasa-bahasa berikut (dan lebih banyak lagi akan ditambah secara berterusan):';
+      'Aplikasi ini direka untuk boleh diakses oleh khalayak global dengan sokongan untuk bahasa berikut (dan lebih banyak ditambah secara berterusan):';
 
   @override
   String get technologyAndResources => 'Teknologi & Sumber';
 
   @override
   String get technologyAndResourcesDescription =>
-      'Aplikasi ini dibina menggunakan teknologi terkini dan sumber yang boleh dipercayai:';
+      'Aplikasi ini dibina menggunakan teknologi canggih dan sumber yang boleh dipercayai:';
 
   @override
-  String get flutterFrameworkTitle => 'Rangka Kerja Flutter';
+  String get flutterFrameworkTitle => 'Kerangka Flutter';
 
   @override
   String get flutterFrameworkDescription =>
-      'Dibina dengan Flutter untuk pengalaman berbilang platform yang cantik dan dikompil secara asli dari satu pangkalan kod.';
+      'Dibina dengan Flutter untuk pengalaman indah, dikompil asli, pelbagai platform dari kod tunggal.';
 
   @override
-  String get advancedAudioEngineTitle => 'Enjin Audio Termaju';
+  String get advancedAudioEngineTitle => 'Enjin Audio Canggih';
 
   @override
   String get advancedAudioEngineDescription =>
-      'Dikuasakan oleh pakej Flutter `just_audio` dan `just_audio_background` untuk main balik dan kawalan audio yang mantap.';
+      'Dikuasakan oleh pakej Flutter `just_audio` dan `just_audio_background` untuk main audio kukuh dan kawalan.';
 
   @override
-  String get reliableQuranDataTitle => 'Data Al-Quran yang Boleh Dipercayai';
+  String get reliableQuranDataTitle => 'Data Al-Quran Boleh Dipercayai';
 
   @override
   String get reliableQuranDataDescription =>
-      'Teks, terjemahan, tafsir, dan audio Al-Quran diperoleh daripada API terbuka dan pangkalan data yang disahkan seperti Quran.com & Everyayah.com.';
+      'Teks Al-Quran, terjemahan, tafsir, dan audio diambil dari API terbuka yang disahkan dan pangkalan data seperti Quran.com & Everyayah.com.';
 
   @override
   String get prayerTimeEngineTitle => 'Enjin Waktu Solat';
 
   @override
   String get prayerTimeEngineDescription =>
-      'Menggunakan kaedah pengiraan yang mantap untuk waktu solat yang tepat. Pemberitahuan dikendalikan oleh `flutter_local_notifications` dan tugas latar belakang.';
+      'Menggunakan kaedah pengiraan yang ditetapkan untuk waktu solat tepat. Pemberitahuan dikendalikan oleh `flutter_local_notifications` dan tugas latar belakang.';
 
   @override
   String get crossPlatformSupport => 'Sokongan Pelbagai Platform';
@@ -978,13 +975,13 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      'Saya secara peribadi berjanji untuk memberikan sokongan dan penyelenggaraan berterusan untuk aplikasi ini sepanjang hayat saya, Insya-Allah. Matlamat saya adalah untuk memastikan aplikasi ini kekal sebagai sumber yang bermanfaat untuk Ummah untuk tahun-tahun mendatang.';
+      'Saya secara peribadi berjanji untuk memberikan sokongan dan penyelenggaraan berterusan untuk aplikasi ini sepanjang hayat saya, In Sha Allah. Matlamat saya adalah memastikan aplikasi ini kekal sebagai sumber bermanfaat untuk Ummah untuk tahun-tahun mendatang.';
 
   @override
   String get fajr => 'Subuh';
 
   @override
-  String get sunrise => 'Syuruk';
+  String get sunrise => 'Matahari Terbit';
 
   @override
   String get dhuhr => 'Zohor';
@@ -1029,36 +1026,36 @@ class AppLocalizationsMs extends AppLocalizations {
   String get sajdaAyah => 'Ayat Sajdah';
 
   @override
-  String get required => 'Wajib';
+  String get required => 'Diperlukan';
 
   @override
-  String get optional => 'Sunat';
+  String get optional => 'Pilihan';
 
   @override
   String get notificationScheduleWarning =>
-      'Nota: Pemberitahuan atau Peringatan yang dijadualkan mungkin terlepas kerana sekatan proses latar belakang OS telefon anda. Contohnya: Origin OS Vivo, One UI Samsung, ColorOS Oppo dll kadangkala mematikan Pemberitahuan atau Peringatan yang dijadualkan. Sila semak tetapan OS anda untuk memastikan apl tidak disekat daripada proses latar belakang.';
+      'Nota: Pemberitahuan atau Peringatan Berjadual boleh terlepas kerana sekatan proses latar belakang OS telefon anda. Contohnya: Origin OS Vivo, One UI Samsung, ColorOS Oppo dll. kadang-kadang membunuh Pemberitahuan atau Peringatan berjadual. Sila semak tetapan OS anda untuk buat aplikasi tidak disekat dari proses latar belakang.';
 
   @override
-  String get scrollWithRecitation => 'Tatal dengan Bacaan';
+  String get scrollWithRecitation => 'Skrol dengan Bacaan';
 
   @override
-  String get quickAccess => 'Akses Pantas';
+  String get quickAccess => 'Akses Cepat';
 
   @override
-  String get initiallyScrollAyah => 'Tatal pada mulanya ke ayah';
+  String get initiallyScrollAyah => 'Skrol ke ayat pada mulanya';
 
   @override
   String get tajweedGuide => 'Panduan Tajwid';
 
   @override
   String get scrollWithRecitationDesc =>
-      'Apabila didayakan, ayat al-Quran akan menatal secara automatik selari dengan bacaan audio.';
+      'Apabila diaktifkan, ayat Al-Quran akan skrol secara automatik selaras dengan bacaan audio.';
 
   @override
   String get configuration => 'Konfigurasi';
 
   @override
-  String get restoreFromBackup => 'Pulihkan Daripada Sandaran';
+  String get restoreFromBackup => 'Pulih Dari Sandaran';
 
   @override
   String get history => 'Sejarah';
@@ -1071,11 +1068,11 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get useAudioStreamDesc =>
-      'Strim audio terus dari internet dan bukannya memuat turun.';
+      'Strim audio terus dari internet bukannya muat turun.';
 
   @override
   String get notUseAudioStreamDesc =>
-      'Muat turun audio untuk kegunaan luar talian dan kurangkan penggunaan data.';
+      'Muat turun audio untuk penggunaan luar talian dan kurangkan penggunaan data.';
 
   @override
   String get audioSettings => 'Tetapan Audio';
@@ -1084,7 +1081,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get playbackSpeed => 'Kelajuan Main Semula';
 
   @override
-  String get playbackSpeedDesc => 'Laraskan kelajuan Bacaan al-Quran.';
+  String get playbackSpeedDesc => 'Laraskan kelajuan Bacaan Al-Quran.';
 
   @override
   String get waitForCurrentDownloadToFinish =>
@@ -1094,25 +1091,25 @@ class AppLocalizationsMs extends AppLocalizations {
   String get areYouSure => 'Adakah anda pasti?';
 
   @override
-  String get checkYourInternetConnection => 'Periksa sambungan internet anda.';
+  String get checkYourInternetConnection => 'Semak sambungan internet anda.';
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return 'Perlu memuat turun $requiredDownload daripada $totalVersesCount ayahs.';
+    return 'Perlu muat turun $requiredDownload daripada $totalVersesCount ayat.';
   }
 
   @override
-  String get download => 'Muat turun';
+  String get download => 'Muat Turun';
 
   @override
   String get audioDownload => 'Muat Turun Audio';
 
   @override
-  String get am => 'AM';
+  String get am => 'PG';
 
   @override
-  String get pm => 'PM';
+  String get pm => 'PTG';
 
   @override
-  String get optimizingQuranScript => 'Optimizing Quran Script';
+  String get optimizingQuranScript => 'Mengoptimumkan Skrip Al-Quran';
 }

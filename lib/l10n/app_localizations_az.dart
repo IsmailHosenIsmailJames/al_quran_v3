@@ -1118,5 +1118,5 @@ class AppLocalizationsAz extends AppLocalizations {
   String get pm => 'PM';
 
   @override
-  String get optimizingQuranScript => 'Optimizing Quran Script';
+  String get optimizingQuranScript => 'Quran Mətninin Optimallaşdırılması';
 }
