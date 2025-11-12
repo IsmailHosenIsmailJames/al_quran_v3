@@ -12,7 +12,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
 import "../../resources/quran_resources/available_surah_info_lang.dart";
-import "../../resources/quran_resources/models/translation_book_model.dart"; // Correct import
+import "../../resources/quran_resources/models/translation_book_model.dart";
 import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 

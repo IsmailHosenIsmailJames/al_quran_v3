@@ -471,6 +471,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
     if (success1 && success2 && success3 && success4) {
       userBox.put("is_setup_complete", true);
+
+      QuranTranslationFunction.init(
+        locale: context.read<LanguageCubit>().state.locale,
+      );
       // success and route to home
       Navigator.pushAndRemoveUntil(
         context,

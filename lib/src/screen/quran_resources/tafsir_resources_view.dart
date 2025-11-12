@@ -21,17 +21,24 @@ class TafsirResourcesView extends StatefulWidget {
 }
 
 class _TafsirResourcesViewState extends State<TafsirResourcesView> {
-  List<TafsirBookModel> downloadedTafsirs =
-      QuranTafsirFunction.getDownloadedTafsirBooks();
-  TafsirBookModel? selectedTafsir = QuranTafsirFunction.getTafsirSelection();
+  late List<TafsirBookModel> downloadedTafsirs;
+
+  List<TafsirBookModel>? selectedTafsir;
+
   TafsirBookModel? downloadingData;
 
-  void _refreshData() {
-    setState(() {
-      downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
-      selectedTafsir = QuranTafsirFunction.getTafsirSelection();
-      downloadingData = null;
-    });
+  void _refreshData() async {
+    downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+    selectedTafsir = await QuranTafsirFunction.getTafsirSelections();
+    downloadingData = null;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+    QuranTafsirFunction.getTafsirSelections().then((value) => selectedTafsir);
+    super.initState();
   }
 
   @override
@@ -76,7 +83,11 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                     bool needDownload = matchedTafsir == null;
                     bool isSelected = false;
                     if (!needDownload && selectedTafsir != null) {
-                      if (selectedTafsir?.fullPath == matchedTafsir.fullPath) {
+                      if (selectedTafsir?.any(
+                            (element) =>
+                                element.fullPath == matchedTafsir.fullPath,
+                          ) ==
+                          true) {
                         isSelected = true;
                       }
                     }

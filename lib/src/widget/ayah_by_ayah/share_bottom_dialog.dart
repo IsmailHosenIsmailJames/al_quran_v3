@@ -1,11 +1,13 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -227,14 +229,45 @@ void showShareBottomDialog(
                 child: TextButton.icon(
                   style: textButtonStyle,
                   onPressed: () async {
-                    String? tafsir = await getTafsirFromDb(
-                      ayahKey,
-                      returnAyahKeyIfLinked: false,
+                    List<TafsirBookModel> downloadedTafsir =
+                        QuranTafsirFunction.getDownloadedTafsirBooks();
+                    TafsirBookModel? selected;
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          child: Column(
+                            children: List.generate(downloadedTafsir.length, (
+                              index,
+                            ) {
+                              return TextButton(
+                                onPressed: () {
+                                  selected = downloadedTafsir[index];
+                                  Navigator.pop(context);
+                                },
+                                child: Text(downloadedTafsir[index].name),
+                              );
+                            }),
+                          ),
+                        );
+                      },
                     );
+                    if (selected == null) return;
+                    var tafsir =
+                        (await QuranTafsirFunction.getTafsirForBook(
+                          selected!,
+                          ayahKey,
+                        ))?.tafsir;
+
+                    String? tafsirString;
+                    if (tafsir != null &&
+                        getStringFromTafsirFromDb(tafsir) != null) {
+                      tafsirString = getStringFromTafsirFromDb(tafsir)!;
+                    }
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsirString ?? "Not found"}",
                       ),
                     );
 
@@ -253,8 +286,36 @@ void showShareBottomDialog(
                   backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
-                  String? tafsir = await getTafsirFromDb(
-                    ayahKey,
+                  List<TafsirBookModel> downloadedTafsir =
+                      QuranTafsirFunction.getDownloadedTafsirBooks();
+                  TafsirBookModel? selected;
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        child: Column(
+                          children: List.generate(downloadedTafsir.length, (
+                            index,
+                          ) {
+                            return TextButton(
+                              onPressed: () {
+                                selected = downloadedTafsir[index];
+                                Navigator.pop(context);
+                              },
+                              child: Text(downloadedTafsir[index].name),
+                            );
+                          }),
+                        ),
+                      );
+                    },
+                  );
+                  if (selected == null) return;
+
+                  String? tafsir = getStringFromTafsirFromDb(
+                    (await QuranTafsirFunction.getTafsirForBook(
+                      selected!,
+                      ayahKey,
+                    ))?.tafsir,
                     returnAyahKeyIfLinked: false,
                   );
                   await FlutterClipboard.copy(
