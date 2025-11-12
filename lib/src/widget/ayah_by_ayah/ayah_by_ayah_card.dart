@@ -72,7 +72,6 @@ Widget getAyahByAyahCard({
       translationListWithInfo
           .map<Map>((e) => e.translation?["f"] ?? {})
           .toList();
-  log(footNoteList.toString(), name: "XYZ");
   List<Map<int, String>> footNoteAsStringMap = [];
   for (int index = 0; index < footNoteList.length; index++) {
     Map footNote = footNoteList[index];
