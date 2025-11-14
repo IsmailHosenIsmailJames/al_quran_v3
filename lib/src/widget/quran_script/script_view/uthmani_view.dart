@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
@@ -28,6 +29,8 @@ class NonTajweedScriptView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool enableWordByWordHighlight =
+        context.read<QuranViewCubit>().state.enableWordByWordHighlight == true;
     List words = QuranScriptFunction.getWordListOfAyah(
       isUthmani ? QuranScriptType.uthmani : QuranScriptType.indopak,
       scriptInfo.surahNumber.toString(),
@@ -150,25 +153,19 @@ class NonTajweedScriptView extends StatelessWidget {
                   String word = words[index];
                   bool isLastWord =
                       index == (words.length - 1) && word.length < 3;
+                  bool willHighLight =
+                      highlightingWordIndex == "$ayahKey:${index + 1}";
 
                   return TextSpan(
                     style:
-                        (segmentsReciterState.showAyahHighlight == null ||
-                                scriptInfo.showWordHighlights == false)
-                            ? TextStyle(
-                              fontFamily: isLastWord ? "QPC_Hafs" : null,
-                            )
-                            : (highlightingWordIndex ==
-                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}" ||
-                                segmentsReciterState.showAyahHighlight ==
-                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}")
+                        isLastWord
+                            ? const TextStyle(fontFamily: "QPC_Hafs")
+                            : (enableWordByWordHighlight && willHighLight)
                             ? TextStyle(
                               backgroundColor: themeState.primaryShade200,
-                              fontFamily: isLastWord ? "QPC_Hafs" : null,
                             )
-                            : TextStyle(
-                              fontFamily: isLastWord ? "QPC_Hafs" : null,
-                            ),
+                            : null,
+
                     text: "$word ",
                     recognizer:
                         scriptInfo.skipWordTap == true

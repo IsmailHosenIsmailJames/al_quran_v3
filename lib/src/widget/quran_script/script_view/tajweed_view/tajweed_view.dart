@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/material.dart";
@@ -23,6 +24,9 @@ class TajweedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool enableWordByWordHighlight =
+        context.read<QuranViewCubit>().state.enableWordByWordHighlight == true;
+
     List words = QuranScriptFunction.getWordListOfAyah(
       QuranScriptType.tajweed,
       scriptInfo.surahNumber.toString(),
@@ -126,18 +130,15 @@ class TajweedView extends StatelessWidget {
               textAlign: scriptInfo.textAlign,
               TextSpan(
                 children: List<InlineSpan>.generate(words.length, (index) {
+                  bool willHighLight =
+                      highlightingWordIndex == "$ayahKey:${index + 1}";
+
                   return parseTajweedWord(
                     wordIndex: index,
                     words: List<String>.from(words),
                     baseStyle: quranStyle.copyWith(
                       backgroundColor:
-                          (segmentsReciterState.showAyahHighlight == null ||
-                                  scriptInfo.showWordHighlights == false)
-                              ? null
-                              : (highlightingWordIndex ==
-                                      "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}" ||
-                                  segmentsReciterState.showAyahHighlight ==
-                                      "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}")
+                          enableWordByWordHighlight && willHighLight
                               ? themeState.primaryShade200
                               : null,
                     ),
