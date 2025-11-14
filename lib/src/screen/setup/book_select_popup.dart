@@ -136,6 +136,15 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
       builder: (context, state) {
         return Column(
           children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_downward_rounded),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
               decoration: BoxDecoration(
