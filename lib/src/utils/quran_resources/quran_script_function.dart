@@ -1,5 +1,4 @@
 import "dart:convert";
-import "dart:developer";
 
 import "package:al_quran_v3/src/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -67,7 +66,6 @@ class QuranScriptFunction {
     String ayah,
   ) {
     String ayahKey = "$surah:$ayah";
-    log(ayahKey, name: "ayahKey");
     switch (type) {
       case QuranScriptType.tajweed:
         List<String> compressed = List<String>.from(quranBox!.get(ayahKey));
