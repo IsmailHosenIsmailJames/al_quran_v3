@@ -35,6 +35,18 @@ void showShareBottomDialog(
   List<Map> footNote,
   List<TranslationBookModel?> booksInfo,
 ) {
+  String translationSingleString = "";
+
+  for (int index = 0; index < translation.length; index++) {
+    translationSingleString +=
+        "\n${translation[index]}\n${booksInfo[index] != null ? "-(${booksInfo[index]?.name ?? ""})\n\n" : ""}";
+    if (footNote[index].isNotEmpty) {
+      footNote[index].forEach((key, value) {
+        translationSingleString += "$key - $value\n";
+      });
+    }
+  }
+
   ThemeState themeState = context.read<ThemeCubit>().state;
   AppLocalizations l10n = AppLocalizations.of(context);
 
@@ -48,13 +60,6 @@ void showShareBottomDialog(
     ayahKey.split(":").last,
   );
 
-  if (quranScriptType == QuranScriptType.tajweed) {}
-  String footNoteAsString = "\n";
-  // if (footNote.isNotEmpty) {
-  //   footNote.forEach((key, value) {
-  //     footNoteAsString += "$key. $value\n";
-  //   });
-  // }
   ButtonStyle textButtonStyle = TextButton.styleFrom(
     shape: const RoundedRectangleBorder(),
     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -127,7 +132,9 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                            "${getSurahName(context, surahInfoModel.id)}"
+                            " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                            "${l10n.translation}:\n$translationSingleString",
                       ),
                     );
                   },
@@ -142,7 +149,9 @@ void showShareBottomDialog(
                 ),
                 onPressed: () async {
                   await FlutterClipboard.copy(
-                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                    "${getSurahName(context, surahInfoModel.id)}"
+                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                    "${l10n.translation}:\n$translationSingleString",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
@@ -199,8 +208,7 @@ void showShareBottomDialog(
                         getPlainTextAyahFromTajweedWords(
                               List<String>.from(quranScriptWord),
                             ) +
-                            translation.toString() +
-                            footNoteAsString,
+                            translationSingleString.toString(),
                       ),
                       delay: const Duration(milliseconds: 200),
                     );
@@ -232,22 +240,42 @@ void showShareBottomDialog(
                     List<TafsirBookModel> downloadedTafsir =
                         QuranTafsirFunction.getDownloadedTafsirBooks();
                     TafsirBookModel? selected;
-                    showDialog(
+                    await showDialog(
                       context: context,
                       builder: (context) {
                         return Dialog(
-                          child: Column(
-                            children: List.generate(downloadedTafsir.length, (
-                              index,
-                            ) {
-                              return TextButton(
-                                onPressed: () {
-                                  selected = downloadedTafsir[index];
-                                  Navigator.pop(context);
-                                },
-                                child: Text(downloadedTafsir[index].name),
-                              );
-                            }),
+                          insetPadding: const EdgeInsets.all(10),
+
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  <Widget>[
+                                    Text(
+                                      l10n.selectTafsirBook,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const Divider(),
+                                  ] +
+                                  List.generate(downloadedTafsir.length, (
+                                    index,
+                                  ) {
+                                    return TextButton(
+                                      onPressed: () {
+                                        selected = downloadedTafsir[index];
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "${index + 1}. ${downloadedTafsir[index].name}",
+                                      ),
+                                    );
+                                  }),
+                            ),
                           ),
                         );
                       },
@@ -267,7 +295,10 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsirString ?? "Not found"}",
+                            "${getSurahName(context, surahInfoModel.id)}"
+                            " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                            " ${l10n.translation}:\n$translationSingleString"
+                            " \n${l10n.tafsir}:\n${tafsirString ?? l10n.notFound}",
                       ),
                     );
 
@@ -289,22 +320,40 @@ void showShareBottomDialog(
                   List<TafsirBookModel> downloadedTafsir =
                       QuranTafsirFunction.getDownloadedTafsirBooks();
                   TafsirBookModel? selected;
-                  showDialog(
+                  await showDialog(
                     context: context,
                     builder: (context) {
                       return Dialog(
-                        child: Column(
-                          children: List.generate(downloadedTafsir.length, (
-                            index,
-                          ) {
-                            return TextButton(
-                              onPressed: () {
-                                selected = downloadedTafsir[index];
-                                Navigator.pop(context);
-                              },
-                              child: Text(downloadedTafsir[index].name),
-                            );
-                          }),
+                        insetPadding: const EdgeInsets.all(10),
+
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:
+                                <Widget>[
+                                  Text(
+                                    l10n.selectTafsirBook,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Divider(),
+                                ] +
+                                List.generate(downloadedTafsir.length, (index) {
+                                  return TextButton(
+                                    onPressed: () {
+                                      selected = downloadedTafsir[index];
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "${index + 1}. ${downloadedTafsir[index].name}",
+                                    ),
+                                  );
+                                }),
+                          ),
                         ),
                       );
                     },
@@ -319,7 +368,10 @@ void showShareBottomDialog(
                     returnAyahKeyIfLinked: false,
                   );
                   await FlutterClipboard.copy(
-                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                    "${getSurahName(context, surahInfoModel.id)}"
+                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                    " ${l10n.translation}:\n$translationSingleString"
+                    " \n${l10n.tafsir}:\n${tafsir ?? l10n.notFound}",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
