@@ -37,7 +37,11 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
   @override
   void initState() {
     downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
-    QuranTafsirFunction.getTafsirSelections().then((value) => selectedTafsir);
+    QuranTafsirFunction.getTafsirSelections().then((value) {
+      int previousLen = selectedTafsir?.length ?? 0;
+      selectedTafsir = value;
+      if (previousLen == 0) setState(() {});
+    });
     super.initState();
   }
 
