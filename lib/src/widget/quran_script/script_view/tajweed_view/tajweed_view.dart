@@ -131,12 +131,12 @@ class TajweedView extends StatelessWidget {
                     words: List<String>.from(words),
                     baseStyle: quranStyle.copyWith(
                       backgroundColor:
-                          (segmentsReciterState.showAyahHilight == null ||
+                          (segmentsReciterState.showAyahHighlight == null ||
                                   scriptInfo.showWordHighlights == false)
                               ? null
                               : (highlightingWordIndex ==
                                       "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}" ||
-                                  segmentsReciterState.showAyahHilight ==
+                                  segmentsReciterState.showAyahHighlight ==
                                       "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}")
                               ? themeState.primaryShade200
                               : null,
