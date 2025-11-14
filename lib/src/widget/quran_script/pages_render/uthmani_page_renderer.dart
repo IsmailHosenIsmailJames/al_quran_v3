@@ -107,8 +107,9 @@ class NonTajweedPageRenderer extends StatelessWidget {
                           children:
                               List.generate(words.length, (index) {
                                 String word = words[index];
-                                bool isLastWord = index == (words.length - 1);
-
+                                bool isLastWord =
+                                    index == (words.length - 1) &&
+                                    word.length < 3;
                                 return TextSpan(
                                   text: "$word ",
                                   style:
@@ -116,7 +117,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                                   enableWordByWordHighlight ==
                                                       true) ||
                                               segmentsReciterState
-                                                      .showAyahHilight ==
+                                                      .showAyahHighlight ==
                                                   ayahKey
                                           ? TextStyle(
                                             backgroundColor:

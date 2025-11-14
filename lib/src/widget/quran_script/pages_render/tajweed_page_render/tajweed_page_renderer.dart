@@ -120,7 +120,7 @@ class TajweedPageRenderer extends StatelessWidget {
                                                     enableWordByWordHighlight ==
                                                         true) ||
                                                 segmentsReciterState
-                                                        .showAyahHilight ==
+                                                        .showAyahHighlight ==
                                                     ayahKey
                                             ? themeState.primaryShade200
                                             : null,

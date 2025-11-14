@@ -10,7 +10,7 @@ class ReciterInfoModel {
   String? bio;
   String? segmentsUrl;
   bool isDownloading;
-  String? showAyahHilight;
+  String? showAyahHighlight;
 
   ReciterInfoModel({
     required this.link,
@@ -22,7 +22,7 @@ class ReciterInfoModel {
     this.bio,
     this.segmentsUrl,
     this.isDownloading = false,
-    this.showAyahHilight,
+    this.showAyahHighlight,
   });
 
   ReciterInfoModel copyWith({
@@ -47,7 +47,7 @@ class ReciterInfoModel {
     bio: bio ?? this.bio,
     segmentsUrl: segmentsUrl ?? this.segmentsUrl,
     isDownloading: isDownloading ?? this.isDownloading,
-    showAyahHilight: showAyahHilight,
+    showAyahHighlight: showAyahHilight,
   );
 
   factory ReciterInfoModel.fromJson(String str) =>

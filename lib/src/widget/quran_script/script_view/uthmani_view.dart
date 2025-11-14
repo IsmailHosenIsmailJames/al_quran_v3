@@ -147,16 +147,20 @@ class NonTajweedScriptView extends StatelessWidget {
               textAlign: scriptInfo.textAlign,
               TextSpan(
                 children: List<InlineSpan>.generate(words.length, (index) {
-                  bool isLastWord = index == (words.length - 1);
+                  String word = words[index];
+                  bool isLastWord =
+                      index == (words.length - 1) && word.length < 3;
 
                   return TextSpan(
                     style:
-                        (segmentsReciterState.showAyahHilight == null ||
+                        (segmentsReciterState.showAyahHighlight == null ||
                                 scriptInfo.showWordHighlights == false)
-                            ? null
+                            ? TextStyle(
+                              fontFamily: isLastWord ? "QPC_Hafs" : null,
+                            )
                             : (highlightingWordIndex ==
                                     "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${index + 1}" ||
-                                segmentsReciterState.showAyahHilight ==
+                                segmentsReciterState.showAyahHighlight ==
                                     "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}")
                             ? TextStyle(
                               backgroundColor: themeState.primaryShade200,
@@ -165,7 +169,7 @@ class NonTajweedScriptView extends StatelessWidget {
                             : TextStyle(
                               fontFamily: isLastWord ? "QPC_Hafs" : null,
                             ),
-                    text: words[index] + " ",
+                    text: "$word ",
                     recognizer:
                         scriptInfo.skipWordTap == true
                             ? null

@@ -583,11 +583,11 @@ class _PageByPageViewState extends State<QuranScriptView> {
                           (context, state) => TextButton(
                             style: TextButton.styleFrom(
                               backgroundColor:
-                                  state.showAyahHilight == allAyahsKey[index]
+                                  state.showAyahHighlight == allAyahsKey[index]
                                       ? themeState.primary
                                       : themeState.primaryShade100,
                               foregroundColor:
-                                  state.showAyahHilight == allAyahsKey[index]
+                                  state.showAyahHighlight == allAyahsKey[index]
                                       ? Colors.white
                                       : themeState.primary,
                               shape: RoundedRectangleBorder(
