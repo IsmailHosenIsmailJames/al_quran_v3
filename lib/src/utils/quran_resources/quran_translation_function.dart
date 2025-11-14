@@ -58,7 +58,7 @@ class QuranTranslationFunction {
 
   static bool isInfoAvailable(Locale locale) {
     final boxName = "surah_info_${locale.languageCode}";
-    return Hive.lazyBox(boxName).isNotEmpty;
+    return Hive.isBoxOpen(boxName);
   }
 
   static Future<String> getInfoOfSurah(Locale locale, String id) async {
@@ -311,20 +311,7 @@ class QuranTranslationFunction {
         );
       }
 
-      log(
-        "Translation '${translationBook.name}' (path: ${translationBook.fullPath}) downloaded and processed successfully.",
-        name: "downloadResources",
-      );
-      List<TranslationBookModel>? selectedTranslationBook =
-          await getTranslationSelections();
-      if (selectedTranslationBook?.any(
-            (element) =>
-                element.fileName == translationBook.fileName &&
-                element.language == translationBook.language,
-          ) ==
-          true) {
-        await init();
-      }
+      await init();
       cubit.updateProgress(1.0, "Downloaded: ${translationBook.name}");
       return true;
     } catch (e, s) {
