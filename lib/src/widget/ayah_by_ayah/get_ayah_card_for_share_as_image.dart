@@ -110,38 +110,68 @@ Widget getAyahCardForShareAsImage(
           l10n.translation,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
-        MediaQuery(
-          data: MediaQuery.of(context),
-          child: Directionality(
-            textDirection: Directionality.of(context),
-            child: Html(data: translation.toString()),
-          ),
-        ),
-        keepFootNote ? const Gap(10) : const Gap(0),
-        if (keepFootNote)
-          ...List.generate(footNote.length, (index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${index + 1}.",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  ),
+        ...List.generate(translation.length, (index) {
+          return Column(
+            children: [
+              MediaQuery(
+                data: MediaQuery.of(context),
+                child: Directionality(
+                  textDirection: Directionality.of(context),
+                  child: Html(data: translation[index]),
                 ),
-                MediaQuery(
-                  data: MediaQuery.of(context),
-                  child: Directionality(
-                    textDirection: Directionality.of(context),
-                    child: Html(data: (footNote.toList()[index]).toString()),
-                  ),
+              ),
+              (keepFootNote && footNote[index].isNotEmpty)
+                  ? const Gap(10)
+                  : const Gap(0),
+              if (keepFootNote && footNote[index].isNotEmpty)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(footNote[index].length, (index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(5),
+                        Text(
+                          "${index + 1}.",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        MediaQuery(
+                          data: MediaQuery.of(context),
+                          child: Directionality(
+                            textDirection: Directionality.of(context),
+                            child: Html(
+                              data:
+                                  footNote[index].values
+                                      .elementAt(index)
+                                      .toString(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
-                const Gap(5),
-              ],
-            );
-          }),
+
+              Row(
+                children: [
+                  const Gap(10),
+                  Container(width: 30, height: 2, color: Colors.grey),
+                  const Gap(5),
+                  Text(
+                    booksInfo[index]?.name ?? "",
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+              const Gap(10),
+            ],
+          );
+        }),
       ],
     ),
   );
