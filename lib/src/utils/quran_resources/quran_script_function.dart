@@ -60,12 +60,16 @@ class QuranScriptFunction {
     quranBox = await Hive.openBox("script_${type.name}");
   }
 
+  static Map cacheOfAyah = {};
+
   static List<String> getWordListOfAyah(
     QuranScriptType type,
     String surah,
     String ayah,
   ) {
     String ayahKey = "$surah:$ayah";
+    final fromCache = cacheOfAyah[ayahKey + type.name];
+    if (fromCache != null) return fromCache;
     switch (type) {
       case QuranScriptType.tajweed:
         List<String> compressed = List<String>.from(quranBox!.get(ayahKey));
@@ -77,10 +81,13 @@ class QuranScriptFunction {
             );
           }
         }
+        cacheOfAyah[ayahKey + type.name] = compressed;
         return compressed;
 
       default:
-        return List<String>.from(quranBox!.get(ayahKey));
+        final toReturn = List<String>.from(quranBox!.get(ayahKey));
+        cacheOfAyah[ayahKey + type.name] = toReturn;
+        return toReturn;
     }
   }
 }
