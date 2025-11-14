@@ -327,7 +327,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         scrollControlDisabledMaxHeightRatio:
                                             0.85,
                                         context: context,
-                                        showDragHandle: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadiusGeometry.only(
+                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(10),
+                                              ),
+                                        ),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: false,
@@ -378,7 +384,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         scrollControlDisabledMaxHeightRatio:
                                             0.85,
                                         context: context,
-                                        showDragHandle: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadiusGeometry.only(
+                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(10),
+                                              ),
+                                        ),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: true,
