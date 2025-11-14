@@ -29,9 +29,7 @@ class QuranTafsirFunction {
 
     if (booksListToOpen.isNotEmpty) {
       for (TafsirBookModel bookModel in booksListToOpen) {
-        await Hive.openLazyBox(
-          getTafsirBoxName(tafsirBook: bookModel),
-        );
+        await Hive.openLazyBox(getTafsirBoxName(tafsirBook: bookModel));
       }
     } else {
       log(
@@ -89,8 +87,8 @@ class QuranTafsirFunction {
   static List<TafsirBookModel> getDownloadedTafsirBooks() {
     final userBox = Hive.box("user");
     return List<Map>.from(
-      userBox.get(downloadedTafsirBooksKey, defaultValue: []),
-    )
+          userBox.get(downloadedTafsirBooksKey, defaultValue: []),
+        )
         .map((e) => TafsirBookModel.fromMap(Map<String, dynamic>.from(e)))
         .toList();
   }
@@ -129,7 +127,7 @@ class QuranTafsirFunction {
 
   static Future<void> setTafsirSelection(TafsirBookModel tafsirBook) async {
     final userBox = Hive.box("user");
-    List<TafsirBookModel> selectedTafsirList = 
+    List<TafsirBookModel> selectedTafsirList =
         (await getTafsirSelections()) ?? [];
     if (!selectedTafsirList.any((b) => b.fullPath == tafsirBook.fullPath)) {
       selectedTafsirList.add(tafsirBook);
@@ -143,10 +141,11 @@ class QuranTafsirFunction {
 
   static Future<void> removeTafsirSelection(TafsirBookModel tafsirBook) async {
     final userBox = Hive.box("user");
-    List<TafsirBookModel> selectedTafsirList = 
+    List<TafsirBookModel> selectedTafsirList =
         (await getTafsirSelections()) ?? [];
-    selectedTafsirList
-        .removeWhere((element) => element.fullPath == tafsirBook.fullPath);
+    selectedTafsirList.removeWhere(
+      (element) => element.fullPath == tafsirBook.fullPath,
+    );
     await userBox.put(
       selectedTafsirListKey,
       selectedTafsirList.map((e) => e.toMap()).toList(),
@@ -156,7 +155,7 @@ class QuranTafsirFunction {
 
   static Future<List<TafsirBookModel>?> getTafsirSelections() async {
     final userBox = Hive.box("user");
-    final Map<String, dynamic>? previousBookMap = 
+    final Map<String, dynamic>? previousBookMap =
         userBox.get("selected_tafsir")?.cast<String, dynamic>();
 
     if (previousBookMap != null) {
@@ -165,11 +164,10 @@ class QuranTafsirFunction {
     }
 
     List? booksList = userBox.get(selectedTafsirListKey);
-    List<TafsirBookModel>? bookListModel = booksList
-        ?.map(
-          (e) => TafsirBookModel.fromMap(Map<String, dynamic>.from(e)),
-        )
-        .toList();
+    List<TafsirBookModel>? bookListModel =
+        booksList
+            ?.map((e) => TafsirBookModel.fromMap(Map<String, dynamic>.from(e)))
+            .toList();
 
     return bookListModel;
   }

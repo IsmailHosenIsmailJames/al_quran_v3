@@ -7,7 +7,8 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranResourcesView extends StatefulWidget {
-  const QuranResourcesView({super.key});
+  final int initTab;
+  const QuranResourcesView({super.key, this.initTab = 0});
 
   @override
   State<QuranResourcesView> createState() => _QuranResourcesViewState();
@@ -23,7 +24,11 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: pagesName.length, vsync: this);
+    _tabController = TabController(
+      initialIndex: widget.initTab,
+      length: pagesName.length,
+      vsync: this,
+    );
   }
 
   @override
