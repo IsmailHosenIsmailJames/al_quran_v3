@@ -132,6 +132,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
       },
     );
 
+    if (!Hive.isBoxOpen("user")) await Hive.openBox("user");
+
     await QuranScriptFunction.initQuranScript(
       context.read<QuranViewCubit>().state.quranScriptType,
     );
