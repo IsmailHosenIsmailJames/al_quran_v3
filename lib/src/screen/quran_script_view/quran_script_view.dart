@@ -583,11 +583,11 @@ class _PageByPageViewState extends State<QuranScriptView> {
                           (context, state) => TextButton(
                             style: TextButton.styleFrom(
                               backgroundColor:
-                                  state.showAyahHilight == allAyahsKey[index]
+                                  state.showAyahHighlight == allAyahsKey[index]
                                       ? themeState.primary
                                       : themeState.primaryShade100,
                               foregroundColor:
-                                  state.showAyahHilight == allAyahsKey[index]
+                                  state.showAyahHighlight == allAyahsKey[index]
                                       ? Colors.white
                                       : themeState.primary,
                               shape: RoundedRectangleBorder(
@@ -801,7 +801,8 @@ class AyahElementWidget extends StatelessWidget {
                         key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                         ayahKey: ayahsKeyOfPage[idx],
                         context: context,
-                        translationMap: translationData.translation ?? {},
+                        translationListWithInfo:
+                            translationData.translationList,
                         wordByWord: translationData.wordByWord ?? [],
                       )
                       : FutureBuilder(
@@ -817,8 +818,8 @@ class AyahElementWidget extends StatelessWidget {
                             key: ayahKeyToKey[ayahsKeyOfPage[idx]],
                             ayahKey: ayahsKeyOfPage[idx],
                             context: context,
-                            translationMap:
-                                asyncSnapshot.data?.translation ?? {},
+                            translationListWithInfo:
+                                asyncSnapshot.data?.translationList ?? [],
                             wordByWord: asyncSnapshot.data?.wordByWord ?? [],
                           );
                         },

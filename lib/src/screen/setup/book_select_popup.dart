@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
+import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -136,6 +137,15 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
       builder: (context, state) {
         return Column(
           children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_downward_rounded),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
               decoration: BoxDecoration(
@@ -170,7 +180,12 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                   List<Map<String, dynamic>> books = _allBooks.values.elementAt(
                     index,
                   );
-
+                  if (widget.isTafsir) {
+                    books.sort(
+                      (a, b) =>
+                          (b["score"] as int).compareTo(a["score"] as int),
+                    );
+                  }
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,6 +254,13 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                                 children: [
                                   Row(
                                     children: [
+                                      if (book is TafsirBookModel)
+                                        buildScoreIndicator(
+                                          percentage: (book).score,
+                                          size: 20,
+                                        ),
+                                      if (book is TafsirBookModel)
+                                        const Gap(10),
                                       Expanded(
                                         child: Text(
                                           widget.isTafsir

@@ -1,57 +1,118 @@
 {
   "@@locale": "kk",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
-  "tafsirNotAvailable": "Тәпісір {ayahKey} үшін қолжетімсіз",
-  "tafsirFoundAt": "Тәпісірді мына жерден табасыз: {anotherAyahLinkKey}",
-  "tafsirJumpTo": "{anotherAyahLinkKey} аятына өту",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirNotAvailable": "{ayahKey} үшін тәпсір жоқ",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "Тәпсір мына жерде: {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "{anotherAyahLinkKey} өту",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
   "hizb": "Хизб",
-  "juz": "Пара",
+  "juz": "Жүз",
   "page": "Бет",
-  "ruku": "Рукуғ",
+  "ruku": "Рүкуғ",
   "languageSettings": "Тіл параметрлері",
-  "surahAyah": "{surahName}, {ayahKey}",
+  "surahAyah": "{surahName} {ayahKey}",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
   "ayahsCount": "{count} аят",
-  "saveAndDownload": "Сақтау және жүктеп алу",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "Сақтау және жүктеу",
   "appLanguage": "Қолданба тілі",
   "selectAppLanguage": "Қолданба тілін таңдаңыз...",
-  "pleaseSelectOne": "Біреуін таңдаңыз",
+  "pleaseSelectOne": "Бірін таңдаңыз",
   "quranTranslationLanguage": "Құран аудармасының тілі",
   "selectTranslationLanguage": "Аударма тілін таңдаңыз...",
-  "quranTranslationBook": "Құран аудармасының кітабы",
+  "quranTranslationBook": "Құран аудармасы кітабы",
   "selectTranslationBook": "Аударма кітабын таңдаңыз...",
-  "quranTafsirLanguage": "Құран тәпісірінің тілі",
-  "selectTafsirLanguage": "Тәпісір тілін таңдаңыз...",
-  "quranTafsirBook": "Құран тәпісірінің кітабы",
-  "selectTafsirBook": "Тәпісір кітабын таңдаңыз...",
-  "quranScriptAndStyle": "Құран жазуы мен стилі",
-  "justAMoment": "Бір сәт күте тұрыңыз...",
+  "quranTafsirLanguage": "Құран тәпсірінің тілі",
+  "selectTafsirLanguage": "Тәпсір тілін таңдаңыз...",
+  "quranTafsirBook": "Құран тәпсірі кітабы",
+  "selectTafsirBook": "Тәпсір кітабын таңдаңыз...",
+  "quranScriptAndStyle": "Құран жазуы және стилі",
+  "justAMoment": "Бір сәт күтіңіз...",
   "processProgress": "{processName} {percentage}",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
   "success": "Сәтті",
   "retry": "Қайталау",
-  "unableToDownloadResources": "Ресурстарды жүктеп алу мүмкін болмады...\nБір қателік орын алды",
-  "downloadingSegmentedQuranRecitation": "Бөлінген Құран оқуын жүктеп алу",
-  "processingSegmentedQuranRecitation": "Бөлінген Құран оқуын өңдеу",
-  "footnote": "Түсініктеме",
-  "tafsir": "Тәпісір",
+  "unableToDownloadResources": "Ресурстарды жүктеу мүмкін емес...\nБірдеңе қате кетті",
+  "downloadingSegmentedQuranRecitation": "Бөлінген Құран оқуы жүктелуде",
+  "processingSegmentedQuranRecitation": "Бөлінген Құран оқуы өңделуде",
+  "footnote": "Ескерту",
+  "tafsir": "Тәпсір",
   "wordByWord": "Сөзбе-сөз",
   "pleaseSelectRequiredOption": "Қажетті опцияны таңдаңыз",
-  "rememberHomeTab": "Негізгі бетті есте сақтау",
-  "rememberHomeTabSubtitle": "Қолданба негізгі экрандағы соңғы ашылған бетті есте сақтайды.",
-  "wakeLock": "Экранды ояу ұстау",
-  "wakeLockSubtitle": "Экранның автоматты түрде сөнуіне жол бермеу.",
+  "rememberHomeTab": "Басты бет қойындысын есте сақтау",
+  "rememberHomeTabSubtitle": "Қолданба басты экрандағы соңғы ашылған қойындыны есте сақтайды.",
+  "wakeLock": "Экранды өшірмеу",
+  "wakeLockSubtitle": "Экранның автоматты түрде өшуін болдырмау.",
   "settings": "Параметрлер",
   "appTheme": "Қолданба тақырыбы",
   "quranStyle": "Құран стилі",
   "changeTheme": "Тақырыпты өзгерту",
-  "verseCount": "Аяттар саны: ",
+  "verseCount": "Аят саны: ",
   "translation": "Аударма",
   "tafsirNotFound": "Табылмады",
-  "moreInfo": "толығырақ",
+  "moreInfo": "қосымша ақпарат",
   "playAudio": "Аудионы ойнату",
   "preview": "Алдын ала қарау",
   "loading": "Жүктелуде...",
   "errorFetchingAddress": "Мекенжайды алу қатесі",
-  "addressNotAvailable": "Мекенжай қолжетімсіз",
+  "addressNotAvailable": "Мекенжай қолжетімді емес",
   "latitude": "Ендік: ",
   "longitude": "Бойлық: ",
   "name": "Аты: ",
@@ -59,33 +120,47 @@
   "parameters": "Параметрлер: ",
   "selectCalculationMethod": "Есептеу әдісін таңдаңыз",
   "shareSelectAyahs": "Таңдалған аяттарды бөлісу",
-  "selectionEmpty": "Ештеңе таңдалмаған",
-  "generatingImagePleaseWait": "Сурет жасалуда... Күте тұрыңыз",
+  "selectionEmpty": "Таңдау бос",
+  "generatingImagePleaseWait": "Сурет жасалуда... Күтіңіз",
   "asImage": "Сурет ретінде",
   "asText": "Мәтін ретінде",
-  "playFromSelectedAyah": "Таңдалған аяттан бастап ойнату",
-  "toTafsir": "Тәпісірге өту",
-  "selectAyah": "Аятты таңдау",
-  "toAyah": "Аятқа өту",
-  "searchForASurah": "Сүре іздеу",
-  "bugReportTitle": "Қате туралы хабарлау",
+  "playFromSelectedAyah": "Таңдалған аяттан ойнату",
+  "toTafsir": "Тәпсірге",
+  "selectAyah": "Аят таңдау",
+  "toAyah": "Аятқа",
+  "searchForASurah": "Сүрені іздеу",
+  "bugReportTitle": "Қате туралы есеп",
   "audioCached": "Аудио кэштелген",
-  "others": "Басқалары",
-  "quranTranslationAyahOneMustEnabled": "Құран|Аударма|Аят, кем дегенде біреуі қосулы болуы керек",
-  "quranFontSize": "Құран қаріпінің өлшемі",
-  "quranLineHeight": "Құран жолының биіктігі",
-  "translationAndTafsirFontSize": "Аударма мен тәпісір қаріпінің өлшемі",
+  "others": "Басқалар",
+  "quranTranslationAyahOneMustEnabled": "Құран|Аударма|Аят, Біреуі қосулы болуы керек",
+  "quranFontSize": "Құран қаріп өлшемі",
+  "quranLineHeight": "Құран жол биіктігі",
+  "translationAndTafsirFontSize": "Аударма және тәпсір қаріп өлшемі",
   "quranAyah": "Құран аяты",
-  "topToolbar": "Жоғарғы құралдар тақтасы",
-  "keepOpenWordByWord": "Сөзбе-сөз аударманы ашық қалдыру",
-  "wordByWordHighlight": "Сөзбе-сөз бөлектеу",
-  "quranScriptSettings": "Құран жазуының параметрлері",
+  "topToolbar": "Жоғарғы құралдар панелі",
+  "keepOpenWordByWord": "Сөзбе-сөз ашық ұстау",
+  "wordByWordHighlight": "Сөзбе-сөз ерекшелеу",
+  "quranScriptSettings": "Құран жазу параметрлері",
   "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
   "pageNumber": "Бет: ",
   "quranResources": "Құран ресурстары",
   "alreadySelected": "'{name}' тілі қазірдің өзінде таңдалған.",
-  "unableToGetCompassData": "Компас деректерін алу мүмкін болмады",
-  "deviceDoesNotHaveSensors": "Құрылғыда сенсорлар жоқ !",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unableToGetCompassData": "Компас деректерін алу мүмкін емес",
+  "deviceDoesNotHaveSensors": "Құрылғыда сенсорлар жоқ!",
   "north": "С",
   "east": "Ш",
   "south": "О",
@@ -93,125 +168,240 @@
   "address": "Мекенжай: ",
   "change": "Өзгерту",
   "calculationMethod": "Есептеу әдісі: ",
-  "downloadPrayerTime": "Намаз уақыттарын жүктеп алу",
+  "downloadPrayerTime": "Намаз уақытын жүктеу",
   "calculationMethodsListEmpty": "Есептеу әдістерінің тізімі бос.",
-  "noCalculationMethodWithLocationData": "Орналасқан жер деректерімен ешқандай есептеу әдісі табылмады.",
+  "noCalculationMethodWithLocationData": "Орналасу деректері бар есептеу әдісі табылмады.",
   "prayerSettings": "Намаз параметрлері",
-  "reminderSettings": "Еске салғыш параметрлері",
+  "reminderSettings": "Еске салу параметрлері",
   "adjustReminderTime": "Еске салу уақытын реттеу",
-  "enforceAlarmSound": "Дабыл дыбысын мәжбүрлі түрде қосу",
-  "enforceAlarmSoundDescription": "Егер қосылса, бұл мүмкіндік телефон дыбысы төмен болса да, дабылды осы жерде орнатылған дыбыс деңгейінде ойнатады. Бұл телефонның төмен дыбыс деңгейіне байланысты дабылды өткізіп алмауды қамтамасыз етеді.",
+  "enforceAlarmSound": "Дабыл дыбысын мәжбүрлеу",
+  "enforceAlarmSoundDescription": "Қосылса, бұл мүмкіндік дабылды осында орнатылған дыбыс деңгейінде ойнатады, тіпті телефонның дыбысы төмен болса да. Бұл телефонның төмен дыбысына байланысты дабылды жіберіп алмауыңызды қамтамасыз етеді.",
   "volume": "Дыбыс деңгейі",
   "atPrayerTime": "Намаз уақытында",
   "minBefore": "{minutes} мин бұрын",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "minAfter": "{minutes} мин кейін",
-  "prayerTimeIsAt": "{prayerName} уақыты {prayerTime}",
-  "itsTimeOf": "Қазір {prayerName} уақыты",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} {prayerTime} уақытында",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "{prayerName} уақыты келді",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
   "stopTheAdhan": "Азанды тоқтату",
-  "dateFoundEmpty": "{date} күні бос табылды",
+  "dateFoundEmpty": "{date} бос табылды",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "today": "Бүгін",
   "left": "Қалды",
-  "reminderAdded": "{prayerName} үшін еске салғыш қосылды",
-  "allowNotificationPermission": "Бұл мүмкіндікті пайдалану үшін хабарландыру рұқсатын беріңіз",
-  "reminderRemoved": "{prayerName} үшін еске салғыш жойылды",
-  "getPrayerTimesAndQibla": "Намаз уақыттары мен Құбыланы алу",
-  "getPrayerTimesAndQiblaDescription": "Кез келген орын үшін намаз уақыттары мен құбыланы есептеу.",
-  "getFromGPS": "GPS арқылы алу",
+  "reminderAdded": "{prayerName} үшін еске салу қосылды",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "Бұл мүмкіндікті пайдалану үшін хабарландыру рұқсатын рұқсат етіңіз",
+  "reminderRemoved": "{prayerName} үшін еске салу жойылды",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "Намаз уақыттары мен Қыбланы алу",
+  "getPrayerTimesAndQiblaDescription": "Кез келген орналасу үшін намаз уақыттары мен Қыбланы есептеу.",
+  "getFromGPS": "GPS-тен алу",
   "or": "Немесе",
   "selectYourCity": "Қалаңызды таңдаңыз",
-  "noteAboutGPS": "Ескерту: Егер сіз GPS-ті пайдаланғыңыз келмесе немесе өзіңізді қауіпсіз сезінбесеңіз, қалаңызды таңдай аласыз.",
-  "downloadingLocationResources": "Орналасқан жер ресурстары жүктелуде...",
-  "somethingWentWrong": "Бір қателік орын алды",
+  "noteAboutGPS": "Ескерту: GPS-ті пайдаланғыңыз келмесе немесе қауіпсіздік сезінбесеңіз, қалаңызды таңдай аласыз.",
+  "downloadingLocationResources": "Орналасу ресурстарын жүктеу...",
+  "somethingWentWrong": "Бірдеңе қате кетті",
   "selectYourCountry": "Еліңізді таңдаңыз",
-  "searchForACountry": "Ел іздеу",
-  "selectYourAdministrator": "Әкімшілік аймағыңызды таңдаңыз",
-  "searchForAnAdministrator": "Әкімшілік аймақ іздеу",
-  "searchForACity": "Қала іздеу",
-  "pleaseEnableLocationService": "Орналасқан жерді анықтау қызметін қосыңыз",
-  "donateUs": "Бізге қолдау көрсетіңіз",
-  "underDevelopment": "Жасалу үстінде",
-  "versionLoading": "Нұсқасы жүктелуде...",
-  "alQuran": "Әл-Құран",
-  "mainMenu": "Негізгі мәзір",
-  "notes": "Жазбалар",
-  "pinned": "Бекітілгендер",
+  "searchForACountry": "Елді іздеу",
+  "selectYourAdministrator": "Әкімшіңізді таңдаңыз",
+  "searchForAnAdministrator": "Әкімшіні іздеу",
+  "searchForACity": "Қаланы іздеу",
+  "pleaseEnableLocationService": "Орналасу қызметін қосыңыз",
+  "donateUs": "Бізге қайырымдылық жасаңыз",
+  "underDevelopment": "Әзірлеу үстінде",
+  "versionLoading": "Жүктелуде...",
+  "alQuran": "Әл Құран",
+  "mainMenu": "Басты мәзір",
+  "notes": "Ескертпелер",
+  "pinned": "Бекітілген",
   "jumpToAyah": "Аятқа өту",
   "shareMultipleAyah": "Бірнеше аятты бөлісу",
-  "shareThisApp": "Осы қолданбамен бөлісу",
-  "giveRating": "Бағалау",
-  "bugReport": "Қате туралы хабарлау",
+  "shareThisApp": "Бұл қолданбаны бөлісу",
+  "giveRating": "Баға беру",
+  "bugReport": "Қате туралы есеп",
   "privacyPolicy": "Құпиялылық саясаты",
   "aboutTheApp": "Қолданба туралы",
   "resetTheApp": "Қолданбаны қалпына келтіру",
   "resetAppWarningTitle": "Қолданба деректерін қалпына келтіру",
-  "resetAppWarningMessage": "Қолданбаны қалпына келтіргіңіз келетініне сенімдісіз бе? Барлық деректеріңіз жойылады және қолданбаны басынан бастап орнатуыңыз керек болады.",
-  "cancel": "Бас тарту",
+  "resetAppWarningMessage": "Қолданбаны қалпына келтіргіңіз келеді ме? Барлық деректеріңіз жоғалады, және қолданбаны басынан орнатуыңыз керек.",
+  "cancel": "Болдырмау",
   "reset": "Қалпына келтіру",
-  "shareAppSubject": "Мына Әл-Құран қолданбасын қарап көріңіз!",
-  "shareAppBody": "Ассалаумағалейкум! Күнделікті оқу және ой жүгірту үшін осы Әл-Құран қолданбасын қарап көріңіз. Ол Алланың сөздерімен байланысуға көмектеседі. Мына жерден жүктеп алыңыз: {appLink}",
-  "openDrawerTooltip": "Мәзірді ашу",
+  "shareAppSubject": "Бұл Әл Құран қолданбасын қараңыз!",
+  "shareAppBody": "Ассалаумағалейкум! Күнделікті оқу және ойлану үшін бұл Әл Құран қолданбасын қараңыз. Ол Алланың сөздерімен байланысуға көмектеседі. Мұнда жүктеңіз: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "Тартпаны ашу",
   "quran": "Құран",
   "prayer": "Намаз",
-  "qibla": "Құбыла",
+  "qibla": "Қыбла",
   "audio": "Аудио",
   "surah": "Сүре",
   "pages": "Беттер",
   "note": "Ескерту:",
   "linkedAyahs": "Байланысты аяттар:",
-  "emptyNoteCollection": "Бұл жазбалар жинағы бос.\nОларды осы жерден көру үшін жазбалар қосыңыз.",
-  "emptyPinnedCollection": "Бұл жинаққа әлі аяттар бекітілмеген.\nОларды осы жерден көру үшін аяттарды бекітіңіз.",
+  "emptyNoteCollection": "Бұл ескертпе жинағы бос.\nМұнда көру үшін кейбір ескертпелер қосыңыз.",
+  "emptyPinnedCollection": "Бұл жинаққа әлі аяттар бекітілмеген.\nМұнда көру үшін аяттарды бекітіңіз.",
   "noContentAvailable": "Мазмұн жоқ.",
-  "failedToLoadCollections": "Жинақтарды жүктеу сәтсіз аяқталды: {error}",
-  "searchByCollectionName": "{collectionType} атауы бойынша іздеу...",
+  "failedToLoadCollections": "Жинақтарды жүктеу сәтсіз: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "{collectionType} аты бойынша іздеу...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "sortBy": "Сұрыптау",
-  "noCollectionAddedYet": "Әлі ешқандай {collectionType} қосылмаған",
+  "noCollectionAddedYet": "Әлі {collectionType} қосылмаған",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "pinnedItemsCount": "{count} бекітілген элемент",
-  "notesCount": "{count} жазба",
-  "emptyNameNotAllowed": "Атауын бос қалдыруға болмайды",
-  "updatedTo": "{collectionName} болып жаңартылды",
-  "changeName": "Атауын өзгерту",
-  "changeColor": "Түсін өзгерту",
-  "colorUpdated": "Түсі жаңартылды",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notesCount": "{count} ескертпе",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "Бос ат рұқсат етілмейді",
+  "updatedTo": "{collectionName} жаңартылды",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "changeName": "Атын өзгерту",
+  "changeColor": "Түсті өзгерту",
+  "colorUpdated": "Түс жаңартылды",
   "collectionDeleted": "{collectionName} жойылды",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "delete": "Жою",
   "save": "Сақтау",
-  "collectionNameCannotBeEmpty": "Жинақ атауы бос болмауы керек.",
+  "collectionNameCannotBeEmpty": "Жинақ аты бос болмауы керек.",
   "addedNewCollection": "Жаңа жинақ қосылды",
   "ayahCount": "{count} аят",
-  "byNameAtoZ": "Атауы бойынша А-Я",
-  "byNameZtoA": "Атауы бойынша Я-А",
-  "byElementNumberAscending": "Элемент нөмірі бойынша өсу",
-  "byElementNumberDescending": "Элемент нөмірі бойынша кему",
-  "byUpdateDateAscending": "Жаңарту күні бойынша өсу",
-  "byUpdateDateDescending": "Жаңарту күні бойынша кему",
-  "byCreateDateAscending": "Құру күні бойынша өсу",
-  "byCreateDateDescending": "Құру күні бойынша кему",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "byNameAtoZ": "Ат бойынша A-дан Z-ға",
+  "byNameZtoA": "Ат бойынша Z-дан A-ға",
+  "byElementNumberAscending": "Элемент нөмірі өсуі бойынша",
+  "byElementNumberDescending": "Элемент нөмірі кемуі бойынша",
+  "byUpdateDateAscending": "Жаңарту күні өсуі бойынша",
+  "byUpdateDateDescending": "Жаңарту күні кемуі бойынша",
+  "byCreateDateAscending": "Құру күні өсуі бойынша",
+  "byCreateDateDescending": "Құру күні кемуі бойынша",
   "translationNotFound": "Аударма табылмады",
   "translationTitle": "Аударма:",
-  "footNoteTitle": "Түсініктеме:",
+  "footNoteTitle": "Ескерту:",
   "wordByWordTranslation": "Сөзбе-сөз аударма:",
-  "tafsirButton": "Тәпісір",
+  "tafsirButton": "Тәпсір",
   "shareButton": "Бөлісу",
-  "addNoteButton": "Жазба қосу",
+  "addNoteButton": "Ескертпе қосу",
   "pinToCollectionButton": "Жинаққа бекіту",
   "shareAsText": "Мәтін ретінде бөлісу",
-  "copiedWithTafsir": "Тәпісірмен бірге көшірілді",
+  "copiedWithTafsir": "Тәпсірмен көшірілді",
   "shareAsImage": "Сурет ретінде бөлісу",
-  "shareWithTafsir": "Тәпісірмен бірге бөлісу",
+  "shareWithTafsir": "Тәпсірмен бөлісу",
   "notFound": "Табылмады",
-  "noteContentCannotBeEmpty": "Жазба мазмұны бос болмауы керек.",
-  "noteSavedSuccessfully": "Жазба сәтті сақталды!",
+  "noteContentCannotBeEmpty": "Ескертпе мазмұны бос болмауы керек.",
+  "noteSavedSuccessfully": "Ескертпе сәтті сақталды!",
   "selectCollections": "Жинақтарды таңдау",
-  "addNote": "Жазба қосу",
-  "writeCollectionName": "Жинақ атауын жазыңыз...",
+  "addNote": "Ескертпе қосу",
+  "writeCollectionName": "Жинақ атын жазыңыз...",
   "noCollectionsYetAddANewOne": "Әлі жинақтар жоқ. Жаңасын қосыңыз!",
-  "pleaseWriteYourNoteFirst": "Алдымен жазбаңызды жазыңыз.",
+  "pleaseWriteYourNoteFirst": "Алдымен ескертпеңізді жазыңыз.",
   "noCollectionSelected": "Жинақ таңдалмаған",
-  "saveNote": "Жазбаны сақтау",
+  "saveNote": "Ескертпені сақтау",
   "nextSelectCollections": "Келесі: Жинақтарды таңдау",
-  "addToPinned": "Бекітілгендерге қосу",
-  "pinnedSavedSuccessfully": "Бекітілгендер сәтті сақталды!",
-  "savePinned": "Бекітілгендерді сақтау",
+  "addToPinned": "Бекітілгенге қосу",
+  "pinnedSavedSuccessfully": "Бекітілген сәтті сақталды!",
+  "savePinned": "Бекітілгенді сақтау",
   "closeAudioController": "Аудио контроллерін жабу",
   "previous": "Алдыңғы",
   "rewind": "Артқа айналдыру",
@@ -220,112 +410,185 @@
   "repeat": "Қайталау",
   "playAsPlaylist": "Плейлист ретінде ойнату",
   "style": "Стиль: {style}",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
   "stopAndClose": "Тоқтату және жабу",
   "play": "Ойнату",
   "pause": "Кідірту",
-  "selectReciter": "Қариды таңдау",
+  "selectReciter": "Оқушыны таңдау",
   "source": "Дереккөз: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "newText": "Жаңа",
-  "more": "Толығырақ: ",
+  "more": "Қосымша: ",
   "cacheNotFound": "Кэш табылмады",
   "cacheSize": "Кэш өлшемі",
   "error": "Қате: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "clean": "Тазалау",
   "lastModified": "Соңғы өзгертілген",
   "oneYearAgo": "1 жыл бұрын",
   "monthsAgo": "{number} ай бұрын",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "weeksAgo": "{number} апта бұрын",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "daysAgo": "{number} күн бұрын",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "hoursAgo": "{hour} сағат бұрын",
-  "aboutAlQuran": "Әл-Құран туралы",
-  "appFullName": "Әл-Құран (Тәпісір, Намаз, Құбыла, Аудио)",
-  "appDescription": "Android, iOS, MacOS, Web, Linux және Windows-қа арналған кешенді исламдық қолданба. Тәпісірмен және бірнеше аудармамен (соның ішінде сөзбе-сөз) Құран оқу, хабарландырулары бар дүниежүзілік намаз уақыттары, Құбыла компасы және синхрондалған сөзбе-сөз аудио оқу мүмкіндіктері бар.",
-  "dataSourcesNote": "Ескерту: Құран мәтіндері, тәпісірлер, аудармалар және аудио ресурстар Quran.com, Everyayah.com және басқа да тексерілген ашық дереккөздерден алынған.",
-  "adFreePromise": "Бұл қолданба Алланың разылығын іздеу үшін жасалған. Сондықтан, ол толығымен жарнамасыз және әрқашан солай болып қалады.",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutAlQuran": "Әл Құран туралы",
+  "appFullName": "Әл Құран (Тәпсір, Намаз, Қыбла, Аудио)",
+  "appDescription": "Android, iOS, MacOS, Web, Linux және Windows үшін толық исламдық қолданба, Құран оқуын тәпсір және бірнеше аудармалармен (сөзбе-сөзді қоса), әлемдік намаз уақыттары, Қыбла компасы және сөзбе-сөз аудио оқуымен ұсынады.",
+  "dataSourcesNote": "Ескерту: Құран мәтіндері, тәпсір, аудармалар және аудио ресурстары Quran.com, Everyayah.com және басқа расталған ашық дереккөздерден алынған.",
+  "adFreePromise": "Бұл қолданба Алланың разылығын алу үшін жасалған. Сондықтан ол толықтай жарнамадан бос және әрқашан солай болады.",
   "coreFeatures": "Негізгі мүмкіндіктер",
-  "coreFeaturesDescription": "Әл-Құран v3-ті күнделікті ислами амалдарыңыз үшін таптырмас құрал ететін негізгі функцияларды зерттеңіз:",
-  "prayerTimesTitle": "Намаз уақыттары мен ескертулері",
-  "prayerTimesDescription": "Түрлі есептеу әдістерін қолдана отырып, дүние жүзіндегі кез келген жер үшін дәл намаз уақыттары. Азан хабарландыруларымен еске салғыштарды орнатыңыз.",
-  "qiblaDirectionTitle": "Құбыла бағыты",
-  "qiblaDirectionDescription": "Анық және дәл компас көрінісімен Құбыла бағытын оңай табыңыз.",
-  "translationTafsirTitle": "Құран аудармасы мен тәпісірі",
-  "translationTafsirDescription": "69 тілдегі 120-дан астам аударма кітабына (сөзбе-сөз аударманы қоса) және 30-дан астам тәпісір кітабына қол жеткізіңіз.",
-  "wordByWordAudioTitle": "Сөзбе-сөз аудио және бөлектеу",
-  "wordByWordAudioDescription": "Тереңдетілген оқу тәжірибесі үшін синхрондалған сөзбе-сөз аудио оқуды және бөлектеуді қадағалаңыз.",
-  "ayahAudioRecitationTitle": "Аяттардың аудио оқылуы",
-  "ayahAudioRecitationDescription": "40-тан астам танымал қарилардың толық аят оқуларын тыңдаңыз.",
-  "notesCloudBackupTitle": "Бұлттық сақтық көшірмесі бар жазбалар",
-  "notesCloudBackupDescription": "Жеке жазбалар мен ой-пікірлерді сақтаңыз, олар бұлтта қауіпсіз сақталады (мүмкіндік әзірленуде/жақында қолжетімді болады).",
+  "coreFeaturesDescription": "Әл Құран v3-ті күнделікті исламдық амалдар үшін таптырмас құрал ететін негізгі функцияларды зерттеңіз:",
+  "prayerTimesTitle": "Намаз уақыттары және ескертулер",
+  "prayerTimesDescription": "Әртүрлі есептеу әдістерін пайдалана отырып, әлемнің кез келген орналасуы үшін дәл намаз уақыттары. Азан хабарландыруларымен еске салуды орнатыңыз.",
+  "qiblaDirectionTitle": "Қыбла бағыты",
+  "qiblaDirectionDescription": "Анық және дәл компас көрінісімен Қыбланы оңай табыңыз.",
+  "translationTafsirTitle": "Құран аудармасы және тәпсірі",
+  "translationTafsirDescription": "69 тілде 120+ аударма кітабын (сөзбе-сөзді қоса) және 30+ тәпсір кітабын қолданыңыз.",
+  "wordByWordAudioTitle": "Сөзбе-сөз аудио және ерекшелеу",
+  "wordByWordAudioDescription": "Иммерсивті оқу тәжірибесі үшін сөзбе-сөз аудио оқуы және ерекшелеумен бірге жүріңіз.",
+  "ayahAudioRecitationTitle": "Аят аудио оқуы",
+  "ayahAudioRecitationDescription": "40+ танымал оқушылардан толық аят оқуларын тыңдаңыз.",
+  "notesCloudBackupTitle": "Ескертпелер бұлттық сақтық көшірмемен",
+  "notesCloudBackupDescription": "Жеке ескертпелер мен ойларды сақтаңыз, бұлтқа қауіпсіз сақтық көшірме (мүмкіндік әзірлеу үстінде/жақында).",
   "crossPlatformSupportTitle": "Кросс-платформалық қолдау",
-  "crossPlatformSupportDescription": "Android, Web, Linux және Windows жүйелерінде қолдау көрсетіледі.",
-  "backgroundAudioPlaybackTitle": "Фондық режимде аудио ойнату",
-  "backgroundAudioPlaybackDescription": "Қолданба фондық режимде болса да, Құран оқуын тыңдауды жалғастырыңыз.",
-  "audioDataCachingTitle": "Аудио мен деректерді кэштеу",
-  "audioDataCachingDescription": "Сенімді аудио мен Құран деректерін кэштеу арқылы жақсартылған ойнату және офлайн мүмкіндіктері.",
+  "crossPlatformSupportDescription": "Android, Web, Linux және Windows-та қолдау көрсетіледі.",
+  "backgroundAudioPlaybackTitle": "Фондық аудио ойнату",
+  "backgroundAudioPlaybackDescription": "Қолданба фонда болса да Құран оқуын тыңдауды жалғастырыңыз.",
+  "audioDataCachingTitle": "Аудио және деректер кэштеу",
+  "audioDataCachingDescription": "Мықты аудио және Құран деректерін кэштеумен ойнату және оффлайн мүмкіндіктерін жақсарту.",
   "minimalisticInterfaceTitle": "Минималистік және таза интерфейс",
-  "minimalisticInterfaceDescription": "Пайдаланушы тәжірибесі мен оқылуына баса назар аударылған, навигациясы оңай интерфейс.",
-  "optimizedPerformanceTitle": "Оңтайландырылған өнімділік пен өлшем",
-  "optimizedPerformanceDescription": "Жеңіл және өнімді болу үшін жасалған, мүмкіндіктері мол қолданба.",
-  "languageSupport": "Тілдік қолдау",
-  "languageSupportDescription": "Бұл қолданба келесі тілдерді қолдау арқылы жаһандық аудиторияға қолжетімді болу үшін жасалған (және үнемі жаңалары қосылып отырады):",
-  "technologyAndResources": "Технологиялар мен ресурстар",
-  "technologyAndResourcesDescription": "Бұл қолданба озық технологиялар мен сенімді ресурстарды пайдалана отырып жасалған:",
-  "flutterFrameworkTitle": "Flutter фреймворкы",
-  "flutterFrameworkDescription": "Бір код базасынан әдемі, жергілікті компиляцияланған, көп платформалы тәжірибе үшін Flutter-мен жасалған.",
-  "advancedAudioEngineTitle": "Жетілдірілген аудио қозғалтқышы",
-  "advancedAudioEngineDescription": "Сенімді аудио ойнату және басқару үшін `just_audio` және `just_audio_background` Flutter пакеттерімен жұмыс істейді.",
+  "minimalisticInterfaceDescription": "Пайдаланушы тәжірибесі және оқуға назар аударатын оңай шарлау интерфейсі.",
+  "optimizedPerformanceTitle": "Оңтайландырылған өнімділік және өлшем",
+  "optimizedPerformanceDescription": "Мүмкіндіктері мол қолданба жеңіл және өнімді болу үшін жасалған.",
+  "languageSupport": "Тіл қолдауы",
+  "languageSupportDescription": "Бұл қолданба жаһандық аудиторияға қолжетімді болу үшін келесі тілдерді қолдайды (және қосымшалары үздіксіз қосылуда):",
+  "technologyAndResources": "Технология және ресурстар",
+  "technologyAndResourcesDescription": "Бұл қолданба заманауи технологиялар және сенімді ресурстармен жасалған:",
+  "flutterFrameworkTitle": "Flutter фреймворк",
+  "flutterFrameworkDescription": "Бір код базасынан әдемі, жергілікті компиляцияланған, көпплатформалық тәжірибе үшін Flutter-мен жасалған.",
+  "advancedAudioEngineTitle": "Кеңейтілген аудио қозғалтқышы",
+  "advancedAudioEngineDescription": "Мықты аудио ойнату және басқару үшін `just_audio` және `just_audio_background` Flutter пакеттерімен жұмыс істейді.",
   "reliableQuranDataTitle": "Сенімді Құран деректері",
-  "reliableQuranDataDescription": "Әл-Құран мәтіндері, аудармалары, тәпісірлері және аудиосы Quran.com мен Everyayah.com сияқты тексерілген ашық API-лер мен дерекқорлардан алынған.",
-  "prayerTimeEngineTitle": "Намаз уақытын есептеу қозғалтқышы",
-  "prayerTimeEngineDescription": "Дәл намаз уақыттары үшін белгіленген есептеу әдістерін пайдаланады. Хабарландырулар `flutter_local_notifications` және фондық тапсырмалар арқылы өңделеді.",
+  "reliableQuranDataDescription": "Әл Құран мәтіндері, аудармалар, тәпсірлер және аудио расталған ашық API және дерекқорлардан алынған, мысалы Quran.com және Everyayah.com.",
+  "prayerTimeEngineTitle": "Намаз уақыты қозғалтқышы",
+  "prayerTimeEngineDescription": "Дәл намаз уақыттары үшін белгіленген есептеу әдістерін пайдаланады. Хабарландырулар `flutter_local_notifications` және фондық тапсырмалармен өңделеді.",
   "crossPlatformSupport": "Кросс-платформалық қолдау",
-  "crossPlatformSupportDescription2": "Түрлі платформаларда үздіксіз қол жеткізудің рахатын көріңіз:",
+  "crossPlatformSupportDescription2": "Әртүрлі платформаларда үздіксіз қолжетімділікті пайдаланыңыз:",
   "android": "Android",
   "ios": "iOS",
   "macos": "macOS",
-  "web": "Веб",
+  "web": "Web",
   "linux": "Linux",
   "windows": "Windows",
   "ourLifetimePromise": "Біздің өмірлік уәдеміз",
-  "lifetimePromiseDescription": "Мен жеке өзім өмір бойы, Ин ша Алла, осы қолданбаға үздіксіз қолдау мен техникалық қызмет көрсетуге уәде беремін. Менің мақсатым - бұл қолданбаның алдағы жылдар бойы үммет үшін пайдалы ресурс болып қалуын қамтамасыз ету.",
+  "lifetimePromiseDescription": "Мен жеке өмірім бойы бұл қолданбаны үздіксіз қолдау және күтім көрсетуге уәде беремін, Ин ша Аллаһ. Менің мақсатым - бұл қолданба жылдар бойы үммет үшін пайдалы ресурс болып қалуын қамтамасыз ету.",
   "fajr": "Таң",
   "sunrise": "Күн шығуы",
-  "dhuhr": "Бесін",
-  "asr": "Екінті",
+  "dhuhr": "Түс",
+  "asr": "Екінді",
   "maghrib": "Ақшам",
   "isha": "Құптан",
   "midnight": "Түн ортасы",
   "alarm": "Дабыл",
   "notification": "Хабарландыру",
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
-  "quranScriptTajweed": "Тәжуид",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "quranScriptTajweed": "Тәжвид",
   "quranScriptUthmani": "Усмани",
-  "quranScriptIndopak": "Индо-Пак",
+  "quranScriptIndopak": "Индопак",
   "sajdaAyah": "Сәжде аяты",
-  "required": "Міндетті",
-  "optional": "Ерікті",
-  "notificationScheduleWarning": "Ескерту: Жоспарланған хабарландыру немесе еске салғыш телефонның ОЖ фондық процесс шектеулеріне байланысты өткізіліп кетуі мүмкін. Мысалы: Vivo-ның Origin ОЖ, Samsung-тың One UI, Oppo-ның ColorOS және т.б. кейде жоспарланған хабарландыруды немесе еске салғышты тоқтатады. Қолданбаның фондық процестен шектелмеуі үшін ОЖ параметрлерін тексеріңіз.",
-  "scrollWithRecitation": "Оқумен айналдыру",
-  "quickAccess": "Жылдам қатынау",
-  "initiallyScrollAyah": "Бастапқыда аятқа жылжыңыз",
-  "tajweedGuide": "Тәжуид нұсқаулығы",
-  "scrollWithRecitationDesc": "Қосылған кезде, Құран аяты аудио оқумен синхронды түрде автоматты түрде жылжиды.",
+  "required": "Қажетті",
+  "optional": "Міндетті емес",
+  "notificationScheduleWarning": "Ескерту: Жоспарланған хабарландыру немесе еске салу телефонның ОС фонындағы процесс шектеулеріне байланысты жіберілуі мүмкін. Мысалы: Vivo's Origin OS, Samsung's One UI, Oppo's ColorOS т.б. кейде жоспарланған хабарландыру немесе еске салуды өлтіреді. Қолданбаның фондық процесстен шектелмеуі үшін ОС параметрлерін тексеріңіз.",
+  "scrollWithRecitation": "Оқумен бірге айналдыру",
+  "quickAccess": "Жылдам қолжетімділік",
+  "initiallyScrollAyah": "Бастапқыда аятқа айналдыру",
+  "tajweedGuide": "Тәжвид нұсқауы",
+  "scrollWithRecitationDesc": "Қосылса, Құран аяты аудио оқуымен синхронды түрде автоматты айналады.",
   "configuration": "Конфигурация",
   "restoreFromBackup": "Сақтық көшірмеден қалпына келтіру",
   "history": "Тарих",
   "search": "Іздеу",
   "useAudioStream": "Аудио ағынын пайдалану",
-  "useAudioStreamDesc": "Жүктеп алудың орнына интернеттен тікелей аудио ағыны.",
-  "notUseAudioStreamDesc": "Офлайн пайдалану үшін аудионы жүктеп алыңыз және деректерді тұтынуды азайтыңыз.",
+  "useAudioStreamDesc": "Аудионы тікелей интернеттен ағынмен жүктеу орнына жүктеу.",
+  "notUseAudioStreamDesc": "Оффлайн пайдалану үшін аудионы жүктеу және деректер шығынын азайту.",
   "audioSettings": "Аудио параметрлері",
   "playbackSpeed": "Ойнату жылдамдығы",
-  "playbackSpeedDesc": "Құран оқу жылдамдығын реттеңіз.",
-  "waitForCurrentDownloadToFinish": "Ағымдағы жүктеп алудың аяқталуын күтіңіз.",
+  "playbackSpeedDesc": "Құран оқуының жылдамдығын реттеу.",
+  "waitForCurrentDownloadToFinish": "Ағымдағы жүктеудің аяқталуын күтіңіз.",
   "areYouSure": "Сіз сенімдісіз бе?",
   "checkYourInternetConnection": "Интернет қосылымыңызды тексеріңіз.",
+  "audioDownloadAlert": "{totalVersesCount} аяттың {requiredDownload} жүктеу қажет.",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
+  "download": "Жүктеу",
   "audioDownload": "Аудио жүктеу",
-  "download": "Жүктеп алу",
-  "audioDownloadAlert": "{totalVersesCount} аяттың {requiredDownload} жүктеп алу қажет.",
-  "am": "AM",
-  "pm": "PM"
+  "am": "ТАҢ",
+  "pm": "ТҮС",
+  "optimizingQuranScript": "Құран жазуын оңтайландыру"
 }

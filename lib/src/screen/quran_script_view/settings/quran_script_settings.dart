@@ -74,37 +74,6 @@ class QuranScriptSettings extends StatelessWidget {
               ),
             ),
             const Gap(20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(appLocalizations.quranLineHeight, style: titleStyle),
-                Text(
-                  localizedNumber(context, quranViewState.lineHeight),
-                  style: titleStyle,
-                ),
-              ],
-            ),
-
-            const Gap(10),
-
-            SliderTheme(
-              data: const SliderThemeData(padding: EdgeInsets.zero),
-              child: Slider.adaptive(
-                value: quranViewState.lineHeight,
-                max: 5,
-                min: 0.7,
-                divisions: 100,
-                label:
-                    context.read<QuranViewCubit>().state.lineHeight.toString(),
-                onChanged: (value) {
-                  context.read<QuranViewCubit>().changeLineHeight(
-                    value.toPrecision(2),
-                  );
-                },
-              ),
-            ),
-            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -141,6 +110,38 @@ class QuranScriptSettings extends StatelessWidget {
                 },
               ),
             ),
+            const Gap(20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(appLocalizations.quranLineHeight, style: titleStyle),
+                Text(
+                  localizedNumber(context, quranViewState.lineHeight),
+                  style: titleStyle,
+                ),
+              ],
+            ),
+
+            const Gap(10),
+
+            SliderTheme(
+              data: const SliderThemeData(padding: EdgeInsets.zero),
+              child: Slider.adaptive(
+                value: quranViewState.lineHeight,
+                max: 5,
+                min: 0.7,
+                divisions: 100,
+                label:
+                    context.read<QuranViewCubit>().state.lineHeight.toString(),
+                onChanged: (value) {
+                  context.read<QuranViewCubit>().changeLineHeight(
+                    value.toPrecision(2),
+                  );
+                },
+              ),
+            ),
+
             const Gap(10),
             SwitchListTile(
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((

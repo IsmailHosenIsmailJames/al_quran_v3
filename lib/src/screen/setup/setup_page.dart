@@ -132,6 +132,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
       },
     );
 
+    if (!Hive.isBoxOpen("user")) await Hive.openBox("user");
+
     await QuranScriptFunction.initQuranScript(
       context.read<QuranViewCubit>().state.quranScriptType,
     );
@@ -325,7 +327,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         scrollControlDisabledMaxHeightRatio:
                                             0.85,
                                         context: context,
-                                        showDragHandle: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadiusGeometry.only(
+                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(10),
+                                              ),
+                                        ),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: false,
@@ -376,7 +384,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                         scrollControlDisabledMaxHeightRatio:
                                             0.85,
                                         context: context,
-                                        showDragHandle: true,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadiusGeometry.only(
+                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(10),
+                                              ),
+                                        ),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: true,
@@ -471,6 +485,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
     if (success1 && success2 && success3 && success4) {
       userBox.put("is_setup_complete", true);
+
+      QuranTranslationFunction.init(
+        locale: context.read<LanguageCubit>().state.locale,
+      );
       // success and route to home
       Navigator.pushAndRemoveUntil(
         context,

@@ -1,285 +1,524 @@
 {
   "@@locale": "sw",
   "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
   "tafsirNotAvailable": "Tafsiri haipatikani kwa {ayahKey}",
-  "tafsirFoundAt": "Tafsiri itapatikana kwenye: {anotherAyahLinkKey}",
-  "tafsirJumpTo": "Rukia {anotherAyahLinkKey}",
-  "hizb": "Hizbu",
-  "juz": "Juzu",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "Tafsiri itapatikana kwa: {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "Ruka kwa {anotherAyahLinkKey}",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "hizb": "Hizb",
+  "juz": "Juz",
   "page": "Ukurasa",
-  "ruku": "Rukuu",
+  "ruku": "Ruku",
   "languageSettings": "Mipangilio ya Lugha",
   "surahAyah": "{surahName} {ayahKey}",
-  "ayahsCount": "Aya {count}",
-  "saveAndDownload": "Hifadhi na Upakue",
-  "appLanguage": "Lugha ya Programu",
-  "selectAppLanguage": "Chagua lugha ya programu...",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "ayahsCount": "{count} Aya",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "Hifadhi na Pakua",
+  "appLanguage": "Lugha ya App",
+  "selectAppLanguage": "Chagua lugha ya app...",
   "pleaseSelectOne": "Tafadhali chagua moja",
-  "quranTranslationLanguage": "Lugha ya Tafsiri ya Qur'ani",
+  "quranTranslationLanguage": "Lugha ya Tafsiri ya Kurani",
   "selectTranslationLanguage": "Chagua lugha ya tafsiri...",
-  "quranTranslationBook": "Kitabu cha Tafsiri ya Qur'ani",
+  "quranTranslationBook": "Kitabu cha Tafsiri ya Kurani",
   "selectTranslationBook": "Chagua kitabu cha tafsiri...",
-  "quranTafsirLanguage": "Lugha ya Tafsiri ya Kina (Tafsiri)",
-  "selectTafsirLanguage": "Chagua lugha ya tafsiri ya kina...",
-  "quranTafsirBook": "Kitabu cha Tafsiri ya Kina",
-  "selectTafsirBook": "Chagua kitabu cha tafsiri ya kina...",
-  "quranScriptAndStyle": "Mwandiko na Mtindo wa Qur'ani",
-  "justAMoment": "Subiri kidogo...",
+  "quranTafsirLanguage": "Lugha ya Tafsiri ya Kurani",
+  "selectTafsirLanguage": "Chagua lugha ya tafsiri...",
+  "quranTafsirBook": "Kitabu cha Tafsiri ya Kurani",
+  "selectTafsirBook": "Chagua kitabu cha tafsiri...",
+  "quranScriptAndStyle": "Nakala na Mtindo wa Kurani",
+  "justAMoment": "Kidogo tu...",
   "processProgress": "{processName} {percentage}",
-  "success": "Imefanikiwa",
-  "retry": "Jaribu Tena",
-  "unableToDownloadResources": "Imeshindwa kupakua nyenzo...\nKuna tatizo limetokea",
-  "downloadingSegmentedQuranRecitation": "Inapakua usomaji wa Qur'ani kwa sehemu",
-  "processingSegmentedQuranRecitation": "Inachakata usomaji wa Qur'ani kwa sehemu",
-  "footnote": "Tanbihi",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
+  "success": "Mafanikio",
+  "retry": "Jaribu tena",
+  "unableToDownloadResources": "Imeshindwa kupakua rasilimali...\nKitu kimeharibika",
+  "downloadingSegmentedQuranRecitation": "Inapakua Usomaji wa Kurani Iliyogawanywa",
+  "processingSegmentedQuranRecitation": "Inachakata Usomaji wa Kurani Iliyogawanywa",
+  "footnote": "Maelezo ya Chini",
   "tafsir": "Tafsiri",
   "wordByWord": "Neno kwa Neno",
   "pleaseSelectRequiredOption": "Tafadhali chagua chaguo linalohitajika",
-  "rememberHomeTab": "Kumbuka Kichupo cha Mwanzo",
-  "rememberHomeTabSubtitle": "Programu itakumbuka kichupo cha mwisho kilichofunguliwa kwenye skrini ya mwanzo.",
-  "wakeLock": "Zuia Skrini Isizime",
-  "wakeLockSubtitle": "Zuia skrini isizime yenyewe.",
+  "rememberHomeTab": "Kumbuka Tab ya Nyumbani",
+  "rememberHomeTabSubtitle": "App itakumbuka tab iliyofunguliwa mwisho katika skrini ya nyumbani.",
+  "wakeLock": "Kufunga Skrini",
+  "wakeLockSubtitle": "Zuia skrini kuzima moja kwa moja.",
   "settings": "Mipangilio",
-  "appTheme": "Mandhari ya Programu",
-  "quranStyle": "Mtindo wa Qur'ani",
+  "appTheme": "Mandhari ya App",
+  "quranStyle": "Mtindo wa Kurani",
   "changeTheme": "Badilisha Mandhari",
   "verseCount": "Idadi ya Aya: ",
   "translation": "Tafsiri",
   "tafsirNotFound": "Haikupatikana",
-  "moreInfo": "Maelezo zaidi",
+  "moreInfo": "maelezo zaidi",
   "playAudio": "Cheza Sauti",
-  "preview": "Onyesho la awali",
+  "preview": "Onyesho la Awali",
   "loading": "Inapakia...",
-  "errorFetchingAddress": "Hitilafu kupata anwani",
+  "errorFetchingAddress": "Hitilafu katika kupata anwani",
   "addressNotAvailable": "Anwani haipatikani",
   "latitude": "Latitudo: ",
   "longitude": "Longitudo: ",
   "name": "Jina: ",
   "location": "Mahali: ",
   "parameters": "Vigezo: ",
-  "selectCalculationMethod": "Chagua Njia ya Kukokotoa",
+  "selectCalculationMethod": "Chagua Njia ya Kuhesabu",
   "shareSelectAyahs": "Shiriki Aya Zilizochaguliwa",
-  "selectionEmpty": "Hakuna Ulichochagua",
-  "generatingImagePleaseWait": "Inatengeneza Picha... Tafadhali Subiri",
+  "selectionEmpty": "Uchaguzi Tupu",
+  "generatingImagePleaseWait": "Inazalisha Picha... Tafadhali Subiri",
   "asImage": "Kama Picha",
-  "asText": "Kama Maandishi",
-  "playFromSelectedAyah": "Cheza Kutoka Aya Uliyochagua",
-  "toTafsir": "Kwenye Tafsiri",
+  "asText": "Kama Nakala",
+  "playFromSelectedAyah": "Cheza Kutoka Aya Iliyochaguliwa",
+  "toTafsir": "Kwa Tafsiri",
   "selectAyah": "Chagua Aya",
-  "toAyah": "Kwenye Aya",
+  "toAyah": "Kwa Aya",
   "searchForASurah": "Tafuta sura",
   "bugReportTitle": "Ripoti ya Hitilafu",
-  "audioCached": "Sauti Imehifadhiwa Kwenye Akiba",
-  "others": "Nyinginezo",
-  "quranTranslationAyahOneMustEnabled": "Qur'ani|Tafsiri|Aya, Lazima Moja Iwashwe",
-  "quranFontSize": "Ukubwa wa Mwandiko wa Qur'ani",
-  "quranLineHeight": "Nafasi kati ya Mistari ya Qur'ani",
-  "translationAndTafsirFontSize": "Ukubwa wa Mwandiko wa Tafsiri",
-  "quranAyah": "Aya ya Qur'ani",
-  "topToolbar": "Upau wa Zana wa Juu",
-  "keepOpenWordByWord": "Acha Wazi Neno kwa Neno",
-  "wordByWordHighlight": "Kuangaza Neno kwa Neno",
-  "quranScriptSettings": "Mipangilio ya Mwandiko wa Qur'ani",
+  "audioCached": "Sauti Iliyohifadhiwa",
+  "others": "Nyingine",
+  "quranTranslationAyahOneMustEnabled": "Kurani|Tafsiri|Aya, Moja Lazima Iwashwe",
+  "quranFontSize": "Ukubwa wa Fonti ya Kurani",
+  "quranLineHeight": "Urefu wa Mstari wa Kurani",
+  "translationAndTafsirFontSize": "Ukubwa wa Fonti ya Tafsiri na Tafsiri",
+  "quranAyah": "Aya ya Kurani",
+  "topToolbar": "Upau wa Juu",
+  "keepOpenWordByWord": "Weka Wazi Neno kwa Neno",
+  "wordByWordHighlight": "Angazia Neno kwa Neno",
+  "quranScriptSettings": "Mipangilio ya Nakala ya Kurani",
   "surahName": "{nameSimple}",
-  "pageNumber": "Ukurasa: ",
-  "quranResources": "Nyenzo za Qur'ani",
-  "alreadySelected": "Lugha ya '{name}' tayari imechaguliwa.",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
+  "pageNumber": "Nambari ya Ukurasa: ",
+  "quranResources": "Rasilimali za Kurani",
+  "alreadySelected": "Lugha '{name}' imechaguliwa tayari.",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "unableToGetCompassData": "Imeshindwa kupata data ya dira",
-  "deviceDoesNotHaveSensors": "Kifaa hakina vitambuzi!",
-  "north": "N",
-  "east": "E",
-  "south": "S",
-  "west": "W",
+  "deviceDoesNotHaveSensors": "Kifaa hakina vihisi !",
+  "north": "K",
+  "east": "M",
+  "south": "Kus",
+  "west": "Mag",
   "address": "Anwani: ",
   "change": "Badilisha",
-  "calculationMethod": "Njia ya Kukokotoa: ",
-  "downloadPrayerTime": "Pakua Nyakati za Swala",
-  "calculationMethodsListEmpty": "Orodha ya njia za kukokotoa haina kitu.",
-  "noCalculationMethodWithLocationData": "Haikuweza kupata njia yoyote ya kukokotoa na data ya eneo.",
+  "calculationMethod": "Njia ya Kuhesabu: ",
+  "downloadPrayerTime": "Pakua Muda wa Swala",
+  "calculationMethodsListEmpty": "Orodha ya njia za kuhesabu ni tupu.",
+  "noCalculationMethodWithLocationData": "Haikuweza kupata njia yoyote ya kuhesabu na data ya mahali.",
   "prayerSettings": "Mipangilio ya Swala",
-  "reminderSettings": "Mipangilio ya Vikumbusho",
-  "adjustReminderTime": "Rekebisha Muda wa Kikumbusho",
+  "reminderSettings": "Mipangilio ya Ukumbusho",
+  "adjustReminderTime": "Rekebisha Muda wa Ukumbusho",
   "enforceAlarmSound": "Lazimisha Sauti ya Kengele",
-  "enforceAlarmSoundDescription": "Ikiwashwa, kipengele hiki kitacheza kengele kwa sauti iliyowekwa hapa, hata kama sauti ya simu yako iko chini. Hii inahakikisha hutakosa kengele kwa sababu ya sauti ndogo ya simu.",
+  "enforceAlarmSoundDescription": "Ikiwashwa, Kipengele hiki kitacheza kengele kwa sauti iliyowekwa hapa, hata kama sauti ya simu yako iko chini. Hii inahakikisha hutakosa kengele kwa sababu ya sauti ya simu kuwa chini.",
   "volume": "Sauti",
   "atPrayerTime": "Wakati wa swala",
-  "minBefore": "Dakika {minutes} kabla",
-  "minAfter": "Dakika {minutes} baada ya",
-  "prayerTimeIsAt": "Wakati wa {prayerName} ni saa {prayerTime}",
+  "minBefore": "{minutes} dakika kabla",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "minAfter": "{minutes} dakika baada",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} ni saa {prayerTime}",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
   "itsTimeOf": "Ni wakati wa {prayerName}",
-  "stopTheAdhan": "Sitisha Adhana",
-  "dateFoundEmpty": "{date} Haikupatikana",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "stopTheAdhan": "Simamisha Adhana",
+  "dateFoundEmpty": "{date} Imepatikana Tupu",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "today": "Leo",
-  "left": "Imebaki",
-  "reminderAdded": "Kikumbusho cha {prayerName} kimeongezwa",
-  "allowNotificationPermission": "Tafadhali ruhusu idhini ya arifa kutumia kipengele hiki",
-  "reminderRemoved": "Kikumbusho cha {prayerName} kimeondolewa",
-  "getPrayerTimesAndQibla": "Pata Nyakati za Swala na Qibla",
-  "getPrayerTimesAndQiblaDescription": "Kokotoa Nyakati za Swala na Qibla kwa Eneo Lolote.",
+  "left": "Kushoto",
+  "reminderAdded": "Ukumbusho wa {prayerName} umeongezwa",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "Tafadhali ruhusu idhini ya arifa ili kutumia kipengele hiki",
+  "reminderRemoved": "Ukumbusho wa {prayerName} umeondolewa",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "Pata Muda wa Swala na Kibla",
+  "getPrayerTimesAndQiblaDescription": "Hesabu Muda wa Swala na Kibla kwa Mahali Yoyote Iliyotolewa.",
   "getFromGPS": "Pata kutoka GPS",
   "or": "Au",
-  "selectYourCity": "Chagua Jiji lako",
-  "noteAboutGPS": "Kumbuka: Ikiwa hutaki kutumia GPS au hujisikii salama, unaweza kuchagua jiji lako.",
-  "downloadingLocationResources": "Inapakua nyenzo za eneo...",
-  "somethingWentWrong": "Kuna tatizo limetokea",
+  "selectYourCity": "Chagua Mji Wako",
+  "noteAboutGPS": "Kumbuka: Ikiwa hutaki kutumia GPS au hujisikia salama, unaweza kuchagua mji wako.",
+  "downloadingLocationResources": "Inapakua rasilimali za mahali...",
+  "somethingWentWrong": "Kitu kimeharibika",
   "selectYourCountry": "Chagua Nchi Yako",
   "searchForACountry": "Tafuta nchi",
-  "selectYourAdministrator": "Chagua Mkoa Wako",
-  "searchForAnAdministrator": "Tafuta mkoa",
-  "searchForACity": "Tafuta jiji",
-  "pleaseEnableLocationService": "Tafadhali washa huduma ya eneo",
+  "selectYourAdministrator": "Chagua Msimamizi Wako",
+  "searchForAnAdministrator": "Tafuta msimamizi",
+  "searchForACity": "Tafuta mji",
+  "pleaseEnableLocationService": "Tafadhali washa huduma ya mahali",
   "donateUs": "Tuchangie",
-  "underDevelopment": "Inaendelezwa",
+  "underDevelopment": "Inaendelea kujengwa",
   "versionLoading": "Inapakia...",
-  "alQuran": "Al Qur'an",
+  "alQuran": "Al Kurani",
   "mainMenu": "Menyu Kuu",
-  "notes": "Dondoo",
-  "pinned": "Zilizobandikwa",
-  "jumpToAyah": "Rukia Aya",
+  "notes": "Maelezo",
+  "pinned": "Iliyobandikwa",
+  "jumpToAyah": "Ruka kwa Aya",
   "shareMultipleAyah": "Shiriki Aya Nyingi",
-  "shareThisApp": "Shiriki Programu Hii",
+  "shareThisApp": "Shiriki App Hii",
   "giveRating": "Toa Ukadiriaji",
   "bugReport": "Ripoti ya Hitilafu",
   "privacyPolicy": "Sera ya Faragha",
-  "aboutTheApp": "Kuhusu Programu",
-  "resetTheApp": "Weka Upya Programu",
-  "resetAppWarningTitle": "Weka Upya Data ya Programu",
-  "resetAppWarningMessage": "Una uhakika unataka kuweka upya programu? Data zako zote zitapotea, na utahitaji kuiweka programu upya tangu mwanzo.",
+  "aboutTheApp": "Kuhusu App",
+  "resetTheApp": "Weka Upya App",
+  "resetAppWarningTitle": "Weka Upya Data ya App",
+  "resetAppWarningMessage": "Una uhakika unataka kuweka upya app? Data yako yote itapotea, na utahitaji kuanzisha app tangu mwanzo.",
   "cancel": "Ghairi",
   "reset": "Weka Upya",
-  "shareAppSubject": "Tazama Programu hii ya Al Qur'an!",
-  "shareAppBody": "Assalamu alaykum! Tazama programu hii ya Al Qur'an kwa usomaji na tafakari ya kila siku. Inasaidia kuungana na maneno ya Mwenyezi Mungu. Pakua hapa: {appLink}",
+  "shareAppSubject": "Angalia App Hii ya Al Kurani!",
+  "shareAppBody": "Assalamualaikum! Angalia app hii ya Al Kurani kwa kusoma na kutafakari kila siku. Inasaidia kuungana na maneno ya Allah. Pakua hapa: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
   "openDrawerTooltip": "Fungua Droo",
-  "quran": "Qur'ani",
+  "quran": "Kurani",
   "prayer": "Swala",
-  "qibla": "Qibla",
+  "qibla": "Kibla",
   "audio": "Sauti",
   "surah": "Sura",
   "pages": "Kurasa",
-  "note": "Kumbuka:",
-  "linkedAyahs": "Aya Zinazohusiana:",
-  "emptyNoteCollection": "Mkusanyiko huu wa dondoo hauna kitu.\nOngeza dondoo ili zionekane hapa.",
-  "emptyPinnedCollection": "Hakuna Aya zilizobandikwa kwenye mkusanyiko huu.\nBandika Aya ili zionekane hapa.",
+  "note": "Maelezo:",
+  "linkedAyahs": "Aya Zilizounganishwa:",
+  "emptyNoteCollection": "Mkusanyiko huu wa maelezo ni tupu.\nOngeza maelezo ili kuyaona hapa.",
+  "emptyPinnedCollection": "Hakuna Aya zilizobandikwa kwa mkusanyiko huu bado.\nBandika Aya ili kuyaona hapa.",
   "noContentAvailable": "Hakuna maudhui yanayopatikana.",
-  "failedToLoadCollections": "Imeshindwa kupakia makusanyo: {error}",
-  "searchByCollectionName": "Tafuta kwa Jina la {collectionType}...",
+  "failedToLoadCollections": "Imeshindwa kupakia mikusanyiko: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "Tafuta Kwa Jina la {collectionType}...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "sortBy": "Panga kwa",
   "noCollectionAddedYet": "Hakuna {collectionType} iliyoongezwa bado",
-  "pinnedItemsCount": "Vipengee {count} vilivyobandikwa",
-  "notesCount": "Dondoo {count}",
-  "emptyNameNotAllowed": "Jina tupu haliruhusiwi",
-  "updatedTo": "Imesasishwa kuwa {collectionName}",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "pinnedItemsCount": "{count} vitu vilivyobandikwa",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notesCount": "{count} maelezo",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "Jina tupu hairuhusiwi",
+  "updatedTo": "Imesasishwa kwa {collectionName}",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "changeName": "Badilisha Jina",
   "changeColor": "Badilisha Rangi",
   "colorUpdated": "Rangi imesasishwa",
   "collectionDeleted": "{collectionName} Imefutwa",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "delete": "Futa",
   "save": "Hifadhi",
   "collectionNameCannotBeEmpty": "Jina la mkusanyiko haliwezi kuwa tupu.",
-  "addedNewCollection": "Mkusanyiko Mpya Umeongezwa",
-  "ayahCount": "Aya {count}",
+  "addedNewCollection": "Imeongezwa Mkusanyiko Mpya",
+  "ayahCount": "{count} Aya",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "byNameAtoZ": "Jina A-Z",
   "byNameZtoA": "Jina Z-A",
-  "byElementNumberAscending": "Nambari ya Kipengee Kupanda",
-  "byElementNumberDescending": "Nambari ya Kipengee Kushuka",
-  "byUpdateDateAscending": "Tarehe ya Usasishaji Kupanda",
-  "byUpdateDateDescending": "Tarehe ya Usasishaji Kushuka",
-  "byCreateDateAscending": "Tarehe ya Kuundwa Kupanda",
-  "byCreateDateDescending": "Tarehe ya Kuundwa Kushuka",
+  "byElementNumberAscending": "Nambari ya Kipengele Inayopanda",
+  "byElementNumberDescending": "Nambari ya Kipengele Inayoshuka",
+  "byUpdateDateAscending": "Tarehe ya Kusasisha Inayopanda",
+  "byUpdateDateDescending": "Tarehe ya Kusasisha Inayoshuka",
+  "byCreateDateAscending": "Tarehe ya Kuunda Inayopanda",
+  "byCreateDateDescending": "Tarehe ya Kuunda Inayoshuka",
   "translationNotFound": "Tafsiri Haikupatikana",
   "translationTitle": "Tafsiri:",
-  "footNoteTitle": "Tanbihi:",
+  "footNoteTitle": "Maelezo ya Chini:",
   "wordByWordTranslation": "Tafsiri Neno kwa Neno:",
   "tafsirButton": "Tafsiri",
   "shareButton": "Shiriki",
-  "addNoteButton": "Ongeza Dondoo",
-  "pinToCollectionButton": "Bandika kwenye Mkusanyiko",
-  "shareAsText": "Shiriki kama Maandishi",
+  "addNoteButton": "Ongeza Maelezo",
+  "pinToCollectionButton": "Bandika kwa Mkusanyiko",
+  "shareAsText": "Shiriki kama Nakala",
   "copiedWithTafsir": "Imenakiliwa na Tafsiri",
   "shareAsImage": "Shiriki kama Picha",
   "shareWithTafsir": "Shiriki na Tafsiri",
   "notFound": "Haikupatikana",
-  "noteContentCannotBeEmpty": "Maudhui ya dondoo hayawezi kuwa tupu.",
-  "noteSavedSuccessfully": "Dondoo limehifadhiwa kikamilifu!",
-  "selectCollections": "Chagua Makusanyo",
-  "addNote": "Ongeza Dondoo",
+  "noteContentCannotBeEmpty": "Maudhui ya maelezo haliwezi kuwa tupu.",
+  "noteSavedSuccessfully": "Maelezo yamehifadhiwa kwa mafanikio!",
+  "selectCollections": "Chagua Mikusanyiko",
+  "addNote": "Ongeza Maelezo",
   "writeCollectionName": "Andika jina la mkusanyiko...",
-  "noCollectionsYetAddANewOne": "Hakuna makusanyo bado. Ongeza jipya!",
-  "pleaseWriteYourNoteFirst": "Tafadhali andika dondoo lako kwanza.",
+  "noCollectionsYetAddANewOne": "Hakuna mikusanyiko bado. Ongeza mpya!",
+  "pleaseWriteYourNoteFirst": "Tafadhali andika maelezo yako kwanza.",
   "noCollectionSelected": "Hakuna Mkusanyiko uliochaguliwa",
-  "saveNote": "Hifadhi Dondoo",
-  "nextSelectCollections": "Inayofuata: Chagua Makusanyo",
-  "addToPinned": "Ongeza kwenye Zilizobandikwa",
-  "pinnedSavedSuccessfully": "Imehifadhiwa kikamilifu kwenye zilizobandikwa!",
-  "savePinned": "Hifadhi Zilizobandikwa",
+  "saveNote": "Hifadhi Maelezo",
+  "nextSelectCollections": "Ifuatayo: Chagua Mikusanyiko",
+  "addToPinned": "Ongeza kwa Iliyobandikwa",
+  "pinnedSavedSuccessfully": "Iliyobandikwa imehifadhiwa kwa mafanikio!",
+  "savePinned": "Hifadhi Iliyobandikwa",
   "closeAudioController": "Funga Kidhibiti cha Sauti",
-  "previous": "Iliyopita",
+  "previous": "Iliyotangulia",
   "rewind": "Rudisha Nyuma",
-  "fastForward": "Songesha Mbele",
-  "playNextAyah": "Cheza Aya Inayofuata",
+  "fastForward": "Songa Mbele",
+  "playNextAyah": "Cheza Aya Ifuatayo",
   "repeat": "Rudia",
-  "playAsPlaylist": "Cheza kama Orodha ya Kucheza",
+  "playAsPlaylist": "Cheza Kama Orodha ya Kucheza",
   "style": "Mtindo: {style}",
-  "stopAndClose": "Sitisha na Funga",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "stopAndClose": "Simamisha & Funga",
   "play": "Cheza",
   "pause": "Sitisha",
   "selectReciter": "Chagua Msomaji",
   "source": "Chanzo: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "newText": "Mpya",
   "more": "Zaidi: ",
-  "cacheNotFound": "Akiba Haikupatikana",
-  "cacheSize": "Ukubwa wa Akiba",
+  "cacheNotFound": "Hifadhi Haikupatikana",
+  "cacheSize": "Ukubwa wa Hifadhi",
   "error": "Hitilafu: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "clean": "Safisha",
-  "lastModified": "Ilibadilishwa Mwisho",
+  "lastModified": "Ilirekebishwa Mwisho",
   "oneYearAgo": "Mwaka 1 uliopita",
-  "monthsAgo": "Miezi {number} iliyopita",
-  "weeksAgo": "Wiki {number} zilizopita",
-  "daysAgo": "Siku {number} zilizopita",
-  "hoursAgo": "Saa {hour} zilizopita",
-  "aboutAlQuran": "Kuhusu Al Qur'an",
-  "appFullName": "Al Qur'an (Tafsiri, Swala, Qibla, Sauti)",
-  "appDescription": "Programu kamili ya Kiislamu kwa ajili ya Android, iOS, MacOS, Web, Linux na Windows, inayotoa usomaji wa Qur'ani na Tafsiri ya Kina & tafsiri nyingi (ikiwemo neno kwa neno), nyakati za swala duniani kote na arifa, dira ya Qibla, na usomaji wa sauti wa neno kwa neno uliolandanishwa.",
-  "dataSourcesNote": "Kumbuka: Maandishi ya Qur'ani, Tafsiri, tafsiri nyingine, na nyenzo za sauti zinatokana na Quran.com, Everyayah.com, na vyanzo vingine vilivyothibitishwa vya wazi.",
-  "adFreePromise": "Programu hii imejengwa ili kutafuta radhi za Mwenyezi Mungu. Kwa hivyo, haina na daima haitakuwa na matangazo kabisa.",
+  "monthsAgo": "{number} Miezi iliyopita",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "weeksAgo": "{number} Wiki zilizopita",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "daysAgo": "{number} Siku zilizopita",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursAgo": "{hour} Saa zilizopita",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutAlQuran": "Kuhusu Al Kurani",
+  "appFullName": "Al Kurani (Tafsiri, Swala, Kibla, Sauti)",
+  "appDescription": "Programu kamili ya Kiislamu kwa Android, iOS, MacOS, Wavuti, Linux na Windows, inayotoa kusoma Kurani na Tafsiri & tafsiri nyingi (ikiwemo neno kwa neno), muda wa swala duniani kote na arifa, dira ya Kibla, na usomaji wa sauti wa neno kwa neno uliosawazishwa.",
+  "dataSourcesNote": "Kumbuka: Nakala za Kurani, Tafsiri, tafsiri, na rasilimali za sauti zinatoka Quran.com, Everyayah.com, na vyanzo vingine vilivyothibitishwa vya wazi.",
+  "adFreePromise": "App hii imejengwa ili kutafuta radhi ya Allah. Kwa hivyo, ni na itakuwa bila Matangazo milele.",
   "coreFeatures": "Vipengele Muhimu",
-  "coreFeaturesDescription": "Gundua utendaji muhimu unaoifanya Al Qur'an v3 kuwa zana muhimu kwa ajili ya matendo yako ya Kiislamu ya kila siku:",
-  "prayerTimesTitle": "Nyakati za Swala na Vikumbusho",
-  "prayerTimesDescription": "Nyakati sahihi za swala kwa eneo lolote duniani kote kwa kutumia njia mbalimbali za kukokotoa. Weka vikumbusho na arifa za Adhana.",
-  "qiblaDirectionTitle": "Mwelekeo wa Qibla",
-  "qiblaDirectionDescription": "Pata mwelekeo wa Qibla kwa urahisi na mwonekano wa dira ulio wazi na sahihi.",
-  "translationTafsirTitle": "Tafsiri ya Qur'ani na Tafsiri ya Kina",
-  "translationTafsirDescription": "Fikia vitabu vya tafsiri zaidi ya 120 (ikiwemo neno kwa neno) katika lugha 69, na vitabu vya Tafsiri ya Kina zaidi ya 30.",
-  "wordByWordAudioTitle": "Sauti na Kuangaza Neno kwa Neno",
-  "wordByWordAudioDescription": "Fuatilia pamoja na usomaji wa sauti wa neno kwa neno uliolandanishwa na kuangazwa kwa ajili ya uzoefu wa kujifunza unaovutia.",
+  "coreFeaturesDescription": "Chunguza vipengele muhimu vinavyofanya Al Kurani v3 kuwa chombo muhimu kwa mazoezi yako ya kila siku ya Kiislamu:",
+  "prayerTimesTitle": "Muda wa Swala & Arifa",
+  "prayerTimesDescription": "Muda sahihi wa swala kwa mahali yoyote duniani kwa kutumia njia mbalimbali za kuhesabu. Weka ukumbusho na arifa za Adhana.",
+  "qiblaDirectionTitle": "Mwelekeo wa Kibla",
+  "qiblaDirectionDescription": "Pata mwelekeo wa Kibla kwa urahisi na mwonekano wa dira iliyo wazi na sahihi.",
+  "translationTafsirTitle": "Tafsiri & Tafsiri ya Kurani",
+  "translationTafsirDescription": "Pata vitabu 120+ vya tafsiri (ikiwemo neno kwa neno) katika lugha 69, na vitabu 30+ vya Tafsiri.",
+  "wordByWordAudioTitle": "Sauti & Angazia Neno kwa Neno",
+  "wordByWordAudioDescription": "Fuata pamoja na usomaji wa sauti wa neno kwa neno uliosawazishwa na angazia kwa uzoefu wa kujifunza unaovuta.",
   "ayahAudioRecitationTitle": "Usomaji wa Sauti wa Aya",
-  "ayahAudioRecitationDescription": "Sikiliza usomaji kamili wa Aya kutoka kwa wasomaji maarufu zaidi ya 40.",
-  "notesCloudBackupTitle": "Dondoo na Hifadhi ya Wingu",
-  "notesCloudBackupDescription": "Hifadhi dondoo na tafakari za kibinafsi, zikihifadhiwa kwa usalama kwenye wingu (kipengele kinachoendelezwa/kinakuja hivi karibuni).",
-  "crossPlatformSupportTitle": "Usaidizi wa Majukwaa Mbalimbali",
-  "crossPlatformSupportDescription": "Inatumika kwenye Android, Web, Linux, na Windows.",
-  "backgroundAudioPlaybackTitle": "Uchezaji wa Sauti Chini kwa Chini",
-  "backgroundAudioPlaybackDescription": "Endelea kusikiliza usomaji wa Qur'ani hata wakati programu iko chini kwa chini.",
-  "audioDataCachingTitle": "Uhifadhi wa Sauti na Data",
-  "audioDataCachingDescription": "Uchezaji ulioboreshwa na uwezo wa nje ya mtandao na uhifadhi thabiti wa sauti na data ya Qur'ani.",
-  "minimalisticInterfaceTitle": "Muonekano Rahisi na Safi",
-  "minimalisticInterfaceDescription": "Muonekano rahisi wa kutumia unaozingatia uzoefu wa mtumiaji na usomaji.",
-  "optimizedPerformanceTitle": "Utendaji na Ukubwa Ulioboreshwa",
+  "ayahAudioRecitationDescription": "Sikiliza usomaji kamili wa Aya kutoka kwa wasomaji 40+ mashuhuri.",
+  "notesCloudBackupTitle": "Maelezo na Hifadhi ya Wingu",
+  "notesCloudBackupDescription": "Hifadhi maelezo na tafakari za kibinafsi, zilizohifadhiwa salama kwenye wingu (kipengele kinaendelea kujengwa/kinakuja hivi karibuni).",
+  "crossPlatformSupportTitle": "Usaidizi wa Vifaa Vingi",
+  "crossPlatformSupportDescription": "Inaauniwa kwenye Android, Wavuti, Linux, na Windows.",
+  "backgroundAudioPlaybackTitle": "Uchezaji wa Sauti Nyuma",
+  "backgroundAudioPlaybackDescription": "Endelea kusikiliza usomaji wa Kurani hata wakati app iko nyuma.",
+  "audioDataCachingTitle": "Hifadhi ya Sauti & Data",
+  "audioDataCachingDescription": "Uchezaji ulioboreshwa na uwezo wa nje ya mtandao na hifadhi thabiti ya sauti na data ya Kurani.",
+  "minimalisticInterfaceTitle": "Muundo Mdogo & Safi",
+  "minimalisticInterfaceDescription": "Muundo rahisi wa kushughulikia na umakini kwa uzoefu wa mtumiaji na usomaji.",
+  "optimizedPerformanceTitle": "Utendaji Ulioboreshwa & Ukubwa",
   "optimizedPerformanceDescription": "Programu yenye vipengele vingi iliyoundwa kuwa nyepesi na yenye utendaji mzuri.",
   "languageSupport": "Usaidizi wa Lugha",
-  "languageSupportDescription": "Programu hii imeundwa kupatikana kwa hadhira ya kimataifa na usaidizi wa lugha zifuatazo (na zaidi zinaongezwa kila mara):",
-  "technologyAndResources": "Teknolojia na Nyenzo",
-  "technologyAndResourcesDescription": "Programu hii imejengwa kwa kutumia teknolojia za kisasa na nyenzo za kuaminika:",
+  "languageSupportDescription": "Programu hii imeundwa ili iweze kufikiwa na hadhira ya kimataifa na usaidizi wa lugha zifuatazo (na zaidi zinaongezwa mara kwa mara):",
+  "technologyAndResources": "Teknolojia & Rasilimali",
+  "technologyAndResourcesDescription": "App hii imejengwa kwa kutumia teknolojia za kisasa na rasilimali za kuaminika:",
   "flutterFrameworkTitle": "Mfumo wa Flutter",
-  "flutterFrameworkDescription": "Imejengwa na Flutter kwa ajili ya uzoefu mzuri, uliokusanywa asilia, wa majukwaa mbalimbali kutoka kwa msingi mmoja wa msimbo.",
-  "advancedAudioEngineTitle": "Injini ya Sauti ya Hali ya Juu",
-  "advancedAudioEngineDescription": "Inaendeshwa na vifurushi vya Flutter `just_audio` na `just_audio_background` kwa uchezaji na udhibiti thabiti wa sauti.",
-  "reliableQuranDataTitle": "Data ya Kuaminika ya Qur'ani",
-  "reliableQuranDataDescription": "Maandishi ya Al Qur'an, tafsiri, tafsiri za kina, na sauti zinatokana na API za wazi zilizothibitishwa na hifadhidata kama Quran.com & Everyayah.com.",
-  "prayerTimeEngineTitle": "Injini ya Nyakati za Swala",
-  "prayerTimeEngineDescription": "Inatumia njia za kukokotoa zilizothibitishwa kwa nyakati sahihi za swala. Arifa zinashughulikiwa na `flutter_local_notifications` na kazi za chini kwa chini.",
-  "crossPlatformSupport": "Usaidizi wa Majukwaa Mbalimbali",
-  "crossPlatformSupportDescription2": "Furahia ufikiaji usio na mshono kwenye majukwaa mbalimbali:",
+  "flutterFrameworkDescription": "Imejengwa na Flutter kwa uzoefu mzuri, uliokusanywa asili, wa vifaa vingi kutoka kwa msingi mmoja wa kodi.",
+  "advancedAudioEngineTitle": "Injini ya Sauti ya Kina",
+  "advancedAudioEngineDescription": "Inaendeshwa na vifurushi vya Flutter `just_audio` na `just_audio_background` kwa uchezaji wa sauti thabiti na udhibiti.",
+  "reliableQuranDataTitle": "Data ya Kurani Iliyoaminika",
+  "reliableQuranDataDescription": "Nakala za Al Kurani, tafsiri, tafsiri, na sauti zinatoka kwa API na hifadhidata za wazi zilithibitishwa kama Quran.com & Everyayah.com.",
+  "prayerTimeEngineTitle": "Injini ya Muda wa Swala",
+  "prayerTimeEngineDescription": "Inatumia njia zilizoanzishwa za kuhesabu kwa muda sahihi wa swala. Arifa zinashughulikiwa na `flutter_local_notifications` na kazi za nyuma.",
+  "crossPlatformSupport": "Usaidizi wa Vifaa Vingi",
+  "crossPlatformSupportDescription2": "Furahia upatikanaji bila shida kwenye vifaa mbalimbali:",
   "android": "Android",
   "ios": "iOS",
   "macos": "macOS",
@@ -287,45 +526,69 @@
   "linux": "Linux",
   "windows": "Windows",
   "ourLifetimePromise": "Ahadi Yetu ya Maisha",
-  "lifetimePromiseDescription": "Binafsi naahidi kutoa usaidizi na matengenezo endelevu kwa programu hii katika maisha yangu yote, In Sha Allah. Lengo langu ni kuhakikisha programu hii inabaki kuwa nyenzo yenye manufaa kwa Umma kwa miaka ijayo.",
-  "fajr": "Alfajiri",
-  "sunrise": "Macheo",
-  "dhuhr": "Adhuhuri",
-  "asr": "Alasiri",
-  "maghrib": "Magharibi",
+  "lifetimePromiseDescription": "Mimi binafsi naahidi kutoa usaidizi na matengenezo endelevu kwa programu hii katika maisha yangu yote, In Sha Allah. Lengo langu ni kuhakikisha app hii inabaki kuwa rasilimali yenye faida kwa Ummah kwa miaka ijayo.",
+  "fajr": "Fajr",
+  "sunrise": "Kuchomoza kwa Jua",
+  "dhuhr": "Dhuhr",
+  "asr": "Asr",
+  "maghrib": "Maghrib",
   "isha": "Isha",
   "midnight": "Usiku wa Manane",
   "alarm": "Kengele",
   "notification": "Arifa",
   "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
   "quranScriptTajweed": "Tajweed",
   "quranScriptUthmani": "Uthmani",
   "quranScriptIndopak": "Indopak",
-  "sajdaAyah": "Aya ya Sijda",
-  "required": "Lazima",
+  "sajdaAyah": "Aya ya Sajda",
+  "required": "Inahitajika",
   "optional": "Hiari",
-  "notificationScheduleWarning": "Kumbuka: Arifa Iliyoratibiwa au Kikumbusho kinaweza kukosekana kwa sababu ya vizuizi vya mchakato wa usuli wa Mfumo wa Uendeshaji wa simu yako. Kwa mfano: Mfumo wa Uendeshaji wa Origin wa Vivo, One UI wa Samsung, ColorOS ya Oppo n.k. wakati mwingine huzima Arifa Iliyoratibiwa au Kikumbusho. Tafadhali angalia mipangilio ya Mfumo wako wa Uendeshaji ili kufanya programu isizuiliwe kutoka kwa mchakato wa usuli.",
-  "scrollWithRecitation": "Tembeza na Kisomo",
-  "quickAccess": "Ufikiaji wa Haraka",
-  "initiallyScrollAyah": "Awali tembeza hadi kwenye ayah",
+  "notificationScheduleWarning": "Kumbuka: Arifa au Ukumbusho uliopangwa unaweza kukosa kutokana na vizuizi vya mchakato wa nyuma wa OS ya simu yako. Kwa mfano: Origin OS ya Vivo, One UI ya Samsung, ColorOS ya Oppo wakati mwingine huua Arifa au Ukumbusho uliopangwa. Tafadhali angalia mipangilio ya OS yako ili kufanya app isizuiwe kutoka mchakato wa nyuma.",
+  "scrollWithRecitation": "Tembeza na Usomaji",
+  "quickAccess": "Upatikanaji Haraka",
+  "initiallyScrollAyah": "Awali tembeza kwa aya",
   "tajweedGuide": "Mwongozo wa Tajweed",
-  "scrollWithRecitationDesc": "Inapowashwa, ayah ya Kurani itasonga kiotomatiki sanjari na usomaji wa sauti.",
+  "scrollWithRecitationDesc": "Ikiwashwa, aya ya Kurani itatembeza moja kwa moja sawia na usomaji wa sauti.",
   "configuration": "Usanidi",
-  "restoreFromBackup": "Rejesha Kutoka kwa Hifadhi Nakala",
+  "restoreFromBackup": "Rejesha Kutoka Hifadhi",
   "history": "Historia",
   "search": "Tafuta",
   "useAudioStream": "Tumia Mtiririko wa Sauti",
-  "useAudioStreamDesc": "Tiririsha sauti moja kwa moja kutoka kwa mtandao badala ya kupakua.",
-  "notUseAudioStreamDesc": "Pakua sauti kwa matumizi ya nje ya mtandao na upunguze matumizi ya data.",
+  "useAudioStreamDesc": "Mtiririko wa sauti moja kwa moja kutoka intaneti badala ya kupakua.",
+  "notUseAudioStreamDesc": "Pakua sauti kwa matumizi ya nje ya mtandao na kupunguza matumizi ya data.",
   "audioSettings": "Mipangilio ya Sauti",
   "playbackSpeed": "Kasi ya Uchezaji",
   "playbackSpeedDesc": "Rekebisha kasi ya Usomaji wa Kurani.",
-  "waitForCurrentDownloadToFinish": "Tafadhali subiri upakuaji wa sasa ukamilike.",
+  "waitForCurrentDownloadToFinish": "Tafadhali subiri upakuaji wa sasa umalize.",
   "areYouSure": "Una uhakika?",
   "checkYourInternetConnection": "Angalia muunganisho wako wa intaneti.",
-  "audioDownload": "Upakuaji wa Sauti",
+  "audioDownloadAlert": "Inahitaji kupakua {requiredDownload} kati ya {totalVersesCount} aya.",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
   "download": "Pakua",
-  "audioDownloadAlert": "Unahitaji kupakua {requiredDownload} kati ya {totalVersesCount} ayah.",
+  "audioDownload": "Upakuaji wa Sauti",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Kuboresha Nakala ya Kurani"
 }
