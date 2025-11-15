@@ -244,8 +244,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userBox = Hive.box("user");
-
     final PageTransitionsTheme pageTransitionsTheme =
         const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -345,9 +343,7 @@ class MyApp extends StatelessWidget {
                 ),
                 themeMode: themeState.themeMode,
                 home:
-                    isSetupComplete(userBox)
-                        ? const HomePage()
-                        : const AppSetupPage(),
+                    isSetupComplete() ? const HomePage() : const AppSetupPage(),
               );
             },
           );
@@ -356,7 +352,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  bool isSetupComplete(Box userBox) {
+  bool isSetupComplete() {
+    final userBox = Hive.box("user");
     return userBox.get("writeQuranScript", defaultValue: false) &&
         userBox.get("is_setup_complete", defaultValue: false) &&
         (userBox.get("writeQuranScriptVersion") ==

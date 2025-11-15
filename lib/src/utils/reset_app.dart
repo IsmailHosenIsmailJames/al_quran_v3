@@ -16,6 +16,7 @@ Future<void> resetTheApp(BuildContext context) async {
   await prefs.clear();
 
   await Hive.deleteFromDisk();
+  await Hive.openBox("user");
   await QuranTranslationFunction.init();
   await QuranTafsirFunction.init();
   await SegmentedResourcesManager.init();
