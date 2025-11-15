@@ -590,5 +590,6 @@
   "audioDownload": "অডিও ডাউনলোড",
   "am": "এএম",
   "pm": "পিএম",
-  "optimizingQuranScript": "কুরআন স্ক্রিপ্ট অপটিমাইজ করা হচ্ছে"
+  "optimizingQuranScript": "কুরআন স্ক্রিপ্ট অপটিমাইজ করা হচ্ছে",
+  "supportOnGithub": "GitHub-এ সমর্থন করুন"
 }

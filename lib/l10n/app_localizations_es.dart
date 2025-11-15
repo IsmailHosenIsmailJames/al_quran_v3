@@ -1125,4 +1125,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'Optimizando script del Corán';
+
+  @override
+  String get supportOnGithub => 'Apoyar en GitHub';
 }

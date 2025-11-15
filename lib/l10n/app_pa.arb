@@ -590,5 +590,6 @@
   "audioDownload": "ਆਡੀਓ ਡਾਊਨਲੋਡ",
   "am": "ਸਵੇਰੇ",
   "pm": "ਸ਼ਾਮ ਨੂੰ",
-  "optimizingQuranScript": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਰਿਹਾ ਹੈ"
+  "optimizingQuranScript": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਰਿਹਾ ਹੈ",
+  "supportOnGithub": "GitHub 'ਤੇ ਸਮਰਥਨ"
 }

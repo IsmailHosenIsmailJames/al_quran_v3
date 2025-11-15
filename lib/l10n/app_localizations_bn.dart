@@ -1114,4 +1114,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'কুরআন স্ক্রিপ্ট অপটিমাইজ করা হচ্ছে';
+
+  @override
+  String get supportOnGithub => 'GitHub-এ সমর্থন করুন';
 }

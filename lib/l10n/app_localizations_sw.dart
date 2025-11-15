@@ -1121,4 +1121,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'Kuboresha Nakala ya Kurani';
+
+  @override
+  String get supportOnGithub => 'Saidia kwenye GitHub';
 }

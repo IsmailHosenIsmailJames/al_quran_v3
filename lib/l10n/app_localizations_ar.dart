@@ -1113,4 +1113,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'تحسين نص القرآن';
+
+  @override
+  String get supportOnGithub => 'ادعمونا على جيت هب';
 }

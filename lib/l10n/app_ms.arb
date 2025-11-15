@@ -590,5 +590,6 @@
   "audioDownload": "Muat Turun Audio",
   "am": "PG",
   "pm": "PTG",
-  "optimizingQuranScript": "Mengoptimumkan Skrip Al-Quran"
+  "optimizingQuranScript": "Mengoptimumkan Skrip Al-Quran",
+  "supportOnGithub": "Sokongan di GitHub"
 }

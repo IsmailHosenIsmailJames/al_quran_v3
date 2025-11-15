@@ -336,9 +336,9 @@ class AboutAppPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.favorite_rounded,
-                      color: themeState.primary,
+                      color: Colors.redAccent,
                       size: 40,
                     ),
                     const Gap(15),

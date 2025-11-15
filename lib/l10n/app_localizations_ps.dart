@@ -1114,4 +1114,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'د قرآن لیک بهینه کول';
+
+  @override
+  String get supportOnGithub => 'په GitHub ملاتړ وکړئ';
 }

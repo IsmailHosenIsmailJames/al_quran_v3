@@ -590,5 +590,6 @@
   "audioDownload": "音频下载",
   "am": "上午",
   "pm": "下午",
-  "optimizingQuranScript": "优化古兰经字体"
+  "optimizingQuranScript": "优化古兰经字体",
+  "supportOnGithub": "在 GitHub 上支持"
 }

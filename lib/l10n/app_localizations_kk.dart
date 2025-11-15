@@ -1113,4 +1113,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'Құран жазуын оңтайландыру';
+
+  @override
+  String get supportOnGithub => 'GitHub-та қолдау';
 }

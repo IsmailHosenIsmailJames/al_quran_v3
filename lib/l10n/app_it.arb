@@ -328,5 +328,6 @@
   "audioDownloadAlert": "Necessario scaricare {requiredDownload} di {totalVersesCount} ayah.",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "Ottimizzazione dello script del Corano"
+  "optimizingQuranScript": "Ottimizzazione dello script del Corano",
+  "supportOnGithub": "Supporta su GitHub"
 }

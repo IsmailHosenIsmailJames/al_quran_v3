@@ -328,5 +328,6 @@
   "audioDownloadAlert": "{totalVersesCount} வசனங்களில் {requiredDownload} வசனங்களைப் பதிவிறக்க வேண்டும்.",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "குர்ஆன் ஸ்கிரிப்டை மேம்படுத்துகிறது"
+  "optimizingQuranScript": "குர்ஆன் ஸ்கிரிப்டை மேம்படுத்துகிறது",
+  "supportOnGithub": "GitHub-இல் ஆதரவு"
 }

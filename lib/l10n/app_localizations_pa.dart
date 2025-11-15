@@ -1112,4 +1112,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰ ਰਿਹਾ ਹੈ';
+
+  @override
+  String get supportOnGithub => 'GitHub \'ਤੇ ਸਮਰਥਨ';
 }

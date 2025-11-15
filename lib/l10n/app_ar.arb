@@ -590,5 +590,6 @@
   "audioDownload": "تنزيل الصوت",
   "am": "ص",
   "pm": "م",
-  "optimizingQuranScript": "تحسين نص القرآن"
+  "optimizingQuranScript": "تحسين نص القرآن",
+  "supportOnGithub": "ادعمونا على جيت هب"
 }

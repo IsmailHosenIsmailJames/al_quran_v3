@@ -590,5 +590,6 @@
   "audioDownload": "Ses İndirme",
   "am": "ÖÖ",
   "pm": "ÖS",
-  "optimizingQuranScript": "Kur'an Yazısını Optimize Ediliyor"
+  "optimizingQuranScript": "Kur'an Yazısını Optimize Ediliyor",
+  "supportOnGithub": "GitHub'da Destekleyin"
 }

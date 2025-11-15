@@ -1099,4 +1099,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'コーランのスクリプトを最適化しています';
+
+  @override
+  String get supportOnGithub => 'GitHubでサポート';
 }

@@ -1116,4 +1116,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'قرآن کے رسم الخط کو آپٹمائز کر رہے ہیں';
+
+  @override
+  String get supportOnGithub => 'گٹ ہب پر حمایت';
 }

@@ -2125,6 +2125,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Optimizing Quran Script'**
   String get optimizingQuranScript;
+
+  /// No description provided for @supportOnGithub.
+  ///
+  /// In en, this message translates to:
+  /// **'Support on GitHub'**
+  String get supportOnGithub;
 }
 
 class _AppLocalizationsDelegate

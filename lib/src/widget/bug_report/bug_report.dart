@@ -119,6 +119,21 @@ Future<void> showBugReportDialog(BuildContext context) async {
               ),
               title: const Text("On Discord"),
             ),
+            const Gap(5),
+            ListTile(
+              onTap: () async {
+                final Uri discordUrl = Uri.parse(
+                  "https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues/new",
+                );
+                // It's not straightforward to prefill messages in Discord channels via URL.
+                // This will just open the channel. User needs to paste the info manually.
+                if (!await launchUrl(discordUrl)) {}
+                Navigator.pop(context);
+              },
+              minTileHeight: 40,
+              leading: const Icon(SimpleIcons.github, color: Colors.white),
+              title: const Text("Create a issue"),
+            ),
           ],
         ),
       );

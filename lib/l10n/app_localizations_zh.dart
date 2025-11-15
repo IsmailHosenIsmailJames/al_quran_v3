@@ -1081,4 +1081,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => '优化古兰经字体';
+
+  @override
+  String get supportOnGithub => '在 GitHub 上支持';
 }

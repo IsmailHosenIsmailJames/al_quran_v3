@@ -590,5 +590,6 @@
   "audioDownload": "Скачивание аудио",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "Оптимизация шрифта Корана"
+  "optimizingQuranScript": "Оптимизация шрифта Корана",
+  "supportOnGithub": "Поддержать на GitHub"
 }

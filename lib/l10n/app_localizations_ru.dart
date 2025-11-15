@@ -1122,4 +1122,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'Оптимизация шрифта Корана';
+
+  @override
+  String get supportOnGithub => 'Поддержать на GitHub';
 }

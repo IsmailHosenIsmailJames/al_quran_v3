@@ -590,5 +590,6 @@
   "audioDownload": "Аудио жүктеу",
   "am": "ТАҢ",
   "pm": "ТҮС",
-  "optimizingQuranScript": "Құран жазуын оңтайландыру"
+  "optimizingQuranScript": "Құран жазуын оңтайландыру",
+  "supportOnGithub": "GitHub-та қолдау"
 }

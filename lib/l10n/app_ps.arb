@@ -590,5 +590,6 @@
   "audioDownload": "آډیو ډاونلوډ",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "د قرآن لیک بهینه کول"
+  "optimizingQuranScript": "د قرآن لیک بهینه کول",
+  "supportOnGithub": "په GitHub ملاتړ وکړئ"
 }

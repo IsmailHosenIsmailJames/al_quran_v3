@@ -1114,4 +1114,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => 'بهینه‌سازی خط قرآن';
+
+  @override
+  String get supportOnGithub => 'حمایت در گیت‌هاب';
 }

@@ -328,5 +328,6 @@
   "audioDownloadAlert": "{totalVersesCount} ayədən {requiredDownload} yükləmək lazımdır.",
   "am": "AM",
   "pm": "PM",
-  "optimizingQuranScript": "Quran Mətninin Optimallaşdırılması"
+  "optimizingQuranScript": "Quran Mətninin Optimallaşdırılması",
+  "supportOnGithub": "GitHub-da dəstək"
 }

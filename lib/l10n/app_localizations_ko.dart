@@ -1098,4 +1098,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get optimizingQuranScript => '쿠란 스크립트 최적화';
+
+  @override
+  String get supportOnGithub => 'GitHub에서 지원';
 }
