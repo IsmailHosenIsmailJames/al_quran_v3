@@ -138,6 +138,9 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
         vertical: 2.0,
       ),
       title: Text(translationBook.name),
+      subtitle: Row(children: [
+           ],
+      ),
       trailing: SizedBox(
         height: 30,
         width: 30,
