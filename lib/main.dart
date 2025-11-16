@@ -39,6 +39,7 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
+import "package:flutter_native_splash/flutter_native_splash.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
@@ -51,7 +52,8 @@ String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   platform_services.initializePlatform();
 
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
@@ -217,6 +219,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     final PageTransitionsTheme pageTransitionsTheme =
         const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{

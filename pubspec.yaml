@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.10.0+66
+version: 3.10.2+66
 
 environment:
   sdk: ^3.7.2
@@ -68,6 +68,7 @@ dependencies:
   hive_ce_flutter: ^2.3.3
   google_fonts: ^6.3.2
   web: ^1.1.1
+  flutter_native_splash: ^2.4.7
   # firebase_core: ^4.0.0
   # cloud_firestore: ^6.0.0
   # firebase_auth: ^6.0.0
@@ -170,3 +171,17 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/img/Quran_Logo_v3.png"
   min_sdk_android: 21 
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/img/Quran_Logo_v3_splah_big.png
+  branding: assets/img/Quran_Logo_v3_splah_big.png
+  color_dark: "#121212"
+  image_dark: assets/img/Quran_Logo_v3_splah_big.png
+  branding_dark: assets/img/Quran_Logo_v3_splah_big.png
+
+  android_12:
+    image: assets/img/Quran_Logo_v3_splah_big.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/img/Quran_Logo_v3_splah_big.png
+    icon_background_color_dark: "#121212"
