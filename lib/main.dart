@@ -1,4 +1,3 @@
-import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
@@ -48,24 +47,18 @@ import "package:just_audio_media_kit/just_audio_media_kit.dart";
 import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "src/screen/prayer_time/functions/prayers_time_function.dart";
 
-Map<String, dynamic> metaDataJuz = {};
-List<Map> metaDataSajda = [];
-Map<String, dynamic> metaDataSurah = {};
-Map<String, dynamic> surahNameLocalization = {};
-Map<String, dynamic> surahMeaningLocalization = {};
-
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await platform_services.initializePlatform();
+  platform_services.initializePlatform();
 
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows) {
-    await platform_services.initAwesomeNotification();
+    platform_services.initAwesomeNotification();
 
-    await JustAudioBackground.init(
+    JustAudioBackground.init(
       androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
       androidNotificationChannelName: "Audio playback",
       androidNotificationOngoing: true,
@@ -90,43 +83,23 @@ Future<void> main() async {
   }
 
   await Hive.openBox("user");
-  await Hive.openBox("segmented_quran_recitation");
 
   MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
-  await QuranTranslationFunction.init(locale: initialLocale.locale);
-  await WordByWordFunction.init();
-  await Hive.openBox(CollectionType.notes.name);
-  await Hive.openBox(CollectionType.pinned.name);
-  await SegmentedResourcesManager.init();
-  await PrayersTimeFunction.init();
+  QuranTranslationFunction.init(locale: initialLocale.locale);
+  WordByWordFunction.init();
+  Hive.openBox(CollectionType.notes.name);
+  Hive.openBox(CollectionType.pinned.name);
+  SegmentedResourcesManager.init();
+  PrayersTimeFunction.init();
 
   final scriptOnDb = Hive.box("user").get(
     "selected_quran_script_type",
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  await QuranScriptFunction.initQuranScript(
+  QuranScriptFunction.initQuranScript(
     QuranScriptType.values.firstWhere((element) => scriptOnDb == element.name),
-  );
-
-  metaDataJuz = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Juz.json"),
-  );
-  metaDataSurah = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Surah.json"),
-  );
-
-  surahNameLocalization = jsonDecode(
-    await rootBundle.loadString(
-      "assets/meta_data/surah_name_localization.json",
-    ),
-  );
-
-  surahMeaningLocalization = jsonDecode(
-    await rootBundle.loadString(
-      "assets/meta_data/surah_meaning_localization.json",
-    ),
   );
 
   await ThemeFunctions.initThemeFunction();

@@ -2,7 +2,7 @@ import "dart:async";
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
@@ -71,7 +71,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
     context.read<AyahByAyahInScrollInfoCubit>().setData(
       dropdownAyahKey: firstAyahInfo,
       surahInfoModel: SurahInfoModel.fromMap(
-        metaDataSurah[firstAyahInfo.split(":").first],
+        metaDataSurah[firstAyahInfo.split(":").first]!,
       ),
     );
     var listOfAyahs = getListOfAyahKey(
@@ -176,7 +176,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
         try {
           pagesInfoWithSurahMetaData[i] = SurahHeaderInfoModel(
             SurahInfoModel.fromMap(
-              metaDataSurah["${pagesInfoWithSurahMetaData[i]}"],
+              metaDataSurah["${pagesInfoWithSurahMetaData[i]}"]!,
             ),
             start!,
             end!,
@@ -201,7 +201,7 @@ class _PageByPageViewState extends State<QuranScriptView> {
       pagesInfoWithSurahMetaData.insert(
         1,
         SurahHeaderInfoModel(
-          SurahInfoModel.fromMap(metaDataSurah[startSurahNumber]),
+          SurahInfoModel.fromMap(metaDataSurah[startSurahNumber]!),
           widget.startKey,
           end!,
         ),
@@ -838,7 +838,7 @@ class AyahElementWidget extends StatelessWidget {
 
                   try {
                     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                      metaDataSurah[ayahsKeyOfPage.first.split(":").first],
+                      metaDataSurah[ayahsKeyOfPage.first.split(":").first]!,
                     );
                     context.read<AyahByAyahInScrollInfoCubit>().setData(
                       surahInfoModel: surahInfoModel,

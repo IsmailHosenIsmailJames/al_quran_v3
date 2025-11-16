@@ -43,6 +43,14 @@ class AudioPage extends StatefulWidget {
 
 class _AudioPageState extends State<AudioPage> {
   @override
+  void initState() {
+    if (surahNameLocalization.isEmpty || surahMeaningLocalization.isEmpty) {
+      loadMetaSurah().then((value) => setState(() {}));
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -51,95 +59,97 @@ class _AudioPageState extends State<AudioPage> {
       isLandScape = true;
     }
     final l10n = AppLocalizations.of(context);
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, themeState) {
-        return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-          buildWhen: (previous, current) {
-            return previous.current != current.current;
-          },
-          builder: (context, ayahKeyState) {
-            int currentIndex =
-                int.parse(ayahKeyState.current.split(":")[1]) - 1;
+    return (surahNameLocalization.isEmpty || surahMeaningLocalization.isEmpty)
+        ? const Center(child: CircularProgressIndicator())
+        : BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, themeState) {
+            return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+              buildWhen: (previous, current) {
+                return previous.current != current.current;
+              },
+              builder: (context, ayahKeyState) {
+                int currentIndex =
+                    int.parse(ayahKeyState.current.split(":")[1]) - 1;
 
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child:
-                  isLandScape
-                      ? Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  getReciterViewWidget(
-                                    context,
-                                    ayahKeyState,
-                                    currentIndex,
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child:
+                      isLandScape
+                          ? Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      getReciterViewWidget(
+                                        context,
+                                        ayahKeyState,
+                                        currentIndex,
+                                      ),
+                                      getSurahInfoAndController(
+                                        ayahKeyState,
+                                        context,
+                                      ),
+                                      const Gap(20),
+                                      getAudioProgressBar(),
+                                      const Gap(10),
+                                      getAudioController(
+                                        currentIndex,
+                                        ayahKeyState,
+                                        context,
+                                        l10n,
+                                      ),
+                                    ],
                                   ),
-                                  getSurahInfoAndController(
-                                    ayahKeyState,
-                                    context,
-                                  ),
-                                  const Gap(20),
-                                  getAudioProgressBar(),
-                                  const Gap(10),
-                                  getAudioController(
-                                    currentIndex,
-                                    ayahKeyState,
-                                    context,
-                                    l10n,
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                          const Gap(10),
-                          Expanded(
-                            flex: 3,
-                            child: getAyahAndTranslationWithShimmer(
-                              context,
-                              ayahKeyState,
-                            ),
-                          ),
-                        ],
-                      )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          getReciterViewWidget(
-                            context,
-                            ayahKeyState,
-                            currentIndex,
-                          ),
-                          const Gap(10),
-                          getSurahInfoAndController(ayahKeyState, context),
+                              const Gap(10),
+                              Expanded(
+                                flex: 3,
+                                child: getAyahAndTranslationWithShimmer(
+                                  context,
+                                  ayahKeyState,
+                                ),
+                              ),
+                            ],
+                          )
+                          : Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              getReciterViewWidget(
+                                context,
+                                ayahKeyState,
+                                currentIndex,
+                              ),
+                              const Gap(10),
+                              getSurahInfoAndController(ayahKeyState, context),
 
-                          const Gap(10),
-                          Expanded(
-                            child: getAyahAndTranslationWithShimmer(
-                              context,
-                              ayahKeyState,
-                            ),
+                              const Gap(10),
+                              Expanded(
+                                child: getAyahAndTranslationWithShimmer(
+                                  context,
+                                  ayahKeyState,
+                                ),
+                              ),
+                              const Gap(20),
+                              getAudioProgressBar(),
+                              const Gap(10),
+                              getAudioController(
+                                currentIndex,
+                                ayahKeyState,
+                                context,
+                                l10n,
+                              ),
+                              const Gap(10),
+                            ],
                           ),
-                          const Gap(20),
-                          getAudioProgressBar(),
-                          const Gap(10),
-                          getAudioController(
-                            currentIndex,
-                            ayahKeyState,
-                            context,
-                            l10n,
-                          ),
-                          const Gap(10),
-                        ],
-                      ),
+                );
+              },
             );
           },
         );
-      },
-    );
   }
 
   BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>

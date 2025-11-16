@@ -1,5 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
@@ -275,7 +275,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       itemCount:
                           surahNumber != null
                               ? SurahInfoModel.fromMap(
-                                metaDataSurah[surahNumber.toString()],
+                                metaDataSurah[surahNumber.toString()]!,
                               ).versesCount
                               : 0,
                       itemBuilder: (context, index) {
@@ -394,7 +394,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
 
                       for (String ayahKey in selectedAyahKeys) {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                          metaDataSurah[ayahKey.split(":").first],
+                          metaDataSurah[ayahKey.split(":").first]!,
                         );
                         List<TranslationOfAyah> translationsListWithInfoList =
                             await QuranTranslationFunction.getTranslation(
@@ -524,7 +524,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                       String text = "";
                       for (String ayahKey in selectedAyahKeys) {
                         SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                          metaDataSurah[ayahKey.split(":").first],
+                          metaDataSurah[ayahKey.split(":").first]!,
                         );
                         List<TranslationOfAyah> translationsListWithInfoList =
                             await QuranTranslationFunction.getTranslation(

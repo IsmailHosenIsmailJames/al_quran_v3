@@ -1,5 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
@@ -32,7 +32,7 @@ class _TafsirViewState extends State<TafsirView>
   @override
   void initState() {
     surahInfoModel = SurahInfoModel.fromMap(
-      metaDataSurah[widget.ayahKey.split(":").first],
+      metaDataSurah[widget.ayahKey.split(":").first]!,
     );
     tafsirBookList = QuranTafsirFunction.getDownloadedTafsirBooks();
     _tabController = TabController(length: tafsirBookList.length, vsync: this);

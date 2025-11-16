@@ -1,7 +1,6 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -14,6 +13,8 @@ import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:gap/gap.dart";
+
+import "../../resources/quran_resources/meta/meta_data_surah.dart";
 
 class CollectionContentView extends StatefulWidget {
   final NoteCollectionModel? noteCollectionModel;
@@ -141,7 +142,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                         noteModel.ayahKey.map((key) {
                           try {
                             SurahInfoModel surahInfo = SurahInfoModel.fromMap(
-                              metaDataSurah[key.split(":").first],
+                              metaDataSurah[key.split(":").first]!,
                             );
                             return Chip(
                               label: Text(

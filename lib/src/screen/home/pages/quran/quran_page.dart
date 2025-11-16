@@ -1,5 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_juz.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";

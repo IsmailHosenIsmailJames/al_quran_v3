@@ -1,5 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -51,7 +51,7 @@ void showShareBottomDialog(
   AppLocalizations l10n = AppLocalizations.of(context);
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah[ayahKey.split(":").first],
+    metaDataSurah[ayahKey.split(":").first]!,
   );
 
   List quranScriptWord = QuranScriptFunction.getWordListOfAyah(

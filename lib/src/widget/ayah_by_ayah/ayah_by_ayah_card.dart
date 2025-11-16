@@ -1,7 +1,9 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_sajda.dart"
+    show metaDataSajda;
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
@@ -95,7 +97,7 @@ Widget getAyahByAyahCard({
   }
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah["$surahNumber"],
+    metaDataSurah["$surahNumber"]!,
   );
 
   bool isSajdaAyah = false;
@@ -124,7 +126,7 @@ Widget getAyahByAyahCard({
               context.read<QuranHistoryCubit>().addHistory(ayahKey);
               try {
                 SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                  metaDataSurah[ayahKey.split(":").first],
+                  metaDataSurah[ayahKey.split(":").first]!,
                 );
 
                 context.read<AyahByAyahInScrollInfoCubit>().setData(
@@ -721,7 +723,9 @@ Row getToolbarWidget(
                 showShareBottomDialog(
                   context,
                   ayahKey,
-                  SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]),
+                  SurahInfoModel.fromMap(
+                    metaDataSurah[surahNumber.toString()]!,
+                  ),
                   quranViewState.quranScriptType,
                   translation,
                   footNoteAsStringMap,
