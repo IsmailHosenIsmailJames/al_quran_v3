@@ -75,23 +75,21 @@ class _SurahListViewState extends State<SurahListView> {
               if (index == 0) {
                 return Column(
                   children: [
-                    if (kDebugMode)
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) =>
-                                      const QuranScriptViewExperimental(
-                                        startKey: "2:1",
-                                        endKey: "2:200",
-                                      ),
-                            ),
-                          );
-                        },
-                        child: const Text("Experimental Quran View"),
-                      ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => const QuranScriptViewExperimental(
+                                  startKey: "2:1",
+                                  endKey: "2:200",
+                                ),
+                          ),
+                        );
+                      },
+                      child: const Text("Experimental Quran View"),
+                    ),
                     BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
                       builder: (context, history) {
                         return history.history.isEmpty

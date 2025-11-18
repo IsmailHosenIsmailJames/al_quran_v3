@@ -19,7 +19,7 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
     List<String>? expandedForWordByWord,
     bool? isAyahByAyah,
     List<int>? pageByPageList,
-    String? dropdownAyahKey,
+    dynamic dropdownAyahKey,
   }) {
     final newState = state.copyWith(
       surahInfoModel: surahInfoModel,

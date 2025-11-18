@@ -1,13 +1,16 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_page_number.dart";
@@ -16,9 +19,13 @@ import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/cupertino.dart" show CupertinoIcons;
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
+import "package:visibility_detector/visibility_detector.dart";
 
 class QuranScriptViewExperimental extends StatefulWidget {
   final String startKey;
@@ -38,34 +45,88 @@ class QuranScriptViewExperimental extends StatefulWidget {
 
 class _QuranScriptViewExperimentalState
     extends State<QuranScriptViewExperimental> {
-  ItemScrollController? itemScrollControllerAyahByAyah = ItemScrollController();
-  ItemPositionsListener? itemPositionsListenerAyahByAyah =
+  ItemScrollController itemScrollControllerAyahByAyah = ItemScrollController();
+  ItemPositionsListener itemPositionsListenerAyahByAyah =
       ItemPositionsListener.create();
-  ScrollOffsetController? scrollOffsetControllerAyahByAyah =
+  ScrollOffsetController scrollOffsetControllerAyahByAyah =
       ScrollOffsetController();
-  ScrollOffsetListener? scrollOffsetListenerAyahByAyah =
+  ScrollOffsetListener scrollOffsetListenerAyahByAyah =
       ScrollOffsetListener.create();
 
-  ItemScrollController? itemScrollControllerReadingMode =
-      ItemScrollController();
-  ItemPositionsListener? itemPositionsListenerReadingMode =
+  ItemScrollController itemScrollControllerReadingMode = ItemScrollController();
+  ItemPositionsListener itemPositionsListenerReadingMode =
       ItemPositionsListener.create();
-  ScrollOffsetController? scrollOffsetControllerReadingMode =
+  ScrollOffsetController scrollOffsetControllerReadingMode =
       ScrollOffsetController();
-  ScrollOffsetListener? scrollOffsetListenerReadingMode =
+  ScrollOffsetListener scrollOffsetListenerReadingMode =
       ScrollOffsetListener.create();
+
+  late List<String> ayahsList;
+  List<List<String>> pagesList = [];
+
+  Future<void> scrollToAyah(dynamic key) async {
+    if (key is String) {
+      itemScrollControllerAyahByAyah.scrollTo(
+        index: ayahsList.indexOf(key),
+        duration: const Duration(milliseconds: 200),
+      );
+    } else if (key is List<String>) {
+      itemScrollControllerReadingMode.scrollTo(
+        index: pagesList.indexOf(key),
+        duration: const Duration(milliseconds: 200),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    ayahsList = getListOfAyahKeyExperimental(
+      startAyahKey: widget.startKey,
+      endAyahKey: widget.endKey,
+    );
+    List<String> parts = [];
+    int lastPage = getPageNumber(ayahsList.first) ?? 0;
+
+    for (String ayahKey in ayahsList) {
+      int page = getPageNumber(ayahKey) ?? 0;
+      if (lastPage == page) {
+        if (ayahKey ==
+            getEndAyahKeyFromSurahNumber(ayahKey.split(":").first.toInt())) {
+          parts.add(ayahKey);
+          pagesList.add(parts);
+          parts = [];
+        } else {
+          parts.add(ayahKey);
+        }
+      } else {
+        lastPage = page;
+        parts.add(ayahKey);
+        pagesList.add(parts);
+        parts = [];
+      }
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     AppLocalizations l10n = AppLocalizations.of(context);
-
-    List<String> ayahsList = getListOfAyahKeyExperimental(
-      startAyahKey: widget.startKey,
-      endAyahKey: widget.endKey,
-    );
+    ThemeState themeState = context.read<ThemeCubit>().state;
+    AppLocalizations appLocalizations = AppLocalizations.of(context);
+    double width = MediaQuery.of(context).size.width;
+    bool isLandScape = width > 600;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Experimental Quran View")),
+      appBar: AppBar(
+        title: appBarTitle(),
+        actions: [
+          getAyahsDropDown(themeState),
+          const Gap(5),
+          getChangesViewButton(themeState),
+          const Gap(2),
+          getSettingsButton(themeState, context),
+        ],
+      ),
       body: BlocBuilder<
         AyahByAyahInScrollInfoCubit,
         AyahByAyahInScrollInfoState
@@ -148,32 +209,6 @@ class _QuranScriptViewExperimentalState
             );
           } else {
             // Reading mode
-            // extract pages
-            List<List<String>> pagesList = [];
-            List<String> parts = [];
-            int lastPage = getPageNumber(ayahsList.first) ?? 0;
-
-            for (String ayahKey in ayahsList) {
-              int page = getPageNumber(ayahKey) ?? 0;
-              if (lastPage == page) {
-                if (ayahKey ==
-                    getEndAyahKeyFromSurahNumber(
-                      ayahKey.split(":").first.toInt(),
-                    )) {
-                  parts.add(ayahKey);
-                  pagesList.add(parts);
-                  parts = [];
-                } else {
-                  parts.add(ayahKey);
-                }
-              } else {
-                lastPage = page;
-                parts.add(ayahKey);
-                pagesList.add(parts);
-                parts = [];
-              }
-            }
-
             return ScrollablePositionedList.builder(
               itemScrollController: itemScrollControllerReadingMode,
               scrollOffsetController: scrollOffsetControllerReadingMode,
@@ -195,36 +230,198 @@ class _QuranScriptViewExperimentalState
                     break;
                   }
                 }
-                return Column(
-                  children: [
-                    if (firstAyah.split(":").last == "1" || index == 0)
-                      SurahInfoHeaderBuilder(
-                        headerInfoModel: SurahHeaderInfoModel(
-                          SurahInfoModel.fromMap(
-                            metaDataSurah[surahNumber.toString()]!,
-                          ),
-                          firstAyah,
-                          surahEndAyahKey ?? currentPage.last,
-                        ),
-                      ),
-                    pageLabelOfQuran(context, l10n, pageNumber),
-                    BlocBuilder<QuranViewCubit, QuranViewState>(
-                      builder:
-                          (context, quranViewState) => QuranPagesRenderer(
-                            ayahsKey: currentPage,
-                            quranScriptType: quranViewState.quranScriptType,
-                            baseStyle: TextStyle(
-                              fontSize: quranViewState.fontSize,
+                return VisibilityDetector(
+                  key: Key(pageNumber.toString()),
+                  onVisibilityChanged: (info) {
+                    if (!context.mounted) {
+                      return;
+                    }
+                    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+                      metaDataSurah[surahNumber.toString()]!,
+                    );
+
+                    context.read<AyahByAyahInScrollInfoCubit>().setData(
+                      surahInfoModel: surahInfoModel,
+                      dropdownAyahKey: currentPage,
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      if (firstAyah.split(":").last == "1" || index == 0)
+                        SurahInfoHeaderBuilder(
+                          headerInfoModel: SurahHeaderInfoModel(
+                            SurahInfoModel.fromMap(
+                              metaDataSurah[surahNumber.toString()]!,
                             ),
+                            firstAyah,
+                            surahEndAyahKey ?? currentPage.last,
                           ),
-                    ),
-                  ],
+                        ),
+                      pageLabelOfQuran(context, l10n, pageNumber),
+                      BlocBuilder<QuranViewCubit, QuranViewState>(
+                        builder:
+                            (context, quranViewState) => QuranPagesRenderer(
+                              ayahsKey: currentPage,
+                              quranScriptType: quranViewState.quranScriptType,
+                              baseStyle: TextStyle(
+                                fontSize: quranViewState.fontSize,
+                              ),
+                            ),
+                      ),
+                    ],
+                  ),
                 );
               },
             );
           }
         },
       ),
+    );
+  }
+
+  Widget appBarTitle() {
+    return BlocBuilder<
+      AyahByAyahInScrollInfoCubit,
+      AyahByAyahInScrollInfoState
+    >(
+      buildWhen: (previous, current) {
+        return previous.surahInfoModel != current.surahInfoModel;
+      },
+      builder: (context, state) {
+        return Text(
+          state.surahInfoModel == null
+              ? ""
+              : AppLocalizations.of(
+                context,
+              ).surahName(getSurahName(context, state.surahInfoModel!.id)),
+          style: const TextStyle(fontSize: 18),
+        );
+      },
+    );
+  }
+
+  BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>
+  getChangesViewButton(ThemeState themeState) {
+    return BlocBuilder<
+      AyahByAyahInScrollInfoCubit,
+      AyahByAyahInScrollInfoState
+    >(
+      builder: (context, state) {
+        return IconButton(
+          style: IconButton.styleFrom(
+            backgroundColor: themeState.primaryShade100,
+            foregroundColor: themeState.primary,
+          ),
+          onPressed: () {
+            final lastPosition = state.dropdownAyahKey;
+
+            context.read<AyahByAyahInScrollInfoCubit>().setData(
+              dropdownAyahKey: null,
+              isAyahByAyah: !state.isAyahByAyah,
+            );
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              if (lastPosition is String) {
+                final index = pagesList.firstWhere(
+                  (element) => element.contains(lastPosition),
+                );
+                scrollToAyah(index);
+              }
+              if (lastPosition is List<String>) {
+                scrollToAyah(lastPosition.first);
+              }
+            });
+          },
+
+          icon: Icon(
+            state.isAyahByAyah
+                ? CupertinoIcons.book
+                : CupertinoIcons.list_bullet,
+          ),
+        );
+      },
+    );
+  }
+
+  Container getAyahsDropDown(ThemeState themeState) {
+    return Container(
+      width: 90,
+      height: 40,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: BlocBuilder<
+        AyahByAyahInScrollInfoCubit,
+        AyahByAyahInScrollInfoState
+      >(
+        builder: (context, ayahScrollInfoState) {
+          List<DropdownMenuItem> dropdownItems =
+              ayahScrollInfoState.isAyahByAyah
+                  ? List.generate(ayahsList.length, (index) {
+                    List<String> ayahData = ayahsList[index].toString().split(
+                      ":",
+                    );
+                    return DropdownMenuItem(
+                      value: ayahsList[index],
+                      child: Center(
+                        child: Text(
+                          "${localizedNumber(context, ayahData.first.toInt())}:${localizedNumber(context, ayahData.last.toInt())}",
+                        ),
+                      ),
+                    );
+                  })
+                  : List.generate(pagesList.length, (index) {
+                    return DropdownMenuItem(
+                      value: pagesList[index],
+                      child: Center(
+                        child: Text(
+                          "${AppLocalizations.of(context).page} - ${localizedNumber(context, getPageNumber(pagesList[index].first))}",
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    );
+                  });
+          return DropdownButton(
+            alignment: Alignment.center,
+            padding: EdgeInsets.zero,
+            isExpanded: false,
+            underline: const SizedBox(),
+            value: ayahScrollInfoState.dropdownAyahKey,
+
+            items: dropdownItems,
+
+            onChanged: (value) async {
+              scrollToAyah(value);
+              WidgetsBinding.instance.addPostFrameCallback((_) async {
+                context.read<AyahByAyahInScrollInfoCubit>().setData(
+                  dropdownAyahKey: value,
+                );
+              });
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  IconButton getSettingsButton(ThemeState themeState, BuildContext context) {
+    return IconButton(
+      padding: EdgeInsets.zero,
+      style: IconButton.styleFrom(
+        padding: EdgeInsets.zero,
+        backgroundColor: themeState.primaryShade100,
+        foregroundColor: themeState.primary,
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const QuranScriptSettings(asPage: true),
+          ),
+        );
+      },
+      icon: const Icon(FluentIcons.settings_24_filled),
     );
   }
 
