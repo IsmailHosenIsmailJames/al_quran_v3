@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -17,7 +16,6 @@ import "package:al_quran_v3/src/widget/history/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/widget/quick_access/quick_access_popup.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -75,21 +73,6 @@ class _SurahListViewState extends State<SurahListView> {
               if (index == 0) {
                 return Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => const QuranScriptViewExperimental(
-                                  startKey: "2:1",
-                                  endKey: "2:200",
-                                ),
-                          ),
-                        );
-                      },
-                      child: const Text("Experimental Quran View"),
-                    ),
                     BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
                       builder: (context, history) {
                         return history.history.isEmpty
@@ -185,7 +168,9 @@ class _SurahListViewState extends State<SurahListView> {
                                       context,
                                       MaterialPageRoute(
                                         builder:
-                                            (context) => QuranScriptView(
+                                            (
+                                              context,
+                                            ) => QuranScriptViewExperimental(
                                               startKey: "${surahInfo.id}:1",
                                               endKey:
                                                   "${surahInfo.id}:${surahInfo.versesCount}",
@@ -257,7 +242,7 @@ class _SurahListViewState extends State<SurahListView> {
                       context,
                       MaterialPageRoute(
                         builder:
-                            (context) => QuranScriptView(
+                            (context) => QuranScriptViewExperimental(
                               startKey: "${filteredSurah[index].id}:1",
                               endKey:
                                   "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
@@ -381,7 +366,7 @@ class _SurahListViewState extends State<SurahListView> {
                 context,
                 MaterialPageRoute(
                   builder:
-                      (context) => QuranScriptView(
+                      (context) => QuranScriptViewExperimental(
                         startKey: "${historyModel.surahNumber}:1",
                         endKey: getEndAyahKeyFromSurahNumber(
                           historyModel.surahNumber,
