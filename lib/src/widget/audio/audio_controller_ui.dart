@@ -1,4 +1,5 @@
 import "dart:developer";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
@@ -76,80 +77,113 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               context.read<AudioUiCubit>().expand(true);
             }
           },
-          child: AnimatedContainer(
-            margin: const EdgeInsets.only(left: 10, right: 10),
-            padding: const EdgeInsets.all(5),
-            duration: const Duration(milliseconds: 300),
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              borderRadius:
-                  state.isExpanded
-                      ? BorderRadius.circular(roundedRadius)
-                      : BorderRadius.circular(1000),
-              color:
-                  state.isExpanded
-                      ? Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade900
-                          : Colors.grey.shade100
-                      : themeState.primary,
-              border: Border.all(color: themeState.primary, width: 0.5),
+          child: TweenAnimationBuilder<double>(
+            tween: Tween<double>(
+              begin: 1000,
+              end: state.isExpanded ? roundedRadius : 1000,
             ),
-            child:
-                (state.showUi && state.isInsideQuranPlayer)
-                    ? Stack(
+            duration: const Duration(milliseconds: 300),
+            builder: (context, radius, child) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                height: height,
+                width: width,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(radius),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Stack(
                       children: [
-                        if (!state.isExpanded)
-                          SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: BlocBuilder<PlayerStateCubit, PlayerState>(
-                              builder:
-                                  (context, state) => Icon(
-                                    state.isPlaying
-                                        ? Icons.pause_rounded
-                                        : Icons.play_arrow_rounded,
-                                    color: Colors.white,
-                                    size: 36,
-                                  ),
-                            ),
+                        // Background Color
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          decoration: BoxDecoration(
+                            color:
+                                state.isExpanded
+                                    ? Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey.shade900.withValues(
+                                          alpha: 0.6,
+                                        )
+                                        : Colors.grey.shade200.withValues(
+                                          alpha: 0.6,
+                                        )
+                                    : themeState.primary,
+                            borderRadius: BorderRadius.circular(radius),
                           ),
-                        if (state.isExpanded)
-                          Stack(
-                            children: [
-                              getFullAudioControllerUI(
-                                l10n,
-                                isLandscapeViewNeedToShow,
-                              ),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: IconButton(
-                                    style: IconButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      iconSize: 15,
-                                    ),
-                                    onPressed: () {
-                                      if (state.isExpanded) {
-                                        context.read<AudioUiCubit>().expand(
-                                          false,
-                                        );
-                                      }
-                                    },
-                                    tooltip: l10n.closeAudioController,
-                                    icon: const Icon(
-                                      Icons.close_fullscreen_rounded,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        ),
+                        // Content
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child:
+                              (state.showUi && state.isInsideQuranPlayer)
+                                  ? Stack(
+                                    children: [
+                                      if (!state.isExpanded)
+                                        SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                          child: BlocBuilder<
+                                            PlayerStateCubit,
+                                            PlayerState
+                                          >(
+                                            builder:
+                                                (context, state) => Icon(
+                                                  state.isPlaying
+                                                      ? Icons.pause_rounded
+                                                      : Icons
+                                                          .play_arrow_rounded,
+                                                  color: Colors.white,
+                                                  size: 36,
+                                                ),
+                                          ),
+                                        ),
+                                      if (state.isExpanded)
+                                        Stack(
+                                          children: [
+                                            getFullAudioControllerUI(
+                                              l10n,
+                                              isLandscapeViewNeedToShow,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: SizedBox(
+                                                height: 30,
+                                                width: 30,
+                                                child: IconButton(
+                                                  style: IconButton.styleFrom(
+                                                    padding: EdgeInsets.zero,
+                                                    iconSize: 15,
+                                                  ),
+                                                  onPressed: () {
+                                                    if (state.isExpanded) {
+                                                      context
+                                                          .read<AudioUiCubit>()
+                                                          .expand(false);
+                                                    }
+                                                  },
+                                                  tooltip:
+                                                      l10n.closeAudioController,
+                                                  icon: const Icon(
+                                                    Icons
+                                                        .close_fullscreen_rounded,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                    ],
+                                  )
+                                  : null,
+                        ),
                       ],
-                    )
-                    : null,
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         );
       },
