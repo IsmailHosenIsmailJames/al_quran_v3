@@ -46,20 +46,14 @@ class QuranScriptViewExperimental extends StatefulWidget {
 class _QuranScriptViewExperimentalState
     extends State<QuranScriptViewExperimental> {
   ItemScrollController itemScrollControllerAyahByAyah = ItemScrollController();
-  ItemPositionsListener itemPositionsListenerAyahByAyah =
-      ItemPositionsListener.create();
-  ScrollOffsetController scrollOffsetControllerAyahByAyah =
-      ScrollOffsetController();
-  ScrollOffsetListener scrollOffsetListenerAyahByAyah =
-      ScrollOffsetListener.create();
-
   ItemScrollController itemScrollControllerReadingMode = ItemScrollController();
-  ItemPositionsListener itemPositionsListenerReadingMode =
+  ItemScrollController itemScrollControllerSurahList = ItemScrollController();
+  ItemScrollController itemScrollControllerAyahList = ItemScrollController();
+  ItemPositionsListener itemPositionsListenerAyahList =
       ItemPositionsListener.create();
-  ScrollOffsetController scrollOffsetControllerReadingMode =
-      ScrollOffsetController();
-  ScrollOffsetListener scrollOffsetListenerReadingMode =
-      ScrollOffsetListener.create();
+  ItemScrollController itemScrollControllerPagesList = ItemScrollController();
+  ItemPositionsListener itemPositionsListenerPagesList =
+      ItemPositionsListener.create();
 
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
@@ -105,8 +99,46 @@ class _QuranScriptViewExperimentalState
         parts = [];
       }
     }
+    context.read<AyahByAyahInScrollInfoCubit>().stream.listen((event) {
+      if (previousDropdownAyahKey != event.dropdownAyahKey) {
+        if (event.isAyahByAyah) {
+          final index = ayahsList.indexOf(event.dropdownAyahKey);
+          if (index != -1) {
+            bool isVisible = isItemVisible(
+              itemPositionsListenerAyahList,
+              index,
+            );
+            if (!isVisible) {
+              itemScrollControllerAyahList.scrollTo(
+                index: index,
+                duration: const Duration(milliseconds: 200),
+                alignment: 0.5,
+              );
+            }
+          }
+        } else {
+          final index = pagesList.indexOf(event.dropdownAyahKey);
+          if (index != -1) {
+            bool isVisible = isItemVisible(
+              itemPositionsListenerPagesList,
+              index,
+            );
+            if (!isVisible) {
+              itemScrollControllerPagesList.scrollTo(
+                index: index,
+                duration: const Duration(milliseconds: 200),
+                alignment: 0.5,
+              );
+            }
+          }
+        }
+      }
+      previousDropdownAyahKey = event.dropdownAyahKey;
+    });
     super.initState();
   }
+
+  dynamic previousDropdownAyahKey;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +221,7 @@ class _QuranScriptViewExperimentalState
                 >(
                   builder: (context, ayahState) {
                     return ScrollablePositionedList.builder(
+                      itemScrollController: itemScrollControllerSurahList,
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       itemCount: 114,
                       itemBuilder: (context, index) {
@@ -199,7 +232,20 @@ class _QuranScriptViewExperimentalState
                             isCurrent,
                             themeState,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => QuranScriptViewExperimental(
+                                      startKey: "${index + 1}:1",
+                                      endKey: getEndAyahKeyFromSurahNumber(
+                                        index + 1,
+                                      ),
+                                    ),
+                              ),
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -243,6 +289,8 @@ class _QuranScriptViewExperimentalState
                   builder: (context, ayahState) {
                     if (ayahState.isAyahByAyah) {
                       return ScrollablePositionedList.builder(
+                        itemScrollController: itemScrollControllerAyahList,
+                        itemPositionsListener: itemPositionsListenerAyahList,
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         itemCount: ayahsList.length,
                         itemBuilder: (context, index) {
@@ -285,6 +333,8 @@ class _QuranScriptViewExperimentalState
                       );
                     } else {
                       return ScrollablePositionedList.builder(
+                        itemScrollController: itemScrollControllerPagesList,
+                        itemPositionsListener: itemPositionsListenerPagesList,
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         itemCount: pagesList.length,
                         itemBuilder: (context, index) {
@@ -363,9 +413,6 @@ class _QuranScriptViewExperimentalState
 
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerAyahByAyah,
-            scrollOffsetController: scrollOffsetControllerAyahByAyah,
-            itemPositionsListener: itemPositionsListenerAyahByAyah,
-            scrollOffsetListener: scrollOffsetListenerAyahByAyah,
             itemCount: ayahsList.length,
             padding: const EdgeInsets.only(top: 30, bottom: 100),
             itemBuilder: (context, index) {
@@ -435,9 +482,6 @@ class _QuranScriptViewExperimentalState
           // Reading mode
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerReadingMode,
-            scrollOffsetController: scrollOffsetControllerReadingMode,
-            itemPositionsListener: itemPositionsListenerReadingMode,
-            scrollOffsetListener: scrollOffsetListenerReadingMode,
             itemCount: pagesList.length,
             padding: const EdgeInsets.only(top: 30, bottom: 100),
             itemBuilder: (context, index) {
@@ -662,5 +706,15 @@ class _QuranScriptViewExperimentalState
       alignment: Alignment.center,
       child: Text("${l10n.page} - ${localizedNumber(context, pageNumber)}"),
     );
+  }
+
+  bool isItemVisible(ItemPositionsListener listener, int index) {
+    final positions = listener.itemPositions.value;
+    for (final position in positions) {
+      if (position.index == index) {
+        return position.itemLeadingEdge >= 0 && position.itemTrailingEdge <= 1;
+      }
+    }
+    return false;
   }
 }
