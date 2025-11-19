@@ -2,7 +2,7 @@ import "dart:async";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view_experimental.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -168,9 +168,7 @@ class _SurahListViewState extends State<SurahListView> {
                                       context,
                                       MaterialPageRoute(
                                         builder:
-                                            (
-                                              context,
-                                            ) => QuranScriptViewExperimental(
+                                            (context) => QuranScriptView(
                                               startKey: "${surahInfo.id}:1",
                                               endKey:
                                                   "${surahInfo.id}:${surahInfo.versesCount}",
@@ -242,7 +240,7 @@ class _SurahListViewState extends State<SurahListView> {
                       context,
                       MaterialPageRoute(
                         builder:
-                            (context) => QuranScriptViewExperimental(
+                            (context) => QuranScriptView(
                               startKey: "${filteredSurah[index].id}:1",
                               endKey:
                                   "${filteredSurah[index].id}:${filteredSurah[index].versesCount}",
@@ -366,7 +364,7 @@ class _SurahListViewState extends State<SurahListView> {
                 context,
                 MaterialPageRoute(
                   builder:
-                      (context) => QuranScriptViewExperimental(
+                      (context) => QuranScriptView(
                         startKey: "${historyModel.surahNumber}:1",
                         endKey: getEndAyahKeyFromSurahNumber(
                           historyModel.surahNumber,

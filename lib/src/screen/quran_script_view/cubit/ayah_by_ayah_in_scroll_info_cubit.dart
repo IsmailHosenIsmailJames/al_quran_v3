@@ -20,6 +20,7 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
     bool? isAyahByAyah,
     List<int>? pageByPageList,
     dynamic dropdownAyahKey,
+    bool clearDropdownAyahKey = false,
   }) {
     final newState = state.copyWith(
       surahInfoModel: surahInfoModel,
@@ -28,6 +29,9 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
       pageByPageList: pageByPageList,
       dropdownAyahKey: dropdownAyahKey,
     );
+    if (clearDropdownAyahKey) {
+      newState.dropdownAyahKey = null;
+    }
     if (AyahByAyahInScrollInfoState.toMap(newState).toString() !=
         AyahByAyahInScrollInfoState.toMap(state).toString()) {
       emit(newState);
