@@ -1,4 +1,5 @@
 import "dart:async";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
@@ -69,15 +70,19 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
   Future<void> scrollToAyah(dynamic key) async {
     if (key is String) {
-      itemScrollControllerAyahByAyah.scrollTo(
-        index: ayahsList.indexOf(key),
-        duration: const Duration(milliseconds: 200),
-      );
+      if (itemScrollControllerAyahByAyah.isAttached) {
+        itemScrollControllerAyahByAyah.scrollTo(
+          index: ayahsList.indexOf(key),
+          duration: const Duration(milliseconds: 200),
+        );
+      }
     } else if (key is List<String>) {
-      itemScrollControllerReadingMode.scrollTo(
-        index: pagesList.indexOf(key),
-        duration: const Duration(milliseconds: 200),
-      );
+      if (itemScrollControllerReadingMode.isAttached) {
+        itemScrollControllerReadingMode.scrollTo(
+          index: pagesList.indexOf(key),
+          duration: const Duration(milliseconds: 200),
+        );
+      }
     }
   }
 
@@ -195,10 +200,25 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     isLandScape = width > 600;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar:
           isLandScape
               ? null
               : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                titleSpacing: 0,
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      color:
+                          Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey.shade900.withValues(alpha: 0.6)
+                              : Colors.grey.shade200.withValues(alpha: 0.6),
+                    ),
+                  ),
+                ),
                 title: appBarTitle(),
                 actions: [
                   getAyahsDropDown(themeState),
@@ -472,6 +492,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   }
 
   Widget quranScriptWidget(AppLocalizations l10n) {
+    double topPadding = 10;
+    if (!isLandScape) {
+      topPadding += MediaQuery.of(context).padding.top + kToolbarHeight;
+    }
+
     return BlocBuilder<
       AyahByAyahInScrollInfoCubit,
       AyahByAyahInScrollInfoState
@@ -483,7 +508,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerAyahByAyah,
             itemCount: ayahsList.length,
-            padding: const EdgeInsets.only(top: 30, bottom: 100),
+            padding: EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
               final ayahKey = ayahsList[index];
               final ayahKeySplit = ayahKey.split(":");
@@ -552,7 +577,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerReadingMode,
             itemCount: pagesList.length,
-            padding: const EdgeInsets.only(top: 30, bottom: 100),
+            padding: EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
               int pageNumber = getPageNumber(pagesList[index].first) ?? 0;
               List<String> currentPage = pagesList[index];

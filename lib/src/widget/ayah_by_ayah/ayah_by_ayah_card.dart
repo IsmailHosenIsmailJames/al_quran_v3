@@ -152,7 +152,7 @@ Widget getAyahByAyahCard({
                             left: 5,
                             top: 5,
                             bottom: 5,
-                            right: 10,
+                            right: 5,
                           )
                           : null,
                   decoration: BoxDecoration(
