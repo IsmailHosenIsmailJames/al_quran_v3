@@ -62,6 +62,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
   StreamSubscription? _ayahKeyCubitSubscription;
   String? scrolledAyahOnAudioPlay;
+  int? lastScrolledPageIndex;
 
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
@@ -169,7 +170,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
         int index = pagesList.indexWhere(
           (element) => element.contains(event.current),
         );
-        if (index != -1) {
+        if (index != -1 && index != lastScrolledPageIndex) {
+          lastScrolledPageIndex = index;
           scrollToAyah(pagesList[index]);
         }
         context.read<SegmentedQuranReciterCubit>().temporaryHilightAyah(
@@ -595,8 +597,13 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                       ),
                     pageLabelOfQuran(context, l10n, pageNumber),
                     BlocBuilder<QuranViewCubit, QuranViewState>(
+                      buildWhen: (previous, current) {
+                        return true;
+                      },
                       builder: (context, quranViewState) {
                         return QuranPagesRenderer(
+                          enableWordByWordHighlight:
+                              quranViewState.enableWordByWordHighlight,
                           ayahsKey: currentPage,
                           quranScriptType: quranViewState.quranScriptType,
                           baseStyle: TextStyle(
