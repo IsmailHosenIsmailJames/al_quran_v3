@@ -78,24 +78,28 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         themeState,
                         textStyleOfTimes,
                         isLandScape,
+                        false,
                       ),
                       Expanded(
                         child: SingleChildScrollView(
-                          child: headerOfPrayerTimesAndCanvas(context, l10n),
+                          child: headerOfPrayerTimesAndCanvas(
+                            context,
+                            l10n,
+                            themeState,
+                          ),
                         ),
                       ),
                     ],
                   )
                   : Column(
                     children: [
-                      headerOfPrayerTimesAndCanvas(context, l10n),
-                      const Gap(30),
                       listOfPrayerTimeWidget(
                         context,
                         l10n,
                         themeState,
                         textStyleOfTimes,
                         isLandScape,
+                        true,
                       ),
                     ],
                   ),
@@ -107,6 +111,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
   Column headerOfPrayerTimesAndCanvas(
     BuildContext context,
     AppLocalizations l10n,
+    ThemeState themeState,
   ) {
     return Column(
       children: [
@@ -117,9 +122,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
             Row(
               children: [
                 const Gap(10),
-                const Icon(
+                Icon(
                   FluentIcons.location_24_regular,
-                  color: Colors.white,
+                  color: themeState.primary,
                 ),
                 const Gap(5),
                 getAddressView(
@@ -129,7 +134,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   keepPadding: false,
                   justAddress: true,
                   keepDecoration: false,
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),
@@ -148,7 +153,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     .read<LocationQiblaPrayerDataCubit>()
                     .alignWithDatabase();
               },
-              icon: const Icon(Icons.my_location_rounded, color: Colors.white),
+              icon: const Icon(Icons.my_location_rounded),
             ),
           ],
         ),
@@ -178,19 +183,38 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     ThemeState themeState,
     TextStyle textStyleOfTimes,
     bool isLandScape,
+    bool withCanvas,
   ) {
     return Expanded(
       child: Container(
         color: Theme.of(context).colorScheme.surface,
         child: ListView.builder(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(
+            15,
+          ).copyWith(top: MediaQuery.of(context).padding.top + 10, bottom: 100),
           itemBuilder: (context, index) {
+            if (withCanvas && index == 0) {
+              return Container(
+                padding: const EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  color: themeState.primaryShade200,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: headerOfPrayerTimesAndCanvas(context, l10n, themeState),
+              );
+            }
+            if (withCanvas && index == 1) {
+              return const Gap(10);
+            }
+            if (withCanvas) {
+              index = index - 2;
+            }
             PrayerModelOfDay? prayerModelOfDay =
                 PrayersTimeFunction.getTodaysPrayerTime(
                   DateTime.now().add(Duration(days: index)),
                 );
             if (prayerModelOfDay == null) {
-              return Text(l10n.dateFoundEmpty(DateTime.now().toString()));
+              return null;
             }
             DateTime? dateOfThis;
             if (prayerModelOfDay.date.gregorian.date != null) {
@@ -238,20 +262,18 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       ),
                     ),
                     if (isToday)
-                      SafeArea(
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PrayerSettings(),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            FluentIcons.settings_24_filled,
-                            color: themeState.primary,
-                          ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PrayerSettings(),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          FluentIcons.settings_24_filled,
+                          color: themeState.primary,
                         ),
                       ),
                   ],
@@ -437,11 +459,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
                     ),
                   ).toUpperCase(),
-              style: const TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Text(
               PrayersTimeFunction.getTodaysPrayerTime(DateTime.now()) == null
@@ -452,11 +470,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
                     ),
                   ),
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
@@ -464,16 +478,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   l10n.left,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const Gap(5),
-                const Icon(
-                  Icons.arrow_forward_rounded,
-                  size: 12,
-                  color: Colors.white,
-                ),
+                const Icon(Icons.arrow_forward_rounded, size: 12),
                 const Gap(5),
                 StreamBuilder(
                   stream: Stream.periodic(const Duration(seconds: 1), (timer) {
@@ -482,7 +491,6 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   builder: (context, snapshot) {
                     TextStyle textStyle = const TextStyle(
                       fontSize: 12,
-                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     );
                     if (!snapshot.hasData) {

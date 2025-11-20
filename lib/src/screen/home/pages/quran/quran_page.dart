@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
@@ -56,60 +58,74 @@ class _QuranPageState extends State<QuranPage>
       l10n.hizb,
       l10n.ruku,
     ];
+
+    final topPadding = MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            BlocBuilder<ThemeCubit, ThemeState>(
-              builder: (context, themeState) {
-                return Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: themeState.primaryShade100,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: TabBar(
-                      splashBorderRadius: BorderRadius.circular(100),
-                      controller: _tabController,
-                      indicator: BoxDecoration(
-                        color: themeState.primaryShade200,
+      body: Stack(
+        children: [
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              physics: const ClampingScrollPhysics(),
+              children: [
+                SurahListView(surahInfoList: surahInfoList),
+                JuzListView(juzInfoList: juzInfoModelList),
+                PageListView(pageInfoList: pageInfoList),
+                const HizbListView(),
+                const RukuListView(),
+              ],
+            ),
+          ),
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  top: topPadding + 3,
+                  bottom: 3,
+                  left: 3,
+                  right: 3,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: themeState.primaryShade100,
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      labelPadding: EdgeInsets.zero,
-                      indicatorSize: TabBarIndicatorSize.tab,
+                      child: TabBar(
+                        splashBorderRadius: BorderRadius.circular(100),
+                        controller: _tabController,
+                        indicator: BoxDecoration(
+                          color: themeState.primaryShade200,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        labelPadding: EdgeInsets.zero,
+                        indicatorSize: TabBarIndicatorSize.tab,
 
-                      labelColor:
-                          Theme.of(context).colorScheme.onPrimaryContainer,
-                      unselectedLabelColor:
-                          Theme.of(context).colorScheme.onSurfaceVariant,
-                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                      unselectedLabelStyle: const TextStyle(
-                        fontWeight: FontWeight.w500,
+                        labelColor:
+                            Theme.of(context).colorScheme.onPrimaryContainer,
+                        unselectedLabelColor:
+                            Theme.of(context).colorScheme.onSurfaceVariant,
+                        labelStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        unselectedLabelStyle: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                        tabs: pagesName.map((name) => Tab(text: name)).toList(),
+                        dividerColor: Colors.transparent,
                       ),
-                      tabs: pagesName.map((name) => Tab(text: name)).toList(),
-                      dividerColor: Colors.transparent,
                     ),
                   ),
-                );
-              },
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                physics: const ClampingScrollPhysics(),
-                children: [
-                  SurahListView(surahInfoList: surahInfoList),
-                  JuzListView(juzInfoList: juzInfoModelList),
-                  PageListView(pageInfoList: pageInfoList),
-                  const HizbListView(),
-                  const RukuListView(),
-                ],
-              ),
-            ),
-          ],
-        ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

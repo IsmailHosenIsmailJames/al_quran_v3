@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
@@ -333,11 +335,19 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
       appBar:
           isSideNav
               ? null
               : AppBar(
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(color: themeState.primaryShade100),
+                  ),
+                ),
                 leading: Builder(
                   builder: (context) {
                     return appBarLeading(l10n, context);
@@ -390,8 +400,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
-      bottomNavigationBar: isSideNav ? null : appBottomNav(l10n),
+      bottomNavigationBar: isSideNav ? null : appBottomNav(l10n, themeState),
     );
   }
 
@@ -679,20 +688,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget appBottomNav(AppLocalizations l10n) {
+  Widget appBottomNav(AppLocalizations l10n, ThemeState themeState) {
     return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
       buildWhen: (previous, current) {
         return previous.tabIndex != current.tabIndex;
       },
       builder: (context, state) {
-        return BottomNavigationBar(
-          currentIndex: state.tabIndex,
-          onTap: (index) {
-            context.read<OthersSettingsCubit>().setTabIndex(index);
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          items: getBottomNavItems(state.tabIndex, l10n),
+        return ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: themeState.primaryShade100,
+              child: BottomNavigationBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                currentIndex: state.tabIndex,
+                onTap: (index) {
+                  context.read<OthersSettingsCubit>().setTabIndex(index);
+                },
+                type: BottomNavigationBarType.fixed,
+                selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                items: getBottomNavItems(state.tabIndex, l10n),
+              ),
+            ),
+          ),
         );
       },
     );

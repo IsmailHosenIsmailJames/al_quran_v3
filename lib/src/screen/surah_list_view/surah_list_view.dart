@@ -66,7 +66,10 @@ class _SurahListViewState extends State<SurahListView> {
           interactive: true,
 
           child: ListView.builder(
-            padding: const EdgeInsets.only(bottom: 120),
+            padding: EdgeInsets.only(
+              bottom: 120,
+              top: MediaQuery.of(context).padding.top + 3 + 40,
+            ),
             itemCount: filteredSurah.length + 1,
             controller: scrollController,
             itemBuilder: (context, index) {

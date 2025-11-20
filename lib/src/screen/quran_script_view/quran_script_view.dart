@@ -211,12 +211,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                 flexibleSpace: ClipRRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                    child: Container(
-                      color:
-                          Theme.of(context).brightness == Brightness.dark
-                              ? Colors.grey.shade900.withValues(alpha: 0.6)
-                              : Colors.grey.shade200.withValues(alpha: 0.6),
-                    ),
+                    child: Container(color: themeState.primaryShade100),
                   ),
                 ),
                 title: appBarTitle(),

@@ -130,79 +130,77 @@ Future<void> main() async {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
+  final textTheme =
+      isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme;
   TextTheme baseTextTheme;
   switch (locale.languageCode) {
     case "ar":
     case "fa":
     case "ug": // Uighur
-      baseTextTheme = GoogleFonts.notoSansArabicTextTheme();
+      baseTextTheme = GoogleFonts.notoSansArabicTextTheme(textTheme);
       break;
     case "ur":
-      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme();
+      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme(textTheme);
       break;
     case "bn":
     case "as": // Assamese
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
       break;
     case "hi":
     case "mr": // Marathi
     case "ne": // Nepali
-      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme();
+      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme(textTheme);
       break;
     case "ja":
-      baseTextTheme = GoogleFonts.notoSansJpTextTheme();
+      baseTextTheme = GoogleFonts.notoSansJpTextTheme(textTheme);
       break;
     case "ko":
-      baseTextTheme = GoogleFonts.notoSansKrTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKrTextTheme(textTheme);
       break;
     case "zh":
-      baseTextTheme = GoogleFonts.notoSansScTextTheme();
+      baseTextTheme = GoogleFonts.notoSansScTextTheme(textTheme);
       break;
     case "ta": // Tamil
-      baseTextTheme = GoogleFonts.notoSansTamilTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTamilTextTheme(textTheme);
       break;
     case "te": // Telugu
-      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme(textTheme);
       break;
     case "kn": // Kannada
-      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme(textTheme);
       break;
     case "ml": // Malayalam
-      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme();
+      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme(textTheme);
       break;
     case "gu": // Gujarati
-      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme();
+      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme(textTheme);
       break;
     case "si": // Sinhala
-      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme(textTheme);
       break;
     case "th": // Thai
-      baseTextTheme = GoogleFonts.notoSansThaiTextTheme();
+      baseTextTheme = GoogleFonts.notoSansThaiTextTheme(textTheme);
       break;
     case "km": // Khmer
-      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme(textTheme);
       break;
     case "he": // Hebrew
-      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme();
+      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme(textTheme);
       break;
     case "am": // Amharic
-      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme();
+      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme(textTheme);
       break;
     case "dv": // Divehi
-      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme(textTheme);
       break;
     case "zgh": // Amazigh
-      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme(textTheme);
       break;
     default:
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
   }
 
-  return baseTextTheme.apply(
-    bodyColor: isDarkMode ? Colors.white : Colors.black,
-    displayColor: isDarkMode ? Colors.white : Colors.black,
-    decorationColor: isDarkMode ? Colors.white : Colors.black,
-  );
+  return baseTextTheme;
 }
 
 class MyApp extends StatelessWidget {
@@ -297,6 +295,11 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Colors.grey.shade100,
                   ),
                   textTheme: getTextTheme(languageState.locale, false),
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    titleSpacing: 0,
+                  ),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
@@ -316,6 +319,11 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
                   textTheme: getTextTheme(languageState.locale, true),
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    titleSpacing: 0,
+                  ),
                 ),
                 themeMode: themeState.themeMode,
                 home:
