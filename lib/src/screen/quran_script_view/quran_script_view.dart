@@ -210,7 +210,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                 titleSpacing: 0,
                 flexibleSpace: ClipRRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(color: themeState.primaryShade100),
                   ),
                 ),

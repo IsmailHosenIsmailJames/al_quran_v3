@@ -51,75 +51,83 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
         ? const SizedBox()
         : SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-          child: Column(
-            children: List.generate(translationResources.length, (index) {
-              String languageKey = translationResources.keys.elementAt(index);
-              List<TranslationBookModel> booksInLanguage =
-                  translationResources[languageKey]
-                      ?.map(
-                        (e) => TranslationBookModel.fromMap(
-                          Map<String, dynamic>.from(e),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
+                children: List.generate(translationResources.length, (index) {
+                  String languageKey = translationResources.keys.elementAt(
+                    index,
+                  );
+                  List<TranslationBookModel> booksInLanguage =
+                      translationResources[languageKey]
+                          ?.map(
+                            (e) => TranslationBookModel.fromMap(
+                              Map<String, dynamic>.from(e),
+                            ),
+                          )
+                          .toList() ??
+                      [];
+
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0),
+                    elevation: 0,
+                    child: ExpansionTile(
+                      key: PageStorageKey(languageKey),
+                      title: Text(
+                        languageNativeNames[languageKey] ?? languageKey,
+
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
-                      )
-                      .toList() ??
-                  [];
+                      ),
+                      childrenPadding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 4.0,
+                      ),
+                      children:
+                          booksInLanguage.map((bookData) {
+                            TranslationBookModel? matchedResources =
+                                downloadedTranslation.firstOrNullWhere(
+                                  (element) =>
+                                      element.fullPath == bookData.fullPath,
+                                );
+                            bool needDownload = matchedResources == null;
+                            bool isSelected = false;
+                            if (!needDownload && selectedResources != null) {
+                              if (selectedResources?.any(
+                                    (element) =>
+                                        element?.fullPath ==
+                                        matchedResources.fullPath,
+                                  ) ==
+                                  true) {
+                                isSelected = true;
+                              }
+                            }
 
-              return Card(
-                margin: const EdgeInsets.symmetric(vertical: 4.0),
-                elevation: 0,
-                child: ExpansionTile(
-                  key: PageStorageKey(languageKey),
-                  title: Text(
-                    languageNativeNames[languageKey] ?? languageKey,
+                            bool isDownloading = false;
+                            if (downloadingData != null) {
+                              if (downloadingData!.fullPath ==
+                                  bookData.fullPath) {
+                                isDownloading = true;
+                              }
+                            }
 
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  childrenPadding: const EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                    vertical: 4.0,
-                  ),
-                  children:
-                      booksInLanguage.map((bookData) {
-                        TranslationBookModel? matchedResources =
-                            downloadedTranslation.firstOrNullWhere(
-                              (element) =>
-                                  element.fullPath == bookData.fullPath,
+                            return _buildBookListTile(
+                              appLocalizations,
+                              bookData,
+                              isSelected,
+                              needDownload,
+                              isDownloading,
+                              themeState,
                             );
-                        bool needDownload = matchedResources == null;
-                        bool isSelected = false;
-                        if (!needDownload && selectedResources != null) {
-                          if (selectedResources?.any(
-                                (element) =>
-                                    element?.fullPath ==
-                                    matchedResources.fullPath,
-                              ) ==
-                              true) {
-                            isSelected = true;
-                          }
-                        }
-
-                        bool isDownloading = false;
-                        if (downloadingData != null) {
-                          if (downloadingData!.fullPath == bookData.fullPath) {
-                            isDownloading = true;
-                          }
-                        }
-
-                        return _buildBookListTile(
-                          appLocalizations,
-                          bookData,
-                          isSelected,
-                          needDownload,
-                          isDownloading,
-                          themeState,
-                        );
-                      }).toList(),
-                ),
-              );
-            }),
+                          }).toList(),
+                    ),
+                  );
+                }),
+              ),
+            ),
           ),
         );
   }
@@ -138,7 +146,7 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
         vertical: 2.0,
       ),
       title: Text(translationBook.name),
-      subtitle: Row(children: [
+      subtitle: const Row(children: [
            ],
       ),
       trailing: SizedBox(

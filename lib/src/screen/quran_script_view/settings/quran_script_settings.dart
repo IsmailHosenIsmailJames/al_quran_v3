@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -340,7 +342,18 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          appBar: AppBar(title: Text(appLocalizations.quranScriptSettings)),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            flexibleSpace: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Container(
+                  color: context.read<ThemeCubit>().state.primaryShade100,
+                ),
+              ),
+            ),
+            title: Text(appLocalizations.quranScriptSettings),
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 10,
@@ -348,7 +361,7 @@ class QuranScriptSettings extends StatelessWidget {
               top: 10,
               bottom: 60,
             ),
-            child: bodyWidget,
+            child: SafeArea(child: bodyWidget),
           ),
         )
         : bodyWidget;

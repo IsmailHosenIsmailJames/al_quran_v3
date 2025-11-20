@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
@@ -22,17 +24,21 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     appLocalizations = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(appLocalizations.settings)),
-      body: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, themeState) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.only(
-              left: 10.0,
-              right: 10,
-              top: 10,
-              bottom: 50,
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, themeState) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(appLocalizations.settings),
+            flexibleSpace: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Container(color: themeState.primaryShade100),
+              ),
             ),
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
 
             child: SafeArea(
               child: Column(
@@ -84,9 +90,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -49,131 +49,140 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
-      child: Column(
-        children: List.generate(availableWbWBooks.length, (index) {
-          TranslationBookModel current = availableWbWBooks[index];
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Column(
+            children: List.generate(availableWbWBooks.length, (index) {
+              TranslationBookModel current = availableWbWBooks[index];
 
-          bool isDownloaded = downloadedWbW.any(
-            (element) => element.fullPath == current.fullPath,
-          );
+              bool isDownloaded = downloadedWbW.any(
+                (element) => element.fullPath == current.fullPath,
+              );
 
-          bool isSelected = selectedWbw?.fullPath == current.fullPath;
-          bool isDownloading = downloadingWbW?.fullPath == current.fullPath;
+              bool isSelected = selectedWbw?.fullPath == current.fullPath;
+              bool isDownloading = downloadingWbW?.fullPath == current.fullPath;
 
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 6),
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(roundedRadius),
-              side: BorderSide(
-                color:
-                    isSelected
-                        ? themeState.primary
-                        : themeState.primaryShade100,
-                width: isSelected ? 1.5 : 1.0,
-              ),
-            ),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(roundedRadius),
-              onTap: () async {
-                if (isDownloading) return;
-
-                if (isDownloaded) {
-                  if (!isSelected) {
-                    setState(() {
-                      selectedWbw = current;
-                    });
-                    await WordByWordFunction.setSelectedWordByWordBook(current);
-                  } else {
-                    log(appLocalizations.alreadySelected(current.name));
-                  }
-                } else {
-                  setState(() {
-                    downloadingWbW = current;
-                  });
-                  log(
-                    "Starting download for: ${current.name}",
-                    name: "WbWResourcesUI",
-                  );
-                  bool success = await WordByWordFunction.downloadResource(
-                    context: context,
-                    book: current,
-                    isSetupProcess: false,
-                  );
-                  if (success) {
-                    await WordByWordFunction.setSelectedWordByWordBook(current);
-                  }
-
-                  await _loadInitialData();
-                  setState(() {
-                    downloadingWbW = null;
-                  });
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 16.0,
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 6),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                  side: BorderSide(
+                    color:
+                        isSelected
+                            ? themeState.primary
+                            : themeState.primaryShade100,
+                    width: isSelected ? 1.5 : 1.0,
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            current.name,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                  onTap: () async {
+                    if (isDownloading) return;
 
-                          Text(current.language),
-                        ],
-                      ),
+                    if (isDownloaded) {
+                      if (!isSelected) {
+                        setState(() {
+                          selectedWbw = current;
+                        });
+                        await WordByWordFunction.setSelectedWordByWordBook(
+                          current,
+                        );
+                      } else {
+                        log(appLocalizations.alreadySelected(current.name));
+                      }
+                    } else {
+                      setState(() {
+                        downloadingWbW = current;
+                      });
+                      log(
+                        "Starting download for: ${current.name}",
+                        name: "WbWResourcesUI",
+                      );
+                      bool success = await WordByWordFunction.downloadResource(
+                        context: context,
+                        book: current,
+                        isSetupProcess: false,
+                      );
+                      if (success) {
+                        await WordByWordFunction.setSelectedWordByWordBook(
+                          current,
+                        );
+                      }
+
+                      await _loadInitialData();
+                      setState(() {
+                        downloadingWbW = null;
+                      });
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 16.0,
                     ),
-                    SizedBox(
-                      height: 30,
-                      width: 30,
-                      child:
-                          isDownloading
-                              ? CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  themeState.primary,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                current.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                backgroundColor:
-                                    context
-                                        .read<ThemeCubit>()
-                                        .state
-                                        .primaryShade100,
-                              )
-                              : isDownloaded
-                              ? isSelected
-                                  ? Icon(
-                                    Icons.check_circle_rounded,
+                              ),
+
+                              Text(current.language),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                          width: 30,
+                          child:
+                              isDownloading
+                                  ? CircularProgressIndicator(
+                                    strokeWidth: 2.5,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      themeState.primary,
+                                    ),
+                                    backgroundColor:
+                                        context
+                                            .read<ThemeCubit>()
+                                            .state
+                                            .primaryShade100,
+                                  )
+                                  : isDownloaded
+                                  ? isSelected
+                                      ? Icon(
+                                        Icons.check_circle_rounded,
+                                        color: themeState.primary,
+                                        size: 28,
+                                      )
+                                      : Icon(
+                                        Icons.circle_outlined,
+                                        color: Colors.grey[600],
+                                        size: 28,
+                                      )
+                                  : Icon(
+                                    FluentIcons.arrow_download_24_regular,
                                     color: themeState.primary,
                                     size: 28,
-                                  )
-                                  : Icon(
-                                    Icons.circle_outlined,
-                                    color: Colors.grey[600],
-                                    size: 28,
-                                  )
-                              : Icon(
-                                FluentIcons.arrow_download_24_regular,
-                                color: themeState.primary,
-                                size: 28,
-                              ),
+                                  ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }

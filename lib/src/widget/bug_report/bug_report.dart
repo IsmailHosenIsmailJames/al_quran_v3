@@ -131,7 +131,7 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 Navigator.pop(context);
               },
               minTileHeight: 40,
-              leading: const Icon(SimpleIcons.github, color: Colors.white),
+              leading: const Icon(SimpleIcons.github),
               title: const Text("Create a issue"),
             ),
           ],

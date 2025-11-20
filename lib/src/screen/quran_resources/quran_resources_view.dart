@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/quran_resources/tafsir_resources_view.dart";
 import "package:al_quran_v3/src/screen/quran_resources/translation_resources_view.dart";
@@ -47,48 +49,62 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
       appLocalizations.wordByWord,
     ];
     return Scaffold(
-      appBar: AppBar(title: Text(appLocalizations.quranResources)),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 40,
-              decoration: BoxDecoration(
-                color: themeState.primaryShade100,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: TabBar(
-                splashBorderRadius: BorderRadius.circular(100),
-                controller: _tabController,
-                indicator: BoxDecoration(
-                  color: themeState.primaryShade200,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                indicatorSize: TabBarIndicatorSize.tab,
-
-                labelColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                unselectedLabelColor:
-                    Theme.of(context).colorScheme.onSurfaceVariant,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                unselectedLabelStyle: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
-                tabs: pagesName.map((name) => Tab(text: name)).toList(),
-                dividerColor: Colors.transparent,
-              ),
-            ),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+            child: Container(color: themeState.primaryShade100),
           ),
+        ),
+        title: Text(appLocalizations.quranResources),
+      ),
+      body: Stack(
+        children: [
+          TabBarView(
+            controller: _tabController,
+            physics: const ClampingScrollPhysics(),
+            children: const [
+              TranslationResourcesView(),
+              TafsirResourcesView(),
+              WordByWordResourcesView(),
+            ],
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: themeState.primaryShade100,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: TabBar(
+                      splashBorderRadius: BorderRadius.circular(100),
+                      controller: _tabController,
+                      indicator: BoxDecoration(
+                        color: themeState.primaryShade200,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      indicatorSize: TabBarIndicatorSize.tab,
 
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              physics: const ClampingScrollPhysics(),
-              children: const [
-                SafeArea(child: TranslationResourcesView()),
-                SafeArea(child: TafsirResourcesView()),
-                SafeArea(child: WordByWordResourcesView()),
-              ],
+                      labelColor:
+                          Theme.of(context).colorScheme.onPrimaryContainer,
+                      unselectedLabelColor:
+                          Theme.of(context).colorScheme.onSurfaceVariant,
+                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      unselectedLabelStyle: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
+                      tabs: pagesName.map((name) => Tab(text: name)).toList(),
+                      dividerColor: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
