@@ -353,8 +353,22 @@ class _HomePageState extends State<HomePage> {
                     return appBarLeading(l10n, context);
                   },
                 ),
+
                 title: Text(l10n.alQuran),
                 centerTitle: true,
+                //   actions: [
+                //     IconButton(
+                //       icon: const Icon(FluentIcons.search_24_filled),
+                //       onPressed: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => const SearchScreen(),
+                //           ),
+                //         );
+                //       },
+                //     ),
+                //   ],
               ),
       body: Row(
         children: [
