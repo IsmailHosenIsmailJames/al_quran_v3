@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
@@ -133,202 +135,211 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    return BlocBuilder<ResourcesProgressCubit, ResourcesProgressCubitState>(
-      builder: (context, state) {
-        return Column(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_downward_rounded),
-              ),
+    return ClipRRect(
+      borderRadius: const BorderRadiusGeometry.only(
+        topRight: Radius.circular(10),
+        topLeft: Radius.circular(10),
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        child: BlocBuilder<ResourcesProgressCubit, ResourcesProgressCubitState>(
+          builder: (context, state) {
+            return mainUi(context, themeState, appLocalizations, state);
+          },
+        ),
+      ),
+    );
+  }
+
+  Column mainUi(
+    BuildContext context,
+    ThemeState themeState,
+    AppLocalizations appLocalizations,
+    ResourcesProgressCubitState state,
+  ) {
+    return Column(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_downward_rounded),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: themeState.primaryShade100,
+          ),
+          child: TextFormField(
+            controller: _textEditingController,
+            textAlign: TextAlign.start,
+            textAlignVertical: TextAlignVertical.center,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              prefixIcon: const Icon(Icons.search),
+              hintText: appLocalizations.search,
+              border: InputBorder.none,
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 15, left: 15, right: 15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: themeState.primaryShade100,
-              ),
-              child: TextFormField(
-                controller: _textEditingController,
-                textAlign: TextAlign.start,
-                textAlignVertical: TextAlignVertical.center,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.search,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: appLocalizations.search,
-                  border: InputBorder.none,
-                ),
-                onEditingComplete: () {
-                  _filterBooks(_textEditingController.text);
-                },
-              ),
-            ),
-            Divider(color: themeState.primaryShade300, height: 1),
-            Expanded(
-              child: ScrollablePositionedList.builder(
-                itemScrollController: _itemScrollController,
-                padding: const EdgeInsets.all(15),
-                itemCount: _allBooks.length,
-                itemBuilder: (context, index) {
-                  String language = _allBooks.keys.elementAt(index);
-                  List<Map<String, dynamic>> books = _allBooks.values.elementAt(
-                    index,
-                  );
-                  if (widget.isTafsir) {
-                    books.sort(
-                      (a, b) =>
-                          (b["score"] as int).compareTo(a["score"] as int),
-                    );
-                  }
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            onEditingComplete: () {
+              _filterBooks(_textEditingController.text);
+            },
+          ),
+        ),
+        Divider(color: themeState.primaryShade300, height: 1),
+        Expanded(
+          child: ScrollablePositionedList.builder(
+            itemScrollController: _itemScrollController,
+            padding: const EdgeInsets.all(15),
+            itemCount: _allBooks.length,
+            itemBuilder: (context, index) {
+              String language = _allBooks.keys.elementAt(index);
+              List<Map<String, dynamic>> books = _allBooks.values.elementAt(
+                index,
+              );
+              if (widget.isTafsir) {
+                books.sort(
+                  (a, b) => (b["score"] as int).compareTo(a["score"] as int),
+                );
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            (languageNativeNames[language] ?? "").capitalize(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Gap(10),
-                          Text(
-                            "( ${language.capitalize()} )",
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      const Gap(5),
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(books.length, (i) {
-                          var book =
-                              widget.isTafsir
-                                  ? TafsirBookModel.fromMap(books[i])
-                                  : TranslationBookModel.fromMap(books[i]);
-
-                          return InkWell(
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                            onTap: () {
-                              widget.isTafsir
-                                  ? context
-                                      .read<ResourcesProgressCubit>()
-                                      .changeTafsirBook(book as TafsirBookModel)
-                                  : context
-                                      .read<ResourcesProgressCubit>()
-                                      .changeTranslationBook(
-                                        book as TranslationBookModel,
-                                      );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border:
-                                    (widget.isTafsir
-                                            ? state.tafsirBookModel == book
-                                            : state.translationBookModel ==
-                                                book)
-                                        ? Border.all(
-                                          color: themeState.primaryShade300,
-                                        )
-                                        : null,
-                                borderRadius: BorderRadius.circular(
-                                  roundedRadius,
-                                ),
-                              ),
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                top: 10,
-                                bottom: 10,
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      if (book is TafsirBookModel)
-                                        buildScoreIndicator(
-                                          percentage: (book).score,
-                                          size: 20,
-                                        ),
-                                      if (book is TafsirBookModel)
-                                        const Gap(10),
-                                      Expanded(
-                                        child: Text(
-                                          widget.isTafsir
-                                              ? (book as TafsirBookModel).name
-                                                  .capitalize()
-                                              : (book as TranslationBookModel)
-                                                  .name
-                                                  .capitalize(),
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color:
-                                                (widget.isTafsir
-                                                        ? book ==
-                                                            state
-                                                                .tafsirBookModel
-                                                        : state.translationBookModel ==
-                                                            book)
-                                                    ? themeState.primary
-                                                    : null,
-                                            fontWeight:
-                                                (widget.isTafsir
-                                                        ? book ==
-                                                            state
-                                                                .tafsirBookModel
-                                                        : state.translationBookModel ==
-                                                            book)
-                                                    ? FontWeight.w600
-                                                    : null,
-                                          ),
-                                        ),
-                                      ),
-                                      if (!widget.isTafsir &&
-                                          (book as TranslationBookModel).type ==
-                                              TranslationResourcesType
-                                                  .withFootnoteTags)
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.footnote,
-                                          asColumn: true,
-                                        ),
-
-                                      (widget.isTafsir
-                                              ? book == state.tafsirBookModel
-                                              : state.translationBookModel ==
-                                                  book)
-                                          ? Icon(
-                                            Icons.check_circle,
-                                            color: themeState.primary,
-                                          )
-                                          : const SizedBox(),
-                                      const Gap(7),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
+                      Text(
+                        (languageNativeNames[language] ?? "").capitalize(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Gap(10),
+                      Text(
+                        "( ${language.capitalize()} )",
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ],
-                  );
-                },
-              ),
-            ),
-          ],
-        );
-      },
+                  ),
+                  const Gap(5),
+
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(books.length, (i) {
+                      var book =
+                          widget.isTafsir
+                              ? TafsirBookModel.fromMap(books[i])
+                              : TranslationBookModel.fromMap(books[i]);
+
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(roundedRadius),
+                        onTap: () {
+                          widget.isTafsir
+                              ? context
+                                  .read<ResourcesProgressCubit>()
+                                  .changeTafsirBook(book as TafsirBookModel)
+                              : context
+                                  .read<ResourcesProgressCubit>()
+                                  .changeTranslationBook(
+                                    book as TranslationBookModel,
+                                  );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border:
+                                (widget.isTafsir
+                                        ? state.tafsirBookModel == book
+                                        : state.translationBookModel == book)
+                                    ? Border.all(
+                                      color: themeState.primaryShade300,
+                                    )
+                                    : null,
+                            borderRadius: BorderRadius.circular(roundedRadius),
+                          ),
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 10,
+                            bottom: 10,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  if (book is TafsirBookModel)
+                                    buildScoreIndicator(
+                                      percentage: (book).score,
+                                      size: 20,
+                                    ),
+                                  if (book is TafsirBookModel) const Gap(10),
+                                  Expanded(
+                                    child: Text(
+                                      widget.isTafsir
+                                          ? (book as TafsirBookModel).name
+                                              .capitalize()
+                                          : (book as TranslationBookModel).name
+                                              .capitalize(),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color:
+                                            (widget.isTafsir
+                                                    ? book ==
+                                                        state.tafsirBookModel
+                                                    : state.translationBookModel ==
+                                                        book)
+                                                ? themeState.primary
+                                                : null,
+                                        fontWeight:
+                                            (widget.isTafsir
+                                                    ? book ==
+                                                        state.tafsirBookModel
+                                                    : state.translationBookModel ==
+                                                        book)
+                                                ? FontWeight.w600
+                                                : null,
+                                      ),
+                                    ),
+                                  ),
+                                  if (!widget.isTafsir &&
+                                      (book as TranslationBookModel).type ==
+                                          TranslationResourcesType
+                                              .withFootnoteTags)
+                                    getFeaturesMark(
+                                      context,
+                                      appLocalizations.footnote,
+                                      asColumn: true,
+                                    ),
+
+                                  (widget.isTafsir
+                                          ? book == state.tafsirBookModel
+                                          : state.translationBookModel == book)
+                                      ? Icon(
+                                        Icons.check_circle,
+                                        color: themeState.primary,
+                                      )
+                                      : const SizedBox(),
+                                  const Gap(7),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  const Gap(10),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

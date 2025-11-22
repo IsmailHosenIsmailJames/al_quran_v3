@@ -334,6 +334,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                                 topLeft: Radius.circular(10),
                                               ),
                                         ),
+                                        backgroundColor: Theme.of(context)
+                                            .scaffoldBackgroundColor
+                                            .withValues(alpha: 0.7),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: false,
@@ -391,6 +394,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                                 topLeft: Radius.circular(10),
                                               ),
                                         ),
+                                        backgroundColor: Theme.of(context)
+                                            .scaffoldBackgroundColor
+                                            .withValues(alpha: 0.7),
                                         builder: (context) {
                                           return const BookSelectPopup(
                                             isTafsir: true,
