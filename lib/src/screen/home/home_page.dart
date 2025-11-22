@@ -345,7 +345,13 @@ class _HomePageState extends State<HomePage> {
                 flexibleSpace: ClipRRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                    child: Container(color: themeState.primaryShade100),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: themeState.mutedGray),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 leading: Builder(
@@ -712,7 +718,11 @@ class _HomePageState extends State<HomePage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
             child: Container(
-              color: themeState.primaryShade100,
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+                border: Border(top: BorderSide(color: themeState.mutedGray)),
+              ),
               child: BottomNavigationBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,

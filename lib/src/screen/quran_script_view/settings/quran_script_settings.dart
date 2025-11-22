@@ -348,7 +348,13 @@ class QuranScriptSettings extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                 child: Container(
-                  color: context.read<ThemeCubit>().state.primaryShade100,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: context.read<ThemeCubit>().state.mutedGray,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

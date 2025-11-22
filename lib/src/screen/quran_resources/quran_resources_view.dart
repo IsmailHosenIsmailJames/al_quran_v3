@@ -54,7 +54,11 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
         flexibleSpace: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: Container(color: themeState.primaryShade100),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: themeState.mutedGray)),
+              ),
+            ),
           ),
         ),
         title: Text(appLocalizations.quranResources),

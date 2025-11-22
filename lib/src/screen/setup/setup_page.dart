@@ -1,4 +1,5 @@
 import "dart:developer";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -165,251 +166,266 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     bool isLandscape = MediaQuery.of(context).size.width > 600;
+    bool isSmallScreen = MediaQuery.of(context).size.height < 450;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(appLocalizations.appLanguage),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
-            icon: const Icon(FluentIcons.settings_24_regular),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Row(
-          children: [
-            if (isLandscape)
-              Expanded(
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                          color: themeState.primaryShade200,
-                          blurRadius: 150,
-                          spreadRadius: 0,
+      extendBodyBehindAppBar: true,
+      appBar:
+          isSmallScreen
+              ? null
+              : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                titleSpacing: 0,
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: themeState.mutedGray),
                         ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      "assets/img/Quran_Logo_v3.png",
-                      color: themeState.primary,
+                      ),
                     ),
                   ),
                 ),
+                title: Text(appLocalizations.appLanguage),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(FluentIcons.settings_24_regular),
+                  ),
+                ],
               ),
-            if (isLandscape) const VerticalDivider(),
+      body: Row(
+        children: [
+          if (isLandscape)
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-                      builder: (context, state) {
-                        return RadioGroup<MyAppLocalization>(
-                          groupValue: state,
-                          onChanged: (value) {
-                            if (value != null) {
-                              changeAppLanguage(value);
-                            }
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: [
+                      BoxShadow(
+                        color: themeState.primaryShade200,
+                        blurRadius: 150,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    "assets/img/Quran_Logo_v3.png",
+                    color: themeState.primary,
+                  ),
+                ),
+              ),
+            ),
+          if (isLandscape) const VerticalDivider(),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                    builder: (context, state) {
+                      return RadioGroup<MyAppLocalization>(
+                        groupValue: state,
+                        onChanged: (value) {
+                          if (value != null) {
+                            changeAppLanguage(value);
+                          }
+                        },
+                        child: ListView.builder(
+                          controller: _scrollController,
+                          itemCount: usedAppLanguageMap.length,
+                          itemBuilder: (context, index) {
+                            final MyAppLocalization appLoc =
+                                usedAppLanguageMap[index];
+                            return RadioListTile<MyAppLocalization>(
+                              value: appLoc,
+                              title: Text(appLoc.native),
+                              subtitle: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Text(appLoc.english),
+                                    const Gap(7),
+                                    if (doesHaveFootNote(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.footnote,
+                                      ),
+                                    if (doesHaveTafsirSupport(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.tafsir,
+                                      ),
+                                    if (doesHaveWordByWordTranslation(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.wordByWord,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            );
                           },
-                          child: ListView.builder(
-                            controller: _scrollController,
-                            itemCount: usedAppLanguageMap.length,
-                            itemBuilder: (context, index) {
-                              final MyAppLocalization appLoc =
-                                  usedAppLanguageMap[index];
-                              return RadioListTile<MyAppLocalization>(
-                                value: appLoc,
-                                title: Text(appLoc.native),
-                                subtitle: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                BlocBuilder<
+                  ResourcesProgressCubit,
+                  ResourcesProgressCubitState
+                >(
+                  builder:
+                      (context, state) => Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(roundedRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: themeState.mutedGray,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(appLoc.english),
-                                      const Gap(7),
-                                      if (doesHaveFootNote(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.footnote,
+                                      Text(
+                                        appLocalizations.translation,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).hintColor,
                                         ),
-                                      if (doesHaveTafsirSupport(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.tafsir,
-                                        ),
-                                      if (doesHaveWordByWordTranslation(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.wordByWord,
-                                        ),
+                                      ),
+                                      Text(
+                                        context
+                                                .read<ResourcesProgressCubit>()
+                                                .state
+                                                .translationBookModel
+                                                ?.name ??
+                                            "",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  BlocBuilder<
-                    ResourcesProgressCubit,
-                    ResourcesProgressCubitState
-                  >(
-                    builder:
-                        (context, state) => Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                            boxShadow: [
-                              BoxShadow(
-                                color: themeState.mutedGray,
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.translation,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      useSafeArea: true,
+                                      scrollControlDisabledMaxHeightRatio: 0.85,
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadiusGeometry.only(
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
                                         ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubit
-                                                  >()
-                                                  .state
-                                                  .translationBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
+                                      ),
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                          .withValues(alpha: 0.7),
+                                      builder: (context) {
+                                        return const BookSelectPopup(
+                                          isTafsir: false,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text(appLocalizations.change),
+                                ),
+                              ],
+                            ),
+                            const Gap(10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        appLocalizations.tafsir,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).hintColor,
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Text(
+                                        context
+                                                .read<ResourcesProgressCubit>()
+                                                .state
+                                                .tafsirBookModel
+                                                ?.name ??
+                                            "",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.85,
-                                        context: context,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadiusGeometry.only(
-                                                topRight: Radius.circular(10),
-                                                topLeft: Radius.circular(10),
-                                              ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      useSafeArea: true,
+                                      scrollControlDisabledMaxHeightRatio: 0.85,
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadiusGeometry.only(
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
                                         ),
-                                        backgroundColor: Theme.of(context)
-                                            .scaffoldBackgroundColor
-                                            .withValues(alpha: 0.7),
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: false,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.tafsir,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
-                                        ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubit
-                                                  >()
-                                                  .state
-                                                  .tafsirBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.85,
-                                        context: context,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadiusGeometry.only(
-                                                topRight: Radius.circular(10),
-                                                topLeft: Radius.circular(10),
-                                              ),
-                                        ),
-                                        backgroundColor: Theme.of(context)
-                                            .scaffoldBackgroundColor
-                                            .withValues(alpha: 0.7),
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: true,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              SizedBox(
+                                      ),
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                          .withValues(alpha: 0.7),
+                                      builder: (context) {
+                                        return const BookSelectPopup(
+                                          isTafsir: true,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text(appLocalizations.change),
+                                ),
+                              ],
+                            ),
+                            const Gap(10),
+                            SafeArea(
+                              bottom: true,
+                              left: false,
+                              right: false,
+                              top: false,
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () {
@@ -425,15 +441,15 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   label: Text(appLocalizations.saveAndDownload),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                  ),
-                ],
-              ),
+                      ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

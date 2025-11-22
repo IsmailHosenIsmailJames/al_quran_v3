@@ -205,13 +205,16 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           isLandScape
               ? null
               : AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                titleSpacing: 0,
                 flexibleSpace: ClipRRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                    child: Container(color: themeState.primaryShade100),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: themeState.mutedGray),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 title: appBarTitle(),
