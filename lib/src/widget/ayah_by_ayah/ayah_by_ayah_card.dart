@@ -123,7 +123,7 @@ Widget getAyahByAyahCard({
               if (!context.mounted) {
                 return;
               }
-              context.read<QuranHistoryCubit>().addHistory(ayahKey);
+              context.read<QuranHistoryCubit>().addHistory(ayahKey: ayahKey);
               try {
                 SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                   metaDataSurah[ayahKey.split(":").first]!,

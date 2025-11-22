@@ -102,7 +102,7 @@ class _SurahListViewState extends State<SurahListView> {
 
                                 SizedBox(
                                   height: 40,
-                                  child: getHistoryWidget(history),
+                                  child: getHistoryWidget(history, l10n),
                                 ),
                                 const Gap(10),
                               ],
@@ -350,7 +350,7 @@ class _SurahListViewState extends State<SurahListView> {
         );
   }
 
-  Widget getHistoryWidget(QuranHistoryState history) {
+  Widget getHistoryWidget(QuranHistoryState history, AppLocalizations l10n) {
     return ListView.builder(
       itemCount: history.history.length,
       scrollDirection: Axis.horizontal,
@@ -379,7 +379,7 @@ class _SurahListViewState extends State<SurahListView> {
               );
             },
             label: Text(
-              "${getSurahName(context, historyModel.surahNumber)} - ${localizedNumber(context, historyModel.ayahNumber)}",
+              "${getSurahName(context, historyModel.surahNumber)} - ${historyModel.pageNumber != null ? "${l10n.page} ${localizedNumber(context, historyModel.pageNumber)}" : localizedNumber(context, historyModel.ayahNumber ?? historyModel.pageNumber ?? 0)} ",
             ),
           ),
         );

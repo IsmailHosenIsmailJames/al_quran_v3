@@ -22,6 +22,7 @@ import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/get_page_number.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
@@ -73,6 +74,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       if (itemScrollControllerAyahByAyah.isAttached) {
         itemScrollControllerAyahByAyah.scrollTo(
           index: ayahsList.indexOf(key),
+          alignment: 0.15,
           duration: const Duration(milliseconds: 200),
         );
       }
@@ -80,6 +82,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       if (itemScrollControllerReadingMode.isAttached) {
         itemScrollControllerReadingMode.scrollTo(
           index: pagesList.indexOf(key),
+          alignment: 0.15,
           duration: const Duration(milliseconds: 200),
         );
       }
@@ -187,6 +190,21 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       scrolledAyahOnAudioPlay = event.current;
     });
 
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (widget.toScrollKey != null) {
+        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+          scrollToAyah(widget.toScrollKey);
+        } else {
+          int index = pagesList.indexWhere(
+            (element) => element.contains(widget.toScrollKey),
+          );
+          if (index != -1) {
+            scrollToAyah(pagesList[index]);
+          }
+        }
+      }
+    });
+
     super.initState();
   }
 
@@ -220,9 +238,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                 title: appBarTitle(),
                 actions: [
                   getAyahsDropDown(themeState),
-                  const Gap(5),
+
                   getChangesViewButton(themeState),
-                  const Gap(2),
+
                   getSettingsButton(themeState, context),
                 ],
               ),
@@ -600,7 +618,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
                     metaDataSurah[surahNumber.toString()]!,
                   );
-
+                  context.read<QuranHistoryCubit>().addHistory(
+                    pageNumber: pageNumber,
+                    ayahKey: firstAyah,
+                  );
                   context.read<AyahByAyahInScrollInfoCubit>().setData(
                     surahInfoModel: surahInfoModel,
                     dropdownAyahKey: currentPage,
@@ -674,7 +695,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     >(
       builder: (context, state) {
         return IconButton(
+          padding: EdgeInsets.zero,
           style: IconButton.styleFrom(
+            padding: EdgeInsets.zero,
             backgroundColor: themeState.primaryShade100,
             foregroundColor: themeState.primary,
           ),
@@ -711,7 +734,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
   Container getAyahsDropDown(ThemeState themeState) {
     return Container(
-      width: 90,
+      width: 94,
       height: 40,
       alignment: Alignment.center,
       decoration: BoxDecoration(

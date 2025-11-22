@@ -17,7 +17,7 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
         ),
       );
 
-  void addHistory(String ayahKey) {
+  void addHistory({required String ayahKey, int? pageNumber}) {
     List<HistoryElement> history = state.history;
     HistoryElement? lastHistory =
         state.history.isEmpty ? null : state.history.last;
@@ -34,6 +34,7 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
         HistoryElement(
           surahNumber: surahNumber,
           ayahNumber: ayahNumber,
+          pageNumber: pageNumber,
           timestamp: DateTime.now().millisecondsSinceEpoch,
         ),
       );
@@ -42,6 +43,7 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
         HistoryElement(
           surahNumber: surahNumber,
           ayahNumber: ayahNumber,
+          pageNumber: pageNumber,
           timestamp: DateTime.now().millisecondsSinceEpoch,
         ),
       );
