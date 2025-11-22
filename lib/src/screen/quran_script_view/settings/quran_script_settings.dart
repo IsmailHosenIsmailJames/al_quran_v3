@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
+import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -359,6 +360,7 @@ class QuranScriptSettings extends StatelessWidget {
               ),
             ),
             title: Text(appLocalizations.quranScriptSettings),
+            actions: [themeIconButton(context)],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(

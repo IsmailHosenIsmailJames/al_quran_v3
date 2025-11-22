@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/others_settings.dart";
 import "package:al_quran_v3/src/screen/settings/theme_settings.dart";
+import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -42,6 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            actions: [themeIconButton(context)],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),

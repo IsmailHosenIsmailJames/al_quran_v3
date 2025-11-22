@@ -29,11 +29,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late PageController pageController;
+
   List<Widget> getBody() {
+    List<Widget> body = [];
     switch (platformOwn) {
       case platform_services.PlatformOwn.isAndroid:
       case platform_services.PlatformOwn.isIos:
-        return const [
+        body = const [
           QuranPage(),
           PrayerTimePage(),
           QiblaDirection(),
@@ -42,17 +45,18 @@ class _HomePageState extends State<HomePage> {
       case platform_services.PlatformOwn.isWindows:
       case platform_services.PlatformOwn.isMac:
       case platform_services.PlatformOwn.isLinux:
-        return const [
+        body = const [
           QuranPage(),
           PrayerTimePage(),
           AudioPage(),
           SettingsPage(),
         ];
       case platform_services.PlatformOwn.isWeb:
-        return const [QuranPage(), AudioPage(), SettingsPage()];
+        body = const [QuranPage(), AudioPage(), SettingsPage()];
       default:
-        return const [QuranPage(), AudioPage(), SettingsPage()];
+        body = const [QuranPage(), AudioPage(), SettingsPage()];
     }
+    return body;
   }
 
   List<BottomNavigationBarItem> getBottomNavItems(
@@ -321,6 +325,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    pageController = PageController(
+      initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -411,11 +423,12 @@ class _HomePageState extends State<HomePage> {
           if (isSideNav) const VerticalDivider(),
           Expanded(
             flex: 2,
-            child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-              buildWhen: (previous, current) {
-                return previous.tabIndex != current.tabIndex;
+            child: PageView(
+              onPageChanged: (value) {
+                context.read<OthersSettingsCubit>().setTabIndex(value);
               },
-              builder: (context, state) => getBody()[state.tabIndex],
+              controller: pageController,
+              children: getBody(),
             ),
           ),
         ],
@@ -516,6 +529,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           context.read<OthersSettingsCubit>().setTabIndex(index);
+          pageController.jumpToPage(index);
         },
       ),
     );
@@ -729,6 +743,7 @@ class _HomePageState extends State<HomePage> {
                 currentIndex: state.tabIndex,
                 onTap: (index) {
                   context.read<OthersSettingsCubit>().setTabIndex(index);
+                  pageController.jumpToPage(index);
                 },
                 type: BottomNavigationBarType.fixed,
                 selectedLabelStyle: const TextStyle(
