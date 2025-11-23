@@ -4,6 +4,7 @@ import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
@@ -308,7 +309,7 @@ class AudioPlayerManager {
     double playbackSpeed = context.read<QuranViewCubit>().state.playbackSpeed;
 
     SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-      metaDataSurah[ayahKey.split(":").first],
+      metaDataSurah[ayahKey.split(":").first]!,
     );
 
     final audioSource = await getAudioSourceFromAyahKey(
@@ -348,7 +349,9 @@ class AudioPlayerManager {
     bool useAudioStream = context.read<QuranViewCubit>().state.useAudioStream;
     if (useAudioStream == false) {
       SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        Map<String, dynamic>.from(metaDataSurah[startAyahKey.split(":").first]),
+        Map<String, dynamic>.from(
+          metaDataSurah[startAyahKey.split(":").first]!,
+        ),
       );
       int count = await getFilesCount(reciterInfoModel, surahInfoModel);
       if (count >= surahInfoModel.versesCount) {
@@ -451,7 +454,7 @@ class AudioPlayerManager {
     List<AudioSource> listOfAudioSource = [];
     for (String ayahKey in ayahList) {
       SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-        metaDataSurah[ayahKey.split(":").first],
+        metaDataSurah[ayahKey.split(":").first]!,
       );
       listOfAudioSource.add(
         await getAudioSourceFromAyahKey(

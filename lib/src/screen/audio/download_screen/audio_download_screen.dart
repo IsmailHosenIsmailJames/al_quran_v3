@@ -1,5 +1,6 @@
 import "dart:developer";
 import "dart:io";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
@@ -87,62 +88,83 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
       searchController.text.trim(),
     );
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.audioDownload)),
-      body: ListView(
-        padding: const EdgeInsets.all(12.0),
-        children: [
-          BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-            builder: (context, ayahKeyState) {
-              int currentIndex =
-                  int.parse(ayahKeyState.current.split(":")[1]) - 1;
-              return getReciterViewWidget(
-                context,
-                ayahKeyState,
-                currentIndex,
-                showDownloadIconButton: false,
-                showSettingsIconButton: false,
-              );
-            },
-          ),
-          const Gap(10),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 5,
-              bottom: 5,
-              left: 5,
-              right: 5,
-            ),
-            child: SearchBar(
-              elevation: WidgetStateProperty.all<double?>(0),
-              hintText: l10n.searchForASurah,
-              controller: searchController,
-              backgroundColor: WidgetStateProperty.all<Color?>(
-                themeState.primaryShade100,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: themeState.mutedGray)),
               ),
-              leading: const Icon(FluentIcons.search_24_filled),
-              onChanged: (value) {
-                setState(() {});
-              },
             ),
           ),
-          BlocBuilder<AudioDownloadCubit, AudioDownloadState>(
-            builder: (context, state) {
-              return Column(
-                children: List.generate(filteredSurah.length, (index) {
-                  return getSurahWidget(
-                    context,
-                    index,
-                    l10n,
-                    filteredSurah,
-                    textColor,
-                    state,
-                    themeState,
-                  );
-                }),
-              );
-            },
-          ),
-        ],
+        ),
+        title: Text(l10n.audioDownload),
+      ),
+      body: ListView.builder(
+        padding: EdgeInsets.only(
+          bottom: 100.0,
+          left: 15,
+          right: 15,
+          top: MediaQuery.of(context).padding.top + 70,
+        ),
+        itemCount: 114 + 3,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+              builder: (context, ayahKeyState) {
+                int currentIndex =
+                    int.parse(ayahKeyState.current.split(":")[1]) - 1;
+                return getReciterViewWidget(
+                  context,
+                  ayahKeyState,
+                  currentIndex,
+                  showDownloadIconButton: false,
+                  showSettingsIconButton: false,
+                );
+              },
+            );
+          }
+          if (index == 1) {
+            return const Gap(10);
+          }
+          if (index == 2) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                top: 5,
+                bottom: 5,
+                left: 5,
+                right: 5,
+              ),
+              child: SearchBar(
+                elevation: WidgetStateProperty.all<double?>(0),
+                hintText: l10n.searchForASurah,
+                controller: searchController,
+                backgroundColor: WidgetStateProperty.all<Color?>(
+                  themeState.primaryShade100,
+                ),
+                leading: const Icon(FluentIcons.search_24_filled),
+                onChanged: (value) {
+                  setState(() {});
+                },
+              ),
+            );
+          }
+          index = index - 3;
+          return BlocBuilder<AudioDownloadCubit, AudioDownloadState>(
+            builder:
+                (context, state) => getSurahWidget(
+                  context,
+                  index,
+                  l10n,
+                  filteredSurah,
+                  textColor,
+                  state,
+                  themeState,
+                ),
+          );
+        },
       ),
     );
   }

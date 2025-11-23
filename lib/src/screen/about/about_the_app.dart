@@ -7,6 +7,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:simple_icons/simple_icons.dart";
+import "package:url_launcher/url_launcher.dart";
 
 class AboutAppPage extends StatelessWidget {
   const AboutAppPage({super.key});
@@ -244,11 +245,53 @@ class AboutAppPage extends StatelessWidget {
             const Gap(15),
             Text(l10n.crossPlatformSupportDescription2),
             const Gap(15),
-            PlatformTile(icon: SimpleIcons.android, title: l10n.android),
-            PlatformTile(icon: SimpleIcons.ios, title: l10n.ios),
-            PlatformTile(icon: SimpleIcons.macos, title: l10n.macos),
-            PlatformTile(icon: SimpleIcons.googlechrome, title: l10n.web),
-            PlatformTile(icon: SimpleIcons.linux, title: l10n.linux),
+            PlatformTile(
+              icon: SimpleIcons.android,
+              title: l10n.android,
+              callback: () {
+                launchUrl(
+                  Uri.parse(
+                    "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                  ),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+            ),
+            // PlatformTile(icon: SimpleIcons.ios, title: l10n.ios),
+            PlatformTile(
+              icon: SimpleIcons.macos,
+              title: l10n.macos,
+              callback: () {
+                launchUrl(
+                  Uri.parse(
+                    "https://github.com/IsmailHosenIsmailJames/al_quran_v3/releases",
+                  ),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+            ),
+            PlatformTile(
+              icon: SimpleIcons.googlechrome,
+              title: l10n.web,
+              callback: () {
+                launchUrl(
+                  Uri.parse("https://alquranwithaudio.web.app"),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+            ),
+            PlatformTile(
+              icon: SimpleIcons.linux,
+              title: l10n.linux,
+              callback: () {
+                launchUrl(
+                  Uri.parse(
+                    "https://github.com/IsmailHosenIsmailJames/al_quran_v3/releases",
+                  ),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+            ),
             PlatformTile(
               alterNative: SvgPicture.string(
                 """<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -268,6 +311,14 @@ class AboutAppPage extends StatelessWidget {
                 ),
               ),
               title: l10n.windows,
+              callback: () {
+                launchUrl(
+                  Uri.parse(
+                    "https://apps.microsoft.com/detail/9nx2chfq26gd?ocid=webpdpshare",
+                  ),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
             ),
 
             const Gap(30),
@@ -285,9 +336,9 @@ class AboutAppPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.favorite_rounded,
-                      color: themeState.primary,
+                      color: Colors.redAccent,
                       size: 40,
                     ),
                     const Gap(15),
@@ -361,12 +412,14 @@ class PlatformTile extends StatelessWidget {
   final IconData? icon;
   final String title;
   final Widget? alterNative;
+  final VoidCallback callback;
 
   const PlatformTile({
     super.key,
     this.icon,
     required this.title,
     this.alterNative,
+    required this.callback,
   });
 
   @override
@@ -375,6 +428,7 @@ class PlatformTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
+        onTap: callback,
         contentPadding: const EdgeInsets.all(12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         // Slightly more rounded

@@ -70,4 +70,45 @@ class QuranViewState {
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is QuranViewState &&
+        other.ayahKey == ayahKey &&
+        other.fontSize == fontSize &&
+        other.lineHeight == lineHeight &&
+        other.quranScriptType == quranScriptType &&
+        other.translationFontSize == translationFontSize &&
+        other.hideFootnote == hideFootnote &&
+        other.hideWordByWord == hideWordByWord &&
+        other.hideTranslation == hideTranslation &&
+        other.hideToolbar == hideToolbar &&
+        other.hideQuranAyah == hideQuranAyah &&
+        other.alwaysOpenWordByWord == alwaysOpenWordByWord &&
+        other.enableWordByWordHighlight == enableWordByWordHighlight &&
+        other.scrollWithRecitation == scrollWithRecitation &&
+        other.useAudioStream == useAudioStream &&
+        other.playbackSpeed == playbackSpeed;
+  }
+
+  @override
+  int get hashCode {
+    return ayahKey.hashCode ^
+        fontSize.hashCode ^
+        lineHeight.hashCode ^
+        quranScriptType.hashCode ^
+        translationFontSize.hashCode ^
+        hideFootnote.hashCode ^
+        hideWordByWord.hashCode ^
+        hideTranslation.hashCode ^
+        hideToolbar.hashCode ^
+        hideQuranAyah.hashCode ^
+        alwaysOpenWordByWord.hashCode ^
+        enableWordByWordHighlight.hashCode ^
+        scrollWithRecitation.hashCode ^
+        useAudioStream.hashCode ^
+        playbackSpeed.hashCode;
+  }
 }

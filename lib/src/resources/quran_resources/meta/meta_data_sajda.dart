@@ -1,0 +1,16 @@
+List<Map<String, dynamic>> metaDataSajda = [
+  {"verse_key": "7:206", "required": false},
+  {"verse_key": "13:15", "required": false},
+  {"verse_key": "16:50", "required": false},
+  {"verse_key": "17:109", "required": false},
+  {"verse_key": "19:58", "required": false},
+  {"verse_key": "22:18", "required": false},
+  {"verse_key": "25:60", "required": false},
+  {"verse_key": "27:26", "required": false},
+  {"verse_key": "32:15", "required": true},
+  {"verse_key": "38:24", "required": false},
+  {"verse_key": "41:38", "required": true},
+  {"verse_key": "53:62", "required": true},
+  {"verse_key": "84:21", "required": false},
+  {"verse_key": "96:19", "required": true},
+];

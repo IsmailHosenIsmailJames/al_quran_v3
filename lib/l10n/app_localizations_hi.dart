@@ -19,12 +19,12 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String tafsirNotAvailable(String ayahKey) {
-    return '$ayahKey के लिए तफ़्सीर उपलब्ध नहीं है';
+    return '$ayahKey के लिए तफ़सीर उपलब्ध नहीं है';
   }
 
   @override
   String tafsirFoundAt(String anotherAyahLinkKey) {
-    return 'तफ़्सीर यहाँ मिलेगी: $anotherAyahLinkKey';
+    return 'तफ़सीर यहां मिलेगा: $anotherAyahLinkKey';
   }
 
   @override
@@ -33,7 +33,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get hizb => 'हिज्ब';
+  String get hizb => 'हिज़्ब';
 
   @override
   String get juz => 'जुज़';
@@ -58,7 +58,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'सहेजें और डाउनलोड करें';
+  String get saveAndDownload => 'सेव और डाउनलोड करें';
 
   @override
   String get appLanguage => 'ऐप की भाषा';
@@ -82,19 +82,19 @@ class AppLocalizationsHi extends AppLocalizations {
   String get selectTranslationBook => 'अनुवाद की किताब चुनें...';
 
   @override
-  String get quranTafsirLanguage => 'कुरान तफ़्सीर की भाषा';
+  String get quranTafsirLanguage => 'कुरान तफ़सीर की भाषा';
 
   @override
-  String get selectTafsirLanguage => 'तफ़्सीर की भाषा चुनें...';
+  String get selectTafsirLanguage => 'तफ़सीर की भाषा चुनें...';
 
   @override
-  String get quranTafsirBook => 'कुरान तफ़्सीर की किताब';
+  String get quranTafsirBook => 'कुरान तफ़सीर की किताब';
 
   @override
-  String get selectTafsirBook => 'तफ़्सीर की किताब चुनें...';
+  String get selectTafsirBook => 'तफ़सीर की किताब चुनें...';
 
   @override
-  String get quranScriptAndStyle => 'कुरान लिपि और शैली';
+  String get quranScriptAndStyle => 'कुरान स्क्रिप्ट और स्टाइल';
 
   @override
   String get justAMoment => 'बस एक पल...';
@@ -108,54 +108,53 @@ class AppLocalizationsHi extends AppLocalizations {
   String get success => 'सफल';
 
   @override
-  String get retry => 'पुनः प्रयास करें';
+  String get retry => 'फिर से कोशिश करें';
 
   @override
   String get unableToDownloadResources =>
-      'संसाधन डाउनलोड करने में असमर्थ...\nकुछ गलत हो गया';
+      'रिसोर्स डाउनलोड करने में असमर्थ...\nकुछ गड़बड़ हो गई';
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'खंडित कुरान तिलावत डाउनलोड हो रही है';
+      'सेगमेंटेड कुरान तिलावत डाउनलोड कर रहे हैं';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'खंडित कुरान तिलावत संसाधित हो रही है';
+      'सेगमेंटेड कुरान तिलावत प्रोसेस कर रहे हैं';
 
   @override
   String get footnote => 'फुटनोट';
 
   @override
-  String get tafsir => 'तफ़्सीर';
+  String get tafsir => 'तफ़सीर';
 
   @override
-  String get wordByWord => 'शब्द-दर-शब्द';
+  String get wordByWord => 'शब्द दर शब्द';
 
   @override
-  String get pleaseSelectRequiredOption => 'कृपया आवश्यक विकल्प चुनें';
+  String get pleaseSelectRequiredOption => 'कृपया जरूरी ऑप्शन चुनें';
 
   @override
   String get rememberHomeTab => 'होम टैब याद रखें';
 
   @override
   String get rememberHomeTabSubtitle =>
-      'ऐप होम स्क्रीन में अंतिम खोले गए टैब को याद रखेगा।';
+      'ऐप होम स्क्रीन में आखिरी खोले गए टैब को याद रखेगा।';
 
   @override
-  String get wakeLock => 'स्क्रीन को जगाए रखें';
+  String get wakeLock => 'वेक लॉक';
 
   @override
-  String get wakeLockSubtitle =>
-      'स्क्रीन को स्वचालित रूप से बंद होने से रोकें।';
+  String get wakeLockSubtitle => 'स्क्रीन को खुद बंद होने से रोकें।';
 
   @override
   String get settings => 'सेटिंग्स';
 
   @override
-  String get appTheme => 'ऐप की थीम';
+  String get appTheme => 'ऐप थीम';
 
   @override
-  String get quranStyle => 'कुरान की शैली';
+  String get quranStyle => 'कुरान स्टाइल';
 
   @override
   String get changeTheme => 'थीम बदलें';
@@ -170,7 +169,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get tafsirNotFound => 'नहीं मिला';
 
   @override
-  String get moreInfo => 'अधिक जानकारी';
+  String get moreInfo => 'और जानकारी';
 
   @override
   String get playAudio => 'ऑडियो चलाएं';
@@ -182,10 +181,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get loading => 'लोड हो रहा है...';
 
   @override
-  String get errorFetchingAddress => 'पता प्राप्त करने में त्रुटि';
+  String get errorFetchingAddress => 'पता लाने में त्रुटि';
 
   @override
-  String get addressNotAvailable => 'पता उपलब्ध नहीं है';
+  String get addressNotAvailable => 'पता उपलब्ध नहीं';
 
   @override
   String get latitude => 'अक्षांश: ';
@@ -203,75 +202,75 @@ class AppLocalizationsHi extends AppLocalizations {
   String get parameters => 'पैरामीटर: ';
 
   @override
-  String get selectCalculationMethod => 'गणना विधि चुनें';
+  String get selectCalculationMethod => 'कैलकुलेशन मेथड चुनें';
 
   @override
-  String get shareSelectAyahs => 'चुनी हुई आयतें साझा करें';
+  String get shareSelectAyahs => 'चुनी हुई आयतें शेयर करें';
 
   @override
   String get selectionEmpty => 'चयन खाली है';
 
   @override
   String get generatingImagePleaseWait =>
-      'छवि बनायी जा रही है... कृपया प्रतीक्षा करें';
+      'इमेज बना रहे हैं... कृपया इंतजार करें';
 
   @override
-  String get asImage => 'छवि के रूप में';
+  String get asImage => 'इमेज के रूप में';
 
   @override
-  String get asText => 'पाठ के रूप में';
+  String get asText => 'टेक्स्ट के रूप में';
 
   @override
   String get playFromSelectedAyah => 'चुनी हुई आयत से चलाएं';
 
   @override
-  String get toTafsir => 'तफ़्सीर पर जाएं';
+  String get toTafsir => 'तफ़सीर पर';
 
   @override
   String get selectAyah => 'आयत चुनें';
 
   @override
-  String get toAyah => 'आयत पर जाएं';
+  String get toAyah => 'आयत पर';
 
   @override
-  String get searchForASurah => 'एक सूरह खोजें';
+  String get searchForASurah => 'सूरह खोजें';
 
   @override
   String get bugReportTitle => 'बग रिपोर्ट';
 
   @override
-  String get audioCached => 'ऑडियो कैश किया गया';
+  String get audioCached => 'ऑडियो कैश्ड';
 
   @override
   String get others => 'अन्य';
 
   @override
   String get quranTranslationAyahOneMustEnabled =>
-      'कुरान|अनुवाद|आयत, एक को सक्षम होना चाहिए';
+      'कुरान|अनुवाद|आयत, एक को चालू रखना जरूरी है';
 
   @override
-  String get quranFontSize => 'कुरान फ़ॉन्ट का आकार';
+  String get quranFontSize => 'कुरान फॉन्ट साइज';
 
   @override
-  String get quranLineHeight => 'कुरान लाइन की ऊंचाई';
+  String get quranLineHeight => 'कुरान लाइन हाइट';
 
   @override
-  String get translationAndTafsirFontSize => 'अनुवाद और तफ़्सीर फ़ॉन्ट का आकार';
+  String get translationAndTafsirFontSize => 'अनुवाद और तफ़सीर फॉन्ट साइज';
 
   @override
-  String get quranAyah => 'कुरान की आयत';
+  String get quranAyah => 'कुरान आयत';
 
   @override
-  String get topToolbar => 'ऊपरी टूलबार';
+  String get topToolbar => 'टॉप टूलबार';
 
   @override
-  String get keepOpenWordByWord => 'शब्द-दर-शब्द खुला रखें';
+  String get keepOpenWordByWord => 'शब्द दर शब्द खुला रखें';
 
   @override
-  String get wordByWordHighlight => 'शब्द-दर-शब्द हाइलाइट';
+  String get wordByWordHighlight => 'शब्द दर शब्द हाइलाइट';
 
   @override
-  String get quranScriptSettings => 'कुरान लिपि सेटिंग्स';
+  String get quranScriptSettings => 'कुरान स्क्रिप्ट सेटिंग्स';
 
   @override
   String surahName(String nameSimple) {
@@ -282,30 +281,30 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pageNumber => 'पेज: ';
 
   @override
-  String get quranResources => 'कुरान संसाधन';
+  String get quranResources => 'कुरान रिसोर्स';
 
   @override
   String alreadySelected(String name) {
-    return 'भाषा \'$name\' पहले से ही चयनित है।';
+    return 'भाषा \'$name\' पहले से चुनी हुई है।';
   }
 
   @override
-  String get unableToGetCompassData => 'कम्पास डेटा प्राप्त करने में असमर्थ';
+  String get unableToGetCompassData => 'कंपास डेटा पाने में असमर्थ';
 
   @override
   String get deviceDoesNotHaveSensors => 'डिवाइस में सेंसर नहीं हैं!';
 
   @override
-  String get north => 'उ';
+  String get north => 'उत्तर';
 
   @override
-  String get east => 'पू';
+  String get east => 'पूर्व';
 
   @override
-  String get south => 'द';
+  String get south => 'दक्षिण';
 
   @override
-  String get west => 'प';
+  String get west => 'पश्चिम';
 
   @override
   String get address => 'पता: ';
@@ -314,39 +313,40 @@ class AppLocalizationsHi extends AppLocalizations {
   String get change => 'बदलें';
 
   @override
-  String get calculationMethod => 'गणना विधि: ';
+  String get calculationMethod => 'कैलकुलेशन मेथड: ';
 
   @override
-  String get downloadPrayerTime => 'नमाज़ का समय डाउनलोड करें';
+  String get downloadPrayerTime => 'नमाज के समय डाउनलोड करें';
 
   @override
-  String get calculationMethodsListEmpty => 'गणना विधियों की सूची खाली है।';
+  String get calculationMethodsListEmpty =>
+      'कैलकुलेशन मेथड्स की लिस्ट खाली है।';
 
   @override
   String get noCalculationMethodWithLocationData =>
-      'स्थान डेटा के साथ कोई गणना विधि नहीं मिली।';
+      'लोकेशन डेटा के साथ कोई कैलकुलेशन मेथड नहीं मिला।';
 
   @override
-  String get prayerSettings => 'नमाज़ सेटिंग्स';
+  String get prayerSettings => 'नमाज सेटिंग्स';
 
   @override
   String get reminderSettings => 'रिमाइंडर सेटिंग्स';
 
   @override
-  String get adjustReminderTime => 'रिमाइंडर का समय समायोजित करें';
+  String get adjustReminderTime => 'रिमाइंडर टाइम एडजस्ट करें';
 
   @override
-  String get enforceAlarmSound => 'अलार्म की ध्वनि को लागू करें';
+  String get enforceAlarmSound => 'अलार्म साउंड को लागू करें';
 
   @override
   String get enforceAlarmSoundDescription =>
-      'यदि सक्षम है, तो यह सुविधा आपके फ़ोन की ध्वनि कम होने पर भी, यहाँ निर्धारित वॉल्यूम पर अलार्म बजाएगी। यह सुनिश्चित करता है कि आप कम फ़ोन वॉल्यूम के कारण अलार्म से न चूकें।';
+      'अगर चालू किया, तो यह फीचर अलार्म को यहां सेट वॉल्यूम पर बजाएगा, भले फोन का साउंड कम हो। इससे अलार्म मिस नहीं होगा।';
 
   @override
   String get volume => 'वॉल्यूम';
 
   @override
-  String get atPrayerTime => 'नमाज़ के समय';
+  String get atPrayerTime => 'नमाज के समय पर';
 
   @override
   String minBefore(int minutes) {
@@ -365,11 +365,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String itsTimeOf(String prayerName) {
-    return 'यह $prayerName का समय है';
+    return '$prayerName का समय हो गया है';
   }
 
   @override
-  String get stopTheAdhan => 'अज़ान रोकें';
+  String get stopTheAdhan => 'अजान रोकें';
 
   @override
   String dateFoundEmpty(String date) {
@@ -380,7 +380,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get today => 'आज';
 
   @override
-  String get left => 'शेष';
+  String get left => 'बाकी';
 
   @override
   String reminderAdded(String prayerName) {
@@ -389,22 +389,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get allowNotificationPermission =>
-      'इस सुविधा का उपयोग करने के लिए कृपया अधिसूचना की अनुमति दें';
+      'इस फीचर को इस्तेमाल करने के लिए नोटिफिकेशन परमिशन दें';
 
   @override
   String reminderRemoved(String prayerName) {
-    return '$prayerName के लिए रिमाइंडर हटा दिया गया';
+    return '$prayerName का रिमाइंडर हटाया गया';
   }
 
   @override
-  String get getPrayerTimesAndQibla => 'नमाज़ का समय और क़िबला प्राप्त करें';
+  String get getPrayerTimesAndQibla => 'नमाज के समय और किबला पाएं';
 
   @override
   String get getPrayerTimesAndQiblaDescription =>
-      'किसी भी दिए गए स्थान के लिए नमाज़ का समय और क़िबला की गणना करें।';
+      'किसी भी लोकेशन के लिए नमाज के समय और किबला कैलकुलेट करें।';
 
   @override
-  String get getFromGPS => 'जीपीएस से प्राप्त करें';
+  String get getFromGPS => 'जीपीएस से पाएं';
 
   @override
   String get or => 'या';
@@ -414,110 +414,110 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get noteAboutGPS =>
-      'नोट: यदि आप जीपीएस का उपयोग नहीं करना चाहते हैं या सुरक्षित महसूस नहीं करते हैं, तो आप अपना शहर चुन सकते हैं।';
+      'नोट: अगर आप जीपीएस इस्तेमाल नहीं करना चाहते या सुरक्षित नहीं लगता, तो अपना शहर चुन सकते हैं।';
 
   @override
   String get downloadingLocationResources =>
-      'स्थान संसाधन डाउनलोड हो रहे हैं...';
+      'लोकेशन रिसोर्स डाउनलोड कर रहे हैं...';
 
   @override
-  String get somethingWentWrong => 'कुछ गलत हो गया';
+  String get somethingWentWrong => 'कुछ गड़बड़ हो गई';
 
   @override
   String get selectYourCountry => 'अपना देश चुनें';
 
   @override
-  String get searchForACountry => 'एक देश खोजें';
+  String get searchForACountry => 'देश खोजें';
 
   @override
-  String get selectYourAdministrator => 'अपना राज्य चुनें';
+  String get selectYourAdministrator => 'अपना एडमिनिस्ट्रेटर चुनें';
 
   @override
-  String get searchForAnAdministrator => 'एक राज्य खोजें';
+  String get searchForAnAdministrator => 'एडमिनिस्ट्रेटर खोजें';
 
   @override
-  String get searchForACity => 'एक शहर खोजें';
+  String get searchForACity => 'शहर खोजें';
 
   @override
-  String get pleaseEnableLocationService => 'कृपया स्थान सेवा सक्षम करें';
+  String get pleaseEnableLocationService => 'कृपया लोकेशन सर्विस चालू करें';
 
   @override
   String get donateUs => 'हमें दान दें';
 
   @override
-  String get underDevelopment => 'विकास के अधीन';
+  String get underDevelopment => 'डेवलपमेंट में';
 
   @override
   String get versionLoading => 'लोड हो रहा है...';
 
   @override
-  String get alQuran => 'अल-क़ुरान';
+  String get alQuran => 'अल कुरान';
 
   @override
-  String get mainMenu => 'मुख्य मेनू';
+  String get mainMenu => 'मेन मेन्यू';
 
   @override
   String get notes => 'नोट्स';
 
   @override
-  String get pinned => 'पिन किया हुआ';
+  String get pinned => 'पिन किए हुए';
 
   @override
   String get jumpToAyah => 'आयत पर जाएं';
 
   @override
-  String get shareMultipleAyah => 'एक से अधिक आयतें साझा करें';
+  String get shareMultipleAyah => 'कई आयतें शेयर करें';
 
   @override
-  String get shareThisApp => 'इस ऐप को साझा करें';
+  String get shareThisApp => 'यह ऐप शेयर करें';
 
   @override
   String get giveRating => 'रेटिंग दें';
 
   @override
-  String get bugReport => 'बग रिपोर्ट करें';
+  String get bugReport => 'बग रिपोर्ट';
 
   @override
-  String get privacyPolicy => 'गोपनीयता नीति';
+  String get privacyPolicy => 'प्राइवेसी पॉलिसी';
 
   @override
   String get aboutTheApp => 'ऐप के बारे में';
 
   @override
-  String get resetTheApp => 'ऐप को रीसेट करें';
+  String get resetTheApp => 'ऐप रीसेट करें';
 
   @override
   String get resetAppWarningTitle => 'ऐप डेटा रीसेट करें';
 
   @override
   String get resetAppWarningMessage =>
-      'क्या आप वाकई ऐप को रीसेट करना चाहते हैं? आपका सारा डेटा खो जाएगा, और आपको ऐप को शुरू से सेट करना होगा।';
+      'क्या आप ऐप रीसेट करना चाहते हैं? आपका सारा डेटा खो जाएगा, और आपको ऐप फिर से सेटअप करना पड़ेगा।';
 
   @override
-  String get cancel => 'रद्द करें';
+  String get cancel => 'कैंसल';
 
   @override
-  String get reset => 'रीसेट करें';
+  String get reset => 'रीसेट';
 
   @override
-  String get shareAppSubject => 'इस अल-क़ुरान ऐप को देखें!';
+  String get shareAppSubject => 'यह अल कुरान ऐप देखें!';
 
   @override
   String shareAppBody(String appLink) {
-    return 'अस्सलामुअलैकुम! दैनिक पढ़ने और चिंतन के लिए इस अल-कुरान ऐप को देखें। यह अल्लाह के शब्दों से जुड़ने में मदद करता है। यहाँ से डाउनलोड करें: $appLink';
+    return 'अस्सलामुअलैकुम! यह अल कुरान ऐप रोज पढ़ने और सोचने के लिए देखें। यह अल्लाह के कलाम से जुड़ने में मदद करता है। यहां डाउनलोड करें: $appLink';
   }
 
   @override
-  String get openDrawerTooltip => 'ड्रॉवर खोलें';
+  String get openDrawerTooltip => 'ड्रावर खोलें';
 
   @override
   String get quran => 'कुरान';
 
   @override
-  String get prayer => 'नमाज़';
+  String get prayer => 'नमाज';
 
   @override
-  String get qibla => 'क़िबला';
+  String get qibla => 'किबला';
 
   @override
   String get audio => 'ऑडियो';
@@ -532,22 +532,22 @@ class AppLocalizationsHi extends AppLocalizations {
   String get note => 'नोट:';
 
   @override
-  String get linkedAyahs => 'जुड़ी हुई आयतें:';
+  String get linkedAyahs => 'लिंक्ड आयतें:';
 
   @override
   String get emptyNoteCollection =>
-      'यह नोट संग्रह खाली है।\nउन्हें यहाँ देखने के लिए कुछ नोट्स जोड़ें।';
+      'यह नोट कलेक्शन खाली है।\nयहां देखने के लिए कुछ नोट्स जोड़ें।';
 
   @override
   String get emptyPinnedCollection =>
-      'इस संग्रह में अभी तक कोई आयत पिन नहीं की गई है।\nउन्हें यहाँ देखने के लिए आयतें पिन करें।';
+      'इस कलेक्शन में अभी कोई आयत पिन नहीं की गई।\nदेखने के लिए आयतें पिन करें।';
 
   @override
-  String get noContentAvailable => 'कोई सामग्री उपलब्ध नहीं है।';
+  String get noContentAvailable => 'कोई कंटेंट उपलब्ध नहीं।';
 
   @override
   String failedToLoadCollections(String error) {
-    return 'संग्रह लोड करने में विफल: $error';
+    return 'कलेक्शन लोड करने में फेल: $error';
   }
 
   @override
@@ -556,16 +556,16 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get sortBy => 'इसके अनुसार छांटें';
+  String get sortBy => 'सॉर्ट बाय';
 
   @override
   String noCollectionAddedYet(String collectionType) {
-    return 'अभी तक कोई $collectionType नहीं जोड़ा गया है';
+    return 'अभी कोई $collectionType नहीं जोड़ा गया';
   }
 
   @override
   String pinnedItemsCount(int count) {
-    return '$count पिन किए गए आइटम';
+    return '$count पिन किए हुए आइटम';
   }
 
   @override
@@ -574,7 +574,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get emptyNameNotAllowed => 'खाली नाम की अनुमति नहीं है';
+  String get emptyNameNotAllowed => 'खाली नाम allowed नहीं';
 
   @override
   String updatedTo(String collectionName) {
@@ -585,27 +585,27 @@ class AppLocalizationsHi extends AppLocalizations {
   String get changeName => 'नाम बदलें';
 
   @override
-  String get changeColor => 'रंग बदलें';
+  String get changeColor => 'कलर बदलें';
 
   @override
-  String get colorUpdated => 'रंग अपडेट किया गया';
+  String get colorUpdated => 'कलर अपडेट किया गया';
 
   @override
   String collectionDeleted(String collectionName) {
-    return '$collectionName हटा दिया गया';
+    return '$collectionName डिलीट किया गया';
   }
 
   @override
-  String get delete => 'हटाएं';
+  String get delete => 'डिलीट';
 
   @override
-  String get save => 'सहेजें';
+  String get save => 'सेव';
 
   @override
-  String get collectionNameCannotBeEmpty => 'संग्रह का नाम खाली नहीं हो सकता।';
+  String get collectionNameCannotBeEmpty => 'कलेक्शन नाम खाली नहीं हो सकता।';
 
   @override
-  String get addedNewCollection => 'नया संग्रह जोड़ा गया';
+  String get addedNewCollection => 'नया कलेक्शन जोड़ा गया';
 
   @override
   String ayahCount(int count) {
@@ -619,22 +619,22 @@ class AppLocalizationsHi extends AppLocalizations {
   String get byNameZtoA => 'नाम Z-A';
 
   @override
-  String get byElementNumberAscending => 'तत्व संख्या आरोही';
+  String get byElementNumberAscending => 'एलीमेंट नंबर बढ़ते क्रम में';
 
   @override
-  String get byElementNumberDescending => 'तत्व संख्या अवरोही';
+  String get byElementNumberDescending => 'एलीमेंट नंबर घटते क्रम में';
 
   @override
-  String get byUpdateDateAscending => 'अद्यतन तिथि आरोही';
+  String get byUpdateDateAscending => 'अपडेट डेट बढ़ते क्रम में';
 
   @override
-  String get byUpdateDateDescending => 'अद्यतन तिथि अवरोही';
+  String get byUpdateDateDescending => 'अपडेट डेट घटते क्रम में';
 
   @override
-  String get byCreateDateAscending => 'निर्माण तिथि आरोही';
+  String get byCreateDateAscending => 'क्रिएट डेट बढ़ते क्रम में';
 
   @override
-  String get byCreateDateDescending => 'निर्माण तिथि अवरोही';
+  String get byCreateDateDescending => 'क्रिएट डेट घटते क्रम में';
 
   @override
   String get translationNotFound => 'अनुवाद नहीं मिला';
@@ -643,80 +643,79 @@ class AppLocalizationsHi extends AppLocalizations {
   String get translationTitle => 'अनुवाद:';
 
   @override
-  String get footNoteTitle => 'फुटनोट:';
+  String get footNoteTitle => 'फुट नोट:';
 
   @override
-  String get wordByWordTranslation => 'शब्द-दर-शब्द अनुवाद:';
+  String get wordByWordTranslation => 'शब्द दर शब्द अनुवाद:';
 
   @override
-  String get tafsirButton => 'तफ़्सीर';
+  String get tafsirButton => 'तफ़सीर';
 
   @override
-  String get shareButton => 'साझा करें';
+  String get shareButton => 'शेयर';
 
   @override
   String get addNoteButton => 'नोट जोड़ें';
 
   @override
-  String get pinToCollectionButton => 'संग्रह में पिन करें';
+  String get pinToCollectionButton => 'कलेक्शन में पिन करें';
 
   @override
-  String get shareAsText => 'पाठ के रूप में साझा करें';
+  String get shareAsText => 'टेक्स्ट के रूप में शेयर करें';
 
   @override
-  String get copiedWithTafsir => 'तफ़्सीर के साथ कॉपी किया गया';
+  String get copiedWithTafsir => 'तफ़सीर के साथ कॉपी किया गया';
 
   @override
-  String get shareAsImage => 'छवि के रूप में साझा करें';
+  String get shareAsImage => 'इमेज के रूप में शेयर करें';
 
   @override
-  String get shareWithTafsir => 'तफ़्सीर के साथ साझा करें';
+  String get shareWithTafsir => 'तफ़सीर के साथ शेयर करें';
 
   @override
   String get notFound => 'नहीं मिला';
 
   @override
-  String get noteContentCannotBeEmpty => 'नोट की सामग्री खाली नहीं हो सकती।';
+  String get noteContentCannotBeEmpty => 'नोट कंटेंट खाली नहीं हो सकता।';
 
   @override
-  String get noteSavedSuccessfully => 'नोट सफलतापूर्वक सहेजा गया!';
+  String get noteSavedSuccessfully => 'नोट सफलतापूर्वक सेव किया गया!';
 
   @override
-  String get selectCollections => 'संग्रह चुनें';
+  String get selectCollections => 'कलेक्शन चुनें';
 
   @override
   String get addNote => 'नोट जोड़ें';
 
   @override
-  String get writeCollectionName => 'संग्रह का नाम लिखें...';
+  String get writeCollectionName => 'कलेक्शन नाम लिखें...';
 
   @override
-  String get noCollectionsYetAddANewOne =>
-      'अभी तक कोई संग्रह नहीं है। एक नया जोड़ें!';
+  String get noCollectionsYetAddANewOne => 'अभी कोई कलेक्शन नहीं। नया जोड़ें!';
 
   @override
   String get pleaseWriteYourNoteFirst => 'कृपया पहले अपना नोट लिखें।';
 
   @override
-  String get noCollectionSelected => 'कोई संग्रह नहीं चुना गया';
+  String get noCollectionSelected => 'कोई कलेक्शन चुना नहीं गया';
 
   @override
-  String get saveNote => 'नोट सहेजें';
+  String get saveNote => 'नोट सेव करें';
 
   @override
-  String get nextSelectCollections => 'अगला: संग्रह चुनें';
+  String get nextSelectCollections => 'अगला: कलेक्शन चुनें';
 
   @override
-  String get addToPinned => 'पिन किए गए में जोड़ें';
+  String get addToPinned => 'पिन में जोड़ें';
 
   @override
-  String get pinnedSavedSuccessfully => 'पिन सफलतापूर्वक सहेजा गया!';
+  String get pinnedSavedSuccessfully => 'पिन सफलतापूर्वक सेव किया गया!';
 
   @override
-  String get savePinned => 'पिन सहेजें';
+  String get savePinned => 'पिन सेव करें';
 
   @override
-  String get closeAudioController => 'ऑडियो नियंत्रक बंद करें';
+  String get closeAudioController => 'ऑडियो कंट्रोलर बंद करें';
 
   @override
   String get previous => 'पिछला';
@@ -738,7 +737,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String style(String style) {
-    return 'शैली: $style';
+    return 'स्टाइल: $style';
   }
 
   @override
@@ -748,27 +747,27 @@ class AppLocalizationsHi extends AppLocalizations {
   String get play => 'चलाएं';
 
   @override
-  String get pause => 'रोकें';
+  String get pause => 'पॉज';
 
   @override
-  String get selectReciter => 'कारी चुनें';
+  String get selectReciter => 'तिलावत करने वाला चुनें';
 
   @override
   String source(String source) {
-    return 'स्रोत: $source';
+    return 'सोर्स: $source';
   }
 
   @override
   String get newText => 'नया';
 
   @override
-  String get more => 'अधिक: ';
+  String get more => 'और: ';
 
   @override
   String get cacheNotFound => 'कैश नहीं मिला';
 
   @override
-  String get cacheSize => 'कैश का आकार';
+  String get cacheSize => 'कैश साइज';
 
   @override
   String error(String error) {
@@ -776,13 +775,13 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get clean => 'साफ़ करें';
+  String get clean => 'साफ करें';
 
   @override
-  String get lastModified => 'अंतिम बार संशोधित';
+  String get lastModified => 'आखिरी बार बदला गया';
 
   @override
-  String get oneYearAgo => '1 वर्ष पहले';
+  String get oneYearAgo => '1 साल पहले';
 
   @override
   String monthsAgo(String number) {
@@ -791,7 +790,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String weeksAgo(String number) {
-    return '$number सप्ताह पहले';
+    return '$number हफ्ते पहले';
   }
 
   @override
@@ -805,158 +804,158 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get aboutAlQuran => 'अल-कुरान के बारे में';
+  String get aboutAlQuran => 'अल कुरान के बारे में';
 
   @override
-  String get appFullName => 'अल-कुरान (तफ़्सीर, नमाज़, क़िबला, ऑडियो)';
+  String get appFullName => 'अल कुरान (तफ़सीर, नमाज, किबला, ऑडियो)';
 
   @override
   String get appDescription =>
-      'एंड्रॉइड, आईओएस, मैकओएस, वेब, लिनक्स और विंडोज के लिए एक व्यापक इस्लामी एप्लिकेशन, जो तफ़्सीर और कई अनुवादों (शब्द-दर-शब्द सहित) के साथ कुरान पढ़ने, सूचनाओं के साथ दुनिया भर में नमाज़ के समय, क़िबला कंपास और सिंक्रनाइज़ शब्द-दर-शब्द ऑडियो पाठ की पेशकश करता है।';
+      'एक पूरा इस्लामी ऐप एंड्रॉयड, आईओएस, मैकओएस, वेब, लिनक्स और विंडोज के लिए, जिसमें कुरान पढ़ना तफ़सीर और कई अनुवादों (शब्द दर शब्द सहित) के साथ, दुनिया भर में नमाज के समय नोटिफिकेशन के साथ, किबला कंपास, और शब्द दर शब्द ऑडियो तिलावत।';
 
   @override
   String get dataSourcesNote =>
-      'नोट: कुरान के पाठ, तफ़्सीर, अनुवाद, और ऑडियो संसाधन Quran.com, Everyayah.com, और अन्य सत्यापित खुले स्रोतों से लिए गए हैं।';
+      'नोट: कुरान टेक्स्ट, तफ़सीर, अनुवाद, और ऑडियो रिसोर्स Quran.com, Everyayah.com, और अन्य वेरीफाइड ओपन सोर्स से लिए गए हैं।';
 
   @override
   String get adFreePromise =>
-      'यह ऐप अल्लाह की खुशी के लिए बनाया गया है। इसलिए, यह पूरी तरह से विज्ञापन-मुक्त है और हमेशा रहेगा।';
+      'यह ऐप अल्लाह की रजा के लिए बनाया गया है। इसलिए, यह हमेशा पूरी तरह से ऐड-फ्री रहेगा।';
 
   @override
-  String get coreFeatures => 'मुख्य विशेषताएं';
+  String get coreFeatures => 'मुख्य फीचर्स';
 
   @override
   String get coreFeaturesDescription =>
-      'उन प्रमुख कार्यात्मकताओं का अन्वेषण करें जो अल-कुरान v3 को आपकी दैनिक इस्लामी प्रथाओं के लिए एक अनिवार्य उपकरण बनाती हैं:';
+      'अल कुरान v3 के मुख्य फंक्शन देखें जो आपके रोज के इस्लामी अमलों के लिए जरूरी टूल है:';
 
   @override
-  String get prayerTimesTitle => 'नमाज़ का समय और अलर्ट';
+  String get prayerTimesTitle => 'नमाज के समय और अलर्ट';
 
   @override
   String get prayerTimesDescription =>
-      'विभिन्न गणना विधियों का उपयोग करके दुनिया भर में किसी भी स्थान के लिए सटीक नमाज़ का समय। अज़ान सूचनाओं के साथ रिमाइंडर सेट करें।';
+      'दुनिया के किसी भी लोकेशन के लिए सटीक नमाज के समय विभिन्न कैलकुलेशन मेथड्स से। अजान नोटिफिकेशन के साथ रिमाइंडर सेट करें।';
 
   @override
-  String get qiblaDirectionTitle => 'क़िबला की दिशा';
+  String get qiblaDirectionTitle => 'किबला दिशा';
 
   @override
   String get qiblaDirectionDescription =>
-      'एक स्पष्ट और सटीक कंपास दृश्य के साथ आसानी से क़िबला की दिशा खोजें।';
+      'किबला दिशा आसानी से पाएं साफ और सटीक कंपास व्यू से।';
 
   @override
-  String get translationTafsirTitle => 'कुरान अनुवाद और तफ़्सीर';
+  String get translationTafsirTitle => 'कुरान अनुवाद और तफ़सीर';
 
   @override
   String get translationTafsirDescription =>
-      '69 भाषाओं में 120+ अनुवाद पुस्तकें (शब्द-दर-शब्द सहित), और 30+ तफ़्सीर पुस्तकों तक पहुंचें।';
+      '69 भाषाओं में 120+ अनुवाद किताबें (शब्द दर शब्द सहित), और 30+ तफ़सीर किताबें।';
 
   @override
-  String get wordByWordAudioTitle => 'शब्द-दर-शब्द ऑडियो और हाइलाइटिंग';
+  String get wordByWordAudioTitle => 'शब्द दर शब्द ऑडियो और हाइलाइटिंग';
 
   @override
   String get wordByWordAudioDescription =>
-      'एक गहन सीखने के अनुभव के लिए सिंक्रनाइज़ शब्द-दर-शब्द ऑडियो पाठ और हाइलाइटिंग के साथ अनुसरण करें।';
+      'शब्द दर शब्द ऑडियो तिलावत और हाइलाइटिंग के साथ फॉलो करें सीखने के लिए।';
 
   @override
-  String get ayahAudioRecitationTitle => 'आयत ऑडियो पाठ';
+  String get ayahAudioRecitationTitle => 'आयत ऑडियो तिलावत';
 
   @override
   String get ayahAudioRecitationDescription =>
-      '40+ से अधिक प्रसिद्ध कारियों से पूर्ण आयत पाठ सुनें।';
+      '40+ मशहूर कारी से पूरी आयत तिलावत सुनें।';
 
   @override
-  String get notesCloudBackupTitle => 'क्लाउड बैकअप के साथ नोट्स';
+  String get notesCloudBackupTitle => 'नोट्स क्लाउड बैकअप के साथ';
 
   @override
   String get notesCloudBackupDescription =>
-      'व्यक्तिगत नोट्स और प्रतिबिंब सहेजें, सुरक्षित रूप से क्लाउड पर बैकअप (सुविधा विकास में/जल्द ही आ रही है)।';
+      'पर्सनल नोट्स और रिफ्लेक्शन सेव करें, क्लाउड में सिक्योर बैकअप (फीचर डेवलपमेंट में/जल्द आ रहा है)।';
 
   @override
-  String get crossPlatformSupportTitle => 'क्रॉस-प्लेटफ़ॉर्म समर्थन';
+  String get crossPlatformSupportTitle => 'क्रॉस-प्लेटफॉर्म सपोर्ट';
 
   @override
   String get crossPlatformSupportDescription =>
-      'एंड्रॉइड, वेब, लिनक्स और विंडोज पर समर्थित।';
+      'एंड्रॉयड, वेब, लिनक्स, और विंडोज पर सपोर्टेड।';
 
   @override
   String get backgroundAudioPlaybackTitle => 'बैकग्राउंड ऑडियो प्लेबैक';
 
   @override
   String get backgroundAudioPlaybackDescription =>
-      'ऐप बैकग्राउंड में होने पर भी कुरान पाठ सुनना जारी रखें।';
+      'कुरान तिलावत सुनते रहें भले ऐप बैकग्राउंड में हो।';
 
   @override
   String get audioDataCachingTitle => 'ऑडियो और डेटा कैशिंग';
 
   @override
   String get audioDataCachingDescription =>
-      'मजबूत ऑडियो और कुरान डेटा कैशिंग के साथ बेहतर प्लेबैक और ऑफ़लाइन क्षमताएं।';
+      'बेहतर प्लेबैक और ऑफलाइन कैपेबिलिटी ऑडियो और कुरान डेटा कैशिंग से।';
 
   @override
-  String get minimalisticInterfaceTitle => 'न्यूनतम और स्वच्छ इंटरफ़ेस';
+  String get minimalisticInterfaceTitle => 'मिनिमलिस्टिक और क्लीन इंटरफेस';
 
   @override
   String get minimalisticInterfaceDescription =>
-      'उपयोगकर्ता अनुभव और पठनीयता पर ध्यान देने के साथ नेविगेट करने में आसान इंटरफ़ेस।';
+      'आसान नेविगेशन इंटरफेस यूजर एक्सपीरियंस और पढ़ने पर फोकस के साथ।';
 
   @override
-  String get optimizedPerformanceTitle => 'अनुकूलित प्रदर्शन और आकार';
+  String get optimizedPerformanceTitle => 'ऑप्टिमाइज्ड परफॉर्मेंस और साइज';
 
   @override
   String get optimizedPerformanceDescription =>
-      'एक सुविधा संपन्न एप्लिकेशन जिसे हल्का और प्रदर्शन करने वाला बनाया गया है।';
+      'फीचर-रिच ऐप जो लाइटवेट और परफॉर्मेंट है।';
 
   @override
-  String get languageSupport => 'भाषा समर्थन';
+  String get languageSupport => 'भाषा सपोर्ट';
 
   @override
   String get languageSupportDescription =>
-      'यह एप्लिकेशन निम्नलिखित भाषाओं के समर्थन के साथ वैश्विक दर्शकों के लिए सुलभ होने के लिए डिज़ाइन किया गया है (और लगातार और भी जोड़े जा रहे हैं):';
+      'यह ऐप ग्लोबल ऑडियंस के लिए डिजाइन किया गया है इन भाषाओं में सपोर्ट के साथ (और और जोड़े जा रहे हैं):';
 
   @override
-  String get technologyAndResources => 'प्रौद्योगिकी और संसाधन';
+  String get technologyAndResources => 'टेक्नोलॉजी और रिसोर्स';
 
   @override
   String get technologyAndResourcesDescription =>
-      'यह ऐप अत्याधुनिक तकनीकों और विश्वसनीय संसाधनों का उपयोग करके बनाया गया है:';
+      'यह ऐप कटिंग-एज टेक्नोलॉजी और भरोसेमंद रिसोर्स से बना है:';
 
   @override
   String get flutterFrameworkTitle => 'फ्लटर फ्रेमवर्क';
 
   @override
   String get flutterFrameworkDescription =>
-      'एक ही कोडबेस से एक सुंदर, मूल रूप से संकलित, बहु-मंचीय अनुभव के लिए फ्लटर के साथ बनाया गया।';
+      'फ्लटर से बना ब्यूटीफुल, नेटिवली कंपाइल्ड, मल्टी-प्लेटफॉर्म एक्सपीरियंस सिंगल कोडबेस से।';
 
   @override
-  String get advancedAudioEngineTitle => 'उन्नत ऑडियो इंजन';
+  String get advancedAudioEngineTitle => 'एडवांस्ड ऑडियो इंजन';
 
   @override
   String get advancedAudioEngineDescription =>
-      'मजबूत ऑडियो प्लेबैक और नियंत्रण के लिए `just_audio` और `just_audio_background` फ्लटर पैकेज द्वारा संचालित।';
+      'just_audio और just_audio_background फ्लटर पैकेज से पावर्ड रॉबस्ट ऑडियो प्लेबैक और कंट्रोल के लिए।';
 
   @override
-  String get reliableQuranDataTitle => 'विश्वसनीय कुरान डेटा';
+  String get reliableQuranDataTitle => 'भरोसेमंद कुरान डेटा';
 
   @override
   String get reliableQuranDataDescription =>
-      'अल-कुरान के पाठ, अनुवाद, तफ़्सीर, और ऑडियो Quran.com और Everyayah.com जैसे सत्यापित खुले API और डेटाबेस से लिए गए हैं।';
+      'अल कुरान टेक्स्ट, अनुवाद, तफ़सीर, और ऑडियो वेरीफाइड ओपन APIs और डेटाबेस जैसे Quran.com & Everyayah.com से।';
 
   @override
-  String get prayerTimeEngineTitle => 'नमाज़ समय इंजन';
+  String get prayerTimeEngineTitle => 'नमाज टाइम इंजन';
 
   @override
   String get prayerTimeEngineDescription =>
-      'सटीक नमाज़ समय के लिए स्थापित गणना विधियों का उपयोग करता है। सूचनाएं `flutter_local_notifications` और पृष्ठभूमि कार्यों द्वारा नियंत्रित होती हैं।';
+      'सटीक नमाज समय के लिए स्थापित कैलकुलेशन मेथड्स इस्तेमाल करता है। नोटिफिकेशन flutter_local_notifications और बैकग्राउंड टास्क से हैंडल।';
 
   @override
-  String get crossPlatformSupport => 'क्रॉस प्लेटफ़ॉर्म समर्थन';
+  String get crossPlatformSupport => 'क्रॉस प्लेटफॉर्म सपोर्ट';
 
   @override
   String get crossPlatformSupportDescription2 =>
-      'विभिन्न प्लेटफार्मों पर निर्बाध पहुंच का आनंद लें:';
+      'विभिन्न प्लेटफॉर्म पर सीमलेस एक्सेस का मजा लें:';
 
   @override
-  String get android => 'एंड्रॉइड';
+  String get android => 'एंड्रॉयड';
 
   @override
   String get ios => 'आईओएस';
@@ -974,11 +973,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get windows => 'विंडोज';
 
   @override
-  String get ourLifetimePromise => 'हमारा आजीवन वादा';
+  String get ourLifetimePromise => 'हमारा लाइफटाइम प्रॉमिस';
 
   @override
   String get lifetimePromiseDescription =>
-      'मैं व्यक्तिगत रूप से अपने पूरे जीवन में इस एप्लिकेशन के लिए निरंतर समर्थन और रखरखाव प्रदान करने का वादा करता हूं, इंशाअल्लाह। मेरा लक्ष्य यह सुनिश्चित करना है कि यह ऐप आने वाले वर्षों के लिए उम्मा के लिए एक फायदेमंद संसाधन बना रहे।';
+      'मैं पर्सनली इस ऐप को अपनी जिंदगी भर सपोर्ट और मेंटेनेंस देने का वादा करता हूं, इंशा अल्लाह। मेरा गोल है कि यह ऐप उम्माह के लिए सालों तक फायदेमंद रिसोर्स बने।';
 
   @override
   String get fajr => 'फज्र';
@@ -987,16 +986,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get sunrise => 'सूर्योदय';
 
   @override
-  String get dhuhr => 'ज़ुहर';
+  String get dhuhr => 'जुहर';
 
   @override
-  String get asr => 'असर';
+  String get asr => 'अस्र';
 
   @override
   String get maghrib => 'मग़रिब';
 
   @override
-  String get isha => 'ईशा';
+  String get isha => 'इशा';
 
   @override
   String get midnight => 'आधी रात';
@@ -1005,7 +1004,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get alarm => 'अलार्म';
 
   @override
-  String get notification => 'अधिसूचना';
+  String get notification => 'नोटिफिकेशन';
 
   @override
   String formattedAddress(
@@ -1029,76 +1028,76 @@ class AppLocalizationsHi extends AppLocalizations {
   String get sajdaAyah => 'सजदा आयत';
 
   @override
-  String get required => 'अनिवार्य';
+  String get required => 'जरूरी';
 
   @override
-  String get optional => 'वैकल्पिक';
+  String get optional => 'ऑप्शनल';
 
   @override
   String get notificationScheduleWarning =>
-      'नोट: आपके फ़ोन के OS बैकग्राउंड प्रोसेस प्रतिबंधों के कारण अनुसूचित अधिसूचना या अनुस्मारक छूट सकता है। उदाहरण के लिए: वीवो का ओरिजिन ओएस, सैमसंग का वन यूआई, ओप्पो का कलरओएस आदि कभी-कभी अनुसूचित अधिसूचना या अनुस्मारक को समाप्त कर देते हैं। कृपया ऐप को बैकग्राउंड प्रोसेस से प्रतिबंधित न करने के लिए अपनी ओएस सेटिंग्स जांचें।';
+      'नोट: शेड्यूल्ड नोटिफिकेशन या रिमाइंडर आपके फोन के OS बैकग्राउंड प्रोसेस रेस्ट्रिक्शन से मिस हो सकते हैं। उदाहरण: Vivo का Origin OS, Samsung का One UI, Oppo का ColorOS आदि कभी-कभी शेड्यूल्ड नोटिफिकेशन या रिमाइंडर को किल कर देते हैं। कृपया अपने OS सेटिंग्स चेक करें ऐप को बैकग्राउंड प्रोसेस से रेस्ट्रिक्ट न करने के लिए।';
 
   @override
-  String get scrollWithRecitation => 'सस्वर पाठ के साथ स्क्रॉल करें';
+  String get scrollWithRecitation => 'तिलावत के साथ स्क्रॉल';
 
   @override
-  String get quickAccess => 'त्वरित पहुँच';
+  String get quickAccess => 'क्विक एक्सेस';
 
   @override
-  String get initiallyScrollAyah => 'शुरू में आयत पर स्क्रॉल करें';
+  String get initiallyScrollAyah => 'शुरुआत में आयत पर स्क्रॉल';
 
   @override
   String get tajweedGuide => 'तजवीद गाइड';
 
   @override
   String get scrollWithRecitationDesc =>
-      'सक्षम होने पर, कुरान की आयत ऑडियो पाठ के साथ सिंक में स्वचालित रूप से स्क्रॉल हो जाएगी।';
+      'चालू करने पर, कुरान आयत ऑडियो तिलावत के साथ ऑटोमैटिक स्क्रॉल होगी।';
 
   @override
-  String get configuration => 'विन्यास';
+  String get configuration => 'कॉन्फिगरेशन';
 
   @override
-  String get restoreFromBackup => 'बैकअप से पुनर्स्थापित करें';
+  String get restoreFromBackup => 'बैकअप से रिस्टोर';
 
   @override
-  String get history => 'इतिहास';
+  String get history => 'हिस्ट्री';
 
   @override
-  String get search => 'खोज';
+  String get search => 'खोजें';
 
   @override
-  String get useAudioStream => 'ऑडियो स्ट्रीम का प्रयोग करें';
+  String get useAudioStream => 'ऑडियो स्ट्रीम इस्तेमाल करें';
 
   @override
   String get useAudioStreamDesc =>
-      'डाउनलोड करने के बजाय सीधे इंटरनेट से ऑडियो स्ट्रीम करें।';
+      'ऑडियो इंटरनेट से डायरेक्ट स्ट्रीम करें डाउनलोड करने की बजाय।';
 
   @override
   String get notUseAudioStreamDesc =>
-      'ऑफ़लाइन उपयोग के लिए ऑडियो डाउनलोड करें और डेटा खपत कम करें।';
+      'ऑफलाइन इस्तेमाल के लिए ऑडियो डाउनलोड करें और डेटा कम खर्च करें।';
 
   @override
   String get audioSettings => 'ऑडियो सेटिंग्स';
 
   @override
-  String get playbackSpeed => 'प्लेबैक गति';
+  String get playbackSpeed => 'प्लेबैक स्पीड';
 
   @override
-  String get playbackSpeedDesc => 'कुरान पाठ की गति को समायोजित करें।';
+  String get playbackSpeedDesc => 'कुरान तिलावत की स्पीड एडजस्ट करें।';
 
   @override
   String get waitForCurrentDownloadToFinish =>
-      'कृपया वर्तमान डाउनलोड समाप्त होने की प्रतीक्षा करें।';
+      'कृपया करंट डाउनलोड खत्म होने का इंतजार करें।';
 
   @override
-  String get areYouSure => 'क्या आपको यकीन है?';
+  String get areYouSure => 'क्या आप श्योर हैं?';
 
   @override
-  String get checkYourInternetConnection => 'अपना इंटरनेट कनेक्शन जांचें।';
+  String get checkYourInternetConnection => 'अपना इंटरनेट कनेक्शन चेक करें।';
 
   @override
   String audioDownloadAlert(int requiredDownload, int totalVersesCount) {
-    return '$totalVersesCount आयतों में से $requiredDownload डाउनलोड करने की आवश्यकता है।';
+    return '$totalVersesCount आयतों में से $requiredDownload डाउनलोड करने की जरूरत है।';
   }
 
   @override
@@ -1112,4 +1111,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get pm => 'PM';
+
+  @override
+  String get optimizingQuranScript => 'कुरान स्क्रिप्ट ऑप्टिमाइज कर रहे हैं';
+
+  @override
+  String get supportOnGithub => 'गिटहब पर समर्थन करें';
 }

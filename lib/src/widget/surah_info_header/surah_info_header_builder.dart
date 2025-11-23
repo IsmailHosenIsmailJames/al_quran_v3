@@ -5,11 +5,10 @@ import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
@@ -38,21 +37,20 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations l10n = AppLocalizations.of(context);
 
-    TafsirBookModel? tafsirSelected = QuranTafsirFunction.getTafsirSelection();
     Widget surahInfoHeader = Container(
       margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(roundedRadius),
         color: themeState.primary.withValues(alpha: 0.05),
       ),
-      height: 120,
+      height: 80,
       child: Stack(
         children: [
           Row(
             children: [
               Container(
-                height: 120,
-                width: 120,
+                height: 80,
+                width: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   image: DecorationImage(
@@ -99,21 +97,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                         ),
                       ],
                     ),
-                    FutureBuilder(
-                      future: QuranTranslationFunction.getMetaInfo(),
-                      builder:
-                          (context, snapshot) => Text(
-                            "${l10n.translation}: ${snapshot.data?.name.toString() ?? ""}",
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                    ),
-                    Text(
-                      "${l10n.tafsir}: ${tafsirSelected?.name ?? l10n.tafsirNotFound}",
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    if (QuranTranslationFunction.isInfoAvailable())
+                    if (QuranTranslationFunction.isInfoAvailable(
+                      context.read<LanguageCubit>().state.locale,
+                    ))
                       SizedBox(
                         height: 25,
                         child: TextButton(
@@ -124,6 +110,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                           onPressed: () async {
                             final String surahInfo =
                                 await QuranTranslationFunction.getInfoOfSurah(
+                                  context.read<LanguageCubit>().state.locale,
                                   headerInfoModel.surahInfoModel.id.toString(),
                                 );
                             Navigator.push(
@@ -170,7 +157,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                                 .state
                                 .isInsideQuranPlayer ==
                             true;
-                    return Column(
+                    return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [

@@ -57,7 +57,7 @@ class CirclePainter extends CustomPainter {
 
     final paint =
         Paint()
-          ..color = Colors.white.withValues(alpha: 0.3)
+          ..color = Colors.grey.withValues(alpha: .5)
           ..strokeWidth = circleStockWidth
           ..style = PaintingStyle.stroke;
 

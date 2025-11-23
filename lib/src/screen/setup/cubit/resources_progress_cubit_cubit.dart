@@ -3,8 +3,8 @@ import "package:al_quran_v3/src/resources/quran_resources/models/translation_boo
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
 import "package:bloc/bloc.dart";
 
-class ResourcesProgressCubitCubit extends Cubit<ResourcesProgressCubitState> {
-  ResourcesProgressCubitCubit() : super(ResourcesProgressCubitState());
+class ResourcesProgressCubit extends Cubit<ResourcesProgressCubitState> {
+  ResourcesProgressCubit() : super(ResourcesProgressCubitState());
 
   void updateProgress(double? percentage, String processName) {
     emit(state.copyWith(percentage: percentage, processName: processName));

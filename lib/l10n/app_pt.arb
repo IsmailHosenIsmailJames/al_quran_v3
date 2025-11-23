@@ -327,5 +327,7 @@
   "download": "Baixar",
   "audioDownloadAlert": "Precisa baixar {requiredDownload} de {totalVersesCount} ayahs.",
   "am": "AM",
-  "pm": "PM"
+  "pm": "PM",
+  "optimizingQuranScript": "Otimizando o Roteiro do Alcorão",
+  "supportOnGithub": "Apoie no GitHub"
 }

@@ -9,13 +9,14 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 Future<void> resetTheApp(BuildContext context) async {
-  context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
-  context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
+  context.read<ResourcesProgressCubit>().changeTafsirBook(null);
+  context.read<ResourcesProgressCubit>().changeTranslationBook(null);
 
   final prefs = await SharedPreferences.getInstance();
   await prefs.clear();
 
   await Hive.deleteFromDisk();
+  await Hive.openBox("user");
   await QuranTranslationFunction.init();
   await QuranTafsirFunction.init();
   await SegmentedResourcesManager.init();

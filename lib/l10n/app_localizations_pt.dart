@@ -1123,4 +1123,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get pm => 'PM';
+
+  @override
+  String get optimizingQuranScript => 'Otimizando o Roteiro do Alcorão';
+
+  @override
+  String get supportOnGithub => 'Apoie no GitHub';
 }

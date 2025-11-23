@@ -7,7 +7,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranPagesRenderer extends StatelessWidget {
   final List<String> ayahsKey;
-  final String? highlightAyah;
   final QuranScriptType quranScriptType;
   final TextStyle? baseStyle;
   final bool? enableWordByWordHighlight;
@@ -18,7 +17,6 @@ class QuranPagesRenderer extends StatelessWidget {
     required this.quranScriptType,
     this.baseStyle,
     this.enableWordByWordHighlight,
-    this.highlightAyah,
   });
 
   @override
@@ -30,21 +28,18 @@ class QuranPagesRenderer extends StatelessWidget {
         ayahsKey: ayahsKey,
         baseTextStyle: copyBaseStyle,
         enableWordByWordHighlight: enableWordByWordHighlight,
-        highlightAyah: highlightAyah,
       ),
       QuranScriptType.uthmani => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
         baseTextStyle: copyBaseStyle,
         isUthmani: true,
         enableWordByWordHighlight: enableWordByWordHighlight,
-        highlightAyah: highlightAyah,
       ),
       QuranScriptType.indopak => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
         baseTextStyle: copyBaseStyle,
         isUthmani: false,
         enableWordByWordHighlight: enableWordByWordHighlight,
-        highlightAyah: highlightAyah,
       ),
     };
   }

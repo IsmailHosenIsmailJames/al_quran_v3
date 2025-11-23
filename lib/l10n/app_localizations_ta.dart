@@ -1128,4 +1128,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get pm => 'PM';
+
+  @override
+  String get optimizingQuranScript => 'குர்ஆன் ஸ்கிரிப்டை மேம்படுத்துகிறது';
+
+  @override
+  String get supportOnGithub => 'GitHub-இல் ஆதரவு';
 }

@@ -1,10 +1,13 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
@@ -28,29 +31,35 @@ void showShareBottomDialog(
 
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
-  String translation,
-  Map footNote,
+  List<String> translation,
+  List<Map> footNote,
+  List<TranslationBookModel?> booksInfo,
 ) {
+  String translationSingleString = "";
+
+  for (int index = 0; index < translation.length; index++) {
+    translationSingleString +=
+        "\n${translation[index]}\n${booksInfo[index] != null ? "-(${booksInfo[index]?.name ?? ""})\n\n" : ""}";
+    if (footNote[index].isNotEmpty) {
+      footNote[index].forEach((key, value) {
+        translationSingleString += "$key - $value\n";
+      });
+    }
+  }
+
   ThemeState themeState = context.read<ThemeCubit>().state;
   AppLocalizations l10n = AppLocalizations.of(context);
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah[ayahKey.split(":").first],
+    metaDataSurah[ayahKey.split(":").first]!,
   );
 
-  List quranScriptWord = getWordListOfAyah(
+  List quranScriptWord = QuranScriptFunction.getWordListOfAyah(
     context.read<QuranViewCubit>().state.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
   );
 
-  if (quranScriptType == QuranScriptType.tajweed) {}
-  String footNoteAsString = "\n";
-  if (footNote.isNotEmpty) {
-    footNote.forEach((key, value) {
-      footNoteAsString += "$key. $value\n";
-    });
-  }
   ButtonStyle textButtonStyle = TextButton.styleFrom(
     shape: const RoundedRectangleBorder(),
     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -123,7 +132,9 @@ void showShareBottomDialog(
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                            "${getSurahName(context, surahInfoModel.id)}"
+                            " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                            "${l10n.translation}:\n$translationSingleString",
                       ),
                     );
                   },
@@ -138,7 +149,9 @@ void showShareBottomDialog(
                 ),
                 onPressed: () async {
                   await FlutterClipboard.copy(
-                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""}",
+                    "${getSurahName(context, surahInfoModel.id)}"
+                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                    "${l10n.translation}:\n$translationSingleString",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
@@ -177,6 +190,7 @@ void showShareBottomDialog(
                             ),
                             translation,
                             footNote,
+                            booksInfo,
                             scriptTextStyle,
                             brightness,
                             themeState,
@@ -194,8 +208,7 @@ void showShareBottomDialog(
                         getPlainTextAyahFromTajweedWords(
                               List<String>.from(quranScriptWord),
                             ) +
-                            translation +
-                            footNoteAsString,
+                            translationSingleString.toString(),
                       ),
                       delay: const Duration(milliseconds: 200),
                     );
@@ -224,14 +237,68 @@ void showShareBottomDialog(
                 child: TextButton.icon(
                   style: textButtonStyle,
                   onPressed: () async {
-                    String? tafsir = await getTafsirFromDb(
-                      ayahKey,
-                      returnAyahKeyIfLinked: false,
+                    List<TafsirBookModel> downloadedTafsir =
+                        QuranTafsirFunction.getDownloadedTafsirBooks();
+                    TafsirBookModel? selected;
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          insetPadding: const EdgeInsets.all(10),
+
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  <Widget>[
+                                    Text(
+                                      l10n.selectTafsirBook,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    const Divider(),
+                                  ] +
+                                  List.generate(downloadedTafsir.length, (
+                                    index,
+                                  ) {
+                                    return TextButton(
+                                      onPressed: () {
+                                        selected = downloadedTafsir[index];
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "${index + 1}. ${downloadedTafsir[index].name}",
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ),
+                        );
+                      },
                     );
+                    if (selected == null) return;
+                    var tafsir =
+                        (await QuranTafsirFunction.getTafsirForBook(
+                          selected!,
+                          ayahKey,
+                        ))?.tafsir;
+
+                    String? tafsirString;
+                    if (tafsir != null &&
+                        getStringFromTafsirFromDb(tafsir) != null) {
+                      tafsirString = getStringFromTafsirFromDb(tafsir)!;
+                    }
                     await SharePlus.instance.share(
                       ShareParams(
                         text:
-                            "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                            "${getSurahName(context, surahInfoModel.id)}"
+                            " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                            " ${l10n.translation}:\n$translationSingleString"
+                            " \n${l10n.tafsir}:\n${tafsirString ?? l10n.notFound}",
                       ),
                     );
 
@@ -250,12 +317,61 @@ void showShareBottomDialog(
                   backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
-                  String? tafsir = await getTafsirFromDb(
-                    ayahKey,
+                  List<TafsirBookModel> downloadedTafsir =
+                      QuranTafsirFunction.getDownloadedTafsirBooks();
+                  TafsirBookModel? selected;
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        insetPadding: const EdgeInsets.all(10),
+
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:
+                                <Widget>[
+                                  Text(
+                                    l10n.selectTafsirBook,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Divider(),
+                                ] +
+                                List.generate(downloadedTafsir.length, (index) {
+                                  return TextButton(
+                                    onPressed: () {
+                                      selected = downloadedTafsir[index];
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "${index + 1}. ${downloadedTafsir[index].name}",
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                  if (selected == null) return;
+
+                  String? tafsir = getStringFromTafsirFromDb(
+                    (await QuranTafsirFunction.getTafsirForBook(
+                      selected!,
+                      ayahKey,
+                    ))?.tafsir,
                     returnAyahKeyIfLinked: false,
                   );
                   await FlutterClipboard.copy(
-                    "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translation\n\n${footNote.isNotEmpty ? footNoteAsString : ""} \nTafsir:\n${tafsir ?? "Not found"}",
+                    "${getSurahName(context, surahInfoModel.id)}"
+                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                    " ${l10n.translation}:\n$translationSingleString"
+                    " \n${l10n.tafsir}:\n${tafsir ?? l10n.notFound}",
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);

@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
@@ -20,12 +18,12 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   
   <!-- SEO Meta Tags -->
-  <title>Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion</title>
+  <title>Al Quran Tafsir, Audio &amp; Salat: Your Complete Islamic Companion</title>
   <meta name="description" content="Join tens of thousands of Muslims worldwide on a spiritual journey with Al Quran, your all-in-one, feature-rich companion for daily Islamic practice. Designed for a seamless and beautiful experience, this app is your accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
   <meta name="keywords" content="Al Quran, Tafsir, Audio Quran, Salat, Prayer Times, Qibla, Islamic Companion, Muslim, Holy Quran, Quran Reader, Uthmani, Indopak, Tajweed, Quran Translation, Quran Audio, Adhan, Qibla Compass">
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion">
+  <meta property="og:title" content="Al Quran Tafsir, Audio &amp; Salat: Your Complete Islamic Companion">
   <meta property="og:description" content="Your all-in-one, feature-rich companion for daily Islamic practice. An accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
   <meta property="og:image" content="icons/Icon-512.png">
   <meta property="og:url" content="https://alquranwithaudio.web.app/">
@@ -33,7 +31,7 @@
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Al Quran Tafsir, Audio & Salat: Your Complete Islamic Companion">
+  <meta name="twitter:title" content="Al Quran Tafsir, Audio &amp; Salat: Your Complete Islamic Companion">
   <meta name="twitter:description" content="Your all-in-one, feature-rich companion for daily Islamic practice. An accessible guide to the Holy Quran, prayer times, and deeper Islamic learning.">
   <meta name="twitter:image" content="icons/Icon-512.png">
 
@@ -45,7 +43,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png">
 
   <link rel="manifest" href="manifest.json">
 
@@ -136,8 +134,94 @@
         }
     }
   </style>
+  
+  
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #ffffff;
+          background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display:block;
+      width:100%; height:100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+          }
+    }
+  </style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
 </head>
 <body>
+  <picture id="splash-branding">
+    <source srcset="splash/img/branding-1x.png 1x, splash/img/branding-2x.png 2x, splash/img/branding-3x.png 3x, splash/img/branding-4x.png 4x" media="(prefers-color-scheme: light)">
+    <source srcset="splash/img/branding-dark-1x.png 1x, splash/img/branding-dark-2x.png 2x, splash/img/branding-dark-3x.png 3x, splash/img/branding-dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+    <img class="bottom" aria-hidden="true" src="splash/img/branding-1x.png" alt="">
+  </picture>
+  <picture id="splash">
+      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+  </picture>
+  
+  
   <div id="loading-indicator" class="loading-container">
     <img src="icons/Icon-512.png" alt="Al Quran Logo" class="logo">
     <div class="loading-text">Loading Al Quran</div>
@@ -148,6 +232,6 @@
     </div>
     <div class="first-time-message">This may take a moment on your first visit.</div>
   </div>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
-</html>
+  <script src="flutter_bootstrap.js" async=""></script>
+
+</body></html>

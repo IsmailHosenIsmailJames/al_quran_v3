@@ -1,6 +1,6 @@
-import "dart:convert";
 import "dart:developer";
 
+// import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_downloa
 import "package:al_quran_v3/src/screen/location_handler/cubit/get_location_data.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -25,7 +26,6 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
-import "package:al_quran_v3/src/screen/search/cubit/search_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
@@ -36,10 +36,11 @@ import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+// import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
-import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
+import "package:flutter_native_splash/flutter_native_splash.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
@@ -48,45 +49,20 @@ import "package:just_audio_media_kit/just_audio_media_kit.dart";
 import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "src/screen/prayer_time/functions/prayers_time_function.dart";
 
-Map<String, dynamic> quranScript = {};
-
-Map<String, dynamic> metaDataJuz = {};
-List<Map> metaDataSajda = [];
-Map<String, dynamic> metaDataSurah = {};
-Map<String, dynamic> surahNameLocalization = {};
-Map<String, dynamic> surahMeaningLocalization = {};
-
-Future<void> loadQuranScript(QuranScriptType scriptType) async {
-  switch (scriptType) {
-    case QuranScriptType.tajweed:
-      quranScript = jsonDecode(
-        await rootBundle.loadString(
-          "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
-        ),
-      );
-    case QuranScriptType.uthmani:
-      quranScript = jsonDecode(
-        await rootBundle.loadString("assets/quran_script/Uthmani.json"),
-      );
-    case QuranScriptType.indopak:
-      quranScript = jsonDecode(
-        await rootBundle.loadString("assets/quran_script/Indopak.json"),
-      );
-  }
-}
-
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await platform_services.initializePlatform();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  platform_services.initializePlatform();
 
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows) {
-    await platform_services.initAwesomeNotification();
+    platform_services.initAwesomeNotification();
 
-    await JustAudioBackground.init(
+    JustAudioBackground.init(
       androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
       androidNotificationChannelName: "Audio playback",
       androidNotificationOngoing: true,
@@ -111,43 +87,23 @@ Future<void> main() async {
   }
 
   await Hive.openBox("user");
-  await Hive.openBox("segmented_quran_recitation");
 
-  await QuranTranslationFunction.init();
-  await WordByWordFunction.init();
-  await Hive.openBox(CollectionType.notes.name);
-  await Hive.openBox(CollectionType.pinned.name);
-  await SegmentedResourcesManager.init();
-  await PrayersTimeFunction.init();
+  MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
-  await loadQuranScript(
-    QuranScriptType.values.firstWhere(
-      (element) =>
-          Hive.box("user").get(
-            "selected_quran_script_type",
-            defaultValue: QuranScriptType.values.first.name,
-          ) ==
-          element.name,
-    ),
+  QuranTranslationFunction.init(locale: initialLocale.locale);
+  WordByWordFunction.init();
+  Hive.openBox(CollectionType.notes.name);
+  Hive.openBox(CollectionType.pinned.name);
+  SegmentedResourcesManager.init();
+  PrayersTimeFunction.init();
+
+  final scriptOnDb = Hive.box("user").get(
+    "selected_quran_script_type",
+    defaultValue: QuranScriptType.values.first.name,
   );
 
-  metaDataJuz = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Juz.json"),
-  );
-  metaDataSurah = jsonDecode(
-    await rootBundle.loadString("assets/meta_data/Surah.json"),
-  );
-
-  surahNameLocalization = jsonDecode(
-    await rootBundle.loadString(
-      "assets/meta_data/surah_name_localization.json",
-    ),
-  );
-
-  surahMeaningLocalization = jsonDecode(
-    await rootBundle.loadString(
-      "assets/meta_data/surah_meaning_localization.json",
-    ),
+  QuranScriptFunction.initQuranScript(
+    QuranScriptType.values.firstWhere((element) => scriptOnDb == element.name),
   );
 
   await ThemeFunctions.initThemeFunction();
@@ -163,8 +119,6 @@ Future<void> main() async {
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
       await getSavedLocation();
 
-  MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
-
   runApp(
     MyApp(
       initialLocale: initialLocale,
@@ -178,79 +132,77 @@ Future<void> main() async {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
+  final textTheme =
+      isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme;
   TextTheme baseTextTheme;
   switch (locale.languageCode) {
     case "ar":
     case "fa":
     case "ug": // Uighur
-      baseTextTheme = GoogleFonts.notoSansArabicTextTheme();
+      baseTextTheme = GoogleFonts.notoSansArabicTextTheme(textTheme);
       break;
     case "ur":
-      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme();
+      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme(textTheme);
       break;
     case "bn":
     case "as": // Assamese
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
       break;
     case "hi":
     case "mr": // Marathi
     case "ne": // Nepali
-      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme();
+      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme(textTheme);
       break;
     case "ja":
-      baseTextTheme = GoogleFonts.notoSansJpTextTheme();
+      baseTextTheme = GoogleFonts.notoSansJpTextTheme(textTheme);
       break;
     case "ko":
-      baseTextTheme = GoogleFonts.notoSansKrTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKrTextTheme(textTheme);
       break;
     case "zh":
-      baseTextTheme = GoogleFonts.notoSansScTextTheme();
+      baseTextTheme = GoogleFonts.notoSansScTextTheme(textTheme);
       break;
     case "ta": // Tamil
-      baseTextTheme = GoogleFonts.notoSansTamilTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTamilTextTheme(textTheme);
       break;
     case "te": // Telugu
-      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme(textTheme);
       break;
     case "kn": // Kannada
-      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme(textTheme);
       break;
     case "ml": // Malayalam
-      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme();
+      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme(textTheme);
       break;
     case "gu": // Gujarati
-      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme();
+      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme(textTheme);
       break;
     case "si": // Sinhala
-      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme(textTheme);
       break;
     case "th": // Thai
-      baseTextTheme = GoogleFonts.notoSansThaiTextTheme();
+      baseTextTheme = GoogleFonts.notoSansThaiTextTheme(textTheme);
       break;
     case "km": // Khmer
-      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme();
+      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme(textTheme);
       break;
     case "he": // Hebrew
-      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme();
+      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme(textTheme);
       break;
     case "am": // Amharic
-      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme();
+      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme(textTheme);
       break;
     case "dv": // Divehi
-      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme();
+      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme(textTheme);
       break;
     case "zgh": // Amazigh
-      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme();
+      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme(textTheme);
       break;
     default:
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme();
+      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
   }
 
-  return baseTextTheme.apply(
-    bodyColor: isDarkMode ? Colors.white : Colors.black,
-    displayColor: isDarkMode ? Colors.white : Colors.black,
-    decorationColor: isDarkMode ? Colors.white : Colors.black,
-  );
+  return baseTextTheme;
 }
 
 class MyApp extends StatelessWidget {
@@ -267,6 +219,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     final PageTransitionsTheme pageTransitionsTheme =
         const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -279,7 +232,7 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ResourcesProgressCubitCubit()),
+        BlocProvider(create: (context) => ResourcesProgressCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
@@ -301,7 +254,6 @@ class MyApp extends StatelessWidget {
           create:
               (context) => PrayerReminderCubit(initState: prayerReminderState),
         ),
-        BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),
@@ -326,7 +278,7 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                onGenerateTitle: (context) => "Al Quran App",
+                onGenerateTitle: (context) => "Quran's Tafsir, Audio & Prayer",
                 theme: ThemeData(brightness: Brightness.light).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
@@ -345,6 +297,11 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Colors.grey.shade100,
                   ),
                   textTheme: getTextTheme(languageState.locale, false),
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    titleSpacing: 0,
+                  ),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
                   pageTransitionsTheme: pageTransitionsTheme,
@@ -364,19 +321,28 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Color.fromARGB(255, 15, 15, 15),
                   ),
                   textTheme: getTextTheme(languageState.locale, true),
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    titleSpacing: 0,
+                  ),
                 ),
                 themeMode: themeState.themeMode,
                 home:
-                    Hive.box(
-                          "user",
-                        ).get("is_setup_complete", defaultValue: false)
-                        ? const HomePage()
-                        : const AppSetupPage(),
+                    isSetupComplete() ? const HomePage() : const AppSetupPage(),
               );
             },
           );
         },
       ),
     );
+  }
+
+  bool isSetupComplete() {
+    final userBox = Hive.box("user");
+    return userBox.get("writeQuranScript", defaultValue: false) &&
+        userBox.get("is_setup_complete", defaultValue: false) &&
+        (userBox.get("writeQuranScriptVersion") ==
+            QuranScriptFunction.quranScriptVersion);
   }
 }

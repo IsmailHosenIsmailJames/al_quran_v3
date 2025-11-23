@@ -1,18 +1,9 @@
-import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
-
-Future<String?> getTafsirFromDb(
-  String ayahKey, {
+String? getStringFromTafsirFromDb(
+  Map? data, {
   bool returnAyahKeyIfLinked = true,
-}) async {
-  String currentAyahKey = ayahKey;
-
+}) {
+  if (data == null) return null;
   for (int i = 0; i < 5; i++) {
-    Map? data = await QuranTafsirFunction.getTafsir(currentAyahKey);
-
-    if (data == null) {
-      return null;
-    }
-
     try {
       final String? text = data["text"] as String?;
 
@@ -27,7 +18,6 @@ Future<String?> getTafsirFromDb(
         if (returnAyahKeyIfLinked) {
           return text;
         }
-        currentAyahKey = text;
       } else {
         return text;
       }

@@ -13,6 +13,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart";
+import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "../../../../main.dart";
@@ -380,23 +381,45 @@ Widget drawerSection({
                     ),
           ),
           const Gap(5),
+          if (platformOwn == platform_services.PlatformOwn.isAndroid)
+            ListTile(
+              minTileHeight: 40,
+              onTap: () async {
+                // lunch the app in play to give review
+                launchUrl(
+                  Uri.parse(
+                    "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                  ),
+                  mode: LaunchMode.externalApplication,
+                );
+              },
+              leading: Icon(Icons.star_rate_rounded, color: themeState.primary),
+              title:
+                  isJustIcon
+                      ? null
+                      : Text(
+                        l10n.giveRating,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+            ),
+          const Gap(5),
           ListTile(
             minTileHeight: 40,
             onTap: () async {
-              // lunch the app in play to give review
+              if (!isDesktop) Navigator.pop(context);
               launchUrl(
                 Uri.parse(
-                  "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                  "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
                 ),
                 mode: LaunchMode.externalApplication,
               );
             },
-            leading: Icon(Icons.star_rate_rounded, color: themeState.primary),
+            leading: Icon(SimpleIcons.github, color: themeState.primary),
             title:
                 isJustIcon
                     ? null
                     : Text(
-                      l10n.giveRating,
+                      l10n.supportOnGithub,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
           ),

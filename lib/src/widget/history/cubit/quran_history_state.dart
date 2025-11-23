@@ -5,12 +5,14 @@ class QuranHistoryState {
 
 class HistoryElement {
   final int surahNumber;
-  final int ayahNumber;
+  final int? ayahNumber;
+  final int? pageNumber;
   final int timestamp;
 
   HistoryElement({
     required this.surahNumber,
-    required this.ayahNumber,
+    this.ayahNumber,
+    this.pageNumber,
     required this.timestamp,
   });
 
@@ -18,6 +20,7 @@ class HistoryElement {
     return {
       "surahNumber": surahNumber,
       "ayahNumber": ayahNumber,
+      "pageNumber": pageNumber,
       "timestamp": timestamp,
     };
   }
@@ -26,6 +29,7 @@ class HistoryElement {
     return HistoryElement(
       surahNumber: json["surahNumber"],
       ayahNumber: json["ayahNumber"],
+      pageNumber: json["pageNumber"],
       timestamp: json["timestamp"],
     );
   }

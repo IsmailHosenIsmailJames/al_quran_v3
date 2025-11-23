@@ -1,352 +1,595 @@
 {
-    "@@locale": "bn",
-    "tafsirAppBarTitle": "{nameSimple} ({nameArabic}) - {ayahKey}",
-    "tafsirNotAvailable": "{ayahKey} এর জন্য তাফসির উপলব্ধ নেই",
-    "tafsirFoundAt": "তাফসিরটি এখানে পাওয়া যাবে: {anotherAyahLinkKey}",
-    "tafsirJumpTo": "{anotherAyahLinkKey} এ যান",
-    "hizb": "হিযব",
-    "juz": "জুয",
-    "page": "পৃষ্ঠা",
-    "ruku": "রুকু",
-    "languageSettings": "ভাষা সেটিংস",
-    "surahAyah": "{surahName} {ayahKey}",
-    "ayahsCount": "{count} টি আয়াত",
-    "saveAndDownload": "সংরক্ষণ ও ডাউনলোড করুন",
-    "appLanguage": "অ্যাপের ভাষা",
-    "selectAppLanguage": "অ্যাপের ভাষা নির্বাচন করুন...",
-    "pleaseSelectOne": "অনুগ্রহ করে একটি নির্বাচন করুন",
-    "quranTranslationLanguage": "কুরআনের অনুবাদের ভাষা",
-    "selectTranslationLanguage": "অনুবাদের ভাষা নির্বাচন করুন...",
-    "quranTranslationBook": "কুরআনের অনুবাদের বই",
-    "selectTranslationBook": "অনুবাদের বই নির্বাচন করুন...",
-    "quranTafsirLanguage": "কুরআনের তাফসিরের ভাষা",
-    "selectTafsirLanguage": "তাফসিরের ভাষা নির্বাচন করুন...",
-    "quranTafsirBook": "কুরআনের তাফসিরের বই",
-    "selectTafsirBook": "তাফসিরের বই নির্বাচন করুন...",
-    "quranScriptAndStyle": "কুরআনের লিপি ও শৈলী",
-    "justAMoment": "একটু অপেক্ষা করুন...",
-    "processProgress": "{processName} {percentage}",
-    "success": "সফল",
-    "retry": "পুনরায় চেষ্টা করুন",
-    "unableToDownloadResources": "রিসোর্স ডাউনলোড করা সম্ভব হচ্ছে না...\nকিছু একটা সমস্যা হয়েছে",
-    "downloadingSegmentedQuranRecitation": "খণ্ডিত কুরআন তিলাওয়াত ডাউনলোড করা হচ্ছে",
-    "processingSegmentedQuranRecitation": "খণ্ডিত কুরআন তিলাওয়াত প্রসেস করা হচ্ছে",
-    "footnote": "পাদটীকা",
-    "tafsir": "তাফসির",
-    "wordByWord": "শব্দে শব্দে",
-    "pleaseSelectRequiredOption": "প্রয়োজনীয় বিকল্পটি নির্বাচন করুন",
-    "rememberHomeTab": "হোম ট্যাব মনে রাখুন",
-    "rememberHomeTabSubtitle": "অ্যাপটি হোম স্ক্রিনের সর্বশেষ খোলা ট্যাবটি মনে রাখবে।",
-    "wakeLock": "স্ক্রিন সজাগ রাখুন",
-    "wakeLockSubtitle": "স্বয়ংক্রিয়ভাবে স্ক্রিন বন্ধ হওয়া থেকে বিরত রাখুন।",
-    "settings": "সেটিংস",
-    "appTheme": "অ্যাপ থিম",
-    "quranStyle": "কুরআনের শৈলী",
-    "changeTheme": "থিম পরিবর্তন করুন",
-    "verseCount": "আয়াত সংখ্যা: ",
-    "translation": "অনুবাদ",
-    "tafsirNotFound": "পাওয়া যায়নি",
-    "moreInfo": "আরও তথ্য",
-    "playAudio": "অডিও চালান",
-    "preview": "প্রিভিউ",
-    "loading": "লোড হচ্ছে...",
-    "errorFetchingAddress": "ঠিকানা আনতে ত্রুটি হয়েছে",
-    "addressNotAvailable": "ঠিকানা উপলব্ধ নয়",
-    "latitude": "অক্ষাংশ: ",
-    "longitude": "দ্রাঘিমাংশ: ",
-    "name": "নাম: ",
-    "location": "অবস্থান: ",
-    "parameters": "প্যারামিটার: ",
-    "selectCalculationMethod": "গণনা পদ্ধতি নির্বাচন করুন",
-    "shareSelectAyahs": "নির্বাচিত আয়াত শেয়ার করুন",
-    "selectionEmpty": "কিছুই নির্বাচন করা হয়নি",
-    "generatingImagePleaseWait": "ছবি তৈরি হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন",
-    "asImage": "ছবি হিসেবে",
-    "asText": "টেক্সট হিসেবে",
-    "playFromSelectedAyah": "নির্বাচিত আয়াত থেকে চালান",
-    "toTafsir": "তাফসিরে যান",
-    "selectAyah": "আয়াত নির্বাচন করুন",
-    "toAyah": "আয়াতে যান",
-    "searchForASurah": "একটি সূরা খুঁজুন",
-    "bugReportTitle": "বাগ রিপোর্ট",
-    "audioCached": "অডিও ক্যাশ করা হয়েছে",
-    "others": "অন্যান্য",
-    "quranTranslationAyahOneMustEnabled": "কুরআন|অনুবাদ|আয়াত, এর মধ্যে একটি অবশ্যই চালু রাখতে হবে",
-    "quranFontSize": "কুরআনের ফন্ট সাইজ",
-    "quranLineHeight": "কুরআনের লাইন হাইট",
-    "translationAndTafsirFontSize": "অনুবাদ ও তাফসিরের ফন্ট সাইজ",
-    "quranAyah": "কুরআনের আয়াত",
-    "topToolbar": "উপরের টুলবার",
-    "keepOpenWordByWord": "শব্দে শব্দে অনুবাদ খোলা রাখুন",
-    "wordByWordHighlight": "শব্দে শব্দে হাইলাইট",
-    "quranScriptSettings": "কুরআনের লিপি সেটিংস",
-    "surahName": "{nameSimple}",
-    "pageNumber": "পৃষ্ঠা: ",
-    "quranResources": "কুরআনের রিসোর্স",
-    "alreadySelected": "ভাষা '{name}' ইতিমধ্যে নির্বাচিত।",
-    "unableToGetCompassData": "কম্পাসের ডেটা পাওয়া যাচ্ছে না",
-    "deviceDoesNotHaveSensors": "ডিভাইসে সেন্সর নেই !",
-    "north": "উঃ",
-    "east": "পূঃ",
-    "south": "দঃ",
-    "west": "পঃ",
-    "address": "ঠিকানা: ",
-    "change": "পরিবর্তন",
-    "calculationMethod": "গণনা পদ্ধতি: ",
-    "downloadPrayerTime": "নামাজের সময় ডাউনলোড করুন",
-    "calculationMethodsListEmpty": "গণনা পদ্ধতির তালিকা খালি।",
-    "noCalculationMethodWithLocationData": "অবস্থানের ডেটা সহ কোনো গণনা পদ্ধতি খুঁজে পাওয়া হয়নি।",
-    "prayerSettings": "নামাজের সেটিংস",
-    "reminderSettings": "রিমাইন্ডার সেটিংস",
-    "adjustReminderTime": "রিমাইন্ডারের সময় ঠিক করুন",
-    "enforceAlarmSound": "অ্যালার্মের শব্দ প্রয়োগ করুন",
-    "enforceAlarmSoundDescription": "এটি চালু থাকলে, আপনার ফোনের সাউন্ড কম থাকলেও এখানে সেট করা ভলিউমে অ্যালার্ম বাজবে। এটি নিশ্চিত করে যে ফোনের ভলিউম কম থাকার কারণে আপনি অ্যালার্ম মিস করবেন না।",
-    "volume": "ভলিউম",
-    "atPrayerTime": "নামাজের সময়",
-    "minBefore": "{minutes} মিনিট আগে",
-    "minAfter": "{minutes} মিনিট পরে",
-    "prayerTimeIsAt": "{prayerName}-এর সময় {prayerTime}",
-    "itsTimeOf": "{prayerName}-এর সময় হয়েছে",
-    "stopTheAdhan": "আযান বন্ধ করুন",
-    "dateFoundEmpty": "{date} খালি পাওয়া গেছে",
-    "today": "আজ",
-    "left": "বাকি",
-    "reminderAdded": "{prayerName}-এর জন্য রিমাইন্ডার যোগ করা হয়েছে",
-    "allowNotificationPermission": "এই ফিচারটি ব্যবহার করার জন্য অনুগ্রহ করে নোটিফিকেশন অনুমতি দিন",
-    "reminderRemoved": "{prayerName}-এর জন্য রিমাইন্ডার সরানো হয়েছে",
-    "getPrayerTimesAndQibla": "নামাজের সময় ও কিবলা জানুন",
-    "getPrayerTimesAndQiblaDescription": "যেকোনো অবস্থানের জন্য নামাজের সময় ও কিবলা গণনা করুন।",
-    "getFromGPS": "জিপিএস থেকে নিন",
-    "or": "অথবা",
-    "selectYourCity": "আপনার শহর নির্বাচন করুন",
-    "noteAboutGPS": "দ্রষ্টব্য: আপনি যদি জিপিএস ব্যবহার করতে না চান বা নিরাপদ বোধ না করেন, তবে আপনার শহর নির্বাচন করতে পারেন।",
-    "downloadingLocationResources": "অবস্থানের রিসোর্স ডাউনলোড হচ্ছে...",
-    "somethingWentWrong": "কিছু একটা সমস্যা হয়েছে",
-    "selectYourCountry": "আপনার দেশ নির্বাচন করুন",
-    "searchForACountry": "একটি সূরা খুঁজুন",
-    "selectYourAdministrator": "আপনার প্রশাসনিক অঞ্চল নির্বাচন করুন",
-    "searchForAnAdministrator": "একটি প্রশাসনিক অঞ্চল খুঁজুন",
-    "searchForACity": "একটি শহর খুঁজুন",
-    "pleaseEnableLocationService": "অনুগ্রহ করে লোকেশন সার্ভিস চালু করুন",
-    "donateUs": "আমাদের দান করুন",
-    "underDevelopment": "নির্মাণাধীন",
-    "versionLoading": "লোড হচ্ছে...",
-    "alQuran": "আল কুরআন",
-    "mainMenu": "প্রধান মেনু",
-    "notes": "নোট",
-    "pinned": "পিন করা",
-    "jumpToAyah": "আয়াতে যান",
-    "shareMultipleAyah": "একাধিক আয়াত শেয়ার করুন",
-    "shareThisApp": "এই অ্যাপটি শেয়ার করুন",
-    "giveRating": "রেটিং দিন",
-    "bugReport": "বাগ রিপোর্ট",
-    "privacyPolicy": "গোপনীয়তা নীতি",
-    "aboutTheApp": "অ্যাপ সম্পর্কে",
-    "resetTheApp": "অ্যাপটি রিসেট করুন",
-    "resetAppWarningTitle": "অ্যাপ ডেটা রিসেট করুন",
-    "resetAppWarningMessage": "আপনি কি অ্যাপটি রিসেট করতে নিশ্চিত? আপনার সমস্ত ডেটা মুছে যাবে এবং আপনাকে প্রথম থেকে অ্যাপটি সেট আপ করতে হবে।",
-    "cancel": "বাতিল",
-    "reset": "রিসেট",
-    "shareAppSubject": "এই আল কুরআন অ্যাপটি দেখুন!",
-    "shareAppBody": "আসসালামু আলাইকুম! প্রতিদিনের পড়া এবং চিন্তাভাবনার জন্য এই আল কুরআন অ্যাপটি দেখুন। এটি আল্লাহর বাণীর সাথে সংযোগ স্থাপন করতে সাহায্য করে। এখানে ডাউনলোড করুন: {appLink}",
-    "openDrawerTooltip": "ড্রয়ার খুলুন",
-    "quran": "কুরআন",
-    "prayer": "নামাজ",
-    "qibla": "কিবলা",
-    "audio": "অডিও",
-    "surah": "সূরা",
-    "pages": "পৃষ্ঠা",
-    "note": "নোট:",
-    "linkedAyahs": "সংযুক্ত আয়াত:",
-    "emptyNoteCollection": "এই নোট সংগ্রহটি খালি।\nএখানে দেখার জন্য কিছু নোট যোগ করুন।",
-    "emptyPinnedCollection": "এখনও কোনো আয়াত এই সংগ্রহে পিন করা হয়নি।\nএখানে দেখার জন্য আয়াত পিন করুন।",
-    "noContentAvailable": "কোনো কনটেন্ট উপলব্ধ নেই।",
-    "failedToLoadCollections": "সংগ্রহ লোড করতে ব্যর্থ: {error}",
-    "searchByCollectionName": "{collectionType} এর নাম দিয়ে খুঁজুন...",
-    "sortBy": "সাজান",
-    "noCollectionAddedYet": "এখনও কোনো {collectionType} যোগ করা হয়নি",
-    "pinnedItemsCount": "{count} টি পিন করা আইটেম",
-    "notesCount": "{count} টি নোট",
-    "emptyNameNotAllowed": "খালি নাম অনুমোদিত নয়",
-    "updatedTo": "{collectionName} এ আপডেট করা হয়েছে",
-    "changeName": "নাম পরিবর্তন করুন",
-    "changeColor": "রঙ পরিবর্তন করুন",
-    "colorUpdated": "রঙ আপডেট করা হয়েছে",
-    "collectionDeleted": "{collectionName} মুছে ফেলা হয়েছে",
-    "delete": "মুছে ফেলুন",
-    "save": "সংরক্ষণ করুন",
-    "collectionNameCannotBeEmpty": "সংগ্রহের নাম খালি রাখা যাবে না।",
-    "addedNewCollection": "নতুন সংগ্রহ যোগ করা হয়েছে",
-    "ayahCount": "{count} টি আয়াত",
-    "byNameAtoZ": "নাম A-Z",
-    "byNameZtoA": "নাম Z-A",
-    "byElementNumberAscending": "উপাদানের সংখ্যা (ছোট থেকে বড়)",
-    "byElementNumberDescending": "উপাদানের সংখ্যা (বড় থেকে ছোট)",
-    "byUpdateDateAscending": "আপডেটের তারিখ (পুরানো থেকে নতুন)",
-    "byUpdateDateDescending": "আপডেটের তারিখ (নতুন থেকে পুরানো)",
-    "byCreateDateAscending": "তৈরির তারিখ (পুরানো থেকে নতুন)",
-    "byCreateDateDescending": "তৈরির তারিখ (নতুন থেকে পুরানো)",
-    "translationNotFound": "অনুবাদ পাওয়া যায়নি",
-    "translationTitle": "অনুবাদ:",
-    "footNoteTitle": "পাদটীকা:",
-    "wordByWordTranslation": "শব্দে শব্দে অনুবাদ:",
-    "tafsirButton": "তাফসির",
-    "shareButton": "শেয়ার",
-    "addNoteButton": "নোট যোগ করুন",
-    "pinToCollectionButton": "সংগ্রহে পিন করুন",
-    "shareAsText": "টেক্সট হিসেবে শেয়ার করুন",
-    "copiedWithTafsir": "তাফসির সহ কপি করা হয়েছে",
-    "shareAsImage": "ছবি হিসেবে শেয়ার করুন",
-    "shareWithTafsir": "তাফসির সহ শেয়ার করুন",
-    "notFound": "পাওয়া যায়নি",
-    "noteContentCannotBeEmpty": "নোটের বিষয়বস্তু খালি রাখা যাবে না।",
-    "noteSavedSuccessfully": "নোট সফলভাবে সংরক্ষণ করা হয়েছে!",
-    "selectCollections": "সংগ্রহ নির্বাচন করুন",
-    "addNote": "নোট যোগ করুন",
-    "writeCollectionName": "সংগ্রহের নাম লিখুন...",
-    "noCollectionsYetAddANewOne": "এখনও কোনো সংগ্রহ নেই। একটি নতুন যোগ করুন!",
-    "pleaseWriteYourNoteFirst": "অনুগ্রহ করে প্রথমে আপনার নোটটি লিখুন।",
-    "noCollectionSelected": "কোনো সংগ্রহ নির্বাচন করা হয়নি",
-    "saveNote": "নোট সংরক্ষণ করুন",
-    "nextSelectCollections": "পরবর্তী: সংগ্রহ নির্বাচন করুন",
-    "addToPinned": "পিন করুন",
-    "pinnedSavedSuccessfully": "পিন সফলভাবে সংরক্ষণ করা হয়েছে!",
-    "savePinned": "পিন সংরক্ষণ করুন",
-    "closeAudioController": "অডিও কন্ট্রোলার বন্ধ করুন",
-    "previous": "পূর্ববর্তী",
-    "rewind": "রিওয়াইন্ড",
-    "fastForward": "ফাস্ট ফরোয়ার্ড",
-    "playNextAyah": "পরবর্তী আয়াত চালান",
-    "repeat": "পুনরাবৃত্তি",
-    "playAsPlaylist": "প্লেলিস্ট হিসেবে চালান",
-    "style": "শৈলী: {style}",
-    "stopAndClose": "থামান ও বন্ধ করুন",
-    "play": "চালান",
-    "pause": "বিরতি",
-    "selectReciter": "কারী নির্বাচন করুন",
-    "source": "উৎস: {source}",
-    "newText": "নতুন",
-    "more": "আরও: ",
-    "cacheNotFound": "ক্যাশ খুঁজে পাওয়া যায়নি",
-    "cacheSize": "ক্যাশের আকার",
-    "error": "ত্রুটি: {error}",
-    "clean": "পরিষ্কার করুন",
-    "lastModified": "সর্বশেষ পরিবর্তিত",
-    "oneYearAgo": "১ বছর আগে",
-    "monthsAgo": "{number} মাস আগে",
-    "@monthsAgo": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "weeksAgo": "{number} সপ্তাহ আগে",
-    "@weeksAgo": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "daysAgo": "{number} দিন আগে",
-    "@daysAgo": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "hoursAgo": "{hour} ঘন্টা আগে",
-    "aboutAlQuran": "আল কুরআন সম্পর্কে",
-    "appFullName": "আল কুরআন (তাফসির, নামাজ, কিবলা, অডিও)",
-    "appDescription": "অ্যান্ড্রয়েড, আইওএস, ম্যাকওএস, ওয়েব, লিনাক্স এবং উইন্ডোজের জন্য একটি পূর্ণাঙ্গ ইসলামিক অ্যাপ্লিকেশন, যা তাফসির এবং একাধিক অনুবাদসহ (শব্দে-শব্দে সহ) কুরআন পড়ার সুবিধা, নোটিফিকেশনসহ বিশ্বব্যাপী নামাজের সময়, কিবলা কম্পাস এবং শব্দে-শব্দে অডিও তিলাওয়াত শোনার সুযোগ দেয়।",
-    "dataSourcesNote": "দ্রষ্টব্য: কুরআনের টেক্সট, তাফসির, অনুবাদ এবং অডিও রিসোর্সগুলো Quran.com, Everyayah.com এবং অন্যান্য যাচাইকৃত উন্মুক্ত উৎস থেকে সংগ্রহ করা হয়েছে।",
-    "adFreePromise": "এই অ্যাপটি আল্লাহর সন্তুষ্টি অর্জনের জন্য তৈরি করা হয়েছে। অতএব, এটি বিজ্ঞাপন-মুক্ত এবং সর্বদা তাই থাকবে।",
-    "coreFeatures": "প্রধান বৈশিষ্ট্য",
-    "coreFeaturesDescription": "আল কুরআন v3-কে আপনার দৈনন্দিন ইসলামিক অনুশীলনের জন্য একটি অপরিহার্য হাতিয়ার করে তুলেছে এমন মূল কার্যকারিতাগুলো অন্বেষণ করুন:",
-    "prayerTimesTitle": "নামাজের সময় ও সতর্কতা",
-    "prayerTimesDescription": "বিভিন্ন গণনা পদ্ধতি ব্যবহার করে বিশ্বব্যাপী যেকোনো অবস্থানের জন্য সঠিক নামাজের সময়। আযানের নোটিফিকেশনসহ রিমাইন্ডার সেট করুন।",
-    "qiblaDirectionTitle": "কিবলার দিক",
-    "qiblaDirectionDescription": "একটি স্পষ্ট এবং সঠিক কম্পাসের মাধ্যমে সহজেই কিবলার দিক নির্ণয় করুন।",
-    "translationTafsirTitle": "কুরআনের অনুবাদ ও তাফসির",
-    "translationTafsirDescription": "৬৯টি ভাষায় ১২০টিরও বেশি অনুবাদের বই (শব্দে-শব্দে সহ) এবং ৩০টিরও বেশি তাফসিরের বই অ্যাক্সেস করুন।",
-    "wordByWordAudioTitle": "শব্দে শব্দে অডিও ও হাইলাইটিং",
-    "wordByWordAudioDescription": "একটি গভীর শেখার অভিজ্ঞতার জন্য সিঙ্ক্রোনাইজড শব্দ-ভিত্তিক অডিও তিলাওয়াত এবং হাইলাইটিং অনুসরণ করুন।",
-    "ayahAudioRecitationTitle": "আয়াতের অডিও তিলাওয়াত",
-    "ayahAudioRecitationDescription": "৪০ জনেরও বেশি প্রখ্যাত কারীর সম্পূর্ণ আয়াত তিলাওয়াত শুনুন।",
-    "notesCloudBackupTitle": "ক্লাউড ব্যাকআপ সহ নোট",
-    "notesCloudBackupDescription": "ব্যক্তিগত নোট এবং চিন্তাভাবনা সংরক্ষণ করুন, যা ক্লাউডে নিরাপদে ব্যাক আপ করা হবে (ফিচারটি নির্মাণাধীন/শীঘ্রই আসছে)।",
-    "crossPlatformSupportTitle": "ক্রস-প্ল্যাটফর্ম সাপোর্ট",
-    "crossPlatformSupportDescription": "অ্যান্ড্রয়েড, ওয়েব, লিনাক্স এবং উইন্ডোজে সমর্থিত।",
-    "backgroundAudioPlaybackTitle": "ব্যাকগ্রাউন্ডে অডিও প্লেব্যাক",
-    "backgroundAudioPlaybackDescription": "অ্যাপটি ব্যাকগ্রাউন্ডে থাকলেও কুরআন তিলাওয়াত শোনা চালিয়ে যান।",
-    "audioDataCachingTitle": "অডিও ও ডেটা ক্যাশিং",
-    "audioDataCachingDescription": "শক্তিশালী অডিও এবং কুরআন ডেটা ক্যাশিংয়ের মাধ্যমে উন্নত প্লেব্যাক এবং অফলাইন ব্যবহারের সুবিধা।",
-    "minimalisticInterfaceTitle": "নান্দনিক ও পরিচ্ছন্ন ইন্টারফেস",
-    "minimalisticInterfaceDescription": "ব্যবহারকারীর অভিজ্ঞতা এবং পঠনযোগ্যতার উপর দৃষ্টি নিবদ্ধ করে সহজে ব্যবহারযোগ্য ইন্টারফেস।",
-    "optimizedPerformanceTitle": "অপ্টিমাইজড পারফরম্যান্স ও আকার",
-    "optimizedPerformanceDescription": "একটি ফিচার-সমৃদ্ধ অ্যাপ্লিকেশন যা হালকা এবং দ্রুতগতিসম্পন্ন হওয়ার জন্য ডিজাইন করা হয়েছে।",
-    "languageSupport": "ভাষা সমর্থন",
-    "languageSupportDescription": "এই অ্যাপ্লিকেশনটি বিশ্বব্যাপী দর্শকদের জন্য তৈরি করা হয়েছে এবং নিম্নলিখিত ভাষাগুলিকে সমর্থন করে (এবং আরও ভাষা ক্রমাগত যোগ করা হচ্ছে):",
-    "technologyAndResources": "প্রযুক্তি ও রিসোর্স",
-    "technologyAndResourcesDescription": "এই অ্যাপটি অত্যাধুনিক প্রযুক্তি এবং নির্ভরযোগ্য রিসোর্স ব্যবহার করে তৈরি করা হয়েছে:",
-    "flutterFrameworkTitle": "ফ্লাটার ফ্রেমওয়ার্ক",
-    "flutterFrameworkDescription": "একটি একক কোডবেস থেকে সুন্দর, নেটিভলি কম্পাইল করা, মাল্টি-প্ল্যাটফর্ম অভিজ্ঞতার জন্য ফ্লাটার দিয়ে তৈরি।",
-    "advancedAudioEngineTitle": "উন্নত অডিও ইঞ্জিন",
-    "advancedAudioEngineDescription": "শক্তিশালী অডিও প্লেব্যাক এবং নিয়ন্ত্রণের জন্য `just_audio` এবং `just_audio_background` ফ্লাটার প্যাকেজ দ্বারা চালিত।",
-    "reliableQuranDataTitle": "নির্ভরযোগ্য কুরআন ডেটা",
-    "reliableQuranDataDescription": "আল কুরআনের টেক্সট, অনুবাদ, তাফসির এবং অডিও Quran.com ও Everyayah.com-এর মতো যাচাইকৃত উন্মুক্ত এপিআই এবং ডেটাবেস থেকে সংগ্রহ করা হয়েছে।",
-    "prayerTimeEngineTitle": "নামাজের সময় ইঞ্জিন",
-    "prayerTimeEngineDescription": "সঠিক নামাজের সময়ের জন্য প্রতিষ্ঠিত গণনা পদ্ধতি ব্যবহার করে। নোটিফিকেশন `flutter_local_notifications` এবং ব্যাকগ্রাউন্ড টাস্ক দ্বারা পরিচালিত হয়।",
-    "crossPlatformSupport": "ক্রস প্ল্যাটফর্ম সাপোর্ট",
-    "crossPlatformSupportDescription2": "বিভিন্ন প্ল্যাটফর্মে নির্বিঘ্ন অ্যাক্সেস উপভোগ করুন:",
-    "android": "অ্যান্ড্রয়েড",
-    "ios": "আইওএস",
-    "macos": "ম্যাকওএস",
-    "web": "ওয়েব",
-    "linux": "লিনাক্স",
-    "windows": "উইন্ডোজ",
-    "ourLifetimePromise": "আমাদের আজীবনের প্রতিশ্রুতি",
-    "lifetimePromiseDescription": "আমি ব্যক্তিগতভাবে আমার সারাজীবন এই অ্যাপ্লিকেশনটির জন্য ক্রমাগত সমর্থন এবং রক্ষণাবেক্ষণ প্রদানের প্রতিশ্রুতি দিচ্ছি, ইনশাআল্লাহ। আমার লক্ষ্য হলো এই অ্যাপটি যাতে আগামী বছরগুলিতে উম্মাহর জন্য একটি উপকারী সম্পদ হিসেবে থাকে তা নিশ্চিত করে।",
-    "fajr": "ফজর",
-    "sunrise": "সূর্যোদয়",
-    "dhuhr": "যোহর",
-    "asr": "আসর",
-    "maghrib": "মাগরিব",
-    "isha": "ইশা",
-    "midnight": "মধ্যরাত",
-    "alarm": "অ্যালার্ম",
-    "notification": "বিজ্ঞপ্তি",
-    "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
-    "quranScriptTajweed": "তাজবীদ",
-    "quranScriptUthmani": "উসমানী",
-    "quranScriptIndopak": "ইন্দোপাক",
-    "sajdaAyah": "সিজদা আয়াত",
-    "required": "আবশ্যক",
-    "optional": "ঐচ্ছিক",
-    "notificationScheduleWarning": "দ্রষ্টব্য: আপনার ফোনের ওএস ব্যাকগ্রাউন্ড প্রসেস সীমাবদ্ধতার কারণে নির্ধারিত বিজ্ঞপ্তি বা অনুস্মারক মিস হতে পারে। উদাহরণস্বরূপ: Vivo-এর Origin OS, Samsung-এর One UI, Oppo-এর ColorOS ইত্যাদি কখনও কখনও নির্ধারিত বিজ্ঞপ্তি বা অনুস্মারক বন্ধ করে দেয়। অ্যাপটিকে ব্যাকগ্রাউন্ড প্রসেস থেকে সীমাবদ্ধ না করার জন্য অনুগ্রহ করে আপনার ওএস সেটিংস পরীক্ষা করুন।",
-    "scrollWithRecitation": "তিলাওয়াতের সাথে স্ক্রোল করুন",
-    "quickAccess": "দ্রুত অ্যাক্সেস",
-  "initiallyScrollAyah": "প্রাথমিকভাবে আয়াতে স্ক্রোল করুন",
-  "tajweedGuide": "তাজবীদ গাইড",
-  "scrollWithRecitationDesc": "সক্ষম করা হলে, কুরআনের আয়াতটি অডিও تلاوتের সাথে সিঙ্কে স্বয়ংক্রিয়ভাবে স্ক্রোল হবে।",
+  "@@locale": "bn",
+  "tafsirAppBarTitle": "{nameSimple} ( {nameArabic} ) - {ayahKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirNotAvailable": "{ayahKey} এর জন্য তাফসীর পাওয়া যায়নি",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "তাফসীর পাওয়া যাবে এখানে: {anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "{anotherAyahLinkKey} এ যান",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "hizb": "হিজব",
+  "juz": "জুয",
+  "page": "পৃষ্ঠা",
+  "ruku": "রুকু",
+  "languageSettings": "ভাষা সেটিংস",
+  "surahAyah": "{surahName} {ayahKey}",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "ayahsCount": "{count} আয়াত",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "saveAndDownload": "সেভ করুন এবং ডাউনলোড করুন",
+  "appLanguage": "অ্যাপের ভাষা",
+  "selectAppLanguage": "অ্যাপের ভাষা নির্বাচন করুন...",
+  "pleaseSelectOne": "দয়া করে একটা নির্বাচন করুন",
+  "quranTranslationLanguage": "কুরআন অনুবাদের ভাষা",
+  "selectTranslationLanguage": "অনুবাদের ভাষা নির্বাচন করুন...",
+  "quranTranslationBook": "কুরআন অনুবাদের বই",
+  "selectTranslationBook": "অনুবাদের বই নির্বাচন করুন...",
+  "quranTafsirLanguage": "কুরআন তাফসীরের ভাষা",
+  "selectTafsirLanguage": "তাফসীরের ভাষা নির্বাচন করুন...",
+  "quranTafsirBook": "কুরআন তাফসীরের বই",
+  "selectTafsirBook": "তাফসীরের বই নির্বাচন করুন...",
+  "quranScriptAndStyle": "কুরআন স্ক্রিপ্ট এবং স্টাইল",
+  "justAMoment": "একটু অপেক্ষা করুন...",
+  "processProgress": "{processName} {percentage}",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
+  "success": "সফল",
+  "retry": "আবার চেষ্টা করুন",
+  "unableToDownloadResources": "রিসোর্স ডাউনলোড করতে পারছি না...\nকিছু একটা সমস্যা হয়েছে",
+  "downloadingSegmentedQuranRecitation": "সেগমেন্টেড কুরআন তিলাওয়াত ডাউনলোড হচ্ছে",
+  "processingSegmentedQuranRecitation": "সেগমেন্টেড কুরআন তিলাওয়াত প্রসেস হচ্ছে",
+  "footnote": "ফুটনোট",
+  "tafsir": "তাফসীর",
+  "wordByWord": "শব্দে শব্দে",
+  "pleaseSelectRequiredOption": "দয়া করে প্রয়োজনীয় অপশন নির্বাচন করুন",
+  "rememberHomeTab": "হোম ট্যাব মনে রাখুন",
+  "rememberHomeTabSubtitle": "অ্যাপ হোম স্ক্রিনের শেষ খোলা ট্যাব মনে রাখবে।",
+  "wakeLock": "ওয়েক লক",
+  "wakeLockSubtitle": "স্ক্রিন অটোম্যাটিক বন্ধ হওয়া থেকে বিরত রাখুন।",
+  "settings": "সেটিংস",
+  "appTheme": "অ্যাপ থিম",
+  "quranStyle": "কুরআন স্টাইল",
+  "changeTheme": "থিম চেঞ্জ করুন",
+  "verseCount": "আয়াত সংখ্যা: ",
+  "translation": "অনুবাদ",
+  "tafsirNotFound": "পাওয়া যায়নি",
+  "moreInfo": "আরও তথ্য",
+  "playAudio": "অডিও চালান",
+  "preview": "প্রিভিউ",
+  "loading": "লোড হচ্ছে...",
+  "errorFetchingAddress": "ঠিকানা আনতে সমস্যা",
+  "addressNotAvailable": "ঠিকানা পাওয়া যায়নি",
+  "latitude": "অক্ষাংশ: ",
+  "longitude": "দ্রাঘিমা: ",
+  "name": "নাম: ",
+  "location": "লোকেশন: ",
+  "parameters": "প্যারামিটার: ",
+  "selectCalculationMethod": "ক্যালকুলেশন মেথড নির্বাচন করুন",
+  "shareSelectAyahs": "নির্বাচিত আয়াত শেয়ার করুন",
+  "selectionEmpty": "নির্বাচন খালি",
+  "generatingImagePleaseWait": "ইমেজ তৈরি হচ্ছে... অপেক্ষা করুন",
+  "asImage": "ইমেজ হিসেবে",
+  "asText": "টেক্সট হিসেবে",
+  "playFromSelectedAyah": "নির্বাচিত আয়াত থেকে চালান",
+  "toTafsir": "তাফসীরে যান",
+  "selectAyah": "আয়াত নির্বাচন করুন",
+  "toAyah": "আয়াতে যান",
+  "searchForASurah": "একটা সূরা খুঁজুন",
+  "bugReportTitle": "বাগ রিপোর্ট",
+  "audioCached": "অডিও ক্যাশড",
+  "others": "অন্যান্য",
+  "quranTranslationAyahOneMustEnabled": "কুরআন|অনুবাদ|আয়াত, একটা অবশ্যই চালু থাকতে হবে",
+  "quranFontSize": "কুরআন ফন্ট সাইজ",
+  "quranLineHeight": "কুরআন লাইন হাইট",
+  "translationAndTafsirFontSize": "অনুবাদ ও তাফসীর ফন্ট সাইজ",
+  "quranAyah": "কুরআন আয়াত",
+  "topToolbar": "উপরের টুলবার",
+  "keepOpenWordByWord": "শব্দে শব্দে খোলা রাখুন",
+  "wordByWordHighlight": "শব্দে শব্দে হাইলাইট",
+  "quranScriptSettings": "কুরআন স্ক্রিপ্ট সেটিংস",
+  "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
+  "pageNumber": "পৃষ্ঠা: ",
+  "quranResources": "কুরআন রিসোর্স",
+  "alreadySelected": "'{name}' ভাষা ইতিমধ্যে নির্বাচিত।",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "unableToGetCompassData": "কম্পাস ডেটা পাওয়া যাচ্ছে না",
+  "deviceDoesNotHaveSensors": "ডিভাইসে সেন্সর নেই!",
+  "north": "উ",
+  "east": "পূ",
+  "south": "দ",
+  "west": "প",
+  "address": "ঠিকানা: ",
+  "change": "চেঞ্জ",
+  "calculationMethod": "ক্যালকুলেশন মেথড: ",
+  "downloadPrayerTime": "নামাজের সময় ডাউনলোড করুন",
+  "calculationMethodsListEmpty": "ক্যালকুলেশন মেথডের লিস্ট খালি।",
+  "noCalculationMethodWithLocationData": "লোকেশন ডেটা সহ কোনো ক্যালকুলেশন মেথড পাওয়া যায়নি।",
+  "prayerSettings": "নামাজ সেটিংস",
+  "reminderSettings": "রিমাইন্ডার সেটিংস",
+  "adjustReminderTime": "রিমাইন্ডার সময় অ্যাডজাস্ট করুন",
+  "enforceAlarmSound": "অ্যালার্মের সাউন্ড জোর করে চালান",
+  "enforceAlarmSoundDescription": "চালু থাকলে, এই ফিচার অ্যালার্মের ভলিউম এখানে সেট করা ভলিউমে চালাবে, এমনকি ফোনের সাউন্ড কম থাকলেও। এতে অ্যালার্ম মিস হবে না।",
+  "volume": "ভলিউম",
+  "atPrayerTime": "নামাজের সময়ে",
+  "minBefore": "{minutes} মিনিট আগে",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "minAfter": "{minutes} মিনিট পরে",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} এর সময় {prayerTime}",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "{prayerName} এর সময় হয়েছে",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "stopTheAdhan": "আজান বন্ধ করুন",
+  "dateFoundEmpty": "{date} খালি পাওয়া গেছে",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "today": "আজ",
+  "left": "বাকি",
+  "reminderAdded": "{prayerName} এর রিমাইন্ডার যোগ করা হয়েছে",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "allowNotificationPermission": "এই ফিচার ব্যবহার করতে নোটিফিকেশন পারমিশন দিন",
+  "reminderRemoved": "{prayerName} এর রিমাইন্ডার সরানো হয়েছে",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "নামাজের সময় এবং কিবলা পান",
+  "getPrayerTimesAndQiblaDescription": "যেকোনো লোকেশনের জন্য নামাজের সময় এবং কিবলা ক্যালকুলেট করুন।",
+  "getFromGPS": "জিপিএস থেকে পান",
+  "or": "অথবা",
+  "selectYourCity": "আপনার শহর নির্বাচন করুন",
+  "noteAboutGPS": "নোট: জিপিএস ব্যবহার করতে না চাইলে বা নিরাপদ মনে না করলে, আপনার শহর নির্বাচন করুন।",
+  "downloadingLocationResources": "লোকেশন রিসোর্স ডাউনলোড হচ্ছে...",
+  "somethingWentWrong": "কিছু একটা সমস্যা হয়েছে",
+  "selectYourCountry": "আপনার দেশ নির্বাচন করুন",
+  "searchForACountry": "একটা দেশ খুঁজুন",
+  "selectYourAdministrator": "আপনার অ্যাডমিনিস্ট্রেটর নির্বাচন করুন",
+  "searchForAnAdministrator": "একটা অ্যাডমিনিস্ট্রেটর খুঁজুন",
+  "searchForACity": "একটা শহর খুঁজুন",
+  "pleaseEnableLocationService": "লোকেশন সার্ভিস চালু করুন",
+  "donateUs": "আমাদের ডোনেট করুন",
+  "underDevelopment": "ডেভেলপমেন্টের মধ্যে",
+  "versionLoading": "লোড হচ্ছে...",
+  "alQuran": "আল কুরআন",
+  "mainMenu": "মেইন মেনু",
+  "notes": "নোটস",
+  "pinned": "পিনড",
+  "jumpToAyah": "আয়াতে যান",
+  "shareMultipleAyah": "একাধিক আয়াত শেয়ার করুন",
+  "shareThisApp": "এই অ্যাপ শেয়ার করুন",
+  "giveRating": "রেটিং দিন",
+  "bugReport": "বাগ রিপোর্ট",
+  "privacyPolicy": "প্রাইভেসি পলিসি",
+  "aboutTheApp": "অ্যাপ সম্পর্কে",
+  "resetTheApp": "অ্যাপ রিসেট করুন",
+  "resetAppWarningTitle": "অ্যাপ ডেটা রিসেট",
+  "resetAppWarningMessage": "আপনি কি নিশ্চিত অ্যাপ রিসেট করতে চান? সব ডেটা হারিয়ে যাবে, এবং অ্যাপ শুরু থেকে সেটআপ করতে হবে।",
+  "cancel": "বাতিল",
+  "reset": "রিসেট",
+  "shareAppSubject": "এই আল কুরআন অ্যাপ দেখুন!",
+  "shareAppBody": "আসসালামু আলাইকুম! এই আল কুরআন অ্যাপ দেখুন দৈনিক পড়া এবং চিন্তার জন্য। এটা আল্লাহর কথার সাথে যুক্ত হতে সাহায্য করে। এখান থেকে ডাউনলোড করুন: {appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "ড্রয়ার খুলুন",
+  "quran": "কুরআন",
+  "prayer": "নামাজ",
+  "qibla": "কিবলা",
+  "audio": "অডিও",
+  "surah": "সূরা",
+  "pages": "পৃষ্ঠাসমূহ",
+  "note": "নোট:",
+  "linkedAyahs": "লিঙ্কড আয়াত:",
+  "emptyNoteCollection": "এই নোট কালেকশন খালি।\nকিছু নোট যোগ করে দেখুন।",
+  "emptyPinnedCollection": "এই কালেকশনে কোনো আয়াত পিন করা হয়নি।\nআয়াত পিন করে দেখুন।",
+  "noContentAvailable": "কোনো কনটেন্ট পাওয়া যায়নি।",
+  "failedToLoadCollections": "কালেকশন লোড করতে ব্যর্থ: {error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "{collectionType} নাম দিয়ে খুঁজুন...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "sortBy": "সর্ট করুন",
+  "noCollectionAddedYet": "এখনো কোনো {collectionType} যোগ করা হয়নি",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "pinnedItemsCount": "{count} পিনড আইটেম",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notesCount": "{count} নোট",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "খালি নাম অনুমোদিত নয়",
+  "updatedTo": "{collectionName} এ আপডেট করা হয়েছে",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "changeName": "নাম চেঞ্জ করুন",
+  "changeColor": "রঙ চেঞ্জ করুন",
+  "colorUpdated": "রঙ আপডেট করা হয়েছে",
+  "collectionDeleted": "{collectionName} ডিলিট করা হয়েছে",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
+  "delete": "ডিলিট",
+  "save": "সেভ",
+  "collectionNameCannotBeEmpty": "কালেকশন নাম খালি হতে পারবে না।",
+  "addedNewCollection": "নতুন কালেকশন যোগ করা হয়েছে",
+  "ayahCount": "{count} আয়াত",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "byNameAtoZ": "নাম A-Z",
+  "byNameZtoA": "নাম Z-A",
+  "byElementNumberAscending": "এলিমেন্ট নম্বর অ্যাসেন্ডিং",
+  "byElementNumberDescending": "এলিমেন্ট নম্বর ডিসেন্ডিং",
+  "byUpdateDateAscending": "আপডেট ডেট অ্যাসেন্ডিং",
+  "byUpdateDateDescending": "আপডেট ডেট ডিসেন্ডিং",
+  "byCreateDateAscending": "ক্রিয়েট ডেট অ্যাসেন্ডিং",
+  "byCreateDateDescending": "ক্রিয়েট ডেট ডিসেন্ডিং",
+  "translationNotFound": "অনুবাদ পাওয়া যায়নি",
+  "translationTitle": "অনুবাদ:",
+  "footNoteTitle": "ফুট নোট:",
+  "wordByWordTranslation": "শব্দে শব্দে অনুবাদ:",
+  "tafsirButton": "তাফসীর",
+  "shareButton": "শেয়ার",
+  "addNoteButton": "নোট যোগ করুন",
+  "pinToCollectionButton": "কালেকশনে পিন করুন",
+  "shareAsText": "টেক্সট হিসেবে শেয়ার",
+  "copiedWithTafsir": "তাফসীর সহ কপি করা হয়েছে",
+  "shareAsImage": "ইমেজ হিসেবে শেয়ার",
+  "shareWithTafsir": "তাফসীর সহ শেয়ার",
+  "notFound": "পাওয়া যায়নি",
+  "noteContentCannotBeEmpty": "নোট কনটেন্ট খালি হতে পারবে না।",
+  "noteSavedSuccessfully": "নোট সফলভাবে সেভ করা হয়েছে!",
+  "selectCollections": "কালেকশন নির্বাচন করুন",
+  "addNote": "নোট যোগ করুন",
+  "writeCollectionName": "কালেকশন নাম লিখুন...",
+  "noCollectionsYetAddANewOne": "এখনো কোনো কালেকশন নেই। নতুন একটা যোগ করুন!",
+  "pleaseWriteYourNoteFirst": "প্রথমে আপনার নোট লিখুন।",
+  "noCollectionSelected": "কোনো কালেকশন নির্বাচিত নয়",
+  "saveNote": "নোট সেভ করুন",
+  "nextSelectCollections": "পরবর্তী: কালেকশন নির্বাচন করুন",
+  "addToPinned": "পিনডে যোগ করুন",
+  "pinnedSavedSuccessfully": "পিনড সফলভাবে সেভ করা হয়েছে!",
+  "savePinned": "পিনড সেভ করুন",
+  "closeAudioController": "অডিও কন্ট্রোলার বন্ধ করুন",
+  "previous": "পূর্ববর্তী",
+  "rewind": "রিওয়াইন্ড",
+  "fastForward": "ফাস্ট ফরওয়ার্ড",
+  "playNextAyah": "পরবর্তী আয়াত চালান",
+  "repeat": "রিপিট",
+  "playAsPlaylist": "প্লেলিস্ট হিসেবে চালান",
+  "style": "স্টাইল: {style}",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "stopAndClose": "বন্ধ করুন এবং ক্লোজ করুন",
+  "play": "চালান",
+  "pause": "পজ",
+  "selectReciter": "তিলাওয়াতকারী নির্বাচন করুন",
+  "source": "সোর্স: {source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "newText": "নতুন",
+  "more": "আরও: ",
+  "cacheNotFound": "ক্যাশ পাওয়া যায়নি",
+  "cacheSize": "ক্যাশ সাইজ",
+  "error": "এরর: {error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "clean": "ক্লিন",
+  "lastModified": "শেষ মডিফাইড",
+  "oneYearAgo": "১ বছর আগে",
+  "monthsAgo": "{number} মাস আগে",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "weeksAgo": "{number} সপ্তাহ আগে",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "daysAgo": "{number} দিন আগে",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursAgo": "{hour} ঘণ্টা আগে",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutAlQuran": "আল কুরআন সম্পর্কে",
+  "appFullName": "আল কুরআন (তাফসীর, নামাজ, কিবলা, অডিও)",
+  "appDescription": "একটা সম্পূর্ণ ইসলামিক অ্যাপ অ্যান্ড্রয়েড, আইওএস, ম্যাকওএস, ওয়েব, লিনাক্স এবং উইন্ডোজের জন্য, কুরআন পড়া তাফসীর এবং একাধিক অনুবাদ (শব্দে শব্দে সহ), বিশ্বব্যাপী নামাজের সময় নোটিফিকেশন সহ, কিবলা কম্পাস, এবং শব্দে শব্দে সিঙ্ক্রোনাইজড অডিও তিলাওয়াত।",
+  "dataSourcesNote": "নোট: কুরআন টেক্সট, তাফসীর, অনুবাদ, এবং অডিও রিসোর্স Quran.com, Everyayah.com, এবং অন্যান্য যাচাইকৃত ওপেন সোর্স থেকে নেয়া।",
+  "adFreePromise": "এই অ্যাপ আল্লাহর সন্তুষ্টির জন্য তৈরি। তাই এটা সবসময় অ্যাড-ফ্রি থাকবে।",
+  "coreFeatures": "মূল ফিচারসমূহ",
+  "coreFeaturesDescription": "আল কুরআন v3 এর মূল ফাংশনালিটি অন্বেষণ করুন যা আপনার দৈনিক ইসলামিক অনুশীলনের জন্য অপরিহার্য টুল:",
+  "prayerTimesTitle": "নামাজের সময় এবং অ্যালার্ট",
+  "prayerTimesDescription": "বিভিন্ন ক্যালকুলেশন মেথড ব্যবহার করে বিশ্বের যেকোনো লোকেশনের জন্য সঠিক নামাজের সময়। আজান নোটিফিকেশন সহ রিমাইন্ডার সেট করুন।",
+  "qiblaDirectionTitle": "কিবলা দিক",
+  "qiblaDirectionDescription": "সহজে কিবলা দিক খুঁজুন স্পষ্ট এবং সঠিক কম্পাস ভিউ সহ।",
+  "translationTafsirTitle": "কুরআন অনুবাদ এবং তাফসীর",
+  "translationTafsirDescription": "৬৯ ভাষায় ১২০+ অনুবাদ বই (শব্দে শব্দে সহ), এবং ৩০+ তাফসীর বই অ্যাক্সেস করুন।",
+  "wordByWordAudioTitle": "শব্দে শব্দে অডিও এবং হাইলাইটিং",
+  "wordByWordAudioDescription": "ইমার্সিভ লার্নিং অভিজ্ঞতার জন্য সিঙ্ক্রোনাইজড শব্দে শব্দে অডিও তিলাওয়াত এবং হাইলাইটিং সহ অনুসরণ করুন।",
+  "ayahAudioRecitationTitle": "আয়াত অডিও তিলাওয়াত",
+  "ayahAudioRecitationDescription": "৪০+ বিখ্যাত তিলাওয়াতকারীর থেকে পূর্ণ আয়াত তিলাওয়াত শুনুন।",
+  "notesCloudBackupTitle": "নোটস ক্লাউড ব্যাকআপ সহ",
+  "notesCloudBackupDescription": "ব্যক্তিগত নোট এবং চিন্তা সেভ করুন, ক্লাউডে নিরাপদে ব্যাকআপ (ফিচার ডেভেলপমেন্টে/শীঘ্রই আসছে)।",
+  "crossPlatformSupportTitle": "ক্রস-প্ল্যাটফর্ম সাপোর্ট",
+  "crossPlatformSupportDescription": "অ্যান্ড্রয়েড, ওয়েব, লিনাক্স, এবং উইন্ডোজে সাপোর্টেড।",
+  "backgroundAudioPlaybackTitle": "ব্যাকগ্রাউন্ড অডিও প্লেব্যাক",
+  "backgroundAudioPlaybackDescription": "অ্যাপ ব্যাকগ্রাউন্ডে থাকলেও কুরআন তিলাওয়াত শোনা চালিয়ে যান।",
+  "audioDataCachingTitle": "অডিও এবং ডেটা ক্যাশিং",
+  "audioDataCachingDescription": "অফলাইন ক্যাপাবিলিটি এবং উন্নত প্লেব্যাকের জন্য শক্তিশালী অডিও এবং কুরআন ডেটা ক্যাশিং।",
+  "minimalisticInterfaceTitle": "মিনিমালিস্টিক এবং ক্লিন ইন্টারফেস",
+  "minimalisticInterfaceDescription": "সহজ নেভিগেশন ইন্টারফেস ইউজার এক্সপিরিয়েন্স এবং পড়ার উপর ফোকাস সহ।",
+  "optimizedPerformanceTitle": "অপটিমাইজড পারফরম্যান্স এবং সাইজ",
+  "optimizedPerformanceDescription": "ফিচার-রিচ অ্যাপ্লিকেশন যা লাইটওয়েট এবং পারফরম্যান্ট ডিজাইন করা।",
+  "languageSupport": "ভাষা সাপোর্ট",
+  "languageSupportDescription": "এই অ্যাপ্লিকেশন বিশ্বব্যাপী অ্যাক্সেসিবল হওয়ার জন্য ডিজাইন করা, নিম্নলিখিত ভাষাসমূহ সাপোর্ট করে (এবং আরও যোগ হচ্ছে):",
+  "technologyAndResources": "টেকনোলজি এবং রিসোর্স",
+  "technologyAndResourcesDescription": "এই অ্যাপ কাটিং-এজ টেকনোলজি এবং নির্ভরযোগ্য রিসোর্স ব্যবহার করে তৈরি:",
+  "flutterFrameworkTitle": "ফ্লাটার ফ্রেমওয়ার্ক",
+  "flutterFrameworkDescription": "ফ্লাটার দিয়ে তৈরি সুন্দর, নেটিভলি কম্পাইল্ড, মাল্টি-প্ল্যাটফর্ম এক্সপিরিয়েন্স একটা সিঙ্গেল কোডবেস থেকে।",
+  "advancedAudioEngineTitle": "অ্যাডভান্সড অডিও ইঞ্জিন",
+  "advancedAudioEngineDescription": "`just_audio` এবং `just_audio_background` ফ্লাটার প্যাকেজ দিয়ে চালিত শক্তিশালী অডিও প্লেব্যাক এবং কন্ট্রোলের জন্য।",
+  "reliableQuranDataTitle": "নির্ভরযোগ্য কুরআন ডেটা",
+  "reliableQuranDataDescription": "আল কুরআন টেক্সট, অনুবাদ, তাফসীর, এবং অডিও যাচাইকৃত ওপেন এপিআই এবং ডেটাবেস যেমন Quran.com এবং Everyayah.com থেকে নেয়া।",
+  "prayerTimeEngineTitle": "নামাজের সময় ইঞ্জিন",
+  "prayerTimeEngineDescription": "সঠিক নামাজের সময়ের জন্য প্রতিষ্ঠিত ক্যালকুলেশন মেথড ব্যবহার করে। নোটিফিকেশন `flutter_local_notifications` এবং ব্যাকগ্রাউন্ড টাস্ক দিয়ে হ্যান্ডেল করা।",
+  "crossPlatformSupport": "ক্রস প্ল্যাটফর্ম সাপোর্ট",
+  "crossPlatformSupportDescription2": "বিভিন্ন প্ল্যাটফর্মে সিমলেস অ্যাক্সেস উপভোগ করুন:",
+  "android": "অ্যান্ড্রয়েড",
+  "ios": "আইওএস",
+  "macos": "ম্যাকওএস",
+  "web": "ওয়েব",
+  "linux": "লিনাক্স",
+  "windows": "উইন্ডোজ",
+  "ourLifetimePromise": "আমাদের লাইফটাইম প্রমিস",
+  "lifetimePromiseDescription": "আমি ব্যক্তিগতভাবে প্রমিস করছি এই অ্যাপ্লিকেশনের জন্য আমার জীবনভর সাপোর্ট এবং মেইনটেন্যান্স প্রদান করব, ইনশাআল্লাহ। আমার লক্ষ্য এই অ্যাপ উম্মাহর জন্য বছরের পর বছর উপকারী রিসোর্স হিসেবে থাকবে।",
+  "fajr": "ফজর",
+  "sunrise": "সূর্যোদয়",
+  "dhuhr": "জোহর",
+  "asr": "আসর",
+  "maghrib": "মাগরিব",
+  "isha": "ইশা",
+  "midnight": "মধ্যরাত",
+  "alarm": "অ্যালার্ম",
+  "notification": "নোটিফিকেশন",
+  "formattedAddress": "{subAdministrativeArea}, {administrativeArea}, {country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
+  "quranScriptTajweed": "তাজউইদ",
+  "quranScriptUthmani": "উসমানি",
+  "quranScriptIndopak": "ইন্দোপাক",
+  "sajdaAyah": "সাজদা আয়াত",
+  "required": "প্রয়োজনীয়",
+  "optional": "অপশনাল",
+  "notificationScheduleWarning": "নোট: স্কেডিউল্ড নোটিফিকেশন বা রিমাইন্ডার আপনার ফোনের ওএস ব্যাকগ্রাউন্ড প্রসেস রেস্ট্রিকশনের কারণে মিস হতে পারে। উদাহরণস্বরূপ: ভিভোর অরিজিন ওএস, স্যামসাংয়ের ওয়ান ইউআই, অপ্পোর কালারওএস ইত্যাদি কখনো কখনো স্কেডিউল্ড নোটিফিকেশন বা রিমাইন্ডার কিল করে। দয়া করে আপনার ওএস সেটিংস চেক করুন যাতে অ্যাপ ব্যাকগ্রাউন্ড প্রসেস থেকে রেস্ট্রিক্ট না হয়।",
+  "scrollWithRecitation": "তিলাওয়াতের সাথে স্ক্রল করুন",
+  "quickAccess": "কুইক অ্যাক্সেস",
+  "initiallyScrollAyah": "প্রথমে আয়াতে স্ক্রল করুন",
+  "tajweedGuide": "তাজউইদ গাইড",
+  "scrollWithRecitationDesc": "চালু থাকলে, কুরআন আয়াত অডিও তিলাওয়াতের সাথে অটোম্যাটিক স্ক্রল করবে।",
   "configuration": "কনফিগারেশন",
-  "restoreFromBackup": "ব্যাকআপ থেকে পুনরুদ্ধার করুন",
-  "history": "ইতিহাস",
-  "search": "অনুসন্ধান করুন",
+  "restoreFromBackup": "ব্যাকআপ থেকে রিস্টোর করুন",
+  "history": "হিস্ট্রি",
+  "search": "খুঁজুন",
   "useAudioStream": "অডিও স্ট্রিম ব্যবহার করুন",
-  "useAudioStreamDesc": "ডাউনলোড করার পরিবর্তে সরাসরি ইন্টারনেট থেকে অডিও স্ট্রিম করুন।",
+  "useAudioStreamDesc": "ইন্টারনেট থেকে সরাসরি অডিও স্ট্রিম করুন ডাউনলোড না করে।",
   "notUseAudioStreamDesc": "অফলাইন ব্যবহারের জন্য অডিও ডাউনলোড করুন এবং ডেটা খরচ কমান।",
   "audioSettings": "অডিও সেটিংস",
-  "playbackSpeed": "প্লেব্যাক গতি",
-  "playbackSpeedDesc": "কুরআন তেলাওয়াতের গতি সামঞ্জস্য করুন।",
-  "waitForCurrentDownloadToFinish": "বর্তমান ডাউনলোড শেষ হওয়ার জন্য অনুগ্রহ করে অপেক্ষা করুন।",
+  "playbackSpeed": "প্লেব্যাক স্পিড",
+  "playbackSpeedDesc": "কুরআন তিলাওয়াতের স্পিড অ্যাডজাস্ট করুন।",
+  "waitForCurrentDownloadToFinish": "বর্তমান ডাউনলোড শেষ হওয়ার জন্য অপেক্ষা করুন।",
   "areYouSure": "আপনি কি নিশ্চিত?",
-  "checkYourInternetConnection": "আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।",
-  "audioDownload": "অডিও ডাউনলোড",
+  "checkYourInternetConnection": "আপনার ইন্টারনেট কানেকশন চেক করুন।",
+  "audioDownloadAlert": "{totalVersesCount} আয়াতের মধ্যে {requiredDownload} ডাউনলোড করতে হবে।",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
   "download": "ডাউনলোড",
-  "audioDownloadAlert": "{totalVersesCount} আয়াতের মধ্যে {requiredDownload} টি ডাউনলোড করতে হবে।",
-  "am": "AM",
-  "pm": "PM"
+  "audioDownload": "অডিও ডাউনলোড",
+  "am": "এএম",
+  "pm": "পিএম",
+  "optimizingQuranScript": "কুরআন স্ক্রিপ্ট অপটিমাইজ করা হচ্ছে",
+  "supportOnGithub": "GitHub-এ সমর্থন করুন"
 }
