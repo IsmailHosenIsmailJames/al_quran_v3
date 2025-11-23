@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:dartx/dartx.dart";
@@ -17,7 +17,6 @@ import "../../../../theme/controller/theme_state.dart";
 class TajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
-  final String? highlightAyah;
   final bool? enableWordByWordHighlight;
 
   const TajweedPageRenderer({
@@ -25,14 +24,13 @@ class TajweedPageRenderer extends StatelessWidget {
     required this.ayahsKey,
     this.baseTextStyle,
     this.enableWordByWordHighlight,
-    this.highlightAyah,
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
 
-    String? wordKey = "";
+    String? highlightingWord;
 
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -70,8 +68,8 @@ class TajweedPageRenderer extends StatelessWidget {
                             (current.currentDuration ?? Duration.zero) &&
                         Duration(milliseconds: word[2]) >
                             (current.currentDuration ?? Duration.zero)) {
-                      if (wordKey != "$currentAyahKey:${word[0]}") {
-                        wordKey = "$currentAyahKey:${word[0]}";
+                      if (highlightingWord != "$currentAyahKey:${word[0]}") {
+                        highlightingWord = "$currentAyahKey:${word[0]}";
                         return true;
                       }
                       return false;
@@ -79,31 +77,32 @@ class TajweedPageRenderer extends StatelessWidget {
                   }
                 }
               } else {
-                if (wordKey != null) {
-                  wordKey = null;
+                if (highlightingWord != null) {
+                  highlightingWord = null;
                   return true;
                 }
               }
               return false;
             },
             builder: (context, positionState) {
+              final highlightingAyahKey =
+                  context.read<AyahKeyCubit>().state.current;
               return Text.rich(
                 TextSpan(
                   children:
                       ayahsKey.map((ayahKey) {
-                        List words = getWordListOfAyah(
+                        List words = QuranScriptFunction.getWordListOfAyah(
                           QuranScriptType.tajweed,
                           ayahKey.split(":").first,
                           ayahKey.split(":").last,
                         );
-
                         return TextSpan(
                           style: TextStyle(
                             backgroundColor:
-                                highlightAyah == ayahKey
+                                highlightingAyahKey == ayahKey
                                     ? isDark
-                                        ? Colors.white.withValues(alpha: 0.05)
-                                        : Colors.black.withValues(alpha: 0.05)
+                                        ? Colors.white.withValues(alpha: 0.08)
+                                        : Colors.black.withValues(alpha: 0.08)
                                     : null,
                           ),
                           children:
@@ -116,13 +115,11 @@ class TajweedPageRenderer extends StatelessWidget {
                                         baseTextStyle?.fontFamily ?? "QPC_Hafs",
                                     height: baseTextStyle?.height,
                                     backgroundColor:
-                                        (wordKey == "$ayahKey:${index + 1}" &&
-                                                    enableWordByWordHighlight ==
-                                                        true) ||
-                                                segmentsReciterState
-                                                        .showAyahHilight ==
-                                                    ayahKey
-                                            ? themeState.primaryShade200
+                                        (highlightingWord ==
+                                                    "$ayahKey:${index + 1}" &&
+                                                enableWordByWordHighlight ==
+                                                    true)
+                                            ? themeState.primaryShade300
                                             : null,
                                   ),
                                   surahNumber: ayahKey.split(":").first.toInt(),

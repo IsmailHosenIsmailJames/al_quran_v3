@@ -26,9 +26,20 @@ class SegmentedResourcesManager {
     }
   }
 
+  static Map segmentsCache = {};
   static List? getAyahSegments(String ayahKey) {
     if (_segmentsBox?.isOpen == false) return null;
-    Map? audioTimeStamp = _segmentsBox?.get(ayahKey, defaultValue: null);
+    final data = segmentsCache[ayahKey];
+    if (data != null) {
+      if (data == -1) return null;
+    }
+    Map? audioTimeStamp =
+        data ?? _segmentsBox?.get(ayahKey, defaultValue: null);
+
+    if (!segmentsCache.containsKey(ayahKey)) {
+      segmentsCache[ayahKey] = audioTimeStamp;
+    }
+
     List<List>? segments;
     if (audioTimeStamp != null) {
       segments = List<List>.from(audioTimeStamp["segments"]);
@@ -92,7 +103,7 @@ class SegmentedResourcesManager {
       final String boxName = praseStringToBoxName(url);
       if (response.statusCode == 200) {
         _segmentsBox = await Hive.openBox(boxName);
-        context.read<ResourcesProgressCubitCubit>().updateProgress(
+        context.read<ResourcesProgressCubit>().updateProgress(
           null,
           appLocalizations.processingSegmentedQuranRecitation,
         );

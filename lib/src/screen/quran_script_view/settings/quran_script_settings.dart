@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -9,6 +11,7 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
+import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -74,37 +77,6 @@ class QuranScriptSettings extends StatelessWidget {
               ),
             ),
             const Gap(20),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(appLocalizations.quranLineHeight, style: titleStyle),
-                Text(
-                  localizedNumber(context, quranViewState.lineHeight),
-                  style: titleStyle,
-                ),
-              ],
-            ),
-
-            const Gap(10),
-
-            SliderTheme(
-              data: const SliderThemeData(padding: EdgeInsets.zero),
-              child: Slider.adaptive(
-                value: quranViewState.lineHeight,
-                max: 5,
-                min: 0.7,
-                divisions: 100,
-                label:
-                    context.read<QuranViewCubit>().state.lineHeight.toString(),
-                onChanged: (value) {
-                  context.read<QuranViewCubit>().changeLineHeight(
-                    value.toPrecision(2),
-                  );
-                },
-              ),
-            ),
-            const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -141,6 +113,38 @@ class QuranScriptSettings extends StatelessWidget {
                 },
               ),
             ),
+            const Gap(20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(appLocalizations.quranLineHeight, style: titleStyle),
+                Text(
+                  localizedNumber(context, quranViewState.lineHeight),
+                  style: titleStyle,
+                ),
+              ],
+            ),
+
+            const Gap(10),
+
+            SliderTheme(
+              data: const SliderThemeData(padding: EdgeInsets.zero),
+              child: Slider.adaptive(
+                value: quranViewState.lineHeight,
+                max: 5,
+                min: 0.7,
+                divisions: 100,
+                label:
+                    context.read<QuranViewCubit>().state.lineHeight.toString(),
+                onChanged: (value) {
+                  context.read<QuranViewCubit>().changeLineHeight(
+                    value.toPrecision(2),
+                  );
+                },
+              ),
+            ),
+
             const Gap(10),
             SwitchListTile(
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
@@ -339,7 +343,25 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          appBar: AppBar(title: Text(appLocalizations.quranScriptSettings)),
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            flexibleSpace: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: context.read<ThemeCubit>().state.mutedGray,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            title: Text(appLocalizations.quranScriptSettings),
+            actions: [themeIconButton(context)],
+          ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.only(
               left: 10,
@@ -347,7 +369,7 @@ class QuranScriptSettings extends StatelessWidget {
               top: 10,
               bottom: 60,
             ),
-            child: bodyWidget,
+            child: SafeArea(child: bodyWidget),
           ),
         )
         : bodyWidget;

@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -23,8 +24,9 @@ Widget getAyahCardForShareAsImage(
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
   String arabic,
-  String translation,
-  Map footNote,
+  List<String> translation,
+  List<Map> footNote,
+  List<TranslationBookModel?> booksInfo,
   TextStyle scriptTextStyle,
   Brightness brightness,
   ThemeState themeState,
@@ -108,38 +110,68 @@ Widget getAyahCardForShareAsImage(
           l10n.translation,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
-        MediaQuery(
-          data: MediaQuery.of(context),
-          child: Directionality(
-            textDirection: Directionality.of(context),
-            child: Html(data: translation),
-          ),
-        ),
-        keepFootNote ? const Gap(10) : const Gap(0),
-        if (keepFootNote)
-          ...List.generate(footNote.length, (index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${index + 1}.",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  ),
+        ...List.generate(translation.length, (index) {
+          return Column(
+            children: [
+              MediaQuery(
+                data: MediaQuery.of(context),
+                child: Directionality(
+                  textDirection: Directionality.of(context),
+                  child: Html(data: translation[index]),
                 ),
-                MediaQuery(
-                  data: MediaQuery.of(context),
-                  child: Directionality(
-                    textDirection: Directionality.of(context),
-                    child: Html(data: footNote.values.toList()[index]),
-                  ),
+              ),
+              (keepFootNote && footNote[index].isNotEmpty)
+                  ? const Gap(10)
+                  : const Gap(0),
+              if (keepFootNote && footNote[index].isNotEmpty)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(footNote[index].length, (index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(5),
+                        Text(
+                          "${index + 1}.",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        MediaQuery(
+                          data: MediaQuery.of(context),
+                          child: Directionality(
+                            textDirection: Directionality.of(context),
+                            child: Html(
+                              data:
+                                  footNote[index].values
+                                      .elementAt(index)
+                                      .toString(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
-                const Gap(5),
-              ],
-            );
-          }),
+
+              Row(
+                children: [
+                  const Gap(10),
+                  Container(width: 30, height: 2, color: Colors.grey),
+                  const Gap(5),
+                  Text(
+                    booksInfo[index]?.name ?? "",
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+              const Gap(10),
+            ],
+          );
+        }),
       ],
     ),
   );

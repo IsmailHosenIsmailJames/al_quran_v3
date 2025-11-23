@@ -21,17 +21,28 @@ class TafsirResourcesView extends StatefulWidget {
 }
 
 class _TafsirResourcesViewState extends State<TafsirResourcesView> {
-  List<TafsirBookModel> downloadedTafsirs =
-      QuranTafsirFunction.getDownloadedTafsirBooks();
-  TafsirBookModel? selectedTafsir = QuranTafsirFunction.getTafsirSelection();
+  late List<TafsirBookModel> downloadedTafsirs;
+
+  List<TafsirBookModel>? selectedTafsir;
+
   TafsirBookModel? downloadingData;
 
-  void _refreshData() {
-    setState(() {
-      downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
-      selectedTafsir = QuranTafsirFunction.getTafsirSelection();
-      downloadingData = null;
+  void _refreshData() async {
+    downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+    selectedTafsir = await QuranTafsirFunction.getTafsirSelections();
+    downloadingData = null;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
+    QuranTafsirFunction.getTafsirSelections().then((value) {
+      int previousLen = selectedTafsir?.length ?? 0;
+      selectedTafsir = value;
+      if (previousLen == 0) setState(() {});
     });
+    super.initState();
   }
 
   @override
@@ -41,64 +52,76 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-      child: Column(
-        children: List.generate(tafsirInformationWithScore.length, (index) {
-          String languageKey = tafsirInformationWithScore.keys.elementAt(index);
-          List<TafsirBookModel> booksInLanguage =
-              tafsirInformationWithScore[languageKey]
-                  ?.map((e) => TafsirBookModel.fromMap(e))
-                  .toList() ??
-              [];
-          booksInLanguage.sort((a, b) => b.score.compareTo(a.score));
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Column(
+            children: List.generate(tafsirInformationWithScore.length, (index) {
+              String languageKey = tafsirInformationWithScore.keys.elementAt(
+                index,
+              );
+              List<TafsirBookModel> booksInLanguage =
+                  tafsirInformationWithScore[languageKey]
+                      ?.map((e) => TafsirBookModel.fromMap(e))
+                      .toList() ??
+                  [];
+              booksInLanguage.sort((a, b) => b.score.compareTo(a.score));
 
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 4.0),
-            elevation: 0,
-            child: ExpansionTile(
-              key: PageStorageKey(languageKey),
-              title: Text(
-                languageNativeNames[languageKey] ?? languageKey,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              childrenPadding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 4.0,
-              ),
-              children:
-                  booksInLanguage.map((bookData) {
-                    TafsirBookModel? matchedTafsir = downloadedTafsirs
-                        .firstOrNullWhere(
-                          (element) => element.fullPath == bookData.fullPath,
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 4.0),
+                elevation: 0,
+                child: ExpansionTile(
+                  key: PageStorageKey(languageKey),
+                  title: Text(
+                    languageNativeNames[languageKey] ?? languageKey,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  childrenPadding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 4.0,
+                  ),
+                  children:
+                      booksInLanguage.map((bookData) {
+                        TafsirBookModel? matchedTafsir = downloadedTafsirs
+                            .firstOrNullWhere(
+                              (element) =>
+                                  element.fullPath == bookData.fullPath,
+                            );
+                        bool needDownload = matchedTafsir == null;
+                        bool isSelected = false;
+                        if (!needDownload && selectedTafsir != null) {
+                          if (selectedTafsir?.any(
+                                (element) =>
+                                    element.fullPath == matchedTafsir.fullPath,
+                              ) ==
+                              true) {
+                            isSelected = true;
+                          }
+                        }
+
+                        bool isDownloading = false;
+                        if (downloadingData != null) {
+                          if (downloadingData?.fullPath == bookData.fullPath) {
+                            isDownloading = true;
+                          }
+                        }
+                        return _buildBookListTile(
+                          appLocalizations,
+                          bookData,
+                          isSelected,
+                          needDownload,
+                          isDownloading,
+                          themeState,
                         );
-                    bool needDownload = matchedTafsir == null;
-                    bool isSelected = false;
-                    if (!needDownload && selectedTafsir != null) {
-                      if (selectedTafsir?.fullPath == matchedTafsir.fullPath) {
-                        isSelected = true;
-                      }
-                    }
-
-                    bool isDownloading = false;
-                    if (downloadingData != null) {
-                      if (downloadingData?.fullPath == bookData.fullPath) {
-                        isDownloading = true;
-                      }
-                    }
-                    return _buildBookListTile(
-                      appLocalizations,
-                      bookData,
-                      isSelected,
-                      needDownload,
-                      isDownloading,
-                      themeState,
-                    );
-                  }).toList(),
-            ),
-          );
-        }),
+                      }).toList(),
+                ),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }

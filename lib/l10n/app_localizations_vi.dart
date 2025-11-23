@@ -1115,4 +1115,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get pm => 'CH';
+
+  @override
+  String get optimizingQuranScript => 'Tối ưu hóa kịch bản Kinh Qur\'an';
+
+  @override
+  String get supportOnGithub => 'Hỗ trợ trên GitHub';
 }

@@ -1,4 +1,5 @@
 import "dart:developer";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
@@ -49,6 +50,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
     AppLocalizations l10n = AppLocalizations.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    bool isLandscapeViewNeedToShow = screenWidth > 600;
 
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
@@ -56,13 +59,15 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
         double height =
             (state.showUi && state.isInsideQuranPlayer)
                 ? state.isExpanded
-                    ? 120
+                    ? isLandscapeViewNeedToShow
+                        ? 66
+                        : 120
                     : 50
                 : 0;
         double width =
             (state.showUi && state.isInsideQuranPlayer)
                 ? state.isExpanded
-                    ? MediaQuery.of(context).size.width
+                    ? screenWidth
                     : 50
                 : 0;
 
@@ -72,87 +77,140 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               context.read<AudioUiCubit>().expand(true);
             }
           },
-          child: AnimatedContainer(
-            margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: const EdgeInsets.all(5),
-            duration: const Duration(milliseconds: 300),
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              borderRadius:
-                  state.isExpanded
-                      ? BorderRadius.circular(roundedRadius)
-                      : BorderRadius.circular(1000),
-              color:
-                  state.isExpanded
-                      ? Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade900
-                          : Colors.grey.shade100
-                      : themeState.primary,
-              border: Border.all(color: themeState.primary, width: 0.5),
+          child: TweenAnimationBuilder<double>(
+            tween: Tween<double>(
+              begin: 1000,
+              end: state.isExpanded ? roundedRadius : 1000,
             ),
-            child:
-                (state.showUi && state.isInsideQuranPlayer)
-                    ? Stack(
+            duration: const Duration(milliseconds: 300),
+            builder: (context, radius, child) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.only(left: 10, right: 10),
+                height: height,
+                width: width,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(radius),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Stack(
                       children: [
-                        if (!state.isExpanded)
-                          SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: BlocBuilder<PlayerStateCubit, PlayerState>(
-                              builder:
-                                  (context, state) => Icon(
-                                    state.isPlaying
-                                        ? Icons.pause_rounded
-                                        : Icons.play_arrow_rounded,
-                                    color: Colors.white,
-                                    size: 36,
-                                  ),
-                            ),
+                        // Background Color
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          decoration: BoxDecoration(
+                            color:
+                                state.isExpanded
+                                    ? Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.grey.shade900.withValues(
+                                          alpha: 0.6,
+                                        )
+                                        : Colors.grey.shade200.withValues(
+                                          alpha: 0.6,
+                                        )
+                                    : themeState.primary,
+                            borderRadius: BorderRadius.circular(radius),
                           ),
-                        if (state.isExpanded)
-                          Stack(
-                            children: [
-                              getFullAudioControllerUI(l10n),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: IconButton(
-                                    style: IconButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      iconSize: 15,
-                                    ),
-                                    onPressed: () {
-                                      if (state.isExpanded) {
-                                        context.read<AudioUiCubit>().expand(
-                                          false,
-                                        );
-                                      }
-                                    },
-                                    tooltip: l10n.closeAudioController,
-                                    icon: const Icon(
-                                      Icons.close_fullscreen_rounded,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        ),
+                        // Content
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child:
+                              (state.showUi && state.isInsideQuranPlayer)
+                                  ? Stack(
+                                    children: [
+                                      if (!state.isExpanded)
+                                        SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                          child: BlocBuilder<
+                                            PlayerStateCubit,
+                                            PlayerState
+                                          >(
+                                            builder:
+                                                (context, state) => Icon(
+                                                  state.isPlaying
+                                                      ? Icons.pause_rounded
+                                                      : Icons
+                                                          .play_arrow_rounded,
+                                                  color: Colors.white,
+                                                  size: 36,
+                                                ),
+                                          ),
+                                        ),
+                                      if (state.isExpanded)
+                                        Stack(
+                                          children: [
+                                            getFullAudioControllerUI(
+                                              l10n,
+                                              isLandscapeViewNeedToShow,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: SizedBox(
+                                                height: 30,
+                                                width: 30,
+                                                child: IconButton(
+                                                  style: IconButton.styleFrom(
+                                                    padding: EdgeInsets.zero,
+                                                    iconSize: 15,
+                                                  ),
+                                                  onPressed: () {
+                                                    if (state.isExpanded) {
+                                                      context
+                                                          .read<AudioUiCubit>()
+                                                          .expand(false);
+                                                    }
+                                                  },
+                                                  tooltip:
+                                                      l10n.closeAudioController,
+                                                  icon: const Icon(
+                                                    Icons
+                                                        .close_fullscreen_rounded,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                    ],
+                                  )
+                                  : null,
+                        ),
                       ],
-                    )
-                    : null,
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         );
       },
     );
   }
 
-  Widget getFullAudioControllerUI(AppLocalizations l10n) {
+  Widget getFullAudioControllerUI(AppLocalizations l10n, bool isLandscapeView) {
+    return isLandscapeView
+        ? Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: playerSliders()),
+            const VerticalDivider(width: 8),
+            Expanded(child: playerControllers(l10n)),
+          ],
+        )
+        : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [playerSliders(), playerControllers(l10n), const Gap(5)],
+        );
+  }
+
+  Widget playerSliders() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
           builder: (context, state) {
@@ -233,256 +291,251 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             }
           },
         ),
-
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: BlocBuilder<AyahKeyCubit, AyahKeyManagement?>(
-            builder: (context, state) {
-              List ayahList = state?.ayahList ?? [];
-              ayahList.removeWhere((element) => element.runtimeType == int);
-              int currentPlayingIndex = ayahList.indexOf(state?.current);
-              if (currentPlayingIndex == -1) currentPlayingIndex = 0;
-
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 30,
-                    width: 30,
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        iconSize: 18,
-                      ),
-                      onPressed: () {
-                        AudioPlayerManager.stopListeningAudioPlayerState();
-                      },
-                      tooltip: l10n.stopAndClose,
-                      icon: const Icon(Icons.close_rounded),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed:
-                        int.parse(state?.current.split(":").last ?? "0") > 1
-                            ? () {
-                              if (state?.ayahList.length == 1) {
-                                int? currentSurahNumber = int.tryParse(
-                                  state?.current.split(":").first ?? "",
-                                );
-                                if (currentSurahNumber == null) return;
-                                List tempAyahList = getListOfAyahKey(
-                                  startAyahKey: "$currentSurahNumber:1",
-                                  endAyahKey: getEndAyahKeyFromSurahNumber(
-                                    currentSurahNumber,
-                                  ),
-                                );
-                                tempAyahList.removeWhere(
-                                  (element) => element.runtimeType == int,
-                                );
-                                int index = tempAyahList.indexOf(
-                                  state?.current ?? "",
-                                );
-                                if (index != -1) {
-                                  AudioPlayerManager.playSingleAyah(
-                                    ayahKey: tempAyahList[index - 1],
-                                    reciterInfoModel:
-                                        context
-                                            .read<SegmentedQuranReciterCubit>()
-                                            .state,
-                                    isInsideQuran: true,
-                                  );
-                                }
-                              } else {
-                                AudioPlayerManager.audioPlayer.seekToPrevious();
-                              }
-                            }
-                            : null,
-                    tooltip: l10n.previous,
-                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
-
-                    icon: const Icon(Icons.skip_previous_rounded),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Duration duration =
-                          AudioPlayerManager.audioPlayer.position;
-                      int inMilSec = duration.inMilliseconds - 5000;
-                      if (inMilSec < 0) inMilSec = 0;
-                      AudioPlayerManager.audioPlayer.seek(
-                        Duration(milliseconds: inMilSec),
-                      );
-                    },
-                    tooltip: l10n.rewind,
-                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                    icon: const Icon(Icons.replay_5_rounded),
-                  ),
-                  BlocBuilder<PlayerStateCubit, PlayerState>(
-                    builder: (context, state) {
-                      return IconButton(
-                        onPressed: () async {
-                          AudioPlayerManager.audioPlayer.playing
-                              ? AudioPlayerManager.audioPlayer.pause()
-                              : AudioPlayerManager.audioPlayer.play();
-                        },
-                        tooltip: state.isPlaying ? l10n.pause : l10n.play,
-                        iconSize: 40,
-                        style: IconButton.styleFrom(
-                          padding: const EdgeInsets.all(5),
-                        ),
-                        icon: Icon(
-                          state.isPlaying
-                              ? Icons.pause_rounded
-                              : Icons.play_arrow_rounded,
-                        ),
-                      );
-                    },
-                  ),
-
-                  IconButton(
-                    onPressed: () {
-                      Duration? position =
-                          AudioPlayerManager.audioPlayer.position;
-
-                      Duration? maxDuration =
-                          AudioPlayerManager.audioPlayer.duration;
-
-                      AudioPlayerManager.audioPlayer.duration;
-                      int inMilSec = position.inMilliseconds + 5000;
-                      if ((maxDuration?.inMilliseconds ??
-                              MediaQuery.of(context).size.width) <
-                          inMilSec) {
-                        inMilSec = maxDuration?.inMilliseconds ?? 0;
-                      }
-                      AudioPlayerManager.audioPlayer.seek(
-                        Duration(milliseconds: inMilSec),
-                      );
-                    },
-                    tooltip: l10n.fastForward,
-                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                    icon: const Icon(Icons.forward_5_rounded),
-                  ),
-
-                  IconButton(
-                    onPressed:
-                        (ayahList.isNotEmpty &&
-                                int.parse(
-                                      state?.current.split(":").last ?? "0",
-                                    ) <
-                                    quranAyahCount[int.parse(
-                                          ayahList.first.split(":").first,
-                                        ) -
-                                        1])
-                            ? () {
-                              if (state?.ayahList.length == 1) {
-                                int? currentSurahNumber = int.tryParse(
-                                  state?.current.split(":").first ?? "",
-                                );
-                                if (currentSurahNumber == null) return;
-                                List tempAyahList = getListOfAyahKey(
-                                  startAyahKey: "$currentSurahNumber:1",
-                                  endAyahKey: getEndAyahKeyFromSurahNumber(
-                                    currentSurahNumber,
-                                  ),
-                                );
-                                tempAyahList.removeWhere(
-                                  (element) => element.runtimeType == int,
-                                );
-                                int index = tempAyahList.indexOf(
-                                  state?.current ?? "",
-                                );
-                                if (index != -1) {
-                                  AudioPlayerManager.playSingleAyah(
-                                    ayahKey: tempAyahList[index + 1],
-                                    reciterInfoModel:
-                                        context
-                                            .read<SegmentedQuranReciterCubit>()
-                                            .state,
-                                    isInsideQuran: true,
-                                  );
-                                }
-                              } else {
-                                AudioPlayerManager.audioPlayer.seekToNext();
-                              }
-                            }
-                            : null,
-                    tooltip: l10n.playNextAyah,
-                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                    icon: const Icon(Icons.skip_next_rounded),
-                  ),
-
-                  if (ayahList.length != 1)
-                    IconButton(
-                      onPressed: () {
-                        if (AudioPlayerManager.audioPlayer.loopMode ==
-                            just_audio.LoopMode.one) {
-                          AudioPlayerManager.audioPlayer.setLoopMode(
-                            just_audio.LoopMode.all,
-                          );
-                        } else if (AudioPlayerManager.audioPlayer.loopMode ==
-                            just_audio.LoopMode.all) {
-                          AudioPlayerManager.audioPlayer.setLoopMode(
-                            just_audio.LoopMode.off,
-                          );
-                        } else {
-                          AudioPlayerManager.audioPlayer.setLoopMode(
-                            just_audio.LoopMode.one,
-                          );
-                        }
-                      },
-                      tooltip: l10n.repeat,
-                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                      icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
-                        just_audio.LoopMode.one => const Icon(
-                          Icons.repeat_one_rounded,
-                        ),
-                        just_audio.LoopMode.all => const Icon(
-                          Icons.repeat_rounded,
-                        ),
-                        just_audio.LoopMode.off => Icon(
-                          Icons.repeat_rounded,
-                          color: Colors.grey.withValues(alpha: 0.6),
-                        ),
-                      },
-                    ),
-
-                  if (ayahList.length == 1)
-                    IconButton(
-                      onPressed: () {
-                        int surahNumber = int.parse(
-                          ayahList.first.split(":").first,
-                        );
-                        int currentAyahNumber = int.parse(
-                          ayahList.first.split(":").last,
-                        );
-                        String endAyahKey = getEndAyahKeyFromSurahNumber(
-                          surahNumber,
-                        );
-
-                        String startAyahKey = "$surahNumber:1";
-
-                        AudioPlayerManager.playMultipleAyahAsPlaylist(
-                          startAyahKey: startAyahKey,
-                          endAyahKey: endAyahKey,
-                          reciterInfoModel:
-                              context.read<SegmentedQuranReciterCubit>().state,
-                          initialIndex: currentAyahNumber - 1,
-                          instantPlay: AudioPlayerManager.audioPlayer.playing,
-                          isInsideQuran: true,
-                        );
-                      },
-                      tooltip: l10n.playAsPlaylist,
-                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                      icon: const Icon(Icons.playlist_play_rounded),
-                    ),
-                ],
-              );
-            },
-          ),
-        ),
-
-        const Gap(5),
       ],
+    );
+  }
+
+  SingleChildScrollView playerControllers(AppLocalizations l10n) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.only(right: 15),
+      child: BlocBuilder<AyahKeyCubit, AyahKeyManagement?>(
+        builder: (context, state) {
+          List ayahList = state?.ayahList ?? [];
+          ayahList.removeWhere((element) => element.runtimeType == int);
+          int currentPlayingIndex = ayahList.indexOf(state?.current);
+          if (currentPlayingIndex == -1) currentPlayingIndex = 0;
+
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 30,
+                width: 30,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    iconSize: 18,
+                  ),
+                  onPressed: () {
+                    AudioPlayerManager.stopListeningAudioPlayerState();
+                  },
+                  tooltip: l10n.stopAndClose,
+                  icon: const Icon(Icons.close_rounded),
+                ),
+              ),
+              IconButton(
+                onPressed:
+                    int.parse(state?.current.split(":").last ?? "0") > 1
+                        ? () {
+                          if (state?.ayahList.length == 1) {
+                            int? currentSurahNumber = int.tryParse(
+                              state?.current.split(":").first ?? "",
+                            );
+                            if (currentSurahNumber == null) return;
+                            List tempAyahList = getListOfAyahKey(
+                              startAyahKey: "$currentSurahNumber:1",
+                              endAyahKey: getEndAyahKeyFromSurahNumber(
+                                currentSurahNumber,
+                              ),
+                            );
+                            tempAyahList.removeWhere(
+                              (element) => element.runtimeType == int,
+                            );
+                            int index = tempAyahList.indexOf(
+                              state?.current ?? "",
+                            );
+                            if (index != -1) {
+                              AudioPlayerManager.playSingleAyah(
+                                ayahKey: tempAyahList[index - 1],
+                                reciterInfoModel:
+                                    context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                isInsideQuran: true,
+                              );
+                            }
+                          } else {
+                            AudioPlayerManager.audioPlayer.seekToPrevious();
+                          }
+                        }
+                        : null,
+                tooltip: l10n.previous,
+                style: IconButton.styleFrom(padding: EdgeInsets.zero),
+
+                icon: const Icon(Icons.skip_previous_rounded),
+              ),
+              IconButton(
+                onPressed: () {
+                  Duration duration = AudioPlayerManager.audioPlayer.position;
+                  int inMilSec = duration.inMilliseconds - 5000;
+                  if (inMilSec < 0) inMilSec = 0;
+                  AudioPlayerManager.audioPlayer.seek(
+                    Duration(milliseconds: inMilSec),
+                  );
+                },
+                tooltip: l10n.rewind,
+                style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                icon: const Icon(Icons.replay_5_rounded),
+              ),
+              BlocBuilder<PlayerStateCubit, PlayerState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: () async {
+                      AudioPlayerManager.audioPlayer.playing
+                          ? AudioPlayerManager.audioPlayer.pause()
+                          : AudioPlayerManager.audioPlayer.play();
+                    },
+                    tooltip: state.isPlaying ? l10n.pause : l10n.play,
+                    iconSize: 40,
+                    style: IconButton.styleFrom(
+                      padding: const EdgeInsets.all(5),
+                    ),
+                    icon: Icon(
+                      state.isPlaying
+                          ? Icons.pause_rounded
+                          : Icons.play_arrow_rounded,
+                    ),
+                  );
+                },
+              ),
+
+              IconButton(
+                onPressed: () {
+                  Duration? position = AudioPlayerManager.audioPlayer.position;
+
+                  Duration? maxDuration =
+                      AudioPlayerManager.audioPlayer.duration;
+
+                  AudioPlayerManager.audioPlayer.duration;
+                  int inMilSec = position.inMilliseconds + 5000;
+                  if ((maxDuration?.inMilliseconds ??
+                          MediaQuery.of(context).size.width) <
+                      inMilSec) {
+                    inMilSec = maxDuration?.inMilliseconds ?? 0;
+                  }
+                  AudioPlayerManager.audioPlayer.seek(
+                    Duration(milliseconds: inMilSec),
+                  );
+                },
+                tooltip: l10n.fastForward,
+                style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                icon: const Icon(Icons.forward_5_rounded),
+              ),
+
+              IconButton(
+                onPressed:
+                    (ayahList.isNotEmpty &&
+                            int.parse(state?.current.split(":").last ?? "0") <
+                                quranAyahCount[int.parse(
+                                      ayahList.first.split(":").first,
+                                    ) -
+                                    1])
+                        ? () {
+                          if (state?.ayahList.length == 1) {
+                            int? currentSurahNumber = int.tryParse(
+                              state?.current.split(":").first ?? "",
+                            );
+                            if (currentSurahNumber == null) return;
+                            List tempAyahList = getListOfAyahKey(
+                              startAyahKey: "$currentSurahNumber:1",
+                              endAyahKey: getEndAyahKeyFromSurahNumber(
+                                currentSurahNumber,
+                              ),
+                            );
+                            tempAyahList.removeWhere(
+                              (element) => element.runtimeType == int,
+                            );
+                            int index = tempAyahList.indexOf(
+                              state?.current ?? "",
+                            );
+                            if (index != -1) {
+                              AudioPlayerManager.playSingleAyah(
+                                ayahKey: tempAyahList[index + 1],
+                                reciterInfoModel:
+                                    context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                isInsideQuran: true,
+                              );
+                            }
+                          } else {
+                            AudioPlayerManager.audioPlayer.seekToNext();
+                          }
+                        }
+                        : null,
+                tooltip: l10n.playNextAyah,
+                style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                icon: const Icon(Icons.skip_next_rounded),
+              ),
+
+              if (ayahList.length != 1)
+                IconButton(
+                  onPressed: () {
+                    if (AudioPlayerManager.audioPlayer.loopMode ==
+                        just_audio.LoopMode.one) {
+                      AudioPlayerManager.audioPlayer.setLoopMode(
+                        just_audio.LoopMode.all,
+                      );
+                    } else if (AudioPlayerManager.audioPlayer.loopMode ==
+                        just_audio.LoopMode.all) {
+                      AudioPlayerManager.audioPlayer.setLoopMode(
+                        just_audio.LoopMode.off,
+                      );
+                    } else {
+                      AudioPlayerManager.audioPlayer.setLoopMode(
+                        just_audio.LoopMode.one,
+                      );
+                    }
+                  },
+                  tooltip: l10n.repeat,
+                  style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                  icon: switch (AudioPlayerManager.audioPlayer.loopMode) {
+                    just_audio.LoopMode.one => const Icon(
+                      Icons.repeat_one_rounded,
+                    ),
+                    just_audio.LoopMode.all => const Icon(Icons.repeat_rounded),
+                    just_audio.LoopMode.off => Icon(
+                      Icons.repeat_rounded,
+                      color: Colors.grey.withValues(alpha: 0.6),
+                    ),
+                  },
+                ),
+
+              if (ayahList.length == 1)
+                IconButton(
+                  onPressed: () {
+                    int surahNumber = int.parse(
+                      ayahList.first.split(":").first,
+                    );
+                    int currentAyahNumber = int.parse(
+                      ayahList.first.split(":").last,
+                    );
+                    String endAyahKey = getEndAyahKeyFromSurahNumber(
+                      surahNumber,
+                    );
+
+                    String startAyahKey = "$surahNumber:1";
+
+                    AudioPlayerManager.playMultipleAyahAsPlaylist(
+                      startAyahKey: startAyahKey,
+                      endAyahKey: endAyahKey,
+                      reciterInfoModel:
+                          context.read<SegmentedQuranReciterCubit>().state,
+                      initialIndex: currentAyahNumber - 1,
+                      instantPlay: AudioPlayerManager.audioPlayer.playing,
+                      isInsideQuran: true,
+                    );
+                  },
+                  tooltip: l10n.playAsPlaylist,
+                  style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                  icon: const Icon(Icons.playlist_play_rounded),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

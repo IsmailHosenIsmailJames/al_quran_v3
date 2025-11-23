@@ -12,7 +12,20 @@
           "package_name": "com.ismail_hosen_james.al_bayan_quran"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "562324718404-airjj0ovl6jp5nk3g823qmslo0mm71n7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ismail_hosen_james.al_bayan_quran",
+            "certificate_hash": "a4570595a20fbed15e8487c9abaccd9b13db479c"
+          }
+        },
+        {
+          "client_id": "562324718404-qcit8fhnjk81cvgj1b6k8sbargh5ohdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAvNykaA8z6YaQ3wVS1kOLpnOMZI91d8vk"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562324718404-qcit8fhnjk81cvgj1b6k8sbargh5ohdm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "562324718404-4s2sokj9dls2qtc2t5ph95vrdgic6obr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ismail-hosen-james.al-bayan-quran"
+              }
+            }
+          ]
         }
       }
     }

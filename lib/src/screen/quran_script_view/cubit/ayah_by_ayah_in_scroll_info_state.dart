@@ -5,7 +5,7 @@ class AyahByAyahInScrollInfoState {
   List<String>? expandedForWordByWord;
   bool isAyahByAyah;
   List<int>? pageByPageList;
-  String? dropdownAyahKey;
+  dynamic dropdownAyahKey;
 
   AyahByAyahInScrollInfoState({
     this.surahInfoModel,
@@ -20,7 +20,7 @@ class AyahByAyahInScrollInfoState {
     List<String>? expandedForWordByWord,
     bool? isAyahByAyah,
     List<int>? pageByPageList,
-    String? dropdownAyahKey,
+    dynamic dropdownAyahKey,
     bool? isScrollingToDown,
   }) {
     return AyahByAyahInScrollInfoState(
@@ -43,4 +43,35 @@ class AyahByAyahInScrollInfoState {
       "dropdownAyahKey": ayahByAyahInScrollInfoState.dropdownAyahKey,
     };
   }
+
+  // helper for list equality without imports
+  static bool _listEquals<T>(List<T>? a, List<T>? b) {
+    if (identical(a, b)) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AyahByAyahInScrollInfoState) return false;
+    return other.surahInfoModel == surahInfoModel &&
+        _listEquals(other.expandedForWordByWord, expandedForWordByWord) &&
+        other.isAyahByAyah == isAyahByAyah &&
+        _listEquals(other.pageByPageList, pageByPageList) &&
+        other.dropdownAyahKey == dropdownAyahKey;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    surahInfoModel,
+    Object.hashAll(expandedForWordByWord ?? const []),
+    isAyahByAyah,
+    Object.hashAll(pageByPageList ?? const []),
+    dropdownAyahKey,
+  );
 }

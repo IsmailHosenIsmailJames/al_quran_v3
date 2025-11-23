@@ -1,56 +1,117 @@
 {
   "@@locale": "zh",
-  "tafsirAppBarTitle": "{nameSimple}（{nameArabic}）- {ayahKey}",
-  "tafsirNotAvailable": "{ayahKey} 无可用经注",
-  "tafsirFoundAt": "经注位于：{anotherAyahLinkKey}",
-  "tafsirJumpTo": "跳转至 {anotherAyahLinkKey}",
+  "tafsirAppBarTitle": "{nameSimple}（{nameArabic}） - {ayahKey}",
+  "@tafsirAppBarTitle": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      },
+      "nameArabic": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirNotAvailable": "{ayahKey} 的塔夫西尔不可用",
+  "@tafsirNotAvailable": {
+    "placeholders": {
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirFoundAt": "塔夫西尔可在：{anotherAyahLinkKey}",
+  "@tafsirFoundAt": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirJumpTo": "跳转到 {anotherAyahLinkKey}",
+  "@tafsirJumpTo": {
+    "placeholders": {
+      "anotherAyahLinkKey": {
+        "type": "String"
+      }
+    }
+  },
   "hizb": "希兹布",
-  "juz": "卷",
+  "juz": "朱兹",
   "page": "页",
   "ruku": "鲁库",
   "languageSettings": "语言设置",
   "surahAyah": "{surahName} {ayahKey}",
-  "ayahsCount": "{count} 节",
+  "@surahAyah": {
+    "placeholders": {
+      "surahName": {
+        "type": "String"
+      },
+      "ayahKey": {
+        "type": "String"
+      }
+    }
+  },
+  "ayahsCount": "{count} 经节",
+  "@ayahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "saveAndDownload": "保存并下载",
   "appLanguage": "应用语言",
   "selectAppLanguage": "选择应用语言...",
-  "pleaseSelectOne": "请选择一项",
+  "pleaseSelectOne": "请选择一个",
   "quranTranslationLanguage": "古兰经翻译语言",
   "selectTranslationLanguage": "选择翻译语言...",
-  "quranTranslationBook": "古兰经翻译版本",
-  "selectTranslationBook": "选择翻译版本...",
-  "quranTafsirLanguage": "古兰经经注语言",
-  "selectTafsirLanguage": "选择经注语言...",
-  "quranTafsirBook": "古兰经经注版本",
-  "selectTafsirBook": "选择经注版本...",
-  "quranScriptAndStyle": "古兰经字体与样式",
-  "justAMoment": "请稍候...",
+  "quranTranslationBook": "古兰经翻译书籍",
+  "selectTranslationBook": "选择翻译书籍...",
+  "quranTafsirLanguage": "古兰经塔夫西尔语言",
+  "selectTafsirLanguage": "选择塔夫西尔语言...",
+  "quranTafsirBook": "古兰经塔夫西尔书籍",
+  "selectTafsirBook": "选择塔夫西尔书籍...",
+  "quranScriptAndStyle": "古兰经字体与风格",
+  "justAMoment": "稍等片刻...",
   "processProgress": "{processName} {percentage}",
+  "@processProgress": {
+    "placeholders": {
+      "processName": {
+        "type": "String"
+      },
+      "percentage": {
+        "type": "String"
+      }
+    }
+  },
   "success": "成功",
   "retry": "重试",
-  "unableToDownloadResources": "无法下载资源...\n出现了一些问题",
-  "downloadingSegmentedQuranRecitation": "正在下载分段式古兰经诵读",
-  "processingSegmentedQuranRecitation": "正在处理分段式古兰经诵读",
+  "unableToDownloadResources": "无法下载资源...\n出了点问题",
+  "downloadingSegmentedQuranRecitation": "下载分段古兰经朗诵",
+  "processingSegmentedQuranRecitation": "处理分段古兰经朗诵",
   "footnote": "脚注",
-  "tafsir": "经注",
-  "wordByWord": "逐词翻译",
+  "tafsir": "塔夫西尔",
+  "wordByWord": "逐字",
   "pleaseSelectRequiredOption": "请选择所需选项",
-  "rememberHomeTab": "记住主页标签",
-  "rememberHomeTabSubtitle": "应用将记住主屏幕上最后打开的标签页。",
-  "wakeLock": "屏幕常亮",
+  "rememberHomeTab": "记住首页标签",
+  "rememberHomeTabSubtitle": "应用将记住首页中最后打开的标签。",
+  "wakeLock": "保持屏幕常亮",
   "wakeLockSubtitle": "防止屏幕自动关闭。",
   "settings": "设置",
   "appTheme": "应用主题",
-  "quranStyle": "古兰经样式",
-  "changeTheme": "更换主题",
-  "verseCount": "节数：",
+  "quranStyle": "古兰经风格",
+  "changeTheme": "更改主题",
+  "verseCount": "经节数：",
   "translation": "翻译",
   "tafsirNotFound": "未找到",
   "moreInfo": "更多信息",
   "playAudio": "播放音频",
   "preview": "预览",
   "loading": "加载中...",
-  "errorFetchingAddress": "获取地址时出错",
+  "errorFetchingAddress": "获取地址出错",
   "addressNotAvailable": "地址不可用",
   "latitude": "纬度：",
   "longitude": "经度：",
@@ -58,32 +119,46 @@
   "location": "位置：",
   "parameters": "参数：",
   "selectCalculationMethod": "选择计算方法",
-  "shareSelectAyahs": "分享所选节",
+  "shareSelectAyahs": "分享选中的经节",
   "selectionEmpty": "选择为空",
-  "generatingImagePleaseWait": "正在生成图片... 请稍候",
-  "asImage": "作为图片",
+  "generatingImagePleaseWait": "生成图像... 请稍等",
+  "asImage": "作为图像",
   "asText": "作为文本",
-  "playFromSelectedAyah": "从所选节开始播放",
-  "toTafsir": "前往经注",
-  "selectAyah": "选择节",
-  "toAyah": "前往节",
-  "searchForASurah": "搜索章",
-  "bugReportTitle": "错误报告",
+  "playFromSelectedAyah": "从选中的经节播放",
+  "toTafsir": "到塔夫西尔",
+  "selectAyah": "选择经节",
+  "toAyah": "到经节",
+  "searchForASurah": "搜索章节",
+  "bugReportTitle": "bug报告",
   "audioCached": "音频已缓存",
   "others": "其他",
-  "quranTranslationAyahOneMustEnabled": "古兰经|翻译|节，必须启用其中一项",
-  "quranFontSize": "古兰经字号",
+  "quranTranslationAyahOneMustEnabled": "古兰经|翻译|经节，必须启用一个",
+  "quranFontSize": "古兰经字体大小",
   "quranLineHeight": "古兰经行高",
-  "translationAndTafsirFontSize": "翻译和经注字号",
-  "quranAyah": "古兰经文",
+  "translationAndTafsirFontSize": "翻译与塔夫西尔字体大小",
+  "quranAyah": "古兰经经节",
   "topToolbar": "顶部工具栏",
-  "keepOpenWordByWord": "保持逐词翻译展开",
-  "wordByWordHighlight": "逐词高亮",
+  "keepOpenWordByWord": "保持逐字打开",
+  "wordByWordHighlight": "逐字高亮",
   "quranScriptSettings": "古兰经字体设置",
   "surahName": "{nameSimple}",
+  "@surahName": {
+    "placeholders": {
+      "nameSimple": {
+        "type": "String"
+      }
+    }
+  },
   "pageNumber": "页码：",
   "quranResources": "古兰经资源",
-  "alreadySelected": "语言“{name}”已被选中。",
+  "alreadySelected": "语言 '{name}' 已选中。",
+  "@alreadySelected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "unableToGetCompassData": "无法获取罗盘数据",
   "deviceDoesNotHaveSensors": "设备没有传感器！",
   "north": "北",
@@ -99,195 +174,359 @@
   "prayerSettings": "礼拜设置",
   "reminderSettings": "提醒设置",
   "adjustReminderTime": "调整提醒时间",
-  "enforceAlarmSound": "强制闹钟音量",
-  "enforceAlarmSoundDescription": "启用后，此功能将以设定的音量播放闹钟，即使您的手机音量很低。这能确保您不会因手机音量低而错过闹钟。",
+  "enforceAlarmSound": "强制闹铃声音",
+  "enforceAlarmSoundDescription": "如果启用，此功能将以此处设置的音量播放闹铃，即使手机声音很低。这确保您不会因手机音量低而错过闹铃。",
   "volume": "音量",
   "atPrayerTime": "在礼拜时间",
   "minBefore": "{minutes} 分钟前",
+  "@minBefore": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "minAfter": "{minutes} 分钟后",
-  "prayerTimeIsAt": "{prayerName}时间是 {prayerTime}",
-  "itsTimeOf": "现在是{prayerName}时间",
+  "@minAfter": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerTimeIsAt": "{prayerName} 在 {prayerTime}",
+  "@prayerTimeIsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "prayerTime": {
+        "type": "String"
+      }
+    }
+  },
+  "itsTimeOf": "现在是 {prayerName} 的时间",
+  "@itsTimeOf": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
   "stopTheAdhan": "停止宣礼",
-  "dateFoundEmpty": "{date} 数据为空",
+  "dateFoundEmpty": "{date} 为空",
+  "@dateFoundEmpty": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "today": "今天",
   "left": "剩余",
   "reminderAdded": "{prayerName} 的提醒已添加",
+  "@reminderAdded": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
   "allowNotificationPermission": "请允许通知权限以使用此功能",
   "reminderRemoved": "{prayerName} 的提醒已移除",
-  "getPrayerTimesAndQibla": "获取礼拜时间和朝向",
-  "getPrayerTimesAndQiblaDescription": "为任何给定地点计算礼拜时间和朝向。",
+  "@reminderRemoved": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "getPrayerTimesAndQibla": "获取礼拜时间和克尔白方向",
+  "getPrayerTimesAndQiblaDescription": "为任何给定位置计算礼拜时间和克尔白方向。",
   "getFromGPS": "从 GPS 获取",
   "or": "或",
   "selectYourCity": "选择您的城市",
-  "noteAboutGPS": "注意：如果您不想使用 GPS 或觉得不安全，可以选择您的城市。",
-  "downloadingLocationResources": "正在下载位置资源...",
-  "somethingWentWrong": "出现了一些问题",
+  "noteAboutGPS": "注意：如果您不想使用 GPS 或觉得不安全，您可以选择您的城市。",
+  "downloadingLocationResources": "下载位置资源...",
+  "somethingWentWrong": "出了点问题",
   "selectYourCountry": "选择您的国家",
   "searchForACountry": "搜索国家",
-  "selectYourAdministrator": "选择您的行政区域",
-  "searchForAnAdministrator": "搜索行政区域",
+  "selectYourAdministrator": "选择您的行政区",
+  "searchForAnAdministrator": "搜索行政区",
   "searchForACity": "搜索城市",
-  "pleaseEnableLocationService": "请启用定位服务",
-  "donateUs": "支持我们",
+  "pleaseEnableLocationService": "请启用位置服务",
+  "donateUs": "捐赠我们",
   "underDevelopment": "开发中",
   "versionLoading": "加载中...",
   "alQuran": "古兰经",
   "mainMenu": "主菜单",
   "notes": "笔记",
   "pinned": "已固定",
-  "jumpToAyah": "跳转到节",
-  "shareMultipleAyah": "分享多节经文",
+  "jumpToAyah": "跳转到经节",
+  "shareMultipleAyah": "分享多个经节",
   "shareThisApp": "分享此应用",
-  "giveRating": "评价",
-  "bugReport": "错误报告",
+  "giveRating": "给予评分",
+  "bugReport": "bug报告",
   "privacyPolicy": "隐私政策",
   "aboutTheApp": "关于应用",
   "resetTheApp": "重置应用",
   "resetAppWarningTitle": "重置应用数据",
-  "resetAppWarningMessage": "您确定要重置应用吗？您的所有数据都将丢失，并且需要从头开始设置应用。",
+  "resetAppWarningMessage": "您确定要重置应用吗？所有数据将丢失，您需要从头设置应用。",
   "cancel": "取消",
   "reset": "重置",
-  "shareAppSubject": "快来看看这款“古兰经”应用！",
-  "shareAppBody": "色兰！快来看看这款“古兰经”应用，适合每日诵读和思考。它能帮助您与安拉的言语建立联系。下载地址：{appLink}",
-  "openDrawerTooltip": "打开抽屉菜单",
+  "shareAppSubject": "看看这个古兰经应用！",
+  "shareAppBody": "阿萨拉姆阿拉伊库姆！看看这个古兰经应用，用于日常阅读和反思。它帮助与安拉的话语连接。在此下载：{appLink}",
+  "@shareAppBody": {
+    "placeholders": {
+      "appLink": {
+        "type": "String"
+      }
+    }
+  },
+  "openDrawerTooltip": "打开抽屉",
   "quran": "古兰经",
   "prayer": "礼拜",
-  "qibla": "朝向",
+  "qibla": "克尔白",
   "audio": "音频",
-  "surah": "章",
+  "surah": "章节",
   "pages": "页",
   "note": "笔记：",
-  "linkedAyahs": "相关经文：",
-  "emptyNoteCollection": "此笔记集为空。\n添加一些笔记以在此处查看。",
-  "emptyPinnedCollection": "此收藏夹中还没有固定的经文。\n固定一些经文以在此处查看。",
+  "linkedAyahs": "链接经节：",
+  "emptyNoteCollection": "此笔记集合为空。\n添加一些笔记以在此处查看。",
+  "emptyPinnedCollection": "尚未固定经节到此集合。\n固定经节以在此处查看。",
   "noContentAvailable": "无可用内容。",
-  "failedToLoadCollections": "加载收藏夹失败：{error}",
-  "searchByCollectionName": "按{collectionType}名称搜索...",
+  "failedToLoadCollections": "加载集合失败：{error}",
+  "@failedToLoadCollections": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "searchByCollectionName": "按 {collectionType} 名称搜索...",
+  "@searchByCollectionName": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
   "sortBy": "排序方式",
-  "noCollectionAddedYet": "尚未添加任何{collectionType}",
-  "pinnedItemsCount": "{count} 个已固定项目",
-  "notesCount": "{count} 条笔记",
-  "emptyNameNotAllowed": "名称不能为空",
-  "updatedTo": "已更新为 {collectionName}",
+  "noCollectionAddedYet": "尚未添加 {collectionType}",
+  "@noCollectionAddedYet": {
+    "placeholders": {
+      "collectionType": {
+        "type": "String"
+      }
+    }
+  },
+  "pinnedItemsCount": "{count} 个固定项",
+  "@pinnedItemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notesCount": "{count} 个笔记",
+  "@notesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "emptyNameNotAllowed": "不允许空名称",
+  "updatedTo": "更新为 {collectionName}",
+  "@updatedTo": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "changeName": "更改名称",
   "changeColor": "更改颜色",
   "colorUpdated": "颜色已更新",
   "collectionDeleted": "{collectionName} 已删除",
+  "@collectionDeleted": {
+    "placeholders": {
+      "collectionName": {
+        "type": "String"
+      }
+    }
+  },
   "delete": "删除",
   "save": "保存",
-  "collectionNameCannotBeEmpty": "收藏夹名称不能为空。",
-  "addedNewCollection": "已添加新收藏夹",
-  "ayahCount": "{count} 节",
+  "collectionNameCannotBeEmpty": "集合名称不能为空。",
+  "addedNewCollection": "添加新集合",
+  "ayahCount": "{count} 经节",
+  "@ayahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "byNameAtoZ": "名称 A-Z",
   "byNameZtoA": "名称 Z-A",
-  "byElementNumberAscending": "元素数量升序",
-  "byElementNumberDescending": "元素数量降序",
+  "byElementNumberAscending": "元素编号升序",
+  "byElementNumberDescending": "元素编号降序",
   "byUpdateDateAscending": "更新日期升序",
   "byUpdateDateDescending": "更新日期降序",
   "byCreateDateAscending": "创建日期升序",
   "byCreateDateDescending": "创建日期降序",
-  "translationNotFound": "未找到翻译",
+  "translationNotFound": "翻译未找到",
   "translationTitle": "翻译：",
   "footNoteTitle": "脚注：",
-  "wordByWordTranslation": "逐词翻译：",
-  "tafsirButton": "经注",
+  "wordByWordTranslation": "逐字翻译：",
+  "tafsirButton": "塔夫西尔",
   "shareButton": "分享",
   "addNoteButton": "添加笔记",
-  "pinToCollectionButton": "固定到收藏夹",
-  "shareAsText": "以文本分享",
-  "copiedWithTafsir": "已复制（含经注）",
-  "shareAsImage": "以图片分享",
-  "shareWithTafsir": "分享（含经注）",
+  "pinToCollectionButton": "固定到集合",
+  "shareAsText": "作为文本分享",
+  "copiedWithTafsir": "已复制带塔夫西尔",
+  "shareAsImage": "作为图像分享",
+  "shareWithTafsir": "带塔夫西尔分享",
   "notFound": "未找到",
   "noteContentCannotBeEmpty": "笔记内容不能为空。",
-  "noteSavedSuccessfully": "笔记已成功保存！",
-  "selectCollections": "选择收藏夹",
+  "noteSavedSuccessfully": "笔记保存成功！",
+  "selectCollections": "选择集合",
   "addNote": "添加笔记",
-  "writeCollectionName": "输入收藏夹名称...",
-  "noCollectionsYetAddANewOne": "还没有收藏夹。添加一个新的吧！",
-  "pleaseWriteYourNoteFirst": "请先写下您的笔记。",
-  "noCollectionSelected": "未选择收藏夹",
+  "writeCollectionName": "写入集合名称...",
+  "noCollectionsYetAddANewOne": "尚未有集合。添加一个新的！",
+  "pleaseWriteYourNoteFirst": "请先写您的笔记。",
+  "noCollectionSelected": "未选择集合",
   "saveNote": "保存笔记",
-  "nextSelectCollections": "下一步：选择收藏夹",
-  "addToPinned": "添加到已固定",
-  "pinnedSavedSuccessfully": "已成功保存到固定项！",
-  "savePinned": "保存固定项",
+  "nextSelectCollections": "下一步：选择集合",
+  "addToPinned": "添加到固定",
+  "pinnedSavedSuccessfully": "固定保存成功！",
+  "savePinned": "保存固定",
   "closeAudioController": "关闭音频控制器",
-  "previous": "上一首",
-  "rewind": "快退",
+  "previous": "上一个",
+  "rewind": "倒回",
   "fastForward": "快进",
-  "playNextAyah": "播放下一节",
+  "playNextAyah": "播放下一个经节",
   "repeat": "重复",
   "playAsPlaylist": "作为播放列表播放",
-  "style": "样式：{style}",
+  "style": "风格：{style}",
+  "@style": {
+    "placeholders": {
+      "style": {
+        "type": "String"
+      }
+    }
+  },
   "stopAndClose": "停止并关闭",
   "play": "播放",
   "pause": "暂停",
-  "selectReciter": "选择诵读者",
+  "selectReciter": "选择朗诵者",
   "source": "来源：{source}",
+  "@source": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "newText": "新",
   "more": "更多：",
-  "cacheNotFound": "未找到缓存",
+  "cacheNotFound": "缓存未找到",
   "cacheSize": "缓存大小",
   "error": "错误：{error}",
+  "@error": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "clean": "清理",
-  "lastModified": "上次修改",
+  "lastModified": "最后修改",
   "oneYearAgo": "1 年前",
   "monthsAgo": "{number} 个月前",
+  "@monthsAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "weeksAgo": "{number} 周前",
+  "@weeksAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "daysAgo": "{number} 天前",
+  "@daysAgo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "hoursAgo": "{hour} 小时前",
-  "aboutAlQuran": "关于“古兰经”应用",
-  "appFullName": "古兰经 (经注, 礼拜, 朝向, 音频)",
-  "appDescription": "一款全面的伊斯兰应用程序，适用于安卓、iOS、MacOS、网页、Linux和Windows。提供带经注和多种翻译（包括逐词翻译）的古兰经阅读、带通知的全球礼拜时间、朝向指南针，以及同步的逐词音频诵读。",
-  "dataSourcesNote": "注：古兰经文本、经注、翻译和音频资源来自 Quran.com、Everyayah.com 及其他经过验证的开放源。",
-  "adFreePromise": "此应用的开发旨在寻求安拉的喜悦。因此，它现在并且永远完全无广告。",
+  "@hoursAgo": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "aboutAlQuran": "关于古兰经",
+  "appFullName": "古兰经（塔夫西尔、礼拜、克尔白、音频）",
+  "appDescription": "一款全面的伊斯兰应用，支持 Android、iOS、MacOS、Web、Linux 和 Windows，提供古兰经阅读带塔夫西尔和多种翻译（包括逐字）、全球礼拜时间带通知、克尔白罗盘，以及同步逐字音频朗诵。",
+  "dataSourcesNote": "注意：古兰经文本、塔夫西尔、翻译和音频资源来源于 Quran.com、Everyayah.com 和其他验证的开源。",
+  "adFreePromise": "此应用是为寻求安拉喜悦而构建。因此，它现在和永远完全无广告。",
   "coreFeatures": "核心功能",
-  "coreFeaturesDescription": "探索使“古兰经 v3”成为您日常伊斯兰实践不可或缺的工具的关键功能：",
-  "prayerTimesTitle": "礼拜时间与提醒",
-  "prayerTimesDescription": "使用多种计算方法，为全球任何地点提供精确的礼拜时间。设置带有宣礼通知的提醒。",
-  "qiblaDirectionTitle": "朝向",
-  "qiblaDirectionDescription": "通过清晰准确的罗盘视图轻松找到朝向。",
-  "translationTafsirTitle": "古兰经翻译与经注",
-  "translationTafsirDescription": "访问 69 种语言的 120 多种翻译版本（包括逐词翻译）和 30 多种经注版本。",
-  "wordByWordAudioTitle": "逐词音频与高亮",
-  "wordByWordAudioDescription": "跟随同步的逐词音频诵读和高亮，获得沉浸式学习体验。",
-  "ayahAudioRecitationTitle": "整节音频诵读",
-  "ayahAudioRecitationDescription": "聆听超过 40 位著名诵读家的完整经文诵读。",
-  "notesCloudBackupTitle": "带云备份的笔记",
-  "notesCloudBackupDescription": "保存个人笔记和感悟，安全备份到云端（功能开发中/即将推出）。",
+  "coreFeaturesDescription": "探索使古兰经 v3 成为您日常伊斯兰实践不可或缺工具的关键功能：",
+  "prayerTimesTitle": "礼拜时间与警报",
+  "prayerTimesDescription": "使用各种计算方法为全球任何位置提供准确的礼拜时间。设置带宣礼通知的提醒。",
+  "qiblaDirectionTitle": "克尔白方向",
+  "qiblaDirectionDescription": "使用清晰准确的罗盘视图轻松找到克尔白方向。",
+  "translationTafsirTitle": "古兰经翻译与塔夫西尔",
+  "translationTafsirDescription": "访问 120+ 翻译书籍（包括逐字）支持 69 种语言，以及 30+ 塔夫西尔书籍。",
+  "wordByWordAudioTitle": "逐字音频与高亮",
+  "wordByWordAudioDescription": "跟随同步逐字音频朗诵和高亮，提供沉浸式学习体验。",
+  "ayahAudioRecitationTitle": "经节音频朗诵",
+  "ayahAudioRecitationDescription": "听取来自 40+ 著名朗诵者的完整经节朗诵。",
+  "notesCloudBackupTitle": "笔记带云备份",
+  "notesCloudBackupDescription": "保存个人笔记和反思，安全备份到云（功能开发中/即将推出）。",
   "crossPlatformSupportTitle": "跨平台支持",
-  "crossPlatformSupportDescription": "支持安卓、网页、Linux 和 Windows。",
+  "crossPlatformSupportDescription": "支持 Android、Web、Linux 和 Windows。",
   "backgroundAudioPlaybackTitle": "后台音频播放",
-  "backgroundAudioPlaybackDescription": "即使应用在后台运行，也能继续聆听古兰经诵读。",
+  "backgroundAudioPlaybackDescription": "即使应用在后台，也继续听取古兰经朗诵。",
   "audioDataCachingTitle": "音频与数据缓存",
-  "audioDataCachingDescription": "通过强大的音频和古兰经数据缓存，改善播放效果和离线能力。",
-  "minimalisticInterfaceTitle": "简约清晰的界面",
-  "minimalisticInterfaceDescription": "易于导航的界面，注重用户体验和可读性。",
-  "optimizedPerformanceTitle": "优化的性能与体积",
-  "optimizedPerformanceDescription": "一款功能丰富、设计轻巧、性能卓越的应用程序。",
+  "audioDataCachingDescription": "通过强大的音频和古兰经数据缓存改善播放和离线能力。",
+  "minimalisticInterfaceTitle": "简约干净界面",
+  "minimalisticInterfaceDescription": "易于导航的界面，专注于用户体验和可读性。",
+  "optimizedPerformanceTitle": "优化性能与大小",
+  "optimizedPerformanceDescription": "一款功能丰富的应用，设计为轻量级和高性能。",
   "languageSupport": "语言支持",
-  "languageSupportDescription": "本应用旨在通过支持以下语言（并持续增加更多语言）来服务全球用户：",
-  "technologyAndResources": "技术与资源",
-  "technologyAndResourcesDescription": "本应用采用尖端技术和可靠资源构建：",
+  "languageSupportDescription": "此应用旨在为全球观众提供支持，以下语言（并持续添加更多）：",
+  "technologyAndResources": "技术和资源",
+  "technologyAndResourcesDescription": "此应用使用前沿技术和可靠资源构建：",
   "flutterFrameworkTitle": "Flutter 框架",
-  "flutterFrameworkDescription": "使用 Flutter 构建，通过单一代码库实现美观、原生编译的多平台体验。",
+  "flutterFrameworkDescription": "使用 Flutter 构建，提供美丽、本地编译、多平台体验，从单一代码库。",
   "advancedAudioEngineTitle": "高级音频引擎",
-  "advancedAudioEngineDescription": "由 `just_audio` 和 `just_audio_background` Flutter 包提供支持，实现强大的音频播放和控制。",
-  "reliableQuranDataTitle": "可靠的古兰经数据",
-  "reliableQuranDataDescription": "古兰经文本、翻译、经注和音频均来自 Quran.com 和 Everyayah.com 等经过验证的开放 API 和数据库。",
+  "advancedAudioEngineDescription": "由 `just_audio` 和 `just_audio_background` Flutter 包提供支持，用于强大的音频播放和控制。",
+  "reliableQuranDataTitle": "可靠古兰经数据",
+  "reliableQuranDataDescription": "古兰经文本、翻译、塔夫西尔和音频来源于验证的开放 API 和数据库，如 Quran.com 和 Everyayah.com。",
   "prayerTimeEngineTitle": "礼拜时间引擎",
-  "prayerTimeEngineDescription": "利用成熟的计算方法获取准确的礼拜时间。通知由 `flutter_local_notifications` 和后台任务处理。",
+  "prayerTimeEngineDescription": "利用established计算方法提供准确礼拜时间。通知由 `flutter_local_notifications` 和后台任务处理。",
   "crossPlatformSupport": "跨平台支持",
   "crossPlatformSupportDescription2": "在各种平台上享受无缝访问：",
-  "android": "安卓",
+  "android": "Android",
   "ios": "iOS",
   "macos": "macOS",
-  "web": "网页",
+  "web": "Web",
   "linux": "Linux",
   "windows": "Windows",
   "ourLifetimePromise": "我们的终身承诺",
-  "lifetimePromiseDescription": "我个人承诺，在我有生之年，将为这个应用提供持续的支持和维护， إن شاء الله (如果安拉意欲)。我的目标是确保这个应用在未来的岁月里，能一直成为穆斯林社群（乌玛）的一个有益资源。",
+  "lifetimePromiseDescription": "我个人承诺在我的有生之年提供此应用的持续支持和维护，In Sha Allah。我的目标是确保此应用成为乌玛的有益资源多年。",
   "fajr": "晨礼",
   "sunrise": "日出",
   "dhuhr": "晌礼",
@@ -295,37 +534,62 @@
   "maghrib": "昏礼",
   "isha": "宵礼",
   "midnight": "午夜",
-  "alarm": "闹钟",
+  "alarm": "闹铃",
   "notification": "通知",
   "formattedAddress": "{subAdministrativeArea}，{administrativeArea}，{country}",
+  "@formattedAddress": {
+    "placeholders": {
+      "subAdministrativeArea": {
+        "type": "String"
+      },
+      "administrativeArea": {
+        "type": "String"
+      },
+      "country": {
+        "type": "String"
+      }
+    }
+  },
   "quranScriptTajweed": "泰吉威德",
-  "quranScriptUthmani": "奥斯曼体",
-  "quranScriptIndopak": "印度-巴基斯坦体",
-  "sajdaAyah": "叩头节",
-  "required": "必须",
+  "quranScriptUthmani": "奥斯曼尼",
+  "quranScriptIndopak": "印巴",
+  "sajdaAyah": "叩头经节",
+  "required": "必需",
   "optional": "可选",
-  "notificationScheduleWarning": "注意：由于手机操作系统的后台进程限制，预定的通知或提醒可能会被错过。例如：Vivo的Origin OS、三星的One UI、Oppo的ColorOS等有时会终止预定的通知或提醒。请检查您的操作系统设置，以使应用程序不受后台进程的限制。",
-  "scrollWithRecitation": "滚动背诵",
+  "notificationScheduleWarning": "注意：由于手机 OS 后台进程限制，预定通知或提醒可能被错过。例如：Vivo 的 Origin OS、Samsung 的 One UI、Oppo 的 ColorOS 等有时会杀死预定通知或提醒。请检查您的 OS 设置，使应用不受后台进程限制。",
+  "scrollWithRecitation": "随朗诵滚动",
   "quickAccess": "快速访问",
-  "initiallyScrollAyah": "最初滚动到 ayah",
+  "initiallyScrollAyah": "初始滚动到经节",
   "tajweedGuide": "泰吉威德指南",
-  "scrollWithRecitationDesc": "启用后，古兰经经文将与音频朗诵同步自动滚动。",
+  "scrollWithRecitationDesc": "启用时，古兰经经节将与音频朗诵同步自动滚动。",
   "configuration": "配置",
-  "restoreFromBackup": "从备份还原",
+  "restoreFromBackup": "从备份恢复",
   "history": "历史",
   "search": "搜索",
   "useAudioStream": "使用音频流",
-  "useAudioStreamDesc": "直接从互联网流式传输音频而不是下载。",
-  "notUseAudioStreamDesc": "下载音频以供离线使用并减少数据消耗。",
+  "useAudioStreamDesc": "直接从互联网流式传输音频，而不是下载。",
+  "notUseAudioStreamDesc": "下载音频以离线使用并减少数据消耗。",
   "audioSettings": "音频设置",
   "playbackSpeed": "播放速度",
-  "playbackSpeedDesc": "调整古兰经背诵的速度。",
+  "playbackSpeedDesc": "调整古兰经朗诵的速度。",
   "waitForCurrentDownloadToFinish": "请等待当前下载完成。",
-  "areYouSure": "你确定吗？",
-  "checkYourInternetConnection": "检查您的网络连接。",
-  "audioDownload": "音频下载",
+  "areYouSure": "您确定吗？",
+  "checkYourInternetConnection": "检查您的互联网连接。",
+  "audioDownloadAlert": "需要下载 {requiredDownload} 个经节，共 {totalVersesCount} 个。",
+  "@audioDownloadAlert": {
+    "placeholders": {
+      "requiredDownload": {
+        "type": "int"
+      },
+      "totalVersesCount": {
+        "type": "int"
+      }
+    }
+  },
   "download": "下载",
-  "audioDownloadAlert": "需要下载 {totalVersesCount} 节经文中的 {requiredDownload} 节。",
+  "audioDownload": "音频下载",
   "am": "上午",
-  "pm": "下午"
+  "pm": "下午",
+  "optimizingQuranScript": "优化古兰经字体",
+  "supportOnGithub": "在 GitHub 上支持"
 }

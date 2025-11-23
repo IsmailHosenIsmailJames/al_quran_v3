@@ -52,7 +52,10 @@ class RukuListView extends StatelessWidget {
           interactive: true,
 
           child: ListView.builder(
-            padding: const EdgeInsets.only(bottom: 120),
+            padding: EdgeInsets.only(
+              bottom: 120,
+              top: MediaQuery.of(context).padding.top + 3 + 40,
+            ),
             controller: scrollController,
             itemCount: rukuInfoList.length,
             itemBuilder: (context, index) {

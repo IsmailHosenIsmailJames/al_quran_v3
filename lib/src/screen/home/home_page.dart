@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
@@ -11,7 +13,6 @@ import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
@@ -28,11 +29,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late PageController pageController;
+
   List<Widget> getBody() {
+    List<Widget> body = [];
     switch (platformOwn) {
       case platform_services.PlatformOwn.isAndroid:
       case platform_services.PlatformOwn.isIos:
-        return const [
+        body = const [
           QuranPage(),
           PrayerTimePage(),
           QiblaDirection(),
@@ -41,17 +45,18 @@ class _HomePageState extends State<HomePage> {
       case platform_services.PlatformOwn.isWindows:
       case platform_services.PlatformOwn.isMac:
       case platform_services.PlatformOwn.isLinux:
-        return const [
+        body = const [
           QuranPage(),
           PrayerTimePage(),
           AudioPage(),
           SettingsPage(),
         ];
       case platform_services.PlatformOwn.isWeb:
-        return const [QuranPage(), AudioPage(), SettingsPage()];
+        body = const [QuranPage(), AudioPage(), SettingsPage()];
       default:
-        return const [QuranPage(), AudioPage(), SettingsPage()];
+        body = const [QuranPage(), AudioPage(), SettingsPage()];
     }
+    return body;
   }
 
   List<BottomNavigationBarItem> getBottomNavItems(
@@ -320,6 +325,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    pageController = PageController(
+      initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -334,18 +347,46 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
       appBar:
           isSideNav
               ? null
               : AppBar(
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: themeState.mutedGray),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 leading: Builder(
                   builder: (context) {
                     return appBarLeading(l10n, context);
                   },
                 ),
+
                 title: Text(l10n.alQuran),
                 centerTitle: true,
+                //   actions: [
+                //     IconButton(
+                //       icon: const Icon(FluentIcons.search_24_filled),
+                //       onPressed: () {
+                //         Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //             builder: (context) => const SearchScreen(),
+                //           ),
+                //         );
+                //       },
+                //     ),
+                //   ],
               ),
       body: Row(
         children: [
@@ -382,17 +423,17 @@ class _HomePageState extends State<HomePage> {
           if (isSideNav) const VerticalDivider(),
           Expanded(
             flex: 2,
-            child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-              buildWhen: (previous, current) {
-                return previous.tabIndex != current.tabIndex;
+            child: PageView(
+              onPageChanged: (value) {
+                context.read<OthersSettingsCubit>().setTabIndex(value);
               },
-              builder: (context, state) => getBody()[state.tabIndex],
+              controller: pageController,
+              children: getBody(),
             ),
           ),
         ],
       ),
-
-      bottomNavigationBar: isSideNav ? null : appBottomNav(l10n),
+      bottomNavigationBar: isSideNav ? null : appBottomNav(l10n, themeState),
     );
   }
 
@@ -488,6 +529,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           context.read<OthersSettingsCubit>().setTabIndex(index);
+          pageController.jumpToPage(index);
         },
       ),
     );
@@ -680,20 +722,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget appBottomNav(AppLocalizations l10n) {
+  Widget appBottomNav(AppLocalizations l10n, ThemeState themeState) {
     return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
       buildWhen: (previous, current) {
         return previous.tabIndex != current.tabIndex;
       },
       builder: (context, state) {
-        return BottomNavigationBar(
-          currentIndex: state.tabIndex,
-          onTap: (index) {
-            context.read<OthersSettingsCubit>().setTabIndex(index);
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          items: getBottomNavItems(state.tabIndex, l10n),
+        return ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+            child: Container(
+              decoration: BoxDecoration(
+                color:
+                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+                border: Border(top: BorderSide(color: themeState.mutedGray)),
+              ),
+              child: BottomNavigationBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                currentIndex: state.tabIndex,
+                onTap: (index) {
+                  context.read<OthersSettingsCubit>().setTabIndex(index);
+                  pageController.jumpToPage(index);
+                },
+                type: BottomNavigationBarType.fixed,
+                selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+                items: getBottomNavItems(state.tabIndex, l10n),
+              ),
+            ),
+          ),
         );
       },
     );

@@ -1,9 +1,12 @@
 import "dart:developer";
+import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -53,7 +56,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     if (translationResources.keys.contains(languageName)) {
       translationLanguageCode = appLanguage;
 
-      context.read<ResourcesProgressCubitCubit>().changeTranslationBook(
+      context.read<ResourcesProgressCubit>().changeTranslationBook(
         translationResources[codeToLanguageMap[translationLanguageCode]]
             ?.map((e) => TranslationBookModel.fromMap(e))
             .toList()
@@ -70,7 +73,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
           [];
       selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
       if (selectableTafsirBook?.isNotEmpty == true) {
-        context.read<ResourcesProgressCubitCubit>().changeTafsirBook(
+        context.read<ResourcesProgressCubit>().changeTafsirBook(
           selectableTafsirBook!.first,
         );
       }
@@ -79,12 +82,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
   void changeTranslationLanguage(String value) {
     translationLanguageCode = value;
-    context.read<ResourcesProgressCubitCubit>().changeTranslationBook(null);
+    context.read<ResourcesProgressCubit>().changeTranslationBook(null);
   }
 
   void changeTafsirLanguage(String value) {
     tafsirLanguageCode = value;
-    context.read<ResourcesProgressCubitCubit>().changeTafsirBook(null);
+    context.read<ResourcesProgressCubit>().changeTafsirBook(null);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       selectableTafsirBook =
@@ -95,12 +98,65 @@ class _AppSetupPageState extends State<AppSetupPage> {
     });
   }
 
+  Future<void> writeQuranScript() async {
+    final userBox = Hive.box("user");
+    final isQuranScripProcessed = userBox.get(
+      "writeQuranScript",
+      defaultValue: false,
+    );
+
+    final String? quranScripVersion = userBox.get("writeQuranScriptVersion");
+    if (isQuranScripProcessed == true) {
+      if (quranScripVersion == QuranScriptFunction.quranScriptVersion) {
+        return;
+      }
+    }
+    showDialog(
+      barrierDismissible: false,
+      fullscreenDialog: true,
+      context: context,
+      builder: (context) => dialogForShowDownloadProcess(),
+    );
+
+    final ResourcesProgressCubit resourcesProgressCubit =
+        context.read<ResourcesProgressCubit>();
+
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    resourcesProgressCubit.updateProgress(0.01, l10n.optimizingQuranScript);
+
+    await QuranScriptFunction.writeQuranScript(
+      onProgress: (progress) {
+        resourcesProgressCubit.updateProgress(
+          progress / 100,
+          l10n.optimizingQuranScript,
+        );
+      },
+    );
+
+    if (!Hive.isBoxOpen("user")) await Hive.openBox("user");
+
+    await QuranScriptFunction.initQuranScript(
+      context.read<QuranViewCubit>().state.quranScriptType,
+    );
+
+    Navigator.pop(context);
+
+    if (userBox.get("is_setup_complete", defaultValue: false)) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false,
+      );
+    }
+  }
+
   late ThemeState themeState = context.read<ThemeCubit>().state;
 
   @override
   void initState() {
     changeAppLanguage(context.read<LanguageCubit>().state);
-    QuranTranslationFunction.init();
+    QuranTranslationFunction.init().then((value) => writeQuranScript());
+
     super.initState();
   }
 
@@ -110,239 +166,272 @@ class _AppSetupPageState extends State<AppSetupPage> {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     bool isLandscape = MediaQuery.of(context).size.width > 600;
+    bool isSmallScreen = MediaQuery.of(context).size.height < 450;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(appLocalizations.appLanguage),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
-            icon: const Icon(FluentIcons.settings_24_regular),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Row(
-          children: [
-            if (isLandscape)
-              Expanded(
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                          color: themeState.primaryShade200,
-                          blurRadius: 150,
-                          spreadRadius: 0,
+      extendBodyBehindAppBar: true,
+      appBar:
+          isSmallScreen
+              ? null
+              : AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                titleSpacing: 0,
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: themeState.mutedGray),
                         ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      "assets/img/Quran_Logo_v3.png",
-                      color: themeState.primary,
+                      ),
                     ),
                   ),
                 ),
+                title: Text(appLocalizations.appLanguage),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(FluentIcons.settings_24_regular),
+                  ),
+                ],
               ),
-            if (isLandscape) const VerticalDivider(),
+      body: Row(
+        children: [
+          if (isLandscape)
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: BlocBuilder<LanguageCubit, MyAppLocalization>(
-                      builder: (context, state) {
-                        return RadioGroup<MyAppLocalization>(
-                          groupValue: state,
-                          onChanged: (value) {
-                            if (value != null) {
-                              changeAppLanguage(value);
-                            }
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    boxShadow: [
+                      BoxShadow(
+                        color: themeState.primaryShade200,
+                        blurRadius: 150,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    "assets/img/Quran_Logo_v3.png",
+                    color: themeState.primary,
+                  ),
+                ),
+              ),
+            ),
+          if (isLandscape) const VerticalDivider(),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+                    builder: (context, state) {
+                      return RadioGroup<MyAppLocalization>(
+                        groupValue: state,
+                        onChanged: (value) {
+                          if (value != null) {
+                            changeAppLanguage(value);
+                          }
+                        },
+                        child: ListView.builder(
+                          controller: _scrollController,
+                          itemCount: usedAppLanguageMap.length,
+                          itemBuilder: (context, index) {
+                            final MyAppLocalization appLoc =
+                                usedAppLanguageMap[index];
+                            return RadioListTile<MyAppLocalization>(
+                              value: appLoc,
+                              title: Text(appLoc.native),
+                              subtitle: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Text(appLoc.english),
+                                    const Gap(7),
+                                    if (doesHaveFootNote(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.footnote,
+                                      ),
+                                    if (doesHaveTafsirSupport(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.tafsir,
+                                      ),
+                                    if (doesHaveWordByWordTranslation(
+                                      appLoc.english.toLowerCase(),
+                                    ))
+                                      getFeaturesMark(
+                                        context,
+                                        appLocalizations.wordByWord,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            );
                           },
-                          child: ListView.builder(
-                            controller: _scrollController,
-                            itemCount: usedAppLanguageMap.length,
-                            itemBuilder: (context, index) {
-                              final MyAppLocalization appLoc =
-                                  usedAppLanguageMap[index];
-                              return RadioListTile<MyAppLocalization>(
-                                value: appLoc,
-                                title: Text(appLoc.native),
-                                subtitle: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                BlocBuilder<
+                  ResourcesProgressCubit,
+                  ResourcesProgressCubitState
+                >(
+                  builder:
+                      (context, state) => Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(roundedRadius),
+                          boxShadow: [
+                            BoxShadow(
+                              color: themeState.mutedGray,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(appLoc.english),
-                                      const Gap(7),
-                                      if (doesHaveFootNote(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.footnote,
+                                      Text(
+                                        appLocalizations.translation,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).hintColor,
                                         ),
-                                      if (doesHaveTafsirSupport(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.tafsir,
-                                        ),
-                                      if (doesHaveWordByWordTranslation(
-                                        appLoc.english.toLowerCase(),
-                                      ))
-                                        getFeaturesMark(
-                                          context,
-                                          appLocalizations.wordByWord,
-                                        ),
+                                      ),
+                                      Text(
+                                        context
+                                                .read<ResourcesProgressCubit>()
+                                                .state
+                                                .translationBookModel
+                                                ?.name ??
+                                            "",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  BlocBuilder<
-                    ResourcesProgressCubitCubit,
-                    ResourcesProgressCubitState
-                  >(
-                    builder:
-                        (context, state) => Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                            boxShadow: [
-                              BoxShadow(
-                                color: themeState.mutedGray,
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.translation,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      useSafeArea: true,
+                                      scrollControlDisabledMaxHeightRatio: 0.85,
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadiusGeometry.only(
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
                                         ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubitCubit
-                                                  >()
-                                                  .state
-                                                  .translationBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
+                                      ),
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                          .withValues(alpha: 0.7),
+                                      builder: (context) {
+                                        return const BookSelectPopup(
+                                          isTafsir: false,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text(appLocalizations.change),
+                                ),
+                              ],
+                            ),
+                            const Gap(10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        appLocalizations.tafsir,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Theme.of(context).hintColor,
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Text(
+                                        context
+                                                .read<ResourcesProgressCubit>()
+                                                .state
+                                                .tafsirBookModel
+                                                ?.name ??
+                                            "",
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    ],
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.85,
-                                        context: context,
-                                        showDragHandle: true,
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: false,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          appLocalizations.tafsir,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Theme.of(context).hintColor,
-                                          ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      useSafeArea: true,
+                                      scrollControlDisabledMaxHeightRatio: 0.85,
+                                      context: context,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadiusGeometry.only(
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10),
                                         ),
-                                        Text(
-                                          context
-                                                  .read<
-                                                    ResourcesProgressCubitCubit
-                                                  >()
-                                                  .state
-                                                  .tafsirBookModel
-                                                  ?.name ??
-                                              "",
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        useSafeArea: true,
-                                        scrollControlDisabledMaxHeightRatio:
-                                            0.85,
-                                        context: context,
-                                        showDragHandle: true,
-                                        builder: (context) {
-                                          return const BookSelectPopup(
-                                            isTafsir: true,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(appLocalizations.change),
-                                  ),
-                                ],
-                              ),
-                              const Gap(10),
-                              SizedBox(
+                                      ),
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor
+                                          .withValues(alpha: 0.7),
+                                      builder: (context) {
+                                        return const BookSelectPopup(
+                                          isTafsir: true,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Text(appLocalizations.change),
+                                ),
+                              ],
+                            ),
+                            const Gap(10),
+                            SafeArea(
+                              bottom: true,
+                              left: false,
+                              right: false,
+                              top: false,
+                              child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     downloadResources(
                                       context
-                                          .read<ResourcesProgressCubitCubit>()
+                                          .read<ResourcesProgressCubit>()
                                           .state,
                                     );
                                   },
@@ -352,15 +441,15 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   label: Text(appLocalizations.saveAndDownload),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                  ),
-                ],
-              ),
+                      ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -379,13 +468,13 @@ class _AppSetupPageState extends State<AppSetupPage> {
     final userBox = Hive.box("user");
     await userBox.put("app_language", appLanguage);
 
-    context.read<ResourcesProgressCubitCubit>().onProcess();
+    context.read<ResourcesProgressCubit>().onProcess();
 
     showDialog(
       barrierDismissible: false,
       context: context,
       fullscreenDialog: true,
-      builder: (context) => dialogForShowDownloadProcess(processState),
+      builder: (context) => dialogForShowDownloadProcess(),
     );
     bool success1 = await QuranTranslationFunction.downloadResources(
       context: context,
@@ -418,6 +507,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
     if (success1 && success2 && success3 && success4) {
       userBox.put("is_setup_complete", true);
+
+      QuranTranslationFunction.init(
+        locale: context.read<LanguageCubit>().state.locale,
+      );
       // success and route to home
       Navigator.pushAndRemoveUntil(
         context,
@@ -426,19 +519,17 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
 
       // clear process state
-      context.read<ResourcesProgressCubitCubit>().success();
+      context.read<ResourcesProgressCubit>().success();
     } else {
       // error and show 'Something went wrong' in cubit
       log([success1, success2, success3, success4].toString());
-      context.read<ResourcesProgressCubitCubit>().failure(
+      context.read<ResourcesProgressCubit>().failure(
         appLocalizations.unableToDownloadResources,
       );
     }
   }
 
-  Widget dialogForShowDownloadProcess(
-    ResourcesProgressCubitState processState,
-  ) {
+  Widget dialogForShowDownloadProcess() {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     return PopScope(
       canPop: false,
@@ -451,7 +542,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: BlocBuilder<
-            ResourcesProgressCubitCubit,
+            ResourcesProgressCubit,
             ResourcesProgressCubitState
           >(
             builder: (context, state) {
@@ -497,7 +588,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        downloadResources(processState);
+                        downloadResources(
+                          context.read<ResourcesProgressCubit>().state,
+                        );
                       },
                       child: Text(appLocalizations.retry),
                     ),

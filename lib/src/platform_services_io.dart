@@ -46,14 +46,15 @@ Future<void> initializePlatform() async {
   }
 
   if (Platform.isIOS || Platform.isAndroid) {
-    await Alarm.init();
-    await Workmanager().initialize(callbackDispatcher);
-    await Workmanager().registerPeriodicTask(
-      "prayer_time_bg",
-      "set_prayer_time_reminder",
-      frequency: const Duration(hours: 1),
-    );
-    await setReminderForPrayers();
+    Alarm.init().then((value) async {
+      await Workmanager().initialize(callbackDispatcher);
+      await Workmanager().registerPeriodicTask(
+        "prayer_time_bg",
+        "set_prayer_time_reminder",
+        frequency: const Duration(hours: 1),
+      );
+      await setReminderForPrayers();
+    });
   }
 }
 

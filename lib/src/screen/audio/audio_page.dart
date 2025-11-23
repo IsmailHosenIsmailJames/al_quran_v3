@@ -9,7 +9,6 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
@@ -43,6 +42,14 @@ class AudioPage extends StatefulWidget {
 
 class _AudioPageState extends State<AudioPage> {
   @override
+  void initState() {
+    if (surahNameLocalization.isEmpty || surahMeaningLocalization.isEmpty) {
+      loadMetaSurah().then((value) => setState(() {}));
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -51,95 +58,106 @@ class _AudioPageState extends State<AudioPage> {
       isLandScape = true;
     }
     final l10n = AppLocalizations.of(context);
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, themeState) {
-        return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-          buildWhen: (previous, current) {
-            return previous.current != current.current;
-          },
-          builder: (context, ayahKeyState) {
-            int currentIndex =
-                int.parse(ayahKeyState.current.split(":")[1]) - 1;
+    return (surahNameLocalization.isEmpty || surahMeaningLocalization.isEmpty)
+        ? const Center(child: CircularProgressIndicator())
+        : BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, themeState) {
+            return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+              buildWhen: (previous, current) {
+                return previous.current != current.current;
+              },
+              builder: (context, ayahKeyState) {
+                int currentIndex =
+                    int.parse(ayahKeyState.current.split(":")[1]) - 1;
 
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child:
-                  isLandScape
-                      ? Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  getReciterViewWidget(
+                return SafeArea(
+                  bottom: true,
+                  left: false,
+                  right: false,
+                  top: true,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child:
+                        isLandScape
+                            ? Row(
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        getReciterViewWidget(
+                                          context,
+                                          ayahKeyState,
+                                          currentIndex,
+                                        ),
+                                        getSurahInfoAndController(
+                                          ayahKeyState,
+                                          context,
+                                        ),
+                                        const Gap(20),
+                                        getAudioProgressBar(),
+                                        const Gap(10),
+                                        getAudioController(
+                                          currentIndex,
+                                          ayahKeyState,
+                                          context,
+                                          l10n,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const Gap(10),
+                                Expanded(
+                                  flex: 3,
+                                  child: getAyahAndTranslationWithShimmer(
                                     context,
                                     ayahKeyState,
-                                    currentIndex,
                                   ),
-                                  getSurahInfoAndController(
-                                    ayahKeyState,
-                                    context,
-                                  ),
-                                  const Gap(20),
-                                  getAudioProgressBar(),
-                                  const Gap(10),
-                                  getAudioController(
-                                    currentIndex,
-                                    ayahKeyState,
-                                    context,
-                                    l10n,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Gap(10),
-                          Expanded(
-                            flex: 3,
-                            child: getAyahAndTranslationWithShimmer(
-                              context,
-                              ayahKeyState,
-                            ),
-                          ),
-                        ],
-                      )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          getReciterViewWidget(
-                            context,
-                            ayahKeyState,
-                            currentIndex,
-                          ),
-                          const Gap(10),
-                          getSurahInfoAndController(ayahKeyState, context),
+                                ),
+                              ],
+                            )
+                            : Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                getReciterViewWidget(
+                                  context,
+                                  ayahKeyState,
+                                  currentIndex,
+                                ),
+                                const Gap(10),
+                                getSurahInfoAndController(
+                                  ayahKeyState,
+                                  context,
+                                ),
 
-                          const Gap(10),
-                          Expanded(
-                            child: getAyahAndTranslationWithShimmer(
-                              context,
-                              ayahKeyState,
+                                const Gap(10),
+                                Expanded(
+                                  child: getAyahAndTranslationWithShimmer(
+                                    context,
+                                    ayahKeyState,
+                                  ),
+                                ),
+                                const Gap(20),
+                                getAudioProgressBar(),
+                                const Gap(10),
+                                getAudioController(
+                                  currentIndex,
+                                  ayahKeyState,
+                                  context,
+                                  l10n,
+                                ),
+                                const Gap(10),
+                              ],
                             ),
-                          ),
-                          const Gap(20),
-                          getAudioProgressBar(),
-                          const Gap(10),
-                          getAudioController(
-                            currentIndex,
-                            ayahKeyState,
-                            context,
-                            l10n,
-                          ),
-                          const Gap(10),
-                        ],
-                      ),
+                  ),
+                );
+              },
             );
           },
         );
-      },
-    );
   }
 
   BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>
@@ -172,7 +190,7 @@ class _AudioPageState extends State<AudioPage> {
           return const SizedBox(height: 250);
         }
         String translation =
-            asyncSnapshot.data?["t"] ??
+            asyncSnapshot.data?.first.translation?["t"] ??
             AppLocalizations.of(context).translationNotFound;
         translation = translation.replaceAll(">", "> ");
         return getAyahAndTranslation(context, ayahKeyState, translation);
@@ -388,7 +406,7 @@ class _AudioPageState extends State<AudioPage> {
               child: BlocBuilder<QuranViewCubit, QuranViewState>(
                 builder: (context, state) {
                   return Html(
-                    data: capitalizeFirstLatter(translation),
+                    data: translation.capitalize(),
                     style: {
                       "*": Style(
                         fontSize: FontSize(state.translationFontSize),

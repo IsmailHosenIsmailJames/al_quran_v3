@@ -64,6 +64,10 @@
 //     messagingSenderId: '562324718404',
 //     projectId: 'alquranwithaudio',
 //     storageBucket: 'alquranwithaudio.appspot.com',
+//     androidClientId:
+//         '562324718404-airjj0ovl6jp5nk3g823qmslo0mm71n7.apps.googleusercontent.com',
+//     iosClientId:
+//         '562324718404-4s2sokj9dls2qtc2t5ph95vrdgic6obr.apps.googleusercontent.com',
 //     iosBundleId: 'com.ismail-hosen-james.al-bayan-quran',
 //   );
 
@@ -73,6 +77,10 @@
 //     messagingSenderId: '562324718404',
 //     projectId: 'alquranwithaudio',
 //     storageBucket: 'alquranwithaudio.appspot.com',
+//     androidClientId:
+//         '562324718404-airjj0ovl6jp5nk3g823qmslo0mm71n7.apps.googleusercontent.com',
+//     iosClientId:
+//         '562324718404-4s2sokj9dls2qtc2t5ph95vrdgic6obr.apps.googleusercontent.com',
 //     iosBundleId: 'com.ismail-hosen-james.al-bayan-quran',
 //   );
 

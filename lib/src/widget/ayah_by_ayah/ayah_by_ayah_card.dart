@@ -1,7 +1,9 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_sajda.dart"
+    show metaDataSajda;
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
@@ -11,9 +13,10 @@ import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dar
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
-import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
@@ -37,6 +40,7 @@ import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 import "package:visibility_detector/visibility_detector.dart";
 
+import "../../resources/quran_resources/models/translation_book_model.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 import "../add_collection_popup/add_note_popup.dart";
@@ -49,16 +53,43 @@ Widget getAyahByAyahCard({
   bool showTopOptions = true,
   bool showOnlyAyah = false,
   bool keepMargin = true,
-  required Map translationMap,
+  required List<TranslationOfAyah> translationListWithInfo,
   required List wordByWord,
 }) {
   AppLocalizations? l10n = AppLocalizations.of(context);
 
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  String translation = translationMap["t"] ?? l10n.translationNotFound;
-  translation = translation.replaceAll(">", "> ");
-  Map footNote = translationMap["f"] ?? {};
+  List<TranslationBookModel?> translationBookInfoList =
+      translationListWithInfo
+          .map<TranslationBookModel?>((e) => e.bookInfo)
+          .toList();
+  List<String> translationList =
+      translationListWithInfo
+          .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
+          .toList();
+  translationList =
+      translationList.map((e) => e.replaceAll(">", "> ")).toList();
+  List<Map> footNoteList =
+      translationListWithInfo
+          .map<Map>((e) => e.translation?["f"] ?? {})
+          .toList();
+  List<Map<int, String>> footNoteAsStringMap = [];
+  for (int index = 0; index < footNoteList.length; index++) {
+    Map footNote = footNoteList[index];
+    String footNoteAsString = "\n";
+    if (footNote.isNotEmpty) {
+      footNote.forEach((key, value) {
+        footNoteAsString += "$key. $value\n";
+      });
+    }
+    if (footNote.isNotEmpty) {
+      footNoteAsStringMap.add({index: footNoteAsString});
+    } else {
+      footNoteAsStringMap.add({});
+    }
+  }
+
   bool supportsWordByWord = false;
   final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
   if (metaDataOfWordByWord != null) {
@@ -66,7 +97,7 @@ Widget getAyahByAyahCard({
   }
 
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah["$surahNumber"],
+    metaDataSurah["$surahNumber"]!,
   );
 
   bool isSajdaAyah = false;
@@ -83,7 +114,7 @@ Widget getAyahByAyahCard({
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
         buildWhen: (previous, current) {
-          return current.ayahKey != previous.ayahKey;
+          return current != previous;
         },
         builder: (context, quranViewState) {
           return VisibilityDetector(
@@ -92,10 +123,10 @@ Widget getAyahByAyahCard({
               if (!context.mounted) {
                 return;
               }
-              context.read<QuranHistoryCubit>().addHistory(ayahKey);
+              context.read<QuranHistoryCubit>().addHistory(ayahKey: ayahKey);
               try {
                 SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                  metaDataSurah[ayahKey.split(":").first],
+                  metaDataSurah[ayahKey.split(":").first]!,
                 );
 
                 context.read<AyahByAyahInScrollInfoCubit>().setData(
@@ -121,7 +152,7 @@ Widget getAyahByAyahCard({
                             left: 5,
                             top: 5,
                             bottom: 5,
-                            right: 10,
+                            right: 5,
                           )
                           : null,
                   decoration: BoxDecoration(
@@ -144,8 +175,9 @@ Widget getAyahByAyahCard({
                           ayahNumber,
                           context,
                           surahNumber,
-                          translation,
-                          footNote,
+                          translationList,
+                          footNoteAsStringMap,
+                          translationBookInfoList,
                           themeState,
                         ),
                       if (!quranViewState.hideQuranAyah) const Gap(10),
@@ -203,6 +235,9 @@ Widget getAyahByAyahCard({
                           ),
                         ),
                       if (isSajdaAyah) const Gap(5),
+
+                      if (!showOnlyAyah && !quranViewState.hideTranslation)
+                        const Gap(5),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
                         Align(
                           alignment: Alignment.centerLeft,
@@ -214,41 +249,19 @@ Widget getAyahByAyahCard({
                             ),
                           ),
                         ),
-
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
                         const Gap(5),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        getTranslationWidget(
+                        getTranslationWithFootNoteWidget(
                           context,
-                          translation,
+                          translationList,
+                          footNoteAsStringMap,
+                          translationBookInfoList,
                           quranViewState,
+                          showOnlyAyah,
+                          l10n,
                         ),
-                      if (footNote.keys.isNotEmpty &&
-                          !showOnlyAyah &&
-                          !quranViewState.hideFootnote)
-                        const Gap(8),
-                      if (footNote.keys.isNotEmpty &&
-                          !showOnlyAyah &&
-                          !quranViewState.hideFootnote)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            l10n.footNoteTitle,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey.shade500,
-                            ),
-                          ),
-                        ),
-                      if (footNote.keys.isNotEmpty &&
-                          !showOnlyAyah &&
-                          !quranViewState.hideFootnote)
-                        const Gap(5),
 
-                      if (footNote.keys.isNotEmpty &&
-                          !showOnlyAyah &&
-                          !quranViewState.hideFootnote)
-                        getFootNoteWidget(footNote, context, quranViewState),
                       if (supportsWordByWord &&
                           !quranViewState.alwaysOpenWordByWord &&
                           !quranViewState.hideWordByWord)
@@ -525,7 +538,7 @@ Align getFootNoteWidget(
               width: MediaQuery.of(context).size.width * 0.85,
 
               child: Html(
-                data: capitalizeFirstLatter(footNote.values.elementAt(index)),
+                data: footNote.values.elementAt(index).toString().capitalize(),
                 style: {
                   "*": Style(
                     fontSize: FontSize(quranViewState.translationFontSize),
@@ -542,23 +555,82 @@ Align getFootNoteWidget(
   );
 }
 
-SizedBox getTranslationWidget(
+Widget getTranslationWithFootNoteWidget(
   BuildContext context,
-  String translation,
+  List<String> translationList,
+  List<Map<int, String>> footNoteAsStringMap,
+  List<TranslationBookModel?> translationBookInfoList,
   QuranViewState quranViewState,
+  bool showOnlyAyah,
+  AppLocalizations l10n,
 ) {
-  return SizedBox(
-    width: MediaQuery.of(context).size.width,
-    child: Html(
-      data: capitalizeFirstLatter(translation),
-      style: {
-        "*": Style(
-          fontSize: FontSize(quranViewState.translationFontSize),
-          margin: Margins.zero,
-          padding: HtmlPaddings.zero,
-        ),
-      },
-    ),
+  return Column(
+    children: List.generate(translationBookInfoList.length, (index) {
+      String translation = translationList[index];
+      Map<int, String> footNote = footNoteAsStringMap[index];
+      TranslationBookModel? bookModel = translationBookInfoList[index];
+
+      return Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Html(
+              data: translation.capitalize(),
+              style: {
+                "*": Style(
+                  fontSize: FontSize(quranViewState.translationFontSize),
+                  margin: Margins.zero,
+                  padding: HtmlPaddings.zero,
+                ),
+              },
+            ),
+          ),
+
+          if (footNote.keys.isNotEmpty &&
+              !showOnlyAyah &&
+              !quranViewState.hideFootnote)
+            const Gap(8),
+          if (footNote.keys.isNotEmpty &&
+              !showOnlyAyah &&
+              !quranViewState.hideFootnote)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                l10n.footNoteTitle,
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+              ),
+            ),
+          if (footNote.keys.isNotEmpty &&
+              !showOnlyAyah &&
+              !quranViewState.hideFootnote)
+            const Gap(5),
+
+          if (footNote.isNotEmpty &&
+              !showOnlyAyah &&
+              !quranViewState.hideFootnote)
+            getFootNoteWidget(footNote, context, quranViewState),
+          const Gap(5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(height: 1, width: 25, color: Colors.grey),
+              const Gap(7),
+              Text(
+                bookModel?.name ?? bookModel?.fileName.split("/").last ?? "",
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+              ),
+              if (bookModel?.language != null)
+                Text(
+                  " (${languageNativeNames[bookModel!.language.toLowerCase()] ?? ""})",
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                ),
+            ],
+          ),
+          const Gap(5),
+        ],
+      );
+    }),
   );
 }
 
@@ -593,8 +665,9 @@ Row getToolbarWidget(
   int ayahNumber,
   BuildContext context,
   int surahNumber,
-  String translation,
-  Map<dynamic, dynamic> footNote,
+  List<String> translation,
+  List<Map<int, String>> footNoteAsStringMap,
+  List<TranslationBookModel?> translationBookInfoList,
   ThemeState themeState,
 ) {
   AppLocalizations l10n = AppLocalizations.of(context);
@@ -650,10 +723,13 @@ Row getToolbarWidget(
                 showShareBottomDialog(
                   context,
                   ayahKey,
-                  SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]),
+                  SurahInfoModel.fromMap(
+                    metaDataSurah[surahNumber.toString()]!,
+                  ),
                   quranViewState.quranScriptType,
                   translation,
-                  footNote,
+                  footNoteAsStringMap,
+                  translationBookInfoList,
                 );
               },
               tooltip: l10n.shareButton,

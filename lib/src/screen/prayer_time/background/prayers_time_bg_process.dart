@@ -34,6 +34,7 @@ Future<void> setReminderForPrayers() async {
   }
   PrayersTimeFunction.loadPrayersData();
   await Alarm.init();
+  await Alarm.stopAll();
 
   DateTime now = DateTime.now();
   PrayerModelOfDay? todaysPrayerData = PrayersTimeFunction.getTodaysPrayerTime(

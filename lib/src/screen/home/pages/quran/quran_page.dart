@@ -1,5 +1,8 @@
+import "dart:ui";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_juz.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
@@ -55,14 +58,35 @@ class _QuranPageState extends State<QuranPage>
       l10n.hizb,
       l10n.ruku,
     ];
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+
+    final topPadding = MediaQuery.of(context).padding.top;
+
+    return Stack(
+      children: [
+        TabBarView(
+          controller: _tabController,
+          physics: const ClampingScrollPhysics(),
           children: [
-            BlocBuilder<ThemeCubit, ThemeState>(
-              builder: (context, themeState) {
-                return Padding(
-                  padding: const EdgeInsets.all(3.0),
+            SurahListView(surahInfoList: surahInfoList),
+            JuzListView(juzInfoList: juzInfoModelList),
+            PageListView(pageInfoList: pageInfoList),
+            const HizbListView(),
+            const RukuListView(),
+          ],
+        ),
+        BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, themeState) {
+            return Padding(
+              padding: EdgeInsets.only(
+                top: topPadding + 3,
+                bottom: 3,
+                left: 3,
+                right: 3,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                   child: Container(
                     height: 40,
                     decoration: BoxDecoration(
@@ -91,25 +115,12 @@ class _QuranPageState extends State<QuranPage>
                       dividerColor: Colors.transparent,
                     ),
                   ),
-                );
-              },
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                physics: const ClampingScrollPhysics(),
-                children: [
-                  SurahListView(surahInfoList: surahInfoList),
-                  JuzListView(juzInfoList: juzInfoModelList),
-                  PageListView(pageInfoList: pageInfoList),
-                  const HizbListView(),
-                  const RukuListView(),
-                ],
+                ),
               ),
-            ),
-          ],
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }

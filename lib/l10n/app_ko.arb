@@ -327,5 +327,7 @@
   "download": "다운로드",
   "audioDownloadAlert": "{totalVersesCount}개의 아야 중 {requiredDownload}개를 다운로드해야 합니다.",
   "am": "오전",
-  "pm": "오후"
+  "pm": "오후",
+  "optimizingQuranScript": "쿠란 스크립트 최적화",
+  "supportOnGithub": "GitHub에서 지원"
 }

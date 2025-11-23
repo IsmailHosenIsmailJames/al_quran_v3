@@ -1,12 +1,10 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/get_word_list_of_ayah.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -22,7 +20,6 @@ class NonTajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
   final bool? enableWordByWordHighlight;
-  final String? highlightAyah;
 
   const NonTajweedPageRenderer({
     super.key,
@@ -30,14 +27,14 @@ class NonTajweedPageRenderer extends StatelessWidget {
     this.baseTextStyle,
     required this.isUthmani,
     this.enableWordByWordHighlight,
-    this.highlightAyah,
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    String? wordKey = "";
+    String? highlightingWord;
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -64,7 +61,6 @@ class NonTajweedPageRenderer extends StatelessWidget {
               }
               String? currentAyahKey =
                   context.read<AyahKeyCubit>().state.current;
-              log(currentAyahKey.toString(), name: "currentAyahKey");
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -74,8 +70,8 @@ class NonTajweedPageRenderer extends StatelessWidget {
                             (current.currentDuration ?? Duration.zero) &&
                         Duration(milliseconds: word[2]) >
                             (current.currentDuration ?? Duration.zero)) {
-                      if (wordKey != "$currentAyahKey:${word[0]}") {
-                        wordKey = "$currentAyahKey:${word[0]}";
+                      if (highlightingWord != "$currentAyahKey:${word[0]}") {
+                        highlightingWord = "$currentAyahKey:${word[0]}";
                         return true;
                       }
                       return false;
@@ -83,19 +79,21 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   }
                 }
               } else {
-                if (wordKey != null) {
-                  wordKey = null;
+                if (highlightingWord != null) {
+                  highlightingWord = null;
                   return true;
                 }
               }
               return false;
             },
             builder: (context, positionState) {
+              final highlightingAyahKey =
+                  context.read<AyahKeyCubit>().state.current;
               return Text.rich(
                 TextSpan(
                   children:
                       ayahsKey.map((ayahKey) {
-                        List words = getWordListOfAyah(
+                        List words = QuranScriptFunction.getWordListOfAyah(
                           isUthmani
                               ? QuranScriptType.uthmani
                               : QuranScriptType.indopak,
@@ -104,23 +102,29 @@ class NonTajweedPageRenderer extends StatelessWidget {
                         );
 
                         return TextSpan(
+                          style: TextStyle(
+                            backgroundColor:
+                                highlightingAyahKey == ayahKey
+                                    ? isDark
+                                        ? Colors.white.withValues(alpha: 0.08)
+                                        : Colors.black.withValues(alpha: 0.08)
+                                    : null,
+                          ),
                           children:
                               List.generate(words.length, (index) {
                                 String word = words[index];
-                                bool isLastWord = index == (words.length - 1);
-
+                                bool isLastWord =
+                                    index == (words.length - 1) &&
+                                    word.length < 3;
                                 return TextSpan(
                                   text: "$word ",
                                   style:
-                                      (wordKey == "$ayahKey:${index + 1}" &&
-                                                  enableWordByWordHighlight ==
-                                                      true) ||
-                                              segmentsReciterState
-                                                      .showAyahHilight ==
-                                                  ayahKey
+                                      (highlightingWord ==
+                                                  "$ayahKey:${index + 1}" &&
+                                              enableWordByWordHighlight == true)
                                           ? TextStyle(
                                             backgroundColor:
-                                                themeState.primaryShade200,
+                                                themeState.primaryShade300,
                                             fontFamily:
                                                 isLastWord ? "QPC_Hafs" : null,
                                           )
@@ -132,17 +136,19 @@ class NonTajweedPageRenderer extends StatelessWidget {
                                   recognizer:
                                       TapGestureRecognizer()
                                         ..onTap = () async {
-                                          final wordKey = List.generate(
-                                            words.length,
-                                            (index) => "$ayahKey:${index + 1}",
-                                          );
+                                          final highlightingWord =
+                                              List.generate(
+                                                words.length,
+                                                (index) =>
+                                                    "$ayahKey:${index + 1}",
+                                              );
                                           showPopupWordFunction(
                                             context: context,
                                             initWordIndex: index,
-                                            wordKeys: wordKey,
+                                            wordKeys: highlightingWord,
                                             wordByWordList:
                                                 await WordByWordFunction.getAyahWordByWordData(
-                                                  "${wordKey.first.split(":")[0]}:${wordKey.first.split(":")[1]}",
+                                                  "${highlightingWord.first.split(":")[0]}:${highlightingWord.first.split(":")[1]}",
                                                 ) ??
                                                 [],
                                           );

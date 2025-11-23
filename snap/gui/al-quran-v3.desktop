@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Al Quran v3
+Comment=A feature-rich Quran app for all platforms.
+Exec=al-quran-v3
+Icon=${SNAP}/meta/gui/Quran_Logo_v3.png
+Terminal=false
+Type=Application
+Categories=Education;Religion;
