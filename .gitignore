@@ -49,3 +49,4 @@ lib/src/api
 AppDir/usr/bin
 appimagetool-x86_64.AppImage
 *.AppImage
+/dist

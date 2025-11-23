@@ -20,13 +20,12 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.ismail_hosen_james.al_bayan_quran"
     compileSdk = 36
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "29.0.14206865"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
@@ -66,6 +65,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+    buildToolsVersion = "36.1.0"
 }
 
 flutter {
