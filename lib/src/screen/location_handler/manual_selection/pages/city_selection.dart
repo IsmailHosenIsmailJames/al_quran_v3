@@ -119,11 +119,12 @@ class _CitySelectionState extends State<CitySelection> {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (context) => DownloadDataForPrayerView(
-                                      lat: latLon.latitude,
-                                      long: latLon.longitude,
-                                      moveToDownload: widget.moveToDownload,
-                                    ),
+                                    (context) =>
+                                        CalculationMethodDataForPrayerView(
+                                          lat: latLon.latitude,
+                                          long: latLon.longitude,
+                                          moveToDownload: widget.moveToDownload,
+                                        ),
                               ),
                             );
                           }

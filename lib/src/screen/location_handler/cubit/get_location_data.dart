@@ -4,7 +4,6 @@ import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calcula
 import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
-import "../../prayer_time/functions/prayers_time_function.dart";
 import "../../qibla/qibla_direction.dart";
 
 Future<LocationQiblaPrayerDataState> getSavedLocation() async {
@@ -34,7 +33,6 @@ Future<LocationQiblaPrayerDataState> getSavedLocation() async {
     );
 
     data.calculationMethod = CalculationMethod.fromMap(calculationMethod);
-    data.isDataExits = PrayersTimeFunction.checkIsDataExits();
   }
   return data;
 }

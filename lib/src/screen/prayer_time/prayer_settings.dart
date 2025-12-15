@@ -69,7 +69,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         context,
                         MaterialPageRoute(
                           builder:
-                              (context) => DownloadDataForPrayerView(
+                              (context) => CalculationMethodDataForPrayerView(
                                 lat: state.latLon!.latitude,
                                 long: state.latLon!.latitude,
                                 showCalculationMethodPopupAtOnInit: true,

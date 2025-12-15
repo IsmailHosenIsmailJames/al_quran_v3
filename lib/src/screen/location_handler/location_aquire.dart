@@ -112,11 +112,13 @@ class _LocationAcquireState extends State<LocationAcquire> {
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (context) => DownloadDataForPrayerView(
-                                          lat: position.latitude,
-                                          long: position.longitude,
-                                          moveToDownload: widget.moveToDownload,
-                                        ),
+                                        (context) =>
+                                            CalculationMethodDataForPrayerView(
+                                              lat: position.latitude,
+                                              long: position.longitude,
+                                              moveToDownload:
+                                                  widget.moveToDownload,
+                                            ),
                                   ),
                                 );
                                 return;

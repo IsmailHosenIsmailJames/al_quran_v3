@@ -4,7 +4,6 @@ import "package:al_quran_v3/src/platform_services.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -17,13 +16,13 @@ import "../../widget/prayers/prayer_calculation_method_info_widget.dart";
 import "../../widget/prayers/select_calculation_method.dart";
 import "../location_handler/cubit/location_data_qibla_data_cubit.dart";
 
-class DownloadDataForPrayerView extends StatefulWidget {
+class CalculationMethodDataForPrayerView extends StatefulWidget {
   final double lat;
   final double long;
   final bool moveToDownload;
   final bool showCalculationMethodPopupAtOnInit;
 
-  const DownloadDataForPrayerView({
+  const CalculationMethodDataForPrayerView({
     super.key,
     required this.lat,
     required this.long,
@@ -32,11 +31,12 @@ class DownloadDataForPrayerView extends StatefulWidget {
   });
 
   @override
-  State<DownloadDataForPrayerView> createState() =>
-      _DownloadDataForPrayerViewState();
+  State<CalculationMethodDataForPrayerView> createState() =>
+      _CalculationMethodDataForPrayerViewState();
 }
 
-class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
+class _CalculationMethodDataForPrayerViewState
+    extends State<CalculationMethodDataForPrayerView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -196,11 +196,6 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                         var cubit =
                             context.read<LocationQiblaPrayerDataCubit>();
                         cubit.changePrayerTimeDownloading(true);
-                        await PrayersTimeFunction.downloadPrayerDataFromAPI(
-                          lat: widget.lat,
-                          lon: widget.long,
-                          calculationMethod: cubit.state.calculationMethod!,
-                        );
                         cubit.saveLocationData(
                           LatLon(latitude: widget.lat, longitude: widget.long),
                           save: true,
@@ -211,7 +206,6 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                         );
                         await cubit.alignWithDatabase();
 
-                        await cubit.checkPrayerDataExits();
                         if (widget.moveToDownload) {
                           Navigator.pop(context);
                         }
@@ -236,12 +230,10 @@ class _DownloadDataForPrayerViewState extends State<DownloadDataForPrayerView> {
                                   ),
                                 ),
                               )
-                              : const Icon(
-                                FluentIcons.arrow_download_24_filled,
-                              );
+                              : const Icon(FluentIcons.checkmark_24_filled);
                         },
                       ),
-                      label: Text(l10n.downloadPrayerTime),
+                      label: Text(l10n.save),
                     ),
                   ),
                 ],
