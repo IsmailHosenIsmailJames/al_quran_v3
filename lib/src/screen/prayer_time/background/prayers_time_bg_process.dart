@@ -29,10 +29,6 @@ Future<void> setReminderForPrayers() async {
   WidgetsFlutterBinding.ensureInitialized();
   final l10n = await AppLocalizations.delegate.load(const Locale("en"));
 
-  if (!(PrayersTimeFunction.checkIsDataExits())) {
-    return;
-  }
-  PrayersTimeFunction.loadPrayersData();
   await Alarm.init();
   await Alarm.stopAll();
 

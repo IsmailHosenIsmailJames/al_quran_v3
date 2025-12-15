@@ -23,14 +23,12 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
       builder: (context, state) {
         if (state.latLon == null || state.calculationMethod == null) {
           return const LocationAcquire();
+        } else if (state.calculationMethod == null) {
+          return CalculationMethodDataForPrayerView(
+            lat: state.latLon!.latitude,
+            long: state.latLon!.longitude,
+          );
         } else {
-          if (state.isDataExits == false) {
-            return DownloadDataForPrayerView(
-              lat: state.latLon!.latitude,
-              long: state.latLon!.longitude,
-            );
-          }
-
           return TimeListOfPrayers(
             lat: state.latLon!.latitude,
             lon: state.latLon!.longitude,
