@@ -14,10 +14,6 @@ String localizedNumber(BuildContext context, dynamic number) {
       currentLocale.languageCode,
     ).format(number as int);
   } else {
-    assert(
-      number.runtimeType == int || number.runtimeType == double,
-      "localizedNumber only supports int and double",
-    );
     return number.toString();
   }
 }
