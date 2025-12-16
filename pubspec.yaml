@@ -70,6 +70,7 @@ dependencies:
   web: ^1.1.1
   flutter_native_splash: ^2.4.7
   adhan_dart: ^1.2.0
+  hijri: ^3.0.0
   # firebase_core: ^4.2.1
   # firebase_ai: ^3.6.0
   # firebase_auth: ^6.1.2
