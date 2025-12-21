@@ -1,3 +1,5 @@
+import "dart:math";
+
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
@@ -472,7 +474,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           backgroundColor:
               prayerTimeHelper.currentPrayer(DateTime.now()) == prayer
                   ? context.read<ThemeCubit>().state.primary
-                  : null,
+                  : Colors.grey.withValues(alpha: 0.2),
         ),
         const Gap(8),
         Text(
@@ -485,8 +487,35 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const Gap(8),
-        Switch(value: true, onChanged: (value) {}),
+        getPrayerReminderSwitch(
+          context,
+          Random().nextBool(),
+          Random().nextBool(),
+        ),
       ],
+    );
+  }
+
+  Switch getPrayerReminderSwitch(
+    BuildContext context,
+    bool isAlarm,
+    bool isCurrentToRemind,
+  ) {
+    return Switch(
+      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+        Set<WidgetState> states,
+      ) {
+        if (states.contains(WidgetState.selected)) {
+          return Icon(
+            isAlarm ? Icons.alarm_on_rounded : FluentIcons.alert_on_24_regular,
+          );
+        }
+        return Icon(
+          isAlarm ? Icons.alarm_off_rounded : FluentIcons.alert_off_24_regular,
+        );
+      }),
+      value: isCurrentToRemind,
+      onChanged: (value) async {},
     );
   }
 }
