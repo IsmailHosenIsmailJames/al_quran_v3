@@ -984,10 +984,16 @@ class AppLocalizationsPa extends AppLocalizations {
   String get sunrise => 'ਸੂਰਜ ਚੜ੍ਹਨਾ';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'ਜ਼ੋਹਰ';
 
   @override
   String get asr => 'ਅਸਰ';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'ਮਗਰਿਬ';

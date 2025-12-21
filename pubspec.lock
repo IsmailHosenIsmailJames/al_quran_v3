@@ -12,10 +12,11 @@ packages:
   adhan_dart:
     dependency: "direct main"
     description:
-      name: adhan_dart
-      sha256: "4910af871e17b412a744616647dd9ecf4a7d0096dcbeb3a2432ac2994b1b5fb4"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "82f55f33aa9658bc098b3efbbc4811d0c6542167"
+      url: "https://github.com/IsmailHosenIsmailJames/adhan_dart.git"
+    source: git
     version: "1.2.0"
   alarm:
     dependency: "direct main"
@@ -1254,6 +1255,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   simple_icons:
     dependency: "direct main"
     description:

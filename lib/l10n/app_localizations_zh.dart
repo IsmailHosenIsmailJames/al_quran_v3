@@ -957,10 +957,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sunrise => '日出';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => '晌礼';
 
   @override
   String get asr => '晡礼';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => '昏礼';

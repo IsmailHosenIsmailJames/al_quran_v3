@@ -973,10 +973,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sunrise => '일출';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => '두흐르';
 
   @override
   String get asr => '아스르';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => '마그리브';

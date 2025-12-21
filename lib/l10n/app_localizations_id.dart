@@ -984,10 +984,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get sunrise => 'Terbit Matahari';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Zuhur';
 
   @override
   String get asr => 'Ashar';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Maghrib';
