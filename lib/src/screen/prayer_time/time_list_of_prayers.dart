@@ -1,5 +1,18 @@
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
+import "package:al_quran_v3/src/screen/settings/settings_page.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:dartx/dartx_io.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+import "package:geocoding/geocoding.dart";
+import "package:google_fonts/google_fonts.dart";
+import "package:hijri/hijri_calendar.dart";
+import "package:shimmer/shimmer.dart";
 
 class TimeListOfPrayers extends StatefulWidget {
   final double lat;
@@ -19,427 +32,461 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return Container();
+    final themeState = context.read<ThemeCubit>().state;
+    final MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return StreamBuilder(
+      stream: Stream.periodic(const Duration(seconds: 10)),
+      builder: (context, snapshot) {
+        final DateTime now = DateTime.now();
+        final PrayerTimeHelper prayerTimeHelper = PrayerTimeHelper(
+          prayerTimes: PrayerTimes(
+            date: DateTime(now.year, now.month, now.day),
+            coordinates: Coordinates(widget.lat, widget.lon),
+            calculationParameters:
+                CalculationMethodParameters.muslimWorldLeague(),
+          ),
+        );
+        return ListView(
+          padding: const EdgeInsets.all(
+            12,
+          ).copyWith(top: mediaQueryData.padding.top + 12, bottom: 100),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(FluentIcons.location_24_regular),
+                const Gap(8),
+                SizedBox(
+                  width: mediaQueryData.size.width * 0.6,
+                  child: FutureBuilder(
+                    future: placemarkFromCoordinates(widget.lat, widget.lon),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: Colors.grey.shade900,
+                          child: Container(
+                            height: 30,
+                            width: mediaQueryData.size.width * 0.6,
+                            decoration: BoxDecoration(
+                              color: themeState.primaryShade200,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        );
+                      }
+                      if (snapshot.hasData) {
+                        final placemark = snapshot.data?.first;
+                        final address = [
+                              placemark?.name,
+                              placemark?.subThoroughfare,
+                              placemark?.thoroughfare,
+                              placemark?.subLocality,
+                              placemark?.locality,
+                              placemark?.subAdministrativeArea,
+                              placemark?.administrativeArea,
+                              placemark?.postalCode,
+                              placemark?.country,
+                              placemark?.isoCountryCode,
+                            ]
+                            .where((e) => e != null && e.isNotEmpty)
+                            .toSet()
+                            .join(", ");
+
+                        return Text(
+                          address,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ),
+                const Gap(8),
+                SizedBox(
+                  width: 60,
+                  height: 30,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {},
+                    icon: Icon(Icons.refresh, color: themeState.primary),
+                  ),
+                ),
+              ],
+            ),
+            const Gap(8),
+            Row(
+              children: [
+                const Icon(FluentIcons.calendar_24_regular),
+                const Gap(8),
+                Text(HijriCalendar.now().toFormat("dd MMMM yyyy")),
+              ],
+            ),
+            const Gap(16),
+            Container(
+              height: 150,
+              width: mediaQueryData.size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: themeState.primaryShade100,
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        prayerTimeHelper.currentPrayerTimeString(
+                          context,
+                          DateTime.now(),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Gap(8),
+                      Expanded(
+                        child: LinearProgressIndicator(
+                          value:
+                              (100 -
+                                  prayerTimeHelper.timeLeftInPercentage(
+                                    DateTime.now(),
+                                  )) /
+                              100,
+                          color: themeState.primary,
+                          backgroundColor: themeState.primaryShade300,
+                          borderRadius: BorderRadius.circular(8),
+                          minHeight: 8,
+                        ),
+                      ),
+                      const Gap(8),
+                      Text(
+                        prayerTimeHelper.nextPrayerTimeString(
+                          context,
+                          DateTime.now(),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(8),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        prayerTimeHelper.currentPrayerName(
+                          context,
+                          DateTime.now(),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        prayerTimeHelper.nextPrayerName(
+                          context,
+                          DateTime.now(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: StreamBuilder(
+                      stream: Stream.periodic(const Duration(seconds: 1)),
+                      builder: (context, snapshot) {
+                        return Text(
+                          prayerTimeHelper.leftTimeString(
+                            context,
+                            DateTime.now(),
+                          ),
+                          style: GoogleFonts.dmMono(fontSize: 36),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Gap(8),
+            Container(
+              decoration: BoxDecoration(
+                color: themeState.primaryShade100,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Forbidden Salat Times",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Spacer(),
+
+                      SizedBox(
+                        height: 35,
+                        width: 60,
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            FluentIcons.info_24_regular,
+                            color: themeState.primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(4),
+                  forbiddenWidget(
+                    themeState,
+                    prayerTimeHelper,
+                    context,
+                    "assets/img/makkah.jpg",
+                    prayerTimeHelper.prayerTimes.sunrise,
+                    prayerTimeHelper.prayerTimes.sunrise.add(
+                      const Duration(minutes: 15),
+                    ),
+                    l10n.sunrise,
+                  ),
+                  const Gap(8),
+                  forbiddenWidget(
+                    themeState,
+                    prayerTimeHelper,
+                    context,
+                    "assets/img/makkah.jpg",
+                    prayerTimeHelper.prayerTimes.dhuhr.subtract(
+                      const Duration(minutes: 8),
+                    ),
+                    prayerTimeHelper.prayerTimes.dhuhr,
+
+                    l10n.noon,
+                  ),
+                  const Gap(8),
+                  forbiddenWidget(
+                    themeState,
+                    prayerTimeHelper,
+                    context,
+                    "assets/img/makkah.jpg",
+                    prayerTimeHelper.prayerTimes.maghrib.subtract(
+                      const Duration(minutes: 15),
+                    ),
+                    prayerTimeHelper.prayerTimes.maghrib,
+
+                    l10n.sunset,
+                  ),
+                ],
+              ),
+            ),
+            const Gap(8),
+
+            Container(
+              decoration: BoxDecoration(
+                color: themeState.primaryShade100,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Prayer Times",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Spacer(),
+                      SizedBox(
+                        height: 35,
+                        width: 60,
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SettingsPage(),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            FluentIcons.settings_24_filled,
+                            color: themeState.primary,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 35,
+                        width: 60,
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: themeState.primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.fajr,
+                    prayerTimeHelper.prayerTimes.fajr,
+                    prayerTimeHelper,
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.sunrise,
+                    prayerTimeHelper.prayerTimes.sunrise,
+                    prayerTimeHelper,
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.dhuhr,
+                    prayerTimeHelper.prayerTimes.dhuhr,
+                    prayerTimeHelper,
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.asr,
+                    prayerTimeHelper.prayerTimes.asr,
+                    prayerTimeHelper,
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.maghrib,
+                    prayerTimeHelper.prayerTimes.maghrib,
+                    prayerTimeHelper,
+                  ),
+                  getPrayerRow(
+                    context,
+                    Prayer.isha,
+                    prayerTimeHelper.prayerTimes.isha,
+                    prayerTimeHelper,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  // Column headerOfPrayerTimesAndCanvas(
-  //   BuildContext context,
-  //   AppLocalizations l10n,
-  //   ThemeState themeState,
-  // ) {
-  //   return Column(
-  //     children: [
-  //       const Gap(7),
-  //       Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               const Gap(10),
-  //               Icon(
-  //                 FluentIcons.location_24_regular,
-  //                 color: themeState.primary,
-  //               ),
-  //               const Gap(5),
-  //               getAddressView(
-  //                 context: context,
-  //                 lat: widget.lat,
-  //                 long: widget.lon,
-  //                 keepPadding: false,
-  //                 justAddress: true,
-  //                 keepDecoration: false,
-  //                 style: const TextStyle(fontSize: 16),
-  //               ),
-  //             ],
-  //           ),
-  //           const SizedBox(),
-  //           IconButton(
-  //             onPressed: () async {
-  //               await Navigator.push(
-  //                 context,
-  //                 MaterialPageRoute(
-  //                   builder:
-  //                       (context) =>
-  //                           const LocationAcquire(moveToDownload: true),
-  //                 ),
-  //               );
-  //               context
-  //                   .read<LocationQiblaPrayerDataCubit>()
-  //                   .alignWithDatabase();
-  //             },
-  //             icon: const Icon(Icons.my_location_rounded),
-  //           ),
-  //         ],
-  //       ),
-  //       const Gap(30),
-  //       Padding(
-  //         padding: const EdgeInsets.only(
-  //           left: 10,
-  //           bottom: 10,
-  //           right: 30,
-  //           top: 10,
-  //         ),
-  //         child: Row(
-  //           children: [
-  //             getNextPrayerTimeWidget(context, l10n),
-  //             const Gap(10),
-  //             const Expanded(flex: 6, child: PrayerTimeCanvas()),
-  //           ],
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-  // Expanded listOfPrayerTimeWidget(
-  //   BuildContext context,
-  //   AppLocalizations l10n,
-  //   ThemeState themeState,
-  //   TextStyle textStyleOfTimes,
-  //   bool isLandScape,
-  //   bool withCanvas,
-  // ) {
-  //   return Expanded(
-  //     child: ListView.builder(
-  //       padding: const EdgeInsets.all(
-  //         15,
-  //       ).copyWith(top: MediaQuery.of(context).padding.top + 10, bottom: 100),
-  //       itemBuilder: (context, index) {
-  //         if (withCanvas && index == 0) {
-  //           return Container(
-  //             padding: const EdgeInsets.only(bottom: 10),
-  //             decoration: BoxDecoration(
-  //               color: themeState.primaryShade200,
-  //               borderRadius: BorderRadius.circular(10),
-  //             ),
-  //             child: headerOfPrayerTimesAndCanvas(context, l10n, themeState),
-  //           );
-  //         }
-  //         if (withCanvas && index == 1) {
-  //           return const Gap(10);
-  //         }
-  //         if (withCanvas) {
-  //           index = index - 2;
-  //         }
-  //         PrayerModelOfDay? prayerModelOfDay =
-  //             PrayersTimeFunction.getTodaysPrayerTime(
-  //               DateTime.now().add(Duration(days: index)),
-  //             );
-  //         if (prayerModelOfDay == null) {
-  //           return null;
-  //         }
-  //         DateTime? dateOfThis;
-  //         if (prayerModelOfDay.date.gregorian.date != null) {
-  //           dateOfThis = DateFormat(
-  //             "dd-MM-yyyy",
-  //           ).tryParse(prayerModelOfDay.date.gregorian.date!);
-  //         }
-  //         if (dateOfThis == null ||
-  //             dateOfThis.isBefore(
-  //               DateTime.now().subtract(const Duration(days: 1)),
-  //             )) {
-  //           return const SizedBox();
-  //         }
-  //         Map<PrayerModelTimesType, TimeOfDay> mapOfTimes =
-  //             PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
-  //         PrayerModelTimesType nextPrayer = PrayersTimeFunction.nextPrayerName(
-  //           prayerModelOfDay,
-  //         );
-  //         bool isToday = dateOfThis.isAtSameDayAs(DateTime.now());
-  //         int? indexOfCurrentPrayer;
-  //         if (isToday) {
-  //           indexOfCurrentPrayer = PrayerModelTimesType.values.indexOf(
-  //             nextPrayer,
-  //           );
-  //         }
-  //         return Column(
-  //           children: [
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //               children: [
-  //                 Text(
-  //                   isToday
-  //                       ? l10n.today
-  //                       : DateFormat.yMMMEd(l10n.localeName).format(dateOfThis),
-  //                   style: TextStyle(
-  //                     fontSize: 22,
-  //                     fontWeight: FontWeight.bold,
-  //                     color:
-  //                         Theme.of(context).brightness == Brightness.light
-  //                             ? Colors.grey.shade600
-  //                             : Colors.grey.shade400,
-  //                   ),
-  //                 ),
-  //                 if (isToday)
-  //                   IconButton(
-  //                     onPressed: () {
-  //                       Navigator.push(
-  //                         context,
-  //                         MaterialPageRoute(
-  //                           builder: (context) => const PrayerSettings(),
-  //                         ),
-  //                       );
-  //                     },
-  //                     icon: Icon(
-  //                       FluentIcons.settings_24_filled,
-  //                       color: themeState.primary,
-  //                     ),
-  //                   ),
-  //               ],
-  //             ),
-  //             const Divider(),
-  //             ...List.generate(mapOfTimes.length, (i) {
-  //               bool isThisIsCurrentPrayer = i == indexOfCurrentPrayer;
-  //               PrayerModelTimesType prayerModelType = mapOfTimes.keys
-  //                   .elementAt(i);
-  //               return getRowWidgetForEachPrayer(
-  //                 isThisIsCurrentPrayer,
-  //                 prayerModelType,
-  //                 textStyleOfTimes,
-  //                 mapOfTimes,
-  //                 i,
-  //                 context,
-  //                 isToday,
-  //                 themeState,
-  //                 l10n,
-  //                 isLandScape,
-  //               );
-  //             }),
-  //             const Gap(30),
-  //           ],
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
-  // Widget getRowWidgetForEachPrayer(
-  //   bool isThisIsCurrentPrayer,
-  //   PrayerModelTimesType prayerModelType,
-  //   TextStyle textStyleOfTimes,
-  //   Map<PrayerModelTimesType, TimeOfDay> mapOfTimes,
-  //   int i,
-  //   BuildContext context,
-  //   bool isToday,
-  //   ThemeState themeState,
-  //   AppLocalizations l10n,
-  //   bool isLandScape,
-  // ) {
-  //   return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-  //     builder: (context, prayerReminderState) {
-  //       List<ReminderTypeWithPrayModel> listOfToRemind =
-  //           prayerReminderState.prayerToRemember;
-  //       ReminderTypeWithPrayModel? currentReminder = listOfToRemind
-  //           .firstOrNullWhere(
-  //             (element) => element.prayerTimesType == prayerModelType,
-  //           );
-  //       bool isCurrentToRemind = currentReminder != null;
-  //       ReminderTypeWithPrayModel defaultWhenEnable = ReminderTypeWithPrayModel(
-  //         reminderType:
-  //             prayerReminderState.previousReminderModes[prayerModelType] ??
-  //             PrayerReminderType.alarm,
-  //         prayerTimesType: prayerModelType,
-  //       );
-  //       return Container(
-  //         padding: const EdgeInsets.only(left: 5, right: 5),
-  //         decoration:
-  //             isThisIsCurrentPrayer
-  //                 ? BoxDecoration(
-  //                   color: themeState.primary.withValues(alpha: 0.1),
-  //                   border: Border.all(color: themeState.primary),
-  //                   borderRadius: BorderRadius.circular(roundedRadius),
-  //                 )
-  //                 : null,
-  //         child: Row(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: <Widget>[
-  //             Text(
-  //               localizedPrayerName(context, prayerModelType),
-  //               style: textStyleOfTimes,
-  //             ),
-  //             const Spacer(),
-  //             Text(
-  //               formatTimeOfDay(context, mapOfTimes.values.elementAt(i)),
-  //               style: textStyleOfTimes,
-  //             ),
-  //             const Gap(10),
-  //             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
-  //                 platformOwn == platform_services.PlatformOwn.isIos)
-  //               SizedBox(
-  //                 height: isToday ? 40 : 30,
-  //                 width: isToday ? 50 : 0,
-  //                 child:
-  //                     !isToday
-  //                         ? null
-  //                         : getPrayerReminderSwitch(
-  //                           defaultWhenEnable,
-  //                           isCurrentToRemind,
-  //                           context,
-  //                           prayerModelType,
-  //                           currentReminder,
-  //                           l10n,
-  //                         ),
-  //               ),
-  //             if (isLandScape)
-  //               const SizedBox(height: 1, child: SafeArea(child: SizedBox())),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-  // Switch getPrayerReminderSwitch(
-  //   ReminderTypeWithPrayModel defaultWhenEnable,
-  //   bool isCurrentToRemind,
-  //   BuildContext context,
-  //   PrayerModelTimesType prayerModelType,
-  //   ReminderTypeWithPrayModel? currentReminder,
-  //   AppLocalizations l10n,
-  // ) {
-  //   return Switch(
-  //     thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-  //       Set<WidgetState> states,
-  //     ) {
-  //       if (states.contains(WidgetState.selected)) {
-  //         return Icon(
-  //           defaultWhenEnable.reminderType == PrayerReminderType.notification
-  //               ? FluentIcons.alert_on_24_regular
-  //               : Icons.alarm_on_rounded,
-  //         );
-  //       }
-  //       return Icon(
-  //         defaultWhenEnable.reminderType == PrayerReminderType.notification
-  //             ? FluentIcons.alert_off_24_regular
-  //             : Icons.alarm_off_rounded,
-  //       );
-  //     }),
-  //     value: isCurrentToRemind,
-  //     onChanged: (value) async {
-  //       if (value) {
-  //         if (await requestPermissionForReminder(
-  //           defaultWhenEnable.reminderType == PrayerReminderType.alarm,
-  //         )) {
-  //           context.read<PrayerReminderCubit>().addPrayerToRemember(
-  //             defaultWhenEnable,
-  //           );
-  //           Fluttertoast.showToast(
-  //             msg: l10n.reminderAdded(prayerModelType.name.capitalize()),
-  //           );
-  //         } else {
-  //           Fluttertoast.showToast(msg: l10n.allowNotificationPermission);
-  //         }
-  //       } else {
-  //         context.read<PrayerReminderCubit>().removePrayerToRemember(
-  //           currentReminder!,
-  //         );
-  //         await setReminderForPrayers();
-  //         Fluttertoast.showToast(
-  //           msg: l10n.reminderRemoved(prayerModelType.name.capitalize()),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-  // Expanded getNextPrayerTimeWidget(
-  //   BuildContext context,
-  //   AppLocalizations l10n,
-  // ) {
-  //   return Expanded(
-  //     flex: 4,
-  //     child: FittedBox(
-  //       fit: BoxFit.scaleDown,
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text(
-  //             (PrayersTimeFunction.getTodaysPrayerTime(DateTime.now()) == null)
-  //                 ? ""
-  //                 : localizedPrayerName(
-  //                   context,
-  //                   PrayersTimeFunction.nextPrayerName(
-  //                     PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
-  //                   ),
-  //                 ).toUpperCase(),
-  //             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-  //           ),
-  //           Text(
-  //             PrayersTimeFunction.getTodaysPrayerTime(DateTime.now()) == null
-  //                 ? ""
-  //                 : formatTimeOfDay(
-  //                   context,
-  //                   PrayersTimeFunction.nextPrayerTime(
-  //                     PrayersTimeFunction.getTodaysPrayerTime(DateTime.now())!,
-  //                   ),
-  //                 ),
-  //             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //           ),
-  //           Row(
-  //             children: [
-  //               Text(
-  //                 l10n.left,
-  //                 style: const TextStyle(
-  //                   fontSize: 12,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ),
-  //               const Gap(5),
-  //               const Icon(Icons.arrow_forward_rounded, size: 12),
-  //               const Gap(5),
-  //               StreamBuilder(
-  //                 stream: Stream.periodic(const Duration(seconds: 1), (timer) {
-  //                   return DateTime.now();
-  //                 }),
-  //                 builder: (context, snapshot) {
-  //                   TextStyle textStyle = const TextStyle(
-  //                     fontSize: 12,
-  //                     fontWeight: FontWeight.bold,
-  //                   );
-  //                   if (!snapshot.hasData) {
-  //                     return Text("00:00:00", style: textStyle);
-  //                   }
-  //                   DateTime targetTime = snapshot.data as DateTime;
-  //                   TimeOfDay? nextPrayerTime =
-  //                       PrayersTimeFunction.getTodaysPrayerTime(targetTime) ==
-  //                               null
-  //                           ? null
-  //                           : PrayersTimeFunction.nextPrayerTime(
-  //                             PrayersTimeFunction.getTodaysPrayerTime(
-  //                               targetTime,
-  //                             )!,
-  //                           );
-  //                   Duration? timeUntilNextPrayer =
-  //                       nextPrayerTime == null
-  //                           ? null
-  //                           : DateTime.now()
-  //                               .copyWith(
-  //                                 hour: nextPrayerTime.hour,
-  //                                 minute: nextPrayerTime.minute,
-  //                                 second: 0,
-  //                               )
-  //                               .difference(targetTime);
-  //                   String pad = localizedNumber(context, 0);
-  //                   return Text(
-  //                     "${localizedNumber(context, timeUntilNextPrayer?.inHours ?? "").padLeft(2, pad)}:${localizedNumber(context, (timeUntilNextPrayer?.inMinutes ?? 0) % 60).padLeft(2, pad)}:${localizedNumber(context, (timeUntilNextPrayer?.inSeconds ?? 0) % 60).padLeft(2, pad)}",
-  //                     style: textStyle,
-  //                   );
-  //                 },
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-  // int? getCurrentPrayerIndex(List<Map<String, dynamic>> listOfTimes) {
-  //   for (int i = 0; i < listOfTimes.length; i++) {
-  //     if (listOfTimes[i]["time"] != null) {
-  //       TimeOfDay timeOfDay = listOfTimes[i]["time"] as TimeOfDay;
-  //       if (timeOfDay.isAfter(TimeOfDay.now())) {
-  //         return i;
-  //       }
-  //     }
-  //   }
-  //   return null;
-  // }
+  ClipRRect forbiddenWidget(
+    ThemeState themeState,
+    PrayerTimeHelper prayerTimeHelper,
+    BuildContext context,
+    String img,
+    DateTime start,
+    DateTime end,
+    String title,
+  ) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(color: themeState.primaryShade100),
+        child: Row(
+          children: [
+            Image.asset(img, height: 60, width: 60, fit: BoxFit.cover),
+            const Gap(8),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          TimeOfDay.fromDateTime(
+                            start.toLocal(),
+                          ).format(context),
+                        ),
+                        const Gap(8),
+                        Expanded(
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: themeState.primaryShade300,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                        const Gap(8),
+                        Text(
+                          TimeOfDay.fromDateTime(end.toLocal()).format(context),
+                        ),
+                        const Gap(8),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getPrayerRow(
+    BuildContext context,
+    Prayer prayer,
+    DateTime time,
+    PrayerTimeHelper prayerTimeHelper,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 6,
+          backgroundColor:
+              prayerTimeHelper.currentPrayer(DateTime.now()) == prayer
+                  ? context.read<ThemeCubit>().state.primary
+                  : null,
+        ),
+        const Gap(8),
+        Text(
+          prayerTimeHelper.localizedPrayerName(context, prayer).capitalize(),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        const Spacer(),
+        Text(
+          TimeOfDay.fromDateTime(time.toLocal()).format(context),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        const Gap(8),
+        Switch(value: true, onChanged: (value) {}),
+      ],
+    );
+  }
 }

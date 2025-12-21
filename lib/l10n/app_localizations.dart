@@ -1888,6 +1888,12 @@ abstract class AppLocalizations {
   /// **'Sunrise'**
   String get sunrise;
 
+  /// No description provided for @noon.
+  ///
+  /// In en, this message translates to:
+  /// **'Noon'**
+  String get noon;
+
   /// No description provided for @dhuhr.
   ///
   /// In en, this message translates to:
@@ -1899,6 +1905,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Asr'**
   String get asr;
+
+  /// No description provided for @sunset.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunset'**
+  String get sunset;
 
   /// No description provided for @maghrib.
   ///

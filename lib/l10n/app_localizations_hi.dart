@@ -986,10 +986,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get sunrise => 'सूर्योदय';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'जुहर';
 
   @override
   String get asr => 'अस्र';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'मग़रिब';

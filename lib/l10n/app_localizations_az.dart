@@ -991,10 +991,16 @@ class AppLocalizationsAz extends AppLocalizations {
   String get sunrise => 'Günəş';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Zöhr';
 
   @override
   String get asr => 'Əsr';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Məğrib';

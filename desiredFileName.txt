@@ -1,1 +1,121 @@
-{}
+{
+  "ar": [
+    "noon",
+    "sunset"
+  ],
+
+  "az": [
+    "noon",
+    "sunset"
+  ],
+
+  "bn": [
+    "noon",
+    "sunset"
+  ],
+
+  "de": [
+    "noon",
+    "sunset"
+  ],
+
+  "es": [
+    "noon",
+    "sunset"
+  ],
+
+  "fa": [
+    "noon",
+    "sunset"
+  ],
+
+  "fr": [
+    "noon",
+    "sunset"
+  ],
+
+  "hi": [
+    "noon",
+    "sunset"
+  ],
+
+  "id": [
+    "noon",
+    "sunset"
+  ],
+
+  "it": [
+    "noon",
+    "sunset"
+  ],
+
+  "ja": [
+    "noon",
+    "sunset"
+  ],
+
+  "kk": [
+    "noon",
+    "sunset"
+  ],
+
+  "ko": [
+    "noon",
+    "sunset"
+  ],
+
+  "ms": [
+    "noon",
+    "sunset"
+  ],
+
+  "pa": [
+    "noon",
+    "sunset"
+  ],
+
+  "ps": [
+    "noon",
+    "sunset"
+  ],
+
+  "pt": [
+    "noon",
+    "sunset"
+  ],
+
+  "ru": [
+    "noon",
+    "sunset"
+  ],
+
+  "sw": [
+    "noon",
+    "sunset"
+  ],
+
+  "ta": [
+    "noon",
+    "sunset"
+  ],
+
+  "tr": [
+    "noon",
+    "sunset"
+  ],
+
+  "ur": [
+    "noon",
+    "sunset"
+  ],
+
+  "vi": [
+    "noon",
+    "sunset"
+  ],
+
+  "zh": [
+    "noon",
+    "sunset"
+  ]
+}

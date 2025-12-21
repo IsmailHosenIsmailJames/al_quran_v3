@@ -1001,10 +1001,16 @@ class AppLocalizationsTa extends AppLocalizations {
   String get sunrise => 'சூரிய உதயம்';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'ളുஹர்';
 
   @override
   String get asr => 'அஸர்';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'மஃரிப்';

@@ -993,10 +993,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sunrise => 'Восход';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Зухр';
 
   @override
   String get asr => 'Аср';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Магриб';

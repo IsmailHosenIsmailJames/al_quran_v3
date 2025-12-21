@@ -996,10 +996,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get sunrise => 'Nascer do sol';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Dhuhr';
 
   @override
   String get asr => 'Asr';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Maghrib';

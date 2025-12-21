@@ -984,10 +984,16 @@ class AppLocalizationsKk extends AppLocalizations {
   String get sunrise => 'Күн шығуы';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Түс';
 
   @override
   String get asr => 'Екінді';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Ақшам';

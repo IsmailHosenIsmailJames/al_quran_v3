@@ -984,10 +984,16 @@ class AppLocalizationsMs extends AppLocalizations {
   String get sunrise => 'Matahari Terbit';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Zohor';
 
   @override
   String get asr => 'Asar';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Maghrib';

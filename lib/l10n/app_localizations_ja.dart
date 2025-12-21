@@ -973,10 +973,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sunrise => '日の出';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'ズフル';
 
   @override
   String get asr => 'アスル';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'マグリブ';

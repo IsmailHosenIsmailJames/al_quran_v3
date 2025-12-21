@@ -986,10 +986,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get sunrise => 'Gündoğumu';
 
   @override
+  String get noon => 'Noon';
+
+  @override
   String get dhuhr => 'Öğle';
 
   @override
   String get asr => 'İkindi';
+
+  @override
+  String get sunset => 'Sunset';
 
   @override
   String get maghrib => 'Akşam';
