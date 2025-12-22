@@ -66,13 +66,13 @@ class PrayerTimeHelper {
     );
 
     if (now.isAfter(forbiddenSunsetPrayerTime) && now.isBefore(sunset)) {
-      return Prayer.maghrib;
+      return Prayer.sunset;
     }
 
     return null;
   }
 
-  Prayer? getNextPrayerIsForbidden(Prayer prayer) {
+  Prayer? isNextForbiddenPrayer(Prayer prayer) {
     if (prayer == Prayer.fajr) {
       return Prayer.sunrise;
     } else if (prayer == Prayer.sunrise) {
@@ -82,6 +82,17 @@ class PrayerTimeHelper {
     } else {
       return null;
     }
+  }
+
+  DateTime getTahajjudStartTime({bool isSixth = false}) {
+    Duration nightDuration = prayerTimes.fajr.difference(prayerTimes.maghrib);
+    Duration tahajjudDuration = Duration(
+      milliseconds: nightDuration.inMilliseconds ~/ (isSixth ? 6 : 3),
+    );
+    return prayerTimes.maghrib
+        .add(tahajjudDuration)
+        .add(const Duration(minutes: 1))
+        .toLocal();
   }
 
   Prayer currentPrayer(DateTime now) {
@@ -127,7 +138,8 @@ class PrayerTimeHelper {
   int timeLeftInPercentage(DateTime now) {
     Duration totalTime = nextPrayerTime(now).difference(currentPrayerTime(now));
     Duration left = nextPrayerTime(now).difference(now);
-    return ((left.inMicroseconds / totalTime.inMicroseconds) * 100).toInt();
+    return ((left.inMicroseconds / (totalTime.inMicroseconds + 1)) * 100)
+        .toInt();
   }
 
   String leftTimeString(BuildContext context, DateTime now) {

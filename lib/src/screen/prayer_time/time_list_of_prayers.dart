@@ -186,7 +186,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               width: mediaQueryData.size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: themeState.primaryShade100,
+                color:
+                    prayerTimeHelper.getCurrentPrayerIfInsideForbidden(now) ==
+                            null
+                        ? themeState.primaryShade100
+                        : Colors.red.withValues(alpha: 0.5),
               ),
               padding: const EdgeInsets.all(8),
               child: Stack(
@@ -498,9 +502,78 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ],
               ),
             ),
+            const Gap(8),
+            GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 1.2,
+              ),
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                ramadanCard(
+                  context,
+                  themeState: themeState,
+                  time:
+                      prayerTimeHelper.prayerTimes.fajr
+                          .subtract(const Duration(minutes: 1))
+                          .toLocal(),
+                  title: "Suhur End Time",
+                ),
+                ramadanCard(
+                  context,
+                  themeState: themeState,
+                  time: prayerTimeHelper.prayerTimes.maghrib.toLocal(),
+                  title: "Iftar Start Time",
+                ),
+                ramadanCard(
+                  context,
+                  themeState: themeState,
+                  time: prayerTimeHelper.getTahajjudStartTime(),
+                  title: "Tahajjud Start Time",
+                ),
+              ],
+            ),
           ],
         );
       },
+    );
+  }
+
+  Widget ramadanCard(
+    BuildContext context, {
+    required ThemeState themeState,
+    required DateTime time,
+    required String title,
+  }) {
+    return Container(
+      width: 100,
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: themeState.primaryShade300),
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const Spacer(),
+          Text(
+            TimeOfDay.fromDateTime(time).format(context),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 
@@ -521,7 +594,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         child: Row(
           children: [
             Image.asset(img, height: 60, width: 60, fit: BoxFit.cover),
-            const Gap(8),
+            const Gap(4),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -537,11 +610,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             start.toLocal(),
                           ).format(context),
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Gap(8),
+                        const Gap(4),
                         Expanded(
                           child: Container(
                             height: 4,
@@ -551,11 +624,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             ),
                           ),
                         ),
-                        const Gap(8),
+                        const Gap(4),
                         Text(
                           TimeOfDay.fromDateTime(end.toLocal()).format(context),
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -565,7 +638,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ),
               ),
             ),
-            const VerticalDivider(width: 16),
+            const VerticalDivider(width: 12),
             getReminderSwitch(
               context,
               isAlarm: false,
