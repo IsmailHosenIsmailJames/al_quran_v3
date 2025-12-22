@@ -1136,4 +1136,16 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get supportOnGithub => 'Supporta su GitHub';
+
+  @override
+  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+
+  @override
+  String get prayerTimes => 'Prayer Times';
+
+  @override
+  String get hanafi => 'Hanafi';
+
+  @override
+  String get shafieMalikiHanbali => 'Shafie, Maliki, Hanbali';
 }

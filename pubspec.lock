@@ -14,7 +14,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "82f55f33aa9658bc098b3efbbc4811d0c6542167"
+      resolved-ref: a57325f3901d468e6394fb0d093f5a3ef7cf61be
       url: "https://github.com/IsmailHosenIsmailJames/adhan_dart.git"
     source: git
     version: "1.2.0"
@@ -659,10 +659,10 @@ packages:
     dependency: "direct main"
     description:
       name: hive_ce
-      sha256: "81d39a03c4c0ba5938260a8c3547d2e71af59defecea21793d57fc3551f0d230"
+      sha256: "412c638aeac0f003bba664884e3048b9547e541aaca13f10cc639da788184bed"
       url: "https://pub.dev"
     source: hosted
-    version: "2.15.1"
+    version: "2.16.0"
   hive_ce_flutter:
     dependency: "direct main"
     description:
@@ -707,10 +707,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "51555e36056541237b15b57afc31a0f53d4f9aefd9bd00873a6dc0090e54e332"
+      sha256: "492bd52f6c4fbb6ee41f781ff27765ce5f627910e1e0cbecfa3d9add5562604c"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.2"
   image_size_getter:
     dependency: transitive
     description:
@@ -1520,10 +1520,10 @@ packages:
     dependency: "direct main"
     description:
       name: vibration
-      sha256: "1fd51cb0f91c6d512734ca0e282dd87fbc7f389b6da5f03c77709ba2cf8fa901"
+      sha256: bfb274be6996651d36bf3e3a947d2122767dae255cfb9ce6ce8ee4b38fb56bad
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.4"
+    version: "3.1.5"
   vibration_platform_interface:
     dependency: transitive
     description:

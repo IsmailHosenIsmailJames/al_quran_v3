@@ -593,5 +593,9 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "Optimizing Quran Script",
-  "supportOnGithub": "Support on GitHub"
+  "supportOnGithub": "Support on GitHub",
+  "forbiddenSalatTimes": "Forbidden Salat Times",
+  "prayerTimes": "Prayer Times",
+  "hanafi": "Hanafi",
+  "shafieMalikiHanbali": "Shafie, Maliki, Hanbali"
 }

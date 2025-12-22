@@ -34,12 +34,12 @@ class PrayerTimeHelper {
         return localizations.fajr;
       case Prayer.noon:
         return localizations.noon;
+      case Prayer.sunset:
+        return localizations.sunset;
     }
   }
 
-  Prayer currentPrayer(DateTime now) {
-    Prayer prayer = prayerTimes.currentPrayer(date: now);
-
+  Prayer? getCurrentPrayerIfInsideForbidden(DateTime now) {
     // check if now is between forbiddenSunrisePrayerTime
     DateTime sunrise = prayerTimes.sunrise;
     DateTime forbiddenSunrisePrayerTime = sunrise.add(
@@ -69,6 +69,26 @@ class PrayerTimeHelper {
       return Prayer.maghrib;
     }
 
+    return null;
+  }
+
+  Prayer? getNextPrayerIsForbidden(Prayer prayer) {
+    if (prayer == Prayer.fajr) {
+      return Prayer.sunrise;
+    } else if (prayer == Prayer.sunrise) {
+      return Prayer.noon;
+    } else if (prayer == Prayer.asr) {
+      return Prayer.sunset;
+    } else {
+      return null;
+    }
+  }
+
+  Prayer currentPrayer(DateTime now) {
+    if (getCurrentPrayerIfInsideForbidden(now) != null) {
+      return getCurrentPrayerIfInsideForbidden(now)!;
+    }
+    Prayer prayer = prayerTimes.currentPrayer(date: now);
     return prayer;
   }
 
@@ -112,6 +132,6 @@ class PrayerTimeHelper {
 
   String leftTimeString(BuildContext context, DateTime now) {
     Duration left = nextPrayerTime(now).difference(now);
-    return "${localizedNumber(context, left.inHours).padLeft(2, "0")}:${localizedNumber(context, left.inMinutes.remainder(60)).padLeft(2, "0")}:${localizedNumber(context, left.inSeconds.remainder(60)).padLeft(2, "0")}";
+    return "${localizedNumber(context, left.inHours).padLeft(2, localizedNumber(context, 0))}:${localizedNumber(context, left.inMinutes.remainder(60)).padLeft(2, localizedNumber(context, 0))}:${localizedNumber(context, left.inSeconds.remainder(60)).padLeft(2, localizedNumber(context, 0))}";
   }
 }
