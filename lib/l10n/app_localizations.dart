@@ -2143,6 +2143,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support on GitHub'**
   String get supportOnGithub;
+
+  /// No description provided for @forbiddenSalatTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Forbidden Salat Times'**
+  String get forbiddenSalatTimes;
+
+  /// No description provided for @prayerTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Times'**
+  String get prayerTimes;
+
+  /// No description provided for @hanafi.
+  ///
+  /// In en, this message translates to:
+  /// **'Hanafi'**
+  String get hanafi;
+
+  /// No description provided for @shafieMalikiHanbali.
+  ///
+  /// In en, this message translates to:
+  /// **'Shafie, Maliki, Hanbali'**
+  String get shafieMalikiHanbali;
 }
 
 class _AppLocalizationsDelegate

@@ -107,6 +107,7 @@ flutter:
   generate: true
   assets:
     - assets/img/
+    - assets/img/sunrise_forbidden_time.png
     - assets/
     - assets/dev/
     - assets/quran_script/

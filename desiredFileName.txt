@@ -1,121 +1,217 @@
 {
   "ar": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "az": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "bn": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "de": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "es": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "fa": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "fr": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "hi": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "id": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "it": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ja": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "kk": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ko": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ms": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "pa": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ps": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "pt": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ru": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "sw": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ta": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "tr": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "ur": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "vi": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ],
 
   "zh": [
     "noon",
-    "sunset"
+    "sunset",
+    "forbiddenSalatTimes",
+    "prayerTimes",
+    "hanafi",
+    "shafieMalikiHanbali"
   ]
 }
