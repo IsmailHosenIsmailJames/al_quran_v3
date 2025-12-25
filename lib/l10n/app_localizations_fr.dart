@@ -1148,4 +1148,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get shafieMalikiHanbali => 'Shafie, Maliki, Hanbali';
+
+  @override
+  String get suhurEndTime => 'Suhur End Time';
+
+  @override
+  String get iftarStartTime => 'Iftar Start Time';
+
+  @override
+  String get tahajjudStartTime => 'Tahajjud Start Time';
 }

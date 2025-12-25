@@ -2,9 +2,9 @@ import "dart:math";
 
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
-import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/utils/hijri_date.dart";
@@ -47,7 +47,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         final DateTime now = DateTime.now();
         final PrayerTimeHelper prayerTimeHelper = PrayerTimeHelper(
           prayerTimes: PrayerTimes(
-            date: DateTime(now.year, now.month, now.day),
+            date: DateTime.now(),
             coordinates: Coordinates(widget.lat, widget.lon),
             calculationParameters:
                 CalculationMethodParameters.muslimWorldLeague(),
@@ -439,7 +439,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const SettingsPage(),
+                                builder: (context) => const PrayerSettings(),
                               ),
                             );
                           },
@@ -521,19 +521,19 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       prayerTimeHelper.prayerTimes.fajr
                           .subtract(const Duration(minutes: 1))
                           .toLocal(),
-                  title: "Suhur End Time",
+                  title: l10n.suhurEndTime,
                 ),
                 ramadanCard(
                   context,
                   themeState: themeState,
                   time: prayerTimeHelper.prayerTimes.maghrib.toLocal(),
-                  title: "Iftar Start Time",
+                  title: l10n.iftarStartTime,
                 ),
                 ramadanCard(
                   context,
                   themeState: themeState,
                   time: prayerTimeHelper.getTahajjudStartTime(),
-                  title: "Tahajjud Start Time",
+                  title: l10n.tahajjudStartTime,
                 ),
               ],
             ),
