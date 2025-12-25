@@ -6,12 +6,14 @@ class LocationQiblaPrayerDataState {
   double? kaabaAngle;
   CalculationMethod? calculationMethod;
   bool? isPrayerTimeDownloading;
+  bool? isGettingLocation;
 
   LocationQiblaPrayerDataState({
     this.latLon,
     this.kaabaAngle,
     this.calculationMethod,
     this.isPrayerTimeDownloading = false,
+    this.isGettingLocation = false,
   });
 
   LocationQiblaPrayerDataState copyWith({
@@ -20,6 +22,7 @@ class LocationQiblaPrayerDataState {
     CalculationMethod? calculationMethod,
     bool? isDataExits,
     bool? isPrayerTimeDownloading,
+    bool? isGettingLocation,
   }) {
     return LocationQiblaPrayerDataState(
       latLon: latLon ?? this.latLon,
@@ -27,6 +30,7 @@ class LocationQiblaPrayerDataState {
       calculationMethod: calculationMethod ?? this.calculationMethod,
       isPrayerTimeDownloading:
           isPrayerTimeDownloading ?? this.isPrayerTimeDownloading,
+      isGettingLocation: isGettingLocation ?? this.isGettingLocation,
     );
   }
 }

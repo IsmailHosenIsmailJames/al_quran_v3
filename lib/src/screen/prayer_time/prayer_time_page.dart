@@ -23,10 +23,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
         if (state.latLon == null || state.calculationMethod == null) {
           return const LocationAcquire();
         } else {
-          return TimeListOfPrayers(
-            lat: state.latLon!.latitude,
-            lon: state.latLon!.longitude,
-          );
+          return const TimeListOfPrayers();
         }
       },
     );

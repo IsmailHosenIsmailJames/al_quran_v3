@@ -28,10 +28,6 @@ class PrayerTimeHelper {
         return localizations.isha;
       case Prayer.tahajjud:
         return localizations.tahajjud;
-      case Prayer.ishaBefore:
-        return "Before Isha";
-      case Prayer.fajrAfter:
-        return "After Fajr";
       default:
         return null;
     }
