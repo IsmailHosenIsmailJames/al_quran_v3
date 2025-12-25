@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/address_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -16,9 +15,9 @@ import "package:gap/gap.dart";
 import "package:geolocator/geolocator.dart";
 
 class LocationAcquire extends StatefulWidget {
-  final bool moveToDownload;
+  final bool backToPage;
 
-  const LocationAcquire({super.key, this.moveToDownload = false});
+  const LocationAcquire({super.key, this.backToPage = false});
 
   @override
   State<LocationAcquire> createState() => _LocationAcquireState();
@@ -31,7 +30,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: widget.moveToDownload ? AppBar() : null,
+      appBar: widget.backToPage ? AppBar() : null,
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -95,44 +94,33 @@ class _LocationAcquireState extends State<LocationAcquire> {
                                       latitude: position.latitude,
                                       longitude: position.longitude,
                                     ),
-                                    save: !widget.moveToDownload,
+                                    save: !widget.backToPage,
                                   );
-                              context
-                                  .read<LocationQiblaPrayerDataCubit>()
-                                  .saveCalculationMethod(
-                                    findClosestCalculationMethod(
-                                      position.latitude,
-                                      position.longitude,
-                                    ),
-                                    save: !widget.moveToDownload,
-                                  );
-                              if (widget.moveToDownload) {
-                                return;
+                              setState(() {
+                                isGPSLocationLoading = false;
+                              });
+                              if (widget.backToPage) {
+                                Navigator.pop(context);
                               }
                             }
                           } catch (e) {
                             log(e.toString());
                           }
-                          setState(() {
-                            isGPSLocationLoading = false;
-                          });
                         },
                         label: Text(l10n.getFromGPS),
-                        icon:
-                            isGPSLocationLoading
-                                ? Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: CircularProgressIndicator(
-                                      backgroundColor:
-                                          context
-                                              .read<ThemeCubit>()
-                                              .state
-                                              .primaryShade100,
-                                    ),
+                        icon: isGPSLocationLoading
+                            ? Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: context
+                                        .read<ThemeCubit>()
+                                        .state
+                                        .primaryShade100,
                                   ),
-                                )
-                                : const Icon(Icons.gps_fixed_rounded),
+                                ),
+                              )
+                            : const Icon(Icons.gps_fixed_rounded),
                       ),
                     ),
                   if (!(platformOwn == PlatformOwn.isLinux)) const Gap(5),
@@ -143,21 +131,22 @@ class _LocationAcquireState extends State<LocationAcquire> {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: OutlinedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder:
-                                (context) => BlocProvider(
-                                  create:
-                                      (context) =>
-                                          ManualLocationSelectionCubit(),
-                                  child: AddressSelection(
-                                    moveToDownloadPage: widget.moveToDownload,
-                                  ),
-                                ),
+                            builder: (context) => BlocProvider(
+                              create: (context) =>
+                                  ManualLocationSelectionCubit(),
+                              child: AddressSelection(
+                                backToPage: widget.backToPage,
+                              ),
+                            ),
                           ),
                         );
+                        if (widget.backToPage) {
+                          Navigator.pop(context);
+                        }
                       },
                       label: Text(l10n.selectYourCity),
                       icon: const Icon(Icons.location_city_rounded),

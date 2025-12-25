@@ -2185,6 +2185,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tahajjud Start Time'**
   String get tahajjudStartTime;
+
+  /// No description provided for @tahajjud.
+  ///
+  /// In en, this message translates to:
+  /// **'Tahajjud'**
+  String get tahajjud;
+
+  /// No description provided for @dhuha.
+  ///
+  /// In en, this message translates to:
+  /// **'Dhuha'**
+  String get dhuha;
 }
 
 class _AppLocalizationsDelegate

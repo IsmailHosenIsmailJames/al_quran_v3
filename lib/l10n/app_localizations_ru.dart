@@ -1152,4 +1152,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tahajjudStartTime => 'Tahajjud Start Time';
+
+  @override
+  String get tahajjud => 'Tahajjud';
+
+  @override
+  String get dhuha => 'Dhuha';
 }

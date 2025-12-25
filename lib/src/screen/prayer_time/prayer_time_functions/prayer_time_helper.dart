@@ -1,149 +1,46 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:flutter/material.dart";
 
 class PrayerTimeHelper {
-  PrayerTimes prayerTimes;
-  PrayerTimeHelper({required this.prayerTimes});
+  PrayerTimeHelper();
 
-  String currentPrayerTimeString(BuildContext context, DateTime now) {
-    return TimeOfDay.fromDateTime(
-      currentPrayerTime(now).toLocal(),
-    ).format(context);
-  }
-
-  String localizedPrayerName(BuildContext context, Prayer prayer) {
+  static String? localizedPrayerName(BuildContext context, Prayer? prayer) {
     final AppLocalizations localizations = AppLocalizations.of(context);
     switch (prayer) {
       case Prayer.fajr:
         return localizations.fajr;
       case Prayer.sunrise:
         return localizations.sunrise;
+      case Prayer.dhuha:
+        return localizations.dhuha;
+      case Prayer.noon:
+        return localizations.noon;
       case Prayer.dhuhr:
         return localizations.dhuhr;
       case Prayer.asr:
         return localizations.asr;
+      case Prayer.sunset:
+        return localizations.sunset;
       case Prayer.maghrib:
         return localizations.maghrib;
       case Prayer.isha:
         return localizations.isha;
+      case Prayer.tahajjud:
+        return localizations.tahajjud;
       case Prayer.ishaBefore:
-        return localizations.isha;
+        return "Before Isha";
       case Prayer.fajrAfter:
-        return localizations.fajr;
-      case Prayer.noon:
-        return localizations.noon;
-      case Prayer.sunset:
-        return localizations.sunset;
+        return "After Fajr";
+      default:
+        return null;
     }
   }
 
-  Prayer? getCurrentPrayerIfInsideForbidden(DateTime now) {
-    // check if now is between forbiddenSunrisePrayerTime
-    DateTime sunrise = prayerTimes.sunrise;
-    DateTime forbiddenSunrisePrayerTime = sunrise.add(
-      const Duration(minutes: 15),
-    );
-    if (now.isAfter(sunrise) && now.isBefore(forbiddenSunrisePrayerTime)) {
-      return Prayer.sunrise;
+  static String formatDuration(Duration? duration) {
+    if (duration == null) {
+      return "-";
     }
-
-    // check noon forbidden time
-    DateTime middleOfDay = prayerTimes.dhuhr;
-    DateTime forbiddenNoonPrayerTime = middleOfDay.subtract(
-      const Duration(minutes: 8),
-    );
-
-    if (now.isAfter(forbiddenNoonPrayerTime) && now.isBefore(middleOfDay)) {
-      return Prayer.noon;
-    }
-
-    // check if now is between forbiddenSunsetPrayerTime
-    DateTime sunset = prayerTimes.maghrib;
-    DateTime forbiddenSunsetPrayerTime = sunset.subtract(
-      const Duration(minutes: 15),
-    );
-
-    if (now.isAfter(forbiddenSunsetPrayerTime) && now.isBefore(sunset)) {
-      return Prayer.sunset;
-    }
-
-    return null;
-  }
-
-  Prayer? isNextForbiddenPrayer(Prayer prayer) {
-    if (prayer == Prayer.fajr) {
-      return Prayer.sunrise;
-    } else if (prayer == Prayer.sunrise) {
-      return Prayer.noon;
-    } else if (prayer == Prayer.asr) {
-      return Prayer.sunset;
-    } else {
-      return null;
-    }
-  }
-
-  DateTime getTahajjudStartTime({bool isSixth = false}) {
-    Duration nightDuration = prayerTimes.fajr.difference(prayerTimes.maghrib);
-    Duration tahajjudDuration = Duration(
-      milliseconds: nightDuration.inMilliseconds ~/ (isSixth ? 6 : 3),
-    );
-    return prayerTimes.maghrib
-        .add(tahajjudDuration)
-        .add(const Duration(minutes: 1))
-        .toLocal();
-  }
-
-  Prayer currentPrayer(DateTime now) {
-    if (getCurrentPrayerIfInsideForbidden(now) != null) {
-      return getCurrentPrayerIfInsideForbidden(now)!;
-    }
-    Prayer prayer = prayerTimes.currentPrayer(date: now);
-    return prayer;
-  }
-
-  Prayer nextPrayer(DateTime now) {
-    return prayerTimes.nextPrayer(date: now);
-  }
-
-  String currentPrayerName(BuildContext context, DateTime now) {
-    final prayer = currentPrayer(now);
-    return localizedPrayerName(context, prayer);
-  }
-
-  String nextPrayerName(BuildContext context, DateTime now) {
-    final prayer = nextPrayer(now);
-    return localizedPrayerName(context, prayer);
-  }
-
-  DateTime currentPrayerTime(DateTime now) {
-    final prayer = currentPrayer(now);
-    final time = prayerTimes.timeForPrayer(prayer);
-    return time.toLocal();
-  }
-
-  String nextPrayerTimeString(BuildContext context, DateTime now) {
-    return TimeOfDay.fromDateTime(
-      nextPrayerTime(now).toLocal(),
-    ).format(context);
-  }
-
-  DateTime nextPrayerTime(DateTime now) {
-    final prayer = nextPrayer(now);
-    final time = prayerTimes.timeForPrayer(prayer);
-    return time.toLocal();
-  }
-
-  int timeLeftInPercentage(DateTime now) {
-    Duration totalTime = nextPrayerTime(now).difference(currentPrayerTime(now));
-    Duration left = nextPrayerTime(now).difference(now);
-    return ((left.inMicroseconds / (totalTime.inMicroseconds + 1)) * 100)
-        .toInt();
-  }
-
-  String leftTimeString(BuildContext context, DateTime now) {
-    Duration left = nextPrayerTime(now).difference(now);
-    return "${localizedNumber(context, left.inHours).padLeft(2, localizedNumber(context, 0))}:${localizedNumber(context, left.inMinutes.remainder(60)).padLeft(2, localizedNumber(context, 0))}:${localizedNumber(context, left.inSeconds.remainder(60)).padLeft(2, localizedNumber(context, 0))}";
+    return "${duration.inHours.toString().padLeft(2, "0")}:${(duration.inMinutes % 60).toString().padLeft(2, "0")}:${(duration.inSeconds % 60).toString().padLeft(2, "0")}";
   }
 }

@@ -14,8 +14,8 @@ import "package:http/http.dart" as http;
 import "../../../theme/controller/theme_cubit.dart";
 
 class AddressSelection extends StatefulWidget {
-  final bool moveToDownloadPage;
-  const AddressSelection({super.key, this.moveToDownloadPage = false});
+  final bool backToPage;
+  const AddressSelection({super.key, this.backToPage = false});
 
   @override
   State<AddressSelection> createState() => _AddressSelectionState();
@@ -69,69 +69,67 @@ class _AddressSelectionState extends State<AddressSelection> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      body: BlocBuilder<
-        ManualLocationSelectionCubit,
-        ManualLocationSelectionState
-      >(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  LinearProgressIndicator(
-                    value: state.downloadProgress,
-                    color: context.read<ThemeCubit>().state.primary,
+      body:
+          BlocBuilder<
+            ManualLocationSelectionCubit,
+            ManualLocationSelectionState
+          >(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      LinearProgressIndicator(
+                        value: state.downloadProgress,
+                        color: context.read<ThemeCubit>().state.primary,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        l10n.downloadingLocationResources,
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    l10n.downloadingLocationResources,
-                    style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          } else if (state.isError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(l10n.checkYourInternetConnection),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: downloadLocationResources,
-                    child: Text(l10n.retry),
-                  ),
-                ],
-              ),
-            );
-          } else if (state.isSuccess) {
-            return PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: pageController,
-              children: [
-                CountriesSelection(pageController: pageController),
-                AdministratorSelection(pageController: pageController),
-                CitySelection(
-                  pageController: pageController,
-                  moveToDownload: widget.moveToDownloadPage,
-                ),
-              ],
-              onPageChanged: (index) {
-                context.read<ManualLocationSelectionCubit>().changeData(
-                  country: state.locationData!.keys.elementAt(index),
                 );
-              },
-            );
-          }
-          return const SizedBox.shrink();
-        },
-      ),
+              } else if (state.isError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(l10n.checkYourInternetConnection),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: downloadLocationResources,
+                        child: Text(l10n.retry),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (state.isSuccess) {
+                return PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: pageController,
+                  children: [
+                    CountriesSelection(pageController: pageController),
+                    AdministratorSelection(pageController: pageController),
+                    CitySelection(pageController: pageController),
+                  ],
+                  onPageChanged: (index) {
+                    context.read<ManualLocationSelectionCubit>().changeData(
+                      country: state.locationData!.keys.elementAt(index),
+                    );
+                  },
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
     );
   }
 }

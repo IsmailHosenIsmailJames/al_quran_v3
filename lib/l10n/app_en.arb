@@ -600,5 +600,7 @@
   "shafieMalikiHanbali": "Shafie, Maliki, Hanbali",
   "suhurEndTime": "Suhur End Time",
   "iftarStartTime": "Iftar Start Time",
-  "tahajjudStartTime": "Tahajjud Start Time"
+  "tahajjudStartTime": "Tahajjud Start Time",
+  "tahajjud": "Tahajjud",
+  "dhuha": "Dhuha"
 }

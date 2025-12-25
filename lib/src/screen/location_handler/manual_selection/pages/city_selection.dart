@@ -2,21 +2,15 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
 class CitySelection extends StatefulWidget {
-  final bool moveToDownload;
   final PageController pageController;
 
-  const CitySelection({
-    super.key,
-    required this.pageController,
-    this.moveToDownload = false,
-  });
+  const CitySelection({super.key, required this.pageController});
 
   @override
   State<CitySelection> createState() => _CitySelectionState();
@@ -67,62 +61,49 @@ class _CitySelectionState extends State<CitySelection> {
             ),
           ),
           Expanded(
-            child: BlocBuilder<
-              ManualLocationSelectionCubit,
-              ManualLocationSelectionState
-            >(
-              builder: (context, state) {
-                if (state.cityList == null) {
-                  return Text(l10n.somethingWentWrong);
-                }
-
-                return ListView.builder(
-                  padding: const EdgeInsets.all(20),
-                  itemCount: state.cityList!.length,
-                  itemBuilder: (context, index) {
-                    String cityName = state.cityList![index]["city"];
-
-                    if (cityName.toLowerCase().contains(
-                      controller.text.toLowerCase().trim(),
-                    )) {
-                      return ListTile(
-                        title: Text(cityName),
-                        onTap: () {
-                          LatLon latLon = LatLon(
-                            latitude: double.parse(
-                              state.cityList![index]["lat"],
-                            ),
-                            longitude: double.parse(
-                              state.cityList![index]["lng"],
-                            ),
-                          );
-                          context
-                              .read<LocationQiblaPrayerDataCubit>()
-                              .saveLocationData(
-                                latLon,
-                                save: !widget.moveToDownload,
-                              );
-                          context
-                              .read<LocationQiblaPrayerDataCubit>()
-                              .saveCalculationMethod(
-                                findClosestCalculationMethod(
-                                  latLon.latitude,
-                                  latLon.longitude,
-                                ),
-                                save: !widget.moveToDownload,
-                              );
-
-                          Navigator.pop(context);
-                          if (widget.moveToDownload) {}
-                        },
-                      );
-                    } else {
-                      return const SizedBox();
+            child:
+                BlocBuilder<
+                  ManualLocationSelectionCubit,
+                  ManualLocationSelectionState
+                >(
+                  builder: (context, state) {
+                    if (state.cityList == null) {
+                      return Text(l10n.somethingWentWrong);
                     }
+
+                    return ListView.builder(
+                      padding: const EdgeInsets.all(20),
+                      itemCount: state.cityList!.length,
+                      itemBuilder: (context, index) {
+                        String cityName = state.cityList![index]["city"];
+
+                        if (cityName.toLowerCase().contains(
+                          controller.text.toLowerCase().trim(),
+                        )) {
+                          return ListTile(
+                            title: Text(cityName),
+                            onTap: () {
+                              LatLon latLon = LatLon(
+                                latitude: double.parse(
+                                  state.cityList![index]["lat"],
+                                ),
+                                longitude: double.parse(
+                                  state.cityList![index]["lng"],
+                                ),
+                              );
+                              context
+                                  .read<LocationQiblaPrayerDataCubit>()
+                                  .saveLocationData(latLon, save: true);
+                              Navigator.pop(context);
+                            },
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    );
                   },
-                );
-              },
-            ),
+                ),
           ),
         ],
       ),

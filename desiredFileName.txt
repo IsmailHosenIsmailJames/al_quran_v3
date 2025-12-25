@@ -8,7 +8,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "az": [
@@ -20,7 +22,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "bn": [
@@ -32,7 +36,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "de": [
@@ -44,7 +50,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "es": [
@@ -56,7 +64,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "fa": [
@@ -68,7 +78,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "fr": [
@@ -80,7 +92,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "hi": [
@@ -92,7 +106,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "id": [
@@ -104,7 +120,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "it": [
@@ -116,7 +134,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ja": [
@@ -128,7 +148,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "kk": [
@@ -140,7 +162,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ko": [
@@ -152,7 +176,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ms": [
@@ -164,7 +190,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "pa": [
@@ -176,7 +204,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ps": [
@@ -188,7 +218,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "pt": [
@@ -200,7 +232,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ru": [
@@ -212,7 +246,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "sw": [
@@ -224,7 +260,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ta": [
@@ -236,7 +274,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "tr": [
@@ -248,7 +288,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "ur": [
@@ -260,7 +302,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "vi": [
@@ -272,7 +316,9 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ],
 
   "zh": [
@@ -284,6 +330,8 @@
     "shafieMalikiHanbali",
     "suhurEndTime",
     "iftarStartTime",
-    "tahajjudStartTime"
+    "tahajjudStartTime",
+    "tahajjud",
+    "dhuha"
   ]
 }
