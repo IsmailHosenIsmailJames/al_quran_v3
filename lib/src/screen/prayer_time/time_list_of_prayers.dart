@@ -2,6 +2,7 @@ import "dart:math";
 
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
@@ -45,14 +46,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       stream: Stream.periodic(const Duration(seconds: 30)),
       builder: (context, snapshot) {
         final DateTime now = DateTime.now();
-        final PrayerTimeHelper prayerTimeHelper = PrayerTimeHelper(
-          prayerTimes: PrayerTimes(
-            date: DateTime.now(),
-            coordinates: Coordinates(widget.lat, widget.lon),
-            calculationParameters:
-                CalculationMethodParameters.muslimWorldLeague(),
-          ),
+        PrayerTimes prayerTimes = PrayerTimes(
+          date: DateTime.now(),
+          coordinates: Coordinates(widget.lat, widget.lon),
+          calculationParameters:
+              CalculationMethodParameters.muslimWorldLeague(),
         );
+
         return ListView(
           padding: const EdgeInsets.all(
             8,
@@ -80,10 +80,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           l10n.location.replaceAll(":", ""),
                           style: TextStyle(
                             fontSize: 12,
-                            color:
-                                isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade800,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade800,
                           ),
                         ),
                         FutureBuilder(
@@ -119,7 +118,15 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   const Gap(12),
                   IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const LocationAcquire(backToPage: true),
+                        ),
+                      );
+                    },
                     icon: Icon(Icons.refresh, color: themeState.primary),
                   ),
                 ],
@@ -186,11 +193,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               width: mediaQueryData.size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color:
-                    prayerTimeHelper.getCurrentPrayerIfInsideForbidden(now) ==
-                            null
-                        ? themeState.primaryShade100
-                        : Colors.red.withValues(alpha: 0.5),
+                color: prayerTimes.isInsideForbiddenTime(now) == null
+                    ? themeState.primaryShade100
+                    : Colors.red.withValues(alpha: 0.5),
               ),
               padding: const EdgeInsets.all(8),
               child: Stack(
@@ -206,26 +211,24 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           child: PrayerTimeCanvas(
                             prayerTimes: [
                               TimeOfDay.fromDateTime(
-                                prayerTimeHelper.prayerTimes.fajr.toLocal(),
+                                prayerTimes.fajr.toLocal(),
                               ),
                               TimeOfDay.fromDateTime(
-                                prayerTimeHelper.prayerTimes.dhuhr.toLocal(),
+                                prayerTimes.dhuhr.toLocal(),
+                              ),
+                              TimeOfDay.fromDateTime(prayerTimes.asr.toLocal()),
+                              TimeOfDay.fromDateTime(
+                                prayerTimes.maghrib.toLocal(),
                               ),
                               TimeOfDay.fromDateTime(
-                                prayerTimeHelper.prayerTimes.asr.toLocal(),
-                              ),
-                              TimeOfDay.fromDateTime(
-                                prayerTimeHelper.prayerTimes.maghrib.toLocal(),
-                              ),
-                              TimeOfDay.fromDateTime(
-                                prayerTimeHelper.prayerTimes.isha.toLocal(),
+                                prayerTimes.isha.toLocal(),
                               ),
                             ],
                             sunriseTime: TimeOfDay.fromDateTime(
-                              prayerTimeHelper.prayerTimes.sunrise.toLocal(),
+                              prayerTimes.sunrise.toLocal(),
                             ),
                             sunsetTime: TimeOfDay.fromDateTime(
-                              prayerTimeHelper.prayerTimes.maghrib.toLocal(),
+                              prayerTimes.maghrib.toLocal(),
                             ),
                           ),
                         ),
@@ -237,10 +240,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       Row(
                         children: [
                           Text(
-                            prayerTimeHelper.currentPrayerTimeString(
-                              context,
-                              DateTime.now(),
-                            ),
+                            TimeOfDay.fromDateTime(
+                              (prayerTimes.timeForPrayer(
+                                        prayerTimes.currentPrayer(date: now) ??
+                                            Prayer.fajr, // better than crash
+                                      ) ??
+                                      DateTime.now())
+                                  .toLocal(),
+                            ).format(context),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -250,11 +257,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           Expanded(
                             child: LinearProgressIndicator(
                               value:
-                                  (100 -
-                                      prayerTimeHelper.timeLeftInPercentage(
-                                        DateTime.now(),
-                                      )) /
-                                  100,
+                                  1 -
+                                  (prayerTimes
+                                          .percentageOfTimeLeftUntilNextPrayer(
+                                            now: DateTime.now(),
+                                          ) ??
+                                      0),
 
                               color: themeState.primary,
                               backgroundColor: themeState.primaryShade300,
@@ -264,10 +272,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           ),
                           const Gap(8),
                           Text(
-                            prayerTimeHelper.nextPrayerTimeString(
-                              context,
-                              DateTime.now(),
-                            ),
+                            TimeOfDay.fromDateTime(
+                              (prayerTimes.timeForPrayer(
+                                        prayerTimes.nextPrayer(date: now) ??
+                                            Prayer.fajr, // better than crash
+                                      ) ??
+                                      DateTime.now())
+                                  .toLocal(),
+                            ).format(context),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -283,10 +295,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(
-                              prayerTimeHelper.currentPrayerName(
-                                context,
-                                DateTime.now(),
-                              ),
+                              PrayerTimeHelper.localizedPrayerName(
+                                    context,
+                                    prayerTimes.currentPrayer(
+                                      date: DateTime.now(),
+                                    ),
+                                  ) ??
+                                  "-",
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -294,10 +309,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             ),
                           ),
                           Text(
-                            prayerTimeHelper.nextPrayerName(
-                              context,
-                              DateTime.now(),
-                            ),
+                            PrayerTimeHelper.localizedPrayerName(
+                                  context,
+                                  prayerTimes.nextPrayer(date: DateTime.now()),
+                                ) ??
+                                "-",
                           ),
                         ],
                       ),
@@ -312,9 +328,10 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  prayerTimeHelper.leftTimeString(
-                                    context,
-                                    DateTime.now(),
+                                  PrayerTimeHelper.formatDuration(
+                                    prayerTimes.timeUntilNextPrayer(
+                                      now: DateTime.now(),
+                                    ),
                                   ),
                                   style: GoogleFonts.dmMono(fontSize: 36),
                                 ),
@@ -372,38 +389,29 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   const Gap(4),
                   forbiddenWidget(
                     themeState,
-                    prayerTimeHelper,
                     context,
                     "assets/img/sunrise_forbidden_time.png",
-                    prayerTimeHelper.prayerTimes.sunrise,
-                    prayerTimeHelper.prayerTimes.sunrise.add(
-                      const Duration(minutes: 15),
-                    ),
+                    prayerTimes.sunrise,
+                    prayerTimes.sunrise.add(const Duration(minutes: 15)),
                     l10n.sunrise,
                   ),
                   const Gap(8),
                   forbiddenWidget(
                     themeState,
-                    prayerTimeHelper,
                     context,
                     "assets/img/noon_forbidden_time.png",
-                    prayerTimeHelper.prayerTimes.dhuhr.subtract(
-                      const Duration(minutes: 8),
-                    ),
-                    prayerTimeHelper.prayerTimes.dhuhr,
+                    prayerTimes.dhuhr.subtract(const Duration(minutes: 8)),
+                    prayerTimes.dhuhr,
 
                     l10n.noon,
                   ),
                   const Gap(8),
                   forbiddenWidget(
                     themeState,
-                    prayerTimeHelper,
                     context,
                     "assets/img/sunset_forbidden_time.png",
-                    prayerTimeHelper.prayerTimes.maghrib.subtract(
-                      const Duration(minutes: 15),
-                    ),
-                    prayerTimeHelper.prayerTimes.maghrib,
+                    prayerTimes.maghrib.subtract(const Duration(minutes: 15)),
+                    prayerTimes.maghrib,
 
                     l10n.sunset,
                   ),
@@ -466,38 +474,32 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   getPrayerRow(
                     context,
                     Prayer.fajr,
-                    prayerTimeHelper.prayerTimes.fajr,
-                    prayerTimeHelper,
-                  ),
-                  getPrayerRow(
-                    context,
-                    Prayer.sunrise,
-                    prayerTimeHelper.prayerTimes.sunrise,
-                    prayerTimeHelper,
+                    prayerTimes.fajr,
+                    prayerTimes,
                   ),
                   getPrayerRow(
                     context,
                     Prayer.dhuhr,
-                    prayerTimeHelper.prayerTimes.dhuhr,
-                    prayerTimeHelper,
+                    prayerTimes.dhuhr,
+                    prayerTimes,
                   ),
                   getPrayerRow(
                     context,
                     Prayer.asr,
-                    prayerTimeHelper.prayerTimes.asr,
-                    prayerTimeHelper,
+                    prayerTimes.asr,
+                    prayerTimes,
                   ),
                   getPrayerRow(
                     context,
                     Prayer.maghrib,
-                    prayerTimeHelper.prayerTimes.maghrib,
-                    prayerTimeHelper,
+                    prayerTimes.maghrib,
+                    prayerTimes,
                   ),
                   getPrayerRow(
                     context,
                     Prayer.isha,
-                    prayerTimeHelper.prayerTimes.isha,
-                    prayerTimeHelper,
+                    prayerTimes.isha,
+                    prayerTimes,
                   ),
                 ],
               ),
@@ -508,7 +510,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 crossAxisCount: 3,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
-                childAspectRatio: 1.2,
+                childAspectRatio: 1.7,
               ),
               padding: EdgeInsets.zero,
               shrinkWrap: true,
@@ -517,22 +519,21 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ramadanCard(
                   context,
                   themeState: themeState,
-                  time:
-                      prayerTimeHelper.prayerTimes.fajr
-                          .subtract(const Duration(minutes: 1))
-                          .toLocal(),
+                  time: prayerTimes.fajr
+                      .subtract(const Duration(minutes: 1))
+                      .toLocal(),
                   title: l10n.suhurEndTime,
                 ),
                 ramadanCard(
                   context,
                   themeState: themeState,
-                  time: prayerTimeHelper.prayerTimes.maghrib.toLocal(),
+                  time: prayerTimes.maghrib.toLocal(),
                   title: l10n.iftarStartTime,
                 ),
                 ramadanCard(
                   context,
                   themeState: themeState,
-                  time: prayerTimeHelper.getTahajjudStartTime(),
+                  time: prayerTimes.tahajjud,
                   title: l10n.tahajjudStartTime,
                 ),
               ],
@@ -546,40 +547,42 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
   Widget ramadanCard(
     BuildContext context, {
     required ThemeState themeState,
-    required DateTime time,
+    required DateTime? time,
     required String title,
   }) {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(
-        color: themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: themeState.primaryShade300),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const Spacer(),
-          Text(
-            TimeOfDay.fromDateTime(time).format(context),
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+    return Badge(
+      label: const SizedBox(height: 2, width: 2),
+      backgroundColor: themeState.primaryShade300,
+      child: Container(
+        decoration: BoxDecoration(
+          color: themeState.primaryShade100,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: themeState.primaryShade300),
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const Spacer(),
+            Text(
+              time == null ? "-" : TimeOfDay.fromDateTime(time).format(context),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   ClipRRect forbiddenWidget(
     ThemeState themeState,
-    PrayerTimeHelper prayerTimeHelper,
     BuildContext context,
     String img,
     DateTime start,
@@ -655,7 +658,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     BuildContext context,
     Prayer prayer,
     DateTime time,
-    PrayerTimeHelper prayerTimeHelper,
+    PrayerTimes prayerTimes,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -665,13 +668,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         CircleAvatar(
           radius: 6,
           backgroundColor:
-              prayerTimeHelper.currentPrayer(DateTime.now()) == prayer
-                  ? context.read<ThemeCubit>().state.primary
-                  : Colors.grey.withValues(alpha: 0.2),
+              prayerTimes.currentPrayer(date: DateTime.now()) == prayer
+              ? context.read<ThemeCubit>().state.primary
+              : Colors.grey.withValues(alpha: 0.2),
         ),
         const Gap(8),
         Text(
-          prayerTimeHelper.localizedPrayerName(context, prayer).capitalize(),
+          PrayerTimeHelper.localizedPrayerName(context, prayer)?.capitalize() ??
+              "-",
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const Spacer(),
