@@ -5,7 +5,6 @@ import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -19,9 +18,6 @@ import "package:gap/gap.dart";
 import "../../../main.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/values/values.dart";
-import "../../widget/prayers/prayer_calculation_method_info_widget.dart";
-import "../location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "../location_handler/model/location_data_qibla_data_state.dart";
 import "functions/prayers_time_function.dart";
 
 class PrayerSettings extends StatefulWidget {
@@ -52,50 +48,6 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             bottom: 80,
           ),
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(l10n.calculationMethod, style: titleStyle),
-                SizedBox(
-                  height: 30,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                    ),
-                    onPressed: () async {
-                      var state =
-                          context.read<LocationQiblaPrayerDataCubit>().state;
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => CalculationMethodDataForPrayerView(
-                                lat: state.latLon!.latitude,
-                                long: state.latLon!.latitude,
-                                showCalculationMethodPopupAtOnInit: true,
-                                moveToDownload: true,
-                              ),
-                        ),
-                      );
-                    },
-                    child: Text(l10n.change),
-                  ),
-                ),
-              ],
-            ),
-            const Gap(5),
-            BlocBuilder<
-              LocationQiblaPrayerDataCubit,
-              LocationQiblaPrayerDataState
-            >(
-              builder: (context, state) {
-                return getPrayerCalculationMethodInfoWidget(
-                  context,
-                  state.calculationMethod!,
-                );
-              },
-            ),
-            const Gap(20),
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
                 platformOwn == platform_services.PlatformOwn.isIos)
               Text(l10n.reminderSettings, style: titleStyle),

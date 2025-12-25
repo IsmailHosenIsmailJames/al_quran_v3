@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/address_selection.dart";
 import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/prayer_time/download_data_for_prayer_view.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
@@ -108,19 +107,6 @@ class _LocationAcquireState extends State<LocationAcquire> {
                                     save: !widget.moveToDownload,
                                   );
                               if (widget.moveToDownload) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) =>
-                                            CalculationMethodDataForPrayerView(
-                                              lat: position.latitude,
-                                              long: position.longitude,
-                                              moveToDownload:
-                                                  widget.moveToDownload,
-                                            ),
-                                  ),
-                                );
                                 return;
                               }
                             }

@@ -2167,6 +2167,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shafie, Maliki, Hanbali'**
   String get shafieMalikiHanbali;
+
+  /// No description provided for @suhurEndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Suhur End Time'**
+  String get suhurEndTime;
+
+  /// No description provided for @iftarStartTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Iftar Start Time'**
+  String get iftarStartTime;
+
+  /// No description provided for @tahajjudStartTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Tahajjud Start Time'**
+  String get tahajjudStartTime;
 }
 
 class _AppLocalizationsDelegate
