@@ -1,3 +1,4 @@
+import "dart:developer";
 import "dart:math" show Random;
 
 import "package:adhan_dart/adhan_dart.dart";
@@ -48,6 +49,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       LocationQiblaPrayerDataState
     >(
       builder: (context, locationState) {
+        log(locationState.madhab.toString());
         return StreamBuilder(
           stream: Stream.periodic(const Duration(seconds: 30)),
           builder: (context, snapshot) {
@@ -59,6 +61,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 locationState.latLon!.longitude,
               ),
               calculationParameters:
+                  locationState.calculationMethod ??
                   CalculationMethodParameters.muslimWorldLeague(),
             );
 
@@ -190,9 +193,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         ),
                         height: 40,
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: DropdownButtonFormField<String>(
+                        child: DropdownButtonFormField<Madhab>(
                           padding: EdgeInsets.zero,
-                          initialValue: "hanafi",
+                          initialValue: locationState.madhab,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,
@@ -201,19 +204,69 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           isExpanded: true,
                           items: [
                             DropdownMenuItem(
-                              value: "hanafi",
-                              child: Text(l10n.hanafi),
+                              value: Madhab.shafi,
+                              child: Text(l10n.shafie),
                             ),
                             DropdownMenuItem(
-                              value: "shafie",
-                              child: Text(l10n.shafieMalikiHanbali),
+                              value: Madhab.hanafi,
+                              child: Text(l10n.hanafi),
                             ),
                           ],
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            context
+                                .read<LocationQiblaPrayerDataCubit>()
+                                .saveMadhab(
+                                  Madhab.values.firstWhere(
+                                    (element) => element.name == value,
+                                  ),
+                                );
+                          },
                         ),
                       ),
                     ),
                   ],
+                ),
+                const Gap(8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: themeState.primaryShade100,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField<CalculationMethodEnum>(
+                      padding: EdgeInsets.zero,
+                      initialValue: locationState.calculationMethod?.method,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                      isDense: true,
+                      isExpanded: true,
+                      items: CalculationMethodEnum.values
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(
+                                CalculationMethodParameters.fromEnum(
+                                      e,
+                                    ).fullName ??
+                                    e.name,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          context
+                              .read<LocationQiblaPrayerDataCubit>()
+                              .saveCalculationMethod(
+                                CalculationMethodParameters.fromEnum(value),
+                              );
+                        }
+                      },
+                    ),
+                  ),
                 ),
 
                 const Gap(8),

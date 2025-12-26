@@ -117,6 +117,7 @@ Future<void> main() async {
 
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
       await LocationQiblaPrayerDataCubit.getSavedState();
+  log(locationQiblaPrayerDataState.madhab.toString(), name: "Madhab");
 
   runApp(
     MyApp(

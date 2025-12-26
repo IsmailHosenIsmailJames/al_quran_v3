@@ -1,9 +1,6 @@
-import "dart:convert";
-
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/functions/find_cloest_calculation_method.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:geolocator/geolocator.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -34,29 +31,43 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     emit(await getSavedState());
   }
 
-  Future<void> saveLocationData(LatLon? latLon, {bool save = true}) async {
+  Future<void> saveLocationData(LatLon latLon, {bool save = true}) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (save) {
-      await Hive.box("user").put("user_location", latLon?.toJson());
+      sharedPreferences.setString("user_location", latLon.toJson());
     }
     LocationQiblaPrayerDataState newState = state.copyWith();
     newState.latLon = latLon;
-    newState.kaabaAngle = latLon == null
-        ? null
-        : calculateQiblaAngle(latLon.latitude, latLon.longitude);
+    newState.kaabaAngle = calculateQiblaAngle(
+      latLon.latitude,
+      latLon.longitude,
+    );
 
     emit(newState);
   }
 
-  void saveCalculationMethod(
-    CalculationMethod? calculationMethod, {
+  Future<void> saveCalculationMethod(
+    CalculationParameters calculationMethod, {
     bool save = true,
-  }) {
+  }) async {
     if (save) {
-      Hive.box(
-        "user",
-      ).put("selected_prayer_calculation_method", calculationMethod?.toMap());
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString(
+        "selected_calculation_method",
+        calculationMethod.method.name,
+      );
     }
     emit(state.copyWith(calculationMethod: calculationMethod));
+  }
+
+  Future<void> saveMadhab(Madhab madhab, {bool save = true}) async {
+    if (save) {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString("selected_madhab", madhab.name);
+    }
+    emit(state.copyWith(madhab: madhab));
   }
 
   void changePrayerTimeDownloading(bool value) {
@@ -85,28 +96,28 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
         data.latLon!.longitude,
       );
       String? calculationMethodJason = sharedPreferences.getString(
-        "selected_prayer_calculation_method",
+        "selected_calculation_method",
       );
-      if (calculationMethodJason == null) {
-        calculationMethodJason = Hive.box("user").get(
-          "selected_prayer_calculation_method",
-          defaultValue: findClosestCalculationMethod(
-            latLong.latitude,
-            latLong.longitude,
-          ).toMap(),
-        );
-        if (calculationMethodJason != null) {
-          await sharedPreferences.setString(
-            "selected_prayer_calculation_method",
-            calculationMethodJason,
-          );
-        }
-      }
       if (calculationMethodJason != null) {
-        Map<String, dynamic>? calculationMethod = Map<String, dynamic>.from(
-          jsonDecode(calculationMethodJason),
+        data.calculationMethod = CalculationMethodParameters.fromEnum(
+          CalculationMethodEnum.values.firstWhere(
+            (element) => element.name == calculationMethodJason,
+          ),
         );
-        data.calculationMethod = CalculationMethod.fromMap(calculationMethod);
+      } else {
+        data.calculationMethod = CalculationMethodParameters.fromEnum(
+          CalculationMethodEnum.muslimWorldLeague,
+        );
+      }
+      String? madhab = sharedPreferences.getString("selected_madhab");
+      if (madhab != null) {
+        data.madhab = Madhab.values.firstWhere(
+          (element) => element.name == madhab,
+        );
+      }
+      {
+        await sharedPreferences.setString("selected_madhab", Madhab.shafi.name);
+        data.madhab ??= Madhab.shafi;
       }
     }
     return data;

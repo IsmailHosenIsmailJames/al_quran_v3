@@ -2162,11 +2162,11 @@ abstract class AppLocalizations {
   /// **'Hanafi'**
   String get hanafi;
 
-  /// No description provided for @shafieMalikiHanbali.
+  /// No description provided for @shafie.
   ///
   /// In en, this message translates to:
-  /// **'Shafie, Maliki, Hanbali'**
-  String get shafieMalikiHanbali;
+  /// **'Shafie'**
+  String get shafie;
 
   /// No description provided for @suhurEndTime.
   ///
