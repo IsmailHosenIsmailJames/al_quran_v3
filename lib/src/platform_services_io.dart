@@ -1,11 +1,9 @@
 import "dart:io";
 
 import "package:alarm/alarm.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
-import "package:workmanager/workmanager.dart";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 
@@ -46,15 +44,8 @@ Future<void> initializePlatform() async {
   }
 
   if (Platform.isIOS || Platform.isAndroid) {
-    Alarm.init().then((value) async {
-      await Workmanager().initialize(callbackDispatcher);
-      await Workmanager().registerPeriodicTask(
-        "prayer_time_bg",
-        "set_prayer_time_reminder",
-        frequency: const Duration(hours: 1),
-      );
-      await setReminderForPrayers();
-    });
+    await Alarm.init();
+    // TODO: set reminder for prayer time
   }
 }
 

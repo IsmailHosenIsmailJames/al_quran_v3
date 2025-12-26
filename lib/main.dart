@@ -46,7 +46,6 @@ import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
 
 import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "src/screen/prayer_time/functions/prayers_time_function.dart";
 
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
@@ -94,7 +93,6 @@ Future<void> main() async {
   Hive.openBox(CollectionType.notes.name);
   Hive.openBox(CollectionType.pinned.name);
   SegmentedResourcesManager.init();
-  PrayersTimeFunction.init();
 
   final scriptOnDb = Hive.box("user").get(
     "selected_quran_script_type",
@@ -108,11 +106,11 @@ Future<void> main() async {
   await ThemeFunctions.initThemeFunction();
 
   PrayerReminderState prayerReminderState = PrayerReminderState(
-    prayerToRemember: PrayersTimeFunction.getListOfPrayerToRemember(),
-    previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
-    reminderTimeAdjustment: PrayersTimeFunction.getAdjustReminderTime(),
-    enforceAlarmSound: PrayersTimeFunction.getEnforceAlarmSound(),
-    soundVolume: PrayersTimeFunction.getSoundVolume(),
+    prayerToRemember: [],
+    previousReminderModes: {},
+    reminderTimeAdjustment: {},
+    enforceAlarmSound: false,
+    soundVolume: 1.0,
   );
 
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =

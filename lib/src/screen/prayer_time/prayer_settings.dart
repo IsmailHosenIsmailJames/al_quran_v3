@@ -1,11 +1,10 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
-import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
+import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -18,7 +17,6 @@ import "package:gap/gap.dart";
 
 import "../../../main.dart";
 import "../../theme/controller/theme_cubit.dart";
-import "functions/prayers_time_function.dart";
 
 class PrayerSettings extends StatefulWidget {
   final PrayerTimes prayerTimes;
@@ -61,7 +59,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             const Gap(5),
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
                 platformOwn == platform_services.PlatformOwn.isIos)
-              getAdjustReminderWidget(themeState, l10n),
+              getAdjustReminderWidget(
+                themeState: themeState,
+                l10n: l10n,
+                prayerTimes: widget.prayerTimes,
+              ),
             const Gap(15),
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
                 platformOwn == platform_services.PlatformOwn.isIos)
@@ -162,13 +164,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget getAdjustReminderWidget(ThemeState themeState, AppLocalizations l10n) {
-    PrayerModelOfDay? prayerModelOfDay =
-        PrayersTimeFunction.getTodaysPrayerTime(DateTime.now());
-    Map<Prayer, TimeOfDay>? mapOfTimes = prayerModelOfDay == null
-        ? null
-        : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
-
+  Widget getAdjustReminderWidget({
+    required ThemeState themeState,
+    required AppLocalizations l10n,
+    required PrayerTimes prayerTimes,
+  }) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color cardColor = isDark
         ? themeState.primary.withOpacity(0.1)
@@ -184,8 +184,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             int currentTimeInMinutes =
                 prayerReminderState.reminderTimeAdjustment[currentPrayerType] ??
                 0;
-            TimeOfDay actualPrayerTime =
-                mapOfTimes?[currentPrayerType] ?? TimeOfDay.now();
+            DateTime? prayerTime = prayerTimes.timeForPrayer(currentPrayerType);
+            TimeOfDay actualPrayerTime = TimeOfDay.fromDateTime(
+              prayerTime ?? DateTime.now(), // better than crash
+            );
 
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 6),
