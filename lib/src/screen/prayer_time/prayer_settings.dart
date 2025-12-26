@@ -32,7 +32,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     TextStyle titleStyle = const TextStyle(
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w500,
     );
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -68,7 +68,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(l10n.enforceAlarmSound, style: titleStyle),
+                    child: Text(
+                      l10n.enforceAlarmSound,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                   const Spacer(),
                   BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
@@ -161,79 +167,140 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     Map<PrayerModelTimesType, TimeOfDay>? mapOfTimes = prayerModelOfDay == null
         ? null
         : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: themeState.primaryShade300),
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      padding: const EdgeInsets.all(5),
-      child: BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-        builder: (context, prayerReminderState) {
-          return Column(
-            children: List.generate(PrayerModelTimesType.values.length, (
-              index,
-            ) {
-              PrayerModelTimesType currentPrayerType =
-                  PrayerModelTimesType.values[index];
 
-              int currentTimeInMinutes =
-                  prayerReminderState
-                      .reminderTimeAdjustment[currentPrayerType] ??
-                  0;
-              TimeOfDay actualPrayerTime =
-                  mapOfTimes?[currentPrayerType] ?? TimeOfDay.now();
-              return Container(
-                decoration: BoxDecoration(
-                  color: index.isEven
-                      ? themeState.primaryShade100
-                      : themeState.primaryShade200,
-                  borderRadius: BorderRadius.circular(roundedRadius),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                margin: const EdgeInsets.symmetric(
-                  vertical: 3,
-                ), // Added some vertical margin
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, prayerReminderState) {
+        return Column(
+          children: List.generate(PrayerModelTimesType.values.length, (index) {
+            PrayerModelTimesType currentPrayerType =
+                PrayerModelTimesType.values[index];
+
+            int currentTimeInMinutes =
+                prayerReminderState.reminderTimeAdjustment[currentPrayerType] ??
+                0;
+            TimeOfDay actualPrayerTime =
+                mapOfTimes?[currentPrayerType] ?? TimeOfDay.now();
+
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: themeState.primary.withOpacity(0.1)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.stretch, // Make slider take full width
-                  children: <Widget>[
+                  children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          localizedPrayerName(context, currentPrayerType),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: themeState.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(
+                                Icons.access_time_rounded,
+                                color: themeState.primary,
+                                size: 20,
+                              ),
+                            ),
+                            const Gap(12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  localizedPrayerName(
+                                    context,
+                                    currentPrayerType,
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  formatTimeOfDay(context, actualPrayerTime),
+                                  style: const TextStyle(fontSize: 13),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            currentTimeInMinutes > 0
+                                ? "+$currentTimeInMinutes min"
+                                : "$currentTimeInMinutes min",
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-
-                        Text(
-                          "${_getAdjustmentText(currentTimeInMinutes, l10n)} - ${_getTimeText(actualPrayerTime, currentTimeInMinutes, l10n)}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
+                        const Gap(10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Text(
+                            _getTimeText(
+                              actualPrayerTime,
+                              currentTimeInMinutes,
+                              l10n,
+                            ),
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: themeState.primary,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    const Gap(5), // Reduced gap for a tighter look
+                    const Gap(8),
                     SliderTheme(
-                      data: const SliderThemeData(padding: EdgeInsets.zero),
+                      data: SliderThemeData(
+                        activeTrackColor: themeState.primary,
+                        inactiveTrackColor: themeState.primary.withOpacity(0.2),
+                        thumbColor: Colors.white,
+                        overlayColor: themeState.primary.withOpacity(0.1),
+                        trackHeight: 6.0,
+                        thumbShape: const RoundSliderThumbShape(
+                          elevation: 4,
+                          pressedElevation: 8,
+                          enabledThumbRadius: 10,
+                        ),
+                        overlayShape: const RoundSliderOverlayShape(
+                          overlayRadius: 20.0,
+                        ),
+                      ),
                       child: Slider(
+                        padding: EdgeInsets.zero,
                         value: currentTimeInMinutes.toDouble(),
-                        min: -120.0,
-                        max: 120.0,
-                        divisions: 240,
+                        min: -60.0,
+                        max: 60.0,
+                        divisions: 120,
                         label: _getAdjustmentText(
                           currentTimeInMinutes.round(),
                           l10n,
                         ),
-                        activeColor: themeState.primary,
-                        inactiveColor: themeState.primaryShade300,
                         onChanged: (double value) {
                           context
                               .read<PrayerReminderCubit>()
@@ -254,11 +321,11 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     ),
                   ],
                 ),
-              );
-            }),
-          );
-        },
-      ),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 
