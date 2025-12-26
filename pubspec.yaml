@@ -72,6 +72,9 @@ dependencies:
     path: adhan_dart
   hijri: ^3.0.0
   shimmer: ^3.0.0
+  background_fetch:
+    git:
+      url: https://github.com/transistorsoft/flutter_background_fetch
   # firebase_core: ^4.2.1
   # firebase_ai: ^3.6.0
   # firebase_auth: ^6.1.2
