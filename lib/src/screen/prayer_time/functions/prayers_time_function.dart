@@ -1,6 +1,7 @@
 import "dart:convert";
 import "dart:developer";
 
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayers_time_bg_process.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
@@ -9,7 +10,6 @@ import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
-import "../models/prayer_types.dart";
 import "../models/reminder_type.dart";
 
 class PrayersTimeFunction {
@@ -24,54 +24,40 @@ class PrayersTimeFunction {
     return prayerTimeMapData[date.month]?[date.day - 1];
   }
 
-  static PrayerModelTimesType nextPrayerName(
-    PrayerModelOfDay prayerModelOfDay,
-  ) {
+  static Prayer nextPrayerName(PrayerModelOfDay prayerModelOfDay) {
     TimeOfDay now = TimeOfDay.fromDateTime(DateTime.now());
-    Map<PrayerModelTimesType, TimeOfDay> timings = getPrayerTimings(
-      prayerModelOfDay,
-    );
+    Map<Prayer, TimeOfDay> timings = getPrayerTimings(prayerModelOfDay);
 
-    for (PrayerModelTimesType key in timings.keys) {
+    for (Prayer key in timings.keys) {
       if (timings[key]!.isAfter(now)) {
         return key;
       }
     }
-    return PrayerModelTimesType.fajr;
+    return Prayer.fajr;
   }
 
   static TimeOfDay nextPrayerTime(PrayerModelOfDay prayerModelOfDay) {
     TimeOfDay now = TimeOfDay.fromDateTime(DateTime.now());
-    Map<PrayerModelTimesType, TimeOfDay> timings = getPrayerTimings(
-      prayerModelOfDay,
-    );
+    Map<Prayer, TimeOfDay> timings = getPrayerTimings(prayerModelOfDay);
 
-    for (PrayerModelTimesType key in timings.keys) {
+    for (Prayer key in timings.keys) {
       if (timings[key]!.isAfter(now)) {
         return timings[key]!;
       }
     }
-    return timings[PrayerModelTimesType.fajr]!;
+    return timings[Prayer.fajr]!;
   }
 
-  static Map<PrayerModelTimesType, TimeOfDay> getPrayerTimings(
+  static Map<Prayer, TimeOfDay> getPrayerTimings(
     PrayerModelOfDay prayerModelOfDay,
   ) {
-    Map<PrayerModelTimesType, TimeOfDay> timings = {
-      PrayerModelTimesType.fajr:
-          timeOfDayFromString(prayerModelOfDay.timings.fajr!)!,
-      PrayerModelTimesType.sunrise:
-          timeOfDayFromString(prayerModelOfDay.timings.sunrise!)!,
-      PrayerModelTimesType.dhuhr:
-          timeOfDayFromString(prayerModelOfDay.timings.dhuhr!)!,
-      PrayerModelTimesType.asr:
-          timeOfDayFromString(prayerModelOfDay.timings.asr!)!,
-      PrayerModelTimesType.maghrib:
-          timeOfDayFromString(prayerModelOfDay.timings.maghrib!)!,
-      PrayerModelTimesType.isha:
-          timeOfDayFromString(prayerModelOfDay.timings.isha!)!,
-      PrayerModelTimesType.midnight:
-          timeOfDayFromString(prayerModelOfDay.timings.midnight!)!,
+    Map<Prayer, TimeOfDay> timings = {
+      Prayer.fajr: timeOfDayFromString(prayerModelOfDay.timings.fajr!)!,
+      Prayer.sunrise: timeOfDayFromString(prayerModelOfDay.timings.sunrise!)!,
+      Prayer.dhuhr: timeOfDayFromString(prayerModelOfDay.timings.dhuhr!)!,
+      Prayer.asr: timeOfDayFromString(prayerModelOfDay.timings.asr!)!,
+      Prayer.maghrib: timeOfDayFromString(prayerModelOfDay.timings.maghrib!)!,
+      Prayer.isha: timeOfDayFromString(prayerModelOfDay.timings.isha!)!,
     };
     return timings;
   }
@@ -129,47 +115,43 @@ class PrayersTimeFunction {
   static List<ReminderTypeWithPrayModel> getListOfPrayerToRemember() {
     List<String> rawPrayerRemind =
         prayerTimePreferences?.getStringList("prayer_time_to_remind") ?? [];
-    List<ReminderTypeWithPrayModel> prayerRemind =
-        rawPrayerRemind
-            .map(
-              (e) => ReminderTypeWithPrayModel.fromJson(
-                Map<String, dynamic>.from(jsonDecode(e)),
-              ),
-            )
-            .toList();
+    List<ReminderTypeWithPrayModel> prayerRemind = rawPrayerRemind
+        .map(
+          (e) => ReminderTypeWithPrayModel.fromJson(
+            Map<String, dynamic>.from(jsonDecode(e)),
+          ),
+        )
+        .toList();
     return prayerRemind;
   }
 
-  static Map<PrayerModelTimesType, PrayerReminderType>
-  getPreviousReminderModes() {
-    Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes = {
-      PrayerModelTimesType.fajr: PrayerReminderType.alarm,
-      PrayerModelTimesType.sunrise: PrayerReminderType.notification,
-      PrayerModelTimesType.dhuhr: PrayerReminderType.alarm,
-      PrayerModelTimesType.asr: PrayerReminderType.alarm,
-      PrayerModelTimesType.maghrib: PrayerReminderType.alarm,
-      PrayerModelTimesType.isha: PrayerReminderType.alarm,
-      PrayerModelTimesType.midnight: PrayerReminderType.notification,
+  static Map<Prayer, PrayerReminderType> getPreviousReminderModes() {
+    Map<Prayer, PrayerReminderType> previousReminderModes = {
+      Prayer.fajr: PrayerReminderType.alarm,
+      Prayer.sunrise: PrayerReminderType.notification,
+      Prayer.dhuhr: PrayerReminderType.alarm,
+      Prayer.asr: PrayerReminderType.alarm,
+      Prayer.maghrib: PrayerReminderType.alarm,
+      Prayer.isha: PrayerReminderType.alarm,
     };
 
-    for (PrayerModelTimesType prayerModelTimesType
-        in PrayerModelTimesType.values) {
+    for (Prayer prayer in Prayer.values) {
       PrayerReminderType? type = PrayerReminderType.values.firstOrNullWhere((
         element,
       ) {
         return element.name ==
             (prayerTimePreferences!.getString(
-              "previousReminderModes_${prayerModelTimesType.name}",
+              "previousReminderModes_${prayer.name}",
             ));
       });
       if (type != null) {
-        previousReminderModes[prayerModelTimesType] = type;
+        previousReminderModes[prayer] = type;
       }
     }
     return previousReminderModes;
   }
 
-  static Future<Map<PrayerModelTimesType, PrayerReminderType>> setReminderModes(
+  static Future<Map<Prayer, PrayerReminderType>> setReminderModes(
     ReminderTypeWithPrayModel data,
   ) async {
     await prayerTimePreferences!.setString(
@@ -183,14 +165,13 @@ class PrayersTimeFunction {
     return getPreviousReminderModes();
   }
 
-  static Map<PrayerModelTimesType, int> getAdjustReminderTime() {
-    Map<PrayerModelTimesType, int> reminderTimeAdjustment = {};
-    for (PrayerModelTimesType prayerModelTimesType
-        in PrayerModelTimesType.values) {
+  static Map<Prayer, int> getAdjustReminderTime() {
+    Map<Prayer, int> reminderTimeAdjustment = {};
+    for (Prayer prayer in Prayer.values) {
       reminderTimeAdjustment.addAll({
-        prayerModelTimesType:
+        prayer:
             prayerTimePreferences!.getInt(
-              "reminderTimeAdjustment_${prayerModelTimesType.name}",
+              "reminderTimeAdjustment_${prayer.name}",
             ) ??
             0,
       });
@@ -198,8 +179,8 @@ class PrayersTimeFunction {
     return reminderTimeAdjustment;
   }
 
-  static Future<Map<PrayerModelTimesType, int>> setAdjustReminderTime(
-    PrayerModelTimesType prayerType,
+  static Future<Map<Prayer, int>> setAdjustReminderTime(
+    Prayer prayerType,
     int timeInMinutes,
   ) async {
     await prayerTimePreferences!.setInt(

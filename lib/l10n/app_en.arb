@@ -598,9 +598,9 @@
   "prayerTimes": "Prayer Times",
   "hanafi": "Hanafi",
   "shafie": "Shafie",
-  "suhurEndTime": "Suhur End Time",
-  "iftarStartTime": "Iftar Start Time",
-  "tahajjudStartTime": "Tahajjud Start Time",
+  "suhurEnd": "Suhur End",
+  "iftarStart": "Iftar Start",
+  "tahajjudStart": "Tahajjud Start",
   "tahajjud": "Tahajjud",
   "dhuha": "Dhuha"
 }
