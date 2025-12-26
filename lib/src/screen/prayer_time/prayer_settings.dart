@@ -158,10 +158,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   Widget getAdjustReminderWidget(ThemeState themeState, AppLocalizations l10n) {
     PrayerModelOfDay? prayerModelOfDay =
         PrayersTimeFunction.getTodaysPrayerTime(DateTime.now());
-    Map<PrayerModelTimesType, TimeOfDay>? mapOfTimes =
-        prayerModelOfDay == null
-            ? null
-            : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
+    Map<PrayerModelTimesType, TimeOfDay>? mapOfTimes = prayerModelOfDay == null
+        ? null
+        : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: themeState.primaryShade300),
@@ -185,10 +184,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   mapOfTimes?[currentPrayerType] ?? TimeOfDay.now();
               return Container(
                 decoration: BoxDecoration(
-                  color:
-                      index.isEven
-                          ? themeState.primaryShade100
-                          : themeState.primaryShade200,
+                  color: index.isEven
+                      ? themeState.primaryShade100
+                      : themeState.primaryShade200,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 padding: const EdgeInsets.symmetric(
@@ -287,10 +285,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
               return Container(
                 decoration: BoxDecoration(
-                  color:
-                      index.isEven
-                          ? themeState.primaryShade100
-                          : themeState.primaryShade200,
+                  color: index.isEven
+                      ? themeState.primaryShade100
+                      : themeState.primaryShade200,
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
                 padding: const EdgeInsets.only(left: 10, right: 5),
@@ -305,41 +302,50 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    DropdownButton(
-                      value: currentPrayerReminderType,
-                      alignment: Alignment.centerRight,
-                      items: List.generate(
-                        PrayerReminderType.values.length,
-                        (index) => DropdownMenuItem(
-                          value: PrayerReminderType.values[index],
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                PrayerReminderType.values[index] ==
-                                        PrayerReminderType.notification
-                                    ? FluentIcons.alert_on_24_regular
-                                    : Icons.alarm_rounded,
-                              ),
-                              const Gap(10),
-                              Text(
-                                localizedReminderName(
-                                  context,
-                                  PrayerReminderType.values[index],
+                    SizedBox(
+                      width: 150,
+                      child: DropdownButtonFormField<PrayerReminderType>(
+                        initialValue: currentPrayerReminderType,
+                        alignment: Alignment.centerRight,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        items: List.generate(
+                          PrayerReminderType.values.length,
+                          (index) => DropdownMenuItem(
+                            value: PrayerReminderType.values[index],
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  localizedReminderName(
+                                    context,
+                                    PrayerReminderType.values[index],
+                                  ),
                                 ),
-                              ),
-                              const Gap(7),
-                            ],
+                                const Gap(7),
+                                Icon(
+                                  PrayerReminderType.values[index] ==
+                                          PrayerReminderType.notification
+                                      ? FluentIcons.alert_on_24_regular
+                                      : Icons.alarm_rounded,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                        onChanged: (value) {
+                          var cubit = context.read<PrayerReminderCubit>();
+                          var data = ReminderTypeWithPrayModel(
+                            prayerTimesType: currentPrayerType,
+                            reminderType: value!,
+                          );
+                          cubit.setReminderMode(data);
+                        },
                       ),
-                      onChanged: (value) {
-                        var cubit = context.read<PrayerReminderCubit>();
-                        var data = ReminderTypeWithPrayModel(
-                          prayerTimesType: currentPrayerType,
-                          reminderType: value!,
-                        );
-                        cubit.setReminderMode(data);
-                      },
                     ),
                   ],
                 ),
