@@ -7,7 +7,8 @@ import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibl
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_time_canvas.dart";
+import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
+import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -541,8 +542,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PrayerSettings(),
+                                    builder: (context) => PrayerSettings(
+                                      prayerTimes: prayerTimes,
+                                    ),
                                   ),
                                 );
                               },
@@ -605,7 +607,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     crossAxisCount: 3,
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
-                    childAspectRatio: 1.7,
+                    childAspectRatio: 1.1,
                   ),
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
@@ -617,19 +619,19 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                       time: prayerTimes.fajr
                           .subtract(const Duration(minutes: 1))
                           .toLocal(),
-                      title: l10n.suhurEndTime,
+                      title: l10n.suhurEnd,
                     ),
                     ramadanCard(
                       context,
                       themeState: themeState,
                       time: prayerTimes.maghrib.toLocal(),
-                      title: l10n.iftarStartTime,
+                      title: l10n.iftarStart,
                     ),
                     ramadanCard(
                       context,
                       themeState: themeState,
                       time: prayerTimes.tahajjud,
-                      title: l10n.tahajjudStartTime,
+                      title: l10n.tahajjudStart,
                     ),
                   ],
                 ),
@@ -644,36 +646,34 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
   Widget ramadanCard(
     BuildContext context, {
     required ThemeState themeState,
-    required DateTime? time,
+    required DateTime time,
     required String title,
   }) {
-    return Badge(
-      label: const SizedBox(height: 2, width: 2),
-      backgroundColor: themeState.primaryShade300,
-      child: Container(
-        decoration: BoxDecoration(
-          color: themeState.primaryShade100,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: themeState.primaryShade300),
-        ),
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const Spacer(),
-            Text(
-              time == null ? "-" : TimeOfDay.fromDateTime(time).format(context),
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        color: themeState.primaryShade100,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: themeState.primaryShade300),
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClockIcon(time: TimeOfDay.fromDateTime(time)),
+          const Gap(8),
+          Text(
+            title,
+            style: const TextStyle(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const Gap(2),
+          Text(
+            TimeOfDay.fromDateTime(time).format(context),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

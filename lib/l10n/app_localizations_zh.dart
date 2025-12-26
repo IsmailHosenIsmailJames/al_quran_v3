@@ -1104,13 +1104,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shafie => 'Shafie';
 
   @override
-  String get suhurEndTime => 'Suhur End Time';
+  String get suhurEnd => 'Suhur End';
 
   @override
-  String get iftarStartTime => 'Iftar Start Time';
+  String get iftarStart => 'Iftar Start';
 
   @override
-  String get tahajjudStartTime => 'Tahajjud Start Time';
+  String get tahajjudStart => 'Tahajjud Start';
 
   @override
   String get tahajjud => 'Tahajjud';

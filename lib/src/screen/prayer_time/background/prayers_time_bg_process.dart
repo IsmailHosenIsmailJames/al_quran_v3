@@ -1,5 +1,6 @@
 import "dart:convert";
 
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
@@ -15,7 +16,6 @@ import "package:workmanager/workmanager.dart";
 import "../../../../main.dart";
 import "../../../platform_services.dart";
 import "../models/prayer_model_of_day.dart";
-import "../models/prayer_types.dart";
 
 @pragma("vm:entry-point")
 void callbackDispatcher() {
@@ -44,20 +44,21 @@ Future<void> setReminderForPrayers() async {
   if (todaysPrayerData == null || nextDayPrayerData == null) {
     return;
   }
-  Map<PrayerModelTimesType, TimeOfDay> todayTimings =
-      PrayersTimeFunction.getPrayerTimings(todaysPrayerData);
+  Map<Prayer, TimeOfDay> todayTimings = PrayersTimeFunction.getPrayerTimings(
+    todaysPrayerData,
+  );
 
-  Map<PrayerModelTimesType, TimeOfDay> nextDayTimings =
-      PrayersTimeFunction.getPrayerTimings(nextDayPrayerData);
+  Map<Prayer, TimeOfDay> nextDayTimings = PrayersTimeFunction.getPrayerTimings(
+    nextDayPrayerData,
+  );
 
   List<ReminderTypeWithPrayModel> listToReminder =
       PrayersTimeFunction.getListOfPrayerToRemember();
 
-  Map<PrayerModelTimesType, int> adjustTimings =
-      PrayersTimeFunction.getAdjustReminderTime();
+  Map<Prayer, int> adjustTimings = PrayersTimeFunction.getAdjustReminderTime();
 
   for (int i = 0; i < todayTimings.length; i++) {
-    PrayerModelTimesType prayType = todayTimings.keys.elementAt(i);
+    Prayer prayType = todayTimings.keys.elementAt(i);
 
     TimeOfDay todayTimeOfDay = todayTimings[prayType]!;
     TimeOfDay nextDayTimeOfDay = nextDayTimings[prayType]!;
@@ -98,7 +99,7 @@ Future<void> setReminderForPrayers() async {
 
       // reminder ID from prayer type and date
       int reminderID =
-          "${PrayerModelTimesType.values.indexOf(prayType)}${reminderTime.year % 1000}${reminderTime.month}${reminderTime.day}"
+          "${Prayer.values.indexOf(prayType)}${reminderTime.year % 1000}${reminderTime.month}${reminderTime.day}"
               .toInt();
 
       // create notification or alarm title and body
@@ -110,8 +111,8 @@ Future<void> setReminderForPrayers() async {
 
       if (currentReminder.reminderType == PrayerReminderType.notification) {
         // check is notification already set
-        List<NotificationModel> notifications =
-            await AwesomeNotifications().listScheduledNotifications();
+        List<NotificationModel> notifications = await AwesomeNotifications()
+            .listScheduledNotifications();
         bool exitsEarly = false;
         for (NotificationModel notificationModel in notifications) {
           if (notificationModel.content?.id == reminderID) {
@@ -212,22 +213,22 @@ Future<void> setReminderNotification({
   );
 }
 
-Future<void> removeAllReminderAccordingType(PrayerModelTimesType type) async {
+Future<void> removeAllReminderAccordingType(Prayer type) async {
   List<AlarmSettings> alarmSettings = await Alarm.getAlarms();
   for (AlarmSettings alarm in alarmSettings) {
     if (alarm.id.toString().startsWith(
-      PrayerModelTimesType.values.indexOf(type).toString(),
+      Prayer.values.indexOf(type).toString(),
     )) {
       await Alarm.stop(alarm.id);
     }
   }
 
-  List<NotificationModel> notifications =
-      await AwesomeNotifications().listScheduledNotifications();
+  List<NotificationModel> notifications = await AwesomeNotifications()
+      .listScheduledNotifications();
   for (NotificationModel notificationModel in notifications) {
     if (notificationModel.content?.id != null &&
         notificationModel.content!.id.toString().startsWith(
-          PrayerModelTimesType.values.indexOf(type).toString(),
+          Prayer.values.indexOf(type).toString(),
         )) {
       await AwesomeNotifications().cancel(notificationModel.content!.id!);
     }

@@ -2168,23 +2168,23 @@ abstract class AppLocalizations {
   /// **'Shafie'**
   String get shafie;
 
-  /// No description provided for @suhurEndTime.
+  /// No description provided for @suhurEnd.
   ///
   /// In en, this message translates to:
-  /// **'Suhur End Time'**
-  String get suhurEndTime;
+  /// **'Suhur End'**
+  String get suhurEnd;
 
-  /// No description provided for @iftarStartTime.
+  /// No description provided for @iftarStart.
   ///
   /// In en, this message translates to:
-  /// **'Iftar Start Time'**
-  String get iftarStartTime;
+  /// **'Iftar Start'**
+  String get iftarStart;
 
-  /// No description provided for @tahajjudStartTime.
+  /// No description provided for @tahajjudStart.
   ///
   /// In en, this message translates to:
-  /// **'Tahajjud Start Time'**
-  String get tahajjudStartTime;
+  /// **'Tahajjud Start'**
+  String get tahajjudStart;
 
   /// No description provided for @tahajjud.
   ///

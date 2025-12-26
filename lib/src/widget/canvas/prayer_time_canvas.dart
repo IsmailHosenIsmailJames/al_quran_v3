@@ -53,11 +53,10 @@ class CirclePainter extends CustomPainter {
     double circleStockWidth = 7;
     final mainCircleRadius = size.shortestSide / 2;
 
-    final paint =
-        Paint()
-          ..color = Colors.grey.withValues(alpha: .5)
-          ..strokeWidth = circleStockWidth
-          ..style = PaintingStyle.stroke;
+    final paint = Paint()
+      ..color = Colors.grey.withValues(alpha: .5)
+      ..strokeWidth = circleStockWidth
+      ..style = PaintingStyle.stroke;
 
     final center = Offset(size.width / 2, size.height / 2);
 
@@ -65,12 +64,11 @@ class CirclePainter extends CustomPainter {
 
     canvas.drawCircle(center, radius, paint);
 
-    final hourLinePaint =
-        Paint()
-          ..color = Colors.grey
-          ..strokeWidth = 2.0
-          ..style = PaintingStyle.stroke
-          ..strokeCap = StrokeCap.round;
+    final hourLinePaint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2.0
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
 
     const double normalLineLength = 2.0;
     const double slightlyBiggerLineLength = 4.0;
@@ -111,10 +109,9 @@ class CirclePainter extends CustomPainter {
       canvas.drawLine(startPoint, endPoint, hourLinePaint);
     }
 
-    final prayerMarkerPaint =
-        Paint()
-          ..color = Colors.white
-          ..style = PaintingStyle.fill;
+    final prayerMarkerPaint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
 
     const double prayerMarkerRadius = 2.0;
 
@@ -189,7 +186,10 @@ class CirclePainter extends CustomPainter {
   }
 
   void _drawText(Canvas canvas, Offset position, String text, double fontSize) {
-    final textSpan = TextSpan(text: text, style: TextStyle(fontSize: fontSize));
+    final textSpan = TextSpan(
+      text: text,
+      style: TextStyle(fontSize: fontSize),
+    );
     final textPainter = TextPainter(
       text: textSpan,
 

@@ -1,9 +1,9 @@
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 
 class ReminderTypeWithPrayModel {
   PrayerReminderType reminderType;
-  PrayerModelTimesType prayerTimesType;
+  Prayer prayerTimesType;
 
   ReminderTypeWithPrayModel({
     required this.reminderType,
@@ -16,9 +16,7 @@ class ReminderTypeWithPrayModel {
       reminderType: PrayerReminderType.values.byName(
         json["reminderType"] as String,
       ),
-      prayerTimesType: PrayerModelTimesType.values.byName(
-        json["prayerTimesType"] as String,
-      ),
+      prayerTimesType: Prayer.values.byName(json["prayerTimesType"] as String),
     );
   }
 

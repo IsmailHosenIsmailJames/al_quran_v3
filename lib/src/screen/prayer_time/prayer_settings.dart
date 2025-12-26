@@ -1,15 +1,16 @@
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/prayer_time/models/prayer_model_of_day.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
 import "package:al_quran_v3/src/utils/format_time_of_day.dart";
-import "package:al_quran_v3/src/utils/localizedPrayerName.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -17,11 +18,11 @@ import "package:gap/gap.dart";
 
 import "../../../main.dart";
 import "../../theme/controller/theme_cubit.dart";
-import "../../theme/values/values.dart";
 import "functions/prayers_time_function.dart";
 
 class PrayerSettings extends StatefulWidget {
-  const PrayerSettings({super.key});
+  final PrayerTimes prayerTimes;
+  const PrayerSettings({super.key, required this.prayerTimes});
 
   @override
   State<PrayerSettings> createState() => _PrayerSettingsState();
@@ -164,16 +165,21 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   Widget getAdjustReminderWidget(ThemeState themeState, AppLocalizations l10n) {
     PrayerModelOfDay? prayerModelOfDay =
         PrayersTimeFunction.getTodaysPrayerTime(DateTime.now());
-    Map<PrayerModelTimesType, TimeOfDay>? mapOfTimes = prayerModelOfDay == null
+    Map<Prayer, TimeOfDay>? mapOfTimes = prayerModelOfDay == null
         ? null
         : PrayersTimeFunction.getPrayerTimings(prayerModelOfDay);
+
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color cardColor = isDark
+        ? themeState.primary.withOpacity(0.1)
+        : Colors.white;
+    final Color textColor = isDark ? Colors.white : Colors.black;
 
     return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
       builder: (context, prayerReminderState) {
         return Column(
-          children: List.generate(PrayerModelTimesType.values.length, (index) {
-            PrayerModelTimesType currentPrayerType =
-                PrayerModelTimesType.values[index];
+          children: List.generate(Prayer.values.length, (index) {
+            Prayer currentPrayerType = Prayer.values[index];
 
             int currentTimeInMinutes =
                 prayerReminderState.reminderTimeAdjustment[currentPrayerType] ??
@@ -184,11 +190,21 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
+                color: cardColor,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: themeState.primary.withOpacity(0.1)),
+                border: Border.all(color: themeState.primary.withOpacity(0.2)),
+                boxShadow: isDark
+                    ? null
+                    : [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     Row(
@@ -199,7 +215,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: themeState.primary.withOpacity(0.1),
+                                color: themeState.primary.withOpacity(0.15),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
@@ -213,18 +229,23 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  localizedPrayerName(
-                                    context,
-                                    currentPrayerType,
-                                  ),
-                                  style: const TextStyle(
+                                  PrayerTimeHelper.localizedPrayerName(
+                                        context,
+                                        currentPrayerType,
+                                      ) ??
+                                      "-",
+                                  style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
+                                    color: textColor,
                                   ),
                                 ),
                                 Text(
                                   formatTimeOfDay(context, actualPrayerTime),
-                                  style: const TextStyle(fontSize: 13),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: textColor.withOpacity(0.7),
+                                  ),
                                 ),
                               ],
                             ),
@@ -237,26 +258,30 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
+                            color: themeState.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            currentTimeInMinutes > 0
-                                ? "+$currentTimeInMinutes min"
-                                : "$currentTimeInMinutes min",
-                            style: const TextStyle(
-                              fontSize: 14,
+                            currentTimeInMinutes == 0
+                                ? l10n.atPrayerTime
+                                : (currentTimeInMinutes > 0
+                                      ? "+$currentTimeInMinutes min"
+                                      : "$currentTimeInMinutes min"),
+                            style: TextStyle(
+                              fontSize: 12,
                               fontWeight: FontWeight.w600,
+                              color: themeState.primary,
                             ),
                           ),
                         ),
-                        const Gap(10),
+                        const Gap(8),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 12,
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: themeState.primary.withOpacity(0.1),
+                            color: themeState.primary,
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: Text(
@@ -265,10 +290,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               currentTimeInMinutes,
                               l10n,
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
-                              color: themeState.primary,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -279,7 +304,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       data: SliderThemeData(
                         activeTrackColor: themeState.primary,
                         inactiveTrackColor: themeState.primary.withOpacity(0.2),
-                        thumbColor: Colors.white,
+                        thumbColor: isDark ? themeState.primary : Colors.white,
                         overlayColor: themeState.primary.withOpacity(0.1),
                         trackHeight: 6.0,
                         thumbShape: const RoundSliderThumbShape(
@@ -330,97 +355,181 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   }
 
   Widget getDropPrayerSettings(ThemeState themeState) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: themeState.primaryShade300),
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      padding: const EdgeInsets.all(5),
-      child: BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-        builder: (context, prayerReminderState) {
-          return Column(
-            children: List.generate(PrayerModelTimesType.values.length, (
-              index,
-            ) {
-              PrayerModelTimesType currentPrayerType =
-                  PrayerModelTimesType.values[index];
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color cardColor = isDark
+        ? themeState.primary.withOpacity(0.1)
+        : Colors.white;
+    final Color textColor = isDark ? Colors.white : Colors.black;
 
-              PrayerReminderType currentPrayerReminderType =
-                  prayerReminderState
-                      .previousReminderModes[currentPrayerType] ??
-                  PrayerReminderType.alarm;
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, prayerReminderState) {
+        return Column(
+          children: List.generate(Prayer.values.length, (index) {
+            Prayer currentPrayerType = Prayer.values[index];
 
-              return Container(
-                decoration: BoxDecoration(
-                  color: index.isEven
-                      ? themeState.primaryShade100
-                      : themeState.primaryShade200,
-                  borderRadius: BorderRadius.circular(roundedRadius),
-                ),
-                padding: const EdgeInsets.only(left: 10, right: 5),
-                margin: const EdgeInsets.only(bottom: 2, top: 2),
+            PrayerReminderType currentReminderType =
+                prayerReminderState.previousReminderModes[currentPrayerType] ??
+                PrayerReminderType.alarm;
+
+            Widget prayerIcon;
+            switch (currentPrayerType) {
+              case Prayer.fajr:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.fajr),
+                );
+                break;
+              case Prayer.sunrise:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.sunrise),
+                );
+                break;
+              case Prayer.dhuhr:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.dhuhr),
+                );
+                break;
+              case Prayer.asr:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.asr),
+                );
+                break;
+              case Prayer.maghrib:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.maghrib),
+                );
+                break;
+              case Prayer.isha:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.isha),
+                );
+                break;
+              case Prayer.dhuha:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.dhuha),
+                );
+                break;
+              case Prayer.noon:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.noon),
+                );
+                break;
+              case Prayer.sunset:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.sunset),
+                );
+                break;
+              case Prayer.tahajjud:
+                prayerIcon = ClockIcon(
+                  time: TimeOfDay.fromDateTime(widget.prayerTimes.tahajjud),
+                );
+                break;
+            }
+
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: cardColor,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: themeState.primary.withOpacity(0.2)),
+                boxShadow: isDark
+                    ? null
+                    : [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: themeState.primary.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: prayerIcon,
+                    ),
+                    const Gap(12),
                     Text(
-                      localizedPrayerName(context, currentPrayerType),
-                      style: const TextStyle(
+                      PrayerTimeHelper.localizedPrayerName(
+                            context,
+                            currentPrayerType,
+                          ) ??
+                          "-",
+                      style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
                       ),
                     ),
-                    SizedBox(
-                      width: 150,
-                      child: DropdownButtonFormField<PrayerReminderType>(
-                        initialValue: currentPrayerReminderType,
-                        alignment: Alignment.centerRight,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                        items: List.generate(
-                          PrayerReminderType.values.length,
-                          (index) => DropdownMenuItem(
-                            value: PrayerReminderType.values[index],
-                            alignment: Alignment.centerRight,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Text(
-                                  localizedReminderName(
-                                    context,
-                                    PrayerReminderType.values[index],
-                                  ),
-                                ),
-                                const Gap(7),
-                                Icon(
-                                  PrayerReminderType.values[index] ==
-                                          PrayerReminderType.notification
-                                      ? FluentIcons.alert_on_24_regular
-                                      : Icons.alarm_rounded,
-                                ),
-                              ],
-                            ),
+                    const Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: themeState.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<PrayerReminderType>(
+                          value: currentReminderType,
+                          dropdownColor: isDark
+                              ? const Color(0xFF1E1E1E)
+                              : Colors.white,
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: themeState.primary,
+                            size: 20,
                           ),
+                          items: PrayerReminderType.values.map((type) {
+                            return DropdownMenuItem(
+                              value: type,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    type == PrayerReminderType.notification
+                                        ? FluentIcons.alert_on_24_regular
+                                        : Icons.alarm_rounded,
+                                    size: 18,
+                                    color: themeState.primary,
+                                  ),
+                                  const Gap(8),
+                                  Text(
+                                    localizedReminderName(context, type),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: themeState.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            if (value != null) {
+                              var cubit = context.read<PrayerReminderCubit>();
+                              var data = ReminderTypeWithPrayModel(
+                                prayerTimesType: currentPrayerType,
+                                reminderType: value,
+                              );
+                              cubit.setReminderMode(data);
+                            }
+                          },
                         ),
-                        onChanged: (value) {
-                          var cubit = context.read<PrayerReminderCubit>();
-                          var data = ReminderTypeWithPrayModel(
-                            prayerTimesType: currentPrayerType,
-                            reminderType: value!,
-                          );
-                          cubit.setReminderMode(data);
-                        },
                       ),
                     ),
                   ],
                 ),
-              );
-            }),
-          );
-        },
-      ),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 

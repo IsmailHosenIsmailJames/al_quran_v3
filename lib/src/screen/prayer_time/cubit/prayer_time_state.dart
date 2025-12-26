@@ -1,11 +1,11 @@
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 
 class PrayerReminderState {
   List<ReminderTypeWithPrayModel> prayerToRemember;
-  Map<PrayerModelTimesType, PrayerReminderType> previousReminderModes;
-  Map<PrayerModelTimesType, int> reminderTimeAdjustment;
+  Map<Prayer, PrayerReminderType> previousReminderModes;
+  Map<Prayer, int> reminderTimeAdjustment;
   bool enforceAlarmSound;
   double soundVolume;
 
@@ -19,8 +19,8 @@ class PrayerReminderState {
 
   PrayerReminderState copyWith({
     List<ReminderTypeWithPrayModel>? prayerToRemember,
-    Map<PrayerModelTimesType, PrayerReminderType>? previousReminderModes,
-    Map<PrayerModelTimesType, int>? reminderTimeAdjustment,
+    Map<Prayer, PrayerReminderType>? previousReminderModes,
+    Map<Prayer, int>? reminderTimeAdjustment,
     bool? enforceAlarmSound,
     double? soundVolume,
   }) {

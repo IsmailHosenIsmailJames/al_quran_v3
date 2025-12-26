@@ -1,6 +1,6 @@
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/prayer_time/functions/prayers_time_function.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/prayer_types.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:bloc/bloc.dart";
 
@@ -8,32 +8,26 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   PrayerReminderCubit({required PrayerReminderState initState})
     : super(initState);
 
-  void addPrayerToRemember(
-    ReminderTypeWithPrayModel prayerModelTimesType,
-  ) async {
+  void addPrayerToRemember(ReminderTypeWithPrayModel Prayer) async {
     List<ReminderTypeWithPrayModel> list = state.prayerToRemember;
-    list.add(prayerModelTimesType);
+    list.add(Prayer);
     emit(state.copyWith(prayerToRemember: list));
-    await PrayersTimeFunction.addPrayerToReminder(prayerModelTimesType);
+    await PrayersTimeFunction.addPrayerToReminder(Prayer);
     emit(
       state.copyWith(
-        previousReminderModes:
-            PrayersTimeFunction.getPreviousReminderModes(),
+        previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
   }
 
-  void removePrayerToRemember(
-    ReminderTypeWithPrayModel prayerModelTimesType,
-  ) async {
+  void removePrayerToRemember(ReminderTypeWithPrayModel Prayer) async {
     List<ReminderTypeWithPrayModel> list = state.prayerToRemember;
-    list.remove(prayerModelTimesType);
+    list.remove(Prayer);
     emit(state.copyWith(prayerToRemember: list));
-    await PrayersTimeFunction.removePrayerToReminder(prayerModelTimesType);
+    await PrayersTimeFunction.removePrayerToReminder(Prayer);
     emit(
       state.copyWith(
-        previousReminderModes:
-            PrayersTimeFunction.getPreviousReminderModes(),
+        previousReminderModes: PrayersTimeFunction.getPreviousReminderModes(),
       ),
     );
   }
@@ -43,10 +37,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     emit(state.copyWith(previousReminderModes: reminderModes));
   }
 
-  void setReminderTimeAdjustment(
-    PrayerModelTimesType prayerType,
-    int timeInMinutes,
-  ) async {
+  void setReminderTimeAdjustment(Prayer prayerType, int timeInMinutes) async {
     final reminderTimeAdjustment =
         await PrayersTimeFunction.setAdjustReminderTime(
           prayerType,
@@ -55,11 +46,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     emit(state.copyWith(reminderTimeAdjustment: reminderTimeAdjustment));
   }
 
-  void setUIReminderTimeAdjustment(
-    PrayerModelTimesType prayerType,
-    int timeInMinutes,
-  ) async {
-    Map<PrayerModelTimesType, int> adjustment = state.reminderTimeAdjustment;
+  void setUIReminderTimeAdjustment(Prayer prayerType, int timeInMinutes) async {
+    Map<Prayer, int> adjustment = state.reminderTimeAdjustment;
     adjustment[prayerType] = timeInMinutes;
     emit(state.copyWith(reminderTimeAdjustment: adjustment));
   }
