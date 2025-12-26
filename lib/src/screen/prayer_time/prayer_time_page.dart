@@ -20,7 +20,7 @@ class _PrayerTimePageState extends State<PrayerTimePage> {
       LocationQiblaPrayerDataState
     >(
       builder: (context, state) {
-        if (state.latLon == null || state.calculationMethod == null) {
+        if (state.latLon == null) {
           return const LocationAcquire();
         } else {
           return const TimeListOfPrayers();

@@ -1,12 +1,10 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/calculation_methods.dart"
-    as calculation_methods;
 
 class LocationQiblaPrayerDataState {
   LatLon? latLon;
   double? kaabaAngle;
-  calculation_methods.CalculationMethod? calculationMethod;
+  CalculationParameters? calculationMethod;
   bool? isPrayerTimeDownloading;
   bool? isGettingLocation;
   Madhab? madhab;
@@ -23,7 +21,7 @@ class LocationQiblaPrayerDataState {
   LocationQiblaPrayerDataState copyWith({
     LatLon? latLon,
     double? kaabaAngle,
-    calculation_methods.CalculationMethod? calculationMethod,
+    CalculationParameters? calculationMethod,
     bool? isDataExits,
     bool? isPrayerTimeDownloading,
     bool? isGettingLocation,

@@ -1132,7 +1132,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get hanafi => 'Hanafi';
 
   @override
-  String get shafieMalikiHanbali => 'Shafie, Maliki, Hanbali';
+  String get shafie => 'Shafie';
 
   @override
   String get suhurEndTime => 'Suhur End Time';
