@@ -1,3 +1,4 @@
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:background_fetch/background_fetch.dart";
 
 // [Android-only] This "Headless Task" is run when the Android app is terminated with `enableHeadless: true`
@@ -14,6 +15,37 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
     return;
   }
   print("[BackgroundFetch] Headless event received.");
-  // Do your work here...
+
+  // Initialize AwesomeNotifications explicitly for the headless isolate
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: "prayer_reminder",
+      channelName: "Prayer Reminder",
+      channelDescription: "This channel is for prayer reminder",
+      playSound: true,
+      onlyAlertOnce: true,
+      groupAlertBehavior: GroupAlertBehavior.Children,
+      importance: NotificationImportance.High,
+      defaultPrivacy: NotificationPrivacy.Public,
+    ),
+  ], debug: true);
+
+  // Schedule a notification for 1 minute later
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: 10,
+      channelKey: "prayer_reminder",
+      title: "Background Task Demo",
+      body:
+          "This notification was scheduled from background task 1 minute ago.",
+      notificationLayout: NotificationLayout.Default,
+    ),
+    schedule: NotificationCalendar.fromDate(
+      date: DateTime.now().add(const Duration(minutes: 1)),
+      allowWhileIdle: true,
+      preciseAlarm: true,
+    ),
+  );
+
   BackgroundFetch.finish(taskId);
 }
