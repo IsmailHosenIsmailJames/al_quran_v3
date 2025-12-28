@@ -46,11 +46,50 @@ Future<void> initializePlatform() async {
     });
   }
 
-  if (Platform.isIOS || Platform.isAndroid) {
+  if (Platform.isAndroid) {
     await Alarm.init();
-    // Register to receive BackgroundFetch events after app is terminated.
-    // Requires {stopOnTerminate: false, enableHeadless: true}
     BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+  }
+
+  if (Platform.isAndroid || Platform.isIOS) {
+    await BackgroundFetch.configure(
+      BackgroundFetchConfig(
+        minimumFetchInterval: 15,
+        stopOnTerminate: false,
+        enableHeadless: true,
+        requiresBatteryNotLow: false,
+        requiresCharging: false,
+        requiresStorageNotLow: false,
+        requiresDeviceIdle: false,
+        requiredNetworkType: NetworkType.NONE,
+      ),
+      (String taskId) async {
+        print("[BackgroundFetch] Event received $taskId");
+
+        // Schedule a notification for 1 minute later (mirroring headless behavior for demo)
+        await AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: 11, // Different ID to distinguish if needed, or same to overwrite
+            channelKey: "prayer_reminder",
+            title: "Background Task Demo (Active)",
+            body:
+                "This notification was scheduled from background fetch 1 minute ago.",
+            notificationLayout: NotificationLayout.Default,
+          ),
+          schedule: NotificationCalendar.fromDate(
+            date: DateTime.now().add(const Duration(minutes: 1)),
+            allowWhileIdle: true,
+            preciseAlarm: true,
+          ),
+        );
+
+        BackgroundFetch.finish(taskId);
+      },
+      (String taskId) async {
+        print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
+        BackgroundFetch.finish(taskId);
+      },
+    );
   }
 }
 
