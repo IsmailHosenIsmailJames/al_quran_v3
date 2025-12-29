@@ -35,6 +35,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     super.initState();
   }
 
+  Prayer? lastPrayerTime;
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -417,6 +419,21 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 const Duration(seconds: 1),
                               ),
                               builder: (context, snapshot) {
+                                final currentPrayer = prayerTimes.currentPrayer(
+                                  date: DateTime.now(),
+                                );
+                                if (lastPrayerTime != null &&
+                                    lastPrayerTime != currentPrayer) {
+                                  WidgetsBinding.instance.addPostFrameCallback((
+                                    time,
+                                  ) {
+                                    setState(() {
+                                      lastPrayerTime = currentPrayer;
+                                    });
+                                  });
+                                } else {
+                                  lastPrayerTime ??= currentPrayer;
+                                }
                                 return Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
