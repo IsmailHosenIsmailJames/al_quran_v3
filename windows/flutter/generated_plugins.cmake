@@ -3,7 +3,6 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  awesome_notifications
   geolocator_windows
   media_kit_libs_windows_audio
   permission_handler_windows

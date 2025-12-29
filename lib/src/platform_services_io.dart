@@ -1,32 +1,31 @@
 import "dart:io";
 
-import "package:al_quran_v3/src/screen/prayer_time/background/prayer_time_background.dart"
-    show backgroundFetchHeadlessTask;
-import "package:alarm/alarm.dart";
-import "package:background_fetch/background_fetch.dart";
+// import "package:alarm/alarm.dart";
+// import "package:background_fetch/background_fetch.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
 
-import "package:awesome_notifications/awesome_notifications.dart";
+// import "package:awesome_notifications/awesome_notifications.dart";
 
 void hideLoadingIndicator() {
   // no-op
 }
 
 Future<void> initAwesomeNotification() async {
-  await AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: "prayer_reminder",
-      channelName: "Prayer Reminder",
-      channelDescription: "This channel is for prayer reminder",
-      playSound: true,
-      onlyAlertOnce: true,
-      groupAlertBehavior: GroupAlertBehavior.Children,
-      importance: NotificationImportance.High,
-      defaultPrivacy: NotificationPrivacy.Public,
-    ),
-  ], debug: false);
+  // TODO Implement notifications functionality here also for "Alarm"
+  // await AwesomeNotifications().initialize(null, [
+  //   NotificationChannel(
+  //     channelKey: "prayer_reminder",
+  //     channelName: "Prayer Reminder",
+  //     channelDescription: "This channel is for prayer reminder",
+  //     playSound: true,
+  //     onlyAlertOnce: true,
+  //     groupAlertBehavior: GroupAlertBehavior.Children,
+  //     importance: NotificationImportance.High,
+  //     defaultPrivacy: NotificationPrivacy.Public,
+  //   ),
+  // ], debug: false);
 }
 
 Future<void> initializePlatform() async {
@@ -46,51 +45,7 @@ Future<void> initializePlatform() async {
     });
   }
 
-  if (Platform.isAndroid) {
-    await Alarm.init();
-    BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
-  }
-
-  if (Platform.isAndroid || Platform.isIOS) {
-    await BackgroundFetch.configure(
-      BackgroundFetchConfig(
-        minimumFetchInterval: 15,
-        stopOnTerminate: false,
-        enableHeadless: true,
-        requiresBatteryNotLow: false,
-        requiresCharging: false,
-        requiresStorageNotLow: false,
-        requiresDeviceIdle: false,
-        requiredNetworkType: NetworkType.NONE,
-      ),
-      (String taskId) async {
-        print("[BackgroundFetch] Event received $taskId");
-
-        // Schedule a notification for 1 minute later (mirroring headless behavior for demo)
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: 11, // Different ID to distinguish if needed, or same to overwrite
-            channelKey: "prayer_reminder",
-            title: "Background Task Demo (Active)",
-            body:
-                "This notification was scheduled from background fetch 1 minute ago.",
-            notificationLayout: NotificationLayout.Default,
-          ),
-          schedule: NotificationCalendar.fromDate(
-            date: DateTime.now().add(const Duration(minutes: 1)),
-            allowWhileIdle: true,
-            preciseAlarm: true,
-          ),
-        );
-
-        BackgroundFetch.finish(taskId);
-      },
-      (String taskId) async {
-        print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
-        BackgroundFetch.finish(taskId);
-      },
-    );
-  }
+  // TODO Implement notifications functionality here also for "Alarm"
 }
 
 Future<String?> getApplicationDataPath() async {
