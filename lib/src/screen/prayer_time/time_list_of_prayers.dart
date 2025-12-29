@@ -5,7 +5,6 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
 import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
 import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
@@ -195,7 +194,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: DropdownButtonFormField<Madhab>(
                           padding: EdgeInsets.zero,
-                          initialValue: locationState.madhab,
+                          initialValue: locationState.madhab ?? Madhab.shafi,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.zero,
@@ -236,7 +235,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<CalculationMethodEnum>(
                       padding: EdgeInsets.zero,
-                      initialValue: locationState.calculationMethod?.method,
+                      initialValue:
+                          locationState.calculationMethod?.method ??
+                          CalculationMethodEnum.muslimWorldLeague,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
@@ -530,41 +531,42 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             ),
                           ),
                           const Spacer(),
-                          SizedBox(
-                            height: 35,
-                            width: 60,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PrayerSettings(
-                                      prayerTimes: prayerTimes,
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: Icon(
-                                FluentIcons.settings_24_filled,
-                                color: themeState.primary,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 35,
-                            width: 60,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_forward,
-                                color: themeState.primary,
-                              ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   height: 35,
+                          //   width: 60,
+                          //   child: IconButton(
+                          //     padding: EdgeInsets.zero,
+                          //     onPressed: () {
+                          //       Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //           builder: (context) => PrayerSettings(
+                          //             prayerTimes: prayerTimes,
+                          //           ),
+                          //         ),
+                          //       );
+                          //     },
+                          //     icon: Icon(
+                          //       FluentIcons.settings_24_filled,
+                          //       color: themeState.primary,
+                          //     ),
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   height: 35,
+                          //   width: 60,
+                          //   child: IconButton(
+                          //     padding: EdgeInsets.zero,
+                          //     onPressed: () {},
+                          //     icon: Icon(
+                          //       Icons.arrow_forward,
+                          //       color: themeState.primary,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
+                      const Gap(8),
                       getPrayerRow(
                         context,
                         Prayer.fajr,
