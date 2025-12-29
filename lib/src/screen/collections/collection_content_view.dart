@@ -81,93 +81,92 @@ class _CollectionContentViewState extends State<CollectionContentView> {
         borderRadius: BorderRadius.circular(roundedRadius),
       ),
       elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
               l10n.note,
               style: textTheme.titleSmall?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            const Gap(4),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(
-                  alpha: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(roundedRadius - 4),
-              ),
-              child: Text(noteModel.text, style: textTheme.bodyMedium),
+          ),
+          const Gap(4),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(roundedRadius - 4),
             ),
-            if (noteModel.ayahKey.isNotEmpty) ...[
-              const Gap(12),
-              Text(
+            child: Text(noteModel.text, style: textTheme.bodyMedium),
+          ),
+          if (noteModel.ayahKey.isNotEmpty) ...[
+            const Gap(12),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
                 l10n.linkedAyahs,
                 style: textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
               ),
-              const Gap(4),
-              InkWell(
-                borderRadius: BorderRadius.circular(roundedRadius - 4),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) =>
-                              ListOfAyahsViews(ayahsKey: noteModel.ayahKey),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest.withValues(
-                      alpha: 0.5,
-                    ),
-                    borderRadius: BorderRadius.circular(roundedRadius - 4),
-                    // border: Border.all(color: colorScheme.outline) // Optional: add border
+            ),
+            const Gap(4),
+            InkWell(
+              borderRadius: BorderRadius.circular(roundedRadius - 4),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ListOfAyahsViews(ayahsKey: noteModel.ayahKey),
                   ),
-                  child: Wrap(
-                    spacing: 8.0, // Gap between adjacent chips.
-                    runSpacing: 4.0, // Gap between lines.
-                    children:
-                        noteModel.ayahKey.map((key) {
-                          try {
-                            SurahInfoModel surahInfo = SurahInfoModel.fromMap(
-                              metaDataSurah[key.split(":").first]!,
-                            );
-                            return Chip(
-                              label: Text(
-                                "${getSurahName(context, surahInfo.id)} - $key",
-                                style: textTheme.labelSmall,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                                vertical: 0,
-                              ),
-                              backgroundColor: colorScheme.secondaryContainer
-                                  .withValues(alpha: 0.7),
-                              side: BorderSide.none,
-                            );
-                          } catch (e) {
-                            log("Error parsing surah info for key $key: $e");
-                            return Chip(label: Text(key)); // Fallback
-                          }
-                        }).toList(),
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.5,
                   ),
+                  borderRadius: BorderRadius.circular(roundedRadius - 4),
+                  // border: Border.all(color: colorScheme.outline) // Optional: add border
+                ),
+                child: Wrap(
+                  spacing: 8.0, // Gap between adjacent chips.
+                  runSpacing: 4.0, // Gap between lines.
+                  children: noteModel.ayahKey.map((key) {
+                    try {
+                      SurahInfoModel surahInfo = SurahInfoModel.fromMap(
+                        metaDataSurah[key.split(":").first]!,
+                      );
+                      return Chip(
+                        label: Text(
+                          "${getSurahName(context, surahInfo.id)} - $key",
+                          style: textTheme.labelSmall,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 0,
+                        ),
+                        backgroundColor: colorScheme.secondaryContainer
+                            .withValues(alpha: 0.7),
+                        side: BorderSide.none,
+                      );
+                    } catch (e) {
+                      log("Error parsing surah info for key $key: $e");
+                      return Chip(label: Text(key)); // Fallback
+                    }
+                  }).toList(),
                 ),
               ),
-            ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }
@@ -214,8 +213,8 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                 NoteModel noteModel = widget.noteCollectionModel!.notes[index];
                 return _buildNoteItem(noteModel, context);
               },
-              separatorBuilder:
-                  (context, index) => const Gap(0), // Cards have own margin
+              separatorBuilder: (context, index) =>
+                  const Gap(0), // Cards have own margin
             );
           } else if (widget.pinnedCollectionModel != null) {
             if (widget.pinnedCollectionModel!.pinned.isEmpty) {
@@ -230,36 +229,36 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     );
                 return translationData != null
                     ? getAyahByAyahCard(
-                      ayahKey:
-                          widget.pinnedCollectionModel!.pinned[index].ayahKey,
-                      context: context,
-                      showFullKey: true,
-                      translationListWithInfo: translationData.translationList,
-                      wordByWord: translationData.wordByWord ?? [],
-                    )
+                        ayahKey:
+                            widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                        context: context,
+                        showFullKey: true,
+                        translationListWithInfo:
+                            translationData.translationList,
+                        wordByWord: translationData.wordByWord ?? [],
+                      )
                     : FutureBuilder(
-                      future: getTranslationWithWordByWord(
-                        widget.pinnedCollectionModel!.pinned[index].ayahKey,
-                      ),
-                      builder: (context, asyncSnapshot) {
-                        if (asyncSnapshot.connectionState !=
-                            ConnectionState.done) {
-                          return const SizedBox(height: 250);
-                        }
-                        return getAyahByAyahCard(
-                          ayahKey:
-                              widget
-                                  .pinnedCollectionModel!
-                                  .pinned[index]
-                                  .ayahKey,
-                          context: context,
-                          showFullKey: true,
-                          translationListWithInfo:
-                              asyncSnapshot.data?.translationList ?? [],
-                          wordByWord: asyncSnapshot.data?.wordByWord ?? [],
-                        );
-                      },
-                    );
+                        future: getTranslationWithWordByWord(
+                          widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                        ),
+                        builder: (context, asyncSnapshot) {
+                          if (asyncSnapshot.connectionState !=
+                              ConnectionState.done) {
+                            return const SizedBox(height: 250);
+                          }
+                          return getAyahByAyahCard(
+                            ayahKey: widget
+                                .pinnedCollectionModel!
+                                .pinned[index]
+                                .ayahKey,
+                            context: context,
+                            showFullKey: true,
+                            translationListWithInfo:
+                                asyncSnapshot.data?.translationList ?? [],
+                            wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                          );
+                        },
+                      );
               },
             );
           }

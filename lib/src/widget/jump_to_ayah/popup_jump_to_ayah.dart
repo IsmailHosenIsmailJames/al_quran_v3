@@ -14,9 +14,6 @@ Future<void> popupJumpToAyah({
     context: context,
     builder: (context) {
       return Dialog(
-        backgroundColor: Theme.of(
-          context,
-        ).scaffoldBackgroundColor.withValues(alpha: 0.8),
         insetPadding: const EdgeInsets.only(
           top: 20,
           left: 10,
