@@ -29,8 +29,6 @@ class NonTajweedScriptView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool enableWordByWordHighlight =
-        context.read<QuranViewCubit>().state.enableWordByWordHighlight == true;
     List words = QuranScriptFunction.getWordListOfAyah(
       isUthmani ? QuranScriptType.uthmani : QuranScriptType.indopak,
       scriptInfo.surahNumber.toString(),
@@ -71,41 +69,43 @@ class NonTajweedScriptView extends StatelessWidget {
             return TextSpan(
               style:
                   highlightingWordIndex ==
-                          "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
-                      ? TextStyle(
-                        backgroundColor:
-                            scriptInfo.showWordHighlights == false
-                                ? null
-                                : themeState.primaryShade200,
-                      )
-                      : null,
+                      "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
+                  ? TextStyle(
+                      backgroundColor: scriptInfo.showWordHighlights == false
+                          ? null
+                          : themeState.primaryShade200,
+                    )
+                  : null,
               text: words[index] + " ",
-              recognizer:
-                  scriptInfo.skipWordTap == true
-                      ? null
-                      : (TapGestureRecognizer()
-                        ..onTap = () async {
-                          List<String> wordsKey = List.generate(
-                            words.length,
-                            (i) =>
-                                "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
-                          );
-                          showPopupWordFunction(
-                            context: context,
-                            wordKeys: wordsKey,
-                            initWordIndex: index,
-                            wordByWordList:
-                                await WordByWordFunction.getAyahWordByWordData(
-                                  "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                                ) ??
-                                [],
-                          );
-                        }),
+              recognizer: scriptInfo.skipWordTap == true
+                  ? null
+                  : (TapGestureRecognizer()
+                      ..onTap = () async {
+                        List<String> wordsKey = List.generate(
+                          words.length,
+                          (i) =>
+                              "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
+                        );
+                        showPopupWordFunction(
+                          context: context,
+                          wordKeys: wordsKey,
+                          initWordIndex: index,
+                          wordByWordList:
+                              await WordByWordFunction.getAyahWordByWordData(
+                                "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                              ) ??
+                              [],
+                        );
+                      }),
             );
           }),
         ),
       );
     }
+
+    bool enableWordByWordHighlight =
+        context.read<QuranViewCubit>().state.enableWordByWordHighlight == true;
+
     return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
       builder: (context, segmentsReciterState) {
         List<List>? segments = context
@@ -157,37 +157,33 @@ class NonTajweedScriptView extends StatelessWidget {
                       highlightingWordIndex == "$ayahKey:${index + 1}";
 
                   return TextSpan(
-                    style:
-                        isLastWord
-                            ? const TextStyle(fontFamily: "QPC_Hafs")
-                            : (enableWordByWordHighlight && willHighLight)
-                            ? TextStyle(
-                              backgroundColor: themeState.primaryShade200,
-                            )
-                            : null,
+                    style: isLastWord
+                        ? const TextStyle(fontFamily: "QPC_Hafs")
+                        : (enableWordByWordHighlight && willHighLight)
+                        ? TextStyle(backgroundColor: themeState.primaryShade200)
+                        : null,
 
                     text: "$word ",
-                    recognizer:
-                        scriptInfo.skipWordTap == true
-                            ? null
-                            : (TapGestureRecognizer()
-                              ..onTap = () async {
-                                List<String> wordsKey = List.generate(
-                                  words.length,
-                                  (i) =>
-                                      "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
-                                );
-                                showPopupWordFunction(
-                                  context: context,
-                                  wordKeys: wordsKey,
-                                  initWordIndex: index,
-                                  wordByWordList:
-                                      await WordByWordFunction.getAyahWordByWordData(
-                                        "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                                      ) ??
-                                      [],
-                                );
-                              }),
+                    recognizer: scriptInfo.skipWordTap == true
+                        ? null
+                        : (TapGestureRecognizer()
+                            ..onTap = () async {
+                              List<String> wordsKey = List.generate(
+                                words.length,
+                                (i) =>
+                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
+                              );
+                              showPopupWordFunction(
+                                context: context,
+                                wordKeys: wordsKey,
+                                initWordIndex: index,
+                                wordByWordList:
+                                    await WordByWordFunction.getAyahWordByWordData(
+                                      "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                                    ) ??
+                                    [],
+                              );
+                            }),
                   );
                 }),
               ),
