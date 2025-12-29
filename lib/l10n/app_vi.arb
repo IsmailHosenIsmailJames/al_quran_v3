@@ -329,5 +329,16 @@
   "am": "SA",
   "pm": "CH",
   "optimizingQuranScript": "Tối ưu hóa kịch bản Kinh Qur'an",
-  "supportOnGithub": "Hỗ trợ trên GitHub"
+  "supportOnGithub": "Hỗ trợ trên GitHub",
+  "noon": "Trưa",
+  "sunset": "Hoàng hôn",
+  "forbiddenSalatTimes": "Thời gian cầu nguyện bị cấm",
+  "prayerTimes": "Thời gian cầu nguyện",
+  "hanafi": "Hanafi",
+  "shafie": "Shafi'i",
+  "suhurEnd": "Kết thúc Suhur",
+  "iftarStart": "Bắt đầu Iftar",
+  "tahajjudStart": "Bắt đầu Tahajjud",
+  "tahajjud": "Tahajjud",
+  "dhuha": "Dhuha"
 }

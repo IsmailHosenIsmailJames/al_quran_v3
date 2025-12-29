@@ -984,7 +984,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get sunrise => 'Күн шығуы';
 
   @override
-  String get noon => 'Noon';
+  String get noon => 'Тал түс';
 
   @override
   String get dhuhr => 'Түс';
@@ -993,7 +993,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get asr => 'Екінді';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => 'Күн батуы';
 
   @override
   String get maghrib => 'Ақшам';
@@ -1124,29 +1124,29 @@ class AppLocalizationsKk extends AppLocalizations {
   String get supportOnGithub => 'GitHub-та қолдау';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => 'Тыйым салынған намаз уақыттары';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => 'Намаз уақыттары';
 
   @override
-  String get hanafi => 'Hanafi';
+  String get hanafi => 'Ханали';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => 'Шафиғи';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => 'Сәресінің аяқталуы';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => 'Ауызашардың басталуы';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => 'Тәһәжүдтің басталуы';
 
   @override
-  String get tahajjud => 'Tahajjud';
+  String get tahajjud => 'Тәһәжүд';
 
   @override
-  String get dhuha => 'Dhuha';
+  String get dhuha => 'Духа';
 }

@@ -591,5 +591,16 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "د قرآن لیک بهینه کول",
-  "supportOnGithub": "په GitHub ملاتړ وکړئ"
+  "supportOnGithub": "په GitHub ملاتړ وکړئ",
+  "noon": "ماسپښین",
+  "sunset": "لمر لوېدل",
+  "forbiddenSalatTimes": "د لمونځ منع شوي وختونه",
+  "prayerTimes": "د لمونځ وختونه",
+  "hanafi": "حنفي",
+  "shafie": "شافعي",
+  "suhurEnd": "د سحری پای",
+  "iftarStart": "د افطار پیل",
+  "tahajjudStart": "د تهجد پیل",
+  "tahajjud": "تهجد",
+  "dhuha": "ضحى"
 }

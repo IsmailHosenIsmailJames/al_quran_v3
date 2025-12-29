@@ -992,7 +992,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get sunrise => 'Kuchomoza kwa Jua';
 
   @override
-  String get noon => 'Noon';
+  String get noon => 'Adhuhuri';
 
   @override
   String get dhuhr => 'Dhuhr';
@@ -1001,7 +1001,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get asr => 'Asr';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => 'Machweo';
 
   @override
   String get maghrib => 'Maghrib';
@@ -1132,25 +1132,25 @@ class AppLocalizationsSw extends AppLocalizations {
   String get supportOnGithub => 'Saidia kwenye GitHub';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => 'Nyakati za Sala Zilizokatazwa';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => 'Nyakati za Sala';
 
   @override
   String get hanafi => 'Hanafi';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => 'Shafi\'i';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => 'Mwisho wa Suhur';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => 'Mwanzo wa Iftar';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => 'Mwanzo wa Tahajjud';
 
   @override
   String get tahajjud => 'Tahajjud';

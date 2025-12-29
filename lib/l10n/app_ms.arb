@@ -591,5 +591,16 @@
   "am": "PG",
   "pm": "PTG",
   "optimizingQuranScript": "Mengoptimumkan Skrip Al-Quran",
-  "supportOnGithub": "Sokongan di GitHub"
+  "supportOnGithub": "Sokongan di GitHub",
+  "noon": "Tengah hari",
+  "sunset": "Matahari terbenam",
+  "forbiddenSalatTimes": "Waktu Solat Dilarang",
+  "prayerTimes": "Waktu Solat",
+  "hanafi": "Hanafi",
+  "shafie": "Syafi'i",
+  "suhurEnd": "Tamat Sahur",
+  "iftarStart": "Mula Iftar",
+  "tahajjudStart": "Mula Tahajjud",
+  "tahajjud": "Tahajjud",
+  "dhuha": "Dhuha"
 }

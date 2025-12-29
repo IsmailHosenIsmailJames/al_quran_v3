@@ -591,5 +591,16 @@
   "am": "ص",
   "pm": "م",
   "optimizingQuranScript": "تحسين نص القرآن",
-  "supportOnGithub": "ادعمونا على جيت هب"
+  "supportOnGithub": "ادعمونا على جيت هب",
+  "noon": "الظهر",
+  "sunset": "الغروب",
+  "forbiddenSalatTimes": "أوقات الصلاة المنهي عنها",
+  "prayerTimes": "أوقات الصلاة",
+  "hanafi": "حنفى",
+  "shafie": "شافعى",
+  "suhurEnd": "نهاية السحور",
+  "iftarStart": "بداية الإفطار",
+  "tahajjudStart": "بداية التهجد",
+  "tahajjud": "التهجد",
+  "dhuha": "الضحى"
 }

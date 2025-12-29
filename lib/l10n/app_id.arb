@@ -591,5 +591,16 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "Mengoptimalkan Naskah Al-Quran",
-  "supportOnGithub": "Dukung di GitHub"
+  "supportOnGithub": "Dukung di GitHub",
+  "noon": "Siang",
+  "sunset": "Terbenam Matahari",
+  "forbiddenSalatTimes": "Waktu Shalat Terlarang",
+  "prayerTimes": "Waktu Shalat",
+  "hanafi": "Hanafi",
+  "shafie": "Syafi'i",
+  "suhurEnd": "Akhir Sahur",
+  "iftarStart": "Mulai Iftar",
+  "tahajjudStart": "Mulai Tahajjud",
+  "tahajjud": "Tahajjud",
+  "dhuha": "Dhuha"
 }

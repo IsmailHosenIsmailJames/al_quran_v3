@@ -591,5 +591,16 @@
   "am": "ÖÖ",
   "pm": "ÖS",
   "optimizingQuranScript": "Kur'an Yazısını Optimize Ediliyor",
-  "supportOnGithub": "GitHub'da Destekleyin"
+  "supportOnGithub": "GitHub'da Destekleyin",
+  "noon": "Öğle",
+  "sunset": "Gün batımı",
+  "forbiddenSalatTimes": "Kerahat Vakitleri",
+  "prayerTimes": "Namaz Vakitleri",
+  "hanafi": "Hanefi",
+  "shafie": "Şafii",
+  "suhurEnd": "Sahur Bitişi",
+  "iftarStart": "İftar Vakti",
+  "tahajjudStart": "Teheccüd Başlangıcı",
+  "tahajjud": "Teheccüd",
+  "dhuha": "Kuşluk"
 }

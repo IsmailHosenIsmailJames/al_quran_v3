@@ -591,5 +591,16 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "Kuboresha Nakala ya Kurani",
-  "supportOnGithub": "Saidia kwenye GitHub"
+  "supportOnGithub": "Saidia kwenye GitHub",
+  "noon": "Adhuhuri",
+  "sunset": "Machweo",
+  "forbiddenSalatTimes": "Nyakati za Sala Zilizokatazwa",
+  "prayerTimes": "Nyakati za Sala",
+  "hanafi": "Hanafi",
+  "shafie": "Shafi'i",
+  "suhurEnd": "Mwisho wa Suhur",
+  "iftarStart": "Mwanzo wa Iftar",
+  "tahajjudStart": "Mwanzo wa Tahajjud",
+  "tahajjud": "Tahajjud",
+  "dhuha": "Dhuha"
 }

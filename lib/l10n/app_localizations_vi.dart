@@ -989,7 +989,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get sunrise => 'Bình minh';
 
   @override
-  String get noon => 'Noon';
+  String get noon => 'Trưa';
 
   @override
   String get dhuhr => 'Dhuhr';
@@ -998,7 +998,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get asr => 'Asr';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => 'Hoàng hôn';
 
   @override
   String get maghrib => 'Maghrib';
@@ -1129,25 +1129,25 @@ class AppLocalizationsVi extends AppLocalizations {
   String get supportOnGithub => 'Hỗ trợ trên GitHub';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => 'Thời gian cầu nguyện bị cấm';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => 'Thời gian cầu nguyện';
 
   @override
   String get hanafi => 'Hanafi';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => 'Shafi\'i';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => 'Kết thúc Suhur';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => 'Bắt đầu Iftar';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => 'Bắt đầu Tahajjud';
 
   @override
   String get tahajjud => 'Tahajjud';
