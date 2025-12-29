@@ -121,7 +121,11 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                   );
                                 }
                                 if (snapshot.hasData) {
-                                  return Text(snapshot.data ?? "");
+                                  return Text(
+                                    snapshot.data ?? "",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  );
                                 }
                                 return const SizedBox.shrink();
                               },

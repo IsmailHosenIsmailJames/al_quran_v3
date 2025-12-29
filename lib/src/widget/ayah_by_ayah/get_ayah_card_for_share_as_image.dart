@@ -43,10 +43,9 @@ Widget getAyahCardForShareAsImage(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(roundedRadius),
       border: Border.all(color: themeState.primary),
-      color:
-          brightness == Brightness.dark
-              ? Colors.grey.shade900
-              : Colors.grey.shade100,
+      color: brightness == Brightness.dark
+          ? Colors.grey.shade900
+          : Colors.grey.shade100,
     ),
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -145,10 +144,9 @@ Widget getAyahCardForShareAsImage(
                           child: Directionality(
                             textDirection: Directionality.of(context),
                             child: Html(
-                              data:
-                                  footNote[index].values
-                                      .elementAt(index)
-                                      .toString(),
+                              data: footNote[index].values
+                                  .elementAt(index)
+                                  .toString(),
                             ),
                           ),
                         ),
