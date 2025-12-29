@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
@@ -48,7 +46,6 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       LocationQiblaPrayerDataState
     >(
       builder: (context, locationState) {
-        log(locationState.madhab.toString());
         return StreamBuilder(
           stream: Stream.periodic(const Duration(seconds: 30)),
           builder: (context, snapshot) {
@@ -61,7 +58,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               ),
               calculationParameters:
                   locationState.calculationMethod ??
-                  CalculationMethodParameters.muslimWorldLeague(),
+                        CalculationMethodParameters.muslimWorldLeague()
+                    ..madhab = locationState.madhab,
             );
 
             return ListView(
@@ -220,7 +218,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                 .read<LocationQiblaPrayerDataCubit>()
                                 .saveMadhab(
                                   Madhab.values.firstWhere(
-                                    (element) => element.name == value,
+                                    (element) => element.name == value!.name,
                                   ),
                                 );
                           },
