@@ -1,5 +1,4 @@
 import "dart:developer";
-import "dart:math" show Random;
 
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
@@ -362,9 +361,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               Text(
                                 TimeOfDay.fromDateTime(
                                   (prayerTimes.timeForPrayer(
-                                            prayerTimes.nextPrayer(date: now) ??
-                                                Prayer
-                                                    .fajr, // better than crash
+                                            prayerTimes.nextPrayer(date: now)!,
                                           ) ??
                                           DateTime.now())
                                       .toLocal(),
@@ -660,7 +657,12 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClockIcon(time: TimeOfDay.fromDateTime(time)),
+          ClockIcon(
+            time: TimeOfDay.fromDateTime(time),
+            color: themeState.primary,
+            size: 20,
+            strokeWidth: 1.2,
+          ),
           const Gap(8),
           Text(
             title,
@@ -738,13 +740,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ),
               ),
             ),
-            const VerticalDivider(width: 12),
-            getReminderSwitch(
-              context,
-              isAlarm: false,
-              isCurrentToRemind: Random().nextBool(),
-              onChanged: (value) {},
-            ),
+            // const VerticalDivider(width: 12),
+            // getReminderSwitch(
+            //   context,
+            //   isAlarm: false,
+            //   isCurrentToRemind: Random().nextBool(),
+            //   onChanged: (value) {},
+            // ),
           ],
         ),
       ),
@@ -757,61 +759,67 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     DateTime time,
     PrayerTimes prayerTimes,
   ) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Gap(8),
-        CircleAvatar(
-          radius: 6,
-          backgroundColor:
-              prayerTimes.currentPrayer(date: DateTime.now()) == prayer
-              ? context.read<ThemeCubit>().state.primary
-              : Colors.grey.withValues(alpha: 0.2),
-        ),
-        const Gap(8),
-        Text(
-          PrayerTimeHelper.localizedPrayerName(context, prayer)?.capitalize() ??
-              "-",
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        const Spacer(),
-        Text(
-          TimeOfDay.fromDateTime(time.toLocal()).format(context),
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        const Gap(12),
-        getReminderSwitch(
-          context,
-          isAlarm: Random().nextBool(),
-          isCurrentToRemind: Random().nextBool(),
-          onChanged: (value) {},
-        ),
-      ],
+    return SizedBox(
+      height: 40,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Gap(8),
+          CircleAvatar(
+            radius: 6,
+            backgroundColor:
+                prayerTimes.currentPrayer(date: DateTime.now()) == prayer
+                ? context.read<ThemeCubit>().state.primary
+                : Colors.grey.withValues(alpha: 0.2),
+          ),
+          const Gap(8),
+          Text(
+            PrayerTimeHelper.localizedPrayerName(
+                  context,
+                  prayer,
+                )?.capitalize() ??
+                "-",
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          const Spacer(),
+          Text(
+            TimeOfDay.fromDateTime(time.toLocal()).format(context),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          const Gap(12),
+          // getReminderSwitch(
+          //   context,
+          //   isAlarm: Random().nextBool(),
+          //   isCurrentToRemind: Random().nextBool(),
+          //   onChanged: (value) {},
+          // ),
+        ],
+      ),
     );
   }
 
-  Switch getReminderSwitch(
-    BuildContext context, {
-    required bool isAlarm,
-    required bool isCurrentToRemind,
-    required Function(bool) onChanged,
-  }) {
-    return Switch(
-      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.selected)) {
-          return Icon(
-            isAlarm ? Icons.alarm_on_rounded : FluentIcons.alert_on_24_regular,
-          );
-        }
-        return Icon(
-          isAlarm ? Icons.alarm_off_rounded : FluentIcons.alert_off_24_regular,
-        );
-      }),
-      value: isCurrentToRemind,
-      onChanged: (value) async {},
-    );
-  }
+  // Switch getReminderSwitch(
+  //   BuildContext context, {
+  //   required bool isAlarm,
+  //   required bool isCurrentToRemind,
+  //   required Function(bool) onChanged,
+  // }) {
+  //   return Switch(
+  //     thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+  //       Set<WidgetState> states,
+  //     ) {
+  //       if (states.contains(WidgetState.selected)) {
+  //         return Icon(
+  //           isAlarm ? Icons.alarm_on_rounded : FluentIcons.alert_on_24_regular,
+  //         );
+  //       }
+  //       return Icon(
+  //         isAlarm ? Icons.alarm_off_rounded : FluentIcons.alert_off_24_regular,
+  //       );
+  //     }),
+  //     value: isCurrentToRemind,
+  //     onChanged: (value) async {},
+  //   );
+  // }
 }

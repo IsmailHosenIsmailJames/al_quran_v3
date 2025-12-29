@@ -16,15 +16,6 @@ packages:
       relative: true
     source: path
     version: "1.2.0"
-  alarm:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: ba118347ed77c69fa8426453151d8a5cdc6fdb6e
-      url: "https://github.com/IsmailHosenIsmailJames/alarm.git"
-    source: git
-    version: "5.1.5"
   analyzer:
     dependency: transitive
     description:
@@ -105,23 +96,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
-  awesome_notifications:
-    dependency: "direct main"
-    description:
-      name: awesome_notifications
-      sha256: "0d5fa4457f2ba4e536adc3ef6af709cdcecf4a05a1f3035981e9afa2f899b2a8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.1"
-  background_fetch:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "7ac1721392931c0755bbc6c96a694dff9cdf75c0"
-      url: "https://github.com/transistorsoft/flutter_background_fetch"
-    source: git
-    version: "1.5.0"
   bloc:
     dependency: "direct main"
     description:
@@ -322,14 +296,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -423,14 +389,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.1"
-  flutter_fgbg:
-    dependency: transitive
-    description:
-      name: flutter_fgbg
-      sha256: eb6da9b2047372566a6e17b505975fe5bace94af01f6fc825c4b6f81baa6c447
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.1"
   flutter_gen:
     dependency: "direct dev"
     description:

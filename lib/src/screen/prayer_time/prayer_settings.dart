@@ -378,51 +378,81 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               case Prayer.fajr:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.fajr),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.sunrise:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.sunrise),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.dhuhr:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.dhuhr),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.asr:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.asr),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.maghrib:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.maghrib),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.isha:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.isha),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.dhuha:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.dhuha),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.noon:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.noon),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.sunset:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.sunset),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
               case Prayer.tahajjud:
                 prayerIcon = ClockIcon(
                   time: TimeOfDay.fromDateTime(widget.prayerTimes.tahajjud),
+                  color: themeState.primary,
+                  size: 20,
+                  strokeWidth: 1.2,
                 );
                 break;
             }
