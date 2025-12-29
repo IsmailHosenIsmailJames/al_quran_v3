@@ -329,5 +329,16 @@
   "am": "오전",
   "pm": "오후",
   "optimizingQuranScript": "쿠란 스크립트 최적화",
-  "supportOnGithub": "GitHub에서 지원"
+  "supportOnGithub": "GitHub에서 지원",
+  "noon": "정오",
+  "sunset": "일몰",
+  "forbiddenSalatTimes": "금지된 기도 시간",
+  "prayerTimes": "기도 시간",
+  "hanafi": "하나피",
+  "shafie": "샤피이",
+  "suhurEnd": "수후르 종료",
+  "iftarStart": "이프타르 시작",
+  "tahajjudStart": "타하주드 시작",
+  "tahajjud": "타하주드",
+  "dhuha": "두하"
 }

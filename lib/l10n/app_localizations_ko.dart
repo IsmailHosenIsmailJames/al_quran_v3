@@ -973,7 +973,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sunrise => '일출';
 
   @override
-  String get noon => 'Noon';
+  String get noon => '정오';
 
   @override
   String get dhuhr => '두흐르';
@@ -982,7 +982,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get asr => '아스르';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => '일몰';
 
   @override
   String get maghrib => '마그리브';
@@ -1109,29 +1109,29 @@ class AppLocalizationsKo extends AppLocalizations {
   String get supportOnGithub => 'GitHub에서 지원';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => '금지된 기도 시간';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => '기도 시간';
 
   @override
-  String get hanafi => 'Hanafi';
+  String get hanafi => '하나피';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => '샤피이';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => '수후르 종료';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => '이프타르 시작';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => '타하주드 시작';
 
   @override
-  String get tahajjud => 'Tahajjud';
+  String get tahajjud => '타하주드';
 
   @override
-  String get dhuha => 'Dhuha';
+  String get dhuha => '두하';
 }

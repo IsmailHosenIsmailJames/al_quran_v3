@@ -591,5 +591,16 @@
   "am": "صبح",
   "pm": "شام",
   "optimizingQuranScript": "قرآن کے رسم الخط کو آپٹمائز کر رہے ہیں",
-  "supportOnGithub": "گٹ ہب پر حمایت"
+  "supportOnGithub": "گٹ ہب پر حمایت",
+  "noon": "دوپہر",
+  "sunset": "غروب آفتاب",
+  "forbiddenSalatTimes": "ممنوعہ نماز کے اوقات",
+  "prayerTimes": "نماز کے اوقات",
+  "hanafi": "حنفی",
+  "shafie": "شافعی",
+  "suhurEnd": "سحری کا اختتام",
+  "iftarStart": "افطار کا وقت",
+  "tahajjudStart": "تہجد کی شروعات",
+  "tahajjud": "تہجد",
+  "dhuha": "چاشت"
 }

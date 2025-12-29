@@ -591,5 +591,16 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "कुरान स्क्रिप्ट ऑप्टिमाइज कर रहे हैं",
-  "supportOnGithub": "गिटहब पर समर्थन करें"
+  "supportOnGithub": "गिटहब पर समर्थन करें",
+  "noon": "दोपहर",
+  "sunset": "सूर्यास्त",
+  "forbiddenSalatTimes": "वर्जित नमाज का समय",
+  "prayerTimes": "नमाज का समय",
+  "hanafi": "हनफी",
+  "shafie": "शफी",
+  "suhurEnd": "सुहुर समाप्ति",
+  "iftarStart": "इफ्तार शुरू",
+  "tahajjudStart": "तहज्जुद शुरू",
+  "tahajjud": "तहज्जुद",
+  "dhuha": "दुहा"
 }

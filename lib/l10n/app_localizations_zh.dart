@@ -957,7 +957,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sunrise => '日出';
 
   @override
-  String get noon => 'Noon';
+  String get noon => '中午';
 
   @override
   String get dhuhr => '晌礼';
@@ -966,7 +966,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get asr => '晡礼';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => '日落';
 
   @override
   String get maghrib => '昏礼';
@@ -1092,29 +1092,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get supportOnGithub => '在 GitHub 上支持';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => '禁止祈祷的时间';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => '祈祷时间';
 
   @override
-  String get hanafi => 'Hanafi';
+  String get hanafi => '哈纳菲';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => '沙斐仪';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => '封斋时间';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => '开斋时间';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => '夜间祷告开始';
 
   @override
-  String get tahajjud => 'Tahajjud';
+  String get tahajjud => '夜间祷告';
 
   @override
-  String get dhuha => 'Dhuha';
+  String get dhuha => '杜哈';
 }

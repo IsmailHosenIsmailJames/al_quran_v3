@@ -591,5 +591,16 @@
   "am": "上午",
   "pm": "下午",
   "optimizingQuranScript": "优化古兰经字体",
-  "supportOnGithub": "在 GitHub 上支持"
+  "supportOnGithub": "在 GitHub 上支持",
+  "noon": "中午",
+  "sunset": "日落",
+  "forbiddenSalatTimes": "禁止祈祷的时间",
+  "prayerTimes": "祈祷时间",
+  "hanafi": "哈纳菲",
+  "shafie": "沙斐仪",
+  "suhurEnd": "封斋时间",
+  "iftarStart": "开斋时间",
+  "tahajjudStart": "夜间祷告开始",
+  "tahajjud": "夜间祷告",
+  "dhuha": "杜哈"
 }

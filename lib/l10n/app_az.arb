@@ -329,5 +329,16 @@
   "am": "AM",
   "pm": "PM",
   "optimizingQuranScript": "Quran Mətninin Optimallaşdırılması",
-  "supportOnGithub": "GitHub-da dəstək"
+  "supportOnGithub": "GitHub-da dəstək",
+  "noon": "Günorta",
+  "sunset": "Gün batımı",
+  "forbiddenSalatTimes": "Qadağan olunmuş namaz vaxtları",
+  "prayerTimes": "Namaz vaxtları",
+  "hanafi": "Hənəfi",
+  "shafie": "Şafii",
+  "suhurEnd": "Səhər yeməyinin bitməsi",
+  "iftarStart": "İftar başlanğıcı",
+  "tahajjudStart": "Təhəccüd başlanğıcı",
+  "tahajjud": "Təhəccüd",
+  "dhuha": "Duha"
 }

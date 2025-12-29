@@ -997,7 +997,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sunrise => 'Alba';
 
   @override
-  String get noon => 'Noon';
+  String get noon => 'Mezzogiorno';
 
   @override
   String get dhuhr => 'Dhuhr';
@@ -1006,7 +1006,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get asr => 'Asr';
 
   @override
-  String get sunset => 'Sunset';
+  String get sunset => 'Tramonto';
 
   @override
   String get maghrib => 'Maghrib';
@@ -1138,25 +1138,25 @@ class AppLocalizationsIt extends AppLocalizations {
   String get supportOnGithub => 'Supporta su GitHub';
 
   @override
-  String get forbiddenSalatTimes => 'Forbidden Salat Times';
+  String get forbiddenSalatTimes => 'Orari di preghiera proibiti';
 
   @override
-  String get prayerTimes => 'Prayer Times';
+  String get prayerTimes => 'Orari di preghiera';
 
   @override
   String get hanafi => 'Hanafi';
 
   @override
-  String get shafie => 'Shafie';
+  String get shafie => 'Shafi\'i';
 
   @override
-  String get suhurEnd => 'Suhur End';
+  String get suhurEnd => 'Fine Suhur';
 
   @override
-  String get iftarStart => 'Iftar Start';
+  String get iftarStart => 'Inizio Iftar';
 
   @override
-  String get tahajjudStart => 'Tahajjud Start';
+  String get tahajjudStart => 'Inizio Tahajjud';
 
   @override
   String get tahajjud => 'Tahajjud';

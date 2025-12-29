@@ -591,5 +591,16 @@
   "am": "ТАҢ",
   "pm": "ТҮС",
   "optimizingQuranScript": "Құран жазуын оңтайландыру",
-  "supportOnGithub": "GitHub-та қолдау"
+  "supportOnGithub": "GitHub-та қолдау",
+  "noon": "Тал түс",
+  "sunset": "Күн батуы",
+  "forbiddenSalatTimes": "Тыйым салынған намаз уақыттары",
+  "prayerTimes": "Намаз уақыттары",
+  "hanafi": "Ханали",
+  "shafie": "Шафиғи",
+  "suhurEnd": "Сәресінің аяқталуы",
+  "iftarStart": "Ауызашардың басталуы",
+  "tahajjudStart": "Тәһәжүдтің басталуы",
+  "tahajjud": "Тәһәжүд",
+  "dhuha": "Духа"
 }
