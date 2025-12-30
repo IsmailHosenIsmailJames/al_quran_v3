@@ -38,11 +38,13 @@ class TajweedGuideScreen extends StatelessWidget {
                     "p": Style(
                       fontSize: FontSize.large,
                       textAlign: TextAlign.start,
+                      lineHeight: LineHeight.em(1.5),
+                      margin: Margins.only(bottom: 10),
                     ),
                     "span": Style(
                       color: ruleDetails["color"],
                       fontFamily: "QPC_Hafs",
-                      fontSize: FontSize.xLarge,
+                      fontSize: FontSize.xxLarge,
                     ),
                   },
                 ),
@@ -65,10 +67,9 @@ class TajweedGuideScreen extends StatelessWidget {
       case IdghamShafawiRule:
         return {
           "name": "Idgham Shafawi",
-          "color":
-              isLight
-                  ? IdghamShafawiRule.lightColor
-                  : IdghamShafawiRule.darkColor,
+          "color": isLight
+              ? IdghamShafawiRule.lightColor
+              : IdghamShafawiRule.darkColor,
           "description": IdghamShafawiRule.description,
         };
       case IqlabRule:
@@ -80,10 +81,9 @@ class TajweedGuideScreen extends StatelessWidget {
       case IkhafaShafawiRule:
         return {
           "name": "Ikhfa' Shafawi",
-          "color":
-              isLight
-                  ? IkhafaShafawiRule.lightColor
-                  : IkhafaShafawiRule.darkColor,
+          "color": isLight
+              ? IkhafaShafawiRule.lightColor
+              : IkhafaShafawiRule.darkColor,
           "description": IkhafaShafawiRule.description,
         };
       case QalqalahRule:
@@ -95,19 +95,17 @@ class TajweedGuideScreen extends StatelessWidget {
       case IdghamGhunnahRule:
         return {
           "name": "Idgham with Ghunnah",
-          "color":
-              isLight
-                  ? IdghamGhunnahRule.lightColor
-                  : IdghamGhunnahRule.darkColor,
+          "color": isLight
+              ? IdghamGhunnahRule.lightColor
+              : IdghamGhunnahRule.darkColor,
           "description": IdghamGhunnahRule.description,
         };
       case IdghamWoGhunnahRule:
         return {
           "name": "Idgham without Ghunnah",
-          "color":
-              isLight
-                  ? IdghamWoGhunnahRule.lightColor
-                  : IdghamWoGhunnahRule.darkColor,
+          "color": isLight
+              ? IdghamWoGhunnahRule.lightColor
+              : IdghamWoGhunnahRule.darkColor,
           "description": IdghamWoGhunnahRule.description,
         };
       case IkhafaRule:
@@ -137,19 +135,17 @@ class TajweedGuideScreen extends StatelessWidget {
       case MaddWajibMuttasilRule:
         return {
           "name": "Madd Wajib Muttasil",
-          "color":
-              isLight
-                  ? MaddWajibMuttasilRule.lightColor
-                  : MaddWajibMuttasilRule.darkColor,
+          "color": isLight
+              ? MaddWajibMuttasilRule.lightColor
+              : MaddWajibMuttasilRule.darkColor,
           "description": MaddWajibMuttasilRule.description,
         };
       case MaddJaizMunfasilRule:
         return {
           "name": "Madd Ja' iz Munfasil",
-          "color":
-              isLight
-                  ? MaddJaizMunfasilRule.lightColor
-                  : MaddJaizMunfasilRule.darkColor,
+          "color": isLight
+              ? MaddJaizMunfasilRule.lightColor
+              : MaddJaizMunfasilRule.darkColor,
           "description": MaddJaizMunfasilRule.description,
         };
       case HamWaslRule:
@@ -161,10 +157,9 @@ class TajweedGuideScreen extends StatelessWidget {
       case LaamShamsiyahRule:
         return {
           "name": "Lam Shamsiyyah",
-          "color":
-              isLight
-                  ? LaamShamsiyahRule.lightColor
-                  : LaamShamsiyahRule.darkColor,
+          "color": isLight
+              ? LaamShamsiyahRule.lightColor
+              : LaamShamsiyahRule.darkColor,
           "description": LaamShamsiyahRule.description,
         };
       case SlntRule:
@@ -176,28 +171,25 @@ class TajweedGuideScreen extends StatelessWidget {
       case IdghamMutajanisaynRule:
         return {
           "name": "Idgham Mutajanisayn",
-          "color":
-              isLight
-                  ? IdghamMutajanisaynRule.lightColor
-                  : IdghamMutajanisaynRule.darkColor,
+          "color": isLight
+              ? IdghamMutajanisaynRule.lightColor
+              : IdghamMutajanisaynRule.darkColor,
           "description": IdghamMutajanisaynRule.description,
         };
       case IdghamMutaqaribaynRule:
         return {
           "name": "Idgham Mutaqaribayn",
-          "color":
-              isLight
-                  ? IdghamMutaqaribaynRule.lightColor
-                  : IdghamMutaqaribaynRule.darkColor,
+          "color": isLight
+              ? IdghamMutaqaribaynRule.lightColor
+              : IdghamMutaqaribaynRule.darkColor,
           "description": IdghamMutaqaribaynRule.description,
         };
       case CustomAlefMaksoraRule:
         return {
           "name": "Alif Maqsurah",
-          "color":
-              isLight
-                  ? CustomAlefMaksoraRule.lightColor
-                  : CustomAlefMaksoraRule.darkColor,
+          "color": isLight
+              ? CustomAlefMaksoraRule.lightColor
+              : CustomAlefMaksoraRule.darkColor,
           "description": CustomAlefMaksoraRule.description,
         };
       default:
