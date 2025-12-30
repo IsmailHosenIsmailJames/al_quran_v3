@@ -37,9 +37,9 @@ class GhunnahRule {
   static const String key = "ghunnah";
   static const String description = """
   <b>Ghunnah (Nasalization)</b>
-  <p>A nasal sound held for approximately two counts. It is applied to the letters <b>نّ (Noon with Shaddah)</b> and <b>مّ (Meem with Shaddah)</b>.</p>
-  <p><b>How to pronounce:</b> Direct the sound through your nose for a noticeable duration.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>إِنَّ</span>, <span style='font-family:QPC_Hafs'>ثُمَّ</span></p>
+  <p>A nasal sound produced from the nose, held for approximately 2 counts. It applies to the letters <b>Noon (ن)</b> and <b>Meem (م)</b> when they have a Shaddah (Example: <b>نّ</b>, <b>مّ</b>).</p>
+  <p><b>How to pronounce:</b> Press onto the letter and hold the nasal sound for a noticeable duration.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>إِنَّ</span> (Inna), <span style='font-family:QPC_Hafs'>ثُمَّ</span> (Thumma)</p>
   """;
 }
 
@@ -50,9 +50,9 @@ class IdghamShafawiRule {
   static const String key = "idgham_shafawi";
   static const String description = """
   <b>Idgham Shafawi (Lip-to-Lip Merging)</b>
-  <p>This rule applies to <b>Meem Sakinah (مْ)</b>. When a Meem Sakinah is followed by another <b>Meem (م)</b>, the two Meems are merged and pronounced with a Ghunnah (nasalization).</p>
-  <p><b>How to pronounce:</b> Merge the first Meem into the second and hold the sound with nasalization.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>لَكُم مَّا</span></p>
+  <p>This rule applies to <b>Meem Sakinah (مْ)</b> followed by another <b>Meem (م)</b>. The two Meems are merged into one with a Ghunnah.</p>
+  <p><b>How to pronounce:</b> Merge the first Meem into the second and hold the nasal sound.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>لَكُم مَّا</span> (Lakum-ma)</p>
   """;
 }
 
@@ -62,10 +62,10 @@ class IqlabRule {
   static const Color darkColor = darkIqlab;
   static const String key = "iqlab";
   static const String description = """
-  <b>Iqlab (Flipping)</b>
-  <p>This rule applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween (ـًـــٍـــٌ)</b>. When either is followed by the letter <b>ب (Ba)</b>, the Noon sound is flipped into a light <b>Meem (م)</b> sound with a Ghunnah.</p>
-  <p><b>How to pronounce:</b> Change the 'n' sound to an 'm' sound and hold with nasalization.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مِن بَعْدِ</span></p>
+  <b>Iqlab (Transformation)</b>
+  <p>Occurs when <b>Noon Sakinah (نْ)</b> or <b>Tanween (ـًـــٍـــٌ)</b> is followed by the letter <b>Ba (ب)</b>. The 'N' sound turns into a hidden <b>Meem (م)</b> with Ghunnah.</p>
+  <p><b>How to pronounce:</b> Change the 'N' sound to an 'M' sound and hold with nasalization.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مِن بَعْدِ</span> (Mim-ba'd)</p>
   """;
 }
 
@@ -76,9 +76,9 @@ class IkhafaShafawiRule {
   static const String key = "ikhafa_shafawi";
   static const String description = """
   <b>Ikhfa' Shafawi (Lip-to-Lip Hiding)</b>
-  <p>This rule applies to <b>Meem Sakinah (مْ)</b>. When it is followed by the letter <b>ب (Ba)</b>, the Meem is pronounced lightly with a Ghunnah, keeping the lips gently together.</p>
-  <p><b>How to pronounce:</b> Pronounce the Meem softly with a light nasal sound before pronouncing the Ba.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>تَرْمِيهِم بِحِجَارَةٍ</span></p>
+  <p>This rule applies to <b>Meem Sakinah (مْ)</b> followed by the letter <b>Ba (ب)</b>. The Meem is concealed slightly with a Ghunnah.</p>
+  <p><b>How to pronounce:</b> Pronounce the Meem softly with a light nasal sound, keeping the lips in light contact or with a tiny gap before the Ba.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>تَرْمِيهِم بِحِجَارَةٍ</span> (Tarmeehim-bi-hijarah)</p>
   """;
 }
 
@@ -88,9 +88,9 @@ class QalqalahRule {
   static const Color darkColor = darkQalaqah;
   static const String key = "qalaqah";
   static const String description = """
-  <b>Qalqalah (Echo / Bouncing)</b>
-  <p>A bouncing or echoing sound made on certain letters when they have a Sukoon (ـْ). The letters are <b>ق ط ب ج د</b> (mnemonic: قُطْبُ جَدٍّ).</p>
-  <p><b>How to pronounce:</b> Create a slight vibration or bounce on the letter without adding a vowel.</p>
+  <b>Qalqalah (Echoing / Bouncing)</b>
+  <p>A bouncing or echoing sound made on the letters <b>ق ط ب ج د</b> (Mnemonic: 'Qutb Jad') when they have a Sukoon (ـْ).</p>
+  <p><b>How to pronounce:</b> Make a quick bounce on the letter without adding a vowel sound, like a strong vibration.</p>
   <p><b>Example:</b> <span style='font-family:QPC_Hafs'>يَدْعُونَ</span>, <span style='font-family:QPC_Hafs'>خَلَقْنَا</span></p>
   """;
 }
@@ -102,9 +102,9 @@ class IdghamGhunnahRule {
   static const String key = "idgham_ghunnah";
   static const String description = """
   <b>Idgham with Ghunnah (Merging with Nasalization)</b>
-  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by one of the letters <b>ي ن م و</b> (mnemonic: يَنْمُو). The Noon sound is merged into the following letter and pronounced with Ghunnah.</p>
-  <p><b>How to pronounce:</b> Skip the 'n' sound and merge it into the next letter while holding a nasal sound.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مَن يَقُولُ</span></p>
+  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by <b>ي ن م و</b>. The Noon sound is merged into the next letter with a Ghunnah (2 counts).</p>
+  <p><b>How to pronounce:</b> Skip the 'N' and direct the sound into the nose while pronouncing the next letter.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مَن يَقُولُ</span> (May-yaqool)</p>
   """;
 }
 
@@ -115,9 +115,9 @@ class IdghamWoGhunnahRule {
   static const String key = "idgham_wo_ghunnah";
   static const String description = """
   <b>Idgham without Ghunnah (Merging without Nasalization)</b>
-  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by the letters <b>ل (Lam)</b> or <b>ر (Ra)</b>. The Noon sound is completely merged into the following letter without any nasalization.</p>
-  <p><b>How to pronounce:</b> The 'n' sound is silent, and the next letter is stressed.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مِن لَدُنْهُ</span>, <span style='font-family:QPC_Hafs'>غَفُورٌ رَحِيمٌ</span></p>
+  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by <b>ل (Lam)</b> or <b>ر (Ra)</b>. The Noon sound is completely merged into the next letter.</p>
+  <p><b>How to pronounce:</b> Skip the 'N' completely and stress the next letter. No nasal sound.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مِن لَدُنْهُ</span> (Mil-ladunhu)</p>
   """;
 }
 
@@ -128,9 +128,9 @@ class IkhafaRule {
   static const String key = "ikhafa";
   static const String description = """
   <b>Ikhfa' (Hiding)</b>
-  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by one of the 15 remaining letters of the alphabet. The Noon sound is hidden or partially pronounced with a light Ghunnah, preparing the mouth for the next letter.</p>
-  <p><b>How to pronounce:</b> Lightly touch the articulation point of the Noon, creating a subtle nasal sound before moving to the next letter.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الإِنسَانُ</span></p>
+  <p>Applies to <b>Noon Sakinah (نْ)</b> or <b>Tanween</b> followed by one of the 15 Ikhfa letters. The Noon sound is hidden with a Ghunnah.</p>
+  <p><b>How to pronounce:</b> Create a sound between Izhar (clarity) and Idgham (merging), holding a nasal sound. Prepare your mouth for the next letter.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الإِنسَانُ</span> (Al-Insaan)</p>
   """;
 }
 
@@ -140,10 +140,10 @@ class MaddTabiiRule {
   static const Color darkColor = darkMaddaNormal;
   static const String key = "madda_normal";
   static const String description = """
-  <b>Madd Tabi'i (Normal Stretch)</b>
-  <p>The natural stretch of a vowel sound for two counts. It occurs when a Fatha is followed by an Alif (ـَا), a Kasra by a Ya' Sakinah (ـِي), or a Dammah by a Waw Sakinah (ـُو).</p>
-  <p><b>How to pronounce:</b> Elongate the vowel sound for a short duration.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>قَالَ</span>, <span style='font-family:QPC_Hafs'>قِيلَ</span>, <span style='font-family:QPC_Hafs'>يَقُولُ</span></p>
+  <b>Madd Tabi'i (Natural Madd)</b>
+  <p>The natural stretch of a vowel sound for <b>2 counts</b>. Occurs with Alif (after Fatha), Ya (after Kasra), or Waw (after Dammah).</p>
+  <p><b>How to pronounce:</b> Elongate the vowel naturally, not too short and not too long.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>قَالَ</span> (Qaala)</p>
   """;
 }
 
@@ -153,10 +153,10 @@ class MaddLazimRule {
   static const Color darkColor = darkMaddaNecessary;
   static const String key = "madda_necessary";
   static const String description = """
-  <b>Madd Lazim (Necessary Stretch)</b>
-  <p>The longest stretch, held for six counts. It occurs when a Madd letter is followed by a letter with a permanent Sukoon (or a Shaddah, which contains a sukoon).</p>
-  <p><b>How to pronounce:</b> Elongate the vowel sound for a full six counts.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الضَّالِّينَ</span>, <span style='font-family:QPC_Hafs'>الْحَاقَّةُ</span></p>
+  <b>Madd Lazim (Compulsory Madd)</b>
+  <p>The longest stretch, held for <b>6 counts</b> (full length). Occurs when a Madd letter is followed by a permanent Sukoon or Shaddah.</p>
+  <p><b>How to pronounce:</b> Elongate the vowel sound significantly (approx. 3x normal length).</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الضَّالِّينَ</span> (Ad-Daalleen)</p>
   """;
 }
 
@@ -166,10 +166,10 @@ class MaddLeenRule {
   static const Color darkColor = darkMaddaPermissible;
   static const String key = "madda_permissible";
   static const String description = """
-  <b>Madd Leen (Easy Stretch)</b>
-  <p>Occurs when a Waw Sakinah (وْ) or Ya Sakinah (يْ) is preceded by a Fatha and followed by a letter that is being stopped upon (temporary sukoon). It can be stretched for 2, 4, or 6 counts.</p>
-  <p><b>How to pronounce:</b> Elongate the 'aw' or 'ay' sound when stopping at the end of an ayah.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>خَوْفٌ</span> (when stopping), <span style='font-family:QPC_Hafs'>الْبَيْتِ</span> (when stopping).</p>
+  <b>Madd Leen (Soft Madd)</b>
+  <p>Occurs when Waw or Ya with Sukoon are preceded by a Fatha, and followed by a stopped letter. Stretched for 2, 4, or 6 counts when stopping.</p>
+  <p><b>How to pronounce:</b> Elongate the 'aw' or 'ay' sound smoothly when stopping.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>خَوْفٌ</span> (Khawf), <span style='font-family:QPC_Hafs'>الْبَيْتِ</span> (Bayt)</p>
   """;
 }
 
@@ -179,10 +179,10 @@ class MaddWajibMuttasilRule {
   static const Color darkColor = darkMaddaObligatoryMottasel;
   static const String key = "madda_obligatory_mottasel";
   static const String description = """
-  <b>Madd Wajib Muttasil (Obligatory Connected Stretch)</b>
-  <p>A stretch of 4 or 5 counts. It occurs when a Madd letter is followed by a Hamzah (ء) within the same word.</p>
+  <b>Madd Wajib Muttasil (Obligatory Connected Madd)</b>
+  <p>Stretched for <b>4 or 5 counts</b>. Occurs when a Madd letter is followed by a Hamzah (ء) in the <b>same word</b>.</p>
   <p><b>How to pronounce:</b> Elongate the vowel for a medium-long duration.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>جَاءَ</span>, <span style='font-family:QPC_Hafs'>السَّمَاءِ</span></p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>السَّمَاءِ</span> (As-Samaa')</p>
   """;
 }
 
@@ -192,10 +192,10 @@ class MaddJaizMunfasilRule {
   static const Color darkColor = darkMaddaObligatoryMonfasel;
   static const String key = "madda_obligatory_monfasel";
   static const String description = """
-  <b>Madd Ja'iz Munfasil (Permissible Separate Stretch)</b>
-  <p>A stretch of 4 or 5 counts. It occurs when a Madd letter appears at the end of a word, and the next word begins with a Hamzah (ء).</p>
+  <b>Madd Ja'iz Munfasil (Permissible Separate Madd)</b>
+  <p>Stretched for <b>4 or 5 counts</b>. Occurs when a Madd letter is at the end of a word, and Hamzah (ء) is at the start of the next.</p>
   <p><b>How to pronounce:</b> Elongate the vowel for a medium-long duration.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>يَا أَيُّهَا</span></p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>يَا أَيُّهَا</span> (Yaa-Ayyuha)</p>
   """;
 }
 
@@ -206,9 +206,9 @@ class HamWaslRule {
   static const String key = "ham_wasl";
   static const String description = """
   <b>Hamzat al-Wasl (Connecting Hamzah)</b>
-  <p>A type of Hamzah that is pronounced only when starting a word. If it is preceded by another word, it is skipped (connected).</p>
-  <p><b>How to pronounce:</b> Pronounce it as a regular 'a', 'i', or 'u' at the beginning of recitation. In the middle of a phrase, drop the Hamzah sound and connect to the previous word.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>ٱهْدِنَا</span> (pronounced 'Ihdina' when starting).</p>
+  <p>Pronounced only when starting a word, but silent when connecting from the previous word.</p>
+  <p><b>How to pronounce:</b> Pronounce as 'A', 'I', or 'U' if starting the sentence. Skip if continuing.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>ٱهْدِنَا</span> (Ihdina - if starting)</p>
   """;
 }
 
@@ -219,9 +219,9 @@ class LaamShamsiyahRule {
   static const String key = "laam_shamsiyah";
   static const String description = """
   <b>Lam Shamsiyyah (Sun Letter Lam)</b>
-  <p>The 'L' sound in the definite article 'ال' is silent when the following letter is a "sun letter" (e.g., ت, ث, د, ذ, ر, ز, س, ش, ص, ض, ط, ظ, ل, ن). The sun letter is then doubled (pronounced with a Shaddah).</p>
-  <p><b>How to pronounce:</b> Skip the 'L' sound and stress the next letter.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الشَّمْسُ</span> (pronounced 'ash-shamsu').</p>
+  <p>The 'L' in 'Al' (ال) is silent when followed by a Sun Letter. The Sun Letter gets a Shaddah.</p>
+  <p><b>How to pronounce:</b> Skip the 'L' and stress the next letter.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>الشَّمْسُ</span> (Ash-Shamsu)</p>
   """;
 }
 
@@ -232,9 +232,9 @@ class SlntRule {
   static const String key = "slnt";
   static const String description = """
   <b>Silent Letter</b>
-  <p>A letter that is written in the script but not pronounced. This often includes certain Alifs or Waws that serve as placeholders or have historical significance but are silent in recitation.</p>
-  <p><b>How to pronounce:</b> Do not pronounce this letter.</p>
-  <p><b>Example:</b> The Alif in <span style='font-family:QPC_Hafs'>قَالُوا۟</span>.</p>
+  <p>A letter written in the script but not pronounced.</p>
+  <p><b>How to pronounce:</b> Ignore this letter completely.</p>
+  <p><b>Example:</b> The final Alif in <span style='font-family:QPC_Hafs'>قَالُوا۟</span></p>
   """;
 }
 
@@ -244,11 +244,10 @@ class IdghamMutajanisaynRule {
   static const Color darkColor = darkIdghamMutajanisayn;
   static const String key = "idgham_mutajanisayn";
   static const String description = """
-  <b>Idgham Mutajanisayn (Merging of Homogeneous Letters)</b>
-  <p>The merging of two letters that share the same articulation point but have different attributes. The first letter is merged into the second.</p>
-  <p><b>Common pairs:</b> ت/د, ط/ت, ذ/ظ.</p>
-  <p><b>How to pronounce:</b> The first letter is not pronounced; the second letter is stressed.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>قَد تَبَيَّنَ</span> (pronounced 'qat-tabayyana').</p>
+  <b>Idgham Mutajanisayn (Homogeneous Merging)</b>
+  <p>Merging two letters with the same articulation point but different attributes.</p>
+  <p><b>How to pronounce:</b> Skip the first letter and stress the second.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>قَد تَبَيَّنَ</span> (Qat-tabayyana)</p>
   """;
 }
 
@@ -258,11 +257,10 @@ class IdghamMutaqaribaynRule {
   static const Color darkColor = darkIdghamMutaqaribayn;
   static const String key = "idgham_mutaqaribayn";
   static const String description = """
-  <b>Idgham Mutaqaribayn (Merging of Similar Letters)</b>
-  <p>The merging of two letters that have very close articulation points and attributes.</p>
-  <p><b>Common pairs:</b> ق/ك, ل/ر.</p>
-  <p><b>How to pronounce:</b> The first letter is merged into the second, which is then stressed.</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>أَلَمْ نَخْلُقكُّم</span> (pronounced 'nakhlukkum').</p>
+  <b>Idgham Mutaqaribayn (Similar Merging)</b>
+  <p>Merging two letters with close articulation points.</p>
+  <p><b>How to pronounce:</b> Skip the first letter and stress the second.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>أَلَمْ نَخْلُقكُّم</span> (Nakhlukkum)</p>
   """;
 }
 
@@ -273,8 +271,8 @@ class CustomAlefMaksoraRule {
   static const String key = "custom-alef-maksora";
   static const String description = """
   <b>Alif Maqsurah (Shortened Alif)</b>
-  <p>This is the letter <b>ى</b> which looks like a Ya without dots. It is pronounced as a short 'a' sound, just like a regular Alif.</p>
-  <p><b>How to pronounce:</b> Pronounce as a normal Alif (an 'a' sound).</p>
-  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>عَلَىٰ</span></p>
+  <p>A dotless Ya (ى) pronounced as a short Alif (Madd Tabi'i).</p>
+  <p><b>How to pronounce:</b> Standard 'aa' vowel sound.</p>
+  <p><b>Example:</b> <span style='font-family:QPC_Hafs'>مُوسَىٰ</span> (Musa)</p>
   """;
 }
