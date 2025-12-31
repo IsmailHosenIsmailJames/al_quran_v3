@@ -26,18 +26,18 @@ class QuranPagesRenderer extends StatelessWidget {
     return switch (quranScriptType) {
       QuranScriptType.tajweed => TajweedPageRenderer(
         ayahsKey: ayahsKey,
-        baseTextStyle: copyBaseStyle,
+        baseTextStyle: copyBaseStyle.copyWith(fontFamily: "QPC_Hafs"),
         enableWordByWordHighlight: enableWordByWordHighlight,
       ),
       QuranScriptType.uthmani => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
-        baseTextStyle: copyBaseStyle,
+        baseTextStyle: copyBaseStyle.copyWith(fontFamily: "QPC_Hafs"),
         isUthmani: true,
         enableWordByWordHighlight: enableWordByWordHighlight,
       ),
       QuranScriptType.indopak => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
-        baseTextStyle: copyBaseStyle,
+        baseTextStyle: copyBaseStyle.copyWith(fontFamily: "AlQuranNeov5x1"),
         isUthmani: false,
         enableWordByWordHighlight: enableWordByWordHighlight,
       ),

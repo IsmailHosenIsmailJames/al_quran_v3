@@ -5,10 +5,9 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
-import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:flutter/gestures.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -59,8 +58,10 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   false) {
                 return false;
               }
-              String? currentAyahKey =
-                  context.read<AyahKeyCubit>().state.current;
+              String? currentAyahKey = context
+                  .read<AyahKeyCubit>()
+                  .state
+                  .current;
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -87,76 +88,52 @@ class NonTajweedPageRenderer extends StatelessWidget {
               return false;
             },
             builder: (context, positionState) {
-              final highlightingAyahKey =
-                  context.read<AyahKeyCubit>().state.current;
+              final highlightingAyahKey = context
+                  .read<AyahKeyCubit>()
+                  .state
+                  .current;
               return Text.rich(
                 TextSpan(
-                  children:
-                      ayahsKey.map((ayahKey) {
-                        List words = QuranScriptFunction.getWordListOfAyah(
-                          isUthmani
-                              ? QuranScriptType.uthmani
-                              : QuranScriptType.indopak,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
+                  children: ayahsKey.map((ayahKey) {
+                    List words = QuranScriptFunction.getWordListOfAyah(
+                      isUthmani
+                          ? QuranScriptType.uthmani
+                          : QuranScriptType.indopak,
+                      ayahKey.split(":").first,
+                      ayahKey.split(":").last,
+                    );
 
-                        return TextSpan(
-                          style: TextStyle(
+                    return TextSpan(
+                      style: TextStyle(
+                        backgroundColor: highlightingAyahKey == ayahKey
+                            ? isDark
+                                  ? Colors.white.withValues(alpha: 0.08)
+                                  : Colors.black.withValues(alpha: 0.08)
+                            : null,
+                      ),
+                      children: List.generate(words.length, (index) {
+                        return parseTajweedWord(
+                          wordIndex: index,
+                          baseStyle: TextStyle(
+                            fontSize: baseTextStyle?.fontSize ?? 24,
+                            fontFamily:
+                                baseTextStyle?.fontFamily ?? "AlQuranNeov5x1",
+                            height: baseTextStyle?.height,
                             backgroundColor:
-                                highlightingAyahKey == ayahKey
-                                    ? isDark
-                                        ? Colors.white.withValues(alpha: 0.08)
-                                        : Colors.black.withValues(alpha: 0.08)
-                                    : null,
+                                (highlightingWord == "$ayahKey:${index + 1}" &&
+                                    enableWordByWordHighlight == true)
+                                ? themeState.primaryShade300
+                                : null,
                           ),
-                          children:
-                              List.generate(words.length, (index) {
-                                String word = words[index];
-                                bool isLastWord =
-                                    index == (words.length - 1) &&
-                                    word.length < 3;
-                                return TextSpan(
-                                  text: "$word ",
-                                  style:
-                                      (highlightingWord ==
-                                                  "$ayahKey:${index + 1}" &&
-                                              enableWordByWordHighlight == true)
-                                          ? TextStyle(
-                                            backgroundColor:
-                                                themeState.primaryShade300,
-                                            fontFamily:
-                                                isLastWord ? "QPC_Hafs" : null,
-                                          )
-                                          : TextStyle(
-                                            fontFamily:
-                                                isLastWord ? "QPC_Hafs" : null,
-                                          ),
-
-                                  recognizer:
-                                      TapGestureRecognizer()
-                                        ..onTap = () async {
-                                          final highlightingWord =
-                                              List.generate(
-                                                words.length,
-                                                (index) =>
-                                                    "$ayahKey:${index + 1}",
-                                              );
-                                          showPopupWordFunction(
-                                            context: context,
-                                            initWordIndex: index,
-                                            wordKeys: highlightingWord,
-                                            wordByWordList:
-                                                await WordByWordFunction.getAyahWordByWordData(
-                                                  "${highlightingWord.first.split(":")[0]}:${highlightingWord.first.split(":")[1]}",
-                                                ) ??
-                                                [],
-                                          );
-                                        },
-                                );
-                              }).toList(),
+                          surahNumber: ayahKey.split(":").first.toInt(),
+                          ayahNumber: ayahKey.split(":").last.toInt(),
+                          skipWordTap: false,
+                          words: List<String>.from(words),
+                          context: context,
                         );
                       }).toList(),
+                    );
+                  }).toList(),
                 ),
                 style: TextStyle(
                   fontSize: baseTextStyle?.fontSize ?? 24,
