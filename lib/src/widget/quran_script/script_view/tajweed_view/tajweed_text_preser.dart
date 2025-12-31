@@ -23,50 +23,52 @@ TextSpan parseTajweedWord({
 
   final Map<String, Color> currentThemeColors = {
     GhunnahRule.key: isLight ? GhunnahRule.lightColor : GhunnahRule.darkColor,
-    IdghamShafawiRule.key:
-        isLight ? IdghamShafawiRule.lightColor : IdghamShafawiRule.darkColor,
+    IdghamShafawiRule.key: isLight
+        ? IdghamShafawiRule.lightColor
+        : IdghamShafawiRule.darkColor,
     IqlabRule.key: isLight ? IqlabRule.lightColor : IqlabRule.darkColor,
-    IkhafaShafawiRule.key:
-        isLight ? IkhafaShafawiRule.lightColor : IkhafaShafawiRule.darkColor,
-    QalqalahRule.key:
-        isLight ? QalqalahRule.lightColor : QalqalahRule.darkColor,
-    IdghamGhunnahRule.key:
-        isLight ? IdghamGhunnahRule.lightColor : IdghamGhunnahRule.darkColor,
-    IdghamWoGhunnahRule.key:
-        isLight
-            ? IdghamWoGhunnahRule.lightColor
-            : IdghamWoGhunnahRule.darkColor,
+    IkhafaShafawiRule.key: isLight
+        ? IkhafaShafawiRule.lightColor
+        : IkhafaShafawiRule.darkColor,
+    QalqalahRule.key: isLight
+        ? QalqalahRule.lightColor
+        : QalqalahRule.darkColor,
+    IdghamGhunnahRule.key: isLight
+        ? IdghamGhunnahRule.lightColor
+        : IdghamGhunnahRule.darkColor,
+    IdghamWoGhunnahRule.key: isLight
+        ? IdghamWoGhunnahRule.lightColor
+        : IdghamWoGhunnahRule.darkColor,
     IkhafaRule.key: isLight ? IkhafaRule.lightColor : IkhafaRule.darkColor,
-    MaddTabiiRule.key:
-        isLight ? MaddTabiiRule.lightColor : MaddTabiiRule.darkColor,
-    MaddLazimRule.key:
-        isLight ? MaddLazimRule.lightColor : MaddLazimRule.darkColor,
-    MaddLeenRule.key:
-        isLight ? MaddLeenRule.lightColor : MaddLeenRule.darkColor,
-    MaddWajibMuttasilRule.key:
-        isLight
-            ? MaddWajibMuttasilRule.lightColor
-            : MaddWajibMuttasilRule.darkColor,
-    MaddJaizMunfasilRule.key:
-        isLight
-            ? MaddJaizMunfasilRule.lightColor
-            : MaddJaizMunfasilRule.darkColor,
+    MaddTabiiRule.key: isLight
+        ? MaddTabiiRule.lightColor
+        : MaddTabiiRule.darkColor,
+    MaddLazimRule.key: isLight
+        ? MaddLazimRule.lightColor
+        : MaddLazimRule.darkColor,
+    MaddLeenRule.key: isLight
+        ? MaddLeenRule.lightColor
+        : MaddLeenRule.darkColor,
+    MaddWajibMuttasilRule.key: isLight
+        ? MaddWajibMuttasilRule.lightColor
+        : MaddWajibMuttasilRule.darkColor,
+    MaddJaizMunfasilRule.key: isLight
+        ? MaddJaizMunfasilRule.lightColor
+        : MaddJaizMunfasilRule.darkColor,
     HamWaslRule.key: isLight ? HamWaslRule.lightColor : HamWaslRule.darkColor,
-    LaamShamsiyahRule.key:
-        isLight ? LaamShamsiyahRule.lightColor : LaamShamsiyahRule.darkColor,
+    LaamShamsiyahRule.key: isLight
+        ? LaamShamsiyahRule.lightColor
+        : LaamShamsiyahRule.darkColor,
     SlntRule.key: isLight ? SlntRule.lightColor : SlntRule.darkColor,
-    IdghamMutajanisaynRule.key:
-        isLight
-            ? IdghamMutajanisaynRule.lightColor
-            : IdghamMutajanisaynRule.darkColor,
-    IdghamMutaqaribaynRule.key:
-        isLight
-            ? IdghamMutaqaribaynRule.lightColor
-            : IdghamMutaqaribaynRule.darkColor,
-    CustomAlefMaksoraRule.key:
-        isLight
-            ? CustomAlefMaksoraRule.lightColor
-            : CustomAlefMaksoraRule.darkColor,
+    IdghamMutajanisaynRule.key: isLight
+        ? IdghamMutajanisaynRule.lightColor
+        : IdghamMutajanisaynRule.darkColor,
+    IdghamMutaqaribaynRule.key: isLight
+        ? IdghamMutaqaribaynRule.lightColor
+        : IdghamMutaqaribaynRule.darkColor,
+    CustomAlefMaksoraRule.key: isLight
+        ? CustomAlefMaksoraRule.lightColor
+        : CustomAlefMaksoraRule.darkColor,
   };
 
   final defaultColor =
@@ -75,33 +77,36 @@ TextSpan parseTajweedWord({
       (brightness == Brightness.light ? Colors.black : Colors.white);
 
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
+  bool isLastWord = wordIndex == words.length - 1;
 
   void processNode(dom.Node node, Color currentColor) {
     if (node.nodeType == dom.Node.TEXT_NODE) {
       spans.add(
         TextSpan(
           text: node.text,
-          style: processingStyle.copyWith(color: currentColor),
-          recognizer:
-              skipWordTap == true
-                  ? null
-                  : (TapGestureRecognizer()
-                    ..onTap = () async {
-                      List<String> wordsKey = List.generate(
-                        words.length,
-                        (index) => "$surahNumber:$ayahNumber:${index + 1}",
-                      );
-                      showPopupWordFunction(
-                        context: context,
-                        wordKeys: wordsKey,
-                        initWordIndex: wordIndex,
-                        wordByWordList:
-                            await WordByWordFunction.getAyahWordByWordData(
-                              "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                            ) ??
-                            [],
-                      );
-                    }),
+          style: processingStyle.copyWith(
+            color: currentColor,
+            fontFamily: isLastWord ? "QPC_Hafs" : null,
+          ),
+          recognizer: skipWordTap == true
+              ? null
+              : (TapGestureRecognizer()
+                  ..onTap = () async {
+                    List<String> wordsKey = List.generate(
+                      words.length,
+                      (index) => "$surahNumber:$ayahNumber:${index + 1}",
+                    );
+                    showPopupWordFunction(
+                      context: context,
+                      wordKeys: wordsKey,
+                      initWordIndex: wordIndex,
+                      wordByWordList:
+                          await WordByWordFunction.getAyahWordByWordData(
+                            "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                          ) ??
+                          [],
+                    );
+                  }),
         ),
       );
     } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
