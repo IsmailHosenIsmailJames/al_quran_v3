@@ -109,8 +109,6 @@ flutter:
   assets:
     - assets/img/
     - assets/img/sunrise_forbidden_time.png
-    - assets/
-    - assets/dev/
     - assets/quran_script/
     - assets/meta_data/
     - assets/adhan/

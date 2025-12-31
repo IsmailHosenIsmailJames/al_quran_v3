@@ -6,7 +6,7 @@ import "package:flutter/services.dart";
 import "package:hive_ce/hive.dart";
 
 class QuranScriptFunction {
-  static String quranScriptVersion = "1";
+  static String quranScriptVersion = "2-dev-1";
   static Box? quranBox;
 
   static Future<void> writeQuranScript({
@@ -70,24 +70,19 @@ class QuranScriptFunction {
     String ayahKey = "$surah:$ayah";
     final fromCache = cacheOfAyah[ayahKey + type.name];
     if (fromCache != null) return fromCache;
-    switch (type) {
-      case QuranScriptType.tajweed:
-        List<String> compressed = List<String>.from(quranBox!.get(ayahKey));
-        for (int i = 0; i < compressed.length; i++) {
-          for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
-            compressed[i] = compressed[i].replaceAll(
-              "r$j",
-              tajweedRulesList[j],
-            );
-          }
+    if (type == QuranScriptType.indopak || type == QuranScriptType.tajweed) {
+      List<String> compressed = List<String>.from(quranBox!.get(ayahKey));
+      for (int i = 0; i < compressed.length; i++) {
+        for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
+          compressed[i] = compressed[i].replaceAll("r$j", tajweedRulesList[j]);
         }
-        cacheOfAyah[ayahKey + type.name] = compressed;
-        return compressed;
-
-      default:
-        final toReturn = List<String>.from(quranBox!.get(ayahKey));
-        cacheOfAyah[ayahKey + type.name] = toReturn;
-        return toReturn;
+      }
+      cacheOfAyah[ayahKey + type.name] = compressed;
+      return compressed;
+    } else {
+      final toReturn = List<String>.from(quranBox!.get(ayahKey));
+      cacheOfAyah[ayahKey + type.name] = toReturn;
+      return toReturn;
     }
   }
 }

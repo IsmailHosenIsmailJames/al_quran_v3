@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -150,40 +151,22 @@ class NonTajweedScriptView extends StatelessWidget {
               textAlign: scriptInfo.textAlign,
               TextSpan(
                 children: List<InlineSpan>.generate(words.length, (index) {
-                  String word = words[index];
-                  bool isLastWord =
-                      index == (words.length - 1) && word.length < 3;
                   bool willHighLight =
                       highlightingWordIndex == "$ayahKey:${index + 1}";
 
-                  return TextSpan(
-                    style: isLastWord
-                        ? const TextStyle(fontFamily: "QPC_Hafs")
-                        : (enableWordByWordHighlight && willHighLight)
-                        ? TextStyle(backgroundColor: themeState.primaryShade200)
-                        : null,
-
-                    text: "$word ",
-                    recognizer: scriptInfo.skipWordTap == true
-                        ? null
-                        : (TapGestureRecognizer()
-                            ..onTap = () async {
-                              List<String> wordsKey = List.generate(
-                                words.length,
-                                (i) =>
-                                    "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
-                              );
-                              showPopupWordFunction(
-                                context: context,
-                                wordKeys: wordsKey,
-                                initWordIndex: index,
-                                wordByWordList:
-                                    await WordByWordFunction.getAyahWordByWordData(
-                                      "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                                    ) ??
-                                    [],
-                              );
-                            }),
+                  return parseTajweedWord(
+                    wordIndex: index,
+                    words: List<String>.from(words),
+                    baseStyle: quranStyle.copyWith(
+                      backgroundColor:
+                          enableWordByWordHighlight && willHighLight
+                          ? themeState.primaryShade200
+                          : null,
+                    ),
+                    context: context,
+                    surahNumber: scriptInfo.surahNumber,
+                    ayahNumber: scriptInfo.ayahNumber,
+                    skipWordTap: scriptInfo.skipWordTap ?? false,
                   );
                 }),
               ),
