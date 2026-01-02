@@ -6,11 +6,8 @@ import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dar
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
-import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
-import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -51,8 +48,14 @@ class NonTajweedScriptView extends StatelessWidget {
         style: quranStyle,
         textDirection: TextDirection.rtl,
         textAlign: scriptInfo.textAlign,
-        TextSpan(
-          children: [TextSpan(text: words[scriptInfo.wordIndex!] + " ")],
+        parseTajweedWord(
+          wordIndex: scriptInfo.wordIndex,
+          words: List<String>.from(words),
+          baseStyle: quranStyle,
+          context: context,
+          surahNumber: scriptInfo.surahNumber,
+          ayahNumber: scriptInfo.ayahNumber,
+          skipWordTap: scriptInfo.skipWordTap ?? false,
         ),
       );
     }
@@ -67,37 +70,14 @@ class NonTajweedScriptView extends StatelessWidget {
         textAlign: scriptInfo.textAlign,
         TextSpan(
           children: List<InlineSpan>.generate(words.length, (index) {
-            return TextSpan(
-              style:
-                  highlightingWordIndex ==
-                      "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${(index + 1)}"
-                  ? TextStyle(
-                      backgroundColor: scriptInfo.showWordHighlights == false
-                          ? null
-                          : themeState.primaryShade200,
-                    )
-                  : null,
-              text: words[index] + " ",
-              recognizer: scriptInfo.skipWordTap == true
-                  ? null
-                  : (TapGestureRecognizer()
-                      ..onTap = () async {
-                        List<String> wordsKey = List.generate(
-                          words.length,
-                          (i) =>
-                              "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}:${i + 1}",
-                        );
-                        showPopupWordFunction(
-                          context: context,
-                          wordKeys: wordsKey,
-                          initWordIndex: index,
-                          wordByWordList:
-                              await WordByWordFunction.getAyahWordByWordData(
-                                "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                              ) ??
-                              [],
-                        );
-                      }),
+            return parseTajweedWord(
+              wordIndex: index,
+              words: List<String>.from(words),
+              baseStyle: quranStyle,
+              context: context,
+              surahNumber: scriptInfo.surahNumber,
+              ayahNumber: scriptInfo.ayahNumber,
+              skipWordTap: scriptInfo.skipWordTap ?? false,
             );
           }),
         ),
