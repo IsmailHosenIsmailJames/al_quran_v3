@@ -49,10 +49,6 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           children: [
             if (platformOwn == platform_services.PlatformOwn.isAndroid ||
                 platformOwn == platform_services.PlatformOwn.isIos)
-              Text(l10n.reminderSettings, style: titleStyle),
-            const Gap(5),
-            if (platformOwn == platform_services.PlatformOwn.isAndroid ||
-                platformOwn == platform_services.PlatformOwn.isIos)
               getDropPrayerSettings(themeState),
             const Gap(20),
             Text(l10n.adjustReminderTime, style: titleStyle),
@@ -546,7 +542,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             if (value != null) {
                               var cubit = context.read<PrayerReminderCubit>();
                               var data = ReminderTypeWithPrayModel(
-                                prayerTimesType: currentPrayerType,
+                                prayerType: currentPrayerType,
                                 reminderType: value,
                               );
                               cubit.setReminderMode(data);
