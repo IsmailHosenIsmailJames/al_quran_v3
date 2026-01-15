@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart"
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
 import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_times_calender_view.dart";
 import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
 import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
@@ -569,6 +570,19 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               );
                             },
                             icon: const Icon(FluentIcons.settings_24_regular),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PrayerTimesCalenderView(
+                                    prayerTimes: prayerTimes,
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(FluentIcons.calendar_24_regular),
                           ),
                         ],
                       ),

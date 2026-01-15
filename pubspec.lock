@@ -812,6 +812,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  material_table_view:
+    dependency: "direct main"
+    description:
+      name: material_table_view
+      sha256: d6c3c9aa03ab419c3abf4ee5042d721763f86ade66eaf186465ea25e9b250101
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.5.2"
   media_kit:
     dependency: transitive
     description:
@@ -1233,6 +1241,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  sliver_passthrough:
+    dependency: transitive
+    description:
+      name: sliver_passthrough
+      sha256: "8a69cacacf3558f7cf586e6078e5bf745d7830aa6162891b4876f7d910205437"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   source_span:
     dependency: transitive
     description:
