@@ -31,13 +31,13 @@ class _AudioSettingsState extends State<AudioSettings> {
     final l10n = AppLocalizations.of(context);
     return widget.needAppBar
         ? Scaffold(
-          appBar: AppBar(title: Text(l10n.audioSettings)),
+            appBar: AppBar(title: Text(l10n.audioSettings)),
 
-          body: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: mainUI(l10n),
-          ),
-        )
+            body: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: mainUI(l10n),
+            ),
+          )
         : mainUI(l10n);
   }
 
@@ -79,113 +79,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                 );
               },
             ),
-            BlocBuilder<QuranViewCubit, QuranViewState>(
-              builder: (context, quranViewState) {
-                double currentSpeed = quranViewState.playbackSpeed;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.playbackSpeed,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const Gap(5),
-                    Text(
-                      l10n.playbackSpeedDesc,
-                      style: TextStyle(
-                        color: Theme.of(context).hintColor,
-                        fontSize: 13,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove_circle_outline),
-                          tooltip: l10n.playbackSpeedDesc,
-                          onPressed:
-                              currentSpeed > 0.5
-                                  ? () async {
-                                    double value = (currentSpeed - 0.05).clamp(
-                                      0.5,
-                                      2.0,
-                                    );
-                                    context
-                                        .read<QuranViewCubit>()
-                                        .setViewOptions(playbackSpeed: value);
-                                    await AudioPlayerManager.audioPlayer
-                                        .setSpeed(value);
-                                    Fluttertoast.showToast(
-                                      msg:
-                                          "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
-                                    );
-                                  }
-                                  : null,
-                        ),
-                        Text(
-                          "${currentSpeed.toStringAsFixed(2)}x",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-
-                        IconButton(
-                          icon: const Icon(Icons.add_circle_outline),
-                          onPressed:
-                              currentSpeed < 2.0
-                                  ? () async {
-                                    double value = (currentSpeed + 0.05).clamp(
-                                      0.5,
-                                      2.0,
-                                    );
-                                    context
-                                        .read<QuranViewCubit>()
-                                        .setViewOptions(playbackSpeed: value);
-                                    await AudioPlayerManager.audioPlayer
-                                        .setSpeed(value);
-                                    Fluttertoast.showToast(
-                                      msg:
-                                          "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
-                                    );
-                                  }
-                                  : null,
-                        ),
-                        const Gap(10),
-                        Expanded(
-                          child: Slider(
-                            value: currentSpeed,
-                            min: 0.5,
-                            max: 2.0,
-                            divisions: 30,
-                            padding: EdgeInsets.zero,
-                            label: "${currentSpeed.toStringAsFixed(1)}x",
-                            onChangeEnd: (value) async {
-                              await AudioPlayerManager.audioPlayer.setSpeed(
-                                value.toPrecision(2),
-                              );
-                              Fluttertoast.showToast(
-                                msg:
-                                    "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
-                              );
-                            },
-                            onChanged: (value) {
-                              context.read<QuranViewCubit>().setViewOptions(
-                                playbackSpeed: double.parse(
-                                  value.toStringAsFixed(1),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            ),
+            const PlayBackSpeedWidget(),
             const Gap(10),
             Text(
               l10n.audioCached,
@@ -215,8 +109,10 @@ class _AudioSettingsState extends State<AudioSettings> {
                       ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(
-                        backgroundColor:
-                            context.read<ThemeCubit>().state.primaryShade100,
+                        backgroundColor: context
+                            .read<ThemeCubit>()
+                            .state
+                            .primaryShade100,
                       ),
                     );
                   }
@@ -248,8 +144,10 @@ class _AudioSettingsState extends State<AudioSettings> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator(
-                      backgroundColor:
-                          context.read<ThemeCubit>().state.primaryShade100,
+                      backgroundColor: context
+                          .read<ThemeCubit>()
+                          .state
+                          .primaryShade100,
                     );
                   } else if (snapshot.hasError) {
                     return Text(l10n.error(snapshot.error.toString()));
@@ -329,6 +227,107 @@ class _AudioSettingsState extends State<AudioSettings> {
   }
 }
 
+class PlayBackSpeedWidget extends StatelessWidget {
+  const PlayBackSpeedWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return BlocBuilder<QuranViewCubit, QuranViewState>(
+      builder: (context, quranViewState) {
+        double currentSpeed = quranViewState.playbackSpeed;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.playbackSpeed,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Gap(5),
+            Text(
+              l10n.playbackSpeedDesc,
+              style: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontSize: 13,
+              ),
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.remove_circle_outline),
+                  tooltip: l10n.playbackSpeedDesc,
+                  onPressed: currentSpeed > 0.5
+                      ? () async {
+                          double value = (currentSpeed - 0.05).clamp(0.5, 2.0);
+                          context.read<QuranViewCubit>().setViewOptions(
+                            playbackSpeed: value,
+                          );
+                          await AudioPlayerManager.audioPlayer.setSpeed(value);
+                          Fluttertoast.showToast(
+                            msg:
+                                "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                          );
+                        }
+                      : null,
+                ),
+                Text(
+                  "${currentSpeed.toStringAsFixed(2)}x",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+
+                IconButton(
+                  icon: const Icon(Icons.add_circle_outline),
+                  onPressed: currentSpeed < 2.0
+                      ? () async {
+                          double value = (currentSpeed + 0.05).clamp(0.5, 2.0);
+                          context.read<QuranViewCubit>().setViewOptions(
+                            playbackSpeed: value,
+                          );
+                          await AudioPlayerManager.audioPlayer.setSpeed(value);
+                          Fluttertoast.showToast(
+                            msg:
+                                "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                          );
+                        }
+                      : null,
+                ),
+                const Gap(10),
+                Expanded(
+                  child: Slider(
+                    value: currentSpeed,
+                    min: 0.5,
+                    max: 2.0,
+                    divisions: 30,
+                    padding: EdgeInsets.zero,
+                    label: "${currentSpeed.toStringAsFixed(1)}x",
+                    onChangeEnd: (value) async {
+                      await AudioPlayerManager.audioPlayer.setSpeed(
+                        value.toPrecision(2),
+                      );
+                      Fluttertoast.showToast(
+                        msg:
+                            "${l10n.playbackSpeed} : ${localizedNumber(context, value.toPrecision(2))}x",
+                      );
+                    },
+                    onChanged: (value) {
+                      context.read<QuranViewCubit>().setViewOptions(
+                        playbackSpeed: double.parse(value.toStringAsFixed(1)),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 Future<Map<String, List<Map<String, dynamic>>>>
 getCategorizedCacheFilesWithSize(
   BuildContext context,
@@ -338,18 +337,18 @@ getCategorizedCacheFilesWithSize(
   final cacheDir = Directory(
     join((await getTemporaryDirectory()).path, "just_audio_cache", "remote"),
   );
-  final files =
-      cacheDir
-          .listSync()
-          .whereType<File>(); // List all files in the cache directory
+  final files = cacheDir
+      .listSync()
+      .whereType<File>(); // List all files in the cache directory
 
   final now = DateTime.now();
 
   for (var file in files) {
     final lastModified = file.lastModifiedSync().second;
 
-    final differenceInDays =
-        Duration(seconds: now.second - lastModified).inDays;
+    final differenceInDays = Duration(
+      seconds: now.second - lastModified,
+    ).inDays;
     final fileSize = file.lengthSync(); // Get the file size
 
     final fileInfo = {"path": file.path, "size": fileSize};
