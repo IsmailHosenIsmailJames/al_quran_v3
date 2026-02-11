@@ -26,8 +26,13 @@ import "../../settings/cubit/quran_script_view_state.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
+  final bool showAudioSpeedController;
 
-  const QuranScriptSettings({super.key, this.asPage = false});
+  const QuranScriptSettings({
+    super.key,
+    this.asPage = false,
+    this.showAudioSpeedController = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -313,7 +318,7 @@ class QuranScriptSettings extends StatelessWidget {
               },
             ),
             const Gap(20),
-            const PlayBackSpeedWidget(),
+            if (showAudioSpeedController) const PlayBackSpeedWidget(),
             const Gap(10),
             BlocBuilder<QuranViewCubit, QuranViewState>(
               builder: (context, quranViewState) {
