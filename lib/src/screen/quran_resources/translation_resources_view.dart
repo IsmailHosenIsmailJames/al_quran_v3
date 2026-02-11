@@ -197,13 +197,13 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
             )
           else ...[
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 if (isSelected) {
-                  QuranTranslationFunction.removeTranslationSelection(
+                  await QuranTranslationFunction.removeTranslationSelection(
                     translationBook,
                   );
                 } else {
-                  QuranTranslationFunction.setTranslationSelection(
+                  await QuranTranslationFunction.setTranslationSelection(
                     translationBook,
                   );
                 }

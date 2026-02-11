@@ -127,6 +127,7 @@ class QuranTranslationFunction {
         name: "removeToListAlreadyDownloaded",
       );
     }
+    await removeTranslationSelection(bookToRemove);
     await Hive.box("user").put(
       downloadedTranslationBooks,
       downloaded.map((e) => e.toMap()).toList(),
@@ -138,11 +139,17 @@ class QuranTranslationFunction {
     final userBox = Hive.box("user");
     List<TranslationBookModel> selectedTranslationList =
         (await getTranslationSelections()) ?? [];
-    selectedTranslationList.add(book);
-    await userBox.put(
-      selectedTranslationListKey,
-      selectedTranslationList.map((e) => e.toMap()).toList(),
+
+    bool exists = selectedTranslationList.any(
+      (e) => e.fullPath == book.fullPath,
     );
+    if (!exists) {
+      selectedTranslationList.add(book);
+      await userBox.put(
+        selectedTranslationListKey,
+        selectedTranslationList.map((e) => e.toMap()).toList(),
+      );
+    }
     await init();
   }
 
