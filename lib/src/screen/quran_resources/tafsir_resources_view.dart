@@ -83,40 +83,38 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                     horizontal: 8.0,
                     vertical: 4.0,
                   ),
-                  children:
-                      booksInLanguage.map((bookData) {
-                        TafsirBookModel? matchedTafsir = downloadedTafsirs
-                            .firstOrNullWhere(
-                              (element) =>
-                                  element.fullPath == bookData.fullPath,
-                            );
-                        bool needDownload = matchedTafsir == null;
-                        bool isSelected = false;
-                        if (!needDownload && selectedTafsir != null) {
-                          if (selectedTafsir?.any(
-                                (element) =>
-                                    element.fullPath == matchedTafsir.fullPath,
-                              ) ==
-                              true) {
-                            isSelected = true;
-                          }
-                        }
-
-                        bool isDownloading = false;
-                        if (downloadingData != null) {
-                          if (downloadingData?.fullPath == bookData.fullPath) {
-                            isDownloading = true;
-                          }
-                        }
-                        return _buildBookListTile(
-                          appLocalizations,
-                          bookData,
-                          isSelected,
-                          needDownload,
-                          isDownloading,
-                          themeState,
+                  children: booksInLanguage.map((bookData) {
+                    TafsirBookModel? matchedTafsir = downloadedTafsirs
+                        .firstOrNullWhere(
+                          (element) => element.fullPath == bookData.fullPath,
                         );
-                      }).toList(),
+                    bool needDownload = matchedTafsir == null;
+                    bool isSelected = false;
+                    if (!needDownload && selectedTafsir != null) {
+                      if (selectedTafsir?.any(
+                            (element) =>
+                                element.fullPath == matchedTafsir.fullPath,
+                          ) ==
+                          true) {
+                        isSelected = true;
+                      }
+                    }
+
+                    bool isDownloading = false;
+                    if (downloadingData != null) {
+                      if (downloadingData?.fullPath == bookData.fullPath) {
+                        isDownloading = true;
+                      }
+                    }
+                    return _buildBookListTile(
+                      appLocalizations,
+                      bookData,
+                      isSelected,
+                      needDownload,
+                      isDownloading,
+                      themeState,
+                    );
+                  }).toList(),
                 ),
               );
             }),
@@ -141,33 +139,124 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
       ),
       leading: buildScoreIndicator(percentage: tafsirBook.score, size: 32),
       title: Text(tafsirBook.name),
-      trailing: SizedBox(
-        height: 30,
-        width: 30,
-        child:
-            isDownloading
-                ? CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
-                  backgroundColor:
-                      context.read<ThemeCubit>().state.primaryShade100,
-                )
-                : needDownload
-                ? Icon(
-                  FluentIcons.arrow_download_24_regular,
-                  color: themeState.primary,
-                )
-                : isSelected
-                ? Icon(
-                  Icons.check_circle_rounded,
-                  color: themeState.primary,
-                  size: 26,
-                )
-                : Icon(
-                  Icons.circle_outlined,
-                  color: Colors.grey[600],
-                  size: 26,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isDownloading)
+            SizedBox(
+              height: 30,
+              width: 30,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
+                backgroundColor: context
+                    .read<ThemeCubit>()
+                    .state
+                    .primaryShade100,
+              ),
+            )
+          else if (needDownload)
+            IconButton(
+              onPressed: () async {
+                setState(() {
+                  downloadingData = tafsirBook;
+                });
+                log(
+                  "Downloading Tafsir: ${tafsirBook.name}",
+                  name: "TafsirResourcesViewUI",
+                );
+                await QuranTafsirFunction.downloadResources(
+                  context: context,
+                  isSetupProcess: false,
+                  tafsirBook: tafsirBook,
+                );
+
+                if (await QuranTafsirFunction.isAlreadyDownloaded(tafsirBook)) {
+                  await QuranTafsirFunction.setTafsirSelection(tafsirBook);
+                }
+                _refreshData();
+              },
+              icon: Icon(
+                FluentIcons.arrow_download_24_regular,
+                color: themeState.primary,
+              ),
+            )
+          else ...[
+            IconButton(
+              onPressed: () async {
+                if (isSelected) {
+                  await QuranTafsirFunction.removeTafsirSelection(tafsirBook);
+                } else {
+                  await QuranTafsirFunction.setTafsirSelection(tafsirBook);
+                }
+                _refreshData();
+              },
+              icon: Icon(
+                isSelected ? Icons.check_circle_rounded : Icons.circle_outlined,
+                color: isSelected ? themeState.primary : Colors.grey[600],
+                size: 26,
+              ),
+            ),
+            PopupMenuButton<String>(
+              onSelected: (value) async {
+                if (value == 'delete') {
+                  await QuranTafsirFunction.removeFromListAlreadyDownloaded(
+                    tafsirBook,
+                  );
+                  _refreshData();
+                } else if (value == 'redownload') {
+                  await QuranTafsirFunction.removeFromListAlreadyDownloaded(
+                    tafsirBook,
+                  );
+                  _refreshData();
+                  setState(() {
+                    downloadingData = tafsirBook;
+                  });
+                  await QuranTafsirFunction.downloadResources(
+                    context: context,
+                    isSetupProcess: false,
+                    tafsirBook: tafsirBook,
+                  );
+
+                  if (await QuranTafsirFunction.isAlreadyDownloaded(
+                    tafsirBook,
+                  )) {
+                    await QuranTafsirFunction.setTafsirSelection(tafsirBook);
+                  }
+                  _refreshData();
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  value: 'delete',
+                  child: Row(
+                    children: [
+                      const Icon(
+                        FluentIcons.delete_24_regular,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(appLocalizations.delete),
+                    ],
+                  ),
                 ),
+                PopupMenuItem<String>(
+                  value: 'redownload',
+                  child: Row(
+                    children: [
+                      Icon(
+                        FluentIcons.arrow_download_24_regular,
+                        color: themeState.primary,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text("Redownload"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
       ),
       onTap: () async {
         if (isDownloading) return;
@@ -176,10 +265,8 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
           await QuranTafsirFunction.setTafsirSelection(tafsirBook);
           _refreshData();
         } else if (isSelected) {
-          log(
-            appLocalizations.alreadySelected(tafsirBook.name),
-            name: "TafsirResourcesViewUI",
-          );
+          await QuranTafsirFunction.removeTafsirSelection(tafsirBook);
+          _refreshData();
         } else {
           setState(() {
             downloadingData = tafsirBook;

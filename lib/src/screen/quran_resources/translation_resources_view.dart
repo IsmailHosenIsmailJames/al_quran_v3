@@ -50,86 +50,88 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
     return selectedResources == null
         ? const SizedBox()
         : SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: Column(
-                children: List.generate(translationResources.length, (index) {
-                  String languageKey = translationResources.keys.elementAt(
-                    index,
-                  );
-                  List<TranslationBookModel> booksInLanguage =
-                      translationResources[languageKey]
-                          ?.map(
-                            (e) => TranslationBookModel.fromMap(
-                              Map<String, dynamic>.from(e),
-                            ),
-                          )
-                          .toList() ??
-                      [];
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+              vertical: 15.0,
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Column(
+                  children: List.generate(translationResources.length, (index) {
+                    String languageKey = translationResources.keys.elementAt(
+                      index,
+                    );
+                    List<TranslationBookModel> booksInLanguage =
+                        translationResources[languageKey]
+                            ?.map(
+                              (e) => TranslationBookModel.fromMap(
+                                Map<String, dynamic>.from(e),
+                              ),
+                            )
+                            .toList() ??
+                        [];
 
-                  return Card(
-                    margin: const EdgeInsets.symmetric(vertical: 4.0),
-                    elevation: 0,
-                    child: ExpansionTile(
-                      key: PageStorageKey(languageKey),
-                      title: Text(
-                        languageNativeNames[languageKey] ?? languageKey,
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 4.0),
+                      elevation: 0,
+                      child: ExpansionTile(
+                        key: PageStorageKey(languageKey),
+                        title: Text(
+                          languageNativeNames[languageKey] ?? languageKey,
 
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      childrenPadding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 4.0,
-                      ),
-                      children:
-                          booksInLanguage.map((bookData) {
-                            TranslationBookModel? matchedResources =
-                                downloadedTranslation.firstOrNullWhere(
+                        childrenPadding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 4.0,
+                        ),
+                        children: booksInLanguage.map((bookData) {
+                          TranslationBookModel? matchedResources =
+                              downloadedTranslation.firstOrNullWhere(
+                                (element) =>
+                                    element.fullPath == bookData.fullPath,
+                              );
+                          bool needDownload = matchedResources == null;
+                          bool isSelected = false;
+                          if (!needDownload && selectedResources != null) {
+                            if (selectedResources?.any(
                                   (element) =>
-                                      element.fullPath == bookData.fullPath,
-                                );
-                            bool needDownload = matchedResources == null;
-                            bool isSelected = false;
-                            if (!needDownload && selectedResources != null) {
-                              if (selectedResources?.any(
-                                    (element) =>
-                                        element?.fullPath ==
-                                        matchedResources.fullPath,
-                                  ) ==
-                                  true) {
-                                isSelected = true;
-                              }
+                                      element?.fullPath ==
+                                      matchedResources.fullPath,
+                                ) ==
+                                true) {
+                              isSelected = true;
                             }
+                          }
 
-                            bool isDownloading = false;
-                            if (downloadingData != null) {
-                              if (downloadingData!.fullPath ==
-                                  bookData.fullPath) {
-                                isDownloading = true;
-                              }
+                          bool isDownloading = false;
+                          if (downloadingData != null) {
+                            if (downloadingData!.fullPath ==
+                                bookData.fullPath) {
+                              isDownloading = true;
                             }
+                          }
 
-                            return _buildBookListTile(
-                              appLocalizations,
-                              bookData,
-                              isSelected,
-                              needDownload,
-                              isDownloading,
-                              themeState,
-                            );
-                          }).toList(),
-                    ),
-                  );
-                }),
+                          return _buildBookListTile(
+                            appLocalizations,
+                            bookData,
+                            isSelected,
+                            needDownload,
+                            isDownloading,
+                            themeState,
+                          );
+                        }).toList(),
+                      ),
+                    );
+                  }),
+                ),
               ),
             ),
-          ),
-        );
+          );
   }
 
   Widget _buildBookListTile(
@@ -146,49 +148,151 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
         vertical: 2.0,
       ),
       title: Text(translationBook.name),
-      subtitle: const Row(children: [
-           ],
-      ),
-      trailing: SizedBox(
-        height: 30,
-        width: 30,
-        child:
-            isDownloading
-                ? CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
-                  backgroundColor:
-                      context.read<ThemeCubit>().state.primaryShade100,
-                )
-                : needDownload
-                ? Icon(
-                  FluentIcons.arrow_download_24_regular,
-                  color: themeState.primary,
-                )
-                : isSelected
-                ? Icon(
-                  Icons.check_circle_rounded,
-                  color: themeState.primary,
-                  size: 26,
-                )
-                : Icon(
-                  Icons.circle_outlined,
-                  color: Colors.grey[600],
-                  size: 26,
+      subtitle: const Row(children: []),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isDownloading)
+            SizedBox(
+              height: 30,
+              width: 30,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
+                backgroundColor: context
+                    .read<ThemeCubit>()
+                    .state
+                    .primaryShade100,
+              ),
+            )
+          else if (needDownload)
+            IconButton(
+              onPressed: () async {
+                setState(() {
+                  downloadingData = translationBook;
+                });
+                log(
+                  "Downloading: ${translationBook.name}",
+                  name: "downloadingData",
+                );
+                await QuranTranslationFunction.downloadResources(
+                  context: context,
+                  isSetupProcess: false,
+                  translationBook: translationBook,
+                );
+
+                if (await QuranTranslationFunction.isAlreadyDownloaded(
+                  translationBook,
+                )) {
+                  await QuranTranslationFunction.setTranslationSelection(
+                    translationBook,
+                  );
+                }
+                _refreshData();
+              },
+              icon: Icon(
+                FluentIcons.arrow_download_24_regular,
+                color: themeState.primary,
+              ),
+            )
+          else ...[
+            IconButton(
+              onPressed: () {
+                if (isSelected) {
+                  QuranTranslationFunction.removeTranslationSelection(
+                    translationBook,
+                  );
+                } else {
+                  QuranTranslationFunction.setTranslationSelection(
+                    translationBook,
+                  );
+                }
+                _refreshData();
+              },
+              icon: Icon(
+                isSelected ? Icons.check_circle_rounded : Icons.circle_outlined,
+                color: isSelected ? themeState.primary : Colors.grey[600],
+                size: 26,
+              ),
+            ),
+            PopupMenuButton<String>(
+              onSelected: (value) async {
+                if (value == 'delete') {
+                  await QuranTranslationFunction.removeFromListAlreadyDownloaded(
+                    translationBook,
+                  );
+                  _refreshData();
+                } else if (value == 'redownload') {
+                  await QuranTranslationFunction.removeFromListAlreadyDownloaded(
+                    translationBook,
+                  );
+                  _refreshData();
+                  setState(() {
+                    downloadingData = translationBook;
+                  });
+                  await QuranTranslationFunction.downloadResources(
+                    context: context,
+                    isSetupProcess: false,
+                    translationBook: translationBook,
+                  );
+
+                  if (await QuranTranslationFunction.isAlreadyDownloaded(
+                    translationBook,
+                  )) {
+                    await QuranTranslationFunction.setTranslationSelection(
+                      translationBook,
+                    );
+                  }
+                  _refreshData();
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  value: 'delete',
+                  child: Row(
+                    children: [
+                      const Icon(
+                        FluentIcons.delete_24_regular,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(appLocalizations.delete),
+                    ],
+                  ),
                 ),
+                PopupMenuItem<String>(
+                  value: 'redownload',
+                  child: Row(
+                    children: [
+                      Icon(
+                        FluentIcons.arrow_download_24_regular,
+                        color: themeState.primary,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text("Redownload"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
       ),
       onTap: () async {
         if (isDownloading) return;
 
         if (!isSelected && !needDownload) {
-          QuranTranslationFunction.setTranslationSelection(translationBook);
+          await QuranTranslationFunction.setTranslationSelection(
+            translationBook,
+          );
           _refreshData();
         } else if (isSelected) {
-          log(
-            appLocalizations.alreadySelected(translationBook.name),
-            name: "TranslationResourcesViewUI",
+          await QuranTranslationFunction.removeTranslationSelection(
+            translationBook,
           );
+          _refreshData();
         } else {
+          // Download logic is now also on the icon, but ok to keep here for tile tap
           setState(() {
             downloadingData = translationBook;
           });

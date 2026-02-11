@@ -146,22 +146,37 @@ class QuranTranslationFunction {
     await init();
   }
 
+  static Future<void> removeTranslationSelection(
+    TranslationBookModel book,
+  ) async {
+    cacheOfAyahKeys.clear();
+    final userBox = Hive.box("user");
+    List<TranslationBookModel> selectedTranslationList =
+        (await getTranslationSelections()) ?? [];
+    selectedTranslationList.removeWhere(
+      (element) => element.fullPath == book.fullPath,
+    );
+    await userBox.put(
+      selectedTranslationListKey,
+      selectedTranslationList.map((e) => e.toMap()).toList(),
+    );
+    await init();
+  }
+
   static Future<List<TranslationBookModel>?> getTranslationSelections() async {
     final userBox = Hive.box("user");
-    final Map<String, dynamic>? previousBookMap =
-        userBox.get("selected_translation")?.cast<String, dynamic>();
+    final Map<String, dynamic>? previousBookMap = userBox
+        .get("selected_translation")
+        ?.cast<String, dynamic>();
 
     if (previousBookMap != null) {
       await userBox.put(selectedTranslationListKey, [previousBookMap]);
     }
 
     List? booksList = userBox.get(selectedTranslationListKey);
-    List<TranslationBookModel>? bookListModel =
-        booksList
-            ?.map(
-              (e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)),
-            )
-            .toList();
+    List<TranslationBookModel>? bookListModel = booksList
+        ?.map((e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)))
+        .toList();
 
     return bookListModel;
   }
@@ -170,10 +185,11 @@ class QuranTranslationFunction {
     required TranslationBookModel translationBook,
   }) {
     // Using fileName for brevity if available and suitable, otherwise fallback to fullPath's last segment
-    String sanitizedBookIdentifier = (translationBook.fileName.isNotEmpty
-            ? translationBook.fileName
-            : translationBook.fullPath.split("/").last)
-        .replaceAll(RegExp(r"[^\w\.-]"), "_");
+    String sanitizedBookIdentifier =
+        (translationBook.fileName.isNotEmpty
+                ? translationBook.fileName
+                : translationBook.fullPath.split("/").last)
+            .replaceAll(RegExp(r"[^\w\.-]"), "_");
 
     return "translation_${translationBook.language}_$sanitizedBookIdentifier";
   }
