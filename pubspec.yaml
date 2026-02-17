@@ -69,7 +69,10 @@ dependencies:
   web: ^1.1.1
   flutter_native_splash: ^2.4.7
   adhan_dart:
-    path: adhan_dart
+    git:
+      url: https://github.com/IsmailHosenIsmailJames/adhan_dart.git
+      ref: master
+
   hijri: ^3.0.0
   shimmer: ^3.0.0
   # background_fetch:

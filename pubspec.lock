@@ -12,9 +12,11 @@ packages:
   adhan_dart:
     dependency: "direct main"
     description:
-      path: adhan_dart
-      relative: true
-    source: path
+      path: "."
+      ref: master
+      resolved-ref: "6cca00ef65cedba2a29f1070fc1f4f321225fcc8"
+      url: "https://github.com/IsmailHosenIsmailJames/adhan_dart.git"
+    source: git
     version: "1.2.0"
   analyzer:
     dependency: transitive
