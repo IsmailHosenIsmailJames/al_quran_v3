@@ -84,6 +84,18 @@ class HizbListView extends StatelessWidget {
                         builder: (context) => QuranScriptView(
                           startKey: hizbInfoList[index].firstVerseKey,
                           endKey: hizbInfoList[index].lastVerseKey,
+                          previousStartKey: index > 0
+                              ? hizbInfoList[index - 1].firstVerseKey
+                              : null,
+                          previousEndKey: index > 0
+                              ? hizbInfoList[index - 1].lastVerseKey
+                              : null,
+                          nextStartKey: index < hizbInfoList.length - 1
+                              ? hizbInfoList[index + 1].firstVerseKey
+                              : null,
+                          nextEndKey: index < hizbInfoList.length - 1
+                              ? hizbInfoList[index + 1].lastVerseKey
+                              : null,
                         ),
                       ),
                     );

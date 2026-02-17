@@ -74,6 +74,22 @@ class PageListView extends StatelessWidget {
                         pageInfoList[index].start,
                       )!,
                       endKey: convertAyahNumberToKey(pageInfoList[index].end)!,
+                      previousStartKey: index > 0
+                          ? convertAyahNumberToKey(
+                              pageInfoList[index - 1].start,
+                            )
+                          : null,
+                      previousEndKey: index > 0
+                          ? convertAyahNumberToKey(pageInfoList[index - 1].end)
+                          : null,
+                      nextStartKey: index < pageInfoList.length - 1
+                          ? convertAyahNumberToKey(
+                              pageInfoList[index + 1].start,
+                            )
+                          : null,
+                      nextEndKey: index < pageInfoList.length - 1
+                          ? convertAyahNumberToKey(pageInfoList[index + 1].end)
+                          : null,
                     ),
                   ),
                 );

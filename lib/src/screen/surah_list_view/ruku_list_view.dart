@@ -87,6 +87,18 @@ class RukuListView extends StatelessWidget {
                         builder: (context) => QuranScriptView(
                           startKey: rukuInfoList[index].firstVerseKey,
                           endKey: rukuInfoList[index].lastVerseKey,
+                          previousStartKey: index > 0
+                              ? rukuInfoList[index - 1].firstVerseKey
+                              : null,
+                          previousEndKey: index > 0
+                              ? rukuInfoList[index - 1].lastVerseKey
+                              : null,
+                          nextStartKey: index < rukuInfoList.length - 1
+                              ? rukuInfoList[index + 1].firstVerseKey
+                              : null,
+                          nextEndKey: index < rukuInfoList.length - 1
+                              ? rukuInfoList[index + 1].lastVerseKey
+                              : null,
                         ),
                       ),
                     );
