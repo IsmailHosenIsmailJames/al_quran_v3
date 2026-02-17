@@ -33,10 +33,13 @@ class QuranScriptFunction {
             await rootBundle.loadString("assets/quran_script/Indopak.json"),
           );
       }
-      final quranBox = await Hive.openBox("script_${scriptType.name}");
+      Box quranBox = await Hive.openBox("script_${scriptType.name}");
       for (String surahKey in quranScriptMap.keys) {
         Map surahMap = quranScriptMap[surahKey] as Map;
         for (final ayahKey in surahMap.keys) {
+          if (!quranBox.isOpen) {
+            quranBox = await Hive.openBox("script_${scriptType.name}");
+          }
           await quranBox.put("$surahKey:$ayahKey", surahMap[ayahKey]);
           processed++;
           if (onProgress != null) {

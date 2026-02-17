@@ -42,10 +42,9 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    List<TranslationBookModel> availableWbWBooks =
-        wordByWordTranslation.values
-            .map((e) => TranslationBookModel.fromMap(e))
-            .toList();
+    List<TranslationBookModel> availableWbWBooks = wordByWordTranslation.values
+        .map((e) => TranslationBookModel.fromMap(e))
+        .toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
@@ -69,10 +68,9 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   side: BorderSide(
-                    color:
-                        isSelected
-                            ? themeState.primary
-                            : themeState.primaryShade100,
+                    color: isSelected
+                        ? themeState.primary
+                        : themeState.primaryShade100,
                     width: isSelected ? 1.5 : 1.0,
                   ),
                 ),
@@ -90,8 +88,16 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
                           current,
                         );
                       } else {
-                        log(appLocalizations.alreadySelected(current.name));
+                        // For WBW, clicking an already selected item might not deselect because we need at least one?
+                        // Or we can allow deselecting. Let's check logic.
+                        // The function removeSelectedWordByWordBook exists.
+                        // Let's allow deselecting on tap if it's already selected.
+                        await WordByWordFunction.removeSelectedWordByWordBook();
+                        setState(() {
+                          selectedWbw = null;
+                        });
                       }
+                      await _loadInitialData();
                     } else {
                       setState(() {
                         downloadingWbW = current;
@@ -136,45 +142,153 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-
                               Text(current.language),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 30,
-                          width: 30,
-                          child:
-                              isDownloading
-                                  ? CircularProgressIndicator(
-                                    strokeWidth: 2.5,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      themeState.primary,
-                                    ),
-                                    backgroundColor:
-                                        context
-                                            .read<ThemeCubit>()
-                                            .state
-                                            .primaryShade100,
-                                  )
-                                  : isDownloaded
-                                  ? isSelected
-                                      ? Icon(
-                                        Icons.check_circle_rounded,
-                                        color: themeState.primary,
-                                        size: 28,
-                                      )
-                                      : Icon(
-                                        Icons.circle_outlined,
-                                        color: Colors.grey[600],
-                                        size: 28,
-                                      )
-                                  : Icon(
-                                    FluentIcons.arrow_download_24_regular,
-                                    color: themeState.primary,
-                                    size: 28,
-                                  ),
-                        ),
+                        if (isDownloading)
+                          SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                themeState.primary,
+                              ),
+                              backgroundColor: context
+                                  .read<ThemeCubit>()
+                                  .state
+                                  .primaryShade100,
+                            ),
+                          )
+                        else if (!isDownloaded)
+                          IconButton(
+                            onPressed: () async {
+                              setState(() {
+                                downloadingWbW = current;
+                              });
+                              log(
+                                "Starting download for: ${current.name}",
+                                name: "WbWResourcesUI",
+                              );
+                              bool success =
+                                  await WordByWordFunction.downloadResource(
+                                    context: context,
+                                    book: current,
+                                    isSetupProcess: false,
+                                  );
+                              if (success) {
+                                await WordByWordFunction.setSelectedWordByWordBook(
+                                  current,
+                                );
+                              }
+                              await _loadInitialData();
+                              setState(() {
+                                downloadingWbW = null;
+                              });
+                            },
+                            icon: Icon(
+                              FluentIcons.arrow_download_24_regular,
+                              color: themeState.primary,
+                              size: 28,
+                            ),
+                          )
+                        else
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () async {
+                                  if (isSelected) {
+                                    await WordByWordFunction.removeSelectedWordByWordBook();
+                                    setState(() {
+                                      selectedWbw = null;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      selectedWbw = current;
+                                    });
+                                    await WordByWordFunction.setSelectedWordByWordBook(
+                                      current,
+                                    );
+                                  }
+                                  await _loadInitialData();
+                                },
+                                icon: Icon(
+                                  isSelected
+                                      ? Icons.check_circle_rounded
+                                      : Icons.circle_outlined,
+                                  color: isSelected
+                                      ? themeState.primary
+                                      : Colors.grey[600],
+                                  size: 28,
+                                ),
+                              ),
+                              PopupMenuButton<String>(
+                                onSelected: (value) async {
+                                  if (value == 'delete') {
+                                    await WordByWordFunction.removeBookFromDownloaded(
+                                      current,
+                                    );
+                                    await _loadInitialData();
+                                  } else if (value == 'redownload') {
+                                    await WordByWordFunction.removeBookFromDownloaded(
+                                      current,
+                                    );
+                                    await _loadInitialData();
+                                    setState(() {
+                                      downloadingWbW = current;
+                                    });
+                                    bool success =
+                                        await WordByWordFunction.downloadResource(
+                                          context: context,
+                                          book: current,
+                                          isSetupProcess: false,
+                                        );
+                                    if (success) {
+                                      await WordByWordFunction.setSelectedWordByWordBook(
+                                        current,
+                                      );
+                                    }
+                                    await _loadInitialData();
+                                    setState(() {
+                                      downloadingWbW = null;
+                                    });
+                                  }
+                                },
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<String>>[
+                                      PopupMenuItem<String>(
+                                        value: 'delete',
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              FluentIcons.delete_24_regular,
+                                              color: Colors.red,
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Text(appLocalizations.delete),
+                                          ],
+                                        ),
+                                      ),
+                                      PopupMenuItem<String>(
+                                        value: 'redownload',
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              FluentIcons
+                                                  .arrow_download_24_regular,
+                                              color: themeState.primary,
+                                            ),
+                                            const SizedBox(width: 8),
+                                            const Text("Redownload"),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                              ),
+                            ],
+                          ),
                       ],
                     ),
                   ),
