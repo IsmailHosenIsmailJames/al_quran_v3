@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_s
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/widgets/next_and_previous_navigation.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
@@ -548,57 +549,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             padding: EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
               if (index == ayahsList.length) {
-                String? previousStartKey;
-                String? previousEndKey;
-                if (widget.previousStartKey != null &&
-                    widget.previousEndKey != null) {
-                  previousStartKey = widget.previousStartKey;
-                  previousEndKey = widget.previousEndKey;
-                } else {
-                  // TODO : by default we will move to next (if exits)/previous (if exits) surah. so calculate for it
-                }
-
-                String? nextStartKey;
-                String? nextEndKey;
-                if (widget.nextStartKey != null && widget.nextEndKey != null) {
-                  nextStartKey = widget.nextStartKey;
-                  nextEndKey = widget.nextEndKey;
-                } else {
-                  // TODO : by default we will move to next (if exits)/previous (if exits) surah. so calculate for it
-                }
-                return Row(
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => QuranScriptView(
-                              startKey: previousStartKey!,
-                              endKey: previousEndKey!,
-                            ),
-                          ),
-                        );
-                      },
-                      child: const Text("Previous"),
-                    ),
-                    if (nextStartKey != null && nextEndKey != null)
-                      OutlinedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QuranScriptView(
-                                startKey: nextStartKey!,
-                                endKey: nextEndKey!,
-                              ),
-                            ),
-                          );
-                        },
-                        child: const Text("Next"),
-                      ),
-                  ],
-                );
+                return NextAndPreviousNavigation(widget: widget);
               }
               final ayahKey = ayahsList[index];
               final ayahKeySplit = ayahKey.split(":");
@@ -666,9 +617,12 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           // Reading mode
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerReadingMode,
-            itemCount: pagesList.length,
+            itemCount: pagesList.length + 1,
             padding: EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
+              if (index == pagesList.length) {
+                return NextAndPreviousNavigation(widget: widget);
+              }
               int pageNumber = getPageNumber(pagesList[index].first) ?? 0;
               List<String> currentPage = pagesList[index];
               String firstAyah = currentPage.first;

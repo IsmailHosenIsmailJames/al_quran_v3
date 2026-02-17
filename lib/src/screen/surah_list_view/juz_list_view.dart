@@ -73,6 +73,18 @@ class JuzListView extends StatelessWidget {
                     builder: (context) => QuranScriptView(
                       startKey: juzInfoList[index].firstVerseKey,
                       endKey: juzInfoList[index].lastVerseKey,
+                      previousStartKey: index > 0
+                          ? juzInfoList[index - 1].firstVerseKey
+                          : null,
+                      previousEndKey: index > 0
+                          ? juzInfoList[index - 1].lastVerseKey
+                          : null,
+                      nextStartKey: index < juzInfoList.length - 1
+                          ? juzInfoList[index + 1].firstVerseKey
+                          : null,
+                      nextEndKey: index < juzInfoList.length - 1
+                          ? juzInfoList[index + 1].lastVerseKey
+                          : null,
                     ),
                   ),
                 );
