@@ -40,11 +40,19 @@ class QuranScriptView extends StatefulWidget {
   final String startKey;
   final String endKey;
   final String? toScrollKey;
+  final String? previousStartKey;
+  final String? previousEndKey;
+  final String? nextStartKey;
+  final String? nextEndKey;
   const QuranScriptView({
     super.key,
     required this.startKey,
     required this.endKey,
     this.toScrollKey,
+    this.previousStartKey,
+    this.previousEndKey,
+    this.nextStartKey,
+    this.nextEndKey,
   });
 
   @override
@@ -536,9 +544,62 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerAyahByAyah,
-            itemCount: ayahsList.length,
+            itemCount: ayahsList.length + 1,
             padding: EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
+              if (index == ayahsList.length) {
+                String? previousStartKey;
+                String? previousEndKey;
+                if (widget.previousStartKey != null &&
+                    widget.previousEndKey != null) {
+                  previousStartKey = widget.previousStartKey;
+                  previousEndKey = widget.previousEndKey;
+                } else {
+                  // TODO : by default we will move to next (if exits)/previous (if exits) surah. so calculate for it
+                }
+
+                String? nextStartKey;
+                String? nextEndKey;
+                if (widget.nextStartKey != null && widget.nextEndKey != null) {
+                  nextStartKey = widget.nextStartKey;
+                  nextEndKey = widget.nextEndKey;
+                } else {
+                  // TODO : by default we will move to next (if exits)/previous (if exits) surah. so calculate for it
+                }
+                return Row(
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuranScriptView(
+                              startKey: previousStartKey!,
+                              endKey: previousEndKey!,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text("Previous"),
+                    ),
+                    if (nextStartKey != null && nextEndKey != null)
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuranScriptView(
+                                startKey: nextStartKey!,
+                                endKey: nextEndKey!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text("Next"),
+                      ),
+                  ],
+                );
+              }
               final ayahKey = ayahsList[index];
               final ayahKeySplit = ayahKey.split(":");
               int surahNumber = ayahKeySplit.first.toInt();

@@ -24,10 +24,13 @@ class JuzListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -67,11 +70,10 @@ class JuzListView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey: juzInfoList[index].firstVerseKey,
-                          endKey: juzInfoList[index].lastVerseKey,
-                        ),
+                    builder: (context) => QuranScriptView(
+                      startKey: juzInfoList[index].firstVerseKey,
+                      endKey: juzInfoList[index].lastVerseKey,
+                    ),
                   ),
                 );
               },
@@ -118,10 +120,9 @@ class JuzListView extends StatelessWidget {
                             "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                           ),
                           style: TextStyle(
-                            color:
-                                brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
+                            color: brightness == Brightness.light
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400,
                           ),
                         ),
                       ],

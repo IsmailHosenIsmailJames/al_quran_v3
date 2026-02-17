@@ -25,10 +25,13 @@ class PageListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -66,15 +69,12 @@ class PageListView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey:
-                              convertAyahNumberToKey(
-                                pageInfoList[index].start,
-                              )!,
-                          endKey:
-                              convertAyahNumberToKey(pageInfoList[index].end)!,
-                        ),
+                    builder: (context) => QuranScriptView(
+                      startKey: convertAyahNumberToKey(
+                        pageInfoList[index].start,
+                      )!,
+                      endKey: convertAyahNumberToKey(pageInfoList[index].end)!,
+                    ),
                   ),
                 );
               },
@@ -121,10 +121,9 @@ class PageListView extends StatelessWidget {
                             "${localizedNumber(context, surahNumber)}:${localizedNumber(context, surahNumber)}",
                           ),
                           style: TextStyle(
-                            color:
-                                brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
+                            color: brightness == Brightness.light
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400,
                           ),
                         ),
                       ],
