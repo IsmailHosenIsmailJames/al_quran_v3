@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart";
@@ -73,18 +74,23 @@ class JuzListView extends StatelessWidget {
                     builder: (context) => QuranScriptView(
                       startKey: juzInfoList[index].firstVerseKey,
                       endKey: juzInfoList[index].lastVerseKey,
-                      previousStartKey: index > 0
-                          ? juzInfoList[index - 1].firstVerseKey
-                          : null,
-                      previousEndKey: index > 0
-                          ? juzInfoList[index - 1].lastVerseKey
-                          : null,
-                      nextStartKey: index < juzInfoList.length - 1
-                          ? juzInfoList[index + 1].firstVerseKey
-                          : null,
-                      nextEndKey: index < juzInfoList.length - 1
-                          ? juzInfoList[index + 1].lastVerseKey
-                          : null,
+                      currentIndex: index,
+                      getNavigationInfo: (i) {
+                        return NavigationInfoModel(
+                          previousStartKey: i > 0
+                              ? juzInfoList[i - 1].firstVerseKey
+                              : null,
+                          previousEndKey: i > 0
+                              ? juzInfoList[i - 1].lastVerseKey
+                              : null,
+                          nextStartKey: i < juzInfoList.length - 1
+                              ? juzInfoList[i + 1].firstVerseKey
+                              : null,
+                          nextEndKey: i < juzInfoList.length - 1
+                              ? juzInfoList[i + 1].lastVerseKey
+                              : null,
+                        );
+                      },
                     ),
                   ),
                 );

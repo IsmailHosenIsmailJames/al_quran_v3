@@ -1,4 +1,5 @@
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -17,26 +18,25 @@ class NextAndPreviousNavigation extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
     String? previousStartKey;
     String? previousEndKey;
-    if (widget.previousStartKey != null && widget.previousEndKey != null) {
-      previousStartKey = widget.previousStartKey;
-      previousEndKey = widget.previousEndKey;
+    String? nextStartKey;
+    String? nextEndKey;
+
+    if (widget.getNavigationInfo != null && widget.currentIndex != null) {
+      NavigationInfoModel info = widget.getNavigationInfo!(
+        widget.currentIndex!,
+      );
+      previousStartKey = info.previousStartKey;
+      previousEndKey = info.previousEndKey;
+      nextStartKey = info.nextStartKey;
+      nextEndKey = info.nextEndKey;
     } else {
+      // Default fallback logic (Surah)
       int currentSurahNumber =
           int.tryParse(widget.startKey.split(":").first) ?? 1;
       if (currentSurahNumber > 1) {
         previousStartKey = "${currentSurahNumber - 1}:1";
         previousEndKey = getEndAyahKeyFromSurahNumber(currentSurahNumber - 1);
       }
-    }
-
-    String? nextStartKey;
-    String? nextEndKey;
-    if (widget.nextStartKey != null && widget.nextEndKey != null) {
-      nextStartKey = widget.nextStartKey;
-      nextEndKey = widget.nextEndKey;
-    } else {
-      int currentSurahNumber =
-          int.tryParse(widget.startKey.split(":").first) ?? 1;
       if (currentSurahNumber < 114) {
         nextStartKey = "${currentSurahNumber + 1}:1";
         nextEndKey = getEndAyahKeyFromSurahNumber(currentSurahNumber + 1);
@@ -58,9 +58,24 @@ class NextAndPreviousNavigation extends StatelessWidget {
             child: _NavigationButton(
               isPrevious: true,
               themeState: themeState,
-              startKey: previousStartKey,
-              endKey: previousEndKey,
+              isDisabled: previousStartKey == null || previousEndKey == null,
               label: getLabel(context, previousStartKey, "Previous"),
+              onTap: () {
+                int? newIndex = widget.currentIndex != null
+                    ? widget.currentIndex! - 1
+                    : null;
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuranScriptView(
+                      startKey: previousStartKey!,
+                      endKey: previousEndKey!,
+                      currentIndex: newIndex,
+                      getNavigationInfo: widget.getNavigationInfo,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           const Gap(10),
@@ -68,9 +83,24 @@ class NextAndPreviousNavigation extends StatelessWidget {
             child: _NavigationButton(
               isPrevious: false,
               themeState: themeState,
-              startKey: nextStartKey,
-              endKey: nextEndKey,
+              isDisabled: nextStartKey == null || nextEndKey == null,
               label: getLabel(context, nextStartKey, "Next"),
+              onTap: () {
+                int? newIndex = widget.currentIndex != null
+                    ? widget.currentIndex! + 1
+                    : null;
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QuranScriptView(
+                      startKey: nextStartKey!,
+                      endKey: nextEndKey!,
+                      currentIndex: newIndex,
+                      getNavigationInfo: widget.getNavigationInfo,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -92,37 +122,25 @@ class NextAndPreviousNavigation extends StatelessWidget {
 class _NavigationButton extends StatelessWidget {
   final bool isPrevious;
   final ThemeState themeState;
-  final String? startKey;
-  final String? endKey;
+  final bool isDisabled;
   final String label;
+  final VoidCallback onTap;
 
   const _NavigationButton({
     required this.isPrevious,
     required this.themeState,
-    required this.startKey,
-    required this.endKey,
+    required this.isDisabled,
     required this.label,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    bool isDisabled = startKey == null || endKey == null;
-
     return Opacity(
       opacity: isDisabled ? 0.4 : 1.0,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: isDisabled
-            ? null
-            : () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        QuranScriptView(startKey: startKey!, endKey: endKey!),
-                  ),
-                );
-              },
+        onTap: isDisabled ? null : onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
           decoration: BoxDecoration(

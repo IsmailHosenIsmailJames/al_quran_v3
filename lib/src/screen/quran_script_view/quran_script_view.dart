@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.d
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/model/surah_header_info.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/widgets/next_and_previous_navigation.dart";
@@ -41,19 +42,15 @@ class QuranScriptView extends StatefulWidget {
   final String startKey;
   final String endKey;
   final String? toScrollKey;
-  final String? previousStartKey;
-  final String? previousEndKey;
-  final String? nextStartKey;
-  final String? nextEndKey;
+  final int? currentIndex;
+  final NavigationInfoModel Function(int index)? getNavigationInfo;
   const QuranScriptView({
     super.key,
     required this.startKey,
     required this.endKey,
     this.toScrollKey,
-    this.previousStartKey,
-    this.previousEndKey,
-    this.nextStartKey,
-    this.nextEndKey,
+    this.currentIndex,
+    this.getNavigationInfo,
   });
 
   @override
