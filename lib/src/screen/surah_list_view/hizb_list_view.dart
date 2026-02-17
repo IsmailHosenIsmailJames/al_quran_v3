@@ -34,158 +34,148 @@ class HizbListView extends StatelessWidget {
         .state
         .quranScriptType;
 
-    return Scrollbar(
-      radius: Radius.circular(roundedRadius),
-      thickness: 13,
-      interactive: true,
+    return FutureBuilder(
+      future: rootBundle.loadString("assets/meta_data/Hizb.json"),
+      builder: (context, asyncSnapshot) {
+        if (asyncSnapshot.connectionState != ConnectionState.done) {
+          return const SizedBox();
+        }
+        Map hizbData = jsonDecode(asyncSnapshot.data!);
+        List<HizbModel> hizbInfoList = hizbData.values
+            .map((e) => HizbModel.fromMap(Map<String, dynamic>.from(e)))
+            .toList();
 
-      child: FutureBuilder(
-        future: rootBundle.loadString("assets/meta_data/Hizb.json"),
-        builder: (context, asyncSnapshot) {
-          if (asyncSnapshot.connectionState != ConnectionState.done) {
-            return const SizedBox();
-          }
-          Map hizbData = jsonDecode(asyncSnapshot.data!);
-          List<HizbModel> hizbInfoList = hizbData.values
-              .map((e) => HizbModel.fromMap(Map<String, dynamic>.from(e)))
-              .toList();
+        return ListView.builder(
+          padding: const EdgeInsets.only(bottom: 120),
+          itemCount: hizbInfoList.length,
+          itemBuilder: (context, index) {
+            HizbModel current = hizbInfoList[index];
+            String firstKey = current.firstVerseKey;
 
-          return ListView.builder(
-            padding: const EdgeInsets.only(bottom: 120),
-            itemCount: hizbInfoList.length,
-            itemBuilder: (context, index) {
-              HizbModel current = hizbInfoList[index];
-              String firstKey = current.firstVerseKey;
-
-              int surahNumber = firstKey.split(":").first.toInt();
-              int ayahNumber = firstKey.split(":").last.toInt();
-              return Padding(
-                padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                    ),
-                    side: BorderSide(
-                      color: context.read<ThemeCubit>().state.primaryShade200,
-                    ),
+            int surahNumber = firstKey.split(":").first.toInt();
+            int ayahNumber = firstKey.split(":").last.toInt();
+            return Padding(
+              padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(roundedRadius),
                   ),
-
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuranScriptView(
-                          startKey: hizbInfoList[index].firstVerseKey,
-                          endKey: hizbInfoList[index].lastVerseKey,
-                          currentIndex: index,
-                          getNavigationInfo: (i) {
-                            return NavigationInfoModel(
-                              previousStartKey: i > 0
-                                  ? hizbInfoList[i - 1].firstVerseKey
-                                  : null,
-                              previousEndKey: i > 0
-                                  ? hizbInfoList[i - 1].lastVerseKey
-                                  : null,
-                              nextStartKey: i < hizbInfoList.length - 1
-                                  ? hizbInfoList[i + 1].firstVerseKey
-                                  : null,
-                              nextEndKey: i < hizbInfoList.length - 1
-                                  ? hizbInfoList[i + 1].lastVerseKey
-                                  : null,
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                      right: 10,
-                      top: 3,
-                      bottom: 3,
-                    ),
-                    height: 60,
-                    child: Row(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  appLocalizations.hizb,
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
-                                    color: textColor,
-                                  ),
-                                ),
-                                const Gap(10),
-                                getIndexNumberWidget(
-                                  context,
-                                  index + 1,
-                                  height: 25,
-                                  width: 25,
-                                  textColor: textColor,
-                                ),
-                              ],
-                            ),
-                            const Gap(2),
-                            Text(
-                              appLocalizations.surahAyah(
-                                "${getSurahName(context, surahNumber)} -",
-                                "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
-                              ),
-                              style: TextStyle(
-                                color: brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const Gap(10),
-                        Expanded(
-                          child: FittedBox(
-                            alignment: Alignment.centerRight,
-                            fit: BoxFit.scaleDown,
-                            child: ScriptProcessor(
-                              scriptInfo: ScriptInfo(
-                                textStyle: const TextStyle(fontSize: 20),
-                                surahNumber: int.parse(
-                                  hizbInfoList[index].firstVerseKey.split(
-                                    ":",
-                                  )[0],
-                                ),
-                                ayahNumber: int.parse(
-                                  hizbInfoList[index].firstVerseKey.split(
-                                    ":",
-                                  )[1],
-                                ),
-                                quranScriptType: quranScriptType,
-                                limitWord: 4,
-                                skipWordTap: true,
-                              ),
-                              themeState: context.read<ThemeCubit>().state,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  side: BorderSide(
+                    color: context.read<ThemeCubit>().state.primaryShade200,
                   ),
                 ),
-              );
-            },
-          );
-        },
-      ),
+
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuranScriptView(
+                        startKey: hizbInfoList[index].firstVerseKey,
+                        endKey: hizbInfoList[index].lastVerseKey,
+                        currentIndex: index,
+                        getNavigationInfo: (i) {
+                          return NavigationInfoModel(
+                            previousStartKey: i > 0
+                                ? hizbInfoList[i - 1].firstVerseKey
+                                : null,
+                            previousEndKey: i > 0
+                                ? hizbInfoList[i - 1].lastVerseKey
+                                : null,
+                            nextStartKey: i < hizbInfoList.length - 1
+                                ? hizbInfoList[i + 1].firstVerseKey
+                                : null,
+                            nextEndKey: i < hizbInfoList.length - 1
+                                ? hizbInfoList[i + 1].lastVerseKey
+                                : null,
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                    top: 3,
+                    bottom: 3,
+                  ),
+                  height: 60,
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                appLocalizations.hizb,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: textColor,
+                                ),
+                              ),
+                              const Gap(10),
+                              getIndexNumberWidget(
+                                context,
+                                index + 1,
+                                height: 25,
+                                width: 25,
+                                textColor: textColor,
+                              ),
+                            ],
+                          ),
+                          const Gap(2),
+                          Text(
+                            appLocalizations.surahAyah(
+                              "${getSurahName(context, surahNumber)} -",
+                              "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
+                            ),
+                            style: TextStyle(
+                              color: brightness == Brightness.light
+                                  ? Colors.grey.shade600
+                                  : Colors.grey.shade400,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const Gap(10),
+                      Expanded(
+                        child: FittedBox(
+                          alignment: Alignment.centerRight,
+                          fit: BoxFit.scaleDown,
+                          child: ScriptProcessor(
+                            scriptInfo: ScriptInfo(
+                              textStyle: const TextStyle(fontSize: 20),
+                              surahNumber: int.parse(
+                                hizbInfoList[index].firstVerseKey.split(":")[0],
+                              ),
+                              ayahNumber: int.parse(
+                                hizbInfoList[index].firstVerseKey.split(":")[1],
+                              ),
+                              quranScriptType: quranScriptType,
+                              limitWord: 4,
+                              skipWordTap: true,
+                            ),
+                            themeState: context.read<ThemeCubit>().state,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

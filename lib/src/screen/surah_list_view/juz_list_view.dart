@@ -33,141 +33,135 @@ class JuzListView extends StatelessWidget {
         .state
         .quranScriptType;
 
-    return Scrollbar(
-      radius: Radius.circular(roundedRadius),
-      thickness: 13,
-      interactive: true,
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 120),
+      itemCount: juzInfoList.length,
+      itemBuilder: (context, index) {
+        JuzInfoModel current = juzInfoList[index];
+        String firstKey = current.firstVerseKey;
 
-      child: ListView.builder(
-        padding: const EdgeInsets.only(bottom: 120),
-        itemCount: juzInfoList.length,
-        itemBuilder: (context, index) {
-          JuzInfoModel current = juzInfoList[index];
-          String firstKey = current.firstVerseKey;
+        int surahNumber = firstKey.split(":").first.toInt();
+        int ayahNumber = firstKey.split(":").last.toInt();
 
-          int surahNumber = firstKey.split(":").first.toInt();
-          int ayahNumber = firstKey.split(":").last.toInt();
-
-          return Padding(
-            padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(roundedRadius),
-                ),
-                side: BorderSide(
-                  color: context.read<ThemeCubit>().state.primaryShade200,
-                ),
+        return Padding(
+          padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(roundedRadius),
               ),
-
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuranScriptView(
-                      startKey: juzInfoList[index].firstVerseKey,
-                      endKey: juzInfoList[index].lastVerseKey,
-                      currentIndex: index,
-                      getNavigationInfo: (i) {
-                        return NavigationInfoModel(
-                          previousStartKey: i > 0
-                              ? juzInfoList[i - 1].firstVerseKey
-                              : null,
-                          previousEndKey: i > 0
-                              ? juzInfoList[i - 1].lastVerseKey
-                              : null,
-                          nextStartKey: i < juzInfoList.length - 1
-                              ? juzInfoList[i + 1].firstVerseKey
-                              : null,
-                          nextEndKey: i < juzInfoList.length - 1
-                              ? juzInfoList[i + 1].lastVerseKey
-                              : null,
-                        );
-                      },
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                  top: 3,
-                  bottom: 3,
-                ),
-                height: 60,
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              appLocalizations.juz,
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                                color: textColor,
-                              ),
-                            ),
-                            const Gap(10),
-                            getIndexNumberWidget(
-                              context,
-                              index + 1,
-                              height: 25,
-                              width: 25,
-                              textColor: textColor,
-                            ),
-                          ],
-                        ),
-                        const Gap(2),
-                        Text(
-                          appLocalizations.surahAyah(
-                            "${getSurahName(context, surahNumber)} -",
-                            "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
-                          ),
-                          style: TextStyle(
-                            color: brightness == Brightness.light
-                                ? Colors.grey.shade600
-                                : Colors.grey.shade400,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(10),
-                    Expanded(
-                      child: FittedBox(
-                        alignment: Alignment.centerRight,
-                        fit: BoxFit.scaleDown,
-                        child: ScriptProcessor(
-                          scriptInfo: ScriptInfo(
-                            textStyle: const TextStyle(fontSize: 20),
-                            surahNumber: int.parse(
-                              juzInfoList[index].firstVerseKey.split(":")[0],
-                            ),
-                            ayahNumber: int.parse(
-                              juzInfoList[index].firstVerseKey.split(":")[1],
-                            ),
-                            quranScriptType: quranScriptType,
-                            limitWord: 4,
-                            skipWordTap: true,
-                          ),
-                          themeState: context.read<ThemeCubit>().state,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              side: BorderSide(
+                color: context.read<ThemeCubit>().state.primaryShade200,
               ),
             ),
-          );
-        },
-      ),
+
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuranScriptView(
+                    startKey: juzInfoList[index].firstVerseKey,
+                    endKey: juzInfoList[index].lastVerseKey,
+                    currentIndex: index,
+                    getNavigationInfo: (i) {
+                      return NavigationInfoModel(
+                        previousStartKey: i > 0
+                            ? juzInfoList[i - 1].firstVerseKey
+                            : null,
+                        previousEndKey: i > 0
+                            ? juzInfoList[i - 1].lastVerseKey
+                            : null,
+                        nextStartKey: i < juzInfoList.length - 1
+                            ? juzInfoList[i + 1].firstVerseKey
+                            : null,
+                        nextEndKey: i < juzInfoList.length - 1
+                            ? juzInfoList[i + 1].lastVerseKey
+                            : null,
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 3,
+                bottom: 3,
+              ),
+              height: 60,
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            appLocalizations.juz,
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              color: textColor,
+                            ),
+                          ),
+                          const Gap(10),
+                          getIndexNumberWidget(
+                            context,
+                            index + 1,
+                            height: 25,
+                            width: 25,
+                            textColor: textColor,
+                          ),
+                        ],
+                      ),
+                      const Gap(2),
+                      Text(
+                        appLocalizations.surahAyah(
+                          "${getSurahName(context, surahNumber)} -",
+                          "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
+                        ),
+                        style: TextStyle(
+                          color: brightness == Brightness.light
+                              ? Colors.grey.shade600
+                              : Colors.grey.shade400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(10),
+                  Expanded(
+                    child: FittedBox(
+                      alignment: Alignment.centerRight,
+                      fit: BoxFit.scaleDown,
+                      child: ScriptProcessor(
+                        scriptInfo: ScriptInfo(
+                          textStyle: const TextStyle(fontSize: 20),
+                          surahNumber: int.parse(
+                            juzInfoList[index].firstVerseKey.split(":")[0],
+                          ),
+                          ayahNumber: int.parse(
+                            juzInfoList[index].firstVerseKey.split(":")[1],
+                          ),
+                          quranScriptType: quranScriptType,
+                          limitWord: 4,
+                          skipWordTap: true,
+                        ),
+                        themeState: context.read<ThemeCubit>().state,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
