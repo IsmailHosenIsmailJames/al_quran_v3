@@ -33,10 +33,8 @@ class HizbListView extends StatelessWidget {
         .read<QuranViewCubit>()
         .state
         .quranScriptType;
-    ScrollController scrollController = ScrollController();
 
     return Scrollbar(
-      controller: scrollController,
       radius: Radius.circular(roundedRadius),
       thickness: 13,
       interactive: true,
@@ -53,11 +51,7 @@ class HizbListView extends StatelessWidget {
               .toList();
 
           return ListView.builder(
-            padding: EdgeInsets.only(
-              bottom: 120,
-              top: MediaQuery.of(context).padding.top + 3 + 40,
-            ),
-            controller: scrollController,
+            padding: const EdgeInsets.only(bottom: 120),
             itemCount: hizbInfoList.length,
             itemBuilder: (context, index) {
               HizbModel current = hizbInfoList[index];

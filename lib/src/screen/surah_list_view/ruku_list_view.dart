@@ -33,7 +33,6 @@ class RukuListView extends StatelessWidget {
         .read<QuranViewCubit>()
         .state
         .quranScriptType;
-    ScrollController scrollController = ScrollController();
 
     return FutureBuilder(
       future: rootBundle.loadString("assets/meta_data/Ruku.json"),
@@ -49,17 +48,12 @@ class RukuListView extends StatelessWidget {
             .toList();
 
         return Scrollbar(
-          controller: scrollController,
           radius: Radius.circular(roundedRadius),
           thickness: 13,
           interactive: true,
 
           child: ListView.builder(
-            padding: EdgeInsets.only(
-              bottom: 120,
-              top: MediaQuery.of(context).padding.top + 3 + 40,
-            ),
-            controller: scrollController,
+            padding: const EdgeInsets.only(bottom: 120),
             itemCount: rukuInfoList.length,
             itemBuilder: (context, index) {
               RukuInfoModel current = rukuInfoList[index];

@@ -349,29 +349,16 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       extendBody: true,
-      extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
       appBar: isSideNav
           ? null
           : AppBar(
-              flexibleSpace: ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: themeState.mutedGray),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               leading: Builder(
                 builder: (context) {
                   return appBarLeading(l10n, context);
                 },
               ),
-
+              backgroundColor: Theme.of(context).colorScheme.surface,
               title: Text(l10n.alQuran),
               centerTitle: true,
               actions: [
