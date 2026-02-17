@@ -6,7 +6,7 @@ import "package:flutter/services.dart";
 import "package:hive_ce/hive.dart";
 
 class QuranScriptFunction {
-  static String quranScriptVersion = "2-dev-2";
+  static String quranScriptVersion = "2-dev-3";
   static Box? quranBox;
 
   static Future<void> writeQuranScript({
