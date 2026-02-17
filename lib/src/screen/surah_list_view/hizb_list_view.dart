@@ -2,6 +2,7 @@ import "dart:convert";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
@@ -84,18 +85,23 @@ class HizbListView extends StatelessWidget {
                         builder: (context) => QuranScriptView(
                           startKey: hizbInfoList[index].firstVerseKey,
                           endKey: hizbInfoList[index].lastVerseKey,
-                          previousStartKey: index > 0
-                              ? hizbInfoList[index - 1].firstVerseKey
-                              : null,
-                          previousEndKey: index > 0
-                              ? hizbInfoList[index - 1].lastVerseKey
-                              : null,
-                          nextStartKey: index < hizbInfoList.length - 1
-                              ? hizbInfoList[index + 1].firstVerseKey
-                              : null,
-                          nextEndKey: index < hizbInfoList.length - 1
-                              ? hizbInfoList[index + 1].lastVerseKey
-                              : null,
+                          currentIndex: index,
+                          getNavigationInfo: (i) {
+                            return NavigationInfoModel(
+                              previousStartKey: i > 0
+                                  ? hizbInfoList[i - 1].firstVerseKey
+                                  : null,
+                              previousEndKey: i > 0
+                                  ? hizbInfoList[i - 1].lastVerseKey
+                                  : null,
+                              nextStartKey: i < hizbInfoList.length - 1
+                                  ? hizbInfoList[i + 1].firstVerseKey
+                                  : null,
+                              nextEndKey: i < hizbInfoList.length - 1
+                                  ? hizbInfoList[i + 1].lastVerseKey
+                                  : null,
+                            );
+                          },
                         ),
                       ),
                     );
