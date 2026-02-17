@@ -25,10 +25,13 @@ class RukuListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return FutureBuilder(
@@ -40,10 +43,9 @@ class RukuListView extends StatelessWidget {
         }
         Map metaDataRuku = jsonDecode(asyncSnapshot.data!);
 
-        List<RukuInfoModel> rukuInfoList =
-            metaDataRuku.values
-                .map((e) => RukuInfoModel.fromMap(Map<String, dynamic>.from(e)))
-                .toList();
+        List<RukuInfoModel> rukuInfoList = metaDataRuku.values
+            .map((e) => RukuInfoModel.fromMap(Map<String, dynamic>.from(e)))
+            .toList();
 
         return Scrollbar(
           controller: scrollController,
@@ -82,11 +84,10 @@ class RukuListView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => QuranScriptView(
-                              startKey: rukuInfoList[index].firstVerseKey,
-                              endKey: rukuInfoList[index].lastVerseKey,
-                            ),
+                        builder: (context) => QuranScriptView(
+                          startKey: rukuInfoList[index].firstVerseKey,
+                          endKey: rukuInfoList[index].lastVerseKey,
+                        ),
                       ),
                     );
                   },
@@ -133,10 +134,9 @@ class RukuListView extends StatelessWidget {
                                 "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                               ),
                               style: TextStyle(
-                                color:
-                                    brightness == Brightness.light
-                                        ? Colors.grey.shade600
-                                        : Colors.grey.shade400,
+                                color: brightness == Brightness.light
+                                    ? Colors.grey.shade600
+                                    : Colors.grey.shade400,
                               ),
                             ),
                           ],
