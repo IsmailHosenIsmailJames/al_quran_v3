@@ -33,21 +33,15 @@ class PageListView extends StatelessWidget {
         .read<QuranViewCubit>()
         .state
         .quranScriptType;
-    ScrollController scrollController = ScrollController();
 
     return Scrollbar(
-      controller: scrollController,
       radius: Radius.circular(roundedRadius),
       thickness: 13,
       interactive: true,
 
       child: ListView.builder(
-        padding: EdgeInsets.only(
-          bottom: 120,
-          top: MediaQuery.of(context).padding.top + 3 + 40,
-        ),
+        padding: const EdgeInsets.only(bottom: 120),
         itemCount: pageInfoList.length,
-        controller: scrollController,
         itemBuilder: (context, index) {
           PageInfoModel pageInfo = pageInfoList[index];
           final ayahKey = convertAyahNumberToKey(pageInfo.start);

@@ -32,20 +32,14 @@ class JuzListView extends StatelessWidget {
         .read<QuranViewCubit>()
         .state
         .quranScriptType;
-    ScrollController scrollController = ScrollController();
 
     return Scrollbar(
-      controller: scrollController,
       radius: Radius.circular(roundedRadius),
       thickness: 13,
       interactive: true,
 
       child: ListView.builder(
-        padding: EdgeInsets.only(
-          bottom: 120,
-          top: MediaQuery.of(context).padding.top + 3 + 40,
-        ),
-        controller: scrollController,
+        padding: const EdgeInsets.only(bottom: 120),
         itemCount: juzInfoList.length,
         itemBuilder: (context, index) {
           JuzInfoModel current = juzInfoList[index];
