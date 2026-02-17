@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart";
@@ -24,10 +25,13 @@ class JuzListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -67,11 +71,27 @@ class JuzListView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey: juzInfoList[index].firstVerseKey,
-                          endKey: juzInfoList[index].lastVerseKey,
-                        ),
+                    builder: (context) => QuranScriptView(
+                      startKey: juzInfoList[index].firstVerseKey,
+                      endKey: juzInfoList[index].lastVerseKey,
+                      currentIndex: index,
+                      getNavigationInfo: (i) {
+                        return NavigationInfoModel(
+                          previousStartKey: i > 0
+                              ? juzInfoList[i - 1].firstVerseKey
+                              : null,
+                          previousEndKey: i > 0
+                              ? juzInfoList[i - 1].lastVerseKey
+                              : null,
+                          nextStartKey: i < juzInfoList.length - 1
+                              ? juzInfoList[i + 1].firstVerseKey
+                              : null,
+                          nextEndKey: i < juzInfoList.length - 1
+                              ? juzInfoList[i + 1].lastVerseKey
+                              : null,
+                        );
+                      },
+                    ),
                   ),
                 );
               },
@@ -118,10 +138,9 @@ class JuzListView extends StatelessWidget {
                             "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                           ),
                           style: TextStyle(
-                            color:
-                                brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
+                            color: brightness == Brightness.light
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400,
                           ),
                         ),
                       ],

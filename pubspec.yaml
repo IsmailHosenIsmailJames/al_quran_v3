@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.14.2+72
+version: 3.16.1+74
 
 environment:
   sdk: ^3.10.0
@@ -69,7 +69,10 @@ dependencies:
   web: ^1.1.1
   flutter_native_splash: ^2.4.7
   adhan_dart:
-    path: adhan_dart
+    git:
+      url: https://github.com/IsmailHosenIsmailJames/adhan_dart.git
+      ref: master
+
   hijri: ^3.0.0
   shimmer: ^3.0.0
   material_table_view: ^5.5.2

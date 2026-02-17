@@ -2,6 +2,7 @@ import "dart:convert";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/hizb_model.dart";
@@ -25,10 +26,13 @@ class HizbListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -44,10 +48,9 @@ class HizbListView extends StatelessWidget {
             return const SizedBox();
           }
           Map hizbData = jsonDecode(asyncSnapshot.data!);
-          List<HizbModel> hizbInfoList =
-              hizbData.values
-                  .map((e) => HizbModel.fromMap(Map<String, dynamic>.from(e)))
-                  .toList();
+          List<HizbModel> hizbInfoList = hizbData.values
+              .map((e) => HizbModel.fromMap(Map<String, dynamic>.from(e)))
+              .toList();
 
           return ListView.builder(
             padding: EdgeInsets.only(
@@ -79,11 +82,27 @@ class HizbListView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => QuranScriptView(
-                              startKey: hizbInfoList[index].firstVerseKey,
-                              endKey: hizbInfoList[index].lastVerseKey,
-                            ),
+                        builder: (context) => QuranScriptView(
+                          startKey: hizbInfoList[index].firstVerseKey,
+                          endKey: hizbInfoList[index].lastVerseKey,
+                          currentIndex: index,
+                          getNavigationInfo: (i) {
+                            return NavigationInfoModel(
+                              previousStartKey: i > 0
+                                  ? hizbInfoList[i - 1].firstVerseKey
+                                  : null,
+                              previousEndKey: i > 0
+                                  ? hizbInfoList[i - 1].lastVerseKey
+                                  : null,
+                              nextStartKey: i < hizbInfoList.length - 1
+                                  ? hizbInfoList[i + 1].firstVerseKey
+                                  : null,
+                              nextEndKey: i < hizbInfoList.length - 1
+                                  ? hizbInfoList[i + 1].lastVerseKey
+                                  : null,
+                            );
+                          },
+                        ),
                       ),
                     );
                   },
@@ -130,10 +149,9 @@ class HizbListView extends StatelessWidget {
                                 "${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)}",
                               ),
                               style: TextStyle(
-                                color:
-                                    brightness == Brightness.light
-                                        ? Colors.grey.shade600
-                                        : Colors.grey.shade400,
+                                color: brightness == Brightness.light
+                                    ? Colors.grey.shade600
+                                    : Colors.grey.shade400,
                               ),
                             ),
                           ],

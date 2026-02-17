@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   Divider(color: themeState.primaryShade300),
                   const Gap(5),
-                  const QuranScriptSettings(),
+                  const QuranScriptSettings(showAudioSpeedController: false),
                   const Gap(30),
                   Text(
                     appLocalizations.audioSettings,

@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
@@ -25,10 +26,13 @@ class PageListView extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
     Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
-    QuranScriptType quranScriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
+    QuranScriptType quranScriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     ScrollController scrollController = ScrollController();
 
     return Scrollbar(
@@ -49,7 +53,6 @@ class PageListView extends StatelessWidget {
           final ayahKey = convertAyahNumberToKey(pageInfo.start);
 
           int surahNumber = ayahKey!.split(":").first.toInt();
-          // int ayahNumber = ayahKey.split(":").last.toInt();
           return Padding(
             padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
             child: TextButton(
@@ -66,15 +69,33 @@ class PageListView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey:
-                              convertAyahNumberToKey(
-                                pageInfoList[index].start,
-                              )!,
-                          endKey:
-                              convertAyahNumberToKey(pageInfoList[index].end)!,
-                        ),
+                    builder: (context) => QuranScriptView(
+                      startKey: convertAyahNumberToKey(
+                        pageInfoList[index].start,
+                      )!,
+                      endKey: convertAyahNumberToKey(pageInfoList[index].end)!,
+                      currentIndex: index,
+                      getNavigationInfo: (i) {
+                        return NavigationInfoModel(
+                          previousStartKey: i > 0
+                              ? convertAyahNumberToKey(
+                                  pageInfoList[i - 1].start,
+                                )
+                              : null,
+                          previousEndKey: i > 0
+                              ? convertAyahNumberToKey(pageInfoList[i - 1].end)
+                              : null,
+                          nextStartKey: i < pageInfoList.length - 1
+                              ? convertAyahNumberToKey(
+                                  pageInfoList[i + 1].start,
+                                )
+                              : null,
+                          nextEndKey: i < pageInfoList.length - 1
+                              ? convertAyahNumberToKey(pageInfoList[i + 1].end)
+                              : null,
+                        );
+                      },
+                    ),
                   ),
                 );
               },
@@ -121,10 +142,9 @@ class PageListView extends StatelessWidget {
                             "${localizedNumber(context, surahNumber)}:${localizedNumber(context, surahNumber)}",
                           ),
                           style: TextStyle(
-                            color:
-                                brightness == Brightness.light
-                                    ? Colors.grey.shade600
-                                    : Colors.grey.shade400,
+                            color: brightness == Brightness.light
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400,
                           ),
                         ),
                       ],

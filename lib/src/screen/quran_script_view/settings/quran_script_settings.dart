@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/screen/audio/settings/audio_settings.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -25,8 +26,13 @@ import "../../settings/cubit/quran_script_view_state.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
+  final bool showAudioSpeedController;
 
-  const QuranScriptSettings({super.key, this.asPage = false});
+  const QuranScriptSettings({
+    super.key,
+    this.asPage = false,
+    this.showAudioSpeedController = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +106,11 @@ class QuranScriptSettings extends StatelessWidget {
                 max: 60,
                 min: 8,
                 divisions: 100,
-                label:
-                    context
-                        .read<QuranViewCubit>()
-                        .state
-                        .translationFontSize
-                        .toString(),
+                label: context
+                    .read<QuranViewCubit>()
+                    .state
+                    .translationFontSize
+                    .toString(),
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeTranslationFontSize(
                     value.toPrecision(2),
@@ -135,8 +140,11 @@ class QuranScriptSettings extends StatelessWidget {
                 max: 5,
                 min: 0.7,
                 divisions: 100,
-                label:
-                    context.read<QuranViewCubit>().state.lineHeight.toString(),
+                label: context
+                    .read<QuranViewCubit>()
+                    .state
+                    .lineHeight
+                    .toString(),
                 onChanged: (value) {
                   context.read<QuranViewCubit>().changeLineHeight(
                     value.toPrecision(2),
@@ -309,6 +317,8 @@ class QuranScriptSettings extends StatelessWidget {
                 );
               },
             ),
+            const Gap(20),
+            if (showAudioSpeedController) const PlayBackSpeedWidget(),
             const Gap(10),
             BlocBuilder<QuranViewCubit, QuranViewState>(
               builder: (context, quranViewState) {
@@ -343,35 +353,35 @@ class QuranScriptSettings extends StatelessWidget {
 
     return asPage
         ? Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            flexibleSpace: ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: context.read<ThemeCubit>().state.mutedGray,
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              flexibleSpace: ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: context.read<ThemeCubit>().state.mutedGray,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
+              title: Text(appLocalizations.quranScriptSettings),
+              actions: [themeIconButton(context)],
             ),
-            title: Text(appLocalizations.quranScriptSettings),
-            actions: [themeIconButton(context)],
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-              top: 10,
-              bottom: 60,
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 60,
+              ),
+              child: SafeArea(child: bodyWidget),
             ),
-            child: SafeArea(child: bodyWidget),
-          ),
-        )
+          )
         : bodyWidget;
   }
 
