@@ -116,7 +116,6 @@ flutter:
     - assets/quran_script/
     - assets/meta_data/
     - assets/adhan/
-    - assets/V4_Glyphs_With_Tajweed/
 
   fonts:
     - family: QPC_Hafs
