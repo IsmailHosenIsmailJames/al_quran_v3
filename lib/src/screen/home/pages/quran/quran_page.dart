@@ -205,14 +205,13 @@ class _QuranPageState extends State<QuranPage>
                           },
                         ),
                       ),
-                      const Gap(4),
+                      const Gap(10),
                     ],
                   ),
                 ),
                 SliverPersistentHeader(
                   pinned: true,
                   floating: false,
-
                   delegate: _QuranHeaderDelegate(
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
@@ -322,16 +321,11 @@ class _QuranHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      color: Theme.of(
-        context,
-      ).scaffoldBackgroundColor, // Ensure background is opaque for sticky effect
-      child: child,
-    );
+    return child;
   }
 
   @override
-  double get maxExtent => 52; // Height of the TabBar container + padding
+  double get maxExtent => 52;
 
   @override
   double get minExtent => 52;
