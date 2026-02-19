@@ -705,7 +705,9 @@ class _HomePageState extends State<HomePage> {
                 border: Border(top: BorderSide(color: themeState.mutedGray)),
               ),
               child: BottomNavigationBar(
-                backgroundColor: Colors.transparent,
+                backgroundColor: Theme.brightnessOf(context) == Brightness.dark
+                    ? Colors.grey.shade900.withValues(alpha: 0.5)
+                    : Colors.grey.shade100.withValues(alpha: 0.5),
                 elevation: 0,
                 currentIndex: state.tabIndex,
                 onTap: (index) {

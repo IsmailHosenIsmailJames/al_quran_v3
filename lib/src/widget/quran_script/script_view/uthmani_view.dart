@@ -57,8 +57,6 @@ class NonTajweedScriptView extends StatelessWidget {
           surahNumber: scriptInfo.surahNumber,
           ayahNumber: scriptInfo.ayahNumber,
           skipWordTap: scriptInfo.skipWordTap ?? false,
-          fixCombiningMarks:
-              scriptInfo.quranScriptType == QuranScriptType.indopak,
         ),
       );
     }
@@ -81,8 +79,6 @@ class NonTajweedScriptView extends StatelessWidget {
               surahNumber: scriptInfo.surahNumber,
               ayahNumber: scriptInfo.ayahNumber,
               skipWordTap: scriptInfo.skipWordTap ?? false,
-              fixCombiningMarks:
-                  scriptInfo.quranScriptType == QuranScriptType.indopak,
             );
           }),
         ),
@@ -152,7 +148,6 @@ class NonTajweedScriptView extends StatelessWidget {
                     surahNumber: scriptInfo.surahNumber,
                     ayahNumber: scriptInfo.ayahNumber,
                     skipWordTap: scriptInfo.skipWordTap ?? false,
-                    fixCombiningMarks: true,
                   );
                 }),
               ),
