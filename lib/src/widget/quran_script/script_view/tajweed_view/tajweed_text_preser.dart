@@ -16,6 +16,7 @@ TextSpan parseTajweedWord({
   required int ayahNumber,
   required bool skipWordTap,
   required wordIndex,
+  bool fixCombiningMarks = false,
 }) {
   List<TextSpan> spans = [];
   final brightness = Theme.of(context).brightness;
@@ -136,7 +137,62 @@ TextSpan parseTajweedWord({
     processNode(node, defaultColor);
   }
 
-  return TextSpan(children: spans, style: processingStyle);
+  if (!fixCombiningMarks) {
+    return TextSpan(children: spans, style: processingStyle);
+  }
+
+  // Post-process: fix combining marks that start a new TextSpan.
+  // In Arabic/IndoPak, diacritics (kasrah, fathah, etc.) are combining marks
+  // that visually attach to the PRECEDING base letter. When a tajweed rule tag
+  // starts with a combining mark (e.g. <rule class=madda_permissible>ِي</rule>),
+  // the mark ends up in a separate TextSpan from its base letter, which can
+  // cause it to not render correctly. Fix by moving leading combining marks
+  // to the previous TextSpan.
+  final List<TextSpan> processedSpans = [];
+  for (int i = 0; i < spans.length; i++) {
+    final text = spans[i].text;
+    if (text != null && text.isNotEmpty && processedSpans.isNotEmpty) {
+      // Only process spans with a non-default color (tajweed rule spans).
+      // Default-colored spans starting with combining marks are fine as-is.
+      final spanColor = spans[i].style?.color;
+      final isRuleSpan = spanColor != null && spanColor != defaultColor;
+
+      if (isRuleSpan) {
+        int combiningEnd = 0;
+        for (int j = 0; j < text.length; j++) {
+          if (_isArabicCombiningMark(text.codeUnitAt(j))) {
+            combiningEnd++;
+          } else {
+            break;
+          }
+        }
+        if (combiningEnd > 0) {
+          // Move combining marks to end of previous span so they attach
+          // to the base letter for correct rendering.
+          final prevSpan = processedSpans.last;
+          processedSpans[processedSpans.length - 1] = TextSpan(
+            text: (prevSpan.text ?? '') + text.substring(0, combiningEnd),
+            style: prevSpan.style,
+            recognizer: prevSpan.recognizer,
+          );
+          final remaining = text.substring(combiningEnd);
+          if (remaining.isNotEmpty) {
+            processedSpans.add(
+              TextSpan(
+                text: remaining,
+                style: spans[i].style,
+                recognizer: spans[i].recognizer,
+              ),
+            );
+          }
+          continue;
+        }
+      }
+    }
+    processedSpans.add(spans[i]);
+  }
+
+  return TextSpan(children: processedSpans, style: processingStyle);
 }
 
 String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
@@ -162,4 +218,19 @@ String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
   }
 
   return plainWords.join(" ").trim();
+}
+
+/// Returns true if the given Unicode code unit is an Arabic combining mark.
+/// These are diacritical marks (tashkeel) that visually attach to the
+/// preceding base letter.
+bool _isArabicCombiningMark(int codeUnit) {
+  // Arabic tashkeel: fathah, dammah, kasrah, shaddah, sukun, etc.
+  if (codeUnit >= 0x064B && codeUnit <= 0x065F) return true;
+  // Superscript Alef (used for madda in words like الرَّحمٰن)
+  if (codeUnit == 0x0670) return true;
+  // Quranic annotation marks and small high/low marks
+  if (codeUnit >= 0x06D6 && codeUnit <= 0x06ED) return true;
+  // Other Arabic combining marks
+  if (codeUnit >= 0x0610 && codeUnit <= 0x061A) return true;
+  return false;
 }

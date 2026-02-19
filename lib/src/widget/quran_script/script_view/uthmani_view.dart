@@ -13,6 +13,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 import "../../../theme/controller/theme_state.dart";
 
+// Plans to implement tajweed. Class name will change later
 class NonTajweedScriptView extends StatelessWidget {
   final bool isUthmani;
   final ScriptInfo scriptInfo;
@@ -56,6 +57,8 @@ class NonTajweedScriptView extends StatelessWidget {
           surahNumber: scriptInfo.surahNumber,
           ayahNumber: scriptInfo.ayahNumber,
           skipWordTap: scriptInfo.skipWordTap ?? false,
+          fixCombiningMarks:
+              scriptInfo.quranScriptType == QuranScriptType.indopak,
         ),
       );
     }
@@ -78,6 +81,8 @@ class NonTajweedScriptView extends StatelessWidget {
               surahNumber: scriptInfo.surahNumber,
               ayahNumber: scriptInfo.ayahNumber,
               skipWordTap: scriptInfo.skipWordTap ?? false,
+              fixCombiningMarks:
+                  scriptInfo.quranScriptType == QuranScriptType.indopak,
             );
           }),
         ),
@@ -147,6 +152,7 @@ class NonTajweedScriptView extends StatelessWidget {
                     surahNumber: scriptInfo.surahNumber,
                     ayahNumber: scriptInfo.ayahNumber,
                     skipWordTap: scriptInfo.skipWordTap ?? false,
+                    fixCombiningMarks: true,
                   );
                 }),
               ),
