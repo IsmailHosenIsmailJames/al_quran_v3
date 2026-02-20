@@ -4,7 +4,10 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
+import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/widget/quran_page_shimmer.dart";
+import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
+import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/juz_info_model.dart";
@@ -83,6 +86,7 @@ class _QuranPageState extends State<QuranPage>
     ];
 
     final themeState = context.watch<ThemeCubit>().state;
+    final isDarkMode = Theme.brightnessOf(context) == Brightness.dark;
 
     return isLoaded
         ? const QuranPageShimmer()
@@ -92,59 +96,111 @@ class _QuranPageState extends State<QuranPage>
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 100,
-                        child: GridView(
-                          padding: const EdgeInsets.all(10),
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 10,
-                                childAspectRatio: 0.9,
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 10.0,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            QuickOption(
-                              themeState: themeState,
-                              label: "Settings",
-                              onClick: () {},
-                              child: const Icon(
-                                FluentIcons.settings_24_regular,
-                                size: 30,
+                            Expanded(
+                              child: QuickOption(
+                                themeState: themeState,
+                                label: "Mushaf",
+                                onClick: () {},
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: Image.asset(
+                                    "assets/img/mushaf.png",
+                                    color: isDarkMode
+                                        ? Colors.grey.shade200
+                                        : Colors.grey.shade800,
+                                    fit: BoxFit.scaleDown,
+                                  ),
+                                ),
                               ),
                             ),
-                            QuickOption(
-                              themeState: themeState,
-                              label: "Library",
-                              onClick: () {},
-                              child: const Icon(
-                                FluentIcons.library_24_regular,
-                                size: 30,
+                            const Gap(8),
+                            Expanded(
+                              child: QuickOption(
+                                themeState: themeState,
+                                label: "Settings",
+                                onClick: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SettingsPage(),
+                                    ),
+                                  );
+                                  WidgetsBinding.instance.addPostFrameCallback((
+                                    _,
+                                  ) {
+                                    setState(() {});
+                                  });
+                                },
+                                child: Icon(
+                                  FluentIcons.settings_24_filled,
+                                  color: isDarkMode
+                                      ? Colors.grey.shade200
+                                      : Colors.grey.shade800,
+                                  size: 32,
+                                ),
                               ),
                             ),
-                            QuickOption(
-                              themeState: themeState,
-                              label: "Settings",
-                              onClick: () {},
-                              child: const Icon(
-                                FluentIcons.settings_24_regular,
-                                size: 30,
+                            const Gap(8),
+                            Expanded(
+                              child: QuickOption(
+                                themeState: themeState,
+                                label: "Resources",
+                                onClick: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const QuranResourcesView(),
+                                    ),
+                                  );
+                                },
+                                child: Icon(
+                                  FluentIcons.arrow_download_24_filled,
+                                  color: isDarkMode
+                                      ? Colors.grey.shade200
+                                      : Colors.grey.shade800,
+                                  size: 32,
+                                ),
                               ),
                             ),
-                            QuickOption(
-                              themeState: themeState,
-                              label: "Settings",
-                              onClick: () {},
-                              child: const Icon(
-                                FluentIcons.settings_24_regular,
-                                size: 30,
+                            const Gap(8),
+                            Expanded(
+                              child: QuickOption(
+                                themeState: themeState,
+                                label: "Pinned",
+                                onClick: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CollectionPage(
+                                            collectionType:
+                                                CollectionType.pinned,
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Icon(
+                                  FluentIcons.pin_24_filled,
+                                  color: isDarkMode
+                                      ? Colors.grey.shade200
+                                      : Colors.grey.shade800,
+                                  size: 32,
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const Gap(10),
                       BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
                         builder: (context, history) {
                           return history.history.isEmpty
@@ -381,25 +437,31 @@ class QuickOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(16),
       onTap: onClick,
       child: Padding(
-        padding: const EdgeInsets.all(2.0).copyWith(top: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 60,
-              width: 70,
+              width: 60,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: themeState.primaryShade100,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: child,
             ),
-            const Gap(4),
+            const Gap(8),
             Text(
               label,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ],
         ),
