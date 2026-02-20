@@ -5,7 +5,6 @@ import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
-import "package:al_quran_v3/src/screen/mushaf/exp_mushaf_screen.dart";
 import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
@@ -361,19 +360,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               title: Text(l10n.alQuran),
               centerTitle: true,
-              actions: [
-                IconButton(
-                  icon: const Icon(FluentIcons.book_16_filled),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MushafScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+              actions: [],
             ),
       body: Row(
         children: [
