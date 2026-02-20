@@ -14,6 +14,7 @@ import "package:al_quran_v3/src/screen/surah_list_view/page_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/ruku_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/surah_list_view.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
@@ -91,6 +92,59 @@ class _QuranPageState extends State<QuranPage>
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 100,
+                        child: GridView(
+                          padding: const EdgeInsets.all(10),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 0.9,
+                              ),
+                          children: [
+                            QuickOption(
+                              themeState: themeState,
+                              label: "Settings",
+                              onClick: () {},
+                              child: const Icon(
+                                FluentIcons.settings_24_regular,
+                                size: 30,
+                              ),
+                            ),
+                            QuickOption(
+                              themeState: themeState,
+                              label: "Library",
+                              onClick: () {},
+                              child: const Icon(
+                                FluentIcons.library_24_regular,
+                                size: 30,
+                              ),
+                            ),
+                            QuickOption(
+                              themeState: themeState,
+                              label: "Settings",
+                              onClick: () {},
+                              child: const Icon(
+                                FluentIcons.settings_24_regular,
+                                size: 30,
+                              ),
+                            ),
+                            QuickOption(
+                              themeState: themeState,
+                              label: "Settings",
+                              onClick: () {},
+                              child: const Icon(
+                                FluentIcons.settings_24_regular,
+                                size: 30,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Gap(10),
                       BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
                         builder: (context, history) {
                           return history.history.isEmpty
@@ -306,6 +360,50 @@ class _QuranPageState extends State<QuranPage>
           ),
         );
       },
+    );
+  }
+}
+
+class QuickOption extends StatelessWidget {
+  final Widget child;
+  final String label;
+  final VoidCallback onClick;
+  const QuickOption({
+    super.key,
+    required this.themeState,
+    required this.child,
+    required this.label,
+    required this.onClick,
+  });
+
+  final ThemeState themeState;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: onClick,
+      child: Padding(
+        padding: const EdgeInsets.all(2.0).copyWith(top: 8),
+        child: Column(
+          children: [
+            Container(
+              height: 60,
+              width: 70,
+              decoration: BoxDecoration(
+                color: themeState.primaryShade100,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: child,
+            ),
+            const Gap(4),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
