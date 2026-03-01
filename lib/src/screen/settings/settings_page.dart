@@ -43,6 +43,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+            backgroundColor: Theme.brightnessOf(context) == Brightness.dark
+                ? Colors.grey.shade900.withValues(alpha: 0.5)
+                : Colors.grey.shade200.withValues(alpha: 0.5),
             actions: [themeIconButton(context)],
           ),
           body: SingleChildScrollView(

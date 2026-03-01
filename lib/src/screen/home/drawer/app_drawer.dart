@@ -3,7 +3,7 @@ import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
-import "package:al_quran_v3/src/utils/reset_app.dart";
+// import "package:al_quran_v3/src/utils/reset_app.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
@@ -53,7 +53,9 @@ class _AppDrawerState extends State<AppDrawer> {
       _version = l10n.versionLoading;
     }
 
-    return Drawer(child: drawerSection(version: _version, context: context));
+    return Drawer(
+      child: drawerSection(version: _version, context: context),
+    );
   }
 }
 
@@ -172,13 +174,12 @@ Widget drawerSection({
                 FluentIcons.settings_24_filled,
                 color: themeState.primary,
               ),
-              title:
-                  isJustIcon
-                      ? null
-                      : Text(
-                        l10n.settings,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
+              title: isJustIcon
+                  ? null
+                  : Text(
+                      l10n.settings,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
             ),
           const Gap(5),
           ListTile(
@@ -194,13 +195,12 @@ Widget drawerSection({
             },
 
             leading: Icon(Icons.translate_rounded, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.languageSettings,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.languageSettings,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
 
@@ -211,10 +211,9 @@ Widget drawerSection({
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder:
-                      (context) => const CollectionPage(
-                        collectionType: CollectionType.notes,
-                      ),
+                  builder: (context) => const CollectionPage(
+                    collectionType: CollectionType.notes,
+                  ),
                 ),
               );
             },
@@ -222,13 +221,12 @@ Widget drawerSection({
               FluentIcons.note_24_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.notes,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.notes,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -238,21 +236,19 @@ Widget drawerSection({
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder:
-                      (context) => const CollectionPage(
-                        collectionType: CollectionType.pinned,
-                      ),
+                  builder: (context) => const CollectionPage(
+                    collectionType: CollectionType.pinned,
+                  ),
                 ),
               );
             },
             leading: Icon(FluentIcons.pin_24_filled, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.pinned,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.pinned,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -265,13 +261,12 @@ Widget drawerSection({
               FluentIcons.arrow_turn_down_right_20_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.jumpToAyah,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.jumpToAyah,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -289,13 +284,12 @@ Widget drawerSection({
               FluentIcons.arrow_download_24_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.quranResources,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.quranResources,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -313,13 +307,12 @@ Widget drawerSection({
               FluentIcons.share_multiple_24_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.shareMultipleAyah,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.shareMultipleAyah,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -334,13 +327,12 @@ Widget drawerSection({
               );
             },
             leading: Icon(Icons.book_rounded, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.tajweedGuide,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.tajweedGuide,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           if (!isJustIcon) const Gap(15),
           if (!isJustIcon)
@@ -372,13 +364,12 @@ Widget drawerSection({
               FluentIcons.share_24_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.shareThisApp,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.shareThisApp,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           if (platformOwn == platform_services.PlatformOwn.isAndroid)
@@ -394,13 +385,12 @@ Widget drawerSection({
                 );
               },
               leading: Icon(Icons.star_rate_rounded, color: themeState.primary),
-              title:
-                  isJustIcon
-                      ? null
-                      : Text(
-                        l10n.giveRating,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
+              title: isJustIcon
+                  ? null
+                  : Text(
+                      l10n.giveRating,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
             ),
           const Gap(5),
           ListTile(
@@ -415,13 +405,12 @@ Widget drawerSection({
               );
             },
             leading: Icon(SimpleIcons.github, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.supportOnGithub,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.supportOnGithub,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -431,13 +420,12 @@ Widget drawerSection({
               showBugReportDialog(context);
             },
             leading: Icon(FluentIcons.bug_24_filled, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.bugReport,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.bugReport,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -451,13 +439,12 @@ Widget drawerSection({
               );
             },
             leading: Icon(Icons.policy_rounded, color: themeState.primary),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.privacyPolicy,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.privacyPolicy,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
           const Gap(5),
           ListTile(
@@ -472,70 +459,69 @@ Widget drawerSection({
               FluentIcons.info_24_filled,
               color: themeState.primary,
             ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.aboutTheApp,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.aboutTheApp,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
           ),
-          const Gap(5),
-          ListTile(
-            minTileHeight: 40,
-            onTap: () async {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog.adaptive(
-                    insetPadding: const EdgeInsets.all(10),
-                    title:
-                        isJustIcon
-                            ? null
-                            : Text(
-                              l10n.resetAppWarningTitle,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                    content: Text(l10n.resetAppWarningMessage),
-                    actions: <Widget>[
-                      TextButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        label: Text(l10n.cancel),
-                        icon: const Icon(Icons.close_rounded),
-                      ),
-                      TextButton.icon(
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          await resetTheApp(context);
-                        },
-                        icon: const Icon(
-                          FluentIcons.arrow_reset_24_filled,
-                          color: Colors.red,
-                        ),
-                        label: Text(
-                          l10n.reset,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            leading: Icon(
-              FluentIcons.arrow_reset_24_filled,
-              color: themeState.primary,
-            ),
-            title:
-                isJustIcon
-                    ? null
-                    : Text(
-                      l10n.resetTheApp,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-          ),
+          // const Gap(5),
+          // ListTile(
+          //   minTileHeight: 40,
+          //   onTap: () async {
+          //     showDialog(
+          //       context: context,
+          //       builder: (BuildContext context) {
+          //         return AlertDialog.adaptive(
+          //           insetPadding: const EdgeInsets.all(10),
+          //           title:
+          //               isJustIcon
+          //                   ? null
+          //                   : Text(
+          //                     l10n.resetAppWarningTitle,
+          //                     style: const TextStyle(color: Colors.red),
+          //                   ),
+          //           content: Text(l10n.resetAppWarningMessage),
+          //           actions: <Widget>[
+          //             TextButton.icon(
+          //               onPressed: () {
+          //                 Navigator.of(context).pop();
+          //               },
+          //               label: Text(l10n.cancel),
+          //               icon: const Icon(Icons.close_rounded),
+          //             ),
+          //             TextButton.icon(
+          //               onPressed: () async {
+          //                 Navigator.of(context).pop();
+          //                 await resetTheApp(context);
+          //               },
+          //               icon: const Icon(
+          //                 FluentIcons.arrow_reset_24_filled,
+          //                 color: Colors.red,
+          //               ),
+          //               label: Text(
+          //                 l10n.reset,
+          //                 style: const TextStyle(color: Colors.red),
+          //               ),
+          //             ),
+          //           ],
+          //         );
+          //       },
+          //     );
+          //   },
+          //   leading: Icon(
+          //     FluentIcons.arrow_reset_24_filled,
+          //     color: themeState.primary,
+          //   ),
+          //   title:
+          //       isJustIcon
+          //           ? null
+          //           : Text(
+          //             l10n.resetTheApp,
+          //             style: const TextStyle(fontWeight: FontWeight.w500),
+          //           ),
+          // ),
           const Gap(50),
         ],
       );
