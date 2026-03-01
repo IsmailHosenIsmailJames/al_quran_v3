@@ -56,20 +56,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
     return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
       builder: (context, state) {
         log(state.isInsideQuranPlayer.toString());
-        double height =
-            (state.showUi && state.isInsideQuranPlayer)
-                ? state.isExpanded
-                    ? isLandscapeViewNeedToShow
+        double height = (state.showUi && state.isInsideQuranPlayer)
+            ? state.isExpanded
+                  ? isLandscapeViewNeedToShow
                         ? 66
                         : 120
-                    : 50
-                : 0;
-        double width =
-            (state.showUi && state.isInsideQuranPlayer)
-                ? state.isExpanded
-                    ? screenWidth
-                    : 50
-                : 0;
+                  : 50
+            : 0;
+        double width = (state.showUi && state.isInsideQuranPlayer)
+            ? state.isExpanded
+                  ? screenWidth
+                  : 50
+            : 0;
 
         return GestureDetector(
           onTap: () {
@@ -99,84 +97,80 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
                           decoration: BoxDecoration(
-                            color:
-                                state.isExpanded
-                                    ? Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.grey.shade900.withValues(
+                            color: state.isExpanded
+                                ? Theme.brightnessOf(context) == Brightness.dark
+                                      ? Colors.grey.shade900.withValues(
                                           alpha: 0.6,
                                         )
-                                        : Colors.grey.shade200.withValues(
+                                      : Colors.grey.shade200.withValues(
                                           alpha: 0.6,
                                         )
-                                    : themeState.primary,
+                                : themeState.primary,
                             borderRadius: BorderRadius.circular(radius),
                           ),
                         ),
                         // Content
                         Padding(
                           padding: const EdgeInsets.all(5),
-                          child:
-                              (state.showUi && state.isInsideQuranPlayer)
-                                  ? Stack(
-                                    children: [
-                                      if (!state.isExpanded)
-                                        SizedBox(
-                                          height: 50,
-                                          width: 50,
-                                          child: BlocBuilder<
-                                            PlayerStateCubit,
-                                            PlayerState
-                                          >(
-                                            builder:
-                                                (context, state) => Icon(
-                                                  state.isPlaying
-                                                      ? Icons.pause_rounded
-                                                      : Icons
-                                                          .play_arrow_rounded,
-                                                  color: Colors.white,
-                                                  size: 36,
-                                                ),
-                                          ),
-                                        ),
-                                      if (state.isExpanded)
-                                        Stack(
-                                          children: [
-                                            getFullAudioControllerUI(
-                                              l10n,
-                                              isLandscapeViewNeedToShow,
+                          child: (state.showUi && state.isInsideQuranPlayer)
+                              ? Stack(
+                                  children: [
+                                    if (!state.isExpanded)
+                                      SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child:
+                                            BlocBuilder<
+                                              PlayerStateCubit,
+                                              PlayerState
+                                            >(
+                                              builder: (context, state) => Icon(
+                                                state.isPlaying
+                                                    ? Icons.pause_rounded
+                                                    : Icons.play_arrow_rounded,
+                                                color: Colors.white,
+                                                size: 36,
+                                              ),
                                             ),
-                                            Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: SizedBox(
-                                                height: 30,
-                                                width: 30,
-                                                child: IconButton(
-                                                  style: IconButton.styleFrom(
-                                                    padding: EdgeInsets.zero,
-                                                    iconSize: 15,
-                                                  ),
-                                                  onPressed: () {
-                                                    if (state.isExpanded) {
-                                                      context
-                                                          .read<AudioUiCubit>()
-                                                          .expand(false);
-                                                    }
-                                                  },
-                                                  tooltip:
-                                                      l10n.closeAudioController,
-                                                  icon: const Icon(
-                                                    Icons
-                                                        .close_fullscreen_rounded,
-                                                  ),
+                                      ),
+                                    if (state.isExpanded)
+                                      Stack(
+                                        children: [
+                                          getFullAudioControllerUI(
+                                            l10n,
+                                            isLandscapeViewNeedToShow,
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: SizedBox(
+                                              height: 30,
+                                              width: 30,
+                                              child: IconButton(
+                                                style: IconButton.styleFrom(
+                                                  padding: EdgeInsets.zero,
+                                                  iconSize: 15,
+                                                ),
+                                                onPressed: () {
+                                                  if (state.isExpanded) {
+                                                    context
+                                                        .read<AudioUiCubit>()
+                                                        .expand(false);
+                                                  }
+                                                },
+                                                tooltip:
+                                                    l10n.closeAudioController,
+                                                icon: const Icon(
+                                                  Icons
+                                                      .close_fullscreen_rounded,
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                    ],
-                                  )
-                                  : null,
+                                          ),
+                                        ],
+                                      ),
+                                  ],
+                                )
+                              : null,
                         ),
                       ],
                     ),
@@ -193,19 +187,19 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
   Widget getFullAudioControllerUI(AppLocalizations l10n, bool isLandscapeView) {
     return isLandscapeView
         ? Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: playerSliders()),
-            const VerticalDivider(width: 8),
-            Expanded(child: playerControllers(l10n)),
-          ],
-        )
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: playerSliders()),
+              const VerticalDivider(width: 8),
+              Expanded(child: playerControllers(l10n)),
+            ],
+          )
         : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [playerSliders(), playerControllers(l10n), const Gap(5)],
-        );
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [playerSliders(), playerControllers(l10n), const Gap(5)],
+          );
   }
 
   Widget playerSliders() {
@@ -242,48 +236,47 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
 
               return ayahList.length > 1
                   ? Row(
-                    children: [
-                      Text(state.current),
-                      Expanded(
-                        child: SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            padding: const EdgeInsets.only(
-                              top: 3,
-                              bottom: 5,
-                              left: 10,
-                              right: 10,
+                      children: [
+                        Text(state.current),
+                        Expanded(
+                          child: SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              padding: const EdgeInsets.only(
+                                top: 3,
+                                bottom: 5,
+                                left: 10,
+                                right: 10,
+                              ),
+                            ),
+
+                            child: Slider(
+                              value: ayahList.indexOf(state.current).toDouble(),
+                              max: ayahList.length.toDouble() - 1,
+                              min: 0,
+
+                              divisions: ayahList.length - 1,
+                              onChanged: (value) {
+                                String ayahKey = ayahList[value.toInt()];
+                                if ((state.ayahList.length) == 1) {
+                                  AudioPlayerManager.playSingleAyah(
+                                    ayahKey: ayahKey,
+                                    reciterInfoModel: context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                    isInsideQuran: true,
+                                  );
+                                }
+                                AudioPlayerManager.audioPlayer.seek(
+                                  Duration.zero,
+                                  index: value.toInt(),
+                                );
+                              },
                             ),
                           ),
-
-                          child: Slider(
-                            value: ayahList.indexOf(state.current).toDouble(),
-                            max: ayahList.length.toDouble() - 1,
-                            min: 0,
-
-                            divisions: ayahList.length - 1,
-                            onChanged: (value) {
-                              String ayahKey = ayahList[value.toInt()];
-                              if ((state.ayahList.length) == 1) {
-                                AudioPlayerManager.playSingleAyah(
-                                  ayahKey: ayahKey,
-                                  reciterInfoModel:
-                                      context
-                                          .read<SegmentedQuranReciterCubit>()
-                                          .state,
-                                  isInsideQuran: true,
-                                );
-                              }
-                              AudioPlayerManager.audioPlayer.seek(
-                                Duration.zero,
-                                index: value.toInt(),
-                              );
-                            },
-                          ),
                         ),
-                      ),
-                      Text(ayahList.last!),
-                    ],
-                  )
+                        Text(ayahList.last!),
+                      ],
+                    )
                   : const SizedBox();
             }
             {
@@ -326,41 +319,39 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 ),
               ),
               IconButton(
-                onPressed:
-                    int.parse(state?.current.split(":").last ?? "0") > 1
-                        ? () {
-                          if (state?.ayahList.length == 1) {
-                            int? currentSurahNumber = int.tryParse(
-                              state?.current.split(":").first ?? "",
+                onPressed: int.parse(state?.current.split(":").last ?? "0") > 1
+                    ? () {
+                        if (state?.ayahList.length == 1) {
+                          int? currentSurahNumber = int.tryParse(
+                            state?.current.split(":").first ?? "",
+                          );
+                          if (currentSurahNumber == null) return;
+                          List tempAyahList = getListOfAyahKey(
+                            startAyahKey: "$currentSurahNumber:1",
+                            endAyahKey: getEndAyahKeyFromSurahNumber(
+                              currentSurahNumber,
+                            ),
+                          );
+                          tempAyahList.removeWhere(
+                            (element) => element.runtimeType == int,
+                          );
+                          int index = tempAyahList.indexOf(
+                            state?.current ?? "",
+                          );
+                          if (index != -1) {
+                            AudioPlayerManager.playSingleAyah(
+                              ayahKey: tempAyahList[index - 1],
+                              reciterInfoModel: context
+                                  .read<SegmentedQuranReciterCubit>()
+                                  .state,
+                              isInsideQuran: true,
                             );
-                            if (currentSurahNumber == null) return;
-                            List tempAyahList = getListOfAyahKey(
-                              startAyahKey: "$currentSurahNumber:1",
-                              endAyahKey: getEndAyahKeyFromSurahNumber(
-                                currentSurahNumber,
-                              ),
-                            );
-                            tempAyahList.removeWhere(
-                              (element) => element.runtimeType == int,
-                            );
-                            int index = tempAyahList.indexOf(
-                              state?.current ?? "",
-                            );
-                            if (index != -1) {
-                              AudioPlayerManager.playSingleAyah(
-                                ayahKey: tempAyahList[index - 1],
-                                reciterInfoModel:
-                                    context
-                                        .read<SegmentedQuranReciterCubit>()
-                                        .state,
-                                isInsideQuran: true,
-                              );
-                            }
-                          } else {
-                            AudioPlayerManager.audioPlayer.seekToPrevious();
                           }
+                        } else {
+                          AudioPlayerManager.audioPlayer.seekToPrevious();
                         }
-                        : null,
+                      }
+                    : null,
                 tooltip: l10n.previous,
                 style: IconButton.styleFrom(padding: EdgeInsets.zero),
 
@@ -427,44 +418,43 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
               IconButton(
                 onPressed:
                     (ayahList.isNotEmpty &&
-                            int.parse(state?.current.split(":").last ?? "0") <
-                                quranAyahCount[int.parse(
-                                      ayahList.first.split(":").first,
-                                    ) -
-                                    1])
-                        ? () {
-                          if (state?.ayahList.length == 1) {
-                            int? currentSurahNumber = int.tryParse(
-                              state?.current.split(":").first ?? "",
+                        int.parse(state?.current.split(":").last ?? "0") <
+                            quranAyahCount[int.parse(
+                                  ayahList.first.split(":").first,
+                                ) -
+                                1])
+                    ? () {
+                        if (state?.ayahList.length == 1) {
+                          int? currentSurahNumber = int.tryParse(
+                            state?.current.split(":").first ?? "",
+                          );
+                          if (currentSurahNumber == null) return;
+                          List tempAyahList = getListOfAyahKey(
+                            startAyahKey: "$currentSurahNumber:1",
+                            endAyahKey: getEndAyahKeyFromSurahNumber(
+                              currentSurahNumber,
+                            ),
+                          );
+                          tempAyahList.removeWhere(
+                            (element) => element.runtimeType == int,
+                          );
+                          int index = tempAyahList.indexOf(
+                            state?.current ?? "",
+                          );
+                          if (index != -1) {
+                            AudioPlayerManager.playSingleAyah(
+                              ayahKey: tempAyahList[index + 1],
+                              reciterInfoModel: context
+                                  .read<SegmentedQuranReciterCubit>()
+                                  .state,
+                              isInsideQuran: true,
                             );
-                            if (currentSurahNumber == null) return;
-                            List tempAyahList = getListOfAyahKey(
-                              startAyahKey: "$currentSurahNumber:1",
-                              endAyahKey: getEndAyahKeyFromSurahNumber(
-                                currentSurahNumber,
-                              ),
-                            );
-                            tempAyahList.removeWhere(
-                              (element) => element.runtimeType == int,
-                            );
-                            int index = tempAyahList.indexOf(
-                              state?.current ?? "",
-                            );
-                            if (index != -1) {
-                              AudioPlayerManager.playSingleAyah(
-                                ayahKey: tempAyahList[index + 1],
-                                reciterInfoModel:
-                                    context
-                                        .read<SegmentedQuranReciterCubit>()
-                                        .state,
-                                isInsideQuran: true,
-                              );
-                            }
-                          } else {
-                            AudioPlayerManager.audioPlayer.seekToNext();
                           }
+                        } else {
+                          AudioPlayerManager.audioPlayer.seekToNext();
                         }
-                        : null,
+                      }
+                    : null,
                 tooltip: l10n.playNextAyah,
                 style: IconButton.styleFrom(padding: EdgeInsets.zero),
                 icon: const Icon(Icons.skip_next_rounded),
@@ -521,8 +511,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     AudioPlayerManager.playMultipleAyahAsPlaylist(
                       startAyahKey: startAyahKey,
                       endAyahKey: endAyahKey,
-                      reciterInfoModel:
-                          context.read<SegmentedQuranReciterCubit>().state,
+                      reciterInfoModel: context
+                          .read<SegmentedQuranReciterCubit>()
+                          .state,
                       initialIndex: currentAyahNumber - 1,
                       instantPlay: AudioPlayerManager.audioPlayer.playing,
                       isInsideQuran: true,

@@ -79,9 +79,10 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
   Widget build(BuildContext context) {
     AppLocalizations l10n = AppLocalizations.of(context);
     late final themeState = context.read<ThemeCubit>().state;
-    Brightness brightness = Theme.of(context).brightness;
-    Color textColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
+    Brightness brightness = Theme.brightnessOf(context);
+    Color textColor = brightness == Brightness.light
+        ? Colors.black
+        : Colors.white;
 
     List<SurahInfoModel> filteredSurah = getFilteredSurah(
       context,
@@ -153,16 +154,15 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
           }
           index = index - 3;
           return BlocBuilder<AudioDownloadCubit, AudioDownloadState>(
-            builder:
-                (context, state) => getSurahWidget(
-                  context,
-                  index,
-                  l10n,
-                  filteredSurah,
-                  textColor,
-                  state,
-                  themeState,
-                ),
+            builder: (context, state) => getSurahWidget(
+              context,
+              index,
+              l10n,
+              filteredSurah,
+              textColor,
+              state,
+              themeState,
+            ),
           );
         },
       ),
@@ -200,116 +200,109 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
             height: 40,
             width: 40,
           ),
-          trailing:
-              isAllDownloaded
-                  ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.check_circle, color: themeState.primary),
-                      IconButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text(l10n.areYouSure),
-                                actions: [
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.green,
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text(l10n.cancel),
+          trailing: isAllDownloaded
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(Icons.check_circle, color: themeState.primary),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(l10n.areYouSure),
+                              actions: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: Colors.green,
                                   ),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.red,
-                                    ),
-                                    onPressed: () async {
-                                      String? path =
-                                          AudioPlayerManager.getExpectedSurahDirectoryLocation(
-                                            surahInfoModel:
-                                                filteredSurah[index],
-                                            reciterInfoModel:
-                                                context
-                                                    .read<
-                                                      AudioTabReciterCubit
-                                                    >()
-                                                    .state,
-                                          );
-                                      if (path == null) return;
-                                      final files = Directory(path).listSync();
-                                      for (final e in files) {
-                                        await e.delete();
-                                      }
-                                      Navigator.pop(context);
-                                      setState(() {});
-                                    },
-                                    child: Text(l10n.delete),
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(l10n.cancel),
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: Colors.red,
                                   ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        icon: const Icon(
-                          FluentIcons.delete_24_filled,
-                          color: Colors.red,
-                        ),
+                                  onPressed: () async {
+                                    String? path =
+                                        AudioPlayerManager.getExpectedSurahDirectoryLocation(
+                                          surahInfoModel: filteredSurah[index],
+                                          reciterInfoModel: context
+                                              .read<AudioTabReciterCubit>()
+                                              .state,
+                                        );
+                                    if (path == null) return;
+                                    final files = Directory(path).listSync();
+                                    for (final e in files) {
+                                      await e.delete();
+                                    }
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: Text(l10n.delete),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        FluentIcons.delete_24_filled,
+                        color: Colors.red,
                       ),
-                    ],
-                  )
-                  : (state.isDownloading &&
-                      state.surahNumber == filteredSurah[index].id)
-                  ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 3.0,
-                          value: state.progress,
-                          color: themeState.primary,
-                          backgroundColor: themeState.primaryShade100,
-                        ),
-                      ),
-                      IconButton(
-                        style: IconButton.styleFrom(
-                          backgroundColor: themeState.primaryShade100,
-                          foregroundColor: Colors.red,
-                        ),
-                        onPressed: () {
-                          AudioPlayerManager.cancelDownload();
-                          context
-                              .read<AudioDownloadCubit>()
-                              .updateIsDownloading(false);
-                          context.read<AudioDownloadCubit>().updateProgress(
-                            0.0,
-                          );
-                          context
-                              .read<AudioDownloadCubit>()
-                              .updateDownloadingSurahNumber(0);
-                        },
-                        icon: const Icon(Icons.cancel_outlined),
-                      ),
-                    ],
-                  )
-                  : IconButton(
-                    style: IconButton.styleFrom(
-                      backgroundColor: themeState.primaryShade100,
                     ),
-                    onPressed: () async {
-                      await onDownloadButtonPressed(
-                        context,
-                        l10n,
-                        filteredSurah[index],
-                      );
-                    },
-                    icon: const Icon(FluentIcons.arrow_download_24_filled),
+                  ],
+                )
+              : (state.isDownloading &&
+                    state.surahNumber == filteredSurah[index].id)
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        value: state.progress,
+                        color: themeState.primary,
+                        backgroundColor: themeState.primaryShade100,
+                      ),
+                    ),
+                    IconButton(
+                      style: IconButton.styleFrom(
+                        backgroundColor: themeState.primaryShade100,
+                        foregroundColor: Colors.red,
+                      ),
+                      onPressed: () {
+                        AudioPlayerManager.cancelDownload();
+                        context.read<AudioDownloadCubit>().updateIsDownloading(
+                          false,
+                        );
+                        context.read<AudioDownloadCubit>().updateProgress(0.0);
+                        context
+                            .read<AudioDownloadCubit>()
+                            .updateDownloadingSurahNumber(0);
+                      },
+                      icon: const Icon(Icons.cancel_outlined),
+                    ),
+                  ],
+                )
+              : IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: themeState.primaryShade100,
                   ),
+                  onPressed: () async {
+                    await onDownloadButtonPressed(
+                      context,
+                      l10n,
+                      filteredSurah[index],
+                    );
+                  },
+                  icon: const Icon(FluentIcons.arrow_download_24_filled),
+                ),
         );
       },
     );

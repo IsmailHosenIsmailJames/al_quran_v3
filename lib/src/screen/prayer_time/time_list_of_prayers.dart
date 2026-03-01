@@ -39,7 +39,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme.brightnessOf(context) == Brightness.dark;
     final themeState = context.read<ThemeCubit>().state;
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context);

@@ -350,75 +350,69 @@ class _HomePageState extends State<HomePage> {
       extendBody: true,
       extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
-      appBar:
-          isSideNav
-              ? null
-              : AppBar(
-                flexibleSpace: ClipRRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: themeState.mutedGray),
-                        ),
+      appBar: isSideNav
+          ? null
+          : AppBar(
+              flexibleSpace: ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: themeState.mutedGray),
                       ),
                     ),
                   ),
                 ),
-                leading: Builder(
-                  builder: (context) {
-                    return appBarLeading(l10n, context);
-                  },
-                ),
-
-                title: Text(l10n.alQuran),
-                centerTitle: true,
-                //   actions: [
-                //     IconButton(
-                //       icon: const Icon(FluentIcons.search_24_filled),
-                //       onPressed: () {
-                //         Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => const SearchScreen(),
-                //           ),
-                //         );
-                //       },
-                //     ),
-                //   ],
               ),
+              leading: Builder(
+                builder: (context) {
+                  return appBarLeading(l10n, context);
+                },
+              ),
+
+              title: Text(l10n.alQuran),
+              centerTitle: true,
+              //   actions: [
+              //     IconButton(
+              //       icon: const Icon(FluentIcons.search_24_filled),
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => const SearchScreen(),
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   ],
+            ),
       body: Row(
         children: [
           if (isSideNav)
             SafeArea(
-              child:
-                  isMobileHeight
-                      ? Row(
-                        children: [
-                          drawerInSidebar(
+              child: isMobileHeight
+                  ? Row(
+                      children: [
+                        drawerInSidebar(themeState, isJustDrawerIcon, context),
+                        SizedBox(
+                          width: 65,
+                          child: navsInSidebar(themeState, isJustDrawerIcon),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Expanded(
+                          child: drawerInSidebar(
                             themeState,
                             isJustDrawerIcon,
                             context,
                           ),
-                          SizedBox(
-                            width: 65,
-                            child: navsInSidebar(themeState, isJustDrawerIcon),
-                          ),
-                        ],
-                      )
-                      : Column(
-                        children: [
-                          Expanded(
-                            child: drawerInSidebar(
-                              themeState,
-                              isJustDrawerIcon,
-                              context,
-                            ),
-                          ),
-                          navsInSidebar(themeState, isJustDrawerIcon),
-                        ],
-                      ),
+                        ),
+                        navsInSidebar(themeState, isJustDrawerIcon),
+                      ],
+                    ),
             ),
           if (isSideNav) const VerticalDivider(),
           Expanded(
@@ -502,10 +496,12 @@ class _HomePageState extends State<HomePage> {
       child: ElevatedButton(
         style: IconButton.styleFrom(
           padding: EdgeInsets.zero,
-          foregroundColor:
-              state.tabIndex == index ? Colors.white : themeState.primary,
-          backgroundColor:
-              state.tabIndex == index ? themeState.primary : Colors.transparent,
+          foregroundColor: state.tabIndex == index
+              ? Colors.white
+              : themeState.primary,
+          backgroundColor: state.tabIndex == index
+              ? themeState.primary
+              : Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(roundedRadius),
             side: BorderSide(color: themeState.primary),
@@ -513,15 +509,17 @@ class _HomePageState extends State<HomePage> {
           shadowColor: Colors.transparent,
         ),
         child: Row(
-          mainAxisAlignment:
-              isJustIcon ? MainAxisAlignment.center : MainAxisAlignment.start,
+          mainAxisAlignment: isJustIcon
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
           children: [
             if (!isJustIcon) const Gap(10),
             if (!isJustIcon) const Gap(10),
             Icon(
               state.tabIndex == index ? selectedIcon : unSelectedIcon,
-              color:
-                  state.tabIndex == index ? Colors.white : themeState.primary,
+              color: state.tabIndex == index
+                  ? Colors.white
+                  : themeState.primary,
             ),
             if (!isJustIcon) const Gap(10),
             if (!isJustIcon) Text(title),
@@ -544,7 +542,7 @@ class _HomePageState extends State<HomePage> {
       icon: SvgPicture.string(
         """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
         colorFilter: ColorFilter.mode(
-          Theme.of(context).brightness == Brightness.dark
+          Theme.brightnessOf(context) == Brightness.dark
               ? Colors.grey.shade100
               : Colors.grey.shade800,
           BlendMode.srcIn,
@@ -568,10 +566,9 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
-                color:
-                    Theme.of(context).brightness == Brightness.dark
-                        ? Colors.grey.shade900
-                        : Colors.grey.shade400,
+                color: Theme.brightnessOf(context) == Brightness.dark
+                    ? Colors.grey.shade900
+                    : Colors.grey.shade400,
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -593,20 +590,16 @@ class _HomePageState extends State<HomePage> {
                               : FluentIcons.book_24_regular,
                         ),
                         style: IconButton.styleFrom(
-                          foregroundColor:
-                              state.tabIndex == 0
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.grey,
-                          backgroundColor:
-                              state.tabIndex == 0
-                                  ? themeState.primaryShade200
-                                  : null,
+                          foregroundColor: state.tabIndex == 0
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey,
+                          backgroundColor: state.tabIndex == 0
+                              ? themeState.primaryShade200
+                              : null,
                         ),
                         tooltip: "Quran",
-                        onPressed:
-                            () => context
-                                .read<OthersSettingsCubit>()
-                                .setTabIndex(0),
+                        onPressed: () =>
+                            context.read<OthersSettingsCubit>().setTabIndex(0),
                       ),
                       if (platformOwn == platform_services.PlatformOwn.isIos ||
                           platformOwn ==
@@ -620,20 +613,16 @@ class _HomePageState extends State<HomePage> {
                               : FluentIcons.clock_24_regular,
                         ),
                         style: IconButton.styleFrom(
-                          foregroundColor:
-                              state.tabIndex == 1
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.grey,
-                          backgroundColor:
-                              state.tabIndex == 1
-                                  ? themeState.primaryShade200
-                                  : null,
+                          foregroundColor: state.tabIndex == 1
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey,
+                          backgroundColor: state.tabIndex == 1
+                              ? themeState.primaryShade200
+                              : null,
                         ),
                         tooltip: "Prayer Time",
-                        onPressed:
-                            () => context
-                                .read<OthersSettingsCubit>()
-                                .setTabIndex(1),
+                        onPressed: () =>
+                            context.read<OthersSettingsCubit>().setTabIndex(1),
                       ),
                       if (platformOwn == platform_services.PlatformOwn.isIos ||
                           platformOwn ==
@@ -649,20 +638,17 @@ class _HomePageState extends State<HomePage> {
                                 : FluentIcons.compass_northwest_24_regular,
                           ),
                           style: IconButton.styleFrom(
-                            foregroundColor:
-                                state.tabIndex == 2
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.grey,
-                            backgroundColor:
-                                state.tabIndex == 2
-                                    ? themeState.primaryShade200
-                                    : null,
+                            foregroundColor: state.tabIndex == 2
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.grey,
+                            backgroundColor: state.tabIndex == 2
+                                ? themeState.primaryShade200
+                                : null,
                           ),
                           tooltip: "Qibla Direction",
-                          onPressed:
-                              () => context
-                                  .read<OthersSettingsCubit>()
-                                  .setTabIndex(2),
+                          onPressed: () => context
+                              .read<OthersSettingsCubit>()
+                              .setTabIndex(2),
                         ),
                       IconButton(
                         icon: Icon(
@@ -671,20 +657,16 @@ class _HomePageState extends State<HomePage> {
                               : Icons.audiotrack_outlined,
                         ),
                         style: IconButton.styleFrom(
-                          foregroundColor:
-                              state.tabIndex == 3
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.grey,
-                          backgroundColor:
-                              state.tabIndex == 3
-                                  ? themeState.primaryShade200
-                                  : null,
+                          foregroundColor: state.tabIndex == 3
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey,
+                          backgroundColor: state.tabIndex == 3
+                              ? themeState.primaryShade200
+                              : null,
                         ),
                         tooltip: "Audio",
-                        onPressed:
-                            () => context
-                                .read<OthersSettingsCubit>()
-                                .setTabIndex(3),
+                        onPressed: () =>
+                            context.read<OthersSettingsCubit>().setTabIndex(3),
                       ),
                       IconButton(
                         icon: Icon(
@@ -693,20 +675,16 @@ class _HomePageState extends State<HomePage> {
                               : Icons.settings_outlined,
                         ),
                         style: IconButton.styleFrom(
-                          foregroundColor:
-                              state.tabIndex == 4
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.grey,
-                          backgroundColor:
-                              state.tabIndex == 4
-                                  ? themeState.primaryShade200
-                                  : null,
+                          foregroundColor: state.tabIndex == 4
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey,
+                          backgroundColor: state.tabIndex == 4
+                              ? themeState.primaryShade200
+                              : null,
                         ),
                         tooltip: "Settings",
-                        onPressed:
-                            () => context
-                                .read<OthersSettingsCubit>()
-                                .setTabIndex(4),
+                        onPressed: () =>
+                            context.read<OthersSettingsCubit>().setTabIndex(4),
                       ),
                     ],
                   );
@@ -733,8 +711,9 @@ class _HomePageState extends State<HomePage> {
             filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
             child: Container(
               decoration: BoxDecoration(
-                color:
-                    Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+                color: Theme.of(
+                  context,
+                ).bottomNavigationBarTheme.backgroundColor,
                 border: Border(top: BorderSide(color: themeState.mutedGray)),
               ),
               child: BottomNavigationBar(

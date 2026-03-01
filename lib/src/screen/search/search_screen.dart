@@ -108,7 +108,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     ThemeState themeState = context.read<ThemeCubit>().state;
-//     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+//     bool isDarkMode = Theme.brightnessOf(context) == Brightness.dark;
 
 //     return Scaffold(
 //       body: Stack(
