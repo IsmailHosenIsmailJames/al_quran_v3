@@ -23,6 +23,7 @@ import "package:screenshot/screenshot.dart";
 // import "../../../widget/preview_quran_script/ayah_preview_widget.dart";
 import "../../settings/cubit/quran_script_view_cubit.dart";
 import "../../settings/cubit/quran_script_view_state.dart";
+import "downloaded_translations_settings.dart";
 
 class QuranScriptSettings extends StatelessWidget {
   final bool asPage;
@@ -194,6 +195,8 @@ class QuranScriptSettings extends StatelessWidget {
                 cubit.setViewOptions(hideTranslation: !value);
               },
             ),
+            if (!quranViewState.hideTranslation)
+              const DownloadedTranslationsSettings(),
             SwitchListTile(
               thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
                 Set<WidgetState> states,
