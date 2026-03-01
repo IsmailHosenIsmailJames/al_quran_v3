@@ -79,19 +79,17 @@ class _CollectionPageState extends State<CollectionPage> {
     final query = _searchTextFieldController.text.toLowerCase();
     setState(() {
       if (widget.collectionType == CollectionType.notes) {
-        _filteredNoteCollection =
-            _listOfNoteCollection
-                .where(
-                  (collection) => collection.name.toLowerCase().contains(query),
-                )
-                .toList();
+        _filteredNoteCollection = _listOfNoteCollection
+            .where(
+              (collection) => collection.name.toLowerCase().contains(query),
+            )
+            .toList();
       } else {
-        _filteredPinnedCollection =
-            _listOfPinnedCollection
-                .where(
-                  (collection) => collection.name.toLowerCase().contains(query),
-                )
-                .toList();
+        _filteredPinnedCollection = _listOfPinnedCollection
+            .where(
+              (collection) => collection.name.toLowerCase().contains(query),
+            )
+            .toList();
       }
     });
   }
@@ -128,8 +126,9 @@ class _CollectionPageState extends State<CollectionPage> {
             height: 45,
             child: IconButton(
               style: IconButton.styleFrom(
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerHighest,
+                backgroundColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                 ),
@@ -185,13 +184,12 @@ class _CollectionPageState extends State<CollectionPage> {
                                     current.name == sortMethod
                                         ? Icons.radio_button_on
                                         : Icons.radio_button_off,
-                                    color:
-                                        current.name == sortMethod
-                                            ? context
-                                                .read<ThemeCubit>()
-                                                .state
-                                                .primary
-                                            : null,
+                                    color: current.name == sortMethod
+                                        ? context
+                                              .read<ThemeCubit>()
+                                              .state
+                                              .primary
+                                        : null,
                                   ),
                                   title: Text(current.toReadableString(l10n)),
                                 );
@@ -252,16 +250,14 @@ class _CollectionPageState extends State<CollectionPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    Color svgColor =
-        Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade100
-            : Colors.grey.shade900;
+    Color svgColor = Theme.brightnessOf(context) == Brightness.dark
+        ? Colors.grey.shade100
+        : Colors.grey.shade900;
 
     final bool isNotes = widget.collectionType == CollectionType.notes;
-    final bool hasItems =
-        isNotes
-            ? _filteredNoteCollection.isNotEmpty
-            : _filteredPinnedCollection.isNotEmpty;
+    final bool hasItems = isNotes
+        ? _filteredNoteCollection.isNotEmpty
+        : _filteredPinnedCollection.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -283,47 +279,47 @@ class _CollectionPageState extends State<CollectionPage> {
         children: [
           _buildSearchAndFilterBar(svgColor, l10n),
           Expanded(
-            child:
-                _isLoading
-                    ? Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor:
-                            context.read<ThemeCubit>().state.primaryShade100,
+            child: _isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: context
+                          .read<ThemeCubit>()
+                          .state
+                          .primaryShade100,
+                    ),
+                  )
+                : _errorMessage != null
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        _errorMessage!,
+                        style: TextStyle(color: Colors.red.shade700),
                       ),
-                    )
-                    : _errorMessage != null
-                    ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          _errorMessage!,
-                          style: TextStyle(color: Colors.red.shade700),
-                        ),
-                      ),
-                    )
-                    : hasItems
-                    ? ListView.builder(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 4.0,
-                      ),
-                      itemCount:
-                          isNotes
-                              ? _filteredNoteCollection.length
-                              : _filteredPinnedCollection.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return isNotes
-                            ? _getNoteCollectionWidget(
+                    ),
+                  )
+                : hasItems
+                ? ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 4.0,
+                    ),
+                    itemCount: isNotes
+                        ? _filteredNoteCollection.length
+                        : _filteredPinnedCollection.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return isNotes
+                          ? _getNoteCollectionWidget(
                               _filteredNoteCollection[index],
                               l10n,
                             )
-                            : _getPinnedCollectionWidget(
+                          : _getPinnedCollectionWidget(
                               _filteredPinnedCollection[index],
                               l10n,
                             );
-                      },
-                    )
-                    : _buildEmptyState(svgColor, l10n),
+                    },
+                  )
+                : _buildEmptyState(svgColor, l10n),
           ),
         ],
       ),
@@ -388,8 +384,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                       );
                                       return;
                                     }
-                                    pinnedCollectionModel.name =
-                                        nameController.text.trim();
+                                    pinnedCollectionModel.name = nameController
+                                        .text
+                                        .trim();
 
                                     await savePinnedCollectionModelAsMap(
                                       pinnedCollectionModel,
@@ -471,10 +468,9 @@ class _CollectionPageState extends State<CollectionPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder:
-                  (context) => CollectionContentView(
-                    pinnedCollectionModel: pinnedCollectionModel,
-                  ),
+              builder: (context) => CollectionContentView(
+                pinnedCollectionModel: pinnedCollectionModel,
+              ),
             ),
           );
         },
@@ -539,8 +535,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                       );
                                       return;
                                     }
-                                    noteCollectionModel.name =
-                                        nameController.text.trim();
+                                    noteCollectionModel.name = nameController
+                                        .text
+                                        .trim();
 
                                     await saveNoteCollectionModelAsMap(
                                       noteCollectionModel,
@@ -621,10 +618,9 @@ class _CollectionPageState extends State<CollectionPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder:
-                  (context) => CollectionContentView(
-                    noteCollectionModel: noteCollectionModel,
-                  ),
+              builder: (context) => CollectionContentView(
+                noteCollectionModel: noteCollectionModel,
+              ),
             ),
           );
         },

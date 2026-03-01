@@ -60,20 +60,18 @@ Widget getAyahByAyahCard({
 
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  List<TranslationBookModel?> translationBookInfoList =
-      translationListWithInfo
-          .map<TranslationBookModel?>((e) => e.bookInfo)
-          .toList();
-  List<String> translationList =
-      translationListWithInfo
-          .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
-          .toList();
-  translationList =
-      translationList.map((e) => e.replaceAll(">", "> ")).toList();
-  List<Map> footNoteList =
-      translationListWithInfo
-          .map<Map>((e) => e.translation?["f"] ?? {})
-          .toList();
+  List<TranslationBookModel?> translationBookInfoList = translationListWithInfo
+      .map<TranslationBookModel?>((e) => e.bookInfo)
+      .toList();
+  List<String> translationList = translationListWithInfo
+      .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
+      .toList();
+  translationList = translationList
+      .map((e) => e.replaceAll(">", "> "))
+      .toList();
+  List<Map> footNoteList = translationListWithInfo
+      .map<Map>((e) => e.translation?["f"] ?? {})
+      .toList();
   List<Map<int, String>> footNoteAsStringMap = [];
   for (int index = 0; index < footNoteList.length; index++) {
     Map footNote = footNoteList[index];
@@ -146,22 +144,20 @@ Widget getAyahByAyahCard({
                   width: MediaQuery.of(context).size.width,
                   key: key,
                   padding: const EdgeInsets.all(5),
-                  margin:
-                      keepMargin
-                          ? const EdgeInsets.only(
-                            left: 5,
-                            top: 5,
-                            bottom: 5,
-                            right: 5,
-                          )
-                          : null,
+                  margin: keepMargin
+                      ? const EdgeInsets.only(
+                          left: 5,
+                          top: 5,
+                          bottom: 5,
+                          right: 5,
+                        )
+                      : null,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(roundedRadius),
                     border: Border.all(
-                      color:
-                          ayahToHighlightState == ayahKey
-                              ? themeState.primary
-                              : themeState.primaryShade200,
+                      color: ayahToHighlightState == ayahKey
+                          ? themeState.primary
+                          : themeState.primaryShade200,
                     ),
                   ),
                   child: Column(
@@ -209,10 +205,10 @@ Widget getAyahByAyahCard({
                                   "assets/img/sajadah.png",
                                 ),
                                 color:
-                                    Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? Colors.grey.shade900
-                                        : Colors.white,
+                                    Theme.brightnessOf(context) ==
+                                        Brightness.light
+                                    ? Colors.grey.shade900
+                                    : Colors.white,
                                 colorBlendMode: BlendMode.srcIn,
                               ),
                               const Gap(10),
@@ -313,8 +309,10 @@ Align getWordByWordWidget(
           builder: (context, ayahScrollState) {
             return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
               buildWhen: (previous, current) {
-                String? currentAyahKey =
-                    context.read<AyahKeyCubit>().state.current;
+                String? currentAyahKey = context
+                    .read<AyahKeyCubit>()
+                    .state
+                    .current;
                 if (currentAyahKey == ayahKey) {
                   if (segments != null) {
                     for (List word in segments) {
@@ -376,81 +374,80 @@ SizedBox getAyahWordByWord(
   return SizedBox(
     height:
         (ayahScrollState.expandedForWordByWord?.contains(ayahKey) == true ||
-                quranViewState.alwaysOpenWordByWord)
-            ? null
-            : 0,
+            quranViewState.alwaysOpenWordByWord)
+        ? null
+        : 0,
 
     child:
         (ayahScrollState.expandedForWordByWord?.contains(ayahKey) == true ||
-                quranViewState.alwaysOpenWordByWord)
-            ? Wrap(
-              spacing: 5,
-              runSpacing: 5,
-              textDirection: TextDirection.rtl,
-              children: List.generate(wordByWord.length, (index) {
-                String currentWordKey = "$surahNumber:$ayahNumber:${index + 1}";
+            quranViewState.alwaysOpenWordByWord)
+        ? Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            textDirection: TextDirection.rtl,
+            children: List.generate(wordByWord.length, (index) {
+              String currentWordKey = "$surahNumber:$ayahNumber:${index + 1}";
 
-                return InkWell(
-                  borderRadius: BorderRadius.circular(roundedRadius),
-                  onTap: () async {
-                    List<String> wordsKey = List.generate(
-                      wordByWord.length,
-                      (i) => "$surahNumber:$ayahNumber:${i + 1}",
-                    );
-                    showPopupWordFunction(
-                      context: context,
-                      wordKeys: wordsKey,
-                      initWordIndex: index,
-                      wordByWordList:
-                          await WordByWordFunction.getAyahWordByWordData(
-                            "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                          ) ??
-                          [],
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      color: themeState.primary.withValues(alpha: 0.05),
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                      border:
-                          highlightingWordIndex == currentWordKey
-                              ? Border.all(color: themeState.primary, width: 2)
-                              : null,
-                    ),
-                    child: Column(
-                      children: [
-                        BlocBuilder<QuranViewCubit, QuranViewState>(
-                          builder: (context, quranViewState) {
-                            return ScriptProcessor(
-                              scriptInfo: ScriptInfo(
-                                surahNumber: surahNumber,
-                                ayahNumber: ayahNumber,
-                                quranScriptType: quranViewState.quranScriptType,
-                                wordIndex: index,
-                                textStyle: TextStyle(
-                                  fontSize: quranViewState.fontSize,
-                                  height: quranViewState.lineHeight,
-                                ),
-                              ),
-                              themeState: themeState,
-                            );
-                          },
-                        ),
-                        const Gap(5),
-                        Text(
-                          wordByWord[index],
-                          style: TextStyle(
-                            fontSize: quranViewState.translationFontSize,
-                          ),
-                        ),
-                      ],
-                    ),
+              return InkWell(
+                borderRadius: BorderRadius.circular(roundedRadius),
+                onTap: () async {
+                  List<String> wordsKey = List.generate(
+                    wordByWord.length,
+                    (i) => "$surahNumber:$ayahNumber:${i + 1}",
+                  );
+                  showPopupWordFunction(
+                    context: context,
+                    wordKeys: wordsKey,
+                    initWordIndex: index,
+                    wordByWordList:
+                        await WordByWordFunction.getAyahWordByWordData(
+                          "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                        ) ??
+                        [],
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    color: themeState.primary.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                    border: highlightingWordIndex == currentWordKey
+                        ? Border.all(color: themeState.primary, width: 2)
+                        : null,
                   ),
-                );
-              }),
-            )
-            : null,
+                  child: Column(
+                    children: [
+                      BlocBuilder<QuranViewCubit, QuranViewState>(
+                        builder: (context, quranViewState) {
+                          return ScriptProcessor(
+                            scriptInfo: ScriptInfo(
+                              surahNumber: surahNumber,
+                              ayahNumber: ayahNumber,
+                              quranScriptType: quranViewState.quranScriptType,
+                              wordIndex: index,
+                              textStyle: TextStyle(
+                                fontSize: quranViewState.fontSize,
+                                height: quranViewState.lineHeight,
+                              ),
+                            ),
+                            themeState: themeState,
+                          );
+                        },
+                      ),
+                      const Gap(5),
+                      Text(
+                        wordByWord[index],
+                        style: TextStyle(
+                          fontSize: quranViewState.translationFontSize,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          )
+        : null,
   );
 }
 
@@ -494,15 +491,13 @@ GestureDetector getWordByWordExpandCloseWidget(
           ),
 
           BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
-            builder:
-                (context, quranViewState) => Icon(
-                  quranViewState.expandedForWordByWord?.contains(ayahKey) ==
-                          true
-                      ? Icons.arrow_drop_up
-                      : Icons.arrow_right,
-                  size: 24,
-                  color: Colors.grey.shade500,
-                ),
+            builder: (context, quranViewState) => Icon(
+              quranViewState.expandedForWordByWord?.contains(ayahKey) == true
+                  ? Icons.arrow_drop_up
+                  : Icons.arrow_right,
+              size: 24,
+              color: Colors.grey.shade500,
+            ),
           ),
         ],
       ),
@@ -860,21 +855,19 @@ IconButton getPlayButtonWidget(
         }
       }
     },
-    icon:
-        (isCurrent && playerState.state == just_audio.ProcessingState.loading)
-            ? Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: CircularProgressIndicator(
-                strokeWidth: 3,
-                backgroundColor:
-                    context.read<ThemeCubit>().state.primaryShade100,
-              ),
-            )
-            : Icon(
-              isPlaying && isCurrent
-                  ? Icons.pause_rounded
-                  : Icons.play_arrow_rounded,
-              size: 18,
+    icon: (isCurrent && playerState.state == just_audio.ProcessingState.loading)
+        ? Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: CircularProgressIndicator(
+              strokeWidth: 3,
+              backgroundColor: context.read<ThemeCubit>().state.primaryShade100,
             ),
+          )
+        : Icon(
+            isPlaying && isCurrent
+                ? Icons.pause_rounded
+                : Icons.play_arrow_rounded,
+            size: 18,
+          ),
   );
 }

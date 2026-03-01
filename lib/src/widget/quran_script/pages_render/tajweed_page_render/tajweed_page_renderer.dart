@@ -32,7 +32,7 @@ class TajweedPageRenderer extends StatelessWidget {
 
     String? highlightingWord;
 
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    bool isDark = Theme.brightnessOf(context) == Brightness.dark;
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -57,8 +57,10 @@ class TajweedPageRenderer extends StatelessWidget {
                   false) {
                 return false;
               }
-              String? currentAyahKey =
-                  context.read<AyahKeyCubit>().state.current;
+              String? currentAyahKey = context
+                  .read<AyahKeyCubit>()
+                  .state
+                  .current;
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -85,52 +87,48 @@ class TajweedPageRenderer extends StatelessWidget {
               return false;
             },
             builder: (context, positionState) {
-              final highlightingAyahKey =
-                  context.read<AyahKeyCubit>().state.current;
+              final highlightingAyahKey = context
+                  .read<AyahKeyCubit>()
+                  .state
+                  .current;
               return Text.rich(
                 TextSpan(
-                  children:
-                      ayahsKey.map((ayahKey) {
-                        List words = QuranScriptFunction.getWordListOfAyah(
-                          QuranScriptType.tajweed,
-                          ayahKey.split(":").first,
-                          ayahKey.split(":").last,
-                        );
-                        return TextSpan(
-                          style: TextStyle(
+                  children: ayahsKey.map((ayahKey) {
+                    List words = QuranScriptFunction.getWordListOfAyah(
+                      QuranScriptType.tajweed,
+                      ayahKey.split(":").first,
+                      ayahKey.split(":").last,
+                    );
+                    return TextSpan(
+                      style: TextStyle(
+                        backgroundColor: highlightingAyahKey == ayahKey
+                            ? isDark
+                                  ? Colors.white.withValues(alpha: 0.08)
+                                  : Colors.black.withValues(alpha: 0.08)
+                            : null,
+                      ),
+                      children: List.generate(words.length, (index) {
+                        return parseTajweedWord(
+                          wordIndex: index,
+                          baseStyle: TextStyle(
+                            fontSize: baseTextStyle?.fontSize ?? 24,
+                            fontFamily: baseTextStyle?.fontFamily ?? "QPC_Hafs",
+                            height: baseTextStyle?.height,
                             backgroundColor:
-                                highlightingAyahKey == ayahKey
-                                    ? isDark
-                                        ? Colors.white.withValues(alpha: 0.08)
-                                        : Colors.black.withValues(alpha: 0.08)
-                                    : null,
+                                (highlightingWord == "$ayahKey:${index + 1}" &&
+                                    enableWordByWordHighlight == true)
+                                ? themeState.primaryShade300
+                                : null,
                           ),
-                          children:
-                              List.generate(words.length, (index) {
-                                return parseTajweedWord(
-                                  wordIndex: index,
-                                  baseStyle: TextStyle(
-                                    fontSize: baseTextStyle?.fontSize ?? 24,
-                                    fontFamily:
-                                        baseTextStyle?.fontFamily ?? "QPC_Hafs",
-                                    height: baseTextStyle?.height,
-                                    backgroundColor:
-                                        (highlightingWord ==
-                                                    "$ayahKey:${index + 1}" &&
-                                                enableWordByWordHighlight ==
-                                                    true)
-                                            ? themeState.primaryShade300
-                                            : null,
-                                  ),
-                                  surahNumber: ayahKey.split(":").first.toInt(),
-                                  ayahNumber: ayahKey.split(":").last.toInt(),
-                                  skipWordTap: false,
-                                  words: List<String>.from(words),
-                                  context: context,
-                                );
-                              }).toList(),
+                          surahNumber: ayahKey.split(":").first.toInt(),
+                          ayahNumber: ayahKey.split(":").last.toInt(),
+                          skipWordTap: false,
+                          words: List<String>.from(words),
+                          context: context,
                         );
                       }).toList(),
+                    );
+                  }).toList(),
                 ),
                 style: TextStyle(
                   fontSize: baseTextStyle?.fontSize ?? 24,

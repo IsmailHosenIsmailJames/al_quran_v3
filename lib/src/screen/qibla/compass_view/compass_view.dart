@@ -24,10 +24,9 @@ class CompassView extends CustomPainter {
     Offset center = Offset(size.height / 2, size.width / 2);
     canvas.translate(center.dx, center.dy);
     Paint degreeAnglePaint = Paint();
-    Color grayColor =
-        Theme.of(context).brightness != Brightness.light
-            ? Colors.grey.shade500
-            : Colors.grey.shade700;
+    Color grayColor = Theme.brightnessOf(context) != Brightness.light
+        ? Colors.grey.shade500
+        : Colors.grey.shade700;
     canvas.drawCircle(
       const Offset(0, 0),
       25,

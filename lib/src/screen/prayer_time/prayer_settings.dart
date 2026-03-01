@@ -169,7 +169,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     required AppLocalizations l10n,
     required PrayerTimes prayerTimes,
   }) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isDark = Theme.brightnessOf(context) == Brightness.dark;
     final Color cardColor = isDark
         ? themeState.primary.withOpacity(0.1)
         : Colors.white;
@@ -357,7 +357,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   }
 
   Widget getDropPrayerSettings(ThemeState themeState) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isDark = Theme.brightnessOf(context) == Brightness.dark;
     final Color cardColor = isDark
         ? themeState.primary.withOpacity(0.1)
         : Colors.white;
