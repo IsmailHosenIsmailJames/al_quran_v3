@@ -53,6 +53,8 @@ Widget getAyahByAyahCard({
   bool showTopOptions = true,
   bool showOnlyAyah = false,
   bool keepMargin = true,
+  bool isCenter = false,
+  bool removeBorder = false,
   required List<TranslationOfAyah> translationListWithInfo,
   required List wordByWord,
 }) {
@@ -152,14 +154,16 @@ Widget getAyahByAyahCard({
                           right: 5,
                         )
                       : null,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    border: Border.all(
-                      color: ayahToHighlightState == ayahKey
-                          ? themeState.primary
-                          : themeState.primaryShade200,
-                    ),
-                  ),
+                  decoration: removeBorder
+                      ? null
+                      : BoxDecoration(
+                          borderRadius: BorderRadius.circular(roundedRadius),
+                          border: Border.all(
+                            color: ayahToHighlightState == ayahKey
+                                ? themeState.primary
+                                : themeState.primaryShade200,
+                          ),
+                        ),
                   child: Column(
                     children: [
                       if (!(showTopOptions == false) &&
@@ -183,6 +187,7 @@ Widget getAyahByAyahCard({
                           ayahNumber,
                           quranViewState,
                           themeState,
+                          isCenter: isCenter,
                         ),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
                         const Gap(5),
@@ -633,10 +638,11 @@ Align quranAyahWidget(
   int surahNumber,
   int ayahNumber,
   QuranViewState quranViewState,
-  ThemeState themeState,
-) {
+  ThemeState themeState, {
+  bool? isCenter,
+}) {
   return Align(
-    alignment: Alignment.centerRight,
+    alignment: isCenter == true ? Alignment.center : Alignment.centerRight,
     child: ScriptProcessor(
       scriptInfo: ScriptInfo(
         surahNumber: surahNumber,
