@@ -58,6 +58,7 @@ class QuranScriptView extends StatefulWidget {
 }
 
 class _QuranScriptViewState extends State<QuranScriptView> {
+  final GlobalKey _mainContentKey = GlobalKey();
   ItemScrollController itemScrollControllerAyahByAyah = ItemScrollController();
   ItemScrollController itemScrollControllerReadingMode = ItemScrollController();
   ItemScrollController itemScrollControllerSurahList = ItemScrollController();
@@ -231,6 +232,19 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     double width = MediaQuery.of(context).size.width;
     isLandScape = width > 600;
 
+    final mainContent = Stack(
+      key: _mainContentKey,
+      children: [
+        quranScriptWidget(l10n),
+        const SafeArea(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: AudioControllerUi(),
+          ),
+        ),
+      ],
+    );
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: isLandScape
@@ -267,32 +281,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   left: true,
                   child: sideBarOfSurahAndAyah(themeState, context),
                 ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      quranScriptWidget(l10n),
-                      const SafeArea(
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: AudioControllerUi(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                Expanded(child: mainContent),
               ],
             )
-          : Stack(
-              children: [
-                quranScriptWidget(l10n),
-                const SafeArea(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: AudioControllerUi(),
-                  ),
-                ),
-              ],
-            ),
+          : mainContent,
     );
   }
 
