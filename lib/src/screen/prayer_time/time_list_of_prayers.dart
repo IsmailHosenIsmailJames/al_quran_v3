@@ -17,6 +17,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shimmer/shimmer.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
@@ -329,7 +330,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           Row(
                             children: [
                               Text(
-                                TimeOfDay.fromDateTime(
+                                DateFormat.jm(
+                                  AppLocalizations.of(context).localeName,
+                                ).format(
                                   (prayerTimes.timeForPrayer(
                                             prayerTimes.currentPrayer(
                                                   date: now,
@@ -339,7 +342,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                           ) ??
                                           DateTime.now())
                                       .toLocal(),
-                                ).format(context),
+                                ),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -364,13 +367,15 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               ),
                               const Gap(8),
                               Text(
-                                TimeOfDay.fromDateTime(
+                                DateFormat.jm(
+                                  AppLocalizations.of(context).localeName,
+                                ).format(
                                   (prayerTimes.timeForPrayer(
                                             prayerTimes.nextPrayer(date: now)!,
                                           ) ??
                                           DateTime.now())
                                       .toLocal(),
-                                ).format(context),
+                                ),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -693,7 +698,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           ),
           const Gap(2),
           Text(
-            TimeOfDay.fromDateTime(time).format(context),
+            DateFormat.jm(AppLocalizations.of(context).localeName).format(time),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
@@ -729,9 +734,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     Row(
                       children: [
                         Text(
-                          TimeOfDay.fromDateTime(
-                            start.toLocal(),
-                          ).format(context),
+                          DateFormat.jm(
+                            AppLocalizations.of(context).localeName,
+                          ).format(start.toLocal()),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -749,7 +754,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         ),
                         const Gap(4),
                         Text(
-                          TimeOfDay.fromDateTime(end.toLocal()).format(context),
+                          DateFormat.jm(
+                            AppLocalizations.of(context).localeName,
+                          ).format(end.toLocal()),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -805,7 +812,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
           ),
           const Spacer(),
           Text(
-            TimeOfDay.fromDateTime(time.toLocal()).format(context),
+            DateFormat.jm(
+              AppLocalizations.of(context).localeName,
+            ).format(time.toLocal()),
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           const Gap(12),
