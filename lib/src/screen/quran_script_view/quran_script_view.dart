@@ -188,7 +188,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
         return;
       }
       if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-        scrollToAyah(ayahsList);
+        scrollToAyah(event.current);
       } else {
         int index = pagesList.indexWhere(
           (element) => element.contains(event.current),
