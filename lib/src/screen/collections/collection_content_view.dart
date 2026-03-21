@@ -12,9 +12,11 @@ import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 
 import "../../resources/quran_resources/meta/meta_data_surah.dart";
+import "common_function.dart";
 
 class CollectionContentView extends StatefulWidget {
   final NoteCollectionModel? noteCollectionModel;
@@ -70,7 +72,13 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     );
   }
 
-  Widget _buildNoteItem(NoteModel noteModel, BuildContext context) {
+  Widget _buildNoteItem(
+    NoteModel noteModel,
+    BuildContext context,
+    VoidCallback? onMoveUp,
+    VoidCallback? onMoveDown,
+    VoidCallback onDelete,
+  ) {
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
@@ -85,12 +93,51 @@ class _CollectionContentViewState extends State<CollectionContentView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              l10n.note,
-              style: textTheme.titleSmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              top: 8.0,
+              bottom: 0,
+              right: 8.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  l10n.note,
+                  style: textTheme.titleSmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                Row(
+                  children: [
+                    if (onMoveUp != null)
+                      IconButton(
+                        onPressed: onMoveUp,
+                        icon: const Icon(
+                          FluentIcons.arrow_up_24_regular,
+                          size: 20,
+                        ),
+                      ),
+                    if (onMoveDown != null)
+                      IconButton(
+                        onPressed: onMoveDown,
+                        icon: const Icon(
+                          FluentIcons.arrow_down_24_regular,
+                          size: 20,
+                        ),
+                      ),
+                    IconButton(
+                      onPressed: onDelete,
+                      icon: const Icon(
+                        FluentIcons.delete_24_regular,
+                        color: Colors.red,
+                        size: 20,
+                      ),
+                      tooltip: l10n.delete,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           const Gap(4),
@@ -211,7 +258,73 @@ class _CollectionContentViewState extends State<CollectionContentView> {
               itemCount: widget.noteCollectionModel!.notes.length,
               itemBuilder: (context, index) {
                 NoteModel noteModel = widget.noteCollectionModel!.notes[index];
-                return _buildNoteItem(noteModel, context);
+                return Dismissible(
+                  key: ValueKey(
+                    noteModel.hashCode.toString() + index.toString(),
+                  ),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                    ),
+                    alignment: Alignment.centerRight,
+                    child: const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDismissed: (direction) async {
+                    widget.noteCollectionModel!.notes.removeAt(index);
+                    await saveNoteCollectionModelAsMap(
+                      widget.noteCollectionModel!,
+                    );
+                    setState(() {});
+                  },
+                  child: _buildNoteItem(
+                    noteModel,
+                    context,
+                    index > 0
+                        ? () async {
+                            final item = widget.noteCollectionModel!.notes
+                                .removeAt(index);
+                            widget.noteCollectionModel!.notes.insert(
+                              index - 1,
+                              item,
+                            );
+                            await saveNoteCollectionModelAsMap(
+                              widget.noteCollectionModel!,
+                            );
+                            setState(() {});
+                            Fluttertoast.showToast(msg: l10n.success);
+                          }
+                        : null,
+                    index < widget.noteCollectionModel!.notes.length - 1
+                        ? () async {
+                            final item = widget.noteCollectionModel!.notes
+                                .removeAt(index);
+                            widget.noteCollectionModel!.notes.insert(
+                              index + 1,
+                              item,
+                            );
+                            await saveNoteCollectionModelAsMap(
+                              widget.noteCollectionModel!,
+                            );
+                            setState(() {});
+                            Fluttertoast.showToast(msg: l10n.success);
+                          }
+                        : null,
+                    () async {
+                      widget.noteCollectionModel!.notes.removeAt(index);
+                      await saveNoteCollectionModelAsMap(
+                        widget.noteCollectionModel!,
+                      );
+                      setState(() {});
+                      Fluttertoast.showToast(msg: l10n.success);
+                    },
+                  ),
+                );
               },
               separatorBuilder: (context, index) =>
                   const Gap(0), // Cards have own margin
@@ -223,14 +336,12 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             return ListView.builder(
               itemCount: widget.pinnedCollectionModel!.pinned.length,
               itemBuilder: (context, index) {
+                final pinnedItem = widget.pinnedCollectionModel!.pinned[index];
                 final TranslationWithWordByWord? translationData =
-                    getTranslationFromCache(
-                      widget.pinnedCollectionModel!.pinned[index].ayahKey,
-                    );
-                return translationData != null
+                    getTranslationFromCache(pinnedItem.ayahKey);
+                Widget cardWidget = translationData != null
                     ? getAyahByAyahCard(
-                        ayahKey:
-                            widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                        ayahKey: pinnedItem.ayahKey,
                         context: context,
                         showFullKey: true,
                         translationListWithInfo:
@@ -239,7 +350,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                       )
                     : FutureBuilder(
                         future: getTranslationWithWordByWord(
-                          widget.pinnedCollectionModel!.pinned[index].ayahKey,
+                          pinnedItem.ayahKey,
                         ),
                         builder: (context, asyncSnapshot) {
                           if (asyncSnapshot.connectionState !=
@@ -247,10 +358,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                             return const SizedBox(height: 250);
                           }
                           return getAyahByAyahCard(
-                            ayahKey: widget
-                                .pinnedCollectionModel!
-                                .pinned[index]
-                                .ayahKey,
+                            ayahKey: pinnedItem.ayahKey,
                             context: context,
                             showFullKey: true,
                             translationListWithInfo:
@@ -259,6 +367,125 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                           );
                         },
                       );
+
+                return Dismissible(
+                  key: ValueKey(
+                    pinnedItem.hashCode.toString() + index.toString(),
+                  ),
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.only(
+                      left: 5,
+                      top: 5,
+                      bottom: 5,
+                      right: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(roundedRadius),
+                    ),
+                    alignment: Alignment.centerRight,
+                    child: const Icon(
+                      FluentIcons.delete_24_regular,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDismissed: (direction) async {
+                    widget.pinnedCollectionModel!.pinned.removeAt(index);
+                    await savePinnedCollectionModelAsMap(
+                      widget.pinnedCollectionModel!,
+                    );
+                    setState(() {});
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, top: 4.0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              if (index > 0)
+                                IconButton(
+                                  onPressed: () async {
+                                    final item = widget
+                                        .pinnedCollectionModel!
+                                        .pinned
+                                        .removeAt(index);
+                                    widget.pinnedCollectionModel!.pinned.insert(
+                                      index - 1,
+                                      item,
+                                    );
+                                    await savePinnedCollectionModelAsMap(
+                                      widget.pinnedCollectionModel!,
+                                    );
+                                    setState(() {});
+                                  },
+                                  icon: const Icon(
+                                    FluentIcons.arrow_up_24_regular,
+                                    size: 20,
+                                  ),
+                                ),
+                              if (index <
+                                  widget.pinnedCollectionModel!.pinned.length -
+                                      1)
+                                IconButton(
+                                  onPressed: () async {
+                                    final item = widget
+                                        .pinnedCollectionModel!
+                                        .pinned
+                                        .removeAt(index);
+                                    widget.pinnedCollectionModel!.pinned.insert(
+                                      index + 1,
+                                      item,
+                                    );
+                                    await savePinnedCollectionModelAsMap(
+                                      widget.pinnedCollectionModel!,
+                                    );
+                                    setState(() {});
+                                  },
+                                  icon: const Icon(
+                                    FluentIcons.arrow_down_24_regular,
+                                    size: 20,
+                                  ),
+                                ),
+                              TextButton.icon(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.red,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 0,
+                                  ),
+                                  minimumSize: const Size(0, 30),
+                                ),
+                                onPressed: () async {
+                                  widget.pinnedCollectionModel!.pinned.removeAt(
+                                    index,
+                                  );
+                                  await savePinnedCollectionModelAsMap(
+                                    widget.pinnedCollectionModel!,
+                                  );
+                                  setState(() {});
+                                },
+                                icon: const Icon(
+                                  FluentIcons.delete_24_regular,
+                                  size: 16,
+                                ),
+                                label: Text(
+                                  l10n.delete,
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      cardWidget,
+                    ],
+                  ),
+                );
               },
             );
           }

@@ -25,7 +25,7 @@ class RukuListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    Brightness brightness = Theme.of(context).brightness;
+    Brightness brightness = Theme.brightnessOf(context);
     Color textColor = brightness == Brightness.light
         ? Colors.black
         : Colors.white;

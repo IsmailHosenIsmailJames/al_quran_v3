@@ -18,7 +18,7 @@ TextSpan parseTajweedWord({
   required wordIndex,
 }) {
   List<TextSpan> spans = [];
-  final brightness = Theme.of(context).brightness;
+  final brightness = Theme.brightnessOf(context);
   final bool isLight = brightness == Brightness.light;
 
   final Map<String, Color> currentThemeColors = {
@@ -26,6 +26,7 @@ TextSpan parseTajweedWord({
     IdghamShafawiRule.key: isLight
         ? IdghamShafawiRule.lightColor
         : IdghamShafawiRule.darkColor,
+
     IqlabRule.key: isLight ? IqlabRule.lightColor : IqlabRule.darkColor,
     IkhafaShafawiRule.key: isLight
         ? IkhafaShafawiRule.lightColor
@@ -55,10 +56,12 @@ TextSpan parseTajweedWord({
     MaddJaizMunfasilRule.key: isLight
         ? MaddJaizMunfasilRule.lightColor
         : MaddJaizMunfasilRule.darkColor,
+
     HamWaslRule.key: isLight ? HamWaslRule.lightColor : HamWaslRule.darkColor,
     LaamShamsiyahRule.key: isLight
         ? LaamShamsiyahRule.lightColor
         : LaamShamsiyahRule.darkColor,
+
     SlntRule.key: isLight ? SlntRule.lightColor : SlntRule.darkColor,
     IdghamMutajanisaynRule.key: isLight
         ? IdghamMutajanisaynRule.lightColor

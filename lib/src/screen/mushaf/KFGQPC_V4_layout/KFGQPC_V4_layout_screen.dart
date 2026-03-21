@@ -4,6 +4,7 @@ import 'dart:io';
 
 import "package:al_quran_v3/src/resources/quran_resources/meta/chapter_header_meta.dart";
 import "package:archive/archive.dart";
+import "package:cached_network_image/cached_network_image.dart";
 import "package:dartx/dartx_io.dart";
 import "package:dio/dio.dart";
 import "package:flutter/material.dart";
@@ -275,17 +276,12 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                "https://ismailhosenismailjames.github.io/al_quran_mushaf/WhatsApp%20Image%202026-02-20%20at%2016.11.16.jpeg",
-                height: 300,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const SizedBox(
-                    height: 300,
-                    child: Center(child: CircularProgressIndicator()),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) =>
+              CachedNetworkImage(
+                imageUrl:
+                    "https://ismailhosenismailjames.github.io/al_quran_mushaf/WhatsApp%20Image%202026-02-20%20at%2016.11.16.jpeg",
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) =>
                     const Icon(Icons.error, size: 100),
               ),
               const SizedBox(height: 32),
@@ -413,7 +409,7 @@ class _MushafPageViewState extends State<MushafPageView> {
           return SizedBox(
             width: double.infinity,
             child: FittedBox(
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.fitWidth,
               child: Text(
                 line.content.replaceAll("  ", " "),
                 textAlign: line.isCentered

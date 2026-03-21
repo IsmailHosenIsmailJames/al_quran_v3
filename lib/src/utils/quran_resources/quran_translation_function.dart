@@ -127,7 +127,23 @@ class QuranTranslationFunction {
         name: "removeToListAlreadyDownloaded",
       );
     }
+
+    List<TranslationBookModel>? selectedBefore =
+        await getTranslationSelections();
+    bool wasSelected =
+        selectedBefore?.any((e) => e.fullPath == bookToRemove.fullPath) ??
+        false;
+
     await removeTranslationSelection(bookToRemove);
+
+    if (wasSelected && downloaded.isNotEmpty) {
+      List<TranslationBookModel>? selectedAfter =
+          await getTranslationSelections();
+      if (selectedAfter == null || selectedAfter.isEmpty) {
+        await setTranslationSelection(downloaded.first);
+      }
+    }
+
     await Hive.box("user").put(
       downloadedTranslationBooks,
       downloaded.map((e) => e.toMap()).toList(),
