@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
 import "package:al_quran_v3/src/utils/reset_app.dart";
+// import "package:al_quran_v3/src/utils/reset_app.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";

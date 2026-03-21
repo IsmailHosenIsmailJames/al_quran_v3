@@ -487,6 +487,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: isJustIcon
               ? MainAxisAlignment.center
               : MainAxisAlignment.start,
+
           children: [
             if (!isJustIcon) const Gap(10),
             if (!isJustIcon) const Gap(10),
@@ -517,7 +518,7 @@ class _HomePageState extends State<HomePage> {
       icon: SvgPicture.string(
         """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
         colorFilter: ColorFilter.mode(
-          Theme.of(context).brightness == Brightness.dark
+          Theme.brightnessOf(context) == Brightness.dark
               ? Colors.grey.shade100
               : Colors.grey.shade800,
           BlendMode.srcIn,
@@ -689,6 +690,7 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(
                   context,
                 ).bottomNavigationBarTheme.backgroundColor,
+
                 border: Border(top: BorderSide(color: themeState.mutedGray)),
               ),
               child: BottomNavigationBar(

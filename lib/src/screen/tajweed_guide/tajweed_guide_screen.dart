@@ -8,7 +8,7 @@ class TajweedGuideScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
+    final brightness = Theme.brightnessOf(context);
     final bool isLight = brightness == Brightness.light;
     AppLocalizations localizations = AppLocalizations.of(context);
     return Scaffold(

@@ -31,7 +31,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    bool isDark = Theme.brightnessOf(context) == Brightness.dark;
 
     String? highlightingWord;
 
@@ -62,6 +62,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   .read<AyahKeyCubit>()
                   .state
                   .current;
+
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -92,6 +93,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   .read<AyahKeyCubit>()
                   .state
                   .current;
+
               return Text.rich(
                 TextSpan(
                   children: ayahsKey.map((ayahKey) {

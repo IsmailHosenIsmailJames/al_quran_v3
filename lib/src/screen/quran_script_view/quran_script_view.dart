@@ -58,6 +58,7 @@ class QuranScriptView extends StatefulWidget {
 }
 
 class _QuranScriptViewState extends State<QuranScriptView> {
+  final GlobalKey _mainContentKey = GlobalKey();
   ItemScrollController itemScrollControllerAyahByAyah = ItemScrollController();
   ItemScrollController itemScrollControllerReadingMode = ItemScrollController();
   ItemScrollController itemScrollControllerSurahList = ItemScrollController();
@@ -78,19 +79,25 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   Future<void> scrollToAyah(dynamic key) async {
     if (key is String) {
       if (itemScrollControllerAyahByAyah.isAttached) {
-        itemScrollControllerAyahByAyah.scrollTo(
-          index: ayahsList.indexOf(key),
-          alignment: 0.15,
-          duration: const Duration(milliseconds: 200),
-        );
+        int index = ayahsList.indexOf(key);
+        if (index != -1) {
+          itemScrollControllerAyahByAyah.scrollTo(
+            index: index,
+            alignment: 0.15,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
       }
     } else if (key is List<String>) {
       if (itemScrollControllerReadingMode.isAttached) {
-        itemScrollControllerReadingMode.scrollTo(
-          index: pagesList.indexOf(key),
-          alignment: 0.15,
-          duration: const Duration(milliseconds: 200),
-        );
+        int index = pagesList.indexOf(key);
+        if (index != -1) {
+          itemScrollControllerReadingMode.scrollTo(
+            index: index,
+            alignment: 0.15,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
       }
     }
   }
@@ -187,7 +194,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
         return;
       }
       if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-        scrollToAyah(ayahsList);
+        scrollToAyah(event.current);
       } else {
         int index = pagesList.indexWhere(
           (element) => element.contains(event.current),
@@ -205,7 +212,21 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.toScrollKey != null) {
+      final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
+
+      if (currentPlayingAyah.isNotEmpty &&
+          ayahsList.contains(currentPlayingAyah)) {
+        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+          scrollToAyah(currentPlayingAyah);
+        } else {
+          int index = pagesList.indexWhere(
+            (element) => element.contains(currentPlayingAyah),
+          );
+          if (index != -1) {
+            scrollToAyah(pagesList[index]);
+          }
+        }
+      } else if (widget.toScrollKey != null) {
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
           scrollToAyah(widget.toScrollKey);
         } else {
@@ -231,6 +252,19 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     double width = MediaQuery.of(context).size.width;
     isLandScape = width > 600;
 
+    final mainContent = Stack(
+      key: _mainContentKey,
+      children: [
+        quranScriptWidget(l10n),
+        const SafeArea(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: AudioControllerUi(),
+          ),
+        ),
+      ],
+    );
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: isLandScape
@@ -248,6 +282,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   ),
                 ),
               ),
+              backgroundColor: Theme.brightnessOf(context) == Brightness.dark
+                  ? Colors.grey.shade900.withValues(alpha: 0.5)
+                  : Colors.grey.shade200.withValues(alpha: 0.5),
               title: appBarTitle(),
               actions: [
                 getAyahsDropDown(themeState),
@@ -267,32 +304,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   left: true,
                   child: sideBarOfSurahAndAyah(themeState, context),
                 ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      quranScriptWidget(l10n),
-                      const SafeArea(
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: AudioControllerUi(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                Expanded(child: mainContent),
               ],
             )
-          : Stack(
-              children: [
-                quranScriptWidget(l10n),
-                const SafeArea(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: AudioControllerUi(),
-                  ),
-                ),
-              ],
-            ),
+          : mainContent,
     );
   }
 

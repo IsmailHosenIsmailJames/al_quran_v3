@@ -65,10 +65,9 @@ void showShareBottomDialog(
     padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
     alignment: Alignment.centerLeft,
   );
-  Color color =
-      Theme.of(context).brightness == Brightness.dark
-          ? Colors.grey.shade100
-          : Colors.grey.shade800;
+  Color color = Theme.brightnessOf(context) == Brightness.dark
+      ? Colors.grey.shade100
+      : Colors.grey.shade800;
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
@@ -170,7 +169,7 @@ void showShareBottomDialog(
                   fontSize: context.read<QuranViewCubit>().state.fontSize,
                   height: context.read<QuranViewCubit>().state.lineHeight,
                 );
-                Brightness brightness = Theme.of(context).brightness;
+                Brightness brightness = Theme.brightnessOf(context);
                 final imageBinary = await screenshotController
                     .captureFromLongWidget(
                       InheritedTheme.captureAll(
@@ -281,11 +280,10 @@ void showShareBottomDialog(
                       },
                     );
                     if (selected == null) return;
-                    var tafsir =
-                        (await QuranTafsirFunction.getTafsirForBook(
-                          selected!,
-                          ayahKey,
-                        ))?.tafsir;
+                    var tafsir = (await QuranTafsirFunction.getTafsirForBook(
+                      selected!,
+                      ayahKey,
+                    ))?.tafsir;
 
                     String? tafsirString;
                     if (tafsir != null &&

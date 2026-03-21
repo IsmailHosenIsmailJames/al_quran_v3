@@ -227,7 +227,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                           )
                                         : Colors.transparent,
                                     foregroundColor:
-                                        Theme.of(context).brightness ==
+                                        Theme.brightnessOf(context) ==
                                             Brightness.dark
                                         ? Colors.white
                                         : Colors.black,
@@ -295,8 +295,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                                   ? themeState.primaryShade300
                                   : Colors.transparent,
                               foregroundColor:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
+                                  Theme.brightnessOf(context) == Brightness.dark
                                   ? Colors.white
                                   : Colors.black,
                             ),
