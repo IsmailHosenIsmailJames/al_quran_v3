@@ -79,19 +79,25 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   Future<void> scrollToAyah(dynamic key) async {
     if (key is String) {
       if (itemScrollControllerAyahByAyah.isAttached) {
-        itemScrollControllerAyahByAyah.scrollTo(
-          index: ayahsList.indexOf(key),
-          alignment: 0.15,
-          duration: const Duration(milliseconds: 200),
-        );
+        int index = ayahsList.indexOf(key);
+        if (index != -1) {
+          itemScrollControllerAyahByAyah.scrollTo(
+            index: index,
+            alignment: 0.15,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
       }
     } else if (key is List<String>) {
       if (itemScrollControllerReadingMode.isAttached) {
-        itemScrollControllerReadingMode.scrollTo(
-          index: pagesList.indexOf(key),
-          alignment: 0.15,
-          duration: const Duration(milliseconds: 200),
-        );
+        int index = pagesList.indexOf(key);
+        if (index != -1) {
+          itemScrollControllerReadingMode.scrollTo(
+            index: index,
+            alignment: 0.15,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
       }
     }
   }
@@ -206,7 +212,21 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.toScrollKey != null) {
+      final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
+
+      if (currentPlayingAyah.isNotEmpty &&
+          ayahsList.contains(currentPlayingAyah)) {
+        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+          scrollToAyah(currentPlayingAyah);
+        } else {
+          int index = pagesList.indexWhere(
+            (element) => element.contains(currentPlayingAyah),
+          );
+          if (index != -1) {
+            scrollToAyah(pagesList[index]);
+          }
+        }
+      } else if (widget.toScrollKey != null) {
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
           scrollToAyah(widget.toScrollKey);
         } else {
