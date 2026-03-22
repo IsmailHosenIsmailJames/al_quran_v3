@@ -76,6 +76,7 @@ dependencies:
   hijri: ^3.0.0
   shimmer: ^3.0.0
   material_table_view: ^5.5.2
+  webview_flutter: ^4.13.1
   # background_fetch:
   #   git:
   #     url: https://github.com/transistorsoft/flutter_background_fetch

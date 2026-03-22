@@ -2,16 +2,12 @@ import 'dart:convert';
 import "dart:developer";
 import 'dart:io';
 
-import "package:al_quran_v3/src/resources/quran_resources/meta/chapter_header_meta.dart";
 import "package:archive/archive.dart";
 import "package:cached_network_image/cached_network_image.dart";
-import "package:dartx/dartx_io.dart";
 import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
-
-import '../utils/font_loader.dart';
-import 'models/mushaf_script_model.dart';
+import "package:webview_flutter/webview_flutter.dart";
 
 class KfgqpcV4LayoutScreen extends StatefulWidget {
   const KfgqpcV4LayoutScreen({super.key});
@@ -27,7 +23,9 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
   String _downloadStatus = "";
 
   String _baseDirPath = "";
-  List<MushafScriptPageModel> _pages = [];
+  bool _dataReady = false;
+  int _totalPages = 604;
+  int _currentPage = 1;
 
   @override
   void initState() {
@@ -47,62 +45,36 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
     );
 
     if (await directory.exists()) {
-      await _loadPages();
-    } else {
-      if (mounted) {
-        setState(() {
-          _isChecking = false;
-        });
+      // Verify that index.html exists
+      final indexFile = File("$_baseDirPath/index.html");
+      if (await indexFile.exists()) {
+        _dataReady = true;
       }
     }
-  }
-
-  Future<void> _loadPages() async {
-    // try {
-    final jsonFile = File("$_baseDirPath/script/quran_pages.json");
-    log(
-      "${jsonFile.path}: ${await jsonFile.exists()}",
-      name: "KfgqpcV4LayoutScreen",
-    );
-
-    if (await jsonFile.exists()) {
-      final jsonString = await jsonFile.readAsString();
-      log(jsonString.substring(0, 100), name: "KfgqpcV4LayoutScreen");
-      // try {
-      final List<dynamic> jsonList = jsonDecode(jsonString);
-      _pages = jsonList.map((x) => MushafScriptPageModel.fromMap(x)).toList();
-      // } catch (e) {
-      //   log(e.toString(), name: "KfgqpcV4LayoutScreen");
-      // }
-      log("Total pages: ${_pages.length}", name: "KfgqpcV4LayoutScreen");
-    } else {
-      // log  tree of folders and files
-      final directory = Directory(_baseDirPath);
-      final List<FileSystemEntity> files = directory.listSync(recursive: true);
-      for (final file in files) {
-        log(file.path, name: "KfgqpcV4LayoutScreen");
-      }
-    }
-
-    // Attempt to load the surah name font
-    await DynamicFontLoader.loadLocalFont(
-      "SurahName",
-      "$_baseDirPath/NeoHeader_COLOR-Regular.ttf",
-    );
 
     if (mounted) {
       setState(() {
         _isChecking = false;
       });
     }
-    // } catch (e) {
-    // debugPrint("Error loading pages: $e");
-    // if (mounted) {
-    //   setState(() {
-    //     _isChecking = false;
-    //   });
-    // }
-    // }
+  }
+
+  Future<void> _deleteMushafData() async {
+    final rootDir = await getApplicationDocumentsDirectory();
+    final directory = Directory("${rootDir.path}/mushaf_demo_data");
+
+    if (await directory.exists()) {
+      await directory.delete(recursive: true);
+    }
+
+    if (mounted) {
+      setState(() {
+        _dataReady = false;
+        _isDownloading = false;
+        _downloadProgress = 0.0;
+        _downloadStatus = "";
+      });
+    }
   }
 
   Future<void> downloadAndExtractMushaf() async {
@@ -118,27 +90,15 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
       final rootDir = await getApplicationDocumentsDirectory();
       _baseDirPath = "${rootDir.path}/mushaf_demo_data";
       final zipFilePath = "${rootDir.path}/KFGQPC_V4_layout.zip";
-      final fontFilePath = "$_baseDirPath/NeoHeader_COLOR-Regular.ttf";
 
       final dio = Dio();
 
-      // Download surah name font to base dir
       await Directory(_baseDirPath).create(recursive: true);
-
-      if (mounted) {
-        setState(() {
-          _downloadStatus = "Downloading Surah Header Font...";
-        });
-      }
-      await dio.download(
-        "https://ismailhosenismailjames.github.io/al_quran_mushaf/NeoHeader_COLOR-Regular.ttf",
-        fontFilePath,
-      );
 
       // Download main zip
       if (mounted) {
         setState(() {
-          _downloadStatus = "Downloading Mushaf Data (Zip)...";
+          _downloadStatus = "Downloading Mushaf Data...";
         });
       }
       await dio.download(
@@ -193,17 +153,16 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
         }
       }
 
-      // Cleanup sip
+      // Cleanup zip
       await zipFile.delete();
 
       if (mounted) {
         setState(() {
-          _downloadStatus = "Loading data...";
+          _downloadStatus = "Loading...";
           _isDownloading = false;
+          _dataReady = true;
         });
       }
-
-      await _loadPages();
     } catch (e) {
       debugPrint("Download error: $e");
       if (mounted) {
@@ -215,59 +174,25 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
     }
   }
 
-  final PageController _pageController = PageController();
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_isChecking) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    if (_pages.isNotEmpty) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("KFGQPC V4"),
-          actions: [
-            DropdownButton(
-              items: _pages.map((page) {
-                return DropdownMenuItem(
-                  value: page.pageNumber,
-                  child: Text(page.pageNumber.toString()),
-                );
-              }).toList(),
-              onChanged: (value) {
-                if (value != null) {
-                  _pageController.jumpToPage(value);
-                  setState(() {});
-                }
-              },
-            ),
-          ],
-        ),
-        body: PageView.builder(
-          controller: _pageController,
-          itemCount: _pages.length,
-          onPageChanged: (index) {
-            setState(() {});
-          },
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: MushafPageView(
-                pageData: _pages[index],
-                baseDirPath: _baseDirPath,
-              ),
-            );
-          },
-        ),
+    if (_dataReady) {
+      return _MushafWebView(
+        baseDirPath: _baseDirPath,
+        totalPages: _totalPages,
+        initialPage: _currentPage,
+        onPageChanged: (page) {
+          _currentPage = page;
+        },
+        onDeleteData: _deleteMushafData,
       );
     }
 
+    // Download screen
     return Scaffold(
       appBar: AppBar(title: const Text("Mushaf Download")),
       body: Center(
@@ -311,122 +236,204 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
   }
 }
 
-class MushafPageView extends StatefulWidget {
-  final MushafScriptPageModel pageData;
-  final String baseDirPath;
+// ── WebView widget for rendering the Mushaf ──
 
-  const MushafPageView({
-    super.key,
-    required this.pageData,
+class _MushafWebView extends StatefulWidget {
+  final String baseDirPath;
+  final int totalPages;
+  final int initialPage;
+  final ValueChanged<int>? onPageChanged;
+  final VoidCallback? onDeleteData;
+
+  const _MushafWebView({
     required this.baseDirPath,
+    required this.totalPages,
+    this.initialPage = 1,
+    this.onPageChanged,
+    this.onDeleteData,
   });
 
   @override
-  State<MushafPageView> createState() => _MushafPageViewState();
+  State<_MushafWebView> createState() => _MushafWebViewState();
 }
 
-class _MushafPageViewState extends State<MushafPageView> {
-  bool _fontLoaded = false;
-  String _fontFamily = "";
+class _MushafWebViewState extends State<_MushafWebView> {
+  late final WebViewController _controller;
+  int _currentPage = 1;
+  bool _isWebViewReady = false;
 
   @override
   void initState() {
     super.initState();
-    _loadFont();
+    _currentPage = widget.initialPage;
+    _initWebView();
   }
 
-  @override
-  void didUpdateWidget(covariant MushafPageView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.pageData.pageNumber != widget.pageData.pageNumber) {
-      _loadFont();
+  void _initWebView() {
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(Colors.white)
+      ..addJavaScriptChannel(
+        'flutter_channel',
+        onMessageReceived: (JavaScriptMessage message) {
+          _handleWordTap(message.message);
+        },
+      )
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (url) async {
+            if (!_isWebViewReady) {
+              final pagesFile =
+                  File("${widget.baseDirPath}/script/quran_pages.json");
+              final namesFile = File("${widget.baseDirPath}/surah_name.json");
+
+              if (await pagesFile.exists() && await namesFile.exists()) {
+                final pagesJson = await pagesFile.readAsString();
+                final namesJson = await namesFile.readAsString();
+
+                // Encode the JSON strings so they form valid JS string literals
+                final pEscaped = jsonEncode(pagesJson);
+                final nEscaped = jsonEncode(namesJson);
+
+                _controller
+                    .runJavaScript("initializeData($pEscaped, $nEscaped)");
+              }
+
+              if (_currentPage != 1) {
+                _controller.runJavaScript('loadPage($_currentPage)');
+              }
+              setState(() {
+                _isWebViewReady = true;
+              });
+            }
+          },
+          onNavigationRequest: (NavigationRequest request) {
+            // Intercept quran:// scheme (fallback from JS)
+            if (request.url.startsWith('quran://')) {
+              _handleQuranScheme(request.url);
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadFile("${widget.baseDirPath}/index.html");
+  }
+
+  void _handleWordTap(String jsonMessage) {
+    try {
+      final data = jsonDecode(jsonMessage);
+      log(
+        "Word tapped: surah=${data['surah']}, wordId=${data['wordId']}, page=${data['page']}",
+        name: "MushafWebView",
+      );
+
+      // TODO: Implement word audio playback or other features here
+      // Example: play audio for the tapped word
+    } catch (e) {
+      log("Error parsing word tap: $e", name: "MushafWebView");
     }
   }
 
-  Future<void> _loadFont() async {
-    int pageNum = widget.pageData.pageNumber;
-    _fontFamily = "Page$pageNum";
-    final fontPath = "${widget.baseDirPath}/fonts/p$pageNum.ttf";
-
-    _fontFamily = await DynamicFontLoader.loadLocalFont(_fontFamily, fontPath);
-
-    if (mounted) {
-      setState(() {
-        _fontLoaded = true;
-      });
+  void _handleQuranScheme(String url) {
+    try {
+      final uri = Uri.parse(url);
+      final surah = uri.queryParameters['surah'];
+      final wordId = uri.queryParameters['wordId'];
+      final page = uri.queryParameters['page'];
+      log(
+        "Word tapped (scheme): surah=$surah, wordId=$wordId, page=$page",
+        name: "MushafWebView",
+      );
+    } catch (e) {
+      log("Error parsing quran scheme: $e", name: "MushafWebView");
     }
   }
+
+  void _goToPage(int page) {
+    if (page < 1 || page > widget.totalPages) return;
+    setState(() {
+      _currentPage = page;
+    });
+    _controller.runJavaScript('loadPage($page)');
+    widget.onPageChanged?.call(page);
+  }
+
+  void _nextPage() => _goToPage(_currentPage + 1);
+  void _prevPage() => _goToPage(_currentPage - 1);
 
   @override
   Widget build(BuildContext context) {
-    if (!_fontLoaded) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return SingleChildScrollView(
-      child: Column(
-        children: widget.pageData.lines.map((line) {
-          // Check if it's a surah name
-          if (line.lineType == LineType.SURAH_NAME) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: FittedBox(
-                child: Text(
-                  chapterHeaderCodes[line.content
-                          .replaceAll("Surah Name ", "")
-                          .replaceAll("\n", " ")
-                          .toIntOrNull() ??
-                      1],
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontFamily: "SurahName",
-                    fontSize: 100,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            );
-          }
-
-          // For Basmallah
-          if (line.lineType == LineType.BASMALLAH) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: Text(
-                line.content,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontFamily:
-                      "QPC_Hafs", // Depending on standard, might need fallback
-                  fontSize: 24,
-                  color: Colors.black,
-                ),
-              ),
-            );
-          }
-
-          // Normal Ayah line
-          return SizedBox(
-            width: double.infinity,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                line.content.replaceAll("  ", " "),
-                textAlign: line.isCentered
-                    ? TextAlign.center
-                    : TextAlign.justify,
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontFamily: _fontFamily,
-                  fontSize: 32,
-                  height: 1.5,
-
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          );
-        }).toList(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Page $_currentPage"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.chevron_right),
+            onPressed: _currentPage > 1 ? _prevPage : null,
+            tooltip: "Previous Page",
+          ),
+          IconButton(
+            icon: const Icon(Icons.chevron_left),
+            onPressed: _currentPage < widget.totalPages ? _nextPage : null,
+            tooltip: "Next Page",
+          ),
+          PopupMenuButton<int>(
+            icon: const Icon(Icons.menu_book),
+            tooltip: "Go to Page",
+            onSelected: _goToPage,
+            itemBuilder: (context) {
+              // Show page groups for quick navigation
+              return List.generate(
+                (widget.totalPages / 20).ceil(),
+                (groupIndex) {
+                  final start = groupIndex * 20 + 1;
+                  final end = (start + 19).clamp(1, widget.totalPages);
+                  return PopupMenuItem<int>(
+                    value: start,
+                    child: Text("Pages $start – $end"),
+                  );
+                },
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete_outline),
+            tooltip: "Delete Mushaf Data",
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Delete Data?"),
+                    content: const Text("Are you sure you want to delete the downloaded Mushaf data? You will need to download it again to view the Quran."),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          widget.onDeleteData?.call();
+                        },
+                        style: TextButton.styleFrom(foregroundColor: Colors.red),
+                        child: const Text("Delete"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _controller),
+          if (!_isWebViewReady)
+            const Center(child: CircularProgressIndicator()),
+        ],
       ),
     );
   }
