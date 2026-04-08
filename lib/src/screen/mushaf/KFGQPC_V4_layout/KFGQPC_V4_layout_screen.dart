@@ -9,6 +9,7 @@ import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
 import "package:shared_preferences/shared_preferences.dart";
+import "package:shimmer/shimmer.dart";
 import "package:webview_flutter/webview_flutter.dart";
 
 class KfgqpcV4LayoutScreen extends StatefulWidget {
@@ -200,40 +201,59 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
 
     // Download screen
     return Scaffold(
-      appBar: AppBar(title: const Text("Mushaf Download")),
+      appBar: AppBar(title: const Text("KFGQPC V4")),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: [
-              CachedNetworkImage(
-                imageUrl:
-                    "https://ismailhosenismailjames.github.io/al_quran_mushaf/WhatsApp%20Image%202026-02-20%20at%2016.11.16.jpeg",
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    const Icon(Icons.error, size: 100),
-              ),
-              const SizedBox(height: 32),
-              const Text(
-                "KFGQPC V4 Layout requires additional data.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 24),
-              if (_isDownloading) ...[
-                Text(_downloadStatus),
-                const SizedBox(height: 12),
-                LinearProgressIndicator(value: _downloadProgress),
-                const SizedBox(height: 8),
-                Text("${(_downloadProgress * 100).toStringAsFixed(1)}%"),
-              ] else
-                ElevatedButton.icon(
-                  onPressed: downloadAndExtractMushaf,
-                  icon: const Icon(Icons.download),
-                  label: const Text("Download & Preview"),
+              Card(
+                elevation: 8,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "https://raw.githubusercontent.com/IsmailHosenIsmailJames/al_quran_mushaf/refs/heads/main/screenshot-2026-04-08_21.31.57.588.png",
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: Colors.grey.shade300,
+                      highlightColor: Colors.grey.shade100,
+                      child: Container(color: Colors.white),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error, size: 100),
+                  ),
                 ),
+              ),
+
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_isDownloading) ...[
+                      Text(_downloadStatus),
+                      const SizedBox(height: 12),
+                      LinearProgressIndicator(value: _downloadProgress),
+                      const SizedBox(height: 8),
+                      Text("${(_downloadProgress * 100).toStringAsFixed(1)}%"),
+                    ] else
+                      SizedBox(
+                        width: 600,
+                        height: 50,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: downloadAndExtractMushaf,
+                          icon: const Icon(Icons.download),
+                          label: const Text("Download"),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
