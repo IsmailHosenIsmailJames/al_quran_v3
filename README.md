@@ -147,3 +147,14 @@ Don't forget to give the project a star! Thanks again!
 3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4.  Push to the Branch (`git push origin feature/AmazingFeature`)
 5.  Open a Pull Request
+
+## License
+
+This project is licensed under the **Non-Commercial and No-Profit License**. 
+
+**Key Restrictions:**
+*   **No Profitable Use**: This software and its derivatives may only be used for non-commercial purposes.
+*   **No Earnings**: You are strictly prohibited from earning revenue or profit from this repository or any of its forks.
+*   **Forks**: All forks must adhere to the same non-commercial constraints.
+
+See the [LICENSE](LICENSE) file for the full text.
