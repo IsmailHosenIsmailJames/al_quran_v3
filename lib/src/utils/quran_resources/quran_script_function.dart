@@ -6,7 +6,7 @@ import "package:flutter/services.dart";
 import "package:hive_ce/hive.dart";
 
 class QuranScriptFunction {
-  static String quranScriptVersion = "2-dev-4";
+  static String quranScriptVersion = "2-dev-5";
   static Box? quranBox;
 
   static Future<void> writeQuranScript({
@@ -73,8 +73,22 @@ class QuranScriptFunction {
     String ayahKey = "$surah:$ayah";
     final fromCache = cacheOfAyah[ayahKey + type.name];
     if (fromCache != null) return fromCache;
+
+    Box? currentBox = Hive.isBoxOpen("script_${type.name}")
+        ? Hive.box("script_${type.name}")
+        : quranBox;
+
+    if (currentBox == null || !currentBox.isOpen) {
+      return [];
+    }
+
+    final dynamic data = currentBox.get(ayahKey);
+    if (data == null) {
+      return [];
+    }
+
     if (type == QuranScriptType.indopak || type == QuranScriptType.tajweed) {
-      List<String> compressed = List<String>.from(quranBox!.get(ayahKey));
+      List<String> compressed = List<String>.from(data);
       for (int i = 0; i < compressed.length; i++) {
         for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
           compressed[i] = compressed[i].replaceAll("r$j", tajweedRulesList[j]);
@@ -83,7 +97,7 @@ class QuranScriptFunction {
       cacheOfAyah[ayahKey + type.name] = compressed;
       return compressed;
     } else {
-      final toReturn = List<String>.from(quranBox!.get(ayahKey));
+      final toReturn = List<String>.from(data);
       cacheOfAyah[ayahKey + type.name] = toReturn;
       return toReturn;
     }

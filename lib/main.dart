@@ -101,7 +101,7 @@ Future<void> main() async {
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  QuranScriptFunction.initQuranScript(
+  await QuranScriptFunction.initQuranScript(
     QuranScriptType.values.firstWhere((element) => scriptOnDb == element.name),
   );
 
