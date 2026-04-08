@@ -2,11 +2,13 @@ import 'dart:convert';
 import "dart:developer";
 import 'dart:io';
 
+import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:archive/archive.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
+import "package:shared_preferences/shared_preferences.dart";
 import "package:webview_flutter/webview_flutter.dart";
 
 class KfgqpcV4LayoutScreen extends StatefulWidget {
@@ -49,6 +51,8 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
       final indexFile = File("$_baseDirPath/index.html");
       if (await indexFile.exists()) {
         _dataReady = true;
+        final prefs = await SharedPreferences.getInstance();
+        _currentPage = prefs.getInt('kfgqpc_mushaf_last_page') ?? 1;
       }
     }
 
@@ -185,8 +189,10 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
         baseDirPath: _baseDirPath,
         totalPages: _totalPages,
         initialPage: _currentPage,
-        onPageChanged: (page) {
+        onPageChanged: (page) async {
           _currentPage = page;
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setInt('kfgqpc_mushaf_last_page', page);
         },
         onDeleteData: _deleteMushafData,
       );
@@ -283,8 +289,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
         NavigationDelegate(
           onPageFinished: (url) async {
             if (!_isWebViewReady) {
-              final pagesFile =
-                  File("${widget.baseDirPath}/script/quran_pages.json");
+              final pagesFile = File(
+                "${widget.baseDirPath}/script/quran_pages.json",
+              );
               final namesFile = File("${widget.baseDirPath}/surah_name.json");
 
               if (await pagesFile.exists() && await namesFile.exists()) {
@@ -295,8 +302,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
                 final pEscaped = jsonEncode(pagesJson);
                 final nEscaped = jsonEncode(namesJson);
 
-                _controller
-                    .runJavaScript("initializeData($pEscaped, $nEscaped)");
+                _controller.runJavaScript(
+                  "initializeData($pEscaped, $nEscaped)",
+                );
               }
 
               if (_currentPage != 1) {
@@ -328,8 +336,11 @@ class _MushafWebViewState extends State<_MushafWebView> {
         name: "MushafWebView",
       );
 
-      // TODO: Implement word audio playback or other features here
-      // Example: play audio for the tapped word
+      AudioPlayerManager.playWordWithWordId(
+        data['surah'],
+        data['wordId'],
+        data['page'],
+      );
     } catch (e) {
       log("Error parsing word tap: $e", name: "MushafWebView");
     }
@@ -383,18 +394,14 @@ class _MushafWebViewState extends State<_MushafWebView> {
             tooltip: "Go to Page",
             onSelected: _goToPage,
             itemBuilder: (context) {
-              // Show page groups for quick navigation
-              return List.generate(
-                (widget.totalPages / 20).ceil(),
-                (groupIndex) {
-                  final start = groupIndex * 20 + 1;
-                  final end = (start + 19).clamp(1, widget.totalPages);
-                  return PopupMenuItem<int>(
-                    value: start,
-                    child: Text("Pages $start – $end"),
-                  );
-                },
-              );
+              // Show all option of page. page 1, page 2 ....
+              return List.generate(widget.totalPages, (index) {
+                final pageNumber = index + 1;
+                return PopupMenuItem<int>(
+                  value: pageNumber,
+                  child: Text("Page $pageNumber"),
+                );
+              });
             },
           ),
           IconButton(
@@ -406,7 +413,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: const Text("Delete Data?"),
-                    content: const Text("Are you sure you want to delete the downloaded Mushaf data? You will need to download it again to view the Quran."),
+                    content: const Text(
+                      "Are you sure you want to delete the downloaded Mushaf data? You will need to download it again to view the Quran.",
+                    ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
@@ -417,7 +426,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
                           Navigator.pop(context);
                           widget.onDeleteData?.call();
                         },
-                        style: TextButton.styleFrom(foregroundColor: Colors.red),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.red,
+                        ),
                         child: const Text("Delete"),
                       ),
                     ],
