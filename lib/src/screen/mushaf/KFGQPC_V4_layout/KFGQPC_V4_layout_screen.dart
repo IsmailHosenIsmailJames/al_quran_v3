@@ -393,6 +393,134 @@ class _MushafWebViewState extends State<_MushafWebView> {
   void _nextPage() => _goToPage(_currentPage + 1);
   void _prevPage() => _goToPage(_currentPage - 1);
 
+  void _showPageNavigationDialog() {
+    final TextEditingController pageController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        final theme = Theme.of(context);
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Row(
+            children: [
+              Icon(Icons.menu_book, color: theme.primaryColor),
+              const SizedBox(width: 12),
+              const Text(
+                "Go to Page",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          content: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Enter a page number between 1 and 604",
+                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: pageController,
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "1 - 604",
+                    hintStyle: TextStyle(
+                      color: Colors.grey.shade300,
+                      fontSize: 20,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade50,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: Colors.grey.shade200),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(color: Colors.grey.shade200),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide(
+                        color: theme.primaryColor,
+                        width: 2,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(color: Colors.redAccent),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Required";
+                    }
+                    final page = int.tryParse(value);
+                    if (page == null || page < 1 || page > 604) {
+                      return "Invalid page (1-604)";
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.grey.shade600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: theme.primaryColor,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    final page = int.parse(pageController.text);
+                    _goToPage(page);
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text(
+                  "Go to Page",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -409,20 +537,10 @@ class _MushafWebViewState extends State<_MushafWebView> {
             onPressed: _currentPage < widget.totalPages ? _nextPage : null,
             tooltip: "Next Page",
           ),
-          PopupMenuButton<int>(
+          IconButton(
             icon: const Icon(Icons.menu_book),
             tooltip: "Go to Page",
-            onSelected: _goToPage,
-            itemBuilder: (context) {
-              // Show all option of page. page 1, page 2 ....
-              return List.generate(widget.totalPages, (index) {
-                final pageNumber = index + 1;
-                return PopupMenuItem<int>(
-                  value: pageNumber,
-                  child: Text("Page $pageNumber"),
-                );
-              });
-            },
+            onPressed: _showPageNavigationDialog,
           ),
           IconButton(
             icon: const Icon(Icons.delete_outline),
