@@ -1,9 +1,11 @@
 import "dart:async";
+import "dart:developer";
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
@@ -76,16 +78,23 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
 
-  Future<void> scrollToAyah(dynamic key) async {
+  Future<void> scrollToAyah(dynamic key, {Duration? duration}) async {
     if (key is String) {
       if (itemScrollControllerAyahByAyah.isAttached) {
         int index = ayahsList.indexOf(key);
         if (index != -1) {
-          itemScrollControllerAyahByAyah.scrollTo(
-            index: index,
-            alignment: 0.15,
-            duration: const Duration(milliseconds: 200),
-          );
+          if (duration == Duration.zero) {
+            itemScrollControllerAyahByAyah.jumpTo(
+              index: index,
+              alignment: 0.15,
+            );
+          } else {
+            itemScrollControllerAyahByAyah.scrollTo(
+              index: index,
+              alignment: 0.15,
+              duration: duration ?? const Duration(milliseconds: 200),
+            );
+          }
         }
       }
     } else if (key is List<String>) {
@@ -212,29 +221,30 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (AudioPlayerManager.audioPlayer.currentIndex == null) return;
       final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
 
       if (currentPlayingAyah.isNotEmpty &&
           ayahsList.contains(currentPlayingAyah)) {
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-          scrollToAyah(currentPlayingAyah);
+          scrollToAyah(currentPlayingAyah, duration: Duration.zero);
         } else {
           int index = pagesList.indexWhere(
             (element) => element.contains(currentPlayingAyah),
           );
           if (index != -1) {
-            scrollToAyah(pagesList[index]);
+            scrollToAyah(pagesList[index], duration: Duration.zero);
           }
         }
       } else if (widget.toScrollKey != null) {
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-          scrollToAyah(widget.toScrollKey);
+          scrollToAyah(widget.toScrollKey, duration: Duration.zero);
         } else {
           int index = pagesList.indexWhere(
             (element) => element.contains(widget.toScrollKey),
           );
           if (index != -1) {
-            scrollToAyah(pagesList[index]);
+            scrollToAyah(pagesList[index], duration: Duration.zero);
           }
         }
       }
