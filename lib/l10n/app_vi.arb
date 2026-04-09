@@ -340,5 +340,18 @@
   "iftarStart": "Bắt đầu Iftar",
   "tahajjudStart": "Bắt đầu Tahajjud",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Phông chữ Indopak",
+  "uthmaniFont": "Phông chữ Uthmani",
+  "close": "Đóng",
+  "goToSettings": "Đi tới cài đặt",
+  "scriptSettingsUpdated": "Đã cập nhật cài đặt tập lệnh",
+  "scriptSettingsUpdatedDescription": "Chúng tôi đã đơn giản hóa các tùy chọn tập lệnh và thêm nhiều phông chữ hơn.",
+  "enterPageNumber": "Nhập số trang từ 1 đến 604",
+  "deleteMushafData": "Xóa dữ liệu Mushaf",
+  "deleteMushafDataDescription": "Bạn có chắc chắn muốn xóa tất cả dữ liệu Mushaf không?",
+  "invalidPage": "Trang không hợp lệ (1-604)",
+  "goToPage": "Đi tới trang",
+  "resources": "Tài nguyên",
+  "mushaf": "Mushaf"
 }

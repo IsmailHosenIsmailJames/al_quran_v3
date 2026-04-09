@@ -602,5 +602,18 @@
   "iftarStart": "Mula Iftar",
   "tahajjudStart": "Mula Tahajjud",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Fon Indopak",
+  "uthmaniFont": "Fon Uthmani",
+  "close": "Tutup",
+  "goToSettings": "Pergi ke Tetapan",
+  "scriptSettingsUpdated": "Tetapan Skrip Dikemas Kini",
+  "scriptSettingsUpdatedDescription": "Kami telah memudahkan pilihan skrip kami dan menambah lebih banyak fon.",
+  "enterPageNumber": "Masukkan nombor halaman antara 1 hingga 604",
+  "deleteMushafData": "Padam Data Mushaf",
+  "deleteMushafDataDescription": "Adakah anda pasti mahu memadam semua data Mushaf?",
+  "invalidPage": "Halaman tidak sah (1-604)",
+  "goToPage": "Pergi ke Halaman",
+  "resources": "Sumber",
+  "mushaf": "Mushaf"
 }

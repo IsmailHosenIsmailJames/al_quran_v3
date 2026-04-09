@@ -602,5 +602,18 @@
   "iftarStart": "开斋时间",
   "tahajjudStart": "夜间祷告开始",
   "tahajjud": "夜间祷告",
-  "dhuha": "杜哈"
+  "dhuha": "杜哈",
+  "indopakFont": "印巴字体",
+  "uthmaniFont": "奥斯曼字体",
+  "close": "关闭",
+  "goToSettings": "前往设置",
+  "scriptSettingsUpdated": "脚本设置已更新",
+  "scriptSettingsUpdatedDescription": "我们简化了脚本选项并添加了更多字体。",
+  "enterPageNumber": "输入 1 到 604 之间的页码",
+  "deleteMushafData": "删除 Mushaf 数据",
+  "deleteMushafDataDescription": "您确定要删除所有 Mushaf 数据吗？",
+  "invalidPage": "无效页码 (1-604)",
+  "goToPage": "前往页面",
+  "resources": "资源",
+  "mushaf": "麦斯哈夫"
 }

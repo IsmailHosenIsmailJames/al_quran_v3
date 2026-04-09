@@ -1169,21 +1169,44 @@ class AppLocalizationsTa extends AppLocalizations {
   String get dhuha => 'லுஹா';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'இந்தோபாக் எழுத்துரு';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'உஸ்மானி எழுத்துரு';
 
   @override
-  String get close => 'Close';
+  String get close => 'மூடு';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'அமைப்புகளுக்குச் செல்லவும்';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated =>
+      'ஸ்கிரிப்ட் அமைப்புகள் புதுப்பிக்கப்பட்டன';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'நாங்கள் ஸ்கிரிப்ட் விருப்பங்களை எளிதாக்கியுள்ளோம் மற்றும் கூடுதல் எழுத்துருக்களைச் சேர்த்துள்ளோம்.';
+
+  @override
+  String get enterPageNumber => '1 முதல் 604 வரையிலான பக்க எண்ணை உள்ளிடவும்';
+
+  @override
+  String get deleteMushafData => 'முஸ்ஹாஃப் தரவை நீக்கு';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'அனைத்து முஸ்ஹாஃப் தரவையும் நீக்க விரும்புகிறீர்களா?';
+
+  @override
+  String get invalidPage => 'தவறான பக்கம் (1-604)';
+
+  @override
+  String get goToPage => 'பக்கத்திற்குச் செல்லவும்';
+
+  @override
+  String get resources => 'ஆதாரங்கள்';
+
+  @override
+  String get mushaf => 'முஸ்ஹாஃப்';
 }

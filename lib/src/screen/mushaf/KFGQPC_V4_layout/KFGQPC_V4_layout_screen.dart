@@ -2,6 +2,7 @@ import 'dart:convert';
 import "dart:developer";
 import 'dart:io';
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:archive/archive.dart";
 import "package:cached_network_image/cached_network_image.dart";
@@ -248,7 +249,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
                           ),
                           onPressed: downloadAndExtractMushaf,
                           icon: const Icon(Icons.download),
-                          label: const Text("Download"),
+                          label: Text(AppLocalizations.of(context).download),
                         ),
                       ),
                   ],
@@ -407,11 +408,11 @@ class _MushafWebViewState extends State<_MushafWebView> {
           ),
           title: Row(
             children: [
-              Icon(Icons.menu_book, color: theme.primaryColor),
+              const Icon(Icons.menu_book),
               const SizedBox(width: 12),
-              const Text(
-                "Go to Page",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context).goToPage,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -421,9 +422,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Enter a page number between 1 and 604",
-                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                Text(
+                  AppLocalizations.of(context).enterPageNumber,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
@@ -436,42 +437,17 @@ class _MushafWebViewState extends State<_MushafWebView> {
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "1 - 604",
-                    hintStyle: TextStyle(
-                      color: Colors.grey.shade300,
-                      fontSize: 20,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey.shade50,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 20),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.grey.shade200),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.grey.shade200),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(
-                        color: theme.primaryColor,
-                        width: 2,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: Colors.redAccent),
-                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Required";
+                      return AppLocalizations.of(context).required;
                     }
                     final page = int.tryParse(value);
                     if (page == null || page < 1 || page > 604) {
-                      return "Invalid page (1-604)";
+                      return AppLocalizations.of(context).invalidPage;
                     }
                     return null;
                   },
@@ -482,10 +458,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(
-                "Cancel",
-                style: TextStyle(color: Colors.grey.shade600),
-              ),
+              child: Text(AppLocalizations.of(context).cancel),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 8.0, bottom: 8.0),
@@ -509,9 +482,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
                     Navigator.pop(context);
                   }
                 },
-                child: const Text(
-                  "Go to Page",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child: Text(
+                  AppLocalizations.of(context).goToPage,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -525,7 +498,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Page $_currentPage"),
+        title: Text("${AppLocalizations.of(context).page} $_currentPage"),
         actions: [
           IconButton(
             icon: const Icon(Icons.chevron_right),
@@ -544,20 +517,20 @@ class _MushafWebViewState extends State<_MushafWebView> {
           ),
           IconButton(
             icon: const Icon(Icons.delete_outline),
-            tooltip: "Delete Mushaf Data",
+            tooltip: AppLocalizations.of(context).deleteMushafData,
             onPressed: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text("Delete Data?"),
-                    content: const Text(
-                      "Are you sure you want to delete the downloaded Mushaf data? You will need to download it again to view the Quran.",
+                    title: Text(AppLocalizations.of(context).deleteMushafData),
+                    content: Text(
+                      AppLocalizations.of(context).deleteMushafDataDescription,
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text("Cancel"),
+                        child: Text(AppLocalizations.of(context).cancel),
                       ),
                       TextButton(
                         onPressed: () {
@@ -567,7 +540,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.red,
                         ),
-                        child: const Text("Delete"),
+                        child: Text(AppLocalizations.of(context).delete),
                       ),
                     ],
                   );

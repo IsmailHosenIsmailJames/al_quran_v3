@@ -1136,21 +1136,42 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dhuha => '두하';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => '인도팩 글꼴';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => '우스마니 글꼴';
 
   @override
-  String get close => 'Close';
+  String get close => '닫기';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => '설정으로 이동';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => '스크립트 설정이 업데이트되었습니다';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      '스크립트 옵션을 단순화하고 더 많은 글꼴을 추가했습니다.';
+
+  @override
+  String get enterPageNumber => '1에서 604 사이의 페이지 번호를 입력하세요';
+
+  @override
+  String get deleteMushafData => '무사프 데이터 삭제';
+
+  @override
+  String get deleteMushafDataDescription => '모든 무사프 데이터를 삭제하시겠습니까?';
+
+  @override
+  String get invalidPage => '잘못된 페이지 (1-604)';
+
+  @override
+  String get goToPage => '페이지로 이동';
+
+  @override
+  String get resources => '리소스';
+
+  @override
+  String get mushaf => '무사프';
 }

@@ -340,5 +340,18 @@
   "iftarStart": "イフタールの始まり",
   "tahajjudStart": "タハッジュドの始まり",
   "tahajjud": "タハッジュド",
-  "dhuha": "ドゥハー"
+  "dhuha": "ドゥハー",
+  "indopakFont": "インドパック・フォント",
+  "uthmaniFont": "ウスマニ・フォント",
+  "close": "閉じる",
+  "goToSettings": "設定へ移動",
+  "scriptSettingsUpdated": "スクリプト設定が更新されました",
+  "scriptSettingsUpdatedDescription": "スクリプトのオプションを簡素化し、さらにフォントを追加しました。",
+  "enterPageNumber": "1から604までのページ番号を入力してください",
+  "deleteMushafData": "ムスハフのデータを削除する",
+  "deleteMushafDataDescription": "ムスハフの全データを削除してもよろしいですか？",
+  "invalidPage": "無効なページ（1-604）",
+  "goToPage": "ページへ移動",
+  "resources": "リソース",
+  "mushaf": "ムスハフ"
 }

@@ -602,5 +602,18 @@
   "iftarStart": "د افطار پیل",
   "tahajjudStart": "د تهجد پیل",
   "tahajjud": "تهجد",
-  "dhuha": "ضحى"
+  "dhuha": "ضحى",
+  "indopakFont": "هندپاک فونټ",
+  "uthmaniFont": "عثماني فونټ",
+  "close": "بندول",
+  "goToSettings": "تنظیماتو ته لاړ شئ",
+  "scriptSettingsUpdated": "د ليکني تنظیمات تازه شول",
+  "scriptSettingsUpdatedDescription": "موږ د ليکني انتخابونه ساده کړي او نور فونټونه مو اضافه کړي دي.",
+  "enterPageNumber": "د ۱ او ۶۰۴ ترمنځ د پاڼې شمېره داخله کړئ",
+  "deleteMushafData": "د مصحف ډیټا حذف کړئ",
+  "deleteMushafDataDescription": "ایا تاسو ډاډه یاست چې غواړئ د مصحف ټول معلومات حذف کړئ؟",
+  "invalidPage": "نامعتبره پاڼه (۱-۶۰۴)",
+  "goToPage": "پاڼې ته لاړ شئ",
+  "resources": "سرچینې",
+  "mushaf": "مصحف"
 }

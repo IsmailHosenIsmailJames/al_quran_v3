@@ -1150,21 +1150,43 @@ class AppLocalizationsMs extends AppLocalizations {
   String get dhuha => 'Dhuha';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'Fon Indopak';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Fon Uthmani';
 
   @override
-  String get close => 'Close';
+  String get close => 'Tutup';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Pergi ke Tetapan';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Tetapan Skrip Dikemas Kini';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Kami telah memudahkan pilihan skrip kami dan menambah lebih banyak fon.';
+
+  @override
+  String get enterPageNumber => 'Masukkan nombor halaman antara 1 hingga 604';
+
+  @override
+  String get deleteMushafData => 'Padam Data Mushaf';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Adakah anda pasti mahu memadam semua data Mushaf?';
+
+  @override
+  String get invalidPage => 'Halaman tidak sah (1-604)';
+
+  @override
+  String get goToPage => 'Pergi ke Halaman';
+
+  @override
+  String get resources => 'Sumber';
+
+  @override
+  String get mushaf => 'Mushaf';
 }

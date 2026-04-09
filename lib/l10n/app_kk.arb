@@ -602,5 +602,18 @@
   "iftarStart": "Ауызашардың басталуы",
   "tahajjudStart": "Тәһәжүдтің басталуы",
   "tahajjud": "Тәһәжүд",
-  "dhuha": "Духа"
+  "dhuha": "Духа",
+  "indopakFont": "Индопак шрифті",
+  "uthmaniFont": "Осман шрифті",
+  "close": "Жабу",
+  "goToSettings": "Параметрлерге өту",
+  "scriptSettingsUpdated": "Мәтін параметрлері жаңартылды",
+  "scriptSettingsUpdatedDescription": "Мәтін опцияларын жеңілдетіп, көбірек шрифт қостық.",
+  "enterPageNumber": "1 мен 604 арасындағы бет нөмірін енгізіңіз",
+  "deleteMushafData": "Мұсхаф деректерін жою",
+  "deleteMushafDataDescription": "Барлық Мұсхаф деректерін жоюды қалайтыныңызға сенімдісіз бе?",
+  "invalidPage": "Бет қате (1-604)",
+  "goToPage": "Бетке өту",
+  "resources": "Ресурстар",
+  "mushaf": "Мұсхаф"
 }

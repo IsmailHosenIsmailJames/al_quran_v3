@@ -602,5 +602,18 @@
   "iftarStart": "بداية الإفطار",
   "tahajjudStart": "بداية التهجد",
   "tahajjud": "التهجد",
-  "dhuha": "الضحى"
+  "dhuha": "الضحى",
+  "indopakFont": "الخط الهندوسي الباكستاني",
+  "uthmaniFont": "الخط العثماني",
+  "close": "إغلاق",
+  "goToSettings": "اذهب إلى الإعدادات",
+  "scriptSettingsUpdated": "تم تحديث إعدادات الخط",
+  "scriptSettingsUpdatedDescription": "لقد قمنا بتبسيط خيارات الخط وأضفنا المزيد من الخطوط.",
+  "enterPageNumber": "أدخل رقم الصفحة بين 1 و 604",
+  "deleteMushafData": "حذف بيانات المصحف",
+  "deleteMushafDataDescription": "هل أنت متأكد أنك تريد حذف جميع بيانات المصحف؟",
+  "invalidPage": "صفحة غير صالحة (1-604)",
+  "goToPage": "ذهاب إلى الصفحة",
+  "resources": "الموارد",
+  "mushaf": "مصحف"
 }

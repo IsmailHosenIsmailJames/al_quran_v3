@@ -602,5 +602,18 @@
   "iftarStart": "इफ्तार शुरू",
   "tahajjudStart": "तहज्जुद शुरू",
   "tahajjud": "तहज्जुद",
-  "dhuha": "दुहा"
+  "dhuha": "दुहा",
+  "indopakFont": "इंडोपाक फ़ॉन्ट",
+  "uthmaniFont": "उस्मानी फ़ॉन्ट",
+  "close": "बंद करें",
+  "goToSettings": "सेटिंग्स में जाएं",
+  "scriptSettingsUpdated": "लिपि सेटिंग्स अपडेट की गईं",
+  "scriptSettingsUpdatedDescription": "हमने अपनी लिपि विकल्पों को सरल बना दिया है और अधिक फ़ॉन्ट जोड़े हैं।",
+  "enterPageNumber": "1 से 604 के बीच एक पृष्ठ संख्या दर्ज करें",
+  "deleteMushafData": "मुसहाफ डेटा हटाएं",
+  "deleteMushafDataDescription": "क्या आप वाकई सभी मुसहाफ डेटा को हटाना चाहते हैं?",
+  "invalidPage": "अमान्य पृष्ठ (1-604)",
+  "goToPage": "पृष्ठ पर जाएं",
+  "resources": "संसाधन",
+  "mushaf": "मुसहाफ"
 }

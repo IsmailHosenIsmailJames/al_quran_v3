@@ -1152,21 +1152,43 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dhuha => 'চাশত';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'ইন্দোপাক ফন্ট';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'উসমানী ফন্ট';
 
   @override
-  String get close => 'Close';
+  String get close => 'বন্ধ করুন';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'সেটিংসে যান';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'স্ক্রিপ্ট সেটিংস আপডেট করা হয়েছে';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'আমরা আমাদের স্ক্রিপ্ট অপশনগুলো সহজ করেছি এবং আরও ফন্ট যোগ করেছি।';
+
+  @override
+  String get enterPageNumber => '১ থেকে ৬০৪ এর মধ্যে একটি পৃষ্ঠা নম্বর লিখুন';
+
+  @override
+  String get deleteMushafData => 'মুসহাফ ডাটা মুছে ফেলুন';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'আপনি কি নিশ্চিত যে আপনি সমস্ত মুসহাফ ডাটা মুছে ফেলতে চান?';
+
+  @override
+  String get invalidPage => 'অকার্যকর পৃষ্ঠা (১-৬০৪)';
+
+  @override
+  String get goToPage => 'পৃষ্ঠায় যান';
+
+  @override
+  String get resources => 'রিসোর্স';
+
+  @override
+  String get mushaf => 'মুসহাফ';
 }

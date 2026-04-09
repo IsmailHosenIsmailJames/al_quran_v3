@@ -602,5 +602,18 @@
   "iftarStart": "Начало Ифтара",
   "tahajjudStart": "Начало Тахаджуда",
   "tahajjud": "Тахаджуд",
-  "dhuha": "Духа"
+  "dhuha": "Духа",
+  "indopakFont": "Шрифт Индопак",
+  "uthmaniFont": "Шрифт Усмани",
+  "close": "Закрыть",
+  "goToSettings": "Перейти в настройки",
+  "scriptSettingsUpdated": "Настройки скрипта обновлены",
+  "scriptSettingsUpdatedDescription": "Мы упростили параметры скрипта и добавили новые шрифты.",
+  "enterPageNumber": "Введите номер страницы от 1 до 604",
+  "deleteMushafData": "Удалить данные Мусхафа",
+  "deleteMushafDataDescription": "Вы уверены, что хотите удалить все данные Мусхафа?",
+  "invalidPage": "Неверная страница (1-604)",
+  "goToPage": "Перейти на страницу",
+  "resources": "Ресурсы",
+  "mushaf": "Мусхаф"
 }

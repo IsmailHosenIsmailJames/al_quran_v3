@@ -602,5 +602,18 @@
   "iftarStart": "Mulai Iftar",
   "tahajjudStart": "Mulai Tahajjud",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Font Indopak",
+  "uthmaniFont": "Font Utsmani",
+  "close": "Tutup",
+  "goToSettings": "Buka Pengaturan",
+  "scriptSettingsUpdated": "Pengaturan Skrip Diperbarui",
+  "scriptSettingsUpdatedDescription": "Kami telah menyederhanakan opsi skrip dan menambahkan lebih banyak font.",
+  "enterPageNumber": "Masukkan nomor halaman antara 1 dan 604",
+  "deleteMushafData": "Hapus Data Mushaf",
+  "deleteMushafDataDescription": "Apakah Anda yakin ingin menghapus semua data Mushaf?",
+  "invalidPage": "Halaman tidak valid (1-604)",
+  "goToPage": "Buka Halaman",
+  "resources": "Sumber Daya",
+  "mushaf": "Mushaf"
 }

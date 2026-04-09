@@ -608,5 +608,12 @@
   "close": "Close",
   "goToSettings": "Go to Settings",
   "scriptSettingsUpdated": "Script Settings Updated",
-  "scriptSettingsUpdatedDescription": "We have simplified our script options and added more fonts."
+  "scriptSettingsUpdatedDescription": "We have simplified our script options and added more fonts.",
+  "enterPageNumber": "Enter a page number between 1 and 604",
+  "deleteMushafData": "Delete Mushaf Data",
+  "deleteMushafDataDescription": "Are you sure you want to delete all Mushaf data?",
+  "invalidPage": "Invalid page (1-604)",
+  "goToPage": "Go to Page",
+  "resources": "Resources",
+  "mushaf": "Mushaf"
 }

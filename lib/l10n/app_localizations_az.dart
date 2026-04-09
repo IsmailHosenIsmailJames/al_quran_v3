@@ -1157,21 +1157,44 @@ class AppLocalizationsAz extends AppLocalizations {
   String get dhuha => 'Duha';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'İndopak Şrifti';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Osmani Şrifti';
 
   @override
-  String get close => 'Close';
+  String get close => 'Bağla';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Ayarlara get';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Mətn ayarları yeniləndi';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Mətn seçimlərimizi sadələşdirdik və daha çox şrift əlavə etdik.';
+
+  @override
+  String get enterPageNumber =>
+      '1 ilə 604 arasında bir səhifə nömrəsi daxil edin';
+
+  @override
+  String get deleteMushafData => 'Müshaf məlumatlarını sil';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Bütün Müshaf məlumatlarını silmək istədiyinizə əminsiniz?';
+
+  @override
+  String get invalidPage => 'Yanlış səhifə (1-604)';
+
+  @override
+  String get goToPage => 'Səhifəyə get';
+
+  @override
+  String get resources => 'Resurslar';
+
+  @override
+  String get mushaf => 'Müshaf';
 }

@@ -602,5 +602,18 @@
   "iftarStart": "İftar Vakti",
   "tahajjudStart": "Teheccüd Başlangıcı",
   "tahajjud": "Teheccüd",
-  "dhuha": "Kuşluk"
+  "dhuha": "Kuşluk",
+  "indopakFont": "İndopak Yazı Tipi",
+  "uthmaniFont": "Osmani Yazı Tipi",
+  "close": "Kapat",
+  "goToSettings": "Ayarlara Git",
+  "scriptSettingsUpdated": "Yazı Ayarları Güncellendi",
+  "scriptSettingsUpdatedDescription": "Yazı seçeneklerimizi basitleştirdik ve daha fazla yazı tipi ekledik.",
+  "enterPageNumber": "1 ile 604 arasında bir sayfa numarası girin",
+  "deleteMushafData": "Mushaf Verilerini Sil",
+  "deleteMushafDataDescription": "Tüm Mushaf verilerini silmek istediğinizden emin misiniz?",
+  "invalidPage": "Geçersiz sayfa (1-604)",
+  "goToPage": "Sayfaya Git",
+  "resources": "Kaynaklar",
+  "mushaf": "Mushaf"
 }

@@ -1137,21 +1137,42 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dhuha => 'ドゥハー';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'インドパック・フォント';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'ウスマニ・フォント';
 
   @override
-  String get close => 'Close';
+  String get close => '閉じる';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => '設定へ移動';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'スクリプト設定が更新されました';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'スクリプトのオプションを簡素化し、さらにフォントを追加しました。';
+
+  @override
+  String get enterPageNumber => '1から604までのページ番号を入力してください';
+
+  @override
+  String get deleteMushafData => 'ムスハフのデータを削除する';
+
+  @override
+  String get deleteMushafDataDescription => 'ムスハフの全データを削除してもよろしいですか？';
+
+  @override
+  String get invalidPage => '無効なページ（1-604）';
+
+  @override
+  String get goToPage => 'ページへ移動';
+
+  @override
+  String get resources => 'リソース';
+
+  @override
+  String get mushaf => 'ムスハフ';
 }
