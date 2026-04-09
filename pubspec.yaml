@@ -119,9 +119,29 @@ flutter:
     - assets/adhan/
 
   fonts:
+
+  ##### Uthmani/Madani Script Fonts #####
     - family: QPC_Hafs
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
+
+    - family: me_quran_volt_newmet
+      fonts:
+        - asset: assets/fonts/Quran/me_quran_volt_newmet copy.ttf
+    
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Quran/Amiri Regular.ttf
+    
+    - family: AlQalamQuranMajeedWeb
+      fonts:
+        - asset: assets/fonts/Quran/Al Qalam Quran Majeed Web Regular.ttf
+    
+    - family: Lateef
+      fonts:
+        - asset: assets/fonts/Quran/Lateef Regular.ttf
+      
+    ##### Indopak/Asian Script Fonts #####
 
     - family: AlQuranNeov5x1
       fonts:
@@ -134,10 +154,13 @@ flutter:
       fonts:
         - asset: assets/fonts/Quran/surah-name-v1.ttf
 
-
-    - family: KFGQPC-Uthmanic-HAFS-Regular
+    - family: noorehira
       fonts:
-        - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
+        - asset: assets/fonts/Quran/noorehira Regular.ttf
+
+    - family: noorehuda
+      fonts:
+        - asset: assets/fonts/Quran/noorehuda Regular.ttf
 
     # - family: NotoSans
     #   fonts:
