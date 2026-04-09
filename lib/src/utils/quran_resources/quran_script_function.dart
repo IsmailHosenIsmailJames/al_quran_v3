@@ -3,103 +3,42 @@ import "dart:convert";
 import "package:al_quran_v3/src/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:flutter/services.dart";
-import "package:hive_ce/hive.dart";
 
 class QuranScriptFunction {
-  static String quranScriptVersion = "2-dev-5";
-  static Box? quranBox;
+  static Map quranScriptMap = {};
+  static QuranScriptType? currentScript;
 
-  static Future<void> writeQuranScript({
-    Function(int progress)? onProgress,
-  }) async {
-    int progress = 0;
-    int processed = 0;
-    final userBox = Hive.box("user");
-    for (QuranScriptType scriptType in QuranScriptType.values) {
-      Map quranScriptMap = {};
-      switch (scriptType) {
-        case QuranScriptType.tajweed:
-          quranScriptMap = jsonDecode(
-            await rootBundle.loadString(
-              "assets/quran_script/QPC_Hafs_Tajweed_Compress.json",
-            ),
-          );
-        case QuranScriptType.uthmani:
-          quranScriptMap = jsonDecode(
-            await rootBundle.loadString("assets/quran_script/Uthmani.json"),
-          );
-        case QuranScriptType.indopak:
-          quranScriptMap = jsonDecode(
-            await rootBundle.loadString("assets/quran_script/Indopak.json"),
-          );
-      }
-      Box quranBox = await Hive.openBox("script_${scriptType.name}");
-      for (String surahKey in quranScriptMap.keys) {
-        Map surahMap = quranScriptMap[surahKey] as Map;
-        for (final ayahKey in surahMap.keys) {
-          if (!quranBox.isOpen) {
-            quranBox = await Hive.openBox("script_${scriptType.name}");
-          }
-          await quranBox.put("$surahKey:$ayahKey", surahMap[ayahKey]);
-          processed++;
-          if (onProgress != null) {
-            final double temProgress = (processed / 18708) * 100;
-            if (temProgress.toInt() != progress) {
-              progress = temProgress.toInt();
-              onProgress(progress);
-            }
-          }
-        }
-      }
-
-      quranScriptMap.clear();
-      await quranBox.close();
+  static Future<void> loadScript(QuranScriptType scriptType) async {
+    if (currentScript != scriptType) {
+      quranScriptMap = {};
+      currentScript = scriptType;
+    } else {
+      return;
     }
-    await userBox.put("writeQuranScriptVersion", quranScriptVersion);
-    await userBox.put("writeQuranScript", true);
+    String scriptAssetName = "";
+    switch (scriptType) {
+      case QuranScriptType.indopak:
+        scriptAssetName = "assets/quran_script/Indopak.json";
+        break;
+      case QuranScriptType.uthmani:
+        scriptAssetName = "assets/quran_script/QPC_Hafs_Tajweed_Compress.json";
+        break;
+    }
+    final value = await rootBundle.loadString(scriptAssetName);
+    quranScriptMap = jsonDecode(value);
   }
-
-  static Future<void> initQuranScript(QuranScriptType type) async {
-    quranBox = await Hive.openBox("script_${type.name}");
-  }
-
-  static Map cacheOfAyah = {};
 
   static List<String> getWordListOfAyah(
     QuranScriptType type,
     String surah,
     String ayah,
   ) {
-    String ayahKey = "$surah:$ayah";
-    final fromCache = cacheOfAyah[ayahKey + type.name];
-    if (fromCache != null) return fromCache;
-
-    Box? currentBox = Hive.isBoxOpen("script_${type.name}")
-        ? Hive.box("script_${type.name}")
-        : quranBox;
-
-    if (currentBox == null || !currentBox.isOpen) {
-      return [];
-    }
-
-    final dynamic data = currentBox.get(ayahKey);
-    if (data == null) {
-      return [];
-    }
-
-    if (type == QuranScriptType.indopak || type == QuranScriptType.tajweed) {
-      List<String> compressed = List<String>.from(data);
-      for (int i = 0; i < compressed.length; i++) {
-        for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
-          compressed[i] = compressed[i].replaceAll("r$j", tajweedRulesList[j]);
-        }
+    final ayahData = List<String>.from(quranScriptMap[surah][ayah]);
+    for (int i = 0; i < ayahData.length; i++) {
+      for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
+        ayahData[i] = ayahData[i].replaceAll("r$j", tajweedRulesList[j]);
       }
-      cacheOfAyah[ayahKey + type.name] = compressed;
-      return compressed;
-    } else {
-      final toReturn = List<String>.from(data);
-      cacheOfAyah[ayahKey + type.name] = toReturn;
-      return toReturn;
     }
+    return ayahData;
   }
 }

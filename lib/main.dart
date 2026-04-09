@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_downloa
 import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -29,14 +30,13 @@ import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
-// import "package:firebase_core/firebase_core.dart";
+import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
@@ -101,8 +101,11 @@ Future<void> main() async {
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  await QuranScriptFunction.initQuranScript(
-    QuranScriptType.values.firstWhere((element) => scriptOnDb == element.name),
+  await QuranScriptFunction.loadScript(
+    QuranScriptType.values.firstOrNullWhere(
+          (element) => scriptOnDb == element.name,
+        ) ??
+        QuranScriptType.uthmani,
   );
 
   await ThemeFunctions.initThemeFunction();
@@ -334,9 +337,6 @@ class MyApp extends StatelessWidget {
 
   bool isSetupComplete() {
     final userBox = Hive.box("user");
-    return userBox.get("writeQuranScript", defaultValue: false) &&
-        userBox.get("is_setup_complete", defaultValue: false) &&
-        (userBox.get("writeQuranScriptVersion") ==
-            QuranScriptFunction.quranScriptVersion);
+    return userBox.get("is_setup_complete", defaultValue: false);
   }
 }

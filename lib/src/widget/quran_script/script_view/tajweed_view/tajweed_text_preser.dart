@@ -2,8 +2,10 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_rules.dart";
 import "package:flutter/gestures.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 import "package:html/parser.dart" show parseFragment;
 import "package:html/dom.dart" as dom;
@@ -81,6 +83,7 @@ TextSpan parseTajweedWord({
 
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
   bool isLastWord = wordIndex == words.length - 1;
+  bool useTajweed = context.read<QuranViewCubit>().state.useTajweed;
 
   void processNode(dom.Node node, Color currentColor) {
     if (node.nodeType == dom.Node.TEXT_NODE) {
@@ -118,9 +121,9 @@ TextSpan parseTajweedWord({
 
       if (element.localName == "rule") {
         String? ruleClass = element.attributes["class"];
-        if (ruleClass != null && currentThemeColors.containsKey(ruleClass)) {
+        if (useTajweed && ruleClass != null && currentThemeColors.containsKey(ruleClass)) {
           nextColor = currentThemeColors[ruleClass]!;
-        } else if (ruleClass != null) {
+        } else if (useTajweed && ruleClass != null) {
           log(
             "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: ${words[wordIndex]} ",
           );
