@@ -16,6 +16,7 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:gap/gap.dart";
 
 import "../../../main.dart";
@@ -330,6 +331,32 @@ class _HomePageState extends State<HomePage> {
       initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
     );
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final userBox = Hive.box("user");
+      final bool isSetupComplete =
+          userBox.get("is_setup_complete", defaultValue: false);
+      final bool hasShownDialog =
+          userBox.get("shown_tajweed_dialog", defaultValue: false);
+      if (isSetupComplete && !hasShownDialog) {
+        userBox.put("shown_tajweed_dialog", true);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Script Settings Updated"),
+              content: const Text(
+                  "We have simplified our script options! You can now toggle Tajweed colors for both Uthmani and IndoPak scripts directly from your settings."),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("Got it"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override

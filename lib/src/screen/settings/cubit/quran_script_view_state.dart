@@ -13,6 +13,7 @@ class QuranViewState {
   bool hideQuranAyah;
   bool alwaysOpenWordByWord;
   bool enableWordByWordHighlight;
+  bool useTajweed;
   bool scrollWithRecitation;
   bool useAudioStream;
   double playbackSpeed;
@@ -29,6 +30,7 @@ class QuranViewState {
     this.hideQuranAyah = false,
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
+    this.useTajweed = true,
     this.scrollWithRecitation = false,
     this.useAudioStream = true,
     this.playbackSpeed = 1.0,
@@ -50,6 +52,7 @@ class QuranViewState {
     bool? scrollWithRecitation,
     bool? useAudioStream,
     double? playbackSpeed,
+    bool? useTajweed,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -68,6 +71,7 @@ class QuranViewState {
       scrollWithRecitation: scrollWithRecitation ?? this.scrollWithRecitation,
       useAudioStream: useAudioStream ?? this.useAudioStream,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
+      useTajweed: useTajweed ?? this.useTajweed,
     );
   }
 
@@ -90,6 +94,7 @@ class QuranViewState {
         other.enableWordByWordHighlight == enableWordByWordHighlight &&
         other.scrollWithRecitation == scrollWithRecitation &&
         other.useAudioStream == useAudioStream &&
+        other.useTajweed == useTajweed &&
         other.playbackSpeed == playbackSpeed;
   }
 
@@ -109,6 +114,7 @@ class QuranViewState {
         enableWordByWordHighlight.hashCode ^
         scrollWithRecitation.hashCode ^
         useAudioStream.hashCode ^
+        useTajweed.hashCode ^
         playbackSpeed.hashCode;
   }
 }

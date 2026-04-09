@@ -60,8 +60,15 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           playbackSpeed: Hive.box(
             "user",
           ).get("playback_speed", defaultValue: 1.0),
+          useTajweed: Hive.box(
+            "user",
+          ).get("useTajweed", defaultValue: true),
         ),
-      );
+      ) {
+    if (Hive.box("user").get("selected_quran_script_type") == "tajweed") {
+      changeQuranScriptType(QuranScriptType.uthmani);
+    }
+  }
 
   void changeAyah(String ayah) {
     Hive.box("user").put("preview_quran_script_ayah", ayah);
@@ -86,6 +93,11 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   void changeTranslationFontSize(double fontSize) {
     Hive.box("user").put("preview_translation_font_size", fontSize);
     emit(state.copyWith(translationFontSize: fontSize));
+  }
+
+  void changeUseTajweed(bool useTajweed) {
+    Hive.box("user").put("useTajweed", useTajweed);
+    emit(state.copyWith(useTajweed: useTajweed));
   }
 
   void setViewOptions({
