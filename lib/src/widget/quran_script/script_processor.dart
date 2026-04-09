@@ -1,6 +1,6 @@
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_view/uthmani_view.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/quran_script_view.dart";
 import "package:flutter/material.dart";
 
 class ScriptProcessor extends StatelessWidget {
@@ -15,12 +15,12 @@ class ScriptProcessor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (scriptInfo.quranScriptType) {
-      QuranScriptType.uthmani => NonTajweedScriptView(
+      QuranScriptType.uthmani => QuranScriptScriptView(
         scriptInfo: scriptInfo,
         themeState: themeState,
         isUthmani: true,
       ),
-      QuranScriptType.indopak => NonTajweedScriptView(
+      QuranScriptType.indopak => QuranScriptScriptView(
         scriptInfo: scriptInfo,
         themeState: themeState,
         isUthmani: false,

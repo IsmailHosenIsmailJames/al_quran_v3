@@ -5,6 +5,8 @@ class QuranViewState {
   double fontSize;
   double lineHeight;
   QuranScriptType quranScriptType;
+  String uthmaniFontName;
+  String indopakFontName;
   double translationFontSize;
   bool hideFootnote;
   bool hideWordByWord;
@@ -23,6 +25,8 @@ class QuranViewState {
     required this.lineHeight,
     required this.quranScriptType,
     required this.translationFontSize,
+    this.uthmaniFontName = "QPC_Hafs",
+    this.indopakFontName = "AlQuranNeov5x1",
     this.hideFootnote = false,
     this.hideWordByWord = false,
     this.hideTranslation = false,
@@ -50,6 +54,8 @@ class QuranViewState {
     bool? alwaysOpenWordByWord,
     bool? enableWordByWordHighlight,
     bool? scrollWithRecitation,
+    String? uthmaniFontName,
+    String? indopakFontName,
     bool? useAudioStream,
     double? playbackSpeed,
     bool? useTajweed,
@@ -72,6 +78,8 @@ class QuranViewState {
       useAudioStream: useAudioStream ?? this.useAudioStream,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
       useTajweed: useTajweed ?? this.useTajweed,
+      uthmaniFontName: uthmaniFontName ?? this.uthmaniFontName,
+      indopakFontName: indopakFontName ?? this.indopakFontName,
     );
   }
 
@@ -95,7 +103,9 @@ class QuranViewState {
         other.scrollWithRecitation == scrollWithRecitation &&
         other.useAudioStream == useAudioStream &&
         other.useTajweed == useTajweed &&
-        other.playbackSpeed == playbackSpeed;
+        other.playbackSpeed == playbackSpeed &&
+        other.uthmaniFontName == uthmaniFontName &&
+        other.indopakFontName == indopakFontName;
   }
 
   @override
@@ -115,6 +125,8 @@ class QuranViewState {
         scrollWithRecitation.hashCode ^
         useAudioStream.hashCode ^
         useTajweed.hashCode ^
-        playbackSpeed.hashCode;
+        playbackSpeed.hashCode ^
+        uthmaniFontName.hashCode ^
+        indopakFontName.hashCode;
   }
 }

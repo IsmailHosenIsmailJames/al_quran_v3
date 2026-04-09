@@ -3,6 +3,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
@@ -268,6 +269,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           wordByWord: [],
                         ),
                         const Gap(10),
+                        const QuranFontSelectionWidget(
+                          titleStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         Row(
                           children: [
                             Expanded(
