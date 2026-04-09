@@ -4,11 +4,11 @@ import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
-import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/utils/quran_word/show_popup_word_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:flutter/gestures.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
+import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -63,6 +63,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   .read<AyahKeyCubit>()
                   .state
                   .current;
+
               if (ayahsKey.contains(currentAyahKey)) {
                 List? segments = audioSegmentsMap[currentAyahKey];
                 if (segments != null) {
@@ -93,6 +94,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   .read<AyahKeyCubit>()
                   .state
                   .current;
+
               return Text.rich(
                 TextSpan(
                   children: ayahsKey.map((ayahKey) {
@@ -113,39 +115,24 @@ class NonTajweedPageRenderer extends StatelessWidget {
                             : null,
                       ),
                       children: List.generate(words.length, (index) {
-                        String word = words[index];
-                        bool isLastWord =
-                            index == (words.length - 1) && word.length < 3;
-                        return TextSpan(
-                          text: "$word ",
-                          style:
-                              (highlightingWord == "$ayahKey:${index + 1}" &&
-                                  enableWordByWordHighlight == true)
-                              ? TextStyle(
-                                  backgroundColor: themeState.primaryShade300,
-                                  fontFamily: isLastWord ? "QPC_Hafs" : null,
-                                )
-                              : TextStyle(
-                                  fontFamily: isLastWord ? "QPC_Hafs" : null,
-                                ),
-
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              final highlightingWord = List.generate(
-                                words.length,
-                                (index) => "$ayahKey:${index + 1}",
-                              );
-                              showPopupWordFunction(
-                                context: context,
-                                initWordIndex: index,
-                                wordKeys: highlightingWord,
-                                wordByWordList:
-                                    await WordByWordFunction.getAyahWordByWordData(
-                                      "${highlightingWord.first.split(":")[0]}:${highlightingWord.first.split(":")[1]}",
-                                    ) ??
-                                    [],
-                              );
-                            },
+                        return parseTajweedWord(
+                          wordIndex: index,
+                          baseStyle: TextStyle(
+                            fontSize: baseTextStyle?.fontSize ?? 24,
+                            fontFamily:
+                                baseTextStyle?.fontFamily ?? "AlQuranNeov5x1",
+                            height: baseTextStyle?.height,
+                            backgroundColor:
+                                (highlightingWord == "$ayahKey:${index + 1}" &&
+                                    enableWordByWordHighlight == true)
+                                ? themeState.primaryShade300
+                                : null,
+                          ),
+                          surahNumber: ayahKey.split(":").first.toInt(),
+                          ayahNumber: ayahKey.split(":").last.toInt(),
+                          skipWordTap: false,
+                          words: List<String>.from(words),
+                          context: context,
                         );
                       }).toList(),
                     );
@@ -155,7 +142,12 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   fontSize: baseTextStyle?.fontSize ?? 24,
                   fontFamily:
                       baseTextStyle?.fontFamily ??
-                      (isUthmani ? "QPC_Hafs" : "AlQuranNeov5x1"),
+                      (isUthmani
+                          ? context.read<QuranViewCubit>().state.uthmaniFontName
+                          : context
+                                .read<QuranViewCubit>()
+                                .state
+                                .indopakFontName),
                   fontWeight: baseTextStyle?.fontWeight,
                   height: baseTextStyle?.height,
                   letterSpacing: 0,

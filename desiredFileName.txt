@@ -1,1 +1,217 @@
-{}
+{
+  "ar": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "az": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "bn": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "de": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "es": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "fa": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "fr": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "hi": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "id": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "it": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ja": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "kk": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ko": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ms": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "pa": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ps": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "pt": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ru": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "sw": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ta": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "tr": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "ur": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "vi": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ],
+
+  "zh": [
+    "indopakFont",
+    "uthmaniFont",
+    "close",
+    "goToSettings",
+    "scriptSettingsUpdated",
+    "scriptSettingsUpdatedDescription"
+  ]
+}

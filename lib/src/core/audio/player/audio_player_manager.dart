@@ -13,8 +13,11 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/platform_services.dart";
+import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
+import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
@@ -134,8 +137,8 @@ class AudioPlayerManager {
     audioUICubit.isPlayList(false);
     audioUICubit.changeIsInsideQuran(false);
 
-    final playerPositionCubit =
-        navigatorKey.currentContext!.read<PlayerPositionCubit>();
+    final playerPositionCubit = navigatorKey.currentContext!
+        .read<PlayerPositionCubit>();
     playerPositionCubit.changeCurrentPosition(Duration.zero);
     playerPositionCubit.changeBufferPosition(Duration.zero);
     playerPositionCubit.changeTotalDuration(Duration.zero);
@@ -241,13 +244,13 @@ class AudioPlayerManager {
     return applicationDataPath == null
         ? null
         : join(
-          applicationDataPath!,
-          "recitations",
-          reciterInfoModel.name,
-          reciterInfoModel.style,
-          surahInfoModel.id.toString().padLeft(3, "0"),
-          "${ayahNumber.toString().padLeft(3, "0")}.mp3",
-        );
+            applicationDataPath!,
+            "recitations",
+            reciterInfoModel.name,
+            reciterInfoModel.style,
+            surahInfoModel.id.toString().padLeft(3, "0"),
+            "${ayahNumber.toString().padLeft(3, "0")}.mp3",
+          );
   }
 
   static String? getExpectedSurahDirectoryLocation({
@@ -257,12 +260,12 @@ class AudioPlayerManager {
     return applicationDataPath == null
         ? null
         : join(
-          applicationDataPath!,
-          "recitations",
-          reciterInfoModel.name,
-          reciterInfoModel.style,
-          surahInfoModel.id.toString().padLeft(3, "0"),
-        );
+            applicationDataPath!,
+            "recitations",
+            reciterInfoModel.name,
+            reciterInfoModel.style,
+            surahInfoModel.id.toString().padLeft(3, "0"),
+          );
   }
 
   static Future<String?> getDownloadedPathOfSurah({
@@ -389,14 +392,12 @@ class AudioPlayerManager {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => AudioDownloadScreen(
-                              initDownloadSurah: surahInfoModel,
-                              reciterInfoModel:
-                                  context
-                                      .read<SegmentedQuranReciterCubit>()
-                                      .state,
-                            ),
+                        builder: (context) => AudioDownloadScreen(
+                          initDownloadSurah: surahInfoModel,
+                          reciterInfoModel: context
+                              .read<SegmentedQuranReciterCubit>()
+                              .state,
+                        ),
                       ),
                     );
                   },
@@ -493,6 +494,14 @@ class AudioPlayerManager {
     if (instantPlay) await audioPlayer.play();
   }
 
+  static Future<void> playWordWithWordId(
+    int surahNumber,
+    int wordId,
+    int page,
+  ) async {
+// TODO
+  }
+
   static Future<void> playWord(String wordKey) async {
     if (isWordPlaying) return;
     if (platformOwn == PlatformOwn.isIos ||
@@ -504,19 +513,19 @@ class AudioPlayerManager {
 
     AudioSource audioSource =
         !(platformOwn == PlatformOwn.isIos ||
-                platformOwn == PlatformOwn.isAndroid ||
-                platformOwn == PlatformOwn.isMac)
-            ? AudioSource.uri(
-              Uri.parse(
-                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
-              ),
-            )
-            : LockCachingAudioSource(
-              Uri.parse(
-                "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
-              ),
-              tag: MediaItem(id: wordKey, title: wordKey),
-            );
+            platformOwn == PlatformOwn.isAndroid ||
+            platformOwn == PlatformOwn.isMac)
+        ? AudioSource.uri(
+            Uri.parse(
+              "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+            ),
+          )
+        : LockCachingAudioSource(
+            Uri.parse(
+              "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+            ),
+            tag: MediaItem(id: wordKey, title: wordKey),
+          );
 
     await stopListeningAudioPlayerState();
 
@@ -560,28 +569,28 @@ class AudioPlayerManager {
               platformOwn == PlatformOwn.isWindows)
           ? AudioSource.file(audioFilePath)
           : AudioSource.file(
-            audioFilePath,
-            tag: MediaItem(
-              id: ayahKey,
-              album: reciter.name,
-              title: getSurahName(context, surahInfoModel.id),
-            ),
-          );
+              audioFilePath,
+              tag: MediaItem(
+                id: ayahKey,
+                album: reciter.name,
+                title: getSurahName(context, surahInfoModel.id),
+              ),
+            );
     } else {
       return (platformOwn == PlatformOwn.isIos ||
               platformOwn == PlatformOwn.isAndroid ||
               platformOwn == PlatformOwn.isMac)
           ? LockCachingAudioSource(
-            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
-            tag: MediaItem(
-              id: ayahKey,
-              album: reciter.name,
-              title: getSurahName(context, surahInfoModel.id),
-            ),
-          )
+              Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+              tag: MediaItem(
+                id: ayahKey,
+                album: reciter.name,
+                title: getSurahName(context, surahInfoModel.id),
+              ),
+            )
           : AudioSource.uri(
-            Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
-          );
+              Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+            );
     }
   }
 
