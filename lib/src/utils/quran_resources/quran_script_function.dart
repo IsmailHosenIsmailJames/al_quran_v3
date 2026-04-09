@@ -42,7 +42,7 @@ class QuranScriptFunction {
       }
     }
 
-    if (!warshScript) {
+    if (!warshScript && QuranScriptType.indopak == type) {
       for (int i = 0; i < ayahData.length; i++) {
         ayahData[i] = ayahData[i].replaceAll(1761.toChar(), "Backup");
         ayahData[i] = ayahData[i].replaceAll(1618.toChar(), 1761.toChar());
