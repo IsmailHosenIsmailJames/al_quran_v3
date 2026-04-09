@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/screen/about/about_the_app.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
+import "package:al_quran_v3/src/utils/reset_app.dart";
 // import "package:al_quran_v3/src/utils/reset_app.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -466,62 +467,60 @@ Widget drawerSection({
                     style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
           ),
-          // const Gap(5),
-          // ListTile(
-          //   minTileHeight: 40,
-          //   onTap: () async {
-          //     showDialog(
-          //       context: context,
-          //       builder: (BuildContext context) {
-          //         return AlertDialog.adaptive(
-          //           insetPadding: const EdgeInsets.all(10),
-          //           title:
-          //               isJustIcon
-          //                   ? null
-          //                   : Text(
-          //                     l10n.resetAppWarningTitle,
-          //                     style: const TextStyle(color: Colors.red),
-          //                   ),
-          //           content: Text(l10n.resetAppWarningMessage),
-          //           actions: <Widget>[
-          //             TextButton.icon(
-          //               onPressed: () {
-          //                 Navigator.of(context).pop();
-          //               },
-          //               label: Text(l10n.cancel),
-          //               icon: const Icon(Icons.close_rounded),
-          //             ),
-          //             TextButton.icon(
-          //               onPressed: () async {
-          //                 Navigator.of(context).pop();
-          //                 await resetTheApp(context);
-          //               },
-          //               icon: const Icon(
-          //                 FluentIcons.arrow_reset_24_filled,
-          //                 color: Colors.red,
-          //               ),
-          //               label: Text(
-          //                 l10n.reset,
-          //                 style: const TextStyle(color: Colors.red),
-          //               ),
-          //             ),
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   },
-          //   leading: Icon(
-          //     FluentIcons.arrow_reset_24_filled,
-          //     color: themeState.primary,
-          //   ),
-          //   title:
-          //       isJustIcon
-          //           ? null
-          //           : Text(
-          //             l10n.resetTheApp,
-          //             style: const TextStyle(fontWeight: FontWeight.w500),
-          //           ),
-          // ),
+          const Gap(5),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog.adaptive(
+                    insetPadding: const EdgeInsets.all(10),
+                    title: isJustIcon
+                        ? null
+                        : Text(
+                            l10n.resetAppWarningTitle,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                    content: Text(l10n.resetAppWarningMessage),
+                    actions: <Widget>[
+                      TextButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        label: Text(l10n.cancel),
+                        icon: const Icon(Icons.close_rounded),
+                      ),
+                      TextButton.icon(
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          await resetTheApp(context);
+                        },
+                        icon: const Icon(
+                          FluentIcons.arrow_reset_24_filled,
+                          color: Colors.red,
+                        ),
+                        label: Text(
+                          l10n.reset,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            leading: Icon(
+              FluentIcons.arrow_reset_24_filled,
+              color: themeState.primary,
+            ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.resetTheApp,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
           const Gap(50),
         ],
       );

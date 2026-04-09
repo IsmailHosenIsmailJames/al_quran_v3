@@ -265,7 +265,8 @@ Widget getAyahByAyahCard({
 
                       if (supportsWordByWord &&
                           !quranViewState.alwaysOpenWordByWord &&
-                          !quranViewState.hideWordByWord)
+                          !quranViewState.hideWordByWord &&
+                          wordByWord.isNotEmpty)
                         getWordByWordExpandCloseWidget(context, ayahKey),
                       if (supportsWordByWord && !quranViewState.hideWordByWord)
                         const Gap(5),

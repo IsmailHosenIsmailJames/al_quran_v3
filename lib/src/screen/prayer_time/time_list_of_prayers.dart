@@ -1,8 +1,16 @@
+import "dart:developer";
+
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
+import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
+import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_times_calender_view.dart";
 import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
 import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
 import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
@@ -509,6 +517,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         prayerTimes.sunrise,
                         prayerTimes.sunrise.add(const Duration(minutes: 15)),
                         l10n.sunrise,
+                        Prayer.sunrise,
                       ),
                       const Gap(8),
                       forbiddenWidget(
@@ -517,8 +526,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         "assets/img/noon_forbidden_time.png",
                         prayerTimes.dhuhr.subtract(const Duration(minutes: 8)),
                         prayerTimes.dhuhr,
-
                         l10n.noon,
+                        Prayer.noon,
                       ),
                       const Gap(8),
                       forbiddenWidget(
@@ -529,8 +538,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                           const Duration(minutes: 15),
                         ),
                         prayerTimes.maghrib,
-
                         l10n.sunset,
+                        Prayer.sunset,
                       ),
                     ],
                   ),
@@ -555,39 +564,31 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             ),
                           ),
                           const Spacer(),
-                          // SizedBox(
-                          //   height: 35,
-                          //   width: 60,
-                          //   child: IconButton(
-                          //     padding: EdgeInsets.zero,
-                          //     onPressed: () {
-                          //       Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //           builder: (context) => PrayerSettings(
-                          //             prayerTimes: prayerTimes,
-                          //           ),
-                          //         ),
-                          //       );
-                          //     },
-                          //     icon: Icon(
-                          //       FluentIcons.settings_24_filled,
-                          //       color: themeState.primary,
-                          //     ),
-                          //   ),
-                          // ),
-                          // SizedBox(
-                          //   height: 35,
-                          //   width: 60,
-                          //   child: IconButton(
-                          //     padding: EdgeInsets.zero,
-                          //     onPressed: () {},
-                          //     icon: Icon(
-                          //       Icons.arrow_forward,
-                          //       color: themeState.primary,
-                          //     ),
-                          //   ),
-                          // ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PrayerSettings(prayerTimes: prayerTimes),
+                                ),
+                              );
+                            },
+                            icon: const Icon(FluentIcons.settings_24_regular),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PrayerTimesCalenderView(
+                                    prayerTimes: prayerTimes,
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(FluentIcons.calendar_24_regular),
+                          ),
                         ],
                       ),
                       const Gap(8),
@@ -713,6 +714,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     DateTime start,
     DateTime end,
     String title,
+    Prayer prayer,
   ) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
@@ -768,13 +770,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 ),
               ),
             ),
-            // const VerticalDivider(width: 12),
-            // getReminderSwitch(
-            //   context,
-            //   isAlarm: false,
-            //   isCurrentToRemind: Random().nextBool(),
-            //   onChanged: (value) {},
-            // ),
+            const VerticalDivider(width: 12),
+            getReminderSwitch(context, prayer: prayer),
           ],
         ),
       ),
@@ -787,69 +784,99 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     DateTime time,
     PrayerTimes prayerTimes,
   ) {
-    return SizedBox(
-      height: 40,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Gap(8),
-          CircleAvatar(
-            radius: 6,
-            backgroundColor:
-                prayerTimes.currentPrayer(date: DateTime.now()) == prayer
-                ? context.read<ThemeCubit>().state.primary
-                : Colors.grey.withValues(alpha: 0.2),
-          ),
-          const Gap(8),
-          Text(
-            PrayerTimeHelper.localizedPrayerName(
-                  context,
-                  prayer,
-                )?.capitalize() ??
-                "-",
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
-          const Spacer(),
-          Text(
-            DateFormat.jm(
-              AppLocalizations.of(context).localeName,
-            ).format(time.toLocal()),
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-          ),
-          const Gap(12),
-          // getReminderSwitch(
-          //   context,
-          //   isAlarm: Random().nextBool(),
-          //   isCurrentToRemind: Random().nextBool(),
-          //   onChanged: (value) {},
-          // ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Gap(8),
+        CircleAvatar(
+          radius: 6,
+          backgroundColor:
+              prayerTimes.currentPrayer(date: DateTime.now()) == prayer
+              ? context.read<ThemeCubit>().state.primary
+              : Colors.grey.withValues(alpha: 0.2),
+        ),
+        const Gap(8),
+        Text(
+          PrayerTimeHelper.localizedPrayerName(context, prayer)?.capitalize() ??
+              "-",
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        const Spacer(),
+        Text(
+          TimeOfDay.fromDateTime(time.toLocal()).format(context),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        const Gap(12),
+        getReminderSwitch(context, prayer: prayer),
+      ],
     );
   }
 
-  // Switch getReminderSwitch(
-  //   BuildContext context, {
-  //   required bool isAlarm,
-  //   required bool isCurrentToRemind,
-  //   required Function(bool) onChanged,
-  // }) {
-  //   return Switch(
-  //     thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-  //       Set<WidgetState> states,
-  //     ) {
-  //       if (states.contains(WidgetState.selected)) {
-  //         return Icon(
-  //           isAlarm ? Icons.alarm_on_rounded : FluentIcons.alert_on_24_regular,
-  //         );
-  //       }
-  //       return Icon(
-  //         isAlarm ? Icons.alarm_off_rounded : FluentIcons.alert_off_24_regular,
-  //       );
-  //     }),
-  //     value: isCurrentToRemind,
-  //     onChanged: (value) async {},
-  //   );
-  // }
+  Widget getReminderSwitch(BuildContext context, {required Prayer prayer}) {
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, state) {
+        bool isCurrentToRemind = state.prayerToRemember.any(
+          (element) => element.prayerType.name == prayer.name,
+        );
+
+        bool isAlarm =
+            state.previousReminderModes[prayer] == PrayerReminderType.alarm;
+        return Switch(
+          thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+            Set<WidgetState> states,
+          ) {
+            if (states.contains(WidgetState.selected)) {
+              return Icon(
+                isAlarm
+                    ? Icons.alarm_on_rounded
+                    : FluentIcons.alert_on_24_regular,
+              );
+            }
+            return Icon(
+              isAlarm
+                  ? Icons.alarm_off_rounded
+                  : FluentIcons.alert_off_24_regular,
+            );
+          }),
+          value: isCurrentToRemind,
+          onChanged: (value) async {
+            log(value.toString());
+            if (value) {
+              PermissionStatus permissionStatus =
+                  await Permission.scheduleExactAlarm.status;
+              if (permissionStatus != PermissionStatus.granted) {
+                permissionStatus = await Permission.scheduleExactAlarm
+                    .request();
+              }
+              if (permissionStatus != PermissionStatus.granted) {
+                Fluttertoast.showToast(
+                  msg: "Please grant the permission to enable reminder",
+                );
+                return;
+              } else {
+                context.read<PrayerReminderCubit>().addPrayerToRemember(
+                  ReminderTypeWithPrayModel(
+                    reminderType: isAlarm
+                        ? PrayerReminderType.alarm
+                        : PrayerReminderType.notification,
+                    prayerType: prayer,
+                  ),
+                );
+              }
+            } else {
+              context.read<PrayerReminderCubit>().removePrayerFromRemember(
+                ReminderTypeWithPrayModel(
+                  reminderType: isAlarm
+                      ? PrayerReminderType.alarm
+                      : PrayerReminderType.notification,
+                  prayerType: prayer,
+                ),
+              );
+            }
+          },
+        );
+      },
+    );
+  }
 }

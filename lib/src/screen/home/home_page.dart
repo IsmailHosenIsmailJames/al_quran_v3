@@ -6,16 +6,20 @@ import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:gap/gap.dart";
 
 import "../../../main.dart";
@@ -330,6 +334,79 @@ class _HomePageState extends State<HomePage> {
       initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
     );
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final userBox = Hive.box("user");
+      final bool isSetupComplete = userBox.get(
+        "is_setup_complete",
+        defaultValue: false,
+      );
+      final bool hasShownDialog = userBox.get(
+        "shown_tajweed_dialog",
+        defaultValue: false,
+      );
+      if (isSetupComplete && hasShownDialog) {
+        userBox.put("shown_tajweed_dialog", true);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+              title: Text(AppLocalizations.of(context).scriptSettingsUpdated),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    AppLocalizations.of(
+                      context,
+                    ).scriptSettingsUpdatedDescription,
+                  ),
+                  const Gap(10),
+                  getScriptSelectionSegmentedButtons(context),
+                  getAyahByAyahCard(
+                    ayahKey: "1:2",
+                    context: context,
+                    translationListWithInfo: [],
+                    showTopOptions: false,
+                    showOnlyAyah: true,
+                    removeBorder: true,
+                    keepMargin: false,
+                    isCenter: true,
+                    wordByWord: [],
+                  ),
+                  const Gap(10),
+                  const QuranFontSelectionWidget(
+                    titleStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton.icon(
+                  onPressed: () => Navigator.pop(context),
+                  label: Text(AppLocalizations.of(context).close),
+                  icon: const Icon(Icons.close),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                  label: Text(AppLocalizations.of(context).goToSettings),
+                  icon: const Icon(Icons.settings),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -348,47 +425,19 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       extendBody: true,
-      extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
       appBar: isSideNav
           ? null
           : AppBar(
-              flexibleSpace: ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: themeState.mutedGray),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              backgroundColor: Theme.brightnessOf(context) == Brightness.dark
-                  ? Colors.grey.shade900.withValues(alpha: 0.5)
-                  : Colors.grey.shade200.withValues(alpha: 0.5),
               leading: Builder(
                 builder: (context) {
                   return appBarLeading(l10n, context);
                 },
               ),
-
+              backgroundColor: Theme.of(context).colorScheme.surface,
               title: Text(l10n.alQuran),
               centerTitle: true,
-              //   actions: [
-              //     IconButton(
-              //       icon: const Icon(FluentIcons.search_24_filled),
-              //       onPressed: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => const SearchScreen(),
-              //           ),
-              //         );
-              //       },
-              //     ),
-              //   ],
+              actions: [],
             ),
       body: Row(
         children: [
@@ -515,6 +564,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: isJustIcon
               ? MainAxisAlignment.center
               : MainAxisAlignment.start,
+
           children: [
             if (!isJustIcon) const Gap(10),
             if (!isJustIcon) const Gap(10),
@@ -569,7 +619,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
-                color: Theme.brightnessOf(context) == Brightness.dark
+                color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.grey.shade900
                     : Colors.grey.shade400,
                 blurRadius: 10,
@@ -717,12 +767,13 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(
                   context,
                 ).bottomNavigationBarTheme.backgroundColor,
+
                 border: Border(top: BorderSide(color: themeState.mutedGray)),
               ),
               child: BottomNavigationBar(
                 backgroundColor: Theme.brightnessOf(context) == Brightness.dark
                     ? Colors.grey.shade900.withValues(alpha: 0.5)
-                    : Colors.grey.shade200.withValues(alpha: 0.5),
+                    : Colors.grey.shade100.withValues(alpha: 0.5),
                 elevation: 0,
                 currentIndex: state.tabIndex,
                 onTap: (index) {

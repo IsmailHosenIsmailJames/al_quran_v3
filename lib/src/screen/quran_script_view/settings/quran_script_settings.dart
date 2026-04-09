@@ -11,7 +11,9 @@ import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/audio/reciter_overview.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
@@ -53,7 +55,24 @@ class QuranScriptSettings extends StatelessWidget {
             Text(appLocalizations.quranStyle, style: titleStyle),
             const Gap(7),
             getScriptSelectionSegmentedButtons(context),
-            const Gap(20),
+            const Gap(10),
+
+            getAyahByAyahCard(
+              ayahKey: "1:2",
+              context: context,
+              translationListWithInfo: [],
+              showTopOptions: false,
+              showOnlyAyah: true,
+              removeBorder: true,
+              keepMargin: false,
+              isCenter: true,
+              wordByWord: [],
+            ),
+
+            const Gap(10),
+            QuranFontSelectionWidget(titleStyle: titleStyle),
+
+            const Gap(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -450,6 +469,123 @@ class QuranScriptSettings extends StatelessWidget {
         }
         return toReturn;
       },
+    );
+  }
+}
+
+class QuranFontSelectionWidget extends StatelessWidget {
+  const QuranFontSelectionWidget({super.key, required this.titleStyle});
+
+  final TextStyle titleStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+
+    return BlocBuilder<QuranViewCubit, QuranViewState>(
+      builder: (context, state) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            state.quranScriptType == QuranScriptType.uthmani
+                ? l10n.uthmaniFont
+                : l10n.indopakFont,
+            style: titleStyle,
+          ),
+          const Gap(10),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.3,
+                  ),
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                  border: Border.all(
+                    color: theme.colorScheme.outlineVariant.withValues(
+                      alpha: 0.5,
+                    ),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: state.quranScriptType == QuranScriptType.uthmani
+                        ? state.uthmaniFontName
+                        : state.indopakFontName,
+                    isExpanded: false,
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 20,
+                    ),
+                    dropdownColor: theme.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    items: state.quranScriptType == QuranScriptType.uthmani
+                        ? const [
+                            DropdownMenuItem(
+                              value: "QPC_Hafs",
+                              child: Text("QPC Hafs"),
+                            ),
+                            DropdownMenuItem(
+                              value: "me_quran_volt_newmet",
+                              child: Text("Me Quran"),
+                            ),
+                            DropdownMenuItem(
+                              value: "Amiri",
+                              child: Text("Amiri"),
+                            ),
+                            DropdownMenuItem(
+                              value: "AlQalamQuranMajeedWeb",
+                              child: Text("Al Qalam Quran Majeed"),
+                            ),
+                            DropdownMenuItem(
+                              value: "Lateef",
+                              child: Text("Lateef"),
+                            ),
+                          ]
+                        : const [
+                            DropdownMenuItem(
+                              value: "AlQuranNeov5x1",
+                              child: Text("Al Quran Neov5x1"),
+                            ),
+                            DropdownMenuItem(
+                              value: "IndopakNastaleeq",
+                              child: Text("Indopak Nastaleeq"),
+                            ),
+                            DropdownMenuItem(
+                              value: "noorehira",
+                              child: Text("Noore Hira"),
+                            ),
+                            DropdownMenuItem(
+                              value: "noorehuda",
+                              child: Text("Noore Huda"),
+                            ),
+                          ],
+                    onChanged: (value) {
+                      if (value == null) return;
+                      if (state.quranScriptType == QuranScriptType.uthmani) {
+                        context.read<QuranViewCubit>().changeUthmaniFontName(
+                          value,
+                        );
+                      } else {
+                        context.read<QuranViewCubit>().changeIndopakFontName(
+                          value,
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

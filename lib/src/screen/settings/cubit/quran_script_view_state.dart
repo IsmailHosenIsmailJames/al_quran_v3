@@ -5,6 +5,8 @@ class QuranViewState {
   double fontSize;
   double lineHeight;
   QuranScriptType quranScriptType;
+  String uthmaniFontName;
+  String indopakFontName;
   double translationFontSize;
   bool hideFootnote;
   bool hideWordByWord;
@@ -13,6 +15,7 @@ class QuranViewState {
   bool hideQuranAyah;
   bool alwaysOpenWordByWord;
   bool enableWordByWordHighlight;
+  bool useTajweed;
   bool scrollWithRecitation;
   bool useAudioStream;
   double playbackSpeed;
@@ -22,6 +25,8 @@ class QuranViewState {
     required this.lineHeight,
     required this.quranScriptType,
     required this.translationFontSize,
+    this.uthmaniFontName = "QPC_Hafs",
+    this.indopakFontName = "AlQuranNeov5x1",
     this.hideFootnote = false,
     this.hideWordByWord = false,
     this.hideTranslation = false,
@@ -29,6 +34,7 @@ class QuranViewState {
     this.hideQuranAyah = false,
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
+    this.useTajweed = true,
     this.scrollWithRecitation = false,
     this.useAudioStream = true,
     this.playbackSpeed = 1.0,
@@ -48,8 +54,11 @@ class QuranViewState {
     bool? alwaysOpenWordByWord,
     bool? enableWordByWordHighlight,
     bool? scrollWithRecitation,
+    String? uthmaniFontName,
+    String? indopakFontName,
     bool? useAudioStream,
     double? playbackSpeed,
+    bool? useTajweed,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -68,6 +77,9 @@ class QuranViewState {
       scrollWithRecitation: scrollWithRecitation ?? this.scrollWithRecitation,
       useAudioStream: useAudioStream ?? this.useAudioStream,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
+      useTajweed: useTajweed ?? this.useTajweed,
+      uthmaniFontName: uthmaniFontName ?? this.uthmaniFontName,
+      indopakFontName: indopakFontName ?? this.indopakFontName,
     );
   }
 
@@ -90,7 +102,10 @@ class QuranViewState {
         other.enableWordByWordHighlight == enableWordByWordHighlight &&
         other.scrollWithRecitation == scrollWithRecitation &&
         other.useAudioStream == useAudioStream &&
-        other.playbackSpeed == playbackSpeed;
+        other.useTajweed == useTajweed &&
+        other.playbackSpeed == playbackSpeed &&
+        other.uthmaniFontName == uthmaniFontName &&
+        other.indopakFontName == indopakFontName;
   }
 
   @override
@@ -109,6 +124,9 @@ class QuranViewState {
         enableWordByWordHighlight.hashCode ^
         scrollWithRecitation.hashCode ^
         useAudioStream.hashCode ^
-        playbackSpeed.hashCode;
+        useTajweed.hashCode ^
+        playbackSpeed.hashCode ^
+        uthmaniFontName.hashCode ^
+        indopakFontName.hashCode;
   }
 }

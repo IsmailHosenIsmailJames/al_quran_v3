@@ -3,10 +3,9 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -100,64 +99,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
     });
   }
 
-  Future<void> writeQuranScript() async {
-    final userBox = Hive.box("user");
-    final isQuranScripProcessed = userBox.get(
-      "writeQuranScript",
-      defaultValue: false,
-    );
-
-    final String? quranScripVersion = userBox.get("writeQuranScriptVersion");
-    if (isQuranScripProcessed == true) {
-      if (quranScripVersion == QuranScriptFunction.quranScriptVersion) {
-        return;
-      }
-    }
-    showDialog(
-      barrierDismissible: false,
-      fullscreenDialog: true,
-      context: context,
-      builder: (context) => dialogForShowDownloadProcess(),
-    );
-
-    final ResourcesProgressCubit resourcesProgressCubit = context
-        .read<ResourcesProgressCubit>();
-
-    final AppLocalizations l10n = AppLocalizations.of(context);
-    resourcesProgressCubit.updateProgress(0.01, l10n.optimizingQuranScript);
-
-    await QuranScriptFunction.writeQuranScript(
-      onProgress: (progress) {
-        resourcesProgressCubit.updateProgress(
-          progress / 100,
-          l10n.optimizingQuranScript,
-        );
-      },
-    );
-
-    if (!Hive.isBoxOpen("user")) await Hive.openBox("user");
-
-    await QuranScriptFunction.initQuranScript(
-      context.read<QuranViewCubit>().state.quranScriptType,
-    );
-
-    Navigator.pop(context);
-
-    if (userBox.get("is_setup_complete", defaultValue: false)) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-        (route) => false,
-      );
-    }
-  }
-
   late ThemeState themeState = context.read<ThemeCubit>().state;
 
   @override
   void initState() {
     changeAppLanguage(context.read<LanguageCubit>().state);
-    QuranTranslationFunction.init().then((value) => writeQuranScript());
 
     super.initState();
   }
@@ -323,6 +269,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           wordByWord: [],
                         ),
                         const Gap(10),
+                        const QuranFontSelectionWidget(
+                          titleStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         Row(
                           children: [
                             Expanded(

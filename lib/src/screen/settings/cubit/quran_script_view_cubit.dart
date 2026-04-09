@@ -30,6 +30,12 @@ class QuranViewCubit extends Cubit<QuranViewState> {
                 ) ==
                 element.name,
           ),
+          indopakFontName: Hive.box(
+            "user",
+          ).get("selected_indopak_font_name", defaultValue: "AlQuranNeov5x1"),
+          uthmaniFontName: Hive.box(
+            "user",
+          ).get("selected_uthmani_font_name", defaultValue: "QPC_Hafs"),
           hideFootnote: Hive.box(
             "user",
           ).get("view_hideFootnote", defaultValue: false),
@@ -60,8 +66,13 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           playbackSpeed: Hive.box(
             "user",
           ).get("playback_speed", defaultValue: 1.0),
+          useTajweed: Hive.box("user").get("useTajweed", defaultValue: true),
         ),
-      );
+      ) {
+    if (Hive.box("user").get("selected_quran_script_type") == "tajweed") {
+      changeQuranScriptType(QuranScriptType.uthmani);
+    }
+  }
 
   void changeAyah(String ayah) {
     Hive.box("user").put("preview_quran_script_ayah", ayah);
@@ -86,6 +97,21 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   void changeTranslationFontSize(double fontSize) {
     Hive.box("user").put("preview_translation_font_size", fontSize);
     emit(state.copyWith(translationFontSize: fontSize));
+  }
+
+  void changeUseTajweed(bool useTajweed) {
+    Hive.box("user").put("useTajweed", useTajweed);
+    emit(state.copyWith(useTajweed: useTajweed));
+  }
+
+  void changeIndopakFontName(String fontName) {
+    Hive.box("user").put("selected_indopak_font_name", fontName);
+    emit(state.copyWith(indopakFontName: fontName));
+  }
+
+  void changeUthmaniFontName(String fontName) {
+    Hive.box("user").put("selected_uthmani_font_name", fontName);
+    emit(state.copyWith(uthmaniFontName: fontName));
   }
 
   void setViewOptions({
@@ -117,10 +143,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
         newState.hideTranslation == true &&
         newState.hideQuranAyah == true) {
       Fluttertoast.showToast(
-        msg:
-            AppLocalizations.of(
-              navigatorKey.currentContext!,
-            ).quranTranslationAyahOneMustEnabled,
+        msg: AppLocalizations.of(
+          navigatorKey.currentContext!,
+        ).quranTranslationAyahOneMustEnabled,
       );
       return;
     }

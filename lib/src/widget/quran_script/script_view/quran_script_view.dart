@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
@@ -9,25 +7,28 @@ import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_text_preser.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-import "../../../../theme/controller/theme_state.dart";
-import "tajweed_text_preser.dart";
+import "../../../theme/controller/theme_state.dart";
 
-class TajweedView extends StatelessWidget {
+class QuranScriptScriptView extends StatelessWidget {
+  final bool isUthmani;
   final ScriptInfo scriptInfo;
   final ThemeState themeState;
-  const TajweedView({
+
+  const QuranScriptScriptView({
     super.key,
     required this.scriptInfo,
+    required this.isUthmani,
     required this.themeState,
   });
 
   @override
   Widget build(BuildContext context) {
     List words = QuranScriptFunction.getWordListOfAyah(
-      QuranScriptType.tajweed,
+      isUthmani ? QuranScriptType.uthmani : QuranScriptType.indopak,
       scriptInfo.surahNumber.toString(),
       scriptInfo.ayahNumber.toString(),
     );
@@ -36,16 +37,14 @@ class TajweedView extends StatelessWidget {
         words = words.sublist(0, scriptInfo.limitWord);
       }
     }
-    TextStyle quranStyle =
-        scriptInfo.textStyle?.copyWith(
-          fontFamily: "QPC_Hafs",
-          letterSpacing: 0,
-        ) ??
-        const TextStyle(letterSpacing: 0, fontFamily: "QPC_Hafs");
-
-    String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
-
-    String? highlightingWordIndex;
+    TextStyle quranStyle = TextStyle(
+      fontSize: scriptInfo.textStyle?.fontSize ?? 24,
+      height: scriptInfo.textStyle?.height ?? 2,
+      fontFamily: isUthmani
+          ? context.read<QuranViewCubit>().state.uthmaniFontName
+          : context.read<QuranViewCubit>().state.indopakFontName,
+      letterSpacing: 0,
+    );
     if (scriptInfo.wordIndex != null) {
       return Text.rich(
         style: quranStyle,
@@ -63,8 +62,10 @@ class TajweedView extends StatelessWidget {
       );
     }
 
+    String ayahKey = "${scriptInfo.surahNumber}:${scriptInfo.ayahNumber}";
+
+    String? highlightingWordIndex;
     if (scriptInfo.forImage == true) {
-      log("For Image");
       return Text.rich(
         style: quranStyle,
         textDirection: TextDirection.rtl,
@@ -84,6 +85,7 @@ class TajweedView extends StatelessWidget {
         ),
       );
     }
+
     bool enableWordByWordHighlight =
         context.read<QuranViewCubit>().state.enableWordByWordHighlight == true;
 
@@ -92,7 +94,6 @@ class TajweedView extends StatelessWidget {
         List<List>? segments = context
             .read<SegmentedQuranReciterCubit>()
             .getAyahSegments(ayahKey);
-
         return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
           buildWhen: (previous, current) {
             if (scriptInfo.showWordHighlights == false ||

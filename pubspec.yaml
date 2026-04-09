@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.17.0+78
+version: 3.17.1+79
 
 environment:
   sdk: ^3.10.0
@@ -51,7 +51,7 @@ dependencies:
   cached_network_image: ^3.4.1
   screenshot: ^3.0.0
   device_info_plus: ^12.1.0
-  package_info_plus: ^9.0.0
+  package_info_plus: ^9.0.1
   # flutter_spinkit: ^5.2.1
   simple_icons: ^14.6.1
   uuid: ^4.5.1
@@ -75,6 +75,8 @@ dependencies:
 
   hijri: ^3.0.0
   shimmer: ^3.0.0
+  material_table_view: ^5.5.2
+  webview_flutter: ^4.13.1
   # background_fetch:
   #   git:
   #     url: https://github.com/transistorsoft/flutter_background_fetch
@@ -112,16 +114,34 @@ flutter:
   assets:
     - assets/img/
     - assets/img/sunrise_forbidden_time.png
-    - assets/
-    - assets/dev/
     - assets/quran_script/
     - assets/meta_data/
     - assets/adhan/
 
   fonts:
+
+  ##### Uthmani/Madani Script Fonts #####
     - family: QPC_Hafs
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
+
+    - family: me_quran_volt_newmet
+      fonts:
+        - asset: assets/fonts/Quran/me_quran_volt_newmet copy.ttf
+    
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Quran/Amiri Regular.ttf
+    
+    - family: AlQalamQuranMajeedWeb
+      fonts:
+        - asset: assets/fonts/Quran/Al Qalam Quran Majeed Web Regular.ttf
+    
+    - family: Lateef
+      fonts:
+        - asset: assets/fonts/Quran/Lateef Regular.ttf
+      
+    ##### Indopak/Asian Script Fonts #####
 
     - family: AlQuranNeov5x1
       fonts:
@@ -130,14 +150,18 @@ flutter:
     - family: IndopakNastaleeq
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
+
+    - family: noorehira
+      fonts:
+        - asset: assets/fonts/Quran/noorehira Regular.ttf
+
+    - family: noorehuda
+      fonts:
+        - asset: assets/fonts/Quran/noorehuda Regular.ttf
+        
     - family: surah-name-v1
       fonts:
         - asset: assets/fonts/Quran/surah-name-v1.ttf
-
-
-    - family: KFGQPC-Uthmanic-HAFS-Regular
-      fonts:
-        - asset: assets/fonts/Quran/KFGQPC Uthmanic Script HAFS Regular.otf
 
     # - family: NotoSans
     #   fonts:

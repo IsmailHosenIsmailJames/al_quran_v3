@@ -27,15 +27,13 @@ class ScriptInfo {
   });
 }
 
-enum QuranScriptType { tajweed, uthmani, indopak }
+enum QuranScriptType { uthmani, indopak }
 
 String getLocalizedQuranScriptType(
   BuildContext context,
   QuranScriptType quranScriptType,
 ) {
   switch (quranScriptType) {
-    case QuranScriptType.tajweed:
-      return AppLocalizations.of(context).quranScriptTajweed;
     case QuranScriptType.uthmani:
       return AppLocalizations.of(context).quranScriptUthmani;
     case QuranScriptType.indopak:
