@@ -340,5 +340,18 @@
   "iftarStart": "İftar başlanğıcı",
   "tahajjudStart": "Təhəccüd başlanğıcı",
   "tahajjud": "Təhəccüd",
-  "dhuha": "Duha"
+  "dhuha": "Duha",
+  "indopakFont": "İndopak Şrifti",
+  "uthmaniFont": "Osmani Şrifti",
+  "close": "Bağla",
+  "goToSettings": "Ayarlara get",
+  "scriptSettingsUpdated": "Mətn ayarları yeniləndi",
+  "scriptSettingsUpdatedDescription": "Mətn seçimlərimizi sadələşdirdik və daha çox şrift əlavə etdik.",
+  "enterPageNumber": "1 ilə 604 arasında bir səhifə nömrəsi daxil edin",
+  "deleteMushafData": "Müshaf məlumatlarını sil",
+  "deleteMushafDataDescription": "Bütün Müshaf məlumatlarını silmək istədiyinizə əminsiniz?",
+  "invalidPage": "Yanlış səhifə (1-604)",
+  "goToPage": "Səhifəyə get",
+  "resources": "Resurslar",
+  "mushaf": "Müshaf"
 }

@@ -1156,21 +1156,43 @@ class AppLocalizationsVi extends AppLocalizations {
   String get dhuha => 'Dhuha';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'Phông chữ Indopak';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Phông chữ Uthmani';
 
   @override
-  String get close => 'Close';
+  String get close => 'Đóng';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Đi tới cài đặt';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Đã cập nhật cài đặt tập lệnh';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Chúng tôi đã đơn giản hóa các tùy chọn tập lệnh và thêm nhiều phông chữ hơn.';
+
+  @override
+  String get enterPageNumber => 'Nhập số trang từ 1 đến 604';
+
+  @override
+  String get deleteMushafData => 'Xóa dữ liệu Mushaf';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Bạn có chắc chắn muốn xóa tất cả dữ liệu Mushaf không?';
+
+  @override
+  String get invalidPage => 'Trang không hợp lệ (1-604)';
+
+  @override
+  String get goToPage => 'Đi tới trang';
+
+  @override
+  String get resources => 'Tài nguyên';
+
+  @override
+  String get mushaf => 'Mushaf';
 }

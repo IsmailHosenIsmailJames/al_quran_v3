@@ -602,5 +602,18 @@
   "iftarStart": "آغاز افطار",
   "tahajjudStart": "آغاز تهجد",
   "tahajjud": "تهجد",
-  "dhuha": "ضحی"
+  "dhuha": "ضحی",
+  "indopakFont": "قلم هندپاک",
+  "uthmaniFont": "قلم عثمانی",
+  "close": "بستن",
+  "goToSettings": "رفتن به تنظیمات",
+  "scriptSettingsUpdated": "تنظیمات رسم‌الخط به‌روز شد",
+  "scriptSettingsUpdatedDescription": "ما گزینه‌های رسم‌الخط را ساده‌تر کرده و قلم‌های بیشتری اضافه کرده‌ایم.",
+  "enterPageNumber": "شماره صفحه‌ای بین ۱ تا ۶۰۴ وارد کنید",
+  "deleteMushafData": "حذف داده‌های مصحف",
+  "deleteMushafDataDescription": "آیا مطمئن هستید که می‌خواهید تمام داده‌های مصحف را حذف کنید؟",
+  "invalidPage": "صفحه نامعتبر (۱-۶۰۴)",
+  "goToPage": "رفتن به صفحه",
+  "resources": "منابع",
+  "mushaf": "مصحف"
 }

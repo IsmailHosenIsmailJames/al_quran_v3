@@ -340,5 +340,18 @@
   "iftarStart": "Início do Iftar",
   "tahajjudStart": "Início do Tahajjud",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Fonte Indopak",
+  "uthmaniFont": "Fonte Uthmani",
+  "close": "Fechar",
+  "goToSettings": "Ir para configurações",
+  "scriptSettingsUpdated": "Configurações de script atualizadas",
+  "scriptSettingsUpdatedDescription": "Simplificamos nossas opções de script e adicionamos mais fontes.",
+  "enterPageNumber": "Insira um número de página entre 1 e 604",
+  "deleteMushafData": "Excluir dados do Mushaf",
+  "deleteMushafDataDescription": "Tem certeza de que deseja excluir todos os dados do Mushaf?",
+  "invalidPage": "Página inválida (1-604)",
+  "goToPage": "Ir para a página",
+  "resources": "Recursos",
+  "mushaf": "Mushaf"
 }

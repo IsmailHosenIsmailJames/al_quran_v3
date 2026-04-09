@@ -2233,6 +2233,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We have simplified our script options and added more fonts.'**
   String get scriptSettingsUpdatedDescription;
+
+  /// No description provided for @enterPageNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a page number between 1 and 604'**
+  String get enterPageNumber;
+
+  /// No description provided for @deleteMushafData.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Mushaf Data'**
+  String get deleteMushafData;
+
+  /// No description provided for @deleteMushafDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete all Mushaf data?'**
+  String get deleteMushafDataDescription;
+
+  /// No description provided for @invalidPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid page (1-604)'**
+  String get invalidPage;
+
+  /// No description provided for @goToPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Page'**
+  String get goToPage;
+
+  /// No description provided for @resources.
+  ///
+  /// In en, this message translates to:
+  /// **'Resources'**
+  String get resources;
+
+  /// No description provided for @mushaf.
+  ///
+  /// In en, this message translates to:
+  /// **'Mushaf'**
+  String get mushaf;
 }
 
 class _AppLocalizationsDelegate

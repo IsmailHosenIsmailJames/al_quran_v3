@@ -1151,21 +1151,43 @@ class AppLocalizationsKk extends AppLocalizations {
   String get dhuha => 'Духа';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'Индопак шрифті';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Осман шрифті';
 
   @override
-  String get close => 'Close';
+  String get close => 'Жабу';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Параметрлерге өту';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Мәтін параметрлері жаңартылды';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Мәтін опцияларын жеңілдетіп, көбірек шрифт қостық.';
+
+  @override
+  String get enterPageNumber => '1 мен 604 арасындағы бет нөмірін енгізіңіз';
+
+  @override
+  String get deleteMushafData => 'Мұсхаф деректерін жою';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Барлық Мұсхаф деректерін жоюды қалайтыныңызға сенімдісіз бе?';
+
+  @override
+  String get invalidPage => 'Бет қате (1-604)';
+
+  @override
+  String get goToPage => 'Бетке өту';
+
+  @override
+  String get resources => 'Ресурстар';
+
+  @override
+  String get mushaf => 'Мұсхаф';
 }

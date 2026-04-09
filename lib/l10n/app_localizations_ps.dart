@@ -1152,21 +1152,43 @@ class AppLocalizationsPs extends AppLocalizations {
   String get dhuha => 'ضحى';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'هندپاک فونټ';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'عثماني فونټ';
 
   @override
-  String get close => 'Close';
+  String get close => 'بندول';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'تنظیماتو ته لاړ شئ';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'د ليکني تنظیمات تازه شول';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'موږ د ليکني انتخابونه ساده کړي او نور فونټونه مو اضافه کړي دي.';
+
+  @override
+  String get enterPageNumber => 'د ۱ او ۶۰۴ ترمنځ د پاڼې شمېره داخله کړئ';
+
+  @override
+  String get deleteMushafData => 'د مصحف ډیټا حذف کړئ';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'ایا تاسو ډاډه یاست چې غواړئ د مصحف ټول معلومات حذف کړئ؟';
+
+  @override
+  String get invalidPage => 'نامعتبره پاڼه (۱-۶۰۴)';
+
+  @override
+  String get goToPage => 'پاڼې ته لاړ شئ';
+
+  @override
+  String get resources => 'سرچینې';
+
+  @override
+  String get mushaf => 'مصحف';
 }

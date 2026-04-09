@@ -602,5 +602,18 @@
   "iftarStart": "افطار کا وقت",
   "tahajjudStart": "تہجد کی شروعات",
   "tahajjud": "تہجد",
-  "dhuha": "چاشت"
+  "dhuha": "چاشت",
+  "indopakFont": "انڈو پاک فونٹ",
+  "uthmaniFont": "عثمانی فونٹ",
+  "close": "بند کریں",
+  "goToSettings": "ترتیبات پر جائیں",
+  "scriptSettingsUpdated": "رسم الخط کی ترتیبات اپ ڈیٹ ہو گئیں",
+  "scriptSettingsUpdatedDescription": "ہم نے اپنے رسم الخط کے اختیارات کو سادہ بنا دیا ہے اور مزید فونٹس شامل کیے ہیں۔",
+  "enterPageNumber": "1 سے 604 کے درمیان صفحہ نمبر درج کریں",
+  "deleteMushafData": "مصحف کا ڈیٹا حذف کریں",
+  "deleteMushafDataDescription": "کیا آپ واقعی مصحف کا تمام ڈیٹا حذف کرنا چاہتے ہیں؟",
+  "invalidPage": "غلط صفحہ (1-604)",
+  "goToPage": "صفحہ پر جائیں",
+  "resources": "وسائل",
+  "mushaf": "مصحف"
 }

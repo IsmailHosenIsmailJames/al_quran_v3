@@ -344,13 +344,14 @@ class _HomePageState extends State<HomePage> {
         "shown_tajweed_dialog",
         defaultValue: false,
       );
-      if (isSetupComplete && hasShownDialog) {
+      if (isSetupComplete && !hasShownDialog) {
         userBox.put("shown_tajweed_dialog", true);
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+              contentPadding: EdgeInsets.zero,
               title: Text(AppLocalizations.of(context).scriptSettingsUpdated),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -362,22 +363,28 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Gap(10),
                   getScriptSelectionSegmentedButtons(context),
-                  getAyahByAyahCard(
-                    ayahKey: "1:2",
-                    context: context,
-                    translationListWithInfo: [],
-                    showTopOptions: false,
-                    showOnlyAyah: true,
-                    removeBorder: true,
-                    keepMargin: false,
-                    isCenter: true,
-                    wordByWord: [],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: getAyahByAyahCard(
+                      ayahKey: "1:2",
+                      context: context,
+                      translationListWithInfo: [],
+                      showTopOptions: false,
+                      showOnlyAyah: true,
+                      removeBorder: true,
+                      keepMargin: false,
+                      isCenter: true,
+                      wordByWord: [],
+                    ),
                   ),
                   const Gap(10),
-                  const QuranFontSelectionWidget(
-                    titleStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: QuranFontSelectionWidget(
+                      titleStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

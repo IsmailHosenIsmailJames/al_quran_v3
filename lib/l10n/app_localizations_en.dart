@@ -1169,4 +1169,26 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get scriptSettingsUpdatedDescription =>
       'We have simplified our script options and added more fonts.';
+
+  @override
+  String get enterPageNumber => 'Enter a page number between 1 and 604';
+
+  @override
+  String get deleteMushafData => 'Delete Mushaf Data';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Are you sure you want to delete all Mushaf data?';
+
+  @override
+  String get invalidPage => 'Invalid page (1-604)';
+
+  @override
+  String get goToPage => 'Go to Page';
+
+  @override
+  String get resources => 'Resources';
+
+  @override
+  String get mushaf => 'Mushaf';
 }

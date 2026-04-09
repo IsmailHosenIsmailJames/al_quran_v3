@@ -1119,21 +1119,41 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dhuha => '杜哈';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => '印巴字体';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => '奥斯曼字体';
 
   @override
-  String get close => 'Close';
+  String get close => '关闭';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => '前往设置';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => '脚本设置已更新';
 
   @override
-  String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+  String get scriptSettingsUpdatedDescription => '我们简化了脚本选项并添加了更多字体。';
+
+  @override
+  String get enterPageNumber => '输入 1 到 604 之间的页码';
+
+  @override
+  String get deleteMushafData => '删除 Mushaf 数据';
+
+  @override
+  String get deleteMushafDataDescription => '您确定要删除所有 Mushaf 数据吗？';
+
+  @override
+  String get invalidPage => '无效页码 (1-604)';
+
+  @override
+  String get goToPage => '前往页面';
+
+  @override
+  String get resources => '资源';
+
+  @override
+  String get mushaf => '麦斯哈夫';
 }

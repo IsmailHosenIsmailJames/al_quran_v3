@@ -1160,21 +1160,43 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dhuha => 'Духа';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'Шрифт Индопак';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Шрифт Усмани';
 
   @override
-  String get close => 'Close';
+  String get close => 'Закрыть';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Перейти в настройки';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Настройки скрипта обновлены';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Мы упростили параметры скрипта и добавили новые шрифты.';
+
+  @override
+  String get enterPageNumber => 'Введите номер страницы от 1 до 604';
+
+  @override
+  String get deleteMushafData => 'Удалить данные Мусхафа';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Вы уверены, что хотите удалить все данные Мусхафа?';
+
+  @override
+  String get invalidPage => 'Неверная страница (1-604)';
+
+  @override
+  String get goToPage => 'Перейти на страницу';
+
+  @override
+  String get resources => 'Ресурсы';
+
+  @override
+  String get mushaf => 'Мусхаф';
 }

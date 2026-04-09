@@ -602,5 +602,18 @@
   "iftarStart": "Mwanzo wa Iftar",
   "tahajjudStart": "Mwanzo wa Tahajjud",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Fonti ya Indopak",
+  "uthmaniFont": "Fonti ya Uthmani",
+  "close": "Funga",
+  "goToSettings": "Nenda kwenye Mipangilio",
+  "scriptSettingsUpdated": "Mipangilio ya Maandishi Imesasishwa",
+  "scriptSettingsUpdatedDescription": "Tumerahisisha chaguzi zetu za maandishi na kuongeza fonti zaidi.",
+  "enterPageNumber": "Ingiza namba ya ukurasa kati ya 1 na 604",
+  "deleteMushafData": "Futa Data ya Mushaf",
+  "deleteMushafDataDescription": "Una uhakika unataka kufuta data zote za Mushaf?",
+  "invalidPage": "Ukurasa batili (1-604)",
+  "goToPage": "Nenda kwenye Ukurasa",
+  "resources": "Rasilimali",
+  "mushaf": "Mushaf"
 }

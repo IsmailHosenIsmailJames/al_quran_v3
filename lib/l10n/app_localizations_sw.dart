@@ -1159,21 +1159,43 @@ class AppLocalizationsSw extends AppLocalizations {
   String get dhuha => 'Dhuha';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'Fonti ya Indopak';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'Fonti ya Uthmani';
 
   @override
-  String get close => 'Close';
+  String get close => 'Funga';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'Nenda kwenye Mipangilio';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'Mipangilio ya Maandishi Imesasishwa';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'Tumerahisisha chaguzi zetu za maandishi na kuongeza fonti zaidi.';
+
+  @override
+  String get enterPageNumber => 'Ingiza namba ya ukurasa kati ya 1 na 604';
+
+  @override
+  String get deleteMushafData => 'Futa Data ya Mushaf';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'Una uhakika unataka kufuta data zote za Mushaf?';
+
+  @override
+  String get invalidPage => 'Ukurasa batili (1-604)';
+
+  @override
+  String get goToPage => 'Nenda kwenye Ukurasa';
+
+  @override
+  String get resources => 'Rasilimali';
+
+  @override
+  String get mushaf => 'Mushaf';
 }

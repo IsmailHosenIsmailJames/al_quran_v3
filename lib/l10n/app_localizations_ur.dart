@@ -1154,21 +1154,43 @@ class AppLocalizationsUr extends AppLocalizations {
   String get dhuha => 'چاشت';
 
   @override
-  String get indopakFont => 'Indopak Font';
+  String get indopakFont => 'انڈو پاک فونٹ';
 
   @override
-  String get uthmaniFont => 'Uthmani Font';
+  String get uthmaniFont => 'عثمانی فونٹ';
 
   @override
-  String get close => 'Close';
+  String get close => 'بند کریں';
 
   @override
-  String get goToSettings => 'Go to Settings';
+  String get goToSettings => 'ترتیبات پر جائیں';
 
   @override
-  String get scriptSettingsUpdated => 'Script Settings Updated';
+  String get scriptSettingsUpdated => 'رسم الخط کی ترتیبات اپ ڈیٹ ہو گئیں';
 
   @override
   String get scriptSettingsUpdatedDescription =>
-      'We have simplified our script options and added more fonts.';
+      'ہم نے اپنے رسم الخط کے اختیارات کو سادہ بنا دیا ہے اور مزید فونٹس شامل کیے ہیں۔';
+
+  @override
+  String get enterPageNumber => '1 سے 604 کے درمیان صفحہ نمبر درج کریں';
+
+  @override
+  String get deleteMushafData => 'مصحف کا ڈیٹا حذف کریں';
+
+  @override
+  String get deleteMushafDataDescription =>
+      'کیا آپ واقعی مصحف کا تمام ڈیٹا حذف کرنا چاہتے ہیں؟';
+
+  @override
+  String get invalidPage => 'غلط صفحہ (1-604)';
+
+  @override
+  String get goToPage => 'صفحہ پر جائیں';
+
+  @override
+  String get resources => 'وسائل';
+
+  @override
+  String get mushaf => 'مصحف';
 }

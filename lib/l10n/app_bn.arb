@@ -602,5 +602,18 @@
   "iftarStart": "ইফতার শুরু",
   "tahajjudStart": "তাহাজ্জুদ শুরু",
   "tahajjud": "তাহাজ্জুদ",
-  "dhuha": "চাশত"
+  "dhuha": "চাশত",
+  "indopakFont": "ইন্দোপাক ফন্ট",
+  "uthmaniFont": "উসমানী ফন্ট",
+  "close": "বন্ধ করুন",
+  "goToSettings": "সেটিংসে যান",
+  "scriptSettingsUpdated": "স্ক্রিপ্ট সেটিংস আপডেট করা হয়েছে",
+  "scriptSettingsUpdatedDescription": "আমরা আমাদের স্ক্রিপ্ট অপশনগুলো সহজ করেছি এবং আরও ফন্ট যোগ করেছি।",
+  "enterPageNumber": "১ থেকে ৬০৪ এর মধ্যে একটি পৃষ্ঠা নম্বর লিখুন",
+  "deleteMushafData": "মুসহাফ ডাটা মুছে ফেলুন",
+  "deleteMushafDataDescription": "আপনি কি নিশ্চিত যে আপনি সমস্ত মুসহাফ ডাটা মুছে ফেলতে চান?",
+  "invalidPage": "অকার্যকর পৃষ্ঠা (১-৬০৪)",
+  "goToPage": "পৃষ্ঠায় যান",
+  "resources": "রিসোর্স",
+  "mushaf": "মুসহাফ"
 }

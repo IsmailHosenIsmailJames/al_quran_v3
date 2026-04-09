@@ -108,7 +108,7 @@ class _QuranPageState extends State<QuranPage>
                             Expanded(
                               child: QuickOption(
                                 themeState: themeState,
-                                label: "Mushaf",
+                                label: l10n.mushaf,
                                 onClick: () {
                                   Navigator.push(
                                     context,
@@ -134,7 +134,7 @@ class _QuranPageState extends State<QuranPage>
                             Expanded(
                               child: QuickOption(
                                 themeState: themeState,
-                                label: "Settings",
+                                label: l10n.settings,
                                 onClick: () async {
                                   await Navigator.push(
                                     context,
@@ -162,7 +162,7 @@ class _QuranPageState extends State<QuranPage>
                             Expanded(
                               child: QuickOption(
                                 themeState: themeState,
-                                label: "Resources",
+                                label: l10n.resources,
                                 onClick: () {
                                   Navigator.push(
                                     context,
@@ -185,7 +185,7 @@ class _QuranPageState extends State<QuranPage>
                             Expanded(
                               child: QuickOption(
                                 themeState: themeState,
-                                label: "Pinned",
+                                label: l10n.pinned,
                                 onClick: () {
                                   Navigator.push(
                                     context,
