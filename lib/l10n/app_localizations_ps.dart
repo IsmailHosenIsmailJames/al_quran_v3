@@ -1150,4 +1150,23 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get dhuha => 'ضحى';
+
+  @override
+  String get indopakFont => 'Indopak Font';
+
+  @override
+  String get uthmaniFont => 'Uthmani Font';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get goToSettings => 'Go to Settings';
+
+  @override
+  String get scriptSettingsUpdated => 'Script Settings Updated';
+
+  @override
+  String get scriptSettingsUpdatedDescription =>
+      'We have simplified our script options and added more fonts.';
 }
