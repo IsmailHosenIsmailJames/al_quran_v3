@@ -2197,6 +2197,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dhuha'**
   String get dhuha;
+
+  /// No description provided for @indopakFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Indopak Font'**
+  String get indopakFont;
+
+  /// No description provided for @uthmaniFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Uthmani Font'**
+  String get uthmaniFont;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @goToSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Settings'**
+  String get goToSettings;
+
+  /// No description provided for @scriptSettingsUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Script Settings Updated'**
+  String get scriptSettingsUpdated;
+
+  /// No description provided for @scriptSettingsUpdatedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'We have simplified our script options and added more fonts.'**
+  String get scriptSettingsUpdatedDescription;
 }
 
 class _AppLocalizationsDelegate

@@ -602,5 +602,11 @@
   "iftarStart": "Iftar Start",
   "tahajjudStart": "Tahajjud Start",
   "tahajjud": "Tahajjud",
-  "dhuha": "Dhuha"
+  "dhuha": "Dhuha",
+  "indopakFont": "Indopak Font",
+  "uthmaniFont": "Uthmani Font",
+  "close": "Close",
+  "goToSettings": "Go to Settings",
+  "scriptSettingsUpdated": "Script Settings Updated",
+  "scriptSettingsUpdatedDescription": "We have simplified our script options and added more fonts."
 }
