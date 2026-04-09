@@ -13,13 +13,12 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 import "../../../theme/controller/theme_state.dart";
 
-// Plans to implement tajweed. Class name will change later
-class NonTajweedScriptView extends StatelessWidget {
+class QuranScriptScriptView extends StatelessWidget {
   final bool isUthmani;
   final ScriptInfo scriptInfo;
   final ThemeState themeState;
 
-  const NonTajweedScriptView({
+  const QuranScriptScriptView({
     super.key,
     required this.scriptInfo,
     required this.isUthmani,
@@ -41,7 +40,9 @@ class NonTajweedScriptView extends StatelessWidget {
     TextStyle quranStyle = TextStyle(
       fontSize: scriptInfo.textStyle?.fontSize ?? 24,
       height: scriptInfo.textStyle?.height ?? 2,
-      fontFamily: isUthmani ? "QPC_Hafs" : "AlQuranNeov5x1",
+      fontFamily: isUthmani
+          ? context.read<QuranViewCubit>().state.uthmaniFontName
+          : context.read<QuranViewCubit>().state.indopakFontName,
       letterSpacing: 0,
     );
     if (scriptInfo.wordIndex != null) {

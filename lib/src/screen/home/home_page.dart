@@ -6,12 +6,15 @@ import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
+import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -333,23 +336,70 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final userBox = Hive.box("user");
-      final bool isSetupComplete =
-          userBox.get("is_setup_complete", defaultValue: false);
-      final bool hasShownDialog =
-          userBox.get("shown_tajweed_dialog", defaultValue: false);
-      if (isSetupComplete && !hasShownDialog) {
+      final bool isSetupComplete = userBox.get(
+        "is_setup_complete",
+        defaultValue: false,
+      );
+      final bool hasShownDialog = userBox.get(
+        "shown_tajweed_dialog",
+        defaultValue: false,
+      );
+      if (isSetupComplete && hasShownDialog) {
         userBox.put("shown_tajweed_dialog", true);
         showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Script Settings Updated"),
-              content: const Text(
-                  "We have simplified our script options! You can now toggle Tajweed colors for both Uthmani and IndoPak scripts directly from your settings."),
+              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+              title: Text(AppLocalizations.of(context).scriptSettingsUpdated),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    AppLocalizations.of(
+                      context,
+                    ).scriptSettingsUpdatedDescription,
+                  ),
+                  const Gap(10),
+                  getScriptSelectionSegmentedButtons(context),
+                  getAyahByAyahCard(
+                    ayahKey: "1:2",
+                    context: context,
+                    translationListWithInfo: [],
+                    showTopOptions: false,
+                    showOnlyAyah: true,
+                    removeBorder: true,
+                    keepMargin: false,
+                    isCenter: true,
+                    wordByWord: [],
+                  ),
+                  const Gap(10),
+                  const QuranFontSelectionWidget(
+                    titleStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
               actions: [
-                TextButton(
+                TextButton.icon(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text("Got it"),
+                  label: Text(AppLocalizations.of(context).close),
+                  icon: const Icon(Icons.close),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                  label: Text(AppLocalizations.of(context).goToSettings),
+                  icon: const Icon(Icons.settings),
                 ),
               ],
             );

@@ -49,7 +49,7 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
             ),
             const Gap(10),
             SizedBox(
-              width: 150,
+              width: 130,
               child: SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(AppLocalizations.of(context).quranScriptTajweed),

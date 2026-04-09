@@ -150,9 +150,6 @@ flutter:
     - family: IndopakNastaleeq
       fonts:
         - asset: assets/fonts/Quran/Indopak Nastaleeq font.ttf
-    - family: surah-name-v1
-      fonts:
-        - asset: assets/fonts/Quran/surah-name-v1.ttf
 
     - family: noorehira
       fonts:
@@ -161,6 +158,10 @@ flutter:
     - family: noorehuda
       fonts:
         - asset: assets/fonts/Quran/noorehuda Regular.ttf
+        
+    - family: surah-name-v1
+      fonts:
+        - asset: assets/fonts/Quran/surah-name-v1.ttf
 
     # - family: NotoSans
     #   fonts:
