@@ -31,6 +31,7 @@ class QuranScriptScriptView extends StatelessWidget {
       isUthmani ? QuranScriptType.uthmani : QuranScriptType.indopak,
       scriptInfo.surahNumber.toString(),
       scriptInfo.ayahNumber.toString(),
+      circleJojom: context.read<QuranViewCubit>().state.circleJojom,
     );
     if (scriptInfo.limitWord != null) {
       if (!(scriptInfo.limitWord! >= words.length)) {

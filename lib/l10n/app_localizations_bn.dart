@@ -1191,4 +1191,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get mushaf => 'মুসহাফ';
+
+  @override
+  String get circleJojomInQuranScript => 'কুরআন স্ক্রিপ্টে বৃত্তাকার জজম/সুকুন';
 }

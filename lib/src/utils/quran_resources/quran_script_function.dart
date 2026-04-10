@@ -33,7 +33,7 @@ class QuranScriptFunction {
     QuranScriptType type,
     String surah,
     String ayah, {
-    bool warshScript = false,
+    required bool circleJojom,
   }) {
     final ayahData = List<String>.from(quranScriptMap[surah][ayah]);
     for (int i = 0; i < ayahData.length; i++) {
@@ -42,7 +42,14 @@ class QuranScriptFunction {
       }
     }
 
-    if (!warshScript && QuranScriptType.indopak == type) {
+    if (!circleJojom && QuranScriptType.indopak == type) {
+      for (int i = 0; i < ayahData.length; i++) {
+        ayahData[i] = ayahData[i].replaceAll(1761.toChar(), "Backup");
+        ayahData[i] = ayahData[i].replaceAll(1618.toChar(), 1761.toChar());
+        ayahData[i] = ayahData[i].replaceAll("Backup", 1618.toChar());
+      }
+    }
+    if (circleJojom && QuranScriptType.uthmani == type) {
       for (int i = 0; i < ayahData.length; i++) {
         ayahData[i] = ayahData[i].replaceAll(1761.toChar(), "Backup");
         ayahData[i] = ayahData[i].replaceAll(1618.toChar(), 1761.toChar());

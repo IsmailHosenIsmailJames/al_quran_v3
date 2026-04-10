@@ -68,7 +68,8 @@ class QuranScriptSettings extends StatelessWidget {
               isCenter: true,
               wordByWord: [],
             ),
-
+            const Gap(10),
+            const CircleJojomQuranViewOption(),
             const Gap(10),
             QuranFontSelectionWidget(titleStyle: titleStyle),
 
@@ -468,6 +469,35 @@ class QuranScriptSettings extends StatelessWidget {
               .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad);
         }
         return toReturn;
+      },
+    );
+  }
+}
+
+class CircleJojomQuranViewOption extends StatelessWidget {
+  const CircleJojomQuranViewOption({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<QuranViewCubit, QuranViewState>(
+      builder: (context, quranViewState) {
+        return SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(AppLocalizations.of(context).circleJojomInQuranScript),
+          value: quranViewState.circleJojom,
+          thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+            Set<WidgetState> states,
+          ) {
+            return Icon(
+              states.contains(WidgetState.selected)
+                  ? Icons.done_rounded
+                  : Icons.close_rounded,
+            );
+          }),
+          onChanged: (value) {
+            context.read<QuranViewCubit>().changeCircleJojom(value);
+          },
+        );
       },
     );
   }

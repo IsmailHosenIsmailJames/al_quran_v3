@@ -58,6 +58,7 @@ void showShareBottomDialog(
     context.read<QuranViewCubit>().state.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
+    circleJojom: context.read<QuranViewCubit>().state.circleJojom,
   );
 
   ButtonStyle textButtonStyle = TextButton.styleFrom(

@@ -615,5 +615,6 @@
   "invalidPage": "Invalid page (1-604)",
   "goToPage": "Go to Page",
   "resources": "Resources",
-  "mushaf": "Mushaf"
+  "mushaf": "Mushaf",
+  "circleJojomInQuranScript": "Circle Jojom/Sukun in Quran Script"
 }

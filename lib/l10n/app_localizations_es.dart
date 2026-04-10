@@ -1202,4 +1202,8 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mushaf => 'Mushaf';
+
+  @override
+  String get circleJojomInQuranScript =>
+      'Círculo Jojom/Sukun en la escritura del Corán';
 }

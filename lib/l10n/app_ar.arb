@@ -615,5 +615,6 @@
   "invalidPage": "صفحة غير صالحة (1-604)",
   "goToPage": "ذهاب إلى الصفحة",
   "resources": "الموارد",
-  "mushaf": "مصحف"
+  "mushaf": "مصحف",
+  "circleJojomInQuranScript": "دائرة جزم/سكون في خط القرآن"
 }

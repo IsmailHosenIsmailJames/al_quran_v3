@@ -15,51 +15,64 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
   return BlocBuilder<ThemeCubit, ThemeState>(
     builder: (context, themeState) {
       return BlocBuilder<QuranViewCubit, QuranViewState>(
-        builder: (context, quranViewState) => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SegmentedButton(
-              selected: {quranViewState.quranScriptType},
-              segments: List<ButtonSegment<QuranScriptType>>.generate(
-                QuranScriptType.values.length,
-                (index) {
-                  return ButtonSegment<QuranScriptType>(
-                    value: QuranScriptType.values.elementAt(index),
+        builder: (context, quranViewState) => FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SegmentedButton(
+                selected: {quranViewState.quranScriptType},
+                segments: List<ButtonSegment<QuranScriptType>>.generate(
+                  QuranScriptType.values.length,
+                  (index) {
+                    return ButtonSegment<QuranScriptType>(
+                      value: QuranScriptType.values.elementAt(index),
 
-                    label: Text(
-                      getLocalizedQuranScriptType(
-                        context,
-                        QuranScriptType.values.elementAt(index),
-                      ).capitalize(),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                      label: Text(
+                        getLocalizedQuranScriptType(
+                          context,
+                          QuranScriptType.values.elementAt(index),
+                        ).capitalize(),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    );
+                  },
+                ),
+
+                selectedIcon: const Icon(Icons.done),
+
+                onSelectionChanged: (value) async {
+                  await Hive.box(
+                    "user",
+                  ).put("selected_script", value.first.name);
+                  await QuranScriptFunction.loadScript(value.first);
+                  context.read<QuranViewCubit>().changeQuranScriptType(
+                    value.first,
                   );
                 },
               ),
-
-              selectedIcon: const Icon(Icons.done),
-
-              onSelectionChanged: (value) async {
-                await Hive.box("user").put("selected_script", value.first.name);
-                await QuranScriptFunction.loadScript(value.first);
-                context.read<QuranViewCubit>().changeQuranScriptType(
-                  value.first,
-                );
-              },
-            ),
-            const Gap(10),
-            SizedBox(
-              width: 130,
-              child: SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(AppLocalizations.of(context).quranScriptTajweed),
-                value: quranViewState.useTajweed,
-                onChanged: (value) {
-                  context.read<QuranViewCubit>().changeUseTajweed(value);
-                },
+              const Gap(16),
+              SizedBox(
+                width: 150,
+                child: SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                    Set<WidgetState> states,
+                  ) {
+                    return Icon(
+                      states.contains(WidgetState.selected)
+                          ? Icons.done_rounded
+                          : Icons.close_rounded,
+                    );
+                  }),
+                  title: Text(AppLocalizations.of(context).quranScriptTajweed),
+                  value: quranViewState.useTajweed,
+                  onChanged: (value) {
+                    context.read<QuranViewCubit>().changeUseTajweed(value);
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     },

@@ -1191,4 +1191,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get mushaf => 'مصحف';
+
+  @override
+  String get circleJojomInQuranScript => 'دایره جزم/سکون در خط قرآن';
 }

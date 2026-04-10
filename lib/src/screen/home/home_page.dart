@@ -351,7 +351,6 @@ class _HomePageState extends State<HomePage> {
           builder: (context) {
             return AlertDialog(
               insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-              contentPadding: EdgeInsets.zero,
               title: Text(AppLocalizations.of(context).scriptSettingsUpdated),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -363,28 +362,24 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Gap(10),
                   getScriptSelectionSegmentedButtons(context),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: getAyahByAyahCard(
-                      ayahKey: "1:2",
-                      context: context,
-                      translationListWithInfo: [],
-                      showTopOptions: false,
-                      showOnlyAyah: true,
-                      removeBorder: true,
-                      keepMargin: false,
-                      isCenter: true,
-                      wordByWord: [],
-                    ),
+                  getAyahByAyahCard(
+                    ayahKey: "1:2",
+                    context: context,
+                    translationListWithInfo: [],
+                    showTopOptions: false,
+                    showOnlyAyah: true,
+                    removeBorder: true,
+                    keepMargin: false,
+                    isCenter: true,
+                    wordByWord: [],
                   ),
                   const Gap(10),
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: QuranFontSelectionWidget(
-                      titleStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  const CircleJojomQuranViewOption(),
+                  const Gap(10),
+                  const QuranFontSelectionWidget(
+                    titleStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

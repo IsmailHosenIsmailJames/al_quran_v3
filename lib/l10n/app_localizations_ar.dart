@@ -1190,4 +1190,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mushaf => 'مصحف';
+
+  @override
+  String get circleJojomInQuranScript => 'دائرة جزم/سكون في خط القرآن';
 }

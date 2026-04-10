@@ -57,6 +57,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           enableWordByWordHighlight: Hive.box(
             "user",
           ).get("view_enableWordByWordHighlight", defaultValue: true),
+          circleJojom: Hive.box(
+            "user",
+          ).get("view_circleJojom", defaultValue: false),
           scrollWithRecitation: Hive.box(
             "user",
           ).get("view_scrollWithRecitation", defaultValue: true),
@@ -112,6 +115,11 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   void changeUthmaniFontName(String fontName) {
     Hive.box("user").put("selected_uthmani_font_name", fontName);
     emit(state.copyWith(uthmaniFontName: fontName));
+  }
+
+  void changeCircleJojom(bool circleJojom) {
+    Hive.box("user").put("view_circleJojom", circleJojom);
+    emit(state.copyWith(circleJojom: circleJojom));
   }
 
   void setViewOptions({

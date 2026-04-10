@@ -1189,4 +1189,8 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get mushaf => 'Mushaf';
+
+  @override
+  String get circleJojomInQuranScript =>
+      'Bulatan Jojom/Sukun dalam Skrip Quran';
 }
