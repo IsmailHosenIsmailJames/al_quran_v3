@@ -13,17 +13,15 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/platform_services.dart";
-import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/audio_download_screen.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/page_info_model.dart";
-import "package:al_quran_v3/src/utils/basic_functions.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:dio/dio.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:just_audio/just_audio.dart";
@@ -499,7 +497,7 @@ class AudioPlayerManager {
     int wordId,
     int page,
   ) async {
-// TODO
+    // TODO
   }
 
   static Future<void> playWord(String wordKey) async {
@@ -515,6 +513,12 @@ class AudioPlayerManager {
         !(platformOwn == PlatformOwn.isIos ||
             platformOwn == PlatformOwn.isAndroid ||
             platformOwn == PlatformOwn.isMac)
+        ? AudioSource.uri(
+            Uri.parse(
+              "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
+            ),
+          )
+        : kIsWeb
         ? AudioSource.uri(
             Uri.parse(
               "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
@@ -566,7 +570,8 @@ class AudioPlayerManager {
     );
     if (audioFilePath != null) {
       return (platformOwn == PlatformOwn.isLinux ||
-              platformOwn == PlatformOwn.isWindows)
+              platformOwn == PlatformOwn.isWindows ||
+              kIsWeb)
           ? AudioSource.file(audioFilePath)
           : AudioSource.file(
               audioFilePath,
@@ -580,14 +585,18 @@ class AudioPlayerManager {
       return (platformOwn == PlatformOwn.isIos ||
               platformOwn == PlatformOwn.isAndroid ||
               platformOwn == PlatformOwn.isMac)
-          ? LockCachingAudioSource(
-              Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
-              tag: MediaItem(
-                id: ayahKey,
-                album: reciter.name,
-                title: getSurahName(context, surahInfoModel.id),
-              ),
-            )
+          ? kIsWeb
+                ? AudioSource.uri(
+                    Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+                  )
+                : LockCachingAudioSource(
+                    Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
+                    tag: MediaItem(
+                      id: ayahKey,
+                      album: reciter.name,
+                      title: getSurahName(context, surahInfoModel.id),
+                    ),
+                  )
           : AudioSource.uri(
               Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
             );
