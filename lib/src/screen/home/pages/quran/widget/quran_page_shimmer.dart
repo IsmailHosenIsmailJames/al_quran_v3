@@ -53,7 +53,7 @@ class QuranPageShimmer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Container(
                 height: 40,
-                width: double.infinity,
+                width: 900,
                 decoration: BoxDecoration(
                   color: themeState.primaryShade100,
                   borderRadius: BorderRadius.circular(8),
@@ -162,7 +162,7 @@ class QuranPageShimmer extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                width: double.infinity,
+                                width: 900,
                                 height: 16,
                                 decoration: BoxDecoration(
                                   color: themeState.primaryShade100,
