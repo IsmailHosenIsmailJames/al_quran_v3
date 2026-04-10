@@ -5,6 +5,7 @@ class QuranViewState {
   double fontSize;
   double lineHeight;
   QuranScriptType quranScriptType;
+  bool circleJojom;
   String uthmaniFontName;
   String indopakFontName;
   double translationFontSize;
@@ -27,6 +28,7 @@ class QuranViewState {
     required this.translationFontSize,
     this.uthmaniFontName = "QPC_Hafs",
     this.indopakFontName = "AlQuranNeov5x1",
+    this.circleJojom = false,
     this.hideFootnote = false,
     this.hideWordByWord = false,
     this.hideTranslation = false,
@@ -45,6 +47,7 @@ class QuranViewState {
     double? fontSize,
     double? lineHeight,
     QuranScriptType? quranScriptType,
+    bool? circleJojom,
     double? translationFontSize,
     bool? hideFootnote,
     bool? hideWordByWord,
@@ -63,6 +66,7 @@ class QuranViewState {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
       fontSize: fontSize ?? this.fontSize,
+      circleJojom: circleJojom ?? this.circleJojom,
       lineHeight: lineHeight ?? this.lineHeight,
       quranScriptType: quranScriptType ?? this.quranScriptType,
       translationFontSize: translationFontSize ?? this.translationFontSize,
@@ -92,6 +96,7 @@ class QuranViewState {
         other.fontSize == fontSize &&
         other.lineHeight == lineHeight &&
         other.quranScriptType == quranScriptType &&
+        other.circleJojom == circleJojom &&
         other.translationFontSize == translationFontSize &&
         other.hideFootnote == hideFootnote &&
         other.hideWordByWord == hideWordByWord &&
@@ -127,6 +132,7 @@ class QuranViewState {
         useTajweed.hashCode ^
         playbackSpeed.hashCode ^
         uthmaniFontName.hashCode ^
+        circleJojom.hashCode ^
         indopakFontName.hashCode;
   }
 }

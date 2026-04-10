@@ -387,6 +387,10 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                           context.read<QuranViewCubit>().state.quranScriptType,
                           ayahKey.split(":").first,
                           ayahKey.split(":").last,
+                          circleJojom: context
+                              .read<QuranViewCubit>()
+                              .state
+                              .circleJojom,
                         );
 
                     String translationString = "\n";

@@ -1,5 +1,4 @@
 import "dart:async";
-import "dart:developer";
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";

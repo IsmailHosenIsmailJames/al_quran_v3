@@ -104,6 +104,10 @@ class NonTajweedPageRenderer extends StatelessWidget {
                           : QuranScriptType.indopak,
                       ayahKey.split(":").first,
                       ayahKey.split(":").last,
+                      circleJojom: context
+                          .read<QuranViewCubit>()
+                          .state
+                          .circleJojom,
                     );
 
                     return TextSpan(

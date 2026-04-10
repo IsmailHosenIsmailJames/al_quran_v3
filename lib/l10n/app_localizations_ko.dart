@@ -1174,4 +1174,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get mushaf => '무사프';
+
+  @override
+  String get circleJojomInQuranScript => '꾸란 스크립트의 원형 수쿤';
 }

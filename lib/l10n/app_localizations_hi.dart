@@ -1191,4 +1191,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get mushaf => 'मुसहाफ';
+
+  @override
+  String get circleJojomInQuranScript => 'कुरान लिपि में गोल जज़्म/सुकून';
 }

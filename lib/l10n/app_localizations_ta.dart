@@ -1209,4 +1209,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get mushaf => 'முஸ்ஹாஃப்';
+
+  @override
+  String get circleJojomInQuranScript => 'குர்ஆன் எழுத்தில் வட்ட ஜஜம்/சுகூன்';
 }

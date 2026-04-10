@@ -1156,4 +1156,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mushaf => '麦斯哈夫';
+
+  @override
+  String get circleJojomInQuranScript => '古兰经手稿中的圆形静符';
 }

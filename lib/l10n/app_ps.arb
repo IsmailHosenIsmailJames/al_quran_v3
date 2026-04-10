@@ -615,5 +615,6 @@
   "invalidPage": "نامعتبره پاڼه (۱-۶۰۴)",
   "goToPage": "پاڼې ته لاړ شئ",
   "resources": "سرچینې",
-  "mushaf": "مصحف"
+  "mushaf": "مصحف",
+  "circleJojomInQuranScript": "په قرآني رسم الخط کې د جزم/سکون دائره"
 }

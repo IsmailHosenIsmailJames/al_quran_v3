@@ -1199,4 +1199,8 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get mushaf => 'Мусхаф';
+
+  @override
+  String get circleJojomInQuranScript =>
+      'Круглый джазм/сукун в кораническом письме';
 }

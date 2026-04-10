@@ -1191,4 +1191,8 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get mushaf => 'مصحف';
+
+  @override
+  String get circleJojomInQuranScript =>
+      'په قرآني رسم الخط کې د جزم/سکون دائره';
 }

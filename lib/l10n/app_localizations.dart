@@ -2275,6 +2275,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mushaf'**
   String get mushaf;
+
+  /// No description provided for @circleJojomInQuranScript.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle Jojom/Sukun in Quran Script'**
+  String get circleJojomInQuranScript;
 }
 
 class _AppLocalizationsDelegate
