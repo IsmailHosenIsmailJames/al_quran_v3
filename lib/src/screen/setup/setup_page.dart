@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
@@ -65,10 +65,10 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
     }
 
-    if (tafsirInformationWithScore.keys.contains(languageName)) {
+    if (tafsirResources.keys.contains(languageName)) {
       tafsirLanguageCode = appLanguage;
       selectableTafsirBook =
-          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
+          tafsirResources[codeToLanguageMap[tafsirLanguageCode]]
               ?.map((e) => TafsirBookModel.fromMap(e))
               .toList() ??
           [];
@@ -92,7 +92,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       selectableTafsirBook =
-          tafsirInformationWithScore[codeToLanguageMap[tafsirLanguageCode]]
+          tafsirResources[codeToLanguageMap[tafsirLanguageCode]]
               ?.map((e) => TafsirBookModel.fromMap(e))
               .toList() ??
           [];
@@ -608,7 +608,7 @@ bool doesHaveWordByWordTranslation(String language) {
 
 bool doesHaveTafsirSupport(String language) {
   bool doesHaveTafsirSupport = false;
-  tafsirInformationWithScore.forEach((key, value) {
+  tafsirResources.forEach((key, value) {
     if (language == key.toLowerCase()) {
       doesHaveTafsirSupport = true;
     }

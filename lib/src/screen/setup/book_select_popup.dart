@@ -4,7 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
@@ -43,7 +43,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
   void initState() {
     super.initState();
     _allBooks =
-        widget.isTafsir ? tafsirInformationWithScore : translationResources;
+        widget.isTafsir ? tafsirResources : translationResources;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;

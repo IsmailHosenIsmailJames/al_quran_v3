@@ -4,7 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_info_with_score.dart";
+import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
@@ -56,12 +56,12 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
         child: Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Column(
-            children: List.generate(tafsirInformationWithScore.length, (index) {
-              String languageKey = tafsirInformationWithScore.keys.elementAt(
+            children: List.generate(tafsirResources.length, (index) {
+              String languageKey = tafsirResources.keys.elementAt(
                 index,
               );
               List<TafsirBookModel> booksInLanguage =
-                  tafsirInformationWithScore[languageKey]
+                  tafsirResources[languageKey]
                       ?.map((e) => TafsirBookModel.fromMap(e))
                       .toList() ??
                   [];

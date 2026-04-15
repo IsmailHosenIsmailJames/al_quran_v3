@@ -1,1849 +1,2529 @@
 Map<String, List<Map<String, dynamic>>> translationResources = {
-  "bulgarian": [
+  "Bambara": [
     {
-      "language": "Bulgarian",
-      "name": "Български превод",
-      "file_name": "Bulgarian_Translation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Bambara",
+      "language_code": "bm",
+      "language_native": "Bamanankan",
+      "name": "Suliman Kanti",
+      "english_name": "Suliman Kanti",
+      "file_name": "Suliman_Kanti.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bulgarian/Bulgarian_Translation.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Bambara/Suliman_Kanti.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
     {
-      "language": "Bulgarian",
-      "name": "Цветан Теофанов",
-      "file_name": "Tzvetan_Theophanov.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Bambara",
+      "language_code": "bm",
+      "language_native": "Bamanankan",
+      "name": "Baba Mamady Jani",
+      "english_name": "Baba Mamady Jani",
+      "file_name": "Baba_Mamady_Jani.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bulgarian/Tzvetan_Theophanov.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Bambara/Baba_Mamady_Jani.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "persian": [
+  "Persian": [
     {
       "language": "Persian",
-      "name": "حسین تاجی گله‌داری",
-      "file_name": "Hussein_Taji_Kal_Dari.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Persian/Hussein_Taji_Kal_Dari.simple.json.txt",
-    },
-    {
-      "language": "Persian",
+      "language_code": "fa",
+      "language_native": "فارسی",
       "name": "IslamHouse.com",
-      "file_name": "IslamHouse.com.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "IslamHouse.com",
+      "file_name": "IslamHouse.com.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Persian/IslamHouse.com.simple.json.txt",
-    },
-  ],
-  "macedonian": [
-    {
-      "language": "Macedonian",
-      "name": "Превод од македонски научници",
-      "file_name": "Macedonian_scholars.simple.json.txt",
-      "score": 100.0,
+          "translation_v2/compressed_translation_simple/Persian/IslamHouse.com.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Macedonian/Macedonian_scholars.simple.json.txt",
+      "is_tajweed": false,
     },
     {
-      "language": "Macedonian",
-      "name": "Превод од македонски научници",
-      "file_name":
-          "Macedonian_scholars.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+      "language": "Persian",
+      "language_code": "fa",
+      "language_native": "فارسی",
+      "name": "حسین تاجی گله‌داری",
+      "english_name": "Hussein Taji Kal Dari",
+      "file_name": "Hussein_Taji_Kal_Dari.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Macedonian/Macedonian_scholars.translation-with-footnote-tags.json.txt",
+          "translation_v2/compressed_translation_simple/Persian/Hussein_Taji_Kal_Dari.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Persian",
+      "language_code": "fa",
+      "language_native": "فارسی",
+      "name": "ترجمه کلمه به کلمه فارسی",
+      "english_name": "Persian wbw translation",
+      "file_name": "Persian_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Persian/Persian_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
     },
   ],
-  "kashmiri": [
+  "Kashmiri": [
     {
       "language": "Kashmiri",
+      "language_code": "ks",
+      "language_native": "کأشُر",
       "name": "بیانُ الفرقان (کٲشُر قرآن)",
-      "file_name": "Bayanul_Furqan(Koshur_Quran).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Bayanul Furqan(Koshur Quran)",
+      "file_name": "Bayanul_Furqan(Koshur_Quran).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kashmiri/Bayanul_Furqan(Koshur_Quran).simple.json.txt",
+          "translation_v2/compressed_translation_simple/Kashmiri/Bayanul_Furqan(Koshur_Quran).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "bosnian": [
+  "French": [
     {
-      "language": "Bosnian",
-      "name": "Muhamed Mehanović",
-      "file_name": "Muhamed_Mehanović.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "French",
+      "language_code": "fr",
+      "language_native": "Français",
+      "name": "Fondation Islamique Montada",
+      "english_name": "Montada Islamic Foundation",
+      "file_name": "Montada_Islamic_Foundation.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bosnian/Muhamed_Mehanović.simple.json.txt",
+          "translation_v2/compressed_translation_simple/French/Montada_Islamic_Foundation.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
-      "language": "Bosnian",
-      "name": "Besim Korkut",
-      "file_name": "Besim_Korkut.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "French",
+      "language_code": "fr",
+      "language_native": "Français",
+      "name": "Muhammad Hamidullah",
+      "english_name": "Muhammad Hamidullah",
+      "file_name": "Muhammad_Hamidullah.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bosnian/Besim_Korkut.simple.json.txt",
+          "translation_v2/compressed_translation_simple/French/Muhammad_Hamidullah.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
-      "language": "Bosnian",
-      "name": "Dar Al-Salam Center",
-      "file_name": "Dar_Al-Salam_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "French",
+      "language_code": "fr",
+      "language_native": "Français",
+      "name": "Rashid Maash",
+      "english_name": "Rashid Maash",
+      "file_name": "Rashid_Maash.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bosnian/Dar_Al-Salam_Center.simple.json.txt",
-    },
-  ],
-  "amharic": [
-    {
-      "language": "Amharic",
-      "name": "ሳዲቅ እና ሳኒ",
-      "file_name": "Sadiq_and_Sani.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Amharic/Sadiq_and_Sani.simple.json.txt",
-    },
-  ],
-  "bengali": [
-    {
-      "language": "Bengali",
-      "name": "তাফসীরে তাইসীরুল কুরআন",
-      "file_name": "Taisirul_Quran.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Taisirul_Quran.simple.json.txt",
+          "translation_v2/compressed_translation_simple/French/Rashid_Maash.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
-      "language": "Bengali",
-      "name": "তাফসীরে রাওয়ায়ে আল-বায়ান",
-      "file_name": "Rawai_Al-bayan.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "French",
+      "language_code": "fr",
+      "language_native": "Français",
+      "name": "Traduction mot-à-mot en français",
+      "english_name": "French wbw translation",
+      "file_name": "French_wbw_translation.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Rawai_Al-bayan.simple.json.txt",
-    },
-    {
-      "language": "Bengali",
-      "name": "শেখ মুজিবুর রহমান",
-      "file_name": "Sheikh_Mujibur_Rahman.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.simple.json.txt",
-    },
-    {
-      "language": "Bengali",
-      "name": "ফাতহুল মাজীদ",
-      "file_name": "Fathul_Majid.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Fathul_Majid.simple.json.txt",
-    },
-    {
-      "language": "Bengali",
-      "name": "ড. আবু বকর মুহাম্মাদ যাকারিয়া",
-      "file_name": "Dr._Abu_Bakr_Muhammad_Zakaria.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bengali/Dr._Abu_Bakr_Muhammad_Zakaria.simple.json.txt",
+          "translation_v2/compressed_translation_word_by_word/French/French_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
     },
   ],
-  "english": [
+  "Swahili": [
     {
-      "language": "English",
-      "name": "Fadel Soliman, Bridges’ translation",
+      "language": "Swahili",
+      "language_code": "sw",
+      "language_native": "Kiswahili",
+      "name": "Dr. Abdullah Muhammad Abu Bakr na Sheikh Nasir Khamis",
+      "english_name": "Dr. Abdullah Muhammad Abu Bakr and Sheikh Nasir Khamis",
       "file_name":
-          "Fadel_Soliman,_Bridges’_translation.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+          "Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Muhammad Sarwar",
-      "file_name": "Muhammad_Sarwar.simple.json.txt",
-      "score": 100.0,
+          "translation_v2/compressed_translation_simple/Swahili/Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Muhammad_Sarwar.simple.json.txt",
+      "is_tajweed": false,
     },
     {
-      "language": "English",
-      "name": "Dr. Ghali",
-      "file_name": "Dr._Ghali.simple.json.txt",
-      "score": 100.0,
+      "language": "Swahili",
+      "language_code": "sw",
+      "language_native": "Kiswahili",
+      "name": "Tafsiri ya Kiswahili - Kituo cha Tarjuma cha Rowad",
+      "english_name": "Swahili translation - Rowad Translation Center",
+      "file_name": "Swahili_translation_-_Rowad_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Swahili/Swahili_translation_-_Rowad_Translation_Center.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Dr._Ghali.simple.json.txt",
+      "is_tajweed": false,
     },
     {
-      "language": "English",
-      "name": "Dr. T. B. Irving",
-      "file_name": "Dr._T._B._Irving.simple.json.txt",
-      "score": 100.0,
+      "language": "Swahili",
+      "language_code": "sw",
+      "language_native": "Kiswahili",
+      "name": "Ali Muhsin Al-Barwani",
+      "english_name": "Ali Muhsin Al-Barwani",
+      "file_name": "Ali_Muhsin_Al-Barwani.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Swahili/Ali_Muhsin_Al-Barwani.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Dr._T._B._Irving.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Mufti Taqi Usmani",
-      "file_name": "Mufti_Taqi_Usmani.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Mufti_Taqi_Usmani.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Muhammad Taqi-ud-Din al-Hilali & Muhammad Muhsin Khan",
-      "file_name":
-          "Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Maulana Wahiduddin Khan (1)",
-      "file_name": "Maulana_Wahiduddin_Khan.simple_(1).json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Maulana_Wahiduddin_Khan.simple_(1).json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Saheeh International",
-      "file_name":
-          "Saheeh_International.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Saheeh_International.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Muhammad Asad",
-      "file_name": "Muhammad_Asad.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Muhammad_Asad.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Tafheem-ul-Quran - Abul A'la Maududi",
-      "file_name": "Tafheem-ul-Quran_-_Abul_Ala_Maududi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Ruwwad Center",
-      "file_name": "Ruwwad_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Ruwwad_Center.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Maarif-ul-Quran",
-      "file_name": "Maarif-ul-Quran.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Maarif-ul-Quran.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "A. J. Arberry",
-      "file_name": "A._J._Arberry.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/A._J._Arberry.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Muhsin Khan",
-      "file_name": "Muhsin_Khan.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Muhsin_Khan.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Muhammad Taqi-ud-Din al-Hilali & Muhammad Muhsin Khan",
-      "file_name":
-          "Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Shakir",
-      "file_name": "Shakir.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Shakir.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Fadel Soliman, Bridges’ translation",
-      "file_name": "Fadel_Soliman,_Bridges’_translation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Abdul Majid Daryabadi",
-      "file_name": "Abdul_Majid_Daryabadi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Abdul_Majid_Daryabadi.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "M. A. S. Abdel Haleem",
-      "file_name": "Abdul_Haleem.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Abdul_Haleem.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Tafheem-ul-Quran - Abul A'la Maududi",
-      "file_name":
-          "Tafheem-ul-Quran_-_Abul_Ala_Maududi.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Professor Shaykh Hasan Al-Fatih Qaribullah",
-      "file_name": "Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Marmaduke Pickthall",
-      "file_name": "English_Translation_(Pickthall).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/English_Translation_(Pickthall).simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "M. A. S. Abdel Haleem",
-      "file_name": "Abdul_Haleem.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Abdul_Haleem.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Saheeh International",
-      "file_name": "Saheeh_International.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Saheeh_International.simple.json.txt",
-    },
-    {
-      "language": "English",
-      "name": "Abdullah Yusuf Ali",
-      "file_name": "Abdullah_Yusuf_Ali.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/English/Abdullah_Yusuf_Ali.simple.json.txt",
+      "is_tajweed": false,
     },
   ],
-  "spanish": [
+  "Greek": [
+    {
+      "language": "Greek",
+      "language_code": "el",
+      "language_native": "Ελληνικά",
+      "name": "Ελληνική μετάφραση",
+      "english_name": "Greek translation",
+      "file_name": "Greek_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Greek/Greek_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Uzbek": [
+    {
+      "language": "Uzbek",
+      "language_code": "uz",
+      "language_native": "Oʻzbekcha",
+      "name": "Muhammad Sodiq Muhammad Yusuf (Lotin)",
+      "english_name": "Muhammad Sodiq Muhammad Yusuf (Latin)",
+      "file_name": "Muhammad_Sodiq_Muhammad_Yusuf_(Latin).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin).json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Uzbek",
+      "language_code": "uz",
+      "language_native": "Oʻzbekcha",
+      "name": "Alauddin Mansur",
+      "english_name": "Alauddin Mansour",
+      "file_name": "Alauddin_Mansour.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Uzbek/Alauddin_Mansour.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Uzbek",
+      "language_code": "uz",
+      "language_native": "Ўзбекча",
+      "name": "Муҳаммад Содиқ Муҳаммад Юсуф",
+      "english_name": "Muhammad Sodik Muhammad Yusuf",
+      "file_name": "Muhammad_Sodik_Muhammad_Yusuf.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Uzbek",
+      "language_code": "uz",
+      "language_native": "Oʻzbekcha",
+      "name": "O'zbekcha tarjima - Rowwad tarjima markazi",
+      "english_name": "Uzbek Translation - Rowwad Translation Center",
+      "file_name": "Uzbek_Translation_-_Rowwad_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Uzbek/Uzbek_Translation_-_Rowwad_Translation_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Kannada": [
+    {
+      "language": "Kannada",
+      "language_code": "kn",
+      "language_native": "ಕನ್ನಡ",
+      "name": "ಕನ್ನಡ ಅನುವಾದ",
+      "english_name": "Kannada Translation",
+      "file_name": "Kannada_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kannada/Kannada_Translation.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Kannada",
+      "language_code": "kn",
+      "language_native": "ಕನ್ನಡ",
+      "name": "ಮುಹಮ್ಮದ್ ಹಂಝಾ ಬತ್ತೂರ್",
+      "english_name": "Muhammad Hamza Battur",
+      "file_name": "Muhammad_Hamza_Battur.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kannada/Muhammad_Hamza_Battur.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Kannada",
+      "language_code": "kn",
+      "language_native": "ಕನ್ನಡ",
+      "name": "ಕನ್ನಡ ಅನುವಾದ - ಬಶೀರ್ ಮಿಸ್ಸೌರಿ",
+      "english_name": "Kannada translation - Bashir Missouri",
+      "file_name": "Kannada_translation_-_Bashir_Missouri.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kannada/Kannada_translation_-_Bashir_Missouri.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Russian": [
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Магомед-Нури Османович Османов",
+      "english_name": "Magomed-Nuri Osmanovich Osmanov",
+      "file_name": "Magomed-Nuri_Osmanovich_Osmanov.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Magomed-Nuri_Osmanovich_Osmanov.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Гордий Семёнович Саблуков",
+      "english_name": "Gordy Semyonovich Sablukov",
+      "file_name": "Gordy_Semyonovich_Sablukov.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Gordy_Semyonovich_Sablukov.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Эльмир Кулиев",
+      "english_name": "Russian Translation ( Elmir Kuliev )",
+      "file_name": "Russian_Translation_(_Elmir_Kuliev_).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Russian_Translation_(_Elmir_Kuliev_).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Министерство вакуфов Египта",
+      "english_name": "Ministry of Awqaf, Egypt",
+      "file_name": "Ministry_of_Awqaf,_Egypt.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Ministry_of_Awqaf,_Egypt.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Абу Адель",
+      "english_name": "Abu Adel",
+      "file_name": "Abu_Adel.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Abu_Adel.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Russian",
+      "language_code": "ru",
+      "language_native": "Русский",
+      "name": "Русский перевод - Абу Адель",
+      "english_name": "Russian translation - Aboadel",
+      "file_name": "Russian_translation_-_Aboadel.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Russian/Russian_translation_-_Aboadel.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Spanish": [
     {
       "language": "Spanish",
-      "name": "Centro Noor Internacional",
-      "file_name":
-          "Noor_International_Center.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Noor_International_Center.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Spanish",
+      "language_code": "es",
+      "language_native": "Español",
       "name": "Sheikh Isa Garcia",
-      "file_name": "Sheikh_Isa_Garcia.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Sheikh Isa Garcia",
+      "file_name": "Sheikh_Isa_Garcia.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Sheikh_Isa_Garcia.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Spanish/Sheikh_Isa_Garcia.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
       "language": "Spanish",
-      "name": "Montada Islamic Foundation",
-      "file_name":
-          "Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Spanish",
+      "language_code": "es",
+      "language_native": "Español",
       "name": "Centro Noor Internacional",
-      "file_name": "Noor_International_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Noor International Center",
+      "file_name": "Noor_International_Center.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Noor_International_Center.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Spanish/Noor_International_Center.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
       "language": "Spanish",
+      "language_code": "es",
+      "language_native": "Español",
       "name": "Montada Islamic Foundation",
-      "file_name": "Montada_Islamic_Foundation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Montada Islamic Foundation",
+      "file_name": "Montada_Islamic_Foundation.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
     {
       "language": "Spanish",
+      "language_code": "es",
+      "language_native": "Español",
       "name": "Traducción al Español (Julio Cortes)",
-      "file_name": "Spanish_Translation(Cortes).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Spanish Translation(Cortes)",
+      "file_name": "Spanish_Translation(Cortes).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Spanish/Spanish_Translation(Cortes).simple.json.txt",
+          "translation_v2/compressed_translation_simple/Spanish/Spanish_Translation(Cortes).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "divehi": [
+  "Yau_yuw": [
     {
-      "language": "Divehi",
-      "name": "ދިވެހިރާއްޖޭގެ ރައީސުލްޖުމްހޫރިއްޔާގެ އޮފީސް",
-      "file_name": "Office_of_the_president_of_Maldives.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Yau_yuw",
+      "language_code": "yao",
+      "language_native": "Chiyao",
+      "name": "Abdul Hamid Silika",
+      "english_name": "Abdul Hamid Silika",
+      "file_name": "Abdul_Hamid_Silika.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Divehi/Office_of_the_president_of_Maldives.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Yau_yuw/Abdul_Hamid_Silika.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
   ],
-  "uighur": [
-    {
-      "language": "Uighur",
-      "name": "مۇھەممەد سالىھ",
-      "file_name": "Muhammad_Saleh.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uighur/Muhammad_Saleh.simple.json.txt",
-    },
-  ],
-  "somali": [
-    {
-      "language": "Somali",
-      "name": "Maxamuud Maxamed Cabduhu",
-      "file_name": "Mahmud_Muhammad_Abduh.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Somali/Mahmud_Muhammad_Abduh.simple.json.txt",
-    },
-    {
-      "language": "Somali",
-      "name": "Cabdullaahi Xasan Yacquub",
-      "file_name": "Abdullah_Hassan_Yacoub.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.simple.json.txt",
-    },
-    {
-      "language": "Somali",
-      "name": "Cabdullaahi Xasan Yacquub",
-      "file_name":
-          "Abdullah_Hassan_Yacoub.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "italian": [
-    {
-      "language": "Italian",
-      "name": "Hamza Roberto Piccardo",
-      "file_name":
-          "Hamza_Roberto_Piccardo.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Italian",
-      "name": "Hamza Roberto Piccardo",
-      "file_name": "Hamza_Roberto_Piccardo.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.simple.json.txt",
-    },
-    {
-      "language": "Italian",
-      "name": "Othman al-Sharif",
-      "file_name": "Othman_al-Sharif.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Italian/Othman_al-Sharif.simple.json.txt",
-    },
-  ],
-  "serbian": [
-    {
-      "language": "Serbian",
-      "name": "Центар Дар Ал-Салам",
-      "file_name": "Dar_Al-Salam_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Serbian/Dar_Al-Salam_Center.simple.json.txt",
-    },
-  ],
-  "kazakh": [
-    {
-      "language": "Kazakh",
-      "name": "Халифа Алтай",
-      "file_name": "Khalifa_Altay.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kazakh/Khalifa_Altay.simple.json.txt",
-    },
-  ],
-  "amazigh": [
-    {
-      "language": "Amazigh",
-      "name": "Ṛemḍan Σet Menṣur",
-      "file_name": "Ramdane_At_Mansour.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Amazigh/Ramdane_At_Mansour.simple.json.txt",
-    },
-  ],
-  "marathi": [
+  "Marathi": [
     {
       "language": "Marathi",
+      "language_code": "mr",
+      "language_native": "मराठी",
       "name": "मुहम्मद शफी अंसारी",
-      "file_name": "Muhammad_Shafi’i_Ansari.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Muhammad Shafi’i Ansari",
+      "file_name": "Muhammad_Shafi’i_Ansari.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Marathi/Muhammad_Shafi’i_Ansari.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Marathi/Muhammad_Shafi’i_Ansari.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "telugu": [
-    {
-      "language": "Telugu",
-      "name": "మౌలానా అబ్దుర్-రహీమ్ ఇబ్న్ ముహమ్మద్",
-      "file_name": "Maulana_Abder-Rahim_ibn_Muhammad.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Telugu/Maulana_Abder-Rahim_ibn_Muhammad.simple.json.txt",
-    },
-  ],
-  "ukrainian": [
+  "Ukrainian": [
     {
       "language": "Ukrainian",
+      "language_code": "uk",
+      "language_native": "Українська",
       "name": "Михайло Якубович",
-      "file_name": "Dr._Mikhailo_Yaqubovic.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Dr. Mikhailo Yaqubovic",
+      "file_name": "Dr._Mikhailo_Yaqubovic.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Ukrainian/Dr._Mikhailo_Yaqubovic.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Ukrainian/Dr._Mikhailo_Yaqubovic.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "hindi": [
+  "English": [
     {
-      "language": "Hindi",
-      "name": "मौलाना अज़ीज़ुल हक़ अल-उमरी",
-      "file_name": "Maulana_Azizul_Haque_al-Umari.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Abdul Majid Daryabadi",
+      "english_name": "Abdul Majid Daryabadi",
+      "file_name": "Abdul_Majid_Daryabadi.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.simple.json.txt",
+          "translation_v2/compressed_translation_simple/English/Abdul_Majid_Daryabadi.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
     {
-      "language": "Hindi",
-      "name": "मौलाना अज़ीज़ुल हक़ अल-उमरी",
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Professor Shaykh Hasan Al-Fatih Qaribullah",
+      "english_name": "Professor Shaykh Hasan Al-Fatih Qaribullah",
+      "file_name": "Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Muhammad Asad",
+      "english_name": "Muhammad Asad",
+      "file_name": "Muhammad_Asad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Muhammad_Asad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "A. J. Arberry",
+      "english_name": "A. J. Arberry",
+      "file_name": "A._J._Arberry.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/A._J._Arberry.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Dr. T. B. Irving",
+      "english_name": "Dr. T. B. Irving",
+      "file_name": "Dr._T._B._Irving.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Dr._T._B._Irving.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Muhammad Sarwar",
+      "english_name": "Muhammad Sarwar",
+      "file_name": "Muhammad_Sarwar.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Muhammad_Sarwar.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Dr. Waleed Bleyhesh Omary",
+      "english_name": "Dr. Waleed Bleyhesh Omary",
+      "file_name": "Dr._Waleed_Bleyhesh_Omary.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Dr._Waleed_Bleyhesh_Omary.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "English Translation (Pickthall)",
+      "english_name": "English Translation (Pickthall)",
+      "file_name": "English_Translation_(Pickthall).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/English_Translation_(Pickthall).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Muhsin Khan",
+      "english_name": "Muhsin Khan",
+      "file_name": "Muhsin_Khan.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Muhsin_Khan.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Dr. Ghali",
+      "english_name": "Dr. Ghali",
+      "file_name": "Dr._Ghali.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Dr._Ghali.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Shakir",
+      "english_name": "Shakir",
+      "file_name": "Shakir.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Shakir.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Abdullah Yusuf Ali",
+      "english_name": "Abdullah Yusuf Ali",
+      "file_name": "Abdullah_Yusuf_Ali.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Abdullah_Yusuf_Ali.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Mufti Taqi Usmani",
+      "english_name": "Mufti Taqi Usmani",
+      "file_name": "Mufti_Taqi_Usmani.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Mufti_Taqi_Usmani.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Ruwwad Center",
+      "english_name": "Ruwwad Center",
+      "file_name": "Ruwwad_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Ruwwad_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Maarif-ul-Quran",
+      "english_name": "Maarif-ul-Quran",
+      "file_name": "Maarif-ul-Quran.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Maarif-ul-Quran.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Saheeh International",
+      "english_name": "Saheeh International",
+      "file_name": "Saheeh_International.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Saheeh_International.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Tafheem-ul-Quran - Abul Ala Maududi",
+      "english_name": "Tafheem-ul-Quran - Abul Ala Maududi",
+      "file_name": "Tafheem-ul-Quran_-_Abul_Ala_Maududi.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "M. A. S. Abdel Haleem",
+      "english_name": "Abdul Haleem",
+      "file_name": "Abdul_Haleem.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Abdul_Haleem.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Fadel Soliman, Bridges’ translation",
+      "english_name": "Fadel Soliman, Bridges’ translation",
+      "file_name": "Fadel_Soliman,_Bridges’_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Maulana Wahiduddin Khan",
+      "english_name": "Maulana Wahiduddin Khan",
+      "file_name": "Maulana_Wahiduddin_Khan.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/English/Maulana_Wahiduddin_Khan.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Muhammad Taqi-ud-Din al-Hilali & Muhammad Muhsin Khan",
+      "english_name": "Muhammad Taqi-ud-Din al-Hilali & Muhammad Muhsin Khan",
       "file_name":
-          "Maulana_Azizul_Haque_al-Umari.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+          "Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.translation-with-footnote-tags.json.txt",
+          "translation_v2/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "Colored English wbw translation",
+      "english_name": "Colored English wbw translation",
+      "file_name": "Colored_English_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/English/Colored_English_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": true,
+    },
+    {
+      "language": "English",
+      "language_code": "en",
+      "language_native": "English",
+      "name": "English Word by Word Translation",
+      "english_name": "English Word by Word Translation",
+      "file_name": "English_Word_by_Word_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/English/English_Word_by_Word_Translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
     },
   ],
-  "chinese": [
-    {
-      "language": "Chinese",
-      "name": "马坚译本（简体）",
-      "file_name": "Chinese_Translation_(Simplified)_-_Ma_Jain.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Chinese/Chinese_Translation_(Simplified)_-_Ma_Jain.simple.json.txt",
-    },
-    {
-      "language": "Chinese",
-      "name": "马金",
-      "file_name": "Muhammad_Makin.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Chinese/Muhammad_Makin.simple.json.txt",
-    },
-  ],
-  "maltese": [
-    {
-      "language": "Maltese",
-      "name": "Il-Qoran Imqaddes",
-      "file_name": "Il-Qoran_Imqaddes.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Maltese/Il-Qoran_Imqaddes.simple.json.txt",
-    },
-  ],
-  "kurdish": [
-    {
-      "language": "Kurdish",
-      "name": "محەممەد ساڵح بامۆکی",
-      "file_name": "Muhammad_Saleh_Bamoki.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kurdish/Muhammad_Saleh_Bamoki.simple.json.txt",
-    },
-    {
-      "language": "Kurdish",
-      "name": "بورهان محەمەد ئەمین",
-      "file_name": "Burhan_Muhammad-Amin.simple.json.txt",
-      "score": 99.98,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kurdish/Burhan_Muhammad-Amin.simple.json.txt",
-    },
-  ],
-  "gujarati": [
-    {
-      "language": "Gujarati",
-      "name": "રબીલા અલ-ઉમ્રી",
-      "file_name": "Rabila_Al-Umry.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Gujarati/Rabila_Al-Umry.simple.json.txt",
-    },
-  ],
-  "sindhi": [
-    {
-      "language": "Sindhi",
-      "name": "تاج محمود امروٽي",
-      "file_name": "Taj_Mehmood_Amroti.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Sindhi/Taj_Mehmood_Amroti.simple.json.txt",
-    },
-  ],
-  "asante": [
-    {
-      "language": "Asante",
-      "name": "Sheikh Haroun Ismaeel",
-      "file_name": "Sheikh_Haroun_Ismaeel.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Asante/Sheikh_Haroun_Ismaeel.simple.json.txt",
-    },
-  ],
-  "yoruba": [
-    {
-      "language": "Yoruba",
-      "name": "Shaykh Abu Raheemah Mikaeel Akyúni",
-      "file_name": "Shaykh_Abu_Rahimah_Mikael_Aykyuni.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.simple.json.txt",
-    },
-    {
-      "language": "Yoruba",
-      "name": "Shaykh Abu Raheemah Mikaeel Akyúni",
-      "file_name":
-          "Shaykh_Abu_Rahimah_Mikael_Aykyuni.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "lithuanian": [
-    {
-      "language": "Lithuanian",
-      "name": "Lietuviškas vertimas",
-      "file_name": "Lithuanian_Translation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Lithuanian/Lithuanian_Translation.simple.json.txt",
-    },
-    {
-      "language": "Lithuanian",
-      "name": "Lietuviškas vertimas",
-      "file_name":
-          "Lithuanian_Translation.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Lithuanian/Lithuanian_Translation.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "portuguese": [
-    {
-      "language": "Portuguese",
-      "name": "Helmi Nasr",
-      "file_name": "Helmi_Nasr.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Portuguese/Helmi_Nasr.simple.json.txt",
-    },
-    {
-      "language": "Portuguese",
-      "name": "Tradução Portuguesa (Samir El Hayek)",
-      "file_name": "Portuguese_Translation(_Samir_).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Portuguese/Portuguese_Translation(_Samir_).simple.json.txt",
-    },
-  ],
-  "german": [
-    {
-      "language": "German",
-      "name": "Frank Bubenheim und Nadeem Elyas",
-      "file_name": "Frank_Bubenheim_and_Nadeem.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/German/Frank_Bubenheim_and_Nadeem.simple.json.txt",
-    },
-    {
-      "language": "German",
-      "name": "Abu Reda Muhammad ibn Ahmad ibn Rassoul",
-      "file_name": "Abu_Reda_Muhammad_ibn_Ahmad.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/German/Abu_Reda_Muhammad_ibn_Ahmad.simple.json.txt",
-    },
-  ],
-  "bambara": [
-    {
-      "language": "Bambara",
-      "name": "Suliman Kanti",
-      "file_name": "Suliman_Kanti.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bambara/Suliman_Kanti.simple.json.txt",
-    },
-    {
-      "language": "Bambara",
-      "name": "Baba Mamady Jani",
-      "file_name": "Baba_Mamady_Jani.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Bambara/Baba_Mamady_Jani.simple.json.txt",
-    },
-  ],
-  "malayalam": [
-    {
-      "language": "Malayalam",
-      "name": "മുഹമ്മദ് കാരകുന്ന് & വണിദാസ് ഇളയാവൂര്‍",
-      "file_name": "Muhammad_Karakunnu_and_Vanidas_Elayavoor.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Malayalam/Muhammad_Karakunnu_and_Vanidas_Elayavoor.simple.json.txt",
-    },
-    {
-      "language": "Malayalam",
-      "name": "അബ്ദുൽ ഹമീദ് & കുഞ്ഞി മുഹമ്മദ് പറപ്പൂർ",
-      "file_name": "Malay_Translation(Abdul_Hameed_and_Kunhi).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Malayalam/Malay_Translation(Abdul_Hameed_and_Kunhi).simple.json.txt",
-    },
-    {
-      "language": "Malayalam",
-      "name": "അബ്ദുൽ-ഹമീദ് ഹൈദർ & കുഞ്ഞി മുഹമ്മദ്",
-      "file_name": "Abdul-Hamid_Haidar_&_Kanhi_Muhammad.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Malayalam/Abdul-Hamid_Haidar_&_Kanhi_Muhammad.simple.json.txt",
-    },
-  ],
-  "french": [
-    {
-      "language": "French",
-      "name": "Rashid Maash",
-      "file_name": "Rashid_Maash.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Rashid_Maash.simple.json.txt",
-    },
-    {
-      "language": "French",
-      "name": "Fondation Islamique Montada",
-      "file_name":
-          "Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Montada_Islamic_Foundation.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "French",
-      "name": "Rashid Maash",
-      "file_name": "Rashid_Maash.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Rashid_Maash.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "French",
-      "name": "Fondation Islamique Montada",
-      "file_name": "Montada_Islamic_Foundation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Montada_Islamic_Foundation.simple.json.txt",
-    },
-    {
-      "language": "French",
-      "name": "Muhammad Hamidullah",
-      "file_name":
-          "Muhammad_Hamidullah.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Muhammad_Hamidullah.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "French",
-      "name": "Muhammad Hamidullah",
-      "file_name": "Muhammad_Hamidullah.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/French/Muhammad_Hamidullah.simple.json.txt",
-    },
-  ],
-  "nepali": [
-    {
-      "language": "Nepali",
-      "name": "अहले हदीस केन्द्रीय सोसाइटी नेपाल",
-      "file_name": "Ahl_Al-Hadith_Central_Society_of_Nepal.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Nepali/Ahl_Al-Hadith_Central_Society_of_Nepal.simple.json.txt",
-    },
-  ],
-  "ganda": [
-    {
-      "language": "Ganda",
-      "name": "African Development Foundation",
-      "file_name": "African_Development_Foundation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Ganda/African_Development_Foundation.simple.json.txt",
-    },
-  ],
-  "assamese": [
-    {
-      "language": "Assamese",
-      "name": "শ্বেখ ৰফীকুল ইছলাম হবিবুৰ-ৰহমান",
-      "file_name": "Shaykh_Rafeequl_Islam_Habibur-Rahman.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.simple.json.txt",
-    },
-    {
-      "language": "Assamese",
-      "name": "শ্বেখ ৰফীকুল ইছলাম হবিবুৰ-ৰহমান",
-      "file_name":
-          "Shaykh_Rafeequl_Islam_Habibur-Rahman.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "chechen": [
-    {
-      "language": "Chechen",
-      "name": "Магомед Магомедов",
-      "file_name": "Magomed_Magomedov.translation-with-footnote-tags.json.txt",
-      "score": 96.7,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Chechen/Magomed_Magomedov.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Chechen",
-      "name": "Магомед Магомедов",
-      "file_name": "Magomed_Magomedov.simple.json.txt",
-      "score": 96.7,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Chechen/Magomed_Magomedov.simple.json.txt",
-    },
-  ],
-  "polish": [
-    {
-      "language": "Polish",
-      "name": "Józef Bielawski",
-      "file_name": "Józef_Bielawski.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Polish/Józef_Bielawski.simple.json.txt",
-    },
-  ],
-  "tajik": [
-    {
-      "language": "Tajik",
-      "name": "Маркази тарҷумаи пешоҳангон",
-      "file_name": "Pioneers_of_Translation_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tajik/Pioneers_of_Translation_Center.simple.json.txt",
-    },
-    {
-      "language": "Tajik",
-      "name": "Хоҷа Мироф ва Хоҷа Мир",
-      "file_name": "Khawaja_Mirof_&_Khawaja_Mir.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.simple.json.txt",
-    },
-    {
-      "language": "Tajik",
-      "name": "Тарҷумаи тоҷикӣ",
-      "file_name": "Tajik.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tajik/Tajik.simple.json.txt",
-    },
-    {
-      "language": "Tajik",
-      "name": "Хоҷа Мироф ва Хоҷа Мир",
-      "file_name":
-          "Khawaja_Mirof_&_Khawaja_Mir.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "kinyarwanda": [
-    {
-      "language": "Kinyarwanda",
-      "name": "Itsinda ry’Ishyirahamwe ry’Abayisilamu mu Rwanda",
-      "file_name":
-          "The_Rwanda_Muslims_Association_team.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Kinyarwanda",
-      "name": "Ikirundi gihiti",
-      "file_name": "Ikirundi_gehiti.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kinyarwanda/Ikirundi_gehiti.simple.json.txt",
-    },
-    {
-      "language": "Kinyarwanda",
-      "name": "Itsinda ry’Ishyirahamwe ry’Abayisilamu mu Rwanda",
-      "file_name": "The_Rwanda_Muslims_Association_team.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.simple.json.txt",
-    },
-  ],
-  "urdu": [
+  "Urdu": [
     {
       "language": "Urdu",
-      "name": "شیخ الہند محمود الحسن (مع تفسیر عثمانی)",
-      "file_name":
-          "Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "تفہیم القرآن - سید ابو الاعلی مودودی",
-      "file_name":
-          "Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "بیان القرآن",
-      "file_name": "bayan-ul-quran.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/bayan-ul-quran.simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "مولانا محمد جوناگڑھی",
-      "file_name":
-          "Maulana_Muhammad_Junagarhi.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "مولانا وحید الدین خان",
-      "file_name": "Maulana_Wahiduddin_Khan.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Maulana_Wahiduddin_Khan.simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "فی ظلال القرآن",
-      "file_name": "Fe_Zilal_al-Qur'an.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Fe_Zilal_al-Qur'an.simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "مولانا محمد جوناگڑھی",
-      "file_name": "Maulana_Muhammad_Junagarhi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "فتح محمد جالندھری",
-      "file_name": "Fatah_Muhammad_Jalandhari.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Fatah_Muhammad_Jalandhari.simple.json.txt",
-    },
-    {
-      "language": "Urdu",
-      "name": "شیخ الہند محمود الحسن (مع تفسیر عثمانی)",
-      "file_name":
-          "Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
       "name": "ابو الاعلی مودودی (رومن اردو)",
-      "file_name": "Abul_Ala_Maududi(Roman_Urdu).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Abul Ala Maududi(Roman Urdu)",
+      "file_name": "Abul_Ala_Maududi(Roman_Urdu).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Abul_Ala_Maududi(Roman_Urdu).simple.json.txt",
+          "translation_v2/compressed_translation_simple/Urdu/Abul_Ala_Maududi(Roman_Urdu).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
     {
       "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "مولانا وحید الدین خان",
+      "english_name": "Maulana Wahiduddin Khan",
+      "file_name": "Maulana_Wahiduddin_Khan.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Maulana_Wahiduddin_Khan.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "فی ظلال القرآن",
+      "english_name": "Fe Zilal al-Qur'an",
+      "file_name": "Fe_Zilal_al-Qur'an.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Fe_Zilal_al-Qur'an.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "بیان القرآن",
+      "english_name": "Bayan-ul-Quran",
+      "file_name": "Bayan-ul-Quran.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Bayan-ul-Quran.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "فتح محمد جالندھری",
+      "english_name": "Fatah Muhammad Jalandhari",
+      "file_name": "Fatah_Muhammad_Jalandhari.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Fatah_Muhammad_Jalandhari.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "اردو لفظ بہ لفظ ترجمہ",
+      "english_name": "Urdu wbw translation",
+      "file_name": "Urdu_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Urdu/Urdu_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "شیخ الہند محمود الحسن (مع تفسیر عثمانی)",
+      "english_name": "Shaykh al-Hind Mahmud al-Hasan(with Tafsir E Usmani)",
+      "file_name":
+          "Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
+      "name": "مولانا محمد جوناگڑھی",
+      "english_name": "Maulana Muhammad Junagarhi",
+      "file_name": "Maulana_Muhammad_Junagarhi.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Urdu",
+      "language_code": "ur",
+      "language_native": "اردو",
       "name": "تفہیم القرآن - سید ابو الاعلی مودودی",
-      "file_name": "Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Tafheem e Qur'an - Syed Abu Ali Maududi",
+      "file_name": "Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
   ],
-  "central_khmer": [
+  "Divehi": [
     {
-      "language": "Central_khmer",
-      "name": "អង្គការអភិវឌ្ឍន៍សហគមន៍ខ្មែរឥស្លាមកម្ពុជា",
-      "file_name": "Cambodian_Muslim_Community_Development.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Divehi",
+      "language_code": "dv",
+      "language_native": "ދިވެހި",
+      "name": "އަބޫބަކުރު އިބްރާހީމް ޢަލީ (ބަކުރުބޭ)",
+      "english_name": "Abu Bakr Ibrahim Ali (Bakurube)",
+      "file_name": "Abu_Bakr_Ibrahim_Ali_(Bakurube).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Central_khmer/Cambodian_Muslim_Community_Development.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Divehi/Abu_Bakr_Ibrahim_Ali_(Bakurube).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "romanian": [
-    {
-      "language": "Romanian",
-      "name": "George Grigore",
-      "file_name": "Grigore.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Romanian/Grigore.simple.json.txt",
-    },
-    {
-      "language": "Romanian",
-      "name": "Liga Islamică și Culturală",
-      "file_name": "Islamic_and_Cultural_League.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.simple.json.txt",
-    },
-    {
-      "language": "Romanian",
-      "name": "Liga Islamică și Culturală",
-      "file_name":
-          "Islamic_and_Cultural_League.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "swahili": [
-    {
-      "language": "Swahili",
-      "name": "Ali Muhsin Al-Barwani",
-      "file_name": "Ali_Muhsin_Al-Barwani.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Swahili/Ali_Muhsin_Al-Barwani.simple.json.txt",
-    },
-    {
-      "language": "Swahili",
-      "name": "Dr. Abdullah Muhammad Abu Bakr na Sheikh Nasir Khamis",
-      "file_name":
-          "Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Swahili/Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.simple.json.txt",
-    },
-  ],
-  "hausa": [
-    {
-      "language": "Hausa",
-      "name": "Tarjumar Abubakar Gumi",
-      "file_name": "Hausa_Translation(Abubakar_Gumi).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hausa/Hausa_Translation(Abubakar_Gumi).simple.json.txt",
-    },
-    {
-      "language": "Hausa",
-      "name": "Abubakar Mahmud Gumi",
-      "file_name": "Abubakar_Mahmood_Jummi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.simple.json.txt",
-    },
-    {
-      "language": "Hausa",
-      "name": "Abubakar Mahmud Gumi",
-      "file_name":
-          "Abubakar_Mahmood_Jummi.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "japanese": [
-    {
-      "language": "Japanese",
-      "name": "三田了一",
-      "file_name": "Ryoichi_Mita.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Japanese/Ryoichi_Mita.simple.json.txt",
-    },
-    {
-      "language": "Japanese",
-      "name": "サイード佐藤",
-      "file_name": "Saeed_Sato.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Japanese/Saeed_Sato.simple.json.txt",
-    },
-  ],
-  "vietnamese": [
-    {
-      "language": "Vietnamese",
-      "name": "Hasan Abdul-Karim",
-      "file_name": "Hasan_Abdul-Karim.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Vietnamese/Hasan_Abdul-Karim.simple.json.txt",
-    },
-    {
-      "language": "Vietnamese",
-      "name": "Trung tâm Ruwwad",
-      "file_name": "Ruwwad_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Vietnamese/Ruwwad_Center.simple.json.txt",
-    },
-    {
-      "language": "Vietnamese",
-      "name": "Trung tâm Ruwwad",
-      "file_name": "Ruwwad_Center.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Vietnamese/Ruwwad_Center.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "tatar": [
-    {
-      "language": "Tatar",
-      "name": "Татарча тәрҗемә",
-      "file_name": "Tatar.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tatar/Tatar.simple.json.txt",
-    },
-  ],
-  "hebrew": [
-    {
-      "language": "Hebrew",
-      "name": "מרכז דאר אלסלאם",
-      "file_name": "Dar_Al-Salam_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Hebrew/Dar_Al-Salam_Center.simple.json.txt",
-    },
-  ],
-  "turkish": [
-    {
-      "language": "Turkish",
-      "name": "Elmalılı Hamdi Yazır",
-      "file_name": "Elmalili_Hamdi_Yazir.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Turkish/Elmalili_Hamdi_Yazir.simple.json.txt",
-    },
-    {
-      "language": "Turkish",
-      "name": "Muslim Şahin",
-      "file_name": "Muslim_Shahin.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Turkish/Muslim_Shahin.simple.json.txt",
-    },
-    {
-      "language": "Turkish",
-      "name": "Diyanet İşleri Başkanlığı",
-      "file_name": "Turkish_Translation(Diyanet).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Turkish/Turkish_Translation(Diyanet).simple.json.txt",
-    },
-    {
-      "language": "Turkish",
-      "name": "Şaban Piriş",
-      "file_name": "Shaban_Britch.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Turkish/Shaban_Britch.simple.json.txt",
-    },
-    {
-      "language": "Turkish",
-      "name": "Dar Al-Salam Merkezi",
-      "file_name": "Dar_Al-Salam_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Turkish/Dar_Al-Salam_Center.simple.json.txt",
-    },
-  ],
-  "yao": [
-    {
-      "language": "Yao",
-      "name": "Abdul Hamid Silika",
-      "file_name": "Abdul_Hamid_Silika.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Yau/Abdul_Hamid_Silika.simple.json.txt",
-    },
-    {
-      "language": "Yao",
-      "name": "Abdul Hamid Silika",
-      "file_name": "Abdul_Hamid_Silika.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Yau/Abdul_Hamid_Silika.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "russian": [
-    {
-      "language": "Russian",
-      "name": "Магомед-Нури Османович Османов",
-      "file_name": "Magomed-Nuri_Osmanovich_Osmanov.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Russian/Magomed-Nuri_Osmanovich_Osmanov.simple.json.txt",
-    },
-    {
-      "language": "Russian",
-      "name": "Эльмир Кулиев",
-      "file_name": "Russian_Translation_(_Elmir_Kuliev_).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Russian/Russian_Translation_(_Elmir_Kuliev_).simple.json.txt",
-    },
-    {
-      "language": "Russian",
-      "name": "Абу Адель",
-      "file_name": "Abu_Adel.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Russian/Abu_Adel.simple.json.txt",
-    },
-    {
-      "language": "Russian",
-      "name": "Министерство вакуфов Египта",
-      "file_name": "Ministry_of_Awqaf,_Egypt.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Russian/Ministry_of_Awqaf,_Egypt.simple.json.txt",
-    },
-    {
-      "language": "Russian",
-      "name": "Гордий Семёнович Саблуков",
-      "file_name": "Gordy_Semyonovich_Sablukov.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Russian/Gordy_Semyonovich_Sablukov.simple.json.txt",
-    },
-  ],
-  "czech": [
-    {
-      "language": "Czech",
-      "name": "Český překlad",
-      "file_name": "Czech.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Czech/Czech.simple.json.txt",
-    },
-  ],
-  "thai": [
-    {
-      "language": "Thai",
-      "name": "สมาคมสถาบันและมหาวิทยาลัยอิสลาม",
-      "file_name": "Society_of_Institutes_and_Universities.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Thai/Society_of_Institutes_and_Universities.simple.json.txt",
-    },
-    {
-      "language": "Thai",
-      "name": "ศูนย์กษัตริย์ฟาฮัดเพื่อการพิมพ์อัลกุรอาน",
-      "file_name": "Thai_Translatio_(King_Fahad_Quran_Complex).simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Thai/Thai_Translatio_(King_Fahad_Quran_Complex).simple.json.txt",
-    },
-  ],
-  "azeri": [
-    {
-      "language": "Azeri",
-      "name": "Azərbaycanca tərcümə",
-      "file_name": "Azerbaijani.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Azeri/Azerbaijani.simple.json.txt",
-    },
-    {
-      "language": "Azeri",
-      "name": "Əlixan Musayev",
-      "file_name": "Alikhan_Musayev.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Azeri/Alikhan_Musayev.simple.json.txt",
-    },
-  ],
-  "finnish": [
-    {
-      "language": "Finnish",
-      "name": "Suomenkielinen käännös",
-      "file_name": "Finnish.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Finnish/Finnish.simple.json.txt",
-    },
-  ],
-  "kannada": [
-    {
-      "language": "Kannada",
-      "name": "ಕನ್ನಡ ಅನುವಾದ",
-      "file_name": "Kannada_Translation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kannada/Kannada_Translation.simple.json.txt",
-    },
-    {
-      "language": "Kannada",
-      "name": "ಕನ್ನಡ ಅನುವಾದ",
-      "file_name":
-          "Kannada_Translation.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kannada/Kannada_Translation.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Kannada",
-      "name": "ಶೇಖ್ ಈಸಾ ಗಾರ್ಸಿಯಾ [?]",
-      "file_name": "Sheikh_Isa_Garcia.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Kannada/Sheikh_Isa_Garcia.translation-with-footnote-tags.json.txt",
-    },
-  ],
-  "tagalog": [
+  "Tagalog": [
     {
       "language": "Tagalog",
+      "language_code": "tl",
+      "language_native": "Tagalog",
       "name": "Dar Al-Salam Center",
-      "file_name": "Dar_Al-Salam_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Dar Al-Salam Center",
+      "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tagalog/Dar_Al-Salam_Center.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Tagalog/Dar_Al-Salam_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "norwegian": [
+  "Sinhala_Sinhalese": [
+    {
+      "language": "Sinhala_Sinhalese",
+      "language_code": "si",
+      "language_native": "සිංහල",
+      "name": "රුව්වාද් මධ්‍යස්ථානය",
+      "english_name": "Ruwwad Center",
+      "file_name": "Ruwwad_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Sinhala_Sinhalese/Ruwwad_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "With_footnotes": [
+    {
+      "language": "With_footnotes",
+      "language_code": "mos",
+      "language_native": "Mooré",
+      "name": "Moore rwwad",
+      "english_name": "Moore rwwad",
+      "file_name": "Moore_rwwad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/With_footnotes/Moore_rwwad.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Maltese": [
+    {
+      "language": "Maltese",
+      "language_code": "mt",
+      "language_native": "Malti",
+      "name": "Il-Qoran Imqaddes",
+      "english_name": "Il-Qoran Imqaddes",
+      "file_name": "Il-Qoran_Imqaddes.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Maltese/Il-Qoran_Imqaddes.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Indonesian": [
+    {
+      "language": "Indonesian",
+      "language_code": "id",
+      "language_native": "Bahasa Indonesia",
+      "name": "Perusahaan Sabiq",
+      "english_name": "The Sabiq company",
+      "file_name": "The_Sabiq_company.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Indonesian/The_Sabiq_company.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Indonesian",
+      "language_code": "id",
+      "language_native": "Bahasa Indonesia",
+      "name": "Kompleks Percetakan Al-Qur'an Raja Fahd",
+      "english_name": "King Fahad Quran Complex",
+      "file_name": "King_Fahad_Quran_Complex.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Indonesian",
+      "language_code": "id",
+      "language_native": "Bahasa Indonesia",
+      "name": "Kementerian Agama Republik Indonesia",
+      "english_name": "Indonesian Islamic affairs ministry",
+      "file_name": "Indonesian_Islamic_affairs_ministry.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Indonesian",
+      "language_code": "id",
+      "language_native": "Bahasa Indonesia",
+      "name": "Terjemahan kata demi kata bahasa Indonesia",
+      "english_name": "Indonesian wbw translation",
+      "file_name": "Indonesian_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Indonesian/Indonesian_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
+    },
+  ],
+  "Macedonian": [
+    {
+      "language": "Macedonian",
+      "language_code": "mk",
+      "language_native": "Македонски",
+      "name": "Превод од македонски научници",
+      "english_name": "Macedonian scholars",
+      "file_name": "Macedonian_scholars.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Macedonian/Macedonian_scholars.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Somali": [
+    {
+      "language": "Somali",
+      "language_code": "so",
+      "language_native": "Soomaali",
+      "name": "Cabdullaahi Xasan Yacquub",
+      "english_name": "Abdullah Hassan Yacoub",
+      "file_name": "Abdullah_Hassan_Yacoub.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Somali",
+      "language_code": "so",
+      "language_native": "Soomaali",
+      "name": "Maxamuud Maxamed Cabduhu",
+      "english_name": "Mahmud Muhammad Abduh",
+      "file_name": "Mahmud_Muhammad_Abduh.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Somali/Mahmud_Muhammad_Abduh.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Turkish": [
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Şaban Piriş",
+      "english_name": "Shaban Britch",
+      "file_name": "Shaban_Britch.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Turkish/Shaban_Britch.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Muslim Şahin",
+      "english_name": "Muslim Shahin",
+      "file_name": "Muslim_Shahin.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Turkish/Muslim_Shahin.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Diyanet İşleri Başkanlığı",
+      "english_name": "Turkish Translation(Diyanet)",
+      "file_name": "Turkish_Translation(Diyanet).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Turkish/Turkish_Translation(Diyanet).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Elmalılı Hamdi Yazır",
+      "english_name": "Elmalili Hamdi Yazir",
+      "file_name": "Elmalili_Hamdi_Yazir.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Turkish/Elmalili_Hamdi_Yazir.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Dar Al-Salam Merkezi",
+      "english_name": "Dar Al-Salam Center",
+      "file_name": "Dar_Al-Salam_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Turkish/Dar_Al-Salam_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Turkish",
+      "language_code": "tr",
+      "language_native": "Türkçe",
+      "name": "Türkçe kelime kelime çeviri",
+      "english_name": "Turkish wbw translation",
+      "file_name": "Turkish_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Turkish/Turkish_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
+    },
+  ],
+  "Vietnamese": [
+    {
+      "language": "Vietnamese",
+      "language_code": "vi",
+      "language_native": "Tiếng Việt",
+      "name": "Trung tâm Ruwwad",
+      "english_name": "Ruwwad Center",
+      "file_name": "Ruwwad_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Vietnamese/Ruwwad_Center.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Vietnamese",
+      "language_code": "vi",
+      "language_native": "Tiếng Việt",
+      "name": "Hasan Abdul-Karim",
+      "english_name": "Hasan Abdul-Karim",
+      "file_name": "Hasan_Abdul-Karim.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Vietnamese/Hasan_Abdul-Karim.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Albanian": [
+    {
+      "language": "Albanian",
+      "language_code": "sq",
+      "language_native": "Shqip",
+      "name": "Qendra Ruwwad",
+      "english_name": "Ruwwad Center",
+      "file_name": "Ruwwad_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Albanian/Ruwwad_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Albanian",
+      "language_code": "sq",
+      "language_native": "Shqip",
+      "name": "Shqip",
+      "english_name": "Albanian",
+      "file_name": "Albanian.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Albanian/Albanian.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Albanian",
+      "language_code": "sq",
+      "language_native": "Shqip",
+      "name": "Përkthim shqip",
+      "english_name": "Albanian Translation",
+      "file_name": "Albanian_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Albanian/Albanian_Translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Albanian",
+      "language_code": "sq",
+      "language_native": "Shqip",
+      "name": "Hasan Efendi Nahi",
+      "english_name": "Hasan Efendi Nahi",
+      "file_name": "Hasan_Efendi_Nahi.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Malay": [
+    {
+      "language": "Malay",
+      "language_code": "ms",
+      "language_native": "Bahasa Melayu",
+      "name": "Abdullah Basmeih",
+      "english_name": "Abdullah Basamia",
+      "file_name": "Abdullah_Basamia.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Malay/Abdullah_Basamia.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "German": [
+    {
+      "language": "German",
+      "language_code": "de",
+      "language_native": "Deutsch",
+      "name": "Frank Bubenheim und Nadeem Elyas",
+      "english_name": "Frank Bubenheim and Nadeem",
+      "file_name": "Frank_Bubenheim_and_Nadeem.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/German/Frank_Bubenheim_and_Nadeem.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "German",
+      "language_code": "de",
+      "language_native": "Deutsch",
+      "name": "Deutsche Übersetzung - Rowwad Translation Center",
+      "english_name": "German Translation - Rowwad Translation Center",
+      "file_name": "German_Translation_-_Rowwad_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/German/German_Translation_-_Rowwad_Translation_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "German",
+      "language_code": "de",
+      "language_native": "Deutsch",
+      "name": "Abu Reda Muhammad ibn Ahmad ibn Rassoul",
+      "english_name": "Abu Reda Muhammad ibn Ahmad",
+      "file_name": "Abu_Reda_Muhammad_ibn_Ahmad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/German/Abu_Reda_Muhammad_ibn_Ahmad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Lithuanian": [
+    {
+      "language": "Lithuanian",
+      "language_code": "lt",
+      "language_native": "Lietuvių",
+      "name": "Lietuviškas vertimas",
+      "english_name": "Lithuanian Translation",
+      "file_name": "Lithuanian_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Lithuanian/Lithuanian_Translation.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Telugu": [
+    {
+      "language": "Telugu",
+      "language_code": "te",
+      "language_native": "తెలుగు",
+      "name": "మౌలానా అబ్దుర్-రహీమ్ ఇబ్న్ ముహమ్మద్",
+      "english_name": "Maulana Abder-Rahim ibn Muhammad",
+      "file_name": "Maulana_Abder-Rahim_ibn_Muhammad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Telugu/Maulana_Abder-Rahim_ibn_Muhammad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Romanian": [
+    {
+      "language": "Romanian",
+      "language_code": "ro",
+      "language_native": "Română",
+      "name": "Traducere în limba română",
+      "english_name": "Romanian translation",
+      "file_name": "Romanian_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Romanian/Romanian_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Romanian",
+      "language_code": "ro",
+      "language_native": "Română",
+      "name": "George Grigore",
+      "english_name": "Grigore",
+      "file_name": "Grigore.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Romanian/Grigore.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Romanian",
+      "language_code": "ro",
+      "language_native": "Română",
+      "name": "Liga Islamică și Culturală",
+      "english_name": "Islamic and Cultural League",
+      "file_name": "Islamic_and_Cultural_League.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Bulgarian": [
+    {
+      "language": "Bulgarian",
+      "language_code": "bg",
+      "language_native": "Български",
+      "name": "Български превод",
+      "english_name": "Bulgarian Translation",
+      "file_name": "Bulgarian_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bulgarian/Bulgarian_Translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bulgarian",
+      "language_code": "bg",
+      "language_native": "Български",
+      "name": "Цветан Теофанов",
+      "english_name": "Tzvetan Theophanov",
+      "file_name": "Tzvetan_Theophanov.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bulgarian/Tzvetan_Theophanov.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Portuguese": [
+    {
+      "language": "Portuguese",
+      "language_code": "pt",
+      "language_native": "Português",
+      "name": "Helmi Nasr",
+      "english_name": "Helmi Nasr",
+      "file_name": "Helmi_Nasr.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Portuguese/Helmi_Nasr.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Portuguese",
+      "language_code": "pt",
+      "language_native": "Português",
+      "name": "Tradução Portuguesa (Samir El Hayek)",
+      "english_name": "Portuguese Translation( Samir )",
+      "file_name": "Portuguese_Translation(_Samir_).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Portuguese/Portuguese_Translation(_Samir_).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Uighur_uyghur": [
+    {
+      "language": "Uighur_uyghur",
+      "language_code": "ug",
+      "language_native": "ئۇيغۇرچە",
+      "name": "مۇھەممەد سالىھ",
+      "english_name": "Muhammad Saleh",
+      "file_name": "Muhammad_Saleh.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Uighur_uyghur/Muhammad_Saleh.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Kinyarwanda": [
+    {
+      "language": "Kinyarwanda",
+      "language_code": "rw",
+      "language_native": "Ikinyarwanda",
+      "name": "Itsinda ry’Ishyirahamwe ry’Abayisilamu mu Rwanda",
+      "english_name": "The Rwanda Muslims Association team",
+      "file_name": "The_Rwanda_Muslims_Association_team.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Serbian": [
+    {
+      "language": "Serbian",
+      "language_code": "sr",
+      "language_native": "Српски",
+      "name": "Центар Дар Ал-Салам",
+      "english_name": "Dar Al-Salam Center",
+      "file_name": "Dar_Al-Salam_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Serbian/Dar_Al-Salam_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Bosnian": [
+    {
+      "language": "Bosnian",
+      "language_code": "bs",
+      "language_native": "Bosanski",
+      "name": "Dar Al-Salam Center",
+      "english_name": "Dar Al-Salam Center",
+      "file_name": "Dar_Al-Salam_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bosnian/Dar_Al-Salam_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bosnian",
+      "language_code": "bs",
+      "language_native": "Bosanski",
+      "name": "Besim Korkut",
+      "english_name": "Besim Korkut",
+      "file_name": "Besim_Korkut.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bosnian/Besim_Korkut.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bosnian",
+      "language_code": "bs",
+      "language_native": "Bosanski",
+      "name": "Muhamed Mehanović",
+      "english_name": "Muhamed Mehanović",
+      "file_name": "Muhamed_Mehanović.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bosnian/Muhamed_Mehanović.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Kazakh": [
+    {
+      "language": "Kazakh",
+      "language_code": "kk",
+      "language_native": "Қазақша",
+      "name": "Халифа Алтай",
+      "english_name": "Khalifa Altay",
+      "file_name": "Khalifa_Altay.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kazakh/Khalifa_Altay.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Chichewa_chewa_nyanja": [
+    {
+      "language": "Chichewa_chewa_nyanja",
+      "language_code": "ny",
+      "language_native": "Chichewa",
+      "name": "Kutanthauzira kwa Chichewa",
+      "english_name": "Chewa translation",
+      "file_name": "Chewa_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chichewa_chewa_nyanja/Chewa_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Pashto": [
+    {
+      "language": "Pashto",
+      "language_code": "ps",
+      "language_native": "پښتو",
+      "name": "پښتو - سرفراز",
+      "english_name": "Pashto - Sarfaraz",
+      "file_name": "Pashto_-_Sarfaraz.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Pashto/Pashto_-_Sarfaraz.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Pashto",
+      "language_code": "ps",
+      "language_native": "پښتو",
+      "name": "زکریا ابوالسلام",
+      "english_name": "Zakaria Abulsalam",
+      "file_name": "Zakaria_Abulsalam.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Pashto/Zakaria_Abulsalam.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Pashto",
+      "language_code": "ps",
+      "language_native": "پښتو",
+      "name": "د روواد ژباړې مرکز",
+      "english_name": "Pashto Translation - Rowwad Translation Center",
+      "file_name": "Pashto_Translation_-_Rowwad_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Pashto/Pashto_Translation_-_Rowwad_Translation_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Hebrew": [
+    {
+      "language": "Hebrew",
+      "language_code": "he",
+      "language_native": "עברית",
+      "name": "מרכז דאר אלסלאם",
+      "english_name": "Dar Al-Salam Center",
+      "file_name": "Dar_Al-Salam_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Hebrew/Dar_Al-Salam_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Georgian": [
+    {
+      "language": "Georgian",
+      "language_code": "ka",
+      "language_native": "ქართული",
+      "name": "ქართული თარგმანი",
+      "english_name": "Georgian Translation",
+      "file_name": "Georgian_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Georgian/Georgian_Translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Bengali": [
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "ড. আবু বকর মুহাম্মাদ যাকারিয়া",
+      "english_name": "Dr. Abu Bakr Muhammad Zakaria",
+      "file_name": "Dr._Abu_Bakr_Muhammad_Zakaria.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bengali/Dr._Abu_Bakr_Muhammad_Zakaria.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "তাফসীরে তাইসীরুল কুরআন",
+      "english_name": "Taisirul Quran",
+      "file_name": "Taisirul_Quran.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bengali/Taisirul_Quran.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "তাফসীরে রাওয়ায়ে আল-বায়ান",
+      "english_name": "Rawai Al-bayan",
+      "file_name": "Rawai_Al-bayan.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bengali/Rawai_Al-bayan.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "ফাতহুল মাজীদ",
+      "english_name": "Fathul Majid",
+      "file_name": "Fathul_Majid.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bengali/Fathul_Majid.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "শেখ মুজিবুর রহমান",
+      "english_name": "Sheikh Mujibur Rahman",
+      "file_name": "Sheikh_Mujibur_Rahman.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Bengali",
+      "language_code": "bn",
+      "language_native": "বাংলা",
+      "name": "বাংলা শব্দে শব্দে অনুবাদ",
+      "english_name": "Bengali wbw translation",
+      "file_name": "Bengali_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Bengali/Bengali_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
+    },
+  ],
+  "Gujarati": [
+    {
+      "language": "Gujarati",
+      "language_code": "gu",
+      "language_native": "ગુજરાતી",
+      "name": "રબીલા અલ-ઉમ્રી",
+      "english_name": "Rabila Al-Umry",
+      "file_name": "Rabila_Al-Umry.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Gujarati/Rabila_Al-Umry.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Czech": [
+    {
+      "language": "Czech",
+      "language_code": "cs",
+      "language_native": "Čeština",
+      "name": "Český překlad",
+      "english_name": "Czech",
+      "file_name": "Czech.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Czech/Czech.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Norwegian": [
     {
       "language": "Norwegian",
+      "language_code": "no",
+      "language_native": "Norsk",
       "name": "Norsk oversettelse",
-      "file_name": "Norwegian.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Norwegian",
+      "file_name": "Norwegian.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Norwegian/Norwegian.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Norwegian/Norwegian.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "korean": [
+  "Tamil": [
     {
-      "language": "Korean",
-      "name": "한국어 번역",
-      "file_name": "Korean.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Tamil",
+      "language_code": "ta",
+      "language_native": "தமிழ்",
+      "name": "அப்துல் ஹமீது பாகவி",
+      "english_name": "Abdul Hameed Baqavi",
+      "file_name": "Abdul_Hameed_Baqavi.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Korean/Korean.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Tamil/Abdul_Hameed_Baqavi.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
     {
-      "language": "Korean",
-      "name": "하미드 최",
-      "file_name": "Hamed_Choi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Tamil",
+      "language_code": "ta",
+      "language_native": "தமிழ்",
+      "name": "ஜான் டிரஸ்ட் ஃபவுண்டேஷன்",
+      "english_name": "Jan Trust Foundation",
+      "file_name": "Jan_Trust_Foundation.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Korean/Hamed_Choi.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Tamil/Jan_Trust_Foundation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Tamil",
+      "language_code": "ta",
+      "language_native": "தமிழ்",
+      "name": "ஷேக் உமர் ஷரீஃப் பின் அப்துல் ஸலாம்",
+      "english_name": "Sheikh Omar Sharif bin Abdul Salam",
+      "file_name": "Sheikh_Omar_Sharif_bin_Abdul_Salam.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Tamil/Sheikh_Omar_Sharif_bin_Abdul_Salam.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Tamil",
+      "language_code": "ta",
+      "language_native": "தமிழ்",
+      "name": "தமிழ் வார்த்தைக்கு வார்த்தை மொழிபெயர்ப்பு",
+      "english_name": "Tamil wbw translation",
+      "file_name": "Tamil_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Tamil/Tamil_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
     },
   ],
-  "uzbek": [
+  "Central_khmer": [
     {
-      "language": "Uzbek",
-      "name": "Muhammad Sodiq Muhammad Yusuf (Lotin)",
-      "file_name":
-          "Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+      "language": "Central_khmer",
+      "language_code": "km",
+      "language_native": "ភាសាខ្មែរ",
+      "name": "អង្គការអភិវឌ្ឍន៍សហគមន៍ខ្មែរឥស្លាមកម្ពុជា",
+      "english_name": "Cambodian Muslim Community Development",
+      "file_name": "Cambodian_Muslim_Community_Development.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Uzbek",
-      "name": "Муҳаммад Содиқ Муҳаммад Юсуф",
-      "file_name": "Muhammad_Sodik_Muhammad_Yusuf.simple.json.txt",
-      "score": 100.0,
+          "translation_v2/compressed_translation_simple/Central_khmer/Cambodian_Muslim_Community_Development.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.simple.json.txt",
-    },
-    {
-      "language": "Uzbek",
-      "name": "Alauddin Mansur",
-      "file_name": "Alauddin_Mansour.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Alauddin_Mansour.simple.json.txt",
-    },
-    {
-      "language": "Uzbek",
-      "name": "Muhammad Sodiq Muhammad Yusuf (Lotin)",
-      "file_name": "Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin)_.simple.json.txt",
-    },
-    {
-      "language": "Uzbek",
-      "name": "Муҳаммад Содиқ Муҳаммад Юсуф",
-      "file_name":
-          "Muhammad_Sodik_Muhammad_Yusuf.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Uzbek",
-      "name": "Alauddin Mansur",
-      "file_name": "Alauddin_Mansour.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Uzbek/Alauddin_Mansour.translation-with-footnote-tags.json.txt",
+      "is_tajweed": false,
     },
   ],
-  "oromo": [
+  "Chinese": [
+    {
+      "language": "Chinese",
+      "language_code": "zh",
+      "language_native": "中文",
+      "name": "马金",
+      "english_name": "Muhammad Makin",
+      "file_name": "Muhammad_Makin.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chinese/Muhammad_Makin.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Chinese",
+      "language_code": "zh",
+      "language_native": "中文",
+      "name": "马坚译本（简体）",
+      "english_name": "Chinese Translation (Simplified) - Ma Jain",
+      "file_name": "Chinese_Translation_(Simplified)_-_Ma_Jain.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_(Simplified)_-_Ma_Jain.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Chinese",
+      "language_code": "zh",
+      "language_native": "中文",
+      "name": "中文苏莱曼",
+      "english_name": "Chinese suliman",
+      "file_name": "Chinese_suliman.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chinese/Chinese_suliman.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Chinese",
+      "language_code": "zh",
+      "language_native": "中文",
+      "name": "中文翻译 - Basair",
+      "english_name": "Chinese Translation - Basair",
+      "file_name": "Chinese_Translation_-_Basair.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_-_Basair.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Kurdish": [
+    {
+      "language": "Kurdish",
+      "language_code": "ku",
+      "language_native": "کوردی",
+      "name": "محەممەد ساڵح بامۆکی",
+      "english_name": "Muhammad Saleh Bamoki",
+      "file_name": "Muhammad_Saleh_Bamoki.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kurdish/Muhammad_Saleh_Bamoki.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Kurdish",
+      "language_code": "ku",
+      "language_native": "کوردی",
+      "name": "بورهان محەمەد ئەمین",
+      "english_name": "Burhan Muhammad-Amin",
+      "file_name": "Burhan_Muhammad-Amin.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kurdish/Burhan_Muhammad-Amin.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Kurdish",
+      "language_code": "ku",
+      "language_native": "کوردی",
+      "name": "وەرگێڕانی کوردی - سەڵاحەدین",
+      "english_name": "Kurdish Translation - Salahuddin",
+      "file_name": "Kurdish_Translation_-_Salahuddin.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kurdish/Kurdish_Translation_-_Salahuddin.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Kurdish",
+      "language_code": "ku",
+      "language_native": "کوردی",
+      "name": "وەرگێڕانی کوردی کرمانجی",
+      "english_name": "Kurdish Kurmanji Translation",
+      "file_name": "Kurdish_Kurmanji_Translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kurdish/Kurdish_Kurmanji_Translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Finnish": [
+    {
+      "language": "Finnish",
+      "language_code": "fi",
+      "language_native": "Suomi",
+      "name": "Suomenkielinen käännös",
+      "english_name": "Finnish",
+      "file_name": "Finnish.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Finnish/Finnish.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Oromo": [
     {
       "language": "Oromo",
+      "language_code": "om",
+      "language_native": "Afaan Oromoo",
       "name": "Gaalii Abbaaboor Abbaa Guumaa",
-      "file_name": "Ghali_Apapur_Apaghuna.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Ghali Apapur Apaghuna",
+      "file_name": "Ghali_Apapur_Apaghuna.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Oromo/Ghali_Apapur_Apaghuna.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Oromo/Ghali_Apapur_Apaghuna.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "pashto": [
+  "Malayalam": [
     {
-      "language": "Pashto",
-      "name": "د روواد ژباړې مرکز",
-      "file_name":
-          "Pashto_Translation_-_Rowwad_Translation_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Malayalam",
+      "language_code": "ml",
+      "language_native": "മലയാളം",
+      "name": "മുഹമ്മദ് കാരകുന്ന് & വണിദാസ് ഇളയാവൂര്‍",
+      "english_name": "Muhammad Karakunnu and Vanidas Elayavoor",
+      "file_name": "Muhammad_Karakunnu_and_Vanidas_Elayavoor.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Pashto/Pashto_Translation_-_Rowwad_Translation_Center.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Malayalam/Muhammad_Karakunnu_and_Vanidas_Elayavoor.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
     {
-      "language": "Pashto",
-      "name": "زکریا ابوالسلام",
-      "file_name": "Zakaria_Abulsalam.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Malayalam",
+      "language_code": "ml",
+      "language_native": "മലയാളം",
+      "name": "അബ്ദുൽ ഹമീദ് & കുഞ്ഞി മുഹമ്മദ് പറപ്പൂർ",
+      "english_name": "Malay Translation(Abdul Hameed and Kunhi)",
+      "file_name": "Malay_Translation(Abdul_Hameed_and_Kunhi).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Pashto/Zakaria_Abulsalam.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Malayalam/Malay_Translation(Abdul_Hameed_and_Kunhi).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Malayalam",
+      "language_code": "ml",
+      "language_native": "മലയാളം",
+      "name": "അബ്ദുൽ-ഹമീദ് ഹൈദർ & കുഞ്ഞി മുഹമ്മദ്",
+      "english_name": "Abdul-Hamid Haidar & Kanhi Muhammad",
+      "file_name": "Abdul-Hamid_Haidar_&_Kanhi_Muhammad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Malayalam/Abdul-Hamid_Haidar_&_Kanhi_Muhammad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "sinhala": [
+  "Hausa": [
     {
-      "language": "Sinhala",
-      "name": "රුව්වාද් මධ්‍යස්ථානය",
-      "file_name": "Ruwwad_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "language": "Hausa",
+      "language_code": "ha",
+      "language_native": "Hausa",
+      "name": "Tarjumar Abubakar Gumi",
+      "english_name": "Hausa Translation(Abubakar Gumi)",
+      "file_name": "Hausa_Translation(Abubakar_Gumi).json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Sinhala/Ruwwad_Center.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Hausa/Hausa_Translation(Abubakar_Gumi).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Hausa",
+      "language_code": "ha",
+      "language_native": "Hausa",
+      "name": "Abubakar Mahmud Gumi",
+      "english_name": "Abubakar Mahmood Jummi",
+      "file_name": "Abubakar_Mahmood_Jummi.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
     },
   ],
-  "indonesian": [
+  "Azeri": [
     {
-      "language": "Indonesian",
-      "name": "Kompleks Percetakan Al-Qur'an Raja Fahd",
-      "file_name":
-          "King_Fahad_Quran_Complex.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+      "language": "Azeri",
+      "language_code": "az",
+      "language_native": "Azərbaycanca",
+      "name": "Azərbaycanca tərcümə",
+      "english_name": "Azerbaijani",
+      "file_name": "Azerbaijani.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Indonesian",
-      "name": "Perusahaan Sabiq",
-      "file_name": "The_Sabiq_company.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/The_Sabiq_company.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Indonesian",
-      "name": "Kompleks Percetakan Al-Qur'an Raja Fahd",
-      "file_name": "King_Fahad_Quran_Complex.simple.json.txt",
-      "score": 100.0,
+          "translation_v2/compressed_translation_simple/Azeri/Azerbaijani.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.simple.json.txt",
+      "is_tajweed": false,
     },
     {
-      "language": "Indonesian",
-      "name": "Kementerian Agama Republik Indonesia",
-      "file_name":
-          "Indonesian_Islamic_affairs_ministry.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
+      "language": "Azeri",
+      "language_code": "az",
+      "language_native": "Azərbaycanca",
+      "name": "Əlixan Musayev",
+      "english_name": "Alikhan Musayev",
+      "file_name": "Alikhan_Musayev.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Indonesian",
-      "name": "Perusahaan Sabiq (1)",
-      "file_name": "The_Sabiq_company.simple_(1).json.txt",
-      "score": 100.0,
+          "translation_v2/compressed_translation_simple/Azeri/Alikhan_Musayev.json.txt",
       "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/The_Sabiq_company.simple_(1).json.txt",
-    },
-    {
-      "language": "Indonesian",
-      "name": "Perusahaan Sabiq",
-      "file_name": "The_Sabiq_company.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/The_Sabiq_company.simple.json.txt",
-    },
-    {
-      "language": "Indonesian",
-      "name": "Kementerian Agama Republik Indonesia",
-      "file_name": "Indonesian_Islamic_affairs_ministry.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.simple.json.txt",
+      "is_tajweed": false,
     },
   ],
-  "dutch": [
+  "Polish": [
+    {
+      "language": "Polish",
+      "language_code": "pl",
+      "language_native": "Polski",
+      "name": "Józef Bielawski",
+      "english_name": "Józef Bielawski",
+      "file_name": "Józef_Bielawski.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Polish/Józef_Bielawski.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Dutch": [
     {
       "language": "Dutch",
+      "language_code": "nl",
+      "language_native": "Nederlands",
       "name": "Sofian S. Siregar",
-      "file_name": "Sofian_S._Siregar.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Sofian S. Siregar",
+      "file_name": "Sofian_S._Siregar.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Dutch/Sofian_S._Siregar.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Dutch/Sofian_S._Siregar.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Dutch",
+      "language_code": "nl",
+      "language_native": "Nederlands",
+      "name": "Malak Faris Abdalsalaam",
+      "english_name": "Malak Faris Abdalsalaam",
+      "file_name": "Malak_Faris_Abdalsalaam.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Dutch/Malak_Faris_Abdalsalaam.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Dutch",
+      "language_code": "nl",
+      "language_native": "Nederlands",
+      "name": "Nederlands Islamitisch Centrum",
+      "english_name": "Dutch Islamic Center",
+      "file_name": "Dutch_Islamic_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Dutch/Dutch_Islamic_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "albanian": [
-    {
-      "language": "Albanian",
-      "name": "Përkthim shqip",
-      "file_name": "Albanian_Translation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Albanian/Albanian_Translation.simple.json.txt",
-    },
-    {
-      "language": "Albanian",
-      "name": "Qendra Ruwwad",
-      "file_name": "Ruwwad_Center.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Albanian/Ruwwad_Center.simple.json.txt",
-    },
-    {
-      "language": "Albanian",
-      "name": "Hasan Efendi Nahi",
-      "file_name": "Hasan_Efendi_Nahi.translation-with-footnote-tags.json.txt",
-      "score": 100.0,
-      "type": "withFootnoteTags",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.translation-with-footnote-tags.json.txt",
-    },
-    {
-      "language": "Albanian",
-      "name": "Hasan Efendi Nahi",
-      "file_name": "Hasan_Efendi_Nahi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.simple.json.txt",
-    },
-    {
-      "language": "Albanian",
-      "name": "Shqip",
-      "file_name": "Albanian.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Albanian/Albanian.simple.json.txt",
-    },
-  ],
-  "malay": [
-    {
-      "language": "Malay",
-      "name": "Abdullah Muhammad Basmeih",
-      "file_name": "Abdullah_Muhammad_Basmeih.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Malay/Abdullah_Muhammad_Basmeih.simple.json.txt",
-    },
-    {
-      "language": "Malay",
-      "name": "Abdullah Basmeih",
-      "file_name": "Abdullah_Basamia.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Malay/Abdullah_Basamia.simple.json.txt",
-    },
-  ],
-  "tamil": [
-    {
-      "language": "Tamil",
-      "name": "அப்துல் ஹமீது பாகவி",
-      "file_name": "Abdul_Hameed_Baqavi.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tamil/Abdul_Hameed_Baqavi.simple.json.txt",
-    },
-    {
-      "language": "Tamil",
-      "name": "ஷேக் உமர் ஷரீஃப் பின் அப்துல் ஸலாம்",
-      "file_name": "Sheikh_Omar_Sharif_bin_Abdul_Salam.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tamil/Sheikh_Omar_Sharif_bin_Abdul_Salam.simple.json.txt",
-    },
-    {
-      "language": "Tamil",
-      "name": "ஜான் டிரஸ்ட் ஃபவுண்டேஷன்",
-      "file_name": "Jan_Trust_Foundation.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
-      "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Tamil/Jan_Trust_Foundation.simple.json.txt",
-    },
-  ],
-  "swedish": [
+  "Swedish": [
     {
       "language": "Swedish",
+      "language_code": "sv",
+      "language_native": "Svenska",
       "name": "Knut Bernström",
-      "file_name": "Knut_Bernström.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Knut Bernström",
+      "file_name": "Knut_Bernström.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Swedish/Knut_Bernström.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Swedish/Knut_Bernström.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
     },
   ],
-  "maranao": [
+  "Korean": [
+    {
+      "language": "Korean",
+      "language_code": "ko",
+      "language_native": "한국어",
+      "name": "한국어 번역",
+      "english_name": "Korean",
+      "file_name": "Korean.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Korean/Korean.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Korean",
+      "language_code": "ko",
+      "language_native": "한국어",
+      "name": "하미드 최",
+      "english_name": "Hamed Choi",
+      "file_name": "Hamed_Choi.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Korean/Hamed_Choi.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Korean",
+      "language_code": "ko",
+      "language_native": "한국어",
+      "name": "한국어 번역 - 로와드 번역 센터",
+      "english_name": "Korean Translation - Rowwad Translation Center",
+      "file_name": "Korean_Translation_-_Rowwad_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Korean/Korean_Translation_-_Rowwad_Translation_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Maranao": [
     {
       "language": "Maranao",
+      "language_code": "mrw",
+      "language_native": "Mëranaw",
       "name": "Maranao",
-      "file_name": "Maranao.simple.json.txt",
-      "score": 100.0,
-      "type": "simple",
+      "english_name": "Maranao",
+      "file_name": "Maranao.json.txt",
       "full_path":
-          "quranic_universal_library/translation/compressed_translation_simple/Maranao/Maranao.simple.json.txt",
+          "translation_v2/compressed_translation_simple/Maranao/Maranao.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Tajik": [
+    {
+      "language": "Tajik",
+      "language_code": "tg",
+      "language_native": "Тоҷикӣ",
+      "name": "Тарҷумаи тоҷикӣ",
+      "english_name": "Tajik",
+      "file_name": "Tajik.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Tajik/Tajik.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Tajik",
+      "language_code": "tg",
+      "language_native": "Тоҷикӣ",
+      "name": "Маркази тарҷумаи пешоҳангон",
+      "english_name": "Pioneers of Translation Center",
+      "file_name": "Pioneers_of_Translation_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Tajik/Pioneers_of_Translation_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Tajik",
+      "language_code": "tg",
+      "language_native": "Тоҷикӣ",
+      "name": "Хоҷа Мироф ва Хоҷа Мир",
+      "english_name": "Khawaja Mirof & Khawaja Mir",
+      "file_name": "Khawaja_Mirof_&_Khawaja_Mir.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Tatar": [
+    {
+      "language": "Tatar",
+      "language_code": "tt",
+      "language_native": "Татарча",
+      "name": "Татарча тәрҗемә",
+      "english_name": "Tatar",
+      "file_name": "Tatar.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Tatar/Tatar.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Yoruba": [
+    {
+      "language": "Yoruba",
+      "language_code": "yo",
+      "language_native": "Yorùbá",
+      "name": "Shaykh Abu Raheemah Mikaeel Akyúni",
+      "english_name": "Shaykh Abu Rahimah Mikael Aykyuni",
+      "file_name": "Shaykh_Abu_Rahimah_Mikael_Aykyuni.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Nepali": [
+    {
+      "language": "Nepali",
+      "language_code": "ne",
+      "language_native": "नेपाली",
+      "name": "अहले हदीस केन्द्रीय सोसाइटी नेपाल",
+      "english_name": "Ahl Al-Hadith Central Society of Nepal",
+      "file_name": "Ahl_Al-Hadith_Central_Society_of_Nepal.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Nepali/Ahl_Al-Hadith_Central_Society_of_Nepal.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Divehi_Dhivehi_Maldivian": [
+    {
+      "language": "Divehi_Dhivehi_Maldivian",
+      "language_code": "dv",
+      "language_native": "ދިވެހި",
+      "name": "ދިވެހިރާއްޖޭގެ ރައީސުލްޖުމްހޫރިއްޔާގެ އޮފީސް",
+      "english_name": "Office of the president of Maldives",
+      "file_name": "Office_of_the_president_of_Maldives.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Divehi_Dhivehi_Maldivian/Office_of_the_president_of_Maldives.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Hindi": [
+    {
+      "language": "Hindi",
+      "language_code": "hi",
+      "language_native": "हिन्दी",
+      "name": "मौलाना अज़ीज़ुल हक़ अल-उमरी",
+      "english_name": "Maulana Azizul Haque al-Umari",
+      "file_name": "Maulana_Azizul_Haque_al-Umari.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Hindi",
+      "language_code": "hi",
+      "language_native": "हिन्दी",
+      "name": "हिंदी शब्द-दर-शब्द अनुवाद",
+      "english_name": "Hindi wbw translation",
+      "file_name": "Hindi_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Hindi/Hindi_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
+    },
+  ],
+  "Italian": [
+    {
+      "language": "Italian",
+      "language_code": "it",
+      "language_native": "Italiano",
+      "name": "Othman al-Sharif",
+      "english_name": "Othman al-Sharif",
+      "file_name": "Othman_al-Sharif.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Italian/Othman_al-Sharif.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Italian",
+      "language_code": "it",
+      "language_native": "Italiano",
+      "name": "Hamza Roberto Piccardo",
+      "english_name": "Hamza Roberto Piccardo",
+      "file_name": "Hamza_Roberto_Piccardo.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Amazigh": [
+    {
+      "language": "Amazigh",
+      "language_code": "zgh",
+      "language_native": "ⵜⴰⵎⴰⵣⵉⵖⵜ",
+      "name": "Ṛemḍan Σet Menṣur",
+      "english_name": "Ramdane At Mansour",
+      "file_name": "Ramdane_At_Mansour.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Amazigh/Ramdane_At_Mansour.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Japanese": [
+    {
+      "language": "Japanese",
+      "language_code": "ja",
+      "language_native": "日本語",
+      "name": "サイード佐藤",
+      "english_name": "Saeed Sato",
+      "file_name": "Saeed_Sato.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Japanese/Saeed_Sato.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Japanese",
+      "language_code": "ja",
+      "language_native": "日本語",
+      "name": "三田了一",
+      "english_name": "Ryoichi Mita",
+      "file_name": "Ryoichi_Mita.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Japanese/Ryoichi_Mita.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Thai": [
+    {
+      "language": "Thai",
+      "language_code": "th",
+      "language_native": "ไทย",
+      "name": "ศูนย์กษัตริย์ฟาฮัดเพื่อการพิมพ์อัลกุรอาน",
+      "english_name": "Thai Translatio (King Fahad Quran Complex)",
+      "file_name": "Thai_Translatio_(King_Fahad_Quran_Complex).json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Thai/Thai_Translatio_(King_Fahad_Quran_Complex).json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Thai",
+      "language_code": "th",
+      "language_native": "ไทย",
+      "name": "สมาคมสถาบันและมหาวิทยาลัยอิสลาม",
+      "english_name": "Society of Institutes and Universities",
+      "file_name": "Society_of_Institutes_and_Universities.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Thai/Society_of_Institutes_and_Universities.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Sindhi": [
+    {
+      "language": "Sindhi",
+      "language_code": "sd",
+      "language_native": "سنڌي",
+      "name": "تاج محمود امروٽي",
+      "english_name": "Taj Mehmood Amroti",
+      "file_name": "Taj_Mehmood_Amroti.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Sindhi/Taj_Mehmood_Amroti.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Amharic": [
+    {
+      "language": "Amharic",
+      "language_code": "am",
+      "language_native": "አማርኛ",
+      "name": "ሳዲቅ እና ሳኒ",
+      "english_name": "Sadiq and Sani",
+      "file_name": "Sadiq_and_Sani.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Amharic/Sadiq_and_Sani.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+    {
+      "language": "Amharic",
+      "language_code": "am",
+      "language_native": "አማርኛ",
+      "name": "የአማርኛ ትርጉም - ዘይን",
+      "english_name": "Amharic Translation - Zain",
+      "file_name": "Amharic_Translation_-_Zain.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Amharic/Amharic_Translation_-_Zain.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Fulah": [
+    {
+      "language": "Fulah",
+      "language_code": "ff",
+      "language_native": "Fulfulde",
+      "name": "Firo Fulfulde",
+      "english_name": "Fulani translation",
+      "file_name": "Fulani_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Fulah/Fulani_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Ganda": [
+    {
+      "language": "Ganda",
+      "language_code": "lg",
+      "language_native": "Luganda",
+      "name": "African Development Foundation",
+      "english_name": "African Development Foundation",
+      "file_name": "African_Development_Foundation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Ganda/African_Development_Foundation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Asante": [
+    {
+      "language": "Asante",
+      "language_code": "ak",
+      "language_native": "Twi",
+      "name": "Sheikh Haroun Ismaeel",
+      "english_name": "Sheikh Haroun Ismaeel",
+      "file_name": "Sheikh_Haroun_Ismaeel.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Asante/Sheikh_Haroun_Ismaeel.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Assamese": [
+    {
+      "language": "Assamese",
+      "language_code": "as",
+      "language_native": "অসমীয়া",
+      "name": "শ্বেখ ৰফীকুল ইছলাম হবিবুৰ-ৰহমান",
+      "english_name": "Shaykh Rafeequl Islam Habibur-Rahman",
+      "file_name": "Shaykh_Rafeequl_Islam_Habibur-Rahman.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Dari": [
+    {
+      "language": "Dari",
+      "language_code": "prs",
+      "language_native": "دری",
+      "name": "مولوی محمد انور بدخشانی",
+      "english_name": "Mawlawi Muhammad Anwar Badkhashani",
+      "file_name": "Mawlawi_Muhammad_Anwar_Badkhashani.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Dari/Mawlawi_Muhammad_Anwar_Badkhashani.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Chechen": [
+    {
+      "language": "Chechen",
+      "language_code": "ce",
+      "language_native": "Нохчийн",
+      "name": "Магомед Магомедов",
+      "english_name": "Magomed Magomedov",
+      "file_name": "Magomed_Magomedov.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Chechen/Magomed_Magomedov.json.txt",
+      "type": "with_footnote",
+      "is_tajweed": false,
+    },
+  ],
+  "Ikirundi": [
+    {
+      "language": "Ikirundi",
+      "language_code": "rn",
+      "language_native": "Ikirundi",
+      "name": "Ikirundi gihiti",
+      "english_name": "Ikirundi gehiti",
+      "file_name": "Ikirundi_gehiti.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Ikirundi/Ikirundi_gehiti.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Khmer": [
+    {
+      "language": "Khmer",
+      "language_code": "km",
+      "language_native": "ភាសាខ្មែរ",
+      "name": "ការបកប្រែភាសាខ្មែរ - មជ្ឈមណ្ឌលបកប្រែ Rwwad",
+      "english_name": "Khmer translation - Rwwad translation center",
+      "file_name": "Khmer_translation_-_Rwwad_translation_center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Khmer/Khmer_translation_-_Rwwad_translation_center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Maguindanao": [
+    {
+      "language": "Maguindanao",
+      "language_code": "mdh",
+      "language_native": "Maguindanao",
+      "name": "Maguindanao - Rwwad",
+      "english_name": "Maguindanao - rwwad",
+      "file_name": "Maguindanao_-_rwwad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Maguindanao/Maguindanao_-_rwwad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Kyrgyz": [
+    {
+      "language": "Kyrgyz",
+      "language_code": "ky",
+      "language_native": "Кыргызча",
+      "name": "Кыргызча - Хакимов",
+      "english_name": "Kyrgyz hakimov",
+      "file_name": "Kyrgyz_hakimov.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Kyrgyz/Kyrgyz_hakimov.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Croatian": [
+    {
+      "language": "Croatian",
+      "language_code": "hr",
+      "language_native": "Hrvatski",
+      "name": "Hrvatski prijevod - Rwwad",
+      "english_name": "Croatian translation - rwwad",
+      "file_name": "Croatian_translation_-_rwwad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Croatian/Croatian_translation_-_rwwad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Afar": [
+    {
+      "language": "Afar",
+      "language_code": "aa",
+      "language_native": "Qafár af",
+      "name": "Shaikh Mahmud Abdulkader Hamza",
+      "english_name": "Shaikh Mahmud Abdulkader Hamza",
+      "file_name": "Shaikh_Mahmud_Abdulkader_Hamza.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Afar/Shaikh_Mahmud_Abdulkader_Hamza.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Luhya": [
+    {
+      "language": "Luhya",
+      "language_code": "luy",
+      "language_native": "Luluyia",
+      "name": "Luhya translation",
+      "english_name": "Luhya translation",
+      "file_name": "Luhya_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Luhya/Luhya_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Bisayan": [
+    {
+      "language": "Bisayan",
+      "language_code": "ceb",
+      "language_native": "Bisaya",
+      "name": "Paghubad sa Bisaya - Rowwad Center",
+      "english_name": "Bisayan Translation - Rowwad Center",
+      "file_name": "Bisayan_Translation_-_Rowwad_Center.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Bisayan/Bisayan_Translation_-_Rowwad_Center.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Malagasy": [
+    {
+      "language": "Malagasy",
+      "language_code": "mg",
+      "language_native": "Malagasy",
+      "name": "Fandikan-teny Malagasy - Rowad",
+      "english_name": "Malagasy translation - Rowad",
+      "file_name": "Malagasy_translation_-_Rowad.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Malagasy/Malagasy_translation_-_Rowad.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Punjabi": [
+    {
+      "language": "Punjabi",
+      "language_code": "pa",
+      "language_native": "پنجابی",
+      "name": "پنجابی عارف",
+      "english_name": "Punjabi arif",
+      "file_name": "Punjabi_arif.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Punjabi/Punjabi_arif.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Dagbani": [
+    {
+      "language": "Dagbani",
+      "language_code": "dag",
+      "language_native": "Dagbani",
+      "name": "Muhammad Baba Gutubu",
+      "english_name": "Muhammad Baba Gutubu",
+      "file_name": "Muhammad_Baba_Gutubu.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Dagbani/Muhammad_Baba_Gutubu.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Filipino": [
+    {
+      "language": "Filipino",
+      "language_code": "fil",
+      "language_native": "Filipino",
+      "name": "Pagsasalin ng Filipino Iranon",
+      "english_name": "Filipino Iranionian translation",
+      "file_name": "Filipino_Iranionian_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Filipino/Filipino_Iranionian_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Lingala": [
+    {
+      "language": "Lingala",
+      "language_code": "ln",
+      "language_native": "Lingála",
+      "name": "Libongoli ya Lingala",
+      "english_name": "Lingala translation",
+      "file_name": "Lingala_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_simple/Lingala/Lingala_translation.json.txt",
+      "type": "simple",
+      "is_tajweed": false,
+    },
+  ],
+  "Ingush": [
+    {
+      "language": "Ingush",
+      "language_code": "inh",
+      "language_native": "ГӀалгӀай",
+      "name": "ГӀалгӀай дош-дешах гочдар",
+      "english_name": "Ingush wbw translation",
+      "file_name": "Ingush_wbw_translation.json.txt",
+      "full_path":
+          "translation_v2/compressed_translation_word_by_word/Ingush/Ingush_wbw_translation.json.txt",
+      "type": "word_by_word",
+      "is_tajweed": false,
     },
   ],
 };
