@@ -42,7 +42,6 @@ dependencies:
   url_launcher: ^6.3.1
   path_provider: ^2.1.5
   share_plus: ^12.0.0
-  clipboard: ^3.0.8
   flutter_html: ^3.0.0
   visibility_detector: ^0.4.0+2
   # alarm:
@@ -77,6 +76,7 @@ dependencies:
   shimmer: ^3.0.0
   material_table_view: ^5.5.2
   webview_flutter: ^4.13.1
+  clipboard: ^2.0.2
   # background_fetch:
   #   git:
   #     url: https://github.com/transistorsoft/flutter_background_fetch
