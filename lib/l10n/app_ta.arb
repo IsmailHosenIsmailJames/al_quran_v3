@@ -354,5 +354,7 @@
   "goToPage": "பக்கத்திற்குச் செல்லவும்",
   "resources": "ஆதாரங்கள்",
   "mushaf": "முஸ்ஹாஃப்",
-  "circleJojomInQuranScript": "குர்ஆன் எழுத்தில் வட்ட ஜஜம்/சுகூன்"
+  "circleJojomInQuranScript": "குர்ஆன் எழுத்தில் வட்ட ஜஜம்/சுகூன்",
+  "copy": "நகலெடு",
+  "share": "பகிர்க"
 }

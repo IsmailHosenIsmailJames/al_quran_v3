@@ -1195,4 +1195,10 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get circleJojomInQuranScript =>
       'په قرآني رسم الخط کې د جزم/سکون دائره';
+
+  @override
+  String get copy => 'کاپي';
+
+  @override
+  String get share => 'شریکول';
 }

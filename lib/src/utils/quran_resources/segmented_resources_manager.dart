@@ -103,7 +103,7 @@ class SegmentedResourcesManager {
       final String boxName = praseStringToBoxName(url);
       if (response.statusCode == 200) {
         _segmentsBox = await Hive.openBox(boxName);
-        context.read<ResourcesProgressCubit>().updateProgress(
+        context.read<ResourcesProcceessCubit>().updateProgress(
           null,
           appLocalizations.processingSegmentedQuranRecitation,
         );

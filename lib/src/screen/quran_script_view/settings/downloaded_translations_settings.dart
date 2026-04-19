@@ -1,4 +1,4 @@
-import 'package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart';
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -15,8 +15,8 @@ class DownloadedTranslationsSettings extends StatefulWidget {
 
 class _DownloadedTranslationsSettingsState
     extends State<DownloadedTranslationsSettings> {
-  List<TranslationBookModel> downloadedTranslations = [];
-  List<TranslationBookModel> selectedTranslations = [];
+  List<ResourcesModel> downloadedTranslations = [];
+  List<ResourcesModel> selectedTranslations = [];
 
   @override
   void initState() {
@@ -35,11 +35,11 @@ class _DownloadedTranslationsSettingsState
     });
   }
 
-  bool _isSelected(TranslationBookModel book) {
+  bool _isSelected(ResourcesModel book) {
     return selectedTranslations.any((t) => t.fullPath == book.fullPath);
   }
 
-  Future<void> _toggleSelection(TranslationBookModel book, bool? value) async {
+  Future<void> _toggleSelection(ResourcesModel book, bool? value) async {
     if (value == true) {
       await QuranTranslationFunction.setTranslationSelection(book);
     } else {
@@ -48,7 +48,7 @@ class _DownloadedTranslationsSettingsState
     _loadData();
   }
 
-  Future<void> _deleteTranslation(TranslationBookModel book) async {
+  Future<void> _deleteTranslation(ResourcesModel book) async {
     await QuranTranslationFunction.removeFromListAlreadyDownloaded(book);
     _loadData();
   }

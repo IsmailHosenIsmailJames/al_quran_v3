@@ -1159,4 +1159,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => '古兰经手稿中的圆形静符';
+
+  @override
+  String get copy => '复制';
+
+  @override
+  String get share => '分享';
 }

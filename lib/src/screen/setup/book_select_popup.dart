@@ -1,19 +1,13 @@
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_state.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
-import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -36,100 +30,50 @@ class ScoreDetails {
 
 class _BookSelectPopupState extends State<BookSelectPopup> {
   final TextEditingController _textEditingController = TextEditingController();
-  late final Map<String, List<Map<String, dynamic>>> _allBooks;
+  late final Map<String, List<ResourcesModel>> _allBooks;
   final ItemScrollController _itemScrollController = ItemScrollController();
 
   @override
   void initState() {
     super.initState();
-    _allBooks =
-        widget.isTafsir ? tafsirResources : translationResources;
+    Map<String, List<ResourcesModel>> allResources = context
+        .read<ResourcesProcceessCubit>()
+        .state
+        .allResources;
+    _allBooks = widget.isTafsir
+        ? allResources.values
+              .expand((element) => element)
+              .where((element) => element.type == ResourceType.tafsir)
+              .sortedBy((element) => element.englishName)
+              .groupBy((element) => element.languageCode)
+        : allResources.values
+              .expand((element) => element)
+              .where(
+                (element) =>
+                    element.type == ResourceType.simple ||
+                    element.type == ResourceType.with_footnote,
+              )
+              .sortedBy((element) => element.englishName)
+              .groupBy((element) => element.languageCode);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      final state = context.read<ResourcesProgressCubit>().state;
-      final selectedBook =
-          widget.isTafsir ? state.tafsirBookModel : state.translationBookModel;
+      final state = context.read<ResourcesProcceessCubit>().state;
+      final selectedBook = widget.isTafsir
+          ? state.selectedTafsirResources
+          : state.selectedTranslationResources;
 
       if (selectedBook != null) {
-        String? targetLanguage;
-
-        for (final entry in _allBooks.entries) {
-          final language = entry.key;
-          final books = entry.value;
-
-          final bookFound = books.any((bookMap) {
-            final book =
-                widget.isTafsir
-                    ? TafsirBookModel.fromMap(bookMap)
-                    : TranslationBookModel.fromMap(bookMap);
-            return book == selectedBook;
-          });
-
-          if (bookFound) {
-            targetLanguage = language;
-            break;
-          }
-        }
-
-        if (targetLanguage != null) {
-          final languages = _allBooks.keys.toList();
-          final languageIndex = languages.indexOf(targetLanguage);
-
-          if (languageIndex != -1) {
-            _itemScrollController.scrollTo(
-              index: languageIndex,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-            );
-          }
+        final languages = _allBooks.keys.sorted().toList();
+        final languageIndex = languages.indexOf(selectedBook.languageCode);
+        if (languageIndex != -1) {
+          _itemScrollController.jumpTo(index: languageIndex);
         }
       }
     });
   }
 
-  void _filterBooks(String query) {
-    final lowerCaseQuery = query.toLowerCase();
-
-    List<ScoreDetails> scoreDetails = [];
-
-    for (int index = 0; index < _allBooks.length; index++) {
-      String language = _allBooks.keys.elementAt(index);
-      List<Map<String, dynamic>> books = _allBooks.values.elementAt(index);
-
-      final languageNative = languageNativeNames[language] ?? "";
-
-      for (final bookMap in books) {
-        String searchableText =
-            widget.isTafsir
-                ? TafsirBookModel.fromMap(bookMap).name
-                : TranslationBookModel.fromMap(bookMap).name;
-
-        final score = searchPatternInText(
-          lowerCaseQuery,
-          "$languageNative $language $searchableText",
-        );
-
-        scoreDetails.add(ScoreDetails(score: score, data: bookMap));
-      }
-    }
-
-    scoreDetails.sort((a, b) => b.score.compareTo(a.score));
-
-    String language =
-        widget.isTafsir
-            ? TafsirBookModel.fromMap(scoreDetails.first.data).language
-            : TranslationBookModel.fromMap(scoreDetails.first.data).language;
-    int index = _allBooks.keys.toList().indexOf(language.toLowerCase());
-    if (index != -1) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _itemScrollController.scrollTo(
-          index: index,
-          duration: const Duration(milliseconds: 200),
-        );
-      });
-    }
-  }
+  void _filterBooks(String query) {}
 
   @override
   Widget build(BuildContext context) {
@@ -142,11 +86,12 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
       ),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-        child: BlocBuilder<ResourcesProgressCubit, ResourcesProgressCubitState>(
-          builder: (context, state) {
-            return mainUi(context, themeState, appLocalizations, state);
-          },
-        ),
+        child:
+            BlocBuilder<ResourcesProcceessCubit, ResourcesProcceessCubitState>(
+              builder: (context, state) {
+                return mainUi(context, themeState, appLocalizations, state);
+              },
+            ),
       ),
     );
   }
@@ -155,7 +100,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
     BuildContext context,
     ThemeState themeState,
     AppLocalizations appLocalizations,
-    ResourcesProgressCubitState state,
+    ResourcesProcceessCubitState state,
   ) {
     return Column(
       children: [
@@ -186,8 +131,8 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
               hintText: appLocalizations.search,
               border: InputBorder.none,
             ),
-            onEditingComplete: () {
-              _filterBooks(_textEditingController.text);
+            onChanged: (value) {
+              _filterBooks(value);
             },
           ),
         ),
@@ -198,15 +143,9 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
             padding: const EdgeInsets.all(15),
             itemCount: _allBooks.length,
             itemBuilder: (context, index) {
-              String language = _allBooks.keys.elementAt(index);
-              List<Map<String, dynamic>> books = _allBooks.values.elementAt(
-                index,
-              );
-              if (widget.isTafsir) {
-                books.sort(
-                  (a, b) => (b["score"] as int).compareTo(a["score"] as int),
-                );
-              }
+              String language = _allBooks.keys.sorted().elementAt(index);
+              List<ResourcesModel> books = _allBooks[language]!;
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,7 +153,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                   Row(
                     children: [
                       Text(
-                        (languageNativeNames[language] ?? "").capitalize(),
+                        (books.first.languageNative).capitalize(),
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -222,7 +161,7 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                       ),
                       const Gap(10),
                       Text(
-                        "( ${language.capitalize()} )",
+                        "( ${books.first.language.capitalize()} )",
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],
@@ -233,34 +172,28 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: List.generate(books.length, (i) {
-                      var book =
-                          widget.isTafsir
-                              ? TafsirBookModel.fromMap(books[i])
-                              : TranslationBookModel.fromMap(books[i]);
+                      var book = books[i];
 
                       return InkWell(
                         borderRadius: BorderRadius.circular(roundedRadius),
                         onTap: () {
                           widget.isTafsir
                               ? context
-                                  .read<ResourcesProgressCubit>()
-                                  .changeTafsirBook(book as TafsirBookModel)
+                                    .read<ResourcesProcceessCubit>()
+                                    .changeTafsirBook(book)
                               : context
-                                  .read<ResourcesProgressCubit>()
-                                  .changeTranslationBook(
-                                    book as TranslationBookModel,
-                                  );
+                                    .read<ResourcesProcceessCubit>()
+                                    .changeTranslationBook(book);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             border:
                                 (widget.isTafsir
-                                        ? state.tafsirBookModel == book
-                                        : state.translationBookModel == book)
-                                    ? Border.all(
-                                      color: themeState.primaryShade300,
-                                    )
-                                    : null,
+                                    ? state.selectedTafsirResources == book
+                                    : state.selectedTranslationResources ==
+                                          book)
+                                ? Border.all(color: themeState.primaryShade300)
+                                : null,
                             borderRadius: BorderRadius.circular(roundedRadius),
                           ),
                           padding: const EdgeInsets.only(
@@ -272,44 +205,34 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                             children: [
                               Row(
                                 children: [
-                                  if (book is TafsirBookModel)
-                                    buildScoreIndicator(
-                                      percentage: (book).score,
-                                      size: 20,
-                                    ),
-                                  if (book is TafsirBookModel) const Gap(10),
                                   Expanded(
                                     child: Text(
-                                      widget.isTafsir
-                                          ? (book as TafsirBookModel).name
-                                              .capitalize()
-                                          : (book as TranslationBookModel).name
-                                              .capitalize(),
+                                      book.name.capitalize(),
                                       style: TextStyle(
                                         fontSize: 14,
                                         color:
                                             (widget.isTafsir
-                                                    ? book ==
-                                                        state.tafsirBookModel
-                                                    : state.translationBookModel ==
-                                                        book)
-                                                ? themeState.primary
-                                                : null,
+                                                ? book ==
+                                                      state
+                                                          .selectedTafsirResources
+                                                : state.selectedTranslationResources ==
+                                                      book)
+                                            ? themeState.primary
+                                            : null,
                                         fontWeight:
                                             (widget.isTafsir
-                                                    ? book ==
-                                                        state.tafsirBookModel
-                                                    : state.translationBookModel ==
-                                                        book)
-                                                ? FontWeight.w600
-                                                : null,
+                                                ? book ==
+                                                      state
+                                                          .selectedTafsirResources
+                                                : state.selectedTranslationResources ==
+                                                      book)
+                                            ? FontWeight.w600
+                                            : null,
                                       ),
                                     ),
                                   ),
                                   if (!widget.isTafsir &&
-                                      (book as TranslationBookModel).type ==
-                                          TranslationResourcesType
-                                              .withFootnoteTags)
+                                      book.type == ResourceType.with_footnote)
                                     getFeaturesMark(
                                       context,
                                       appLocalizations.footnote,
@@ -317,12 +240,14 @@ class _BookSelectPopupState extends State<BookSelectPopup> {
                                     ),
 
                                   (widget.isTafsir
-                                          ? book == state.tafsirBookModel
-                                          : state.translationBookModel == book)
+                                          ? book ==
+                                                state.selectedTafsirResources
+                                          : state.selectedTranslationResources ==
+                                                book)
                                       ? Icon(
-                                        Icons.check_circle,
-                                        color: themeState.primary,
-                                      )
+                                          Icons.check_circle,
+                                          color: themeState.primary,
+                                        )
                                       : const SizedBox(),
                                   const Gap(7),
                                 ],

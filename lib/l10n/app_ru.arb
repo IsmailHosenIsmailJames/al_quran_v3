@@ -616,5 +616,7 @@
   "goToPage": "Перейти на страницу",
   "resources": "Ресурсы",
   "mushaf": "Мусхаф",
-  "circleJojomInQuranScript": "Круглый джазм/сукун в кораническом письме"
+  "circleJojomInQuranScript": "Круглый джазм/сукун в кораническом письме",
+  "copy": "Копировать",
+  "share": "Поделиться"
 }

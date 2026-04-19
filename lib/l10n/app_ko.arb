@@ -354,5 +354,7 @@
   "goToPage": "페이지로 이동",
   "resources": "리소스",
   "mushaf": "무사프",
-  "circleJojomInQuranScript": "꾸란 스크립트의 원형 수쿤"
+  "circleJojomInQuranScript": "꾸란 스크립트의 원형 수쿤",
+  "copy": "복사",
+  "share": "공유"
 }

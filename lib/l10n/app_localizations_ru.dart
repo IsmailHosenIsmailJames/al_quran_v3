@@ -1203,4 +1203,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get circleJojomInQuranScript =>
       'Круглый джазм/сукун в кораническом письме';
+
+  @override
+  String get copy => 'Копировать';
+
+  @override
+  String get share => 'Поделиться';
 }

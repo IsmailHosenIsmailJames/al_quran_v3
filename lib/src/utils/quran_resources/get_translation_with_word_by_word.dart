@@ -1,7 +1,6 @@
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-
-import "../../resources/quran_resources/models/translation_book_model.dart";
 
 Map<String, TranslationWithWordByWord> cacheOfAyahKeys = {};
 
@@ -32,6 +31,6 @@ class TranslationWithWordByWord {
 
 class TranslationOfAyah {
   final Map? translation;
-  final TranslationBookModel? bookInfo;
+  final ResourcesModel? bookInfo;
   TranslationOfAyah({this.translation, required this.bookInfo});
 }

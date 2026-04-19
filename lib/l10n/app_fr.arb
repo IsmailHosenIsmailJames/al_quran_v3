@@ -616,5 +616,7 @@
   "goToPage": "Aller à la page",
   "resources": "Ressources",
   "mushaf": "Mushaf",
-  "circleJojomInQuranScript": "Cercle Jojom/Sukun dans l'écriture du Coran"
+  "circleJojomInQuranScript": "Cercle Jojom/Sukun dans l'écriture du Coran",
+  "copy": "Copier",
+  "share": "Partager"
 }

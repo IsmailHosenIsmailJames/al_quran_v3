@@ -1207,4 +1207,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get circleJojomInQuranScript =>
       'Kreis Jojom/Sukun in der Koran-Schrift';
+
+  @override
+  String get copy => 'Kopieren';
+
+  @override
+  String get share => 'Teilen';
 }

@@ -1194,4 +1194,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'কুরআন স্ক্রিপ্টে বৃত্তাকার জজম/সুকুন';
+
+  @override
+  String get copy => 'কপি';
+
+  @override
+  String get share => 'শেয়ার';
 }

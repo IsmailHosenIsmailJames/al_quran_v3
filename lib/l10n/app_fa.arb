@@ -616,5 +616,7 @@
   "goToPage": "رفتن به صفحه",
   "resources": "منابع",
   "mushaf": "مصحف",
-  "circleJojomInQuranScript": "دایره جزم/سکون در خط قرآن"
+  "circleJojomInQuranScript": "دایره جزم/سکون در خط قرآن",
+  "copy": "کپی",
+  "share": "اشتراک‌گذاری"
 }

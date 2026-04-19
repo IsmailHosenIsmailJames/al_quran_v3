@@ -31,6 +31,12 @@ translations = {
         "ur": "قرآن اسکرپٹ میں جزم/سکون کا دائرہ",
         "vi": "Vòng tròn Jojom/Sukun dalam văn bản Quran",
         "zh": "古兰经手稿中的圆形静符"
+    },
+    "copy": {
+        "ar": "نسخ", "az": "Kopyala", "bn": "কপি", "de": "Kopieren", "es": "Copiar", "fa": "کپی", "fr": "Copier", "hi": "कॉपी करें", "id": "Salin", "it": "Copia", "ja": "コピー", "kk": "Көшіру", "ko": "복사", "ms": "Salin", "pa": "ਕਾਪੀ ਕਰੋ", "ps": "کاپي", "pt": "Copiar", "ru": "Копировать", "sw": "Nakili", "ta": "நகலெடு", "tr": "Kopyala", "ur": "کاپی", "vi": "Sao chép", "zh": "复制"
+    },
+    "share": {
+        "ar": "مشاركة", "az": "Paylaş", "bn": "শেয়ার", "de": "Teilen", "es": "Compartir", "fa": "اشتراک‌گذاری", "fr": "Partager", "hi": "साझा करें", "id": "Bagikan", "it": "Condividi", "ja": "共有", "kk": "Бөлісу", "ko": "공유", "ms": "Kongsi", "pa": "ਸਾਂਝਾ ਕਰੋ", "ps": "شریکول", "pt": "Compartilhar", "ru": "Поделиться", "sw": "Shiriki", "ta": "பகிர்க", "tr": "Paylaş", "ur": "شیئر", "vi": "Chia sẻ", "zh": "分享"
     }
 }
 

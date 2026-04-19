@@ -1,13 +1,11 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/widget/components/get_score_widget.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -21,11 +19,11 @@ class TafsirResourcesView extends StatefulWidget {
 }
 
 class _TafsirResourcesViewState extends State<TafsirResourcesView> {
-  late List<TafsirBookModel> downloadedTafsirs;
+  late List<ResourcesModel> downloadedTafsirs;
 
-  List<TafsirBookModel>? selectedTafsir;
+  List<ResourcesModel>? selectedTafsir;
 
-  TafsirBookModel? downloadingData;
+  ResourcesModel? downloadingData;
 
   void _refreshData() async {
     downloadedTafsirs = QuranTafsirFunction.getDownloadedTafsirBooks();
@@ -57,15 +55,14 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
           padding: const EdgeInsets.only(top: 40),
           child: Column(
             children: List.generate(tafsirResources.length, (index) {
-              String languageKey = tafsirResources.keys.elementAt(
+              String languageKey = tafsirResources.keys.sorted().elementAt(
                 index,
               );
-              List<TafsirBookModel> booksInLanguage =
+              List<ResourcesModel> booksInLanguage =
                   tafsirResources[languageKey]
-                      ?.map((e) => TafsirBookModel.fromMap(e))
+                      ?.map((e) => ResourcesModel.fromMap(e))
                       .toList() ??
                   [];
-              booksInLanguage.sort((a, b) => b.score.compareTo(a.score));
 
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 4.0),
@@ -73,18 +70,23 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                 child: ExpansionTile(
                   key: PageStorageKey(languageKey),
                   title: Text(
-                    languageNativeNames[languageKey] ?? languageKey,
+                    booksInLanguage.first.languageNative,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
+                  ),
+                  subtitle: Text(
+                    booksInLanguage.first.language
+                        .replaceAll("_", " ")
+                        .capitalize(),
                   ),
                   childrenPadding: const EdgeInsets.symmetric(
                     horizontal: 8.0,
                     vertical: 4.0,
                   ),
                   children: booksInLanguage.map((bookData) {
-                    TafsirBookModel? matchedTafsir = downloadedTafsirs
+                    ResourcesModel? matchedTafsir = downloadedTafsirs
                         .firstOrNullWhere(
                           (element) => element.fullPath == bookData.fullPath,
                         );
@@ -126,7 +128,7 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
 
   Widget _buildBookListTile(
     AppLocalizations appLocalizations,
-    TafsirBookModel tafsirBook,
+    ResourcesModel tafsirBook,
     bool isSelected,
     bool needDownload,
     bool isDownloading,
@@ -137,7 +139,6 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
         horizontal: 8.0,
         vertical: 2.0,
       ),
-      leading: buildScoreIndicator(percentage: tafsirBook.score, size: 32),
       title: Text(tafsirBook.name),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

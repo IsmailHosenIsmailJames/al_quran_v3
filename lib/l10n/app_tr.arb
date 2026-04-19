@@ -616,5 +616,7 @@
   "goToPage": "Sayfaya Git",
   "resources": "Kaynaklar",
   "mushaf": "Mushaf",
-  "circleJojomInQuranScript": "Kur'an Hattında Yuvarlak Cezm/Sükun"
+  "circleJojomInQuranScript": "Kur'an Hattında Yuvarlak Cezm/Sükun",
+  "copy": "Kopyala",
+  "share": "Paylaş"
 }

@@ -354,5 +354,7 @@
   "goToPage": "ページへ移動",
   "resources": "リソース",
   "mushaf": "ムスハフ",
-  "circleJojomInQuranScript": "コーラン文字の円形スクーン"
+  "circleJojomInQuranScript": "コーラン文字の円形スクーン",
+  "copy": "コピー",
+  "share": "共有"
 }

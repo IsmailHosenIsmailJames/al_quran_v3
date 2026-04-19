@@ -616,5 +616,7 @@
   "goToPage": "पृष्ठ पर जाएं",
   "resources": "संसाधन",
   "mushaf": "मुसहाफ",
-  "circleJojomInQuranScript": "कुरान लिपि में गोल जज़्म/सुकून"
+  "circleJojomInQuranScript": "कुरान लिपि में गोल जज़्म/सुकून",
+  "copy": "कॉपी करें",
+  "share": "साझा करें"
 }

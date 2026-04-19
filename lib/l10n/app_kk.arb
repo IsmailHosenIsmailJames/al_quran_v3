@@ -616,5 +616,7 @@
   "goToPage": "Бетке өту",
   "resources": "Ресурстар",
   "mushaf": "Мұсхаф",
-  "circleJojomInQuranScript": "Құран жазуындағы дөңгелек жәзм/сукун"
+  "circleJojomInQuranScript": "Құран жазуындағы дөңгелек жәзм/сукун",
+  "copy": "Көшіру",
+  "share": "Бөлісу"
 }

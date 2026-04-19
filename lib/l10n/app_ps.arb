@@ -616,5 +616,7 @@
   "goToPage": "پاڼې ته لاړ شئ",
   "resources": "سرچینې",
   "mushaf": "مصحف",
-  "circleJojomInQuranScript": "په قرآني رسم الخط کې د جزم/سکون دائره"
+  "circleJojomInQuranScript": "په قرآني رسم الخط کې د جزم/سکون دائره",
+  "copy": "کاپي",
+  "share": "شریکول"
 }

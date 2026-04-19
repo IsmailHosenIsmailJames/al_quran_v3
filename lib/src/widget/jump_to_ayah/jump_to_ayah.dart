@@ -2,7 +2,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/utils/filter/filter_surah.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
@@ -356,9 +356,9 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
                     List<TranslationOfAyah> translationsListWithInfoList =
                         await QuranTranslationFunction.getTranslation(ayahKey);
 
-                    List<TranslationBookModel?> translationBookInfoList =
+                    List<ResourcesModel?> translationBookInfoList =
                         translationsListWithInfoList
-                            .map<TranslationBookModel?>((e) => e.bookInfo)
+                            .map<ResourcesModel?>((e) => e.bookInfo)
                             .toList();
                     List<String> translationList = translationsListWithInfoList
                         .map<String>(

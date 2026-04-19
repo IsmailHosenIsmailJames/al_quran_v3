@@ -1195,4 +1195,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'Kur\'an Hattında Yuvarlak Cezm/Sükun';
+
+  @override
+  String get copy => 'Kopyala';
+
+  @override
+  String get share => 'Paylaş';
 }
