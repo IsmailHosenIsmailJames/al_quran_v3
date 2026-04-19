@@ -14,6 +14,7 @@ import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
@@ -40,7 +41,6 @@ import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 import "package:visibility_detector/visibility_detector.dart";
 
-import "../../resources/quran_resources/models/translation_book_model.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 import "../add_collection_popup/add_note_popup.dart";
@@ -62,8 +62,8 @@ Widget getAyahByAyahCard({
 
   int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
   int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  List<TranslationBookModel?> translationBookInfoList = translationListWithInfo
-      .map<TranslationBookModel?>((e) => e.bookInfo)
+  List<ResourcesModel?> translationBookInfoList = translationListWithInfo
+      .map<ResourcesModel?>((e) => e.bookInfo)
       .toList();
   List<String> translationList = translationListWithInfo
       .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
@@ -560,7 +560,7 @@ Widget getTranslationWithFootNoteWidget(
   BuildContext context,
   List<String> translationList,
   List<Map<int, String>> footNoteAsStringMap,
-  List<TranslationBookModel?> translationBookInfoList,
+  List<ResourcesModel?> translationBookInfoList,
   QuranViewState quranViewState,
   bool showOnlyAyah,
   AppLocalizations l10n,
@@ -569,7 +569,7 @@ Widget getTranslationWithFootNoteWidget(
     children: List.generate(translationBookInfoList.length, (index) {
       String translation = translationList[index];
       Map<int, String> footNote = footNoteAsStringMap[index];
-      TranslationBookModel? bookModel = translationBookInfoList[index];
+      ResourcesModel? bookModel = translationBookInfoList[index];
 
       return Column(
         children: [
@@ -669,7 +669,7 @@ Row getToolbarWidget(
   int surahNumber,
   List<String> translation,
   List<Map<int, String>> footNoteAsStringMap,
-  List<TranslationBookModel?> translationBookInfoList,
+  List<ResourcesModel?> translationBookInfoList,
   ThemeState themeState,
 ) {
   AppLocalizations l10n = AppLocalizations.of(context);

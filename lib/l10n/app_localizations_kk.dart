@@ -1193,4 +1193,10 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'Құран жазуындағы дөңгелек жәзм/сукун';
+
+  @override
+  String get copy => 'Көшіру';
+
+  @override
+  String get share => 'Бөлісу';
 }

@@ -1,8 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/get_tafsir_from_db.dart";
@@ -33,7 +32,7 @@ void showShareBottomDialog(
   QuranScriptType quranScriptType,
   List<String> translation,
   List<Map> footNote,
-  List<TranslationBookModel?> booksInfo,
+  List<ResourcesModel?> booksInfo,
 ) {
   String translationSingleString = "";
 
@@ -237,9 +236,9 @@ void showShareBottomDialog(
                 child: TextButton.icon(
                   style: textButtonStyle,
                   onPressed: () async {
-                    List<TafsirBookModel> downloadedTafsir =
+                    List<ResourcesModel> downloadedTafsir =
                         QuranTafsirFunction.getDownloadedTafsirBooks();
-                    TafsirBookModel? selected;
+                    ResourcesModel? selected;
                     await showDialog(
                       context: context,
                       builder: (context) {
@@ -316,9 +315,9 @@ void showShareBottomDialog(
                   backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
-                  List<TafsirBookModel> downloadedTafsir =
+                  List<ResourcesModel> downloadedTafsir =
                       QuranTafsirFunction.getDownloadedTafsirBooks();
-                  TafsirBookModel? selected;
+                  ResourcesModel? selected;
                   await showDialog(
                     context: context,
                     builder: (context) {

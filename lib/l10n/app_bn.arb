@@ -616,5 +616,7 @@
   "goToPage": "পৃষ্ঠায় যান",
   "resources": "রিসোর্স",
   "mushaf": "মুসহাফ",
-  "circleJojomInQuranScript": "কুরআন স্ক্রিপ্টে বৃত্তাকার জজম/সুকুন"
+  "circleJojomInQuranScript": "কুরআন স্ক্রিপ্টে বৃত্তাকার জজম/সুকুন",
+  "copy": "কপি",
+  "share": "শেয়ার"
 }

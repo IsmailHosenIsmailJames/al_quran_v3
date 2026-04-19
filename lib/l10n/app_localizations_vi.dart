@@ -1199,4 +1199,10 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get circleJojomInQuranScript =>
       'Vòng tròn Jojom/Sukun dalam văn bản Quran';
+
+  @override
+  String get copy => 'Sao chép';
+
+  @override
+  String get share => 'Chia sẻ';
 }

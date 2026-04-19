@@ -1177,4 +1177,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => '꾸란 스크립트의 원형 수쿤';
+
+  @override
+  String get copy => '복사';
+
+  @override
+  String get share => '공유';
 }

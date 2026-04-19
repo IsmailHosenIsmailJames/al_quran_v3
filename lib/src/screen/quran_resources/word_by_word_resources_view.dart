@@ -1,12 +1,13 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -20,9 +21,9 @@ class WordByWordResourcesView extends StatefulWidget {
 }
 
 class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
-  List<TranslationBookModel> downloadedWbW = [];
-  TranslationBookModel? selectedWbw;
-  TranslationBookModel? downloadingWbW;
+  List<ResourcesModel> downloadedWbW = [];
+  ResourcesModel? selectedWbw;
+  ResourcesModel? downloadingWbW;
 
   @override
   void initState() {
@@ -42,8 +43,11 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
   Widget build(BuildContext context) {
     ThemeState themeState = context.watch<ThemeCubit>().state;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    List<TranslationBookModel> availableWbWBooks = wordByWordTranslation.values
-        .map((e) => TranslationBookModel.fromMap(e))
+    List<ResourcesModel> availableWbWBooks = translationResources.values
+        .expand((element) => element)
+        .map((e) => ResourcesModel.fromMap(e))
+        .sortedBy((element) => element.englishName)
+        .where((element) => element.type == ResourceType.word_by_word)
         .toList();
 
     return SingleChildScrollView(
@@ -53,7 +57,7 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
           padding: const EdgeInsets.only(top: 40),
           child: Column(
             children: List.generate(availableWbWBooks.length, (index) {
-              TranslationBookModel current = availableWbWBooks[index];
+              ResourcesModel current = availableWbWBooks[index];
 
               bool isDownloaded = downloadedWbW.any(
                 (element) => element.fullPath == current.fullPath,

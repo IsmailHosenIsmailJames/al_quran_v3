@@ -8,7 +8,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Suliman Kanti",
       "file_name": "Suliman_Kanti.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bambara/Suliman_Kanti.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bambara/Suliman_Kanti.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -20,7 +20,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Baba Mamady Jani",
       "file_name": "Baba_Mamady_Jani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bambara/Baba_Mamady_Jani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bambara/Baba_Mamady_Jani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -34,7 +34,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "IslamHouse.com",
       "file_name": "IslamHouse.com.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Persian/IslamHouse.com.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Persian/IslamHouse.com.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -46,7 +46,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hussein Taji Kal Dari",
       "file_name": "Hussein_Taji_Kal_Dari.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Persian/Hussein_Taji_Kal_Dari.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Persian/Hussein_Taji_Kal_Dari.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -58,7 +58,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Persian wbw translation",
       "file_name": "Persian_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Persian/Persian_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Persian/Persian_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -72,7 +72,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Bayanul Furqan(Koshur Quran)",
       "file_name": "Bayanul_Furqan(Koshur_Quran).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kashmiri/Bayanul_Furqan(Koshur_Quran).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kashmiri/Bayanul_Furqan(Koshur_Quran).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -86,7 +86,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Montada Islamic Foundation",
       "file_name": "Montada_Islamic_Foundation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/French/Montada_Islamic_Foundation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/French/Montada_Islamic_Foundation.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -98,7 +98,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Hamidullah",
       "file_name": "Muhammad_Hamidullah.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/French/Muhammad_Hamidullah.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/French/Muhammad_Hamidullah.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -110,7 +110,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Rashid Maash",
       "file_name": "Rashid_Maash.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/French/Rashid_Maash.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/French/Rashid_Maash.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -122,7 +122,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "French wbw translation",
       "file_name": "French_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/French/French_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/French/French_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -137,7 +137,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "file_name":
           "Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Swahili/Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Swahili/Dr._Abdullah_Muhammad_Abu_Bakr_and_Sheikh_Nasir_Khamis.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -149,7 +149,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Swahili translation - Rowad Translation Center",
       "file_name": "Swahili_translation_-_Rowad_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Swahili/Swahili_translation_-_Rowad_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Swahili/Swahili_translation_-_Rowad_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -161,7 +161,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ali Muhsin Al-Barwani",
       "file_name": "Ali_Muhsin_Al-Barwani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Swahili/Ali_Muhsin_Al-Barwani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Swahili/Ali_Muhsin_Al-Barwani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -175,7 +175,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Greek translation",
       "file_name": "Greek_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Greek/Greek_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Greek/Greek_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -189,7 +189,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Sodiq Muhammad Yusuf (Latin)",
       "file_name": "Muhammad_Sodiq_Muhammad_Yusuf_(Latin).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodiq_Muhammad_Yusuf_(Latin).json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -201,7 +201,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Alauddin Mansour",
       "file_name": "Alauddin_Mansour.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Uzbek/Alauddin_Mansour.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Uzbek/Alauddin_Mansour.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -213,7 +213,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Sodik Muhammad Yusuf",
       "file_name": "Muhammad_Sodik_Muhammad_Yusuf.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Uzbek/Muhammad_Sodik_Muhammad_Yusuf.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -225,7 +225,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Uzbek Translation - Rowwad Translation Center",
       "file_name": "Uzbek_Translation_-_Rowwad_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Uzbek/Uzbek_Translation_-_Rowwad_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Uzbek/Uzbek_Translation_-_Rowwad_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -239,7 +239,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Kannada Translation",
       "file_name": "Kannada_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kannada/Kannada_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kannada/Kannada_Translation.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -251,7 +251,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Hamza Battur",
       "file_name": "Muhammad_Hamza_Battur.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kannada/Muhammad_Hamza_Battur.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kannada/Muhammad_Hamza_Battur.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -263,7 +263,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Kannada translation - Bashir Missouri",
       "file_name": "Kannada_translation_-_Bashir_Missouri.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kannada/Kannada_translation_-_Bashir_Missouri.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kannada/Kannada_translation_-_Bashir_Missouri.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -277,7 +277,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Magomed-Nuri Osmanovich Osmanov",
       "file_name": "Magomed-Nuri_Osmanovich_Osmanov.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Magomed-Nuri_Osmanovich_Osmanov.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Magomed-Nuri_Osmanovich_Osmanov.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -289,7 +289,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Gordy Semyonovich Sablukov",
       "file_name": "Gordy_Semyonovich_Sablukov.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Gordy_Semyonovich_Sablukov.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Gordy_Semyonovich_Sablukov.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -301,7 +301,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Russian Translation ( Elmir Kuliev )",
       "file_name": "Russian_Translation_(_Elmir_Kuliev_).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Russian_Translation_(_Elmir_Kuliev_).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Russian_Translation_(_Elmir_Kuliev_).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -313,7 +313,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ministry of Awqaf, Egypt",
       "file_name": "Ministry_of_Awqaf,_Egypt.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Ministry_of_Awqaf,_Egypt.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Ministry_of_Awqaf,_Egypt.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -325,7 +325,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abu Adel",
       "file_name": "Abu_Adel.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Abu_Adel.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Abu_Adel.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -337,7 +337,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Russian translation - Aboadel",
       "file_name": "Russian_translation_-_Aboadel.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Russian/Russian_translation_-_Aboadel.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Russian/Russian_translation_-_Aboadel.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -351,7 +351,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sheikh Isa Garcia",
       "file_name": "Sheikh_Isa_Garcia.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Spanish/Sheikh_Isa_Garcia.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Spanish/Sheikh_Isa_Garcia.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -363,7 +363,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Noor International Center",
       "file_name": "Noor_International_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Spanish/Noor_International_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Spanish/Noor_International_Center.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -375,7 +375,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Montada Islamic Foundation",
       "file_name": "Montada_Islamic_Foundation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Spanish/Montada_Islamic_Foundation.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -387,7 +387,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Spanish Translation(Cortes)",
       "file_name": "Spanish_Translation(Cortes).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Spanish/Spanish_Translation(Cortes).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Spanish/Spanish_Translation(Cortes).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -401,7 +401,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdul Hamid Silika",
       "file_name": "Abdul_Hamid_Silika.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Yau_yuw/Abdul_Hamid_Silika.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Yau_yuw/Abdul_Hamid_Silika.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -415,7 +415,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Shafi’i Ansari",
       "file_name": "Muhammad_Shafi’i_Ansari.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Marathi/Muhammad_Shafi’i_Ansari.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Marathi/Muhammad_Shafi’i_Ansari.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -429,7 +429,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dr. Mikhailo Yaqubovic",
       "file_name": "Dr._Mikhailo_Yaqubovic.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Ukrainian/Dr._Mikhailo_Yaqubovic.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Ukrainian/Dr._Mikhailo_Yaqubovic.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -443,7 +443,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdul Majid Daryabadi",
       "file_name": "Abdul_Majid_Daryabadi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Abdul_Majid_Daryabadi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Abdul_Majid_Daryabadi.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -455,7 +455,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Professor Shaykh Hasan Al-Fatih Qaribullah",
       "file_name": "Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Professor_Shaykh_Hasan_Al-Fatih_Qaribullah.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -467,7 +467,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Asad",
       "file_name": "Muhammad_Asad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Muhammad_Asad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Muhammad_Asad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -479,7 +479,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "A. J. Arberry",
       "file_name": "A._J._Arberry.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/A._J._Arberry.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/A._J._Arberry.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -491,7 +491,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dr. T. B. Irving",
       "file_name": "Dr._T._B._Irving.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Dr._T._B._Irving.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Dr._T._B._Irving.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -503,7 +503,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Sarwar",
       "file_name": "Muhammad_Sarwar.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Muhammad_Sarwar.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Muhammad_Sarwar.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -515,7 +515,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dr. Waleed Bleyhesh Omary",
       "file_name": "Dr._Waleed_Bleyhesh_Omary.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Dr._Waleed_Bleyhesh_Omary.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Dr._Waleed_Bleyhesh_Omary.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -527,7 +527,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "English Translation (Pickthall)",
       "file_name": "English_Translation_(Pickthall).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/English_Translation_(Pickthall).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/English_Translation_(Pickthall).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -539,7 +539,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhsin Khan",
       "file_name": "Muhsin_Khan.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Muhsin_Khan.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Muhsin_Khan.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -551,7 +551,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dr. Ghali",
       "file_name": "Dr._Ghali.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Dr._Ghali.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Dr._Ghali.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -563,7 +563,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Shakir",
       "file_name": "Shakir.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Shakir.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Shakir.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -575,7 +575,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdullah Yusuf Ali",
       "file_name": "Abdullah_Yusuf_Ali.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Abdullah_Yusuf_Ali.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Abdullah_Yusuf_Ali.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -587,7 +587,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Mufti Taqi Usmani",
       "file_name": "Mufti_Taqi_Usmani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Mufti_Taqi_Usmani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Mufti_Taqi_Usmani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -599,7 +599,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ruwwad Center",
       "file_name": "Ruwwad_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Ruwwad_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Ruwwad_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -611,7 +611,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maarif-ul-Quran",
       "file_name": "Maarif-ul-Quran.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Maarif-ul-Quran.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Maarif-ul-Quran.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -623,7 +623,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Saheeh International",
       "file_name": "Saheeh_International.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Saheeh_International.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Saheeh_International.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -635,7 +635,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tafheem-ul-Quran - Abul Ala Maududi",
       "file_name": "Tafheem-ul-Quran_-_Abul_Ala_Maududi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Tafheem-ul-Quran_-_Abul_Ala_Maududi.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -647,7 +647,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdul Haleem",
       "file_name": "Abdul_Haleem.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Abdul_Haleem.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Abdul_Haleem.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -659,7 +659,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Fadel Soliman, Bridges’ translation",
       "file_name": "Fadel_Soliman,_Bridges’_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Fadel_Soliman,_Bridges’_translation.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -671,7 +671,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maulana Wahiduddin Khan",
       "file_name": "Maulana_Wahiduddin_Khan.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Maulana_Wahiduddin_Khan.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Maulana_Wahiduddin_Khan.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -684,7 +684,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "file_name":
           "Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/English/Muhammad_Taqi-ud-Din_al-Hilali_&_Muhammad_Muhsin_Khan.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -696,7 +696,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Colored English wbw translation",
       "file_name": "Colored_English_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/English/Colored_English_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/English/Colored_English_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": true,
     },
@@ -708,7 +708,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "English Word by Word Translation",
       "file_name": "English_Word_by_Word_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/English/English_Word_by_Word_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/English/English_Word_by_Word_Translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -722,7 +722,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abul Ala Maududi(Roman Urdu)",
       "file_name": "Abul_Ala_Maududi(Roman_Urdu).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Abul_Ala_Maududi(Roman_Urdu).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Abul_Ala_Maududi(Roman_Urdu).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -734,7 +734,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maulana Wahiduddin Khan",
       "file_name": "Maulana_Wahiduddin_Khan.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Maulana_Wahiduddin_Khan.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Maulana_Wahiduddin_Khan.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -746,7 +746,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Fe Zilal al-Qur'an",
       "file_name": "Fe_Zilal_al-Qur'an.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Fe_Zilal_al-Qur'an.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Fe_Zilal_al-Qur'an.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -758,7 +758,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Bayan-ul-Quran",
       "file_name": "Bayan-ul-Quran.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Bayan-ul-Quran.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Bayan-ul-Quran.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -770,7 +770,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Fatah Muhammad Jalandhari",
       "file_name": "Fatah_Muhammad_Jalandhari.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Fatah_Muhammad_Jalandhari.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Fatah_Muhammad_Jalandhari.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -782,7 +782,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Urdu wbw translation",
       "file_name": "Urdu_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Urdu/Urdu_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Urdu/Urdu_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -795,7 +795,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "file_name":
           "Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Shaykh_al-Hind_Mahmud_al-Hasan(with_Tafsir_E_Usmani).json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -807,7 +807,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maulana Muhammad Junagarhi",
       "file_name": "Maulana_Muhammad_Junagarhi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Maulana_Muhammad_Junagarhi.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -819,7 +819,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tafheem e Qur'an - Syed Abu Ali Maududi",
       "file_name": "Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Urdu/Tafheem_e_Qur'an_-_Syed_Abu_Ali_Maududi.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -833,7 +833,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abu Bakr Ibrahim Ali (Bakurube)",
       "file_name": "Abu_Bakr_Ibrahim_Ali_(Bakurube).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Divehi/Abu_Bakr_Ibrahim_Ali_(Bakurube).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Divehi/Abu_Bakr_Ibrahim_Ali_(Bakurube).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -847,7 +847,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dar Al-Salam Center",
       "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tagalog/Dar_Al-Salam_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tagalog/Dar_Al-Salam_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -861,21 +861,21 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ruwwad Center",
       "file_name": "Ruwwad_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Sinhala_Sinhalese/Ruwwad_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Sinhala_Sinhalese/Ruwwad_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
   ],
-  "With_footnotes": [
+  "Moore": [
     {
-      "language": "With_footnotes",
+      "language": "Moore",
       "language_code": "mos",
       "language_native": "Mooré",
       "name": "Moore rwwad",
       "english_name": "Moore rwwad",
       "file_name": "Moore_rwwad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/With_footnotes/Moore_rwwad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/With_footnotes/Moore_rwwad.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -889,7 +889,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Il-Qoran Imqaddes",
       "file_name": "Il-Qoran_Imqaddes.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Maltese/Il-Qoran_Imqaddes.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Maltese/Il-Qoran_Imqaddes.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -903,7 +903,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "The Sabiq company",
       "file_name": "The_Sabiq_company.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Indonesian/The_Sabiq_company.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Indonesian/The_Sabiq_company.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -915,7 +915,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "King Fahad Quran Complex",
       "file_name": "King_Fahad_Quran_Complex.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Indonesian/King_Fahad_Quran_Complex.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -927,7 +927,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Indonesian Islamic affairs ministry",
       "file_name": "Indonesian_Islamic_affairs_ministry.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Indonesian/Indonesian_Islamic_affairs_ministry.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -939,7 +939,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Indonesian wbw translation",
       "file_name": "Indonesian_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Indonesian/Indonesian_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Indonesian/Indonesian_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -953,7 +953,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Macedonian scholars",
       "file_name": "Macedonian_scholars.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Macedonian/Macedonian_scholars.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Macedonian/Macedonian_scholars.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -967,7 +967,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdullah Hassan Yacoub",
       "file_name": "Abdullah_Hassan_Yacoub.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Somali/Abdullah_Hassan_Yacoub.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -979,7 +979,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Mahmud Muhammad Abduh",
       "file_name": "Mahmud_Muhammad_Abduh.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Somali/Mahmud_Muhammad_Abduh.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Somali/Mahmud_Muhammad_Abduh.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -993,7 +993,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Shaban Britch",
       "file_name": "Shaban_Britch.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Turkish/Shaban_Britch.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Turkish/Shaban_Britch.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1005,7 +1005,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muslim Shahin",
       "file_name": "Muslim_Shahin.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Turkish/Muslim_Shahin.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Turkish/Muslim_Shahin.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1017,7 +1017,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Turkish Translation(Diyanet)",
       "file_name": "Turkish_Translation(Diyanet).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Turkish/Turkish_Translation(Diyanet).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Turkish/Turkish_Translation(Diyanet).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1029,7 +1029,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Elmalili Hamdi Yazir",
       "file_name": "Elmalili_Hamdi_Yazir.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Turkish/Elmalili_Hamdi_Yazir.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Turkish/Elmalili_Hamdi_Yazir.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1041,7 +1041,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dar Al-Salam Center",
       "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Turkish/Dar_Al-Salam_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Turkish/Dar_Al-Salam_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1053,7 +1053,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Turkish wbw translation",
       "file_name": "Turkish_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Turkish/Turkish_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Turkish/Turkish_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -1067,7 +1067,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ruwwad Center",
       "file_name": "Ruwwad_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Vietnamese/Ruwwad_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Vietnamese/Ruwwad_Center.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1079,7 +1079,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hasan Abdul-Karim",
       "file_name": "Hasan_Abdul-Karim.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Vietnamese/Hasan_Abdul-Karim.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Vietnamese/Hasan_Abdul-Karim.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1093,7 +1093,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ruwwad Center",
       "file_name": "Ruwwad_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Albanian/Ruwwad_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Albanian/Ruwwad_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1105,7 +1105,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Albanian",
       "file_name": "Albanian.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Albanian/Albanian.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Albanian/Albanian.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1117,7 +1117,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Albanian Translation",
       "file_name": "Albanian_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Albanian/Albanian_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Albanian/Albanian_Translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1129,7 +1129,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hasan Efendi Nahi",
       "file_name": "Hasan_Efendi_Nahi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Albanian/Hasan_Efendi_Nahi.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1143,7 +1143,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdullah Basamia",
       "file_name": "Abdullah_Basamia.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Malay/Abdullah_Basamia.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Malay/Abdullah_Basamia.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1157,7 +1157,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Frank Bubenheim and Nadeem",
       "file_name": "Frank_Bubenheim_and_Nadeem.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/German/Frank_Bubenheim_and_Nadeem.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/German/Frank_Bubenheim_and_Nadeem.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1169,7 +1169,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "German Translation - Rowwad Translation Center",
       "file_name": "German_Translation_-_Rowwad_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/German/German_Translation_-_Rowwad_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/German/German_Translation_-_Rowwad_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1181,7 +1181,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abu Reda Muhammad ibn Ahmad",
       "file_name": "Abu_Reda_Muhammad_ibn_Ahmad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/German/Abu_Reda_Muhammad_ibn_Ahmad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/German/Abu_Reda_Muhammad_ibn_Ahmad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1195,7 +1195,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Lithuanian Translation",
       "file_name": "Lithuanian_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Lithuanian/Lithuanian_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Lithuanian/Lithuanian_Translation.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1209,7 +1209,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maulana Abder-Rahim ibn Muhammad",
       "file_name": "Maulana_Abder-Rahim_ibn_Muhammad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Telugu/Maulana_Abder-Rahim_ibn_Muhammad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Telugu/Maulana_Abder-Rahim_ibn_Muhammad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1223,7 +1223,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Romanian translation",
       "file_name": "Romanian_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Romanian/Romanian_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Romanian/Romanian_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1235,7 +1235,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Grigore",
       "file_name": "Grigore.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Romanian/Grigore.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Romanian/Grigore.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1247,7 +1247,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Islamic and Cultural League",
       "file_name": "Islamic_and_Cultural_League.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Romanian/Islamic_and_Cultural_League.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1261,7 +1261,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Bulgarian Translation",
       "file_name": "Bulgarian_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bulgarian/Bulgarian_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bulgarian/Bulgarian_Translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1273,7 +1273,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tzvetan Theophanov",
       "file_name": "Tzvetan_Theophanov.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bulgarian/Tzvetan_Theophanov.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bulgarian/Tzvetan_Theophanov.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1287,7 +1287,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Helmi Nasr",
       "file_name": "Helmi_Nasr.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Portuguese/Helmi_Nasr.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Portuguese/Helmi_Nasr.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1299,7 +1299,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Portuguese Translation( Samir )",
       "file_name": "Portuguese_Translation(_Samir_).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Portuguese/Portuguese_Translation(_Samir_).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Portuguese/Portuguese_Translation(_Samir_).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1313,7 +1313,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Saleh",
       "file_name": "Muhammad_Saleh.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Uighur_uyghur/Muhammad_Saleh.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Uighur_uyghur/Muhammad_Saleh.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1327,7 +1327,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "The Rwanda Muslims Association team",
       "file_name": "The_Rwanda_Muslims_Association_team.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kinyarwanda/The_Rwanda_Muslims_Association_team.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1341,7 +1341,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dar Al-Salam Center",
       "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Serbian/Dar_Al-Salam_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Serbian/Dar_Al-Salam_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1355,7 +1355,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dar Al-Salam Center",
       "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bosnian/Dar_Al-Salam_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bosnian/Dar_Al-Salam_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1367,7 +1367,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Besim Korkut",
       "file_name": "Besim_Korkut.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bosnian/Besim_Korkut.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bosnian/Besim_Korkut.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1379,7 +1379,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhamed Mehanović",
       "file_name": "Muhamed_Mehanović.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bosnian/Muhamed_Mehanović.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bosnian/Muhamed_Mehanović.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1393,7 +1393,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Khalifa Altay",
       "file_name": "Khalifa_Altay.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kazakh/Khalifa_Altay.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kazakh/Khalifa_Altay.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1407,7 +1407,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Chewa translation",
       "file_name": "Chewa_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chichewa_chewa_nyanja/Chewa_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chichewa_chewa_nyanja/Chewa_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1421,7 +1421,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Pashto - Sarfaraz",
       "file_name": "Pashto_-_Sarfaraz.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Pashto/Pashto_-_Sarfaraz.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Pashto/Pashto_-_Sarfaraz.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1433,7 +1433,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Zakaria Abulsalam",
       "file_name": "Zakaria_Abulsalam.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Pashto/Zakaria_Abulsalam.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Pashto/Zakaria_Abulsalam.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1445,7 +1445,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Pashto Translation - Rowwad Translation Center",
       "file_name": "Pashto_Translation_-_Rowwad_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Pashto/Pashto_Translation_-_Rowwad_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Pashto/Pashto_Translation_-_Rowwad_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1459,7 +1459,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dar Al-Salam Center",
       "file_name": "Dar_Al-Salam_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Hebrew/Dar_Al-Salam_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Hebrew/Dar_Al-Salam_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1473,7 +1473,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Georgian Translation",
       "file_name": "Georgian_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Georgian/Georgian_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Georgian/Georgian_Translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1487,7 +1487,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dr. Abu Bakr Muhammad Zakaria",
       "file_name": "Dr._Abu_Bakr_Muhammad_Zakaria.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bengali/Dr._Abu_Bakr_Muhammad_Zakaria.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bengali/Dr._Abu_Bakr_Muhammad_Zakaria.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1499,7 +1499,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Taisirul Quran",
       "file_name": "Taisirul_Quran.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bengali/Taisirul_Quran.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bengali/Taisirul_Quran.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1511,7 +1511,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Rawai Al-bayan",
       "file_name": "Rawai_Al-bayan.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bengali/Rawai_Al-bayan.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bengali/Rawai_Al-bayan.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1523,7 +1523,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Fathul Majid",
       "file_name": "Fathul_Majid.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bengali/Fathul_Majid.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bengali/Fathul_Majid.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1535,7 +1535,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sheikh Mujibur Rahman",
       "file_name": "Sheikh_Mujibur_Rahman.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bengali/Sheikh_Mujibur_Rahman.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1547,7 +1547,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Bengali wbw translation",
       "file_name": "Bengali_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Bengali/Bengali_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Bengali/Bengali_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -1561,7 +1561,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Rabila Al-Umry",
       "file_name": "Rabila_Al-Umry.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Gujarati/Rabila_Al-Umry.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Gujarati/Rabila_Al-Umry.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1575,7 +1575,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Czech",
       "file_name": "Czech.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Czech/Czech.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Czech/Czech.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1589,7 +1589,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Norwegian",
       "file_name": "Norwegian.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Norwegian/Norwegian.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Norwegian/Norwegian.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1603,7 +1603,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdul Hameed Baqavi",
       "file_name": "Abdul_Hameed_Baqavi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tamil/Abdul_Hameed_Baqavi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tamil/Abdul_Hameed_Baqavi.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1615,7 +1615,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Jan Trust Foundation",
       "file_name": "Jan_Trust_Foundation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tamil/Jan_Trust_Foundation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tamil/Jan_Trust_Foundation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1627,7 +1627,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sheikh Omar Sharif bin Abdul Salam",
       "file_name": "Sheikh_Omar_Sharif_bin_Abdul_Salam.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tamil/Sheikh_Omar_Sharif_bin_Abdul_Salam.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tamil/Sheikh_Omar_Sharif_bin_Abdul_Salam.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1639,7 +1639,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tamil wbw translation",
       "file_name": "Tamil_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Tamil/Tamil_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Tamil/Tamil_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -1653,7 +1653,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Cambodian Muslim Community Development",
       "file_name": "Cambodian_Muslim_Community_Development.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Central_khmer/Cambodian_Muslim_Community_Development.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Central_khmer/Cambodian_Muslim_Community_Development.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1667,7 +1667,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Makin",
       "file_name": "Muhammad_Makin.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chinese/Muhammad_Makin.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chinese/Muhammad_Makin.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1679,7 +1679,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Chinese Translation (Simplified) - Ma Jain",
       "file_name": "Chinese_Translation_(Simplified)_-_Ma_Jain.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_(Simplified)_-_Ma_Jain.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_(Simplified)_-_Ma_Jain.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1691,7 +1691,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Chinese suliman",
       "file_name": "Chinese_suliman.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chinese/Chinese_suliman.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chinese/Chinese_suliman.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1703,7 +1703,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Chinese Translation - Basair",
       "file_name": "Chinese_Translation_-_Basair.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_-_Basair.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chinese/Chinese_Translation_-_Basair.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1717,7 +1717,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Saleh Bamoki",
       "file_name": "Muhammad_Saleh_Bamoki.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kurdish/Muhammad_Saleh_Bamoki.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kurdish/Muhammad_Saleh_Bamoki.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1729,7 +1729,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Burhan Muhammad-Amin",
       "file_name": "Burhan_Muhammad-Amin.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kurdish/Burhan_Muhammad-Amin.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kurdish/Burhan_Muhammad-Amin.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1741,7 +1741,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Kurdish Translation - Salahuddin",
       "file_name": "Kurdish_Translation_-_Salahuddin.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kurdish/Kurdish_Translation_-_Salahuddin.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kurdish/Kurdish_Translation_-_Salahuddin.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1753,7 +1753,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Kurdish Kurmanji Translation",
       "file_name": "Kurdish_Kurmanji_Translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kurdish/Kurdish_Kurmanji_Translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kurdish/Kurdish_Kurmanji_Translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1767,7 +1767,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Finnish",
       "file_name": "Finnish.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Finnish/Finnish.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Finnish/Finnish.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1781,7 +1781,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ghali Apapur Apaghuna",
       "file_name": "Ghali_Apapur_Apaghuna.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Oromo/Ghali_Apapur_Apaghuna.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Oromo/Ghali_Apapur_Apaghuna.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1795,7 +1795,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Karakunnu and Vanidas Elayavoor",
       "file_name": "Muhammad_Karakunnu_and_Vanidas_Elayavoor.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Malayalam/Muhammad_Karakunnu_and_Vanidas_Elayavoor.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Malayalam/Muhammad_Karakunnu_and_Vanidas_Elayavoor.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1807,7 +1807,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Malay Translation(Abdul Hameed and Kunhi)",
       "file_name": "Malay_Translation(Abdul_Hameed_and_Kunhi).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Malayalam/Malay_Translation(Abdul_Hameed_and_Kunhi).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Malayalam/Malay_Translation(Abdul_Hameed_and_Kunhi).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1819,7 +1819,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abdul-Hamid Haidar & Kanhi Muhammad",
       "file_name": "Abdul-Hamid_Haidar_&_Kanhi_Muhammad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Malayalam/Abdul-Hamid_Haidar_&_Kanhi_Muhammad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Malayalam/Abdul-Hamid_Haidar_&_Kanhi_Muhammad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1833,7 +1833,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hausa Translation(Abubakar Gumi)",
       "file_name": "Hausa_Translation(Abubakar_Gumi).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Hausa/Hausa_Translation(Abubakar_Gumi).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Hausa/Hausa_Translation(Abubakar_Gumi).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1845,7 +1845,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Abubakar Mahmood Jummi",
       "file_name": "Abubakar_Mahmood_Jummi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Hausa/Abubakar_Mahmood_Jummi.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -1859,7 +1859,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Azerbaijani",
       "file_name": "Azerbaijani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Azeri/Azerbaijani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Azeri/Azerbaijani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1871,7 +1871,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Alikhan Musayev",
       "file_name": "Alikhan_Musayev.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Azeri/Alikhan_Musayev.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Azeri/Alikhan_Musayev.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1885,7 +1885,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Józef Bielawski",
       "file_name": "Józef_Bielawski.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Polish/Józef_Bielawski.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Polish/Józef_Bielawski.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1899,7 +1899,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sofian S. Siregar",
       "file_name": "Sofian_S._Siregar.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Dutch/Sofian_S._Siregar.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Dutch/Sofian_S._Siregar.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1911,7 +1911,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Malak Faris Abdalsalaam",
       "file_name": "Malak_Faris_Abdalsalaam.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Dutch/Malak_Faris_Abdalsalaam.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Dutch/Malak_Faris_Abdalsalaam.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1923,7 +1923,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Dutch Islamic Center",
       "file_name": "Dutch_Islamic_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Dutch/Dutch_Islamic_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Dutch/Dutch_Islamic_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1937,7 +1937,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Knut Bernström",
       "file_name": "Knut_Bernström.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Swedish/Knut_Bernström.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Swedish/Knut_Bernström.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1951,7 +1951,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Korean",
       "file_name": "Korean.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Korean/Korean.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Korean/Korean.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1963,7 +1963,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hamed Choi",
       "file_name": "Hamed_Choi.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Korean/Hamed_Choi.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Korean/Hamed_Choi.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1975,7 +1975,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Korean Translation - Rowwad Translation Center",
       "file_name": "Korean_Translation_-_Rowwad_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Korean/Korean_Translation_-_Rowwad_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Korean/Korean_Translation_-_Rowwad_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -1989,7 +1989,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maranao",
       "file_name": "Maranao.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Maranao/Maranao.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Maranao/Maranao.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2003,7 +2003,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tajik",
       "file_name": "Tajik.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tajik/Tajik.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tajik/Tajik.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2015,7 +2015,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Pioneers of Translation Center",
       "file_name": "Pioneers_of_Translation_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tajik/Pioneers_of_Translation_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tajik/Pioneers_of_Translation_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2027,7 +2027,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Khawaja Mirof & Khawaja Mir",
       "file_name": "Khawaja_Mirof_&_Khawaja_Mir.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tajik/Khawaja_Mirof_&_Khawaja_Mir.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2041,7 +2041,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Tatar",
       "file_name": "Tatar.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Tatar/Tatar.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Tatar/Tatar.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2055,7 +2055,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Shaykh Abu Rahimah Mikael Aykyuni",
       "file_name": "Shaykh_Abu_Rahimah_Mikael_Aykyuni.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Yoruba/Shaykh_Abu_Rahimah_Mikael_Aykyuni.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2069,7 +2069,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ahl Al-Hadith Central Society of Nepal",
       "file_name": "Ahl_Al-Hadith_Central_Society_of_Nepal.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Nepali/Ahl_Al-Hadith_Central_Society_of_Nepal.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Nepali/Ahl_Al-Hadith_Central_Society_of_Nepal.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2083,7 +2083,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Office of the president of Maldives",
       "file_name": "Office_of_the_president_of_Maldives.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Divehi_Dhivehi_Maldivian/Office_of_the_president_of_Maldives.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Divehi_Dhivehi_Maldivian/Office_of_the_president_of_Maldives.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2097,7 +2097,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maulana Azizul Haque al-Umari",
       "file_name": "Maulana_Azizul_Haque_al-Umari.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Hindi/Maulana_Azizul_Haque_al-Umari.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2109,7 +2109,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hindi wbw translation",
       "file_name": "Hindi_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Hindi/Hindi_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Hindi/Hindi_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },
@@ -2123,7 +2123,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Othman al-Sharif",
       "file_name": "Othman_al-Sharif.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Italian/Othman_al-Sharif.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Italian/Othman_al-Sharif.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2135,7 +2135,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Hamza Roberto Piccardo",
       "file_name": "Hamza_Roberto_Piccardo.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Italian/Hamza_Roberto_Piccardo.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2149,7 +2149,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ramdane At Mansour",
       "file_name": "Ramdane_At_Mansour.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Amazigh/Ramdane_At_Mansour.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Amazigh/Ramdane_At_Mansour.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2163,7 +2163,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Saeed Sato",
       "file_name": "Saeed_Sato.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Japanese/Saeed_Sato.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Japanese/Saeed_Sato.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2175,7 +2175,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ryoichi Mita",
       "file_name": "Ryoichi_Mita.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Japanese/Ryoichi_Mita.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Japanese/Ryoichi_Mita.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2189,7 +2189,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Thai Translatio (King Fahad Quran Complex)",
       "file_name": "Thai_Translatio_(King_Fahad_Quran_Complex).json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Thai/Thai_Translatio_(King_Fahad_Quran_Complex).json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Thai/Thai_Translatio_(King_Fahad_Quran_Complex).json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2201,7 +2201,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Society of Institutes and Universities",
       "file_name": "Society_of_Institutes_and_Universities.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Thai/Society_of_Institutes_and_Universities.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Thai/Society_of_Institutes_and_Universities.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2215,7 +2215,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Taj Mehmood Amroti",
       "file_name": "Taj_Mehmood_Amroti.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Sindhi/Taj_Mehmood_Amroti.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Sindhi/Taj_Mehmood_Amroti.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2229,7 +2229,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sadiq and Sani",
       "file_name": "Sadiq_and_Sani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Amharic/Sadiq_and_Sani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Amharic/Sadiq_and_Sani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2241,7 +2241,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Amharic Translation - Zain",
       "file_name": "Amharic_Translation_-_Zain.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Amharic/Amharic_Translation_-_Zain.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Amharic/Amharic_Translation_-_Zain.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2255,7 +2255,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Fulani translation",
       "file_name": "Fulani_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Fulah/Fulani_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Fulah/Fulani_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2269,7 +2269,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "African Development Foundation",
       "file_name": "African_Development_Foundation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Ganda/African_Development_Foundation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Ganda/African_Development_Foundation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2283,7 +2283,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Sheikh Haroun Ismaeel",
       "file_name": "Sheikh_Haroun_Ismaeel.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Asante/Sheikh_Haroun_Ismaeel.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Asante/Sheikh_Haroun_Ismaeel.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2297,7 +2297,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Shaykh Rafeequl Islam Habibur-Rahman",
       "file_name": "Shaykh_Rafeequl_Islam_Habibur-Rahman.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Assamese/Shaykh_Rafeequl_Islam_Habibur-Rahman.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2311,7 +2311,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Mawlawi Muhammad Anwar Badkhashani",
       "file_name": "Mawlawi_Muhammad_Anwar_Badkhashani.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Dari/Mawlawi_Muhammad_Anwar_Badkhashani.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Dari/Mawlawi_Muhammad_Anwar_Badkhashani.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2325,7 +2325,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Magomed Magomedov",
       "file_name": "Magomed_Magomedov.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Chechen/Magomed_Magomedov.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Chechen/Magomed_Magomedov.json.txt",
       "type": "with_footnote",
       "is_tajweed": false,
     },
@@ -2339,7 +2339,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ikirundi gehiti",
       "file_name": "Ikirundi_gehiti.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Ikirundi/Ikirundi_gehiti.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Ikirundi/Ikirundi_gehiti.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2353,7 +2353,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Khmer translation - Rwwad translation center",
       "file_name": "Khmer_translation_-_Rwwad_translation_center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Khmer/Khmer_translation_-_Rwwad_translation_center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Khmer/Khmer_translation_-_Rwwad_translation_center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2367,7 +2367,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Maguindanao - rwwad",
       "file_name": "Maguindanao_-_rwwad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Maguindanao/Maguindanao_-_rwwad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Maguindanao/Maguindanao_-_rwwad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2381,7 +2381,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Kyrgyz hakimov",
       "file_name": "Kyrgyz_hakimov.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Kyrgyz/Kyrgyz_hakimov.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Kyrgyz/Kyrgyz_hakimov.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2395,7 +2395,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Croatian translation - rwwad",
       "file_name": "Croatian_translation_-_rwwad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Croatian/Croatian_translation_-_rwwad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Croatian/Croatian_translation_-_rwwad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2409,7 +2409,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Shaikh Mahmud Abdulkader Hamza",
       "file_name": "Shaikh_Mahmud_Abdulkader_Hamza.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Afar/Shaikh_Mahmud_Abdulkader_Hamza.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Afar/Shaikh_Mahmud_Abdulkader_Hamza.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2423,7 +2423,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Luhya translation",
       "file_name": "Luhya_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Luhya/Luhya_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Luhya/Luhya_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2437,7 +2437,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Bisayan Translation - Rowwad Center",
       "file_name": "Bisayan_Translation_-_Rowwad_Center.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Bisayan/Bisayan_Translation_-_Rowwad_Center.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Bisayan/Bisayan_Translation_-_Rowwad_Center.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2451,7 +2451,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Malagasy translation - Rowad",
       "file_name": "Malagasy_translation_-_Rowad.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Malagasy/Malagasy_translation_-_Rowad.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Malagasy/Malagasy_translation_-_Rowad.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2465,7 +2465,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Punjabi arif",
       "file_name": "Punjabi_arif.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Punjabi/Punjabi_arif.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Punjabi/Punjabi_arif.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2479,7 +2479,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Muhammad Baba Gutubu",
       "file_name": "Muhammad_Baba_Gutubu.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Dagbani/Muhammad_Baba_Gutubu.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Dagbani/Muhammad_Baba_Gutubu.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2493,7 +2493,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Filipino Iranionian translation",
       "file_name": "Filipino_Iranionian_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Filipino/Filipino_Iranionian_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Filipino/Filipino_Iranionian_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2507,7 +2507,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Lingala translation",
       "file_name": "Lingala_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_simple/Lingala/Lingala_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_simple/Lingala/Lingala_translation.json.txt",
       "type": "simple",
       "is_tajweed": false,
     },
@@ -2521,7 +2521,7 @@ Map<String, List<Map<String, dynamic>>> translationResources = {
       "english_name": "Ingush wbw translation",
       "file_name": "Ingush_wbw_translation.json.txt",
       "full_path":
-          "translation_v2/compressed_translation_word_by_word/Ingush/Ingush_wbw_translation.json.txt",
+          "quranic_universal_library/translation_v2/compressed_translation_word_by_word/Ingush/Ingush_wbw_translation.json.txt",
       "type": "word_by_word",
       "is_tajweed": false,
     },

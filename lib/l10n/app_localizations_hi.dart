@@ -1194,4 +1194,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'कुरान लिपि में गोल जज़्म/सुकून';
+
+  @override
+  String get copy => 'कॉपी करें';
+
+  @override
+  String get share => 'साझा करें';
 }

@@ -231,7 +231,7 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ResourcesProgressCubit()),
+        BlocProvider(create: (context) => ResourcesProcceessCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),

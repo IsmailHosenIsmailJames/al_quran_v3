@@ -354,5 +354,7 @@
   "goToPage": "Səhifəyə get",
   "resources": "Resurslar",
   "mushaf": "Müshaf",
-  "circleJojomInQuranScript": "Quran skriptində dairəvi cəzm/sükun"
+  "circleJojomInQuranScript": "Quran skriptində dairəvi cəzm/sükun",
+  "copy": "Kopyala",
+  "share": "Paylaş"
 }

@@ -1192,4 +1192,10 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਵਿੱਚ ਗੋਲ ਜਜ਼ਮ/ਸੁਕੂਨ';
+
+  @override
+  String get copy => 'ਕਾਪੀ ਕਰੋ';
+
+  @override
+  String get share => 'ਸਾਂਝਾ ਕਰੋ';
 }

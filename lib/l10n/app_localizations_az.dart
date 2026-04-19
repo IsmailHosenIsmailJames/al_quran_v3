@@ -1200,4 +1200,10 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'Quran skriptində dairəvi cəzm/sükun';
+
+  @override
+  String get copy => 'Kopyala';
+
+  @override
+  String get share => 'Paylaş';
 }

@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:dio/dio.dart" as dio;
@@ -12,7 +13,6 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
 import "../../resources/quran_resources/available_surah_info_lang.dart";
-import "../../resources/quran_resources/models/translation_book_model.dart";
 import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
@@ -25,8 +25,7 @@ class QuranTranslationFunction {
     if (!Hive.isBoxOpen("user")) {
       await Hive.openBox("user");
     }
-    List<TranslationBookModel>? booksListToOpen =
-        await getTranslationSelections();
+    List<ResourcesModel>? booksListToOpen = await getTranslationSelections();
     if (booksListToOpen == null) return;
     log(
       booksListToOpen.map((e) => e.toMap()).toString(),
@@ -42,7 +41,7 @@ class QuranTranslationFunction {
     }
 
     if (booksListToOpen.isNotEmpty) {
-      for (TranslationBookModel bookModel in booksListToOpen) {
+      for (ResourcesModel bookModel in booksListToOpen) {
         await Hive.openLazyBox(
           getTranslationBoxName(translationBook: bookModel),
         );
@@ -66,11 +65,10 @@ class QuranTranslationFunction {
     return (await Hive.lazyBox(boxName).get(id))["text"];
   }
 
-  static Future<bool> isAlreadyDownloaded(TranslationBookModel book) async {
-    List<TranslationBookModel> downloadedBooks =
-        getDownloadedTranslationBooks();
+  static Future<bool> isAlreadyDownloaded(ResourcesModel book) async {
+    List<ResourcesModel> downloadedBooks = getDownloadedTranslationBooks();
 
-    for (TranslationBookModel downloadedBook in downloadedBooks) {
+    for (ResourcesModel downloadedBook in downloadedBooks) {
       // Use fullPath and language for unique identification
       if (downloadedBook.fullPath == book.fullPath) {
         final boxName = getTranslationBoxName(translationBook: book);
@@ -80,11 +78,9 @@ class QuranTranslationFunction {
     return false;
   }
 
-  static Future<void> setToListAlreadyDownloaded(
-    TranslationBookModel book,
-  ) async {
+  static Future<void> setToListAlreadyDownloaded(ResourcesModel book) async {
     final userBox = Hive.box("user");
-    List<TranslationBookModel> downloadedList = getDownloadedTranslationBooks();
+    List<ResourcesModel> downloadedList = getDownloadedTranslationBooks();
 
     if (!downloadedList.any((b) => b.fullPath == book.fullPath)) {
       downloadedList.add(book);
@@ -95,21 +91,21 @@ class QuranTranslationFunction {
     }
   }
 
-  static List<TranslationBookModel> getDownloadedTranslationBooks() {
+  static List<ResourcesModel> getDownloadedTranslationBooks() {
     final userBox = Hive.box("user");
     List<dynamic> downloadedList = userBox.get(
       downloadedTranslationBooks,
       defaultValue: [],
     );
     return downloadedList
-        .map((e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)))
+        .map((e) => ResourcesModel.fromMap(Map<String, dynamic>.from(e)))
         .toList();
   }
 
   static Future<void> removeFromListAlreadyDownloaded(
-    TranslationBookModel bookToRemove,
+    ResourcesModel bookToRemove,
   ) async {
-    List<TranslationBookModel> downloaded = getDownloadedTranslationBooks();
+    List<ResourcesModel> downloaded = getDownloadedTranslationBooks();
     downloaded.removeWhere(
       (element) => element.fullPath == bookToRemove.fullPath,
     );
@@ -128,8 +124,7 @@ class QuranTranslationFunction {
       );
     }
 
-    List<TranslationBookModel>? selectedBefore =
-        await getTranslationSelections();
+    List<ResourcesModel>? selectedBefore = await getTranslationSelections();
     bool wasSelected =
         selectedBefore?.any((e) => e.fullPath == bookToRemove.fullPath) ??
         false;
@@ -137,8 +132,7 @@ class QuranTranslationFunction {
     await removeTranslationSelection(bookToRemove);
 
     if (wasSelected && downloaded.isNotEmpty) {
-      List<TranslationBookModel>? selectedAfter =
-          await getTranslationSelections();
+      List<ResourcesModel>? selectedAfter = await getTranslationSelections();
       if (selectedAfter == null || selectedAfter.isEmpty) {
         await setTranslationSelection(downloaded.first);
       }
@@ -150,10 +144,10 @@ class QuranTranslationFunction {
     );
   }
 
-  static Future<void> setTranslationSelection(TranslationBookModel book) async {
+  static Future<void> setTranslationSelection(ResourcesModel book) async {
     cacheOfAyahKeys.clear();
     final userBox = Hive.box("user");
-    List<TranslationBookModel> selectedTranslationList =
+    List<ResourcesModel> selectedTranslationList =
         (await getTranslationSelections()) ?? [];
 
     bool exists = selectedTranslationList.any(
@@ -169,12 +163,10 @@ class QuranTranslationFunction {
     await init();
   }
 
-  static Future<void> removeTranslationSelection(
-    TranslationBookModel book,
-  ) async {
+  static Future<void> removeTranslationSelection(ResourcesModel book) async {
     cacheOfAyahKeys.clear();
     final userBox = Hive.box("user");
-    List<TranslationBookModel> selectedTranslationList =
+    List<ResourcesModel> selectedTranslationList =
         (await getTranslationSelections()) ?? [];
     selectedTranslationList.removeWhere(
       (element) => element.fullPath == book.fullPath,
@@ -186,7 +178,7 @@ class QuranTranslationFunction {
     await init();
   }
 
-  static Future<List<TranslationBookModel>?> getTranslationSelections() async {
+  static Future<List<ResourcesModel>?> getTranslationSelections() async {
     final userBox = Hive.box("user");
     final Map<String, dynamic>? previousBookMap = userBox
         .get("selected_translation")
@@ -197,15 +189,15 @@ class QuranTranslationFunction {
     }
 
     List? booksList = userBox.get(selectedTranslationListKey);
-    List<TranslationBookModel>? bookListModel = booksList
-        ?.map((e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)))
+    List<ResourcesModel>? bookListModel = booksList
+        ?.map((e) => ResourcesModel.fromMap(Map<String, dynamic>.from(e)))
         .toList();
 
     return bookListModel;
   }
 
   static String getTranslationBoxName({
-    required TranslationBookModel translationBook,
+    required ResourcesModel translationBook,
   }) {
     // Using fileName for brevity if available and suitable, otherwise fallback to fullPath's last segment
     String sanitizedBookIdentifier =
@@ -218,7 +210,7 @@ class QuranTranslationFunction {
   }
 
   static Future<List<String>?> getSelectedTranslationBoxName() async {
-    List<TranslationBookModel>? translationSelectionList =
+    List<ResourcesModel>? translationSelectionList =
         await getTranslationSelections();
     if (translationSelectionList != null) {
       return translationSelectionList
@@ -230,10 +222,10 @@ class QuranTranslationFunction {
 
   static Future<bool> downloadResources({
     required BuildContext context,
-    required TranslationBookModel translationBook,
+    required ResourcesModel translationBook,
     bool isSetupProcess = false,
   }) async {
-    final cubit = context.read<ResourcesProgressCubit>();
+    final cubit = context.read<ResourcesProcceessCubit>();
     cubit.updateProgress(
       null,
       "Downloading Translation: ${translationBook.name}",
@@ -246,7 +238,7 @@ class QuranTranslationFunction {
       if (isSetupProcess) {
         await setTranslationSelection(translationBook);
       } else {
-        List<TranslationBookModel>? selectedTranslationBook =
+        List<ResourcesModel>? selectedTranslationBook =
             await getTranslationSelections();
         bool isSelected =
             selectedTranslationBook?.any(
@@ -424,10 +416,10 @@ class QuranTranslationFunction {
   static Future<List<TranslationOfAyah>> getTranslation(String ayahKey) async {
     final List<TranslationOfAyah> toReturn = [];
 
-    List<TranslationBookModel>? selectedBooks =
+    List<ResourcesModel>? selectedBooks =
         await getTranslationSelections() ?? [];
 
-    for (TranslationBookModel bookModel in selectedBooks) {
+    for (ResourcesModel bookModel in selectedBooks) {
       String boxName = getTranslationBoxName(translationBook: bookModel);
       LazyBox? translationBox;
       if (!Hive.isBoxOpen(boxName)) {
@@ -453,9 +445,9 @@ class QuranTranslationFunction {
 
   static Future<void> close() async {
     cacheOfAyahKeys.clear();
-    List<TranslationBookModel> selectedBooks = getDownloadedTranslationBooks();
+    List<ResourcesModel> selectedBooks = getDownloadedTranslationBooks();
     selectedBooks.addAll(await getTranslationSelections() ?? []);
-    for (TranslationBookModel bookModel in selectedBooks) {
+    for (ResourcesModel bookModel in selectedBooks) {
       String boxName = getTranslationBoxName(translationBook: bookModel);
       if (Hive.isBoxOpen(boxName)) {
         await Hive.lazyBox(boxName).close();

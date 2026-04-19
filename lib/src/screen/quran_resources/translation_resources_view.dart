@@ -1,9 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
@@ -21,11 +20,11 @@ class TranslationResourcesView extends StatefulWidget {
 }
 
 class _TranslationResourcesViewState extends State<TranslationResourcesView> {
-  List<TranslationBookModel> downloadedTranslation =
+  List<ResourcesModel> downloadedTranslation =
       QuranTranslationFunction.getDownloadedTranslationBooks();
-  List<TranslationBookModel?>? selectedResources;
+  List<ResourcesModel?>? selectedResources;
 
-  TranslationBookModel? downloadingData;
+  ResourcesModel? downloadingData;
 
   void _refreshData() async {
     selectedResources =
@@ -59,13 +58,14 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
                 padding: const EdgeInsets.only(top: 40),
                 child: Column(
                   children: List.generate(translationResources.length, (index) {
-                    String languageKey = translationResources.keys.elementAt(
-                      index,
-                    );
-                    List<TranslationBookModel> booksInLanguage =
+                    String languageKey = translationResources.keys
+                        .sorted()
+                        .elementAt(index);
+
+                    List<ResourcesModel> booksInLanguage =
                         translationResources[languageKey]
                             ?.map(
-                              (e) => TranslationBookModel.fromMap(
+                              (e) => ResourcesModel.fromMap(
                                 Map<String, dynamic>.from(e),
                               ),
                             )
@@ -78,19 +78,24 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
                       child: ExpansionTile(
                         key: PageStorageKey(languageKey),
                         title: Text(
-                          languageNativeNames[languageKey] ?? languageKey,
+                          booksInLanguage.first.languageNative,
 
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        subtitle: Text(
+                          booksInLanguage.first.language
+                              .replaceAll("_", " ")
+                              .capitalize(),
+                        ),
                         childrenPadding: const EdgeInsets.symmetric(
                           horizontal: 8.0,
                           vertical: 4.0,
                         ),
                         children: booksInLanguage.map((bookData) {
-                          TranslationBookModel? matchedResources =
+                          ResourcesModel? matchedResources =
                               downloadedTranslation.firstOrNullWhere(
                                 (element) =>
                                     element.fullPath == bookData.fullPath,
@@ -136,7 +141,7 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
 
   Widget _buildBookListTile(
     AppLocalizations appLocalizations,
-    TranslationBookModel translationBook,
+    ResourcesModel translationBook,
     bool isSelected,
     bool needDownload,
     bool isDownloading,

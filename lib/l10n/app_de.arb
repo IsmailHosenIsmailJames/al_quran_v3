@@ -354,5 +354,7 @@
   "goToPage": "Gehe zu Seite",
   "resources": "Ressourcen",
   "mushaf": "Mushaf",
-  "circleJojomInQuranScript": "Kreis Jojom/Sukun in der Koran-Schrift"
+  "circleJojomInQuranScript": "Kreis Jojom/Sukun in der Koran-Schrift",
+  "copy": "Kopieren",
+  "share": "Teilen"
 }

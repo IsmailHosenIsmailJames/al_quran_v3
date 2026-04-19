@@ -616,5 +616,7 @@
   "goToPage": "ذهاب إلى الصفحة",
   "resources": "الموارد",
   "mushaf": "مصحف",
-  "circleJojomInQuranScript": "دائرة جزم/سكون في خط القرآن"
+  "circleJojomInQuranScript": "دائرة جزم/سكون في خط القرآن",
+  "copy": "نسخ",
+  "share": "مشاركة"
 }

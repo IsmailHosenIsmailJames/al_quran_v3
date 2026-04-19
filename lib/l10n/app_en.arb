@@ -616,5 +616,7 @@
   "goToPage": "Go to Page",
   "resources": "Resources",
   "mushaf": "Mushaf",
-  "circleJojomInQuranScript": "Circle Jojom/Sukun in Quran Script"
+  "circleJojomInQuranScript": "Circle Jojom/Sukun in Quran Script",
+  "copy": "Copy",
+  "share": "Share"
 }

@@ -1194,4 +1194,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'دایره جزم/سکون در خط قرآن';
+
+  @override
+  String get copy => 'کپی';
+
+  @override
+  String get share => 'اشتراک‌گذاری';
 }

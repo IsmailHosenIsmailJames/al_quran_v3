@@ -3,6 +3,7 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
@@ -10,12 +11,6 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/quran_resources/language_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
-import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
@@ -43,67 +38,14 @@ class AppSetupPage extends StatefulWidget {
 }
 
 class _AppSetupPageState extends State<AppSetupPage> {
-  List<TafsirBookModel>? selectableTafsirBook;
-
-  String? appLanguage;
-  String? translationLanguageCode;
-  String? tafsirLanguageCode;
-
-  void changeAppLanguage(MyAppLocalization localeInfo) {
-    appLanguage = localeInfo.locale.languageCode;
-    String? languageName = codeToLanguageMap[appLanguage];
-    context.read<LanguageCubit>().changeLanguage(localeInfo);
-
-    if (translationResources.keys.contains(languageName)) {
-      translationLanguageCode = appLanguage;
-
-      context.read<ResourcesProgressCubit>().changeTranslationBook(
-        translationResources[codeToLanguageMap[translationLanguageCode]]
-            ?.map((e) => TranslationBookModel.fromMap(e))
-            .toList()
-            .first,
-      );
-    }
-
-    if (tafsirResources.keys.contains(languageName)) {
-      tafsirLanguageCode = appLanguage;
-      selectableTafsirBook =
-          tafsirResources[codeToLanguageMap[tafsirLanguageCode]]
-              ?.map((e) => TafsirBookModel.fromMap(e))
-              .toList() ??
-          [];
-      selectableTafsirBook?.sort((a, b) => b.score.compareTo(a.score));
-      if (selectableTafsirBook?.isNotEmpty == true) {
-        context.read<ResourcesProgressCubit>().changeTafsirBook(
-          selectableTafsirBook!.first,
-        );
-      }
-    }
-  }
-
-  void changeTranslationLanguage(String value) {
-    translationLanguageCode = value;
-    context.read<ResourcesProgressCubit>().changeTranslationBook(null);
-  }
-
-  void changeTafsirLanguage(String value) {
-    tafsirLanguageCode = value;
-    context.read<ResourcesProgressCubit>().changeTafsirBook(null);
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      selectableTafsirBook =
-          tafsirResources[codeToLanguageMap[tafsirLanguageCode]]
-              ?.map((e) => TafsirBookModel.fromMap(e))
-              .toList() ??
-          [];
-    });
-  }
-
   late ThemeState themeState = context.read<ThemeCubit>().state;
 
   @override
   void initState() {
-    changeAppLanguage(context.read<LanguageCubit>().state);
+    context.read<ResourcesProcceessCubit>().changeAppLanguage(
+      context,
+      context.read<LanguageCubit>().state,
+    );
 
     super.initState();
   }
@@ -189,7 +131,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                         groupValue: state,
                         onChanged: (value) {
                           if (value != null) {
-                            changeAppLanguage(value);
+                            context
+                                .read<ResourcesProcceessCubit>()
+                                .changeAppLanguage(context, value);
                           }
                         },
                         child: ListView.builder(
@@ -207,23 +151,29 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   children: [
                                     Text(appLoc.english),
                                     const Gap(7),
-                                    if (doesHaveFootNote(
-                                      appLoc.english.toLowerCase(),
-                                    ))
+                                    if (context
+                                        .read<ResourcesProcceessCubit>()
+                                        .doesHaveFootNote(
+                                          appLoc.locale.languageCode,
+                                        ))
                                       getFeaturesMark(
                                         context,
                                         appLocalizations.footnote,
                                       ),
-                                    if (doesHaveTafsirSupport(
-                                      appLoc.english.toLowerCase(),
-                                    ))
+                                    if (context
+                                        .read<ResourcesProcceessCubit>()
+                                        .doesHaveTafsirSupport(
+                                          appLoc.locale.languageCode,
+                                        ))
                                       getFeaturesMark(
                                         context,
                                         appLocalizations.tafsir,
                                       ),
-                                    if (doesHaveWordByWordTranslation(
-                                      appLoc.english.toLowerCase(),
-                                    ))
+                                    if (context
+                                        .read<ResourcesProcceessCubit>()
+                                        .doesHaveWordByWordTranslation(
+                                          appLoc.locale.languageCode,
+                                        ))
                                       getFeaturesMark(
                                         context,
                                         appLocalizations.wordByWord,
@@ -240,8 +190,8 @@ class _AppSetupPageState extends State<AppSetupPage> {
                 ),
 
                 BlocBuilder<
-                  ResourcesProgressCubit,
-                  ResourcesProgressCubitState
+                  ResourcesProcceessCubit,
+                  ResourcesProcceessCubitState
                 >(
                   builder: (context, state) => Container(
                     padding: const EdgeInsets.all(10),
@@ -291,9 +241,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   ),
                                   Text(
                                     context
-                                            .read<ResourcesProgressCubit>()
+                                            .read<ResourcesProcceessCubit>()
                                             .state
-                                            .translationBookModel
+                                            .selectedTranslationResources
                                             ?.name ??
                                         "",
                                     style: const TextStyle(fontSize: 16),
@@ -345,9 +295,9 @@ class _AppSetupPageState extends State<AppSetupPage> {
                                   ),
                                   Text(
                                     context
-                                            .read<ResourcesProgressCubit>()
+                                            .read<ResourcesProcceessCubit>()
                                             .state
-                                            .tafsirBookModel
+                                            .selectedTafsirResources
                                             ?.name ??
                                         "",
                                     style: const TextStyle(fontSize: 16),
@@ -392,7 +342,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                             child: ElevatedButton.icon(
                               onPressed: () {
                                 downloadResources(
-                                  context.read<ResourcesProgressCubit>().state,
+                                  context.read<ResourcesProcceessCubit>().state,
                                 );
                               },
                               icon: const Icon(
@@ -415,20 +365,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
   }
 
   Future<void> downloadResources(
-    ResourcesProgressCubitState processState,
+    ResourcesProcceessCubitState processState,
   ) async {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    if (translationLanguageCode == null ||
-        tafsirLanguageCode == null ||
-        processState.translationBookModel == null ||
-        processState.tafsirBookModel == null) {
+    final resourcesProcceessCubit = context.read<ResourcesProcceessCubit>();
+    if (processState.selectedTranslationResources == null ||
+        processState.selectableTafsirResources == null) {
       Fluttertoast.showToast(msg: appLocalizations.pleaseSelectRequiredOption);
       return;
     }
     final userBox = Hive.box("user");
-    await userBox.put("app_language", appLanguage);
+    await userBox.put("app_language", processState.appLanguageCode);
 
-    context.read<ResourcesProgressCubit>().onProcess();
+    resourcesProcceessCubit.onProcess();
 
     showDialog(
       barrierDismissible: false,
@@ -438,19 +387,19 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
     bool success1 = await QuranTranslationFunction.downloadResources(
       context: context,
-      translationBook: processState.translationBookModel!,
+      translationBook: processState.selectedTranslationResources!,
       isSetupProcess: true,
     );
     bool success2 = await QuranTafsirFunction.downloadResources(
       context: context,
-      tafsirBook: processState.tafsirBookModel!,
+      tafsirBook: processState.selectedTafsirResources!,
       isSetupProcess: true,
     );
-    String language = codeToLanguageMap[translationLanguageCode ?? ""] ?? "";
-    TranslationBookModel? supportedWbW = wordByWordTranslation.values
-        .map((e) => TranslationBookModel.fromMap(e))
-        .firstOrNullWhere(
-          (element) => element.language.toLowerCase() == language.toLowerCase(),
+    ResourcesModel? supportedWbW = resourcesProcceessCubit
+        .state
+        .allResources[processState.appLanguageCode]
+        ?.firstOrNullWhere(
+          (element) => element.type == ResourceType.word_by_word,
         );
     log(supportedWbW?.fullPath ?? "Null", name: "WBW Full Path");
     bool success3 = supportedWbW != null
@@ -478,11 +427,11 @@ class _AppSetupPageState extends State<AppSetupPage> {
       );
 
       // clear process state
-      context.read<ResourcesProgressCubit>().success();
+      context.read<ResourcesProcceessCubit>().success();
     } else {
       // error and show 'Something went wrong' in cubit
       log([success1, success2, success3, success4].toString());
-      context.read<ResourcesProgressCubit>().failure(
+      context.read<ResourcesProcceessCubit>().failure(
         appLocalizations.unableToDownloadResources,
       );
     }
@@ -500,7 +449,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
         child: Container(
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
-          child: BlocBuilder<ResourcesProgressCubit, ResourcesProgressCubitState>(
+          child: BlocBuilder<ResourcesProcceessCubit, ResourcesProcceessCubitState>(
             builder: (context, state) {
               if (state.onProcess == true) {
                 return Column(
@@ -545,7 +494,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                       onPressed: () {
                         Navigator.pop(context);
                         downloadResources(
-                          context.read<ResourcesProgressCubit>().state,
+                          context.read<ResourcesProcceessCubit>().state,
                         );
                       },
                       child: Text(appLocalizations.retry),
@@ -565,7 +514,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
     );
   }
 
-  double? getProgressValue(ResourcesProgressCubitState state) {
+  double? getProgressValue(ResourcesProcceessCubitState state) {
     try {
       double? value =
           (state.percentage == null ||
@@ -582,38 +531,6 @@ class _AppSetupPageState extends State<AppSetupPage> {
       return 0;
     }
   }
-}
-
-bool doesHaveFootNote(String language) {
-  bool doesHaveFootNote = false;
-  for (Map map in translationResources[language] ?? []) {
-    if (map["type"] == "translation-with-footnote-tags") {
-      doesHaveFootNote = true;
-      break;
-    }
-  }
-  return doesHaveFootNote;
-}
-
-bool doesHaveWordByWordTranslation(String language) {
-  bool doesHaveWordByWordTranslation = false;
-  wordByWordTranslation.forEach((lang, value) {
-    if (language == lang.toLowerCase()) {
-      doesHaveWordByWordTranslation = true;
-    }
-  });
-
-  return doesHaveWordByWordTranslation;
-}
-
-bool doesHaveTafsirSupport(String language) {
-  bool doesHaveTafsirSupport = false;
-  tafsirResources.forEach((key, value) {
-    if (language == key.toLowerCase()) {
-      doesHaveTafsirSupport = true;
-    }
-  });
-  return doesHaveTafsirSupport;
 }
 
 Widget getFeaturesMark(

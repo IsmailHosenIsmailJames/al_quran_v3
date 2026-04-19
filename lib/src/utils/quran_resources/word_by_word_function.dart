@@ -2,9 +2,7 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart"; // Correct import
-// Remove if wordByWordTranslation is no longer the primary source of truth after refactoring
-// import "package:al_quran_v3/src/resources/quran_resources/word_by_word_translation.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
@@ -21,11 +19,11 @@ class WordByWordFunction {
   static const String _userBoxKeyDownloaded = "downloaded_wbw_books";
   static const String _userBoxKeySelected = "selected_wbw_book";
 
-  static Future<void> init({TranslationBookModel? book}) async {
+  static Future<void> init({ResourcesModel? book}) async {
     if (!Hive.isBoxOpen("user")) {
       await Hive.openBox("user");
     }
-    TranslationBookModel? selectedBook = book ?? getSelectedWordByWordBook();
+    ResourcesModel? selectedBook = book ?? getSelectedWordByWordBook();
 
     log(
       "Selected WbW Book for init: ${selectedBook?.toMap()}",
@@ -34,7 +32,7 @@ class WordByWordFunction {
 
     if (selectedBook != null) {
       // Ensure it's a wordByWord type, though selection should ideally filter this
-      if (selectedBook.type != TranslationResourcesType.wordByWord) {
+      if (selectedBook.type != ResourceType.word_by_word) {
         log(
           "Book ${selectedBook.name} is not a wordByWord type. Clearing selection.",
           name: "WbWFunction.init",
@@ -65,33 +63,31 @@ class WordByWordFunction {
     }
   }
 
-  static String getWordByWordBoxName(TranslationBookModel book) {
+  static String getWordByWordBoxName(ResourcesModel book) {
     // Ensure it's a wordByWord type before proceeding (optional assertion)
-    // assert(book.type == TranslationResourcesType.wordByWord);
-    String sanitizedIdentifier = (book.fileName.isNotEmpty
-            ? book.fileName
-            : book.fullPath.split("/").last)
-        .replaceAll(RegExp(r"[^\w\.-]"), "_");
+    // assert(book.type == ResourceType.word_by_word);
+    String sanitizedIdentifier =
+        (book.fileName.isNotEmpty
+                ? book.fileName
+                : book.fullPath.split("/").last)
+            .replaceAll(RegExp(r"[^\w\.-]"), "_");
 
     return "wbw_${book.language}_$sanitizedIdentifier";
   }
 
-  static Future<bool> isBookDownloaded(TranslationBookModel book) async {
-    // assert(book.type == TranslationResourcesType.wordByWord);
+  static Future<bool> isBookDownloaded(ResourcesModel book) async {
+    // assert(book.type == ResourceType.word_by_word);
     final userBox = Hive.box("user");
     List<dynamic> downloadedList = userBox.get(
       _userBoxKeyDownloaded,
       defaultValue: [],
     );
-    List<TranslationBookModel> downloadedBooks =
-        downloadedList
-            .map(
-              (e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)),
-            )
-            .where((b) => b.type == TranslationResourcesType.wordByWord)
-            .toList();
+    List<ResourcesModel> downloadedBooks = downloadedList
+        .map((e) => ResourcesModel.fromMap(Map<String, dynamic>.from(e)))
+        .where((b) => b.type == ResourceType.word_by_word)
+        .toList();
 
-    for (TranslationBookModel downloadedBook in downloadedBooks) {
+    for (ResourcesModel downloadedBook in downloadedBooks) {
       if (downloadedBook.fullPath == book.fullPath &&
           downloadedBook.language == book.language) {
         final boxName = getWordByWordBoxName(book);
@@ -101,10 +97,10 @@ class WordByWordFunction {
     return false;
   }
 
-  static Future<void> setBookAsDownloaded(TranslationBookModel book) async {
-    // assert(book.type == TranslationResourcesType.wordByWord);
+  static Future<void> setBookAsDownloaded(ResourcesModel book) async {
+    // assert(book.type == ResourceType.word_by_word);
     final userBox = Hive.box("user");
-    List<TranslationBookModel> downloadedList = getDownloadedWordByWordBooks();
+    List<ResourcesModel> downloadedList = getDownloadedWordByWordBooks();
 
     if (!downloadedList.any((bMap) => bMap.fullPath == book.fullPath)) {
       downloadedList.add(book);
@@ -119,28 +115,27 @@ class WordByWordFunction {
     }
   }
 
-  static List<TranslationBookModel> getDownloadedWordByWordBooks() {
+  static List<ResourcesModel> getDownloadedWordByWordBooks() {
     final userBox = Hive.box("user");
     List<dynamic> downloadedList = userBox.get(
       _userBoxKeyDownloaded,
       defaultValue: [],
     );
     return downloadedList
-        .map((e) => TranslationBookModel.fromMap(Map<String, dynamic>.from(e)))
-        .where((b) => b.type == TranslationResourcesType.wordByWord)
+        .map((e) => ResourcesModel.fromMap(Map<String, dynamic>.from(e)))
+        .where((b) => b.type == ResourceType.word_by_word)
         .toList();
   }
 
-  // getLanguageInfo might be deprecated if all info now comes from TranslationBookModel
+  // getLanguageInfo might be deprecated if all info now comes from ResourcesModel
   // static Map<String, dynamic>? getLanguageInfo(String languageKey) { ... }
 
   static Future<void> removeBookFromDownloaded(
-    TranslationBookModel bookToRemove,
+    ResourcesModel bookToRemove,
   ) async {
-    // assert(bookToRemove.type == TranslationResourcesType.wordByWord);
+    // assert(bookToRemove.type == ResourceType.word_by_word);
 
-    List<TranslationBookModel> downloadedMapList =
-        getDownloadedWordByWordBooks();
+    List<ResourcesModel> downloadedMapList = getDownloadedWordByWordBooks();
 
     downloadedMapList.removeWhere(
       (bMap) => bMap.fullPath == bookToRemove.fullPath,
@@ -169,10 +164,8 @@ class WordByWordFunction {
     }
   }
 
-  static Future<void> setSelectedWordByWordBook(
-    TranslationBookModel book,
-  ) async {
-    if (book.type != TranslationResourcesType.wordByWord) {
+  static Future<void> setSelectedWordByWordBook(ResourcesModel book) async {
+    if (book.type != ResourceType.word_by_word) {
       log(
         "Cannot select non-wbw book '${book.name}' as WbW.",
         name: "WbWFunction.setSelectedWordByWordBook",
@@ -188,14 +181,15 @@ class WordByWordFunction {
     await init(book: book);
   }
 
-  static TranslationBookModel? getSelectedWordByWordBook() {
+  static ResourcesModel? getSelectedWordByWordBook() {
     final userBox = Hive.box("user");
-    final Map<String, dynamic>? bookMap =
-        userBox.get(_userBoxKeySelected)?.cast<String, dynamic>();
+    final Map<String, dynamic>? bookMap = userBox
+        .get(_userBoxKeySelected)
+        ?.cast<String, dynamic>();
     if (bookMap != null) {
-      final book = TranslationBookModel.fromMap(bookMap);
+      final book = ResourcesModel.fromMap(bookMap);
       // Ensure it is indeed a wordByWord type
-      if (book.type == TranslationResourcesType.wordByWord) return book;
+      if (book.type == ResourceType.word_by_word) return book;
       // If not, it's an invalid selection, log and return null (or clear it)
       log(
         "Selected WbW book is not of type wordByWord. Invalid selection.",
@@ -219,10 +213,10 @@ class WordByWordFunction {
 
   static Future<bool> downloadResource({
     required BuildContext context,
-    required TranslationBookModel book, // Now takes the full model
+    required ResourcesModel book,
     bool isSetupProcess = false,
   }) async {
-    if (book.type != TranslationResourcesType.wordByWord) {
+    if (book.type != ResourceType.word_by_word) {
       log(
         "Download requested for non-WbW book: ${book.name}",
         name: "WbWFunction.downloadResource",
@@ -231,7 +225,7 @@ class WordByWordFunction {
       return false;
     }
 
-    final cubit = context.read<ResourcesProgressCubit>();
+    final cubit = context.read<ResourcesProcceessCubit>();
     cubit.updateProgress(null, "Downloading WbW: ${book.name}");
 
     if (await isBookDownloaded(book)) {
@@ -325,7 +319,7 @@ class WordByWordFunction {
       }
 
       await newBox.put("meta_data", {
-        ...book.toMap(), // Store all info from the TranslationBookModel
+        ...book.toMap(), // Store all info from the ResourcesModel
         "download_date": DateTime.now().toIso8601String(),
       });
 

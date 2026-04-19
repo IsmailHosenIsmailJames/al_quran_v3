@@ -1178,4 +1178,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get circleJojomInQuranScript => 'コーラン文字の円形スクーン';
+
+  @override
+  String get copy => 'コピー';
+
+  @override
+  String get share => '共有';
 }

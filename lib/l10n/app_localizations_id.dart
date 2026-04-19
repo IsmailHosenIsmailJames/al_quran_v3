@@ -1193,4 +1193,10 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get circleJojomInQuranScript =>
       'Lingkaran Jojom/Sukun dalam Skrip Quran';
+
+  @override
+  String get copy => 'Salin';
+
+  @override
+  String get share => 'Bagikan';
 }

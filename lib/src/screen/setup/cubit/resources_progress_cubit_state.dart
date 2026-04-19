@@ -1,42 +1,62 @@
-import "package:al_quran_v3/src/resources/quran_resources/models/tafsir_book_model.dart";
-import "package:al_quran_v3/src/resources/quran_resources/models/translation_book_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
 
-class ResourcesProgressCubitState {
+class ResourcesProcceessCubitState {
+  String? appLanguageCode;
   double? percentage;
   String? processName;
   bool? onProcess;
   bool? isSuccess;
   String? errorMessage;
-  TranslationBookModel? translationBookModel;
-  TafsirBookModel? tafsirBookModel;
+  // Map of language code and resources list
+  final Map<String, List<ResourcesModel>> allResources;
+  List<ResourcesModel>? selectableTranslationResources;
+  List<ResourcesModel>? selectableTafsirResources;
+  ResourcesModel? selectedTafsirResources;
+  ResourcesModel? selectedTranslationResources;
 
-  ResourcesProgressCubitState({
+  ResourcesProcceessCubitState({
+    this.appLanguageCode,
     this.percentage,
     this.processName,
     this.onProcess,
     this.isSuccess,
     this.errorMessage,
-    this.translationBookModel,
-    this.tafsirBookModel,
+    required this.allResources,
+    this.selectableTranslationResources,
+    this.selectableTafsirResources,
+    this.selectedTafsirResources,
+    this.selectedTranslationResources,
   });
 
-  ResourcesProgressCubitState copyWith({
+  ResourcesProcceessCubitState copyWith({
+    String? appLanguageCode,
     double? percentage,
     String? processName,
     bool? onProcess,
     bool? isSuccess,
     String? errorMessage,
-    TranslationBookModel? translationBookModel,
-    TafsirBookModel? tafsirBookModel,
+    Map<String, List<ResourcesModel>>? allResources,
+    List<ResourcesModel>? selectableTranslationResources,
+    List<ResourcesModel>? selectableTafsirResources,
+    ResourcesModel? selectedTafsirResources,
+    ResourcesModel? selectedTranslationResources,
   }) {
-    return ResourcesProgressCubitState(
+    return ResourcesProcceessCubitState(
+      appLanguageCode: appLanguageCode ?? this.appLanguageCode,
       percentage: percentage ?? this.percentage,
       processName: processName ?? this.processName,
       onProcess: onProcess ?? this.onProcess,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage ?? this.errorMessage,
-      translationBookModel: translationBookModel ?? this.translationBookModel,
-      tafsirBookModel: tafsirBookModel ?? this.tafsirBookModel,
+      allResources: allResources ?? this.allResources,
+      selectedTafsirResources:
+          selectedTafsirResources ?? this.selectedTafsirResources,
+      selectedTranslationResources:
+          selectedTranslationResources ?? this.selectedTranslationResources,
+      selectableTranslationResources:
+          selectableTranslationResources ?? this.selectableTranslationResources,
+      selectableTafsirResources:
+          selectableTafsirResources ?? this.selectableTafsirResources,
     );
   }
 }
