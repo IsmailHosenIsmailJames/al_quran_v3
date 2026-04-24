@@ -69,7 +69,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
           playbackSpeed: Hive.box(
             "user",
           ).get("playback_speed", defaultValue: 1.0),
-          useTajweed: Hive.box("user").get("useTajweed", defaultValue: true),
+          useTajweed: Hive.box("user").get("useTajweed", defaultValue: false),
         ),
       ) {
     if (Hive.box("user").get("selected_quran_script_type") == "tajweed") {

@@ -696,8 +696,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                       },
                       builder: (context, quranViewState) {
                         final quranViewCubit = context.read<QuranViewCubit>();
-                        TextStyle baseTextStyle = const TextStyle(fontSize: 24);
-                        baseTextStyle = baseTextStyle.copyWith(
+                        TextStyle baseTextStyle = TextStyle(
+                          fontSize: quranViewState.fontSize,
+                          height: quranViewState.lineHeight,
                           fontFamily:
                               quranViewState.quranScriptType ==
                                   QuranScriptType.uthmani
