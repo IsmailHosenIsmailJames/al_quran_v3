@@ -15,19 +15,19 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
 
-class NonTajweedPageRenderer extends StatelessWidget {
+class QuranPagesRenderer extends StatelessWidget {
   final bool isUthmani;
   final List<String> ayahsKey;
-  final TextStyle? baseTextStyle;
-  final bool? enableWordByWordHighlight;
+  final TextStyle baseTextStyle;
+  final bool enableWordByWordHighlight;
   final bool tajweedColorEnable;
 
-  const NonTajweedPageRenderer({
+  const QuranPagesRenderer({
     super.key,
     required this.ayahsKey,
-    this.baseTextStyle,
+    required this.baseTextStyle,
     required this.isUthmani,
-    this.enableWordByWordHighlight,
+    required this.enableWordByWordHighlight,
     required this.tajweedColorEnable,
   });
 
@@ -124,10 +124,10 @@ class NonTajweedPageRenderer extends StatelessWidget {
                         return parseTajweedWord(
                           wordIndex: index,
                           baseStyle: TextStyle(
-                            fontSize: baseTextStyle?.fontSize ?? 24,
+                            fontSize: baseTextStyle.fontSize ?? 24,
                             fontFamily:
-                                baseTextStyle?.fontFamily ?? "AlQuranNeov5x1",
-                            height: baseTextStyle?.height,
+                                baseTextStyle.fontFamily ?? "AlQuranNeov5x1",
+                            height: baseTextStyle.height,
                             backgroundColor:
                                 (highlightingWord == "$ayahKey:${index + 1}" &&
                                     enableWordByWordHighlight == true)
@@ -146,17 +146,17 @@ class NonTajweedPageRenderer extends StatelessWidget {
                   }).toList(),
                 ),
                 style: TextStyle(
-                  fontSize: baseTextStyle?.fontSize ?? 24,
+                  fontSize: baseTextStyle.fontSize ?? 24,
                   fontFamily:
-                      baseTextStyle?.fontFamily ??
+                      baseTextStyle.fontFamily ??
                       (isUthmani
                           ? context.read<QuranViewCubit>().state.uthmaniFontName
                           : context
                                 .read<QuranViewCubit>()
                                 .state
                                 .indopakFontName),
-                  fontWeight: baseTextStyle?.fontWeight,
-                  height: baseTextStyle?.height,
+                  fontWeight: baseTextStyle.fontWeight,
+                  height: baseTextStyle.height,
                   letterSpacing: 0,
                 ),
                 textAlign: TextAlign.right,
