@@ -83,6 +83,34 @@ TextSpan parseTajweedWord({
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
   bool isLastWord = wordIndex == words.length - 1;
 
+  if (!tajweedColorEnable) {
+    return TextSpan(
+      text: "${getPlainTextAyahFromTajweedWords([words[wordIndex]])} ",
+      style: processingStyle.copyWith(
+        fontFamily: isLastWord ? "QPC_Hafs" : null,
+      ),
+      recognizer: skipWordTap == true
+          ? null
+          : (TapGestureRecognizer()
+              ..onTap = () async {
+                List<String> wordsKey = List.generate(
+                  words.length,
+                  (index) => "$surahNumber:$ayahNumber:${index + 1}",
+                );
+                showPopupWordFunction(
+                  context: context,
+                  wordKeys: wordsKey,
+                  initWordIndex: wordIndex,
+                  wordByWordList:
+                      await WordByWordFunction.getAyahWordByWordData(
+                        "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                      ) ??
+                      [],
+                );
+              }),
+    );
+  }
+
   void processNode(dom.Node node, Color currentColor) {
     if (node.nodeType == dom.Node.TEXT_NODE) {
       spans.add(
@@ -167,5 +195,32 @@ String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
     plainWords.add(textContent);
   }
 
-  return plainWords.join(" ").trim();
+  String planeText = plainWords.join(" ").trim();
+  log(planeText, name: "getPlainTextAyahFromTajweedWords After: ");
+  return planeText;
 }
+
+// [getPlainTextAyahFromTajweedWords Before: ] [
+//  "وَاِذِ",
+//   "<rule class=ham_wasl>ا</rule>عْتَزَلْـتُمُوْهُمْ",
+//   "وَمَا",
+//   "يَعْبُدُوْنَ",
+//   "اِلَّا",
+//   "<rule class=ham_wasl>ا</rule>للّٰهَ",
+//   "فَاْوٗۤ<rule class=madda_obligatory_monfasel>ا</rule>",
+//   "اِلَى",
+//   "<rule class=ham_wasl>ا</rule>لْـكَهْفِ",
+//   "يَ<rule class=ikhafa>نْش</rule>ُرْ",
+//   "لَـكُمْ",
+//   "رَبُّكُ<rule class=idgham_shafawi>م</rule>ْ",
+//   "<rule class=idgham_shafawi>م</rule>ِّ<rule class=idgham_wo_ghunnah>ن</rule>ْ",
+//   "<rule class=idgham_wo_ghunnah>ر</rule>َّحْمَتِه<rule class=madda_normal>ٖ</rule>",
+//   "وَيُهَيِّئْ",
+//   "لَـكُ<rule class=idgham_shafawi>م</rule>ْ",
+//   "<rule class=idgham_shafawi>م</rule>ِّنْ",
+//   "اَمْرِكُ<rule class=idgham_shafawi>م</rule>ْ",
+//   "<rule class=idgham_shafawi>م</rule>ِّرْفَقًا‏",
+//   "١٦"
+//  ]
+
+// [getPlainTextAyahFromTajweedWords After: ] وَاِذِ اعْتَزَلْـتُمُوْهُمْ وَمَا يَعْبُدُوْنَ اِلَّا اللّٰهَ فَاْوٗۤا اِلَى الْـكَهْفِ يَنْشُرْ لَـكُمْ رَبُّكُمْ مِّنْ رَّحْمَتِهٖ وَيُهَيِّئْ لَـكُمْ مِّنْ اَمْرِكُمْ مِّرْفَقًا‏ ١٦
