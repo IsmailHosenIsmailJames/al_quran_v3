@@ -1201,4 +1201,23 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get share => 'Paylaş';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Bazı yazı tiplerinde Indopak tecvid renginde bazı oluşturma sorunları bulduk. Bu nedenle, betik renk oluşturmada tutarsızlık görebilirsiniz. Indopak\'ta tecvid uygulamak istediğinizden emin misiniz?';
+
+  @override
+  String get apply => 'Uygula';
+
+  @override
+  String get warning => 'Uyarı';
+
+  @override
+  String get hijri => 'Hicri';
+
+  @override
+  String get gregorian => 'Miladi';
+
+  @override
+  String get prayerTimesCalender => 'Namaz Vakitleri Takvimi';
 }

@@ -1184,4 +1184,23 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get share => '共有';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      '一部のフォントでインドパクのタジュウィードの色に描画の問題が見つかりました。そのため、スクリプトの色の描画に不整合が見られる可能性があります。本当にインドパクにタジュウィードを適用しますか？';
+
+  @override
+  String get apply => '適用';
+
+  @override
+  String get warning => '警告';
+
+  @override
+  String get hijri => 'ヒジュラ暦';
+
+  @override
+  String get gregorian => 'グレゴリオ暦';
+
+  @override
+  String get prayerTimesCalender => '礼拝時間カレンダー';
 }

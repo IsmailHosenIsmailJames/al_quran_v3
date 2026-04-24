@@ -436,7 +436,11 @@ SizedBox getAyahWordByWord(
                                 height: quranViewState.lineHeight,
                               ),
                             ),
-                            tajweedColorEnable: quranViewState.useTajweed,
+                            tajweedColorEnable:
+                                quranViewState.quranScriptType ==
+                                    QuranScriptType.uthmani
+                                ? quranViewState.useTajweedOnUthmani
+                                : quranViewState.useTajweedOnIndopak,
                             themeState: themeState,
                           );
                         },
@@ -656,7 +660,10 @@ Align quranAyahWidget(
           height: quranViewState.lineHeight,
         ),
       ),
-      tajweedColorEnable: quranViewState.useTajweed,
+      tajweedColorEnable:
+          quranViewState.quranScriptType == QuranScriptType.uthmani
+          ? quranViewState.useTajweedOnUthmani
+          : quranViewState.useTajweedOnIndopak,
       themeState: themeState,
     ),
   );

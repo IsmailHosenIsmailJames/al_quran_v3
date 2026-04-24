@@ -2,41 +2,14 @@ import json
 import os
 
 translations = {
-   
-    "close": {
-        "ar": "إغلاق", "az": "Bağla", "bn": "বন্ধ করুন", "de": "Schließen", "es": "Cerrar", "fa": "بستن", "fr": "Fermer", "hi": "बंद करें", "id": "Tutup", "it": "Chiudi", "ja": "閉じる", "kk": "Жабу", "ko": "닫기", "ms": "Tutup", "pa": "ਬੰਦ ਕਰੋ", "ps": "بندول", "pt": "Fechar", "ru": "Закрыть", "sw": "Funga", "ta": "மூடு", "tr": "Kapat", "ur": "بند کریں", "vi": "Đóng", "zh": "关闭"
+    "hijri": {
+        "ar": "هجري", "az": "Hicri", "bn": "হিজরি", "de": "Hidschri", "es": "Hégira", "fa": "هجری", "fr": "Hégirien", "hi": "हिजरी", "id": "Hijriah", "it": "Egira", "ja": "ヒジュラ暦", "kk": "Хижра", "ko": "히즈라", "ms": "Hijrah", "pa": "ਹਿਜਰੀ", "ps": "هجري", "pt": "Hégira", "ru": "Хиджра", "sw": "Hijria", "ta": "ஹிஜ்ரி", "tr": "Hicri", "ur": "ہجری", "vi": "Hijri", "zh": "回历"
     },
-    "circleJojomInQuranScript": {
-        "ar": "دائرة جزم/سكون في خط القرآن",
-        "az": "Quran skriptində dairəvi cəzm/sükun",
-        "bn": "কুরআন স্ক্রিপ্টে বৃত্তাকার জজম/সুকুন",
-        "de": "Kreis Jojom/Sukun in der Koran-Schrift",
-        "es": "Círculo Jojom/Sukun en la escritura del Corán",
-        "fa": "دایره جزم/سکون در خط قرآن",
-        "fr": "Cercle Jojom/Sukun dans l'écriture du Coran",
-        "hi": "कुरान लिपि में गोल जज़्म/सुकून",
-        "id": "Lingkaran Jojom/Sukun dalam Skrip Quran",
-        "it": "Cerchio Jojom/Sukun nella scrittura del Corano",
-        "ja": "コーラン文字の円形スクーン",
-        "kk": "Құран жазуындағы дөңгелек жәзм/сукун",
-        "ko": "꾸란 스크립트의 원형 수쿤",
-        "ms": "Bulatan Jojom/Sukun dalam Skrip Quran",
-        "pa": "ਕੁਰਾਨ ਸਕ੍ਰਿਪਟ ਵਿੱਚ ਗੋਲ ਜਜ਼ਮ/ਸੁਕੂਨ",
-        "ps": "په قرآني رسم الخط کې د جزم/سکون دائره",
-        "pt": "Círculo Jojom/Sukun na escrita do Alcorão",
-        "ru": "Круглый джазм/сукун в кораническом письме",
-        "sw": "Duara la Jojom/Sukun katika Maandishi ya Quran",
-        "ta": "குர்ஆன் எழுத்தில் வட்ட ஜஜம்/சுகூன்",
-        "tr": "Kur'an Hattında Yuvarlak Cezm/Sükun",
-        "ur": "قرآن اسکرپٹ میں جزم/سکون کا دائرہ",
-        "vi": "Vòng tròn Jojom/Sukun dalam văn bản Quran",
-        "zh": "古兰经手稿中的圆形静符"
+    "gregorian": {
+        "ar": "ميلادي", "az": "Qriqorian", "bn": "গ্রেগরিয়ান", "de": "Gregorianisch", "es": "Gregoriano", "fa": "میلادی", "fr": "Grégorien", "hi": "ग्रेगोरियन", "id": "Masehi", "it": "Gregoriano", "ja": "グレゴリオ暦", "kk": "Григориан", "ko": "그레고리력", "ms": "Masihi", "pa": "ਗ੍ਰੈਗੋਰੀਅਨ", "ps": "ګریګورین", "pt": "Gregoriano", "ru": "Григорианский", "sw": "Gregori", "ta": "கிரிகோரியன்", "tr": "Miladi", "ur": "عیسوی", "vi": "Dương lịch", "zh": "公历"
     },
-    "copy": {
-        "ar": "نسخ", "az": "Kopyala", "bn": "কপি", "de": "Kopieren", "es": "Copiar", "fa": "کپی", "fr": "Copier", "hi": "कॉपी करें", "id": "Salin", "it": "Copia", "ja": "コピー", "kk": "Көшіру", "ko": "복사", "ms": "Salin", "pa": "ਕਾਪੀ ਕਰੋ", "ps": "کاپي", "pt": "Copiar", "ru": "Копировать", "sw": "Nakili", "ta": "நகலெடு", "tr": "Kopyala", "ur": "کاپی", "vi": "Sao chép", "zh": "复制"
-    },
-    "share": {
-        "ar": "مشاركة", "az": "Paylaş", "bn": "শেয়ার", "de": "Teilen", "es": "Compartir", "fa": "اشتراک‌گذاری", "fr": "Partager", "hi": "साझा करें", "id": "Bagikan", "it": "Condividi", "ja": "共有", "kk": "Бөлісу", "ko": "공유", "ms": "Kongsi", "pa": "ਸਾਂਝਾ ਕਰੋ", "ps": "شریکول", "pt": "Compartilhar", "ru": "Поделиться", "sw": "Shiriki", "ta": "பகிர்க", "tr": "Paylaş", "ur": "شیئر", "vi": "Chia sẻ", "zh": "分享"
+    "prayerTimesCalender": {
+        "ar": "تقويم أوقات الصلاة", "az": "Namaz Vaxtları Təqvimi", "bn": "নামাজের সময়সূচী ক্যালেন্ডার", "de": "Gebetszeitenkalender", "es": "Calendario de Tiempos de Oración", "fa": "تقویم اوقات شرعی", "fr": "Calendrier des heures de prière", "hi": "प्रार्थना के समय का कैलेंडर", "id": "Kalender Waktu Salat", "it": "Calendario dei tempi di preghiera", "ja": "礼拝時間カレンダー", "kk": "Намаз уақыттарының күнтізбесі", "ko": "기도 시간 달력", "ms": "Kalendar Waktu Solat", "pa": "ਪ੍ਰਾਰਥਨਾ ਦੇ ਸਮੇਂ ਦਾ ਕੈਲੰਡਰ", "ps": "د لمانځه وختونو کیلنڈر", "pt": "Calendário de Horários de Oração", "ru": "Календарь времени молитв", "sw": "Kalenda ya Nyakati za Swala", "ta": "தொழுகை நேரங்கள் நாட்காட்டி", "tr": "Namaz Vakitleri Takvimi", "ur": "نماز کے اوقات کا کیلنڈر", "vi": "Lịch Thời gian Cầu nguyện", "zh": "祈祷时间日历"
     }
 }
 

@@ -394,10 +394,10 @@ class _AudioPageState extends State<AudioPage> {
                     showWordHighlights: false,
                   ),
                   themeState: context.read<ThemeCubit>().state,
-                  tajweedColorEnable: context
-                      .read<QuranViewCubit>()
-                      .state
-                      .useTajweed,
+                  tajweedColorEnable:
+                      state.quranScriptType == QuranScriptType.uthmani
+                      ? state.useTajweedOnUthmani
+                      : state.useTajweedOnIndopak,
                 );
               },
             ),

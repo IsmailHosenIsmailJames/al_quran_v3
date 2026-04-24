@@ -52,12 +52,13 @@ void showShareBottomDialog(
   SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
     metaDataSurah[ayahKey.split(":").first]!,
   );
+  final quranViewState = context.read<QuranViewCubit>().state;
 
   List quranScriptWord = QuranScriptFunction.getWordListOfAyah(
-    context.read<QuranViewCubit>().state.quranScriptType,
+    quranViewState.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
-    circleJojom: context.read<QuranViewCubit>().state.circleJojom,
+    circleJojom: quranViewState.circleJojom,
   );
 
   ButtonStyle textButtonStyle = TextButton.styleFrom(
@@ -68,6 +69,7 @@ void showShareBottomDialog(
   Color color = Theme.brightnessOf(context) == Brightness.dark
       ? Colors.grey.shade100
       : Colors.grey.shade800;
+
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
@@ -166,14 +168,14 @@ void showShareBottomDialog(
               style: textButtonStyle,
               onPressed: () async {
                 TextStyle scriptTextStyle = TextStyle(
-                  fontSize: context.read<QuranViewCubit>().state.fontSize,
-                  height: context.read<QuranViewCubit>().state.lineHeight,
+                  fontSize: quranViewState.fontSize,
+                  height: quranViewState.lineHeight,
                 );
                 Brightness brightness = Theme.brightnessOf(context);
-                bool useTajweed = context
-                    .read<QuranViewCubit>()
-                    .state
-                    .useTajweed;
+                bool useTajweed =
+                    quranViewState.quranScriptType == QuranScriptType.uthmani
+                    ? quranViewState.useTajweedOnUthmani
+                    : quranViewState.useTajweedOnIndopak;
                 final imageBinary = await screenshotController
                     .captureFromLongWidget(
                       InheritedTheme.captureAll(

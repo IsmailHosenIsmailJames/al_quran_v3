@@ -1206,4 +1206,23 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get share => 'Paylaş';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Bəzi şriftlərdə İndopak təcvid rəngi üzərində bəzi göstərmə problemləri tapdıq. Buna görə, skript rənginin göstərilməsində uyğunsuzluq görə bilərsiniz. İndopak üzərində təcvid tətbiq etmək istədiyinizə əminsiniz?';
+
+  @override
+  String get apply => 'Tətbiq et';
+
+  @override
+  String get warning => 'Xəbərdarlıq';
+
+  @override
+  String get hijri => 'Hicri';
+
+  @override
+  String get gregorian => 'Qriqorian';
+
+  @override
+  String get prayerTimesCalender => 'Namaz Vaxtları Təqvimi';
 }

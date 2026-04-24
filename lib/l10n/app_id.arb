@@ -618,5 +618,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Lingkaran Jojom/Sukun dalam Skrip Quran",
   "copy": "Salin",
-  "share": "Bagikan"
+  "share": "Bagikan",
+  "warning": "Peringatan",
+  "apply": "Terapkan",
+  "warningMessageOnIndopakTajweedEnable": "Kami menemukan beberapa masalah rendering pada warna tajwid Indopak di beberapa font. Jadi, Anda mungkin melihat ketidakkonsistenan pada rendering warna skrip. Apakah Anda yakin ingin menerapkan tajwid pada Indopak?",
+  "hijri": "Hijriah",
+  "gregorian": "Masehi",
+  "prayerTimesCalender": "Kalender Waktu Salat"
 }

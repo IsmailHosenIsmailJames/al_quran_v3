@@ -1200,4 +1200,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get share => 'Share';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'We found some rendering issues on indopak tajweed color on some fonts. So, you could see inconsistency over script color rendering. Are you sure you want to apply tajweed on indopak?';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get hijri => 'Hijri';
+
+  @override
+  String get gregorian => 'Gregorian';
+
+  @override
+  String get prayerTimesCalender => 'Prayer Times Calender';
 }

@@ -618,5 +618,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Cercle Jojom/Sukun dans l'écriture du Coran",
   "copy": "Copier",
-  "share": "Partager"
+  "share": "Partager",
+  "warning": "Avertissement",
+  "apply": "Appliquer",
+  "warningMessageOnIndopakTajweedEnable": "Nous avons trouvé des problèmes de rendu sur la couleur du tajweed Indopak sur certaines polices. Vous pourriez donc voir des incohérences sur le rendu des couleurs du script. Êtes-vous sûr de vouloir appliquer le tajweed sur l'Indopak ?",
+  "hijri": "Hégirien",
+  "gregorian": "Grégorien",
+  "prayerTimesCalender": "Calendrier des heures de prière"
 }

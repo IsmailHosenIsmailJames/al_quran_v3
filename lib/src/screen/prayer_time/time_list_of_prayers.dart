@@ -804,7 +804,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         ),
         const Spacer(),
         Text(
-          TimeOfDay.fromDateTime(time.toLocal()).format(context),
+          DateFormat.jm(
+            AppLocalizations.of(context).localeName,
+          ).format(time.toLocal()),
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const Gap(12),

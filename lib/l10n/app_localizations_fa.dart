@@ -1200,4 +1200,23 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get share => 'اشتراک‌گذاری';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'ما در رنگ تجوید ایندوپاک در برخی فونت‌ها مشکلات نمایش پیدا کرده‌ایم. بنابراین، ممکن است در نمایش رنگ متن ناهماهنگی‌هایی مشاهده کنید. آیا مطمئن هستید که می‌خواهید تجوید را بر روی ایندوپاک اعمال کنید؟';
+
+  @override
+  String get apply => 'اعمال';
+
+  @override
+  String get warning => 'هشدار';
+
+  @override
+  String get hijri => 'هجری';
+
+  @override
+  String get gregorian => 'میلادی';
+
+  @override
+  String get prayerTimesCalender => 'تقویم اوقات شرعی';
 }

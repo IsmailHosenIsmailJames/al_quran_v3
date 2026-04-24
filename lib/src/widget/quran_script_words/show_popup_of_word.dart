@@ -128,10 +128,15 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                       skipWordTap: true,
                     ),
                     themeState: context.read<ThemeCubit>().state,
-                    tajweedColorEnable: context
-                        .read<QuranViewCubit>()
-                        .state
-                        .useTajweed,
+                    tajweedColorEnable: scriptType == QuranScriptType.uthmani
+                        ? context
+                              .read<QuranViewCubit>()
+                              .state
+                              .useTajweedOnUthmani
+                        : context
+                              .read<QuranViewCubit>()
+                              .state
+                              .useTajweedOnIndopak,
                   ),
                   const Gap(10),
                   if (supportsWordByWord)

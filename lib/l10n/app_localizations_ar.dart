@@ -1199,4 +1199,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get share => 'مشاركة';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'لقد وجدنا بعض مشاكل العرض في لون التجويد الهندي الباكستاني في بعض الخطوط. لذلك، قد ترى عدم تناسق في عرض ألوان النص. هل أنت متأكد من أنك تريد تطبيق التجويد على الهندي الباكستاني؟';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get warning => 'تحذير';
+
+  @override
+  String get hijri => 'هجري';
+
+  @override
+  String get gregorian => 'ميلادي';
+
+  @override
+  String get prayerTimesCalender => 'تقويم أوقات الصلاة';
 }

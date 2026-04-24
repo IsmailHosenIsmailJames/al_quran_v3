@@ -1209,4 +1209,23 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get share => 'Поделиться';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Мы обнаружили некоторые проблемы с отображением цвета таджвида индопак на некоторых шрифтах. Поэтому вы можете увидеть несоответствия в отображении цвета скрипта. Вы уверены, что хотите применить таджвид к индопак?';
+
+  @override
+  String get apply => 'Применить';
+
+  @override
+  String get warning => 'Предупреждение';
+
+  @override
+  String get hijri => 'Хиджра';
+
+  @override
+  String get gregorian => 'Григорианский';
+
+  @override
+  String get prayerTimesCalender => 'Календарь времени молитв';
 }

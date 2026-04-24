@@ -1202,4 +1202,23 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get share => 'شیئر';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'ہمیں کچھ فونٹس پر انڈوپاک تجوید کے رنگ میں کچھ رینڈرنگ کے مسائل ملے ہیں۔ لہذا، آپ اسکرپٹ کے رنگ کی رینڈرنگ میں عدم تسلسل دیکھ سکتے ہیں۔ کیا آپ واقعی انڈوپاک پر تجوید لاگو کرنا چاہتے ہیں؟';
+
+  @override
+  String get apply => 'لاگو کریں';
+
+  @override
+  String get warning => 'انتباہ';
+
+  @override
+  String get hijri => 'ہجری';
+
+  @override
+  String get gregorian => 'عیسوی';
+
+  @override
+  String get prayerTimesCalender => 'نماز کے اوقات کا کیلنڈر';
 }

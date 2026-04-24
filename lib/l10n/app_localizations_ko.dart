@@ -1183,4 +1183,23 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get share => '공유';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      '일부 글꼴에서 인도팍 타즈위드 색상 렌더링에 몇 가지 문제가 발견되었습니다. 따라서 스크립트 색상 렌더링에 불일치가 나타날 수 있습니다. 인도팍에 타즈위드를 적용하시겠습니까?';
+
+  @override
+  String get apply => '적용';
+
+  @override
+  String get warning => '경고';
+
+  @override
+  String get hijri => '히즈라';
+
+  @override
+  String get gregorian => '그레고리력';
+
+  @override
+  String get prayerTimesCalender => '기도 시간 달력';
 }

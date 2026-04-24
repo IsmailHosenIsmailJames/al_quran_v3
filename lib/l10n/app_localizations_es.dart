@@ -1212,4 +1212,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get share => 'Compartir';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Hemos encontrado algunos problemas de renderizado en el color del tajweed Indopak en algunas fuentes. Por lo tanto, podrías ver inconsistencias en el renderizado del color de la escritura. ¿Estás seguro de que quieres aplicar tajweed en Indopak?';
+
+  @override
+  String get apply => 'Aplicar';
+
+  @override
+  String get warning => 'Advertencia';
+
+  @override
+  String get hijri => 'Hégira';
+
+  @override
+  String get gregorian => 'Gregoriano';
+
+  @override
+  String get prayerTimesCalender => 'Calendario de Tiempos de Oración';
 }

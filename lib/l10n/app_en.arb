@@ -618,5 +618,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Circle Jojom/Sukun in Quran Script",
   "copy": "Copy",
-  "share": "Share"
+  "share": "Share",
+  "warningMessageOnIndopakTajweedEnable": "We found some rendering issues on indopak tajweed color on some fonts. So, you could see inconsistency over script color rendering. Are you sure you want to apply tajweed on indopak?",
+  "apply": "Apply",
+  "warning": "Warning",
+  "hijri": "Hijri",
+  "gregorian": "Gregorian",
+  "prayerTimesCalender": "Prayer Times Calender"
 }

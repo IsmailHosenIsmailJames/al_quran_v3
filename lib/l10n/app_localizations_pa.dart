@@ -1198,4 +1198,23 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get share => 'ਸਾਂਝਾ ਕਰੋ';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'ਅਸੀਂ ਕੁਝ ਫੌਂਟਾਂ \'ਤੇ ਇੰਡੋਪਾਕ ਤਜਵੀਦ ਰੰਗ ਵਿੱਚ ਕੁਝ ਰੈਂਡਰਿੰਗ ਸਮੱਸਿਆਵਾਂ ਲੱਭੀਆਂ ਹਨ। ਇਸ ਲਈ, ਤੁਸੀਂ ਸਕ੍ਰਿਪਟ ਰੰਗ ਰੈਂਡਰਿੰਗ ਵਿੱਚ ਅਸੰਗਤੀ ਦੇਖ ਸਕਦੇ ਹੋ। ਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਤ ਹੋ ਕਿ ਤੁਸੀਂ ਇੰਡੋਪਾਕ \'ਤੇ ਤਜਵੀਦ ਨੂੰ ਲਾਗੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?';
+
+  @override
+  String get apply => 'ਲਾਗੂ ਕਰੋ';
+
+  @override
+  String get warning => 'ਚੇਤਾਵਨੀ';
+
+  @override
+  String get hijri => 'ਹਿਜਰੀ';
+
+  @override
+  String get gregorian => 'ਗ੍ਰੈਗੋਰੀਅਨ';
+
+  @override
+  String get prayerTimesCalender => 'ਪ੍ਰਾਰਥਨਾ ਦੇ ਸਮੇਂ ਦਾ ਕੈਲੰਡਰ';
 }

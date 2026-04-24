@@ -713,7 +713,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                               QuranScriptType.uthmani,
                           enableWordByWordHighlight:
                               quranViewState.enableWordByWordHighlight,
-                          tajweedColorEnable: quranViewState.useTajweed,
+                          tajweedColorEnable:
+                              quranViewState.quranScriptType ==
+                                  QuranScriptType.uthmani
+                              ? quranViewState.useTajweedOnUthmani
+                              : quranViewState.useTajweedOnIndopak,
                         );
                       },
                     ),
