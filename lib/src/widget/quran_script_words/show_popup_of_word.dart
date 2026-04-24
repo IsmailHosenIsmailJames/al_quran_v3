@@ -39,8 +39,10 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
-    QuranScriptType scriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    QuranScriptType scriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     bool supportsWordByWord = false;
     final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
     if (metaDataOfWordByWord != null) {
@@ -109,62 +111,62 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                 });
               },
               reverse: true,
-              itemBuilder:
-                  (context, index) => Column(
-                    children: [
-                      ScriptProcessor(
-                        scriptInfo: ScriptInfo(
-                          surahNumber: int.parse(
-                            widget.wordKeys[index].split(":")[0],
-                          ),
-                          ayahNumber: int.parse(
-                            widget.wordKeys[index].split(":")[1],
-                          ),
-                          wordIndex:
-                              int.parse(widget.wordKeys[index].split(":")[2]) -
-                              1,
-                          quranScriptType: scriptType,
-                          textStyle: const TextStyle(fontSize: 40),
-                          skipWordTap: true,
-                        ),
-                        themeState: context.read<ThemeCubit>().state,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  ScriptProcessor(
+                    scriptInfo: ScriptInfo(
+                      surahNumber: int.parse(
+                        widget.wordKeys[index].split(":")[0],
                       ),
-                      const Gap(10),
-                      if (supportsWordByWord)
-                        Text(
-                          widget.wordByWord[index].toString().capitalize(),
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      const Gap(15),
-                      BlocBuilder<WordPlayingStateCubit, String?>(
-                        builder: (context, state) {
-                          return OutlinedButton.icon(
-                            style: IconButton.styleFrom(
-                              backgroundColor: themeState.primary.withValues(
-                                alpha: 0.05,
-                              ),
-                              foregroundColor: themeState.primary,
-                            ),
-                            onPressed: () {
-                              context.read<WordPlayingStateCubit>().changeState(
-                                widget.wordKeys[index],
-                              );
-                              AudioPlayerManager.playWord(
-                                widget.wordKeys[index],
-                              );
-                            },
-                            label: Text(AppLocalizations.of(context).playAudio),
-                            icon: Icon(
-                              state == widget.wordKeys[index]
-                                  ? Icons.pause_circle_outline_rounded
-                                  : Icons.play_circle_outline_rounded,
-                              size: 28,
-                            ),
-                          );
-                        },
+                      ayahNumber: int.parse(
+                        widget.wordKeys[index].split(":")[1],
                       ),
-                    ],
+                      wordIndex:
+                          int.parse(widget.wordKeys[index].split(":")[2]) - 1,
+                      quranScriptType: scriptType,
+                      textStyle: const TextStyle(fontSize: 40),
+                      skipWordTap: true,
+                    ),
+                    themeState: context.read<ThemeCubit>().state,
+                    tajweedColorEnable: context
+                        .read<QuranViewCubit>()
+                        .state
+                        .useTajweed,
                   ),
+                  const Gap(10),
+                  if (supportsWordByWord)
+                    Text(
+                      widget.wordByWord[index].toString().capitalize(),
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  const Gap(15),
+                  BlocBuilder<WordPlayingStateCubit, String?>(
+                    builder: (context, state) {
+                      return OutlinedButton.icon(
+                        style: IconButton.styleFrom(
+                          backgroundColor: themeState.primary.withValues(
+                            alpha: 0.05,
+                          ),
+                          foregroundColor: themeState.primary,
+                        ),
+                        onPressed: () {
+                          context.read<WordPlayingStateCubit>().changeState(
+                            widget.wordKeys[index],
+                          );
+                          AudioPlayerManager.playWord(widget.wordKeys[index]);
+                        },
+                        label: Text(AppLocalizations.of(context).playAudio),
+                        icon: Icon(
+                          state == widget.wordKeys[index]
+                              ? Icons.pause_circle_outline_rounded
+                              : Icons.play_circle_outline_rounded,
+                          size: 28,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

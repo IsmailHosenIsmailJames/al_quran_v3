@@ -6,10 +6,12 @@ import "package:flutter/material.dart";
 class ScriptProcessor extends StatelessWidget {
   final ScriptInfo scriptInfo;
   final ThemeState themeState;
+  final bool tajweedColorEnable;
   const ScriptProcessor({
     super.key,
     required this.scriptInfo,
     required this.themeState,
+    required this.tajweedColorEnable,
   });
 
   @override
@@ -19,11 +21,13 @@ class ScriptProcessor extends StatelessWidget {
         scriptInfo: scriptInfo,
         themeState: themeState,
         isUthmani: true,
+        tajweedColorEnable: tajweedColorEnable,
       ),
       QuranScriptType.indopak => QuranScriptScriptView(
         scriptInfo: scriptInfo,
         themeState: themeState,
         isUthmani: false,
+        tajweedColorEnable: tajweedColorEnable,
       ),
     };
   }

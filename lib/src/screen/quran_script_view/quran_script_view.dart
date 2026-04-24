@@ -702,6 +702,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                           baseStyle: TextStyle(
                             fontSize: quranViewState.fontSize,
                           ),
+                          tajweedColorEnable: context
+                              .read<QuranViewCubit>()
+                              .state
+                              .useTajweed,
                         );
                       },
                     ),

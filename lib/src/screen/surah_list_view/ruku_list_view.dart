@@ -168,6 +168,10 @@ class RukuListView extends StatelessWidget {
                               skipWordTap: true,
                             ),
                             themeState: context.read<ThemeCubit>().state,
+                            tajweedColorEnable: context
+                                .read<QuranViewCubit>()
+                                .state
+                                .useTajweed,
                           ),
                         ),
                       ),
