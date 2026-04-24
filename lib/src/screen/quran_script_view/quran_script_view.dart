@@ -26,7 +26,8 @@ import "package:al_quran_v3/src/utils/quran_ayahs_function/get_page_number.dart"
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
-import "package:al_quran_v3/src/widget/quran_script/pages_render/pages_render.dart";
+import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
+import "package:al_quran_v3/src/widget/quran_script/pages_render/quran_page_renderer.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -694,18 +695,24 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                         return true;
                       },
                       builder: (context, quranViewState) {
+                        final quranViewCubit = context.read<QuranViewCubit>();
+                        TextStyle baseTextStyle = const TextStyle(fontSize: 24);
+                        baseTextStyle = baseTextStyle.copyWith(
+                          fontFamily:
+                              quranViewState.quranScriptType ==
+                                  QuranScriptType.uthmani
+                              ? quranViewCubit.state.uthmaniFontName
+                              : quranViewCubit.state.indopakFontName,
+                        );
                         return QuranPagesRenderer(
+                          ayahsKey: currentPage,
+                          baseTextStyle: baseTextStyle,
+                          isUthmani:
+                              quranViewState.quranScriptType ==
+                              QuranScriptType.uthmani,
                           enableWordByWordHighlight:
                               quranViewState.enableWordByWordHighlight,
-                          ayahsKey: currentPage,
-                          quranScriptType: quranViewState.quranScriptType,
-                          baseStyle: TextStyle(
-                            fontSize: quranViewState.fontSize,
-                          ),
-                          tajweedColorEnable: context
-                              .read<QuranViewCubit>()
-                              .state
-                              .useTajweed,
+                          tajweedColorEnable: quranViewState.useTajweed,
                         );
                       },
                     ),
