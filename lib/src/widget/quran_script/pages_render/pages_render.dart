@@ -22,27 +22,19 @@ class QuranPagesRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final quranViewCubit = context.read<QuranViewCubit>();
     TextStyle copyBaseStyle = (baseStyle ?? const TextStyle(fontSize: 24))
-        .copyWith(height: context.read<QuranViewCubit>().state.lineHeight);
-    return switch (quranScriptType) {
-      QuranScriptType.uthmani => NonTajweedPageRenderer(
-        ayahsKey: ayahsKey,
-        baseTextStyle: copyBaseStyle.copyWith(
-          fontFamily: context.read<QuranViewCubit>().state.uthmaniFontName,
-        ),
-        isUthmani: true,
-        enableWordByWordHighlight: enableWordByWordHighlight,
-        tajweedColorEnable: tajweedColorEnable,
+        .copyWith(height: quranViewCubit.state.lineHeight);
+    return NonTajweedPageRenderer(
+      ayahsKey: ayahsKey,
+      baseTextStyle: copyBaseStyle.copyWith(
+        fontFamily: quranScriptType == QuranScriptType.uthmani
+            ? quranViewCubit.state.uthmaniFontName
+            : quranViewCubit.state.indopakFontName,
       ),
-      QuranScriptType.indopak => NonTajweedPageRenderer(
-        ayahsKey: ayahsKey,
-        baseTextStyle: copyBaseStyle.copyWith(
-          fontFamily: context.read<QuranViewCubit>().state.indopakFontName,
-        ),
-        isUthmani: false,
-        enableWordByWordHighlight: enableWordByWordHighlight,
-        tajweedColorEnable: tajweedColorEnable,
-      ),
-    };
+      isUthmani: quranScriptType == QuranScriptType.uthmani,
+      enableWordByWordHighlight: enableWordByWordHighlight,
+      tajweedColorEnable: tajweedColorEnable,
+    );
   }
 }
