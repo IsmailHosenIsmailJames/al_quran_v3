@@ -1199,4 +1199,23 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get share => 'Бөлісу';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Біз кейбір қаріптердегі индопак тәжуид түсінің көрсетілуінде кейбір мәселелерді таптық. Сондықтан, скрипт түстерінің көрсетілуінде сәйкессіздіктерді көруіңіз мүмкін. Индопакта тәжуидті қолданғыңыз келетініне сенімдісіз бе?';
+
+  @override
+  String get apply => 'Қолдану';
+
+  @override
+  String get warning => 'Ескерту';
+
+  @override
+  String get hijri => 'Хижра';
+
+  @override
+  String get gregorian => 'Григориан';
+
+  @override
+  String get prayerTimesCalender => 'Намаз уақыттарының күнтізбесі';
 }

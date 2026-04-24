@@ -2293,6 +2293,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share'**
   String get share;
+
+  /// No description provided for @warningMessageOnIndopakTajweedEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'We found some rendering issues on indopak tajweed color on some fonts. So, you could see inconsistency over script color rendering. Are you sure you want to apply tajweed on indopak?'**
+  String get warningMessageOnIndopakTajweedEnable;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @hijri.
+  ///
+  /// In en, this message translates to:
+  /// **'Hijri'**
+  String get hijri;
+
+  /// No description provided for @gregorian.
+  ///
+  /// In en, this message translates to:
+  /// **'Gregorian'**
+  String get gregorian;
+
+  /// No description provided for @prayerTimesCalender.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Times Calender'**
+  String get prayerTimesCalender;
 }
 
 class _AppLocalizationsDelegate

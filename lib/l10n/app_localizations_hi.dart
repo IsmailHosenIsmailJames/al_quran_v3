@@ -1200,4 +1200,23 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get share => 'साझा करें';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'हमने कुछ फ़ॉन्ट्स पर इंडोपाक तजवीद रंग में कुछ रेंडरिंग समस्याएं पाई हैं। इसलिए, आप स्क्रिप्ट रंग रेंडरिंग में असंगति देख सकते हैं। क्या आप निश्चित हैं कि आप इंडोपाक पर तजवीद लागू करना चाहते हैं?';
+
+  @override
+  String get apply => 'लागू करें';
+
+  @override
+  String get warning => 'चेतावनी';
+
+  @override
+  String get hijri => 'हिजरी';
+
+  @override
+  String get gregorian => 'ग्रेगोरियन';
+
+  @override
+  String get prayerTimesCalender => 'प्रार्थना के समय का कैलेंडर';
 }

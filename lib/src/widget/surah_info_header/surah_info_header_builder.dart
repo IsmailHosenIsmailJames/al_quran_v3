@@ -297,7 +297,10 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     showWordHighlights: false,
                   ),
                   themeState: context.read<ThemeCubit>().state,
-                  tajweedColorEnable: state.useTajweed,
+                  tajweedColorEnable:
+                      state.quranScriptType == QuranScriptType.uthmani
+                      ? state.useTajweedOnUthmani
+                      : state.useTajweedOnIndopak,
                 );
               },
             ),

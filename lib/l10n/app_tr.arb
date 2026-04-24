@@ -618,5 +618,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Kur'an Hattında Yuvarlak Cezm/Sükun",
   "copy": "Kopyala",
-  "share": "Paylaş"
+  "share": "Paylaş",
+  "warning": "Uyarı",
+  "apply": "Uygula",
+  "warningMessageOnIndopakTajweedEnable": "Bazı yazı tiplerinde Indopak tecvid renginde bazı oluşturma sorunları bulduk. Bu nedenle, betik renk oluşturmada tutarsızlık görebilirsiniz. Indopak'ta tecvid uygulamak istediğinizden emin misiniz?",
+  "hijri": "Hicri",
+  "gregorian": "Miladi",
+  "prayerTimesCalender": "Namaz Vakitleri Takvimi"
 }

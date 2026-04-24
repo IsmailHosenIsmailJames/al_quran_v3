@@ -1208,4 +1208,23 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get share => 'Shiriki';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Tumepata shida kadhaa za utoaji kwenye rangi ya tajweed ya Indopak kwenye fonti zingine. Kwa hivyo, unaweza kuona kutokwenda kwenye utoaji wa rangi ya maandishi. Je, una uhakika unataka kutumia tajweed kwenye Indopak?';
+
+  @override
+  String get apply => 'Tumia';
+
+  @override
+  String get warning => 'Onyo';
+
+  @override
+  String get hijri => 'Hijria';
+
+  @override
+  String get gregorian => 'Gregori';
+
+  @override
+  String get prayerTimesCalender => 'Kalenda ya Nyakati za Swala';
 }

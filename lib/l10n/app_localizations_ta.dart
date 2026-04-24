@@ -1218,4 +1218,23 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get share => 'பகிர்க';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'சில எழுத்துருக்களில் இண்டோபாக் தஜ்வீத் வண்ணத்தில் சில ரெண்டரிங் சிக்கல்களைக் கண்டறிந்துள்ளோம். எனவே, ஸ்கிரிப்ட் வண்ண ரெண்டரிங்கில் நீங்கள் முரண்பாட்டைக் காணலாம். நீங்கள் இண்டோபாக்கில் தஜ்வீத்தைப் பயன்படுத்த விரும்புகிறீர்களா?';
+
+  @override
+  String get apply => 'பயன்படுத்துக';
+
+  @override
+  String get warning => 'எச்சரிக்கை';
+
+  @override
+  String get hijri => 'ஹிஜ்ரி';
+
+  @override
+  String get gregorian => 'கிரிகோரியன்';
+
+  @override
+  String get prayerTimesCalender => 'தொழுகை நேரங்கள் நாட்காட்டி';
 }

@@ -1205,4 +1205,23 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get share => 'Chia sẻ';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Chúng tôi đã phát hiện một số vấn đề kết xuất trên màu tajweed Indopak trên một số phông chữ. Vì vậy, bạn có thể thấy sự không nhất quán trên kết xuất màu văn bản. Bạn có chắc chắn muốn áp dụng tajweed trên Indopak không?';
+
+  @override
+  String get apply => 'Áp dụng';
+
+  @override
+  String get warning => 'Cảnh báo';
+
+  @override
+  String get hijri => 'Hijri';
+
+  @override
+  String get gregorian => 'Dương lịch';
+
+  @override
+  String get prayerTimesCalender => 'Lịch Thời gian Cầu nguyện';
 }

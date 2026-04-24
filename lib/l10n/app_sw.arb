@@ -618,5 +618,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Duara la Jojom/Sukun katika Maandishi ya Quran",
   "copy": "Nakili",
-  "share": "Shiriki"
+  "share": "Shiriki",
+  "warning": "Onyo",
+  "apply": "Tumia",
+  "warningMessageOnIndopakTajweedEnable": "Tumepata shida kadhaa za utoaji kwenye rangi ya tajweed ya Indopak kwenye fonti zingine. Kwa hivyo, unaweza kuona kutokwenda kwenye utoaji wa rangi ya maandishi. Je, una uhakika unataka kutumia tajweed kwenye Indopak?",
+  "hijri": "Hijria",
+  "gregorian": "Gregori",
+  "prayerTimesCalender": "Kalenda ya Nyakati za Swala"
 }

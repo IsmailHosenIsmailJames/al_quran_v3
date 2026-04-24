@@ -356,5 +356,11 @@
   "mushaf": "Mushaf",
   "circleJojomInQuranScript": "Vòng tròn Jojom/Sukun dalam văn bản Quran",
   "copy": "Sao chép",
-  "share": "Chia sẻ"
+  "share": "Chia sẻ",
+  "warning": "Cảnh báo",
+  "apply": "Áp dụng",
+  "warningMessageOnIndopakTajweedEnable": "Chúng tôi đã phát hiện một số vấn đề kết xuất trên màu tajweed Indopak trên một số phông chữ. Vì vậy, bạn có thể thấy sự không nhất quán trên kết xuất màu văn bản. Bạn có chắc chắn muốn áp dụng tajweed trên Indopak không?",
+  "hijri": "Hijri",
+  "gregorian": "Dương lịch",
+  "prayerTimesCalender": "Lịch Thời gian Cầu nguyện"
 }

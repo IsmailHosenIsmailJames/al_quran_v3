@@ -65,9 +65,62 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                     );
                   }),
                   title: Text(AppLocalizations.of(context).quranScriptTajweed),
-                  value: quranViewState.useTajweed,
-                  onChanged: (value) {
-                    context.read<QuranViewCubit>().changeUseTajweed(value);
+                  value:
+                      quranViewState.quranScriptType == QuranScriptType.uthmani
+                      ? quranViewState.useTajweedOnUthmani
+                      : quranViewState.useTajweedOnIndopak,
+                  onChanged: (value) async {
+                    if (quranViewState.quranScriptType ==
+                        QuranScriptType.uthmani) {
+                      context.read<QuranViewCubit>().changeUseTajweedOnUthmani(
+                        value,
+                      );
+                    } else {
+                      if (value) {
+                        final willApply = await showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(AppLocalizations.of(context).warning),
+                              content: Text(
+                                AppLocalizations.of(
+                                  context,
+                                ).warningMessageOnIndopakTajweedEnable,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context, false);
+                                  },
+                                  child: Text(
+                                    AppLocalizations.of(context).cancel,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                  child: Text(
+                                    AppLocalizations.of(context).apply,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        if (willApply == true) {
+                          if (context.mounted) {
+                            context
+                                .read<QuranViewCubit>()
+                                .changeUseTajweedOnIndopak(value);
+                          }
+                        }
+                      } else {
+                        context
+                            .read<QuranViewCubit>()
+                            .changeUseTajweedOnIndopak(value);
+                      }
+                    }
                   },
                 ),
               ),

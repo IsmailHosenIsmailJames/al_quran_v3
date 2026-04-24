@@ -1,4 +1,5 @@
 import "package:adhan_dart/adhan_dart.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:flutter/material.dart";
 import "package:hijri/hijri_calendar.dart";
@@ -34,10 +35,7 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
     final textTheme = TextTheme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Prayer Times Calender"),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.import_export)),
-        ],
+        title: Text(AppLocalizations.of(context).prayerTimesCalender),
       ),
       body: TableView.builder(
         controller: _scrollController,
@@ -54,7 +52,7 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
             if (column == 0) {
               return Center(
                 child: Text(
-                  "Hijri",
+                  AppLocalizations.of(context).hijri,
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -64,7 +62,7 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
             } else if (column == 1) {
               return Center(
                 child: Text(
-                  "Gregorian",
+                  AppLocalizations.of(context).gregorian,
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -75,7 +73,18 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
               Prayer prayer = Prayer.values.elementAt(column - 2);
               return Center(
                 child: Text(
-                  prayer.name.capitalize,
+                  switch (prayer) {
+                    Prayer.fajr => AppLocalizations.of(context).fajr,
+                    Prayer.sunrise => AppLocalizations.of(context).sunrise,
+                    Prayer.dhuhr => AppLocalizations.of(context).dhuhr,
+                    Prayer.asr => AppLocalizations.of(context).asr,
+                    Prayer.maghrib => AppLocalizations.of(context).maghrib,
+                    Prayer.isha => AppLocalizations.of(context).isha,
+                    Prayer.dhuha => AppLocalizations.of(context).dhuha,
+                    Prayer.noon => AppLocalizations.of(context).noon,
+                    Prayer.sunset => AppLocalizations.of(context).sunset,
+                    Prayer.tahajjud => AppLocalizations.of(context).tahajjud,
+                  },
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -85,7 +94,7 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
             }
           });
         },
-        rowCount: 365,
+        rowCount: 365 * 2,
         rowHeight: 60.0,
         rowBuilder: (context, row, contentBuilder) {
           final date = start.add(Duration(days: row));
@@ -105,7 +114,10 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
             } else if (column == 1) {
               return Center(
                 child: Text(
-                  DateFormat("dd MMMM yyyy").format(date),
+                  DateFormat(
+                    "dd MMMM yyyy",
+                    AppLocalizations.of(context).localeName,
+                  ).format(date),
                   textAlign: TextAlign.center,
                 ),
               );

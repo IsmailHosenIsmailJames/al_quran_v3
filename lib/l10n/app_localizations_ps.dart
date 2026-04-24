@@ -1201,4 +1201,23 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get share => 'شریکول';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'موږ په ځینو فونټونو کې د انډوپاک تجوید رنګ کې د ښودلو ځینې ستونزې موندلې دي. نو، تاسو ممکن د سکریپټ رنګ ښودلو کې ناانډولي وګورئ. ایا تاسو ډاډه یاست چې تاسو غواړئ په انډوپاک کې تجوید پلي کړئ؟';
+
+  @override
+  String get apply => 'تطبیق کړئ';
+
+  @override
+  String get warning => 'خبرداری';
+
+  @override
+  String get hijri => 'هجري';
+
+  @override
+  String get gregorian => 'ګریګورین';
+
+  @override
+  String get prayerTimesCalender => 'د لمانځه وختونو کیلنڈر';
 }

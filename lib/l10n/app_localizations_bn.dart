@@ -1200,4 +1200,23 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get share => 'শেয়ার';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'কিছু ফন্টে ইন্দোনেশীয়-পাকিস্তানি (ইন্দোপাক) তাজবীদ রঙে কিছু রেন্ডারিং সমস্যা পাওয়া গেছে। তাই, স্ক্রিপ্টের রঙের ক্ষেত্রে আপনি কিছু অসামঞ্জস্যতা দেখতে পারেন। আপনি কি নিশ্চিত যে আপনি ইন্দোপাক-এ তাজবীদ প্রয়োগ করতে চান?';
+
+  @override
+  String get apply => 'প্রয়োগ করুন';
+
+  @override
+  String get warning => 'সতর্কতা';
+
+  @override
+  String get hijri => 'হিজরি';
+
+  @override
+  String get gregorian => 'গ্রেগরিয়ান';
+
+  @override
+  String get prayerTimesCalender => 'নামাজের সময়সূচী ক্যালেন্ডার';
 }

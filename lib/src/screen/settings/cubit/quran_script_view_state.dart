@@ -9,6 +9,8 @@ class QuranViewState {
   String uthmaniFontName;
   String indopakFontName;
   double translationFontSize;
+  bool useTajweedOnUthmani;
+  bool useTajweedOnIndopak;
   bool hideFootnote;
   bool hideWordByWord;
   bool hideTranslation;
@@ -16,7 +18,6 @@ class QuranViewState {
   bool hideQuranAyah;
   bool alwaysOpenWordByWord;
   bool enableWordByWordHighlight;
-  bool useTajweed;
   bool scrollWithRecitation;
   bool useAudioStream;
   double playbackSpeed;
@@ -26,6 +27,8 @@ class QuranViewState {
     required this.lineHeight,
     required this.quranScriptType,
     required this.translationFontSize,
+    required this.useTajweedOnUthmani,
+    required this.useTajweedOnIndopak,
     this.uthmaniFontName = "QPC_Hafs",
     this.indopakFontName = "AlQuranNeov5x1",
     this.circleJojom = false,
@@ -36,7 +39,6 @@ class QuranViewState {
     this.hideQuranAyah = false,
     this.alwaysOpenWordByWord = false,
     this.enableWordByWordHighlight = true,
-    this.useTajweed = true,
     this.scrollWithRecitation = false,
     this.useAudioStream = true,
     this.playbackSpeed = 1.0,
@@ -49,6 +51,8 @@ class QuranViewState {
     QuranScriptType? quranScriptType,
     bool? circleJojom,
     double? translationFontSize,
+    bool? useTajweedOnUthmani,
+    bool? useTajweedOnIndopak,
     bool? hideFootnote,
     bool? hideWordByWord,
     bool? hideTranslation,
@@ -61,7 +65,6 @@ class QuranViewState {
     String? indopakFontName,
     bool? useAudioStream,
     double? playbackSpeed,
-    bool? useTajweed,
   }) {
     return QuranViewState(
       ayahKey: ayahKey ?? this.ayahKey,
@@ -70,6 +73,8 @@ class QuranViewState {
       lineHeight: lineHeight ?? this.lineHeight,
       quranScriptType: quranScriptType ?? this.quranScriptType,
       translationFontSize: translationFontSize ?? this.translationFontSize,
+      useTajweedOnUthmani: useTajweedOnUthmani ?? this.useTajweedOnUthmani,
+      useTajweedOnIndopak: useTajweedOnIndopak ?? this.useTajweedOnIndopak,
       hideFootnote: hideFootnote ?? this.hideFootnote,
       hideWordByWord: hideWordByWord ?? this.hideWordByWord,
       hideTranslation: hideTranslation ?? this.hideTranslation,
@@ -81,7 +86,6 @@ class QuranViewState {
       scrollWithRecitation: scrollWithRecitation ?? this.scrollWithRecitation,
       useAudioStream: useAudioStream ?? this.useAudioStream,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
-      useTajweed: useTajweed ?? this.useTajweed,
       uthmaniFontName: uthmaniFontName ?? this.uthmaniFontName,
       indopakFontName: indopakFontName ?? this.indopakFontName,
     );
@@ -98,6 +102,8 @@ class QuranViewState {
         other.quranScriptType == quranScriptType &&
         other.circleJojom == circleJojom &&
         other.translationFontSize == translationFontSize &&
+        other.useTajweedOnUthmani == useTajweedOnUthmani &&
+        other.useTajweedOnIndopak == useTajweedOnIndopak &&
         other.hideFootnote == hideFootnote &&
         other.hideWordByWord == hideWordByWord &&
         other.hideTranslation == hideTranslation &&
@@ -107,7 +113,6 @@ class QuranViewState {
         other.enableWordByWordHighlight == enableWordByWordHighlight &&
         other.scrollWithRecitation == scrollWithRecitation &&
         other.useAudioStream == useAudioStream &&
-        other.useTajweed == useTajweed &&
         other.playbackSpeed == playbackSpeed &&
         other.uthmaniFontName == uthmaniFontName &&
         other.indopakFontName == indopakFontName;
@@ -120,6 +125,8 @@ class QuranViewState {
         lineHeight.hashCode ^
         quranScriptType.hashCode ^
         translationFontSize.hashCode ^
+        useTajweedOnUthmani.hashCode ^
+        useTajweedOnIndopak.hashCode ^
         hideFootnote.hashCode ^
         hideWordByWord.hashCode ^
         hideTranslation.hashCode ^
@@ -129,7 +136,6 @@ class QuranViewState {
         enableWordByWordHighlight.hashCode ^
         scrollWithRecitation.hashCode ^
         useAudioStream.hashCode ^
-        useTajweed.hashCode ^
         playbackSpeed.hashCode ^
         uthmaniFontName.hashCode ^
         circleJojom.hashCode ^

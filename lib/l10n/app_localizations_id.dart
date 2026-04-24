@@ -1199,4 +1199,23 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get share => 'Bagikan';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      'Kami menemukan beberapa masalah rendering pada warna tajwid Indopak di beberapa font. Jadi, Anda mungkin melihat ketidakkonsistenan pada rendering warna skrip. Apakah Anda yakin ingin menerapkan tajwid pada Indopak?';
+
+  @override
+  String get apply => 'Terapkan';
+
+  @override
+  String get warning => 'Peringatan';
+
+  @override
+  String get hijri => 'Hijriah';
+
+  @override
+  String get gregorian => 'Masehi';
+
+  @override
+  String get prayerTimesCalender => 'Kalender Waktu Salat';
 }

@@ -29,10 +29,8 @@ class HizbListView extends StatelessWidget {
     Color textColor = brightness == Brightness.light
         ? Colors.black
         : Colors.white;
-    QuranScriptType quranScriptType = context
-        .read<QuranViewCubit>()
-        .state
-        .quranScriptType;
+    final quranViewState = context.read<QuranViewCubit>().state;
+    QuranScriptType quranScriptType = quranViewState.quranScriptType;
 
     return FutureBuilder(
       future: rootBundle.loadString("assets/meta_data/Hizb.json"),
@@ -165,10 +163,11 @@ class HizbListView extends StatelessWidget {
                               skipWordTap: true,
                             ),
                             themeState: context.read<ThemeCubit>().state,
-                            tajweedColorEnable: context
-                                .read<QuranViewCubit>()
-                                .state
-                                .useTajweed,
+                            tajweedColorEnable:
+                                quranViewState.quranScriptType ==
+                                    QuranScriptType.uthmani
+                                ? quranViewState.useTajweedOnUthmani
+                                : quranViewState.useTajweedOnIndopak,
                           ),
                         ),
                       ),

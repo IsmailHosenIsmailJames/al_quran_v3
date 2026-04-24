@@ -356,5 +356,11 @@
   "mushaf": "ムスハフ",
   "circleJojomInQuranScript": "コーラン文字の円形スクーン",
   "copy": "コピー",
-  "share": "共有"
+  "share": "共有",
+  "warning": "警告",
+  "apply": "適用",
+  "warningMessageOnIndopakTajweedEnable": "一部のフォントでインドパクのタジュウィードの色に描画の問題が見つかりました。そのため、スクリプトの色の描画に不整合が見られる可能性があります。本当にインドパクにタジュウィードを適用しますか？",
+  "hijri": "ヒジュラ暦",
+  "gregorian": "グレゴリオ暦",
+  "prayerTimesCalender": "礼拝時間カレンダー"
 }

@@ -356,5 +356,11 @@
   "mushaf": "Müshaf",
   "circleJojomInQuranScript": "Quran skriptində dairəvi cəzm/sükun",
   "copy": "Kopyala",
-  "share": "Paylaş"
+  "share": "Paylaş",
+  "warning": "Xəbərdarlıq",
+  "apply": "Tətbiq et",
+  "warningMessageOnIndopakTajweedEnable": "Bəzi şriftlərdə İndopak təcvid rəngi üzərində bəzi göstərmə problemləri tapdıq. Buna görə, skript rənginin göstərilməsində uyğunsuzluq görə bilərsiniz. İndopak üzərində təcvid tətbiq etmək istədiyinizə əminsiniz?",
+  "hijri": "Hicri",
+  "gregorian": "Qriqorian",
+  "prayerTimesCalender": "Namaz Vaxtları Təqvimi"
 }

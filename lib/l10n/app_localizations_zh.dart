@@ -1165,4 +1165,23 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get share => '分享';
+
+  @override
+  String get warningMessageOnIndopakTajweedEnable =>
+      '我们在某些字体的印巴变音符号颜色上发现了一些渲染问题。因此，您可能会看到脚本颜色渲染的不一致。您确定要在印巴文上应用变音符号吗？';
+
+  @override
+  String get apply => '应用';
+
+  @override
+  String get warning => '警告';
+
+  @override
+  String get hijri => '回历';
+
+  @override
+  String get gregorian => '公历';
+
+  @override
+  String get prayerTimesCalender => '祈祷时间日历';
 }
