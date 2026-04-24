@@ -20,6 +20,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
   final List<String> ayahsKey;
   final TextStyle? baseTextStyle;
   final bool? enableWordByWordHighlight;
+  final bool tajweedColorEnable;
 
   const NonTajweedPageRenderer({
     super.key,
@@ -27,6 +28,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
     this.baseTextStyle,
     required this.isUthmani,
     this.enableWordByWordHighlight,
+    required this.tajweedColorEnable,
   });
 
   @override
@@ -137,6 +139,7 @@ class NonTajweedPageRenderer extends StatelessWidget {
                           skipWordTap: false,
                           words: List<String>.from(words),
                           context: context,
+                          tajweedColorEnable: tajweedColorEnable,
                         );
                       }).toList(),
                     );

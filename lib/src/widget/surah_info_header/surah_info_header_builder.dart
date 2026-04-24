@@ -116,12 +116,11 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder:
-                                    (context) => SurahInfoView(
-                                      html: surahInfo,
-                                      surahInfoModel:
-                                          headerInfoModel.surahInfoModel,
-                                    ),
+                                builder: (context) => SurahInfoView(
+                                  html: surahInfo,
+                                  surahInfoModel:
+                                      headerInfoModel.surahInfoModel,
+                                ),
                               ),
                             );
                           },
@@ -172,17 +171,13 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder:
-                                      (context) => AudioDownloadScreen(
-                                        initDownloadSurah:
-                                            headerInfoModel.surahInfoModel,
-                                        reciterInfoModel:
-                                            context
-                                                .read<
-                                                  SegmentedQuranReciterCubit
-                                                >()
-                                                .state,
-                                      ),
+                                  builder: (context) => AudioDownloadScreen(
+                                    initDownloadSurah:
+                                        headerInfoModel.surahInfoModel,
+                                    reciterInfoModel: context
+                                        .read<SegmentedQuranReciterCubit>()
+                                        .state,
+                                  ),
                                 ),
                               );
                             },
@@ -197,8 +192,10 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             foregroundColor: Colors.white,
                           ),
                           onPressed: () {
-                            bool isPlayList =
-                                context.read<AudioUiCubit>().state.isPlayList;
+                            bool isPlayList = context
+                                .read<AudioUiCubit>()
+                                .state
+                                .isPlayList;
                             bool isCompleted =
                                 playerState.state ==
                                 just_audio.ProcessingState.completed;
@@ -215,10 +212,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               AudioPlayerManager.playMultipleAyahAsPlaylist(
                                 startAyahKey: startAyahKey,
                                 endAyahKey: endAyahKey,
-                                reciterInfoModel:
-                                    context
-                                        .read<SegmentedQuranReciterCubit>()
-                                        .state,
+                                reciterInfoModel: context
+                                    .read<SegmentedQuranReciterCubit>()
+                                    .state,
                                 isInsideQuran: true,
                               );
                             } else if (isCurrentPlaying &&
@@ -237,35 +233,33 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                               AudioPlayerManager.playMultipleAyahAsPlaylist(
                                 startAyahKey: startAyahKey,
                                 endAyahKey: endAyahKey,
-                                reciterInfoModel:
-                                    context
-                                        .read<SegmentedQuranReciterCubit>()
-                                        .state,
+                                reciterInfoModel: context
+                                    .read<SegmentedQuranReciterCubit>()
+                                    .state,
                                 isInsideQuran: true,
                               );
                             }
                           },
                           icon:
                               (playerState.state ==
-                                          just_audio.ProcessingState.loading &&
-                                      isCurrentSurah)
-                                  ? Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
-                                      strokeWidth: 4,
-                                      backgroundColor:
-                                          context
-                                              .read<ThemeCubit>()
-                                              .state
-                                              .primaryShade100,
-                                    ),
-                                  )
-                                  : Icon(
-                                    isCurrentPlaying
-                                        ? Icons.pause_rounded
-                                        : Icons.play_arrow_rounded,
+                                      just_audio.ProcessingState.loading &&
+                                  isCurrentSurah)
+                              ? Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 4,
+                                    backgroundColor: context
+                                        .read<ThemeCubit>()
+                                        .state
+                                        .primaryShade100,
                                   ),
+                                )
+                              : Icon(
+                                  isCurrentPlaying
+                                      ? Icons.pause_rounded
+                                      : Icons.play_arrow_rounded,
+                                ),
                         ),
                       ],
                     );
@@ -303,6 +297,7 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                     showWordHighlights: false,
                   ),
                   themeState: context.read<ThemeCubit>().state,
+                  tajweedColorEnable: state.useTajweed,
                 );
               },
             ),

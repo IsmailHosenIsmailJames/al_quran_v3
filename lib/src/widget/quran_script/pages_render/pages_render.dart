@@ -9,6 +9,7 @@ class QuranPagesRenderer extends StatelessWidget {
   final QuranScriptType quranScriptType;
   final TextStyle? baseStyle;
   final bool? enableWordByWordHighlight;
+  final bool tajweedColorEnable;
 
   const QuranPagesRenderer({
     super.key,
@@ -16,6 +17,7 @@ class QuranPagesRenderer extends StatelessWidget {
     required this.quranScriptType,
     this.baseStyle,
     this.enableWordByWordHighlight,
+    required this.tajweedColorEnable,
   });
 
   @override
@@ -30,6 +32,7 @@ class QuranPagesRenderer extends StatelessWidget {
         ),
         isUthmani: true,
         enableWordByWordHighlight: enableWordByWordHighlight,
+        tajweedColorEnable: tajweedColorEnable,
       ),
       QuranScriptType.indopak => NonTajweedPageRenderer(
         ayahsKey: ayahsKey,
@@ -38,6 +41,7 @@ class QuranPagesRenderer extends StatelessWidget {
         ),
         isUthmani: false,
         enableWordByWordHighlight: enableWordByWordHighlight,
+        tajweedColorEnable: tajweedColorEnable,
       ),
     };
   }

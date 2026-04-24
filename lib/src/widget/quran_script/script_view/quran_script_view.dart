@@ -17,12 +17,14 @@ class QuranScriptScriptView extends StatelessWidget {
   final bool isUthmani;
   final ScriptInfo scriptInfo;
   final ThemeState themeState;
+  final bool tajweedColorEnable;
 
   const QuranScriptScriptView({
     super.key,
     required this.scriptInfo,
     required this.isUthmani,
     required this.themeState,
+    required this.tajweedColorEnable,
   });
 
   @override
@@ -59,6 +61,7 @@ class QuranScriptScriptView extends StatelessWidget {
           surahNumber: scriptInfo.surahNumber,
           ayahNumber: scriptInfo.ayahNumber,
           skipWordTap: scriptInfo.skipWordTap ?? false,
+          tajweedColorEnable: tajweedColorEnable,
         ),
       );
     }
@@ -81,6 +84,7 @@ class QuranScriptScriptView extends StatelessWidget {
               surahNumber: scriptInfo.surahNumber,
               ayahNumber: scriptInfo.ayahNumber,
               skipWordTap: scriptInfo.skipWordTap ?? false,
+              tajweedColorEnable: tajweedColorEnable,
             );
           }),
         ),
@@ -150,6 +154,7 @@ class QuranScriptScriptView extends StatelessWidget {
                     surahNumber: scriptInfo.surahNumber,
                     ayahNumber: scriptInfo.ayahNumber,
                     skipWordTap: scriptInfo.skipWordTap ?? false,
+                    tajweedColorEnable: tajweedColorEnable,
                   );
                 }),
               ),

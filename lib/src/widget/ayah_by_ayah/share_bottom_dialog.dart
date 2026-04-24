@@ -170,6 +170,10 @@ void showShareBottomDialog(
                   height: context.read<QuranViewCubit>().state.lineHeight,
                 );
                 Brightness brightness = Theme.brightnessOf(context);
+                bool useTajweed = context
+                    .read<QuranViewCubit>()
+                    .state
+                    .useTajweed;
                 final imageBinary = await screenshotController
                     .captureFromLongWidget(
                       InheritedTheme.captureAll(
@@ -193,6 +197,7 @@ void showShareBottomDialog(
                             scriptTextStyle,
                             brightness,
                             themeState,
+                            useTajweed,
                           ),
                         ),
                       ),

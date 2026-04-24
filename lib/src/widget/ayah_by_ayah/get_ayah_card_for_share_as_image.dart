@@ -30,6 +30,7 @@ Widget getAyahCardForShareAsImage(
   TextStyle scriptTextStyle,
   Brightness brightness,
   ThemeState themeState,
+  bool useTajweed,
 ) {
   AppLocalizations l10n = AppLocalizations.of(context);
 
@@ -97,10 +98,10 @@ Widget getAyahCardForShareAsImage(
               surahNumber: ayahKey.split(":").first.toInt(),
               ayahNumber: ayahKey.split(":").last.toInt(),
               quranScriptType: quranScriptType,
-
               textStyle: scriptTextStyle,
               forImage: true,
             ),
+            tajweedColorEnable: useTajweed,
             themeState: themeState,
           ),
         ),

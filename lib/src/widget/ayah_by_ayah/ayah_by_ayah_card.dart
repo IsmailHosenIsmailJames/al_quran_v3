@@ -436,6 +436,7 @@ SizedBox getAyahWordByWord(
                                 height: quranViewState.lineHeight,
                               ),
                             ),
+                            tajweedColorEnable: quranViewState.useTajweed,
                             themeState: themeState,
                           );
                         },
@@ -655,6 +656,7 @@ Align quranAyahWidget(
           height: quranViewState.lineHeight,
         ),
       ),
+      tajweedColorEnable: quranViewState.useTajweed,
       themeState: themeState,
     ),
   );
