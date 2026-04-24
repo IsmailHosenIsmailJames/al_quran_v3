@@ -201,21 +201,25 @@ class _TafsirViewState extends State<TafsirView>
             },
           ),
         ],
-        bottom: TabBar(
-          isScrollable: true,
-          tabAlignment: TabAlignment.start,
-          controller: _tabController,
-          tabs: List<Tab>.generate(tafsirBookList.length, (index) {
-            return Tab(child: Text(tafsirBookList[index].name));
-          }),
-        ),
+        bottom: tafsirBookList.isNotEmpty
+            ? TabBar(
+                isScrollable: true,
+                tabAlignment: TabAlignment.start,
+                controller: _tabController,
+                tabs: List<Tab>.generate(tafsirBookList.length, (index) {
+                  return Tab(child: Text(tafsirBookList[index].name));
+                }),
+              )
+            : null,
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: List<Widget>.generate(tafsirBookList.length, (index) {
-          return tafsirWidget(tafsirBookList[index]);
-        }),
-      ),
+      body: tafsirBookList.isNotEmpty
+          ? TabBarView(
+              controller: _tabController,
+              children: List<Widget>.generate(tafsirBookList.length, (index) {
+                return tafsirWidget(tafsirBookList[index]);
+              }),
+            )
+          : Center(child: Text(appLocalizations.selectTafsirBook)),
     );
   }
 
