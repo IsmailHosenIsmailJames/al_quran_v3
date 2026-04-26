@@ -1,6 +1,5 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:flex_color_picker/flex_color_picker.dart";
 import "package:flutter/material.dart";
 import "package:hijri/hijri_calendar.dart";
 import "package:intl/intl.dart";

@@ -6,26 +6,33 @@ import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
 import "package:window_manager/window_manager.dart";
 
-// import "package:awesome_notifications/awesome_notifications.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 
 void hideLoadingIndicator() {
   // no-op
 }
 
 Future<void> initAwesomeNotification() async {
-  // TODO Implement notifications functionality here also for "Alarm"
-  // await AwesomeNotifications().initialize(null, [
-  //   NotificationChannel(
-  //     channelKey: "prayer_reminder",
-  //     channelName: "Prayer Reminder",
-  //     channelDescription: "This channel is for prayer reminder",
-  //     playSound: true,
-  //     onlyAlertOnce: true,
-  //     groupAlertBehavior: GroupAlertBehavior.Children,
-  //     importance: NotificationImportance.High,
-  //     defaultPrivacy: NotificationPrivacy.Public,
-  //   ),
-  // ], debug: false);
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: "prayer_reminder",
+      channelName: "Prayer Reminders",
+      channelDescription: "Notifications for prayer time reminders",
+      playSound: true,
+      onlyAlertOnce: true,
+      importance: NotificationImportance.High,
+      defaultPrivacy: NotificationPrivacy.Public,
+    ),
+    NotificationChannel(
+      channelKey: "prayer_alarm_notification",
+      channelName: "Prayer Alarm Notifications",
+      channelDescription:
+          "High-priority notifications for prayer alarm reminders",
+      playSound: true,
+      importance: NotificationImportance.Max,
+      defaultPrivacy: NotificationPrivacy.Public,
+    ),
+  ], debug: false);
 }
 
 Future<void> initializePlatform() async {
@@ -44,8 +51,6 @@ Future<void> initializePlatform() async {
       await windowManager.focus();
     });
   }
-
-  // TODO Implement notifications functionality here also for "Alarm"
 }
 
 Future<String?> getApplicationDataPath() async {

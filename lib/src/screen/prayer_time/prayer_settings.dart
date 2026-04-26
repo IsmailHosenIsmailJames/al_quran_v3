@@ -180,7 +180,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             int currentTimeInMinutes =
                 prayerReminderState.reminderTimeAdjustment[currentPrayerType] ??
                 0;
-            DateTime? prayerTime = prayerTimes.timeForPrayer(currentPrayerType);
+            DateTime? prayerTime = prayerTimes
+                .timeForPrayer(currentPrayerType)
+                ?.toLocal();
             TimeOfDay actualPrayerTime = TimeOfDay.fromDateTime(
               prayerTime ?? DateTime.now(), // better than crash
             );
