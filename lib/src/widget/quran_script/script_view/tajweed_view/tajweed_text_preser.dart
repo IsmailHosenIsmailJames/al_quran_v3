@@ -196,31 +196,5 @@ String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
   }
 
   String planeText = plainWords.join(" ").trim();
-  log(planeText, name: "getPlainTextAyahFromTajweedWords After: ");
   return planeText;
 }
-
-// [getPlainTextAyahFromTajweedWords Before: ] [
-//  "وَاِذِ",
-//   "<rule class=ham_wasl>ا</rule>عْتَزَلْـتُمُوْهُمْ",
-//   "وَمَا",
-//   "يَعْبُدُوْنَ",
-//   "اِلَّا",
-//   "<rule class=ham_wasl>ا</rule>للّٰهَ",
-//   "فَاْوٗۤ<rule class=madda_obligatory_monfasel>ا</rule>",
-//   "اِلَى",
-//   "<rule class=ham_wasl>ا</rule>لْـكَهْفِ",
-//   "يَ<rule class=ikhafa>نْش</rule>ُرْ",
-//   "لَـكُمْ",
-//   "رَبُّكُ<rule class=idgham_shafawi>م</rule>ْ",
-//   "<rule class=idgham_shafawi>م</rule>ِّ<rule class=idgham_wo_ghunnah>ن</rule>ْ",
-//   "<rule class=idgham_wo_ghunnah>ر</rule>َّحْمَتِه<rule class=madda_normal>ٖ</rule>",
-//   "وَيُهَيِّئْ",
-//   "لَـكُ<rule class=idgham_shafawi>م</rule>ْ",
-//   "<rule class=idgham_shafawi>م</rule>ِّنْ",
-//   "اَمْرِكُ<rule class=idgham_shafawi>م</rule>ْ",
-//   "<rule class=idgham_shafawi>م</rule>ِّرْفَقًا‏",
-//   "١٦"
-//  ]
-
-// [getPlainTextAyahFromTajweedWords After: ] وَاِذِ اعْتَزَلْـتُمُوْهُمْ وَمَا يَعْبُدُوْنَ اِلَّا اللّٰهَ فَاْوٗۤا اِلَى الْـكَهْفِ يَنْشُرْ لَـكُمْ رَبُّكُمْ مِّنْ رَّحْمَتِهٖ وَيُهَيِّئْ لَـكُمْ مِّنْ اَمْرِكُمْ مِّرْفَقًا‏ ١٦

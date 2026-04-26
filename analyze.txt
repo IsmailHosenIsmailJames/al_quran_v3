@@ -1,0 +1,60 @@
+Analyzing al_quran_v3...                                        
+
+warning • 'LockCachingAudioSource' is experimental and could be removed or changed at any time • lib/src/core/audio/player/audio_player_manager.dart:527:11 • experimental_member_use
+warning • 'LockCachingAudioSource' is experimental and could be removed or changed at any time • lib/src/core/audio/player/audio_player_manager.dart:592:19 • experimental_member_use
+   info • The constant name 'word_by_word' isn't a lowerCamelCase identifier • lib/src/resources/quran_resources/models/resources_model.dart:3:37 • constant_identifier_names
+   info • The constant name 'with_footnote' isn't a lowerCamelCase identifier • lib/src/resources/quran_resources/models/resources_model.dart:3:51 • constant_identifier_names
+   info • The file name 'KFGQPC_V4_layout_screen.dart' isn't a lower_case_with_underscores identifier • lib/src/screen/mushaf/KFGQPC_V4_layout/KFGQPC_V4_layout_screen.dart:1:1 • file_names
+   info • The private field _totalPages could be 'final' • lib/src/screen/mushaf/KFGQPC_V4_layout/KFGQPC_V4_layout_screen.dart:31:7 • prefer_final_fields
+   info • The constant name 'AYAH' isn't a lowerCamelCase identifier • lib/src/screen/mushaf/KFGQPC_V4_layout/models/mushaf_script_model.dart:97:17 • constant_identifier_names
+   info • The constant name 'BASMALLAH' isn't a lowerCamelCase identifier • lib/src/screen/mushaf/KFGQPC_V4_layout/models/mushaf_script_model.dart:97:23 • constant_identifier_names
+   info • The constant name 'SURAH_NAME' isn't a lowerCamelCase identifier • lib/src/screen/mushaf/KFGQPC_V4_layout/models/mushaf_script_model.dart:97:34 • constant_identifier_names
+  error • The named parameter 'onDidReceiveLocalNotification' isn't defined • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:29:13 • undefined_named_parameter
+  error • The named parameter 'settings' is required, but there's no corresponding argument • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:34:43 • missing_required_argument
+  error • Too many positional arguments: 0 expected, but 1 found • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:34:54 • extra_positional_arguments_could_be_named
+  error • The named parameter 'id' is required, but there's no corresponding argument • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:119:45 • missing_required_argument
+  error • The named parameter 'notificationDetails' is required, but there's no corresponding argument • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:119:45 • missing_required_argument
+  error • The named parameter 'scheduledDate' is required, but there's no corresponding argument • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:119:45 • missing_required_argument
+  error • Too many positional arguments: 0 expected, but 5 found • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:120:9 • extra_positional_arguments_could_be_named
+  error • The named parameter 'uiLocalNotificationDateInterpretation' isn't defined • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:126:9 • undefined_named_parameter
+  error • Undefined name 'UILocalNotificationDateInterpretation' • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:127:13 • undefined_identifier
+  error • The named parameter 'id' is required, but there's no corresponding argument • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:137:45 • missing_required_argument
+  error • Too many positional arguments: 0 expected, but 1 found • lib/src/screen/prayer_time/background/background_notification_scheduler.dart:137:52 • extra_positional_arguments_could_be_named
+   info • 'isInDebugMode' is deprecated and shouldn't be used. Use WorkmanagerDebug handlers instead. This parameter has no effect • lib/src/screen/prayer_time/background/prayer_background_worker.dart:27:7 • deprecated_member_use
+  error • There's no constant named 'not_required' in 'NetworkType' • lib/src/screen/prayer_time/background/prayer_background_worker.dart:38:34 • undefined_enum_constant
+  error • The argument type 'ExistingWorkPolicy' can't be assigned to the parameter type 'ExistingPeriodicWorkPolicy?'.  • lib/src/screen/prayer_time/background/prayer_background_worker.dart:44:27 • argument_type_not_assignable
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:170:30 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:193:62 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:198:47 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:216:59 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:245:54 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:259:55 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:304:64 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:306:58 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:358:30 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:461:62 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:466:47 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:479:51 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/screen/prayer_time/prayer_settings.dart:501:51 • deprecated_member_use
+warning • Unused import: 'package:flex_color_picker/flex_color_picker.dart' • lib/src/screen/prayer_time/prayer_times_calender_view.dart:3:8 • unused_import
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:61:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:67:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:75:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:81:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:89:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:95:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:103:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:111:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:117:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:123:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:129:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:135:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:143:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:151:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:157:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:165:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:171:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:179:12 • type_literal_in_constant_pattern
+   info • Use 'TypeName _' instead of a type literal • lib/src/screen/tajweed_guide/tajweed_guide_screen.dart:187:12 • type_literal_in_constant_pattern
+   info • The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/src/widget/jump_to_ayah/jump_to_ayah.dart:1:8 • unnecessary_import
+

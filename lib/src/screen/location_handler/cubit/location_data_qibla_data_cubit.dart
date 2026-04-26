@@ -7,6 +7,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 import "../../qibla/qibla_direction.dart";
+import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
 
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit({
@@ -44,6 +45,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     );
 
     emit(newState);
+    await ReminderScheduler.rescheduleAll();
   }
 
   Future<void> saveCalculationMethod(
@@ -59,6 +61,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       );
     }
     emit(state.copyWith(calculationMethod: calculationMethod));
+    await ReminderScheduler.rescheduleAll();
   }
 
   Future<void> saveMadhab(Madhab madhab, {bool save = true}) async {
@@ -68,6 +71,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       sharedPreferences.setString("selected_madhab", madhab.name);
     }
     emit(state.copyWith(madhab: madhab));
+    await ReminderScheduler.rescheduleAll();
   }
 
   void changePrayerTimeDownloading(bool value) {

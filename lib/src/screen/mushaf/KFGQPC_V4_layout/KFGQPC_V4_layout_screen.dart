@@ -1,6 +1,6 @@
-import 'dart:convert';
+import "dart:convert";
 import "dart:developer";
-import 'dart:io';
+import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
@@ -28,7 +28,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
 
   String _baseDirPath = "";
   bool _dataReady = false;
-  int _totalPages = 604;
+  final int _totalPages = 604;
   int _currentPage = 1;
 
   @override
@@ -54,7 +54,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
       if (await indexFile.exists()) {
         _dataReady = true;
         final prefs = await SharedPreferences.getInstance();
-        _currentPage = prefs.getInt('kfgqpc_mushaf_last_page') ?? 1;
+        _currentPage = prefs.getInt("kfgqpc_mushaf_last_page") ?? 1;
       }
     }
 
@@ -194,7 +194,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
         onPageChanged: (page) async {
           _currentPage = page;
           final prefs = await SharedPreferences.getInstance();
-          await prefs.setInt('kfgqpc_mushaf_last_page', page);
+          await prefs.setInt("kfgqpc_mushaf_last_page", page);
         },
         onDeleteData: _deleteMushafData,
       );
@@ -301,7 +301,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Colors.white)
       ..addJavaScriptChannel(
-        'flutter_channel',
+        "flutter_channel",
         onMessageReceived: (JavaScriptMessage message) {
           _handleWordTap(message.message);
         },
@@ -329,7 +329,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
               }
 
               if (_currentPage != 1) {
-                _controller.runJavaScript('loadPage($_currentPage)');
+                _controller.runJavaScript("loadPage($_currentPage)");
               }
               setState(() {
                 _isWebViewReady = true;
@@ -338,7 +338,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
           },
           onNavigationRequest: (NavigationRequest request) {
             // Intercept quran:// scheme (fallback from JS)
-            if (request.url.startsWith('quran://')) {
+            if (request.url.startsWith("quran://")) {
               _handleQuranScheme(request.url);
               return NavigationDecision.prevent;
             }
@@ -358,9 +358,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
       );
 
       AudioPlayerManager.playWordWithWordId(
-        data['surah'],
-        data['wordId'],
-        data['page'],
+        data["surah"],
+        data["wordId"],
+        data["page"],
       );
     } catch (e) {
       log("Error parsing word tap: $e", name: "MushafWebView");
@@ -370,9 +370,9 @@ class _MushafWebViewState extends State<_MushafWebView> {
   void _handleQuranScheme(String url) {
     try {
       final uri = Uri.parse(url);
-      final surah = uri.queryParameters['surah'];
-      final wordId = uri.queryParameters['wordId'];
-      final page = uri.queryParameters['page'];
+      final surah = uri.queryParameters["surah"];
+      final wordId = uri.queryParameters["wordId"];
+      final page = uri.queryParameters["page"];
       log(
         "Word tapped (scheme): surah=$surah, wordId=$wordId, page=$page",
         name: "MushafWebView",
@@ -387,7 +387,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
     setState(() {
       _currentPage = page;
     });
-    _controller.runJavaScript('loadPage($page)');
+    _controller.runJavaScript("loadPage($page)");
     widget.onPageChanged?.call(page);
   }
 

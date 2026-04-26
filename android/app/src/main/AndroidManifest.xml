@@ -19,7 +19,7 @@
     <!-- alarm -->
 
     <!-- REMOVE THE PERMISSION FROM A DEPENDENCY -->
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" tools:node="remove" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     
     <application
         android:name="${applicationName}"
