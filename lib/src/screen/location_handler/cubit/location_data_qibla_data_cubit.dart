@@ -45,7 +45,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     );
 
     emit(newState);
-    await ReminderScheduler.rescheduleAll();
+    await ReminderScheduler.scheduleNotification();
   }
 
   Future<void> saveCalculationMethod(
@@ -61,7 +61,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       );
     }
     emit(state.copyWith(calculationMethod: calculationMethod));
-    await ReminderScheduler.rescheduleAll();
+    await ReminderScheduler.scheduleNotification();
   }
 
   Future<void> saveMadhab(Madhab madhab, {bool save = true}) async {
@@ -71,7 +71,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       sharedPreferences.setString("selected_madhab", madhab.name);
     }
     emit(state.copyWith(madhab: madhab));
-    await ReminderScheduler.rescheduleAll();
+    await ReminderScheduler.scheduleNotification();
   }
 
   void changePrayerTimeDownloading(bool value) {

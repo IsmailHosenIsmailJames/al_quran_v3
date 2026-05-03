@@ -1,8 +1,5 @@
 import "dart:developer";
 
-import "package:alarm/alarm.dart";
-import "package:alarm/utils/alarm_set.dart";
-
 // import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
@@ -15,8 +12,6 @@ import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/screen/prayer_time/background/prayer_background_worker.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_alarm_screen.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
@@ -120,41 +115,16 @@ Future<void> main() async {
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
       await LocationQiblaPrayerDataCubit.getSavedState();
 
-  PrayerReminderState prayerReminderState = await ReminderScheduler.init(
-    onNotificationClick: (payload) {
-      if (payload != null && navigatorKey.currentState != null) {
-        navigatorKey.currentState!.push(
-          MaterialPageRoute(
-            builder: (_) => PrayerAlarmScreen(payload: payload),
-          ),
-        );
-      }
-    },
-  );
-
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
+    await ReminderScheduler.init();
     await PrayerBackgroundWorker.init();
   }
-
-  // Listen for alarm ringing events and show the alarm screen
-  Alarm.ringing.listen((AlarmSet alarmSet) {
-    for (final alarm in alarmSet.alarms) {
-      final prayerName = alarm.notificationSettings.body
-          .replaceAll("It is time for ", "")
-          .replaceAll(" prayer.", "");
-      final payload = "$prayerName:${alarm.id}";
-      navigatorKey.currentState?.push(
-        MaterialPageRoute(builder: (_) => PrayerAlarmScreen(payload: payload)),
-      );
-    }
-  });
 
   runApp(
     MyApp(
       initialLocale: initialLocale,
-      prayerReminderState: prayerReminderState,
       locationQiblaPrayerDataState: locationQiblaPrayerDataState,
     ),
   );
@@ -240,13 +210,11 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
 
 class MyApp extends StatelessWidget {
   final MyAppLocalization initialLocale;
-  final PrayerReminderState prayerReminderState;
   final LocationQiblaPrayerDataState locationQiblaPrayerDataState;
 
   const MyApp({
     super.key,
     required this.initialLocale,
-    required this.prayerReminderState,
     required this.locationQiblaPrayerDataState,
   });
 
@@ -282,10 +250,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AudioTabReciterCubit()),
         BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
-        BlocProvider(
-          create: (context) =>
-              PrayerReminderCubit(initState: prayerReminderState),
-        ),
+        BlocProvider(create: (context) => PrayerReminderCubit()),
         BlocProvider(create: (context) => OthersSettingsCubit()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),
