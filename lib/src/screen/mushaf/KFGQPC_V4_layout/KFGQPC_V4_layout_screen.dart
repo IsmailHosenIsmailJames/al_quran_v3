@@ -11,7 +11,8 @@ import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
 import "package:shared_preferences/shared_preferences.dart";
 import "package:shimmer/shimmer.dart";
-import "package:webview_flutter/webview_flutter.dart";
+import "dart:collection";
+import "package:flutter_inappwebview/flutter_inappwebview.dart";
 
 class KfgqpcV4LayoutScreen extends StatefulWidget {
   const KfgqpcV4LayoutScreen({super.key});
@@ -285,7 +286,7 @@ class _MushafWebView extends StatefulWidget {
 }
 
 class _MushafWebViewState extends State<_MushafWebView> {
-  late final WebViewController _controller;
+  InAppWebViewController? _controller;
   int _currentPage = 1;
   bool _isWebViewReady = false;
 
@@ -293,60 +294,6 @@ class _MushafWebViewState extends State<_MushafWebView> {
   void initState() {
     super.initState();
     _currentPage = widget.initialPage;
-    _initWebView();
-  }
-
-  void _initWebView() {
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.white)
-      ..addJavaScriptChannel(
-        "flutter_channel",
-        onMessageReceived: (JavaScriptMessage message) {
-          _handleWordTap(message.message);
-        },
-      )
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageFinished: (url) async {
-            if (!_isWebViewReady) {
-              final pagesFile = File(
-                "${widget.baseDirPath}/script/quran_pages.json",
-              );
-              final namesFile = File("${widget.baseDirPath}/surah_name.json");
-
-              if (await pagesFile.exists() && await namesFile.exists()) {
-                final pagesJson = await pagesFile.readAsString();
-                final namesJson = await namesFile.readAsString();
-
-                // Encode the JSON strings so they form valid JS string literals
-                final pEscaped = jsonEncode(pagesJson);
-                final nEscaped = jsonEncode(namesJson);
-
-                _controller.runJavaScript(
-                  "initializeData($pEscaped, $nEscaped)",
-                );
-              }
-
-              if (_currentPage != 1) {
-                _controller.runJavaScript("loadPage($_currentPage)");
-              }
-              setState(() {
-                _isWebViewReady = true;
-              });
-            }
-          },
-          onNavigationRequest: (NavigationRequest request) {
-            // Intercept quran:// scheme (fallback from JS)
-            if (request.url.startsWith("quran://")) {
-              _handleQuranScheme(request.url);
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadFile("${widget.baseDirPath}/index.html");
   }
 
   void _handleWordTap(String jsonMessage) {
@@ -387,7 +334,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
     setState(() {
       _currentPage = page;
     });
-    _controller.runJavaScript("loadPage($page)");
+    _controller?.evaluateJavascript(source: "loadPage($page)");
     widget.onPageChanged?.call(page);
   }
 
@@ -552,7 +499,68 @@ class _MushafWebViewState extends State<_MushafWebView> {
       ),
       body: Stack(
         children: [
-          WebViewWidget(controller: _controller),
+          InAppWebView(
+            initialUrlRequest: URLRequest(url: WebUri("file://${widget.baseDirPath}/index.html")),
+            initialSettings: InAppWebViewSettings(
+              javaScriptEnabled: true,
+              transparentBackground: false,
+              allowFileAccessFromFileURLs: true,
+              allowUniversalAccessFromFileURLs: true,
+              allowFileAccess: true,
+            ),
+            initialUserScripts: UnmodifiableListView<UserScript>([
+              UserScript(
+                source: "window.flutter_channel = { postMessage: function(message) { window.flutter_inappwebview.callHandler('flutter_channel', message); } };",
+                injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+              )
+            ]),
+            onWebViewCreated: (controller) {
+              _controller = controller;
+              controller.addJavaScriptHandler(
+                handlerName: "flutter_channel",
+                callback: (args) {
+                  _handleWordTap(args[0]);
+                },
+              );
+            },
+            onLoadStop: (controller, url) async {
+              if (!_isWebViewReady) {
+                final pagesFile = File(
+                  "${widget.baseDirPath}/script/quran_pages.json",
+                );
+                final namesFile = File("${widget.baseDirPath}/surah_name.json");
+
+                if (await pagesFile.exists() && await namesFile.exists()) {
+                  final pagesJson = await pagesFile.readAsString();
+                  final namesJson = await namesFile.readAsString();
+
+                  final pEscaped = jsonEncode(pagesJson);
+                  final nEscaped = jsonEncode(namesJson);
+
+                  controller.evaluateJavascript(
+                    source: "initializeData($pEscaped, $nEscaped)",
+                  );
+                }
+
+                if (_currentPage != 1) {
+                  controller.evaluateJavascript(source: "loadPage($_currentPage)");
+                }
+                if (mounted) {
+                  setState(() {
+                    _isWebViewReady = true;
+                  });
+                }
+              }
+            },
+            shouldOverrideUrlLoading: (controller, navigationAction) async {
+              final url = navigationAction.request.url?.toString() ?? "";
+              if (url.startsWith("quran://")) {
+                _handleQuranScheme(url);
+                return NavigationActionPolicy.CANCEL;
+              }
+              return NavigationActionPolicy.ALLOW;
+            },
+          ),
           if (!_isWebViewReady)
             const Center(child: CircularProgressIndicator()),
         ],

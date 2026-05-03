@@ -8,6 +8,7 @@ class LocationQiblaPrayerDataState {
   bool? isPrayerTimeDownloading;
   bool? isGettingLocation;
   Madhab? madhab;
+  bool hasInitialLocationUpdated;
 
   LocationQiblaPrayerDataState({
     this.latLon,
@@ -16,6 +17,7 @@ class LocationQiblaPrayerDataState {
     this.isPrayerTimeDownloading = false,
     this.isGettingLocation = false,
     this.madhab,
+    this.hasInitialLocationUpdated = false,
   });
 
   LocationQiblaPrayerDataState copyWith({
@@ -26,6 +28,7 @@ class LocationQiblaPrayerDataState {
     bool? isPrayerTimeDownloading,
     bool? isGettingLocation,
     Madhab? madhab,
+    bool? hasInitialLocationUpdated,
   }) {
     return LocationQiblaPrayerDataState(
       latLon: latLon ?? this.latLon,
@@ -35,6 +38,8 @@ class LocationQiblaPrayerDataState {
           isPrayerTimeDownloading ?? this.isPrayerTimeDownloading,
       isGettingLocation: isGettingLocation ?? this.isGettingLocation,
       madhab: madhab ?? this.madhab,
+      hasInitialLocationUpdated:
+          hasInitialLocationUpdated ?? this.hasInitialLocationUpdated,
     );
   }
 }
