@@ -631,5 +631,10 @@
   "manualLocationDescription": "Ел мен қаланы қолмен таңдаңыз. Қаланы өзгертсеңіз, орналасуды жаңартуыңыз керек.",
   "selectLocation": "Орналасуды таңдаңыз",
   "selectCountry": "Елді таңдаңыз",
-  "selectCity": "Қаланы таңдаңыз"
+  "selectCity": "Қаланы таңдаңыз",
+  "sunRising": "Күннің шығуы",
+  "sunSetting": "Күннің батуы",
+  "sunTopOfTheHead": "Күннің тас төбеде болуы",
+  "salatTime": "Намаз уақыты",
+  "forbiddenSalatTime": "Намаз оқуға тыйым салынған уақыт"
 }

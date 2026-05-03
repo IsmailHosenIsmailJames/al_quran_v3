@@ -1251,4 +1251,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get selectCity => 'Выберите город';
+
+  @override
+  String get sunRising => 'Восход солнца';
+
+  @override
+  String get sunSetting => 'Закат солнца';
+
+  @override
+  String get sunTopOfTheHead => 'Солнце в зените';
+
+  @override
+  String get salatTime => 'Время молитвы';
+
+  @override
+  String get forbiddenSalatTime => 'Запрещенное время молитвы';
 }

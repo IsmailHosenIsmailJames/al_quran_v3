@@ -369,5 +369,10 @@
   "manualLocationDescription": "국가와 도시를 수동으로 선택합니다. 도시를 변경하면 위치를 업데이트해야 합니다.",
   "selectLocation": "위치 선택",
   "selectCountry": "국가 선택",
-  "selectCity": "도시 선택"
+  "selectCity": "도시 선택",
+  "sunRising": "일출",
+  "sunSetting": "일몰",
+  "sunTopOfTheHead": "태양이 머리 위에 있음",
+  "salatTime": "기도 시간",
+  "forbiddenSalatTime": "금지된 기도 시간"
 }

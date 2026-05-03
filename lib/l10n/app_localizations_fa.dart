@@ -1242,4 +1242,19 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get selectCity => 'انتخاب شهر';
+
+  @override
+  String get sunRising => 'طلوع خورشید';
+
+  @override
+  String get sunSetting => 'غروب خورشید';
+
+  @override
+  String get sunTopOfTheHead => 'خورشید در وسط آسمان';
+
+  @override
+  String get salatTime => 'وقت نماز';
+
+  @override
+  String get forbiddenSalatTime => 'وقت ممنوعه نماز';
 }

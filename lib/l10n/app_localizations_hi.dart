@@ -1242,4 +1242,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get selectCity => 'शहर चुनें';
+
+  @override
+  String get sunRising => 'सूर्योदय';
+
+  @override
+  String get sunSetting => 'सूर्यास्त';
+
+  @override
+  String get sunTopOfTheHead => 'सूरज सिर के ऊपर';
+
+  @override
+  String get salatTime => 'प्रार्थना का समय';
+
+  @override
+  String get forbiddenSalatTime => 'वर्जित प्रार्थना का समय';
 }

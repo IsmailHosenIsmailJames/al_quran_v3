@@ -631,5 +631,10 @@
   "manualLocationDescription": "Выберите страну и город вручную. Вам нужно будет обновить местоположение, если вы смените город.",
   "selectLocation": "Выберите местоположение",
   "selectCountry": "Выберите страну",
-  "selectCity": "Выберите город"
+  "selectCity": "Выберите город",
+  "sunRising": "Восход солнца",
+  "sunSetting": "Закат солнца",
+  "sunTopOfTheHead": "Солнце в зените",
+  "salatTime": "Время молитвы",
+  "forbiddenSalatTime": "Запрещенное время молитвы"
 }

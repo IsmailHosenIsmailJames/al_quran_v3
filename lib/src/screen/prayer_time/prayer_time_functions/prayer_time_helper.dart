@@ -5,8 +5,14 @@ import "package:flutter/material.dart";
 class PrayerTimeHelper {
   PrayerTimeHelper();
 
-  static String? localizedPrayerName(BuildContext context, Prayer? prayer) {
-    final AppLocalizations localizations = AppLocalizations.of(context);
+  static String? localizedPrayerName(
+    BuildContext? context,
+
+    Prayer? prayer, {
+    AppLocalizations? appLocalizations,
+  }) {
+    final AppLocalizations localizations =
+        appLocalizations ?? AppLocalizations.of(context!);
     switch (prayer) {
       case Prayer.fajr:
         return localizations.fajr;

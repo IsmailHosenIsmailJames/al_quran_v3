@@ -631,5 +631,10 @@
   "manualLocationDescription": "Seleccione manualmente el país y la ciudad. Necesita actualizar la ubicación si cambia de ciudad.",
   "selectLocation": "Seleccionar ubicación",
   "selectCountry": "Seleccionar país",
-  "selectCity": "Seleccionar ciudad"
+  "selectCity": "Seleccionar ciudad",
+  "sunRising": "Salida del sol",
+  "sunSetting": "Puesta del sol",
+  "sunTopOfTheHead": "Sol en el cenit",
+  "salatTime": "Tiempo de Oración",
+  "forbiddenSalatTime": "Tiempo de oración prohibido"
 }

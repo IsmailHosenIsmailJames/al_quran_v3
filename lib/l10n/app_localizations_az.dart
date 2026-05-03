@@ -1248,4 +1248,19 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get selectCity => 'Şəhəri seçin';
+
+  @override
+  String get sunRising => 'Günəşin çıxması';
+
+  @override
+  String get sunSetting => 'Günəşin batması';
+
+  @override
+  String get sunTopOfTheHead => 'Günəşin Təpədə Olması';
+
+  @override
+  String get salatTime => 'Namaz Vaxtı';
+
+  @override
+  String get forbiddenSalatTime => 'Məkruh Namaz Vaxtı';
 }

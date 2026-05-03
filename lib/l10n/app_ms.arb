@@ -631,5 +631,10 @@
   "manualLocationDescription": "Pilih negara dan bandar secara manual. Anda perlu mengemas kini lokasi jika anda menukar bandar.",
   "selectLocation": "Pilih Lokasi",
   "selectCountry": "Pilih Negara",
-  "selectCity": "Pilih Bandar"
+  "selectCity": "Pilih Bandar",
+  "sunRising": "Matahari Terbit",
+  "sunSetting": "Matahari Terbenam",
+  "sunTopOfTheHead": "Matahari di Atas Kepala",
+  "salatTime": "Waktu Solat",
+  "forbiddenSalatTime": "Waktu Solat Dilarang"
 }

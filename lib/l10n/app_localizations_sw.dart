@@ -1250,4 +1250,19 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get selectCity => 'Chagua Jiji';
+
+  @override
+  String get sunRising => 'Kuchomoza kwa Jua';
+
+  @override
+  String get sunSetting => 'Kuzama kwa Jua';
+
+  @override
+  String get sunTopOfTheHead => 'Jua Utosini';
+
+  @override
+  String get salatTime => 'Wakati wa Swala';
+
+  @override
+  String get forbiddenSalatTime => 'Wakati Uliokatazwa wa Swala';
 }

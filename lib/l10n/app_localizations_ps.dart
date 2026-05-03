@@ -1243,4 +1243,19 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get selectCity => 'ښار وټاکئ';
+
+  @override
+  String get sunRising => 'لمر ختل';
+
+  @override
+  String get sunSetting => 'لمر لوېدل';
+
+  @override
+  String get sunTopOfTheHead => 'لمر د سر په سر';
+
+  @override
+  String get salatTime => 'د لمانځه وخت';
+
+  @override
+  String get forbiddenSalatTime => 'د لمانځه منع شوی وخت';
 }

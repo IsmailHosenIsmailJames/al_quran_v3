@@ -2371,6 +2371,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select City'**
   String get selectCity;
+
+  /// No description provided for @sunRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun Rising'**
+  String get sunRising;
+
+  /// No description provided for @sunSetting.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun Setting'**
+  String get sunSetting;
+
+  /// No description provided for @sunTopOfTheHead.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun Top of the Head'**
+  String get sunTopOfTheHead;
+
+  /// No description provided for @salatTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Salat Time'**
+  String get salatTime;
+
+  /// No description provided for @forbiddenSalatTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Forbidden Salat Time'**
+  String get forbiddenSalatTime;
 }
 
 class _AppLocalizationsDelegate

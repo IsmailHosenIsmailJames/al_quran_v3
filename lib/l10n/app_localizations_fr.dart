@@ -1256,4 +1256,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get selectCity => 'Sélectionner la ville';
+
+  @override
+  String get sunRising => 'Lever du soleil';
+
+  @override
+  String get sunSetting => 'Coucher du soleil';
+
+  @override
+  String get sunTopOfTheHead => 'Soleil au zénith';
+
+  @override
+  String get salatTime => 'Heure de la prière';
+
+  @override
+  String get forbiddenSalatTime => 'Heure de prière interdite';
 }

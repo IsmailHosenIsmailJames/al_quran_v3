@@ -631,5 +631,10 @@
   "manualLocationDescription": "Manually select the country and city. You need to update the location if you change city.",
   "selectLocation": "Select Location",
   "selectCountry": "Select Country",
-  "selectCity": "Select City"
+  "selectCity": "Select City",
+  "sunRising": "Sun Rising",
+  "sunSetting": "Sun Setting",
+  "sunTopOfTheHead": "Sun Top of the Head",
+  "salatTime": "Salat Time",
+  "forbiddenSalatTime": "Forbidden Salat Time"
 }

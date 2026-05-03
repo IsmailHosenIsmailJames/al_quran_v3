@@ -631,5 +631,10 @@
   "manualLocationDescription": "اختر البلد والمدينة يدويًا. ستحتاج إلى تحديث الموقع إذا قمت بتغيير المدينة.",
   "selectLocation": "اختر الموقع",
   "selectCountry": "اختر البلد",
-  "selectCity": "اختر المدينة"
+  "selectCity": "اختر المدينة",
+  "sunRising": "شروق الشمس",
+  "sunSetting": "غروب الشمس",
+  "sunTopOfTheHead": "وقت الزوال (الشمس في كبد السماء)",
+  "salatTime": "وقت الصلاة",
+  "forbiddenSalatTime": "وقت كراهة الصلاة"
 }

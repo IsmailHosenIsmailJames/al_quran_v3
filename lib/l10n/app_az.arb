@@ -369,5 +369,10 @@
   "manualLocationDescription": "Ölkəni və şəhəri əl ilə seçin. Şəhəri dəyişsəniz, məkanı yeniləməlisiniz.",
   "selectLocation": "Məkanı seçin",
   "selectCountry": "Ölkəni seçin",
-  "selectCity": "Şəhəri seçin"
+  "selectCity": "Şəhəri seçin",
+  "sunRising": "Günəşin çıxması",
+  "sunSetting": "Günəşin batması",
+  "sunTopOfTheHead": "Günəşin Təpədə Olması",
+  "salatTime": "Namaz Vaxtı",
+  "forbiddenSalatTime": "Məkruh Namaz Vaxtı"
 }
