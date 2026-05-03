@@ -180,7 +180,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                               await context
                                   .read<LocationQiblaPrayerDataCubit>()
                                   .getLocation();
-                              Fluttertoast.showToast(msg: "New Location Saved");
+                              Fluttertoast.showToast(msg: l10n.success);
                               return;
                             }
                           } else {
