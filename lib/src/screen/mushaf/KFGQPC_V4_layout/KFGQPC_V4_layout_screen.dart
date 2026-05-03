@@ -500,7 +500,7 @@ class _MushafWebViewState extends State<_MushafWebView> {
       body: Stack(
         children: [
           InAppWebView(
-            initialUrlRequest: URLRequest(url: WebUri("file://${widget.baseDirPath}/index.html")),
+            initialUrlRequest: URLRequest(url: WebUri(Uri.file("${widget.baseDirPath}/index.html").toString())),
             initialSettings: InAppWebViewSettings(
               javaScriptEnabled: true,
               transparentBackground: false,
