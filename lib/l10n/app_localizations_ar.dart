@@ -1218,4 +1218,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'تقويم أوقات الصلاة';
+
+  @override
+  String get allowLocation => 'السماح بالموقع';
+
+  @override
+  String get allowLocationDescription => 'تحديث أوقات الصلاة تلقائيًا.';
+
+  @override
+  String get manualLocation => 'موقع يدوي';
+
+  @override
+  String get manualLocationDescription =>
+      'اختر البلد والمدينة يدويًا. ستحتاج إلى تحديث الموقع إذا قمت بتغيير المدينة.';
+
+  @override
+  String get selectLocation => 'اختر الموقع';
+
+  @override
+  String get selectCountry => 'اختر البلد';
+
+  @override
+  String get selectCity => 'اختر المدينة';
 }

@@ -624,5 +624,12 @@
   "warning": "Warning",
   "hijri": "Hijri",
   "gregorian": "Gregorian",
-  "prayerTimesCalender": "Prayer Times Calender"
+  "prayerTimesCalender": "Prayer Times Calender",
+  "allowLocation": "Allow Location",
+  "allowLocationDescription": "Automatically updates prayer times.",
+  "manualLocation": "Manual Location",
+  "manualLocationDescription": "Manually select the country and city. You need to update the location if you change city.",
+  "selectLocation": "Select Location",
+  "selectCountry": "Select Country",
+  "selectCity": "Select City"
 }

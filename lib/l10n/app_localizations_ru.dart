@@ -1228,4 +1228,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Календарь времени молитв';
+
+  @override
+  String get allowLocation => 'Разрешить местоположение';
+
+  @override
+  String get allowLocationDescription =>
+      'Автоматически обновляет время молитв.';
+
+  @override
+  String get manualLocation => 'Ручное местоположение';
+
+  @override
+  String get manualLocationDescription =>
+      'Выберите страну и город вручную. Вам нужно будет обновить местоположение, если вы смените город.';
+
+  @override
+  String get selectLocation => 'Выберите местоположение';
+
+  @override
+  String get selectCountry => 'Выберите страну';
+
+  @override
+  String get selectCity => 'Выберите город';
 }

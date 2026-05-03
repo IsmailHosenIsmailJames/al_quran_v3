@@ -362,5 +362,12 @@
   "warningMessageOnIndopakTajweedEnable": "일부 글꼴에서 인도팍 타즈위드 색상 렌더링에 몇 가지 문제가 발견되었습니다. 따라서 스크립트 색상 렌더링에 불일치가 나타날 수 있습니다. 인도팍에 타즈위드를 적용하시겠습니까?",
   "hijri": "히즈라",
   "gregorian": "그레고리력",
-  "prayerTimesCalender": "기도 시간 달력"
+  "prayerTimesCalender": "기도 시간 달력",
+  "allowLocation": "위치 허용",
+  "allowLocationDescription": "기도 시간을 자동으로 업데이트합니다.",
+  "manualLocation": "수동 위치",
+  "manualLocationDescription": "국가와 도시를 수동으로 선택합니다. 도시를 변경하면 위치를 업데이트해야 합니다.",
+  "selectLocation": "위치 선택",
+  "selectCountry": "국가 선택",
+  "selectCity": "도시 선택"
 }

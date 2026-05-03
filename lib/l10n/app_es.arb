@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "Hemos encontrado algunos problemas de renderizado en el color del tajweed Indopak en algunas fuentes. Por lo tanto, podrías ver inconsistencias en el renderizado del color de la escritura. ¿Estás seguro de que quieres aplicar tajweed en Indopak?",
   "hijri": "Hégira",
   "gregorian": "Gregoriano",
-  "prayerTimesCalender": "Calendario de Tiempos de Oración"
+  "prayerTimesCalender": "Calendario de Tiempos de Oración",
+  "allowLocation": "Permitir ubicación",
+  "allowLocationDescription": "Actualiza automáticamente los tiempos de oración.",
+  "manualLocation": "Ubicación manual",
+  "manualLocationDescription": "Seleccione manualmente el país y la ciudad. Necesita actualizar la ubicación si cambia de ciudad.",
+  "selectLocation": "Seleccionar ubicación",
+  "selectCountry": "Seleccionar país",
+  "selectCity": "Seleccionar ciudad"
 }

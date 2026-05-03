@@ -1218,4 +1218,27 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Намаз уақыттарының күнтізбесі';
+
+  @override
+  String get allowLocation => 'Орналасуға рұқсат беру';
+
+  @override
+  String get allowLocationDescription =>
+      'Намаз уақыттарын автоматты түрде жаңартады.';
+
+  @override
+  String get manualLocation => 'Қолмен орналасу';
+
+  @override
+  String get manualLocationDescription =>
+      'Ел мен қаланы қолмен таңдаңыз. Қаланы өзгертсеңіз, орналасуды жаңартуыңыз керек.';
+
+  @override
+  String get selectLocation => 'Орналасуды таңдаңыз';
+
+  @override
+  String get selectCountry => 'Елді таңдаңыз';
+
+  @override
+  String get selectCity => 'Қаланы таңдаңыз';
 }

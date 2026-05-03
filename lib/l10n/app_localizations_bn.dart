@@ -1219,4 +1219,27 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'নামাজের সময়সূচী ক্যালেন্ডার';
+
+  @override
+  String get allowLocation => 'অবস্থান অনুমতি দিন';
+
+  @override
+  String get allowLocationDescription =>
+      'স্বয়ংক্রিয়ভাবে নামাজের সময় আপডেট করে।';
+
+  @override
+  String get manualLocation => 'ম্যানুয়াল অবস্থান';
+
+  @override
+  String get manualLocationDescription =>
+      'ম্যানুয়ালি দেশ এবং শহর নির্বাচন করুন। আপনি শহর পরিবর্তন করলে আপনাকে অবস্থান আপডেট করতে হবে।';
+
+  @override
+  String get selectLocation => 'অবস্থান নির্বাচন করুন';
+
+  @override
+  String get selectCountry => 'দেশ নির্বাচন করুন';
+
+  @override
+  String get selectCity => 'শহর নির্বাচন করুন';
 }

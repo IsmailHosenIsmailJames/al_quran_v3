@@ -35,6 +35,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       prayerType,
       timeInMinutes,
     );
+    await ReminderScheduler.cancelAllNotifications();
+    await ReminderScheduler.scheduleNotification();
   }
 
   /// Called while user is dragging the slider — only update UI + save pref.

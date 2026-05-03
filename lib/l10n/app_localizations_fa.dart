@@ -1219,4 +1219,27 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'تقویم اوقات شرعی';
+
+  @override
+  String get allowLocation => 'اجازه مکان';
+
+  @override
+  String get allowLocationDescription =>
+      'اوقات شرعی را به طور خودکار به روز می کند.';
+
+  @override
+  String get manualLocation => 'مکان دستی';
+
+  @override
+  String get manualLocationDescription =>
+      'کشور و شهر را به صورت دستی انتخاب کنید. در صورت تغییر شهر باید مکان را به روز کنید.';
+
+  @override
+  String get selectLocation => 'انتخاب مکان';
+
+  @override
+  String get selectCountry => 'انتخاب کشور';
+
+  @override
+  String get selectCity => 'انتخاب شهر';
 }

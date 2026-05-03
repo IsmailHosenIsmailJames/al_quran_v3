@@ -1220,4 +1220,27 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'د لمانځه وختونو کیلنڈر';
+
+  @override
+  String get allowLocation => 'موقعیت ته اجازه ورکړئ';
+
+  @override
+  String get allowLocationDescription =>
+      'د لمانځه وختونه په اوتومات ډول تازه کوي.';
+
+  @override
+  String get manualLocation => 'لاسي موقعیت';
+
+  @override
+  String get manualLocationDescription =>
+      'په لاسي ډول هیواد او ښار وټاکئ. که تاسو ښار بدل کړئ نو تاسو اړتیا لرئ موقعیت تازه کړئ.';
+
+  @override
+  String get selectLocation => 'موقعیت وټاکئ';
+
+  @override
+  String get selectCountry => 'هیواد وټاکئ';
+
+  @override
+  String get selectCity => 'ښار وټاکئ';
 }

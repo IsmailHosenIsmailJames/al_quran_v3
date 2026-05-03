@@ -1225,4 +1225,27 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Namaz Vaxtları Təqvimi';
+
+  @override
+  String get allowLocation => 'Məkanı icazə ver';
+
+  @override
+  String get allowLocationDescription =>
+      'Namaz vaxtlarını avtomatik yeniləyir.';
+
+  @override
+  String get manualLocation => 'Əl ilə məkan';
+
+  @override
+  String get manualLocationDescription =>
+      'Ölkəni və şəhəri əl ilə seçin. Şəhəri dəyişsəniz, məkanı yeniləməlisiniz.';
+
+  @override
+  String get selectLocation => 'Məkanı seçin';
+
+  @override
+  String get selectCountry => 'Ölkəni seçin';
+
+  @override
+  String get selectCity => 'Şəhəri seçin';
 }

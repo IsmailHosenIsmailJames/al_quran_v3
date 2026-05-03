@@ -1221,4 +1221,27 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'نماز کے اوقات کا کیلنڈر';
+
+  @override
+  String get allowLocation => 'مقام کی اجازت دیں';
+
+  @override
+  String get allowLocationDescription =>
+      'نماز کے اوقات خود بخود اپ ڈیٹ کرتا ہے۔';
+
+  @override
+  String get manualLocation => 'دستی مقام';
+
+  @override
+  String get manualLocationDescription =>
+      'دستی طور پر ملک اور شہر کا انتخاب کریں۔ اگر آپ شہر تبدیل کرتے ہیں تو آپ کو مقام کو اپ ڈیٹ کرنے کی ضرورت ہے۔';
+
+  @override
+  String get selectLocation => 'مقام منتخب کریں';
+
+  @override
+  String get selectCountry => 'ملک منتخب کریں';
+
+  @override
+  String get selectCity => 'شہر منتخب کریں';
 }

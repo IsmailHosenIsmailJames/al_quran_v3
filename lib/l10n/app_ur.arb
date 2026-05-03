@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "ہمیں کچھ فونٹس پر انڈوپاک تجوید کے رنگ میں کچھ رینڈرنگ کے مسائل ملے ہیں۔ لہذا، آپ اسکرپٹ کے رنگ کی رینڈرنگ میں عدم تسلسل دیکھ سکتے ہیں۔ کیا آپ واقعی انڈوپاک پر تجوید لاگو کرنا چاہتے ہیں؟",
   "hijri": "ہجری",
   "gregorian": "عیسوی",
-  "prayerTimesCalender": "نماز کے اوقات کا کیلنڈر"
+  "prayerTimesCalender": "نماز کے اوقات کا کیلنڈر",
+  "allowLocation": "مقام کی اجازت دیں",
+  "allowLocationDescription": "نماز کے اوقات خود بخود اپ ڈیٹ کرتا ہے۔",
+  "manualLocation": "دستی مقام",
+  "manualLocationDescription": "دستی طور پر ملک اور شہر کا انتخاب کریں۔ اگر آپ شہر تبدیل کرتے ہیں تو آپ کو مقام کو اپ ڈیٹ کرنے کی ضرورت ہے۔",
+  "selectLocation": "مقام منتخب کریں",
+  "selectCountry": "ملک منتخب کریں",
+  "selectCity": "شہر منتخب کریں"
 }

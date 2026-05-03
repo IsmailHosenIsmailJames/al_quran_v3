@@ -78,10 +78,6 @@ class ReminderScheduler {
       for (Prayer prayerName in prayerTimesToday.keys) {
         DateTime? time = prayerTimesToday[prayerName];
         if (time != null) {
-          log(
-            "${DateFormat("dd MMMM yyyy hh:mm a").format(time)} - ${prayerName.name}",
-          );
-
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               channelKey: "prayer_reminder",
@@ -179,6 +175,7 @@ class ReminderScheduler {
   }
 
   static Future<void> cancelAllNotifications() async {
+    log("Cancelling all notifications");
     await AwesomeNotifications().cancelAll();
   }
 

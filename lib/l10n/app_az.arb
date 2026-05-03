@@ -362,5 +362,12 @@
   "warningMessageOnIndopakTajweedEnable": "Bəzi şriftlərdə İndopak təcvid rəngi üzərində bəzi göstərmə problemləri tapdıq. Buna görə, skript rənginin göstərilməsində uyğunsuzluq görə bilərsiniz. İndopak üzərində təcvid tətbiq etmək istədiyinizə əminsiniz?",
   "hijri": "Hicri",
   "gregorian": "Qriqorian",
-  "prayerTimesCalender": "Namaz Vaxtları Təqvimi"
+  "prayerTimesCalender": "Namaz Vaxtları Təqvimi",
+  "allowLocation": "Məkanı icazə ver",
+  "allowLocationDescription": "Namaz vaxtlarını avtomatik yeniləyir.",
+  "manualLocation": "Əl ilə məkan",
+  "manualLocationDescription": "Ölkəni və şəhəri əl ilə seçin. Şəhəri dəyişsəniz, məkanı yeniləməlisiniz.",
+  "selectLocation": "Məkanı seçin",
+  "selectCountry": "Ölkəni seçin",
+  "selectCity": "Şəhəri seçin"
 }

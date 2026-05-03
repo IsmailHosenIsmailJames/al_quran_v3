@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "Bazı yazı tiplerinde Indopak tecvid renginde bazı oluşturma sorunları bulduk. Bu nedenle, betik renk oluşturmada tutarsızlık görebilirsiniz. Indopak'ta tecvid uygulamak istediğinizden emin misiniz?",
   "hijri": "Hicri",
   "gregorian": "Miladi",
-  "prayerTimesCalender": "Namaz Vakitleri Takvimi"
+  "prayerTimesCalender": "Namaz Vakitleri Takvimi",
+  "allowLocation": "Konuma İzin Ver",
+  "allowLocationDescription": "Namaz vakitlerini otomatik günceller.",
+  "manualLocation": "Manuel Konum",
+  "manualLocationDescription": "Ülke ve şehri manuel seçin. Şehir değiştirirseniz konumu güncellemeniz gerekir.",
+  "selectLocation": "Konum Seçin",
+  "selectCountry": "Ülke Seçin",
+  "selectCity": "Şehir Seçin"
 }

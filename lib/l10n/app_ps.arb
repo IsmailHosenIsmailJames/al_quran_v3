@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "موږ په ځینو فونټونو کې د انډوپاک تجوید رنګ کې د ښودلو ځینې ستونزې موندلې دي. نو، تاسو ممکن د سکریپټ رنګ ښودلو کې ناانډولي وګورئ. ایا تاسو ډاډه یاست چې تاسو غواړئ په انډوپاک کې تجوید پلي کړئ؟",
   "hijri": "هجري",
   "gregorian": "ګریګورین",
-  "prayerTimesCalender": "د لمانځه وختونو کیلنڈر"
+  "prayerTimesCalender": "د لمانځه وختونو کیلنڈر",
+  "allowLocation": "موقعیت ته اجازه ورکړئ",
+  "allowLocationDescription": "د لمانځه وختونه په اوتومات ډول تازه کوي.",
+  "manualLocation": "لاسي موقعیت",
+  "manualLocationDescription": "په لاسي ډول هیواد او ښار وټاکئ. که تاسو ښار بدل کړئ نو تاسو اړتیا لرئ موقعیت تازه کړئ.",
+  "selectLocation": "موقعیت وټاکئ",
+  "selectCountry": "هیواد وټاکئ",
+  "selectCity": "ښار وټاکئ"
 }

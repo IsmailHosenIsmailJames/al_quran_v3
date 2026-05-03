@@ -1203,4 +1203,26 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => '礼拝時間カレンダー';
+
+  @override
+  String get allowLocation => '位置情報を許可';
+
+  @override
+  String get allowLocationDescription => '礼拝時間を自動的に更新します。';
+
+  @override
+  String get manualLocation => '手動で位置情報を設定';
+
+  @override
+  String get manualLocationDescription =>
+      '国と都市を手動で選択します。都市を変更した場合は、位置情報を更新する必要があります。';
+
+  @override
+  String get selectLocation => '位置情報を選択';
+
+  @override
+  String get selectCountry => '国を選択';
+
+  @override
+  String get selectCity => '都市を選択';
 }

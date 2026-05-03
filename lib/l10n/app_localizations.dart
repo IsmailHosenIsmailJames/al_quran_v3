@@ -2329,6 +2329,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prayer Times Calender'**
   String get prayerTimesCalender;
+
+  /// No description provided for @allowLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Location'**
+  String get allowLocation;
+
+  /// No description provided for @allowLocationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically updates prayer times.'**
+  String get allowLocationDescription;
+
+  /// No description provided for @manualLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual Location'**
+  String get manualLocation;
+
+  /// No description provided for @manualLocationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Manually select the country and city. You need to update the location if you change city.'**
+  String get manualLocationDescription;
+
+  /// No description provided for @selectLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Location'**
+  String get selectLocation;
+
+  /// No description provided for @selectCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Country'**
+  String get selectCountry;
+
+  /// No description provided for @selectCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Select City'**
+  String get selectCity;
 }
 
 class _AppLocalizationsDelegate

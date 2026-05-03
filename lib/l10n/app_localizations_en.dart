@@ -1219,4 +1219,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Prayer Times Calender';
+
+  @override
+  String get allowLocation => 'Allow Location';
+
+  @override
+  String get allowLocationDescription => 'Automatically updates prayer times.';
+
+  @override
+  String get manualLocation => 'Manual Location';
+
+  @override
+  String get manualLocationDescription =>
+      'Manually select the country and city. You need to update the location if you change city.';
+
+  @override
+  String get selectLocation => 'Select Location';
+
+  @override
+  String get selectCountry => 'Select Country';
+
+  @override
+  String get selectCity => 'Select City';
 }

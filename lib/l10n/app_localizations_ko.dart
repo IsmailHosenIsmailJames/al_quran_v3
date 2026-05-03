@@ -1202,4 +1202,26 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => '기도 시간 달력';
+
+  @override
+  String get allowLocation => '위치 허용';
+
+  @override
+  String get allowLocationDescription => '기도 시간을 자동으로 업데이트합니다.';
+
+  @override
+  String get manualLocation => '수동 위치';
+
+  @override
+  String get manualLocationDescription =>
+      '국가와 도시를 수동으로 선택합니다. 도시를 변경하면 위치를 업데이트해야 합니다.';
+
+  @override
+  String get selectLocation => '위치 선택';
+
+  @override
+  String get selectCountry => '국가 선택';
+
+  @override
+  String get selectCity => '도시 선택';
 }
