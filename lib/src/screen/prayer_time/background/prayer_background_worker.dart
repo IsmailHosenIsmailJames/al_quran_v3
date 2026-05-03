@@ -29,7 +29,7 @@ class PrayerBackgroundWorker {
     await Workmanager().registerPeriodicTask(
       periodicTaskName,
       periodicTaskName,
-      frequency: const Duration(days: 7), // Weekly top-up
+      frequency: const Duration(days: 1), // Weekly top-up
       initialDelay: const Duration(minutes: 10),
       constraints: Constraints(
         networkType: NetworkType.notRequired,
