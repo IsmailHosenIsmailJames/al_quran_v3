@@ -101,7 +101,7 @@ msix_config:
   publisher_display_name: "MD. Ismail Hosen"
   identity_name: MD.IsmailHosen.com.ismail.al-quran
   publisher: "CN=B9F6AC9B-F4A4-426C-9C75-82E3872E24AB"
-  msix_version: 3.8.0.0
+  msix_version: 3.21.2.0
   logo_path: "assets\\img\\Quran_Logo_v3.png"
   capabilities: "internetClient, location"
   store: true
