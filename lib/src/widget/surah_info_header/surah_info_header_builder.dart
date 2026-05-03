@@ -108,11 +108,12 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             shape: const RoundedRectangleBorder(),
                           ),
                           onPressed: () async {
-                            final String surahInfo =
+                            final String? surahInfo =
                                 await QuranTranslationFunction.getInfoOfSurah(
                                   context.read<LanguageCubit>().state.locale,
                                   headerInfoModel.surahInfoModel.id.toString(),
                                 );
+                            if (surahInfo == null || !context.mounted) return;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
