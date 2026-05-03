@@ -9,7 +9,7 @@ void callbackDispatcher() {
       await ReminderScheduler.init();
 
       // Reschedule all active notifications for the next 30 days
-      await ReminderScheduler.rescheduleAll();
+      await ReminderScheduler.scheduleNotification();
 
       return true;
     } catch (e) {

@@ -1,37 +1,32 @@
 import "package:adhan_dart/adhan_dart.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type.dart";
-import "package:al_quran_v3/src/screen/prayer_time/models/reminder_type_with_pray_model.dart";
 
 class PrayerReminderState {
-  List<ReminderTypeWithPrayModel> prayerToRemember;
-  Map<Prayer, PrayerReminderType> previousReminderModes;
-  Map<Prayer, int> reminderTimeAdjustment;
-  bool enforceAlarmSound;
-  double soundVolume;
+  Map<Prayer, int>? reminderTimeAdjustment;
+  bool? enforceAlarmSound;
+  double? soundVolume;
+  bool? isPrayerRemindNotificationEnabled;
 
   PrayerReminderState({
-    required this.prayerToRemember,
-    required this.previousReminderModes,
-    required this.reminderTimeAdjustment,
-    required this.enforceAlarmSound,
-    required this.soundVolume,
+    this.reminderTimeAdjustment,
+    this.enforceAlarmSound,
+    this.soundVolume,
+    this.isPrayerRemindNotificationEnabled,
   });
 
   PrayerReminderState copyWith({
-    List<ReminderTypeWithPrayModel>? prayerToRemember,
-    Map<Prayer, PrayerReminderType>? previousReminderModes,
     Map<Prayer, int>? reminderTimeAdjustment,
     bool? enforceAlarmSound,
     double? soundVolume,
+    bool? isPrayerRemindNotificationEnabled,
   }) {
     return PrayerReminderState(
-      prayerToRemember: prayerToRemember ?? this.prayerToRemember,
-      previousReminderModes:
-          previousReminderModes ?? this.previousReminderModes,
       reminderTimeAdjustment:
           reminderTimeAdjustment ?? this.reminderTimeAdjustment,
       enforceAlarmSound: enforceAlarmSound ?? this.enforceAlarmSound,
       soundVolume: soundVolume ?? this.soundVolume,
+      isPrayerRemindNotificationEnabled:
+          isPrayerRemindNotificationEnabled ??
+          this.isPrayerRemindNotificationEnabled,
     );
   }
 }
