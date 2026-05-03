@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "我们在某些字体的印巴变音符号颜色上发现了一些渲染问题。因此，您可能会看到脚本颜色渲染的不一致。您确定要在印巴文上应用变音符号吗？",
   "hijri": "回历",
   "gregorian": "公历",
-  "prayerTimesCalender": "祈祷时间日历"
+  "prayerTimesCalender": "祈祷时间日历",
+  "allowLocation": "允许位置",
+  "allowLocationDescription": "自动更新祈祷时间。",
+  "manualLocation": "手动位置",
+  "manualLocationDescription": "手动选择国家和城市。如果您更改城市，则需要更新位置。",
+  "selectLocation": "选择位置",
+  "selectCountry": "选择国家",
+  "selectCity": "选择城市"
 }

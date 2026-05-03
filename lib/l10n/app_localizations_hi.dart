@@ -1219,4 +1219,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'प्रार्थना के समय का कैलेंडर';
+
+  @override
+  String get allowLocation => 'स्थान की अनुमति दें';
+
+  @override
+  String get allowLocationDescription =>
+      'प्रार्थना का समय स्वचालित रूप से अपडेट करता है।';
+
+  @override
+  String get manualLocation => 'मैनुअल स्थान';
+
+  @override
+  String get manualLocationDescription =>
+      'मैन्युअल रूप से देश और शहर का चयन करें। यदि आप शहर बदलते हैं तो आपको स्थान अपडेट करने की आवश्यकता है।';
+
+  @override
+  String get selectLocation => 'स्थान चुनें';
+
+  @override
+  String get selectCountry => 'देश चुनें';
+
+  @override
+  String get selectCity => 'शहर चुनें';
 }

@@ -139,59 +139,16 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         ),
                       ),
                       const Gap(12),
-                      PopupMenuButton(
+                      IconButton(
                         padding: EdgeInsets.zero,
-                        itemBuilder: (context) {
-                          return [
-                            PopupMenuItem(
-                              value: true,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.gps_fixed_rounded),
-                                  const Gap(8),
-                                  Text(l10n.getFromGPS),
-                                ],
-                              ),
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const LocationAcquire(backToPage: true),
                             ),
-                            PopupMenuItem(
-                              value: false,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.location_city_rounded),
-                                  const Gap(8),
-                                  Text(l10n.selectYourCity),
-                                ],
-                              ),
-                            ),
-                          ];
-                        },
-                        onSelected: (value) async {
-                          if (value == true) {
-                            PermissionStatus locationPermission =
-                                await Permission.location.status;
-
-                            if (locationPermission.isGranted) {
-                              await context
-                                  .read<LocationQiblaPrayerDataCubit>()
-                                  .getLocation();
-                              Fluttertoast.showToast(msg: l10n.success);
-                              return;
-                            }
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const LocationAcquire(backToPage: true),
-                              ),
-                            );
-                          }
+                          );
                         },
 
                         icon: locationState.isGettingLocation == true
@@ -441,7 +398,6 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                                   ),
                                 ),
                               ),
-                              Text(DateTime.now().toString()),
                               Text(
                                 PrayerTimeHelper.localizedPrayerName(
                                       context,

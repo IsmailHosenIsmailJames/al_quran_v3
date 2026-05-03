@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "Tumepata shida kadhaa za utoaji kwenye rangi ya tajweed ya Indopak kwenye fonti zingine. Kwa hivyo, unaweza kuona kutokwenda kwenye utoaji wa rangi ya maandishi. Je, una uhakika unataka kutumia tajweed kwenye Indopak?",
   "hijri": "Hijria",
   "gregorian": "Gregori",
-  "prayerTimesCalender": "Kalenda ya Nyakati za Swala"
+  "prayerTimesCalender": "Kalenda ya Nyakati za Swala",
+  "allowLocation": "Ruhusu Mahali",
+  "allowLocationDescription": "Husasisha kiotomatiki nyakati za swala.",
+  "manualLocation": "Eneo la Mwongozo",
+  "manualLocationDescription": "Chagua nchi na jiji kwa mikono. Unahitaji kusasisha eneo ikiwa utabadilisha jiji.",
+  "selectLocation": "Chagua Mahali",
+  "selectCountry": "Chagua Nchi",
+  "selectCity": "Chagua Jiji"
 }

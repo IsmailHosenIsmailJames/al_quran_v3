@@ -1227,4 +1227,27 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Kalenda ya Nyakati za Swala';
+
+  @override
+  String get allowLocation => 'Ruhusu Mahali';
+
+  @override
+  String get allowLocationDescription =>
+      'Husasisha kiotomatiki nyakati za swala.';
+
+  @override
+  String get manualLocation => 'Eneo la Mwongozo';
+
+  @override
+  String get manualLocationDescription =>
+      'Chagua nchi na jiji kwa mikono. Unahitaji kusasisha eneo ikiwa utabadilisha jiji.';
+
+  @override
+  String get selectLocation => 'Chagua Mahali';
+
+  @override
+  String get selectCountry => 'Chagua Nchi';
+
+  @override
+  String get selectCity => 'Chagua Jiji';
 }

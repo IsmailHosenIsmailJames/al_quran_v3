@@ -362,5 +362,12 @@
   "warningMessageOnIndopakTajweedEnable": "一部のフォントでインドパクのタジュウィードの色に描画の問題が見つかりました。そのため、スクリプトの色の描画に不整合が見られる可能性があります。本当にインドパクにタジュウィードを適用しますか？",
   "hijri": "ヒジュラ暦",
   "gregorian": "グレゴリオ暦",
-  "prayerTimesCalender": "礼拝時間カレンダー"
+  "prayerTimesCalender": "礼拝時間カレンダー",
+  "allowLocation": "位置情報を許可",
+  "allowLocationDescription": "礼拝時間を自動的に更新します。",
+  "manualLocation": "手動で位置情報を設定",
+  "manualLocationDescription": "国と都市を手動で選択します。都市を変更した場合は、位置情報を更新する必要があります。",
+  "selectLocation": "位置情報を選択",
+  "selectCountry": "国を選択",
+  "selectCity": "都市を選択"
 }

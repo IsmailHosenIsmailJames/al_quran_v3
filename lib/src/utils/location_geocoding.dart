@@ -5,30 +5,38 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:geocoding/geocoding.dart";
 
 AddressClass? address;
+LatLon? _lastLatLon;
+Future<String>? _cachedFuture;
 
-Future<String> locationName(BuildContext context, LatLon latLon) async {
-  if (address == null) {
-    final countryCode = context.read<LanguageCubit>().state.locale.countryCode;
-    await setLocaleIdentifier(countryCode ?? "US");
+Future<String> locationName(BuildContext context, LatLon latLon) {
+  if (address == null || _lastLatLon?.latitude != latLon.latitude || _lastLatLon?.longitude != latLon.longitude) {
+    _lastLatLon = latLon;
+    _cachedFuture = _fetchLocationName(context, latLon);
+  }
+  return _cachedFuture!;
+}
 
-    final placeMarks = await placemarkFromCoordinates(
-      latLon.latitude,
-      latLon.longitude,
-    );
+Future<String> _fetchLocationName(BuildContext context, LatLon latLon) async {
+  final countryCode = context.read<LanguageCubit>().state.locale.countryCode;
+  await setLocaleIdentifier(countryCode ?? "US");
 
-    address = AddressClass();
-    for (final placeMark in placeMarks) {
-      address!.name = placeMark.name;
-      address!.subThoroughfare = placeMark.subThoroughfare;
-      address!.thoroughfare = placeMark.thoroughfare;
-      address!.subLocality = placeMark.subLocality;
-      address!.locality = placeMark.locality;
-      address!.subAdministrativeArea = placeMark.subAdministrativeArea;
-      address!.administrativeArea = placeMark.administrativeArea;
-      address!.postalCode = placeMark.postalCode;
-      address!.country = placeMark.country;
-      address!.isoCountryCode = placeMark.isoCountryCode;
-    }
+  final placeMarks = await placemarkFromCoordinates(
+    latLon.latitude,
+    latLon.longitude,
+  );
+
+  address = AddressClass();
+  for (final placeMark in placeMarks) {
+    address!.name = placeMark.name;
+    address!.subThoroughfare = placeMark.subThoroughfare;
+    address!.thoroughfare = placeMark.thoroughfare;
+    address!.subLocality = placeMark.subLocality;
+    address!.locality = placeMark.locality;
+    address!.subAdministrativeArea = placeMark.subAdministrativeArea;
+    address!.administrativeArea = placeMark.administrativeArea;
+    address!.postalCode = placeMark.postalCode;
+    address!.country = placeMark.country;
+    address!.isoCountryCode = placeMark.isoCountryCode;
   }
 
   return [

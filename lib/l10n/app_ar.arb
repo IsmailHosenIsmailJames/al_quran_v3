@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "لقد وجدنا بعض مشاكل العرض في لون التجويد الهندي الباكستاني في بعض الخطوط. لذلك، قد ترى عدم تناسق في عرض ألوان النص. هل أنت متأكد من أنك تريد تطبيق التجويد على الهندي الباكستاني؟",
   "hijri": "هجري",
   "gregorian": "ميلادي",
-  "prayerTimesCalender": "تقويم أوقات الصلاة"
+  "prayerTimesCalender": "تقويم أوقات الصلاة",
+  "allowLocation": "السماح بالموقع",
+  "allowLocationDescription": "تحديث أوقات الصلاة تلقائيًا.",
+  "manualLocation": "موقع يدوي",
+  "manualLocationDescription": "اختر البلد والمدينة يدويًا. ستحتاج إلى تحديث الموقع إذا قمت بتغيير المدينة.",
+  "selectLocation": "اختر الموقع",
+  "selectCountry": "اختر البلد",
+  "selectCity": "اختر المدينة"
 }

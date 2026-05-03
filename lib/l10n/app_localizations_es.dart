@@ -1231,4 +1231,27 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Calendario de Tiempos de Oración';
+
+  @override
+  String get allowLocation => 'Permitir ubicación';
+
+  @override
+  String get allowLocationDescription =>
+      'Actualiza automáticamente los tiempos de oración.';
+
+  @override
+  String get manualLocation => 'Ubicación manual';
+
+  @override
+  String get manualLocationDescription =>
+      'Seleccione manualmente el país y la ciudad. Necesita actualizar la ubicación si cambia de ciudad.';
+
+  @override
+  String get selectLocation => 'Seleccionar ubicación';
+
+  @override
+  String get selectCountry => 'Seleccionar país';
+
+  @override
+  String get selectCity => 'Seleccionar ciudad';
 }

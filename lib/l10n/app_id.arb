@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "Kami menemukan beberapa masalah rendering pada warna tajwid Indopak di beberapa font. Jadi, Anda mungkin melihat ketidakkonsistenan pada rendering warna skrip. Apakah Anda yakin ingin menerapkan tajwid pada Indopak?",
   "hijri": "Hijriah",
   "gregorian": "Masehi",
-  "prayerTimesCalender": "Kalender Waktu Salat"
+  "prayerTimesCalender": "Kalender Waktu Salat",
+  "allowLocation": "Izinkan Lokasi",
+  "allowLocationDescription": "Secara otomatis memperbarui waktu salat.",
+  "manualLocation": "Lokasi Manual",
+  "manualLocationDescription": "Pilih negara dan kota secara manual. Anda perlu memperbarui lokasi jika Anda mengubah kota.",
+  "selectLocation": "Pilih Lokasi",
+  "selectCountry": "Pilih Negara",
+  "selectCity": "Pilih Kota"
 }

@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_s
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/setup/book_select_popup.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
+import "package:al_quran_v3/src/utils/quran_resources/location_resources_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
@@ -413,7 +414,12 @@ class _AppSetupPageState extends State<AppSetupPage> {
       context,
       context.read<SegmentedQuranReciterCubit>().state.segmentsUrl!,
     );
-    if (success1 && success2 && success3 && success4) {
+    bool success5 = await LocationResourcesFunction.downloadLocationResources(
+      context: context,
+      isSetupProcess: true,
+    );
+
+    if (success1 && success2 && success3 && success4 && success5) {
       userBox.put("is_setup_complete", true);
 
       QuranTranslationFunction.init(
@@ -430,7 +436,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
       context.read<ResourcesProcceessCubit>().success();
     } else {
       // error and show 'Something went wrong' in cubit
-      log([success1, success2, success3, success4].toString());
+      log([success1, success2, success3, success4, success5].toString());
       context.read<ResourcesProcceessCubit>().failure(
         appLocalizations.unableToDownloadResources,
       );

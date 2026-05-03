@@ -362,5 +362,12 @@
   "warningMessageOnIndopakTajweedEnable": "Chúng tôi đã phát hiện một số vấn đề kết xuất trên màu tajweed Indopak trên một số phông chữ. Vì vậy, bạn có thể thấy sự không nhất quán trên kết xuất màu văn bản. Bạn có chắc chắn muốn áp dụng tajweed trên Indopak không?",
   "hijri": "Hijri",
   "gregorian": "Dương lịch",
-  "prayerTimesCalender": "Lịch Thời gian Cầu nguyện"
+  "prayerTimesCalender": "Lịch Thời gian Cầu nguyện",
+  "allowLocation": "Cho phép vị trí",
+  "allowLocationDescription": "Tự động cập nhật thời gian cầu nguyện.",
+  "manualLocation": "Vị trí thủ công",
+  "manualLocationDescription": "Chọn quốc gia và thành phố theo cách thủ công. Bạn cần cập nhật vị trí nếu bạn thay đổi thành phố.",
+  "selectLocation": "Chọn vị trí",
+  "selectCountry": "Chọn quốc gia",
+  "selectCity": "Chọn thành phố"
 }

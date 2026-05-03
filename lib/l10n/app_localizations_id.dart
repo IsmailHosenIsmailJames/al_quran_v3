@@ -1218,4 +1218,27 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Kalender Waktu Salat';
+
+  @override
+  String get allowLocation => 'Izinkan Lokasi';
+
+  @override
+  String get allowLocationDescription =>
+      'Secara otomatis memperbarui waktu salat.';
+
+  @override
+  String get manualLocation => 'Lokasi Manual';
+
+  @override
+  String get manualLocationDescription =>
+      'Pilih negara dan kota secara manual. Anda perlu memperbarui lokasi jika Anda mengubah kota.';
+
+  @override
+  String get selectLocation => 'Pilih Lokasi';
+
+  @override
+  String get selectCountry => 'Pilih Negara';
+
+  @override
+  String get selectCity => 'Pilih Kota';
 }

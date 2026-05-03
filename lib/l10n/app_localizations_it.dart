@@ -1233,4 +1233,27 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Calendario dei tempi di preghiera';
+
+  @override
+  String get allowLocation => 'Consenti posizione';
+
+  @override
+  String get allowLocationDescription =>
+      'Aggiorna automaticamente i tempi di preghiera.';
+
+  @override
+  String get manualLocation => 'Posizione manuale';
+
+  @override
+  String get manualLocationDescription =>
+      'Seleziona manualmente il paese e la città. Devi aggiornare la posizione se cambi città.';
+
+  @override
+  String get selectLocation => 'Seleziona posizione';
+
+  @override
+  String get selectCountry => 'Seleziona paese';
+
+  @override
+  String get selectCity => 'Seleziona città';
 }

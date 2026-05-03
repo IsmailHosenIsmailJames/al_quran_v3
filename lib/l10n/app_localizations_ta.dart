@@ -1237,4 +1237,27 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'தொழுகை நேரங்கள் நாட்காட்டி';
+
+  @override
+  String get allowLocation => 'இருப்பிடத்தை அனுமதி';
+
+  @override
+  String get allowLocationDescription =>
+      'தொழுகை நேரங்களை தானாகவே புதுப்பிக்கிறது.';
+
+  @override
+  String get manualLocation => 'கையேடு இருப்பிடம்';
+
+  @override
+  String get manualLocationDescription =>
+      'நாட்டையும் நகரத்தையும் கைமுறையாகத் தேர்ந்தெடுக்கவும். நீங்கள் நகரத்தை மாற்றினால் இருப்பிடத்தைப் புதுப்பிக்க வேண்டும்.';
+
+  @override
+  String get selectLocation => 'இருப்பிடத்தைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get selectCountry => 'நாட்டைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get selectCity => 'நகரத்தைத் தேர்ந்தெடுக்கவும்';
 }

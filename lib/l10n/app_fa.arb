@@ -624,5 +624,12 @@
   "warningMessageOnIndopakTajweedEnable": "ما در رنگ تجوید ایندوپاک در برخی فونت‌ها مشکلات نمایش پیدا کرده‌ایم. بنابراین، ممکن است در نمایش رنگ متن ناهماهنگی‌هایی مشاهده کنید. آیا مطمئن هستید که می‌خواهید تجوید را بر روی ایندوپاک اعمال کنید؟",
   "hijri": "هجری",
   "gregorian": "میلادی",
-  "prayerTimesCalender": "تقویم اوقات شرعی"
+  "prayerTimesCalender": "تقویم اوقات شرعی",
+  "allowLocation": "اجازه مکان",
+  "allowLocationDescription": "اوقات شرعی را به طور خودکار به روز می کند.",
+  "manualLocation": "مکان دستی",
+  "manualLocationDescription": "کشور و شهر را به صورت دستی انتخاب کنید. در صورت تغییر شهر باید مکان را به روز کنید.",
+  "selectLocation": "انتخاب مکان",
+  "selectCountry": "انتخاب کشور",
+  "selectCity": "انتخاب شهر"
 }

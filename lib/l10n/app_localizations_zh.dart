@@ -1184,4 +1184,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => '祈祷时间日历';
+
+  @override
+  String get allowLocation => '允许位置';
+
+  @override
+  String get allowLocationDescription => '自动更新祈祷时间。';
+
+  @override
+  String get manualLocation => '手动位置';
+
+  @override
+  String get manualLocationDescription => '手动选择国家和城市。如果您更改城市，则需要更新位置。';
+
+  @override
+  String get selectLocation => '选择位置';
+
+  @override
+  String get selectCountry => '选择国家';
+
+  @override
+  String get selectCity => '选择城市';
 }

@@ -1224,4 +1224,27 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get prayerTimesCalender => 'Lịch Thời gian Cầu nguyện';
+
+  @override
+  String get allowLocation => 'Cho phép vị trí';
+
+  @override
+  String get allowLocationDescription =>
+      'Tự động cập nhật thời gian cầu nguyện.';
+
+  @override
+  String get manualLocation => 'Vị trí thủ công';
+
+  @override
+  String get manualLocationDescription =>
+      'Chọn quốc gia và thành phố theo cách thủ công. Bạn cần cập nhật vị trí nếu bạn thay đổi thành phố.';
+
+  @override
+  String get selectLocation => 'Chọn vị trí';
+
+  @override
+  String get selectCountry => 'Chọn quốc gia';
+
+  @override
+  String get selectCity => 'Chọn thành phố';
 }
