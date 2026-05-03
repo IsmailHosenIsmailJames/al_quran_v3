@@ -153,15 +153,6 @@ class _LocationAcquireState extends State<LocationAcquire> {
                     ),
                   ),
                   const Gap(20),
-                  if (!(platformOwn == PlatformOwn.isLinux))
-                    Text(
-                      l10n.noteAboutGPS,
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      ),
-                    ),
                 ],
               ),
             ),
