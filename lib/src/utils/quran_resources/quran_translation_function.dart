@@ -57,12 +57,15 @@ class QuranTranslationFunction {
 
   static bool isInfoAvailable(Locale locale) {
     final boxName = "surah_info_${locale.languageCode}";
-    return Hive.isBoxOpen(boxName);
+    log(Hive.lazyBox(boxName).keys.toString(), name: "Surah Info Keys");
+    return Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty;
   }
 
-  static Future<String> getInfoOfSurah(Locale locale, String id) async {
+  static Future<String?> getInfoOfSurah(Locale locale, String id) async {
     final boxName = "surah_info_${locale.languageCode}";
-    return (await Hive.lazyBox(boxName).get(id))["text"];
+    final data = await Hive.lazyBox(boxName).get(id);
+    if (data == null) return null;
+    return data["text"];
   }
 
   static Future<bool> isAlreadyDownloaded(ResourcesModel book) async {
@@ -391,7 +394,7 @@ class QuranTranslationFunction {
           response.data,
         );
         for (final key in data.keys) {
-          log(key);
+          log(key, name: "Surah Info Key");
           await box.put(key, data[key]);
         }
         // await box.close(); // Close after writing
