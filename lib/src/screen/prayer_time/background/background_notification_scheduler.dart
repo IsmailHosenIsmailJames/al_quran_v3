@@ -52,6 +52,7 @@ class ReminderScheduler {
         channelName: "Prayer Reminders",
         channelDescription: "Notifications for prayer time reminders",
         playSound: true,
+        soundSource: "resource://raw/notification_sound",
         onlyAlertOnce: true,
         importance: NotificationImportance.High,
         defaultPrivacy: NotificationPrivacy.Public,
@@ -62,6 +63,7 @@ class ReminderScheduler {
         channelDescription:
             "High-priority notifications for prayer alarm reminders",
         playSound: true,
+        soundSource: "resource://raw/notification_sound",
         importance: NotificationImportance.Max,
         defaultPrivacy: NotificationPrivacy.Public,
       ),
