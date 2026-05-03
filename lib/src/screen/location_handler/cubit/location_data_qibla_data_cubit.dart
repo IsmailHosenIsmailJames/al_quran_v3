@@ -28,6 +28,13 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
   }
 
+  Future<void> updateLocationOnce() async {
+    if (!state.hasInitialLocationUpdated) {
+      emit(state.copyWith(hasInitialLocationUpdated: true));
+      await getLocation();
+    }
+  }
+
   Future<void> alignWithDatabase() async {
     emit(await getSavedState());
   }

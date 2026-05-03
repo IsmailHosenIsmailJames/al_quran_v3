@@ -38,6 +38,16 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
   @override
   void initState() {
     super.initState();
+    _checkLocationPermissionAndUpdate();
+  }
+
+  Future<void> _checkLocationPermissionAndUpdate() async {
+    final status = await Permission.location.status;
+    if (status.isGranted) {
+      if (mounted) {
+        context.read<LocationQiblaPrayerDataCubit>().updateLocationOnce();
+      }
+    }
   }
 
   Prayer? lastPrayerTime;
@@ -152,10 +162,14 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                         },
 
                         icon: locationState.isGettingLocation == true
-                            ? CircularProgressIndicator(
-                                color: themeState.primary,
-                                strokeCap: StrokeCap.round,
-                                padding: const EdgeInsets.all(2),
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: themeState.primary,
+                                  strokeCap: StrokeCap.round,
+                                  strokeWidth: 2,
+                                ),
                               )
                             : Icon(Icons.refresh, color: themeState.primary),
                       ),
