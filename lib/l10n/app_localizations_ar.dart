@@ -1240,4 +1240,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get selectCity => 'اختر المدينة';
+
+  @override
+  String get sunRising => 'شروق الشمس';
+
+  @override
+  String get sunSetting => 'غروب الشمس';
+
+  @override
+  String get sunTopOfTheHead => 'وقت الزوال (الشمس في كبد السماء)';
+
+  @override
+  String get salatTime => 'وقت الصلاة';
+
+  @override
+  String get forbiddenSalatTime => 'وقت كراهة الصلاة';
 }

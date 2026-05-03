@@ -1224,4 +1224,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get selectCity => '도시 선택';
+
+  @override
+  String get sunRising => '일출';
+
+  @override
+  String get sunSetting => '일몰';
+
+  @override
+  String get sunTopOfTheHead => '태양이 머리 위에 있음';
+
+  @override
+  String get salatTime => '기도 시간';
+
+  @override
+  String get forbiddenSalatTime => '금지된 기도 시간';
 }

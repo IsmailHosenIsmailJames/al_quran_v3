@@ -631,5 +631,10 @@
   "manualLocationDescription": "मैन्युअल रूप से देश और शहर का चयन करें। यदि आप शहर बदलते हैं तो आपको स्थान अपडेट करने की आवश्यकता है।",
   "selectLocation": "स्थान चुनें",
   "selectCountry": "देश चुनें",
-  "selectCity": "शहर चुनें"
+  "selectCity": "शहर चुनें",
+  "sunRising": "सूर्योदय",
+  "sunSetting": "सूर्यास्त",
+  "sunTopOfTheHead": "सूरज सिर के ऊपर",
+  "salatTime": "प्रार्थना का समय",
+  "forbiddenSalatTime": "वर्जित प्रार्थना का समय"
 }

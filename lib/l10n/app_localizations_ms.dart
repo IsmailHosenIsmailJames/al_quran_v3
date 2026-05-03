@@ -1241,4 +1241,19 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get selectCity => 'Pilih Bandar';
+
+  @override
+  String get sunRising => 'Matahari Terbit';
+
+  @override
+  String get sunSetting => 'Matahari Terbenam';
+
+  @override
+  String get sunTopOfTheHead => 'Matahari di Atas Kepala';
+
+  @override
+  String get salatTime => 'Waktu Solat';
+
+  @override
+  String get forbiddenSalatTime => 'Waktu Solat Dilarang';
 }

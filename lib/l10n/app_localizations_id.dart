@@ -1241,4 +1241,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get selectCity => 'Pilih Kota';
+
+  @override
+  String get sunRising => 'Matahari Terbit';
+
+  @override
+  String get sunSetting => 'Matahari Terbenam';
+
+  @override
+  String get sunTopOfTheHead => 'Matahari di Atas Kepala';
+
+  @override
+  String get salatTime => 'Waktu Salat';
+
+  @override
+  String get forbiddenSalatTime => 'Waktu Salat Terlarang';
 }

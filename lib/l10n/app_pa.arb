@@ -631,5 +631,10 @@
   "manualLocationDescription": "ਮੈਨੁਅਲ ਤੌਰ 'ਤੇ ਦੇਸ਼ ਅਤੇ ਸ਼ਹਿਰ ਦੀ ਚੋਣ ਕਰੋ। ਜੇਕਰ ਤੁਸੀਂ ਸ਼ਹਿਰ ਬਦਲਦੇ ਹੋ ਤਾਂ ਤੁਹਾਨੂੰ ਟਿਕਾਣਾ ਅਪਡੇਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।",
   "selectLocation": "ਟਿਕਾਣਾ ਚੁਣੋ",
   "selectCountry": "ਦੇਸ਼ ਚੁਣੋ",
-  "selectCity": "ਸ਼ਹਿਰ ਚੁਣੋ"
+  "selectCity": "ਸ਼ਹਿਰ ਚੁਣੋ",
+  "sunRising": "ਸੂਰਜ ਚੜ੍ਹਨਾ",
+  "sunSetting": "ਸੂਰਜ ਡੁੱਬਣਾ",
+  "sunTopOfTheHead": "ਸੂਰਜ ਸਿਰ ਦੇ ਉੱਪਰ",
+  "salatTime": "ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
+  "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ"
 }

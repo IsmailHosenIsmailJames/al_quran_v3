@@ -631,5 +631,10 @@
   "manualLocationDescription": "Chagua nchi na jiji kwa mikono. Unahitaji kusasisha eneo ikiwa utabadilisha jiji.",
   "selectLocation": "Chagua Mahali",
   "selectCountry": "Chagua Nchi",
-  "selectCity": "Chagua Jiji"
+  "selectCity": "Chagua Jiji",
+  "sunRising": "Kuchomoza kwa Jua",
+  "sunSetting": "Kuzama kwa Jua",
+  "sunTopOfTheHead": "Jua Utosini",
+  "salatTime": "Wakati wa Swala",
+  "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala"
 }

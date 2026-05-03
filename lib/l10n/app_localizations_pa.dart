@@ -1240,4 +1240,19 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get selectCity => 'ਸ਼ਹਿਰ ਚੁਣੋ';
+
+  @override
+  String get sunRising => 'ਸੂਰਜ ਚੜ੍ਹਨਾ';
+
+  @override
+  String get sunSetting => 'ਸੂਰਜ ਡੁੱਬਣਾ';
+
+  @override
+  String get sunTopOfTheHead => 'ਸੂਰਜ ਸਿਰ ਦੇ ਉੱਪਰ';
+
+  @override
+  String get salatTime => 'ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ';
+
+  @override
+  String get forbiddenSalatTime => 'ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ';
 }

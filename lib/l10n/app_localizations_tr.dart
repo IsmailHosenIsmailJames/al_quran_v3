@@ -1243,4 +1243,19 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get selectCity => 'Şehir Seçin';
+
+  @override
+  String get sunRising => 'Güneşin Doğuşu';
+
+  @override
+  String get sunSetting => 'Güneşin Batışı';
+
+  @override
+  String get sunTopOfTheHead => 'Güneşin Tepede Olması';
+
+  @override
+  String get salatTime => 'Namaz Vakti';
+
+  @override
+  String get forbiddenSalatTime => 'Kerahat Vakti';
 }

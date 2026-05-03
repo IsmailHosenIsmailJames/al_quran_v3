@@ -1247,4 +1247,19 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get selectCity => 'Chọn thành phố';
+
+  @override
+  String get sunRising => 'Mặt trời mọc';
+
+  @override
+  String get sunSetting => 'Mặt trời lặn';
+
+  @override
+  String get sunTopOfTheHead => 'Mặt trời trên đỉnh đầu';
+
+  @override
+  String get salatTime => 'Thời gian cầu nguyện';
+
+  @override
+  String get forbiddenSalatTime => 'Thời gian cầu nguyện bị cấm';
 }

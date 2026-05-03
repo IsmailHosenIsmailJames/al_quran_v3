@@ -631,5 +631,10 @@
   "manualLocationDescription": "ম্যানুয়ালি দেশ এবং শহর নির্বাচন করুন। আপনি শহর পরিবর্তন করলে আপনাকে অবস্থান আপডেট করতে হবে।",
   "selectLocation": "অবস্থান নির্বাচন করুন",
   "selectCountry": "দেশ নির্বাচন করুন",
-  "selectCity": "শহর নির্বাচন করুন"
+  "selectCity": "শহর নির্বাচন করুন",
+  "sunRising": "সূর্যোদয়",
+  "sunSetting": "সূর্যাস্ত",
+  "sunTopOfTheHead": "সূর্য মাথার উপরে",
+  "salatTime": "নামাজের সময়",
+  "forbiddenSalatTime": "নামাজের নিষিদ্ধ সময়"
 }

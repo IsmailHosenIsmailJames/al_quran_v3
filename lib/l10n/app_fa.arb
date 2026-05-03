@@ -631,5 +631,10 @@
   "manualLocationDescription": "کشور و شهر را به صورت دستی انتخاب کنید. در صورت تغییر شهر باید مکان را به روز کنید.",
   "selectLocation": "انتخاب مکان",
   "selectCountry": "انتخاب کشور",
-  "selectCity": "انتخاب شهر"
+  "selectCity": "انتخاب شهر",
+  "sunRising": "طلوع خورشید",
+  "sunSetting": "غروب خورشید",
+  "sunTopOfTheHead": "خورشید در وسط آسمان",
+  "salatTime": "وقت نماز",
+  "forbiddenSalatTime": "وقت ممنوعه نماز"
 }

@@ -1260,4 +1260,19 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get selectCity => 'நகரத்தைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get sunRising => 'சூரியோதயம்';
+
+  @override
+  String get sunSetting => 'சூரிய அஸ்தமனம்';
+
+  @override
+  String get sunTopOfTheHead => 'சூரியன் உச்சி';
+
+  @override
+  String get salatTime => 'தொழுகை நேரம்';
+
+  @override
+  String get forbiddenSalatTime => 'தடைசெய்யப்பட்ட தொழுகை நேரம்';
 }

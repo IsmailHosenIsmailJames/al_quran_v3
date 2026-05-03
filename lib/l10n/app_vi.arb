@@ -369,5 +369,10 @@
   "manualLocationDescription": "Chọn quốc gia và thành phố theo cách thủ công. Bạn cần cập nhật vị trí nếu bạn thay đổi thành phố.",
   "selectLocation": "Chọn vị trí",
   "selectCountry": "Chọn quốc gia",
-  "selectCity": "Chọn thành phố"
+  "selectCity": "Chọn thành phố",
+  "sunRising": "Mặt trời mọc",
+  "sunSetting": "Mặt trời lặn",
+  "sunTopOfTheHead": "Mặt trời trên đỉnh đầu",
+  "salatTime": "Thời gian cầu nguyện",
+  "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm"
 }

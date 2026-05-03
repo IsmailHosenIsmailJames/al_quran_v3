@@ -1244,4 +1244,19 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get selectCity => 'شہر منتخب کریں';
+
+  @override
+  String get sunRising => 'طلوع آفتاب';
+
+  @override
+  String get sunSetting => 'غروب آفتاب';
+
+  @override
+  String get sunTopOfTheHead => 'سورج سر کے اوپر';
+
+  @override
+  String get salatTime => 'نماز کا وقت';
+
+  @override
+  String get forbiddenSalatTime => 'ممنوعہ نماز کا وقت';
 }

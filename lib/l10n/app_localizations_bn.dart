@@ -1242,4 +1242,19 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get selectCity => 'শহর নির্বাচন করুন';
+
+  @override
+  String get sunRising => 'সূর্যোদয়';
+
+  @override
+  String get sunSetting => 'সূর্যাস্ত';
+
+  @override
+  String get sunTopOfTheHead => 'সূর্য মাথার উপরে';
+
+  @override
+  String get salatTime => 'নামাজের সময়';
+
+  @override
+  String get forbiddenSalatTime => 'নামাজের নিষিদ্ধ সময়';
 }

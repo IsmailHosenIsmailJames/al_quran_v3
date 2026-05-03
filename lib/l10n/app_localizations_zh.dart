@@ -1205,4 +1205,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get selectCity => '选择城市';
+
+  @override
+  String get sunRising => '日出';
+
+  @override
+  String get sunSetting => '日落';
+
+  @override
+  String get sunTopOfTheHead => '太阳当头';
+
+  @override
+  String get salatTime => '礼拜时间';
+
+  @override
+  String get forbiddenSalatTime => '被禁止的礼拜时间';
 }

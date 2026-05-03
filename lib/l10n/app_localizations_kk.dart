@@ -1241,4 +1241,19 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get selectCity => 'Қаланы таңдаңыз';
+
+  @override
+  String get sunRising => 'Күннің шығуы';
+
+  @override
+  String get sunSetting => 'Күннің батуы';
+
+  @override
+  String get sunTopOfTheHead => 'Күннің тас төбеде болуы';
+
+  @override
+  String get salatTime => 'Намаз уақыты';
+
+  @override
+  String get forbiddenSalatTime => 'Намаз оқуға тыйым салынған уақыт';
 }

@@ -631,5 +631,10 @@
   "manualLocationDescription": "Ülke ve şehri manuel seçin. Şehir değiştirirseniz konumu güncellemeniz gerekir.",
   "selectLocation": "Konum Seçin",
   "selectCountry": "Ülke Seçin",
-  "selectCity": "Şehir Seçin"
+  "selectCity": "Şehir Seçin",
+  "sunRising": "Güneşin Doğuşu",
+  "sunSetting": "Güneşin Batışı",
+  "sunTopOfTheHead": "Güneşin Tepede Olması",
+  "salatTime": "Namaz Vakti",
+  "forbiddenSalatTime": "Kerahat Vakti"
 }

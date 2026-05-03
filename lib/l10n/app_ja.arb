@@ -369,5 +369,10 @@
   "manualLocationDescription": "国と都市を手動で選択します。都市を変更した場合は、位置情報を更新する必要があります。",
   "selectLocation": "位置情報を選択",
   "selectCountry": "国を選択",
-  "selectCity": "都市を選択"
+  "selectCity": "都市を選択",
+  "sunRising": "日の出",
+  "sunSetting": "日の入り",
+  "sunTopOfTheHead": "太陽が真上",
+  "salatTime": "礼拝の時間",
+  "forbiddenSalatTime": "礼拝禁止時間"
 }

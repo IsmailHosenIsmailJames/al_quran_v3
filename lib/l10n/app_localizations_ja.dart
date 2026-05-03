@@ -1225,4 +1225,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get selectCity => '都市を選択';
+
+  @override
+  String get sunRising => '日の出';
+
+  @override
+  String get sunSetting => '日の入り';
+
+  @override
+  String get sunTopOfTheHead => '太陽が真上';
+
+  @override
+  String get salatTime => '礼拝の時間';
+
+  @override
+  String get forbiddenSalatTime => '礼拝禁止時間';
 }

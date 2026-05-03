@@ -1241,4 +1241,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectCity => 'Select City';
+
+  @override
+  String get sunRising => 'Sun Rising';
+
+  @override
+  String get sunSetting => 'Sun Setting';
+
+  @override
+  String get sunTopOfTheHead => 'Sun Top of the Head';
+
+  @override
+  String get salatTime => 'Salat Time';
+
+  @override
+  String get forbiddenSalatTime => 'Forbidden Salat Time';
 }

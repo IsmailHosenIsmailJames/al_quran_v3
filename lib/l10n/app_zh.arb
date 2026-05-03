@@ -631,5 +631,10 @@
   "manualLocationDescription": "手动选择国家和城市。如果您更改城市，则需要更新位置。",
   "selectLocation": "选择位置",
   "selectCountry": "选择国家",
-  "selectCity": "选择城市"
+  "selectCity": "选择城市",
+  "sunRising": "日出",
+  "sunSetting": "日落",
+  "sunTopOfTheHead": "太阳当头",
+  "salatTime": "礼拜时间",
+  "forbiddenSalatTime": "被禁止的礼拜时间"
 }

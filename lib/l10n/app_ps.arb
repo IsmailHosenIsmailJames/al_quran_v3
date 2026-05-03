@@ -631,5 +631,10 @@
   "manualLocationDescription": "په لاسي ډول هیواد او ښار وټاکئ. که تاسو ښار بدل کړئ نو تاسو اړتیا لرئ موقعیت تازه کړئ.",
   "selectLocation": "موقعیت وټاکئ",
   "selectCountry": "هیواد وټاکئ",
-  "selectCity": "ښار وټاکئ"
+  "selectCity": "ښار وټاکئ",
+  "sunRising": "لمر ختل",
+  "sunSetting": "لمر لوېدل",
+  "sunTopOfTheHead": "لمر د سر په سر",
+  "salatTime": "د لمانځه وخت",
+  "forbiddenSalatTime": "د لمانځه منع شوی وخت"
 }

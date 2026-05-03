@@ -1,11 +1,39 @@
 import "dart:developer";
 
 import "package:adhan_dart/adhan_dart.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/l10n/app_localizations_ar.dart";
+import "package:al_quran_v3/l10n/app_localizations_az.dart";
+import "package:al_quran_v3/l10n/app_localizations_bn.dart";
+import "package:al_quran_v3/l10n/app_localizations_de.dart";
+import "package:al_quran_v3/l10n/app_localizations_en.dart";
+import "package:al_quran_v3/l10n/app_localizations_es.dart";
+import "package:al_quran_v3/l10n/app_localizations_fa.dart";
+import "package:al_quran_v3/l10n/app_localizations_fr.dart";
+import "package:al_quran_v3/l10n/app_localizations_hi.dart";
+import "package:al_quran_v3/l10n/app_localizations_id.dart";
+import "package:al_quran_v3/l10n/app_localizations_it.dart";
+import "package:al_quran_v3/l10n/app_localizations_ja.dart";
+import "package:al_quran_v3/l10n/app_localizations_kk.dart";
+import "package:al_quran_v3/l10n/app_localizations_ko.dart";
+import "package:al_quran_v3/l10n/app_localizations_ms.dart";
+import "package:al_quran_v3/l10n/app_localizations_pa.dart";
+import "package:al_quran_v3/l10n/app_localizations_ps.dart";
+import "package:al_quran_v3/l10n/app_localizations_pt.dart";
+import "package:al_quran_v3/l10n/app_localizations_ru.dart";
+import "package:al_quran_v3/l10n/app_localizations_sw.dart";
+import "package:al_quran_v3/l10n/app_localizations_ta.dart";
+import "package:al_quran_v3/l10n/app_localizations_tr.dart";
+import "package:al_quran_v3/l10n/app_localizations_ur.dart";
+import "package:al_quran_v3/l10n/app_localizations_vi.dart";
+import "package:al_quran_v3/l10n/app_localizations_zh.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
 import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
 import "package:dartx/dartx_io.dart";
+import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -68,6 +96,8 @@ class ReminderScheduler {
     PrayerReminderState reminderState,
     DateTime now,
   ) async {
+    Locale locale = (await LanguageCubit.getInitialLocale()).locale;
+    AppLocalizations appLocalizations = appLocalizationsFromLocale(locale);
     List<Map<Prayer, DateTime?>> next7DaysPrayerTimes = _getNext7DayPrayerTimes(
       locationState,
       now,
@@ -83,7 +113,7 @@ class ReminderScheduler {
               channelKey: "prayer_reminder",
               id: _notificationId(prayerName, time),
               title:
-                  "${getPrayerGroupName(prayerName)} - ${getPrayerNameWithSomeDetails(prayerName)}",
+                  "${getPrayerGroupName(prayerName, appLocalizations)} - ${getPrayerNameWithSomeDetails(prayerName, appLocalizations)}",
               body: DateFormat.jm(
                 (await LanguageCubit.getInitialLocale()).locale.languageCode,
               ).format(time),
@@ -106,36 +136,102 @@ class ReminderScheduler {
     }
   }
 
-  static String getPrayerNameWithSomeDetails(Prayer prayer) {
-    switch (prayer) {
-      case Prayer.sunrise:
-        return "Sun Rising";
-      case Prayer.noon:
-        return "Sun Top of the Head";
-      case Prayer.sunset:
-        return "Sun Setting";
+  static AppLocalizations appLocalizationsFromLocale(Locale locale) {
+    switch (locale.languageCode) {
+      case 'ar':
+        return AppLocalizationsAr();
+      case 'az':
+        return AppLocalizationsAz();
+      case 'bn':
+        return AppLocalizationsBn();
+      case 'de':
+        return AppLocalizationsDe();
+      case 'en':
+        return AppLocalizationsEn();
+      case 'es':
+        return AppLocalizationsEs();
+      case 'fa':
+        return AppLocalizationsFa();
+      case 'fr':
+        return AppLocalizationsFr();
+      case 'hi':
+        return AppLocalizationsHi();
+      case 'id':
+        return AppLocalizationsId();
+      case 'it':
+        return AppLocalizationsIt();
+      case 'ja':
+        return AppLocalizationsJa();
+      case 'kk':
+        return AppLocalizationsKk();
+      case 'ko':
+        return AppLocalizationsKo();
+      case 'ms':
+        return AppLocalizationsMs();
+      case 'pa':
+        return AppLocalizationsPa();
+      case 'ps':
+        return AppLocalizationsPs();
+      case 'pt':
+        return AppLocalizationsPt();
+      case 'ru':
+        return AppLocalizationsRu();
+      case 'sw':
+        return AppLocalizationsSw();
+      case 'ta':
+        return AppLocalizationsTa();
+      case 'tr':
+        return AppLocalizationsTr();
+      case 'ur':
+        return AppLocalizationsUr();
+      case 'vi':
+        return AppLocalizationsVi();
+      case 'zh':
+        return AppLocalizationsZh();
       default:
-        return prayer.name.capitalize();
+        return AppLocalizationsEn();
     }
   }
 
-  static String getPrayerGroupName(Prayer prayer) {
+  static String getPrayerNameWithSomeDetails(
+    Prayer prayer,
+    AppLocalizations appLocalizations,
+  ) {
+    switch (prayer) {
+      case Prayer.sunrise:
+        return appLocalizations.sunRising;
+      case Prayer.noon:
+        return appLocalizations.sunTopOfTheHead;
+      case Prayer.sunset:
+        return appLocalizations.sunSetting;
+      default:
+        return PrayerTimeHelper.localizedPrayerName(
+              null,
+              prayer,
+              appLocalizations: appLocalizations,
+            )?.capitalize() ??
+            "-";
+    }
+  }
+
+  static String getPrayerGroupName(
+    Prayer prayer,
+    AppLocalizations appLocalizations,
+  ) {
     switch (prayer) {
       case Prayer.fajr:
       case Prayer.dhuhr:
       case Prayer.asr:
       case Prayer.maghrib:
       case Prayer.isha:
-        return "Salat Time";
+      case Prayer.tahajjud:
+      case Prayer.dhuha:
+        return appLocalizations.salatTime;
 
       case Prayer.sunrise:
       case Prayer.sunset:
       case Prayer.noon:
-        return "Forbidden Prayer Time";
-
-      case Prayer.tahajjud:
-      case Prayer.dhuha:
-        return "Optional Prayer Time";
+        return appLocalizations.forbiddenSalatTime;
     }
   }
 
