@@ -61,7 +61,7 @@ Future<void> main() async {
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
-    platform_services.initAwesomeNotification();
+    await platform_services.initAwesomeNotification();
 
     JustAudioBackground.init(
       androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",

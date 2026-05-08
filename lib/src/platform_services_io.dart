@@ -13,26 +13,21 @@ void hideLoadingIndicator() {
 }
 
 Future<void> initAwesomeNotification() async {
-  await AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: "prayer_reminder",
-      channelName: "Prayer Reminders",
-      channelDescription: "Notifications for prayer time reminders",
-      playSound: true,
-      onlyAlertOnce: true,
-      importance: NotificationImportance.High,
-      defaultPrivacy: NotificationPrivacy.Public,
-    ),
-    NotificationChannel(
-      channelKey: "prayer_alarm_notification",
-      channelName: "Prayer Alarm Notifications",
-      channelDescription:
-          "High-priority notifications for prayer alarm reminders",
-      playSound: true,
-      importance: NotificationImportance.Max,
-      defaultPrivacy: NotificationPrivacy.Public,
-    ),
-  ], debug: false);
+  await AwesomeNotifications().initialize(
+    'resource://mipmap/ic_launcher',
+    [
+      NotificationChannel(
+        channelKey: "prayer_reminder",
+        channelName: "Prayer Reminders",
+        channelDescription: "Notifications for prayer time reminders",
+        playSound: true,
+        onlyAlertOnce: true,
+        importance: NotificationImportance.High,
+        defaultPrivacy: NotificationPrivacy.Public,
+      )
+    ],
+    debug: false,
+  );
 }
 
 Future<void> initializePlatform() async {
