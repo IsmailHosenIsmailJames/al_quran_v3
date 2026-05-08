@@ -44,30 +44,6 @@ class ReminderScheduler {
 
   static Future init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-
-    // Initialize awesome_notifications for notification-type reminders
-    await AwesomeNotifications().initialize(null, [
-      NotificationChannel(
-        channelKey: "prayer_reminder",
-        channelName: "Prayer Reminders",
-        channelDescription: "Notifications for prayer time reminders",
-        playSound: true,
-        soundSource: "resource://raw/notification_sound",
-        onlyAlertOnce: true,
-        importance: NotificationImportance.High,
-        defaultPrivacy: NotificationPrivacy.Public,
-      ),
-      NotificationChannel(
-        channelKey: "prayer_alarm_notification",
-        channelName: "Prayer Alarm Notifications",
-        channelDescription:
-            "High-priority notifications for prayer alarm reminders",
-        playSound: true,
-        soundSource: "resource://raw/notification_sound",
-        importance: NotificationImportance.Max,
-        defaultPrivacy: NotificationPrivacy.Public,
-      ),
-    ], debug: false);
   }
 
   // ─── Schedule ──────────────────────────────────────────────────────────
