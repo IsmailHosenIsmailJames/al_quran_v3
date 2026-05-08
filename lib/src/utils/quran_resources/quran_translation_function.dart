@@ -57,7 +57,6 @@ class QuranTranslationFunction {
 
   static bool isInfoAvailable(Locale locale) {
     final boxName = "surah_info_${locale.languageCode}";
-    log(Hive.lazyBox(boxName).keys.toString(), name: "Surah Info Keys");
     return Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty;
   }
 

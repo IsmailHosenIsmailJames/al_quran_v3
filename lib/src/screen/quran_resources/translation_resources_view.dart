@@ -69,8 +69,13 @@ class _TranslationResourcesViewState extends State<TranslationResourcesView> {
                                 Map<String, dynamic>.from(e),
                               ),
                             )
+                            .where((e) => e.type != ResourceType.word_by_word)
                             .toList() ??
                         [];
+
+                    if (booksInLanguage.isEmpty) {
+                      return const SizedBox();
+                    }
 
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 4.0),
