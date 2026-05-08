@@ -221,22 +221,26 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (AudioPlayerManager.audioPlayer.currentIndex == null) return;
-      final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
+      if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+        final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
 
-      if (currentPlayingAyah.isNotEmpty &&
-          ayahsList.contains(currentPlayingAyah)) {
-        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-          scrollToAyah(currentPlayingAyah, duration: Duration.zero);
-        } else {
-          int index = pagesList.indexWhere(
-            (element) => element.contains(currentPlayingAyah),
-          );
-          if (index != -1) {
-            scrollToAyah(pagesList[index], duration: Duration.zero);
+        if (currentPlayingAyah.isNotEmpty &&
+            ayahsList.contains(currentPlayingAyah)) {
+          if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+            scrollToAyah(currentPlayingAyah, duration: Duration.zero);
+          } else {
+            int index = pagesList.indexWhere(
+              (element) => element.contains(currentPlayingAyah),
+            );
+            if (index != -1) {
+              scrollToAyah(pagesList[index], duration: Duration.zero);
+            }
           }
+          return;
         }
-      } else if (widget.toScrollKey != null) {
+      }
+
+      if (widget.toScrollKey != null) {
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
           scrollToAyah(widget.toScrollKey, duration: Duration.zero);
         } else {
