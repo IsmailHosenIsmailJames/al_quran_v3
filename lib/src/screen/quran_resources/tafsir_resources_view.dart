@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/resources/quran_resources/tafsir_resources.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -12,7 +13,8 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class TafsirResourcesView extends StatefulWidget {
-  const TafsirResourcesView({super.key});
+  final String searchQuery;
+  const TafsirResourcesView({super.key, this.searchQuery = ''});
 
   @override
   State<TafsirResourcesView> createState() => _TafsirResourcesViewState();
@@ -63,6 +65,20 @@ class _TafsirResourcesViewState extends State<TafsirResourcesView> {
                       ?.map((e) => ResourcesModel.fromMap(e))
                       .toList() ??
                   [];
+                  
+              if (booksInLanguage.isEmpty) {
+                return const SizedBox();
+              }
+              
+              bool matchesSearch = widget.searchQuery.isEmpty || 
+                  booksInLanguage.first.language.toLowerCase().contains(widget.searchQuery.toLowerCase()) ||
+                  booksInLanguage.first.languageNative.toLowerCase().contains(widget.searchQuery.toLowerCase()) ||
+                  searchPatternInText(widget.searchQuery.toLowerCase(), booksInLanguage.first.language.toLowerCase()) > 80.0 ||
+                  searchPatternInText(widget.searchQuery.toLowerCase(), booksInLanguage.first.languageNative.toLowerCase()) > 80.0;
+
+              if (!matchesSearch) {
+                return const SizedBox();
+              }
 
               return Card(
                 margin: const EdgeInsets.symmetric(vertical: 4.0),

@@ -2,6 +2,7 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
 import "package:al_quran_v3/src/resources/quran_resources/translation_resources.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -13,7 +14,8 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class WordByWordResourcesView extends StatefulWidget {
-  const WordByWordResourcesView({super.key});
+  final String searchQuery;
+  const WordByWordResourcesView({super.key, this.searchQuery = ''});
 
   @override
   State<WordByWordResourcesView> createState() =>
@@ -49,6 +51,15 @@ class _WordByWordResourcesViewState extends State<WordByWordResourcesView> {
         .sortedBy((element) => element.englishName)
         .where((element) => element.type == ResourceType.word_by_word)
         .toList();
+        
+    if (widget.searchQuery.isNotEmpty) {
+      availableWbWBooks = availableWbWBooks.where((element) {
+        return element.language.toLowerCase().contains(widget.searchQuery.toLowerCase()) ||
+               element.languageNative.toLowerCase().contains(widget.searchQuery.toLowerCase()) ||
+               searchPatternInText(widget.searchQuery.toLowerCase(), element.language.toLowerCase()) > 80.0 ||
+               searchPatternInText(widget.searchQuery.toLowerCase(), element.languageNative.toLowerCase()) > 80.0;
+      }).toList();
+    }
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
