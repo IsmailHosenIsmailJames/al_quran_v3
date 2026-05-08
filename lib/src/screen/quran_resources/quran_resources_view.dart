@@ -22,6 +22,10 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
 
   List<String> pagesName = ["Translation", "Tafsir", "Word By Word"];
 
+  bool _isSearching = false;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
   @override
   void initState() {
     super.initState();
@@ -31,11 +35,18 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
       length: pagesName.length,
       vsync: this,
     );
+    
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -64,17 +75,47 @@ class _QuranResourcesViewState extends State<QuranResourcesView>
         backgroundColor: Theme.brightnessOf(context) == Brightness.dark
             ? Colors.grey.shade900.withValues(alpha: 0.5)
             : Colors.grey.shade200.withValues(alpha: 0.5),
-        title: Text(appLocalizations.quranResources),
+        title: _isSearching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: appLocalizations.search,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                  ),
+                ),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              )
+            : Text(appLocalizations.quranResources),
+        actions: [
+          IconButton(
+            icon: Icon(_isSearching ? Icons.close : Icons.search),
+            onPressed: () {
+              setState(() {
+                if (_isSearching) {
+                  _isSearching = false;
+                  _searchController.clear();
+                } else {
+                  _isSearching = true;
+                }
+              });
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [
           TabBarView(
             controller: _tabController,
             physics: const ClampingScrollPhysics(),
-            children: const [
-              TranslationResourcesView(),
-              TafsirResourcesView(),
-              WordByWordResourcesView(),
+            children: [
+              TranslationResourcesView(searchQuery: _searchQuery),
+              TafsirResourcesView(searchQuery: _searchQuery),
+              WordByWordResourcesView(searchQuery: _searchQuery),
             ],
           ),
           SafeArea(
