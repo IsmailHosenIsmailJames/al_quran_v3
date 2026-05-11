@@ -433,7 +433,7 @@ Widget drawerSection({
             minTileHeight: 40,
             onTap: () async {
               String policyUrl =
-                  "https://www.freeprivacypolicy.com/live/d8c08904-a100-4f0b-94d8-13d86a8c8605";
+                  "https://github.com/IsmailHosenIsmailJames/al_quran_v3/blob/main/PRIVACY_POLICY.md";
               launchUrl(
                 Uri.parse(policyUrl),
                 mode: LaunchMode.externalApplication,
