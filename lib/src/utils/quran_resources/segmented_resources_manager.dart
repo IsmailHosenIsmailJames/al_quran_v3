@@ -48,6 +48,7 @@ class SegmentedResourcesManager {
   }
 
   static ReciterInfoModel? getOpenSegmentsReciter() {
+    if (_segmentsBox?.isOpen == false) return null;
     String? metaData = _segmentsBox?.get(_metaKey, defaultValue: null);
     if (metaData == null) return null;
     return ReciterInfoModel.fromJson(_segmentsBox!.get(_metaKey));

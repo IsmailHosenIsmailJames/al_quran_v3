@@ -393,7 +393,6 @@ class QuranTranslationFunction {
           response.data,
         );
         for (final key in data.keys) {
-          log(key, name: "Surah Info Key");
           await box.put(key, data[key]);
         }
         // await box.close(); // Close after writing
