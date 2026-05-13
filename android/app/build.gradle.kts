@@ -41,6 +41,10 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
+        manifestPlaceholders += mapOf(
+            "appAuthRedirectScheme" to "com.ismail_hosen_james.al_bayan_quran"
+        )
+
     }
 
      packagingOptions {
