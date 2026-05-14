@@ -18,6 +18,7 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.da
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
 import "package:dio/dio.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -497,7 +498,14 @@ class AudioPlayerManager {
     int wordId,
     int page,
   ) async {
-    // TODO
+    String? wordKey = QuranScriptFunction.getAyahKeyFromWordId(
+      surah: surahNumber,
+      wordId: wordId,
+      page: page,
+    );
+    if (wordKey == null) return;
+    log(wordKey, name: "Playing WBW:");
+    AudioPlayerManager.playWord(wordKey);
   }
 
   static Future<void> playWord(String wordKey) async {
