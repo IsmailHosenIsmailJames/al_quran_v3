@@ -1,9 +1,13 @@
 import "dart:convert";
+import "dart:developer";
 
+import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/services.dart";
+
+import "../../resources/quran_resources/ayah_word_length_map.dart";
 
 class QuranScriptFunction {
   static Map quranScriptMap = {};
@@ -58,5 +62,31 @@ class QuranScriptFunction {
     }
 
     return ayahData;
+  }
+
+  static String? getAyahKeyFromWordId({
+    required int surah,
+    required int wordId,
+    required int page,
+  }) {
+    int ayahCount = quranAyahCount[surah - 1];
+    for (int ayahNumber = 1; ayahNumber <= ayahCount; ayahNumber++) {
+      String ayahKey = "$surah:$ayahNumber";
+      if (ayahWordLengthMap[ayahKey]! > wordId) {
+        String previousAyahKey = "$surah:${ayahNumber - 1}";
+        String wordKey =
+            "$previousAyahKey:${wordId - ayahWordLengthMap[previousAyahKey]!}";
+        if (wordKey.endsWith("0")) {
+          return null;
+        }
+        return wordKey;
+      }
+    }
+    String lastAyahKey = "$surah:$ayahCount";
+    String wordKey = "$lastAyahKey:${wordId - ayahWordLengthMap[lastAyahKey]!}";
+    if (wordKey.endsWith("0")) {
+      return null;
+    }
+    return wordKey;
   }
 }
