@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:al_quran_v3/src/api/logging_client.dart';
 import 'package:al_quran_v3/src/api/quran_auth_session.dart';
 import 'package:app_links/app_links.dart';
 import 'package:crypto/crypto.dart';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:developer' as developer;
 
@@ -18,6 +18,8 @@ class QuranAuthService {
       'https://quran-backend-delta.vercel.app/api/auth/exchange';
   static const String authorizationEndpoint =
       'https://prelive-oauth2.quran.foundation/oauth2/auth';
+
+  static final LoggingClient _client = LoggingClient();
 
   /// Generates a cryptographically secure code verifier for PKCE.
   static String _generateCodeVerifier() {
@@ -149,7 +151,7 @@ class QuranAuthService {
       );
 
       // 7. Exchange the code on our secure backend
-      final exchangeResponse = await http.post(
+      final exchangeResponse = await _client.post(
         Uri.parse(backendExchangeUrl),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({

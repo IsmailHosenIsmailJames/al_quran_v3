@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
+import 'package:al_quran_v3/src/api/logging_client.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:http/http.dart' as http;
 
 /// Manages persisted OAuth session state using Hive.
 ///
@@ -20,6 +20,8 @@ class QuranAuthSession {
       'https://prelive-oauth2.quran.foundation/oauth2/token';
   static const String _backendRefreshUrl =
       'https://quran-backend-delta.vercel.app/api/auth/refresh';
+
+  static final LoggingClient _client = LoggingClient();
 
   static Box get _box => Hive.box('user');
 
@@ -128,7 +130,7 @@ class QuranAuthSession {
 
     // Try 1: Backend refresh endpoint
     try {
-      final response = await http.post(
+      final response = await _client.post(
         Uri.parse(_backendRefreshUrl),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'refresh_token': refreshToken}),
@@ -157,7 +159,7 @@ class QuranAuthSession {
 
     // Try 2: Direct OAuth2 token endpoint with grant_type=refresh_token
     try {
-      final response = await http.post(
+      final response = await _client.post(
         Uri.parse(_tokenEndpoint),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: {

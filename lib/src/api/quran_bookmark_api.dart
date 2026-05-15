@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
+import 'package:al_quran_v3/src/api/logging_client.dart';
 import 'package:al_quran_v3/src/api/models/api_bookmark_model.dart';
 import 'package:al_quran_v3/src/api/quran_auth_session.dart';
 import 'package:al_quran_v3/src/api/quran_notes_api.dart'; // For QuranApiException
-import 'package:http/http.dart' as http;
 
 /// API client for the Quran Foundation Bookmarks endpoints.
 class QuranBookmarkApi {
   static const String _baseUrl =
       'https://apis-prelive.quran.foundation/auth/v1/bookmarks';
+
+  static final LoggingClient _client = LoggingClient();
 
   /// Builds the standard auth headers for API requests.
   static Future<Map<String, String>> _getHeaders() async {
@@ -32,7 +34,7 @@ class QuranBookmarkApi {
   /// Fetches all bookmarks for the authenticated user.
   static Future<List<ApiBookmarkModel>> getBookmarks() async {
     final headers = await _getHeaders();
-    final response = await http.get(Uri.parse(_baseUrl), headers: headers);
+    final response = await _client.get(Uri.parse(_baseUrl), headers: headers);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
@@ -63,7 +65,7 @@ class QuranBookmarkApi {
       if (verseNumber != null) 'verseNumber': verseNumber,
     };
 
-    final response = await http.post(
+    final response = await _client.post(
       Uri.parse(_baseUrl),
       headers: headers,
       body: jsonEncode(requestBody),
@@ -92,7 +94,7 @@ class QuranBookmarkApi {
   /// Deletes a bookmark by its server ID.
   static Future<void> deleteBookmark(String bookmarkId) async {
     final headers = await _getHeaders();
-    final response = await http.delete(
+    final response = await _client.delete(
       Uri.parse('$_baseUrl/$bookmarkId'),
       headers: headers,
     );
