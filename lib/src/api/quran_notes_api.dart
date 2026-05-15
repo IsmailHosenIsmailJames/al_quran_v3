@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
+import 'package:al_quran_v3/src/api/logging_client.dart';
 import 'package:al_quran_v3/src/api/quran_auth_session.dart';
 import 'package:al_quran_v3/src/screen/collections/models/api_note_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http show Response;
 
 /// Exception thrown when the Quran Foundation API returns an error response.
 ///
@@ -51,6 +52,8 @@ class QuranNotesApi {
   static const String _baseUrl =
       'https://apis-prelive.quran.foundation/auth/v1/notes';
 
+  static final LoggingClient _client = LoggingClient();
+
   /// Builds the standard auth headers for API requests.
   static Future<Map<String, String>> _getHeaders() async {
     final accessToken = await QuranAuthSession.getValidAccessToken();
@@ -83,7 +86,7 @@ class QuranNotesApi {
     if (sortBy != null) queryParams['sortBy'] = sortBy;
 
     final uri = Uri.parse(_baseUrl).replace(queryParameters: queryParams);
-    final response = await http.get(uri, headers: headers);
+    final response = await _client.get(uri, headers: headers);
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
@@ -114,7 +117,7 @@ class QuranNotesApi {
       requestBody['ranges'] = ranges;
     }
 
-    final response = await http.post(
+    final response = await _client.post(
       Uri.parse(_baseUrl),
       headers: headers,
       body: jsonEncode(requestBody),
@@ -153,7 +156,7 @@ class QuranNotesApi {
       requestBody['saveToQR'] = saveToQR;
     }
 
-    final response = await http.patch(
+    final response = await _client.patch(
       Uri.parse('$_baseUrl/$noteId'),
       headers: headers,
       body: jsonEncode(requestBody),
@@ -183,7 +186,7 @@ class QuranNotesApi {
   static Future<void> deleteNote(String noteId) async {
     final headers = await _getHeaders();
 
-    final response = await http.delete(
+    final response = await _client.delete(
       Uri.parse('$_baseUrl/$noteId'),
       headers: headers,
     );
@@ -203,7 +206,7 @@ class QuranNotesApi {
   static Future<ApiNoteModel> getNoteById(String noteId) async {
     final headers = await _getHeaders();
 
-    final response = await http.get(
+    final response = await _client.get(
       Uri.parse('$_baseUrl/$noteId'),
       headers: headers,
     );
@@ -232,7 +235,7 @@ class QuranNotesApi {
   static Future<List<ApiNoteModel>> getNotesByVerse(String verseKey) async {
     final headers = await _getHeaders();
 
-    final response = await http.get(
+    final response = await _client.get(
       Uri.parse('$_baseUrl/by-verse/$verseKey'),
       headers: headers,
     );

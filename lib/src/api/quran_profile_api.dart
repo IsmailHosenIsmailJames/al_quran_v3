@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
+import 'package:al_quran_v3/src/api/logging_client.dart';
 import 'package:al_quran_v3/src/api/models/user_profile_model.dart';
 import 'package:al_quran_v3/src/api/quran_auth_session.dart';
 import 'package:al_quran_v3/src/api/quran_notes_api.dart'; // For QuranApiException
-import 'package:http/http.dart' as http;
 
 /// API client for the Quran Foundation User Profile endpoints.
 ///
@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 class QuranProfileApi {
   static const String _baseUrl =
       'https://apis-prelive.quran.foundation/auth/v1/users';
+
+  static final LoggingClient _client = LoggingClient();
 
   /// Builds the standard auth headers for API requests.
   static Future<Map<String, String>> _getHeaders() async {
@@ -34,7 +36,7 @@ class QuranProfileApi {
   /// Retrieves the authenticated user's profile.
   static Future<UserProfile> getProfile() async {
     final headers = await _getHeaders();
-    final response = await http.get(
+    final response = await _client.get(
       Uri.parse('$_baseUrl/profile'),
       headers: headers,
     );
@@ -80,7 +82,7 @@ class QuranProfileApi {
     if (avatar != null) requestBody['avatar'] = avatar;
     if (username != null) requestBody['username'] = username;
 
-    final response = await http.patch(
+    final response = await _client.patch(
       Uri.parse('$_baseUrl/update-profile'),
       headers: headers,
       body: jsonEncode(requestBody),
@@ -118,7 +120,7 @@ class QuranProfileApi {
     if (notifications != null) requestBody['notifications'] = notifications;
     if (theme != null) requestBody['theme'] = theme;
 
-    final response = await http.patch(
+    final response = await _client.patch(
       Uri.parse('$_baseUrl/edit-profile'),
       headers: headers,
       body: jsonEncode(requestBody),
