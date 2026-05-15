@@ -4,6 +4,7 @@ import "dart:developer";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/core/bookmark/cubit/bookmark_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
@@ -96,6 +97,7 @@ Future<void> main() async {
   WordByWordFunction.init();
   Hive.openBox(CollectionType.notes.name);
   Hive.openBox(CollectionType.pinned.name);
+  Hive.openBox(CollectionType.bookmark.name);
   SegmentedResourcesManager.init();
 
   final scriptOnDb = Hive.box("user").get(
@@ -258,6 +260,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => QuranHistoryCubit()),
         BlocProvider(create: (context) => AudioDownloadCubit()),
         BlocProvider(create: (context) => AyahToHighlight(null)),
+        BlocProvider(create: (context) => BookmarkCubit()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(

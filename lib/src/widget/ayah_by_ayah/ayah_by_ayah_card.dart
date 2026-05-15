@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/bookmark/cubit/bookmark_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
@@ -27,7 +28,7 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.da
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
+import "package:al_quran_v3/src/screen/collections/add_collection_popup/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -43,7 +44,7 @@ import "package:visibility_detector/visibility_detector.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
-import "../add_collection_popup/add_note_popup.dart";
+import "../../screen/collections/add_collection_popup/add_note_popup.dart";
 
 Widget getAyahByAyahCard({
   dynamic key,
@@ -767,6 +768,42 @@ Row getToolbarWidget(
           },
           tooltip: l10n.addNoteButton,
           icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
+        ),
+      ),
+      const Gap(5),
+      SizedBox(
+        height: 30,
+        width: 30,
+        child: BlocBuilder<BookmarkCubit, BookmarkState>(
+          builder: (context, bookmarkState) {
+            final isBookmarked = context.read<BookmarkCubit>().isBookmarked(ayahKey);
+            return IconButton(
+              style: IconButton.styleFrom(
+                padding: EdgeInsets.zero,
+                foregroundColor: isBookmarked ? themeState.primary : Colors.grey,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                  side: BorderSide(
+                    color: isBookmarked ? themeState.primary : Colors.grey,
+                  ),
+                ),
+              ),
+              onPressed: () {
+                context.read<BookmarkCubit>().toggleBookmark(
+                      surahNumber: surahNumber,
+                      ayahNumber: ayahNumber,
+                      verseKey: ayahKey,
+                    );
+              },
+              tooltip: 'Bookmark',
+              icon: Icon(
+                isBookmarked
+                    ? FluentIcons.bookmark_24_filled
+                    : FluentIcons.bookmark_24_regular,
+                size: 18,
+              ),
+            );
+          },
         ),
       ),
       const Gap(5),

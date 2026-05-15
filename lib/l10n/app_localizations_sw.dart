@@ -1265,4 +1265,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Wakati Uliokatazwa wa Swala';
+
+  @override
+  String get profile => 'Profile';
 }

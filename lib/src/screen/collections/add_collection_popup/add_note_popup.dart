@@ -1,4 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/api/notes_sync_service.dart";
+import "package:al_quran_v3/src/api/quran_auth_session.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
@@ -11,9 +13,9 @@ import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:uuid/uuid.dart";
 
-import "../../screen/collections/common_function.dart";
-import "../../theme/controller/theme_cubit.dart";
-import "../../theme/controller/theme_state.dart";
+import "../common_function.dart";
+import "../../../theme/controller/theme_cubit.dart";
+import "../../../theme/controller/theme_state.dart";
 
 var uuid = const Uuid();
 
@@ -64,10 +66,21 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   }
 
   void _handleSaveNote() {
-    if (_noteEditingController.text.trim().isEmpty) {
+    final noteText = _noteEditingController.text.trim();
+    if (noteText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context).noteContentCannotBeEmpty),
+        ),
+      );
+      return;
+    }
+
+    // Enforce minimum 6 characters for API compatibility
+    if (noteText.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Note must be at least 6 characters long'),
         ),
       );
       return;
@@ -80,7 +93,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
       id: newNoteId,
       ayahKey: [widget.ayahKey],
       // Use the ayahKey from the widget
-      text: _noteEditingController.text.trim(),
+      text: noteText,
       createdAt: now,
       updatedAt: now,
     );
@@ -93,6 +106,15 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
       collection.updatedAt = now;
       collection.notes.add(newNote);
       notesBox.put(collectionID, collection.toJson());
+
+      // Sync to server in background if logged in
+      if (QuranAuthSession.isLoggedIn) {
+        NotesSyncService.syncSingleNote(
+          note: newNote,
+          collectionId: collection.id,
+          collectionName: collection.name,
+        );
+      }
     }
 
     Navigator.pop(context); // Close the dialog
@@ -222,56 +244,38 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                   Expanded(
                     child:
                         (_availableNoteCollections.isEmpty &&
-                                !_addNewNoteCollectionStep &&
-                                _addNewNoteCollectionStep)
-                            ? Center(
-                              child: Text(l10n.noCollectionsYetAddANewOne),
-                            )
-                            : ListView.builder(
-                              itemCount: _availableNoteCollections.length,
-                              itemBuilder: (context, index) {
-                                final collection =
-                                    _availableNoteCollections[index];
-                                final isSelected = _selectedNoteCollectionIds
-                                    .contains(collection.id);
-                                return ListTile(
-                                  minTileHeight: 40,
-                                  leading: Icon(
-                                    FluentIcons.folder_24_filled,
-                                    color: Color(
-                                      int.parse("0xFF${collection.colorHex}"),
-                                    ),
+                            !_addNewNoteCollectionStep &&
+                            _addNewNoteCollectionStep)
+                        ? Center(child: Text(l10n.noCollectionsYetAddANewOne))
+                        : ListView.builder(
+                            itemCount: _availableNoteCollections.length,
+                            itemBuilder: (context, index) {
+                              final collection =
+                                  _availableNoteCollections[index];
+                              final isSelected = _selectedNoteCollectionIds
+                                  .contains(collection.id);
+                              return ListTile(
+                                minTileHeight: 40,
+                                leading: Icon(
+                                  FluentIcons.folder_24_filled,
+                                  color: Color(
+                                    int.parse("0xFF${collection.colorHex}"),
                                   ),
-                                  title: Text(collection.name),
-                                  subtitle: Text(
-                                    "${collection.notes.length} notes",
+                                ),
+                                title: Text(collection.name),
+                                subtitle: Text(
+                                  "${collection.notes.length} notes",
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(
+                                    isSelected
+                                        ? Icons.check_box_rounded
+                                        : Icons.check_box_outline_blank_rounded,
+                                    color: isSelected
+                                        ? themeState.primary
+                                        : Colors.grey,
                                   ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      isSelected
-                                          ? Icons.check_box_rounded
-                                          : Icons
-                                              .check_box_outline_blank_rounded,
-                                      color:
-                                          isSelected
-                                              ? themeState.primary
-                                              : Colors.grey,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (isSelected) {
-                                          _selectedNoteCollectionIds.remove(
-                                            collection.id,
-                                          );
-                                        } else {
-                                          _selectedNoteCollectionIds.add(
-                                            collection.id,
-                                          );
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  onTap: () {
+                                  onPressed: () {
                                     setState(() {
                                       if (isSelected) {
                                         _selectedNoteCollectionIds.remove(
@@ -284,9 +288,23 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                       }
                                     });
                                   },
-                                );
-                              },
-                            ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    if (isSelected) {
+                                      _selectedNoteCollectionIds.remove(
+                                        collection.id,
+                                      );
+                                    } else {
+                                      _selectedNoteCollectionIds.add(
+                                        collection.id,
+                                      );
+                                    }
+                                  });
+                                },
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),
@@ -363,10 +381,9 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                         }
                       }
                     },
-                    iconAlignment:
-                        _selectNoteCollectionStep
-                            ? IconAlignment.start
-                            : IconAlignment.end,
+                    iconAlignment: _selectNoteCollectionStep
+                        ? IconAlignment.start
+                        : IconAlignment.end,
                     icon: Icon(
                       _selectNoteCollectionStep
                           ? Icons.done_all_rounded

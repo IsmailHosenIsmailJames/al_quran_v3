@@ -3,7 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  app_links
   awesome_notifications
+  file_selector_windows
   flutter_inappwebview_windows
   geolocator_windows
   media_kit_libs_windows_audio

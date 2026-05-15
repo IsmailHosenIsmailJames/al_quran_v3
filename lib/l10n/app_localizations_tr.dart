@@ -1258,4 +1258,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Kerahat Vakti';
+
+  @override
+  String get profile => 'Profile';
 }

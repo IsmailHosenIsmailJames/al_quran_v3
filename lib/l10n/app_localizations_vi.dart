@@ -1262,4 +1262,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Thời gian cầu nguyện bị cấm';
+
+  @override
+  String get profile => 'Profile';
 }

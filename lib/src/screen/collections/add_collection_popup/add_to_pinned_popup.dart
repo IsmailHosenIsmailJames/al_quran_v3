@@ -9,10 +9,10 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
-import "../../screen/collections/common_function.dart";
-import "../../screen/collections/models/pinned_model.dart.dart";
-import "../../theme/controller/theme_cubit.dart";
-import "../../theme/controller/theme_state.dart";
+import "../common_function.dart";
+import "../models/pinned_model.dart.dart";
+import "../../../theme/controller/theme_cubit.dart";
+import "../../../theme/controller/theme_state.dart";
 import "add_note_popup.dart";
 
 Future<void> showAddToPinnedPopup(BuildContext context, String ayahKey) async {
@@ -199,52 +199,37 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                 Expanded(
                   child:
                       (_availablePinnedCollections.isEmpty &&
-                              !_addNewPinnedCollectionStep)
-                          ? Center(child: Text(l10n.noCollectionsYetAddANewOne))
-                          : ListView.builder(
-                            itemCount: _availablePinnedCollections.length,
-                            itemBuilder: (context, index) {
-                              final collection =
-                                  _availablePinnedCollections[index];
-                              final isSelected = _selectedPinnedCollectionIds
-                                  .contains(collection.id);
-                              return ListTile(
-                                minTileHeight: 40,
-                                leading: Icon(
-                                  FluentIcons.pin_24_filled,
-                                  color: Color(
-                                    int.parse("0xFF${collection.colorHex}"),
-                                  ),
+                          !_addNewPinnedCollectionStep)
+                      ? Center(child: Text(l10n.noCollectionsYetAddANewOne))
+                      : ListView.builder(
+                          itemCount: _availablePinnedCollections.length,
+                          itemBuilder: (context, index) {
+                            final collection =
+                                _availablePinnedCollections[index];
+                            final isSelected = _selectedPinnedCollectionIds
+                                .contains(collection.id);
+                            return ListTile(
+                              minTileHeight: 40,
+                              leading: Icon(
+                                FluentIcons.pin_24_filled,
+                                color: Color(
+                                  int.parse("0xFF${collection.colorHex}"),
                                 ),
-                                title: Text(collection.name),
-                                subtitle: Text(
-                                  "${collection.pinned.length} pinned",
+                              ),
+                              title: Text(collection.name),
+                              subtitle: Text(
+                                "${collection.pinned.length} pinned",
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(
+                                  isSelected
+                                      ? Icons.check_box_rounded
+                                      : Icons.check_box_outline_blank_rounded,
+                                  color: isSelected
+                                      ? themeState.primary
+                                      : Colors.grey,
                                 ),
-                                trailing: IconButton(
-                                  icon: Icon(
-                                    isSelected
-                                        ? Icons.check_box_rounded
-                                        : Icons.check_box_outline_blank_rounded,
-                                    color:
-                                        isSelected
-                                            ? themeState.primary
-                                            : Colors.grey,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      if (isSelected) {
-                                        _selectedPinnedCollectionIds.remove(
-                                          collection.id,
-                                        );
-                                      } else {
-                                        _selectedPinnedCollectionIds.add(
-                                          collection.id,
-                                        );
-                                      }
-                                    });
-                                  },
-                                ),
-                                onTap: () {
+                                onPressed: () {
                                   setState(() {
                                     if (isSelected) {
                                       _selectedPinnedCollectionIds.remove(
@@ -257,9 +242,23 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                     }
                                   });
                                 },
-                              );
-                            },
-                          ),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  if (isSelected) {
+                                    _selectedPinnedCollectionIds.remove(
+                                      collection.id,
+                                    );
+                                  } else {
+                                    _selectedPinnedCollectionIds.add(
+                                      collection.id,
+                                    );
+                                  }
+                                });
+                              },
+                            );
+                          },
+                        ),
                 ),
               ],
             ),

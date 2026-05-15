@@ -1266,4 +1266,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Запрещенное время молитвы';
+
+  @override
+  String get profile => 'Profile';
 }

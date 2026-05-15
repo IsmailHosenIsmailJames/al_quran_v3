@@ -1257,4 +1257,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'নামাজের নিষিদ্ধ সময়';
+
+  @override
+  String get profile => 'Profile';
 }

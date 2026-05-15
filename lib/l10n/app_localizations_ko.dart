@@ -1239,4 +1239,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '금지된 기도 시간';
+
+  @override
+  String get profile => 'Profile';
 }

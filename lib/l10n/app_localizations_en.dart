@@ -1256,4 +1256,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Forbidden Salat Time';
+
+  @override
+  String get profile => 'Profile';
 }

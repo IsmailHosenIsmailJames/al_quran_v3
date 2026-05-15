@@ -1269,4 +1269,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Tiempo de oración prohibido';
+
+  @override
+  String get profile => 'Profile';
 }

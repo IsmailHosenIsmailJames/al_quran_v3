@@ -1257,4 +1257,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'وقت ممنوعه نماز';
+
+  @override
+  String get profile => 'Profile';
 }

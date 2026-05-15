@@ -7,12 +7,27 @@ class NoteModel {
   DateTime createdAt;
   DateTime updatedAt;
 
+  /// The server-assigned note ID from the Quran Foundation API.
+  /// Null if this note has never been synced to the server.
+  String? serverNoteId;
+
+  /// Whether the local version matches the server version.
+  /// False when local edits haven't been pushed yet.
+  bool isSynced;
+
+  /// Soft-delete flag. When true, the note should be deleted from the server
+  /// on the next sync, then removed locally.
+  bool isDeleted;
+
   NoteModel({
     required this.id,
     required this.ayahKey,
     required this.text,
     required this.createdAt,
     required this.updatedAt,
+    this.serverNoteId,
+    this.isSynced = false,
+    this.isDeleted = false,
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json) {
@@ -22,6 +37,9 @@ class NoteModel {
       text: json["text"] as String,
       createdAt: DateTime.parse(json["createdAt"] as String),
       updatedAt: DateTime.parse(json["updatedAt"] as String),
+      serverNoteId: json["serverNoteId"] as String?,
+      isSynced: json["isSynced"] as bool? ?? false,
+      isDeleted: json["isDeleted"] as bool? ?? false,
     );
   }
 
@@ -32,6 +50,9 @@ class NoteModel {
       "text": text,
       "createdAt": createdAt.toIso8601String(),
       "updatedAt": updatedAt.toIso8601String(),
+      "serverNoteId": serverNoteId,
+      "isSynced": isSynced,
+      "isDeleted": isDeleted,
     };
   }
 
@@ -47,6 +68,9 @@ class NoteModel {
     List<String>? collectionIds,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? serverNoteId,
+    bool? isSynced,
+    bool? isDeleted,
   }) {
     return NoteModel(
       id: id ?? this.id,
@@ -54,6 +78,9 @@ class NoteModel {
       text: text ?? this.text,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      serverNoteId: serverNoteId ?? this.serverNoteId,
+      isSynced: isSynced ?? this.isSynced,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 }

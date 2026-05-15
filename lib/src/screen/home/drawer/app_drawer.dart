@@ -1,10 +1,10 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
+import "package:al_quran_v3/src/screen/profile/profile_page.dart";
 import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
 import "package:al_quran_v3/src/utils/reset_app.dart";
-// import "package:al_quran_v3/src/utils/reset_app.dart";
 import "package:al_quran_v3/src/widget/bug_report/bug_report.dart";
 import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
@@ -22,6 +22,7 @@ import "../../../platform_services.dart" as platform_services;
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
 import "../../collections/collection_page.dart";
+import "../../collections/bookmark_page.dart";
 import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
@@ -160,6 +161,26 @@ Widget drawerSection({
               ),
             ),
           if (!isJustIcon) Divider(height: 10, color: themeState.mutedGray),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              if (!isDesktop) Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+            },
+            leading: Icon(
+              FluentIcons.person_24_filled,
+              color: themeState.primary,
+            ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.profile,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
           if (platformOwn == platform_services.PlatformOwn.isAndroid ||
               platformOwn == platform_services.PlatformOwn.isIos)
             ListTile(
@@ -201,6 +222,28 @@ Widget drawerSection({
                 : Text(
                     l10n.languageSettings,
                     style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              if (!isDesktop) Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookmarkPage(),
+                ),
+              );
+            },
+            leading: Icon(
+              FluentIcons.bookmark_24_filled,
+              color: themeState.primary,
+            ),
+            title: isJustIcon
+                ? null
+                : const Text(
+                    "Bookmarks",
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
           ),
           const Gap(5),
