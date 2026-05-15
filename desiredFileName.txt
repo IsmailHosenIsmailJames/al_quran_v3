@@ -1,1 +1,97 @@
-{}
+{
+  "ar": [
+    "profile"
+  ],
+
+  "az": [
+    "profile"
+  ],
+
+  "bn": [
+    "profile"
+  ],
+
+  "de": [
+    "profile"
+  ],
+
+  "es": [
+    "profile"
+  ],
+
+  "fa": [
+    "profile"
+  ],
+
+  "fr": [
+    "profile"
+  ],
+
+  "hi": [
+    "profile"
+  ],
+
+  "id": [
+    "profile"
+  ],
+
+  "it": [
+    "profile"
+  ],
+
+  "ja": [
+    "profile"
+  ],
+
+  "kk": [
+    "profile"
+  ],
+
+  "ko": [
+    "profile"
+  ],
+
+  "ms": [
+    "profile"
+  ],
+
+  "pa": [
+    "profile"
+  ],
+
+  "ps": [
+    "profile"
+  ],
+
+  "pt": [
+    "profile"
+  ],
+
+  "ru": [
+    "profile"
+  ],
+
+  "sw": [
+    "profile"
+  ],
+
+  "ta": [
+    "profile"
+  ],
+
+  "tr": [
+    "profile"
+  ],
+
+  "ur": [
+    "profile"
+  ],
+
+  "vi": [
+    "profile"
+  ],
+
+  "zh": [
+    "profile"
+  ]
+}

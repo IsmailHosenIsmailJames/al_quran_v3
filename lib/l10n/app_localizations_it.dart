@@ -1271,4 +1271,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Tempo di preghiera proibito';
+
+  @override
+  String get profile => 'Profile';
 }

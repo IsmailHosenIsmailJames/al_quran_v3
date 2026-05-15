@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
-import "../../widget/add_collection_popup/add_note_popup.dart";
-import "../../widget/add_collection_popup/add_to_pinned_popup.dart";
+import "add_collection_popup/add_note_popup.dart";
+import "add_collection_popup/add_to_pinned_popup.dart";
 import "collection_page.dart";
 import "models/note_collection_model.dart";
 import "models/pinned_collection_model.dart";
@@ -13,12 +13,9 @@ import "models/sorting_methods_type.dart";
 Future<List<PinnedCollectionModel>> fetchPinnedCollections() async {
   final box = Hive.box(CollectionType.pinned.name);
   await saveDemoPinnedCollection();
-  List<PinnedCollectionModel> availablePinnedCollections =
-      box.values
-          .map(
-            (e) => PinnedCollectionModel.fromJson(Map<String, dynamic>.from(e)),
-          )
-          .toList();
+  List<PinnedCollectionModel> availablePinnedCollections = box.values
+      .map((e) => PinnedCollectionModel.fromJson(Map<String, dynamic>.from(e)))
+      .toList();
   String sortMethod = Hive.box("user").get(
     "selected_sorting_method",
     defaultValue: SortingMethodsType.values.first.name,
@@ -66,12 +63,9 @@ Future<List<PinnedCollectionModel>> fetchPinnedCollections() async {
 Future<List<NoteCollectionModel>> fetchNoteCollections() async {
   final box = Hive.box(CollectionType.notes.name);
   await saveDemoNoteCollection();
-  List<NoteCollectionModel> availableNoteCollections =
-      box.values
-          .map(
-            (e) => NoteCollectionModel.fromJson(Map<String, dynamic>.from(e)),
-          )
-          .toList();
+  List<NoteCollectionModel> availableNoteCollections = box.values
+      .map((e) => NoteCollectionModel.fromJson(Map<String, dynamic>.from(e)))
+      .toList();
   String sortMethod = Hive.box("user").get(
     "selected_sorting_method",
     defaultValue: SortingMethodsType.values.first.name,

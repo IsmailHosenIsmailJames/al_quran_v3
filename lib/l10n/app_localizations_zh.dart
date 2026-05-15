@@ -1220,4 +1220,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '被禁止的礼拜时间';
+
+  @override
+  String get profile => 'Profile';
 }

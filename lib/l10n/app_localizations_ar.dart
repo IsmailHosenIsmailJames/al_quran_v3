@@ -1255,4 +1255,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'وقت كراهة الصلاة';
+
+  @override
+  String get profile => 'Profile';
 }

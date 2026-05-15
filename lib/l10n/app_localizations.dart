@@ -2401,6 +2401,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forbidden Salat Time'**
   String get forbiddenSalatTime;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate

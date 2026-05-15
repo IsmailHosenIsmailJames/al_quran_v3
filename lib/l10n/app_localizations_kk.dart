@@ -1256,4 +1256,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Намаз оқуға тыйым салынған уақыт';
+
+  @override
+  String get profile => 'Profile';
 }

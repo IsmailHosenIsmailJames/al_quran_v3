@@ -42,7 +42,7 @@ android {
         versionName = flutter.versionName
         multiDexEnabled = true
         manifestPlaceholders += mapOf(
-            "appAuthRedirectScheme" to "com.ismail_hosen_james.al_bayan_quran"
+            "appAuthRedirectScheme" to "com.ismailhosenjames.albayanquran"
         )
 
     }

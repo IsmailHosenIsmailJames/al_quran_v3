@@ -1259,4 +1259,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'ممنوعہ نماز کا وقت';
+
+  @override
+  String get profile => 'Profile';
 }

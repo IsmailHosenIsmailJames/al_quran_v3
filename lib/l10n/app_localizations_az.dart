@@ -1263,4 +1263,7 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Məkruh Namaz Vaxtı';
+
+  @override
+  String get profile => 'Profile';
 }

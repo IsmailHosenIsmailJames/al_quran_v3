@@ -1275,4 +1275,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'தடைசெய்யப்பட்ட தொழுகை நேரம்';
+
+  @override
+  String get profile => 'Profile';
 }

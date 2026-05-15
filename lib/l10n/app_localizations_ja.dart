@@ -1240,4 +1240,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '礼拝禁止時間';
+
+  @override
+  String get profile => 'Profile';
 }

@@ -1255,4 +1255,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ';
+
+  @override
+  String get profile => 'Profile';
 }

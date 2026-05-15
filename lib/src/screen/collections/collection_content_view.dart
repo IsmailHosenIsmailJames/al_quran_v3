@@ -1,6 +1,8 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/api/notes_sync_service.dart";
+import "package:al_quran_v3/src/api/quran_auth_session.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -108,6 +110,18 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     color: colorScheme.onSurfaceVariant,
                   ),
                 ),
+                if (QuranAuthSession.isLoggedIn) ...[
+                  const Gap(6),
+                  Icon(
+                    noteModel.isSynced
+                        ? FluentIcons.cloud_checkmark_16_regular
+                        : FluentIcons.cloud_arrow_up_16_regular,
+                    size: 16,
+                    color: noteModel.isSynced
+                        ? Colors.green.shade400
+                        : colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                  ),
+                ],
                 Row(
                   children: [
                     if (onMoveUp != null)
@@ -276,10 +290,15 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     ),
                   ),
                   onDismissed: (direction) async {
-                    widget.noteCollectionModel!.notes.removeAt(index);
+                    final deletedNote =
+                        widget.noteCollectionModel!.notes.removeAt(index);
                     await saveNoteCollectionModelAsMap(
                       widget.noteCollectionModel!,
                     );
+                    // Sync deletion to server
+                    if (QuranAuthSession.isLoggedIn) {
+                      NotesSyncService.syncDeletedNote(deletedNote);
+                    }
                     setState(() {});
                   },
                   child: _buildNoteItem(

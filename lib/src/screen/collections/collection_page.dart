@@ -1,4 +1,8 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/api/notes_sync_service.dart";
+import "package:al_quran_v3/src/api/quran_auth_session.dart";
+import "package:al_quran_v3/src/api/quran_notes_api.dart";
+import "package:al_quran_v3/src/screen/profile/profile_page.dart";
 import "package:al_quran_v3/src/screen/collections/collection_content_view.dart";
 import "package:al_quran_v3/src/screen/collections/common_function.dart";
 import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
@@ -35,6 +39,7 @@ class _CollectionPageState extends State<CollectionPage> {
   List<PinnedCollectionModel> _filteredPinnedCollection = [];
 
   bool _isLoading = true;
+  bool _isSyncing = false;
   String? _errorMessage;
 
   @override
@@ -73,6 +78,102 @@ class _CollectionPageState extends State<CollectionPage> {
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> _handleSync() async {
+    if (_isSyncing) return;
+    setState(() => _isSyncing = true);
+    try {
+      await NotesSyncService.fullSync();
+      // Refresh the local list after sync
+      await _fetchData();
+      Fluttertoast.showToast(msg: 'Notes synced successfully');
+    } on QuranApiException catch (e) {
+      if (mounted) _showSyncErrorDialog(e.message, e.type);
+    } catch (e) {
+      if (mounted) _showSyncErrorDialog(e.toString(), null);
+    } finally {
+      if (mounted) setState(() => _isSyncing = false);
+    }
+  }
+
+  void _showSyncErrorDialog(String message, String? errorType) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        icon: Icon(
+          FluentIcons.error_circle_24_regular,
+          size: 40,
+          color: Colors.red.shade400,
+        ),
+        title: const Text('Sync Failed'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SelectableText(message),
+            if (errorType != null) ...[
+              const SizedBox(height: 8),
+              SelectableText(
+                'Error type: $errorType',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.5),
+                ),
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLoginPrompt() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        icon: Icon(
+          FluentIcons.cloud_arrow_up_24_regular,
+          size: 40,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        title: const Text('Backup & Sync'),
+        content: const Text(
+          'Please login to sync and backup your notes to the cloud. '
+          'This allows you to restore your notes on any device.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Not now'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              ).then((_) {
+                // Refresh UI in case user logged in
+                setState(() {});
+              });
+            },
+            child: const Text('Login'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _filterCollections() {
@@ -267,13 +368,35 @@ class _CollectionPageState extends State<CollectionPage> {
             widget.collectionType.name == "notes" ? l10n.notes : l10n.pinned,
           ).capitalize(),
         ),
-        // actions: [
-        //   IconButton(
-        //     onPressed: _fetchData,
-        //     icon: const Icon(FluentIcons.arrow_sync_24_regular),
-        //     tooltip: "Refresh",
-        //   ),
-        // ],
+        actions: [
+          if (widget.collectionType == CollectionType.notes)
+            _isSyncing
+                ? const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      if (QuranAuthSession.isLoggedIn) {
+                        _handleSync();
+                      } else {
+                        _showLoginPrompt();
+                      }
+                    },
+                    icon: Icon(
+                      QuranAuthSession.isLoggedIn
+                          ? FluentIcons.arrow_sync_24_regular
+                          : FluentIcons.cloud_arrow_up_24_regular,
+                    ),
+                    tooltip: QuranAuthSession.isLoggedIn
+                        ? "Sync Notes"
+                        : "Backup Notes",
+                  ),
+        ],
       ),
       body: Column(
         children: [
@@ -629,4 +752,4 @@ class _CollectionPageState extends State<CollectionPage> {
   }
 }
 
-enum CollectionType { pinned, notes }
+enum CollectionType { pinned, notes, bookmark }

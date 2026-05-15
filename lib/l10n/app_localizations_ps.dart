@@ -1258,4 +1258,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'د لمانځه منع شوی وخت';
+
+  @override
+  String get profile => 'Profile';
 }
