@@ -45,7 +45,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _fetchProfile() async {
     setState(() {
-      _isLoading = _profile == null; // Only show loading if we don't have a cached profile
+      _isLoading =
+          _profile ==
+          null; // Only show loading if we don't have a cached profile
       _error = null;
     });
 
@@ -176,7 +178,6 @@ class _ProfilePageState extends State<ProfilePage> {
             backgroundColor: Theme.brightnessOf(context) == Brightness.dark
                 ? Colors.grey.shade900.withValues(alpha: 0.5)
                 : Colors.grey.shade200.withValues(alpha: 0.5),
-            actions: [themeIconButton(context)],
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
@@ -374,6 +375,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
         */
+        /*
         const Gap(32),
         SizedBox(
           width: double.infinity,
@@ -402,6 +404,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
+        */
       ],
     );
   }
