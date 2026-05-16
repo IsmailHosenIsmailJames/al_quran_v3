@@ -37,20 +37,26 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     _isLoggedIn = QuranAuthSession.isLoggedIn;
     if (_isLoggedIn) {
+      // Load cached profile for instant display
+      _profile = QuranAuthSession.getCachedUserProfile();
       _fetchProfile();
     }
   }
 
   Future<void> _fetchProfile() async {
     setState(() {
-      _isLoading = true;
+      _isLoading = _profile == null; // Only show loading if we don't have a cached profile
       _error = null;
     });
 
     try {
       final profile = await QuranProfileApi.getProfile();
+      // Cache the profile for offline use
+      await QuranAuthSession.saveUserProfile(profile);
+
       setState(() {
         _profile = profile;
+        _isLoading = false;
       });
     } on QuranApiException catch (e) {
       setState(() {
@@ -90,10 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 'Error type: $errorType',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.5),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],
@@ -195,10 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const Text(
                       'Connect with the Quran Foundation to sync your bookmarks, notes, and reading progress across all your devices.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        height: 1.5,
-                      ),
+                      style: TextStyle(color: Colors.grey, height: 1.5),
                     ),
                     const Gap(40),
                     if (_isLoading)
@@ -229,8 +231,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     else if (_error != null)
                       Column(
                         children: [
-                          const Icon(FluentIcons.error_circle_24_regular,
-                              size: 48, color: Colors.red),
+                          const Icon(
+                            FluentIcons.error_circle_24_regular,
+                            size: 48,
+                            color: Colors.red,
+                          ),
                           const Gap(16),
                           Text(_error!, textAlign: TextAlign.center),
                           const Gap(16),
@@ -356,6 +361,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ],
+        /*
         const Gap(24),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -367,6 +373,7 @@ class _ProfilePageState extends State<ProfilePage> {
             _buildStatItem('Likes', _profile!.likesCount.toString()),
           ],
         ),
+        */
         const Gap(32),
         SizedBox(
           width: double.infinity,
@@ -404,19 +411,10 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const Gap(4),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 13,
-            color: Colors.grey,
-          ),
-        ),
+        Text(label, style: const TextStyle(fontSize: 13, color: Colors.grey)),
       ],
     );
   }
@@ -497,10 +495,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: ListTile(
         onTap: onTap,
         leading: Icon(icon, color: themeState.primary),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w500),
-        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
         trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),

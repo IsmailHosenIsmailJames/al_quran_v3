@@ -1,8 +1,10 @@
 class UserProfile {
-  final int id;
+  final String id;
+  final String? email;
   final String? firstName;
   final String? lastName;
   final String? username;
+  final String? photoUrl;
   final String? bio;
   final String? country;
   final String? gender;
@@ -11,13 +13,18 @@ class UserProfile {
   final int followersCount;
   final int followingsCount;
   final int likesCount;
+  final bool isAdmin;
+  final bool isPasswordSet;
   final UserSettings? settings;
+  final DateTime? createdAt;
 
   UserProfile({
     required this.id,
+    this.email,
     this.firstName,
     this.lastName,
     this.username,
+    this.photoUrl,
     this.bio,
     this.country,
     this.gender,
@@ -26,11 +33,14 @@ class UserProfile {
     this.followersCount = 0,
     this.followingsCount = 0,
     this.likesCount = 0,
+    this.isAdmin = false,
+    this.isPasswordSet = false,
     this.settings,
+    this.createdAt,
   });
 
   String get displayName {
-    if (firstName != null && lastName != null) {
+    if (firstName != null && lastName != null && firstName!.isNotEmpty) {
       return '$firstName $lastName';
     }
     return firstName ?? lastName ?? username ?? 'User';
@@ -38,32 +48,47 @@ class UserProfile {
 
   factory UserProfile.fromJson(Map<String, dynamic> json) {
     return UserProfile(
-      id: json['id'] as int,
+      id: json['id']?.toString() ?? '',
+      email: json['email'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       username: json['username'] as String?,
+      photoUrl: json['photoUrl'] as String?,
       bio: json['bio'] as String?,
       country: json['country'] as String?,
       gender: json['gender'] as String?,
       avatarUrls: json['avatarUrls'] != null
           ? AvatarUrls.fromJson(json['avatarUrls'] as Map<String, dynamic>)
           : null,
-      postsCount: json['postsCount'] as int? ?? 0,
-      followersCount: json['followersCount'] as int? ?? 0,
-      followingsCount: json['followingsCount'] as int? ?? 0,
-      likesCount: json['likesCount'] as int? ?? 0,
+      postsCount: _toInt(json['postsCount']) ?? 0,
+      followersCount: _toInt(json['followersCount']) ?? 0,
+      followingsCount: _toInt(json['followingsCount']) ?? 0,
+      likesCount: _toInt(json['likesCount']) ?? 0,
+      isAdmin: json['isAdmin'] as bool? ?? false,
+      isPasswordSet: json['isPasswordSet'] as bool? ?? false,
       settings: json['settings'] != null
           ? UserSettings.fromJson(json['settings'] as Map<String, dynamic>)
           : null,
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
     );
+  }
+
+  static int? _toInt(dynamic value) {
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'email': email,
       'firstName': firstName,
       'lastName': lastName,
       'username': username,
+      'photoUrl': photoUrl,
       'bio': bio,
       'country': country,
       'gender': gender,
@@ -72,7 +97,10 @@ class UserProfile {
       'followersCount': followersCount,
       'followingsCount': followingsCount,
       'likesCount': likesCount,
+      'isAdmin': isAdmin,
+      'isPasswordSet': isPasswordSet,
       'settings': settings?.toJson(),
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 }
