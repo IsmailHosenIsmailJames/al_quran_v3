@@ -7,11 +7,13 @@ class ScriptProcessor extends StatelessWidget {
   final ScriptInfo scriptInfo;
   final ThemeState themeState;
   final bool tajweedColorEnable;
+  final bool? showBottomsheetOnTap;
   const ScriptProcessor({
     super.key,
     required this.scriptInfo,
     required this.themeState,
     required this.tajweedColorEnable,
+    this.showBottomsheetOnTap,
   });
 
   @override
@@ -22,12 +24,14 @@ class ScriptProcessor extends StatelessWidget {
         themeState: themeState,
         isUthmani: true,
         tajweedColorEnable: tajweedColorEnable,
+        showBottomsheetOnTap: showBottomsheetOnTap,
       ),
       QuranScriptType.indopak => QuranScriptScriptView(
         scriptInfo: scriptInfo,
         themeState: themeState,
         isUthmani: false,
         tajweedColorEnable: tajweedColorEnable,
+        showBottomsheetOnTap: showBottomsheetOnTap,
       ),
     };
   }
