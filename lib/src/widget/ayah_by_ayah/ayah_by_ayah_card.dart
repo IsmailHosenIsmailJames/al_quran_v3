@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/common_functions/remove_html_tag.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_sajda.dart"
     show metaDataSajda;
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
@@ -58,6 +59,7 @@ Widget getAyahByAyahCard({
   bool removeBorder = false,
   required List<TranslationOfAyah> translationListWithInfo,
   required List wordByWord,
+  bool? showBottomsheetOnTap,
 }) {
   AppLocalizations? l10n = AppLocalizations.of(context);
 
@@ -189,6 +191,7 @@ Widget getAyahByAyahCard({
                           quranViewState,
                           themeState,
                           isCenter: isCenter,
+                          showBottomsheetOnTap: showBottomsheetOnTap,
                         ),
                       if (!showOnlyAyah && !quranViewState.hideTranslation)
                         const Gap(5),
@@ -448,7 +451,7 @@ SizedBox getAyahWordByWord(
                       ),
                       const Gap(5),
                       Text(
-                        wordByWord[index],
+                        removeHtmlTags(wordByWord[index]),
                         style: TextStyle(
                           fontSize: quranViewState.translationFontSize,
                         ),
@@ -647,6 +650,7 @@ Align quranAyahWidget(
   QuranViewState quranViewState,
   ThemeState themeState, {
   bool? isCenter,
+  bool? showBottomsheetOnTap,
 }) {
   return Align(
     alignment: isCenter == true ? Alignment.center : Alignment.centerRight,
@@ -661,6 +665,7 @@ Align quranAyahWidget(
           height: quranViewState.lineHeight,
         ),
       ),
+      showBottomsheetOnTap: showBottomsheetOnTap,
       tajweedColorEnable:
           quranViewState.quranScriptType == QuranScriptType.uthmani
           ? quranViewState.useTajweedOnUthmani
@@ -776,11 +781,15 @@ Row getToolbarWidget(
         width: 30,
         child: BlocBuilder<BookmarkCubit, BookmarkState>(
           builder: (context, bookmarkState) {
-            final isBookmarked = context.read<BookmarkCubit>().isBookmarked(ayahKey);
+            final isBookmarked = context.read<BookmarkCubit>().isBookmarked(
+              ayahKey,
+            );
             return IconButton(
               style: IconButton.styleFrom(
                 padding: EdgeInsets.zero,
-                foregroundColor: isBookmarked ? themeState.primary : Colors.grey,
+                foregroundColor: isBookmarked
+                    ? themeState.primary
+                    : Colors.grey,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
                   side: BorderSide(
@@ -790,10 +799,10 @@ Row getToolbarWidget(
               ),
               onPressed: () {
                 context.read<BookmarkCubit>().toggleBookmark(
-                      surahNumber: surahNumber,
-                      ayahNumber: ayahNumber,
-                      verseKey: ayahKey,
-                    );
+                  surahNumber: surahNumber,
+                  ayahNumber: ayahNumber,
+                  verseKey: ayahKey,
+                );
               },
               tooltip: 'Bookmark',
               icon: Icon(
