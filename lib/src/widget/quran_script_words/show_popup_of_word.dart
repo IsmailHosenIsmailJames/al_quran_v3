@@ -10,6 +10,7 @@ import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_sta
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -140,9 +141,14 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                   ),
                   const Gap(10),
                   if (supportsWordByWord)
-                    Text(
-                      widget.wordByWord[index].toString().capitalize(),
-                      style: const TextStyle(fontSize: 18),
+                    Html(
+                      data: widget.wordByWord[index].toString(),
+                      style: {
+                        "*": Style(
+                          textAlign: TextAlign.center,
+                          fontSize: FontSize(18),
+                        ),
+                      },
                     ),
                   const Gap(15),
                   BlocBuilder<WordPlayingStateCubit, String?>(

@@ -218,6 +218,7 @@ class _AppSetupPageState extends State<AppSetupPage> {
                           keepMargin: false,
                           isCenter: true,
                           wordByWord: [],
+                          showBottomsheetOnTap: false,
                         ),
                         const Gap(10),
                         const QuranFontSelectionWidget(
