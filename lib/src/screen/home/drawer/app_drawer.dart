@@ -22,7 +22,6 @@ import "../../../platform_services.dart" as platform_services;
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
 import "../../collections/collection_page.dart";
-import "../../collections/bookmark_page.dart";
 import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
@@ -222,28 +221,6 @@ Widget drawerSection({
                 : Text(
                     l10n.languageSettings,
                     style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-          ),
-          ListTile(
-            minTileHeight: 40,
-            onTap: () async {
-              if (!isDesktop) Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BookmarkPage(),
-                ),
-              );
-            },
-            leading: Icon(
-              FluentIcons.bookmark_24_filled,
-              color: themeState.primary,
-            ),
-            title: isJustIcon
-                ? null
-                : const Text(
-                    "Bookmarks",
-                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
           ),
           const Gap(5),
