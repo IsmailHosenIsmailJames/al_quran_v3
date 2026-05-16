@@ -10,7 +10,6 @@ import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/core/bookmark/cubit/bookmark_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
 import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
@@ -773,46 +772,6 @@ Row getToolbarWidget(
           },
           tooltip: l10n.addNoteButton,
           icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
-        child: BlocBuilder<BookmarkCubit, BookmarkState>(
-          builder: (context, bookmarkState) {
-            final isBookmarked = context.read<BookmarkCubit>().isBookmarked(
-              ayahKey,
-            );
-            return IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.zero,
-                foregroundColor: isBookmarked
-                    ? themeState.primary
-                    : Colors.grey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                  side: BorderSide(
-                    color: isBookmarked ? themeState.primary : Colors.grey,
-                  ),
-                ),
-              ),
-              onPressed: () {
-                context.read<BookmarkCubit>().toggleBookmark(
-                  surahNumber: surahNumber,
-                  ayahNumber: ayahNumber,
-                  verseKey: ayahKey,
-                );
-              },
-              tooltip: 'Bookmark',
-              icon: Icon(
-                isBookmarked
-                    ? FluentIcons.bookmark_24_filled
-                    : FluentIcons.bookmark_24_regular,
-                size: 18,
-              ),
-            );
-          },
         ),
       ),
       const Gap(5),
