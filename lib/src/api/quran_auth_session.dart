@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as developer;
 
 import 'package:al_quran_v3/src/api/logging_client.dart';
+import 'package:al_quran_v3/src/api/models/user_profile_model.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 /// Manages persisted OAuth session state using Hive.
@@ -13,6 +14,7 @@ class QuranAuthSession {
   static const String _keyRefreshToken = 'auth_refresh_token';
   static const String _keyExpiresAt = 'auth_expires_at';
   static const String _keyIdToken = 'auth_id_token';
+  static const String _keyUserProfile = 'auth_user_profile';
 
   // OAuth config (mirrors QuranAuthService)
   static const String _clientId = '1537c362-884a-4376-b064-9b071c638c61';
@@ -42,7 +44,7 @@ class QuranAuthSession {
 
     // Calculate absolute expiry time
     final expiresAt = DateTime.now().add(
-      Duration(seconds: (expiresIn as int?) ?? 3600),
+      Duration(seconds: _parseInt(expiresIn) ?? 3600),
     );
 
     await _box.put(_keyAccessToken, accessToken);
@@ -58,6 +60,12 @@ class QuranAuthSession {
       'Session saved. Expires at: $expiresAt',
       name: 'QuranAuthSession',
     );
+  }
+
+  static int? _parseInt(dynamic value) {
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 
   /// Returns the current access token, or null if not logged in.
@@ -200,7 +208,27 @@ class QuranAuthSession {
     await _box.delete(_keyRefreshToken);
     await _box.delete(_keyExpiresAt);
     await _box.delete(_keyIdToken);
+    await _box.delete(_keyUserProfile);
     developer.log('Session cleared', name: 'QuranAuthSession');
+  }
+
+  /// Saves the user profile to local storage.
+  static Future<void> saveUserProfile(UserProfile profile) async {
+    await _box.put(_keyUserProfile, jsonEncode(profile.toJson()));
+    developer.log('User profile saved locally', name: 'QuranAuthSession');
+  }
+
+  /// Retrieves the cached user profile from local storage.
+  static UserProfile? getCachedUserProfile() {
+    final jsonStr = _box.get(_keyUserProfile) as String?;
+    if (jsonStr == null) return null;
+    try {
+      final json = jsonDecode(jsonStr) as Map<String, dynamic>;
+      return UserProfile.fromJson(json);
+    } catch (e) {
+      developer.log('Error loading cached profile: $e', name: 'QuranAuthSession');
+      return null;
+    }
   }
 
   /// The client ID used for API requests.

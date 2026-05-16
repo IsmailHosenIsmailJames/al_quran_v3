@@ -74,16 +74,19 @@ class QuranProfileApi {
     String? username,
   }) async {
     final headers = await _getHeaders();
-    final requestBody = <String, dynamic>{};
-    if (firstName != null) requestBody['firstName'] = firstName;
-    if (lastName != null) requestBody['lastName'] = lastName;
-    if (bio != null) requestBody['bio'] = bio;
-    if (country != null) requestBody['country'] = country;
-    if (avatar != null) requestBody['avatar'] = avatar;
-    if (username != null) requestBody['username'] = username;
+    final requestBody = {
+      'user': {
+        if (firstName != null) 'firstName': firstName,
+        if (lastName != null) 'lastName': lastName,
+        if (bio != null) 'bio': bio,
+        if (country != null) 'country': country,
+        if (avatar != null) 'avatar': avatar,
+        if (username != null) 'username': username,
+      }
+    };
 
-    final response = await _client.patch(
-      Uri.parse('$_baseUrl/update-profile'),
+    final response = await _client.put(
+      Uri.parse('$_baseUrl/profile'),
       headers: headers,
       body: jsonEncode(requestBody),
     );
@@ -121,7 +124,7 @@ class QuranProfileApi {
     if (theme != null) requestBody['theme'] = theme;
 
     final response = await _client.patch(
-      Uri.parse('$_baseUrl/edit-profile'),
+      Uri.parse('$_baseUrl/profile'),
       headers: headers,
       body: jsonEncode(requestBody),
     );
