@@ -1,97 +1,145 @@
 {
   "ar": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "az": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "bn": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "de": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "es": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "fa": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "fr": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "hi": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "id": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "it": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ja": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "kk": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ko": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ms": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "pa": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ps": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "pt": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ru": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "sw": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ta": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "tr": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "ur": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "vi": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ],
 
   "zh": [
-    "profile"
+    "profile",
+    "pleaseLoginToSearch",
+    "searchHint"
   ]
 }

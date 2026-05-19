@@ -185,6 +185,8 @@ icons_launcher:
   platforms:
     android:
       enable: true
+      adaptive_background_color: "#009688"
+      adaptive_foreground_image: "assets/img/Quran_Logo_v3.png"
     ios:
       enable: true
     web:
@@ -207,6 +209,8 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/img/Quran_Logo_v3.png"
   min_sdk_android: 21 
+  adaptive_icon_background: "#009688"
+  adaptive_icon_foreground: "assets/img/Quran_Logo_v3.png"
 
 flutter_native_splash:
   color: "#ffffff"

@@ -1,211 +1,213 @@
-// import "dart:convert";
-// import "dart:developer";
-// import "dart:ui";
+import "dart:async";
 
-// import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-// import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-// import "package:firebase_ai/firebase_ai.dart";
-// import "package:fluentui_system_icons/fluentui_system_icons.dart";
-// import "package:flutter/material.dart";
-// import "package:flutter_bloc/flutter_bloc.dart";
-// import "package:fluttertoast/fluttertoast.dart";
-// import "package:gap/gap.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/api/quran_search_api.dart";
+import "package:al_quran_v3/src/api/quran_notes_api.dart"; // For QuranApiException
+import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 
-// class SearchScreen extends StatefulWidget {
-//   const SearchScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
-//   @override
-//   State<SearchScreen> createState() => _SearchScreenState();
-// }
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
 
-// class _SearchScreenState extends State<SearchScreen> {
-//   TextEditingController textEditingController = TextEditingController();
-//   bool resultView = false;
-//   Map? result;
-//   String? errorText;
+class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController _textController = TextEditingController();
+  bool _isLoading = false;
+  Map<String, dynamic>? _searchResults;
+  String? _error;
 
-//   Future<void> onSearch(String query) async {
-//     setState(() {
-//       result = null;
-//       resultView = true;
-//       errorText = null;
-//     });
+  Future<void> _performSearch(String query) async {
+    if (query.trim().isEmpty) return;
 
-//     String prompt = """
-// You are an intelligent backend API for a Quran Mobile Application. Your task is to perform a semantic search based on a user's query and return a structured JSON response.
+    setState(() {
+      _isLoading = true;
+      _searchResults = null;
+      _error = null;
+    });
 
-// **Input:**
-// User Query: "$query"
+    try {
+      final results = await QuranSearchApi.search(query: query);
+      setState(() {
+        _searchResults = results;
+        _isLoading = false;
+      });
+    } on QuranApiException catch (e) {
+      setState(() {
+        _error = e.message;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = "An unexpected error occurred: $e";
+        _isLoading = false;
+      });
+    }
+  }
 
-// **Instructions:**
-// 1. Analyze the user's query semantically (look for meaning, not just keyword matching).
-// 2. Identify relevant Quranic Ayahs that answer or relate to the query.
-// 3. Group these Ayahs logically based on sub-themes or contexts within the query.
-// 4. **Strict Output Rule:** Return ONLY valid JSON. Do not include introduction text, markdown formatting (like ```json), or explanations.
+  void _navigateToResult(dynamic item) {
+    final type = item['result_type'];
+    final key = item['key'].toString();
 
-// **Data Constraints:**
-// - Do NOT include Arabic text.
-// - Do NOT include translations.
-// - Only return `surah_number` and `ayah_number`.
-// - Include a short, descriptive `group_title` for each cluster of verses.
+    if (type == 'surah') {
+      final surahNumber = key;
+      final totalAyah = metaDataSurah[surahNumber]!['vc'];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuranScriptView(
+            startKey: "$surahNumber:1",
+            endKey: "$surahNumber:$totalAyah",
+          ),
+        ),
+      );
+    } else if (type == 'ayah') {
+      final parts = key.split(':');
+      final surahNumber = parts[0];
+      final totalAyah = metaDataSurah[surahNumber]!['vc'];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuranScriptView(
+            startKey: "$surahNumber:1",
+            endKey: "$surahNumber:$totalAyah",
+            toScrollKey: key,
+          ),
+        ),
+      );
+    }
+  }
 
-// **JSON Structure:**
-// The output must strictly follow this schema:
-// {
-//   "search_meta": {
-//     "query_analyzed": "String",
-//     "total_groups": Integer
-//   },
-//   "data": [
-//     {
-//       "group_title": "String (Context of this group)",
-//       "relevance_score": Float (0.0 to 1.0),
-//       "verses": [
-//         {
-//           "surah_number": Integer,
-//           "ayah_number": Integer
-//         }
-//       ]
-//     }
-//   ]
-// }
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final themeState = context.read<ThemeCubit>().state;
 
-// **Example:**
-// If query is "patience and prayer", output:
-// {
-//   "search_meta": {
-//     "query_analyzed": "patience and prayer",
-//     "total_groups": 1
-//   },
-//   "data": [
-//     {
-//       "group_title": "Seeking help through patience and prayer",
-//       "relevance_score": 0.98,
-//       "verses": [
-//         { "surah_number": 2, "ayah_number": 45 },
-//         { "surah_number": 2, "ayah_number": 153 }
-//       ]
-//     }
-//   ]
-// }
-// """;
-//     final model = FirebaseAI.googleAI().generativeModel(
-//       model: "gemini-2.5-flash-lite",
-//     );
+    return Scaffold(
+      appBar: AppBar(title: Text(l10n.search)),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SearchBar(
+              controller: _textController,
+              hintText: l10n.searchHint,
+              onSubmitted: _performSearch,
+              leading: const Icon(FluentIcons.search_24_regular),
+              trailing: [
+                if (_textController.text.isNotEmpty)
+                  IconButton(
+                    onPressed: () {
+                      _textController.clear();
+                      setState(() {
+                        _searchResults = null;
+                      });
+                    },
+                    icon: const Icon(FluentIcons.dismiss_24_regular),
+                  ),
+              ],
+            ),
+          ),
+          if (_isLoading)
+            const Expanded(child: Center(child: CircularProgressIndicator())),
+          if (_error != null)
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text(
+                    _error!,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
+            ),
+          if (_searchResults != null)
+            Expanded(child: _buildResultsList(themeState)),
+        ],
+      ),
+    );
+  }
 
-//     try {
-//       log("Going to call AI");
-//       final response = await model.generateContent([Content.text(prompt)]);
-//       result = jsonDecode(response.text ?? "{}");
-//       log(response.text.toString(), name: "AI Response");
-//     } catch (e) {
-//       errorText = e.toString();
-//       log(e.toString(), name: "AI Response");
-//     }
-//     setState(() {});
-//   }
+  Widget _buildResultsList(ThemeState themeState) {
+    final result = _searchResults!['result'];
+    final navigation = result['navigation'] as List? ?? [];
+    final verses = result['verses'] as List? ?? [];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     ThemeState themeState = context.read<ThemeCubit>().state;
-//     bool isDarkMode = Theme.brightnessOf(context) == Brightness.dark;
+    if (navigation.isEmpty && verses.isEmpty) {
+      return const Center(child: Text("No results found."));
+    }
 
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           if (resultView)
-//             ListView.builder(
-//               padding: EdgeInsets.only(
-//                 top: MediaQuery.of(context).padding.top + 90,
-//                 bottom: 100,
-//                 left: 15,
-//                 right: 15,
-//               ),
-//               itemCount: result?.length ?? 1,
-//               itemBuilder: (context, index) {
-//                 if (result != null) {
-//                   return Container();
-//                 }
-//                 return SizedBox(
-//                   height: MediaQuery.of(context).size.height * 0.7,
-//                   child: Center(
-//                     child:
-//                         errorText != null
-//                             ? Text(errorText.toString())
-//                             : CircularProgressIndicator(
-//                               backgroundColor: themeState.primaryShade100,
-//                             ),
-//                   ),
-//                 );
-//               },
-//             ),
-//           AnimatedContainer(
-//             duration: const Duration(milliseconds: 300),
-//             margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-//             height: resultView ? 100 : MediaQuery.of(context).size.height,
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 if (!resultView)
-//                   const Text(
-//                     "AI Search",
-//                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-//                   ),
-//                 if (!resultView) const Gap(8),
-//                 if (!resultView)
-//                   Text(
-//                     "Find Ayahs using natural language",
-//                     style: TextStyle(
-//                       fontSize: 16,
-//                       color: Colors.grey.shade600,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   ),
-//                 if (!resultView) const Gap(20),
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 16),
-//                   child: ClipRRect(
-//                     child: BackdropFilter(
-//                       filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-//                       child: SearchBar(
-//                         hintText: "e.g., verses about patience",
-//                         hintStyle: const WidgetStatePropertyAll(
-//                           TextStyle(color: Colors.grey),
-//                         ),
-//                         controller: textEditingController,
-//                         onSubmitted: (value) {
-//                           if (value.trim().isNotEmpty) {
-//                             onSearch(value);
-//                           } else {
-//                             Fluttertoast.showToast(
-//                               msg: "Please enter a search query",
-//                             );
-//                           }
-//                         },
-//                         elevation: const WidgetStatePropertyAll(0),
-//                         leading: const Icon(FluentIcons.search_24_filled),
-//                         backgroundColor: WidgetStatePropertyAll(
-//                           themeState.primaryShade100,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//                 if (!resultView) const Gap(16),
-//                 if (!resultView)
-//                   const Padding(
-//                     padding: EdgeInsets.symmetric(horizontal: 16),
-//                     child: Text(
-//                       "This search utilizes Al models to find relevant Ayahs",
-//                       style: TextStyle(fontSize: 12, color: Colors.grey),
-//                     ),
-//                   ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+    return ListView(
+      children: [
+        if (navigation.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              "Navigation",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: themeState.primary,
+              ),
+            ),
+          ),
+          ...navigation.map(
+            (item) => ListTile(
+              title: Text(item['name']),
+              subtitle: Text(item['result_type'].toString().toUpperCase()),
+              onTap: () => _navigateToResult(item),
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: themeState.primaryShade100,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  FluentIcons.navigation_24_regular,
+                  color: themeState.primary,
+                  size: 20,
+                ),
+              ),
+            ),
+          ),
+          const Divider(),
+        ],
+        if (verses.isNotEmpty) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              "Verses",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: themeState.primary,
+              ),
+            ),
+          ),
+          ...verses.map(
+            (item) => ListTile(
+              title: Text(
+                item['name'],
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(fontSize: 18),
+              ),
+              subtitle: Text("Ayah ${item['key']}"),
+              onTap: () => _navigateToResult(item),
+            ),
+          ),
+        ],
+        const Gap(100), // Spacing for bottom
+      ],
+    );
+  }
+}

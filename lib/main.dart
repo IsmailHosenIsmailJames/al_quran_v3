@@ -265,6 +265,7 @@ class MyApp extends StatelessWidget {
           return BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, themeState) {
               return MaterialApp(
+                color: themeState.primary,
                 navigatorKey: navigatorKey,
                 debugShowCheckedModeBanner: false,
                 locale: languageState.locale,

@@ -10,6 +10,9 @@ import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_s
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
+import "package:al_quran_v3/src/api/quran_auth_session.dart";
+import "package:al_quran_v3/src/screen/profile/profile_page.dart";
+import "package:al_quran_v3/src/screen/search/search_screen.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -439,7 +442,38 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               title: Text(l10n.alQuran),
               centerTitle: true,
-              actions: [],
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    if (QuranAuthSession.isLoggedIn) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchScreen(),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(l10n.pleaseLoginToSearch),
+                          action: SnackBarAction(
+                            label: l10n.profile,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ProfilePage(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  icon: const Icon(FluentIcons.search_24_regular),
+                ),
+              ],
             ),
       body: Row(
         children: [

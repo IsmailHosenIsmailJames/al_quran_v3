@@ -1259,4 +1259,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+
+  @override
+  String get searchHint => 'Search for verses, surahs...';
 }

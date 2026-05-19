@@ -2407,6 +2407,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @pleaseLoginToSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to use the search feature.'**
+  String get pleaseLoginToSearch;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for verses, surahs...'**
+  String get searchHint;
 }
 
 class _AppLocalizationsDelegate
