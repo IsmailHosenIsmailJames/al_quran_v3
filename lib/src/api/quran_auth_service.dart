@@ -61,16 +61,20 @@ class QuranAuthService {
       final state = _generateState();
 
       // 2. Build the authorization URL
-      final authUrl =
-          Uri.https('prelive-oauth2.quran.foundation', '/oauth2/auth', {
-            'response_type': 'code',
-            'client_id': clientId,
-            'redirect_uri': redirectUrl,
-            'scope': 'openid offline_access user bookmark note collection',
-            'code_challenge': codeChallenge,
-            'code_challenge_method': 'S256',
-            'state': state,
-          });
+      final authUrl = Uri.https(
+        'prelive-oauth2.quran.foundation',
+        '/oauth2/auth',
+        {
+          'response_type': 'code',
+          'client_id': clientId,
+          'redirect_uri': redirectUrl,
+          'scope':
+              'openid offline_access user bookmark note collection search content',
+          'code_challenge': codeChallenge,
+          'code_challenge_method': 'S256',
+          'state': state,
+        },
+      );
 
       developer.log('Authorization URL: $authUrl', name: 'QuranAuthService');
 
