@@ -778,46 +778,6 @@ Row getToolbarWidget(
       SizedBox(
         height: 30,
         width: 30,
-        child: BlocBuilder<BookmarkCubit, BookmarkState>(
-          builder: (context, bookmarkState) {
-            final isBookmarked = context.read<BookmarkCubit>().isBookmarked(
-              ayahKey,
-            );
-            return IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.zero,
-                foregroundColor: isBookmarked
-                    ? themeState.primary
-                    : Colors.grey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                  side: BorderSide(
-                    color: isBookmarked ? themeState.primary : Colors.grey,
-                  ),
-                ),
-              ),
-              onPressed: () {
-                context.read<BookmarkCubit>().toggleBookmark(
-                  surahNumber: surahNumber,
-                  ayahNumber: ayahNumber,
-                  verseKey: ayahKey,
-                );
-              },
-              tooltip: 'Bookmark',
-              icon: Icon(
-                isBookmarked
-                    ? FluentIcons.bookmark_24_filled
-                    : FluentIcons.bookmark_24_regular,
-                size: 18,
-              ),
-            );
-          },
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
         child: IconButton(
           style: IconButton.styleFrom(
             padding: EdgeInsets.zero,
