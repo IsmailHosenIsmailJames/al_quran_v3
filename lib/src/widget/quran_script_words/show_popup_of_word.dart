@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.da
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
 import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
-import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
