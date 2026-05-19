@@ -111,7 +111,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
         });
       }
       await dio.download(
-        "https://github.com/IsmailHosenIsmailJames/al_quran_mushaf/releases/download/v1.0.0/KFGQPC_V4_layout.zip",
+        "https://qdnd4qxnpmpxjuss.public.blob.vercel-storage.com/KFGQPC_V4_layout.zip",
         zipFilePath,
         onReceiveProgress: (count, total) {
           if (total != -1 && mounted) {
@@ -217,7 +217,7 @@ class _KfgqpcV4LayoutScreenState extends State<KfgqpcV4LayoutScreen> {
                   borderRadius: BorderRadius.circular(12),
                   child: CachedNetworkImage(
                     imageUrl:
-                        "https://github.com/IsmailHosenIsmailJames/al_quran_mushaf/releases/download/v1.0.0/WhatsApp.Image.2026-02-20.at.16.11.16.jpeg",
+                        "https://qdnd4qxnpmpxjuss.public.blob.vercel-storage.com/WhatsApp.Image.2026-02-20.at.16.11.16%20%281%29.jpeg",
                     placeholder: (context, url) => Shimmer.fromColors(
                       baseColor: Colors.grey.shade300,
                       highlightColor: Colors.grey.shade100,

@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 3.22.0+89
+version: 3.22.2+90
 
 environment:
   sdk: ^3.10.0
@@ -77,9 +77,8 @@ dependencies:
   timezone: ^0.11.0
   workmanager: ^0.9.0+3
   flutter_inappwebview: ^6.1.5
-  # flutter_appauth: ^12.0.0 # Replaced with manual OAuth flow
-  app_links: ^6.4.0
-  crypto: ^3.0.6
+  crypto: ^3.0.7
+  app_links: ^7.0.0
   # background_fetch:
   #   git:
   #     url: https://github.com/transistorsoft/flutter_background_fetch
