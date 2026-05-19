@@ -637,5 +637,7 @@
   "sunTopOfTheHead": "Sun Top of the Head",
   "salatTime": "Salat Time",
   "forbiddenSalatTime": "Forbidden Salat Time",
-  "profile": "Profile"
+  "profile": "Profile",
+  "pleaseLoginToSearch": "Please login to use the search feature.",
+  "searchHint": "Search for verses, surahs..."
 }
