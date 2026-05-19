@@ -1265,4 +1265,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get searchHint => 'ਆਇਤਾਂ, ਸੂਰਾ ਖੋਜੋ...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'ਹੋਰ ਤਫ਼ਸੀਰਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'ਸਿੱਧੇ ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਕਲਾਉਡ ਤਫ਼ਸੀਰਾਂ (ਕੁਰਾਨ ਫਾਊਂਡੇਸ਼ਨ ਤੋਂ) ਤੱਕ ਪਹੁੰਚ ਕਰੋ।';
+
+  @override
+  String get signIn => 'ਸਾਈਨ ਇਨ';
 }

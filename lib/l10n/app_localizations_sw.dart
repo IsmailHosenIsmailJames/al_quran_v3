@@ -1275,4 +1275,14 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get searchHint => 'Tafuta aya, sura...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Pata Tafsiri Zaidi';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Pata Tafsiri za wingu (Kutoka Quran Foundation) moja kwa moja kwa lugha yako.';
+
+  @override
+  String get signIn => 'Ingia';
 }

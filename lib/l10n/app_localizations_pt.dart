@@ -1280,4 +1280,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get searchHint => 'Buscar versículos, suras...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Desbloqueie mais Tafsirs';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Acesse os Tafsirs na nuvem (da Fundação Alcorão) diretamente em seu idioma.';
+
+  @override
+  String get signIn => 'Entrar';
 }

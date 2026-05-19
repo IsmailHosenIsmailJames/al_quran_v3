@@ -1269,4 +1269,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get searchHint => 'آیات، سورتیں تلاش کریں...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'مزید تفاسیر کھولیں';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'براہ راست اپنی زبان میں کلاؤড تفاسیر (قرآن فاؤنڈیشن से) تک رسائی حاصل کریں۔';
+
+  @override
+  String get signIn => 'سائن ان کریں';
 }

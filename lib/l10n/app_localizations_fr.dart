@@ -1281,4 +1281,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get searchHint => 'Rechercher des versets, sourates...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Débloquez plus de Tafsirs';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Accédez aux Tafsirs en ligne (de la Fondation Coran) directement dans votre langue.';
+
+  @override
+  String get signIn => 'Se connecter';
 }

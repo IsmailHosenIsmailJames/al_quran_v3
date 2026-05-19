@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
   "profile": "ਪ੍ਰੋਫਾਈਲ",
   "pleaseLoginToSearch": "ਖੋਜ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ।",
-  "searchHint": "ਆਇਤਾਂ, ਸੂਰਾ ਖੋਜੋ..."
+  "searchHint": "ਆਇਤਾਂ, ਸੂਰਾ ਖੋਜੋ...",
+  "signIn": "ਸਾਈਨ ਇਨ",
+  "accessUnlockMoreTafsirs": "ਹੋਰ ਤਫ਼ਸੀਰਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ",
+  "accessCloudTafsirsDesc": "ਸਿੱਧੇ ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਕਲਾਉਡ ਤਫ਼ਸੀਰਾਂ (ਕੁਰਾਨ ਫਾਊਂਡੇਸ਼ਨ ਤੋਂ) ਤੱਕ ਪਹੁੰਚ ਕਰੋ।"
 }

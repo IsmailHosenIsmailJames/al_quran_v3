@@ -1273,4 +1273,14 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get searchHint => 'Ayələr, surələr axtarın...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Daha çox Təfsirə daxil olun';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Keltirilmiş bulud Təfsirlərinə (Quran Fondundan) birbaşa öz dilinizdə daxil olun.';
+
+  @override
+  String get signIn => 'Daxil ol';
 }

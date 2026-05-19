@@ -1266,4 +1266,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get searchHint => 'Cari ayat, surah...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Buka Lebih Banyak Tafsir';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Akses Tafsir awan (dari Quran Foundation) langsung dalam bahasa Anda.';
+
+  @override
+  String get signIn => 'Masuk';
 }

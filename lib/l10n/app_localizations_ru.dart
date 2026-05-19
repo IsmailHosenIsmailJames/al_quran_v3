@@ -1276,4 +1276,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get searchHint => 'Поиск стихов, сур...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Разблокировать больше Тафсиров';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Получите доступ к облачным Тафсирам (от Фонда Корана) прямо на вашем языке.';
+
+  @override
+  String get signIn => 'Войти';
 }

@@ -1268,4 +1268,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get searchHint => 'Ayet, sure ara...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Daha Fazla Tefsir Aç';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Kendi dilinizde bulut Tefsirlere (Kuran Vakfı\'ndan) doğrudan erişin.';
+
+  @override
+  String get signIn => 'Giriş Yap';
 }

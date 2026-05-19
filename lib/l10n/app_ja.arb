@@ -377,5 +377,8 @@
   "forbiddenSalatTime": "礼拝禁止時間",
   "profile": "プロフィール",
   "pleaseLoginToSearch": "検索機能を使用するにはログインしてください。",
-  "searchHint": "句、章（スーラ）を検索..."
+  "searchHint": "句、章（スーラ）を検索...",
+  "accessUnlockMoreTafsirs": "さらに多くのタフシールをアンロック",
+  "accessCloudTafsirsDesc": "あなたの言語でクラウド・タフシール（コーラン財団提供）に直接アクセス。",
+  "signIn": "サインイン"
 }

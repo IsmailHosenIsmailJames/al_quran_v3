@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Kerahat Vakti",
   "profile": "Profil",
   "pleaseLoginToSearch": "Arama özelliğini kullanmak için lütfen giriş yapın.",
-  "searchHint": "Ayet, sure ara..."
+  "searchHint": "Ayet, sure ara...",
+  "accessUnlockMoreTafsirs": "Daha Fazla Tefsir Aç",
+  "accessCloudTafsirsDesc": "Kendi dilinizde bulut Tefsirlere (Kuran Vakfı'ndan) doğrudan erişin.",
+  "signIn": "Giriş Yap"
 }

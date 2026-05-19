@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "وقت ممنوعه نماز",
   "profile": "پروفایل",
   "pleaseLoginToSearch": "لطفاً برای استفاده از قابلیت جستجو وارد شوید.",
-  "searchHint": "جستجو برای آیات، سوره‌ها..."
+  "searchHint": "جستجو برای آیات، سوره‌ها...",
+  "signIn": "ورود",
+  "accessUnlockMoreTafsirs": "دسترسی به تفاسیر بیشتر",
+  "accessCloudTafsirsDesc": "دسترسی مستقیم به تفاسیر ابری (از بنیاد قرآن) به زبان خودتان."
 }

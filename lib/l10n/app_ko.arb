@@ -377,5 +377,8 @@
   "forbiddenSalatTime": "금지된 기도 시간",
   "profile": "프로필",
   "pleaseLoginToSearch": "검색 기능을 사용하려면 로그인하세요.",
-  "searchHint": "구절, 수라 검색..."
+  "searchHint": "구절, 수라 검색...",
+  "signIn": "로그인",
+  "accessUnlockMoreTafsirs": "더 많은 타프시르 보기",
+  "accessCloudTafsirsDesc": "원하는 언어로 클라우드 타프시르(꾸란 재단 제공)를 직접 확인하세요."
 }

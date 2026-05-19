@@ -1272,4 +1272,14 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get searchHint => 'Tìm kiếm câu thơ, surah...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Truy cập thêm nhiều Tafsir';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Truy cập trực tiếp các Tafsir đám mây (từ Quran Foundation) bằng ngôn ngữ của bạn.';
+
+  @override
+  String get signIn => 'Đăng nhập';
 }

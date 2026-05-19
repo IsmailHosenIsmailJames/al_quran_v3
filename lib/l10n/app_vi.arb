@@ -377,5 +377,8 @@
   "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm",
   "profile": "Hồ sơ",
   "pleaseLoginToSearch": "Vui lòng đăng nhập to sử dụng tính năng tìm kiếm.",
-  "searchHint": "Tìm kiếm câu thơ, surah..."
+  "searchHint": "Tìm kiếm câu thơ, surah...",
+  "signIn": "Đăng nhập",
+  "accessUnlockMoreTafsirs": "Truy cập thêm nhiều Tafsir",
+  "accessCloudTafsirsDesc": "Truy cập trực tiếp các Tafsir đám mây (từ Quran Foundation) bằng ngôn ngữ của bạn."
 }

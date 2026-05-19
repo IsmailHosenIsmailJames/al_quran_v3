@@ -1229,4 +1229,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get searchHint => '搜索诗节、苏拉...';
+
+  @override
+  String get accessUnlockMoreTafsirs => '解锁更多塔夫西尔';
+
+  @override
+  String get accessCloudTafsirsDesc => '直接以您的语言访问云端塔夫西尔（来自古兰经基金会）。';
+
+  @override
+  String get signIn => '登录';
 }

@@ -377,5 +377,8 @@
   "forbiddenSalatTime": "Məkruh Namaz Vaxtı",
   "profile": "Profil",
   "pleaseLoginToSearch": "Axtarış funksiyasından istifadə etmək üçün daxil olun.",
-  "searchHint": "Ayələr, surələr axtarın..."
+  "searchHint": "Ayələr, surələr axtarın...",
+  "signIn": "Daxil ol",
+  "accessUnlockMoreTafsirs": "Daha çox Təfsirə daxil olun",
+  "accessCloudTafsirsDesc": "Keltirilmiş bulud Təfsirlərinə (Quran Fondundan) birbaşa öz dilinizdə daxil olun."
 }
