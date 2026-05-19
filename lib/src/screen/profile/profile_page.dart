@@ -123,23 +123,31 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       final result = await QuranAuthService.login();
       if (result != null) {
-        setState(() {
-          _isLoggedIn = true;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoggedIn = true;
+          });
+        }
         await _fetchProfile();
       } else {
-        setState(() {
-          _error = 'Login cancelled or failed.';
-        });
+        if (mounted) {
+          setState(() {
+            _error = 'Login cancelled or failed.';
+          });
+        }
       }
     } catch (e) {
-      setState(() {
-        _error = 'An error occurred: $e';
-      });
+      if (mounted) {
+        setState(() {
+          _error = 'An error occurred: $e';
+        });
+      }
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 

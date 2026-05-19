@@ -1268,4 +1268,14 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get searchHint => 'د آیتونو، سورتونو لټون...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'نورو تفاسیرو ته لاسرسی';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'په مستقیم ډول ستاسو په ژبه کې د بادل تفاسیرو (د قران بنسټ څخه) ته لاسرسی ومومئ.';
+
+  @override
+  String get signIn => 'ننوځئ';
 }

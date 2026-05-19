@@ -28,11 +28,7 @@ class TafsirTabItem {
   final ResourcesModel? localResource;
   final TafsirInfo? onlineResource;
 
-  TafsirTabItem({
-    required this.name,
-    this.localResource,
-    this.onlineResource,
-  });
+  TafsirTabItem({required this.name, this.localResource, this.onlineResource});
 
   bool get isOnline => onlineResource != null;
 }
@@ -45,8 +41,7 @@ class TafsirView extends StatefulWidget {
   State<TafsirView> createState() => _TafsirViewState();
 }
 
-class _TafsirViewState extends State<TafsirView>
-    with TickerProviderStateMixin {
+class _TafsirViewState extends State<TafsirView> with TickerProviderStateMixin {
   late SurahInfoModel surahInfoModel;
   late AppLocalizations appLocalizations;
 
@@ -66,14 +61,13 @@ class _TafsirViewState extends State<TafsirView>
 
   void _loadTabs() {
     final localBooks = QuranTafsirFunction.getDownloadedTafsirBooks();
-    
+
     // Dispose the old controller if any
     _tabController.dispose();
 
-    _tabItems = localBooks.map((e) => TafsirTabItem(
-      name: e.name,
-      localResource: e,
-    )).toList();
+    _tabItems = localBooks
+        .map((e) => TafsirTabItem(name: e.name, localResource: e))
+        .toList();
 
     _tabController = TabController(length: _tabItems.length, vsync: this);
 
@@ -101,22 +95,26 @@ class _TafsirViewState extends State<TafsirView>
       final filteredOnline = onlineTafsirs.where((online) {
         final onlineName = online.name.toLowerCase();
         final translatedName = online.translatedName?.name.toLowerCase();
-        return !localNames.contains(onlineName) && 
-               (translatedName == null || !localNames.contains(translatedName));
+        return !localNames.contains(onlineName) &&
+            (translatedName == null || !localNames.contains(translatedName));
       }).toList();
 
       if (filteredOnline.isNotEmpty && mounted) {
-        final newOnlineItems = filteredOnline.map((e) => TafsirTabItem(
-          name: e.translatedName?.name ?? e.name,
-          onlineResource: e,
-        )).toList();
+        final newOnlineItems = filteredOnline
+            .map(
+              (e) => TafsirTabItem(
+                name: e.translatedName?.name ?? e.name,
+                onlineResource: e,
+              ),
+            )
+            .toList();
 
         // Keep track of the current tab index so we don't lose the user's active tab when we update the controller
         final currentIdx = _tabController.index;
 
         setState(() {
           _tabItems.addAll(newOnlineItems);
-          
+
           // Re-initialize TabController with new length
           final oldController = _tabController;
           _tabController = TabController(
@@ -187,20 +185,16 @@ class _TafsirViewState extends State<TafsirView>
       ),
       child: Row(
         children: [
-          const Icon(
-            Icons.cloud_outlined,
-            color: Colors.white,
-            size: 28,
-          ),
+          const Icon(Icons.cloud_outlined, color: Colors.white, size: 28),
           const Gap(12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Unlock 20+ Tafsirs',
-                  style: TextStyle(
+                Text(
+                  appLocalizations.accessUnlockMoreTafsirs,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -208,7 +202,7 @@ class _TafsirViewState extends State<TafsirView>
                 ),
                 const Gap(2),
                 Text(
-                  'Access cloud Tafsirs directly in your language.',
+                  appLocalizations.accessCloudTafsirsDesc,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.9),
                     fontSize: 11,
@@ -229,12 +223,9 @@ class _TafsirViewState extends State<TafsirView>
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: const Text(
-              'Sign In',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
+            child: Text(
+              appLocalizations.signIn,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
           ),
         ],
@@ -397,17 +388,25 @@ class _TafsirViewState extends State<TafsirView>
                     final currentTab = _tabItems[_tabController.index];
                     if (currentTab.isOnline) {
                       try {
-                        final ayahTafsir = await QuranTafsirApi.getTafsirForAyah(
-                          resourceId: currentTab.onlineResource!.id.toString(),
-                          ayahKey: widget.ayahKey,
-                        );
-                        String text = ayahTafsir.text.replaceAll('"', "").trim();
+                        final ayahTafsir =
+                            await QuranTafsirApi.getTafsirForAyah(
+                              resourceId: currentTab.onlineResource!.id
+                                  .toString(),
+                              ayahKey: widget.ayahKey,
+                            );
+                        String text = ayahTafsir.text
+                            .replaceAll('"', "")
+                            .trim();
                         if (text.isNotEmpty) {
                           await FlutterClipboard.copy(text);
-                          await Fluttertoast.showToast(msg: appLocalizations.copy);
+                          await Fluttertoast.showToast(
+                            msg: appLocalizations.copy,
+                          );
                         }
                       } catch (e) {
-                        Fluttertoast.showToast(msg: "Failed to fetch tafsir text to copy.");
+                        Fluttertoast.showToast(
+                          msg: "Failed to fetch tafsir text to copy.",
+                        );
                       }
                     } else {
                       final tafsirData =
@@ -419,7 +418,9 @@ class _TafsirViewState extends State<TafsirView>
                       text = text?.replaceAll('"', "").trim();
                       if (text != null && text.isNotEmpty) {
                         await FlutterClipboard.copy(text);
-                        await Fluttertoast.showToast(msg: appLocalizations.copy);
+                        await Fluttertoast.showToast(
+                          msg: appLocalizations.copy,
+                        );
                       }
                     }
                   },
@@ -439,11 +440,15 @@ class _TafsirViewState extends State<TafsirView>
                     final currentTab = _tabItems[_tabController.index];
                     if (currentTab.isOnline) {
                       try {
-                        final ayahTafsir = await QuranTafsirApi.getTafsirForAyah(
-                          resourceId: currentTab.onlineResource!.id.toString(),
-                          ayahKey: widget.ayahKey,
-                        );
-                        String text = ayahTafsir.text.replaceAll('"', "").trim();
+                        final ayahTafsir =
+                            await QuranTafsirApi.getTafsirForAyah(
+                              resourceId: currentTab.onlineResource!.id
+                                  .toString(),
+                              ayahKey: widget.ayahKey,
+                            );
+                        String text = ayahTafsir.text
+                            .replaceAll('"', "")
+                            .trim();
                         if (text.isNotEmpty) {
                           await SharePlus.instance.share(
                             ShareParams(
@@ -453,7 +458,9 @@ class _TafsirViewState extends State<TafsirView>
                           );
                         }
                       } catch (e) {
-                        Fluttertoast.showToast(msg: "Failed to fetch tafsir text to share.");
+                        Fluttertoast.showToast(
+                          msg: "Failed to fetch tafsir text to share.",
+                        );
                       }
                     } else {
                       final tafsirData =
@@ -488,7 +495,9 @@ class _TafsirViewState extends State<TafsirView>
                     if (_tabItems.isEmpty) return;
                     final currentTab = _tabItems[_tabController.index];
                     if (currentTab.isOnline) {
-                      Fluttertoast.showToast(msg: "Cloud Tafsirs cannot be deleted.");
+                      Fluttertoast.showToast(
+                        msg: "Cloud Tafsirs cannot be deleted.",
+                      );
                       return;
                     }
                     final currentBook = currentTab.localResource!;
@@ -670,7 +679,7 @@ class _LazyOnlineTafsirWidgetState extends State<LazyOnlineTafsirWidget> {
   Widget _buildContent() {
     final themeState = context.read<ThemeCubit>().state;
     final appLocalizations = AppLocalizations.of(context);
-    
+
     return FutureBuilder<AyahTafsir>(
       key: ValueKey('${widget.onlineTafsir.id}_${widget.ayahKey}'),
       future: QuranTafsirApi.getTafsirForAyah(
@@ -727,7 +736,10 @@ class _LazyOnlineTafsirWidgetState extends State<LazyOnlineTafsirWidget> {
                       ),
                       const Gap(8),
                       Text(
-                        snapshot.error.toString().replaceAll('Exception:', '').trim(),
+                        snapshot.error
+                            .toString()
+                            .replaceAll('Exception:', '')
+                            .trim(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.grey,
@@ -765,9 +777,7 @@ class _LazyOnlineTafsirWidgetState extends State<LazyOnlineTafsirWidget> {
         final tafsirData = snapshot.data;
         if (tafsirData == null || tafsirData.text.trim().isEmpty) {
           return Center(
-            child: Text(
-              appLocalizations.tafsirNotAvailable(widget.ayahKey),
-            ),
+            child: Text(appLocalizations.tafsirNotAvailable(widget.ayahKey)),
           );
         }
 

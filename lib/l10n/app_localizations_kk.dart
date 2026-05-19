@@ -1266,4 +1266,14 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get searchHint => 'Аяттарды, сүрелерді іздеу...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Көбірек тәпсірлерді көру';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Бұлттық тәпсірлерге (Құран қорынан) тікелей өз тіліңізде қол жеткізіңіз.';
+
+  @override
+  String get signIn => 'Кіру';
 }

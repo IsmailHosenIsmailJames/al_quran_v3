@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Heure de prière interdite",
   "profile": "Profil",
   "pleaseLoginToSearch": "Veuillez vous connecter pour utiliser la fonction de recherche.",
-  "searchHint": "Rechercher des versets, sourates..."
+  "searchHint": "Rechercher des versets, sourates...",
+  "accessUnlockMoreTafsirs": "Débloquez plus de Tafsirs",
+  "accessCloudTafsirsDesc": "Accédez aux Tafsirs en ligne (de la Fondation Coran) directement dans votre langue.",
+  "signIn": "Se connecter"
 }

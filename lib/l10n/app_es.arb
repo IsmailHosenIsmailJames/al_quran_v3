@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Tiempo de oración prohibido",
   "profile": "Perfil",
   "pleaseLoginToSearch": "Inicie sesión para utilizar la función de búsqueda.",
-  "searchHint": "Buscar versículos, suras..."
+  "searchHint": "Buscar versículos, suras...",
+  "accessUnlockMoreTafsirs": "Desbloquea más Tafsirs",
+  "accessCloudTafsirsDesc": "Acceda a los Tafsirs en la nube (de la Fundación Corán) directamente en su idioma.",
+  "signIn": "Iniciar sesión"
 }

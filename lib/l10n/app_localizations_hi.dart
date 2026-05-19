@@ -1267,4 +1267,14 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get searchHint => 'आयतें, सूरह खोजें...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'अधिक Tafsirs अनलॉक करें';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'सीधे अपनी भाषा में ক্লাउड Tafsirs (कुरान फाउंडेशन से) एक्सेस करें।';
+
+  @override
+  String get signIn => 'साइन इन करें';
 }

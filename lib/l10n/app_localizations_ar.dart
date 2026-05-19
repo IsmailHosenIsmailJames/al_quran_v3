@@ -1264,4 +1264,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get searchHint => 'البحث عن الآيات، السور...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'افتح المزيد من التفاسير';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'احصل على تفاسير السحابية (من مؤسسة القرآن) مباشرة بلغتك.';
+
+  @override
+  String get signIn => 'تسجيل الدخول';
 }

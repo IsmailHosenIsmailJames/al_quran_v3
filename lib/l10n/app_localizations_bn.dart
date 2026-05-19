@@ -1267,4 +1267,14 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get searchHint => 'আয়াত, সূরা অনুসন্ধান করুন...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'আরও তাফসীর অ্যাক্সেস ও আনলক করুন';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'সরাসরি আপনার ভাষায় ক্লাউড তাফসীর (কুরআন ফাউন্ডেশন থেকে) অ্যাক্সেস করুন।';
+
+  @override
+  String get signIn => 'সাইন ইন';
 }

@@ -1285,4 +1285,14 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get searchHint => 'வசனங்கள், சூராக்களைத் தேடுங்கள்...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'மேலும் பல தஃப்சீர்களை அணுகவும்';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'உங்கள் மொழியிலேயே கிளவுட் தஃப்சீர்களை (குர்ஆன் அறக்கட்டளையிலிருந்து) நேரடியாக அணுகவும்.';
+
+  @override
+  String get signIn => 'உள்நுழைக';
 }

@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "ممنوعہ نماز کا وقت",
   "profile": "پروفائل",
   "pleaseLoginToSearch": "سرچ فیچر استعمال کرنے کے لیے براہ کرم لاگ ان کریں۔",
-  "searchHint": "آیات، سورتیں تلاش کریں..."
+  "searchHint": "آیات، سورتیں تلاش کریں...",
+  "accessUnlockMoreTafsirs": "مزید تفاسیر کھولیں",
+  "accessCloudTafsirsDesc": "براہ راست اپنی زبان میں کلاؤড تفاسیر (قرآن فاؤنڈیشن से) تک رسائی حاصل کریں۔",
+  "signIn": "سائن ان کریں"
 }

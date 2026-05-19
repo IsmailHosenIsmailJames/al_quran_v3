@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "वर्जित प्रार्थना का समय",
   "profile": "प्रोफ़ाइल",
   "pleaseLoginToSearch": "खोज सुविधा का उपयोग करने के लिए कृपया लॉगिन करें।",
-  "searchHint": "आयतें, सूरह खोजें..."
+  "searchHint": "आयतें, सूरह खोजें...",
+  "accessUnlockMoreTafsirs": "अधिक Tafsirs अनलॉक करें",
+  "accessCloudTafsirsDesc": "सीधे अपनी भाषा में ক্লাउड Tafsirs (कुरान फाउंडेशन से) एक्सेस करें।",
+  "signIn": "साइन इन करें"
 }

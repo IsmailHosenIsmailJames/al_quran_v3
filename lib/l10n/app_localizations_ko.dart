@@ -1248,4 +1248,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get searchHint => '구절, 수라 검색...';
+
+  @override
+  String get accessUnlockMoreTafsirs => '더 많은 타프시르 보기';
+
+  @override
+  String get accessCloudTafsirsDesc => '원하는 언어로 클라우드 타프시르(꾸란 재단 제공)를 직접 확인하세요.';
+
+  @override
+  String get signIn => '로그인';
 }

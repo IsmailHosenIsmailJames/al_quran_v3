@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Forbidden Salat Time",
   "profile": "Profile",
   "pleaseLoginToSearch": "Please login to use the search feature.",
-  "searchHint": "Search for verses, surahs..."
+  "searchHint": "Search for verses, surahs...",
+  "accessUnlockMoreTafsirs": "Access More Tafsirs",
+  "accessCloudTafsirsDesc": "Access cloud Tafsirs (From Quran Foundation) directly in your language.",
+  "signIn": "Sign In"
 }

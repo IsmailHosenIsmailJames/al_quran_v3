@@ -1280,4 +1280,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get searchHint => 'Suche nach Versen, Suren...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'Schalten Sie weitere Tafsire frei';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'Greifen Sie direkt in Ihrer Sprache auf Cloud-Tafsire (von der Quran Foundation) zu.';
+
+  @override
+  String get signIn => 'Anmelden';
 }

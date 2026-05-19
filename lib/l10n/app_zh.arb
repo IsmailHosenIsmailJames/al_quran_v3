@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "被禁止的礼拜时间",
   "profile": "个人资料",
   "pleaseLoginToSearch": "请登录以使用搜索功能。",
-  "searchHint": "搜索诗节、苏拉..."
+  "searchHint": "搜索诗节、苏拉...",
+  "accessUnlockMoreTafsirs": "解锁更多塔夫西尔",
+  "accessCloudTafsirsDesc": "直接以您的语言访问云端塔夫西尔（来自古兰经基金会）。",
+  "signIn": "登录"
 }

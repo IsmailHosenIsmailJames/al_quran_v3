@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "د لمانځه منع شوی وخت",
   "profile": "پېژندڅېره",
   "pleaseLoginToSearch": "مهرباني وکړئ د لټون اسانتیا کارولو لپاره ننوځئ.",
-  "searchHint": "د آیتونو، سورتونو لټون..."
+  "searchHint": "د آیتونو، سورتونو لټون...",
+  "signIn": "ننوځئ",
+  "accessUnlockMoreTafsirs": "نورو تفاسیرو ته لاسرسی",
+  "accessCloudTafsirsDesc": "په مستقیم ډول ستاسو په ژبه کې د بادل تفاسیرو (د قران بنسټ څخه) ته لاسرسی ومومئ."
 }

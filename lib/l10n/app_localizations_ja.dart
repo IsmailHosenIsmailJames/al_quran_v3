@@ -1249,4 +1249,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get searchHint => '句、章（スーラ）を検索...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'さらに多くのタフシールをアンロック';
+
+  @override
+  String get accessCloudTafsirsDesc => 'あなたの言語でクラウド・タフシール（コーラン財団提供）に直接アクセス。';
+
+  @override
+  String get signIn => 'サインイン';
 }

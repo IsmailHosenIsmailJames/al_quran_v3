@@ -2419,6 +2419,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search for verses, surahs...'**
   String get searchHint;
+
+  /// No description provided for @accessUnlockMoreTafsirs.
+  ///
+  /// In en, this message translates to:
+  /// **'Access More Tafsirs'**
+  String get accessUnlockMoreTafsirs;
+
+  /// No description provided for @accessCloudTafsirsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Access cloud Tafsirs (From Quran Foundation) directly in your language.'**
+  String get accessCloudTafsirsDesc;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
 }
 
 class _AppLocalizationsDelegate

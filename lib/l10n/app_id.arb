@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Waktu Salat Terlarang",
   "profile": "Profil",
   "pleaseLoginToSearch": "Silakan masuk untuk menggunakan fitur pencarian.",
-  "searchHint": "Cari ayat, surah..."
+  "searchHint": "Cari ayat, surah...",
+  "accessUnlockMoreTafsirs": "Buka Lebih Banyak Tafsir",
+  "accessCloudTafsirsDesc": "Akses Tafsir awan (dari Quran Foundation) langsung dalam bahasa Anda.",
+  "signIn": "Masuk"
 }

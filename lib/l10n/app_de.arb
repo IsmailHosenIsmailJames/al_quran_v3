@@ -377,5 +377,8 @@
   "forbiddenSalatTime": "Verbotene Gebetszeit",
   "profile": "Profil",
   "pleaseLoginToSearch": "Bitte melden Sie sich an, um die Suchfunktion zu nutzen.",
-  "searchHint": "Suche nach Versen, Suren..."
+  "searchHint": "Suche nach Versen, Suren...",
+  "accessUnlockMoreTafsirs": "Schalten Sie weitere Tafsire frei",
+  "accessCloudTafsirsDesc": "Greifen Sie direkt in Ihrer Sprache auf Cloud-Tafsire (von der Quran Foundation) zu.",
+  "signIn": "Anmelden"
 }

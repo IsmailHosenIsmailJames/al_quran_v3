@@ -1267,4 +1267,14 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get searchHint => 'جستجو برای آیات، سوره‌ها...';
+
+  @override
+  String get accessUnlockMoreTafsirs => 'دسترسی به تفاسیر بیشتر';
+
+  @override
+  String get accessCloudTafsirsDesc =>
+      'دسترسی مستقیم به تفاسیر ابری (از بنیاد قرآن) به زبان خودتان.';
+
+  @override
+  String get signIn => 'ورود';
 }

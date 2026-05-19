@@ -639,5 +639,8 @@
   "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala",
   "profile": "Profaili",
   "pleaseLoginToSearch": "Tafadhali ingia ili utumie huduma ya kutafuta.",
-  "searchHint": "Tafuta aya, sura..."
+  "searchHint": "Tafuta aya, sura...",
+  "signIn": "Ingia",
+  "accessUnlockMoreTafsirs": "Pata Tafsiri Zaidi",
+  "accessCloudTafsirsDesc": "Pata Tafsiri za wingu (Kutoka Quran Foundation) moja kwa moja kwa lugha yako."
 }
