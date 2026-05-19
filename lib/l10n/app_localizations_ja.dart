@@ -1242,11 +1242,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get forbiddenSalatTime => '礼拝禁止時間';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'プロフィール';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch => '検索機能を使用するにはログインしてください。';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => '句、章（スーラ）を検索...';
 }

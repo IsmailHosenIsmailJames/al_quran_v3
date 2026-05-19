@@ -1259,11 +1259,12 @@ class AppLocalizationsFa extends AppLocalizations {
   String get forbiddenSalatTime => 'وقت ممنوعه نماز';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'پروفایل';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'لطفاً برای استفاده از قابلیت جستجو وارد شوید.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'جستجو برای آیات، سوره‌ها...';
 }

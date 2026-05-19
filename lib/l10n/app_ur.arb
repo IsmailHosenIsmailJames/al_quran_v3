@@ -636,5 +636,8 @@
   "sunSetting": "غروب آفتاب",
   "sunTopOfTheHead": "سورج سر کے اوپر",
   "salatTime": "نماز کا وقت",
-  "forbiddenSalatTime": "ممنوعہ نماز کا وقت"
+  "forbiddenSalatTime": "ممنوعہ نماز کا وقت",
+  "profile": "پروفائل",
+  "pleaseLoginToSearch": "سرچ فیچر استعمال کرنے کے لیے براہ کرم لاگ ان کریں۔",
+  "searchHint": "آیات، سورتیں تلاش کریں..."
 }

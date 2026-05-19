@@ -1222,11 +1222,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get forbiddenSalatTime => '被禁止的礼拜时间';
 
   @override
-  String get profile => 'Profile';
+  String get profile => '个人资料';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch => '请登录以使用搜索功能。';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => '搜索诗节、苏拉...';
 }

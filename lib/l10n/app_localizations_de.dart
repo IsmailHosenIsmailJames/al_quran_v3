@@ -1272,11 +1272,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get forbiddenSalatTime => 'Verbotene Gebetszeit';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profil';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Bitte melden Sie sich an, um die Suchfunktion zu nutzen.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Suche nach Versen, Suren...';
 }

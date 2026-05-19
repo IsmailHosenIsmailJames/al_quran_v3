@@ -374,5 +374,8 @@
   "sunSetting": "Sonnenuntergang",
   "sunTopOfTheHead": "Sonne im Zenit",
   "salatTime": "Gebetszeit",
-  "forbiddenSalatTime": "Verbotene Gebetszeit"
+  "forbiddenSalatTime": "Verbotene Gebetszeit",
+  "profile": "Profil",
+  "pleaseLoginToSearch": "Bitte melden Sie sich an, um die Suchfunktion zu nutzen.",
+  "searchHint": "Suche nach Versen, Suren..."
 }

@@ -636,5 +636,8 @@
   "sunSetting": "غروب خورشید",
   "sunTopOfTheHead": "خورشید در وسط آسمان",
   "salatTime": "وقت نماز",
-  "forbiddenSalatTime": "وقت ممنوعه نماز"
+  "forbiddenSalatTime": "وقت ممنوعه نماز",
+  "profile": "پروفایل",
+  "pleaseLoginToSearch": "لطفاً برای استفاده از قابلیت جستجو وارد شوید.",
+  "searchHint": "جستجو برای آیات، سوره‌ها..."
 }

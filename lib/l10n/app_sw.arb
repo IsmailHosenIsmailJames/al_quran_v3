@@ -636,5 +636,8 @@
   "sunSetting": "Kuzama kwa Jua",
   "sunTopOfTheHead": "Jua Utosini",
   "salatTime": "Wakati wa Swala",
-  "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala"
+  "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala",
+  "profile": "Profaili",
+  "pleaseLoginToSearch": "Tafadhali ingia ili utumie huduma ya kutafuta.",
+  "searchHint": "Tafuta aya, sura..."
 }

@@ -636,5 +636,8 @@
   "sunSetting": "غروب الشمس",
   "sunTopOfTheHead": "وقت الزوال (الشمس في كبد السماء)",
   "salatTime": "وقت الصلاة",
-  "forbiddenSalatTime": "وقت كراهة الصلاة"
+  "forbiddenSalatTime": "وقت كراهة الصلاة",
+  "profile": "الملف الشخصي",
+  "pleaseLoginToSearch": "يرجى تسجيل الدخول لاستخدام ميزة البحث.",
+  "searchHint": "البحث عن الآيات، السور..."
 }

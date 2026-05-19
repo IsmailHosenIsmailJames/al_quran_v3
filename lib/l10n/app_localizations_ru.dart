@@ -1268,11 +1268,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get forbiddenSalatTime => 'Запрещенное время молитвы';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Профиль';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Пожалуйста, войдите, чтобы использовать функцию поиска.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Поиск стихов, сур...';
 }

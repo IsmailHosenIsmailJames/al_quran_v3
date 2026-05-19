@@ -1267,11 +1267,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get forbiddenSalatTime => 'Wakati Uliokatazwa wa Swala';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profaili';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Tafadhali ingia ili utumie huduma ya kutafuta.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Tafuta aya, sura...';
 }

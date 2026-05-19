@@ -374,5 +374,8 @@
   "sunSetting": "日の入り",
   "sunTopOfTheHead": "太陽が真上",
   "salatTime": "礼拝の時間",
-  "forbiddenSalatTime": "礼拝禁止時間"
+  "forbiddenSalatTime": "礼拝禁止時間",
+  "profile": "プロフィール",
+  "pleaseLoginToSearch": "検索機能を使用するにはログインしてください。",
+  "searchHint": "句、章（スーラ）を検索..."
 }

@@ -374,5 +374,8 @@
   "sunSetting": "சூரிய அஸ்தமனம்",
   "sunTopOfTheHead": "சூரியன் உச்சி",
   "salatTime": "தொழுகை நேரம்",
-  "forbiddenSalatTime": "தடைசெய்யப்பட்ட தொழுகை நேரம்"
+  "forbiddenSalatTime": "தடைசெய்யப்பட்ட தொழுகை நேரம்",
+  "profile": "சுயவிவரம்",
+  "pleaseLoginToSearch": "தேடல் அம்சத்தைப் பயன்படுத்த தயவுசெய்து உள்நுழையவும்.",
+  "searchHint": "வசனங்கள், சூராக்களைத் தேடுங்கள்..."
 }

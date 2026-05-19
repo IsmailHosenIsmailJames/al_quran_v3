@@ -636,5 +636,8 @@
   "sunSetting": "Puesta del sol",
   "sunTopOfTheHead": "Sol en el cenit",
   "salatTime": "Tiempo de Oración",
-  "forbiddenSalatTime": "Tiempo de oración prohibido"
+  "forbiddenSalatTime": "Tiempo de oración prohibido",
+  "profile": "Perfil",
+  "pleaseLoginToSearch": "Inicie sesión para utilizar la función de búsqueda.",
+  "searchHint": "Buscar versículos, suras..."
 }

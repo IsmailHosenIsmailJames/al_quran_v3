@@ -636,5 +636,8 @@
   "sunSetting": "Закат солнца",
   "sunTopOfTheHead": "Солнце в зените",
   "salatTime": "Время молитвы",
-  "forbiddenSalatTime": "Запрещенное время молитвы"
+  "forbiddenSalatTime": "Запрещенное время молитвы",
+  "profile": "Профиль",
+  "pleaseLoginToSearch": "Пожалуйста, войдите, чтобы использовать функцию поиска.",
+  "searchHint": "Поиск стихов, сур..."
 }

@@ -374,5 +374,8 @@
   "sunSetting": "일몰",
   "sunTopOfTheHead": "태양이 머리 위에 있음",
   "salatTime": "기도 시간",
-  "forbiddenSalatTime": "금지된 기도 시간"
+  "forbiddenSalatTime": "금지된 기도 시간",
+  "profile": "프로필",
+  "pleaseLoginToSearch": "검색 기능을 사용하려면 로그인하세요.",
+  "searchHint": "구절, 수라 검색..."
 }
