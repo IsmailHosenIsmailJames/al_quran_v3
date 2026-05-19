@@ -1278,4 +1278,14 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get signIn => 'ننوځئ';
+
+  @override
+  String get welcomeToAlQuran => 'القرآن ته ښه راغلاست';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'په خپلو ټولو وسیلو کې د خپلو بک مارکونو، نوټونو او لوستلو پرمختګ همغږي کولو لپاره د قرآن بنسټ سره وصل شئ.';
+
+  @override
+  String get loginWithQuranFoundation => 'د قرآن بنسټ سره ننوتل';
 }

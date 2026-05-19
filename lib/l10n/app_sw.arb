@@ -642,5 +642,8 @@
   "searchHint": "Tafuta aya, sura...",
   "signIn": "Ingia",
   "accessUnlockMoreTafsirs": "Pata Tafsiri Zaidi",
-  "accessCloudTafsirsDesc": "Pata Tafsiri za wingu (Kutoka Quran Foundation) moja kwa moja kwa lugha yako."
+  "accessCloudTafsirsDesc": "Pata Tafsiri za wingu (Kutoka Quran Foundation) moja kwa moja kwa lugha yako.",
+  "welcomeToAlQuran": "Karibu kwenye Al-Quran",
+  "quranFoundationSyncDesc": "Ungana na Quran Foundation ili kusawazisha vialamisho vyako, madokezo, na maendeleo ya kusoma kwenye vifaa vyako vyote.",
+  "loginWithQuranFoundation": "Ingia na Quran Foundation"
 }

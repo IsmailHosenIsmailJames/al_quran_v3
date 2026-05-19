@@ -642,5 +642,8 @@
   "searchHint": "Cari ayat, surah...",
   "accessUnlockMoreTafsirs": "Buka Lebih Banyak Tafsir",
   "accessCloudTafsirsDesc": "Akses Tafsir awan (daripada Yayasan Al-Quran) secara langsung dalam bahasa anda.",
-  "signIn": "Log Masuk"
+  "signIn": "Log Masuk",
+  "welcomeToAlQuran": "Selamat datang ke Al-Quran",
+  "quranFoundationSyncDesc": "Hubungkan dengan Yayasan Al-Quran untuk menyinkronkan penanda buku, nota, dan kemajuan membaca anda di semua peranti anda.",
+  "loginWithQuranFoundation": "Log masuk dengan Yayasan Al-Quran"
 }

@@ -1283,4 +1283,14 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get signIn => 'Daxil ol';
+
+  @override
+  String get welcomeToAlQuran => 'Qurani-Kərimə xoş gəlmisiniz';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Əlfəcinlərinizi, qeydlərinizi və oxuma tərəqqinizi bütün cihazlarınızda sinxronlaşdırmaq üçün Quran Fondu ilə əlaqə saxlayın.';
+
+  @override
+  String get loginWithQuranFoundation => 'Quran Fondu ilə daxil ol';
 }

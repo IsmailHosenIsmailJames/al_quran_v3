@@ -1285,4 +1285,14 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get signIn => 'Ingia';
+
+  @override
+  String get welcomeToAlQuran => 'Karibu kwenye Al-Quran';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Ungana na Quran Foundation ili kusawazisha vialamisho vyako, madokezo, na maendeleo ya kusoma kwenye vifaa vyako vyote.';
+
+  @override
+  String get loginWithQuranFoundation => 'Ingia na Quran Foundation';
 }

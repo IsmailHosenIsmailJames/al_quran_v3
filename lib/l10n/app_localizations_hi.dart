@@ -1277,4 +1277,14 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get signIn => 'साइन इन करें';
+
+  @override
+  String get welcomeToAlQuran => 'अल-क़ुरआन में आपका स्वागत है';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'अपने सभी उपकरणों पर अपने बुकमार्क, नोट्स और पढ़ने की प्रगति को सिंक करने के लिए कुरान फाउंडेशन से जुड़ें।';
+
+  @override
+  String get loginWithQuranFoundation => 'कुरान फाउंडेशन के साथ लॉगिन करें';
 }

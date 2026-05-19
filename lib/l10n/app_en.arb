@@ -642,5 +642,8 @@
   "searchHint": "Search for verses, surahs...",
   "accessUnlockMoreTafsirs": "Access More Tafsirs",
   "accessCloudTafsirsDesc": "Access cloud Tafsirs (From Quran Foundation) directly in your language.",
-  "signIn": "Sign In"
+  "signIn": "Sign In",
+  "welcomeToAlQuran": "Welcome to Al-Quran",
+  "quranFoundationSyncDesc": "Connect with the Quran Foundation to sync your bookmarks, notes, and reading progress across all your devices.",
+  "loginWithQuranFoundation": "Login with Quran Foundation"
 }

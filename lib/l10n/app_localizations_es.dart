@@ -1289,4 +1289,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get signIn => 'Iniciar sesión';
+
+  @override
+  String get welcomeToAlQuran => 'Bienvenido a Al-Quran';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Conéctese con la Fundación Corán para sincronizar sus marcadores, notas y progreso de lectura en todos sus dispositivos.';
+
+  @override
+  String get loginWithQuranFoundation =>
+      'Iniciar sesión con la Fundación Corán';
 }

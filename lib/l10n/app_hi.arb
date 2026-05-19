@@ -642,5 +642,8 @@
   "searchHint": "आयतें, सूरह खोजें...",
   "accessUnlockMoreTafsirs": "अधिक Tafsirs अनलॉक करें",
   "accessCloudTafsirsDesc": "सीधे अपनी भाषा में ক্লাउड Tafsirs (कुरान फाउंडेशन से) एक्सेस करें।",
-  "signIn": "साइन इन करें"
+  "signIn": "साइन इन करें",
+  "welcomeToAlQuran": "अल-क़ुरआन में आपका स्वागत है",
+  "quranFoundationSyncDesc": "अपने सभी उपकरणों पर अपने बुकमार्क, नोट्स और पढ़ने की प्रगति को सिंक करने के लिए कुरान फाउंडेशन से जुड़ें।",
+  "loginWithQuranFoundation": "कुरान फाउंडेशन के साथ लॉगिन करें"
 }

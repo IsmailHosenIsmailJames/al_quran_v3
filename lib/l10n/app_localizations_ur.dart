@@ -1279,4 +1279,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get signIn => 'سائن ان کریں';
+
+  @override
+  String get welcomeToAlQuran => 'القرآن میں خوش آمدید';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'اپنے تمام آلات پر اپنے بُک مارکس، نوٹس اور پڑھنے کی پیشرفت کو مطابقت پذیر بنانے کے لیے قرآن فاؤنڈیشن سے جڑیں۔';
+
+  @override
+  String get loginWithQuranFoundation => 'قرآن فاؤنڈیشن کے ساتھ لاگ ان کریں';
 }

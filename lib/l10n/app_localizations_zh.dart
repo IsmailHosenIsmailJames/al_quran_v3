@@ -1238,4 +1238,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get signIn => '登录';
+
+  @override
+  String get welcomeToAlQuran => '欢迎来到古兰经';
+
+  @override
+  String get quranFoundationSyncDesc => '与古兰经基金会连接，以在您的所有设备上同步书签、笔记和阅读进度。';
+
+  @override
+  String get loginWithQuranFoundation => '使用古兰经基金会登录';
 }

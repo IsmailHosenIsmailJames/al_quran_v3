@@ -642,5 +642,8 @@
   "searchHint": "Buscar versículos, suras...",
   "accessUnlockMoreTafsirs": "Desbloquea más Tafsirs",
   "accessCloudTafsirsDesc": "Acceda a los Tafsirs en la nube (de la Fundación Corán) directamente en su idioma.",
-  "signIn": "Iniciar sesión"
+  "signIn": "Iniciar sesión",
+  "welcomeToAlQuran": "Bienvenido a Al-Quran",
+  "quranFoundationSyncDesc": "Conéctese con la Fundación Corán para sincronizar sus marcadores, notas y progreso de lectura en todos sus dispositivos.",
+  "loginWithQuranFoundation": "Iniciar sesión con la Fundación Corán"
 }

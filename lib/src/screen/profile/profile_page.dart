@@ -195,19 +195,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   _buildProfileHeader(themeState),
                   const Gap(30),
                   if (!_isLoggedIn) ...[
-                    const Text(
-                      'Welcome to Al-Quran',
-                      style: TextStyle(
+                    Text(
+                      appLocalizations.welcomeToAlQuran,
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -0.5,
                       ),
                     ),
                     const Gap(12),
-                    const Text(
-                      'Connect with the Quran Foundation to sync your bookmarks, notes, and reading progress across all your devices.',
+                    Text(
+                      appLocalizations.quranFoundationSyncDesc,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey, height: 1.5),
+                      style: const TextStyle(color: Colors.grey, height: 1.5),
                     ),
                     const Gap(40),
                     if (_isLoading)
@@ -218,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: ElevatedButton.icon(
                           onPressed: _handleLogin,
                           icon: const Icon(FluentIcons.person_board_24_regular),
-                          label: const Text('Login with Quran Foundation'),
+                          label: Text(appLocalizations.loginWithQuranFoundation),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: themeState.primary,
                             foregroundColor: Colors.white,

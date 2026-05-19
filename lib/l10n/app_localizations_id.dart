@@ -1276,4 +1276,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get signIn => 'Masuk';
+
+  @override
+  String get welcomeToAlQuran => 'Selamat datang di Al-Quran';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Hubungkan dengan Quran Foundation untuk menyinkronkan penanda buku, catatan, dan kemajuan membaca Anda di semua perangkat Anda.';
+
+  @override
+  String get loginWithQuranFoundation => 'Masuk dengan Quran Foundation';
 }

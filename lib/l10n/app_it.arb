@@ -380,5 +380,8 @@
   "searchHint": "Cerca versetti, sure...",
   "accessUnlockMoreTafsirs": "Sblocca altri Tafsir",
   "accessCloudTafsirsDesc": "Accedi ai Tafsir cloud (della Quran Foundation) direttamente nella tua lingua.",
-  "signIn": "Accedi"
+  "signIn": "Accedi",
+  "welcomeToAlQuran": "Benvenuto su Al-Quran",
+  "quranFoundationSyncDesc": "Connettiti con la Quran Foundation per sincronizzare i tuoi segnalibri, note e progressi di lettura su tutti i tuoi dispositivi.",
+  "loginWithQuranFoundation": "Accedi con la Quran Foundation"
 }

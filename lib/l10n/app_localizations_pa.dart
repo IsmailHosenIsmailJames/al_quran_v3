@@ -1275,4 +1275,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get signIn => 'ਸਾਈਨ ਇਨ';
+
+  @override
+  String get welcomeToAlQuran => 'ਅਲ-کੁਰਾਨ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'ਆਪਣੇ ਸਾਰੇ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਆਪਣੇ ਬੁੱਕਮਾਰਕਸ, ਨੋਟਸ ਅਤੇ ਪੜ੍ਹਨ ਦੀ ਪ੍ਰਗਤੀ ਨੂੰ ਸਿੰਕ ਕਰਨ ਲਈ ਕੁਰਾਨ ਫਾਊਂਡੇਸ਼ਨ ਨਾਲ ਜੁੜੋ।';
+
+  @override
+  String get loginWithQuranFoundation => 'ਕੁਰਾਨ ਫਾਊਂਡੇਸ਼ਨ ਨਾਲ ਲੌਗਇਨ ਕਰੋ';
 }

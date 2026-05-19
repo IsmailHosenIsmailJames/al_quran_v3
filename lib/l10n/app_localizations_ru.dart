@@ -1286,4 +1286,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get signIn => 'Войти';
+
+  @override
+  String get welcomeToAlQuran => 'Добро пожаловать в Аль-Коран';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Подключитесь к Фонду Корана, чтобы синхронизировать закладки, заметки и прогресс чтения на всех ваших устройствах.';
+
+  @override
+  String get loginWithQuranFoundation => 'Войти через Фонд Корана';
 }
