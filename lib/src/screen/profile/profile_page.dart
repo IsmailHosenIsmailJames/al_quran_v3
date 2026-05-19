@@ -6,9 +6,7 @@ import 'package:al_quran_v3/src/api/quran_auth_session.dart';
 import 'package:al_quran_v3/src/api/quran_notes_api.dart';
 import 'package:al_quran_v3/src/api/quran_profile_api.dart';
 import 'package:al_quran_v3/src/screen/about/about_the_app.dart';
-import 'package:al_quran_v3/src/screen/profile/edit_profile_page.dart';
 import 'package:al_quran_v3/src/screen/settings/settings_page.dart';
-import 'package:al_quran_v3/src/widget/theme/theme_icon_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -409,26 +407,26 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildStatItem(String label, String value) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        const Gap(4),
-        Text(label, style: const TextStyle(fontSize: 13, color: Colors.grey)),
-      ],
-    );
-  }
+  // Widget _buildStatItem(String label, String value) {
+  //   return Column(
+  //     children: [
+  //       Text(
+  //         value,
+  //         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //       ),
+  //       const Gap(4),
+  //       Text(label, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+  //     ],
+  //   );
+  // }
 
-  Widget _buildStatSeparator(ThemeState themeState) {
-    return Container(
-      height: 24,
-      width: 1,
-      color: themeState.mutedGray.withValues(alpha: 0.3),
-    );
-  }
+  // Widget _buildStatSeparator(ThemeState themeState) {
+  //   return Container(
+  //     height: 24,
+  //     width: 1,
+  //     color: themeState.mutedGray.withValues(alpha: 0.3),
+  //   );
+  // }
 
   Widget _buildSettingsList(ThemeState themeState) {
     return Column(
@@ -446,7 +444,7 @@ class _ProfilePageState extends State<ProfilePage> {
         const Gap(12),
         _buildSettingsItem(
           icon: FluentIcons.settings_24_regular,
-          title: 'App Settings',
+          title: AppLocalizations.of(context).settings,
           onTap: () {
             Navigator.push(
               context,
@@ -457,7 +455,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         _buildSettingsItem(
           icon: FluentIcons.lock_closed_24_regular,
-          title: 'Privacy Policy',
+          title: AppLocalizations.of(context).privacyPolicy,
           onTap: () {
             launchUrl(
               Uri.parse(
@@ -470,7 +468,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         _buildSettingsItem(
           icon: FluentIcons.question_circle_24_regular,
-          title: 'About & Help',
+          title: AppLocalizations.of(context).aboutTheApp,
           onTap: () {
             Navigator.push(
               context,
