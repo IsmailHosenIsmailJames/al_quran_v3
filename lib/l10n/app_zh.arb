@@ -642,5 +642,8 @@
   "searchHint": "搜索诗节、苏拉...",
   "accessUnlockMoreTafsirs": "解锁更多塔夫西尔",
   "accessCloudTafsirsDesc": "直接以您的语言访问云端塔夫西尔（来自古兰经基金会）。",
-  "signIn": "登录"
+  "signIn": "登录",
+  "welcomeToAlQuran": "欢迎来到古兰经",
+  "quranFoundationSyncDesc": "与古兰经基金会连接，以在您的所有设备上同步书签、笔记和阅读进度。",
+  "loginWithQuranFoundation": "使用古兰经基金会登录"
 }

@@ -642,5 +642,8 @@
   "searchHint": "Ayet, sure ara...",
   "accessUnlockMoreTafsirs": "Daha Fazla Tefsir Aç",
   "accessCloudTafsirsDesc": "Kendi dilinizde bulut Tefsirlere (Kuran Vakfı'ndan) doğrudan erişin.",
-  "signIn": "Giriş Yap"
+  "signIn": "Giriş Yap",
+  "welcomeToAlQuran": "Kur'an-ı Kerim'e Hoş Geldiniz",
+  "quranFoundationSyncDesc": "Yer işaretlerinizi, notlarınızı ve okuma ilerlerinizi tüm cihazlarınızda senkronize etmek için Kuran Vakfı ile bağlantı kurun.",
+  "loginWithQuranFoundation": "Kuran Vakfı ile Giriş Yap"
 }

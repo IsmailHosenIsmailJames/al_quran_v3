@@ -1290,4 +1290,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get signIn => 'Anmelden';
+
+  @override
+  String get welcomeToAlQuran => 'Willkommen bei Al-Quran';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Verbinden Sie sich mit der Quran Foundation, um Ihre Lesezeichen, Notizen und Ihren Lesefortschritt auf all Ihren Geräten zu synchronisieren.';
+
+  @override
+  String get loginWithQuranFoundation => 'Mit der Quran Foundation anmelden';
 }

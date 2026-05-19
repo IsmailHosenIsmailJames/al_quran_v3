@@ -1278,4 +1278,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get signIn => 'Giriş Yap';
+
+  @override
+  String get welcomeToAlQuran => 'Kur\'an-ı Kerim\'e Hoş Geldiniz';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Yer işaretlerinizi, notlarınızı ve okuma ilerlerinizi tüm cihazlarınızda senkronize etmek için Kuran Vakfı ile bağlantı kurun.';
+
+  @override
+  String get loginWithQuranFoundation => 'Kuran Vakfı ile Giriş Yap';
 }

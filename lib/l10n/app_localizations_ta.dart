@@ -1295,4 +1295,14 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get signIn => 'உள்நுழைக';
+
+  @override
+  String get welcomeToAlQuran => 'அல்-குர்ஆனிற்கு உங்களை வரவேற்கிறோம்';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'உங்கள் எல்லா சாதனங்களிலும் உங்கள் புக்மார்க்குகள், குறிப்புகள் மற்றும் வாసిப்பு முன்னேற்றத்தை ஒத்திசைக்க குர்ஆன் அறக்கட்டளையுடன் இணையுங்கள்.';
+
+  @override
+  String get loginWithQuranFoundation => 'குர்ஆன் அறக்கட்டளையுடன் உள்நுழைக';
 }

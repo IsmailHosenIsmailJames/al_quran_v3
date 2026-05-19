@@ -2437,6 +2437,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign In'**
   String get signIn;
+
+  /// No description provided for @welcomeToAlQuran.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Al-Quran'**
+  String get welcomeToAlQuran;
+
+  /// No description provided for @quranFoundationSyncDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with the Quran Foundation to sync your bookmarks, notes, and reading progress across all your devices.'**
+  String get quranFoundationSyncDesc;
+
+  /// No description provided for @loginWithQuranFoundation.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Quran Foundation'**
+  String get loginWithQuranFoundation;
 }
 
 class _AppLocalizationsDelegate

@@ -1258,4 +1258,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get signIn => 'サインイン';
+
+  @override
+  String get welcomeToAlQuran => 'アル・コーランへようこそ';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Quran Foundationと接続して、すべてのデバイスでブックマーク、メモ、読書の進行状況を同期します。';
+
+  @override
+  String get loginWithQuranFoundation => 'Quran Foundationでログイン';
 }

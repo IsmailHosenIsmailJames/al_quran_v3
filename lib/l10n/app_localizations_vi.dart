@@ -1282,4 +1282,14 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get signIn => 'Đăng nhập';
+
+  @override
+  String get welcomeToAlQuran => 'Chào mừng bạn đến với Al-Quran';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Kết nối với Tổ chức Quran để đồng bộ hóa các dấu trang, ghi chú và tiến trình đọc trên tất cả các thiết bị của bạn.';
+
+  @override
+  String get loginWithQuranFoundation => 'Đăng nhập với Tổ chức Quran';
 }

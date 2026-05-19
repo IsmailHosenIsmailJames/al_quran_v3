@@ -642,5 +642,8 @@
   "searchHint": "البحث عن الآيات، السور...",
   "accessUnlockMoreTafsirs": "افتح المزيد من التفاسير",
   "accessCloudTafsirsDesc": "احصل على تفاسير السحابية (من مؤسسة القرآن) مباشرة بلغتك.",
-  "signIn": "تسجيل الدخول"
+  "signIn": "تسجيل الدخول",
+  "welcomeToAlQuran": "مرحبًا بك في القرآن الكريم",
+  "quranFoundationSyncDesc": "تواصل مع مؤسسة القرآن لمزامنة إشاراتك المرجعية وملاحظاتك وتقدم القراءة عبر جميع أجهزتك.",
+  "loginWithQuranFoundation": "تسجيل الدخول مع مؤسسة القرآن"
 }

@@ -380,5 +380,8 @@
   "searchHint": "Suche nach Versen, Suren...",
   "accessUnlockMoreTafsirs": "Schalten Sie weitere Tafsire frei",
   "accessCloudTafsirsDesc": "Greifen Sie direkt in Ihrer Sprache auf Cloud-Tafsire (von der Quran Foundation) zu.",
-  "signIn": "Anmelden"
+  "signIn": "Anmelden",
+  "welcomeToAlQuran": "Willkommen bei Al-Quran",
+  "quranFoundationSyncDesc": "Verbinden Sie sich mit der Quran Foundation, um Ihre Lesezeichen, Notizen und Ihren Lesefortschritt auf all Ihren Geräten zu synchronisieren.",
+  "loginWithQuranFoundation": "Mit der Quran Foundation anmelden"
 }

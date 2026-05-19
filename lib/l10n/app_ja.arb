@@ -380,5 +380,8 @@
   "searchHint": "句、章（スーラ）を検索...",
   "accessUnlockMoreTafsirs": "さらに多くのタフシールをアンロック",
   "accessCloudTafsirsDesc": "あなたの言語でクラウド・タフシール（コーラン財団提供）に直接アクセス。",
-  "signIn": "サインイン"
+  "signIn": "サインイン",
+  "welcomeToAlQuran": "アル・コーランへようこそ",
+  "quranFoundationSyncDesc": "Quran Foundationと接続して、すべてのデバイスでブックマーク、メモ、読書の進行状況を同期します。",
+  "loginWithQuranFoundation": "Quran Foundationでログイン"
 }

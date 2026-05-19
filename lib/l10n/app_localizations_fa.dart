@@ -1277,4 +1277,14 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get signIn => 'ورود';
+
+  @override
+  String get welcomeToAlQuran => 'به القرآن خوش آمدید';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'برای همگام‌سازی نشانک‌ها، یادداشت‌ها و پیشرفت خواندن خود در همه دستگاه‌های خود، با بنیاد قرآن ارتباط برقرار کنید.';
+
+  @override
+  String get loginWithQuranFoundation => 'ورود با بنیاد قرآن';
 }

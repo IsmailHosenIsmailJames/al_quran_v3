@@ -1276,4 +1276,14 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get signIn => 'Кіру';
+
+  @override
+  String get welcomeToAlQuran => 'Құран Кәрімге қош келдіңіз';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'Бетбелгілерді, жазбаларды және оқу прогресін барлық құрылғыларыңызда синхрондау үшін Құран қорына қосылыңыз.';
+
+  @override
+  String get loginWithQuranFoundation => 'Құран қорымен кіру';
 }

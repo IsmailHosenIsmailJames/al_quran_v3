@@ -380,5 +380,8 @@
   "searchHint": "Tìm kiếm câu thơ, surah...",
   "signIn": "Đăng nhập",
   "accessUnlockMoreTafsirs": "Truy cập thêm nhiều Tafsir",
-  "accessCloudTafsirsDesc": "Truy cập trực tiếp các Tafsir đám mây (từ Quran Foundation) bằng ngôn ngữ của bạn."
+  "accessCloudTafsirsDesc": "Truy cập trực tiếp các Tafsir đám mây (từ Quran Foundation) bằng ngôn ngữ của bạn.",
+  "welcomeToAlQuran": "Chào mừng bạn đến với Al-Quran",
+  "quranFoundationSyncDesc": "Kết nối với Tổ chức Quran để đồng bộ hóa các dấu trang, ghi chú và tiến trình đọc trên tất cả các thiết bị của bạn.",
+  "loginWithQuranFoundation": "Đăng nhập với Tổ chức Quran"
 }

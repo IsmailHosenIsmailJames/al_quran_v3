@@ -1277,4 +1277,14 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get signIn => 'সাইন ইন';
+
+  @override
+  String get welcomeToAlQuran => 'আল-কুরআনে আপনাকে স্বাগতম';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      'আপনার সমস্ত ডিভাইসে বুকমার্ক, নোট এবং পড়ার অগ্রগতি সিঙ্ক করতে কুরআন ফাউন্ডেশনের সাথে সংযুক্ত হন।';
+
+  @override
+  String get loginWithQuranFoundation => 'কুরআন ফাউন্ডেশনের সাথে লগইন করুন';
 }

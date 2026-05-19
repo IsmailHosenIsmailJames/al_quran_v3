@@ -1257,4 +1257,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get signIn => '로그인';
+
+  @override
+  String get welcomeToAlQuran => '알 꾸란에 오신 것을 환영합니다';
+
+  @override
+  String get quranFoundationSyncDesc =>
+      '모든 기기에서 북마크, 메모 및 읽기 진행 상황을 동기화하려면 꾸란 재단과 연결하세요.';
+
+  @override
+  String get loginWithQuranFoundation => '꾸란 재단으로 로그인';
 }

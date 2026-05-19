@@ -642,5 +642,8 @@
   "searchHint": "Rechercher des versets, sourates...",
   "accessUnlockMoreTafsirs": "Débloquez plus de Tafsirs",
   "accessCloudTafsirsDesc": "Accédez aux Tafsirs en ligne (de la Fondation Coran) directement dans votre langue.",
-  "signIn": "Se connecter"
+  "signIn": "Se connecter",
+  "welcomeToAlQuran": "Bienvenue sur Al-Quran",
+  "quranFoundationSyncDesc": "Connectez-vous avec la Fondation Coran pour synchroniser vos signets, vos notes et votre progression de lecture sur tous vos appareils.",
+  "loginWithQuranFoundation": "Se connecter avec la Fondation Coran"
 }
