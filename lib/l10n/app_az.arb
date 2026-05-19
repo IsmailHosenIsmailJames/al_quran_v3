@@ -374,5 +374,8 @@
   "sunSetting": "Günəşin batması",
   "sunTopOfTheHead": "Günəşin Təpədə Olması",
   "salatTime": "Namaz Vaxtı",
-  "forbiddenSalatTime": "Məkruh Namaz Vaxtı"
+  "forbiddenSalatTime": "Məkruh Namaz Vaxtı",
+  "profile": "Profil",
+  "pleaseLoginToSearch": "Axtarış funksiyasından istifadə etmək üçün daxil olun.",
+  "searchHint": "Ayələr, surələr axtarın..."
 }

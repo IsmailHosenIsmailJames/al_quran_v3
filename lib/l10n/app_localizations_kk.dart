@@ -1258,11 +1258,12 @@ class AppLocalizationsKk extends AppLocalizations {
   String get forbiddenSalatTime => 'Намаз оқуға тыйым салынған уақыт';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Профиль';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Іздеу мүмкіндігін пайдалану үшін жүйеге кіріңіз.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Аяттарды, сүрелерді іздеу...';
 }

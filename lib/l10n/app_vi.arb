@@ -374,5 +374,8 @@
   "sunSetting": "Mặt trời lặn",
   "sunTopOfTheHead": "Mặt trời trên đỉnh đầu",
   "salatTime": "Thời gian cầu nguyện",
-  "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm"
+  "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm",
+  "profile": "Hồ sơ",
+  "pleaseLoginToSearch": "Vui lòng đăng nhập to sử dụng tính năng tìm kiếm.",
+  "searchHint": "Tìm kiếm câu thơ, surah..."
 }

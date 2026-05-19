@@ -636,5 +636,8 @@
   "sunSetting": "Güneşin Batışı",
   "sunTopOfTheHead": "Güneşin Tepede Olması",
   "salatTime": "Namaz Vakti",
-  "forbiddenSalatTime": "Kerahat Vakti"
+  "forbiddenSalatTime": "Kerahat Vakti",
+  "profile": "Profil",
+  "pleaseLoginToSearch": "Arama özelliğini kullanmak için lütfen giriş yapın.",
+  "searchHint": "Ayet, sure ara..."
 }

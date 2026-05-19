@@ -1273,11 +1273,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get forbiddenSalatTime => 'Heure de prière interdite';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profil';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Veuillez vous connecter pour utiliser la fonction de recherche.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Rechercher des versets, sourates...';
 }

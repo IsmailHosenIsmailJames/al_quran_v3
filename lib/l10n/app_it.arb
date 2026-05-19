@@ -374,5 +374,8 @@
   "sunSetting": "Tramonto",
   "sunTopOfTheHead": "Sole allo zenit",
   "salatTime": "Tempo di preghiera",
-  "forbiddenSalatTime": "Tempo di preghiera proibito"
+  "forbiddenSalatTime": "Tempo di preghiera proibito",
+  "profile": "Profilo",
+  "pleaseLoginToSearch": "Accedi per utilizzare la funzione di ricerca.",
+  "searchHint": "Cerca versetti, sure..."
 }

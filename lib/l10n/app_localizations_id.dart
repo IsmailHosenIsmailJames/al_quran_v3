@@ -1258,11 +1258,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get forbiddenSalatTime => 'Waktu Salat Terlarang';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profil';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Silakan masuk untuk menggunakan fitur pencarian.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Cari ayat, surah...';
 }

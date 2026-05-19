@@ -1260,11 +1260,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get forbiddenSalatTime => 'Kerahat Vakti';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profil';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Arama özelliğini kullanmak için lütfen giriş yapın.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Ayet, sure ara...';
 }

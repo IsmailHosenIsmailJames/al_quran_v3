@@ -636,5 +636,8 @@
   "sunSetting": "لمر لوېدل",
   "sunTopOfTheHead": "لمر د سر په سر",
   "salatTime": "د لمانځه وخت",
-  "forbiddenSalatTime": "د لمانځه منع شوی وخت"
+  "forbiddenSalatTime": "د لمانځه منع شوی وخت",
+  "profile": "پېژندڅېره",
+  "pleaseLoginToSearch": "مهرباني وکړئ د لټون اسانتیا کارولو لپاره ننوځئ.",
+  "searchHint": "د آیتونو، سورتونو لټون..."
 }

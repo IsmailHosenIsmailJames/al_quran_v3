@@ -636,5 +636,8 @@
   "sunSetting": "Күннің батуы",
   "sunTopOfTheHead": "Күннің тас төбеде болуы",
   "salatTime": "Намаз уақыты",
-  "forbiddenSalatTime": "Намаз оқуға тыйым салынған уақыт"
+  "forbiddenSalatTime": "Намаз оқуға тыйым салынған уақыт",
+  "profile": "Профиль",
+  "pleaseLoginToSearch": "Іздеу мүмкіндігін пайдалану үшін жүйеге кіріңіз.",
+  "searchHint": "Аяттарды, сүрелерді іздеу..."
 }

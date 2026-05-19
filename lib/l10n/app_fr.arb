@@ -636,5 +636,8 @@
   "sunSetting": "Coucher du soleil",
   "sunTopOfTheHead": "Soleil au zénith",
   "salatTime": "Heure de la prière",
-  "forbiddenSalatTime": "Heure de prière interdite"
+  "forbiddenSalatTime": "Heure de prière interdite",
+  "profile": "Profil",
+  "pleaseLoginToSearch": "Veuillez vous connecter pour utiliser la fonction de recherche.",
+  "searchHint": "Rechercher des versets, sourates..."
 }

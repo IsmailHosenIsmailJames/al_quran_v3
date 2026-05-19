@@ -636,5 +636,8 @@
   "sunSetting": "Matahari Terbenam",
   "sunTopOfTheHead": "Matahari di Atas Kepala",
   "salatTime": "Waktu Solat",
-  "forbiddenSalatTime": "Waktu Solat Dilarang"
+  "forbiddenSalatTime": "Waktu Solat Dilarang",
+  "profile": "Profil",
+  "pleaseLoginToSearch": "Sila log masuk untuk menggunakan ciri carian.",
+  "searchHint": "Cari ayat, surah..."
 }

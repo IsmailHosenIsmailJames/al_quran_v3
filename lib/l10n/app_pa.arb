@@ -636,5 +636,8 @@
   "sunSetting": "ਸੂਰਜ ਡੁੱਬਣਾ",
   "sunTopOfTheHead": "ਸੂਰਜ ਸਿਰ ਦੇ ਉੱਪਰ",
   "salatTime": "ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
-  "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ"
+  "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
+  "profile": "ਪ੍ਰੋਫਾਈਲ",
+  "pleaseLoginToSearch": "ਖੋਜ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ।",
+  "searchHint": "ਆਇਤਾਂ, ਸੂਰਾ ਖੋਜੋ..."
 }

@@ -636,5 +636,8 @@
   "sunSetting": "日落",
   "sunTopOfTheHead": "太阳当头",
   "salatTime": "礼拜时间",
-  "forbiddenSalatTime": "被禁止的礼拜时间"
+  "forbiddenSalatTime": "被禁止的礼拜时间",
+  "profile": "个人资料",
+  "pleaseLoginToSearch": "请登录以使用搜索功能。",
+  "searchHint": "搜索诗节、苏拉..."
 }

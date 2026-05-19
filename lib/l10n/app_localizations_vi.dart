@@ -1264,11 +1264,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String get forbiddenSalatTime => 'Thời gian cầu nguyện bị cấm';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Hồ sơ';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Vui lòng đăng nhập to sử dụng tính năng tìm kiếm.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Tìm kiếm câu thơ, surah...';
 }

@@ -1257,11 +1257,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forbiddenSalatTime => 'وقت كراهة الصلاة';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'الملف الشخصي';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch => 'يرجى تسجيل الدخول لاستخدام ميزة البحث.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'البحث عن الآيات، السور...';
 }

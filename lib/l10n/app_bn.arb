@@ -636,5 +636,8 @@
   "sunSetting": "সূর্যাস্ত",
   "sunTopOfTheHead": "সূর্য মাথার উপরে",
   "salatTime": "নামাজের সময়",
-  "forbiddenSalatTime": "নামাজের নিষিদ্ধ সময়"
+  "forbiddenSalatTime": "নামাজের নিষিদ্ধ সময়",
+  "profile": "প্রোফাইল",
+  "pleaseLoginToSearch": "অনুগ্রহ করে অনুসন্ধান সুবিধা ব্যবহার করতে লগইন করুন।",
+  "searchHint": "আয়াত, সূরা অনুসন্ধান করুন..."
 }

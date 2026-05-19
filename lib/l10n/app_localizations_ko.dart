@@ -1241,11 +1241,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get forbiddenSalatTime => '금지된 기도 시간';
 
   @override
-  String get profile => 'Profile';
+  String get profile => '프로필';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch => '검색 기능을 사용하려면 로그인하세요.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => '구절, 수라 검색...';
 }

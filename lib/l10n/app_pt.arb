@@ -374,5 +374,8 @@
   "sunSetting": "Pôr do sol",
   "sunTopOfTheHead": "Sol no zênite",
   "salatTime": "Tempo de Oração",
-  "forbiddenSalatTime": "Tempo de oração proibido"
+  "forbiddenSalatTime": "Tempo de oração proibido",
+  "profile": "Perfil",
+  "pleaseLoginToSearch": "Por favor, faça login para usar o recurso de busca.",
+  "searchHint": "Buscar versículos, suras..."
 }

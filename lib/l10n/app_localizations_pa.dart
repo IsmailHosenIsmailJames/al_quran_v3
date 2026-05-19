@@ -1257,11 +1257,12 @@ class AppLocalizationsPa extends AppLocalizations {
   String get forbiddenSalatTime => 'ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'ਪ੍ਰੋਫਾਈਲ';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'ਖੋਜ ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ।';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'ਆਇਤਾਂ, ਸੂਰਾ ਖੋਜੋ...';
 }

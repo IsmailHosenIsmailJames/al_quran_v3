@@ -1265,11 +1265,12 @@ class AppLocalizationsAz extends AppLocalizations {
   String get forbiddenSalatTime => 'Məkruh Namaz Vaxtı';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Profil';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'Axtarış funksiyasından istifadə etmək üçün daxil olun.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'Ayələr, surələr axtarın...';
 }

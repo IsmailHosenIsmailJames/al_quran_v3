@@ -1277,11 +1277,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get forbiddenSalatTime => 'தடைசெய்யப்பட்ட தொழுகை நேரம்';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'சுயவிவரம்';
 
   @override
-  String get pleaseLoginToSearch => 'Please login to use the search feature.';
+  String get pleaseLoginToSearch =>
+      'தேடல் அம்சத்தைப் பயன்படுத்த தயவுசெய்து உள்நுழையவும்.';
 
   @override
-  String get searchHint => 'Search for verses, surahs...';
+  String get searchHint => 'வசனங்கள், சூராக்களைத் தேடுங்கள்...';
 }
