@@ -6,7 +6,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
-import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
 class AboutAppPage extends StatelessWidget {
@@ -246,7 +245,9 @@ class AboutAppPage extends StatelessWidget {
             Text(l10n.crossPlatformSupportDescription2),
             const Gap(15),
             PlatformTile(
-              icon: SimpleIcons.android,
+              alterNative: SvgPicture.asset(
+                "assets/img/android-color-svgrepo-com.svg",
+              ),
               title: l10n.android,
               callback: () {
                 launchUrl(
@@ -259,7 +260,15 @@ class AboutAppPage extends StatelessWidget {
             ),
             // PlatformTile(icon: SimpleIcons.ios, title: l10n.ios),
             PlatformTile(
-              icon: SimpleIcons.macos,
+              alterNative: SvgPicture.asset(
+                "assets/img/macos-svgrepo-com.svg",
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                  BlendMode.srcIn,
+                ),
+              ),
               title: l10n.macos,
               callback: () {
                 launchUrl(
@@ -271,7 +280,9 @@ class AboutAppPage extends StatelessWidget {
               },
             ),
             PlatformTile(
-              icon: SimpleIcons.googlechrome,
+              alterNative: SvgPicture.asset(
+                "assets/img/google-chrome-logo-new-svgrepo-com.svg",
+              ),
               title: l10n.web,
               callback: () {
                 launchUrl(
@@ -281,7 +292,11 @@ class AboutAppPage extends StatelessWidget {
               },
             ),
             PlatformTile(
-              icon: SimpleIcons.linux,
+              alterNative: SvgPicture.asset(
+                "assets/img/linux-svgrepo-com.svg",
+                height: 34,
+                width: 34,
+              ),
               title: l10n.linux,
               callback: () {
                 launchUrl(
@@ -293,20 +308,10 @@ class AboutAppPage extends StatelessWidget {
               },
             ),
             PlatformTile(
-              alterNative: SvgPicture.string(
-                """<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <title>Windows 11</title>
-    <g id="Windows-11" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="windows11-logo" fill="#0078D4"> <!-- Standard Windows blue, can be adjusted -->
-            <rect id="Top-Left" x="1" y="1" width="10" height="10"></rect>
-            <rect id="Top-Right" x="13" y="1" width="10" height="10"></rect>
-            <rect id="Bottom-Left" x="1" y="13" width="10" height="10"></rect>
-            <rect id="Bottom-Right" x="13" y="13" width="10" height="10"></rect>
-        </g>
-    </g>
-</svg>""",
+              alterNative: SvgPicture.asset(
+                "assets/img/windows-applications-svgrepo-com.svg",
                 colorFilter: ColorFilter.mode(
-                  themeState.primary,
+                  Color(0xff0078D6),
                   BlendMode.srcIn,
                 ),
               ),
@@ -344,12 +349,11 @@ class AboutAppPage extends StatelessWidget {
                     const Gap(15),
                     Text(
                       l10n.ourLifetimePromise,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: themeState.primary,
-                      ),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: themeState.primary,
+                          ),
                       textAlign: TextAlign.center,
                     ),
                     const Gap(15),

@@ -48,8 +48,6 @@ dependencies:
   screenshot: ^3.0.0
   device_info_plus: ^13.1.0
   package_info_plus: ^10.1.0
-  # flutter_spinkit: ^5.2.1
-  simple_icons: ^14.6.1
   uuid: ^4.5.1
   flex_color_picker: ^3.7.1
   window_manager: ^0.5.0
@@ -89,7 +87,6 @@ dev_dependencies:
     sdk: flutter
   flutter_to_debian: ^2.0.2
 
-
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.3
   icons_launcher: ^3.0.1
@@ -106,7 +103,6 @@ msix_config:
   capabilities: "internetClient, location"
   store: true
 
-
 flutter:
   uses-material-design: true
   generate: true
@@ -117,8 +113,7 @@ flutter:
     - assets/meta_data/
 
   fonts:
-
-  ##### Uthmani/Madani Script Fonts #####
+    ##### Uthmani/Madani Script Fonts #####
     - family: QPC_Hafs
       fonts:
         - asset: assets/fonts/Quran/QPC Hafs font.ttf
@@ -126,19 +121,19 @@ flutter:
     - family: me_quran_volt_newmet
       fonts:
         - asset: assets/fonts/Quran/me_quran_volt_newmet copy.ttf
-    
+
     - family: Amiri
       fonts:
         - asset: assets/fonts/Quran/Amiri Regular.ttf
-    
+
     - family: AlQalamQuranMajeedWeb
       fonts:
         - asset: assets/fonts/Quran/Al Qalam Quran Majeed Web Regular.ttf
-    
+
     - family: Lateef
       fonts:
         - asset: assets/fonts/Quran/Lateef Regular.ttf
-      
+
     ##### Indopak/Asian Script Fonts #####
 
     - family: AlQuranNeov5x1
@@ -156,7 +151,7 @@ flutter:
     - family: noorehuda
       fonts:
         - asset: assets/fonts/Quran/noorehuda Regular.ttf
-        
+
     - family: surah-name-v1
       fonts:
         - asset: assets/fonts/Quran/surah-name-v1.ttf
@@ -180,7 +175,7 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/img/Quran_Logo_v3.png"
-  min_sdk_android: 21 
+  min_sdk_android: 21
   adaptive_icon_background: "#ffffff"
   adaptive_icon_foreground: "assets/img/Quran_Logo_v3.png"
 

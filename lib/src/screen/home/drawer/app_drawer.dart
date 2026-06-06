@@ -11,10 +11,10 @@ import "package:al_quran_v3/src/widget/theme/theme_icon_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:share_plus/share_plus.dart";
-import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "../../../../main.dart";
@@ -405,7 +405,13 @@ Widget drawerSection({
                 mode: LaunchMode.externalApplication,
               );
             },
-            leading: Icon(SimpleIcons.github, color: themeState.primary),
+            leading: SvgPicture.asset(
+              "assets/img/github-142-svgrepo-com.svg",
+              colorFilter: ColorFilter.mode(
+                themeState.primary,
+                BlendMode.srcIn,
+              ),
+            ),
             title: isJustIcon
                 ? null
                 : Text(

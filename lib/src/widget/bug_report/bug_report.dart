@@ -7,7 +7,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/svg.dart";
 import "package:gap/gap.dart";
 import "package:package_info_plus/package_info_plus.dart";
-import "package:simple_icons/simple_icons.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "../../theme/controller/theme_cubit.dart";
@@ -113,9 +112,10 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 Navigator.pop(context);
               },
               minTileHeight: 40,
-              leading: const Icon(
-                SimpleIcons.discord,
-                color: Color(0xff5865f2),
+              leading: SvgPicture.asset(
+                "assets/img/discord-icon-svgrepo-com.svg",
+                height: 28,
+                width: 28,
               ),
               title: const Text("On Discord"),
             ),
@@ -125,13 +125,24 @@ Future<void> showBugReportDialog(BuildContext context) async {
                 final Uri discordUrl = Uri.parse(
                   "https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues/new",
                 );
+
                 // It's not straightforward to prefill messages in Discord channels via URL.
                 // This will just open the channel. User needs to paste the info manually.
                 if (!await launchUrl(discordUrl)) {}
                 Navigator.pop(context);
               },
               minTileHeight: 40,
-              leading: const Icon(SimpleIcons.github),
+              leading: SvgPicture.asset(
+                "assets/img/github-142-svgrepo-com.svg",
+                colorFilter: ColorFilter.mode(
+                  Brightness.dark == Theme.of(context).brightness
+                      ? Colors.white
+                      : Colors.black,
+                  BlendMode.srcIn,
+                ),
+                height: 28,
+                width: 28,
+              ),
               title: const Text("Create a issue"),
             ),
           ],
