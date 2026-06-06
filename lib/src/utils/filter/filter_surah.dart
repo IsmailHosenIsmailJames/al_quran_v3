@@ -13,24 +13,25 @@ List<SurahInfoModel> getFilteredSurah(
 ) {
   List<SurahInfoModel> surahInfoList =
       metaDataSurah.values.map((e) => SurahInfoModel.fromMap(e)).toList();
-  Map<double, SurahInfoModel> mapOfFilteredSurah = {};
-  if (filterString.isNotEmpty) {
-    for (int i = 0; i < surahInfoList.length; i++) {
-      double matched = searchPatternInText(
-        filterString.toLowerCase(),
-        "${surahInfoList[i].id} ${getSurahName(context, surahInfoList[i].id)} ${NumberFormat.decimalPattern(context.read<LanguageCubit>().state.locale.languageCode).format(surahInfoList[i].id)}"
-            .toLowerCase(),
-      );
-      mapOfFilteredSurah[matched] = surahInfoList[i];
-    }
-  } else {
+  if (filterString.isEmpty) {
     return surahInfoList;
   }
-  List<double> matchedValue = mapOfFilteredSurah.keys.toList();
-  matchedValue.sort((a, b) => b.compareTo(a));
-  List<SurahInfoModel> surahInfoToReturn = [];
-  for (var element in matchedValue) {
-    surahInfoToReturn.add(mapOfFilteredSurah[element]!);
+
+  final String query = filterString.toLowerCase();
+  List<MapEntry<double, SurahInfoModel>> scoredSurahs = [];
+
+  for (int i = 0; i < surahInfoList.length; i++) {
+    double matched = searchPatternInText(
+      query,
+      "${surahInfoList[i].id} ${getSurahName(context, surahInfoList[i].id)} ${NumberFormat.decimalPattern(context.read<LanguageCubit>().state.locale.languageCode).format(surahInfoList[i].id)}"
+          .toLowerCase(),
+    );
+    if (matched > 0) {
+      scoredSurahs.add(MapEntry(matched, surahInfoList[i]));
+    }
   }
-  return surahInfoToReturn;
+
+  scoredSurahs.sort((a, b) => b.key.compareTo(a.key));
+  return scoredSurahs.map((e) => e.value).toList();
 }
+
