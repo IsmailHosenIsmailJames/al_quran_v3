@@ -110,50 +110,53 @@ Widget getAyahCardForShareAsImage(
           l10n.translation,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
-        ...List.generate(translation.length, (index) {
+        ...List.generate(translation.length, (translationIndex) {
           return Column(
             children: [
               MediaQuery(
                 data: MediaQuery.of(context),
                 child: Directionality(
                   textDirection: Directionality.of(context),
-                  child: Html(data: translation[index]),
+                  child: Html(data: translation[translationIndex]),
                 ),
               ),
-              (keepFootNote && footNote[index].isNotEmpty)
+              (keepFootNote && footNote[translationIndex].isNotEmpty)
                   ? const Gap(10)
                   : const Gap(0),
-              if (keepFootNote && footNote[index].isNotEmpty)
+              if (keepFootNote && footNote[translationIndex].isNotEmpty)
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(footNote[index].length, (index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Gap(5),
-                        Text(
-                          "${index + 1}.",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        MediaQuery(
-                          data: MediaQuery.of(context),
-                          child: Directionality(
-                            textDirection: Directionality.of(context),
-                            child: Html(
-                              data: footNote[index].values
-                                  .elementAt(index)
-                                  .toString(),
+                  children: List.generate(
+                    footNote[translationIndex].length,
+                    (fnIndex) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Gap(5),
+                          Text(
+                            "${fnIndex + 1}.",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  }),
+                          MediaQuery(
+                            data: MediaQuery.of(context),
+                            child: Directionality(
+                              textDirection: Directionality.of(context),
+                              child: Html(
+                                data: footNote[translationIndex].values
+                                    .elementAt(fnIndex)
+                                    .toString(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
 
               Row(
@@ -162,7 +165,7 @@ Widget getAyahCardForShareAsImage(
                   Container(width: 30, height: 2, color: Colors.grey),
                   const Gap(5),
                   Text(
-                    booksInfo[index]?.name ?? "",
+                    booksInfo[translationIndex]?.name ?? "",
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
