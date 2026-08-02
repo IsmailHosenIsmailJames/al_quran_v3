@@ -636,5 +636,18 @@
   "sunSetting": "Kuzama kwa Jua",
   "sunTopOfTheHead": "Jua Utosini",
   "salatTime": "Wakati wa Swala",
-  "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala"
+  "forbiddenSalatTime": "Wakati Uliokatazwa wa Swala",
+  "translationDatabase": "Kanzidata ya Tafsiri",
+  "translationDatabaseSubtitle": "Inapakua maandishi ya tafsiri yaliyochaguliwa",
+  "tafsirCommentary": "Tafsiri ya Qur'ani",
+  "tafsirCommentarySubtitle": "Kuandaa rasilimali za tafsiri",
+  "wordByWordAnalysis": "Uchambuzi Neno kwa Neno",
+  "wordByWordAnalysisSubtitle": "Weka mchanganuo wa msamiati",
+  "audioRecitationSegments": "Vipengele vya Kisomo cha Sauti",
+  "audioRecitationSegmentsSubtitle": "Weka vipengele vya muda wa aya",
+  "locationQiblaMetadata": "Data ya Eneo na Qibla",
+  "locationQiblaMetadataSubtitle": "Inapakua data ya eneo la miji duniani",
+  "preparingResources": "Kuandaa rasilimali...",
+  "setupCompletedOpeningQuran": "Uwekaji umekamilika! Kufungua Al-Qur'ani...",
+  "unexpectedErrorSetup": "Hitilafu isiyotazamiwa imetokea wakati wa uwekaji."
 }

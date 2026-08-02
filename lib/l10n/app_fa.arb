@@ -636,5 +636,18 @@
   "sunSetting": "غروب خورشید",
   "sunTopOfTheHead": "خورشید در وسط آسمان",
   "salatTime": "وقت نماز",
-  "forbiddenSalatTime": "وقت ممنوعه نماز"
+  "forbiddenSalatTime": "وقت ممنوعه نماز",
+  "translationDatabase": "پایگاه داده ترجمه",
+  "translationDatabaseSubtitle": "دانلود متن ترجمه انتخاب شده",
+  "tafsirCommentary": "تفسیر قرآن",
+  "tafsirCommentarySubtitle": "آماده‌سازی منابع تفسیر",
+  "wordByWordAnalysis": "تحلیل کلمه به کلمه",
+  "wordByWordAnalysisSubtitle": "تنظیم تفکیک واژگان",
+  "audioRecitationSegments": "بخش‌های تلاوت صوتی",
+  "audioRecitationSegmentsSubtitle": "پیکربندی زمان‌بندی آيات",
+  "locationQiblaMetadata": "متاداده مکان و قبله",
+  "locationQiblaMetadataSubtitle": "دانلود داده‌های مکان شهرهای جهان",
+  "preparingResources": "در حال آماده‌سازی منابع...",
+  "setupCompletedOpeningQuran": "تنظیمات کامل شد! در حال باز کردن قرآن...",
+  "unexpectedErrorSetup": "یک خطای غیرمنتظره در طول تنظیم رخ داد."
 }

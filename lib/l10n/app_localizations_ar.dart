@@ -1255,4 +1255,44 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'وقت كراهة الصلاة';
+
+  @override
+  String get translationDatabase => 'قاعدة بيانات الترجمة';
+
+  @override
+  String get translationDatabaseSubtitle => 'تنزيل نص الترجمة المحدد';
+
+  @override
+  String get tafsirCommentary => 'تفسير القرآن';
+
+  @override
+  String get tafsirCommentarySubtitle => 'إعداد مصادر التفسير';
+
+  @override
+  String get wordByWordAnalysis => 'التحليل كلمة بكلمة';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'إعداد تفكيك المفردات';
+
+  @override
+  String get audioRecitationSegments => 'أجزاء التلاوة الصوتية';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'تكوين التوقيت الصوتي للآيات';
+
+  @override
+  String get locationQiblaMetadata => 'بيانات الموقع والقبلة';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'تنزيل بيانات مواقع المدن العالمية';
+
+  @override
+  String get preparingResources => 'جاري إعداد المصادر...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'اكتمل الإعداد! جاري فتح القرآن...';
+
+  @override
+  String get unexpectedErrorSetup => 'حدث خطأ غير متوقع أثناء الإعداد.';
 }

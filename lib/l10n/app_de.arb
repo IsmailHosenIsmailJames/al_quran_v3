@@ -374,5 +374,18 @@
   "sunSetting": "Sonnenuntergang",
   "sunTopOfTheHead": "Sonne im Zenit",
   "salatTime": "Gebetszeit",
-  "forbiddenSalatTime": "Verbotene Gebetszeit"
+  "forbiddenSalatTime": "Verbotene Gebetszeit",
+  "translationDatabase": "Übersetzungsdatenbank",
+  "translationDatabaseSubtitle": "Ausgewählter Übersetzungstext wird heruntergeladen",
+  "tafsirCommentary": "Tafsir-Kommentar",
+  "tafsirCommentarySubtitle": "Tafsir-Ressourcen werden vorbereitet",
+  "wordByWordAnalysis": "Wort-für-Wort-Analyse",
+  "wordByWordAnalysisSubtitle": "Wortschatzanalyse wird eingerichtet",
+  "audioRecitationSegments": "Audio-Rezitationssegmente",
+  "audioRecitationSegmentsSubtitle": "Vers-Timing-Segmente werden konfiguriert",
+  "locationQiblaMetadata": "Standort- & Qibla-Metadaten",
+  "locationQiblaMetadataSubtitle": "Globale Standortdaten werden heruntergeladen",
+  "preparingResources": "Ressourcen werden vorbereitet...",
+  "setupCompletedOpeningQuran": "Einrichtung abgeschlossen! Al-Quran wird geöffnet...",
+  "unexpectedErrorSetup": "Unerwarteter Fehler bei der Einrichtung."
 }

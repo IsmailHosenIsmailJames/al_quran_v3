@@ -1259,4 +1259,46 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'ممنوعہ نماز کا وقت';
+
+  @override
+  String get translationDatabase => 'ترجمہ ڈیٹابیس';
+
+  @override
+  String get translationDatabaseSubtitle => 'منتخب کردہ ترجمہ کی ڈاؤن لوڈنگ';
+
+  @override
+  String get tafsirCommentary => 'تفسیر قرآن';
+
+  @override
+  String get tafsirCommentarySubtitle => 'تفسیر کے مواد کی تیاری';
+
+  @override
+  String get wordByWordAnalysis => 'لفظ بہ لفظ تجزیہ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'الفاظ کے معنی کی تیاری';
+
+  @override
+  String get audioRecitationSegments => 'آڈیو تلاوت کے ٹائم فریم';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'آیات کی ٹائمنگ کی ترتیب';
+
+  @override
+  String get locationQiblaMetadata => 'مقام اور قبلہ کا ڈیٹا';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'عالمی شہروں کے مقام کا ڈیٹا ڈاؤن لوڈ ہو رہا ہے';
+
+  @override
+  String get preparingResources => 'وسائل تیار کیے جا رہے ہیں...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'ترتیب مکمل ہو گئی! القرآن کھولا جا رہا ہے...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔';
 }

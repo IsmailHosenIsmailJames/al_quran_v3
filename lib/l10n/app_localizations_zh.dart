@@ -1220,4 +1220,43 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '被禁止的礼拜时间';
+
+  @override
+  String get translationDatabase => '翻译数据库';
+
+  @override
+  String get translationDatabaseSubtitle => '正在下载所选的翻译文本';
+
+  @override
+  String get tafsirCommentary => '塔夫西尔解经';
+
+  @override
+  String get tafsirCommentarySubtitle => '正在准备塔夫西尔资源';
+
+  @override
+  String get wordByWordAnalysis => '逐字分析';
+
+  @override
+  String get wordByWordAnalysisSubtitle => '正在设置词汇拆解';
+
+  @override
+  String get audioRecitationSegments => '音频诵读片段';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => '正在配置经文时间片段';
+
+  @override
+  String get locationQiblaMetadata => '位置与朝向元数据';
+
+  @override
+  String get locationQiblaMetadataSubtitle => '正在下载全球城市位置数据';
+
+  @override
+  String get preparingResources => '正在准备资源...';
+
+  @override
+  String get setupCompletedOpeningQuran => '设置完成！正在打开古兰经...';
+
+  @override
+  String get unexpectedErrorSetup => '设置过程中发生意外错误。';
 }

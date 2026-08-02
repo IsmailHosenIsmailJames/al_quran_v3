@@ -636,5 +636,18 @@
   "sunSetting": "Sun Setting",
   "sunTopOfTheHead": "Sun Top of the Head",
   "salatTime": "Salat Time",
-  "forbiddenSalatTime": "Forbidden Salat Time"
+  "forbiddenSalatTime": "Forbidden Salat Time",
+  "translationDatabase": "Translation Database",
+  "translationDatabaseSubtitle": "Downloading selected translation text",
+  "tafsirCommentary": "Tafsir Commentary",
+  "tafsirCommentarySubtitle": "Preparing scholarly tafsir resources",
+  "wordByWordAnalysis": "Word-by-Word Analysis",
+  "wordByWordAnalysisSubtitle": "Setting up vocabulary breakdown",
+  "audioRecitationSegments": "Audio Recitation Segments",
+  "audioRecitationSegmentsSubtitle": "Configuring ayah timing segments",
+  "locationQiblaMetadata": "Location & Qibla Metadata",
+  "locationQiblaMetadataSubtitle": "Downloading global city location data",
+  "preparingResources": "Preparing resources...",
+  "setupCompletedOpeningQuran": "Setup completed! Opening Al-Quran...",
+  "unexpectedErrorSetup": "An unexpected error occurred during setup."
 }

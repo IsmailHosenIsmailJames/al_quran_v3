@@ -53,75 +53,78 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
               const Gap(16),
               SizedBox(
                 width: 150,
-                child: SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
-                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                    Set<WidgetState> states,
-                  ) {
-                    return Icon(
-                      states.contains(WidgetState.selected)
-                          ? Icons.done_rounded
-                          : Icons.close_rounded,
-                    );
-                  }),
-                  title: Text(AppLocalizations.of(context).quranScriptTajweed),
-                  value:
-                      quranViewState.quranScriptType == QuranScriptType.uthmani
-                      ? quranViewState.useTajweedOnUthmani
-                      : quranViewState.useTajweedOnIndopak,
-                  onChanged: (value) async {
-                    if (quranViewState.quranScriptType ==
-                        QuranScriptType.uthmani) {
-                      context.read<QuranViewCubit>().changeUseTajweedOnUthmani(
-                        value,
+                child: Material(
+                  color: Colors.transparent,
+                  child: SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
+                      Set<WidgetState> states,
+                    ) {
+                      return Icon(
+                        states.contains(WidgetState.selected)
+                            ? Icons.done_rounded
+                            : Icons.close_rounded,
                       );
-                    } else {
-                      if (value) {
-                        final willApply = await showDialog<bool>(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(AppLocalizations.of(context).warning),
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                ).warningMessageOnIndopakTajweedEnable,
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context, false);
-                                  },
-                                  child: Text(
-                                    AppLocalizations.of(context).cancel,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                  child: Text(
-                                    AppLocalizations.of(context).apply,
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
+                    }),
+                    title: Text(AppLocalizations.of(context).quranScriptTajweed),
+                    value:
+                        quranViewState.quranScriptType == QuranScriptType.uthmani
+                        ? quranViewState.useTajweedOnUthmani
+                        : quranViewState.useTajweedOnIndopak,
+                    onChanged: (value) async {
+                      if (quranViewState.quranScriptType ==
+                          QuranScriptType.uthmani) {
+                        context.read<QuranViewCubit>().changeUseTajweedOnUthmani(
+                          value,
                         );
-                        if (willApply == true) {
-                          if (context.mounted) {
-                            context
-                                .read<QuranViewCubit>()
-                                .changeUseTajweedOnIndopak(value);
-                          }
-                        }
                       } else {
-                        context
-                            .read<QuranViewCubit>()
-                            .changeUseTajweedOnIndopak(value);
+                        if (value) {
+                          final willApply = await showDialog<bool>(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(AppLocalizations.of(context).warning),
+                                content: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  ).warningMessageOnIndopakTajweedEnable,
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context).cancel,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context).apply,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          if (willApply == true) {
+                            if (context.mounted) {
+                              context
+                                  .read<QuranViewCubit>()
+                                  .changeUseTajweedOnIndopak(value);
+                            }
+                          }
+                        } else {
+                          context
+                              .read<QuranViewCubit>()
+                              .changeUseTajweedOnIndopak(value);
+                        }
                       }
-                    }
-                  },
+                    },
+                  ),
                 ),
               ),
             ],

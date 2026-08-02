@@ -3,6 +3,7 @@ import "dart:developer";
 // import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
@@ -29,7 +30,6 @@ import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_s
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
@@ -90,6 +90,7 @@ Future<void> main() async {
   }
 
   await Hive.openBox("user");
+  await configureDependencies();
 
   MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
@@ -234,7 +235,6 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ResourcesProcceessCubit()),
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),

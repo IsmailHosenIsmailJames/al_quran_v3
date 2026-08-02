@@ -1240,4 +1240,43 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '礼拝禁止時間';
+
+  @override
+  String get translationDatabase => '翻訳データベース';
+
+  @override
+  String get translationDatabaseSubtitle => '選択した翻訳テキストをダウンロード中';
+
+  @override
+  String get tafsirCommentary => 'タフスィール解説';
+
+  @override
+  String get tafsirCommentarySubtitle => 'タフスィールリソースを準備中';
+
+  @override
+  String get wordByWordAnalysis => '単語ごとの分析';
+
+  @override
+  String get wordByWordAnalysisSubtitle => '単語分解を設定中';
+
+  @override
+  String get audioRecitationSegments => '音声朗誦セグメント';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'ヴァースのタイミングセグメントを設定中';
+
+  @override
+  String get locationQiblaMetadata => '位置とキブラのメタデータ';
+
+  @override
+  String get locationQiblaMetadataSubtitle => '世界の都市位置データをダウンロード中';
+
+  @override
+  String get preparingResources => 'リソースを準備中...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'セットアップが完了しました！コーランを開いています...';
+
+  @override
+  String get unexpectedErrorSetup => 'セットアップ中に予期しないエラーが発生しました。';
 }

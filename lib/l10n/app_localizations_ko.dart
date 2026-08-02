@@ -1239,4 +1239,43 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '금지된 기도 시간';
+
+  @override
+  String get translationDatabase => '번역 데이터베이스';
+
+  @override
+  String get translationDatabaseSubtitle => '선택한 번역 텍스트 다운로드 중';
+
+  @override
+  String get tafsirCommentary => '타프시르 해설';
+
+  @override
+  String get tafsirCommentarySubtitle => '타프시르 리소스 준비 중';
+
+  @override
+  String get wordByWordAnalysis => '단어별 분석';
+
+  @override
+  String get wordByWordAnalysisSubtitle => '어휘 분석 설정 중';
+
+  @override
+  String get audioRecitationSegments => '오디오 낭송 세그먼트';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => '구절 타이밍 세그먼트 구성 중';
+
+  @override
+  String get locationQiblaMetadata => '위치 및 키블라 메타데이터';
+
+  @override
+  String get locationQiblaMetadataSubtitle => '글로벌 도시 위치 데이터 다운로드 중';
+
+  @override
+  String get preparingResources => '리소스 준비 중...';
+
+  @override
+  String get setupCompletedOpeningQuran => '설정이 완료되었습니다! 알코란을 여는 중...';
+
+  @override
+  String get unexpectedErrorSetup => '설정 중 예기치 않은 오류가 발생했습니다.';
 }

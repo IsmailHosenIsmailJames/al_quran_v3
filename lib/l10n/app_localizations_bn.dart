@@ -1257,4 +1257,50 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'নামাজের নিষিদ্ধ সময়';
+
+  @override
+  String get translationDatabase => 'অনুবাদ ডাটাবেস';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'নির্বাচিত অনুবাদের টেক্সট ডাউনলোড হচ্ছে';
+
+  @override
+  String get tafsirCommentary => 'তাফসীর কমেন্টারি';
+
+  @override
+  String get tafsirCommentarySubtitle =>
+      'তাফসীর সংক্রান্ত তথ্য প্রস্তুত করা হচ্ছে';
+
+  @override
+  String get wordByWordAnalysis => 'শব্দে শব্দে বিশ্লেষণ';
+
+  @override
+  String get wordByWordAnalysisSubtitle =>
+      'শব্দভিত্তিক অর্থ প্রস্তুত করা হচ্ছে';
+
+  @override
+  String get audioRecitationSegments => 'অডিও তেলাওয়াত সেগমেন্ট';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'আয়াতভিত্তিক অডিও টাইমিং সেটআপ করা হচ্ছে';
+
+  @override
+  String get locationQiblaMetadata => 'লোকেশন ও কিবলা মেটাডাটা';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'বিশ্বব্যাপী শহরের অবস্থান ডাটা ডাউনলোড করা হচ্ছে';
+
+  @override
+  String get preparingResources => 'রিসোর্স প্রস্তুত করা হচ্ছে...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'সেটআপ সম্পন্ন হয়েছে! আল-কুরআন খোলা হচ্ছে...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'সেটআপের সময় একটিunexpected সমস্যা ঘটেছে।';
 }

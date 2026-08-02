@@ -636,5 +636,18 @@
   "sunSetting": "Күннің батуы",
   "sunTopOfTheHead": "Күннің тас төбеде болуы",
   "salatTime": "Намаз уақыты",
-  "forbiddenSalatTime": "Намаз оқуға тыйым салынған уақыт"
+  "forbiddenSalatTime": "Намаз оқуға тыйым салынған уақыт",
+  "translationDatabase": "Аударма дерекқоры",
+  "translationDatabaseSubtitle": "Тандалған аударма мәтіні жүктелуде",
+  "tafsirCommentary": "Тәпсір",
+  "tafsirCommentarySubtitle": "Тәпсір ресурстары дайындалуда",
+  "wordByWordAnalysis": "Сөз-сөз талдау",
+  "wordByWordAnalysisSubtitle": "Сөздік талдауы бапталуда",
+  "audioRecitationSegments": "Аудио оқу сегменттері",
+  "audioRecitationSegmentsSubtitle": "Аят уақыт сегменттері бапталуда",
+  "locationQiblaMetadata": "Орналасу және Құбыла метадеректері",
+  "locationQiblaMetadataSubtitle": "Әлемдік қалалардың орналасу деректері жүктелуде",
+  "preparingResources": "Ресурстар дайындалуда...",
+  "setupCompletedOpeningQuran": "Баптау аяқталды! Құран ашылуда...",
+  "unexpectedErrorSetup": "Баптау кезінде күтпеген қате орын алды."
 }

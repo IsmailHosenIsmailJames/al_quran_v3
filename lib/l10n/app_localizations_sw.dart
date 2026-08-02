@@ -1265,4 +1265,48 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Wakati Uliokatazwa wa Swala';
+
+  @override
+  String get translationDatabase => 'Kanzidata ya Tafsiri';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Inapakua maandishi ya tafsiri yaliyochaguliwa';
+
+  @override
+  String get tafsirCommentary => 'Tafsiri ya Qur\'ani';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Kuandaa rasilimali za tafsiri';
+
+  @override
+  String get wordByWordAnalysis => 'Uchambuzi Neno kwa Neno';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Weka mchanganuo wa msamiati';
+
+  @override
+  String get audioRecitationSegments => 'Vipengele vya Kisomo cha Sauti';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Weka vipengele vya muda wa aya';
+
+  @override
+  String get locationQiblaMetadata => 'Data ya Eneo na Qibla';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Inapakua data ya eneo la miji duniani';
+
+  @override
+  String get preparingResources => 'Kuandaa rasilimali...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Uwekaji umekamilika! Kufungua Al-Qur\'ani...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Hitilafu isiyotazamiwa imetokea wakati wa uwekaji.';
 }

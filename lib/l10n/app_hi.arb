@@ -636,5 +636,18 @@
   "sunSetting": "सूर्यास्त",
   "sunTopOfTheHead": "सूरज सिर के ऊपर",
   "salatTime": "प्रार्थना का समय",
-  "forbiddenSalatTime": "वर्जित प्रार्थना का समय"
+  "forbiddenSalatTime": "वर्जित प्रार्थना का समय",
+  "translationDatabase": "अनुवाद डेटाबेस",
+  "translationDatabaseSubtitle": "चयनित अनुवाद पाठ डाउनलोड हो रहा है",
+  "tafsirCommentary": "तफ़सीर कमेंट्री",
+  "tafsirCommentarySubtitle": "तफ़सीर संसाधन तैयार किए जा रहे हैं",
+  "wordByWordAnalysis": "शब्द-दर-शब्द विश्लेषण",
+  "wordByWordAnalysisSubtitle": "शब्दावली विभाजन स्थापित किया जा रहा है",
+  "audioRecitationSegments": "ऑडियो पाठ खंड",
+  "audioRecitationSegmentsSubtitle": "आयत समय खंड कॉन्फ़िगर किए जा रहे हैं",
+  "locationQiblaMetadata": "स्थान और क़िबला मेटाडेटा",
+  "locationQiblaMetadataSubtitle": "वैश्विक शहर स्थान डेटा डाउनलोड हो रहा है",
+  "preparingResources": "संसाधन तैयार किए जा रहे हैं...",
+  "setupCompletedOpeningQuran": "सेटअप पूरा हुआ! अल-कुरआन खोला जा रहा है...",
+  "unexpectedErrorSetup": "सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।"
 }

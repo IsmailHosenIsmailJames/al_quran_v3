@@ -636,5 +636,18 @@
   "sunSetting": "Закат солнца",
   "sunTopOfTheHead": "Солнце в зените",
   "salatTime": "Время молитвы",
-  "forbiddenSalatTime": "Запрещенное время молитвы"
+  "forbiddenSalatTime": "Запрещенное время молитвы",
+  "translationDatabase": "База данных переводов",
+  "translationDatabaseSubtitle": "Загрузка текста выбранного перевода",
+  "tafsirCommentary": "Толкование (Тафсир)",
+  "tafsirCommentarySubtitle": "Подготовка ресурсов тафсира",
+  "wordByWordAnalysis": "Пословный анализ",
+  "wordByWordAnalysisSubtitle": "Настройка пословного разбора",
+  "audioRecitationSegments": "Аудиосегменты чтецов",
+  "audioRecitationSegmentsSubtitle": "Настройка временных сегментов аятов",
+  "locationQiblaMetadata": "Данные локации и Киблы",
+  "locationQiblaMetadataSubtitle": "Загрузка данных о геолокации городов",
+  "preparingResources": "Подготовка ресурсов...",
+  "setupCompletedOpeningQuran": "Настройка завершена! Открытие Корана...",
+  "unexpectedErrorSetup": "Произошла непредвиденная ошибка при настройке."
 }

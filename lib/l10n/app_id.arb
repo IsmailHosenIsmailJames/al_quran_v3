@@ -636,5 +636,18 @@
   "sunSetting": "Matahari Terbenam",
   "sunTopOfTheHead": "Matahari di Atas Kepala",
   "salatTime": "Waktu Salat",
-  "forbiddenSalatTime": "Waktu Salat Terlarang"
+  "forbiddenSalatTime": "Waktu Salat Terlarang",
+  "translationDatabase": "Basis Data Terjemahan",
+  "translationDatabaseSubtitle": "Mengunduh teks terjemahan yang dipilih",
+  "tafsirCommentary": "Tafsir Al-Qur'an",
+  "tafsirCommentarySubtitle": "Menyiapkan sumber tafsir",
+  "wordByWordAnalysis": "Analisis Kata demi Kata",
+  "wordByWordAnalysisSubtitle": "Menyiapkan rincian kosakata",
+  "audioRecitationSegments": "Segmen Tilawah Audio",
+  "audioRecitationSegmentsSubtitle": "Mengatur segmen waktu ayat",
+  "locationQiblaMetadata": "Metadata Lokasi & Kiblat",
+  "locationQiblaMetadataSubtitle": "Mengunduh data lokasi kota global",
+  "preparingResources": "Menyiapkan sumber daya...",
+  "setupCompletedOpeningQuran": "Penyiapan selesai! Membuka Al-Qur'an...",
+  "unexpectedErrorSetup": "Terjadi kesalahan tidak terduga saat penyiapan."
 }

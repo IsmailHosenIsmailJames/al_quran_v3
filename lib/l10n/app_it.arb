@@ -374,5 +374,18 @@
   "sunSetting": "Tramonto",
   "sunTopOfTheHead": "Sole allo zenit",
   "salatTime": "Tempo di preghiera",
-  "forbiddenSalatTime": "Tempo di preghiera proibito"
+  "forbiddenSalatTime": "Tempo di preghiera proibito",
+  "translationDatabase": "Database traduzioni",
+  "translationDatabaseSubtitle": "Download testo della traduzione selezionata",
+  "tafsirCommentary": "Commento Tafsir",
+  "tafsirCommentarySubtitle": "Preparazione risorse tafsir",
+  "wordByWordAnalysis": "Analisi parola per parola",
+  "wordByWordAnalysisSubtitle": "Impostazione scomposizione vocabolario",
+  "audioRecitationSegments": "Segmenti di recitazione audio",
+  "audioRecitationSegmentsSubtitle": "Configurazione segmenti temporali versi",
+  "locationQiblaMetadata": "Metadati posizione e Qibla",
+  "locationQiblaMetadataSubtitle": "Download dati posizione città globali",
+  "preparingResources": "Preparazione risorse...",
+  "setupCompletedOpeningQuran": "Configurazione completata! Apertura del Corano...",
+  "unexpectedErrorSetup": "Si è verificato un errore imprevisto durante la configurazione."
 }

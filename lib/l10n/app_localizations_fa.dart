@@ -1257,4 +1257,45 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'وقت ممنوعه نماز';
+
+  @override
+  String get translationDatabase => 'پایگاه داده ترجمه';
+
+  @override
+  String get translationDatabaseSubtitle => 'دانلود متن ترجمه انتخاب شده';
+
+  @override
+  String get tafsirCommentary => 'تفسیر قرآن';
+
+  @override
+  String get tafsirCommentarySubtitle => 'آماده‌سازی منابع تفسیر';
+
+  @override
+  String get wordByWordAnalysis => 'تحلیل کلمه به کلمه';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'تنظیم تفکیک واژگان';
+
+  @override
+  String get audioRecitationSegments => 'بخش‌های تلاوت صوتی';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'پیکربندی زمان‌بندی آيات';
+
+  @override
+  String get locationQiblaMetadata => 'متاداده مکان و قبله';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'دانلود داده‌های مکان شهرهای جهان';
+
+  @override
+  String get preparingResources => 'در حال آماده‌سازی منابع...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'تنظیمات کامل شد! در حال باز کردن قرآن...';
+
+  @override
+  String get unexpectedErrorSetup => 'یک خطای غیرمنتظره در طول تنظیم رخ داد.';
 }

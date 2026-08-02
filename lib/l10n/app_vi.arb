@@ -374,5 +374,18 @@
   "sunSetting": "Mặt trời lặn",
   "sunTopOfTheHead": "Mặt trời trên đỉnh đầu",
   "salatTime": "Thời gian cầu nguyện",
-  "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm"
+  "forbiddenSalatTime": "Thời gian cầu nguyện bị cấm",
+  "translationDatabase": "Cơ sở dữ liệu dịch",
+  "translationDatabaseSubtitle": "Đang tải văn bản dịch đã chọn",
+  "tafsirCommentary": "Chú giải Tafsir",
+  "tafsirCommentarySubtitle": "Đang chuẩn bị tài nguyên tafsir",
+  "wordByWordAnalysis": "Phân tích từng từ",
+  "wordByWordAnalysisSubtitle": "Thiết lập phân tích từ vựng",
+  "audioRecitationSegments": "Các phân đoạn đọc âm thanh",
+  "audioRecitationSegmentsSubtitle": "Cấu hình phân đoạn thời gian câu",
+  "locationQiblaMetadata": "Dữ liệu vị trí & Qibla",
+  "locationQiblaMetadataSubtitle": "Đang tải dữ liệu vị trí thành phố toàn cầu",
+  "preparingResources": "Đang chuẩn bị tài nguyên...",
+  "setupCompletedOpeningQuran": "Cấu hình hoàn tất! Đang mở Al-Quran...",
+  "unexpectedErrorSetup": "Đã xảy ra lỗi không mong muốn trong quá trình thiết lập."
 }

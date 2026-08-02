@@ -1258,4 +1258,45 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'د لمانځه منع شوی وخت';
+
+  @override
+  String get translationDatabase => 'د ژباړې ډیټابیس';
+
+  @override
+  String get translationDatabaseSubtitle => 'د ټاکل شوې ژباړې متن ډاونلوډ کیږي';
+
+  @override
+  String get tafsirCommentary => 'د قرآن تفسير';
+
+  @override
+  String get tafsirCommentarySubtitle => 'د تفسیر سرچینې چمتو کیږي';
+
+  @override
+  String get wordByWordAnalysis => 'کلمه په کلمه تحلیل';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'د لغتونو جلا کول تنظیمول';
+
+  @override
+  String get audioRecitationSegments => 'د غږیز تلاوت برخې';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'د ایتونو د وخت برخې تنظیمول';
+
+  @override
+  String get locationQiblaMetadata => 'د موقعیت او قبلې میټاډاټا';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'د نړۍ د ښارونو د موقعیت ډیټا ډاونلوډ کیږي';
+
+  @override
+  String get preparingResources => 'سرچینې چمتو کیږي...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'ترتیب بشپړ شو! القرآن خلاصیږي...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'د ترتیب په جریان کې ناڅاپي تېروتنه رامنځته شوه.';
 }

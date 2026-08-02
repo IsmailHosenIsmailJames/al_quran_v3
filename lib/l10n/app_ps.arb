@@ -636,5 +636,18 @@
   "sunSetting": "لمر لوېدل",
   "sunTopOfTheHead": "لمر د سر په سر",
   "salatTime": "د لمانځه وخت",
-  "forbiddenSalatTime": "د لمانځه منع شوی وخت"
+  "forbiddenSalatTime": "د لمانځه منع شوی وخت",
+  "translationDatabase": "د ژباړې ډیټابیس",
+  "translationDatabaseSubtitle": "د ټاکل شوې ژباړې متن ډاونلوډ کیږي",
+  "tafsirCommentary": "د قرآن تفسير",
+  "tafsirCommentarySubtitle": "د تفسیر سرچینې چمتو کیږي",
+  "wordByWordAnalysis": "کلمه په کلمه تحلیل",
+  "wordByWordAnalysisSubtitle": "د لغتونو جلا کول تنظیمول",
+  "audioRecitationSegments": "د غږیز تلاوت برخې",
+  "audioRecitationSegmentsSubtitle": "د ایتونو د وخت برخې تنظیمول",
+  "locationQiblaMetadata": "د موقعیت او قبلې میټاډاټا",
+  "locationQiblaMetadataSubtitle": "د نړۍ د ښارونو د موقعیت ډیټا ډاونلوډ کیږي",
+  "preparingResources": "سرچینې چمتو کیږي...",
+  "setupCompletedOpeningQuran": "ترتیب بشپړ شو! القرآن خلاصیږي...",
+  "unexpectedErrorSetup": "د ترتیب په جریان کې ناڅاپي تېروتنه رامنځته شوه."
 }

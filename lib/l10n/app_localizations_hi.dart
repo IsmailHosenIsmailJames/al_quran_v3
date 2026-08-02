@@ -1257,4 +1257,49 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'वर्जित प्रार्थना का समय';
+
+  @override
+  String get translationDatabase => 'अनुवाद डेटाबेस';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'चयनित अनुवाद पाठ डाउनलोड हो रहा है';
+
+  @override
+  String get tafsirCommentary => 'तफ़सीर कमेंट्री';
+
+  @override
+  String get tafsirCommentarySubtitle => 'तफ़सीर संसाधन तैयार किए जा रहे हैं';
+
+  @override
+  String get wordByWordAnalysis => 'शब्द-दर-शब्द विश्लेषण';
+
+  @override
+  String get wordByWordAnalysisSubtitle =>
+      'शब्दावली विभाजन स्थापित किया जा रहा है';
+
+  @override
+  String get audioRecitationSegments => 'ऑडियो पाठ खंड';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'आयत समय खंड कॉन्फ़िगर किए जा रहे हैं';
+
+  @override
+  String get locationQiblaMetadata => 'स्थान और क़िबला मेटाडेटा';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'वैश्विक शहर स्थान डेटा डाउनलोड हो रहा है';
+
+  @override
+  String get preparingResources => 'संसाधन तैयार किए जा रहे हैं...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'सेटअप पूरा हुआ! अल-कुरआन खोला जा रहा है...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।';
 }

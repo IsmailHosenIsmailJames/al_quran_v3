@@ -636,5 +636,18 @@
   "sunSetting": "日落",
   "sunTopOfTheHead": "太阳当头",
   "salatTime": "礼拜时间",
-  "forbiddenSalatTime": "被禁止的礼拜时间"
+  "forbiddenSalatTime": "被禁止的礼拜时间",
+  "translationDatabase": "翻译数据库",
+  "translationDatabaseSubtitle": "正在下载所选的翻译文本",
+  "tafsirCommentary": "塔夫西尔解经",
+  "tafsirCommentarySubtitle": "正在准备塔夫西尔资源",
+  "wordByWordAnalysis": "逐字分析",
+  "wordByWordAnalysisSubtitle": "正在设置词汇拆解",
+  "audioRecitationSegments": "音频诵读片段",
+  "audioRecitationSegmentsSubtitle": "正在配置经文时间片段",
+  "locationQiblaMetadata": "位置与朝向元数据",
+  "locationQiblaMetadataSubtitle": "正在下载全球城市位置数据",
+  "preparingResources": "正在准备资源...",
+  "setupCompletedOpeningQuran": "设置完成！正在打开古兰经...",
+  "unexpectedErrorSetup": "设置过程中发生意外错误。"
 }
