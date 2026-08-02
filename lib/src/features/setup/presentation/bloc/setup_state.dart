@@ -1,24 +1,21 @@
-import "package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart";
-import "package:al_quran_v3/src/features/setup/domain/entities/setup_config.dart";
+import 'package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart';
+import 'package:al_quran_v3/src/features/setup/domain/entities/setup_config.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'setup_state.freezed.dart';
 
 enum SetupStatus { initial, loading, loaded, error }
 
-class SetupState {
-  final SetupStatus status;
-  final SetupConfig config;
-  final Map<String, List<ResourceEntity>> allResources;
-  final List<ResourceEntity> selectableTranslations;
-  final List<ResourceEntity> selectableTafsirs;
-  final String? errorMessage;
-
-  const SetupState({
-    this.status = SetupStatus.initial,
-    required this.config,
-    this.allResources = const {},
-    this.selectableTranslations = const [],
-    this.selectableTafsirs = const [],
-    this.errorMessage,
-  });
+@freezed
+abstract class SetupState with _$SetupState {
+  const factory SetupState({
+    @Default(SetupStatus.initial) SetupStatus status,
+    required SetupConfig config,
+    @Default({}) Map<String, List<ResourceEntity>> allResources,
+    @Default([]) List<ResourceEntity> selectableTranslations,
+    @Default([]) List<ResourceEntity> selectableTafsirs,
+    String? errorMessage,
+  }) = _SetupState;
 
   factory SetupState.initial() {
     return const SetupState(
@@ -27,23 +24,7 @@ class SetupState {
     );
   }
 
-  SetupState copyWith({
-    SetupStatus? status,
-    SetupConfig? config,
-    Map<String, List<ResourceEntity>>? allResources,
-    List<ResourceEntity>? selectableTranslations,
-    List<ResourceEntity>? selectableTafsirs,
-    String? errorMessage,
-  }) {
-    return SetupState(
-      status: status ?? this.status,
-      config: config ?? this.config,
-      allResources: allResources ?? this.allResources,
-      selectableTranslations: selectableTranslations ?? this.selectableTranslations,
-      selectableTafsirs: selectableTafsirs ?? this.selectableTafsirs,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+  const SetupState._();
 
   bool doesHaveFootNote(String langCode) {
     return allResources[langCode]?.any((e) => e.hasFootnote) ?? false;
@@ -56,17 +37,4 @@ class SetupState {
   bool doesHaveWordByWord(String langCode) {
     return allResources[langCode]?.any((e) => e.isWordByWord) ?? false;
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SetupState &&
-          runtimeType == other.runtimeType &&
-          status == other.status &&
-          config == other.config &&
-          errorMessage == other.errorMessage;
-
-  @override
-  int get hashCode =>
-      status.hashCode ^ config.hashCode ^ errorMessage.hashCode;
 }
