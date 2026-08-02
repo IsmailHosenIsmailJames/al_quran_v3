@@ -1,26 +1,23 @@
-enum DownloadStepStatus {
-  initial,
-  inProgress,
-  completed,
-  failed,
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class DownloadProgress {
-  final String stepName;
-  final double? percentage; // 0.0 to 1.0 overall progress
-  final int currentStepIndex; // 0 to 4
-  final int totalSteps;
-  final DownloadStepStatus status;
-  final String? errorMessage;
+part 'download_progress.freezed.dart';
+part 'download_progress.g.dart';
 
-  const DownloadProgress({
-    required this.stepName,
-    this.percentage,
-    this.currentStepIndex = 0,
-    this.totalSteps = 5,
-    required this.status,
-    this.errorMessage,
-  });
+enum DownloadStepStatus { initial, inProgress, completed, failed }
+
+@freezed
+abstract class DownloadProgress with _$DownloadProgress {
+  const factory DownloadProgress({
+    required String stepName,
+    double? percentage,
+    @Default(0) int currentStepIndex,
+    @Default(5) int totalSteps,
+    required DownloadStepStatus status,
+    String? errorMessage,
+  }) = _DownloadProgress;
+
+  factory DownloadProgress.fromJson(Map<String, dynamic> json) =>
+      _$DownloadProgressFromJson(json);
 
   factory DownloadProgress.initial() {
     return const DownloadProgress(
