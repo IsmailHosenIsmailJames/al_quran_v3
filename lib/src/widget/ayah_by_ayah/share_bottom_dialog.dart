@@ -180,26 +180,29 @@ void showShareBottomDialog(
                     .captureFromLongWidget(
                       InheritedTheme.captureAll(
                         context,
-                        Material(
-                          child: getAyahCardForShareAsImage(
-                            context,
-                            Hive.box("user").get(
-                              "show_mac_os_window_like_icon",
-                              defaultValue: true,
+                        BlocProvider.value(
+                          value: context.read<QuranViewCubit>(),
+                          child: Material(
+                            child: getAyahCardForShareAsImage(
+                              context,
+                              Hive.box("user").get(
+                                "show_mac_os_window_like_icon",
+                                defaultValue: true,
+                              ),
+                              ayahKey,
+                              surahInfoModel,
+                              quranScriptType,
+                              getPlainTextAyahFromTajweedWords(
+                                List<String>.from(quranScriptWord),
+                              ),
+                              translation,
+                              footNote,
+                              booksInfo,
+                              scriptTextStyle,
+                              brightness,
+                              themeState,
+                              useTajweed,
                             ),
-                            ayahKey,
-                            surahInfoModel,
-                            quranScriptType,
-                            getPlainTextAyahFromTajweedWords(
-                              List<String>.from(quranScriptWord),
-                            ),
-                            translation,
-                            footNote,
-                            booksInfo,
-                            scriptTextStyle,
-                            brightness,
-                            themeState,
-                            useTajweed,
                           ),
                         ),
                       ),
