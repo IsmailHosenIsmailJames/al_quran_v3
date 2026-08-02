@@ -1263,4 +1263,47 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Məkruh Namaz Vaxtı';
+
+  @override
+  String get translationDatabase => 'Tərcümə bazası';
+
+  @override
+  String get translationDatabaseSubtitle => 'Seçilmiş tərcümə mətni endirilir';
+
+  @override
+  String get tafsirCommentary => 'Təfsir';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Təfsir resursları hazırlanır';
+
+  @override
+  String get wordByWordAnalysis => 'Söz-söz təhlil';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Lüğət tərkibi hazırlanır';
+
+  @override
+  String get audioRecitationSegments => 'Audio qiraət seqmentləri';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Ayə vaxt seqmentləri tənzimlənir';
+
+  @override
+  String get locationQiblaMetadata => 'Məkan və Qiblə məlumatları';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Qlobal şəhər məkan məlumatları endirilir';
+
+  @override
+  String get preparingResources => 'Resurslar hazırlanır...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Quraşdırma tamamlandı! Quran açılır...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Quraşdırma zamanı gözlənilməz xəta baş verdi.';
 }

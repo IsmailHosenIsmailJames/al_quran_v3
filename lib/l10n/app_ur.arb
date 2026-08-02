@@ -636,5 +636,18 @@
   "sunSetting": "غروب آفتاب",
   "sunTopOfTheHead": "سورج سر کے اوپر",
   "salatTime": "نماز کا وقت",
-  "forbiddenSalatTime": "ممنوعہ نماز کا وقت"
+  "forbiddenSalatTime": "ممنوعہ نماز کا وقت",
+  "translationDatabase": "ترجمہ ڈیٹابیس",
+  "translationDatabaseSubtitle": "منتخب کردہ ترجمہ کی ڈاؤن لوڈنگ",
+  "tafsirCommentary": "تفسیر قرآن",
+  "tafsirCommentarySubtitle": "تفسیر کے مواد کی تیاری",
+  "wordByWordAnalysis": "لفظ بہ لفظ تجزیہ",
+  "wordByWordAnalysisSubtitle": "الفاظ کے معنی کی تیاری",
+  "audioRecitationSegments": "آڈیو تلاوت کے ٹائم فریم",
+  "audioRecitationSegmentsSubtitle": "آیات کی ٹائمنگ کی ترتیب",
+  "locationQiblaMetadata": "مقام اور قبلہ کا ڈیٹا",
+  "locationQiblaMetadataSubtitle": "عالمی شہروں کے مقام کا ڈیٹا ڈاؤن لوڈ ہو رہا ہے",
+  "preparingResources": "وسائل تیار کیے جا رہے ہیں...",
+  "setupCompletedOpeningQuran": "ترتیب مکمل ہو گئی! القرآن کھولا جا رہا ہے...",
+  "unexpectedErrorSetup": "ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔"
 }

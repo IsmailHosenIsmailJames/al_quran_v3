@@ -636,5 +636,18 @@
   "sunSetting": "غروب الشمس",
   "sunTopOfTheHead": "وقت الزوال (الشمس في كبد السماء)",
   "salatTime": "وقت الصلاة",
-  "forbiddenSalatTime": "وقت كراهة الصلاة"
+  "forbiddenSalatTime": "وقت كراهة الصلاة",
+  "translationDatabase": "قاعدة بيانات الترجمة",
+  "translationDatabaseSubtitle": "تنزيل نص الترجمة المحدد",
+  "tafsirCommentary": "تفسير القرآن",
+  "tafsirCommentarySubtitle": "إعداد مصادر التفسير",
+  "wordByWordAnalysis": "التحليل كلمة بكلمة",
+  "wordByWordAnalysisSubtitle": "إعداد تفكيك المفردات",
+  "audioRecitationSegments": "أجزاء التلاوة الصوتية",
+  "audioRecitationSegmentsSubtitle": "تكوين التوقيت الصوتي للآيات",
+  "locationQiblaMetadata": "بيانات الموقع والقبلة",
+  "locationQiblaMetadataSubtitle": "تنزيل بيانات مواقع المدن العالمية",
+  "preparingResources": "جاري إعداد المصادر...",
+  "setupCompletedOpeningQuran": "اكتمل الإعداد! جاري فتح القرآن...",
+  "unexpectedErrorSetup": "حدث خطأ غير متوقع أثناء الإعداد."
 }

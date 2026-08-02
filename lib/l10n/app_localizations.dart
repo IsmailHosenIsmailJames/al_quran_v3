@@ -2401,6 +2401,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forbidden Salat Time'**
   String get forbiddenSalatTime;
+
+  /// No description provided for @translationDatabase.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation Database'**
+  String get translationDatabase;
+
+  /// No description provided for @translationDatabaseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading selected translation text'**
+  String get translationDatabaseSubtitle;
+
+  /// No description provided for @tafsirCommentary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tafsir Commentary'**
+  String get tafsirCommentary;
+
+  /// No description provided for @tafsirCommentarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing scholarly tafsir resources'**
+  String get tafsirCommentarySubtitle;
+
+  /// No description provided for @wordByWordAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Word-by-Word Analysis'**
+  String get wordByWordAnalysis;
+
+  /// No description provided for @wordByWordAnalysisSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting up vocabulary breakdown'**
+  String get wordByWordAnalysisSubtitle;
+
+  /// No description provided for @audioRecitationSegments.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio Recitation Segments'**
+  String get audioRecitationSegments;
+
+  /// No description provided for @audioRecitationSegmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuring ayah timing segments'**
+  String get audioRecitationSegmentsSubtitle;
+
+  /// No description provided for @locationQiblaMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Location & Qibla Metadata'**
+  String get locationQiblaMetadata;
+
+  /// No description provided for @locationQiblaMetadataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading global city location data'**
+  String get locationQiblaMetadataSubtitle;
+
+  /// No description provided for @preparingResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing resources...'**
+  String get preparingResources;
+
+  /// No description provided for @setupCompletedOpeningQuran.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup completed! Opening Al-Quran...'**
+  String get setupCompletedOpeningQuran;
+
+  /// No description provided for @unexpectedErrorSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred during setup.'**
+  String get unexpectedErrorSetup;
 }
 
 class _AppLocalizationsDelegate

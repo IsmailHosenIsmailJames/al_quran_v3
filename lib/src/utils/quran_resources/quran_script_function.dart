@@ -1,5 +1,4 @@
 import "dart:convert";
-import "dart:developer";
 
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/utils/tajweed_rules.dart";

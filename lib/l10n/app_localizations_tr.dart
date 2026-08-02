@@ -1258,4 +1258,47 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Kerahat Vakti';
+
+  @override
+  String get translationDatabase => 'Meal Veritabanı';
+
+  @override
+  String get translationDatabaseSubtitle => 'Seçilen meal metni indiriliyor';
+
+  @override
+  String get tafsirCommentary => 'Tefsir Açıklaması';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Tefsir kaynakları hazırlanıyor';
+
+  @override
+  String get wordByWordAnalysis => 'Kelime Kelime Tahlil';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Kelime kelime anlam hazırlanıyor';
+
+  @override
+  String get audioRecitationSegments => 'Sesli Tilavet Segmentleri';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Ayet zamanlama segmentleri ayarlanıyor';
+
+  @override
+  String get locationQiblaMetadata => 'Konum ve Kıble Verileri';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Küresel şehir konum verileri indiriliyor';
+
+  @override
+  String get preparingResources => 'Kaynaklar hazırlanıyor...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Kurulum tamamlandı! Kur\'an-ı Kerim açılıyor...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Kurulum sırasında beklenmeyen bir hata oluştu.';
 }

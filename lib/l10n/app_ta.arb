@@ -374,5 +374,18 @@
   "sunSetting": "சூரிய அஸ்தமனம்",
   "sunTopOfTheHead": "சூரியன் உச்சி",
   "salatTime": "தொழுகை நேரம்",
-  "forbiddenSalatTime": "தடைசெய்யப்பட்ட தொழுகை நேரம்"
+  "forbiddenSalatTime": "தடைசெய்யப்பட்ட தொழுகை நேரம்",
+  "translationDatabase": "மொழிபெயர்ப்பு தரவுத்தளம்",
+  "translationDatabaseSubtitle": "தேர்ந்தெடுக்கப்பட்ட மொழிபெயர்ப்பு உரை பதிவிறக்கப்படுகிறது",
+  "tafsirCommentary": "தஃப்சீர் உரை",
+  "tafsirCommentarySubtitle": "தஃப்சீர் வளங்கள் തയ്യാറാக்கப்படுகின்றன",
+  "wordByWordAnalysis": "சொல்-சொல் பகுப்பாய்வு",
+  "wordByWordAnalysisSubtitle": "சொல் விளக்கம் அமைக்கப்படுகிறது",
+  "audioRecitationSegments": "ஒலி ஓதல் பிரிவுகள்",
+  "audioRecitationSegmentsSubtitle": "வசன நேர பிரிவுகள் அமைவு",
+  "locationQiblaMetadata": "இருப்பிடம் & கிப்லா மெட்டாடேட்டா",
+  "locationQiblaMetadataSubtitle": "உலகளாவிய நகர இருப்பிடத் தரவு பதிவிறக்கப்படுகிறது",
+  "preparingResources": "வளங்கள் ತಯಾರிக்கப்படுகின்றன...",
+  "setupCompletedOpeningQuran": "அமைவு முடிந்தது! அல்-குர்ஆன் திறக்கப்படுகிறது...",
+  "unexpectedErrorSetup": "அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது."
 }

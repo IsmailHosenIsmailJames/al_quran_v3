@@ -1262,4 +1262,47 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Thời gian cầu nguyện bị cấm';
+
+  @override
+  String get translationDatabase => 'Cơ sở dữ liệu dịch';
+
+  @override
+  String get translationDatabaseSubtitle => 'Đang tải văn bản dịch đã chọn';
+
+  @override
+  String get tafsirCommentary => 'Chú giải Tafsir';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Đang chuẩn bị tài nguyên tafsir';
+
+  @override
+  String get wordByWordAnalysis => 'Phân tích từng từ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Thiết lập phân tích từ vựng';
+
+  @override
+  String get audioRecitationSegments => 'Các phân đoạn đọc âm thanh';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Cấu hình phân đoạn thời gian câu';
+
+  @override
+  String get locationQiblaMetadata => 'Dữ liệu vị trí & Qibla';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Đang tải dữ liệu vị trí thành phố toàn cầu';
+
+  @override
+  String get preparingResources => 'Đang chuẩn bị tài nguyên...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Cấu hình hoàn tất! Đang mở Al-Quran...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Đã xảy ra lỗi không mong muốn trong quá trình thiết lập.';
 }

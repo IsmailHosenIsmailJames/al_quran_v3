@@ -1266,4 +1266,48 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Запрещенное время молитвы';
+
+  @override
+  String get translationDatabase => 'База данных переводов';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Загрузка текста выбранного перевода';
+
+  @override
+  String get tafsirCommentary => 'Толкование (Тафсир)';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Подготовка ресурсов тафсира';
+
+  @override
+  String get wordByWordAnalysis => 'Пословный анализ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Настройка пословного разбора';
+
+  @override
+  String get audioRecitationSegments => 'Аудиосегменты чтецов';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Настройка временных сегментов аятов';
+
+  @override
+  String get locationQiblaMetadata => 'Данные локации и Киблы';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Загрузка данных о геолокации городов';
+
+  @override
+  String get preparingResources => 'Подготовка ресурсов...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Настройка завершена! Открытие Корана...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Произошла непредвиденная ошибка при настройке.';
 }

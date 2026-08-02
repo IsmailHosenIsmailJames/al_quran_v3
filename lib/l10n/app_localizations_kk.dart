@@ -1256,4 +1256,46 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Намаз оқуға тыйым салынған уақыт';
+
+  @override
+  String get translationDatabase => 'Аударма дерекқоры';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Тандалған аударма мәтіні жүктелуде';
+
+  @override
+  String get tafsirCommentary => 'Тәпсір';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Тәпсір ресурстары дайындалуда';
+
+  @override
+  String get wordByWordAnalysis => 'Сөз-сөз талдау';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Сөздік талдауы бапталуда';
+
+  @override
+  String get audioRecitationSegments => 'Аудио оқу сегменттері';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Аят уақыт сегменттері бапталуда';
+
+  @override
+  String get locationQiblaMetadata => 'Орналасу және Құбыла метадеректері';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Әлемдік қалалардың орналасу деректері жүктелуде';
+
+  @override
+  String get preparingResources => 'Ресурстар дайындалуда...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'Баптау аяқталды! Құран ашылуда...';
+
+  @override
+  String get unexpectedErrorSetup => 'Баптау кезінде күтпеген қате орын алды.';
 }

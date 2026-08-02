@@ -3,11 +3,9 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart"; // Still needed for BuildContext
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../encode_decode.dart";
@@ -212,10 +210,17 @@ class WordByWordFunction {
   }
 
   static Future<bool> downloadResource({
-    required BuildContext context,
+    BuildContext? context,
+    void Function(double? percentage, String processName)? onProgress,
     required ResourcesModel book,
     bool isSetupProcess = false,
   }) async {
+    void updateProgress(double? percentage, String name) {
+      if (onProgress != null) {
+        onProgress(percentage, name);
+      }
+    }
+
     if (book.type != ResourceType.word_by_word) {
       log(
         "Download requested for non-WbW book: ${book.name}",
@@ -225,8 +230,7 @@ class WordByWordFunction {
       return false;
     }
 
-    final cubit = context.read<ResourcesProcceessCubit>();
-    cubit.updateProgress(null, "Downloading WbW: ${book.name}");
+    updateProgress(null, "Downloading WbW: ${book.name}");
 
     if (await isBookDownloaded(book)) {
       log(
@@ -271,7 +275,7 @@ class WordByWordFunction {
           "Failed to open Hive box '$boxName' even after delete: $e2",
           name: "WbWFunction.downloadResource",
         );
-        cubit.updateProgress(
+        updateProgress(
           null,
           "Error preparing WbW storage for ${book.name}",
         );
@@ -281,14 +285,14 @@ class WordByWordFunction {
 
     try {
       final String downloadUrl = ApisUrls.base + book.fullPath;
-      cubit.updateProgress(0.0, "Downloading WbW: ${book.name}");
+      updateProgress(0.0, "Downloading WbW: ${book.name}");
 
       dio.Response response = await dio.Dio().get(
         downloadUrl,
         onReceiveProgress: (received, total) {
           if (total != -1) {
             double progress = received / total;
-            cubit.updateProgress(
+            updateProgress(
               progress * 0.5,
               "Downloading WbW: ${book.name}",
             );
@@ -296,7 +300,7 @@ class WordByWordFunction {
         },
       );
 
-      cubit.updateProgress(0.5, "Processing WbW: ${book.name}");
+      updateProgress(0.5, "Processing WbW: ${book.name}");
       Map<String, dynamic> jsonData = await compute(
         (data) =>
             jsonDecode(decodeBZip2String(data as String))
@@ -311,7 +315,7 @@ class WordByWordFunction {
         await newBox.put(entry.key, entry.value);
         processedEntries++;
         if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          cubit.updateProgress(
+          updateProgress(
             0.5 + (processedEntries / totalEntries * 0.5),
             "Processing WbW data for ${book.name}",
           );
@@ -336,14 +340,14 @@ class WordByWordFunction {
         "WbW for '${book.name}' downloaded and processed successfully.",
         name: "WbWFunction.downloadResource",
       );
-      cubit.updateProgress(1.0, "WbW: ${book.name} Downloaded");
+      updateProgress(1.0, "WbW: ${book.name} Downloaded");
       return true;
     } catch (e, s) {
       log(
         "Error downloading/processing WbW for '${book.name}': $e\n$s",
         name: "WbWFunction.downloadResource",
       );
-      cubit.updateProgress(null, "Error downloading WbW for ${book.name}");
+      updateProgress(null, "Error downloading WbW for ${book.name}");
       if (newBox.isOpen) {
         await newBox.close();
       }

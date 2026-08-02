@@ -636,5 +636,18 @@
   "sunSetting": "Puesta del sol",
   "sunTopOfTheHead": "Sol en el cenit",
   "salatTime": "Tiempo de Oración",
-  "forbiddenSalatTime": "Tiempo de oración prohibido"
+  "forbiddenSalatTime": "Tiempo de oración prohibido",
+  "translationDatabase": "Base de datos de traducción",
+  "translationDatabaseSubtitle": "Descargando el texto de traducción seleccionado",
+  "tafsirCommentary": "Comentario de Tafsir",
+  "tafsirCommentarySubtitle": "Preparando recursos de tafsir",
+  "wordByWordAnalysis": "Análisis palabra por palabra",
+  "wordByWordAnalysisSubtitle": "Configurando el desglose del vocabulario",
+  "audioRecitationSegments": "Segmentos de recitación de audio",
+  "audioRecitationSegmentsSubtitle": "Configurando los segmentos de tiempo de las aleyas",
+  "locationQiblaMetadata": "Metadatos de ubicación y Quibla",
+  "locationQiblaMetadataSubtitle": "Descargando datos de ubicación de ciudades globales",
+  "preparingResources": "Preparando recursos...",
+  "setupCompletedOpeningQuran": "¡Configuración completada! Abriendo Al-Corán...",
+  "unexpectedErrorSetup": "Ocurrió un error inesperado durante la configuración."
 }

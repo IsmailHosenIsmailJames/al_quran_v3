@@ -1275,4 +1275,47 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'தடைசெய்யப்பட்ட தொழுகை நேரம்';
+
+  @override
+  String get translationDatabase => 'மொழிபெயர்ப்பு தரவுத்தளம்';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'தேர்ந்தெடுக்கப்பட்ட மொழிபெயர்ப்பு உரை பதிவிறக்கப்படுகிறது';
+
+  @override
+  String get tafsirCommentary => 'தஃப்சீர் உரை';
+
+  @override
+  String get tafsirCommentarySubtitle =>
+      'தஃப்சீர் வளங்கள் തയ്യാറാக்கப்படுகின்றன';
+
+  @override
+  String get wordByWordAnalysis => 'சொல்-சொல் பகுப்பாய்வு';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'சொல் விளக்கம் அமைக்கப்படுகிறது';
+
+  @override
+  String get audioRecitationSegments => 'ஒலி ஓதல் பிரிவுகள்';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'வசன நேர பிரிவுகள் அமைவு';
+
+  @override
+  String get locationQiblaMetadata => 'இருப்பிடம் & கிப்லா மெட்டாடேட்டா';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'உலகளாவிய நகர இருப்பிடத் தரவு பதிவிறக்கப்படுகிறது';
+
+  @override
+  String get preparingResources => 'வளங்கள் ತಯಾರிக்கப்படுகின்றன...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'அமைவு முடிந்தது! அல்-குர்ஆன் திறக்கப்படுகிறது...';
+
+  @override
+  String get unexpectedErrorSetup => 'அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது.';
 }

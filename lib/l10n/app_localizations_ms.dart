@@ -1256,4 +1256,47 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Waktu Solat Dilarang';
+
+  @override
+  String get translationDatabase => 'Pangkalan Data Terjemahan';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Memuat turun teks terjemahan yang dipilih';
+
+  @override
+  String get tafsirCommentary => 'Tafsir Al-Quran';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Menyediakan sumber tafsir';
+
+  @override
+  String get wordByWordAnalysis => 'Analisis Kata demi Kata';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Menyediakan pecahan kosa kata';
+
+  @override
+  String get audioRecitationSegments => 'Segmen Bacaan Audio';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'Konfigurasi segmen masa ayat';
+
+  @override
+  String get locationQiblaMetadata => 'Metadata Lokasi & Kiblat';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Memuat turun data lokasi bandar global';
+
+  @override
+  String get preparingResources => 'Menyediakan sumber...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Persediaan selesai! Membuka Al-Quran...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Ralat tidak dijangka berlaku semasa persediaan.';
 }

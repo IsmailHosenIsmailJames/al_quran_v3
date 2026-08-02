@@ -636,5 +636,18 @@
   "sunSetting": "ਸੂਰਜ ਡੁੱਬਣਾ",
   "sunTopOfTheHead": "ਸੂਰਜ ਸਿਰ ਦੇ ਉੱਪਰ",
   "salatTime": "ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
-  "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ"
+  "forbiddenSalatTime": "ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ",
+  "translationDatabase": "ਅਨੁਵਾਦ ਡਾਟਾਬੇਸ",
+  "translationDatabaseSubtitle": "ਚੁਣਿਆ ਗਿਆ ਅਨੁਵਾਦ ਟੈਕਸਟ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
+  "tafsirCommentary": "ਤਫਸੀਰ",
+  "tafsirCommentarySubtitle": "ਤਫਸੀਰ ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ",
+  "wordByWordAnalysis": "ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਵਿਸ਼ਲੇਸ਼ਣ",
+  "wordByWordAnalysisSubtitle": "ਸ਼ਬਦਾਵਲੀ ਵੰਡ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ",
+  "audioRecitationSegments": "ਆਡੀਓ ਤਿਲਾਵਤ ਖੰਡ",
+  "audioRecitationSegmentsSubtitle": "ਆਇਤ ਸਮਾਂ ਖੰਡ ਕੌਂਫਿਗਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ",
+  "locationQiblaMetadata": "ਸਥਾਨ ਅਤੇ ਕ਼ਿਬਲਾ ਮੈਟਾਡੇਟਾ",
+  "locationQiblaMetadataSubtitle": "ਗਲੋਬਲ ਸ਼ਹਿਰ ਦੇ ਸਥਾਨ ਡਾਟਾ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
+  "preparingResources": "ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...",
+  "setupCompletedOpeningQuran": "ਸੈੱਟਅੱਪ ਪੂਰਾ ਹੋਇਆ! ਅਲ-ਕੁਰਾਨ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
+  "unexpectedErrorSetup": "ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।"
 }

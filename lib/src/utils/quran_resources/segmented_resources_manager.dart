@@ -1,11 +1,9 @@
 import "dart:convert";
 
-import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/api/apis_urls.dart";
 import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
 import "package:al_quran_v3/src/utils/encode_decode.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -91,22 +89,22 @@ class SegmentedResourcesManager {
   }
 
   static Future<bool> downloadResources(
-    BuildContext context,
-    String url,
-  ) async {
+    BuildContext? context,
+    String url, {
+    void Function(double? percentage, String processName)? onProgress,
+  }) async {
     if (await isAlreadyDownloaded(url)) {
       return true;
     } else {
-      AppLocalizations appLocalizations = AppLocalizations.of(context);
       url = ApisUrls.base + url;
       final response = await dio.Dio().get(url);
       final String boxName = praseStringToBoxName(url);
       if (response.statusCode == 200) {
         _segmentsBox = await Hive.openBox(boxName);
-        context.read<ResourcesProcceessCubit>().updateProgress(
-          null,
-          appLocalizations.processingSegmentedQuranRecitation,
-        );
+        const processMsg = "Processing Audio Segments";
+        if (onProgress != null) {
+          onProgress(null, processMsg);
+        }
         Map segmentsInfo = await compute(
           (message) => jsonDecode(decodeBZip2String(message)),
           response.data,
@@ -115,10 +113,14 @@ class SegmentedResourcesManager {
         for (final ayahKey in segmentsInfo.keys) {
           await _segmentsBox!.put(ayahKey, segmentsInfo[ayahKey]);
         }
-        await _segmentsBox?.put(
-          _metaKey,
-          context.read<SegmentedQuranReciterCubit>().state.toJson(),
-        );
+        if (context != null) {
+          try {
+            await _segmentsBox?.put(
+              _metaKey,
+              context.read<SegmentedQuranReciterCubit>().state.toJson(),
+            );
+          } catch (_) {}
+        }
         await changeSelectedBox(praseStringToBoxName(url));
         return true;
       } else {

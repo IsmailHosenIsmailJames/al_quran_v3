@@ -1271,4 +1271,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Heure de prière interdite';
+
+  @override
+  String get translationDatabase => 'Base de données de traduction';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Téléchargement du texte de traduction sélectionné';
+
+  @override
+  String get tafsirCommentary => 'Commentaire de Tafsir';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Préparation des ressources de tafsir';
+
+  @override
+  String get wordByWordAnalysis => 'Analyse mot à mot';
+
+  @override
+  String get wordByWordAnalysisSubtitle =>
+      'Configuration de la ventilation du vocabulaire';
+
+  @override
+  String get audioRecitationSegments => 'Segments de récitation audio';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Configuration des segments temporels des versets';
+
+  @override
+  String get locationQiblaMetadata => 'Métadonnées de localisation et Qibla';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Téléchargement des données de localisation des villes mondial';
+
+  @override
+  String get preparingResources => 'Préparation des ressources...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Configuration terminée ! Ouverture du Coran...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Une erreur inattendue est survenue lors de la configuration.';
 }

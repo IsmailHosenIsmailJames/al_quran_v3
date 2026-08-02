@@ -5,11 +5,9 @@ import "package:al_quran_v3/src/resources/quran_resources/models/resources_model
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
-import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
 class QuranTafsirFunction {
@@ -171,12 +169,18 @@ class QuranTafsirFunction {
   }
 
   static Future<bool> downloadResources({
-    required BuildContext context,
+    BuildContext? context,
+    void Function(double? percentage, String processName)? onProgress,
     required ResourcesModel tafsirBook,
     bool isSetupProcess = false,
   }) async {
-    final cubit = context.read<ResourcesProcceessCubit>();
-    cubit.updateProgress(null, "Downloading Tafsir: ${tafsirBook.name}");
+    void updateProgress(double? percentage, String name) {
+      if (onProgress != null) {
+        onProgress(percentage, name);
+      }
+    }
+
+    updateProgress(null, "Downloading Tafsir: ${tafsirBook.name}");
 
     if (await isAlreadyDownloaded(tafsirBook)) {
       log(
@@ -213,20 +217,20 @@ class QuranTafsirFunction {
           "Failed to open LazyBox '$tafsirBoxName' even after delete: $e2",
           name: "downloadResources",
         );
-        cubit.updateProgress(null, "Error preparing Tafsir storage");
+        updateProgress(null, "Error preparing Tafsir storage");
         return false;
       }
     }
 
     try {
       String base = ApisUrls.base;
-      cubit.updateProgress(0.0, "Downloading: ${tafsirBook.name}");
+      updateProgress(0.0, "Downloading: ${tafsirBook.name}");
       dio.Response response = await dio.Dio().get(
         base + tafsirBook.fullPath,
         onReceiveProgress: (received, total) {
           if (total != -1) {
             double progress = received / total;
-            cubit.updateProgress(
+            updateProgress(
               progress * 0.5,
               "Downloading: ${tafsirBook.name}",
             );
@@ -234,7 +238,7 @@ class QuranTafsirFunction {
         },
       );
 
-      cubit.updateProgress(0.5, "Processing: ${tafsirBook.name}");
+      updateProgress(0.5, "Processing: ${tafsirBook.name}");
       Map data = await compute(
         (message) => jsonDecode(decodeBZip2String(message)),
         response.data,
@@ -246,7 +250,7 @@ class QuranTafsirFunction {
         await tafsirBox.put(key, data[key]);
         processedEntries++;
         if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          cubit.updateProgress(
+          updateProgress(
             0.5 + (processedEntries / totalEntries * 0.5),
             "Processing Tafsir",
           );
@@ -265,14 +269,14 @@ class QuranTafsirFunction {
         name: "downloadResources",
       );
       await init();
-      cubit.updateProgress(1.0, "Downloaded: ${tafsirBook.name}");
+      updateProgress(1.0, "Downloaded: ${tafsirBook.name}");
       return true;
     } catch (e, s) {
       log(
         "Error downloading or processing Tafsir '${tafsirBook.name}': $e\n$s",
         name: "downloadResources",
       );
-      cubit.updateProgress(null, "Error downloading Tafsir");
+      updateProgress(null, "Error downloading Tafsir");
       if (tafsirBox.isOpen) {
         await tafsirBox.close();
       }

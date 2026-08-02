@@ -1256,4 +1256,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Forbidden Salat Time';
+
+  @override
+  String get translationDatabase => 'Translation Database';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Downloading selected translation text';
+
+  @override
+  String get tafsirCommentary => 'Tafsir Commentary';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Preparing scholarly tafsir resources';
+
+  @override
+  String get wordByWordAnalysis => 'Word-by-Word Analysis';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Setting up vocabulary breakdown';
+
+  @override
+  String get audioRecitationSegments => 'Audio Recitation Segments';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Configuring ayah timing segments';
+
+  @override
+  String get locationQiblaMetadata => 'Location & Qibla Metadata';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Downloading global city location data';
+
+  @override
+  String get preparingResources => 'Preparing resources...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Setup completed! Opening Al-Quran...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'An unexpected error occurred during setup.';
 }

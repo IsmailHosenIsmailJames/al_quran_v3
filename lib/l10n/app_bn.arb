@@ -636,5 +636,18 @@
   "sunSetting": "সূর্যাস্ত",
   "sunTopOfTheHead": "সূর্য মাথার উপরে",
   "salatTime": "নামাজের সময়",
-  "forbiddenSalatTime": "নামাজের নিষিদ্ধ সময়"
+  "forbiddenSalatTime": "নামাজের নিষিদ্ধ সময়",
+  "translationDatabase": "অনুবাদ ডাটাবেস",
+  "translationDatabaseSubtitle": "নির্বাচিত অনুবাদের টেক্সট ডাউনলোড হচ্ছে",
+  "tafsirCommentary": "তাফসীর কমেন্টারি",
+  "tafsirCommentarySubtitle": "তাফসীর সংক্রান্ত তথ্য প্রস্তুত করা হচ্ছে",
+  "wordByWordAnalysis": "শব্দে শব্দে বিশ্লেষণ",
+  "wordByWordAnalysisSubtitle": "শব্দভিত্তিক অর্থ প্রস্তুত করা হচ্ছে",
+  "audioRecitationSegments": "অডিও তেলাওয়াত সেগমেন্ট",
+  "audioRecitationSegmentsSubtitle": "আয়াতভিত্তিক অডিও টাইমিং সেটআপ করা হচ্ছে",
+  "locationQiblaMetadata": "লোকেশন ও কিবলা মেটাডাটা",
+  "locationQiblaMetadataSubtitle": "বিশ্বব্যাপী শহরের অবস্থান ডাটা ডাউনলোড করা হচ্ছে",
+  "preparingResources": "রিসোর্স প্রস্তুত করা হচ্ছে...",
+  "setupCompletedOpeningQuran": "সেটআপ সম্পন্ন হয়েছে! আল-কুরআন খোলা হচ্ছে...",
+  "unexpectedErrorSetup": "সেটআপের সময় একটিunexpected সমস্যা ঘটেছে।"
 }

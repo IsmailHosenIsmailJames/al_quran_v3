@@ -374,5 +374,18 @@
   "sunSetting": "Günəşin batması",
   "sunTopOfTheHead": "Günəşin Təpədə Olması",
   "salatTime": "Namaz Vaxtı",
-  "forbiddenSalatTime": "Məkruh Namaz Vaxtı"
+  "forbiddenSalatTime": "Məkruh Namaz Vaxtı",
+  "translationDatabase": "Tərcümə bazası",
+  "translationDatabaseSubtitle": "Seçilmiş tərcümə mətni endirilir",
+  "tafsirCommentary": "Təfsir",
+  "tafsirCommentarySubtitle": "Təfsir resursları hazırlanır",
+  "wordByWordAnalysis": "Söz-söz təhlil",
+  "wordByWordAnalysisSubtitle": "Lüğət tərkibi hazırlanır",
+  "audioRecitationSegments": "Audio qiraət seqmentləri",
+  "audioRecitationSegmentsSubtitle": "Ayə vaxt seqmentləri tənzimlənir",
+  "locationQiblaMetadata": "Məkan və Qiblə məlumatları",
+  "locationQiblaMetadataSubtitle": "Qlobal şəhər məkan məlumatları endirilir",
+  "preparingResources": "Resurslar hazırlanır...",
+  "setupCompletedOpeningQuran": "Quraşdırma tamamlandı! Quran açılır...",
+  "unexpectedErrorSetup": "Quraşdırma zamanı gözlənilməz xəta baş verdi."
 }

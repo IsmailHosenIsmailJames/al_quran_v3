@@ -532,6 +532,7 @@ class AudioPlayerManager {
               "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
             ),
           )
+        // ignore: experimental_member_use
         : LockCachingAudioSource(
             Uri.parse(
               "https://audio.qurancdn.com/wbw/${wordKeyToAudioOfWordID(wordKey)}.mp3",
@@ -597,6 +598,7 @@ class AudioPlayerManager {
                 ? AudioSource.uri(
                     Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
                   )
+                // ignore: experimental_member_use
                 : LockCachingAudioSource(
                     Uri.parse(getUrlOfAudioFromAyahKey(ayahKey, reciter)),
                     tag: MediaItem(

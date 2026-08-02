@@ -374,5 +374,18 @@
   "sunSetting": "日の入り",
   "sunTopOfTheHead": "太陽が真上",
   "salatTime": "礼拝の時間",
-  "forbiddenSalatTime": "礼拝禁止時間"
+  "forbiddenSalatTime": "礼拝禁止時間",
+  "translationDatabase": "翻訳データベース",
+  "translationDatabaseSubtitle": "選択した翻訳テキストをダウンロード中",
+  "tafsirCommentary": "タフスィール解説",
+  "tafsirCommentarySubtitle": "タフスィールリソースを準備中",
+  "wordByWordAnalysis": "単語ごとの分析",
+  "wordByWordAnalysisSubtitle": "単語分解を設定中",
+  "audioRecitationSegments": "音声朗誦セグメント",
+  "audioRecitationSegmentsSubtitle": "ヴァースのタイミングセグメントを設定中",
+  "locationQiblaMetadata": "位置とキブラのメタデータ",
+  "locationQiblaMetadataSubtitle": "世界の都市位置データをダウンロード中",
+  "preparingResources": "リソースを準備中...",
+  "setupCompletedOpeningQuran": "セットアップが完了しました！コーランを開いています...",
+  "unexpectedErrorSetup": "セットアップ中に予期しないエラーが発生しました。"
 }

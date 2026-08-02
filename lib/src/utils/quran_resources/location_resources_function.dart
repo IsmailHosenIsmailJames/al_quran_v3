@@ -12,7 +12,7 @@ class LocationResourcesFunction {
   static const String _fileName = 'worldcities.json.txt';
 
   static Future<bool> downloadLocationResources({
-    required BuildContext context,
+    BuildContext? context,
     bool isSetupProcess = false,
   }) async {
     try {

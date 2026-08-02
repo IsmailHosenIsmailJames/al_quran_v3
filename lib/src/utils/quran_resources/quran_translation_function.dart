@@ -13,7 +13,6 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../api/apis_urls.dart";
 import "../../resources/quran_resources/available_surah_info_lang.dart";
-import "../../screen/setup/cubit/resources_progress_cubit_cubit.dart";
 import "../encode_decode.dart";
 
 class QuranTranslationFunction {
@@ -223,12 +222,18 @@ class QuranTranslationFunction {
   }
 
   static Future<bool> downloadResources({
-    required BuildContext context,
+    BuildContext? context,
+    void Function(double? percentage, String processName)? onProgress,
     required ResourcesModel translationBook,
     bool isSetupProcess = false,
   }) async {
-    final cubit = context.read<ResourcesProcceessCubit>();
-    cubit.updateProgress(
+    void updateProgress(double? percentage, String name) {
+      if (onProgress != null) {
+        onProgress(percentage, name);
+      }
+    }
+
+    updateProgress(
       null,
       "Downloading Translation: ${translationBook.name}",
     );
@@ -281,7 +286,7 @@ class QuranTranslationFunction {
           "Failed to open Box '$translationBoxName' even after delete: $e2",
           name: "downloadResources",
         );
-        cubit.updateProgress(null, "Error preparing translation storage");
+        updateProgress(null, "Error preparing translation storage");
         return false;
       }
     }
@@ -289,13 +294,13 @@ class QuranTranslationFunction {
     try {
       String base = ApisUrls.base;
       // Using fullPath from the model for the download URL
-      cubit.updateProgress(0.0, "Downloading: ${translationBook.name}");
+      updateProgress(0.0, "Downloading: ${translationBook.name}");
       dio.Response response = await dio.Dio().get(
         base + translationBook.fullPath,
         onReceiveProgress: (received, total) {
           if (total != -1) {
             double progress = received / total;
-            cubit.updateProgress(
+            updateProgress(
               progress * 0.5,
               "Downloading: ${translationBook.name}", // Using model's display name
             );
@@ -303,7 +308,7 @@ class QuranTranslationFunction {
         },
       );
 
-      cubit.updateProgress(0.5, "Processing: ${translationBook.name}");
+      updateProgress(0.5, "Processing: ${translationBook.name}");
       Map data = await compute(
         (message) => jsonDecode(decodeBZip2String(message as String)),
         response.data,
@@ -316,7 +321,7 @@ class QuranTranslationFunction {
         await newTranslationBox.put(key, data[key]);
         processedEntries++;
         if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          cubit.updateProgress(
+          updateProgress(
             0.5 + (processedEntries / totalEntries * 0.5),
             "Processing Translation",
           );
@@ -332,11 +337,15 @@ class QuranTranslationFunction {
       if (availableSurahInfoInLang.contains(
         languageToCodeMap[translationBook.language.toLowerCase()],
       )) {
-        cubit.updateProgress(
+        updateProgress(
           null,
           "Downloading Surah's Info (${translationBook.language})",
         );
-        await downloadSurahInfo(context.read<LanguageCubit>().state.locale);
+        if (context != null) {
+          try {
+            await downloadSurahInfo(context.read<LanguageCubit>().state.locale);
+          } catch (_) {}
+        }
       } else {
         log(
           "Skipping downloading Surah's Info (${translationBook.language})",
@@ -345,14 +354,14 @@ class QuranTranslationFunction {
       }
 
       await init();
-      cubit.updateProgress(1.0, "Downloaded: ${translationBook.name}");
+      updateProgress(1.0, "Downloaded: ${translationBook.name}");
       return true;
     } catch (e, s) {
       log(
         "Error downloading or processing Translation '${translationBook.name}' (path: ${translationBook.fullPath}): $e\n$s",
         name: "downloadResources",
       );
-      cubit.updateProgress(null, "Error downloading Translation");
+      updateProgress(null, "Error downloading Translation");
       if (newTranslationBox.isOpen) {
         await newTranslationBox.close();
       }

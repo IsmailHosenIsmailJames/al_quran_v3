@@ -1255,4 +1255,47 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'ਵਰਜਿਤ ਪ੍ਰਾਰਥਨਾ ਦਾ ਸਮਾਂ';
+
+  @override
+  String get translationDatabase => 'ਅਨੁਵਾਦ ਡਾਟਾਬੇਸ';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'ਚੁਣਿਆ ਗਿਆ ਅਨੁਵਾਦ ਟੈਕਸਟ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ';
+
+  @override
+  String get tafsirCommentary => 'ਤਫਸੀਰ';
+
+  @override
+  String get tafsirCommentarySubtitle => 'ਤਫਸੀਰ ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ';
+
+  @override
+  String get wordByWordAnalysis => 'ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਵਿਸ਼ਲੇਸ਼ਣ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'ਸ਼ਬਦਾਵਲੀ ਵੰਡ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ';
+
+  @override
+  String get audioRecitationSegments => 'ਆਡੀਓ ਤਿਲਾਵਤ ਖੰਡ';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'ਆਇਤ ਸਮਾਂ ਖੰਡ ਕੌਂਫਿਗਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ';
+
+  @override
+  String get locationQiblaMetadata => 'ਸਥਾਨ ਅਤੇ ਕ਼ਿਬਲਾ ਮੈਟਾਡੇਟਾ';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'ਗਲੋਬਲ ਸ਼ਹਿਰ ਦੇ ਸਥਾਨ ਡਾਟਾ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ';
+
+  @override
+  String get preparingResources => 'ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'ਸੈੱਟਅੱਪ ਪੂਰਾ ਹੋਇਆ! ਅਲ-ਕੁਰਾਨ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get unexpectedErrorSetup => 'ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।';
 }

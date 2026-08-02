@@ -636,5 +636,18 @@
   "sunSetting": "Güneşin Batışı",
   "sunTopOfTheHead": "Güneşin Tepede Olması",
   "salatTime": "Namaz Vakti",
-  "forbiddenSalatTime": "Kerahat Vakti"
+  "forbiddenSalatTime": "Kerahat Vakti",
+  "translationDatabase": "Meal Veritabanı",
+  "translationDatabaseSubtitle": "Seçilen meal metni indiriliyor",
+  "tafsirCommentary": "Tefsir Açıklaması",
+  "tafsirCommentarySubtitle": "Tefsir kaynakları hazırlanıyor",
+  "wordByWordAnalysis": "Kelime Kelime Tahlil",
+  "wordByWordAnalysisSubtitle": "Kelime kelime anlam hazırlanıyor",
+  "audioRecitationSegments": "Sesli Tilavet Segmentleri",
+  "audioRecitationSegmentsSubtitle": "Ayet zamanlama segmentleri ayarlanıyor",
+  "locationQiblaMetadata": "Konum ve Kıble Verileri",
+  "locationQiblaMetadataSubtitle": "Küresel şehir konum verileri indiriliyor",
+  "preparingResources": "Kaynaklar hazırlanıyor...",
+  "setupCompletedOpeningQuran": "Kurulum tamamlandı! Kur'an-ı Kerim açılıyor...",
+  "unexpectedErrorSetup": "Kurulum sırasında beklenmeyen bir hata oluştu."
 }
