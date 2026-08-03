@@ -11,21 +11,21 @@ import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.d
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/resources/translation/languages.dart";
 import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/prayer_background_worker.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/background/prayer_background_worker.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
+import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
@@ -48,7 +48,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
 
-import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
@@ -121,7 +121,7 @@ Future<void> main() async {
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
     await ReminderScheduler.init();
-    await PrayerBackgroundWorker.init();
+    PrayerBackgroundWorker.registerWorker();
   }
 
   runApp(
@@ -329,7 +329,7 @@ class MyApp extends StatelessWidget {
                 themeMode: themeState.themeMode,
                 home: isSetupComplete()
                     ? const HomePage()
-                    : const AppSetupPage(),
+                    : const SetupScreen(),
               );
             },
           );

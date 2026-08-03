@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart"
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/widget/quran_page_shimmer.dart";
 import "package:al_quran_v3/src/screen/mushaf/KFGQPC_V4_layout/KFGQPC_V4_layout_screen.dart";
-import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
+import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
 import "package:al_quran_v3/src/screen/settings/settings_page.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/hizb_list_view.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/juz_list_view.dart";
@@ -168,7 +168,7 @@ class _QuranPageState extends State<QuranPage>
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const QuranResourcesView(),
+                                          const QuranResourcesScreen(),
                                     ),
                                   );
                                 },

@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
+import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
 import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
@@ -7,7 +7,6 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 Future<void> resetTheApp(BuildContext context) async {
-
   final prefs = await SharedPreferences.getInstance();
   await prefs.clear();
 
@@ -19,7 +18,7 @@ Future<void> resetTheApp(BuildContext context) async {
 
   Navigator.pushAndRemoveUntil(
     context,
-    MaterialPageRoute(builder: (context) => const AppSetupPage()),
+    MaterialPageRoute(builder: (context) => const SetupScreen()),
     (route) {
       return false;
     },

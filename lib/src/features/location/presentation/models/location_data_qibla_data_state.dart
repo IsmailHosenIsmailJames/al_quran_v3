@@ -1,5 +1,5 @@
 import "package:adhan_dart/adhan_dart.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
 
 class LocationQiblaPrayerDataState {
   LatLon? latLon;

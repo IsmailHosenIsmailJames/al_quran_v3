@@ -1,6 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
 import "package:al_quran_v3/src/screen/about/about_the_app.dart";
-import "package:al_quran_v3/src/screen/quran_resources/quran_resources_view.dart";
 import "package:al_quran_v3/src/screen/settings/app_language_settings.dart";
 import "package:al_quran_v3/src/screen/tajweed_guide/tajweed_guide_screen.dart";
 import "package:al_quran_v3/src/utils/reset_app.dart";
@@ -277,7 +277,7 @@ Widget drawerSection({
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const QuranResourcesView(),
+                  builder: (context) => const QuranResourcesScreen(),
                 ),
               );
             },

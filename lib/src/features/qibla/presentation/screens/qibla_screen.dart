@@ -2,12 +2,12 @@ import "dart:math" as math;
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/location/presentation/screens/location_acquire_screen.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_cubit.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_state.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/widgets/compass_painter.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";

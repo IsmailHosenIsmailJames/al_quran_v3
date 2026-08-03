@@ -2,10 +2,11 @@ import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
+import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
 import "package:al_quran_v3/src/screen/audio/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
-import "package:al_quran_v3/src/screen/qibla/qibla_direction.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/others_settings_state.dart";
@@ -19,11 +20,10 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:gap/gap.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "../../../main.dart";
-import "../prayer_time/prayer_time_page.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         body = const [
           QuranPage(),
           PrayerTimePage(),
-          QiblaDirection(),
+          QiblaScreen(),
           AudioPage(),
         ];
       case platform_services.PlatformOwn.isWindows:

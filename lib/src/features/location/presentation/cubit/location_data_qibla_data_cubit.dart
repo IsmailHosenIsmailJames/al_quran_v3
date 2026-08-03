@@ -1,13 +1,19 @@
 import "package:adhan_dart/adhan_dart.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/qibla/data/repositories/qibla_repository_impl.dart";
+import "package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart";
+import "package:al_quran_v3/src/features/qibla/data/datasources/vibration_datasource.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:geolocator/geolocator.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
-import "../../qibla/qibla_direction.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
+double _calcQibla(double lat, double lon) {
+  final repo = QiblaRepositoryImpl(CompassDatasourceImpl(), VibrationDatasourceImpl());
+  return repo.calculateQiblaAngle(lat, lon);
+}
 
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit({
@@ -46,7 +52,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
     LocationQiblaPrayerDataState newState = state.copyWith();
     newState.latLon = latLon;
-    newState.kaabaAngle = calculateQiblaAngle(
+    newState.kaabaAngle = _calcQibla(
       latLon.latitude,
       latLon.longitude,
     );
@@ -102,7 +108,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     } else {
       var latLong = LatLon.fromJson(jsonLocation);
       data.latLon = latLong;
-      data.kaabaAngle = calculateQiblaAngle(
+      data.kaabaAngle = _calcQibla(
         data.latLon!.latitude,
         data.latLon!.longitude,
       );

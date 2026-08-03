@@ -1,19 +1,20 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/location_aquire.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_settings.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_times_calender_view.dart";
-import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
-import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/location/presentation/screens/location_acquire_screen.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_settings_screen.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/utils/hijri_date.dart";
 import "package:al_quran_v3/src/utils/location_geocoding.dart";
+import "package:al_quran_v3/src/widget/canvas/draw_clock_icon_from_time.dart";
+import "package:al_quran_v3/src/widget/canvas/prayer_time_canvas.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -24,7 +25,6 @@ import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shimmer/shimmer.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:url_launcher/url_launcher.dart";
 
 class TimeListOfPrayers extends StatefulWidget {
