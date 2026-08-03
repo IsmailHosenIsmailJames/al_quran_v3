@@ -27,17 +27,17 @@ import "package:al_quran_v3/l10n/app_localizations_tr.dart";
 import "package:al_quran_v3/l10n/app_localizations_ur.dart";
 import "package:al_quran_v3/l10n/app_localizations_vi.dart";
 import "package:al_quran_v3/l10n/app_localizations_zh.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
-import "package:awesome_notifications/awesome_notifications.dart";
 
 class ReminderScheduler {
   static late SharedPreferences _sharedPreferences;

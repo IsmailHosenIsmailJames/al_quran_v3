@@ -2,10 +2,10 @@ import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/manual_location_selection_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
 import "package:al_quran_v3/src/platform_services.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/manual_selection/cubit/manual_location_selection_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/model/lat_lon.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -122,13 +122,13 @@ class _LocationAcquireState extends State<LocationAcquire> {
               Navigator.pop(context);
             }
           } else {
-             setState(() {
+            setState(() {
               isGPSLocationLoading = false;
             });
           }
         } catch (e) {
           setState(() {
-             isGPSLocationLoading = false;
+            isGPSLocationLoading = false;
           });
           log(e.toString());
         }
@@ -489,4 +489,3 @@ class _SelectionListState extends State<_SelectionList> {
     );
   }
 }
-

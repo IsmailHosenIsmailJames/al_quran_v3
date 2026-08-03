@@ -1,18 +1,17 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_state.dart";
-import "package:al_quran_v3/src/screen/prayer_time/prayer_time_functions/prayer_time_helper.dart";
-import "package:al_quran_v3/src/utils/format_time_of_day.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/utils/number_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-
-import "../../../main.dart";
-import "../../theme/controller/theme_cubit.dart";
 
 class PrayerSettings extends StatefulWidget {
   final PrayerTimes prayerTimes;
@@ -160,7 +159,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   }) {
     final bool isDark = Theme.brightnessOf(context) == Brightness.dark;
     final Color cardColor = isDark
-        ? themeState.primary.withOpacity(0.1)
+        ? themeState.primary.withValues(alpha: 0.1)
         : Colors.white;
     final Color textColor = isDark ? Colors.white : Colors.black;
 
@@ -186,12 +185,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               decoration: BoxDecoration(
                 color: cardColor,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: themeState.primary.withOpacity(0.2)),
+                border: Border.all(color: themeState.primary.withValues(alpha: 0.2)),
                 boxShadow: isDark
                     ? null
                     : [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -209,7 +208,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: themeState.primary.withOpacity(0.15),
+                                color: themeState.primary.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
@@ -238,7 +237,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                                   formatTimeOfDay(context, actualPrayerTime),
                                   style: TextStyle(
                                     fontSize: 13,
-                                    color: textColor.withOpacity(0.7),
+                                    color: textColor.withValues(alpha: 0.7),
                                   ),
                                 ),
                               ],
@@ -252,7 +251,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: themeState.primary.withOpacity(0.1),
+                            color: themeState.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
@@ -297,9 +296,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     SliderTheme(
                       data: SliderThemeData(
                         activeTrackColor: themeState.primary,
-                        inactiveTrackColor: themeState.primary.withOpacity(0.2),
+                        inactiveTrackColor: themeState.primary.withValues(alpha: 0.2),
                         thumbColor: isDark ? themeState.primary : Colors.white,
-                        overlayColor: themeState.primary.withOpacity(0.1),
+                        overlayColor: themeState.primary.withValues(alpha: 0.1),
                         trackHeight: 6.0,
                         thumbShape: const RoundSliderThumbShape(
                           elevation: 4,
