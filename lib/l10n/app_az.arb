@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "Qlobal şəhər məkan məlumatları endirilir",
   "preparingResources": "Resurslar hazırlanır...",
   "setupCompletedOpeningQuran": "Quraşdırma tamamlandı! Quran açılır...",
-  "unexpectedErrorSetup": "Quraşdırma zamanı gözlənilməz xəta baş verdi."
+  "unexpectedErrorSetup": "Quraşdırma zamanı gözlənilməz xəta baş verdi.",
+  "heading": "İstiqamət",
+  "alignedWithKaaba": "Kəbə ilə eyni istiqamətdə",
+  "turnRight": "{degrees}° Sağa dönün",
+  "turnLeft": "{degrees}° Sola dönün"
 }

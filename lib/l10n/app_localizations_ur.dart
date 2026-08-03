@@ -1301,4 +1301,20 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔';
+
+  @override
+  String get heading => 'رخ';
+
+  @override
+  String get alignedWithKaaba => 'کعبہ کے ساتھ درست سمت';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° دائیں طرف مڑیں';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° بائیں طرف مڑیں';
+  }
 }

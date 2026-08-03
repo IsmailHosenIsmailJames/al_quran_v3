@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Mengunduh data lokasi kota global",
   "preparingResources": "Menyiapkan sumber daya...",
   "setupCompletedOpeningQuran": "Penyiapan selesai! Membuka Al-Qur'an...",
-  "unexpectedErrorSetup": "Terjadi kesalahan tidak terduga saat penyiapan."
+  "unexpectedErrorSetup": "Terjadi kesalahan tidak terduga saat penyiapan.",
+  "heading": "Arah",
+  "alignedWithKaaba": "Sejajar dengan Ka'bah",
+  "turnRight": "Putar {degrees}° ke Kanan",
+  "turnLeft": "Putar {degrees}° ke Kiri"
 }

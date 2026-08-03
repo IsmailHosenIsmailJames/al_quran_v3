@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "世界の都市位置データをダウンロード中",
   "preparingResources": "リソースを準備中...",
   "setupCompletedOpeningQuran": "セットアップが完了しました！コーランを開いています...",
-  "unexpectedErrorSetup": "セットアップ中に予期しないエラーが発生しました。"
+  "unexpectedErrorSetup": "セットアップ中に予期しないエラーが発生しました。",
+  "heading": "方位",
+  "alignedWithKaaba": "カアバ神殿に合致",
+  "turnRight": "右に {degrees}° 回ってください",
+  "turnLeft": "左に {degrees}° 回ってください"
 }

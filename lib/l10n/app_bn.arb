@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "বিশ্বব্যাপী শহরের অবস্থান ডাটা ডাউনলোড করা হচ্ছে",
   "preparingResources": "রিসোর্স প্রস্তুত করা হচ্ছে...",
   "setupCompletedOpeningQuran": "সেটআপ সম্পন্ন হয়েছে! আল-কুরআন খোলা হচ্ছে...",
-  "unexpectedErrorSetup": "সেটআপের সময় একটিunexpected সমস্যা ঘটেছে।"
+  "unexpectedErrorSetup": "সেটআপের সময় একটিunexpected সমস্যা ঘটেছে।",
+  "heading": "হেডিং",
+  "alignedWithKaaba": "কাবার সাথে সারিবদ্ধ",
+  "turnRight": "{degrees}° ডানদিকে ঘুরুন",
+  "turnLeft": "{degrees}° বামদিকে ঘুরুন"
 }

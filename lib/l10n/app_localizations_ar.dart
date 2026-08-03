@@ -1295,4 +1295,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'حدث خطأ غير متوقع أثناء الإعداد.';
+
+  @override
+  String get heading => 'الاتجاه';
+
+  @override
+  String get alignedWithKaaba => 'محاذٍ للكعبة';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'أدر $degrees° إلى اليمين';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'أدر $degrees° إلى اليسار';
+  }
 }

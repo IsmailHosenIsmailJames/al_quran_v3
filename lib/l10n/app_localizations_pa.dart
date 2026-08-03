@@ -1298,4 +1298,20 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।';
+
+  @override
+  String get heading => 'ਦਿਸ਼ਾ';
+
+  @override
+  String get alignedWithKaaba => 'ਕਾਬਾ ਨਾਲ ਮਿਲਿਆ ਹੋਇਆ';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° ਸੱਜੇ ਮੁੜੋ';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° ਖੱਬੇ ਮੁੜੋ';
+  }
 }

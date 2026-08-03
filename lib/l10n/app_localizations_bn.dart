@@ -1303,4 +1303,20 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'সেটআপের সময় একটিunexpected সমস্যা ঘটেছে।';
+
+  @override
+  String get heading => 'হেডিং';
+
+  @override
+  String get alignedWithKaaba => 'কাবার সাথে সারিবদ্ধ';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° ডানদিকে ঘুরুন';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° বামদিকে ঘুরুন';
+  }
 }

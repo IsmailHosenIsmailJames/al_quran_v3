@@ -1302,4 +1302,20 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।';
+
+  @override
+  String get heading => 'दिशा';
+
+  @override
+  String get alignedWithKaaba => 'काबा के साथ संरेखित';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° दाहिने मुड़ें';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° बाएँ मुड़ें';
+  }
 }

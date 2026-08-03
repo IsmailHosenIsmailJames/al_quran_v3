@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Küresel şehir konum verileri indiriliyor",
   "preparingResources": "Kaynaklar hazırlanıyor...",
   "setupCompletedOpeningQuran": "Kurulum tamamlandı! Kur'an-ı Kerim açılıyor...",
-  "unexpectedErrorSetup": "Kurulum sırasında beklenmeyen bir hata oluştu."
+  "unexpectedErrorSetup": "Kurulum sırasında beklenmeyen bir hata oluştu.",
+  "heading": "Pusula Yönü",
+  "alignedWithKaaba": "Kabe ile Hizalandı",
+  "turnRight": "{degrees}° Sağa Dönün",
+  "turnLeft": "{degrees}° Sola Dönün"
 }

@@ -1299,4 +1299,20 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Terjadi kesalahan tidak terduga saat penyiapan.';
+
+  @override
+  String get heading => 'Arah';
+
+  @override
+  String get alignedWithKaaba => 'Sejajar dengan Ka\'bah';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Putar $degrees° ke Kanan';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Putar $degrees° ke Kiri';
+  }
 }

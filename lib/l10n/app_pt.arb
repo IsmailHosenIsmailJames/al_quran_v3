@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "Baixando dados de localização de cidades globais",
   "preparingResources": "Preparando recursos...",
   "setupCompletedOpeningQuran": "Configuração concluída! Abrindo o Al-Corão...",
-  "unexpectedErrorSetup": "Ocorreu um erro inesperado durante a configuração."
+  "unexpectedErrorSetup": "Ocorreu um erro inesperado durante a configuração.",
+  "heading": "Rumo",
+  "alignedWithKaaba": "Alinhado com a Caaba",
+  "turnRight": "Vire {degrees}° à direita",
+  "turnLeft": "Vire {degrees}° à esquerda"
 }

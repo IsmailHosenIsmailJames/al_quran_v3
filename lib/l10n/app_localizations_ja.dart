@@ -1279,4 +1279,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'セットアップ中に予期しないエラーが発生しました。';
+
+  @override
+  String get heading => '方位';
+
+  @override
+  String get alignedWithKaaba => 'カアバ神殿に合致';
+
+  @override
+  String turnRight(Object degrees) {
+    return '右に $degrees° 回ってください';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '左に $degrees° 回ってください';
+  }
 }

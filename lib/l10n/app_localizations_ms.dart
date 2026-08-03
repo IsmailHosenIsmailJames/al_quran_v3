@@ -1299,4 +1299,20 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Ralat tidak dijangka berlaku semasa persediaan.';
+
+  @override
+  String get heading => 'Haluan';
+
+  @override
+  String get alignedWithKaaba => 'Sejajar dengan Kaabah';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Pusing $degrees° ke Kanan';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Pusing $degrees° ke Kiri';
+  }
 }

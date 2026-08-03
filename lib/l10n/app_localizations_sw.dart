@@ -1309,4 +1309,20 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Hitilafu isiyotazamiwa imetokea wakati wa uwekaji.';
+
+  @override
+  String get heading => 'Mwelekeo';
+
+  @override
+  String get alignedWithKaaba => 'Imelingana na Kaaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Geuka $degrees° Kulia';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Geuka $degrees° Shoto';
+  }
 }

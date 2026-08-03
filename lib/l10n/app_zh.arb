@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "正在下载全球城市位置数据",
   "preparingResources": "正在准备资源...",
   "setupCompletedOpeningQuran": "设置完成！正在打开古兰经...",
-  "unexpectedErrorSetup": "设置过程中发生意外错误。"
+  "unexpectedErrorSetup": "设置过程中发生意外错误。",
+  "heading": "朝向",
+  "alignedWithKaaba": "已对准克尔白",
+  "turnRight": "向右旋转 {degrees}°",
+  "turnLeft": "向左旋转 {degrees}°"
 }

@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "ਗਲੋਬਲ ਸ਼ਹਿਰ ਦੇ ਸਥਾਨ ਡਾਟਾ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
   "preparingResources": "ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...",
   "setupCompletedOpeningQuran": "ਸੈੱਟਅੱਪ ਪੂਰਾ ਹੋਇਆ! ਅਲ-ਕੁਰਾਨ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ...",
-  "unexpectedErrorSetup": "ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।"
+  "unexpectedErrorSetup": "ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।",
+  "heading": "ਦਿਸ਼ਾ",
+  "alignedWithKaaba": "ਕਾਬਾ ਨਾਲ ਮਿਲਿਆ ਹੋਇਆ",
+  "turnRight": "{degrees}° ਸੱਜੇ ਮੁੜੋ",
+  "turnLeft": "{degrees}° ਖੱਬੇ ਮੁੜੋ"
 }

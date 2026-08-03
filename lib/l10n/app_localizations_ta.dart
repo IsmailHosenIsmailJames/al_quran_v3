@@ -1318,4 +1318,20 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது.';
+
+  @override
+  String get heading => 'திசை';
+
+  @override
+  String get alignedWithKaaba => 'காபாவுடன் சீரமைக்கப்பட்டுள்ளது';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° வலதுபுறம் திரும்பவும்';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° இடதுபுறம் திரும்பவும்';
+  }
 }

@@ -1299,4 +1299,20 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'د ترتیب په جریان کې ناڅاپي تېروتنه رامنځته شوه.';
+
+  @override
+  String get heading => 'لارښود';
+
+  @override
+  String get alignedWithKaaba => 'له کعبې سره برابر شوی';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° ښي لور ته وګرځئ';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° چپې لور ته وګرځئ';
+  }
 }

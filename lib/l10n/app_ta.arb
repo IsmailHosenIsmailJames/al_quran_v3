@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "உலகளாவிய நகர இருப்பிடத் தரவு பதிவிறக்கப்படுகிறது",
   "preparingResources": "வளங்கள் ತಯಾರிக்கப்படுகின்றன...",
   "setupCompletedOpeningQuran": "அமைவு முடிந்தது! அல்-குர்ஆன் திறக்கப்படுகிறது...",
-  "unexpectedErrorSetup": "அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது."
+  "unexpectedErrorSetup": "அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது.",
+  "heading": "திசை",
+  "alignedWithKaaba": "காபாவுடன் சீரமைக்கப்பட்டுள்ளது",
+  "turnRight": "{degrees}° வலதுபுறம் திரும்பவும்",
+  "turnLeft": "{degrees}° இடதுபுறம் திரும்பவும்"
 }

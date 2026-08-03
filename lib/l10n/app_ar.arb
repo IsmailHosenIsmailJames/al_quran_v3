@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "تنزيل بيانات مواقع المدن العالمية",
   "preparingResources": "جاري إعداد المصادر...",
   "setupCompletedOpeningQuran": "اكتمل الإعداد! جاري فتح القرآن...",
-  "unexpectedErrorSetup": "حدث خطأ غير متوقع أثناء الإعداد."
+  "unexpectedErrorSetup": "حدث خطأ غير متوقع أثناء الإعداد.",
+  "heading": "الاتجاه",
+  "alignedWithKaaba": "محاذٍ للكعبة",
+  "turnRight": "أدر {degrees}° إلى اليمين",
+  "turnLeft": "أدر {degrees}° إلى اليسار"
 }
