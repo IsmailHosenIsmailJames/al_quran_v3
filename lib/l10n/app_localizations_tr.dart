@@ -1301,4 +1301,20 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Kurulum sırasında beklenmeyen bir hata oluştu.';
+
+  @override
+  String get heading => 'Pusula Yönü';
+
+  @override
+  String get alignedWithKaaba => 'Kabe ile Hizalandı';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° Sağa Dönün';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° Sola Dönün';
+  }
 }

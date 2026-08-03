@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Downloading global city location data",
   "preparingResources": "Preparing resources...",
   "setupCompletedOpeningQuran": "Setup completed! Opening Al-Quran...",
-  "unexpectedErrorSetup": "An unexpected error occurred during setup."
+  "unexpectedErrorSetup": "An unexpected error occurred during setup.",
+  "heading": "Heading",
+  "alignedWithKaaba": "Aligned with Kaaba",
+  "turnRight": "Turn {degrees}° Right",
+  "turnLeft": "Turn {degrees}° Left"
 }

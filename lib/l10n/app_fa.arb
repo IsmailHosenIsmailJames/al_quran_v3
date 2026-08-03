@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "دانلود داده‌های مکان شهرهای جهان",
   "preparingResources": "در حال آماده‌سازی منابع...",
   "setupCompletedOpeningQuran": "تنظیمات کامل شد! در حال باز کردن قرآن...",
-  "unexpectedErrorSetup": "یک خطای غیرمنتظره در طول تنظیم رخ داد."
+  "unexpectedErrorSetup": "یک خطای غیرمنتظره در طول تنظیم رخ داد.",
+  "heading": "جهت",
+  "alignedWithKaaba": "هم‌راستا با کعبه",
+  "turnRight": "{degrees}° به راست بچرخید",
+  "turnLeft": "{degrees}° به چپ بچرخید"
 }

@@ -1259,4 +1259,20 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => '设置过程中发生意外错误。';
+
+  @override
+  String get heading => '朝向';
+
+  @override
+  String get alignedWithKaaba => '已对准克尔白';
+
+  @override
+  String turnRight(Object degrees) {
+    return '向右旋转 $degrees°';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '向左旋转 $degrees°';
+  }
 }

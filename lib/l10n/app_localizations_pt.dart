@@ -1315,4 +1315,20 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Ocorreu um erro inesperado durante a configuração.';
+
+  @override
+  String get heading => 'Rumo';
+
+  @override
+  String get alignedWithKaaba => 'Alinhado com a Caaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Vire $degrees° à direita';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Vire $degrees° à esquerda';
+  }
 }

@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Әлемдік қалалардың орналасу деректері жүктелуде",
   "preparingResources": "Ресурстар дайындалуда...",
   "setupCompletedOpeningQuran": "Баптау аяқталды! Құран ашылуда...",
-  "unexpectedErrorSetup": "Баптау кезінде күтпеген қате орын алды."
+  "unexpectedErrorSetup": "Баптау кезінде күтпеген қате орын алды.",
+  "heading": "Бағыт",
+  "alignedWithKaaba": "Қағбамен бағытталған",
+  "turnRight": "{degrees}° оңға бұрылыңыз",
+  "turnLeft": "{degrees}° солға бұрылыңыз"
 }

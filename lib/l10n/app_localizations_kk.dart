@@ -1298,4 +1298,20 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'Баптау кезінде күтпеген қате орын алды.';
+
+  @override
+  String get heading => 'Бағыт';
+
+  @override
+  String get alignedWithKaaba => 'Қағбамен бағытталған';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° оңға бұрылыңыз';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° солға бұрылыңыз';
+  }
 }

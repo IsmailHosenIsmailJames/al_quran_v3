@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Загрузка данных о геолокации городов",
   "preparingResources": "Подготовка ресурсов...",
   "setupCompletedOpeningQuran": "Настройка завершена! Открытие Корана...",
-  "unexpectedErrorSetup": "Произошла непредвиденная ошибка при настройке."
+  "unexpectedErrorSetup": "Произошла непредвиденная ошибка при настройке.",
+  "heading": "Направление",
+  "alignedWithKaaba": "Направлено на Каабу",
+  "turnRight": "Поверните на {degrees}° вправо",
+  "turnLeft": "Поверните на {degrees}° влево"
 }

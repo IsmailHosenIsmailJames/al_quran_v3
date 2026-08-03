@@ -1310,4 +1310,20 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Произошла непредвиденная ошибка при настройке.';
+
+  @override
+  String get heading => 'Направление';
+
+  @override
+  String get alignedWithKaaba => 'Направлено на Каабу';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Поверните на $degrees° вправо';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Поверните на $degrees° влево';
+  }
 }

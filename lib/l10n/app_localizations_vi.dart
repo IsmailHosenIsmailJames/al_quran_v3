@@ -1305,4 +1305,20 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Đã xảy ra lỗi không mong muốn trong quá trình thiết lập.';
+
+  @override
+  String get heading => 'Hướng';
+
+  @override
+  String get alignedWithKaaba => 'Đã hướng đúng Kaaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Xoay $degrees° sang Phải';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Xoay $degrees° sang Trái';
+  }
 }

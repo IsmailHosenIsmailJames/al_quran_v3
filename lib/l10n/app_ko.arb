@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "글로벌 도시 위치 데이터 다운로드 중",
   "preparingResources": "리소스 준비 중...",
   "setupCompletedOpeningQuran": "설정이 완료되었습니다! 알코란을 여는 중...",
-  "unexpectedErrorSetup": "설정 중 예기치 않은 오류가 발생했습니다."
+  "unexpectedErrorSetup": "설정 중 예기치 않은 오류가 발생했습니다.",
+  "heading": "방위",
+  "alignedWithKaaba": "카바와 정렬됨",
+  "turnRight": "오른쪽으로 {degrees}° 회전",
+  "turnLeft": "왼쪽으로 {degrees}° 회전"
 }

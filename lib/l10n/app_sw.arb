@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Inapakua data ya eneo la miji duniani",
   "preparingResources": "Kuandaa rasilimali...",
   "setupCompletedOpeningQuran": "Uwekaji umekamilika! Kufungua Al-Qur'ani...",
-  "unexpectedErrorSetup": "Hitilafu isiyotazamiwa imetokea wakati wa uwekaji."
+  "unexpectedErrorSetup": "Hitilafu isiyotazamiwa imetokea wakati wa uwekaji.",
+  "heading": "Mwelekeo",
+  "alignedWithKaaba": "Imelingana na Kaaba",
+  "turnRight": "Geuka {degrees}° Kulia",
+  "turnLeft": "Geuka {degrees}° Shoto"
 }

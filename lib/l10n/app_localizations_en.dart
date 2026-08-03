@@ -1300,4 +1300,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'An unexpected error occurred during setup.';
+
+  @override
+  String get heading => 'Heading';
+
+  @override
+  String get alignedWithKaaba => 'Aligned with Kaaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Turn $degrees° Right';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Turn $degrees° Left';
+  }
 }

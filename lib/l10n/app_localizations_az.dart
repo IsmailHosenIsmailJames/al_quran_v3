@@ -1306,4 +1306,20 @@ class AppLocalizationsAz extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Quraşdırma zamanı gözlənilməz xəta baş verdi.';
+
+  @override
+  String get heading => 'İstiqamət';
+
+  @override
+  String get alignedWithKaaba => 'Kəbə ilə eyni istiqamətdə';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° Sağa dönün';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° Sola dönün';
+  }
 }

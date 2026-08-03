@@ -387,5 +387,9 @@
   "locationQiblaMetadataSubtitle": "Đang tải dữ liệu vị trí thành phố toàn cầu",
   "preparingResources": "Đang chuẩn bị tài nguyên...",
   "setupCompletedOpeningQuran": "Cấu hình hoàn tất! Đang mở Al-Quran...",
-  "unexpectedErrorSetup": "Đã xảy ra lỗi không mong muốn trong quá trình thiết lập."
+  "unexpectedErrorSetup": "Đã xảy ra lỗi không mong muốn trong quá trình thiết lập.",
+  "heading": "Hướng",
+  "alignedWithKaaba": "Đã hướng đúng Kaaba",
+  "turnRight": "Xoay {degrees}° sang Phải",
+  "turnLeft": "Xoay {degrees}° sang Trái"
 }

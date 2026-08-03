@@ -2479,6 +2479,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred during setup.'**
   String get unexpectedErrorSetup;
+
+  /// No description provided for @heading.
+  ///
+  /// In en, this message translates to:
+  /// **'Heading'**
+  String get heading;
+
+  /// No description provided for @alignedWithKaaba.
+  ///
+  /// In en, this message translates to:
+  /// **'Aligned with Kaaba'**
+  String get alignedWithKaaba;
+
+  /// No description provided for @turnRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {degrees}° Right'**
+  String turnRight(Object degrees);
+
+  /// No description provided for @turnLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {degrees}° Left'**
+  String turnLeft(Object degrees);
 }
 
 class _AppLocalizationsDelegate

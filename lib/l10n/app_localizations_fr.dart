@@ -1316,4 +1316,20 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get unexpectedErrorSetup =>
       'Une erreur inattendue est survenue lors de la configuration.';
+
+  @override
+  String get heading => 'Cap';
+
+  @override
+  String get alignedWithKaaba => 'Aligné avec la Kaaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Tournez de $degrees° à droite';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Tournez de $degrees° à gauche';
+  }
 }

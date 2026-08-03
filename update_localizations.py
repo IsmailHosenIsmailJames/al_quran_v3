@@ -2,44 +2,113 @@ import json
 import os
 
 translations = {
-    "translationDatabase": {
-        "en": "Translation Database", "ar": "قاعدة بيانات الترجمة", "az": "Tərcümə bazası", "bn": "অনুবাদ ডাটাবেস", "de": "Übersetzungsdatenbank", "es": "Base de datos de traducción", "fa": "پایگاه داده ترجمه", "fr": "Base de données de traduction", "hi": "अनुवाद डेटाबेस", "id": "Basis Data Terjemahan", "it": "Database traduzioni", "ja": "翻訳データベース", "kk": "Аударма дерекқоры", "ko": "번역 데이터베이스", "ms": "Pangkalan Data Terjemahan", "pa": "ਅਨੁਵਾਦ ਡਾਟਾਬੇਸ", "ps": "د ژباړې ډیټابیس", "pt": "Banco de dados de tradução", "ru": "База данных переводов", "sw": "Kanzidata ya Tafsiri", "ta": "மொழிபெயர்ப்பு தரவுத்தளம்", "tr": "Meal Veritabanı", "ur": "ترجمہ ڈیٹابیس", "vi": "Cơ sở dữ liệu dịch", "zh": "翻译数据库"
+    "heading": {
+        "en": "Heading",
+        "ar": "الاتجاه",
+        "az": "İstiqamət",
+        "bn": "হেডিং",
+        "de": "Ausrichtung",
+        "es": "Rumbo",
+        "fa": "جهت",
+        "fr": "Cap",
+        "hi": "दिशा",
+        "id": "Arah",
+        "it": "Rilevamento",
+        "ja": "方位",
+        "kk": "Бағыт",
+        "ko": "방위",
+        "ms": "Haluan",
+        "pa": "ਦਿਸ਼ਾ",
+        "ps": "لارښود",
+        "pt": "Rumo",
+        "ru": "Направление",
+        "sw": "Mwelekeo",
+        "ta": "திசை",
+        "tr": "Pusula Yönü",
+        "ur": "رخ",
+        "vi": "Hướng",
+        "zh": "朝向"
     },
-    "translationDatabaseSubtitle": {
-        "en": "Downloading selected translation text", "ar": "تنزيل نص الترجمة المحدد", "az": "Seçilmiş tərcümə mətni endirilir", "bn": "নির্বাচিত অনুবাদের টেক্সট ডাউনলোড হচ্ছে", "de": "Ausgewählter Übersetzungstext wird heruntergeladen", "es": "Descargando el texto de traducción seleccionado", "fa": "دانلود متن ترجمه انتخاب شده", "fr": "Téléchargement du texte de traduction sélectionné", "hi": "चयनित अनुवाद पाठ डाउनलोड हो रहा है", "id": "Mengunduh teks terjemahan yang dipilih", "it": "Download testo della traduzione selezionata", "ja": "選択した翻訳テキストをダウンロード中", "kk": "Тандалған аударма мәтіні жүктелуде", "ko": "선택한 번역 텍스트 다운로드 중", "ms": "Memuat turun teks terjemahan yang dipilih", "pa": "ਚੁਣਿਆ ਗਿਆ ਅਨੁਵਾਦ ਟੈਕਸਟ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ", "ps": "د ټاکل شوې ژباړې متن ډاونلوډ کیږي", "pt": "Baixando texto de tradução selecionado", "ru": "Загрузка текста выбранного перевода", "sw": "Inapakua maandishi ya tafsiri yaliyochaguliwa", "ta": "தேர்ந்தெடுக்கப்பட்ட மொழிபெயர்ப்பு உரை பதிவிறக்கப்படுகிறது", "tr": "Seçilen meal metni indiriliyor", "ur": "منتخب کردہ ترجمہ کی ڈاؤن لوڈنگ", "vi": "Đang tải văn bản dịch đã chọn", "zh": "正在下载所选的翻译文本"
+    "alignedWithKaaba": {
+        "en": "Aligned with Kaaba",
+        "ar": "محاذٍ للكعبة",
+        "az": "Kəbə ilə eyni istiqamətdə",
+        "bn": "কাবার সাথে সারিবদ্ধ",
+        "de": "Ausgerichtet auf die Kaaba",
+        "es": "Alineado con la Kaaba",
+        "fa": "هم‌راستا با کعبه",
+        "fr": "Aligné avec la Kaaba",
+        "hi": "काबा के साथ संरेखित",
+        "id": "Sejajar dengan Ka'bah",
+        "it": "Allineato con la Kaaba",
+        "ja": "カアバ神殿に合致",
+        "kk": "Қағбамен бағытталған",
+        "ko": "카바와 정렬됨",
+        "ms": "Sejajar dengan Kaabah",
+        "pa": "ਕਾਬਾ ਨਾਲ ਮਿਲਿਆ ਹੋਇਆ",
+        "ps": "له کعبې سره برابر شوی",
+        "pt": "Alinhado com a Caaba",
+        "ru": "Направлено на Каабу",
+        "sw": "Imelingana na Kaaba",
+        "ta": "காபாவுடன் சீரமைக்கப்பட்டுள்ளது",
+        "tr": "Kabe ile Hizalandı",
+        "ur": "کعبہ کے ساتھ درست سمت",
+        "vi": "Đã hướng đúng Kaaba",
+        "zh": "已对准克尔白"
     },
-    "tafsirCommentary": {
-        "en": "Tafsir Commentary", "ar": "تفسير القرآن", "az": "Təfsir", "bn": "তাফসীর কমেন্টারি", "de": "Tafsir-Kommentar", "es": "Comentario de Tafsir", "fa": "تفسیر قرآن", "fr": "Commentaire de Tafsir", "hi": "तफ़सीर कमेंट्री", "id": "Tafsir Al-Qur'an", "it": "Commento Tafsir", "ja": "タフスィール解説", "kk": "Тәпсір", "ko": "타프시르 해설", "ms": "Tafsir Al-Quran", "pa": "ਤਫਸੀਰ", "ps": "د قرآن تفسير", "pt": "Comentário Tafsir", "ru": "Толкование (Тафсир)", "sw": "Tafsiri ya Qur'ani", "ta": "தஃப்சீர் உரை", "tr": "Tefsir Açıklaması", "ur": "تفسیر قرآن", "vi": "Chú giải Tafsir", "zh": "塔夫西尔解经"
+    "turnRight": {
+        "en": "Turn {degrees}° Right",
+        "ar": "أدر {degrees}° إلى اليمين",
+        "az": "{degrees}° Sağa dönün",
+        "bn": "{degrees}° ডানদিকে ঘুরুন",
+        "de": "Drehe {degrees}° nach rechts",
+        "es": "Gira {degrees}° a la derecha",
+        "fa": "{degrees}° به راست بچرخید",
+        "fr": "Tournez de {degrees}° à droite",
+        "hi": "{degrees}° दाहिने मुड़ें",
+        "id": "Putar {degrees}° ke Kanan",
+        "it": "Gira di {degrees}° a destra",
+        "ja": "右に {degrees}° 回ってください",
+        "kk": "{degrees}° оңға бұрылыңыз",
+        "ko": "오른쪽으로 {degrees}° 회전",
+        "ms": "Pusing {degrees}° ke Kanan",
+        "pa": "{degrees}° ਸੱਜੇ ਮੁੜੋ",
+        "ps": "{degrees}° ښي لور ته وګرځئ",
+        "pt": "Vire {degrees}° à direita",
+        "ru": "Поверните на {degrees}° вправо",
+        "sw": "Geuka {degrees}° Kulia",
+        "ta": "{degrees}° வலதுபுறம் திரும்பவும்",
+        "tr": "{degrees}° Sağa Dönün",
+        "ur": "{degrees}° دائیں طرف مڑیں",
+        "vi": "Xoay {degrees}° sang Phải",
+        "zh": "向右旋转 {degrees}°"
     },
-    "tafsirCommentarySubtitle": {
-        "en": "Preparing scholarly tafsir resources", "ar": "إعداد مصادر التفسير", "az": "Təfsir resursları hazırlanır", "bn": "তাফসীর সংক্রান্ত তথ্য প্রস্তুত করা হচ্ছে", "de": "Tafsir-Ressourcen werden vorbereitet", "es": "Preparando recursos de tafsir", "fa": "آماده‌سازی منابع تفسیر", "fr": "Préparation des ressources de tafsir", "hi": "तफ़सीर संसाधन तैयार किए जा रहे हैं", "id": "Menyiapkan sumber tafsir", "it": "Preparazione risorse tafsir", "ja": "タフスィールリソースを準備中", "kk": "Тәпсір ресурстары дайындалуда", "ko": "타프시르 리소스 준비 중", "ms": "Menyediakan sumber tafsir", "pa": "ਤਫਸੀਰ ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ", "ps": "د تفسیر سرچینې چمتو کیږي", "pt": "Preparando recursos de tafsir", "ru": "Подготовка ресурсов тафсира", "sw": "Kuandaa rasilimali za tafsiri", "ta": "தஃப்சீர் வளங்கள் തയ്യാറാக்கப்படுகின்றன", "tr": "Tefsir kaynakları hazırlanıyor", "ur": "تفسیر کے مواد کی تیاری", "vi": "Đang chuẩn bị tài nguyên tafsir", "zh": "正在准备塔夫西尔资源"
-    },
-    "wordByWordAnalysis": {
-        "en": "Word-by-Word Analysis", "ar": "التحليل كلمة بكلمة", "az": "Söz-söz təhlil", "bn": "শব্দে শব্দে বিশ্লেষণ", "de": "Wort-für-Wort-Analyse", "es": "Análisis palabra por palabra", "fa": "تحلیل کلمه به کلمه", "fr": "Analyse mot à mot", "hi": "शब्द-दर-शब्द विश्लेषण", "id": "Analisis Kata demi Kata", "it": "Analisi parola per parola", "ja": "単語ごとの分析", "kk": "Сөз-сөз талдау", "ko": "단어별 분석", "ms": "Analisis Kata demi Kata", "pa": "ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਵਿਸ਼ਲੇਸ਼ਣ", "ps": "کلمه په کلمه تحلیل", "pt": "Análise palavra por palavra", "ru": "Пословный анализ", "sw": "Uchambuzi Neno kwa Neno", "ta": "சொல்-சொல் பகுப்பாய்வு", "tr": "Kelime Kelime Tahlil", "ur": "لفظ بہ لفظ تجزیہ", "vi": "Phân tích từng từ", "zh": "逐字分析"
-    },
-    "wordByWordAnalysisSubtitle": {
-        "en": "Setting up vocabulary breakdown", "ar": "إعداد تفكيك المفردات", "az": "Lüğət tərkibi hazırlanır", "bn": "শব্দভিত্তিক অর্থ প্রস্তুত করা হচ্ছে", "de": "Wortschatzanalyse wird eingerichtet", "es": "Configurando el desglose del vocabulario", "fa": "تنظیم تفکیک واژگان", "fr": "Configuration de la ventilation du vocabulaire", "hi": "शब्दावली विभाजन स्थापित किया जा रहा है", "id": "Menyiapkan rincian kosakata", "it": "Impostazione scomposizione vocabolario", "ja": "単語分解を設定中", "kk": "Сөздік талдауы бапталуда", "ko": "어휘 분석 설정 중", "ms": "Menyediakan pecahan kosa kata", "pa": "ਸ਼ਬਦਾਵਲੀ ਵੰਡ ਤਿਆਰ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ", "ps": "د لغتونو جلا کول تنظیمول", "pt": "Configurando divisão de vocabulário", "ru": "Настройка пословного разбора", "sw": "Weka mchanganuo wa msamiati", "ta": "சொல் விளக்கம் அமைக்கப்படுகிறது", "tr": "Kelime kelime anlam hazırlanıyor", "ur": "الفاظ کے معنی کی تیاری", "vi": "Thiết lập phân tích từ vựng", "zh": "正在设置词汇拆解"
-    },
-    "audioRecitationSegments": {
-        "en": "Audio Recitation Segments", "ar": "أجزاء التلاوة الصوتية", "az": "Audio qiraət seqmentləri", "bn": "অডিও তেলাওয়াত সেগমেন্ট", "de": "Audio-Rezitationssegmente", "es": "Segmentos de recitación de audio", "fa": "بخش‌های تلاوت صوتی", "fr": "Segments de récitation audio", "hi": "ऑडियो पाठ खंड", "id": "Segmen Tilawah Audio", "it": "Segmenti di recitazione audio", "ja": "音声朗誦セグメント", "kk": "Аудио оқу сегменттері", "ko": "오디오 낭송 세그먼트", "ms": "Segmen Bacaan Audio", "pa": "ਆਡੀਓ ਤਿਲਾਵਤ ਖੰਡ", "ps": "د غږیز تلاوت برخې", "pt": "Segmentos de recitação de áudio", "ru": "Аудиосегменты чтецов", "sw": "Vipengele vya Kisomo cha Sauti", "ta": "ஒலி ஓதல் பிரிவுகள்", "tr": "Sesli Tilavet Segmentleri", "ur": "آڈیو تلاوت کے ٹائم فریم", "vi": "Các phân đoạn đọc âm thanh", "zh": "音频诵读片段"
-    },
-    "audioRecitationSegmentsSubtitle": {
-        "en": "Configuring ayah timing segments", "ar": "تكوين التوقيت الصوتي للآيات", "az": "Ayə vaxt seqmentləri tənzimlənir", "bn": "আয়াতভিত্তিক অডিও টাইমিং সেটআপ করা হচ্ছে", "de": "Vers-Timing-Segmente werden konfiguriert", "es": "Configurando los segmentos de tiempo de las aleyas", "fa": "پیکربندی زمان‌بندی آيات", "fr": "Configuration des segments temporels des versets", "hi": "आयत समय खंड कॉन्फ़िगर किए जा रहे हैं", "id": "Mengatur segmen waktu ayat", "it": "Configurazione segmenti temporali versi", "ja": "ヴァースのタイミングセグメントを設定中", "kk": "Аят уақыт сегменттері бапталуда", "ko": "구절 타이밍 세그먼트 구성 중", "ms": "Konfigurasi segmen masa ayat", "pa": "ਆਇਤ ਸਮਾਂ ਖੰਡ ਕੌਂਫਿਗਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ", "ps": "د ایتونو د وخت برخې تنظیمول", "pt": "Configurando segmentos de tempo de versos", "ru": "Настройка временных сегментов аятов", "sw": "Weka vipengele vya muda wa aya", "ta": "வசன நேர பிரிவுகள் அமைவு", "tr": "Ayet zamanlama segmentleri ayarlanıyor", "ur": "آیات کی ٹائمنگ کی ترتیب", "vi": "Cấu hình phân đoạn thời gian câu", "zh": "正在配置经文时间片段"
-    },
-    "locationQiblaMetadata": {
-        "en": "Location & Qibla Metadata", "ar": "بيانات الموقع والقبلة", "az": "Məkan və Qiblə məlumatları", "bn": "লোকেশন ও কিবলা মেটাডাটা", "de": "Standort- & Qibla-Metadaten", "es": "Metadatos de ubicación y Quibla", "fa": "متاداده مکان و قبله", "fr": "Métadonnées de localisation et Qibla", "hi": "स्थान और क़िबला मेटाडेटा", "id": "Metadata Lokasi & Kiblat", "it": "Metadati posizione e Qibla", "ja": "位置とキブラのメタデータ", "kk": "Орналасу және Құбыла метадеректері", "ko": "위치 및 키블라 메타데이터", "ms": "Metadata Lokasi & Kiblat", "pa": "ਸਥਾਨ ਅਤੇ ਕ਼ਿਬਲਾ ਮੈਟਾਡੇਟਾ", "ps": "د موقعیت او قبلې میټاډاټا", "pt": "Metadados de localização e Qibla", "ru": "Данные локации и Киблы", "sw": "Data ya Eneo na Qibla", "ta": "இருப்பிடம் & கிப்லா மெட்டாடேட்டா", "tr": "Konum ve Kıble Verileri", "ur": "مقام اور قبلہ کا ڈیٹا", "vi": "Dữ liệu vị trí & Qibla", "zh": "位置与朝向元数据"
-    },
-    "locationQiblaMetadataSubtitle": {
-        "en": "Downloading global city location data", "ar": "تنزيل بيانات مواقع المدن العالمية", "az": "Qlobal şəhər məkan məlumatları endirilir", "bn": "বিশ্বব্যাপী শহরের অবস্থান ডাটা ডাউনলোড করা হচ্ছে", "de": "Globale Standortdaten werden heruntergeladen", "es": "Descargando datos de ubicación de ciudades globales", "fa": "دانلود داده‌های مکان شهرهای جهان", "fr": "Téléchargement des données de localisation des villes mondial", "hi": "वैश्विक शहर स्थान डेटा डाउनलोड हो रहा है", "id": "Mengunduh data lokasi kota global", "it": "Download dati posizione città globali", "ja": "世界の都市位置データをダウンロード中", "kk": "Әлемдік қалалардың орналасу деректері жүктелуде", "ko": "글로벌 도시 위치 데이터 다운로드 중", "ms": "Memuat turun data lokasi bandar global", "pa": "ਗਲੋਬਲ ਸ਼ਹਿਰ ਦੇ ਸਥਾਨ ਡਾਟਾ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ", "ps": "د نړۍ د ښارونو د موقعیت ډیټا ډاونلوډ کیږي", "pt": "Baixando dados de localização de cidades globais", "ru": "Загрузка данных о геолокации городов", "sw": "Inapakua data ya eneo la miji duniani", "ta": "உலகளாவிய நகர இருப்பிடத் தரவு பதிவிறக்கப்படுகிறது", "tr": "Küresel şehir konum verileri indiriliyor", "ur": "عالمی شہروں کے مقام کا ڈیٹا ڈاؤن لوڈ ہو رہا ہے", "vi": "Đang tải dữ liệu vị trí thành phố toàn cầu", "zh": "正在下载全球城市位置数据"
-    },
-    "preparingResources": {
-        "en": "Preparing resources...", "ar": "جاري إعداد المصادر...", "az": "Resurslar hazırlanır...", "bn": "রিসোর্স প্রস্তুত করা হচ্ছে...", "de": "Ressourcen werden vorbereitet...", "es": "Preparando recursos...", "fa": "در حال آماده‌سازی منابع...", "fr": "Préparation des ressources...", "hi": "संसाधन तैयार किए जा रहे हैं...", "id": "Menyiapkan sumber daya...", "it": "Preparazione risorse...", "ja": "リソースを準備中...", "kk": "Ресурстар дайындалуда...", "ko": "리소스 준비 중...", "ms": "Menyediakan sumber...", "pa": "ਸਰੋਤ ਤਿਆਰ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...", "ps": "سرچینې چمتو کیږي...", "pt": "Preparando recursos...", "ru": "Подготовка ресурсов...", "sw": "Kuandaa rasilimali...", "ta": "வளங்கள் ತಯಾರிக்கப்படுகின்றன...", "tr": "Kaynaklar hazırlanıyor...", "ur": "وسائل تیار کیے جا رہے ہیں...", "vi": "Đang chuẩn bị tài nguyên...", "zh": "正在准备资源..."
-    },
-    "setupCompletedOpeningQuran": {
-        "en": "Setup completed! Opening Al-Quran...", "ar": "اكتمل الإعداد! جاري فتح القرآن...", "az": "Quraşdırma tamamlandı! Quran açılır...", "bn": "সেটআপ সম্পন্ন হয়েছে! আল-কুরআন খোলা হচ্ছে...", "de": "Einrichtung abgeschlossen! Al-Quran wird geöffnet...", "es": "¡Configuración completada! Abriendo Al-Corán...", "fa": "تنظیمات کامل شد! در حال باز کردن قرآن...", "fr": "Configuration terminée ! Ouverture du Coran...", "hi": "सेटअप पूरा हुआ! अल-कुरआन खोला जा रहा है...", "id": "Penyiapan selesai! Membuka Al-Qur'an...", "it": "Configurazione completata! Apertura del Corano...", "ja": "セットアップが完了しました！コーランを開いています...", "kk": "Баптау аяқталды! Құран ашылуда...", "ko": "설정이 완료되었습니다! 알코란을 여는 중...", "ms": "Persediaan selesai! Membuka Al-Quran...", "pa": "ਸੈੱਟਅੱਪ ਪੂਰਾ ਹੋਇਆ! ਅਲ-ਕੁਰਾਨ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ...", "ps": "ترتیب بشپړ شو! القرآن خلاصیږي...", "pt": "Configuração concluída! Abrindo o Al-Corão...", "ru": "Настройка завершена! Открытие Корана...", "sw": "Uwekaji umekamilika! Kufungua Al-Qur'ani...", "ta": "அமைவு முடிந்தது! அல்-குர்ஆன் திறக்கப்படுகிறது...", "tr": "Kurulum tamamlandı! Kur'an-ı Kerim açılıyor...", "ur": "ترتیب مکمل ہو گئی! القرآن کھولا جا رہا ہے...", "vi": "Cấu hình hoàn tất! Đang mở Al-Quran...", "zh": "设置完成！正在打开古兰经..."
-    },
-    "unexpectedErrorSetup": {
-        "en": "An unexpected error occurred during setup.", "ar": "حدث خطأ غير متوقع أثناء الإعداد.", "az": "Quraşdırma zamanı gözlənilməz xəta baş verdi.", "bn": "সেটআপের সময় একটি অপ্রত্যাশিত সমস্যা ঘটেছে।", "de": "Unerwarteter Fehler bei der Einrichtung.", "es": "Ocurrió un error inesperado durante la configuración.", "fa": "یک خطای غیرمنتظره در طول تنظیم رخ داد.", "fr": "Une erreur inattendue est survenue lors de la configuration.", "hi": "सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।", "id": "Terjadi kesalahan tidak terduga saat penyiapan.", "it": "Si è verificato un errore imprevisto durante la configurazione.", "ja": "セットアップ中に予期しないエラーが発生しました。", "kk": "Баптау кезінде күтпеген қате орын алды.", "ko": "설정 중 예기치 않은 오류가 발생했습니다.", "ms": "Ralat tidak dijangka berlaku semasa persediaan.", "pa": "ਸੈੱਟਅੱਪ ਦੌਰਾਨ ਇੱਕ ਅਣਪਛਾਤੀ ਗਲਤੀ ਆਈ।", "ps": "د ترتیب په جریان کې ناڅاپي تېروتنه رامنځته شوه.", "pt": "Ocorreu um erro inesperado durante a configuração.", "ru": "Произошла непредвиденная ошибка при настройке.", "sw": "Hitilafu isiyotazamiwa imetokea wakati wa uwekaji.", "ta": "அமைவின் போது எதிர்பாராத பிழை ஏற்பட்டது.", "tr": "Kurulum sırasında beklenmeyen bir hata oluştu.", "ur": "ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔", "vi": "Đã xảy ra lỗi không mong muốn trong quá trình thiết lập.", "zh": "设置过程中发生意外错误。"
+    "turnLeft": {
+        "en": "Turn {degrees}° Left",
+        "ar": "أدر {degrees}° إلى اليسار",
+        "az": "{degrees}° Sola dönün",
+        "bn": "{degrees}° বামদিকে ঘুরুন",
+        "de": "Drehe {degrees}° nach links",
+        "es": "Gira {degrees}° a la izquierda",
+        "fa": "{degrees}° به چپ بچرخید",
+        "fr": "Tournez de {degrees}° à gauche",
+        "hi": "{degrees}° बाएँ मुड़ें",
+        "id": "Putar {degrees}° ke Kiri",
+        "it": "Gira di {degrees}° a sinistra",
+        "ja": "左に {degrees}° 回ってください",
+        "kk": "{degrees}° солға бұрылыңыз",
+        "ko": "왼쪽으로 {degrees}° 회전",
+        "ms": "Pusing {degrees}° ke Kiri",
+        "pa": "{degrees}° ਖੱਬੇ ਮੁੜੋ",
+        "ps": "{degrees}° چپې لور ته وګرځئ",
+        "pt": "Vire {degrees}° à esquerda",
+        "ru": "Поверните на {degrees}° влево",
+        "sw": "Geuka {degrees}° Shoto",
+        "ta": "{degrees}° இடதுபுறம் திரும்பவும்",
+        "tr": "{degrees}° Sola Dönün",
+        "ur": "{degrees}° بائیں طرف مڑیں",
+        "vi": "Xoay {degrees}° sang Trái",
+        "zh": "向左旋转 {degrees}°"
     }
 }
 

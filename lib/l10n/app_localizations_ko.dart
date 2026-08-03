@@ -1278,4 +1278,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => '설정 중 예기치 않은 오류가 발생했습니다.';
+
+  @override
+  String get heading => '방위';
+
+  @override
+  String get alignedWithKaaba => '카바와 정렬됨';
+
+  @override
+  String turnRight(Object degrees) {
+    return '오른쪽으로 $degrees° 회전';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '왼쪽으로 $degrees° 회전';
+  }
 }

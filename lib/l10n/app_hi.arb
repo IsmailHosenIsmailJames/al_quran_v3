@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "वैश्विक शहर स्थान डेटा डाउनलोड हो रहा है",
   "preparingResources": "संसाधन तैयार किए जा रहे हैं...",
   "setupCompletedOpeningQuran": "सेटअप पूरा हुआ! अल-कुरआन खोला जा रहा है...",
-  "unexpectedErrorSetup": "सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।"
+  "unexpectedErrorSetup": "सेटअप के दौरान एक अप्रत्याशित त्रुटि हुई।",
+  "heading": "दिशा",
+  "alignedWithKaaba": "काबा के साथ संरेखित",
+  "turnRight": "{degrees}° दाहिने मुड़ें",
+  "turnLeft": "{degrees}° बाएँ मुड़ें"
 }

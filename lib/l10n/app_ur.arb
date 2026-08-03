@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "عالمی شہروں کے مقام کا ڈیٹا ڈاؤن لوڈ ہو رہا ہے",
   "preparingResources": "وسائل تیار کیے جا رہے ہیں...",
   "setupCompletedOpeningQuran": "ترتیب مکمل ہو گئی! القرآن کھولا جا رہا ہے...",
-  "unexpectedErrorSetup": "ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔"
+  "unexpectedErrorSetup": "ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔",
+  "heading": "رخ",
+  "alignedWithKaaba": "کعبہ کے ساتھ درست سمت",
+  "turnRight": "{degrees}° دائیں طرف مڑیں",
+  "turnLeft": "{degrees}° بائیں طرف مڑیں"
 }

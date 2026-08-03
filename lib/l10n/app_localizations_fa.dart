@@ -1298,4 +1298,20 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get unexpectedErrorSetup => 'یک خطای غیرمنتظره در طول تنظیم رخ داد.';
+
+  @override
+  String get heading => 'جهت';
+
+  @override
+  String get alignedWithKaaba => 'هم‌راستا با کعبه';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° به راست بچرخید';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° به چپ بچرخید';
+  }
 }

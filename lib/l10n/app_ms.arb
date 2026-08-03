@@ -649,5 +649,9 @@
   "locationQiblaMetadataSubtitle": "Memuat turun data lokasi bandar global",
   "preparingResources": "Menyediakan sumber...",
   "setupCompletedOpeningQuran": "Persediaan selesai! Membuka Al-Quran...",
-  "unexpectedErrorSetup": "Ralat tidak dijangka berlaku semasa persediaan."
+  "unexpectedErrorSetup": "Ralat tidak dijangka berlaku semasa persediaan.",
+  "heading": "Haluan",
+  "alignedWithKaaba": "Sejajar dengan Kaabah",
+  "turnRight": "Pusing {degrees}° ke Kanan",
+  "turnLeft": "Pusing {degrees}° ke Kiri"
 }
