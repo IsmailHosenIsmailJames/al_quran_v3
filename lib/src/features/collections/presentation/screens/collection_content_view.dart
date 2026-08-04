@@ -1,11 +1,13 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/presentation/widgets/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/screen/collections/list_of_ayahs_views.dart";
-import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
-import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
-import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
+import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
@@ -14,9 +16,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-
-import "../../resources/quran_resources/meta/meta_data_surah.dart";
-import "common_function.dart";
 
 class CollectionContentView extends StatefulWidget {
   final NoteCollectionModel? noteCollectionModel;
@@ -34,7 +33,6 @@ class CollectionContentView extends StatefulWidget {
 class _CollectionContentViewState extends State<CollectionContentView> {
   @override
   void initState() {
-    // Assertions are great for development
     assert(
       !(widget.noteCollectionModel == null &&
           widget.pinnedCollectionModel == null),
@@ -181,11 +179,10 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     alpha: 0.5,
                   ),
                   borderRadius: BorderRadius.circular(roundedRadius - 4),
-                  // border: Border.all(color: colorScheme.outline) // Optional: add border
                 ),
                 child: Wrap(
-                  spacing: 8.0, // Gap between adjacent chips.
-                  runSpacing: 4.0, // Gap between lines.
+                  spacing: 8.0,
+                  runSpacing: 4.0,
                   children: noteModel.ayahKey.map((key) {
                     try {
                       SurahInfoModel surahInfo = SurahInfoModel.fromMap(
@@ -206,7 +203,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                       );
                     } catch (e) {
                       log("Error parsing surah info for key $key: $e");
-                      return Chip(label: Text(key)); // Fallback
+                      return Chip(label: Text(key));
                     }
                   }).toList(),
                 ),
@@ -235,7 +232,6 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             ),
             const Gap(10),
             Expanded(
-              // Added Expanded to prevent overflow if name is long
               child: Text(
                 widget.noteCollectionModel?.name ??
                     widget.pinnedCollectionModel!.name,
@@ -248,7 +244,6 @@ class _CollectionContentViewState extends State<CollectionContentView> {
       ),
       body: Builder(
         builder: (context) {
-          // Use Builder to ensure context is correct for Theme
           if (widget.noteCollectionModel != null) {
             if (widget.noteCollectionModel!.notes.isEmpty) {
               return _buildEmptyState(l10n.emptyNoteCollection);
@@ -277,7 +272,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ),
                   onDismissed: (direction) async {
                     widget.noteCollectionModel!.notes.removeAt(index);
-                    await saveNoteCollectionModelAsMap(
+                    await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
                       widget.noteCollectionModel!,
                     );
                     setState(() {});
@@ -293,7 +288,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                               index - 1,
                               item,
                             );
-                            await saveNoteCollectionModelAsMap(
+                            await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
                               widget.noteCollectionModel!,
                             );
                             setState(() {});
@@ -308,7 +303,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                               index + 1,
                               item,
                             );
-                            await saveNoteCollectionModelAsMap(
+                            await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
                               widget.noteCollectionModel!,
                             );
                             setState(() {});
@@ -317,7 +312,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                         : null,
                     () async {
                       widget.noteCollectionModel!.notes.removeAt(index);
-                      await saveNoteCollectionModelAsMap(
+                      await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
                         widget.noteCollectionModel!,
                       );
                       setState(() {});
@@ -326,8 +321,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ),
                 );
               },
-              separatorBuilder: (context, index) =>
-                  const Gap(0), // Cards have own margin
+              separatorBuilder: (context, index) => const Gap(0),
             );
           } else if (widget.pinnedCollectionModel != null) {
             if (widget.pinnedCollectionModel!.pinned.isEmpty) {
@@ -393,7 +387,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ),
                   onDismissed: (direction) async {
                     widget.pinnedCollectionModel!.pinned.removeAt(index);
-                    await savePinnedCollectionModelAsMap(
+                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
                       widget.pinnedCollectionModel!,
                     );
                     setState(() {});
@@ -418,7 +412,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                       index - 1,
                                       item,
                                     );
-                                    await savePinnedCollectionModelAsMap(
+                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
                                       widget.pinnedCollectionModel!,
                                     );
                                     setState(() {});
@@ -441,7 +435,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                       index + 1,
                                       item,
                                     );
-                                    await savePinnedCollectionModelAsMap(
+                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
                                       widget.pinnedCollectionModel!,
                                     );
                                     setState(() {});
@@ -464,7 +458,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                   widget.pinnedCollectionModel!.pinned.removeAt(
                                     index,
                                   );
-                                  await savePinnedCollectionModelAsMap(
+                                  await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
                                     widget.pinnedCollectionModel!,
                                   );
                                   setState(() {});
@@ -489,9 +483,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
               },
             );
           }
-          return _buildEmptyState(
-            l10n.noContentAvailable,
-          ); // Fallback, should not happen due to asserts
+          return _buildEmptyState(l10n.noContentAvailable);
         },
       ),
     );

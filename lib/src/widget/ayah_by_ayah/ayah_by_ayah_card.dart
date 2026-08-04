@@ -28,7 +28,8 @@ import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.da
 import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
 import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/add_collection_popup/add_to_pinned_popup.dart";
+import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_to_pinned_popup.dart";
+import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_note_popup.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/share_bottom_dialog.dart";
 import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
@@ -44,7 +45,6 @@ import "package:visibility_detector/visibility_detector.dart";
 
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
-import "../add_collection_popup/add_note_popup.dart";
 
 Widget getAyahByAyahCard({
   dynamic key,

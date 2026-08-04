@@ -1,7 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/screen/collections/collection_page.dart";
-import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
-import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
+import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -10,10 +12,6 @@ import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:uuid/uuid.dart";
-
-import "../../screen/collections/common_function.dart";
-import "../../theme/controller/theme_cubit.dart";
-import "../../theme/controller/theme_state.dart";
 
 var uuid = const Uuid();
 
@@ -27,7 +25,6 @@ Future<void> showAddNotePopup(BuildContext context, String ayahKey) async {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(roundedRadius),
         ),
-        // Pass ayahKey to the AddNoteWidget
         child: AddNoteWidget(ayahKey: ayahKey),
       );
     },
@@ -56,7 +53,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   @override
   void initState() {
     super.initState();
-    fetchNoteCollections().then((value) {
+    CollectionsLocalDataSource.fetchNoteCollections().then((value) {
       setState(() {
         _availableNoteCollections = value;
       });
@@ -79,7 +76,6 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
     final newNote = NoteModel(
       id: newNoteId,
       ayahKey: [widget.ayahKey],
-      // Use the ayahKey from the widget
       text: _noteEditingController.text.trim(),
       createdAt: now,
       updatedAt: now,
@@ -95,7 +91,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
       notesBox.put(collectionID, collection.toJson());
     }
 
-    Navigator.pop(context); // Close the dialog
+    Navigator.pop(context);
     Fluttertoast.showToast(
       msg: AppLocalizations.of(context).noteSavedSuccessfully,
     );
@@ -147,11 +143,10 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
             ],
           ),
           const Divider(),
-          // Animated visibility for collection selection step
           if (_selectNoteCollectionStep)
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: _addNewNoteCollectionStep ? 270 : 220, // Adjusted height
+              height: _addNewNoteCollectionStep ? 270 : 220,
               child: Column(
                 children: [
                   if (_addNewNoteCollectionStep)
@@ -193,7 +188,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                 ),
                                 onPressed: () async {
                                   NoteCollectionModel? newCollection =
-                                      await handleAddNewNoteCollection(
+                                      await CollectionsLocalDataSource.handleAddNewNoteCollection(
                                         _newCollectionNameController.text
                                             .trim(),
                                         l10n,
@@ -315,7 +310,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
             height: 45,
             child: Row(
               children: [
-                if (_selectNoteCollectionStep) // Add a back button for the collection step
+                if (_selectNoteCollectionStep)
                   SizedBox(
                     width: 60,
                     child: IconButton(
@@ -326,8 +321,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                       onPressed: () {
                         setState(() {
                           _selectNoteCollectionStep = false;
-                          _addNewNoteCollectionStep =
-                              false; // Also reset this if going back
+                          _addNewNoteCollectionStep = false;
                         });
                       },
                     ),
@@ -385,31 +379,5 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
         ],
       ),
     );
-  }
-}
-
-Future<void> saveDemoNoteCollection() async {
-  final box = Hive.box(CollectionType.notes.name);
-  if (box.values.isEmpty) {
-    List<NoteCollectionModel> collections = [
-      NoteCollectionModel(
-        id: "col1",
-        name: "Reflections",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        notes: [],
-      ),
-      NoteCollectionModel(
-        id: "col2",
-        name: "Favourites",
-        colorHex: "FFAB00",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        notes: [],
-      ),
-    ];
-    for (NoteCollectionModel model in collections) {
-      await box.put(model.id, model.toJson());
-    }
   }
 }

@@ -1,9 +1,12 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/screen/collections/collection_content_view.dart";
-import "package:al_quran_v3/src/screen/collections/common_function.dart";
-import "package:al_quran_v3/src/screen/collections/models/note_collection_model.dart";
-import "package:al_quran_v3/src/screen/collections/models/pinned_collection_model.dart";
-import "package:al_quran_v3/src/screen/collections/models/sorting_methods_type.dart";
+import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+export "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart" show CollectionType;
+import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
+import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
+import "package:al_quran_v3/src/features/collections/presentation/screens/collection_content_view.dart";
+import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:dartx/dartx.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
@@ -14,8 +17,6 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
-
-import "../../theme/controller/theme_cubit.dart";
 
 class CollectionPage extends StatefulWidget {
   final CollectionType collectionType;
@@ -58,10 +59,10 @@ class _CollectionPageState extends State<CollectionPage> {
     });
     try {
       if (widget.collectionType == CollectionType.notes) {
-        _listOfNoteCollection = await fetchNoteCollections();
+        _listOfNoteCollection = await CollectionsLocalDataSource.fetchNoteCollections();
         _filteredNoteCollection = List.from(_listOfNoteCollection);
       } else {
-        _listOfPinnedCollection = await fetchPinnedCollections();
+        _listOfPinnedCollection = await CollectionsLocalDataSource.fetchPinnedCollections();
         _filteredPinnedCollection = List.from(_listOfPinnedCollection);
       }
     } catch (e) {
@@ -267,13 +268,6 @@ class _CollectionPageState extends State<CollectionPage> {
             widget.collectionType.name == "notes" ? l10n.notes : l10n.pinned,
           ).capitalize(),
         ),
-        // actions: [
-        //   IconButton(
-        //     onPressed: _fetchData,
-        //     icon: const Icon(FluentIcons.arrow_sync_24_regular),
-        //     tooltip: "Refresh",
-        //   ),
-        // ],
       ),
       body: Column(
         children: [
@@ -388,7 +382,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                         .text
                                         .trim();
 
-                                    await savePinnedCollectionModelAsMap(
+                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
                                       pinnedCollectionModel,
                                     );
                                     await _fetchData();
@@ -425,7 +419,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     safeParseColor(pinnedCollectionModel.colorHex),
                   );
                   pinnedCollectionModel.colorHex = selectedColor.hex;
-                  await savePinnedCollectionModelAsMap(pinnedCollectionModel);
+                  await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(pinnedCollectionModel);
                   await _fetchData();
                   Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
@@ -439,7 +433,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
               PopupMenuItem(
                 onTap: () async {
-                  await deleteNoteCollectionByID(pinnedCollectionModel.id);
+                  await CollectionsLocalDataSource.deletePinnedCollectionByID(pinnedCollectionModel.id);
                   await _fetchData();
 
                   Fluttertoast.showToast(
@@ -539,7 +533,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                         .text
                                         .trim();
 
-                                    await saveNoteCollectionModelAsMap(
+                                    await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
                                       noteCollectionModel,
                                     );
                                     await _fetchData();
@@ -576,7 +570,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     safeParseColor(noteCollectionModel.colorHex),
                   );
                   noteCollectionModel.colorHex = selectedColor.hex;
-                  await saveNoteCollectionModelAsMap(noteCollectionModel);
+                  await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(noteCollectionModel);
                   await _fetchData();
                   Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
@@ -590,7 +584,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
               PopupMenuItem(
                 onTap: () async {
-                  await deleteNoteCollectionByID(noteCollectionModel.id);
+                  await CollectionsLocalDataSource.deleteNoteCollectionByID(noteCollectionModel.id);
                   await _fetchData();
 
                   Fluttertoast.showToast(
@@ -628,5 +622,3 @@ class _CollectionPageState extends State<CollectionPage> {
     );
   }
 }
-
-enum CollectionType { pinned, notes }

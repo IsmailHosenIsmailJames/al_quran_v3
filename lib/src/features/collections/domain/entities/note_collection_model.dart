@@ -1,6 +1,6 @@
 import "dart:convert";
 
-import "package:al_quran_v3/src/screen/collections/models/note_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
 
 class NoteCollectionModel {
   String id;

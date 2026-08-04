@@ -4,7 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_pages_info.dart";
-import "package:al_quran_v3/src/screen/collections/collection_page.dart";
+import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/widget/quran_page_shimmer.dart";
 import "package:al_quran_v3/src/screen/mushaf/KFGQPC_V4_layout/KFGQPC_V4_layout_screen.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";

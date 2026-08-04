@@ -21,7 +21,7 @@ import "../../../../main.dart";
 import "../../../platform_services.dart" as platform_services;
 import "../../../theme/controller/theme_cubit.dart";
 import "../../../theme/controller/theme_state.dart";
-import "../../collections/collection_page.dart";
+import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "../../settings/settings_page.dart";
 
 class AppDrawer extends StatefulWidget {
