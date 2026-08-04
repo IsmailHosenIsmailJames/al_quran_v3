@@ -1,7 +1,7 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/qibla/data/repositories/qibla_repository_impl.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/vibration_datasource.dart";

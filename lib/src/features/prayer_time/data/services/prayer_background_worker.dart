@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:workmanager/workmanager.dart";
 
 @pragma("vm:entry-point")
