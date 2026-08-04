@@ -7,6 +7,7 @@ enum DownloadStepStatus { initial, inProgress, completed, failed }
 
 @freezed
 abstract class DownloadProgress with _$DownloadProgress {
+  @JsonSerializable(explicitToJson: true)
   const factory DownloadProgress({
     required String stepName,
     double? percentage,

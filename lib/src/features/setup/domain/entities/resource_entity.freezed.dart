@@ -215,8 +215,8 @@ return $default(_that.id,_that.name,_that.englishName,_that.languageCode,_that.l
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _ResourceEntity extends ResourceEntity {
   const _ResourceEntity({required this.id, required this.name, @JsonKey(name: 'english_name') required this.englishName, @JsonKey(name: 'language_code') required this.languageCode, required this.language, @JsonKey(name: 'language_native') required this.languageNative, required this.type, @JsonKey(name: 'full_path') required this.fullPath, @JsonKey(name: 'file_name') required this.fileName, this.isDownloaded = false}): super._();
   factory _ResourceEntity.fromJson(Map<String, dynamic> json) => _$ResourceEntityFromJson(json);

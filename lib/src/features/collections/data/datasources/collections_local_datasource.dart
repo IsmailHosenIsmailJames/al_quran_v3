@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/features/collections/domain/entities/note_model.
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
+import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
@@ -94,7 +95,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
         box.values
             .map(
               (e) => PinnedCollectionModel.fromJson(
-                Map<String, dynamic>.from(e),
+                deepConvertMap(e as Map),
               ),
             )
             .toList();
@@ -151,7 +152,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
         box.values
             .map(
               (e) =>
-                  NoteCollectionModel.fromJson(Map<String, dynamic>.from(e)),
+                  NoteCollectionModel.fromJson(deepConvertMap(e as Map)),
             )
             .toList();
     String sortMethod = Hive.box("user").get(

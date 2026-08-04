@@ -6,6 +6,7 @@ part 'setup_config.g.dart';
 
 @freezed
 abstract class SetupConfig with _$SetupConfig {
+  @JsonSerializable(explicitToJson: true)
   const factory SetupConfig({
     required String appLanguageCode,
     ResourceEntity? selectedTranslation,

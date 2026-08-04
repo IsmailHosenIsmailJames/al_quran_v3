@@ -211,8 +211,8 @@ return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _PinnedCollectionModel implements PinnedCollectionModel {
   const _PinnedCollectionModel({required this.id, required this.name, this.colorHex = "808080", required final  List<PinnedModel> pinned, required this.createdAt, required this.updatedAt}): _pinned = pinned;
   factory _PinnedCollectionModel.fromJson(Map<String, dynamic> json) => _$PinnedCollectionModelFromJson(json);

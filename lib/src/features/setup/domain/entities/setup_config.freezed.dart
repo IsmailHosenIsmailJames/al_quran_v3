@@ -233,8 +233,8 @@ return $default(_that.appLanguageCode,_that.selectedTranslation,_that.selectedTa
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _SetupConfig extends SetupConfig {
   const _SetupConfig({required this.appLanguageCode, this.selectedTranslation, this.selectedTafsir, this.isSetupComplete = false}): super._();
   factory _SetupConfig.fromJson(Map<String, dynamic> json) => _$SetupConfigFromJson(json);

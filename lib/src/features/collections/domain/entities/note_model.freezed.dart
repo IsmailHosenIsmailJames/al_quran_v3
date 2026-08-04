@@ -210,8 +210,8 @@ return $default(_that.id,_that.ayahKey,_that.text,_that.createdAt,_that.updatedA
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _NoteModel implements NoteModel {
   const _NoteModel({required this.id, required final  List<String> ayahKey, required this.text, required this.createdAt, required this.updatedAt}): _ayahKey = ayahKey;
   factory _NoteModel.fromJson(Map<String, dynamic> json) => _$NoteModelFromJson(json);

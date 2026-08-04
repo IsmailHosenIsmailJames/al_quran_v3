@@ -22,7 +22,7 @@ _SetupConfig _$SetupConfigFromJson(Map<String, dynamic> json) => _SetupConfig(
 Map<String, dynamic> _$SetupConfigToJson(_SetupConfig instance) =>
     <String, dynamic>{
       'appLanguageCode': instance.appLanguageCode,
-      'selectedTranslation': instance.selectedTranslation,
-      'selectedTafsir': instance.selectedTafsir,
+      'selectedTranslation': instance.selectedTranslation?.toJson(),
+      'selectedTafsir': instance.selectedTafsir?.toJson(),
       'isSetupComplete': instance.isSetupComplete,
     };

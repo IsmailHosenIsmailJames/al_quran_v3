@@ -7,6 +7,7 @@ part 'quran_resource_model.g.dart';
 
 @freezed
 abstract class QuranResourceModel with _$QuranResourceModel {
+  @JsonSerializable(explicitToJson: true)
   const factory QuranResourceModel({
     required String language,
     @JsonKey(name: 'language_native') required String languageNative,

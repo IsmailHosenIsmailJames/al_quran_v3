@@ -7,6 +7,7 @@ enum DownloadStatus { initial, downloading, success, failure }
 
 @freezed
 abstract class DownloadState with _$DownloadState {
+  @JsonSerializable(explicitToJson: true)
   const factory DownloadState({
     @Default(DownloadStatus.initial) DownloadStatus status,
     required DownloadProgress progress,

@@ -24,7 +24,7 @@ Map<String, dynamic> _$NoteCollectionModelToJson(
   'id': instance.id,
   'name': instance.name,
   'colorHex': instance.colorHex,
-  'notes': instance.notes,
+  'notes': instance.notes.map((e) => e.toJson()).toList(),
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt.toIso8601String(),
 };
