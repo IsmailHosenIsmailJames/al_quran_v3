@@ -1,7 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -51,7 +53,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
   @override
   void initState() {
     super.initState();
-    CollectionsLocalDataSource.fetchPinnedCollections().then((value) {
+    getIt<CollectionsRepository>().fetchPinnedCollections().then((value) {
       setState(() {
         _availablePinnedCollections = value;
       });
@@ -74,8 +76,11 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
       PinnedCollectionModel collection = PinnedCollectionModel.fromJson(
         Map<String, dynamic>.from(pinnedBox.get(collectionID)),
       );
-      collection.updatedAt = now;
-      collection.pinned.add(newPinned);
+      final updatedPinned = List<PinnedModel>.from(collection.pinned)..add(newPinned);
+      collection = collection.copyWith(
+        updatedAt: now,
+        pinned: updatedPinned,
+      );
       pinnedBox.put(collectionID, collection.toJson());
     }
 
@@ -171,7 +176,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                 foregroundColor: themeState.primary,
                               ),
                               onPressed: () async {
-                                CollectionsLocalDataSource.handleAddNewCollection(
+                                getIt<CollectionsRepository>().handleAddNewCollection(
                                   _newCollectionNameController.text.trim(),
                                   AppLocalizations.of(context),
                                 ).then((value) {

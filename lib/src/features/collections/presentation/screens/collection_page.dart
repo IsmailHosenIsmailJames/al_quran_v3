@@ -1,9 +1,11 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 export "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart" show CollectionType;
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
+import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
 import "package:al_quran_v3/src/features/collections/presentation/screens/collection_content_view.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
@@ -59,10 +61,10 @@ class _CollectionPageState extends State<CollectionPage> {
     });
     try {
       if (widget.collectionType == CollectionType.notes) {
-        _listOfNoteCollection = await CollectionsLocalDataSource.fetchNoteCollections();
+        _listOfNoteCollection = await getIt<CollectionsRepository>().fetchNoteCollections();
         _filteredNoteCollection = List.from(_listOfNoteCollection);
       } else {
-        _listOfPinnedCollection = await CollectionsLocalDataSource.fetchPinnedCollections();
+        _listOfPinnedCollection = await getIt<CollectionsRepository>().fetchPinnedCollections();
         _filteredPinnedCollection = List.from(_listOfPinnedCollection);
       }
     } catch (e) {
@@ -378,18 +380,18 @@ class _CollectionPageState extends State<CollectionPage> {
                                       );
                                       return;
                                     }
-                                    pinnedCollectionModel.name = nameController
-                                        .text
-                                        .trim();
+                                    final updatedPinnedCollection = pinnedCollectionModel.copyWith(
+                                      name: nameController.text.trim(),
+                                    );
 
-                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
-                                      pinnedCollectionModel,
+                                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
+                                      updatedPinnedCollection,
                                     );
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
                                       msg: l10n.updatedTo(
-                                        pinnedCollectionModel.name,
+                                        updatedPinnedCollection.name,
                                       ),
                                     );
                                   },
@@ -418,8 +420,10 @@ class _CollectionPageState extends State<CollectionPage> {
                     context,
                     safeParseColor(pinnedCollectionModel.colorHex),
                   );
-                  pinnedCollectionModel.colorHex = selectedColor.hex;
-                  await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(pinnedCollectionModel);
+                  final updatedPinnedCollection = pinnedCollectionModel.copyWith(
+                    colorHex: selectedColor.hex,
+                  );
+                  await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(updatedPinnedCollection);
                   await _fetchData();
                   Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
@@ -433,7 +437,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
               PopupMenuItem(
                 onTap: () async {
-                  await CollectionsLocalDataSource.deletePinnedCollectionByID(pinnedCollectionModel.id);
+                  await getIt<CollectionsRepository>().deletePinnedCollectionByID(pinnedCollectionModel.id);
                   await _fetchData();
 
                   Fluttertoast.showToast(
@@ -529,18 +533,18 @@ class _CollectionPageState extends State<CollectionPage> {
                                       );
                                       return;
                                     }
-                                    noteCollectionModel.name = nameController
-                                        .text
-                                        .trim();
+                                    final updatedNoteCollection = noteCollectionModel.copyWith(
+                                      name: nameController.text.trim(),
+                                    );
 
-                                    await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
-                                      noteCollectionModel,
+                                    await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
+                                      updatedNoteCollection,
                                     );
                                     await _fetchData();
                                     Navigator.pop(context);
                                     Fluttertoast.showToast(
                                       msg: l10n.updatedTo(
-                                        noteCollectionModel.name,
+                                        updatedNoteCollection.name,
                                       ),
                                     );
                                   },
@@ -569,8 +573,10 @@ class _CollectionPageState extends State<CollectionPage> {
                     context,
                     safeParseColor(noteCollectionModel.colorHex),
                   );
-                  noteCollectionModel.colorHex = selectedColor.hex;
-                  await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(noteCollectionModel);
+                  final updatedNoteCollection = noteCollectionModel.copyWith(
+                    colorHex: selectedColor.hex,
+                  );
+                  await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(updatedNoteCollection);
                   await _fetchData();
                   Fluttertoast.showToast(msg: l10n.colorUpdated);
                 },
@@ -584,7 +590,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
               PopupMenuItem(
                 onTap: () async {
-                  await CollectionsLocalDataSource.deleteNoteCollectionByID(noteCollectionModel.id);
+                  await getIt<CollectionsRepository>().deleteNoteCollectionByID(noteCollectionModel.id);
                   await _fetchData();
 
                   Fluttertoast.showToast(
