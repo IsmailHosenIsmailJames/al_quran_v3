@@ -1,10 +1,11 @@
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
@@ -272,7 +273,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ),
                   onDismissed: (direction) async {
                     widget.noteCollectionModel!.notes.removeAt(index);
-                    await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
+                    await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
                       widget.noteCollectionModel!,
                     );
                     setState(() {});
@@ -288,7 +289,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                               index - 1,
                               item,
                             );
-                            await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
+                            await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
                               widget.noteCollectionModel!,
                             );
                             setState(() {});
@@ -303,7 +304,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                               index + 1,
                               item,
                             );
-                            await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
+                            await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
                               widget.noteCollectionModel!,
                             );
                             setState(() {});
@@ -312,7 +313,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                         : null,
                     () async {
                       widget.noteCollectionModel!.notes.removeAt(index);
-                      await CollectionsLocalDataSource.saveNoteCollectionModelAsMap(
+                      await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
                         widget.noteCollectionModel!,
                       );
                       setState(() {});
@@ -387,7 +388,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ),
                   onDismissed: (direction) async {
                     widget.pinnedCollectionModel!.pinned.removeAt(index);
-                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
+                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
                       widget.pinnedCollectionModel!,
                     );
                     setState(() {});
@@ -412,7 +413,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                       index - 1,
                                       item,
                                     );
-                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
+                                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
                                       widget.pinnedCollectionModel!,
                                     );
                                     setState(() {});
@@ -435,7 +436,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                       index + 1,
                                       item,
                                     );
-                                    await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
+                                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
                                       widget.pinnedCollectionModel!,
                                     );
                                     setState(() {});
@@ -458,7 +459,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                                   widget.pinnedCollectionModel!.pinned.removeAt(
                                     index,
                                   );
-                                  await CollectionsLocalDataSource.savePinnedCollectionModelAsMap(
+                                  await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
                                     widget.pinnedCollectionModel!,
                                   );
                                   setState(() {});

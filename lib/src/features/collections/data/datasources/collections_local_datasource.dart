@@ -6,14 +6,40 @@ import "package:al_quran_v3/src/features/collections/domain/entities/pinned_mode
 import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 import "package:uuid/uuid.dart";
-
-const Uuid _uuid = Uuid();
 
 enum CollectionType { pinned, notes }
 
-class CollectionsLocalDataSource {
-  static Future<void> saveDemoPinnedCollection() async {
+abstract class CollectionsLocalDataSource {
+  Future<void> saveDemoPinnedCollection();
+  Future<void> saveDemoNoteCollection();
+  Future<List<PinnedCollectionModel>> fetchPinnedCollections();
+  Future<List<NoteCollectionModel>> fetchNoteCollections();
+  Future<NoteCollectionModel?> handleAddNewNoteCollection(
+    String noteText,
+    AppLocalizations l10n,
+  );
+  Future<PinnedCollectionModel?> handleAddNewCollection(
+    String text,
+    AppLocalizations l10n,
+  );
+  Future<void> deleteNoteCollectionByID(String id);
+  Future<void> deletePinnedCollectionByID(String id);
+  Future<void> saveNoteCollectionModelAsMap(
+    NoteCollectionModel noteCollection,
+  );
+  Future<void> savePinnedCollectionModelAsMap(
+    PinnedCollectionModel pinnedCollection,
+  );
+}
+
+@LazySingleton(as: CollectionsLocalDataSource)
+class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
+  static const Uuid _uuid = Uuid();
+
+  @override
+  Future<void> saveDemoPinnedCollection() async {
     final box = Hive.box(CollectionType.pinned.name);
     if (box.isEmpty) {
       final now = DateTime.now();
@@ -35,7 +61,8 @@ class CollectionsLocalDataSource {
     }
   }
 
-  static Future<void> saveDemoNoteCollection() async {
+  @override
+  Future<void> saveDemoNoteCollection() async {
     final box = Hive.box(CollectionType.notes.name);
     if (box.isEmpty) {
       final now = DateTime.now();
@@ -46,7 +73,8 @@ class CollectionsLocalDataSource {
           NoteModel(
             id: "demo_note_1",
             ayahKey: ["1:1"],
-            text: "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+            text:
+                "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
             createdAt: now,
             updatedAt: now,
           ),
@@ -58,22 +86,26 @@ class CollectionsLocalDataSource {
     }
   }
 
-  static Future<List<PinnedCollectionModel>> fetchPinnedCollections() async {
+  @override
+  Future<List<PinnedCollectionModel>> fetchPinnedCollections() async {
     final box = Hive.box(CollectionType.pinned.name);
     await saveDemoPinnedCollection();
     List<PinnedCollectionModel> availablePinnedCollections =
         box.values
             .map(
-              (e) => PinnedCollectionModel.fromJson(Map<String, dynamic>.from(e)),
+              (e) => PinnedCollectionModel.fromJson(
+                Map<String, dynamic>.from(e),
+              ),
             )
             .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
       defaultValue: SortingMethodsType.values.first.name,
     );
-    SortingMethodsType sortingMethodsType = SortingMethodsType.values.firstWhere(
-      (element) => element.name == sortMethod,
-    );
+    SortingMethodsType sortingMethodsType =
+        SortingMethodsType.values.firstWhere(
+          (element) => element.name == sortMethod,
+        );
     switch (sortingMethodsType) {
       case SortingMethodsType.byNameAtoZ:
         availablePinnedCollections.sort(
@@ -111,22 +143,25 @@ class CollectionsLocalDataSource {
     return availablePinnedCollections;
   }
 
-  static Future<List<NoteCollectionModel>> fetchNoteCollections() async {
+  @override
+  Future<List<NoteCollectionModel>> fetchNoteCollections() async {
     final box = Hive.box(CollectionType.notes.name);
     await saveDemoNoteCollection();
     List<NoteCollectionModel> availableNoteCollections =
         box.values
             .map(
-              (e) => NoteCollectionModel.fromJson(Map<String, dynamic>.from(e)),
+              (e) =>
+                  NoteCollectionModel.fromJson(Map<String, dynamic>.from(e)),
             )
             .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
       defaultValue: SortingMethodsType.values.first.name,
     );
-    SortingMethodsType sortingMethodsType = SortingMethodsType.values.firstWhere(
-      (element) => element.name == sortMethod,
-    );
+    SortingMethodsType sortingMethodsType =
+        SortingMethodsType.values.firstWhere(
+          (element) => element.name == sortMethod,
+        );
     switch (sortingMethodsType) {
       case SortingMethodsType.byNameAtoZ:
         availableNoteCollections.sort(
@@ -164,7 +199,8 @@ class CollectionsLocalDataSource {
     return availableNoteCollections;
   }
 
-  static Future<NoteCollectionModel?> handleAddNewNoteCollection(
+  @override
+  Future<NoteCollectionModel?> handleAddNewNoteCollection(
     String noteText,
     AppLocalizations l10n,
   ) async {
@@ -189,7 +225,8 @@ class CollectionsLocalDataSource {
     return newCollection;
   }
 
-  static Future<PinnedCollectionModel?> handleAddNewCollection(
+  @override
+  Future<PinnedCollectionModel?> handleAddNewCollection(
     String text,
     AppLocalizations l10n,
   ) async {
@@ -215,17 +252,20 @@ class CollectionsLocalDataSource {
     return newCollection;
   }
 
-  static Future<void> deleteNoteCollectionByID(String id) async {
+  @override
+  Future<void> deleteNoteCollectionByID(String id) async {
     final noteCollectionModel = Hive.box(CollectionType.notes.name);
     await noteCollectionModel.delete(id);
   }
 
-  static Future<void> deletePinnedCollectionByID(String id) async {
+  @override
+  Future<void> deletePinnedCollectionByID(String id) async {
     final noteCollectionModel = Hive.box(CollectionType.pinned.name);
     await noteCollectionModel.delete(id);
   }
 
-  static Future<void> saveNoteCollectionModelAsMap(
+  @override
+  Future<void> saveNoteCollectionModelAsMap(
     NoteCollectionModel noteCollection,
   ) async {
     Hive.box(
@@ -233,7 +273,8 @@ class CollectionsLocalDataSource {
     ).put(noteCollection.id, noteCollection.toJson());
   }
 
-  static Future<void> savePinnedCollectionModelAsMap(
+  @override
+  Future<void> savePinnedCollectionModelAsMap(
     PinnedCollectionModel pinnedCollection,
   ) async {
     Hive.box(

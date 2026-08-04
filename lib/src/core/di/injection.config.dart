@@ -9,6 +9,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart'
+    as _i169;
+import 'package:al_quran_v3/src/features/collections/data/repositories/collections_repository_impl.dart'
+    as _i713;
+import 'package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart'
+    as _i1035;
 import 'package:al_quran_v3/src/features/location/data/datasources/location_local_datasource.dart'
     as _i924;
 import 'package:al_quran_v3/src/features/location/data/datasources/location_remote_datasource.dart'
@@ -166,6 +172,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i197.CompassDatasource>(
       () => _i197.CompassDatasourceImpl(),
     );
+    gh.lazySingleton<_i169.CollectionsLocalDataSource>(
+      () => _i169.CollectionsLocalDataSourceImpl(),
+    );
     gh.factory<_i411.QuranResourcesCubit>(
       () => _i411.QuranResourcesCubit(
         gh<_i83.GetQuranResourcesUseCase>(),
@@ -181,6 +190,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1067.LocationRepositoryImpl(
         gh<_i924.LocationLocalDataSource>(),
         gh<_i527.LocationRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i1035.CollectionsRepository>(
+      () => _i713.CollectionsRepositoryImpl(
+        gh<_i169.CollectionsLocalDataSource>(),
       ),
     );
     gh.lazySingleton<_i451.PrayerTimeRepository>(

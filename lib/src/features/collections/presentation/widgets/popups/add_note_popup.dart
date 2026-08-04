@@ -1,7 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -53,7 +55,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
   @override
   void initState() {
     super.initState();
-    CollectionsLocalDataSource.fetchNoteCollections().then((value) {
+    getIt<CollectionsRepository>().fetchNoteCollections().then((value) {
       setState(() {
         _availableNoteCollections = value;
       });
@@ -86,8 +88,11 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
       NoteCollectionModel collection = NoteCollectionModel.fromJson(
         Map<String, dynamic>.from(notesBox.get(collectionID)),
       );
-      collection.updatedAt = now;
-      collection.notes.add(newNote);
+      final updatedNotes = List<NoteModel>.from(collection.notes)..add(newNote);
+      collection = collection.copyWith(
+        updatedAt: now,
+        notes: updatedNotes,
+      );
       notesBox.put(collectionID, collection.toJson());
     }
 
@@ -188,7 +193,7 @@ class _AddNoteWidgetState extends State<AddNoteWidget> {
                                 ),
                                 onPressed: () async {
                                   NoteCollectionModel? newCollection =
-                                      await CollectionsLocalDataSource.handleAddNewNoteCollection(
+                                      await getIt<CollectionsRepository>().handleAddNewNoteCollection(
                                         _newCollectionNameController.text
                                             .trim(),
                                         l10n,
