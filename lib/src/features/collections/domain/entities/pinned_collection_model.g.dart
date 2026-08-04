@@ -25,7 +25,7 @@ Map<String, dynamic> _$PinnedCollectionModelToJson(
   'id': instance.id,
   'name': instance.name,
   'colorHex': instance.colorHex,
-  'pinned': instance.pinned,
+  'pinned': instance.pinned.map((e) => e.toJson()).toList(),
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt.toIso8601String(),
 };

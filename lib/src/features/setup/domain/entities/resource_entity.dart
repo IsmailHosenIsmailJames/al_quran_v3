@@ -6,6 +6,7 @@ part 'resource_entity.g.dart';
 
 @freezed
 abstract class ResourceEntity with _$ResourceEntity {
+  @JsonSerializable(explicitToJson: true)
   const factory ResourceEntity({
     required String id,
     required String name,

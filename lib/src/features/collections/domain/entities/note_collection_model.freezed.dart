@@ -211,8 +211,8 @@ return $default(_that.id,_that.name,_that.colorHex,_that.notes,_that.createdAt,_
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _NoteCollectionModel implements NoteCollectionModel {
   const _NoteCollectionModel({required this.id, required this.name, this.colorHex = "808080", required final  List<NoteModel> notes, required this.createdAt, required this.updatedAt}): _notes = notes;
   factory _NoteCollectionModel.fromJson(Map<String, dynamic> json) => _$NoteCollectionModelFromJson(json);

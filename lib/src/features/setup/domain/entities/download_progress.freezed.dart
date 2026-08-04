@@ -211,8 +211,8 @@ return $default(_that.stepName,_that.percentage,_that.currentStepIndex,_that.tot
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _DownloadProgress implements DownloadProgress {
   const _DownloadProgress({required this.stepName, this.percentage, this.currentStepIndex = 0, this.totalSteps = 5, required this.status, this.errorMessage});
   factory _DownloadProgress.fromJson(Map<String, dynamic> json) => _$DownloadProgressFromJson(json);

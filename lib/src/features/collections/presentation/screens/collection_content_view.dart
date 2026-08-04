@@ -5,7 +5,9 @@ import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
+import "package:al_quran_v3/src/features/collections/domain/entities/pinned_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
+import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
@@ -15,6 +17,7 @@ import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter_animate/flutter_animate.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 
@@ -32,6 +35,9 @@ class CollectionContentView extends StatefulWidget {
 }
 
 class _CollectionContentViewState extends State<CollectionContentView> {
+  late NoteCollectionModel? _noteCollectionModel;
+  late PinnedCollectionModel? _pinnedCollectionModel;
+
   @override
   void initState() {
     assert(
@@ -45,28 +51,42 @@ class _CollectionContentViewState extends State<CollectionContentView> {
       "NoteCollectionModel & PinnedCollectionModel both cannot be provided",
     );
     super.initState();
+    _noteCollectionModel = widget.noteCollectionModel;
+    _pinnedCollectionModel = widget.pinnedCollectionModel;
   }
 
   Widget _buildEmptyState(String message) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              FluentIcons.info_24_regular,
-              size: 50,
-              color: Colors.grey,
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                FluentIcons.info_24_regular,
+                size: 48,
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+              ),
             ),
             const Gap(16),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
-        ),
+        ).animate().fadeIn(duration: 300.ms).scale(begin: const Offset(0.9, 0.9)),
       ),
     );
   }
@@ -82,136 +102,174 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(roundedRadius),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      elevation: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              top: 8.0,
-              bottom: 0,
-              right: 8.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Top Row
+            Row(
               children: [
-                Text(
-                  l10n.note,
-                  style: textTheme.titleSmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    FluentIcons.note_24_filled,
+                    size: 16,
+                    color: colorScheme.primary,
                   ),
                 ),
-                Row(
-                  children: [
-                    if (onMoveUp != null)
-                      IconButton(
-                        onPressed: onMoveUp,
-                        icon: const Icon(
-                          FluentIcons.arrow_up_24_regular,
-                          size: 20,
-                        ),
-                      ),
-                    if (onMoveDown != null)
-                      IconButton(
-                        onPressed: onMoveDown,
-                        icon: const Icon(
-                          FluentIcons.arrow_down_24_regular,
-                          size: 20,
-                        ),
-                      ),
-                    IconButton(
-                      onPressed: onDelete,
-                      icon: const Icon(
-                        FluentIcons.delete_24_regular,
-                        color: Colors.red,
-                        size: 20,
-                      ),
-                      tooltip: l10n.delete,
+                const Gap(8),
+                Text(
+                  formatRelativeDate(noteModel.updatedAt),
+                  style: textTheme.labelMedium?.copyWith(
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
+                  ),
+                ),
+                const Spacer(),
+                if (onMoveUp != null)
+                  IconButton(
+                    onPressed: onMoveUp,
+                    visualDensity: VisualDensity.compact,
+                    icon: const Icon(
+                      FluentIcons.arrow_up_24_regular,
+                      size: 18,
                     ),
-                  ],
+                  ),
+                if (onMoveDown != null)
+                  IconButton(
+                    onPressed: onMoveDown,
+                    visualDensity: VisualDensity.compact,
+                    icon: const Icon(
+                      FluentIcons.arrow_down_24_regular,
+                      size: 18,
+                    ),
+                  ),
+                IconButton(
+                  onPressed: onDelete,
+                  visualDensity: VisualDensity.compact,
+                  icon: const Icon(
+                    FluentIcons.delete_24_regular,
+                    color: Colors.redAccent,
+                    size: 18,
+                  ),
+                  tooltip: l10n.delete,
                 ),
               ],
             ),
-          ),
-          const Gap(4),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(roundedRadius - 4),
-            ),
-            child: Text(noteModel.text, style: textTheme.bodyMedium),
-          ),
-          if (noteModel.ayahKey.isNotEmpty) ...[
-            const Gap(12),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Gap(10),
+
+            // Note Content Box
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.4,
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Text(
-                l10n.linkedAyahs,
-                style: textTheme.titleSmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
+                noteModel.text,
+                style: textTheme.bodyMedium?.copyWith(
+                  height: 1.4,
+                  fontSize: 14.5,
                 ),
               ),
             ),
-            const Gap(4),
-            InkWell(
-              borderRadius: BorderRadius.circular(roundedRadius - 4),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ListOfAyahsViews(ayahsKey: noteModel.ayahKey),
+
+            // Linked Ayahs Chips
+            if (noteModel.ayahKey.isNotEmpty) ...[
+              const Gap(12),
+              InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ListOfAyahsViews(ayahsKey: noteModel.ayahKey),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.25),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: colorScheme.primary.withValues(alpha: 0.2),
+                    ),
                   ),
-                );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withValues(
-                    alpha: 0.5,
+                  child: Row(
+                    children: [
+                      Icon(
+                        FluentIcons.book_open_24_regular,
+                        size: 16,
+                        color: colorScheme.primary,
+                      ),
+                      const Gap(8),
+                      Expanded(
+                        child: Wrap(
+                          spacing: 6.0,
+                          runSpacing: 4.0,
+                          children: noteModel.ayahKey.map((key) {
+                            try {
+                              SurahInfoModel surahInfo = SurahInfoModel.fromMap(
+                                metaDataSurah[key.split(":").first]!,
+                              );
+                              return Chip(
+                                label: Text(
+                                  "${getSurahName(context, surahInfo.id)} $key",
+                                  style: textTheme.labelSmall?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                padding: EdgeInsets.zero,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                backgroundColor: colorScheme.primaryContainer,
+                                side: BorderSide.none,
+                              );
+                            } catch (e) {
+                              log("Error parsing surah info for key $key: $e");
+                              return Chip(label: Text(key));
+                            }
+                          }).toList(),
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right_rounded,
+                        size: 18,
+                        color: colorScheme.primary,
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(roundedRadius - 4),
-                ),
-                child: Wrap(
-                  spacing: 8.0,
-                  runSpacing: 4.0,
-                  children: noteModel.ayahKey.map((key) {
-                    try {
-                      SurahInfoModel surahInfo = SurahInfoModel.fromMap(
-                        metaDataSurah[key.split(":").first]!,
-                      );
-                      return Chip(
-                        label: Text(
-                          "${getSurahName(context, surahInfo.id)} - $key",
-                          style: textTheme.labelSmall,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 0,
-                        ),
-                        backgroundColor: colorScheme.secondaryContainer
-                            .withValues(alpha: 0.7),
-                        side: BorderSide.none,
-                      );
-                    } catch (e) {
-                      log("Error parsing surah info for key $key: $e");
-                      return Chip(label: Text(key));
-                    }
-                  }).toList(),
                 ),
               ),
-            ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -220,23 +278,43 @@ class _CollectionContentViewState extends State<CollectionContentView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final isNoteCollection = _noteCollectionModel != null;
+    final folderHex = isNoteCollection
+        ? _noteCollectionModel!.colorHex
+        : _pinnedCollectionModel!.colorHex;
+    final folderColor = safeParseColor(folderHex);
+    final folderName = isNoteCollection
+        ? _noteCollectionModel!.name
+        : _pinnedCollectionModel!.name;
 
     return Scaffold(
       appBar: AppBar(
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              widget.noteCollectionModel != null
-                  ? FluentIcons.note_24_regular
-                  : FluentIcons.pin_24_filled,
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: folderColor.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                isNoteCollection
+                    ? FluentIcons.folder_24_filled
+                    : FluentIcons.pin_24_filled,
+                color: folderColor,
+                size: 20,
+              ),
             ),
             const Gap(10),
             Expanded(
               child: Text(
-                widget.noteCollectionModel?.name ??
-                    widget.pinnedCollectionModel!.name,
-                style: textTheme.titleLarge,
+                folderName,
+                style: textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -245,25 +323,26 @@ class _CollectionContentViewState extends State<CollectionContentView> {
       ),
       body: Builder(
         builder: (context) {
-          if (widget.noteCollectionModel != null) {
-            if (widget.noteCollectionModel!.notes.isEmpty) {
+          if (isNoteCollection) {
+            if (_noteCollectionModel!.notes.isEmpty) {
               return _buildEmptyState(l10n.emptyNoteCollection);
             }
-            return ListView.separated(
-              padding: const EdgeInsets.all(12.0),
-              itemCount: widget.noteCollectionModel!.notes.length,
+            return ListView.builder(
+              padding: const EdgeInsets.all(14.0),
+              itemCount: _noteCollectionModel!.notes.length,
               itemBuilder: (context, index) {
-                NoteModel noteModel = widget.noteCollectionModel!.notes[index];
+                NoteModel noteModel = _noteCollectionModel!.notes[index];
                 return Dismissible(
                   key: ValueKey(
-                    noteModel.hashCode.toString() + index.toString(),
+                    noteModel.id + index.toString(),
                   ),
                   direction: DismissDirection.endToStart,
                   background: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(roundedRadius),
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(18),
                     ),
                     alignment: Alignment.centerRight,
                     child: const Icon(
@@ -272,9 +351,13 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     ),
                   ),
                   onDismissed: (direction) async {
-                    widget.noteCollectionModel!.notes.removeAt(index);
+                    final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
+                      ..removeAt(index);
+                    _noteCollectionModel = _noteCollectionModel!.copyWith(
+                      notes: updatedNotes,
+                    );
                     await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                      widget.noteCollectionModel!,
+                      _noteCollectionModel!,
                     );
                     setState(() {});
                   },
@@ -283,55 +366,59 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     context,
                     index > 0
                         ? () async {
-                            final item = widget.noteCollectionModel!.notes
-                                .removeAt(index);
-                            widget.noteCollectionModel!.notes.insert(
-                              index - 1,
-                              item,
+                            final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
+                            final item = updatedNotes.removeAt(index);
+                            updatedNotes.insert(index - 1, item);
+                            _noteCollectionModel = _noteCollectionModel!.copyWith(
+                              notes: updatedNotes,
                             );
                             await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                              widget.noteCollectionModel!,
+                              _noteCollectionModel!,
                             );
                             setState(() {});
                             Fluttertoast.showToast(msg: l10n.success);
                           }
                         : null,
-                    index < widget.noteCollectionModel!.notes.length - 1
+                    index < _noteCollectionModel!.notes.length - 1
                         ? () async {
-                            final item = widget.noteCollectionModel!.notes
-                                .removeAt(index);
-                            widget.noteCollectionModel!.notes.insert(
-                              index + 1,
-                              item,
+                            final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
+                            final item = updatedNotes.removeAt(index);
+                            updatedNotes.insert(index + 1, item);
+                            _noteCollectionModel = _noteCollectionModel!.copyWith(
+                              notes: updatedNotes,
                             );
                             await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                              widget.noteCollectionModel!,
+                              _noteCollectionModel!,
                             );
                             setState(() {});
                             Fluttertoast.showToast(msg: l10n.success);
                           }
                         : null,
                     () async {
-                      widget.noteCollectionModel!.notes.removeAt(index);
+                      final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
+                        ..removeAt(index);
+                      _noteCollectionModel = _noteCollectionModel!.copyWith(
+                        notes: updatedNotes,
+                      );
                       await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                        widget.noteCollectionModel!,
+                        _noteCollectionModel!,
                       );
                       setState(() {});
                       Fluttertoast.showToast(msg: l10n.success);
                     },
-                  ),
+                  ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
                 );
               },
-              separatorBuilder: (context, index) => const Gap(0),
             );
-          } else if (widget.pinnedCollectionModel != null) {
-            if (widget.pinnedCollectionModel!.pinned.isEmpty) {
+          } else if (_pinnedCollectionModel != null) {
+            if (_pinnedCollectionModel!.pinned.isEmpty) {
               return _buildEmptyState(l10n.emptyPinnedCollection);
             }
             return ListView.builder(
-              itemCount: widget.pinnedCollectionModel!.pinned.length,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              itemCount: _pinnedCollectionModel!.pinned.length,
               itemBuilder: (context, index) {
-                final pinnedItem = widget.pinnedCollectionModel!.pinned[index];
+                final pinnedItem = _pinnedCollectionModel!.pinned[index];
                 final TranslationWithWordByWord? translationData =
                     getTranslationFromCache(pinnedItem.ayahKey);
                 Widget cardWidget = translationData != null
@@ -365,19 +452,14 @@ class _CollectionContentViewState extends State<CollectionContentView> {
 
                 return Dismissible(
                   key: ValueKey(
-                    pinnedItem.hashCode.toString() + index.toString(),
+                    pinnedItem.id + index.toString(),
                   ),
                   direction: DismissDirection.endToStart,
                   background: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    margin: const EdgeInsets.only(
-                      left: 5,
-                      top: 5,
-                      bottom: 5,
-                      right: 5,
-                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.redAccent,
                       borderRadius: BorderRadius.circular(roundedRadius),
                     ),
                     alignment: Alignment.centerRight,
@@ -387,9 +469,13 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     ),
                   ),
                   onDismissed: (direction) async {
-                    widget.pinnedCollectionModel!.pinned.removeAt(index);
+                    final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned)
+                      ..removeAt(index);
+                    _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
+                      pinned: updatedPinned,
+                    );
                     await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                      widget.pinnedCollectionModel!,
+                      _pinnedCollectionModel!,
                     );
                     setState(() {});
                   },
@@ -397,89 +483,82 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0, top: 4.0),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              if (index > 0)
-                                IconButton(
-                                  onPressed: () async {
-                                    final item = widget
-                                        .pinnedCollectionModel!
-                                        .pinned
-                                        .removeAt(index);
-                                    widget.pinnedCollectionModel!.pinned.insert(
-                                      index - 1,
-                                      item,
-                                    );
-                                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                      widget.pinnedCollectionModel!,
-                                    );
-                                    setState(() {});
-                                  },
-                                  icon: const Icon(
-                                    FluentIcons.arrow_up_24_regular,
-                                    size: 20,
-                                  ),
-                                ),
-                              if (index <
-                                  widget.pinnedCollectionModel!.pinned.length -
-                                      1)
-                                IconButton(
-                                  onPressed: () async {
-                                    final item = widget
-                                        .pinnedCollectionModel!
-                                        .pinned
-                                        .removeAt(index);
-                                    widget.pinnedCollectionModel!.pinned.insert(
-                                      index + 1,
-                                      item,
-                                    );
-                                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                      widget.pinnedCollectionModel!,
-                                    );
-                                    setState(() {});
-                                  },
-                                  icon: const Icon(
-                                    FluentIcons.arrow_down_24_regular,
-                                    size: 20,
-                                  ),
-                                ),
-                              TextButton.icon(
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.red,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 0,
-                                  ),
-                                  minimumSize: const Size(0, 30),
-                                ),
+                        child: Row(
+                          children: [
+                            const Gap(8),
+                            Text(
+                              formatRelativeDate(pinnedItem.updatedAt),
+                              style: textTheme.labelSmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                            const Spacer(),
+                            if (index > 0)
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
                                 onPressed: () async {
-                                  widget.pinnedCollectionModel!.pinned.removeAt(
-                                    index,
+                                  final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned);
+                                  final item = updatedPinned.removeAt(index);
+                                  updatedPinned.insert(index - 1, item);
+                                  _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
+                                    pinned: updatedPinned,
                                   );
                                   await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                    widget.pinnedCollectionModel!,
+                                    _pinnedCollectionModel!,
                                   );
                                   setState(() {});
                                 },
                                 icon: const Icon(
-                                  FluentIcons.delete_24_regular,
-                                  size: 16,
-                                ),
-                                label: Text(
-                                  l10n.delete,
-                                  style: const TextStyle(fontSize: 12),
+                                  FluentIcons.arrow_up_24_regular,
+                                  size: 18,
                                 ),
                               ),
-                            ],
-                          ),
+                            if (index <
+                                _pinnedCollectionModel!.pinned.length - 1)
+                              IconButton(
+                                visualDensity: VisualDensity.compact,
+                                onPressed: () async {
+                                  final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned);
+                                  final item = updatedPinned.removeAt(index);
+                                  updatedPinned.insert(index + 1, item);
+                                  _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
+                                    pinned: updatedPinned,
+                                  );
+                                  await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
+                                    _pinnedCollectionModel!,
+                                  );
+                                  setState(() {});
+                                },
+                                icon: const Icon(
+                                  FluentIcons.arrow_down_24_regular,
+                                  size: 18,
+                                ),
+                              ),
+                            IconButton(
+                              visualDensity: VisualDensity.compact,
+                              onPressed: () async {
+                                final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned)
+                                  ..removeAt(index);
+                                _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
+                                  pinned: updatedPinned,
+                                );
+                                await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
+                                  _pinnedCollectionModel!,
+                                );
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                FluentIcons.delete_24_regular,
+                                color: Colors.redAccent,
+                                size: 18,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       cardWidget,
                     ],
-                  ),
+                  ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
                 );
               },
             );

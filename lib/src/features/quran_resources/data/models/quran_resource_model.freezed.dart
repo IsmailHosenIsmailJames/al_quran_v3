@@ -214,8 +214,8 @@ return $default(_that.language,_that.languageNative,_that.languageCode,_that.nam
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _QuranResourceModel extends QuranResourceModel {
   const _QuranResourceModel({required this.language, @JsonKey(name: 'language_native') required this.languageNative, @JsonKey(name: 'language_code') required this.languageCode, required this.name, @JsonKey(name: 'english_name') required this.englishName, @JsonKey(name: 'file_name') required this.fileName, @JsonKey(name: 'full_path') required this.fullPath, required this.type, @JsonKey(name: 'is_tajweed') this.isTajweed = false}): super._();
   factory _QuranResourceModel.fromJson(Map<String, dynamic> json) => _$QuranResourceModelFromJson(json);

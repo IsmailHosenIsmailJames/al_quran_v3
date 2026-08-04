@@ -5,6 +5,7 @@ part 'note_model.g.dart';
 
 @freezed
 abstract class NoteModel with _$NoteModel {
+  @JsonSerializable(explicitToJson: true)
   const factory NoteModel({
     required String id,
     required List<String> ayahKey,

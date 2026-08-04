@@ -6,6 +6,7 @@ part 'pinned_collection_model.g.dart';
 
 @freezed
 abstract class PinnedCollectionModel with _$PinnedCollectionModel {
+  @JsonSerializable(explicitToJson: true)
   const factory PinnedCollectionModel({
     required String id,
     required String name,

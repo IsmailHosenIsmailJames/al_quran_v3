@@ -218,7 +218,7 @@ return $default(_that.status,_that.config,_that.allResources,_that.selectableTra
 
 /// @nodoc
 
-
+@JsonSerializable(explicitToJson: true)
 class _SetupState extends SetupState {
   const _SetupState({this.status = SetupStatus.initial, required this.config, final  Map<String, List<ResourceEntity>> allResources = const {}, final  List<ResourceEntity> selectableTranslations = const [], final  List<ResourceEntity> selectableTafsirs = const [], this.errorMessage}): _allResources = allResources,_selectableTranslations = selectableTranslations,_selectableTafsirs = selectableTafsirs,super._();
   

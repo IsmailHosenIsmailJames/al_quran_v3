@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:flutter/material.dart";
+import "package:flutter_animate/flutter_animate.dart";
 
 class ListOfAyahsViews extends StatefulWidget {
   final List<String> ayahsKey;
@@ -16,13 +17,19 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.ayahCount(widget.ayahsKey.length))),
+      appBar: AppBar(
+        title: Text(
+          l10n.ayahCount(widget.ayahsKey.length),
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: widget.ayahsKey.length,
         itemBuilder: (context, index) {
           final TranslationWithWordByWord? translationData =
               getTranslationFromCache(widget.ayahsKey[index]);
-          return translationData != null
+          final Widget card = translationData != null
               ? getAyahByAyahCard(
                 ayahKey: widget.ayahsKey[index],
                 context: context,
@@ -46,6 +53,11 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
                   );
                 },
               );
+
+          return card
+              .animate(delay: (index * 40).ms)
+              .fadeIn(duration: 250.ms)
+              .slideY(begin: 0.05, end: 0);
         },
       ),
     );

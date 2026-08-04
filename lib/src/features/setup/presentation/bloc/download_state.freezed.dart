@@ -215,7 +215,7 @@ return $default(_that.status,_that.progress,_that.errorMessage);case _:
 
 /// @nodoc
 
-
+@JsonSerializable(explicitToJson: true)
 class _DownloadState implements DownloadState {
   const _DownloadState({this.status = DownloadStatus.initial, required this.progress, this.errorMessage});
   

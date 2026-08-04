@@ -209,8 +209,8 @@ return $default(_that.id,_that.ayahKey,_that.createdAt,_that.updatedAt);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(explicitToJson: true)
 class _PinnedModel implements PinnedModel {
   const _PinnedModel({required this.id, required this.ayahKey, required this.createdAt, required this.updatedAt});
   factory _PinnedModel.fromJson(Map<String, dynamic> json) => _$PinnedModelFromJson(json);

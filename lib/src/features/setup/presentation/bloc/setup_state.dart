@@ -8,6 +8,7 @@ enum SetupStatus { initial, loading, loaded, error }
 
 @freezed
 abstract class SetupState with _$SetupState {
+  @JsonSerializable(explicitToJson: true)
   const factory SetupState({
     @Default(SetupStatus.initial) SetupStatus status,
     required SetupConfig config,
