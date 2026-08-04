@@ -4,7 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
-import "package:al_quran_v3/src/screen/audio/audio_page.dart";
+import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
 import "package:al_quran_v3/src/screen/home/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/quran_page.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";

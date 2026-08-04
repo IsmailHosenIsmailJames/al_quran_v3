@@ -1,8 +1,8 @@
 import "dart:convert";
 
 import "package:al_quran_v3/src/api/apis_urls.dart";
-import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/utils/encode_decode.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";

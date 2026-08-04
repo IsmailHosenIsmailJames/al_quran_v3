@@ -1,7 +1,7 @@
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_state.dart";

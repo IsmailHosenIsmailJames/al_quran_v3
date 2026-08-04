@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.d
 import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:intl/intl.dart";
