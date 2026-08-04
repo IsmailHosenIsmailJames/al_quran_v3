@@ -9,6 +9,22 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:al_quran_v3/src/features/about/data/datasources/about_local_datasource.dart'
+    as _i190;
+import 'package:al_quran_v3/src/features/about/data/repositories/about_repository_impl.dart'
+    as _i294;
+import 'package:al_quran_v3/src/features/about/domain/repositories/i_about_repository.dart'
+    as _i914;
+import 'package:al_quran_v3/src/features/about/domain/usecases/get_app_info_usecase.dart'
+    as _i511;
+import 'package:al_quran_v3/src/features/audio/data/datasources/audio_local_datasource.dart'
+    as _i712;
+import 'package:al_quran_v3/src/features/audio/data/repositories/audio_repository_impl.dart'
+    as _i587;
+import 'package:al_quran_v3/src/features/audio/domain/repositories/i_audio_repository.dart'
+    as _i818;
+import 'package:al_quran_v3/src/features/audio/domain/usecases/get_recitations_usecase.dart'
+    as _i219;
 import 'package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart'
     as _i169;
 import 'package:al_quran_v3/src/features/collections/data/repositories/collections_repository_impl.dart'
@@ -99,6 +115,30 @@ import 'package:al_quran_v3/src/features/setup/presentation/bloc/download_cubit.
     as _i708;
 import 'package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart'
     as _i76;
+import 'package:al_quran_v3/src/features/surah_info/data/datasources/surah_info_local_datasource.dart'
+    as _i278;
+import 'package:al_quran_v3/src/features/surah_info/data/repositories/surah_info_repository_impl.dart'
+    as _i632;
+import 'package:al_quran_v3/src/features/surah_info/domain/repositories/i_surah_info_repository.dart'
+    as _i723;
+import 'package:al_quran_v3/src/features/surah_info/domain/usecases/get_surah_info_usecase.dart'
+    as _i570;
+import 'package:al_quran_v3/src/features/surah_list/data/datasources/surah_navigation_local_datasource.dart'
+    as _i662;
+import 'package:al_quran_v3/src/features/surah_list/data/repositories/surah_navigation_repository_impl.dart'
+    as _i571;
+import 'package:al_quran_v3/src/features/surah_list/domain/repositories/i_surah_navigation_repository.dart'
+    as _i31;
+import 'package:al_quran_v3/src/features/surah_list/domain/usecases/get_surah_navigation_usecase.dart'
+    as _i626;
+import 'package:al_quran_v3/src/features/tafsir/data/datasources/tafsir_local_datasource.dart'
+    as _i563;
+import 'package:al_quran_v3/src/features/tafsir/data/repositories/tafsir_repository_impl.dart'
+    as _i880;
+import 'package:al_quran_v3/src/features/tafsir/domain/repositories/i_tafsir_repository.dart'
+    as _i759;
+import 'package:al_quran_v3/src/features/tafsir/domain/usecases/get_tafsir_usecase.dart'
+    as _i662;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -109,6 +149,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.lazySingleton<_i190.AboutLocalDataSource>(
+      () => _i190.AboutLocalDataSource(),
+    );
+    gh.lazySingleton<_i712.AudioLocalDataSource>(
+      () => _i712.AudioLocalDataSource(),
+    );
     gh.lazySingleton<_i150.QuranResourcesLocalDataSource>(
       () => _i150.QuranResourcesLocalDataSource(),
     );
@@ -117,6 +163,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i72.SetupLocalDataSource>(
       () => _i72.SetupLocalDataSource(),
+    );
+    gh.lazySingleton<_i278.SurahInfoLocalDataSource>(
+      () => _i278.SurahInfoLocalDataSource(),
+    );
+    gh.lazySingleton<_i662.SurahNavigationLocalDataSource>(
+      () => _i662.SurahNavigationLocalDataSource(),
+    );
+    gh.lazySingleton<_i563.TafsirLocalDataSource>(
+      () => _i563.TafsirLocalDataSource(),
     );
     gh.lazySingleton<_i720.IResourceRepository>(
       () => _i865.ResourceRepositoryImpl(),
@@ -166,6 +221,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i502.IQuranResourcesRepository>(),
       ),
     );
+    gh.lazySingleton<_i914.IAboutRepository>(
+      () => _i294.AboutRepositoryImpl(gh<_i190.AboutLocalDataSource>()),
+    );
     gh.lazySingleton<_i104.PrayerTimeCalculatorDataSource>(
       () => _i104.PrayerTimeCalculatorDataSourceImpl(),
     );
@@ -175,6 +233,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i169.CollectionsLocalDataSource>(
       () => _i169.CollectionsLocalDataSourceImpl(),
     );
+    gh.lazySingleton<_i759.ITafsirRepository>(
+      () => _i880.TafsirRepositoryImpl(gh<_i563.TafsirLocalDataSource>()),
+    );
     gh.factory<_i411.QuranResourcesCubit>(
       () => _i411.QuranResourcesCubit(
         gh<_i83.GetQuranResourcesUseCase>(),
@@ -183,14 +244,28 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i925.DeleteQuranResourceUseCase>(),
       ),
     );
+    gh.lazySingleton<_i662.GetTafsirUseCase>(
+      () => _i662.GetTafsirUseCase(gh<_i759.ITafsirRepository>()),
+    );
     gh.lazySingleton<_i144.SaveSetupPreferencesUseCase>(
       () => _i144.SaveSetupPreferencesUseCase(gh<_i670.ISetupRepository>()),
+    );
+    gh.lazySingleton<_i31.ISurahNavigationRepository>(
+      () => _i571.SurahNavigationRepositoryImpl(
+        gh<_i662.SurahNavigationLocalDataSource>(),
+      ),
     );
     gh.lazySingleton<_i856.LocationRepository>(
       () => _i1067.LocationRepositoryImpl(
         gh<_i924.LocationLocalDataSource>(),
         gh<_i527.LocationRemoteDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i723.ISurahInfoRepository>(
+      () => _i632.SurahInfoRepositoryImpl(gh<_i278.SurahInfoLocalDataSource>()),
+    );
+    gh.lazySingleton<_i818.IAudioRepository>(
+      () => _i587.AudioRepositoryImpl(gh<_i712.AudioLocalDataSource>()),
     );
     gh.lazySingleton<_i1035.CollectionsRepository>(
       () => _i713.CollectionsRepositoryImpl(
@@ -209,6 +284,9 @@ extension GetItInjectableX on _i174.GetIt {
         setupRepository: gh<_i670.ISetupRepository>(),
       ),
     );
+    gh.lazySingleton<_i511.GetAppInfoUseCase>(
+      () => _i511.GetAppInfoUseCase(gh<_i914.IAboutRepository>()),
+    );
     gh.lazySingleton<_i642.GetCurrentLocationUseCase>(
       () => _i642.GetCurrentLocationUseCase(gh<_i856.LocationRepository>()),
     );
@@ -218,11 +296,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i22.SaveLocationUseCase>(
       () => _i22.SaveLocationUseCase(gh<_i856.LocationRepository>()),
     );
+    gh.lazySingleton<_i219.GetRecitationsUseCase>(
+      () => _i219.GetRecitationsUseCase(gh<_i818.IAudioRepository>()),
+    );
     gh.lazySingleton<_i298.QiblaRepository>(
       () => _i135.QiblaRepositoryImpl(
         gh<_i197.CompassDatasource>(),
         gh<_i1059.VibrationDatasource>(),
       ),
+    );
+    gh.lazySingleton<_i626.GetSurahNavigationUseCase>(
+      () => _i626.GetSurahNavigationUseCase(
+        gh<_i31.ISurahNavigationRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i570.GetSurahInfoUseCase>(
+      () => _i570.GetSurahInfoUseCase(gh<_i723.ISurahInfoRepository>()),
     );
     gh.lazySingleton<_i556.GetPrayerTimesUseCase>(
       () => _i556.GetPrayerTimesUseCase(gh<_i451.PrayerTimeRepository>()),

@@ -3,7 +3,7 @@ import "dart:developer";
 import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:archive/archive.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:dio/dio.dart";

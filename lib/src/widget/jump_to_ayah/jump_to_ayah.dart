@@ -9,8 +9,8 @@ import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function
 import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
 import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
-import "package:al_quran_v3/src/screen/tafsir_view/tafsir_view.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
+import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
 import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
 import "package:dartx/dartx.dart";

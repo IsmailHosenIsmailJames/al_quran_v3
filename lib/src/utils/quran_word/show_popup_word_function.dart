@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/screen/surah_list_view/model/surah_info_model.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/widget/quran_script_words/show_popup_of_word.dart";
 import "package:flutter/material.dart";
 

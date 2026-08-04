@@ -1,5 +1,5 @@
-import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
-import "package:al_quran_v3/src/core/audio/model/recitation_info_model.dart";
+import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
+import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -9,10 +9,10 @@ import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "../../core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "../../utils/basic_functions.dart";
-import "../../screen/audio/change_reciter/popup_change_reciter.dart";
-import "../../screen/audio/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_change_reciter.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "../../theme/values/values.dart";
 
 Widget getReciterWidget({

@@ -2,14 +2,14 @@ import "dart:developer";
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/core/audio/model/audio_controller_ui.dart";
-import "package:al_quran_v3/src/core/audio/model/audio_player_position_model.dart";
-import "package:al_quran_v3/src/core/audio/model/ayahkey_management.dart";
-import "package:al_quran_v3/src/core/audio/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_model.dart";
+import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
+import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
+import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/theme/values/values.dart";
@@ -20,7 +20,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
 
-import "../../core/audio/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
 import "../../theme/controller/theme_cubit.dart";
 import "../../theme/controller/theme_state.dart";
 
@@ -122,10 +122,10 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                         child:
                                             BlocBuilder<
                                               PlayerStateCubit,
-                                              PlayerState
+                                              PlayerState?
                                             >(
                                               builder: (context, state) => Icon(
-                                                state.isPlaying
+                                                (state?.isPlaying ?? false)
                                                     ? Icons.pause_rounded
                                                     : Icons.play_arrow_rounded,
                                                 color: Colors.white,
@@ -196,6 +196,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             ],
           )
         : Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [playerSliders(), playerControllers(l10n), const Gap(5)],
@@ -208,10 +209,19 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
       children: [
         BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
           builder: (context, state) {
+            Duration progress = state.currentDuration ?? Duration.zero;
+            Duration buffered = state.bufferDuration ?? Duration.zero;
+            Duration total = state.totalDuration ?? Duration.zero;
+            if (progress < Duration.zero) progress = Duration.zero;
+            if (total < Duration.zero) total = Duration.zero;
+            if (buffered < Duration.zero) buffered = Duration.zero;
+            if (progress > total && total > Duration.zero) progress = total;
+            if (buffered > total && total > Duration.zero) buffered = total;
+
             return ProgressBar(
-              progress: state.currentDuration ?? Duration.zero,
-              buffered: state.bufferDuration ?? Duration.zero,
-              total: state.totalDuration ?? Duration.zero,
+              progress: progress,
+              buffered: buffered,
+              total: total,
               thumbCanPaintOutsideBar: false,
               barHeight: 6,
               timeLabelLocation: TimeLabelLocation.sides,
@@ -228,33 +238,46 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 state?.end != null &&
                 state?.start != null) {
               int currentSurahNumber = int.parse(state!.current.split(":")[0]);
-              List ayahList = getListOfAyahKey(
-                startAyahKey: "$currentSurahNumber:1",
-                endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
+              List ayahList = List.from(
+                getListOfAyahKey(
+                  startAyahKey: "$currentSurahNumber:1",
+                  endAyahKey: getEndAyahKeyFromSurahNumber(currentSurahNumber),
+                ),
               );
               ayahList.removeWhere((element) => element.runtimeType == int);
+
+              int idx = ayahList.indexOf(state.current);
+              if (idx < 0) idx = 0;
+              double sliderVal = idx.toDouble().clamp(
+                0.0,
+                (ayahList.length > 1 ? ayahList.length - 1 : 0).toDouble(),
+              );
+              int divisions = ayahList.length > 1 ? ayahList.length - 1 : 1;
 
               return ayahList.length > 1
                   ? Row(
                       children: [
-                        Text(state.current),
+                        Text(
+                          state.current,
+                          style: const TextStyle(fontSize: 12),
+                        ),
                         Expanded(
                           child: SliderTheme(
                             data: SliderTheme.of(context).copyWith(
                               padding: const EdgeInsets.only(
                                 top: 3,
                                 bottom: 5,
-                                left: 10,
-                                right: 10,
+                                left: 5,
+                                right: 5,
                               ),
                             ),
 
                             child: Slider(
-                              value: ayahList.indexOf(state.current).toDouble(),
-                              max: ayahList.length.toDouble() - 1,
+                              value: sliderVal,
+                              max: (ayahList.length - 1).toDouble(),
                               min: 0,
 
-                              divisions: ayahList.length - 1,
+                              divisions: divisions,
                               onChanged: (value) {
                                 String ayahKey = ayahList[value.toInt()];
                                 if ((state.ayahList.length) == 1) {
@@ -274,7 +297,10 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             ),
                           ),
                         ),
-                        Text(ayahList.last!),
+                        Text(
+                          ayahList.last.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        ),
                       ],
                     )
                   : const SizedBox();
@@ -294,7 +320,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
       padding: const EdgeInsets.only(right: 15),
       child: BlocBuilder<AyahKeyCubit, AyahKeyManagement?>(
         builder: (context, state) {
-          List ayahList = state?.ayahList ?? [];
+          List ayahList = List.from(state?.ayahList ?? []);
           ayahList.removeWhere((element) => element.runtimeType == int);
           int currentPlayingIndex = ayahList.indexOf(state?.current);
           if (currentPlayingIndex == -1) currentPlayingIndex = 0;
@@ -326,10 +352,12 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             state?.current.split(":").first ?? "",
                           );
                           if (currentSurahNumber == null) return;
-                          List tempAyahList = getListOfAyahKey(
-                            startAyahKey: "$currentSurahNumber:1",
-                            endAyahKey: getEndAyahKeyFromSurahNumber(
-                              currentSurahNumber,
+                          List tempAyahList = List.from(
+                            getListOfAyahKey(
+                              startAyahKey: "$currentSurahNumber:1",
+                              endAyahKey: getEndAyahKeyFromSurahNumber(
+                                currentSurahNumber,
+                              ),
                             ),
                           );
                           tempAyahList.removeWhere(
@@ -370,21 +398,22 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 style: IconButton.styleFrom(padding: EdgeInsets.zero),
                 icon: const Icon(Icons.replay_5_rounded),
               ),
-              BlocBuilder<PlayerStateCubit, PlayerState>(
+              BlocBuilder<PlayerStateCubit, PlayerState?>(
                 builder: (context, state) {
+                  final isPlaying = state?.isPlaying ?? false;
                   return IconButton(
                     onPressed: () async {
                       AudioPlayerManager.audioPlayer.playing
                           ? AudioPlayerManager.audioPlayer.pause()
                           : AudioPlayerManager.audioPlayer.play();
                     },
-                    tooltip: state.isPlaying ? l10n.pause : l10n.play,
+                    tooltip: isPlaying ? l10n.pause : l10n.play,
                     iconSize: 40,
                     style: IconButton.styleFrom(
                       padding: const EdgeInsets.all(5),
                     ),
                     icon: Icon(
-                      state.isPlaying
+                      isPlaying
                           ? Icons.pause_rounded
                           : Icons.play_arrow_rounded,
                     ),
@@ -429,10 +458,12 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                             state?.current.split(":").first ?? "",
                           );
                           if (currentSurahNumber == null) return;
-                          List tempAyahList = getListOfAyahKey(
-                            startAyahKey: "$currentSurahNumber:1",
-                            endAyahKey: getEndAyahKeyFromSurahNumber(
-                              currentSurahNumber,
+                          List tempAyahList = List.from(
+                            getListOfAyahKey(
+                              startAyahKey: "$currentSurahNumber:1",
+                              endAyahKey: getEndAyahKeyFromSurahNumber(
+                                currentSurahNumber,
+                              ),
                             ),
                           );
                           tempAyahList.removeWhere(
