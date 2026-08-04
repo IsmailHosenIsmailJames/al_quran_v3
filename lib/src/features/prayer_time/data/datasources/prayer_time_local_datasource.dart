@@ -1,5 +1,5 @@
 import "package:adhan_dart/adhan_dart.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:injectable/injectable.dart";
 import "package:shared_preferences/shared_preferences.dart";
 

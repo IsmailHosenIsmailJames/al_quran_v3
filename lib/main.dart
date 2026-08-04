@@ -19,8 +19,8 @@ import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/background/background_notification_scheduler.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/background/prayer_background_worker.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_background_worker.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
 import "package:al_quran_v3/src/screen/collections/collection_page.dart";

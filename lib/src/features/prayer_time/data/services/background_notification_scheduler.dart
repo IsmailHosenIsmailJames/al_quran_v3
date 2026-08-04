@@ -30,7 +30,6 @@ import "package:al_quran_v3/l10n/app_localizations_zh.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
@@ -182,13 +181,20 @@ class ReminderScheduler {
         return appLocalizations.sunTopOfTheHead;
       case Prayer.sunset:
         return appLocalizations.sunSetting;
-      default:
-        return PrayerTimeHelper.localizedPrayerName(
-              null,
-              prayer,
-              appLocalizations: appLocalizations,
-            )?.capitalize() ??
-            "-";
+      case Prayer.fajr:
+        return appLocalizations.fajr.capitalize();
+      case Prayer.dhuha:
+        return appLocalizations.dhuha.capitalize();
+      case Prayer.dhuhr:
+        return appLocalizations.dhuhr.capitalize();
+      case Prayer.asr:
+        return appLocalizations.asr.capitalize();
+      case Prayer.maghrib:
+        return appLocalizations.maghrib.capitalize();
+      case Prayer.isha:
+        return appLocalizations.isha.capitalize();
+      case Prayer.tahajjud:
+        return appLocalizations.tahajjud.capitalize();
     }
   }
 
