@@ -23,7 +23,8 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/background_no
 import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_background_worker.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
-import "package:al_quran_v3/src/screen/collections/collection_page.dart";
+import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
+import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 import "package:al_quran_v3/src/screen/home/home_page.dart";
 import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
 import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
