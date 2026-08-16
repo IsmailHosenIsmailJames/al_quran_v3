@@ -83,6 +83,8 @@ import 'package:al_quran_v3/src/features/prayer_time/domain/usecases/save_prayer
     as _i347;
 import 'package:al_quran_v3/src/features/prayer_time/domain/usecases/schedule_prayer_notifications_usecase.dart'
     as _i903;
+import 'package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart'
+    as _i601;
 import 'package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_time_cubit.dart'
     as _i358;
 import 'package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart'
@@ -119,6 +121,8 @@ import 'package:al_quran_v3/src/features/quran_resources/domain/usecases/toggle_
     as _i130;
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart'
     as _i411;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart'
+    as _i81;
 import 'package:al_quran_v3/src/features/settings/data/datasources/settings_local_datasource.dart'
     as _i584;
 import 'package:al_quran_v3/src/features/settings/data/repositories/settings_repository_impl.dart'
@@ -167,6 +171,8 @@ import 'package:al_quran_v3/src/features/surah_list/domain/repositories/i_surah_
     as _i31;
 import 'package:al_quran_v3/src/features/surah_list/domain/usecases/get_surah_navigation_usecase.dart'
     as _i626;
+import 'package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_cubit.dart'
+    as _i563;
 import 'package:al_quran_v3/src/features/tafsir/data/datasources/tafsir_local_datasource.dart'
     as _i563;
 import 'package:al_quran_v3/src/features/tafsir/data/repositories/tafsir_repository_impl.dart'
@@ -175,6 +181,16 @@ import 'package:al_quran_v3/src/features/tafsir/domain/repositories/i_tafsir_rep
     as _i759;
 import 'package:al_quran_v3/src/features/tafsir/domain/usecases/get_tafsir_usecase.dart'
     as _i662;
+import 'package:al_quran_v3/src/features/tajweed_guide/data/datasources/tajweed_guide_local_data_source.dart'
+    as _i461;
+import 'package:al_quran_v3/src/features/tajweed_guide/data/repositories/tajweed_guide_repository_impl.dart'
+    as _i1041;
+import 'package:al_quran_v3/src/features/tajweed_guide/domain/repositories/tajweed_guide_repository.dart'
+    as _i619;
+import 'package:al_quran_v3/src/features/tajweed_guide/domain/usecases/get_tajweed_rules_usecase.dart'
+    as _i33;
+import 'package:al_quran_v3/src/features/tajweed_guide/presentation/cubit/tajweed_guide_cubit.dart'
+    as _i461;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -185,6 +201,9 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i601.PrayerReminderCubit>(() => _i601.PrayerReminderCubit());
+    gh.factory<_i81.QuranViewCubit>(() => _i81.QuranViewCubit());
+    gh.factory<_i563.SurahSearchCubit>(() => _i563.SurahSearchCubit());
     gh.lazySingleton<_i190.AboutLocalDataSource>(
       () => _i190.AboutLocalDataSource(),
     );
@@ -240,6 +259,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i283.SetupRepositoryImpl(
         localDataSource: gh<_i72.SetupLocalDataSource>(),
       ),
+    );
+    gh.lazySingleton<_i461.TajweedGuideLocalDataSource>(
+      () => _i461.TajweedGuideLocalDataSourceImpl(),
     );
     gh.lazySingleton<_i502.IQuranResourcesRepository>(
       () => _i456.QuranResourcesRepositoryImpl(
@@ -297,6 +319,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i662.GetTafsirUseCase>(
       () => _i662.GetTafsirUseCase(gh<_i759.ITafsirRepository>()),
+    );
+    gh.lazySingleton<_i619.TajweedGuideRepository>(
+      () => _i1041.TajweedGuideRepositoryImpl(
+        localDataSource: gh<_i461.TajweedGuideLocalDataSource>(),
+      ),
     );
     gh.lazySingleton<_i144.SaveSetupPreferencesUseCase>(
       () => _i144.SaveSetupPreferencesUseCase(gh<_i670.ISetupRepository>()),
@@ -418,6 +445,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i451.PrayerTimeRepository>(),
       ),
     );
+    gh.lazySingleton<_i33.GetTajweedRulesUseCase>(
+      () => _i33.GetTajweedRulesUseCase(gh<_i619.TajweedGuideRepository>()),
+    );
     gh.factory<_i76.SetupBloc>(
       () => _i76.SetupBloc(
         getSetupResourcesUseCase: gh<_i930.GetSetupResourcesUseCase>(),
@@ -469,6 +499,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i759.GetCompassHeadingUseCase>(),
         gh<_i153.CalculateQiblaAngleUseCase>(),
         gh<_i979.TriggerAlignmentVibrationUseCase>(),
+      ),
+    );
+    gh.factory<_i461.TajweedGuideCubit>(
+      () => _i461.TajweedGuideCubit(
+        getTajweedRulesUseCase: gh<_i33.GetTajweedRulesUseCase>(),
       ),
     );
     return this;

@@ -1,4 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_cubit.dart";
@@ -30,7 +32,7 @@ class _SurahListViewState extends State<SurahListView> {
   @override
   void initState() {
     super.initState();
-    _searchCubit = SurahSearchCubit(context);
+    _searchCubit = getIt<SurahSearchCubit>();
   }
 
   @override
@@ -74,7 +76,11 @@ class _SurahListViewState extends State<SurahListView> {
                   ),
                   leading: const Icon(FluentIcons.search_24_filled),
                   onChanged: (value) {
-                    _searchCubit.onSearchChanged(value);
+                    _searchCubit.onSearchChanged(
+                      value,
+                      languageCode:
+                          context.read<LanguageCubit>().state.locale.languageCode,
+                    );
                   },
                 ),
               );

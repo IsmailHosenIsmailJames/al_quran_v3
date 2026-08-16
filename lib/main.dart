@@ -11,6 +11,7 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_qura
 import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
 import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
@@ -250,15 +251,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
         BlocProvider(create: (context) => WordPlayingStateCubit()),
         BlocProvider(create: (context) => AudioTabReciterCubit()),
-        BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
-        BlocProvider(create: (context) => QuranViewCubit()),
-        BlocProvider(create: (context) => PrayerReminderCubit()),
+        BlocProvider(create: (context) => getIt<QuranViewCubit>()),
+        BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),
         BlocProvider(create: (context) => LanguageCubit(initialLocale)),
         BlocProvider(create: (context) => LandscapeScrollEffect()),
         BlocProvider(create: (context) => QuickAccessCubit()),
         BlocProvider(create: (context) => getIt<QuranHistoryCubit>()),
         BlocProvider(create: (context) => AudioDownloadCubit()),
+        BlocProvider(create: (context) => AudioLoopCubit()),
         BlocProvider(create: (context) => AyahToHighlight(null)),
       ],
 

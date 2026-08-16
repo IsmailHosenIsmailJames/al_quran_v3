@@ -5,7 +5,9 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 
+@injectable
 class QuranViewCubit extends Cubit<QuranViewState> {
   QuranViewCubit()
     : super(

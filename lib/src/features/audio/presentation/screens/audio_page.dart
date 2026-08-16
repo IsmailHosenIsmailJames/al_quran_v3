@@ -9,7 +9,9 @@ import "package:al_quran_v3/src/core/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_range_selector.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
@@ -57,6 +59,7 @@ class _AudioPageState extends State<AudioPage> {
     final height = MediaQuery.of(context).size.height;
     final isLandscape = width > 900 || (height < 600 && width > 500);
     final l10n = AppLocalizations.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (surahNameLocalization.isEmpty || surahMeaningLocalization.isEmpty) {
       return const Center(child: CircularProgressIndicator());
@@ -112,10 +115,21 @@ class _AudioPageState extends State<AudioPage> {
                           // Right Panel: Ayah & Translation Card
                           Expanded(
                             flex: 6,
-                            child: _buildAyahCard(
-                              context,
-                              ayahKeyState,
-                              themeState,
+                            child: Column(
+                              children: [
+                                _buildRangeStatusBanner(
+                                  context,
+                                  themeState,
+                                  isDark,
+                                ),
+                                Expanded(
+                                  child: _buildAyahCard(
+                                    context,
+                                    ayahKeyState,
+                                    themeState,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -135,7 +149,9 @@ class _AudioPageState extends State<AudioPage> {
                             ayahKeyState,
                             themeState,
                           ),
-                          const Gap(10),
+                          const Gap(8),
+                          // Range Status Banner (if active)
+                          _buildRangeStatusBanner(context, themeState, isDark),
                           // Listening Ayah Card
                           Expanded(
                             child: _buildAyahCard(
@@ -285,6 +301,31 @@ class _AudioPageState extends State<AudioPage> {
             ),
           ),
 
+          // Range / Memorization Quick Action
+          BlocBuilder<AudioLoopCubit, AudioLoopState>(
+            builder: (context, loopState) {
+              return IconButton(
+                visualDensity: VisualDensity.compact,
+                iconSize: 18,
+                tooltip: "Ayah Range & Memorization",
+                icon: Icon(
+                  FluentIcons.arrow_repeat_all_20_regular,
+                  color: loopState.isRangeActive
+                      ? themeState.primary
+                      : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+                ),
+                onPressed: () {
+                  popupAyahRangeSelector(
+                    context,
+                    initialSurah: surahNumber,
+                    initialStartAyah:
+                        ayahKeyState.current.split(":")[1].toInt(),
+                  );
+                },
+              );
+            },
+          ),
+
           // Next Surah Button
           IconButton(
             visualDensity: VisualDensity.compact,
@@ -310,6 +351,73 @@ class _AudioPageState extends State<AudioPage> {
           ),
         ],
       ),
+    );
+  }
+
+  /// Banner indicating active Range & Repetition mode
+  Widget _buildRangeStatusBanner(
+    BuildContext context,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    return BlocBuilder<AudioLoopCubit, AudioLoopState>(
+      builder: (context, loopState) {
+        if (!loopState.isRangeActive) return const SizedBox.shrink();
+
+        final cycleText = loopState.repeatTargetCount == -1
+            ? "Cycle ${loopState.currentRangeCycle}/∞"
+            : "Cycle ${loopState.currentRangeCycle}/${loopState.repeatTargetCount}";
+
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+            borderRadius: BorderRadius.circular(roundedRadius),
+            border: Border.all(
+              color: themeState.primary.withValues(alpha: 0.25),
+            ),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                FluentIcons.arrow_repeat_all_20_filled,
+                color: themeState.primary,
+                size: 16,
+              ),
+              const Gap(8),
+              Expanded(
+                child: Text(
+                  "Memorizing: ${getSurahName(context, loopState.startSurah)} ${loopState.startAyah}–${loopState.endAyah} • $cycleText",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: themeState.primary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                iconSize: 16,
+                tooltip: "Adjust Range",
+                onPressed: () => popupAyahRangeSelector(context),
+                icon: const Icon(Icons.tune_rounded),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                iconSize: 16,
+                tooltip: "Stop Range",
+                onPressed: () => context.read<AudioLoopCubit>().clearRange(),
+                icon: const Icon(Icons.close_rounded),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -491,13 +599,56 @@ class _AudioPageState extends State<AudioPage> {
     ThemeState themeState,
     AppLocalizations l10n,
   ) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        // Loop Mode Quick-Toggle
+        BlocBuilder<AudioLoopCubit, AudioLoopState>(
+          builder: (context, loopState) {
+            IconData loopIcon;
+            Color? loopColor;
+            String tooltip;
+
+            switch (loopState.loopMode) {
+              case LoopMode.off:
+                loopIcon = Icons.repeat_rounded;
+                loopColor =
+                    isDark ? Colors.grey.shade600 : Colors.grey.shade400;
+                tooltip = "Loop: Off";
+                break;
+              case LoopMode.all:
+                loopIcon = Icons.repeat_rounded;
+                loopColor = themeState.primary;
+                tooltip = "Loop: All (Range/Playlist)";
+                break;
+              case LoopMode.one:
+                loopIcon = Icons.repeat_one_rounded;
+                loopColor = themeState.primary;
+                tooltip = "Loop: Single Ayah";
+                break;
+            }
+
+            return IconButton(
+              tooltip: tooltip,
+              iconSize: 22,
+              visualDensity: VisualDensity.compact,
+              icon: Icon(loopIcon, color: loopColor),
+              onPressed: () =>
+                  context.read<AudioLoopCubit>().toggleQuickLoopMode(),
+            );
+          },
+        ),
+        const Gap(4),
+
         // Previous Ayah
         IconButton(
           tooltip: "Previous Ayah",
-          iconSize: 28,
+          iconSize: 26,
           icon: const Icon(Icons.skip_previous_rounded),
           onPressed: currentIndex > 0
               ? () {
@@ -517,12 +668,12 @@ class _AudioPageState extends State<AudioPage> {
                 }
               : null,
         ),
-        const Gap(6),
+        const Gap(4),
 
         // Replay 5s
         IconButton(
           tooltip: "Replay 5s",
-          iconSize: 24,
+          iconSize: 22,
           icon: const Icon(Icons.replay_5_rounded),
           onPressed: AudioPlayerManager.audioPlayer.audioSource == null
               ? null
@@ -535,7 +686,7 @@ class _AudioPageState extends State<AudioPage> {
                   AudioPlayerManager.audioPlayer.seek(position);
                 },
         ),
-        const Gap(10),
+        const Gap(8),
 
         // Hero Play / Pause Button
         BlocBuilder<PlayerStateCubit, PlayerState>(
@@ -624,12 +775,12 @@ class _AudioPageState extends State<AudioPage> {
             );
           },
         ),
-        const Gap(10),
+        const Gap(8),
 
         // Forward 5s
         IconButton(
           tooltip: "Forward 5s",
-          iconSize: 24,
+          iconSize: 22,
           icon: const Icon(Icons.forward_5_rounded),
           onPressed: AudioPlayerManager.audioPlayer.audioSource == null
               ? null
@@ -642,12 +793,12 @@ class _AudioPageState extends State<AudioPage> {
                   AudioPlayerManager.audioPlayer.seek(position);
                 },
         ),
-        const Gap(6),
+        const Gap(4),
 
         // Next Ayah
         IconButton(
           tooltip: "Next Ayah",
-          iconSize: 28,
+          iconSize: 26,
           icon: const Icon(Icons.skip_next_rounded),
           onPressed: currentIndex < (ayahKeyState.ayahList.length - 1)
               ? () {
@@ -667,7 +818,31 @@ class _AudioPageState extends State<AudioPage> {
                 }
               : null,
         ),
+        const Gap(4),
+
+        // Range / Memorize Mode
+        IconButton(
+          tooltip: "Ayah Range & Memorization",
+          iconSize: 22,
+          visualDensity: VisualDensity.compact,
+          icon: Icon(
+            FluentIcons.arrow_repeat_all_20_regular,
+            color: context.watch<AudioLoopCubit>().state.isRangeActive
+                ? themeState.primary
+                : (isDark ? Colors.grey.shade600 : Colors.grey.shade400),
+          ),
+          onPressed: () {
+            final surahNumber = ayahKeyState.current.split(":")[0].toInt();
+            final ayahNumber = ayahKeyState.current.split(":")[1].toInt();
+            popupAyahRangeSelector(
+              context,
+              initialSurah: surahNumber,
+              initialStartAyah: ayahNumber,
+            );
+          },
+        ),
       ],
-    );
-  }
+    ),
+  );
+}
 }

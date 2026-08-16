@@ -1,9 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "../../data/datasources/tajweed_guide_local_data_source.dart";
-import "../../data/repositories/tajweed_guide_repository_impl.dart";
-import "../../domain/usecases/get_tajweed_rules_usecase.dart";
 import "../cubit/tajweed_guide_cubit.dart";
 import "../cubit/tajweed_guide_state.dart";
 import "../widgets/tajweed_rule_card.dart";
@@ -14,12 +12,7 @@ class TajweedGuideScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final dataSource = TajweedGuideLocalDataSourceImpl();
-        final repository = TajweedGuideRepositoryImpl(localDataSource: dataSource);
-        final useCase = GetTajweedRulesUseCase(repository);
-        return TajweedGuideCubit(getTajweedRulesUseCase: useCase)..loadTajweedRules();
-      },
+      create: (context) => getIt<TajweedGuideCubit>()..loadTajweedRules(),
       child: const TajweedGuideView(),
     );
   }
