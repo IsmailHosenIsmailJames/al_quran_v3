@@ -11,7 +11,9 @@ import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_m
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_range_selector.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
@@ -287,12 +289,52 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             int.tryParse(ayahKeyState.current.split(":")[0]) ?? 1;
         final ayahNumber =
             int.tryParse(ayahKeyState.current.split(":")[1]) ?? 1;
-        final totalAyahsInSurah =
-            quranAyahCount[surahNumber - 1];
+        final totalAyahsInSurah = quranAyahCount[surahNumber - 1];
+        final isDark = Theme.of(context).brightness == Brightness.dark;
 
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        return FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+            // Loop Quick Toggle
+            BlocBuilder<AudioLoopCubit, AudioLoopState>(
+              builder: (context, loopState) {
+                IconData loopIcon;
+                Color? loopColor;
+                String tooltip;
+
+                switch (loopState.loopMode) {
+                  case just_audio.LoopMode.off:
+                    loopIcon = Icons.repeat_rounded;
+                    loopColor =
+                        isDark ? Colors.grey.shade600 : Colors.grey.shade400;
+                    tooltip = "Loop: Off";
+                    break;
+                  case just_audio.LoopMode.all:
+                    loopIcon = Icons.repeat_rounded;
+                    loopColor = themeState.primary;
+                    tooltip = "Loop: All (Range/Playlist)";
+                    break;
+                  case just_audio.LoopMode.one:
+                    loopIcon = Icons.repeat_one_rounded;
+                    loopColor = themeState.primary;
+                    tooltip = "Loop: Single Ayah";
+                    break;
+                }
+
+                return IconButton(
+                  iconSize: 18,
+                  visualDensity: VisualDensity.compact,
+                  tooltip: tooltip,
+                  onPressed: () =>
+                      context.read<AudioLoopCubit>().toggleQuickLoopMode(),
+                  icon: Icon(loopIcon, color: loopColor),
+                );
+              },
+            ),
+
             // Previous Ayah
             IconButton(
               iconSize: 22,
@@ -307,11 +349,11 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   : null,
               icon: const Icon(Icons.skip_previous_rounded),
             ),
-            const Gap(4),
+            const Gap(2),
 
             // Replay 5s
             IconButton(
-              iconSize: 20,
+              iconSize: 18,
               visualDensity: VisualDensity.compact,
               tooltip: "Replay 5s",
               onPressed: AudioPlayerManager.audioPlayer.audioSource == null
@@ -327,7 +369,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     },
               icon: const Icon(Icons.replay_5_rounded),
             ),
-            const Gap(8),
+            const Gap(6),
 
             // Play / Pause Hero Button
             BlocBuilder<PlayerStateCubit, PlayerState>(
@@ -337,8 +379,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                         state.state == just_audio.ProcessingState.buffering;
 
                 return Container(
-                  width: 48,
-                  height: 48,
+                  width: 44,
+                  height: 44,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: themeState.primary,
@@ -366,8 +408,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                       child: Center(
                         child: isLoading
                             ? const SizedBox(
-                                width: 22,
-                                height: 22,
+                                width: 20,
+                                height: 20,
                                 child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                   valueColor:
@@ -379,7 +421,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                                     ? Icons.pause_rounded
                                     : Icons.play_arrow_rounded,
                                 color: Colors.white,
-                                size: 28,
+                                size: 26,
                               ),
                       ),
                     ),
@@ -387,11 +429,11 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 );
               },
             ),
-            const Gap(8),
+            const Gap(6),
 
             // Forward 5s
             IconButton(
-              iconSize: 20,
+              iconSize: 18,
               visualDensity: VisualDensity.compact,
               tooltip: "Forward 5s",
               onPressed: AudioPlayerManager.audioPlayer.audioSource == null
@@ -407,7 +449,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     },
               icon: const Icon(Icons.forward_5_rounded),
             ),
-            const Gap(4),
+            const Gap(2),
 
             // Next Ayah
             IconButton(
@@ -423,9 +465,30 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   : null,
               icon: const Icon(Icons.skip_next_rounded),
             ),
+
+            // Range / Memorize Button
+            IconButton(
+              iconSize: 18,
+              visualDensity: VisualDensity.compact,
+              tooltip: "Ayah Range & Memorization",
+              icon: Icon(
+                FluentIcons.arrow_repeat_all_20_regular,
+                color: context.watch<AudioLoopCubit>().state.isRangeActive
+                    ? themeState.primary
+                    : (isDark ? Colors.grey.shade600 : Colors.grey.shade400),
+              ),
+              onPressed: () {
+                popupAyahRangeSelector(
+                  context,
+                  initialSurah: surahNumber,
+                  initialStartAyah: ayahNumber,
+                );
+              },
+            ),
           ],
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 }

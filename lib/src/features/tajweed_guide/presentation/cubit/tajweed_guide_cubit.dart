@@ -1,7 +1,9 @@
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:injectable/injectable.dart";
 import "../../domain/usecases/get_tajweed_rules_usecase.dart";
 import "tajweed_guide_state.dart";
 
+@injectable
 class TajweedGuideCubit extends Cubit<TajweedGuideState> {
   final GetTajweedRulesUseCase getTajweedRulesUseCase;
 

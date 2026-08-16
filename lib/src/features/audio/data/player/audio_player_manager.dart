@@ -30,6 +30,7 @@ import "package:just_audio_background/just_audio_background.dart";
 import "package:path/path.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 
 class AudioPlayerManager {
   static bool isListening = false;
@@ -82,10 +83,18 @@ class AudioPlayerManager {
     playerEventStream = audioPlayer.playerEventStream.listen((event) {
       context.read<PlayerStateCubit>().changeState(isPlaying: event.playing);
     });
+    int? lastStreamIndex;
     processingStateStream = audioPlayer.processingStateStream.listen((
       event,
     ) async {
       if (event == ProcessingState.completed) {
+        final audioLoopCubit = context.read<AudioLoopCubit>();
+        final shouldContinue = audioLoopCubit.onPlaylistCycleFinished();
+        if (shouldContinue && audioLoopCubit.state.isRangeActive) {
+          await audioPlayer.seek(Duration.zero, index: 0);
+          await audioPlayer.play();
+          return;
+        }
         await audioPlayer.pause();
         await audioPlayer.seek(Duration.zero, index: 0);
         context.read<AudioUiCubit>().expand(false);
@@ -114,7 +123,22 @@ class AudioPlayerManager {
     currentIndexStream = audioPlayer.currentIndexStream.listen((event) {
       if (event != null) {
         final ayahKeyCubit = context.read<AyahKeyCubit>();
-        ayahKeyCubit.changeCurrentAyahKey(ayahKeyCubit.state.ayahList[event]);
+        final audioLoopCubit = context.read<AudioLoopCubit>();
+        if (event < ayahKeyCubit.state.ayahList.length) {
+          ayahKeyCubit.changeCurrentAyahKey(ayahKeyCubit.state.ayahList[event]);
+        }
+        // Check for wrap-around loop cycle
+        if (lastStreamIndex != null &&
+            lastStreamIndex! > event &&
+            event == 0 &&
+            audioLoopCubit.state.isRangeActive) {
+          final shouldContinue = audioLoopCubit.onPlaylistCycleFinished();
+          if (!shouldContinue) {
+            audioPlayer.pause();
+            audioPlayer.seek(Duration.zero, index: 0);
+          }
+        }
+        lastStreamIndex = event;
       }
     });
   }
@@ -490,6 +514,9 @@ class AudioPlayerManager {
       initialIndex: initialIndex,
       shuffleOrder: DefaultShuffleOrder(),
     );
+
+    final audioLoopCubit = context.read<AudioLoopCubit>();
+    await audioPlayer.setLoopMode(audioLoopCubit.state.loopMode);
 
     await audioPlayer.setSpeed(playbackSpeed);
     if (instantPlay) await audioPlayer.play();

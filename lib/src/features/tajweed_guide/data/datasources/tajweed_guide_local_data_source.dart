@@ -1,10 +1,12 @@
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
+import "package:injectable/injectable.dart";
 import "../models/tajweed_rule_model.dart";
 
 abstract class TajweedGuideLocalDataSource {
   List<TajweedRuleModel> getTajweedRules();
 }
 
+@LazySingleton(as: TajweedGuideLocalDataSource)
 class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
   @override
   List<TajweedRuleModel> getTajweedRules() {

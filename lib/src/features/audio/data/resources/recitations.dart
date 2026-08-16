@@ -5,6 +5,19 @@ String baseOfSegmentsAudioResource =
 
 List<Map<String, dynamic>> recitationsInfoList = [
   {
+    "link": "https://verses.quran.foundation/Alafasy/mp3",
+    "name": "Mishari Rashid Alafasy",
+    "style": "Murattal",
+    "segments_url":
+        "$baseOfSegmentsAudioResource-mishari-rashid-al-afasy-murattal-hafs-953.json.txt",
+
+    "img":
+        "https://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
+    "bio":
+        "https://www.assabile.com/mishary-rashid-alafasy-1/mishary-rashid-alafasy.htm",
+    "source": "Quran.com",
+  },
+  {
     "link": "https://everyayah.com/data/Abdul_Basit_Murattal_64kbps",
     "name": "Abdul Basit Abdus Samad",
     "style": "Murattal",
@@ -84,20 +97,6 @@ List<Map<String, dynamic>> recitationsInfoList = [
     "img": "https://www.assabile.com/media/person/200x256/ahmed-al-ajmi.png",
     "bio": "https://www.assabile.com/ahmed-al-ajmi-13/ahmed-al-ajmi.htm",
     "source": "EveryAyah.com",
-  },
-
-  {
-    "link": "https://verses.quran.foundation/Alafasy/mp3",
-    "name": "Mishari Rashid Alafasy",
-    "style": "Murattal",
-    "segments_url":
-        "$baseOfSegmentsAudioResource-mishari-rashid-al-afasy-murattal-hafs-953.json.txt",
-
-    "img":
-        "https://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-    "bio":
-        "https://www.assabile.com/mishary-rashid-alafasy-1/mishary-rashid-alafasy.htm",
-    "source": "Quran.com",
   },
 
   {
