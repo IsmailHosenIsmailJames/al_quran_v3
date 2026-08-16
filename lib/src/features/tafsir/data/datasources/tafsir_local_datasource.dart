@@ -1,5 +1,5 @@
-import 'package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart';
-import 'package:al_quran_v3/src/utils/quran_resources/quran_tafsir_function.dart';
+import 'package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart';
+import 'package:al_quran_v3/src/features/quran_resources/data/utils/quran_tafsir_function.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton

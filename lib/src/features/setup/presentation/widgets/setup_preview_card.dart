@@ -3,11 +3,11 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/book_search_cub
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_state.dart";
 import "package:al_quran_v3/src/features/setup/presentation/widgets/book_select_bottom_sheet.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/settings/quran_script_settings.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
-import "package:al_quran_v3/src/widget/preview_quran_script/script_selection_segment_button.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/preview/script_selection_segment_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";

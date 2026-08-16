@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/collections/domain/entities/sorting_met
 import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
 import "package:al_quran_v3/src/features/collections/presentation/screens/collection_content_view.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:dartx/dartx.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";

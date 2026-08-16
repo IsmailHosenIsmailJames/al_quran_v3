@@ -1,11 +1,11 @@
 import "dart:async";
 
-import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_state.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
+import "package:al_quran_v3/src/features/surah_list/domain/utils/search_pattern_in_text.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:flutter/widgets.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:intl/intl.dart";

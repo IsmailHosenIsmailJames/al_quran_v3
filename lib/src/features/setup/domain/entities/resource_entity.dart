@@ -1,4 +1,4 @@
-import 'package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart';
+import 'package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'resource_entity.freezed.dart';

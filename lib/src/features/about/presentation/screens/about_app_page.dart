@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/resources/translation/languages.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/localization/languages.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";

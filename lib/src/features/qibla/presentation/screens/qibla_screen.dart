@@ -8,9 +8,9 @@ import "package:al_quran_v3/src/features/location/presentation/screens/location_
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_cubit.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_state.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/widgets/compass_painter.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/utils/number_localization.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";

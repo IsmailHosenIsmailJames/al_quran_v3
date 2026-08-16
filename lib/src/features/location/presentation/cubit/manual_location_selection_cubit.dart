@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/utils/quran_resources/location_resources_function.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/location_resources_function.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 

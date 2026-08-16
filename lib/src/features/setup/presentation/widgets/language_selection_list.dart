@@ -3,10 +3,10 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_event.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_state.dart";
 import "package:al_quran_v3/src/features/setup/presentation/widgets/setup_preview_card.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
-import "package:al_quran_v3/src/resources/translation/languages.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
+import "package:al_quran_v3/src/core/localization/languages.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";

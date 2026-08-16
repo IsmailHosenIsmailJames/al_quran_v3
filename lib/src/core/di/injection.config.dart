@@ -31,6 +31,18 @@ import 'package:al_quran_v3/src/features/collections/data/repositories/collectio
     as _i713;
 import 'package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart'
     as _i1035;
+import 'package:al_quran_v3/src/features/home/data/datasources/history_local_datasource.dart'
+    as _i151;
+import 'package:al_quran_v3/src/features/home/data/repositories/history_repository_impl.dart'
+    as _i922;
+import 'package:al_quran_v3/src/features/home/domain/repositories/i_history_repository.dart'
+    as _i170;
+import 'package:al_quran_v3/src/features/home/domain/usecases/add_history_usecase.dart'
+    as _i126;
+import 'package:al_quran_v3/src/features/home/domain/usecases/get_history_usecase.dart'
+    as _i289;
+import 'package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart'
+    as _i900;
 import 'package:al_quran_v3/src/features/location/data/datasources/location_local_datasource.dart'
     as _i924;
 import 'package:al_quran_v3/src/features/location/data/datasources/location_remote_datasource.dart'
@@ -45,6 +57,18 @@ import 'package:al_quran_v3/src/features/location/domain/usecases/get_saved_loca
     as _i168;
 import 'package:al_quran_v3/src/features/location/domain/usecases/save_location_usecase.dart'
     as _i22;
+import 'package:al_quran_v3/src/features/mushaf/data/datasources/mushaf_local_datasource.dart'
+    as _i187;
+import 'package:al_quran_v3/src/features/mushaf/data/datasources/mushaf_remote_datasource.dart'
+    as _i796;
+import 'package:al_quran_v3/src/features/mushaf/data/repositories/mushaf_repository_impl.dart'
+    as _i594;
+import 'package:al_quran_v3/src/features/mushaf/domain/repositories/i_mushaf_repository.dart'
+    as _i318;
+import 'package:al_quran_v3/src/features/mushaf/domain/usecases/mushaf_usecases.dart'
+    as _i1044;
+import 'package:al_quran_v3/src/features/mushaf/presentation/cubit/mushaf_cubit.dart'
+    as _i852;
 import 'package:al_quran_v3/src/features/prayer_time/data/datasources/prayer_time_calculator_datasource.dart'
     as _i104;
 import 'package:al_quran_v3/src/features/prayer_time/data/datasources/prayer_time_local_datasource.dart'
@@ -95,6 +119,18 @@ import 'package:al_quran_v3/src/features/quran_resources/domain/usecases/toggle_
     as _i130;
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart'
     as _i411;
+import 'package:al_quran_v3/src/features/settings/data/datasources/settings_local_datasource.dart'
+    as _i584;
+import 'package:al_quran_v3/src/features/settings/data/repositories/settings_repository_impl.dart'
+    as _i197;
+import 'package:al_quran_v3/src/features/settings/domain/repositories/i_settings_repository.dart'
+    as _i881;
+import 'package:al_quran_v3/src/features/settings/domain/usecases/get_settings_usecase.dart'
+    as _i70;
+import 'package:al_quran_v3/src/features/settings/domain/usecases/save_settings_usecase.dart'
+    as _i272;
+import 'package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart'
+    as _i103;
 import 'package:al_quran_v3/src/features/setup/data/datasources/setup_local_datasource.dart'
     as _i72;
 import 'package:al_quran_v3/src/features/setup/data/repositories/resource_repository_impl.dart'
@@ -155,11 +191,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i712.AudioLocalDataSource>(
       () => _i712.AudioLocalDataSource(),
     );
+    gh.lazySingleton<_i151.HistoryLocalDataSource>(
+      () => _i151.HistoryLocalDataSource(),
+    );
+    gh.lazySingleton<_i187.MushafLocalDataSource>(
+      () => _i187.MushafLocalDataSource(),
+    );
+    gh.lazySingleton<_i796.MushafRemoteDataSource>(
+      () => _i796.MushafRemoteDataSource(),
+    );
     gh.lazySingleton<_i150.QuranResourcesLocalDataSource>(
       () => _i150.QuranResourcesLocalDataSource(),
     );
     gh.lazySingleton<_i609.QuranResourcesRemoteDataSource>(
       () => _i609.QuranResourcesRemoteDataSource(),
+    );
+    gh.lazySingleton<_i584.SettingsLocalDataSource>(
+      () => _i584.SettingsLocalDataSource(),
     );
     gh.lazySingleton<_i72.SetupLocalDataSource>(
       () => _i72.SetupLocalDataSource(),
@@ -181,6 +229,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i930.GetSetupResourcesUseCase>(
       () => _i930.GetSetupResourcesUseCase(gh<_i720.IResourceRepository>()),
+    );
+    gh.lazySingleton<_i881.ISettingsRepository>(
+      () => _i197.SettingsRepositoryImpl(gh<_i584.SettingsLocalDataSource>()),
     );
     gh.lazySingleton<_i329.PrayerTimeLocalDataSource>(
       () => _i329.PrayerTimeLocalDataSourceImpl(),
@@ -278,6 +329,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i329.PrayerTimeLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i318.IMushafRepository>(
+      () => _i594.MushafRepositoryImpl(
+        localDataSource: gh<_i187.MushafLocalDataSource>(),
+        remoteDataSource: gh<_i796.MushafRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i170.IHistoryRepository>(
+      () => _i922.HistoryRepositoryImpl(gh<_i151.HistoryLocalDataSource>()),
+    );
     gh.lazySingleton<_i1025.DownloadSetupResourcesUseCase>(
       () => _i1025.DownloadSetupResourcesUseCase(
         resourceRepository: gh<_i720.IResourceRepository>(),
@@ -287,6 +347,30 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i511.GetAppInfoUseCase>(
       () => _i511.GetAppInfoUseCase(gh<_i914.IAboutRepository>()),
     );
+    gh.lazySingleton<_i1044.CheckMushafDownloadedUseCase>(
+      () => _i1044.CheckMushafDownloadedUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i1044.DownloadMushafUseCase>(
+      () => _i1044.DownloadMushafUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i1044.DeleteMushafUseCase>(
+      () => _i1044.DeleteMushafUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i1044.GetMushafLastPageUseCase>(
+      () => _i1044.GetMushafLastPageUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i1044.SaveMushafLastPageUseCase>(
+      () => _i1044.SaveMushafLastPageUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i1044.GetMushafBasePathUseCase>(
+      () => _i1044.GetMushafBasePathUseCase(gh<_i318.IMushafRepository>()),
+    );
+    gh.lazySingleton<_i70.GetSettingsUseCase>(
+      () => _i70.GetSettingsUseCase(gh<_i881.ISettingsRepository>()),
+    );
+    gh.lazySingleton<_i272.SaveSettingsUseCase>(
+      () => _i272.SaveSettingsUseCase(gh<_i881.ISettingsRepository>()),
+    );
     gh.lazySingleton<_i642.GetCurrentLocationUseCase>(
       () => _i642.GetCurrentLocationUseCase(gh<_i856.LocationRepository>()),
     );
@@ -295,6 +379,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i22.SaveLocationUseCase>(
       () => _i22.SaveLocationUseCase(gh<_i856.LocationRepository>()),
+    );
+    gh.factory<_i852.MushafCubit>(
+      () => _i852.MushafCubit(
+        checkDownloadedUseCase: gh<_i1044.CheckMushafDownloadedUseCase>(),
+        downloadUseCase: gh<_i1044.DownloadMushafUseCase>(),
+        deleteUseCase: gh<_i1044.DeleteMushafUseCase>(),
+        getLastPageUseCase: gh<_i1044.GetMushafLastPageUseCase>(),
+        saveLastPageUseCase: gh<_i1044.SaveMushafLastPageUseCase>(),
+        getBasePathUseCase: gh<_i1044.GetMushafBasePathUseCase>(),
+      ),
     );
     gh.lazySingleton<_i219.GetRecitationsUseCase>(
       () => _i219.GetRecitationsUseCase(gh<_i818.IAudioRepository>()),
@@ -330,10 +424,22 @@ extension GetItInjectableX on _i174.GetIt {
         saveSetupPreferencesUseCase: gh<_i144.SaveSetupPreferencesUseCase>(),
       ),
     );
+    gh.lazySingleton<_i126.AddHistoryUseCase>(
+      () => _i126.AddHistoryUseCase(gh<_i170.IHistoryRepository>()),
+    );
+    gh.lazySingleton<_i289.GetHistoryUseCase>(
+      () => _i289.GetHistoryUseCase(gh<_i170.IHistoryRepository>()),
+    );
     gh.factory<_i708.DownloadCubit>(
       () => _i708.DownloadCubit(
         downloadSetupResourcesUseCase:
             gh<_i1025.DownloadSetupResourcesUseCase>(),
+      ),
+    );
+    gh.factory<_i103.OthersSettingsCubit>(
+      () => _i103.OthersSettingsCubit(
+        getSettingsUseCase: gh<_i70.GetSettingsUseCase>(),
+        saveSettingsUseCase: gh<_i272.SaveSettingsUseCase>(),
       ),
     );
     gh.lazySingleton<_i153.CalculateQiblaAngleUseCase>(
@@ -350,6 +456,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i556.GetPrayerTimesUseCase>(),
         gh<_i347.SavePrayerSettingsUseCase>(),
         gh<_i903.SchedulePrayerNotificationsUseCase>(),
+      ),
+    );
+    gh.factory<_i900.QuranHistoryCubit>(
+      () => _i900.QuranHistoryCubit(
+        getHistoryUseCase: gh<_i289.GetHistoryUseCase>(),
+        addHistoryUseCase: gh<_i126.AddHistoryUseCase>(),
       ),
     );
     gh.factory<_i236.QiblaCubit>(
