@@ -653,5 +653,6 @@
   "heading": "Arah",
   "alignedWithKaaba": "Sejajar dengan Ka'bah",
   "turnRight": "Putar {degrees}° ke Kanan",
-  "turnLeft": "Putar {degrees}° ke Kiri"
+  "turnLeft": "Putar {degrees}° ke Kiri",
+  "streamingAndNetwork": "Streaming & Jaringan"
 }

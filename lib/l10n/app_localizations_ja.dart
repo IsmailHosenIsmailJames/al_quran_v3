@@ -1295,4 +1295,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '左に $degrees° 回ってください';
   }
+
+  @override
+  String get streamingAndNetwork => 'ストリーミングとネットワーク';
 }

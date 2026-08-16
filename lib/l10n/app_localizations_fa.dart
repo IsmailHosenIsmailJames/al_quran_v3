@@ -1314,4 +1314,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° به چپ بچرخید';
   }
+
+  @override
+  String get streamingAndNetwork => 'پخش جریانی و شبکه';
 }

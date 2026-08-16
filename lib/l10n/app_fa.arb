@@ -653,5 +653,6 @@
   "heading": "جهت",
   "alignedWithKaaba": "هم‌راستا با کعبه",
   "turnRight": "{degrees}° به راست بچرخید",
-  "turnLeft": "{degrees}° به چپ بچرخید"
+  "turnLeft": "{degrees}° به چپ بچرخید",
+  "streamingAndNetwork": "پخش جریانی و شبکه"
 }

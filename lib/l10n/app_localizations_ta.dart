@@ -1334,4 +1334,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° இடதுபுறம் திரும்பவும்';
   }
+
+  @override
+  String get streamingAndNetwork => 'ஸ்ட்ரீமிங் மற்றும் பிணையம்';
 }

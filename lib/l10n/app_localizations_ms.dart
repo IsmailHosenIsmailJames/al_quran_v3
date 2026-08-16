@@ -1315,4 +1315,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Pusing $degrees° ke Kiri';
   }
+
+  @override
+  String get streamingAndNetwork => 'Penstriman & Rangkaian';
 }

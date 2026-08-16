@@ -653,5 +653,6 @@
   "heading": "الاتجاه",
   "alignedWithKaaba": "محاذٍ للكعبة",
   "turnRight": "أدر {degrees}° إلى اليمين",
-  "turnLeft": "أدر {degrees}° إلى اليسار"
+  "turnLeft": "أدر {degrees}° إلى اليسار",
+  "streamingAndNetwork": "البث والشبكة"
 }

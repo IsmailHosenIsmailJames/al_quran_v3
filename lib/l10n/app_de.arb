@@ -391,5 +391,6 @@
   "heading": "Ausrichtung",
   "alignedWithKaaba": "Ausgerichtet auf die Kaaba",
   "turnRight": "Drehe {degrees}° nach rechts",
-  "turnLeft": "Drehe {degrees}° nach links"
+  "turnLeft": "Drehe {degrees}° nach links",
+  "streamingAndNetwork": "Streaming & Netzwerk"
 }

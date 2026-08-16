@@ -2503,6 +2503,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Turn {degrees}° Left'**
   String turnLeft(Object degrees);
+
+  /// No description provided for @streamingAndNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Streaming & Network'**
+  String get streamingAndNetwork;
 }
 
 class _AppLocalizationsDelegate

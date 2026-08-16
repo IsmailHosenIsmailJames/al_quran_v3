@@ -1315,4 +1315,7 @@ class AppLocalizationsId extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Putar $degrees° ke Kiri';
   }
+
+  @override
+  String get streamingAndNetwork => 'Streaming & Jaringan';
 }

@@ -653,5 +653,6 @@
   "heading": "Бағыт",
   "alignedWithKaaba": "Қағбамен бағытталған",
   "turnRight": "{degrees}° оңға бұрылыңыз",
-  "turnLeft": "{degrees}° солға бұрылыңыз"
+  "turnLeft": "{degrees}° солға бұрылыңыз",
+  "streamingAndNetwork": "Стриминг және желі"
 }

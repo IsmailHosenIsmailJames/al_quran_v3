@@ -653,5 +653,6 @@
   "heading": "Направление",
   "alignedWithKaaba": "Направлено на Каабу",
   "turnRight": "Поверните на {degrees}° вправо",
-  "turnLeft": "Поверните на {degrees}° влево"
+  "turnLeft": "Поверните на {degrees}° влево",
+  "streamingAndNetwork": "Стриминг и сеть"
 }

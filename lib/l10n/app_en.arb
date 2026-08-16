@@ -653,5 +653,6 @@
   "heading": "Heading",
   "alignedWithKaaba": "Aligned with Kaaba",
   "turnRight": "Turn {degrees}° Right",
-  "turnLeft": "Turn {degrees}° Left"
+  "turnLeft": "Turn {degrees}° Left",
+  "streamingAndNetwork": "Streaming & Network"
 }

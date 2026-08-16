@@ -653,5 +653,6 @@
   "heading": "لارښود",
   "alignedWithKaaba": "له کعبې سره برابر شوی",
   "turnRight": "{degrees}° ښي لور ته وګرځئ",
-  "turnLeft": "{degrees}° چپې لور ته وګرځئ"
+  "turnLeft": "{degrees}° چپې لور ته وګرځئ",
+  "streamingAndNetwork": "سټریمینګ او شبکه"
 }

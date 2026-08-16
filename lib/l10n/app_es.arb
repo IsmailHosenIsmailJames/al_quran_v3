@@ -653,5 +653,6 @@
   "heading": "Rumbo",
   "alignedWithKaaba": "Alineado con la Kaaba",
   "turnRight": "Gira {degrees}° a la derecha",
-  "turnLeft": "Gira {degrees}° a la izquierda"
+  "turnLeft": "Gira {degrees}° a la izquierda",
+  "streamingAndNetwork": "Transmisión y red"
 }

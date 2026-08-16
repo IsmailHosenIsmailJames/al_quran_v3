@@ -1315,4 +1315,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° چپې لور ته وګرځئ';
   }
+
+  @override
+  String get streamingAndNetwork => 'سټریمینګ او شبکه';
 }

@@ -653,5 +653,6 @@
   "heading": "Pusula Yönü",
   "alignedWithKaaba": "Kabe ile Hizalandı",
   "turnRight": "{degrees}° Sağa Dönün",
-  "turnLeft": "{degrees}° Sola Dönün"
+  "turnLeft": "{degrees}° Sola Dönün",
+  "streamingAndNetwork": "Akış ve Ağ"
 }

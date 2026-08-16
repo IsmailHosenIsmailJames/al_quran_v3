@@ -1294,4 +1294,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '왼쪽으로 $degrees° 회전';
   }
+
+  @override
+  String get streamingAndNetwork => '스트리밍 및 네트워크';
 }

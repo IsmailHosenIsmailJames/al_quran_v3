@@ -1314,4 +1314,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° солға бұрылыңыз';
   }
+
+  @override
+  String get streamingAndNetwork => 'Стриминг және желі';
 }

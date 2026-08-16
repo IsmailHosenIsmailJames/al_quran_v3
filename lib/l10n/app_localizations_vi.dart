@@ -1321,4 +1321,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Xoay $degrees° sang Trái';
   }
+
+  @override
+  String get streamingAndNetwork => 'Phát trực tuyến & Mạng';
 }

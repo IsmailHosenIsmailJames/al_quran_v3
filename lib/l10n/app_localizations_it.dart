@@ -1332,4 +1332,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Gira di $degrees° a sinistra';
   }
+
+  @override
+  String get streamingAndNetwork => 'Streaming e rete';
 }

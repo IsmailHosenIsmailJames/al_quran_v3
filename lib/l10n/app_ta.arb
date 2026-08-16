@@ -391,5 +391,6 @@
   "heading": "திசை",
   "alignedWithKaaba": "காபாவுடன் சீரமைக்கப்பட்டுள்ளது",
   "turnRight": "{degrees}° வலதுபுறம் திரும்பவும்",
-  "turnLeft": "{degrees}° இடதுபுறம் திரும்பவும்"
+  "turnLeft": "{degrees}° இடதுபுறம் திரும்பவும்",
+  "streamingAndNetwork": "ஸ்ட்ரீமிங் மற்றும் பிணையம்"
 }
