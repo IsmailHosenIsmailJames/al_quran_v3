@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart";
-import "package:al_quran_v3/src/resources/translation/languages.dart";
+import "package:al_quran_v3/src/core/localization/languages.dart";
 
 abstract class SetupEvent {
   const SetupEvent();

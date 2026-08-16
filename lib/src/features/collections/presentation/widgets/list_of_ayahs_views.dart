@@ -1,6 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
-import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";
 

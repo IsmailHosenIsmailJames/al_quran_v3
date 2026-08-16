@@ -5,8 +5,8 @@ import "package:al_quran_v3/src/features/collections/domain/entities/pinned_coll
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";

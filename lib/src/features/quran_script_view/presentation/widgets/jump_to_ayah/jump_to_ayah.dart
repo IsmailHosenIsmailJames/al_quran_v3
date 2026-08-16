@@ -1,0 +1,504 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/features/surah_list/domain/utils/filter_surah.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
+import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
+import "package:al_quran_v3/src/core/theme/values/values.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
+import "package:dartx/dartx.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
+import "package:gap/gap.dart";
+import "package:share_plus/share_plus.dart";
+
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
+
+class JumpToAyahView extends StatefulWidget {
+  final String? initAyahKey;
+  final bool isAudioPlayer;
+  final bool? selectMultipleAndShare;
+  final Function(String ayahKey)? onPlaySelected;
+  final Function(String ayahKey)? onSelectAyah;
+
+  const JumpToAyahView({
+    super.key,
+    this.initAyahKey,
+    required this.isAudioPlayer,
+    this.onPlaySelected,
+    this.selectMultipleAndShare,
+    this.onSelectAyah,
+  });
+
+  @override
+  State<JumpToAyahView> createState() => _JumpToAyahViewState();
+}
+
+class _JumpToAyahViewState extends State<JumpToAyahView> {
+  late int? surahNumber = int.tryParse(widget.initAyahKey?.split(":")[0] ?? "");
+  late int? ayahNumber = int.tryParse(widget.initAyahKey?.split(":")[1] ?? "");
+  ScrollController surahScrollController = ScrollController();
+  ScrollController ayahScrollController = ScrollController();
+  TextEditingController surahSearchController = TextEditingController();
+  List<String> selectedAyahKeys = [];
+  List<SurahInfoModel> surahInfoList = metaDataSurah.values
+      .map((e) => SurahInfoModel.fromMap(e))
+      .toList();
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeState themeState = context.read<ThemeCubit>().state;
+    List<SurahInfoModel> filteredSurah = getFilteredSurah(
+      context,
+      surahSearchController.text.trim(),
+    );
+    AppLocalizations l10n = AppLocalizations.of(context);
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(roundedRadius),
+      ),
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(roundedRadius),
+                topRight: Radius.circular(roundedRadius),
+              ),
+              color: themeState.primaryShade100,
+            ),
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            child: Stack(
+              children: [
+                Center(
+                  child: Text(
+                    widget.selectMultipleAndShare == true
+                        ? l10n.shareSelectAyahs
+                        : l10n.jumpToAyah,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          if (widget.selectMultipleAndShare == true) const Gap(8),
+          if (widget.selectMultipleAndShare == true)
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsetsGeometry.only(left: 10),
+              child: Text("Selected: ${selectedAyahKeys.length}"),
+            ),
+          if (widget.selectMultipleAndShare == true) const Gap(5),
+
+          if (widget.selectMultipleAndShare == true)
+            Stack(
+              children: [
+                Container(
+                  height: 40,
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                    color: themeState.primaryShade100,
+                  ),
+
+                  child: selectedAyahKeys.isEmpty
+                      ? Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Text(l10n.selectionEmpty),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.only(left: 10, right: 30),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: selectedAyahKeys.length,
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: Text(
+                                "${selectedAyahKeys[index]}${selectedAyahKeys.length == index + 1 ? "" : ", "}",
+                              ),
+                            );
+                          },
+                        ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    height: 40,
+                    child: IconButton(
+                      style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        selectedAyahKeys.clear();
+                        setState(() {});
+                      },
+                      icon: Icon(Icons.close, color: themeState.primary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+          if (widget.selectMultipleAndShare == true) const Divider(),
+
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width:
+                      MediaQuery.of(context).size.width *
+                      (widget.selectMultipleAndShare == true ? 0.6 : 0.65),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5, bottom: 5),
+                        child: SearchBar(
+                          controller: surahSearchController,
+                          elevation: WidgetStateProperty.all<double?>(0),
+                          backgroundColor: WidgetStateProperty.all<Color?>(
+                            themeState.primaryShade100,
+                          ),
+                          leading: const Icon(FluentIcons.search_24_filled),
+                          hintText: l10n.searchForASurah,
+
+                          onChanged: (value) {
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Scrollbar(
+                          controller: surahScrollController,
+                          interactive: true,
+                          radius: Radius.circular(roundedRadius),
+                          thickness: 10,
+                          child: ListView.builder(
+                            controller: surahScrollController,
+                            itemCount: filteredSurah.length,
+                            padding: const EdgeInsets.all(10),
+                            itemBuilder: (context, index) {
+                              SurahInfoModel surah = filteredSurah[index];
+                              return SizedBox(
+                                height: surah.id == surahNumber ? 40 : 30,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    alignment: Alignment.centerLeft,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        roundedRadius,
+                                      ),
+                                    ),
+                                    backgroundColor: surah.id == surahNumber
+                                        ? themeState.primary.withValues(
+                                            alpha: 0.2,
+                                          )
+                                        : Colors.transparent,
+                                    foregroundColor:
+                                        Theme.brightnessOf(context) ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
+                                    padding: const EdgeInsets.only(left: 10),
+                                  ),
+
+                                  onPressed: () {
+                                    setState(() {
+                                      surahNumber = surah.id;
+                                      ayahNumber = 1;
+                                    });
+                                  },
+                                  child: Text(
+                                    "${localizedNumber(context, surah.id)}. ${getSurahName(context, surah.id)}",
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const VerticalDivider(width: 1),
+                SizedBox(
+                  width:
+                      MediaQuery.of(context).size.width *
+                      (widget.selectMultipleAndShare == true ? 0.3 : 0.2),
+                  child: Scrollbar(
+                    controller: ayahScrollController,
+                    interactive: true,
+                    radius: Radius.circular(roundedRadius),
+                    thickness: 10,
+                    child: ListView.builder(
+                      controller: ayahScrollController,
+                      padding: const EdgeInsets.all(10),
+
+                      itemCount: surahNumber != null
+                          ? SurahInfoModel.fromMap(
+                              metaDataSurah[surahNumber.toString()]!,
+                            ).versesCount
+                          : 0,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height:
+                              (index == (ayahNumber ?? 0) - 1) &&
+                                  (widget.selectMultipleAndShare != true)
+                              ? 40
+                              : 30,
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+
+                              alignment: Alignment.center,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  roundedRadius,
+                                ),
+                              ),
+                              backgroundColor:
+                                  (index == (ayahNumber ?? 0) - 1) &&
+                                      (widget.selectMultipleAndShare != true)
+                                  ? themeState.primaryShade300
+                                  : Colors.transparent,
+                              foregroundColor:
+                                  Theme.brightnessOf(context) == Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            onPressed: () {
+                              if (widget.selectMultipleAndShare == true) {
+                                if (selectedAyahKeys.contains(
+                                  "$surahNumber:${index + 1}",
+                                )) {
+                                  selectedAyahKeys.remove(
+                                    "$surahNumber:${index + 1}",
+                                  );
+                                } else {
+                                  selectedAyahKeys.add(
+                                    "$surahNumber:${index + 1}",
+                                  );
+                                }
+                              } else {
+                                ayahNumber = index + 1;
+                              }
+                              setState(() {});
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                if (widget.selectMultipleAndShare == true)
+                                  selectedAyahKeys.contains(
+                                        "$surahNumber:${index + 1}",
+                                      )
+                                      ? const Icon(Icons.check_box_rounded)
+                                      : const Icon(
+                                          Icons.check_box_outline_blank_rounded,
+                                        ),
+                                if (widget.selectMultipleAndShare == true)
+                                  const Gap(20),
+                                Text(localizedNumber(context, index + 1)),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (widget.selectMultipleAndShare == true)
+            SizedBox(
+              width: 300,
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  String text = "";
+                  for (String ayahKey in selectedAyahKeys) {
+                    SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
+                      metaDataSurah[ayahKey.split(":").first]!,
+                    );
+                    List<TranslationOfAyah> translationsListWithInfoList =
+                        await QuranTranslationFunction.getTranslation(ayahKey);
+
+                    List<ResourcesModel?> translationBookInfoList =
+                        translationsListWithInfoList
+                            .map<ResourcesModel?>((e) => e.bookInfo)
+                            .toList();
+                    List<String> translationList = translationsListWithInfoList
+                        .map<String>(
+                          (e) => e.translation?["t"] ?? "Translation Not Found",
+                        )
+                        .toList();
+                    translationList = translationList
+                        .map((e) => e.replaceAll(">", "> "))
+                        .toList();
+                    List<Map> footNoteList = translationsListWithInfoList
+                        .map<Map>((e) => e.translation?["f"] ?? {})
+                        .toList();
+                    List<Map<int, String>> footNoteAsStringMap = [];
+                    footNoteList.mapIndexed((index, footNote) {
+                      String footNoteAsString = "\n";
+                      if (footNote.isNotEmpty) {
+                        footNote.forEach((key, value) {
+                          footNoteAsString += "$key. $value\n";
+                        });
+                      }
+                      footNoteAsStringMap.add({index: footNoteAsString});
+                    });
+
+                    List quranScriptWord =
+                        QuranScriptFunction.getWordListOfAyah(
+                          context.read<QuranViewCubit>().state.quranScriptType,
+                          ayahKey.split(":").first,
+                          ayahKey.split(":").last,
+                          circleJojom: context
+                              .read<QuranViewCubit>()
+                              .state
+                              .circleJojom,
+                        );
+
+                    String translationString = "\n";
+                    for (int i = 0; i < translationBookInfoList.length; i++) {
+                      translationString += translationList[i];
+                      translationString += "\n";
+                      footNoteAsStringMap[i].forEach((key, value) {
+                        translationString += "$key. $value";
+                      });
+                    }
+                    text +=
+                        "${getSurahName(context, surahInfoModel.id)} - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\nTranslation:\n$translationString\n";
+                  }
+
+                  await SharePlus.instance.share(ShareParams(text: text));
+                  Navigator.pop(context);
+                },
+                icon: const Icon(FluentIcons.textbox_16_regular),
+                label: Text(l10n.asText),
+              ),
+            ),
+          if (widget.isAudioPlayer)
+            Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+                top: 5,
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(roundedRadius),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  widget.onPlaySelected!("$surahNumber:$ayahNumber");
+                },
+                label: Text(l10n.playFromSelectedAyah),
+                icon: const Icon(Icons.play_circle_outline_rounded, size: 26),
+              ),
+            ),
+          if (!widget.isAudioPlayer && widget.selectMultipleAndShare != true)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  if (widget.onSelectAyah == null)
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          if (surahNumber != null && ayahNumber != null) {
+                            Navigator.pop(context);
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TafsirView(
+                                  ayahKey: "$surahNumber:$ayahNumber",
+                                ),
+                              ),
+                            );
+                          } else {
+                            Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                          }
+                        },
+                        child: Text(l10n.toTafsir),
+                      ),
+                    ),
+                  if (widget.onSelectAyah == null) const Gap(10),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (surahNumber != null && ayahNumber != null) {
+                          Navigator.pop(context);
+                          if (widget.onSelectAyah != null) {
+                            widget.onSelectAyah!("$surahNumber:$ayahNumber");
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QuranScriptView(
+                                  startKey: "$surahNumber:1",
+                                  endKey: getEndAyahKeyFromSurahNumber(
+                                    surahNumber!,
+                                  ),
+                                  toScrollKey: "$surahNumber:$ayahNumber",
+                                ),
+                              ),
+                            );
+                          }
+                        } else {
+                          Fluttertoast.showToast(msg: l10n.pleaseSelectOne);
+                        }
+                      },
+                      child: Text(
+                        widget.onSelectAyah != null
+                            ? l10n.selectAyah
+                            : l10n.toAyah,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}

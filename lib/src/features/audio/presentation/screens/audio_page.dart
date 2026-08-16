@@ -9,20 +9,20 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_qura
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/utils/get_localized_ayah_key.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/utils/quran_ayahs_function/gen_ayahs_key.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/core/utils/get_localized_ayah_key.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/utils/gen_ayahs_key.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/components/reciter_overview.dart";
-import "package:al_quran_v3/src/widget/jump_to_ayah/popup_jump_to_ayah.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
-import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/values/values.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_view_widget.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/popup_jump_to_ayah.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
+import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
@@ -31,7 +31,7 @@ import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
 
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 
 class AudioPage extends StatefulWidget {
   const AudioPage({super.key});

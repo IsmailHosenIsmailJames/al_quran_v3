@@ -9,12 +9,12 @@ import "package:al_quran_v3/src/features/collections/domain/entities/pinned_mode
 import "package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart";
 import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/list_of_ayahs_views.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/utils/quran_resources/get_translation_with_word_by_word.dart";
-import "package:al_quran_v3/src/widget/ayah_by_ayah/ayah_by_ayah_card.dart";
+import "package:al_quran_v3/src/core/theme/values/values.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_animate/flutter_animate.dart";

@@ -1,7 +1,7 @@
 import 'package:al_quran_v3/l10n/app_localizations.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/quran_resource_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
-import 'package:al_quran_v3/src/theme/controller/theme_cubit.dart';
+import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

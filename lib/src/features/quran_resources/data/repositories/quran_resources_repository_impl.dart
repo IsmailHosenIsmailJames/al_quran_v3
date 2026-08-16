@@ -4,8 +4,8 @@ import 'package:al_quran_v3/src/features/quran_resources/data/models/quran_resou
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/quran_resource_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/resource_group_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/repositories/i_quran_resources_repository.dart';
-import 'package:al_quran_v3/src/resources/quran_resources/models/resources_model.dart';
-import 'package:al_quran_v3/src/utils/filter/search_pattern_in_text.dart';
+import 'package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart';
+import 'package:al_quran_v3/src/features/surah_list/domain/utils/search_pattern_in_text.dart';
 import 'package:dartx/dartx.dart';
 import 'package:injectable/injectable.dart';
 

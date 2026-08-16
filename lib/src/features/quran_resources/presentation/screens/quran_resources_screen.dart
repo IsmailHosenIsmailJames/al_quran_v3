@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/re
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/tafsir_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/translation_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/word_by_word_resources_tab.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 

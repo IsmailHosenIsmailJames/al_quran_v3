@@ -1,23 +1,23 @@
 import "dart:convert";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/model/navigation_info_model.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/models/navigation_info_model.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/hizb_model.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
-import "package:al_quran_v3/src/widget/components/get_surah_index_widget.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_processor.dart";
+import "package:al_quran_v3/src/core/theme/values/values.dart";
+import "package:al_quran_v3/src/core/widgets/get_surah_index_widget.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
+import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-import "package:al_quran_v3/src/utils/number_localization.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 
 class HizbListView extends StatelessWidget {
   const HizbListView({super.key});

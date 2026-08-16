@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/features/tajweed_guide/data/datasources/tajweed_
 import "package:al_quran_v3/src/features/tajweed_guide/data/repositories/tajweed_guide_repository_impl.dart";
 import "package:al_quran_v3/src/features/tajweed_guide/domain/usecases/get_tajweed_rules_usecase.dart";
 import "package:al_quran_v3/src/features/tajweed_guide/presentation/widgets/tajweed_tagged_text.dart";
-import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_rules.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 

@@ -1,4 +1,4 @@
-import "package:al_quran_v3/src/widget/quran_script/script_view/tajweed_view/tajweed_rules.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
 import "package:flutter/material.dart";
 import "package:html/dom.dart" as dom;
 import "package:html/parser.dart" show parseFragment;

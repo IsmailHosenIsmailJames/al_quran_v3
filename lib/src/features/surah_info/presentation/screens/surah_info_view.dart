@@ -1,9 +1,9 @@
 import "dart:developer";
 
-import "package:al_quran_v3/src/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/quran_script_view.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:al_quran_v3/src/widget/surah_info_header/surah_info_header_builder.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";
 import "package:flutter_html/flutter_html.dart";

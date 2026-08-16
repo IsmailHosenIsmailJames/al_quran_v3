@@ -30,7 +30,7 @@ import "package:al_quran_v3/l10n/app_localizations_zh.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/material.dart";

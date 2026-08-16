@@ -1,8 +1,8 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/features/audio/data/resources/recitations.dart";
-import "package:al_quran_v3/src/utils/basic_functions.dart";
-import "package:al_quran_v3/src/theme/values/values.dart";
+import "package:al_quran_v3/src/core/utils/basic_functions.dart";
+import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -10,8 +10,8 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 
 class ChangeReciter extends StatefulWidget {
   final ReciterInfoModel initReciterIndex;

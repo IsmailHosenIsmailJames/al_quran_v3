@@ -1,9 +1,9 @@
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
-import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/segmented_resources_manager.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-import "package:al_quran_v3/src/utils/get_segments_supported_reciters.dart";
+import "package:al_quran_v3/src/features/audio/data/utils/get_segments_supported_reciters.dart";
 
 class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
   SegmentedQuranReciterCubit()

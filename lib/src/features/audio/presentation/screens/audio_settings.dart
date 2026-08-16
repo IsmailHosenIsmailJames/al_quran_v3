@@ -3,10 +3,10 @@ import "dart:io";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/audio/presentation/helpers/audio_functions.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_state.dart";
-import "package:al_quran_v3/src/utils/number_localization.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -15,7 +15,7 @@ import "package:path/path.dart";
 import "package:path_provider/path_provider.dart";
 import "package:screenshot/screenshot.dart";
 
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 
 class AudioSettings extends StatefulWidget {
   final bool needAppBar;
