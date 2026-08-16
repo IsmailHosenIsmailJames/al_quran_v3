@@ -1,7 +1,8 @@
 import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/services/platform_services.dart"
+    as platform_services;
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
@@ -334,81 +335,6 @@ class _HomePageState extends State<HomePage> {
       initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
     );
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final userBox = Hive.box("user");
-      final bool isSetupComplete = userBox.get(
-        "is_setup_complete",
-        defaultValue: false,
-      );
-      final bool hasShownDialog = userBox.get(
-        "shown_tajweed_dialog",
-        defaultValue: false,
-      );
-      if (isSetupComplete && !hasShownDialog) {
-        userBox.put("shown_tajweed_dialog", true);
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              insetPadding: const EdgeInsets.symmetric(horizontal: 10),
-              title: Text(AppLocalizations.of(context).scriptSettingsUpdated),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    AppLocalizations.of(
-                      context,
-                    ).scriptSettingsUpdatedDescription,
-                  ),
-                  const Gap(10),
-                  getScriptSelectionSegmentedButtons(context),
-                  getAyahByAyahCard(
-                    ayahKey: "1:2",
-                    context: context,
-                    translationListWithInfo: [],
-                    showTopOptions: false,
-                    showOnlyAyah: true,
-                    removeBorder: true,
-                    keepMargin: false,
-                    isCenter: true,
-                    wordByWord: [],
-                  ),
-                  const Gap(10),
-                  const CircleJojomQuranViewOption(),
-                  const Gap(10),
-                  const QuranFontSelectionWidget(
-                    titleStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton.icon(
-                  onPressed: () => Navigator.pop(context),
-                  label: Text(AppLocalizations.of(context).close),
-                  icon: const Icon(Icons.close),
-                ),
-                TextButton.icon(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPage(),
-                      ),
-                    );
-                  },
-                  label: Text(AppLocalizations.of(context).goToSettings),
-                  icon: const Icon(Icons.settings),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    });
   }
 
   @override
