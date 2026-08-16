@@ -391,5 +391,6 @@
   "heading": "方位",
   "alignedWithKaaba": "カアバ神殿に合致",
   "turnRight": "右に {degrees}° 回ってください",
-  "turnLeft": "左に {degrees}° 回ってください"
+  "turnLeft": "左に {degrees}° 回ってください",
+  "streamingAndNetwork": "ストリーミングとネットワーク"
 }

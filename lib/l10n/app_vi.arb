@@ -391,5 +391,6 @@
   "heading": "Hướng",
   "alignedWithKaaba": "Đã hướng đúng Kaaba",
   "turnRight": "Xoay {degrees}° sang Phải",
-  "turnLeft": "Xoay {degrees}° sang Trái"
+  "turnLeft": "Xoay {degrees}° sang Trái",
+  "streamingAndNetwork": "Phát trực tuyến & Mạng"
 }

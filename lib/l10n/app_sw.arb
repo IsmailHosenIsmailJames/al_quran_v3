@@ -653,5 +653,6 @@
   "heading": "Mwelekeo",
   "alignedWithKaaba": "Imelingana na Kaaba",
   "turnRight": "Geuka {degrees}° Kulia",
-  "turnLeft": "Geuka {degrees}° Shoto"
+  "turnLeft": "Geuka {degrees}° Shoto",
+  "streamingAndNetwork": "Utiririshaji na Mtandao"
 }

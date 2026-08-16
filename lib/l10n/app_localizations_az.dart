@@ -1322,4 +1322,7 @@ class AppLocalizationsAz extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° Sola dönün';
   }
+
+  @override
+  String get streamingAndNetwork => 'Yayım və Şəbəkə';
 }

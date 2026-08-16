@@ -653,5 +653,6 @@
   "heading": "朝向",
   "alignedWithKaaba": "已对准克尔白",
   "turnRight": "向右旋转 {degrees}°",
-  "turnLeft": "向左旋转 {degrees}°"
+  "turnLeft": "向左旋转 {degrees}°",
+  "streamingAndNetwork": "流媒体与网络"
 }

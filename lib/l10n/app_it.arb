@@ -391,5 +391,6 @@
   "heading": "Rilevamento",
   "alignedWithKaaba": "Allineato con la Kaaba",
   "turnRight": "Gira di {degrees}° a destra",
-  "turnLeft": "Gira di {degrees}° a sinistra"
+  "turnLeft": "Gira di {degrees}° a sinistra",
+  "streamingAndNetwork": "Streaming e rete"
 }

@@ -391,5 +391,6 @@
   "heading": "방위",
   "alignedWithKaaba": "카바와 정렬됨",
   "turnRight": "오른쪽으로 {degrees}° 회전",
-  "turnLeft": "왼쪽으로 {degrees}° 회전"
+  "turnLeft": "왼쪽으로 {degrees}° 회전",
+  "streamingAndNetwork": "스트리밍 및 네트워크"
 }

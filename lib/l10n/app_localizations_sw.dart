@@ -1325,4 +1325,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Geuka $degrees° Shoto';
   }
+
+  @override
+  String get streamingAndNetwork => 'Utiririshaji na Mtandao';
 }

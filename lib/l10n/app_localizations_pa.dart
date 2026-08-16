@@ -1314,4 +1314,7 @@ class AppLocalizationsPa extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '$degrees° ਖੱਬੇ ਮੁੜੋ';
   }
+
+  @override
+  String get streamingAndNetwork => 'ਸਟ੍ਰੀਮਿੰਗ ਅਤੇ ਨੈੱਟਵਰਕ';
 }

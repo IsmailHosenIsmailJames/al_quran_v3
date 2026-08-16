@@ -391,5 +391,6 @@
   "heading": "İstiqamət",
   "alignedWithKaaba": "Kəbə ilə eyni istiqamətdə",
   "turnRight": "{degrees}° Sağa dönün",
-  "turnLeft": "{degrees}° Sola dönün"
+  "turnLeft": "{degrees}° Sola dönün",
+  "streamingAndNetwork": "Yayım və Şəbəkə"
 }

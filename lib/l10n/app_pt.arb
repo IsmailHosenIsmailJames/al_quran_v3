@@ -391,5 +391,6 @@
   "heading": "Rumo",
   "alignedWithKaaba": "Alinhado com a Caaba",
   "turnRight": "Vire {degrees}° à direita",
-  "turnLeft": "Vire {degrees}° à esquerda"
+  "turnLeft": "Vire {degrees}° à esquerda",
+  "streamingAndNetwork": "Transmissão e rede"
 }

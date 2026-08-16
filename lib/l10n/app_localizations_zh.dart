@@ -1275,4 +1275,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String turnLeft(Object degrees) {
     return '向左旋转 $degrees°';
   }
+
+  @override
+  String get streamingAndNetwork => '流媒体与网络';
 }

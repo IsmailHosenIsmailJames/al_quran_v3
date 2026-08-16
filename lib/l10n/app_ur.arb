@@ -653,5 +653,6 @@
   "heading": "رخ",
   "alignedWithKaaba": "کعبہ کے ساتھ درست سمت",
   "turnRight": "{degrees}° دائیں طرف مڑیں",
-  "turnLeft": "{degrees}° بائیں طرف مڑیں"
+  "turnLeft": "{degrees}° بائیں طرف مڑیں",
+  "streamingAndNetwork": "اسٹریمنگ اور نیٹ ورک"
 }

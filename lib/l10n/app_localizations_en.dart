@@ -1316,4 +1316,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String turnLeft(Object degrees) {
     return 'Turn $degrees° Left';
   }
+
+  @override
+  String get streamingAndNetwork => 'Streaming & Network';
 }

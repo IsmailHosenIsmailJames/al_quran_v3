@@ -653,5 +653,6 @@
   "heading": "হেডিং",
   "alignedWithKaaba": "কাবার সাথে সারিবদ্ধ",
   "turnRight": "{degrees}° ডানদিকে ঘুরুন",
-  "turnLeft": "{degrees}° বামদিকে ঘুরুন"
+  "turnLeft": "{degrees}° বামদিকে ঘুরুন",
+  "streamingAndNetwork": "স্ট্রিমিং ও নেটওয়ার্ক"
 }

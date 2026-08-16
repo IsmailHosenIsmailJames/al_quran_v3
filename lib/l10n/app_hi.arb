@@ -653,5 +653,6 @@
   "heading": "दिशा",
   "alignedWithKaaba": "काबा के साथ संरेखित",
   "turnRight": "{degrees}° दाहिने मुड़ें",
-  "turnLeft": "{degrees}° बाएँ मुड़ें"
+  "turnLeft": "{degrees}° बाएँ मुड़ें",
+  "streamingAndNetwork": "स्ट्रीमिंग और नेटवर्क"
 }

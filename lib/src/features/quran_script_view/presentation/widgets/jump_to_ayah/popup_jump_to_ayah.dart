@@ -8,30 +8,62 @@ Future<void> popupJumpToAyah({
   required bool isAudioPlayer,
   bool? selectMultipleAndShare,
   Function(String ayahKey)? onPlaySelected,
-  final Function(String ayahKey)? onSelectAyah,
+  Function(String ayahKey)? onSelectAyah,
 }) async {
-  await showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        insetPadding: const EdgeInsets.only(
-          top: 20,
-          left: 10,
-          right: 10,
-          bottom: 20,
-        ),
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+  final isLargeScreen = width >= 600;
 
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(roundedRadius),
-        ),
-        child: JumpToAyahView(
-          initAyahKey: initAyahKey,
-          isAudioPlayer: isAudioPlayer,
-          onPlaySelected: onPlaySelected,
-          selectMultipleAndShare: selectMultipleAndShare,
-          onSelectAyah: onSelectAyah,
-        ),
-      );
-    },
-  );
+  if (isLargeScreen) {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(roundedRadius + 6),
+          ),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 560,
+              maxHeight: height * 0.82,
+            ),
+            child: JumpToAyahView(
+              initAyahKey: initAyahKey,
+              isAudioPlayer: isAudioPlayer,
+              onPlaySelected: onPlaySelected,
+              selectMultipleAndShare: selectMultipleAndShare,
+              onSelectAyah: onSelectAyah,
+            ),
+          ),
+        );
+      },
+    );
+  } else {
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: height * 0.82,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(roundedRadius + 6),
+            ),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: JumpToAyahView(
+            initAyahKey: initAyahKey,
+            isAudioPlayer: isAudioPlayer,
+            onPlaySelected: onPlaySelected,
+            selectMultipleAndShare: selectMultipleAndShare,
+            onSelectAyah: onSelectAyah,
+          ),
+        );
+      },
+    );
+  }
 }

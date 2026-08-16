@@ -653,5 +653,6 @@
   "heading": "Haluan",
   "alignedWithKaaba": "Sejajar dengan Kaabah",
   "turnRight": "Pusing {degrees}° ke Kanan",
-  "turnLeft": "Pusing {degrees}° ke Kiri"
+  "turnLeft": "Pusing {degrees}° ke Kiri",
+  "streamingAndNetwork": "Penstriman & Rangkaian"
 }
