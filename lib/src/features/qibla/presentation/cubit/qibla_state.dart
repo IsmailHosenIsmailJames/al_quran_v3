@@ -1,31 +1,14 @@
-class QiblaState {
-  final double? compassHeading;
-  final double? kaabaAngle;
-  final bool isSensorSupported;
-  final bool isAligned;
-  final bool hasError;
+import "package:freezed_annotation/freezed_annotation.dart";
 
-  const QiblaState({
-    this.compassHeading,
-    this.kaabaAngle,
-    this.isSensorSupported = true,
-    this.isAligned = false,
-    this.hasError = false,
-  });
+part 'qibla_state.freezed.dart';
 
-  QiblaState copyWith({
+@freezed
+abstract class QiblaState with _$QiblaState {
+  const factory QiblaState({
     double? compassHeading,
     double? kaabaAngle,
-    bool? isSensorSupported,
-    bool? isAligned,
-    bool? hasError,
-  }) {
-    return QiblaState(
-      compassHeading: compassHeading ?? this.compassHeading,
-      kaabaAngle: kaabaAngle ?? this.kaabaAngle,
-      isSensorSupported: isSensorSupported ?? this.isSensorSupported,
-      isAligned: isAligned ?? this.isAligned,
-      hasError: hasError ?? this.hasError,
-    );
-  }
+    @Default(true) bool isSensorSupported,
+    @Default(false) bool isAligned,
+    @Default(false) bool hasError,
+  }) = _QiblaState;
 }

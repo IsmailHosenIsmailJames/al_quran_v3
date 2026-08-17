@@ -1,41 +1,17 @@
 import "package:flutter/material.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class ThemeState {
-  ThemeMode themeMode;
-  Color primary;
-  Color primaryShade100;
-  Color primaryShade200;
-  Color primaryShade300;
-  Color secondary;
-  Color mutedGray;
+part 'theme_state.freezed.dart';
 
-  ThemeState({
-    required this.themeMode,
-    required this.primary,
-    required this.primaryShade100,
-    required this.primaryShade200,
-    required this.primaryShade300,
-    required this.secondary,
-    required this.mutedGray,
-  });
-
-  ThemeState copyWith({
-    ThemeMode? themeMode,
-    Color? primary,
-    Color? primaryShade100,
-    Color? primaryShade200,
-    Color? primaryShade300,
-    Color? secondary,
-    Color? mutedGray,
-  }) {
-    return ThemeState(
-      themeMode: themeMode ?? this.themeMode,
-      primary: primary ?? this.primary,
-      primaryShade100: primaryShade100 ?? this.primaryShade100,
-      primaryShade200: primaryShade200 ?? this.primaryShade200,
-      primaryShade300: primaryShade300 ?? this.primaryShade300,
-      secondary: secondary ?? this.secondary,
-      mutedGray: mutedGray ?? this.mutedGray,
-    );
-  }
+@freezed
+abstract class ThemeState with _$ThemeState {
+  const factory ThemeState({
+    required ThemeMode themeMode,
+    required Color primary,
+    required Color primaryShade100,
+    required Color primaryShade200,
+    required Color primaryShade300,
+    required Color secondary,
+    required Color mutedGray,
+  }) = _ThemeState;
 }

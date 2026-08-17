@@ -1,26 +1,17 @@
 import "package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart";
 import "package:al_quran_v3/src/core/localization/languages.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-abstract class SetupEvent {
-  const SetupEvent();
-}
+part 'setup_event.freezed.dart';
 
-class SetupInitRequested extends SetupEvent {
-  final MyAppLocalization currentLocalization;
-  const SetupInitRequested(this.currentLocalization);
-}
-
-class SetupLanguageChanged extends SetupEvent {
-  final MyAppLocalization localization;
-  const SetupLanguageChanged(this.localization);
-}
-
-class SetupTranslationSelected extends SetupEvent {
-  final ResourceEntity translation;
-  const SetupTranslationSelected(this.translation);
-}
-
-class SetupTafsirSelected extends SetupEvent {
-  final ResourceEntity tafsir;
-  const SetupTafsirSelected(this.tafsir);
+@freezed
+abstract class SetupEvent with _$SetupEvent {
+  const factory SetupEvent.initRequested(MyAppLocalization currentLocalization) =
+      SetupInitRequested;
+  const factory SetupEvent.languageChanged(MyAppLocalization localization) =
+      SetupLanguageChanged;
+  const factory SetupEvent.translationSelected(ResourceEntity translation) =
+      SetupTranslationSelected;
+  const factory SetupEvent.tafsirSelected(ResourceEntity tafsir) =
+      SetupTafsirSelected;
 }

@@ -1,6 +1,8 @@
 import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_model.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:injectable/injectable.dart";
 
+@lazySingleton
 class AudioUiCubit extends Cubit<AudioControllerUiState> {
   AudioUiCubit()
     : super(

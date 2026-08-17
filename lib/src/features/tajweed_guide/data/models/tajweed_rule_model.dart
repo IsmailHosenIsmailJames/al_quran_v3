@@ -1,26 +1,86 @@
+import "package:flutter/material.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 import "../../domain/entities/tajweed_rule_entity.dart";
 
-class TajweedExampleModel extends TajweedExampleEntity {
-  const TajweedExampleModel({
-    required super.arabicText,
-    required super.transliteration,
-    super.surahAyahRef,
-    super.surahNumber,
-    super.ayahNumber,
-    super.wordIndex,
-  });
+part 'tajweed_rule_model.freezed.dart';
+
+@freezed
+abstract class TajweedExampleModel with _$TajweedExampleModel {
+  const TajweedExampleModel._();
+
+  const factory TajweedExampleModel({
+    required String arabicText,
+    required String transliteration,
+    String? surahAyahRef,
+    int? surahNumber,
+    int? ayahNumber,
+    int? wordIndex,
+  }) = _TajweedExampleModel;
+
+  factory TajweedExampleModel.fromEntity(TajweedExampleEntity entity) {
+    return TajweedExampleModel(
+      arabicText: entity.arabicText,
+      transliteration: entity.transliteration,
+      surahAyahRef: entity.surahAyahRef,
+      surahNumber: entity.surahNumber,
+      ayahNumber: entity.ayahNumber,
+      wordIndex: entity.wordIndex,
+    );
+  }
+
+  TajweedExampleEntity toEntity() {
+    return TajweedExampleEntity(
+      arabicText: arabicText,
+      transliteration: transliteration,
+      surahAyahRef: surahAyahRef,
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+      wordIndex: wordIndex,
+    );
+  }
 }
 
-class TajweedRuleModel extends TajweedRuleEntity {
-  const TajweedRuleModel({
-    required super.id,
-    required super.ruleKey,
-    required super.name,
-    required super.arabicName,
-    required super.description,
-    required super.howToPronounce,
-    required super.examples,
-    required super.lightColor,
-    required super.darkColor,
-  });
+@freezed
+abstract class TajweedRuleModel with _$TajweedRuleModel {
+  const TajweedRuleModel._();
+
+  const factory TajweedRuleModel({
+    required String id,
+    required String ruleKey,
+    required String name,
+    required String arabicName,
+    required String description,
+    required String howToPronounce,
+    required List<TajweedExampleModel> examples,
+    required Color lightColor,
+    required Color darkColor,
+  }) = _TajweedRuleModel;
+
+  factory TajweedRuleModel.fromEntity(TajweedRuleEntity entity) {
+    return TajweedRuleModel(
+      id: entity.id,
+      ruleKey: entity.ruleKey,
+      name: entity.name,
+      arabicName: entity.arabicName,
+      description: entity.description,
+      howToPronounce: entity.howToPronounce,
+      examples: entity.examples.map(TajweedExampleModel.fromEntity).toList(),
+      lightColor: entity.lightColor,
+      darkColor: entity.darkColor,
+    );
+  }
+
+  TajweedRuleEntity toEntity() {
+    return TajweedRuleEntity(
+      id: id,
+      ruleKey: ruleKey,
+      name: name,
+      arabicName: arabicName,
+      description: description,
+      howToPronounce: howToPronounce,
+      examples: examples.map((e) => e.toEntity()).toList(),
+      lightColor: lightColor,
+      darkColor: darkColor,
+    );
+  }
 }

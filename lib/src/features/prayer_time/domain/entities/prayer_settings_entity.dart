@@ -1,21 +1,12 @@
 import "package:adhan_dart/adhan_dart.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class PrayerSettingsEntity {
-  final CalculationParameters calculationMethod;
-  final Madhab madhab;
+part 'prayer_settings_entity.freezed.dart';
 
-  const PrayerSettingsEntity({
-    required this.calculationMethod,
-    required this.madhab,
-  });
-
-  PrayerSettingsEntity copyWith({
-    CalculationParameters? calculationMethod,
-    Madhab? madhab,
-  }) {
-    return PrayerSettingsEntity(
-      calculationMethod: calculationMethod ?? this.calculationMethod,
-      madhab: madhab ?? this.madhab,
-    );
-  }
+@freezed
+abstract class PrayerSettingsEntity with _$PrayerSettingsEntity {
+  const factory PrayerSettingsEntity({
+    required CalculationParameters calculationMethod,
+    required Madhab madhab,
+  }) = _PrayerSettingsEntity;
 }

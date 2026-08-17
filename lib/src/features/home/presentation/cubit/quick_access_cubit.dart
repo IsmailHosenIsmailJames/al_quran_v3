@@ -1,6 +1,32 @@
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 
+part 'quick_access_cubit.freezed.dart';
+part 'quick_access_cubit.g.dart';
+
+@freezed
+abstract class QuickAccessModel with _$QuickAccessModel {
+  const QuickAccessModel._();
+
+  @JsonSerializable(explicitToJson: true)
+  const factory QuickAccessModel({
+    required int surahNumber,
+    int? scrollIndex,
+    required DateTime createdAt,
+  }) = _QuickAccessModel;
+
+  factory QuickAccessModel.fromJson(Map<String, dynamic> json) =>
+      _$QuickAccessModelFromJson(json);
+
+  factory QuickAccessModel.fromMap(Map<String, dynamic> map) =>
+      QuickAccessModel.fromJson(map);
+
+  Map<String, dynamic> toMap() => toJson();
+}
+
+@lazySingleton
 class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
   QuickAccessCubit()
     : super(
@@ -10,7 +36,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
                   ?.toList()
                   ?.map(
                     (e) =>
-                        QuickAccessModel.fromMap(Map<String, dynamic>.from(e)),
+                        QuickAccessModel.fromJson(Map<String, dynamic>.from(e)),
                   )
                   .toList() ??
               [
@@ -70,7 +96,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
 
   void addQuickAccess(QuickAccessModel quickAccessModel) {
     emit([quickAccessModel, ...state]);
-    Hive.box("user").put("quick_access", state.map((e) => e.toMap()).toList());
+    Hive.box("user").put("quick_access", state.map((e) => e.toJson()).toList());
   }
 
   void removeQuickAccess(QuickAccessModel quickAccessModel) {
@@ -81,7 +107,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     emit(copyState);
     Hive.box(
       "user",
-    ).put("quick_access", copyState.map((e) => e.toMap()).toList());
+    ).put("quick_access", copyState.map((e) => e.toJson()).toList());
   }
 
   void updateQuickAccess(QuickAccessModel quickAccessModel) {
@@ -97,37 +123,6 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     emit(copyState);
     Hive.box(
       "user",
-    ).put("quick_access", copyState.map((e) => e.toMap()).toList());
-  }
-}
-
-class QuickAccessModel {
-  int surahNumber;
-  int? scrollIndex;
-  DateTime createdAt;
-
-  QuickAccessModel({
-    required this.surahNumber,
-    this.scrollIndex,
-    required this.createdAt,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      "surahNumber": surahNumber,
-      "scrollIndex": scrollIndex,
-      "createdAt": createdAt.toIso8601String(),
-    };
-  }
-
-  factory QuickAccessModel.fromMap(Map<String, dynamic> map) {
-    return QuickAccessModel(
-      surahNumber: map["surahNumber"],
-      scrollIndex: map["scrollIndex"],
-      createdAt:
-          map["createdAt"] == null
-              ? DateTime.now()
-              : DateTime.parse(map["createdAt"]),
-    );
+    ).put("quick_access", copyState.map((e) => e.toJson()).toList());
   }
 }

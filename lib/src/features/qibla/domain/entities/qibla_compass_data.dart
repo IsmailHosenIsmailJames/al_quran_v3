@@ -1,13 +1,14 @@
-class QiblaCompassData {
-  final double heading;
-  final double kaabaAngle;
-  final bool isAligned;
+import "package:freezed_annotation/freezed_annotation.dart";
 
-  const QiblaCompassData({
-    required this.heading,
-    required this.kaabaAngle,
-    required this.isAligned,
-  });
+part 'qibla_compass_data.freezed.dart';
+
+@freezed
+abstract class QiblaCompassData with _$QiblaCompassData {
+  const factory QiblaCompassData({
+    required double heading,
+    required double kaabaAngle,
+    required bool isAligned,
+  }) = _QiblaCompassData;
 
   /// Computes whether the current heading aligns with Kaaba angle within tolerance.
   static bool checkIsAligned(double heading, double kaabaAngle, {double tolerance = 5.0}) {

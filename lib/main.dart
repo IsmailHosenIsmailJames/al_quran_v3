@@ -237,30 +237,32 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeCubit()),
-        BlocProvider(create: (context) => AudioUiCubit()),
-        BlocProvider(create: (context) => PlayerPositionCubit()),
-        BlocProvider(create: (context) => AyahKeyCubit()),
-        BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
+        BlocProvider(create: (context) => getIt<ThemeCubit>()),
+        BlocProvider(create: (context) => getIt<AudioUiCubit>()),
+        BlocProvider(create: (context) => getIt<PlayerPositionCubit>()),
+        BlocProvider(create: (context) => getIt<AyahKeyCubit>()),
+        BlocProvider(create: (context) => getIt<AyahByAyahInScrollInfoCubit>()),
         BlocProvider(
-          create: (context) => LocationQiblaPrayerDataCubit(
-            initState: locationQiblaPrayerDataState,
+          create: (context) => getIt<LocationQiblaPrayerDataCubit>(
+            param1: locationQiblaPrayerDataState,
           ),
         ),
-        BlocProvider(create: (context) => SegmentedQuranReciterCubit()),
-        BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
-        BlocProvider(create: (context) => WordPlayingStateCubit()),
-        BlocProvider(create: (context) => AudioTabReciterCubit()),
+        BlocProvider(create: (context) => getIt<SegmentedQuranReciterCubit>()),
+        BlocProvider(create: (context) => getIt<PlayerStateCubit>()),
+        BlocProvider(create: (context) => getIt<WordPlayingStateCubit>()),
+        BlocProvider(create: (context) => getIt<AudioTabReciterCubit>()),
         BlocProvider(create: (context) => getIt<QuranViewCubit>()),
         BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),
-        BlocProvider(create: (context) => LanguageCubit(initialLocale)),
-        BlocProvider(create: (context) => LandscapeScrollEffect()),
-        BlocProvider(create: (context) => QuickAccessCubit()),
+        BlocProvider(
+          create: (context) => getIt<LanguageCubit>(param1: initialLocale),
+        ),
+        BlocProvider(create: (context) => getIt<LandscapeScrollEffect>()),
+        BlocProvider(create: (context) => getIt<QuickAccessCubit>()),
         BlocProvider(create: (context) => getIt<QuranHistoryCubit>()),
-        BlocProvider(create: (context) => AudioDownloadCubit()),
-        BlocProvider(create: (context) => AudioLoopCubit()),
-        BlocProvider(create: (context) => AyahToHighlight(null)),
+        BlocProvider(create: (context) => getIt<AudioDownloadCubit>()),
+        BlocProvider(create: (context) => getIt<AudioLoopCubit>()),
+        BlocProvider(create: (context) => getIt<AyahToHighlight>()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(

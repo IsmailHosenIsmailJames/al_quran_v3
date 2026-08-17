@@ -23,12 +23,12 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
       }
     }
     if (jsonLocation == null) return null;
-    return LocationCoordinates.fromJson(jsonLocation);
+    return LocationCoordinates.fromJsonString(jsonLocation);
   }
 
   @override
   Future<void> saveLocation(LocationCoordinates location) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userLocationKey, location.toJson());
+    await prefs.setString(_userLocationKey, location.toJsonString());
   }
 }

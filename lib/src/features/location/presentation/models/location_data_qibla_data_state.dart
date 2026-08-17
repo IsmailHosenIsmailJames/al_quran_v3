@@ -1,45 +1,18 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class LocationQiblaPrayerDataState {
-  LatLon? latLon;
-  double? kaabaAngle;
-  CalculationParameters? calculationMethod;
-  bool? isPrayerTimeDownloading;
-  bool? isGettingLocation;
-  Madhab? madhab;
-  bool hasInitialLocationUpdated;
+part 'location_data_qibla_data_state.freezed.dart';
 
-  LocationQiblaPrayerDataState({
-    this.latLon,
-    this.kaabaAngle,
-    this.calculationMethod,
-    this.isPrayerTimeDownloading = false,
-    this.isGettingLocation = false,
-    this.madhab,
-    this.hasInitialLocationUpdated = false,
-  });
-
-  LocationQiblaPrayerDataState copyWith({
+@freezed
+abstract class LocationQiblaPrayerDataState with _$LocationQiblaPrayerDataState {
+  const factory LocationQiblaPrayerDataState({
     LatLon? latLon,
     double? kaabaAngle,
     CalculationParameters? calculationMethod,
-    bool? isDataExits,
-    bool? isPrayerTimeDownloading,
-    bool? isGettingLocation,
+    @Default(false) bool? isPrayerTimeDownloading,
+    @Default(false) bool? isGettingLocation,
     Madhab? madhab,
-    bool? hasInitialLocationUpdated,
-  }) {
-    return LocationQiblaPrayerDataState(
-      latLon: latLon ?? this.latLon,
-      kaabaAngle: kaabaAngle ?? this.kaabaAngle,
-      calculationMethod: calculationMethod ?? this.calculationMethod,
-      isPrayerTimeDownloading:
-          isPrayerTimeDownloading ?? this.isPrayerTimeDownloading,
-      isGettingLocation: isGettingLocation ?? this.isGettingLocation,
-      madhab: madhab ?? this.madhab,
-      hasInitialLocationUpdated:
-          hasInitialLocationUpdated ?? this.hasInitialLocationUpdated,
-    );
-  }
+    @Default(false) bool hasInitialLocationUpdated,
+  }) = _LocationQiblaPrayerDataState;
 }

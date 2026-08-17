@@ -1,61 +1,32 @@
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
 import "package:just_audio/just_audio.dart";
 
-class AudioLoopState {
-  final LoopMode loopMode;
-  final bool isRangeActive;
-  final int startSurah;
-  final int startAyah;
-  final int endSurah;
-  final int endAyah;
-  final int repeatTargetCount; // -1 for infinite (infinity), or 1..N
-  final int currentRangeCycle;
-  final int repeatEachAyah;
-  final int currentAyahRepeat;
+part 'audio_loop_cubit.freezed.dart';
 
-  const AudioLoopState({
-    this.loopMode = LoopMode.off,
-    this.isRangeActive = false,
-    this.startSurah = 1,
-    this.startAyah = 1,
-    this.endSurah = 1,
-    this.endAyah = 7,
-    this.repeatTargetCount = -1,
-    this.currentRangeCycle = 1,
-    this.repeatEachAyah = 1,
-    this.currentAyahRepeat = 1,
-  });
+@freezed
+abstract class AudioLoopState with _$AudioLoopState {
+  const AudioLoopState._();
+
+  const factory AudioLoopState({
+    @Default(LoopMode.off) LoopMode loopMode,
+    @Default(false) bool isRangeActive,
+    @Default(1) int startSurah,
+    @Default(1) int startAyah,
+    @Default(1) int endSurah,
+    @Default(7) int endAyah,
+    @Default(-1) int repeatTargetCount, // -1 for infinite (infinity), or 1..N
+    @Default(1) int currentRangeCycle,
+    @Default(1) int repeatEachAyah,
+    @Default(1) int currentAyahRepeat,
+  }) = _AudioLoopState;
 
   bool get isInfinite => repeatTargetCount <= 0;
-
-  AudioLoopState copyWith({
-    LoopMode? loopMode,
-    bool? isRangeActive,
-    int? startSurah,
-    int? startAyah,
-    int? endSurah,
-    int? endAyah,
-    int? repeatTargetCount,
-    int? currentRangeCycle,
-    int? repeatEachAyah,
-    int? currentAyahRepeat,
-  }) {
-    return AudioLoopState(
-      loopMode: loopMode ?? this.loopMode,
-      isRangeActive: isRangeActive ?? this.isRangeActive,
-      startSurah: startSurah ?? this.startSurah,
-      startAyah: startAyah ?? this.startAyah,
-      endSurah: endSurah ?? this.endSurah,
-      endAyah: endAyah ?? this.endAyah,
-      repeatTargetCount: repeatTargetCount ?? this.repeatTargetCount,
-      currentRangeCycle: currentRangeCycle ?? this.currentRangeCycle,
-      repeatEachAyah: repeatEachAyah ?? this.repeatEachAyah,
-      currentAyahRepeat: currentAyahRepeat ?? this.currentAyahRepeat,
-    );
-  }
 }
 
+@lazySingleton
 class AudioLoopCubit extends Cubit<AudioLoopState> {
   AudioLoopCubit() : super(const AudioLoopState());
 

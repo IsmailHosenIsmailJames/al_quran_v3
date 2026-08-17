@@ -1,43 +1,31 @@
 import "package:flutter/material.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class TajweedExampleEntity {
-  final String arabicText;
-  final String transliteration;
-  final String? surahAyahRef;
-  final int? surahNumber;
-  final int? ayahNumber;
-  final int? wordIndex;
+part 'tajweed_rule_entity.freezed.dart';
 
-  const TajweedExampleEntity({
-    required this.arabicText,
-    required this.transliteration,
-    this.surahAyahRef,
-    this.surahNumber,
-    this.ayahNumber,
-    this.wordIndex,
-  });
+@freezed
+abstract class TajweedExampleEntity with _$TajweedExampleEntity {
+  const factory TajweedExampleEntity({
+    required String arabicText,
+    required String transliteration,
+    String? surahAyahRef,
+    int? surahNumber,
+    int? ayahNumber,
+    int? wordIndex,
+  }) = _TajweedExampleEntity;
 }
 
-class TajweedRuleEntity {
-  final String id;
-  final String ruleKey;
-  final String name;
-  final String arabicName;
-  final String description;
-  final String howToPronounce;
-  final List<TajweedExampleEntity> examples;
-  final Color lightColor;
-  final Color darkColor;
-
-  const TajweedRuleEntity({
-    required this.id,
-    required this.ruleKey,
-    required this.name,
-    required this.arabicName,
-    required this.description,
-    required this.howToPronounce,
-    required this.examples,
-    required this.lightColor,
-    required this.darkColor,
-  });
+@freezed
+abstract class TajweedRuleEntity with _$TajweedRuleEntity {
+  const factory TajweedRuleEntity({
+    required String id,
+    required String ruleKey,
+    required String name,
+    required String arabicName,
+    required String description,
+    required String howToPronounce,
+    required List<TajweedExampleEntity> examples,
+    required Color lightColor,
+    required Color darkColor,
+  }) = _TajweedRuleEntity;
 }

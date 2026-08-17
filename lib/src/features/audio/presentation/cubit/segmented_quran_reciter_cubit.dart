@@ -2,9 +2,11 @@ import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model
 import "package:al_quran_v3/src/features/quran_resources/data/utils/segmented_resources_manager.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:injectable/injectable.dart";
 
 import "package:al_quran_v3/src/features/audio/data/utils/get_segments_supported_reciters.dart";
 
+@lazySingleton
 class SegmentedQuranReciterCubit extends Cubit<ReciterInfoModel> {
   SegmentedQuranReciterCubit()
     : super(

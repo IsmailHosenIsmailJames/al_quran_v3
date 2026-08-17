@@ -1,31 +1,14 @@
 import "package:adhan_dart/adhan_dart.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class PrayerReminderState {
-  final Map<Prayer, int>? reminderTimeAdjustment;
-  final bool? isPrayerRemindNotificationEnabled;
-  final bool? enforceAlarmSound;
-  final double? soundVolume;
+part 'prayer_reminder_state.freezed.dart';
 
-  PrayerReminderState({
-    this.reminderTimeAdjustment,
-    this.isPrayerRemindNotificationEnabled,
-    this.enforceAlarmSound,
-    this.soundVolume,
-  });
-
-  PrayerReminderState copyWith({
+@freezed
+abstract class PrayerReminderState with _$PrayerReminderState {
+  const factory PrayerReminderState({
     Map<Prayer, int>? reminderTimeAdjustment,
     bool? isPrayerRemindNotificationEnabled,
     bool? enforceAlarmSound,
     double? soundVolume,
-  }) {
-    return PrayerReminderState(
-      reminderTimeAdjustment:
-          reminderTimeAdjustment ?? this.reminderTimeAdjustment,
-      isPrayerRemindNotificationEnabled: isPrayerRemindNotificationEnabled ??
-          this.isPrayerRemindNotificationEnabled,
-      enforceAlarmSound: enforceAlarmSound ?? this.enforceAlarmSound,
-      soundVolume: soundVolume ?? this.soundVolume,
-    );
-  }
+  }) = _PrayerReminderState;
 }

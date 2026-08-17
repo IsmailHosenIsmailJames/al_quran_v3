@@ -1,9 +1,13 @@
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class SurahHeaderInfoModel {
-  final SurahInfoModel surahInfoModel;
-  final String startAyahKey;
-  final String endAyahKey;
+part 'surah_header_info.freezed.dart';
 
-  SurahHeaderInfoModel(this.surahInfoModel, this.startAyahKey, this.endAyahKey);
+@freezed
+abstract class SurahHeaderInfoModel with _$SurahHeaderInfoModel {
+  const factory SurahHeaderInfoModel({
+    required SurahInfoModel surahInfoModel,
+    required String startAyahKey,
+    required String endAyahKey,
+  }) = _SurahHeaderInfoModel;
 }

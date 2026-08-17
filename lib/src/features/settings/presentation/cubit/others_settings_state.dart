@@ -1,23 +1,12 @@
-class OthersSettingsState {
-  final bool rememberLastTab;
-  final int tabIndex;
-  final bool wakeLock;
+import "package:freezed_annotation/freezed_annotation.dart";
 
-  OthersSettingsState({
-    this.rememberLastTab = true,
-    this.tabIndex = 0,
-    this.wakeLock = false,
-  });
+part 'others_settings_state.freezed.dart';
 
-  OthersSettingsState copyWith({
-    bool? rememberLastTab,
-    int? tabIndex,
-    bool? wakeLock,
-  }) {
-    return OthersSettingsState(
-      rememberLastTab: rememberLastTab ?? this.rememberLastTab,
-      tabIndex: tabIndex ?? this.tabIndex,
-      wakeLock: wakeLock ?? this.wakeLock,
-    );
-  }
+@freezed
+abstract class OthersSettingsState with _$OthersSettingsState {
+  const factory OthersSettingsState({
+    @Default(true) bool rememberLastTab,
+    @Default(0) int tabIndex,
+    @Default(false) bool wakeLock,
+  }) = _OthersSettingsState;
 }

@@ -1,13 +1,13 @@
-class NavigationInfoModel {
-  String? previousStartKey;
-  String? previousEndKey;
-  String? nextStartKey;
-  String? nextEndKey;
+import "package:freezed_annotation/freezed_annotation.dart";
 
-  NavigationInfoModel({
-    this.previousStartKey,
-    this.previousEndKey,
-    this.nextStartKey,
-    this.nextEndKey,
-  });
+part 'navigation_info_model.freezed.dart';
+
+@freezed
+abstract class NavigationInfoModel with _$NavigationInfoModel {
+  const factory NavigationInfoModel({
+    String? previousStartKey,
+    String? previousEndKey,
+    String? nextStartKey,
+    String? nextEndKey,
+  }) = _NavigationInfoModel;
 }

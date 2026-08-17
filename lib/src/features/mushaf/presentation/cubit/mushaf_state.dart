@@ -1,39 +1,16 @@
-class MushafState {
-  final bool isChecking;
-  final bool isDownloading;
-  final double downloadProgress;
-  final String downloadStatus;
-  final bool dataReady;
-  final String baseDirPath;
-  final int currentPage;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const MushafState({
-    this.isChecking = true,
-    this.isDownloading = false,
-    this.downloadProgress = 0.0,
-    this.downloadStatus = "",
-    this.dataReady = false,
-    this.baseDirPath = "",
-    this.currentPage = 1,
-  });
+part 'mushaf_state.freezed.dart';
 
-  MushafState copyWith({
-    bool? isChecking,
-    bool? isDownloading,
-    double? downloadProgress,
-    String? downloadStatus,
-    bool? dataReady,
-    String? baseDirPath,
-    int? currentPage,
-  }) {
-    return MushafState(
-      isChecking: isChecking ?? this.isChecking,
-      isDownloading: isDownloading ?? this.isDownloading,
-      downloadProgress: downloadProgress ?? this.downloadProgress,
-      downloadStatus: downloadStatus ?? this.downloadStatus,
-      dataReady: dataReady ?? this.dataReady,
-      baseDirPath: baseDirPath ?? this.baseDirPath,
-      currentPage: currentPage ?? this.currentPage,
-    );
-  }
+@freezed
+abstract class MushafState with _$MushafState {
+  const factory MushafState({
+    @Default(true) bool isChecking,
+    @Default(false) bool isDownloading,
+    @Default(0.0) double downloadProgress,
+    @Default("") String downloadStatus,
+    @Default(false) bool dataReady,
+    @Default("") String baseDirPath,
+    @Default(1) int currentPage,
+  }) = _MushafState;
 }

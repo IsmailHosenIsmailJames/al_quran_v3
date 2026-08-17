@@ -1,23 +1,24 @@
 import "package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class BookSearchState {
-  final String query;
-  final bool isTafsir;
-  final Map<String, List<ResourceEntity>> groupedBooks;
-  final List<String> sortedLanguages;
+part 'book_search_state.freezed.dart';
 
-  const BookSearchState({
-    required this.query,
-    required this.isTafsir,
-    required this.groupedBooks,
-    required this.sortedLanguages,
-  });
+@freezed
+abstract class BookSearchState with _$BookSearchState {
+  const BookSearchState._();
+
+  const factory BookSearchState({
+    required String query,
+    required bool isTafsir,
+    required Map<String, List<ResourceEntity>> groupedBooks,
+    required List<String> sortedLanguages,
+  }) = _BookSearchState;
 
   factory BookSearchState.initial({
     required bool isTafsir,
     required Map<String, List<ResourceEntity>> allResources,
   }) {
-    final filtered = _filterAndGroup(allResources, "", isTafsir);
+    final filtered = filterAndGroup(allResources, "", isTafsir);
     final sortedLangs = filtered.keys.toList()..sort();
     return BookSearchState(
       query: "",
@@ -27,7 +28,7 @@ class BookSearchState {
     );
   }
 
-  static Map<String, List<ResourceEntity>> _filterAndGroup(
+  static Map<String, List<ResourceEntity>> filterAndGroup(
     Map<String, List<ResourceEntity>> allResources,
     String query,
     bool isTafsir,
@@ -60,7 +61,7 @@ class BookSearchState {
     String newQuery,
     Map<String, List<ResourceEntity>> allResources,
   ) {
-    final filtered = _filterAndGroup(allResources, newQuery, isTafsir);
+    final filtered = filterAndGroup(allResources, newQuery, isTafsir);
     final sortedLangs = filtered.keys.toList()..sort();
     return BookSearchState(
       query: newQuery,
