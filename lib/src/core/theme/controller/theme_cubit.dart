@@ -3,7 +3,9 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/functions/theme_functions.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:injectable/injectable.dart";
 
+@lazySingleton
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit()
     : super(

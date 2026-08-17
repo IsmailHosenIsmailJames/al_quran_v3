@@ -1,7 +1,9 @@
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 
+@lazySingleton
 class AyahKeyCubit extends Cubit<AyahKeyManagement> {
   AyahKeyCubit()
     : super(

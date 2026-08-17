@@ -1,27 +1,26 @@
-import "dart:convert";
+import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LatLon {
-  double latitude;
-  double longitude;
+part 'lat_lon.freezed.dart';
+part 'lat_lon.g.dart';
 
-  LatLon({required this.latitude, required this.longitude});
+@freezed
+abstract class LatLon with _$LatLon {
+  const LatLon._();
 
-  LatLon copyWith({double? latitude, double? longitude}) => LatLon(
-        latitude: latitude ?? this.latitude,
-        longitude: longitude ?? this.longitude,
-      );
+  @JsonSerializable(explicitToJson: true)
+  const factory LatLon({
+    required double latitude,
+    required double longitude,
+  }) = _LatLon;
 
-  factory LatLon.fromJson(String str) => LatLon.fromMap(json.decode(str));
+  factory LatLon.fromJson(Map<String, dynamic> json) => _$LatLonFromJson(json);
 
-  String toJson() => json.encode(toMap());
+  factory LatLon.fromJsonString(String str) =>
+      LatLon.fromJson(json.decode(str) as Map<String, dynamic>);
 
-  factory LatLon.fromMap(Map<String, dynamic> json) => LatLon(
-        latitude: json["latitude"]?.toDouble(),
-        longitude: json["longitude"]?.toDouble(),
-      );
+  factory LatLon.fromMap(Map<String, dynamic> map) => LatLon.fromJson(map);
 
-  Map<String, dynamic> toMap() => {
-        "latitude": latitude,
-        "longitude": longitude,
-      };
+  Map<String, dynamic> toMap() => toJson();
+  String toJsonString() => json.encode(toJson());
 }

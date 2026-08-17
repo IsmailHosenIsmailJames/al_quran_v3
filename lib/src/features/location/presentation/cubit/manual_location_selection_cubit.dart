@@ -1,9 +1,28 @@
 import "package:al_quran_v3/src/features/quran_resources/data/utils/location_resources_function.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
 
+part 'manual_location_selection_cubit.freezed.dart';
+
+@freezed
+abstract class ManualLocationSelectionState with _$ManualLocationSelectionState {
+  const factory ManualLocationSelectionState({
+    @Default(0.0) double? downloadProgress,
+    String? country,
+    String? city,
+    Map? locationData,
+    List? cityList,
+    @Default(false) bool isLoading,
+    @Default(false) bool isError,
+    @Default(false) bool isSuccess,
+  }) = _ManualLocationSelectionState;
+}
+
+@injectable
 class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
-  ManualLocationSelectionCubit() : super(ManualLocationSelectionState());
+  ManualLocationSelectionCubit() : super(const ManualLocationSelectionState());
 
   void changeData({
     double? downloadProgress,
@@ -17,14 +36,14 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
   }) {
     emit(
       state.copyWith(
-        downloadProgress: downloadProgress,
-        country: country,
-        city: city,
-        locationData: locationData,
-        cityList: cityList,
-        isLoading: isLoading,
-        isError: isError,
-        isSuccess: isSuccess,
+        downloadProgress: downloadProgress ?? state.downloadProgress,
+        country: country ?? state.country,
+        city: city ?? state.city,
+        locationData: locationData ?? state.locationData,
+        cityList: cityList ?? state.cityList,
+        isLoading: isLoading ?? state.isLoading,
+        isError: isError ?? state.isError,
+        isSuccess: isSuccess ?? state.isSuccess,
       ),
     );
   }
@@ -85,49 +104,5 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
 
   void selectCity(String city) {
     changeData(city: city);
-  }
-}
-
-class ManualLocationSelectionState {
-  double? downloadProgress = 0.0;
-  String? country;
-  String? city;
-  Map? locationData;
-  List? cityList;
-  bool isLoading = false;
-  bool isError = false;
-  bool isSuccess = false;
-
-  ManualLocationSelectionState({
-    this.downloadProgress,
-    this.country,
-    this.city,
-    this.locationData,
-    this.cityList,
-    this.isLoading = false,
-    this.isError = false,
-    this.isSuccess = false,
-  });
-
-  ManualLocationSelectionState copyWith({
-    double? downloadProgress,
-    String? country,
-    String? city,
-    Map? locationData,
-    List? cityList,
-    bool? isLoading,
-    bool? isError,
-    bool? isSuccess,
-  }) {
-    return ManualLocationSelectionState(
-      downloadProgress: downloadProgress ?? this.downloadProgress,
-      country: country ?? this.country,
-      city: city ?? this.city,
-      locationData: locationData ?? this.locationData,
-      cityList: cityList ?? this.cityList,
-      isLoading: isLoading ?? this.isLoading,
-      isError: isError ?? this.isError,
-      isSuccess: isSuccess ?? this.isSuccess,
-    );
   }
 }

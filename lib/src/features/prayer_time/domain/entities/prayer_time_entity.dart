@@ -1,27 +1,21 @@
 import "package:adhan_dart/adhan_dart.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class PrayerTimeEntity {
-  final DateTime fajr;
-  final DateTime sunrise;
-  final DateTime dhuhr;
-  final DateTime asr;
-  final DateTime maghrib;
-  final DateTime isha;
-  final String nextPrayerName;
-  final DateTime? nextPrayerTime;
-  final Duration? timeRemaining;
+part 'prayer_time_entity.freezed.dart';
 
-  const PrayerTimeEntity({
-    required this.fajr,
-    required this.sunrise,
-    required this.dhuhr,
-    required this.asr,
-    required this.maghrib,
-    required this.isha,
-    required this.nextPrayerName,
-    this.nextPrayerTime,
-    this.timeRemaining,
-  });
+@freezed
+abstract class PrayerTimeEntity with _$PrayerTimeEntity {
+  const factory PrayerTimeEntity({
+    required DateTime fajr,
+    required DateTime sunrise,
+    required DateTime dhuhr,
+    required DateTime asr,
+    required DateTime maghrib,
+    required DateTime isha,
+    required String nextPrayerName,
+    DateTime? nextPrayerTime,
+    Duration? timeRemaining,
+  }) = _PrayerTimeEntity;
 
   factory PrayerTimeEntity.fromPrayerTimes(PrayerTimes prayerTimes) {
     Prayer? nextPrayerEnum = prayerTimes.nextPrayer(date: DateTime.now());

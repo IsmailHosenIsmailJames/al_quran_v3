@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/features/qibla/data/datasources/vibration_dataso
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:geolocator/geolocator.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 double _calcQibla(double lat, double lon) {
@@ -15,10 +16,11 @@ double _calcQibla(double lat, double lon) {
   return repo.calculateQiblaAngle(lat, lon);
 }
 
+@lazySingleton
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit({
-    required LocationQiblaPrayerDataState initState,
-  }) : super(initState);
+    @factoryParam LocationQiblaPrayerDataState? initState,
+  }) : super(initState ?? const LocationQiblaPrayerDataState());
 
   Future<void> getLocation() async {
     emit(state.copyWith(isGettingLocation: true));
@@ -48,16 +50,14 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   Future<void> saveLocationData(LatLon latLon, {bool save = true}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (save) {
-      sharedPreferences.setString("user_location", latLon.toJson());
+      sharedPreferences.setString("user_location", latLon.toJsonString());
     }
-    LocationQiblaPrayerDataState newState = state.copyWith();
-    newState.latLon = latLon;
-    newState.kaabaAngle = _calcQibla(
+    final double kaabaAngle = _calcQibla(
       latLon.latitude,
       latLon.longitude,
     );
 
-    emit(newState);
+    emit(state.copyWith(latLon: latLon, kaabaAngle: kaabaAngle));
     await ReminderScheduler.scheduleNotification();
   }
 
@@ -92,7 +92,6 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   }
 
   static Future<LocationQiblaPrayerDataState> getSavedState() async {
-    LocationQiblaPrayerDataState data = LocationQiblaPrayerDataState();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? jsonLocation = sharedPreferences.getString("user_location");
     if (jsonLocation == null) {
@@ -103,40 +102,45 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
 
     if (jsonLocation == null) {
-      data.latLon = null;
-      data.kaabaAngle = null;
+      return const LocationQiblaPrayerDataState();
     } else {
-      var latLong = LatLon.fromJson(jsonLocation);
-      data.latLon = latLong;
-      data.kaabaAngle = _calcQibla(
-        data.latLon!.latitude,
-        data.latLon!.longitude,
+      var latLong = LatLon.fromJsonString(jsonLocation);
+      double kaabaAngle = _calcQibla(
+        latLong.latitude,
+        latLong.longitude,
       );
       String? calculationMethodJason = sharedPreferences.getString(
         "selected_calculation_method",
       );
+      CalculationParameters calculationMethod;
       if (calculationMethodJason != null) {
-        data.calculationMethod = CalculationMethodParameters.fromEnum(
+        calculationMethod = CalculationMethodParameters.fromEnum(
           CalculationMethodEnum.values.firstWhere(
             (element) => element.name == calculationMethodJason,
           ),
         );
       } else {
-        data.calculationMethod = CalculationMethodParameters.fromEnum(
+        calculationMethod = CalculationMethodParameters.fromEnum(
           CalculationMethodEnum.muslimWorldLeague,
         );
       }
       String? madhab = sharedPreferences.getString("selected_madhab");
+      Madhab? madhabEnum;
       if (madhab != null) {
-        data.madhab = Madhab.values.firstWhere(
+        madhabEnum = Madhab.values.firstWhere(
           (element) => element.name == madhab,
         );
-      }
-      {
+      } else {
         await sharedPreferences.setString("selected_madhab", Madhab.shafi.name);
-        data.madhab ??= Madhab.shafi;
+        madhabEnum = Madhab.shafi;
       }
+
+      return LocationQiblaPrayerDataState(
+        latLon: latLong,
+        kaabaAngle: kaabaAngle,
+        calculationMethod: calculationMethod,
+        madhab: madhabEnum,
+      );
     }
-    return data;
   }
 }

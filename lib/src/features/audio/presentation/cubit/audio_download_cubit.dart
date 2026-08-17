@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'audio_download_cubit.freezed.dart';
 part 'audio_download_cubit.g.dart';
@@ -17,6 +18,7 @@ abstract class AudioDownloadState with _$AudioDownloadState {
       _$AudioDownloadStateFromJson(json);
 }
 
+@lazySingleton
 class AudioDownloadCubit extends Cubit<AudioDownloadState> {
   AudioDownloadCubit() : super(const AudioDownloadState());
 

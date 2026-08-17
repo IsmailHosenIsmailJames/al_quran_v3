@@ -1,29 +1,14 @@
 import "package:al_quran_v3/src/features/prayer_time/domain/entities/prayer_time_entity.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-class PrayerTimeState {
-  final PrayerTimeEntity? todayPrayerTimes;
-  final List<PrayerTimeEntity> monthlyPrayerTimes;
-  final bool isLoading;
-  final bool hasError;
+part 'prayer_time_state.freezed.dart';
 
-  const PrayerTimeState({
-    this.todayPrayerTimes,
-    this.monthlyPrayerTimes = const [],
-    this.isLoading = false,
-    this.hasError = false,
-  });
-
-  PrayerTimeState copyWith({
+@freezed
+abstract class PrayerTimeState with _$PrayerTimeState {
+  const factory PrayerTimeState({
     PrayerTimeEntity? todayPrayerTimes,
-    List<PrayerTimeEntity>? monthlyPrayerTimes,
-    bool? isLoading,
-    bool? hasError,
-  }) {
-    return PrayerTimeState(
-      todayPrayerTimes: todayPrayerTimes ?? this.todayPrayerTimes,
-      monthlyPrayerTimes: monthlyPrayerTimes ?? this.monthlyPrayerTimes,
-      isLoading: isLoading ?? this.isLoading,
-      hasError: hasError ?? this.hasError,
-    );
-  }
+    @Default([]) List<PrayerTimeEntity> monthlyPrayerTimes,
+    @Default(false) bool isLoading,
+    @Default(false) bool hasError,
+  }) = _PrayerTimeState;
 }

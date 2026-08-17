@@ -1,30 +1,23 @@
-import "package:al_quran_v3/src/features/home/domain/entities/history_element_entity.dart";
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:al_quran_v3/src/features/home/domain/entities/history_element_entity.dart';
 
-class HistoryElementModel extends HistoryElementEntity {
-  const HistoryElementModel({
-    required super.surahNumber,
-    super.ayahNumber,
-    super.pageNumber,
-    required super.timestamp,
-  });
+part 'history_element_model.freezed.dart';
+part 'history_element_model.g.dart';
 
-  Map<String, dynamic> toJson() {
-    return {
-      "surahNumber": surahNumber,
-      "ayahNumber": ayahNumber,
-      "pageNumber": pageNumber,
-      "timestamp": timestamp,
-    };
-  }
+@freezed
+abstract class HistoryElementModel with _$HistoryElementModel {
+  const HistoryElementModel._();
 
-  factory HistoryElementModel.fromJson(Map<String, dynamic> json) {
-    return HistoryElementModel(
-      surahNumber: json["surahNumber"],
-      ayahNumber: json["ayahNumber"],
-      pageNumber: json["pageNumber"],
-      timestamp: json["timestamp"],
-    );
-  }
+  @JsonSerializable(explicitToJson: true)
+  const factory HistoryElementModel({
+    required int surahNumber,
+    int? ayahNumber,
+    int? pageNumber,
+    required int timestamp,
+  }) = _HistoryElementModel;
+
+  factory HistoryElementModel.fromJson(Map<String, dynamic> json) =>
+      _$HistoryElementModelFromJson(json);
 
   factory HistoryElementModel.fromEntity(HistoryElementEntity entity) {
     return HistoryElementModel(
@@ -32,6 +25,15 @@ class HistoryElementModel extends HistoryElementEntity {
       ayahNumber: entity.ayahNumber,
       pageNumber: entity.pageNumber,
       timestamp: entity.timestamp,
+    );
+  }
+
+  HistoryElementEntity toEntity() {
+    return HistoryElementEntity(
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+      pageNumber: pageNumber,
+      timestamp: timestamp,
     );
   }
 }

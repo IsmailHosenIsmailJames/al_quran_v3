@@ -1,49 +1,30 @@
-import "dart:convert";
+import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LocationCoordinates {
-  final double latitude;
-  final double longitude;
-  final String? cityName;
-  final String? countryName;
+part 'location_coordinates.freezed.dart';
+part 'location_coordinates.g.dart';
 
-  const LocationCoordinates({
-    required this.latitude,
-    required this.longitude,
-    this.cityName,
-    this.countryName,
-  });
+@freezed
+abstract class LocationCoordinates with _$LocationCoordinates {
+  const LocationCoordinates._();
 
-  LocationCoordinates copyWith({
-    double? latitude,
-    double? longitude,
+  @JsonSerializable(explicitToJson: true)
+  const factory LocationCoordinates({
+    required double latitude,
+    required double longitude,
     String? cityName,
     String? countryName,
-  }) {
-    return LocationCoordinates(
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
-      cityName: cityName ?? this.cityName,
-      countryName: countryName ?? this.countryName,
-    );
-  }
+  }) = _LocationCoordinates;
 
-  factory LocationCoordinates.fromJson(String str) =>
-      LocationCoordinates.fromMap(json.decode(str));
+  factory LocationCoordinates.fromJson(Map<String, dynamic> json) =>
+      _$LocationCoordinatesFromJson(json);
 
-  String toJson() => json.encode(toMap());
+  factory LocationCoordinates.fromJsonString(String str) =>
+      LocationCoordinates.fromJson(json.decode(str) as Map<String, dynamic>);
 
-  factory LocationCoordinates.fromMap(Map<String, dynamic> json) =>
-      LocationCoordinates(
-        latitude: (json["latitude"] as num).toDouble(),
-        longitude: (json["longitude"] as num).toDouble(),
-        cityName: json["cityName"] as String?,
-        countryName: json["countryName"] as String?,
-      );
+  factory LocationCoordinates.fromMap(Map<String, dynamic> map) =>
+      LocationCoordinates.fromJson(map);
 
-  Map<String, dynamic> toMap() => {
-        "latitude": latitude,
-        "longitude": longitude,
-        if (cityName != null) "cityName": cityName,
-        if (countryName != null) "countryName": countryName,
-      };
+  Map<String, dynamic> toMap() => toJson();
+  String toJsonString() => json.encode(toJson());
 }

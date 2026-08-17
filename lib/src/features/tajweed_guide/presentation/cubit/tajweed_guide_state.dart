@@ -1,31 +1,16 @@
 import "../../domain/entities/tajweed_rule_entity.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
 
-abstract class TajweedGuideState {
-  const TajweedGuideState();
-}
+part 'tajweed_guide_state.freezed.dart';
 
-class TajweedGuideInitial extends TajweedGuideState {
-  const TajweedGuideInitial();
-}
-
-class TajweedGuideLoading extends TajweedGuideState {
-  const TajweedGuideLoading();
-}
-
-class TajweedGuideLoaded extends TajweedGuideState {
-  final List<TajweedRuleEntity> rules;
-  final List<TajweedRuleEntity> filteredRules;
-  final String searchQuery;
-
-  const TajweedGuideLoaded({
-    required this.rules,
-    required this.filteredRules,
-    this.searchQuery = "",
-  });
-}
-
-class TajweedGuideError extends TajweedGuideState {
-  final String message;
-
-  const TajweedGuideError(this.message);
+@freezed
+abstract class TajweedGuideState with _$TajweedGuideState {
+  const factory TajweedGuideState.initial() = TajweedGuideInitial;
+  const factory TajweedGuideState.loading() = TajweedGuideLoading;
+  const factory TajweedGuideState.loaded({
+    required List<TajweedRuleEntity> rules,
+    required List<TajweedRuleEntity> filteredRules,
+    @Default("") String searchQuery,
+  }) = TajweedGuideLoaded;
+  const factory TajweedGuideState.error(String message) = TajweedGuideError;
 }

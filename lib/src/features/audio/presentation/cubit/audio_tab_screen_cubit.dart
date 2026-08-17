@@ -2,7 +2,9 @@ import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model
 import "package:al_quran_v3/src/features/audio/data/resources/recitations.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:injectable/injectable.dart";
 
+@lazySingleton
 class AudioTabReciterCubit extends Cubit<ReciterInfoModel> {
   AudioTabReciterCubit()
     : super(

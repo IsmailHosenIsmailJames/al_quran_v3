@@ -1,6 +1,8 @@
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:injectable/injectable.dart";
 
+@lazySingleton
 class PlayerPositionCubit extends Cubit<AudioPlayerPositionModel> {
   PlayerPositionCubit() : super(const AudioPlayerPositionModel());
   void changeCurrentPosition(Duration? position) {
