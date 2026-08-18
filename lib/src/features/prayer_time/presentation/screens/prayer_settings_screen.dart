@@ -37,9 +37,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
         platformOwn == platform_services.PlatformOwn.isIos;
 
     return Scaffold(
+      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: Text(l10n.prayerSettings),
+        title: Text(
+          l10n.prayerSettings,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
         child: Center(
@@ -48,36 +54,59 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               children: [
-                // 1. Calculation & Method Section
-                _buildSectionHeader(l10n.calculationAndJurisprudence, FluentIcons.compass_northwest_24_regular, themeState, isDark),
-                const Gap(8),
-                _buildCalculationMethodCard(context, themeState, isDark, l10n),
+                // 1. Calculation & Jurisprudence Section
+                _buildSectionHeader(
+                  l10n.calculationAndJurisprudence,
+                  FluentIcons.compass_northwest_24_regular,
+                  themeState,
+                  isDark,
+                ),
                 const Gap(10),
+                _buildCalculationMethodCard(context, themeState, isDark, l10n),
+                const Gap(12),
                 _buildMadhabCard(context, themeState, isDark, l10n),
 
                 const Gap(24),
 
                 // 2. Notification & Sound Settings
                 if (isMobile) ...[
-                  _buildSectionHeader(l10n.notificationsAndAudio, FluentIcons.alert_24_regular, themeState, isDark),
-                  const Gap(8),
+                  _buildSectionHeader(
+                    l10n.notificationsAndAudio,
+                    FluentIcons.alert_24_regular,
+                    themeState,
+                    isDark,
+                  ),
+                  const Gap(10),
                   _buildNotificationSettingsCard(context, themeState, isDark, l10n),
                   const Gap(24),
                 ],
 
                 // 3. Manual Time Adjustments
                 if (isMobile) ...[
-                  _buildSectionHeader(l10n.adjustReminderTime, FluentIcons.timer_24_regular, themeState, isDark),
+                  _buildSectionHeader(
+                    l10n.adjustReminderTime,
+                    FluentIcons.timer_24_regular,
+                    themeState,
+                    isDark,
+                  ),
                   const Gap(4),
-                  Text(
-                    l10n.adjustReminderTimingDescription,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: Text(
+                      l10n.adjustReminderTimingDescription,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      ),
                     ),
                   ),
-                  const Gap(10),
-                  _buildAdjustReminderList(themeState: themeState, l10n: l10n, prayerTimes: widget.prayerTimes, isDark: isDark),
+                  const Gap(12),
+                  _buildAdjustReminderList(
+                    themeState: themeState,
+                    l10n: l10n,
+                    prayerTimes: widget.prayerTimes,
+                    isDark: isDark,
+                  ),
                   const Gap(40),
                 ],
               ],
@@ -88,11 +117,23 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildSectionHeader(String title, IconData icon, dynamic themeState, bool isDark) {
+  Widget _buildSectionHeader(
+    String title,
+    IconData icon,
+    dynamic themeState,
+    bool isDark,
+  ) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: themeState.primary),
-        const Gap(8),
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, size: 16, color: themeState.primary),
+        ),
+        const Gap(10),
         Text(
           title,
           style: TextStyle(
@@ -105,19 +146,34 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildCalculationMethodCard(BuildContext context, dynamic themeState, bool isDark, AppLocalizations l10n) {
+  Widget _buildCalculationMethodCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return BlocBuilder<LocationQiblaPrayerDataCubit, LocationQiblaPrayerDataState>(
       builder: (context, locationState) {
-        final currentEnum = locationState.calculationMethod?.method ?? CalculationMethodEnum.muslimWorldLeague;
+        final currentEnum = locationState.calculationMethod?.method ??
+            CalculationMethodEnum.muslimWorldLeague;
 
         return Container(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? Colors.white.withValues(alpha: 0.04) : themeState.primaryShade100.withValues(alpha: 0.5),
+            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isDark ? Colors.white.withValues(alpha: 0.08) : themeState.primaryShade200.withValues(alpha: 0.6),
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade200,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,30 +192,47 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   initialValue: currentEnum,
                   isExpanded: true,
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    fillColor: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white,
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    fillColor: isDark
+                        ? Colors.white.withValues(alpha: 0.04)
+                        : Colors.grey.shade50,
                     filled: true,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: isDark ? Colors.white.withValues(alpha: 0.1) : Colors.grey.shade300,
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.1)
+                            : Colors.grey.shade300,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade300,
                       ),
                     ),
                   ),
-                  dropdownColor: isDark ? const Color(0xFF252525) : Colors.white,
+                  dropdownColor:
+                      isDark ? const Color(0xFF252525) : Colors.white,
                   items: CalculationMethodEnum.values.map((methodEnum) {
-                    final params = CalculationMethodParameters.fromEnum(methodEnum);
+                    final params =
+                        CalculationMethodParameters.fromEnum(methodEnum);
                     return DropdownMenuItem(
                       value: methodEnum,
                       child: Text(
                         params.fullName ?? methodEnum.name,
-                        style: const TextStyle(fontSize: 13),
+                        style: const TextStyle(fontSize: 13.5),
                       ),
                     );
                   }).toList(),
                   onChanged: (value) {
                     if (value != null) {
-                      context.read<LocationQiblaPrayerDataCubit>().saveCalculationMethod(
+                      context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .saveCalculationMethod(
                             CalculationMethodParameters.fromEnum(value),
                           );
                     }
@@ -173,19 +246,33 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildMadhabCard(BuildContext context, dynamic themeState, bool isDark, AppLocalizations l10n) {
+  Widget _buildMadhabCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return BlocBuilder<LocationQiblaPrayerDataCubit, LocationQiblaPrayerDataState>(
       builder: (context, locationState) {
         final currentMadhab = locationState.madhab ?? Madhab.shafi;
 
         return Container(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? Colors.white.withValues(alpha: 0.04) : themeState.primaryShade100.withValues(alpha: 0.5),
+            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isDark ? Colors.white.withValues(alpha: 0.08) : themeState.primaryShade200.withValues(alpha: 0.6),
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade200,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +293,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       title: l10n.shafie,
                       subtitle: l10n.shafieDescription,
                       isSelected: currentMadhab == Madhab.shafi,
-                      onTap: () => context.read<LocationQiblaPrayerDataCubit>().saveMadhab(Madhab.shafi),
+                      onTap: () => context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .saveMadhab(Madhab.shafi),
                       themeState: themeState,
                       isDark: isDark,
                     ),
@@ -217,7 +306,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       title: l10n.hanafi,
                       subtitle: l10n.hanafiDescription,
                       isSelected: currentMadhab == Madhab.hanafi,
-                      onTap: () => context.read<LocationQiblaPrayerDataCubit>().saveMadhab(Madhab.hanafi),
+                      onTap: () => context
+                          .read<LocationQiblaPrayerDataCubit>()
+                          .saveMadhab(Madhab.hanafi),
                       themeState: themeState,
                       isDark: isDark,
                     ),
@@ -243,15 +334,21 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected
-              ? themeState.primary.withValues(alpha: isDark ? 0.25 : 0.12)
-              : (isDark ? Colors.white.withValues(alpha: 0.03) : Colors.white),
+              ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.08)
+              : (isDark
+                  ? Colors.white.withValues(alpha: 0.03)
+                  : Colors.grey.shade50),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? themeState.primary : (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.grey.shade300),
-            width: isSelected ? 1.5 : 1.0,
+            color: isSelected
+                ? themeState.primary
+                : (isDark
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : Colors.grey.shade200),
+            width: isSelected ? 1.6 : 1.0,
           ),
         ),
         child: Column(
@@ -263,20 +360,26 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.5,
                     fontWeight: FontWeight.bold,
-                    color: isSelected ? themeState.primary : (isDark ? Colors.white : Colors.grey.shade900),
+                    color: isSelected
+                        ? themeState.primary
+                        : (isDark ? Colors.white : Colors.grey.shade900),
                   ),
                 ),
                 if (isSelected)
-                  Icon(FluentIcons.checkmark_circle_24_filled, size: 16, color: themeState.primary),
+                  Icon(
+                    FluentIcons.checkmark_circle_24_filled,
+                    size: 17,
+                    color: themeState.primary,
+                  ),
               ],
             ),
-            const Gap(3),
+            const Gap(4),
             Text(
               subtitle,
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 10.5,
                 color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
               ),
             ),
@@ -286,21 +389,36 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildNotificationSettingsCard(BuildContext context, dynamic themeState, bool isDark, AppLocalizations l10n) {
+  Widget _buildNotificationSettingsCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
       builder: (context, reminderState) {
-        final isMasterEnabled = reminderState.isPrayerRemindNotificationEnabled ?? false;
+        final isMasterEnabled =
+            reminderState.isPrayerRemindNotificationEnabled ?? false;
         final enforceAlarm = reminderState.enforceAlarmSound ?? false;
         final volume = reminderState.soundVolume ?? 0.65;
 
         return Container(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: isDark ? Colors.white.withValues(alpha: 0.04) : themeState.primaryShade100.withValues(alpha: 0.5),
+            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isDark ? Colors.white.withValues(alpha: 0.08) : themeState.primaryShade200.withValues(alpha: 0.6),
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade200,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,7 +443,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           l10n.enablePrayerRemindersDescription,
                           style: TextStyle(
                             fontSize: 11,
-                            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
                           ),
                         ),
                       ],
@@ -336,15 +456,24 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     activeTrackColor: themeState.primary,
                     onChanged: (value) async {
                       if (value) {
-                        final notifStatus = await Permission.notification.request();
-                        final exactAlarmStatus = await Permission.scheduleExactAlarm.request();
-                        if (!notifStatus.isGranted || !exactAlarmStatus.isGranted) {
-                          Fluttertoast.showToast(msg: l10n.allowNotificationPermission);
+                        final notifStatus =
+                            await Permission.notification.request();
+                        final exactAlarmStatus =
+                            await Permission.scheduleExactAlarm.request();
+                        if (!notifStatus.isGranted ||
+                            !exactAlarmStatus.isGranted) {
+                          Fluttertoast.showToast(
+                            msg: l10n.allowNotificationPermission,
+                          );
                           return;
                         }
-                        context.read<PrayerReminderCubit>().enablePrayerRemindNotification();
+                        context
+                            .read<PrayerReminderCubit>()
+                            .enablePrayerRemindNotification();
                       } else {
-                        context.read<PrayerReminderCubit>().disablePrayerRemindNotification();
+                        context
+                            .read<PrayerReminderCubit>()
+                            .disablePrayerRemindNotification();
                       }
                     },
                   ),
@@ -373,7 +502,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           l10n.enforceAlarmSoundDescription,
                           style: TextStyle(
                             fontSize: 11,
-                            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
                           ),
                         ),
                       ],
@@ -383,7 +514,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     value: enforceAlarm,
                     activeTrackColor: themeState.primary,
                     onChanged: (value) {
-                      context.read<PrayerReminderCubit>().setReminderEnforceSound(value);
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderEnforceSound(value);
                     },
                   ),
                 ],
@@ -416,7 +549,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 SliderTheme(
                   data: SliderThemeData(
                     activeTrackColor: themeState.primary,
-                    inactiveTrackColor: themeState.primary.withValues(alpha: 0.2),
+                    inactiveTrackColor: isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : themeState.primary.withValues(alpha: 0.2),
                     thumbColor: themeState.primary,
                     trackHeight: 4,
                   ),
@@ -426,7 +561,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     max: 1.0,
                     divisions: 20,
                     onChanged: (val) {
-                      context.read<PrayerReminderCubit>().setReminderSoundVolume(val);
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderSoundVolume(val);
                     },
                   ),
                 ),
@@ -457,26 +594,42 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       builder: (context, prayerReminderState) {
         return Column(
           children: prayers.map((prayerType) {
-            final int offsetMinutes = prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
-            final DateTime? prayerTime = prayerTimes.timeForPrayer(prayerType)?.toLocal();
-            final actualPrayerTime = TimeOfDay.fromDateTime(prayerTime ?? DateTime.now());
+            final int offsetMinutes =
+                prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
+            final DateTime? prayerTime =
+                prayerTimes.timeForPrayer(prayerType)?.toLocal();
+            final actualPrayerTime =
+                TimeOfDay.fromDateTime(prayerTime ?? DateTime.now());
 
             final adjustedTime = TimeOfDay(
-              hour: (actualPrayerTime.hour + (actualPrayerTime.minute + offsetMinutes) ~/ 60) % 24,
+              hour: (actualPrayerTime.hour +
+                      (actualPrayerTime.minute + offsetMinutes) ~/ 60) %
+                  24,
               minute: (actualPrayerTime.minute + offsetMinutes) % 60,
             );
 
-            final prayerName = PrayerTimeHelper.localizedPrayerName(context, prayerType) ?? prayerType.name;
+            final prayerName =
+                PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
+                    prayerType.name;
 
             return Container(
-              margin: const EdgeInsets.symmetric(vertical: 4),
+              margin: const EdgeInsets.symmetric(vertical: 5),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: isDark ? Colors.white.withValues(alpha: 0.04) : themeState.primaryShade100.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(14),
+                color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: isDark ? Colors.white.withValues(alpha: 0.08) : themeState.primaryShade200.withValues(alpha: 0.5),
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade200,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.03),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: Column(
                 children: [
@@ -485,7 +638,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: themeState.primary.withValues(alpha: 0.15),
+                          color: themeState.primary
+                              .withValues(alpha: isDark ? 0.2 : 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
@@ -502,16 +656,22 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             Text(
                               prayerName,
                               style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: isDark ? Colors.white : Colors.grey.shade900,
+                                fontSize: 14.5,
+                                fontWeight: FontWeight.bold,
+                                color: isDark
+                                    ? Colors.white
+                                    : Colors.grey.shade900,
                               ),
                             ),
                             Text(
-                              l10n.actualTime(formatTimeOfDay(context, actualPrayerTime)),
+                              l10n.actualTime(
+                                formatTimeOfDay(context, actualPrayerTime),
+                              ),
                               style: TextStyle(
                                 fontSize: 11,
-                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                           ],
@@ -519,26 +679,42 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       ),
                       // Offset chip
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 9,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: offsetMinutes == 0
-                              ? (isDark ? Colors.white.withValues(alpha: 0.08) : Colors.grey.shade200)
-                              : themeState.primary.withValues(alpha: 0.15),
+                              ? (isDark
+                                  ? Colors.white.withValues(alpha: 0.08)
+                                  : Colors.grey.shade100)
+                              : themeState.primary.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          offsetMinutes == 0 ? l10n.exactTime : (offsetMinutes > 0 ? "+$offsetMinutes min" : "$offsetMinutes min"),
+                          offsetMinutes == 0
+                              ? l10n.exactTime
+                              : (offsetMinutes > 0
+                                  ? "+${localizedNumber(context, offsetMinutes)} m"
+                                  : "-${localizedNumber(context, offsetMinutes.abs())} m"),
                           style: TextStyle(
                             fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: offsetMinutes == 0 ? (isDark ? Colors.grey.shade400 : Colors.grey.shade700) : themeState.primary,
+                            fontWeight: FontWeight.w600,
+                            color: offsetMinutes == 0
+                                ? (isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade700)
+                                : themeState.primary,
                           ),
                         ),
                       ),
                       const Gap(8),
                       // Adjusted alert time pill
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: themeState.primary,
                           borderRadius: BorderRadius.circular(20),
@@ -558,11 +734,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   SliderTheme(
                     data: SliderThemeData(
                       activeTrackColor: themeState.primary,
-                      inactiveTrackColor: isDark ? Colors.white.withValues(alpha: 0.1) : themeState.primary.withValues(alpha: 0.2),
+                      inactiveTrackColor: isDark
+                          ? Colors.white.withValues(alpha: 0.1)
+                          : Colors.grey.shade200,
                       thumbColor: themeState.primary,
-                      overlayColor: themeState.primary.withValues(alpha: 0.1),
-                      trackHeight: 4.0,
-                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+                      overlayColor:
+                          themeState.primary.withValues(alpha: 0.15),
+                      trackHeight: 3.5,
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 6),
                     ),
                     child: Slider(
                       value: offsetMinutes.toDouble(),
@@ -571,13 +751,17 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       divisions: 120,
                       label: _getAdjustmentText(offsetMinutes, l10n),
                       onChanged: (double value) {
-                        context.read<PrayerReminderCubit>().setUIReminderTimeAdjustment(
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setUIReminderTimeAdjustment(
                               prayerType,
                               value.round(),
                             );
                       },
                       onChangeEnd: (value) {
-                        context.read<PrayerReminderCubit>().setReminderTimeAdjustment(
+                        context
+                            .read<PrayerReminderCubit>()
+                            .setReminderTimeAdjustment(
                               prayerType,
                               value.round(),
                             );
