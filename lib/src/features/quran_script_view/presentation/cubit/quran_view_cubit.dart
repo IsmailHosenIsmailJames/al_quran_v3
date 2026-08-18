@@ -148,16 +148,18 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   }) {
     // if all are false, show toast that must be selected one
     QuranViewState newState = state.copyWith(
-      hideFootnote: hideFootnote,
-      hideWordByWord: hideWordByWord,
-      hideTranslation: hideTranslation,
-      hideToolbar: hideToolbar,
-      hideQuranAyah: hideQuranAyah,
-      alwaysOpenWordByWord: alwaysOpenWordByWord,
-      enableWordByWordHighlight: enableWordByWordHighlight,
-      scrollWithRecitation: scrollWithRecitation,
-      useAudioStream: useAudioStream,
-      playbackSpeed: playbackSpeed,
+      hideFootnote: hideFootnote ?? state.hideFootnote,
+      hideWordByWord: hideWordByWord ?? state.hideWordByWord,
+      hideTranslation: hideTranslation ?? state.hideTranslation,
+      hideToolbar: hideToolbar ?? state.hideToolbar,
+      hideQuranAyah: hideQuranAyah ?? state.hideQuranAyah,
+      alwaysOpenWordByWord: alwaysOpenWordByWord ?? state.alwaysOpenWordByWord,
+      enableWordByWordHighlight:
+          enableWordByWordHighlight ?? state.enableWordByWordHighlight,
+      scrollWithRecitation:
+          scrollWithRecitation ?? state.scrollWithRecitation,
+      useAudioStream: useAudioStream ?? state.useAudioStream,
+      playbackSpeed: playbackSpeed ?? state.playbackSpeed,
     );
     if (newState.hideWordByWord == true &&
         newState.hideTranslation == true &&

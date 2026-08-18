@@ -16,7 +16,7 @@ double _calcQibla(double lat, double lon) {
   return repo.calculateQiblaAngle(lat, lon);
 }
 
-@lazySingleton
+@injectable
 class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   LocationQiblaPrayerDataCubit({
     @factoryParam LocationQiblaPrayerDataState? initState,

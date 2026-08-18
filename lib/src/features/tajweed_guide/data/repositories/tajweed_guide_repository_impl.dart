@@ -11,6 +11,6 @@ class TajweedGuideRepositoryImpl implements TajweedGuideRepository {
 
   @override
   List<TajweedRuleEntity> getTajweedRules() {
-    return localDataSource.getTajweedRules();
+    return localDataSource.getTajweedRules().map((e) => e.toEntity()).toList();
   }
 }

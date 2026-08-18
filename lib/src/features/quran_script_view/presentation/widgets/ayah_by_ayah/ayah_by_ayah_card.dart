@@ -16,6 +16,7 @@ import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";

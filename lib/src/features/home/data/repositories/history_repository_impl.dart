@@ -12,7 +12,7 @@ class HistoryRepositoryImpl implements IHistoryRepository {
 
   @override
   List<HistoryElementEntity> getHistory() {
-    return localDataSource.getHistory();
+    return localDataSource.getHistory().map((e) => e.toEntity()).toList();
   }
 
   @override
@@ -22,8 +22,7 @@ class HistoryRepositoryImpl implements IHistoryRepository {
     int? pageNumber,
   }) async {
     List<HistoryElementModel> history = localDataSource.getHistory();
-    HistoryElementModel? lastHistory =
-        history.isEmpty ? null : history.last;
+    HistoryElementModel? lastHistory = history.isEmpty ? null : history.last;
 
     if (lastHistory != null &&
         surahNumber == lastHistory.surahNumber &&

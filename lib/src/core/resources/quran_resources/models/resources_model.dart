@@ -16,7 +16,7 @@ enum ResourceType {
 
 @freezed
 abstract class ResourcesModel with _$ResourcesModel {
-  @JsonSerializable(explicitToJson: true)
+  @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
   const factory ResourcesModel({
     @Default('') String language,
     @Default('') String languageNative,
