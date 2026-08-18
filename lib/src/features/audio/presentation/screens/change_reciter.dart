@@ -159,11 +159,19 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 filled: true,
                 fillColor: isDark
                     ? Colors.white.withValues(alpha: 0.06)
-                    : themeState.primaryShade100.withValues(alpha: 0.35),
+                    : Colors.grey.shade100,
                 contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
-                  borderSide: BorderSide.none,
+                  borderSide: BorderSide(
+                    color: isDark ? Colors.transparent : Colors.grey.shade300,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(roundedRadius),
+                  borderSide: BorderSide(
+                    color: isDark ? Colors.transparent : Colors.grey.shade300,
+                  ),
                 ),
               ),
             ),
@@ -402,6 +410,8 @@ class _ChangeReciterState extends State<ChangeReciter> {
           _selectedFilter = filterKey;
         });
       },
+      checkmarkColor: Colors.white,
+      showCheckmark: true,
       labelStyle: TextStyle(
         fontSize: 12,
         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
@@ -414,8 +424,14 @@ class _ChangeReciterState extends State<ChangeReciter> {
       selectedColor: themeState.primary,
       backgroundColor: isDark
           ? Colors.white.withValues(alpha: 0.05)
-          : Colors.black.withValues(alpha: 0.04),
-      side: BorderSide.none,
+          : Colors.white,
+      side: BorderSide(
+        color: isSelected
+            ? Colors.transparent
+            : (isDark
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.grey.shade300),
+      ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       visualDensity: VisualDensity.compact,
     );

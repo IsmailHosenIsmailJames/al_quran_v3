@@ -207,11 +207,11 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                   borderRadius: BorderRadius.circular(roundedRadius),
                   color: isDark
                       ? Colors.white.withValues(alpha: 0.05)
-                      : themeState.primaryShade100.withValues(alpha: 0.35),
+                      : Colors.grey.shade100,
                   border: Border.all(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.08)
-                        : themeState.primary.withValues(alpha: 0.15),
+                        : Colors.grey.shade300,
                   ),
                 ),
                 child: DropdownButtonHideUnderline(
@@ -243,7 +243,7 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
-                  color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+                  color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
                   border: Border.all(
                     color: themeState.primary.withValues(alpha: 0.25),
                   ),
@@ -395,13 +395,25 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                     label: Text(label),
                     selected: isSelected,
                     selectedColor: themeState.primary,
+                    checkmarkColor: Colors.white,
+                    showCheckmark: true,
                     backgroundColor: isDark
                         ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.black.withValues(alpha: 0.04),
-                    side: BorderSide.none,
+                        : Colors.white,
+                    side: BorderSide(
+                      color: isSelected
+                          ? Colors.transparent
+                          : (isDark
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : Colors.grey.shade300),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     labelStyle: TextStyle(
                       fontSize: 12,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.w500,
                       color: isSelected
                           ? Colors.white
                           : isDark
@@ -516,11 +528,11 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
         borderRadius: BorderRadius.circular(roundedRadius),
         color: isDark
             ? Colors.white.withValues(alpha: 0.04)
-            : themeState.primaryShade100.withValues(alpha: 0.35),
+            : Colors.grey.shade100,
         border: Border.all(
           color: isDark
               ? Colors.white.withValues(alpha: 0.08)
-              : themeState.primary.withValues(alpha: 0.15),
+              : Colors.grey.shade300,
         ),
       ),
       child: Column(
@@ -570,16 +582,21 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
     return ActionChip(
       label: Text(label),
       onPressed: onTap,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       labelStyle: TextStyle(
         fontSize: 11,
         color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
       ),
       backgroundColor: isDark
           ? Colors.white.withValues(alpha: 0.05)
-          : Colors.black.withValues(alpha: 0.04),
-      side: BorderSide.none,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      visualDensity: VisualDensity.compact,
+          : Colors.white,
+      side: BorderSide(
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.08)
+            : Colors.grey.shade300,
+      ),
     );
   }
 }

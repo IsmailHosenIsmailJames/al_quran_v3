@@ -66,24 +66,26 @@ class ContinueReadingHeroCard extends StatelessWidget {
               colors: isDark
                   ? [
                       themeState.primary.withValues(alpha: 0.28),
-                      themeState.primaryShade100.withValues(alpha: 0.16),
+                      themeState.primary.withValues(alpha: 0.16),
                       themeState.primary.withValues(alpha: 0.08),
                     ]
                   : [
-                      themeState.primary.withValues(alpha: 0.15),
-                      themeState.primaryShade100.withValues(alpha: 0.9),
-                      themeState.primaryShade200.withValues(alpha: 0.4),
+                      themeState.primary.withValues(alpha: 0.10),
+                      themeState.primary.withValues(alpha: 0.04),
+                      Colors.white,
                     ],
             ),
             border: Border.all(
-              color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.22),
+              color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.18),
               width: 1.2,
             ),
             boxShadow: [
               BoxShadow(
-                color: themeState.primary.withValues(alpha: isDark ? 0.14 : 0.08),
-                blurRadius: 18,
-                offset: const Offset(0, 6),
+                color: isDark
+                    ? themeState.primary.withValues(alpha: 0.14)
+                    : Colors.black.withValues(alpha: 0.03),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
             ],
           ),

@@ -1,6 +1,10 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/home/presentation/screens/home_page.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_state.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart";
@@ -8,12 +12,6 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_event.dar
 import "package:al_quran_v3/src/features/setup/presentation/widgets/download_progress_dialog.dart";
 import "package:al_quran_v3/src/features/setup/presentation/widgets/language_selection_list.dart";
 import "package:al_quran_v3/src/features/setup/presentation/widgets/setup_preview_card.dart";
-import "package:al_quran_v3/src/core/localization/language_cubit.dart";
-import "package:al_quran_v3/src/features/home/presentation/screens/home_page.dart";
-import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter/rendering.dart";
@@ -98,7 +96,6 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
-    ThemeState themeState = context.read<ThemeCubit>().state;
     bool isLandscape = MediaQuery.of(context).size.width > 600;
     bool isSmallScreen = MediaQuery.of(context).size.height < 450;
 
@@ -162,46 +159,56 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
             }
             return true;
           },
-          child: Row(
-            children: [
-              if (isLandscape)
-                Expanded(
-                  child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        boxShadow: [
-                          BoxShadow(
-                            color: themeState.primaryShade200,
-                            blurRadius: 150,
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: Image.asset(
-                        "assets/img/Quran_Logo_v3.png",
-                        color: themeState.primary,
-                      ),
-                    ),
-                  ),
-                ),
-              if (isLandscape) const VerticalDivider(),
-              Expanded(
-                child: Column(
+          child: isLandscape
+              ? Row(
                   children: [
                     Expanded(
+                      flex: 5,
                       child: LanguageSelectionList(
                         scrollController: _scrollController,
+                        bottomPadding: 24,
                       ),
                     ),
-                    SetupPreviewCard(
-                      onDownloadPressed: () => _onDownloadPressed(context),
+                    const VerticalDivider(width: 1),
+                    Expanded(
+                      flex: 6,
+                      child: SingleChildScrollView(
+                        padding: const EdgeInsets.all(16),
+                        child: SetupPreviewCard(
+                          onDownloadPressed: () => _onDownloadPressed(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Stack(
+                  children: [
+                    // Full Viewport Language Selection List
+                    Positioned.fill(
+                      child: LanguageSelectionList(
+                        scrollController: _scrollController,
+                        bottomPadding: 140,
+                      ),
+                    ),
+
+                    // Floating / Pinned Bottom Setup Bar
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: SetupBottomBar(
+                        onDownloadPressed: () => _onDownloadPressed(context),
+                        onCustomizePressed: () {
+                          showSetupCustomizationSheet(
+                            context,
+                            onDownloadPressed: () =>
+                                _onDownloadPressed(context),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );

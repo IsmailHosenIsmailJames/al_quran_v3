@@ -169,7 +169,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   visualDensity: VisualDensity.compact,
                   icon: const Icon(
                     FluentIcons.delete_24_regular,
-                    color: Colors.redAccent,
+                    color: Color(0xFFDC2626),
                     size: 18,
                   ),
                   tooltip: l10n.delete,
@@ -341,7 +341,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     margin: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: const Color(0xFFDC2626),
                       borderRadius: BorderRadius.circular(18),
                     ),
                     alignment: Alignment.centerRight,
@@ -459,7 +459,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     margin: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.redAccent,
+                      color: const Color(0xFFDC2626),
                       borderRadius: BorderRadius.circular(roundedRadius),
                     ),
                     alignment: Alignment.centerRight,
@@ -549,7 +549,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                               },
                               icon: const Icon(
                                 FluentIcons.delete_24_regular,
-                                color: Colors.redAccent,
+                                color: Color(0xFFDC2626),
                                 size: 18,
                               ),
                             ),

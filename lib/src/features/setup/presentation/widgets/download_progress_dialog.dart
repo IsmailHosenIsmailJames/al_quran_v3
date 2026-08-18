@@ -46,19 +46,22 @@ class DownloadProgressDialog extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         backgroundColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(22),
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: themeState.primaryShade200.withValues(alpha: 0.4),
-              width: 1.5,
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade200,
+              width: 1,
             ),
             boxShadow: [
               BoxShadow(
-                color: themeState.primary.withValues(alpha: 0.15),
-                blurRadius: 30,
-                spreadRadius: 2,
+                color: Colors.black.withValues(alpha: isDark ? 0.4 : 0.08),
+                blurRadius: 28,
+                spreadRadius: 0,
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -70,12 +73,14 @@ class DownloadProgressDialog extends StatelessWidget {
                   themeState,
                   appLocalizations,
                   state,
+                  isDark,
                 );
               } else if (state.status == DownloadStatus.success) {
                 return _buildSuccessContent(
                   context,
                   themeState,
                   appLocalizations,
+                  isDark,
                 );
               } else if (state.status == DownloadStatus.failure) {
                 return _buildFailureContent(
@@ -83,6 +88,7 @@ class DownloadProgressDialog extends StatelessWidget {
                   themeState,
                   appLocalizations,
                   state,
+                  isDark,
                 );
               }
               return _buildInitialLoader(themeState);
@@ -98,6 +104,7 @@ class DownloadProgressDialog extends StatelessWidget {
     ThemeState themeState,
     AppLocalizations appLocalizations,
     DownloadState state,
+    bool isDark,
   ) {
     final perc = state.progress.percentage ?? 0.0;
     final displayPercentage = (perc * 100).clamp(0.0, 100.0);
@@ -108,39 +115,40 @@ class DownloadProgressDialog extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Top Glowing Icon & Title Header
+        // Top Icon & Title Header
         Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: themeState.primaryShade100,
-                boxShadow: [
-                  BoxShadow(
-                    color: themeState.primary.withValues(alpha: 0.25),
-                    blurRadius: 16,
-                    spreadRadius: 1,
+                color: themeState.primary.withValues(
+                  alpha: isDark ? 0.18 : 0.1,
+                ),
+                border: Border.all(
+                  color: themeState.primary.withValues(
+                    alpha: isDark ? 0.3 : 0.15,
                   ),
-                ],
+                ),
               ),
               child: Icon(
                 FluentIcons.arrow_download_24_filled,
                 color: themeState.primary,
-                size: 24,
+                size: 22,
               ),
             ),
-            const Gap(14),
+            const Gap(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     appLocalizations.justAMoment,
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       letterSpacing: -0.3,
+                      color: isDark ? Colors.white : Colors.grey.shade900,
                     ),
                   ),
                   const Gap(2),
@@ -151,23 +159,32 @@ class DownloadProgressDialog extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 13,
-                      color: Theme.of(context).hintColor,
+                      fontSize: 12.5,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: themeState.primaryShade100,
+                color: themeState.primary.withValues(
+                  alpha: isDark ? 0.18 : 0.08,
+                ),
                 borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color: themeState.primary.withValues(
+                    alpha: isDark ? 0.35 : 0.2,
+                  ),
+                ),
               ),
               child: Text(
                 "${displayPercentage.toStringAsFixed(0)}%",
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: themeState.primary,
                 ),
@@ -176,7 +193,7 @@ class DownloadProgressDialog extends StatelessWidget {
           ],
         ),
 
-        const Gap(20),
+        const Gap(16),
 
         // Animated Smooth Progress Bar
         TweenAnimationBuilder<double>(
@@ -184,23 +201,21 @@ class DownloadProgressDialog extends StatelessWidget {
           curve: Curves.easeInOut,
           tween: Tween<double>(begin: 0.0, end: perc),
           builder: (context, value, child) {
-            return Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: LinearProgressIndicator(
-                    value: value > 0 ? value : null,
-                    minHeight: 10,
-                    backgroundColor: themeState.primaryShade100,
-                    color: themeState.primary,
-                  ),
-                ),
-              ],
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: value > 0 ? value : null,
+                minHeight: 7,
+                backgroundColor: isDark
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : Colors.grey.shade100,
+                color: themeState.primary,
+              ),
             );
           },
         ),
 
-        const Gap(22),
+        const Gap(16),
 
         // Step-by-Step Checklist View
         Flexible(
@@ -211,28 +226,44 @@ class DownloadProgressDialog extends StatelessWidget {
                 final stage = setupStages[index];
                 final isDone = index < activeIndex;
                 final isActive = index == activeIndex;
-                final isPending = index > activeIndex;
+
+                Color itemBg;
+                Color itemBorder;
+                if (isActive) {
+                  itemBg = themeState.primary.withValues(
+                    alpha: isDark ? 0.14 : 0.06,
+                  );
+                  itemBorder = themeState.primary.withValues(
+                    alpha: isDark ? 0.4 : 0.25,
+                  );
+                } else if (isDone) {
+                  itemBg = isDark
+                      ? const Color(0xFF16A34A).withValues(alpha: 0.08)
+                      : const Color(0xFF16A34A).withValues(alpha: 0.05);
+                  itemBorder = isDark
+                      ? const Color(0xFF16A34A).withValues(alpha: 0.25)
+                      : const Color(0xFF16A34A).withValues(alpha: 0.2);
+                } else {
+                  itemBg = isDark
+                      ? Colors.white.withValues(alpha: 0.02)
+                      : Colors.grey.shade50;
+                  itemBorder = isDark
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.grey.shade200;
+                }
 
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 250),
-                  margin: const EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 8),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 12,
+                    horizontal: 12,
+                    vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: isActive
-                        ? themeState.primaryShade100.withValues(alpha: 0.5)
-                        : (isDone
-                              ? Colors.green.withValues(alpha: 0.05)
-                              : Colors.transparent),
-                    borderRadius: BorderRadius.circular(14),
+                    color: itemBg,
+                    borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: isActive
-                          ? themeState.primaryShade300
-                          : (isDone
-                                ? Colors.green.withValues(alpha: 0.3)
-                                : Colors.grey.withValues(alpha: 0.15)),
+                      color: itemBorder,
                       width: isActive ? 1.5 : 1,
                     ),
                   ),
@@ -242,25 +273,27 @@ class DownloadProgressDialog extends StatelessWidget {
                       if (isDone)
                         const Icon(
                           Icons.check_circle_rounded,
-                          color: Colors.green,
-                          size: 22,
+                          color: Color(0xFF16A34A),
+                          size: 20,
                         )
                       else if (isActive)
                         SizedBox(
-                          width: 20,
-                          height: 20,
+                          width: 18,
+                          height: 18,
                           child: CircularProgressIndicator(
-                            strokeWidth: 2.5,
+                            strokeWidth: 2.2,
                             color: themeState.primary,
                           ),
                         )
                       else
                         Icon(
                           Icons.radio_button_unchecked,
-                          color: Colors.grey.shade400,
-                          size: 22,
+                          color: isDark
+                              ? Colors.grey.shade600
+                              : Colors.grey.shade400,
+                          size: 20,
                         ),
-                      const Gap(14),
+                      const Gap(12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,18 +301,22 @@ class DownloadProgressDialog extends StatelessWidget {
                             Text(
                               stage["title"]!,
                               style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: isActive
+                                fontSize: 13.5,
+                                fontWeight: isActive || isDone
                                     ? FontWeight.bold
+                                    : FontWeight.w500,
+                                color: isActive
+                                    ? themeState.primary
                                     : (isDone
-                                          ? FontWeight.w600
-                                          : FontWeight.normal),
-                                color: isPending
-                                    ? Theme.of(context).hintColor
-                                    : null,
+                                        ? (isDark
+                                            ? Colors.white
+                                            : Colors.grey.shade900)
+                                        : (isDark
+                                            ? Colors.grey.shade400
+                                            : Colors.grey.shade600)),
                               ),
                             ),
-                            const Gap(2),
+                            const Gap(1),
                             Text(
                               isActive && state.progress.stepName.isNotEmpty
                                   ? state.progress.stepName
@@ -287,8 +324,10 @@ class DownloadProgressDialog extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).hintColor,
+                                fontSize: 11.5,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                           ],
@@ -309,39 +348,42 @@ class DownloadProgressDialog extends StatelessWidget {
     BuildContext context,
     ThemeState themeState,
     AppLocalizations appLocalizations,
+    bool isDark,
   ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.green.shade50,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.green.withValues(alpha: 0.3),
-                blurRadius: 20,
-                spreadRadius: 2,
-              ),
-            ],
+            color: const Color(0xFF16A34A).withValues(
+              alpha: isDark ? 0.2 : 0.1,
+            ),
           ),
           child: const Icon(
             Icons.check_circle_rounded,
-            color: Colors.green,
-            size: 54,
+            color: Color(0xFF16A34A),
+            size: 48,
           ),
         ),
         const Gap(16),
         Text(
           appLocalizations.success,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : Colors.grey.shade900,
+          ),
         ),
         const Gap(8),
         Text(
           appLocalizations.setupCompletedOpeningQuran,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
+          style: TextStyle(
+            fontSize: 13,
+            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+          ),
         ),
       ],
     );
@@ -352,53 +394,62 @@ class DownloadProgressDialog extends StatelessWidget {
     ThemeState themeState,
     AppLocalizations appLocalizations,
     DownloadState state,
+    bool isDark,
   ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.red.shade50,
+            color: const Color(0xFFDC2626).withValues(
+              alpha: isDark ? 0.2 : 0.1,
+            ),
           ),
           child: const Icon(
             Icons.error_outline_rounded,
-            color: Colors.red,
-            size: 54,
+            color: Color(0xFFDC2626),
+            size: 48,
           ),
         ),
         const Gap(16),
         Text(
           appLocalizations.unableToDownloadResources,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 17,
             fontWeight: FontWeight.bold,
-            color: Colors.red,
+            color: Color(0xFFDC2626),
           ),
           textAlign: TextAlign.center,
         ),
         const Gap(8),
         Text(
           state.errorMessage ?? appLocalizations.unexpectedErrorSetup,
-          style: TextStyle(fontSize: 13, color: Theme.of(context).hintColor),
+          style: TextStyle(
+            fontSize: 12.5,
+            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+          ),
           textAlign: TextAlign.center,
         ),
         const Gap(20),
         SizedBox(
           width: double.infinity,
+          height: 48,
           child: ElevatedButton.icon(
             onPressed: onRetry,
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              elevation: 0,
+              backgroundColor: themeState.primary,
+              foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            icon: const Icon(Icons.refresh_rounded),
+            icon: const Icon(Icons.refresh_rounded, size: 20),
             label: Text(
               appLocalizations.retry,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ),
