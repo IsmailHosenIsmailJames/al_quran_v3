@@ -9,6 +9,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/navigation_info_model.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/surah_header_info.dart";
@@ -605,9 +606,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   if (isSurahHeadingIncluded)
                     SurahInfoHeaderBuilder(
                       headerInfoModel: SurahHeaderInfoModel(
-                        SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!),
-                        ayahKey,
-                        surahEndAyahKey,
+                        surahInfoModel:
+                            SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!),
+                        startAyahKey: ayahKey,
+                        endAyahKey: surahEndAyahKey,
                       ),
                     ),
                   if (isPageStart) pageLabelOfQuran(context, l10n, pageNumber),
@@ -686,11 +688,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                     if (firstAyah.split(":").last == "1" || index == 0)
                       SurahInfoHeaderBuilder(
                         headerInfoModel: SurahHeaderInfoModel(
-                          SurahInfoModel.fromMap(
+                          surahInfoModel: SurahInfoModel.fromMap(
                             metaDataSurah[surahNumber.toString()]!,
                           ),
-                          firstAyah,
-                          surahEndAyahKey ?? currentPage.last,
+                          startAyahKey: firstAyah,
+                          endAyahKey: surahEndAyahKey ?? currentPage.last,
                         ),
                       ),
                     pageLabelOfQuran(context, l10n, pageNumber),

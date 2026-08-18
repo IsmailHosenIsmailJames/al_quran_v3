@@ -9,6 +9,10 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:al_quran_v3/src/core/localization/language_cubit.dart' as _i178;
+import 'package:al_quran_v3/src/core/localization/languages.dart' as _i498;
+import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart'
+    as _i376;
 import 'package:al_quran_v3/src/features/about/data/datasources/about_local_datasource.dart'
     as _i190;
 import 'package:al_quran_v3/src/features/about/data/repositories/about_repository_impl.dart'
@@ -25,6 +29,22 @@ import 'package:al_quran_v3/src/features/audio/domain/repositories/i_audio_repos
     as _i818;
 import 'package:al_quran_v3/src/features/audio/domain/usecases/get_recitations_usecase.dart'
     as _i219;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart'
+    as _i949;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart'
+    as _i146;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart'
+    as _i587;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart'
+    as _i1021;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart'
+    as _i966;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart'
+    as _i793;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart'
+    as _i525;
+import 'package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart'
+    as _i730;
 import 'package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart'
     as _i169;
 import 'package:al_quran_v3/src/features/collections/data/repositories/collections_repository_impl.dart'
@@ -41,6 +61,8 @@ import 'package:al_quran_v3/src/features/home/domain/usecases/add_history_usecas
     as _i126;
 import 'package:al_quran_v3/src/features/home/domain/usecases/get_history_usecase.dart'
     as _i289;
+import 'package:al_quran_v3/src/features/home/presentation/cubit/quick_access_cubit.dart'
+    as _i364;
 import 'package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart'
     as _i900;
 import 'package:al_quran_v3/src/features/location/data/datasources/location_local_datasource.dart'
@@ -57,6 +79,12 @@ import 'package:al_quran_v3/src/features/location/domain/usecases/get_saved_loca
     as _i168;
 import 'package:al_quran_v3/src/features/location/domain/usecases/save_location_usecase.dart'
     as _i22;
+import 'package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart'
+    as _i945;
+import 'package:al_quran_v3/src/features/location/presentation/cubit/manual_location_selection_cubit.dart'
+    as _i288;
+import 'package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart'
+    as _i15;
 import 'package:al_quran_v3/src/features/mushaf/data/datasources/mushaf_local_datasource.dart'
     as _i187;
 import 'package:al_quran_v3/src/features/mushaf/data/datasources/mushaf_remote_datasource.dart'
@@ -121,8 +149,16 @@ import 'package:al_quran_v3/src/features/quran_resources/domain/usecases/toggle_
     as _i130;
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart'
     as _i411;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart'
+    as _i775;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart'
+    as _i277;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/landscape_scroll_effect.dart'
+    as _i327;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart'
     as _i81;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart'
+    as _i348;
 import 'package:al_quran_v3/src/features/settings/data/datasources/settings_local_datasource.dart'
     as _i584;
 import 'package:al_quran_v3/src/features/settings/data/repositories/settings_repository_impl.dart'
@@ -141,6 +177,8 @@ import 'package:al_quran_v3/src/features/setup/data/repositories/resource_reposi
     as _i865;
 import 'package:al_quran_v3/src/features/setup/data/repositories/setup_repository_impl.dart'
     as _i283;
+import 'package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart'
+    as _i609;
 import 'package:al_quran_v3/src/features/setup/domain/repositories/i_resource_repository.dart'
     as _i720;
 import 'package:al_quran_v3/src/features/setup/domain/repositories/i_setup_repository.dart'
@@ -151,6 +189,8 @@ import 'package:al_quran_v3/src/features/setup/domain/usecases/get_setup_resourc
     as _i930;
 import 'package:al_quran_v3/src/features/setup/domain/usecases/save_setup_preferences_usecase.dart'
     as _i144;
+import 'package:al_quran_v3/src/features/setup/presentation/bloc/book_search_cubit.dart'
+    as _i998;
 import 'package:al_quran_v3/src/features/setup/presentation/bloc/download_cubit.dart'
     as _i708;
 import 'package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart'
@@ -201,18 +241,39 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i288.ManualLocationSelectionCubit>(
+      () => _i288.ManualLocationSelectionCubit(),
+    );
     gh.factory<_i601.PrayerReminderCubit>(() => _i601.PrayerReminderCubit());
     gh.factory<_i81.QuranViewCubit>(() => _i81.QuranViewCubit());
     gh.factory<_i563.SurahSearchCubit>(() => _i563.SurahSearchCubit());
+    gh.lazySingleton<_i376.ThemeCubit>(() => _i376.ThemeCubit());
     gh.lazySingleton<_i190.AboutLocalDataSource>(
       () => _i190.AboutLocalDataSource(),
     );
     gh.lazySingleton<_i712.AudioLocalDataSource>(
       () => _i712.AudioLocalDataSource(),
     );
+    gh.lazySingleton<_i949.AudioDownloadCubit>(
+      () => _i949.AudioDownloadCubit(),
+    );
+    gh.lazySingleton<_i146.AudioLoopCubit>(() => _i146.AudioLoopCubit());
+    gh.lazySingleton<_i587.AudioTabReciterCubit>(
+      () => _i587.AudioTabReciterCubit(),
+    );
+    gh.lazySingleton<_i1021.AudioUiCubit>(() => _i1021.AudioUiCubit());
+    gh.lazySingleton<_i966.AyahKeyCubit>(() => _i966.AyahKeyCubit());
+    gh.lazySingleton<_i793.PlayerPositionCubit>(
+      () => _i793.PlayerPositionCubit(),
+    );
+    gh.lazySingleton<_i525.PlayerStateCubit>(() => _i525.PlayerStateCubit());
+    gh.lazySingleton<_i730.SegmentedQuranReciterCubit>(
+      () => _i730.SegmentedQuranReciterCubit(),
+    );
     gh.lazySingleton<_i151.HistoryLocalDataSource>(
       () => _i151.HistoryLocalDataSource(),
     );
+    gh.lazySingleton<_i364.QuickAccessCubit>(() => _i364.QuickAccessCubit());
     gh.lazySingleton<_i187.MushafLocalDataSource>(
       () => _i187.MushafLocalDataSource(),
     );
@@ -224,6 +285,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i609.QuranResourcesRemoteDataSource>(
       () => _i609.QuranResourcesRemoteDataSource(),
+    );
+    gh.lazySingleton<_i775.AyahByAyahInScrollInfoCubit>(
+      () => _i775.AyahByAyahInScrollInfoCubit(),
+    );
+    gh.lazySingleton<_i277.AyahToHighlight>(() => _i277.AyahToHighlight());
+    gh.lazySingleton<_i327.LandscapeScrollEffect>(
+      () => _i327.LandscapeScrollEffect(),
+    );
+    gh.lazySingleton<_i348.WordPlayingStateCubit>(
+      () => _i348.WordPlayingStateCubit(),
     );
     gh.lazySingleton<_i584.SettingsLocalDataSource>(
       () => _i584.SettingsLocalDataSource(),
@@ -297,8 +368,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i914.IAboutRepository>(
       () => _i294.AboutRepositoryImpl(gh<_i190.AboutLocalDataSource>()),
     );
+    gh.factoryParam<
+      _i998.BookSearchCubit,
+      bool,
+      Map<String, List<_i609.ResourceEntity>>
+    >(
+      (isTafsir, allResources) =>
+          _i998.BookSearchCubit(isTafsir: isTafsir, allResources: allResources),
+    );
     gh.lazySingleton<_i104.PrayerTimeCalculatorDataSource>(
       () => _i104.PrayerTimeCalculatorDataSourceImpl(),
+    );
+    gh.factoryParam<_i178.LanguageCubit, _i498.MyAppLocalization?, dynamic>(
+      (initialLocale, _) => _i178.LanguageCubit(initialLocale),
     );
     gh.lazySingleton<_i197.CompassDatasource>(
       () => _i197.CompassDatasourceImpl(),
@@ -370,6 +452,14 @@ extension GetItInjectableX on _i174.GetIt {
         resourceRepository: gh<_i720.IResourceRepository>(),
         setupRepository: gh<_i670.ISetupRepository>(),
       ),
+    );
+    gh.factoryParam<
+      _i945.LocationQiblaPrayerDataCubit,
+      _i15.LocationQiblaPrayerDataState?,
+      dynamic
+    >(
+      (initState, _) =>
+          _i945.LocationQiblaPrayerDataCubit(initState: initState),
     );
     gh.lazySingleton<_i511.GetAppInfoUseCase>(
       () => _i511.GetAppInfoUseCase(gh<_i914.IAboutRepository>()),
