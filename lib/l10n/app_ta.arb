@@ -428,5 +428,14 @@
   "actualTime": "உண்மையான நேரம்: {time}",
   "nextPrayerLabel": "அடுத்தது: {prayerName}",
   "currentPrayerLabel": "இப்போது: {prayerName}",
-  "startsAt": "{prayerName} தொடங்கும் நேரம் {time}"
+  "startsAt": "{prayerName} தொடங்கும் நேரம் {time}",
+  "continueReading": "தொடர்ந்து படிக்கவும்",
+  "lastRead": "கடைசியாக படித்தது",
+  "resume": "மீண்டும் தொடங்கு",
+  "startReading": "படிக்கத் தொடங்குங்கள்",
+  "verses": "வசனங்கள்",
+  "makki": "மக்கீ",
+  "madani": "மதனீ",
+  "ayah": "வசனம்",
+  "edit": "திருத்து"
 }

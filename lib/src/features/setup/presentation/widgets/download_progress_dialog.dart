@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/download_state.dart";
@@ -16,27 +14,24 @@ class DownloadProgressDialog extends StatelessWidget {
   const DownloadProgressDialog({super.key, required this.onRetry});
 
   List<Map<String, String>> _getSetupStages(AppLocalizations loc) => [
-        {
-          "title": loc.translationDatabase,
-          "subtitle": loc.translationDatabaseSubtitle,
-        },
-        {
-          "title": loc.tafsirCommentary,
-          "subtitle": loc.tafsirCommentarySubtitle,
-        },
-        {
-          "title": loc.wordByWordAnalysis,
-          "subtitle": loc.wordByWordAnalysisSubtitle,
-        },
-        {
-          "title": loc.audioRecitationSegments,
-          "subtitle": loc.audioRecitationSegmentsSubtitle,
-        },
-        {
-          "title": loc.locationQiblaMetadata,
-          "subtitle": loc.locationQiblaMetadataSubtitle,
-        },
-      ];
+    {
+      "title": loc.translationDatabase,
+      "subtitle": loc.translationDatabaseSubtitle,
+    },
+    {"title": loc.tafsirCommentary, "subtitle": loc.tafsirCommentarySubtitle},
+    {
+      "title": loc.wordByWordAnalysis,
+      "subtitle": loc.wordByWordAnalysisSubtitle,
+    },
+    {
+      "title": loc.audioRecitationSegments,
+      "subtitle": loc.audioRecitationSegmentsSubtitle,
+    },
+    {
+      "title": loc.locationQiblaMetadata,
+      "subtitle": loc.locationQiblaMetadataSubtitle,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,55 +45,48 @@ class DownloadProgressDialog extends StatelessWidget {
         insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         backgroundColor: Colors.transparent,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: (isDark ? Colors.grey.shade900 : Colors.white)
-                    .withValues(alpha: 0.9),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: themeState.primaryShade200.withValues(alpha: 0.4),
-                  width: 1.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: themeState.primary.withValues(alpha: 0.15),
-                    blurRadius: 30,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: BlocBuilder<DownloadCubit, DownloadState>(
-                builder: (context, state) {
-                  if (state.status == DownloadStatus.downloading) {
-                    return _buildDownloadingContent(
-                      context,
-                      themeState,
-                      appLocalizations,
-                      state,
-                    );
-                  } else if (state.status == DownloadStatus.success) {
-                    return _buildSuccessContent(
-                      context,
-                      themeState,
-                      appLocalizations,
-                    );
-                  } else if (state.status == DownloadStatus.failure) {
-                    return _buildFailureContent(
-                      context,
-                      themeState,
-                      appLocalizations,
-                      state,
-                    );
-                  }
-                  return _buildInitialLoader(themeState);
-                },
-              ),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: themeState.primaryShade200.withValues(alpha: 0.4),
+              width: 1.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: themeState.primary.withValues(alpha: 0.15),
+                blurRadius: 30,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: BlocBuilder<DownloadCubit, DownloadState>(
+            builder: (context, state) {
+              if (state.status == DownloadStatus.downloading) {
+                return _buildDownloadingContent(
+                  context,
+                  themeState,
+                  appLocalizations,
+                  state,
+                );
+              } else if (state.status == DownloadStatus.success) {
+                return _buildSuccessContent(
+                  context,
+                  themeState,
+                  appLocalizations,
+                );
+              } else if (state.status == DownloadStatus.failure) {
+                return _buildFailureContent(
+                  context,
+                  themeState,
+                  appLocalizations,
+                  state,
+                );
+              }
+              return _buildInitialLoader(themeState);
+            },
           ),
         ),
       ),
@@ -236,15 +224,15 @@ class DownloadProgressDialog extends StatelessWidget {
                     color: isActive
                         ? themeState.primaryShade100.withValues(alpha: 0.5)
                         : (isDone
-                            ? Colors.green.withValues(alpha: 0.05)
-                            : Colors.transparent),
+                              ? Colors.green.withValues(alpha: 0.05)
+                              : Colors.transparent),
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
                       color: isActive
                           ? themeState.primaryShade300
                           : (isDone
-                              ? Colors.green.withValues(alpha: 0.3)
-                              : Colors.grey.withValues(alpha: 0.15)),
+                                ? Colors.green.withValues(alpha: 0.3)
+                                : Colors.grey.withValues(alpha: 0.15)),
                       width: isActive ? 1.5 : 1,
                     ),
                   ),
@@ -284,8 +272,8 @@ class DownloadProgressDialog extends StatelessWidget {
                                 fontWeight: isActive
                                     ? FontWeight.bold
                                     : (isDone
-                                        ? FontWeight.w600
-                                        : FontWeight.normal),
+                                          ? FontWeight.w600
+                                          : FontWeight.normal),
                                 color: isPending
                                     ? Theme.of(context).hintColor
                                     : null,

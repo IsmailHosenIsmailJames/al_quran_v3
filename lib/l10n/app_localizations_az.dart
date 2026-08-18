@@ -1447,4 +1447,31 @@ class AppLocalizationsAz extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName $time başlayır';
   }
+
+  @override
+  String get continueReading => 'Oxumağa davam et';
+
+  @override
+  String get lastRead => 'Son oxunan';
+
+  @override
+  String get resume => 'Davam et';
+
+  @override
+  String get startReading => 'Oxumağa başla';
+
+  @override
+  String get verses => 'Ayələr';
+
+  @override
+  String get makki => 'Məkkə';
+
+  @override
+  String get madani => 'Mədinə';
+
+  @override
+  String get ayah => 'Ayə';
+
+  @override
+  String get edit => 'Düzəliş et';
 }

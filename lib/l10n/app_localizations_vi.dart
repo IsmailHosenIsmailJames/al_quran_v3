@@ -1447,4 +1447,31 @@ class AppLocalizationsVi extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName bắt đầu lúc $time';
   }
+
+  @override
+  String get continueReading => 'Tiếp tục đọc';
+
+  @override
+  String get lastRead => 'Đọc lần cuối';
+
+  @override
+  String get resume => 'Tiếp tục';
+
+  @override
+  String get startReading => 'Bắt đầu đọc';
+
+  @override
+  String get verses => 'Câu';
+
+  @override
+  String get makki => 'Mecca';
+
+  @override
+  String get madani => 'Medina';
+
+  @override
+  String get ayah => 'Câu';
+
+  @override
+  String get edit => 'Chỉnh sửa';
 }

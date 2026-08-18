@@ -430,7 +430,7 @@
     }
   },
   "newText": "New",
-  "more": "More: ",
+  "more": "More",
   "cacheNotFound": "Cache Not Found",
   "cacheSize": "Cache Size",
   "error": "Error: {error}",
@@ -695,7 +695,6 @@
   "jumpToToday": "Jump to Today",
   "dateAndHijri": "Date / Hijri",
   "selectedLocation": "Selected Location",
-  "more": "More",
   "nextPrayerLabel": "Next: {prayerName}",
   "@nextPrayerLabel": {
     "placeholders": {
@@ -722,5 +721,14 @@
         "type": "String"
       }
     }
-  }
+  },
+  "continueReading": "Continue Reading",
+  "lastRead": "Last Read",
+  "resume": "Resume",
+  "startReading": "Start Reading",
+  "verses": "Verses",
+  "makki": "Makki",
+  "madani": "Madani",
+  "ayah": "Ayah",
+  "edit": "Edit"
 }

@@ -690,5 +690,14 @@
   "actualTime": "实际时间：{time}",
   "nextPrayerLabel": "下一番：{prayerName}",
   "currentPrayerLabel": "当前：{prayerName}",
-  "startsAt": "{prayerName} 开始于 {time}"
+  "startsAt": "{prayerName} 开始于 {time}",
+  "continueReading": "继续阅读",
+  "lastRead": "上次阅读",
+  "resume": "继续",
+  "startReading": "开始阅读",
+  "verses": "节",
+  "makki": "麦加降示",
+  "madani": "麦地那降示",
+  "ayah": "节",
+  "edit": "编辑"
 }

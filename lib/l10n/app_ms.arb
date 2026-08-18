@@ -690,5 +690,14 @@
   "actualTime": "Waktu Sebenar: {time}",
   "nextPrayerLabel": "Seterusnya: {prayerName}",
   "currentPrayerLabel": "Sekarang: {prayerName}",
-  "startsAt": "{prayerName} bermula jam {time}"
+  "startsAt": "{prayerName} bermula jam {time}",
+  "continueReading": "Teruskan Membaca",
+  "lastRead": "Terakhir Dibaca",
+  "resume": "Sambung",
+  "startReading": "Mula Membaca",
+  "verses": "Ayat",
+  "makki": "Makkiyyah",
+  "madani": "Madaniyyah",
+  "ayah": "Ayat",
+  "edit": "Sunting"
 }

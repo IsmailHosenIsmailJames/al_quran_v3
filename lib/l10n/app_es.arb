@@ -690,5 +690,14 @@
   "actualTime": "Hora real: {time}",
   "nextPrayerLabel": "Siguiente: {prayerName}",
   "currentPrayerLabel": "Ahora: {prayerName}",
-  "startsAt": "{prayerName} comienza a las {time}"
+  "startsAt": "{prayerName} comienza a las {time}",
+  "continueReading": "Continuar leyendo",
+  "lastRead": "Última lectura",
+  "resume": "Reanudar",
+  "startReading": "Empezar a leer",
+  "verses": "Versículos",
+  "makki": "Mequí",
+  "madani": "Mediní",
+  "ayah": "Versículo",
+  "edit": "Editar"
 }

@@ -1,5 +1,4 @@
 import "dart:async";
-import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
@@ -281,25 +280,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     );
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       appBar: isLandScape
           ? null
           : AppBar(
-              flexibleSpace: ClipRRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(color: themeState.mutedGray),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              backgroundColor: Theme.brightnessOf(context) == Brightness.dark
-                  ? Colors.grey.shade900.withValues(alpha: 0.5)
-                  : Colors.grey.shade200.withValues(alpha: 0.5),
               title: appBarTitle(),
               actions: [
                 getAyahsDropDown(themeState),
@@ -557,10 +541,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   }
 
   Widget quranScriptWidget(AppLocalizations l10n) {
-    double topPadding = 10;
-    if (!isLandScape) {
-      topPadding += MediaQuery.of(context).padding.top + kToolbarHeight;
-    }
+    const double topPadding = 6;
 
     return BlocBuilder<
       AyahByAyahInScrollInfoCubit,

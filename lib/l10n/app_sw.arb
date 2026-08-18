@@ -690,5 +690,14 @@
   "actualTime": "Wakati Halisi: {time}",
   "nextPrayerLabel": "Inayofuata: {prayerName}",
   "currentPrayerLabel": "Sasa: {prayerName}",
-  "startsAt": "{prayerName} inaanza saa {time}"
+  "startsAt": "{prayerName} inaanza saa {time}",
+  "continueReading": "Endelea Kusoma",
+  "lastRead": "Iliyosomwa Mwisho",
+  "resume": "Rejelea",
+  "startReading": "Anza Kusoma",
+  "verses": "Aya",
+  "makki": "Makkiyah",
+  "madani": "Madaniyah",
+  "ayah": "Aya",
+  "edit": "Hariri"
 }

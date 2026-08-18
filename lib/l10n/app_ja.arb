@@ -428,5 +428,14 @@
   "actualTime": "実際: {time}",
   "nextPrayerLabel": "次: {prayerName}",
   "currentPrayerLabel": "現在: {prayerName}",
-  "startsAt": "{prayerName}の開始時刻 {time}"
+  "startsAt": "{prayerName}の開始時刻 {time}",
+  "continueReading": "続きを読む",
+  "lastRead": "最後に読んだ",
+  "resume": "再開",
+  "startReading": "読み始める",
+  "verses": "節",
+  "makki": "マッカ啓示",
+  "madani": "マディーナ啓示",
+  "ayah": "節",
+  "edit": "編集"
 }

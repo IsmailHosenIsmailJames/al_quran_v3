@@ -1,38 +1,25 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_pages_info.dart";
-import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_page_shimmer.dart";
-import "package:al_quran_v3/src/features/mushaf/presentation/screens/kfgqpc_v4_layout_screen.dart";
-import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
-import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
-import "package:al_quran_v3/src/features/surah_list/presentation/screens/hizb_list_view.dart";
-import "package:al_quran_v3/src/features/surah_list/presentation/screens/juz_list_view.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/continue_reading_hero_card.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_history_carousel.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_access_bar.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_actions_bar.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_tab_bar_header.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/juz_info_model.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/page_info_model.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
+import "package:al_quran_v3/src/features/surah_list/presentation/screens/hizb_list_view.dart";
+import "package:al_quran_v3/src/features/surah_list/presentation/screens/juz_list_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/page_list_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/ruku_list_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/surah_list_view.dart";
-import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
-import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_state.dart";
-import "package:al_quran_v3/src/features/home/presentation/cubit/quick_access_cubit.dart";
-import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:gap/gap.dart";
-import "package:al_quran_v3/src/features/home/presentation/widgets/quick_access_popup.dart";
-import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
-import "package:al_quran_v3/src/core/utils/number_localization.dart";
-import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-
+/// The modernized Home Page Quran Tab.
 class QuranPage extends StatefulWidget {
   const QuranPage({super.key});
 
@@ -42,31 +29,35 @@ class QuranPage extends StatefulWidget {
 
 class _QuranPageState extends State<QuranPage>
     with SingleTickerProviderStateMixin {
-  List<SurahInfoModel> surahInfoList = metaDataSurah.values
-      .map((value) => SurahInfoModel.fromMap(value))
-      .toList();
-  List<JuzInfoModel> juzInfoModelList = metaDataJuz.values
-      .map((e) => JuzInfoModel.fromMap(e))
-      .toList();
-  List<PageInfoModel> pageInfoList = quranPagesInfo
-      .map((e) => PageInfoModel.fromMap(e))
-      .toList();
-
+  late final List<SurahInfoModel> _surahInfoList;
+  late final List<JuzInfoModel> _juzInfoModelList;
+  late final List<PageInfoModel> _pageInfoList;
   late final TabController _tabController;
 
-  bool isLoaded = true;
+  bool _isLoaded = true;
 
   @override
   void initState() {
-    _tabController = TabController(length: 5, vsync: this);
-    loadMetaSurah().then((value) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() {
-          isLoaded = false;
-        });
-      });
-    });
     super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+
+    _surahInfoList = metaDataSurah.values
+        .map((value) => SurahInfoModel.fromMap(value))
+        .toList();
+    _juzInfoModelList = metaDataJuz.values
+        .map((e) => JuzInfoModel.fromMap(e))
+        .toList();
+    _pageInfoList = quranPagesInfo
+        .map((e) => PageInfoModel.fromMap(e))
+        .toList();
+
+    loadMetaSurah().then((_) {
+      if (mounted) {
+        setState(() {
+          _isLoaded = false;
+        });
+      }
+    });
   }
 
   @override
@@ -77,8 +68,12 @@ class _QuranPageState extends State<QuranPage>
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoaded) {
+      return const QuranPageShimmer();
+    }
+
     final l10n = AppLocalizations.of(context);
-    List<String> pagesName = [
+    final List<String> tabNames = [
       l10n.surah,
       l10n.juz,
       l10n.pages,
@@ -86,421 +81,49 @@ class _QuranPageState extends State<QuranPage>
       l10n.ruku,
     ];
 
-    final themeState = context.watch<ThemeCubit>().state;
-    final isDarkMode = Theme.brightnessOf(context) == Brightness.dark;
-
-    return isLoaded
-        ? const QuranPageShimmer()
-        : NestedScrollView(
+    return SafeArea(
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                SliverToBoxAdapter(
+                // Top Sections: Continue Reading, Quick Actions, History, Shortcuts
+                const SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 10.0,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: QuickOption(
-                                themeState: themeState,
-                                label: l10n.mushaf,
-                                onClick: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const KfgqpcV4LayoutScreen(),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.all(10.0),
-                                  child: Image.asset(
-                                    "assets/img/mushaf.png",
-                                    color: isDarkMode
-                                        ? Colors.grey.shade200
-                                        : Colors.grey.shade800,
-                                    fit: BoxFit.scaleDown,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Expanded(
-                              child: QuickOption(
-                                themeState: themeState,
-                                label: l10n.settings,
-                                onClick: () async {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SettingsPage(),
-                                    ),
-                                  );
-                                  WidgetsBinding.instance.addPostFrameCallback((
-                                    _,
-                                  ) {
-                                    setState(() {});
-                                  });
-                                },
-                                child: Icon(
-                                  FluentIcons.settings_24_filled,
-                                  color: isDarkMode
-                                      ? Colors.grey.shade200
-                                      : Colors.grey.shade800,
-                                  size: 32,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Expanded(
-                              child: QuickOption(
-                                themeState: themeState,
-                                label: l10n.resources,
-                                onClick: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const QuranResourcesScreen(),
-                                    ),
-                                  );
-                                },
-                                child: Icon(
-                                  FluentIcons.arrow_download_24_filled,
-                                  color: isDarkMode
-                                      ? Colors.grey.shade200
-                                      : Colors.grey.shade800,
-                                  size: 32,
-                                ),
-                              ),
-                            ),
-                            const Gap(8),
-                            Expanded(
-                              child: QuickOption(
-                                themeState: themeState,
-                                label: l10n.pinned,
-                                onClick: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CollectionPage(
-                                            collectionType:
-                                                CollectionType.pinned,
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: Icon(
-                                  FluentIcons.pin_24_filled,
-                                  color: isDarkMode
-                                      ? Colors.grey.shade200
-                                      : Colors.grey.shade800,
-                                  size: 32,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
-                        builder: (context, history) {
-                          return history.history.isEmpty
-                              ? Container()
-                              : Column(
-                                  children: [
-                                    const Gap(10),
-                                    Row(
-                                      children: [
-                                        const Gap(10),
-                                        const Icon(
-                                          FluentIcons.history_24_regular,
-                                        ),
-                                        const Gap(5),
-                                        Text(
-                                          l10n.history,
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.titleMedium,
-                                        ),
-                                      ],
-                                    ),
-
-                                    const Gap(5),
-
-                                    SizedBox(
-                                      height: 40,
-                                      child: getHistoryWidget(history, l10n),
-                                    ),
-                                    const Gap(10),
-                                  ],
-                                );
-                        },
-                      ),
-
-                      Row(
-                        children: [
-                          const Gap(10),
-                          const Icon(FluentIcons.flash_24_regular),
-                          const Gap(5),
-                          Text(
-                            l10n.quickAccess,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const Gap(10),
-                          IconButton(
-                            style: IconButton.styleFrom(
-                              backgroundColor: themeState.primaryShade100,
-                              foregroundColor: themeState.primary,
-                            ),
-                            onPressed: () {
-                              showQuickAccessPopup(context);
-                            },
-                            icon: const Icon(FluentIcons.edit_24_regular),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                        child: BlocBuilder<QuickAccessCubit, List<QuickAccessModel>>(
-                          builder: (context, quickAccessList) {
-                            return ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: quickAccessList.length,
-                              itemBuilder: (context, index) {
-                                QuickAccessModel quickAccessModel =
-                                    quickAccessList[index];
-
-                                SurahInfoModel surahInfo =
-                                    SurahInfoModel.fromMap(
-                                      metaDataSurah[quickAccessModel.surahNumber
-                                          .toString()]!,
-                                    );
-                                String? scrollTo =
-                                    ((quickAccessModel.scrollIndex != null) &&
-                                        (quickAccessModel.scrollIndex! > 1))
-                                    ? "${surahInfo.id}:${quickAccessModel.scrollIndex}"
-                                    : null;
-
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextButton.icon(
-                                    style: TextButton.styleFrom(
-                                      backgroundColor: context
-                                          .read<ThemeCubit>()
-                                          .state
-                                          .primaryShade100,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => QuranScriptView(
-                                            startKey: "${surahInfo.id}:1",
-                                            endKey:
-                                                "${surahInfo.id}:${surahInfo.versesCount}",
-                                            toScrollKey: scrollTo,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    label: Text(
-                                      getSurahName(context, surahInfo.id) +
-                                          (scrollTo != null
-                                              ? " - ${localizedNumber(context, quickAccessModel.scrollIndex)}"
-                                              : ""),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      const Gap(10),
+                      ContinueReadingHeroCard(),
+                      QuranQuickActionsBar(),
+                      QuranHistoryCarousel(),
+                      QuranQuickAccessBar(),
                     ],
                   ),
                 ),
+
+                // Sticky glassmorphic tab bar header
                 SliverPersistentHeader(
                   pinned: true,
                   floating: false,
-                  delegate: _QuranHeaderDelegate(
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                          child: Container(
-                            height: 46,
-                            decoration: BoxDecoration(
-                              color: themeState.primaryShade100,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: TabBar(
-                              splashBorderRadius: BorderRadius.circular(100),
-                              controller: _tabController,
-                              indicator: BoxDecoration(
-                                color: themeState.primaryShade200,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              labelPadding: EdgeInsets.zero,
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              labelColor: Theme.of(
-                                context,
-                              ).colorScheme.onPrimaryContainer,
-                              unselectedLabelColor: Theme.of(
-                                context,
-                              ).colorScheme.onSurfaceVariant,
-                              labelStyle: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                              unselectedLabelStyle: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                              tabs: pagesName
-                                  .map((name) => Tab(text: name))
-                                  .toList(),
-                              dividerColor: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  delegate: QuranTabBarHeaderDelegate(
+                    tabController: _tabController,
+                    tabNames: tabNames,
                   ),
                 ),
               ];
             },
             body: TabBarView(
               controller: _tabController,
-              // physics: const ClampingScrollPhysics(), // NestedScrollView handles physics usually
               children: [
-                SurahListView(surahInfoList: surahInfoList),
-                JuzListView(juzInfoList: juzInfoModelList),
-                PageListView(pageInfoList: pageInfoList),
+                SurahListView(surahInfoList: _surahInfoList),
+                JuzListView(juzInfoList: _juzInfoModelList),
+                PageListView(pageInfoList: _pageInfoList),
                 const HizbListView(),
                 const RukuListView(),
               ],
             ),
-          );
-  }
-
-  Widget getHistoryWidget(QuranHistoryState history, AppLocalizations l10n) {
-    return ListView.builder(
-      itemCount: history.history.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        HistoryElement historyModel = history.history.reversed.toList()[index];
-        return Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: TextButton.icon(
-            style: TextButton.styleFrom(
-              backgroundColor: context.read<ThemeCubit>().state.primaryShade100,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuranScriptView(
-                    startKey: "${historyModel.surahNumber}:1",
-                    endKey: getEndAyahKeyFromSurahNumber(
-                      historyModel.surahNumber,
-                    ),
-                    toScrollKey:
-                        "${historyModel.surahNumber}:${historyModel.ayahNumber}",
-                  ),
-                ),
-              );
-            },
-            label: Text(
-              "${getSurahName(context, historyModel.surahNumber)} - ${historyModel.pageNumber != null ? "${l10n.page} ${localizedNumber(context, historyModel.pageNumber)}" : localizedNumber(context, historyModel.ayahNumber ?? historyModel.pageNumber ?? 0)} ",
-            ),
           ),
-        );
-      },
-    );
-  }
-}
-
-class QuickOption extends StatelessWidget {
-  final Widget child;
-  final String label;
-  final VoidCallback onClick;
-  const QuickOption({
-    super.key,
-    required this.themeState,
-    required this.child,
-    required this.label,
-    required this.onClick,
-  });
-
-  final ThemeState themeState;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
-      onTap: onClick,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 60,
-              width: 60,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: themeState.primaryShade100,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: child,
-            ),
-            const Gap(8),
-            Text(
-              label,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-          ],
         ),
       ),
     );
-  }
-}
-
-class _QuranHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _QuranHeaderDelegate({required this.child});
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return child;
-  }
-
-  @override
-  double get maxExtent => 52;
-
-  @override
-  double get minExtent => 52;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

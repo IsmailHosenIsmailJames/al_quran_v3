@@ -430,7 +430,7 @@
     }
   },
   "newText": "নতুন",
-  "more": "আরও: ",
+  "more": "আরও",
   "cacheNotFound": "ক্যাশ পাওয়া যায়নি",
   "cacheSize": "ক্যাশ সাইজ",
   "error": "এরর: {error}",
@@ -695,7 +695,6 @@
   "jumpToToday": "আজকের তারিখে যান",
   "dateAndHijri": "তারিখ / হিজরি",
   "selectedLocation": "নির্বাচিত অবস্থান",
-  "more": "আরও",
   "nextPrayerLabel": "পরবর্তী: {prayerName}",
   "@nextPrayerLabel": {
     "placeholders": {
@@ -722,5 +721,14 @@
         "type": "String"
       }
     }
-  }
+  },
+  "continueReading": "পড়া চালিয়ে যান",
+  "lastRead": "সর্বশেষ পাঠ",
+  "resume": "শুরু করুন",
+  "startReading": "পড়া শুরু করুন",
+  "verses": "আয়াত",
+  "makki": "মাক্কী",
+  "madani": "মাদানী",
+  "ayah": "আয়াত",
+  "edit": "সম্পাদনা"
 }
