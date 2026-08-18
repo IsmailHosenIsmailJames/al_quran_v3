@@ -7,6 +7,7 @@ part 'prayer_reminder_state.freezed.dart';
 abstract class PrayerReminderState with _$PrayerReminderState {
   const factory PrayerReminderState({
     Map<Prayer, int>? reminderTimeAdjustment,
+    Map<Prayer, bool>? enabledPrayers,
     bool? isPrayerRemindNotificationEnabled,
     bool? enforceAlarmSound,
     double? soundVolume,

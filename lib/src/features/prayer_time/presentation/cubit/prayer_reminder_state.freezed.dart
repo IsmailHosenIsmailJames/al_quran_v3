@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PrayerReminderState {
 
- Map<Prayer, int>? get reminderTimeAdjustment; bool? get isPrayerRemindNotificationEnabled; bool? get enforceAlarmSound; double? get soundVolume;
+ Map<Prayer, int>? get reminderTimeAdjustment; Map<Prayer, bool>? get enabledPrayers; bool? get isPrayerRemindNotificationEnabled; bool? get enforceAlarmSound; double? get soundVolume;
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PrayerReminderStateCopyWith<PrayerReminderState> get copyWith => _$PrayerRemind
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerReminderState&&const DeepCollectionEquality().equals(other.reminderTimeAdjustment, reminderTimeAdjustment)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerReminderState&&const DeepCollectionEquality().equals(other.reminderTimeAdjustment, reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other.enabledPrayers, enabledPrayers)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reminderTimeAdjustment),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reminderTimeAdjustment),const DeepCollectionEquality().hash(enabledPrayers),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume);
 
 @override
 String toString() {
-  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume)';
+  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PrayerReminderStateCopyWith<$Res>  {
   factory $PrayerReminderStateCopyWith(PrayerReminderState value, $Res Function(PrayerReminderState) _then) = _$PrayerReminderStateCopyWithImpl;
 @useResult
 $Res call({
- Map<Prayer, int>? reminderTimeAdjustment, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume
+ Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume
 });
 
 
@@ -62,10 +62,11 @@ class _$PrayerReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? reminderTimeAdjustment = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,}) {
   return _then(_self.copyWith(
 reminderTimeAdjustment: freezed == reminderTimeAdjustment ? _self.reminderTimeAdjustment : reminderTimeAdjustment // ignore: cast_nullable_to_non_nullable
-as Map<Prayer, int>?,isPrayerRemindNotificationEnabled: freezed == isPrayerRemindNotificationEnabled ? _self.isPrayerRemindNotificationEnabled : isPrayerRemindNotificationEnabled // ignore: cast_nullable_to_non_nullable
+as Map<Prayer, int>?,enabledPrayers: freezed == enabledPrayers ? _self.enabledPrayers : enabledPrayers // ignore: cast_nullable_to_non_nullable
+as Map<Prayer, bool>?,isPrayerRemindNotificationEnabled: freezed == isPrayerRemindNotificationEnabled ? _self.isPrayerRemindNotificationEnabled : isPrayerRemindNotificationEnabled // ignore: cast_nullable_to_non_nullable
 as bool?,enforceAlarmSound: freezed == enforceAlarmSound ? _self.enforceAlarmSound : enforceAlarmSound // ignore: cast_nullable_to_non_nullable
 as bool?,soundVolume: freezed == soundVolume ? _self.soundVolume : soundVolume // ignore: cast_nullable_to_non_nullable
 as double?,
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PrayerReminderState() when $default != null:
-return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEna
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)  $default,) {final _that = this;
 switch (_that) {
 case _PrayerReminderState():
-return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEna
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<Prayer, int>? reminderTimeAdjustment,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume)?  $default,) {final _that = this;
 switch (_that) {
 case _PrayerReminderState() when $default != null:
-return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume);case _:
   return null;
 
 }
@@ -209,7 +210,7 @@ return $default(_that.reminderTimeAdjustment,_that.isPrayerRemindNotificationEna
 
 
 class _PrayerReminderState implements PrayerReminderState {
-  const _PrayerReminderState({final  Map<Prayer, int>? reminderTimeAdjustment, this.isPrayerRemindNotificationEnabled, this.enforceAlarmSound, this.soundVolume}): _reminderTimeAdjustment = reminderTimeAdjustment;
+  const _PrayerReminderState({final  Map<Prayer, int>? reminderTimeAdjustment, final  Map<Prayer, bool>? enabledPrayers, this.isPrayerRemindNotificationEnabled, this.enforceAlarmSound, this.soundVolume}): _reminderTimeAdjustment = reminderTimeAdjustment,_enabledPrayers = enabledPrayers;
   
 
  final  Map<Prayer, int>? _reminderTimeAdjustment;
@@ -217,6 +218,15 @@ class _PrayerReminderState implements PrayerReminderState {
   final value = _reminderTimeAdjustment;
   if (value == null) return null;
   if (_reminderTimeAdjustment is EqualUnmodifiableMapView) return _reminderTimeAdjustment;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
+ final  Map<Prayer, bool>? _enabledPrayers;
+@override Map<Prayer, bool>? get enabledPrayers {
+  final value = _enabledPrayers;
+  if (value == null) return null;
+  if (_enabledPrayers is EqualUnmodifiableMapView) return _enabledPrayers;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(value);
 }
@@ -235,16 +245,16 @@ _$PrayerReminderStateCopyWith<_PrayerReminderState> get copyWith => __$PrayerRem
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerReminderState&&const DeepCollectionEquality().equals(other._reminderTimeAdjustment, _reminderTimeAdjustment)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerReminderState&&const DeepCollectionEquality().equals(other._reminderTimeAdjustment, _reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other._enabledPrayers, _enabledPrayers)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reminderTimeAdjustment),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reminderTimeAdjustment),const DeepCollectionEquality().hash(_enabledPrayers),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume);
 
 @override
 String toString() {
-  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume)';
+  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume)';
 }
 
 
@@ -255,7 +265,7 @@ abstract mixin class _$PrayerReminderStateCopyWith<$Res> implements $PrayerRemin
   factory _$PrayerReminderStateCopyWith(_PrayerReminderState value, $Res Function(_PrayerReminderState) _then) = __$PrayerReminderStateCopyWithImpl;
 @override @useResult
 $Res call({
- Map<Prayer, int>? reminderTimeAdjustment, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume
+ Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume
 });
 
 
@@ -272,10 +282,11 @@ class __$PrayerReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? reminderTimeAdjustment = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,}) {
   return _then(_PrayerReminderState(
 reminderTimeAdjustment: freezed == reminderTimeAdjustment ? _self._reminderTimeAdjustment : reminderTimeAdjustment // ignore: cast_nullable_to_non_nullable
-as Map<Prayer, int>?,isPrayerRemindNotificationEnabled: freezed == isPrayerRemindNotificationEnabled ? _self.isPrayerRemindNotificationEnabled : isPrayerRemindNotificationEnabled // ignore: cast_nullable_to_non_nullable
+as Map<Prayer, int>?,enabledPrayers: freezed == enabledPrayers ? _self._enabledPrayers : enabledPrayers // ignore: cast_nullable_to_non_nullable
+as Map<Prayer, bool>?,isPrayerRemindNotificationEnabled: freezed == isPrayerRemindNotificationEnabled ? _self.isPrayerRemindNotificationEnabled : isPrayerRemindNotificationEnabled // ignore: cast_nullable_to_non_nullable
 as bool?,enforceAlarmSound: freezed == enforceAlarmSound ? _self.enforceAlarmSound : enforceAlarmSound // ignore: cast_nullable_to_non_nullable
 as bool?,soundVolume: freezed == soundVolume ? _self.soundVolume : soundVolume // ignore: cast_nullable_to_non_nullable
 as double?,

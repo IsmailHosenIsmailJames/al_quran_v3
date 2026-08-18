@@ -1278,4 +1278,121 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => '流媒体与网络';
+
+  @override
+  String get next => '下一个';
+
+  @override
+  String get now => '现在';
+
+  @override
+  String get current => '当前';
+
+  @override
+  String get active => '活跃';
+
+  @override
+  String get activeNow => '当前活跃';
+
+  @override
+  String get hours => '小时';
+
+  @override
+  String get minutes => '分钟';
+
+  @override
+  String get seconds => '秒';
+
+  @override
+  String get fastingAndVoluntaryTimes => '斋戒与副功拜时间';
+
+  @override
+  String get imsak => '封斋/禁食时间';
+
+  @override
+  String get ishraqAndDuha => '日出拜与杜哈拜';
+
+  @override
+  String get lastThirdOfNight => '后半夜/最后三分之一夜';
+
+  @override
+  String get awqatAlNahy => '禁止礼拜时间';
+
+  @override
+  String get forbiddenSunriseDescription => '从日出至太阳升高一枪之高（约15分钟）';
+
+  @override
+  String get forbiddenNoonDescription => '太阳处于正中天顶直至偏西（约8分钟）';
+
+  @override
+  String get forbiddenSunsetDescription => '太阳泛黄直至完全落山（约15分钟）';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => '在IslamQA上阅读完整教法裁决';
+
+  @override
+  String get asrJurisprudence => '晡礼教法学派（麦兹海布）';
+
+  @override
+  String get shafieDescription => '通例（沙斐仪、马立克、罕百里）';
+
+  @override
+  String get hanafiDescription => '哈乃斐学派';
+
+  @override
+  String get shafieShadow => '通例（影子1倍）';
+
+  @override
+  String get hanafiShadow => '哈乃斐（影子2倍）';
+
+  @override
+  String get calculationAndJurisprudence => '计算方法与教法学派';
+
+  @override
+  String get notificationsAndAudio => '通知与音频';
+
+  @override
+  String get enablePrayerReminders => '开启礼拜提醒';
+
+  @override
+  String get enablePrayerRemindersDescription => '接收所有即将到来的礼拜时间通知提醒。';
+
+  @override
+  String get adjustReminderTimingDescription => '调整各番拜功的提醒时间（相对于实际时间的 +/- 分钟）。';
+
+  @override
+  String get exactTime => '准时';
+
+  @override
+  String actualTime(String time) {
+    return '实际时间：$time';
+  }
+
+  @override
+  String get jumpToToday => '跳转到今天';
+
+  @override
+  String get dateAndHijri => '公历 / 伊斯兰历';
+
+  @override
+  String get selectedLocation => '已选位置';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return '下一番：$prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return '当前：$prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName 开始于 $time';
+  }
 }

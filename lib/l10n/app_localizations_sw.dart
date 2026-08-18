@@ -1328,4 +1328,126 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Utiririshaji na Mtandao';
+
+  @override
+  String get next => 'Inayofuata';
+
+  @override
+  String get now => 'Sasa';
+
+  @override
+  String get current => 'Ya sasa';
+
+  @override
+  String get active => 'Hai';
+
+  @override
+  String get activeNow => 'Inatumika sasa';
+
+  @override
+  String get hours => 'Masaa';
+
+  @override
+  String get minutes => 'Dakika';
+
+  @override
+  String get seconds => 'Sekunde';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Nyakati za Kufunga na Sala za Sunnah';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ishraq na Duha';
+
+  @override
+  String get lastThirdOfNight => 'Theluthi ya mwisho ya usiku';
+
+  @override
+  String get awqatAlNahy => 'Nyakati Zilizokatazwa Kusali';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Kutoka kuchomoza kwa jua hadi linapoinuka kimo cha mkuki (~dakika 15)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Wakati jua liko katikati kabisa hadi kuanza kwa Adhuhuri (~dakika 8)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Jua linapogeuka manjano hadi linapotua kabisa (~dakika 15)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Soma Fatwa Kamili kwenye IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Madhehebu ya Sala ya Alasiri';
+
+  @override
+  String get shafieDescription => 'Kawaida (Shafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Madhehebu ya Hanafi';
+
+  @override
+  String get shafieShadow => 'Kawaida (Kivuli 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Kivuli 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Hesabu na Madhehebu';
+
+  @override
+  String get notificationsAndAudio => 'Arifa na Sauti';
+
+  @override
+  String get enablePrayerReminders => 'Washa Vikumbusho vya Sala';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Pata arifa za nyakati zote za sala zinazofuata.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Rekebisha muda wa kikumbusho (+/- dakika kutoka wakati halisi).';
+
+  @override
+  String get exactTime => 'Muda Kamili';
+
+  @override
+  String actualTime(String time) {
+    return 'Wakati Halisi: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Nenda Leo';
+
+  @override
+  String get dateAndHijri => 'Tarehe / Hijri';
+
+  @override
+  String get selectedLocation => 'Eneo Lililochaguliwa';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Inayofuata: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Sasa: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName inaanza saa $time';
+  }
 }
