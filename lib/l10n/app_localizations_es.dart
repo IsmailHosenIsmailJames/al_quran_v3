@@ -1333,4 +1333,127 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Transmisión y red';
+
+  @override
+  String get next => 'Siguiente';
+
+  @override
+  String get now => 'Ahora';
+
+  @override
+  String get current => 'Actual';
+
+  @override
+  String get active => 'Activo';
+
+  @override
+  String get activeNow => 'Activo ahora';
+
+  @override
+  String get hours => 'Horas';
+
+  @override
+  String get minutes => 'Minutos';
+
+  @override
+  String get seconds => 'Segundos';
+
+  @override
+  String get fastingAndVoluntaryTimes =>
+      'Horarios de ayuno y oraciones voluntarias';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ishraq y Duha';
+
+  @override
+  String get lastThirdOfNight => 'Último tercio de la noche';
+
+  @override
+  String get awqatAlNahy => 'Tiempos prohibidos de oración (Awqat al-Nahy)';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Desde la salida del sol hasta que se eleva la altura de una lanza (~15 min)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Cuando el sol está en el cenit hasta el inicio de Dhuhr (~8 min)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Cuando el sol se pone amarillento hasta la puesta total (~15 min)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Leer fatwa completa en IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Jurisprudencia de Asr (Madhab)';
+
+  @override
+  String get shafieDescription => 'Estándar (Shafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Escuela Hanafí';
+
+  @override
+  String get shafieShadow => 'Estándar (Sombra 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafí (Sombra 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Cálculo y Jurisprudencia';
+
+  @override
+  String get notificationsAndAudio => 'Notificaciones y Audio';
+
+  @override
+  String get enablePrayerReminders => 'Activar recordatorios de oración';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Reciba alertas para todas las próximas oraciones.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Ajustar el tiempo del recordatorio (+/- minutos de la hora real).';
+
+  @override
+  String get exactTime => 'Hora exacta';
+
+  @override
+  String actualTime(String time) {
+    return 'Hora real: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Ir a hoy';
+
+  @override
+  String get dateAndHijri => 'Fecha / Hiyri';
+
+  @override
+  String get selectedLocation => 'Ubicación seleccionada';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Siguiente: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Ahora: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName comienza a las $time';
+  }
 }

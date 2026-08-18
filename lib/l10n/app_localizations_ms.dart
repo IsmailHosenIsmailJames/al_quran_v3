@@ -1318,4 +1318,126 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Penstriman & Rangkaian';
+
+  @override
+  String get next => 'Seterusnya';
+
+  @override
+  String get now => 'Sekarang';
+
+  @override
+  String get current => 'Semasa';
+
+  @override
+  String get active => 'Aktif';
+
+  @override
+  String get activeNow => 'Aktif Sekarang';
+
+  @override
+  String get hours => 'Jam';
+
+  @override
+  String get minutes => 'Minit';
+
+  @override
+  String get seconds => 'Saat';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Waktu Puasa & Sunat';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Isyraq & Dhuha';
+
+  @override
+  String get lastThirdOfNight => 'Sepertiga Malam Terakhir';
+
+  @override
+  String get awqatAlNahy => 'Waktu Dilarang Solat';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Dari terbit matahari hingga naik sekadar satu tombak (~15 minit)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Ketika matahari tegak di atas kepala hingga tergelincir (~8 minit)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Ketika matahari kekuningan hingga terbenam sepenuhnya (~15 minit)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Baca Fatwa Lengkap di IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Mazhab Waktu Asar';
+
+  @override
+  String get shafieDescription => 'Standard (Syafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Mazhab Hanafi';
+
+  @override
+  String get shafieShadow => 'Standard (Bayang 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Bayang 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Pengiraan & Mazhab';
+
+  @override
+  String get notificationsAndAudio => 'Pemberitahuan & Audio';
+
+  @override
+  String get enablePrayerReminders => 'Aktifkan Peringatan Solat';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Terima pemberitahuan bagi semua waktu solat yang akan datang.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Laraskan masa peringatan (+/- minit dari waktu solat sebenar).';
+
+  @override
+  String get exactTime => 'Waktu Tepat';
+
+  @override
+  String actualTime(String time) {
+    return 'Waktu Sebenar: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Pergi ke Hari Ini';
+
+  @override
+  String get dateAndHijri => 'Tarikh / Hijrah';
+
+  @override
+  String get selectedLocation => 'Lokasi Dipilih';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Seterusnya: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Sekarang: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName bermula jam $time';
+  }
 }

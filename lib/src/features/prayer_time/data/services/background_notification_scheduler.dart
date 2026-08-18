@@ -48,6 +48,8 @@ class ReminderScheduler {
   // ─── Schedule ──────────────────────────────────────────────────────────
 
   static Future<void> scheduleNotification() async {
+    if (!isPrayerRemindNotificationEnabled()) return;
+
     LocationQiblaPrayerDataState locationState =
         await LocationQiblaPrayerDataCubit.getSavedState();
 
@@ -63,6 +65,7 @@ class ReminderScheduler {
       return;
     }
 
+    await cancelAllNotifications();
     await _scheduleNotifications(locationState, reminderState, now);
   }
 
@@ -80,11 +83,17 @@ class ReminderScheduler {
       now,
     );
 
+    final enabledMap = reminderState.enabledPrayers ?? getEnabledPrayers();
+
     for (int i = 0; i < next7DaysPrayerTimes.length; i++) {
       final prayerTimesToday = next7DaysPrayerTimes[i];
       for (Prayer prayerName in prayerTimesToday.keys) {
+        if (!(enabledMap[prayerName] ?? true)) continue;
+
         DateTime? time = prayerTimesToday[prayerName];
         if (time != null) {
+          if (time.isBefore(now)) continue;
+
           AwesomeNotifications().createNotification(
             content: NotificationContent(
               channelKey: "prayer_reminder",
@@ -92,7 +101,7 @@ class ReminderScheduler {
               title:
                   "${getPrayerGroupName(prayerName, appLocalizations)} - ${getPrayerNameWithSomeDetails(prayerName, appLocalizations)}",
               body: DateFormat.jm(
-                (await LanguageCubit.getInitialLocale()).locale.languageCode,
+                locale.languageCode,
               ).format(time),
             ),
 
@@ -102,8 +111,8 @@ class ReminderScheduler {
               year: time.year,
               hour: time.hour,
               minute: time.minute,
-              second: time.second,
-              millisecond: time.millisecond,
+              second: 0,
+              millisecond: 0,
               allowWhileIdle: true,
               repeats: false,
             ),
@@ -269,23 +278,46 @@ class ReminderScheduler {
   static PrayerReminderState getState() {
     return PrayerReminderState(
       reminderTimeAdjustment: getReminderTimeAdjustment(),
+      enabledPrayers: getEnabledPrayers(),
       enforceAlarmSound: getEnforceAlarmSound(),
       soundVolume: getSoundVolume(),
+      isPrayerRemindNotificationEnabled: isPrayerRemindNotificationEnabled(),
     );
   }
 
   static Future<void> enablePrayerRemindNotification() async {
-    _sharedPreferences.setBool("prayer_remind_notification", true);
+    await _sharedPreferences.setBool("prayer_remind_notification", true);
     await scheduleNotification();
   }
 
   static Future<void> disablePrayerRemindNotification() async {
-    _sharedPreferences.setBool("prayer_remind_notification", false);
+    await _sharedPreferences.setBool("prayer_remind_notification", false);
     await cancelAllNotifications();
   }
 
   static bool isPrayerRemindNotificationEnabled() {
     return _sharedPreferences.getBool("prayer_remind_notification") ?? false;
+  }
+
+  static bool isPrayerEnabled(Prayer prayer) {
+    return _sharedPreferences.getBool("prayer_${prayer.name}_enabled") ??
+        (prayer == Prayer.fajr ||
+            prayer == Prayer.dhuhr ||
+            prayer == Prayer.asr ||
+            prayer == Prayer.maghrib ||
+            prayer == Prayer.isha);
+  }
+
+  static Future<void> setPrayerEnabled(Prayer prayer, bool enabled) async {
+    await _sharedPreferences.setBool("prayer_${prayer.name}_enabled", enabled);
+  }
+
+  static Map<Prayer, bool> getEnabledPrayers() {
+    Map<Prayer, bool> map = {};
+    for (var prayer in Prayer.values) {
+      map[prayer] = isPrayerEnabled(prayer);
+    }
+    return map;
   }
 
   static Map<Prayer, int> getReminderTimeAdjustment() {
@@ -301,7 +333,7 @@ class ReminderScheduler {
   }
 
   static Future<void> setReminderTimeAdjustment(Prayer prayer, int time) async {
-    _sharedPreferences.setInt("prayer_${prayer.name}_reminder_time", time);
+    await _sharedPreferences.setInt("prayer_${prayer.name}_reminder_time", time);
   }
 
   static bool getEnforceAlarmSound() {
@@ -310,7 +342,7 @@ class ReminderScheduler {
   }
 
   static Future<void> setEnforceAlarmSound(bool value) async {
-    _sharedPreferences.setBool("prayer_reminder_enforce_alarm_sound", value);
+    await _sharedPreferences.setBool("prayer_reminder_enforce_alarm_sound", value);
   }
 
   static double getSoundVolume() {
@@ -318,6 +350,6 @@ class ReminderScheduler {
   }
 
   static Future<void> setSoundVolume(double volume) async {
-    _sharedPreferences.setDouble("prayer_reminder_sound_volume", volume);
+    await _sharedPreferences.setDouble("prayer_reminder_sound_volume", volume);
   }
 }

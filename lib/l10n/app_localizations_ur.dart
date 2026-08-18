@@ -1320,4 +1320,126 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'اسٹریمنگ اور نیٹ ورک';
+
+  @override
+  String get next => 'اگلا';
+
+  @override
+  String get now => 'ابھی';
+
+  @override
+  String get current => 'موجودہ';
+
+  @override
+  String get active => 'فعال';
+
+  @override
+  String get activeNow => 'ابھی فعال';
+
+  @override
+  String get hours => 'گھنٹے';
+
+  @override
+  String get minutes => 'منٹ';
+
+  @override
+  String get seconds => 'سیکنڈ';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'روزہ اور نفل اوقات';
+
+  @override
+  String get imsak => 'امساک';
+
+  @override
+  String get ishraqAndDuha => 'اشراق اور چاشت';
+
+  @override
+  String get lastThirdOfNight => 'رات کا آخری تہائی';
+
+  @override
+  String get awqatAlNahy => 'نماز کے ممنوعہ اوقات';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'طلوع آفتاب سے لے کر نیزہ بھر بلند ہونے تک (~15 منٹ)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'سورج عین سر پر ہونے سے لے کر ڈھلنے تک (~8 منٹ)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'سورج زرد ہونے سے لے کر غروب آفتاب تک (~15 منٹ)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'صحیح مسلم (832) میں عقبہ بن عامر رضی اللہ عنہ سے روایت ہے کہ:\n\n\"رسول اللہ صلی اللہ علیہ وسلم ہمیں تین اوقات میں نماز پڑھنے یا اپنے مردوں کو دفن کرنے سے منع فرماتے تھے:\n1. جب سورج طلوع ہو رہا ہو یہاں تک کہ بلند ہو جائے۔\n2. جب دوپہر کو سورج عین سر پر ہو یہاں تک کہ ڈھل جائے۔\n3. جب سورج غروب ہونے کے قریب ہو یہاں تک کہ غروب ہو جائے۔\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA پر مکمل فتویٰ پڑھیں';
+
+  @override
+  String get asrJurisprudence => 'فقہ عصر (مذہب)';
+
+  @override
+  String get shafieDescription => 'جمہور (شافعی، مالکی، حنبلی)';
+
+  @override
+  String get hanafiDescription => 'فقہ حنفی';
+
+  @override
+  String get shafieShadow => 'جمہور (سایہ 1 گنا)';
+
+  @override
+  String get hanafiShadow => 'حنفی (سایہ 2 گنا)';
+
+  @override
+  String get calculationAndJurisprudence => 'طریقہ حساب اور فقہ';
+
+  @override
+  String get notificationsAndAudio => 'اطلاعات اور آواز';
+
+  @override
+  String get enablePrayerReminders => 'نماز کے یاد دہانی الرٹس آن کریں';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'تمام آنے والی نمازوں کے اوقات کے لیے الرٹ وصول کریں۔';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'نماز کے اصل وقت سے الرٹ کا وقت آگے پیچھے (+/- منٹ) کریں۔';
+
+  @override
+  String get exactTime => 'عین وقت';
+
+  @override
+  String actualTime(String time) {
+    return 'اصل وقت: $time';
+  }
+
+  @override
+  String get jumpToToday => 'آج کے دن پر جائیں';
+
+  @override
+  String get dateAndHijri => 'تاریخ / ہجری';
+
+  @override
+  String get selectedLocation => 'منتخب مقام';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'اگلی: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'ابھی: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName کا آغاز $time';
+  }
 }

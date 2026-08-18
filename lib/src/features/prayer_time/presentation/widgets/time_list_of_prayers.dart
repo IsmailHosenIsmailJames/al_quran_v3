@@ -1,31 +1,26 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/utils/hijri_date.dart";
+import "package:al_quran_v3/src/features/location/data/utils/location_geocoding.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/features/location/presentation/screens/location_acquire_screen.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_settings_screen.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/fasting_sunnah_card.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/forbidden_prayer_times_card.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_hero_card.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_item_card.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_quick_settings_sheet.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/core/utils/hijri_date.dart";
-import "package:al_quran_v3/src/features/location/data/utils/location_geocoding.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/canvas/draw_clock_icon_from_time.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/canvas/prayer_time_canvas.dart";
-import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shimmer/shimmer.dart";
-import "package:url_launcher/url_launcher.dart";
 
 class TimeListOfPrayers extends StatefulWidget {
   const TimeListOfPrayers({super.key});
@@ -50,25 +45,28 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     }
   }
 
-  Prayer? lastPrayerTime;
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
-    final themeState = context.read<ThemeCubit>().state;
-    final MediaQueryData mediaQueryData = MediaQuery.of(context);
-    final AppLocalizations l10n = AppLocalizations.of(context);
+    final themeState = context.watch<ThemeCubit>().state;
+    final mediaQueryData = MediaQuery.of(context);
+    final l10n = AppLocalizations.of(context);
+
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
       LocationQiblaPrayerDataState
     >(
       builder: (context, locationState) {
+        if (locationState.latLon == null) {
+          return const LocationAcquire();
+        }
+
         return StreamBuilder(
           stream: Stream.periodic(const Duration(seconds: 30)),
           builder: (context, snapshot) {
             final DateTime now = DateTime.now();
-            PrayerTimes prayerTimes = PrayerTimes(
-              date: DateTime.now(),
+            final PrayerTimes prayerTimes = PrayerTimes(
+              date: now,
               coordinates: Coordinates(
                 locationState.latLon!.latitude,
                 locationState.latLon!.longitude,
@@ -76,701 +74,124 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
               calculationParameters:
                   locationState.calculationMethod ??
                         CalculationMethodParameters.muslimWorldLeague()
-                    ..madhab = locationState.madhab,
+                    ..madhab = locationState.madhab ?? Madhab.shafi,
             );
 
-            return ListView(
-              padding: const EdgeInsets.all(
-                8,
-              ).copyWith(top: mediaQueryData.padding.top + 8, bottom: 100),
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: themeState.primaryShade100,
-                    borderRadius: BorderRadius.circular(8),
+            final currentPrayer = prayerTimes.currentPrayer(date: now);
+            final nextPrayer = prayerTimes.nextPrayer(date: now);
+
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 14).copyWith(
+                    top: mediaQueryData.padding.top + 10,
+                    bottom: 120,
                   ),
-                  height: 70,
-                  padding: const EdgeInsets.all(4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(FluentIcons.location_24_regular),
-                      const Gap(12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Top App Header: Location & Action Buttons
+                    _buildTopHeader(
+                      context,
+                      locationState,
+                      prayerTimes,
+                      themeState,
+                      isDark,
+                      l10n,
+                    ),
+
+                    const Gap(10),
+
+                    // Date & Quick Configuration Pill Row
+                    _buildDateAndConfigRow(
+                      context,
+                      locationState,
+                      prayerTimes,
+                      themeState,
+                      isDark,
+                      l10n,
+                    ),
+
+                    const Gap(14),
+
+                    // Live Next Prayer Hero Card
+                    PrayerHeroCard(prayerTimes: prayerTimes),
+
+                    const Gap(18),
+
+                    // Section Title: Daily Prayers
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              l10n.location.replaceAll(":", ""),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade800,
-                              ),
+                            Icon(
+                              FluentIcons.clock_24_regular,
+                              size: 20,
+                              color: themeState.primary,
                             ),
-                            FutureBuilder(
-                              future: locationName(
-                                context,
-                                LatLon(
-                                  latitude: locationState.latLon!.latitude,
-                                  longitude: locationState.latLon!.longitude,
-                                ),
+                            const Gap(8),
+                            Text(
+                              l10n.prayerTimes,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: isDark
+                                    ? Colors.white
+                                    : Colors.grey.shade900,
                               ),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState !=
-                                    ConnectionState.done) {
-                                  return Shimmer.fromColors(
-                                    baseColor: Colors.grey,
-                                    highlightColor: Colors.grey.shade900,
-                                    child: Container(
-                                      height: 30,
-                                      width: mediaQueryData.size.width * 0.6,
-                                      decoration: BoxDecoration(
-                                        color: themeState.primaryShade200,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                if (snapshot.hasData) {
-                                  return Text(
-                                    snapshot.data ?? "",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  );
-                                }
-                                return const SizedBox.shrink();
-                              },
                             ),
                           ],
                         ),
-                      ),
-                      const Gap(12),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const LocationAcquire(backToPage: true),
+                        InkWell(
+                          onTap: () =>
+                              PrayerQuickSettingsSheet.show(context, prayerTimes),
+                          borderRadius: BorderRadius.circular(8),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 4,
                             ),
-                          );
-                        },
-
-                        icon: locationState.isGettingLocation == true
-                            ? SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  color: themeState.primary,
-                                  strokeCap: StrokeCap.round,
-                                  strokeWidth: 2,
+                            child: Row(
+                              children: [
+                                Text(
+                                  locationState.madhab == Madhab.hanafi
+                                      ? l10n.hanafi
+                                      : l10n.shafie,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: themeState.primary,
+                                  ),
                                 ),
-                              )
-                            : Icon(Icons.refresh, color: themeState.primary),
-                      ),
-                    ],
-                  ),
-                ),
-                const Gap(8),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(
-                        8,
-                      ).copyWith(left: 16, right: 16),
-                      decoration: BoxDecoration(
-                        color: themeState.primaryShade100,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(FluentIcons.calendar_24_regular),
-                          const Gap(4),
-                          Text(hijriDate(context)),
-                        ],
-                      ),
+                                const Gap(4),
+                                Icon(
+                                  FluentIcons.chevron_down_16_regular,
+                                  size: 14,
+                                  color: themeState.primary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const Gap(8),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: themeState.primaryShade100,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        height: 40,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: DropdownButtonFormField<Madhab>(
-                          padding: EdgeInsets.zero,
-                          initialValue: locationState.madhab ?? Madhab.shafi,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.zero,
-                          ),
-                          isDense: true,
-                          isExpanded: true,
-                          items: [
-                            DropdownMenuItem(
-                              value: Madhab.shafi,
-                              child: Text(l10n.shafie),
-                            ),
-                            DropdownMenuItem(
-                              value: Madhab.hanafi,
-                              child: Text(l10n.hanafi),
-                            ),
-                          ],
-                          onChanged: (value) {
-                            context
-                                .read<LocationQiblaPrayerDataCubit>()
-                                .saveMadhab(
-                                  Madhab.values.firstWhere(
-                                    (element) => element.name == value!.name,
-                                  ),
-                                );
-                          },
-                        ),
-                      ),
-                    ),
+
+                    // Vertical List of Core Prayers
+                    ..._buildPrayerCards(prayerTimes, now, currentPrayer, nextPrayer),
+
+                    const Gap(20),
+
+                    // Fasting & Voluntary Prayers Grid (Suhur, Iftar, Duha, Tahajjud)
+                    FastingSunnahCard(prayerTimes: prayerTimes),
+
+                    const Gap(20),
+
+                    // Forbidden Prayer Times Card
+                    ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
                   ],
                 ),
-                const Gap(8),
-                Container(
-                  decoration: BoxDecoration(
-                    color: themeState.primaryShade100,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButtonFormField<CalculationMethodEnum>(
-                      padding: EdgeInsets.zero,
-                      initialValue:
-                          locationState.calculationMethod?.method ??
-                          CalculationMethodEnum.muslimWorldLeague,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                      isDense: true,
-                      isExpanded: true,
-                      items: CalculationMethodEnum.values
-                          .map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(
-                                CalculationMethodParameters.fromEnum(
-                                      e,
-                                    ).fullName ??
-                                    e.name,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        if (value != null) {
-                          context
-                              .read<LocationQiblaPrayerDataCubit>()
-                              .saveCalculationMethod(
-                                CalculationMethodParameters.fromEnum(value),
-                              );
-                        }
-                      },
-                    ),
-                  ),
-                ),
-
-                const Gap(8),
-                Container(
-                  height: 150,
-                  width: mediaQueryData.size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: prayerTimes.isInsideForbiddenTime(now) == null
-                        ? themeState.primaryShade100
-                        : Colors.red.withValues(alpha: 0.5),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: PrayerTimeCanvas(
-                                prayerTimes: [
-                                  TimeOfDay.fromDateTime(
-                                    prayerTimes.fajr.toLocal(),
-                                  ),
-                                  TimeOfDay.fromDateTime(
-                                    prayerTimes.dhuhr.toLocal(),
-                                  ),
-                                  TimeOfDay.fromDateTime(
-                                    prayerTimes.asr.toLocal(),
-                                  ),
-                                  TimeOfDay.fromDateTime(
-                                    prayerTimes.maghrib.toLocal(),
-                                  ),
-                                  TimeOfDay.fromDateTime(
-                                    prayerTimes.isha.toLocal(),
-                                  ),
-                                ],
-                                sunriseTime: TimeOfDay.fromDateTime(
-                                  prayerTimes.sunrise.toLocal(),
-                                ),
-                                sunsetTime: TimeOfDay.fromDateTime(
-                                  prayerTimes.maghrib.toLocal(),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                DateFormat.jm(
-                                  AppLocalizations.of(context).localeName,
-                                ).format(
-                                  (prayerTimes.timeForPrayer(
-                                            prayerTimes.currentPrayer(
-                                                  date: now,
-                                                ) ??
-                                                Prayer
-                                                    .fajr, // better than crash
-                                          ) ??
-                                          DateTime.now())
-                                      .toLocal(),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Gap(8),
-                              Expanded(
-                                child: LinearProgressIndicator(
-                                  value:
-                                      1 -
-                                      (prayerTimes
-                                              .percentageOfTimeLeftUntilNextPrayer(
-                                                now: DateTime.now(),
-                                              ) ??
-                                          0),
-
-                                  color: themeState.primary,
-                                  backgroundColor: themeState.primaryShade300,
-                                  borderRadius: BorderRadius.circular(8),
-                                  minHeight: 8,
-                                ),
-                              ),
-                              const Gap(8),
-                              Text(
-                                DateFormat.jm(
-                                  AppLocalizations.of(context).localeName,
-                                ).format(
-                                  (prayerTimes.timeForPrayer(
-                                            prayerTimes.nextPrayer(date: now)!,
-                                          ) ??
-                                          DateTime.now())
-                                      .toLocal(),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  PrayerTimeHelper.localizedPrayerName(
-                                        context,
-                                        prayerTimes.currentPrayer(
-                                          date: DateTime.now(),
-                                        ),
-                                      ) ??
-                                      "-",
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                PrayerTimeHelper.localizedPrayerName(
-                                      context,
-                                      prayerTimes.nextPrayer(
-                                        date: DateTime.now(),
-                                      ),
-                                    ) ??
-                                    "-",
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: StreamBuilder(
-                              stream: Stream.periodic(
-                                const Duration(seconds: 1),
-                              ),
-                              builder: (context, snapshot) {
-                                final currentPrayer = prayerTimes.currentPrayer(
-                                  date: DateTime.now(),
-                                );
-                                if (lastPrayerTime != null &&
-                                    lastPrayerTime != currentPrayer) {
-                                  WidgetsBinding.instance.addPostFrameCallback((
-                                    time,
-                                  ) {
-                                    setState(() {
-                                      lastPrayerTime = currentPrayer;
-                                    });
-                                  });
-                                } else {
-                                  lastPrayerTime ??= currentPrayer;
-                                }
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      PrayerTimeHelper.formatDuration(
-                                        prayerTimes.timeUntilNextPrayer(
-                                          now: DateTime.now(),
-                                        ),
-                                      ),
-                                      style: GoogleFonts.dmMono(fontSize: 36),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                const Gap(12),
-
-                Container(
-                  decoration: BoxDecoration(
-                    color: themeState.primaryShade100,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            l10n.prayerTimes,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Spacer(),
-                          BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-                            builder: (context, state) {
-                              return Switch(
-                                thumbIcon:
-                                    WidgetStateProperty.resolveWith<Icon?>((
-                                      Set<WidgetState> states,
-                                    ) {
-                                      if (states.contains(
-                                        WidgetState.selected,
-                                      )) {
-                                        return const Icon(
-                                          FluentIcons.alert_on_24_regular,
-                                        );
-                                      }
-                                      return const Icon(
-                                        FluentIcons.alert_off_24_regular,
-                                      );
-                                    }),
-
-                                value:
-                                    state.isPrayerRemindNotificationEnabled ??
-                                    false,
-                                onChanged: (value) async {
-                                  PermissionStatus
-                                  notificationPermissionStatus =
-                                      await Permission.notification.status;
-
-                                  notificationPermissionStatus =
-                                      await Permission.notification.request();
-
-                                  PermissionStatus
-                                  scheduleExactPermissionStatus =
-                                      await Permission
-                                          .scheduleExactAlarm
-                                          .status;
-
-                                  scheduleExactPermissionStatus =
-                                      await Permission.scheduleExactAlarm
-                                          .request();
-
-                                  bool isNotificationAllowed =
-                                      notificationPermissionStatus.isGranted &&
-                                      scheduleExactPermissionStatus.isGranted;
-                                  if (!isNotificationAllowed) {
-                                    Fluttertoast.showToast(
-                                      msg: l10n.allowNotificationPermission,
-                                    );
-                                    return;
-                                  }
-                                  if (value) {
-                                    context
-                                        .read<PrayerReminderCubit>()
-                                        .enablePrayerRemindNotification();
-                                  } else {
-                                    context
-                                        .read<PrayerReminderCubit>()
-                                        .disablePrayerRemindNotification();
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PrayerSettings(prayerTimes: prayerTimes),
-                                ),
-                              );
-                            },
-                            icon: const Icon(FluentIcons.settings_24_regular),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PrayerTimesCalenderView(
-                                    prayerTimes: prayerTimes,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(FluentIcons.calendar_24_regular),
-                          ),
-                        ],
-                      ),
-                      const Gap(8),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 700),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              getPrayerTimeComponents(
-                                context,
-                                Prayer.fajr,
-                                prayerTimes.fajr,
-                                prayerTimes,
-                              ),
-                              getPrayerTimeComponents(
-                                context,
-                                Prayer.dhuhr,
-                                prayerTimes.dhuhr,
-                                prayerTimes,
-                              ),
-                              getPrayerTimeComponents(
-                                context,
-                                Prayer.asr,
-                                prayerTimes.asr,
-                                prayerTimes,
-                              ),
-                              getPrayerTimeComponents(
-                                context,
-                                Prayer.maghrib,
-                                prayerTimes.maghrib,
-                                prayerTimes,
-                              ),
-                              getPrayerTimeComponents(
-                                context,
-                                Prayer.isha,
-                                prayerTimes.isha,
-                                prayerTimes,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 700),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              getCurrentPrayerIndicator(
-                                prayerTimes,
-                                Prayer.fajr,
-                                themeState,
-                              ),
-                              getCurrentPrayerIndicator(
-                                prayerTimes,
-                                Prayer.dhuhr,
-                                themeState,
-                              ),
-                              getCurrentPrayerIndicator(
-                                prayerTimes,
-                                Prayer.asr,
-                                themeState,
-                              ),
-                              getCurrentPrayerIndicator(
-                                prayerTimes,
-                                Prayer.maghrib,
-                                themeState,
-                              ),
-                              getCurrentPrayerIndicator(
-                                prayerTimes,
-                                Prayer.isha,
-                                themeState,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Gap(12),
-                Container(
-                  decoration: BoxDecoration(
-                    color: themeState.primaryShade100,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            l10n.forbiddenSalatTimes,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Spacer(),
-
-                          SizedBox(
-                            height: 35,
-                            width: 60,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                launchUrl(
-                                  Uri.parse(
-                                    "https://islamqa.info/en/answers/48998/forbidden-prayer-times",
-                                  ),
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              },
-                              icon: Icon(
-                                FluentIcons.info_24_regular,
-                                color: themeState.primary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Gap(4),
-                      forbiddenWidget(
-                        themeState,
-                        context,
-                        "assets/img/sunrise_forbidden_time.png",
-                        prayerTimes.sunrise,
-                        prayerTimes.sunrise.add(const Duration(minutes: 15)),
-                        l10n.sunrise,
-                        Prayer.sunrise,
-                      ),
-                      const Gap(8),
-                      forbiddenWidget(
-                        themeState,
-                        context,
-                        "assets/img/noon_forbidden_time.png",
-                        prayerTimes.dhuhr.subtract(const Duration(minutes: 8)),
-                        prayerTimes.dhuhr,
-                        l10n.noon,
-                        Prayer.noon,
-                      ),
-                      const Gap(8),
-                      forbiddenWidget(
-                        themeState,
-                        context,
-                        "assets/img/sunset_forbidden_time.png",
-                        prayerTimes.maghrib.subtract(
-                          const Duration(minutes: 15),
-                        ),
-                        prayerTimes.maghrib,
-                        l10n.sunset,
-                        Prayer.sunset,
-                      ),
-                    ],
-                  ),
-                ),
-                const Gap(8),
-                GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: 1.1,
-                  ),
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ramadanCard(
-                      context,
-                      themeState: themeState,
-                      time: prayerTimes.fajr
-                          .subtract(const Duration(minutes: 1))
-                          .toLocal(),
-                      title: l10n.suhurEnd,
-                    ),
-                    ramadanCard(
-                      context,
-                      themeState: themeState,
-                      time: prayerTimes.maghrib.toLocal(),
-                      title: l10n.iftarStart,
-                    ),
-                    ramadanCard(
-                      context,
-                      themeState: themeState,
-                      time: prayerTimes.tahajjud,
-                      title: l10n.tahajjudStart,
-                    ),
-                  ],
-                ),
-              ],
+              ),
             );
           },
         );
@@ -778,168 +199,315 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     );
   }
 
-  Widget getCurrentPrayerIndicator(
+  Widget _buildTopHeader(
+    BuildContext context,
+    LocationQiblaPrayerDataState locationState,
     PrayerTimes prayerTimes,
-    Prayer prayer,
-    ThemeState themeState,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
   ) {
-    return SizedBox(
-      width: 80,
-      child: Align(
-        alignment: Alignment.center,
-        child: CircleAvatar(
-          radius: 6,
-          backgroundColor:
-              prayerTimes.currentPrayer(date: DateTime.now()) == prayer
-              ? themeState.primary
-              : themeState.primaryShade100,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.04)
+            : themeState.primaryShade100.withValues(alpha: 0.6),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.08)
+              : themeState.primaryShade200.withValues(alpha: 0.5),
         ),
       ),
-    );
-  }
-
-  Widget ramadanCard(
-    BuildContext context, {
-    required ThemeState themeState,
-    required DateTime time,
-    required String title,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: themeState.primaryShade300),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          ClockIcon(
-            time: TimeOfDay.fromDateTime(time),
+          Icon(
+            FluentIcons.location_24_filled,
             color: themeState.primary,
             size: 20,
-            strokeWidth: 1.2,
           ),
-          const Gap(8),
-          Text(
-            title,
-            style: const TextStyle(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const Gap(2),
-          Text(
-            DateFormat.jm(AppLocalizations.of(context).localeName).format(time),
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-
-  ClipRRect forbiddenWidget(
-    ThemeState themeState,
-    BuildContext context,
-    String img,
-    DateTime start,
-    DateTime end,
-    String title,
-    Prayer prayer,
-  ) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(color: themeState.primaryShade100),
-        child: Row(
-          children: [
-            Image.asset(img, height: 60, width: 60, fit: BoxFit.cover),
-            const Gap(4),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: const TextStyle(fontSize: 14)),
-                    Row(
-                      children: [
-                        Text(
-                          DateFormat.jm(
-                            AppLocalizations.of(context).localeName,
-                          ).format(start.toLocal()),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Gap(4),
-                        Expanded(
+          const Gap(10),
+          Expanded(
+            child: InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LocationAcquire(backToPage: true),
+                  ),
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    l10n.location.replaceAll(":", ""),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                    ),
+                  ),
+                  FutureBuilder(
+                    future: locationName(
+                      context,
+                      LatLon(
+                        latitude: locationState.latLon!.latitude,
+                        longitude: locationState.latLon!.longitude,
+                      ),
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Shimmer.fromColors(
+                          baseColor: isDark
+                              ? Colors.grey.shade800
+                              : Colors.grey.shade300,
+                          highlightColor: isDark
+                              ? Colors.grey.shade700
+                              : Colors.grey.shade100,
                           child: Container(
-                            height: 4,
+                            height: 16,
+                            width: 140,
+                            margin: const EdgeInsets.only(top: 2),
                             decoration: BoxDecoration(
-                              color: themeState.primaryShade300,
-                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4),
                             ),
                           ),
+                        );
+                      }
+                      return Text(
+                        snapshot.data ?? l10n.selectedLocation,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
                         ),
-                        const Gap(4),
-                        Text(
-                          DateFormat.jm(
-                            AppLocalizations.of(context).localeName,
-                          ).format(end.toLocal()),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget getPrayerTimeComponents(
-    BuildContext context,
-    Prayer prayer,
-    DateTime time,
-    PrayerTimes prayerTimes,
-  ) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      width: 80,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            PrayerTimeHelper.localizedPrayerName(
-                  context,
-                  prayer,
-                )?.capitalize() ??
-                "-",
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
           ),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              DateFormat.jm(
-                AppLocalizations.of(context).localeName,
-              ).format(time.toLocal()),
-              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+          const Gap(8),
+          // Refresh GPS button
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              context.read<LocationQiblaPrayerDataCubit>().getLocation();
+            },
+            icon: locationState.isGettingLocation == true
+                ? SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: CircularProgressIndicator(
+                      color: themeState.primary,
+                      strokeCap: StrokeCap.round,
+                      strokeWidth: 2,
+                    ),
+                  )
+                : Icon(
+                    FluentIcons.arrow_clockwise_24_regular,
+                    color: themeState.primary,
+                    size: 20,
+                  ),
+          ),
+          // Calendar View Button
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PrayerTimesCalenderView(prayerTimes: prayerTimes),
+                ),
+              );
+            },
+            icon: Icon(
+              FluentIcons.calendar_month_24_regular,
+              color: themeState.primary,
+              size: 20,
+            ),
+          ),
+          // Settings Button
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PrayerSettings(prayerTimes: prayerTimes),
+                ),
+              );
+            },
+            icon: Icon(
+              FluentIcons.settings_24_regular,
+              color: themeState.primary,
+              size: 20,
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildDateAndConfigRow(
+    BuildContext context,
+    LocationQiblaPrayerDataState locationState,
+    PrayerTimes prayerTimes,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    final gregorianFormatted =
+        DateFormat("d MMMM yyyy", l10n.localeName).format(DateTime.now());
+
+    final methodEnum =
+        locationState.calculationMethod?.method ??
+        CalculationMethodEnum.muslimWorldLeague;
+    final methodName =
+        CalculationMethodParameters.fromEnum(methodEnum).fullName ??
+        methodEnum.name;
+
+    return Row(
+      children: [
+        // Hijri & Gregorian Date Chip
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.04)
+                  : themeState.primaryShade100.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : themeState.primaryShade200.withValues(alpha: 0.4),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  FluentIcons.calendar_ltr_24_regular,
+                  size: 16,
+                  color: themeState.primary,
+                ),
+                const Gap(8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        hijriDate(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
+                        ),
+                      ),
+                      Text(
+                        gregorianFormatted,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Gap(8),
+        // Quick Settings Trigger Pill
+        InkWell(
+          onTap: () => PrayerQuickSettingsSheet.show(context, prayerTimes),
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: themeState.primary.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  FluentIcons.options_24_regular,
+                  size: 15,
+                  color: themeState.primary,
+                ),
+                const Gap(6),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 120),
+                  child: Text(
+                    methodName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: themeState.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _buildPrayerCards(
+    PrayerTimes prayerTimes,
+    DateTime now,
+    Prayer? currentPrayer,
+    Prayer? nextPrayer,
+  ) {
+    final prayers = [
+      Prayer.fajr,
+      Prayer.sunrise,
+      Prayer.dhuhr,
+      Prayer.asr,
+      Prayer.maghrib,
+      Prayer.isha,
+    ];
+
+    return prayers.map((prayer) {
+      final time = prayerTimes.timeForPrayer(prayer)?.toLocal() ?? now;
+      final isActive = currentPrayer == prayer;
+      final isNext = nextPrayer == prayer;
+      final isPassed = now.isAfter(time) && !isActive;
+
+      return PrayerItemCard(
+        prayer: prayer,
+        time: time,
+        isActive: isActive,
+        isNext: isNext,
+        isPassed: isPassed,
+      );
+    }).toList();
   }
 }

@@ -654,5 +654,73 @@
   "alignedWithKaaba": "কাবার সাথে সারিবদ্ধ",
   "turnRight": "{degrees}° ডানদিকে ঘুরুন",
   "turnLeft": "{degrees}° বামদিকে ঘুরুন",
-  "streamingAndNetwork": "স্ট্রিমিং ও নেটওয়ার্ক"
+  "streamingAndNetwork": "স্ট্রিমিং ও নেটওয়ার্ক",
+  "next": "পরবর্তী",
+  "now": "এখন",
+  "current": "বর্তমান",
+  "active": "সক্রিয়",
+  "activeNow": "এখন চলছে",
+  "hours": "ঘণ্টা",
+  "minutes": "মিনিট",
+  "seconds": "সেকেন্ড",
+  "fastingAndVoluntaryTimes": "রোজা ও নফল নামাজের সময়",
+  "imsak": "ইমসাক",
+  "ishraqAndDuha": "ইশরাক ও চাশত",
+  "lastThirdOfNight": "রাতের শেষ তৃতীয়াংশ",
+  "awqatAlNahy": "নামাজের নিষিদ্ধ সময় (আওকাতুন নাহয়)",
+  "forbiddenSunriseDescription": "সূর্যোদয়ের শুরু থেকে এক বর্শা পরিমাণ ওপরে ওঠা পর্যন্ত (~১৫ মিনিট)",
+  "forbiddenNoonDescription": "সূর্য ঠিক মাথার ওপর থেকে ঢলে পড়া পর্যন্ত (~৮ মিনিট)",
+  "forbiddenSunsetDescription": "সূর্য হলুদ বর্ণ ধারণ করার পর থেকে সম্পূর্ণ ডোবা পর্যন্ত (~১৫ মিনিট)",
+  "forbiddenTimesHadith": "সহীহ মুসলিমের (৮৩২) হাদীসে বর্ণিত, উকবা ইবনে আমির আল-জুহানী (রা.) বলেন:\n\n\"তিনটি সময়ে রাসূলুল্লাহ (সা.) আমাদের সালাত আদায় করতে বা মৃতদের দাফন করতে নিষেধ করেছেন:\n১. সূর্যোদয়ের শুরু থেকে পূর্ণরূপে ওপরে ওঠা পর্যন্ত (~১৫ মিনিট)।\n২. ঠিক দ্বিপ্রহরে সূর্য মধ্যাকাশে থাকা থেকে ঢলে পড়ার পূর্ব পর্যন্ত (~৮-১০ মিনিট)।\n৩. সূর্যাস্তের সময় সূর্য হলুদ হওয়া থেকে সম্পূর্ণ অস্ত যাওয়া পর্যন্ত (~১৫ মিনিট)।\"",
+  "readMoreOnIslamQA": "IslamQA-তে সম্পূর্ণ ফতোয়া পড়ুন",
+  "asrJurisprudence": "আসরের মাযহাব নির্ধারণ",
+  "shafieDescription": "সাধারণ (শাফেয়ী, মালেকী, হাম্বলী)",
+  "hanafiDescription": "হানাফী মাযহাব",
+  "shafieShadow": "সাধারণ (ছায়া ১ গুণ)",
+  "hanafiShadow": "হানাফী (ছায়া ২ গুণ)",
+  "calculationAndJurisprudence": "ক্যালকুলেশন ও মাযহাব",
+  "notificationsAndAudio": "নোটিফিকেশন ও অডিও",
+  "enablePrayerReminders": "নামাজের রিমাইন্ডার চালু করুন",
+  "enablePrayerRemindersDescription": "আসন্ন সকল নামাজের সময় নোটিফিকেশন অ্যালার্ট পান।",
+  "adjustReminderTimingDescription": "নামাজের প্রকৃত সময় থেকে রিমাইন্ডার সময় আগে-পিছে (+/- মিনিট) নির্ধারণ করুন।",
+  "exactTime": "সঠিক সময়",
+  "actualTime": "প্রকৃত সময়: {time}",
+  "@actualTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "jumpToToday": "আজকের তারিখে যান",
+  "dateAndHijri": "তারিখ / হিজরি",
+  "selectedLocation": "নির্বাচিত অবস্থান",
+  "more": "আরও",
+  "nextPrayerLabel": "পরবর্তী: {prayerName}",
+  "@nextPrayerLabel": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "currentPrayerLabel": "এখন: {prayerName}",
+  "@currentPrayerLabel": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      }
+    }
+  },
+  "startsAt": "{prayerName} শুরু {time}",
+  "@startsAt": {
+    "placeholders": {
+      "prayerName": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

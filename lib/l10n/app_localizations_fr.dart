@@ -1335,4 +1335,127 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Streaming et réseau';
+
+  @override
+  String get next => 'Suivant';
+
+  @override
+  String get now => 'Maintenant';
+
+  @override
+  String get current => 'Actuel';
+
+  @override
+  String get active => 'Actif';
+
+  @override
+  String get activeNow => 'Actif maintenant';
+
+  @override
+  String get hours => 'Heures';
+
+  @override
+  String get minutes => 'Minutes';
+
+  @override
+  String get seconds => 'Secondes';
+
+  @override
+  String get fastingAndVoluntaryTimes =>
+      'Horaires de jeûne et prières surérogatoires';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ichraq & Douha';
+
+  @override
+  String get lastThirdOfNight => 'Dernier tiers de la nuit';
+
+  @override
+  String get awqatAlNahy => 'Temps d\'interdiction de prière (Awqat al-Nahy)';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Du lever du soleil jusqu\'à ce qu\'il s\'élève de la hauteur d\'une lance (~15 min)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Lorsque le soleil est au zénith jusqu\'au début de Dhuhr (~8 min)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Quand le soleil jaunit jusqu\'au coucher complet (~15 min)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'D\'après Sahih Muslim (832), \'Uqbah ibn \'Amir a dit :\n\n« Il y a trois moments où le Messager d\'Allah (paix et bénédictions sur lui) nous interdisait de prier ou d\'enterrer nos morts :\n1. Lorsque le soleil commence à se lever jusqu\'à ce qu\'il s\'élève.\n2. Au zénith jusqu\'à ce qu\'il décline.\n3. Lorsque le soleil commence à se coucher jusqu\'à ce qu\'il se couche complètement. »';
+
+  @override
+  String get readMoreOnIslamQA => 'Lire la fatwa complète sur IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Jurisprudence d\'Asr (Madhhab)';
+
+  @override
+  String get shafieDescription => 'Standard (Chafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'École Hanafite';
+
+  @override
+  String get shafieShadow => 'Standard (Ombre 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Ombre 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Calcul et Jurisprudence';
+
+  @override
+  String get notificationsAndAudio => 'Notifications et Audio';
+
+  @override
+  String get enablePrayerReminders => 'Activer les rappels de prière';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Recevez des alertes pour toutes les prières à venir.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Ajuster l\'heure du rappel (+/- minutes par rapport à l\'heure réelle).';
+
+  @override
+  String get exactTime => 'Heure exacte';
+
+  @override
+  String actualTime(String time) {
+    return 'Heure réelle : $time';
+  }
+
+  @override
+  String get jumpToToday => 'Aller à aujourd\'hui';
+
+  @override
+  String get dateAndHijri => 'Date / Hégirien';
+
+  @override
+  String get selectedLocation => 'Emplacement sélectionné';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Suivant : $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'En ce moment : $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName commence à $time';
+  }
 }

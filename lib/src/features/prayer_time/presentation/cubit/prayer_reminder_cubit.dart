@@ -10,12 +10,23 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       : super(
           PrayerReminderState(
             reminderTimeAdjustment: ReminderScheduler.getReminderTimeAdjustment(),
+            enabledPrayers: ReminderScheduler.getEnabledPrayers(),
             enforceAlarmSound: ReminderScheduler.getEnforceAlarmSound(),
             soundVolume: ReminderScheduler.getSoundVolume(),
             isPrayerRemindNotificationEnabled:
                 ReminderScheduler.isPrayerRemindNotificationEnabled(),
           ),
         );
+
+  Future<void> togglePrayerReminder(Prayer prayer) async {
+    final currentEnabled = state.enabledPrayers?[prayer] ?? ReminderScheduler.isPrayerEnabled(prayer);
+    final newEnabled = !currentEnabled;
+    final map = Map<Prayer, bool>.from(state.enabledPrayers ?? {});
+    map[prayer] = newEnabled;
+    emit(state.copyWith(enabledPrayers: map));
+    await ReminderScheduler.setPrayerEnabled(prayer, newEnabled);
+    await ReminderScheduler.scheduleNotification();
+  }
 
   Future<void> enablePrayerRemindNotification() async {
     emit(state.copyWith(isPrayerRemindNotificationEnabled: true));

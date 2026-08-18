@@ -12,7 +12,7 @@ void callbackDispatcher() {
 
 class PrayerBackgroundWorker {
   static void registerWorker() async {
-    Workmanager().initialize(callbackDispatcher, isInDebugMode: false);
+    Workmanager().initialize(callbackDispatcher);
     Workmanager().registerPeriodicTask(
       "1",
       "prayer_reminder",

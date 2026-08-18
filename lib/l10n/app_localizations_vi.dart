@@ -1324,4 +1324,127 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Phát trực tuyến & Mạng';
+
+  @override
+  String get next => 'Tiếp theo';
+
+  @override
+  String get now => 'Bây giờ';
+
+  @override
+  String get current => 'Hiện tại';
+
+  @override
+  String get active => 'Đang hoạt động';
+
+  @override
+  String get activeNow => 'Đang diễn ra';
+
+  @override
+  String get hours => 'Giờ';
+
+  @override
+  String get minutes => 'Phút';
+
+  @override
+  String get seconds => 'Giây';
+
+  @override
+  String get fastingAndVoluntaryTimes =>
+      'Thời gian nhịn ăn & Cầu nguyện tự nguyện';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ishraq & Duha';
+
+  @override
+  String get lastThirdOfNight => '1/3 đêm cuối';
+
+  @override
+  String get awqatAlNahy => 'Thời gian cấm cầu nguyện';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Từ lúc mặt trời mọc cho đến khi lên cao bằng ngọn giáo (~15 phút)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Khi mặt trời ở thiên đỉnh cho đến khi Dhuhr bắt đầu (~8 phút)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Khi mặt trời chuyển vàng cho đến khi lặn hoàn toàn (~15 phút)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Đọc Fatwa đầy đủ trên IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Trường phái luật Asr (Madhab)';
+
+  @override
+  String get shafieDescription => 'Tiêu chuẩn (Shafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Trường phái Hanafi';
+
+  @override
+  String get shafieShadow => 'Tiêu chuẩn (Bóng 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Bóng 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Phương pháp tính & Trường phái';
+
+  @override
+  String get notificationsAndAudio => 'Thông báo & Âm thanh';
+
+  @override
+  String get enablePrayerReminders => 'Bật nhắc nhở cầu nguyện';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Nhận thông báo cho tất cả các giờ cầu nguyện sắp tới.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Điều chỉnh thời gian nhắc nhở (+/- phút so với giờ cầu nguyện thực tế).';
+
+  @override
+  String get exactTime => 'Đúng giờ';
+
+  @override
+  String actualTime(String time) {
+    return 'Thời gian thực: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Đến hôm nay';
+
+  @override
+  String get dateAndHijri => 'Ngày / Hồi lịch';
+
+  @override
+  String get selectedLocation => 'Vị trí đã chọn';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Tiếp theo: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Hiện tại: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName bắt đầu lúc $time';
+  }
 }

@@ -1318,4 +1318,126 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'Streaming & Jaringan';
+
+  @override
+  String get next => 'Berikutnya';
+
+  @override
+  String get now => 'Sekarang';
+
+  @override
+  String get current => 'Saat Ini';
+
+  @override
+  String get active => 'Aktif';
+
+  @override
+  String get activeNow => 'Aktif Sekarang';
+
+  @override
+  String get hours => 'Jam';
+
+  @override
+  String get minutes => 'Menit';
+
+  @override
+  String get seconds => 'Detik';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Waktu Puasa & Sunnah';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Isyraq & Dhuha';
+
+  @override
+  String get lastThirdOfNight => 'Sepertiga Malam Terakhir';
+
+  @override
+  String get awqatAlNahy => 'Waktu Dilarang Sholat';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Dari terbit matahari hingga naik setinggi tombak (~15 menit)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Saat matahari tepat di atas kepala hingga tergelincir (~8 menit)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Saat matahari menguning hingga terbenam sepenuhnya (~15 menit)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'Dalam Shahih Muslim (832), dari \'Uqbah bin \'Amir al-Juhani radhiyallahu \'anhu berkata:\n\n\"Tiga waktu di mana Rasulullah shallallahu \'alaihi wa sallam melarang kami sholat atau menguburkan jenazah:\n1. Ketika matahari mulai terbit hingga meninggi.\n2. Ketika matahari berada di tengah-tengah langit hingga tergelincir.\n3. Ketika matahari condong hendak terbenam hingga benar-benar terbenam.\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Baca Fatwa Lengkap di IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Mazhab Waktu Ashar';
+
+  @override
+  String get shafieDescription => 'Standar (Syafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Mazhab Hanafi';
+
+  @override
+  String get shafieShadow => 'Standar (Bayangan 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Bayangan 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Perhitungan & Mazhab';
+
+  @override
+  String get notificationsAndAudio => 'Notifikasi & Audio';
+
+  @override
+  String get enablePrayerReminders => 'Aktifkan Pengingat Sholat';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Dapatkan peringatan notifikasi untuk semua waktu sholat yang akan datang.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Sesuaikan waktu pengingat (+/- menit dari waktu sholat sebenarnya).';
+
+  @override
+  String get exactTime => 'Waktu Tepat';
+
+  @override
+  String actualTime(String time) {
+    return 'Waktu Sebenarnya: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Lompat ke Hari Ini';
+
+  @override
+  String get dateAndHijri => 'Tanggal / Hijriah';
+
+  @override
+  String get selectedLocation => 'Lokasi Terpilih';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Berikutnya: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Sekarang: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName dimulai pukul $time';
+  }
 }

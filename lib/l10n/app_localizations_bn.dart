@@ -761,7 +761,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get newText => 'নতুন';
 
   @override
-  String get more => 'আরও: ';
+  String get more => 'আরও';
 
   @override
   String get cacheNotFound => 'ক্যাশ পাওয়া যায়নি';
@@ -1322,4 +1322,126 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'স্ট্রিমিং ও নেটওয়ার্ক';
+
+  @override
+  String get next => 'পরবর্তী';
+
+  @override
+  String get now => 'এখন';
+
+  @override
+  String get current => 'বর্তমান';
+
+  @override
+  String get active => 'সক্রিয়';
+
+  @override
+  String get activeNow => 'এখন চলছে';
+
+  @override
+  String get hours => 'ঘণ্টা';
+
+  @override
+  String get minutes => 'মিনিট';
+
+  @override
+  String get seconds => 'সেকেন্ড';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'রোজা ও নফল নামাজের সময়';
+
+  @override
+  String get imsak => 'ইমসাক';
+
+  @override
+  String get ishraqAndDuha => 'ইশরাক ও চাশত';
+
+  @override
+  String get lastThirdOfNight => 'রাতের শেষ তৃতীয়াংশ';
+
+  @override
+  String get awqatAlNahy => 'নামাজের নিষিদ্ধ সময় (আওকাতুন নাহয়)';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'সূর্যোদয়ের শুরু থেকে এক বর্শা পরিমাণ ওপরে ওঠা পর্যন্ত (~১৫ মিনিট)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'সূর্য ঠিক মাথার ওপর থেকে ঢলে পড়া পর্যন্ত (~৮ মিনিট)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'সূর্য হলুদ বর্ণ ধারণ করার পর থেকে সম্পূর্ণ ডোবা পর্যন্ত (~১৫ মিনিট)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'সহীহ মুসলিমের (৮৩২) হাদীসে বর্ণিত, উকবা ইবনে আমির আল-জুহানী (রা.) বলেন:\n\n\"তিনটি সময়ে রাসূলুল্লাহ (সা.) আমাদের সালাত আদায় করতে বা মৃতদের দাফন করতে নিষেধ করেছেন:\n১. সূর্যোদয়ের শুরু থেকে পূর্ণরূপে ওপরে ওঠা পর্যন্ত (~১৫ মিনিট)।\n২. ঠিক দ্বিপ্রহরে সূর্য মধ্যাকাশে থাকা থেকে ঢলে পড়ার পূর্ব পর্যন্ত (~৮-১০ মিনিট)।\n৩. সূর্যাস্তের সময় সূর্য হলুদ হওয়া থেকে সম্পূর্ণ অস্ত যাওয়া পর্যন্ত (~১৫ মিনিট)।\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA-তে সম্পূর্ণ ফতোয়া পড়ুন';
+
+  @override
+  String get asrJurisprudence => 'আসরের মাযহাব নির্ধারণ';
+
+  @override
+  String get shafieDescription => 'সাধারণ (শাফেয়ী, মালেকী, হাম্বলী)';
+
+  @override
+  String get hanafiDescription => 'হানাফী মাযহাব';
+
+  @override
+  String get shafieShadow => 'সাধারণ (ছায়া ১ গুণ)';
+
+  @override
+  String get hanafiShadow => 'হানাফী (ছায়া ২ গুণ)';
+
+  @override
+  String get calculationAndJurisprudence => 'ক্যালকুলেশন ও মাযহাব';
+
+  @override
+  String get notificationsAndAudio => 'নোটিফিকেশন ও অডিও';
+
+  @override
+  String get enablePrayerReminders => 'নামাজের রিমাইন্ডার চালু করুন';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'আসন্ন সকল নামাজের সময় নোটিফিকেশন অ্যালার্ট পান।';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'নামাজের প্রকৃত সময় থেকে রিমাইন্ডার সময় আগে-পিছে (+/- মিনিট) নির্ধারণ করুন।';
+
+  @override
+  String get exactTime => 'সঠিক সময়';
+
+  @override
+  String actualTime(String time) {
+    return 'প্রকৃত সময়: $time';
+  }
+
+  @override
+  String get jumpToToday => 'আজকের তারিখে যান';
+
+  @override
+  String get dateAndHijri => 'তারিখ / হিজরি';
+
+  @override
+  String get selectedLocation => 'নির্বাচিত অবস্থান';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'পরবর্তী: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'এখন: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName শুরু $time';
+  }
 }

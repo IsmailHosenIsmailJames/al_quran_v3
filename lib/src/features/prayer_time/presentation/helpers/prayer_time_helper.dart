@@ -1,13 +1,31 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+
+class ForbiddenTimeInfo {
+  final bool isForbiddenNow;
+  final String title;
+  final String description;
+  final DateTime startTime;
+  final DateTime endTime;
+  final Prayer prayer;
+
+  ForbiddenTimeInfo({
+    required this.isForbiddenNow,
+    required this.title,
+    required this.description,
+    required this.startTime,
+    required this.endTime,
+    required this.prayer,
+  });
+}
 
 class PrayerTimeHelper {
   PrayerTimeHelper();
 
   static String? localizedPrayerName(
     BuildContext? context,
-
     Prayer? prayer, {
     AppLocalizations? appLocalizations,
   }) {
@@ -39,10 +57,130 @@ class PrayerTimeHelper {
     }
   }
 
+  static String arabicPrayerName(Prayer? prayer) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return "الفجر";
+      case Prayer.sunrise:
+        return "الشروق";
+      case Prayer.dhuha:
+        return "الضحى";
+      case Prayer.noon:
+        return "الزوال";
+      case Prayer.dhuhr:
+        return "الظهر";
+      case Prayer.asr:
+        return "العصر";
+      case Prayer.sunset:
+        return "الغروب";
+      case Prayer.maghrib:
+        return "المغرب";
+      case Prayer.isha:
+        return "العشاء";
+      case Prayer.tahajjud:
+        return "التهجد";
+      default:
+        return "";
+    }
+  }
+
+  static IconData getPrayerIcon(Prayer prayer) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return FluentIcons.weather_haze_24_regular;
+      case Prayer.sunrise:
+        return FluentIcons.weather_sunny_low_24_regular;
+      case Prayer.dhuha:
+        return FluentIcons.weather_sunny_24_regular;
+      case Prayer.noon:
+        return FluentIcons.weather_sunny_high_24_regular;
+      case Prayer.dhuhr:
+        return FluentIcons.weather_sunny_24_filled;
+      case Prayer.asr:
+        return FluentIcons.weather_partly_cloudy_day_24_regular;
+      case Prayer.sunset:
+        return FluentIcons.weather_sunny_low_24_filled;
+      case Prayer.maghrib:
+        return FluentIcons.weather_moon_off_24_regular;
+      case Prayer.isha:
+        return FluentIcons.weather_moon_24_regular;
+      case Prayer.tahajjud:
+        return FluentIcons.weather_moon_24_filled;
+    }
+  }
+
   static String formatDuration(Duration? duration) {
     if (duration == null) {
-      return "-";
+      return "--:--:--";
     }
-    return "${duration.inHours.toString().padLeft(2, "0")}:${(duration.inMinutes % 60).toString().padLeft(2, "0")}:${(duration.inSeconds % 60).toString().padLeft(2, "0")}";
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    int hours = duration.inHours;
+    int minutes = duration.inMinutes % 60;
+    int seconds = duration.inSeconds % 60;
+    return "${twoDigits(hours)}:${twoDigits(minutes)}:${twoDigits(seconds)}";
+  }
+
+  static List<ForbiddenTimeInfo> getForbiddenWindows(
+    PrayerTimes prayerTimes,
+    DateTime now,
+    BuildContext context,
+  ) {
+    final l10n = AppLocalizations.of(context);
+
+    // 1. Post Sunrise: Sunrise until +15 minutes
+    final sunriseStart = prayerTimes.sunrise.toLocal();
+    final sunriseEnd = sunriseStart.add(const Duration(minutes: 15));
+    final isSunriseForbidden =
+        now.isAfter(sunriseStart) && now.isBefore(sunriseEnd);
+
+    // 2. Midday / Zenith (Zawal): Dhuhr - 8 minutes until Dhuhr
+    final dhuhrStart = prayerTimes.dhuhr.toLocal();
+    final noonStart = dhuhrStart.subtract(const Duration(minutes: 8));
+    final isNoonForbidden = now.isAfter(noonStart) && now.isBefore(dhuhrStart);
+
+    // 3. Pre Sunset: Maghrib - 15 minutes until Maghrib
+    final maghribStart = prayerTimes.maghrib.toLocal();
+    final sunsetStart = maghribStart.subtract(const Duration(minutes: 15));
+    final isSunsetForbidden =
+        now.isAfter(sunsetStart) && now.isBefore(maghribStart);
+
+    return [
+      ForbiddenTimeInfo(
+        isForbiddenNow: isSunriseForbidden,
+        title: l10n.sunrise,
+        description: l10n.forbiddenSunriseDescription,
+        startTime: sunriseStart,
+        endTime: sunriseEnd,
+        prayer: Prayer.sunrise,
+      ),
+      ForbiddenTimeInfo(
+        isForbiddenNow: isNoonForbidden,
+        title: l10n.noon,
+        description: l10n.forbiddenNoonDescription,
+        startTime: noonStart,
+        endTime: dhuhrStart,
+        prayer: Prayer.noon,
+      ),
+      ForbiddenTimeInfo(
+        isForbiddenNow: isSunsetForbidden,
+        title: l10n.sunset,
+        description: l10n.forbiddenSunsetDescription,
+        startTime: sunsetStart,
+        endTime: maghribStart,
+        prayer: Prayer.sunset,
+      ),
+    ];
+  }
+
+  static ForbiddenTimeInfo? getActiveForbiddenWindow(
+    PrayerTimes prayerTimes,
+    DateTime now,
+    BuildContext context,
+  ) {
+    final windows = getForbiddenWindows(prayerTimes, now, context);
+    for (final window in windows) {
+      if (window.isForbiddenNow) return window;
+    }
+    return null;
   }
 }

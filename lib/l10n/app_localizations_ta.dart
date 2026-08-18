@@ -1337,4 +1337,127 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get streamingAndNetwork => 'ஸ்ட்ரீமிங் மற்றும் பிணையம்';
+
+  @override
+  String get next => 'அடுத்தது';
+
+  @override
+  String get now => 'இப்போது';
+
+  @override
+  String get current => 'தற்போதைய';
+
+  @override
+  String get active => 'செயலில்';
+
+  @override
+  String get activeNow => 'இப்போது செயலில்';
+
+  @override
+  String get hours => 'மணிநேரம்';
+
+  @override
+  String get minutes => 'நிமிடங்கள்';
+
+  @override
+  String get seconds => 'வினாடிகள்';
+
+  @override
+  String get fastingAndVoluntaryTimes =>
+      'நோன்பு மற்றும் நஃபில் தொழுகை நேரங்கள்';
+
+  @override
+  String get imsak => 'இம்ஸாக்';
+
+  @override
+  String get ishraqAndDuha => 'இஷ்ராக் மற்றும் லுஹா';
+
+  @override
+  String get lastThirdOfNight => 'இரவின் இறுதி மூன்றில் ஒரு பங்கு';
+
+  @override
+  String get awqatAlNahy => 'தொழுகை தடைசெய்யப்பட்ட நேரங்கள்';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'சூரிய உதயத்திலிருந்து ஈட்டி உயரத்திற்கு உயரும் வரை (~15 நிமிடங்கள்)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'சூரியன் உச்சி மண்டையிலிருந்து சாயும் வரை (~8 நிமிடங்கள்)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'சூரியன் மஞ்சளாகி மறையும் வரை (~15 நிமிடங்கள்)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA-வில் முழு ஃபத்வாவைப் படிக்கவும்';
+
+  @override
+  String get asrJurisprudence => 'அஸர் மத்ஹப் முறை';
+
+  @override
+  String get shafieDescription => 'பொதுவானது (ஷாஃபி, மாலிகி, ஹன்பலி)';
+
+  @override
+  String get hanafiDescription => 'ஹனஃபி முறை';
+
+  @override
+  String get shafieShadow => 'பொதுவானது (நிழல் 1x)';
+
+  @override
+  String get hanafiShadow => 'ஹனஃபி (நிழல் 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'கணக்கீடு மற்றும் மத்ஹப்';
+
+  @override
+  String get notificationsAndAudio => 'அறிவிப்புகள் மற்றும் ஆடியோ';
+
+  @override
+  String get enablePrayerReminders => 'தொழுகை நினைவூட்டல்களை இயக்கு';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'வரவிருக்கும் அனைத்து தொழுகை நேரங்களுக்கும் அறிவிப்புகளைப் பெறுங்கள்.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'உண்மையான தொழுகை நேரத்திலிருந்து நினைவூட்டல் நேரத்தை மாற்றவும் (+/- நிமிடங்கள்).';
+
+  @override
+  String get exactTime => 'துல்லியமான நேரம்';
+
+  @override
+  String actualTime(String time) {
+    return 'உண்மையான நேரம்: $time';
+  }
+
+  @override
+  String get jumpToToday => 'இன்றைக்குச் செல்';
+
+  @override
+  String get dateAndHijri => 'தேதி / ஹிஜ்ரி';
+
+  @override
+  String get selectedLocation => 'தேர்ந்தெடுக்கப்பட்ட இடம்';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'அடுத்தது: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'இப்போது: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName தொடங்கும் நேரம் $time';
+  }
 }

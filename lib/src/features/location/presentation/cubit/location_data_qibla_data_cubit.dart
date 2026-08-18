@@ -83,7 +83,11 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
           await SharedPreferences.getInstance();
       sharedPreferences.setString("selected_madhab", madhab.name);
     }
-    emit(state.copyWith(madhab: madhab));
+    final calcMethod = state.calculationMethod;
+    if (calcMethod != null) {
+      calcMethod.madhab = madhab;
+    }
+    emit(state.copyWith(madhab: madhab, calculationMethod: calcMethod));
     await ReminderScheduler.scheduleNotification();
   }
 
@@ -134,6 +138,8 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
         await sharedPreferences.setString("selected_madhab", Madhab.shafi.name);
         madhabEnum = Madhab.shafi;
       }
+
+      calculationMethod.madhab = madhabEnum;
 
       return LocationQiblaPrayerDataState(
         latLon: latLong,
