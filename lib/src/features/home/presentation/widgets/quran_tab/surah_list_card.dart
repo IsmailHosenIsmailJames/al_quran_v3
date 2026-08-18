@@ -22,7 +22,6 @@ class SurahListCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     final String localizedName = getSurahName(context, surah.id);
-    final String arabicName = getSurahNameArabic(surah.id);
     final String surahMeaning = getSurahMeaning(context, surah.id);
 
     final bool isMakkah = surah.revelationPlace.toLowerCase() == "makkah";
@@ -30,14 +29,12 @@ class SurahListCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.035)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.035) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
               ? Colors.white.withValues(alpha: 0.08)
-              : themeState.primaryShade200.withValues(alpha: 0.6),
+              : Colors.grey.shade200,
         ),
         boxShadow: [
           BoxShadow(
@@ -63,7 +60,10 @@ class SurahListCard extends StatelessWidget {
             );
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14.0,
+              vertical: 12.0,
+            ),
             child: Row(
               children: [
                 // Geometric Islamic index badge
@@ -82,9 +82,7 @@ class SurahListCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? Colors.white
-                              : Colors.grey.shade900,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
                         ),
                       ),
                       if (surahMeaning.isNotEmpty) ...[
@@ -151,14 +149,12 @@ class SurahListCard extends StatelessWidget {
 
                 const Gap(8),
 
-                // Arabic Name
+                // Arabic Calligraphy Name (surah-name-v1)
                 Text(
-                  arabicName,
-                  style: TextStyle(
-                    fontFamily: "Amiri",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: themeState.primary,
+                  "surah${surah.id.toString().padLeft(3, '0')}",
+                  style: const TextStyle(
+                    fontFamily: "surah-name-v1",
+                    fontSize: 26,
                   ),
                 ),
               ],

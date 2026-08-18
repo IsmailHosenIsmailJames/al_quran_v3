@@ -178,7 +178,7 @@ class AyahByAyahCard extends StatelessWidget {
                             ? themeState.primary
                             : (isDark
                                 ? Colors.white.withValues(alpha: 0.07)
-                                : themeState.primaryShade200.withValues(alpha: 0.7)),
+                                : Colors.grey.shade200),
                         width: isHighlighted ? 1.5 : 1.0,
                       ),
                       boxShadow: [
@@ -315,106 +315,123 @@ class _AyahToolbar extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Islamic Octagonal Number Badge
-        QuranIndexBadge(
-          index: ayahNumber,
-          size: 34,
-        ),
-        if (showFullKey == true) ...[
-          const Gap(8),
-          Text(
-            "${getSurahName(context, surahInfoModel.id)} (${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)})",
-            style: TextStyle(
-              fontSize: 12.5,
-              fontWeight: FontWeight.w600,
-              color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
-            ),
+        // Islamic Octagonal Number Badge + Optional Full Surah/Ayah Reference
+        Expanded(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              QuranIndexBadge(
+                index: ayahNumber,
+                size: 32,
+              ),
+              if (showFullKey == true) ...[
+                const Gap(8),
+                Flexible(
+                  child: Text(
+                    "${getSurahName(context, surahInfoModel.id)} (${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)})",
+                    style: TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ],
           ),
-        ],
+        ),
 
-        const Spacer(),
+        const Gap(6),
 
-        // Tafsir Action Pill
-        SizedBox(
-          height: 32,
-          child: TextButton.icon(
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              backgroundColor: isDark
-                  ? Colors.white.withValues(alpha: 0.05)
-                  : themeState.primaryShade100.withValues(alpha: 0.6),
-              foregroundColor: themeState.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : themeState.primaryShade200.withValues(alpha: 0.6),
+        // Actions Row
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Tafsir Action Pill
+            SizedBox(
+              height: 30,
+              child: TextButton.icon(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  backgroundColor: isDark
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : themeState.primary.withValues(alpha: 0.08),
+                  foregroundColor: themeState.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : themeState.primary.withValues(alpha: 0.2),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TafsirView(ayahKey: ayahKey),
+                    ),
+                  );
+                },
+                icon: const Icon(FluentIcons.book_open_20_filled, size: 14),
+                label: Text(
+                  l10n.tafsirButton,
+                  style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TafsirView(ayahKey: ayahKey),
-                ),
-              );
-            },
-            icon: const Icon(FluentIcons.book_open_20_filled, size: 15),
-            label: Text(
-              l10n.tafsirButton,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            const Gap(4),
+
+            // Share Action Icon
+            _ActionIconButton(
+              icon: FluentIcons.share_20_regular,
+              tooltip: l10n.shareButton,
+              themeState: themeState,
+              isDark: isDark,
+              onTap: () {
+                showShareBottomDialog(
+                  context,
+                  ayahKey,
+                  SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]!),
+                  context.read<QuranViewCubit>().state.quranScriptType,
+                  translation,
+                  footNoteAsStringMap,
+                  translationBookInfoList,
+                );
+              },
             ),
-          ),
-        ),
-        const Gap(6),
+            const Gap(4),
 
-        // Share Action Icon
-        _ActionIconButton(
-          icon: FluentIcons.share_20_regular,
-          tooltip: l10n.shareButton,
-          themeState: themeState,
-          isDark: isDark,
-          onTap: () {
-            showShareBottomDialog(
-              context,
-              ayahKey,
-              SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]!),
-              context.read<QuranViewCubit>().state.quranScriptType,
-              translation,
-              footNoteAsStringMap,
-              translationBookInfoList,
-            );
-          },
-        ),
-        const Gap(6),
+            // Add Note Action Icon
+            _ActionIconButton(
+              icon: FluentIcons.note_add_20_regular,
+              tooltip: l10n.addNoteButton,
+              themeState: themeState,
+              isDark: isDark,
+              onTap: () => showAddNotePopup(context, ayahKey),
+            ),
+            const Gap(4),
 
-        // Add Note Action Icon
-        _ActionIconButton(
-          icon: FluentIcons.note_add_20_regular,
-          tooltip: l10n.addNoteButton,
-          themeState: themeState,
-          isDark: isDark,
-          onTap: () => showAddNotePopup(context, ayahKey),
-        ),
-        const Gap(6),
+            // Pin / Bookmark Action Icon
+            _ActionIconButton(
+              icon: FluentIcons.bookmark_20_regular,
+              tooltip: l10n.pinToCollectionButton,
+              themeState: themeState,
+              isDark: isDark,
+              onTap: () => showAddToPinnedPopup(context, ayahKey),
+            ),
+            const Gap(4),
 
-        // Pin / Bookmark Action Icon
-        _ActionIconButton(
-          icon: FluentIcons.bookmark_20_regular,
-          tooltip: l10n.pinToCollectionButton,
-          themeState: themeState,
-          isDark: isDark,
-          onTap: () => showAddToPinnedPopup(context, ayahKey),
-        ),
-        const Gap(6),
-
-        // Play Audio Action Icon
-        _AyahPlayButton(
-          ayahKey: ayahKey,
-          themeState: themeState,
-          isDark: isDark,
+            // Play / Audio Action Icon
+            _AyahPlayButton(
+              ayahKey: ayahKey,
+              themeState: themeState,
+              isDark: isDark,
+            ),
+          ],
         ),
       ],
     );
@@ -447,14 +464,14 @@ class _ActionIconButton extends StatelessWidget {
         style: IconButton.styleFrom(
           backgroundColor: isDark
               ? Colors.white.withValues(alpha: 0.05)
-              : themeState.primaryShade100.withValues(alpha: 0.5),
+              : Colors.grey.shade100,
           foregroundColor: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.08)
-                  : themeState.primaryShade200.withValues(alpha: 0.5),
+                  : Colors.grey.shade300,
             ),
           ),
         ),
@@ -496,7 +513,7 @@ class _AyahPlayButton extends StatelessWidget {
                       ? themeState.primary
                       : (isDark
                           ? Colors.white.withValues(alpha: 0.05)
-                          : themeState.primaryShade100.withValues(alpha: 0.5)),
+                          : Colors.grey.shade100),
                   foregroundColor: isCurrent
                       ? Colors.white
                       : themeState.primary,
@@ -507,7 +524,7 @@ class _AyahPlayButton extends StatelessWidget {
                           ? themeState.primary
                           : (isDark
                               ? Colors.white.withValues(alpha: 0.08)
-                              : themeState.primaryShade200.withValues(alpha: 0.5)),
+                              : Colors.grey.shade300),
                     ),
                   ),
                 ),

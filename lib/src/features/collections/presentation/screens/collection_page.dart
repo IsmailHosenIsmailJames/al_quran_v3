@@ -564,11 +564,7 @@ class _CollectionPageState extends State<CollectionPage> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -577,8 +573,16 @@ class _CollectionPageState extends State<CollectionPage> {
           ),
         ],
       ),
-      child: ClipRRect(
+      child: Material(
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
         child: Container(
           decoration: BoxDecoration(
             border: Border(left: BorderSide(color: folderColor, width: 5)),
@@ -820,11 +824,7 @@ class _CollectionPageState extends State<CollectionPage> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -833,8 +833,16 @@ class _CollectionPageState extends State<CollectionPage> {
           ),
         ],
       ),
-      child: ClipRRect(
+      child: Material(
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
         child: Container(
           decoration: BoxDecoration(
             border: Border(left: BorderSide(color: folderColor, width: 5)),
