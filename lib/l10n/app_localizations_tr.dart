@@ -1459,14 +1459,110 @@ class AppLocalizationsTr extends AppLocalizations {
   String get verses => 'Ayet';
 
   @override
+  String get ayah => 'Ayet';
+
+  @override
+  String get edit => 'Düzenle';
+
+  @override
+  String get searchAll => 'Tümü';
+
+  @override
+  String get searchArabic => 'Arapça';
+
+  @override
+  String get searchQuranHint => 'Kur\'an, Sure, 2:255, Meal ara...';
+
+  @override
+  String get searchFiltersAndOptions => 'Arama Filtreleri ve Seçenekleri';
+
+  @override
+  String get exactPhrase => 'Tam İfade';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Sure bulundu',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Ayet bulundu',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return '\"$query\" ile eşleşen sure bulunamadı';
+  }
+
+  @override
+  String get noResultsFound => 'Sonuç bulunamadı';
+
+  @override
+  String get trySearchingFor =>
+      'Bir sure adı, ayet numarası (örn. 2:255) veya konuları aramayı deneyin';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'Tüm Sureler ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Aktif Kısayollar ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'Aktif kısayol bulunamadı';
+
+  @override
+  String get customize => 'Özelleştir';
+
+  @override
+  String get bismillahPreview => 'Besmele Önizleme';
+
+  @override
+  String get tajweedRules => 'Tecvid Kuralları';
+
+  @override
   String get makki => 'Mekkî';
 
   @override
   String get madani => 'Medenî';
 
   @override
-  String get ayah => 'Ayet';
+  String get exactPhraseMatch => 'Tam İfade Eşleşmesi';
 
   @override
-  String get edit => 'Düzenle';
+  String get matchExactWordsDesc =>
+      'Kelimeleri ardışık sırada tam olarak eşleştir';
+
+  @override
+  String get filterBySurah => 'Sureye Göre Filtrele';
+
+  @override
+  String get all114SurahsEntireQuran => 'Tüm 114 Sure (Tüm Kur\'an)';
+
+  @override
+  String get revelationType => 'İniş Yeri';
+
+  @override
+  String get searchInTranslations => 'Meallerde Ara';
+
+  @override
+  String get searchInTafsirs => 'Tefsirlerde Ara';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total aktif';
+  }
 }
