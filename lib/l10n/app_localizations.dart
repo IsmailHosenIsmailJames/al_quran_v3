@@ -2725,6 +2725,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{prayerName} starts at {time}'**
   String startsAt(String prayerName, String time);
+
+  /// No description provided for @continueReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Reading'**
+  String get continueReading;
+
+  /// No description provided for @lastRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Read'**
+  String get lastRead;
+
+  /// No description provided for @resume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resume;
+
+  /// No description provided for @startReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Reading'**
+  String get startReading;
+
+  /// No description provided for @verses.
+  ///
+  /// In en, this message translates to:
+  /// **'Verses'**
+  String get verses;
+
+  /// No description provided for @makki.
+  ///
+  /// In en, this message translates to:
+  /// **'Makki'**
+  String get makki;
+
+  /// No description provided for @madani.
+  ///
+  /// In en, this message translates to:
+  /// **'Madani'**
+  String get madani;
+
+  /// No description provided for @ayah.
+  ///
+  /// In en, this message translates to:
+  /// **'Ayah'**
+  String get ayah;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate

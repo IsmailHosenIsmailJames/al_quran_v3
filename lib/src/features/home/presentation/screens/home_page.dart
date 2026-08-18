@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
@@ -348,7 +346,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      extendBody: true,
+      extendBody: false,
       drawer: const AppDrawer(),
       appBar: isSideNav
           ? null
@@ -678,39 +676,43 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget appBottomNav(AppLocalizations l10n, ThemeState themeState) {
+    final isDark = Theme.brightnessOf(context) == Brightness.dark;
+    final Color navBg = isDark ? const Color(0xFF121212) : Colors.white;
+    final Color borderColor = isDark
+        ? Colors.white.withValues(alpha: 0.08)
+        : themeState.mutedGray.withValues(alpha: 0.5);
+
     return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
       buildWhen: (previous, current) {
         return previous.tabIndex != current.tabIndex;
       },
       builder: (context, state) {
-        return ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(
-                  context,
-                ).bottomNavigationBarTheme.backgroundColor,
-
-                border: Border(top: BorderSide(color: themeState.mutedGray)),
-              ),
-              child: BottomNavigationBar(
-                backgroundColor: Theme.brightnessOf(context) == Brightness.dark
-                    ? Colors.grey.shade900.withValues(alpha: 0.5)
-                    : Colors.grey.shade100.withValues(alpha: 0.5),
-                elevation: 0,
-                currentIndex: state.tabIndex,
-                onTap: (index) {
-                  context.read<OthersSettingsCubit>().setTabIndex(index);
-                  pageController.jumpToPage(index);
-                },
-                type: BottomNavigationBarType.fixed,
-                selectedLabelStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-                items: getBottomNavItems(state.tabIndex, l10n),
-              ),
+        return Container(
+          decoration: BoxDecoration(
+            color: navBg,
+            border: Border(top: BorderSide(color: borderColor, width: 0.8)),
+          ),
+          child: BottomNavigationBar(
+            backgroundColor: navBg,
+            elevation: 0,
+            currentIndex: state.tabIndex,
+            onTap: (index) {
+              context.read<OthersSettingsCubit>().setTabIndex(index);
+              pageController.jumpToPage(index);
+            },
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: themeState.primary,
+            unselectedItemColor:
+                isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
             ),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            ),
+            items: getBottomNavItems(state.tabIndex, l10n),
           ),
         );
       },

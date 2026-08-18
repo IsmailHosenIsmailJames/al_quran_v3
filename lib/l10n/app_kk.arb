@@ -690,5 +690,14 @@
   "actualTime": "Нақты уақыт: {time}",
   "nextPrayerLabel": "Келесі: {prayerName}",
   "currentPrayerLabel": "Қазір: {prayerName}",
-  "startsAt": "{prayerName} уақыты: {time}"
+  "startsAt": "{prayerName} уақыты: {time}",
+  "continueReading": "Оқуды жалғастыру",
+  "lastRead": "Соңғы оқылған",
+  "resume": "Жалғастыру",
+  "startReading": "Оқуды бастау",
+  "verses": "Аяттар",
+  "makki": "Меккелік",
+  "madani": "Мәдиналық",
+  "ayah": "Аят",
+  "edit": "Өңдеу"
 }

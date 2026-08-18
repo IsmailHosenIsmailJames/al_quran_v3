@@ -690,5 +690,14 @@
   "actualTime": "ਅਸਲ ਸਮਾਂ: {time}",
   "nextPrayerLabel": "ਅਗਲਾ: {prayerName}",
   "currentPrayerLabel": "ਹੁਣ: {prayerName}",
-  "startsAt": "{prayerName} {time} ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ"
+  "startsAt": "{prayerName} {time} ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ",
+  "continueReading": "ਪੜ੍ਹਨਾ ਜਾਰੀ ਰੱਖੋ",
+  "lastRead": "ਆਖਰੀ ਵਾਰ ਪੜ੍ਹਿਆ",
+  "resume": "ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ",
+  "startReading": "ਪੜ੍ਹਨਾ ਸ਼ੁਰੂ ਕਰੋ",
+  "verses": "ਆਇਤਾਂ",
+  "makki": "ਮੱਕੀ",
+  "madani": "ਮਦਨੀ",
+  "ayah": "ਆਇਤ",
+  "edit": "ਸੰਪਾਦਿਤ ਕਰੋ"
 }

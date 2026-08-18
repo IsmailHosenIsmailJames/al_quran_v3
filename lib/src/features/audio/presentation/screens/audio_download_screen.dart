@@ -1,6 +1,5 @@
 import "dart:developer";
 import "dart:io";
-import "dart:ui";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
@@ -95,35 +94,15 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
     );
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        flexibleSpace: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: isDark
-                    ? Colors.black.withValues(alpha: 0.5)
-                    : Colors.white.withValues(alpha: 0.7),
-                border: Border(
-                  bottom: BorderSide(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.06)
-                        : Colors.black.withValues(alpha: 0.06),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
         title: Text(
           l10n.audioDownload,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top + kToolbarHeight + 12,
+        padding: const EdgeInsets.only(
+          top: 12,
           bottom: 40,
           left: 14,
           right: 14,

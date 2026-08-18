@@ -1442,4 +1442,31 @@ class AppLocalizationsTr extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName $time vaktinde başlar';
   }
+
+  @override
+  String get continueReading => 'Okumaya Devam Et';
+
+  @override
+  String get lastRead => 'Son Okunan';
+
+  @override
+  String get resume => 'Devam Et';
+
+  @override
+  String get startReading => 'Okumaya Başla';
+
+  @override
+  String get verses => 'Ayet';
+
+  @override
+  String get makki => 'Mekkî';
+
+  @override
+  String get madani => 'Medenî';
+
+  @override
+  String get ayah => 'Ayet';
+
+  @override
+  String get edit => 'Düzenle';
 }

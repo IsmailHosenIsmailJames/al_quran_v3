@@ -690,5 +690,14 @@
   "actualTime": "Фактическое: {time}",
   "nextPrayerLabel": "Следующая: {prayerName}",
   "currentPrayerLabel": "Сейчас: {prayerName}",
-  "startsAt": "{prayerName} начинается в {time}"
+  "startsAt": "{prayerName} начинается в {time}",
+  "continueReading": "Продолжить чтение",
+  "lastRead": "Последнее прочитанное",
+  "resume": "Возобновить",
+  "startReading": "Начать чтение",
+  "verses": "Аяты",
+  "makki": "Мекканская",
+  "madani": "Мединская",
+  "ayah": "Аят",
+  "edit": "Редактировать"
 }

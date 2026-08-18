@@ -1460,4 +1460,31 @@ class AppLocalizationsTa extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName தொடங்கும் நேரம் $time';
   }
+
+  @override
+  String get continueReading => 'தொடர்ந்து படிக்கவும்';
+
+  @override
+  String get lastRead => 'கடைசியாக படித்தது';
+
+  @override
+  String get resume => 'மீண்டும் தொடங்கு';
+
+  @override
+  String get startReading => 'படிக்கத் தொடங்குங்கள்';
+
+  @override
+  String get verses => 'வசனங்கள்';
+
+  @override
+  String get makki => 'மக்கீ';
+
+  @override
+  String get madani => 'மதனீ';
+
+  @override
+  String get ayah => 'வசனம்';
+
+  @override
+  String get edit => 'திருத்து';
 }

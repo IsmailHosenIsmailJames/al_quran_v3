@@ -428,5 +428,14 @@
   "actualTime": "Ora effettiva: {time}",
   "nextPrayerLabel": "Successiva: {prayerName}",
   "currentPrayerLabel": "Ora: {prayerName}",
-  "startsAt": "{prayerName} inizia alle {time}"
+  "startsAt": "{prayerName} inizia alle {time}",
+  "continueReading": "Continua a leggere",
+  "lastRead": "Ultima lettura",
+  "resume": "Riprendi",
+  "startReading": "Inizia a leggere",
+  "verses": "Versetti",
+  "makki": "Meccana",
+  "madani": "Medinese",
+  "ayah": "Versetto",
+  "edit": "Modifica"
 }

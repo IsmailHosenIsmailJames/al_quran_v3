@@ -428,5 +428,14 @@
   "actualTime": "실제 시간: {time}",
   "nextPrayerLabel": "다음: {prayerName}",
   "currentPrayerLabel": "지금: {prayerName}",
-  "startsAt": "{prayerName} 시작 시간 {time}"
+  "startsAt": "{prayerName} 시작 시간 {time}",
+  "continueReading": "계속 읽기",
+  "lastRead": "마지막으로 읽은 곳",
+  "resume": "재개",
+  "startReading": "읽기 시작",
+  "verses": "구절",
+  "makki": "메카 계시",
+  "madani": "메디나 계시",
+  "ayah": "구절",
+  "edit": "편집"
 }

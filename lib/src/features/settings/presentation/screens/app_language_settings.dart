@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/localization/languages.dart";
@@ -24,22 +22,7 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
     AppLocalizations l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        flexibleSpace: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: themeState.mutedGray)),
-              ),
-            ),
-          ),
-        ),
-        backgroundColor:
-            Theme.brightnessOf(context) == Brightness.dark
-                ? Colors.grey.shade900.withValues(alpha: 0.5)
-                : Colors.grey.shade200.withValues(alpha: 0.5),
         title: Text(l10n.languageSettings),
       ),
       body: BlocBuilder<LanguageCubit, MyAppLocalization>(

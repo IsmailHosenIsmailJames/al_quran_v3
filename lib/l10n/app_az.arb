@@ -428,5 +428,14 @@
   "actualTime": "Faktiki: {time}",
   "nextPrayerLabel": "Növbəti: {prayerName}",
   "currentPrayerLabel": "İndi: {prayerName}",
-  "startsAt": "{prayerName} {time} başlayır"
+  "startsAt": "{prayerName} {time} başlayır",
+  "continueReading": "Oxumağa davam et",
+  "lastRead": "Son oxunan",
+  "resume": "Davam et",
+  "startReading": "Oxumağa başla",
+  "verses": "Ayələr",
+  "makki": "Məkkə",
+  "madani": "Mədinə",
+  "ayah": "Ayə",
+  "edit": "Düzəliş et"
 }

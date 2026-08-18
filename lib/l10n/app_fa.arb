@@ -690,5 +690,14 @@
   "actualTime": "زمان واقعی: {time}",
   "nextPrayerLabel": "بعدی: {prayerName}",
   "currentPrayerLabel": "اکنون: {prayerName}",
-  "startsAt": "{prayerName} در {time} شروع می‌شود"
+  "startsAt": "{prayerName} در {time} شروع می‌شود",
+  "continueReading": "ادامه خواندن",
+  "lastRead": "آخرین خوانده شده",
+  "resume": "از سرگیری",
+  "startReading": "شروع خواندن",
+  "verses": "آیات",
+  "makki": "مکی",
+  "madani": "مدنی",
+  "ayah": "آیه",
+  "edit": "ویرایش"
 }

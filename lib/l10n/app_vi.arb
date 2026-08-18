@@ -428,5 +428,14 @@
   "actualTime": "Thời gian thực: {time}",
   "nextPrayerLabel": "Tiếp theo: {prayerName}",
   "currentPrayerLabel": "Hiện tại: {prayerName}",
-  "startsAt": "{prayerName} bắt đầu lúc {time}"
+  "startsAt": "{prayerName} bắt đầu lúc {time}",
+  "continueReading": "Tiếp tục đọc",
+  "lastRead": "Đọc lần cuối",
+  "resume": "Tiếp tục",
+  "startReading": "Bắt đầu đọc",
+  "verses": "Câu",
+  "makki": "Mecca",
+  "madani": "Medina",
+  "ayah": "Câu",
+  "edit": "Chỉnh sửa"
 }

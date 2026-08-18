@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:al_quran_v3/l10n/app_localizations.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
 import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
@@ -28,21 +26,21 @@ class ResourceTabBar extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-            child: Container(
-              height: 44,
-              decoration: BoxDecoration(
-                color: themeState.primaryShade100.withValues(alpha: 0.7),
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(
-                  color: themeState.primaryShade100,
-                  width: 1.0,
-                ),
-              ),
-              child: TabBar(
+        child: Container(
+          height: 44,
+          decoration: BoxDecoration(
+            color: Theme.brightnessOf(context) == Brightness.dark
+                ? const Color(0xFF1E1E1E)
+                : themeState.primaryShade100.withValues(alpha: 0.9),
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(
+              color: Theme.brightnessOf(context) == Brightness.dark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : themeState.primaryShade200,
+              width: 1.0,
+            ),
+          ),
+          child: TabBar(
                 controller: tabController,
                 splashBorderRadius: BorderRadius.circular(100),
                 indicator: BoxDecoration(
@@ -72,8 +70,6 @@ class ResourceTabBar extends StatelessWidget {
                   context.read<QuranResourcesCubit>().changeTab(index);
                 },
               ),
-            ),
-          ),
         ),
       ),
     );

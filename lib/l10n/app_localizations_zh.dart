@@ -1395,4 +1395,31 @@ class AppLocalizationsZh extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName 开始于 $time';
   }
+
+  @override
+  String get continueReading => '继续阅读';
+
+  @override
+  String get lastRead => '上次阅读';
+
+  @override
+  String get resume => '继续';
+
+  @override
+  String get startReading => '开始阅读';
+
+  @override
+  String get verses => '节';
+
+  @override
+  String get makki => '麦加降示';
+
+  @override
+  String get madani => '麦地那降示';
+
+  @override
+  String get ayah => '节';
+
+  @override
+  String get edit => '编辑';
 }

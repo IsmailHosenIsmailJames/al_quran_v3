@@ -1451,4 +1451,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName начинается в $time';
   }
+
+  @override
+  String get continueReading => 'Продолжить чтение';
+
+  @override
+  String get lastRead => 'Последнее прочитанное';
+
+  @override
+  String get resume => 'Возобновить';
+
+  @override
+  String get startReading => 'Начать чтение';
+
+  @override
+  String get verses => 'Аяты';
+
+  @override
+  String get makki => 'Мекканская';
+
+  @override
+  String get madani => 'Мединская';
+
+  @override
+  String get ayah => 'Аят';
+
+  @override
+  String get edit => 'Редактировать';
 }

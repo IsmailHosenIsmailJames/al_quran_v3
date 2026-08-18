@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
@@ -118,7 +116,6 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
         }
       },
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         appBar: isSmallScreen
             ? null
             : PreferredSize(
@@ -130,21 +127,6 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
                   child: AppBar(
                     elevation: 0,
                     titleSpacing: 0,
-                    flexibleSpace: ClipRRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: themeState.mutedGray),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    backgroundColor: Theme.brightnessOf(context) == Brightness.dark
-                        ? Colors.grey.shade900.withValues(alpha: 0.5)
-                        : Colors.grey.shade200.withValues(alpha: 0.5),
                     title: Text(appLocalizations.appLanguage),
                     centerTitle: true,
                     actions: [

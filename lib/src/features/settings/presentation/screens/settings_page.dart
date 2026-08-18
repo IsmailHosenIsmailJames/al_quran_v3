@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
@@ -27,25 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return Scaffold(
-          extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: Text(appLocalizations.settings),
-            flexibleSpace: ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: themeState.mutedGray),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            backgroundColor:
-                Theme.brightnessOf(context) == Brightness.dark
-                    ? Colors.grey.shade900.withValues(alpha: 0.5)
-                    : Colors.grey.shade200.withValues(alpha: 0.5),
             actions: [themeIconButton(context)],
           ),
           body: SingleChildScrollView(

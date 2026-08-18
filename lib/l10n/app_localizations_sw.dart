@@ -1450,4 +1450,31 @@ class AppLocalizationsSw extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName inaanza saa $time';
   }
+
+  @override
+  String get continueReading => 'Endelea Kusoma';
+
+  @override
+  String get lastRead => 'Iliyosomwa Mwisho';
+
+  @override
+  String get resume => 'Rejelea';
+
+  @override
+  String get startReading => 'Anza Kusoma';
+
+  @override
+  String get verses => 'Aya';
+
+  @override
+  String get makki => 'Makkiyah';
+
+  @override
+  String get madani => 'Madaniyah';
+
+  @override
+  String get ayah => 'Aya';
+
+  @override
+  String get edit => 'Hariri';
 }

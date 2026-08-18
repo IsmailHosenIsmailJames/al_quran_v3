@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_state.dart";
@@ -8,7 +6,6 @@ import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/re
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/tafsir_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/translation_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/word_by_word_resources_tab.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -69,29 +66,10 @@ class _QuranResourcesViewState extends State<_QuranResourcesView>
 
   @override
   Widget build(BuildContext context) {
-    final themeState = context.watch<ThemeCubit>().state;
     final cubit = context.read<QuranResourcesCubit>();
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        flexibleSpace: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: themeState.mutedGray.withValues(alpha: 0.5),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey.shade900.withValues(alpha: 0.6)
-            : Colors.grey.shade100.withValues(alpha: 0.6),
         title: ResourceSearchBar(searchController: _searchController),
         actions: [
           BlocBuilder<QuranResourcesCubit, QuranResourcesState>(

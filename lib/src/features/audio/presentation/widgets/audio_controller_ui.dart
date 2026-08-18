@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_ayah_count.dart";
@@ -109,24 +107,18 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 ),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(roundedRadius + 4),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF1E1E1E).withValues(alpha: 0.88)
-                        : Colors.white.withValues(alpha: 0.92),
-                    borderRadius: BorderRadius.circular(roundedRadius + 4),
-                    border: Border.all(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : themeState.primary.withValues(alpha: 0.15),
-                    ),
-                  ),
-                  child: Column(
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+                borderRadius: BorderRadius.circular(roundedRadius + 4),
+                border: Border.all(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.1)
+                      : themeState.primary.withValues(alpha: 0.15),
+                ),
+              ),
+              child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // Header Row: Surah/Ayah Info + Action Buttons
@@ -141,9 +133,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   ),
                 ),
               ),
-            ),
-          ),
-        );
+            );
       },
     );
   }

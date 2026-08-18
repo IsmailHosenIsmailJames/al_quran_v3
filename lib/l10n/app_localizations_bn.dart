@@ -1444,4 +1444,31 @@ class AppLocalizationsBn extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName শুরু $time';
   }
+
+  @override
+  String get continueReading => 'পড়া চালিয়ে যান';
+
+  @override
+  String get lastRead => 'সর্বশেষ পাঠ';
+
+  @override
+  String get resume => 'শুরু করুন';
+
+  @override
+  String get startReading => 'পড়া শুরু করুন';
+
+  @override
+  String get verses => 'আয়াত';
+
+  @override
+  String get makki => 'মাক্কী';
+
+  @override
+  String get madani => 'মাদানী';
+
+  @override
+  String get ayah => 'আয়াত';
+
+  @override
+  String get edit => 'সম্পাদনা';
 }

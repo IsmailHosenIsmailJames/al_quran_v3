@@ -1414,4 +1414,31 @@ class AppLocalizationsKo extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName 시작 시간 $time';
   }
+
+  @override
+  String get continueReading => '계속 읽기';
+
+  @override
+  String get lastRead => '마지막으로 읽은 곳';
+
+  @override
+  String get resume => '재개';
+
+  @override
+  String get startReading => '읽기 시작';
+
+  @override
+  String get verses => '구절';
+
+  @override
+  String get makki => '메카 계시';
+
+  @override
+  String get madani => '메디나 계시';
+
+  @override
+  String get ayah => '구절';
+
+  @override
+  String get edit => '편집';
 }

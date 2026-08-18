@@ -1439,4 +1439,31 @@ class AppLocalizationsFa extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName در $time شروع می‌شود';
   }
+
+  @override
+  String get continueReading => 'ادامه خواندن';
+
+  @override
+  String get lastRead => 'آخرین خوانده شده';
+
+  @override
+  String get resume => 'از سرگیری';
+
+  @override
+  String get startReading => 'شروع خواندن';
+
+  @override
+  String get verses => 'آیات';
+
+  @override
+  String get makki => 'مکی';
+
+  @override
+  String get madani => 'مدنی';
+
+  @override
+  String get ayah => 'آیه';
+
+  @override
+  String get edit => 'ویرایش';
 }

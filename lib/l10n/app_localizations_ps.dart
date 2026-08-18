@@ -1440,4 +1440,31 @@ class AppLocalizationsPs extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName په $time پیل کیږي';
   }
+
+  @override
+  String get continueReading => 'لوستلو ته دوام ورکړئ';
+
+  @override
+  String get lastRead => 'وروستی لوستل شوی';
+
+  @override
+  String get resume => 'بیا پیل کړئ';
+
+  @override
+  String get startReading => 'لوستل پیل کړئ';
+
+  @override
+  String get verses => 'آیاتونه';
+
+  @override
+  String get makki => 'مکي';
+
+  @override
+  String get madani => 'مدني';
+
+  @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'سمون';
 }

@@ -300,10 +300,20 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Colors.grey.shade100,
                   ),
                   textTheme: getTextTheme(languageState.locale, false),
-                  appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.transparent,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.white,
+                    surfaceTintColor: Colors.transparent,
+                    scrolledUnderElevation: 0,
                     elevation: 0,
                     titleSpacing: 0,
+                    iconTheme: IconThemeData(color: Colors.grey.shade800),
+                  ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    selectedItemColor: themeState.primary,
+                    unselectedItemColor: Colors.grey.shade600,
+                    type: BottomNavigationBarType.fixed,
                   ),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
@@ -325,9 +335,19 @@ class MyApp extends StatelessWidget {
                   ),
                   textTheme: getTextTheme(languageState.locale, true),
                   appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: Color(0xFF121212),
+                    surfaceTintColor: Colors.transparent,
+                    scrolledUnderElevation: 0,
                     elevation: 0,
                     titleSpacing: 0,
+                    iconTheme: IconThemeData(color: Colors.white),
+                  ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor: const Color(0xFF121212),
+                    elevation: 0,
+                    selectedItemColor: themeState.primary,
+                    unselectedItemColor: Colors.grey.shade400,
+                    type: BottomNavigationBarType.fixed,
                   ),
                 ),
                 themeMode: themeState.themeMode,

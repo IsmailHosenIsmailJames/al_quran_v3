@@ -690,5 +690,14 @@
   "actualTime": "Gerçek Vakit: {time}",
   "nextPrayerLabel": "Sonraki: {prayerName}",
   "currentPrayerLabel": "Şimdi: {prayerName}",
-  "startsAt": "{prayerName} {time} vaktinde başlar"
+  "startsAt": "{prayerName} {time} vaktinde başlar",
+  "continueReading": "Okumaya Devam Et",
+  "lastRead": "Son Okunan",
+  "resume": "Devam Et",
+  "startReading": "Okumaya Başla",
+  "verses": "Ayet",
+  "makki": "Mekkî",
+  "madani": "Medenî",
+  "ayah": "Ayet",
+  "edit": "Düzenle"
 }

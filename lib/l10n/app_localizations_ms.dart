@@ -1440,4 +1440,31 @@ class AppLocalizationsMs extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName bermula jam $time';
   }
+
+  @override
+  String get continueReading => 'Teruskan Membaca';
+
+  @override
+  String get lastRead => 'Terakhir Dibaca';
+
+  @override
+  String get resume => 'Sambung';
+
+  @override
+  String get startReading => 'Mula Membaca';
+
+  @override
+  String get verses => 'Ayat';
+
+  @override
+  String get makki => 'Makkiyyah';
+
+  @override
+  String get madani => 'Madaniyyah';
+
+  @override
+  String get ayah => 'Ayat';
+
+  @override
+  String get edit => 'Sunting';
 }

@@ -1442,4 +1442,31 @@ class AppLocalizationsUr extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName کا آغاز $time';
   }
+
+  @override
+  String get continueReading => 'پڑھنا جاری رکھیں';
+
+  @override
+  String get lastRead => 'آخری بار پڑھا گیا';
+
+  @override
+  String get resume => 'دوبارہ شروع کریں';
+
+  @override
+  String get startReading => 'پڑھنا شروع کریں';
+
+  @override
+  String get verses => 'آیات';
+
+  @override
+  String get makki => 'مکی';
+
+  @override
+  String get madani => 'مدنی';
+
+  @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'ترمیم';
 }

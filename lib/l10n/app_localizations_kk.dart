@@ -1439,4 +1439,31 @@ class AppLocalizationsKk extends AppLocalizations {
   String startsAt(String prayerName, String time) {
     return '$prayerName уақыты: $time';
   }
+
+  @override
+  String get continueReading => 'Оқуды жалғастыру';
+
+  @override
+  String get lastRead => 'Соңғы оқылған';
+
+  @override
+  String get resume => 'Жалғастыру';
+
+  @override
+  String get startReading => 'Оқуды бастау';
+
+  @override
+  String get verses => 'Аяттар';
+
+  @override
+  String get makki => 'Меккелік';
+
+  @override
+  String get madani => 'Мәдиналық';
+
+  @override
+  String get ayah => 'Аят';
+
+  @override
+  String get edit => 'Өңдеу';
 }
