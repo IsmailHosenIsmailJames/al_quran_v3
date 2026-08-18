@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/utils/show_popup_word_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
@@ -7,6 +5,45 @@ import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:html/parser.dart" show parseFragment;
 import "package:html/dom.dart" as dom;
+
+class _WordToken {
+  final String text;
+  final String? ruleClass;
+  const _WordToken(this.text, [this.ruleClass]);
+}
+
+// In-memory cache for parsed HTML tokens of tajweed words to avoid repeated DOM parsing
+final Map<String, List<_WordToken>> _tokenCache = {};
+final Map<String, String> _plainTextWordCache = {};
+
+List<_WordToken> _tokenizeTajweedWord(String rawWord) {
+  final cached = _tokenCache[rawWord];
+  if (cached != null) return cached;
+
+  final List<_WordToken> tokens = [];
+  final fragment = parseFragment("$rawWord ");
+
+  void walk(dom.Node node, String? currentRule) {
+    if (node.nodeType == dom.Node.TEXT_NODE) {
+      if (node.text != null && node.text!.isNotEmpty) {
+        tokens.add(_WordToken(node.text!, currentRule));
+      }
+    } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
+      final el = node as dom.Element;
+      final rule = el.localName == "rule" ? el.attributes["class"] : currentRule;
+      for (final child in el.nodes) {
+        walk(child, rule);
+      }
+    }
+  }
+
+  for (final rootNode in fragment.nodes) {
+    walk(rootNode, null);
+  }
+
+  _tokenCache[rawWord] = tokens;
+  return tokens;
+}
 
 TextSpan parseTajweedWord({
   required TextStyle baseStyle,
@@ -16,9 +53,8 @@ TextSpan parseTajweedWord({
   required int ayahNumber,
   required bool skipWordTap,
   required bool tajweedColorEnable,
-  required wordIndex,
+  required dynamic wordIndex,
 }) {
-  List<TextSpan> spans = [];
   final brightness = Theme.brightnessOf(context);
   final bool isLight = brightness == Brightness.light;
 
@@ -27,7 +63,6 @@ TextSpan parseTajweedWord({
     IdghamShafawiRule.key: isLight
         ? IdghamShafawiRule.lightColor
         : IdghamShafawiRule.darkColor,
-
     IqlabRule.key: isLight ? IqlabRule.lightColor : IqlabRule.darkColor,
     IkhafaShafawiRule.key: isLight
         ? IkhafaShafawiRule.lightColor
@@ -57,12 +92,10 @@ TextSpan parseTajweedWord({
     MaddJaizMunfasilRule.key: isLight
         ? MaddJaizMunfasilRule.lightColor
         : MaddJaizMunfasilRule.darkColor,
-
     HamWaslRule.key: isLight ? HamWaslRule.lightColor : HamWaslRule.darkColor,
     LaamShamsiyahRule.key: isLight
         ? LaamShamsiyahRule.lightColor
         : LaamShamsiyahRule.darkColor,
-
     SlntRule.key: isLight ? SlntRule.lightColor : SlntRule.darkColor,
     IdghamMutajanisaynRule.key: isLight
         ? IdghamMutajanisaynRule.lightColor
@@ -78,97 +111,59 @@ TextSpan parseTajweedWord({
   final defaultColor =
       baseStyle.color ??
       Theme.of(context).textTheme.bodyMedium?.color ??
-      (brightness == Brightness.light ? Colors.black : Colors.white);
+      (isLight ? Colors.black : Colors.white);
 
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
-  bool isLastWord = wordIndex == words.length - 1;
+  final int wIndex = wordIndex is int ? wordIndex : (int.tryParse(wordIndex.toString()) ?? 0);
+  final bool isLastWord = wIndex == words.length - 1;
+  final String rawWord = words[wIndex];
+
+  GestureRecognizer? recognizer;
+  if (!skipWordTap) {
+    recognizer = TapGestureRecognizer()
+      ..onTap = () async {
+        final List<String> wordsKey = List.generate(
+          words.length,
+          (index) => "$surahNumber:$ayahNumber:${index + 1}",
+        );
+        showPopupWordFunction(
+          context: context,
+          wordKeys: wordsKey,
+          initWordIndex: wIndex,
+          wordByWordList:
+              await WordByWordFunction.getAyahWordByWordData(
+                "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+              ) ??
+              [],
+        );
+      };
+  }
 
   if (!tajweedColorEnable) {
     return TextSpan(
-      text: "${getPlainTextAyahFromTajweedWords([words[wordIndex]])} ",
+      text: "${getPlainTextAyahFromTajweedWords([rawWord])} ",
       style: processingStyle.copyWith(
         fontFamily: isLastWord ? "QPC_Hafs" : null,
       ),
-      recognizer: skipWordTap == true
-          ? null
-          : (TapGestureRecognizer()
-              ..onTap = () async {
-                List<String> wordsKey = List.generate(
-                  words.length,
-                  (index) => "$surahNumber:$ayahNumber:${index + 1}",
-                );
-                showPopupWordFunction(
-                  context: context,
-                  wordKeys: wordsKey,
-                  initWordIndex: wordIndex,
-                  wordByWordList:
-                      await WordByWordFunction.getAyahWordByWordData(
-                        "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                      ) ??
-                      [],
-                );
-              }),
+      recognizer: recognizer,
     );
   }
 
-  void processNode(dom.Node node, Color currentColor) {
-    if (node.nodeType == dom.Node.TEXT_NODE) {
-      spans.add(
-        TextSpan(
-          text: node.text,
-          style: processingStyle.copyWith(
-            color: currentColor,
-            fontFamily: isLastWord ? "QPC_Hafs" : null,
-          ),
-          recognizer: skipWordTap == true
-              ? null
-              : (TapGestureRecognizer()
-                  ..onTap = () async {
-                    List<String> wordsKey = List.generate(
-                      words.length,
-                      (index) => "$surahNumber:$ayahNumber:${index + 1}",
-                    );
-                    showPopupWordFunction(
-                      context: context,
-                      wordKeys: wordsKey,
-                      initWordIndex: wordIndex,
-                      wordByWordList:
-                          await WordByWordFunction.getAyahWordByWordData(
-                            "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                          ) ??
-                          [],
-                    );
-                  }),
-        ),
-      );
-    } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
-      dom.Element element = node as dom.Element;
-      Color nextColor = currentColor;
-
-      if (element.localName == "rule") {
-        String? ruleClass = element.attributes["class"];
-        if (tajweedColorEnable &&
-            ruleClass != null &&
-            currentThemeColors.containsKey(ruleClass)) {
-          nextColor = currentThemeColors[ruleClass]!;
-        } else if (tajweedColorEnable && ruleClass != null) {
-          log(
-            "Warning: Unknown/unmapped Tajweed rule class '$ruleClass' in word: ${words[wordIndex]} ",
-          );
-        }
-      }
-
-      if (element.nodes.isNotEmpty) {
-        for (var childNode in element.nodes) {
-          processNode(childNode, nextColor);
-        }
-      }
+  final tokens = _tokenizeTajweedWord(rawWord);
+  final List<TextSpan> spans = tokens.map((token) {
+    Color color = defaultColor;
+    if (token.ruleClass != null && currentThemeColors.containsKey(token.ruleClass)) {
+      color = currentThemeColors[token.ruleClass]!;
     }
-  }
-
-  for (var node in parseFragment("${words[wordIndex]} ").nodes) {
-    processNode(node, defaultColor);
-  }
+    return TextSpan(
+      text: token.text,
+      style: processingStyle.copyWith(
+        color: color,
+        fontFamily: isLastWord ? "QPC_Hafs" : null,
+      ),
+      recognizer: recognizer,
+    );
+  }).toList();
 
   return TextSpan(children: spans, style: processingStyle);
 }
@@ -176,25 +171,17 @@ TextSpan parseTajweedWord({
 String getPlainTextAyahFromTajweedWords(List<String> tajweedWords) {
   List<String> plainWords = [];
   for (String wordWithTajweed in tajweedWords) {
-    final documentFragment = parseFragment(wordWithTajweed);
-
-    String textContent = "";
-    void extractText(dom.Node node) {
-      if (node.nodeType == dom.Node.TEXT_NODE) {
-        textContent += node.text ?? "";
-      } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
-        for (var childNode in node.nodes) {
-          extractText(childNode);
-        }
-      }
+    final cached = _plainTextWordCache[wordWithTajweed];
+    if (cached != null) {
+      plainWords.add(cached);
+      continue;
     }
 
-    for (var node in documentFragment.nodes) {
-      extractText(node);
-    }
-    plainWords.add(textContent);
+    final tokens = _tokenizeTajweedWord(wordWithTajweed);
+    final text = tokens.map((t) => t.text).join("").trim();
+    _plainTextWordCache[wordWithTajweed] = text;
+    plainWords.add(text);
   }
 
-  String planeText = plainWords.join(" ").trim();
-  return planeText;
+  return plainWords.join(" ").trim();
 }

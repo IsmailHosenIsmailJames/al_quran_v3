@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
 
-Map<String, TranslationWithWordByWord> cacheOfAyahKeys = {};
+final Map<String, TranslationWithWordByWord> cacheOfAyahKeys = {};
 
 TranslationWithWordByWord? getTranslationFromCache(String ayahKey) {
   return cacheOfAyahKeys[ayahKey];
@@ -11,6 +11,9 @@ TranslationWithWordByWord? getTranslationFromCache(String ayahKey) {
 Future<TranslationWithWordByWord> getTranslationWithWordByWord(
   String ayahKey,
 ) async {
+  final cached = cacheOfAyahKeys[ayahKey];
+  if (cached != null) return cached;
+
   final TranslationWithWordByWord translationWithWordByWord =
       TranslationWithWordByWord(
         translationList: await QuranTranslationFunction.getTranslation(ayahKey),
@@ -18,6 +21,15 @@ Future<TranslationWithWordByWord> getTranslationWithWordByWord(
       );
   cacheOfAyahKeys[ayahKey] = translationWithWordByWord;
   return translationWithWordByWord;
+}
+
+/// Pre-warms the translation cache for a list of Ayahs in the background.
+Future<void> prewarmAyahsTranslation(List<String> ayahKeys) async {
+  for (final key in ayahKeys) {
+    if (!cacheOfAyahKeys.containsKey(key)) {
+      getTranslationWithWordByWord(key);
+    }
+  }
 }
 
 class TranslationWithWordByWord {

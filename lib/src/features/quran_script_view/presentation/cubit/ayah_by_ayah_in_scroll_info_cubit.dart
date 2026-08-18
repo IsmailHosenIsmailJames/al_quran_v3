@@ -15,6 +15,21 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
         ),
       );
 
+  void toggleView() {
+    setData(isAyahByAyah: !state.isAyahByAyah);
+  }
+
+  void toggleWordByWord(String ayahKey) {
+    final List<String> list =
+        List<String>.from(state.expandedForWordByWord ?? []);
+    if (list.contains(ayahKey)) {
+      list.remove(ayahKey);
+    } else {
+      list.add(ayahKey);
+    }
+    setData(expandedForWordByWord: list);
+  }
+
   void setData({
     SurahInfoModel? surahInfoModel,
     List<String>? expandedForWordByWord,
@@ -25,10 +40,13 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
   }) {
     final newState = state.copyWith(
       surahInfoModel: surahInfoModel ?? state.surahInfoModel,
-      expandedForWordByWord: expandedForWordByWord ?? state.expandedForWordByWord,
+      expandedForWordByWord:
+          expandedForWordByWord ?? state.expandedForWordByWord,
       isAyahByAyah: isAyahByAyah ?? state.isAyahByAyah,
       pageByPageList: pageByPageList ?? state.pageByPageList,
-      dropdownAyahKey: clearDropdownAyahKey ? null : (dropdownAyahKey ?? state.dropdownAyahKey),
+      dropdownAyahKey: clearDropdownAyahKey
+          ? null
+          : (dropdownAyahKey ?? state.dropdownAyahKey),
     );
     if (newState != state) {
       emit(newState);
