@@ -2,7 +2,7 @@
 // import "package:alarm/model/notification_settings.dart";
 // import "package:alarm/model/volume_settings.dart";
 // import "package:flutter/material.dart";
-// import "package:al_quran_v3/src/platform_services.dart" as platform_services;
+// import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
 
 // import "../../../main.dart";
 

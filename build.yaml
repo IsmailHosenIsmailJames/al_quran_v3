@@ -1,0 +1,6 @@
+targets:
+  $default:
+    sources:
+      - lib/src/**
+      - lib/main.dart
+      - pubspec.yaml

@@ -1255,4 +1255,212 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'وقت كراهة الصلاة';
+
+  @override
+  String get translationDatabase => 'قاعدة بيانات الترجمة';
+
+  @override
+  String get translationDatabaseSubtitle => 'تنزيل نص الترجمة المحدد';
+
+  @override
+  String get tafsirCommentary => 'تفسير القرآن';
+
+  @override
+  String get tafsirCommentarySubtitle => 'إعداد مصادر التفسير';
+
+  @override
+  String get wordByWordAnalysis => 'التحليل كلمة بكلمة';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'إعداد تفكيك المفردات';
+
+  @override
+  String get audioRecitationSegments => 'أجزاء التلاوة الصوتية';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'تكوين التوقيت الصوتي للآيات';
+
+  @override
+  String get locationQiblaMetadata => 'بيانات الموقع والقبلة';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'تنزيل بيانات مواقع المدن العالمية';
+
+  @override
+  String get preparingResources => 'جاري إعداد المصادر...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'اكتمل الإعداد! جاري فتح القرآن...';
+
+  @override
+  String get unexpectedErrorSetup => 'حدث خطأ غير متوقع أثناء الإعداد.';
+
+  @override
+  String get heading => 'الاتجاه';
+
+  @override
+  String get alignedWithKaaba => 'محاذٍ للكعبة';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'أدر $degrees° إلى اليمين';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'أدر $degrees° إلى اليسار';
+  }
+
+  @override
+  String get streamingAndNetwork => 'البث والشبكة';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get now => 'الآن';
+
+  @override
+  String get current => 'الحالي';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get activeNow => 'نشط الآن';
+
+  @override
+  String get hours => 'ساعات';
+
+  @override
+  String get minutes => 'دقائق';
+
+  @override
+  String get seconds => 'ثوانٍ';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'أوقات الصيام والتطوع';
+
+  @override
+  String get imsak => 'الإمساك';
+
+  @override
+  String get ishraqAndDuha => 'الإشراق والضحى';
+
+  @override
+  String get lastThirdOfNight => 'الثلث الأخير من الليل';
+
+  @override
+  String get awqatAlNahy => 'أوقات النهي عن الصلاة';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'من طلوع الشمس حتى ترتفع قيد رمح (نحو 15 دقيقة)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'عند استواء الشمس في كبد السماء حتى تزول (~8 دقائق)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'عند اصفرار الشمس حتى تغرب تماماً (~15 دقيقة)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'جاء في صحيح مسلم (832) عن عقبة بن عامر الجهني رضي الله عنه قال:\n\n«ثلاث ساعات كان رسول الله صلى الله عليه وسلم ينهانا أن نصلي فيهن أو أن نقبر فيهن موتانا:\n1. حين تطلع الشمس بازغة حتى ترتفع.\n2. وحين يقوم قائم الظهيرة حتى تميل الشمس.\n3. وحين تضيّف الشمس للغروب حتى تغرب.»';
+
+  @override
+  String get readMoreOnIslamQA => 'اقرأ الفتوى كاملة على IslamQA';
+
+  @override
+  String get asrJurisprudence => 'مذهب حساب صلاة العصر';
+
+  @override
+  String get shafieDescription => 'الجمهور (الشافعي، المالكي، الحنبلي)';
+
+  @override
+  String get hanafiDescription => 'المذهب الحنفي';
+
+  @override
+  String get shafieShadow => 'الجمهور (الظل 1x)';
+
+  @override
+  String get hanafiShadow => 'الحنفي (الظل 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'طرق الحساب والمذهب';
+
+  @override
+  String get notificationsAndAudio => 'الإشعارات والصوت';
+
+  @override
+  String get enablePrayerReminders => 'تفعيل تنبيهات الصلاة';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'تلقي إشعارات تنبيهية لجميع أوقات الصلاة القادمة.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'ضبط وقت تنبيه الصلاة (+/- دقائق عن بداية الوقت الفعلي).';
+
+  @override
+  String get exactTime => 'الوقت بالضبط';
+
+  @override
+  String actualTime(String time) {
+    return 'الوقت الفعلي: $time';
+  }
+
+  @override
+  String get jumpToToday => 'الانتقال إلى اليوم';
+
+  @override
+  String get dateAndHijri => 'التاريخ / الهجري';
+
+  @override
+  String get selectedLocation => 'الموقع المحدد';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'التالي: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'الآن: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return 'يبدأ $prayerName في $time';
+  }
+
+  @override
+  String get continueReading => 'متابعة القراءة';
+
+  @override
+  String get lastRead => 'آخر قراءة';
+
+  @override
+  String get resume => 'استئناف';
+
+  @override
+  String get startReading => 'ابدأ القراءة';
+
+  @override
+  String get verses => 'آيات';
+
+  @override
+  String get makki => 'مكية';
+
+  @override
+  String get madani => 'مدنية';
+
+  @override
+  String get ayah => 'آية';
+
+  @override
+  String get edit => 'تعديل';
 }

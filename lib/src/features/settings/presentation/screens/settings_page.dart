@@ -1,0 +1,90 @@
+import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/theme/widgets/theme_icon_button.dart";
+import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
+import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
+import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
+
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  late AppLocalizations appLocalizations;
+  @override
+  Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, themeState) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(appLocalizations.settings),
+            actions: [themeIconButton(context)],
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(10),
+
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    appLocalizations.appTheme,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Divider(color: themeState.primaryShade300),
+                  const ThemeSettings(),
+                  const Gap(20),
+                  Text(
+                    appLocalizations.quranStyle,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const QuranScriptSettings(showAudioSpeedController: false),
+                  const Gap(30),
+                  Text(
+                    appLocalizations.audioSettings,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const AudioSettings(),
+                  const Gap(30),
+                  Text(
+                    appLocalizations.others,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Divider(color: themeState.primaryShade300),
+                  const Gap(5),
+                  const OthersSettings(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

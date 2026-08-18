@@ -1270,4 +1270,218 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Tempo de oração proibido';
+
+  @override
+  String get translationDatabase => 'Banco de dados de tradução';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Baixando texto de tradução selecionado';
+
+  @override
+  String get tafsirCommentary => 'Comentário Tafsir';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Preparando recursos de tafsir';
+
+  @override
+  String get wordByWordAnalysis => 'Análise palavra por palavra';
+
+  @override
+  String get wordByWordAnalysisSubtitle =>
+      'Configurando divisão de vocabulário';
+
+  @override
+  String get audioRecitationSegments => 'Segmentos de recitação de áudio';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Configurando segmentos de tempo de versos';
+
+  @override
+  String get locationQiblaMetadata => 'Metadados de localização e Qibla';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Baixando dados de localização de cidades globais';
+
+  @override
+  String get preparingResources => 'Preparando recursos...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Configuração concluída! Abrindo o Al-Corão...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Ocorreu um erro inesperado durante a configuração.';
+
+  @override
+  String get heading => 'Rumo';
+
+  @override
+  String get alignedWithKaaba => 'Alinhado com a Caaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Vire $degrees° à direita';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Vire $degrees° à esquerda';
+  }
+
+  @override
+  String get streamingAndNetwork => 'Transmissão e rede';
+
+  @override
+  String get next => 'Próximo';
+
+  @override
+  String get now => 'Agora';
+
+  @override
+  String get current => 'Atual';
+
+  @override
+  String get active => 'Ativo';
+
+  @override
+  String get activeNow => 'Ativo agora';
+
+  @override
+  String get hours => 'Horas';
+
+  @override
+  String get minutes => 'Minutos';
+
+  @override
+  String get seconds => 'Segundos';
+
+  @override
+  String get fastingAndVoluntaryTimes =>
+      'Horários de jejum e orações voluntárias';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ishraq e Duha';
+
+  @override
+  String get lastThirdOfNight => 'Último terço da noite';
+
+  @override
+  String get awqatAlNahy => 'Horários proibidos de oração';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Do nascer do sol até subir a altura de uma lança (~15 min)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Quando o sol está no zênite até o início de Dhuhr (~8 min)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Quando o sol amarela até o pôr do sol completo (~15 min)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Ler fatwa completa no IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Jurisprudência de Asr (Madhab)';
+
+  @override
+  String get shafieDescription => 'Padrão (Shafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Escola Hanafi';
+
+  @override
+  String get shafieShadow => 'Padrão (Sombra 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Sombra 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Cálculo e Jurisprudência';
+
+  @override
+  String get notificationsAndAudio => 'Notificações e Áudio';
+
+  @override
+  String get enablePrayerReminders => 'Ativar lembretes de oração';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Receba alertas de notificação para todos os próximos horários de oração.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Ajuste o horário do lembrete (+/- minutos do horário real).';
+
+  @override
+  String get exactTime => 'Horário exato';
+
+  @override
+  String actualTime(String time) {
+    return 'Horário real: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Ir para hoje';
+
+  @override
+  String get dateAndHijri => 'Data / Hijri';
+
+  @override
+  String get selectedLocation => 'Localização selecionada';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Próxima: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Agora: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName começa às $time';
+  }
+
+  @override
+  String get continueReading => 'Continuar lendo';
+
+  @override
+  String get lastRead => 'Última leitura';
+
+  @override
+  String get resume => 'Retomar';
+
+  @override
+  String get startReading => 'Começar a ler';
+
+  @override
+  String get verses => 'Versículos';
+
+  @override
+  String get makki => 'Mequense';
+
+  @override
+  String get madani => 'Medinense';
+
+  @override
+  String get ayah => 'Versículo';
+
+  @override
+  String get edit => 'Editar';
 }

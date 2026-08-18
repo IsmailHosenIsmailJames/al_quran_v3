@@ -2,40 +2,42 @@ import "dart:developer";
 
 // import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/audio/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/player_position_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/core/audio/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/platform_services.dart" as platform_services;
-import "package:al_quran_v3/src/resources/translation/languages.dart";
-import "package:al_quran_v3/src/screen/audio/download_screen/cubit/audio_download_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/background_notification_scheduler.dart";
-import "package:al_quran_v3/src/screen/prayer_time/background/prayer_background_worker.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_to_highlight.dart";
-import "package:al_quran_v3/src/screen/setup/setup_page.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_script_function.dart";
-import "package:al_quran_v3/src/utils/quran_resources/quran_translation_function.dart";
-import "package:al_quran_v3/src/utils/quran_resources/segmented_resources_manager.dart";
-import "package:al_quran_v3/src/utils/quran_resources/word_by_word_function.dart";
-import "package:al_quran_v3/src/resources/translation/language_cubit.dart";
-import "package:al_quran_v3/src/screen/audio/cubit/audio_tab_screen_cubit.dart";
-import "package:al_quran_v3/src/screen/collections/collection_page.dart";
-import "package:al_quran_v3/src/screen/home/home_page.dart";
-import "package:al_quran_v3/src/screen/home/pages/quran/cubit/quick_access_cubit.dart";
-import "package:al_quran_v3/src/screen/location_handler/cubit/location_data_qibla_data_cubit.dart";
-import "package:al_quran_v3/src/screen/prayer_time/cubit/prayer_time_cubit.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
-import "package:al_quran_v3/src/screen/quran_script_view/cubit/landscape_scroll_effect.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/others_settings_cubit.dart";
-import "package:al_quran_v3/src/screen/settings/cubit/quran_script_view_cubit.dart";
-import "package:al_quran_v3/src/screen/setup/cubit/resources_progress_cubit_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/theme/functions/theme_functions.dart";
-import "package:al_quran_v3/src/widget/history/cubit/quran_history_cubit.dart";
-import "package:al_quran_v3/src/widget/quran_script/model/script_info.dart";
-import "package:al_quran_v3/src/widget/quran_script_words/cubit/word_playing_state_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/localization/languages.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/segmented_resources_manager.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_background_worker.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
+import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
+import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
+import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+import "package:al_quran_v3/src/features/home/presentation/screens/home_page.dart";
+import "package:al_quran_v3/src/features/home/presentation/cubit/quick_access_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/landscape_scroll_effect.dart";
+import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/theme/functions/theme_functions.dart";
+import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -48,7 +50,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
 
-import "src/screen/location_handler/model/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 
 String? applicationDataPath;
 platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
@@ -90,14 +92,15 @@ Future<void> main() async {
   }
 
   await Hive.openBox("user");
+  await configureDependencies();
 
   MyAppLocalization initialLocale = await LanguageCubit.getInitialLocale();
 
-  QuranTranslationFunction.init(locale: initialLocale.locale);
-  WordByWordFunction.init();
-  Hive.openBox(CollectionType.notes.name);
-  Hive.openBox(CollectionType.pinned.name);
-  SegmentedResourcesManager.init();
+  await QuranTranslationFunction.init(locale: initialLocale.locale);
+  await WordByWordFunction.init();
+  await Hive.openBox(CollectionType.notes.name);
+  await Hive.openBox(CollectionType.pinned.name);
+  await SegmentedResourcesManager.init();
 
   final scriptOnDb = Hive.box("user").get(
     "selected_quran_script_type",
@@ -120,7 +123,7 @@ Future<void> main() async {
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
     await ReminderScheduler.init();
-    await PrayerBackgroundWorker.init();
+    PrayerBackgroundWorker.registerWorker();
   }
 
   runApp(
@@ -234,31 +237,32 @@ class MyApp extends StatelessWidget {
         );
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ResourcesProcceessCubit()),
-        BlocProvider(create: (context) => ThemeCubit()),
-        BlocProvider(create: (context) => AudioUiCubit()),
-        BlocProvider(create: (context) => PlayerPositionCubit()),
-        BlocProvider(create: (context) => AyahKeyCubit()),
-        BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
+        BlocProvider(create: (context) => getIt<ThemeCubit>()),
+        BlocProvider(create: (context) => getIt<AudioUiCubit>()),
+        BlocProvider(create: (context) => getIt<PlayerPositionCubit>()),
+        BlocProvider(create: (context) => getIt<AyahKeyCubit>()),
+        BlocProvider(create: (context) => getIt<AyahByAyahInScrollInfoCubit>()),
         BlocProvider(
-          create: (context) => LocationQiblaPrayerDataCubit(
-            initState: locationQiblaPrayerDataState,
+          create: (context) => getIt<LocationQiblaPrayerDataCubit>(
+            param1: locationQiblaPrayerDataState,
           ),
         ),
-        BlocProvider(create: (context) => SegmentedQuranReciterCubit()),
-        BlocProvider(create: (context) => PlayerStateCubit(PlayerState())),
-        BlocProvider(create: (context) => WordPlayingStateCubit()),
-        BlocProvider(create: (context) => AudioTabReciterCubit()),
-        BlocProvider(create: (context) => AyahByAyahInScrollInfoCubit()),
-        BlocProvider(create: (context) => QuranViewCubit()),
-        BlocProvider(create: (context) => PrayerReminderCubit()),
-        BlocProvider(create: (context) => OthersSettingsCubit()),
-        BlocProvider(create: (context) => LanguageCubit(initialLocale)),
-        BlocProvider(create: (context) => LandscapeScrollEffect()),
-        BlocProvider(create: (context) => QuickAccessCubit()),
-        BlocProvider(create: (context) => QuranHistoryCubit()),
-        BlocProvider(create: (context) => AudioDownloadCubit()),
-        BlocProvider(create: (context) => AyahToHighlight(null)),
+        BlocProvider(create: (context) => getIt<SegmentedQuranReciterCubit>()),
+        BlocProvider(create: (context) => getIt<PlayerStateCubit>()),
+        BlocProvider(create: (context) => getIt<WordPlayingStateCubit>()),
+        BlocProvider(create: (context) => getIt<AudioTabReciterCubit>()),
+        BlocProvider(create: (context) => getIt<QuranViewCubit>()),
+        BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
+        BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),
+        BlocProvider(
+          create: (context) => getIt<LanguageCubit>(param1: initialLocale),
+        ),
+        BlocProvider(create: (context) => getIt<LandscapeScrollEffect>()),
+        BlocProvider(create: (context) => getIt<QuickAccessCubit>()),
+        BlocProvider(create: (context) => getIt<QuranHistoryCubit>()),
+        BlocProvider(create: (context) => getIt<AudioDownloadCubit>()),
+        BlocProvider(create: (context) => getIt<AudioLoopCubit>()),
+        BlocProvider(create: (context) => getIt<AyahToHighlight>()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(
@@ -296,10 +300,20 @@ class MyApp extends StatelessWidget {
                     backgroundColor: Colors.grey.shade100,
                   ),
                   textTheme: getTextTheme(languageState.locale, false),
-                  appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.transparent,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.white,
+                    surfaceTintColor: Colors.transparent,
+                    scrolledUnderElevation: 0,
                     elevation: 0,
                     titleSpacing: 0,
+                    iconTheme: IconThemeData(color: Colors.grey.shade800),
+                  ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    selectedItemColor: themeState.primary,
+                    unselectedItemColor: Colors.grey.shade600,
+                    type: BottomNavigationBarType.fixed,
                   ),
                 ),
                 darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
@@ -321,15 +335,25 @@ class MyApp extends StatelessWidget {
                   ),
                   textTheme: getTextTheme(languageState.locale, true),
                   appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: Color(0xFF121212),
+                    surfaceTintColor: Colors.transparent,
+                    scrolledUnderElevation: 0,
                     elevation: 0,
                     titleSpacing: 0,
+                    iconTheme: IconThemeData(color: Colors.white),
+                  ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor: const Color(0xFF121212),
+                    elevation: 0,
+                    selectedItemColor: themeState.primary,
+                    unselectedItemColor: Colors.grey.shade400,
+                    type: BottomNavigationBarType.fixed,
                   ),
                 ),
                 themeMode: themeState.themeMode,
                 home: isSetupComplete()
                     ? const HomePage()
-                    : const AppSetupPage(),
+                    : const SetupScreen(),
               );
             },
           );
