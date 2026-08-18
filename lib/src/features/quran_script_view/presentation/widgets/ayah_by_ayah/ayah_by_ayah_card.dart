@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/common_functions/remove_html_tag.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_sajda.dart"
@@ -16,6 +14,7 @@ import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_index_badge.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
@@ -26,29 +25,26 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/fast_translation_text.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
-import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_to_pinned_popup.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_note_popup.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/share_bottom_dialog.dart";
-import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
-import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
-import "package:visibility_detector/visibility_detector.dart";
 
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 
+/// Top-level helper function for backward compatibility.
 Widget getAyahByAyahCard({
-  dynamic key,
+  Key? key,
   required String ayahKey,
   required BuildContext context,
   bool? showFullKey,
@@ -61,835 +57,997 @@ Widget getAyahByAyahCard({
   required List wordByWord,
   bool? showBottomsheetOnTap,
 }) {
-  AppLocalizations? l10n = AppLocalizations.of(context);
-
-  int surahNumber = int.parse(ayahKey.toString().split(":")[0]);
-  int ayahNumber = int.parse(ayahKey.toString().split(":")[1]);
-  List<ResourcesModel?> translationBookInfoList = translationListWithInfo
-      .map<ResourcesModel?>((e) => e.bookInfo)
-      .toList();
-  List<String> translationList = translationListWithInfo
-      .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
-      .toList();
-  translationList = translationList
-      .map((e) => e.replaceAll(">", "> "))
-      .toList();
-  List<Map> footNoteList = translationListWithInfo
-      .map<Map>((e) => e.translation?["f"] ?? {})
-      .toList();
-  List<Map<int, String>> footNoteAsStringMap = [];
-  for (int index = 0; index < footNoteList.length; index++) {
-    Map footNote = footNoteList[index];
-    String footNoteAsString = "\n";
-    if (footNote.isNotEmpty) {
-      footNote.forEach((key, value) {
-        footNoteAsString += "$key. $value\n";
-      });
-    }
-    if (footNote.isNotEmpty) {
-      footNoteAsStringMap.add({index: footNoteAsString});
-    } else {
-      footNoteAsStringMap.add({});
-    }
-  }
-
-  bool supportsWordByWord = false;
-  final metaDataOfWordByWord = WordByWordFunction.getSelectedWordByWordBook();
-  if (metaDataOfWordByWord != null) {
-    supportsWordByWord = true;
-  }
-
-  SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah["$surahNumber"]!,
+  return AyahByAyahCard(
+    key: key,
+    ayahKey: ayahKey,
+    showFullKey: showFullKey,
+    showTopOptions: showTopOptions,
+    showOnlyAyah: showOnlyAyah,
+    keepMargin: keepMargin,
+    isCenter: isCenter,
+    removeBorder: removeBorder,
+    translationListWithInfo: translationListWithInfo,
+    wordByWord: wordByWord,
+    showBottomsheetOnTap: showBottomsheetOnTap,
   );
+}
 
-  bool isSajdaAyah = false;
-  bool isSajdaRequired = false;
-  for (Map sajdaAyah in metaDataSajda) {
-    if (sajdaAyah["verse_key"] == ayahKey) {
-      isSajdaAyah = true;
-      isSajdaRequired = sajdaAyah["required"];
-      break;
+/// A high-performance, modern card representing a single Ayah with
+/// its Arabic calligraphy, actions toolbar, translation, footnotes, and word-by-word pills.
+class AyahByAyahCard extends StatelessWidget {
+  final String ayahKey;
+  final bool? showFullKey;
+  final bool showTopOptions;
+  final bool showOnlyAyah;
+  final bool keepMargin;
+  final bool isCenter;
+  final bool removeBorder;
+  final List<TranslationOfAyah> translationListWithInfo;
+  final List wordByWord;
+  final bool? showBottomsheetOnTap;
+
+  const AyahByAyahCard({
+    super.key,
+    required this.ayahKey,
+    this.showFullKey,
+    this.showTopOptions = true,
+    this.showOnlyAyah = false,
+    this.keepMargin = true,
+    this.isCenter = false,
+    this.removeBorder = false,
+    required this.translationListWithInfo,
+    required this.wordByWord,
+    this.showBottomsheetOnTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final isDark = Theme.brightnessOf(context) == Brightness.dark;
+    final themeState = context.watch<ThemeCubit>().state;
+
+    final parts = ayahKey.split(":");
+    final int surahNumber = int.tryParse(parts.first) ?? 1;
+    final int ayahNumber = int.tryParse(parts.last) ?? 1;
+
+    final List<ResourcesModel?> translationBookInfoList =
+        translationListWithInfo.map<ResourcesModel?>((e) => e.bookInfo).toList();
+
+    final List<String> translationList = translationListWithInfo
+        .map<String>((e) => e.translation?["t"] ?? "Translation Not Found")
+        .toList();
+
+    final List<Map<int, String>> footNoteAsStringMap = [];
+    for (int index = 0; index < translationListWithInfo.length; index++) {
+      final Map footNote = translationListWithInfo[index].translation?["f"] ?? {};
+      String footNoteAsString = "\n";
+      if (footNote.isNotEmpty) {
+        footNote.forEach((key, value) {
+          footNoteAsString += "$key. $value\n";
+        });
+        footNoteAsStringMap.add({index: footNoteAsString});
+      } else {
+        footNoteAsStringMap.add({});
+      }
     }
+
+    final bool supportsWordByWord =
+        WordByWordFunction.getSelectedWordByWordBook() != null;
+
+    final SurahInfoModel surahInfoModel =
+        SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!);
+
+    bool isSajdaAyah = false;
+    bool isSajdaRequired = false;
+    for (Map sajdaAyah in metaDataSajda) {
+      if (sajdaAyah["verse_key"] == ayahKey) {
+        isSajdaAyah = true;
+        isSajdaRequired = sajdaAyah["required"] ?? false;
+        break;
+      }
+    }
+
+    return BlocBuilder<QuranViewCubit, QuranViewState>(
+      builder: (context, quranViewState) {
+        return BlocBuilder<AyahToHighlight, String?>(
+          buildWhen: (previous, current) {
+            return (previous == ayahKey) || (current == ayahKey);
+          },
+          builder: (context, ayahToHighlightState) {
+            final bool isHighlighted = ayahToHighlightState == ayahKey;
+
+            return Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              margin: keepMargin
+                  ? const EdgeInsets.symmetric(horizontal: 10, vertical: 5)
+                  : EdgeInsets.zero,
+              decoration: removeBorder
+                  ? null
+                  : BoxDecoration(
+                      color: isHighlighted
+                          ? themeState.primary.withValues(
+                              alpha: isDark ? 0.12 : 0.06,
+                            )
+                          : (isDark
+                              ? const Color(0xFF181818)
+                              : Colors.white),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isHighlighted
+                            ? themeState.primary
+                            : (isDark
+                                ? Colors.white.withValues(alpha: 0.07)
+                                : themeState.primaryShade200.withValues(alpha: 0.7)),
+                        width: isHighlighted ? 1.5 : 1.0,
+                      ),
+                      boxShadow: [
+                        if (!isDark && !isHighlighted)
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.02),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                      ],
+                    ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Top Toolbar: Verse Index + Actions (Tafsir, Share, Note, Pin, Play)
+                  if (showTopOptions && !quranViewState.hideToolbar)
+                    _AyahToolbar(
+                      ayahKey: ayahKey,
+                      ayahNumber: ayahNumber,
+                      surahNumber: surahNumber,
+                      surahInfoModel: surahInfoModel,
+                      showFullKey: showFullKey,
+                      translation: translationList,
+                      footNoteAsStringMap: footNoteAsStringMap,
+                      translationBookInfoList: translationBookInfoList,
+                      themeState: themeState,
+                      isDark: isDark,
+                      l10n: l10n,
+                    ),
+
+                  if (!quranViewState.hideQuranAyah) const Gap(12),
+
+                  // Arabic Quran Script
+                  if (!quranViewState.hideQuranAyah)
+                    _AyahArabicSection(
+                      surahNumber: surahNumber,
+                      ayahNumber: ayahNumber,
+                      quranViewState: quranViewState,
+                      themeState: themeState,
+                      isCenter: isCenter,
+                      showBottomsheetOnTap: showBottomsheetOnTap,
+                    ),
+
+                  // Sajda Indicator Banner
+                  if (isSajdaAyah) ...[
+                    const Gap(10),
+                    _SajdaBanner(
+                      isSajdaRequired: isSajdaRequired,
+                      themeState: themeState,
+                      isDark: isDark,
+                      l10n: l10n,
+                    ),
+                  ],
+
+                  // Translation Section
+                  if (!showOnlyAyah && !quranViewState.hideTranslation) ...[
+                    const Gap(12),
+                    _AyahTranslationSection(
+                      translationList: translationList,
+                      footNoteAsStringMap: footNoteAsStringMap,
+                      translationBookInfoList: translationBookInfoList,
+                      quranViewState: quranViewState,
+                      showOnlyAyah: showOnlyAyah,
+                      themeState: themeState,
+                      isDark: isDark,
+                      l10n: l10n,
+                    ),
+                  ],
+
+                  // Word-by-Word Expandable Section
+                  if (supportsWordByWord &&
+                      !quranViewState.hideWordByWord &&
+                      wordByWord.isNotEmpty) ...[
+                    const Gap(8),
+                    if (!quranViewState.alwaysOpenWordByWord)
+                      _WordByWordExpandToggle(
+                        ayahKey: ayahKey,
+                        themeState: themeState,
+                        l10n: l10n,
+                      ),
+                    const Gap(4),
+                    _WordByWordContent(
+                      ayahKey: ayahKey,
+                      quranViewState: quranViewState,
+                      wordByWord: wordByWord,
+                      surahNumber: surahNumber,
+                      ayahNumber: ayahNumber,
+                      themeState: themeState,
+                      isDark: isDark,
+                    ),
+                  ],
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
+}
 
-  return BlocBuilder<ThemeCubit, ThemeState>(
-    builder: (context, themeState) {
-      return BlocBuilder<QuranViewCubit, QuranViewState>(
-        buildWhen: (previous, current) {
-          return current != previous;
-        },
-        builder: (context, quranViewState) {
-          return VisibilityDetector(
-            key: Key(ayahKey),
-            onVisibilityChanged: (info) {
-              if (!context.mounted) {
-                return;
-              }
-              context.read<QuranHistoryCubit>().addHistory(ayahKey: ayahKey);
-              try {
-                SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-                  metaDataSurah[ayahKey.split(":").first]!,
-                );
+// ---------------------------------------------------------------------------
+// Subcomponent 1: Ayah Toolbar
+// ---------------------------------------------------------------------------
+class _AyahToolbar extends StatelessWidget {
+  final String ayahKey;
+  final int ayahNumber;
+  final int surahNumber;
+  final SurahInfoModel surahInfoModel;
+  final bool? showFullKey;
+  final List<String> translation;
+  final List<Map<int, String>> footNoteAsStringMap;
+  final List<ResourcesModel?> translationBookInfoList;
+  final ThemeState themeState;
+  final bool isDark;
+  final AppLocalizations l10n;
 
-                context.read<AyahByAyahInScrollInfoCubit>().setData(
-                  surahInfoModel: surahInfoModel,
-                  dropdownAyahKey: ayahKey,
-                );
-              } catch (e) {
-                log(e.toString());
-              }
+  const _AyahToolbar({
+    required this.ayahKey,
+    required this.ayahNumber,
+    required this.surahNumber,
+    required this.surahInfoModel,
+    this.showFullKey,
+    required this.translation,
+    required this.footNoteAsStringMap,
+    required this.translationBookInfoList,
+    required this.themeState,
+    required this.isDark,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // Islamic Octagonal Number Badge
+        QuranIndexBadge(
+          index: ayahNumber,
+          size: 34,
+        ),
+        if (showFullKey == true) ...[
+          const Gap(8),
+          Text(
+            "${getSurahName(context, surahInfoModel.id)} (${localizedNumber(context, surahNumber)}:${localizedNumber(context, ayahNumber)})",
+            style: TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w600,
+              color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+            ),
+          ),
+        ],
+
+        const Spacer(),
+
+        // Tafsir Action Pill
+        SizedBox(
+          height: 32,
+          child: TextButton.icon(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              backgroundColor: isDark
+                  ? Colors.white.withValues(alpha: 0.05)
+                  : themeState.primaryShade100.withValues(alpha: 0.6),
+              foregroundColor: themeState.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : themeState.primaryShade200.withValues(alpha: 0.6),
+                ),
+              ),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TafsirView(ayahKey: ayahKey),
+                ),
+              );
             },
-            child: BlocBuilder<AyahToHighlight, String?>(
-              buildWhen: (previous, current) {
-                return current != previous;
-              },
-              builder: (context, ayahToHighlightState) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  key: key,
-                  padding: const EdgeInsets.all(5),
-                  margin: keepMargin
-                      ? const EdgeInsets.only(
-                          left: 5,
-                          top: 5,
-                          bottom: 5,
-                          right: 5,
-                        )
-                      : null,
-                  decoration: removeBorder
-                      ? null
-                      : BoxDecoration(
-                          borderRadius: BorderRadius.circular(roundedRadius),
-                          border: Border.all(
-                            color: ayahToHighlightState == ayahKey
-                                ? themeState.primary
-                                : themeState.primaryShade200,
-                          ),
-                        ),
-                  child: Column(
-                    children: [
-                      if (!(showTopOptions == false) &&
-                          !quranViewState.hideToolbar)
-                        getToolbarWidget(
-                          showFullKey,
-                          surahInfoModel,
-                          ayahKey,
-                          ayahNumber,
-                          context,
-                          surahNumber,
-                          translationList,
-                          footNoteAsStringMap,
-                          translationBookInfoList,
-                          themeState,
-                        ),
-                      if (!quranViewState.hideQuranAyah) const Gap(10),
-                      if (!quranViewState.hideQuranAyah)
-                        quranAyahWidget(
-                          surahNumber,
-                          ayahNumber,
-                          quranViewState,
-                          themeState,
-                          isCenter: isCenter,
-                          showBottomsheetOnTap: showBottomsheetOnTap,
-                        ),
-                      if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        const Gap(5),
-                      if (isSajdaAyah)
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.red),
-                            borderRadius: BorderRadius.circular(roundedRadius),
-                          ),
-                          height: 35,
+            icon: const Icon(FluentIcons.book_open_20_filled, size: 15),
+            label: Text(
+              l10n.tafsirButton,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            ),
+          ),
+        ),
+        const Gap(6),
 
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+        // Share Action Icon
+        _ActionIconButton(
+          icon: FluentIcons.share_20_regular,
+          tooltip: l10n.shareButton,
+          themeState: themeState,
+          isDark: isDark,
+          onTap: () {
+            showShareBottomDialog(
+              context,
+              ayahKey,
+              SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]!),
+              context.read<QuranViewCubit>().state.quranScriptType,
+              translation,
+              footNoteAsStringMap,
+              translationBookInfoList,
+            );
+          },
+        ),
+        const Gap(6),
+
+        // Add Note Action Icon
+        _ActionIconButton(
+          icon: FluentIcons.note_add_20_regular,
+          tooltip: l10n.addNoteButton,
+          themeState: themeState,
+          isDark: isDark,
+          onTap: () => showAddNotePopup(context, ayahKey),
+        ),
+        const Gap(6),
+
+        // Pin / Bookmark Action Icon
+        _ActionIconButton(
+          icon: FluentIcons.bookmark_20_regular,
+          tooltip: l10n.pinToCollectionButton,
+          themeState: themeState,
+          isDark: isDark,
+          onTap: () => showAddToPinnedPopup(context, ayahKey),
+        ),
+        const Gap(6),
+
+        // Play Audio Action Icon
+        _AyahPlayButton(
+          ayahKey: ayahKey,
+          themeState: themeState,
+          isDark: isDark,
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionIconButton extends StatelessWidget {
+  final IconData icon;
+  final String tooltip;
+  final ThemeState themeState;
+  final bool isDark;
+  final VoidCallback onTap;
+
+  const _ActionIconButton({
+    required this.icon,
+    required this.tooltip,
+    required this.themeState,
+    required this.isDark,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 32,
+      width: 32,
+      child: IconButton(
+        tooltip: tooltip,
+        padding: EdgeInsets.zero,
+        style: IconButton.styleFrom(
+          backgroundColor: isDark
+              ? Colors.white.withValues(alpha: 0.05)
+              : themeState.primaryShade100.withValues(alpha: 0.5),
+          foregroundColor: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : themeState.primaryShade200.withValues(alpha: 0.5),
+            ),
+          ),
+        ),
+        onPressed: onTap,
+        icon: Icon(icon, size: 16),
+      ),
+    );
+  }
+}
+
+class _AyahPlayButton extends StatelessWidget {
+  final String ayahKey;
+  final ThemeState themeState;
+  final bool isDark;
+
+  const _AyahPlayButton({
+    required this.ayahKey,
+    required this.themeState,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PlayerStateCubit, PlayerState>(
+      builder: (context, playerState) {
+        return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+          builder: (context, ayahKeyManagement) {
+            final bool isPlaying = playerState.isPlaying;
+            final bool isCurrent = ayahKeyManagement.current == ayahKey &&
+                context.read<AudioUiCubit>().state.isInsideQuranPlayer == true;
+
+            return SizedBox(
+              height: 32,
+              width: 32,
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                style: IconButton.styleFrom(
+                  backgroundColor: isCurrent
+                      ? themeState.primary
+                      : (isDark
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : themeState.primaryShade100.withValues(alpha: 0.5)),
+                  foregroundColor: isCurrent
+                      ? Colors.white
+                      : themeState.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(
+                      color: isCurrent
+                          ? themeState.primary
+                          : (isDark
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : themeState.primaryShade200.withValues(alpha: 0.5)),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  if (context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
+                    AudioPlayerManager.playSingleAyah(
+                      ayahKey: ayahKey,
+                      reciterInfoModel:
+                          context.read<SegmentedQuranReciterCubit>().state,
+                      instantPlay: true,
+                      isInsideQuran: true,
+                    );
+                  } else if (isCurrent && isPlaying) {
+                    AudioPlayerManager.audioPlayer.pause();
+                  } else if (isCurrent) {
+                    AudioPlayerManager.audioPlayer.play();
+                  } else {
+                    bool isPlayList = context.read<AudioUiCubit>().state.isPlayList;
+                    if (isPlayList &&
+                        ayahKeyManagement.current.split(":").first ==
+                            ayahKey.split(":").first) {
+                      await AudioPlayerManager.audioPlayer.seek(
+                        Duration.zero,
+                        index: ayahKeyManagement.ayahList.indexOf(ayahKey),
+                      );
+                      AudioPlayerManager.audioPlayer.play();
+                    } else {
+                      AudioPlayerManager.playSingleAyah(
+                        ayahKey: ayahKey,
+                        reciterInfoModel:
+                            context.read<SegmentedQuranReciterCubit>().state,
+                        instantPlay: true,
+                        isInsideQuran: true,
+                      );
+                    }
+                  }
+                },
+                icon: (isCurrent &&
+                        playerState.state == just_audio.ProcessingState.loading)
+                    ? const SizedBox(
+                        height: 14,
+                        width: 14,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Icon(
+                        isPlaying && isCurrent
+                            ? Icons.pause_rounded
+                            : Icons.play_arrow_rounded,
+                        size: 18,
+                      ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Subcomponent 2: Arabic Script
+// ---------------------------------------------------------------------------
+class _AyahArabicSection extends StatelessWidget {
+  final int surahNumber;
+  final int ayahNumber;
+  final QuranViewState quranViewState;
+  final ThemeState themeState;
+  final bool isCenter;
+  final bool? showBottomsheetOnTap;
+
+  const _AyahArabicSection({
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.quranViewState,
+    required this.themeState,
+    required this.isCenter,
+    this.showBottomsheetOnTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: isCenter ? Alignment.center : Alignment.centerRight,
+      child: ScriptProcessor(
+        scriptInfo: ScriptInfo(
+          surahNumber: surahNumber,
+          ayahNumber: ayahNumber,
+          quranScriptType: quranViewState.quranScriptType,
+          showWordHighlights: quranViewState.enableWordByWordHighlight == true,
+          textStyle: TextStyle(
+            fontSize: quranViewState.fontSize,
+            height: quranViewState.lineHeight,
+          ),
+        ),
+        showBottomsheetOnTap: showBottomsheetOnTap,
+        tajweedColorEnable:
+            quranViewState.quranScriptType == QuranScriptType.uthmani
+                ? quranViewState.useTajweedOnUthmani
+                : quranViewState.useTajweedOnIndopak,
+        themeState: themeState,
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Subcomponent 3: Sajda Banner
+// ---------------------------------------------------------------------------
+class _SajdaBanner extends StatelessWidget {
+  final bool isSajdaRequired;
+  final ThemeState themeState;
+  final bool isDark;
+  final AppLocalizations l10n;
+
+  const _SajdaBanner({
+    required this.isSajdaRequired,
+    required this.themeState,
+    required this.isDark,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.amber.withValues(alpha: isDark ? 0.12 : 0.08),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.amber.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image(
+            height: 20,
+            width: 20,
+            image: const AssetImage("assets/img/sajadah.png"),
+            color: isDark ? Colors.amber.shade300 : Colors.amber.shade800,
+            colorBlendMode: BlendMode.srcIn,
+          ),
+          const Gap(8),
+          Text(
+            "${l10n.sajdaAyah} - ${isSajdaRequired ? l10n.required : l10n.optional}",
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: isDark ? Colors.amber.shade300 : Colors.amber.shade800,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Subcomponent 4: Translation & Footnote Section
+// ---------------------------------------------------------------------------
+class _AyahTranslationSection extends StatelessWidget {
+  final List<String> translationList;
+  final List<Map<int, String>> footNoteAsStringMap;
+  final List<ResourcesModel?> translationBookInfoList;
+  final QuranViewState quranViewState;
+  final bool showOnlyAyah;
+  final ThemeState themeState;
+  final bool isDark;
+  final AppLocalizations l10n;
+
+  const _AyahTranslationSection({
+    required this.translationList,
+    required this.footNoteAsStringMap,
+    required this.translationBookInfoList,
+    required this.quranViewState,
+    required this.showOnlyAyah,
+    required this.themeState,
+    required this.isDark,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(translationBookInfoList.length, (index) {
+        final String translation = translationList[index];
+        final Map<int, String> footNote = footNoteAsStringMap[index];
+        final ResourcesModel? bookModel = translationBookInfoList[index];
+
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Translation Text with Fast Zero-DOM renderer
+              FastTranslationText(
+                text: translation,
+                style: TextStyle(
+                  fontSize: quranViewState.translationFontSize,
+                  height: 1.5,
+                  color: isDark ? Colors.grey.shade200 : Colors.grey.shade900,
+                ),
+              ),
+
+              // Footnotes if available and enabled
+              if (footNote.isNotEmpty &&
+                  !showOnlyAyah &&
+                  !quranViewState.hideFootnote) ...[
+                const Gap(8),
+                _FootnoteWidget(
+                  footNote: footNote,
+                  quranViewState: quranViewState,
+                  themeState: themeState,
+                  isDark: isDark,
+                  l10n: l10n,
+                ),
+              ],
+
+              const Gap(4),
+
+              // Translation Source Attribution
+              Row(
+                children: [
+                  Container(
+                    height: 1,
+                    width: 18,
+                    color: isDark ? Colors.grey.shade700 : Colors.grey.shade400,
+                  ),
+                  const Gap(6),
+                  Text(
+                    bookModel?.name ?? bookModel?.fileName.split("/").last ?? "",
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                    ),
+                  ),
+                  if (bookModel?.language != null)
+                    Text(
+                      " (${languageNativeNames[bookModel!.language.toLowerCase()] ?? ""})",
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _FootnoteWidget extends StatelessWidget {
+  final Map<int, String> footNote;
+  final QuranViewState quranViewState;
+  final ThemeState themeState;
+  final bool isDark;
+  final AppLocalizations l10n;
+
+  const _FootnoteWidget({
+    required this.footNote,
+    required this.quranViewState,
+    required this.themeState,
+    required this.isDark,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.03)
+            : Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : Colors.grey.shade300,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                FluentIcons.info_16_filled,
+                size: 14,
+                color: themeState.primary,
+              ),
+              const Gap(6),
+              Text(
+                l10n.footNoteTitle,
+                style: TextStyle(
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.bold,
+                  color: themeState.primary,
+                ),
+              ),
+            ],
+          ),
+          const Gap(6),
+          ...footNote.entries.map((entry) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: FastTranslationText(
+                text: entry.value.trim(),
+                style: TextStyle(
+                  fontSize: quranViewState.translationFontSize - 1.5,
+                  height: 1.4,
+                  color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Subcomponent 5: Word-By-Word Section
+// ---------------------------------------------------------------------------
+class _WordByWordExpandToggle extends StatelessWidget {
+  final String ayahKey;
+  final ThemeState themeState;
+  final AppLocalizations l10n;
+
+  const _WordByWordExpandToggle({
+    required this.ayahKey,
+    required this.themeState,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.read<AyahByAyahInScrollInfoCubit>().toggleWordByWord(ayahKey);
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              l10n.wordByWordTranslation,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey.shade500,
+              ),
+            ),
+            BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
+              builder: (context, scrollState) {
+                final isExpanded =
+                    scrollState.expandedForWordByWord?.contains(ayahKey) == true;
+                return Icon(
+                  isExpanded
+                      ? FluentIcons.chevron_up_16_filled
+                      : FluentIcons.chevron_down_16_filled,
+                  size: 16,
+                  color: Colors.grey.shade500,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _WordByWordContent extends StatelessWidget {
+  final String ayahKey;
+  final QuranViewState quranViewState;
+  final List<dynamic> wordByWord;
+  final int surahNumber;
+  final int ayahNumber;
+  final ThemeState themeState;
+  final bool isDark;
+
+  const _WordByWordContent({
+    required this.ayahKey,
+    required this.quranViewState,
+    required this.wordByWord,
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.themeState,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
+      builder: (context, ayahScrollState) {
+        final bool isVisible =
+            (ayahScrollState.expandedForWordByWord?.contains(ayahKey) == true) ||
+            quranViewState.alwaysOpenWordByWord;
+
+        if (!isVisible) return const SizedBox.shrink();
+
+        return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+          builder: (context, segmentsReciterState) {
+            String? highlightingWordIndex;
+            final List<List>? segments = context
+                .read<SegmentedQuranReciterCubit>()
+                .getAyahSegments(ayahKey);
+
+            return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
+              buildWhen: (previous, current) {
+                final currentAyahKey =
+                    context.read<AyahKeyCubit>().state.current;
+                if (currentAyahKey == ayahKey && segments != null) {
+                  for (List word in segments) {
+                    final int start = word[1].toInt();
+                    final int end = word[2].toInt();
+                    final cur = current.currentDuration ?? Duration.zero;
+                    if (Duration(milliseconds: start) < cur &&
+                        Duration(milliseconds: end) > cur) {
+                      if (highlightingWordIndex != "$currentAyahKey:${word[0]}") {
+                        highlightingWordIndex = "$currentAyahKey:${word[0]}";
+                        return true;
+                      }
+                      return false;
+                    }
+                  }
+                } else if (highlightingWordIndex != null) {
+                  highlightingWordIndex = null;
+                  return true;
+                }
+                return false;
+              },
+              builder: (context, playPositionState) {
+                return Align(
+                  alignment: Alignment.centerRight,
+                  child: Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    textDirection: TextDirection.rtl,
+                    children: List.generate(wordByWord.length, (index) {
+                      final String currentWordKey =
+                          "$surahNumber:$ayahNumber:${index + 1}";
+                      final bool isHighlighted =
+                          highlightingWordIndex == currentWordKey;
+
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () async {
+                          final List<String> wordsKey = List.generate(
+                            wordByWord.length,
+                            (i) => "$surahNumber:$ayahNumber:${i + 1}",
+                          );
+                          showPopupWordFunction(
+                            context: context,
+                            wordKeys: wordsKey,
+                            initWordIndex: index,
+                            wordByWordList:
+                                await WordByWordFunction.getAyahWordByWordData(
+                                  "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                                ) ??
+                                [],
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isHighlighted
+                                ? themeState.primary.withValues(alpha: 0.15)
+                                : (isDark
+                                    ? Colors.white.withValues(alpha: 0.04)
+                                    : themeState.primary.withValues(alpha: 0.06)),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: isHighlighted
+                                  ? themeState.primary
+                                  : (isDark
+                                      ? Colors.white.withValues(alpha: 0.06)
+                                      : themeState.primaryShade200.withValues(alpha: 0.6)),
+                              width: isHighlighted ? 1.5 : 1,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image(
-                                height: 25,
-                                width: 25,
-                                image: const AssetImage(
-                                  "assets/img/sajadah.png",
+                              ScriptProcessor(
+                                scriptInfo: ScriptInfo(
+                                  surahNumber: surahNumber,
+                                  ayahNumber: ayahNumber,
+                                  quranScriptType:
+                                      quranViewState.quranScriptType,
+                                  wordIndex: index,
+                                  textStyle: TextStyle(
+                                    fontSize: quranViewState.fontSize,
+                                    height: quranViewState.lineHeight,
+                                  ),
                                 ),
-                                color:
-                                    Theme.brightnessOf(context) ==
-                                        Brightness.light
-                                    ? Colors.grey.shade900
-                                    : Colors.white,
-                                colorBlendMode: BlendMode.srcIn,
+                                tajweedColorEnable:
+                                    quranViewState.quranScriptType ==
+                                        QuranScriptType.uthmani
+                                    ? quranViewState.useTajweedOnUthmani
+                                    : quranViewState.useTajweedOnIndopak,
+                                themeState: themeState,
                               ),
-                              const Gap(10),
+                              const Gap(2),
                               Text(
-                                l10n.sajdaAyah,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Gap(8),
-                              const Text("-"),
-                              const Gap(8),
-                              Text(
-                                isSajdaRequired ? l10n.required : l10n.optional,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
+                                removeHtmlTags(wordByWord[index].toString()),
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade700,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      if (isSajdaAyah) const Gap(5),
-
-                      if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        const Gap(5),
-                      if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            l10n.translationTitle,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey.shade500,
-                            ),
-                          ),
-                        ),
-                      if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        const Gap(5),
-                      if (!showOnlyAyah && !quranViewState.hideTranslation)
-                        getTranslationWithFootNoteWidget(
-                          context,
-                          translationList,
-                          footNoteAsStringMap,
-                          translationBookInfoList,
-                          quranViewState,
-                          showOnlyAyah,
-                          l10n,
-                        ),
-
-                      if (supportsWordByWord &&
-                          !quranViewState.alwaysOpenWordByWord &&
-                          !quranViewState.hideWordByWord &&
-                          wordByWord.isNotEmpty)
-                        getWordByWordExpandCloseWidget(context, ayahKey),
-                      if (supportsWordByWord && !quranViewState.hideWordByWord)
-                        const Gap(5),
-                      if (supportsWordByWord && !quranViewState.hideWordByWord)
-                        getWordByWordWidget(
-                          context,
-                          ayahKey,
-                          quranViewState,
-                          wordByWord,
-                          surahNumber,
-                          ayahNumber,
-                        ),
-                    ],
+                      );
+                    }),
                   ),
-                );
-              },
-            ),
-          );
-        },
-      );
-    },
-  );
-}
-
-Align getWordByWordWidget(
-  BuildContext context,
-  String ayahKey,
-  QuranViewState quranViewState,
-  List<dynamic> wordByWord,
-  int surahNumber,
-  int ayahNumber,
-) {
-  ThemeState themeState = context.read<ThemeCubit>().state;
-  return Align(
-    alignment: Alignment.centerRight,
-    child: BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-      builder: (context, segmentsREciterSate) {
-        String? highlightingWordIndex;
-        List<List>? segments = context
-            .read<SegmentedQuranReciterCubit>()
-            .getAyahSegments(ayahKey);
-        return BlocBuilder<
-          AyahByAyahInScrollInfoCubit,
-          AyahByAyahInScrollInfoState
-        >(
-          builder: (context, ayahScrollState) {
-            return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
-              buildWhen: (previous, current) {
-                String? currentAyahKey = context
-                    .read<AyahKeyCubit>()
-                    .state
-                    .current;
-                if (currentAyahKey == ayahKey) {
-                  if (segments != null) {
-                    for (List word in segments) {
-                      word = word.map((e) => e.toInt()).toList();
-                      if (Duration(milliseconds: word[1]) <
-                              (current.currentDuration ?? Duration.zero) &&
-                          Duration(milliseconds: word[2]) >
-                              (current.currentDuration ?? Duration.zero)) {
-                        if (highlightingWordIndex !=
-                            "$currentAyahKey:${word[0]}") {
-                          highlightingWordIndex = "$currentAyahKey:${word[0]}";
-                          return true;
-                        }
-                        return false;
-                      }
-                    }
-                  }
-                } else {
-                  if (highlightingWordIndex != null) {
-                    highlightingWordIndex = null;
-                    return true;
-                  }
-                }
-                return false;
-              },
-
-              builder: (context, playPositionState) {
-                return getAyahWordByWord(
-                  ayahScrollState,
-                  ayahKey,
-                  quranViewState,
-                  wordByWord,
-                  surahNumber,
-                  ayahNumber,
-                  context,
-                  themeState,
-                  highlightingWordIndex,
                 );
               },
             );
           },
         );
       },
-    ),
-  );
-}
-
-SizedBox getAyahWordByWord(
-  AyahByAyahInScrollInfoState ayahScrollState,
-  String ayahKey,
-  QuranViewState quranViewState,
-  List<dynamic> wordByWord,
-  int surahNumber,
-  int ayahNumber,
-  BuildContext context,
-  ThemeState themeState,
-  String? highlightingWordIndex,
-) {
-  return SizedBox(
-    height:
-        (ayahScrollState.expandedForWordByWord?.contains(ayahKey) == true ||
-            quranViewState.alwaysOpenWordByWord)
-        ? null
-        : 0,
-
-    child:
-        (ayahScrollState.expandedForWordByWord?.contains(ayahKey) == true ||
-            quranViewState.alwaysOpenWordByWord)
-        ? Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            textDirection: TextDirection.rtl,
-            children: List.generate(wordByWord.length, (index) {
-              String currentWordKey = "$surahNumber:$ayahNumber:${index + 1}";
-
-              return InkWell(
-                borderRadius: BorderRadius.circular(roundedRadius),
-                onTap: () async {
-                  List<String> wordsKey = List.generate(
-                    wordByWord.length,
-                    (i) => "$surahNumber:$ayahNumber:${i + 1}",
-                  );
-                  showPopupWordFunction(
-                    context: context,
-                    wordKeys: wordsKey,
-                    initWordIndex: index,
-                    wordByWordList:
-                        await WordByWordFunction.getAyahWordByWordData(
-                          "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                        ) ??
-                        [],
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    color: themeState.primary.withValues(alpha: 0.05),
-                    borderRadius: BorderRadius.circular(roundedRadius),
-                    border: highlightingWordIndex == currentWordKey
-                        ? Border.all(color: themeState.primary, width: 2)
-                        : null,
-                  ),
-                  child: Column(
-                    children: [
-                      BlocBuilder<QuranViewCubit, QuranViewState>(
-                        builder: (context, quranViewState) {
-                          return ScriptProcessor(
-                            scriptInfo: ScriptInfo(
-                              surahNumber: surahNumber,
-                              ayahNumber: ayahNumber,
-                              quranScriptType: quranViewState.quranScriptType,
-                              wordIndex: index,
-                              textStyle: TextStyle(
-                                fontSize: quranViewState.fontSize,
-                                height: quranViewState.lineHeight,
-                              ),
-                            ),
-                            tajweedColorEnable:
-                                quranViewState.quranScriptType ==
-                                    QuranScriptType.uthmani
-                                ? quranViewState.useTajweedOnUthmani
-                                : quranViewState.useTajweedOnIndopak,
-                            themeState: themeState,
-                          );
-                        },
-                      ),
-                      const Gap(5),
-                      Text(
-                        removeHtmlTags(wordByWord[index]),
-                        style: TextStyle(
-                          fontSize: quranViewState.translationFontSize,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-          )
-        : null,
-  );
-}
-
-GestureDetector getWordByWordExpandCloseWidget(
-  BuildContext context,
-  String ayahKey,
-) {
-  ThemeState themeState = context.read<ThemeCubit>().state;
-  AppLocalizations l10n = AppLocalizations.of(context);
-  return GestureDetector(
-    onTap: () {
-      List<String> expandedForWordByWord =
-          context
-              .read<AyahByAyahInScrollInfoCubit>()
-              .state
-              .expandedForWordByWord
-              ?.toList() ??
-          [];
-
-      expandedForWordByWord.contains(ayahKey)
-          ? expandedForWordByWord.remove(ayahKey)
-          : expandedForWordByWord.add(ayahKey);
-      context.read<AyahByAyahInScrollInfoCubit>().setData(
-        expandedForWordByWord: expandedForWordByWord,
-      );
-    },
-    behavior: HitTestBehavior.translucent,
-    child: Container(
-      decoration: BoxDecoration(
-        color: themeState.primary.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      padding: const EdgeInsets.only(left: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            l10n.wordByWordTranslation,
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-          ),
-
-          BlocBuilder<AyahByAyahInScrollInfoCubit, AyahByAyahInScrollInfoState>(
-            builder: (context, quranViewState) => Icon(
-              quranViewState.expandedForWordByWord?.contains(ayahKey) == true
-                  ? Icons.arrow_drop_up
-                  : Icons.arrow_right,
-              size: 24,
-              color: Colors.grey.shade500,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Align getFootNoteWidget(
-  Map<dynamic, dynamic> footNote,
-  BuildContext context,
-  QuranViewState quranViewState,
-) {
-  return Align(
-    alignment: Alignment.centerLeft,
-    child: Column(
-      children: List.generate(footNote.length, (index) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 12,
-              backgroundColor: context.read<ThemeCubit>().state.primaryShade300,
-              child: Text(
-                localizedNumber(context, index + 1),
-                style: const TextStyle(fontSize: 12),
-              ),
-            ),
-            const Gap(5),
-            Container(
-              decoration: const BoxDecoration(),
-              padding: const EdgeInsets.only(bottom: 5),
-              width: MediaQuery.of(context).size.width * 0.85,
-
-              child: Html(
-                data: footNote.values.elementAt(index).toString().capitalize(),
-                style: {
-                  "*": Style(
-                    fontSize: FontSize(quranViewState.translationFontSize),
-                    margin: Margins.zero,
-                    padding: HtmlPaddings.zero,
-                  ),
-                },
-              ),
-            ),
-          ],
-        );
-      }),
-    ),
-  );
-}
-
-Widget getTranslationWithFootNoteWidget(
-  BuildContext context,
-  List<String> translationList,
-  List<Map<int, String>> footNoteAsStringMap,
-  List<ResourcesModel?> translationBookInfoList,
-  QuranViewState quranViewState,
-  bool showOnlyAyah,
-  AppLocalizations l10n,
-) {
-  return Column(
-    children: List.generate(translationBookInfoList.length, (index) {
-      String translation = translationList[index];
-      Map<int, String> footNote = footNoteAsStringMap[index];
-      ResourcesModel? bookModel = translationBookInfoList[index];
-
-      return Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Html(
-              data: translation.capitalize(),
-              style: {
-                "*": Style(
-                  fontSize: FontSize(quranViewState.translationFontSize),
-                  margin: Margins.zero,
-                  padding: HtmlPaddings.zero,
-                ),
-              },
-            ),
-          ),
-
-          if (footNote.keys.isNotEmpty &&
-              !showOnlyAyah &&
-              !quranViewState.hideFootnote)
-            const Gap(8),
-          if (footNote.keys.isNotEmpty &&
-              !showOnlyAyah &&
-              !quranViewState.hideFootnote)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                l10n.footNoteTitle,
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-              ),
-            ),
-          if (footNote.keys.isNotEmpty &&
-              !showOnlyAyah &&
-              !quranViewState.hideFootnote)
-            const Gap(5),
-
-          if (footNote.isNotEmpty &&
-              !showOnlyAyah &&
-              !quranViewState.hideFootnote)
-            getFootNoteWidget(footNote, context, quranViewState),
-          const Gap(5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(height: 1, width: 25, color: Colors.grey),
-              const Gap(7),
-              Text(
-                bookModel?.name ?? bookModel?.fileName.split("/").last ?? "",
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-              ),
-              if (bookModel?.language != null)
-                Text(
-                  " (${languageNativeNames[bookModel!.language.toLowerCase()] ?? ""})",
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-                ),
-            ],
-          ),
-          const Gap(5),
-        ],
-      );
-    }),
-  );
-}
-
-Align quranAyahWidget(
-  int surahNumber,
-  int ayahNumber,
-  QuranViewState quranViewState,
-  ThemeState themeState, {
-  bool? isCenter,
-  bool? showBottomsheetOnTap,
-}) {
-  return Align(
-    alignment: isCenter == true ? Alignment.center : Alignment.centerRight,
-    child: ScriptProcessor(
-      scriptInfo: ScriptInfo(
-        surahNumber: surahNumber,
-        ayahNumber: ayahNumber,
-        quranScriptType: quranViewState.quranScriptType,
-        showWordHighlights: quranViewState.enableWordByWordHighlight == true,
-        textStyle: TextStyle(
-          fontSize: quranViewState.fontSize,
-          height: quranViewState.lineHeight,
-        ),
-      ),
-      showBottomsheetOnTap: showBottomsheetOnTap,
-      tajweedColorEnable:
-          quranViewState.quranScriptType == QuranScriptType.uthmani
-          ? quranViewState.useTajweedOnUthmani
-          : quranViewState.useTajweedOnIndopak,
-      themeState: themeState,
-    ),
-  );
-}
-
-Row getToolbarWidget(
-  bool? showFullKey,
-  SurahInfoModel surahInfoModel,
-  String ayahKey,
-  int ayahNumber,
-  BuildContext context,
-  int surahNumber,
-  List<String> translation,
-  List<Map<int, String>> footNoteAsStringMap,
-  List<ResourcesModel?> translationBookInfoList,
-  ThemeState themeState,
-) {
-  AppLocalizations l10n = AppLocalizations.of(context);
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    mainAxisAlignment: MainAxisAlignment.center,
-
-    children: [
-      Container(
-        decoration: BoxDecoration(
-          color: themeState.primaryShade300,
-          borderRadius: BorderRadius.circular(roundedRadius - 4),
-        ),
-        padding: const EdgeInsets.only(left: 5, right: 5, bottom: 3, top: 3),
-        child: Text(
-          showFullKey == true
-              ? "${getSurahName(context, surahInfoModel.id)}\nAyah: ${localizedNumber(context, ayahKey.split(":").first.toInt())}:${localizedNumber(context, ayahNumber)}"
-              : localizedNumber(context, ayahNumber),
-        ),
-      ),
-      const Spacer(),
-      SizedBox(
-        height: 30,
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => TafsirView(ayahKey: ayahKey),
-              ),
-            );
-          },
-          child: Text(l10n.tafsirButton),
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
-        child: BlocBuilder<QuranViewCubit, QuranViewState>(
-          builder: (context, quranViewState) {
-            return IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.zero,
-                foregroundColor: themeState.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                  side: BorderSide(color: themeState.primary),
-                ),
-              ),
-              onPressed: () {
-                showShareBottomDialog(
-                  context,
-                  ayahKey,
-                  SurahInfoModel.fromMap(
-                    metaDataSurah[surahNumber.toString()]!,
-                  ),
-                  quranViewState.quranScriptType,
-                  translation,
-                  footNoteAsStringMap,
-                  translationBookInfoList,
-                );
-              },
-              tooltip: l10n.shareButton,
-              icon: const Icon(FluentIcons.share_24_filled, size: 18),
-            );
-          },
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
-        child: IconButton(
-          style: IconButton.styleFrom(
-            padding: EdgeInsets.zero,
-            foregroundColor: themeState.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-              side: BorderSide(color: themeState.primary),
-            ),
-          ),
-          onPressed: () async {
-            showAddNotePopup(context, ayahKey);
-          },
-          tooltip: l10n.addNoteButton,
-          icon: const Icon(FluentIcons.note_add_24_filled, size: 18),
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
-        child: IconButton(
-          style: IconButton.styleFrom(
-            padding: EdgeInsets.zero,
-            foregroundColor: themeState.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100),
-              side: BorderSide(color: themeState.primary),
-            ),
-          ),
-          onPressed: () {
-            showAddToPinnedPopup(context, ayahKey);
-          },
-          tooltip: l10n.pinToCollectionButton,
-          icon: const Icon(FluentIcons.pin_24_filled, size: 18),
-        ),
-      ),
-      const Gap(5),
-      SizedBox(
-        height: 30,
-        width: 30,
-        child: BlocBuilder<PlayerStateCubit, PlayerState>(
-          builder: (context, playerState) {
-            return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-              builder: (context, ayahKeyManagement) {
-                bool isPlaying = playerState.isPlaying;
-                bool isCurrent =
-                    ayahKeyManagement.current == ayahKey &&
-                    context.read<AudioUiCubit>().state.isInsideQuranPlayer ==
-                        true;
-
-                return getPlayButtonWidget(
-                  context,
-                  ayahKey,
-                  isCurrent,
-                  isPlaying,
-                  ayahKeyManagement,
-                  playerState,
-                );
-              },
-            );
-          },
-        ),
-      ),
-    ],
-  );
-}
-
-IconButton getPlayButtonWidget(
-  BuildContext context,
-  String ayahKey,
-  bool isCurrent,
-  bool isPlaying,
-  AyahKeyManagement ayahKeyManagement,
-  PlayerState playerState,
-) {
-  ThemeState themeState = context.read<ThemeCubit>().state;
-  return IconButton(
-    style: IconButton.styleFrom(
-      padding: EdgeInsets.zero,
-      foregroundColor: themeState.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100),
-        side: BorderSide(color: themeState.primary),
-      ),
-    ),
-    onPressed: () async {
-      if (context.read<AudioUiCubit>().state.isInsideQuranPlayer == false) {
-        AudioPlayerManager.playSingleAyah(
-          ayahKey: ayahKey,
-          reciterInfoModel: context.read<SegmentedQuranReciterCubit>().state,
-          instantPlay: true,
-          isInsideQuran: true,
-        );
-      } else if (isCurrent && isPlaying) {
-        AudioPlayerManager.audioPlayer.pause();
-      } else if (isCurrent) {
-        AudioPlayerManager.audioPlayer.play();
-      } else {
-        log("Current Ayah: $ayahKey");
-        bool isPlayList = context.read<AudioUiCubit>().state.isPlayList;
-        if (isPlayList &&
-            ayahKeyManagement.current.split(":").first ==
-                ayahKey.split(":").first) {
-          await AudioPlayerManager.audioPlayer.seek(
-            Duration.zero,
-            index: ayahKeyManagement.ayahList.indexOf(ayahKey),
-          );
-          AudioPlayerManager.audioPlayer.play();
-        } else {
-          AudioPlayerManager.playSingleAyah(
-            ayahKey: ayahKey,
-            reciterInfoModel: context.read<SegmentedQuranReciterCubit>().state,
-            instantPlay: true,
-            isInsideQuran: true,
-          );
-        }
-      }
-    },
-    icon: (isCurrent && playerState.state == just_audio.ProcessingState.loading)
-        ? Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: CircularProgressIndicator(
-              strokeWidth: 3,
-              backgroundColor: context.read<ThemeCubit>().state.primaryShade100,
-            ),
-          )
-        : Icon(
-            isPlaying && isCurrent
-                ? Icons.pause_rounded
-                : Icons.play_arrow_rounded,
-            size: 18,
-          ),
-  );
+    );
+  }
 }
