@@ -1239,4 +1239,206 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '금지된 기도 시간';
+
+  @override
+  String get translationDatabase => '번역 데이터베이스';
+
+  @override
+  String get translationDatabaseSubtitle => '선택한 번역 텍스트 다운로드 중';
+
+  @override
+  String get tafsirCommentary => '타프시르 해설';
+
+  @override
+  String get tafsirCommentarySubtitle => '타프시르 리소스 준비 중';
+
+  @override
+  String get wordByWordAnalysis => '단어별 분석';
+
+  @override
+  String get wordByWordAnalysisSubtitle => '어휘 분석 설정 중';
+
+  @override
+  String get audioRecitationSegments => '오디오 낭송 세그먼트';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => '구절 타이밍 세그먼트 구성 중';
+
+  @override
+  String get locationQiblaMetadata => '위치 및 키블라 메타데이터';
+
+  @override
+  String get locationQiblaMetadataSubtitle => '글로벌 도시 위치 데이터 다운로드 중';
+
+  @override
+  String get preparingResources => '리소스 준비 중...';
+
+  @override
+  String get setupCompletedOpeningQuran => '설정이 완료되었습니다! 알코란을 여는 중...';
+
+  @override
+  String get unexpectedErrorSetup => '설정 중 예기치 않은 오류가 발생했습니다.';
+
+  @override
+  String get heading => '방위';
+
+  @override
+  String get alignedWithKaaba => '카바와 정렬됨';
+
+  @override
+  String turnRight(Object degrees) {
+    return '오른쪽으로 $degrees° 회전';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '왼쪽으로 $degrees° 회전';
+  }
+
+  @override
+  String get streamingAndNetwork => '스트리밍 및 네트워크';
+
+  @override
+  String get next => '다음';
+
+  @override
+  String get now => '지금';
+
+  @override
+  String get current => '현재';
+
+  @override
+  String get active => '활성';
+
+  @override
+  String get activeNow => '현재 활성';
+
+  @override
+  String get hours => '시간';
+
+  @override
+  String get minutes => '분';
+
+  @override
+  String get seconds => '초';
+
+  @override
+  String get fastingAndVoluntaryTimes => '금식 및 자발적 예배 시간';
+
+  @override
+  String get imsak => '임사크';
+
+  @override
+  String get ishraqAndDuha => '이슈라크 및 두하';
+
+  @override
+  String get lastThirdOfNight => '밤의 마지막 3분의 1';
+
+  @override
+  String get awqatAlNahy => '예배 금지 시간';
+
+  @override
+  String get forbiddenSunriseDescription => '일출부터 태양이 창 높이만큼 뜰 때까지 (약 15분)';
+
+  @override
+  String get forbiddenNoonDescription => '태양이 정오 꼭대기에 있을 때부터 주흐르 시작까지 (약 8분)';
+
+  @override
+  String get forbiddenSunsetDescription => '태양이 노랗게 변할 때부터 완전히 질 때까지 (약 15분)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA에서 전체 파트와 읽기';
+
+  @override
+  String get asrJurisprudence => '아스르 학파 (마드하브)';
+
+  @override
+  String get shafieDescription => '표준 (샤피이, 말리키, 한발리)';
+
+  @override
+  String get hanafiDescription => '하나피 학파';
+
+  @override
+  String get shafieShadow => '표준 (그림자 1배)';
+
+  @override
+  String get hanafiShadow => '하나피 (그림자 2배)';
+
+  @override
+  String get calculationAndJurisprudence => '계산법 및 학파';
+
+  @override
+  String get notificationsAndAudio => '알림 및 오디오';
+
+  @override
+  String get enablePrayerReminders => '예배 알림 활성화';
+
+  @override
+  String get enablePrayerRemindersDescription => '다가오는 모든 예배 시간에 대한 알림을 받습니다.';
+
+  @override
+  String get adjustReminderTimingDescription => '실제 예배 시간 기준 알림 시간 조정 (+/- 분).';
+
+  @override
+  String get exactTime => '정확한 시간';
+
+  @override
+  String actualTime(String time) {
+    return '실제 시간: $time';
+  }
+
+  @override
+  String get jumpToToday => '오늘로 이동';
+
+  @override
+  String get dateAndHijri => '날짜 / 이슬람력';
+
+  @override
+  String get selectedLocation => '선택된 위치';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return '다음: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return '지금: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName 시작 시간 $time';
+  }
+
+  @override
+  String get continueReading => '계속 읽기';
+
+  @override
+  String get lastRead => '마지막으로 읽은 곳';
+
+  @override
+  String get resume => '재개';
+
+  @override
+  String get startReading => '읽기 시작';
+
+  @override
+  String get verses => '구절';
+
+  @override
+  String get makki => '메카 계시';
+
+  @override
+  String get madani => '메디나 계시';
+
+  @override
+  String get ayah => '구절';
+
+  @override
+  String get edit => '편집';
 }

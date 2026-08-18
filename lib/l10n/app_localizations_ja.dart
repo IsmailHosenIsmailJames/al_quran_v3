@@ -1240,4 +1240,206 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => '礼拝禁止時間';
+
+  @override
+  String get translationDatabase => '翻訳データベース';
+
+  @override
+  String get translationDatabaseSubtitle => '選択した翻訳テキストをダウンロード中';
+
+  @override
+  String get tafsirCommentary => 'タフスィール解説';
+
+  @override
+  String get tafsirCommentarySubtitle => 'タフスィールリソースを準備中';
+
+  @override
+  String get wordByWordAnalysis => '単語ごとの分析';
+
+  @override
+  String get wordByWordAnalysisSubtitle => '単語分解を設定中';
+
+  @override
+  String get audioRecitationSegments => '音声朗誦セグメント';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'ヴァースのタイミングセグメントを設定中';
+
+  @override
+  String get locationQiblaMetadata => '位置とキブラのメタデータ';
+
+  @override
+  String get locationQiblaMetadataSubtitle => '世界の都市位置データをダウンロード中';
+
+  @override
+  String get preparingResources => 'リソースを準備中...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'セットアップが完了しました！コーランを開いています...';
+
+  @override
+  String get unexpectedErrorSetup => 'セットアップ中に予期しないエラーが発生しました。';
+
+  @override
+  String get heading => '方位';
+
+  @override
+  String get alignedWithKaaba => 'カアバ神殿に合致';
+
+  @override
+  String turnRight(Object degrees) {
+    return '右に $degrees° 回ってください';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '左に $degrees° 回ってください';
+  }
+
+  @override
+  String get streamingAndNetwork => 'ストリーミングとネットワーク';
+
+  @override
+  String get next => '次';
+
+  @override
+  String get now => '今';
+
+  @override
+  String get current => '現在';
+
+  @override
+  String get active => 'アクティブ';
+
+  @override
+  String get activeNow => '現在アクティブ';
+
+  @override
+  String get hours => '時間';
+
+  @override
+  String get minutes => '分';
+
+  @override
+  String get seconds => '秒';
+
+  @override
+  String get fastingAndVoluntaryTimes => '断食と任意の礼拝の時間';
+
+  @override
+  String get imsak => 'イムサーク';
+
+  @override
+  String get ishraqAndDuha => 'イシュラークとドゥハー';
+
+  @override
+  String get lastThirdOfNight => '夜の最後の3分の1';
+
+  @override
+  String get awqatAlNahy => '礼拝の禁止時間帯';
+
+  @override
+  String get forbiddenSunriseDescription => '日の出から太陽が槍の高さまで昇るまで（約15分）';
+
+  @override
+  String get forbiddenNoonDescription => '太陽が天頂にある時からズフルが始まるまで（約8分）';
+
+  @override
+  String get forbiddenSunsetDescription => '太陽が黄色くなってから完全に沈むまで（約15分）';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQAで完全なファトワーを読む';
+
+  @override
+  String get asrJurisprudence => 'アスルの法学派（マズハブ）';
+
+  @override
+  String get shafieDescription => '標準（シャーフィイー、マーリキー、ハンバリー）';
+
+  @override
+  String get hanafiDescription => 'ハナフィー学派';
+
+  @override
+  String get shafieShadow => '標準（影1倍）';
+
+  @override
+  String get hanafiShadow => 'ハナフィー（影2倍）';
+
+  @override
+  String get calculationAndJurisprudence => '計算方法と法学派';
+
+  @override
+  String get notificationsAndAudio => '通知と音声';
+
+  @override
+  String get enablePrayerReminders => '礼拝リマインダーを有効にする';
+
+  @override
+  String get enablePrayerRemindersDescription => 'すべての今後の礼拝時間の通知を受け取ります。';
+
+  @override
+  String get adjustReminderTimingDescription => '実際の礼拝時間からのリマインダー時間を調整（+/-分）。';
+
+  @override
+  String get exactTime => '正確な時間';
+
+  @override
+  String actualTime(String time) {
+    return '実際: $time';
+  }
+
+  @override
+  String get jumpToToday => '今日へ移動';
+
+  @override
+  String get dateAndHijri => '日付 / ヒジュラ暦';
+
+  @override
+  String get selectedLocation => '選択された場所';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return '次: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return '現在: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerNameの開始時刻 $time';
+  }
+
+  @override
+  String get continueReading => '続きを読む';
+
+  @override
+  String get lastRead => '最後に読んだ';
+
+  @override
+  String get resume => '再開';
+
+  @override
+  String get startReading => '読み始める';
+
+  @override
+  String get verses => '節';
+
+  @override
+  String get makki => 'マッカ啓示';
+
+  @override
+  String get madani => 'マディーナ啓示';
+
+  @override
+  String get ayah => '節';
+
+  @override
+  String get edit => '編集';
 }

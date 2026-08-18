@@ -1258,4 +1258,213 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'د لمانځه منع شوی وخت';
+
+  @override
+  String get translationDatabase => 'د ژباړې ډیټابیس';
+
+  @override
+  String get translationDatabaseSubtitle => 'د ټاکل شوې ژباړې متن ډاونلوډ کیږي';
+
+  @override
+  String get tafsirCommentary => 'د قرآن تفسير';
+
+  @override
+  String get tafsirCommentarySubtitle => 'د تفسیر سرچینې چمتو کیږي';
+
+  @override
+  String get wordByWordAnalysis => 'کلمه په کلمه تحلیل';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'د لغتونو جلا کول تنظیمول';
+
+  @override
+  String get audioRecitationSegments => 'د غږیز تلاوت برخې';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'د ایتونو د وخت برخې تنظیمول';
+
+  @override
+  String get locationQiblaMetadata => 'د موقعیت او قبلې میټاډاټا';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'د نړۍ د ښارونو د موقعیت ډیټا ډاونلوډ کیږي';
+
+  @override
+  String get preparingResources => 'سرچینې چمتو کیږي...';
+
+  @override
+  String get setupCompletedOpeningQuran => 'ترتیب بشپړ شو! القرآن خلاصیږي...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'د ترتیب په جریان کې ناڅاپي تېروتنه رامنځته شوه.';
+
+  @override
+  String get heading => 'لارښود';
+
+  @override
+  String get alignedWithKaaba => 'له کعبې سره برابر شوی';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° ښي لور ته وګرځئ';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° چپې لور ته وګرځئ';
+  }
+
+  @override
+  String get streamingAndNetwork => 'سټریمینګ او شبکه';
+
+  @override
+  String get next => 'راتلونکی';
+
+  @override
+  String get now => 'اوس';
+
+  @override
+  String get current => 'اوسنی';
+
+  @override
+  String get active => 'فعال';
+
+  @override
+  String get activeNow => 'اوس فعال';
+
+  @override
+  String get hours => 'ساعتونه';
+
+  @override
+  String get minutes => 'دقیقې';
+
+  @override
+  String get seconds => 'ثانیې';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'د روژې او نفلو وختونه';
+
+  @override
+  String get imsak => 'امساک';
+
+  @override
+  String get ishraqAndDuha => 'اشراق او چاشت';
+
+  @override
+  String get lastThirdOfNight => 'د شپې وروستۍ دریمه برخه';
+
+  @override
+  String get awqatAlNahy => 'د لمانځه د منعې وختونه';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'د لمر ختو څخه تر هغه چې د یوې نېزې په اندازه پورته شي (~۱۵ دقیقې)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'کله چې لمر په سر کې وي تر څو چې زوال وکړي (~۸ دقیقې)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'د لمر له ژړېدو څخه تر بشپړ ډوبېدو پورې (~۱۵ دقیقې)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'په IslamQA کې بشپړه فتوی ولولئ';
+
+  @override
+  String get asrJurisprudence => 'د عصر فقهي مسلک (مذهب)';
+
+  @override
+  String get shafieDescription => 'معیاري (شافعي، مالکي، حنبلي)';
+
+  @override
+  String get hanafiDescription => 'حنفي مذهب';
+
+  @override
+  String get shafieShadow => 'معیاري (سیوری ۱ چنده)';
+
+  @override
+  String get hanafiShadow => 'حنفي (سیوری ۲ چنده)';
+
+  @override
+  String get calculationAndJurisprudence => 'حساب او فقه';
+
+  @override
+  String get notificationsAndAudio => 'خبرتیاوې او غږ';
+
+  @override
+  String get enablePrayerReminders => 'د لمانځه یادونه فعاله کړئ';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'د ټولو راتلونکو لمونځونو د وخت لپاره خبرتیا ترلاسه کړئ.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'د لمانځه له اصلي وخت څخه د یادونې وخت تنظیم کړئ (+/- دقیقې).';
+
+  @override
+  String get exactTime => 'پوره وخت';
+
+  @override
+  String actualTime(String time) {
+    return 'اصلي وخت: $time';
+  }
+
+  @override
+  String get jumpToToday => 'نن ورځې ته لاړ شئ';
+
+  @override
+  String get dateAndHijri => 'نېټه / هجري';
+
+  @override
+  String get selectedLocation => 'ټاکل شوی ځای';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'راتلونکی: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'اوس: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName په $time پیل کیږي';
+  }
+
+  @override
+  String get continueReading => 'لوستلو ته دوام ورکړئ';
+
+  @override
+  String get lastRead => 'وروستی لوستل شوی';
+
+  @override
+  String get resume => 'بیا پیل کړئ';
+
+  @override
+  String get startReading => 'لوستل پیل کړئ';
+
+  @override
+  String get verses => 'آیاتونه';
+
+  @override
+  String get makki => 'مکي';
+
+  @override
+  String get madani => 'مدني';
+
+  @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'سمون';
 }

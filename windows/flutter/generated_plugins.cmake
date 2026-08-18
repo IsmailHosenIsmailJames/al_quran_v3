@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
+  clipboard
   flutter_inappwebview_windows
   geolocator_windows
   media_kit_libs_windows_audio

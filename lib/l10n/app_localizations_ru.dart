@@ -1266,4 +1266,216 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Запрещенное время молитвы';
+
+  @override
+  String get translationDatabase => 'База данных переводов';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Загрузка текста выбранного перевода';
+
+  @override
+  String get tafsirCommentary => 'Толкование (Тафсир)';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Подготовка ресурсов тафсира';
+
+  @override
+  String get wordByWordAnalysis => 'Пословный анализ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Настройка пословного разбора';
+
+  @override
+  String get audioRecitationSegments => 'Аудиосегменты чтецов';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Настройка временных сегментов аятов';
+
+  @override
+  String get locationQiblaMetadata => 'Данные локации и Киблы';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Загрузка данных о геолокации городов';
+
+  @override
+  String get preparingResources => 'Подготовка ресурсов...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Настройка завершена! Открытие Корана...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Произошла непредвиденная ошибка при настройке.';
+
+  @override
+  String get heading => 'Направление';
+
+  @override
+  String get alignedWithKaaba => 'Направлено на Каабу';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Поверните на $degrees° вправо';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Поверните на $degrees° влево';
+  }
+
+  @override
+  String get streamingAndNetwork => 'Стриминг и сеть';
+
+  @override
+  String get next => 'Следующий';
+
+  @override
+  String get now => 'Сейчас';
+
+  @override
+  String get current => 'Текущий';
+
+  @override
+  String get active => 'Активный';
+
+  @override
+  String get activeNow => 'Активен сейчас';
+
+  @override
+  String get hours => 'Часы';
+
+  @override
+  String get minutes => 'Минуты';
+
+  @override
+  String get seconds => 'Секунды';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Время поста и добровольных молитв';
+
+  @override
+  String get imsak => 'Имсак';
+
+  @override
+  String get ishraqAndDuha => 'Ишрак и Духа';
+
+  @override
+  String get lastThirdOfNight => 'Последняя треть ночи';
+
+  @override
+  String get awqatAlNahy => 'Запретные времена для молитвы';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'От восхода солнца до его подъема на высоту копья (~15 мин)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Когда солнце в зените до наступления полудня (~8 мин)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Когда солнце желтеет до полного захода (~15 мин)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Читать полную фетву на IslamQA';
+
+  @override
+  String get asrJurisprudence => 'Мазхаб времени Аср';
+
+  @override
+  String get shafieDescription => 'Стандарт (Шафии, Малики, Ханбали)';
+
+  @override
+  String get hanafiDescription => 'Ханафитский мазхаб';
+
+  @override
+  String get shafieShadow => 'Стандарт (Тень 1x)';
+
+  @override
+  String get hanafiShadow => 'Ханафи (Тень 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Расчет и мазхаб';
+
+  @override
+  String get notificationsAndAudio => 'Уведомления и звук';
+
+  @override
+  String get enablePrayerReminders => 'Включить напоминания о молитве';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Получайте уведомления для всех предстоящих молитв.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Настройте время напоминания (+/- минут от времени молитвы).';
+
+  @override
+  String get exactTime => 'Точное время';
+
+  @override
+  String actualTime(String time) {
+    return 'Фактическое: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Перейти к сегодня';
+
+  @override
+  String get dateAndHijri => 'Дата / Хиджра';
+
+  @override
+  String get selectedLocation => 'Выбранное местоположение';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Следующая: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Сейчас: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName начинается в $time';
+  }
+
+  @override
+  String get continueReading => 'Продолжить чтение';
+
+  @override
+  String get lastRead => 'Последнее прочитанное';
+
+  @override
+  String get resume => 'Возобновить';
+
+  @override
+  String get startReading => 'Начать чтение';
+
+  @override
+  String get verses => 'Аяты';
+
+  @override
+  String get makki => 'Мекканская';
+
+  @override
+  String get madani => 'Мединская';
+
+  @override
+  String get ayah => 'Аят';
+
+  @override
+  String get edit => 'Редактировать';
 }

@@ -1270,4 +1270,216 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Verbotene Gebetszeit';
+
+  @override
+  String get translationDatabase => 'Übersetzungsdatenbank';
+
+  @override
+  String get translationDatabaseSubtitle =>
+      'Ausgewählter Übersetzungstext wird heruntergeladen';
+
+  @override
+  String get tafsirCommentary => 'Tafsir-Kommentar';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Tafsir-Ressourcen werden vorbereitet';
+
+  @override
+  String get wordByWordAnalysis => 'Wort-für-Wort-Analyse';
+
+  @override
+  String get wordByWordAnalysisSubtitle =>
+      'Wortschatzanalyse wird eingerichtet';
+
+  @override
+  String get audioRecitationSegments => 'Audio-Rezitationssegmente';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Vers-Timing-Segmente werden konfiguriert';
+
+  @override
+  String get locationQiblaMetadata => 'Standort- & Qibla-Metadaten';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Globale Standortdaten werden heruntergeladen';
+
+  @override
+  String get preparingResources => 'Ressourcen werden vorbereitet...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Einrichtung abgeschlossen! Al-Quran wird geöffnet...';
+
+  @override
+  String get unexpectedErrorSetup => 'Unerwarteter Fehler bei der Einrichtung.';
+
+  @override
+  String get heading => 'Ausrichtung';
+
+  @override
+  String get alignedWithKaaba => 'Ausgerichtet auf die Kaaba';
+
+  @override
+  String turnRight(Object degrees) {
+    return 'Drehe $degrees° nach rechts';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return 'Drehe $degrees° nach links';
+  }
+
+  @override
+  String get streamingAndNetwork => 'Streaming & Netzwerk';
+
+  @override
+  String get next => 'Nächste';
+
+  @override
+  String get now => 'Jetzt';
+
+  @override
+  String get current => 'Aktuell';
+
+  @override
+  String get active => 'Aktiv';
+
+  @override
+  String get activeNow => 'Jetzt aktiv';
+
+  @override
+  String get hours => 'Stunden';
+
+  @override
+  String get minutes => 'Minuten';
+
+  @override
+  String get seconds => 'Sekunden';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Fasten- und freiwillige Gebetszeiten';
+
+  @override
+  String get imsak => 'Imsak';
+
+  @override
+  String get ishraqAndDuha => 'Ischraq & Duha';
+
+  @override
+  String get lastThirdOfNight => 'Letztes Drittel der Nacht';
+
+  @override
+  String get awqatAlNahy => 'Verbotene Gebetszeiten (Awqat al-Nahy)';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Vom Sonnenaufgang bis die Sonne um Speerhöhe gestiegen ist (~15 Min.)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Wenn die Sonne im Zenit steht bis zum Beginn des Dhuhr (~8 Min.)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Wenn die Sonne gelb wird bis zum vollständigen Untergang (~15 Min.)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"';
+
+  @override
+  String get readMoreOnIslamQA => 'Vollständige Fatwa auf IslamQA lesen';
+
+  @override
+  String get asrJurisprudence => 'Asr-Rechtsschule (Madhhab)';
+
+  @override
+  String get shafieDescription => 'Standard (Schafi\'i, Maliki, Hanbali)';
+
+  @override
+  String get hanafiDescription => 'Hanafitische Rechtsschule';
+
+  @override
+  String get shafieShadow => 'Standard (Schatten 1x)';
+
+  @override
+  String get hanafiShadow => 'Hanafi (Schatten 2x)';
+
+  @override
+  String get calculationAndJurisprudence => 'Berechnung & Rechtsschule';
+
+  @override
+  String get notificationsAndAudio => 'Benachrichtigungen & Audio';
+
+  @override
+  String get enablePrayerReminders => 'Gebetserinnerungen aktivieren';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Erhalten Sie Benachrichtigungen für alle anstehenden Gebetszeiten.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Erinnerungszeit anpassen (+/- Minuten zur tatsächlichen Gebetszeit).';
+
+  @override
+  String get exactTime => 'Genaue Zeit';
+
+  @override
+  String actualTime(String time) {
+    return 'Tatsächlich: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Zu Heute springen';
+
+  @override
+  String get dateAndHijri => 'Datum / Hidschri';
+
+  @override
+  String get selectedLocation => 'Ausgewählter Ort';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Nächste: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Jetzt: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName beginnt um $time';
+  }
+
+  @override
+  String get continueReading => 'Weiterlesen';
+
+  @override
+  String get lastRead => 'Zuletzt gelesen';
+
+  @override
+  String get resume => 'Fortsetzen';
+
+  @override
+  String get startReading => 'Mit dem Lesen beginnen';
+
+  @override
+  String get verses => 'Verse';
+
+  @override
+  String get makki => 'Mekkanisch';
+
+  @override
+  String get madani => 'Medinensisch';
+
+  @override
+  String get ayah => 'Vers';
+
+  @override
+  String get edit => 'Bearbeiten';
 }

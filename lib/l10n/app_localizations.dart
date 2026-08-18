@@ -1507,7 +1507,7 @@ abstract class AppLocalizations {
   /// No description provided for @more.
   ///
   /// In en, this message translates to:
-  /// **'More: '**
+  /// **'More'**
   String get more;
 
   /// No description provided for @cacheNotFound.
@@ -2401,6 +2401,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forbidden Salat Time'**
   String get forbiddenSalatTime;
+
+  /// No description provided for @translationDatabase.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation Database'**
+  String get translationDatabase;
+
+  /// No description provided for @translationDatabaseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading selected translation text'**
+  String get translationDatabaseSubtitle;
+
+  /// No description provided for @tafsirCommentary.
+  ///
+  /// In en, this message translates to:
+  /// **'Tafsir Commentary'**
+  String get tafsirCommentary;
+
+  /// No description provided for @tafsirCommentarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing scholarly tafsir resources'**
+  String get tafsirCommentarySubtitle;
+
+  /// No description provided for @wordByWordAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Word-by-Word Analysis'**
+  String get wordByWordAnalysis;
+
+  /// No description provided for @wordByWordAnalysisSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting up vocabulary breakdown'**
+  String get wordByWordAnalysisSubtitle;
+
+  /// No description provided for @audioRecitationSegments.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio Recitation Segments'**
+  String get audioRecitationSegments;
+
+  /// No description provided for @audioRecitationSegmentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuring ayah timing segments'**
+  String get audioRecitationSegmentsSubtitle;
+
+  /// No description provided for @locationQiblaMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Location & Qibla Metadata'**
+  String get locationQiblaMetadata;
+
+  /// No description provided for @locationQiblaMetadataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading global city location data'**
+  String get locationQiblaMetadataSubtitle;
+
+  /// No description provided for @preparingResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing resources...'**
+  String get preparingResources;
+
+  /// No description provided for @setupCompletedOpeningQuran.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup completed! Opening Al-Quran...'**
+  String get setupCompletedOpeningQuran;
+
+  /// No description provided for @unexpectedErrorSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred during setup.'**
+  String get unexpectedErrorSetup;
+
+  /// No description provided for @heading.
+  ///
+  /// In en, this message translates to:
+  /// **'Heading'**
+  String get heading;
+
+  /// No description provided for @alignedWithKaaba.
+  ///
+  /// In en, this message translates to:
+  /// **'Aligned with Kaaba'**
+  String get alignedWithKaaba;
+
+  /// No description provided for @turnRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {degrees}° Right'**
+  String turnRight(Object degrees);
+
+  /// No description provided for @turnLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn {degrees}° Left'**
+  String turnLeft(Object degrees);
+
+  /// No description provided for @streamingAndNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Streaming & Network'**
+  String get streamingAndNetwork;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @now.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get now;
+
+  /// No description provided for @current.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get current;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @activeNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Now'**
+  String get activeNow;
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get hours;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Minutes'**
+  String get minutes;
+
+  /// No description provided for @seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'Seconds'**
+  String get seconds;
+
+  /// No description provided for @fastingAndVoluntaryTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Fasting & Voluntary Times'**
+  String get fastingAndVoluntaryTimes;
+
+  /// No description provided for @imsak.
+  ///
+  /// In en, this message translates to:
+  /// **'Imsak'**
+  String get imsak;
+
+  /// No description provided for @ishraqAndDuha.
+  ///
+  /// In en, this message translates to:
+  /// **'Ishraq & Duha'**
+  String get ishraqAndDuha;
+
+  /// No description provided for @lastThirdOfNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 3rd of Night'**
+  String get lastThirdOfNight;
+
+  /// No description provided for @awqatAlNahy.
+  ///
+  /// In en, this message translates to:
+  /// **'Forbidden Prayer Times (Awqat al-Nahy)'**
+  String get awqatAlNahy;
+
+  /// No description provided for @forbiddenSunriseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'From sunrise until the sun rises the height of a spear (~15 mins)'**
+  String get forbiddenSunriseDescription;
+
+  /// No description provided for @forbiddenNoonDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'When the sun is at its zenith until Dhuhr starts (~8 mins)'**
+  String get forbiddenNoonDescription;
+
+  /// No description provided for @forbiddenSunsetDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'When the sun turns yellow until Maghrib begins (~15 mins)'**
+  String get forbiddenSunsetDescription;
+
+  /// No description provided for @forbiddenTimesHadith.
+  ///
+  /// In en, this message translates to:
+  /// **'According to authentic Hadith in Sahih Muslim (832), \'Uqbah ibn \'Amir al-Juhani said:\n\n\"There are three times at which the Messenger of Allah (peace and blessings be upon him) forbade us to pray or to bury our dead:\n1. When the sun begins to rise until it is fully risen (~15 mins after sunrise).\n2. When the sun is at its height at midday until it has passed the meridian (~8-10 mins before Dhuhr).\n3. When the sun begins to set until it has completely set (~15 mins before Maghrib).\"'**
+  String get forbiddenTimesHadith;
+
+  /// No description provided for @readMoreOnIslamQA.
+  ///
+  /// In en, this message translates to:
+  /// **'Read Complete Fatawa on IslamQA'**
+  String get readMoreOnIslamQA;
+
+  /// No description provided for @asrJurisprudence.
+  ///
+  /// In en, this message translates to:
+  /// **'Asr Jurisprudence (Madhab)'**
+  String get asrJurisprudence;
+
+  /// No description provided for @shafieDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard (Shafi\'i, Maliki, Hanbali)'**
+  String get shafieDescription;
+
+  /// No description provided for @hanafiDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Hanafi School of Thought'**
+  String get hanafiDescription;
+
+  /// No description provided for @shafieShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard (Shadow 1x)'**
+  String get shafieShadow;
+
+  /// No description provided for @hanafiShadow.
+  ///
+  /// In en, this message translates to:
+  /// **'Hanafi (Shadow 2x)'**
+  String get hanafiShadow;
+
+  /// No description provided for @calculationAndJurisprudence.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation & Jurisprudence'**
+  String get calculationAndJurisprudence;
+
+  /// No description provided for @notificationsAndAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications & Audio'**
+  String get notificationsAndAudio;
+
+  /// No description provided for @enablePrayerReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Prayer Reminders'**
+  String get enablePrayerReminders;
+
+  /// No description provided for @enablePrayerRemindersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive notification alerts for all upcoming prayer times.'**
+  String get enablePrayerRemindersDescription;
+
+  /// No description provided for @adjustReminderTimingDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust individual prayer reminder timing (+/- minutes from actual prayer start).'**
+  String get adjustReminderTimingDescription;
+
+  /// No description provided for @exactTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Time'**
+  String get exactTime;
+
+  /// No description provided for @actualTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Actual: {time}'**
+  String actualTime(String time);
+
+  /// No description provided for @jumpToToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump to Today'**
+  String get jumpToToday;
+
+  /// No description provided for @dateAndHijri.
+  ///
+  /// In en, this message translates to:
+  /// **'Date / Hijri'**
+  String get dateAndHijri;
+
+  /// No description provided for @selectedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected Location'**
+  String get selectedLocation;
+
+  /// No description provided for @nextPrayerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: {prayerName}'**
+  String nextPrayerLabel(String prayerName);
+
+  /// No description provided for @currentPrayerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Now: {prayerName}'**
+  String currentPrayerLabel(String prayerName);
+
+  /// No description provided for @startsAt.
+  ///
+  /// In en, this message translates to:
+  /// **'{prayerName} starts at {time}'**
+  String startsAt(String prayerName, String time);
+
+  /// No description provided for @continueReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Reading'**
+  String get continueReading;
+
+  /// No description provided for @lastRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Read'**
+  String get lastRead;
+
+  /// No description provided for @resume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resume;
+
+  /// No description provided for @startReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Reading'**
+  String get startReading;
+
+  /// No description provided for @verses.
+  ///
+  /// In en, this message translates to:
+  /// **'Verses'**
+  String get verses;
+
+  /// No description provided for @makki.
+  ///
+  /// In en, this message translates to:
+  /// **'Makki'**
+  String get makki;
+
+  /// No description provided for @madani.
+  ///
+  /// In en, this message translates to:
+  /// **'Madani'**
+  String get madani;
+
+  /// No description provided for @ayah.
+  ///
+  /// In en, this message translates to:
+  /// **'Ayah'**
+  String get ayah;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate

@@ -1259,4 +1259,214 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'ممنوعہ نماز کا وقت';
+
+  @override
+  String get translationDatabase => 'ترجمہ ڈیٹابیس';
+
+  @override
+  String get translationDatabaseSubtitle => 'منتخب کردہ ترجمہ کی ڈاؤن لوڈنگ';
+
+  @override
+  String get tafsirCommentary => 'تفسیر قرآن';
+
+  @override
+  String get tafsirCommentarySubtitle => 'تفسیر کے مواد کی تیاری';
+
+  @override
+  String get wordByWordAnalysis => 'لفظ بہ لفظ تجزیہ';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'الفاظ کے معنی کی تیاری';
+
+  @override
+  String get audioRecitationSegments => 'آڈیو تلاوت کے ٹائم فریم';
+
+  @override
+  String get audioRecitationSegmentsSubtitle => 'آیات کی ٹائمنگ کی ترتیب';
+
+  @override
+  String get locationQiblaMetadata => 'مقام اور قبلہ کا ڈیٹا';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'عالمی شہروں کے مقام کا ڈیٹا ڈاؤن لوڈ ہو رہا ہے';
+
+  @override
+  String get preparingResources => 'وسائل تیار کیے جا رہے ہیں...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'ترتیب مکمل ہو گئی! القرآن کھولا جا رہا ہے...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'ترتیب کے دوران ایک غیر متوقع خرابی پیش آئی۔';
+
+  @override
+  String get heading => 'رخ';
+
+  @override
+  String get alignedWithKaaba => 'کعبہ کے ساتھ درست سمت';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° دائیں طرف مڑیں';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° بائیں طرف مڑیں';
+  }
+
+  @override
+  String get streamingAndNetwork => 'اسٹریمنگ اور نیٹ ورک';
+
+  @override
+  String get next => 'اگلا';
+
+  @override
+  String get now => 'ابھی';
+
+  @override
+  String get current => 'موجودہ';
+
+  @override
+  String get active => 'فعال';
+
+  @override
+  String get activeNow => 'ابھی فعال';
+
+  @override
+  String get hours => 'گھنٹے';
+
+  @override
+  String get minutes => 'منٹ';
+
+  @override
+  String get seconds => 'سیکنڈ';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'روزہ اور نفل اوقات';
+
+  @override
+  String get imsak => 'امساک';
+
+  @override
+  String get ishraqAndDuha => 'اشراق اور چاشت';
+
+  @override
+  String get lastThirdOfNight => 'رات کا آخری تہائی';
+
+  @override
+  String get awqatAlNahy => 'نماز کے ممنوعہ اوقات';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'طلوع آفتاب سے لے کر نیزہ بھر بلند ہونے تک (~15 منٹ)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'سورج عین سر پر ہونے سے لے کر ڈھلنے تک (~8 منٹ)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'سورج زرد ہونے سے لے کر غروب آفتاب تک (~15 منٹ)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'صحیح مسلم (832) میں عقبہ بن عامر رضی اللہ عنہ سے روایت ہے کہ:\n\n\"رسول اللہ صلی اللہ علیہ وسلم ہمیں تین اوقات میں نماز پڑھنے یا اپنے مردوں کو دفن کرنے سے منع فرماتے تھے:\n1. جب سورج طلوع ہو رہا ہو یہاں تک کہ بلند ہو جائے۔\n2. جب دوپہر کو سورج عین سر پر ہو یہاں تک کہ ڈھل جائے۔\n3. جب سورج غروب ہونے کے قریب ہو یہاں تک کہ غروب ہو جائے۔\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA پر مکمل فتویٰ پڑھیں';
+
+  @override
+  String get asrJurisprudence => 'فقہ عصر (مذہب)';
+
+  @override
+  String get shafieDescription => 'جمہور (شافعی، مالکی، حنبلی)';
+
+  @override
+  String get hanafiDescription => 'فقہ حنفی';
+
+  @override
+  String get shafieShadow => 'جمہور (سایہ 1 گنا)';
+
+  @override
+  String get hanafiShadow => 'حنفی (سایہ 2 گنا)';
+
+  @override
+  String get calculationAndJurisprudence => 'طریقہ حساب اور فقہ';
+
+  @override
+  String get notificationsAndAudio => 'اطلاعات اور آواز';
+
+  @override
+  String get enablePrayerReminders => 'نماز کے یاد دہانی الرٹس آن کریں';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'تمام آنے والی نمازوں کے اوقات کے لیے الرٹ وصول کریں۔';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'نماز کے اصل وقت سے الرٹ کا وقت آگے پیچھے (+/- منٹ) کریں۔';
+
+  @override
+  String get exactTime => 'عین وقت';
+
+  @override
+  String actualTime(String time) {
+    return 'اصل وقت: $time';
+  }
+
+  @override
+  String get jumpToToday => 'آج کے دن پر جائیں';
+
+  @override
+  String get dateAndHijri => 'تاریخ / ہجری';
+
+  @override
+  String get selectedLocation => 'منتخب مقام';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'اگلی: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'ابھی: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName کا آغاز $time';
+  }
+
+  @override
+  String get continueReading => 'پڑھنا جاری رکھیں';
+
+  @override
+  String get lastRead => 'آخری بار پڑھا گیا';
+
+  @override
+  String get resume => 'دوبارہ شروع کریں';
+
+  @override
+  String get startReading => 'پڑھنا شروع کریں';
+
+  @override
+  String get verses => 'آیات';
+
+  @override
+  String get makki => 'مکی';
+
+  @override
+  String get madani => 'مدنی';
+
+  @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'ترمیم';
 }

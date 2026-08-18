@@ -1258,4 +1258,215 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get forbiddenSalatTime => 'Kerahat Vakti';
+
+  @override
+  String get translationDatabase => 'Meal Veritabanı';
+
+  @override
+  String get translationDatabaseSubtitle => 'Seçilen meal metni indiriliyor';
+
+  @override
+  String get tafsirCommentary => 'Tefsir Açıklaması';
+
+  @override
+  String get tafsirCommentarySubtitle => 'Tefsir kaynakları hazırlanıyor';
+
+  @override
+  String get wordByWordAnalysis => 'Kelime Kelime Tahlil';
+
+  @override
+  String get wordByWordAnalysisSubtitle => 'Kelime kelime anlam hazırlanıyor';
+
+  @override
+  String get audioRecitationSegments => 'Sesli Tilavet Segmentleri';
+
+  @override
+  String get audioRecitationSegmentsSubtitle =>
+      'Ayet zamanlama segmentleri ayarlanıyor';
+
+  @override
+  String get locationQiblaMetadata => 'Konum ve Kıble Verileri';
+
+  @override
+  String get locationQiblaMetadataSubtitle =>
+      'Küresel şehir konum verileri indiriliyor';
+
+  @override
+  String get preparingResources => 'Kaynaklar hazırlanıyor...';
+
+  @override
+  String get setupCompletedOpeningQuran =>
+      'Kurulum tamamlandı! Kur\'an-ı Kerim açılıyor...';
+
+  @override
+  String get unexpectedErrorSetup =>
+      'Kurulum sırasında beklenmeyen bir hata oluştu.';
+
+  @override
+  String get heading => 'Pusula Yönü';
+
+  @override
+  String get alignedWithKaaba => 'Kabe ile Hizalandı';
+
+  @override
+  String turnRight(Object degrees) {
+    return '$degrees° Sağa Dönün';
+  }
+
+  @override
+  String turnLeft(Object degrees) {
+    return '$degrees° Sola Dönün';
+  }
+
+  @override
+  String get streamingAndNetwork => 'Akış ve Ağ';
+
+  @override
+  String get next => 'Sonraki';
+
+  @override
+  String get now => 'Şimdi';
+
+  @override
+  String get current => 'Mevcut';
+
+  @override
+  String get active => 'Aktif';
+
+  @override
+  String get activeNow => 'Şimdi Aktif';
+
+  @override
+  String get hours => 'Saat';
+
+  @override
+  String get minutes => 'Dakika';
+
+  @override
+  String get seconds => 'Saniye';
+
+  @override
+  String get fastingAndVoluntaryTimes => 'Oruç ve Nafile Vakitleri';
+
+  @override
+  String get imsak => 'İmsak';
+
+  @override
+  String get ishraqAndDuha => 'İşrak ve Duha';
+
+  @override
+  String get lastThirdOfNight => 'Gecenin Son Üçte Biri';
+
+  @override
+  String get awqatAlNahy => 'Kerahat Vakitleri';
+
+  @override
+  String get forbiddenSunriseDescription =>
+      'Güneşin doğuşundan bir mızrak boyu yükselmesine kadar (~15 dk)';
+
+  @override
+  String get forbiddenNoonDescription =>
+      'Güneş tam tepedeyken zeval vaktine kadar (~8 dk)';
+
+  @override
+  String get forbiddenSunsetDescription =>
+      'Güneşin sararmasından batışına kadar (~15 dk)';
+
+  @override
+  String get forbiddenTimesHadith =>
+      'Sahih-i Müslim\'de (832) Ukbe b. Âmir\'den rivayet edildiğine göre:\n\n\"Resûlullah (s.a.v.) bize üç vakitte namaz kılmayı veya ölülerimizi defnetmeyi yasakladı:\n1. Güneş doğmaya başladığında yükselene kadar.\n2. Öğle vakti güneş tam tepedeyken batıya meyletmesine kadar.\n3. Güneş batmaya yüz tuttuğunda batana kadar.\"';
+
+  @override
+  String get readMoreOnIslamQA => 'IslamQA\'da Tam Fetvayı Oku';
+
+  @override
+  String get asrJurisprudence => 'İkindi Vakti Mezhebi';
+
+  @override
+  String get shafieDescription => 'Cumhur (Şafii, Maliki, Hanbeli)';
+
+  @override
+  String get hanafiDescription => 'Hanefi Mezhebi';
+
+  @override
+  String get shafieShadow => 'Standart (Gölge 1 katı)';
+
+  @override
+  String get hanafiShadow => 'Hanefi (Gölge 2 katı)';
+
+  @override
+  String get calculationAndJurisprudence => 'Hesaplama ve Fıkıh';
+
+  @override
+  String get notificationsAndAudio => 'Bildirimler ve Ses';
+
+  @override
+  String get enablePrayerReminders => 'Namaz Hatırlatıcılarını Aç';
+
+  @override
+  String get enablePrayerRemindersDescription =>
+      'Gelecek tüm namaz vakitleri için bildirim uyarısı alın.';
+
+  @override
+  String get adjustReminderTimingDescription =>
+      'Namaz vaktinden önce/sonra hatırlatma dakikası ayarlayın (+/- dk).';
+
+  @override
+  String get exactTime => 'Tam Vakti';
+
+  @override
+  String actualTime(String time) {
+    return 'Gerçek Vakit: $time';
+  }
+
+  @override
+  String get jumpToToday => 'Bugüne Git';
+
+  @override
+  String get dateAndHijri => 'Tarih / Hicri';
+
+  @override
+  String get selectedLocation => 'Seçilen Konum';
+
+  @override
+  String nextPrayerLabel(String prayerName) {
+    return 'Sonraki: $prayerName';
+  }
+
+  @override
+  String currentPrayerLabel(String prayerName) {
+    return 'Şimdi: $prayerName';
+  }
+
+  @override
+  String startsAt(String prayerName, String time) {
+    return '$prayerName $time vaktinde başlar';
+  }
+
+  @override
+  String get continueReading => 'Okumaya Devam Et';
+
+  @override
+  String get lastRead => 'Son Okunan';
+
+  @override
+  String get resume => 'Devam Et';
+
+  @override
+  String get startReading => 'Okumaya Başla';
+
+  @override
+  String get verses => 'Ayet';
+
+  @override
+  String get makki => 'Mekkî';
+
+  @override
+  String get madani => 'Medenî';
+
+  @override
+  String get ayah => 'Ayet';
+
+  @override
+  String get edit => 'Düzenle';
 }
