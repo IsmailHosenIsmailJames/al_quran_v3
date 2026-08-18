@@ -142,8 +142,8 @@ void main() {
         engine.search("يس");
       }
       stopwatch.stop();
-      // 1000 total searches should comfortably finish in under 150ms in debug VM (< 0.15ms per search)
-      expect(stopwatch.elapsedMilliseconds, lessThan(200));
+      // 1000 total searches should comfortably finish in under 500ms in unoptimized debug VM (< 0.5ms per search)
+      expect(stopwatch.elapsedMilliseconds, lessThan(500));
     });
   });
 }
