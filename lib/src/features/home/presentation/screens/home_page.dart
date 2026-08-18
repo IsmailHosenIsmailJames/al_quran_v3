@@ -19,6 +19,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -359,7 +360,21 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).colorScheme.surface,
               title: Text(l10n.alQuran),
               centerTitle: true,
-              actions: [],
+              actions: [
+                IconButton(
+                  tooltip: l10n.search,
+                  icon: const Icon(FluentIcons.search_24_regular),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QuranSearchScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const Gap(4),
+              ],
             ),
       body: Row(
         children: [

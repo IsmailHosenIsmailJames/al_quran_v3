@@ -1,9 +1,10 @@
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
-import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
-import 'package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:gap/gap.dart";
 
 class DownloadedTranslationsSettings extends StatefulWidget {
   const DownloadedTranslationsSettings({super.key});
@@ -55,40 +56,71 @@ class _DownloadedTranslationsSettingsState
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = context.watch<ThemeCubit>().state.primary;
+    final themeState = context.watch<ThemeCubit>().state;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (downloadedTranslations.isEmpty) {
       return const SizedBox.shrink();
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 14.0),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
-        itemCount: downloadedTranslations.length,
-        itemBuilder: (context, index) {
-          final book = downloadedTranslations[index];
-          final isSelected = _isSelected(book);
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(top: 6, bottom: 6),
+      itemCount: downloadedTranslations.length,
+      separatorBuilder: (context, index) => const Gap(6),
+      itemBuilder: (context, index) {
+        final book = downloadedTranslations[index];
+        final isSelected = _isSelected(book);
 
-          return CheckboxListTile(
-            contentPadding: EdgeInsets.zero,
-            controlAffinity: ListTileControlAffinity.leading,
-            activeColor: primaryColor,
-            title: Text(book.name, style: const TextStyle(fontSize: 14)),
-            value: isSelected,
-            onChanged: (value) => _toggleSelection(book, value),
-            secondary: IconButton(
-              icon: const Icon(
-                FluentIcons.delete_24_regular,
-                color: Colors.red,
-              ),
-              onPressed: () => _deleteTranslation(book),
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? themeState.primary.withValues(alpha: isDark ? 0.12 : 0.04)
+                : (isDark
+                    ? Colors.white.withValues(alpha: 0.03)
+                    : Colors.grey.shade50),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: isSelected
+                  ? themeState.primary.withValues(alpha: 0.4)
+                  : (isDark
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.grey.shade200),
             ),
-          );
-        },
-      ),
+          ),
+          child: Row(
+            children: [
+              Checkbox.adaptive(
+                value: isSelected,
+                activeColor: themeState.primary,
+                onChanged: (value) => _toggleSelection(book, value),
+              ),
+              const Gap(4),
+              Expanded(
+                child: Text(
+                  book.name,
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    color: isDark ? Colors.white : Colors.grey.shade900,
+                  ),
+                ),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(
+                  FluentIcons.delete_20_regular,
+                  color: Color(0xFFDC2626),
+                  size: 18,
+                ),
+                onPressed: () => _deleteTranslation(book),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

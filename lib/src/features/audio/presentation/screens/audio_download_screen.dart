@@ -3,7 +3,6 @@ import "dart:io";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/core/resources/quran_resources/meta/chapter_header_meta.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
@@ -52,8 +51,8 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (widget.reciterInfoModel != null) {
         context.read<AudioTabReciterCubit>().changeReciter(
-              widget.reciterInfoModel!,
-            );
+          widget.reciterInfoModel!,
+        );
       }
       if (widget.initDownloadSurah != null) {
         final key = _keysOfAllSurah[widget.initDownloadSurah!.id];
@@ -130,7 +129,14 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
             onChanged: (_) => setState(() {}),
             decoration: InputDecoration(
               hintText: l10n.searchForASurah,
-              prefixIcon: const Icon(FluentIcons.search_20_regular, size: 20),
+              hintStyle: TextStyle(
+                color: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+              ),
+              prefixIcon: Icon(
+                FluentIcons.search_20_regular,
+                size: 20,
+                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+              ),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
                       icon: const Icon(Icons.clear_rounded, size: 18),
@@ -143,12 +149,22 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
               filled: true,
               fillColor: isDark
                   ? Colors.white.withValues(alpha: 0.05)
-                  : themeState.primaryShade100.withValues(alpha: 0.35),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                  : Colors.grey.shade100,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 16,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(roundedRadius),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(
+                  color: isDark ? Colors.transparent : Colors.grey.shade300,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(roundedRadius),
+                borderSide: BorderSide(
+                  color: isDark ? Colors.transparent : Colors.grey.shade300,
+                ),
               ),
             ),
           ),
@@ -156,13 +172,8 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
 
           // Surahs List
           ...filteredSurahs.map(
-            (surah) => _buildSurahCard(
-              context,
-              surah,
-              l10n,
-              themeState,
-              isDark,
-            ),
+            (surah) =>
+                _buildSurahCard(context, surah, l10n, themeState, isDark),
           ),
         ],
       ),
@@ -188,7 +199,8 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
             final downloadedCount = snapshot.data ?? 0;
             final isAllDownloaded =
                 surah.versesCount > 0 && surah.versesCount <= downloadedCount;
-            final isDownloadingThis = downloadState.isDownloading &&
+            final isDownloadingThis =
+                downloadState.isDownloading &&
                 downloadState.surahNumber == surah.id;
 
             return Container(
@@ -243,10 +255,11 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                               ),
                               const Spacer(),
                               Text(
-                                chapterHeaderCodes[surah.id - 1],
-                                style: const TextStyle(
-                                  fontFamily: "SurahName",
-                                  fontSize: 26,
+                                "surah${surah.id.toString().padLeft(3, '0')}",
+                                style: TextStyle(
+                                  fontFamily: "surah-name-v1",
+                                  fontSize: 22,
+                                  color: isDark ? Colors.white : Colors.grey.shade900,
                                 ),
                               ),
                             ],
@@ -287,10 +300,11 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                           IconButton(
                             visualDensity: VisualDensity.compact,
                             tooltip: l10n.delete,
-                            onPressed: () => _confirmDeleteSurah(context, surah, l10n),
+                            onPressed: () =>
+                                _confirmDeleteSurah(context, surah, l10n),
                             icon: const Icon(
                               FluentIcons.delete_20_regular,
-                              color: Colors.redAccent,
+                              color: Color(0xFFDC2626),
                               size: 20,
                             ),
                           ),
@@ -309,8 +323,9 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                                   ? downloadState.progress
                                   : null,
                               color: themeState.primary,
-                              backgroundColor:
-                                  themeState.primary.withValues(alpha: 0.2),
+                              backgroundColor: themeState.primary.withValues(
+                                alpha: 0.2,
+                              ),
                             ),
                           ),
                           const Gap(4),
@@ -322,16 +337,16 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                               context
                                   .read<AudioDownloadCubit>()
                                   .updateIsDownloading(false);
-                              context
-                                  .read<AudioDownloadCubit>()
-                                  .updateProgress(0.0);
+                              context.read<AudioDownloadCubit>().updateProgress(
+                                0.0,
+                              );
                               context
                                   .read<AudioDownloadCubit>()
                                   .updateDownloadingSurahNumber(0);
                             },
                             icon: const Icon(
                               Icons.cancel_outlined,
-                              color: Colors.redAccent,
+                              color: Color(0xFFDC2626),
                               size: 20,
                             ),
                           ),
@@ -342,8 +357,9 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                         visualDensity: VisualDensity.compact,
                         tooltip: l10n.download,
                         style: IconButton.styleFrom(
-                          backgroundColor:
-                              themeState.primary.withValues(alpha: 0.15),
+                          backgroundColor: themeState.primary.withValues(
+                            alpha: 0.15,
+                          ),
                           foregroundColor: themeState.primary,
                         ),
                         onPressed: () async {
@@ -387,15 +403,16 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
             ),
             FilledButton(
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color(0xFFDC2626),
               ),
               onPressed: () async {
                 final path =
                     AudioPlayerManager.getExpectedSurahDirectoryLocation(
-                  surahInfoModel: surah,
-                  reciterInfoModel:
-                      context.read<AudioTabReciterCubit>().state,
-                );
+                      surahInfoModel: surah,
+                      reciterInfoModel: context
+                          .read<AudioTabReciterCubit>()
+                          .state,
+                    );
                 if (path != null) {
                   final dir = Directory(path);
                   if (await dir.exists()) {

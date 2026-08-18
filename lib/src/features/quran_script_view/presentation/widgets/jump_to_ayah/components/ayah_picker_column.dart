@@ -123,18 +123,18 @@ class _AyahPickerColumnState extends State<AyahPickerColumn> {
                 decoration: BoxDecoration(
                   color: isHighlighted
                       ? widget.themeState.primary.withValues(
-                          alpha: isDark ? 0.25 : 0.14,
+                          alpha: isDark ? 0.2 : 0.08,
                         )
                       : isDark
                           ? Colors.white.withValues(alpha: 0.02)
-                          : Colors.black.withValues(alpha: 0.015),
+                          : Colors.white,
                   borderRadius: BorderRadius.circular(roundedRadius),
                   border: Border.all(
                     color: isHighlighted
                         ? widget.themeState.primary
                         : isDark
                             ? Colors.white.withValues(alpha: 0.05)
-                            : Colors.black.withValues(alpha: 0.04),
+                            : Colors.grey.shade200,
                     width: isHighlighted ? 1.5 : 1,
                   ),
                 ),

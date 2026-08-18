@@ -100,13 +100,21 @@ class QuranHistoryCarousel extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: isDark
                             ? Colors.white.withValues(alpha: 0.05)
-                            : themeState.primaryShade100.withValues(alpha: 0.7),
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isDark
                               ? Colors.white.withValues(alpha: 0.08)
-                              : themeState.primaryShade200.withValues(alpha: 0.6),
+                              : Colors.grey.shade300,
                         ),
+                        boxShadow: [
+                          if (!isDark)
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.02),
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
+                            ),
+                        ],
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

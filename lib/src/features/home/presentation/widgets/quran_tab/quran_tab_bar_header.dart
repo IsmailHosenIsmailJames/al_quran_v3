@@ -30,12 +30,12 @@ class QuranTabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
         decoration: BoxDecoration(
           color: isDark
               ? const Color(0xFF1E1E1E)
-              : themeState.primaryShade100.withValues(alpha: 0.9),
+              : Colors.grey.shade100,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: isDark
                 ? Colors.white.withValues(alpha: 0.08)
-                : themeState.primaryShade200,
+                : Colors.grey.shade300,
           ),
         ),
         child: TabBar(

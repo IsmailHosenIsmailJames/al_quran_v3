@@ -32,7 +32,10 @@ class QuranQuickAccessBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 4.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -100,10 +103,11 @@ class QuranQuickAccessBar extends StatelessWidget {
 
                   final String? scrollTo =
                       ((model.scrollIndex != null) && (model.scrollIndex! > 1))
-                          ? "${model.surahNumber}:${model.scrollIndex}"
-                          : null;
+                      ? "${model.surahNumber}:${model.scrollIndex}"
+                      : null;
 
-                  final label = surahName +
+                  final label =
+                      surahName +
                       (scrollTo != null
                           ? " • ${localizedNumber(context, model.scrollIndex)}"
                           : "");
@@ -131,14 +135,23 @@ class QuranQuickAccessBar extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: isDark
                             ? Colors.white.withValues(alpha: 0.05)
-                            : themeState.primaryShade100.withValues(alpha: 0.8),
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: isDark
                               ? Colors.white.withValues(alpha: 0.08)
-                              : themeState.primaryShade200,
+                              : Colors.grey.shade300,
                         ),
+                        boxShadow: [
+                          if (!isDark)
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.02),
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
+                            ),
+                        ],
                       ),
+                      alignment: Alignment.center,
                       child: Text(
                         label,
                         style: TextStyle(

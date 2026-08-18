@@ -133,18 +133,26 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             decoration: BoxDecoration(
               color: isForbidden
-                  ? Colors.amber.withValues(alpha: isDark ? 0.18 : 0.12)
+                  ? Colors.amber.withValues(alpha: isDark ? 0.18 : 0.10)
                   : (isDark
                       ? Colors.white.withValues(alpha: 0.04)
-                      : themeState.primaryShade100.withValues(alpha: 0.55)),
+                      : Colors.white),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
                 color: isForbidden
                     ? Colors.amber.shade700.withValues(alpha: 0.5)
                     : (isDark
                         ? Colors.white.withValues(alpha: 0.08)
-                        : themeState.primaryShade200.withValues(alpha: 0.5)),
+                        : Colors.grey.shade200),
               ),
+              boxShadow: [
+                if (!isDark && !isForbidden)
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.02),
+                    blurRadius: 4,
+                    offset: const Offset(0, 1),
+                  ),
+              ],
             ),
             child: Row(
               children: [
