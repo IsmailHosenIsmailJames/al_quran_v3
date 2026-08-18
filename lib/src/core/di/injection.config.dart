@@ -159,6 +159,12 @@ import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/qu
     as _i81;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart'
     as _i348;
+import 'package:al_quran_v3/src/features/search/data/datasources/quran_search_datasource.dart'
+    as _i656;
+import 'package:al_quran_v3/src/features/search/domain/usecases/search_quran_usecase.dart'
+    as _i405;
+import 'package:al_quran_v3/src/features/search/presentation/cubit/quran_search_cubit.dart'
+    as _i151;
 import 'package:al_quran_v3/src/features/settings/data/datasources/settings_local_datasource.dart'
     as _i584;
 import 'package:al_quran_v3/src/features/settings/data/repositories/settings_repository_impl.dart'
@@ -296,6 +302,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i348.WordPlayingStateCubit>(
       () => _i348.WordPlayingStateCubit(),
     );
+    gh.lazySingleton<_i656.QuranSearchDataSource>(
+      () => _i656.QuranSearchDataSource(),
+    );
     gh.lazySingleton<_i584.SettingsLocalDataSource>(
       () => _i584.SettingsLocalDataSource(),
     );
@@ -330,6 +339,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i283.SetupRepositoryImpl(
         localDataSource: gh<_i72.SetupLocalDataSource>(),
       ),
+    );
+    gh.factory<_i405.SearchQuranUseCase>(
+      () => _i405.SearchQuranUseCase(gh<_i656.QuranSearchDataSource>()),
     );
     gh.lazySingleton<_i461.TajweedGuideLocalDataSource>(
       () => _i461.TajweedGuideLocalDataSourceImpl(),
@@ -460,6 +472,12 @@ extension GetItInjectableX on _i174.GetIt {
     >(
       (initState, _) =>
           _i945.LocationQiblaPrayerDataCubit(initState: initState),
+    );
+    gh.factory<_i151.QuranSearchCubit>(
+      () => _i151.QuranSearchCubit(
+        gh<_i656.QuranSearchDataSource>(),
+        gh<_i405.SearchQuranUseCase>(),
+      ),
     );
     gh.lazySingleton<_i511.GetAppInfoUseCase>(
       () => _i511.GetAppInfoUseCase(gh<_i914.IAboutRepository>()),

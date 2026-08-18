@@ -1468,14 +1468,114 @@ class AppLocalizationsRu extends AppLocalizations {
   String get verses => 'Аяты';
 
   @override
+  String get ayah => 'Аят';
+
+  @override
+  String get edit => 'Редактировать';
+
+  @override
+  String get searchAll => 'Все';
+
+  @override
+  String get searchArabic => 'Арабский';
+
+  @override
+  String get searchQuranHint => 'Поиск в Коране, суре, 2:255, переводе...';
+
+  @override
+  String get searchFiltersAndOptions => 'Фильтры и параметры поиска';
+
+  @override
+  String get exactPhrase => 'Точная фраза';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сур найдено',
+      few: '$count суры найдены',
+      one: '$count сура найдена',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count аятов найдено',
+      few: '$count аята найдено',
+      one: '$count аят найден',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'Нет сур, соответствующих «$query»';
+  }
+
+  @override
+  String get noResultsFound => 'Ничего не найдено';
+
+  @override
+  String get trySearchingFor =>
+      'Попробуйте поискать название суры, номер аята (например, 2:255) или темы';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'Все суры ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Активные ярлыки ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'Активные ярлыки не найдены';
+
+  @override
+  String get customize => 'Настроить';
+
+  @override
+  String get bismillahPreview => 'Предпросмотр Бисмилля';
+
+  @override
+  String get tajweedRules => 'Правила таджвида';
+
+  @override
   String get makki => 'Мекканская';
 
   @override
   String get madani => 'Мединская';
 
   @override
-  String get ayah => 'Аят';
+  String get exactPhraseMatch => 'Точное совпадение фразы';
 
   @override
-  String get edit => 'Редактировать';
+  String get matchExactWordsDesc =>
+      'Сопоставлять точные слова в непрерывной последовательности';
+
+  @override
+  String get filterBySurah => 'Фильтр по суре';
+
+  @override
+  String get all114SurahsEntireQuran => 'Все 114 сур (весь Коран)';
+
+  @override
+  String get revelationType => 'Место ниспослания';
+
+  @override
+  String get searchInTranslations => 'Поиск в переводах';
+
+  @override
+  String get searchInTafsirs => 'Поиск в тафсирах';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total активно';
+  }
 }

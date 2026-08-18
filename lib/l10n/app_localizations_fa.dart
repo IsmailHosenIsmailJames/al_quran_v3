@@ -1456,14 +1456,109 @@ class AppLocalizationsFa extends AppLocalizations {
   String get verses => 'آیات';
 
   @override
+  String get ayah => 'آیه';
+
+  @override
+  String get edit => 'ویرایش';
+
+  @override
+  String get searchAll => 'همه';
+
+  @override
+  String get searchArabic => 'عربی';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'فیلترها و گزینه‌های جستجو';
+
+  @override
+  String get exactPhrase => 'عبارت دقیق';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سوره یافت شد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count آیه یافت شد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'نتیجه‌ای یافت نشد';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'میانبر فعالی یافت نشد';
+
+  @override
+  String get customize => 'شخصی‌سازی';
+
+  @override
+  String get bismillahPreview => 'پیش‌نمایش بسم الله';
+
+  @override
+  String get tajweedRules => 'قواعد تجوید';
+
+  @override
   String get makki => 'مکی';
 
   @override
   String get madani => 'مدنی';
 
   @override
-  String get ayah => 'آیه';
+  String get exactPhraseMatch => 'تطبیق دقیق عبارت';
 
   @override
-  String get edit => 'ویرایش';
+  String get matchExactWordsDesc => 'تطبیق کلمات دقیق در یک دنباله پیوسته';
+
+  @override
+  String get filterBySurah => 'فیلتر بر اساس سوره';
+
+  @override
+  String get all114SurahsEntireQuran => 'همه ۱۱۴ سوره (کل قرآن)';
+
+  @override
+  String get revelationType => 'نوع نزول';
+
+  @override
+  String get searchInTranslations => 'جستجو در ترجمه‌ها';
+
+  @override
+  String get searchInTafsirs => 'جستجو در تفاسیر';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total فعال';
+  }
 }

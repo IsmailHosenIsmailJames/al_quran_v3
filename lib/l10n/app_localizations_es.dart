@@ -58,7 +58,7 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'Guardar y descargar';
+  String get saveAndDownload => 'Guardar y Descargar';
 
   @override
   String get appLanguage => 'Idioma de la app';
@@ -1473,14 +1473,112 @@ class AppLocalizationsEs extends AppLocalizations {
   String get verses => 'Versículos';
 
   @override
+  String get ayah => 'Versículo';
+
+  @override
+  String get edit => 'Editar';
+
+  @override
+  String get searchAll => 'Todos';
+
+  @override
+  String get searchArabic => 'Árabe';
+
+  @override
+  String get searchQuranHint => 'Buscar Corán, Sura, 2:255, Traducción...';
+
+  @override
+  String get searchFiltersAndOptions => 'Filtros y opciones de búsqueda';
+
+  @override
+  String get exactPhrase => 'Frase exacta';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count suras encontradas',
+      one: '1 sura encontrada',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count versículos encontrados',
+      one: '1 versículo encontrado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No hay suras que coincidan con \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No se encontraron resultados';
+
+  @override
+  String get trySearchingFor =>
+      'Intente buscar un nombre de sura, número de versículo (ej. 2:255) o temas';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'Todas las suras ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Accesos directos activos ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No se encontraron accesos directos activos';
+
+  @override
+  String get customize => 'Personalizar';
+
+  @override
+  String get bismillahPreview => 'Vista previa de Bismillah';
+
+  @override
+  String get tajweedRules => 'Reglas de Tajweed';
+
+  @override
   String get makki => 'Mequí';
 
   @override
   String get madani => 'Mediní';
 
   @override
-  String get ayah => 'Versículo';
+  String get exactPhraseMatch => 'Coincidencia exacta de frase';
 
   @override
-  String get edit => 'Editar';
+  String get matchExactWordsDesc =>
+      'Coincidir palabras exactas en secuencia continua';
+
+  @override
+  String get filterBySurah => 'Filtrar por sura';
+
+  @override
+  String get all114SurahsEntireQuran => 'Las 114 suras (Corán completo)';
+
+  @override
+  String get revelationType => 'Lugar de revelación';
+
+  @override
+  String get searchInTranslations => 'Buscar en traducciones';
+
+  @override
+  String get searchInTafsirs => 'Buscar en tafsires';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total activo(s)';
+  }
 }
