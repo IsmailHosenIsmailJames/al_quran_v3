@@ -102,31 +102,37 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        color: isDark
+            ? const Color(0xFF1E1E1E)
+            : Colors.white,
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
               ? [
-                  themeState.primary.withValues(alpha: 0.25),
-                  themeState.primaryShade100.withValues(alpha: 0.15),
-                  themeState.primary.withValues(alpha: 0.1),
+                  themeState.primary.withValues(alpha: 0.20),
+                  const Color(0xFF1E1E1E),
                 ]
               : [
-                  themeState.primary.withValues(alpha: 0.12),
-                  themeState.primaryShade100,
-                  themeState.primaryShade200.withValues(alpha: 0.4),
+                  Color.lerp(themeState.primary, Colors.white, 0.82)!,
+                  Color.lerp(themeState.primary, Colors.white, 0.93)!,
+                  Colors.white,
                 ],
         ),
         border: Border.all(
-          color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.25),
-          width: 1.2,
+          color: isDark
+              ? themeState.primary.withValues(alpha: 0.3)
+              : Color.lerp(themeState.primary, Colors.white, 0.65)!,
+          width: 1.0,
         ),
         boxShadow: [
           BoxShadow(
-            color: themeState.primary.withValues(alpha: isDark ? 0.12 : 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.3)
+                : Colors.black.withValues(alpha: 0.03),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -141,7 +147,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                 margin: const EdgeInsets.only(bottom: 14),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.amber.withValues(alpha: isDark ? 0.2 : 0.15),
+                  color: Colors.amber.withValues(alpha: isDark ? 0.2 : 0.12),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: Colors.amber.shade700.withValues(alpha: 0.4),
@@ -183,15 +189,20 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: themeState.primary.withValues(alpha: 0.18),
+                        color: isDark
+                            ? themeState.primary.withValues(alpha: 0.20)
+                            : Colors.white.withValues(alpha: 0.85),
                         borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.25),
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             PrayerTimeHelper.getPrayerIcon(nextPrayer),
-                            size: 15,
+                            size: 14,
                             color: themeState.primary,
                           ),
                           const Gap(5),
@@ -199,7 +210,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                             l10n.nextPrayerLabel(nextPrayerLocalized),
                             style: TextStyle(
                               fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                               color: themeState.primary,
                             ),
                           ),
@@ -214,7 +225,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                           fontSize: 12,
                           color: isDark
                               ? Colors.grey.shade400
-                              : Colors.grey.shade700,
+                              : Colors.grey.shade600,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -226,9 +237,11 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                     nextPrayerArabic,
                     style: TextStyle(
                       fontFamily: "Amiri",
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: themeState.primary.withValues(alpha: 0.8),
+                      color: isDark
+                          ? themeState.primary.withValues(alpha: 0.9)
+                          : themeState.primary.withValues(alpha: 0.8),
                     ),
                   ),
               ],
@@ -288,7 +301,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
               ],
             ),
 
-            const Gap(18),
+            const Gap(16),
 
             // Live Progress Bar & Next Prayer start time
             Column(
@@ -297,10 +310,10 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   borderRadius: BorderRadius.circular(10),
                   child: LinearProgressIndicator(
                     value: progressElapsed,
-                    minHeight: 7,
+                    minHeight: 6,
                     backgroundColor: isDark
                         ? Colors.white.withValues(alpha: 0.08)
-                        : themeState.primary.withValues(alpha: 0.12),
+                        : Colors.grey.shade200,
                     valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
                   ),
                 ),
@@ -362,9 +375,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
           label,
           style: TextStyle(
             fontSize: 9,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 1.2,
-            color: themeState.primary.withValues(alpha: 0.85),
+            fontWeight: FontWeight.w600,
+            letterSpacing: 1.0,
+            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
           ),
         ),
       ],

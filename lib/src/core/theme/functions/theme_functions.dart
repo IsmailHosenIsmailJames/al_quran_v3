@@ -60,11 +60,11 @@ class ThemeFunctions {
     return ThemeState(
       themeMode: mode,
       primary: primary,
-      primaryShade100: primary.withValues(alpha: 0.1),
-      primaryShade200: primary.withValues(alpha: 0.2),
-      primaryShade300: primary.withValues(alpha: 0.3),
+      primaryShade100: primary.withValues(alpha: 0.08),
+      primaryShade200: primary.withValues(alpha: 0.14),
+      primaryShade300: primary.withValues(alpha: 0.22),
       secondary: Colors.orange,
-      mutedGray: Colors.grey.withValues(alpha: 0.2),
+      mutedGray: Colors.grey.withValues(alpha: 0.15),
     );
   }
 }

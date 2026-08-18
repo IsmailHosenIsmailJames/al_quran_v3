@@ -19,7 +19,12 @@ import "package:path_provider/path_provider.dart";
 
 class AudioSettings extends StatefulWidget {
   final bool needAppBar;
-  const AudioSettings({super.key, this.needAppBar = false});
+  final bool scrollable;
+  const AudioSettings({
+    super.key,
+    this.needAppBar = false,
+    this.scrollable = true,
+  });
 
   @override
   State<AudioSettings> createState() => _AudioSettingsState();
@@ -31,23 +36,27 @@ class _AudioSettingsState extends State<AudioSettings> {
     final l10n = AppLocalizations.of(context);
     final content = _buildMainUI(context, l10n);
 
-    return widget.needAppBar
-        ? Scaffold(
-            appBar: AppBar(
-              title: Text(
-                l10n.audioSettings,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: content,
-            ),
-          )
-        : SingleChildScrollView(
+    if (widget.needAppBar) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            l10n.audioSettings,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: content,
+        ),
+      );
+    }
+
+    return widget.scrollable
+        ? SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: content,
-          );
+          )
+        : content;
   }
 
   Widget _buildMainUI(BuildContext context, AppLocalizations l10n) {
@@ -216,7 +225,12 @@ class _AudioSettingsState extends State<AudioSettings> {
                 borderRadius: BorderRadius.circular(roundedRadius - 2),
                 color: isDark
                     ? Colors.white.withValues(alpha: 0.04)
-                    : themeState.primaryShade100.withValues(alpha: 0.35),
+                    : Colors.grey.shade100,
+                border: Border.all(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.grey.shade300,
+                ),
               ),
               child: Row(
                 children: [
@@ -249,16 +263,30 @@ class _AudioSettingsState extends State<AudioSettings> {
                       ],
                     ),
                   ),
-                  FilledButton.tonal(
+                  FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: Colors.redAccent.withValues(alpha: 0.15),
-                      foregroundColor: Colors.redAccent,
+                      backgroundColor: const Color(0xFFDC2626),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
                       visualDensity: VisualDensity.compact,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 6,
+                      ),
                     ),
                     onPressed: keys.isEmpty
                         ? null
                         : () => _confirmClearAllCache(context, data, l10n),
-                    child: Text(l10n.clean),
+                    child: Text(
+                      l10n.clean,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -309,7 +337,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                         },
                         icon: const Icon(
                           FluentIcons.delete_16_regular,
-                          color: Colors.redAccent,
+                          color: Color(0xFFDC2626),
                         ),
                       ),
                     ],
@@ -356,7 +384,7 @@ class _AudioSettingsState extends State<AudioSettings> {
             ),
             FilledButton(
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color(0xFFDC2626),
               ),
               onPressed: () async {
                 for (final key in data.keys) {
@@ -416,10 +444,21 @@ class PlayBackSpeedWidget extends StatelessWidget {
                   label: Text("${speed.toStringAsFixed(speed == speed.roundToDouble() ? 0 : 2)}x"),
                   selected: isSelected,
                   selectedColor: themeState.primary,
+                  checkmarkColor: Colors.white,
+                  showCheckmark: true,
                   backgroundColor: isDark
                       ? Colors.white.withValues(alpha: 0.05)
-                      : Colors.black.withValues(alpha: 0.04),
-                  side: BorderSide.none,
+                      : Colors.white,
+                  side: BorderSide(
+                    color: isSelected
+                        ? Colors.transparent
+                        : (isDark
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade300),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   labelStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,

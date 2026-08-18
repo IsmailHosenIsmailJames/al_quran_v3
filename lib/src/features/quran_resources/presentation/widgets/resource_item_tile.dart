@@ -26,19 +26,22 @@ class ResourceItemTile extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4.0),
-      decoration: BoxDecoration(
+      child: Material(
         color: resource.isSelected
             ? themeState.primaryShade100.withValues(alpha: 0.25)
             : Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: resource.isSelected
-              ? themeState.primary
-              : themeState.primaryShade100.withValues(alpha: 0.5),
-          width: resource.isSelected ? 1.5 : 0.8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(
+            color: resource.isSelected
+                ? themeState.primary
+                : themeState.primaryShade100.withValues(alpha: 0.5),
+            width: resource.isSelected ? 1.5 : 0.8,
+          ),
         ),
-      ),
-      child: ListTile(
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
         title: Row(
           children: [
@@ -175,6 +178,7 @@ class ResourceItemTile extends StatelessWidget {
           }
         },
       ),
-    );
-  }
+    ),
+  );
+}
 }

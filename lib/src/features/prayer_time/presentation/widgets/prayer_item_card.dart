@@ -50,24 +50,24 @@ class PrayerItemCard extends StatelessWidget {
     if (isActive) {
       cardBg = isDark
           ? themeState.primary.withValues(alpha: 0.22)
-          : themeState.primary.withValues(alpha: 0.1);
-      borderColor = themeState.primary.withValues(alpha: 0.6);
+          : themeState.primary.withValues(alpha: 0.08);
+      borderColor = themeState.primary;
     } else if (isNext) {
       cardBg = isDark
-          ? themeState.primaryShade100.withValues(alpha: 0.12)
-          : themeState.primaryShade100;
-      borderColor = themeState.primary.withValues(alpha: 0.35);
+          ? Colors.white.withValues(alpha: 0.04)
+          : Colors.white;
+      borderColor = themeState.primary.withValues(alpha: 0.4);
     } else {
       cardBg = isDark
           ? Colors.white.withValues(alpha: 0.04)
-          : themeState.primaryShade100.withValues(alpha: 0.55);
+          : Colors.white;
       borderColor = isDark
           ? Colors.white.withValues(alpha: 0.08)
-          : themeState.primaryShade200.withValues(alpha: 0.4);
+          : Colors.grey.shade200;
     }
 
     final primaryTextColor = isPassed
-        ? (isDark ? Colors.grey.shade500 : Colors.grey.shade500)
+        ? (isDark ? Colors.grey.shade500 : Colors.grey.shade400)
         : (isDark ? Colors.white : Colors.grey.shade900);
 
     return Container(
@@ -79,6 +79,14 @@ class PrayerItemCard extends StatelessWidget {
           color: borderColor,
           width: isActive ? 1.5 : 1.0,
         ),
+        boxShadow: [
+          if (!isDark && !isActive)
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 4,
+              offset: const Offset(0, 1),
+            ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -92,10 +100,12 @@ class PrayerItemCard extends StatelessWidget {
                 color: isActive
                     ? themeState.primary
                     : isNext
-                        ? themeState.primary.withValues(alpha: 0.2)
+                        ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12)
                         : (isDark
                             ? Colors.white.withValues(alpha: 0.06)
-                            : themeState.primaryShade200),
+                            : (isPassed
+                                ? Colors.grey.shade100
+                                : themeState.primary.withValues(alpha: 0.08))),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -103,7 +113,7 @@ class PrayerItemCard extends StatelessWidget {
                 color: isActive
                     ? Colors.white
                     : (isPassed
-                        ? (isDark ? Colors.grey.shade600 : Colors.grey.shade500)
+                        ? (isDark ? Colors.grey.shade600 : Colors.grey.shade400)
                         : themeState.primary),
                 size: 22,
               ),

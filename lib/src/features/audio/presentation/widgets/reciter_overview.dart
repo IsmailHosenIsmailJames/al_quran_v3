@@ -60,11 +60,11 @@ Widget getReciterWidget({
           borderRadius: BorderRadius.circular(roundedRadius + 4),
           color: isDark
               ? Colors.white.withValues(alpha: 0.05)
-              : themeState.primaryShade100.withValues(alpha: 0.45),
+              : Colors.grey.shade100,
           border: Border.all(
             color: isDark
                 ? Colors.white.withValues(alpha: 0.08)
-                : themeState.primary.withValues(alpha: 0.15),
+                : Colors.grey.shade300,
           ),
         ),
         child: Row(

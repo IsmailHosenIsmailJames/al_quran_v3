@@ -84,11 +84,12 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
               isDense: true,
               hintText: l10n.searchForASurah,
               hintStyle: theme.textTheme.bodySmall?.copyWith(
-                color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.6),
+                color: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
               ),
-              prefixIcon: const Icon(
+              prefixIcon: Icon(
                 FluentIcons.search_16_regular,
                 size: 18,
+                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
               ),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
@@ -103,14 +104,22 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
               filled: true,
               fillColor: isDark
                   ? Colors.white.withValues(alpha: 0.05)
-                  : widget.themeState.primaryShade100.withValues(alpha: 0.35),
+                  : Colors.grey.shade100,
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 8,
                 horizontal: 12,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(roundedRadius),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(
+                  color: isDark ? Colors.transparent : Colors.grey.shade300,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(roundedRadius),
+                borderSide: BorderSide(
+                  color: isDark ? Colors.transparent : Colors.grey.shade300,
+                ),
               ),
             ),
           ),
@@ -144,18 +153,18 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
                       decoration: BoxDecoration(
                         color: isSelected
                             ? widget.themeState.primary.withValues(
-                                alpha: isDark ? 0.22 : 0.12,
+                                alpha: isDark ? 0.2 : 0.08,
                               )
                             : isDark
                                 ? Colors.white.withValues(alpha: 0.02)
-                                : Colors.black.withValues(alpha: 0.015),
+                                : Colors.white,
                         borderRadius: BorderRadius.circular(roundedRadius),
                         border: Border.all(
                           color: isSelected
                               ? widget.themeState.primary
                               : isDark
                                   ? Colors.white.withValues(alpha: 0.05)
-                                  : Colors.black.withValues(alpha: 0.04),
+                                  : Colors.grey.shade200,
                           width: isSelected ? 1.5 : 1,
                         ),
                       ),
@@ -178,9 +187,9 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? widget.themeState.primary
-                                        : widget.themeState.primary.withValues(
-                                            alpha: isDark ? 0.18 : 0.1,
-                                          ),
+                                        : isDark
+                                            ? Colors.white.withValues(alpha: 0.06)
+                                            : widget.themeState.primary.withValues(alpha: 0.08),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   alignment: Alignment.center,

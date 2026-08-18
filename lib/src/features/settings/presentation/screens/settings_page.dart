@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settin
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
+import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -18,73 +19,185 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late AppLocalizations appLocalizations;
   @override
   Widget build(BuildContext context) {
-    appLocalizations = AppLocalizations.of(context);
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, themeState) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(appLocalizations.settings),
-            actions: [themeIconButton(context)],
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(10),
+    final appLocalizations = AppLocalizations.of(context);
+    final themeState = context.watch<ThemeCubit>().state;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-            child: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    appLocalizations.appTheme,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Divider(color: themeState.primaryShade300),
-                  const ThemeSettings(),
-                  const Gap(20),
-                  Text(
-                    appLocalizations.quranStyle,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Divider(color: themeState.primaryShade300),
-                  const Gap(5),
-                  const QuranScriptSettings(showAudioSpeedController: false),
-                  const Gap(30),
-                  Text(
-                    appLocalizations.audioSettings,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Divider(color: themeState.primaryShade300),
-                  const Gap(5),
-                  const AudioSettings(),
-                  const Gap(30),
-                  Text(
-                    appLocalizations.others,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Divider(color: themeState.primaryShade300),
-                  const Gap(5),
-                  const OthersSettings(),
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          appLocalizations.settings,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        actions: [themeIconButton(context)],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top App Branding Card
+              _buildAppBrandingCard(context, themeState, isDark),
+
+              const Gap(16),
+
+              // 1. Appearance & Theme Section
+              _buildMainSection(
+                icon: FluentIcons.paint_brush_24_regular,
+                title: appLocalizations.appTheme,
+                themePrimary: themeState.primary,
+                isDark: isDark,
+                child: const ThemeSettings(),
               ),
+
+              const Gap(16),
+
+              // 2. Quran Script & Style Section
+              _buildMainSection(
+                icon: FluentIcons.book_letter_24_regular,
+                title: appLocalizations.quranStyle,
+                themePrimary: themeState.primary,
+                isDark: isDark,
+                child: const QuranScriptSettings(showAudioSpeedController: false),
+              ),
+
+              const Gap(16),
+
+              // 3. Audio Settings Section
+              _buildMainSection(
+                icon: FluentIcons.headphones_24_regular,
+                title: appLocalizations.audioSettings,
+                themePrimary: themeState.primary,
+                isDark: isDark,
+                child: const AudioSettings(scrollable: false),
+              ),
+
+              const Gap(16),
+
+              // 4. General & Preferences Section
+              _buildMainSection(
+                icon: FluentIcons.settings_24_regular,
+                title: appLocalizations.others,
+                themePrimary: themeState.primary,
+                isDark: isDark,
+                child: const OthersSettings(),
+              ),
+
+              const Gap(24),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppBrandingCard(
+    BuildContext context,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : Colors.grey.shade200,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              FluentIcons.book_globe_24_filled,
+              color: themeState.primary,
+              size: 24,
             ),
           ),
-        );
-      },
+          const Gap(14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Al Quran • القرآن الكريم",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Gap(2),
+                Text(
+                  "Customize reading, audio & theme preferences",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainSection({
+    required IconData icon,
+    required String title,
+    required Color themePrimary,
+    required bool isDark,
+    required Widget child,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : Colors.grey.shade200,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: themePrimary.withValues(alpha: isDark ? 0.2 : 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, size: 16, color: themePrimary),
+              ),
+              const Gap(10),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const Gap(14),
+          child,
+        ],
+      ),
     );
   }
 }

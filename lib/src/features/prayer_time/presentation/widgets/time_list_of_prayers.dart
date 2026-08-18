@@ -212,13 +212,21 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
       decoration: BoxDecoration(
         color: isDark
             ? Colors.white.withValues(alpha: 0.04)
-            : themeState.primaryShade100.withValues(alpha: 0.6),
+            : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
               ? Colors.white.withValues(alpha: 0.08)
-              : themeState.primaryShade200.withValues(alpha: 0.5),
+              : Colors.grey.shade200,
         ),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+        ],
       ),
       child: Row(
         children: [
@@ -388,13 +396,21 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
             decoration: BoxDecoration(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.04)
-                  : themeState.primaryShade100.withValues(alpha: 0.5),
+                  : Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark
                     ? Colors.white.withValues(alpha: 0.08)
-                    : themeState.primaryShade200.withValues(alpha: 0.4),
+                    : Colors.grey.shade300,
               ),
+              boxShadow: [
+                if (!isDark)
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.02),
+                    blurRadius: 3,
+                    offset: const Offset(0, 1),
+                  ),
+              ],
             ),
             child: Row(
               children: [

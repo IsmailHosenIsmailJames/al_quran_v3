@@ -61,13 +61,21 @@ Widget getReciterViewWidget(
                 decoration: BoxDecoration(
                   color: isDark
                       ? Colors.white.withValues(alpha: 0.05)
-                      : themeState.primaryShade100.withValues(alpha: 0.5),
+                      : Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.08)
-                        : themeState.primary.withValues(alpha: 0.15),
+                        : Colors.grey.shade300,
                   ),
+                  boxShadow: [
+                    if (!isDark)
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.02),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                  ],
                 ),
                 child: IconButton(
                   tooltip: l10n.audioSettings,
@@ -95,13 +103,21 @@ Widget getReciterViewWidget(
                 decoration: BoxDecoration(
                   color: isDark
                       ? Colors.white.withValues(alpha: 0.05)
-                      : themeState.primaryShade100.withValues(alpha: 0.5),
+                      : Colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.08)
-                        : themeState.primary.withValues(alpha: 0.15),
+                        : Colors.grey.shade300,
                   ),
+                  boxShadow: [
+                    if (!isDark)
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.02),
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                  ],
                 ),
                 child: IconButton(
                   tooltip: l10n.download,
