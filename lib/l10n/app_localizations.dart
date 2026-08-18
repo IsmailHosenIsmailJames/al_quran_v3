@@ -217,7 +217,7 @@ abstract class AppLocalizations {
   /// No description provided for @saveAndDownload.
   ///
   /// In en, this message translates to:
-  /// **'Save and Download'**
+  /// **'Save & Download'**
   String get saveAndDownload;
 
   /// No description provided for @appLanguage.
@@ -2756,6 +2756,114 @@ abstract class AppLocalizations {
   /// **'Verses'**
   String get verses;
 
+  /// No description provided for @ayah.
+  ///
+  /// In en, this message translates to:
+  /// **'Ayah'**
+  String get ayah;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @searchAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get searchAll;
+
+  /// No description provided for @searchArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get searchArabic;
+
+  /// No description provided for @searchQuranHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Quran, Surah, 2:255, Translation...'**
+  String get searchQuranHint;
+
+  /// No description provided for @searchFiltersAndOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Filters & Options'**
+  String get searchFiltersAndOptions;
+
+  /// No description provided for @exactPhrase.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Phrase'**
+  String get exactPhrase;
+
+  /// No description provided for @surahsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Surah found} other{{count} Surahs found}}'**
+  String surahsFound(int count);
+
+  /// No description provided for @ayahsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 Ayah found} other{{count} Ayahs found}}'**
+  String ayahsFound(int count);
+
+  /// No description provided for @noMatchingSurahs.
+  ///
+  /// In en, this message translates to:
+  /// **'No Surahs matching \"{query}\"'**
+  String noMatchingSurahs(String query);
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @trySearchingFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Try searching for a Surah name, verse number (e.g. 2:255), or topics'**
+  String get trySearchingFor;
+
+  /// No description provided for @allSurahsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'All Surahs ({count})'**
+  String allSurahsCount(int count);
+
+  /// No description provided for @activeShortcutsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Shortcuts ({count})'**
+  String activeShortcutsCount(int count);
+
+  /// No description provided for @noActiveShortcuts.
+  ///
+  /// In en, this message translates to:
+  /// **'No active shortcuts found'**
+  String get noActiveShortcuts;
+
+  /// No description provided for @customize.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize'**
+  String get customize;
+
+  /// No description provided for @bismillahPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Bismillah Preview'**
+  String get bismillahPreview;
+
+  /// No description provided for @tajweedRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Tajweed Rules'**
+  String get tajweedRules;
+
   /// No description provided for @makki.
   ///
   /// In en, this message translates to:
@@ -2768,17 +2876,53 @@ abstract class AppLocalizations {
   /// **'Madani'**
   String get madani;
 
-  /// No description provided for @ayah.
+  /// No description provided for @exactPhraseMatch.
   ///
   /// In en, this message translates to:
-  /// **'Ayah'**
-  String get ayah;
+  /// **'Exact Phrase Match'**
+  String get exactPhraseMatch;
 
-  /// No description provided for @edit.
+  /// No description provided for @matchExactWordsDesc.
   ///
   /// In en, this message translates to:
-  /// **'Edit'**
-  String get edit;
+  /// **'Match exact words in continuous sequence'**
+  String get matchExactWordsDesc;
+
+  /// No description provided for @filterBySurah.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Surah'**
+  String get filterBySurah;
+
+  /// No description provided for @all114SurahsEntireQuran.
+  ///
+  /// In en, this message translates to:
+  /// **'All 114 Surahs (Entire Quran)'**
+  String get all114SurahsEntireQuran;
+
+  /// No description provided for @revelationType.
+  ///
+  /// In en, this message translates to:
+  /// **'Revelation Type'**
+  String get revelationType;
+
+  /// No description provided for @searchInTranslations.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in Translations'**
+  String get searchInTranslations;
+
+  /// No description provided for @searchInTafsirs.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in Tafsirs'**
+  String get searchInTafsirs;
+
+  /// No description provided for @activeCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{selected}/{total} active'**
+  String activeCount(int selected, int total);
 }
 
 class _AppLocalizationsDelegate

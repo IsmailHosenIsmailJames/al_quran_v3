@@ -1474,14 +1474,113 @@ class AppLocalizationsPt extends AppLocalizations {
   String get verses => 'Versículos';
 
   @override
+  String get ayah => 'Versículo';
+
+  @override
+  String get edit => 'Editar';
+
+  @override
+  String get searchAll => 'Todos';
+
+  @override
+  String get searchArabic => 'Árabe';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Filtros e opções de pesquisa';
+
+  @override
+  String get exactPhrase => 'Frase exata';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count suratas encontradas',
+      one: '1 surata encontrada',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count versículos encontrados',
+      one: '1 versículo encontrado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'Nenhum resultado encontrado';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'Nenhum atalho ativo encontrado';
+
+  @override
+  String get customize => 'Personalizar';
+
+  @override
+  String get bismillahPreview => 'Pré-visualização de Bismillah';
+
+  @override
+  String get tajweedRules => 'Regras de Tajweed';
+
+  @override
   String get makki => 'Mequense';
 
   @override
   String get madani => 'Medinense';
 
   @override
-  String get ayah => 'Versículo';
+  String get exactPhraseMatch => 'Correspondência exata de frase';
 
   @override
-  String get edit => 'Editar';
+  String get matchExactWordsDesc =>
+      'Corresponder palavras exatas em sequência contínua';
+
+  @override
+  String get filterBySurah => 'Filtrar por surata';
+
+  @override
+  String get all114SurahsEntireQuran =>
+      'Todas as 114 suratas (Alcorão completo)';
+
+  @override
+  String get revelationType => 'Local de revelação';
+
+  @override
+  String get searchInTranslations => 'Pesquisar nas traduções';
+
+  @override
+  String get searchInTafsirs => 'Pesquisar nos tafsirs';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total ativo(s)';
+  }
 }

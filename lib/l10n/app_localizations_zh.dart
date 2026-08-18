@@ -1412,14 +1412,109 @@ class AppLocalizationsZh extends AppLocalizations {
   String get verses => '节';
 
   @override
+  String get ayah => '节';
+
+  @override
+  String get edit => '编辑';
+
+  @override
+  String get searchAll => '全部';
+
+  @override
+  String get searchArabic => '阿拉伯语';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => '搜索过滤器与选项';
+
+  @override
+  String get exactPhrase => '精确短语';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '找到 $count 个苏拉',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '找到 $count 条经文',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => '未找到结果';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => '未找到活动快捷方式';
+
+  @override
+  String get customize => '自定义';
+
+  @override
+  String get bismillahPreview => '太斯米预览';
+
+  @override
+  String get tajweedRules => '古兰经诵读规则';
+
+  @override
   String get makki => '麦加降示';
 
   @override
   String get madani => '麦地那降示';
 
   @override
-  String get ayah => '节';
+  String get exactPhraseMatch => '精确短语匹配';
 
   @override
-  String get edit => '编辑';
+  String get matchExactWordsDesc => '按连续顺序匹配确切单词';
+
+  @override
+  String get filterBySurah => '按苏拉筛选';
+
+  @override
+  String get all114SurahsEntireQuran => '全部 114 个苏拉（整本古兰经）';
+
+  @override
+  String get revelationType => '降示地点';
+
+  @override
+  String get searchInTranslations => '在译文中搜索';
+
+  @override
+  String get searchInTafsirs => '在经注中搜索';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total 项启用';
+  }
 }

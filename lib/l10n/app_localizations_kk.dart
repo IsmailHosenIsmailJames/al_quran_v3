@@ -1456,14 +1456,110 @@ class AppLocalizationsKk extends AppLocalizations {
   String get verses => 'Аяттар';
 
   @override
+  String get ayah => 'Аят';
+
+  @override
+  String get edit => 'Өңдеу';
+
+  @override
+  String get searchAll => 'Барлығы';
+
+  @override
+  String get searchArabic => 'Арабша';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Search Filters & Options';
+
+  @override
+  String get exactPhrase => 'Дәл сөз тіркесі';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сүре табылды',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count аят табылды',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No active shortcuts found';
+
+  @override
+  String get customize => 'Баптау';
+
+  @override
+  String get bismillahPreview => 'Бисмилля алдын ала қарау';
+
+  @override
+  String get tajweedRules => 'Тәжуид ережелері';
+
+  @override
   String get makki => 'Меккелік';
 
   @override
   String get madani => 'Мәдиналық';
 
   @override
-  String get ayah => 'Аят';
+  String get exactPhraseMatch => 'Дәл сөз тіркесін сәйкестендіру';
 
   @override
-  String get edit => 'Өңдеу';
+  String get matchExactWordsDesc =>
+      'Сөздерді үздіксіз ретпен дәл сәйкестендіріңіз';
+
+  @override
+  String get filterBySurah => 'Сүре бойынша сүзгілеу';
+
+  @override
+  String get all114SurahsEntireQuran => 'Барлық 114 сүре (Толық Құран)';
+
+  @override
+  String get revelationType => 'Түсірілу түрі';
+
+  @override
+  String get searchInTranslations => 'Аудармалардан іздеу';
+
+  @override
+  String get searchInTafsirs => 'Тәпсірлерден іздеу';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total белсенді';
+  }
 }

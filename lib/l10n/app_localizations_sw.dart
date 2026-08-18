@@ -58,7 +58,7 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'Hifadhi na Pakua';
+  String get saveAndDownload => 'Hifadhi na Upakue';
 
   @override
   String get appLanguage => 'Lugha ya App';
@@ -1467,14 +1467,112 @@ class AppLocalizationsSw extends AppLocalizations {
   String get verses => 'Aya';
 
   @override
+  String get ayah => 'Aya';
+
+  @override
+  String get edit => 'Hariri';
+
+  @override
+  String get searchAll => 'Yote';
+
+  @override
+  String get searchArabic => 'Kiarabu';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Search Filters & Options';
+
+  @override
+  String get exactPhrase => 'Maneno Halisi';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Sura $count zimepatikana',
+      one: 'Sura 1 imepatikana',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Aya $count zimepatikana',
+      one: 'Aya 1 imepatikana',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No active shortcuts found';
+
+  @override
+  String get customize => 'Binafsisha';
+
+  @override
+  String get bismillahPreview => 'Uhakiki wa Bismillah';
+
+  @override
+  String get tajweedRules => 'Kanuni za Tajweed';
+
+  @override
   String get makki => 'Makkiyah';
 
   @override
   String get madani => 'Madaniyah';
 
   @override
-  String get ayah => 'Aya';
+  String get exactPhraseMatch => 'Ulinganifu Halisi wa Maneno';
 
   @override
-  String get edit => 'Hariri';
+  String get matchExactWordsDesc =>
+      'Linganisha maneno halisi katika mlolongo unaoendelea';
+
+  @override
+  String get filterBySurah => 'Chuja kwa Sura';
+
+  @override
+  String get all114SurahsEntireQuran => 'Sura zote 114 (Kurani nzima)';
+
+  @override
+  String get revelationType => 'Aina ya Ufunuo';
+
+  @override
+  String get searchInTranslations => 'Tafuta katika Tafsiri';
+
+  @override
+  String get searchInTafsirs => 'Tafuta katika Tafsiri za Quran (Tafsir)';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total amilifu';
+  }
 }

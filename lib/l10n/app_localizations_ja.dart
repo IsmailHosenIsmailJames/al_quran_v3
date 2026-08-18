@@ -1432,14 +1432,109 @@ class AppLocalizationsJa extends AppLocalizations {
   String get verses => '節';
 
   @override
+  String get ayah => '節';
+
+  @override
+  String get edit => '編集';
+
+  @override
+  String get searchAll => 'すべて';
+
+  @override
+  String get searchArabic => 'アラビア語';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => '検索フィルターとオプション';
+
+  @override
+  String get exactPhrase => '完全一致フレーズ';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 件の章が見つかりました',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 件の節が見つかりました',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => '結果が見つかりませんでした';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'アクティブなショートカットが見つかりません';
+
+  @override
+  String get customize => 'カスタマイズ';
+
+  @override
+  String get bismillahPreview => 'ビスミッラーのプレビュー';
+
+  @override
+  String get tajweedRules => 'タジウィードの規則';
+
+  @override
   String get makki => 'マッカ啓示';
 
   @override
   String get madani => 'マディーナ啓示';
 
   @override
-  String get ayah => '節';
+  String get exactPhraseMatch => '完全一致検索';
 
   @override
-  String get edit => '編集';
+  String get matchExactWordsDesc => '連続する順序で正確な単語を一致させます';
+
+  @override
+  String get filterBySurah => '章（スーラ）でフィルター';
+
+  @override
+  String get all114SurahsEntireQuran => '全114章（クルアーン全体）';
+
+  @override
+  String get revelationType => '啓示の場所';
+
+  @override
+  String get searchInTranslations => '翻訳内で検索';
+
+  @override
+  String get searchInTafsirs => 'タフスィール（解釈）内で検索';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total 件有効';
+  }
 }

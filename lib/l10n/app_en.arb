@@ -62,7 +62,7 @@
       }
     }
   },
-  "saveAndDownload": "Save and Download",
+  "saveAndDownload": "Save & Download",
   "appLanguage": "App Language",
   "selectAppLanguage": "Select app language...",
   "pleaseSelectOne": "Please select one",
@@ -727,8 +727,77 @@
   "resume": "Resume",
   "startReading": "Start Reading",
   "verses": "Verses",
+  "ayah": "Ayah",
+  "edit": "Edit",
+  "searchAll": "All",
+  "searchArabic": "Arabic",
+  "searchQuranHint": "Search Quran, Surah, 2:255, Translation...",
+  "searchFiltersAndOptions": "Search Filters & Options",
+  "exactPhrase": "Exact Phrase",
+  "surahsFound": "{count, plural, =1{1 Surah found} other{{count} Surahs found}}",
+  "@surahsFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahsFound": "{count, plural, =1{1 Ayah found} other{{count} Ayahs found}}",
+  "@ayahsFound": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMatchingSurahs": "No Surahs matching \"{query}\"",
+  "@noMatchingSurahs": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "noResultsFound": "No results found",
+  "trySearchingFor": "Try searching for a Surah name, verse number (e.g. 2:255), or topics",
+  "allSurahsCount": "All Surahs ({count})",
+  "@allSurahsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeShortcutsCount": "Active Shortcuts ({count})",
+  "@activeShortcutsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noActiveShortcuts": "No active shortcuts found",
+  "customize": "Customize",
+  "bismillahPreview": "Bismillah Preview",
+  "tajweedRules": "Tajweed Rules",
   "makki": "Makki",
   "madani": "Madani",
-  "ayah": "Ayah",
-  "edit": "Edit"
+  "exactPhraseMatch": "Exact Phrase Match",
+  "matchExactWordsDesc": "Match exact words in continuous sequence",
+  "filterBySurah": "Filter by Surah",
+  "all114SurahsEntireQuran": "All 114 Surahs (Entire Quran)",
+  "revelationType": "Revelation Type",
+  "searchInTranslations": "Search in Translations",
+  "searchInTafsirs": "Search in Tafsirs",
+  "activeCount": "{selected}/{total} active",
+  "@activeCount": {
+    "placeholders": {
+      "selected": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

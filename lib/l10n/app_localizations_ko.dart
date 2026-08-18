@@ -1431,14 +1431,109 @@ class AppLocalizationsKo extends AppLocalizations {
   String get verses => '구절';
 
   @override
+  String get ayah => '구절';
+
+  @override
+  String get edit => '편집';
+
+  @override
+  String get searchAll => '전체';
+
+  @override
+  String get searchArabic => '아랍어';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => '검색 필터 및 옵션';
+
+  @override
+  String get exactPhrase => '정확한 구절';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count개의 장을 찾았습니다',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count개의 구절을 찾았습니다',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => '결과를 찾을 수 없습니다';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => '활성 단축키를 찾을 수 없습니다';
+
+  @override
+  String get customize => '사용자 정의';
+
+  @override
+  String get bismillahPreview => '비스밀라 미리보기';
+
+  @override
+  String get tajweedRules => '타지위드 규칙';
+
+  @override
   String get makki => '메카 계시';
 
   @override
   String get madani => '메디나 계시';
 
   @override
-  String get ayah => '구절';
+  String get exactPhraseMatch => '정확한 구절 일치';
 
   @override
-  String get edit => '편집';
+  String get matchExactWordsDesc => '연속된 순서로 정확한 단어를 일치시킵니다';
+
+  @override
+  String get filterBySurah => '장(수라)별 필터';
+
+  @override
+  String get all114SurahsEntireQuran => '전체 114개 장(쿠란 전체)';
+
+  @override
+  String get revelationType => '계시 장소';
+
+  @override
+  String get searchInTranslations => '번역에서 검색';
+
+  @override
+  String get searchInTafsirs => '타프시르(주석)에서 검색';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total개 활성';
+  }
 }
