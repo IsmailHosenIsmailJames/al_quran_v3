@@ -58,7 +58,7 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'ذخیره کړئ او ډاونلوډ کړئ';
+  String get saveAndDownload => 'خوندي او ډاونلوډ کړئ';
 
   @override
   String get appLanguage => 'د اپلیکیشن ژبه';
@@ -311,7 +311,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get address => 'پته: ';
 
   @override
-  String get change => 'بدل کړئ';
+  String get change => 'بدلون';
 
   @override
   String get calculationMethod => 'د محاسبې میتود: ';
@@ -1457,14 +1457,111 @@ class AppLocalizationsPs extends AppLocalizations {
   String get verses => 'آیاتونه';
 
   @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'سمون';
+
+  @override
+  String get searchAll => 'ټول';
+
+  @override
+  String get searchArabic => 'عربي';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Search Filters & Options';
+
+  @override
+  String get exactPhrase => 'کټ مټ عبارت';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سورتونه وموندل شول',
+      one: '1 سورت وموندل شو',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count آیاتونه وموندل شول',
+      one: '1 آیت وموندل شو',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No active shortcuts found';
+
+  @override
+  String get customize => 'دودیز کړئ';
+
+  @override
+  String get bismillahPreview => 'د بسم الله مخکتنه';
+
+  @override
+  String get tajweedRules => 'د تجوید قواعد';
+
+  @override
   String get makki => 'مکي';
 
   @override
   String get madani => 'مدني';
 
   @override
-  String get ayah => 'آیت';
+  String get exactPhraseMatch => 'د کټ مټ عبارت مطابقت';
 
   @override
-  String get edit => 'سمون';
+  String get matchExactWordsDesc => 'په پرله پسې ترتیب کې دقیق ټکي مطابقت کړئ';
+
+  @override
+  String get filterBySurah => 'د سورت له مخې فلټر کړئ';
+
+  @override
+  String get all114SurahsEntireQuran => 'ټول ۱۱۴ سورتونه (بشپړ قرآن)';
+
+  @override
+  String get revelationType => 'د نزول ډول';
+
+  @override
+  String get searchInTranslations => 'په ژباړو کې لټون وکړئ';
+
+  @override
+  String get searchInTafsirs => 'په تفاسیرو کې لټون وکړئ';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total فعال';
+  }
 }

@@ -58,7 +58,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'احفظ ونزل';
+  String get saveAndDownload => 'حفظ وتنزيل';
 
   @override
   String get appLanguage => 'لغة التطبيق';
@@ -1453,14 +1453,117 @@ class AppLocalizationsAr extends AppLocalizations {
   String get verses => 'آيات';
 
   @override
+  String get ayah => 'آية';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get searchAll => 'الكل';
+
+  @override
+  String get searchArabic => 'العربية';
+
+  @override
+  String get searchQuranHint => 'ابحث في القرآن، السورة، ٢:٢٥٥، الترجمة...';
+
+  @override
+  String get searchFiltersAndOptions => 'خيارات وفلاتر البحث';
+
+  @override
+  String get exactPhrase => 'العبارة بالضبط';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم العثور على $count سورة',
+      many: 'تم العثور على $count سورة',
+      few: 'تم العثور على $count سور',
+      two: 'تم العثور على سورتين',
+      one: 'تم العثور على سورة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم العثور على $count آية',
+      many: 'تم العثور على $count آية',
+      few: 'تم العثور على $count آيات',
+      two: 'تم العثور على آيتين',
+      one: 'تم العثور على آية واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'لا توجد سور مطابقة لـ \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'لم يتم العثور على نتائج';
+
+  @override
+  String get trySearchingFor =>
+      'جرب البحث عن اسم سورة أو رقم آية (مثل ٢:٢٥٥) أو مواضيع';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'جميع السور ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'الاختصارات النشطة ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'لا توجد اختصارات نشطة';
+
+  @override
+  String get customize => 'تخصيص';
+
+  @override
+  String get bismillahPreview => 'معاينة البسملة';
+
+  @override
+  String get tajweedRules => 'أحكام التجويد';
+
+  @override
   String get makki => 'مكية';
 
   @override
   String get madani => 'مدنية';
 
   @override
-  String get ayah => 'آية';
+  String get exactPhraseMatch => 'مطابقة العبارة بدقة';
 
   @override
-  String get edit => 'تعديل';
+  String get matchExactWordsDesc => 'مطابقة الكلمات بدقة في تسلسل متصل';
+
+  @override
+  String get filterBySurah => 'تصفية حسب السورة';
+
+  @override
+  String get all114SurahsEntireQuran => 'جميع السور الـ ١١٤ (القرآن كاملاً)';
+
+  @override
+  String get revelationType => 'نوع النزول';
+
+  @override
+  String get searchInTranslations => 'البحث في الترجمات';
+
+  @override
+  String get searchInTafsirs => 'البحث في التفاسير';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total نشط';
+  }
 }

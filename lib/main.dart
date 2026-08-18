@@ -283,44 +283,19 @@ class MyApp extends StatelessWidget {
                 supportedLocales: AppLocalizations.supportedLocales,
                 onGenerateTitle: (context) => "Quran's Tafsir, Audio & Prayer",
                 theme: ThemeData(brightness: Brightness.light).copyWith(
+                  scaffoldBackgroundColor: const Color(0xFFF9FAFB),
+                  cardColor: Colors.white,
+                  dividerColor: Colors.grey.shade200,
                   pageTransitionsTheme: pageTransitionsTheme,
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
                     brightness: Brightness.light,
+                  ).copyWith(
+                    surface: Colors.white,
                   ),
-                  elevatedButtonTheme: ElevatedButtonThemeData(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: themeState.primary,
-                      foregroundColor: Colors.white,
-                      iconColor: Colors.white,
-                      elevation: 0,
-                    ),
-                  ),
-                  bottomSheetTheme: BottomSheetThemeData(
-                    backgroundColor: Colors.grey.shade100,
-                  ),
-                  textTheme: getTextTheme(languageState.locale, false),
-                  appBarTheme: AppBarTheme(
+                  dialogTheme: const DialogThemeData(
                     backgroundColor: Colors.white,
                     surfaceTintColor: Colors.transparent,
-                    scrolledUnderElevation: 0,
-                    elevation: 0,
-                    titleSpacing: 0,
-                    iconTheme: IconThemeData(color: Colors.grey.shade800),
-                  ),
-                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    selectedItemColor: themeState.primary,
-                    unselectedItemColor: Colors.grey.shade600,
-                    type: BottomNavigationBarType.fixed,
-                  ),
-                ),
-                darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
-                  pageTransitionsTheme: pageTransitionsTheme,
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: themeState.primary,
-                    brightness: Brightness.dark,
                   ),
                   elevatedButtonTheme: ElevatedButtonThemeData(
                     style: ElevatedButton.styleFrom(
@@ -331,7 +306,92 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   bottomSheetTheme: const BottomSheetThemeData(
-                    backgroundColor: Color.fromARGB(255, 15, 15, 15),
+                    backgroundColor: Colors.white,
+                    surfaceTintColor: Colors.transparent,
+                  ),
+                  textTheme: getTextTheme(languageState.locale, false),
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.white,
+                    surfaceTintColor: Colors.transparent,
+                    scrolledUnderElevation: 0,
+                    elevation: 0,
+                    titleSpacing: 0,
+                    iconTheme: IconThemeData(color: Colors.grey.shade800),
+                  ),
+                  chipTheme: ChipThemeData(
+                    checkmarkColor: Colors.white,
+                    selectedColor: themeState.primary,
+                    backgroundColor: Colors.white,
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    labelStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade800,
+                    ),
+                    secondaryLabelStyle: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    selectedItemColor: themeState.primary,
+                    unselectedItemColor: Colors.grey.shade600,
+                    type: BottomNavigationBarType.fixed,
+                  ),
+                ),
+                darkTheme: ThemeData(brightness: Brightness.dark).copyWith(
+                  scaffoldBackgroundColor: const Color(0xFF121212),
+                  cardColor: const Color(0xFF181818),
+                  dividerColor: Colors.white.withValues(alpha: 0.08),
+                  pageTransitionsTheme: pageTransitionsTheme,
+                  colorScheme: ColorScheme.fromSeed(
+                    seedColor: themeState.primary,
+                    brightness: Brightness.dark,
+                  ).copyWith(
+                    surface: const Color(0xFF181818),
+                  ),
+                  dialogTheme: const DialogThemeData(
+                    backgroundColor: Color(0xFF181818),
+                    surfaceTintColor: Colors.transparent,
+                  ),
+                  chipTheme: ChipThemeData(
+                    checkmarkColor: Colors.white,
+                    selectedColor: themeState.primary,
+                    backgroundColor: const Color(0xFF1E1E1E),
+                    side: BorderSide(
+                      color: Colors.white.withValues(alpha: 0.08),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    labelStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey.shade300,
+                    ),
+                    secondaryLabelStyle: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  elevatedButtonTheme: ElevatedButtonThemeData(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: themeState.primary,
+                      foregroundColor: Colors.white,
+                      iconColor: Colors.white,
+                      elevation: 0,
+                    ),
+                  ),
+                  bottomSheetTheme: const BottomSheetThemeData(
+                    backgroundColor: Color(0xFF181818),
+                    surfaceTintColor: Colors.transparent,
                   ),
                   textTheme: getTextTheme(languageState.locale, true),
                   appBarTheme: const AppBarTheme(

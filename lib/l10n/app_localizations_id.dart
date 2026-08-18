@@ -58,7 +58,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'Simpan dan Unduh';
+  String get saveAndDownload => 'Simpan & Unduh';
 
   @override
   String get appLanguage => 'Bahasa Aplikasi';
@@ -1457,14 +1457,110 @@ class AppLocalizationsId extends AppLocalizations {
   String get verses => 'Ayat';
 
   @override
+  String get ayah => 'Ayat';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get searchAll => 'Semua';
+
+  @override
+  String get searchArabic => 'Bahasa Arab';
+
+  @override
+  String get searchQuranHint => 'Cari Al-Quran, Surah, 2:255, Terjemahan...';
+
+  @override
+  String get searchFiltersAndOptions => 'Filter & Opsi Pencarian';
+
+  @override
+  String get exactPhrase => 'Frasa Tepat';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Surah ditemukan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Ayat ditemukan',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'Tidak ada Surah yang cocok dengan \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'Tidak ada hasil ditemukan';
+
+  @override
+  String get trySearchingFor =>
+      'Coba cari nama Surah, nomor ayat (mis. 2:255), atau topik';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'Semua Surah ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Pintasan Aktif ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'Tidak ada pintasan aktif ditemukan';
+
+  @override
+  String get customize => 'Kustomisasi';
+
+  @override
+  String get bismillahPreview => 'Pratinjau Bismillah';
+
+  @override
+  String get tajweedRules => 'Hukum Tajwid';
+
+  @override
   String get makki => 'Makkiyah';
 
   @override
   String get madani => 'Madaniyah';
 
   @override
-  String get ayah => 'Ayat';
+  String get exactPhraseMatch => 'Pencocokan Frasa Tepat';
 
   @override
-  String get edit => 'Edit';
+  String get matchExactWordsDesc =>
+      'Cocokkan kata-kata persis dalam urutan berurutan';
+
+  @override
+  String get filterBySurah => 'Filter berdasarkan Surah';
+
+  @override
+  String get all114SurahsEntireQuran => 'Semua 114 Surah (Seluruh Al-Quran)';
+
+  @override
+  String get revelationType => 'Tempat Turunnya';
+
+  @override
+  String get searchInTranslations => 'Cari dalam Terjemahan';
+
+  @override
+  String get searchInTafsirs => 'Cari dalam Tafsir';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total aktif';
+  }
 }

@@ -58,7 +58,7 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'محفوظ کریں اور ڈاؤن لوڈ کریں';
+  String get saveAndDownload => 'محفوظ اور ڈاؤن لوڈ کریں';
 
   @override
   String get appLanguage => 'ایپ کی زبان';
@@ -1459,14 +1459,111 @@ class AppLocalizationsUr extends AppLocalizations {
   String get verses => 'آیات';
 
   @override
+  String get ayah => 'آیت';
+
+  @override
+  String get edit => 'ترمیم';
+
+  @override
+  String get searchAll => 'سب';
+
+  @override
+  String get searchArabic => 'عربی';
+
+  @override
+  String get searchQuranHint => 'قرآن، سورۃ، 2:255، ترجمہ تلاش کریں...';
+
+  @override
+  String get searchFiltersAndOptions => 'تلاش کے فلٹرز اور اختیارات';
+
+  @override
+  String get exactPhrase => 'عین جملہ';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count سورتیں ملیں',
+      one: '1 سورت ملی',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count آیات ملیں',
+      one: '1 آیت ملی',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return '\"$query\" سے مماثل کوئی سورت نہیں ملی';
+  }
+
+  @override
+  String get noResultsFound => 'کوئی نتیجہ نہیں ملا';
+
+  @override
+  String get trySearchingFor =>
+      'سورۃ کا نام، آیت نمبر (مثلاً 2:255) یا موضوعات تلاش کرنے کی کوشش کریں';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'تمام سورتیں ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'فعال شارٹ کٹس ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'کوئی فعال شارٹ کٹ نہیں ملا';
+
+  @override
+  String get customize => 'تخصیص';
+
+  @override
+  String get bismillahPreview => 'بسم اللہ پیش نظارہ';
+
+  @override
+  String get tajweedRules => 'تجوید کے قواعد';
+
+  @override
   String get makki => 'مکی';
 
   @override
   String get madani => 'مدنی';
 
   @override
-  String get ayah => 'آیت';
+  String get exactPhraseMatch => 'عین جملے کا ملاپ';
 
   @override
-  String get edit => 'ترمیم';
+  String get matchExactWordsDesc => 'مسلسل ترتیب میں الفاظ کا درست ملاپ کریں';
+
+  @override
+  String get filterBySurah => 'سورۃ کے لحاظ سے فلٹر کریں';
+
+  @override
+  String get all114SurahsEntireQuran => 'تمام 114 سورتیں (مکمل قرآن)';
+
+  @override
+  String get revelationType => 'نزول کی قسم';
+
+  @override
+  String get searchInTranslations => 'تراجم میں تلاش کریں';
+
+  @override
+  String get searchInTafsirs => 'تفاسیر میں تلاش کریں';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total فعال';
+  }
 }

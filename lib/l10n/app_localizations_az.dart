@@ -58,7 +58,7 @@ class AppLocalizationsAz extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'Yadda saxla və Yüklə';
+  String get saveAndDownload => 'Yadda saxla və endir';
 
   @override
   String get appLanguage => 'Tətbiq Dili';
@@ -1464,14 +1464,110 @@ class AppLocalizationsAz extends AppLocalizations {
   String get verses => 'Ayələr';
 
   @override
+  String get ayah => 'Ayə';
+
+  @override
+  String get edit => 'Düzəliş et';
+
+  @override
+  String get searchAll => 'Hamısı';
+
+  @override
+  String get searchArabic => 'Ərəbcə';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Search Filters & Options';
+
+  @override
+  String get exactPhrase => 'Dəqiq İfadə';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count surə tapıldı',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayə tapıldı',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No active shortcuts found';
+
+  @override
+  String get customize => 'Fərdiləşdir';
+
+  @override
+  String get bismillahPreview => 'Bismillah önizləməsi';
+
+  @override
+  String get tajweedRules => 'Təcvid qaydaları';
+
+  @override
   String get makki => 'Məkkə';
 
   @override
   String get madani => 'Mədinə';
 
   @override
-  String get ayah => 'Ayə';
+  String get exactPhraseMatch => 'Dəqiq İfadə Uyğunluğu';
 
   @override
-  String get edit => 'Düzəliş et';
+  String get matchExactWordsDesc =>
+      'Ardıcıl ardıcıllıqla dəqiq sözləri uyğunlaşdırın';
+
+  @override
+  String get filterBySurah => 'Surəyə görə filtrləyin';
+
+  @override
+  String get all114SurahsEntireQuran => 'Bütün 114 surə (Bütün Quran)';
+
+  @override
+  String get revelationType => 'Nazil olma yeri';
+
+  @override
+  String get searchInTranslations => 'Tərcümələrdə axtarın';
+
+  @override
+  String get searchInTafsirs => 'Təfsirlərdə axtarın';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total aktiv';
+  }
 }

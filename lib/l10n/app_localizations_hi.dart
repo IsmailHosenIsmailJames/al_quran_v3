@@ -58,7 +58,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'सेव और डाउनलोड करें';
+  String get saveAndDownload => 'सहेजें और डाउनलोड करें';
 
   @override
   String get appLanguage => 'ऐप की भाषा';
@@ -1460,14 +1460,111 @@ class AppLocalizationsHi extends AppLocalizations {
   String get verses => 'आयतें';
 
   @override
+  String get ayah => 'आयत';
+
+  @override
+  String get edit => 'संपादित करें';
+
+  @override
+  String get searchAll => 'सभी';
+
+  @override
+  String get searchArabic => 'अरबी';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'खोज फ़िल्टर और विकल्प';
+
+  @override
+  String get exactPhrase => 'सटीक वाक्यांश';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count सूरह मिले',
+      one: '1 सूरह मिला',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count आयतें मिलीं',
+      one: '1 आयत मिली',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'कोई परिणाम नहीं मिला';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'कोई सक्रिय शॉर्टकट नहीं मिला';
+
+  @override
+  String get customize => 'अनुकूलित करें';
+
+  @override
+  String get bismillahPreview => 'बिस्मिल्लाह पूर्वावलोकन';
+
+  @override
+  String get tajweedRules => 'तजवीद के नियम';
+
+  @override
   String get makki => 'मक्की';
 
   @override
   String get madani => 'मदनी';
 
   @override
-  String get ayah => 'आयत';
+  String get exactPhraseMatch => 'सटीक वाक्यांश मिलान';
 
   @override
-  String get edit => 'संपादित करें';
+  String get matchExactWordsDesc => 'लगातार क्रम में सटीक शब्दों का मिलान करें';
+
+  @override
+  String get filterBySurah => 'सूरह द्वारा फ़िल्टर करें';
+
+  @override
+  String get all114SurahsEntireQuran => 'सभी 114 सूरह (संपूर्ण कुरान)';
+
+  @override
+  String get revelationType => 'अवतरण का प्रकार';
+
+  @override
+  String get searchInTranslations => 'अनुवादों में खोजें';
+
+  @override
+  String get searchInTafsirs => 'तफ़सीर में खोजें';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total सक्रिय';
+  }
 }

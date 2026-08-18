@@ -311,7 +311,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get address => 'ঠিকানা: ';
 
   @override
-  String get change => 'চেঞ্জ';
+  String get change => 'পরিবর্তন';
 
   @override
   String get calculationMethod => 'ক্যালকুলেশন মেথড: ';
@@ -1461,14 +1461,112 @@ class AppLocalizationsBn extends AppLocalizations {
   String get verses => 'আয়াত';
 
   @override
+  String get ayah => 'আয়াত';
+
+  @override
+  String get edit => 'সম্পাদনা';
+
+  @override
+  String get searchAll => 'সব';
+
+  @override
+  String get searchArabic => 'আরবি';
+
+  @override
+  String get searchQuranHint => 'কুরআন, সূরা, ২:২৫৫, অনুবাদ খুঁজুন...';
+
+  @override
+  String get searchFiltersAndOptions => 'সার্চ ফিল্টার এবং অপশন';
+
+  @override
+  String get exactPhrase => 'হুবহু শব্দগুচ্ছ';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count টি সূরা পাওয়া গেছে',
+      one: '১ টি সূরা পাওয়া গেছে',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count টি আয়াত পাওয়া গেছে',
+      one: '১ টি আয়াত পাওয়া গেছে',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return '\"$query\" দিয়ে কোনো সূরা পাওয়া যায়নি';
+  }
+
+  @override
+  String get noResultsFound => 'কোনো ফলাফল পাওয়া যায়নি';
+
+  @override
+  String get trySearchingFor =>
+      'একটি সূরার নাম, আয়াত নম্বর (যেমন ২:২৫৫), বা বিষয় দিয়ে অনুসন্ধান করুন';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'সকল সূরা ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'সক্রিয় শর্টকাট ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'কোনো সক্রিয় শর্টকাট নেই';
+
+  @override
+  String get customize => 'কাস্টমাইজ';
+
+  @override
+  String get bismillahPreview => 'বিসমিল্লাহ প্রিভিউ';
+
+  @override
+  String get tajweedRules => 'তাজবীদ নিয়ম';
+
+  @override
   String get makki => 'মাক্কী';
 
   @override
   String get madani => 'মাদানী';
 
   @override
-  String get ayah => 'আয়াত';
+  String get exactPhraseMatch => 'হুবহু শব্দগুচ্ছ মিলান';
 
   @override
-  String get edit => 'সম্পাদনা';
+  String get matchExactWordsDesc =>
+      'ধারাবাহিক ক্রমানুসারে হুবহু শব্দগুলো মিলান';
+
+  @override
+  String get filterBySurah => 'সূরা অনুযায়ী ফিল্টার';
+
+  @override
+  String get all114SurahsEntireQuran => 'সকল ১১৪টি সূরা (সম্পূর্ণ কুরআন)';
+
+  @override
+  String get revelationType => 'নাযিলের স্থান';
+
+  @override
+  String get searchInTranslations => 'অনুবাদে অনুসন্ধান করুন';
+
+  @override
+  String get searchInTafsirs => 'তাফসীরে অনুসন্ধান করুন';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total সক্রিয়';
+  }
 }

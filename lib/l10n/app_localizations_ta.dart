@@ -1477,14 +1477,113 @@ class AppLocalizationsTa extends AppLocalizations {
   String get verses => 'வசனங்கள்';
 
   @override
+  String get ayah => 'வசனம்';
+
+  @override
+  String get edit => 'திருத்து';
+
+  @override
+  String get searchAll => 'அனைத்தும்';
+
+  @override
+  String get searchArabic => 'அரபு';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Search Filters & Options';
+
+  @override
+  String get exactPhrase => 'சரியான சொற்றொடர்';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count அத்தியாயங்கள் காணப்பட்டன',
+      one: '1 அத்தியாயம் காணப்பட்டது',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count வசனங்கள் காணப்பட்டன',
+      one: '1 வசனம் காணப்பட்டது',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'No active shortcuts found';
+
+  @override
+  String get customize => 'தனிப்பயனாக்கு';
+
+  @override
+  String get bismillahPreview => 'பிஸ்மில்லாஹ் முன்னோட்டம்';
+
+  @override
+  String get tajweedRules => 'தஜ்வீத் விதிகள்';
+
+  @override
   String get makki => 'மக்கீ';
 
   @override
   String get madani => 'மதனீ';
 
   @override
-  String get ayah => 'வசனம்';
+  String get exactPhraseMatch => 'சரியான சொற்றொடர் பொருத்தம்';
 
   @override
-  String get edit => 'திருத்து';
+  String get matchExactWordsDesc =>
+      'தொடர்ச்சியான வரிசையில் சரியான சொற்களைப் பொருத்துங்கள்';
+
+  @override
+  String get filterBySurah => 'அத்தியாயம் வாரியாக வடிகட்டவும்';
+
+  @override
+  String get all114SurahsEntireQuran =>
+      'அனைத்து 114 அத்தியாயங்களும் (முழு குர்ஆன்)';
+
+  @override
+  String get revelationType => 'இறக்கப்பட்ட இடம்';
+
+  @override
+  String get searchInTranslations => 'மொழிபெயர்ப்புகளில் தேடவும்';
+
+  @override
+  String get searchInTafsirs => 'தஃப்சீரில் தேடவும்';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total செயலில் உள்ளது';
+  }
 }

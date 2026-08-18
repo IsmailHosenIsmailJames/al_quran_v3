@@ -58,7 +58,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get saveAndDownload => 'Lưu và Tải xuống';
+  String get saveAndDownload => 'Lưu & Tải xuống';
 
   @override
   String get appLanguage => 'Ngôn ngữ ứng dụng';
@@ -1464,14 +1464,110 @@ class AppLocalizationsVi extends AppLocalizations {
   String get verses => 'Câu';
 
   @override
+  String get ayah => 'Câu';
+
+  @override
+  String get edit => 'Chỉnh sửa';
+
+  @override
+  String get searchAll => 'Tất cả';
+
+  @override
+  String get searchArabic => 'Tiếng Ả Rập';
+
+  @override
+  String get searchQuranHint => 'Search Quran, Surah, 2:255, Translation...';
+
+  @override
+  String get searchFiltersAndOptions => 'Bộ lọc & tùy chọn tìm kiếm';
+
+  @override
+  String get exactPhrase => 'Cụm từ chính xác';
+
+  @override
+  String surahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Tìm thấy $count Surah',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String ayahsFound(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Tìm thấy $count câu kinh',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noMatchingSurahs(String query) {
+    return 'No Surahs matching \"$query\"';
+  }
+
+  @override
+  String get noResultsFound => 'Không tìm thấy kết quả';
+
+  @override
+  String get trySearchingFor =>
+      'Try searching for a Surah name, verse number (e.g. 2:255), or topics';
+
+  @override
+  String allSurahsCount(int count) {
+    return 'All Surahs ($count)';
+  }
+
+  @override
+  String activeShortcutsCount(int count) {
+    return 'Active Shortcuts ($count)';
+  }
+
+  @override
+  String get noActiveShortcuts => 'Không tìm thấy phím tắt hoạt động';
+
+  @override
+  String get customize => 'Tùy chỉnh';
+
+  @override
+  String get bismillahPreview => 'Xem trước Bismillah';
+
+  @override
+  String get tajweedRules => 'Quy tắc Tajweed';
+
+  @override
   String get makki => 'Mecca';
 
   @override
   String get madani => 'Medina';
 
   @override
-  String get ayah => 'Câu';
+  String get exactPhraseMatch => 'Khớp cụm từ chính xác';
 
   @override
-  String get edit => 'Chỉnh sửa';
+  String get matchExactWordsDesc =>
+      'Khớp các từ chính xác theo trình tự liên tục';
+
+  @override
+  String get filterBySurah => 'Lọc theo Surah';
+
+  @override
+  String get all114SurahsEntireQuran => 'Tất cả 114 Surah (Toàn bộ Kinh Quran)';
+
+  @override
+  String get revelationType => 'Nơi mặc khải';
+
+  @override
+  String get searchInTranslations => 'Tìm kiếm trong bản dịch';
+
+  @override
+  String get searchInTafsirs => 'Tìm kiếm trong Tafsir';
+
+  @override
+  String activeCount(int selected, int total) {
+    return '$selected/$total đang hoạt động';
+  }
 }
