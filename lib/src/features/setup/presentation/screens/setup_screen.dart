@@ -142,6 +142,7 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
                   ),
                 ),
               ),
+        extendBodyBehindAppBar: true,
         body: NotificationListener<UserScrollNotification>(
           onNotification: (notification) {
             if (notification.direction == ScrollDirection.reverse) {
