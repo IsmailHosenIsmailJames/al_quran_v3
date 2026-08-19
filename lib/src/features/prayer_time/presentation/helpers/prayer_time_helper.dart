@@ -208,7 +208,7 @@ class PrayerTimeHelper {
       case Prayer.sunset:
         return FluentIcons.weather_sunny_low_24_filled;
       case Prayer.maghrib:
-        return FluentIcons.weather_moon_off_24_regular;
+        return FluentIcons.weather_sunny_low_24_filled;
       case Prayer.isha:
         return FluentIcons.weather_moon_24_regular;
       case Prayer.tahajjud:
