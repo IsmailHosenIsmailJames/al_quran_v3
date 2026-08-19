@@ -1576,4 +1576,65 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Cari berdasarkan nama Surah, nomor ayat (mis. 2:255), atau kata dalam terjemahan dan tafsir.';
+
+  @override
+  String get madani15Line => '15 Baris Madinah';
+
+  @override
+  String get totalPagesCount => '604 Halaman';
+
+  @override
+  String get wordAudio => 'Audio Per Kata';
+
+  @override
+  String get offlineReady => 'Siap Offline';
+
+  @override
+  String get vectorFonts => 'Font Vektor';
+
+  @override
+  String get madaniMushafLayout => 'Tata Letak Mushaf Madinah';
+
+  @override
+  String get kfgqpcDescription => 'Kompleks Percetakan Al-Quran Raja Fahd (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Mengunduh Paket Mushaf...';
+
+  @override
+  String get extractingAndInstallingData => 'Mengekstrak & Memasang Data...';
+
+  @override
+  String get settingUpOfflinePages => 'Menyiapkan halaman offline...';
+
+  @override
+  String get fetchingLayoutArchive => 'Mengambil arsip tata letak...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Harap biarkan aplikasi tetap terbuka sampai unduhan selesai.';
+
+  @override
+  String get downloadFailed => 'Unduhan Gagal';
+
+  @override
+  String get retryDownload => 'Coba Unduh Lagi';
+
+  @override
+  String get packageSize => 'Ukuran Paket';
+
+  @override
+  String get loadingMushafPage => 'Memuat Halaman Mushaf...';
+
+  @override
+  String get quickPageJump => 'Lompat Halaman Cepat';
+
+  @override
+  String get searchSurahHint => 'Cari Surah berdasarkan nama atau nomor...';
+
+  @override
+  String get fullscreen => 'Layar Penuh';
+
+  @override
+  String get back => 'Kembali';
 }

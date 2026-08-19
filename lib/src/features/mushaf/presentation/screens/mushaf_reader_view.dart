@@ -3,6 +3,7 @@ import "dart:convert";
 import "dart:developer";
 import "dart:io";
 
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/mushaf/domain/utils/mushaf_page_helper.dart";
@@ -257,7 +258,7 @@ class _MushafReaderViewState extends State<MushafReaderView> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          "Loading Mushaf Page...",
+                          AppLocalizations.of(context).loadingMushafPage,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,

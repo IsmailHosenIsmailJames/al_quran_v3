@@ -10,7 +10,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:shimmer/shimmer.dart";
 
-/// Modern, informative Mushaf download and overview screen.
+/// Modern, clean, fully-localized Mushaf download and overview screen.
 class MushafDownloadView extends StatelessWidget {
   const MushafDownloadView({super.key});
 
@@ -39,66 +39,41 @@ class MushafDownloadView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Hero Preview Card
-                _buildHeroCard(context, isDark, themeState),
-                const Gap(20),
+                _buildHeroCard(context, isDark, themeState, l10n),
+                const Gap(18),
 
-                // Key Information Badges
-                const Wrap(
+                // Feature Tags
+                Wrap(
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    MushafInfoBadge(
+                    const MushafInfoBadge(
                       icon: FluentIcons.book_24_regular,
                       label: "KFGQPC V4",
                     ),
                     MushafInfoBadge(
                       icon: FluentIcons.document_text_24_regular,
-                      label: "15-Line Madani",
+                      label: l10n.madani15Line,
                     ),
                     MushafInfoBadge(
-                      icon: FluentIcons.globe_arrow_up_24_regular,
-                      label: "Offline Ready",
+                      icon: FluentIcons.book_open_24_regular,
+                      label: l10n.totalPagesCount,
+                    ),
+                    MushafInfoBadge(
+                      icon: FluentIcons.speaker_2_24_regular,
+                      label: l10n.wordAudio,
+                    ),
+                    MushafInfoBadge(
+                      icon: FluentIcons.arrow_download_24_regular,
+                      label: l10n.offlineReady,
+                    ),
+                    MushafInfoBadge(
+                      icon: FluentIcons.text_font_24_regular,
+                      label: l10n.vectorFonts,
                     ),
                   ],
                 ),
-                const Gap(20),
-
-                // Feature Highlights
-                Text(
-                  "Features & Overview",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : Colors.grey.shade900,
-                  ),
-                ),
-                const Gap(12),
-                const MushafFeatureTile(
-                  icon: FluentIcons.text_font_24_regular,
-                  title: "Authentic KFGQPC Typography",
-                  description:
-                      "Standard King Fahd Quran Printing Complex font and page rendering with crisp vector glyphs.",
-                ),
-                const MushafFeatureTile(
-                  icon: FluentIcons.book_open_24_regular,
-                  title: "604 Madani Pages",
-                  description:
-                      "Complete 15-line Madani Mushaf pagination exactly identical to physical printed Quran copies.",
-                ),
-                const MushafFeatureTile(
-                  icon: FluentIcons.speaker_2_24_regular,
-                  title: "Word-by-Word Audio Sync",
-                  description:
-                      "Tap any word or verse on the page to instantly listen to crystal clear pronunciation.",
-                ),
-                const MushafFeatureTile(
-                  icon: FluentIcons.arrow_download_24_regular,
-                  title: "100% Offline Access",
-                  description:
-                      "Downloaded directly to your device storage so you can recite anywhere without internet.",
-                ),
-
-                const Gap(12),
+                const Gap(24),
 
                 // Download / Progress Action Section
                 _buildDownloadSection(context, state, isDark, themeState, l10n),
@@ -112,9 +87,13 @@ class MushafDownloadView extends StatelessWidget {
   }
 
   Widget _buildHeroCard(
-      BuildContext context, bool isDark, dynamic themeState) {
+    BuildContext context,
+    bool isDark,
+    dynamic themeState,
+    AppLocalizations l10n,
+  ) {
     return Container(
-      constraints: const BoxConstraints(maxHeight: 220),
+      constraints: const BoxConstraints(maxHeight: 260),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
@@ -161,14 +140,14 @@ class MushafDownloadView extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.1),
-                    Colors.black.withValues(alpha: 0.65),
+                    Colors.black.withValues(alpha: 0.05),
+                    Colors.black.withValues(alpha: 0.7),
                   ],
                 ),
               ),
             ),
             // Banner Title Overlay
-            const Positioned(
+            Positioned(
               bottom: 16,
               left: 16,
               right: 16,
@@ -177,18 +156,18 @@ class MushafDownloadView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Madani Mushaf Layout",
-                    style: TextStyle(
+                    l10n.madaniMushafLayout,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.3,
                     ),
                   ),
-                  Gap(2),
+                  const Gap(2),
                   Text(
-                    "King Fahd Quran Printing Complex (V4)",
-                    style: TextStyle(
+                    l10n.kfgqpcDescription,
+                    style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 13,
                     ),
@@ -250,8 +229,8 @@ class MushafDownloadView extends StatelessWidget {
                     children: [
                       Text(
                         isExtracting
-                            ? "Extracting & Installing Data..."
-                            : "Downloading Mushaf Package...",
+                            ? l10n.extractingAndInstallingData
+                            : l10n.downloadingMushafPackage,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14.5,
@@ -263,8 +242,8 @@ class MushafDownloadView extends StatelessWidget {
                         state.downloadStatus.isNotEmpty
                             ? state.downloadStatus
                             : (isExtracting
-                                ? "Setting up offline pages..."
-                                : "Fetching layout archive..."),
+                                ? l10n.settingUpOfflinePages
+                                : l10n.fetchingLayoutArchive),
                         style: TextStyle(
                           fontSize: 12,
                           color: isDark
@@ -301,7 +280,7 @@ class MushafDownloadView extends StatelessWidget {
             ),
             const Gap(10),
             Text(
-              "Please keep the app open while download completes.",
+              l10n.keepAppOpenDuringDownload,
               style: TextStyle(
                 fontSize: 11.5,
                 fontStyle: FontStyle.italic,
@@ -326,15 +305,15 @@ class MushafDownloadView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const Row(
+            Row(
               children: [
-                Icon(FluentIcons.warning_24_regular,
+                const Icon(FluentIcons.warning_24_regular,
                     color: Colors.red, size: 24),
-                Gap(12),
+                const Gap(12),
                 Expanded(
                   child: Text(
-                    "Download Failed",
-                    style: TextStyle(
+                    l10n.downloadFailed,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: Colors.red,
@@ -370,9 +349,9 @@ class MushafDownloadView extends StatelessWidget {
                 },
                 icon: const Icon(FluentIcons.arrow_clockwise_24_regular,
                     size: 18),
-                label: const Text(
-                  "Retry Download",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                label: Text(
+                  l10n.retryDownload,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -401,7 +380,7 @@ class MushafDownloadView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Package Size",
+                l10n.packageSize,
                 style: TextStyle(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w600,

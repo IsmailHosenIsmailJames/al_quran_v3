@@ -1575,4 +1575,66 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Сүре атауы, аят нөмірі (мыс. 2:255) немесе аудармалар мен тәпсірлердегі сөздер бойынша іздеңіз.';
+
+  @override
+  String get madani15Line => '15 жолдық Мәдина';
+
+  @override
+  String get totalPagesCount => '604 бет';
+
+  @override
+  String get wordAudio => 'Сөздік аудио';
+
+  @override
+  String get offlineReady => 'Офлайн қолжетімді';
+
+  @override
+  String get vectorFonts => 'Векторлық қаріптер';
+
+  @override
+  String get madaniMushafLayout => 'Мәдина Мұсхаф макеті';
+
+  @override
+  String get kfgqpcDescription => 'Король Фаһд Құран басу кешені (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Мұсхаф топтамасы жүктелуде...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'Деректер шығарылуда және орнатылуда...';
+
+  @override
+  String get settingUpOfflinePages => 'Офлайн беттер бапталуда...';
+
+  @override
+  String get fetchingLayoutArchive => 'Макет архиві алынуда...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Жүктеу аяқталғанша қолданбаны ашық ұстаңыз.';
+
+  @override
+  String get downloadFailed => 'Жүктеу сәтсіз аяқталды';
+
+  @override
+  String get retryDownload => 'Қайта жүктеу';
+
+  @override
+  String get packageSize => 'Топтама өлшемі';
+
+  @override
+  String get loadingMushafPage => 'Мұсхаф беті жүктелуде...';
+
+  @override
+  String get quickPageJump => 'Бетке жылдам өту';
+
+  @override
+  String get searchSurahHint => 'Сүрені аты немесе нөмірі бойынша іздеу...';
+
+  @override
+  String get fullscreen => 'Толық экран';
+
+  @override
+  String get back => 'Артқа';
 }

@@ -1582,4 +1582,66 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'সূরা নাম, আয়াত নম্বর (যেমন ২:২৫৫), অথবা অনুবাদ ও তাফসীরের শব্দ দিয়ে অনুসন্ধান করুন।';
+
+  @override
+  String get madani15Line => '১৫ লাইনের মাদানী';
+
+  @override
+  String get totalPagesCount => '৬০৪ পৃষ্ঠা';
+
+  @override
+  String get wordAudio => 'শব্দে অডিও';
+
+  @override
+  String get offlineReady => 'অফলাইনে প্রস্তুত';
+
+  @override
+  String get vectorFonts => 'ভেক্টর ফন্ট';
+
+  @override
+  String get madaniMushafLayout => 'মাদানী মুসহাফ লেআউট';
+
+  @override
+  String get kfgqpcDescription => 'বাদশাহ ফাহাদ কুরআন মুদ্রণ কমপ্লেক্স (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'মুসহাফ প্যাকেজ ডাউনলোড হচ্ছে...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'ডাটা এক্সট্র্যাক্ট ও ইনস্টল হচ্ছে...';
+
+  @override
+  String get settingUpOfflinePages => 'অফলাইন পৃষ্ঠা প্রস্তুত হচ্ছে...';
+
+  @override
+  String get fetchingLayoutArchive => 'লেআউট সংগ্রহ করা হচ্ছে...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'ডাউনলোড সম্পন্ন হওয়া পর্যন্ত দয়া করে অ্যাপটি খোলা রাখুন।';
+
+  @override
+  String get downloadFailed => 'ডাউনলোড ব্যর্থ হয়েছে';
+
+  @override
+  String get retryDownload => 'পুনরায় ডাউনলোড চেষ্টা করুন';
+
+  @override
+  String get packageSize => 'প্যাকেজের আকার';
+
+  @override
+  String get loadingMushafPage => 'মুসহাফ পৃষ্ঠা লোড হচ্ছে...';
+
+  @override
+  String get quickPageJump => 'দ্রুত পৃষ্ঠা পরিবর্তন';
+
+  @override
+  String get searchSurahHint => 'নাম বা নম্বর দিয়ে সূরা খুঁজুন...';
+
+  @override
+  String get fullscreen => 'পূর্ণ পর্দা';
+
+  @override
+  String get back => 'ফিরে যান';
 }

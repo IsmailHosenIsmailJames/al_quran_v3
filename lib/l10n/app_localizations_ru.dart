@@ -1591,4 +1591,65 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Ищите по названию суры, номеру аята (например, 2:255) или словам в переводах и тафсирах.';
+
+  @override
+  String get madani15Line => '15-строчный Мединский';
+
+  @override
+  String get totalPagesCount => '604 страницы';
+
+  @override
+  String get wordAudio => 'Аудио по словам';
+
+  @override
+  String get offlineReady => 'Доступно офлайн';
+
+  @override
+  String get vectorFonts => 'Векторные шрифты';
+
+  @override
+  String get madaniMushafLayout => 'Макет Мединского Мусхафа';
+
+  @override
+  String get kfgqpcDescription => 'Комплекс имени Короля Фахда (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Загрузка пакета Мусхафа...';
+
+  @override
+  String get extractingAndInstallingData => 'Извлечение и установка данных...';
+
+  @override
+  String get settingUpOfflinePages => 'Настройка офлайн-страниц...';
+
+  @override
+  String get fetchingLayoutArchive => 'Получение архива макета...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Пожалуйста, не закрывайте приложение до завершения загрузки.';
+
+  @override
+  String get downloadFailed => 'Ошибка загрузки';
+
+  @override
+  String get retryDownload => 'Повторить загрузку';
+
+  @override
+  String get packageSize => 'Размер пакета';
+
+  @override
+  String get loadingMushafPage => 'Загрузка страницы Мусхафа...';
+
+  @override
+  String get quickPageJump => 'Быстрый переход к странице';
+
+  @override
+  String get searchSurahHint => 'Поиск суры по названию или номеру...';
+
+  @override
+  String get fullscreen => 'Полноэкранный режим';
+
+  @override
+  String get back => 'Назад';
 }

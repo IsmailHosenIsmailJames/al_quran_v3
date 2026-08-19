@@ -2947,6 +2947,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search by Surah name, verse reference (e.g. 2:255), or words in translations and tafsir.'**
   String get searchGuideDescription;
+
+  /// No description provided for @madani15Line.
+  ///
+  /// In en, this message translates to:
+  /// **'15-Line Madani'**
+  String get madani15Line;
+
+  /// No description provided for @totalPagesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'604 Pages'**
+  String get totalPagesCount;
+
+  /// No description provided for @wordAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Word Audio'**
+  String get wordAudio;
+
+  /// No description provided for @offlineReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline Ready'**
+  String get offlineReady;
+
+  /// No description provided for @vectorFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Vector Fonts'**
+  String get vectorFonts;
+
+  /// No description provided for @madaniMushafLayout.
+  ///
+  /// In en, this message translates to:
+  /// **'Madani Mushaf Layout'**
+  String get madaniMushafLayout;
+
+  /// No description provided for @kfgqpcDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'King Fahd Quran Printing Complex (V4)'**
+  String get kfgqpcDescription;
+
+  /// No description provided for @downloadingMushafPackage.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading Mushaf Package...'**
+  String get downloadingMushafPackage;
+
+  /// No description provided for @extractingAndInstallingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Extracting & Installing Data...'**
+  String get extractingAndInstallingData;
+
+  /// No description provided for @settingUpOfflinePages.
+  ///
+  /// In en, this message translates to:
+  /// **'Setting up offline pages...'**
+  String get settingUpOfflinePages;
+
+  /// No description provided for @fetchingLayoutArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Fetching layout archive...'**
+  String get fetchingLayoutArchive;
+
+  /// No description provided for @keepAppOpenDuringDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Please keep the app open while download completes.'**
+  String get keepAppOpenDuringDownload;
+
+  /// No description provided for @downloadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Download Failed'**
+  String get downloadFailed;
+
+  /// No description provided for @retryDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry Download'**
+  String get retryDownload;
+
+  /// No description provided for @packageSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Package Size'**
+  String get packageSize;
+
+  /// No description provided for @loadingMushafPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading Mushaf Page...'**
+  String get loadingMushafPage;
+
+  /// No description provided for @quickPageJump.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Page Jump'**
+  String get quickPageJump;
+
+  /// No description provided for @searchSurahHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Surah by name or number...'**
+  String get searchSurahHint;
+
+  /// No description provided for @fullscreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Fullscreen'**
+  String get fullscreen;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
 }
 
 class _AppLocalizationsDelegate
