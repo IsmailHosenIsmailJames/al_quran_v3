@@ -73,16 +73,14 @@ class PrayerTimeline {
 
     final events = <_PrayerTimelineEvent>[
       _PrayerTimelineEvent(Prayer.isha, ptYesterday.isha.toLocal()),
-      if (ptYesterday.tahajjud != null)
-        _PrayerTimelineEvent(Prayer.tahajjud, ptYesterday.tahajjud!.toLocal()),
+      _PrayerTimelineEvent(Prayer.tahajjud, ptYesterday.tahajjud.toLocal()),
       _PrayerTimelineEvent(Prayer.fajr, ptToday.fajr.toLocal()),
       _PrayerTimelineEvent(Prayer.sunrise, ptToday.sunrise.toLocal()),
       _PrayerTimelineEvent(Prayer.dhuhr, ptToday.dhuhr.toLocal()),
       _PrayerTimelineEvent(Prayer.asr, ptToday.asr.toLocal()),
       _PrayerTimelineEvent(Prayer.maghrib, ptToday.maghrib.toLocal()),
       _PrayerTimelineEvent(Prayer.isha, ptToday.isha.toLocal()),
-      if (ptToday.tahajjud != null)
-        _PrayerTimelineEvent(Prayer.tahajjud, ptToday.tahajjud!.toLocal()),
+      _PrayerTimelineEvent(Prayer.tahajjud, ptToday.tahajjud.toLocal()),
       _PrayerTimelineEvent(Prayer.fajr, ptTomorrow.fajr.toLocal()),
       _PrayerTimelineEvent(Prayer.sunrise, ptTomorrow.sunrise.toLocal()),
     ];

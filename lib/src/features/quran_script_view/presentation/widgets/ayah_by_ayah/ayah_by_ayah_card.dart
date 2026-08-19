@@ -1017,7 +1017,7 @@ class _WordByWordContent extends StatelessWidget {
                                   ? themeState.primary
                                   : (isDark
                                       ? Colors.white.withValues(alpha: 0.06)
-                                      : themeState.primaryShade200.withValues(alpha: 0.6)),
+                                      : themeState.primary.withValues(alpha: 0.15)),
                               width: isHighlighted ? 1.5 : 1,
                             ),
                           ),
