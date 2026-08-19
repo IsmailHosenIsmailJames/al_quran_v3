@@ -1549,4 +1549,64 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       '장 이름, 구절 번호(예: 2:255) 또는 번역 및 타프시르의 단어로 검색하세요.';
+
+  @override
+  String get madani15Line => '15줄 메디나체';
+
+  @override
+  String get totalPagesCount => '604페이지';
+
+  @override
+  String get wordAudio => '단어별 오디오';
+
+  @override
+  String get offlineReady => '오프라인 사용 가능';
+
+  @override
+  String get vectorFonts => '벡터 폰트';
+
+  @override
+  String get madaniMushafLayout => '메디나 무스하프 레이아웃';
+
+  @override
+  String get kfgqpcDescription => '파드 국왕 쿠란 인쇄 복합단지 (V4)';
+
+  @override
+  String get downloadingMushafPackage => '무스하프 패키지 다운로드 중...';
+
+  @override
+  String get extractingAndInstallingData => '데이터 압축 해제 및 설치 중...';
+
+  @override
+  String get settingUpOfflinePages => '오프라인 페이지 설정 중...';
+
+  @override
+  String get fetchingLayoutArchive => '레이아웃 아카이브를 가져오는 중...';
+
+  @override
+  String get keepAppOpenDuringDownload => '다운로드가 완료될 때까지 앱을 열어두세요.';
+
+  @override
+  String get downloadFailed => '다운로드 실패';
+
+  @override
+  String get retryDownload => '다운로드 다시 시도';
+
+  @override
+  String get packageSize => '패키지 크기';
+
+  @override
+  String get loadingMushafPage => '무스하프 페이지 로딩 중...';
+
+  @override
+  String get quickPageJump => '빠른 페이지 이동';
+
+  @override
+  String get searchSurahHint => '이름이나 번호로 수라 검색...';
+
+  @override
+  String get fullscreen => '전체 화면';
+
+  @override
+  String get back => '뒤로';
 }

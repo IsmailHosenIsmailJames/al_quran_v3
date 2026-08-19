@@ -288,7 +288,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
           ),
           const Gap(24),
           Text(
-            "Quick Page Jump",
+            l10n.quickPageJump,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -300,12 +300,12 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
             spacing: 8,
             runSpacing: 8,
             children: [
-              _quickPageChip(1, "Page 1 (Al-Fatihah)", themeState, isDark),
-              _quickPageChip(2, "Page 2 (Al-Baqarah)", themeState, isDark),
-              _quickPageChip(293, "Page 293 (Al-Kahf)", themeState, isDark),
-              _quickPageChip(440, "Page 440 (Ya-Sin)", themeState, isDark),
-              _quickPageChip(582, "Page 582 (Juz 30)", themeState, isDark),
-              _quickPageChip(604, "Page 604 (An-Nas)", themeState, isDark),
+              _quickPageChip(1, "${l10n.page} 1 (Al-Fatihah)", themeState, isDark),
+              _quickPageChip(2, "${l10n.page} 2 (Al-Baqarah)", themeState, isDark),
+              _quickPageChip(293, "${l10n.page} 293 (Al-Kahf)", themeState, isDark),
+              _quickPageChip(440, "${l10n.page} 440 (Ya-Sin)", themeState, isDark),
+              _quickPageChip(582, "${l10n.page} 582 (${l10n.juz} 30)", themeState, isDark),
+              _quickPageChip(604, "${l10n.page} 604 (An-Nas)", themeState, isDark),
             ],
           ),
         ],
@@ -344,7 +344,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
           child: TextField(
             controller: _surahSearchController,
             decoration: InputDecoration(
-              hintText: "Search Surah by name or number...",
+              hintText: l10n.searchSurahHint,
               prefixIcon: const Icon(FluentIcons.search_24_regular, size: 20),
               suffixIcon: _surahSearchController.text.isNotEmpty
                   ? IconButton(
@@ -401,7 +401,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
                   ),
                 ),
                 subtitle: Text(
-                  "${surah.revelationType == 'makkah' ? 'Makki' : 'Madani'} • ${surah.versesCount} verses • Page ${surah.startPage}",
+                  "${surah.revelationType == 'makkah' ? l10n.makki : l10n.madani} • ${surah.versesCount} ${l10n.verses} • ${l10n.page} ${surah.startPage}",
                   style: TextStyle(
                     fontSize: 12,
                     color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -461,7 +461,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
             ),
           ),
           subtitle: Text(
-            "${juz.startSurahName} • Verses ${juz.firstVerseKey} to ${juz.lastVerseKey}",
+            "${juz.startSurahName} • ${l10n.verses} ${juz.firstVerseKey} - ${juz.lastVerseKey}",
             style: TextStyle(
               fontSize: 12,
               color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -481,7 +481,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
               ),
             ),
             child: Text(
-              "Page ${juz.startPage}",
+              "${l10n.page} ${juz.startPage}",
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,

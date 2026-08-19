@@ -1529,4 +1529,64 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get searchGuideDescription => '通过苏拉名称、经文编号（例如 2:255）或译文及经注中的词语进行搜索。';
+
+  @override
+  String get madani15Line => '15行麦地那版';
+
+  @override
+  String get totalPagesCount => '604页';
+
+  @override
+  String get wordAudio => '逐词音频';
+
+  @override
+  String get offlineReady => '支持离线';
+
+  @override
+  String get vectorFonts => '矢量字体';
+
+  @override
+  String get madaniMushafLayout => '麦地那穆斯哈夫布局';
+
+  @override
+  String get kfgqpcDescription => '法赫德国王古兰经印刷厂 (V4)';
+
+  @override
+  String get downloadingMushafPackage => '正在下载穆斯哈夫数据包...';
+
+  @override
+  String get extractingAndInstallingData => '正在解压并安装数据...';
+
+  @override
+  String get settingUpOfflinePages => '正在设置离线页面...';
+
+  @override
+  String get fetchingLayoutArchive => '正在获取排版压缩包...';
+
+  @override
+  String get keepAppOpenDuringDownload => '下载完成前请保持应用处于打开状态。';
+
+  @override
+  String get downloadFailed => '下载失败';
+
+  @override
+  String get retryDownload => '重试下载';
+
+  @override
+  String get packageSize => '数据包大小';
+
+  @override
+  String get loadingMushafPage => '正在加载穆斯哈夫页面...';
+
+  @override
+  String get quickPageJump => '快速页面跳转';
+
+  @override
+  String get searchSurahHint => '按名称或编号搜索苏拉...';
+
+  @override
+  String get fullscreen => '全屏';
+
+  @override
+  String get back => '返回';
 }

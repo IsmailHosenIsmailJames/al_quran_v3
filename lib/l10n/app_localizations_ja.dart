@@ -1550,4 +1550,64 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       '章名、節番号（例：2:255）、または翻訳やタフスィール内の単語で検索できます。';
+
+  @override
+  String get madani15Line => '15行マディーナ版';
+
+  @override
+  String get totalPagesCount => '604ページ';
+
+  @override
+  String get wordAudio => '単語ごとの音声';
+
+  @override
+  String get offlineReady => 'オフライン対応';
+
+  @override
+  String get vectorFonts => 'ベクターフォント';
+
+  @override
+  String get madaniMushafLayout => 'マディーナ・ムスハフ・レイアウト';
+
+  @override
+  String get kfgqpcDescription => 'ファハド国王クルアーン印刷複合体 (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'ムスハフパッケージをダウンロード中...';
+
+  @override
+  String get extractingAndInstallingData => 'データを抽出してインストール中...';
+
+  @override
+  String get settingUpOfflinePages => 'オフラインページを設定中...';
+
+  @override
+  String get fetchingLayoutArchive => 'レイアウトアーカイブを取得中...';
+
+  @override
+  String get keepAppOpenDuringDownload => 'ダウンロードが完了するまでアプリを開いたままにしてください。';
+
+  @override
+  String get downloadFailed => 'ダウンロードに失敗しました';
+
+  @override
+  String get retryDownload => '再ダウンロード';
+
+  @override
+  String get packageSize => 'パッケージサイズ';
+
+  @override
+  String get loadingMushafPage => 'ムスハフページを読み込み中...';
+
+  @override
+  String get quickPageJump => 'クイックページ移動';
+
+  @override
+  String get searchSurahHint => '名前または番号でスーラを検索...';
+
+  @override
+  String get fullscreen => '全画面表示';
+
+  @override
+  String get back => '戻る';
 }
