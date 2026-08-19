@@ -48,37 +48,18 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
     final l10n = AppLocalizations.of(context);
 
-    final currentPrayer = widget.prayerTimes.currentPrayer(date: _now);
-    Prayer? rawNextPrayer = widget.prayerTimes.nextPrayer(date: _now);
-    final Prayer nextPrayer = rawNextPrayer ?? Prayer.fajr;
-
-    DateTime? effectiveNextTime;
-    Duration? durationUntilNext;
-
-    if (rawNextPrayer != null) {
-      effectiveNextTime = widget.prayerTimes.timeForPrayer(rawNextPrayer)?.toLocal();
-      if (effectiveNextTime != null) {
-        durationUntilNext = effectiveNextTime.difference(_now);
-      }
-    } else {
-      // After Isha: next prayer is tomorrow's Fajr
-      final tomorrowFajr = widget.prayerTimes.fajr.add(const Duration(days: 1)).toLocal();
-      effectiveNextTime = tomorrowFajr;
-      durationUntilNext = tomorrowFajr.difference(_now);
-    }
-
-    if (durationUntilNext != null && durationUntilNext.isNegative) {
-      durationUntilNext = Duration.zero;
-    }
-
-    final currentPrayerTime = widget.prayerTimes.timeForPrayer(
-      currentPrayer ?? Prayer.fajr,
+    final timeline = PrayerTimeline.calculate(
+      coordinates: widget.prayerTimes.coordinates,
+      calculationParameters: widget.prayerTimes.calculationParameters,
+      now: _now,
     );
-    final nextPrayerTime = effectiveNextTime ?? widget.prayerTimes.timeForPrayer(nextPrayer);
 
-    final progressLeft =
-        widget.prayerTimes.percentageOfTimeLeftUntilNextPrayer(now: _now) ?? 0.0;
-    final progressElapsed = (1.0 - progressLeft).clamp(0.0, 1.0);
+    final currentPrayer = timeline.currentPrayer;
+    final nextPrayer = timeline.nextPrayer;
+    final currentPrayerTime = timeline.currentPrayerTime;
+    final nextPrayerTime = timeline.nextPrayerTime;
+    final durationUntilNext = timeline.durationUntilNext;
+    final progressElapsed = timeline.progressElapsed;
 
     final activeForbiddenWindow = PrayerTimeHelper.getActiveForbiddenWindow(
       widget.prayerTimes,

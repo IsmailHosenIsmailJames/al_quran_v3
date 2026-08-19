@@ -21,6 +21,115 @@ class ForbiddenTimeInfo {
   });
 }
 
+/// Represents the continuous prayer timeline across day/night boundaries.
+class PrayerTimeline {
+  final Prayer currentPrayer;
+  final Prayer nextPrayer;
+  final DateTime currentPrayerTime;
+  final DateTime nextPrayerTime;
+  final Duration durationUntilNext;
+  final double progressElapsed;
+
+  const PrayerTimeline({
+    required this.currentPrayer,
+    required this.nextPrayer,
+    required this.currentPrayerTime,
+    required this.nextPrayerTime,
+    required this.durationUntilNext,
+    required this.progressElapsed,
+  });
+
+  /// Calculates a continuous, gapless prayer timeline across midnight and day boundaries.
+  /// Accurately computes Tahajjud, Fajr, and Isha transitions regardless of timezone or time of day.
+  static PrayerTimeline calculate({
+    required Coordinates coordinates,
+    required CalculationParameters calculationParameters,
+    required DateTime now,
+  }) {
+    final yesterdayDate = DateTime(now.year, now.month, now.day - 1);
+    final todayDate = DateTime(now.year, now.month, now.day);
+    final tomorrowDate = DateTime(now.year, now.month, now.day + 1);
+
+    final ptYesterday = PrayerTimes(
+      coordinates: coordinates,
+      date: yesterdayDate,
+      calculationParameters: calculationParameters,
+      precision: true,
+    );
+
+    final ptToday = PrayerTimes(
+      coordinates: coordinates,
+      date: todayDate,
+      calculationParameters: calculationParameters,
+      precision: true,
+    );
+
+    final ptTomorrow = PrayerTimes(
+      coordinates: coordinates,
+      date: tomorrowDate,
+      calculationParameters: calculationParameters,
+      precision: true,
+    );
+
+    final events = <_PrayerTimelineEvent>[
+      _PrayerTimelineEvent(Prayer.isha, ptYesterday.isha.toLocal()),
+      if (ptYesterday.tahajjud != null)
+        _PrayerTimelineEvent(Prayer.tahajjud, ptYesterday.tahajjud!.toLocal()),
+      _PrayerTimelineEvent(Prayer.fajr, ptToday.fajr.toLocal()),
+      _PrayerTimelineEvent(Prayer.sunrise, ptToday.sunrise.toLocal()),
+      _PrayerTimelineEvent(Prayer.dhuhr, ptToday.dhuhr.toLocal()),
+      _PrayerTimelineEvent(Prayer.asr, ptToday.asr.toLocal()),
+      _PrayerTimelineEvent(Prayer.maghrib, ptToday.maghrib.toLocal()),
+      _PrayerTimelineEvent(Prayer.isha, ptToday.isha.toLocal()),
+      if (ptToday.tahajjud != null)
+        _PrayerTimelineEvent(Prayer.tahajjud, ptToday.tahajjud!.toLocal()),
+      _PrayerTimelineEvent(Prayer.fajr, ptTomorrow.fajr.toLocal()),
+      _PrayerTimelineEvent(Prayer.sunrise, ptTomorrow.sunrise.toLocal()),
+    ];
+
+    // Find the next upcoming event strictly after 'now'
+    int nextIndex = -1;
+    for (int i = 0; i < events.length; i++) {
+      if (events[i].time.isAfter(now)) {
+        nextIndex = i;
+        break;
+      }
+    }
+
+    if (nextIndex == -1) {
+      nextIndex = events.length - 1;
+    }
+
+    final nextEvent = events[nextIndex];
+    final currentEvent = nextIndex > 0 ? events[nextIndex - 1] : events[0];
+
+    final duration = nextEvent.time.difference(now);
+    final totalWindow = nextEvent.time.difference(currentEvent.time);
+    final elapsedWindow = now.difference(currentEvent.time);
+
+    double progress = 0.0;
+    if (totalWindow.inMilliseconds > 0) {
+      progress = (elapsedWindow.inMilliseconds / totalWindow.inMilliseconds)
+          .clamp(0.0, 1.0);
+    }
+
+    return PrayerTimeline(
+      currentPrayer: currentEvent.prayer,
+      nextPrayer: nextEvent.prayer,
+      currentPrayerTime: currentEvent.time,
+      nextPrayerTime: nextEvent.time,
+      durationUntilNext: duration.isNegative ? Duration.zero : duration,
+      progressElapsed: progress,
+    );
+  }
+}
+
+class _PrayerTimelineEvent {
+  final Prayer prayer;
+  final DateTime time;
+  const _PrayerTimelineEvent(this.prayer, this.time);
+}
+
 class PrayerTimeHelper {
   PrayerTimeHelper();
 
