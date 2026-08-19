@@ -1,6 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
@@ -9,6 +8,7 @@ import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/qur
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/search/data/models/search_result_model.dart";
 import "package:al_quran_v3/src/features/search/domain/utils/text_highlighter.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -36,10 +36,6 @@ class SearchResultCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     final surahName = getSurahName(context, ayahResult.surahNumber);
-    final surahData = metaDataSurah[ayahResult.surahNumber.toString()];
-    final totalVerses = surahData != null
-        ? (surahData["verses_count"] as int? ?? 7)
-        : 7;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
@@ -71,7 +67,7 @@ class SearchResultCard extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => QuranScriptView(
                   startKey: "${ayahResult.surahNumber}:1",
-                  endKey: "${ayahResult.surahNumber}:$totalVerses",
+                  endKey: getEndAyahKeyFromSurahNumber(ayahResult.surahNumber),
                   toScrollKey: ayahResult.ayahKey,
                 ),
               ),

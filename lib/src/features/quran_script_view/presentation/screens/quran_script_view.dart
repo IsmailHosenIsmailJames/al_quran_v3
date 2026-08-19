@@ -81,6 +81,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       ItemPositionsListener.create();
 
   StreamSubscription? _ayahKeyCubitSubscription;
+  StreamSubscription? _ayahScrollInfoSubscription;
   String? scrolledAyahOnAudioPlay;
   int? lastScrolledPageIndex;
   String? _lastTopAyahKey;
@@ -90,34 +91,93 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
 
+  int _getInitialAyahIndex() {
+    if (widget.toScrollKey != null) {
+      final index = ayahsList.indexOf(widget.toScrollKey!);
+      if (index != -1) return index;
+    } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+      final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
+      if (currentPlayingAyah.isNotEmpty) {
+        final index = ayahsList.indexOf(currentPlayingAyah);
+        if (index != -1) return index;
+      }
+    }
+    return 0;
+  }
+
+  int _getInitialPageIndex() {
+    if (widget.toScrollKey != null) {
+      final index = pagesList.indexWhere(
+        (element) => element.contains(widget.toScrollKey),
+      );
+      if (index != -1) return index;
+    } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+      final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
+      if (currentPlayingAyah.isNotEmpty) {
+        final index = pagesList.indexWhere(
+          (element) => element.contains(currentPlayingAyah),
+        );
+        if (index != -1) return index;
+      }
+    }
+    return 0;
+  }
+
   Future<void> scrollToAyah(dynamic key, {Duration? duration}) async {
     if (key is String) {
-      if (itemScrollControllerAyahByAyah.isAttached) {
-        int index = ayahsList.indexOf(key);
-        if (index != -1) {
-          if (duration == Duration.zero) {
-            itemScrollControllerAyahByAyah.jumpTo(
-              index: index,
-              alignment: 0.15,
-            );
-          } else {
-            itemScrollControllerAyahByAyah.scrollTo(
-              index: index,
-              alignment: 0.15,
-              duration: duration ?? const Duration(milliseconds: 200),
-            );
+      final int index = ayahsList.indexOf(key);
+      if (index != -1) {
+        void doScroll() {
+          if (itemScrollControllerAyahByAyah.isAttached) {
+            if (duration == Duration.zero) {
+              itemScrollControllerAyahByAyah.jumpTo(
+                index: index,
+                alignment: 0.15,
+              );
+            } else {
+              itemScrollControllerAyahByAyah.scrollTo(
+                index: index,
+                alignment: 0.15,
+                duration: duration ?? const Duration(milliseconds: 200),
+              );
+            }
           }
+        }
+
+        if (itemScrollControllerAyahByAyah.isAttached) {
+          doScroll();
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) doScroll();
+          });
         }
       }
     } else if (key is List<String>) {
-      if (itemScrollControllerReadingMode.isAttached) {
-        int index = pagesList.indexOf(key);
-        if (index != -1) {
-          itemScrollControllerReadingMode.scrollTo(
-            index: index,
-            alignment: 0.15,
-            duration: const Duration(milliseconds: 200),
-          );
+      final int index = pagesList.indexOf(key);
+      if (index != -1) {
+        void doScroll() {
+          if (itemScrollControllerReadingMode.isAttached) {
+            if (duration == Duration.zero) {
+              itemScrollControllerReadingMode.jumpTo(
+                index: index,
+                alignment: 0.15,
+              );
+            } else {
+              itemScrollControllerReadingMode.scrollTo(
+                index: index,
+                alignment: 0.15,
+                duration: duration ?? const Duration(milliseconds: 200),
+              );
+            }
+          }
+        }
+
+        if (itemScrollControllerReadingMode.isAttached) {
+          doScroll();
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) doScroll();
+          });
         }
       }
     }
@@ -129,7 +189,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
     ItemPosition? topItem;
     for (final p in positions) {
-      if (p.itemTrailingEdge > 0.05) {
+      if (p.itemTrailingEdge > 0.20) {
         if (topItem == null || p.itemLeadingEdge < topItem.itemLeadingEdge) {
           topItem = p;
         }
@@ -166,7 +226,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
     ItemPosition? topItem;
     for (final p in positions) {
-      if (p.itemTrailingEdge > 0.05) {
+      if (p.itemTrailingEdge > 0.20) {
         if (topItem == null || p.itemLeadingEdge < topItem.itemLeadingEdge) {
           topItem = p;
         }
@@ -207,7 +267,48 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   void dispose() {
     _historyDebounceTimer?.cancel();
     _ayahKeyCubitSubscription?.cancel();
+    _ayahScrollInfoSubscription?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant QuranScriptView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.toScrollKey != null &&
+        widget.toScrollKey != oldWidget.toScrollKey) {
+      context.read<AyahToHighlight>().changeAyah(widget.toScrollKey!);
+      context
+          .read<SegmentedQuranReciterCubit>()
+          .temporaryHilightAyah(widget.toScrollKey!);
+
+      final int surahNumber =
+          int.tryParse(widget.toScrollKey!.split(":").first) ?? 1;
+      final surahInfo =
+          metaDataSurah["$surahNumber"] != null
+              ? SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!)
+              : null;
+      if (surahInfo != null) {
+        context.read<AyahByAyahInScrollInfoCubit>().setData(
+          surahInfoModel: surahInfo,
+          dropdownAyahKey: widget.toScrollKey!,
+        );
+      }
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+            scrollToAyah(widget.toScrollKey, duration: Duration.zero);
+          } else {
+            int index = pagesList.indexWhere(
+              (element) => element.contains(widget.toScrollKey),
+            );
+            if (index != -1) {
+              scrollToAyah(pagesList[index], duration: Duration.zero);
+            }
+          }
+        }
+      });
+    }
   }
 
   @override
@@ -259,45 +360,49 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      context.read<AyahByAyahInScrollInfoCubit>().stream.listen((event) {
-        if (!isLandScape) return;
-        if (previousDropdownAyahKey != event.dropdownAyahKey) {
-          final dynamic dropdownAyahKey = event.dropdownAyahKey;
-          if (dropdownAyahKey != null && dropdownAyahKey is String) {
-            final index = ayahsList.indexOf(dropdownAyahKey);
-            if (index != -1) {
-              bool isVisible = isItemVisible(
-                itemPositionsListenerAyahList,
-                index,
-              );
-              if (!isVisible && itemScrollControllerAyahList.isAttached) {
-                itemScrollControllerAyahList.scrollTo(
-                  index: index,
-                  duration: const Duration(milliseconds: 200),
-                  alignment: 0.5,
-                );
+      if (!mounted) return;
+      _ayahScrollInfoSubscription = context
+          .read<AyahByAyahInScrollInfoCubit>()
+          .stream
+          .listen((event) {
+            if (!mounted || !isLandScape) return;
+            if (previousDropdownAyahKey != event.dropdownAyahKey) {
+              final dynamic dropdownAyahKey = event.dropdownAyahKey;
+              if (dropdownAyahKey != null && dropdownAyahKey is String) {
+                final index = ayahsList.indexOf(dropdownAyahKey);
+                if (index != -1) {
+                  bool isVisible = isItemVisible(
+                    itemPositionsListenerAyahList,
+                    index,
+                  );
+                  if (!isVisible && itemScrollControllerAyahList.isAttached) {
+                    itemScrollControllerAyahList.scrollTo(
+                      index: index,
+                      duration: const Duration(milliseconds: 200),
+                      alignment: 0.5,
+                    );
+                  }
+                }
+              } else if (event.dropdownAyahKey != null &&
+                  dropdownAyahKey is List<String>) {
+                final index = pagesList.indexOf(event.dropdownAyahKey);
+                if (index != -1) {
+                  bool isVisible = isItemVisible(
+                    itemPositionsListenerPagesList,
+                    index,
+                  );
+                  if (!isVisible && itemScrollControllerPagesList.isAttached) {
+                    itemScrollControllerPagesList.scrollTo(
+                      index: index,
+                      duration: const Duration(milliseconds: 200),
+                      alignment: 0.5,
+                    );
+                  }
+                }
               }
             }
-          } else if (event.dropdownAyahKey != null &&
-              dropdownAyahKey is List<String>) {
-            final index = pagesList.indexOf(event.dropdownAyahKey);
-            if (index != -1) {
-              bool isVisible = isItemVisible(
-                itemPositionsListenerPagesList,
-                index,
-              );
-              if (!isVisible && itemScrollControllerPagesList.isAttached) {
-                itemScrollControllerPagesList.scrollTo(
-                  index: index,
-                  duration: const Duration(milliseconds: 200),
-                  alignment: 0.5,
-                );
-              }
-            }
-          }
-        }
-        previousDropdownAyahKey = event.dropdownAyahKey;
-      });
+            previousDropdownAyahKey = event.dropdownAyahKey;
+          });
     });
 
     _ayahKeyCubitSubscription = context.read<AyahKeyCubit>().stream.listen((
@@ -326,8 +431,42 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       scrolledAyahOnAudioPlay = event.current;
     });
 
+    final String initialAyah = widget.toScrollKey ?? widget.startKey;
+    final int initialSurahNumber =
+        int.tryParse(initialAyah.split(":").first) ?? 1;
+    final initialSurahInfo =
+        metaDataSurah["$initialSurahNumber"] != null
+            ? SurahInfoModel.fromMap(metaDataSurah["$initialSurahNumber"]!)
+            : null;
+    if (initialSurahInfo != null) {
+      context.read<AyahByAyahInScrollInfoCubit>().setData(
+        surahInfoModel: initialSurahInfo,
+        dropdownAyahKey: initialAyah,
+      );
+    }
+
+    if (widget.toScrollKey != null) {
+      context.read<AyahToHighlight>().changeAyah(widget.toScrollKey!);
+    }
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+      final String? targetAyah = widget.toScrollKey;
+      if (targetAyah != null) {
+        context.read<AyahToHighlight>().changeAyah(targetAyah);
+        context
+            .read<SegmentedQuranReciterCubit>()
+            .temporaryHilightAyah(targetAyah);
+        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
+          scrollToAyah(targetAyah, duration: Duration.zero);
+        } else {
+          int index = pagesList.indexWhere(
+            (element) => element.contains(targetAyah),
+          );
+          if (index != -1) {
+            scrollToAyah(pagesList[index], duration: Duration.zero);
+          }
+        }
+      } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
         final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
 
         if (currentPlayingAyah.isNotEmpty &&
@@ -341,20 +480,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             if (index != -1) {
               scrollToAyah(pagesList[index], duration: Duration.zero);
             }
-          }
-          return;
-        }
-      }
-
-      if (widget.toScrollKey != null) {
-        if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
-          scrollToAyah(widget.toScrollKey, duration: Duration.zero);
-        } else {
-          int index = pagesList.indexWhere(
-            (element) => element.contains(widget.toScrollKey),
-          );
-          if (index != -1) {
-            scrollToAyah(pagesList[index], duration: Duration.zero);
           }
         }
       }
@@ -483,16 +608,20 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    getSurahName(context, index + 1),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: isCurrent
-                                          ? themeState.primary
-                                          : Colors.grey,
+                                  Flexible(
+                                    child: Text(
+                                      getSurahName(context, index + 1),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: isCurrent
+                                            ? themeState.primary
+                                            : Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                  if (isCurrent) const Gap(5),
+                                  if (isCurrent) const Gap(4),
                                   if (isCurrent)
                                     const Icon(
                                       Icons.radio_button_checked,
@@ -656,6 +785,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerAyahByAyah,
             itemPositionsListener: itemPositionsListenerAyahByAyah,
+            initialScrollIndex: _getInitialAyahIndex(),
+            initialAlignment: 0.15,
             itemCount: ayahsList.length + 1,
             padding: const EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {
@@ -729,6 +860,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerReadingMode,
             itemPositionsListener: itemPositionsListenerReadingMode,
+            initialScrollIndex: _getInitialPageIndex(),
+            initialAlignment: 0.15,
             itemCount: pagesList.length + 1,
             padding: const EdgeInsets.only(top: topPadding, bottom: 100),
             itemBuilder: (context, index) {

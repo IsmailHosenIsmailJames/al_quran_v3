@@ -346,92 +346,97 @@ class _AyahToolbar extends StatelessWidget {
         const Gap(6),
 
         // Actions Row
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Tafsir Action Pill
-            SizedBox(
-              height: 30,
-              child: TextButton.icon(
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  backgroundColor: isDark
-                      ? Colors.white.withValues(alpha: 0.05)
-                      : themeState.primary.withValues(alpha: 0.08),
-                  foregroundColor: themeState.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.08)
-                          : themeState.primary.withValues(alpha: 0.2),
+        Flexible(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Tafsir Action Pill
+                SizedBox(
+                  height: 30,
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      backgroundColor: isDark
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : themeState.primary.withValues(alpha: 0.08),
+                      foregroundColor: themeState.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                          color: isDark
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : themeState.primary.withValues(alpha: 0.2),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TafsirView(ayahKey: ayahKey),
+                        ),
+                      );
+                    },
+                    icon: const Icon(FluentIcons.book_open_20_filled, size: 14),
+                    label: Text(
+                      l10n.tafsirButton,
+                      style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TafsirView(ayahKey: ayahKey),
-                    ),
-                  );
-                },
-                icon: const Icon(FluentIcons.book_open_20_filled, size: 14),
-                label: Text(
-                  l10n.tafsirButton,
-                  style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),
+                const Gap(4),
+
+                // Share Action Icon
+                _ActionIconButton(
+                  icon: FluentIcons.share_20_regular,
+                  tooltip: l10n.shareButton,
+                  themeState: themeState,
+                  isDark: isDark,
+                  onTap: () {
+                    showShareBottomDialog(
+                      context,
+                      ayahKey,
+                      SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]!),
+                      context.read<QuranViewCubit>().state.quranScriptType,
+                      translation,
+                      footNoteAsStringMap,
+                      translationBookInfoList,
+                    );
+                  },
                 ),
-              ),
-            ),
-            const Gap(4),
+                const Gap(4),
 
-            // Share Action Icon
-            _ActionIconButton(
-              icon: FluentIcons.share_20_regular,
-              tooltip: l10n.shareButton,
-              themeState: themeState,
-              isDark: isDark,
-              onTap: () {
-                showShareBottomDialog(
-                  context,
-                  ayahKey,
-                  SurahInfoModel.fromMap(metaDataSurah[surahNumber.toString()]!),
-                  context.read<QuranViewCubit>().state.quranScriptType,
-                  translation,
-                  footNoteAsStringMap,
-                  translationBookInfoList,
-                );
-              },
-            ),
-            const Gap(4),
+                // Add Note Action Icon
+                _ActionIconButton(
+                  icon: FluentIcons.note_add_20_regular,
+                  tooltip: l10n.addNoteButton,
+                  themeState: themeState,
+                  isDark: isDark,
+                  onTap: () => showAddNotePopup(context, ayahKey),
+                ),
+                const Gap(4),
 
-            // Add Note Action Icon
-            _ActionIconButton(
-              icon: FluentIcons.note_add_20_regular,
-              tooltip: l10n.addNoteButton,
-              themeState: themeState,
-              isDark: isDark,
-              onTap: () => showAddNotePopup(context, ayahKey),
-            ),
-            const Gap(4),
+                // Pin / Bookmark Action Icon
+                _ActionIconButton(
+                  icon: FluentIcons.bookmark_20_regular,
+                  tooltip: l10n.pinToCollectionButton,
+                  themeState: themeState,
+                  isDark: isDark,
+                  onTap: () => showAddToPinnedPopup(context, ayahKey),
+                ),
+                const Gap(4),
 
-            // Pin / Bookmark Action Icon
-            _ActionIconButton(
-              icon: FluentIcons.bookmark_20_regular,
-              tooltip: l10n.pinToCollectionButton,
-              themeState: themeState,
-              isDark: isDark,
-              onTap: () => showAddToPinnedPopup(context, ayahKey),
+                // Play / Audio Action Icon
+                _AyahPlayButton(
+                  ayahKey: ayahKey,
+                  themeState: themeState,
+                  isDark: isDark,
+                ),
+              ],
             ),
-            const Gap(4),
-
-            // Play / Audio Action Icon
-            _AyahPlayButton(
-              ayahKey: ayahKey,
-              themeState: themeState,
-              isDark: isDark,
-            ),
-          ],
+          ),
         ),
       ],
     );
