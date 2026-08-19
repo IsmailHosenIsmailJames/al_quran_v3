@@ -723,5 +723,9 @@
   "revelationType": "Место ниспослания",
   "searchInTranslations": "Поиск в переводах",
   "searchInTafsirs": "Поиск в тафсирах",
-  "activeCount": "{selected}/{total} активно"
+  "activeCount": "{selected}/{total} активно",
+  "recentSearches": "Недавние поиски",
+  "clearAll": "Очистить всё",
+  "searchGuideTitle": "Поиск в Священном Коране",
+  "searchGuideDescription": "Ищите по названию суры, номеру аята (например, 2:255) или словам в переводах и тафсирах."
 }

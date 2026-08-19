@@ -461,5 +461,9 @@
   "revelationType": "Nazil olma yeri",
   "searchInTranslations": "Tərcümələrdə axtarın",
   "searchInTafsirs": "Təfsirlərdə axtarın",
-  "activeCount": "{selected}/{total} aktiv"
+  "activeCount": "{selected}/{total} aktiv",
+  "recentSearches": "Son axtarışlar",
+  "clearAll": "Hamısını təmizlə",
+  "searchGuideTitle": "Müqəddəs Quranda axtarın",
+  "searchGuideDescription": "Surə adı, ayə nömrəsi (məs. 2:255) və ya tərcümə və təfsirlərdəki sözlərlə axtarın."
 }

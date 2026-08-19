@@ -1563,4 +1563,17 @@ class AppLocalizationsPa extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total ਸਰਗਰਮ';
   }
+
+  @override
+  String get recentSearches => 'ਹਾਲੀਆ ਖੋਜਾਂ';
+
+  @override
+  String get clearAll => 'ਸਭ ਸਾਫ਼ ਕਰੋ';
+
+  @override
+  String get searchGuideTitle => 'ਪਵਿੱਤਰ ਕੁਰਾਨ ਵਿੱਚ ਖੋਜੋ';
+
+  @override
+  String get searchGuideDescription =>
+      'ਸੂਰਤ ਦੇ ਨਾਮ, ਆਇਤ ਨੰਬਰ (ਜਿਵੇਂ 2:255), ਜਾਂ ਅਨੁਵਾਦਾਂ ਅਤੇ ਤਫ਼ਸੀਰ ਦੇ ਸ਼ਬਦਾਂ ਦੁਆਰਾ ਖੋਜੋ।';
 }

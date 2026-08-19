@@ -461,5 +461,9 @@
   "revelationType": "계시 장소",
   "searchInTranslations": "번역에서 검색",
   "searchInTafsirs": "타프시르(주석)에서 검색",
-  "activeCount": "{selected}/{total}개 활성"
+  "activeCount": "{selected}/{total}개 활성",
+  "recentSearches": "최근 검색",
+  "clearAll": "모두 지우기",
+  "searchGuideTitle": "성스러운 쿠란 검색",
+  "searchGuideDescription": "장 이름, 구절 번호(예: 2:255) 또는 번역 및 타프시르의 단어로 검색하세요."
 }

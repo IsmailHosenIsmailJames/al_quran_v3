@@ -1517,4 +1517,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total 项启用';
   }
+
+  @override
+  String get recentSearches => '最近搜索';
+
+  @override
+  String get clearAll => '清除全部';
+
+  @override
+  String get searchGuideTitle => '搜索古兰经';
+
+  @override
+  String get searchGuideDescription => '通过苏拉名称、经文编号（例如 2:255）或译文及经注中的词语进行搜索。';
 }

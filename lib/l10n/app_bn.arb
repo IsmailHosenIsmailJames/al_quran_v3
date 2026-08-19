@@ -754,5 +754,9 @@
   "revelationType": "নাযিলের স্থান",
   "searchInTranslations": "অনুবাদে অনুসন্ধান করুন",
   "searchInTafsirs": "তাফসীরে অনুসন্ধান করুন",
-  "activeCount": "{selected}/{total} সক্রিয়"
+  "activeCount": "{selected}/{total} সক্রিয়",
+  "recentSearches": "সাম্প্রতিক অনুসন্ধান",
+  "clearAll": "সব মুছুন",
+  "searchGuideTitle": "পবিত্র কুরআন অনুসন্ধান করুন",
+  "searchGuideDescription": "সূরা নাম, আয়াত নম্বর (যেমন ২:২৫৫), অথবা অনুবাদ ও তাফসীরের শব্দ দিয়ে অনুসন্ধান করুন।"
 }

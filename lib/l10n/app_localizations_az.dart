@@ -1570,4 +1570,17 @@ class AppLocalizationsAz extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total aktiv';
   }
+
+  @override
+  String get recentSearches => 'Son axtarışlar';
+
+  @override
+  String get clearAll => 'Hamısını təmizlə';
+
+  @override
+  String get searchGuideTitle => 'Müqəddəs Quranda axtarın';
+
+  @override
+  String get searchGuideDescription =>
+      'Surə adı, ayə nömrəsi (məs. 2:255) və ya tərcümə və təfsirlərdəki sözlərlə axtarın.';
 }

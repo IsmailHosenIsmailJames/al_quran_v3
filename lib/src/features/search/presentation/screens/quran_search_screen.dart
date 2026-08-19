@@ -464,7 +464,12 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
         // 2. Direct Ayah Jump Card
         if (directJump != null) {
           if (index == currentIndex) {
-            return DirectAyahJumpCard(directJump: directJump);
+            return DirectAyahJumpCard(
+              directJump: directJump,
+              onResultSelected: () {
+                context.read<QuranSearchCubit>().saveQueryToHistory(state.query);
+              },
+            );
           }
           currentIndex++;
         }
@@ -472,7 +477,7 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
         // 3. Matching Surahs Carousel / Row
         if (surahs.isNotEmpty) {
           if (index == currentIndex) {
-            return _buildSurahsSection(surahs, themeState, isDark, l10n);
+            return _buildSurahsSection(surahs, themeState, isDark, l10n, state.query);
           }
           currentIndex++;
         }
@@ -483,6 +488,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
           return SearchResultCard(
             ayahResult: ayahs[ayahIndex],
             query: state.query,
+            onResultSelected: () {
+              context.read<QuranSearchCubit>().saveQueryToHistory(state.query);
+            },
           );
         }
 
@@ -496,6 +504,7 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
     ThemeState themeState,
     bool isDark,
     AppLocalizations l10n,
+    String activeQuery,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -522,6 +531,7 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
               final surah = surahs[index];
               return InkWell(
                 onTap: () {
+                  context.read<QuranSearchCubit>().saveQueryToHistory(activeQuery);
                   Navigator.push(
                     context,
                     MaterialPageRoute(

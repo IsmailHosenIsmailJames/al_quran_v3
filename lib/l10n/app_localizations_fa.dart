@@ -1561,4 +1561,17 @@ class AppLocalizationsFa extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total فعال';
   }
+
+  @override
+  String get recentSearches => 'جستجوهای اخیر';
+
+  @override
+  String get clearAll => 'پاک کردن همه';
+
+  @override
+  String get searchGuideTitle => 'جستجو در قرآن کریم';
+
+  @override
+  String get searchGuideDescription =>
+      'بر اساس نام سوره، شماره آیه (مانند 2:255) یا کلمات در ترجمه‌ها و تفاسیر جستجو کنید.';
 }

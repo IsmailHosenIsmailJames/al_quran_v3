@@ -1569,4 +1569,17 @@ class AppLocalizationsBn extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total সক্রিয়';
   }
+
+  @override
+  String get recentSearches => 'সাম্প্রতিক অনুসন্ধান';
+
+  @override
+  String get clearAll => 'সব মুছুন';
+
+  @override
+  String get searchGuideTitle => 'পবিত্র কুরআন অনুসন্ধান করুন';
+
+  @override
+  String get searchGuideDescription =>
+      'সূরা নাম, আয়াত নম্বর (যেমন ২:২৫৫), অথবা অনুবাদ ও তাফসীরের শব্দ দিয়ে অনুসন্ধান করুন।';
 }

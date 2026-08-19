@@ -394,6 +394,63 @@ translations = {
         "ja": "{selected}/{total} 件有効", "ko": "{selected}/{total}개 활성", "zh": "{selected}/{total} 项启用", "vi": "{selected}/{total} đang hoạt động",
         "sw": "{selected}/{total} amilifu", "az": "{selected}/{total} aktiv", "kk": "{selected}/{total} белсенді",
         "pa": "{selected}/{total} ਸਰਗਰਮ", "ps": "{selected}/{total} فعال", "ta": "{selected}/{total} செயலில் உள்ளது"
+    },
+    "recentSearches": {
+        "en": "Recent Searches", "bn": "সাম্প্রতিক অনুসন্ধান", "ar": "عمليات البحث الأخيرة",
+        "tr": "Son Aramalar", "ur": "حالیہ تلاشیں", "fa": "جستجوهای اخیر",
+        "id": "Pencarian Terkini", "ms": "Carian Terkini", "fr": "Recherches récentes",
+        "de": "Letzte Suchanfragen", "es": "Búsquedas recientes", "ru": "Недавние поиски",
+        "hi": "हाल की खोजें", "pt": "Pesquisas recentes", "it": "Ricerche recenti",
+        "ja": "最近の検索", "ko": "최근 검색", "zh": "最近搜索", "vi": "Tìm kiếm gần đây",
+        "sw": "Utafutaji wa Hivi Karibuni", "az": "Son axtarışlar", "kk": "Соңғы іздеулер",
+        "pa": "ਹਾਲੀਆ ਖੋਜਾਂ", "ps": "وروستي لټونونه", "ta": "சமீபத்திய தேடல்கள்"
+    },
+    "clearAll": {
+        "en": "Clear All", "bn": "সব মুছুন", "ar": "مسح الكل",
+        "tr": "Tümünü Temizle", "ur": "تمام صاف کریں", "fa": "پاک کردن همه",
+        "id": "Hapus Semua", "ms": "Padam Semua", "fr": "Tout effacer",
+        "de": "Alles löschen", "es": "Borrar todo", "ru": "Очистить всё",
+        "hi": "सभी साफ़ करें", "pt": "Limpar tudo", "it": "Cancella tutto",
+        "ja": "すべて消去", "ko": "모두 지우기", "zh": "清除全部", "vi": "Xóa tất cả",
+        "sw": "Futa Yote", "az": "Hamısını təmizlə", "kk": "Барлығын тазалау",
+        "pa": "ਸਭ ਸਾਫ਼ ਕਰੋ", "ps": "ټول پاک کړئ", "ta": "அனைத்தையும் அழி"
+    },
+    "searchGuideTitle": {
+        "en": "Search the Holy Quran", "bn": "পবিত্র কুরআন অনুসন্ধান করুন", "ar": "ابحث في القرآن الكريم",
+        "tr": "Kur'an-ı Kerim'de Ara", "ur": "قرآن مجید میں تلاش کریں", "fa": "جستجو در قرآن کریم",
+        "id": "Cari di Al-Quran", "ms": "Cari dalam Al-Quran", "fr": "Rechercher dans le Saint Coran",
+        "de": "Im Heiligen Koran suchen", "es": "Buscar en el Sagrado Corán", "ru": "Поиск в Священном Коране",
+        "hi": "पवित्र कुरान में खोजें", "pt": "Pesquisar no Sagrado Alcorão", "it": "Cerca nel Sacro Corano",
+        "ja": "クルアーンを検索", "ko": "성스러운 쿠란 검색", "zh": "搜索古兰经", "vi": "Tìm kiếm trong Kinh Quran",
+        "sw": "Tafuta katika Kurani Tukufu", "az": "Müqəddəs Quranda axtarın", "kk": "Қасиетті Құраннан іздеу",
+        "pa": "ਪਵਿੱਤਰ ਕੁਰਾਨ ਵਿੱਚ ਖੋਜੋ", "ps": "په سپېڅلي قرآن کې لټون وکړئ", "ta": "புனித குர்ஆனில் தேடுங்கள்"
+    },
+    "searchGuideDescription": {
+        "en": "Search by Surah name, verse reference (e.g. 2:255), or words in translations and tafsir.",
+        "bn": "সূরা নাম, আয়াত নম্বর (যেমন ২:২৫৫), অথবা অনুবাদ ও তাফসীরের শব্দ দিয়ে অনুসন্ধান করুন।",
+        "ar": "ابحث باسم السورة أو رقم الآية (مثل 2:255) أو بالكلمات في الترجمات والتفاسير.",
+        "tr": "Sure adı, ayet numarası (örn. 2:255) veya meal ve tefsirlerdeki kelimelerle arayın.",
+        "ur": "سورۃ کے نام، آیت نمبر (مثلاً 2:255)، یا تراجم اور تفاسیر میں الفاظ کے ذریعے تلاش کریں۔",
+        "fa": "بر اساس نام سوره، شماره آیه (مانند 2:255) یا کلمات در ترجمه‌ها و تفاسیر جستجو کنید.",
+        "id": "Cari berdasarkan nama Surah, nomor ayat (mis. 2:255), atau kata dalam terjemahan dan tafsir.",
+        "ms": "Cari mengikut nama Surah, rujukan ayat (cth. 2:255), atau perkataan dalam terjemahan dan tafsir.",
+        "fr": "Recherchez par nom de sourate, référence de verset (ex. 2:255) ou mots dans les traductions et tafsirs.",
+        "de": "Suchen Sie nach Sure-Namen, Versangabe (z. B. 2:255) oder Wörtern in Übersetzungen und Tafsir.",
+        "es": "Busque por nombre de sura, referencia de versículo (ej. 2:255) o palabras en traducciones y tafsir.",
+        "ru": "Ищите по названию суры, номеру аята (например, 2:255) или словам в переводах и тафсирах.",
+        "hi": "सूरह नाम, आयत संदर्भ (उदा. 2:255), या अनुवाद और तफ़सीर के शब्दों द्वारा खोजें।",
+        "pt": "Pesquise por nome de surata, referência de versículo (ex. 2:255) ou palavras em traduções e tafsir.",
+        "it": "Cerca per nome della sura, riferimento del versetto (es. 2:255) o parole nelle traduzioni e nei tafsir.",
+        "ja": "章名、節番号（例：2:255）、または翻訳やタフスィール内の単語で検索できます。",
+        "ko": "장 이름, 구절 번호(예: 2:255) 또는 번역 및 타프시르의 단어로 검색하세요.",
+        "zh": "通过苏拉名称、经文编号（例如 2:255）或译文及经注中的词语进行搜索。",
+        "vi": "Tìm kiếm theo tên Surah, số câu (ví dụ 2:255) hoặc các từ trong bản dịch và tafsir.",
+        "sw": "Tafuta kwa jina la Sura, nambari ya aya (mf. 2:255), au maneno katika tafsiri na tafsiri ya Quran.",
+        "az": "Surə adı, ayə nömrəsi (məs. 2:255) və ya tərcümə və təfsirlərdəki sözlərlə axtarın.",
+        "kk": "Сүре атауы, аят нөмірі (мыс. 2:255) немесе аудармалар мен тәпсірлердегі сөздер бойынша іздеңіз.",
+        "pa": "ਸੂਰਤ ਦੇ ਨਾਮ, ਆਇਤ ਨੰਬਰ (ਜਿਵੇਂ 2:255), ਜਾਂ ਅਨੁਵਾਦਾਂ ਅਤੇ ਤਫ਼ਸੀਰ ਦੇ ਸ਼ਬਦਾਂ ਦੁਆਰਾ ਖੋਜੋ।",
+        "ps": "د سورت نوم، د آیت شمېره (لکه 2:255)، یا په ژباړو او تفاسیرو کې د کلمو له مخې لټون وکړئ.",
+        "ta": "அத்தியாயப் பெயர், வசன எண் (எ.கா. 2:255) அல்லது மொழிபெயர்ப்புகள் மற்றும் தஃப்சீரில் உள்ள சொற்கள் மூலம் தேடுங்கள்."
     }
 }
 

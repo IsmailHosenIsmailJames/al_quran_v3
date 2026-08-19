@@ -723,5 +723,9 @@
   "revelationType": "अवतरण का प्रकार",
   "searchInTranslations": "अनुवादों में खोजें",
   "searchInTafsirs": "तफ़सीर में खोजें",
-  "activeCount": "{selected}/{total} सक्रिय"
+  "activeCount": "{selected}/{total} सक्रिय",
+  "recentSearches": "हाल की खोजें",
+  "clearAll": "सभी साफ़ करें",
+  "searchGuideTitle": "पवित्र कुरान में खोजें",
+  "searchGuideDescription": "सूरह नाम, आयत संदर्भ (उदा. 2:255), या अनुवाद और तफ़सीर के शब्दों द्वारा खोजें।"
 }

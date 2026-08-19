@@ -723,5 +723,9 @@
   "revelationType": "نزول کی قسم",
   "searchInTranslations": "تراجم میں تلاش کریں",
   "searchInTafsirs": "تفاسیر میں تلاش کریں",
-  "activeCount": "{selected}/{total} فعال"
+  "activeCount": "{selected}/{total} فعال",
+  "recentSearches": "حالیہ تلاشیں",
+  "clearAll": "تمام صاف کریں",
+  "searchGuideTitle": "قرآن مجید میں تلاش کریں",
+  "searchGuideDescription": "سورۃ کے نام، آیت نمبر (مثلاً 2:255)، یا تراجم اور تفاسیر میں الفاظ کے ذریعے تلاش کریں۔"
 }

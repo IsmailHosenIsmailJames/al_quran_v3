@@ -461,5 +461,9 @@
   "revelationType": "Offenbarungsort",
   "searchInTranslations": "In Übersetzungen suchen",
   "searchInTafsirs": "In Tafsiren suchen",
-  "activeCount": "{selected}/{total} aktiv"
+  "activeCount": "{selected}/{total} aktiv",
+  "recentSearches": "Letzte Suchanfragen",
+  "clearAll": "Alles löschen",
+  "searchGuideTitle": "Im Heiligen Koran suchen",
+  "searchGuideDescription": "Suchen Sie nach Sure-Namen, Versangabe (z. B. 2:255) oder Wörtern in Übersetzungen und Tafsir."
 }
