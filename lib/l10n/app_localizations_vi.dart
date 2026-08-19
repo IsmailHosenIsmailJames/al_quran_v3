@@ -1570,4 +1570,17 @@ class AppLocalizationsVi extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total đang hoạt động';
   }
+
+  @override
+  String get recentSearches => 'Tìm kiếm gần đây';
+
+  @override
+  String get clearAll => 'Xóa tất cả';
+
+  @override
+  String get searchGuideTitle => 'Tìm kiếm trong Kinh Quran';
+
+  @override
+  String get searchGuideDescription =>
+      'Tìm kiếm theo tên Surah, số câu (ví dụ 2:255) hoặc các từ trong bản dịch và tafsir.';
 }

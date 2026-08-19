@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MushafState {
 
- bool get isChecking; bool get isDownloading; double get downloadProgress; String get downloadStatus; bool get dataReady; String get baseDirPath; int get currentPage;
+ bool get isChecking; bool get isDownloading; bool get isExtracting; double get downloadProgress; String get downloadStatus; bool get hasError; String get errorMessage; bool get dataReady; String get baseDirPath; int get currentPage; bool get isUiVisible;
 /// Create a copy of MushafState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MushafStateCopyWith<MushafState> get copyWith => _$MushafStateCopyWithImpl<Mush
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isExtracting, isExtracting) || other.isExtracting == isExtracting)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.isUiVisible, isUiVisible) || other.isUiVisible == isUiVisible));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,downloadProgress,downloadStatus,dataReady,baseDirPath,currentPage);
+int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,isExtracting,downloadProgress,downloadStatus,hasError,errorMessage,dataReady,baseDirPath,currentPage,isUiVisible);
 
 @override
 String toString() {
-  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage)';
+  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, isExtracting: $isExtracting, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, hasError: $hasError, errorMessage: $errorMessage, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage, isUiVisible: $isUiVisible)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MushafStateCopyWith<$Res>  {
   factory $MushafStateCopyWith(MushafState value, $Res Function(MushafState) _then) = _$MushafStateCopyWithImpl;
 @useResult
 $Res call({
- bool isChecking, bool isDownloading, double downloadProgress, String downloadStatus, bool dataReady, String baseDirPath, int currentPage
+ bool isChecking, bool isDownloading, bool isExtracting, double downloadProgress, String downloadStatus, bool hasError, String errorMessage, bool dataReady, String baseDirPath, int currentPage, bool isUiVisible
 });
 
 
@@ -62,16 +62,20 @@ class _$MushafStateCopyWithImpl<$Res>
 
 /// Create a copy of MushafState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isChecking = null,Object? isDownloading = null,Object? downloadProgress = null,Object? downloadStatus = null,Object? dataReady = null,Object? baseDirPath = null,Object? currentPage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isChecking = null,Object? isDownloading = null,Object? isExtracting = null,Object? downloadProgress = null,Object? downloadStatus = null,Object? hasError = null,Object? errorMessage = null,Object? dataReady = null,Object? baseDirPath = null,Object? currentPage = null,Object? isUiVisible = null,}) {
   return _then(_self.copyWith(
 isChecking: null == isChecking ? _self.isChecking : isChecking // ignore: cast_nullable_to_non_nullable
 as bool,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
+as bool,isExtracting: null == isExtracting ? _self.isExtracting : isExtracting // ignore: cast_nullable_to_non_nullable
 as bool,downloadProgress: null == downloadProgress ? _self.downloadProgress : downloadProgress // ignore: cast_nullable_to_non_nullable
 as double,downloadStatus: null == downloadStatus ? _self.downloadStatus : downloadStatus // ignore: cast_nullable_to_non_nullable
+as String,hasError: null == hasError ? _self.hasError : hasError // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,dataReady: null == dataReady ? _self.dataReady : dataReady // ignore: cast_nullable_to_non_nullable
 as bool,baseDirPath: null == baseDirPath ? _self.baseDirPath : baseDirPath // ignore: cast_nullable_to_non_nullable
 as String,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isUiVisible: null == isUiVisible ? _self.isUiVisible : isUiVisible // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -156,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isChecking,  bool isDownloading,  double downloadProgress,  String downloadStatus,  bool dataReady,  String baseDirPath,  int currentPage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isChecking,  bool isDownloading,  bool isExtracting,  double downloadProgress,  String downloadStatus,  bool hasError,  String errorMessage,  bool dataReady,  String baseDirPath,  int currentPage,  bool isUiVisible)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MushafState() when $default != null:
-return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_that.downloadStatus,_that.dataReady,_that.baseDirPath,_that.currentPage);case _:
+return $default(_that.isChecking,_that.isDownloading,_that.isExtracting,_that.downloadProgress,_that.downloadStatus,_that.hasError,_that.errorMessage,_that.dataReady,_that.baseDirPath,_that.currentPage,_that.isUiVisible);case _:
   return orElse();
 
 }
@@ -177,10 +181,10 @@ return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isChecking,  bool isDownloading,  double downloadProgress,  String downloadStatus,  bool dataReady,  String baseDirPath,  int currentPage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isChecking,  bool isDownloading,  bool isExtracting,  double downloadProgress,  String downloadStatus,  bool hasError,  String errorMessage,  bool dataReady,  String baseDirPath,  int currentPage,  bool isUiVisible)  $default,) {final _that = this;
 switch (_that) {
 case _MushafState():
-return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_that.downloadStatus,_that.dataReady,_that.baseDirPath,_that.currentPage);case _:
+return $default(_that.isChecking,_that.isDownloading,_that.isExtracting,_that.downloadProgress,_that.downloadStatus,_that.hasError,_that.errorMessage,_that.dataReady,_that.baseDirPath,_that.currentPage,_that.isUiVisible);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +201,10 @@ return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isChecking,  bool isDownloading,  double downloadProgress,  String downloadStatus,  bool dataReady,  String baseDirPath,  int currentPage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isChecking,  bool isDownloading,  bool isExtracting,  double downloadProgress,  String downloadStatus,  bool hasError,  String errorMessage,  bool dataReady,  String baseDirPath,  int currentPage,  bool isUiVisible)?  $default,) {final _that = this;
 switch (_that) {
 case _MushafState() when $default != null:
-return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_that.downloadStatus,_that.dataReady,_that.baseDirPath,_that.currentPage);case _:
+return $default(_that.isChecking,_that.isDownloading,_that.isExtracting,_that.downloadProgress,_that.downloadStatus,_that.hasError,_that.errorMessage,_that.dataReady,_that.baseDirPath,_that.currentPage,_that.isUiVisible);case _:
   return null;
 
 }
@@ -212,16 +216,20 @@ return $default(_that.isChecking,_that.isDownloading,_that.downloadProgress,_tha
 
 
 class _MushafState implements MushafState {
-  const _MushafState({this.isChecking = true, this.isDownloading = false, this.downloadProgress = 0.0, this.downloadStatus = "", this.dataReady = false, this.baseDirPath = "", this.currentPage = 1});
+  const _MushafState({this.isChecking = true, this.isDownloading = false, this.isExtracting = false, this.downloadProgress = 0.0, this.downloadStatus = "", this.hasError = false, this.errorMessage = "", this.dataReady = false, this.baseDirPath = "", this.currentPage = 1, this.isUiVisible = true});
   
 
 @override@JsonKey() final  bool isChecking;
 @override@JsonKey() final  bool isDownloading;
+@override@JsonKey() final  bool isExtracting;
 @override@JsonKey() final  double downloadProgress;
 @override@JsonKey() final  String downloadStatus;
+@override@JsonKey() final  bool hasError;
+@override@JsonKey() final  String errorMessage;
 @override@JsonKey() final  bool dataReady;
 @override@JsonKey() final  String baseDirPath;
 @override@JsonKey() final  int currentPage;
+@override@JsonKey() final  bool isUiVisible;
 
 /// Create a copy of MushafState
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +241,16 @@ _$MushafStateCopyWith<_MushafState> get copyWith => __$MushafStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isExtracting, isExtracting) || other.isExtracting == isExtracting)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.isUiVisible, isUiVisible) || other.isUiVisible == isUiVisible));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,downloadProgress,downloadStatus,dataReady,baseDirPath,currentPage);
+int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,isExtracting,downloadProgress,downloadStatus,hasError,errorMessage,dataReady,baseDirPath,currentPage,isUiVisible);
 
 @override
 String toString() {
-  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage)';
+  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, isExtracting: $isExtracting, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, hasError: $hasError, errorMessage: $errorMessage, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage, isUiVisible: $isUiVisible)';
 }
 
 
@@ -253,7 +261,7 @@ abstract mixin class _$MushafStateCopyWith<$Res> implements $MushafStateCopyWith
   factory _$MushafStateCopyWith(_MushafState value, $Res Function(_MushafState) _then) = __$MushafStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isChecking, bool isDownloading, double downloadProgress, String downloadStatus, bool dataReady, String baseDirPath, int currentPage
+ bool isChecking, bool isDownloading, bool isExtracting, double downloadProgress, String downloadStatus, bool hasError, String errorMessage, bool dataReady, String baseDirPath, int currentPage, bool isUiVisible
 });
 
 
@@ -270,16 +278,20 @@ class __$MushafStateCopyWithImpl<$Res>
 
 /// Create a copy of MushafState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isChecking = null,Object? isDownloading = null,Object? downloadProgress = null,Object? downloadStatus = null,Object? dataReady = null,Object? baseDirPath = null,Object? currentPage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isChecking = null,Object? isDownloading = null,Object? isExtracting = null,Object? downloadProgress = null,Object? downloadStatus = null,Object? hasError = null,Object? errorMessage = null,Object? dataReady = null,Object? baseDirPath = null,Object? currentPage = null,Object? isUiVisible = null,}) {
   return _then(_MushafState(
 isChecking: null == isChecking ? _self.isChecking : isChecking // ignore: cast_nullable_to_non_nullable
 as bool,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
+as bool,isExtracting: null == isExtracting ? _self.isExtracting : isExtracting // ignore: cast_nullable_to_non_nullable
 as bool,downloadProgress: null == downloadProgress ? _self.downloadProgress : downloadProgress // ignore: cast_nullable_to_non_nullable
 as double,downloadStatus: null == downloadStatus ? _self.downloadStatus : downloadStatus // ignore: cast_nullable_to_non_nullable
+as String,hasError: null == hasError ? _self.hasError : hasError // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,dataReady: null == dataReady ? _self.dataReady : dataReady // ignore: cast_nullable_to_non_nullable
 as bool,baseDirPath: null == baseDirPath ? _self.baseDirPath : baseDirPath // ignore: cast_nullable_to_non_nullable
 as String,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
-as int,
+as int,isUiVisible: null == isUiVisible ? _self.isUiVisible : isUiVisible // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

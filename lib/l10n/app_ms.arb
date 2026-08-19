@@ -723,5 +723,9 @@
   "revelationType": "Tempat Penurunan",
   "searchInTranslations": "Cari dalam Terjemahan",
   "searchInTafsirs": "Cari dalam Tafsir",
-  "activeCount": "{selected}/{total} aktif"
+  "activeCount": "{selected}/{total} aktif",
+  "recentSearches": "Carian Terkini",
+  "clearAll": "Padam Semua",
+  "searchGuideTitle": "Cari dalam Al-Quran",
+  "searchGuideDescription": "Cari mengikut nama Surah, rujukan ayat (cth. 2:255), atau perkataan dalam terjemahan dan tafsir."
 }

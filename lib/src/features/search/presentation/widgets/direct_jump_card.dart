@@ -13,10 +13,12 @@ import "package:gap/gap.dart";
 /// A prominent shortcut card shown when user query directly matches a verse reference.
 class DirectAyahJumpCard extends StatelessWidget {
   final DirectAyahJumpModel directJump;
+  final VoidCallback? onResultSelected;
 
   const DirectAyahJumpCard({
     super.key,
     required this.directJump,
+    this.onResultSelected,
   });
 
   @override
@@ -95,6 +97,7 @@ class DirectAyahJumpCard extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  onResultSelected?.call();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

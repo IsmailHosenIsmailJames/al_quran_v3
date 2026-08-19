@@ -461,5 +461,9 @@
   "revelationType": "啓示の場所",
   "searchInTranslations": "翻訳内で検索",
   "searchInTafsirs": "タフスィール（解釈）内で検索",
-  "activeCount": "{selected}/{total} 件有効"
+  "activeCount": "{selected}/{total} 件有効",
+  "recentSearches": "最近の検索",
+  "clearAll": "すべて消去",
+  "searchGuideTitle": "クルアーンを検索",
+  "searchGuideDescription": "章名、節番号（例：2:255）、または翻訳やタフスィール内の単語で検索できます。"
 }

@@ -799,5 +799,9 @@
         "type": "int"
       }
     }
-  }
+  },
+  "recentSearches": "Recent Searches",
+  "clearAll": "Clear All",
+  "searchGuideTitle": "Search the Holy Quran",
+  "searchGuideDescription": "Search by Surah name, verse reference (e.g. 2:255), or words in translations and tafsir."
 }

@@ -95,6 +95,31 @@ void main() {
 
       expect(cubit.state.status, SearchStatus.success);
       expect(cubit.state.results?.directJump?.ayahKey, "2:255");
+      expect(cubit.state.searchHistory.contains("2:255"), isTrue);
+      cubit.close();
+    });
+
+    test("onQueryChanged debounces and does not save intermediate keystrokes to history", () async {
+      final cubit = QuranSearchCubit(dataSource, useCase);
+      await cubit.clearAllHistory();
+
+      cubit.onQueryChanged("F");
+      cubit.onQueryChanged("Fa");
+      cubit.onQueryChanged("Fatiha");
+
+      // Wait for debounce duration
+      await Future.delayed(const Duration(milliseconds: 400));
+
+      expect(cubit.state.status, SearchStatus.success);
+      // History should not contain intermediate keystrokes
+      expect(cubit.state.searchHistory.contains("F"), isFalse);
+      expect(cubit.state.searchHistory.contains("Fa"), isFalse);
+      expect(cubit.state.searchHistory.contains("Fatiha"), isFalse);
+
+      // Now explicitly saving query when tapped
+      await cubit.saveQueryToHistory("Fatiha");
+      expect(cubit.state.searchHistory.contains("Fatiha"), isTrue);
+
       cubit.close();
     });
   });

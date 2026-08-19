@@ -1536,4 +1536,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total개 활성';
   }
+
+  @override
+  String get recentSearches => '최근 검색';
+
+  @override
+  String get clearAll => '모두 지우기';
+
+  @override
+  String get searchGuideTitle => '성스러운 쿠란 검색';
+
+  @override
+  String get searchGuideDescription =>
+      '장 이름, 구절 번호(예: 2:255) 또는 번역 및 타프시르의 단어로 검색하세요.';
 }

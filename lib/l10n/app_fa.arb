@@ -723,5 +723,9 @@
   "revelationType": "نوع نزول",
   "searchInTranslations": "جستجو در ترجمه‌ها",
   "searchInTafsirs": "جستجو در تفاسیر",
-  "activeCount": "{selected}/{total} فعال"
+  "activeCount": "{selected}/{total} فعال",
+  "recentSearches": "جستجوهای اخیر",
+  "clearAll": "پاک کردن همه",
+  "searchGuideTitle": "جستجو در قرآن کریم",
+  "searchGuideDescription": "بر اساس نام سوره، شماره آیه (مانند 2:255) یا کلمات در ترجمه‌ها و تفاسیر جستجو کنید."
 }

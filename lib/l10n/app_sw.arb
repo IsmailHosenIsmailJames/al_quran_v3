@@ -723,5 +723,9 @@
   "revelationType": "Aina ya Ufunuo",
   "searchInTranslations": "Tafuta katika Tafsiri",
   "searchInTafsirs": "Tafuta katika Tafsiri za Quran (Tafsir)",
-  "activeCount": "{selected}/{total} amilifu"
+  "activeCount": "{selected}/{total} amilifu",
+  "recentSearches": "Utafutaji wa Hivi Karibuni",
+  "clearAll": "Futa Yote",
+  "searchGuideTitle": "Tafuta katika Kurani Tukufu",
+  "searchGuideDescription": "Tafuta kwa jina la Sura, nambari ya aya (mf. 2:255), au maneno katika tafsiri na tafsiri ya Quran."
 }

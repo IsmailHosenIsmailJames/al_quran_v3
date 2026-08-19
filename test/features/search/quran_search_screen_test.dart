@@ -45,7 +45,7 @@ void main() {
   }
 
   group("QuranSearchScreen UI Widget Tests", () {
-    testWidgets("renders search input, scope tabs, and suggested topic chips", (tester) async {
+    testWidgets("renders search input, scope tabs, and search guide card", (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pump();
 
@@ -57,10 +57,8 @@ void main() {
       expect(find.text("All"), findsOneWidget);
       expect(find.text("Arabic"), findsOneWidget);
 
-      // Verify popular suggestion chips exist
-      expect(find.text("Popular Topics & Surahs"), findsOneWidget);
-      expect(find.text("Ayatul Kursi (2:255)"), findsOneWidget);
-      expect(find.text("Surah Al-Kahf"), findsOneWidget);
+      // Verify search guide card exists
+      expect(find.text("Search the Holy Quran"), findsOneWidget);
     });
 
     testWidgets("opens filter bottom sheet when filter icon is tapped", (tester) async {

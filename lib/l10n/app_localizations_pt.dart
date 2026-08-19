@@ -1583,4 +1583,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total ativo(s)';
   }
+
+  @override
+  String get recentSearches => 'Pesquisas recentes';
+
+  @override
+  String get clearAll => 'Limpar tudo';
+
+  @override
+  String get searchGuideTitle => 'Pesquisar no Sagrado Alcorão';
+
+  @override
+  String get searchGuideDescription =>
+      'Pesquise por nome de surata, referência de versículo (ex. 2:255) ou palavras em traduções e tafsir.';
 }

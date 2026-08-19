@@ -1566,4 +1566,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total نشط';
   }
+
+  @override
+  String get recentSearches => 'عمليات البحث الأخيرة';
+
+  @override
+  String get clearAll => 'مسح الكل';
+
+  @override
+  String get searchGuideTitle => 'ابحث في القرآن الكريم';
+
+  @override
+  String get searchGuideDescription =>
+      'ابحث باسم السورة أو رقم الآية (مثل 2:255) أو بالكلمات في الترجمات والتفاسير.';
 }

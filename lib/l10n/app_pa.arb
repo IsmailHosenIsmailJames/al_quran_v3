@@ -723,5 +723,9 @@
   "revelationType": "ਪ੍ਰਕਾਸ਼ ਦੀ ਕਿਸਮ",
   "searchInTranslations": "ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਖੋਜੋ",
   "searchInTafsirs": "ਤਫ਼ਸੀਰ ਵਿੱਚ ਖੋਜੋ",
-  "activeCount": "{selected}/{total} ਸਰਗਰਮ"
+  "activeCount": "{selected}/{total} ਸਰਗਰਮ",
+  "recentSearches": "ਹਾਲੀਆ ਖੋਜਾਂ",
+  "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
+  "searchGuideTitle": "ਪਵਿੱਤਰ ਕੁਰਾਨ ਵਿੱਚ ਖੋਜੋ",
+  "searchGuideDescription": "ਸੂਰਤ ਦੇ ਨਾਮ, ਆਇਤ ਨੰਬਰ (ਜਿਵੇਂ 2:255), ਜਾਂ ਅਨੁਵਾਦਾਂ ਅਤੇ ਤਫ਼ਸੀਰ ਦੇ ਸ਼ਬਦਾਂ ਦੁਆਰਾ ਖੋਜੋ।"
 }

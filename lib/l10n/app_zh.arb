@@ -723,5 +723,9 @@
   "revelationType": "降示地点",
   "searchInTranslations": "在译文中搜索",
   "searchInTafsirs": "在经注中搜索",
-  "activeCount": "{selected}/{total} 项启用"
+  "activeCount": "{selected}/{total} 项启用",
+  "recentSearches": "最近搜索",
+  "clearAll": "清除全部",
+  "searchGuideTitle": "搜索古兰经",
+  "searchGuideDescription": "通过苏拉名称、经文编号（例如 2:255）或译文及经注中的词语进行搜索。"
 }

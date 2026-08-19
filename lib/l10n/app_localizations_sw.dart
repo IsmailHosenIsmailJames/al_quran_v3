@@ -1575,4 +1575,17 @@ class AppLocalizationsSw extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total amilifu';
   }
+
+  @override
+  String get recentSearches => 'Utafutaji wa Hivi Karibuni';
+
+  @override
+  String get clearAll => 'Futa Yote';
+
+  @override
+  String get searchGuideTitle => 'Tafuta katika Kurani Tukufu';
+
+  @override
+  String get searchGuideDescription =>
+      'Tafuta kwa jina la Sura, nambari ya aya (mf. 2:255), au maneno katika tafsiri na tafsiri ya Quran.';
 }
