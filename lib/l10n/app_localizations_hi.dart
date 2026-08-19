@@ -1642,4 +1642,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get back => 'पीछे';
+
+  @override
+  String get script => 'स्क्रिप्ट';
 }

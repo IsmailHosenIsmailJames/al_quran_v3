@@ -36,9 +36,11 @@ class SetupBottomBar extends StatelessWidget {
     return BlocBuilder<SetupBloc, SetupState>(
       builder: (context, state) {
         final translationName = state.config.selectedTranslation?.name ?? "";
-        final scriptTypeName =
-            getLocalizedQuranScriptType(context, quranViewState.quranScriptType)
-                .capitalize();
+        final tafsirName = state.config.selectedTafsir?.name ?? "";
+        final scriptTypeName = getLocalizedQuranScriptType(
+          context,
+          quranViewState.quranScriptType,
+        ).capitalize();
 
         return Container(
           decoration: BoxDecoration(
@@ -73,7 +75,7 @@ class SetupBottomBar extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
-                      vertical: 8,
+                      vertical: 9,
                     ),
                     decoration: BoxDecoration(
                       color: isDark
@@ -86,86 +88,139 @@ class SetupBottomBar extends StatelessWidget {
                             : Colors.grey.shade200,
                       ),
                     ),
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: themeState.primary.withValues(
-                              alpha: isDark ? 0.2 : 0.1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            FluentIcons.book_letter_24_regular,
-                            size: 16,
-                            color: themeState.primary,
-                          ),
-                        ),
-                        const Gap(10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "$scriptTypeName Script",
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                  color: isDark
-                                      ? Colors.grey.shade400
-                                      : Colors.grey.shade600,
-                                ),
+                        // Top row: Script badge & Change button
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${appLocalizations.script}: ",
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      scriptTypeName.isNotEmpty
+                                          ? scriptTypeName
+                                          : "—",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 12.5,
+                                        fontWeight: FontWeight.w600,
+                                        color: isDark
+                                            ? Colors.white
+                                            : Colors.grey.shade900,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const Gap(1),
-                              Text(
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: themeState.primary.withValues(
+                                  alpha: isDark ? 0.14 : 0.08,
+                                ),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.tune_rounded,
+                                    size: 13,
+                                    color: themeState.primary,
+                                  ),
+                                  const Gap(4),
+                                  Text(
+                                    appLocalizations.change,
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: themeState.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // Translation row
+                        Row(
+                          children: [
+                            Text(
+                              "${appLocalizations.translation}: ",
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w500,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
                                 translationName.isNotEmpty
                                     ? translationName
-                                    : "Default Translation",
+                                    : "—",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
                                   color: isDark
                                       ? Colors.white
                                       : Colors.grey.shade900,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        const Gap(8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: themeState.primary.withValues(
-                              alpha: isDark ? 0.15 : 0.1,
                             ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.tune_rounded,
-                                size: 14,
-                                color: themeState.primary,
+                          ],
+                        ),
+                        const Gap(3),
+                        // Tafsir row
+                        Row(
+                          children: [
+                            Text(
+                              "${appLocalizations.tafsir}: ",
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w500,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
-                              const Gap(4),
-                              Text(
-                                appLocalizations.change,
+                            ),
+                            Expanded(
+                              child: Text(
+                                tafsirName.isNotEmpty ? tafsirName : "—",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: themeState.primary,
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -347,7 +402,8 @@ class SetupPreviewCard extends StatelessWidget {
                     context,
                     icon: FluentIcons.book_letter_24_regular,
                     label: appLocalizations.translation,
-                    title: state.config.selectedTranslation?.name ??
+                    title:
+                        state.config.selectedTranslation?.name ??
                         "Select Translation",
                     themePrimary: themeState.primary,
                     isDark: isDark,
@@ -479,10 +535,7 @@ class SetupPreviewCard extends StatelessWidget {
             onTap: onTap,
             borderRadius: BorderRadius.circular(8),
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 color: themePrimary.withValues(alpha: isDark ? 0.14 : 0.08),
                 borderRadius: BorderRadius.circular(8),
@@ -490,11 +543,7 @@ class SetupPreviewCard extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.swap_vert_rounded,
-                    size: 15,
-                    color: themePrimary,
-                  ),
+                  Icon(Icons.swap_vert_rounded, size: 15, color: themePrimary),
                   const Gap(4),
                   Text(
                     l10n.change,

@@ -1638,4 +1638,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get back => 'شاته';
+
+  @override
+  String get script => 'لیک';
 }

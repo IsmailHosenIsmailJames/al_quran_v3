@@ -1651,4 +1651,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get back => 'Nyuma';
+
+  @override
+  String get script => 'Nakala';
 }

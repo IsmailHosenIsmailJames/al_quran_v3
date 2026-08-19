@@ -1656,4 +1656,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get back => 'Atrás';
+
+  @override
+  String get script => 'Escritura';
 }
