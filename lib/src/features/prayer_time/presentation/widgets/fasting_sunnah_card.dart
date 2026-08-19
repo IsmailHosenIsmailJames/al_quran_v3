@@ -19,11 +19,13 @@ class FastingSunnahCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final timeFormatter = DateFormat.jm(l10n.localeName);
 
-    final suhurTime =
-        prayerTimes.fajr.subtract(const Duration(minutes: 10)).toLocal();
+    final suhurTime = prayerTimes.fajr
+        .subtract(const Duration(minutes: 10))
+        .toLocal();
     final iftarTime = prayerTimes.maghrib.toLocal();
-    final duhaTime =
-        prayerTimes.sunrise.add(const Duration(minutes: 15)).toLocal();
+    final duhaTime = prayerTimes.sunrise
+        .add(const Duration(minutes: 15))
+        .toLocal();
     final tahajjudTime = prayerTimes.tahajjud.toLocal();
 
     return Column(
@@ -76,7 +78,7 @@ class FastingSunnahCard extends StatelessWidget {
             ),
             _buildCard(
               context: context,
-              icon: FluentIcons.weather_sunny_24_regular,
+              icon: FluentIcons.weather_sunny_32_filled,
               title: l10n.dhuha,
               subtitle: l10n.ishraqAndDuha,
               time: timeFormatter.format(duhaTime),
@@ -110,9 +112,7 @@ class FastingSunnahCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.04)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
