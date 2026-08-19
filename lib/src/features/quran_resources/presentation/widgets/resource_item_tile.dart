@@ -1,7 +1,7 @@
 import 'package:al_quran_v3/l10n/app_localizations.dart';
+import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/quran_resource_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
-import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,164 +21,204 @@ class ResourceItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
+    final isDark = Theme.brightnessOf(context) == Brightness.dark;
     final appLocalizations = AppLocalizations.of(context);
     final cubit = context.read<QuranResourcesCubit>();
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Material(
+      margin: const EdgeInsets.symmetric(vertical: 3.5),
+      decoration: BoxDecoration(
         color: resource.isSelected
-            ? themeState.primaryShade100.withValues(alpha: 0.25)
-            : Theme.of(context).cardColor,
+            ? themeState.primary.withValues(alpha: isDark ? 0.14 : 0.06)
+            : (isDark ? const Color(0xFF252525) : const Color(0xFFF9FAFB)),
         borderRadius: BorderRadius.circular(12),
-        shape: RoundedRectangleBorder(
+        border: Border.all(
+          color: resource.isSelected
+              ? themeState.primary
+              : (isDark
+                  ? Colors.white.withValues(alpha: 0.06)
+                  : Colors.grey.shade200),
+          width: resource.isSelected ? 1.5 : 1.0,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(
-            color: resource.isSelected
-                ? themeState.primary
-                : themeState.primaryShade100.withValues(alpha: 0.5),
-            width: resource.isSelected ? 1.5 : 0.8,
-          ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(
-                resource.name,
-                style: TextStyle(
-                  fontWeight: resource.isSelected
-                      ? FontWeight.bold
-                      : FontWeight.w500,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            if (resource.hasFootnote) ...[
-              const SizedBox(width: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: themeState.primaryShade200,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  "Footnotes",
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: themeState.primary,
+          onTap: () {
+            if (isDownloading) return;
+            if (!resource.isDownloaded) {
+              cubit.downloadResource(resource);
+            } else {
+              cubit.toggleSelection(resource);
+            }
+          },
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              resource.name,
+                              style: TextStyle(
+                                fontWeight: resource.isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.w600,
+                                fontSize: 14.5,
+                                color: isDark
+                                    ? Colors.white
+                                    : Colors.grey.shade900,
+                              ),
+                            ),
+                          ),
+                          if (resource.hasFootnote) ...[
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color:
+                                    themeState.primary.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                "Footnotes",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: themeState.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                      if (resource.englishName != resource.name) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          resource.englishName,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ],
-        ),
-        subtitle: resource.englishName != resource.name
-            ? Text(
-                resource.englishName,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              )
-            : null,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isDownloading)
-              SizedBox(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(
-                  value: downloadProgress > 0 ? downloadProgress : null,
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
-                  backgroundColor: themeState.primaryShade100,
-                ),
-              )
-            else if (!resource.isDownloaded)
-              IconButton(
-                icon: Icon(
-                  FluentIcons.arrow_download_24_regular,
-                  color: themeState.primary,
-                ),
-                tooltip: "Download",
-                onPressed: () => cubit.downloadResource(resource),
-              )
-            else ...[
-              IconButton(
-                icon: Icon(
-                  resource.isSelected
-                      ? Icons.check_circle_rounded
-                      : Icons.circle_outlined,
-                  color: resource.isSelected
-                      ? themeState.primary
-                      : Colors.grey[500],
-                  size: 26,
-                ),
-                tooltip: resource.isSelected ? "Deselect" : "Select",
-                onPressed: () => cubit.toggleSelection(resource),
-              ),
-              PopupMenuButton<String>(
-                icon: Icon(
-                  Icons.more_vert_rounded,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  size: 20,
-                ),
-                onSelected: (value) {
-                  if (value == 'delete') {
-                    cubit.deleteResource(resource);
-                  } else if (value == 'redownload') {
-                    cubit.redownloadResource(resource);
-                  }
-                },
-                itemBuilder: (context) => [
-                  PopupMenuItem<String>(
-                    value: 'redownload',
-                    child: Row(
-                      children: [
-                        Icon(
-                          FluentIcons.arrow_download_24_regular,
-                          color: themeState.primary,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        const Text("Redownload"),
-                      ],
+                const SizedBox(width: 8),
+                if (isDownloading)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(
+                        value: downloadProgress > 0 ? downloadProgress : null,
+                        strokeWidth: 2.5,
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(themeState.primary),
+                        backgroundColor:
+                            themeState.primary.withValues(alpha: 0.15),
+                      ),
                     ),
+                  )
+                else if (!resource.isDownloaded)
+                  IconButton(
+                    icon: Icon(
+                      FluentIcons.arrow_download_24_regular,
+                      color: themeState.primary,
+                      size: 22,
+                    ),
+                    tooltip: "Download",
+                    visualDensity: VisualDensity.compact,
+                    onPressed: () => cubit.downloadResource(resource),
+                  )
+                else ...[
+                  IconButton(
+                    icon: Icon(
+                      resource.isSelected
+                          ? Icons.check_circle_rounded
+                          : Icons.radio_button_unchecked,
+                      color: resource.isSelected
+                          ? themeState.primary
+                          : (isDark
+                              ? Colors.grey.shade600
+                              : Colors.grey.shade400),
+                      size: 24,
+                    ),
+                    tooltip: resource.isSelected ? "Deselect" : "Select",
+                    visualDensity: VisualDensity.compact,
+                    onPressed: () => cubit.toggleSelection(resource),
                   ),
-                  PopupMenuItem<String>(
-                    value: 'delete',
-                    child: Row(
-                      children: [
-                        const Icon(
-                          FluentIcons.delete_24_regular,
-                          color: Colors.red,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(appLocalizations.delete),
-                      ],
+                  PopupMenuButton<String>(
+                    icon: Icon(
+                      Icons.more_vert_rounded,
+                      color:
+                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      size: 20,
                     ),
+                    padding: EdgeInsets.zero,
+                    onSelected: (value) {
+                      if (value == 'delete') {
+                        cubit.deleteResource(resource);
+                      } else if (value == 'redownload') {
+                        cubit.redownloadResource(resource);
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem<String>(
+                        value: 'redownload',
+                        child: Row(
+                          children: [
+                            Icon(
+                              FluentIcons.arrow_download_24_regular,
+                              color: themeState.primary,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 8),
+                            const Text("Redownload"),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'delete',
+                        child: Row(
+                          children: [
+                            const Icon(
+                              FluentIcons.delete_24_regular,
+                              color: Colors.red,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              appLocalizations.delete,
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              ),
-            ],
-          ],
+              ],
+            ),
+          ),
         ),
-        onTap: () {
-          if (isDownloading) return;
-          if (!resource.isDownloaded) {
-            cubit.downloadResource(resource);
-          } else {
-            cubit.toggleSelection(resource);
-          }
-        },
       ),
-    ),
-  );
+    );
+  }
 }
-}
+
