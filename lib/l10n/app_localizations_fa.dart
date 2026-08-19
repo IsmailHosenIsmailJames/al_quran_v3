@@ -1574,4 +1574,65 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'بر اساس نام سوره، شماره آیه (مانند 2:255) یا کلمات در ترجمه‌ها و تفاسیر جستجو کنید.';
+
+  @override
+  String get madani15Line => '۱۵ خطی مدنی';
+
+  @override
+  String get totalPagesCount => '۶۰۴ صفحه';
+
+  @override
+  String get wordAudio => 'صوت کلمات';
+
+  @override
+  String get offlineReady => 'آماده به صورت آفلاین';
+
+  @override
+  String get vectorFonts => 'فونت‌های برداری';
+
+  @override
+  String get madaniMushafLayout => 'طرح مصحف مدنی';
+
+  @override
+  String get kfgqpcDescription => 'مجتمع چاپ قرآن ملک فهد (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'در حال دانلود بسته مصحف...';
+
+  @override
+  String get extractingAndInstallingData => 'در حال استخراج و نصب داده‌ها...';
+
+  @override
+  String get settingUpOfflinePages => 'در حال آماده‌سازی صفحات آفلاین...';
+
+  @override
+  String get fetchingLayoutArchive => 'در حال دریافت آرشیو طرح...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'لطفاً تا پایان دانلود، برنامه را باز نگه دارید.';
+
+  @override
+  String get downloadFailed => 'دانلود ناموفق بود';
+
+  @override
+  String get retryDownload => 'تلاش مجدد برای دانلود';
+
+  @override
+  String get packageSize => 'حجم بسته';
+
+  @override
+  String get loadingMushafPage => 'در حال بارگذاری صفحه مصحف...';
+
+  @override
+  String get quickPageJump => 'پرش سریع به صفحه';
+
+  @override
+  String get searchSurahHint => 'جستجوی سوره با نام یا شماره...';
+
+  @override
+  String get fullscreen => 'تمام صفحه';
+
+  @override
+  String get back => 'بازگشت';
 }

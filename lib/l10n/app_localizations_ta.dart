@@ -1599,4 +1599,68 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'அத்தியாயப் பெயர், வசன எண் (எ.கா. 2:255) அல்லது மொழிபெயர்ப்புகள் மற்றும் தஃப்சீரில் உள்ள சொற்கள் மூலம் தேடுங்கள்.';
+
+  @override
+  String get madani15Line => '15-வரி மதனீ';
+
+  @override
+  String get totalPagesCount => '604 பக்கங்கள்';
+
+  @override
+  String get wordAudio => 'சொல் ஆடியோ';
+
+  @override
+  String get offlineReady => 'ஆஃப்லைனில் தயார்';
+
+  @override
+  String get vectorFonts => 'வெக்டர் எழுத்துருக்கள்';
+
+  @override
+  String get madaniMushafLayout => 'மதனீ முஸஹஃப் தளவமைப்பு';
+
+  @override
+  String get kfgqpcDescription => 'மன்னர் ஃபஹத் குர்ஆன் அச்சிடும் வளாகம் (V4)';
+
+  @override
+  String get downloadingMushafPackage =>
+      'முஸஹஃப் தொகுப்பு பதிவிறக்கப்படுகிறது...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'தரவு பிரித்தெடுக்கப்பட்டு நிறுவப்படுகிறது...';
+
+  @override
+  String get settingUpOfflinePages => 'ஆஃப்லைன் பக்கங்கள் அமைக்கப்படுகின்றன...';
+
+  @override
+  String get fetchingLayoutArchive => 'தளவமைப்பு காப்பகம் பெறப்படுகிறது...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'பதிவிறக்கம் முடியும் வரை பயன்பாட்டைத் திறந்து வைக்கவும்.';
+
+  @override
+  String get downloadFailed => 'பதிவிறக்கம் தோல்வியடைந்தது';
+
+  @override
+  String get retryDownload => 'மீண்டும் பதிவிறக்கவும்';
+
+  @override
+  String get packageSize => 'தொகுப்பு அளவு';
+
+  @override
+  String get loadingMushafPage => 'முஸஹஃப் பக்கம் ஏற்றப்படுகிறது...';
+
+  @override
+  String get quickPageJump => 'விரைவு பக்க தாவல்';
+
+  @override
+  String get searchSurahHint =>
+      'பெயர் அல்லது எண் மூலம் அத்தியாயத்தைத் தேடுங்கள்...';
+
+  @override
+  String get fullscreen => 'முழுத்திரை';
+
+  @override
+  String get back => 'பின்செல்';
 }

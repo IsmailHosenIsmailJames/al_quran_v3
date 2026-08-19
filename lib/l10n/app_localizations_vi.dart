@@ -1583,4 +1583,66 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Tìm kiếm theo tên Surah, số câu (ví dụ 2:255) hoặc các từ trong bản dịch và tafsir.';
+
+  @override
+  String get madani15Line => 'Madani 15 dòng';
+
+  @override
+  String get totalPagesCount => '604 Trang';
+
+  @override
+  String get wordAudio => 'Âm thanh từng từ';
+
+  @override
+  String get offlineReady => 'Sẵn sàng ngoại tuyến';
+
+  @override
+  String get vectorFonts => 'Phông chữ vector';
+
+  @override
+  String get madaniMushafLayout => 'Bố cục Mushaf Madani';
+
+  @override
+  String get kfgqpcDescription => 'Tổ hợp In ấn Kinh Quran Vua Fahd (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Đang tải xuống gói Mushaf...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'Đang giải nén & cài đặt dữ liệu...';
+
+  @override
+  String get settingUpOfflinePages => 'Đang thiết lập các trang ngoại tuyến...';
+
+  @override
+  String get fetchingLayoutArchive => 'Đang lấy kho lưu trữ bố cục...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Vui lòng giữ ứng dụng mở cho đến khi tải xuống hoàn tất.';
+
+  @override
+  String get downloadFailed => 'Tải xuống thất bại';
+
+  @override
+  String get retryDownload => 'Thử tải lại';
+
+  @override
+  String get packageSize => 'Kích thước gói';
+
+  @override
+  String get loadingMushafPage => 'Đang tải trang Mushaf...';
+
+  @override
+  String get quickPageJump => 'Chuyển trang nhanh';
+
+  @override
+  String get searchSurahHint => 'Tìm kiếm Surah theo tên hoặc số...';
+
+  @override
+  String get fullscreen => 'Toàn màn hình';
+
+  @override
+  String get back => 'Quay lại';
 }

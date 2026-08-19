@@ -134,7 +134,7 @@ class MushafBottomBar extends StatelessWidget {
                     icon: const Icon(FluentIcons.chevron_left_20_filled,
                         size: 16),
                     label: Text(
-                      "Next",
+                      l10n.next,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -202,7 +202,7 @@ class MushafBottomBar extends StatelessWidget {
                     ),
                     onPressed: currentPage > 1 ? onPrevPage : null,
                     label: Text(
-                      "Prev",
+                      l10n.previous,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,

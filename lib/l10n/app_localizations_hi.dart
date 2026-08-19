@@ -1580,4 +1580,66 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'सूरह नाम, आयत संदर्भ (उदा. 2:255), या अनुवाद और तफ़सीर के शब्दों द्वारा खोजें।';
+
+  @override
+  String get madani15Line => '15-पंक्ति मदनी';
+
+  @override
+  String get totalPagesCount => '604 पृष्ठ';
+
+  @override
+  String get wordAudio => 'शब्द ऑडियो';
+
+  @override
+  String get offlineReady => 'ऑफ़लाइन तैयार';
+
+  @override
+  String get vectorFonts => 'वेक्टर फ़ॉन्ट्स';
+
+  @override
+  String get madaniMushafLayout => 'मदनी मुसहाफ लेआउट';
+
+  @override
+  String get kfgqpcDescription => 'शाह फहद कुरान प्रिंटिंग कॉम्प्लेक्स (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'मुसहाफ पैकेज डाउनलोड हो रहा है...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'डेटा निकाला और स्थापित किया जा रहा है...';
+
+  @override
+  String get settingUpOfflinePages => 'ऑफ़लाइन पृष्ठ तैयार किए जा रहे हैं...';
+
+  @override
+  String get fetchingLayoutArchive => 'लेआउट संग्रह प्राप्त किया जा रहा है...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'कृपया डाउनलोड पूरा होने तक ऐप को खुला रखें।';
+
+  @override
+  String get downloadFailed => 'डाउनलोड विफल';
+
+  @override
+  String get retryDownload => 'डाउनलोड पुनः प्रयास करें';
+
+  @override
+  String get packageSize => 'पैकेज का आकार';
+
+  @override
+  String get loadingMushafPage => 'मुसहाफ पृष्ठ लोड हो रहा है...';
+
+  @override
+  String get quickPageJump => 'त्वरित पृष्ठ कूद';
+
+  @override
+  String get searchSurahHint => 'नाम या संख्या से सूरह खोजें...';
+
+  @override
+  String get fullscreen => 'पूर्ण स्क्रीन';
+
+  @override
+  String get back => 'पीछे';
 }

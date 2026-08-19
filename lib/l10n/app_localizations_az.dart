@@ -1583,4 +1583,66 @@ class AppLocalizationsAz extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Surə adı, ayə nömrəsi (məs. 2:255) və ya tərcümə və təfsirlərdəki sözlərlə axtarın.';
+
+  @override
+  String get madani15Line => '15 Sətirli Mədinə';
+
+  @override
+  String get totalPagesCount => '604 Səhifə';
+
+  @override
+  String get wordAudio => 'Söz Səsi';
+
+  @override
+  String get offlineReady => 'Oflayn Hazır';
+
+  @override
+  String get vectorFonts => 'Vektor Şriftləri';
+
+  @override
+  String get madaniMushafLayout => 'Mədinə Müshəf Tərtibatı';
+
+  @override
+  String get kfgqpcDescription => 'Kral Fəhd Quran Çap Kompleksi (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Müshəf Paketi Endirilir...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'Məlumatlar Çıxarılır və Quraşdırılır...';
+
+  @override
+  String get settingUpOfflinePages => 'Oflayn səhifələr qurulur...';
+
+  @override
+  String get fetchingLayoutArchive => 'Tərtibat arxivi əldə edilir...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Zəhmət olmasa, endirmə tamamlanana qədər tətbiqi açıq saxlayın.';
+
+  @override
+  String get downloadFailed => 'Endirmə Uğursuz Oldu';
+
+  @override
+  String get retryDownload => 'Yenidən Endir';
+
+  @override
+  String get packageSize => 'Paket Ölçüsü';
+
+  @override
+  String get loadingMushafPage => 'Müshəf Səhifəsi Yüklənir...';
+
+  @override
+  String get quickPageJump => 'Sürətli Səhifə Keçidi';
+
+  @override
+  String get searchSurahHint => 'Surəni ad və ya nömrə ilə axtarın...';
+
+  @override
+  String get fullscreen => 'Tam Ekran';
+
+  @override
+  String get back => 'Geri';
 }
