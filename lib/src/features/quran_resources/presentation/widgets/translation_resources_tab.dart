@@ -22,12 +22,10 @@ class TranslationResourcesTab extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.only(
-            top: MediaQuery.paddingOf(context).top + 60,
-            bottom: 24,
-            left: 12,
-            right: 12,
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
           ),
+          padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
           itemCount: state.translationGroups.length,
           itemBuilder: (context, index) {
             final group = state.translationGroups[index];
