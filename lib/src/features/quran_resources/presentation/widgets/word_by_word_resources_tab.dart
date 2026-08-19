@@ -22,12 +22,10 @@ class WordByWordResourcesTab extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.only(
-            top: MediaQuery.paddingOf(context).top + 60,
-            bottom: 24,
-            left: 16,
-            right: 16,
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
           ),
+          padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
           itemCount: state.wordByWordResources.length,
           itemBuilder: (context, index) {
             final resource = state.wordByWordResources[index];
