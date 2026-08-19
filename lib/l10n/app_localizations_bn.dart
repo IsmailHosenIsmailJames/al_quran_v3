@@ -1644,4 +1644,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get back => 'ফিরে যান';
+
+  @override
+  String get script => 'স্ক্রিপ্ট';
 }

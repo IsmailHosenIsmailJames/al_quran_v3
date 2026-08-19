@@ -1662,4 +1662,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get back => 'Retour';
+
+  @override
+  String get script => 'Écriture';
 }

@@ -747,5 +747,6 @@
   "quickPageJump": "快速页面跳转",
   "searchSurahHint": "按名称或编号搜索苏拉...",
   "fullscreen": "全屏",
-  "back": "返回"
+  "back": "返回",
+  "script": "字体"
 }

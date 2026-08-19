@@ -1637,4 +1637,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get back => 'Артқа';
+
+  @override
+  String get script => 'Жазу';
 }

@@ -747,5 +747,6 @@
   "quickPageJump": "Salto rápido de página",
   "searchSurahHint": "Buscar sura por nombre o número...",
   "fullscreen": "Pantalla completa",
-  "back": "Atrás"
+  "back": "Atrás",
+  "script": "Escritura"
 }

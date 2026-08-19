@@ -1652,4 +1652,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get back => 'Назад';
+
+  @override
+  String get script => 'Шрифт';
 }

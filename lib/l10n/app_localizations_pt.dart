@@ -1658,4 +1658,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get back => 'Voltar';
+
+  @override
+  String get script => 'Escrita';
 }

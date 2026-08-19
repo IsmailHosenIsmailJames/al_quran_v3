@@ -1609,4 +1609,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get back => '뒤로';
+
+  @override
+  String get script => '서체';
 }
