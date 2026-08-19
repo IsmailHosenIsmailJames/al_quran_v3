@@ -723,5 +723,9 @@
   "revelationType": "Түсірілу түрі",
   "searchInTranslations": "Аудармалардан іздеу",
   "searchInTafsirs": "Тәпсірлерден іздеу",
-  "activeCount": "{selected}/{total} белсенді"
+  "activeCount": "{selected}/{total} белсенді",
+  "recentSearches": "Соңғы іздеулер",
+  "clearAll": "Барлығын тазалау",
+  "searchGuideTitle": "Қасиетті Құраннан іздеу",
+  "searchGuideDescription": "Сүре атауы, аят нөмірі (мыс. 2:255) немесе аудармалар мен тәпсірлердегі сөздер бойынша іздеңіз."
 }

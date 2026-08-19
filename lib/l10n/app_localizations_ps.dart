@@ -1564,4 +1564,17 @@ class AppLocalizationsPs extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total فعال';
   }
+
+  @override
+  String get recentSearches => 'وروستي لټونونه';
+
+  @override
+  String get clearAll => 'ټول پاک کړئ';
+
+  @override
+  String get searchGuideTitle => 'په سپېڅلي قرآن کې لټون وکړئ';
+
+  @override
+  String get searchGuideDescription =>
+      'د سورت نوم، د آیت شمېره (لکه 2:255)، یا په ژباړو او تفاسیرو کې د کلمو له مخې لټون وکړئ.';
 }

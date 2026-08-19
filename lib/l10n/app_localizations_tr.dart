@@ -1565,4 +1565,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total aktif';
   }
+
+  @override
+  String get recentSearches => 'Son Aramalar';
+
+  @override
+  String get clearAll => 'Tümünü Temizle';
+
+  @override
+  String get searchGuideTitle => 'Kur\'an-ı Kerim\'de Ara';
+
+  @override
+  String get searchGuideDescription =>
+      'Sure adı, ayet numarası (örn. 2:255) veya meal ve tefsirlerdeki kelimelerle arayın.';
 }

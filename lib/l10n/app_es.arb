@@ -723,5 +723,9 @@
   "revelationType": "Lugar de revelación",
   "searchInTranslations": "Buscar en traducciones",
   "searchInTafsirs": "Buscar en tafsires",
-  "activeCount": "{selected}/{total} activo(s)"
+  "activeCount": "{selected}/{total} activo(s)",
+  "recentSearches": "Búsquedas recientes",
+  "clearAll": "Borrar todo",
+  "searchGuideTitle": "Buscar en el Sagrado Corán",
+  "searchGuideDescription": "Busque por nombre de sura, referencia de versículo (ej. 2:255) o palabras en traducciones y tafsir."
 }

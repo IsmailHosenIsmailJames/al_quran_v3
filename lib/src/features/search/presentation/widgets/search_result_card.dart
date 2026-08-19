@@ -20,11 +20,13 @@ import "package:gap/gap.dart";
 class SearchResultCard extends StatelessWidget {
   final AyahSearchResultModel ayahResult;
   final String query;
+  final VoidCallback? onResultSelected;
 
   const SearchResultCard({
     super.key,
     required this.ayahResult,
     required this.query,
+    this.onResultSelected,
   });
 
   @override
@@ -63,6 +65,7 @@ class SearchResultCard extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: () {
+            onResultSelected?.call();
             Navigator.push(
               context,
               MaterialPageRoute(

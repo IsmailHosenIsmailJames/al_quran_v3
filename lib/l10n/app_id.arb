@@ -723,5 +723,9 @@
   "revelationType": "Tempat Turunnya",
   "searchInTranslations": "Cari dalam Terjemahan",
   "searchInTafsirs": "Cari dalam Tafsir",
-  "activeCount": "{selected}/{total} aktif"
+  "activeCount": "{selected}/{total} aktif",
+  "recentSearches": "Pencarian Terkini",
+  "clearAll": "Hapus Semua",
+  "searchGuideTitle": "Cari di Al-Quran",
+  "searchGuideDescription": "Cari berdasarkan nama Surah, nomor ayat (mis. 2:255), atau kata dalam terjemahan dan tafsir."
 }

@@ -723,5 +723,9 @@
   "revelationType": "İniş Yeri",
   "searchInTranslations": "Meallerde Ara",
   "searchInTafsirs": "Tefsirlerde Ara",
-  "activeCount": "{selected}/{total} aktif"
+  "activeCount": "{selected}/{total} aktif",
+  "recentSearches": "Son Aramalar",
+  "clearAll": "Tümünü Temizle",
+  "searchGuideTitle": "Kur'an-ı Kerim'de Ara",
+  "searchGuideDescription": "Sure adı, ayet numarası (örn. 2:255) veya meal ve tefsirlerdeki kelimelerle arayın."
 }

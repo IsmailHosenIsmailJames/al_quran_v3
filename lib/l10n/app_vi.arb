@@ -461,5 +461,9 @@
   "revelationType": "Nơi mặc khải",
   "searchInTranslations": "Tìm kiếm trong bản dịch",
   "searchInTafsirs": "Tìm kiếm trong Tafsir",
-  "activeCount": "{selected}/{total} đang hoạt động"
+  "activeCount": "{selected}/{total} đang hoạt động",
+  "recentSearches": "Tìm kiếm gần đây",
+  "clearAll": "Xóa tất cả",
+  "searchGuideTitle": "Tìm kiếm trong Kinh Quran",
+  "searchGuideDescription": "Tìm kiếm theo tên Surah, số câu (ví dụ 2:255) hoặc các từ trong bản dịch và tafsir."
 }

@@ -723,5 +723,9 @@
   "revelationType": "د نزول ډول",
   "searchInTranslations": "په ژباړو کې لټون وکړئ",
   "searchInTafsirs": "په تفاسیرو کې لټون وکړئ",
-  "activeCount": "{selected}/{total} فعال"
+  "activeCount": "{selected}/{total} فعال",
+  "recentSearches": "وروستي لټونونه",
+  "clearAll": "ټول پاک کړئ",
+  "searchGuideTitle": "په سپېڅلي قرآن کې لټون وکړئ",
+  "searchGuideDescription": "د سورت نوم، د آیت شمېره (لکه 2:255)، یا په ژباړو او تفاسیرو کې د کلمو له مخې لټون وکړئ."
 }

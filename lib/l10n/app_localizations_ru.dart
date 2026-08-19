@@ -1578,4 +1578,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total активно';
   }
+
+  @override
+  String get recentSearches => 'Недавние поиски';
+
+  @override
+  String get clearAll => 'Очистить всё';
+
+  @override
+  String get searchGuideTitle => 'Поиск в Священном Коране';
+
+  @override
+  String get searchGuideDescription =>
+      'Ищите по названию суры, номеру аята (например, 2:255) или словам в переводах и тафсирах.';
 }

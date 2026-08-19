@@ -461,5 +461,9 @@
   "revelationType": "Local de revelação",
   "searchInTranslations": "Pesquisar nas traduções",
   "searchInTafsirs": "Pesquisar nos tafsirs",
-  "activeCount": "{selected}/{total} ativo(s)"
+  "activeCount": "{selected}/{total} ativo(s)",
+  "recentSearches": "Pesquisas recentes",
+  "clearAll": "Limpar tudo",
+  "searchGuideTitle": "Pesquisar no Sagrado Alcorão",
+  "searchGuideDescription": "Pesquise por nome de surata, referência de versículo (ex. 2:255) ou palavras em traduções e tafsir."
 }

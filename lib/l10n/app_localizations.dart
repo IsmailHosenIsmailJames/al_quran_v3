@@ -2923,6 +2923,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{selected}/{total} active'**
   String activeCount(int selected, int total);
+
+  /// No description provided for @recentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Searches'**
+  String get recentSearches;
+
+  /// No description provided for @clearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All'**
+  String get clearAll;
+
+  /// No description provided for @searchGuideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search the Holy Quran'**
+  String get searchGuideTitle;
+
+  /// No description provided for @searchGuideDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Surah name, verse reference (e.g. 2:255), or words in translations and tafsir.'**
+  String get searchGuideDescription;
 }
 
 class _AppLocalizationsDelegate
