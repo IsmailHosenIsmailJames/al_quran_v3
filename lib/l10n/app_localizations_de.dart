@@ -1656,4 +1656,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get back => 'Zurück';
+
+  @override
+  String get script => 'Schrift';
 }

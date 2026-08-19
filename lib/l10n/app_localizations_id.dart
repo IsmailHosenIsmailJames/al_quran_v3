@@ -1637,4 +1637,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get back => 'Kembali';
+
+  @override
+  String get script => 'Skrip';
 }

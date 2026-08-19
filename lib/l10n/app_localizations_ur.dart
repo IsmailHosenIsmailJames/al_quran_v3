@@ -1641,4 +1641,7 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get back => 'واپس';
+
+  @override
+  String get script => 'رسم الخط';
 }

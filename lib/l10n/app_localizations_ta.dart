@@ -1663,4 +1663,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get back => 'பின்செல்';
+
+  @override
+  String get script => 'எழுத்துரு';
 }

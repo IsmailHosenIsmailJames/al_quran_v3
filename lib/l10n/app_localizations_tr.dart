@@ -1640,4 +1640,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get back => 'Geri';
+
+  @override
+  String get script => 'Yazı';
 }

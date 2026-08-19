@@ -1589,4 +1589,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get back => '返回';
+
+  @override
+  String get script => '字体';
 }

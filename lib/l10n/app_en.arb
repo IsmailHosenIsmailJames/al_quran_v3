@@ -823,5 +823,6 @@
   "quickPageJump": "Quick Page Jump",
   "searchSurahHint": "Search Surah by name or number...",
   "fullscreen": "Fullscreen",
-  "back": "Back"
+  "back": "Back",
+  "script": "Script"
 }
