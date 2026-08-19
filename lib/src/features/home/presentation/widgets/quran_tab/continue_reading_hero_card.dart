@@ -6,6 +6,8 @@ import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -31,11 +33,13 @@ class ContinueReadingHeroCard extends StatelessWidget {
         final int? pageNumber = latest?.pageNumber;
 
         final surahData = metaDataSurah[surahNumber.toString()];
+        final surahInfo = surahData != null
+            ? SurahInfoModel.fromMap(surahData)
+            : null;
         final String revelationPlace =
-            surahData?["revelation_place"]?.toString().toLowerCase() ?? "makkah";
+            surahInfo?.revelationPlace.toLowerCase() ?? "makkah";
         final isMakkah = revelationPlace == "makkah";
-        final int versesCount =
-            int.tryParse(surahData?["verses_count"]?.toString() ?? "7") ?? 7;
+        final int versesCount = surahInfo?.versesCount ?? 7;
 
         final surahLocalized = getSurahName(context, surahNumber);
 
@@ -49,7 +53,7 @@ class ContinueReadingHeroCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => QuranScriptView(
                 startKey: "$surahNumber:1",
-                endKey: "$surahNumber:$versesCount",
+                endKey: getEndAyahKeyFromSurahNumber(surahNumber),
                 toScrollKey: toScroll,
               ),
             ),

@@ -1,11 +1,11 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
-import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
+import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -23,30 +23,27 @@ class QuranHistoryCarousel extends StatelessWidget {
 
     return BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
       builder: (context, historyState) {
-        if (historyState.history.isEmpty) {
-          return const SizedBox.shrink();
-        }
-
-        final recentItems = historyState.history.reversed.toList();
+        final recentItems = historyState.history.reversed.take(10).toList();
+        if (recentItems.isEmpty) return const SizedBox.shrink();
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
                 children: [
                   Icon(
-                    FluentIcons.history_24_regular,
-                    size: 18,
+                    FluentIcons.history_24_filled,
+                    size: 16,
                     color: themeState.primary,
                   ),
                   const Gap(6),
                   Text(
                     l10n.history,
                     style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
                       color: isDark ? Colors.white : Colors.grey.shade900,
                     ),
                   ),
@@ -64,11 +61,6 @@ class QuranHistoryCarousel extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = recentItems[index];
                   final surahName = getSurahName(context, item.surahNumber);
-                  final surahData = metaDataSurah[item.surahNumber.toString()];
-                  final int versesCount = int.tryParse(
-                        surahData?["verses_count"]?.toString() ?? "7",
-                      ) ??
-                      7;
 
                   final label = item.pageNumber != null
                       ? "$surahName • ${l10n.page} ${localizedNumber(context, item.pageNumber)}"
@@ -85,7 +77,7 @@ class QuranHistoryCarousel extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => QuranScriptView(
                             startKey: "${item.surahNumber}:1",
-                            endKey: "${item.surahNumber}:$versesCount",
+                            endKey: getEndAyahKeyFromSurahNumber(item.surahNumber),
                             toScrollKey: toScroll,
                           ),
                         ),
