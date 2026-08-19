@@ -88,10 +88,7 @@ void main() {
 
     test("searchImmediate executes search and updates state", () async {
       final cubit = QuranSearchCubit(dataSource, useCase);
-      cubit.searchImmediate("2:255");
-
-      // Allow async search to complete
-      await Future.delayed(const Duration(milliseconds: 100));
+      await cubit.searchImmediate("2:255");
 
       expect(cubit.state.status, SearchStatus.success);
       expect(cubit.state.results?.directJump?.ayahKey, "2:255");
