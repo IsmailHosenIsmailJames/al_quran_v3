@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_index_badge.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/search/data/datasources/quran_search_datasource.dart";
@@ -98,9 +99,12 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
     final l10n = AppLocalizations.of(context);
 
     return Scaffold(
+      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
       appBar: AppBar(
         leading: const BackButton(),
         titleSpacing: 0,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: _buildSearchTextField(themeState, isDark, l10n),
         actions: [
           _buildFilterIconButton(context, themeState, isDark, l10n),
@@ -135,7 +139,12 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
               },
             ),
 
-            const Divider(height: 12),
+            Divider(
+              height: 14,
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.06)
+                  : Colors.grey.shade200,
+            ),
 
             // Results Body
             Expanded(
@@ -503,12 +512,12 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
           ),
         ),
         SizedBox(
-          height: 80,
+          height: 76,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             scrollDirection: Axis.horizontal,
             itemCount: surahs.length,
-            separatorBuilder: (context, index) => const Gap(8),
+            separatorBuilder: (context, index) => const Gap(10),
             itemBuilder: (context, index) {
               final surah = surahs[index];
               return InkWell(
@@ -525,26 +534,32 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 },
                 borderRadius: BorderRadius.circular(14),
                 child: Container(
-                  width: 170,
-                  padding: const EdgeInsets.all(10),
+                  width: 175,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.04)
-                        : themeState.primaryShade100.withValues(alpha: 0.6),
+                    color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
                       color: isDark
                           ? Colors.white.withValues(alpha: 0.08)
-                          : themeState.primaryShade200,
+                          : Colors.grey.shade200,
                     ),
+                    boxShadow: [
+                      if (!isDark)
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.03),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                    ],
                   ),
                   child: Row(
                     children: [
                       QuranIndexBadge(
                         index: surah.id,
-                        size: 32,
+                        size: 34,
                       ),
-                      const Gap(8),
+                      const Gap(10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -554,15 +569,18 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                               getSurahName(context, surah.id),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 13,
+                              style: TextStyle(
+                                fontSize: 13.5,
                                 fontWeight: FontWeight.bold,
+                                color: isDark ? Colors.white : Colors.grey.shade900,
                               ),
                             ),
+                            const Gap(2),
                             Text(
-                              "${surah.versesCount} ${l10n.verses}",
+                              "${localizedNumber(context, surah.versesCount)} ${l10n.verses}",
                               style: TextStyle(
                                 fontSize: 11,
+                                fontWeight: FontWeight.w500,
                                 color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                               ),
                             ),
