@@ -83,6 +83,9 @@ class PrayerQuickSettingsSheet extends StatelessWidget {
                       ),
                     ),
                     TextButton.icon(
+                      style: TextButton.styleFrom(
+                        foregroundColor: themeState.primary,
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                         Navigator.push(
@@ -101,7 +104,11 @@ class PrayerQuickSettingsSheet extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Divider(),
+                Divider(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade200,
+                ),
                 const Gap(10),
 
                 // Asr Calculation (Madhab)
@@ -167,13 +174,13 @@ class PrayerQuickSettingsSheet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   decoration: BoxDecoration(
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : themeState.primaryShade100.withValues(alpha: 0.6),
+                        ? Colors.white.withValues(alpha: 0.04)
+                        : Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(14),
                     border: Border.all(
                       color: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : themeState.primaryShade200,
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.grey.shade200,
                     ),
                   ),
                   child: DropdownButtonHideUnderline(
@@ -241,17 +248,17 @@ class PrayerQuickSettingsSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected
-              ? themeState.primary.withValues(alpha: isDark ? 0.25 : 0.12)
+              ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.08)
               : (isDark
-                  ? Colors.white.withValues(alpha: 0.04)
-                  : themeState.primaryShade100.withValues(alpha: 0.4)),
+                  ? Colors.white.withValues(alpha: 0.03)
+                  : Colors.grey.shade50),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : themeState.primaryShade200.withValues(alpha: 0.6)),
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : Colors.grey.shade200),
             width: isSelected ? 1.5 : 1.0,
           ),
         ),

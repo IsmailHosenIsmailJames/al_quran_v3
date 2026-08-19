@@ -33,7 +33,7 @@ class SelectedAyahsChips extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark
             ? Colors.white.withValues(alpha: 0.04)
-            : themeState.primaryShade100.withValues(alpha: 0.35),
+            : themeState.primary.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(roundedRadius),
         border: Border.all(
           color: isDark

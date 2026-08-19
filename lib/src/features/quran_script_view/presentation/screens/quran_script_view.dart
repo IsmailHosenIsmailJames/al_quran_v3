@@ -970,7 +970,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             child: Divider(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.1)
-                  : themeState.primaryShade200.withValues(alpha: 0.7),
+                  : Colors.grey.shade300,
             ),
           ),
           Container(
@@ -979,12 +979,12 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             decoration: BoxDecoration(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.05)
-                  : themeState.primaryShade100,
+                  : themeState.primary.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark
                     ? Colors.white.withValues(alpha: 0.08)
-                    : themeState.primaryShade200,
+                    : themeState.primary.withValues(alpha: 0.25),
               ),
             ),
             child: Text(
@@ -1000,7 +1000,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             child: Divider(
               color: isDark
                   ? Colors.white.withValues(alpha: 0.1)
-                  : themeState.primaryShade200.withValues(alpha: 0.7),
+                  : Colors.grey.shade300,
             ),
           ),
         ],
