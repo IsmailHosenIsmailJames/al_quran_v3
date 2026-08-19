@@ -23,28 +23,49 @@ class ResourceSearchBar extends StatelessWidget {
         if (!state.isSearching) {
           return Text(
             appLocalizations.quranResources,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+            ),
           );
         }
 
-        return TextField(
-          controller: searchController,
-          autofocus: true,
-          onChanged: (val) => cubit.setSearchQuery(val),
-          decoration: InputDecoration(
-            hintText: appLocalizations.search,
-            border: InputBorder.none,
-            hintStyle: TextStyle(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.5),
-            ),
-          ),
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+        return ValueListenableBuilder<TextEditingValue>(
+          valueListenable: searchController,
+          builder: (context, value, child) {
+            return TextField(
+              controller: searchController,
+              autofocus: true,
+              onChanged: (val) => cubit.setSearchQuery(val),
+              decoration: InputDecoration(
+                hintText: "${appLocalizations.search}...",
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.45),
+                  fontSize: 16,
+                ),
+                suffixIcon: value.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear_rounded, size: 20),
+                        onPressed: () {
+                          searchController.clear();
+                          cubit.setSearchQuery('');
+                        },
+                      )
+                    : null,
+              ),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 16,
+              ),
+            );
+          },
         );
       },
     );
   }
 }
+
