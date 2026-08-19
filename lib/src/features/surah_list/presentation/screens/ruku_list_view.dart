@@ -59,7 +59,7 @@ class RukuListView extends StatelessWidget {
                 border: Border.all(
                   color: isDark
                       ? Colors.white.withValues(alpha: 0.08)
-                      : themeState.primaryShade200.withValues(alpha: 0.6),
+                      : Colors.grey.shade200,
                 ),
                 boxShadow: [
                   BoxShadow(

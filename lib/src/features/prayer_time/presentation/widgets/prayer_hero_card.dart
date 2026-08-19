@@ -198,19 +198,17 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                         ],
                       ),
                     ),
-                    if (currentPrayer != null) ...[
-                      const Gap(8),
-                      Text(
-                        "• ${l10n.currentPrayerLabel(currentPrayerLocalized)}",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade600,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    const Gap(8),
+                    Text(
+                      "• ${l10n.currentPrayerLabel(currentPrayerLocalized)}",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
+                        fontWeight: FontWeight.w500,
                       ),
-                    ],
+                    ),
                   ],
                 ),
                 if (nextPrayerArabic.isNotEmpty)
@@ -236,7 +234,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 _buildTimeSegment(
-                  (durationUntilNext?.inHours ?? 0).toString().padLeft(2, "0"),
+                  durationUntilNext.inHours.toString().padLeft(2, "0"),
                   l10n.hours.toUpperCase(),
                   themeState,
                   isDark,
@@ -253,7 +251,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   ),
                 ),
                 _buildTimeSegment(
-                  ((durationUntilNext?.inMinutes ?? 0) % 60)
+                  (durationUntilNext.inMinutes % 60)
                       .toString()
                       .padLeft(2, "0"),
                   l10n.minutes.toUpperCase(),
@@ -272,7 +270,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   ),
                 ),
                 _buildTimeSegment(
-                  ((durationUntilNext?.inSeconds ?? 0) % 60)
+                  (durationUntilNext.inSeconds % 60)
                       .toString()
                       .padLeft(2, "0"),
                   l10n.seconds.toUpperCase(),
@@ -303,21 +301,17 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      currentPrayerTime != null
-                          ? "${currentPrayerLocalized.isNotEmpty ? currentPrayerLocalized : l10n.current}: ${timeFormatter.format(currentPrayerTime.toLocal())}"
-                          : "",
+                      "${currentPrayerLocalized.isNotEmpty ? currentPrayerLocalized : l10n.current}: ${timeFormatter.format(currentPrayerTime.toLocal())}",
                       style: TextStyle(
                         fontSize: 11,
                         color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                       ),
                     ),
                     Text(
-                      nextPrayerTime != null
-                          ? l10n.startsAt(
-                              nextPrayerLocalized,
-                              timeFormatter.format(nextPrayerTime.toLocal()),
-                            )
-                          : "",
+                      l10n.startsAt(
+                        nextPrayerLocalized,
+                        timeFormatter.format(nextPrayerTime.toLocal()),
+                      ),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
