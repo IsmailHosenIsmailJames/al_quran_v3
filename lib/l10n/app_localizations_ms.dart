@@ -1563,4 +1563,17 @@ class AppLocalizationsMs extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total aktif';
   }
+
+  @override
+  String get recentSearches => 'Carian Terkini';
+
+  @override
+  String get clearAll => 'Padam Semua';
+
+  @override
+  String get searchGuideTitle => 'Cari dalam Al-Quran';
+
+  @override
+  String get searchGuideDescription =>
+      'Cari mengikut nama Surah, rujukan ayat (cth. 2:255), atau perkataan dalam terjemahan dan tafsir.';
 }

@@ -1567,4 +1567,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total सक्रिय';
   }
+
+  @override
+  String get recentSearches => 'हाल की खोजें';
+
+  @override
+  String get clearAll => 'सभी साफ़ करें';
+
+  @override
+  String get searchGuideTitle => 'पवित्र कुरान में खोजें';
+
+  @override
+  String get searchGuideDescription =>
+      'सूरह नाम, आयत संदर्भ (उदा. 2:255), या अनुवाद और तफ़सीर के शब्दों द्वारा खोजें।';
 }

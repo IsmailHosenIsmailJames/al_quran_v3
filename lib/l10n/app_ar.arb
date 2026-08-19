@@ -723,5 +723,9 @@
   "revelationType": "نوع النزول",
   "searchInTranslations": "البحث في الترجمات",
   "searchInTafsirs": "البحث في التفاسير",
-  "activeCount": "{selected}/{total} نشط"
+  "activeCount": "{selected}/{total} نشط",
+  "recentSearches": "عمليات البحث الأخيرة",
+  "clearAll": "مسح الكل",
+  "searchGuideTitle": "ابحث في القرآن الكريم",
+  "searchGuideDescription": "ابحث باسم السورة أو رقم الآية (مثل 2:255) أو بالكلمات في الترجمات والتفاسير."
 }

@@ -723,5 +723,9 @@
   "revelationType": "Lieu de révélation",
   "searchInTranslations": "Rechercher dans les traductions",
   "searchInTafsirs": "Rechercher dans les exégèses (tafsirs)",
-  "activeCount": "{selected}/{total} actif(s)"
+  "activeCount": "{selected}/{total} actif(s)",
+  "recentSearches": "Recherches récentes",
+  "clearAll": "Tout effacer",
+  "searchGuideTitle": "Rechercher dans le Saint Coran",
+  "searchGuideDescription": "Recherchez par nom de sourate, référence de verset (ex. 2:255) ou mots dans les traductions et tafsirs."
 }

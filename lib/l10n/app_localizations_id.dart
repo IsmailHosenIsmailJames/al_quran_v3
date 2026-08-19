@@ -1563,4 +1563,17 @@ class AppLocalizationsId extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total aktif';
   }
+
+  @override
+  String get recentSearches => 'Pencarian Terkini';
+
+  @override
+  String get clearAll => 'Hapus Semua';
+
+  @override
+  String get searchGuideTitle => 'Cari di Al-Quran';
+
+  @override
+  String get searchGuideDescription =>
+      'Cari berdasarkan nama Surah, nomor ayat (mis. 2:255), atau kata dalam terjemahan dan tafsir.';
 }

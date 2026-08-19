@@ -13,7 +13,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
   final SearchQuranUseCase _useCase;
   Timer? _debounceTimer;
 
-  static const _debounceDuration = Duration(milliseconds: 180);
+  static const _debounceDuration = Duration(milliseconds: 300);
 
   QuranSearchCubit(this._dataSource, this._useCase)
       : super(const QuranSearchState()) {
@@ -47,7 +47,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     ));
   }
 
-  /// Debounced keystroke search handler.
+  /// Debounced keystroke search handler. Does NOT save intermediate keystrokes to history.
   void onQueryChanged(String query) {
     final trimmed = query.trim();
     _debounceTimer?.cancel();
@@ -67,12 +67,12 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     ));
 
     _debounceTimer = Timer(_debounceDuration, () {
-      _executeSearch(trimmed);
+      _executeSearch(trimmed, saveHistory: false);
     });
   }
 
-  /// Executes search immediately (e.g. from history click or submit).
-  void searchImmediate(String query) {
+  /// Executes search immediately and saves to history (e.g. keyboard submit or history click).
+  Future<void> searchImmediate(String query, {bool saveHistory = true}) async {
     final trimmed = query.trim();
     _debounceTimer?.cancel();
 
@@ -90,7 +90,19 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
       status: SearchStatus.loading,
     ));
 
-    _executeSearch(trimmed);
+    await _executeSearch(trimmed, saveHistory: saveHistory);
+  }
+
+  /// Manually save an active query to history (e.g. when user clicks on a search result).
+  Future<void> saveQueryToHistory(String query) async {
+    final trimmed = query.trim();
+    if (trimmed.isNotEmpty) {
+      await _dataSource.addSearchHistory(trimmed);
+      if (isClosed) return;
+      emit(state.copyWith(
+        searchHistory: _dataSource.getSearchHistory(),
+      ));
+    }
   }
 
   /// Changes the search scope tab (All, Translations, Arabic, Tafsir, Surahs).
@@ -101,7 +113,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     emit(state.copyWith(filter: updatedFilter));
 
     if (state.query.trim().isNotEmpty) {
-      _executeSearch(state.query.trim());
+      _executeSearch(state.query.trim(), saveHistory: false);
     }
   }
 
@@ -110,7 +122,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     emit(state.copyWith(filter: newFilter));
 
     if (state.query.trim().isNotEmpty) {
-      _executeSearch(state.query.trim());
+      _executeSearch(state.query.trim(), saveHistory: false);
     }
   }
 
@@ -142,7 +154,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     updateFilter(state.filter.copyWith(selectedTafsirs: list));
   }
 
-  Future<void> _executeSearch(String query) async {
+  Future<void> _executeSearch(String query, {bool saveHistory = false}) async {
     try {
       final results = await _useCase.execute(
         query: query,
@@ -151,9 +163,11 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
 
       if (isClosed) return;
 
-      // Save to recent search history
-      unawaited(_dataSource.addSearchHistory(query));
-      final updatedHistory = _dataSource.getSearchHistory();
+      List<String> updatedHistory = state.searchHistory;
+      if (saveHistory && query.trim().isNotEmpty) {
+        await _dataSource.addSearchHistory(query.trim());
+        updatedHistory = _dataSource.getSearchHistory();
+      }
 
       if (results.isEmpty) {
         emit(state.copyWith(

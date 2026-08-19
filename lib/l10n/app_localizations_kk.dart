@@ -1562,4 +1562,17 @@ class AppLocalizationsKk extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total белсенді';
   }
+
+  @override
+  String get recentSearches => 'Соңғы іздеулер';
+
+  @override
+  String get clearAll => 'Барлығын тазалау';
+
+  @override
+  String get searchGuideTitle => 'Қасиетті Құраннан іздеу';
+
+  @override
+  String get searchGuideDescription =>
+      'Сүре атауы, аят нөмірі (мыс. 2:255) немесе аудармалар мен тәпсірлердегі сөздер бойынша іздеңіз.';
 }

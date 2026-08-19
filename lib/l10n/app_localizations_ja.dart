@@ -1537,4 +1537,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total 件有効';
   }
+
+  @override
+  String get recentSearches => '最近の検索';
+
+  @override
+  String get clearAll => 'すべて消去';
+
+  @override
+  String get searchGuideTitle => 'クルアーンを検索';
+
+  @override
+  String get searchGuideDescription =>
+      '章名、節番号（例：2:255）、または翻訳やタフスィール内の単語で検索できます。';
 }

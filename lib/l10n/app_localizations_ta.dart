@@ -1586,4 +1586,17 @@ class AppLocalizationsTa extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total செயலில் உள்ளது';
   }
+
+  @override
+  String get recentSearches => 'சமீபத்திய தேடல்கள்';
+
+  @override
+  String get clearAll => 'அனைத்தையும் அழி';
+
+  @override
+  String get searchGuideTitle => 'புனித குர்ஆனில் தேடுங்கள்';
+
+  @override
+  String get searchGuideDescription =>
+      'அத்தியாயப் பெயர், வசன எண் (எ.கா. 2:255) அல்லது மொழிபெயர்ப்புகள் மற்றும் தஃப்சீரில் உள்ள சொற்கள் மூலம் தேடுங்கள்.';
 }

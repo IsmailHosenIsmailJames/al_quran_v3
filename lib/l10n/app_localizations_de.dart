@@ -1580,4 +1580,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total aktiv';
   }
+
+  @override
+  String get recentSearches => 'Letzte Suchanfragen';
+
+  @override
+  String get clearAll => 'Alles löschen';
+
+  @override
+  String get searchGuideTitle => 'Im Heiligen Koran suchen';
+
+  @override
+  String get searchGuideDescription =>
+      'Suchen Sie nach Sure-Namen, Versangabe (z. B. 2:255) oder Wörtern in Übersetzungen und Tafsir.';
 }

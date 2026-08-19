@@ -1585,4 +1585,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String activeCount(int selected, int total) {
     return '$selected/$total actif(s)';
   }
+
+  @override
+  String get recentSearches => 'Recherches récentes';
+
+  @override
+  String get clearAll => 'Tout effacer';
+
+  @override
+  String get searchGuideTitle => 'Rechercher dans le Saint Coran';
+
+  @override
+  String get searchGuideDescription =>
+      'Recherchez par nom de sourate, référence de verset (ex. 2:255) ou mots dans les traductions et tafsirs.';
 }

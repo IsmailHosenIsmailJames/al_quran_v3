@@ -461,5 +461,9 @@
   "revelationType": "இறக்கப்பட்ட இடம்",
   "searchInTranslations": "மொழிபெயர்ப்புகளில் தேடவும்",
   "searchInTafsirs": "தஃப்சீரில் தேடவும்",
-  "activeCount": "{selected}/{total} செயலில் உள்ளது"
+  "activeCount": "{selected}/{total} செயலில் உள்ளது",
+  "recentSearches": "சமீபத்திய தேடல்கள்",
+  "clearAll": "அனைத்தையும் அழி",
+  "searchGuideTitle": "புனித குர்ஆனில் தேடுங்கள்",
+  "searchGuideDescription": "அத்தியாயப் பெயர், வசன எண் (எ.கா. 2:255) அல்லது மொழிபெயர்ப்புகள் மற்றும் தஃப்சீரில் உள்ள சொற்கள் மூலம் தேடுங்கள்."
 }
