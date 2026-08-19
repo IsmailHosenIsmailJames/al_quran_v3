@@ -485,5 +485,6 @@
   "quickPageJump": "빠른 페이지 이동",
   "searchSurahHint": "이름이나 번호로 수라 검색...",
   "fullscreen": "전체 화면",
-  "back": "뒤로"
+  "back": "뒤로",
+  "script": "서체"
 }

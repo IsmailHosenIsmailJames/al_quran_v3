@@ -1638,4 +1638,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get back => 'ਵਾਪਸ';
+
+  @override
+  String get script => 'ਸਕ੍ਰਿਪਟ';
 }

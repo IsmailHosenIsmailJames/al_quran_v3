@@ -188,7 +188,7 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
                     Positioned.fill(
                       child: LanguageSelectionList(
                         scrollController: _scrollController,
-                        bottomPadding: 140,
+                        bottomPadding: 155,
                       ),
                     ),
 

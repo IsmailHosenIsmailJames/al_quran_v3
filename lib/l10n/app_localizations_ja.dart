@@ -1610,4 +1610,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get back => '戻る';
+
+  @override
+  String get script => '書体';
 }

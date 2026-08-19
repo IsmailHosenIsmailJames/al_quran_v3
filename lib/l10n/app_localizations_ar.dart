@@ -1640,4 +1640,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get back => 'رجوع';
+
+  @override
+  String get script => 'رسم الخط';
 }

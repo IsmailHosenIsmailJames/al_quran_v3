@@ -1659,4 +1659,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get back => 'Indietro';
+
+  @override
+  String get script => 'Scrittura';
 }

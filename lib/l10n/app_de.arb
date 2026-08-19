@@ -485,5 +485,6 @@
   "quickPageJump": "Schneller Seitensprung",
   "searchSurahHint": "Sure nach Name oder Nummer suchen...",
   "fullscreen": "Vollbild",
-  "back": "Zurück"
+  "back": "Zurück",
+  "script": "Schrift"
 }

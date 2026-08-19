@@ -1645,4 +1645,7 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get back => 'Geri';
+
+  @override
+  String get script => 'Xətt';
 }

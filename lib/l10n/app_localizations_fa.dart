@@ -1635,4 +1635,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get back => 'بازگشت';
+
+  @override
+  String get script => 'رسم الخط';
 }

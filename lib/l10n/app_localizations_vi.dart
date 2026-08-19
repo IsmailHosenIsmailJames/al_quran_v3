@@ -1645,4 +1645,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get back => 'Quay lại';
+
+  @override
+  String get script => 'Chữ viết';
 }
