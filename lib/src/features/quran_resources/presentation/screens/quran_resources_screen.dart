@@ -88,18 +88,20 @@ class _QuranResourcesViewState extends State<_QuranResourcesView>
           ),
         ],
       ),
-      body: Stack(
+      body: Column(
         children: [
-          TabBarView(
-            controller: _tabController,
-            physics: const ClampingScrollPhysics(),
-            children: const [
-              TranslationResourcesTab(),
-              TafsirResourcesTab(),
-              WordByWordResourcesTab(),
-            ],
-          ),
           ResourceTabBar(tabController: _tabController),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              physics: const ClampingScrollPhysics(),
+              children: const [
+                TranslationResourcesTab(),
+                TafsirResourcesTab(),
+                WordByWordResourcesTab(),
+              ],
+            ),
+          ),
         ],
       ),
     );
