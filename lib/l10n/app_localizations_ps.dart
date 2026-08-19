@@ -1577,4 +1577,65 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'د سورت نوم، د آیت شمېره (لکه 2:255)، یا په ژباړو او تفاسیرو کې د کلمو له مخې لټون وکړئ.';
+
+  @override
+  String get madani15Line => '۱۵ کرښې مدني';
+
+  @override
+  String get totalPagesCount => '۶۰۴ مخونه';
+
+  @override
+  String get wordAudio => 'د ټکو غږ';
+
+  @override
+  String get offlineReady => 'آفلاین چمتو';
+
+  @override
+  String get vectorFonts => 'ویکتور فونټونه';
+
+  @override
+  String get madaniMushafLayout => 'د مدني مصحف بڼه';
+
+  @override
+  String get kfgqpcDescription => 'د پاچا فهد د قرآن چاپونې کمپلیکس (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'د مصحف کڅوړه ډاونلوډ کیږي...';
+
+  @override
+  String get extractingAndInstallingData => 'ډاټا استخراج او انسټال کیږي...';
+
+  @override
+  String get settingUpOfflinePages => 'آفلاین مخونه تنظیم کیږي...';
+
+  @override
+  String get fetchingLayoutArchive => 'د بڼې آرشیف ترلاسه کیږي...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'مهرباني وکړئ د ډاونلوډ بشپړیدو پورې اپلیکیشن خلاص وساتئ.';
+
+  @override
+  String get downloadFailed => 'ډاونلوډ ناکام شو';
+
+  @override
+  String get retryDownload => 'بیا ډاونلوډ هڅه وکړئ';
+
+  @override
+  String get packageSize => 'د کڅوړې اندازه';
+
+  @override
+  String get loadingMushafPage => 'د مصحف مخ بار کیږي...';
+
+  @override
+  String get quickPageJump => 'ژر مخ ته تلل';
+
+  @override
+  String get searchSurahHint => 'د نوم یا شمېرې له مخې سورت ولټوئ...';
+
+  @override
+  String get fullscreen => 'بشپړ سکرین';
+
+  @override
+  String get back => 'شاته';
 }

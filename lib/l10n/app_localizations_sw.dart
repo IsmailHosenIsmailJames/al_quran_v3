@@ -1588,4 +1588,67 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Tafuta kwa jina la Sura, nambari ya aya (mf. 2:255), au maneno katika tafsiri na tafsiri ya Quran.';
+
+  @override
+  String get madani15Line => 'Madani ya Mistari 15';
+
+  @override
+  String get totalPagesCount => 'Kurasa 604';
+
+  @override
+  String get wordAudio => 'Sauti ya Neno kwa Neno';
+
+  @override
+  String get offlineReady => 'Tayari Nje ya Mtandao';
+
+  @override
+  String get vectorFonts => 'Fonti za Vekta';
+
+  @override
+  String get madaniMushafLayout => 'Muundo wa Mushaf wa Madani';
+
+  @override
+  String get kfgqpcDescription =>
+      'Kiwanda cha Uchapishaji cha Mfalme Fahd (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Inapakua Kifurushi cha Mushaf...';
+
+  @override
+  String get extractingAndInstallingData => 'Inafungua na Kusakinisha Data...';
+
+  @override
+  String get settingUpOfflinePages =>
+      'Inatayarisha kurasa za nje ya mtandao...';
+
+  @override
+  String get fetchingLayoutArchive => 'Inaleta kumbukumbu ya muundo...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Tafadhali weka programu wazi hadi upakuaji ukamilike.';
+
+  @override
+  String get downloadFailed => 'Upakuaji Umeshindwa';
+
+  @override
+  String get retryDownload => 'Jaribu Kupakua Tena';
+
+  @override
+  String get packageSize => 'Ukubwa wa Kifurushi';
+
+  @override
+  String get loadingMushafPage => 'Inapakia Ukurasa wa Mushaf...';
+
+  @override
+  String get quickPageJump => 'Kuruka Ukurasa Haraka';
+
+  @override
+  String get searchSurahHint => 'Tafuta Sura kwa jina au nambari...';
+
+  @override
+  String get fullscreen => 'Skrini Kamili';
+
+  @override
+  String get back => 'Nyuma';
 }

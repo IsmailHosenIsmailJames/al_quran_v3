@@ -1579,4 +1579,65 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'ابحث باسم السورة أو رقم الآية (مثل 2:255) أو بالكلمات في الترجمات والتفاسير.';
+
+  @override
+  String get madani15Line => 'مصحف المدينة ١٥ سطر';
+
+  @override
+  String get totalPagesCount => '٦٠٤ صفحة';
+
+  @override
+  String get wordAudio => 'صوت الكلمات';
+
+  @override
+  String get offlineReady => 'جاهز بدون إنترنت';
+
+  @override
+  String get vectorFonts => 'خطوط متجهة';
+
+  @override
+  String get madaniMushafLayout => 'تصميم مصحف المدينة';
+
+  @override
+  String get kfgqpcDescription => 'مجمع الملك فهد لطباعة المصحف الشريف (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'جاري تنزيل حزمة المصحف...';
+
+  @override
+  String get extractingAndInstallingData => 'جاري استخراج وتثبيت البيانات...';
+
+  @override
+  String get settingUpOfflinePages => 'جاري تجهيز الصفحات بدون اتصال...';
+
+  @override
+  String get fetchingLayoutArchive => 'جاري جلب أرشيف التصميم...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'يرجى إبقاء التطبيق مفتوحاً حتى يكتمل التنزيل.';
+
+  @override
+  String get downloadFailed => 'فشل التنزيل';
+
+  @override
+  String get retryDownload => 'إعادة المحاولة';
+
+  @override
+  String get packageSize => 'حجم الحزمة';
+
+  @override
+  String get loadingMushafPage => 'جاري تحميل صفحة المصحف...';
+
+  @override
+  String get quickPageJump => 'انتقال سريع للصفحة';
+
+  @override
+  String get searchSurahHint => 'ابحث عن السورة بالاسم أو الرقم...';
+
+  @override
+  String get fullscreen => 'ملء الشاشة';
+
+  @override
+  String get back => 'رجوع';
 }

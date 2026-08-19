@@ -1578,4 +1578,66 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Sure adı, ayet numarası (örn. 2:255) veya meal ve tefsirlerdeki kelimelerle arayın.';
+
+  @override
+  String get madani15Line => '15 Satır Medine';
+
+  @override
+  String get totalPagesCount => '604 Sayfa';
+
+  @override
+  String get wordAudio => 'Kelime Sesi';
+
+  @override
+  String get offlineReady => 'Çevrimdışı Hazır';
+
+  @override
+  String get vectorFonts => 'Vektör Yazı Tipleri';
+
+  @override
+  String get madaniMushafLayout => 'Medine Mushaf Düzeni';
+
+  @override
+  String get kfgqpcDescription => 'Kral Fehd Kur\'an Basım Kompleksi (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Mushaf Paketi İndiriliyor...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'Veriler Çıkarılıyor ve Kuruluyor...';
+
+  @override
+  String get settingUpOfflinePages => 'Çevrimdışı sayfalar ayarlanıyor...';
+
+  @override
+  String get fetchingLayoutArchive => 'Düzen arşivi alınıyor...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Lütfen indirme tamamlanana kadar uygulamayı açık tutun.';
+
+  @override
+  String get downloadFailed => 'İndirme Başarısız';
+
+  @override
+  String get retryDownload => 'İndirmeyi Tekrar Dene';
+
+  @override
+  String get packageSize => 'Paket Boyutu';
+
+  @override
+  String get loadingMushafPage => 'Mushaf Sayfası Yükleniyor...';
+
+  @override
+  String get quickPageJump => 'Hızlı Sayfa Geçişi';
+
+  @override
+  String get searchSurahHint => 'Sureyi isim veya numara ile ara...';
+
+  @override
+  String get fullscreen => 'Tam Ekran';
+
+  @override
+  String get back => 'Geri';
 }

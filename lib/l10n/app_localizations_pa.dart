@@ -1576,4 +1576,66 @@ class AppLocalizationsPa extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'ਸੂਰਤ ਦੇ ਨਾਮ, ਆਇਤ ਨੰਬਰ (ਜਿਵੇਂ 2:255), ਜਾਂ ਅਨੁਵਾਦਾਂ ਅਤੇ ਤਫ਼ਸੀਰ ਦੇ ਸ਼ਬਦਾਂ ਦੁਆਰਾ ਖੋਜੋ।';
+
+  @override
+  String get madani15Line => '15-ਲਾਈਨ ਮਦਨੀ';
+
+  @override
+  String get totalPagesCount => '604 ਪੰਨੇ';
+
+  @override
+  String get wordAudio => 'ਸ਼ਬਦ ਆਡੀਓ';
+
+  @override
+  String get offlineReady => 'ਆਫ਼ਲਾਈਨ ਤਿਆਰ';
+
+  @override
+  String get vectorFonts => 'ਵੈਕਟਰ ਫੌਂਟ';
+
+  @override
+  String get madaniMushafLayout => 'ਮਦਨੀ ਮੁਸਹਫ਼ ਖਾਕਾ';
+
+  @override
+  String get kfgqpcDescription => 'ਕਿੰਗ ਫ਼ਾਹਦ ਕੁਰਾਨ ਪ੍ਰਿੰਟਿੰਗ ਕੰਪਲੈਕਸ (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'ਮੁਸਹਫ਼ ਪੈਕੇਜ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'ਡੇਟਾ ਕੱਢਿਆ ਅਤੇ ਇੰਸਟਾਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get settingUpOfflinePages => 'ਆਫ਼ਲਾਈਨ ਪੰਨੇ ਸੈੱਟ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ...';
+
+  @override
+  String get fetchingLayoutArchive => 'ਖਾਕਾ ਪੁਰਾਲੇਖ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'ਕਿਰਪਾ ਕਰਕੇ ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋਣ ਤੱਕ ਐਪ ਨੂੰ ਖੁੱਲ੍ਹਾ ਰੱਖੋ।';
+
+  @override
+  String get downloadFailed => 'ਡਾਊਨਲੋਡ ਅਸਫਲ ਰਿਹਾ';
+
+  @override
+  String get retryDownload => 'ਮੁੜ ਡਾਊਨਲੋਡ ਕਰੋ';
+
+  @override
+  String get packageSize => 'ਪੈਕੇਜ ਦਾ ਆਕਾਰ';
+
+  @override
+  String get loadingMushafPage => 'ਮੁਸਹਫ਼ ਪੰਨਾ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get quickPageJump => 'ਤੁਰੰਤ ਪੰਨਾ ਛਾਲ';
+
+  @override
+  String get searchSurahHint => 'ਨਾਮ ਜਾਂ ਨੰਬਰ ਦੁਆਰਾ ਸੂਰਤ ਖੋਜੋ...';
+
+  @override
+  String get fullscreen => 'ਪੂਰੀ ਸਕ੍ਰੀਨ';
+
+  @override
+  String get back => 'ਵਾਪਸ';
 }

@@ -1579,4 +1579,66 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'سورۃ کے نام، آیت نمبر (مثلاً 2:255)، یا تراجم اور تفاسیر میں الفاظ کے ذریعے تلاش کریں۔';
+
+  @override
+  String get madani15Line => '15 سطری مدنی';
+
+  @override
+  String get totalPagesCount => '604 صفحات';
+
+  @override
+  String get wordAudio => 'لفظی آڈیو';
+
+  @override
+  String get offlineReady => 'آف لائن دستیاب';
+
+  @override
+  String get vectorFonts => 'ویکٹر فونٹس';
+
+  @override
+  String get madaniMushafLayout => 'مدنی مصحف لے آؤٹ';
+
+  @override
+  String get kfgqpcDescription => 'مجمع شاہ فہد برائے طباعت مصحف شریف (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'مصحف پیکیج ڈاؤن لوڈ ہو رہا ہے...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'ڈیٹا نکالا اور انسٹال کیا جا رہا ہے...';
+
+  @override
+  String get settingUpOfflinePages => 'آف لائن صفحات ترتیب دیے جا رہے ہیں...';
+
+  @override
+  String get fetchingLayoutArchive => 'لے آؤٹ آرکائیو حاصل کی جا رہی ہے...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'براہ کرم ڈاؤن لوڈ مکمل ہونے تک ایپ کھلی رکھیں۔';
+
+  @override
+  String get downloadFailed => 'ڈاؤن لوڈ ناکام ہو گیا';
+
+  @override
+  String get retryDownload => 'ڈاؤن لوڈ دوبارہ کریں';
+
+  @override
+  String get packageSize => 'پیکیج کا سائز';
+
+  @override
+  String get loadingMushafPage => 'مصحف کا صفحہ لوڈ ہو رہا ہے...';
+
+  @override
+  String get quickPageJump => 'فوری صفحہ پر جائیں';
+
+  @override
+  String get searchSurahHint => 'نام یا نمبر سے سورت تلاش کریں...';
+
+  @override
+  String get fullscreen => 'فل اسکرین';
+
+  @override
+  String get back => 'واپس';
 }

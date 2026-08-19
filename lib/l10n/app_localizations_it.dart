@@ -1596,4 +1596,67 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get searchGuideDescription =>
       'Cerca per nome della sura, riferimento del versetto (es. 2:255) o parole nelle traduzioni e nei tafsir.';
+
+  @override
+  String get madani15Line => 'Madani a 15 righe';
+
+  @override
+  String get totalPagesCount => '604 Pagine';
+
+  @override
+  String get wordAudio => 'Audio per parola';
+
+  @override
+  String get offlineReady => 'Pronto offline';
+
+  @override
+  String get vectorFonts => 'Font vettoriali';
+
+  @override
+  String get madaniMushafLayout => 'Layout del Mushaf Madani';
+
+  @override
+  String get kfgqpcDescription =>
+      'Complesso Re Fahd per la stampa del Corano (V4)';
+
+  @override
+  String get downloadingMushafPackage => 'Download del pacchetto Mushaf...';
+
+  @override
+  String get extractingAndInstallingData =>
+      'Estrazione e installazione dei dati...';
+
+  @override
+  String get settingUpOfflinePages => 'Configurazione delle pagine offline...';
+
+  @override
+  String get fetchingLayoutArchive => 'Recupero dell\'archivio del layout...';
+
+  @override
+  String get keepAppOpenDuringDownload =>
+      'Si prega di mantenere l\'app aperta fino al completamento del download.';
+
+  @override
+  String get downloadFailed => 'Download non riuscito';
+
+  @override
+  String get retryDownload => 'Riprova il download';
+
+  @override
+  String get packageSize => 'Dimensione del pacchetto';
+
+  @override
+  String get loadingMushafPage => 'Caricamento della pagina del Mushaf...';
+
+  @override
+  String get quickPageJump => 'Salto rapido di pagina';
+
+  @override
+  String get searchSurahHint => 'Cerca la sura per nome o numero...';
+
+  @override
+  String get fullscreen => 'Schermo intero';
+
+  @override
+  String get back => 'Indietro';
 }
