@@ -369,7 +369,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             itemCount: _filteredSurahs.length,
-            separatorBuilder: (_, __) => const Divider(height: 1),
+            separatorBuilder: (context, index) => const Divider(height: 1),
             itemBuilder: (context, index) {
               final surah = _filteredSurahs[index];
               return ListTile(
@@ -429,7 +429,7 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       itemCount: _allJuzs.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
+      separatorBuilder: (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final juz = _allJuzs[index];
         return ListTile(
