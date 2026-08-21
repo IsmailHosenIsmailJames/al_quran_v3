@@ -59,6 +59,9 @@
                 <data
                     android:scheme="al-quran"
                     android:host="prayer" />
+                <data
+                    android:scheme="al-quran"
+                    android:host="ayah" />
             </intent-filter>
         </activity>
 
@@ -84,6 +87,42 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/prayer_widget_medium_info" />
+        </receiver>
+
+        <!-- Quran Ayah Small Widget Receiver (2x2) -->
+        <receiver
+            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetSmallProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ayah_widget_small_info" />
+        </receiver>
+
+        <!-- Quran Ayah Medium Widget Receiver (4x2) -->
+        <receiver
+            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetMediumProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ayah_widget_medium_info" />
+        </receiver>
+
+        <!-- Quran Ayah Large Widget Receiver (4x4) -->
+        <receiver
+            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetLargeProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ayah_widget_large_info" />
         </receiver>
 
         <!-- for just audio background -->

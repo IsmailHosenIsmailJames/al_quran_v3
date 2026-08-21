@@ -7,7 +7,6 @@ import "package:al_quran_v3/src/features/location/presentation/models/location_d
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
 import "package:home_widget/home_widget.dart";
 import "package:intl/intl.dart";
 import "package:shared_preferences/shared_preferences.dart";

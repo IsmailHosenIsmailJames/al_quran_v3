@@ -2,4 +2,7 @@
 <resources>
     <string name="widget_small_description">Displays the next prayer time, remaining countdown, and location.</string>
     <string name="widget_medium_description">Displays today\'s 5 prayer schedule with the current active prayer highlighted and next prayer countdown.</string>
+    <string name="widget_ayah_small_description">Displays a compact Quranic verse with translation and Surah reference.</string>
+    <string name="widget_ayah_medium_description">Displays a daily Quranic Ayah with beautiful Arabic text and translation.</string>
+    <string name="widget_ayah_large_description">Displays a full Quranic reflection card with complete Arabic verse, translation, and Surah details.</string>
 </resources>
