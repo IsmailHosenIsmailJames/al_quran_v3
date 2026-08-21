@@ -49,3 +49,12 @@ lib/src/api
 *.AppImage
 /dist
 test_hive*/
+
+# Firebase configuration & credentials
+lib/firebase_options.dart
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+macos/Runner/GoogleService-Info.plist
+.firebase/
+*serviceAccountKey*.json
+*firebase-adminsdk*.json
