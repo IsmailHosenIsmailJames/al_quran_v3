@@ -1723,4 +1723,86 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'روزانہ کی منتخب، آخری پڑھی گئی، یا کسٹم پن کردہ آیات میں سے انتخاب کریں';
+
+  @override
+  String get accountAndSync => 'اکاؤنٹ اور کلاؤڈ سنک';
+
+  @override
+  String get signIn => 'سائن ان';
+
+  @override
+  String get signUp => 'اکاؤنٹ بنائیں';
+
+  @override
+  String get signOut => 'سائن آؤٹ';
+
+  @override
+  String get deleteAccount => 'اکاؤنٹ اور ڈیٹا ڈیلیٹ کریں';
+
+  @override
+  String get deleteAccountTitle => 'کیا اکاؤنٹ ڈیلیٹ کرنا ہے؟';
+
+  @override
+  String get deleteAccountWarning =>
+      'یہ مستقل طور پر آپ کا اکاؤنٹ اور کلاؤڈ سے آپ کے تمام مطابقت پذیر نوٹس، بک مارکس اور پڑھنے کی تاریخ کو حذف کر دے گا۔ اس عمل کو واپس نہیں لایا جا سکتا۔';
+
+  @override
+  String get deleteAccountConfirm => 'ہاں، سب کچھ حذف کریں';
+
+  @override
+  String get syncNow => 'ابھی سنک کریں';
+
+  @override
+  String get syncing => 'سنک ہو رہا ہے...';
+
+  @override
+  String get syncSuccess => 'ڈیٹا کامیابی کے ساتھ مطابقت پذیر ہو گیا!';
+
+  @override
+  String get syncFailed => 'سنک ناکام ہو گیا۔ انٹرنیٹ کنکشن چیک کریں۔';
+
+  @override
+  String get googleSignIn => 'Google کے ساتھ جاری رکھیں';
+
+  @override
+  String get email => 'ای میل پتہ';
+
+  @override
+  String get password => 'پاس ورڈ';
+
+  @override
+  String get fullName => 'پورا نام';
+
+  @override
+  String get forgotPassword => 'پاس ورڈ بھول گئے؟';
+
+  @override
+  String get sendResetLink => 'ری سیٹ لنک بھیجیں';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'پاس ورڈ ری سیٹ کا لنک آپ کے ای میل پر بھیج دیا گیا ہے!';
+
+  @override
+  String get continueAsGuest => 'بطور مہمان جاری رکھیں';
+
+  @override
+  String get alreadyHaveAccount => 'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
+
+  @override
+  String get dontHaveAccount => 'اکاؤنٹ نہیں ہے؟ سائن اپ کریں';
+
+  @override
+  String get privacyPolicyNotice =>
+      'جاری رکھ کر، آپ ہماری سروس کی شرائط اور رازداری کی پالیسی سے اتفاق کرتے ہیں۔';
+
+  @override
+  String get guestUser => 'مہمان صارف';
+
+  @override
+  String get syncedCloudBackup => 'کلاؤڈ ہم آہنگی';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'اپنے تمام آلات پر اپنے نوٹس، پن اور پڑھنے کی تاریخ کو مطابقت پذیر رکھیں۔';
 }

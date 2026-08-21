@@ -1721,4 +1721,86 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'اختر بين الآيات اليومية المختارة، أو آخر قراءة، أو آية مثبتة مخصصة';
+
+  @override
+  String get accountAndSync => 'الحساب والمزامنة السحابية';
+
+  @override
+  String get signIn => 'تسجيل الدخول';
+
+  @override
+  String get signUp => 'إنشاء حساب';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get deleteAccount => 'حذف الحساب والبيانات';
+
+  @override
+  String get deleteAccountTitle => 'هل تريد حذف الحساب؟';
+
+  @override
+  String get deleteAccountWarning =>
+      'سيؤدي هذا إلى حذف حسابك وجميع ملاحظاتك وإشاراتك المرجعية وسجل القراءة المتزامن سحابيًا نهائيًا. لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get deleteAccountConfirm => 'نعم، احذف كل شيء';
+
+  @override
+  String get syncNow => 'المزامنة الآن';
+
+  @override
+  String get syncing => 'جارٍ المزامنة...';
+
+  @override
+  String get syncSuccess => 'تمت مزامنة البيانات بنجاح!';
+
+  @override
+  String get syncFailed => 'فشلت المزامنة. يرجى التحقق من اتصال الإنترنت.';
+
+  @override
+  String get googleSignIn => 'المتابعة باستخدام Google';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get fullName => 'الاسم الكامل';
+
+  @override
+  String get forgotPassword => 'هل نسيت كلمة المرور؟';
+
+  @override
+  String get sendResetLink => 'إرسال رابط إعادة التعيين';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني!';
+
+  @override
+  String get continueAsGuest => 'المتابعة كضيف';
+
+  @override
+  String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟ تسجيل الدخول';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟ إنشاء حساب';
+
+  @override
+  String get privacyPolicyNotice =>
+      'بالمتابعة، فإنك توافق على شروط الخدمة وسياسة الخصوصية الخاصة بنا.';
+
+  @override
+  String get guestUser => 'مستخدم ضيف';
+
+  @override
+  String get syncedCloudBackup => 'المزامنة السحابية';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'حافظ على مزامنة ملاحظاتك وإشاراتك وسجل القراءة عبر جميع أجهزتك.';
 }

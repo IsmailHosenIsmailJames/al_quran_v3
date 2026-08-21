@@ -1739,4 +1739,87 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Elige entre versículos seleccionados diarios, último leído o versículos fijados';
+
+  @override
+  String get accountAndSync => 'Cuenta y sincronización en la nube';
+
+  @override
+  String get signIn => 'Iniciar sesión';
+
+  @override
+  String get signUp => 'Crear cuenta';
+
+  @override
+  String get signOut => 'Cerrar sesión';
+
+  @override
+  String get deleteAccount => 'Eliminar cuenta y datos';
+
+  @override
+  String get deleteAccountTitle => '¿Eliminar cuenta?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Esto eliminará permanentemente tu cuenta y todas tus notas, marcadores e historial de lectura sincronizados en la nube. Esta acción no se puede deshacer.';
+
+  @override
+  String get deleteAccountConfirm => 'Sí, eliminar todo';
+
+  @override
+  String get syncNow => 'Sincronizar ahora';
+
+  @override
+  String get syncing => 'Sincronizando...';
+
+  @override
+  String get syncSuccess => '¡Datos sincronizados con éxito!';
+
+  @override
+  String get syncFailed =>
+      'Error de sincronización. Verifica tu conexión a internet.';
+
+  @override
+  String get googleSignIn => 'Continuar con Google';
+
+  @override
+  String get email => 'Correo electrónico';
+
+  @override
+  String get password => 'Contraseña';
+
+  @override
+  String get fullName => 'Nombre completo';
+
+  @override
+  String get forgotPassword => '¿Olvidaste tu contraseña?';
+
+  @override
+  String get sendResetLink => 'Enviar enlace de restablecimiento';
+
+  @override
+  String get resetPasswordEmailSent =>
+      '¡Enlace de restablecimiento enviado a tu correo electrónico!';
+
+  @override
+  String get continueAsGuest => 'Continuar como invitado';
+
+  @override
+  String get alreadyHaveAccount => '¿Ya tienes una cuenta? Iniciar sesión';
+
+  @override
+  String get dontHaveAccount => '¿No tienes una cuenta? Regístrate';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Al continuar, aceptas nuestros Términos de servicio y Política de privacidad.';
+
+  @override
+  String get guestUser => 'Usuario invitado';
+
+  @override
+  String get syncedCloudBackup => 'Sincronización en la nube';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Mantén tus notas, marcadores e historial de lectura sincronizados en todos tus dispositivos.';
 }

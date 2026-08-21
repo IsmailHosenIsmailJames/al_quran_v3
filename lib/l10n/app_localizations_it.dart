@@ -1743,4 +1743,87 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Scegli tra versetti selezionati ogni giorno, ultimi letti o fissati';
+
+  @override
+  String get accountAndSync => 'Account e Sincronizzazione Cloud';
+
+  @override
+  String get signIn => 'Accedi';
+
+  @override
+  String get signUp => 'Crea Account';
+
+  @override
+  String get signOut => 'Esci';
+
+  @override
+  String get deleteAccount => 'Elimina Account e Dati';
+
+  @override
+  String get deleteAccountTitle => 'Eliminare l\'account?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Questo eliminerà definitivamente il tuo account e tutte le note, i segnalibri e la cronologia di lettura sincronizzati dal cloud. Questa azione non può essere annullata.';
+
+  @override
+  String get deleteAccountConfirm => 'Sì, elimina tutto';
+
+  @override
+  String get syncNow => 'Sincronizza Ora';
+
+  @override
+  String get syncing => 'Sincronizzazione in corso...';
+
+  @override
+  String get syncSuccess => 'Dati sincronizzati con successo!';
+
+  @override
+  String get syncFailed =>
+      'Sincronizzazione non riuscita. Controlla la tua connessione Internet.';
+
+  @override
+  String get googleSignIn => 'Continua con Google';
+
+  @override
+  String get email => 'Indirizzo Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get fullName => 'Nome Completo';
+
+  @override
+  String get forgotPassword => 'Password dimenticata?';
+
+  @override
+  String get sendResetLink => 'Invia Link di Reimpostazione';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Link per reimpostare la password inviato alla tua email!';
+
+  @override
+  String get continueAsGuest => 'Continua come Ospite';
+
+  @override
+  String get alreadyHaveAccount => 'Hai già un account? Accedi';
+
+  @override
+  String get dontHaveAccount => 'Non hai un account? Registrati';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Continuando, accetti i nostri Termini di servizio e l\'Informativa sulla privacy.';
+
+  @override
+  String get guestUser => 'Utente Ospite';
+
+  @override
+  String get syncedCloudBackup => 'Sincronizzazione Cloud';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Mantieni sincronizzate note, pin e cronologia di lettura su tutti i tuoi dispositivi.';
 }

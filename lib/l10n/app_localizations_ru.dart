@@ -1734,4 +1734,87 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Выберите между ежедневными избранными, последними прочитанными или закрепленными аятами';
+
+  @override
+  String get accountAndSync => 'Аккаунт и облачная синхронизация';
+
+  @override
+  String get signIn => 'Войти';
+
+  @override
+  String get signUp => 'Создать аккаунт';
+
+  @override
+  String get signOut => 'Выйти';
+
+  @override
+  String get deleteAccount => 'Удалить аккаунт и данные';
+
+  @override
+  String get deleteAccountTitle => 'Удалить аккаунт?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Это навсегда удалит ваш аккаунт и все синхронизированные заметки, закладки и историю чтения из облака. Это действие нельзя отменить.';
+
+  @override
+  String get deleteAccountConfirm => 'Да, удалить всё';
+
+  @override
+  String get syncNow => 'Синхронизировать сейчас';
+
+  @override
+  String get syncing => 'Синхронизация...';
+
+  @override
+  String get syncSuccess => 'Данные успешно синхронизированы!';
+
+  @override
+  String get syncFailed =>
+      'Ошибка синхронизации. Проверьте интернет-соединение.';
+
+  @override
+  String get googleSignIn => 'Продолжить с Google';
+
+  @override
+  String get email => 'Электронная почта';
+
+  @override
+  String get password => 'Пароль';
+
+  @override
+  String get fullName => 'Полное имя';
+
+  @override
+  String get forgotPassword => 'Забыли пароль?';
+
+  @override
+  String get sendResetLink => 'Отправить ссылку для сброса';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Ссылка для сброса пароля отправлена на вашу почту!';
+
+  @override
+  String get continueAsGuest => 'Продолжить как гость';
+
+  @override
+  String get alreadyHaveAccount => 'Уже есть аккаунт? Войти';
+
+  @override
+  String get dontHaveAccount => 'Нет аккаунта? Зарегистрироваться';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Продолжая, вы соглашаетесь с нашими Условиями обслуживания и Политикой конфиденциальности.';
+
+  @override
+  String get guestUser => 'Гостевой пользователь';
+
+  @override
+  String get syncedCloudBackup => 'Облачная синхронизация';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Синхронизируйте заметки, закладки и историю чтения на всех ваших устройствах.';
 }

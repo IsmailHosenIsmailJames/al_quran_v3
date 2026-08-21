@@ -1738,4 +1738,87 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Wählen Sie zwischen täglich ausgewählten, zuletzt gelesenen oder angehefteten Versen';
+
+  @override
+  String get accountAndSync => 'Konto & Cloud-Synchronisierung';
+
+  @override
+  String get signIn => 'Anmelden';
+
+  @override
+  String get signUp => 'Konto erstellen';
+
+  @override
+  String get signOut => 'Abmelden';
+
+  @override
+  String get deleteAccount => 'Konto & Daten löschen';
+
+  @override
+  String get deleteAccountTitle => 'Konto löschen?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Dadurch werden Ihr Konto und alle synchronisierten Notizen, Lesezeichen und Ihr Leseverlauf dauerhaft aus der Cloud gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get deleteAccountConfirm => 'Ja, alles löschen';
+
+  @override
+  String get syncNow => 'Jetzt synchronisieren';
+
+  @override
+  String get syncing => 'Synchronisierung...';
+
+  @override
+  String get syncSuccess => 'Daten erfolgreich synchronisiert!';
+
+  @override
+  String get syncFailed =>
+      'Synchronisierung fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung.';
+
+  @override
+  String get googleSignIn => 'Mit Google fortfahren';
+
+  @override
+  String get email => 'E-Mail-Adresse';
+
+  @override
+  String get password => 'Passwort';
+
+  @override
+  String get fullName => 'Vollständiger Name';
+
+  @override
+  String get forgotPassword => 'Passwort vergessen?';
+
+  @override
+  String get sendResetLink => 'Link zum Zurücksetzen senden';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Link zum Zurücksetzen des Passworts wurde an Ihre E-Mail gesendet!';
+
+  @override
+  String get continueAsGuest => 'Als Gast fortfahren';
+
+  @override
+  String get alreadyHaveAccount => 'Bereits ein Konto? Anmelden';
+
+  @override
+  String get dontHaveAccount => 'Noch kein Konto? Registrieren';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Indem Sie fortfahren, stimmen Sie unseren Nutzungsbedingungen und Datenschutzbestimmungen zu.';
+
+  @override
+  String get guestUser => 'Gastbenutzer';
+
+  @override
+  String get syncedCloudBackup => 'Cloud-Synchronisierung';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Halten Sie Ihre Notizen, Pins und Ihren Leseverlauf auf allen Ihren Geräten synchron.';
 }
