@@ -1643,4 +1643,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get script => 'رسم الخط';
+
+  @override
+  String get muted => 'مكتوم';
+
+  @override
+  String get alerts => 'تنبيهات';
+
+  @override
+  String get off => 'إيقاف';
+
+  @override
+  String get on => 'تشغيل';
 }

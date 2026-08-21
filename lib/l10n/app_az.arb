@@ -486,5 +486,9 @@
   "searchSurahHint": "Surəni ad və ya nömrə ilə axtarın...",
   "fullscreen": "Tam Ekran",
   "back": "Geri",
-  "script": "Xətt"
+  "script": "Xətt",
+  "muted": "Səssiz",
+  "alerts": "Xəbərdarlıqlar",
+  "off": "Bağlı",
+  "on": "Açıq"
 }

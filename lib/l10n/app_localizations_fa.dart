@@ -1638,4 +1638,16 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get script => 'رسم الخط';
+
+  @override
+  String get muted => 'بی‌صدا';
+
+  @override
+  String get alerts => 'هشدارها';
+
+  @override
+  String get off => 'خاموش';
+
+  @override
+  String get on => 'روشن';
 }

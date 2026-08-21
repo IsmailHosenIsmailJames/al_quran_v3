@@ -1592,4 +1592,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get script => '字体';
+
+  @override
+  String get muted => '静音';
+
+  @override
+  String get alerts => '提醒';
+
+  @override
+  String get off => '关闭';
+
+  @override
+  String get on => '开启';
 }

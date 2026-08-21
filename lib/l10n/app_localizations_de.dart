@@ -1659,4 +1659,16 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get script => 'Schrift';
+
+  @override
+  String get muted => 'Stumm';
+
+  @override
+  String get alerts => 'Benachrichtigungen';
+
+  @override
+  String get off => 'Aus';
+
+  @override
+  String get on => 'Ein';
 }

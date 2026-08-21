@@ -1661,4 +1661,16 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get script => 'Escrita';
+
+  @override
+  String get muted => 'Silenciado';
+
+  @override
+  String get alerts => 'Alertas';
+
+  @override
+  String get off => 'Desligado';
+
+  @override
+  String get on => 'Ligado';
 }

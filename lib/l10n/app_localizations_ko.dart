@@ -1612,4 +1612,16 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get script => '서체';
+
+  @override
+  String get muted => '음소거';
+
+  @override
+  String get alerts => '알림';
+
+  @override
+  String get off => '꺼짐';
+
+  @override
+  String get on => '켜짐';
 }
