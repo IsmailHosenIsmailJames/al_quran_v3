@@ -486,5 +486,9 @@
   "searchSurahHint": "Cerca la sura per nome o numero...",
   "fullscreen": "Schermo intero",
   "back": "Indietro",
-  "script": "Scrittura"
+  "script": "Scrittura",
+  "muted": "Disattivato",
+  "alerts": "Avvisi",
+  "off": "Spento",
+  "on": "Acceso"
 }

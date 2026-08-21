@@ -1648,4 +1648,16 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get script => 'Chữ viết';
+
+  @override
+  String get muted => 'Tắt tiếng';
+
+  @override
+  String get alerts => 'Thông báo';
+
+  @override
+  String get off => 'Tắt';
+
+  @override
+  String get on => 'Bật';
 }

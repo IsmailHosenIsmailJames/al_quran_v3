@@ -748,5 +748,9 @@
   "searchSurahHint": "Rechercher une sourate par nom ou numéro...",
   "fullscreen": "Plein écran",
   "back": "Retour",
-  "script": "Écriture"
+  "script": "Écriture",
+  "muted": "Muet",
+  "alerts": "Alertes",
+  "off": "Désactivé",
+  "on": "Activé"
 }

@@ -486,5 +486,9 @@
   "searchSurahHint": "Tìm kiếm Surah theo tên hoặc số...",
   "fullscreen": "Toàn màn hình",
   "back": "Quay lại",
-  "script": "Chữ viết"
+  "script": "Chữ viết",
+  "muted": "Tắt tiếng",
+  "alerts": "Thông báo",
+  "off": "Tắt",
+  "on": "Bật"
 }

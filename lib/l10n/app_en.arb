@@ -824,5 +824,9 @@
   "searchSurahHint": "Search Surah by name or number...",
   "fullscreen": "Fullscreen",
   "back": "Back",
-  "script": "Script"
+  "script": "Script",
+  "muted": "Muted",
+  "alerts": "Alerts",
+  "off": "Off",
+  "on": "On"
 }

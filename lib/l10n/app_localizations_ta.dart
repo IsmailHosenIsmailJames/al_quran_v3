@@ -1666,4 +1666,16 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get script => 'எழுத்துரு';
+
+  @override
+  String get muted => 'அமைதி';
+
+  @override
+  String get alerts => 'விழிப்பூட்டல்கள்';
+
+  @override
+  String get off => 'முடக்கு';
+
+  @override
+  String get on => 'இயக்கு';
 }
