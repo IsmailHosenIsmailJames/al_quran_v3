@@ -1724,4 +1724,86 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'दैनिक चयनित, अंतिम पढ़ी गई, या कस्टम पिन की गई आयतों के बीच चुनें';
+
+  @override
+  String get accountAndSync => 'अकाउंट और क्लाउड सिंक';
+
+  @override
+  String get signIn => 'साइन इन';
+
+  @override
+  String get signUp => 'अकाउंट बनाएं';
+
+  @override
+  String get signOut => 'साइन आउट';
+
+  @override
+  String get deleteAccount => 'अकाउंट और डेटा हटाएं';
+
+  @override
+  String get deleteAccountTitle => 'अकाउंट हटाएं?';
+
+  @override
+  String get deleteAccountWarning =>
+      'यह आपके खाते और क्लाउड से आपके सभी समन्वयित नोट्स, बुकमार्क और पढ़ने के इतिहास को स्थायी रूप से हटा देगा। यह क्रिया पूर्ववत नहीं की जा सकती।';
+
+  @override
+  String get deleteAccountConfirm => 'हाँ, सब कुछ हटाएं';
+
+  @override
+  String get syncNow => 'अभी सिंक करें';
+
+  @override
+  String get syncing => 'सिंक हो रहा है...';
+
+  @override
+  String get syncSuccess => 'डेटा सफलतापूर्वक सिंक हो गया!';
+
+  @override
+  String get syncFailed => 'सिंक विफल रहा। कृपया अपना इंटरनेट कनेक्शन जांचें।';
+
+  @override
+  String get googleSignIn => 'Google के साथ जारी रखें';
+
+  @override
+  String get email => 'ईमेल पता';
+
+  @override
+  String get password => 'पासवर्ड';
+
+  @override
+  String get fullName => 'पूरा नाम';
+
+  @override
+  String get forgotPassword => 'पासवर्ड भूल गए?';
+
+  @override
+  String get sendResetLink => 'रीसेट लिंक भेजें';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'पासवर्ड रीसेट लिंक आपके ईमेल पर भेजा गया!';
+
+  @override
+  String get continueAsGuest => 'अतिथि के रूप में जारी रखें';
+
+  @override
+  String get alreadyHaveAccount => 'क्या पहले से एक खाता मौजूद है? साइन इन';
+
+  @override
+  String get dontHaveAccount => 'अकाउंट नहीं है? साइन अप करें';
+
+  @override
+  String get privacyPolicyNotice =>
+      'जारी रखकर, आप हमारी सेवा की शर्तों और गोपनीयता नीति से सहमत होते हैं।';
+
+  @override
+  String get guestUser => 'अतिथि उपयोगकर्ता';
+
+  @override
+  String get syncedCloudBackup => 'क्लाउड सिंक्रोनाइज़ेशन';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'अपने सभी उपकरणों पर अपने नोट्स, पिन और पढ़ने के इतिहास को सिंक रखें।';
 }

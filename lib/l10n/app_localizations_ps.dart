@@ -1720,4 +1720,87 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'د ورځني غوره شوي، وروستي لوستل شوي، یا ټاکل شوي ځانګړي آیتونو ترمنځ وټاکئ';
+
+  @override
+  String get accountAndSync => 'حساب او کلاوډ همغږي';
+
+  @override
+  String get signIn => 'ننوتل';
+
+  @override
+  String get signUp => 'حساب جوړ کړئ';
+
+  @override
+  String get signOut => 'وتل';
+
+  @override
+  String get deleteAccount => 'حساب او معلومات ړنګ کړئ';
+
+  @override
+  String get deleteAccountTitle => 'ایا حساب ړنګ کړئ؟';
+
+  @override
+  String get deleteAccountWarning =>
+      'دا به ستاسو حساب او ستاسو ټول همغږي شوي نوټونه، بک مارکونه، او د لوستلو تاریخ د تل لپاره له کلاوډ څخه ړنګ کړي. دا عمل نشي بیرته کیدی.';
+
+  @override
+  String get deleteAccountConfirm => 'هو، ټول ړنګ کړئ';
+
+  @override
+  String get syncNow => 'همدا اوس همغږي کړئ';
+
+  @override
+  String get syncing => 'د همغږۍ په حال کې...';
+
+  @override
+  String get syncSuccess => 'معلومات په بریالیتوب سره همغږي شول!';
+
+  @override
+  String get syncFailed =>
+      'همغږي ناکامه شوه. مهرباني وکړئ خپل د انټرنیټ اړیکه وګورئ.';
+
+  @override
+  String get googleSignIn => 'د ګوګل سره دوام ورکړئ';
+
+  @override
+  String get email => 'بریښنالیک پته';
+
+  @override
+  String get password => 'پټ نوم';
+
+  @override
+  String get fullName => 'بشپړ نوم';
+
+  @override
+  String get forgotPassword => 'پټ نوم مو هېر شوی؟';
+
+  @override
+  String get sendResetLink => 'د بیا تنظیم لینک واستوئ';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'د پټ نوم د بیا تنظیم لینک ستاسو بریښنالیک ته واستول شو!';
+
+  @override
+  String get continueAsGuest => 'د میلمه په توګه دوام ورکړئ';
+
+  @override
+  String get alreadyHaveAccount => 'ایا له وړاندې حساب لرئ؟ ننوځئ';
+
+  @override
+  String get dontHaveAccount => 'حساب نه لرئ؟ نوم لیکنه وکړئ';
+
+  @override
+  String get privacyPolicyNotice =>
+      'د دوام ورکولو سره، تاسو زموږ د خدماتو شرایطو او د محرمیت پالیسۍ سره موافق یاست.';
+
+  @override
+  String get guestUser => 'میلمه کاروونکی';
+
+  @override
+  String get syncedCloudBackup => 'کلاوډ همغږي';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'خپل نوټونه، پنونه او د لوستلو تاریخ په خپلو ټولو وسیلو کې همغږي وساتئ.';
 }

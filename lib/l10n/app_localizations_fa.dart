@@ -1716,4 +1716,87 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'بین آیات منتخب روزانه، آخرین خوانده شده یا آیات سنجاق‌شده سفارشی انتخاب کنید';
+
+  @override
+  String get accountAndSync => 'حساب کاربری و همگام‌سازی ابری';
+
+  @override
+  String get signIn => 'ورود';
+
+  @override
+  String get signUp => 'ایجاد حساب';
+
+  @override
+  String get signOut => 'خروج';
+
+  @override
+  String get deleteAccount => 'حذف حساب و داده‌ها';
+
+  @override
+  String get deleteAccountTitle => 'حساب حذف شود؟';
+
+  @override
+  String get deleteAccountWarning =>
+      'این عمل حساب شما و تمام یادداشت‌ها، نشانک‌ها و تاریخچه خواندن همگام‌شده در ابر را برای همیشه حذف خواهد کرد. این عمل غیرقابل بازگشت است.';
+
+  @override
+  String get deleteAccountConfirm => 'بله، همه چیز را حذف کن';
+
+  @override
+  String get syncNow => 'همگام‌سازی اکنون';
+
+  @override
+  String get syncing => 'در حال همگام‌سازی...';
+
+  @override
+  String get syncSuccess => 'داده‌ها با موفقیت همگام‌سازی شدند!';
+
+  @override
+  String get syncFailed =>
+      'همگام‌سازی ناموفق بود. اتصال اینترنت خود را بررسی کنید.';
+
+  @override
+  String get googleSignIn => 'ادامه با گوگل';
+
+  @override
+  String get email => 'آدرس ایمیل';
+
+  @override
+  String get password => 'رمز عبور';
+
+  @override
+  String get fullName => 'نام کامل';
+
+  @override
+  String get forgotPassword => 'رمز عبور را فراموش کرده‌اید؟';
+
+  @override
+  String get sendResetLink => 'ارسال پیوند بازنشانی';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'پیوند بازنشانی رمز عبور به ایمیل شما ارسال شد!';
+
+  @override
+  String get continueAsGuest => 'ادامه به عنوان مهمان';
+
+  @override
+  String get alreadyHaveAccount => 'از قبل حساب کاربری دارید؟ وارد شوید';
+
+  @override
+  String get dontHaveAccount => 'حساب کاربری ندارید؟ ثبت نام کنید';
+
+  @override
+  String get privacyPolicyNotice =>
+      'با ادامه، شما با شرایط خدمات و خط مشی رازداری ما موافقت می‌کنید.';
+
+  @override
+  String get guestUser => 'کاربر مهمان';
+
+  @override
+  String get syncedCloudBackup => 'همگام‌سازی ابری';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'یادداشت‌ها، سنجاق‌ها و تاریخچه خواندن خود را در همه دستگاه‌هایتان همگام نگه دارید.';
 }

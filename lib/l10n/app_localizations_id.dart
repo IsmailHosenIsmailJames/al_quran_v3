@@ -1719,4 +1719,87 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Pilih antara ayat pilihan harian, terakhir dibaca, atau ayat kustom disematkan';
+
+  @override
+  String get accountAndSync => 'Akun & Sinkronisasi Cloud';
+
+  @override
+  String get signIn => 'Masuk';
+
+  @override
+  String get signUp => 'Buat Akun';
+
+  @override
+  String get signOut => 'Keluar';
+
+  @override
+  String get deleteAccount => 'Hapus Akun & Data';
+
+  @override
+  String get deleteAccountTitle => 'Hapus Akun?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Ini akan menghapus akun Anda dan semua catatan, bookmark, dan riwayat membaca yang disinkronkan dari cloud secara permanen. Tindakan ini tidak dapat dibatalkan.';
+
+  @override
+  String get deleteAccountConfirm => 'Ya, Hapus Semuanya';
+
+  @override
+  String get syncNow => 'Sinkronkan Sekarang';
+
+  @override
+  String get syncing => 'Menyinkronkan...';
+
+  @override
+  String get syncSuccess => 'Data berhasil disinkronkan!';
+
+  @override
+  String get syncFailed =>
+      'Sinkronisasi gagal. Silakan periksa koneksi internet Anda.';
+
+  @override
+  String get googleSignIn => 'Lanjutkan dengan Google';
+
+  @override
+  String get email => 'Alamat Email';
+
+  @override
+  String get password => 'Kata Sandi';
+
+  @override
+  String get fullName => 'Nama Lengkap';
+
+  @override
+  String get forgotPassword => 'Lupa Kata Sandi?';
+
+  @override
+  String get sendResetLink => 'Kirim Tautan Reset';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Tautan reset kata sandi telah dikirim ke email Anda!';
+
+  @override
+  String get continueAsGuest => 'Lanjutkan sebagai Tamu';
+
+  @override
+  String get alreadyHaveAccount => 'Sudah punya akun? Masuk';
+
+  @override
+  String get dontHaveAccount => 'Belum punya akun? Daftar';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Dengan melanjutkan, Anda menyetujui Ketentuan Layanan & Kebijakan Privasi kami.';
+
+  @override
+  String get guestUser => 'Pengguna Tamu';
+
+  @override
+  String get syncedCloudBackup => 'Sinkronisasi Cloud';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Jaga agar catatan, pin, dan riwayat membaca Anda tetap tersinkronisasi di semua perangkat.';
 }

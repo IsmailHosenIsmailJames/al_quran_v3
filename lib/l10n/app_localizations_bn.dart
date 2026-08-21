@@ -1727,4 +1727,86 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'প্রতিদিনের নির্বাচিত, সর্বশেষ পঠিত বা নিজের পছন্দের পিন করা আয়াত বেছে নিন';
+
+  @override
+  String get accountAndSync => 'অ্যাকাউন্ট ও ক্লাউড সিঙ্ক';
+
+  @override
+  String get signIn => 'সাইন ইন';
+
+  @override
+  String get signUp => 'অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get signOut => 'সাইন আউট';
+
+  @override
+  String get deleteAccount => 'অ্যাকাউন্ট ও ডেটা মুছুন';
+
+  @override
+  String get deleteAccountTitle => 'অ্যাকাউন্ট মুছে ফেলবেন?';
+
+  @override
+  String get deleteAccountWarning =>
+      'এটি স্থায়ীভাবে আপনার অ্যাকাউন্ট এবং ক্লাউডে সংরক্ষিত সমস্ত নোট, বুকমার্ক ও পঠন ইতিহাস মুছে ফেলবে। এই কাজটি পূর্বাবস্থায় ফিরিয়ে আনা যাবে না।';
+
+  @override
+  String get deleteAccountConfirm => 'হ্যাঁ, সবকিছু মুছুন';
+
+  @override
+  String get syncNow => 'এখনই সিঙ্ক করুন';
+
+  @override
+  String get syncing => 'সিঙ্ক হচ্ছে...';
+
+  @override
+  String get syncSuccess => 'ডেটা সফলভাবে সিঙ্ক হয়েছে!';
+
+  @override
+  String get syncFailed => 'সিঙ্ক ব্যর্থ হয়েছে। ইন্টারনেট সংযোগ পরীক্ষা করুন।';
+
+  @override
+  String get googleSignIn => 'Google দিয়ে এগিয়ে যান';
+
+  @override
+  String get email => 'ইমেইল ঠিকানা';
+
+  @override
+  String get password => 'পাসওয়ার্ড';
+
+  @override
+  String get fullName => 'পূর্ণ নাম';
+
+  @override
+  String get forgotPassword => 'পাসওয়ার্ড ভুলে গেছেন?';
+
+  @override
+  String get sendResetLink => 'রিসেট লিংক পাঠান';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'আপনার ইমেইলে পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে!';
+
+  @override
+  String get continueAsGuest => 'গেস্ট হিসেবে চালিয়ে যান';
+
+  @override
+  String get alreadyHaveAccount => 'ইতিমধ্যে অ্যাকাউন্ট আছে? সাইন ইন করুন';
+
+  @override
+  String get dontHaveAccount => 'অ্যাকাউন্ট নেই? তৈরি করুন';
+
+  @override
+  String get privacyPolicyNotice =>
+      'এগিয়ে যাওয়ার মাধ্যমে, আপনি আমাদের সেবা শর্তাবলী এবং গোপনীয়তা নীতিতে সম্মতি দিচ্ছেন।';
+
+  @override
+  String get guestUser => 'গেস্ট ব্যবহারকারী';
+
+  @override
+  String get syncedCloudBackup => 'ক্লাউড সিঙ্ক্রোনাইজেশন';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'আপনার সমস্ত ডিভাইসে আপনার নোট, পিন এবং পঠন ইতিহাস সুরক্ষিত ও সিঙ্ক রাখুন।';
 }

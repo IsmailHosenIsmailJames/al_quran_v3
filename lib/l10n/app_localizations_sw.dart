@@ -1734,4 +1734,87 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Chagua kati ya aya zilizochaguliwa za kila siku, za mwisho kusomwa, au zilizobandikwa';
+
+  @override
+  String get accountAndSync => 'Akaunti na Usawazishaji wa Wingu';
+
+  @override
+  String get signIn => 'Ingia';
+
+  @override
+  String get signUp => 'Fungua Akaunti';
+
+  @override
+  String get signOut => 'Toka';
+
+  @override
+  String get deleteAccount => 'Futa Akaunti na Data';
+
+  @override
+  String get deleteAccountTitle => 'Kufuta Akaunti?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Hii itafuta akaunti yako kabisa na maelezo yote, alamisho, na historia ya usomaji iliyosawazishwa kutoka kwa wingu. Hatua hii haiwezi kutenduliwa.';
+
+  @override
+  String get deleteAccountConfirm => 'Ndiyo, Futa Kila Kitu';
+
+  @override
+  String get syncNow => 'Sawazisha Sasa';
+
+  @override
+  String get syncing => 'Inasawazisha...';
+
+  @override
+  String get syncSuccess => 'Data imesawazishwa kikamilifu!';
+
+  @override
+  String get syncFailed =>
+      'Usawazishaji umeshindwa. Tafadhali angalia muunganisho wako wa intaneti.';
+
+  @override
+  String get googleSignIn => 'Endelea na Google';
+
+  @override
+  String get email => 'Barua pepe';
+
+  @override
+  String get password => 'Nenosiri';
+
+  @override
+  String get fullName => 'Jina Kamili';
+
+  @override
+  String get forgotPassword => 'Umesahau Nenosiri?';
+
+  @override
+  String get sendResetLink => 'Tuma Kiungo cha Kuweka Upya';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Kiungo cha kuweka upya nenosiri kimetumwa kwa barua pepe yako!';
+
+  @override
+  String get continueAsGuest => 'Endelea kama Mgeni';
+
+  @override
+  String get alreadyHaveAccount => 'Tayari una akaunti? Ingia';
+
+  @override
+  String get dontHaveAccount => 'Huna akaunti? Jisajili';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Kwa kuendelea, unakubali Masharti yetu ya Huduma na Sera ya Faragha.';
+
+  @override
+  String get guestUser => 'Mtumiaji Mgeni';
+
+  @override
+  String get syncedCloudBackup => 'Usawazishaji wa Wingu';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Weka madokezo yako, pini, na historia ya usomaji ikiwa imesawazishwa kwenye vifaa vyako vyote.';
 }
