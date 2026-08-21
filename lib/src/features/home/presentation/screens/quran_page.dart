@@ -73,6 +73,10 @@ class _QuranPageState extends State<QuranPage>
     }
 
     final l10n = AppLocalizations.of(context);
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final isWideHeader = (width > height && width >= 650) || width >= 850;
+
     final List<String> tabNames = [
       l10n.surah,
       l10n.juz,
@@ -84,20 +88,40 @@ class _QuranPageState extends State<QuranPage>
     return SafeArea(
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 800),
+          constraints: BoxConstraints(maxWidth: isWideHeader ? 1100 : 800),
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 // Top Sections: Continue Reading, Quick Actions, History, Shortcuts
-                const SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      ContinueReadingHeroCard(),
-                      QuranQuickActionsBar(),
-                      QuranHistoryCarousel(),
-                      QuranQuickAccessBar(),
-                    ],
-                  ),
+                SliverToBoxAdapter(
+                  child: isWideHeader
+                      ? const Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 5,
+                                  child: ContinueReadingHeroCard(),
+                                ),
+                                Expanded(
+                                  flex: 5,
+                                  child: QuranQuickActionsBar(),
+                                ),
+                              ],
+                            ),
+                            QuranHistoryCarousel(),
+                            QuranQuickAccessBar(),
+                          ],
+                        )
+                      : const Column(
+                          children: [
+                            ContinueReadingHeroCard(),
+                            QuranQuickActionsBar(),
+                            QuranHistoryCarousel(),
+                            QuranQuickAccessBar(),
+                          ],
+                        ),
                 ),
 
                 // Sticky glassmorphic tab bar header
