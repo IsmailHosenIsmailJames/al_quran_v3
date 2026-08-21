@@ -12,6 +12,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/fastin
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/forbidden_prayer_times_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_hero_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_quick_settings_sheet.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_horizontal_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -50,6 +51,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     final themeState = context.watch<ThemeCubit>().state;
     final mediaQueryData = MediaQuery.of(context);
     final l10n = AppLocalizations.of(context);
+    final width = mediaQueryData.size.width;
+    final height = mediaQueryData.size.height;
+    final isLandscapeDashboard = (width > height && width >= 600) || width >= 800;
 
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
@@ -76,6 +80,72 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     ..madhab = locationState.madhab ?? Madhab.shafi,
             );
 
+            if (isLandscapeDashboard) {
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1100),
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                    ).copyWith(
+                      top: mediaQueryData.padding.top + 8,
+                      bottom: 40,
+                    ),
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Left Column: Location, Date & Live Countdown
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: [
+                                _buildTopHeader(
+                                  context,
+                                  locationState,
+                                  prayerTimes,
+                                  themeState,
+                                  isDark,
+                                  l10n,
+                                ),
+                                const Gap(10),
+                                _buildDateAndConfigRow(
+                                  context,
+                                  locationState,
+                                  prayerTimes,
+                                  themeState,
+                                  isDark,
+                                  l10n,
+                                ),
+                                const Gap(12),
+                                PrayerHeroCard(prayerTimes: prayerTimes),
+                              ],
+                            ),
+                          ),
+                          const Gap(14),
+
+                          // Right Column: 5 Prayers Strip, Forbidden Times, Fasting Row
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: [
+                                PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
+                                const Gap(12),
+                                ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
+                                const Gap(12),
+                                FastingSunnahCard(prayerTimes: prayerTimes),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            // Portrait Mode Flow
             return Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 700),
@@ -176,8 +246,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const LocationAcquire(backToPage: true),
+                    builder: (context) => const LocationAcquire(backToPage: true),
                   ),
                 );
               },
@@ -263,7 +332,25 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     size: 20,
                   ),
           ),
-
+          // Calendar View Button
+          IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PrayerTimesCalenderView(prayerTimes: prayerTimes),
+                ),
+              );
+            },
+            icon: Icon(
+              FluentIcons.calendar_month_24_regular,
+              color: themeState.primary,
+              size: 20,
+            ),
+          ),
           // Settings Button
           IconButton(
             visualDensity: VisualDensity.compact,
@@ -296,10 +383,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     bool isDark,
     AppLocalizations l10n,
   ) {
-    final gregorianFormatted = DateFormat(
-      "d MMMM yyyy",
-      l10n.localeName,
-    ).format(DateTime.now());
+    final gregorianFormatted =
+        DateFormat("d MMMM yyyy", l10n.localeName).format(DateTime.now());
 
     final methodEnum =
         locationState.calculationMethod?.method ??

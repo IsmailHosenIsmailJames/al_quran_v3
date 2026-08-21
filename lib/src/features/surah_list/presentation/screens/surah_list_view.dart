@@ -123,6 +123,36 @@ class _SurahListViewState extends State<SurahListView> {
           );
         }
 
+        final width = MediaQuery.of(context).size.width;
+        final isTabletGrid = width >= 700;
+
+        if (isTabletGrid) {
+          return ListView(
+            padding: const EdgeInsets.only(top: 8, bottom: 100),
+            children: [
+              _buildSearchBar(l10n, isDark, langCode),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisExtent: 94,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemCount: filteredSurah.length,
+                  itemBuilder: (context, index) {
+                    final surah = filteredSurah[index];
+                    return SurahListCard(surah: surah, margin: EdgeInsets.zero);
+                  },
+                ),
+              ),
+            ],
+          );
+        }
+
         return ListView.builder(
           padding: const EdgeInsets.only(top: 8, bottom: 100),
           itemCount: filteredSurah.length + 1,

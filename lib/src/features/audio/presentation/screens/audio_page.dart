@@ -74,6 +74,7 @@ class _AudioPageState extends State<AudioPage> {
                 int.parse(ayahKeyState.current.split(":")[1]) - 1;
 
             return SafeArea(
+              left: false,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
@@ -87,30 +88,36 @@ class _AudioPageState extends State<AudioPage> {
                           Expanded(
                             flex: 5,
                             child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  getReciterViewWidget(
-                                    context,
-                                    ayahKeyState,
-                                    currentIndex,
-                                  ),
-                                  const Gap(12),
-                                  _buildSurahSelectorBar(
-                                    context,
-                                    ayahKeyState,
-                                    themeState,
-                                  ),
-                                  const Gap(24),
-                                  _buildProgressBar(themeState),
-                                  const Gap(12),
-                                  _buildPlaybackControls(
-                                    context,
-                                    currentIndex,
-                                    ayahKeyState,
-                                    themeState,
-                                    l10n,
-                                  ),
-                                ],
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: height >= 600 ? 24 : 0,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    getReciterViewWidget(
+                                      context,
+                                      ayahKeyState,
+                                      currentIndex,
+                                    ),
+                                    const Gap(14),
+                                    _buildSurahSelectorBar(
+                                      context,
+                                      ayahKeyState,
+                                      themeState,
+                                    ),
+                                    Gap(height >= 600 ? 32 : 20),
+                                    _buildProgressBar(themeState),
+                                    Gap(height >= 600 ? 20 : 12),
+                                    _buildPlaybackControls(
+                                      context,
+                                      currentIndex,
+                                      ayahKeyState,
+                                      themeState,
+                                      l10n,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
