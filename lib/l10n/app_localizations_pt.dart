@@ -1741,4 +1741,87 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Escolha entre versículos selecionados diários, últimos lidos ou fixados';
+
+  @override
+  String get accountAndSync => 'Conta e Sincronização na Nuvem';
+
+  @override
+  String get signIn => 'Entrar';
+
+  @override
+  String get signUp => 'Criar Conta';
+
+  @override
+  String get signOut => 'Sair';
+
+  @override
+  String get deleteAccount => 'Excluir Conta e Dados';
+
+  @override
+  String get deleteAccountTitle => 'Excluir Conta?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Isso excluirá permanentemente sua conta e todas as suas notas, favoritos e histórico de leitura sincronizados na nuvem. Esta ação não pode ser desfeita.';
+
+  @override
+  String get deleteAccountConfirm => 'Sim, Excluir Tudo';
+
+  @override
+  String get syncNow => 'Sincronizar Agora';
+
+  @override
+  String get syncing => 'Sincronizando...';
+
+  @override
+  String get syncSuccess => 'Dados sincronizados com sucesso!';
+
+  @override
+  String get syncFailed =>
+      'Falha na sincronização. Verifique sua conexão com a internet.';
+
+  @override
+  String get googleSignIn => 'Continuar com o Google';
+
+  @override
+  String get email => 'Endereço de E-mail';
+
+  @override
+  String get password => 'Senha';
+
+  @override
+  String get fullName => 'Nome Completo';
+
+  @override
+  String get forgotPassword => 'Esqueceu a senha?';
+
+  @override
+  String get sendResetLink => 'Enviar Link de Redefinição';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Link de redefinição de senha enviado para seu e-mail!';
+
+  @override
+  String get continueAsGuest => 'Continuar como Convidado';
+
+  @override
+  String get alreadyHaveAccount => 'Já tem uma conta? Entrar';
+
+  @override
+  String get dontHaveAccount => 'Não tem uma conta? Cadastre-se';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade.';
+
+  @override
+  String get guestUser => 'Usuário Convidado';
+
+  @override
+  String get syncedCloudBackup => 'Sincronização na Nuvem';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Mantenha suas notas, pins e histórico de leitura sincronizados em todos os seus dispositivos.';
 }

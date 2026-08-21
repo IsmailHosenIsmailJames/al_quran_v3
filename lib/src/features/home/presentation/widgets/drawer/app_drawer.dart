@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
 import "package:al_quran_v3/src/features/about/presentation/screens/about_app_page.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/app_language_settings.dart";
@@ -18,9 +19,13 @@ import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/services/platform_services.dart"
+    as platform_services;
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
+import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
+import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
+import "package:al_quran_v3/src/features/auth/presentation/screens/profile_account_screen.dart";
 import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
@@ -70,7 +75,7 @@ Widget drawerSection({
 }) {
   final l10n = AppLocalizations.of(context);
   return BlocBuilder<ThemeCubit, ThemeState>(
-    builder: (context, themeState) {
+    builder: (context, ThemeState themeState) {
       return ListView(
         children: [
           if (!isJustIcon)
@@ -147,7 +152,110 @@ Widget drawerSection({
                 ),
               ),
             ),
-          const Gap(20),
+          const Gap(10),
+          if (!isJustIcon)
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                final isAuth = authState is Authenticated;
+                final user = isAuth ? authState.user : null;
+                final name =
+                    user?.displayName ??
+                    (user?.isAnonymous == true
+                        ? l10n.guestUser
+                        : l10n.accountAndSync);
+                final subtitle =
+                    user?.email ??
+                    (isAuth
+                        ? "Cloud Sync Active"
+                        : "Sync notes, pins & history");
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      if (!isDesktop) Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => isAuth
+                              ? const ProfileAccountScreen()
+                              : const AuthScreen(),
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(14),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: themeState.primary.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: themeState.primary.withValues(alpha: 0.2),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 18,
+                            backgroundColor: themeState.primaryShade200,
+                            backgroundImage: user?.photoUrl != null
+                                ? NetworkImage(user!.photoUrl!)
+                                : null,
+                            child: user?.photoUrl == null
+                                ? Icon(
+                                    isAuth
+                                        ? FluentIcons.person_24_filled
+                                        : FluentIcons.cloud_arrow_up_24_regular,
+                                    size: 18,
+                                    color: themeState.primary,
+                                  )
+                                : null,
+                          ),
+                          const Gap(10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  subtitle,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            FluentIcons.chevron_right_24_regular,
+                            size: 16,
+                            color: themeState.primary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          const Gap(10),
           if (!isJustIcon)
             Padding(
               padding: const EdgeInsets.only(left: 18),
@@ -168,7 +276,9 @@ Widget drawerSection({
               if (!isDesktop) Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const QuranSearchScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const QuranSearchScreen(),
+                ),
               );
             },
             leading: Icon(
@@ -183,26 +293,26 @@ Widget drawerSection({
                   ),
           ),
           const Gap(5),
-            ListTile(
-              minTileHeight: 40,
-              onTap: () async {
-                if (!isDesktop) Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
-                );
-              },
-              leading: Icon(
-                FluentIcons.settings_24_filled,
-                color: themeState.primary,
-              ),
-              title: isJustIcon
-                  ? null
-                  : Text(
-                      l10n.settings,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              if (!isDesktop) Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            leading: Icon(
+              FluentIcons.settings_24_filled,
+              color: themeState.primary,
             ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.settings,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
           const Gap(5),
           ListTile(
             minTileHeight: 40,

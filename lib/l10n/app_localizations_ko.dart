@@ -1685,4 +1685,84 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       '매일 엄선된 구절, 마지막으로 읽은 구절, 고정된 맞춤 구절 중에서 선택';
+
+  @override
+  String get accountAndSync => '계정 및 클라우드 동기화';
+
+  @override
+  String get signIn => '로그인';
+
+  @override
+  String get signUp => '계정 만들기';
+
+  @override
+  String get signOut => '로그아웃';
+
+  @override
+  String get deleteAccount => '계정 및 데이터 삭제';
+
+  @override
+  String get deleteAccountTitle => '계정을 삭제하시겠습니까?';
+
+  @override
+  String get deleteAccountWarning =>
+      '이렇게 하면 계정과 클라우드에 동기화된 모든 메모, 북마크, 읽기 기록이 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.';
+
+  @override
+  String get deleteAccountConfirm => '예, 모두 삭제합니다';
+
+  @override
+  String get syncNow => '지금 동기화';
+
+  @override
+  String get syncing => '동기화 중...';
+
+  @override
+  String get syncSuccess => '데이터가 성공적으로 동기화되었습니다!';
+
+  @override
+  String get syncFailed => '동기화에 실패했습니다. 인터넷 연결을 확인하세요.';
+
+  @override
+  String get googleSignIn => 'Google로 계속';
+
+  @override
+  String get email => '이메일 주소';
+
+  @override
+  String get password => '비밀번호';
+
+  @override
+  String get fullName => '전체 이름';
+
+  @override
+  String get forgotPassword => '비밀번호를 잊으셨나요?';
+
+  @override
+  String get sendResetLink => '재설정 링크 보내기';
+
+  @override
+  String get resetPasswordEmailSent => '비밀번호 재설정 링크가 이메일로 전송되었습니다!';
+
+  @override
+  String get continueAsGuest => '게스트로 계속';
+
+  @override
+  String get alreadyHaveAccount => '이미 계정이 있으신가요? 로그인';
+
+  @override
+  String get dontHaveAccount => '계정이 없으신가요? 가입하기';
+
+  @override
+  String get privacyPolicyNotice => '계속 진행하면 서비스 약관 및 개인정보 보호정책에 동의하게 됩니다.';
+
+  @override
+  String get guestUser => '게스트 사용자';
+
+  @override
+  String get syncedCloudBackup => '클라우드 동기화';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      '모든 기기에서 메모, 고정 항목 및 읽기 기록을 동기화 상태로 유지하세요.';
 }

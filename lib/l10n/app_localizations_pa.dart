@@ -1720,4 +1720,87 @@ class AppLocalizationsPa extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'ਰੋਜ਼ਾਨਾ ਚੁਣੀਆਂ ਗਈਆਂ, ਆਖਰੀ ਪੜ੍ਹੀਆਂ ਗਈਆਂ, ਜਾਂ ਪਿੰਨ ਕੀਤੀਆਂ ਆਇਤਾਂ ਵਿੱਚੋਂ ਚੁਣੋ';
+
+  @override
+  String get accountAndSync => 'ਖਾਤਾ ਅਤੇ ਕਲਾਉਡ ਸਿੰਕ';
+
+  @override
+  String get signIn => 'ਸਾਈਨ ਇਨ';
+
+  @override
+  String get signUp => 'ਖਾਤਾ ਬਣਾਓ';
+
+  @override
+  String get signOut => 'ਸਾਈਨ ਆਊਟ';
+
+  @override
+  String get deleteAccount => 'ਖਾਤਾ ਅਤੇ ਡਾਟਾ ਮਿਟਾਓ';
+
+  @override
+  String get deleteAccountTitle => 'ਕੀ ਖਾਤਾ ਮਿਟਾਉਣਾ ਹੈ?';
+
+  @override
+  String get deleteAccountWarning =>
+      'ਇਹ ਤੁਹਾਡੇ ਖਾਤੇ ਅਤੇ ਕਲਾਉਡ ਤੋਂ ਤੁਹਾਡੇ ਸਾਰੇ ਸਮਕਾਲੀ ਨੋਟਸ, ਬੁੱਕਮਾਰਕਸ ਅਤੇ ਪੜ੍ਹਨ ਦੇ ਇਤਿਹਾਸ ਨੂੰ ਪੱਕੇ ਤੌਰ \'ਤੇ ਮਿਟਾ ਦੇਵੇਗਾ। ਇਸ ਕਾਰਵਾਈ ਨੂੰ ਵਾਪਸ ਨਹੀਂ ਲਿਆ ਜਾ ਸਕਦਾ।';
+
+  @override
+  String get deleteAccountConfirm => 'ਹਾਂ, ਸਭ ਕੁਝ ਮਿਟਾਓ';
+
+  @override
+  String get syncNow => 'ਹੁਣੇ ਸਿੰਕ ਕਰੋ';
+
+  @override
+  String get syncing => 'ਸਿੰਕ ਹੋ ਰਿਹਾ ਹੈ...';
+
+  @override
+  String get syncSuccess => 'ਡਾਟਾ ਸਫਲਤਾਪੂਰਵਕ ਸਿੰਕ ਹੋ ਗਿਆ!';
+
+  @override
+  String get syncFailed =>
+      'ਸਿੰਕ ਅਸਫਲ ਰਿਹਾ। ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ।';
+
+  @override
+  String get googleSignIn => 'Google ਨਾਲ ਜਾਰੀ ਰੱਖੋ';
+
+  @override
+  String get email => 'ਈਮੇਲ ਪਤਾ';
+
+  @override
+  String get password => 'ਪਾਸਵਰਡ';
+
+  @override
+  String get fullName => 'ਪੂਰਾ ਨਾਮ';
+
+  @override
+  String get forgotPassword => 'ਕੀ ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ ਹੋ?';
+
+  @override
+  String get sendResetLink => 'ਰੀਸੈੱਟ ਲਿੰਕ ਭੇਜੋ';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'ਪਾਸਵਰਡ ਰੀਸੈਟ ਲਿੰਕ ਤੁਹਾਡੀ ਈਮੇਲ \'ਤੇ ਭੇਜਿਆ ਗਿਆ ਹੈ!';
+
+  @override
+  String get continueAsGuest => 'ਮਹਿਮਾਨ ਵਜੋਂ ਜਾਰੀ ਰੱਖੋ';
+
+  @override
+  String get alreadyHaveAccount => 'ਕੀ ਪਹਿਲਾਂ ਹੀ ਖਾਤਾ ਹੈ? ਸਾਈਨ ਇਨ ਕਰੋ';
+
+  @override
+  String get dontHaveAccount => 'ਕੀ ਖਾਤਾ ਨਹੀਂ ਹੈ? ਸਾਈਨ ਅੱਪ ਕਰੋ';
+
+  @override
+  String get privacyPolicyNotice =>
+      'ਜਾਰੀ ਰੱਖ ਕੇ, ਤੁਸੀਂ ਸਾਡੀਆਂ ਸੇਵਾ ਦੀਆਂ ਸ਼ਰਤਾਂ ਅਤੇ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਨਾਲ ਸਹਿਮਤ ਹੁੰਦੇ ਹੋ।';
+
+  @override
+  String get guestUser => 'ਮਹਿਮਾਨ ਉਪਭੋਗਤਾ';
+
+  @override
+  String get syncedCloudBackup => 'ਕਲਾਉਡ ਸਿੰਕ੍ਰੋਨਾਈਜ਼ੇਸ਼ਨ';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'ਆਪਣੇ ਸਾਰੇ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਆਪਣੇ ਨੋਟਸ, ਪਿੰਨ ਅਤੇ ਪੜ੍ਹਨ ਦੇ ਇਤਿਹਾਸ ਨੂੰ ਸਿੰਕ ਰੱਖੋ।';
 }

@@ -45,6 +45,10 @@ import 'package:al_quran_v3/src/features/audio/presentation/cubit/player_state_c
     as _i525;
 import 'package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart'
     as _i730;
+import 'package:al_quran_v3/src/features/auth/data/datasources/firebase_auth_datasource.dart'
+    as _i1061;
+import 'package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart'
+    as _i794;
 import 'package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart'
     as _i169;
 import 'package:al_quran_v3/src/features/collections/data/repositories/collections_repository_impl.dart'
@@ -219,6 +223,10 @@ import 'package:al_quran_v3/src/features/surah_list/domain/usecases/get_surah_na
     as _i626;
 import 'package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_cubit.dart'
     as _i563;
+import 'package:al_quran_v3/src/features/sync/data/services/cloud_sync_service.dart'
+    as _i1071;
+import 'package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart'
+    as _i778;
 import 'package:al_quran_v3/src/features/tafsir/data/datasources/tafsir_local_datasource.dart'
     as _i563;
 import 'package:al_quran_v3/src/features/tafsir/data/repositories/tafsir_repository_impl.dart'
@@ -317,8 +325,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i662.SurahNavigationLocalDataSource>(
       () => _i662.SurahNavigationLocalDataSource(),
     );
+    gh.lazySingleton<_i1071.CloudSyncService>(() => _i1071.CloudSyncService());
     gh.lazySingleton<_i563.TafsirLocalDataSource>(
       () => _i563.TafsirLocalDataSource(),
+    );
+    gh.lazySingleton<_i1061.FirebaseAuthDataSource>(
+      () => _i1061.FirebaseAuthDataSourceImpl(),
     );
     gh.lazySingleton<_i720.IResourceRepository>(
       () => _i865.ResourceRepositoryImpl(),
@@ -380,6 +392,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i914.IAboutRepository>(
       () => _i294.AboutRepositoryImpl(gh<_i190.AboutLocalDataSource>()),
     );
+    gh.lazySingleton<_i778.SyncCubit>(
+      () => _i778.SyncCubit(syncService: gh<_i1071.CloudSyncService>()),
+    );
     gh.factoryParam<
       _i998.BookSearchCubit,
       bool,
@@ -393,6 +408,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factoryParam<_i178.LanguageCubit, _i498.MyAppLocalization?, dynamic>(
       (initialLocale, _) => _i178.LanguageCubit(initialLocale),
+    );
+    gh.lazySingleton<_i794.AuthCubit>(
+      () =>
+          _i794.AuthCubit(authDataSource: gh<_i1061.FirebaseAuthDataSource>()),
     );
     gh.lazySingleton<_i197.CompassDatasource>(
       () => _i197.CompassDatasourceImpl(),

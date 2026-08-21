@@ -1749,4 +1749,87 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'தினசரி தேர்ந்தெடுக்கப்பட்ட, கடைசியாக வாசித்த அல்லது தனிப்பயன் பின் செய்த வசனங்களுக்கு இடையே தேர்வுசெய்க';
+
+  @override
+  String get accountAndSync => 'கணக்கு மற்றும் கிளவுட் ஒத்திசைவு';
+
+  @override
+  String get signIn => 'உள்நுழைக';
+
+  @override
+  String get signUp => 'கணக்கை உருவாக்குக';
+
+  @override
+  String get signOut => 'வெளியேறுக';
+
+  @override
+  String get deleteAccount => 'கணக்கு மற்றும் தரவை நீக்குக';
+
+  @override
+  String get deleteAccountTitle => 'கணக்கை நீக்கவா?';
+
+  @override
+  String get deleteAccountWarning =>
+      'இது உங்கள் கணக்கையும் கிளவுடில் ஒத்திசைக்கப்பட்ட உங்கள் அனைத்து குறிப்புகள், புக்மார்க்குகள் மற்றும் வாசிப்பு வரலாற்றையும் நிரந்தரமாக நீக்கும். இந்த செயலை செயல்தவிர்க்க முடியாது.';
+
+  @override
+  String get deleteAccountConfirm => 'ஆம், அனைத்தையும் நீக்கு';
+
+  @override
+  String get syncNow => 'இப்போது ஒத்திசைக்க';
+
+  @override
+  String get syncing => 'ஒத்திசைக்கிறது...';
+
+  @override
+  String get syncSuccess => 'தரவு வெற்றிகரமாக ஒத்திசைக்கப்பட்டது!';
+
+  @override
+  String get syncFailed =>
+      'ஒத்திசைவு தோல்வியடைந்தது. உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்.';
+
+  @override
+  String get googleSignIn => 'Google உடன் தொடரவும்';
+
+  @override
+  String get email => 'மின்னஞ்சல் முகவரி';
+
+  @override
+  String get password => 'கடவுச்சொல்';
+
+  @override
+  String get fullName => 'முழுப் பெயர்';
+
+  @override
+  String get forgotPassword => 'கடவுச்சொல்லை மறந்துவிட்டீர்களா?';
+
+  @override
+  String get sendResetLink => 'மீட்டமைப்பு இணைப்பை அனுப்புக';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'கடவுச்சொல் மீட்டமைப்பு இணைப்பு உங்கள் மின்னஞ்சலுக்கு அனுப்பப்பட்டது!';
+
+  @override
+  String get continueAsGuest => 'விருந்தினராக தொடரவும்';
+
+  @override
+  String get alreadyHaveAccount => 'ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக';
+
+  @override
+  String get dontHaveAccount => 'கணக்கு இல்லையா? பதிவு செய்க';
+
+  @override
+  String get privacyPolicyNotice =>
+      'தொடர்வதன் மூலம், எங்கள் சேவை விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கையை ஏற்கிறீர்கள்.';
+
+  @override
+  String get guestUser => 'விருந்தினர் பயனர்';
+
+  @override
+  String get syncedCloudBackup => 'கிளவுட் ஒத்திசைவு';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'உங்கள் குறிப்புகள், பின்கள் மற்றும் வாசிப்பு வரலாற்றை உங்கள் எல்லா சாதனங்களிலும் ஒத்திசைக்கவும்.';
 }

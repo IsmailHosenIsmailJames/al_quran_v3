@@ -1,14 +1,18 @@
 import "dart:developer";
 
-// import "package:al_quran_v3/firebase_options.dart";
+import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
+import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
+import "package:firebase_core/firebase_core.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/services/platform_services.dart"
+    as platform_services;
 import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
@@ -58,7 +62,21 @@ platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  if (kIsWeb ||
+      defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS ||
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.windows) {
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } catch (e) {
+      debugPrint("Firebase initialization skipped: $e");
+    }
+  }
+
   platform_services.initializePlatform();
 
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
@@ -263,6 +281,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AudioDownloadCubit>()),
         BlocProvider(create: (context) => getIt<AudioLoopCubit>()),
         BlocProvider(create: (context) => getIt<AyahToHighlight>()),
+        BlocProvider(create: (context) => getIt<AuthCubit>()),
+        BlocProvider(create: (context) => getIt<SyncCubit>()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(
@@ -290,9 +310,7 @@ class MyApp extends StatelessWidget {
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
                     brightness: Brightness.light,
-                  ).copyWith(
-                    surface: Colors.white,
-                  ),
+                  ).copyWith(surface: Colors.white),
                   dialogTheme: const DialogThemeData(
                     backgroundColor: Colors.white,
                     surfaceTintColor: Colors.transparent,
@@ -353,9 +371,7 @@ class MyApp extends StatelessWidget {
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: themeState.primary,
                     brightness: Brightness.dark,
-                  ).copyWith(
-                    surface: const Color(0xFF181818),
-                  ),
+                  ).copyWith(surface: const Color(0xFF181818)),
                   dialogTheme: const DialogThemeData(
                     backgroundColor: Color(0xFF181818),
                     surfaceTintColor: Colors.transparent,
