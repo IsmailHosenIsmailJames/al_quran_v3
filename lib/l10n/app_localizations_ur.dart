@@ -1644,4 +1644,16 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get script => 'رسم الخط';
+
+  @override
+  String get muted => 'خاموش';
+
+  @override
+  String get alerts => 'اطلاعات';
+
+  @override
+  String get off => 'بند';
+
+  @override
+  String get on => 'آن';
 }

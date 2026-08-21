@@ -11,9 +11,8 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/fasting_sunnah_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/forbidden_prayer_times_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_hero_card.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_item_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_quick_settings_sheet.dart";
-import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_horizontal_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -77,17 +76,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     ..madhab = locationState.madhab ?? Madhab.shafi,
             );
 
-            final currentPrayer = prayerTimes.currentPrayer(date: now);
-            final nextPrayer = prayerTimes.nextPrayer(date: now);
-
             return Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 700),
                 child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 14).copyWith(
-                    top: mediaQueryData.padding.top + 10,
-                    bottom: 120,
-                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                  ).copyWith(top: mediaQueryData.padding.top + 10, bottom: 120),
                   children: [
                     // Top App Header: Location & Action Buttons
                     _buildTopHeader(
@@ -116,79 +111,20 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     // Live Next Prayer Hero Card
                     PrayerHeroCard(prayerTimes: prayerTimes),
 
-                    const Gap(18),
+                    const Gap(14),
 
-                    // Section Title: Daily Prayers
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              FluentIcons.clock_24_regular,
-                              size: 20,
-                              color: themeState.primary,
-                            ),
-                            const Gap(8),
-                            Text(
-                              l10n.prayerTimes,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: isDark
-                                    ? Colors.white
-                                    : Colors.grey.shade900,
-                              ),
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () =>
-                              PrayerQuickSettingsSheet.show(context, prayerTimes),
-                          borderRadius: BorderRadius.circular(8),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 4,
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  locationState.madhab == Madhab.hanafi
-                                      ? l10n.hanafi
-                                      : l10n.shafie,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: themeState.primary,
-                                  ),
-                                ),
-                                const Gap(4),
-                                Icon(
-                                  FluentIcons.chevron_down_16_regular,
-                                  size: 14,
-                                  color: themeState.primary,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(8),
+                    // Compact Horizontal 5-Prayer Card
+                    PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
 
-                    // Vertical List of Core Prayers
-                    ..._buildPrayerCards(prayerTimes, now, currentPrayer, nextPrayer),
-
-                    const Gap(20),
-
-                    // Fasting & Voluntary Prayers Grid (Suhur, Iftar, Duha, Tahajjud)
-                    FastingSunnahCard(prayerTimes: prayerTimes),
-
-                    const Gap(20),
+                    const Gap(14),
 
                     // Forbidden Prayer Times Card
                     ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
+
+                    const Gap(14),
+
+                    // Fasting & Voluntary 3-Column Row (Suhur End, Iftar Start, Tahajjud Start)
+                    FastingSunnahCard(prayerTimes: prayerTimes),
                   ],
                 ),
               ),
@@ -210,9 +146,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.04)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
@@ -242,7 +176,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LocationAcquire(backToPage: true),
+                    builder: (context) =>
+                        const LocationAcquire(backToPage: true),
                   ),
                 );
               },
@@ -255,7 +190,9 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                   FutureBuilder(
@@ -326,25 +263,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                     size: 20,
                   ),
           ),
-          // Calendar View Button
-          IconButton(
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      PrayerTimesCalenderView(prayerTimes: prayerTimes),
-                ),
-              );
-            },
-            icon: Icon(
-              FluentIcons.calendar_month_24_regular,
-              color: themeState.primary,
-              size: 20,
-            ),
-          ),
+
           // Settings Button
           IconButton(
             visualDensity: VisualDensity.compact,
@@ -377,8 +296,10 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     bool isDark,
     AppLocalizations l10n,
   ) {
-    final gregorianFormatted =
-        DateFormat("d MMMM yyyy", l10n.localeName).format(DateTime.now());
+    final gregorianFormatted = DateFormat(
+      "d MMMM yyyy",
+      l10n.localeName,
+    ).format(DateTime.now());
 
     final methodEnum =
         locationState.calculationMethod?.method ??
@@ -494,36 +415,5 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
         ),
       ],
     );
-  }
-
-  List<Widget> _buildPrayerCards(
-    PrayerTimes prayerTimes,
-    DateTime now,
-    Prayer? currentPrayer,
-    Prayer? nextPrayer,
-  ) {
-    final prayers = [
-      Prayer.fajr,
-      Prayer.sunrise,
-      Prayer.dhuhr,
-      Prayer.asr,
-      Prayer.maghrib,
-      Prayer.isha,
-    ];
-
-    return prayers.map((prayer) {
-      final time = prayerTimes.timeForPrayer(prayer)?.toLocal() ?? now;
-      final isActive = currentPrayer == prayer;
-      final isNext = nextPrayer == prayer;
-      final isPassed = now.isAfter(time) && !isActive;
-
-      return PrayerItemCard(
-        prayer: prayer,
-        time: time,
-        isActive: isActive,
-        isNext: isNext,
-        isPassed: isPassed,
-      );
-    }).toList();
   }
 }

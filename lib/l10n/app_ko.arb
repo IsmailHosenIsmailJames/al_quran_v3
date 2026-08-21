@@ -486,5 +486,9 @@
   "searchSurahHint": "이름이나 번호로 수라 검색...",
   "fullscreen": "전체 화면",
   "back": "뒤로",
-  "script": "서체"
+  "script": "서체",
+  "muted": "음소거",
+  "alerts": "알림",
+  "off": "꺼짐",
+  "on": "켜짐"
 }

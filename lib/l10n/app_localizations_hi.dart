@@ -1645,4 +1645,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get script => 'स्क्रिप्ट';
+
+  @override
+  String get muted => 'म्यूट';
+
+  @override
+  String get alerts => 'अलर्ट';
+
+  @override
+  String get off => 'बंद';
+
+  @override
+  String get on => 'चालू';
 }

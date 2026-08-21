@@ -1643,4 +1643,16 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get script => 'Yazı';
+
+  @override
+  String get muted => 'Sessiz';
+
+  @override
+  String get alerts => 'Uyarılar';
+
+  @override
+  String get off => 'Kapalı';
+
+  @override
+  String get on => 'Açık';
 }

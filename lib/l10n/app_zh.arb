@@ -748,5 +748,9 @@
   "searchSurahHint": "按名称或编号搜索苏拉...",
   "fullscreen": "全屏",
   "back": "返回",
-  "script": "字体"
+  "script": "字体",
+  "muted": "静音",
+  "alerts": "提醒",
+  "off": "关闭",
+  "on": "开启"
 }

@@ -1641,4 +1641,16 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get script => 'ਸਕ੍ਰਿਪਟ';
+
+  @override
+  String get muted => 'ਮਿਊਟ';
+
+  @override
+  String get alerts => 'ਚੇਤਾਵਨੀਆਂ';
+
+  @override
+  String get off => 'ਬੰਦ';
+
+  @override
+  String get on => 'ਚਾਲੂ';
 }

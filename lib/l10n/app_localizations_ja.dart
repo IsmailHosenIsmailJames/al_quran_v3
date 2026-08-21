@@ -1613,4 +1613,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get script => '書体';
+
+  @override
+  String get muted => '消音';
+
+  @override
+  String get alerts => '通知';
+
+  @override
+  String get off => 'オフ';
+
+  @override
+  String get on => 'オン';
 }

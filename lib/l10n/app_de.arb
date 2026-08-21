@@ -486,5 +486,9 @@
   "searchSurahHint": "Sure nach Name oder Nummer suchen...",
   "fullscreen": "Vollbild",
   "back": "Zurück",
-  "script": "Schrift"
+  "script": "Schrift",
+  "muted": "Stumm",
+  "alerts": "Benachrichtigungen",
+  "off": "Aus",
+  "on": "Ein"
 }

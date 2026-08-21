@@ -1648,4 +1648,16 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get script => 'Xətt';
+
+  @override
+  String get muted => 'Səssiz';
+
+  @override
+  String get alerts => 'Xəbərdarlıqlar';
+
+  @override
+  String get off => 'Bağlı';
+
+  @override
+  String get on => 'Açıq';
 }

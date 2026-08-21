@@ -486,5 +486,9 @@
   "searchSurahHint": "Pesquisar surata por nome ou número...",
   "fullscreen": "Tela cheia",
   "back": "Voltar",
-  "script": "Escrita"
+  "script": "Escrita",
+  "muted": "Silenciado",
+  "alerts": "Alertas",
+  "off": "Desligado",
+  "on": "Ligado"
 }

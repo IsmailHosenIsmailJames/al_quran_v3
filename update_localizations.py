@@ -7,25 +7,45 @@ languages = [
 ]
 
 translations = {
-    "back": {
-        "en": "Back", "bn": "ফিরে যান", "ar": "رجوع",
-        "tr": "Geri", "ur": "واپس", "fa": "بازگشت",
-        "id": "Kembali", "ms": "Kembali", "fr": "Retour",
-        "de": "Zurück", "es": "Atrás", "ru": "Назад",
-        "hi": "पीछे", "pt": "Voltar", "it": "Indietro",
-        "ja": "戻る", "ko": "뒤로", "zh": "返回", "vi": "Quay lại",
-        "sw": "Nyuma", "az": "Geri", "kk": "Артқа",
-        "pa": "ਵਾਪਸ", "ps": "شاته", "ta": "பின்செல்"
+    "muted": {
+        "en": "Muted", "bn": "মিউট", "ar": "مكتوم",
+        "tr": "Sessiz", "ur": "خاموش", "fa": "بی‌صدا",
+        "id": "Dibisukan", "ms": "Dibisukan", "fr": "Muet",
+        "de": "Stumm", "es": "Silenciado", "ru": "Без звука",
+        "hi": "म्यूट", "pt": "Silenciado", "it": "Disattivato",
+        "ja": "消音", "ko": "음소거", "zh": "静音", "vi": "Tắt tiếng",
+        "sw": "Kimya", "az": "Səssiz", "kk": "Дыбыссыз",
+        "pa": "ਮਿਊਟ", "ps": "بې غږه", "ta": "அமைதி"
     },
-    "script": {
-        "en": "Script", "bn": "স্ক্রিপ্ট", "ar": "رسم الخط",
-        "tr": "Yazı", "ur": "رسم الخط", "fa": "رسم الخط",
-        "id": "Skrip", "ms": "Skrip", "fr": "Écriture",
-        "de": "Schrift", "es": "Escritura", "ru": "Шрифт",
-        "hi": "स्क्रिप्ट", "pt": "Escrita", "it": "Scrittura",
-        "ja": "書体", "ko": "서체", "zh": "字体", "vi": "Chữ viết",
-        "sw": "Nakala", "az": "Xətt", "kk": "Жазу",
-        "pa": "ਸਕ੍ਰਿਪਟ", "ps": "لیک", "ta": "எழுத்துரு"
+    "alerts": {
+        "en": "Alerts", "bn": "অ্যালার্ট", "ar": "تنبيهات",
+        "tr": "Uyarılar", "ur": "اطلاعات", "fa": "هشدارها",
+        "id": "Pemberitahuan", "ms": "Pemberitahuan", "fr": "Alertes",
+        "de": "Benachrichtigungen", "es": "Alertas", "ru": "Оповещения",
+        "hi": "अलर्ट", "pt": "Alertas", "it": "Avvisi",
+        "ja": "通知", "ko": "알림", "zh": "提醒", "vi": "Thông báo",
+        "sw": "Tahadhari", "az": "Xəbərdarlıqlar", "kk": "Ескертулер",
+        "pa": "ਚੇਤਾਵਨੀਆਂ", "ps": "خبرتیاوې", "ta": "விழிப்பூட்டல்கள்"
+    },
+    "off": {
+        "en": "Off", "bn": "বন্ধ", "ar": "إيقاف",
+        "tr": "Kapalı", "ur": "بند", "fa": "خاموش",
+        "id": "Mati", "ms": "Mati", "fr": "Désactivé",
+        "de": "Aus", "es": "Desactivado", "ru": "Выкл",
+        "hi": "बंद", "pt": "Desligado", "it": "Spento",
+        "ja": "オフ", "ko": "꺼짐", "zh": "关闭", "vi": "Tắt",
+        "sw": "Imezimwa", "az": "Bağlı", "kk": "Өшірулі",
+        "pa": "ਬੰਦ", "ps": "بند", "ta": "முடக்கு"
+    },
+    "on": {
+        "en": "On", "bn": "চালু", "ar": "تشغيل",
+        "tr": "Açık", "ur": "آن", "fa": "روشن",
+        "id": "Aktif", "ms": "Aktif", "fr": "Activé",
+        "de": "Ein", "es": "Activado", "ru": "Вкл",
+        "hi": "चालू", "pt": "Ligado", "it": "Acceso",
+        "ja": "オン", "ko": "켜짐", "zh": "开启", "vi": "Bật",
+        "sw": "Imewashwa", "az": "Açıq", "kk": "Қосулы",
+        "pa": "ਚਾਲੂ", "ps": "روښانه", "ta": "இயக்கு"
     }
 }
 

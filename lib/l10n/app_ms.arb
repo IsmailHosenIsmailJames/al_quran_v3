@@ -748,5 +748,9 @@
   "searchSurahHint": "Cari Surah mengikut nama atau nombor...",
   "fullscreen": "Skrin Penuh",
   "back": "Kembali",
-  "script": "Skrip"
+  "script": "Skrip",
+  "muted": "Dibisukan",
+  "alerts": "Pemberitahuan",
+  "off": "Mati",
+  "on": "Aktif"
 }
