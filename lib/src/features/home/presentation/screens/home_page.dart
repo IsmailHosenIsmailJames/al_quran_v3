@@ -7,12 +7,14 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_widget_service.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
 import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
+import "package:home_widget/home_widget.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -165,6 +167,27 @@ class _HomePageState extends State<HomePage> {
       initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
     );
     super.initState();
+
+    // Initialize HomeWidget and handle deep links from home/lock screen widgets
+    PrayerWidgetService.updateWidgets();
+    HomeWidget.initiallyLaunchedFromHomeWidget().then((uri) {
+      if (uri != null) {
+        _handleWidgetUri(uri);
+      }
+    });
+    HomeWidget.widgetClicked.listen((uri) {
+      if (uri != null) {
+        _handleWidgetUri(uri);
+      }
+    });
+  }
+
+  void _handleWidgetUri(Uri uri) {
+    // Navigate to Prayer Tab (index 1 on mobile)
+    context.read<OthersSettingsCubit>().setTabIndex(1);
+    if (pageController.hasClients) {
+      pageController.jumpToPage(1);
+    }
   }
 
   @override

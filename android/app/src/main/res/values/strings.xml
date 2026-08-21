@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_small_description">Displays the next prayer time, remaining countdown, and location.</string>
+    <string name="widget_medium_description">Displays today\'s 5 prayer schedule with the current active prayer highlighted and next prayer countdown.</string>
+</resources>

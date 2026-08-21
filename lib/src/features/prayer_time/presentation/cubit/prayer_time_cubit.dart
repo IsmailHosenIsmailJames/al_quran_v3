@@ -1,5 +1,6 @@
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/location/domain/entities/location_coordinates.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_widget_service.dart";
 import "package:al_quran_v3/src/features/prayer_time/domain/entities/prayer_time_entity.dart";
 import "package:al_quran_v3/src/features/prayer_time/domain/usecases/get_prayer_times_usecase.dart";
 import "package:al_quran_v3/src/features/prayer_time/domain/usecases/save_prayer_settings_usecase.dart";
@@ -50,6 +51,7 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
         isLoading: false,
         hasError: false,
       ));
+      PrayerWidgetService.updateWidgets();
     } catch (_) {
       emit(state.copyWith(isLoading: false, hasError: true));
     }
@@ -58,10 +60,12 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
   Future<void> updateCalculationMethod(CalculationParameters method) async {
     await _savePrayerSettingsUseCase.saveCalculationMethod(method);
     await _schedulePrayerNotificationsUseCase();
+    await PrayerWidgetService.updateWidgets();
   }
 
   Future<void> updateMadhab(Madhab madhab) async {
     await _savePrayerSettingsUseCase.saveMadhab(madhab);
     await _schedulePrayerNotificationsUseCase();
+    await PrayerWidgetService.updateWidgets();
   }
 }
