@@ -1727,4 +1727,87 @@ class AppLocalizationsAz extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Gündəlik seçilmiş, son oxunmuş və ya xüsusi sancılmış ayələr arasında seçim edin';
+
+  @override
+  String get accountAndSync => 'Hesab və Bulud Sinxronizasiyası';
+
+  @override
+  String get signIn => 'Daxil ol';
+
+  @override
+  String get signUp => 'Hesab Yarat';
+
+  @override
+  String get signOut => 'Çıxış';
+
+  @override
+  String get deleteAccount => 'Hesabı və Məlumatları Sil';
+
+  @override
+  String get deleteAccountTitle => 'Hesab Silinsin?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Bu, hesabınızı və buluddakı bütün sinxronlaşdırılmış qeydlərinizi, əlfəcinlərinizi və oxu tarixçənizi həmişəlik siləcək. Bu əməliyyat geri qaytarıla bilməz.';
+
+  @override
+  String get deleteAccountConfirm => 'Bəli, Hər Şeyi Sil';
+
+  @override
+  String get syncNow => 'İndi Sinxronlaşdırın';
+
+  @override
+  String get syncing => 'Sinxronlaşdırılır...';
+
+  @override
+  String get syncSuccess => 'Məlumatlar uğurla sinxronlaşdırıldı!';
+
+  @override
+  String get syncFailed =>
+      'Sinxronizasiya uğursuz oldu. İnternet bağlantınızı yoxlayın.';
+
+  @override
+  String get googleSignIn => 'Google ilə davam edin';
+
+  @override
+  String get email => 'E-poçt Ünvanı';
+
+  @override
+  String get password => 'Şifrə';
+
+  @override
+  String get fullName => 'Tam Ad';
+
+  @override
+  String get forgotPassword => 'Şifrəni unutmusunuz?';
+
+  @override
+  String get sendResetLink => 'Sıfırlama Linki Göndər';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Şifrə sıfırlama linki e-poçtunuza göndərildi!';
+
+  @override
+  String get continueAsGuest => 'Qonaq kimi davam edin';
+
+  @override
+  String get alreadyHaveAccount => 'Artıq hesabınız var? Daxil olun';
+
+  @override
+  String get dontHaveAccount => 'Hesabınız yoxdur? Qeydiyyatdan keçin';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Davam etməklə Xidmət Şərtlərimiz və Məxfilik Siyasətimizlə razılaşırsınız.';
+
+  @override
+  String get guestUser => 'Qonaq İstifadəçi';
+
+  @override
+  String get syncedCloudBackup => 'Bulud Sinxronizasiyası';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Qeydlərinizi, sancaqlı ayələrinizi və oxu tarixçənizi bütün cihazlarınızda sinxron saxlayın.';
 }

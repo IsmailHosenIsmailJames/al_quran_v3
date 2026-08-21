@@ -1718,4 +1718,87 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Pilih antara ayat pilihan harian, terakhir dibaca, atau ayat tersuai disematkan';
+
+  @override
+  String get accountAndSync => 'Akaun & Penyegerakan Awan';
+
+  @override
+  String get signIn => 'Log Masuk';
+
+  @override
+  String get signUp => 'Cipta Akaun';
+
+  @override
+  String get signOut => 'Log Keluar';
+
+  @override
+  String get deleteAccount => 'Padam Akaun & Data';
+
+  @override
+  String get deleteAccountTitle => 'Padam Akaun?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Ini akan memadamkan akaun anda dan semua nota, penanda halaman, dan sejarah bacaan yang diselaraskan dari awan secara kekal. Tindakan ini tidak boleh dibatalkan.';
+
+  @override
+  String get deleteAccountConfirm => 'Ya, Padam Semua';
+
+  @override
+  String get syncNow => 'Segerak Sekarang';
+
+  @override
+  String get syncing => 'Menyegerakkan...';
+
+  @override
+  String get syncSuccess => 'Data berjaya diselaraskan!';
+
+  @override
+  String get syncFailed =>
+      'Penyegerakan gagal. Sila periksa sambungan internet anda.';
+
+  @override
+  String get googleSignIn => 'Teruskan dengan Google';
+
+  @override
+  String get email => 'Alamat E-mel';
+
+  @override
+  String get password => 'Kata Laluan';
+
+  @override
+  String get fullName => 'Nama Penuh';
+
+  @override
+  String get forgotPassword => 'Lupa Kata Laluan?';
+
+  @override
+  String get sendResetLink => 'Hantar Pautan Tetap Semula';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Pautan set semula kata laluan telah dihantar ke e-mel anda!';
+
+  @override
+  String get continueAsGuest => 'Teruskan sebagai Tetamu';
+
+  @override
+  String get alreadyHaveAccount => 'Sudah mempunyai akaun? Log Masuk';
+
+  @override
+  String get dontHaveAccount => 'Belum mempunyai akaun? Daftar';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Dengan meneruskan, anda bersetuju dengan Syarat Perkhidmatan & Dasar Privasi kami.';
+
+  @override
+  String get guestUser => 'Pengguna Tetamu';
+
+  @override
+  String get syncedCloudBackup => 'Penyegerakan Awan';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Pastikan nota, pin, dan sejarah bacaan anda diselaraskan di semua peranti anda.';
 }

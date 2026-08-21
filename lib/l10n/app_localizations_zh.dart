@@ -1664,4 +1664,82 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get customizeWidgetAyahAndPrayersDesc => '在每日精选、上次阅读或自定义固定经文之间进行选择';
+
+  @override
+  String get accountAndSync => '账户与云端同步';
+
+  @override
+  String get signIn => '登录';
+
+  @override
+  String get signUp => '创建账户';
+
+  @override
+  String get signOut => '退出登录';
+
+  @override
+  String get deleteAccount => '删除账户和数据';
+
+  @override
+  String get deleteAccountTitle => '删除账户？';
+
+  @override
+  String get deleteAccountWarning => '这将永久删除您的账户以及云端同步的所有笔记、书签和阅读历史记录。此操作无法撤消。';
+
+  @override
+  String get deleteAccountConfirm => '是的，删除全部';
+
+  @override
+  String get syncNow => '立即同步';
+
+  @override
+  String get syncing => '正在同步...';
+
+  @override
+  String get syncSuccess => '数据同步成功！';
+
+  @override
+  String get syncFailed => '同步失败。请检查您的网络连接。';
+
+  @override
+  String get googleSignIn => '通过 Google 继续';
+
+  @override
+  String get email => '电子邮箱';
+
+  @override
+  String get password => '密码';
+
+  @override
+  String get fullName => '全名';
+
+  @override
+  String get forgotPassword => '忘记密码？';
+
+  @override
+  String get sendResetLink => '发送重置链接';
+
+  @override
+  String get resetPasswordEmailSent => '密码重置链接已发送到您的邮箱！';
+
+  @override
+  String get continueAsGuest => '以访客身份继续';
+
+  @override
+  String get alreadyHaveAccount => '已有账户？登录';
+
+  @override
+  String get dontHaveAccount => '还没有账户？注册';
+
+  @override
+  String get privacyPolicyNotice => '继续操作即表示您同意我们的服务条款和隐私政策。';
+
+  @override
+  String get guestUser => '访客用户';
+
+  @override
+  String get syncedCloudBackup => '云端同步';
+
+  @override
+  String get syncedCloudBackupDesc => '在所有设备上同步您的笔记、图钉和阅读历史记录。';
 }

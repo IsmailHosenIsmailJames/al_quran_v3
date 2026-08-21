@@ -1729,4 +1729,87 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Chọn giữa các câu kinh được chọn lọc hàng ngày, đọc gần nhất hoặc câu kinh đã ghim';
+
+  @override
+  String get accountAndSync => 'Tài khoản & Đồng bộ đám mây';
+
+  @override
+  String get signIn => 'Đăng nhập';
+
+  @override
+  String get signUp => 'Tạo tài khoản';
+
+  @override
+  String get signOut => 'Đăng xuất';
+
+  @override
+  String get deleteAccount => 'Xóa tài khoản & Dữ liệu';
+
+  @override
+  String get deleteAccountTitle => 'Xóa tài khoản?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Thao tác này sẽ xóa vĩnh viễn tài khoản của bạn và tất cả các ghi chú, dấu trang và lịch sử đọc đã đồng bộ khỏi đám mây. Hành động này không thể hoàn tác.';
+
+  @override
+  String get deleteAccountConfirm => 'Có, xóa tất cả';
+
+  @override
+  String get syncNow => 'Đồng bộ ngay';
+
+  @override
+  String get syncing => 'Đang đồng bộ...';
+
+  @override
+  String get syncSuccess => 'Dữ liệu đã được đồng bộ thành công!';
+
+  @override
+  String get syncFailed =>
+      'Đồng bộ thất bại. Vui lòng kiểm tra kết nối internet của bạn.';
+
+  @override
+  String get googleSignIn => 'Tiếp tục với Google';
+
+  @override
+  String get email => 'Địa chỉ Email';
+
+  @override
+  String get password => 'Mật khẩu';
+
+  @override
+  String get fullName => 'Họ và tên';
+
+  @override
+  String get forgotPassword => 'Quên mật khẩu?';
+
+  @override
+  String get sendResetLink => 'Gửi liên kết đặt lại';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Liên kết đặt lại mật khẩu đã được gửi đến email của bạn!';
+
+  @override
+  String get continueAsGuest => 'Tiếp tục với tư cách Khách';
+
+  @override
+  String get alreadyHaveAccount => 'Đã có tài khoản? Đăng nhập';
+
+  @override
+  String get dontHaveAccount => 'Chưa có tài khoản? Đăng ký';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ & Chính sách quyền riêng tư của chúng tôi.';
+
+  @override
+  String get guestUser => 'Người dùng Khách';
+
+  @override
+  String get syncedCloudBackup => 'Đồng bộ đám mây';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Giữ ghi chú, ghim và lịch sử đọc của bạn được đồng bộ hóa trên tất cả các thiết bị.';
 }

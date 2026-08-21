@@ -1720,4 +1720,87 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Choose between daily curated, last read, or custom pinned verses';
+
+  @override
+  String get accountAndSync => 'Account & Cloud Sync';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get signUp => 'Create Account';
+
+  @override
+  String get signOut => 'Sign Out';
+
+  @override
+  String get deleteAccount => 'Delete Account & Data';
+
+  @override
+  String get deleteAccountTitle => 'Delete Account?';
+
+  @override
+  String get deleteAccountWarning =>
+      'This will permanently delete your account and all your synchronized notes, bookmarks, and reading history from the cloud. This action cannot be undone.';
+
+  @override
+  String get deleteAccountConfirm => 'Yes, Delete Everything';
+
+  @override
+  String get syncNow => 'Sync Now';
+
+  @override
+  String get syncing => 'Syncing...';
+
+  @override
+  String get syncSuccess => 'Data synchronized successfully!';
+
+  @override
+  String get syncFailed =>
+      'Sync failed. Please check your internet connection.';
+
+  @override
+  String get googleSignIn => 'Continue with Google';
+
+  @override
+  String get email => 'Email Address';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get forgotPassword => 'Forgot Password?';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Password reset link sent to your email!';
+
+  @override
+  String get continueAsGuest => 'Continue as Guest';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account? Sign In';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account? Sign Up';
+
+  @override
+  String get privacyPolicyNotice =>
+      'By continuing, you agree to our Terms of Service & Privacy Policy.';
+
+  @override
+  String get guestUser => 'Guest User';
+
+  @override
+  String get syncedCloudBackup => 'Cloud Synchronization';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Keep your notes, pins, and reading history synced across all your devices.';
 }

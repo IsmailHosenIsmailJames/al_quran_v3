@@ -1,26 +1,19 @@
 {
   "project_info": {
     "project_number": "562324718404",
+    "firebase_url": "https://alquranwithaudio-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "alquranwithaudio",
     "storage_bucket": "alquranwithaudio.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:562324718404:android:edab7cc24328618369cd11",
+        "mobilesdk_app_id": "1:562324718404:android:cc17455127c7825269cd11",
         "android_client_info": {
           "package_name": "com.ismail_hosen_james.al_bayan_quran"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "562324718404-airjj0ovl6jp5nk3g823qmslo0mm71n7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ismail_hosen_james.al_bayan_quran",
-            "certificate_hash": "a4570595a20fbed15e8487c9abaccd9b13db479c"
-          }
-        },
         {
           "client_id": "562324718404-qcit8fhnjk81cvgj1b6k8sbargh5ohdm.apps.googleusercontent.com",
           "client_type": 3

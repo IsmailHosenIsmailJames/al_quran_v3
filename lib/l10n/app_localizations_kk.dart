@@ -1719,4 +1719,87 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       'Күнделікті таңдалған, соңғы оқылған немесе бекітілген аяттар арасынан таңдаңыз';
+
+  @override
+  String get accountAndSync => 'Тіркелгі және бұлттық синхрондау';
+
+  @override
+  String get signIn => 'Кіру';
+
+  @override
+  String get signUp => 'Тіркелгі жасау';
+
+  @override
+  String get signOut => 'Шығу';
+
+  @override
+  String get deleteAccount => 'Тіркелгі мен деректерді жою';
+
+  @override
+  String get deleteAccountTitle => 'Тіркелгіні жою керек пе?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Бұл сіздің тіркелгіңізді және бұлттағы барлық синхрондалған жазбаларыңызды, бетбелгілеріңізді және оқу тарихыңызды біржола жояды. Бұл әрекетті қайтару мүмкін емес.';
+
+  @override
+  String get deleteAccountConfirm => 'Иә, бәрін жою';
+
+  @override
+  String get syncNow => 'Қазір синхрондау';
+
+  @override
+  String get syncing => 'Синхрондалуда...';
+
+  @override
+  String get syncSuccess => 'Деректер сәтті синхрондалды!';
+
+  @override
+  String get syncFailed =>
+      'Синхрондау сәтсіз аяқталды. Интернет байланысын тексеріңіз.';
+
+  @override
+  String get googleSignIn => 'Google арқылы жалғастыру';
+
+  @override
+  String get email => 'Электрондық пошта';
+
+  @override
+  String get password => 'Құпия сөз';
+
+  @override
+  String get fullName => 'Толық аты-жөні';
+
+  @override
+  String get forgotPassword => 'Құпия сөзді ұмыттыңыз ба?';
+
+  @override
+  String get sendResetLink => 'Қалпына келтіру сілтемесін жіберу';
+
+  @override
+  String get resetPasswordEmailSent =>
+      'Құпия сөзді қалпына келтіру сілтемесі поштаңызға жіберілді!';
+
+  @override
+  String get continueAsGuest => 'Қонақ ретінде жалғастыру';
+
+  @override
+  String get alreadyHaveAccount => 'Тіркелгіңіз бар ма? Кіру';
+
+  @override
+  String get dontHaveAccount => 'Тіркелгіңіз жоқ па? Тіркелу';
+
+  @override
+  String get privacyPolicyNotice =>
+      'Жалғастыру арқылы сіз біздің Қызмет көрсету шарттарымыз бен Құпиялылық саясатымызға келісесіз.';
+
+  @override
+  String get guestUser => 'Қонақ пайдаланушы';
+
+  @override
+  String get syncedCloudBackup => 'Бұлттық синхрондау';
+
+  @override
+  String get syncedCloudBackupDesc =>
+      'Жазбаларыңызды, бекітілген аяттарыңызды және оқу тарихыңызды барлық құрылғыларда синхрондаңыз.';
 }

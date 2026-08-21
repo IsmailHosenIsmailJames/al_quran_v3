@@ -1686,4 +1686,83 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get customizeWidgetAyahAndPrayersDesc =>
       '毎日の厳選、最後に読んだ、または固定されたアーヤから選択';
+
+  @override
+  String get accountAndSync => 'アカウントとクラウド同期';
+
+  @override
+  String get signIn => 'サインイン';
+
+  @override
+  String get signUp => 'アカウント作成';
+
+  @override
+  String get signOut => 'サインアウト';
+
+  @override
+  String get deleteAccount => 'アカウントとデータを削除';
+
+  @override
+  String get deleteAccountTitle => 'アカウントを削除しますか？';
+
+  @override
+  String get deleteAccountWarning =>
+      'これにより、アカウントとクラウド上の同期されたすべてのメモ、ブックマーク、読書履歴が完全に削除されます。この操作は元に戻せません。';
+
+  @override
+  String get deleteAccountConfirm => 'はい、すべて削除します';
+
+  @override
+  String get syncNow => '今すぐ同期';
+
+  @override
+  String get syncing => '同期中...';
+
+  @override
+  String get syncSuccess => 'データが正常に同期されました！';
+
+  @override
+  String get syncFailed => '同期に失敗しました。インターネット接続を確認してください。';
+
+  @override
+  String get googleSignIn => 'Googleで続行';
+
+  @override
+  String get email => 'メールアドレス';
+
+  @override
+  String get password => 'パスワード';
+
+  @override
+  String get fullName => '氏名';
+
+  @override
+  String get forgotPassword => 'パスワードをお忘れですか？';
+
+  @override
+  String get sendResetLink => 'リセットリンクを送信';
+
+  @override
+  String get resetPasswordEmailSent => 'パスワード再設定リンクをメールに送信しました！';
+
+  @override
+  String get continueAsGuest => 'ゲストとして続行';
+
+  @override
+  String get alreadyHaveAccount => '既にアカウントをお持ちですか？サインイン';
+
+  @override
+  String get dontHaveAccount => 'アカウントをお持ちでないですか？登録';
+
+  @override
+  String get privacyPolicyNotice => '続行すると、利用規約とプライバシーポリシーに同意したことになります。';
+
+  @override
+  String get guestUser => 'ゲストユーザー';
+
+  @override
+  String get syncedCloudBackup => 'クラウド同期';
+
+  @override
+  String get syncedCloudBackupDesc => 'すべてのデバイス間でメモ、ピン、読書履歴を同期します。';
 }
