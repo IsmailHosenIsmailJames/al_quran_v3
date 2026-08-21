@@ -3097,6 +3097,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'On'**
   String get on;
+
+  /// No description provided for @homeAndLockWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Home & Lock Widgets'**
+  String get homeAndLockWidgets;
+
+  /// No description provided for @glanceableWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Glanceable Widgets'**
+  String get glanceableWidgets;
+
+  /// No description provided for @glanceableWidgetsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Display daily verses and prayer times on your home screen and lock screen.'**
+  String get glanceableWidgetsDesc;
+
+  /// No description provided for @ayahWidgetDisplayMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Ayah Widget Display Mode'**
+  String get ayahWidgetDisplayMode;
+
+  /// No description provided for @dailyInspiringAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Inspiring Ayah (Curated)'**
+  String get dailyInspiringAyah;
+
+  /// No description provided for @dailyInspiringAyahDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Changes every day at midnight with 365+ profound verses.'**
+  String get dailyInspiringAyahDesc;
+
+  /// No description provided for @lastReadAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Read Ayah'**
+  String get lastReadAyah;
+
+  /// No description provided for @lastReadAyahDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncs with your latest reading position for instant 1-tap resume.'**
+  String get lastReadAyahDesc;
+
+  /// No description provided for @pinnedCustomVerse.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinned Custom Verse'**
+  String get pinnedCustomVerse;
+
+  /// No description provided for @randomDailyAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Random Daily Ayah'**
+  String get randomDailyAyah;
+
+  /// No description provided for @randomDailyAyahDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Picks a random verse every day for fresh reflection.'**
+  String get randomDailyAyahDesc;
+
+  /// No description provided for @updateAllWidgetsNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Update All Widgets Now'**
+  String get updateAllWidgetsNow;
+
+  /// No description provided for @widgetsUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Widgets updated successfully!'**
+  String get widgetsUpdatedSuccessfully;
+
+  /// No description provided for @ayahPinnedToWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Ayah pinned to Home & Lock Screen Widgets!'**
+  String get ayahPinnedToWidgets;
+
+  /// No description provided for @pinToWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin to Home & Lock Widgets'**
+  String get pinToWidgets;
+
+  /// No description provided for @selectPinnedAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Pinned Ayah'**
+  String get selectPinnedAyah;
+
+  /// No description provided for @saveAndApplyToWidget.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Apply to Widget'**
+  String get saveAndApplyToWidget;
+
+  /// No description provided for @howToAddWidgets.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Add Widgets'**
+  String get howToAddWidgets;
+
+  /// No description provided for @customizeWidgetAyahAndPrayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize Widget Ayah & Prayers'**
+  String get customizeWidgetAyahAndPrayers;
+
+  /// No description provided for @customizeWidgetAyahAndPrayersDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose between daily curated, last read, or custom pinned verses'**
+  String get customizeWidgetAyahAndPrayersDesc;
 }
 
 class _AppLocalizationsDelegate

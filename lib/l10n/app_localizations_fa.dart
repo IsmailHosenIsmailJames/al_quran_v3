@@ -1650,4 +1650,70 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get on => 'روشن';
+
+  @override
+  String get homeAndLockWidgets => 'ویجت‌های صفحه اصلی و قفل';
+
+  @override
+  String get glanceableWidgets => 'ویجت‌های در یک نگاه';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'آیات روزانه و اوقات نماز را روی صفحه اصلی و قفل خود نمایش دهید.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'حالت نمایش ویجت آیه';
+
+  @override
+  String get dailyInspiringAyah => 'آیه الهام‌بخش روزانه (منتخب)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'هر روز نیمه‌شب با بیش از ۳۶۵ آیه عمیق و برگزیده تغییر می‌کند.';
+
+  @override
+  String get lastReadAyah => 'آخرین آیه خوانده شده';
+
+  @override
+  String get lastReadAyahDesc =>
+      'با آخرین موقعیت خواندن شما برای ادامه آسان همگام می‌شود.';
+
+  @override
+  String get pinnedCustomVerse => 'آیه سفارشی سنجاق‌شده';
+
+  @override
+  String get randomDailyAyah => 'آیه تصادفی روزانه';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'هر روز آیه‌ای تصادفی را برای تأمل تازه انتخاب می‌کند.';
+
+  @override
+  String get updateAllWidgetsNow => 'به‌روزرسانی همه ویجت‌ها';
+
+  @override
+  String get widgetsUpdatedSuccessfully =>
+      'ویجت‌ها با موفقیت به‌روزرسانی شدند!';
+
+  @override
+  String get ayahPinnedToWidgets => 'آیه در ویجت‌های صفحه اصلی و قفل سنجاق شد!';
+
+  @override
+  String get pinToWidgets => 'سنجاق به ویجت‌ها';
+
+  @override
+  String get selectPinnedAyah => 'انتخاب آیه برای سنجاق';
+
+  @override
+  String get saveAndApplyToWidget => 'ذخیره و اعمال روی ویجت';
+
+  @override
+  String get howToAddWidgets => 'نحوه افزودن ویجت‌ها';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => 'سفارشی‌سازی آیه و نمازهای ویجت';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'بین آیات منتخب روزانه، آخرین خوانده شده یا آیات سنجاق‌شده سفارشی انتخاب کنید';
 }

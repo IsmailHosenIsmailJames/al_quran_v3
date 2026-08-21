@@ -1671,4 +1671,71 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get on => 'Ein';
+
+  @override
+  String get homeAndLockWidgets => 'Start- & Sperrbildschirm-Widgets';
+
+  @override
+  String get glanceableWidgets => 'Widgets auf einen Blick';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Tägliche Verse und Gebetszeiten auf Ihrem Start- und Sperrbildschirm anzeigen.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Anzeigemodus des Vers-Widgets';
+
+  @override
+  String get dailyInspiringAyah => 'Täglicher inspirierender Vers (Ausgewählt)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Wechselt jeden Tag um Mitternacht mit über 365 tiefgründigen Versen.';
+
+  @override
+  String get lastReadAyah => 'Zuletzt gelesener Vers';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Synchronisiert sich mit Ihrer letzten Leseposition für die Fortsetzung mit einem Fingertipp.';
+
+  @override
+  String get pinnedCustomVerse => 'Angehefteter individueller Vers';
+
+  @override
+  String get randomDailyAyah => 'Zufälliger täglicher Vers';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Wählt jeden Tag einen zufälligen Vers für neue Reflexionen aus.';
+
+  @override
+  String get updateAllWidgetsNow => 'Alle Widgets jetzt aktualisieren';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widgets erfolgreich aktualisiert!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Vers an Start- & Sperrbildschirm-Widgets angeheftet!';
+
+  @override
+  String get pinToWidgets => 'An Widgets anheften';
+
+  @override
+  String get selectPinnedAyah => 'Anzuheftenden Vers auswählen';
+
+  @override
+  String get saveAndApplyToWidget => 'Speichern & auf Widget anwenden';
+
+  @override
+  String get howToAddWidgets => 'So fügen Sie Widgets hinzu';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Widget-Verse und Gebete anpassen';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Wählen Sie zwischen täglich ausgewählten, zuletzt gelesenen oder angehefteten Versen';
 }

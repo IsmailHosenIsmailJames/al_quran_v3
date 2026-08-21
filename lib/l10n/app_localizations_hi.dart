@@ -1657,4 +1657,71 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get on => 'चालू';
+
+  @override
+  String get homeAndLockWidgets => 'होम और लॉक स्क्रीन विजेट';
+
+  @override
+  String get glanceableWidgets => 'त्वरित विजेट';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'अपने होम स्क्रीन और लॉक स्क्रीन पर दैनिक आयतें और नमाज़ का समय प्रदर्शित करें।';
+
+  @override
+  String get ayahWidgetDisplayMode => 'आयत विजेट डिस्प्ले मोड';
+
+  @override
+  String get dailyInspiringAyah => 'दैनिक प्रेरणादायक आयत (चयनित)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365+ गहन आयतों के साथ हर रात आधी रात को बदलता है।';
+
+  @override
+  String get lastReadAyah => 'अंतिम पढ़ी गई आयत';
+
+  @override
+  String get lastReadAyahDesc =>
+      '1-टैप में पढ़ना जारी रखने के लिए आपकी अंतिम पढ़ने की स्थिति के साथ सिंक होता है।';
+
+  @override
+  String get pinnedCustomVerse => 'पिन की गई आयत';
+
+  @override
+  String get randomDailyAyah => 'यादृच्छिक दैनिक आयत';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'ताज़ा चिंतन के लिए हर दिन एक यादृच्छिक आयत चुनता है।';
+
+  @override
+  String get updateAllWidgetsNow => 'सभी विजेट अभी अपडेट करें';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'विजेट सफलतापूर्वक अपडेट किए गए!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'आयत होम और लॉक स्क्रीन विजेट पर पिन की गई!';
+
+  @override
+  String get pinToWidgets => 'विजेट पर पिन करें';
+
+  @override
+  String get selectPinnedAyah => 'पिन करने के लिए आयत चुनें';
+
+  @override
+  String get saveAndApplyToWidget => 'सहेजें और विजेट पर लागू करें';
+
+  @override
+  String get howToAddWidgets => 'विजेट कैसे जोड़ें';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'विजेट आयत और नमाज़ को कस्टमाइज़ करें';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'दैनिक चयनित, अंतिम पढ़ी गई, या कस्टम पिन की गई आयतों के बीच चुनें';
 }

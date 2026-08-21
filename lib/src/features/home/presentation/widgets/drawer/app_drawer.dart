@@ -24,6 +24,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
+import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -202,6 +203,29 @@ Widget drawerSection({
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
             ),
+          const Gap(5),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              if (!isDesktop) Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WidgetSettingsScreen(),
+                ),
+              );
+            },
+            leading: Icon(
+              FluentIcons.app_recent_24_filled,
+              color: themeState.primary,
+            ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.homeAndLockWidgets,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
           const Gap(5),
           ListTile(
             minTileHeight: 40,

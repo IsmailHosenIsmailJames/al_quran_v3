@@ -1652,4 +1652,71 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get on => 'Aktif';
+
+  @override
+  String get homeAndLockWidgets => 'Widget Layar Utama & Kunci';
+
+  @override
+  String get glanceableWidgets => 'Widget Sekilas';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Tampilkan ayat harian dan jadwal sholat di layar utama dan layar kunci Anda.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Mode Tampilan Widget Ayat';
+
+  @override
+  String get dailyInspiringAyah => 'Ayat Inspiratif Harian (Pilihan)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Berganti setiap hari tengah malam dengan 365+ ayat pilihan yang mendalam.';
+
+  @override
+  String get lastReadAyah => 'Ayat Terakhir Dibaca';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Menyelaraskan dengan posisi membaca terakhir untuk melanjutkan dengan 1 ketukan.';
+
+  @override
+  String get pinnedCustomVerse => 'Ayat Kustom Disematkan';
+
+  @override
+  String get randomDailyAyah => 'Ayat Harian Acak';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Memilih ayat acak setiap hari untuk refleksi yang segar.';
+
+  @override
+  String get updateAllWidgetsNow => 'Perbarui Semua Widget Sekarang';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widget berhasil diperbarui!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Ayat disematkan ke Widget Layar Utama & Kunci!';
+
+  @override
+  String get pinToWidgets => 'Sematkan ke Widget';
+
+  @override
+  String get selectPinnedAyah => 'Pilih Ayat yang Disematkan';
+
+  @override
+  String get saveAndApplyToWidget => 'Simpan & Terapkan ke Widget';
+
+  @override
+  String get howToAddWidgets => 'Cara Menambahkan Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Kustomisasi Ayat & Jadwal Sholat Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Pilih antara ayat pilihan harian, terakhir dibaca, atau ayat kustom disematkan';
 }

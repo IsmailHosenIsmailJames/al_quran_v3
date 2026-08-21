@@ -1674,4 +1674,73 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get on => 'Acceso';
+
+  @override
+  String get homeAndLockWidgets => 'Widget Schermata Home e Blocco';
+
+  @override
+  String get glanceableWidgets => 'Widget a Colpo d\'Occhio';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Mostra i versetti quotidiani e gli orari di preghiera sulla schermata iniziale e di blocco.';
+
+  @override
+  String get ayahWidgetDisplayMode =>
+      'Modalità di Visualizzazione Widget Versetto';
+
+  @override
+  String get dailyInspiringAyah =>
+      'Versetto Ispiratore Quotidiano (Selezionato)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Cambia ogni giorno a mezzanotte con oltre 365 versetti profondi.';
+
+  @override
+  String get lastReadAyah => 'Ultimo Versetto Letto';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Si sincronizza con la tua ultima posizione di lettura per riprendere con un tocco.';
+
+  @override
+  String get pinnedCustomVerse => 'Versetto Personalizzato Fissato';
+
+  @override
+  String get randomDailyAyah => 'Versetto Giornaliero Casuale';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Sceglie un versetto casuale ogni giorno per una nuova riflessione.';
+
+  @override
+  String get updateAllWidgetsNow => 'Aggiorna Tutti i Widget Ora';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widget aggiornati con successo!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Versetto fissato sui Widget della Schermata Home e Blocco!';
+
+  @override
+  String get pinToWidgets => 'Fissa sui Widget';
+
+  @override
+  String get selectPinnedAyah => 'Seleziona Versetto da Fissare';
+
+  @override
+  String get saveAndApplyToWidget => 'Salva e Applica al Widget';
+
+  @override
+  String get howToAddWidgets => 'Come Aggiungere Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Personalizza Versetto e Preghiere del Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Scegli tra versetti selezionati ogni giorno, ultimi letti o fissati';
 }

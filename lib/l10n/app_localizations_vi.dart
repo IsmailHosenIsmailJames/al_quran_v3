@@ -1660,4 +1660,73 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get on => 'Bật';
+
+  @override
+  String get homeAndLockWidgets => 'Tiện ích Màn hình chính & Khóa';
+
+  @override
+  String get glanceableWidgets => 'Tiện ích xem nhanh';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Hiển thị các câu kinh hàng ngày và thời gian cầu nguyện trên màn hình chính và màn hình khóa.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Chế độ hiển thị tiện ích câu kinh';
+
+  @override
+  String get dailyInspiringAyah =>
+      'Câu kinh truyền cảm hứng hàng ngày (Chọn lọc)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Thay đổi mỗi ngày vào lúc nửa đêm với hơn 365 câu kinh sâu sắc được chọn lọc.';
+
+  @override
+  String get lastReadAyah => 'Câu kinh đọc gần nhất';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Đồng bộ hóa với vị trí đọc gần nhất để tiếp tục chỉ bằng 1 lần chạm.';
+
+  @override
+  String get pinnedCustomVerse => 'Câu kinh ghim tùy chỉnh';
+
+  @override
+  String get randomDailyAyah => 'Câu kinh ngẫu nhiên hàng ngày';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Chọn một câu kinh ngẫu nhiên mỗi ngày để suy ngẫm mới mẻ.';
+
+  @override
+  String get updateAllWidgetsNow => 'Cập nhật tất cả tiện ích ngay';
+
+  @override
+  String get widgetsUpdatedSuccessfully =>
+      'Tiện ích đã được cập nhật thành công!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Câu kinh đã được ghim vào tiện ích Màn hình chính & Khóa!';
+
+  @override
+  String get pinToWidgets => 'Ghim vào tiện ích';
+
+  @override
+  String get selectPinnedAyah => 'Chọn câu kinh để ghim';
+
+  @override
+  String get saveAndApplyToWidget => 'Lưu & Áp dụng cho tiện ích';
+
+  @override
+  String get howToAddWidgets => 'Cách thêm tiện ích';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Tùy chỉnh câu kinh & cầu nguyện trên tiện ích';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Chọn giữa các câu kinh được chọn lọc hàng ngày, đọc gần nhất hoặc câu kinh đã ghim';
 }

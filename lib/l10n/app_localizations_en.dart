@@ -1654,4 +1654,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get on => 'On';
+
+  @override
+  String get homeAndLockWidgets => 'Home & Lock Widgets';
+
+  @override
+  String get glanceableWidgets => 'Glanceable Widgets';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Display daily verses and prayer times on your home screen and lock screen.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Ayah Widget Display Mode';
+
+  @override
+  String get dailyInspiringAyah => 'Daily Inspiring Ayah (Curated)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Changes every day at midnight with 365+ profound verses.';
+
+  @override
+  String get lastReadAyah => 'Last Read Ayah';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Syncs with your latest reading position for instant 1-tap resume.';
+
+  @override
+  String get pinnedCustomVerse => 'Pinned Custom Verse';
+
+  @override
+  String get randomDailyAyah => 'Random Daily Ayah';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Picks a random verse every day for fresh reflection.';
+
+  @override
+  String get updateAllWidgetsNow => 'Update All Widgets Now';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widgets updated successfully!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Ayah pinned to Home & Lock Screen Widgets!';
+
+  @override
+  String get pinToWidgets => 'Pin to Home & Lock Widgets';
+
+  @override
+  String get selectPinnedAyah => 'Select Pinned Ayah';
+
+  @override
+  String get saveAndApplyToWidget => 'Save & Apply to Widget';
+
+  @override
+  String get howToAddWidgets => 'How to Add Widgets';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => 'Customize Widget Ayah & Prayers';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Choose between daily curated, last read, or custom pinned verses';
 }
