@@ -12,8 +12,9 @@ import "package:gap/gap.dart";
 /// A modern card displaying Surah metadata, full localized title, and Arabic calligraphy.
 class SurahListCard extends StatelessWidget {
   final SurahInfoModel surah;
+  final EdgeInsetsGeometry? margin;
 
-  const SurahListCard({super.key, required this.surah});
+  const SurahListCard({super.key, required this.surah, this.margin});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SurahListCard extends StatelessWidget {
     final bool isMakkah = surah.revelationPlace.toLowerCase() == "makkah";
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       decoration: BoxDecoration(
         color: isDark ? Colors.white.withValues(alpha: 0.035) : Colors.white,
         borderRadius: BorderRadius.circular(16),

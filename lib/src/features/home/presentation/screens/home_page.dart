@@ -1,25 +1,23 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
+import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
-import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
-import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
-import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
+import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
-
-import "package:al_quran_v3/main.dart";
-import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,11 +30,10 @@ class _HomePageState extends State<HomePage> {
   late PageController pageController;
 
   List<Widget> getBody() {
-    List<Widget> body = [];
     switch (platformOwn) {
       case platform_services.PlatformOwn.isAndroid:
       case platform_services.PlatformOwn.isIos:
-        body = const [
+        return const [
           QuranPage(),
           PrayerTimePage(),
           QiblaScreen(),
@@ -45,18 +42,16 @@ class _HomePageState extends State<HomePage> {
       case platform_services.PlatformOwn.isWindows:
       case platform_services.PlatformOwn.isMac:
       case platform_services.PlatformOwn.isLinux:
-        body = const [
+        return const [
           QuranPage(),
           PrayerTimePage(),
           AudioPage(),
           SettingsPage(),
         ];
       case platform_services.PlatformOwn.isWeb:
-        body = const [QuranPage(), AudioPage(), SettingsPage()];
       default:
-        body = const [QuranPage(), AudioPage(), SettingsPage()];
+        return const [QuranPage(), AudioPage(), SettingsPage()];
     }
-    return body;
   }
 
   List<BottomNavigationBarItem> getBottomNavItems(
@@ -136,30 +131,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ];
       case platform_services.PlatformOwn.isWeb:
-        return [
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 0
-                  ? FluentIcons.book_16_filled
-                  : FluentIcons.book_24_regular,
-            ),
-            label: l10n.quran,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 1
-                  ? Icons.audiotrack_rounded
-                  : Icons.audiotrack_outlined,
-            ),
-            label: l10n.audio,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 2 ? Icons.settings : Icons.settings_outlined,
-            ),
-            label: l10n.settings,
-          ),
-        ];
       default:
         return [
           BottomNavigationBarItem(
@@ -183,142 +154,6 @@ class _HomePageState extends State<HomePage> {
               tabIndex == 2 ? Icons.settings : Icons.settings_outlined,
             ),
             label: l10n.settings,
-          ),
-        ];
-    }
-  }
-
-  List<Widget> sideNavBar(
-    bool isJustIcon,
-    OthersSettingsState state,
-    AppLocalizations appLocalizations,
-  ) {
-    switch (platformOwn) {
-      case platform_services.PlatformOwn.isAndroid:
-      case platform_services.PlatformOwn.isIos:
-        return [
-          desktopNav(
-            0,
-            state,
-            appLocalizations.alQuran,
-            FluentIcons.book_24_filled,
-            FluentIcons.book_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            1,
-            state,
-            appLocalizations.prayer,
-            FluentIcons.clock_24_filled,
-            FluentIcons.clock_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            2,
-            state,
-            appLocalizations.qibla,
-            FluentIcons.compass_northwest_24_filled,
-            FluentIcons.compass_northwest_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            3,
-            state,
-            appLocalizations.audio,
-            Icons.audiotrack_rounded,
-            Icons.audiotrack_outlined,
-            isJustIcon,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWindows:
-      case platform_services.PlatformOwn.isMac:
-      case platform_services.PlatformOwn.isLinux:
-        return [
-          desktopNav(
-            0,
-            state,
-            appLocalizations.alQuran,
-            FluentIcons.book_24_filled,
-            FluentIcons.book_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            1,
-            state,
-            appLocalizations.prayer,
-            FluentIcons.clock_24_filled,
-            FluentIcons.clock_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            2,
-            state,
-            appLocalizations.audio,
-            Icons.audiotrack_rounded,
-            Icons.audiotrack_outlined,
-            isJustIcon,
-          ),
-          desktopNav(
-            3,
-            state,
-            appLocalizations.settings,
-            Icons.settings,
-            Icons.settings_outlined,
-            isJustIcon,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWeb:
-        return [
-          desktopNav(
-            0,
-            state,
-            appLocalizations.alQuran,
-            FluentIcons.book_24_filled,
-            FluentIcons.book_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            1,
-            state,
-            appLocalizations.audio,
-            Icons.audiotrack_rounded,
-            Icons.audiotrack_outlined,
-            isJustIcon,
-          ),
-          desktopNav(
-            2,
-            state,
-            appLocalizations.settings,
-            Icons.settings,
-            Icons.settings_outlined,
-            isJustIcon,
-          ),
-        ];
-      default:
-        return [
-          desktopNav(
-            0,
-            state,
-            appLocalizations.alQuran,
-            FluentIcons.book_24_filled,
-            FluentIcons.book_24_regular,
-            isJustIcon,
-          ),
-          desktopNav(
-            1,
-            state,
-            appLocalizations.audio,
-            Icons.audiotrack_rounded,
-            Icons.audiotrack_outlined,
-            isJustIcon,
-          ),
-          desktopNav(
-            2,
-            state,
-            appLocalizations.settings,
-            Icons.settings,
-            Icons.settings_outlined,
-            isJustIcon,
           ),
         ];
     }
@@ -333,18 +168,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    ThemeState themeState = context.read<ThemeCubit>().state;
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    bool isSideNav = width > 600;
-    bool isJustDrawerIcon = width < 800;
-    bool isMobileHeight = false;
-    if (height < 500) {
-      isMobileHeight = true;
-      isJustDrawerIcon = true;
-    }
+    final themeState = context.watch<ThemeCubit>().state;
+    final isDark = Theme.brightnessOf(context) == Brightness.dark;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final isSideNav = width > 600 || (height < 500 && width > 450);
 
     return Scaffold(
       extendBody: false,
@@ -378,34 +214,8 @@ class _HomePageState extends State<HomePage> {
             ),
       body: Row(
         children: [
-          if (isSideNav)
-            SafeArea(
-              child: isMobileHeight
-                  ? Row(
-                      children: [
-                        drawerInSidebar(themeState, isJustDrawerIcon, context),
-                        SizedBox(
-                          width: 65,
-                          child: navsInSidebar(themeState, isJustDrawerIcon),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: drawerInSidebar(
-                            themeState,
-                            isJustDrawerIcon,
-                            context,
-                          ),
-                        ),
-                        navsInSidebar(themeState, isJustDrawerIcon),
-                      ],
-                    ),
-            ),
-          if (isSideNav) const VerticalDivider(),
+          if (isSideNav) _buildNavigationRail(context, themeState, isDark, l10n),
           Expanded(
-            flex: 2,
             child: PageView(
               onPageChanged: (value) {
                 context.read<OthersSettingsCubit>().setTabIndex(value);
@@ -420,107 +230,312 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AnimatedContainer navsInSidebar(
-    ThemeState themeState,
-    bool isJustDrawerIcon,
-  ) {
-    AppLocalizations appLocalizations = AppLocalizations.of(context);
-    return AnimatedContainer(
-      decoration: BoxDecoration(
-        color: themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 5),
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 5),
-      width: isJustDrawerIcon ? 70 : 270,
-      duration: const Duration(milliseconds: 200),
-      child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-        builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 7,
-            children: sideNavBar(isJustDrawerIcon, state, appLocalizations),
-          );
-        },
-      ),
-    );
-  }
-
-  AnimatedContainer drawerInSidebar(
-    ThemeState themeState,
-    bool isJustDrawerIcon,
+  Widget _buildNavigationRail(
     BuildContext context,
+    ThemeState themeState,
+    bool isDark,
+    AppLocalizations l10n,
   ) {
-    return AnimatedContainer(
-      decoration: BoxDecoration(
-        color: themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(roundedRadius),
-      ),
-      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 5),
-      padding: const EdgeInsets.only(left: 5),
-      width: isJustDrawerIcon ? 70 : 270,
-      duration: const Duration(milliseconds: 200),
-      child: drawerSection(
-        context: context,
-        isDesktop: true,
-        isJustIcon: isJustDrawerIcon,
-      ),
-    );
-  }
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final bool isCompactHeight = screenHeight < 550;
 
-  Widget desktopNav(
-    int index,
-    OthersSettingsState state,
-    String title,
-    IconData selectedIcon,
-    IconData unSelectedIcon,
-    bool isJustIcon,
-  ) {
-    ThemeState themeState = context.read<ThemeCubit>().state;
-    double width = isJustIcon ? 70 : 270;
-
-    return SizedBox(
-      width: width,
-      height: 40,
-      child: ElevatedButton(
-        style: IconButton.styleFrom(
-          padding: EdgeInsets.zero,
-          foregroundColor: state.tabIndex == index
-              ? Colors.white
-              : themeState.primary,
-          backgroundColor: state.tabIndex == index
-              ? themeState.primary
-              : Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(roundedRadius),
-            side: BorderSide(color: themeState.primary),
+    return SafeArea(
+      right: false,
+      child: Container(
+        width: 62,
+        margin: const EdgeInsets.only(left: 8, top: 6, bottom: 6, right: 4),
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.grey.shade200,
+            width: 1.2,
           ),
-          shadowColor: Colors.transparent,
-        ),
-        child: Row(
-          mainAxisAlignment: isJustIcon
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.start,
-
-          children: [
-            if (!isJustIcon) const Gap(10),
-            if (!isJustIcon) const Gap(10),
-            Icon(
-              state.tabIndex == index ? selectedIcon : unSelectedIcon,
-              color: state.tabIndex == index
-                  ? Colors.white
-                  : themeState.primary,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-            if (!isJustIcon) const Gap(10),
-            if (!isJustIcon) Text(title),
           ],
         ),
-        onPressed: () {
-          context.read<OthersSettingsCubit>().setTabIndex(index);
-          pageController.jumpToPage(index);
-        },
+        child: Column(
+          children: [
+            // Drawer Hamburger Button
+            Builder(
+              builder: (drawerContext) {
+                return Tooltip(
+                  message: l10n.openDrawerTooltip,
+                  child: InkWell(
+                    onTap: () => Scaffold.of(drawerContext).openDrawer(),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.06)
+                            : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: SvgPicture.string(
+                          """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
+                          colorFilter: ColorFilter.mode(
+                            isDark ? Colors.grey.shade200 : Colors.grey.shade800,
+                            BlendMode.srcIn,
+                          ),
+                          height: 20,
+                          width: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            const Gap(8),
+            Divider(
+              height: 1,
+              indent: 10,
+              endIndent: 10,
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade200,
+            ),
+            const Gap(8),
+
+            // Navigation Destinations
+            Expanded(
+              child: BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+                builder: (context, state) {
+                  if (isCompactHeight) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: _buildRailDestinations(
+                        context,
+                        state.tabIndex,
+                        themeState,
+                        isDark,
+                        l10n,
+                      ),
+                    );
+                  }
+
+                  // Tablet / Desktop vertical layout
+                  return Column(
+                    children: [
+                      ..._buildRailDestinations(
+                        context,
+                        state.tabIndex,
+                        themeState,
+                        isDark,
+                        l10n,
+                        spacing: 12,
+                      ),
+                      const Spacer(),
+                      Divider(
+                        height: 1,
+                        indent: 10,
+                        endIndent: 10,
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade200,
+                      ),
+                      const Gap(6),
+                      // Search shortcut
+                      IconButton(
+                        tooltip: l10n.search,
+                        icon: Icon(
+                          FluentIcons.search_24_regular,
+                          size: 20,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const QuranSearchScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      // Settings shortcut
+                      IconButton(
+                        tooltip: l10n.settings,
+                        icon: Icon(
+                          FluentIcons.settings_24_regular,
+                          size: 20,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const SettingsPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  List<Widget> _buildRailDestinations(
+    BuildContext context,
+    int activeIndex,
+    ThemeState themeState,
+    bool isDark,
+    AppLocalizations l10n, {
+    double spacing = 0,
+  }) {
+    List<_RailDestinationItem> items = [];
+
+    switch (platformOwn) {
+      case platform_services.PlatformOwn.isAndroid:
+      case platform_services.PlatformOwn.isIos:
+        items = [
+          _RailDestinationItem(
+            index: 0,
+            title: l10n.quran,
+            activeIcon: FluentIcons.book_24_filled,
+            inactiveIcon: FluentIcons.book_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 1,
+            title: l10n.prayer,
+            activeIcon: FluentIcons.clock_24_filled,
+            inactiveIcon: FluentIcons.clock_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 2,
+            title: l10n.qibla,
+            activeIcon: FluentIcons.compass_northwest_24_filled,
+            inactiveIcon: FluentIcons.compass_northwest_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 3,
+            title: l10n.audio,
+            activeIcon: Icons.audiotrack_rounded,
+            inactiveIcon: Icons.audiotrack_outlined,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWindows:
+      case platform_services.PlatformOwn.isMac:
+      case platform_services.PlatformOwn.isLinux:
+        items = [
+          _RailDestinationItem(
+            index: 0,
+            title: l10n.quran,
+            activeIcon: FluentIcons.book_24_filled,
+            inactiveIcon: FluentIcons.book_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 1,
+            title: l10n.prayer,
+            activeIcon: FluentIcons.clock_24_filled,
+            inactiveIcon: FluentIcons.clock_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 2,
+            title: l10n.audio,
+            activeIcon: Icons.audiotrack_rounded,
+            inactiveIcon: Icons.audiotrack_outlined,
+          ),
+          _RailDestinationItem(
+            index: 3,
+            title: l10n.settings,
+            activeIcon: Icons.settings,
+            inactiveIcon: Icons.settings_outlined,
+          ),
+        ];
+      case platform_services.PlatformOwn.isWeb:
+      default:
+        items = [
+          _RailDestinationItem(
+            index: 0,
+            title: l10n.quran,
+            activeIcon: FluentIcons.book_24_filled,
+            inactiveIcon: FluentIcons.book_24_regular,
+          ),
+          _RailDestinationItem(
+            index: 1,
+            title: l10n.audio,
+            activeIcon: Icons.audiotrack_rounded,
+            inactiveIcon: Icons.audiotrack_outlined,
+          ),
+          _RailDestinationItem(
+            index: 2,
+            title: l10n.settings,
+            activeIcon: Icons.settings,
+            inactiveIcon: Icons.settings_outlined,
+          ),
+        ];
+    }
+
+    return items.map((item) {
+      final isSelected = activeIndex == item.index;
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: spacing > 0 ? spacing / 2 : 0),
+        child: Tooltip(
+          message: item.title,
+          child: InkWell(
+            onTap: () {
+              context.read<OthersSettingsCubit>().setTabIndex(item.index);
+              pageController.jumpToPage(item.index);
+            },
+            borderRadius: BorderRadius.circular(14),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? themeState.primary
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: themeState.primary.withValues(alpha: 0.35),
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
+                        ),
+                      ]
+                    : [],
+              ),
+              child: Center(
+                child: Icon(
+                  isSelected ? item.activeIcon : item.inactiveIcon,
+                  size: 22,
+                  color: isSelected
+                      ? Colors.white
+                      : (isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade700),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList();
   }
 
   IconButton appBarLeading(AppLocalizations l10n, BuildContext context) {
@@ -540,152 +555,6 @@ class _HomePageState extends State<HomePage> {
         height: 28,
         width: 28,
         fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Widget appFloatingNav(AppLocalizations l10n) {
-    return SafeArea(
-      child: Align(
-        alignment: Alignment.bottomRight,
-
-        child: Container(
-          margin: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.grey.shade900
-                    : Colors.grey.shade400,
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
-          ),
-          child: BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, themeState) {
-              return BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
-                builder: (context, state) {
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      appBarLeading(l10n, context),
-                      const Gap(5),
-                      IconButton(
-                        icon: Icon(
-                          state.tabIndex == 0
-                              ? FluentIcons.book_24_filled
-                              : FluentIcons.book_24_regular,
-                        ),
-                        style: IconButton.styleFrom(
-                          foregroundColor: state.tabIndex == 0
-                              ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
-                          backgroundColor: state.tabIndex == 0
-                              ? themeState.primaryShade200
-                              : null,
-                        ),
-                        tooltip: "Quran",
-                        onPressed: () =>
-                            context.read<OthersSettingsCubit>().setTabIndex(0),
-                      ),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        const Gap(5),
-
-                      IconButton(
-                        icon: Icon(
-                          state.tabIndex == 1
-                              ? FluentIcons.clock_24_filled
-                              : FluentIcons.clock_24_regular,
-                        ),
-                        style: IconButton.styleFrom(
-                          foregroundColor: state.tabIndex == 1
-                              ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
-                          backgroundColor: state.tabIndex == 1
-                              ? themeState.primaryShade200
-                              : null,
-                        ),
-                        tooltip: "Prayer Time",
-                        onPressed: () =>
-                            context.read<OthersSettingsCubit>().setTabIndex(1),
-                      ),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        const Gap(5),
-                      if (platformOwn == platform_services.PlatformOwn.isIos ||
-                          platformOwn ==
-                              platform_services.PlatformOwn.isAndroid)
-                        IconButton(
-                          icon: Icon(
-                            state.tabIndex == 2
-                                ? FluentIcons.compass_northwest_24_filled
-                                : FluentIcons.compass_northwest_24_regular,
-                          ),
-                          style: IconButton.styleFrom(
-                            foregroundColor: state.tabIndex == 2
-                                ? Theme.of(context).colorScheme.primary
-                                : Colors.grey,
-                            backgroundColor: state.tabIndex == 2
-                                ? themeState.primaryShade200
-                                : null,
-                          ),
-                          tooltip: "Qibla Direction",
-                          onPressed: () => context
-                              .read<OthersSettingsCubit>()
-                              .setTabIndex(2),
-                        ),
-                      IconButton(
-                        icon: Icon(
-                          state.tabIndex == 3
-                              ? Icons.audiotrack_rounded
-                              : Icons.audiotrack_outlined,
-                        ),
-                        style: IconButton.styleFrom(
-                          foregroundColor: state.tabIndex == 3
-                              ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
-                          backgroundColor: state.tabIndex == 3
-                              ? themeState.primaryShade200
-                              : null,
-                        ),
-                        tooltip: "Audio",
-                        onPressed: () =>
-                            context.read<OthersSettingsCubit>().setTabIndex(3),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          state.tabIndex == 4
-                              ? Icons.settings
-                              : Icons.settings_outlined,
-                        ),
-                        style: IconButton.styleFrom(
-                          foregroundColor: state.tabIndex == 4
-                              ? Theme.of(context).colorScheme.primary
-                              : Colors.grey,
-                          backgroundColor: state.tabIndex == 4
-                              ? themeState.primaryShade200
-                              : null,
-                        ),
-                        tooltip: "Settings",
-                        onPressed: () =>
-                            context.read<OthersSettingsCubit>().setTabIndex(4),
-                      ),
-                    ],
-                  );
-                },
-                buildWhen: (previous, current) {
-                  return previous.tabIndex != current.tabIndex;
-                },
-              );
-            },
-          ),
-        ),
       ),
     );
   }
@@ -733,4 +602,18 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+}
+
+class _RailDestinationItem {
+  final int index;
+  final String title;
+  final IconData activeIcon;
+  final IconData inactiveIcon;
+
+  const _RailDestinationItem({
+    required this.index,
+    required this.title,
+    required this.activeIcon,
+    required this.inactiveIcon,
+  });
 }
