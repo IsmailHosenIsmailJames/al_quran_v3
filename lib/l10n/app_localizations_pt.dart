@@ -1673,4 +1673,72 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get on => 'Ligado';
+
+  @override
+  String get homeAndLockWidgets => 'Widgets de Início e Bloqueio';
+
+  @override
+  String get glanceableWidgets => 'Widgets Rápidos';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Exiba versículos diários e horários de oração na tela inicial e na tela de bloqueio.';
+
+  @override
+  String get ayahWidgetDisplayMode =>
+      'Modo de Exibição do Widget de Versículos';
+
+  @override
+  String get dailyInspiringAyah => 'Versículo Inspirador Diário (Selecionado)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Muda todos os dias à meia-noite com mais de 365 versículos profundos.';
+
+  @override
+  String get lastReadAyah => 'Último Versículo Lido';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Sincroniza com sua última posição de leitura para retomar com 1 toque.';
+
+  @override
+  String get pinnedCustomVerse => 'Versículo Personalizado Fixado';
+
+  @override
+  String get randomDailyAyah => 'Versículo Diário Aleatório';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Escolhe um versículo aleatório todos os dias para uma nova reflexão.';
+
+  @override
+  String get updateAllWidgetsNow => 'Atualizar Todos os Widgets Agora';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widgets atualizados com sucesso!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Versículo fixado nos Widgets de Início e Bloqueio!';
+
+  @override
+  String get pinToWidgets => 'Fixar nos Widgets';
+
+  @override
+  String get selectPinnedAyah => 'Selecionar Versículo para Fixar';
+
+  @override
+  String get saveAndApplyToWidget => 'Salvar e Aplicar ao Widget';
+
+  @override
+  String get howToAddWidgets => 'Como Adicionar Widgets';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Personalizar Versículos e Orações do Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Escolha entre versículos selecionados diários, últimos lidos ou fixados';
 }

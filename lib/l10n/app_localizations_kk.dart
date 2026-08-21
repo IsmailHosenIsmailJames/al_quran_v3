@@ -1652,4 +1652,71 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get on => 'Қосулы';
+
+  @override
+  String get homeAndLockWidgets => 'Басты және құлыптау экраны виджеттері';
+
+  @override
+  String get glanceableWidgets => 'Қысқаша шолу виджеттері';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Басты және құлыптау экранында күнделікті аяттар мен намаз уақыттарын көрсетіңіз.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Аят виджетін көрсету режимі';
+
+  @override
+  String get dailyInspiringAyah => 'Күнделікті ғибратты аят (Таңдалған)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365-тен астам таңдаулы аятпен күн сайын түн ортасында жаңарады.';
+
+  @override
+  String get lastReadAyah => 'Соңғы оқылған аят';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Бір түрту арқылы жалғастыру үшін соңғы оқу орныңызбен синхрондалады.';
+
+  @override
+  String get pinnedCustomVerse => 'Бекітілген арнайы аят';
+
+  @override
+  String get randomDailyAyah => 'Кездейсоқ күнделікті аят';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Күнделікті жаңа ой-толғау үшін кездейсоқ аят таңдайды.';
+
+  @override
+  String get updateAllWidgetsNow => 'Барлық виджеттерді қазір жаңарту';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Виджеттер сәтті жаңартылды!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Аят басты және құлыптау экраны виджеттеріне бекітілді!';
+
+  @override
+  String get pinToWidgets => 'Виджеттерге бекіту';
+
+  @override
+  String get selectPinnedAyah => 'Бекітілетін аятты таңдаңыз';
+
+  @override
+  String get saveAndApplyToWidget => 'Сақтау және виджетке қолдану';
+
+  @override
+  String get howToAddWidgets => 'Виджеттерді қалай қосуға болады';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Виджет аяты мен намаздарын баптау';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Күнделікті таңдалған, соңғы оқылған немесе бекітілген аяттар арасынан таңдаңыз';
 }

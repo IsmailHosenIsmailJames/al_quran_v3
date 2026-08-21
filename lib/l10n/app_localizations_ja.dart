@@ -1625,4 +1625,65 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get on => 'オン';
+
+  @override
+  String get homeAndLockWidgets => 'ホーム＆ロック画面ウィジェット';
+
+  @override
+  String get glanceableWidgets => 'ひと目でわかるウィジェット';
+
+  @override
+  String get glanceableWidgetsDesc => 'ホーム画面とロック画面に毎日の聖句と礼拝時間を表示します。';
+
+  @override
+  String get ayahWidgetDisplayMode => 'アーヤウィジェット表示モード';
+
+  @override
+  String get dailyInspiringAyah => '毎日の心に響くアーヤ（厳選）';
+
+  @override
+  String get dailyInspiringAyahDesc => '厳選された365以上の深遠な聖句で、毎日午前0時に更新されます。';
+
+  @override
+  String get lastReadAyah => '最後に読んだアーヤ';
+
+  @override
+  String get lastReadAyahDesc => '最後に読んだ場所と同期し、ワンタップで続きを読むことができます。';
+
+  @override
+  String get pinnedCustomVerse => '固定されたカスタムアーヤ';
+
+  @override
+  String get randomDailyAyah => 'ランダムな毎日のアーヤ';
+
+  @override
+  String get randomDailyAyahDesc => '毎日の新たな瞑想のために、ランダムに聖句を選択します。';
+
+  @override
+  String get updateAllWidgetsNow => 'すべてのウィジェットを今すぐ更新';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'ウィジェットが正常に更新されました！';
+
+  @override
+  String get ayahPinnedToWidgets => 'アーヤがホーム＆ロック画面ウィジェットに固定されました！';
+
+  @override
+  String get pinToWidgets => 'ウィジェットに固定';
+
+  @override
+  String get selectPinnedAyah => '固定するアーヤを選択';
+
+  @override
+  String get saveAndApplyToWidget => '保存してウィジェットに適用';
+
+  @override
+  String get howToAddWidgets => 'ウィジェットの追加方法';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => 'ウィジェットのアーヤと礼拝をカスタマイズ';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      '毎日の厳選、最後に読んだ、または固定されたアーヤから選択';
 }

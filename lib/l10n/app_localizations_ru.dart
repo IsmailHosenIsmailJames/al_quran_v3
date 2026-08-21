@@ -1667,4 +1667,71 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get on => 'Вкл';
+
+  @override
+  String get homeAndLockWidgets => 'Виджеты экрана и блокировки';
+
+  @override
+  String get glanceableWidgets => 'Удобные виджеты';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Отображайте ежедневные аяты и время молитв на главном экране и экране блокировки.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Режим отображения виджета аятов';
+
+  @override
+  String get dailyInspiringAyah => 'Ежедневный вдохновляющий аят (Избранное)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Обновляется каждый день в полночь из коллекции более 365 избранных аятов.';
+
+  @override
+  String get lastReadAyah => 'Последний прочитанный аят';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Синхронизируется с последним прочитанным местом для мгновенного продолжения.';
+
+  @override
+  String get pinnedCustomVerse => 'Закрепленный аят';
+
+  @override
+  String get randomDailyAyah => 'Случайный ежедневный аят';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Выбирает случайный аят каждый день для нового размышления.';
+
+  @override
+  String get updateAllWidgetsNow => 'Обновить все виджеты сейчас';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Виджеты успешно обновлены!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Аят закреплен на виджетах экрана и блокировки!';
+
+  @override
+  String get pinToWidgets => 'Закрепить на виджетах';
+
+  @override
+  String get selectPinnedAyah => 'Выберите аят для закрепления';
+
+  @override
+  String get saveAndApplyToWidget => 'Сохранить и применить к виджету';
+
+  @override
+  String get howToAddWidgets => 'Как добавить виджеты';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Настроить аят и молитвы в виджете';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Выберите между ежедневными избранными, последними прочитанными или закрепленными аятами';
 }

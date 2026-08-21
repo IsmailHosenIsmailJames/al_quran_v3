@@ -1677,4 +1677,71 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get on => 'Activé';
+
+  @override
+  String get homeAndLockWidgets => 'Widgets Écran d\'accueil et Verrouillage';
+
+  @override
+  String get glanceableWidgets => 'Widgets Aperçu Rapide';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Affichez les versets quotidiens et les heures de prière sur votre écran d\'accueil et de verrouillage.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Mode d\'affichage du Widget Verset';
+
+  @override
+  String get dailyInspiringAyah => 'Verset Inspirant Quotidien (Sélectionné)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Change chaque jour à minuit avec plus de 365 versets profonds sélectionnés.';
+
+  @override
+  String get lastReadAyah => 'Dernier Verset Lu';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Se synchronise avec votre dernière position de lecture pour reprendre en un clic.';
+
+  @override
+  String get pinnedCustomVerse => 'Verset Personnalisé Épinglé';
+
+  @override
+  String get randomDailyAyah => 'Verset Quotidien Aléatoire';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Choisit un verset aléatoire chaque jour pour une nouvelle réflexion.';
+
+  @override
+  String get updateAllWidgetsNow => 'Mettre à jour tous les widgets';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widgets mis à jour avec succès !';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Verset épinglé sur les widgets d\'accueil et de verrouillage !';
+
+  @override
+  String get pinToWidgets => 'Épingler aux widgets';
+
+  @override
+  String get selectPinnedAyah => 'Sélectionner le verset à épingler';
+
+  @override
+  String get saveAndApplyToWidget => 'Enregistrer et appliquer au widget';
+
+  @override
+  String get howToAddWidgets => 'Comment ajouter des widgets';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Personnaliser les versets et prières du widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Choisissez entre des versets quotidiens sélectionnés, le dernier lu ou un verset épinglé';
 }

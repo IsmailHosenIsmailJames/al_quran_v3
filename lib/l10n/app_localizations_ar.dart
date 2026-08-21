@@ -1655,4 +1655,70 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get on => 'تشغيل';
+
+  @override
+  String get homeAndLockWidgets => 'ويدجت الشاشة الرئيسية والقفل';
+
+  @override
+  String get glanceableWidgets => 'أدوات سهلة وسريعة';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'عرض الآيات اليومية وأوقات الصلاة على شاشتك الرئيسية وشاشة القفل.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'وضع عرض ويدجت الآية';
+
+  @override
+  String get dailyInspiringAyah => 'آية يومية ملهمة (مختارة)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'يتغير كل يوم عند منتصف الليل مع أكثر من 365 آية مختارة بعناية.';
+
+  @override
+  String get lastReadAyah => 'آخر آية مقروءة';
+
+  @override
+  String get lastReadAyahDesc =>
+      'يتزامن مع آخر موضع قراءة للمتابعة الفورية بنقرة واحدة.';
+
+  @override
+  String get pinnedCustomVerse => 'آية مخصصة مثبتة';
+
+  @override
+  String get randomDailyAyah => 'آية يومية عشوائية';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'يختار آية عشوائية كل يوم للتأمل والتفكر المتجدد.';
+
+  @override
+  String get updateAllWidgetsNow => 'تحديث جميع الأدوات الآن';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'تم تحديث الأدوات بنجاح!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'تم تثبيت الآية في ويدجت الشاشة الرئيسية والقفل!';
+
+  @override
+  String get pinToWidgets => 'تثبيت في ويدجت الشاشة';
+
+  @override
+  String get selectPinnedAyah => 'اختر الآية للتثبيت';
+
+  @override
+  String get saveAndApplyToWidget => 'حفظ وتطبيق على الويدجت';
+
+  @override
+  String get howToAddWidgets => 'كيفية إضافة الأدوات';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => 'تخصيص آيات وصلوات الويدجت';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'اختر بين الآيات اليومية المختارة، أو آخر قراءة، أو آية مثبتة مخصصة';
 }

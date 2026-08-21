@@ -1666,4 +1666,72 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get on => 'Imewashwa';
+
+  @override
+  String get homeAndLockWidgets => 'Vidijeti za Skrini ya Nyumbani na Kufunga';
+
+  @override
+  String get glanceableWidgets => 'Vidijeti za Mtazamo wa Haraka';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Onyesha aya za kila siku na nyakati za sala kwenye skrini yako ya nyumbani na kufunga.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Njia ya Kuonyesha Vidijeti ya Aya';
+
+  @override
+  String get dailyInspiringAyah =>
+      'Aya ya Kila Siku ya Kutia Moyo (Iliyochaguliwa)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Hubadilika kila siku usiku wa manane na aya 365+ zenye maana nzito.';
+
+  @override
+  String get lastReadAyah => 'Aya ya Mwisho Kusomwa';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Hulandana na eneo lako la mwisho la usomaji ili kuendelea kwa mguso mmoja.';
+
+  @override
+  String get pinnedCustomVerse => 'Aya Maalum Iliyobandikwa';
+
+  @override
+  String get randomDailyAyah => 'Aya ya Nasibu ya Kila Siku';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Huchagua aya ya nasibu kila siku kwa ajili ya tafakuri mpya.';
+
+  @override
+  String get updateAllWidgetsNow => 'Sasisha Vidijeti Zote Sasa';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Vidijeti zimesasishwa kikamilifu!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Aya imebandikwa kwenye Vidijeti za Skrini ya Nyumbani na Kufunga!';
+
+  @override
+  String get pinToWidgets => 'Bandika kwenye Vidijeti';
+
+  @override
+  String get selectPinnedAyah => 'Chagua Aya ya Kubandika';
+
+  @override
+  String get saveAndApplyToWidget => 'Hifadhi na Utumie kwenye Vidijeti';
+
+  @override
+  String get howToAddWidgets => 'Jinsi ya Kuongeza Vidijeti';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Binafsisha Aya na Sala za Vidijeti';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Chagua kati ya aya zilizochaguliwa za kila siku, za mwisho kusomwa, au zilizobandikwa';
 }
