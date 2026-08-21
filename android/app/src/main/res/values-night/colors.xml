@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#121212</color>
+
+    <!-- Widget Dark Mode Colors -->
+    <color name="widget_card_bg">#121E1B</color>
+    <color name="widget_card_stroke">#233832</color>
+    <color name="widget_text_primary">#FFFFFF</color>
+    <color name="widget_text_secondary">#9CA3AF</color>
+    <color name="widget_accent_primary">#34D399</color>
+    <color name="widget_active_pill_bg">#1B7A5C</color>
+    <color name="widget_active_pill_stroke">#4DD8A8</color>
+    <color name="widget_active_pill_text">#FFFFFF</color>
+    <color name="widget_inactive_item_bg">#14FFFFFF</color>
+    <color name="widget_inactive_item_stroke">#1AFFFFFF</color>
+    <color name="widget_inactive_title_text">#D1D5DB</color>
+    <color name="widget_inactive_time_text">#FFFFFF</color>
+    <color name="widget_countdown_bg">#2610B981</color>
+    <color name="widget_countdown_stroke">#4010B981</color>
+    <color name="widget_countdown_text">#6EE7B7</color>
+</resources>
