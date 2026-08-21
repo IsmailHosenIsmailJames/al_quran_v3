@@ -1624,4 +1624,65 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get on => '켜짐';
+
+  @override
+  String get homeAndLockWidgets => '홈 및 잠금 화면 위젯';
+
+  @override
+  String get glanceableWidgets => '한눈에 보는 위젯';
+
+  @override
+  String get glanceableWidgetsDesc => '홈 화면과 잠금 화면에 매일의 구절과 기도 시간을 표시합니다.';
+
+  @override
+  String get ayahWidgetDisplayMode => '구절 위젯 표시 모드';
+
+  @override
+  String get dailyInspiringAyah => '매일 영감을 주는 구절 (엄선)';
+
+  @override
+  String get dailyInspiringAyahDesc => '365개 이상의 엄선된 깊은 구절로 매일 자정에 변경됩니다.';
+
+  @override
+  String get lastReadAyah => '마지막으로 읽은 구절';
+
+  @override
+  String get lastReadAyahDesc => '한 번의 탭으로 즉시 다시 읽을 수 있도록 마지막 읽은 위치와 동기화됩니다.';
+
+  @override
+  String get pinnedCustomVerse => '고정된 사용자 지정 구절';
+
+  @override
+  String get randomDailyAyah => '무작위 일일 구절';
+
+  @override
+  String get randomDailyAyahDesc => '새로운 묵상을 위해 매일 무작위 구절을 선택합니다.';
+
+  @override
+  String get updateAllWidgetsNow => '지금 모든 위젯 업데이트';
+
+  @override
+  String get widgetsUpdatedSuccessfully => '위젯이 성공적으로 업데이트되었습니다!';
+
+  @override
+  String get ayahPinnedToWidgets => '구절이 홈 및 잠금 화면 위젯에 고정되었습니다!';
+
+  @override
+  String get pinToWidgets => '위젯에 고정';
+
+  @override
+  String get selectPinnedAyah => '고정할 구절 선택';
+
+  @override
+  String get saveAndApplyToWidget => '저장 및 위젯에 적용';
+
+  @override
+  String get howToAddWidgets => '위젯 추가 방법';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => '위젯 구절 및 기도 맞춤설정';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      '매일 엄선된 구절, 마지막으로 읽은 구절, 고정된 맞춤 구절 중에서 선택';
 }

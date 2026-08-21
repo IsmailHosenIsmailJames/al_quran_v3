@@ -1671,4 +1671,72 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get on => 'Activado';
+
+  @override
+  String get homeAndLockWidgets => 'Widgets de inicio y bloqueo';
+
+  @override
+  String get glanceableWidgets => 'Widgets de un vistazo';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Muestra versículos diarios y horarios de oración en tu pantalla de inicio y bloqueo.';
+
+  @override
+  String get ayahWidgetDisplayMode =>
+      'Modo de visualización del widget de versículo';
+
+  @override
+  String get dailyInspiringAyah => 'Versículo inspirador diario (Seleccionado)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Cambia cada día a medianoche con más de 365 versículos profundos seleccionados.';
+
+  @override
+  String get lastReadAyah => 'Último versículo leído';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Se sincroniza con tu última posición de lectura para continuar con un toque.';
+
+  @override
+  String get pinnedCustomVerse => 'Versículo personalizado fijado';
+
+  @override
+  String get randomDailyAyah => 'Versículo diario aleatorio';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Elige un versículo aleatorio cada día para una nueva reflexión.';
+
+  @override
+  String get updateAllWidgetsNow => 'Actualizar todos los widgets ahora';
+
+  @override
+  String get widgetsUpdatedSuccessfully => '¡Widgets actualizados con éxito!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      '¡Versículo fijado en los widgets de inicio y bloqueo!';
+
+  @override
+  String get pinToWidgets => 'Fijar en widgets';
+
+  @override
+  String get selectPinnedAyah => 'Seleccionar versículo para fijar';
+
+  @override
+  String get saveAndApplyToWidget => 'Guardar y aplicar al widget';
+
+  @override
+  String get howToAddWidgets => 'Cómo agregar widgets';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Personalizar versículo y oraciones del widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Elige entre versículos seleccionados diarios, último leído o versículos fijados';
 }

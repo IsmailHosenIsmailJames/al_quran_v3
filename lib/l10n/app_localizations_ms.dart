@@ -1652,4 +1652,70 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get on => 'Aktif';
+
+  @override
+  String get homeAndLockWidgets => 'Widget Skrin Utama & Kunci';
+
+  @override
+  String get glanceableWidgets => 'Widget Sekilas Pandang';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Pamerkan ayat harian dan waktu solat pada skrin utama dan skrin kunci anda.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Mod Paparan Widget Ayat';
+
+  @override
+  String get dailyInspiringAyah => 'Ayat Inspirasi Harian (Pilihan)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'Bertukar setiap hari pada tengah malam dengan 365+ ayat pilihan yang mendalam.';
+
+  @override
+  String get lastReadAyah => 'Ayat Terakhir Dibaca';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Menyelaras dengan kedudukan bacaan terakhir untuk menyambung semula dengan 1 ketukan.';
+
+  @override
+  String get pinnedCustomVerse => 'Ayat Tersuai Disematkan';
+
+  @override
+  String get randomDailyAyah => 'Ayat Harian Rawak';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Memilih ayat rawak setiap hari untuk renungan yang segar.';
+
+  @override
+  String get updateAllWidgetsNow => 'Kemas Kini Semua Widget Sekarang';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widget berjaya dikemas kini!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Ayat disematkan pada Widget Skrin Utama & Kunci!';
+
+  @override
+  String get pinToWidgets => 'Sematkan ke Widget';
+
+  @override
+  String get selectPinnedAyah => 'Pilih Ayat untuk Disematkan';
+
+  @override
+  String get saveAndApplyToWidget => 'Simpan & Gunakan pada Widget';
+
+  @override
+  String get howToAddWidgets => 'Cara Menambah Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => 'Sesuaikan Ayat & Solat Widget';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Pilih antara ayat pilihan harian, terakhir dibaca, atau ayat tersuai disematkan';
 }

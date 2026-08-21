@@ -1656,4 +1656,71 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get on => 'آن';
+
+  @override
+  String get homeAndLockWidgets => 'ہوم اور لاک اسکرین وجٹس';
+
+  @override
+  String get glanceableWidgets => 'فوری نگاہ وجٹس';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'اپنی ہوم اسکرین اور لاک اسکرین پر روزانہ کی آیات اور نماز کے اوقات دیکھیں۔';
+
+  @override
+  String get ayahWidgetDisplayMode => 'آیت وجٹ ڈسپلے موڈ';
+
+  @override
+  String get dailyInspiringAyah => 'روزانہ متاثر کن آیت (منتخب)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365 سے زائد منتخب آیات کے ساتھ ہر روز آدھی رات کو تبدیل ہوتا ہے۔';
+
+  @override
+  String get lastReadAyah => 'آخری پڑھی گئی آیت';
+
+  @override
+  String get lastReadAyahDesc =>
+      'ایک ٹیپ میں دوبارہ پڑھنا جاری رکھنے کے لیے آخری مقام سے ہم آہنگ ہوتا ہے۔';
+
+  @override
+  String get pinnedCustomVerse => 'پن کردہ پسندیدہ آیت';
+
+  @override
+  String get randomDailyAyah => 'روزانہ کی بے ترتیب آیت';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'نئی فکر اور غور و تدبر کے لیے ہر روز ایک نئی آیت کا انتخاب کرتا ہے۔';
+
+  @override
+  String get updateAllWidgetsNow => 'تمام وجٹس کو ابھی اپ ڈیٹ کریں';
+
+  @override
+  String get widgetsUpdatedSuccessfully =>
+      'وجٹس کامیابی کے ساتھ اپ ڈیٹ ہو گئے!';
+
+  @override
+  String get ayahPinnedToWidgets => 'آیت ہوم اور لاک اسکرین وجٹس پر پن ہو گئی!';
+
+  @override
+  String get pinToWidgets => 'وجٹس پر پن کریں';
+
+  @override
+  String get selectPinnedAyah => 'پن کرنے کے لیے آیت منتخب کریں';
+
+  @override
+  String get saveAndApplyToWidget => 'محفوظ کریں اور وجٹ پر لاگو کریں';
+
+  @override
+  String get howToAddWidgets => 'وجٹس کیسے شامل کریں';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'وجٹ آیات اور نماز کے اوقات کو حسب ضرورت بنائیں';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'روزانہ کی منتخب، آخری پڑھی گئی، یا کسٹم پن کردہ آیات میں سے انتخاب کریں';
 }

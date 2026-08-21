@@ -50,6 +50,9 @@ class AyahWidgetService {
         await Hive.openBox("user");
       }
 
+      final userBox = Hive.box("user");
+      final mode = userBox.get("widget_ayah_mode", defaultValue: "curated");
+
       // Generate 7-day Ayah timeline items
       final timelineDays = <Map<String, dynamic>>[];
       final dayOfYear = int.parse(DateFormat("D").format(now));
@@ -66,7 +69,24 @@ class AyahWidgetService {
           surah = customSurah;
           ayah = customAyah;
           theme = "Selected Verse";
+        } else if (mode == "pinned") {
+          surah = userBox.get("widget_pinned_surah", defaultValue: 2);
+          ayah = userBox.get("widget_pinned_ayah", defaultValue: 255);
+          theme = "Pinned Verse";
+        } else if (mode == "last_read") {
+          final lastAyahStr = userBox.get("last_ayah_current", defaultValue: "1:1");
+          final parts = lastAyahStr.toString().split(":");
+          surah = int.tryParse(parts.first) ?? 1;
+          ayah = int.tryParse(parts.last) ?? 1;
+          theme = "Last Read";
+        } else if (mode == "random") {
+          final randomSeed = (now.day * 31 + now.month * 7 + i * 13) % curatedAyahsList.length;
+          final item = curatedAyahsList[randomSeed];
+          surah = item.surah;
+          ayah = item.ayah;
+          theme = item.theme;
         } else {
+          // Default: Curated Daily
           final curatedIndex = (dayOfYear + i) % curatedAyahsList.length;
           final item = curatedAyahsList[curatedIndex];
           surah = item.surah;

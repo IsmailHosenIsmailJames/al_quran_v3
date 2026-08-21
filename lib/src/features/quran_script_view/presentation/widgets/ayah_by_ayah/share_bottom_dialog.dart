@@ -1,5 +1,4 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
@@ -20,6 +19,7 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:screenshot/screenshot.dart";
 import "package:share_plus/share_plus.dart";
 
+import "package:al_quran_v3/src/features/quran_resources/data/services/ayah_widget_service.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
@@ -27,7 +27,6 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 void showShareBottomDialog(
   BuildContext context,
   String ayahKey,
-
   SurahInfoModel surahInfoModel,
   QuranScriptType quranScriptType,
   List<String> translation,
@@ -49,26 +48,14 @@ void showShareBottomDialog(
   ThemeState themeState = context.read<ThemeCubit>().state;
   AppLocalizations l10n = AppLocalizations.of(context);
 
-  SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
-    metaDataSurah[ayahKey.split(":").first]!,
-  );
   final quranViewState = context.read<QuranViewCubit>().state;
 
   List quranScriptWord = QuranScriptFunction.getWordListOfAyah(
     quranViewState.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
-    circleJojom: quranViewState.circleJojom,
+    circleJojom: false,
   );
-
-  ButtonStyle textButtonStyle = TextButton.styleFrom(
-    shape: const RoundedRectangleBorder(),
-    padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-    alignment: Alignment.centerLeft,
-  );
-  Color color = Theme.brightnessOf(context) == Brightness.dark
-      ? Colors.grey.shade100
-      : Colors.grey.shade800;
 
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -79,6 +66,15 @@ void showShareBottomDialog(
     ),
     context: context,
     builder: (context) {
+      ButtonStyle textButtonStyle = TextButton.styleFrom(
+        shape: const RoundedRectangleBorder(),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        alignment: Alignment.centerLeft,
+      );
+      Color color = Theme.brightnessOf(context) == Brightness.dark
+          ? Colors.grey.shade100
+          : Colors.grey.shade800;
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +119,33 @@ void showShareBottomDialog(
               ],
             ),
           ),
-          const Gap(15),
+          const Gap(10),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: TextButton.icon(
+              style: textButtonStyle,
+              onPressed: () async {
+                final parts = ayahKey.split(":");
+                final surah = int.tryParse(parts.first) ?? 1;
+                final ayah = int.tryParse(parts.last) ?? 1;
+                final userBox = Hive.box("user");
+                await userBox.put("widget_ayah_mode", "pinned");
+                await userBox.put("widget_pinned_surah", surah);
+                await userBox.put("widget_pinned_ayah", ayah);
+                await AyahWidgetService.updateWidgets(customSurah: surah, customAyah: ayah);
+                Fluttertoast.showToast(msg: l10n.ayahPinnedToWidgets);
+                if (context.mounted) {
+                  Navigator.pop(context);
+                }
+              },
+              icon: Icon(FluentIcons.pin_24_filled, color: themeState.primary),
+              label: Text(
+                l10n.pinToWidgets,
+                style: TextStyle(color: color, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+          const Gap(5),
           Row(
             children: [
               Expanded(

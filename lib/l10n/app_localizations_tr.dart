@@ -1655,4 +1655,71 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get on => 'Açık';
+
+  @override
+  String get homeAndLockWidgets => 'Ana Ekran ve Kilit Ekranı Araçları';
+
+  @override
+  String get glanceableWidgets => 'Hızlı Bakış Araçları';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Ana ekranınızda ve kilit ekranınızda günlük ayetleri ve namaz vakitlerini görüntüleyin.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Ayet Widget Görüntüleme Modu';
+
+  @override
+  String get dailyInspiringAyah => 'Günlük İlham Veren Ayet (Seçilmiş)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365\'ten fazla seçilmiş ayetle her gün gece yarısı değişir.';
+
+  @override
+  String get lastReadAyah => 'Son Okunan Ayet';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Tek dokunuşla hemen devam etmek için son okuma konumunuzla senkronize olur.';
+
+  @override
+  String get pinnedCustomVerse => 'Sabitlenmiş Özel Ayet';
+
+  @override
+  String get randomDailyAyah => 'Rastgele Günlük Ayet';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Taze bir tefekkür için her gün rastgele bir ayet seçer.';
+
+  @override
+  String get updateAllWidgetsNow => 'Tüm Widget\'ları Şimdi Güncelle';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Widget\'lar başarıyla güncellendi!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Ayet Ana Ekran ve Kilit Ekranı Araçlarına sabitlendi!';
+
+  @override
+  String get pinToWidgets => 'Widget\'lara Sabitle';
+
+  @override
+  String get selectPinnedAyah => 'Sabitlenecek Ayeti Seçin';
+
+  @override
+  String get saveAndApplyToWidget => 'Kaydet ve Widget\'a Uygula';
+
+  @override
+  String get howToAddWidgets => 'Widget Nasıl Eklenir';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Widget Ayet ve Namaz Vakitlerini Özelleştirin';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Günlük seçilmiş, son okunan veya özel sabitlenmiş ayetler arasından seçim yapın';
 }

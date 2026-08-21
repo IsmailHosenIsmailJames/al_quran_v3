@@ -1678,4 +1678,75 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get on => 'இயக்கு';
+
+  @override
+  String get homeAndLockWidgets => 'முகப்பு மற்றும் பூட்டுத்திரை விட்ஜெட்டுகள்';
+
+  @override
+  String get glanceableWidgets => 'விரைவு பார்வை விட்ஜெட்டுகள்';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'உங்கள் முகப்புத்திரை மற்றும் பூட்டுத்திரையில் தினசரி வசனங்கள் மற்றும் தொழுகை நேரங்களைக் காட்டுங்கள்.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'வசனம் விட்ஜெட் காட்சி முறை';
+
+  @override
+  String get dailyInspiringAyah =>
+      'தினசரி ஊக்கமளிக்கும் வசனம் (தேர்ந்தெடுக்கப்பட்டது)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365+ ஆழமான வசனங்களுடன் தினமும் நள்ளிரவில் மாறும்.';
+
+  @override
+  String get lastReadAyah => 'கடைசியாக வாசித்த வசனம்';
+
+  @override
+  String get lastReadAyahDesc =>
+      '1-தட்டலில் வாசிப்பைத் தொடர உங்கள் கடைசி வாசிப்பு நிலையுடன் ஒத்திசைகிறது.';
+
+  @override
+  String get pinnedCustomVerse => 'பின் செய்யப்பட்ட தனிப்பயன் வசனம்';
+
+  @override
+  String get randomDailyAyah => 'சீரற்ற தினசரி வசனம்';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'புதிய சிந்தனைக்காக தினமும் ஒரு சீரற்ற வசனத்தைத் தேர்ந்தெடுக்கிறது.';
+
+  @override
+  String get updateAllWidgetsNow =>
+      'அனைத்து விட்ஜெட்டுகளையும் இப்போது புதுப்பிக்கவும்';
+
+  @override
+  String get widgetsUpdatedSuccessfully =>
+      'விட்ஜெட்டுகள் வெற்றிகரமாகப் புதுப்பிக்கப்பட்டன!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'வசனம் முகப்பு மற்றும் பூட்டுத்திரை விட்ஜெட்டுகளில் பின் செய்யப்பட்டது!';
+
+  @override
+  String get pinToWidgets => 'விட்ஜெட்டுகளில் பின் செய்க';
+
+  @override
+  String get selectPinnedAyah =>
+      'பின் செய்ய வேண்டிய வசனத்தைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get saveAndApplyToWidget => 'சேமித்து விட்ஜெட்டுக்கு பயன்படுத்துக';
+
+  @override
+  String get howToAddWidgets => 'விட்ஜெட்டுகளை எவ்வாறு சேர்ப்பது';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'விட்ஜெட் வசனம் மற்றும் தொழுகைகளைத் தனிப்பயனாக்குக';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'தினசரி தேர்ந்தெடுக்கப்பட்ட, கடைசியாக வாசித்த அல்லது தனிப்பயன் பின் செய்த வசனங்களுக்கு இடையே தேர்வுசெய்க';
 }

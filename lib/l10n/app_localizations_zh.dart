@@ -1604,4 +1604,64 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get on => '开启';
+
+  @override
+  String get homeAndLockWidgets => '主屏幕和锁定屏幕小组件';
+
+  @override
+  String get glanceableWidgets => '一览小组件';
+
+  @override
+  String get glanceableWidgetsDesc => '在主屏幕和锁定屏幕上显示每日经文和礼拜时间。';
+
+  @override
+  String get ayahWidgetDisplayMode => '经文小组件显示模式';
+
+  @override
+  String get dailyInspiringAyah => '每日启迪经文（精选）';
+
+  @override
+  String get dailyInspiringAyahDesc => '每天午夜更新，精选365+篇深刻经文。';
+
+  @override
+  String get lastReadAyah => '上次阅读经文';
+
+  @override
+  String get lastReadAyahDesc => '与您最新的阅读位置同步，一键快速继续阅读。';
+
+  @override
+  String get pinnedCustomVerse => '固定自定义经文';
+
+  @override
+  String get randomDailyAyah => '随机每日经文';
+
+  @override
+  String get randomDailyAyahDesc => '每天随机选择一篇经文，带来崭新的感悟与思考。';
+
+  @override
+  String get updateAllWidgetsNow => '立即更新所有小组件';
+
+  @override
+  String get widgetsUpdatedSuccessfully => '小组件已成功更新！';
+
+  @override
+  String get ayahPinnedToWidgets => '经文已固定到主屏幕和锁定屏幕小组件！';
+
+  @override
+  String get pinToWidgets => '固定到小组件';
+
+  @override
+  String get selectPinnedAyah => '选择固定经文';
+
+  @override
+  String get saveAndApplyToWidget => '保存并应用到小组件';
+
+  @override
+  String get howToAddWidgets => '如何添加小组件';
+
+  @override
+  String get customizeWidgetAyahAndPrayers => '自定义小组件经文和礼拜';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc => '在每日精选、上次阅读或自定义固定经文之间进行选择';
 }

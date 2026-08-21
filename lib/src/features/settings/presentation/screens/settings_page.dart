@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/widgets/theme_icon_button.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
+import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -75,9 +76,29 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: const AudioSettings(scrollable: false),
               ),
 
+              // 4. Home & Lock Widgets Section
+              _buildMainSection(
+                icon: FluentIcons.app_recent_24_regular,
+                title: appLocalizations.homeAndLockWidgets,
+                themePrimary: themeState.primary,
+                isDark: isDark,
+                child: ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(appLocalizations.customizeWidgetAyahAndPrayers, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                  subtitle: Text(appLocalizations.customizeWidgetAyahAndPrayersDesc, style: const TextStyle(fontSize: 12)),
+                  trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const WidgetSettingsScreen()),
+                    );
+                  },
+                ),
+              ),
+
               const Gap(16),
 
-              // 4. General & Preferences Section
+              // 5. General & Preferences Section
               _buildMainSection(
                 icon: FluentIcons.settings_24_regular,
                 title: appLocalizations.others,
