@@ -2,15 +2,15 @@ import "dart:math" as math;
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/features/location/presentation/screens/location_acquire_screen.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_cubit.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_state.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/widgets/compass_painter.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
@@ -50,7 +50,7 @@ class _QiblaView extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    bool isLandscape = width > height;
+    bool isLandscape = width > height || height < 500;
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return Scaffold(
@@ -115,9 +115,88 @@ class _QiblaView extends StatelessWidget {
                           double kaabaAngle = locationState.kaabaAngle!;
                           bool isAligned = qiblaState.isAligned;
 
-                          double compassDiameter = isLandscape
-                              ? height * 0.55
-                              : width * 0.82;
+                          if (isLandscape) {
+                            double compassDiameter = math.min(
+                              (height - 40) * 0.82,
+                              width * 0.45,
+                            );
+
+                            Widget compassView = SizedBox(
+                              width: compassDiameter,
+                              height: compassDiameter,
+                              child: CustomPaint(
+                                painter: CompassPainter(
+                                  themeState,
+                                  context: context,
+                                  kaabaAngle: kaabaAngle,
+                                  isAligned: isAligned,
+                                  appLocalizations: appLocalizations,
+                                ),
+                              ),
+                            );
+
+                            return Center(
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(maxWidth: 900),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 8,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      // Left Column: Metrics Card & Guidance
+                                      Expanded(
+                                        flex: 5,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            _buildHeaderMetrics(
+                                              context: context,
+                                              themeState: themeState,
+                                              heading: heading,
+                                              kaabaAngle: kaabaAngle,
+                                              isAligned: isAligned,
+                                              isLandscape: true,
+                                            ),
+                                            const Gap(16),
+                                            _buildAlignmentBadge(
+                                              context: context,
+                                              themeState: themeState,
+                                              isAligned: isAligned,
+                                              heading: heading,
+                                              kaabaAngle: kaabaAngle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const Gap(20),
+                                      // Right Column: Centered Rotating Compass
+                                      Expanded(
+                                        flex: 5,
+                                        child: Center(
+                                          child: _CompassRotationContainer(
+                                            heading: heading,
+                                            isAligned: isAligned,
+                                            compassView: compassView,
+                                            themeState: themeState,
+                                            diameter: compassDiameter,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+
+                          // Portrait Mode
+                          double compassDiameter = math.min(
+                            width * 0.82,
+                            height * 0.45,
+                          );
 
                           Widget compassView = SizedBox(
                             width: compassDiameter,
@@ -145,6 +224,7 @@ class _QiblaView extends StatelessWidget {
                                 heading: heading,
                                 kaabaAngle: kaabaAngle,
                                 isAligned: isAligned,
+                                isLandscape: false,
                               ),
 
                               // Compass Rotation Container
@@ -184,11 +264,12 @@ class _QiblaView extends StatelessWidget {
     required double heading,
     required double kaabaAngle,
     required bool isAligned,
+    required bool isLandscape,
   }) {
     bool isDark = Theme.brightnessOf(context) == Brightness.dark;
     final l10n = AppLocalizations.of(context);
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: EdgeInsets.symmetric(horizontal: isLandscape ? 0 : 24),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: isDark
@@ -396,7 +477,7 @@ class _CompassRotationContainerState extends State<_CompassRotationContainer> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        // Smooth unrolled continuous rotation animation (no 360° spin on 0°/360° boundary)
+        // Smooth unrolled continuous rotation animation
         TweenAnimationBuilder<double>(
           tween: Tween<double>(end: _accumulatedAngle),
           duration: const Duration(milliseconds: 250),
