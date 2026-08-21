@@ -7,9 +7,12 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_widget_service.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_time_page.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/screens/qibla_screen.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/services/ayah_widget_service.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
@@ -170,6 +173,8 @@ class _HomePageState extends State<HomePage> {
 
     // Initialize HomeWidget and handle deep links from home/lock screen widgets
     PrayerWidgetService.updateWidgets();
+    AyahWidgetService.updateWidgets();
+
     HomeWidget.initiallyLaunchedFromHomeWidget().then((uri) {
       if (uri != null) {
         _handleWidgetUri(uri);
@@ -183,10 +188,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleWidgetUri(Uri uri) {
-    // Navigate to Prayer Tab (index 1 on mobile)
-    context.read<OthersSettingsCubit>().setTabIndex(1);
-    if (pageController.hasClients) {
-      pageController.jumpToPage(1);
+    if (uri.host == "ayah") {
+      final surah = int.tryParse(uri.queryParameters["surah"] ?? "1") ?? 1;
+      final ayah = int.tryParse(uri.queryParameters["ayah"] ?? "1") ?? 1;
+      final ayahCount = metaDataSurah["$surah"]?["vc"] ?? 7;
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => QuranScriptView(
+            startKey: "$surah:1",
+            endKey: "$surah:$ayahCount",
+            toScrollKey: "$surah:$ayah",
+          ),
+        ),
+      );
+    } else {
+      // Default / Prayer Tab (index 1 on mobile)
+      context.read<OthersSettingsCubit>().setTabIndex(1);
+      if (pageController.hasClients) {
+        pageController.jumpToPage(1);
+      }
     }
   }
 
