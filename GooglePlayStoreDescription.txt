@@ -19,9 +19,9 @@ Paste one into Google Play Console "Short description":
 Holy Quran with Tafsir, Audio MP3, Word by Word, Prayer Times & Qibla Compass
 [77/80 characters]
 
-• Option 2 (Offline & Reading Focus):
-Read Holy Quran offline with Tafsir, MP3 Audio Recitation, Azan & Prayer Times
-[78/80 characters]
+• Option 2 (Widgets & Prayer Times Focus):
+Holy Quran with Offline Tafsir, MP3 Audio, Prayer Times, Azan & Home Widgets
+[76/80 characters]
 
 • Option 3 (Complete Worship & Practice):
 Al Quran with Audio Recitation, Tafsir, Prayer Times, Azan Alarm & Qibla Finder
@@ -31,13 +31,19 @@ Al Quran with Audio Recitation, Tafsir, Prayer Times, Azan Alarm & Qibla Finder
 3. FULL LONG DESCRIPTION (Max 4,000 characters)
 Paste the text below into Google Play Console "Full description":
 --------------------------------------------------------------------------------
-Al Quran (القرآن الكريم) is your complete, feature-rich Holy Quran app designed to elevate your daily Islamic practice. Read, listen, and study the Noble Quran offline with authentic translations, Tafsir commentaries, word-by-word analysis, MP3 audio recitation, accurate prayer times, Azan alarm notifications, and a precise Qibla compass.
+Al Quran (القرآن الكريم) is your complete, feature-rich Holy Quran app designed to elevate your daily Islamic practice. Read, listen, and study the Noble Quran offline with authentic translations, Tafsir commentaries, word-by-word analysis, powerful Quran search, MP3 audio recitation, accurate prayer times, Azan alarm notifications, elegant Home & Lock Screen Widgets, and a precise Qibla compass.
 
-Whether you want to recite the Holy Quran offline, master pronunciation with Tajweed rules, understand Ayah meanings, or listen to world-renowned Qaris, Al Quran offers an intuitive, ad-free, and spiritually enriching experience.
+Whether you want to recite the Holy Quran offline, glance at daily Ayahs and prayer times from your home screen, search specific verses, master pronunciation with Tajweed rules, or listen to world-renowned Qaris, Al Quran offers an intuitive, ad-free, and spiritually enriching experience.
 
 ══════════════════════════════════════
 ✨ KEY FEATURES
 ══════════════════════════════════════
+
+📱 ELEGANT HOME & LOCK SCREEN WIDGETS
+• Prayer Time Widgets (2x2 & 4x2): View today's 5 prayer schedule, active prayer highlight, and next prayer countdown directly from your home and lock screen.
+• Daily Quran Ayah Widgets (2x2, 4x2, 4x4): Reflect upon daily inspiring Quranic verses with authentic Uthmani Arabic script and localized translations right on your home screen.
+• 1-Tap Deep Linking: Tap any widget to jump instantly to the exact Surah/Ayah or prayer schedule in the app.
+• Theme-Aware & Zero Battery Drain: Full Light and Dark mode high-contrast design with pre-scheduled timelines for optimal battery efficiency.
 
 📖 COMPLETE HOLY QURAN READER (OFFLINE)
 • Multiple Authentic Scripts: Read in Uthmani (Madani), Indopak, and QPC Hafs with color-coded Tajweed scripts.
@@ -45,6 +51,13 @@ Whether you want to recite the Holy Quran offline, master pronunciation with Taj
 • Smooth Quran Navigation: Jump instantly to any Surah, Juz (Para), Page, Hizb, or Ruku.
 • Flexible Reading Views: Switch seamlessly between Page View (Mushaf Mode) and Verse-by-Verse List View.
 • Surah Information: Explore revelation context (Makki / Madani), verse counts, and central themes.
+
+🔍 POWERFUL & SMART QURAN SEARCH
+• Multi-Scope Search: Search instantly across Arabic verses, translations, Tafsir commentaries, and Surah titles.
+• Direct Ayah Jump: Type verse references (e.g., "2:255") or beloved passage names (e.g., "Ayatul Kursi") to jump directly to that exact verse in the Quran script.
+• Diacritic-Agnostic Arabic Search: Search Arabic text with or without Tashkeel (harakat / diacritics) with automatic letter normalization.
+• Advanced Search Filters: Filter queries by specific Surahs, Makki / Madani revelation origins, or exact phrase matching.
+• Keyword Highlighting: Easily locate matched terms with clear visual highlighting across Arabic and translation results.
 
 🧠 IN-DEPTH TAFSIR & WORD-BY-WORD STUDY
 • Authentic Tafsir Library: Deepen your understanding with renowned Tafsirs (including Tafsir Ibn Kathir, Jalalayn, and more) across multiple languages.
@@ -81,8 +94,8 @@ Download Al Quran today to strengthen your connection with the Holy Quran and en
 4. GOOGLE PLAY STORE LOCALIZATION KEYWORDS (FOR REGIONAL LISTINGS)
 Use these when adding localized store listings in Google Play Console:
 --------------------------------------------------------------------------------
-• Bengali (BD/IN): আল কুরআন বাংলা অনুবাদ, তাফসীর ইবনে কাসীর, নামাজের সময়সূচি, আযান অ্যালার্ম, কিবলা কম্পাস, অডিও তিলাওয়াত।
-• Indonesian (ID): Al Quran Indonesia Offline, Terjemahan & Tafsir, Jadwal Sholat, Suara Adzan, Arah Kiblat, Audio Murottal MP3.
-• Urdu (PK/IN): القرآن الکریم، قرآن مجید مع اردو ترجمہ و تفسیر، نماز کے اوقات، اذان الارم، قبلہ رخ، تلاوت قرآن۔
-• Arabic (MENA): القرآن الكريم كاملاً بدون انترنت، أوقات الصلاة والأذان، تفسير القرآن، اتجاه القبلة، تلاوة صوتية.
-• Turkish (TR): Kuran-ı Kerim Meali ve Tefsiri, Ezan Vakti ve Namaz Saatleri, Kıble Pusulası, Sesli Kuran Dinle.
+• Bengali (BD/IN): আল কুরআন বাংলা অনুবাদ, কুরআন সার্চ ও আয়াত সার্চ, তাফসীর ইবনে কাসীর, নামাজের সময়সূচি, আযান অ্যালার্ম, হোম ও লক স্ক্রিন উইজেট, কিবলা কম্পাস, অডিও তিলাওয়াত।
+• Indonesian (ID): Al Quran Indonesia Offline, Widget Layar Utama & Kunci, Pencarian Ayat Al Quran, Terjemahan & Tafsir, Jadwal Sholat, Suara Adzan, Arah Kiblat, Audio Murottal MP3.
+• Urdu (PK/IN): القرآن الکریم، قرآن سرچ اور تلاش، ہوم اور لاک اسکرین وجٹس، قرآن مجید مع اردو ترجمہ و تفسیر، نماز کے اوقات، اذان الارم، قبلہ رخ، تلاوت قرآن۔
+• Arabic (MENA): القرآن الكريم كاملاً بدون انترنت، ويدجت الشاشة الرئيسية والقفل، بحث سريع في الآيات والسور، أوقات الصلاة والأذان، تفسير القرآن، اتجاه القبلة، تلاوة صوتية.
+• Turkish (TR): Kuran-ı Kerim Meali ve Tefsiri, Kuran Widget, Kuran Ayet Arama, Ezan Vakti ve Namaz Saatleri, Kıble Pusulası, Sesli Kuran Dinle.
