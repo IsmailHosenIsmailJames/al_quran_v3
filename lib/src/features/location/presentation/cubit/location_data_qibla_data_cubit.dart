@@ -2,6 +2,7 @@ import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_widget_service.dart";
 import "package:al_quran_v3/src/features/qibla/data/repositories/qibla_repository_impl.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/vibration_datasource.dart";
@@ -59,6 +60,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
 
     emit(state.copyWith(latLon: latLon, kaabaAngle: kaabaAngle));
     await ReminderScheduler.scheduleNotification();
+    await PrayerWidgetService.updateWidgets(locationState: state);
   }
 
   Future<void> saveCalculationMethod(
@@ -75,6 +77,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
     emit(state.copyWith(calculationMethod: calculationMethod));
     await ReminderScheduler.scheduleNotification();
+    await PrayerWidgetService.updateWidgets(locationState: state);
   }
 
   Future<void> saveMadhab(Madhab madhab, {bool save = true}) async {
@@ -89,6 +92,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     }
     emit(state.copyWith(madhab: madhab, calculationMethod: calcMethod));
     await ReminderScheduler.scheduleNotification();
+    await PrayerWidgetService.updateWidgets(locationState: state);
   }
 
   void changePrayerTimeDownloading(bool value) {

@@ -50,7 +50,41 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Home & Lock Screen Widget Deep Link Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="al-quran"
+                    android:host="prayer" />
+            </intent-filter>
         </activity>
+
+        <!-- Prayer Times Small Widget Receiver (2x2) -->
+        <receiver
+            android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetSmallProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/prayer_widget_small_info" />
+        </receiver>
+
+        <!-- Prayer Times Medium Widget Receiver (4x2 / 5 Prayers) -->
+        <receiver
+            android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetMediumProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/prayer_widget_medium_info" />
+        </receiver>
 
         <!-- for just audio background -->
         <!-- ADD THIS "SERVICE" element -->
