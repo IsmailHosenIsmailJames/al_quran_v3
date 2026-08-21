@@ -1640,4 +1640,16 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get script => 'Жазу';
+
+  @override
+  String get muted => 'Дыбыссыз';
+
+  @override
+  String get alerts => 'Ескертулер';
+
+  @override
+  String get off => 'Өшірулі';
+
+  @override
+  String get on => 'Қосулы';
 }

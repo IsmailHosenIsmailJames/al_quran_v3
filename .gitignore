@@ -46,7 +46,6 @@ app.*.map.json
 lib/src/api
 *.dmg
 *.deb
-AppDir/usr/bin
-appimagetool-x86_64.AppImage
 *.AppImage
 /dist
+test_hive*/

@@ -486,5 +486,9 @@
   "searchSurahHint": "名前または番号でスーラを検索...",
   "fullscreen": "全画面表示",
   "back": "戻る",
-  "script": "書体"
+  "script": "書体",
+  "muted": "消音",
+  "alerts": "通知",
+  "off": "オフ",
+  "on": "オン"
 }

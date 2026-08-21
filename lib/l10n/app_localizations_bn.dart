@@ -1647,4 +1647,16 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get script => 'স্ক্রিপ্ট';
+
+  @override
+  String get muted => 'মিউট';
+
+  @override
+  String get alerts => 'অ্যালার্ট';
+
+  @override
+  String get off => 'বন্ধ';
+
+  @override
+  String get on => 'চালু';
 }

@@ -1655,4 +1655,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get script => 'Шрифт';
+
+  @override
+  String get muted => 'Без звука';
+
+  @override
+  String get alerts => 'Оповещения';
+
+  @override
+  String get off => 'Выкл';
+
+  @override
+  String get on => 'Вкл';
 }

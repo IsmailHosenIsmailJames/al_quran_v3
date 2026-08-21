@@ -748,5 +748,9 @@
   "searchSurahHint": "Tafuta Sura kwa jina au nambari...",
   "fullscreen": "Skrini Kamili",
   "back": "Nyuma",
-  "script": "Nakala"
+  "script": "Nakala",
+  "muted": "Kimya",
+  "alerts": "Tahadhari",
+  "off": "Imezimwa",
+  "on": "Imewashwa"
 }

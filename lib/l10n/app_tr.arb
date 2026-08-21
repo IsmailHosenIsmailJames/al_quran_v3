@@ -748,5 +748,9 @@
   "searchSurahHint": "Sureyi isim veya numara ile ara...",
   "fullscreen": "Tam Ekran",
   "back": "Geri",
-  "script": "Yazı"
+  "script": "Yazı",
+  "muted": "Sessiz",
+  "alerts": "Uyarılar",
+  "off": "Kapalı",
+  "on": "Açık"
 }

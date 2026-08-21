@@ -1654,4 +1654,16 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get script => 'Nakala';
+
+  @override
+  String get muted => 'Kimya';
+
+  @override
+  String get alerts => 'Tahadhari';
+
+  @override
+  String get off => 'Imezimwa';
+
+  @override
+  String get on => 'Imewashwa';
 }

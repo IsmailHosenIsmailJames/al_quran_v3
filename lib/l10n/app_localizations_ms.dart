@@ -1640,4 +1640,16 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get script => 'Skrip';
+
+  @override
+  String get muted => 'Dibisukan';
+
+  @override
+  String get alerts => 'Pemberitahuan';
+
+  @override
+  String get off => 'Mati';
+
+  @override
+  String get on => 'Aktif';
 }

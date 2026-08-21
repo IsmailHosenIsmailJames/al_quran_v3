@@ -1665,4 +1665,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get script => 'Écriture';
+
+  @override
+  String get muted => 'Muet';
+
+  @override
+  String get alerts => 'Alertes';
+
+  @override
+  String get off => 'Désactivé';
+
+  @override
+  String get on => 'Activé';
 }

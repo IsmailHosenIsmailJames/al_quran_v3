@@ -1641,4 +1641,16 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get script => 'لیک';
+
+  @override
+  String get muted => 'بې غږه';
+
+  @override
+  String get alerts => 'خبرتیاوې';
+
+  @override
+  String get off => 'بند';
+
+  @override
+  String get on => 'روښانه';
 }
