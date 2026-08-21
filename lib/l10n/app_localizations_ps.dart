@@ -1653,4 +1653,71 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get on => 'روښانه';
+
+  @override
+  String get homeAndLockWidgets => 'د کور او لاک سکرین ویجټونه';
+
+  @override
+  String get glanceableWidgets => 'په یوه نظر کې ویجټونه';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'د خپل کور او لاک سکرین پر مخ ورځني آیتونه او د لمانځه وختونه وښایاست.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'د آیت ویجټ ښودلو حالت';
+
+  @override
+  String get dailyInspiringAyah => 'ورځنی الهام بخښونکی آیت (غوره شوی)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      'هره ورځ په نیمه شپه کې له ۳۶۵ څخه زیاتو غوره شویو آیتونو سره بدلیږي.';
+
+  @override
+  String get lastReadAyah => 'وروستی لوستل شوی آیت';
+
+  @override
+  String get lastReadAyahDesc =>
+      'په یو ټک سره لوستلو ته دوام ورکولو لپاره ستاسو د وروستي لوستلو موقعیت سره همغږي کیږي.';
+
+  @override
+  String get pinnedCustomVerse => 'ټاکل شوی ځانګړی آیت';
+
+  @override
+  String get randomDailyAyah => 'تصادفي ورځنی آیت';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'د نوي فکر او تدبر لپاره هره ورځ یو تصادفي آیت غوره کوي.';
+
+  @override
+  String get updateAllWidgetsNow => 'همدا اوس ټول ویجټونه تازه کړئ';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'ویجټونه په بریالیتوب سره تازه شول!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'آیت د کور او لاک سکرین ویجټونو ته وټاکل شو!';
+
+  @override
+  String get pinToWidgets => 'ویجټونو ته وټاکئ';
+
+  @override
+  String get selectPinnedAyah => 'د ټاکلو لپاره آیت وټاکئ';
+
+  @override
+  String get saveAndApplyToWidget => 'خوندي کړئ او ویجټ ته یې پلي کړئ';
+
+  @override
+  String get howToAddWidgets => 'ویجټونه څنګه اضافه کړئ';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'د ویجټ آیت او لمونځونه تنظیم کړئ';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'د ورځني غوره شوي، وروستي لوستل شوي، یا ټاکل شوي ځانګړي آیتونو ترمنځ وټاکئ';
 }

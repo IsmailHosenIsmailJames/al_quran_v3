@@ -1653,4 +1653,71 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get on => 'ਚਾਲੂ';
+
+  @override
+  String get homeAndLockWidgets => 'ਹੋਮ ਅਤੇ ਲੌਕ ਸਕ੍ਰੀਨ ਵਿਜੇਟਸ';
+
+  @override
+  String get glanceableWidgets => 'ਇੱਕ ਝਲਕ ਵਿਜੇਟਸ';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'ਆਪਣੀ ਹੋਮ ਸਕ੍ਰੀਨ ਅਤੇ ਲੌਕ ਸਕ੍ਰੀਨ \'ਤੇ ਰੋਜ਼ਾਨਾ ਦੀਆਂ ਆਇਤਾਂ ਅਤੇ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰੋ।';
+
+  @override
+  String get ayahWidgetDisplayMode => 'ਆਇਤ ਵਿਜੇਟ ਡਿਸਪਲੇ ਮੋਡ';
+
+  @override
+  String get dailyInspiringAyah => 'ਰੋਜ਼ਾਨਾ ਪ੍ਰੇਰਨਾਦਾਇਕ ਆਇਤ (ਚੁਣੀ ਗਈ)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365+ ਚੁਣੀਆਂ ਹੋਈਆਂ ਆਇਤਾਂ ਨਾਲ ਹਰ ਰੋਜ਼ ਅੱਧੀ ਰਾਤ ਨੂੰ ਬਦਲਦਾ ਹੈ।';
+
+  @override
+  String get lastReadAyah => 'ਆਖਰੀ ਪੜ੍ਹੀ ਗਈ ਆਇਤ';
+
+  @override
+  String get lastReadAyahDesc =>
+      'ਇੱਕ ਟੈਪ ਨਾਲ ਪੜ੍ਹਨਾ ਜਾਰੀ ਰੱਖਣ ਲਈ ਤੁਹਾਡੀ ਆਖਰੀ ਸਥਿਤੀ ਨਾਲ ਸਿੰਕ ਹੁੰਦਾ ਹੈ।';
+
+  @override
+  String get pinnedCustomVerse => 'ਪਿੰਨ ਕੀਤੀ ਗਈ ਆਇਤ';
+
+  @override
+  String get randomDailyAyah => 'ਬੇਤਰਤੀਬ ਰੋਜ਼ਾਨਾ ਆਇਤ';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'ਨਵੇਂ ਵਿਚਾਰਾਂ ਲਈ ਹਰ ਰੋਜ਼ ਇੱਕ ਬੇਤਰਤੀਬ ਆਇਤ ਚੁਣਦਾ ਹੈ।';
+
+  @override
+  String get updateAllWidgetsNow => 'ਸਾਰੇ ਵਿਜੇਟਸ ਹੁਣੇ ਅਪਡੇਟ ਕਰੋ';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'ਵਿਜੇਟਸ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਹੋ ਗਏ!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'ਆਇਤ ਹੋਮ ਅਤੇ ਲੌਕ ਸਕ੍ਰੀਨ ਵਿਜੇਟਸ \'ਤੇ ਪਿੰਨ ਕੀਤੀ ਗਈ!';
+
+  @override
+  String get pinToWidgets => 'ਵਿਜੇਟਸ \'ਤੇ ਪਿੰਨ ਕਰੋ';
+
+  @override
+  String get selectPinnedAyah => 'ਪਿੰਨ ਕਰਨ ਲਈ ਆਇਤ ਚੁਣੋ';
+
+  @override
+  String get saveAndApplyToWidget => 'ਸੁਰੱਖਿਅਤ ਕਰੋ ਅਤੇ ਵਿਜੇਟ \'ਤੇ ਲਾਗੂ ਕਰੋ';
+
+  @override
+  String get howToAddWidgets => 'ਵਿਜੇਟਸ ਕਿਵੇਂ ਸ਼ਾਮਲ ਕਰੀਏ';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'ਵਿਜੇਟ ਆਇਤ ਅਤੇ ਨਮਾਜ਼ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'ਰੋਜ਼ਾਨਾ ਚੁਣੀਆਂ ਗਈਆਂ, ਆਖਰੀ ਪੜ੍ਹੀਆਂ ਗਈਆਂ, ਜਾਂ ਪਿੰਨ ਕੀਤੀਆਂ ਆਇਤਾਂ ਵਿੱਚੋਂ ਚੁਣੋ';
 }

@@ -1660,4 +1660,71 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get on => 'Açıq';
+
+  @override
+  String get homeAndLockWidgets => 'Əsas və Kilid Ekranı Vidcetləri';
+
+  @override
+  String get glanceableWidgets => 'Baxış Vidcetləri';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'Əsas və kilid ekranınızda gündəlik ayələri və namaz vaxtlarını göstərin.';
+
+  @override
+  String get ayahWidgetDisplayMode => 'Ayə Vidceti Göstərmə Modu';
+
+  @override
+  String get dailyInspiringAyah => 'Gündəlik İlhamverici Ayə (Seçilmiş)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '365-dən çox seçilmiş ayə ilə hər gün gecə yarısı dəyişir.';
+
+  @override
+  String get lastReadAyah => 'Son Oxunmuş Ayə';
+
+  @override
+  String get lastReadAyahDesc =>
+      'Bir toxunuşla davam etmək üçün son oxu mövqeyinizlə sinxronlaşır.';
+
+  @override
+  String get pinnedCustomVerse => 'Sancılanmış Xüsusi Ayə';
+
+  @override
+  String get randomDailyAyah => 'Təsadüfi Gündəlik Ayə';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'Hər gün yeni düşüncələr üçün təsadüfi bir ayə seçir.';
+
+  @override
+  String get updateAllWidgetsNow => 'Bütün Vidcetləri İndi Yeniləyin';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'Vidcetlər uğurla yeniləndi!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'Ayə Əsas və Kilid Ekranı Vidcetlərinə sancıldı!';
+
+  @override
+  String get pinToWidgets => 'Vidcetlərə Sanc';
+
+  @override
+  String get selectPinnedAyah => 'Sancılacaq Ayəni Seçin';
+
+  @override
+  String get saveAndApplyToWidget => 'Yadda Saxla və Vidcetə Tətbiq Et';
+
+  @override
+  String get howToAddWidgets => 'Vidcetləri Necə Əlavə Etməli';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'Vidcet Ayəsini və Namazlarını Fərdiləşdirin';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'Gündəlik seçilmiş, son oxunmuş və ya xüsusi sancılmış ayələr arasında seçim edin';
 }

@@ -1659,4 +1659,72 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get on => 'চালু';
+
+  @override
+  String get homeAndLockWidgets => 'হোম ও লক স্ক্রিন উইজেট';
+
+  @override
+  String get glanceableWidgets => 'একনজরে উইজেট';
+
+  @override
+  String get glanceableWidgetsDesc =>
+      'আপনার হোম স্ক্রিন ও লক স্ক্রিনে প্রতিদিনের আয়াত ও নামাজের সময় প্রদর্শন করুন।';
+
+  @override
+  String get ayahWidgetDisplayMode => 'আয়াত উইজেট ডিসপ্লে মোড';
+
+  @override
+  String get dailyInspiringAyah =>
+      'প্রতিদিনের অনুপ্রেরণামূলক আয়াত (নির্বাচিত)';
+
+  @override
+  String get dailyInspiringAyahDesc =>
+      '৩৬৫+ নির্বাচিত আয়াত নিয়ে প্রতিদিন মধ্যরাতে স্বয়ংক্রিয়ভাবে পরিবর্তিত হয়।';
+
+  @override
+  String get lastReadAyah => 'সর্বশেষ পঠিত আয়াত';
+
+  @override
+  String get lastReadAyahDesc =>
+      'সহজ ১-ট্যাপে পড়া চালিয়ে নিতে আপনার সর্বশেষ পঠিত স্থানের সাথে সিঙ্ক হয়।';
+
+  @override
+  String get pinnedCustomVerse => 'পিন করা নিজস্ব আয়াত';
+
+  @override
+  String get randomDailyAyah => 'দৈবচয়ন দৈনিক আয়াত';
+
+  @override
+  String get randomDailyAyahDesc =>
+      'নতুন ভাবনার জন্য প্রতিদিন একটি নতুন আয়াত নির্বাচন করে।';
+
+  @override
+  String get updateAllWidgetsNow => 'সকল উইজেট এখনই আপডেট করুন';
+
+  @override
+  String get widgetsUpdatedSuccessfully => 'উইজেট সফলভাবে আপডেট করা হয়েছে!';
+
+  @override
+  String get ayahPinnedToWidgets =>
+      'আয়াতটি হোম ও লক স্ক্রিন উইজেটে পিন করা হয়েছে!';
+
+  @override
+  String get pinToWidgets => 'উইজেটে পিন করুন';
+
+  @override
+  String get selectPinnedAyah => 'পিন করার আয়াত নির্বাচন করুন';
+
+  @override
+  String get saveAndApplyToWidget => 'সংরক্ষণ ও উইজেটে প্রয়োগ করুন';
+
+  @override
+  String get howToAddWidgets => 'উইজেট যুক্ত করার নিয়ম';
+
+  @override
+  String get customizeWidgetAyahAndPrayers =>
+      'উইজেটের আয়াত ও নামাজের সময় কাস্টমাইজ করুন';
+
+  @override
+  String get customizeWidgetAyahAndPrayersDesc =>
+      'প্রতিদিনের নির্বাচিত, সর্বশেষ পঠিত বা নিজের পছন্দের পিন করা আয়াত বেছে নিন';
 }
