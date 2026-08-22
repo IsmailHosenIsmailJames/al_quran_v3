@@ -27,13 +27,21 @@ abstract class FirebaseAuthDataSource {
 @LazySingleton(as: FirebaseAuthDataSource)
 class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    serverClientId: "562324718404-qcit8fhnjk81cvgj1b6k8sbargh5ohdm.apps.googleusercontent.com",
-    scopes: ["email", "profile"],
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   final FirebaseDatabase _database = FirebaseDatabase.instance;
+  bool _isGoogleSignInInitialized = false;
 
   FirebaseAuthDataSourceImpl();
+
+  Future<void> _ensureGoogleSignInInitialized() async {
+    if (!_isGoogleSignInInitialized) {
+      await _googleSignIn.initialize(
+        serverClientId:
+            "562324718404-qcit8fhnjk81cvgj1b6k8sbargh5ohdm.apps.googleusercontent.com",
+      );
+      _isGoogleSignInInitialized = true;
+    }
+  }
 
   @override
   UserEntity? get currentUser {
@@ -44,28 +52,25 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Stream<UserEntity?> get authStateChanges {
     return _firebaseAuth.authStateChanges().map(
-          (user) => user != null ? UserEntity.fromFirebaseUser(user) : null,
-        );
+      (user) => user != null ? UserEntity.fromFirebaseUser(user) : null,
+    );
   }
 
   @override
   Future<UserEntity> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) {
-        throw Exception("Google sign in was cancelled.");
-      }
+      await _ensureGoogleSignInInitialized();
+      final GoogleSignInAccount googleUser =
+          await _googleSignIn.authenticate();
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithCredential(credential);
       final user = userCredential.user;
 
       if (user == null) {
@@ -96,11 +101,8 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String password,
   }) async {
     try {
-      final UserCredential credential =
-          await _firebaseAuth.signInWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
+      final UserCredential credential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email.trim(), password: password);
       final user = credential.user;
       if (user == null) {
         throw Exception("Sign in failed. No user found.");
@@ -126,11 +128,11 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String displayName,
   }) async {
     try {
-      final UserCredential credential =
-          await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
+      final UserCredential credential = await _firebaseAuth
+          .createUserWithEmailAndPassword(
+            email: email.trim(),
+            password: password,
+          );
       final user = credential.user;
       if (user == null) {
         throw Exception("Failed to create account.");
@@ -162,8 +164,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<UserEntity> signInAnonymously() async {
     try {
-      final UserCredential credential =
-          await _firebaseAuth.signInAnonymously();
+      final UserCredential credential = await _firebaseAuth.signInAnonymously();
       final user = credential.user;
       if (user == null) {
         throw Exception("Failed to sign in anonymously.");
@@ -190,6 +191,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     try {
       await _firebaseAuth.signOut();
       try {
+        await _ensureGoogleSignInInitialized();
         await _googleSignIn.signOut();
       } catch (_) {}
     } catch (e) {
@@ -219,6 +221,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
 
       // 3. Google Sign in disconnect
       try {
+        await _ensureGoogleSignInInitialized();
         await _googleSignIn.disconnect();
       } catch (_) {}
     } catch (e) {

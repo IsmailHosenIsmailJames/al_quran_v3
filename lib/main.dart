@@ -440,6 +440,17 @@ class MyApp extends StatelessWidget {
 
   bool isSetupComplete() {
     final userBox = Hive.box("user");
-    return userBox.get("is_setup_complete", defaultValue: false);
+    if (userBox.get("is_setup_complete", defaultValue: false) == true) {
+      return true;
+    }
+    // Backward compatibility: If the user previously configured language/translation
+    if (userBox.get("app_language") != null ||
+        userBox.get("selected_quran_translation_book") != null ||
+        userBox.get("selected_quran_tafsir_book") != null ||
+        userBox.get("last_ayah_current") != null) {
+      userBox.put("is_setup_complete", true);
+      return true;
+    }
+    return false;
   }
 }
