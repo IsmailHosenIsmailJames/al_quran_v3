@@ -7,6 +7,7 @@
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/ayah_widget_medium"
     android:previewLayout="@layout/ayah_widget_medium"
+    android:previewImage="@drawable/widget_preview_ayah_medium"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen|keyguard"
     android:description="@string/widget_ayah_medium_description" />
