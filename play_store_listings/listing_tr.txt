@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — TURKISH (Türkçe) [tr]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kuran-ı Kerim: Meal ve Namaz
+[Character Count: 28 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kuran-ı Kerim Meali, Tefsir, Sesli Dinle, Ezan Vakti, Widget & Bulut Eşitleme
+[Character Count: 77 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم), günlük ibadetlerinizi zenginleştirmek için tasarlanmış kapsamlı bir dijital Kuran-ı Kerim uygulamasıdır. Güvenilir Türkçe mealler, tefsirler, kelime kelime analiz, gelişmiş arama, dünyaca ünlü hafızlardan MP3 sesli tilavet, doğru namaz vakitleri, ezan alarmı, ana ekran widget'ları, kıble pusulası ve Çoklu Cihaz Bulut Senkronizasyonu ile Kuran'ı keşfedin.
+
+İnternetsiz Kuran okuyun, widget ile günlük ayetleri ve ezan saatlerini takip edin, notlarınızı tüm cihazlarınızda yedekleyin.
+
+══════════════════════════════════════
+✨ ÖNE ÇIKAN ÖZELLİKLER
+══════════════════════════════════════
+
+☁️ GÜVENLİ BULUT YEDEKLEME VE SENKRONİZASYON
+• Çoklu Cihaz Senkronizasyonu: Sabitlenen ayetlerinizi, notlarınızı, son okuma yerinizi ve kısayollarınızı tüm Android cihazlarınızda gerçek zamanlı eşitleyin.
+• Verileriniz Güvende: Telefon değiştirdiğinizde kişisel notlarınız ve ayraçlarınız asla kaybolmaz.
+• Tek Tıkla Giriş: Google veya E-posta ile kolayca giriş yapın ya da Misafir modunda başlayın.
+• 100% Gizlilik: Uygulama içinden tek tuşla hesap ve veri silme imkanı.
+
+📱 ŞIK ANA EKRAN VE KİLİT EKRANI WİDGET'LARI
+• Namaz Vakitleri Widget'ı: 5 vakit namaz saatlerini ve sonraki vakte kalan süreyi ekranınızdan görün.
+• Günün Ayeti Widget'ı: Orijinal Osmani hat ve Türkçe mealiyle ilham veren günlük ayetleri takip edin.
+• Hızlı Erişim: Widget'a dokunarak doğrudan ilgili sureye, ayete veya namaz takvimine geçiş yapın.
+• Pil Dostu: Otomatik güncellenen, bataryayı yormayan yüksek kontrastlı Gece/Gündüz temaları.
+
+📖 ÇEVRİMDIŞI KURAN-I KERİM OKUMA (MUSHAF)
+• Orijinal Hat Seçenekleri: Medine Osmani, İndo-Pak ve renkli tecvidli hat seçenekleri.
+• 100% İnternetsiz Erişim: Tüm mushafı, Türkçe mealleri ve tefsirleri internetsiz okuyun.
+• Kolay Gezinme: İstediğiniz Sure, Cüz, Sayfa veya Rükûya anında geçin.
+• Esnek Okuma Modları: Mushaf Sayfa Görünümü veya Ayet Ayet Liste Görünümü arasında geçiş yapın.
+
+🔍 AKILLI AYET ARAMA VE DOĞRUDAN GEÇİŞ
+• Kapsamlı Arama: Arapça metin, Türkçe meal, tefsir ve sure isimleri içinde anında arama yapın.
+• Doğrudan Ayet Geçişi: Ayet referansı (ör. "2:255") veya popüler isim (ör. "Ayetel Kürsi") yazarak direkt ayete gidin.
+• Harekeli/Harekesiz Arama: Arapça kelimeleri harekesiz de kolayca ve doğru bulun.
+
+🧠 DETAYLI TEFSİR VE KELİME KELİME ÇÖZÜMLEME
+• Güvenilir Tefsirler: İbn Kesir, Celaleyn ve Diyanet tefsirleri ile ayetlerin derin manalarını öğrenin.
+• Kelime Kelime Anlam: Her Arapça kelimenin kök anlamını, gramer yapısını ve okunuşunu inceleyin.
+• Meal Karşılaştırma: Ayetleri daha iyi anlamak için birden fazla meali yan yana kıyaslayın.
+
+🔊 MP3 SESLİ KURAN TİLAVETİ
+• Ünlü Hafızlar: Mishari Rashid Alafasy, Abdulbasit Abdussamed, Abdullah Basfar ve daha fazlası.
+• Ezber (Hıfz) Modu: Ayet ve kelime bazında tekrarlarla Kuran ezberleme ve tecvid geliştirme.
+• Arka Planda Çalma: Ekran kapalıyken dinleyin ve internetsiz dinleme için ses dosyalarını indirin.
+
+🕌 DOĞRU NAMAZ VAKİTLERİ VE EZAN ALARMI
+• Hassas Ezan Vakitleri: GPS konumunuza göre Diyanet ve uluslararası hesaplama yöntemleri.
+• Ezan Bildirimleri: Sabah, Öğle, İkindi, Akşam ve Yatsı vakitlerinde güzel ezan sesli bildirimler.
+• Geri Sayım Sayacı: Bir sonraki namaz vaktine kalan süreyi gösteren canlı sayaç.
+
+🧭 KIBLE PUSULASI VE TECVİD REHBERİ
+• Hassas Kıble Bulucu: Dünyanın her yerinde Kabe yönünü cihazınızın pusulasıyla kolayca bulun.
+• İnteraktif Tecvid Rehberi: İhfa, İzhar, İklab, İdgam ve Kalkale kurallarını pratik örneklerle öğrenin.
+
+══════════════════════════════════════
+🌐 40+ DİL DESTEĞİ
+══════════════════════════════════════
+Türkçe, İngilizce, Arapça, Urduca, Endonezce, Rusça, Fransızca, Almanca ve 40'tan fazla dilde mealler içerir.
+
+Kuran-ı Kerim ile bağınızı güçlendirmek ve ibadetlerinizi tüm cihazlarınızda eşitlemek için Al Quran uygulamasını hemen indirin.
+[Character Count: 3803 / 4,000 chars]

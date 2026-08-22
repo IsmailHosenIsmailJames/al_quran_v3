@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — VIETNAMESE (Tiếng Việt) [vi]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kinh Quran: Dịch & Giờ Salah
+[Character Count: 28 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kinh Quran tiếng Việt offline, Tafsir, Audio MP3, Giờ lễ Salah & Đồng bộ Widget
+[Character Count: 79 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) là ứng dụng Hồi giáo toàn diện để đọc, lắng nghe và học tập Kinh Quran Thánh. Ứng dụng cung cấp bản dịch tiếng Việt chuẩn xác, chú giải Tafsir, phân tích ngữ pháp từng từ, tìm kiếm câu kinh thông minh, âm thanh MP3 từ các Qari danh tiếng thế giới, giờ cầu nguyện Salah chuẩn xác, chuông báo Adhan, tiện ích widget màn hình chính và khóa, la bàn Qibla cùng tính năng Đồng bộ hóa Đám mây Đa Thiết bị.
+
+Đọc Kinh Quran hoàn toàn ngoại tuyến không cần internet, theo dõi giờ cầu nguyện qua widget và sao lưu an toàn ghi chú của bạn trên đám mây.
+
+══════════════════════════════════════
+✨ CÁC TÍNH NĂNG NỔI BẬT
+══════════════════════════════════════
+
+☁️ SAO LƯU ĐÁM MÂY & ĐỒNG BỘ ĐA THIẾT BỊ
+• Đồng bộ hóa Đa Thiết bị: Tự động đồng bộ các câu kinh đã ghim, ghi chú, vị trí đọc gần nhất trên tất cả điện thoại Android.
+• Dữ liệu Luôn An Toàn: Toàn bộ ghi chú và dấu trang của bạn luôn được lưu giữ an toàn trên đám mây.
+• Đăng nhập 1 Chạm: Đăng nhập nhanh qua Google hoặc Email/Mật khẩu, hoặc bắt đầu ở chế độ Khách.
+• 100% Bảo mật: Hoàn toàn tuân thủ bảo mật với tùy chọn xóa tài khoản và dữ liệu trực tiếp trong app.
+
+📱 TIỆN ÍCH WIDGET MÀN HÌNH CHÍNH & KHÓA
+• Widget Giờ Cầu Nguyện: Xem lịch trình 5 buổi lễ trong ngày và đếm ngược đến giờ lễ tiếp theo trên màn hình.
+• Widget Câu Kinh Mỗi Ngày: Suy ngẫm về các câu kinh ý nghĩa với chữ Ả Rập Uthmani và bản dịch tiếng Việt.
+• Truy cập Trực tiếp: Chạm vào widget để mở ngay Surah hoặc lịch cầu nguyện tương ứng.
+• Tiết kiệm Pin: Thiết kế chủ đề Sáng và Tối tương phản cao, tự động cập nhật mà không hao pin.
+
+📖 ĐỌC KINH QURAN TOÀN TẬP NGOẠI TUYẾN (MUSHAF)
+• Kiểu Chữ Ả Rập Chuẩn: Bản chép Madani Uthmani, Indo-Pak và kiểu chữ quy tắc Tajweed có mã màu.
+• 100% Ngoại Tuyến: Đọc toàn bộ Mushaf, bản dịch và Tafsir mà không cần kết nối mạng.
+• Điều hướng Nhanh: Chuyển nhanh đến bất kỳ Surah, Juz, Trang, Hizb hoặc Ruku nào.
+• Chế độ Đọc Linh Hoạt: Chuyển đổi giữa chế độ Trang Mushaf và Danh sách từng câu kinh.
+
+🔍 TÌM KIẾM CÂU KINH THÔNG MINH & NHẢY TRỰC TIẾP
+• Tìm kiếm Toàn diện: Tìm kiếm trong văn bản tiếng Ả Rập, bản dịch tiếng Việt, Tafsir và tên Surah.
+• Nhảy Trực tiếp: Nhập số câu (vd: "2:255") hoặc tên gọi để mở ngay lập tức.
+• Tìm kiếm Không Cần Dấu: Dễ dàng tìm kiếm từ ngữ Ả Rập có hoặc không có dấu nguyên âm.
+
+🧠 TAFSIR CHI TIẾT & PHÂN TÍCH TỪNG TỪ
+• Kho Tàng Tafsir Uy Tín: Hiểu sâu sắc ý nghĩa câu kinh với Tafsir Ibn Kathir, Jalalayn và kinh điển.
+• Nghĩa Từng Từ: Chạm vào bất kỳ từ tiếng Ả Rập nào để xem nghĩa gốc, ngữ pháp và phát âm.
+• So Sánh Bản Dịch: Đặt nhiều bản dịch cạnh nhau để có cái nhìn toàn diện nhất.
+
+🔊 ÂM THANH QURAN MP3 CHẤT LƯỢNG CAO
+• Các Qari Nổi Tiếng: Lắng nghe giọng đọc của Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, v.v.
+• Chế độ Học Thuộc (Hifz): Lặp lại từng câu và từng từ để hỗ trợ ghi nhớ và hoàn thiện Tajweed.
+• Phát trong Nền: Nghe kinh khi màn hình tắt và tải xuống tệp âm thanh để nghe offline.
+
+🕌 GIỜ CẦU NGUYỆN CHUẨN XÁC & BÁO ADHAN
+• Giờ Salah Chuẩn Xác: Tính toán dựa trên vị trí GPS của bạn theo các phương pháp quốc tế.
+• Thông báo Adhan: Lời kêu gọi cầu nguyện du dương cho các lễ Fajr, Dhuhr, Asr, Maghrib và Isha.
+• Đồng Hồ Đếm Ngược: Hiển thị thời gian thực còn lại cho đến giờ cầu nguyện tiếp theo.
+
+🧭 LA BÀN QIBLA & HƯỚNG DẪN TAJWEED
+• Xác định Hướng Qibla: Tìm hướng chính xác về thánh địa Kaaba tại Mecca từ mọi nơi trên thế giới.
+• Hướng dẫn Tajweed: Giải thích dễ hiểu các quy tắc Ghunnah, Idgham, Iqlab, Ikhfa và Qalqalah.
+
+══════════════════════════════════════
+🌐 HỖ TRỢ HƠN 40 NGÔN NGỮ
+══════════════════════════════════════
+Bao gồm tiếng Việt, tiếng Ả Rập, tiếng Anh, tiếng Pháp, tiếng Thổ Nhĩ Kỳ, tiếng Urdu, tiếng Indonesia và nhiều ngôn ngữ khác.
+
+Tải ngay ứng dụng Al Quran để gắn kết tâm hồn với Kinh Thánh, đồng bộ hóa việc thờ phượng trên mọi thiết bị và nâng tầm đời sống tâm linh mỗi ngày.
+[Character Count: 3855 / 4,000 chars]

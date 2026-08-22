@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — SWAHILI (Kiswahili) [sw]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kurani Tukufu: Tafsiri & Swala
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kurani Tukufu Kiswahili bila mtandao, Tafsir, Sauti MP3, Swala, Widget & Cloud
+[Character Count: 78 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) ni programu kamili ya Kiislamu ya kusoma, kusikiliza na kujifunza Kurani Tukufu nje ya mtandao. Inajumuisha tafsiri sahihi za Kiswahili (Sheikh Ali Muhsin Al-Barwani na wengine), tafsiri za wanazuoni (Tafsir), uchambuzi wa neno kwa neno, utafutaji wa haraka wa aya, usomaji mzuri wa sauti za MP3, nyakati sahihi za swala, azana, widget za skrini kuu na ya kufunga, dira ya kibla na usawazishaji wa wingu kwa vifaa vyote.
+
+Soma Kurani bila intaneti, fuatilia nyakati za swala kupitia widget na uhifadhi maelezo na alamisho zako salama kwenye wingu.
+
+══════════════════════════════════════
+✨ SIFA KUU
+══════════════════════════════════════
+
+☁️ USAWAZISHAJI WA WINGU NA HIFADHI SALAMA
+• Usawazishaji wa Vifaa Vingi: Sawazisha aya zilizowekwa alama, maelezo yako, na sehemu ya mwisho uliyosoma kwenye vifaa vyako vyote vya Android.
+• Taarifa Zako Ziko Salama: Unapobadilisha simu, maelezo yako na alamisho hazitapotea kamwe.
+• Kuingia kwa Mguso Mmoja: Ingia kwa urahisi ukitumia Google au Barua pepe/Nenosiri, au anza kama Mgeni.
+• 100% Usiri na Usalama: Udhibiti kamili wa data zako na uwezo wa kufuta akaunti moja kwa moja ndani ya programu.
+
+📱 WIDGET ZA SKRINI KUU NA YA KUFUNGA
+• Widget za Nyakati za Swala: Tazama ratiba ya swala 5 za kila siku na muda uliobaki hadi swala inayofuata kwenye skrini yako.
+• Widget ya Aya ya Siku: Tafakari aya zenye kutia moyo kila siku zikiwa na maandishi ya Uthmani na tafsiri ya Kiswahili.
+• Kufungua Moja kwa Moja: Gusa widget ili kufungua papo hapo Sura husika au ratiba ya swala.
+• Kuokoa Betri: Muundo maridadi wa rangi ya giza na mwanga usiotumia nguvu nyingi za betri.
+
+📖 USOMAJI KAMILI WA KURANI BILA MTANDAO (MUSHAF)
+• Maandishi Halisi: Mushaf wa Madina Uthmani, Indo-Pak na maandishi yenye sheria za Tajweed za rangi.
+• 100% Bila Mtandao: Soma Kurani nzima, tafsiri na maelezo bila kuhitaji bando ya intaneti.
+• Urambazaji Rahisi: Nenda haraka kwenye Sura, Juzuu, Ukurasa, Hizbi au Ruku yoyote.
+• Njia za Kusoma: Badilisha kati ya mwonekano wa Ukurasa wa Mushaf na orodha ya aya kwa aya.
+
+🔍 UTAFUTAJI BORA WA KURANI NA KWENDA KWENYE AYA
+• Utafutaji Kamili: Tafuta kwenye maandishi ya Kiarabu, tafsiri ya Kiswahili, tafsir na majina ya Sura.
+• Kwenda Moja kwa Moja: Andika nambari ya aya (mf. "2:255") au jina (mf. "Ayatul Kursi") ili kuifungua moja kwa moja.
+• Kutafuta Bila Alama: Pata maneno ya Kiarabu kwa urahisi ukiwa na au bila alama za irabu.
+
+🧠 TAFSIR YA KINA NA NENO KWA NENO
+• Tafsir Sahihi: Panua uelewa wako ukitumia Tafsir Ibn Kathir, Jalalayn na zinginezo.
+• Maana ya Neno kwa Neno: Gusa neno lolote la Kiarabu ili kuona asili yake, sarufi na matamshi.
+• Kulinganisha Tafsiri: Linganisha tafsiri mbalimbali kwa pamoja ili kuelewa vyema.
+
+🔊 USOMAJI WA SAUTI YA MP3 YENYE UBORA
+• Maqari Maarufu: Sikiliza usomaji wa Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar na wengine wengi.
+• Njia ya Kuhifadhi (Hifz): Rudia aya na maneno ili kurahisisha kuhifadhi Kurani na kuboresha Tajweed.
+• Kusikiliza Nyuma ya Skrini: Sikiliza hata skrini ikiwa imezimwa na pakua sauti ili kusikiliza bila mtandao.
+
+🕌 NYAKATI SAHIHI ZA SWALA NA AZANA
+• Nyakati Sahihi: Huhesabiwa kulingana na GPS yako kwa kutumia mbinu zinazotambulika kimataifa.
+• Taarifa za Azana: Miito mizuri ya swala kwa Alfajiri, Adhuhuri, Alasiri, Maghribi na Isha.
+• Kipima Muda: Saa inayohesabu muda uliobaki hadi swala ifikayo.
+
+🧭 DIRA YA KIBLA NA MWONGOZO WA TAJWEED
+• Kitafuta Kibla: Pata mwelekeo sahihi wa Al-Kaaba Makka kutoka mahali popote duniani.
+• Mwongozo wa Tajweed: Jifunze sheria za Ghunnah, Idgham, Iqlab, Ikhfa na Qalqalah kwa urahisi.
+
+══════════════════════════════════════
+🌐 MSAADA WA LUGHA ZAIDI YA 40
+══════════════════════════════════════
+Inapatikana katika Kiswahili, Kiarabu, Kiingereza, Kifaransa, Kituruki, Kiurdu na lugha nyingine nyingi.
+
+Pakua programu ya Al Quran leo ili kuimarisha imani yako, kusawazisha ibada zako kwenye vifaa vyote na kuelimika kila siku.
+[Character Count: 3933 / 4,000 chars]

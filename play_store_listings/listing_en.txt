@@ -1,35 +1,21 @@
 ================================================================================
-GOOGLE PLAY STORE METADATA & ASO OPTIMIZATION
+GOOGLE PLAY STORE METADATA — ENGLISH (English) [en]
 ================================================================================
 
 --------------------------------------------------------------------------------
-1. APP TITLE OPTIONS (Max 30 characters)
-Choose one for your Google Play Console App Name:
+1. APP TITLE (Max 30 characters)
 --------------------------------------------------------------------------------
-• Option 1 (Recommended):  Al Quran: Tafsir & Prayer Time   [30/30 chars]
-• Option 2:                Al Quran: Audio, Tafsir, Qibla   [30/30 chars]
-• Option 3:                Al Quran Majeed: Tafsir, Azan    [30/30 chars]
-• Option 4:                Al Quran: Offline Tafsir, MP3    [30/30 chars]
+Al Quran: Tafsir & Prayer Time
+[Character Count: 30 / 30 chars]
 
 --------------------------------------------------------------------------------
-2. SHORT DESCRIPTION OPTIONS (Max 80 characters)
-Paste one into Google Play Console "Short description":
+2. SHORT DESCRIPTION (Max 80 characters)
 --------------------------------------------------------------------------------
-• Option 1 (Recommended - High Search Intent & Cloud Sync):
 Holy Quran with Tafsir, Audio MP3, Prayer Times, Widgets & Multi-Device Sync
-[76/80 characters]
-
-• Option 2 (Comprehensive Worship & Practice):
-Al Quran with Audio Recitation, Tafsir, Prayer Times, Cloud Backup & Qibla
-[74/80 characters]
-
-• Option 3 (Offline & Widgets Focus):
-Holy Quran with Offline Tafsir, MP3 Audio, Prayer Times, Azan & Home Widgets
-[76/80 characters]
+[Character Count: 76 / 80 chars]
 
 --------------------------------------------------------------------------------
-3. FULL LONG DESCRIPTION (Max 4,000 characters)
-Paste the text below into Google Play Console "Full description":
+3. FULL DESCRIPTION (Max 4,000 characters)
 --------------------------------------------------------------------------------
 Al Quran (القرآن الكريم) is your complete Holy Quran app designed to elevate your daily Islamic practice. Read, listen, and study the Noble Quran offline with authentic translations, Tafsir commentaries, word-by-word analysis, smart Quran search, MP3 audio, prayer times, Azan alarm, Home & Lock Screen Widgets, Qibla compass, and Multi-Device Cloud Sync.
 
@@ -88,13 +74,4 @@ Recite the Quran offline, glance at daily Ayahs and prayer times from your home 
 Translations in English, Arabic, Bengali (বাংলা), Urdu (اردو), Indonesian (Bahasa Indonesia), Turkish (Türkçe), Hindi (हिन्दी), French (Français), Russian (Русский), Persian (فارسی), and more.
 
 Download Al Quran today to study the Holy Quran, sync your worship across all devices, and enrich your daily Islamic life.
-
---------------------------------------------------------------------------------
-4. GOOGLE PLAY STORE LOCALIZATION KEYWORDS (FOR REGIONAL LISTINGS)
-Use these when adding localized store listings in Google Play Console:
---------------------------------------------------------------------------------
-• Bengali (BD/IN): আল কুরআন বাংলা অনুবাদ, কুরআন ক্লাউড সিঙ্ক ও ব্যাকআপ, কুরআন সার্চ ও আয়াত সার্চ, তাফসীর ইবনে কাসীর, নামাজের সময়সূচি, আযান অ্যালার্ম, হোম ও লক স্ক্রিন উইজেট, কিবলা কম্পাস, অডিও তিলাওয়াত।
-• Indonesian (ID): Al Quran Indonesia Offline, Sinkronisasi Cloud & Cadangan Akun, Widget Layar Utama & Kunci, Pencarian Ayat Al Quran, Terjemahan & Tafsir, Jadwal Sholat, Suara Adzan, Arah Kiblat, Audio Murottal MP3.
-• Urdu (PK/IN): القرآن الکریم، کلاؤڈ بیک اپ اور ملٹی ڈیوائس سنک، قرآن سرچ اور تلاش، ہوم اور لاک اسکرین وجٹس، قرآن مجید مع اردو ترجمہ و تفسیر، نماز کے اوقات، اذان الارم، قبلہ رخ، تلاوت قرآن۔
-• Arabic (MENA): القرآن الكريم كاملاً بدون انترنت، مزامنة سحابية وحفظ الملاحظات والإشارات، ويدجت الشاشة الرئيسية والقفل، بحث سريع في الآيات والسور، أوقات الصلاة والأذان، تفسير القرآن، اتجاه القبلة، تلاوة صوتية.
-• Turkish (TR): Kuran-ı Kerim Meali ve Tefsiri, Kuran Bulut Senkronizasyonu ve Yedekleme, Kuran Widget, Kuran Ayet Arama, Ezan Vakti ve Namaz Saatleri, Kıble Pusulası, Sesli Kuran Dinle.
+[Character Count: 3967 / 4,000 chars]

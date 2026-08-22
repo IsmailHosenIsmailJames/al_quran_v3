@@ -1,0 +1,1952 @@
+
+
+================================================================================================================================================================
+GOOGLE PLAY STORE METADATA — ARABIC (العربية) [ar]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+القرآن الكريم: تفسير وأذان
+[Character Count: 26 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+القرآن الكريم مع التفسير، صوت MP3، مواقيت الصلاة، ويدجت الشاشة والمزامنة
+[Character Count: 72 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+تطبيق القرآن الكريم (القرآن المجيد) رفيقك الشامل لتلاوة ودراسة كتاب الله. استمتع بتلاوة القرآن الكريم بدون انترنت مع تفاسير معتمدة، إعراب وتحليل الكلمات كلمة بكلمة، بحث ذكي متقدم، تلاوات صوتية بأصوات أشهر القراء، مواقيت الصلاة الدقيقة، تنبيهات الأذان، ويدجت الشاشة الرئيسية والقفل، بوصلة القبلة، والمزامنة السحابية عبر أجهزتك.
+
+اقرأ القرآن، تابع أذكارك ومواقيت صلاتك من الشاشة الرئيسية، واحفظ ملاحظاتك وإشاراتك المرجعية بأمان على السحابة.
+
+══════════════════════════════════════
+✨ أبرز الميزات
+══════════════════════════════════════
+
+☁️ مزامنة سحابية آمنة ونسخ احتياطي
+• مزامنة متعددة الأجهزة: مزامنة تلقائية لآياتك المثبتة، مجموعات الملاحظات، موضع آخر قراءة، والوصول السريع عبر جميع أجهزتك.
+• حفظ التقدم: احفظ تأملاتك القرآنية وملاحظاتك وسجل التصفح بأمان في السحابة دون فقدان أي بيانات.
+• تسجيل دخول سريع: تسجيل بضغطة واحدة عبر Google أو البريد، أو المتابعة كضيف مع إمكانية الترقية.
+• خصوصية وأمان 100%: حماية تامة لبياناتك مع خيار حذف الحساب والبيانات بضغطة زر داخل التطبيق.
+
+📱 ويدجت أنيق للشاشة الرئيسية وشاشة القفل
+• ويدجت مواقيت الصلاة: عرض أوقات الصلوات الخمس والعد التنازلي للصلاة القادمة على شاشتك.
+• ويدجت آية اليوم: تدبر آيات يومية ملهمة بالرسم العثماني على شاشتك الرئيسية.
+• فتح مباشر سريع: الانتقال بنقرة واحدة إلى السورة أو جدول الصلاة من الويدجت.
+• توفير فائق للبطارية: تصميم مريح عالي التباين يعمل بذكاء دون استهلاك البطارية.
+
+📖 مصحف كامل بدون انترنت بروايات متعددة
+• خطوط وروايات أصيلة: مصحف المدينة بالرسم العثماني، الهندو-باك، ومصحف مجمع الملك فهد مع أحكام التجويد الملونة.
+• استخدام كامل بدون نت: تصفح المصحف الشريف والتفاسير والترجمات في أي وقت دون اتصال.
+• تنقل سلس: انتقال فوري إلى أي سورة، جزء، صفحة، حزب، أو ركوع.
+• أوضاع قراءة متعددة: التبديل بين وضع صفحات المصحف ووضع عرض الآيات المتسلسل.
+
+🔍 بحث قرآني ذكي وانتقال فوري للآيات
+• بحث شامل: البحث في نصوص الآيات، الترجمات، التفاسير، وأسماء السور.
+• انتقال مباشر للآية: اكتب رقم الآية (مثل "2:255") أو اسمها (مثل "آية الكرسي") للانتقال المباشر.
+• بحث مرن بدون تشكيل: التعرف التلقائي على الكلمات بالحركات وبدونها.
+• فلاتر بحث متقدمة: تصفية البحث حسب السور أو الآيات المكية والمدنية.
+
+🧠 مكتبة التفاسير والتحليل كلمة بكلمة
+• أشهر كتب التفسير: تفسير ابن كثير، الجلالين، الميسر، والسعدي وغيرها.
+• ترجمة كلمة بكلمة: اضغط على أي كلمة لمعرفة معناها الصرفي وإعرابها ونطقها.
+• مقارنة الترجمات: عرض ومقارنة عدة ترجمات في شاشة واحدة لفهم أعمق.
+
+🔊 تلاوات صوتية MP3 لأشهر القراء
+• كبار القراء: مشاري العفاسي، عبد الباسط عبد الصمد، الحصري، عبد الله بصفر، وغيرهم.
+• تكرار للتحفيظ: تكرار الآيات والكلمات لمساعدتك في حفظ القرآن وإتقان التجويد.
+• تشغيل في الخلفية: استماع مستمر مع إغلاق الشاشة وتخزين التلاوات للاستماع بدون نت.
+
+🕌 مواقيت الصلاة وأصوات الأذان
+• أوقات صلاة دقيقة: حساب دقيق حسب موقعك عبر GPS بطرق الحساب العالمية المعتمدة.
+• تنبيهات الأذان: أصوات أذان عذبة للتنبيه لصلوات الفجر، الظهر، العصر، المغرب، والعشاء.
+• عد تنازلي: مؤقت للوقت المتبقي حتى موعد الصلاة التالية.
+
+🧭 اتجاه القبلة ودليل التجويد
+• بوصلة القبلة الدقيقة: تحديد اتجاه الكعبة المشرفة بدقة في أي مكان حول العالم.
+• دليل التجويد التفاعلي: شرح ميسر لأحكام الغنة، الإدغام، الإقلاب، الإخفاء، والقلقلة.
+
+══════════════════════════════════════
+🌐 دعم أكثر من 40 لغة عالمية
+══════════════════════════════════════
+يتوفر التطبيق بتراجم وتفاسير باللغات العربية، الإنجليزية، البنغالية، الأردية، الإندونيسية، التركية، الفرنسية، الروسية، الفارسية، وغيرها.
+
+حمل تطبيق القرآن الكريم اليوم لتوثيق صلتك بكتاب الله، مزامنة عباداتك عبر جميع أجهزتك، والارتقاء بحياتك الإيمانية.
+[Character Count: 3387 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — AZERBAIJANI (Azərbaycanca) [az]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Qurani Kərim: Təfsir və Namaz
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Qurani Kərim Azərbaycan oflayn, Təfsir, MP3 Səsli, Namaz vaxtları & Vidcet
+[Character Count: 74 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) gündəlik ibadətləriniz üçün tam və zəngin Qurani-Kərim tətbiqidir. Azərbaycan dilində mötəbər tərcümələr, təfsirlər, sözbəsöz ərəbcə təhlil, Quran axtarışı, məşhur qarilərin MP3 tilavətləri, dəqiq namaz vaxtları, azan bildirişləri, ana ekran vidcetləri, qiblə kompas və çoxlu cihaz bulud sinxronizasiyası ilə Quranı kəşf edin.
+
+İnternetsiz Quran oxuyun, vidcetlərlə namaz vaxtlarını izləyin və qeydlərinizi buludda etibarlı qoruyun.
+
+══════════════════════════════════════
+✨ ƏSAS XÜSUSİYYƏTLƏR
+══════════════════════════════════════
+
+☁️ ETİBARLI BULUD YADDAŞI VƏ SİNXRONİZASİYA
+• Çoxlu Cihaz Sinxronizasiyası: Saxlanılan ayələrinizi, qeydlərinizi, son oxu yerinizi bütün Android cihazlarınızda avtomatik bərabərləşdirin.
+• Məlumatların İtməməsi: Telefonunuzu dəyişdikdə qeydləriniz və əlfəcinləriniz həmişə qorunur.
+• 1 Toxunuşla Giriş: Google və ya Email ilə asan qeydiyyat və ya Qonaq rejimində başlamaq imkanı.
+• 100% Məxfilik: Tətbiq daxilindən hesabı və bütün məlumatları bir toxunuşla silmək hüququ.
+
+📱 ƏSAS EKRAN VƏ KİLİD EKRANI VİDCETLƏRİ
+• Namaz Vaxtları Vidceti: 5 vaxt namaz saatlarını və növbəti namaza qalan vaxtı ana ekranınızda görün.
+• Günün Ayəsi Vidceti: Gözəl Osman xətti və Azərbaycan dilində tərcümə ilə gündəlik ayələr.
+• Birbaşa Keçid: Vidcetə toxunaraq birbaşa müvafiq surəyə və ya namaz cədvəlinə daxil olun.
+• Enerjiyə Qənaət: Batareyanı yormayan yüksək kontrastlı Gecə və Gündüz rejimləri.
+
+📖 OFLAYN QURANİ-KƏRİM OXU (MÜSHƏF)
+• Orijinal Xətlər: Mədinə Osman xətti, İndo-Pak və rəngli təcvid qaydaları.
+• 100% İnternetsiz Giriş: Bütün Quranı, tərcümə və təfsirləri oflayn oxuyun.
+• Rahat Naviqasiya: İstədiyiniz Surə, Cüz, Səhifə, Hizb və ya Rüküyə dərhal keçin.
+• Oxu Rejimləri: Müshəf Səhifə Görünüşü və Ayə-Ayə Siyahı Görünüşü.
+
+🔍 AĞILLI QURAN AXTARIŞI VƏ BİRBAŞA AYƏYƏ KEÇİD
+• Çoxşaxəli Axtarış: Ərəbcə mətn, Azərbaycan dilində tərcümə, təfsir və surə adlarında anında axtarış.
+• Birbaşa Ayə Keçidi: Ayə nömrəsini (məs. "2:255") və ya adını yazaraq birbaşa ayəni açın.
+• Hərəkəsiz Axtarış: Hərəkələr olmadan da ərəbcə sözləri asanlıqla tapın.
+
+🧠 ƏTRAFLI TƏFSİR VƏ SÖZBƏSÖZ TƏHLİL
+• Mötəbər Təfsirlər: İbn Kəsir və Cəlaləyn təfsirləri ilə ayələrin dərin mənalarını öyrənin.
+• Sözbəsöz Məna: Hər bir ərəb sözünün kökünü, qrammatikasını və oxunuşunu öyrənmək üçün toxunun.
+• Tərcümə Müqayisəsi: Daha dərin anlama üçün bir neçə tərcüməni yanaşı müqayisə edin.
+
+🔊 MP3 SƏSLİ QURAN TİLAVƏTİ
+• Məşhur Qarilər: Mişari Rəşid əl-Afasi, Əbdülbasit, Abdullah Bəsfar və digər böyük qarilər.
+• Əzbərləmə (Hifz) Rejimi: Quranı əzbərləmək üçün ayə və sözbəsöz təkrar rejimi.
+• Arxa Planda Dinləmə: Ekran sönülü olduqda belə dinləyin və səsləri oflayn yaddaşa endirin.
+
+🕌 DƏQİQ NAMAZ VAXTLARI VƏ AZAN
+• Dəqiq Vaxtlar: GPS yerləşmənizə əsaslanan dəqiq namaz təqvimi.
+• Azan Bildirişləri: Sübh, Zöhr, Əsr, Məğrib və İşa namazları üçün gözəl azan səsləri.
+• Geri Sayım: Növbəti namaza qalan vaxtı göstərən canlı saniyəölçən.
+
+🧭 QİBLƏ KOMPASI VƏ TƏCVİD TƏLİMATI
+• Qiblə Tapıcı: Dünyanın istənilən yerindən Kəbənin dəqiq istiqamətini müəyyən edin.
+• İnteraktiv Təcvid Bələdçisi: Qunnah, İdğam, İqlab, İxfa və Qəlqələ qaydalarının asan izahı.
+
+══════════════════════════════════════
+🌐 40+ DİL DƏSTƏYİ
+══════════════════════════════════════
+Azərbaycan, ərəb, türk, ingilis, rus, urdu və onlarla digər dildə tərcümələr.
+
+Quranla bağınızı gücləndirmək və ibadətlərinizi bütün cihazlarınızda sinxronlaşdırmaq üçün Al Quran tətbiqini bu gün yükləyin.
+[Character Count: 3476 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — BENGALI (বাংলা) [bn]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+আল কুরআন: তাফসীর ও নামাজ সময়
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+কুরআন মাজীদ বাংলা অর্থ, তাফসীর, অডিও, নামাজের সময়, উইজেট ও ক্লাউড সিঙ্ক
+[Character Count: 71 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+আল কুরআন (القرآن الكريم) অ্যাপটি আপনার দৈনন্দিন ইসলামিক জীবনকে অর্থবহ করার এক পূর্ণাঙ্গ ডিজিটাল কুরআন সঙ্গী। নির্ভরযোগ্য বাংলা অনুবাদ, তাফসীর, শব্দে শব্দে অর্থ ও ব্যাকরণ, শক্তিশালী কুরআন সার্চ, বিশ্বখ্যাত ক্বারীদের অডিও তিলাওয়াত, নির্ভুল নামাজের সময়সূচি, আযান অ্যালার্ম, হোম ও লক স্ক্রিন উইজেট, কিবলা কম্পাস এবং ক্লাউড ব্যাকআপ ও মাল্টি-ডিভাইস সিঙ্ক সুবিধা নিয়ে তৈরি এই অ্যাপ।
+
+ইন্টারনেট ছাড়াই পূর্ণ কুরআন পাঠ করুন, হোম স্ক্রিন থেকে প্রতিদিনের আয়াত ও নামাজের সময় দেখুন, এবং সব ডিভাইসে বুকমার্ক ও নোট সুরক্ষিত রাখুন।
+
+══════════════════════════════════════
+✨ প্রধান বৈশিষ্ট্যসমূহ
+══════════════════════════════════════
+
+☁️ নিরাপদ ক্লাউড ব্যাকআপ ও মাল্টি-ডিভাইস সিঙ্ক
+• ডিভাইস সিঙ্ক: আপনার পিন করা আয়াত, নোট কালেকশন, সর্বশেষ পঠিত আয়াত ও শর্টকাট রিয়েল-টাইমে সব ফোনে স্বয়ংক্রিয়ভাবে সিঙ্ক হবে।
+• তথ্য সুরক্ষা: ফোন পরিবর্তন বা রিসেট করলেও আপনার প্রিয় নোট, বুকমার্ক ও ব্রাউজ হিস্ট্রি কখনোই হারাবে না।
+• সহজ লগইন: গুগল বা ইমেইল দিয়ে ১-ট্যাপে লগইন করুন অথবা গেস্ট হিসেবে শুরু করে ব্যাকআপ চালু করুন।
+• ১০০% গোপনীয়তা: অ্যাপের ভেতর থেকেই এক ক্লিকে যেকোনো সময় অ্যাকাউন্ট ও ডাটা ডিলিট করার সুবিধা।
+
+📱 হোম ও লক স্ক্রিন উইজেট
+• নামাজের সময়সূচি উইজেট: ৫ ওয়াক্ত নামাজের সময় ও পরবর্তী ওয়াক্তের কাউন্টডাউন দেখুন হোম ও লক স্ক্রিনে।
+• দৈনিক আয়াত উইজেট: উসমানী আরবি লিপি ও বাংলা অনুবাদসহ অনুপ্রেরণামূলক আয়াত সরাসরি হোম স্ক্রিনে পান।
+• ডিপ লিঙ্কিং: যেকোনো উইজেটে ট্যাপ করেই সরাসরি নির্দিষ্ট সূরা, আয়াত বা নামাজের পেইজে প্রবেশ করুন।
+• ব্যাটারি ফ্রেন্ডলি: উচ্চ কন্ট্রাস্টের ডার্ক ও লাইট মোড যা ব্যাটারি সাশ্রয় করে স্বয়ংক্রিয়ভাবে আপডেট হয়।
+
+📖 অফলাইন কুরআন মাজীদ তিলাওয়াত
+• বিশুদ্ধ আরবি স্ক্রিপ্ট: মদিনা উসমানী, ইন্দো-পাক ও কিউপিসি হাফস স্ক্রিপ্টের সাথে কালার-কোডেড তাজবীদ।
+• শতভাগ অফলাইন: কোনো ইন্টারনেট সংযোগ ছাড়াই সম্পূর্ণ কুরআন, বাংলা অনুবাদ ও তাফসীর অধ্যয়ন করুন।
+• সহজ নেভিগেশন: যেকোনো সূরা, পারা, পৃষ্ঠা, রুকু বা হিযবে দ্রুত চলে যাওয়ার আধুনিক সুবিধা।
+• পড়ার মোড: কাগজের মুসহাফ পেইজ ভিউ এবং আয়াতভিত্তিক লিস্ট ভিউয়ের মধ্যে পছন্দমতো পড়ার সুযোগ।
+
+🔍 স্মার্ট কুরআন সার্চ ও সরাসরি আয়াত জাম্প
+• মাল্টি-স্কোপ সার্চ: আরবি টেক্সট, বাংলা অনুবাদ, তাফসীর এবং সূরার নামের মধ্যে নিমিষেই অনুসন্ধান করুন।
+• সরাসরি আয়াত জাম্প: রেফারেন্স (যেমন "২:২৫৫") বা নাম (যেমন "আয়াতুল কুরসী") লিখে সরাসরি মূল আয়াতে যান।
+• হরকত ছাড়া সার্চ: হরকত বা জের-জবর ছাড়াও আরবি শব্দ খুব সহজে নির্ভুলভাবে খুঁজে বের করুন।
+
+🧠 নির্ভরযোগ্য তাফসীর ও শব্দে শব্দে কুরআন
+• বিখ্যাত তাফসীর সম্ভার: তাফসীর ইবনে কাসীর, তাফসীর জালালাইন এবং আহসানুল বায়ানসহ বিশ্বখ্যাত তাফসীর।
+• শব্দে শব্দে অর্থ: প্রতিটি আরবি শব্দের মূল অর্থ, ব্যাকরণ ও সঠিক উচ্চারণ জানুন ট্যাপ করেই।
+• অনুবাদের তুলনা: গভীর অনুধাবনের জন্য একাধিক বাংলা অনুবাদ পাশাপাশি রেখে তুলনা করুন।
+
+🔊 বিশ্বখ্যাত ক্বারীদের অডিও তিলাওয়াত
+• প্রখ্যাত ক্বারীগণ: মিশারি রাশিদ আল-আফাসি, আব্দুল বাসেত, আব্দুল্লাহ বাসফারসহ জনপ্রিয় তিলাওয়াতকারী।
+• হিফজ মোড: আয়াত ও শব্দ ধরে ধরে রিপিট দিয়ে কুরআন মুখস্থ ও তাজবীদ নিখুঁত করার সুযোগ।
+• ব্যাকগ্রাউন্ড অডিও: স্ক্রিন বন্ধ রেখেই তিলাওয়াত শুনুন এবং অফলাইনে শোনার জন্য অডিও ডাউনলোড করুন।
+
+🕌 নির্ভুল নামাজের সময়সূচি ও আযান অ্যালার্ম
+• সঠিক সালাতের সময়: জিপিএস লোকেশনের ভিত্তিতে ৫ ওয়াক্ত নামাজের সময় এবং সাহরি ও ইফতারের সময়সূচি।
+• সুমধুর আযান অ্যালার্ম: ফজর, যোহর, আসর, মাগরিব ও ইশার ওয়াক্তে আযানের মনমুগ্ধকর নোটিফিকেশন।
+• কাউন্টডাউন টাইমার: পরবর্তী নামাজের আর কতক্ষণ বাকি তা জানার রিয়েল-টাইম টাইমার।
+
+🧭 সঠিক কিবলা কম্পাস ও তাজবীদ গাইড
+• কিবলা ফাইন্ডার: পৃথিবীর যেকোনো প্রান্ত থেকে কাবার সঠিক দিক সহজে নির্ণয় করুন।
+• তাজবীদ গাইড: গুন্নাহ, ইদগাম, ইকলাব, ইখফা এবং ক্বলক্বলাহ নিয়মের সহজ পাঠ।
+
+══════════════════════════════════════
+🌐 বহুভাষিক সুবিধা
+══════════════════════════════════════
+বাংলা, ইংরেজি, আরবি, উর্দু, ইন্দোনেশিয়ান, তুর্কি, হিন্দি, ফরাসি, রাশিয়ানসহ ৪০টিরও বেশি ভাষার অনুবাদ।
+
+কুরআনের সান্নিধ্যে জীবন গড়তে এবং সব ডিভাইসে আপনার আমল সুরক্ষিত রাখতে আজই ডাউনলোড করুন আল কুরআন অ্যাপ।
+[Character Count: 3697 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — GERMAN (Deutsch) [de]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Der Koran: Gebetszeiten & Azan
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Koran auf Deutsch offline, Tafsir, Audio MP3, Gebetszeiten, Widgets & Cloud-Sync
+[Character Count: 80 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) ist Ihre vollständige islamische App zum Lesen, Hören und Studieren des Heiligen Korans. Nutzen Sie die App komplett offline mit authentischen deutschen Übersetzungen, Tafsir-Kommentaren, Wort-für-Wort-Analyse, intelligenter Vers-Suche, MP3-Audio-Rezitationen berühmter Qaris, präzisen Gebetszeiten, Azan-Alarm, Widgets für Start- und Sperrbildschirm, Qibla-Kompass und Multi-Device Cloud-Synchronisation.
+
+Lesen Sie den Koran ohne Internet, behalten Sie Gebetszeiten per Widget im Blick und sichern Sie Notizen und Lesezeichen dauerhaft in der Cloud.
+
+══════════════════════════════════════
+✨ HAUPTFUNKTIONEN
+══════════════════════════════════════
+
+☁️ SICHERE CLOUD-SYNCHRONISATION & BACKUP
+• Multi-Geräte-Sync: Synchronisieren Sie markierte Verse, Notizen, Leseposition und Schnellzugriffe automatisch auf all Ihren Android-Geräten.
+• Keine Datenverluste: Persönliche Notizen, Lesezeichen und Leseverlauf bleiben beim Gerätewechsel sicher erhalten.
+• 1-Klick-Anmeldung: Bequemer Login via Google oder E-Mail/Passwort oder direkter Start im Gastmodus.
+• 100% Datenschutz: Volle DSGVO-Konformität mit Möglichkeit, Konto und Daten direkt in der App zu löschen.
+
+📱 ELEGANTE WIDGETS FÜR START- & SPERRBILDSCHIRM
+• Gebetszeiten-Widgets: Die 5 täglichen Gebete und Countdown zum nächsten Gebet direkt auf Ihrem Bildschirm.
+• Vers des Tages Widgets: Inspirierende Verse mit Uthmani-Kalligraphie und deutscher Übersetzung.
+• Direktzugriff: Tippen Sie auf ein Widget, um direkt zur entsprechenden Sure oder zum Gebetsplan zu springen.
+• Akkusparend: Klares Dunkel- und Hell-Design mit optimierten Intervallen ohne unnötigen Akkuverbrauch.
+
+📖 VOLLSTÄNDIGER KORAN OFFLINE (MUSHAF)
+• Authentische Schriften: Medinensische Uthmani-Schrift, Indopak und farbkodierte Tajweed-Schriften.
+• 100% Offline-Zugriff: Lesen Sie den gesamten Mushaf, Übersetzungen und Tafsir ohne Internet.
+• Einfache Navigation: Schneller Sprung zu jeder Sure, jedem Juz (Para), jeder Seite, jedem Hizb oder Ruku.
+• Flexible Lesemodi: Wechseln Sie zwischen Mushaf-Seitenansicht und Vers-für-Vers-Listenansicht.
+
+🔍 INTELLIGENTE KORAN-SUCHE & SCHNELLSPRUNG
+• Umfassende Suche: Durchsuchen Sie arabische Texte, deutsche Übersetzungen, Tafsir und Surennamen.
+• Direkter Verssprung: Geben Sie Versangaben (z.B. "2:255") ein, um sofort zum Vers zu gelangen.
+• Suche ohne Vokalzeichen: Arabische Wörter einfach mit oder ohne Harakat auffinden.
+
+🧠 TAFSIR & WORT-FÜR-WORT-ANALYSE
+• Angesehene Tafsir-Werke: Vertiefen Sie Ihr Verständnis mit Tafsir Ibn Kathir, Jalalayn und weiteren.
+• Wort-für-Wort-Bedeutung: Tippen Sie auf ein arabisches Wort für Wurzel, Grammatik und Aussprache.
+• Übersetzungsvergleich: Vergleichen Sie mehrere deutsche Übersetzungen nebeneinander.
+
+🔊 HOCHWERTIGE MP3-AUDIO-REZITATIONEN
+• Berühmte Qaris: Rezitationen von Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar und mehr.
+• Lernmodus: Vers- und wortweise Wiederholung zur Unterstützung des Auswendiglernens (Hifz).
+• Hintergrundwiedergabe: Hören Sie bei ausgeschaltetem Bildschirm und laden Sie Audios für offline herunter.
+
+🕌 PRÄZISE GEBETSZEITEN & AZAN-ALARM
+• Genaue Gebetszeiten: GPS-basierte Berechnung nach international anerkannten Methoden.
+• Azan-Benachrichtigungen: Wunderschöne Gebetsrufe für Fadschr, Zuhr, Asr, Maghrib und Ischa.
+• Countdown-Timer: Zeigt in Echtzeit die verbleibende Zeit bis zum nächsten Gebet an.
+
+🧭 QIBLA-KOMPASS & TAJWEED-LEITFADEN
+• Zuverlässiger Qibla-Finder: Finden Sie die exakte Richtung zur Kaaba in Mekka weltweit.
+• Tajweed-Leitfaden: Leicht verständliche Erklärungen zu Ghunnah, Idgham, Iqlab, Ikhfa und Qalqalah.
+
+══════════════════════════════════════
+🌐 UNTERSTÜTZUNG FÜR 40+ SPRACHEN
+══════════════════════════════════════
+Verfügbar auf Deutsch, Arabisch, Englisch, Türkisch, Urdu, Französisch, Russisch und vielen weiteren Sprachen.
+
+Laden Sie Al Quran noch heute herunter, um Ihr tägliches Gebetsleben zu bereichern und Ihre Daten auf allen Geräten zu synchronisieren.
+[Character Count: 3977 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — ENGLISH (English) [en]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Al Quran: Tafsir & Prayer Time
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Holy Quran with Tafsir, Audio MP3, Prayer Times, Widgets & Multi-Device Sync
+[Character Count: 76 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) is your complete Holy Quran app designed to elevate your daily Islamic practice. Read, listen, and study the Noble Quran offline with authentic translations, Tafsir commentaries, word-by-word analysis, smart Quran search, MP3 audio, prayer times, Azan alarm, Home & Lock Screen Widgets, Qibla compass, and Multi-Device Cloud Sync.
+
+Recite the Quran offline, glance at daily Ayahs and prayer times from your home screen, backup and sync notes across devices, and master recitation with Tajweed rules.
+
+══════════════════════════════════════
+✨ KEY FEATURES
+══════════════════════════════════════
+
+☁️ SECURE CLOUD BACKUP & MULTI-DEVICE SYNC
+• Multi-Device Sync: Automatically sync pinned Ayahs, note collections, last read position, and quick access shortcuts across all your Android devices in real-time.
+• Never Lose Progress: Backup your personalized Quran notes, bookmarks, and browse history safely in the cloud.
+• 1-Tap Sign-In: Quick login with Google or Email/Password, or start in Guest mode with instant offline-to-cloud upgrade.
+• 100% Privacy: Full control over your personal data with transparent in-app account & data deletion.
+
+📱 ELEGANT HOME & LOCK SCREEN WIDGETS
+• Prayer Time Widgets: View daily prayer times, active prayer highlight, and next prayer countdown on your home/lock screen.
+• Daily Ayah Widgets: Reflect upon inspiring verses with Uthmani Arabic script and translations on your home screen.
+• 1-Tap Deep Linking: Jump directly into the exact Surah/Ayah or prayer schedule from any widget.
+• Zero Battery Drain: High-contrast designs with pre-scheduled timelines for battery efficiency.
+
+📖 COMPLETE HOLY QURAN READER (OFFLINE)
+• Authentic Scripts: Read in Uthmani (Madani), Indopak, and QPC Hafs with color-coded Tajweed.
+• 100% Offline Access: Read full Mushaf, translations, and Tafsirs without an internet connection.
+• Smooth Navigation: Quick jump to any Surah, Juz (Para), Page, Hizb, or Ruku.
+• Reading Modes: Switch between Page View (Mushaf Mode) and Verse-by-Verse List View.
+
+🔍 SMART QURAN SEARCH & DIRECT JUMP
+• Multi-Scope Search: Search across Arabic verses, translations, Tafsir commentaries, and Surahs.
+• Direct Ayah Jump: Enter verse references (e.g., "2:255") or names (e.g., "Ayatul Kursi") to jump immediately.
+• Diacritic-Agnostic Search: Search Arabic with or without Tashkeel (harakat) with letter normalization.
+• Advanced Filters: Filter by specific Surahs, Makki / Madani origin, or exact phrases.
+
+🧠 TAFSIR & WORD-BY-WORD STUDY
+• Renowned Tafsirs: Deepen your understanding with Tafsir Ibn Kathir, Jalalayn, and more.
+• Word-by-Word Analysis: Tap any Arabic word for root meaning, grammar, and pronunciation.
+• Translation Comparison: Compare multiple translations side-by-side.
+
+🔊 IMMERSIVE MP3 AUDIO RECITATION
+• Famous Qaris: Listen to Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, and more.
+• Repeat & Follow: Verse-by-verse and word-by-word repeat mode for memorization (Hifz).
+• Background Audio: Playback with screen off and offline audio caching.
+
+🕌 PRAYER TIMES & AZAN ALERTS
+• Accurate Salah Times: GPS-based timings with global calculation methods (MWL, ISNA, Egypt, Makkah, Karachi).
+• Azan Notifications: Beautiful Adhan audio alerts for Fajr, Dhuhr, Asr, Maghrib, and Isha.
+• Countdown Timer: Real-time countdown to the next prayer.
+
+🧭 QIBLA COMPASS & TAJWEED GUIDE
+• Precise Qibla Finder: Find Kaaba direction worldwide using GPS and device compass.
+• Tajweed Guide: Interactive guide covering Ghunnah, Idgham, Iqlab, Ikhfa, and Qalqalah rules.
+
+══════════════════════════════════════
+🌐 40+ LANGUAGES SUPPORT
+══════════════════════════════════════
+Translations in English, Arabic, Bengali (বাংলা), Urdu (اردو), Indonesian (Bahasa Indonesia), Turkish (Türkçe), Hindi (हिन्दी), French (Français), Russian (Русский), Persian (فارسی), and more.
+
+Download Al Quran today to study the Holy Quran, sync your worship across all devices, and enrich your daily Islamic life.
+[Character Count: 3967 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — SPANISH (Español) [es]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+El Corán: Horarios de Oración
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Sagrado Corán en Español sin internet, Audio MP3, Horarios de Rezo y Widgets
+[Character Count: 76 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) es tu aplicación islámica completa para leer, escuchar y estudiar el Sagrado Corán. Disfruta de una lectura sin conexión a internet con traducciones auténticas al español, comentarios de Tafsir, análisis palabra por palabra, búsqueda inteligente de versículos, recitaciones en audio MP3 de Qaris de renombre mundial, horarios precisos de oración, notificaciones de Adhan, elegantes widgets de pantalla de inicio y bloqueo, brújula de Qibla y sincronización en la nube multidispositivo.
+
+Lee el Corán sin internet, consulta tus horarios de rezo desde tus widgets y mantén tus notas y marcadores protegidos en la nube.
+
+══════════════════════════════════════
+✨ CARACTERÍSTICAS PRINCIPALES
+══════════════════════════════════════
+
+☁️ COPIA DE SEGURIDAD EN LA NUBE Y SINCRONIZACIÓN
+• Sincronización Multidispositivo: Sincroniza automáticamente tus aleyas fijadas, notas personales, última posición de lectura y accesos directos en todos tus dispositivos Android.
+• Datos Protegidos: No pierdas tus reflexiones, marcadores e historial de lectura al cambiar o reiniciar tu teléfono.
+• Inicio de Sesión Rápido: Conéctate con un solo toque con Google o Correo/Contraseña, o modo Invitado.
+• 100% Privacidad: Cumplimiento total de las normas de privacidad con opción para eliminar tu cuenta y datos directamente en la app.
+
+📱 WIDGETS DE PANTALLA DE INICIO Y BLOQUEO
+• Widgets de Horarios de Oración: Visualiza los 5 rezos diarios, la oración actual y la cuenta regresiva en tu pantalla de inicio.
+• Widgets de Versículo Diario: Reflexiona diariamente con aleyas en caligrafía otomana y traducción en español en tu pantalla.
+• Acceso Directo: Toca cualquier widget para abrir directamente la Sura, aleya o los horarios de rezo.
+• Bajo Consumo de Batería: Diseños elegantes en modo Claro y Oscuro con actualizaciones programadas eficientes.
+
+📖 LECTURA COMPLETA DEL CORÁN SIN INTERNET (MUSHAF)
+• Caligrafías Auténticas: Mushaf Uthmani de Medina, Indopak y QPC Hafs con reglas de Tajweed a color.
+• 100% Offline: Accede a todo el Corán, traducciones y Tafsirs sin conexión de datos.
+• Navegación Fluida: Salta de inmediato a cualquier Sura, Juz (Para), Página, Hizb o Ruku.
+• Modos de Lectura: Alterna entre el modo Página Mushaf y la vista versículo por versículo.
+
+🔍 BÚSQUEDA CORÁNICA INTELIGENTE
+• Búsqueda Exhaustiva: Busca en textos árabes, traducciones en español, Tafsirs y nombres de Suras.
+• Salto Directo a la Aleya: Escribe la referencia (ej. "2:255") o nombre para abrirla al instante.
+• Búsqueda sin Signos Diacríticos: Encuentra palabras en árabe con o sin vocales (tashkeel).
+
+🧠 TAFSIR DETALLADO Y PALABRA POR PALABRA
+• Tafsir Auténtico: Profundiza con Tafsir Ibn Kazir, Jalalayn y obras académicas reconocidas.
+• Análisis Palabra por Palabra: Toca cualquier palabra en árabe para ver su raíz, gramática y pronunciación.
+• Comparación de Traducciones: Compara múltiples traducciones simultáneamente para una mejor comprensión.
+
+🔊 RECITACIONES DE AUDIO MP3 EN ALTA CALIDAD
+• Qaris Reconocidos: Escucha a Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar y más recitadores.
+• Repetición y Memorización: Modo de repetición por versículos y palabras para facilitar la memorización (Hifz).
+• Reproducción en Segundo Plano: Escucha con la pantalla apagada y descarga audios para escuchar sin internet.
+
+🕌 HORARIOS DE ORACIÓN Y ALERTAS DE AZAN
+• Horarios Precisos: Cálculo basado en tu ubicación GPS con los métodos de cálculo oficiales internacionales.
+• Notificaciones de Adhan: Hermosas llamadas a la oración para Fajr, Dhuhr, Asr, Maghrib e Isha.
+• Temporizador de Cuenta Regresiva: Tiempo exacto restante para la próxima oración.
+
+🧭 BRÚJULA DE QIBLA Y GUÍA DE TAJWEED
+• Localizador de Qibla: Encuentra la dirección exacta de la Kaaba en La Meca desde cualquier lugar del mundo.
+• Guía de Tajweed: Aprende las reglas de Ghunnah, Idgham, Iqlab, Ikhfa y Qalqalah con ejemplos interactivos.
+
+══════════════════════════════════════
+🌐 SOPORTE EN MÁS DE 40 IDIOMAS
+══════════════════════════════════════
+Disponible en español, árabe, inglés, francés, turco, urdu, indonesio, ruso y muchos más.
+
+Descarga Al Quran hoy para fortalecer tu conexión con el Sagrado Corán, sincronizar tu adoración en todos tus dispositivos y enriquecer tu vida islámica diaria.
+[Character Count: 4275 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — PERSIAN (فارسی) [fa]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+قرآن کریم: ترجمه، تفسیر و اذان
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+قرآن کریم صوتی، ترجمه و تفسیر فارسی، اوقات شرعی، ویجت و همگام‌سازی ابری
+[Character Count: 71 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+قرآن کریم (القرآن المجید) یک برنامه جامع و هوشمند برای تلاوت، تدبر و مطالعه کلام‌الله مجید است. این اپلیکیشن با ترجمه‌های معتبر فارسی، تفاسیر ارزشمند، ترجمه کلمه به کلمه، جستجوی پیشرفته، تلاوت صوتی MP3 قاریان برجسته، اوقات شرعی دقیق، اذان‌گو، ویجت‌های صفحه اصلی و قفل، قبله‌نما و همگام‌سازی ابری در تمام دستگاه‌ها طراحی شده است.
+
+قرآن را آفلاین بخوانید، اوقات شرعی را در صفحه اصلی مشاهده کنید و یادداشت‌های خود را همیشه در فضای ابری ایمن نگه دارید.
+
+══════════════════════════════════════
+✨ ویژگی‌های کلیدی
+══════════════════════════════════════
+
+☁️ پشتیبان‌گیری ابری و همگام‌سازی چند دستگاه
+• همگام‌سازی خودکار: نشانه‌ها، مجموعه‌های یادداشت، آخرین موقعیت قرائت و دسترسی‌های سریع را در همه دستگاه‌های خود همگام کنید.
+• حفظ اطلاعات: با تعویض گوشی، یادداشت‌ها و نشانک‌های قرآنی شما هرگز پاک نخواهند شد.
+• ورود آسان: ورود با یک کلیک از طریق حساب گوگل یا ایمیل، با امکان استفاده به عنوان مهمان.
+• امنیت و حریم خصوصی ۱۰۰٪: کنترل کامل بر داده‌ها با امکان حذف آسان حساب کاربری درون برنامه.
+
+📱 ویجت‌های زیبای صفحه اصلی و قفل
+• ویجت اوقات شرعی: نمایش اوقات نمازهای پنج‌گانه و شمارش معکوس تا اذان بعدی روی صفحه اصلی.
+• ویجت آیه روز: تلاوت و تأمل روزانه در آیات با خط عثمان طه و ترجمه فارسی.
+• دسترسی مستقیم: با لمس هر ویجت، مستقیماً به سوره یا بخش مربوطه وارد شوید.
+• مصرف بهینه باتری: طراحی زیبا با تم تاریک و روشن بدون ایجاد مصرف اضافی باتری.
+
+📖 قرآن کریم کامل آفلاین (مصحف شریف)
+• خطوط اصیل: رسم‌الخط عثمان طه مدینه، هندو-پاک و مصحف همراه با تجوید رنگی.
+• دسترسی کاملاً آفلاین: دسترسی به کل مصحف، ترجمه‌ها و تفاسیر بدون نیاز به اینترنت.
+• پیمایش آسان: دسترسی سریع به هر سوره، جزء، صفحه، حزب یا رکوع.
+• حالت‌های مطالعه: مطالعه در حالت صفحه مصحف یا حالت آیه به آیه.
+
+🔍 جستجوی هوشمند قرآنی و پرش مستقیم به آیه
+• جستجوی همه‌جانبه: جستجو در متن عربی، ترجمه فارسی، تفاسیر و اسامی سوره‌ها.
+• پرش مستقیم: با وارد کردن شماره آیه (مانند "2:255") یا نام آیه (مانند "آیت الکرسی") مستقیماً به آیه بروید.
+• جستجو بدون اعراب: جستجوی آسان کلمات عربی با یا بدون اعراب و حرکات.
+
+🧠 تفاسیر معتبر و ترجمه کلمه به کلمه
+• کتابخانه تفاسیر: مطالعه تفاسیر معتبر از جمله تفسیر المیزان، نمونه و ابن کثیر.
+• تحلیل کلمه به کلمه: لمس هر کلمه برای مشاهده ریشه، دستور زبان و تلفظ صوتی.
+• مقایسه ترجمه‌ها: بررسی همزمان چندین ترجمه فارسی برای درک بهتر مفاهیم.
+
+🔊 تلاوت صوتی MP3 قاریان مشهور
+• قاریان بین‌المللی: تلاوت دلنشین استادان عبدالباسط، مشاری العفاسی، منشاوی، پرهیزگار و غیره.
+• حالت تکرار برای حفظ: امکان تکرار آیه و کلمه برای حفظ قرآن و تقویت تجوید.
+• پخش در پس‌زمینه: گوش دادن به تلاوت با صفحه خاموش و دانلود صوت برای استفاده آفلاین.
+
+🕌 اوقات شرعی دقیق و پخش اذان
+• اوقات دقیق نماز: محاسبه دقیق زمان نمازها بر اساس موقعیت جغرافیایی GPS شما.
+• هشدارهای اذان: پخش نوای اذان در اوقات صبح، ظهر، عصر، مغرب و عشاء.
+• شمارش معکوس: نمایش زمان باقی‌مانده تا اذان بعدی.
+
+🧭 قبله‌نمای دقیق و آموزش تجوید
+• قبله‌یاب هوشمند: جهت‌یابی دقیق به سمت کعبه در هر نقطه از جهان با قطب‌نمای گوشی.
+• راهنمای تجوید: آموزش ساده قواعد ادغام، اخفاء، اقلاب، غنه و قلقله.
+
+══════════════════════════════════════
+🌐 پشتیبانی از ۴۰+ زبان
+══════════════════════════════════════
+شامل ترجمه به زبان‌های فارسی، عربی، انگلیسی، ترکی، اردو، فرانسوی و ده‌ها زبان دیگر.
+
+همین امروز اپلیکیشن القرآن را دانلود کنید تا انس با کلام وحی را در زندگی روزمره تجربه کنید.
+[Character Count: 3188 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — FRENCH (Français) [fr]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Le Saint Coran: Prière & Azan
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Coran en Français hors-ligne, Tafsir, Audio MP3, Prière, Widgets & Synchro Cloud
+[Character Count: 80 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) est votre application islamique complète pour lire, écouter et étudier le Saint Coran. Profitez d'une lecture hors-ligne avec traductions françaises, Tafsirs complets, analyse mot à mot, recherche intelligente, récitations MP3, horaires de prière précis, alertes Adhan, widgets écran d'accueil et de verrouillage, boussole Qibla et synchronisation Cloud multi-appareils.
+
+Lisez le Coran sans connexion Internet, suivez vos prières depuis vos widgets et sauvegardez vos notes et favoris en toute sécurité sur le Cloud.
+
+══════════════════════════════════════
+✨ CARACTÉRISTIQUES PRINCIPALES
+══════════════════════════════════════
+
+☁️ SYNCHRONISATION CLOUD & SAUVEGARDE
+• Synchro Multi-Appareils: Synchronisez automatiquement vos versets épinglés, notes, dernière position de lecture et raccourcis sur tous vos appareils Android.
+• Sauvegarde Garantie: Conservez vos réflexions et signets sans risque de perte lors d'un changement de téléphone.
+• Connexion en 1 Clic: Connexion rapide via Google ou Email/Mot de passe, ou mode Invité.
+• 100% Confidentialité: Respect total des normes RGPD avec suppression de compte directement dans l'application.
+
+📱 WIDGETS ÉCRAN D'ACCUEIL ET DE VERROUILLAGE
+• Widgets Horaires de Prière: Affichez les 5 prières quotidiennes et le compte à rebours de la suivante sur votre écran.
+• Widgets Verset du Jour: Méditez chaque jour sur des versets inspirants avec calligraphie Othmani et traduction française.
+• Accès Rapide Direct: Appuyez sur un widget pour ouvrir directement la Sourate ou les horaires.
+• Économie de Batterie: Design élégant en mode Sombre/Clair optimisé pour préserver la batterie.
+
+📖 LECTURE DU SAINT CORAN HORS-LIGNE (MUSHAF)
+• Calligraphies Authentiques: Mushaf Madani Othmani, Indo-Pak et QPC Hafs avec Tajwid en couleur.
+• 100% Hors-Ligne: Accédez au texte intégral du Coran, aux traductions et aux Tafsirs sans Internet.
+• Navigation Intuitive: Accédez instantanément à n'importe quelle Sourate, Juz (Para), Page ou Hizb.
+• Modes de Lecture: Basculez facilement entre le mode Page Mushaf et le mode Liste verset par verset.
+
+🔍 RECHERCHE CORANIQUE INTELLIGENTE
+• Recherche Complète: Recherchez dans le texte arabe, les traductions françaises, les Tafsirs et les noms de Sourates.
+• Saut Direct au Verset: Tapez la référence (ex. "2:255") ou le nom pour ouvrir directement le verset.
+• Recherche sans Voyelles: Trouvez facilement les mots arabes avec ou sans tashkeel.
+
+🧠 TAFSIR DÉTAILLÉ & MOT À MOT
+• Grands Tafsirs: Approfondissez le sens des versets avec Tafsir Ibn Kathir, Jalalayn et plus.
+• Analyse Mot à Mot: Touchez n'importe quel mot arabe pour découvrir sa racine, grammaire et prononciation.
+• Comparaison de Traductions: Comparez plusieurs traductions côte à côte pour une meilleure compréhension.
+
+🔊 RÉCITATIONS AUDIO MP3 HAUTE QUALITÉ
+• Récitateurs Célèbres: Écoutez Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar et d'autres grands Qaris.
+• Répétition & Mémorisation: Mode répétition verset par verset pour faciliter la mémorisation (Hifz).
+• Lecture en Arrière-Plan: Écoutez écran éteint et téléchargez les audios pour une écoute hors-ligne.
+
+🕌 HEURES DE PRIÈRE & ALERTES ADHAN
+• Horaires Précis: Calcul précis selon votre position GPS avec les méthodes reconnues.
+• Notifications d'Adhan: Magnifiques appels à la prière pour Fajr, Dhuhr, Asr, Maghrib et Isha.
+• Compte à Rebours: Horloge en temps réel indiquant le temps restant avant la prochaine prière.
+
+🧭 BOUSSOLE QIBLA & GUIDE DE TAJWID
+• Direction de la Qibla: Localisez la Kaaba avec précision partout dans le monde grâce au GPS.
+• Guide de Tajwid: Apprenez facilement les règles de Ghunnah, Idgham, Iqlab, Ikhfa et Qalqalah.
+
+══════════════════════════════════════
+🌐 SUPPORT DE PLUS DE 40 LANGUES
+══════════════════════════════════════
+Disponible en français, arabe, anglais, turc, ourdou, indonésien, russe, espagnol et bien d'autres langues.
+
+Téléchargez Al Quran dès aujourd'hui pour enrichir votre pratique spirituelle, synchroniser votre culte sur tous vos écrans et vous rapprocher du Saint Coran.
+[Character Count: 4061 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — HINDI (हिन्दी) [hi]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+अल क़ुरआन: तफ़सीर व नमाज़ समय
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+अल क़ुरआन हिंदी अनुवाद, तफ़सीर, ऑडियो, नमाज़ का समय, विजेट और क्लाउड सिंक
+[Character Count: 73 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+अल क़ुरआन (القرآن الكريم) आपकी रोज़मर्रा की इस्लामी इबादत और क़ुरआन मजीद के अध्ययन के लिए एक सम्पूर्ण डिजिटल ऐप है। प्रामाणिक हिंदी अनुवाद, तफ़सीर, शब्द-दर-शब्द विश्लेषण, स्मार्ट सर्च, विश्व प्रसिद्ध क़ारियों की ऑडियो तिलावत, नमाज़ का सटीक समय, अज़ान अलार्म, होम व लॉक स्क्रीन विजेट, क़िबला कम्पास और मल्टी-डिवाइस क्लाउड सिंक की सुविधा के साथ क़ुरआन पढ़ें और समझें।
+
+इंटरनेट के बिना पूरा क़ुरआन पढ़ें, होम स्क्रीन विजेट से नमाज़ का समय और दैनिक आयतें देखें, और अपने सभी नोट्स व बुकमार्क को क्लाउड पर सुरक्षित रखें।
+
+══════════════════════════════════════
+✨ मुख्य विशेषताएँ
+══════════════════════════════════════
+
+☁️ सुरक्षित क्लाउड बैकअप व मल्टी-डिवाइस सिंक
+• सभी डिवाइस में सिंक: अपनी पिन की गई आयतें, नोट्स, अंतिम पठन स्थान और शॉर्टकट अपने सभी एंड्रॉइड फोन और टैबलेट में सिंक करें।
+• डेटा सुरक्षा: फोन बदलने या रीसेट करने पर भी आपके नोट्स, बुकमार्क और हिस्ट्री कभी नहीं मिटेंगे।
+• 1-टैप आसान लॉगिन: गूगल या ईमेल से तुरंत लॉगिन करें या गेस्ट मोड में तुरंत इस्तेमाल शुरू करें।
+• 100% गोपनीयता: ऐप के भीतर से ही अपना अकाउंट और डेटा हटाने की पूरी सुविधा।
+
+📱 होम व लॉक स्क्रीन विजेट
+• नमाज़ समय विजेट: 5 वक़्त की नमाज़ का समय, वर्तमान नमाज़ और अगली नमाज़ का काउंटडाउन होम स्क्रीन पर देखें।
+• दैनिक आयत विजेट: उस्मानी अरबी लिपि और हिंदी अर्थ के साथ प्रेरणादायक आयतें सीधे अपनी स्क्रीन पर पाएं।
+• सीधा एक्सेस: विजेट पर टैप करके सीधे संबंधित सूरह, आयत या नमाज़ टाइमटेबल पर जाएं।
+• बैटरी की बचत: डार्क और लाइट मोड का आकर्षक डिज़ाइन जो बैटरी की खपत नहीं करता।
+
+📖 सम्पूर्ण पवित्र क़ुरआन ऑफ़लाइन
+• प्रामाणिक अरबी फ़ॉन्ट: मदीना उस्मानी, इंडो-पाक और रंगीन तजवीद फ़ॉन्ट में पढ़ने की सुविधा।
+• 100% ऑफ़लाइन उपयोग: बिना इंटरनेट कनेक्शन के पूरा क़ुरआन, हिंदी अनुवाद और तफ़सीर पढ़ें।
+• सरल नेविगेशन: किसी भी सूरह, पारा (जुज़), पेज, हिज़्ब या रुकू पर तुरंत पहुंचें।
+• पढ़ने के दो मोड: मुसहफ़ पेज मोड और आयत-वार लिस्ट मोड में आसानी से पढ़ें।
+
+🔍 स्मार्ट क़ुरआन सर्च और डायरेक्ट जंप
+• बहु-स्तरीय सर्च: अरबी शब्दों, हिंदी अनुवाद, तफ़सीर और सूरह के नामों में तेज़ी से खोजें।
+• सीधे आयत पर जाएं: आयत का नंबर (जैसे "2:255") या नाम (जैसे "आयतुल कुर्सी") लिखकर सीधे आयत खोलें।
+• बिना एराब के सर्च: ज़ेर-ज़बर के बिना भी अरबी शब्द आसानी से खोजें।
+
+🧠 तफ़सीर और शब्द-दर-शब्द हिंदी अर्थ
+• प्रामाणिक तफ़सीर: तफ़सीर इब्न कसीर, जलालैन और अन्य प्रतिष्ठित तफ़सीर का अध्ययन करें।
+• शब्द-दर-शब्द अर्थ: प्रत्येक अरबी शब्द का मूल अर्थ, व्याकरण और उच्चारण जानने के लिए टैप करें।
+• अनुवाद तुलना: बेहतर समझ के लिए कई हिंदी अनुवादों की एक साथ तुलना करें।
+
+🔊 मनमोहक MP3 ऑडियो तिलावत
+• मशहूर क़ारी: मिशारी राशिद अल-अफ़ासी, अब्दुल बासित, अब्दुल्लाह बसफ़र आदि की आवाज़ में तिलावत।
+• हिफ़्ज़ व दोहराव मोड: क़ुरआन कंठस्थ (हिफ़्ज़) करने और तजवीद सुधारने के लिए आयत और शब्द दोहराव की सुविधा।
+• बैकग्राउंड प्लेबैक: स्क्रीन बंद रहने पर भी तिलावत सुनें और ऑफ़लाइन सुनने के लिए ऑडियो डाउनलोड करें।
+
+🕌 नमाज़ का सही समय और अज़ान अलार्म
+• सटीक नमाज़ समय: आपके जीपीएस लोकेशन के अनुसार फ़ज्र, ज़ुहर, अस्र, मग़रिब और इशा का सटीक समय।
+• मधुर अज़ान अलर्ट: नमाज़ के वक़्त दिल को छू लेने वाली अज़ान की सूचनाएं पाएं।
+• काउंटडाउन टाइमर: अगली नमाज़ में कितना समय बाकी है, यह बताने वाला टाइमर।
+
+🧭 क़िबला कम्पास और तजवीद गाइड
+• सटीक क़िबला फाइंडर: दुनिया के किसी भी कोने से काबा शरीफ़ की सही दिशा जानें।
+• तजवीद नियम गाइड: ग़ुन्ना, इदग़ाम, इक़लाब, इख़्फ़ा और क़लक़ला के नियमों की सरल व्याख्या।
+
+══════════════════════════════════════
+🌐 40+ भाषाओं का समर्थन
+══════════════════════════════════════
+हिंदी, उर्दू, अंग्रेज़ी, अरबी, बंगाली, गुजराती, मराठी, तमिल, तेलुगु और अन्य कई भाषाओं में उपलब्ध।
+
+क़ुरआन करीम से अपना संबंध मज़बूत करने और अपनी इबादत को सभी डिवाइसों में सुरक्षित रखने के लिए आज ही अल क़ुरआन ऐप डाउनलोड करें।
+[Character Count: 3548 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — INDONESIAN (Bahasa Indonesia) [id]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Al Quran: Tafsir & Waktu Salat
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Al Quran Indonesia Offline, Tafsir, Audio MP3, Jadwal Sholat & Sinkronisasi
+[Character Count: 75 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) adalah aplikasi Al-Quran digital lengkap untuk menemani ibadah harian Anda. Baca, dengarkan, dan pelajari ayat suci Al-Quran secara offline dengan terjemahan Kemenag, tafsir lengkap, analisis kata demi kata, pencarian ayat pintar, audio murottal MP3, jadwal sholat akurat, alarm adzan, widget layar utama & kunci, kompas kiblat, serta Sinkronisasi Cloud Multi-Perangkat.
+
+Baca Al-Quran tanpa internet, pantau jadwal sholat dari widget layar utama, serta amankan catatan dan bookmark Anda di semua perangkat Android.
+
+══════════════════════════════════════
+✨ FITUR UTAMA
+══════════════════════════════════════
+
+☁️ SINKRONISASI CLOUD & CADANGAN AMAN
+• Multi-Perangkat: Sinkronkan ayat yang dipin, koleksi catatan, posisi terakhir dibaca, dan pintasan otomatis di semua HP & tablet Android.
+• Data Aman: Jangan khawatir kehilangan catatan tadabbur, bookmark, dan riwayat saat ganti HP.
+• Masuk Cepat: Masuk mudah dengan akun Google atau Email/Password, atau mulai sebagai Tamu.
+• Privasi 100%: Kontrol penuh data Anda dengan opsi hapus akun dan data langsung di dalam aplikasi.
+
+📱 WIDGET LAYAR UTAMA & LAYAR KUNCI
+• Widget Jadwal Sholat: Pantau 5 waktu sholat harian dan hitung mundur waktu berikutnya di layar Anda.
+• Widget Ayat Harian: Tadabburi ayat pilihan dengan tulisan Arab Utsmani dan terjemahan Indonesia.
+• Akses Cepat: Ketuk widget untuk langsung membuka Surah/Ayat atau jadwal sholat yang diinginkan.
+• Hemat Baterai: Desain tema Gelap dan Terang yang hemat baterai dengan pembaruan otomatis efisien.
+
+📖 BACA AL-QURAN LENGKAP OFFLINE (MUSHAF)
+• Pilihan Mushaf Asli: Mushaf Madinah Utsmani, Indo-Pak, dan Standar Kemenag dengan tajwid berwarna.
+• 100% Offline: Buka seluruh mushaf, terjemahan, dan tafsir kapan saja tanpa internet.
+• Navigasi Cepat: Langsung lompat ke Surah, Juz, Halaman, Hizb, atau Ruku yang diinginkan.
+• Mode Membaca: Tampilan Halaman (Mode Mushaf) atau Tampilan Daftar Per Ayat.
+
+🔍 PENCARIAN AYAT PINTAR & LOMPAT LANGSUNG
+• Pencarian Menyeluruh: Cari kata dalam teks Arab, terjemahan Indonesia, tafsir, atau nama Surah.
+• Lompat Ayat: Ketik nomor ayat (misal "2:255") atau nama (misal "Ayat Kursi") untuk buka langsung.
+• Pencarian Tanpa Harakat: Temukan ayat Arab dengan mudah baik dengan atau tanpa harakat.
+
+🧠 TAFSIR LENGKAP & KATA DEMI KATA
+• Koleksi Tafsir Shahih: Pahami makna Al-Quran dengan Tafsir Ibnu Katsir, Jalalayn, dan Kemenag.
+• Arti Kata demi Kata: Ketuk kata bahasa Arab untuk melihat arti dasar, akar kata, dan tata bahasa.
+• Bandingkan Terjemahan: Buka beberapa terjemahan sekaligus untuk pemahaman lebih komprehensif.
+
+🔊 AUDIO MUROTTAL MP3 MERDU
+• Qari Internasional: Dengarkan lantunan Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, dll.
+• Mode Hafalan: Putar ulang ayat atau kata demi kata untuk memudahkan menghafal Al-Quran (Tahfidz).
+• Putar di Latar Belakang: Tetap dengarkan lantunan ayat saat layar mati, serta unduh audio untuk offline.
+
+🕌 JADWAL SHOLAT AKURAT & SUARA ADZAN
+• Waktu Sholat Presisi: Dihitung berdasarkan koordinat GPS menggunakan metode standar resmi.
+• Pengingat Adzan: Notifikasi adzan merdu untuk waktu Subuh, Dzuhur, Ashar, Maghrib, dan Isya.
+• Hitung Mundur: Pengingat waktu yang tersisa menjelang waktu sholat berikutnya.
+
+🧭 KOMPAS KIBLAT & PANDUAN TAJWID
+• Pencari Arah Kiblat: Temukan arah Ka'bah secara tepat dan akurat dari mana saja.
+• Panduan Tajwid: Pelajari hukum Ghunnah, Idgham, Iqlab, Ikhfa, dan Qalqalah dengan mudah.
+
+══════════════════════════════════════
+🌐 DUKUNGAN 40+ BAHASA
+══════════════════════════════════════
+Dilengkapi terjemahan dalam Bahasa Indonesia, Inggris, Arab, Melayu, Urdu, Turki, Prancis, dan lainnya.
+
+Unduh Al Quran sekarang untuk mendekatkan diri kepada Allah, menyelaraskan ibadah di semua perangkat, dan memperdalam pemahaman Al-Quran setiap hari.
+[Character Count: 3799 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — ITALIAN (Italiano) [it]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Corano in Italiano: Preghiera
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Corano in Italiano offline, Tafsir, Audio MP3, Orari di Preghiera & Widget Sync
+[Character Count: 79 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) è l'applicazione islamica completa per leggere, ascoltare e studiare il Sacro Corano in italiano senza connessione internet. Include traduzioni autentiche, commentari Tafsir, analisi parola per parola, ricerca intelligente dei versetti, recitazioni audio MP3 di famosi Qari, orari di preghiera accurati, notifiche Adhan, eleganti widget per la schermata iniziale e di blocco, bussola Qibla e sincronizzazione cloud multidispositivo.
+
+Leggi il Corano offline, controlla gli orari di preghiera tramite i widget e salva in sicurezza le tue note e i tuoi segnalibri nel cloud.
+
+══════════════════════════════════════
+✨ CARATTERISTICHE PRINCIPALI
+══════════════════════════════════════
+
+☁️ BACKUP NEL CLOUD E SINCRONIZZAZIONE DISPOSITIVI
+• Sincronizzazione Multidispositivo: Sincronizza automaticamente versetti fissati, note, segnalibri e scorciatoie su tutti i tuoi dispositivi Android.
+• Dati al Sicuro: Non perdere mai le tue riflessioni e i tuoi segnalibri quando cambi telefono.
+• Accesso Rapido in 1 Tocco: Accedi facilmente con Google o Email/Password, oppure usa l'app come Ospite.
+• 100% Privacy: Controllo totale dei tuoi dati personali con opzione di eliminazione immediata dell'account.
+
+📱 WIDGET SCHERMATA HOME E BLOCCO
+• Widget Orari di Preghiera: Visualizza le 5 preghiere quotidiane e il conto alla rovescia direttamente sullo schermo.
+• Widget Versetto del Giorno: Rifletti quotidianamente sui versetti coranici in calligrafia Uthmani con traduzione in italiano.
+• Accesso Diretto: Tocca il widget per aprire subito la Sura, il versetto o l'orario di preghiera.
+• Risparmio Batteria: Design elegante in modalità Chiara e Scura ad alta efficienza energetica.
+
+📖 LETTURA COMPLETA DEL CORANO OFFLINE (MUSHAF)
+• Calligrafie Autentiche: Mushaf Uthmani di Medina, Indopak e QPC Hafs con regole del Tajweed a colori.
+• 100% Senza Internet: Leggi l'intero testo coranico, le traduzioni e i Tafsir senza connessione dati.
+• Navigazione Rapida: Salta istantaneamente a qualsiasi Sura, Juz, Pagina, Hizb o Ruku.
+• Modalità di Lettura: Alterna tra visualizzazione a Pagina Mushaf e visualizzazione Elenco versetto per versetto.
+
+🔍 RICERCA CORANICA INTELLIGENTE
+• Ricerca Completa: Cerca nel testo arabo, nelle traduzioni italiane, nei Tafsir e nei titoli delle Sure.
+• Salto Diretto al Versetto: Inserisci il riferimento (es. "2:255") o il nome per aprirlo all'istante.
+• Ricerca senza Segni Diacritici: Trova facilmente i termini arabi con o senza vocali (tashkeel).
+
+🧠 TAFSIR DETTAGLIATO E PAROLA PER PAROLA
+• Grandi Tafsir: Approfondisci con Tafsir Ibn Kathir, Jalalayn e altre opere autorevoli.
+• Analisi Parola per Parola: Tocca qualsiasi vocabolo arabo per scoprire radice, grammatica e pronuncia.
+• Confronto Traduzioni: Confronta più traduzioni affiancate per una comprensione perfetta.
+
+🔊 RECITAZIONI AUDIO MP3 IN ALTA QUALITÀ
+• Qari Celebri: Ascolta Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar e molti altri.
+• Modalità Ripetizione e Memorizzazione: Ripeti versetti e parole per facilitare la memorizzazione (Hifz).
+• Riproduzione in Background: Ascolta a schermo spento e scarica l'audio per l'ascolto offline.
+
+🕌 ORARI DI PREGHIERA E NOTIFICHE ADHAN
+• Orari Precisi: Calcolo basato sulla posizione GPS con i principali metodi islamici mondiali.
+• Notifiche Adhan: Richiami alla preghiera per Fajr, Dhuhr, Asr, Maghrib e Isha.
+• Conto alla Rovescia: Timer in tempo reale per la preghiera successiva.
+
+🧭 BUSSOLA QIBLA E GUIDA AL TAJWEED
+• Trova Qibla Preciso: Individua l'esatta direzione della Kaaba alla Mecca da ogni parte del mondo.
+• Guida al Tajweed: Regole semplici per Ghunnah, Idgham, Iqlab, Ikhfa e Qalqalah.
+
+══════════════════════════════════════
+🌐 SUPPORTO PER PIÙ DI 40 LINGUE
+══════════════════════════════════════
+Disponibile in italiano, arabo, inglese, francese, spagnolo, turco, urdu e molte altre lingue.
+
+Scarica Al Quran oggi per rafforzare la tua fede, sincronizzare le tue preghiere su tutti i dispositivi ed arricchire la tua vita spirituale.
+[Character Count: 4012 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — JAPANESE (日本語) [ja]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+クルアーン: 日本語訳と礼拝時間
+[Character Count: 16 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+聖クルアーン日本語訳オフライン, 読誦MP3, 正確な礼拝時間, ウィジェットと同期
+[Character Count: 42 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+アル・クルアーン（القرآن الكريم）は、日々のイスラムの信仰と学習を深めるための包括的な聖クルアーンアプリです。信頼性の高い日本語翻訳、タフスィール（注釈）、逐語解説、スマート検索、世界的なカリーによる高音质MP3読誦、正確な礼拝時間（サラート）、アザーン通知、ホーム画面およびロック画面ウィジェット、キブラコンパス、複数端末クラウド同期機能を備えています。
+
+オフラインで聖クルアーンを読誦し、ホーム画面から日々のアーヤと礼拝時間を確認し、メモやブックマークを安全にクラウドに保存しましょう。
+
+══════════════════════════════════════
+✨ 主な機能
+══════════════════════════════════════
+
+☁️ 安全なクラウドバックアップと複数端末同期
+• 複数デバイス同期：ピン留めしたアーヤ、メモ、読書進捗、ショートカットをすべてのAndroid端末間でリアルタイムに同期。
+• データの安心保護：端末の変更や初期化を行っても、個人的なメモやブックマークが失われることはありません。
+• 1タップ簡単ログイン：Googleアカウントまたはメールアドレスで手軽にログイン可能（ゲストモードも対応）。
+• 100% プライバシー保護：アプリ内から直接アカウントや全データを安全に削除できる完全なデータ管理機能。
+
+📱 洗練されたホーム＆ロック画面ウィジェット
+• 礼拝時間ウィジェット：1日5回の礼拝スケジュールと次の礼拝までのカウントダウンをホーム画面で確認。
+• 今日のアーヤ ウィジェット：伝統的なウスマーン朝書体と日本語訳で、毎日心に響く節をお届け。
+• ワンタップ直接アクセス：ウィジェットをタップするだけで、目的のスーラや礼拝ページへ即座に移動。
+• 省電力設計：バッテリーを消費しない洗練されたダーク/ライトテーマデザイン。
+
+📖 完全オフライン聖クルアーン読誦（ムスハフ）
+• 本格的なアラビア語書体：マディーナ・ウスマーン体、インド・パキスタン体、カラータジュウィード書体。
+• 100% オフライン対応：インターネット接続なしで全聖典、日本語訳、注釈をいつでも閲覧可能。
+• スムーズなナビゲーション：任意のスーラ、ジュズ、ページ、ヒズブへ瞬時にジャンプ。
+• 柔軟な読書モード：見開きムスハフページ表示と節ごとのリスト表示を自由に切り替え。
+
+🔍 スマートなクルアーン検索と節への直行
+• 包括的な検索：アラビア語原文、日本語訳、タフスィール、章名から瞬時に検索。
+• アーヤ直行ジャンプ：節番号（例：「2:255」）や有名な名称（例：「アーヤトル・クルスィー」）を入力して直接移動。
+• 母音記号なし検索：アラビア語の母音記号（シャクル）の有無にかかわらず高精度に検索。
+
+🧠 詳細なタフスィールと逐語解析
+• 権威ある注釈書：イブン・カスィールやジャラーラインなどの伝統的なタフスィールを深く学習。
+• 単語ごとの詳細分析：アラビア語の単語をタップして語根、文法、発音を確認。
+• 翻訳の並列比較：複数の翻訳を並べて比較し、より深い意味を理解。
+
+🔊 臨場感あふれるMP3音声読誦
+• 著名な読誦者：ミシャーリー・アラーファスィー、アブドゥル・バースィト、アブドッラー・バスファルなど。
+• 暗記（ヒフズ）モード：暗記とタジュウィード向上のための節ごと・単語ごとのリピート再生。
+• バックグラウンド再生：画面オフ時でも再生可能。オフライン再生用に音声をダウンロード可能。
+
+🕌 正確な礼拝時間とアザーン通知
+• 正確なサラート時間：GPS位置情報に基づき、主要な国際計算方式で正確に算出。
+• 心に響くアザーン：夜明け（ファジュル）、正午（ズフル）、午後（アスル）、日没（マグリブ）、夜（イシャー）のアザーンアラーム。
+• カウントダウンタイマー：次の礼拝時間までの残り時間をリアルタイムで表示。
+
+🧭 キブラコンパスとタジュウィード学習ガイド
+• 正確なキブラ方位計：世界中どこからでもマッカのカアバ神殿の正確な方角を指示。
+• タジュウィードガイド：グンナ、イドガーム、イクラーブ、イフファー、カルカラなどの規則を分かりやすく解説。
+
+══════════════════════════════════════
+🌐 40以上の言語に対応
+══════════════════════════════════════
+日本語、アラビア語、英語、ウルドゥー語、インドネシア語、トルコ語、中国語、フランス語など多数の言語をサポート。
+
+今すぐアル・クルアーンをダウンロードして、聖典との絆を深め、すべての端末で日々の信仰を充実させましょう。
+[Character Count: 1971 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — KAZAKH (Қазақша) [kk]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Құран Кәрім: Тәпсір және Намаз
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Құран Кәрім қазақша офлайн, Тәпсір, Аудио MP3, Намаз уақыты, Виджеттер & Синхрон
+[Character Count: 80 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Әл-Құран (القرآن الكريم) — күнделікті мұсылмандық құлшылығыңызға арналған толыққанды әрі ыңғайлы цифрлық Құран қосымшасы. Сенімді қазақша мағыналық аудармалар, тәпсірлер, сөзбе-сөз талдау, аяттарды ақылды іздеу, атақты қарилардың MP3 аудиосы, нақты намаз уақыттары, азан хабарламалары, негізгі және құлыптау экранының виджеттері, құбыла компасы және құрылғылар арасындағы бұлттық синхрондау мүмкіндігі бар.
+
+Құранды интернетсіз оқыңыз, виджеттер арқылы намаз уақытын қадағалаңыз және өз жазбаларыңызды бұлтта қауіпсіз сақтаңыз.
+
+══════════════════════════════════════
+✨ БАСТЫ МҮМКІНДІКТЕР
+══════════════════════════════════════
+
+☁️ ҚАУІПСІЗ БҰЛТТЫҚ СИНХРОНДАУ ЖӘНЕ КӨШІРМЕ
+• Құрылғылар арасындағы байланыс: Белгіленген аяттарды, жазбаларды және соңғы оқыған орынды барлық Android құрылғыларыңызда автоматты түрде синхрондаңыз.
+• Деректер қауіпсіздігі: Телефонды ауыстырған кезде жеке жазбаларыңыз бен бетбелгілеріңіз ешқашан жоғалмайды.
+• 1 рет басумен кіру: Google немесе Email арқылы оңай кіру немесе қонақ режимінде бастау.
+• 100% Құпиялылық: Қосымша ішінен аккаунт пен барлық деректерді кез келген уақытта бірден өшіру мүмкіндігі.
+
+📱 ЭКРАН ВИДЖЕТТЕРІ (НЕГІЗГІ ЖӘНЕ ҚҰЛЫПТАУ)
+• Намаз уақыттары виджеті: 5 уақыт намаз кестесі мен келесі намазға дейінгі кері санақты экраннан қараңыз.
+• Күн аяты виджеті: Күн сайын шабыттандыратын аяттарды қазақша аудармасымен басты экранда көріңіз.
+• Тікелей өту: Кез келген виджетті басу арқылы тиісті сүреге немесе намаз кестесіне лезде өтіңіз.
+• Батарея үнемдеу: Батарея қуатын артық жұмсамайтын жоғары сапалы қараңғы және жарық тақырыптар.
+
+📖 ТОЛЫҚ ҚҰРАНДЫ ОФЛАЙН ОҚУ (МҰСХАП)
+• Түпнұсқа жазулар: Мәдина Усмани, Индопак және түсті тәжуид ережелері бар қаріптер.
+• 100% Офлайн қолжетімділік: Бүкіл Құранды, аудармалар мен тәпсірлерді интернетсіз оқыңыз.
+• Ыңғайлы навигация: Кез келген Сүре, Пара (Жүз), Бет немесе Рукуға жылдам өтіңіз.
+• Оқу режимдері: Мұсхап беттік көрінісі мен аяттар тізімі арасында ауысыңыз.
+
+🔍 АҚЫЛДЫ ҚҰРАН ІЗДЕУ ЖӘНЕ АЯТҚА ТІКЕЛЕЙ ӨТУ
+• Толық іздеу: Арабша мәтін, қазақша аударма, тәпсір және сүре атаулары бойынша жылдам іздеу.
+• Аятқа тікелей өту: Аят нөмірін (мыс. "2:255") немесе атауын енгізіп, лезде ашыңыз.
+• Харакатсыз іздеу: Арабша сөздерді харакатсыз да оңай әрі дәл табыңыз.
+
+🧠 КЕЛЕЛІ ТӘПСІРЛЕР ЖӘНЕ СӨЗБЕ-СӨЗ ТАЛДАУ
+• Танымал тәпсірлер: Ибн Касир, Сәғди және Жәләләйн тәпсірлерімен аят мағынасын тереңірек түсініңіз.
+• Сөзбе-сөз аударма: Әрбір араб сөзінің түбірін, грамматикасын және айтылуын білу үшін сөзді басыңыз.
+• Аудармаларды салыстыру: Терең түсіну үшін бірнеше аударманы қатар қойып салыстырыңыз.
+
+🔊 MP3 АУДИО ТИЛӘУАТ
+• Белгілі қарилар: Мишари Рашид әл-Афаси, Абдулбасит, Абдуллах Басфар және т.б.
+• Жаттау (Хифз) режимі: Құранды жаттау және тәжуидті дұрыстау үшін аяттар мен сөздерді қайталау режимі.
+• Фондық режимде тыңдау: Экран сөніп тұрғанда да тыңдаңыз және аудионы офлайн сақтаңыз.
+
+🕌 НАҚТЫ НАМАЗ УАҚЫТЫ ЖӘНЕ АЗАН
+• Дәл кесте: GPS орналасқан жеріңізге негізделген ҚМДБ және халықаралық әдістер бойынша есептеу.
+• Азан хабарламалары: Таң, Бесін, Екінті, Ақшам және Құптан намаздарына арналған әуезді азан дабылы.
+• Кері санақ: Келесі намазға дейінгі қалған уақытты көрсететін таймер.
+
+🧭 ҚҰБЫЛА КОМПАСЫ ЖӘНЕ ТӘЖУИД ЕРЕЖЕЛЕРІ
+• Дәл Құбыла тапқыш: Әлемнің кез келген нүктесінен Қағбаның бағытын оңай анықтаңыз.
+• Тәжуид ережелері: Ғунна, Идғам, Иқләб, Ихфа және Қалқала ережелерінің қарапайым түсіндірмесі.
+
+══════════════════════════════════════
+🌐 40-ТАН АСТАМ ТІЛДІ ҚОЛДАУ
+══════════════════════════════════════
+Қазақша, арабша, орысша, түрікше, өзбекше, ағылшынша және ондаған басқа тілдерде қолжетімді.
+
+Құран Кәріммен байланысыңызды арттыру және барлық құрылғыларыңызда деректеріңізді синхрондау үшін Al Quran қосымшасын бүгін жүктеп алыңыз.
+[Character Count: 3735 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — KOREAN (한국어) [ko]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+꾸란: 한국어 번역 및 예배 시간
+[Character Count: 18 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+성 꾸란 한국어 오프라인 번역, 오디오 MP3, 정확한 예배 시간, 위젯 및 클라우드 동기화
+[Character Count: 51 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+알 꾸란(القرآن الكريم)은 일상 속 이슬람 신앙생활과 꾸란 학습을 위해 제작된 완벽한 디지털 성 꾸란 앱입니다. 신뢰할 수 있는 한국어 번역, 타프시르(주석), 단어별 어휘 분석, 스마트 검색, 세계적인 카리의 고음질 MP3 낭송, 정확한 예배 시간(살라트), 아잔 알림, 홈 화면 및 잠금 화면 위젯, 키블라 나침반, 다중 기기 클라우드 동기화 기능을 제공합니다.
+
+인터넷 없이도 성 꾸란을 읽고, 홈 화면 위젯으로 매일의 구절과 예배 시간을 확인하며, 소중한 메모와 북마크를 클라우드에 안전하게 보관하세요.
+
+══════════════════════════════════════
+✨ 주요 기능
+══════════════════════════════════════
+
+☁️ 안전한 클라우드 백업 및 다중 기기 동기화
+• 다중 기기 자동 동기화: 고정된 구절, 메모 모음, 마지막 읽은 위치, 바로가기를 모든 안드로이드 기기에서 실시간 동기화.
+• 데이터 손실 방지: 기기를 변경하거나 초기화해도 소중한 묵상 노트와 북마크가 안전하게 유지됩니다.
+• 1탭 간편 로그인: Google 또는 이메일 계정으로 손쉽게 로그인하거나 게스트 모드로 즉시 시작 가능.
+• 100% 개인정보 보호: 앱 내에서 언제든지 계정과 데이터를 즉시 삭제할 수 있는 완벽한 데이터 관리.
+
+📱 세련된 홈 화면 및 잠금 화면 위젯
+• 예배 시간 위젯: 하루 5번의 예배 일정과 다음 예배까지의 카운트다운을 홈 화면에서 한눈에 확인.
+• 오늘의 구절 위젯: 우스마니 아랍어 원문과 한국어 번역이 담긴 감동적인 구절을 매일 제공.
+• 1탭 바로가기: 위젯을 터치하여 해당 수라나 예배 시간표로 즉시 이동.
+• 배터리 절약 설계: 배터리 소모를 최소화하는 고대비 다크 및 라이트 테마 지원.
+
+📖 완벽한 오프라인 성 꾸란 읽기 (무스하프)
+• 정통 아랍어 서체: 메디나 우스마니체, 인도-파키스탄체, 컬러 타지위드 규칙 서체 지원.
+• 100% 오프라인 사용: 인터넷 연결 없이도 전체 꾸란, 번역본, 주석을 언제 어디서나 열람.
+• 빠른 탐색: 원하는 수라, 주즈, 페이지, 히즈브로 순식간에 이동.
+• 유연한 읽기 모드: 무스하프 책 페이지 보기와 구절별 목록 보기 간 자유로운 전환.
+
+🔍 스마트 꾸란 검색 및 구절 바로가기
+• 종합 검색: 아랍어 원문, 한국어 번역, 타프시르, 수라 이름 전체에서 신속하게 검색.
+• 구절 번호 바로가기: 구절 번호(예: "2:255")나 명칭(예: "아야트 알 쿠르시")을 입력해 즉시 이동.
+• 모음 부호 없는 검색: 아랍어 모음 부호(하라카트) 없이도 단어를 정확하게 검색.
+
+🧠 심층 타프시르 및 단어별 어휘 분석
+• 권위 있는 주석서: 이븐 카시르, 잘랄라인 등 정통 타프시르를 통한 깊이 있는 이해.
+• 단어별 의미 분석: 아랍어 단어를 터치하여 어근, 문법 구조, 발음을 즉시 확인.
+• 번역본 비교: 다양한 번역본을 나란히 비교하여 구절의 의미를 보다 명확하게 파악.
+
+🔊 고품질 MP3 오디오 낭송
+• 유명 낭송가: 미샤리 라시드 알아파시, 압둘 바싯, 압둘라 바스파르 등 최고의 카리 음원 수록.
+• 암기(히프즈) 모드: 구절 및 단어 반복 재생으로 꾸란 암기와 타지위드 교정 지원.
+• 백그라운드 재생: 화면이 꺼진 상태에서도 청취 가능하며 오프라인 청취를 위한 다운로드 지원.
+
+🕌 정확한 예배 시간 및 아잔 알림
+• 정밀한 살라트 시간: GPS 위치를 기반으로 국제 표준 계산法에 따라 정확하게 산출.
+• 감동적인 아잔 알림: 파즈르, 두흐르, 아스르, 마그립, 이샤 시간에 맞춘 아름다운 아잔 소리 알림.
+• 카운트다운 타이머: 다음 예배까지 남은 시간을 실시간으로 안내.
+
+🧭 키블라 나침반 및 타지위드 학습 가이드
+• 정밀한 키블라 찾기: 전 세계 어디에서나 메카 카바 신전의 정확한 방향을 나침반으로 안내.
+• 타지위드 가이드: 군나, 이드가암, 이끌랍, 이크파, 칼칼라 등 낭송 규칙을 알기 쉽게 설명.
+
+══════════════════════════════════════
+🌐 40개 이상의 다국어 지원
+══════════════════════════════════════
+한국어, 아랍어, 영어, 우르두어, 인도네시아어, 튀르키예어, 프랑스어, 일본어 등 다양한 언어 지원.
+
+지금 알 꾸란 앱을 다운로드하여 성 꾸란을 더 깊이 이해하고, 모든 기기에서 신앙생활을 동기화하세요.
+[Character Count: 2145 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — MALAY (Bahasa Melayu) [ms]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Al Quran: Tafsir & Waktu Solat
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Al Quran Melayu Offline, Audio MP3, Waktu Solat, Widget & Segerak Awan
+[Character Count: 70 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) adalah aplikasi Al-Quran digital lengkap yang direka untuk mempertingkatkan amalan ibadah harian anda. Baca, dengar, dan fahami ayat suci Al-Quran secara luar talian dengan terjemahan Bahasa Melayu yang sahih, tafsir, analisis perkataan demi perkataan, carian ayat pintar, audio MP3, waktu solat tepat, azan, widget skrin utama & kunci, kompas kiblat, dan Penyegerakan Awan Berbilang Peranti.
+
+Baca Al-Quran tanpa sambungan internet, pantau waktu solat dari widget skrin utama, serta simpan nota dan penanda halaman anda dengan selamat di awan.
+
+══════════════════════════════════════
+✨ CIRI-CIRI UTAMA
+══════════════════════════════════════
+
+☁️ SANDARAN AWAN & SEGERAK BERBILANG PERANTI
+• Segerak Berbilang Peranti: Segerakkan ayat yang ditanda, koleksi nota, kedudukan bacaan terakhir, dan pintasan pantas merentas semua peranti Android anda.
+• Jangan Hilang Rekod: Lindungi nota tadabbur, penanda buku, dan sejarah bacaan anda secara selamat di awan.
+• Log Masuk 1-Sentuhan: Log masuk pantas dengan Google atau Emel/Kata Laluan, atau mula sebagai Tetamu.
+• 100% Privasi & Keselamatan: Kawalan penuh data peribadi anda dengan pilihan pemadaman akaun dan data dalam aplikasi.
+
+📱 WIDGET SKRIN UTAMA & SKRIN KUNCI
+• Widget Waktu Solat: Lihat jadual 5 waktu solat, penanda solat aktif, dan kiraan detik solat seterusnya di skrin utama.
+• Widget Ayat Harian: Hayati ayat-ayat Al-Quran pilihan dengan tulisan Arab Rasm Uthmani dan terjemahan Bahasa Melayu.
+• Akses Terus Pantas: Ketuk widget untuk terus membuka Surah/Ayat atau jadual waktu solat.
+• Jimat Bateri: Reka bentuk mod Gelap dan Terang yang kemas dan jimat kuasa bateri.
+
+📖 BACA AL-QURAN LENGKAP OFFLINE
+• Pilihan Mashaf Asli: Mashaf Madinah Uthmani, Indo-Pak, dan QPC Hafs dengan tajwid berwarna.
+• 100% Akses Luar Talian: Baca keseluruhan mashaf, terjemahan, dan tafsir tanpa internet.
+• Navigasi Pantas: Lompat terus ke mana-mana Surah, Juzuk, Halaman, Hizb, atau Rukuk.
+• Mod Membaca: Pilihan Paparan Halaman Mushaf atau Paparan Senarai Ayat demi Ayat.
+
+🔍 CARIAN AYAT PINTAR & LOMPAT TERUS
+• Carian Menyeluruh: Cari dalam teks Arab, terjemahan Melayu, tafsir, atau nama Surah.
+• Lompat Ayat Terus: Taip rujukan ayat (cth. "2:255") atau nama ayat (cth. "Ayatul Kursi") untuk buka terus.
+• Carian Tanpa Baris: Cari teks Arab dengan mudah sama ada berbaris atau tanpa baris.
+
+🧠 TAFSIR LENGKAP & KATA DEMI KATA
+• Koleksi Tafsir Sahih: Fahami makna ayat dengan Tafsir Ibn Kathir, Jalalayn, dan tafsir muktabar.
+• Makna Perkataan demi Perkataan: Ketuk mana-mana perkataan Arab untuk melihat makna dasar, tatabahasa, dan sebutan.
+• Perbandingan Terjemahan: Buka beberapa terjemahan serentak untuk pemahaman lebih mendalam.
+
+🔊 BACAAN AUDIO MP3 MERDU
+• Qari Terkenal: Dengarkan bacaan Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, dan ramai lagi.
+• Mod Hafazan (Hifz): Ulang ayat dan perkataan demi perkataan untuk memudahkan hafalan dan memperbaiki tajwid.
+• Main di Latar Belakang: Dengar bacaan ayat semasa skrin padam dan muat turun audio untuk kegunaan offline.
+
+🕌 WAKTU SOLAT TEPAT & LAUNGAN AZAN
+• Waktu Solat Tepat: Dikira berdasarkan lokasi GPS anda menggunakan kaedah JAKIM & antarabangsa.
+• Pemberitahuan Azan: Notifikasi azan merdu untuk waktu Subuh, Zohor, Asar, Maghrib, dan Isyak.
+• Kiraan Detik: Peringatan masa yang tinggal menjelang waktu solat seterusnya.
+
+🧭 KOMPAS KIBLAT & PANDUAN TAJWID
+• Penunjuk Arah Kiblat: Cari arah Kaabah dengan tepat dari mana-mana lokasi di seluruh dunia.
+• Panduan Tajwid: Pelajari hukum Ghunnah, Idgham, Iqlab, Ikhfa, dan Qalqalah dengan mudah.
+
+══════════════════════════════════════
+🌐 SOKONGAN 40+ BAHASA
+══════════════════════════════════════
+Menyediakan terjemahan dalam Bahasa Melayu, Indonesia, Inggeris, Arab, Urdu, Turki, dan pelbagai bahasa dunia.
+
+Muat turun Al Quran hari ini untuk mendekatkan diri kepada Allah, menyelaraskan amalan di semua peranti anda, dan memperkayakan kehidupan harian.
+[Character Count: 3937 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — PUNJABI (ਪੰਜਾਬੀ / پنجابی) [pa]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+ਅਲ ਕੁਰਆਨ: ਤਫ਼ਸੀਰ ਤੇ ਨਮਾਜ਼ ਸਮਾਂ
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+ਅਲ ਕੁਰਆਨ ਪੰਜਾਬੀ ਅਨੁਵਾਦ, ਤਫ਼ਸੀਰ, ਆਡੀਓ, ਨਮਾਜ਼ ਦਾ ਸਮਾਂ, ਵਿਜੇਟ ਅਤੇ ਕਲਾਊਡ ਸਿੰਕ
+[Character Count: 73 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+ਅਲ ਕੁਰਆਨ (القرآن الكريم) ਐਪ ਤੁਹਾਡੀ ਰੋਜ਼ਾਨਾ ਇਸਲਾਮੀ ਇਬਾਦਤ ਅਤੇ ਕੁਰਆਨ ਮਜੀਦ ਦੇ ਅਧਿਐਨ ਲਈ ਇੱਕ ਸੰਪੂਰਨ ਡਿਜੀਟਲ ਸਾਥੀ ਹੈ। ਭਰੋਸੇਯੋਗ ਪੰਜਾਬੀ ਅਨੁਵਾਦ, ਤਫ਼ਸੀਰ, ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਅਰਥ, ਸਮਾਰਟ ਸਰਚ, ਮਸ਼ਹੂਰ ਕਾਰੀਆਂ ਦੀ ਆਡੀਓ ਤਿਲਾਵਤ, ਨਮਾਜ਼ ਦੇ ਸਹੀ ਸਮੇਂ, ਅਜ਼ਾਨ ਅਲਾਰਮ, ਹੋਮ ਅਤੇ ਲਾਕ ਸਕ੍ਰੀਨ ਵਿਜੇਟ, ਕਿਬਲਾ ਕੰਪਾਸ ਅਤੇ ਮਲਟੀ-ਡਿਵਾਈਸ ਕਲਾਊਡ ਸਿੰਕ ਦੀ ਸੁਵਿਧਾ ਇਸ ਵਿੱਚ ਮੌਜੂਦ ਹੈ।
+
+ਬਿਨਾਂ ਇੰਟਰਨੈੱਟ ਦੇ ਪੂਰਾ ਕੁਰਆਨ ਪੜ੍ਹੋ, ਹੋਮ ਸਕ੍ਰੀਨ ਤੋਂ ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਅਤੇ ਰੋਜ਼ਾਨਾ ਆਇਤਾਂ ਦੇਖੋ, ਅਤੇ ਆਪਣੇ ਸਾਰੇ ਨੋਟਸ ਤੇ ਬੁੱਕਮਾਰਕ ਕਲਾਊਡ ਵਿੱਚ ਸੁਰੱਖਿਅਤ ਰੱਖੋ।
+
+══════════════════════════════════════
+✨ ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ
+══════════════════════════════════════
+
+☁️ ਸੁਰੱਖਿਅਤ ਕਲਾਊਡ ਬੈਕਅੱਪ ਤੇ ਮਲਟੀ-ਡਿਵਾਈਸ ਸਿੰਕ
+• ਸਾਰੀਆਂ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਸਿੰਕ: ਪਿੰਨ ਕੀਤੀਆਂ ਆਇਤਾਂ, ਨੋਟਸ, ਆਖਰੀ ਪੜ੍ਹਨ ਵਾਲੀ ਥਾਂ ਆਪਣੇ ਸਾਰੇ ਐਂਡਰਾਇਡ ਫੋਨਾਂ ਵਿੱਚ ਸਿੰਕ ਕਰੋ।
+• ਡਾਟਾ ਸੁਰੱਖਿਆ: ਫੋਨ ਬਦਲਣ ਤੇ ਵੀ ਤੁਹਾਡੇ ਨਿੱਜੀ ਨੋਟਸ ਅਤੇ ਬੁੱਕਮਾਰਕ ਕਦੇ ਖਤਮ ਨਹੀਂ ਹੋਣਗੇ।
+• 1-ਟੈਪ ਆਸਾਨ ਲੌਗਇਨ: ਗੂਗਲ ਜਾਂ ਈਮੇਲ ਰਾਹੀਂ ਆਸਾਨੀ ਨਾਲ ਲੌਗਇਨ ਕਰੋ ਜਾਂ ਗੈਸਟ ਮੋਡ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ।
+• 100% ਨਿੱਜਤਾ: ਐਪ ਦੇ ਅੰਦਰੋਂ ਹੀ ਆਪਣਾ ਅਕਾਊਂਟ ਅਤੇ ਡਾਟਾ ਪੂਰੀ ਤਰ੍ਹਾਂ ਡਿਲੀਟ ਕਰਨ ਦੀ ਆਜ਼ਾਦੀ।
+
+📱 ਹੋਮ ਅਤੇ ਲਾਕ ਸਕ੍ਰੀਨ ਵਿਜੇਟ
+• ਨਮਾਜ਼ ਸਮਾਂ ਵਿਜੇਟ: 5 ਵਕਤ ਦੀ ਨਮਾਜ਼ ਦਾ ਸਮਾਂ ਅਤੇ ਅਗਲੀ ਨਮਾਜ਼ ਦਾ ਕਾਊਂਟਡਾਊਨ ਆਪਣੀ ਸਕ੍ਰੀਨ ਤੇ ਦੇਖੋ।
+• ਰੋਜ਼ਾਨਾ ਆਇਤ ਵਿਜੇਟ: ਉਸਮਾਨੀ ਅਰਬੀ ਅਤੇ ਪੰਜਾਬੀ ਅਰਥਾਂ ਨਾਲ ਪ੍ਰੇਰਣਾਦਾਇਕ ਆਇਤਾਂ ਹੋਮ ਸਕ੍ਰੀਨ ਤੇ ਪਾਓ।
+• ਸਿੱਧੀ ਪਹੁੰਚ: ਵਿਜੇਟ ਤੇ ਟੈਪ ਕਰਕੇ ਸਿੱਧਾ ਸੰਬੰਧਿਤ ਸੂਰਤ ਜਾਂ ਨਮਾਜ਼ ਪੇਜ ਤੇ ਜਾਓ।
+• ਬੈਟਰੀ ਦੀ ਬੱਚਤ: ਖੂਬਸੂਰਤ ਡਾਰਕ ਅਤੇ ਲਾਈਟ ਮੋਡ ਜੋ ਬੈਟਰੀ ਦੀ ਖਪਤ ਬਹੁਤ ਘੱਟ ਕਰਦੇ ਹਨ।
+
+📖 ਸੰਪੂਰਨ ਪਵਿੱਤਰ ਕੁਰਆਨ ਆਫ਼ਲਾਈਨ
+• ਅਸਲੀ ਅਰਬੀ ਫੌਂਟ: ਮਦੀਨਾ ਉਸਮਾਨੀ, ਇੰਡੋ-ਪਾਕ ਅਤੇ ਰੰਗੀਨ ਤਜਵੀਦ ਨਿਯਮਾਂ ਵਾਲੇ ਫੌਂਟ।
+• 100% ਆਫ਼ਲਾਈਨ ਪਹੁੰਚ: ਬਿਨਾਂ ਇੰਟਰਨੈੱਟ ਦੇ ਪੂਰਾ ਕੁਰਆਨ, ਅਨੁਵਾਦ ਅਤੇ ਤਫ਼ਸੀਰ ਪੜ੍ਹੋ।
+• ਸੌਖੀ ਨੈਵੀਗੇਸ਼ਨ: ਕਿਸੇ ਵੀ ਸੂਰਤ, ਪਾਰਾ, ਪੰਨੇ ਜਾਂ ਰੁਕੂਅ ਤੇ ਤੁਰੰਤ ਪਹੁੰਚੋ।
+• ਪੜ੍ਹਨ ਦੇ ਮੋਡ: ਮੁਸਹਫ਼ ਪੇਜ ਮੋਡ ਅਤੇ ਆਇਤ-ਵਾਰ ਲਿਸਟ ਮੋਡ ਵਿੱਚ ਆਸਾਨੀ ਨਾਲ ਪੜ੍ਹੋ।
+
+🔍 ਸਮਾਰਟ ਕੁਰਆਨ ਸਰਚ ਤੇ ਸਿੱਧਾ ਆਇਤ ਜੰਪ
+• ਵਿਆਪਕ ਸਰਚ: ਅਰਬੀ ਸ਼ਬਦਾਂ, ਪੰਜਾਬੀ ਅਨੁਵਾਦ, ਤਫ਼ਸੀਰ ਅਤੇ ਸੂਰਤਾਂ ਦੇ ਨਾਵਾਂ ਵਿੱਚ ਖੋਜੋ।
+• ਸਿੱਧਾ ਆਇਤ ਜੰਪ: ਆਇਤ ਦਾ ਨੰਬਰ (ਜਿਵੇਂ "2:255") ਜਾਂ ਨਾਮ ਲਿਖ ਕੇ ਸਿੱਧਾ ਆਇਤ ਖੋਲ੍ਹੋ।
+• ਬਿਨਾਂ ਹਰਕਤਾਂ ਦੇ ਸਰਚ: ਜ਼ੇਰ-ਜ਼ਬਰ ਤੋਂ ਬਿਨਾਂ ਵੀ ਅਰਬੀ ਸ਼ਬਦ ਆਸਾਨੀ ਨਾਲ ਲੱਭੋ।
+
+🧠 ਤਫ਼ਸੀਰ ਅਤੇ ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਅਰਥ
+• ਪ੍ਰਮਾਣਿਕ ਤਫ਼ਸੀਰ: ਤਫ਼ਸੀਰ ਇਬਨ ਕਸੀਰ, ਜਲਾਲੈਨ ਅਤੇ ਹੋਰ ਵੱਡੀਆਂ ਤਫ਼ਸੀਰਾਂ ਦਾ ਅਧਿਐਨ ਕਰੋ।
+• ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਅਰਥ: ਹਰ ਅਰਬੀ ਸ਼ਬਦ ਦਾ ਮੂਲ ਅਰਥ, ਵਿਆਕਰਣ ਅਤੇ ਉਚਾਰਨ ਜਾਣਨ ਲਈ ਟੈਪ ਕਰੋ।
+• ਅਨੁਵਾਦ ਤੁਲਨਾ: ਡੂੰਘੀ ਸਮਝ ਲਈ ਕਈ ਅਨੁਵਾਦਾਂ ਦੀ ਨਾਲ-ਨਾਲ ਤੁਲਨਾ ਕਰੋ।
+
+🔊 ਮਨਮੋਹਕ MP3 ਆਡੀਓ ਤਿਲਾਵਤ
+• ਪ੍ਰਸਿੱਧ ਕਾਰੀ: ਮਿਸ਼ਾਰੀ ਰਾਸ਼ਿਦ ਅਲ-ਅਫ਼ਾਸੀ, ਅਬਦੁਲ ਬਾਸਿਤ, ਅਬਦੁੱਲਾ ਬਸਫ਼ਰ ਆਦਿ ਦੀ ਆਵਾਜ਼ ਵਿੱਚ ਤਿਲਾਵਤ।
+• ਹਿਫ਼ਜ਼ ਮੋਡ: ਕੁਰਆਨ ਜ਼ਬਾਨੀ ਯਾਦ (ਹਿਫ਼ਜ਼) ਕਰਨ ਲਈ ਆਇਤਾਂ ਨੂੰ ਵਾਰ-ਵਾਰ ਸੁਣਨ ਦੀ ਸੁਵਿਧਾ।
+• ਬੈਕਗ੍ਰਾਊਂਡ ਪਲੇਅਬੈਕ: ਸਕ੍ਰੀਨ ਬੰਦ ਹੋਣ ਤੇ ਵੀ ਸੁਣੋ ਅਤੇ ਆਫ਼ਲਾਈਨ ਸੁਣਨ ਲਈ ਆਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ।
+
+🕌 ਨਮਾਜ਼ ਦਾ ਸਹੀ ਸਮਾਂ ਅਤੇ ਅਜ਼ਾਨ ਅਲਾਰਮ
+• ਸਹੀ ਨਮਾਜ਼ ਸਮਾਂ: ਤੁਹਾਡੀ ਜੀਪੀਐਸ ਲੋਕੇਸ਼ਨ ਅਨੁਸਾਰ ਸਾਰੇ 5 ਵਕਤਾਂ ਦਾ ਸਹੀ ਸਮਾਂ।
+• ਸੁਰੀਲੀ ਅਜ਼ਾਨ ਨੋਟੀਫਿਕੇਸ਼ਨ: ਨਮਾਜ਼ ਦੇ ਵਕਤ ਦਿਲ ਨੂੰ ਛੂਹਣ ਵਾਲੀਆਂ ਅਜ਼ਾਨਾਂ ਦੀਆਂ ਸੂਚਨਾਵਾਂ।
+• ਕਾਊਂਟਡਾਊਨ ਟਾਈਮਰ: ਅਗਲੀ ਨਮਾਜ਼ ਵਿੱਚ ਬਾਕੀ ਸਮਾਂ ਦੱਸਣ ਵਾਲਾ ਲਾਈਵ ਟਾਈਮਰ।
+
+🧭 ਕਿਬਲਾ ਕੰਪਾਸ ਤੇ ਤਜਵੀਦ ਗਾਈਡ
+• ਕਿਬਲਾ ਫਾਈਂਡਰ: ਦੁਨੀਆ ਦੇ ਕਿਸੇ ਵੀ ਕੋਨੇ ਤੋਂ ਕਾਬਾ ਸ਼ਰੀਫ਼ ਦੀ ਸਹੀ ਦਿਸ਼ਾ ਲੱਭੋ।
+• ਤਜਵੀਦ ਗਾਈਡ: ਗੁੰਨਾ, ਇਦਗ਼ਾਮ, ਇਕਲਾਬ, ਇਖ਼ਫ਼ਾ ਅਤੇ ਕਲਕਲਾ ਦੇ ਨਿਯਮਾਂ ਦੀ ਸੌਖੀ ਵਿਆਖਿਆ।
+
+══════════════════════════════════════
+🌐 40+ ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ
+══════════════════════════════════════
+ਪੰਜਾਬੀ, ਉਰਦੂ, ਹਿੰਦੀ, ਅੰਗਰੇਜ਼ੀ, ਅਰਬੀ, ਬੰਗਾਲੀ ਸਮੇਤ ਦਰਜਨਾਂ ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਉਪਲਬਧ।
+
+ਕੁਰਆਨ ਮਜੀਦ ਨਾਲ ਆਪਣਾ ਰਿਸ਼ਤਾ ਮਜ਼ਬੂਤ ਕਰਨ ਅਤੇ ਆਪਣੀ ਇਬਾਦਤ ਨੂੰ ਸਾਰੀਆਂ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਸਿੰਕ ਕਰਨ ਲਈ ਅੱਜ ਹੀ ਅਲ ਕੁਰਆਨ ਐਪ ਡਾਊਨਲੋਡ ਕਰੋ।
+[Character Count: 3227 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — PASHTO (پښتو) [ps]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+قرآن کریم: پښتو ترجمه او لمونځ
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+قرآن کریم پښتو ترجمه او تفسیر، غږیز تلاوت، د لمانځه اوقات، وجټونه او کلاوډ سنک
+[Character Count: 78 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+القرآن (القرآن الكريم) ستاسو د ورځني اسلامي ژوند او عباداتو لپاره يو بشپړ او جامع ډيجيټل قرآن اپليکېشن دی. د معتبرو پښتو ژباړو، تفاسيرو، ټکي په ټکي مانا او ګرامر، غښتلي لټون، د نامتو قاريانو ښکلي تلاوت، د لمانځه کره اوقاتو، اذان الارم، ويجټونو، قبلې نما او د کلاوډ سنک له اسانتياوو سره د قرآن کريم تلاوت او مطالعه وکړئ.
+
+بې له انټرنېټه بشپړ قرآن ولولئ، له خپل سکرین څخه د لمانځه اوقات او ورځني آيتونه وګورئ او خپل يادښتونه په کلاوډ کې خوندي وساتئ.
+
+══════════════════════════════════════
+✨ مهمې ځانګړنې
+══════════════════════════════════════
+
+☁️ خوندي کلاوډ بیک اپ او ملټي ډیوائس سنک
+• په ټولو ډیوائسونو کې سنک: خپل نښه شوي آيتونه، يادښتونه، د وروستۍ تلاوت ځای او شارټ کټونه په خپلو ټولو انډرائيډ ټيليفونونو کې سنک کړئ.
+• د معلوماتو خوندیتوب: د ټيليفون په بدلولو سره به ستاسو ذاتي يادښتونه او بک مارکونه هېڅکله له منځه لاړ نه شي.
+• په ۱ کلیک ننوتل: د ګوګل يا ايميل له لارې په اسانۍ ننوځئ او يا په مېلمه حالت کې سمدستي کار پیل کړئ.
+• ۱۰۰٪ محرمیت: د اپلیکېشن له منځ څخه د اکاونټ او ټولو معلوماتو د سمدستي پاکولو پوره واک.
+
+📱 د کور او لاك سکرین ويجټونه
+• د لمانځه اوقاتو ویجټ: د ۵ وخته لمونځونو کره وختونه او د راتلونکي لمانځه کاونټ ډاون په سکرین وګورئ.
+• د ورځني آيت ویجټ: په عثماني خط او پښتو ژباړه سره الهام بخښونکي آيتونه په خپل سکرین وګورئ.
+• مستقیم لاسرسی: په ویجټ باندې په کلیک کولو سره سمدستي اړوند سورت یا د لمانځه پاڼې ته لاړ شئ.
+• د بېټرۍ سپما: د تور او روښانه موډ ښکلی ډیزاین چې بېټرۍ ته هېڅ تاوان نه رسوي.
+
+📖 بشپړ قرآن کریم بې له انټرنېټه (مصحف)
+• مستند خطونه: د مدینې عثماني خط، انډو-پاک او د رنګین تجوید قاعدو لرونکی خط.
+• ۱۰۰٪ آفلاین لاسرسی: ټول قرآن کریم، پښتو ژباړې او تفاسیر بې له انټرنېټه ولولئ.
+• اسانه تګ راتګ: هر سورت، پاره (سیپاره)، پاڼې، حزب یا رکوع ته سمدستي ورشئ.
+• د لوستلو ډولونه: د مصحف د پاڼې او د آيت په آيت لست بڼه کې لوستل.
+
+🔍 د قرآن هوښیار لټون او آيت ته مستقیم ورتلل
+• هر اړخیز لټون: په عربي متن، پښتو ژباړه، تفاسیرو او د سورتونو په نومونو کې چټک لټون.
+• آيت ته مستقیم ورتلل: د آيت نمبر (لکه "2:255") يا نوم (لکه "آیت الکرسی") وليکئ او نېغ ورشئ.
+• بې له اعرابه لټون: د زېر او زبر پرته هم عربي کلمې په سمه توګه ومومئ.
+
+🧠 معتبر تفاسیر او ټکي په ټکي پښتو مانا
+• مستند تفاسیر: د تفسير ابن کثير، تفسير جلالين او معتبرو تفاسیرو مطالعه.
+• ټکي په ټکي مانا: په هر عربي ټکي باندې کلیک وکړئ ترڅو اصلي مانا، ګرامر او تلفظ وګورئ.
+• د ژباړو پرتله کول: د ژورې پوهې لپاره څو پښتو ژباړې یو ځای پرتله کړئ.
+
+🔊 په زړه پورې MP3 غږیز تلاوت
+• مشهور قاریان: د مشاري راشد العفاسي، عبدالباسط، عبدالله بصفر او نورو قاریانو په غږ کې تلاوت.
+• د حفظ قرآن موډ: د آيت او تورو بار بار تکرار د قرآن د حفظ او تجوید د ښه والي لپاره.
+• په پس منظر کې غږ: د سکرین په بند حالت کې تلاوت واورئ او د آفلاین لپاره یې ډاونلوډ کړئ.
+
+🕌 د لمانځه کره اوقات او اذان
+• کره وختونه: ستاسو د GPS موقعیت پر بنسټ د معتبرو نړیوالو طریقو له مخې د لمونځونو اوقات.
+• د اذان خبرتیاوې: د سهار، ماسپښین، مازیګر، ماښام او ماسخوتن لپاره په زړه پورې اذانونه.
+• کاونټ ډاون ټایمر: بل لمانځه ته د پاتې وخت ښودونکی ژوندی ټایمر.
+
+🧭 د قبلې قطب نما او د تجوید لارښود
+• دقیق قبله موندونکی: د نړۍ له هر ګوټ څخه د کعبې شريفې سم لوری معلوم کړئ.
+• د تجوید لارښود: د غنې، ادغام، اقلاب، اخفاء او قلقلې د قواعدو اسانه تشرېح.
+
+══════════════════════════════════════
+🌐 د ۴۰ څخه زیاتو ژبو ملاتړ
+══════════════════════════════════════
+پښتو، دري/فارسي، عربي، انګلیسي، اردو، ازبکي، ترکي او په لسګونو نورو نړیوالو ژبو کې شتون لري.
+
+له قرآن کریم سره د خپلې اړیکې د ټینګولو او په خپلو ټولو ډیوائسونو کې د عباداتو د سنک کولو لپاره نن ورځ د القرآن اپلیکېشن ډاونلوډ کړئ.
+[Character Count: 3410 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — PORTUGUESE (Português) [pt]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Alcorão Sagrado: Horários Rezo
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Alcorão em Português offline, Tafsir, Áudio MP3, Horários de Oração e Widgets
+[Character Count: 77 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) é a sua aplicação islâmica completa para ler, ouvir e estudar o Nobre Alcorão Sagrado offline. Desfrute de traduções autênticas em português, comentários de Tafsir, análise palavra por palavra, pesquisa inteligente de versículos, áudio MP3 de recitadores renomados, horários de oração exatos, notificações de Adhan, widgets elegantes para ecrã principal e de bloqueio, bússola de Qibla e sincronização na nuvem multidispositivo.
+
+Leia o Alcorão sem internet, consulte os seus horários de rezo nos widgets e mantenha as suas notas e marcadores protegidos na nuvem.
+
+══════════════════════════════════════
+✨ PRINCIPAIS CARACTERÍSTICAS
+══════════════════════════════════════
+
+☁️ CÓPIA DE SEGURANÇA NA NUVEM E SINCRONIZAÇÃO
+• Sincronização Multidispositivo: Sincronize automaticamente versículos marcados, notas pessoais, última posição de leitura e atalhos em todos os seus dispositivos Android.
+• Dados Sempre Seguros: Guarde as suas reflexões e marcadores em segurança na nuvem ao mudar de telemóvel.
+• Início de Sessão em 1 Toque: Acesso rápido com Google ou Email/Palavra-passe, ou comece no modo Convidado.
+• 100% Privacidade: Total conformidade com RGPD e eliminação transparente de conta e dados na aplicação.
+
+📱 WIDGETS DE ECRÃ PRINCIPAL E BLOQUEIO
+• Widgets de Horários de Oração: Veja os 5 horários de oração diários e a contagem decrescente no seu ecrã.
+• Widgets de Versículo Diário: Reflita diariamente com versículos em caligrafia otomana e tradução em português.
+• Acesso Direto: Toque no widget para abrir diretamente a Surata, versículo ou horários.
+• Baixo Consumo de Bateria: Design moderno e eficiente com temas Claro e Escuro.
+
+📖 LEITURA COMPLETA DO ALCORÃO OFFLINE (MUSHAF)
+• Caligrafias Autênticas: Mushaf Uthmani de Medina, Indopak e QPC Hafs com regras de Tajweed coloridas.
+• 100% Offline: Acesso integral ao texto, traduções e Tafsirs sem ligação à internet.
+• Navegação Rápida: Acesso imediato a qualquer Surata, Juz, Página, Hizb ou Ruku.
+• Modos de Leitura: Alterne entre a visualização de Página Mushaf e a lista versículo por versículo.
+
+🔍 PESQUISA CORÂNICA INTELIGENTE
+• Pesquisa Completa: Pesquise em árabe, traduções em português, Tafsirs e nomes de Suratas.
+• Salto Direto: Digite referências (ex.: "2:255") ou nomes (ex.: "Ayat al-Kursi") para abrir diretamente.
+• Pesquisa sem Diacríticos: Encontre palavras em árabe com facilidade, com ou sem acentuação.
+
+🧠 TAFSIR DETALHADO E PALAVRA POR PALAVRA
+• Grandes Tafsirs: Aprofunde a sua compreensão com Tafsir Ibn Kathir, Jalalayn e outros.
+• Análise Palavra por Palavra: Toque em qualquer palavra árabe para ver a raiz, gramática e pronúncia.
+• Comparação de Traduções: Compare várias traduções simultaneamente para melhor compreensão.
+
+🔊 RECITADO ÁUDIO MP3 DE ALTA QUALIDADE
+• Qaris Famosos: Escute Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar e outros recitadores.
+• Repetição para Memorização: Repita versículos e palavras para memorização (Hifz) e aperfeiçoamento de Tajweed.
+• Reprodução em Segundo Plano: Ouça com o ecrã desligado e descarregue áudios para ouvir offline.
+
+🕌 HORÁRIOS DE ORAÇÃO E ALERTAS DE AZAN
+• Horários Precisos: Cálculo por GPS de acordo com os métodos islâmicos internacionais.
+• Notificações de Adhan: Chamamento para a oração em Fajr, Dhuhr, Asr, Maghrib e Isha.
+• Temporizador de Contagem Decrescente: Tempo restante para a próxima oração.
+
+🧭 BÚSSOLA DE QIBLA E GUIA DE TAJWED
+• Localizador de Qibla: Encontre a direção exata da Kaaba em Meca a partir de qualquer lugar.
+• Guia de Tajweed: Aprenda facilmente as regras de Ghunnah, Idgham, Iqlab, Ikhfa e Qalqalah.
+
+══════════════════════════════════════
+🌐 SUPORTE PARA MAIS DE 40 IDIOMAS
+══════════════════════════════════════
+Disponível em português, espanhol, árabe, inglês, francês, turco, urdu e muitos outros.
+
+Transfira o Al Quran hoje para fortalecer a sua fé, sincronizar a sua adoração e enriquecer a sua vida diária.
+[Character Count: 3922 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — RUSSIAN (Русский) [ru]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Коран: Перевод, Тафсир и Намаз
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Коран на русском офлайн, Тафсир, Аудио MP3, Время намаза, Виджеты & Синхронизация
+[Character Count: 81 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Аль Коран (القرآن الكريم) — это ваше полное приложение для чтения, прослушивания и изучения Священного Корана. Читайте Коран офлайн с достоверными переводами (Эльмир Кулиев, Абу Адель), тафсирами, пословным переводом и грамматикой, умным поиском аятов, аудио MP3 от известных чтецов, точным расписанием намаза, азаном, виджетами для экрана блокировки и рабочего стола, компасом киблы и облачной синхронизацией.
+
+Читайте Коран без интернета, следите за временем молитвы с помощью виджетов и надежно сохраняйте свои закладки и заметки в облаке.
+
+══════════════════════════════════════
+✨ ОСНОВНЫЕ ВОЗМОЖНОСТИ
+══════════════════════════════════════
+
+☁️ ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ И РЕЗЕРВНОЕ КОПИРОВАНИЕ
+• Синхронизация между устройствами: Ваши сохраненные аяты, заметки, история чтения и закладки автоматически синхронизируются на всех Android-устройствах.
+• Безопасность данных: При смене телефона ваши личные заметки и закладки останутся в полной сохранности в облаке.
+• Быстрый вход в 1 клик: Удобный вход через Google или Email, а также режим гостя.
+• 100% Конфиденциальность: Возможность мгновенного удаления аккаунта прямо в приложении.
+
+📱 ВИДЖЕТЫ ДЛЯ ГЛАВНОГО ЭКРАНА И ЭКРАНА БЛОКИРОВКИ
+• Виджет времени намаза: 5 ежедневных молитв и обратный отсчет до следующего намаза на вашем экране.
+• Виджет «Аят дня»: Вдохновляющие коранические аяты на арабском с русским переводом.
+• Быстрый переход: Нажмите на виджет, чтобы мгновенно открыть нужную суру или расписание.
+• Экономия батареи: Высококонтрастные светлая и темная темы без лишнего расхода энергии.
+
+📖 ПОЛНЫЙ КОРАН ОФЛАЙН (МУСХАФ)
+• Аутентичные шрифты: Мединский шрифт Усмани, Индопак и шрифт с правилами таджвида.
+• 100% Офлайн доступ: Читайте весь Коран, переводы смыслов и тафсиры без подключения к сети.
+• Удобная навигация: Быстрый переход к любой суре, джузу, странице, хизбу или руку.
+• Режимы чтения: Переключение между режимом страницы Мусхафа и списком аятов.
+
+🔍 УМНЫЙ ПОИСК ПО КОРАНУ И ПЕРЕХОД К АЯТУ
+• Комплексный поиск: Поиск по арабскому тексту, русским переводам, тафсирам и названиям сур.
+• Прямой переход: Введите номер (напр., "2:255") или название для мгновенного перехода.
+• Поиск без огласовок: Легкий поиск арабских слов без харакатов.
+
+🧠 ТАФСИР И ПОСЛОВНЫЙ РАЗБОР
+• Достоверные тафсиры: Тафсир аль-Джалалайн, Ибн Касир, ас-Саади и другие труды.
+• Пословный перевод: Нажмите на любое арабское слово для просмотра корня, грамматики и звучания.
+• Сравнение переводов: Сравнивайте несколько переводов одновременно для глубокого понимания.
+
+🔊 АУДИО ТИЛЯВАТ MP3 В ВЫСОКОМ КАЧЕСТВЕ
+• Известные чтецы: Мишари Рашид аль-Афаси, Абдуль-Басит, Абдуллах Басфар и другие.
+• Повтор для заучивания: Повторение по аятам и словам для легкого заучивания Корана (хифз).
+• Фоновое воспроизведение: Слушайте с выключенным экраном и скачивайте аудио для офлайн.
+
+🕌 ТОЧНОЕ ВРЕМЯ НАМАЗА И АЗАН
+• Точное расписание: Расчет по GPS с использованием признанных мировых методов.
+• Оповещения Азана: Красивый призыв на все 5 ежедневных молитв.
+• Таймер обратного отсчета: Отображение времени, оставшегося до следующего намаза.
+
+🧭 КОМПАС КИБЛЫ И ПРАВИЛА ТАДЖВИДА
+• Точный поиск Киблы: Определение направления на Каабу из любой точки мира.
+• Интерактивный таджвид: Простое объяснение правил гунна, идгам, икляб, ихфа и калькаля.
+
+══════════════════════════════════════
+🌐 ПОДДЕРЖКА 40+ ЯЗЫКОВ
+══════════════════════════════════════
+Переводы на русский, арабский, английский, узбекский, татарский, турецкий, казахский и другие языки.
+
+Скачайте приложение Аль Коран сегодня, чтобы всегда иметь Слово Аллаха под рукой и синхронизировать свое поклонение на всех устройствах.
+[Character Count: 3612 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — SWAHILI (Kiswahili) [sw]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kurani Tukufu: Tafsiri & Swala
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kurani Tukufu Kiswahili bila mtandao, Tafsir, Sauti MP3, Swala, Widget & Cloud
+[Character Count: 78 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) ni programu kamili ya Kiislamu ya kusoma, kusikiliza na kujifunza Kurani Tukufu nje ya mtandao. Inajumuisha tafsiri sahihi za Kiswahili (Sheikh Ali Muhsin Al-Barwani na wengine), tafsiri za wanazuoni (Tafsir), uchambuzi wa neno kwa neno, utafutaji wa haraka wa aya, usomaji mzuri wa sauti za MP3, nyakati sahihi za swala, azana, widget za skrini kuu na ya kufunga, dira ya kibla na usawazishaji wa wingu kwa vifaa vyote.
+
+Soma Kurani bila intaneti, fuatilia nyakati za swala kupitia widget na uhifadhi maelezo na alamisho zako salama kwenye wingu.
+
+══════════════════════════════════════
+✨ SIFA KUU
+══════════════════════════════════════
+
+☁️ USAWAZISHAJI WA WINGU NA HIFADHI SALAMA
+• Usawazishaji wa Vifaa Vingi: Sawazisha aya zilizowekwa alama, maelezo yako, na sehemu ya mwisho uliyosoma kwenye vifaa vyako vyote vya Android.
+• Taarifa Zako Ziko Salama: Unapobadilisha simu, maelezo yako na alamisho hazitapotea kamwe.
+• Kuingia kwa Mguso Mmoja: Ingia kwa urahisi ukitumia Google au Barua pepe/Nenosiri, au anza kama Mgeni.
+• 100% Usiri na Usalama: Udhibiti kamili wa data zako na uwezo wa kufuta akaunti moja kwa moja ndani ya programu.
+
+📱 WIDGET ZA SKRINI KUU NA YA KUFUNGA
+• Widget za Nyakati za Swala: Tazama ratiba ya swala 5 za kila siku na muda uliobaki hadi swala inayofuata kwenye skrini yako.
+• Widget ya Aya ya Siku: Tafakari aya zenye kutia moyo kila siku zikiwa na maandishi ya Uthmani na tafsiri ya Kiswahili.
+• Kufungua Moja kwa Moja: Gusa widget ili kufungua papo hapo Sura husika au ratiba ya swala.
+• Kuokoa Betri: Muundo maridadi wa rangi ya giza na mwanga usiotumia nguvu nyingi za betri.
+
+📖 USOMAJI KAMILI WA KURANI BILA MTANDAO (MUSHAF)
+• Maandishi Halisi: Mushaf wa Madina Uthmani, Indo-Pak na maandishi yenye sheria za Tajweed za rangi.
+• 100% Bila Mtandao: Soma Kurani nzima, tafsiri na maelezo bila kuhitaji bando ya intaneti.
+• Urambazaji Rahisi: Nenda haraka kwenye Sura, Juzuu, Ukurasa, Hizbi au Ruku yoyote.
+• Njia za Kusoma: Badilisha kati ya mwonekano wa Ukurasa wa Mushaf na orodha ya aya kwa aya.
+
+🔍 UTAFUTAJI BORA WA KURANI NA KWENDA KWENYE AYA
+• Utafutaji Kamili: Tafuta kwenye maandishi ya Kiarabu, tafsiri ya Kiswahili, tafsir na majina ya Sura.
+• Kwenda Moja kwa Moja: Andika nambari ya aya (mf. "2:255") au jina (mf. "Ayatul Kursi") ili kuifungua moja kwa moja.
+• Kutafuta Bila Alama: Pata maneno ya Kiarabu kwa urahisi ukiwa na au bila alama za irabu.
+
+🧠 TAFSIR YA KINA NA NENO KWA NENO
+• Tafsir Sahihi: Panua uelewa wako ukitumia Tafsir Ibn Kathir, Jalalayn na zinginezo.
+• Maana ya Neno kwa Neno: Gusa neno lolote la Kiarabu ili kuona asili yake, sarufi na matamshi.
+• Kulinganisha Tafsiri: Linganisha tafsiri mbalimbali kwa pamoja ili kuelewa vyema.
+
+🔊 USOMAJI WA SAUTI YA MP3 YENYE UBORA
+• Maqari Maarufu: Sikiliza usomaji wa Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar na wengine wengi.
+• Njia ya Kuhifadhi (Hifz): Rudia aya na maneno ili kurahisisha kuhifadhi Kurani na kuboresha Tajweed.
+• Kusikiliza Nyuma ya Skrini: Sikiliza hata skrini ikiwa imezimwa na pakua sauti ili kusikiliza bila mtandao.
+
+🕌 NYAKATI SAHIHI ZA SWALA NA AZANA
+• Nyakati Sahihi: Huhesabiwa kulingana na GPS yako kwa kutumia mbinu zinazotambulika kimataifa.
+• Taarifa za Azana: Miito mizuri ya swala kwa Alfajiri, Adhuhuri, Alasiri, Maghribi na Isha.
+• Kipima Muda: Saa inayohesabu muda uliobaki hadi swala ifikayo.
+
+🧭 DIRA YA KIBLA NA MWONGOZO WA TAJWEED
+• Kitafuta Kibla: Pata mwelekeo sahihi wa Al-Kaaba Makka kutoka mahali popote duniani.
+• Mwongozo wa Tajweed: Jifunze sheria za Ghunnah, Idgham, Iqlab, Ikhfa na Qalqalah kwa urahisi.
+
+══════════════════════════════════════
+🌐 MSAADA WA LUGHA ZAIDI YA 40
+══════════════════════════════════════
+Inapatikana katika Kiswahili, Kiarabu, Kiingereza, Kifaransa, Kituruki, Kiurdu na lugha nyingine nyingi.
+
+Pakua programu ya Al Quran leo ili kuimarisha imani yako, kusawazisha ibada zako kwenye vifaa vyote na kuelimika kila siku.
+[Character Count: 3933 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — TAMIL (தமிழ்) [ta]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+அல் குர்ஆன்: தஃப்சீர் & தொழுகை
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+அல் குர்ஆன் தமிழ் மொழிபெயர்ப்பு, ஆடியோ MP3, தொழுகை நேரம், விட்ஜெட்கள் & சின்க்
+[Character Count: 78 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+அல் குர்ஆன் (القرآن الكريم) உங்கள் தினசரி இஸ்லாமிய வழிபாட்டை எளிதாக்கும் முழுமையான டிஜிட்டல் குர்ஆன் செயலியாகும். நம்பகமான தமிழ் மொழிபெயர்ப்பு, தஃப்சீர் விளக்கவுரை, சொல் வாரியான அர்த்தம், ஸ்மார்ட் குர்ஆன் தேடல், சர்வதேச காரிகளின் ஆடியோ திலாவத், துல்லியமான தொழுகை நேரங்கள், பாங்கு அலாரம், முகப்புத் திரை விட்ஜெட்கள், கிப்லா திசைகாட்டி மற்றும் கிளவுட் சின்க் வசதிகள் இதில் உள்ளன.
+
+இன்டர்நெட் இன்றியே முழு குர்ஆனையும் ஓதுங்கள், முகப்புத் திரை விட்ஜெட்கள் மூலம் தொழுகை நேரங்களை உடனுக்குடன் பாருங்கள், உங்கள் குறிப்புகளை கிளவுடில் பாதுகாப்பாக வையுங்கள்.
+
+══════════════════════════════════════
+✨ முக்கிய அம்சங்கள்
+══════════════════════════════════════
+
+☁️ பாதுகாப்பான கிளவுட் சின்க் & பேக்கப்
+• பல சாதன சின்க்: உங்கள் புக்மார்க்குகள், குறிப்புகள், கடைசியாக ஓதிய இடம் ஆகியவை உங்கள் எல்லா ஆண்ட்ராய்டு போன்களிலும் தானாகவே சின்க் ஆகும்.
+• தகவல்கள் பாதுகாப்பானது: போனை மாற்றினாலும் உங்கள் தஃப்சீர் குறிப்புகளும் புக்மார்க்குகளும் அழியாமல் கிளவுடில் இருக்கும்.
+• 1-தட்டல் லாகின்: கூகிள் அல்லது மின்னஞ்சல் மூலம் சுலபமாக லாகின் செய்து பயன்படுத்தலாம்.
+• 100% தனியுரிமை: செயலியின் உள்ளிருந்தே உங்கள் கணக்கையும் தரவுகளையும் முழுமையாக நீக்கும் வசதி.
+
+📱 முகப்பு & பூட்டுத் திரை விட்ஜெட்கள்
+• தொழுகை நேர விட்ஜெட்: 5 நேர தொழுகை அட்டவணை மற்றும் அடுத்த தொழுகைக்கான கவுண்ட்டவுன் திரையில் தெரியும்.
+• தினசரி ஆயத் விட்ஜெட்: உஸ்மானி அரபி எழுத்து மற்றும் தமிழ் மொழிபெயர்ப்புடன் கூடிய எழுச்சியூட்டும் ஆயத்துகள்.
+• நேரடி அணுகல்: விட்ஜெட்டை தொட்டு உடனே சம்பந்தப்பட்ட சூரா அல்லது தொழுகைப் பக்கத்திற்குச் செல்லலாம்.
+• பேட்டரி சிக்கனம்: பேட்டரியை உறிஞ்சாத எளிய மற்றும் நேர்த்தியான டார்க்/லைட் தீம்கள்.
+
+📖 முழுமையான குர்ஆன் ஓதுதல் (ஆஃப்லைன்)
+• அசல் அரபி எழுத்துக்கள்: மதீனா உஸ்மானி, இந்தோ-பாக் மற்றும் வண்ண தஜ்வீத் எழுத்துக்கள்.
+• 100% ஆஃப்லைன் வசதி: இணையம் இல்லாமலேயே முழு குர்ஆன், மொழிபெயர்ப்பு மற்றும் தஃப்சீர்களைப் படிக்கலாம்.
+• சுலபமான வழிகாட்டுதல்: எந்தவொரு சூரா, ஜூஸ் (பாரா), பக்கம் அல்லது ருகூவிற்கும் உடனே செல்லலாம்.
+• வாசிப்பு முறைகள்: முஸஹஃப் பக்க வடிவம் அல்லது ஆயத் வாரியான பட்டியல் வடிவம்.
+
+🔍 ஸ்மார்ட் தேடல் & நேரடி ஆயத் ஜம்ப்
+• விரிவான தேடல்: அரபி வார்த்தைகள், தமிழ் அர்த்தம், தஃப்சீர் மற்றும் சூரா பெயர்களில் தேடலாம்.
+• நேரடி ஆயத் அணுகல்: ஆயத் எண் (எ.கா. "2:255") அல்லது பெயரை உள்ளிட்டு உடனே செல்லலாம்.
+• ஹரக்கத் இன்றி தேடுதல்: குறியீடுகள் இல்லாமலும் அரபி வார்த்தைகளை எளிதாகக் கண்டுபிடிக்கலாம்.
+
+🧠 தஃப்சீர் & சொல் வாரியான ஆய்வு
+• பிரபல தஃப்சீர்கள்: இப்னு கஸீர், ஜலாலைன் உள்ளிட்ட புகழ்பெற்ற தஃப்சீர்கள்.
+• சொல் வாரியான அர்த்தம்: ஒவ்வொரு அரபி வார்த்தையின் மூல அர்த்தம், இலக்கணம் மற்றும் உச்சரிப்பை அறியலாம்.
+• மொழிபெயர்ப்பு ஒப்பீடு: ஆழமான புரிதலுக்கு பல தமிழ் மொழிபெயர்ப்புகளை ஒப்பிட்டுப் பார்க்கலாம்.
+
+🔊 இனிமையான MP3 ஆடியோ ஓதுதல்
+• பிரபல காரிகள்: மிஷாரி ரஷீத் அல்-அஃபாசி, அப்துல் பாசித், அப்துல்லாஹ் பஸ்ஃபர் மற்றும் பலர்.
+• மனன (ஹிஃப்ழ்) பயிற்சி முறை: ஆயத்துகளையும் வார்த்தைகளையும் திரும்பத் திரும்பக் கேட்டு மனனம் செய்யும் வசதி.
+• பின்னணி ஆடியோ: திரை அணைந்திருக்கும் போதும் கேட்கலாம் மற்றும் ஆஃப்லைனில் கேட்க பதிவிறக்கலாம்.
+
+🕌 துல்லியமான தொழுகை நேரம் & பாங்கு
+• துல்லியமான நேரங்கள்: உங்கள் ஜிபிஎஸ் இருப்பிடத்தின் அடிப்படையில் சர்வதேச கணக்கீட்டு முறைகள்.
+• பாங்கு அறிவிப்புகள்: பஜ்ர், ளுஹர், அஸர், மஃரிப் மற்றும் இஷா தொழுகைகளுக்கான இனிமையான பாங்கு ஓசை.
+• கவுண்ட்டவுன் டைமர்: அடுத்த தொழுகைக்கு இன்னும் எவ்வளவு நேரம் உள்ளது என்பதைக் காட்டும் டைமர்.
+
+🧭 கிப்லா திசைகாட்டி & தஜ்வீத் வழிகாட்டி
+• கிப்லா ஃபைண்டர்: உலகின் எந்தப் பகுதியிலிருந்தும் கஃபாவின் சரியான திசையைக் கண்டறியலாம்.
+• தஜ்வீத் விதிகள்: குன்னா, இக்க்லாப், இக்ஃபா, இத்காம் மற்றும் கல்கலா விதிகளின் எளிய விளக்கம்.
+
+══════════════════════════════════════
+🌐 40+ மொழிகளின் ஆதரவு
+══════════════════════════════════════
+தமிழ், அரபி, ஆங்கிலம், உருது, இந்தி, மலாய், இந்தோனேசியன் உட்பட 40+ மொழிகளில் மொழிபெயர்ப்புகள் உள்ளன.
+
+குர்ஆனோடு உள்ள தொடர்பை வலுப்படுத்தவும், உங்கள் வழிபாட்டுத் தரவுகளை அனைத்து சாதனங்களிலும் சின்க் செய்யவும் இன்றே அல் குர்ஆன் செயலியைப் பதிவிறக்குங்கள்.
+[Character Count: 3805 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — TURKISH (Türkçe) [tr]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kuran-ı Kerim: Meal ve Namaz
+[Character Count: 28 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kuran-ı Kerim Meali, Tefsir, Sesli Dinle, Ezan Vakti, Widget & Bulut Eşitleme
+[Character Count: 77 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم), günlük ibadetlerinizi zenginleştirmek için tasarlanmış kapsamlı bir dijital Kuran-ı Kerim uygulamasıdır. Güvenilir Türkçe mealler, tefsirler, kelime kelime analiz, gelişmiş arama, dünyaca ünlü hafızlardan MP3 sesli tilavet, doğru namaz vakitleri, ezan alarmı, ana ekran widget'ları, kıble pusulası ve Çoklu Cihaz Bulut Senkronizasyonu ile Kuran'ı keşfedin.
+
+İnternetsiz Kuran okuyun, widget ile günlük ayetleri ve ezan saatlerini takip edin, notlarınızı tüm cihazlarınızda yedekleyin.
+
+══════════════════════════════════════
+✨ ÖNE ÇIKAN ÖZELLİKLER
+══════════════════════════════════════
+
+☁️ GÜVENLİ BULUT YEDEKLEME VE SENKRONİZASYON
+• Çoklu Cihaz Senkronizasyonu: Sabitlenen ayetlerinizi, notlarınızı, son okuma yerinizi ve kısayollarınızı tüm Android cihazlarınızda gerçek zamanlı eşitleyin.
+• Verileriniz Güvende: Telefon değiştirdiğinizde kişisel notlarınız ve ayraçlarınız asla kaybolmaz.
+• Tek Tıkla Giriş: Google veya E-posta ile kolayca giriş yapın ya da Misafir modunda başlayın.
+• 100% Gizlilik: Uygulama içinden tek tuşla hesap ve veri silme imkanı.
+
+📱 ŞIK ANA EKRAN VE KİLİT EKRANI WİDGET'LARI
+• Namaz Vakitleri Widget'ı: 5 vakit namaz saatlerini ve sonraki vakte kalan süreyi ekranınızdan görün.
+• Günün Ayeti Widget'ı: Orijinal Osmani hat ve Türkçe mealiyle ilham veren günlük ayetleri takip edin.
+• Hızlı Erişim: Widget'a dokunarak doğrudan ilgili sureye, ayete veya namaz takvimine geçiş yapın.
+• Pil Dostu: Otomatik güncellenen, bataryayı yormayan yüksek kontrastlı Gece/Gündüz temaları.
+
+📖 ÇEVRİMDIŞI KURAN-I KERİM OKUMA (MUSHAF)
+• Orijinal Hat Seçenekleri: Medine Osmani, İndo-Pak ve renkli tecvidli hat seçenekleri.
+• 100% İnternetsiz Erişim: Tüm mushafı, Türkçe mealleri ve tefsirleri internetsiz okuyun.
+• Kolay Gezinme: İstediğiniz Sure, Cüz, Sayfa veya Rükûya anında geçin.
+• Esnek Okuma Modları: Mushaf Sayfa Görünümü veya Ayet Ayet Liste Görünümü arasında geçiş yapın.
+
+🔍 AKILLI AYET ARAMA VE DOĞRUDAN GEÇİŞ
+• Kapsamlı Arama: Arapça metin, Türkçe meal, tefsir ve sure isimleri içinde anında arama yapın.
+• Doğrudan Ayet Geçişi: Ayet referansı (ör. "2:255") veya popüler isim (ör. "Ayetel Kürsi") yazarak direkt ayete gidin.
+• Harekeli/Harekesiz Arama: Arapça kelimeleri harekesiz de kolayca ve doğru bulun.
+
+🧠 DETAYLI TEFSİR VE KELİME KELİME ÇÖZÜMLEME
+• Güvenilir Tefsirler: İbn Kesir, Celaleyn ve Diyanet tefsirleri ile ayetlerin derin manalarını öğrenin.
+• Kelime Kelime Anlam: Her Arapça kelimenin kök anlamını, gramer yapısını ve okunuşunu inceleyin.
+• Meal Karşılaştırma: Ayetleri daha iyi anlamak için birden fazla meali yan yana kıyaslayın.
+
+🔊 MP3 SESLİ KURAN TİLAVETİ
+• Ünlü Hafızlar: Mishari Rashid Alafasy, Abdulbasit Abdussamed, Abdullah Basfar ve daha fazlası.
+• Ezber (Hıfz) Modu: Ayet ve kelime bazında tekrarlarla Kuran ezberleme ve tecvid geliştirme.
+• Arka Planda Çalma: Ekran kapalıyken dinleyin ve internetsiz dinleme için ses dosyalarını indirin.
+
+🕌 DOĞRU NAMAZ VAKİTLERİ VE EZAN ALARMI
+• Hassas Ezan Vakitleri: GPS konumunuza göre Diyanet ve uluslararası hesaplama yöntemleri.
+• Ezan Bildirimleri: Sabah, Öğle, İkindi, Akşam ve Yatsı vakitlerinde güzel ezan sesli bildirimler.
+• Geri Sayım Sayacı: Bir sonraki namaz vaktine kalan süreyi gösteren canlı sayaç.
+
+🧭 KIBLE PUSULASI VE TECVİD REHBERİ
+• Hassas Kıble Bulucu: Dünyanın her yerinde Kabe yönünü cihazınızın pusulasıyla kolayca bulun.
+• İnteraktif Tecvid Rehberi: İhfa, İzhar, İklab, İdgam ve Kalkale kurallarını pratik örneklerle öğrenin.
+
+══════════════════════════════════════
+🌐 40+ DİL DESTEĞİ
+══════════════════════════════════════
+Türkçe, İngilizce, Arapça, Urduca, Endonezce, Rusça, Fransızca, Almanca ve 40'tan fazla dilde mealler içerir.
+
+Kuran-ı Kerim ile bağınızı güçlendirmek ve ibadetlerinizi tüm cihazlarınızda eşitlemek için Al Quran uygulamasını hemen indirin.
+[Character Count: 3803 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — URDU (اردو) [ur]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+القرآن: اردو ترجمہ و نماز
+[Character Count: 25 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+قرآن مجید مع اردو ترجمہ، تفسیر، آڈیو تلاوت، اوقات نماز، وجٹس اور کلاؤڈ سنک
+[Character Count: 74 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+القرآن (القرآن الكريم) آپ کی روزمرہ اسلامی عبادات کے لیے ایک مکمل اور جامع ڈیجیٹل قرآن ایپ ہے۔ مستند اردو تراجم، تفاسیر، لفظ بہ لفظ ترجمہ و گرامر، اسمارٹ قرآن سرچ، خوبصورت آڈیو تلاوت، اوقاتِ نماز، اذان الارم، ہوم و لاک اسکرین وجٹس، قبلہ رخ اور ملٹی ڈیوائس کلاؤڈ سنک کی سہولت کے ساتھ قرآن مجید کا مطالعہ کریں۔
+
+بغیر انٹرنیٹ کے قرآن پاک پڑھیں، ہوم اسکرین سے روزانہ کی آیات اور نماز کے اوقات دیکھیں، اور اپنے نوٹس اور بُک مارکس کو ہر ڈیوائس پر محفوظ رکھیں۔
+
+══════════════════════════════════════
+✨ اہم خصوصیات
+══════════════════════════════════════
+
+☁️ محفوظ کلاؤڈ بیک اپ اور ملٹی ڈیوائس سنک
+• ملٹی ڈیوائس سنک: اپنی محفوظ کردہ آیات، نوٹس، آخری تلاوت شدہ مقام اور شارٹ کٹس کو تمام اینڈرائیڈ ڈیوائسز پر خودکار طور پر سنک کریں۔
+• ڈیٹا کا تحفظ: فون تبدیل کرنے پر بھی آپ کے ذاتی نوٹس، بُک مارکس اور ہسٹری کبھی ضائع نہیں ہوں گے۔
+• آسان لاگ اِن: گوگل یا ای میل کے ذریعے ایک کلک میں لاگ اِن کریں یا گیسٹ موڈ میں فوری استعمال شروع کریں۔
+• 100% پرائیویسی: ایپ کے اندر سے مکمل اکاؤنٹ اور ڈیٹا ڈیلیٹ کرنے کی مکمل سہولت۔
+
+📱 ہوم اور لاک اسکرین وجٹس
+• اوقاتِ نماز وجٹ: پانچوں نمازوں کے درست اوقات اور اگلی نماز کا کاؤنٹ ڈاؤن ہوم اسکرین پر دیکھیں۔
+• روزانہ آیت وجٹ: عثمانی رسم الخط اور اردو ترجمہ کے ساتھ ایمان افروز آیات براہِ راست ہوم اسکرین پر دیکھیں۔
+• فوری رسائی: وجٹ پر ٹیپ کر کے فوری طور پر مطلوبہ سورۃ، آیت یا نماز کے صفحے پر جائیں۔
+• بیٹری فرینڈلی: ڈارک اور لائٹ موڈ کے دلکش ڈیزائن جو بیٹری پر اضافی بوجھ نہیں ڈالتے۔
+
+📖 مکمل قرآن مجید آف لائن تلاوت
+• مستند رسم الخط: مدینہ عثمانی، انڈو پاک اور رنگین تجویدی رسم الخط میں تلاوت کی سہولت۔
+• 100% آف لائن رسائی: انٹرنیٹ کے بغیر مکمل قرآن پاک، اردو ترجمہ اور تفاسیر پڑھیں۔
+• آسان نیویگیشن: کسی بھی سورۃ، پارہ، صفحہ، حزب یا رکوع پر فوراً پہنچیں۔
+• پڑھنے کے مختلف انداز: مصحف پیج موڈ اور آیت وار لسٹ موڈ میں آسانی سے سوئچ کریں۔
+
+🔍 اسمارٹ قرآن سرچ اور فوری آیت جمپ
+• جامع سرچ: عربی الفاظ، اردو ترجمہ، تفاسیر اور سورتوں کے ناموں میں فوری تلاش کریں۔
+• براہِ راست آیت جمپ: آیت کا نمبر (جیسے "2:255") یا نام لکھ کر فوراً متعلقہ آیت پر جائیں۔
+• اعراب کے بغیر تلاش: اعراب اور زبر زیر کے بغیر بھی عربی الفاظ کو درستگی سے تلاش کریں۔
+
+🧠 تفاسیر اور لفظ بہ لفظ اردو ترجمہ
+• مستند تفاسیر: تفسیر ابن کثیر، تفسیر جلالین اور دیگر معتبر تفاسیر کا مطالعہ کریں۔
+• لفظ بہ لفظ مفہوم: ہر عربی لفظ پر ٹیپ کر کے اس کا مادہ، گرامر اور معنی دیکھیں۔
+• تراجم کا موازنہ: گہری فہم کے لیے مختلف اردو تراجم کا باہم موازنہ کریں۔
+
+🔊 دلکش MP3 آڈیو تلاوت
+• مشہور قراء: مشاری راشد العفاسی، عبد الباسط، عبد اللہ بصفر اور دیگر قراء کی تلاوت۔
+• حفظ قرآن موڈ: آیات اور الفاظ کو بار بار دہرا کر حفظ (حفظِ قرآن) اور تجوید درست کریں۔
+• بیک گراؤنڈ پلے بیک: اسکرین بند کر کے بھی تلاوت سنیں اور آف لائن تلاوت کے لیے آڈیو ڈاؤن لوڈ کریں۔
+
+🕌 اوقاتِ نماز اور اذان الارم
+• درست اوقاتِ نماز: آپ کے جی پی ایس مقام کے مطابق مستند طریقوں پر مبنی نظام اوقات۔
+• خوبصورت اذان نوٹیفکیشن: فجر، ظہر، عصر، مغرب اور عشاء کے لیے ایمان افروز اذان الرٹس۔
+• کاؤنٹ ڈاؤن ٹائمر: اگلی نماز میں باقی وقت بتانے والا درست ٹائمر۔
+
+🧭 قبلہ رخ کمپاس اور تجوید گائیڈ
+• درست قبلہ نما: دنیا کے کسی بھی کونے سے خانہ کعبہ کی درست سمت معلوم کریں۔
+• تجوید گائیڈ: غنہ، ادغام، اقلاب، اخفاء اور قلقلہ کے بنیادی اصولوں کی آسان وضاحت۔
+
+══════════════════════════════════════
+🌐 40 سے زائد زبانوں کی سپورٹ
+══════════════════════════════════════
+اردو، انگریزی، عربی، بنگالی، ہندی، انڈونیشین، ترکی، فارسی، فرانسیسی اور دیگر 40+ زبانوں میں تراجم دستیاب ہیں۔
+
+قرآن پاک سے اپنا تعلق مضبوط بنانے اور اپنی عبادات کو تمام ڈیوائسز پر محفوظ رکھنے کے لیے آج ہی القرآن ایپ ڈاؤن لوڈ کریں۔
+[Character Count: 3416 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — VIETNAMESE (Tiếng Việt) [vi]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Kinh Quran: Dịch & Giờ Salah
+[Character Count: 28 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Kinh Quran tiếng Việt offline, Tafsir, Audio MP3, Giờ lễ Salah & Đồng bộ Widget
+[Character Count: 79 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) là ứng dụng Hồi giáo toàn diện để đọc, lắng nghe và học tập Kinh Quran Thánh. Ứng dụng cung cấp bản dịch tiếng Việt chuẩn xác, chú giải Tafsir, phân tích ngữ pháp từng từ, tìm kiếm câu kinh thông minh, âm thanh MP3 từ các Qari danh tiếng thế giới, giờ cầu nguyện Salah chuẩn xác, chuông báo Adhan, tiện ích widget màn hình chính và khóa, la bàn Qibla cùng tính năng Đồng bộ hóa Đám mây Đa Thiết bị.
+
+Đọc Kinh Quran hoàn toàn ngoại tuyến không cần internet, theo dõi giờ cầu nguyện qua widget và sao lưu an toàn ghi chú của bạn trên đám mây.
+
+══════════════════════════════════════
+✨ CÁC TÍNH NĂNG NỔI BẬT
+══════════════════════════════════════
+
+☁️ SAO LƯU ĐÁM MÂY & ĐỒNG BỘ ĐA THIẾT BỊ
+• Đồng bộ hóa Đa Thiết bị: Tự động đồng bộ các câu kinh đã ghim, ghi chú, vị trí đọc gần nhất trên tất cả điện thoại Android.
+• Dữ liệu Luôn An Toàn: Toàn bộ ghi chú và dấu trang của bạn luôn được lưu giữ an toàn trên đám mây.
+• Đăng nhập 1 Chạm: Đăng nhập nhanh qua Google hoặc Email/Mật khẩu, hoặc bắt đầu ở chế độ Khách.
+• 100% Bảo mật: Hoàn toàn tuân thủ bảo mật với tùy chọn xóa tài khoản và dữ liệu trực tiếp trong app.
+
+📱 TIỆN ÍCH WIDGET MÀN HÌNH CHÍNH & KHÓA
+• Widget Giờ Cầu Nguyện: Xem lịch trình 5 buổi lễ trong ngày và đếm ngược đến giờ lễ tiếp theo trên màn hình.
+• Widget Câu Kinh Mỗi Ngày: Suy ngẫm về các câu kinh ý nghĩa với chữ Ả Rập Uthmani và bản dịch tiếng Việt.
+• Truy cập Trực tiếp: Chạm vào widget để mở ngay Surah hoặc lịch cầu nguyện tương ứng.
+• Tiết kiệm Pin: Thiết kế chủ đề Sáng và Tối tương phản cao, tự động cập nhật mà không hao pin.
+
+📖 ĐỌC KINH QURAN TOÀN TẬP NGOẠI TUYẾN (MUSHAF)
+• Kiểu Chữ Ả Rập Chuẩn: Bản chép Madani Uthmani, Indo-Pak và kiểu chữ quy tắc Tajweed có mã màu.
+• 100% Ngoại Tuyến: Đọc toàn bộ Mushaf, bản dịch và Tafsir mà không cần kết nối mạng.
+• Điều hướng Nhanh: Chuyển nhanh đến bất kỳ Surah, Juz, Trang, Hizb hoặc Ruku nào.
+• Chế độ Đọc Linh Hoạt: Chuyển đổi giữa chế độ Trang Mushaf và Danh sách từng câu kinh.
+
+🔍 TÌM KIẾM CÂU KINH THÔNG MINH & NHẢY TRỰC TIẾP
+• Tìm kiếm Toàn diện: Tìm kiếm trong văn bản tiếng Ả Rập, bản dịch tiếng Việt, Tafsir và tên Surah.
+• Nhảy Trực tiếp: Nhập số câu (vd: "2:255") hoặc tên gọi để mở ngay lập tức.
+• Tìm kiếm Không Cần Dấu: Dễ dàng tìm kiếm từ ngữ Ả Rập có hoặc không có dấu nguyên âm.
+
+🧠 TAFSIR CHI TIẾT & PHÂN TÍCH TỪNG TỪ
+• Kho Tàng Tafsir Uy Tín: Hiểu sâu sắc ý nghĩa câu kinh với Tafsir Ibn Kathir, Jalalayn và kinh điển.
+• Nghĩa Từng Từ: Chạm vào bất kỳ từ tiếng Ả Rập nào để xem nghĩa gốc, ngữ pháp và phát âm.
+• So Sánh Bản Dịch: Đặt nhiều bản dịch cạnh nhau để có cái nhìn toàn diện nhất.
+
+🔊 ÂM THANH QURAN MP3 CHẤT LƯỢNG CAO
+• Các Qari Nổi Tiếng: Lắng nghe giọng đọc của Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, v.v.
+• Chế độ Học Thuộc (Hifz): Lặp lại từng câu và từng từ để hỗ trợ ghi nhớ và hoàn thiện Tajweed.
+• Phát trong Nền: Nghe kinh khi màn hình tắt và tải xuống tệp âm thanh để nghe offline.
+
+🕌 GIỜ CẦU NGUYỆN CHUẨN XÁC & BÁO ADHAN
+• Giờ Salah Chuẩn Xác: Tính toán dựa trên vị trí GPS của bạn theo các phương pháp quốc tế.
+• Thông báo Adhan: Lời kêu gọi cầu nguyện du dương cho các lễ Fajr, Dhuhr, Asr, Maghrib và Isha.
+• Đồng Hồ Đếm Ngược: Hiển thị thời gian thực còn lại cho đến giờ cầu nguyện tiếp theo.
+
+🧭 LA BÀN QIBLA & HƯỚNG DẪN TAJWEED
+• Xác định Hướng Qibla: Tìm hướng chính xác về thánh địa Kaaba tại Mecca từ mọi nơi trên thế giới.
+• Hướng dẫn Tajweed: Giải thích dễ hiểu các quy tắc Ghunnah, Idgham, Iqlab, Ikhfa và Qalqalah.
+
+══════════════════════════════════════
+🌐 HỖ TRỢ HƠN 40 NGÔN NGỮ
+══════════════════════════════════════
+Bao gồm tiếng Việt, tiếng Ả Rập, tiếng Anh, tiếng Pháp, tiếng Thổ Nhĩ Kỳ, tiếng Urdu, tiếng Indonesia và nhiều ngôn ngữ khác.
+
+Tải ngay ứng dụng Al Quran để gắn kết tâm hồn với Kinh Thánh, đồng bộ hóa việc thờ phượng trên mọi thiết bị và nâng tầm đời sống tâm linh mỗi ngày.
+[Character Count: 3855 / 4,000 chars]
+
+
+================================================================================
+GOOGLE PLAY STORE METADATA — CHINESE (中文 (简体)) [zh]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+古兰经: 中文翻译与礼拜时间
+[Character Count: 14 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+古兰经离线中文版, 经注, MP3音频诵读, 准确礼拜时间, 小组件与多设备云同步
+[Character Count: 41 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+《古兰经》（القرآن الكريم）是专为您打造的完整离线古兰经应用。包含马坚等权威中文译本、经注（Tafsir）、逐词解析、著名诵读家高品质MP3音频、精准礼拜时刻、宣礼（阿赞）提醒、主屏幕与锁屏小组件、朝向（克尔白）罗盘以及多设备云端同步功能。
+
+无需网络即可随时随地阅读《古兰经》，通过桌面小组件便捷查看每日经文和礼拜时间，并将您的笔记与书签安全同步至云端。
+
+══════════════════════════════════════
+✨ 核心功能
+══════════════════════════════════════
+
+☁️ 安全云端备份与多设备同步
+• 多设备实时同步：自动在您的所有安卓手机和平板电脑间同步收藏经文、研读笔记、最后阅读位置与快捷方式。
+• 数据安全不丢失：更换手机时，您的个人笔记、书签和阅读历史依然完好保存在云端。
+• 1键快速登录：支持通过Google或邮箱密码轻松登录，或以访客模式随时开启体验。
+• 100% 隐私保护：完全遵循隐私标准，支持在应用内一键安全注销账户与清除数据。
+
+📱 精美主屏幕与锁屏小组件
+• 礼拜时刻小组件：在主屏幕随时查看每日5次礼拜时间、当前拜功及下次拜功倒计时。
+• 每日经文小组件：每天在桌面品读精选的奥斯曼体阿拉伯语经文与优美中文译文。
+• 1键直达功能：点击小组件即可直接跳转至对应的古兰经章节或拜功时间表。
+• 极低电量消耗：提供高对比度深色与浅色主题，高效自动更新，不耗费多余电量。
+
+📖 完整离线《古兰经》阅读（穆斯哈夫）
+• 权威阿文排版：麦地那奥斯曼字体、印巴字体及带彩色诵读规则（Tajweed）的字体。
+• 100% 离线使用：无需联网即可离线阅读整本古兰经文、中文译文和经注。
+• 便捷导航跳转：迅速跳转至任意章节（Surah）、卷（Juz）、页码或节（Ruku）。
+• 多样阅读模式：支持经典穆斯哈夫页面模式与逐节列表阅读模式随意切换。
+
+🔍 智能古兰经搜索与精准定位
+• 多范围全面搜索：可同时在阿拉伯文经文、中文译文、经注及章节名称中快速检索。
+• 经文直达跳转：输入经文编号（如“2:255”）或常用名称（如“宝座经”）直接跳转阅读。
+• 去变音符号搜索：无需输入阿拉伯语元音符号（短音符）即可精准查找对应词句。
+
+🧠 深度经注与逐词对照研读
+• 经典经注库：包含伊本·凯西尔经注（Ibn Kathir）、札拉莱尼经注（Jalalayn）等权威注解。
+• 逐词词义解析：点击任意阿拉伯单词即可查看词根、语法属性与标准发音。
+• 译本对比对照：可并排对比多个中文译本，更全面深入地领悟经文深意。
+
+🔊 沉浸式高音质 MP3 音频诵读
+• 著名诵读者：包含米沙里·拉希德（Alafasy）、阿卜杜·巴西特（Abdul Basit）等世界大师诵读。
+• 背诵与跟读模式：支持按节、按词重复播放，助力古兰经背诵（Hifz）与纠正发音。
+• 后台播放与缓存：支持锁屏后台播放，并可提前下载音频文件供离线聆听。
+
+🕌 精准礼拜时间与宣礼提醒
+• 精确拜功时间：基于您所在的GPS地理位置，采用国际主流算法精确计算。
+• 悦耳宣礼通知：晨礼（Fajr）、晌礼（Dhuhr）、晡礼（Asr）、昏礼（Maghrib）与宵礼（Isha）准时提醒。
+• 拜功倒计时：实时显示距离下一次拜功所剩余的时间。
+
+🧭 朝向罗盘与诵读规则指南
+• 精准朝向指示：无论身在世界何处，均可通过GPS和指南针精准指示麦加克尔白方向。
+• 互动式诵读规则：轻松学习鼻音（Ghunnah）、同化（Idgham）、转化（Iqlab）、隐藏（Ikhfa）等Tajweed规则。
+
+══════════════════════════════════════
+🌐 支持40多种世界语言
+══════════════════════════════════════
+提供中文、阿拉伯语、英语、乌尔都语、印度尼西亚语、土耳其语、法语、俄语等多国语言翻译。
+
+立即下载《古兰经》应用，让圣洁启示常伴身旁，在所有设备上同步您的功修，提升每日的信仰生活。
+[Character Count: 1703 / 4,000 chars]

@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — GERMAN (Deutsch) [de]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Der Koran: Gebetszeiten & Azan
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Koran auf Deutsch offline, Tafsir, Audio MP3, Gebetszeiten, Widgets & Cloud-Sync
+[Character Count: 80 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) ist Ihre vollständige islamische App zum Lesen, Hören und Studieren des Heiligen Korans. Nutzen Sie die App komplett offline mit authentischen deutschen Übersetzungen, Tafsir-Kommentaren, Wort-für-Wort-Analyse, intelligenter Vers-Suche, MP3-Audio-Rezitationen berühmter Qaris, präzisen Gebetszeiten, Azan-Alarm, Widgets für Start- und Sperrbildschirm, Qibla-Kompass und Multi-Device Cloud-Synchronisation.
+
+Lesen Sie den Koran ohne Internet, behalten Sie Gebetszeiten per Widget im Blick und sichern Sie Notizen und Lesezeichen dauerhaft in der Cloud.
+
+══════════════════════════════════════
+✨ HAUPTFUNKTIONEN
+══════════════════════════════════════
+
+☁️ SICHERE CLOUD-SYNCHRONISATION & BACKUP
+• Multi-Geräte-Sync: Synchronisieren Sie markierte Verse, Notizen, Leseposition und Schnellzugriffe automatisch auf all Ihren Android-Geräten.
+• Keine Datenverluste: Persönliche Notizen, Lesezeichen und Leseverlauf bleiben beim Gerätewechsel sicher erhalten.
+• 1-Klick-Anmeldung: Bequemer Login via Google oder E-Mail/Passwort oder direkter Start im Gastmodus.
+• 100% Datenschutz: Volle DSGVO-Konformität mit Möglichkeit, Konto und Daten direkt in der App zu löschen.
+
+📱 ELEGANTE WIDGETS FÜR START- & SPERRBILDSCHIRM
+• Gebetszeiten-Widgets: Die 5 täglichen Gebete und Countdown zum nächsten Gebet direkt auf Ihrem Bildschirm.
+• Vers des Tages Widgets: Inspirierende Verse mit Uthmani-Kalligraphie und deutscher Übersetzung.
+• Direktzugriff: Tippen Sie auf ein Widget, um direkt zur entsprechenden Sure oder zum Gebetsplan zu springen.
+• Akkusparend: Klares Dunkel- und Hell-Design mit optimierten Intervallen ohne unnötigen Akkuverbrauch.
+
+📖 VOLLSTÄNDIGER KORAN OFFLINE (MUSHAF)
+• Authentische Schriften: Medinensische Uthmani-Schrift, Indopak und farbkodierte Tajweed-Schriften.
+• 100% Offline-Zugriff: Lesen Sie den gesamten Mushaf, Übersetzungen und Tafsir ohne Internet.
+• Einfache Navigation: Schneller Sprung zu jeder Sure, jedem Juz (Para), jeder Seite, jedem Hizb oder Ruku.
+• Flexible Lesemodi: Wechseln Sie zwischen Mushaf-Seitenansicht und Vers-für-Vers-Listenansicht.
+
+🔍 INTELLIGENTE KORAN-SUCHE & SCHNELLSPRUNG
+• Umfassende Suche: Durchsuchen Sie arabische Texte, deutsche Übersetzungen, Tafsir und Surennamen.
+• Direkter Verssprung: Geben Sie Versangaben (z.B. "2:255") ein, um sofort zum Vers zu gelangen.
+• Suche ohne Vokalzeichen: Arabische Wörter einfach mit oder ohne Harakat auffinden.
+
+🧠 TAFSIR & WORT-FÜR-WORT-ANALYSE
+• Angesehene Tafsir-Werke: Vertiefen Sie Ihr Verständnis mit Tafsir Ibn Kathir, Jalalayn und weiteren.
+• Wort-für-Wort-Bedeutung: Tippen Sie auf ein arabisches Wort für Wurzel, Grammatik und Aussprache.
+• Übersetzungsvergleich: Vergleichen Sie mehrere deutsche Übersetzungen nebeneinander.
+
+🔊 HOCHWERTIGE MP3-AUDIO-REZITATIONEN
+• Berühmte Qaris: Rezitationen von Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar und mehr.
+• Lernmodus: Vers- und wortweise Wiederholung zur Unterstützung des Auswendiglernens (Hifz).
+• Hintergrundwiedergabe: Hören Sie bei ausgeschaltetem Bildschirm und laden Sie Audios für offline herunter.
+
+🕌 PRÄZISE GEBETSZEITEN & AZAN-ALARM
+• Genaue Gebetszeiten: GPS-basierte Berechnung nach international anerkannten Methoden.
+• Azan-Benachrichtigungen: Wunderschöne Gebetsrufe für Fadschr, Zuhr, Asr, Maghrib und Ischa.
+• Countdown-Timer: Zeigt in Echtzeit die verbleibende Zeit bis zum nächsten Gebet an.
+
+🧭 QIBLA-KOMPASS & TAJWEED-LEITFADEN
+• Zuverlässiger Qibla-Finder: Finden Sie die exakte Richtung zur Kaaba in Mekka weltweit.
+• Tajweed-Leitfaden: Leicht verständliche Erklärungen zu Ghunnah, Idgham, Iqlab, Ikhfa und Qalqalah.
+
+══════════════════════════════════════
+🌐 UNTERSTÜTZUNG FÜR 40+ SPRACHEN
+══════════════════════════════════════
+Verfügbar auf Deutsch, Arabisch, Englisch, Türkisch, Urdu, Französisch, Russisch und vielen weiteren Sprachen.
+
+Laden Sie Al Quran noch heute herunter, um Ihr tägliches Gebetsleben zu bereichern und Ihre Daten auf allen Geräten zu synchronisieren.
+[Character Count: 3977 / 4,000 chars]
