@@ -10,7 +10,17 @@ class SetupLocalDataSource {
   Box get _box => Hive.box(_userBoxName);
 
   bool isSetupComplete() {
-    return _box.get(_keyIsSetupComplete, defaultValue: false) == true;
+    if (_box.get(_keyIsSetupComplete, defaultValue: false) == true) {
+      return true;
+    }
+    if (_box.get(_keyAppLanguage) != null ||
+        _box.get("selected_quran_translation_book") != null ||
+        _box.get("selected_quran_tafsir_book") != null ||
+        _box.get("last_ayah_current") != null) {
+      _box.put(_keyIsSetupComplete, true);
+      return true;
+    }
+    return false;
   }
 
   Future<void> saveSetupComplete(bool isComplete) async {

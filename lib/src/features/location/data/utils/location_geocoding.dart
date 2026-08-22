@@ -9,7 +9,9 @@ LatLon? _lastLatLon;
 Future<String>? _cachedFuture;
 
 Future<String> locationName(BuildContext context, LatLon latLon) {
-  if (address == null || _lastLatLon?.latitude != latLon.latitude || _lastLatLon?.longitude != latLon.longitude) {
+  if (address == null ||
+      _lastLatLon?.latitude != latLon.latitude ||
+      _lastLatLon?.longitude != latLon.longitude) {
     _lastLatLon = latLon;
     _cachedFuture = _fetchLocationName(context, latLon);
   }
@@ -18,9 +20,9 @@ Future<String> locationName(BuildContext context, LatLon latLon) {
 
 Future<String> _fetchLocationName(BuildContext context, LatLon latLon) async {
   final countryCode = context.read<LanguageCubit>().state.locale.countryCode;
-  await setLocaleIdentifier(countryCode ?? "US");
+  final Geocoding geocoding = Geocoding(locale: Locale(countryCode ?? "US"));
 
-  final placeMarks = await placemarkFromCoordinates(
+  final placeMarks = await geocoding.placemarkFromCoordinates(
     latLon.latitude,
     latLon.longitude,
   );
