@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — AZERBAIJANI (Azərbaycanca) [az]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Qurani Kərim: Təfsir və Namaz
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Qurani Kərim Azərbaycan oflayn, Təfsir, MP3 Səsli, Namaz vaxtları & Vidcet
+[Character Count: 74 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) gündəlik ibadətləriniz üçün tam və zəngin Qurani-Kərim tətbiqidir. Azərbaycan dilində mötəbər tərcümələr, təfsirlər, sözbəsöz ərəbcə təhlil, Quran axtarışı, məşhur qarilərin MP3 tilavətləri, dəqiq namaz vaxtları, azan bildirişləri, ana ekran vidcetləri, qiblə kompas və çoxlu cihaz bulud sinxronizasiyası ilə Quranı kəşf edin.
+
+İnternetsiz Quran oxuyun, vidcetlərlə namaz vaxtlarını izləyin və qeydlərinizi buludda etibarlı qoruyun.
+
+══════════════════════════════════════
+✨ ƏSAS XÜSUSİYYƏTLƏR
+══════════════════════════════════════
+
+☁️ ETİBARLI BULUD YADDAŞI VƏ SİNXRONİZASİYA
+• Çoxlu Cihaz Sinxronizasiyası: Saxlanılan ayələrinizi, qeydlərinizi, son oxu yerinizi bütün Android cihazlarınızda avtomatik bərabərləşdirin.
+• Məlumatların İtməməsi: Telefonunuzu dəyişdikdə qeydləriniz və əlfəcinləriniz həmişə qorunur.
+• 1 Toxunuşla Giriş: Google və ya Email ilə asan qeydiyyat və ya Qonaq rejimində başlamaq imkanı.
+• 100% Məxfilik: Tətbiq daxilindən hesabı və bütün məlumatları bir toxunuşla silmək hüququ.
+
+📱 ƏSAS EKRAN VƏ KİLİD EKRANI VİDCETLƏRİ
+• Namaz Vaxtları Vidceti: 5 vaxt namaz saatlarını və növbəti namaza qalan vaxtı ana ekranınızda görün.
+• Günün Ayəsi Vidceti: Gözəl Osman xətti və Azərbaycan dilində tərcümə ilə gündəlik ayələr.
+• Birbaşa Keçid: Vidcetə toxunaraq birbaşa müvafiq surəyə və ya namaz cədvəlinə daxil olun.
+• Enerjiyə Qənaət: Batareyanı yormayan yüksək kontrastlı Gecə və Gündüz rejimləri.
+
+📖 OFLAYN QURANİ-KƏRİM OXU (MÜSHƏF)
+• Orijinal Xətlər: Mədinə Osman xətti, İndo-Pak və rəngli təcvid qaydaları.
+• 100% İnternetsiz Giriş: Bütün Quranı, tərcümə və təfsirləri oflayn oxuyun.
+• Rahat Naviqasiya: İstədiyiniz Surə, Cüz, Səhifə, Hizb və ya Rüküyə dərhal keçin.
+• Oxu Rejimləri: Müshəf Səhifə Görünüşü və Ayə-Ayə Siyahı Görünüşü.
+
+🔍 AĞILLI QURAN AXTARIŞI VƏ BİRBAŞA AYƏYƏ KEÇİD
+• Çoxşaxəli Axtarış: Ərəbcə mətn, Azərbaycan dilində tərcümə, təfsir və surə adlarında anında axtarış.
+• Birbaşa Ayə Keçidi: Ayə nömrəsini (məs. "2:255") və ya adını yazaraq birbaşa ayəni açın.
+• Hərəkəsiz Axtarış: Hərəkələr olmadan da ərəbcə sözləri asanlıqla tapın.
+
+🧠 ƏTRAFLI TƏFSİR VƏ SÖZBƏSÖZ TƏHLİL
+• Mötəbər Təfsirlər: İbn Kəsir və Cəlaləyn təfsirləri ilə ayələrin dərin mənalarını öyrənin.
+• Sözbəsöz Məna: Hər bir ərəb sözünün kökünü, qrammatikasını və oxunuşunu öyrənmək üçün toxunun.
+• Tərcümə Müqayisəsi: Daha dərin anlama üçün bir neçə tərcüməni yanaşı müqayisə edin.
+
+🔊 MP3 SƏSLİ QURAN TİLAVƏTİ
+• Məşhur Qarilər: Mişari Rəşid əl-Afasi, Əbdülbasit, Abdullah Bəsfar və digər böyük qarilər.
+• Əzbərləmə (Hifz) Rejimi: Quranı əzbərləmək üçün ayə və sözbəsöz təkrar rejimi.
+• Arxa Planda Dinləmə: Ekran sönülü olduqda belə dinləyin və səsləri oflayn yaddaşa endirin.
+
+🕌 DƏQİQ NAMAZ VAXTLARI VƏ AZAN
+• Dəqiq Vaxtlar: GPS yerləşmənizə əsaslanan dəqiq namaz təqvimi.
+• Azan Bildirişləri: Sübh, Zöhr, Əsr, Məğrib və İşa namazları üçün gözəl azan səsləri.
+• Geri Sayım: Növbəti namaza qalan vaxtı göstərən canlı saniyəölçən.
+
+🧭 QİBLƏ KOMPASI VƏ TƏCVİD TƏLİMATI
+• Qiblə Tapıcı: Dünyanın istənilən yerindən Kəbənin dəqiq istiqamətini müəyyən edin.
+• İnteraktiv Təcvid Bələdçisi: Qunnah, İdğam, İqlab, İxfa və Qəlqələ qaydalarının asan izahı.
+
+══════════════════════════════════════
+🌐 40+ DİL DƏSTƏYİ
+══════════════════════════════════════
+Azərbaycan, ərəb, türk, ingilis, rus, urdu və onlarla digər dildə tərcümələr.
+
+Quranla bağınızı gücləndirmək və ibadətlərinizi bütün cihazlarınızda sinxronlaşdırmaq üçün Al Quran tətbiqini bu gün yükləyin.
+[Character Count: 3476 / 4,000 chars]

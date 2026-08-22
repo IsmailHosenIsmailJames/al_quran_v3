@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — MALAY (Bahasa Melayu) [ms]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Al Quran: Tafsir & Waktu Solat
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Al Quran Melayu Offline, Audio MP3, Waktu Solat, Widget & Segerak Awan
+[Character Count: 70 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) adalah aplikasi Al-Quran digital lengkap yang direka untuk mempertingkatkan amalan ibadah harian anda. Baca, dengar, dan fahami ayat suci Al-Quran secara luar talian dengan terjemahan Bahasa Melayu yang sahih, tafsir, analisis perkataan demi perkataan, carian ayat pintar, audio MP3, waktu solat tepat, azan, widget skrin utama & kunci, kompas kiblat, dan Penyegerakan Awan Berbilang Peranti.
+
+Baca Al-Quran tanpa sambungan internet, pantau waktu solat dari widget skrin utama, serta simpan nota dan penanda halaman anda dengan selamat di awan.
+
+══════════════════════════════════════
+✨ CIRI-CIRI UTAMA
+══════════════════════════════════════
+
+☁️ SANDARAN AWAN & SEGERAK BERBILANG PERANTI
+• Segerak Berbilang Peranti: Segerakkan ayat yang ditanda, koleksi nota, kedudukan bacaan terakhir, dan pintasan pantas merentas semua peranti Android anda.
+• Jangan Hilang Rekod: Lindungi nota tadabbur, penanda buku, dan sejarah bacaan anda secara selamat di awan.
+• Log Masuk 1-Sentuhan: Log masuk pantas dengan Google atau Emel/Kata Laluan, atau mula sebagai Tetamu.
+• 100% Privasi & Keselamatan: Kawalan penuh data peribadi anda dengan pilihan pemadaman akaun dan data dalam aplikasi.
+
+📱 WIDGET SKRIN UTAMA & SKRIN KUNCI
+• Widget Waktu Solat: Lihat jadual 5 waktu solat, penanda solat aktif, dan kiraan detik solat seterusnya di skrin utama.
+• Widget Ayat Harian: Hayati ayat-ayat Al-Quran pilihan dengan tulisan Arab Rasm Uthmani dan terjemahan Bahasa Melayu.
+• Akses Terus Pantas: Ketuk widget untuk terus membuka Surah/Ayat atau jadual waktu solat.
+• Jimat Bateri: Reka bentuk mod Gelap dan Terang yang kemas dan jimat kuasa bateri.
+
+📖 BACA AL-QURAN LENGKAP OFFLINE
+• Pilihan Mashaf Asli: Mashaf Madinah Uthmani, Indo-Pak, dan QPC Hafs dengan tajwid berwarna.
+• 100% Akses Luar Talian: Baca keseluruhan mashaf, terjemahan, dan tafsir tanpa internet.
+• Navigasi Pantas: Lompat terus ke mana-mana Surah, Juzuk, Halaman, Hizb, atau Rukuk.
+• Mod Membaca: Pilihan Paparan Halaman Mushaf atau Paparan Senarai Ayat demi Ayat.
+
+🔍 CARIAN AYAT PINTAR & LOMPAT TERUS
+• Carian Menyeluruh: Cari dalam teks Arab, terjemahan Melayu, tafsir, atau nama Surah.
+• Lompat Ayat Terus: Taip rujukan ayat (cth. "2:255") atau nama ayat (cth. "Ayatul Kursi") untuk buka terus.
+• Carian Tanpa Baris: Cari teks Arab dengan mudah sama ada berbaris atau tanpa baris.
+
+🧠 TAFSIR LENGKAP & KATA DEMI KATA
+• Koleksi Tafsir Sahih: Fahami makna ayat dengan Tafsir Ibn Kathir, Jalalayn, dan tafsir muktabar.
+• Makna Perkataan demi Perkataan: Ketuk mana-mana perkataan Arab untuk melihat makna dasar, tatabahasa, dan sebutan.
+• Perbandingan Terjemahan: Buka beberapa terjemahan serentak untuk pemahaman lebih mendalam.
+
+🔊 BACAAN AUDIO MP3 MERDU
+• Qari Terkenal: Dengarkan bacaan Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, dan ramai lagi.
+• Mod Hafazan (Hifz): Ulang ayat dan perkataan demi perkataan untuk memudahkan hafalan dan memperbaiki tajwid.
+• Main di Latar Belakang: Dengar bacaan ayat semasa skrin padam dan muat turun audio untuk kegunaan offline.
+
+🕌 WAKTU SOLAT TEPAT & LAUNGAN AZAN
+• Waktu Solat Tepat: Dikira berdasarkan lokasi GPS anda menggunakan kaedah JAKIM & antarabangsa.
+• Pemberitahuan Azan: Notifikasi azan merdu untuk waktu Subuh, Zohor, Asar, Maghrib, dan Isyak.
+• Kiraan Detik: Peringatan masa yang tinggal menjelang waktu solat seterusnya.
+
+🧭 KOMPAS KIBLAT & PANDUAN TAJWID
+• Penunjuk Arah Kiblat: Cari arah Kaabah dengan tepat dari mana-mana lokasi di seluruh dunia.
+• Panduan Tajwid: Pelajari hukum Ghunnah, Idgham, Iqlab, Ikhfa, dan Qalqalah dengan mudah.
+
+══════════════════════════════════════
+🌐 SOKONGAN 40+ BAHASA
+══════════════════════════════════════
+Menyediakan terjemahan dalam Bahasa Melayu, Indonesia, Inggeris, Arab, Urdu, Turki, dan pelbagai bahasa dunia.
+
+Muat turun Al Quran hari ini untuk mendekatkan diri kepada Allah, menyelaraskan amalan di semua peranti anda, dan memperkayakan kehidupan harian.
+[Character Count: 3937 / 4,000 chars]

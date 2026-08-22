@@ -1,0 +1,76 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — FRENCH (Français) [fr]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Le Saint Coran: Prière & Azan
+[Character Count: 29 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Coran en Français hors-ligne, Tafsir, Audio MP3, Prière, Widgets & Synchro Cloud
+[Character Count: 80 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) est votre application islamique complète pour lire, écouter et étudier le Saint Coran. Profitez d'une lecture hors-ligne avec traductions françaises, Tafsirs complets, analyse mot à mot, recherche intelligente, récitations MP3, horaires de prière précis, alertes Adhan, widgets écran d'accueil et de verrouillage, boussole Qibla et synchronisation Cloud multi-appareils.
+
+Lisez le Coran sans connexion Internet, suivez vos prières depuis vos widgets et sauvegardez vos notes et favoris en toute sécurité sur le Cloud.
+
+══════════════════════════════════════
+✨ CARACTÉRISTIQUES PRINCIPALES
+══════════════════════════════════════
+
+☁️ SYNCHRONISATION CLOUD & SAUVEGARDE
+• Synchro Multi-Appareils: Synchronisez automatiquement vos versets épinglés, notes, dernière position de lecture et raccourcis sur tous vos appareils Android.
+• Sauvegarde Garantie: Conservez vos réflexions et signets sans risque de perte lors d'un changement de téléphone.
+• Connexion en 1 Clic: Connexion rapide via Google ou Email/Mot de passe, ou mode Invité.
+• 100% Confidentialité: Respect total des normes RGPD avec suppression de compte directement dans l'application.
+
+📱 WIDGETS ÉCRAN D'ACCUEIL ET DE VERROUILLAGE
+• Widgets Horaires de Prière: Affichez les 5 prières quotidiennes et le compte à rebours de la suivante sur votre écran.
+• Widgets Verset du Jour: Méditez chaque jour sur des versets inspirants avec calligraphie Othmani et traduction française.
+• Accès Rapide Direct: Appuyez sur un widget pour ouvrir directement la Sourate ou les horaires.
+• Économie de Batterie: Design élégant en mode Sombre/Clair optimisé pour préserver la batterie.
+
+📖 LECTURE DU SAINT CORAN HORS-LIGNE (MUSHAF)
+• Calligraphies Authentiques: Mushaf Madani Othmani, Indo-Pak et QPC Hafs avec Tajwid en couleur.
+• 100% Hors-Ligne: Accédez au texte intégral du Coran, aux traductions et aux Tafsirs sans Internet.
+• Navigation Intuitive: Accédez instantanément à n'importe quelle Sourate, Juz (Para), Page ou Hizb.
+• Modes de Lecture: Basculez facilement entre le mode Page Mushaf et le mode Liste verset par verset.
+
+🔍 RECHERCHE CORANIQUE INTELLIGENTE
+• Recherche Complète: Recherchez dans le texte arabe, les traductions françaises, les Tafsirs et les noms de Sourates.
+• Saut Direct au Verset: Tapez la référence (ex. "2:255") ou le nom pour ouvrir directement le verset.
+• Recherche sans Voyelles: Trouvez facilement les mots arabes avec ou sans tashkeel.
+
+🧠 TAFSIR DÉTAILLÉ & MOT À MOT
+• Grands Tafsirs: Approfondissez le sens des versets avec Tafsir Ibn Kathir, Jalalayn et plus.
+• Analyse Mot à Mot: Touchez n'importe quel mot arabe pour découvrir sa racine, grammaire et prononciation.
+• Comparaison de Traductions: Comparez plusieurs traductions côte à côte pour une meilleure compréhension.
+
+🔊 RÉCITATIONS AUDIO MP3 HAUTE QUALITÉ
+• Récitateurs Célèbres: Écoutez Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar et d'autres grands Qaris.
+• Répétition & Mémorisation: Mode répétition verset par verset pour faciliter la mémorisation (Hifz).
+• Lecture en Arrière-Plan: Écoutez écran éteint et téléchargez les audios pour une écoute hors-ligne.
+
+🕌 HEURES DE PRIÈRE & ALERTES ADHAN
+• Horaires Précis: Calcul précis selon votre position GPS avec les méthodes reconnues.
+• Notifications d'Adhan: Magnifiques appels à la prière pour Fajr, Dhuhr, Asr, Maghrib et Isha.
+• Compte à Rebours: Horloge en temps réel indiquant le temps restant avant la prochaine prière.
+
+🧭 BOUSSOLE QIBLA & GUIDE DE TAJWID
+• Direction de la Qibla: Localisez la Kaaba avec précision partout dans le monde grâce au GPS.
+• Guide de Tajwid: Apprenez facilement les règles de Ghunnah, Idgham, Iqlab, Ikhfa et Qalqalah.
+
+══════════════════════════════════════
+🌐 SUPPORT DE PLUS DE 40 LANGUES
+══════════════════════════════════════
+Disponible en français, arabe, anglais, turc, ourdou, indonésien, russe, espagnol et bien d'autres langues.
+
+Téléchargez Al Quran dès aujourd'hui pour enrichir votre pratique spirituelle, synchroniser votre culte sur tous vos écrans et vous rapprocher du Saint Coran.
+[Character Count: 4061 / 4,000 chars]

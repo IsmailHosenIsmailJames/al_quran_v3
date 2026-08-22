@@ -1,0 +1,77 @@
+================================================================================
+GOOGLE PLAY STORE METADATA — ENGLISH (English) [en]
+================================================================================
+
+--------------------------------------------------------------------------------
+1. APP TITLE (Max 30 characters)
+--------------------------------------------------------------------------------
+Al Quran: Tafsir & Prayer Time
+[Character Count: 30 / 30 chars]
+
+--------------------------------------------------------------------------------
+2. SHORT DESCRIPTION (Max 80 characters)
+--------------------------------------------------------------------------------
+Holy Quran with Tafsir, Audio MP3, Prayer Times, Widgets & Multi-Device Sync
+[Character Count: 76 / 80 chars]
+
+--------------------------------------------------------------------------------
+3. FULL DESCRIPTION (Max 4,000 characters)
+--------------------------------------------------------------------------------
+Al Quran (القرآن الكريم) is your complete Holy Quran app designed to elevate your daily Islamic practice. Read, listen, and study the Noble Quran offline with authentic translations, Tafsir commentaries, word-by-word analysis, smart Quran search, MP3 audio, prayer times, Azan alarm, Home & Lock Screen Widgets, Qibla compass, and Multi-Device Cloud Sync.
+
+Recite the Quran offline, glance at daily Ayahs and prayer times from your home screen, backup and sync notes across devices, and master recitation with Tajweed rules.
+
+══════════════════════════════════════
+✨ KEY FEATURES
+══════════════════════════════════════
+
+☁️ SECURE CLOUD BACKUP & MULTI-DEVICE SYNC
+• Multi-Device Sync: Automatically sync pinned Ayahs, note collections, last read position, and quick access shortcuts across all your Android devices in real-time.
+• Never Lose Progress: Backup your personalized Quran notes, bookmarks, and browse history safely in the cloud.
+• 1-Tap Sign-In: Quick login with Google or Email/Password, or start in Guest mode with instant offline-to-cloud upgrade.
+• 100% Privacy: Full control over your personal data with transparent in-app account & data deletion.
+
+📱 ELEGANT HOME & LOCK SCREEN WIDGETS
+• Prayer Time Widgets: View daily prayer times, active prayer highlight, and next prayer countdown on your home/lock screen.
+• Daily Ayah Widgets: Reflect upon inspiring verses with Uthmani Arabic script and translations on your home screen.
+• 1-Tap Deep Linking: Jump directly into the exact Surah/Ayah or prayer schedule from any widget.
+• Zero Battery Drain: High-contrast designs with pre-scheduled timelines for battery efficiency.
+
+📖 COMPLETE HOLY QURAN READER (OFFLINE)
+• Authentic Scripts: Read in Uthmani (Madani), Indopak, and QPC Hafs with color-coded Tajweed.
+• 100% Offline Access: Read full Mushaf, translations, and Tafsirs without an internet connection.
+• Smooth Navigation: Quick jump to any Surah, Juz (Para), Page, Hizb, or Ruku.
+• Reading Modes: Switch between Page View (Mushaf Mode) and Verse-by-Verse List View.
+
+🔍 SMART QURAN SEARCH & DIRECT JUMP
+• Multi-Scope Search: Search across Arabic verses, translations, Tafsir commentaries, and Surahs.
+• Direct Ayah Jump: Enter verse references (e.g., "2:255") or names (e.g., "Ayatul Kursi") to jump immediately.
+• Diacritic-Agnostic Search: Search Arabic with or without Tashkeel (harakat) with letter normalization.
+• Advanced Filters: Filter by specific Surahs, Makki / Madani origin, or exact phrases.
+
+🧠 TAFSIR & WORD-BY-WORD STUDY
+• Renowned Tafsirs: Deepen your understanding with Tafsir Ibn Kathir, Jalalayn, and more.
+• Word-by-Word Analysis: Tap any Arabic word for root meaning, grammar, and pronunciation.
+• Translation Comparison: Compare multiple translations side-by-side.
+
+🔊 IMMERSIVE MP3 AUDIO RECITATION
+• Famous Qaris: Listen to Mishari Rashid Alafasy, Abdul Basit, Abdullah Basfar, and more.
+• Repeat & Follow: Verse-by-verse and word-by-word repeat mode for memorization (Hifz).
+• Background Audio: Playback with screen off and offline audio caching.
+
+🕌 PRAYER TIMES & AZAN ALERTS
+• Accurate Salah Times: GPS-based timings with global calculation methods (MWL, ISNA, Egypt, Makkah, Karachi).
+• Azan Notifications: Beautiful Adhan audio alerts for Fajr, Dhuhr, Asr, Maghrib, and Isha.
+• Countdown Timer: Real-time countdown to the next prayer.
+
+🧭 QIBLA COMPASS & TAJWEED GUIDE
+• Precise Qibla Finder: Find Kaaba direction worldwide using GPS and device compass.
+• Tajweed Guide: Interactive guide covering Ghunnah, Idgham, Iqlab, Ikhfa, and Qalqalah rules.
+
+══════════════════════════════════════
+🌐 40+ LANGUAGES SUPPORT
+══════════════════════════════════════
+Translations in English, Arabic, Bengali (বাংলা), Urdu (اردو), Indonesian (Bahasa Indonesia), Turkish (Türkçe), Hindi (हिन्दी), French (Français), Russian (Русский), Persian (فارسی), and more.
+
+Download Al Quran today to study the Holy Quran, sync your worship across all devices, and enrich your daily Islamic life.
+[Character Count: 3967 / 4,000 chars]

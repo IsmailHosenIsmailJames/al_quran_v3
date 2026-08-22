@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
@@ -164,6 +166,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  StreamSubscription<Uri?>? _widgetClickSubscription;
+
   @override
   void initState() {
     pageController = PageController(
@@ -180,7 +184,7 @@ class _HomePageState extends State<HomePage> {
         _handleWidgetUri(uri);
       }
     });
-    HomeWidget.widgetClicked.listen((uri) {
+    _widgetClickSubscription = HomeWidget.widgetClicked.listen((uri) {
       if (uri != null) {
         _handleWidgetUri(uri);
       }
@@ -188,31 +192,41 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleWidgetUri(Uri uri) {
-    if (uri.host == "ayah") {
-      final surah = int.tryParse(uri.queryParameters["surah"] ?? "1") ?? 1;
-      final ayah = int.tryParse(uri.queryParameters["ayah"] ?? "1") ?? 1;
-      final ayahCount = metaDataSurah["$surah"]?["vc"] ?? 7;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => QuranScriptView(
-            startKey: "$surah:1",
-            endKey: "$surah:$ayahCount",
-            toScrollKey: "$surah:$ayah",
+      final isAyah = uri.host == "ayah" ||
+          uri.path.contains("ayah") ||
+          (uri.scheme == "al-quran" && uri.host == "ayah");
+
+      if (isAyah) {
+        final surah = int.tryParse(uri.queryParameters["surah"] ?? "1") ?? 1;
+        final ayah = int.tryParse(uri.queryParameters["ayah"] ?? "1") ?? 1;
+        final ayahCount = metaDataSurah["$surah"]?["vc"] ?? 7;
+
+        final navState = navigatorKey.currentState ?? Navigator.of(context);
+        navState.push(
+          MaterialPageRoute(
+            builder: (context) => QuranScriptView(
+              startKey: "$surah:1",
+              endKey: "$surah:$ayahCount",
+              toScrollKey: "$surah:$ayah",
+            ),
           ),
-        ),
-      );
-    } else {
-      // Default / Prayer Tab (index 1 on mobile)
-      context.read<OthersSettingsCubit>().setTabIndex(1);
-      if (pageController.hasClients) {
-        pageController.jumpToPage(1);
+        );
+      } else {
+        // Default / Prayer Tab (index 1 on mobile)
+        context.read<OthersSettingsCubit>().setTabIndex(1);
+        if (pageController.hasClients) {
+          pageController.jumpToPage(1);
+        }
       }
-    }
+    });
   }
 
   @override
   void dispose() {
+    _widgetClickSubscription?.cancel();
     pageController.dispose();
     super.dispose();
   }
