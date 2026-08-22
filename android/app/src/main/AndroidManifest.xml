@@ -68,6 +68,7 @@
         <!-- Prayer Times Small Widget Receiver (2x2) -->
         <receiver
             android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetSmallProvider"
+            android:label="@string/widget_prayer_small_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -80,6 +81,7 @@
         <!-- Prayer Times Medium Widget Receiver (4x2 / 5 Prayers) -->
         <receiver
             android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetMediumProvider"
+            android:label="@string/widget_prayer_medium_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -92,6 +94,7 @@
         <!-- Quran Ayah Small Widget Receiver (2x2) -->
         <receiver
             android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetSmallProvider"
+            android:label="@string/widget_ayah_small_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -104,6 +107,7 @@
         <!-- Quran Ayah Medium Widget Receiver (4x2) -->
         <receiver
             android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetMediumProvider"
+            android:label="@string/widget_ayah_medium_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -116,6 +120,7 @@
         <!-- Quran Ayah Large Widget Receiver (4x4) -->
         <receiver
             android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetLargeProvider"
+            android:label="@string/widget_ayah_large_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
