@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#121212</color>
+    <!-- Launcher Icon Background - Always White -->
+    <color name="ic_launcher_background">#ffffff</color>
 
     <!-- Widget Dark Mode Colors -->
     <color name="widget_card_bg">#121E1B</color>
