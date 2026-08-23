@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "د دوام ورکولو سره، تاسو زموږ د خدماتو شرایطو او د محرمیت پالیسۍ سره موافق یاست.",
   "guestUser": "میلمه کاروونکی",
   "syncedCloudBackup": "کلاوډ همغږي",
-  "syncedCloudBackupDesc": "خپل نوټونه، پنونه او د لوستلو تاریخ په خپلو ټولو وسیلو کې همغږي وساتئ."
+  "syncedCloudBackupDesc": "خپل نوټونه، پنونه او د لوستلو تاریخ په خپلو ټولو وسیلو کې همغږي وساتئ.",
+  "alHadith": "الحدیث",
+  "hadithCompanion": "ملګری",
+  "hadithCompanionDesc": "صحیح البخاري، مسلم او د مستندو احادیثو ټولګې.",
+  "open": "خلاصول",
+  "install": "نصب کول",
+  "companionApps": "ملګري اپلیکیشنونه",
+  "hadithCollectionsBrief": "بخاري، مسلم او نور",
+  "explore": "پلټنه",
+  "ourIslamicCompanionApps": "زموږ اسلامي ملګري اپلیکیشنونه",
+  "ourIslamicCompanionAppsDesc": "د مسلمان امت لپاره یوازې د الله تعالی د رضا (صدقه جاریه) لپاره په ۱۰۰٪ وړیا او له اعلاناتو پرته تجربه جوړ شوی."
 }

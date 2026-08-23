@@ -1832,4 +1832,36 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'உங்கள் குறிப்புகள், பின்கள் மற்றும் வாசிப்பு வரலாற்றை உங்கள் எல்லா சாதனங்களிலும் ஒத்திசைக்கவும்.';
+
+  @override
+  String get alHadith => 'அல் ஹதீஸ்';
+
+  @override
+  String get hadithCompanion => 'துணை';
+
+  @override
+  String get hadithCompanionDesc =>
+      'ஸஹீஹ் அல்-புகாரி, முஸ்லிம் மற்றும் ஆதாரப்பூர்வமான ஹதீஸ் தொகுப்புகள்.';
+
+  @override
+  String get open => 'திறக்க';
+
+  @override
+  String get install => 'நிறுவுக';
+
+  @override
+  String get companionApps => 'துணை பயன்பாடுகள்';
+
+  @override
+  String get hadithCollectionsBrief => 'புகாரி, முஸ்லிம் மற்றும் பல';
+
+  @override
+  String get explore => 'ஆராய்க';
+
+  @override
+  String get ourIslamicCompanionApps => 'எங்கள் இஸ்லாமிய துணை பயன்பாடுகள்';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'முஸ்லிம் உம்மாவிற்காக முழுக்க முழுக்க அல்லாஹ்வின் திருப்திக்காக (ஸதகதுல் ஜாரியா) 100% இலவச மற்றும் விளம்பரமில்லாத அனுபவத்துடன் உருவாக்கப்பட்டது.';
 }

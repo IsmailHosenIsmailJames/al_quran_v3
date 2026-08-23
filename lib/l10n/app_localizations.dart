@@ -3373,6 +3373,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep your notes, pins, and reading history synced across all your devices.'**
   String get syncedCloudBackupDesc;
+
+  /// No description provided for @alHadith.
+  ///
+  /// In en, this message translates to:
+  /// **'Al Hadith'**
+  String get alHadith;
+
+  /// No description provided for @hadithCompanion.
+  ///
+  /// In en, this message translates to:
+  /// **'Companion'**
+  String get hadithCompanion;
+
+  /// No description provided for @hadithCompanionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sahih Bukhari, Muslim & authentic Sunnah collections.'**
+  String get hadithCompanionDesc;
+
+  /// No description provided for @open.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get open;
+
+  /// No description provided for @install.
+  ///
+  /// In en, this message translates to:
+  /// **'Install'**
+  String get install;
+
+  /// No description provided for @companionApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Companion Apps'**
+  String get companionApps;
+
+  /// No description provided for @hadithCollectionsBrief.
+  ///
+  /// In en, this message translates to:
+  /// **'Bukhari, Muslim & more'**
+  String get hadithCollectionsBrief;
+
+  /// No description provided for @explore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get explore;
+
+  /// No description provided for @ourIslamicCompanionApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Islamic Companion Apps'**
+  String get ourIslamicCompanionApps;
+
+  /// No description provided for @ourIslamicCompanionAppsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Developed purely for the sake of Allah (Sadaqah Jariyah) with 100% free and ad-free experience for the Muslim Ummah.'**
+  String get ourIslamicCompanionAppsDesc;
 }
 
 class _AppLocalizationsDelegate

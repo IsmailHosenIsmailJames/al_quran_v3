@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "جاری رکھ کر، آپ ہماری سروس کی شرائط اور رازداری کی پالیسی سے اتفاق کرتے ہیں۔",
   "guestUser": "مہمان صارف",
   "syncedCloudBackup": "کلاؤڈ ہم آہنگی",
-  "syncedCloudBackupDesc": "اپنے تمام آلات پر اپنے نوٹس، پن اور پڑھنے کی تاریخ کو مطابقت پذیر رکھیں۔"
+  "syncedCloudBackupDesc": "اپنے تمام آلات پر اپنے نوٹس، پن اور پڑھنے کی تاریخ کو مطابقت پذیر رکھیں۔",
+  "alHadith": "الحدیث",
+  "hadithCompanion": "ہمراہی",
+  "hadithCompanionDesc": "صحیح بخاری، مسلم اور مستند حدیث کے مجموعے۔",
+  "open": "کھولیں",
+  "install": "انسٹال",
+  "companionApps": "ہمراہی ایپس",
+  "hadithCollectionsBrief": "بخاری، مسلم اور مزید",
+  "explore": "دیکھیں",
+  "ourIslamicCompanionApps": "ہماری اسلامی ہمراہی ایپس",
+  "ourIslamicCompanionAppsDesc": "مسلم امت کے لیے خالصتاً رضائے الٰہی (صدقہ جاریہ) کے لیے 100٪ مفت اور اشتہارات سے پاک تیار کی گئی ہے۔"
 }

@@ -5,6 +5,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_su
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_pages_info.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_page_shimmer.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/continue_reading_hero_card.dart";
+import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/hadith_companion_card.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_history_carousel.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_access_bar.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_actions_bar.dart";
@@ -112,6 +113,7 @@ class _QuranPageState extends State<QuranPage>
                             ),
                             QuranHistoryCarousel(),
                             QuranQuickAccessBar(),
+                            HadithCompanionCard(),
                           ],
                         )
                       : const Column(
@@ -120,6 +122,7 @@ class _QuranPageState extends State<QuranPage>
                             QuranQuickActionsBar(),
                             QuranHistoryCarousel(),
                             QuranQuickAccessBar(),
+                            HadithCompanionCard(),
                           ],
                         ),
                 ),

@@ -1803,4 +1803,36 @@ class AppLocalizationsPa extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'ਆਪਣੇ ਸਾਰੇ ਡਿਵਾਈਸਾਂ ਵਿੱਚ ਆਪਣੇ ਨੋਟਸ, ਪਿੰਨ ਅਤੇ ਪੜ੍ਹਨ ਦੇ ਇਤਿਹਾਸ ਨੂੰ ਸਿੰਕ ਰੱਖੋ।';
+
+  @override
+  String get alHadith => 'ਅਲ ਹਦੀਸ';
+
+  @override
+  String get hadithCompanion => 'ਸਾਥੀ';
+
+  @override
+  String get hadithCompanionDesc =>
+      'ਸਹੀਹ ਅਲ-ਬੁਖਾਰੀ, ਮੁਸਲਿਮ ਅਤੇ ਪ੍ਰਮਾਣਿਕ ਹਦੀਸ ਸੰਗ੍ਰਹਿ।';
+
+  @override
+  String get open => 'ਖੋਲ੍ਹੋ';
+
+  @override
+  String get install => 'ਇੰਸਟਾਲ';
+
+  @override
+  String get companionApps => 'ਸਾਥੀ ਐਪਸ';
+
+  @override
+  String get hadithCollectionsBrief => 'ਬੁਖਾਰੀ, ਮੁਸਲਿਮ ਅਤੇ ਹੋਰ';
+
+  @override
+  String get explore => 'ਖੋਜੋ';
+
+  @override
+  String get ourIslamicCompanionApps => 'ਸਾਡੀਆਂ ਇਸਲਾਮੀ ਸਾਥੀ ਐਪਸ';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'ਮੁਸਲਿਮ ਉਮਾਹ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਅੱਲ੍ਹਾ ਦੀ ਖਾਤਰ (ਸਦਕਾ-ਏ-ਜਾਰੀਆ) 100% ਮੁਫਤ ਅਤੇ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਅਨੁਭਵ ਨਾਲ ਵਿਕਸਤ ਕੀਤਾ ਗਿਆ।';
 }

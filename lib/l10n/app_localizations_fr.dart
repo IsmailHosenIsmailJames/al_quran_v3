@@ -1827,4 +1827,36 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Gardez vos notes, favoris et historique de lecture synchronisés sur tous vos appareils.';
+
+  @override
+  String get alHadith => 'Al Hadith';
+
+  @override
+  String get hadithCompanion => 'Compagnon';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Sahih al-Bukhari, Muslim et collections de hadiths authentiques.';
+
+  @override
+  String get open => 'Ouvrir';
+
+  @override
+  String get install => 'Installer';
+
+  @override
+  String get companionApps => 'Applications Compagnes';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim et plus';
+
+  @override
+  String get explore => 'Explorer';
+
+  @override
+  String get ourIslamicCompanionApps => 'Nos Applications Islamiques Compagnes';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Développé uniquement pour l\'amour d\'Allah (Sadaqah Jariyah) avec une expérience 100% gratuite et sans publicité pour la Oummah musulmane.';
 }

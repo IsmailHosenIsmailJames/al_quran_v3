@@ -1806,4 +1806,36 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'अपने सभी उपकरणों पर अपने नोट्स, पिन और पढ़ने के इतिहास को सिंक रखें।';
+
+  @override
+  String get alHadith => 'अल हदीस';
+
+  @override
+  String get hadithCompanion => 'सहयोगी';
+
+  @override
+  String get hadithCompanionDesc =>
+      'सहीह बुखारी, मुस्लिम और प्रामाणिक हदीस संग्रह।';
+
+  @override
+  String get open => 'खोलें';
+
+  @override
+  String get install => 'इंस्टॉल';
+
+  @override
+  String get companionApps => 'सहयोगी ऐप्स';
+
+  @override
+  String get hadithCollectionsBrief => 'बुखारी, मुस्लिम और अन्य';
+
+  @override
+  String get explore => 'देखें';
+
+  @override
+  String get ourIslamicCompanionApps => 'हमारे इस्लामिक सहयोगी ऐप्स';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'मुस्लिम उम्माह के लिए पूरी तरह से अल्लाह की खातिर (सदका-ए-जारिया) 100% मुफ्त और विज्ञापन-मुक्त अनुभव के साथ विकसित किया गया।';
 }

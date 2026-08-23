@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "Kwa kuendelea, unakubali Masharti yetu ya Huduma na Sera ya Faragha.",
   "guestUser": "Mtumiaji Mgeni",
   "syncedCloudBackup": "Usawazishaji wa Wingu",
-  "syncedCloudBackupDesc": "Weka madokezo yako, pini, na historia ya usomaji ikiwa imesawazishwa kwenye vifaa vyako vyote."
+  "syncedCloudBackupDesc": "Weka madokezo yako, pini, na historia ya usomaji ikiwa imesawazishwa kwenye vifaa vyako vyote.",
+  "alHadith": "Al Hadith",
+  "hadithCompanion": "Mwenza",
+  "hadithCompanionDesc": "Sahih al-Bukhari, Muslim na mikusanyo sahihi ya Hadithi.",
+  "open": "Fungua",
+  "install": "Sakinisha",
+  "companionApps": "Programu Sahaba",
+  "hadithCollectionsBrief": "Bukhari, Muslim na zaidi",
+  "explore": "Chunguza",
+  "ourIslamicCompanionApps": "Programu Zetu za Kiislamu za Mwenza",
+  "ourIslamicCompanionAppsDesc": "Imeundwa kwa ajili ya Mwenyezi Mungu pekee (Sadaqah Jariyah) ikiwa na uzoefu wa 100% bila malipo na bila matangazo kwa Umma wa Kiislamu."
 }

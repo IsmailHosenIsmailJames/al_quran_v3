@@ -536,5 +536,15 @@
   "privacyPolicyNotice": "Davam etməklə Xidmət Şərtlərimiz və Məxfilik Siyasətimizlə razılaşırsınız.",
   "guestUser": "Qonaq İstifadəçi",
   "syncedCloudBackup": "Bulud Sinxronizasiyası",
-  "syncedCloudBackupDesc": "Qeydlərinizi, sancaqlı ayələrinizi və oxu tarixçənizi bütün cihazlarınızda sinxron saxlayın."
+  "syncedCloudBackupDesc": "Qeydlərinizi, sancaqlı ayələrinizi və oxu tarixçənizi bütün cihazlarınızda sinxron saxlayın.",
+  "alHadith": "Əl-Hədis",
+  "hadithCompanion": "Yoldaş",
+  "hadithCompanionDesc": "Səhih əl-Buxari, Müslüm və mötəbər hədis topluları.",
+  "open": "Aç",
+  "install": "Quraşdır",
+  "companionApps": "Köməkçi Tətbiqlər",
+  "hadithCollectionsBrief": "Buxari, Müslüm və s.",
+  "explore": "Kəşf et",
+  "ourIslamicCompanionApps": "İslami Köməkçi Tətbiqlərimiz",
+  "ourIslamicCompanionAppsDesc": "Müsəlman Ümməti üçün tamamilə Allah rizası üçün (Sədəqeyi-Cariyə) 100% pulsuz və reklamsız hazırlanmışdır."
 }

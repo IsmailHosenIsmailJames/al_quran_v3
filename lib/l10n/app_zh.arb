@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "继续操作即表示您同意我们的服务条款和隐私政策。",
   "guestUser": "访客用户",
   "syncedCloudBackup": "云端同步",
-  "syncedCloudBackupDesc": "在所有设备上同步您的笔记、图钉和阅读历史记录。"
+  "syncedCloudBackupDesc": "在所有设备上同步您的笔记、图钉和阅读历史记录。",
+  "alHadith": "圣训",
+  "hadithCompanion": "伴侣",
+  "hadithCompanionDesc": "布哈里圣训实录、穆斯林圣训实录及权威圣训集。",
+  "open": "打开",
+  "install": "安装",
+  "companionApps": "配套应用",
+  "hadithCollectionsBrief": "布哈里、穆斯林等",
+  "explore": "探索",
+  "ourIslamicCompanionApps": "我们的伊斯兰配套应用",
+  "ourIslamicCompanionAppsDesc": "完全为了真主的喜悦（持久的施舍）而开发，为穆斯林群体提供100%免费且无广告的体验。"
 }

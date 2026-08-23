@@ -536,5 +536,15 @@
   "privacyPolicyNotice": "Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ & Chính sách quyền riêng tư của chúng tôi.",
   "guestUser": "Người dùng Khách",
   "syncedCloudBackup": "Đồng bộ đám mây",
-  "syncedCloudBackupDesc": "Giữ ghi chú, ghim và lịch sử đọc của bạn được đồng bộ hóa trên tất cả các thiết bị."
+  "syncedCloudBackupDesc": "Giữ ghi chú, ghim và lịch sử đọc của bạn được đồng bộ hóa trên tất cả các thiết bị.",
+  "alHadith": "Al Hadith",
+  "hadithCompanion": "Đồng hành",
+  "hadithCompanionDesc": "Sahih al-Bukhari, Muslim & các bộ sưu tập Hadith xác thực.",
+  "open": "Mở",
+  "install": "Cài đặt",
+  "companionApps": "Ứng dụng đồng hành",
+  "hadithCollectionsBrief": "Bukhari, Muslim & thêm",
+  "explore": "Khám phá",
+  "ourIslamicCompanionApps": "Ứng dụng đồng hành Hồi giáo của chúng tôi",
+  "ourIslamicCompanionAppsDesc": "Được phát triển hoàn toàn vì Allah (Sadaqah Jariyah) với trải nghiệm miễn phí 100% và không có quảng cáo cho Cộng đồng Hồi giáo."
 }

@@ -1812,4 +1812,37 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Giữ ghi chú, ghim và lịch sử đọc của bạn được đồng bộ hóa trên tất cả các thiết bị.';
+
+  @override
+  String get alHadith => 'Al Hadith';
+
+  @override
+  String get hadithCompanion => 'Đồng hành';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Sahih al-Bukhari, Muslim & các bộ sưu tập Hadith xác thực.';
+
+  @override
+  String get open => 'Mở';
+
+  @override
+  String get install => 'Cài đặt';
+
+  @override
+  String get companionApps => 'Ứng dụng đồng hành';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim & thêm';
+
+  @override
+  String get explore => 'Khám phá';
+
+  @override
+  String get ourIslamicCompanionApps =>
+      'Ứng dụng đồng hành Hồi giáo của chúng tôi';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Được phát triển hoàn toàn vì Allah (Sadaqah Jariyah) với trải nghiệm miễn phí 100% và không có quảng cáo cho Cộng đồng Hồi giáo.';
 }

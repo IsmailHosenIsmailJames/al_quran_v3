@@ -1809,4 +1809,36 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'আপনার সমস্ত ডিভাইসে আপনার নোট, পিন এবং পঠন ইতিহাস সুরক্ষিত ও সিঙ্ক রাখুন।';
+
+  @override
+  String get alHadith => 'আল হাদিস';
+
+  @override
+  String get hadithCompanion => 'সহযোগী';
+
+  @override
+  String get hadithCompanionDesc =>
+      'সহীহ বুখারী, মুসলিম এবং নির্ভরযোগ্য হাদীস সংকলন।';
+
+  @override
+  String get open => 'খুলুন';
+
+  @override
+  String get install => 'ইনস্টল';
+
+  @override
+  String get companionApps => 'সহযোগী অ্যাপসমূহ';
+
+  @override
+  String get hadithCollectionsBrief => 'বুখারী, মুসলিম এবং অন্যান্য';
+
+  @override
+  String get explore => 'দেখুন';
+
+  @override
+  String get ourIslamicCompanionApps => 'আমাদের অন্যান্য ইসলামিক অ্যাপসমূহ';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'মুসলিম উম্মাহর জন্য সম্পূর্ণ বিনামূল্যে ও বিজ্ঞাপনহীনভাবে আল্লাহর সন্তুষ্টির উদ্দেশ্যে (সদকায়ে জারিয়া) তৈরি।';
 }

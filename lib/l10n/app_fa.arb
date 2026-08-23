@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "با ادامه، شما با شرایط خدمات و خط مشی رازداری ما موافقت می‌کنید.",
   "guestUser": "کاربر مهمان",
   "syncedCloudBackup": "همگام‌سازی ابری",
-  "syncedCloudBackupDesc": "یادداشت‌ها، سنجاق‌ها و تاریخچه خواندن خود را در همه دستگاه‌هایتان همگام نگه دارید."
+  "syncedCloudBackupDesc": "یادداشت‌ها، سنجاق‌ها و تاریخچه خواندن خود را در همه دستگاه‌هایتان همگام نگه دارید.",
+  "alHadith": "الحدیث",
+  "hadithCompanion": "همراه",
+  "hadithCompanionDesc": "صحیح بخاری، مسلم و مجموعه‌های معتبر حدیث.",
+  "open": "باز کردن",
+  "install": "نصب",
+  "companionApps": "برنامه‌های همراه",
+  "hadithCollectionsBrief": "بخاری، مسلم و غیره",
+  "explore": "کاوش",
+  "ourIslamicCompanionApps": "برنامه‌های همراه اسلامی ما",
+  "ourIslamicCompanionAppsDesc": "صرفاً برای رضای خدا (صدقه جاریه) با تجربه‌ای ۱۰۰٪ رایگان و بدون تبلیغات برای امت اسلامی توسعه یافته است."
 }

@@ -1803,4 +1803,36 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'خپل نوټونه، پنونه او د لوستلو تاریخ په خپلو ټولو وسیلو کې همغږي وساتئ.';
+
+  @override
+  String get alHadith => 'الحدیث';
+
+  @override
+  String get hadithCompanion => 'ملګری';
+
+  @override
+  String get hadithCompanionDesc =>
+      'صحیح البخاري، مسلم او د مستندو احادیثو ټولګې.';
+
+  @override
+  String get open => 'خلاصول';
+
+  @override
+  String get install => 'نصب کول';
+
+  @override
+  String get companionApps => 'ملګري اپلیکیشنونه';
+
+  @override
+  String get hadithCollectionsBrief => 'بخاري، مسلم او نور';
+
+  @override
+  String get explore => 'پلټنه';
+
+  @override
+  String get ourIslamicCompanionApps => 'زموږ اسلامي ملګري اپلیکیشنونه';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'د مسلمان امت لپاره یوازې د الله تعالی د رضا (صدقه جاریه) لپاره په ۱۰۰٪ وړیا او له اعلاناتو پرته تجربه جوړ شوی.';
 }

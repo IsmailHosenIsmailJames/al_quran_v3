@@ -177,5 +177,11 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="discord" />
         </intent>
+        <!-- For detecting and launching Al Hadith companion app -->
+        <package android:name="com.ismail.al_hadith" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="alhadith" />
+        </intent>
     </queries>
 </manifest>

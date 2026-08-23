@@ -536,5 +536,15 @@
   "privacyPolicyNotice": "Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade.",
   "guestUser": "Usuário Convidado",
   "syncedCloudBackup": "Sincronização na Nuvem",
-  "syncedCloudBackupDesc": "Mantenha suas notas, pins e histórico de leitura sincronizados em todos os seus dispositivos."
+  "syncedCloudBackupDesc": "Mantenha suas notas, pins e histórico de leitura sincronizados em todos os seus dispositivos.",
+  "alHadith": "Al Hadith",
+  "hadithCompanion": "Companheiro",
+  "hadithCompanionDesc": "Sahih al-Bukhari, Muslim e coleções autênticas de hadiths.",
+  "open": "Abrir",
+  "install": "Instalar",
+  "companionApps": "Aplicativos Companheiros",
+  "hadithCollectionsBrief": "Bukhari, Muslim e mais",
+  "explore": "Explorar",
+  "ourIslamicCompanionApps": "Nossos Aplicativos Islâmicos Companheiros",
+  "ourIslamicCompanionAppsDesc": "Desenvolvido puramente pelo amor de Allah (Sadaqah Jariyah) com uma experiência 100% gratuita e sem anúncios para a Ummah Muçulmana."
 }

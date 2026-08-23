@@ -1,5 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/localization/languages.dart";
+import "package:al_quran_v3/src/core/services/companion_apps_service.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:flutter/material.dart";
@@ -321,6 +322,67 @@ class AboutAppPage extends StatelessWidget {
                   mode: LaunchMode.externalApplication,
                 );
               },
+            ),
+            const Gap(30),
+            const Divider(thickness: 1.5),
+            const Gap(30),
+            Text(
+              l10n.ourIslamicCompanionApps,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const Gap(10),
+            Text(
+              l10n.ourIslamicCompanionAppsDesc,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const Gap(15),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                tileColor: Theme.of(context)
+                    .colorScheme
+                    .secondaryContainer
+                    .withValues(alpha: 0.3),
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    "assets/img/hadith_logo.png",
+                    width: 42,
+                    height: 42,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: themeState.primary.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        Icons.menu_book_rounded,
+                        color: themeState.primary,
+                        size: 26,
+                      ),
+                    ),
+                  ),
+                ),
+                title: Text(
+                  l10n.alHadith,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                subtitle: Text(
+                  l10n.hadithCompanionDesc,
+                ),
+                trailing: FilledButton.tonal(
+                  onPressed: () =>
+                      CompanionAppsService.openOrInstallHadithApp(),
+                  child: Text(l10n.explore),
+                ),
+              ),
             ),
             const Gap(30),
             const Divider(thickness: 1.5),

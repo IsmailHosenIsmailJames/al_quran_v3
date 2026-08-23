@@ -1817,4 +1817,36 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Weka madokezo yako, pini, na historia ya usomaji ikiwa imesawazishwa kwenye vifaa vyako vyote.';
+
+  @override
+  String get alHadith => 'Al Hadith';
+
+  @override
+  String get hadithCompanion => 'Mwenza';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Sahih al-Bukhari, Muslim na mikusanyo sahihi ya Hadithi.';
+
+  @override
+  String get open => 'Fungua';
+
+  @override
+  String get install => 'Sakinisha';
+
+  @override
+  String get companionApps => 'Programu Sahaba';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim na zaidi';
+
+  @override
+  String get explore => 'Chunguza';
+
+  @override
+  String get ourIslamicCompanionApps => 'Programu Zetu za Kiislamu za Mwenza';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Imeundwa kwa ajili ya Mwenyezi Mungu pekee (Sadaqah Jariyah) ikiwa na uzoefu wa 100% bila malipo na bila matangazo kwa Umma wa Kiislamu.';
 }

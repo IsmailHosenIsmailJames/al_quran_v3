@@ -1799,4 +1799,35 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'یادداشت‌ها، سنجاق‌ها و تاریخچه خواندن خود را در همه دستگاه‌هایتان همگام نگه دارید.';
+
+  @override
+  String get alHadith => 'الحدیث';
+
+  @override
+  String get hadithCompanion => 'همراه';
+
+  @override
+  String get hadithCompanionDesc => 'صحیح بخاری، مسلم و مجموعه‌های معتبر حدیث.';
+
+  @override
+  String get open => 'باز کردن';
+
+  @override
+  String get install => 'نصب';
+
+  @override
+  String get companionApps => 'برنامه‌های همراه';
+
+  @override
+  String get hadithCollectionsBrief => 'بخاری، مسلم و غیره';
+
+  @override
+  String get explore => 'کاوش';
+
+  @override
+  String get ourIslamicCompanionApps => 'برنامه‌های همراه اسلامی ما';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'صرفاً برای رضای خدا (صدقه جاریه) با تجربه‌ای ۱۰۰٪ رایگان و بدون تبلیغات برای امت اسلامی توسعه یافته است.';
 }
