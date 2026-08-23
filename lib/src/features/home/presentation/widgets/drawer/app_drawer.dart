@@ -19,6 +19,7 @@ import "package:share_plus/share_plus.dart";
 import "package:url_launcher/url_launcher.dart";
 
 import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/core/services/companion_apps_service.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
@@ -487,6 +488,63 @@ Widget drawerSection({
                 : Text(
                     l10n.tajweedGuide,
                     style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+          ),
+          if (!isJustIcon) const Gap(15),
+          if (!isJustIcon)
+            Padding(
+              padding: const EdgeInsets.only(left: 18),
+              child: SafeArea(
+                child: Text(
+                  l10n.companionApps,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+          if (!isJustIcon) Divider(height: 10, color: themeState.mutedGray),
+          ListTile(
+            minTileHeight: 40,
+            onTap: () async {
+              if (!isDesktop) Navigator.pop(context);
+              await CompanionAppsService.openOrInstallHadithApp();
+            },
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                "assets/img/hadith_logo.png",
+                width: 26,
+                height: 26,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Icon(
+                  FluentIcons.book_database_24_filled,
+                  color: themeState.primary,
+                ),
+              ),
+            ),
+            title: isJustIcon
+                ? null
+                : Text(
+                    l10n.alHadith,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+            subtitle: isJustIcon
+                ? null
+                : Text(
+                    l10n.hadithCollectionsBrief,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+            trailing: isJustIcon
+                ? null
+                : Icon(
+                    FluentIcons.open_20_filled,
+                    size: 16,
+                    color: themeState.primary,
                   ),
           ),
           if (!isJustIcon) const Gap(15),

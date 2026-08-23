@@ -536,5 +536,15 @@
   "privacyPolicyNotice": "계속 진행하면 서비스 약관 및 개인정보 보호정책에 동의하게 됩니다.",
   "guestUser": "게스트 사용자",
   "syncedCloudBackup": "클라우드 동기화",
-  "syncedCloudBackupDesc": "모든 기기에서 메모, 고정 항목 및 읽기 기록을 동기화 상태로 유지하세요."
+  "syncedCloudBackupDesc": "모든 기기에서 메모, 고정 항목 및 읽기 기록을 동기화 상태로 유지하세요.",
+  "alHadith": "알 하디스",
+  "hadithCompanion": "동반자",
+  "hadithCompanionDesc": "사히 알 부하리, 무슬림 및 신뢰할 수 있는 하디스 모음집.",
+  "open": "열기",
+  "install": "설치",
+  "companionApps": "동반 앱",
+  "hadithCollectionsBrief": "부하리, 무슬림 등",
+  "explore": "탐색",
+  "ourIslamicCompanionApps": "우리의 이슬람 동반 앱",
+  "ourIslamicCompanionAppsDesc": "무슬림 움마를 위해 오직 알라를 위해 (사다카 자리야) 100% 무료 및 광고 없는 경험으로 개발되었습니다."
 }

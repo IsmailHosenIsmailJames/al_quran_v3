@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "بالمتابعة، فإنك توافق على شروط الخدمة وسياسة الخصوصية الخاصة بنا.",
   "guestUser": "مستخدم ضيف",
   "syncedCloudBackup": "المزامنة السحابية",
-  "syncedCloudBackupDesc": "حافظ على مزامنة ملاحظاتك وإشاراتك وسجل القراءة عبر جميع أجهزتك."
+  "syncedCloudBackupDesc": "حافظ على مزامنة ملاحظاتك وإشاراتك وسجل القراءة عبر جميع أجهزتك.",
+  "alHadith": "الحديث الشريف",
+  "hadithCompanion": "مرافق",
+  "hadithCompanionDesc": "صحيح البخاري ومسلم ومجموعات الحديث النبوي الشريف.",
+  "open": "فتح",
+  "install": "تثبيت",
+  "companionApps": "التطبيقات المرافقة",
+  "hadithCollectionsBrief": "البخاري ومسلم والمزيد",
+  "explore": "استكشاف",
+  "ourIslamicCompanionApps": "تطبيقاتنا الإسلامية المرافقة",
+  "ourIslamicCompanionAppsDesc": "تم تطويرها خالصًا لوجه الله (صدقة جارية) ومجانية وخالية من الإعلانات بنسبة 100% للأمة الإسلامية."
 }

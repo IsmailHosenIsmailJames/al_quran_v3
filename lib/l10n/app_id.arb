@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "Dengan melanjutkan, Anda menyetujui Ketentuan Layanan & Kebijakan Privasi kami.",
   "guestUser": "Pengguna Tamu",
   "syncedCloudBackup": "Sinkronisasi Cloud",
-  "syncedCloudBackupDesc": "Jaga agar catatan, pin, dan riwayat membaca Anda tetap tersinkronisasi di semua perangkat."
+  "syncedCloudBackupDesc": "Jaga agar catatan, pin, dan riwayat membaca Anda tetap tersinkronisasi di semua perangkat.",
+  "alHadith": "Al Hadits",
+  "hadithCompanion": "Pendamping",
+  "hadithCompanionDesc": "Shahih Bukhari, Muslim & kumpulan hadits shahih.",
+  "open": "Buka",
+  "install": "Instal",
+  "companionApps": "Aplikasi Pendamping",
+  "hadithCollectionsBrief": "Bukhari, Muslim & lainnya",
+  "explore": "Jelajahi",
+  "ourIslamicCompanionApps": "Aplikasi Pendamping Islami Kami",
+  "ourIslamicCompanionAppsDesc": "Dikembangkan semata-mata karena Allah (Sedekah Jariyah) dengan pengalaman 100% gratis dan bebas iklan untuk Umat Muslim."
 }

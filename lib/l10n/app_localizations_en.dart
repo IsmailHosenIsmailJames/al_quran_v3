@@ -1803,4 +1803,36 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Keep your notes, pins, and reading history synced across all your devices.';
+
+  @override
+  String get alHadith => 'Al Hadith';
+
+  @override
+  String get hadithCompanion => 'Companion';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Sahih Bukhari, Muslim & authentic Sunnah collections.';
+
+  @override
+  String get open => 'Open';
+
+  @override
+  String get install => 'Install';
+
+  @override
+  String get companionApps => 'Companion Apps';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim & more';
+
+  @override
+  String get explore => 'Explore';
+
+  @override
+  String get ourIslamicCompanionApps => 'Our Islamic Companion Apps';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Developed purely for the sake of Allah (Sadaqah Jariyah) with 100% free and ad-free experience for the Muslim Ummah.';
 }

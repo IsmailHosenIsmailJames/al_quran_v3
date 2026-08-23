@@ -1765,4 +1765,35 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get syncedCloudBackupDesc => 'すべてのデバイス間でメモ、ピン、読書履歴を同期します。';
+
+  @override
+  String get alHadith => 'アル・ハディース';
+
+  @override
+  String get hadithCompanion => 'コンパニオン';
+
+  @override
+  String get hadithCompanionDesc => 'サヒーフ・アル＝ブハーリー、ムスリム、真正ハディース集。';
+
+  @override
+  String get open => '開く';
+
+  @override
+  String get install => 'インストール';
+
+  @override
+  String get companionApps => 'コンパニオンアプリ';
+
+  @override
+  String get hadithCollectionsBrief => 'ブハーリー、ムスリムなど';
+
+  @override
+  String get explore => '探索';
+
+  @override
+  String get ourIslamicCompanionApps => '私たちのイスラム・コンパニオンアプリ';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'ムスリム・ウンマのために、アッラーのために（サダカ・ジャーリヤ）100％無料・広告なしで開発されました。';
 }

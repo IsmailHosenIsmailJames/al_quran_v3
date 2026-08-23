@@ -1801,4 +1801,36 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Pastikan nota, pin, dan sejarah bacaan anda diselaraskan di semua peranti anda.';
+
+  @override
+  String get alHadith => 'Al Hadis';
+
+  @override
+  String get hadithCompanion => 'Pendamping';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Shahih Bukhari, Muslim & koleksi hadis sahih.';
+
+  @override
+  String get open => 'Buka';
+
+  @override
+  String get install => 'Pasang';
+
+  @override
+  String get companionApps => 'Aplikasi Pendamping';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim & lain-lain';
+
+  @override
+  String get explore => 'Terokai';
+
+  @override
+  String get ourIslamicCompanionApps => 'Aplikasi Pendamping Islam Kami';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Dibangunkan semata-mata kerana Allah (Sedekah Jariyah) dengan pengalaman 100% percuma dan tanpa iklan untuk Umat Islam.';
 }

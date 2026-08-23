@@ -798,5 +798,15 @@
   "privacyPolicyNotice": "Devam ederek Hizmet Şartlarımızı ve Gizlilik Politikamızı kabul etmiş olursunuz.",
   "guestUser": "Misafir Kullanıcı",
   "syncedCloudBackup": "Bulut Senkronizasyonu",
-  "syncedCloudBackupDesc": "Notlarınızı, yer imlerinizi ve okuma geçmişinizi tüm cihazlarınızda senkronize tutun."
+  "syncedCloudBackupDesc": "Notlarınızı, yer imlerinizi ve okuma geçmişinizi tüm cihazlarınızda senkronize tutun.",
+  "alHadith": "Hadis-i Şerif",
+  "hadithCompanion": "Yoldaş",
+  "hadithCompanionDesc": "Sahih-i Buhari, Müslim ve sahih hadis külliyatı.",
+  "open": "Aç",
+  "install": "Yükle",
+  "companionApps": "Kardeş Uygulamalar",
+  "hadithCollectionsBrief": "Buhari, Müslim ve fazlası",
+  "explore": "Keşfet",
+  "ourIslamicCompanionApps": "İslami Kardeş Uygulamalarımız",
+  "ourIslamicCompanionAppsDesc": "Müslüman Ümmeti için tamamen Allah rızası için (Sadaka-i Cariye) %100 ücretsiz ve reklamsız olarak geliştirilmiştir."
 }

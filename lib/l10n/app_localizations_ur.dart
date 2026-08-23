@@ -1805,4 +1805,36 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'اپنے تمام آلات پر اپنے نوٹس، پن اور پڑھنے کی تاریخ کو مطابقت پذیر رکھیں۔';
+
+  @override
+  String get alHadith => 'الحدیث';
+
+  @override
+  String get hadithCompanion => 'ہمراہی';
+
+  @override
+  String get hadithCompanionDesc =>
+      'صحیح بخاری، مسلم اور مستند حدیث کے مجموعے۔';
+
+  @override
+  String get open => 'کھولیں';
+
+  @override
+  String get install => 'انسٹال';
+
+  @override
+  String get companionApps => 'ہمراہی ایپس';
+
+  @override
+  String get hadithCollectionsBrief => 'بخاری، مسلم اور مزید';
+
+  @override
+  String get explore => 'دیکھیں';
+
+  @override
+  String get ourIslamicCompanionApps => 'ہماری اسلامی ہمراہی ایپس';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'مسلم امت کے لیے خالصتاً رضائے الٰہی (صدقہ جاریہ) کے لیے 100٪ مفت اور اشتہارات سے پاک تیار کی گئی ہے۔';
 }

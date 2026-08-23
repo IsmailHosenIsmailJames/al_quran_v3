@@ -1805,4 +1805,36 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Notlarınızı, yer imlerinizi ve okuma geçmişinizi tüm cihazlarınızda senkronize tutun.';
+
+  @override
+  String get alHadith => 'Hadis-i Şerif';
+
+  @override
+  String get hadithCompanion => 'Yoldaş';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Sahih-i Buhari, Müslim ve sahih hadis külliyatı.';
+
+  @override
+  String get open => 'Aç';
+
+  @override
+  String get install => 'Yükle';
+
+  @override
+  String get companionApps => 'Kardeş Uygulamalar';
+
+  @override
+  String get hadithCollectionsBrief => 'Buhari, Müslim ve fazlası';
+
+  @override
+  String get explore => 'Keşfet';
+
+  @override
+  String get ourIslamicCompanionApps => 'İslami Kardeş Uygulamalarımız';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Müslüman Ümmeti için tamamen Allah rızası için (Sadaka-i Cariye) %100 ücretsiz ve reklamsız olarak geliştirilmiştir.';
 }

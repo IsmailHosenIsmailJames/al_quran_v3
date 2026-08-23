@@ -1765,4 +1765,35 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       '모든 기기에서 메모, 고정 항목 및 읽기 기록을 동기화 상태로 유지하세요.';
+
+  @override
+  String get alHadith => '알 하디스';
+
+  @override
+  String get hadithCompanion => '동반자';
+
+  @override
+  String get hadithCompanionDesc => '사히 알 부하리, 무슬림 및 신뢰할 수 있는 하디스 모음집.';
+
+  @override
+  String get open => '열기';
+
+  @override
+  String get install => '설치';
+
+  @override
+  String get companionApps => '동반 앱';
+
+  @override
+  String get hadithCollectionsBrief => '부하리, 무슬림 등';
+
+  @override
+  String get explore => '탐색';
+
+  @override
+  String get ourIslamicCompanionApps => '우리의 이슬람 동반 앱';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      '무슬림 움마를 위해 오직 알라를 위해 (사다카 자리야) 100% 무료 및 광고 없는 경험으로 개발되었습니다.';
 }

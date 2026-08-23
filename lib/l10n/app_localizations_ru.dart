@@ -1817,4 +1817,36 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Синхронизируйте заметки, закладки и историю чтения на всех ваших устройствах.';
+
+  @override
+  String get alHadith => 'Аль-Хадис';
+
+  @override
+  String get hadithCompanion => 'Спутник';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Сахих аль-Бухари, Муслим и достоверные сборники хадисов.';
+
+  @override
+  String get open => 'Открыть';
+
+  @override
+  String get install => 'Установить';
+
+  @override
+  String get companionApps => 'Сопутствующие приложения';
+
+  @override
+  String get hadithCollectionsBrief => 'Бухари, Муслим и др.';
+
+  @override
+  String get explore => 'Обзор';
+
+  @override
+  String get ourIslamicCompanionApps => 'Наши исламские приложения-спутники';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Разработано исключительно ради Аллаха (Садака Джария) — 100% бесплатно и без рекламы для мусульманской уммы.';
 }

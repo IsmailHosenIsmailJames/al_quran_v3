@@ -1810,4 +1810,36 @@ class AppLocalizationsAz extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Qeydlərinizi, sancaqlı ayələrinizi və oxu tarixçənizi bütün cihazlarınızda sinxron saxlayın.';
+
+  @override
+  String get alHadith => 'Əl-Hədis';
+
+  @override
+  String get hadithCompanion => 'Yoldaş';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Səhih əl-Buxari, Müslüm və mötəbər hədis topluları.';
+
+  @override
+  String get open => 'Aç';
+
+  @override
+  String get install => 'Quraşdır';
+
+  @override
+  String get companionApps => 'Köməkçi Tətbiqlər';
+
+  @override
+  String get hadithCollectionsBrief => 'Buxari, Müslüm və s.';
+
+  @override
+  String get explore => 'Kəşf et';
+
+  @override
+  String get ourIslamicCompanionApps => 'İslami Köməkçi Tətbiqlərimiz';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Müsəlman Ümməti üçün tamamilə Allah rizası üçün (Sədəqeyi-Cariyə) 100% pulsuz və reklamsız hazırlanmışdır.';
 }

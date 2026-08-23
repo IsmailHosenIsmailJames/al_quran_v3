@@ -536,5 +536,15 @@
   "privacyPolicyNotice": "続行すると、利用規約とプライバシーポリシーに同意したことになります。",
   "guestUser": "ゲストユーザー",
   "syncedCloudBackup": "クラウド同期",
-  "syncedCloudBackupDesc": "すべてのデバイス間でメモ、ピン、読書履歴を同期します。"
+  "syncedCloudBackupDesc": "すべてのデバイス間でメモ、ピン、読書履歴を同期します。",
+  "alHadith": "アル・ハディース",
+  "hadithCompanion": "コンパニオン",
+  "hadithCompanionDesc": "サヒーフ・アル＝ブハーリー、ムスリム、真正ハディース集。",
+  "open": "開く",
+  "install": "インストール",
+  "companionApps": "コンパニオンアプリ",
+  "hadithCollectionsBrief": "ブハーリー、ムスリムなど",
+  "explore": "探索",
+  "ourIslamicCompanionApps": "私たちのイスラム・コンパニオンアプリ",
+  "ourIslamicCompanionAppsDesc": "ムスリム・ウンマのために、アッラーのために（サダカ・ジャーリヤ）100％無料・広告なしで開発されました。"
 }

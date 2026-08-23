@@ -1802,4 +1802,37 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Жазбаларыңызды, бекітілген аяттарыңызды және оқу тарихыңызды барлық құрылғыларда синхрондаңыз.';
+
+  @override
+  String get alHadith => 'Әл-Хадис';
+
+  @override
+  String get hadithCompanion => 'Серіктес';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Сахих әл-Бұхари, Мүслим және сенімді хадистер жинағы.';
+
+  @override
+  String get open => 'Ашу';
+
+  @override
+  String get install => 'Орнату';
+
+  @override
+  String get companionApps => 'Серіктес қолданбалар';
+
+  @override
+  String get hadithCollectionsBrief => 'Бұхари, Мүслим және т.б.';
+
+  @override
+  String get explore => 'Зерттеу';
+
+  @override
+  String get ourIslamicCompanionApps =>
+      'Біздің ислами серіктес қолданбаларымыз';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Мұсылман Үмметі үшін Алланың разылығы үшін (Садақа Джария) 100% тегін және жарнамасыз жасалған.';
 }

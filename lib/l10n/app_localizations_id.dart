@@ -1802,4 +1802,36 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'Jaga agar catatan, pin, dan riwayat membaca Anda tetap tersinkronisasi di semua perangkat.';
+
+  @override
+  String get alHadith => 'Al Hadits';
+
+  @override
+  String get hadithCompanion => 'Pendamping';
+
+  @override
+  String get hadithCompanionDesc =>
+      'Shahih Bukhari, Muslim & kumpulan hadits shahih.';
+
+  @override
+  String get open => 'Buka';
+
+  @override
+  String get install => 'Instal';
+
+  @override
+  String get companionApps => 'Aplikasi Pendamping';
+
+  @override
+  String get hadithCollectionsBrief => 'Bukhari, Muslim & lainnya';
+
+  @override
+  String get explore => 'Jelajahi';
+
+  @override
+  String get ourIslamicCompanionApps => 'Aplikasi Pendamping Islami Kami';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'Dikembangkan semata-mata karena Allah (Sedekah Jariyah) dengan pengalaman 100% gratis dan bebas iklan untuk Umat Muslim.';
 }

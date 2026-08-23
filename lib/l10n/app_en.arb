@@ -874,5 +874,15 @@
   "privacyPolicyNotice": "By continuing, you agree to our Terms of Service & Privacy Policy.",
   "guestUser": "Guest User",
   "syncedCloudBackup": "Cloud Synchronization",
-  "syncedCloudBackupDesc": "Keep your notes, pins, and reading history synced across all your devices."
+  "syncedCloudBackupDesc": "Keep your notes, pins, and reading history synced across all your devices.",
+  "alHadith": "Al Hadith",
+  "hadithCompanion": "Companion",
+  "hadithCompanionDesc": "Sahih Bukhari, Muslim & authentic Sunnah collections.",
+  "open": "Open",
+  "install": "Install",
+  "companionApps": "Companion Apps",
+  "hadithCollectionsBrief": "Bukhari, Muslim & more",
+  "explore": "Explore",
+  "ourIslamicCompanionApps": "Our Islamic Companion Apps",
+  "ourIslamicCompanionAppsDesc": "Developed purely for the sake of Allah (Sadaqah Jariyah) with 100% free and ad-free experience for the Muslim Ummah."
 }

@@ -1803,4 +1803,36 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get syncedCloudBackupDesc =>
       'حافظ على مزامنة ملاحظاتك وإشاراتك وسجل القراءة عبر جميع أجهزتك.';
+
+  @override
+  String get alHadith => 'الحديث الشريف';
+
+  @override
+  String get hadithCompanion => 'مرافق';
+
+  @override
+  String get hadithCompanionDesc =>
+      'صحيح البخاري ومسلم ومجموعات الحديث النبوي الشريف.';
+
+  @override
+  String get open => 'فتح';
+
+  @override
+  String get install => 'تثبيت';
+
+  @override
+  String get companionApps => 'التطبيقات المرافقة';
+
+  @override
+  String get hadithCollectionsBrief => 'البخاري ومسلم والمزيد';
+
+  @override
+  String get explore => 'استكشاف';
+
+  @override
+  String get ourIslamicCompanionApps => 'تطبيقاتنا الإسلامية المرافقة';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      'تم تطويرها خالصًا لوجه الله (صدقة جارية) ومجانية وخالية من الإعلانات بنسبة 100% للأمة الإسلامية.';
 }

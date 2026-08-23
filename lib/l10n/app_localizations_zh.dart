@@ -1742,4 +1742,35 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get syncedCloudBackupDesc => '在所有设备上同步您的笔记、图钉和阅读历史记录。';
+
+  @override
+  String get alHadith => '圣训';
+
+  @override
+  String get hadithCompanion => '伴侣';
+
+  @override
+  String get hadithCompanionDesc => '布哈里圣训实录、穆斯林圣训实录及权威圣训集。';
+
+  @override
+  String get open => '打开';
+
+  @override
+  String get install => '安装';
+
+  @override
+  String get companionApps => '配套应用';
+
+  @override
+  String get hadithCollectionsBrief => '布哈里、穆斯林等';
+
+  @override
+  String get explore => '探索';
+
+  @override
+  String get ourIslamicCompanionApps => '我们的伊斯兰配套应用';
+
+  @override
+  String get ourIslamicCompanionAppsDesc =>
+      '完全为了真主的喜悦（持久的施舍）而开发，为穆斯林群体提供100%免费且无广告的体验。';
 }
