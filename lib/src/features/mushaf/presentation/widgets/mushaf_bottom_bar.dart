@@ -33,11 +33,11 @@ class MushafBottomBar extends StatelessWidget {
 
     return AnimatedCrossFade(
       firstChild: Container(
-        padding: const EdgeInsets.fromLTRB(16, 10, 16, 14),
+        padding: const EdgeInsets.fromLTRB(16, 6, 16, 10),
         decoration: BoxDecoration(
           color: (isDark ? const Color(0xFF1A1A1A) : Colors.white)
               .withValues(alpha: 0.95),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
           border: Border(
             top: BorderSide(
               color: isDark
@@ -117,7 +117,7 @@ class MushafBottomBar extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 8,
+                        vertical: 6,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -189,7 +189,7 @@ class MushafBottomBar extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 8,
+                        vertical: 6,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
