@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'manual_location_selection_cubit.dart';
@@ -9,12 +9,13 @@ part of 'manual_location_selection_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ManualLocationSelectionState {
 
- double? get downloadProgress; String? get country; String? get city; Map? get locationData; List? get cityList; bool get isLoading; bool get isError; bool get isSuccess;
+ double? get downloadProgress; String? get country; String? get city; Map<dynamic, dynamic>? get locationData; List<dynamic>? get cityList; bool get isLoading; bool get isError; bool get isSuccess;
 /// Create a copy of ManualLocationSelectionState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +46,7 @@ abstract mixin class $ManualLocationSelectionStateCopyWith<$Res>  {
   factory $ManualLocationSelectionStateCopyWith(ManualLocationSelectionState value, $Res Function(ManualLocationSelectionState) _then) = _$ManualLocationSelectionStateCopyWithImpl;
 @useResult
 $Res call({
- double? downloadProgress, String? country, String? city, Map? locationData, List? cityList, bool isLoading, bool isError, bool isSuccess
+ double? downloadProgress, String? country, String? city, Map<dynamic, dynamic>? locationData, List<dynamic>? cityList, bool isLoading, bool isError, bool isSuccess
 });
 
 
@@ -63,13 +64,13 @@ class _$ManualLocationSelectionStateCopyWithImpl<$Res>
 /// Create a copy of ManualLocationSelectionState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? downloadProgress = freezed,Object? country = freezed,Object? city = freezed,Object? locationData = freezed,Object? cityList = freezed,Object? isLoading = null,Object? isError = null,Object? isSuccess = null,}) {
-  return _then(_self.copyWith(
+  return _then(ManualLocationSelectionState(
 downloadProgress: freezed == downloadProgress ? _self.downloadProgress : downloadProgress // ignore: cast_nullable_to_non_nullable
 as double?,country: freezed == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String?,locationData: freezed == locationData ? _self.locationData : locationData // ignore: cast_nullable_to_non_nullable
-as Map?,cityList: freezed == cityList ? _self.cityList : cityList // ignore: cast_nullable_to_non_nullable
-as List?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as Map<dynamic, dynamic>?,cityList: freezed == cityList ? _self.cityList : cityList // ignore: cast_nullable_to_non_nullable
+as List<dynamic>?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -157,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? downloadProgress,  String? country,  String? city,  Map? locationData,  List? cityList,  bool isLoading,  bool isError,  bool isSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? downloadProgress,  String? country,  String? city,  Map<dynamic, dynamic>? locationData,  List<dynamic>? cityList,  bool isLoading,  bool isError,  bool isSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ManualLocationSelectionState() when $default != null:
 return $default(_that.downloadProgress,_that.country,_that.city,_that.locationData,_that.cityList,_that.isLoading,_that.isError,_that.isSuccess);case _:
@@ -178,7 +179,7 @@ return $default(_that.downloadProgress,_that.country,_that.city,_that.locationDa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? downloadProgress,  String? country,  String? city,  Map? locationData,  List? cityList,  bool isLoading,  bool isError,  bool isSuccess)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? downloadProgress,  String? country,  String? city,  Map<dynamic, dynamic>? locationData,  List<dynamic>? cityList,  bool isLoading,  bool isError,  bool isSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _ManualLocationSelectionState():
 return $default(_that.downloadProgress,_that.country,_that.city,_that.locationData,_that.cityList,_that.isLoading,_that.isError,_that.isSuccess);case _:
@@ -198,7 +199,7 @@ return $default(_that.downloadProgress,_that.country,_that.city,_that.locationDa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? downloadProgress,  String? country,  String? city,  Map? locationData,  List? cityList,  bool isLoading,  bool isError,  bool isSuccess)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? downloadProgress,  String? country,  String? city,  Map<dynamic, dynamic>? locationData,  List<dynamic>? cityList,  bool isLoading,  bool isError,  bool isSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _ManualLocationSelectionState() when $default != null:
 return $default(_that.downloadProgress,_that.country,_that.city,_that.locationData,_that.cityList,_that.isLoading,_that.isError,_that.isSuccess);case _:
@@ -213,14 +214,14 @@ return $default(_that.downloadProgress,_that.country,_that.city,_that.locationDa
 
 
 class _ManualLocationSelectionState implements ManualLocationSelectionState {
-  const _ManualLocationSelectionState({this.downloadProgress = 0.0, this.country, this.city, final  Map? locationData, final  List? cityList, this.isLoading = false, this.isError = false, this.isSuccess = false}): _locationData = locationData,_cityList = cityList;
+  const _ManualLocationSelectionState({this.downloadProgress = 0.0, this.country, this.city,  Map<dynamic, dynamic>? locationData,  List<dynamic>? cityList, this.isLoading = false, this.isError = false, this.isSuccess = false}): _locationData = locationData,_cityList = cityList;
   
 
 @override@JsonKey() final  double? downloadProgress;
 @override final  String? country;
 @override final  String? city;
- final  Map? _locationData;
-@override Map? get locationData {
+ final  Map<dynamic, dynamic>? _locationData;
+@override Map<dynamic, dynamic>? get locationData {
   final value = _locationData;
   if (value == null) return null;
   if (_locationData is EqualUnmodifiableMapView) return _locationData;
@@ -228,8 +229,8 @@ class _ManualLocationSelectionState implements ManualLocationSelectionState {
   return EqualUnmodifiableMapView(value);
 }
 
- final  List? _cityList;
-@override List? get cityList {
+ final  List<dynamic>? _cityList;
+@override List<dynamic>? get cityList {
   final value = _cityList;
   if (value == null) return null;
   if (_cityList is EqualUnmodifiableListView) return _cityList;
@@ -271,7 +272,7 @@ abstract mixin class _$ManualLocationSelectionStateCopyWith<$Res> implements $Ma
   factory _$ManualLocationSelectionStateCopyWith(_ManualLocationSelectionState value, $Res Function(_ManualLocationSelectionState) _then) = __$ManualLocationSelectionStateCopyWithImpl;
 @override @useResult
 $Res call({
- double? downloadProgress, String? country, String? city, Map? locationData, List? cityList, bool isLoading, bool isError, bool isSuccess
+ double? downloadProgress, String? country, String? city, Map<dynamic, dynamic>? locationData, List<dynamic>? cityList, bool isLoading, bool isError, bool isSuccess
 });
 
 
@@ -294,8 +295,8 @@ downloadProgress: freezed == downloadProgress ? _self.downloadProgress : downloa
 as double?,country: freezed == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String?,locationData: freezed == locationData ? _self._locationData : locationData // ignore: cast_nullable_to_non_nullable
-as Map?,cityList: freezed == cityList ? _self._cityList : cityList // ignore: cast_nullable_to_non_nullable
-as List?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as Map<dynamic, dynamic>?,cityList: freezed == cityList ? _self._cityList : cityList // ignore: cast_nullable_to_non_nullable
+as List<dynamic>?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,isSuccess: null == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
 as bool,

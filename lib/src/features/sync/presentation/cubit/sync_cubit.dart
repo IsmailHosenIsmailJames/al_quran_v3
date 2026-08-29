@@ -37,6 +37,10 @@ class SyncCubit extends Cubit<SyncState> {
     }
   }
 
+  void scheduleAutoSync(String uid) {
+    _syncService.scheduleDebouncedSync(uid);
+  }
+
   void reset() {
     emit(SyncInitial(lastSynced: _getLastSyncedFromHive()));
   }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'prayer_time_state.dart';
@@ -9,6 +9,7 @@ part of 'prayer_time_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$PrayerTimeStateCopyWithImpl<$Res>
 /// Create a copy of PrayerTimeState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? todayPrayerTimes = freezed,Object? monthlyPrayerTimes = null,Object? isLoading = null,Object? hasError = null,}) {
-  return _then(_self.copyWith(
+  return _then(PrayerTimeState(
 todayPrayerTimes: freezed == todayPrayerTimes ? _self.todayPrayerTimes : todayPrayerTimes // ignore: cast_nullable_to_non_nullable
 as PrayerTimeEntity?,monthlyPrayerTimes: null == monthlyPrayerTimes ? _self.monthlyPrayerTimes : monthlyPrayerTimes // ignore: cast_nullable_to_non_nullable
 as List<PrayerTimeEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
@@ -221,7 +222,7 @@ return $default(_that.todayPrayerTimes,_that.monthlyPrayerTimes,_that.isLoading,
 
 
 class _PrayerTimeState implements PrayerTimeState {
-  const _PrayerTimeState({this.todayPrayerTimes, final  List<PrayerTimeEntity> monthlyPrayerTimes = const [], this.isLoading = false, this.hasError = false}): _monthlyPrayerTimes = monthlyPrayerTimes;
+  const _PrayerTimeState({this.todayPrayerTimes,  List<PrayerTimeEntity> monthlyPrayerTimes = const [], this.isLoading = false, this.hasError = false}): _monthlyPrayerTimes = monthlyPrayerTimes;
   
 
 @override final  PrayerTimeEntity? todayPrayerTimes;

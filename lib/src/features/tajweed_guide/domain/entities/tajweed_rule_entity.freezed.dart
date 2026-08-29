@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tajweed_rule_entity.dart';
@@ -9,6 +9,7 @@ part of 'tajweed_rule_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$TajweedExampleEntityCopyWithImpl<$Res>
 /// Create a copy of TajweedExampleEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? arabicText = null,Object? transliteration = null,Object? surahAyahRef = freezed,Object? surahNumber = freezed,Object? ayahNumber = freezed,Object? wordIndex = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(TajweedExampleEntity(
 arabicText: null == arabicText ? _self.arabicText : arabicText // ignore: cast_nullable_to_non_nullable
 as String,transliteration: null == transliteration ? _self.transliteration : transliteration // ignore: cast_nullable_to_non_nullable
 as String,surahAyahRef: freezed == surahAyahRef ? _self.surahAyahRef : surahAyahRef // ignore: cast_nullable_to_non_nullable
@@ -335,7 +336,7 @@ class _$TajweedRuleEntityCopyWithImpl<$Res>
 /// Create a copy of TajweedRuleEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? ruleKey = null,Object? name = null,Object? arabicName = null,Object? description = null,Object? howToPronounce = null,Object? examples = null,Object? lightColor = null,Object? darkColor = null,}) {
-  return _then(_self.copyWith(
+  return _then(TajweedRuleEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,ruleKey: null == ruleKey ? _self.ruleKey : ruleKey // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -486,7 +487,7 @@ return $default(_that.id,_that.ruleKey,_that.name,_that.arabicName,_that.descrip
 
 
 class _TajweedRuleEntity implements TajweedRuleEntity {
-  const _TajweedRuleEntity({required this.id, required this.ruleKey, required this.name, required this.arabicName, required this.description, required this.howToPronounce, required final  List<TajweedExampleEntity> examples, required this.lightColor, required this.darkColor}): _examples = examples;
+  const _TajweedRuleEntity({required this.id, required this.ruleKey, required this.name, required this.arabicName, required this.description, required this.howToPronounce, required  List<TajweedExampleEntity> examples, required this.lightColor, required this.darkColor}): _examples = examples;
   
 
 @override final  String id;

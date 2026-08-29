@@ -24,7 +24,7 @@ import 'package:al_quran_v3/src/features/about/domain/usecases/get_app_info_usec
 import 'package:al_quran_v3/src/features/audio/data/datasources/audio_local_datasource.dart'
     as _i712;
 import 'package:al_quran_v3/src/features/audio/data/repositories/audio_repository_impl.dart'
-    as _i587;
+    as _i588;
 import 'package:al_quran_v3/src/features/audio/domain/repositories/i_audio_repository.dart'
     as _i818;
 import 'package:al_quran_v3/src/features/audio/domain/usecases/get_recitations_usecase.dart'
@@ -120,7 +120,7 @@ import 'package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_r
 import 'package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_time_cubit.dart'
     as _i358;
 import 'package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart'
-    as _i197;
+    as _i198;
 import 'package:al_quran_v3/src/features/qibla/data/datasources/vibration_datasource.dart'
     as _i1059;
 import 'package:al_quran_v3/src/features/qibla/data/repositories/qibla_repository_impl.dart'
@@ -130,7 +130,7 @@ import 'package:al_quran_v3/src/features/qibla/domain/repositories/qibla_reposit
 import 'package:al_quran_v3/src/features/qibla/domain/usecases/calculate_qibla_angle_usecase.dart'
     as _i153;
 import 'package:al_quran_v3/src/features/qibla/domain/usecases/get_compass_heading_usecase.dart'
-    as _i759;
+    as _i760;
 import 'package:al_quran_v3/src/features/qibla/domain/usecases/trigger_alignment_vibration_usecase.dart'
     as _i979;
 import 'package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_cubit.dart'
@@ -168,7 +168,7 @@ import 'package:al_quran_v3/src/features/search/data/datasources/quran_search_da
 import 'package:al_quran_v3/src/features/search/domain/usecases/search_quran_usecase.dart'
     as _i405;
 import 'package:al_quran_v3/src/features/search/presentation/cubit/quran_search_cubit.dart'
-    as _i151;
+    as _i152;
 import 'package:al_quran_v3/src/features/settings/data/datasources/settings_local_datasource.dart'
     as _i584;
 import 'package:al_quran_v3/src/features/settings/data/repositories/settings_repository_impl.dart'
@@ -188,7 +188,7 @@ import 'package:al_quran_v3/src/features/setup/data/repositories/resource_reposi
 import 'package:al_quran_v3/src/features/setup/data/repositories/setup_repository_impl.dart'
     as _i283;
 import 'package:al_quran_v3/src/features/setup/domain/entities/resource_entity.dart'
-    as _i609;
+    as _i610;
 import 'package:al_quran_v3/src/features/setup/domain/repositories/i_resource_repository.dart'
     as _i720;
 import 'package:al_quran_v3/src/features/setup/domain/repositories/i_setup_repository.dart'
@@ -228,13 +228,13 @@ import 'package:al_quran_v3/src/features/sync/data/services/cloud_sync_service.d
 import 'package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart'
     as _i778;
 import 'package:al_quran_v3/src/features/tafsir/data/datasources/tafsir_local_datasource.dart'
-    as _i563;
+    as _i564;
 import 'package:al_quran_v3/src/features/tafsir/data/repositories/tafsir_repository_impl.dart'
     as _i880;
 import 'package:al_quran_v3/src/features/tafsir/domain/repositories/i_tafsir_repository.dart'
     as _i759;
 import 'package:al_quran_v3/src/features/tafsir/domain/usecases/get_tafsir_usecase.dart'
-    as _i662;
+    as _i663;
 import 'package:al_quran_v3/src/features/tajweed_guide/data/datasources/tajweed_guide_local_data_source.dart'
     as _i461;
 import 'package:al_quran_v3/src/features/tajweed_guide/data/repositories/tajweed_guide_repository_impl.dart'
@@ -244,7 +244,7 @@ import 'package:al_quran_v3/src/features/tajweed_guide/domain/repositories/tajwe
 import 'package:al_quran_v3/src/features/tajweed_guide/domain/usecases/get_tajweed_rules_usecase.dart'
     as _i33;
 import 'package:al_quran_v3/src/features/tajweed_guide/presentation/cubit/tajweed_guide_cubit.dart'
-    as _i461;
+    as _i462;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -326,8 +326,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i662.SurahNavigationLocalDataSource(),
     );
     gh.lazySingleton<_i1071.CloudSyncService>(() => _i1071.CloudSyncService());
-    gh.lazySingleton<_i563.TafsirLocalDataSource>(
-      () => _i563.TafsirLocalDataSource(),
+    gh.lazySingleton<_i564.TafsirLocalDataSource>(
+      () => _i564.TafsirLocalDataSource(),
     );
     gh.lazySingleton<_i1061.FirebaseAuthDataSource>(
       () => _i1061.FirebaseAuthDataSourceImpl(),
@@ -398,7 +398,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factoryParam<
       _i998.BookSearchCubit,
       bool,
-      Map<String, List<_i609.ResourceEntity>>
+      Map<String, List<_i610.ResourceEntity>>
     >(
       (isTafsir, allResources) =>
           _i998.BookSearchCubit(isTafsir: isTafsir, allResources: allResources),
@@ -413,14 +413,14 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i794.AuthCubit(authDataSource: gh<_i1061.FirebaseAuthDataSource>()),
     );
-    gh.lazySingleton<_i197.CompassDatasource>(
-      () => _i197.CompassDatasourceImpl(),
+    gh.lazySingleton<_i198.CompassDatasource>(
+      () => _i198.CompassDatasourceImpl(),
     );
     gh.lazySingleton<_i169.CollectionsLocalDataSource>(
       () => _i169.CollectionsLocalDataSourceImpl(),
     );
     gh.lazySingleton<_i759.ITafsirRepository>(
-      () => _i880.TafsirRepositoryImpl(gh<_i563.TafsirLocalDataSource>()),
+      () => _i880.TafsirRepositoryImpl(gh<_i564.TafsirLocalDataSource>()),
     );
     gh.factory<_i411.QuranResourcesCubit>(
       () => _i411.QuranResourcesCubit(
@@ -430,8 +430,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i925.DeleteQuranResourceUseCase>(),
       ),
     );
-    gh.lazySingleton<_i662.GetTafsirUseCase>(
-      () => _i662.GetTafsirUseCase(gh<_i759.ITafsirRepository>()),
+    gh.lazySingleton<_i663.GetTafsirUseCase>(
+      () => _i663.GetTafsirUseCase(gh<_i759.ITafsirRepository>()),
     );
     gh.lazySingleton<_i619.TajweedGuideRepository>(
       () => _i1041.TajweedGuideRepositoryImpl(
@@ -456,7 +456,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i632.SurahInfoRepositoryImpl(gh<_i278.SurahInfoLocalDataSource>()),
     );
     gh.lazySingleton<_i818.IAudioRepository>(
-      () => _i587.AudioRepositoryImpl(gh<_i712.AudioLocalDataSource>()),
+      () => _i588.AudioRepositoryImpl(gh<_i712.AudioLocalDataSource>()),
     );
     gh.lazySingleton<_i1035.CollectionsRepository>(
       () => _i713.CollectionsRepositoryImpl(
@@ -492,8 +492,8 @@ extension GetItInjectableX on _i174.GetIt {
       (initState, _) =>
           _i945.LocationQiblaPrayerDataCubit(initState: initState),
     );
-    gh.factory<_i151.QuranSearchCubit>(
-      () => _i151.QuranSearchCubit(
+    gh.factory<_i152.QuranSearchCubit>(
+      () => _i152.QuranSearchCubit(
         gh<_i656.QuranSearchDataSource>(),
         gh<_i405.SearchQuranUseCase>(),
       ),
@@ -549,7 +549,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i298.QiblaRepository>(
       () => _i135.QiblaRepositoryImpl(
-        gh<_i197.CompassDatasource>(),
+        gh<_i198.CompassDatasource>(),
         gh<_i1059.VibrationDatasource>(),
       ),
     );
@@ -602,8 +602,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i153.CalculateQiblaAngleUseCase>(
       () => _i153.CalculateQiblaAngleUseCase(gh<_i298.QiblaRepository>()),
     );
-    gh.lazySingleton<_i759.GetCompassHeadingUseCase>(
-      () => _i759.GetCompassHeadingUseCase(gh<_i298.QiblaRepository>()),
+    gh.lazySingleton<_i760.GetCompassHeadingUseCase>(
+      () => _i760.GetCompassHeadingUseCase(gh<_i298.QiblaRepository>()),
     );
     gh.lazySingleton<_i979.TriggerAlignmentVibrationUseCase>(
       () => _i979.TriggerAlignmentVibrationUseCase(gh<_i298.QiblaRepository>()),
@@ -623,13 +623,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i236.QiblaCubit>(
       () => _i236.QiblaCubit(
-        gh<_i759.GetCompassHeadingUseCase>(),
+        gh<_i760.GetCompassHeadingUseCase>(),
         gh<_i153.CalculateQiblaAngleUseCase>(),
         gh<_i979.TriggerAlignmentVibrationUseCase>(),
       ),
     );
-    gh.factory<_i461.TajweedGuideCubit>(
-      () => _i461.TajweedGuideCubit(
+    gh.factory<_i462.TajweedGuideCubit>(
+      () => _i462.TajweedGuideCubit(
         getTajweedRulesUseCase: gh<_i33.GetTajweedRulesUseCase>(),
       ),
     );

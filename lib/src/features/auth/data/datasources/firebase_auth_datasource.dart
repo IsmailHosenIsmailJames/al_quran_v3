@@ -3,6 +3,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_database/firebase_database.dart";
 import "package:flutter/foundation.dart";
 import "package:google_sign_in/google_sign_in.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
 
 abstract class FirebaseAuthDataSource {
@@ -69,10 +70,28 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await _firebaseAuth
-          .signInWithCredential(credential);
-      final user = userCredential.user;
+      final currentUser = _firebaseAuth.currentUser;
+      UserCredential userCredential;
 
+      // If currently an anonymous guest, seamlessly upgrade/link account
+      if (currentUser != null && currentUser.isAnonymous) {
+        try {
+          userCredential = await currentUser.linkWithCredential(credential);
+        } on FirebaseAuthException catch (e) {
+          if (e.code == "credential-already-in-use" ||
+              e.code == "provider-already-linked") {
+            userCredential =
+                await _firebaseAuth.signInWithCredential(credential);
+          } else {
+            rethrow;
+          }
+        }
+      } else {
+        userCredential =
+            await _firebaseAuth.signInWithCredential(credential);
+      }
+
+      final user = userCredential.user;
       if (user == null) {
         throw Exception("Failed to sign in with Google.");
       }
@@ -128,11 +147,35 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String displayName,
   }) async {
     try {
-      final UserCredential credential = await _firebaseAuth
-          .createUserWithEmailAndPassword(
+      final currentUser = _firebaseAuth.currentUser;
+      UserCredential credential;
+
+      if (currentUser != null && currentUser.isAnonymous) {
+        try {
+          final emailCred = EmailAuthProvider.credential(
             email: email.trim(),
             password: password,
           );
+          credential = await currentUser.linkWithCredential(emailCred);
+        } on FirebaseAuthException catch (e) {
+          if (e.code == "credential-already-in-use" ||
+              e.code == "email-already-in-use" ||
+              e.code == "provider-already-linked") {
+            credential = await _firebaseAuth.createUserWithEmailAndPassword(
+              email: email.trim(),
+              password: password,
+            );
+          } else {
+            rethrow;
+          }
+        }
+      } else {
+        credential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email.trim(),
+          password: password,
+        );
+      }
+
       final user = credential.user;
       if (user == null) {
         throw Exception("Failed to create account.");
@@ -216,10 +259,16 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         debugPrint("Error removing user database tree: $e");
       }
 
-      // 2. Delete the Firebase Auth User
+      // 2. Clear user-specific Hive cache
+      try {
+        final userBox = Hive.box("user");
+        await userBox.delete("last_cloud_sync_timestamp");
+      } catch (_) {}
+
+      // 3. Delete the Firebase Auth User
       await user.delete();
 
-      // 3. Google Sign in disconnect
+      // 4. Google Sign in disconnect
       try {
         await _ensureGoogleSignInInitialized();
         await _googleSignIn.disconnect();

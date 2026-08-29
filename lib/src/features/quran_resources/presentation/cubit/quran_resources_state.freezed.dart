@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'quran_resources_state.dart';
@@ -9,6 +9,7 @@ part of 'quran_resources_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$QuranResourcesStateCopyWithImpl<$Res>
 /// Create a copy of QuranResourcesState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? activeTabIndex = null,Object? searchQuery = null,Object? isSearching = null,Object? translationGroups = null,Object? tafsirGroups = null,Object? wordByWordResources = null,Object? downloadingResourcePath = freezed,Object? downloadProgress = null,Object? errorMessage = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(QuranResourcesState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as QuranResourcesStatus,activeTabIndex: null == activeTabIndex ? _self.activeTabIndex : activeTabIndex // ignore: cast_nullable_to_non_nullable
 as int,searchQuery: null == searchQuery ? _self.searchQuery : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -215,7 +216,7 @@ return $default(_that.status,_that.activeTabIndex,_that.searchQuery,_that.isSear
 
 
 class _QuranResourcesState implements QuranResourcesState {
-  const _QuranResourcesState({this.status = QuranResourcesStatus.initial, this.activeTabIndex = 0, this.searchQuery = '', this.isSearching = false, final  List<ResourceGroupEntity> translationGroups = const [], final  List<ResourceGroupEntity> tafsirGroups = const [], final  List<QuranResourceEntity> wordByWordResources = const [], this.downloadingResourcePath, this.downloadProgress = 0.0, this.errorMessage}): _translationGroups = translationGroups,_tafsirGroups = tafsirGroups,_wordByWordResources = wordByWordResources;
+  const _QuranResourcesState({this.status = QuranResourcesStatus.initial, this.activeTabIndex = 0, this.searchQuery = '', this.isSearching = false,  List<ResourceGroupEntity> translationGroups = const [],  List<ResourceGroupEntity> tafsirGroups = const [],  List<QuranResourceEntity> wordByWordResources = const [], this.downloadingResourcePath, this.downloadProgress = 0.0, this.errorMessage}): _translationGroups = translationGroups,_tafsirGroups = tafsirGroups,_wordByWordResources = wordByWordResources;
   
 
 @override@JsonKey() final  QuranResourcesStatus status;

@@ -14,6 +14,8 @@ abstract class PinnedCollectionModel with _$PinnedCollectionModel {
     required List<PinnedModel> pinned,
     required DateTime createdAt,
     required DateTime updatedAt,
+    @Default(false) bool isDeleted,
+    DateTime? deletedAt,
   }) = _PinnedCollectionModel;
 
   factory PinnedCollectionModel.fromJson(Map<String, dynamic> json) =>

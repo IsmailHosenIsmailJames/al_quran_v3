@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'mushaf_script_model.dart';
@@ -9,6 +9,7 @@ part of 'mushaf_script_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$MushafScriptPageModelCopyWithImpl<$Res>
 /// Create a copy of MushafScriptPageModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? pageNumber = null,Object? lines = null,}) {
-  return _then(_self.copyWith(
+  return _then(MushafScriptPageModel(
 pageNumber: null == pageNumber ? _self.pageNumber : pageNumber // ignore: cast_nullable_to_non_nullable
 as int,lines: null == lines ? _self.lines : lines // ignore: cast_nullable_to_non_nullable
 as List<MushafLine>,
@@ -210,7 +211,7 @@ return $default(_that.pageNumber,_that.lines);case _:
 
 @JsonSerializable(explicitToJson: true)
 class _MushafScriptPageModel extends MushafScriptPageModel {
-  const _MushafScriptPageModel({@JsonKey(name: "page_number") required this.pageNumber, required final  List<MushafLine> lines}): _lines = lines,super._();
+  const _MushafScriptPageModel({@JsonKey(name: "page_number") required this.pageNumber, required  List<MushafLine> lines}): _lines = lines,super._();
   factory _MushafScriptPageModel.fromJson(Map<String, dynamic> json) => _$MushafScriptPageModelFromJson(json);
 
 @override@JsonKey(name: "page_number") final  int pageNumber;
@@ -338,7 +339,7 @@ class _$MushafLineCopyWithImpl<$Res>
 /// Create a copy of MushafLine
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? lineNumber = null,Object? lineType = null,Object? isCentered = null,Object? surahNumber = freezed,Object? content = null,Object? firstWordId = freezed,Object? lastWordId = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(MushafLine(
 lineNumber: null == lineNumber ? _self.lineNumber : lineNumber // ignore: cast_nullable_to_non_nullable
 as int,lineType: null == lineType ? _self.lineType : lineType // ignore: cast_nullable_to_non_nullable
 as LineType,isCentered: null == isCentered ? _self.isCentered : isCentered // ignore: cast_nullable_to_non_nullable

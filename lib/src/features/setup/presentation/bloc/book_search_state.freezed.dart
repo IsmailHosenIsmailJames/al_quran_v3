@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'book_search_state.dart';
@@ -9,6 +9,7 @@ part of 'book_search_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$BookSearchStateCopyWithImpl<$Res>
 /// Create a copy of BookSearchState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? query = null,Object? isTafsir = null,Object? groupedBooks = null,Object? sortedLanguages = null,}) {
-  return _then(_self.copyWith(
+  return _then(BookSearchState(
 query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String,isTafsir: null == isTafsir ? _self.isTafsir : isTafsir // ignore: cast_nullable_to_non_nullable
 as bool,groupedBooks: null == groupedBooks ? _self.groupedBooks : groupedBooks // ignore: cast_nullable_to_non_nullable
@@ -209,7 +210,7 @@ return $default(_that.query,_that.isTafsir,_that.groupedBooks,_that.sortedLangua
 
 
 class _BookSearchState extends BookSearchState {
-  const _BookSearchState({required this.query, required this.isTafsir, required final  Map<String, List<ResourceEntity>> groupedBooks, required final  List<String> sortedLanguages}): _groupedBooks = groupedBooks,_sortedLanguages = sortedLanguages,super._();
+  const _BookSearchState({required this.query, required this.isTafsir, required  Map<String, List<ResourceEntity>> groupedBooks, required  List<String> sortedLanguages}): _groupedBooks = groupedBooks,_sortedLanguages = sortedLanguages,super._();
   
 
 @override final  String query;

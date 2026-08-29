@@ -19,12 +19,15 @@ import "package:al_quran_v3/src/features/search/presentation/screens/quran_searc
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
-import "package:home_widget/home_widget.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_compass/flutter_compass.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
+import "package:home_widget/home_widget.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,145 +38,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late PageController pageController;
-
-  List<Widget> getBody() {
-    switch (platformOwn) {
-      case platform_services.PlatformOwn.isAndroid:
-      case platform_services.PlatformOwn.isIos:
-        return const [
-          QuranPage(),
-          PrayerTimePage(),
-          QiblaScreen(),
-          AudioPage(),
-        ];
-      case platform_services.PlatformOwn.isWindows:
-      case platform_services.PlatformOwn.isMac:
-      case platform_services.PlatformOwn.isLinux:
-        return const [
-          QuranPage(),
-          PrayerTimePage(),
-          AudioPage(),
-          SettingsPage(),
-        ];
-      case platform_services.PlatformOwn.isWeb:
-      default:
-        return const [QuranPage(), AudioPage(), SettingsPage()];
-    }
-  }
-
-  List<BottomNavigationBarItem> getBottomNavItems(
-    int tabIndex,
-    AppLocalizations l10n,
-  ) {
-    switch (platformOwn) {
-      case platform_services.PlatformOwn.isAndroid:
-      case platform_services.PlatformOwn.isIos:
-        return [
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 0
-                  ? FluentIcons.book_16_filled
-                  : FluentIcons.book_24_regular,
-            ),
-            label: l10n.quran,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 1
-                  ? FluentIcons.clock_24_filled
-                  : FluentIcons.clock_24_regular,
-            ),
-            label: l10n.prayer,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 2
-                  ? FluentIcons.compass_northwest_24_filled
-                  : FluentIcons.compass_northwest_24_regular,
-            ),
-            label: l10n.qibla,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 3
-                  ? Icons.audiotrack_rounded
-                  : Icons.audiotrack_outlined,
-            ),
-            label: l10n.audio,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWindows:
-      case platform_services.PlatformOwn.isMac:
-      case platform_services.PlatformOwn.isLinux:
-        return [
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 0
-                  ? FluentIcons.book_16_filled
-                  : FluentIcons.book_24_regular,
-            ),
-            label: l10n.quran,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 1
-                  ? FluentIcons.clock_24_filled
-                  : FluentIcons.clock_24_regular,
-            ),
-            label: l10n.prayer,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 2
-                  ? Icons.audiotrack_rounded
-                  : Icons.audiotrack_outlined,
-            ),
-            label: l10n.audio,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 3 ? Icons.settings : Icons.settings_outlined,
-            ),
-            label: l10n.settings,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWeb:
-      default:
-        return [
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 0
-                  ? FluentIcons.book_16_filled
-                  : FluentIcons.book_24_regular,
-            ),
-            label: l10n.quran,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 1
-                  ? Icons.audiotrack_rounded
-                  : Icons.audiotrack_outlined,
-            ),
-            label: l10n.audio,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              tabIndex == 2 ? Icons.settings : Icons.settings_outlined,
-            ),
-            label: l10n.settings,
-          ),
-        ];
-    }
-  }
-
+  bool _hasCompassSensor = true;
   StreamSubscription<Uri?>? _widgetClickSubscription;
 
   @override
   void initState() {
+    // Read cached compass sensor state if available
+    try {
+      final cached = Hive.box("user").get("has_compass_sensor");
+      if (cached != null && cached is bool) {
+        _hasCompassSensor = cached;
+      }
+    } catch (_) {}
+
     pageController = PageController(
       initialPage: context.read<OthersSettingsCubit>().state.tabIndex,
     );
     super.initState();
+
+    _checkCompassAvailability();
 
     // Initialize HomeWidget and handle deep links from home/lock screen widgets
     PrayerWidgetService.updateWidgets();
@@ -189,6 +72,181 @@ class _HomePageState extends State<HomePage> {
         _handleWidgetUri(uri);
       }
     });
+  }
+
+  Future<void> _checkCompassAvailability() async {
+    if (kIsWeb ||
+        platformOwn == platform_services.PlatformOwn.isWindows ||
+        platformOwn == platform_services.PlatformOwn.isLinux ||
+        platformOwn == platform_services.PlatformOwn.isMac) {
+      _updateCompassSensor(false);
+      return;
+    }
+
+    try {
+      final events = FlutterCompass.events;
+      if (events == null) {
+        _updateCompassSensor(false);
+        return;
+      }
+      final hasHeading = await events
+          .map((e) => e.heading != null)
+          .first
+          .timeout(
+            const Duration(milliseconds: 1200),
+            onTimeout: () => false,
+          );
+      _updateCompassSensor(hasHeading);
+    } catch (_) {
+      _updateCompassSensor(false);
+    }
+  }
+
+  void _updateCompassSensor(bool hasSensor) {
+    try {
+      Hive.box("user").put("has_compass_sensor", hasSensor);
+    } catch (_) {}
+    if (mounted && _hasCompassSensor != hasSensor) {
+      setState(() => _hasCompassSensor = hasSensor);
+    }
+  }
+
+  List<Widget> getBody() {
+    if (platformOwn == platform_services.PlatformOwn.isWeb) {
+      return const [
+        QuranPage(),
+        AudioPage(),
+        SettingsPage(showAppBar: false),
+      ];
+    }
+
+    if (_hasCompassSensor &&
+        (platformOwn == platform_services.PlatformOwn.isAndroid ||
+            platformOwn == platform_services.PlatformOwn.isIos)) {
+      return const [
+        QuranPage(),
+        PrayerTimePage(),
+        QiblaScreen(),
+        AudioPage(),
+      ];
+    }
+
+    // Devices without compass sensor: show Profile & Settings tab instead of Qibla
+    return const [
+      QuranPage(),
+      PrayerTimePage(),
+      AudioPage(),
+      SettingsPage(showAppBar: false),
+    ];
+  }
+
+  List<BottomNavigationBarItem> getBottomNavItems(
+    int tabIndex,
+    AppLocalizations l10n,
+  ) {
+    if (platformOwn == platform_services.PlatformOwn.isWeb) {
+      return [
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 0
+                ? FluentIcons.book_16_filled
+                : FluentIcons.book_24_regular,
+          ),
+          label: l10n.quran,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 1
+                ? Icons.audiotrack_rounded
+                : Icons.audiotrack_outlined,
+          ),
+          label: l10n.audio,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 2
+                ? FluentIcons.person_accounts_24_filled
+                : FluentIcons.person_accounts_24_regular,
+          ),
+          label: l10n.settings,
+        ),
+      ];
+    }
+
+    if (_hasCompassSensor &&
+        (platformOwn == platform_services.PlatformOwn.isAndroid ||
+            platformOwn == platform_services.PlatformOwn.isIos)) {
+      return [
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 0
+                ? FluentIcons.book_16_filled
+                : FluentIcons.book_24_regular,
+          ),
+          label: l10n.quran,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 1
+                ? FluentIcons.clock_24_filled
+                : FluentIcons.clock_24_regular,
+          ),
+          label: l10n.prayer,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 2
+                ? FluentIcons.compass_northwest_24_filled
+                : FluentIcons.compass_northwest_24_regular,
+          ),
+          label: l10n.qibla,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            tabIndex == 3
+                ? Icons.audiotrack_rounded
+                : Icons.audiotrack_outlined,
+          ),
+          label: l10n.audio,
+        ),
+      ];
+    }
+
+    // Devices without compass sensor (show Profile + Settings tab)
+    return [
+      BottomNavigationBarItem(
+        icon: Icon(
+          tabIndex == 0
+              ? FluentIcons.book_16_filled
+              : FluentIcons.book_24_regular,
+        ),
+        label: l10n.quran,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          tabIndex == 1
+              ? FluentIcons.clock_24_filled
+              : FluentIcons.clock_24_regular,
+        ),
+        label: l10n.prayer,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          tabIndex == 2
+              ? Icons.audiotrack_rounded
+              : Icons.audiotrack_outlined,
+        ),
+        label: l10n.audio,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          tabIndex == 3
+              ? FluentIcons.person_accounts_24_filled
+              : FluentIcons.person_accounts_24_regular,
+        ),
+        label: l10n.settings,
+      ),
+    ];
   }
 
   void _handleWidgetUri(Uri uri) {
@@ -424,26 +482,29 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
-                      // Settings shortcut
-                      IconButton(
-                        tooltip: l10n.settings,
-                        icon: Icon(
-                          FluentIcons.settings_24_regular,
-                          size: 20,
-                          color: isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade700,
+                      // Settings shortcut (only when Settings is not in main rail destinations)
+                      if (_hasCompassSensor &&
+                          (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                              platformOwn == platform_services.PlatformOwn.isIos))
+                        IconButton(
+                          tooltip: l10n.settings,
+                          icon: Icon(
+                            FluentIcons.settings_24_regular,
+                            size: 20,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade700,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SettingsPage(),
+                              ),
+                            );
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const SettingsPage(),
-                            ),
-                          );
-                        },
-                      ),
                     ],
                   );
                 },
@@ -465,86 +526,83 @@ class _HomePageState extends State<HomePage> {
   }) {
     List<_RailDestinationItem> items = [];
 
-    switch (platformOwn) {
-      case platform_services.PlatformOwn.isAndroid:
-      case platform_services.PlatformOwn.isIos:
-        items = [
-          _RailDestinationItem(
-            index: 0,
-            title: l10n.quran,
-            activeIcon: FluentIcons.book_24_filled,
-            inactiveIcon: FluentIcons.book_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 1,
-            title: l10n.prayer,
-            activeIcon: FluentIcons.clock_24_filled,
-            inactiveIcon: FluentIcons.clock_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 2,
-            title: l10n.qibla,
-            activeIcon: FluentIcons.compass_northwest_24_filled,
-            inactiveIcon: FluentIcons.compass_northwest_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 3,
-            title: l10n.audio,
-            activeIcon: Icons.audiotrack_rounded,
-            inactiveIcon: Icons.audiotrack_outlined,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWindows:
-      case platform_services.PlatformOwn.isMac:
-      case platform_services.PlatformOwn.isLinux:
-        items = [
-          _RailDestinationItem(
-            index: 0,
-            title: l10n.quran,
-            activeIcon: FluentIcons.book_24_filled,
-            inactiveIcon: FluentIcons.book_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 1,
-            title: l10n.prayer,
-            activeIcon: FluentIcons.clock_24_filled,
-            inactiveIcon: FluentIcons.clock_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 2,
-            title: l10n.audio,
-            activeIcon: Icons.audiotrack_rounded,
-            inactiveIcon: Icons.audiotrack_outlined,
-          ),
-          _RailDestinationItem(
-            index: 3,
-            title: l10n.settings,
-            activeIcon: Icons.settings,
-            inactiveIcon: Icons.settings_outlined,
-          ),
-        ];
-      case platform_services.PlatformOwn.isWeb:
-      default:
-        items = [
-          _RailDestinationItem(
-            index: 0,
-            title: l10n.quran,
-            activeIcon: FluentIcons.book_24_filled,
-            inactiveIcon: FluentIcons.book_24_regular,
-          ),
-          _RailDestinationItem(
-            index: 1,
-            title: l10n.audio,
-            activeIcon: Icons.audiotrack_rounded,
-            inactiveIcon: Icons.audiotrack_outlined,
-          ),
-          _RailDestinationItem(
-            index: 2,
-            title: l10n.settings,
-            activeIcon: Icons.settings,
-            inactiveIcon: Icons.settings_outlined,
-          ),
-        ];
+    if (platformOwn == platform_services.PlatformOwn.isWeb) {
+      items = [
+        _RailDestinationItem(
+          index: 0,
+          title: l10n.quran,
+          activeIcon: FluentIcons.book_24_filled,
+          inactiveIcon: FluentIcons.book_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 1,
+          title: l10n.audio,
+          activeIcon: Icons.audiotrack_rounded,
+          inactiveIcon: Icons.audiotrack_outlined,
+        ),
+        _RailDestinationItem(
+          index: 2,
+          title: l10n.settings,
+          activeIcon: FluentIcons.person_accounts_24_filled,
+          inactiveIcon: FluentIcons.person_accounts_24_regular,
+        ),
+      ];
+    } else if (_hasCompassSensor &&
+        (platformOwn == platform_services.PlatformOwn.isAndroid ||
+            platformOwn == platform_services.PlatformOwn.isIos)) {
+      items = [
+        _RailDestinationItem(
+          index: 0,
+          title: l10n.quran,
+          activeIcon: FluentIcons.book_24_filled,
+          inactiveIcon: FluentIcons.book_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 1,
+          title: l10n.prayer,
+          activeIcon: FluentIcons.clock_24_filled,
+          inactiveIcon: FluentIcons.clock_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 2,
+          title: l10n.qibla,
+          activeIcon: FluentIcons.compass_northwest_24_filled,
+          inactiveIcon: FluentIcons.compass_northwest_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 3,
+          title: l10n.audio,
+          activeIcon: Icons.audiotrack_rounded,
+          inactiveIcon: Icons.audiotrack_outlined,
+        ),
+      ];
+    } else {
+      items = [
+        _RailDestinationItem(
+          index: 0,
+          title: l10n.quran,
+          activeIcon: FluentIcons.book_24_filled,
+          inactiveIcon: FluentIcons.book_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 1,
+          title: l10n.prayer,
+          activeIcon: FluentIcons.clock_24_filled,
+          inactiveIcon: FluentIcons.clock_24_regular,
+        ),
+        _RailDestinationItem(
+          index: 2,
+          title: l10n.audio,
+          activeIcon: Icons.audiotrack_rounded,
+          inactiveIcon: Icons.audiotrack_outlined,
+        ),
+        _RailDestinationItem(
+          index: 3,
+          title: l10n.settings,
+          activeIcon: FluentIcons.person_accounts_24_filled,
+          inactiveIcon: FluentIcons.person_accounts_24_regular,
+        ),
+      ];
     }
 
     return items.map((item) {
@@ -556,7 +614,9 @@ class _HomePageState extends State<HomePage> {
           child: InkWell(
             onTap: () {
               context.read<OthersSettingsCubit>().setTabIndex(item.index);
-              pageController.jumpToPage(item.index);
+              if (pageController.hasClients) {
+                pageController.jumpToPage(item.index);
+              }
             },
             borderRadius: BorderRadius.circular(14),
             child: AnimatedContainer(
@@ -629,6 +689,10 @@ class _HomePageState extends State<HomePage> {
         return previous.tabIndex != current.tabIndex;
       },
       builder: (context, state) {
+        final items = getBottomNavItems(state.tabIndex, l10n);
+        final safeIndex = state.tabIndex >= items.length
+            ? items.length - 1
+            : (state.tabIndex < 0 ? 0 : state.tabIndex);
         return Container(
           decoration: BoxDecoration(
             color: navBg,
@@ -637,10 +701,12 @@ class _HomePageState extends State<HomePage> {
           child: BottomNavigationBar(
             backgroundColor: navBg,
             elevation: 0,
-            currentIndex: state.tabIndex,
+            currentIndex: safeIndex,
             onTap: (index) {
               context.read<OthersSettingsCubit>().setTabIndex(index);
-              pageController.jumpToPage(index);
+              if (pageController.hasClients) {
+                pageController.jumpToPage(index);
+              }
             },
             type: BottomNavigationBarType.fixed,
             selectedItemColor: themeState.primary,
@@ -654,7 +720,7 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.w500,
               fontSize: 12,
             ),
-            items: getBottomNavItems(state.tabIndex, l10n),
+            items: items,
           ),
         );
       },

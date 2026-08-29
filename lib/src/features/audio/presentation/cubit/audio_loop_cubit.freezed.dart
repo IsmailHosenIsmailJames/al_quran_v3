@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'audio_loop_cubit.dart';
@@ -9,13 +9,13 @@ part of 'audio_loop_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AudioLoopState {
 
- LoopMode get loopMode; bool get isRangeActive; int get startSurah; int get startAyah; int get endSurah; int get endAyah; int get repeatTargetCount;// -1 for infinite (infinity), or 1..N
- int get currentRangeCycle; int get repeatEachAyah; int get currentAyahRepeat;
+ LoopMode get loopMode; bool get isRangeActive; int get startSurah; int get startAyah; int get endSurah; int get endAyah; int get repeatTargetCount; int get currentRangeCycle; int get repeatEachAyah; int get currentAyahRepeat;
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -64,7 +64,7 @@ class _$AudioLoopStateCopyWithImpl<$Res>
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? loopMode = null,Object? isRangeActive = null,Object? startSurah = null,Object? startAyah = null,Object? endSurah = null,Object? endAyah = null,Object? repeatTargetCount = null,Object? currentRangeCycle = null,Object? repeatEachAyah = null,Object? currentAyahRepeat = null,}) {
-  return _then(_self.copyWith(
+  return _then(AudioLoopState(
 loopMode: null == loopMode ? _self.loopMode : loopMode // ignore: cast_nullable_to_non_nullable
 as LoopMode,isRangeActive: null == isRangeActive ? _self.isRangeActive : isRangeActive // ignore: cast_nullable_to_non_nullable
 as bool,startSurah: null == startSurah ? _self.startSurah : startSurah // ignore: cast_nullable_to_non_nullable
@@ -226,7 +226,6 @@ class _AudioLoopState extends AudioLoopState {
 @override@JsonKey() final  int endSurah;
 @override@JsonKey() final  int endAyah;
 @override@JsonKey() final  int repeatTargetCount;
-// -1 for infinite (infinity), or 1..N
 @override@JsonKey() final  int currentRangeCycle;
 @override@JsonKey() final  int repeatEachAyah;
 @override@JsonKey() final  int currentAyahRepeat;
