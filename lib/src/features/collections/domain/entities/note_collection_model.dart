@@ -14,6 +14,8 @@ abstract class NoteCollectionModel with _$NoteCollectionModel {
     required List<NoteModel> notes,
     required DateTime createdAt,
     required DateTime updatedAt,
+    @Default(false) bool isDeleted,
+    DateTime? deletedAt,
   }) = _NoteCollectionModel;
 
   factory NoteCollectionModel.fromJson(Map<String, dynamic> json) =>

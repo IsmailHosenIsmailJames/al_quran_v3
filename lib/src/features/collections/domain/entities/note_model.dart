@@ -12,6 +12,8 @@ abstract class NoteModel with _$NoteModel {
     required String text,
     required DateTime createdAt,
     required DateTime updatedAt,
+    @Default(false) bool isDeleted,
+    DateTime? deletedAt,
   }) = _NoteModel;
 
   factory NoteModel.fromJson(Map<String, dynamic> json) =>

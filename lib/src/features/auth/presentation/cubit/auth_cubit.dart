@@ -128,6 +128,8 @@ class AuthCubit extends Cubit<AuthState> {
       return "Password is too weak (min 6 characters).";
     } else if (str.contains("invalid-email")) {
       return "Please enter a valid email address.";
+    } else if (str.contains("requires-recent-login")) {
+      return "For security, please sign out and sign in again before deleting your account.";
     } else if (str.contains("network-request-failed")) {
       return "Network error. Please check your internet connection.";
     }

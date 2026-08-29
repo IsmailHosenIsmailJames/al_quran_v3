@@ -26,4 +26,8 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
 
     emit(QuranHistoryState(history: getHistoryUseCase()));
   }
+
+  void reload() {
+    emit(QuranHistoryState(history: getHistoryUseCase()));
+  }
 }

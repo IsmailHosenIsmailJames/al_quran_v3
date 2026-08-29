@@ -125,4 +125,15 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
       "user",
     ).put("quick_access", copyState.map((e) => e.toJson()).toList());
   }
+
+  void reload() {
+    final raw = Hive.box("user").get("quick_access", defaultValue: null);
+    if (raw != null && raw is List) {
+      final items = raw
+          .map((e) => QuickAccessModel.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+      items.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      emit(items);
+    }
+  }
 }

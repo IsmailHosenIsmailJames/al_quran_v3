@@ -11,6 +11,8 @@ abstract class PinnedModel with _$PinnedModel {
     required String ayahKey,
     required DateTime createdAt,
     required DateTime updatedAt,
+    @Default(false) bool isDeleted,
+    DateTime? deletedAt,
   }) = _PinnedModel;
 
   factory PinnedModel.fromJson(Map<String, dynamic> json) =>

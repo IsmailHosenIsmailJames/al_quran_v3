@@ -98,6 +98,10 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
                 deepConvertMap(e as Map),
               ),
             )
+            .where((collection) => !collection.isDeleted)
+            .map((collection) => collection.copyWith(
+                  pinned: collection.pinned.where((p) => !p.isDeleted).toList(),
+                ))
             .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
@@ -154,6 +158,10 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
               (e) =>
                   NoteCollectionModel.fromJson(deepConvertMap(e as Map)),
             )
+            .where((collection) => !collection.isDeleted)
+            .map((collection) => collection.copyWith(
+                  notes: collection.notes.where((n) => !n.isDeleted).toList(),
+                ))
             .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
@@ -256,30 +264,56 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
   @override
   Future<void> deleteNoteCollectionByID(String id) async {
     final noteCollectionModel = Hive.box(CollectionType.notes.name);
-    await noteCollectionModel.delete(id);
+    final raw = noteCollectionModel.get(id);
+    if (raw != null && raw is Map) {
+      final now = DateTime.now();
+      final model = NoteCollectionModel.fromJson(deepConvertMap(raw));
+      final updated = model.copyWith(
+        isDeleted: true,
+        deletedAt: now,
+        updatedAt: now,
+      );
+      await noteCollectionModel.put(id, updated.toJson());
+    } else {
+      await noteCollectionModel.delete(id);
+    }
   }
 
   @override
   Future<void> deletePinnedCollectionByID(String id) async {
-    final noteCollectionModel = Hive.box(CollectionType.pinned.name);
-    await noteCollectionModel.delete(id);
+    final pinnedCollectionModel = Hive.box(CollectionType.pinned.name);
+    final raw = pinnedCollectionModel.get(id);
+    if (raw != null && raw is Map) {
+      final now = DateTime.now();
+      final model = PinnedCollectionModel.fromJson(deepConvertMap(raw));
+      final updated = model.copyWith(
+        isDeleted: true,
+        deletedAt: now,
+        updatedAt: now,
+      );
+      await pinnedCollectionModel.put(id, updated.toJson());
+    } else {
+      await pinnedCollectionModel.delete(id);
+    }
   }
 
   @override
   Future<void> saveNoteCollectionModelAsMap(
     NoteCollectionModel noteCollection,
   ) async {
-    Hive.box(
+    final updatedCollection = noteCollection.copyWith(updatedAt: DateTime.now());
+    await Hive.box(
       CollectionType.notes.name,
-    ).put(noteCollection.id, noteCollection.toJson());
+    ).put(updatedCollection.id, updatedCollection.toJson());
   }
 
   @override
   Future<void> savePinnedCollectionModelAsMap(
     PinnedCollectionModel pinnedCollection,
   ) async {
-    Hive.box(
+    final updatedCollection = pinnedCollection.copyWith(updatedAt: DateTime.now());
+    await Hive.box(
       CollectionType.pinned.name,
-    ).put(pinnedCollection.id, pinnedCollection.toJson());
+    ).put(updatedCollection.id, updatedCollection.toJson());
   }
 }

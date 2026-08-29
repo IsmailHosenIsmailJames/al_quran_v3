@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'pinned_collection_model.dart';
@@ -9,13 +9,14 @@ part of 'pinned_collection_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$PinnedCollectionModel {
 
- String get id; String get name; String get colorHex; List<PinnedModel> get pinned; DateTime get createdAt; DateTime get updatedAt;
+ String get id; String get name; String get colorHex; List<PinnedModel> get pinned; DateTime get createdAt; DateTime get updatedAt; bool get isDeleted; DateTime? get deletedAt;
 /// Create a copy of PinnedCollectionModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +29,16 @@ $PinnedCollectionModelCopyWith<PinnedCollectionModel> get copyWith => _$PinnedCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.pinned, pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.pinned, pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(pinned),createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(pinned),createdAt,updatedAt,isDeleted,deletedAt);
 
 @override
 String toString() {
-  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
 }
 
 
@@ -48,7 +49,7 @@ abstract mixin class $PinnedCollectionModelCopyWith<$Res>  {
   factory $PinnedCollectionModelCopyWith(PinnedCollectionModel value, $Res Function(PinnedCollectionModel) _then) = _$PinnedCollectionModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String colorHex, List<PinnedModel> pinned, DateTime createdAt, DateTime updatedAt
+ String id, String name, String colorHex, List<PinnedModel> pinned, DateTime createdAt, DateTime updatedAt, bool isDeleted, DateTime? deletedAt
 });
 
 
@@ -65,15 +66,17 @@ class _$PinnedCollectionModelCopyWithImpl<$Res>
 
 /// Create a copy of PinnedCollectionModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? colorHex = null,Object? pinned = null,Object? createdAt = null,Object? updatedAt = null,}) {
-  return _then(_self.copyWith(
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? colorHex = null,Object? pinned = null,Object? createdAt = null,Object? updatedAt = null,Object? isDeleted = null,Object? deletedAt = freezed,}) {
+  return _then(PinnedCollectionModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,colorHex: null == colorHex ? _self.colorHex : colorHex // ignore: cast_nullable_to_non_nullable
 as String,pinned: null == pinned ? _self.pinned : pinned // ignore: cast_nullable_to_non_nullable
 as List<PinnedModel>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
+as bool,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -158,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt,  bool isDeleted,  DateTime? deletedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PinnedCollectionModel() when $default != null:
-return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.deletedAt);case _:
   return orElse();
 
 }
@@ -179,10 +182,10 @@ return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt,  bool isDeleted,  DateTime? deletedAt)  $default,) {final _that = this;
 switch (_that) {
 case _PinnedCollectionModel():
-return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.deletedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +202,10 @@ return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String colorHex,  List<PinnedModel> pinned,  DateTime createdAt,  DateTime updatedAt,  bool isDeleted,  DateTime? deletedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _PinnedCollectionModel() when $default != null:
-return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,_that.updatedAt,_that.isDeleted,_that.deletedAt);case _:
   return null;
 
 }
@@ -214,7 +217,7 @@ return $default(_that.id,_that.name,_that.colorHex,_that.pinned,_that.createdAt,
 
 @JsonSerializable(explicitToJson: true)
 class _PinnedCollectionModel implements PinnedCollectionModel {
-  const _PinnedCollectionModel({required this.id, required this.name, this.colorHex = "808080", required final  List<PinnedModel> pinned, required this.createdAt, required this.updatedAt}): _pinned = pinned;
+  const _PinnedCollectionModel({required this.id, required this.name, this.colorHex = "808080", required  List<PinnedModel> pinned, required this.createdAt, required this.updatedAt, this.isDeleted = false, this.deletedAt}): _pinned = pinned;
   factory _PinnedCollectionModel.fromJson(Map<String, dynamic> json) => _$PinnedCollectionModelFromJson(json);
 
 @override final  String id;
@@ -229,6 +232,8 @@ class _PinnedCollectionModel implements PinnedCollectionModel {
 
 @override final  DateTime createdAt;
 @override final  DateTime updatedAt;
+@override@JsonKey() final  bool isDeleted;
+@override final  DateTime? deletedAt;
 
 /// Create a copy of PinnedCollectionModel
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +248,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._pinned, _pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._pinned, _pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(_pinned),createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(_pinned),createdAt,updatedAt,isDeleted,deletedAt);
 
 @override
 String toString() {
-  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
 }
 
 
@@ -263,7 +268,7 @@ abstract mixin class _$PinnedCollectionModelCopyWith<$Res> implements $PinnedCol
   factory _$PinnedCollectionModelCopyWith(_PinnedCollectionModel value, $Res Function(_PinnedCollectionModel) _then) = __$PinnedCollectionModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String colorHex, List<PinnedModel> pinned, DateTime createdAt, DateTime updatedAt
+ String id, String name, String colorHex, List<PinnedModel> pinned, DateTime createdAt, DateTime updatedAt, bool isDeleted, DateTime? deletedAt
 });
 
 
@@ -280,7 +285,7 @@ class __$PinnedCollectionModelCopyWithImpl<$Res>
 
 /// Create a copy of PinnedCollectionModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? colorHex = null,Object? pinned = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? colorHex = null,Object? pinned = null,Object? createdAt = null,Object? updatedAt = null,Object? isDeleted = null,Object? deletedAt = freezed,}) {
   return _then(_PinnedCollectionModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -288,7 +293,9 @@ as String,colorHex: null == colorHex ? _self.colorHex : colorHex // ignore: cast
 as String,pinned: null == pinned ? _self._pinned : pinned // ignore: cast_nullable_to_non_nullable
 as List<PinnedModel>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,isDeleted: null == isDeleted ? _self.isDeleted : isDeleted // ignore: cast_nullable_to_non_nullable
+as bool,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

@@ -157,6 +157,58 @@ class ProfileAccountScreen extends StatelessWidget {
                   ),
                 ),
 
+                if (user.isAnonymous) ...[
+                  const Gap(16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: isDark ? const Color(0xFF2A2415) : const Color(0xFFFFFBEB),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.amber.shade400.withValues(alpha: 0.5)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(FluentIcons.cloud_sync_24_filled, color: Colors.amber.shade700, size: 22),
+                            const Gap(8),
+                            const Text(
+                              "Upgrade Guest Account",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        const Gap(6),
+                        Text(
+                          "Link your Google or Email account to enable continuous cloud sync across all your devices.",
+                          style: TextStyle(fontSize: 12, color: isDark ? Colors.grey.shade300 : Colors.grey.shade700),
+                        ),
+                        const Gap(12),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.amber.shade700,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const AuthScreen()),
+                              );
+                            },
+                            icon: const Icon(FluentIcons.arrow_up_right_24_filled, size: 16),
+                            label: const Text("Link Account to Sync Cloud", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+
                 const Gap(20),
 
                 // Cloud Sync Card

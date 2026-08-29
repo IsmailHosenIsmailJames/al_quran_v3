@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:developer";
 
 import "package:al_quran_v3/firebase_options.dart";
@@ -5,7 +6,9 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
+import "package:al_quran_v3/src/features/sync/data/services/cloud_sync_service.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
@@ -230,7 +233,7 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   return baseTextTheme;
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final MyAppLocalization initialLocale;
   final LocationQiblaPrayerDataState locationQiblaPrayerDataState;
 
@@ -239,6 +242,41 @@ class MyApp extends StatelessWidget {
     required this.initialLocale,
     required this.locationQiblaPrayerDataState,
   });
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  StreamSubscription? _syncSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    // Auto-sync on startup if already authenticated
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        getIt<SyncCubit>().sync(user.uid);
+      }
+    } catch (_) {}
+
+    // Listen to sync completion events to dynamically reload active UI cubits
+    try {
+      _syncSubscription = getIt<CloudSyncService>().onSyncCompleted.listen((_) {
+        try {
+          getIt<QuranHistoryCubit>().reload();
+          getIt<QuickAccessCubit>().reload();
+        } catch (_) {}
+      });
+    } catch (_) {}
+  }
+
+  @override
+  void dispose() {
+    _syncSubscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +300,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AyahByAyahInScrollInfoCubit>()),
         BlocProvider(
           create: (context) => getIt<LocationQiblaPrayerDataCubit>(
-            param1: locationQiblaPrayerDataState,
+            param1: widget.locationQiblaPrayerDataState,
           ),
         ),
         BlocProvider(create: (context) => getIt<SegmentedQuranReciterCubit>()),
@@ -273,7 +311,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),
         BlocProvider(
-          create: (context) => getIt<LanguageCubit>(param1: initialLocale),
+          create: (context) => getIt<LanguageCubit>(param1: widget.initialLocale),
         ),
         BlocProvider(create: (context) => getIt<LandscapeScrollEffect>()),
         BlocProvider(create: (context) => getIt<QuickAccessCubit>()),

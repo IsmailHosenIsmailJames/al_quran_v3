@@ -17,7 +17,8 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  final bool showAppBar;
+  const SettingsPage({super.key, this.showAppBar = true});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -31,16 +32,19 @@ class _SettingsPageState extends State<SettingsPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          appLocalizations.settings,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: [themeIconButton(context)],
-      ),
+      appBar: widget.showAppBar
+          ? AppBar(
+              title: Text(
+                appLocalizations.settings,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              actions: [themeIconButton(context)],
+            )
+          : null,
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: SafeArea(
+          top: widget.showAppBar,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

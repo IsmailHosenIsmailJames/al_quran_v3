@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'resource_group_entity.dart';
@@ -9,6 +9,7 @@ part of 'resource_group_entity.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$ResourceGroupEntityCopyWithImpl<$Res>
 /// Create a copy of ResourceGroupEntity
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? languageKey = null,Object? languageNative = null,Object? languageEnglish = null,Object? resources = null,}) {
-  return _then(_self.copyWith(
+  return _then(ResourceGroupEntity(
 languageKey: null == languageKey ? _self.languageKey : languageKey // ignore: cast_nullable_to_non_nullable
 as String,languageNative: null == languageNative ? _self.languageNative : languageNative // ignore: cast_nullable_to_non_nullable
 as String,languageEnglish: null == languageEnglish ? _self.languageEnglish : languageEnglish // ignore: cast_nullable_to_non_nullable
@@ -209,7 +210,7 @@ return $default(_that.languageKey,_that.languageNative,_that.languageEnglish,_th
 
 
 class _ResourceGroupEntity implements ResourceGroupEntity {
-  const _ResourceGroupEntity({required this.languageKey, required this.languageNative, required this.languageEnglish, required final  List<QuranResourceEntity> resources}): _resources = resources;
+  const _ResourceGroupEntity({required this.languageKey, required this.languageNative, required this.languageEnglish, required  List<QuranResourceEntity> resources}): _resources = resources;
   
 
 @override final  String languageKey;

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'juz_info_model.dart';
@@ -9,6 +9,7 @@ part of 'juz_info_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$JuzInfoModelCopyWithImpl<$Res>
 /// Create a copy of JuzInfoModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? juzNumber = null,Object? versesCount = null,Object? firstVerseKey = null,Object? lastVerseKey = null,Object? verseMapping = null,}) {
-  return _then(_self.copyWith(
+  return _then(JuzInfoModel(
 juzNumber: null == juzNumber ? _self.juzNumber : juzNumber // ignore: cast_nullable_to_non_nullable
 as int,versesCount: null == versesCount ? _self.versesCount : versesCount // ignore: cast_nullable_to_non_nullable
 as int,firstVerseKey: null == firstVerseKey ? _self.firstVerseKey : firstVerseKey // ignore: cast_nullable_to_non_nullable
@@ -213,7 +214,7 @@ return $default(_that.juzNumber,_that.versesCount,_that.firstVerseKey,_that.last
 
 @JsonSerializable(explicitToJson: true)
 class _JuzInfoModel extends JuzInfoModel {
-  const _JuzInfoModel({@JsonKey(name: 'jn') required this.juzNumber, @JsonKey(name: 'vc') required this.versesCount, @JsonKey(name: 'fvk') required this.firstVerseKey, @JsonKey(name: 'lvk') required this.lastVerseKey, @JsonKey(name: 'vm') required final  Map<String, String> verseMapping}): _verseMapping = verseMapping,super._();
+  const _JuzInfoModel({@JsonKey(name: 'jn') required this.juzNumber, @JsonKey(name: 'vc') required this.versesCount, @JsonKey(name: 'fvk') required this.firstVerseKey, @JsonKey(name: 'lvk') required this.lastVerseKey, @JsonKey(name: 'vm') required  Map<String, String> verseMapping}): _verseMapping = verseMapping,super._();
   factory _JuzInfoModel.fromJson(Map<String, dynamic> json) => _$JuzInfoModelFromJson(json);
 
 @override@JsonKey(name: 'jn') final  int juzNumber;

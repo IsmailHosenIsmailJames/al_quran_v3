@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'quran_view_state.dart';
@@ -9,6 +9,7 @@ part of 'quran_view_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$QuranViewStateCopyWithImpl<$Res>
 /// Create a copy of QuranViewState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? ayahKey = null,Object? fontSize = null,Object? lineHeight = null,Object? quranScriptType = null,Object? translationFontSize = null,Object? useTajweedOnUthmani = null,Object? useTajweedOnIndopak = null,Object? uthmaniFontName = null,Object? indopakFontName = null,Object? circleJojom = null,Object? hideFootnote = null,Object? hideWordByWord = null,Object? hideTranslation = null,Object? hideToolbar = null,Object? hideQuranAyah = null,Object? alwaysOpenWordByWord = null,Object? enableWordByWordHighlight = null,Object? scrollWithRecitation = null,Object? useAudioStream = null,Object? playbackSpeed = null,}) {
-  return _then(_self.copyWith(
+  return _then(QuranViewState(
 ayahKey: null == ayahKey ? _self.ayahKey : ayahKey // ignore: cast_nullable_to_non_nullable
 as String,fontSize: null == fontSize ? _self.fontSize : fontSize // ignore: cast_nullable_to_non_nullable
 as double,lineHeight: null == lineHeight ? _self.lineHeight : lineHeight // ignore: cast_nullable_to_non_nullable
