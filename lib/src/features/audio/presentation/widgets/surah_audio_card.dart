@@ -18,11 +18,7 @@ class SurahAudioCard extends StatelessWidget {
   final SurahInfoModel surah;
   final EdgeInsetsGeometry? margin;
 
-  const SurahAudioCard({
-    super.key,
-    required this.surah,
-    this.margin,
-  });
+  const SurahAudioCard({super.key, required this.surah, this.margin});
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +37,22 @@ class SurahAudioCard extends StatelessWidget {
             final isPlaying = isCurrentlyPlayingSurah && playerState.isPlaying;
 
             return Container(
-              margin: margin ??
+              margin:
+                  margin ??
                   const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
               decoration: BoxDecoration(
                 color: isCurrentlyPlayingSurah
-                    ? themeState.primary.withValues(
-                        alpha: isDark ? 0.12 : 0.08,
-                      )
+                    ? themeState.primary.withValues(alpha: isDark ? 0.12 : 0.08)
                     : (isDark
-                        ? Colors.white.withValues(alpha: 0.03)
-                        : Colors.white),
+                          ? Colors.white.withValues(alpha: 0.03)
+                          : Colors.white),
                 borderRadius: BorderRadius.circular(roundedRadius + 2),
                 border: Border.all(
                   color: isCurrentlyPlayingSurah
                       ? themeState.primary.withValues(alpha: 0.4)
                       : (isDark
-                          ? Colors.white.withValues(alpha: 0.06)
-                          : Colors.grey.shade200),
+                            ? Colors.white.withValues(alpha: 0.06)
+                            : Colors.grey.shade200),
                   width: isCurrentlyPlayingSurah ? 1.5 : 1.0,
                 ),
                 boxShadow: isDark
@@ -93,8 +88,10 @@ class SurahAudioCard extends StatelessWidget {
                             color: isCurrentlyPlayingSurah
                                 ? themeState.primary
                                 : (isDark
-                                    ? Colors.white.withValues(alpha: 0.06)
-                                    : themeState.primary.withValues(alpha: 0.1)),
+                                      ? Colors.white.withValues(alpha: 0.06)
+                                      : themeState.primary.withValues(
+                                          alpha: 0.1,
+                                        )),
                           ),
                           child: Center(
                             child: isPlaying
@@ -131,11 +128,11 @@ class SurahAudioCard extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       style: theme.textTheme.titleSmall
                                           ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: isCurrentlyPlayingSurah
-                                            ? themeState.primary
-                                            : null,
-                                      ),
+                                            fontWeight: FontWeight.w600,
+                                            color: isCurrentlyPlayingSurah
+                                                ? themeState.primary
+                                                : null,
+                                          ),
                                     ),
                                   ),
                                   const Gap(6),
@@ -146,8 +143,7 @@ class SurahAudioCard extends StatelessWidget {
                                     ),
                                     decoration: BoxDecoration(
                                       color: isDark
-                                          ? Colors.white
-                                              .withValues(alpha: 0.06)
+                                          ? Colors.white.withValues(alpha: 0.06)
                                           : Colors.grey.shade100,
                                       borderRadius: BorderRadius.circular(6),
                                     ),
@@ -183,7 +179,7 @@ class SurahAudioCard extends StatelessWidget {
 
                         // Arabic Calligraphy
                         Text(
-                          getSurahNameArabic(surah.id),
+                          "surah${surah.id.toString().padLeft(3, '0')}",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             fontFamily: "surah-name-v1",
@@ -191,8 +187,8 @@ class SurahAudioCard extends StatelessWidget {
                             color: isCurrentlyPlayingSurah
                                 ? themeState.primary
                                 : (isDark
-                                    ? Colors.white.withValues(alpha: 0.9)
-                                    : Colors.grey.shade800),
+                                      ? Colors.white.withValues(alpha: 0.9)
+                                      : Colors.grey.shade800),
                           ),
                         ),
                         const Gap(10),
@@ -223,13 +219,12 @@ class SurahAudioCard extends StatelessWidget {
                                     final startAyahKey = "$startSurah:1";
                                     final endAyahKey =
                                         getEndAyahKeyFromSurahNumber(
-                                      int.parse(startSurah),
-                                    );
+                                          int.parse(startSurah),
+                                        );
                                     final toStartIndex =
                                         int.parse(ayahKey.split(":")[1]) - 1;
 
-                                    AudioPlayerManager
-                                        .playMultipleAyahAsPlaylist(
+                                    AudioPlayerManager.playMultipleAyahAsPlaylist(
                                       startAyahKey: startAyahKey,
                                       endAyahKey: endAyahKey,
                                       isInsideQuran: false,
