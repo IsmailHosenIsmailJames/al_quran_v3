@@ -23,7 +23,7 @@
         android:fullBackupContent="false"
         tools:replace="android:allowBackup,android:fullBackupContent">
         <activity
-            android:name="com.ismail_hosen_james.al_quran_v3.MainActivity"
+            android:name="com.ismail_hosen.quran_audio.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:enableOnBackInvokedCallback="true"
             android:exported="true"
