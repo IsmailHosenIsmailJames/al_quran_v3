@@ -162,21 +162,21 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/img/Quran_Logo_v3.png"
+  image_path: "assets/img/logo.png"
   min_sdk_android: 21
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/img/Quran_Logo_v3.png"
+  adaptive_icon_foreground: "assets/img/logo.png"
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/img/Quran_Logo_v3_splah_big.png
-  branding: assets/img/Quran_Logo_v3_splah_big.png
+  image: assets/img/logo.png
+  branding: assets/img/logo.png
   color_dark: "#121212"
-  image_dark: assets/img/Quran_Logo_v3_splah_big.png
-  branding_dark: assets/img/Quran_Logo_v3_splah_big.png
+  image_dark: assets/img/logo.png
+  branding_dark: assets/img/logo.png
 
   android_12:
-    image: assets/img/Quran_Logo_v3_splah_big.png
+    image: assets/img/logo.png
     icon_background_color: "#ffffff"
-    image_dark: assets/img/Quran_Logo_v3_splah_big.png
+    image_dark: assets/img/logo.png
     icon_background_color_dark: "#121212"
