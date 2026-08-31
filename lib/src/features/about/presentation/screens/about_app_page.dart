@@ -39,7 +39,7 @@ class AboutAppPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.asset(
-                    "assets/img/Quran_Logo_v3.png",
+                    "assets/img/logo.png",
                     height: 150,
                     width: 150,
                     fit: BoxFit.cover,
