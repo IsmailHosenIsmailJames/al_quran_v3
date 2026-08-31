@@ -1,5 +1,3 @@
-import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
-import "package:al_quran_v3/src/features/quran_script_view/presentation/utils/show_popup_word_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
@@ -119,25 +117,6 @@ TextSpan parseTajweedWord({
   final String rawWord = words[wIndex];
 
   GestureRecognizer? recognizer;
-  if (!skipWordTap) {
-    recognizer = TapGestureRecognizer()
-      ..onTap = () async {
-        final List<String> wordsKey = List.generate(
-          words.length,
-          (index) => "$surahNumber:$ayahNumber:${index + 1}",
-        );
-        showPopupWordFunction(
-          context: context,
-          wordKeys: wordsKey,
-          initWordIndex: wIndex,
-          wordByWordList:
-              await WordByWordFunction.getAyahWordByWordData(
-                "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-              ) ??
-              [],
-        );
-      };
-  }
 
   if (!tajweedColorEnable) {
     return TextSpan(

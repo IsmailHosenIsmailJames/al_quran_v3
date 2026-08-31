@@ -2,8 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- just audio background -->
@@ -13,15 +11,13 @@
     
     <!-- notifications -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <!-- notifications -->
     
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="Quran's Tafsir, Audio and Prayer"
+        android:label="Al Quran Audio"
         android:usesCleartextTraffic="true"
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -50,85 +46,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <!-- Home & Lock Screen Widget Deep Link Filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="al-quran"
-                    android:host="prayer" />
-                <data
-                    android:scheme="al-quran"
-                    android:host="ayah" />
-            </intent-filter>
         </activity>
-
-        <!-- Prayer Times Small Widget Receiver (2x2) -->
-        <receiver
-            android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetSmallProvider"
-            android:label="@string/widget_prayer_small_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/prayer_widget_small_info" />
-        </receiver>
-
-        <!-- Prayer Times Medium Widget Receiver (4x2 / 5 Prayers) -->
-        <receiver
-            android:name="com.ismail_hosen_james.al_quran_v3.PrayerWidgetMediumProvider"
-            android:label="@string/widget_prayer_medium_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/prayer_widget_medium_info" />
-        </receiver>
-
-        <!-- Quran Ayah Small Widget Receiver (2x2) -->
-        <receiver
-            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetSmallProvider"
-            android:label="@string/widget_ayah_small_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/ayah_widget_small_info" />
-        </receiver>
-
-        <!-- Quran Ayah Medium Widget Receiver (4x2) -->
-        <receiver
-            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetMediumProvider"
-            android:label="@string/widget_ayah_medium_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/ayah_widget_medium_info" />
-        </receiver>
-
-        <!-- Quran Ayah Large Widget Receiver (4x4) -->
-        <receiver
-            android:name="com.ismail_hosen_james.al_quran_v3.AyahWidgetLargeProvider"
-            android:label="@string/widget_ayah_large_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/ayah_widget_large_info" />
-        </receiver>
 
         <!-- for just audio background -->
         <!-- ADD THIS "SERVICE" element -->

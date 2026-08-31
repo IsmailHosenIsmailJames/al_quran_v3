@@ -4,15 +4,12 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/services/ayah_share_service.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
-import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/components/ayah_picker_column.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/components/jump_to_ayah_actions.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/components/jump_to_ayah_header.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/components/selected_ayahs_chips.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/components/surah_picker_column.dart";
-import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -106,39 +103,17 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
   }
 
   void _onToTafsir() {
-    Navigator.pop(context);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TafsirView(
-          ayahKey: "$surahNumber:$ayahNumber",
-        ),
-      ),
-    );
+    _onPlaySelected();
   }
 
   void _onToAyah() {
-    final targetKey = "$surahNumber:$ayahNumber";
-    Navigator.pop(context);
-    if (widget.onSelectAyah != null) {
-      widget.onSelectAyah!(targetKey);
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => QuranScriptView(
-            startKey: "$surahNumber:1",
-            endKey: getEndAyahKeyFromSurahNumber(surahNumber),
-            toScrollKey: targetKey,
-          ),
-        ),
-      );
-    }
+    _onPlaySelected();
   }
 
   void _onPlaySelected() {
     Navigator.pop(context);
     widget.onPlaySelected?.call("$surahNumber:$ayahNumber");
+    widget.onSelectAyah?.call("$surahNumber:$ayahNumber");
   }
 
   Future<void> _onShareSelected() async {
