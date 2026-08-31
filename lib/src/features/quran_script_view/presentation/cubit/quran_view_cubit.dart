@@ -104,6 +104,9 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     emit(state.copyWith(quranScriptType: quranScriptType));
   }
 
+  void changeScript(QuranScriptType quranScriptType) =>
+      changeQuranScriptType(quranScriptType);
+
   void changeTranslationFontSize(double fontSize) {
     Hive.box("user").put("preview_translation_font_size", fontSize);
     emit(state.copyWith(translationFontSize: fontSize));
@@ -114,10 +117,16 @@ class QuranViewCubit extends Cubit<QuranViewState> {
     emit(state.copyWith(useTajweedOnUthmani: useTajweed));
   }
 
+  void toggleTajweedOnUthmani() =>
+      changeUseTajweedOnUthmani(!state.useTajweedOnUthmani);
+
   void changeUseTajweedOnIndopak(bool useTajweed) {
     Hive.box("user").put("useTajweedOnIndopak", useTajweed);
     emit(state.copyWith(useTajweedOnIndopak: useTajweed));
   }
+
+  void toggleTajweedOnIndopak() =>
+      changeUseTajweedOnIndopak(!state.useTajweedOnIndopak);
 
   void changeIndopakFontName(String fontName) {
     Hive.box("user").put("selected_indopak_font_name", fontName);

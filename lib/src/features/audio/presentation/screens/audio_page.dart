@@ -1,37 +1,35 @@
-import "dart:developer";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/core/resources/quran_resources/quran_ayah_count.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
-import "package:al_quran_v3/src/core/utils/get_localized_ayah_key.dart";
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_range_selector.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/sleep_timer_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/playback_speed_bottom_sheet.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_range_selector.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_view_widget.dart";
-import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/sleep_timer_bottom_sheet.dart";
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/gen_ayahs_key.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/popup_jump_to_ayah.dart";
-import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" hide PlayerState;
 
@@ -70,11 +68,13 @@ class _AudioPageState extends State<AudioPage> {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
           buildWhen: (prev, curr) => prev.current != curr.current,
           builder: (context, ayahKeyState) {
-            final currentIndex =
-                int.parse(ayahKeyState.current.split(":")[1]) - 1;
+            final parts = ayahKeyState.current.split(":");
+            final surahNumber = int.tryParse(parts[0]) ?? 1;
+            final ayahNumber =
+                int.tryParse(parts.length > 1 ? parts[1] : "1") ?? 1;
+            final currentIndex = ayahNumber - 1;
 
             return SafeArea(
-              left: false,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
@@ -90,7 +90,7 @@ class _AudioPageState extends State<AudioPage> {
                             child: SingleChildScrollView(
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                  vertical: height >= 600 ? 24 : 0,
+                                  vertical: height >= 600 ? 16 : 0,
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -100,15 +100,15 @@ class _AudioPageState extends State<AudioPage> {
                                       ayahKeyState,
                                       currentIndex,
                                     ),
-                                    const Gap(14),
+                                    const Gap(12),
                                     _buildSurahSelectorBar(
                                       context,
                                       ayahKeyState,
                                       themeState,
                                     ),
-                                    Gap(height >= 600 ? 32 : 20),
+                                    Gap(height >= 600 ? 24 : 16),
                                     _buildProgressBar(themeState),
-                                    Gap(height >= 600 ? 20 : 12),
+                                    Gap(height >= 600 ? 16 : 10),
                                     _buildPlaybackControls(
                                       context,
                                       currentIndex,
@@ -122,7 +122,7 @@ class _AudioPageState extends State<AudioPage> {
                             ),
                           ),
                           const Gap(16),
-                          // Right Panel: Ayah & Translation Card
+                          // Right Panel: Hero Arabic Ayah Card
                           Expanded(
                             flex: 6,
                             child: Column(
@@ -132,11 +132,18 @@ class _AudioPageState extends State<AudioPage> {
                                   themeState,
                                   isDark,
                                 ),
+                                _buildSleepTimerBanner(
+                                  context,
+                                  themeState,
+                                  isDark,
+                                ),
                                 Expanded(
-                                  child: _buildAyahCard(
+                                  child: _buildHeroArabicAyahCard(
                                     context,
-                                    ayahKeyState,
+                                    surahNumber,
+                                    ayahNumber,
                                     themeState,
+                                    isDark,
                                   ),
                                 ),
                               ],
@@ -152,28 +159,32 @@ class _AudioPageState extends State<AudioPage> {
                             ayahKeyState,
                             currentIndex,
                           ),
-                          const Gap(10),
+                          const Gap(8),
                           // Surah Selector
                           _buildSurahSelectorBar(
                             context,
                             ayahKeyState,
                             themeState,
                           ),
-                          const Gap(8),
+                          const Gap(6),
                           // Range Status Banner (if active)
                           _buildRangeStatusBanner(context, themeState, isDark),
-                          // Listening Ayah Card
+                          // Sleep Timer Banner (if active)
+                          _buildSleepTimerBanner(context, themeState, isDark),
+                          // Hero Arabic Ayah Card
                           Expanded(
-                            child: _buildAyahCard(
+                            child: _buildHeroArabicAyahCard(
                               context,
-                              ayahKeyState,
+                              surahNumber,
+                              ayahNumber,
                               themeState,
+                              isDark,
                             ),
                           ),
-                          const Gap(16),
+                          const Gap(12),
                           // Audio Scrubber
                           _buildProgressBar(themeState),
-                          const Gap(8),
+                          const Gap(6),
                           // Audio Controls Cluster
                           _buildPlaybackControls(
                             context,
@@ -182,7 +193,7 @@ class _AudioPageState extends State<AudioPage> {
                             themeState,
                             l10n,
                           ),
-                          const Gap(8),
+                          const Gap(6),
                         ],
                       ),
               ),
@@ -222,6 +233,7 @@ class _AudioPageState extends State<AudioPage> {
           IconButton(
             visualDensity: VisualDensity.compact,
             iconSize: 18,
+            tooltip: "Previous Surah",
             onPressed: surahNumber > 1
                 ? () {
                     final prevSurah = surahNumber - 1;
@@ -270,7 +282,7 @@ class _AudioPageState extends State<AudioPage> {
                         instantPlay: true,
                         initialIndex: toStartIndex,
                         reciterInfoModel: context
-                            .read<SegmentedQuranReciterCubit>()
+                            .read<AudioTabReciterCubit>()
                             .state,
                       );
                     },
@@ -278,8 +290,8 @@ class _AudioPageState extends State<AudioPage> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 8,
+                    horizontal: 8,
+                    vertical: 6,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -292,7 +304,7 @@ class _AudioPageState extends State<AudioPage> {
                       const Gap(8),
                       Flexible(
                         child: Text(
-                          "${getSurahName(context, surahNumber)} • ${getAyahLocalized(context, ayahKeyState.current)}",
+                          "${getSurahName(context, surahNumber)} • Ayah ${ayahKeyState.current.split(':')[1]} of ${quranAyahCount[surahNumber - 1]}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.titleSmall?.copyWith(
@@ -313,7 +325,7 @@ class _AudioPageState extends State<AudioPage> {
             ),
           ),
 
-          // Range / Memorization Quick Action
+          // Memorization / Range Looper
           BlocBuilder<AudioLoopCubit, AudioLoopState>(
             builder: (context, loopState) {
               return IconButton(
@@ -343,6 +355,7 @@ class _AudioPageState extends State<AudioPage> {
           IconButton(
             visualDensity: VisualDensity.compact,
             iconSize: 18,
+            tooltip: "Next Surah",
             onPressed: surahNumber < 114
                 ? () {
                     final nextSurah = surahNumber + 1;
@@ -383,8 +396,8 @@ class _AudioPageState extends State<AudioPage> {
             : "Cycle ${loopState.currentRangeCycle}/${loopState.repeatTargetCount}";
 
         return Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          margin: const EdgeInsets.only(bottom: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
             color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
             borderRadius: BorderRadius.circular(roundedRadius),
@@ -435,138 +448,317 @@ class _AudioPageState extends State<AudioPage> {
     );
   }
 
-  /// Modern Ayah and Translation Card with smooth styling and typography
-  Widget _buildAyahCard(
+  /// Banner indicating active Sleep Timer
+  Widget _buildSleepTimerBanner(
     BuildContext context,
-    AyahKeyManagement ayahKeyState,
     ThemeState themeState,
+    bool isDark,
   ) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    return BlocBuilder<SleepTimerCubit, SleepTimerState>(
+      builder: (context, timerState) {
+        if (!timerState.isActive) return const SizedBox.shrink();
+
+        final statusText = timerState.isEndOfSurah
+            ? "Stop at end of Surah"
+            : "${_formatRemaining(timerState.remainingDuration)} remaining";
+
+        return Container(
+          margin: const EdgeInsets.only(bottom: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.amber.withValues(alpha: isDark ? 0.15 : 0.1),
+            borderRadius: BorderRadius.circular(roundedRadius),
+            border: Border.all(color: Colors.amber.withValues(alpha: 0.3)),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                FluentIcons.timer_20_filled,
+                color: Colors.amber,
+                size: 16,
+              ),
+              const Gap(8),
+              Expanded(
+                child: Text(
+                  "Sleep Timer: $statusText",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.amber,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                iconSize: 16,
+                tooltip: "Cancel Timer",
+                onPressed: () => context.read<SleepTimerCubit>().cancelTimer(),
+                icon: const Icon(Icons.close_rounded, color: Colors.amber),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  String _formatRemaining(Duration? duration) {
+    if (duration == null) return "0:00";
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds % 60;
+    return "$minutes:${seconds.toString().padLeft(2, '0')}";
+  }
+
+  /// Dedicated Hero Arabic Ayah Card with crystal-clear typography, Surah header, and word highlighting
+  Widget _buildHeroArabicAyahCard(
+    BuildContext context,
+    int surahNumber,
+    int ayahNumber,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    final surahMeta = metaDataSurah[surahNumber.toString()];
+    final surahModel = surahMeta != null
+        ? SurahInfoModel.fromMap(surahMeta)
+        : null;
+    final totalVerses = quranAyahCount[surahNumber - 1];
 
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(roundedRadius + 4),
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.03)
-            : Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(roundedRadius + 6),
+        color: isDark ? Colors.white.withValues(alpha: 0.03) : Colors.white,
         border: Border.all(
           color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : Colors.grey.shade300,
+              ? Colors.white.withValues(alpha: 0.08)
+              : Colors.grey.shade200,
         ),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: themeState.primary.withValues(alpha: 0.04),
+                  blurRadius: 16,
+                  offset: const Offset(0, 4),
+                ),
+              ],
       ),
-      child: FutureBuilder(
-        future: QuranTranslationFunction.getTranslation(ayahKeyState.current),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Center(
-              child: SizedBox(
-                height: 32,
-                width: 32,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  color: themeState.primary,
+      child: Column(
+        children: [
+          // Surah & Verse Header Banner
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.02)
+                  : themeState.primary.withValues(alpha: 0.05),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(roundedRadius + 6),
+              ),
+              border: Border(
+                bottom: BorderSide(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.grey.shade200,
                 ),
               ),
-            );
-          }
+            ),
+            child: Row(
+              children: [
+                // Surah Name in Arabic font
+                if (surahModel != null)
+                  Text(
+                    getSurahNameArabic(surahModel.id),
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      fontFamily: "surah-name-v1",
+                      fontSize: 22,
+                      color: themeState.primary,
+                    ),
+                  ),
+                const Gap(10),
+                // Verse Counter Tag
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: themeState.primary.withValues(
+                      alpha: isDark ? 0.2 : 0.12,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    "Verse $ayahNumber of $totalVerses",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: themeState.primary,
+                    ),
+                  ),
+                ),
+                const Spacer(),
 
-          final String translation =
-              snapshot.data?.firstOrNull?.translation?["t"]?.toString() ??
-              AppLocalizations.of(context).translationNotFound;
-          final String formattedTranslation = translation.replaceAll(">", "> ");
+                // Script Switcher & Tajweed Action Chip
+                BlocBuilder<QuranViewCubit, QuranViewState>(
+                  builder: (context, quranViewState) {
+                    final isUthmani =
+                        quranViewState.quranScriptType ==
+                        QuranScriptType.uthmani;
 
-          return Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Arabic Script
-                  BlocBuilder<QuranViewCubit, QuranViewState>(
-                    builder: (context, state) {
-                      return ScriptProcessor(
-                        scriptInfo: ScriptInfo(
-                          surahNumber: ayahKeyState.current
-                              .split(":")[0]
-                              .toInt(),
-                          ayahNumber: ayahKeyState.current
-                              .split(":")[1]
-                              .toInt(),
-                          quranScriptType: state.quranScriptType,
-                          textStyle: TextStyle(
-                            fontSize: state.fontSize,
-                            height: state.lineHeight,
+                    return PopupMenuButton<String>(
+                      tooltip: "Script & Font Settings",
+                      icon: Icon(
+                        FluentIcons.text_font_size_20_regular,
+                        size: 18,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
+                      ),
+                      onSelected: (value) {
+                        final cubit = context.read<QuranViewCubit>();
+                        if (value == "uthmani") {
+                          cubit.changeScript(QuranScriptType.uthmani);
+                        } else if (value == "indopak") {
+                          cubit.changeScript(QuranScriptType.indopak);
+                        } else if (value == "tajweed") {
+                          if (isUthmani) {
+                            cubit.toggleTajweedOnUthmani();
+                          } else {
+                            cubit.toggleTajweedOnIndopak();
+                          }
+                        } else if (value == "font_plus") {
+                          cubit.changeFontSize(quranViewState.fontSize + 2);
+                        } else if (value == "font_minus") {
+                          if (quranViewState.fontSize > 16) {
+                            cubit.changeFontSize(quranViewState.fontSize - 2);
+                          }
+                        }
+                      },
+                      itemBuilder: (context) {
+                        final isTajweed = isUthmani
+                            ? quranViewState.useTajweedOnUthmani
+                            : quranViewState.useTajweedOnIndopak;
+
+                        return [
+                          PopupMenuItem(
+                            value: "uthmani",
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isUthmani
+                                      ? Icons.radio_button_checked
+                                      : Icons.radio_button_off,
+                                  size: 18,
+                                  color: isUthmani ? themeState.primary : null,
+                                ),
+                                const Gap(10),
+                                const Text("Uthmani Script (Madani)"),
+                              ],
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                          skipWordTap: true,
-                          showWordHighlights: false,
-                        ),
-                        themeState: themeState,
-                        tajweedColorEnable:
-                            state.quranScriptType == QuranScriptType.uthmani
-                            ? state.useTajweedOnUthmani
-                            : state.useTajweedOnIndopak,
-                      );
-                    },
-                  ),
-                  const Gap(14),
-                  // Subtle Decorative Divider
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: isDark
-                              ? Colors.white.withValues(alpha: 0.08)
-                              : themeState.primary.withValues(alpha: 0.15),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Icon(
-                          FluentIcons.sparkle_16_filled,
-                          size: 12,
-                          color: themeState.primary.withValues(alpha: 0.5),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: isDark
-                              ? Colors.white.withValues(alpha: 0.08)
-                              : themeState.primary.withValues(alpha: 0.15),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Gap(12),
-                  // Translation Text
-                  BlocBuilder<QuranViewCubit, QuranViewState>(
-                    builder: (context, state) {
-                      return Html(
-                        data: formattedTranslation.capitalize(),
-                        style: {
-                          "*": Style(
-                            fontSize: FontSize(state.translationFontSize),
-                            lineHeight: const LineHeight(1.5),
-                            margin: Margins.zero,
-                            padding: HtmlPaddings.zero,
-                            alignment: Alignment.center,
-                            textAlign: TextAlign.center,
-                            color: isDark
-                                ? Colors.grey.shade300
-                                : Colors.grey.shade800,
+                          PopupMenuItem(
+                            value: "indopak",
+                            child: Row(
+                              children: [
+                                Icon(
+                                  !isUthmani
+                                      ? Icons.radio_button_checked
+                                      : Icons.radio_button_off,
+                                  size: 18,
+                                  color: !isUthmani ? themeState.primary : null,
+                                ),
+                                const Gap(10),
+                                const Text("IndoPak Script (Asian)"),
+                              ],
+                            ),
                           ),
-                        },
-                      );
-                    },
-                  ),
-                ],
+                          const PopupMenuDivider(),
+                          PopupMenuItem(
+                            value: "tajweed",
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isTajweed
+                                      ? Icons.check_box_rounded
+                                      : Icons.check_box_outline_blank_rounded,
+                                  size: 18,
+                                  color: isTajweed ? themeState.primary : null,
+                                ),
+                                const Gap(10),
+                                const Text("Tajweed Color Rules"),
+                              ],
+                            ),
+                          ),
+                          const PopupMenuDivider(),
+                          const PopupMenuItem(
+                            value: "font_plus",
+                            child: Row(
+                              children: [
+                                Icon(Icons.zoom_in_rounded, size: 18),
+                                Gap(10),
+                                Text("Increase Font Size"),
+                              ],
+                            ),
+                          ),
+                          const PopupMenuItem(
+                            value: "font_minus",
+                            child: Row(
+                              children: [
+                                Icon(Icons.zoom_out_rounded, size: 18),
+                                Gap(10),
+                                Text("Decrease Font Size"),
+                              ],
+                            ),
+                          ),
+                        ];
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          // Arabic Quran Text Body
+          Expanded(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 18,
+                ),
+                child: BlocBuilder<QuranViewCubit, QuranViewState>(
+                  builder: (context, state) {
+                    return ScriptProcessor(
+                      scriptInfo: ScriptInfo(
+                        surahNumber: surahNumber,
+                        ayahNumber: ayahNumber,
+                        quranScriptType: state.quranScriptType,
+                        textStyle: TextStyle(
+                          fontSize: state.fontSize.clamp(20.0, 48.0),
+                          height: state.lineHeight.clamp(1.8, 3.0),
+                        ),
+                        textAlign: TextAlign.center,
+                        skipWordTap: true,
+                        showWordHighlights: true,
+                      ),
+                      themeState: themeState,
+                      tajweedColorEnable:
+                          state.quranScriptType == QuranScriptType.uthmani
+                          ? state.useTajweedOnUthmani
+                          : state.useTajweedOnIndopak,
+                    );
+                  },
+                ),
               ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
@@ -625,6 +817,23 @@ class _AudioPageState extends State<AudioPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Playback Speed Button
+          IconButton(
+            tooltip: "Playback Speed",
+            iconSize: 22,
+            visualDensity: VisualDensity.compact,
+            icon: Text(
+              "${AudioPlayerManager.audioPlayer.speed}x",
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+              ),
+            ),
+            onPressed: () => showPlaybackSpeedBottomSheet(context),
+          ),
+          const Gap(4),
+
           // Loop Mode Quick-Toggle
           BlocBuilder<AudioLoopCubit, AudioLoopState>(
             builder: (context, loopState) {
@@ -716,8 +925,8 @@ class _AudioPageState extends State<AudioPage> {
                   state.state == ProcessingState.buffering;
 
               return Container(
-                width: 64,
-                height: 64,
+                width: 62,
+                height: 62,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: themeState.primary,
@@ -763,11 +972,6 @@ class _AudioPageState extends State<AudioPage> {
                               .state,
                         );
                         return;
-                      } else if (context
-                          .read<AudioUiCubit>()
-                          .state
-                          .isInsideQuranPlayer) {
-                        log("Inside Quran Player");
                       }
 
                       AudioPlayerManager.audioPlayer.playing
@@ -845,26 +1049,18 @@ class _AudioPageState extends State<AudioPage> {
           ),
           const Gap(4),
 
-          // Range / Memorize Mode
+          // Sleep Timer Button
           IconButton(
-            tooltip: "Ayah Range & Memorization",
+            tooltip: "Sleep Timer",
             iconSize: 22,
             visualDensity: VisualDensity.compact,
             icon: Icon(
-              FluentIcons.arrow_repeat_all_20_regular,
-              color: context.watch<AudioLoopCubit>().state.isRangeActive
-                  ? themeState.primary
+              FluentIcons.timer_20_regular,
+              color: context.watch<SleepTimerCubit>().state.isActive
+                  ? Colors.amber
                   : (isDark ? Colors.grey.shade600 : Colors.grey.shade400),
             ),
-            onPressed: () {
-              final surahNumber = ayahKeyState.current.split(":")[0].toInt();
-              final ayahNumber = ayahKeyState.current.split(":")[1].toInt();
-              popupAyahRangeSelector(
-                context,
-                initialSurah: surahNumber,
-                initialStartAyah: ayahNumber,
-              );
-            },
+            onPressed: () => showSleepTimerBottomSheet(context),
           ),
         ],
       ),

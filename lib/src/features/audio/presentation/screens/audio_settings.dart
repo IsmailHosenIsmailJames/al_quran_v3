@@ -5,10 +5,13 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
+import "package:al_quran_v3/src/features/about/presentation/screens/about_app_page.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/audio/presentation/helpers/audio_functions.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
+import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -36,27 +39,18 @@ class _AudioSettingsState extends State<AudioSettings> {
     final l10n = AppLocalizations.of(context);
     final content = _buildMainUI(context, l10n);
 
-    if (widget.needAppBar) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            l10n.audioSettings,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Settings",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: content,
-        ),
-      );
-    }
-
-    return widget.scrollable
-        ? SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: content,
-          )
-        : content;
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: content,
+      ),
+    );
   }
 
   Widget _buildMainUI(BuildContext context, AppLocalizations l10n) {
@@ -67,7 +61,119 @@ class _AudioSettingsState extends State<AudioSettings> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 1. Playback Speed Section
+        // 1. Quran Script & Typography Section
+        _buildSectionCard(
+          context,
+          isDark: isDark,
+          title: "Quran Script & Arabic Font",
+          icon: FluentIcons.text_font_size_20_regular,
+          child: BlocBuilder<QuranViewCubit, QuranViewState>(
+            builder: (context, state) {
+              final isUthmani = state.quranScriptType == QuranScriptType.uthmani;
+              final isTajweed = isUthmani
+                  ? state.useTajweedOnUthmani
+                  : state.useTajweedOnIndopak;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Script Style Segment
+                  Text(
+                    "Script Style",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                    ),
+                  ),
+                  const Gap(8),
+                  SegmentedButton<QuranScriptType>(
+                    segments: const [
+                      ButtonSegment(
+                        value: QuranScriptType.uthmani,
+                        label: Text("Uthmani (Madani)"),
+                        icon: Icon(Icons.menu_book_rounded, size: 16),
+                      ),
+                      ButtonSegment(
+                        value: QuranScriptType.indopak,
+                        label: Text("IndoPak (Asian)"),
+                        icon: Icon(Icons.auto_stories_rounded, size: 16),
+                      ),
+                    ],
+                    selected: {state.quranScriptType},
+                    onSelectionChanged: (selection) {
+                      context.read<QuranViewCubit>().changeScript(
+                            selection.first,
+                          );
+                    },
+                  ),
+                  const Gap(14),
+
+                  // Tajweed Rule Colors Toggle
+                  SwitchListTile.adaptive(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text(
+                      "Tajweed Color Rules",
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                    subtitle: Text(
+                      "Colorize recitation rules (Ghunnah, Ikhfa, Idgham, Madd, Qalqalah)",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      ),
+                    ),
+                    value: isTajweed,
+                    activeTrackColor: themeState.primary,
+                    onChanged: (val) {
+                      final cubit = context.read<QuranViewCubit>();
+                      if (isUthmani) {
+                        cubit.toggleTajweedOnUthmani();
+                      } else {
+                        cubit.toggleTajweedOnIndopak();
+                      }
+                    },
+                  ),
+                  const Gap(8),
+
+                  // Arabic Font Size Slider
+                  Text(
+                    "Arabic Font Size (${state.fontSize.round()}px)",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.text_fields_rounded, size: 16),
+                      Expanded(
+                        child: Slider(
+                          value: state.fontSize.clamp(18.0, 44.0),
+                          min: 18,
+                          max: 44,
+                          divisions: 13,
+                          activeColor: themeState.primary,
+                          onChanged: (value) {
+                            context
+                                .read<QuranViewCubit>()
+                                .changeFontSize(value);
+                          },
+                        ),
+                      ),
+                      const Icon(Icons.text_fields_rounded, size: 24),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+
+        const Gap(14),
+
+        // 2. Playback Speed Section
         _buildSectionCard(
           context,
           isDark: isDark,
@@ -76,9 +182,9 @@ class _AudioSettingsState extends State<AudioSettings> {
           child: const PlayBackSpeedWidget(),
         ),
 
-        const Gap(16),
+        const Gap(14),
 
-        // 2. Streaming & Network Section
+        // 3. Streaming & Network Section
         _buildSectionCard(
           context,
           isDark: isDark,
@@ -120,9 +226,20 @@ class _AudioSettingsState extends State<AudioSettings> {
           ),
         ),
 
-        const Gap(16),
+        const Gap(14),
 
-        // 3. Audio Cache Storage Section
+        // 4. Appearance & Theme Section
+        _buildSectionCard(
+          context,
+          isDark: isDark,
+          title: "Theme & Appearance",
+          icon: FluentIcons.color_20_regular,
+          child: const ThemeSettings(),
+        ),
+
+        const Gap(14),
+
+        // 5. Audio Cache & Storage Section
         _buildSectionCard(
           context,
           isDark: isDark,
@@ -130,6 +247,35 @@ class _AudioSettingsState extends State<AudioSettings> {
           icon: FluentIcons.storage_20_regular,
           child: _buildCacheSection(context, l10n, themeState, isDark),
         ),
+
+        const Gap(14),
+
+        // 6. About & App Info
+        _buildSectionCard(
+          context,
+          isDark: isDark,
+          title: "About",
+          icon: FluentIcons.info_20_regular,
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(FluentIcons.info_20_filled, color: themeState.primary),
+            title: const Text(
+              "About Al Quran Audio",
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+            subtitle: const Text("Version 4.0.2 • Open source"),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AboutAppPage(),
+                ),
+              );
+            },
+          ),
+        ),
+        const Gap(24),
       ],
     );
   }
@@ -144,46 +290,49 @@ class _AudioSettingsState extends State<AudioSettings> {
     final theme = Theme.of(context);
     final themeState = context.read<ThemeCubit>().state;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(roundedRadius),
-        color: isDark ? Colors.white.withValues(alpha: 0.03) : Colors.white,
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.06)
-              : Colors.black.withValues(alpha: 0.06),
+    return Material(
+      color: isDark ? Colors.white.withValues(alpha: 0.03) : Colors.white,
+      borderRadius: BorderRadius.circular(roundedRadius + 2),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(roundedRadius + 2),
+          border: Border.all(
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.06)
+                : Colors.grey.shade200,
+          ),
+          boxShadow: isDark
+              ? null
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.02),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
         ),
-        boxShadow: isDark
-            ? null
-            : [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.02),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 20, color: themeState.primary),
+                const Gap(8),
+                Text(
+                  title,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, size: 20, color: themeState.primary),
-              const Gap(8),
-              Text(
-                title,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const Gap(12),
-          const Divider(height: 1),
-          const Gap(12),
-          child,
-        ],
+            ),
+            const Gap(12),
+            const Divider(height: 1),
+            const Gap(12),
+            child,
+          ],
+        ),
       ),
     );
   }

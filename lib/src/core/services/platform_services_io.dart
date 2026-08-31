@@ -34,7 +34,7 @@ Future<void> initializePlatform() async {
   if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
-      title: "Al-Quran's Tafsir, Audio, Prayer Time",
+      title: "Al Quran Audio",
       minimumSize: Size(400, 600),
       center: true,
       backgroundColor: Colors.transparent,

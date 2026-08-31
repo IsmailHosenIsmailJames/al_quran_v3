@@ -1,7 +1,7 @@
 import "dart:convert";
 
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_ayah_count.dart";
-import "package:al_quran_v3/src/features/tajweed_guide/domain/utils/tajweed_rules.dart";
+import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/services.dart";

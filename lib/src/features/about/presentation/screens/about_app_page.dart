@@ -340,15 +340,17 @@ class AboutAppPage extends StatelessWidget {
             const Gap(15),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6.0),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                tileColor: Theme.of(context)
+              child: Material(
+                color: Theme.of(context)
                     .colorScheme
                     .secondaryContainer
                     .withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(12),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
@@ -384,6 +386,7 @@ class AboutAppPage extends StatelessWidget {
                 ),
               ),
             ),
+          ),
             const Gap(30),
             const Divider(thickness: 1.5),
             const Gap(30),
@@ -449,20 +452,23 @@ class FeatureTile extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        tileColor: Theme.of(
+      child: Material(
+        color: Theme.of(
           context,
         ).colorScheme.secondaryContainer.withValues(alpha: 0.3),
-        leading: Icon(icon, color: themeState.primary, size: 32),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
+        borderRadius: BorderRadius.circular(10),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          leading: Icon(icon, color: themeState.primary, size: 32),
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
+          subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
         ),
-        subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
       ),
     );
   }
@@ -487,18 +493,21 @@ class PlatformTile extends StatelessWidget {
     ThemeState themeState = context.read<ThemeCubit>().state;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        onTap: callback,
-        contentPadding: const EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        tileColor: Theme.of(
+      child: Material(
+        color: Theme.of(
           context,
         ).colorScheme.secondaryContainer.withValues(alpha: 0.3),
-        leading: alterNative ?? Icon(icon, color: themeState.primary, size: 32),
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
+        borderRadius: BorderRadius.circular(10),
+        child: ListTile(
+          onTap: callback,
+          contentPadding: const EdgeInsets.all(12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          leading: alterNative ?? Icon(icon, color: themeState.primary, size: 32),
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

@@ -4,21 +4,23 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/features/audio/data/resources/recitations.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
+import "package:hive_ce_flutter/hive_flutter.dart";
 
 class ChangeReciter extends StatefulWidget {
-  final ReciterInfoModel initReciterIndex;
+  final ReciterInfoModel? initReciterIndex;
   final bool? isWordByWord;
-  final Function(ReciterInfoModel index) onReciterChanged;
+  final Function(ReciterInfoModel index)? onReciterChanged;
 
   const ChangeReciter({
     super.key,
-    required this.initReciterIndex,
-    required this.onReciterChanged,
+    this.initReciterIndex,
+    this.onReciterChanged,
     this.isWordByWord,
   });
 
@@ -36,7 +38,15 @@ class _ChangeReciterState extends State<ChangeReciter> {
   @override
   void initState() {
     super.initState();
-    _selectedReciter = widget.initReciterIndex;
+    _selectedReciter = widget.initReciterIndex ??
+        ReciterInfoModel.fromMap(
+          Map<String, dynamic>.from(
+            Hive.box("user").get(
+              "last_selected_reciter",
+              defaultValue: recitationsInfoList[0],
+            ),
+          ),
+        );
     final parsed = recitationsInfoList
         .map((e) => ReciterInfoModel.fromMap(e))
         .toList();
@@ -89,52 +99,62 @@ class _ChangeReciterState extends State<ChangeReciter> {
     final isDark = theme.brightness == Brightness.dark;
     final filtered = _filteredReciters;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        children: [
-          // Drag Handle
-          const Gap(10),
-          Center(
-            child: Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ),
-          const Gap(10),
+    final canPop = Navigator.canPop(context);
 
-          // Header
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    l10n.selectReciter,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+    return Material(
+      color: theme.scaffoldBackgroundColor,
+      borderRadius: widget.initReciterIndex != null
+          ? const BorderRadius.vertical(top: Radius.circular(20))
+          : BorderRadius.zero,
+      child: SafeArea(
+        top: widget.initReciterIndex == null,
+        bottom: false,
+        child: Column(
+          children: [
+            if (widget.initReciterIndex != null) ...[
+              // Drag Handle
+              const Gap(10),
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const Gap(10),
+            ] else ...[
+              const Gap(14),
+            ],
+
+            // Header
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.selectReciter,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close_rounded),
-                  style: IconButton.styleFrom(
-                    backgroundColor: isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.black.withValues(alpha: 0.05),
-                  ),
-                ),
-              ],
+                  if (canPop)
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close_rounded),
+                      style: IconButton.styleFrom(
+                        backgroundColor: isDark
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.black.withValues(alpha: 0.05),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
 
           const Gap(8),
 
@@ -256,7 +276,13 @@ class _ChangeReciterState extends State<ChangeReciter> {
                               setState(() {
                                 _selectedReciter = reciter;
                               });
-                              widget.onReciterChanged(reciter);
+                              context
+                                  .read<AudioTabReciterCubit>()
+                                  .changeReciter(reciter);
+                              widget.onReciterChanged?.call(reciter);
+                              if (canPop) {
+                                Navigator.pop(context);
+                              }
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(10),
@@ -392,8 +418,9 @@ class _ChangeReciterState extends State<ChangeReciter> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildFilterChip(
     String filterKey,
