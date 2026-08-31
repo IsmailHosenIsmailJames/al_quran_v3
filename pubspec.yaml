@@ -88,7 +88,7 @@ msix_config:
   identity_name: MD.IsmailHosen.com.ismail.al-quran-audio
   publisher: "CN=B9F6AC9B-F4A4-426C-9C75-82E3872E24AB"
   msix_version: 3.21.2.0
-  logo_path: "assets\\img\\Quran_Logo_v3.png"
+  logo_path: "assets\\img\\logo.png"
   capabilities: "internetClient"
   store: true
 
