@@ -571,7 +571,7 @@ class _AudioPageState extends State<AudioPage> {
                 // Surah Name in Arabic font
                 if (surahModel != null)
                   Text(
-                    getSurahNameArabic(surahModel.id),
+                    "surah${surahModel.id.toString().padLeft(3, '0')}",
                     textDirection: TextDirection.rtl,
                     style: TextStyle(
                       fontFamily: "surah-name-v1",
