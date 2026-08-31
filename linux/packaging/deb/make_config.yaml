@@ -9,7 +9,7 @@ installed_size: 26604
 essential: true
 dependencies:
   - libmpv-dev
-icon: assets/img/Quran_Logo_v3.png
+icon: assets/img/logo.png
 
 postinstall_scripts:
   - echo "The application is installed"
