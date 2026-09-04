@@ -1,7 +1,11 @@
+import "dart:io";
+
+import "package:flutter/foundation.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/format_time_of_day.dart";
@@ -456,16 +460,26 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     activeTrackColor: themeState.primary,
                     onChanged: (value) async {
                       if (value) {
-                        final notifStatus =
-                            await Permission.notification.request();
-                        final exactAlarmStatus =
-                            await Permission.scheduleExactAlarm.request();
-                        if (!notifStatus.isGranted ||
-                            !exactAlarmStatus.isGranted) {
-                          Fluttertoast.showToast(
-                            msg: l10n.allowNotificationPermission,
-                          );
-                          return;
+                        final notifAllowed =
+                            await AwesomeNotifications().isNotificationAllowed();
+                        if (!notifAllowed) {
+                          final granted = await AwesomeNotifications()
+                              .requestPermissionToSendNotifications();
+                          if (!granted) {
+                            Fluttertoast.showToast(
+                              msg: l10n.allowNotificationPermission,
+                            );
+                            return;
+                          }
+                        }
+                        if (!kIsWeb && Platform.isAndroid) {
+                          try {
+                            final status =
+                                await Permission.scheduleExactAlarm.status;
+                            if (status.isDenied) {
+                              await Permission.scheduleExactAlarm.request();
+                            }
+                          } catch (_) {}
                         }
                         context
                             .read<PrayerReminderCubit>()
@@ -568,6 +582,253 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   ),
                 ),
               ],
+
+              // Ringtone Settings
+              const Divider(height: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.reminderRingtone,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? Colors.white : Colors.grey.shade900,
+                          ),
+                        ),
+                        const Gap(2),
+                        Text(
+                          l10n.chooseRingtoneDescription,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton.filledTonal(
+                    onPressed: () {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .toggleRingtonePreview();
+                    },
+                    icon: Icon(
+                      reminderState.isPlayingPreview
+                          ? FluentIcons.pause_24_filled
+                          : FluentIcons.play_24_filled,
+                      color: themeState.primary,
+                      size: 20,
+                    ),
+                    tooltip: reminderState.isPlayingPreview
+                        ? l10n.stopPreview
+                        : l10n.previewSound,
+                  ),
+                ],
+              ),
+              const Gap(10),
+
+              // Current Sound Display Card & Browse Button
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade300,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      FluentIcons.music_note_2_24_regular,
+                      size: 20,
+                      color: themeState.primary,
+                    ),
+                    const Gap(10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            reminderState.selectedRingtoneTitle ??
+                                l10n.defaultSound,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  isDark ? Colors.white : Colors.grey.shade900,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            reminderState.selectedRingtoneType == "default_sound" ||
+                                    reminderState.selectedRingtoneType == null
+                                ? "WAV Audio (notification_sound.wav)"
+                                : reminderState.selectedRingtoneType == "custom"
+                                    ? "Device / System Sound"
+                                    : "System Preset",
+                            style: TextStyle(
+                              fontSize: 10.5,
+                              color: isDark
+                                  ? Colors.grey.shade400
+                                  : Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Gap(8),
+                    FilledButton.tonalIcon(
+                      onPressed: () {
+                        context.read<PrayerReminderCubit>().chooseRingtone();
+                      },
+                      icon: const Icon(
+                        FluentIcons.folder_open_24_regular,
+                        size: 16,
+                      ),
+                      label: Text(
+                        l10n.chooseRingtone,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      style: FilledButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Gap(12),
+
+              // Quick Presets
+              Text(
+                l10n.quickPresets,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                ),
+              ),
+              const Gap(8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ChoiceChip(
+                    label: Text(
+                      l10n.defaultSound,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: reminderState.selectedRingtoneType ==
+                            "default_sound" ||
+                        reminderState.selectedRingtoneType == null,
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .selectRingtonePreset("default_sound");
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: Text(
+                      l10n.systemNotification,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: reminderState.selectedRingtoneType ==
+                        "system_notification",
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .selectRingtonePreset("system_notification");
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: Text(
+                      l10n.systemAlarm,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected:
+                        reminderState.selectedRingtoneType == "system_alarm",
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .selectRingtonePreset("system_alarm");
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    label: Text(
+                      l10n.systemRingtone,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected:
+                        reminderState.selectedRingtoneType == "system_ringtone",
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .selectRingtonePreset("system_ringtone");
+                      }
+                    },
+                  ),
+                ],
+              ),
+
+              const Divider(height: 24),
+
+              // Test Notification Button
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () async {
+                    await context
+                        .read<PrayerReminderCubit>()
+                        .sendTestNotification();
+                    Fluttertoast.showToast(msg: l10n.testNotificationSent);
+                  },
+                  icon: Icon(
+                    FluentIcons.alert_badge_24_regular,
+                    size: 18,
+                    color: themeState.primary,
+                  ),
+                  label: Text(
+                    l10n.testNotification,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: themeState.primary,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    side: BorderSide(
+                      color: themeState.primary.withValues(alpha: 0.5),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         );

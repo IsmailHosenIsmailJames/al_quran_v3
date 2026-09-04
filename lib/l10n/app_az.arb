@@ -546,5 +546,17 @@
   "hadithCollectionsBrief": "Buxari, Müslüm və s.",
   "explore": "Kəşf et",
   "ourIslamicCompanionApps": "İslami Köməkçi Tətbiqlərimiz",
-  "ourIslamicCompanionAppsDesc": "Müsəlman Ümməti üçün tamamilə Allah rizası üçün (Sədəqeyi-Cariyə) 100% pulsuz və reklamsız hazırlanmışdır."
+  "ourIslamicCompanionAppsDesc": "Müsəlman Ümməti üçün tamamilə Allah rizası üçün (Sədəqeyi-Cariyə) 100% pulsuz və reklamsız hazırlanmışdır.",
+  "reminderRingtone": "Xatırlatma səsi",
+  "chooseRingtone": "Zəng melodiyası seçin",
+  "chooseRingtoneDescription": "Sistem səslərindən və ya cihaz audio fayllarından seçin",
+  "defaultSound": "Tətbiq standartı (notification_sound.wav)",
+  "systemNotification": "Sistem standart bildirişi",
+  "systemAlarm": "Sistem standart zəngli saatı",
+  "systemRingtone": "Sistem telefon zəngi",
+  "previewSound": "Səsə qabaqcadan baxış",
+  "stopPreview": "Önizləməni dayandırın",
+  "testNotification": "Test bildirişi göndərin",
+  "testNotificationSent": "Test bildirişi göndərildi! Bildirişlərinizi yoxlayın.",
+  "quickPresets": "Sürətli seçimlər"
 }

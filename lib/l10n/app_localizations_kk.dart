@@ -1835,4 +1835,42 @@ class AppLocalizationsKk extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Мұсылман Үмметі үшін Алланың разылығы үшін (Садақа Джария) 100% тегін және жарнамасыз жасалған.';
+
+  @override
+  String get reminderRingtone => 'Еске салу дыбысы';
+
+  @override
+  String get chooseRingtone => 'Қоңырау үнін таңдаңыз';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Жүйелік дыбыстардан немесе құрылғы аудиосынан таңдаңыз';
+
+  @override
+  String get defaultSound => 'Қолданбаның әдепкі үні (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Жүйенің әдепкі хабарландыруы';
+
+  @override
+  String get systemAlarm => 'Жүйенің әдепкі оятар үні';
+
+  @override
+  String get systemRingtone => 'Жүйенің телефон қоңырауы';
+
+  @override
+  String get previewSound => 'Дыбысты тыңдау';
+
+  @override
+  String get stopPreview => 'Тыңдауды тоқтату';
+
+  @override
+  String get testNotification => 'Сынақ хабарландыруын жіберу';
+
+  @override
+  String get testNotificationSent =>
+      'Сынақ хабарландыруы жіберілді! Хабарландыруларыңызды тексеріңіз.';
+
+  @override
+  String get quickPresets => 'Жылдам таңдаулар';
 }

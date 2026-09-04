@@ -1835,4 +1835,42 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'د مسلمان امت لپاره یوازې د الله تعالی د رضا (صدقه جاریه) لپاره په ۱۰۰٪ وړیا او له اعلاناتو پرته تجربه جوړ شوی.';
+
+  @override
+  String get reminderRingtone => 'د یادونې غږ';
+
+  @override
+  String get chooseRingtone => 'د زنګ غږ غوره کړئ';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'د سیسټم غږونو یا د وسیلې له آډیو څخه غوره کړئ';
+
+  @override
+  String get defaultSound => 'د اپلیکیشن ډیفالټ (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'د سیسټم ډیفالټ خبرتیا';
+
+  @override
+  String get systemAlarm => 'د سیسټم ډیفالټ الارم';
+
+  @override
+  String get systemRingtone => 'د سیسټم د ټیلیفون زنګ';
+
+  @override
+  String get previewSound => 'د غږ مخکتنه';
+
+  @override
+  String get stopPreview => 'مخکتنه بنده کړئ';
+
+  @override
+  String get testNotification => 'ازمایښتي خبرتیا واستوئ';
+
+  @override
+  String get testNotificationSent =>
+      'ازمایښتي خبرتیا واستول شوه! خپلې خبرتیاوې وګورئ.';
+
+  @override
+  String get quickPresets => 'ګړندي اختیارونه';
 }

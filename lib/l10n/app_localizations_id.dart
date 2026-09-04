@@ -1834,4 +1834,42 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Dikembangkan semata-mata karena Allah (Sedekah Jariyah) dengan pengalaman 100% gratis dan bebas iklan untuk Umat Muslim.';
+
+  @override
+  String get reminderRingtone => 'Suara Pengingat';
+
+  @override
+  String get chooseRingtone => 'Pilih Nada Dering';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Pilih dari suara sistem atau audio perangkat';
+
+  @override
+  String get defaultSound => 'Bawaan Aplikasi (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Notifikasi Bawaan Sistem';
+
+  @override
+  String get systemAlarm => 'Alarm Bawaan Sistem';
+
+  @override
+  String get systemRingtone => 'Nada Dering Telepon Sistem';
+
+  @override
+  String get previewSound => 'Pratinjau Suara';
+
+  @override
+  String get stopPreview => 'Hentikan Pratinjau';
+
+  @override
+  String get testNotification => 'Kirim Notifikasi Uji Coba';
+
+  @override
+  String get testNotificationSent =>
+      'Notifikasi uji coba terkirim! Periksa notifikasi Anda.';
+
+  @override
+  String get quickPresets => 'Pilihan Cepat';
 }

@@ -1773,4 +1773,40 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       '完全为了真主的喜悦（持久的施舍）而开发，为穆斯林群体提供100%免费且无广告的体验。';
+
+  @override
+  String get reminderRingtone => '提醒声音';
+
+  @override
+  String get chooseRingtone => '选择铃声';
+
+  @override
+  String get chooseRingtoneDescription => '从系统声音或设备音频中选择';
+
+  @override
+  String get defaultSound => '应用默认 (notification_sound.wav)';
+
+  @override
+  String get systemNotification => '系统默认通知';
+
+  @override
+  String get systemAlarm => '系统默认闹钟';
+
+  @override
+  String get systemRingtone => '系统电话铃声';
+
+  @override
+  String get previewSound => '试听声音';
+
+  @override
+  String get stopPreview => '停止试听';
+
+  @override
+  String get testNotification => '发送测试通知';
+
+  @override
+  String get testNotificationSent => '测试通知已发送！请查看您的通知。';
+
+  @override
+  String get quickPresets => '快速预设';
 }

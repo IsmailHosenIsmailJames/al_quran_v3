@@ -546,5 +546,17 @@
   "hadithCollectionsBrief": "Bukhari, Muslim e altri",
   "explore": "Esplora",
   "ourIslamicCompanionApps": "Le Nostre App Islamiche Compagne",
-  "ourIslamicCompanionAppsDesc": "Sviluppato puramente per la causa di Allah (Sadaqah Jariyah) con un'esperienza al 100% gratuita e senza pubblicità per la Ummah musulmana."
+  "ourIslamicCompanionAppsDesc": "Sviluppato puramente per la causa di Allah (Sadaqah Jariyah) con un'esperienza al 100% gratuita e senza pubblicità per la Ummah musulmana.",
+  "reminderRingtone": "Suono del promemoria",
+  "chooseRingtone": "Scegli suoneria",
+  "chooseRingtoneDescription": "Scegli tra i suoni di sistema o l'audio del dispositivo",
+  "defaultSound": "Predefinito dell'app (notification_sound.wav)",
+  "systemNotification": "Notifica predefinita di sistema",
+  "systemAlarm": "Sveglia predefinita di sistema",
+  "systemRingtone": "Suoneria del telefono di sistema",
+  "previewSound": "Ascolta anteprima",
+  "stopPreview": "Ferma anteprima",
+  "testNotification": "Invia notifica di prova",
+  "testNotificationSent": "Notifica di prova inviata! Controlla le tue notifiche.",
+  "quickPresets": "Preimpostazioni rapide"
 }

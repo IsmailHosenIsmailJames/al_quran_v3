@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "Bukhari, Muslim & lain-lain",
   "explore": "Terokai",
   "ourIslamicCompanionApps": "Aplikasi Pendamping Islam Kami",
-  "ourIslamicCompanionAppsDesc": "Dibangunkan semata-mata kerana Allah (Sedekah Jariyah) dengan pengalaman 100% percuma dan tanpa iklan untuk Umat Islam."
+  "ourIslamicCompanionAppsDesc": "Dibangunkan semata-mata kerana Allah (Sedekah Jariyah) dengan pengalaman 100% percuma dan tanpa iklan untuk Umat Islam.",
+  "reminderRingtone": "Bunyi Peringatan",
+  "chooseRingtone": "Pilih Nada Dering",
+  "chooseRingtoneDescription": "Pilih daripada bunyi sistem atau audio peranti",
+  "defaultSound": "Lalai Aplikasi (notification_sound.wav)",
+  "systemNotification": "Pemberitahuan Lalai Sistem",
+  "systemAlarm": "Penggera Lalai Sistem",
+  "systemRingtone": "Nada Dering Telefon Sistem",
+  "previewSound": "Pratonton Bunyi",
+  "stopPreview": "Hentikan Pratonton",
+  "testNotification": "Hantar Pemberitahuan Ujian",
+  "testNotificationSent": "Pemberitahuan ujian dihantar! Semak pemberitahuan anda.",
+  "quickPresets": "Pratetap Pantas"
 }

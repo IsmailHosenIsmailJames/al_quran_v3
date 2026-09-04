@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "Buhari, Müslim ve fazlası",
   "explore": "Keşfet",
   "ourIslamicCompanionApps": "İslami Kardeş Uygulamalarımız",
-  "ourIslamicCompanionAppsDesc": "Müslüman Ümmeti için tamamen Allah rızası için (Sadaka-i Cariye) %100 ücretsiz ve reklamsız olarak geliştirilmiştir."
+  "ourIslamicCompanionAppsDesc": "Müslüman Ümmeti için tamamen Allah rızası için (Sadaka-i Cariye) %100 ücretsiz ve reklamsız olarak geliştirilmiştir.",
+  "reminderRingtone": "Hatırlatıcı Sesi",
+  "chooseRingtone": "Zil Sesi Seç",
+  "chooseRingtoneDescription": "Sistem seslerinden veya cihaz seslerinden seçin",
+  "defaultSound": "Uygulama Varsayılanı (notification_sound.wav)",
+  "systemNotification": "Sistem Varsayılan Bildirimi",
+  "systemAlarm": "Sistem Varsayılan Alarmı",
+  "systemRingtone": "Sistem Telefon Zil Sesi",
+  "previewSound": "Sesi Önizle",
+  "stopPreview": "Önizlemeyi Durdur",
+  "testNotification": "Test Bildirimi Gönder",
+  "testNotificationSent": "Test bildirimi gönderildi! Bildirimlerinizi kontrol edin.",
+  "quickPresets": "Hızlı Önayarlar"
 }

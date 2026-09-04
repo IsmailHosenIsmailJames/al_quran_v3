@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "ਬੁਖਾਰੀ, ਮੁਸਲਿਮ ਅਤੇ ਹੋਰ",
   "explore": "ਖੋਜੋ",
   "ourIslamicCompanionApps": "ਸਾਡੀਆਂ ਇਸਲਾਮੀ ਸਾਥੀ ਐਪਸ",
-  "ourIslamicCompanionAppsDesc": "ਮੁਸਲਿਮ ਉਮਾਹ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਅੱਲ੍ਹਾ ਦੀ ਖਾਤਰ (ਸਦਕਾ-ਏ-ਜਾਰੀਆ) 100% ਮੁਫਤ ਅਤੇ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਅਨੁਭਵ ਨਾਲ ਵਿਕਸਤ ਕੀਤਾ ਗਿਆ।"
+  "ourIslamicCompanionAppsDesc": "ਮੁਸਲਿਮ ਉਮਾਹ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਅੱਲ੍ਹਾ ਦੀ ਖਾਤਰ (ਸਦਕਾ-ਏ-ਜਾਰੀਆ) 100% ਮੁਫਤ ਅਤੇ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਅਨੁਭਵ ਨਾਲ ਵਿਕਸਤ ਕੀਤਾ ਗਿਆ।",
+  "reminderRingtone": "ਯਾਦ-ਦਹਾਨੀ ਧੁਨੀ",
+  "chooseRingtone": "ਰਿੰਗਟੋਨ ਚੁਣੋ",
+  "chooseRingtoneDescription": "ਸਿਸਟਮ ਧੁਨੀਆਂ ਜਾਂ ਡਿਵਾਈਸ ਆਡੀਓ ਵਿੱਚੋਂ ਚੁਣੋ",
+  "defaultSound": "ਐਪ ਡਿਫੌਲਟ (notification_sound.wav)",
+  "systemNotification": "ਸਿਸਟਮ ਡਿਫੌਲਟ ਸੂਚਨਾ",
+  "systemAlarm": "ਸਿਸਟਮ ਡਿਫੌਲਟ ਅਲਾਰਮ",
+  "systemRingtone": "ਸਿਸਟਮ ਫ਼ੋਨ ਰਿੰਗਟੋਨ",
+  "previewSound": "ਧੁਨੀ ਦੀ ਝਲਕ",
+  "stopPreview": "ਝਲਕ ਰੋਕੋ",
+  "testNotification": "ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੋ",
+  "testNotificationSent": "ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੀ ਗਈ! ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।",
+  "quickPresets": "ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ"
 }

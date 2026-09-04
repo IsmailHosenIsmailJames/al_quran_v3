@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "बुखारी, मुस्लिम और अन्य",
   "explore": "देखें",
   "ourIslamicCompanionApps": "हमारे इस्लामिक सहयोगी ऐप्स",
-  "ourIslamicCompanionAppsDesc": "मुस्लिम उम्माह के लिए पूरी तरह से अल्लाह की खातिर (सदका-ए-जारिया) 100% मुफ्त और विज्ञापन-मुक्त अनुभव के साथ विकसित किया गया।"
+  "ourIslamicCompanionAppsDesc": "मुस्लिम उम्माह के लिए पूरी तरह से अल्लाह की खातिर (सदका-ए-जारिया) 100% मुफ्त और विज्ञापन-मुक्त अनुभव के साथ विकसित किया गया।",
+  "reminderRingtone": "स्मरण ध्वनि",
+  "chooseRingtone": "रिंगटोन चुनें",
+  "chooseRingtoneDescription": "सिस्टम ध्वनियों या डिवाइस ऑडियो से चुनें",
+  "defaultSound": "ऐप डिफ़ॉल्ट (notification_sound.wav)",
+  "systemNotification": "सिस्टम डिफ़ॉल्ट सूचना",
+  "systemAlarm": "सिस्टम डिफ़ॉल्ट अलार्म",
+  "systemRingtone": "सिस्टम फ़ोन रिंगटोन",
+  "previewSound": "ध्वनि पूर्वावलोकन",
+  "stopPreview": "पूर्वावलोकन रोकें",
+  "testNotification": "परीक्षण सूचना भेजें",
+  "testNotificationSent": "परीक्षण सूचना भेजी गई! अपनी सूचनाएं जांचें।",
+  "quickPresets": "त्वरित प्रीसेट"
 }

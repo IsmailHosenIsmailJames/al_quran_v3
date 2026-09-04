@@ -1849,4 +1849,42 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Разработано исключительно ради Аллаха (Садака Джария) — 100% бесплатно и без рекламы для мусульманской уммы.';
+
+  @override
+  String get reminderRingtone => 'Звук напоминания';
+
+  @override
+  String get chooseRingtone => 'Выбрать мелодию';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Выберите из системных звуков или аудио устройства';
+
+  @override
+  String get defaultSound => 'По умолчанию приложения (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Системное уведомление по умолчанию';
+
+  @override
+  String get systemAlarm => 'Системный будильник по умолчанию';
+
+  @override
+  String get systemRingtone => 'Системный звонок телефона';
+
+  @override
+  String get previewSound => 'Прослушать звук';
+
+  @override
+  String get stopPreview => 'Остановить';
+
+  @override
+  String get testNotification => 'Отправить тестовое уведомление';
+
+  @override
+  String get testNotificationSent =>
+      'Тестовое уведомление отправлено! Проверьте панель уведомлений.';
+
+  @override
+  String get quickPresets => 'Быстрый выбор';
 }

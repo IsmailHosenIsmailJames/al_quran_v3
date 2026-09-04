@@ -1830,4 +1830,42 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'صرفاً برای رضای خدا (صدقه جاریه) با تجربه‌ای ۱۰۰٪ رایگان و بدون تبلیغات برای امت اسلامی توسعه یافته است.';
+
+  @override
+  String get reminderRingtone => 'صدای یادآور';
+
+  @override
+  String get chooseRingtone => 'انتخاب زنگ';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'از صداهای سیستم یا فایل‌های صوتی دستگاه انتخاب کنید';
+
+  @override
+  String get defaultSound => 'پیش‌فرض برنامه (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'اعلان پیش‌فرض سیستم';
+
+  @override
+  String get systemAlarm => 'هشدار پیش‌فرض سیستم';
+
+  @override
+  String get systemRingtone => 'زنگ تماس سیستم';
+
+  @override
+  String get previewSound => 'پیش‌شنیدن صدا';
+
+  @override
+  String get stopPreview => 'توقف پخش';
+
+  @override
+  String get testNotification => 'ارسال اعلان آزمایشی';
+
+  @override
+  String get testNotificationSent =>
+      'اعلان آزمایشی ارسال شد! اعلان‌های خود را بررسی کنید.';
+
+  @override
+  String get quickPresets => 'گزینه‌های سریع';
 }

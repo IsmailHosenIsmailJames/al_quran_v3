@@ -11,5 +11,9 @@ abstract class PrayerReminderState with _$PrayerReminderState {
     bool? isPrayerRemindNotificationEnabled,
     bool? enforceAlarmSound,
     double? soundVolume,
+    String? selectedRingtoneUri,
+    String? selectedRingtoneTitle,
+    String? selectedRingtoneType,
+    @Default(false) bool isPlayingPreview,
   }) = _PrayerReminderState;
 }

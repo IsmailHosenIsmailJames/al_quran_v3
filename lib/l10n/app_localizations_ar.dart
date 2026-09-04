@@ -1835,4 +1835,42 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'تم تطويرها خالصًا لوجه الله (صدقة جارية) ومجانية وخالية من الإعلانات بنسبة 100% للأمة الإسلامية.';
+
+  @override
+  String get reminderRingtone => 'صوت التذكير';
+
+  @override
+  String get chooseRingtone => 'اختيار النغمة';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'اختر من أصوات النظام أو ملفات الصوت بالجهاز';
+
+  @override
+  String get defaultSound => 'افتراضي التطبيق (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'إشعار النظام الافتراضي';
+
+  @override
+  String get systemAlarm => 'منبه النظام الافتراضي';
+
+  @override
+  String get systemRingtone => 'نغمة الهاتف الافتراضية';
+
+  @override
+  String get previewSound => 'معاينة الصوت';
+
+  @override
+  String get stopPreview => 'إيقاف المعاينة';
+
+  @override
+  String get testNotification => 'إرسال إشعار تجريبي';
+
+  @override
+  String get testNotificationSent =>
+      'تم إرسال الإشعار التجريبي! تحقق من إشعاراتك.';
+
+  @override
+  String get quickPresets => 'خيارات سريعة';
 }

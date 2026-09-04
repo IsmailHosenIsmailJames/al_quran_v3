@@ -1837,4 +1837,42 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'مسلم امت کے لیے خالصتاً رضائے الٰہی (صدقہ جاریہ) کے لیے 100٪ مفت اور اشتہارات سے پاک تیار کی گئی ہے۔';
+
+  @override
+  String get reminderRingtone => 'یاد دہانی کی آواز';
+
+  @override
+  String get chooseRingtone => 'رنگ ٹون منتخب کریں';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'سسٹم کی آوازوں یا ڈیوائس کے آڈیو سے منتخب کریں';
+
+  @override
+  String get defaultSound => 'ایپ کا ڈیفالٹ (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'سسٹم کا ڈیفالٹ نوٹیفکیشن';
+
+  @override
+  String get systemAlarm => 'سسٹم کا ڈیفالٹ الارم';
+
+  @override
+  String get systemRingtone => 'سسٹم کی فون رنگ ٹون';
+
+  @override
+  String get previewSound => 'آواز سنیں';
+
+  @override
+  String get stopPreview => 'بند کریں';
+
+  @override
+  String get testNotification => 'ٹیسٹ نوٹیفکیشن بھیجیں';
+
+  @override
+  String get testNotificationSent =>
+      'ٹیسٹ نوٹیفکیشن بھیج دیا گیا! اپنے نوٹیفکیشنز چیک کریں۔';
+
+  @override
+  String get quickPresets => 'فوری ترتیبات';
 }

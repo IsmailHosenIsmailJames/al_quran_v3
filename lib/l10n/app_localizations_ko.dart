@@ -1796,4 +1796,40 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       '무슬림 움마를 위해 오직 알라를 위해 (사다카 자리야) 100% 무료 및 광고 없는 경험으로 개발되었습니다.';
+
+  @override
+  String get reminderRingtone => '알림음';
+
+  @override
+  String get chooseRingtone => '벨소리 선택';
+
+  @override
+  String get chooseRingtoneDescription => '시스템 소리 또는 기기 오디오에서 선택';
+
+  @override
+  String get defaultSound => '앱 기본값 (notification_sound.wav)';
+
+  @override
+  String get systemNotification => '시스템 기본 알림';
+
+  @override
+  String get systemAlarm => '시스템 기본 알람';
+
+  @override
+  String get systemRingtone => '시스템 전화 벨소리';
+
+  @override
+  String get previewSound => '소리 미리듣기';
+
+  @override
+  String get stopPreview => '미리듣기 중지';
+
+  @override
+  String get testNotification => '테스트 알림 보내기';
+
+  @override
+  String get testNotificationSent => '테스트 알림이 전송되었습니다! 알림을 확인하세요.';
+
+  @override
+  String get quickPresets => '빠른 사전 설정';
 }
