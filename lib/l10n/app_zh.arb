@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "布哈里、穆斯林等",
   "explore": "探索",
   "ourIslamicCompanionApps": "我们的伊斯兰配套应用",
-  "ourIslamicCompanionAppsDesc": "完全为了真主的喜悦（持久的施舍）而开发，为穆斯林群体提供100%免费且无广告的体验。"
+  "ourIslamicCompanionAppsDesc": "完全为了真主的喜悦（持久的施舍）而开发，为穆斯林群体提供100%免费且无广告的体验。",
+  "reminderRingtone": "提醒声音",
+  "chooseRingtone": "选择铃声",
+  "chooseRingtoneDescription": "从系统声音或设备音频中选择",
+  "defaultSound": "应用默认 (notification_sound.wav)",
+  "systemNotification": "系统默认通知",
+  "systemAlarm": "系统默认闹钟",
+  "systemRingtone": "系统电话铃声",
+  "previewSound": "试听声音",
+  "stopPreview": "停止试听",
+  "testNotification": "发送测试通知",
+  "testNotificationSent": "测试通知已发送！请查看您的通知。",
+  "quickPresets": "快速预设"
 }

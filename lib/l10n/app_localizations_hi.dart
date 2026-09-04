@@ -1838,4 +1838,42 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'मुस्लिम उम्माह के लिए पूरी तरह से अल्लाह की खातिर (सदका-ए-जारिया) 100% मुफ्त और विज्ञापन-मुक्त अनुभव के साथ विकसित किया गया।';
+
+  @override
+  String get reminderRingtone => 'स्मरण ध्वनि';
+
+  @override
+  String get chooseRingtone => 'रिंगटोन चुनें';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'सिस्टम ध्वनियों या डिवाइस ऑडियो से चुनें';
+
+  @override
+  String get defaultSound => 'ऐप डिफ़ॉल्ट (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'सिस्टम डिफ़ॉल्ट सूचना';
+
+  @override
+  String get systemAlarm => 'सिस्टम डिफ़ॉल्ट अलार्म';
+
+  @override
+  String get systemRingtone => 'सिस्टम फ़ोन रिंगटोन';
+
+  @override
+  String get previewSound => 'ध्वनि पूर्वावलोकन';
+
+  @override
+  String get stopPreview => 'पूर्वावलोकन रोकें';
+
+  @override
+  String get testNotification => 'परीक्षण सूचना भेजें';
+
+  @override
+  String get testNotificationSent =>
+      'परीक्षण सूचना भेजी गई! अपनी सूचनाएं जांचें।';
+
+  @override
+  String get quickPresets => 'त्वरित प्रीसेट';
 }

@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "بخاری، مسلم و غیره",
   "explore": "کاوش",
   "ourIslamicCompanionApps": "برنامه‌های همراه اسلامی ما",
-  "ourIslamicCompanionAppsDesc": "صرفاً برای رضای خدا (صدقه جاریه) با تجربه‌ای ۱۰۰٪ رایگان و بدون تبلیغات برای امت اسلامی توسعه یافته است."
+  "ourIslamicCompanionAppsDesc": "صرفاً برای رضای خدا (صدقه جاریه) با تجربه‌ای ۱۰۰٪ رایگان و بدون تبلیغات برای امت اسلامی توسعه یافته است.",
+  "reminderRingtone": "صدای یادآور",
+  "chooseRingtone": "انتخاب زنگ",
+  "chooseRingtoneDescription": "از صداهای سیستم یا فایل‌های صوتی دستگاه انتخاب کنید",
+  "defaultSound": "پیش‌فرض برنامه (notification_sound.wav)",
+  "systemNotification": "اعلان پیش‌فرض سیستم",
+  "systemAlarm": "هشدار پیش‌فرض سیستم",
+  "systemRingtone": "زنگ تماس سیستم",
+  "previewSound": "پیش‌شنیدن صدا",
+  "stopPreview": "توقف پخش",
+  "testNotification": "ارسال اعلان آزمایشی",
+  "testNotificationSent": "اعلان آزمایشی ارسال شد! اعلان‌های خود را بررسی کنید.",
+  "quickPresets": "گزینه‌های سریع"
 }

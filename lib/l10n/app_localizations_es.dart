@@ -1855,4 +1855,43 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Desarrollado exclusivamente por el amor de Allah (Sadaqah Yariyah) con una experiencia 100% gratuita y sin anuncios para la Ummah musulmana.';
+
+  @override
+  String get reminderRingtone => 'Sonido de recordatorio';
+
+  @override
+  String get chooseRingtone => 'Elegir tono';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Elija entre sonidos del sistema o audio del dispositivo';
+
+  @override
+  String get defaultSound =>
+      'Predeterminado de la app (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Notificación predeterminada del sistema';
+
+  @override
+  String get systemAlarm => 'Alarma predeterminada del sistema';
+
+  @override
+  String get systemRingtone => 'Tono de llamada del sistema';
+
+  @override
+  String get previewSound => 'Vista previa del sonido';
+
+  @override
+  String get stopPreview => 'Detener reproducción';
+
+  @override
+  String get testNotification => 'Enviar notificación de prueba';
+
+  @override
+  String get testNotificationSent =>
+      '¡Notificación de prueba enviada! Revisa tus notificaciones.';
+
+  @override
+  String get quickPresets => 'Ajustes rápidos';
 }

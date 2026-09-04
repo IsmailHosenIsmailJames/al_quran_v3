@@ -1,4 +1,5 @@
 import "dart:developer";
+import "dart:io";
 
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
@@ -29,10 +30,12 @@ import "package:al_quran_v3/l10n/app_localizations_vi.dart";
 import "package:al_quran_v3/l10n/app_localizations_zh.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/ringtone_service.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
@@ -41,8 +44,84 @@ import "package:shared_preferences/shared_preferences.dart";
 class ReminderScheduler {
   static late SharedPreferences _sharedPreferences;
 
-  static Future init() async {
+  static Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  // ─── Permission Check ──────────────────────────────────────────────────
+
+  static Future<bool> hasRequiredPermissions() async {
+    try {
+      final isAllowed = await AwesomeNotifications().isNotificationAllowed();
+      if (!isAllowed) return false;
+
+      if (!kIsWeb && Platform.isAndroid) {
+        final status = await Permission.scheduleExactAlarm.status;
+        if (status.isDenied ||
+            status.isPermanentlyDenied ||
+            status.isRestricted) {
+          return false;
+        }
+      }
+      return true;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  // ─── Channel Sync ──────────────────────────────────────────────────────
+
+  static Future<void> syncNotificationChannel() async {
+    final isAlarm = getEnforceAlarmSound();
+    final soundUri = getSelectedRingtoneUri();
+    final soundType = getSelectedRingtoneType();
+    final channelKey = getNotificationChannelKey();
+
+    String? soundSource;
+    DefaultRingtoneType defaultRingtoneType = DefaultRingtoneType.Notification;
+
+    if (soundType == "default_sound" || soundType == "notification_sound") {
+      soundSource = "resource://raw/notification_sound";
+    } else if (soundType == "system_alarm") {
+      defaultRingtoneType = DefaultRingtoneType.Alarm;
+    } else if (soundType == "system_ringtone") {
+      defaultRingtoneType = DefaultRingtoneType.Ringtone;
+    } else if (soundType == "system_notification") {
+      defaultRingtoneType = DefaultRingtoneType.Notification;
+    }
+
+    try {
+      await AwesomeNotifications().setChannel(
+        NotificationChannel(
+          channelKey: channelKey,
+          channelName: "Prayer Reminders",
+          channelDescription: "Notifications for prayer time reminders",
+          playSound: true,
+          importance:
+              isAlarm ? NotificationImportance.Max : NotificationImportance.High,
+          defaultPrivacy: NotificationPrivacy.Public,
+          soundSource: soundSource,
+          defaultRingtoneType: defaultRingtoneType,
+          criticalAlerts: true,
+          enableVibration: true,
+          enableLights: true,
+        ),
+        forceUpdate: true,
+      );
+    } catch (e) {
+      log("Error syncing AwesomeNotifications channel: $e");
+    }
+
+    if (!kIsWeb && Platform.isAndroid) {
+      await RingtoneService.createOrUpdateNotificationChannel(
+        channelKey: channelKey,
+        channelName: "Prayer Reminders",
+        soundUri: (soundType == "default_sound" || soundType == "notification_sound")
+            ? "resource://raw/notification_sound"
+            : soundUri ?? soundType,
+        isAlarm: isAlarm,
+      );
+    }
   }
 
   // ─── Schedule ──────────────────────────────────────────────────────────
@@ -56,15 +135,14 @@ class ReminderScheduler {
     if (locationState.latLon == null) return;
 
     PrayerReminderState reminderState = getState();
-
     DateTime now = DateTime.now();
 
-    // check permission
-    if (!await Permission.notification.isGranted ||
-        !await Permission.scheduleExactAlarm.isGranted) {
+    if (!await hasRequiredPermissions()) {
+      log("Notification permissions not granted, skipping schedule");
       return;
     }
 
+    await syncNotificationChannel();
     await cancelAllNotifications();
     await _scheduleNotifications(locationState, reminderState, now);
   }
@@ -84,6 +162,9 @@ class ReminderScheduler {
     );
 
     final enabledMap = reminderState.enabledPrayers ?? getEnabledPrayers();
+    final isAlarm = reminderState.enforceAlarmSound ?? getEnforceAlarmSound();
+    final channelKey = getNotificationChannelKey();
+    final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
     for (int i = 0; i < next7DaysPrayerTimes.length; i++) {
       final prayerTimesToday = next7DaysPrayerTimes[i];
@@ -94,17 +175,20 @@ class ReminderScheduler {
         if (time != null) {
           if (time.isBefore(now)) continue;
 
-          AwesomeNotifications().createNotification(
+          await AwesomeNotifications().createNotification(
             content: NotificationContent(
-              channelKey: "prayer_reminder",
+              channelKey: channelKey,
               id: _notificationId(prayerName, time),
               title:
                   "${getPrayerGroupName(prayerName, appLocalizations)} - ${getPrayerNameWithSomeDetails(prayerName, appLocalizations)}",
               body: DateFormat.jm(
                 locale.languageCode,
               ).format(time),
+              category:
+                  isAlarm ? NotificationCategory.Alarm : NotificationCategory.Reminder,
+              notificationLayout: NotificationLayout.Default,
+              wakeUpScreen: true,
             ),
-
             schedule: NotificationCalendar(
               day: time.day,
               month: time.month,
@@ -113,13 +197,35 @@ class ReminderScheduler {
               minute: time.minute,
               second: 0,
               millisecond: 0,
+              timeZone: localTimeZone,
               allowWhileIdle: true,
+              preciseAlarm: true,
               repeats: false,
             ),
           );
         }
       }
     }
+  }
+
+  static Future<void> sendTestNotification() async {
+    await syncNotificationChannel();
+    final channelKey = getNotificationChannelKey();
+    final isAlarm = getEnforceAlarmSound();
+    final title = getSelectedRingtoneTitle() ?? "notification_sound.wav";
+
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 99999,
+        channelKey: channelKey,
+        title: "🕌 Prayer Reminder Test",
+        body: "Testing sound: $title",
+        category:
+            isAlarm ? NotificationCategory.Alarm : NotificationCategory.Reminder,
+        notificationLayout: NotificationLayout.Default,
+        wakeUpScreen: true,
+      ),
+    );
   }
 
   static AppLocalizations appLocalizationsFromLocale(Locale locale) {
@@ -270,9 +376,9 @@ class ReminderScheduler {
 
   // ─── ID Helpers ────────────────────────────────────────────────────────
 
-  /// Notification IDs: prayerIndex * 1000 + dayOffset (range: 0-9999)
+  /// Notification IDs: prayerIndex * 10000 + month * 100 + day
   static int _notificationId(Prayer prayer, DateTime time) {
-    return prayer.index * 1000 + time.month * 100 + time.day;
+    return prayer.index * 10000 + time.month * 100 + time.day;
   }
 
   static PrayerReminderState getState() {
@@ -282,6 +388,10 @@ class ReminderScheduler {
       enforceAlarmSound: getEnforceAlarmSound(),
       soundVolume: getSoundVolume(),
       isPrayerRemindNotificationEnabled: isPrayerRemindNotificationEnabled(),
+      selectedRingtoneUri: getSelectedRingtoneUri(),
+      selectedRingtoneTitle: getSelectedRingtoneTitle(),
+      selectedRingtoneType: getSelectedRingtoneType(),
+      isPlayingPreview: false,
     );
   }
 
@@ -351,5 +461,49 @@ class ReminderScheduler {
 
   static Future<void> setSoundVolume(double volume) async {
     await _sharedPreferences.setDouble("prayer_reminder_sound_volume", volume);
+  }
+
+  // ─── Ringtone Settings ────────────────────────────────────────────────
+
+  static String getNotificationChannelKey() {
+    return _sharedPreferences.getString("prayer_reminder_channel_key") ??
+        "prayer_reminder_default";
+  }
+
+  static Future<void> setNotificationChannelKey(String key) async {
+    await _sharedPreferences.setString("prayer_reminder_channel_key", key);
+  }
+
+  static String? getSelectedRingtoneUri() {
+    return _sharedPreferences.getString("prayer_reminder_sound_uri");
+  }
+
+  static Future<void> setSelectedRingtoneUri(String? uri) async {
+    if (uri == null) {
+      await _sharedPreferences.remove("prayer_reminder_sound_uri");
+    } else {
+      await _sharedPreferences.setString("prayer_reminder_sound_uri", uri);
+    }
+  }
+
+  static String? getSelectedRingtoneTitle() {
+    return _sharedPreferences.getString("prayer_reminder_sound_title");
+  }
+
+  static Future<void> setSelectedRingtoneTitle(String? title) async {
+    if (title == null) {
+      await _sharedPreferences.remove("prayer_reminder_sound_title");
+    } else {
+      await _sharedPreferences.setString("prayer_reminder_sound_title", title);
+    }
+  }
+
+  static String getSelectedRingtoneType() {
+    return _sharedPreferences.getString("prayer_reminder_sound_type") ??
+        "default_sound";
+  }
+
+  static Future<void> setSelectedRingtoneType(String type) async {
+    await _sharedPreferences.setString("prayer_reminder_sound_type", type);
   }
 }

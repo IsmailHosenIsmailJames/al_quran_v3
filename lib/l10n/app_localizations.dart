@@ -3433,6 +3433,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Developed purely for the sake of Allah (Sadaqah Jariyah) with 100% free and ad-free experience for the Muslim Ummah.'**
   String get ourIslamicCompanionAppsDesc;
+
+  /// No description provided for @reminderRingtone.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Sound'**
+  String get reminderRingtone;
+
+  /// No description provided for @chooseRingtone.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Ringtone'**
+  String get chooseRingtone;
+
+  /// No description provided for @chooseRingtoneDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from system sounds or device audio'**
+  String get chooseRingtoneDescription;
+
+  /// No description provided for @defaultSound.
+  ///
+  /// In en, this message translates to:
+  /// **'App Default (notification_sound.wav)'**
+  String get defaultSound;
+
+  /// No description provided for @systemNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default Notification'**
+  String get systemNotification;
+
+  /// No description provided for @systemAlarm.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default Alarm'**
+  String get systemAlarm;
+
+  /// No description provided for @systemRingtone.
+  ///
+  /// In en, this message translates to:
+  /// **'System Phone Ringtone'**
+  String get systemRingtone;
+
+  /// No description provided for @previewSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview Sound'**
+  String get previewSound;
+
+  /// No description provided for @stopPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Preview'**
+  String get stopPreview;
+
+  /// No description provided for @testNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Test Notification'**
+  String get testNotification;
+
+  /// No description provided for @testNotificationSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Test notification sent! Check your notifications.'**
+  String get testNotificationSent;
+
+  /// No description provided for @quickPresets.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Presets'**
+  String get quickPresets;
 }
 
 class _AppLocalizationsDelegate

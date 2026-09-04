@@ -1833,4 +1833,42 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Dibangunkan semata-mata kerana Allah (Sedekah Jariyah) dengan pengalaman 100% percuma dan tanpa iklan untuk Umat Islam.';
+
+  @override
+  String get reminderRingtone => 'Bunyi Peringatan';
+
+  @override
+  String get chooseRingtone => 'Pilih Nada Dering';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Pilih daripada bunyi sistem atau audio peranti';
+
+  @override
+  String get defaultSound => 'Lalai Aplikasi (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Pemberitahuan Lalai Sistem';
+
+  @override
+  String get systemAlarm => 'Penggera Lalai Sistem';
+
+  @override
+  String get systemRingtone => 'Nada Dering Telefon Sistem';
+
+  @override
+  String get previewSound => 'Pratonton Bunyi';
+
+  @override
+  String get stopPreview => 'Hentikan Pratonton';
+
+  @override
+  String get testNotification => 'Hantar Pemberitahuan Ujian';
+
+  @override
+  String get testNotificationSent =>
+      'Pemberitahuan ujian dihantar! Semak pemberitahuan anda.';
+
+  @override
+  String get quickPresets => 'Pratetap Pantas';
 }

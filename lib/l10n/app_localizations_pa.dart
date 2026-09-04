@@ -1835,4 +1835,42 @@ class AppLocalizationsPa extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'ਮੁਸਲਿਮ ਉਮਾਹ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਅੱਲ੍ਹਾ ਦੀ ਖਾਤਰ (ਸਦਕਾ-ਏ-ਜਾਰੀਆ) 100% ਮੁਫਤ ਅਤੇ ਵਿਗਿਆਪਨ-ਮੁਕਤ ਅਨੁਭਵ ਨਾਲ ਵਿਕਸਤ ਕੀਤਾ ਗਿਆ।';
+
+  @override
+  String get reminderRingtone => 'ਯਾਦ-ਦਹਾਨੀ ਧੁਨੀ';
+
+  @override
+  String get chooseRingtone => 'ਰਿੰਗਟੋਨ ਚੁਣੋ';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'ਸਿਸਟਮ ਧੁਨੀਆਂ ਜਾਂ ਡਿਵਾਈਸ ਆਡੀਓ ਵਿੱਚੋਂ ਚੁਣੋ';
+
+  @override
+  String get defaultSound => 'ਐਪ ਡਿਫੌਲਟ (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'ਸਿਸਟਮ ਡਿਫੌਲਟ ਸੂਚਨਾ';
+
+  @override
+  String get systemAlarm => 'ਸਿਸਟਮ ਡਿਫੌਲਟ ਅਲਾਰਮ';
+
+  @override
+  String get systemRingtone => 'ਸਿਸਟਮ ਫ਼ੋਨ ਰਿੰਗਟੋਨ';
+
+  @override
+  String get previewSound => 'ਧੁਨੀ ਦੀ ਝਲਕ';
+
+  @override
+  String get stopPreview => 'ਝਲਕ ਰੋਕੋ';
+
+  @override
+  String get testNotification => 'ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੋ';
+
+  @override
+  String get testNotificationSent =>
+      'ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੀ ਗਈ! ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।';
+
+  @override
+  String get quickPresets => 'ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ';
 }

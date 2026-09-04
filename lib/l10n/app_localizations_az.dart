@@ -1842,4 +1842,42 @@ class AppLocalizationsAz extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Müsəlman Ümməti üçün tamamilə Allah rizası üçün (Sədəqeyi-Cariyə) 100% pulsuz və reklamsız hazırlanmışdır.';
+
+  @override
+  String get reminderRingtone => 'Xatırlatma səsi';
+
+  @override
+  String get chooseRingtone => 'Zəng melodiyası seçin';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Sistem səslərindən və ya cihaz audio fayllarından seçin';
+
+  @override
+  String get defaultSound => 'Tətbiq standartı (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Sistem standart bildirişi';
+
+  @override
+  String get systemAlarm => 'Sistem standart zəngli saatı';
+
+  @override
+  String get systemRingtone => 'Sistem telefon zəngi';
+
+  @override
+  String get previewSound => 'Səsə qabaqcadan baxış';
+
+  @override
+  String get stopPreview => 'Önizləməni dayandırın';
+
+  @override
+  String get testNotification => 'Test bildirişi göndərin';
+
+  @override
+  String get testNotificationSent =>
+      'Test bildirişi göndərildi! Bildirişlərinizi yoxlayın.';
+
+  @override
+  String get quickPresets => 'Sürətli seçimlər';
 }

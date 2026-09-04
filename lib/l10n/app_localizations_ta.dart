@@ -1864,4 +1864,42 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'முஸ்லிம் உம்மாவிற்காக முழுக்க முழுக்க அல்லாஹ்வின் திருப்திக்காக (ஸதகதுல் ஜாரியா) 100% இலவச மற்றும் விளம்பரமில்லாத அனுபவத்துடன் உருவாக்கப்பட்டது.';
+
+  @override
+  String get reminderRingtone => 'நினைவூட்டல் ஒலி';
+
+  @override
+  String get chooseRingtone => 'ரிங்டோனைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'கணினி ஒலிகள் அல்லது சாதன ஆடியோவிலிருந்து தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get defaultSound => 'செயலி இயல்புநிலை (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'கணினி இயல்புநிலை அறிவிப்பு';
+
+  @override
+  String get systemAlarm => 'கணினி இயல்புநிலை அலாரம்';
+
+  @override
+  String get systemRingtone => 'கணினி தொலைபேசி ரிங்டோன்';
+
+  @override
+  String get previewSound => 'ஒலியை முன்னோட்டமிடு';
+
+  @override
+  String get stopPreview => 'முன்னோட்டத்தை நிறுத்து';
+
+  @override
+  String get testNotification => 'சோதனை அறிவிப்பை அனுப்பவும்';
+
+  @override
+  String get testNotificationSent =>
+      'சோதனை அறிவிப்பு அனுப்பப்பட்டது! உங்கள் அறிவிப்புகளைச் சரிபார்க்கவும்.';
+
+  @override
+  String get quickPresets => 'விரைவு முன்னமைவுகள்';
 }

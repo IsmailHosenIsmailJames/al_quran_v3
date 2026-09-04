@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "البخاري ومسلم والمزيد",
   "explore": "استكشاف",
   "ourIslamicCompanionApps": "تطبيقاتنا الإسلامية المرافقة",
-  "ourIslamicCompanionAppsDesc": "تم تطويرها خالصًا لوجه الله (صدقة جارية) ومجانية وخالية من الإعلانات بنسبة 100% للأمة الإسلامية."
+  "ourIslamicCompanionAppsDesc": "تم تطويرها خالصًا لوجه الله (صدقة جارية) ومجانية وخالية من الإعلانات بنسبة 100% للأمة الإسلامية.",
+  "reminderRingtone": "صوت التذكير",
+  "chooseRingtone": "اختيار النغمة",
+  "chooseRingtoneDescription": "اختر من أصوات النظام أو ملفات الصوت بالجهاز",
+  "defaultSound": "افتراضي التطبيق (notification_sound.wav)",
+  "systemNotification": "إشعار النظام الافتراضي",
+  "systemAlarm": "منبه النظام الافتراضي",
+  "systemRingtone": "نغمة الهاتف الافتراضية",
+  "previewSound": "معاينة الصوت",
+  "stopPreview": "إيقاف المعاينة",
+  "testNotification": "إرسال إشعار تجريبي",
+  "testNotificationSent": "تم إرسال الإشعار التجريبي! تحقق من إشعاراتك.",
+  "quickPresets": "خيارات سريعة"
 }

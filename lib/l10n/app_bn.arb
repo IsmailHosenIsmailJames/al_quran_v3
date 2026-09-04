@@ -839,5 +839,17 @@
   "hadithCollectionsBrief": "বুখারী, মুসলিম এবং অন্যান্য",
   "explore": "দেখুন",
   "ourIslamicCompanionApps": "আমাদের অন্যান্য ইসলামিক অ্যাপসমূহ",
-  "ourIslamicCompanionAppsDesc": "মুসলিম উম্মাহর জন্য সম্পূর্ণ বিনামূল্যে ও বিজ্ঞাপনহীনভাবে আল্লাহর সন্তুষ্টির উদ্দেশ্যে (সদকায়ে জারিয়া) তৈরি।"
+  "ourIslamicCompanionAppsDesc": "মুসলিম উম্মাহর জন্য সম্পূর্ণ বিনামূল্যে ও বিজ্ঞাপনহীনভাবে আল্লাহর সন্তুষ্টির উদ্দেশ্যে (সদকায়ে জারিয়া) তৈরি।",
+  "reminderRingtone": "রিমাইন্ডার রিংটোন",
+  "chooseRingtone": "রিংটোন নির্বাচন করুন",
+  "chooseRingtoneDescription": "সিস্টেম সাউন্ড বা ডিভাইসের অডিও থেকে বেছে নিন",
+  "defaultSound": "অ্যাপ ডিফল্ট (notification_sound.wav)",
+  "systemNotification": "সিস্টেম ডিফল্ট নোটিফিকেশন",
+  "systemAlarm": "সিস্টেম ডিফল্ট অ্যালার্ম",
+  "systemRingtone": "সিস্টেম ফোন রিংটোন",
+  "previewSound": "শব্দ শুনুন",
+  "stopPreview": "প্লে বন্ধ করুন",
+  "testNotification": "টেস্ট নোটিফিকেশন পাঠান",
+  "testNotificationSent": "টেস্ট নোটিফিকেশন পাঠানো হয়েছে! আপনার নোটিফিকেশন চেক করুন।",
+  "quickPresets": "কুইক প্রিসেট"
 }

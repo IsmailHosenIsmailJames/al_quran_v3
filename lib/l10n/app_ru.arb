@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "Бухари, Муслим и др.",
   "explore": "Обзор",
   "ourIslamicCompanionApps": "Наши исламские приложения-спутники",
-  "ourIslamicCompanionAppsDesc": "Разработано исключительно ради Аллаха (Садака Джария) — 100% бесплатно и без рекламы для мусульманской уммы."
+  "ourIslamicCompanionAppsDesc": "Разработано исключительно ради Аллаха (Садака Джария) — 100% бесплатно и без рекламы для мусульманской уммы.",
+  "reminderRingtone": "Звук напоминания",
+  "chooseRingtone": "Выбрать мелодию",
+  "chooseRingtoneDescription": "Выберите из системных звуков или аудио устройства",
+  "defaultSound": "По умолчанию приложения (notification_sound.wav)",
+  "systemNotification": "Системное уведомление по умолчанию",
+  "systemAlarm": "Системный будильник по умолчанию",
+  "systemRingtone": "Системный звонок телефона",
+  "previewSound": "Прослушать звук",
+  "stopPreview": "Остановить",
+  "testNotification": "Отправить тестовое уведомление",
+  "testNotificationSent": "Тестовое уведомление отправлено! Проверьте панель уведомлений.",
+  "quickPresets": "Быстрый выбор"
 }

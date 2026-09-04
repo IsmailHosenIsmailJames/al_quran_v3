@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "بخاری، مسلم اور مزید",
   "explore": "دیکھیں",
   "ourIslamicCompanionApps": "ہماری اسلامی ہمراہی ایپس",
-  "ourIslamicCompanionAppsDesc": "مسلم امت کے لیے خالصتاً رضائے الٰہی (صدقہ جاریہ) کے لیے 100٪ مفت اور اشتہارات سے پاک تیار کی گئی ہے۔"
+  "ourIslamicCompanionAppsDesc": "مسلم امت کے لیے خالصتاً رضائے الٰہی (صدقہ جاریہ) کے لیے 100٪ مفت اور اشتہارات سے پاک تیار کی گئی ہے۔",
+  "reminderRingtone": "یاد دہانی کی آواز",
+  "chooseRingtone": "رنگ ٹون منتخب کریں",
+  "chooseRingtoneDescription": "سسٹم کی آوازوں یا ڈیوائس کے آڈیو سے منتخب کریں",
+  "defaultSound": "ایپ کا ڈیفالٹ (notification_sound.wav)",
+  "systemNotification": "سسٹم کا ڈیفالٹ نوٹیفکیشن",
+  "systemAlarm": "سسٹم کا ڈیفالٹ الارم",
+  "systemRingtone": "سسٹم کی فون رنگ ٹون",
+  "previewSound": "آواز سنیں",
+  "stopPreview": "بند کریں",
+  "testNotification": "ٹیسٹ نوٹیفکیشن بھیجیں",
+  "testNotificationSent": "ٹیسٹ نوٹیفکیشن بھیج دیا گیا! اپنے نوٹیفکیشنز چیک کریں۔",
+  "quickPresets": "فوری ترتیبات"
 }

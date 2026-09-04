@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "بخاري، مسلم او نور",
   "explore": "پلټنه",
   "ourIslamicCompanionApps": "زموږ اسلامي ملګري اپلیکیشنونه",
-  "ourIslamicCompanionAppsDesc": "د مسلمان امت لپاره یوازې د الله تعالی د رضا (صدقه جاریه) لپاره په ۱۰۰٪ وړیا او له اعلاناتو پرته تجربه جوړ شوی."
+  "ourIslamicCompanionAppsDesc": "د مسلمان امت لپاره یوازې د الله تعالی د رضا (صدقه جاریه) لپاره په ۱۰۰٪ وړیا او له اعلاناتو پرته تجربه جوړ شوی.",
+  "reminderRingtone": "د یادونې غږ",
+  "chooseRingtone": "د زنګ غږ غوره کړئ",
+  "chooseRingtoneDescription": "د سیسټم غږونو یا د وسیلې له آډیو څخه غوره کړئ",
+  "defaultSound": "د اپلیکیشن ډیفالټ (notification_sound.wav)",
+  "systemNotification": "د سیسټم ډیفالټ خبرتیا",
+  "systemAlarm": "د سیسټم ډیفالټ الارم",
+  "systemRingtone": "د سیسټم د ټیلیفون زنګ",
+  "previewSound": "د غږ مخکتنه",
+  "stopPreview": "مخکتنه بنده کړئ",
+  "testNotification": "ازمایښتي خبرتیا واستوئ",
+  "testNotificationSent": "ازمایښتي خبرتیا واستول شوه! خپلې خبرتیاوې وګورئ.",
+  "quickPresets": "ګړندي اختیارونه"
 }

@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "Bukhari, Muslim & lainnya",
   "explore": "Jelajahi",
   "ourIslamicCompanionApps": "Aplikasi Pendamping Islami Kami",
-  "ourIslamicCompanionAppsDesc": "Dikembangkan semata-mata karena Allah (Sedekah Jariyah) dengan pengalaman 100% gratis dan bebas iklan untuk Umat Muslim."
+  "ourIslamicCompanionAppsDesc": "Dikembangkan semata-mata karena Allah (Sedekah Jariyah) dengan pengalaman 100% gratis dan bebas iklan untuk Umat Muslim.",
+  "reminderRingtone": "Suara Pengingat",
+  "chooseRingtone": "Pilih Nada Dering",
+  "chooseRingtoneDescription": "Pilih dari suara sistem atau audio perangkat",
+  "defaultSound": "Bawaan Aplikasi (notification_sound.wav)",
+  "systemNotification": "Notifikasi Bawaan Sistem",
+  "systemAlarm": "Alarm Bawaan Sistem",
+  "systemRingtone": "Nada Dering Telepon Sistem",
+  "previewSound": "Pratinjau Suara",
+  "stopPreview": "Hentikan Pratinjau",
+  "testNotification": "Kirim Notifikasi Uji Coba",
+  "testNotificationSent": "Notifikasi uji coba terkirim! Periksa notifikasi Anda.",
+  "quickPresets": "Pilihan Cepat"
 }

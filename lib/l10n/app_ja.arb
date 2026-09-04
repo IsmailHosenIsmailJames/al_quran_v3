@@ -546,5 +546,17 @@
   "hadithCollectionsBrief": "ブハーリー、ムスリムなど",
   "explore": "探索",
   "ourIslamicCompanionApps": "私たちのイスラム・コンパニオンアプリ",
-  "ourIslamicCompanionAppsDesc": "ムスリム・ウンマのために、アッラーのために（サダカ・ジャーリヤ）100％無料・広告なしで開発されました。"
+  "ourIslamicCompanionAppsDesc": "ムスリム・ウンマのために、アッラーのために（サダカ・ジャーリヤ）100％無料・広告なしで開発されました。",
+  "reminderRingtone": "リマインダー音",
+  "chooseRingtone": "着信音を選択",
+  "chooseRingtoneDescription": "システム音またはデバイスの音声から選択",
+  "defaultSound": "アプリデフォルト (notification_sound.wav)",
+  "systemNotification": "システム標準の通知音",
+  "systemAlarm": "システム標準のアラーム音",
+  "systemRingtone": "システムの着信音",
+  "previewSound": "サウンドを試聴",
+  "stopPreview": "試聴を停止",
+  "testNotification": "テスト通知を送信",
+  "testNotificationSent": "テスト通知を送信しました！通知を確認してください。",
+  "quickPresets": "クイックプリセット"
 }

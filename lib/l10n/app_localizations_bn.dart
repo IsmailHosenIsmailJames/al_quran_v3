@@ -1841,4 +1841,42 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'মুসলিম উম্মাহর জন্য সম্পূর্ণ বিনামূল্যে ও বিজ্ঞাপনহীনভাবে আল্লাহর সন্তুষ্টির উদ্দেশ্যে (সদকায়ে জারিয়া) তৈরি।';
+
+  @override
+  String get reminderRingtone => 'রিমাইন্ডার রিংটোন';
+
+  @override
+  String get chooseRingtone => 'রিংটোন নির্বাচন করুন';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'সিস্টেম সাউন্ড বা ডিভাইসের অডিও থেকে বেছে নিন';
+
+  @override
+  String get defaultSound => 'অ্যাপ ডিফল্ট (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'সিস্টেম ডিফল্ট নোটিফিকেশন';
+
+  @override
+  String get systemAlarm => 'সিস্টেম ডিফল্ট অ্যালার্ম';
+
+  @override
+  String get systemRingtone => 'সিস্টেম ফোন রিংটোন';
+
+  @override
+  String get previewSound => 'শব্দ শুনুন';
+
+  @override
+  String get stopPreview => 'প্লে বন্ধ করুন';
+
+  @override
+  String get testNotification => 'টেস্ট নোটিফিকেশন পাঠান';
+
+  @override
+  String get testNotificationSent =>
+      'টেস্ট নোটিফিকেশন পাঠানো হয়েছে! আপনার নোটিফিকেশন চেক করুন।';
+
+  @override
+  String get quickPresets => 'কুইক প্রিসেট';
 }

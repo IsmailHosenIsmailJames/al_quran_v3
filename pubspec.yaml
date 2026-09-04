@@ -115,6 +115,7 @@ flutter:
     - assets/img/
     - assets/quran_script/
     - assets/meta_data/
+    - assets/audio/
 
   fonts:
     ##### Uthmani/Madani Script Fonts #####

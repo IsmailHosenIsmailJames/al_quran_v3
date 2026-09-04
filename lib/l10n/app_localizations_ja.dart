@@ -1796,4 +1796,40 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'ムスリム・ウンマのために、アッラーのために（サダカ・ジャーリヤ）100％無料・広告なしで開発されました。';
+
+  @override
+  String get reminderRingtone => 'リマインダー音';
+
+  @override
+  String get chooseRingtone => '着信音を選択';
+
+  @override
+  String get chooseRingtoneDescription => 'システム音またはデバイスの音声から選択';
+
+  @override
+  String get defaultSound => 'アプリデフォルト (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'システム標準の通知音';
+
+  @override
+  String get systemAlarm => 'システム標準のアラーム音';
+
+  @override
+  String get systemRingtone => 'システムの着信音';
+
+  @override
+  String get previewSound => 'サウンドを試聴';
+
+  @override
+  String get stopPreview => '試聴を停止';
+
+  @override
+  String get testNotification => 'テスト通知を送信';
+
+  @override
+  String get testNotificationSent => 'テスト通知を送信しました！通知を確認してください。';
+
+  @override
+  String get quickPresets => 'クイックプリセット';
 }

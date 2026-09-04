@@ -808,5 +808,17 @@
   "hadithCollectionsBrief": "Bujari, Muslim y más",
   "explore": "Explorar",
   "ourIslamicCompanionApps": "Nuestras Aplicaciones Islámicas Compañeras",
-  "ourIslamicCompanionAppsDesc": "Desarrollado exclusivamente por el amor de Allah (Sadaqah Yariyah) con una experiencia 100% gratuita y sin anuncios para la Ummah musulmana."
+  "ourIslamicCompanionAppsDesc": "Desarrollado exclusivamente por el amor de Allah (Sadaqah Yariyah) con una experiencia 100% gratuita y sin anuncios para la Ummah musulmana.",
+  "reminderRingtone": "Sonido de recordatorio",
+  "chooseRingtone": "Elegir tono",
+  "chooseRingtoneDescription": "Elija entre sonidos del sistema o audio del dispositivo",
+  "defaultSound": "Predeterminado de la app (notification_sound.wav)",
+  "systemNotification": "Notificación predeterminada del sistema",
+  "systemAlarm": "Alarma predeterminada del sistema",
+  "systemRingtone": "Tono de llamada del sistema",
+  "previewSound": "Vista previa del sonido",
+  "stopPreview": "Detener reproducción",
+  "testNotification": "Enviar notificación de prueba",
+  "testNotificationSent": "¡Notificación de prueba enviada! Revisa tus notificaciones.",
+  "quickPresets": "Ajustes rápidos"
 }

@@ -1849,4 +1849,43 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Imeundwa kwa ajili ya Mwenyezi Mungu pekee (Sadaqah Jariyah) ikiwa na uzoefu wa 100% bila malipo na bila matangazo kwa Umma wa Kiislamu.';
+
+  @override
+  String get reminderRingtone => 'Sauti ya Kikumbusho';
+
+  @override
+  String get chooseRingtone => 'Chagua Mlio';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Chagua kutoka kwa sauti za mfumo au faili za sauti za kifaa';
+
+  @override
+  String get defaultSound =>
+      'Chaguo-msingi la Programu (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Taarifa Chaguomsingi ya Mfumo';
+
+  @override
+  String get systemAlarm => 'Kengele Chaguomsingi ya Mfumo';
+
+  @override
+  String get systemRingtone => 'Mlio wa Simu wa Mfumo';
+
+  @override
+  String get previewSound => 'Sikiliza Sauti';
+
+  @override
+  String get stopPreview => 'Acha Kusikiliza';
+
+  @override
+  String get testNotification => 'Tuma Taarifa ya Jaribio';
+
+  @override
+  String get testNotificationSent =>
+      'Taarifa ya jaribio imetumwa! Angalia taarifa zako.';
+
+  @override
+  String get quickPresets => 'Chaguo za Haraka';
 }

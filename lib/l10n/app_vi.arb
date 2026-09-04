@@ -546,5 +546,17 @@
   "hadithCollectionsBrief": "Bukhari, Muslim & thêm",
   "explore": "Khám phá",
   "ourIslamicCompanionApps": "Ứng dụng đồng hành Hồi giáo của chúng tôi",
-  "ourIslamicCompanionAppsDesc": "Được phát triển hoàn toàn vì Allah (Sadaqah Jariyah) với trải nghiệm miễn phí 100% và không có quảng cáo cho Cộng đồng Hồi giáo."
+  "ourIslamicCompanionAppsDesc": "Được phát triển hoàn toàn vì Allah (Sadaqah Jariyah) với trải nghiệm miễn phí 100% và không có quảng cáo cho Cộng đồng Hồi giáo.",
+  "reminderRingtone": "Âm thanh nhắc nhở",
+  "chooseRingtone": "Chọn nhạc chuông",
+  "chooseRingtoneDescription": "Chọn từ âm thanh hệ thống hoặc âm thanh thiết bị",
+  "defaultSound": "Mặc định ứng dụng (notification_sound.wav)",
+  "systemNotification": "Thông báo mặc định của hệ thống",
+  "systemAlarm": "Báo thức mặc định của hệ thống",
+  "systemRingtone": "Nhạc chuông điện thoại của hệ thống",
+  "previewSound": "Nghe thử âm thanh",
+  "stopPreview": "Dừng nghe thử",
+  "testNotification": "Gửi thông báo thử nghiệm",
+  "testNotificationSent": "Đã gửi thông báo thử nghiệm! Kiểm tra thông báo của bạn.",
+  "quickPresets": "Cài đặt nhanh"
 }

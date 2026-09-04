@@ -1845,4 +1845,42 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get ourIslamicCompanionAppsDesc =>
       'Được phát triển hoàn toàn vì Allah (Sadaqah Jariyah) với trải nghiệm miễn phí 100% và không có quảng cáo cho Cộng đồng Hồi giáo.';
+
+  @override
+  String get reminderRingtone => 'Âm thanh nhắc nhở';
+
+  @override
+  String get chooseRingtone => 'Chọn nhạc chuông';
+
+  @override
+  String get chooseRingtoneDescription =>
+      'Chọn từ âm thanh hệ thống hoặc âm thanh thiết bị';
+
+  @override
+  String get defaultSound => 'Mặc định ứng dụng (notification_sound.wav)';
+
+  @override
+  String get systemNotification => 'Thông báo mặc định của hệ thống';
+
+  @override
+  String get systemAlarm => 'Báo thức mặc định của hệ thống';
+
+  @override
+  String get systemRingtone => 'Nhạc chuông điện thoại của hệ thống';
+
+  @override
+  String get previewSound => 'Nghe thử âm thanh';
+
+  @override
+  String get stopPreview => 'Dừng nghe thử';
+
+  @override
+  String get testNotification => 'Gửi thông báo thử nghiệm';
+
+  @override
+  String get testNotificationSent =>
+      'Đã gửi thông báo thử nghiệm! Kiểm tra thông báo của bạn.';
+
+  @override
+  String get quickPresets => 'Cài đặt nhanh';
 }

@@ -546,5 +546,17 @@
   "hadithCollectionsBrief": "부하리, 무슬림 등",
   "explore": "탐색",
   "ourIslamicCompanionApps": "우리의 이슬람 동반 앱",
-  "ourIslamicCompanionAppsDesc": "무슬림 움마를 위해 오직 알라를 위해 (사다카 자리야) 100% 무료 및 광고 없는 경험으로 개발되었습니다."
+  "ourIslamicCompanionAppsDesc": "무슬림 움마를 위해 오직 알라를 위해 (사다카 자리야) 100% 무료 및 광고 없는 경험으로 개발되었습니다.",
+  "reminderRingtone": "알림음",
+  "chooseRingtone": "벨소리 선택",
+  "chooseRingtoneDescription": "시스템 소리 또는 기기 오디오에서 선택",
+  "defaultSound": "앱 기본값 (notification_sound.wav)",
+  "systemNotification": "시스템 기본 알림",
+  "systemAlarm": "시스템 기본 알람",
+  "systemRingtone": "시스템 전화 벨소리",
+  "previewSound": "소리 미리듣기",
+  "stopPreview": "미리듣기 중지",
+  "testNotification": "테스트 알림 보내기",
+  "testNotificationSent": "테스트 알림이 전송되었습니다! 알림을 확인하세요.",
+  "quickPresets": "빠른 사전 설정"
 }
