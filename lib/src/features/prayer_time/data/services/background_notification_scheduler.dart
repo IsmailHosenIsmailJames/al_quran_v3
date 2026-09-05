@@ -72,7 +72,6 @@ class ReminderScheduler {
   // ─── Channel Sync ──────────────────────────────────────────────────────
 
   static Future<void> syncNotificationChannel() async {
-    final isAlarm = getEnforceAlarmSound();
     final soundUri = getSelectedRingtoneUri();
     final soundType = getSelectedRingtoneType();
     final channelKey = getNotificationChannelKey();
@@ -97,12 +96,11 @@ class ReminderScheduler {
           channelName: "Prayer Reminders",
           channelDescription: "Notifications for prayer time reminders",
           playSound: true,
-          importance:
-              isAlarm ? NotificationImportance.Max : NotificationImportance.High,
+          importance: NotificationImportance.High,
           defaultPrivacy: NotificationPrivacy.Public,
           soundSource: soundSource,
           defaultRingtoneType: defaultRingtoneType,
-          criticalAlerts: true,
+          criticalAlerts: false,
           enableVibration: true,
           enableLights: true,
         ),
@@ -119,7 +117,7 @@ class ReminderScheduler {
         soundUri: (soundType == "default_sound" || soundType == "notification_sound")
             ? "resource://raw/notification_sound"
             : soundUri ?? soundType,
-        isAlarm: isAlarm,
+        isAlarm: false,
       );
     }
   }
@@ -162,7 +160,6 @@ class ReminderScheduler {
     );
 
     final enabledMap = reminderState.enabledPrayers ?? getEnabledPrayers();
-    final isAlarm = reminderState.enforceAlarmSound ?? getEnforceAlarmSound();
     final channelKey = getNotificationChannelKey();
     final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
 
@@ -184,10 +181,10 @@ class ReminderScheduler {
               body: DateFormat.jm(
                 locale.languageCode,
               ).format(time),
-              category:
-                  isAlarm ? NotificationCategory.Alarm : NotificationCategory.Reminder,
+              category: NotificationCategory.Reminder,
               notificationLayout: NotificationLayout.Default,
               wakeUpScreen: true,
+              autoDismissible: true,
             ),
             schedule: NotificationCalendar(
               day: time.day,
@@ -211,7 +208,6 @@ class ReminderScheduler {
   static Future<void> sendTestNotification() async {
     await syncNotificationChannel();
     final channelKey = getNotificationChannelKey();
-    final isAlarm = getEnforceAlarmSound();
     final title = getSelectedRingtoneTitle() ?? "notification_sound.wav";
 
     await AwesomeNotifications().createNotification(
@@ -220,10 +216,10 @@ class ReminderScheduler {
         channelKey: channelKey,
         title: "🕌 Prayer Reminder Test",
         body: "Testing sound: $title",
-        category:
-            isAlarm ? NotificationCategory.Alarm : NotificationCategory.Reminder,
+        category: NotificationCategory.Reminder,
         notificationLayout: NotificationLayout.Default,
         wakeUpScreen: true,
+        autoDismissible: true,
       ),
     );
   }
@@ -466,8 +462,13 @@ class ReminderScheduler {
   // ─── Ringtone Settings ────────────────────────────────────────────────
 
   static String getNotificationChannelKey() {
-    return _sharedPreferences.getString("prayer_reminder_channel_key") ??
-        "prayer_reminder_default";
+    final key = _sharedPreferences.getString("prayer_reminder_channel_key");
+    if (key == null ||
+        key == "prayer_reminder" ||
+        key == "prayer_reminder_default") {
+      return "prayer_reminder_notif_v1";
+    }
+    return key;
   }
 
   static Future<void> setNotificationChannelKey(String key) async {

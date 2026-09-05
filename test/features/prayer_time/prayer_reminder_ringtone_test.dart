@@ -37,7 +37,7 @@ void main() {
 
     test("ReminderScheduler ringtone preferences default values and updates", () async {
       expect(ReminderScheduler.getSelectedRingtoneType(), equals("default_sound"));
-      expect(ReminderScheduler.getNotificationChannelKey(), equals("prayer_reminder_default"));
+      expect(ReminderScheduler.getNotificationChannelKey(), equals("prayer_reminder_notif_v1"));
       expect(ReminderScheduler.getSelectedRingtoneUri(), isNull);
       expect(ReminderScheduler.getSelectedRingtoneTitle(), isNull);
 
