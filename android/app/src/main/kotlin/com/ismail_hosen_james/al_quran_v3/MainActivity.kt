@@ -198,8 +198,7 @@ class MainActivity : AudioServiceActivity() {
                         if (rawResId != 0) {
                             Uri.parse("android.resource://$packageName/$rawResId")
                         } else {
-                            if (isAlarm) RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                            else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                            RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                         }
                     }
                     soundUriStr == "system_alarm" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
@@ -210,7 +209,7 @@ class MainActivity : AudioServiceActivity() {
 
                 val audioAttributes = AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(if (isAlarm) AudioAttributes.USAGE_ALARM else AudioAttributes.USAGE_NOTIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                     .build()
 
                 // If channel exists, delete before recreating to ensure sound update is applied by Android OS
