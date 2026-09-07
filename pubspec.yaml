@@ -78,10 +78,6 @@ dependencies:
   workmanager: ^0.10.0+1
   flutter_inappwebview: ^6.1.5
   home_widget: ^0.9.3
-  firebase_core: ^4.13.0
-  firebase_auth: ^6.1.2
-  google_sign_in: ^7.2.0
-  firebase_database: ^12.4.7
 
 dev_dependencies:
   flutter_test:
