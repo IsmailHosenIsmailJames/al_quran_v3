@@ -8,9 +8,6 @@
 
 #include <awesome_notifications/awesome_notifications_plugin_c_api.h>
 #include <clipboard/clipboard_plugin.h>
-#include <firebase_auth/firebase_auth_plugin_c_api.h>
-#include <firebase_core/firebase_core_plugin_c_api.h>
-#include <firebase_database/firebase_database_plugin_c_api.h>
 #include <flutter_inappwebview_windows/flutter_inappwebview_windows_plugin_c_api.h>
 #include <geolocator_windows/geolocator_windows.h>
 #include <media_kit_libs_windows_audio/media_kit_libs_windows_audio_plugin_c_api.h>
@@ -25,12 +22,6 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("AwesomeNotificationsPluginCApi"));
   ClipboardPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ClipboardPlugin"));
-  FirebaseAuthPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FirebaseAuthPluginCApi"));
-  FirebaseCorePluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
-  FirebaseDatabasePluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("FirebaseDatabasePluginCApi"));
   FlutterInappwebviewWindowsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterInappwebviewWindowsPluginCApi"));
   GeolocatorWindowsRegisterWithRegistrar(

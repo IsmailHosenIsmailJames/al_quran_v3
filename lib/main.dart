@@ -1,15 +1,9 @@
 import "dart:async";
 import "dart:developer";
 
-import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
-import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
-import "package:al_quran_v3/src/features/sync/data/services/cloud_sync_service.dart";
-import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
-import "package:firebase_auth/firebase_auth.dart";
-import "package:firebase_core/firebase_core.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
@@ -66,19 +60,8 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  if (kIsWeb ||
-      defaultTargetPlatform == TargetPlatform.android ||
-      defaultTargetPlatform == TargetPlatform.iOS ||
-      defaultTargetPlatform == TargetPlatform.macOS ||
-      defaultTargetPlatform == TargetPlatform.windows) {
-    try {
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-    } catch (e) {
-      debugPrint("Firebase initialization skipped: $e");
-    }
-  }
+  // Disable runtime fetching of fonts from Google servers for FOSS offline privacy
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   platform_services.initializePlatform();
 
@@ -248,36 +231,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  StreamSubscription? _syncSubscription;
-
-  @override
-  void initState() {
-    super.initState();
-    // Auto-sync on startup if already authenticated
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        getIt<SyncCubit>().sync(user.uid);
-      }
-    } catch (_) {}
-
-    // Listen to sync completion events to dynamically reload active UI cubits
-    try {
-      _syncSubscription = getIt<CloudSyncService>().onSyncCompleted.listen((_) {
-        try {
-          getIt<QuranHistoryCubit>().reload();
-          getIt<QuickAccessCubit>().reload();
-        } catch (_) {}
-      });
-    } catch (_) {}
-  }
-
-  @override
-  void dispose() {
-    _syncSubscription?.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
@@ -319,8 +272,6 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => getIt<AudioDownloadCubit>()),
         BlocProvider(create: (context) => getIt<AudioLoopCubit>()),
         BlocProvider(create: (context) => getIt<AyahToHighlight>()),
-        BlocProvider(create: (context) => getIt<AuthCubit>()),
-        BlocProvider(create: (context) => getIt<SyncCubit>()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(

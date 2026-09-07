@@ -4,10 +4,6 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/widgets/theme_icon_button.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
-import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
-import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
-import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
-import "package:al_quran_v3/src/features/auth/presentation/screens/profile_account_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
@@ -50,51 +46,6 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               // Top App Branding Card
               _buildAppBrandingCard(context, themeState, isDark),
-
-              const Gap(16),
-
-              // 0. Account & Cloud Sync Section
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, authState) {
-                  final isAuth = authState is Authenticated;
-                  final user = isAuth ? authState.user : null;
-                  final title = isAuth ? (user?.displayName ?? user?.email ?? "User Account") : appLocalizations.accountAndSync;
-                  final subtitle = isAuth ? (user?.email ?? "Cloud sync active") : "Sign in to sync notes, bookmarks & history";
-
-                  return _buildMainSection(
-                    icon: FluentIcons.person_accounts_24_regular,
-                    title: appLocalizations.accountAndSync,
-                    themePrimary: themeState.primary,
-                    isDark: isDark,
-                    child: ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: themeState.primaryShade200,
-                        backgroundImage: user?.photoUrl != null ? NetworkImage(user!.photoUrl!) : null,
-                        child: user?.photoUrl == null
-                            ? Icon(
-                                isAuth ? FluentIcons.person_24_filled : FluentIcons.cloud_arrow_up_24_regular,
-                                size: 20,
-                                color: themeState.primary,
-                              )
-                            : null,
-                      ),
-                      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-                      subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
-                      trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => isAuth ? const ProfileAccountScreen() : const AuthScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
 
               const Gap(16),
 

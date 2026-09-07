@@ -1,0 +1,39 @@
+Categories:
+  - Reading
+  - Religion
+License: GPL-3.0-or-later
+AuthorName: MD. Ismail Hosen
+SourceCode: https://github.com/IsmailHosenIsmailJames/al_quran_v3
+IssueTracker: https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues
+
+AutoName: Al-Bayan Quran
+
+Summary: Holy Quran, Tafsir, Audio Recitations, and Prayer Times (FOSS Edition)
+
+Description: |-
+  Al-Bayan Quran is an Islamic application for reading the Holy Quran, listening to recitations, calculating accurate prayer times, and finding the Qibla direction.
+
+  Features:
+  * Full Quran Mushaf & Script views with multiple Arabic typography fonts (Uthmani, Indopak).
+  * Word-by-word analysis and translations in dozens of languages.
+  * Audio recitation playback with background audio support.
+  * Offline prayer time calculations and Qibla compass.
+  * Local notes, pinned ayahs, and reading history saved entirely offline on device.
+  * 100% Free and Open Source (FOSS) with zero ads, zero tracking, and no proprietary dependencies.
+
+RepoType: git
+Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
+
+Builds:
+  - versionName: 4.1.0
+    versionCode: 96
+    commit: v4.1.0
+    subdir: .
+    output: build/app/outputs/flutter-apk/app-release.apk
+    build:
+      - flutter build apk --release
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 4.1.0
+CurrentVersionCode: 96
