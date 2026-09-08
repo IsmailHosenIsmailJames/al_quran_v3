@@ -820,5 +820,16 @@
   "stopPreview": "بند کریں",
   "testNotification": "ٹیسٹ نوٹیفکیشن بھیجیں",
   "testNotificationSent": "ٹیسٹ نوٹیفکیشن بھیج دیا گیا! اپنے نوٹیفکیشنز چیک کریں۔",
-  "quickPresets": "فوری ترتیبات"
+  "quickPresets": "فوری ترتیبات",
+  "reminderModeOff": "بند",
+  "reminderModeNotification": "اطلاع",
+  "reminderModeAlarm": "الارم",
+  "testAlarm": "الارم آزمائیں",
+  "testAlarmSent": "مکمل اسکرین الارم ٹیسٹ بھیج دیا گیا",
+  "stopAlarm": "الارم بند کریں",
+  "snooze": "اسنوز",
+  "snoozed10Min": "10 منٹ کے لیے اسنوز کیا گیا",
+  "fullScreenAlarmPermission": "فل اسکرین الارم کی اجازت",
+  "fullScreenAlarmPermissionDesc": "فون لاک ہونے پر الارم کو اسکرین آن کرنے کی اجازت دیں",
+  "grantPermission": "اجازت دیں"
 }

@@ -1873,4 +1873,38 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get quickPresets => 'ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ';
+
+  @override
+  String get reminderModeOff => 'ਬੰਦ';
+
+  @override
+  String get reminderModeNotification => 'ਸੂਚਨਾ';
+
+  @override
+  String get reminderModeAlarm => 'ਅਲਾਰਮ';
+
+  @override
+  String get testAlarm => 'ਅਲਾਰਮ ਪਰਖੋ';
+
+  @override
+  String get testAlarmSent => 'ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਟੈਸਟ ਭੇਜਿਆ ਗਿਆ';
+
+  @override
+  String get stopAlarm => 'ਅਲਾਰਮ ਰੋਕੋ';
+
+  @override
+  String get snooze => 'ਸਨੂਜ਼';
+
+  @override
+  String get snoozed10Min => '10 ਮਿੰਟਾਂ ਲਈ ਸਨੂਜ਼ ਕੀਤਾ ਗਿਆ';
+
+  @override
+  String get fullScreenAlarmPermission => 'ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਆਗਿਆ';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'ਫੋਨ ਲੌਕ ਹੋਣ \'ਤੇ ਅਲਾਰਮ ਨੂੰ ਸਕ੍ਰੀਨ ਜਗਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ';
+
+  @override
+  String get grantPermission => 'ਆਗਿਆ ਦਿਓ';
 }

@@ -820,5 +820,16 @@
   "stopPreview": "पूर्वावलोकन रोकें",
   "testNotification": "परीक्षण सूचना भेजें",
   "testNotificationSent": "परीक्षण सूचना भेजी गई! अपनी सूचनाएं जांचें।",
-  "quickPresets": "त्वरित प्रीसेट"
+  "quickPresets": "त्वरित प्रीसेट",
+  "reminderModeOff": "बंद",
+  "reminderModeNotification": "अधिसूचना",
+  "reminderModeAlarm": "अलार्म",
+  "testAlarm": "अलार्म परीक्षण",
+  "testAlarmSent": "फुल-स्क्रीन अलार्म टेस्ट भेजा गया",
+  "stopAlarm": "अलार्म बंद करें",
+  "snooze": "स्नूज़",
+  "snoozed10Min": "10 मिनट के लिए स्नूज़ किया गया",
+  "fullScreenAlarmPermission": "फुल-स्क्रीन अलार्म अनुमति",
+  "fullScreenAlarmPermissionDesc": "फ़ोन लॉक होने पर अलार्म को स्क्रीन जगाने की अनुमति दें",
+  "grantPermission": "अनुमति दें"
 }

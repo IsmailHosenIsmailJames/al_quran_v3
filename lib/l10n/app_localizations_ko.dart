@@ -1832,4 +1832,37 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get quickPresets => '빠른 사전 설정';
+
+  @override
+  String get reminderModeOff => '꺼짐';
+
+  @override
+  String get reminderModeNotification => '알림';
+
+  @override
+  String get reminderModeAlarm => '알람';
+
+  @override
+  String get testAlarm => '알람 테스트';
+
+  @override
+  String get testAlarmSent => '전체 화면 알람 테스트 전송됨';
+
+  @override
+  String get stopAlarm => '알람 중지';
+
+  @override
+  String get snooze => '스누즈';
+
+  @override
+  String get snoozed10Min => '10분 동안 스누즈됨';
+
+  @override
+  String get fullScreenAlarmPermission => '전체 화면 알람 권한';
+
+  @override
+  String get fullScreenAlarmPermissionDesc => '휴대폰이 잠겨 있을 때 알람이 화면을 켜도록 허용';
+
+  @override
+  String get grantPermission => '권한 허용';
 }

@@ -24,6 +24,21 @@ class MainActivity : AudioServiceActivity() {
     private var currentRingtone: Ringtone? = null
     private var currentMediaPlayer: MediaPlayer? = null
 
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            @Suppress("DEPRECATION")
+            window.addFlags(
+                android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            )
+        }
+    }
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
@@ -45,6 +60,12 @@ class MainActivity : AudioServiceActivity() {
                     }
                     "createOrUpdateNotificationChannel" -> {
                         createOrUpdateNotificationChannel(call, result)
+                    }
+                    "canUseFullScreenIntent" -> {
+                        canUseFullScreenIntent(result)
+                    }
+                    "openFullScreenIntentSettings" -> {
+                        openFullScreenIntentSettings(result)
                     }
                     else -> {
                         result.notImplemented()
@@ -209,7 +230,7 @@ class MainActivity : AudioServiceActivity() {
 
                 val audioAttributes = AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .setUsage(if (isAlarm) AudioAttributes.USAGE_ALARM else AudioAttributes.USAGE_NOTIFICATION)
                     .build()
 
                 // If channel exists, delete before recreating to ensure sound update is applied by Android OS
@@ -223,11 +244,14 @@ class MainActivity : AudioServiceActivity() {
                     channelName,
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
-                    description = "Notifications for prayer time reminders"
+                    description = if (isAlarm) "Full-screen alarm for prayer times" else "Notifications for prayer time reminders"
                     setSound(soundUri, audioAttributes)
                     enableVibration(true)
                     enableLights(true)
                     setShowBadge(true)
+                    if (isAlarm) {
+                        setBypassDnd(true)
+                    }
                 }
 
                 notificationManager.createNotificationChannel(channel)
@@ -237,6 +261,35 @@ class MainActivity : AudioServiceActivity() {
             }
         } else {
             result.success(true)
+        }
+    }
+
+    private fun canUseFullScreenIntent(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            try {
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                result.success(notificationManager.canUseFullScreenIntent())
+            } catch (e: Exception) {
+                result.success(true)
+            }
+        } else {
+            result.success(true)
+        }
+    }
+
+    private fun openFullScreenIntentSettings(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            try {
+                val intent = Intent(android.provider.Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
+                    data = Uri.parse("package:$packageName")
+                }
+                startActivity(intent)
+                result.success(true)
+            } catch (e: Exception) {
+                result.error("SETTINGS_ERROR", e.message, null)
+            }
+        } else {
+            result.success(false)
         }
     }
 

@@ -1873,4 +1873,38 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quickPresets => 'خيارات سريعة';
+
+  @override
+  String get reminderModeOff => 'إيقاف';
+
+  @override
+  String get reminderModeNotification => 'إشعار';
+
+  @override
+  String get reminderModeAlarm => 'منبه';
+
+  @override
+  String get testAlarm => 'تجربة المنبه';
+
+  @override
+  String get testAlarmSent => 'تم إرسال تجربة المنبه بملء الشاشة';
+
+  @override
+  String get stopAlarm => 'إيقاف المنبه';
+
+  @override
+  String get snooze => 'غفوة';
+
+  @override
+  String get snoozed10Min => 'تم التفعيل لـ 10 دقائق';
+
+  @override
+  String get fullScreenAlarmPermission => 'إذن المنبه بملء الشاشة';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'السماح للمنبه بإيقاظ الشاشة عندما يكون الهاتف مقفلاً';
+
+  @override
+  String get grantPermission => 'منح الإذن';
 }

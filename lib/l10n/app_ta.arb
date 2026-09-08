@@ -558,5 +558,16 @@
   "stopPreview": "முன்னோட்டத்தை நிறுத்து",
   "testNotification": "சோதனை அறிவிப்பை அனுப்பவும்",
   "testNotificationSent": "சோதனை அறிவிப்பு அனுப்பப்பட்டது! உங்கள் அறிவிப்புகளைச் சரிபார்க்கவும்.",
-  "quickPresets": "விரைவு முன்னமைவுகள்"
+  "quickPresets": "விரைவு முன்னமைவுகள்",
+  "reminderModeOff": "முடக்கு",
+  "reminderModeNotification": "அறிவிப்பு",
+  "reminderModeAlarm": "அலாரம்",
+  "testAlarm": "அலாரத்தை சோதிக்கவும்",
+  "testAlarmSent": "முழுத் திரை அலார சோதனை அனுப்பப்பட்டது",
+  "stopAlarm": "அலாரத்தை நிறுத்து",
+  "snooze": "ஸ்னூஸ்",
+  "snoozed10Min": "10 நிமிடங்களுக்கு ஒத்திவைக்கப்பட்டது",
+  "fullScreenAlarmPermission": "முழுத் திரை அலார அனுமதி",
+  "fullScreenAlarmPermissionDesc": "தொலைபேசி பூட்டப்பட்டிருக்கும் போது அலாரங்கள் திரையை எழுப்ப அனுமதிக்கவும்",
+  "grantPermission": "அனுமதி கொடுங்கள்"
 }

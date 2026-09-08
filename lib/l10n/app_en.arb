@@ -896,5 +896,16 @@
   "stopPreview": "Stop Preview",
   "testNotification": "Send Test Notification",
   "testNotificationSent": "Test notification sent! Check your notifications.",
-  "quickPresets": "Quick Presets"
+  "quickPresets": "Quick Presets",
+  "reminderModeOff": "Off",
+  "reminderModeNotification": "Notification",
+  "reminderModeAlarm": "Alarm",
+  "testAlarm": "Test Alarm",
+  "testAlarmSent": "Full-screen alarm test sent",
+  "stopAlarm": "Stop Alarm",
+  "snooze": "Snooze",
+  "snoozed10Min": "Snoozed for 10 minutes",
+  "fullScreenAlarmPermission": "Full-Screen Alarm Permission",
+  "fullScreenAlarmPermissionDesc": "Allow alarms to wake up the screen when your phone is locked",
+  "grantPermission": "Grant Permission"
 }

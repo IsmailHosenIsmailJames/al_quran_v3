@@ -820,5 +820,16 @@
   "stopPreview": "مخکتنه بنده کړئ",
   "testNotification": "ازمایښتي خبرتیا واستوئ",
   "testNotificationSent": "ازمایښتي خبرتیا واستول شوه! خپلې خبرتیاوې وګورئ.",
-  "quickPresets": "ګړندي اختیارونه"
+  "quickPresets": "ګړندي اختیارونه",
+  "reminderModeOff": "بند",
+  "reminderModeNotification": "خبرتیا",
+  "reminderModeAlarm": "الارم",
+  "testAlarm": "الارم وازموئئ",
+  "testAlarmSent": "د بشپړ سکرین د الارم ازموینه واستول شوه",
+  "stopAlarm": "الارم بند کړئ",
+  "snooze": "ځنډول",
+  "snoozed10Min": "د ۱۰ دقیقو لپاره وځنډول شو",
+  "fullScreenAlarmPermission": "د بشپړ سکرین د الارم اجازه",
+  "fullScreenAlarmPermissionDesc": "الارم ته اجازه ورکړئ کله چې ټلیفون قفل وي سکرین فعال کړي",
+  "grantPermission": "اجازه ورکړئ"
 }

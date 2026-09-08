@@ -1879,4 +1879,38 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get quickPresets => 'কুইক প্রিসেট';
+
+  @override
+  String get reminderModeOff => 'বন্ধ';
+
+  @override
+  String get reminderModeNotification => 'নোটিফিকেশন';
+
+  @override
+  String get reminderModeAlarm => 'অ্যালার্ম';
+
+  @override
+  String get testAlarm => 'অ্যালার্ম পরীক্ষা করুন';
+
+  @override
+  String get testAlarmSent => 'ফুল-স্ক্রিন অ্যালার্ম টেস্ট পাঠানো হয়েছে';
+
+  @override
+  String get stopAlarm => 'অ্যালার্ম বন্ধ করুন';
+
+  @override
+  String get snooze => 'স্নুজ';
+
+  @override
+  String get snoozed10Min => '১০ মিনিটের জন্য স্নুজ করা হয়েছে';
+
+  @override
+  String get fullScreenAlarmPermission => 'ফুল-স্ক্রিন অ্যালার্ম অনুমতি';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'ফোন লক থাকা অবস্থায় অ্যালার্মকে স্ক্রিন জাগানোর অনুমতি দিন';
+
+  @override
+  String get grantPermission => 'অনুমতি দিন';
 }

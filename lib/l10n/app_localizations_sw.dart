@@ -1888,4 +1888,38 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get quickPresets => 'Chaguo za Haraka';
+
+  @override
+  String get reminderModeOff => 'Zima';
+
+  @override
+  String get reminderModeNotification => 'Arifa';
+
+  @override
+  String get reminderModeAlarm => 'Kengele';
+
+  @override
+  String get testAlarm => 'Jaribu Kengele';
+
+  @override
+  String get testAlarmSent => 'Jaribio la kengele ya skrini nzima limetumwa';
+
+  @override
+  String get stopAlarm => 'Simamisha Kengele';
+
+  @override
+  String get snooze => 'Ahirisha';
+
+  @override
+  String get snoozed10Min => 'Imeahirishwa kwa dakika 10';
+
+  @override
+  String get fullScreenAlarmPermission => 'Ruhusa ya Kengele ya Skrini Nzima';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Ruhusu kengele kuamsha skrini wakati simu imefungwa';
+
+  @override
+  String get grantPermission => 'Toa Ruhusa';
 }

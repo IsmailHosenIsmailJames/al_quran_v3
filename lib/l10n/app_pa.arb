@@ -820,5 +820,16 @@
   "stopPreview": "ਝਲਕ ਰੋਕੋ",
   "testNotification": "ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੋ",
   "testNotificationSent": "ਟੈਸਟ ਸੂਚਨਾ ਭੇਜੀ ਗਈ! ਆਪਣੀਆਂ ਸੂਚਨਾਵਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।",
-  "quickPresets": "ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ"
+  "quickPresets": "ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ",
+  "reminderModeOff": "ਬੰਦ",
+  "reminderModeNotification": "ਸੂਚਨਾ",
+  "reminderModeAlarm": "ਅਲਾਰਮ",
+  "testAlarm": "ਅਲਾਰਮ ਪਰਖੋ",
+  "testAlarmSent": "ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਟੈਸਟ ਭੇਜਿਆ ਗਿਆ",
+  "stopAlarm": "ਅਲਾਰਮ ਰੋਕੋ",
+  "snooze": "ਸਨੂਜ਼",
+  "snoozed10Min": "10 ਮਿੰਟਾਂ ਲਈ ਸਨੂਜ਼ ਕੀਤਾ ਗਿਆ",
+  "fullScreenAlarmPermission": "ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਆਗਿਆ",
+  "fullScreenAlarmPermissionDesc": "ਫੋਨ ਲੌਕ ਹੋਣ 'ਤੇ ਅਲਾਰਮ ਨੂੰ ਸਕ੍ਰੀਨ ਜਗਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ",
+  "grantPermission": "ਆਗਿਆ ਦਿਓ"
 }

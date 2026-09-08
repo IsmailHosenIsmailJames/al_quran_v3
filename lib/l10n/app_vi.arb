@@ -558,5 +558,16 @@
   "stopPreview": "Dừng nghe thử",
   "testNotification": "Gửi thông báo thử nghiệm",
   "testNotificationSent": "Đã gửi thông báo thử nghiệm! Kiểm tra thông báo của bạn.",
-  "quickPresets": "Cài đặt nhanh"
+  "quickPresets": "Cài đặt nhanh",
+  "reminderModeOff": "Tắt",
+  "reminderModeNotification": "Thông báo",
+  "reminderModeAlarm": "Báo thức",
+  "testAlarm": "Kiểm tra báo thức",
+  "testAlarmSent": "Đã gửi kiểm tra báo thức toàn màn hình",
+  "stopAlarm": "Dừng báo thức",
+  "snooze": "Báo lại",
+  "snoozed10Min": "Đã báo lại trong 10 phút",
+  "fullScreenAlarmPermission": "Quyền báo thức toàn màn hình",
+  "fullScreenAlarmPermissionDesc": "Cho phép báo thức đánh thức màn hình khi điện thoại bị khóa",
+  "grantPermission": "Cấp quyền"
 }

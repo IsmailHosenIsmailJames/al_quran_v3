@@ -820,5 +820,16 @@
   "stopPreview": "Acha Kusikiliza",
   "testNotification": "Tuma Taarifa ya Jaribio",
   "testNotificationSent": "Taarifa ya jaribio imetumwa! Angalia taarifa zako.",
-  "quickPresets": "Chaguo za Haraka"
+  "quickPresets": "Chaguo za Haraka",
+  "reminderModeOff": "Zima",
+  "reminderModeNotification": "Arifa",
+  "reminderModeAlarm": "Kengele",
+  "testAlarm": "Jaribu Kengele",
+  "testAlarmSent": "Jaribio la kengele ya skrini nzima limetumwa",
+  "stopAlarm": "Simamisha Kengele",
+  "snooze": "Ahirisha",
+  "snoozed10Min": "Imeahirishwa kwa dakika 10",
+  "fullScreenAlarmPermission": "Ruhusa ya Kengele ya Skrini Nzima",
+  "fullScreenAlarmPermissionDesc": "Ruhusu kengele kuamsha skrini wakati simu imefungwa",
+  "grantPermission": "Toa Ruhusa"
 }

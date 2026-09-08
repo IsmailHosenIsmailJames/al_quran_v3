@@ -308,6 +308,94 @@ translations = {
         "ur": "فوری ترتیبات",
         "vi": "Cài đặt nhanh",
         "zh": "快速预设"
+    },
+    "reminderModeOff": {
+        "en": "Off", "ar": "إيقاف", "az": "Bağlı", "bn": "বন্ধ",
+        "de": "Aus", "es": "Desactivado", "fa": "خاموش", "fr": "Désactivé",
+        "hi": "बंद", "id": "Mati", "it": "Disattivato", "ja": "オフ",
+        "kk": "Өшірулі", "ko": "꺼짐", "ms": "Mati", "pa": "ਬੰਦ",
+        "ps": "بند", "pt": "Desligado", "ru": "Выкл", "sw": "Zima",
+        "ta": "முடக்கு", "tr": "Kapalı", "ur": "بند", "vi": "Tắt", "zh": "关闭"
+    },
+    "reminderModeNotification": {
+        "en": "Notification", "ar": "إشعار", "az": "Bildiriş", "bn": "নোটিফিকেশন",
+        "de": "Benachrichtigung", "es": "Notificación", "fa": "اعلان", "fr": "Notification",
+        "hi": "अधिसूचना", "id": "Notifikasi", "it": "Notifica", "ja": "通知",
+        "kk": "Хабарландыру", "ko": "알림", "ms": "Pemberitahuan", "pa": "ਸੂਚਨਾ",
+        "ps": "خبرتیا", "pt": "Notificação", "ru": "Уведомление", "sw": "Arifa",
+        "ta": "அறிவிப்பு", "tr": "Bildirim", "ur": "اطلاع", "vi": "Thông báo", "zh": "通知"
+    },
+    "reminderModeAlarm": {
+        "en": "Alarm", "ar": "منبه", "az": "Zəngli saat", "bn": "অ্যালার্ম",
+        "de": "Wecker", "es": "Alarma", "fa": "هشدار", "fr": "Alarme",
+        "hi": "अलार्म", "id": "Alarm", "it": "Sveglia", "ja": "アラーム",
+        "kk": "Оятқыш", "ko": "알람", "ms": "Penggera", "pa": "ਅਲਾਰਮ",
+        "ps": "الارم", "pt": "Alarme", "ru": "Будильник", "sw": "Kengele",
+        "ta": "அலாரம்", "tr": "Alarm", "ur": "الارم", "vi": "Báo thức", "zh": "闹钟"
+    },
+    "testAlarm": {
+        "en": "Test Alarm", "ar": "تجربة المنبه", "az": "Zəngli saatı sına", "bn": "অ্যালার্ম পরীক্ষা করুন",
+        "de": "Wecker testen", "es": "Probar alarma", "fa": "آزمایش هشدار", "fr": "Tester l'alarme",
+        "hi": "अलार्म परीक्षण", "id": "Uji Alarm", "it": "Testa sveglia", "ja": "アラームテスト",
+        "kk": "Оятқышты тексеру", "ko": "알람 테스트", "ms": "Uji Penggera", "pa": "ਅਲਾਰਮ ਪਰਖੋ",
+        "ps": "الارم وازموئئ", "pt": "Testar alarme", "ru": "Тест будильника", "sw": "Jaribu Kengele",
+        "ta": "அலாரத்தை சோதிக்கவும்", "tr": "Alarmı Test Et", "ur": "الارم آزمائیں", "vi": "Kiểm tra báo thức", "zh": "测试闹钟"
+    },
+    "testAlarmSent": {
+        "en": "Full-screen alarm test sent", "ar": "تم إرسال تجربة المنبه بملء الشاشة", "az": "Tam ekran zəngli saat testi göndərildi", "bn": "ফুল-স্ক্রিন অ্যালার্ম টেস্ট পাঠানো হয়েছে",
+        "de": "Vollbild-Alarmtest gesendet", "es": "Prueba de alarma de pantalla completa enviada", "fa": "آزمایش هشدار تمام صفحه ارسال شد", "fr": "Test d'alarme plein écran envoyé",
+        "hi": "फुल-स्क्रीन अलार्म टेस्ट भेजा गया", "id": "Uji alarm layar penuh terkirim", "it": "Test sveglia a schermo intero inviato", "ja": "全画面アラームテストを送信しました",
+        "kk": "Толық экранды оятқыш сынағы жіберілді", "ko": "전체 화면 알람 테스트 전송됨", "ms": "Ujian penggera skrin penuh dihantar", "pa": "ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਟੈਸਟ ਭੇਜਿਆ ਗਿਆ",
+        "ps": "د بشپړ سکرین د الارم ازموینه واستول شوه", "pt": "Teste de alarme em tela cheia enviado", "ru": "Тест полноэкранного будильника отправлен", "sw": "Jaribio la kengele ya skrini nzima limetumwa",
+        "ta": "முழுத் திரை அலார சோதனை அனுப்பப்பட்டது", "tr": "Tam ekran alarm testi gönderildi", "ur": "مکمل اسکرین الارم ٹیسٹ بھیج دیا گیا", "vi": "Đã gửi kiểm tra báo thức toàn màn hình", "zh": "已发送全屏闹钟测试"
+    },
+    "stopAlarm": {
+        "en": "Stop Alarm", "ar": "إيقاف المنبه", "az": "Zəngli saatı saxla", "bn": "অ্যালার্ম বন্ধ করুন",
+        "de": "Wecker stoppen", "es": "Detener alarma", "fa": "توقف هشدار", "fr": "Arrêter l'alarme",
+        "hi": "अलार्म बंद करें", "id": "Hentikan Alarm", "it": "Ferma sveglia", "ja": "アラーム停止",
+        "kk": "Оятқышты тоқтату", "ko": "알람 중지", "ms": "Hentikan Penggera", "pa": "ਅਲਾਰਮ ਰੋਕੋ",
+        "ps": "الارم بند کړئ", "pt": "Parar alarme", "ru": "Остановить будильник", "sw": "Simamisha Kengele",
+        "ta": "அலாரத்தை நிறுத்து", "tr": "Alarmı Durdur", "ur": "الارم بند کریں", "vi": "Dừng báo thức", "zh": "停止闹钟"
+    },
+    "snooze": {
+        "en": "Snooze", "ar": "غفوة", "az": "Təxirə sal", "bn": "স্নুজ",
+        "de": "Schlummern", "es": "Posponer", "fa": "تعویق", "fr": "Répéter",
+        "hi": "स्नूज़", "id": "Tunda", "it": "Posponi", "ja": "スヌーズ",
+        "kk": "Кейінге қалдыру", "ko": "스누즈", "ms": "Tunda", "pa": "ਸਨੂਜ਼",
+        "ps": "ځنډول", "pt": "Soneca", "ru": "Отложить", "sw": "Ahirisha",
+        "ta": "ஸ்னூஸ்", "tr": "Ertele", "ur": "اسنوز", "vi": "Báo lại", "zh": "稍后提醒"
+    },
+    "snoozed10Min": {
+        "en": "Snoozed for 10 minutes", "ar": "تم التفعيل لـ 10 دقائق", "az": "10 dəqiqə təxirə salındı", "bn": "১০ মিনিটের জন্য স্নুজ করা হয়েছে",
+        "de": "Für 10 Minuten geschlummert", "es": "Pospuesto por 10 minutos", "fa": "برای ۱۰ دقیقه به تعویق افتاد", "fr": "Répété pour 10 minutes",
+        "hi": "10 मिनट के लिए स्नूज़ किया गया", "id": "Ditunda selama 10 menit", "it": "Posposto per 10 minuti", "ja": "10分間スヌーズしました",
+        "kk": "10 минутқа кейінге қалдырылды", "ko": "10분 동안 스누즈됨", "ms": "Ditunda selama 10 minit", "pa": "10 ਮਿੰਟਾਂ ਲਈ ਸਨੂਜ਼ ਕੀਤਾ ਗਿਆ",
+        "ps": "د ۱۰ دقیقو لپاره وځنډول شو", "pt": "Adiado por 10 minutos", "ru": "Отложено на 10 минут", "sw": "Imeahirishwa kwa dakika 10",
+        "ta": "10 நிமிடங்களுக்கு ஒத்திவைக்கப்பட்டது", "tr": "10 dakika ertelendi", "ur": "10 منٹ کے لیے اسنوز کیا گیا", "vi": "Đã báo lại trong 10 phút", "zh": "已稍后提醒10分钟"
+    },
+    "fullScreenAlarmPermission": {
+        "en": "Full-Screen Alarm Permission", "ar": "إذن المنبه بملء الشاشة", "az": "Tam ekran zəngli saat icazəsi", "bn": "ফুল-স্ক্রিন অ্যালার্ম অনুমতি",
+        "de": "Vollbild-Alarm-Berechtigung", "es": "Permiso de alarma de pantalla completa", "fa": "مجوز هشدار تمام صفحه", "fr": "Autorisation d'alarme plein écran",
+        "hi": "फुल-स्क्रीन अलार्म अनुमति", "id": "Izin Alarm Layar Penuh", "it": "Autorizzazione sveglia a schermo intero", "ja": "全画面アラーム権限",
+        "kk": "Толық экранды оятқыш рұқсаты", "ko": "전체 화면 알람 권한", "ms": "Kebenaran Penggera Skrin Penuh", "pa": "ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਆਗਿਆ",
+        "ps": "د بشپړ سکرین د الارم اجازه", "pt": "Permissão de alarme em tela cheia", "ru": "Разрешение на полноэкранный будильник", "sw": "Ruhusa ya Kengele ya Skrini Nzima",
+        "ta": "முழுத் திரை அலார அனுமதி", "tr": "Tam Ekran Alarm İzni", "ur": "فل اسکرین الارم کی اجازت", "vi": "Quyền báo thức toàn màn hình", "zh": "全屏闹钟权限"
+    },
+    "fullScreenAlarmPermissionDesc": {
+        "en": "Allow alarms to wake up the screen when your phone is locked", "ar": "السماح للمنبه بإيقاظ الشاشة عندما يكون الهاتف مقفلاً", "az": "Telefon kilitli olduqda zəngli saatın ekranı oyatmasına icazə verin", "bn": "ফোন লক থাকা অবস্থায় অ্যালার্মকে স্ক্রিন জাগানোর অনুমতি দিন",
+        "de": "Erlauben Sie dem Wecker, den Bildschirm bei gesperrtem Telefon zu aktivieren", "es": "Permitir que las alarmas activen la pantalla cuando el teléfono está bloqueado", "fa": "اجازه دهید هشدارها هنگام قفل بودن گوشی صفحه را روشن کنند", "fr": "Autoriser les alarmes à réveiller l'écran lorsque le téléphone est verrouillé",
+        "hi": "फ़ोन लॉक होने पर अलार्म को स्क्रीन जगाने की अनुमति दें", "id": "Izinkan alarm mengaktifkan layar saat ponsel terkunci", "it": "Consenti alle sveglie di riattivare lo schermo quando il telefono è bloccato", "ja": "端末がロックされている時にアラームが画面を起動することを許可",
+        "kk": "Телефон құлыптаулы болғанда оятқышқа экранды оятуға рұқсат етіңіз", "ko": "휴대폰이 잠겨 있을 때 알람이 화면을 켜도록 허용", "ms": "Benarkan penggera menghidupkan skrin apabila telefon dikunci", "pa": "ਫੋਨ ਲੌਕ ਹੋਣ 'ਤੇ ਅਲਾਰਮ ਨੂੰ ਸਕ੍ਰੀਨ ਜਗਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ",
+        "ps": "الارم ته اجازه ورکړئ کله چې ټلیفون قفل وي سکرین فعال کړي", "pt": "Permitir que os alarmes ativem a tela quando o telefone estiver bloqueado", "ru": "Разрешить будильникам включать экран при заблокированном телефоне", "sw": "Ruhusu kengele kuamsha skrini wakati simu imefungwa",
+        "ta": "தொலைபேசி பூட்டப்பட்டிருக்கும் போது அலாரங்கள் திரையை எழுப்ப அனுமதிக்கவும்", "tr": "Telefon kilitliyken alarmların ekranı uyandırmasına izin verin", "ur": "فون لاک ہونے پر الارم کو اسکرین آن کرنے کی اجازت دیں", "vi": "Cho phép báo thức đánh thức màn hình khi điện thoại bị khóa", "zh": "允许闹钟在手机锁定时唤醒屏幕"
+    },
+    "grantPermission": {
+        "en": "Grant Permission", "ar": "منح الإذن", "az": "İcazə verin", "bn": "অনুমতি দিন",
+        "de": "Berechtigung erteilen", "es": "Conceder permiso", "fa": "اعطای مجوز", "fr": "Accorder l'autorisation",
+        "hi": "अनुमति दें", "id": "Beri Izin", "it": "Concedi autorizzazione", "ja": "権限を許可",
+        "kk": "Рұқсат беру", "ko": "권한 허용", "ms": "Beri Kebenaran", "pa": "ਆਗਿਆ ਦਿਓ",
+        "ps": "اجازه ورکړئ", "pt": "Conceder permissão", "ru": "Предоставить разрешение", "sw": "Toa Ruhusa",
+        "ta": "அனுமதி கொடுங்கள்", "tr": "İzin Ver", "ur": "اجازت دیں", "vi": "Cấp quyền", "zh": "授予权限"
     }
 }
 

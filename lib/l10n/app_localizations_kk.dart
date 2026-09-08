@@ -1873,4 +1873,38 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get quickPresets => 'Жылдам таңдаулар';
+
+  @override
+  String get reminderModeOff => 'Өшірулі';
+
+  @override
+  String get reminderModeNotification => 'Хабарландыру';
+
+  @override
+  String get reminderModeAlarm => 'Оятқыш';
+
+  @override
+  String get testAlarm => 'Оятқышты тексеру';
+
+  @override
+  String get testAlarmSent => 'Толық экранды оятқыш сынағы жіберілді';
+
+  @override
+  String get stopAlarm => 'Оятқышты тоқтату';
+
+  @override
+  String get snooze => 'Кейінге қалдыру';
+
+  @override
+  String get snoozed10Min => '10 минутқа кейінге қалдырылды';
+
+  @override
+  String get fullScreenAlarmPermission => 'Толық экранды оятқыш рұқсаты';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Телефон құлыптаулы болғанда оятқышқа экранды оятуға рұқсат етіңіз';
+
+  @override
+  String get grantPermission => 'Рұқсат беру';
 }

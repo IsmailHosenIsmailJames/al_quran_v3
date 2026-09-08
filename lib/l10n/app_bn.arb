@@ -851,5 +851,16 @@
   "stopPreview": "প্লে বন্ধ করুন",
   "testNotification": "টেস্ট নোটিফিকেশন পাঠান",
   "testNotificationSent": "টেস্ট নোটিফিকেশন পাঠানো হয়েছে! আপনার নোটিফিকেশন চেক করুন।",
-  "quickPresets": "কুইক প্রিসেট"
+  "quickPresets": "কুইক প্রিসেট",
+  "reminderModeOff": "বন্ধ",
+  "reminderModeNotification": "নোটিফিকেশন",
+  "reminderModeAlarm": "অ্যালার্ম",
+  "testAlarm": "অ্যালার্ম পরীক্ষা করুন",
+  "testAlarmSent": "ফুল-স্ক্রিন অ্যালার্ম টেস্ট পাঠানো হয়েছে",
+  "stopAlarm": "অ্যালার্ম বন্ধ করুন",
+  "snooze": "স্নুজ",
+  "snoozed10Min": "১০ মিনিটের জন্য স্নুজ করা হয়েছে",
+  "fullScreenAlarmPermission": "ফুল-স্ক্রিন অ্যালার্ম অনুমতি",
+  "fullScreenAlarmPermissionDesc": "ফোন লক থাকা অবস্থায় অ্যালার্মকে স্ক্রিন জাগানোর অনুমতি দিন",
+  "grantPermission": "অনুমতি দিন"
 }

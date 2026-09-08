@@ -1871,4 +1871,38 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get quickPresets => 'Pratetap Pantas';
+
+  @override
+  String get reminderModeOff => 'Mati';
+
+  @override
+  String get reminderModeNotification => 'Pemberitahuan';
+
+  @override
+  String get reminderModeAlarm => 'Penggera';
+
+  @override
+  String get testAlarm => 'Uji Penggera';
+
+  @override
+  String get testAlarmSent => 'Ujian penggera skrin penuh dihantar';
+
+  @override
+  String get stopAlarm => 'Hentikan Penggera';
+
+  @override
+  String get snooze => 'Tunda';
+
+  @override
+  String get snoozed10Min => 'Ditunda selama 10 minit';
+
+  @override
+  String get fullScreenAlarmPermission => 'Kebenaran Penggera Skrin Penuh';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Benarkan penggera menghidupkan skrin apabila telefon dikunci';
+
+  @override
+  String get grantPermission => 'Beri Kebenaran';
 }

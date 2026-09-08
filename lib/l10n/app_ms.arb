@@ -820,5 +820,16 @@
   "stopPreview": "Hentikan Pratonton",
   "testNotification": "Hantar Pemberitahuan Ujian",
   "testNotificationSent": "Pemberitahuan ujian dihantar! Semak pemberitahuan anda.",
-  "quickPresets": "Pratetap Pantas"
+  "quickPresets": "Pratetap Pantas",
+  "reminderModeOff": "Mati",
+  "reminderModeNotification": "Pemberitahuan",
+  "reminderModeAlarm": "Penggera",
+  "testAlarm": "Uji Penggera",
+  "testAlarmSent": "Ujian penggera skrin penuh dihantar",
+  "stopAlarm": "Hentikan Penggera",
+  "snooze": "Tunda",
+  "snoozed10Min": "Ditunda selama 10 minit",
+  "fullScreenAlarmPermission": "Kebenaran Penggera Skrin Penuh",
+  "fullScreenAlarmPermissionDesc": "Benarkan penggera menghidupkan skrin apabila telefon dikunci",
+  "grantPermission": "Beri Kebenaran"
 }

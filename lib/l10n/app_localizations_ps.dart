@@ -1873,4 +1873,38 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get quickPresets => 'ګړندي اختیارونه';
+
+  @override
+  String get reminderModeOff => 'بند';
+
+  @override
+  String get reminderModeNotification => 'خبرتیا';
+
+  @override
+  String get reminderModeAlarm => 'الارم';
+
+  @override
+  String get testAlarm => 'الارم وازموئئ';
+
+  @override
+  String get testAlarmSent => 'د بشپړ سکرین د الارم ازموینه واستول شوه';
+
+  @override
+  String get stopAlarm => 'الارم بند کړئ';
+
+  @override
+  String get snooze => 'ځنډول';
+
+  @override
+  String get snoozed10Min => 'د ۱۰ دقیقو لپاره وځنډول شو';
+
+  @override
+  String get fullScreenAlarmPermission => 'د بشپړ سکرین د الارم اجازه';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'الارم ته اجازه ورکړئ کله چې ټلیفون قفل وي سکرین فعال کړي';
+
+  @override
+  String get grantPermission => 'اجازه ورکړئ';
 }

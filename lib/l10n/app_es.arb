@@ -820,5 +820,16 @@
   "stopPreview": "Detener reproducción",
   "testNotification": "Enviar notificación de prueba",
   "testNotificationSent": "¡Notificación de prueba enviada! Revisa tus notificaciones.",
-  "quickPresets": "Ajustes rápidos"
+  "quickPresets": "Ajustes rápidos",
+  "reminderModeOff": "Desactivado",
+  "reminderModeNotification": "Notificación",
+  "reminderModeAlarm": "Alarma",
+  "testAlarm": "Probar alarma",
+  "testAlarmSent": "Prueba de alarma de pantalla completa enviada",
+  "stopAlarm": "Detener alarma",
+  "snooze": "Posponer",
+  "snoozed10Min": "Pospuesto por 10 minutos",
+  "fullScreenAlarmPermission": "Permiso de alarma de pantalla completa",
+  "fullScreenAlarmPermissionDesc": "Permitir que las alarmas activen la pantalla cuando el teléfono está bloqueado",
+  "grantPermission": "Conceder permiso"
 }

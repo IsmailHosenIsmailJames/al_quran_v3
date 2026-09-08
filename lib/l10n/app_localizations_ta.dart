@@ -1902,4 +1902,38 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get quickPresets => 'விரைவு முன்னமைவுகள்';
+
+  @override
+  String get reminderModeOff => 'முடக்கு';
+
+  @override
+  String get reminderModeNotification => 'அறிவிப்பு';
+
+  @override
+  String get reminderModeAlarm => 'அலாரம்';
+
+  @override
+  String get testAlarm => 'அலாரத்தை சோதிக்கவும்';
+
+  @override
+  String get testAlarmSent => 'முழுத் திரை அலார சோதனை அனுப்பப்பட்டது';
+
+  @override
+  String get stopAlarm => 'அலாரத்தை நிறுத்து';
+
+  @override
+  String get snooze => 'ஸ்னூஸ்';
+
+  @override
+  String get snoozed10Min => '10 நிமிடங்களுக்கு ஒத்திவைக்கப்பட்டது';
+
+  @override
+  String get fullScreenAlarmPermission => 'முழுத் திரை அலார அனுமதி';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'தொலைபேசி பூட்டப்பட்டிருக்கும் போது அலாரங்கள் திரையை எழுப்ப அனுமதிக்கவும்';
+
+  @override
+  String get grantPermission => 'அனுமதி கொடுங்கள்';
 }
