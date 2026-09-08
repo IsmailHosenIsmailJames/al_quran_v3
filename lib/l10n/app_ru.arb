@@ -820,5 +820,16 @@
   "stopPreview": "Остановить",
   "testNotification": "Отправить тестовое уведомление",
   "testNotificationSent": "Тестовое уведомление отправлено! Проверьте панель уведомлений.",
-  "quickPresets": "Быстрый выбор"
+  "quickPresets": "Быстрый выбор",
+  "reminderModeOff": "Выкл",
+  "reminderModeNotification": "Уведомление",
+  "reminderModeAlarm": "Будильник",
+  "testAlarm": "Тест будильника",
+  "testAlarmSent": "Тест полноэкранного будильника отправлен",
+  "stopAlarm": "Остановить будильник",
+  "snooze": "Отложить",
+  "snoozed10Min": "Отложено на 10 минут",
+  "fullScreenAlarmPermission": "Разрешение на полноэкранный будильник",
+  "fullScreenAlarmPermissionDesc": "Разрешить будильникам включать экран при заблокированном телефоне",
+  "grantPermission": "Предоставить разрешение"
 }

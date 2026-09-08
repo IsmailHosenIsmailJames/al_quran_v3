@@ -820,5 +820,16 @@
   "stopPreview": "Hentikan Pratinjau",
   "testNotification": "Kirim Notifikasi Uji Coba",
   "testNotificationSent": "Notifikasi uji coba terkirim! Periksa notifikasi Anda.",
-  "quickPresets": "Pilihan Cepat"
+  "quickPresets": "Pilihan Cepat",
+  "reminderModeOff": "Mati",
+  "reminderModeNotification": "Notifikasi",
+  "reminderModeAlarm": "Alarm",
+  "testAlarm": "Uji Alarm",
+  "testAlarmSent": "Uji alarm layar penuh terkirim",
+  "stopAlarm": "Hentikan Alarm",
+  "snooze": "Tunda",
+  "snoozed10Min": "Ditunda selama 10 menit",
+  "fullScreenAlarmPermission": "Izin Alarm Layar Penuh",
+  "fullScreenAlarmPermissionDesc": "Izinkan alarm mengaktifkan layar saat ponsel terkunci",
+  "grantPermission": "Beri Izin"
 }

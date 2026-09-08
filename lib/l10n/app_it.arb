@@ -558,5 +558,16 @@
   "stopPreview": "Ferma anteprima",
   "testNotification": "Invia notifica di prova",
   "testNotificationSent": "Notifica di prova inviata! Controlla le tue notifiche.",
-  "quickPresets": "Preimpostazioni rapide"
+  "quickPresets": "Preimpostazioni rapide",
+  "reminderModeOff": "Disattivato",
+  "reminderModeNotification": "Notifica",
+  "reminderModeAlarm": "Sveglia",
+  "testAlarm": "Testa sveglia",
+  "testAlarmSent": "Test sveglia a schermo intero inviato",
+  "stopAlarm": "Ferma sveglia",
+  "snooze": "Posponi",
+  "snoozed10Min": "Posposto per 10 minuti",
+  "fullScreenAlarmPermission": "Autorizzazione sveglia a schermo intero",
+  "fullScreenAlarmPermissionDesc": "Consenti alle sveglie di riattivare lo schermo quando il telefono è bloccato",
+  "grantPermission": "Concedi autorizzazione"
 }

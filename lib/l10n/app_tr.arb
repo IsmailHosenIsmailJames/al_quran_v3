@@ -820,5 +820,16 @@
   "stopPreview": "Önizlemeyi Durdur",
   "testNotification": "Test Bildirimi Gönder",
   "testNotificationSent": "Test bildirimi gönderildi! Bildirimlerinizi kontrol edin.",
-  "quickPresets": "Hızlı Önayarlar"
+  "quickPresets": "Hızlı Önayarlar",
+  "reminderModeOff": "Kapalı",
+  "reminderModeNotification": "Bildirim",
+  "reminderModeAlarm": "Alarm",
+  "testAlarm": "Alarmı Test Et",
+  "testAlarmSent": "Tam ekran alarm testi gönderildi",
+  "stopAlarm": "Alarmı Durdur",
+  "snooze": "Ertele",
+  "snoozed10Min": "10 dakika ertelendi",
+  "fullScreenAlarmPermission": "Tam Ekran Alarm İzni",
+  "fullScreenAlarmPermissionDesc": "Telefon kilitliyken alarmların ekranı uyandırmasına izin verin",
+  "grantPermission": "İzin Ver"
 }

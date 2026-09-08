@@ -1868,4 +1868,38 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get quickPresets => 'گزینه‌های سریع';
+
+  @override
+  String get reminderModeOff => 'خاموش';
+
+  @override
+  String get reminderModeNotification => 'اعلان';
+
+  @override
+  String get reminderModeAlarm => 'هشدار';
+
+  @override
+  String get testAlarm => 'آزمایش هشدار';
+
+  @override
+  String get testAlarmSent => 'آزمایش هشدار تمام صفحه ارسال شد';
+
+  @override
+  String get stopAlarm => 'توقف هشدار';
+
+  @override
+  String get snooze => 'تعویق';
+
+  @override
+  String get snoozed10Min => 'برای ۱۰ دقیقه به تعویق افتاد';
+
+  @override
+  String get fullScreenAlarmPermission => 'مجوز هشدار تمام صفحه';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'اجازه دهید هشدارها هنگام قفل بودن گوشی صفحه را روشن کنند';
+
+  @override
+  String get grantPermission => 'اعطای مجوز';
 }

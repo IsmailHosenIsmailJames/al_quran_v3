@@ -110,4 +110,28 @@ class RingtoneService {
       return false;
     }
   }
+
+  /// Checks if the app is allowed to use full-screen intents (Android 14+).
+  static Future<bool> canUseFullScreenIntent() async {
+    if (!isSupported) return true;
+    try {
+      final res = await _channel.invokeMethod<bool>("canUseFullScreenIntent");
+      return res ?? true;
+    } catch (e) {
+      debugPrint("Error checking full-screen intent permission: $e");
+      return true;
+    }
+  }
+
+  /// Opens the system settings screen to grant full-screen intent permission (Android 14+).
+  static Future<bool> openFullScreenIntentSettings() async {
+    if (!isSupported) return false;
+    try {
+      final res = await _channel.invokeMethod<bool>("openFullScreenIntentSettings");
+      return res ?? false;
+    } catch (e) {
+      debugPrint("Error opening full-screen intent settings: $e");
+      return false;
+    }
+  }
 }

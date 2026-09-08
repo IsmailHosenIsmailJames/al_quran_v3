@@ -1883,4 +1883,38 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get quickPresets => 'Cài đặt nhanh';
+
+  @override
+  String get reminderModeOff => 'Tắt';
+
+  @override
+  String get reminderModeNotification => 'Thông báo';
+
+  @override
+  String get reminderModeAlarm => 'Báo thức';
+
+  @override
+  String get testAlarm => 'Kiểm tra báo thức';
+
+  @override
+  String get testAlarmSent => 'Đã gửi kiểm tra báo thức toàn màn hình';
+
+  @override
+  String get stopAlarm => 'Dừng báo thức';
+
+  @override
+  String get snooze => 'Báo lại';
+
+  @override
+  String get snoozed10Min => 'Đã báo lại trong 10 phút';
+
+  @override
+  String get fullScreenAlarmPermission => 'Quyền báo thức toàn màn hình';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Cho phép báo thức đánh thức màn hình khi điện thoại bị khóa';
+
+  @override
+  String get grantPermission => 'Cấp quyền';
 }

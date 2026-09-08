@@ -1880,4 +1880,38 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get quickPresets => 'Sürətli seçimlər';
+
+  @override
+  String get reminderModeOff => 'Bağlı';
+
+  @override
+  String get reminderModeNotification => 'Bildiriş';
+
+  @override
+  String get reminderModeAlarm => 'Zəngli saat';
+
+  @override
+  String get testAlarm => 'Zəngli saatı sına';
+
+  @override
+  String get testAlarmSent => 'Tam ekran zəngli saat testi göndərildi';
+
+  @override
+  String get stopAlarm => 'Zəngli saatı saxla';
+
+  @override
+  String get snooze => 'Təxirə sal';
+
+  @override
+  String get snoozed10Min => '10 dəqiqə təxirə salındı';
+
+  @override
+  String get fullScreenAlarmPermission => 'Tam ekran zəngli saat icazəsi';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Telefon kilitli olduqda zəngli saatın ekranı oyatmasına icazə verin';
+
+  @override
+  String get grantPermission => 'İcazə verin';
 }

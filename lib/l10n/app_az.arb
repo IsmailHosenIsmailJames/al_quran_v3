@@ -558,5 +558,16 @@
   "stopPreview": "Önizləməni dayandırın",
   "testNotification": "Test bildirişi göndərin",
   "testNotificationSent": "Test bildirişi göndərildi! Bildirişlərinizi yoxlayın.",
-  "quickPresets": "Sürətli seçimlər"
+  "quickPresets": "Sürətli seçimlər",
+  "reminderModeOff": "Bağlı",
+  "reminderModeNotification": "Bildiriş",
+  "reminderModeAlarm": "Zəngli saat",
+  "testAlarm": "Zəngli saatı sına",
+  "testAlarmSent": "Tam ekran zəngli saat testi göndərildi",
+  "stopAlarm": "Zəngli saatı saxla",
+  "snooze": "Təxirə sal",
+  "snoozed10Min": "10 dəqiqə təxirə salındı",
+  "fullScreenAlarmPermission": "Tam ekran zəngli saat icazəsi",
+  "fullScreenAlarmPermissionDesc": "Telefon kilitli olduqda zəngli saatın ekranı oyatmasına icazə verin",
+  "grantPermission": "İcazə verin"
 }

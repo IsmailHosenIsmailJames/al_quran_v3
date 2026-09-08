@@ -1894,4 +1894,39 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get quickPresets => 'Ajustes rápidos';
+
+  @override
+  String get reminderModeOff => 'Desactivado';
+
+  @override
+  String get reminderModeNotification => 'Notificación';
+
+  @override
+  String get reminderModeAlarm => 'Alarma';
+
+  @override
+  String get testAlarm => 'Probar alarma';
+
+  @override
+  String get testAlarmSent => 'Prueba de alarma de pantalla completa enviada';
+
+  @override
+  String get stopAlarm => 'Detener alarma';
+
+  @override
+  String get snooze => 'Posponer';
+
+  @override
+  String get snoozed10Min => 'Pospuesto por 10 minutos';
+
+  @override
+  String get fullScreenAlarmPermission =>
+      'Permiso de alarma de pantalla completa';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Permitir que las alarmas activen la pantalla cuando el teléfono está bloqueado';
+
+  @override
+  String get grantPermission => 'Conceder permiso';
 }

@@ -558,5 +558,16 @@
   "stopPreview": "Wiedergabe stoppen",
   "testNotification": "Testbenachrichtigung senden",
   "testNotificationSent": "Testbenachrichtigung gesendet! Überprüfen Sie Ihre Benachrichtigungen.",
-  "quickPresets": "Schnellauswahl"
+  "quickPresets": "Schnellauswahl",
+  "reminderModeOff": "Aus",
+  "reminderModeNotification": "Benachrichtigung",
+  "reminderModeAlarm": "Wecker",
+  "testAlarm": "Wecker testen",
+  "testAlarmSent": "Vollbild-Alarmtest gesendet",
+  "stopAlarm": "Wecker stoppen",
+  "snooze": "Schlummern",
+  "snoozed10Min": "Für 10 Minuten geschlummert",
+  "fullScreenAlarmPermission": "Vollbild-Alarm-Berechtigung",
+  "fullScreenAlarmPermissionDesc": "Erlauben Sie dem Wecker, den Bildschirm bei gesperrtem Telefon zu aktivieren",
+  "grantPermission": "Berechtigung erteilen"
 }

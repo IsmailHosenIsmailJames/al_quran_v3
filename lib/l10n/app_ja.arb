@@ -558,5 +558,16 @@
   "stopPreview": "試聴を停止",
   "testNotification": "テスト通知を送信",
   "testNotificationSent": "テスト通知を送信しました！通知を確認してください。",
-  "quickPresets": "クイックプリセット"
+  "quickPresets": "クイックプリセット",
+  "reminderModeOff": "オフ",
+  "reminderModeNotification": "通知",
+  "reminderModeAlarm": "アラーム",
+  "testAlarm": "アラームテスト",
+  "testAlarmSent": "全画面アラームテストを送信しました",
+  "stopAlarm": "アラーム停止",
+  "snooze": "スヌーズ",
+  "snoozed10Min": "10分間スヌーズしました",
+  "fullScreenAlarmPermission": "全画面アラーム権限",
+  "fullScreenAlarmPermissionDesc": "端末がロックされている時にアラームが画面を起動することを許可",
+  "grantPermission": "権限を許可"
 }

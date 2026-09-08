@@ -1832,4 +1832,37 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get quickPresets => 'クイックプリセット';
+
+  @override
+  String get reminderModeOff => 'オフ';
+
+  @override
+  String get reminderModeNotification => '通知';
+
+  @override
+  String get reminderModeAlarm => 'アラーム';
+
+  @override
+  String get testAlarm => 'アラームテスト';
+
+  @override
+  String get testAlarmSent => '全画面アラームテストを送信しました';
+
+  @override
+  String get stopAlarm => 'アラーム停止';
+
+  @override
+  String get snooze => 'スヌーズ';
+
+  @override
+  String get snoozed10Min => '10分間スヌーズしました';
+
+  @override
+  String get fullScreenAlarmPermission => '全画面アラーム権限';
+
+  @override
+  String get fullScreenAlarmPermissionDesc => '端末がロックされている時にアラームが画面を起動することを許可';
+
+  @override
+  String get grantPermission => '権限を許可';
 }

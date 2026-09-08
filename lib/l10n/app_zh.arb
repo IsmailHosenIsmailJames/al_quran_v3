@@ -820,5 +820,16 @@
   "stopPreview": "停止试听",
   "testNotification": "发送测试通知",
   "testNotificationSent": "测试通知已发送！请查看您的通知。",
-  "quickPresets": "快速预设"
+  "quickPresets": "快速预设",
+  "reminderModeOff": "关闭",
+  "reminderModeNotification": "通知",
+  "reminderModeAlarm": "闹钟",
+  "testAlarm": "测试闹钟",
+  "testAlarmSent": "已发送全屏闹钟测试",
+  "stopAlarm": "停止闹钟",
+  "snooze": "稍后提醒",
+  "snoozed10Min": "已稍后提醒10分钟",
+  "fullScreenAlarmPermission": "全屏闹钟权限",
+  "fullScreenAlarmPermissionDesc": "允许闹钟在手机锁定时唤醒屏幕",
+  "grantPermission": "授予权限"
 }

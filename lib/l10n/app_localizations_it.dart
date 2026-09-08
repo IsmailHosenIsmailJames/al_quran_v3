@@ -1896,4 +1896,39 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get quickPresets => 'Preimpostazioni rapide';
+
+  @override
+  String get reminderModeOff => 'Disattivato';
+
+  @override
+  String get reminderModeNotification => 'Notifica';
+
+  @override
+  String get reminderModeAlarm => 'Sveglia';
+
+  @override
+  String get testAlarm => 'Testa sveglia';
+
+  @override
+  String get testAlarmSent => 'Test sveglia a schermo intero inviato';
+
+  @override
+  String get stopAlarm => 'Ferma sveglia';
+
+  @override
+  String get snooze => 'Posponi';
+
+  @override
+  String get snoozed10Min => 'Posposto per 10 minuti';
+
+  @override
+  String get fullScreenAlarmPermission =>
+      'Autorizzazione sveglia a schermo intero';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Consenti alle sveglie di riattivare lo schermo quando il telefono è bloccato';
+
+  @override
+  String get grantPermission => 'Concedi autorizzazione';
 }

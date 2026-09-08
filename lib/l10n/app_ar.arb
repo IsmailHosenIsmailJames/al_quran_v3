@@ -820,5 +820,16 @@
   "stopPreview": "إيقاف المعاينة",
   "testNotification": "إرسال إشعار تجريبي",
   "testNotificationSent": "تم إرسال الإشعار التجريبي! تحقق من إشعاراتك.",
-  "quickPresets": "خيارات سريعة"
+  "quickPresets": "خيارات سريعة",
+  "reminderModeOff": "إيقاف",
+  "reminderModeNotification": "إشعار",
+  "reminderModeAlarm": "منبه",
+  "testAlarm": "تجربة المنبه",
+  "testAlarmSent": "تم إرسال تجربة المنبه بملء الشاشة",
+  "stopAlarm": "إيقاف المنبه",
+  "snooze": "غفوة",
+  "snoozed10Min": "تم التفعيل لـ 10 دقائق",
+  "fullScreenAlarmPermission": "إذن المنبه بملء الشاشة",
+  "fullScreenAlarmPermissionDesc": "السماح للمنبه بإيقاظ الشاشة عندما يكون الهاتف مقفلاً",
+  "grantPermission": "منح الإذن"
 }

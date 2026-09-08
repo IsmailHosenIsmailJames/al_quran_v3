@@ -27,7 +27,10 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_background_worker.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
@@ -56,6 +59,9 @@ import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
+
+import "package:al_quran_v3/src/core/utils/navigator_key.dart";
+export "package:al_quran_v3/src/core/utils/navigator_key.dart";
 
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 
@@ -155,8 +161,6 @@ Future<void> main() async {
   );
   platform_services.hideLoadingIndicator();
 }
-
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   final textTheme = isDarkMode
@@ -268,6 +272,34 @@ class _MyAppState extends State<MyApp> {
           getIt<QuranHistoryCubit>().reload();
           getIt<QuickAccessCubit>().reload();
         } catch (_) {}
+      });
+    } catch (_) {}
+
+    // Check if launched directly from full-screen alarm notification
+    try {
+      AwesomeNotifications()
+          .getInitialNotificationAction(removeFromActionEvents: true)
+          .then((initialAction) {
+        if (initialAction != null && initialAction.payload?["type"] == "alarm") {
+          final prayerName = initialAction.payload?["prayer"];
+          final timeStr = initialAction.payload?["time"];
+          if (prayerName != null) {
+            final prayer = Prayer.values.cast<Prayer?>().firstWhere(
+                  (p) => p?.name.toLowerCase() == prayerName.toLowerCase(),
+                  orElse: () => null,
+                );
+            if (prayer != null) {
+              final time = timeStr != null ? DateTime.tryParse(timeStr) : null;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                navigateToPrayerAlarmScreen(
+                  prayer,
+                  time ?? DateTime.now(),
+                  initialAction.id ?? 0,
+                );
+              });
+            }
+          }
+        }
       });
     } catch (_) {}
   }

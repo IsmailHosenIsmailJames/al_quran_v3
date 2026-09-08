@@ -1887,4 +1887,39 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quickPresets => 'Быстрый выбор';
+
+  @override
+  String get reminderModeOff => 'Выкл';
+
+  @override
+  String get reminderModeNotification => 'Уведомление';
+
+  @override
+  String get reminderModeAlarm => 'Будильник';
+
+  @override
+  String get testAlarm => 'Тест будильника';
+
+  @override
+  String get testAlarmSent => 'Тест полноэкранного будильника отправлен';
+
+  @override
+  String get stopAlarm => 'Остановить будильник';
+
+  @override
+  String get snooze => 'Отложить';
+
+  @override
+  String get snoozed10Min => 'Отложено на 10 минут';
+
+  @override
+  String get fullScreenAlarmPermission =>
+      'Разрешение на полноэкранный будильник';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Разрешить будильникам включать экран при заблокированном телефоне';
+
+  @override
+  String get grantPermission => 'Предоставить разрешение';
 }

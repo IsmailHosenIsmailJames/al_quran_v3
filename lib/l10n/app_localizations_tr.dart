@@ -1875,4 +1875,38 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get quickPresets => 'Hızlı Önayarlar';
+
+  @override
+  String get reminderModeOff => 'Kapalı';
+
+  @override
+  String get reminderModeNotification => 'Bildirim';
+
+  @override
+  String get reminderModeAlarm => 'Alarm';
+
+  @override
+  String get testAlarm => 'Alarmı Test Et';
+
+  @override
+  String get testAlarmSent => 'Tam ekran alarm testi gönderildi';
+
+  @override
+  String get stopAlarm => 'Alarmı Durdur';
+
+  @override
+  String get snooze => 'Ertele';
+
+  @override
+  String get snoozed10Min => '10 dakika ertelendi';
+
+  @override
+  String get fullScreenAlarmPermission => 'Tam Ekran Alarm İzni';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Telefon kilitliyken alarmların ekranı uyandırmasına izin verin';
+
+  @override
+  String get grantPermission => 'İzin Ver';
 }

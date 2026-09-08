@@ -1873,4 +1873,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quickPresets => 'Quick Presets';
+
+  @override
+  String get reminderModeOff => 'Off';
+
+  @override
+  String get reminderModeNotification => 'Notification';
+
+  @override
+  String get reminderModeAlarm => 'Alarm';
+
+  @override
+  String get testAlarm => 'Test Alarm';
+
+  @override
+  String get testAlarmSent => 'Full-screen alarm test sent';
+
+  @override
+  String get stopAlarm => 'Stop Alarm';
+
+  @override
+  String get snooze => 'Snooze';
+
+  @override
+  String get snoozed10Min => 'Snoozed for 10 minutes';
+
+  @override
+  String get fullScreenAlarmPermission => 'Full-Screen Alarm Permission';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Allow alarms to wake up the screen when your phone is locked';
+
+  @override
+  String get grantPermission => 'Grant Permission';
 }

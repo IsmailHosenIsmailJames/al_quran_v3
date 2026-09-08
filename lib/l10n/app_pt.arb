@@ -558,5 +558,16 @@
   "stopPreview": "Parar prévia",
   "testNotification": "Enviar notificação de teste",
   "testNotificationSent": "Notificação de teste enviada! Verifique suas notificações.",
-  "quickPresets": "Predefinições rápidas"
+  "quickPresets": "Predefinições rápidas",
+  "reminderModeOff": "Desligado",
+  "reminderModeNotification": "Notificação",
+  "reminderModeAlarm": "Alarme",
+  "testAlarm": "Testar alarme",
+  "testAlarmSent": "Teste de alarme em tela cheia enviado",
+  "stopAlarm": "Parar alarme",
+  "snooze": "Soneca",
+  "snoozed10Min": "Adiado por 10 minutos",
+  "fullScreenAlarmPermission": "Permissão de alarme em tela cheia",
+  "fullScreenAlarmPermissionDesc": "Permitir que os alarmes ativem a tela quando o telefone estiver bloqueado",
+  "grantPermission": "Conceder permissão"
 }

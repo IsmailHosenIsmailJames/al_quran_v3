@@ -1,4 +1,5 @@
 import "package:adhan_dart/adhan_dart.dart";
+import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -83,6 +84,71 @@ void main() {
       expect(cubit.state.selectedRingtoneType, equals("default_sound"));
       expect(cubit.state.selectedRingtoneTitle, equals("App Default (notification_sound.wav)"));
       expect(ReminderScheduler.getSelectedRingtoneType(), equals("default_sound"));
+
+      await cubit.close();
+    });
+
+    test("PrayerReminderMode enum helpers and parser work accurately", () {
+      expect(PrayerReminderMode.off.isOff, isTrue);
+      expect(PrayerReminderMode.off.isNotification, isFalse);
+      expect(PrayerReminderMode.off.isAlarm, isFalse);
+
+      expect(PrayerReminderMode.notification.isOff, isFalse);
+      expect(PrayerReminderMode.notification.isNotification, isTrue);
+      expect(PrayerReminderMode.notification.isAlarm, isFalse);
+
+      expect(PrayerReminderMode.alarm.isOff, isFalse);
+      expect(PrayerReminderMode.alarm.isNotification, isFalse);
+      expect(PrayerReminderMode.alarm.isAlarm, isTrue);
+
+      expect(PrayerReminderMode.fromString("off"), equals(PrayerReminderMode.off));
+      expect(PrayerReminderMode.fromString("notification"), equals(PrayerReminderMode.notification));
+      expect(PrayerReminderMode.fromString("alarm"), equals(PrayerReminderMode.alarm));
+      expect(PrayerReminderMode.fromString("unknown"), equals(PrayerReminderMode.notification));
+      expect(PrayerReminderMode.fromString(null), equals(PrayerReminderMode.notification));
+    });
+
+    test("Dual channel keys are properly configured", () {
+      expect(ReminderScheduler.getNotificationChannelKey(), equals("prayer_reminder_notif_v1"));
+      expect(ReminderScheduler.getAlarmChannelKey(), equals("prayer_alarm_channel_v1"));
+    });
+
+    test("ReminderScheduler prayer reminder modes can be set and retrieved", () async {
+      // Default should be notification for obligatory prayers, off for optional
+      final defaultModes = ReminderScheduler.getPrayerReminderModes();
+      expect(defaultModes[Prayer.fajr], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.dhuhr], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.asr], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.maghrib], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.isha], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.sunrise], equals(PrayerReminderMode.off));
+      expect(defaultModes[Prayer.sunset], equals(PrayerReminderMode.off));
+
+      // Set Fajr to alarm, Dhuhr to notification, Asr to off
+      await ReminderScheduler.setPrayerReminderMode(Prayer.fajr, PrayerReminderMode.alarm);
+      await ReminderScheduler.setPrayerReminderMode(Prayer.dhuhr, PrayerReminderMode.notification);
+      await ReminderScheduler.setPrayerReminderMode(Prayer.asr, PrayerReminderMode.off);
+
+      final updatedModes = ReminderScheduler.getPrayerReminderModes();
+      expect(updatedModes[Prayer.fajr], equals(PrayerReminderMode.alarm));
+      expect(updatedModes[Prayer.dhuhr], equals(PrayerReminderMode.notification));
+      expect(updatedModes[Prayer.asr], equals(PrayerReminderMode.off));
+    });
+
+    test("PrayerReminderCubit setPrayerReminderMode updates state correctly", () async {
+      final cubit = PrayerReminderCubit();
+
+      await cubit.setPrayerReminderMode(Prayer.fajr, PrayerReminderMode.alarm);
+      expect(cubit.state.prayerReminderModes?[Prayer.fajr], equals(PrayerReminderMode.alarm));
+      expect(cubit.state.enabledPrayers?[Prayer.fajr], isTrue);
+
+      await cubit.setPrayerReminderMode(Prayer.asr, PrayerReminderMode.off);
+      expect(cubit.state.prayerReminderModes?[Prayer.asr], equals(PrayerReminderMode.off));
+      expect(cubit.state.enabledPrayers?[Prayer.asr], isFalse);
+
+      await cubit.setPrayerReminderMode(Prayer.asr, PrayerReminderMode.notification);
+      expect(cubit.state.prayerReminderModes?[Prayer.asr], equals(PrayerReminderMode.notification));
+      expect(cubit.state.enabledPrayers?[Prayer.asr], isTrue);
 
       await cubit.close();
     });

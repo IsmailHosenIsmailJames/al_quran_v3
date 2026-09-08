@@ -1876,4 +1876,38 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get quickPresets => 'त्वरित प्रीसेट';
+
+  @override
+  String get reminderModeOff => 'बंद';
+
+  @override
+  String get reminderModeNotification => 'अधिसूचना';
+
+  @override
+  String get reminderModeAlarm => 'अलार्म';
+
+  @override
+  String get testAlarm => 'अलार्म परीक्षण';
+
+  @override
+  String get testAlarmSent => 'फुल-स्क्रीन अलार्म टेस्ट भेजा गया';
+
+  @override
+  String get stopAlarm => 'अलार्म बंद करें';
+
+  @override
+  String get snooze => 'स्नूज़';
+
+  @override
+  String get snoozed10Min => '10 मिनट के लिए स्नूज़ किया गया';
+
+  @override
+  String get fullScreenAlarmPermission => 'फुल-स्क्रीन अलार्म अनुमति';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'फ़ोन लॉक होने पर अलार्म को स्क्रीन जगाने की अनुमति दें';
+
+  @override
+  String get grantPermission => 'अनुमति दें';
 }

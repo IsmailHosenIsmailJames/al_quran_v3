@@ -558,5 +558,16 @@
   "stopPreview": "미리듣기 중지",
   "testNotification": "테스트 알림 보내기",
   "testNotificationSent": "테스트 알림이 전송되었습니다! 알림을 확인하세요.",
-  "quickPresets": "빠른 사전 설정"
+  "quickPresets": "빠른 사전 설정",
+  "reminderModeOff": "꺼짐",
+  "reminderModeNotification": "알림",
+  "reminderModeAlarm": "알람",
+  "testAlarm": "알람 테스트",
+  "testAlarmSent": "전체 화면 알람 테스트 전송됨",
+  "stopAlarm": "알람 중지",
+  "snooze": "스누즈",
+  "snoozed10Min": "10분 동안 스누즈됨",
+  "fullScreenAlarmPermission": "전체 화면 알람 권한",
+  "fullScreenAlarmPermissionDesc": "휴대폰이 잠겨 있을 때 알람이 화면을 켜도록 허용",
+  "grantPermission": "권한 허용"
 }

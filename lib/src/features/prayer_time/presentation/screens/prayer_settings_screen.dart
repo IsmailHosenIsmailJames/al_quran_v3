@@ -3,7 +3,6 @@ import "dart:io";
 import "package:flutter/foundation.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
@@ -12,9 +11,12 @@ import "package:al_quran_v3/src/core/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
+import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -37,8 +39,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     final themeState = context.watch<ThemeCubit>().state;
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
 
-    final isMobile = platformOwn == platform_services.PlatformOwn.isAndroid ||
-        platformOwn == platform_services.PlatformOwn.isIos;
+    final platform = platform_services.getPlatform();
+    final isMobile = platform == platform_services.PlatformOwn.isAndroid ||
+        platform == platform_services.PlatformOwn.isIos;
 
     return Scaffold(
       backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
@@ -795,39 +798,157 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
               const Divider(height: 24),
 
-              // Test Notification Button
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () async {
-                    await context
-                        .read<PrayerReminderCubit>()
-                        .sendTestNotification();
-                    Fluttertoast.showToast(msg: l10n.testNotificationSent);
-                  },
-                  icon: Icon(
-                    FluentIcons.alert_badge_24_regular,
-                    size: 18,
-                    color: themeState.primary,
-                  ),
-                  label: Text(
-                    l10n.testNotification,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: themeState.primary,
+              // Full-screen intent permission banner (if permission missing on Android 14+)
+              if (!reminderState.hasFullScreenIntentPermission) ...[
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFEF3C7)
+                        .withValues(alpha: isDark ? 0.15 : 0.9),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFFF59E0B).withValues(alpha: 0.5),
                     ),
                   ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    side: BorderSide(
-                      color: themeState.primary.withValues(alpha: 0.5),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        FluentIcons.warning_24_filled,
+                        color: Color(0xFFD97706),
+                        size: 20,
+                      ),
+                      const Gap(10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.fullScreenAlarmPermission,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFB45309),
+                              ),
+                            ),
+                            const Gap(2),
+                            Text(
+                              l10n.fullScreenAlarmPermissionDesc,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark
+                                    ? Colors.grey.shade300
+                                    : const Color(0xFF78350F),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .openFullScreenIntentSettings();
+                        },
+                        child: Text(
+                          l10n.grantPermission,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFD97706),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+              ],
+
+              // Test Notification & Alarm Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () async {
+                        await context
+                            .read<PrayerReminderCubit>()
+                            .sendTestNotification();
+                        Fluttertoast.showToast(msg: l10n.testNotificationSent);
+                      },
+                      icon: Icon(
+                        FluentIcons.alert_badge_24_regular,
+                        size: 16,
+                        color: themeState.primary,
+                      ),
+                      label: Text(
+                        l10n.testNotification,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: themeState.primary,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 8,
+                        ),
+                        side: BorderSide(
+                          color: themeState.primary.withValues(alpha: 0.5),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Gap(10),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        await context
+                            .read<PrayerReminderCubit>()
+                            .sendTestAlarmNotification();
+                        Fluttertoast.showToast(msg: l10n.testAlarmSent);
+                        if (context.mounted) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PrayerAlarmScreen(
+                                prayer: Prayer.fajr,
+                                scheduledTime: DateTime.now(),
+                                notificationId: 99998,
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.alarm,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        l10n.testAlarm,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFE11D48),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 8,
+                        ),
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -872,6 +993,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             final prayerName =
                 PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
                     prayerType.name;
+
+            final currentMode = prayerReminderState.prayerReminderModes?[prayerType] ??
+                ReminderScheduler.getPrayerReminderMode(prayerType);
 
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 5),
@@ -938,103 +1062,228 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           ],
                         ),
                       ),
-                      // Offset chip
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 9,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: offsetMinutes == 0
-                              ? (isDark
-                                  ? Colors.white.withValues(alpha: 0.08)
-                                  : Colors.grey.shade100)
-                              : themeState.primary.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          offsetMinutes == 0
-                              ? l10n.exactTime
-                              : (offsetMinutes > 0
-                                  ? "+${localizedNumber(context, offsetMinutes)} m"
-                                  : "-${localizedNumber(context, offsetMinutes.abs())} m"),
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
+                      if (currentMode.isEnabled) ...[
+                        // Offset chip
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 9,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
                             color: offsetMinutes == 0
                                 ? (isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade700)
-                                : themeState.primary,
+                                    ? Colors.white.withValues(alpha: 0.08)
+                                    : Colors.grey.shade100)
+                                : themeState.primary.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            offsetMinutes == 0
+                                ? l10n.exactTime
+                                : (offsetMinutes > 0
+                                    ? "+${localizedNumber(context, offsetMinutes)} m"
+                                    : "-${localizedNumber(context, offsetMinutes.abs())} m"),
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: offsetMinutes == 0
+                                  ? (isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade700)
+                                  : themeState.primary,
+                            ),
                           ),
                         ),
+                        const Gap(8),
+                        // Adjusted alert time pill
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: themeState.primary,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            formatTimeOfDay(context, adjustedTime),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const Gap(10),
+
+                  // 3-Mode Selector: Off | Notification | Alarm
+                  Row(
+                    children: [
+                      _buildModeChip(
+                        label: l10n.reminderModeOff,
+                        icon: FluentIcons.alert_off_24_regular,
+                        isSelected: currentMode == PrayerReminderMode.off,
+                        selectedColor: isDark
+                            ? Colors.grey.shade500
+                            : Colors.grey.shade600,
+                        isDark: isDark,
+                        onTap: () {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setPrayerReminderMode(
+                                prayerType,
+                                PrayerReminderMode.off,
+                              );
+                        },
                       ),
                       const Gap(8),
-                      // Adjusted alert time pill
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: themeState.primary,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          formatTimeOfDay(context, adjustedTime),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                      _buildModeChip(
+                        label: l10n.reminderModeNotification,
+                        icon: FluentIcons.alert_badge_24_regular,
+                        isSelected:
+                            currentMode == PrayerReminderMode.notification,
+                        selectedColor: themeState.primary,
+                        isDark: isDark,
+                        onTap: () {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setPrayerReminderMode(
+                                prayerType,
+                                PrayerReminderMode.notification,
+                              );
+                        },
+                      ),
+                      const Gap(8),
+                      _buildModeChip(
+                        label: l10n.reminderModeAlarm,
+                        icon: Icons.alarm,
+                        isSelected: currentMode == PrayerReminderMode.alarm,
+                        selectedColor: const Color(0xFFE11D48),
+                        isDark: isDark,
+                        onTap: () {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setPrayerReminderMode(
+                                prayerType,
+                                PrayerReminderMode.alarm,
+                              );
+                        },
                       ),
                     ],
                   ),
-                  const Gap(6),
-                  SliderTheme(
-                    data: SliderThemeData(
-                      activeTrackColor: themeState.primary,
-                      inactiveTrackColor: isDark
-                          ? Colors.white.withValues(alpha: 0.1)
-                          : Colors.grey.shade200,
-                      thumbColor: themeState.primary,
-                      overlayColor:
-                          themeState.primary.withValues(alpha: 0.15),
-                      trackHeight: 3.5,
-                      thumbShape:
-                          const RoundSliderThumbShape(enabledThumbRadius: 6),
+
+                  if (currentMode.isEnabled) ...[
+                    const Gap(8),
+                    SliderTheme(
+                      data: SliderThemeData(
+                        activeTrackColor: themeState.primary,
+                        inactiveTrackColor: isDark
+                            ? Colors.white.withValues(alpha: 0.1)
+                            : Colors.grey.shade200,
+                        thumbColor: themeState.primary,
+                        overlayColor:
+                            themeState.primary.withValues(alpha: 0.15),
+                        trackHeight: 3.5,
+                        thumbShape:
+                            const RoundSliderThumbShape(enabledThumbRadius: 6),
+                      ),
+                      child: Slider(
+                        value: offsetMinutes.toDouble(),
+                        min: -60.0,
+                        max: 60.0,
+                        divisions: 120,
+                        label: _getAdjustmentText(offsetMinutes, l10n),
+                        onChanged: (double value) {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setUIReminderTimeAdjustment(
+                                prayerType,
+                                value.round(),
+                              );
+                        },
+                        onChangeEnd: (value) {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .setReminderTimeAdjustment(
+                                prayerType,
+                                value.round(),
+                              );
+                        },
+                      ),
                     ),
-                    child: Slider(
-                      value: offsetMinutes.toDouble(),
-                      min: -60.0,
-                      max: 60.0,
-                      divisions: 120,
-                      label: _getAdjustmentText(offsetMinutes, l10n),
-                      onChanged: (double value) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setUIReminderTimeAdjustment(
-                              prayerType,
-                              value.round(),
-                            );
-                      },
-                      onChangeEnd: (value) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .setReminderTimeAdjustment(
-                              prayerType,
-                              value.round(),
-                            );
-                      },
-                    ),
-                  ),
+                  ],
                 ],
               ),
             );
           }).toList(),
         );
       },
+    );
+  }
+
+  Widget _buildModeChip({
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required Color selectedColor,
+    required bool isDark,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? selectedColor.withValues(alpha: isDark ? 0.25 : 0.12)
+                : (isDark
+                    ? Colors.white.withValues(alpha: 0.04)
+                    : Colors.grey.shade100),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: isSelected
+                  ? selectedColor
+                  : (isDark
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.grey.shade200),
+              width: isSelected ? 1.5 : 1.0,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 14,
+                color: isSelected
+                    ? selectedColor
+                    : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+              ),
+              const Gap(4),
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    color: isSelected
+                        ? (isDark ? Colors.white : selectedColor)
+                        : (isDark ? Colors.grey.shade400 : Colors.grey.shade700),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

@@ -1891,4 +1891,38 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get quickPresets => 'Schnellauswahl';
+
+  @override
+  String get reminderModeOff => 'Aus';
+
+  @override
+  String get reminderModeNotification => 'Benachrichtigung';
+
+  @override
+  String get reminderModeAlarm => 'Wecker';
+
+  @override
+  String get testAlarm => 'Wecker testen';
+
+  @override
+  String get testAlarmSent => 'Vollbild-Alarmtest gesendet';
+
+  @override
+  String get stopAlarm => 'Wecker stoppen';
+
+  @override
+  String get snooze => 'Schlummern';
+
+  @override
+  String get snoozed10Min => 'Für 10 Minuten geschlummert';
+
+  @override
+  String get fullScreenAlarmPermission => 'Vollbild-Alarm-Berechtigung';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Erlauben Sie dem Wecker, den Bildschirm bei gesperrtem Telefon zu aktivieren';
+
+  @override
+  String get grantPermission => 'Berechtigung erteilen';
 }

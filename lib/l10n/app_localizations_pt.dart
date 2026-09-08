@@ -1895,4 +1895,38 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get quickPresets => 'Predefinições rápidas';
+
+  @override
+  String get reminderModeOff => 'Desligado';
+
+  @override
+  String get reminderModeNotification => 'Notificação';
+
+  @override
+  String get reminderModeAlarm => 'Alarme';
+
+  @override
+  String get testAlarm => 'Testar alarme';
+
+  @override
+  String get testAlarmSent => 'Teste de alarme em tela cheia enviado';
+
+  @override
+  String get stopAlarm => 'Parar alarme';
+
+  @override
+  String get snooze => 'Soneca';
+
+  @override
+  String get snoozed10Min => 'Adiado por 10 minutos';
+
+  @override
+  String get fullScreenAlarmPermission => 'Permissão de alarme em tela cheia';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Permitir que os alarmes ativem a tela quando o telefone estiver bloqueado';
+
+  @override
+  String get grantPermission => 'Conceder permissão';
 }

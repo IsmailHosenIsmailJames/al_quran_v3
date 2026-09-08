@@ -1875,4 +1875,38 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get quickPresets => 'فوری ترتیبات';
+
+  @override
+  String get reminderModeOff => 'بند';
+
+  @override
+  String get reminderModeNotification => 'اطلاع';
+
+  @override
+  String get reminderModeAlarm => 'الارم';
+
+  @override
+  String get testAlarm => 'الارم آزمائیں';
+
+  @override
+  String get testAlarmSent => 'مکمل اسکرین الارم ٹیسٹ بھیج دیا گیا';
+
+  @override
+  String get stopAlarm => 'الارم بند کریں';
+
+  @override
+  String get snooze => 'اسنوز';
+
+  @override
+  String get snoozed10Min => '10 منٹ کے لیے اسنوز کیا گیا';
+
+  @override
+  String get fullScreenAlarmPermission => 'فل اسکرین الارم کی اجازت';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'فون لاک ہونے پر الارم کو اسکرین آن کرنے کی اجازت دیں';
+
+  @override
+  String get grantPermission => 'اجازت دیں';
 }

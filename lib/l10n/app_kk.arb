@@ -820,5 +820,16 @@
   "stopPreview": "Тыңдауды тоқтату",
   "testNotification": "Сынақ хабарландыруын жіберу",
   "testNotificationSent": "Сынақ хабарландыруы жіберілді! Хабарландыруларыңызды тексеріңіз.",
-  "quickPresets": "Жылдам таңдаулар"
+  "quickPresets": "Жылдам таңдаулар",
+  "reminderModeOff": "Өшірулі",
+  "reminderModeNotification": "Хабарландыру",
+  "reminderModeAlarm": "Оятқыш",
+  "testAlarm": "Оятқышты тексеру",
+  "testAlarmSent": "Толық экранды оятқыш сынағы жіберілді",
+  "stopAlarm": "Оятқышты тоқтату",
+  "snooze": "Кейінге қалдыру",
+  "snoozed10Min": "10 минутқа кейінге қалдырылды",
+  "fullScreenAlarmPermission": "Толық экранды оятқыш рұқсаты",
+  "fullScreenAlarmPermissionDesc": "Телефон құлыптаулы болғанда оятқышқа экранды оятуға рұқсат етіңіз",
+  "grantPermission": "Рұқсат беру"
 }

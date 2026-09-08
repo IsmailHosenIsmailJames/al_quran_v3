@@ -1872,4 +1872,38 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get quickPresets => 'Pilihan Cepat';
+
+  @override
+  String get reminderModeOff => 'Mati';
+
+  @override
+  String get reminderModeNotification => 'Notifikasi';
+
+  @override
+  String get reminderModeAlarm => 'Alarm';
+
+  @override
+  String get testAlarm => 'Uji Alarm';
+
+  @override
+  String get testAlarmSent => 'Uji alarm layar penuh terkirim';
+
+  @override
+  String get stopAlarm => 'Hentikan Alarm';
+
+  @override
+  String get snooze => 'Tunda';
+
+  @override
+  String get snoozed10Min => 'Ditunda selama 10 menit';
+
+  @override
+  String get fullScreenAlarmPermission => 'Izin Alarm Layar Penuh';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Izinkan alarm mengaktifkan layar saat ponsel terkunci';
+
+  @override
+  String get grantPermission => 'Beri Izin';
 }

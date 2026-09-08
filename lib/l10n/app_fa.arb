@@ -820,5 +820,16 @@
   "stopPreview": "توقف پخش",
   "testNotification": "ارسال اعلان آزمایشی",
   "testNotificationSent": "اعلان آزمایشی ارسال شد! اعلان‌های خود را بررسی کنید.",
-  "quickPresets": "گزینه‌های سریع"
+  "quickPresets": "گزینه‌های سریع",
+  "reminderModeOff": "خاموش",
+  "reminderModeNotification": "اعلان",
+  "reminderModeAlarm": "هشدار",
+  "testAlarm": "آزمایش هشدار",
+  "testAlarmSent": "آزمایش هشدار تمام صفحه ارسال شد",
+  "stopAlarm": "توقف هشدار",
+  "snooze": "تعویق",
+  "snoozed10Min": "برای ۱۰ دقیقه به تعویق افتاد",
+  "fullScreenAlarmPermission": "مجوز هشدار تمام صفحه",
+  "fullScreenAlarmPermissionDesc": "اجازه دهید هشدارها هنگام قفل بودن گوشی صفحه را روشن کنند",
+  "grantPermission": "اعطای مجوز"
 }

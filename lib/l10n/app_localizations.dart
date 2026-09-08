@@ -3505,6 +3505,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quick Presets'**
   String get quickPresets;
+
+  /// No description provided for @reminderModeOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get reminderModeOff;
+
+  /// No description provided for @reminderModeNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get reminderModeNotification;
+
+  /// No description provided for @reminderModeAlarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm'**
+  String get reminderModeAlarm;
+
+  /// No description provided for @testAlarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Alarm'**
+  String get testAlarm;
+
+  /// No description provided for @testAlarmSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-screen alarm test sent'**
+  String get testAlarmSent;
+
+  /// No description provided for @stopAlarm.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop Alarm'**
+  String get stopAlarm;
+
+  /// No description provided for @snooze.
+  ///
+  /// In en, this message translates to:
+  /// **'Snooze'**
+  String get snooze;
+
+  /// No description provided for @snoozed10Min.
+  ///
+  /// In en, this message translates to:
+  /// **'Snoozed for 10 minutes'**
+  String get snoozed10Min;
+
+  /// No description provided for @fullScreenAlarmPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-Screen Alarm Permission'**
+  String get fullScreenAlarmPermission;
+
+  /// No description provided for @fullScreenAlarmPermissionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow alarms to wake up the screen when your phone is locked'**
+  String get fullScreenAlarmPermissionDesc;
+
+  /// No description provided for @grantPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant Permission'**
+  String get grantPermission;
 }
 
 class _AppLocalizationsDelegate

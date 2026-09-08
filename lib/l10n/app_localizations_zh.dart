@@ -1809,4 +1809,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get quickPresets => '快速预设';
+
+  @override
+  String get reminderModeOff => '关闭';
+
+  @override
+  String get reminderModeNotification => '通知';
+
+  @override
+  String get reminderModeAlarm => '闹钟';
+
+  @override
+  String get testAlarm => '测试闹钟';
+
+  @override
+  String get testAlarmSent => '已发送全屏闹钟测试';
+
+  @override
+  String get stopAlarm => '停止闹钟';
+
+  @override
+  String get snooze => '稍后提醒';
+
+  @override
+  String get snoozed10Min => '已稍后提醒10分钟';
+
+  @override
+  String get fullScreenAlarmPermission => '全屏闹钟权限';
+
+  @override
+  String get fullScreenAlarmPermissionDesc => '允许闹钟在手机锁定时唤醒屏幕';
+
+  @override
+  String get grantPermission => '授予权限';
 }
