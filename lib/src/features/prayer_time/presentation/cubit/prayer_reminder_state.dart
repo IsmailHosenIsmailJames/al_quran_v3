@@ -18,5 +18,6 @@ abstract class PrayerReminderState with _$PrayerReminderState {
     String? selectedRingtoneType,
     @Default(false) bool isPlayingPreview,
     @Default(true) bool hasFullScreenIntentPermission,
+    @Default(true) bool isIgnoringBatteryOptimizations,
   }) = _PrayerReminderState;
 }

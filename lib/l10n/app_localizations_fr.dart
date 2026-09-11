@@ -1932,4 +1932,98 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get grantPermission => 'Accorder l\'autorisation';
+
+  @override
+  String get adhanSound => 'Adhan authentique';
+
+  @override
+  String get batteryOptimizationTitle =>
+      'Exemption d\'optimisation de batterie';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Autoriser l\'application en arrière-plan pour garantir les alarmes de prière à l\'heure';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Guide et configuration des rappels de prière';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Configurer les alarmes de réveil, le son de l\'Adhan et les autorisations';
+
+  @override
+  String get neverMissAPrayer => 'Ne manquez jamais une prière';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Choisissez entre des alarmes plein écran avec l\'Adhan ou des notifications discrètes';
+
+  @override
+  String get howRemindersWork => 'Fonctionnement des rappels';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Alarme plein écran';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Réveille l\'écran sur le verrouillage avec l\'Adhan, calligraphie et Arrêt/Répéter. Idéal pour Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Notification discrète';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Bannière standard avec son. Discrète et idéale pendant le travail.';
+
+  @override
+  String get presetBalanced => 'Équilibré';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Alarme ⏰ + Autres Notification 🔔';
+
+  @override
+  String get presetAllAlarms => 'Toutes les alarmes';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Alarme plein écran pour toutes les prières';
+
+  @override
+  String get presetAllNotifications => 'Toutes les notifications';
+
+  @override
+  String get presetAllNotificationsSubtitle =>
+      'Notifications discrètes uniquement';
+
+  @override
+  String get saveAndReturn => 'Enregistrer et revenir';
+
+  @override
+  String get saveAndGetStarted => 'Enregistrer et commencer';
+
+  @override
+  String get granted => 'Accordé';
+
+  @override
+  String get requiredPermissions => 'Autorisations requises';
+
+  @override
+  String get skip => 'Passer';
+
+  @override
+  String get skipForNow => 'Passer pour l\'instant';
+
+  @override
+  String get exactAlarmPermission => 'Alarmes exactes';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Déclenche les notifications précisément aux heures de prière';
+
+  @override
+  String get appDefaultTone => 'Son par défaut de l\'application';
+
+  @override
+  String get systemAlarmTone => 'Sonnerie d\'alarme système';
 }

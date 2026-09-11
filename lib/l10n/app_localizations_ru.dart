@@ -1922,4 +1922,97 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get grantPermission => 'Предоставить разрешение';
+
+  @override
+  String get adhanSound => 'Азан';
+
+  @override
+  String get batteryOptimizationTitle => 'Исключение из оптимизации батареи';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Разрешите работу в фоновом режиме для точного срабатывания будильников намаза';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Руководство и настройка напоминаний намаза';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Настройте будильники, звук азана и разрешения';
+
+  @override
+  String get neverMissAPrayer => 'Не пропускайте намаз';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Выберите между полноэкранным будильником с азаном или мягкими уведомлениями';
+
+  @override
+  String get howRemindersWork => 'Как работают напоминания';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Полноэкранный будильник';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Включает экран поверх блокировки с азаном, каллиграфией и кнопками. Идеально для Фаджра.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Мягкое уведомление';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Обычный баннер со звуком. Ненавязчив и удобен в рабочее время.';
+
+  @override
+  String get presetBalanced => 'Сбалансированный';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'Фаджр будильник ⏰ + Остальные уведомления 🔔';
+
+  @override
+  String get presetAllAlarms => 'Все будильники';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Полноэкранный будильник для всех намазов';
+
+  @override
+  String get presetAllNotifications => 'Все уведомления';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Только мягкие уведомления';
+
+  @override
+  String get saveAndReturn => 'Сохранить и вернуться';
+
+  @override
+  String get saveAndGetStarted => 'Сохранить и начать';
+
+  @override
+  String get granted => 'Предоставлено';
+
+  @override
+  String get requiredPermissions => 'Необходимые разрешения';
+
+  @override
+  String get skip => 'Пропустить';
+
+  @override
+  String get skipForNow => 'Пропустить сейчас';
+
+  @override
+  String get exactAlarmPermission => 'Точные будильники';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Запускает уведомления точно во время молитвы';
+
+  @override
+  String get appDefaultTone => 'Стандартный звук приложения';
+
+  @override
+  String get systemAlarmTone => 'Системный сигнал будильника';
 }

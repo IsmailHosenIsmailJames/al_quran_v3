@@ -1842,4 +1842,88 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get grantPermission => '授予权限';
+
+  @override
+  String get adhanSound => '宣礼声';
+
+  @override
+  String get batteryOptimizationTitle => '电池优化豁免';
+
+  @override
+  String get batteryOptimizationDesc => '允许应用在后台运行，以确保礼拜闹钟准时触发';
+
+  @override
+  String get prayerGuidanceSetupTitle => '礼拜提醒指南与设置';
+
+  @override
+  String get prayerGuidanceSetupDesc => '配置唤醒闹钟、宣礼声和权限';
+
+  @override
+  String get neverMissAPrayer => '绝不错过任何礼拜';
+
+  @override
+  String get prayerGuidanceHeaderDesc => '在带宣礼声的全屏闹钟或温和通知之间进行选择';
+
+  @override
+  String get howRemindersWork => '提醒如何工作';
+
+  @override
+  String get fullScreenAlarmModeTitle => '全屏闹钟';
+
+  @override
+  String get fullScreenAlarmModeDesc => '在锁屏上以宣礼声、书法和停止/稍后提醒唤醒屏幕。非常适合晨礼。';
+
+  @override
+  String get gentleNotificationModeTitle => '温和通知';
+
+  @override
+  String get gentleNotificationModeDesc => '带声音的标准横幅通知。不具侵入性，适合工作时间。';
+
+  @override
+  String get presetBalanced => '平衡';
+
+  @override
+  String get presetBalancedSubtitle => '晨礼 闹钟 ⏰ + 其他 通知 🔔';
+
+  @override
+  String get presetAllAlarms => '全部闹钟';
+
+  @override
+  String get presetAllAlarmsSubtitle => '所有礼拜均使用全屏闹钟';
+
+  @override
+  String get presetAllNotifications => '全部通知';
+
+  @override
+  String get presetAllNotificationsSubtitle => '仅温和横幅通知';
+
+  @override
+  String get saveAndReturn => '保存并返回';
+
+  @override
+  String get saveAndGetStarted => '保存并开始';
+
+  @override
+  String get granted => '已授予';
+
+  @override
+  String get requiredPermissions => '所需权限';
+
+  @override
+  String get skip => '跳过';
+
+  @override
+  String get skipForNow => '暂且跳过';
+
+  @override
+  String get exactAlarmPermission => '精准闹钟';
+
+  @override
+  String get exactAlarmPermissionDesc => '在礼拜时间准时触发通知';
+
+  @override
+  String get appDefaultTone => '应用默认铃声';
+
+  @override
+  String get systemAlarmTone => '系统闹钟铃声';
 }

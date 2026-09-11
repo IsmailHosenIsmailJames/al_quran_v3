@@ -17,6 +17,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_r
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_guidance_setup_screen.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -499,6 +500,77 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
               const Divider(height: 24),
 
+              // Prayer Guidance & Setup Link Card
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const PrayerGuidanceSetupScreen(
+                        isFromSettings: true,
+                      ),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: themeState.primary.withValues(alpha: 0.25),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: themeState.primary.withValues(alpha: 0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FluentIcons.book_question_mark_24_filled,
+                          color: themeState.primary,
+                          size: 20,
+                        ),
+                      ),
+                      const Gap(12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.prayerGuidanceSetupTitle,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: isDark ? Colors.white : Colors.grey.shade900,
+                              ),
+                            ),
+                            const Gap(2),
+                            Text(
+                              l10n.prayerGuidanceSetupDesc,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right_rounded,
+                        color: themeState.primary,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const Divider(height: 24),
+
               // Enforce Sound Toggle
               Row(
                 children: [
@@ -676,12 +748,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            reminderState.selectedRingtoneType == "default_sound" ||
-                                    reminderState.selectedRingtoneType == null
-                                ? "WAV Audio (notification_sound.wav)"
-                                : reminderState.selectedRingtoneType == "custom"
-                                    ? "Device / System Sound"
-                                    : "System Preset",
+                            reminderState.selectedRingtoneType == "adhan"
+                                ? "Authentic Adhan (Audio)"
+                                : reminderState.selectedRingtoneType == "default_sound" ||
+                                        reminderState.selectedRingtoneType == null
+                                    ? "WAV Audio (notification_sound.wav)"
+                                    : reminderState.selectedRingtoneType == "custom"
+                                        ? "Device / System Sound"
+                                        : "System Preset",
                             style: TextStyle(
                               fontSize: 10.5,
                               color: isDark
@@ -732,6 +806,21 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
+                  ChoiceChip(
+                    avatar: const Icon(FluentIcons.sound_wave_circle_24_regular, size: 16),
+                    label: Text(
+                      l10n.adhanSound,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: reminderState.selectedRingtoneType == "adhan",
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .selectRingtonePreset("adhan");
+                      }
+                    },
+                  ),
                   ChoiceChip(
                     label: Text(
                       l10n.defaultSound,
@@ -856,6 +945,74 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFFD97706),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+
+              // Battery Optimization Exemption banner (critical for Honor / MagicOS / MIUI)
+              if (!kIsWeb &&
+                  Platform.isAndroid &&
+                  !reminderState.isIgnoringBatteryOptimizations) ...[
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFF6FF)
+                        .withValues(alpha: isDark ? 0.15 : 0.9),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFF3B82F6).withValues(alpha: 0.5),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        FluentIcons.battery_charge_24_filled,
+                        color: Color(0xFF2563EB),
+                        size: 20,
+                      ),
+                      const Gap(10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n.batteryOptimizationTitle,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1D4ED8),
+                              ),
+                            ),
+                            const Gap(2),
+                            Text(
+                              l10n.batteryOptimizationDesc,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark
+                                    ? Colors.grey.shade300
+                                    : const Color(0xFF1E3A8A),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context
+                              .read<PrayerReminderCubit>()
+                              .requestIgnoreBatteryOptimizations();
+                        },
+                        child: Text(
+                          l10n.grantPermission,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2563EB),
                           ),
                         ),
                       ),

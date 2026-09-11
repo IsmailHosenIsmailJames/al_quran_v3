@@ -26,9 +26,11 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
             selectedRingtoneType: ReminderScheduler.getSelectedRingtoneType(),
             isPlayingPreview: false,
             hasFullScreenIntentPermission: true,
+            isIgnoringBatteryOptimizations: true,
           ),
         ) {
     checkFullScreenIntentPermission();
+    checkBatteryOptimization();
   }
 
   Future<void> togglePrayerReminder(Prayer prayer) async {
@@ -123,6 +125,9 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     await stopRingtonePreview();
     String title;
     switch (type) {
+      case "adhan":
+        title = "Adhan (Ahmed al-Imadi)";
+        break;
       case "system_alarm":
         title = "System Default Alarm";
         break;
@@ -162,9 +167,11 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     } else {
       emit(state.copyWith(isPlayingPreview: true));
       final soundType = state.selectedRingtoneType ?? "default_sound";
-      final uri = soundType == "default_sound"
-          ? "resource://raw/notification_sound"
-          : (state.selectedRingtoneUri ?? soundType);
+      final uri = soundType == "adhan"
+          ? "resource://raw/adhan"
+          : (soundType == "default_sound"
+              ? "resource://raw/notification_sound"
+              : (state.selectedRingtoneUri ?? soundType));
 
       final success = await RingtoneService.playRingtone(uri);
       if (!success) {
@@ -194,6 +201,75 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       await RingtoneService.openFullScreenIntentSettings();
       await checkFullScreenIntentPermission();
     } catch (_) {}
+  }
+
+  Future<void> checkBatteryOptimization() async {
+    try {
+      final isIgnoring = await RingtoneService.isIgnoringBatteryOptimizations();
+      if (!isClosed) {
+        emit(state.copyWith(isIgnoringBatteryOptimizations: isIgnoring));
+      }
+    } catch (_) {}
+  }
+
+  Future<void> requestIgnoreBatteryOptimizations() async {
+    try {
+      await RingtoneService.requestIgnoreBatteryOptimizations();
+      await checkBatteryOptimization();
+    } catch (_) {}
+  }
+
+  Future<void> checkAllPermissions() async {
+    await checkFullScreenIntentPermission();
+    await checkBatteryOptimization();
+  }
+
+  Future<void> applyBulkPreset(String preset) async {
+    final Map<Prayer, PrayerReminderMode> modes = {};
+    final Map<Prayer, bool> enabled = {};
+
+    for (final p in Prayer.values) {
+      final isCorePrayer = p == Prayer.fajr ||
+          p == Prayer.dhuhr ||
+          p == Prayer.asr ||
+          p == Prayer.maghrib ||
+          p == Prayer.isha;
+
+      if (!isCorePrayer) {
+        modes[p] = PrayerReminderMode.off;
+        enabled[p] = false;
+        continue;
+      }
+
+      if (preset == "all_alarm") {
+        modes[p] = PrayerReminderMode.alarm;
+        enabled[p] = true;
+      } else if (preset == "all_notification") {
+        modes[p] = PrayerReminderMode.notification;
+        enabled[p] = true;
+      } else if (preset == "all_off") {
+        modes[p] = PrayerReminderMode.off;
+        enabled[p] = false;
+      } else {
+        // "balanced" default: Fajr is Alarm, others are Notification
+        final isFajr = p == Prayer.fajr;
+        modes[p] =
+            isFajr ? PrayerReminderMode.alarm : PrayerReminderMode.notification;
+        enabled[p] = true;
+      }
+    }
+
+    emit(state.copyWith(
+      prayerReminderModes: modes,
+      enabledPrayers: enabled,
+      isPrayerRemindNotificationEnabled: true,
+    ));
+
+    await ReminderScheduler.enablePrayerRemindNotification();
+    for (final entry in modes.entries) {
+      await ReminderScheduler.setPrayerReminderMode(entry.key, entry.value);
+    }
+    await ReminderScheduler.scheduleNotification();
   }
 
   Future<void> setPrayerReminderMode(

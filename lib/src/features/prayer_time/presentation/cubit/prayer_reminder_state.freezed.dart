@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PrayerReminderState {
 
- Map<Prayer, int>? get reminderTimeAdjustment; Map<Prayer, bool>? get enabledPrayers; Map<Prayer, PrayerReminderMode>? get prayerReminderModes; bool? get isPrayerRemindNotificationEnabled; bool? get enforceAlarmSound; double? get soundVolume; String? get selectedRingtoneUri; String? get selectedRingtoneTitle; String? get selectedRingtoneType; bool get isPlayingPreview; bool get hasFullScreenIntentPermission;
+ Map<Prayer, int>? get reminderTimeAdjustment; Map<Prayer, bool>? get enabledPrayers; Map<Prayer, PrayerReminderMode>? get prayerReminderModes; bool? get isPrayerRemindNotificationEnabled; bool? get enforceAlarmSound; double? get soundVolume; String? get selectedRingtoneUri; String? get selectedRingtoneTitle; String? get selectedRingtoneType; bool get isPlayingPreview; bool get hasFullScreenIntentPermission; bool get isIgnoringBatteryOptimizations;
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $PrayerReminderStateCopyWith<PrayerReminderState> get copyWith => _$PrayerRemind
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerReminderState&&const DeepCollectionEquality().equals(other.reminderTimeAdjustment, reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other.enabledPrayers, enabledPrayers)&&const DeepCollectionEquality().equals(other.prayerReminderModes, prayerReminderModes)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume)&&(identical(other.selectedRingtoneUri, selectedRingtoneUri) || other.selectedRingtoneUri == selectedRingtoneUri)&&(identical(other.selectedRingtoneTitle, selectedRingtoneTitle) || other.selectedRingtoneTitle == selectedRingtoneTitle)&&(identical(other.selectedRingtoneType, selectedRingtoneType) || other.selectedRingtoneType == selectedRingtoneType)&&(identical(other.isPlayingPreview, isPlayingPreview) || other.isPlayingPreview == isPlayingPreview)&&(identical(other.hasFullScreenIntentPermission, hasFullScreenIntentPermission) || other.hasFullScreenIntentPermission == hasFullScreenIntentPermission));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerReminderState&&const DeepCollectionEquality().equals(other.reminderTimeAdjustment, reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other.enabledPrayers, enabledPrayers)&&const DeepCollectionEquality().equals(other.prayerReminderModes, prayerReminderModes)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume)&&(identical(other.selectedRingtoneUri, selectedRingtoneUri) || other.selectedRingtoneUri == selectedRingtoneUri)&&(identical(other.selectedRingtoneTitle, selectedRingtoneTitle) || other.selectedRingtoneTitle == selectedRingtoneTitle)&&(identical(other.selectedRingtoneType, selectedRingtoneType) || other.selectedRingtoneType == selectedRingtoneType)&&(identical(other.isPlayingPreview, isPlayingPreview) || other.isPlayingPreview == isPlayingPreview)&&(identical(other.hasFullScreenIntentPermission, hasFullScreenIntentPermission) || other.hasFullScreenIntentPermission == hasFullScreenIntentPermission)&&(identical(other.isIgnoringBatteryOptimizations, isIgnoringBatteryOptimizations) || other.isIgnoringBatteryOptimizations == isIgnoringBatteryOptimizations));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reminderTimeAdjustment),const DeepCollectionEquality().hash(enabledPrayers),const DeepCollectionEquality().hash(prayerReminderModes),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume,selectedRingtoneUri,selectedRingtoneTitle,selectedRingtoneType,isPlayingPreview,hasFullScreenIntentPermission);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reminderTimeAdjustment),const DeepCollectionEquality().hash(enabledPrayers),const DeepCollectionEquality().hash(prayerReminderModes),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume,selectedRingtoneUri,selectedRingtoneTitle,selectedRingtoneType,isPlayingPreview,hasFullScreenIntentPermission,isIgnoringBatteryOptimizations);
 
 @override
 String toString() {
-  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, prayerReminderModes: $prayerReminderModes, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume, selectedRingtoneUri: $selectedRingtoneUri, selectedRingtoneTitle: $selectedRingtoneTitle, selectedRingtoneType: $selectedRingtoneType, isPlayingPreview: $isPlayingPreview, hasFullScreenIntentPermission: $hasFullScreenIntentPermission)';
+  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, prayerReminderModes: $prayerReminderModes, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume, selectedRingtoneUri: $selectedRingtoneUri, selectedRingtoneTitle: $selectedRingtoneTitle, selectedRingtoneType: $selectedRingtoneType, isPlayingPreview: $isPlayingPreview, hasFullScreenIntentPermission: $hasFullScreenIntentPermission, isIgnoringBatteryOptimizations: $isIgnoringBatteryOptimizations)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $PrayerReminderStateCopyWith<$Res>  {
   factory $PrayerReminderStateCopyWith(PrayerReminderState value, $Res Function(PrayerReminderState) _then) = _$PrayerReminderStateCopyWithImpl;
 @useResult
 $Res call({
- Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, Map<Prayer, PrayerReminderMode>? prayerReminderModes, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume, String? selectedRingtoneUri, String? selectedRingtoneTitle, String? selectedRingtoneType, bool isPlayingPreview, bool hasFullScreenIntentPermission
+ Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, Map<Prayer, PrayerReminderMode>? prayerReminderModes, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume, String? selectedRingtoneUri, String? selectedRingtoneTitle, String? selectedRingtoneType, bool isPlayingPreview, bool hasFullScreenIntentPermission, bool isIgnoringBatteryOptimizations
 });
 
 
@@ -63,7 +63,7 @@ class _$PrayerReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? prayerReminderModes = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,Object? selectedRingtoneUri = freezed,Object? selectedRingtoneTitle = freezed,Object? selectedRingtoneType = freezed,Object? isPlayingPreview = null,Object? hasFullScreenIntentPermission = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? prayerReminderModes = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,Object? selectedRingtoneUri = freezed,Object? selectedRingtoneTitle = freezed,Object? selectedRingtoneType = freezed,Object? isPlayingPreview = null,Object? hasFullScreenIntentPermission = null,Object? isIgnoringBatteryOptimizations = null,}) {
   return _then(PrayerReminderState(
 reminderTimeAdjustment: freezed == reminderTimeAdjustment ? _self.reminderTimeAdjustment : reminderTimeAdjustment // ignore: cast_nullable_to_non_nullable
 as Map<Prayer, int>?,enabledPrayers: freezed == enabledPrayers ? _self.enabledPrayers : enabledPrayers // ignore: cast_nullable_to_non_nullable
@@ -76,6 +76,7 @@ as String?,selectedRingtoneTitle: freezed == selectedRingtoneTitle ? _self.selec
 as String?,selectedRingtoneType: freezed == selectedRingtoneType ? _self.selectedRingtoneType : selectedRingtoneType // ignore: cast_nullable_to_non_nullable
 as String?,isPlayingPreview: null == isPlayingPreview ? _self.isPlayingPreview : isPlayingPreview // ignore: cast_nullable_to_non_nullable
 as bool,hasFullScreenIntentPermission: null == hasFullScreenIntentPermission ? _self.hasFullScreenIntentPermission : hasFullScreenIntentPermission // ignore: cast_nullable_to_non_nullable
+as bool,isIgnoringBatteryOptimizations: null == isIgnoringBatteryOptimizations ? _self.isIgnoringBatteryOptimizations : isIgnoringBatteryOptimizations // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission,  bool isIgnoringBatteryOptimizations)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PrayerReminderState() when $default != null:
-return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission,_that.isIgnoringBatteryOptimizations);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerRe
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission,  bool isIgnoringBatteryOptimizations)  $default,) {final _that = this;
 switch (_that) {
 case _PrayerReminderState():
-return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission,_that.isIgnoringBatteryOptimizations);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerRe
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes,  bool? isPrayerRemindNotificationEnabled,  bool? enforceAlarmSound,  double? soundVolume,  String? selectedRingtoneUri,  String? selectedRingtoneTitle,  String? selectedRingtoneType,  bool isPlayingPreview,  bool hasFullScreenIntentPermission,  bool isIgnoringBatteryOptimizations)?  $default,) {final _that = this;
 switch (_that) {
 case _PrayerReminderState() when $default != null:
-return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission);case _:
+return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerReminderModes,_that.isPrayerRemindNotificationEnabled,_that.enforceAlarmSound,_that.soundVolume,_that.selectedRingtoneUri,_that.selectedRingtoneTitle,_that.selectedRingtoneType,_that.isPlayingPreview,_that.hasFullScreenIntentPermission,_that.isIgnoringBatteryOptimizations);case _:
   return null;
 
 }
@@ -217,7 +218,7 @@ return $default(_that.reminderTimeAdjustment,_that.enabledPrayers,_that.prayerRe
 
 
 class _PrayerReminderState implements PrayerReminderState {
-  const _PrayerReminderState({ Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes, this.isPrayerRemindNotificationEnabled, this.enforceAlarmSound, this.soundVolume, this.selectedRingtoneUri, this.selectedRingtoneTitle, this.selectedRingtoneType, this.isPlayingPreview = false, this.hasFullScreenIntentPermission = true}): _reminderTimeAdjustment = reminderTimeAdjustment,_enabledPrayers = enabledPrayers,_prayerReminderModes = prayerReminderModes;
+  const _PrayerReminderState({ Map<Prayer, int>? reminderTimeAdjustment,  Map<Prayer, bool>? enabledPrayers,  Map<Prayer, PrayerReminderMode>? prayerReminderModes, this.isPrayerRemindNotificationEnabled, this.enforceAlarmSound, this.soundVolume, this.selectedRingtoneUri, this.selectedRingtoneTitle, this.selectedRingtoneType, this.isPlayingPreview = false, this.hasFullScreenIntentPermission = true, this.isIgnoringBatteryOptimizations = true}): _reminderTimeAdjustment = reminderTimeAdjustment,_enabledPrayers = enabledPrayers,_prayerReminderModes = prayerReminderModes;
   
 
  final  Map<Prayer, int>? _reminderTimeAdjustment;
@@ -255,6 +256,7 @@ class _PrayerReminderState implements PrayerReminderState {
 @override final  String? selectedRingtoneType;
 @override@JsonKey() final  bool isPlayingPreview;
 @override@JsonKey() final  bool hasFullScreenIntentPermission;
+@override@JsonKey() final  bool isIgnoringBatteryOptimizations;
 
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
@@ -266,16 +268,16 @@ _$PrayerReminderStateCopyWith<_PrayerReminderState> get copyWith => __$PrayerRem
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerReminderState&&const DeepCollectionEquality().equals(other._reminderTimeAdjustment, _reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other._enabledPrayers, _enabledPrayers)&&const DeepCollectionEquality().equals(other._prayerReminderModes, _prayerReminderModes)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume)&&(identical(other.selectedRingtoneUri, selectedRingtoneUri) || other.selectedRingtoneUri == selectedRingtoneUri)&&(identical(other.selectedRingtoneTitle, selectedRingtoneTitle) || other.selectedRingtoneTitle == selectedRingtoneTitle)&&(identical(other.selectedRingtoneType, selectedRingtoneType) || other.selectedRingtoneType == selectedRingtoneType)&&(identical(other.isPlayingPreview, isPlayingPreview) || other.isPlayingPreview == isPlayingPreview)&&(identical(other.hasFullScreenIntentPermission, hasFullScreenIntentPermission) || other.hasFullScreenIntentPermission == hasFullScreenIntentPermission));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerReminderState&&const DeepCollectionEquality().equals(other._reminderTimeAdjustment, _reminderTimeAdjustment)&&const DeepCollectionEquality().equals(other._enabledPrayers, _enabledPrayers)&&const DeepCollectionEquality().equals(other._prayerReminderModes, _prayerReminderModes)&&(identical(other.isPrayerRemindNotificationEnabled, isPrayerRemindNotificationEnabled) || other.isPrayerRemindNotificationEnabled == isPrayerRemindNotificationEnabled)&&(identical(other.enforceAlarmSound, enforceAlarmSound) || other.enforceAlarmSound == enforceAlarmSound)&&(identical(other.soundVolume, soundVolume) || other.soundVolume == soundVolume)&&(identical(other.selectedRingtoneUri, selectedRingtoneUri) || other.selectedRingtoneUri == selectedRingtoneUri)&&(identical(other.selectedRingtoneTitle, selectedRingtoneTitle) || other.selectedRingtoneTitle == selectedRingtoneTitle)&&(identical(other.selectedRingtoneType, selectedRingtoneType) || other.selectedRingtoneType == selectedRingtoneType)&&(identical(other.isPlayingPreview, isPlayingPreview) || other.isPlayingPreview == isPlayingPreview)&&(identical(other.hasFullScreenIntentPermission, hasFullScreenIntentPermission) || other.hasFullScreenIntentPermission == hasFullScreenIntentPermission)&&(identical(other.isIgnoringBatteryOptimizations, isIgnoringBatteryOptimizations) || other.isIgnoringBatteryOptimizations == isIgnoringBatteryOptimizations));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reminderTimeAdjustment),const DeepCollectionEquality().hash(_enabledPrayers),const DeepCollectionEquality().hash(_prayerReminderModes),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume,selectedRingtoneUri,selectedRingtoneTitle,selectedRingtoneType,isPlayingPreview,hasFullScreenIntentPermission);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reminderTimeAdjustment),const DeepCollectionEquality().hash(_enabledPrayers),const DeepCollectionEquality().hash(_prayerReminderModes),isPrayerRemindNotificationEnabled,enforceAlarmSound,soundVolume,selectedRingtoneUri,selectedRingtoneTitle,selectedRingtoneType,isPlayingPreview,hasFullScreenIntentPermission,isIgnoringBatteryOptimizations);
 
 @override
 String toString() {
-  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, prayerReminderModes: $prayerReminderModes, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume, selectedRingtoneUri: $selectedRingtoneUri, selectedRingtoneTitle: $selectedRingtoneTitle, selectedRingtoneType: $selectedRingtoneType, isPlayingPreview: $isPlayingPreview, hasFullScreenIntentPermission: $hasFullScreenIntentPermission)';
+  return 'PrayerReminderState(reminderTimeAdjustment: $reminderTimeAdjustment, enabledPrayers: $enabledPrayers, prayerReminderModes: $prayerReminderModes, isPrayerRemindNotificationEnabled: $isPrayerRemindNotificationEnabled, enforceAlarmSound: $enforceAlarmSound, soundVolume: $soundVolume, selectedRingtoneUri: $selectedRingtoneUri, selectedRingtoneTitle: $selectedRingtoneTitle, selectedRingtoneType: $selectedRingtoneType, isPlayingPreview: $isPlayingPreview, hasFullScreenIntentPermission: $hasFullScreenIntentPermission, isIgnoringBatteryOptimizations: $isIgnoringBatteryOptimizations)';
 }
 
 
@@ -286,7 +288,7 @@ abstract mixin class _$PrayerReminderStateCopyWith<$Res> implements $PrayerRemin
   factory _$PrayerReminderStateCopyWith(_PrayerReminderState value, $Res Function(_PrayerReminderState) _then) = __$PrayerReminderStateCopyWithImpl;
 @override @useResult
 $Res call({
- Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, Map<Prayer, PrayerReminderMode>? prayerReminderModes, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume, String? selectedRingtoneUri, String? selectedRingtoneTitle, String? selectedRingtoneType, bool isPlayingPreview, bool hasFullScreenIntentPermission
+ Map<Prayer, int>? reminderTimeAdjustment, Map<Prayer, bool>? enabledPrayers, Map<Prayer, PrayerReminderMode>? prayerReminderModes, bool? isPrayerRemindNotificationEnabled, bool? enforceAlarmSound, double? soundVolume, String? selectedRingtoneUri, String? selectedRingtoneTitle, String? selectedRingtoneType, bool isPlayingPreview, bool hasFullScreenIntentPermission, bool isIgnoringBatteryOptimizations
 });
 
 
@@ -303,7 +305,7 @@ class __$PrayerReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of PrayerReminderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? prayerReminderModes = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,Object? selectedRingtoneUri = freezed,Object? selectedRingtoneTitle = freezed,Object? selectedRingtoneType = freezed,Object? isPlayingPreview = null,Object? hasFullScreenIntentPermission = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? reminderTimeAdjustment = freezed,Object? enabledPrayers = freezed,Object? prayerReminderModes = freezed,Object? isPrayerRemindNotificationEnabled = freezed,Object? enforceAlarmSound = freezed,Object? soundVolume = freezed,Object? selectedRingtoneUri = freezed,Object? selectedRingtoneTitle = freezed,Object? selectedRingtoneType = freezed,Object? isPlayingPreview = null,Object? hasFullScreenIntentPermission = null,Object? isIgnoringBatteryOptimizations = null,}) {
   return _then(_PrayerReminderState(
 reminderTimeAdjustment: freezed == reminderTimeAdjustment ? _self._reminderTimeAdjustment : reminderTimeAdjustment // ignore: cast_nullable_to_non_nullable
 as Map<Prayer, int>?,enabledPrayers: freezed == enabledPrayers ? _self._enabledPrayers : enabledPrayers // ignore: cast_nullable_to_non_nullable
@@ -316,6 +318,7 @@ as String?,selectedRingtoneTitle: freezed == selectedRingtoneTitle ? _self.selec
 as String?,selectedRingtoneType: freezed == selectedRingtoneType ? _self.selectedRingtoneType : selectedRingtoneType // ignore: cast_nullable_to_non_nullable
 as String?,isPlayingPreview: null == isPlayingPreview ? _self.isPlayingPreview : isPlayingPreview // ignore: cast_nullable_to_non_nullable
 as bool,hasFullScreenIntentPermission: null == hasFullScreenIntentPermission ? _self.hasFullScreenIntentPermission : hasFullScreenIntentPermission // ignore: cast_nullable_to_non_nullable
+as bool,isIgnoringBatteryOptimizations: null == isIgnoringBatteryOptimizations ? _self.isIgnoringBatteryOptimizations : isIgnoringBatteryOptimizations // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

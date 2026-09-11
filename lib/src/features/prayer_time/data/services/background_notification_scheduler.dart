@@ -81,7 +81,9 @@ class ReminderScheduler {
     String? soundSource;
     DefaultRingtoneType notifRingtoneType = DefaultRingtoneType.Notification;
 
-    if (soundType == "default_sound" || soundType == "notification_sound") {
+    if (soundType == "adhan") {
+      soundSource = "resource://raw/adhan";
+    } else if (soundType == "default_sound" || soundType == "notification_sound") {
       soundSource = "resource://raw/notification_sound";
     } else if (soundType == "system_alarm") {
       notifRingtoneType = DefaultRingtoneType.Alarm;
@@ -132,21 +134,23 @@ class ReminderScheduler {
     }
 
     if (!kIsWeb && Platform.isAndroid) {
+      final nativeSoundUri = soundType == "adhan"
+          ? "resource://raw/adhan"
+          : ((soundType == "default_sound" || soundType == "notification_sound")
+              ? "resource://raw/notification_sound"
+              : soundUri ?? soundType);
+
       await RingtoneService.createOrUpdateNotificationChannel(
         channelKey: notifChannelKey,
         channelName: "Prayer Reminders",
-        soundUri: (soundType == "default_sound" || soundType == "notification_sound")
-            ? "resource://raw/notification_sound"
-            : soundUri ?? soundType,
+        soundUri: nativeSoundUri,
         isAlarm: false,
       );
 
       await RingtoneService.createOrUpdateNotificationChannel(
         channelKey: alarmChannelKey,
         channelName: "Prayer Alarms",
-        soundUri: (soundType == "default_sound" || soundType == "notification_sound")
-            ? "resource://raw/notification_sound"
-            : soundUri ?? soundType,
+        soundUri: nativeSoundUri,
         isAlarm: true,
       );
     }
@@ -157,22 +161,26 @@ class ReminderScheduler {
   static Future<void> scheduleNotification() async {
     if (!isPrayerRemindNotificationEnabled()) return;
 
-    LocationQiblaPrayerDataState locationState =
-        await LocationQiblaPrayerDataCubit.getSavedState();
+    try {
+      LocationQiblaPrayerDataState locationState =
+          await LocationQiblaPrayerDataCubit.getSavedState();
 
-    if (locationState.latLon == null) return;
+      if (locationState.latLon == null) return;
 
-    PrayerReminderState reminderState = getState();
-    DateTime now = DateTime.now();
+      PrayerReminderState reminderState = getState();
+      DateTime now = DateTime.now();
 
-    if (!await hasRequiredPermissions()) {
-      log("Notification permissions not granted, skipping schedule");
-      return;
+      if (!await hasRequiredPermissions()) {
+        log("Notification permissions not granted, skipping schedule");
+        return;
+      }
+
+      await syncNotificationChannel();
+      await cancelAllNotifications();
+      await _scheduleNotifications(locationState, reminderState, now);
+    } catch (e) {
+      log("Error scheduling prayer notifications: $e");
     }
-
-    await syncNotificationChannel();
-    await cancelAllNotifications();
-    await _scheduleNotifications(locationState, reminderState, now);
   }
 
   /// Schedule reminders using `awesome_notifications`.
@@ -609,6 +617,28 @@ class ReminderScheduler {
       mode.name,
     );
     await setPrayerEnabled(prayer, mode.isEnabled);
+  }
+
+  static Future<void> setAllPrayerReminderModes(PrayerReminderMode mode) async {
+    for (Prayer prayer in Prayer.values) {
+      if (prayer == Prayer.sunrise || prayer == Prayer.sunset) {
+        await setPrayerReminderMode(prayer, PrayerReminderMode.off);
+      } else {
+        await setPrayerReminderMode(prayer, mode);
+      }
+    }
+  }
+
+  static Future<void> setBalancedPrayerReminderModes() async {
+    for (Prayer prayer in Prayer.values) {
+      if (prayer == Prayer.fajr) {
+        await setPrayerReminderMode(prayer, PrayerReminderMode.alarm);
+      } else if (prayer == Prayer.sunrise || prayer == Prayer.sunset) {
+        await setPrayerReminderMode(prayer, PrayerReminderMode.off);
+      } else {
+        await setPrayerReminderMode(prayer, PrayerReminderMode.notification);
+      }
+    }
   }
 
   static Map<Prayer, int> getReminderTimeAdjustment() {

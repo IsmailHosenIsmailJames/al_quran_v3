@@ -1909,4 +1909,94 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get grantPermission => 'اجازت دیں';
+
+  @override
+  String get adhanSound => 'اذان';
+
+  @override
+  String get batteryOptimizationTitle => 'بیٹری آپٹیمائزیشن چھوٹ';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'نماز کے الارم وقت پر بجنے کو یقینی بنانے کے لیے ایپ کو پس منظر میں چلنے کی اجازت دیں';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'نماز یاد دہانی گائیڈ اور سیٹ اپ';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'بیدار کرنے والے الارم، اذان کی آواز اور اجازتیں ترتیب دیں';
+
+  @override
+  String get neverMissAPrayer => 'کبھی بھی نماز نہ چھوڑیں';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'اذان کے ساتھ فل اسکرین الارم یا ہلکے نوٹیفکیشن میں سے انتخاب کریں';
+
+  @override
+  String get howRemindersWork => 'یاد دہانیاں کیسے کام کرتی ہیں';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'فل اسکرین الارم';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'لاک اسکرین پر اذان، خطاطی اور بند/اسنوز کے ساتھ اسکرین روشن کرتا ہے۔ فجر کے لیے بہترین۔';
+
+  @override
+  String get gentleNotificationModeTitle => 'ہلکی اطلاع';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'آواز کے ساتھ معیاری نوٹیفکیشن بینر۔ کام کے اوقات کے لیے بہترین।';
+
+  @override
+  String get presetBalanced => 'متوازن';
+
+  @override
+  String get presetBalancedSubtitle => 'فجر الارم ⏰ + دیگر نوٹیفکیشن 🔔';
+
+  @override
+  String get presetAllAlarms => 'تمام الارم';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'تمام نمازوں کے لیے فل اسکرین الارم';
+
+  @override
+  String get presetAllNotifications => 'تمام اطلاعات';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'صرف ہلکی نوٹیفیکیشن';
+
+  @override
+  String get saveAndReturn => 'محفوظ کریں اور واپس جائیں';
+
+  @override
+  String get saveAndGetStarted => 'محفوظ کریں اور شروع کریں';
+
+  @override
+  String get granted => 'اجازت مل گئی';
+
+  @override
+  String get requiredPermissions => 'مطلوبہ اجازتیں';
+
+  @override
+  String get skip => 'چھوڑیں';
+
+  @override
+  String get skipForNow => 'ابھی کے لیے چھوڑیں';
+
+  @override
+  String get exactAlarmPermission => 'درست الارم';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'نماز کے اوقات میں عین وقت پر اطلاعات جاری کرتا ہے';
+
+  @override
+  String get appDefaultTone => 'ایپ کی پہلے سے طے شدہ آواز';
+
+  @override
+  String get systemAlarmTone => 'سسٹم الارم کی آواز';
 }
