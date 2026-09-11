@@ -1907,4 +1907,95 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get grantPermission => 'اجازه ورکړئ';
+
+  @override
+  String get adhanSound => 'اذان';
+
+  @override
+  String get batteryOptimizationTitle => 'د بیټرۍ اصلاح څخه معافیت';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'د لمانځه الارمونه په وخت کار کولو لپاره اپلیکیشن ته په شالید کې د چلېدو اجازه ورکړئ';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'د لمانځه یادونې لارښود او تنظیم';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'د ویښېدو الارمونه، د اذان غږ او اجازې تنظیم کړئ';
+
+  @override
+  String get neverMissAPrayer => 'هیڅ لمونځ مه قضا کوئ';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'د اذان سره د بشپړ سکرین الارمونو یا نرم خبرتیاوو ترمنځ غوره کړئ';
+
+  @override
+  String get howRemindersWork => 'یادونې څنګه کار کوي';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'د بشپړ سکرین الارم';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'د اذان او بندولو/ځنډولو سره د سکرین څراغ روښانه کوي. د فجر لپاره مناسب.';
+
+  @override
+  String get gentleNotificationModeTitle => 'نرم خبرتیا';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'د غږ سره معیاري خبرتیا. د کار د ساعتونو لپاره خورا مناسب.';
+
+  @override
+  String get presetBalanced => 'متوازن';
+
+  @override
+  String get presetBalancedSubtitle => 'فجر الارم ⏰ + نور خبرتیا 🔔';
+
+  @override
+  String get presetAllAlarms => 'ټول الارمونه';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'د ټولو لمونځونو لپاره د بشپړ سکرین الارم';
+
+  @override
+  String get presetAllNotifications => 'ټولې خبرتیاوې';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'یوازې نرمې خبرتیاوې';
+
+  @override
+  String get saveAndReturn => 'ساتل او بیرته ستنېدل';
+
+  @override
+  String get saveAndGetStarted => 'ساتل او پیل کول';
+
+  @override
+  String get granted => 'اجازه ورکړل شوه';
+
+  @override
+  String get requiredPermissions => 'اړینې اجازې';
+
+  @override
+  String get skip => 'پریږدئ';
+
+  @override
+  String get skipForNow => 'اوس لپاره پریږدئ';
+
+  @override
+  String get exactAlarmPermission => 'دقیق الارمونه';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'د لمانځه په وخت کې دقیق خبرتیاوې پیلوي';
+
+  @override
+  String get appDefaultTone => 'د اپلیکیشن ډیفالټ غږ';
+
+  @override
+  String get systemAlarmTone => 'د سیسټم د الارم غږ';
 }

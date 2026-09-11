@@ -1914,4 +1914,97 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get grantPermission => 'İcazə verin';
+
+  @override
+  String get adhanSound => 'Həqiqi Azan';
+
+  @override
+  String get batteryOptimizationTitle => 'Batareya optimallaşdırma istisnası';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Namaz zənglərinin vaxtında çalması üçün tətbiqin arxa fonda işləməsinə icazə verin';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Namaz xatırlatmaları bələdçisi və quraşdırma';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Oyatma zəngləri, azan səsi və icazələri tənzimləyin';
+
+  @override
+  String get neverMissAPrayer => 'Heç bir namazı qaçırmayın';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Azanlı tam ekran zəngləri və ya mülayim bildirişlər arasında seçim edin';
+
+  @override
+  String get howRemindersWork => 'Xatırlatmalar necə işləyir';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Tam ekran zəngli saat';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Ekranı kilid ekranı üzərində azan və xəttatlıqla oyadır. Sübh namazı üçün idealdır.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Mülayim bildiriş';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Xatırlatma səsi olan standart bildiriş. İş saatları üçün idealdır.';
+
+  @override
+  String get presetBalanced => 'Balanslı';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'Sübh zəngli saat ⏰ + Digərləri bildiriş 🔔';
+
+  @override
+  String get presetAllAlarms => 'Bütün namazlar zəngli saat';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Bütün namazlar üçün tam ekran zəngli saat';
+
+  @override
+  String get presetAllNotifications => 'Bütün bildirişlər';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Yalnız mülayim bildirişlər';
+
+  @override
+  String get saveAndReturn => 'Saxla və qayıt';
+
+  @override
+  String get saveAndGetStarted => 'Saxla və başla';
+
+  @override
+  String get granted => 'İcazə verildi';
+
+  @override
+  String get requiredPermissions => 'Tələb olunan icazələr';
+
+  @override
+  String get skip => 'Keç';
+
+  @override
+  String get skipForNow => 'Hələlik keç';
+
+  @override
+  String get exactAlarmPermission => 'Dəqiq siqnallar';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Namaz vaxtlarında dəqiq bildirişləri işə salır';
+
+  @override
+  String get appDefaultTone => 'Tətbiqin standart səsi';
+
+  @override
+  String get systemAlarmTone => 'Sistem siqnal səsi';
 }

@@ -1909,4 +1909,95 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get grantPermission => 'İzin Ver';
+
+  @override
+  String get adhanSound => 'Özgün Ezan';
+
+  @override
+  String get batteryOptimizationTitle => 'Pil Optimizasyonu Muafiyeti';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Namaz alarmlarının vaktinde çalmasını sağlamak için uygulamanın arka planda çalışmasına izin verin';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Namaz Hatırlatıcı Rehberi ve Kurulumu';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Uyanma alarmlarını, ezan sesini ve izinleri yapılandırın';
+
+  @override
+  String get neverMissAPrayer => 'Hiçbir Namazı Kaçırmayın';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Ezanlı Tam Ekran Alarmlar veya hafif bildirimler arasında seçim yapın';
+
+  @override
+  String get howRemindersWork => 'Hatırlatıcılar Nasıl Çalışır';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Tam Ekran Alarm';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Ekranı kilit ekranı üzerinden ezan, hat sanatı ve Durdur/Ertele ile uyandırır. Sabah namazı için idealdir.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Hafif Bildirim';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Sesli standart bildirim başlığı. Rahatsız etmez, mesai saatleri için idealdir.';
+
+  @override
+  String get presetBalanced => 'Dengeli';
+
+  @override
+  String get presetBalancedSubtitle => 'Sabah Alarm ⏰ + Diğerleri Bildirim 🔔';
+
+  @override
+  String get presetAllAlarms => 'Tüm Alarmlar';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'Tüm namazlar için tam ekran alarm';
+
+  @override
+  String get presetAllNotifications => 'Tüm Bildirimler';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Yalnızca hafif bildirimler';
+
+  @override
+  String get saveAndReturn => 'Kaydet ve Geri Dön';
+
+  @override
+  String get saveAndGetStarted => 'Kaydet ve Başla';
+
+  @override
+  String get granted => 'Verildi';
+
+  @override
+  String get requiredPermissions => 'Gerekli İzinler';
+
+  @override
+  String get skip => 'Geç';
+
+  @override
+  String get skipForNow => 'Şimdilik geç';
+
+  @override
+  String get exactAlarmPermission => 'Tam Zamanlı Alarmlar';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Namaz vakitlerinde tam vaktinde bildirim gönderir';
+
+  @override
+  String get appDefaultTone => 'Uygulama Varsayılan Sesi';
+
+  @override
+  String get systemAlarmTone => 'Sistem Alarm Sesi';
 }

@@ -3571,6 +3571,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Grant Permission'**
   String get grantPermission;
+
+  /// No description provided for @adhanSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentic Adhan'**
+  String get adhanSound;
+
+  /// No description provided for @batteryOptimizationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery Optimization Exemption'**
+  String get batteryOptimizationTitle;
+
+  /// No description provided for @batteryOptimizationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow app to run in background to ensure prayer alarms trigger on time on your device'**
+  String get batteryOptimizationDesc;
+
+  /// No description provided for @prayerGuidanceSetupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Reminders Guide & Setup'**
+  String get prayerGuidanceSetupTitle;
+
+  /// No description provided for @prayerGuidanceSetupDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Configure waking alarms, Adhan sound, and permissions'**
+  String get prayerGuidanceSetupDesc;
+
+  /// No description provided for @neverMissAPrayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Never Miss a Prayer'**
+  String get neverMissAPrayer;
+
+  /// No description provided for @prayerGuidanceHeaderDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose between waking Full-Screen Alarms with the Adhan or gentle Heads-Up Notifications'**
+  String get prayerGuidanceHeaderDesc;
+
+  /// No description provided for @howRemindersWork.
+  ///
+  /// In en, this message translates to:
+  /// **'How Reminders Work'**
+  String get howRemindersWork;
+
+  /// No description provided for @fullScreenAlarmModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-Screen Alarm'**
+  String get fullScreenAlarmModeTitle;
+
+  /// No description provided for @fullScreenAlarmModeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Wakes your screen over lockscreen with the Adhan, Arabic calligraphy, and Stop/Snooze buttons. Perfect for Fajr.'**
+  String get fullScreenAlarmModeDesc;
+
+  /// No description provided for @gentleNotificationModeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle Notification'**
+  String get gentleNotificationModeTitle;
+
+  /// No description provided for @gentleNotificationModeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard notification banner with reminder sound. Non-intrusive and ideal for work hours.'**
+  String get gentleNotificationModeDesc;
+
+  /// No description provided for @presetBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get presetBalanced;
+
+  /// No description provided for @presetBalancedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fajr Alarm ⏰ + Others Notification 🔔'**
+  String get presetBalancedSubtitle;
+
+  /// No description provided for @presetAllAlarms.
+  ///
+  /// In en, this message translates to:
+  /// **'All Alarms'**
+  String get presetAllAlarms;
+
+  /// No description provided for @presetAllAlarmsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-Screen Alarm for all prayers'**
+  String get presetAllAlarmsSubtitle;
+
+  /// No description provided for @presetAllNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'All Notifications'**
+  String get presetAllNotifications;
+
+  /// No description provided for @presetAllNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle banner notifications only'**
+  String get presetAllNotificationsSubtitle;
+
+  /// No description provided for @saveAndReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Return'**
+  String get saveAndReturn;
+
+  /// No description provided for @saveAndGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Get Started'**
+  String get saveAndGetStarted;
+
+  /// No description provided for @granted.
+  ///
+  /// In en, this message translates to:
+  /// **'Granted'**
+  String get granted;
+
+  /// No description provided for @requiredPermissions.
+  ///
+  /// In en, this message translates to:
+  /// **'Required Permissions'**
+  String get requiredPermissions;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @skipForNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip for now'**
+  String get skipForNow;
+
+  /// No description provided for @exactAlarmPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Alarms'**
+  String get exactAlarmPermission;
+
+  /// No description provided for @exactAlarmPermissionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Triggers notifications precisely at prayer times'**
+  String get exactAlarmPermissionDesc;
+
+  /// No description provided for @appDefaultTone.
+  ///
+  /// In en, this message translates to:
+  /// **'App Default Tone'**
+  String get appDefaultTone;
+
+  /// No description provided for @systemAlarmTone.
+  ///
+  /// In en, this message translates to:
+  /// **'System Alarm Tone'**
+  String get systemAlarmTone;
 }
 
 class _AppLocalizationsDelegate

@@ -1936,4 +1936,96 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get grantPermission => 'அனுமதி கொடுங்கள்';
+
+  @override
+  String get adhanSound => 'பாங்கு ஒலி';
+
+  @override
+  String get batteryOptimizationTitle => 'பேட்டரி தேர்வு விலக்கு';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'தொழுகை அலாரங்கள் சரியான நேரத்தில் ஒலிக்க பயன்பாட்டைப் பின்னணியில் இயக்க அனுமதிக்கவும்';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'தொழுகை நினைவூட்டல் வழிகாட்டி மற்றும் அமைப்பு';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'விழித்தெழும் அலாரங்கள், பாங்கு ஒலி மற்றும் அனுமதிகளை உள்ளமைக்கவும்';
+
+  @override
+  String get neverMissAPrayer => 'எந்தத் தொழுகையையும் தவறவிடாதீர்கள்';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'பாங்கு ஒலியுடன் கூடிய முழுத்திரை அலாரங்கள் அல்லது அறிவிப்புகளுக்கு இடையே தேர்வு செய்யவும்';
+
+  @override
+  String get howRemindersWork => 'நினைவூட்டல்கள் எவ்வாறு செயல்படுகின்றன';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'முழுத் திரை அலாரம்';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'பாங்கு ஒலி மற்றும் நிறுத்து/ஸ்னூஸ் பொத்தான்களுடன் திரையை எழுப்புகிறது. ஃபஜ்ருக்கு ஏற்றது.';
+
+  @override
+  String get gentleNotificationModeTitle => 'மென்மையான அறிவிப்பு';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'ஒலியுடன் கூடிய நிலையான அறிவிப்பு பேனர். வேலை நேரத்திற்கு ஏற்றது.';
+
+  @override
+  String get presetBalanced => 'சமச்சீர்';
+
+  @override
+  String get presetBalancedSubtitle => 'ஃபஜ்ர் அலாரம் ⏰ + மற்றவை அறிவிப்பு 🔔';
+
+  @override
+  String get presetAllAlarms => 'அனைத்து அலாரங்கள்';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'அனைத்து தொழுகைகளுக்கும் முழுத்திரை அலாரம்';
+
+  @override
+  String get presetAllNotifications => 'அனைத்து அறிவிப்புகள்';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'மென்மையான அறிவிப்புகள் மட்டுமே';
+
+  @override
+  String get saveAndReturn => 'சேமித்து திரும்புக';
+
+  @override
+  String get saveAndGetStarted => 'சேமித்து தொடங்குக';
+
+  @override
+  String get granted => 'வழங்கப்பட்டது';
+
+  @override
+  String get requiredPermissions => 'தேவையான அனுமதிகள்';
+
+  @override
+  String get skip => 'தவிர்';
+
+  @override
+  String get skipForNow => 'இப்போதைக்கு தவிர்';
+
+  @override
+  String get exactAlarmPermission => 'துல்லியமான அலாரங்கள்';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'தொழுகை நேரங்களில் துல்லியமாக அறிவிப்புகளைத் தூண்டுகிறது';
+
+  @override
+  String get appDefaultTone => 'செயலியின் இயல்புநிலை ஒலி';
+
+  @override
+  String get systemAlarmTone => 'கணினி அலாரம் ஒலி';
 }

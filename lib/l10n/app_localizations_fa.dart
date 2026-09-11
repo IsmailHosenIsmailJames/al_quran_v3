@@ -1902,4 +1902,94 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get grantPermission => 'اعطای مجوز';
+
+  @override
+  String get adhanSound => 'اذان اصیل';
+
+  @override
+  String get batteryOptimizationTitle => 'معافیت بهینه‌سازی باتری';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'اجازه دهید برنامه در پس‌زمینه اجرا شود تا هشدارهای نماز به‌موقع به صدا درآیند';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'راهنما و تنظیمات یادآورهای نماز';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'پیکربندی هشدارهای بیدارباش، صدای اذان و مجوزها';
+
+  @override
+  String get neverMissAPrayer => 'هرگز نمازی را از دست ندهید';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'بین هشدارهای تمام‌صفحه با اذان یا اعلان‌های ملایم انتخاب کنید';
+
+  @override
+  String get howRemindersWork => 'نحوه کارکرد یادآورها';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'هشدار تمام‌صفحه';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'صفحه را روی صفحه قفل با اذان، خطاطی و توقف/تعویق روشن می‌کند. عالی برای فجر.';
+
+  @override
+  String get gentleNotificationModeTitle => 'اعلان ملایم';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'بنر اعلان استاندارد با صدا. بدون مزاحمت و مناسب ساعت کاری.';
+
+  @override
+  String get presetBalanced => 'متعادل';
+
+  @override
+  String get presetBalancedSubtitle => 'فجر هشدار ⏰ + بقیه اعلان 🔔';
+
+  @override
+  String get presetAllAlarms => 'تمام هشدارها';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'هشدار تمام‌صفحه برای تمام نمازها';
+
+  @override
+  String get presetAllNotifications => 'تمام اعلان‌ها';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'فقط اعلان‌های ملایم';
+
+  @override
+  String get saveAndReturn => 'ذخیره و بازگشت';
+
+  @override
+  String get saveAndGetStarted => 'ذخیره و شروع';
+
+  @override
+  String get granted => 'اعطا شد';
+
+  @override
+  String get requiredPermissions => 'مجوزهای مورد نیاز';
+
+  @override
+  String get skip => 'رد کردن';
+
+  @override
+  String get skipForNow => 'فعلاً رد شود';
+
+  @override
+  String get exactAlarmPermission => 'هشدارهای دقیق';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'اعلان‌ها را دقیقاً در زمان‌های نماز فعال می‌کند';
+
+  @override
+  String get appDefaultTone => 'صدای پیش‌فرض برنامه';
+
+  @override
+  String get systemAlarmTone => 'صدای زنگ سیستم';
 }

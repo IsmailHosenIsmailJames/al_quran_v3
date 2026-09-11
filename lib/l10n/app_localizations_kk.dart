@@ -1907,4 +1907,97 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get grantPermission => 'Рұқсат беру';
+
+  @override
+  String get adhanSound => 'Азан';
+
+  @override
+  String get batteryOptimizationTitle => 'Батареяны оңтайландырудан босату';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Намаз оятқыштарының уақытында соғылуын қамтамасыз ету үшін қолданбаның фонда жұмыс істеуіне рұқсат беріңіз';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Намаз еске салғыштарының нұсқаулығы және баптауы';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Оятқыштарды, азан дыбысын және рұқсаттарды баптаңыз';
+
+  @override
+  String get neverMissAPrayer => 'Ешбір намазды жіберіп алмаңыз';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Азанмен толық экранды оятқыштар немесе жұмсақ хабарландырулар арасында таңдаңыз';
+
+  @override
+  String get howRemindersWork => 'Еске салғыштар қалай жұмыс істейді';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Толық экранды оятқыш';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Экранды құлыптау экранының үстінен азан, каллиграфия және Тоқтату/Кейінге қалдыру арқылы оятады. Таң намазы үшін өте қолайлы.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Жұмсақ хабарландыру';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Дыбысы бар стандартты хабарландыру. Жұмыс уақыты үшін ыңғайлы.';
+
+  @override
+  String get presetBalanced => 'Теңгерімді';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'Таң намазы оятқыш ⏰ + Басқалары хабарландыру 🔔';
+
+  @override
+  String get presetAllAlarms => 'Барлық оятқыштар';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Барлық намаздар үшін толық экранды оятқыш';
+
+  @override
+  String get presetAllNotifications => 'Барлық хабарландырулар';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Тек жұмсақ хабарландырулар';
+
+  @override
+  String get saveAndReturn => 'Сақтау және оралу';
+
+  @override
+  String get saveAndGetStarted => 'Сақтау және бастау';
+
+  @override
+  String get granted => 'Рұқсат берілді';
+
+  @override
+  String get requiredPermissions => 'Қажетті рұқсаттар';
+
+  @override
+  String get skip => 'Өткізіп жіберу';
+
+  @override
+  String get skipForNow => 'Әзірге өткізіп жіберу';
+
+  @override
+  String get exactAlarmPermission => 'Дәл оятқыштар';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Намаз уақытында хабарландыруларды дәл жібереді';
+
+  @override
+  String get appDefaultTone => 'Қолданбаның әдепкі дыбысы';
+
+  @override
+  String get systemAlarmTone => 'Жүйелік оятқыш дыбысы';
 }

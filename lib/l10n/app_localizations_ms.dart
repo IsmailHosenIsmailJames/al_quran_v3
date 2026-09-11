@@ -1905,4 +1905,97 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get grantPermission => 'Beri Kebenaran';
+
+  @override
+  String get adhanSound => 'Azan Autentik';
+
+  @override
+  String get batteryOptimizationTitle => 'Pengecualian Pengoptimuman Bateri';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Benarkan aplikasi berjalan di latar belakang untuk memastikan penggera solat berbunyi tepat pada masanya';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'Panduan & Tetapan Peringatan Solat';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Konfigurasikan penggera bangun, bunyi azan dan kebenaran';
+
+  @override
+  String get neverMissAPrayer => 'Jangan Lepaskan Solat';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Pilih antara Penggera Skrin Penuh dengan Azan atau Pemberitahuan Lembut';
+
+  @override
+  String get howRemindersWork => 'Bagaimana Peringatan Berfungsi';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Penggera Skrin Penuh';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Menghidupkan skrin pada skrin kunci dengan Azan, seni khat dan Berhenti/Tunda. Sesuai untuk Subuh.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Pemberitahuan Lembut';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Sepanduk pemberitahuan biasa dengan bunyi. Sesuai untuk waktu kerja.';
+
+  @override
+  String get presetBalanced => 'Seimbang';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'Subuh Penggera ⏰ + Lain-lain Pemberitahuan 🔔';
+
+  @override
+  String get presetAllAlarms => 'Semua Penggera';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Penggera Skrin Penuh untuk semua solat';
+
+  @override
+  String get presetAllNotifications => 'Semua Pemberitahuan';
+
+  @override
+  String get presetAllNotificationsSubtitle =>
+      'Hanya pemberitahuan sepanduk lembut';
+
+  @override
+  String get saveAndReturn => 'Simpan & Kembali';
+
+  @override
+  String get saveAndGetStarted => 'Simpan & Mula';
+
+  @override
+  String get granted => 'Diberikan';
+
+  @override
+  String get requiredPermissions => 'Kebenaran Diperlukan';
+
+  @override
+  String get skip => 'Langkau';
+
+  @override
+  String get skipForNow => 'Langkau buat masa ini';
+
+  @override
+  String get exactAlarmPermission => 'Penggera Tepat';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Mencetuskan pemberitahuan tepat pada waktu solat';
+
+  @override
+  String get appDefaultTone => 'Nada Lalai Aplikasi';
+
+  @override
+  String get systemAlarmTone => 'Nada Penggera Sistem';
 }

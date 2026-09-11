@@ -1913,4 +1913,97 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get grantPermission => 'অনুমতি দিন';
+
+  @override
+  String get adhanSound => 'আযান';
+
+  @override
+  String get batteryOptimizationTitle => 'ব্যাটারি অপ্টিমাইজেশন ছাড়';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'আপনার ডিভাইসে যথাসময়ে নামাজের অ্যালার্ম বাজাতে ব্যাকগ্রাউন্ডে চলার অনুমতি দিন';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'নামাজের রিমাইন্ডার গাইড ও সেটআপ';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'অ্যালার্ম, আযানের শব্দ এবং প্রয়োজনীয় অনুমতি কনফিগার করুন';
+
+  @override
+  String get neverMissAPrayer => 'কোনো নামাজ যেন বাদ না পড়ে';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'আযানসহ ফুল-স্ক্রিন অ্যালার্ম অথবা হালকা নোটিফিকেশনের মধ্যে বেছে নিন';
+
+  @override
+  String get howRemindersWork => 'রিমাইন্ডার কীভাবে কাজ করে';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'ফুল-স্ক্রিন অ্যালার্ম';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'লকস্ক্রিনের উপর আযান, ক্যালিগ্রাফি এবং স্টপ/স্নুজ বাটনসহ স্ক্রিন জাগায়। ফজরের জন্য অত্যন্ত উপযোগী।';
+
+  @override
+  String get gentleNotificationModeTitle => 'হালকা নোটিফিকেশন';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'রিমাইন্ডার সাউন্ডসহ সাধারণ নোটিফিকেশন ব্যানার। কাজের সময়ের জন্য উপযুক্ত।';
+
+  @override
+  String get presetBalanced => 'ভারসাম্যপূর্ণ';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'ফজর অ্যালার্ম ⏰ + অন্যান্য নোটিফিকেশন 🔔';
+
+  @override
+  String get presetAllAlarms => 'সবগুলো অ্যালার্ম';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'সবগুলো নামাজের জন্যই ফুল-স্ক্রিন অ্যালার্ম';
+
+  @override
+  String get presetAllNotifications => 'সবগুলো নোটিফিকেশন';
+
+  @override
+  String get presetAllNotificationsSubtitle =>
+      'শুধুমাত্র হালকা ব্যানার নোটিফিকেশন';
+
+  @override
+  String get saveAndReturn => 'সংরক্ষণ করুন ও ফিরে যান';
+
+  @override
+  String get saveAndGetStarted => 'সংরক্ষণ করুন ও শুরু করুন';
+
+  @override
+  String get granted => 'অনুমতি দেওয়া হয়েছে';
+
+  @override
+  String get requiredPermissions => 'প্রয়োজনীয় অনুমতিসমূহ';
+
+  @override
+  String get skip => 'স্কিপ';
+
+  @override
+  String get skipForNow => 'আপাতত স্কিপ করুন';
+
+  @override
+  String get exactAlarmPermission => 'সঠিক অ্যালার্ম';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'নামাজের নির্ধারিত সময়ে নিখুঁতভাবে অ্যালার্ম চালু করে';
+
+  @override
+  String get appDefaultTone => 'অ্যাপ ডিফল্ট টোন';
+
+  @override
+  String get systemAlarmTone => 'সিস্টেম অ্যালার্ম টোন';
 }

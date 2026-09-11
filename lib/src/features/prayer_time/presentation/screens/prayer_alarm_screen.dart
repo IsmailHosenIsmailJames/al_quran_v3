@@ -1,5 +1,6 @@
 import "dart:async";
 import "package:adhan_dart/adhan_dart.dart";
+import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/utils/navigator_key.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/ringtone_service.dart";
@@ -48,6 +49,7 @@ class PrayerAlarmScreen extends StatefulWidget {
 class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
     with SingleTickerProviderStateMixin {
   late Timer _clockTimer;
+  Timer? _safetySilenceTimer;
   late DateTime _currentTime;
   late AnimationController _pulseController;
 
@@ -72,20 +74,57 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
     try {
       WakelockPlus.enable();
     } catch (_) {}
+
+    // Start playing alarm audio immediately
+    _startAlarmAudio();
+  }
+
+  Future<void> _startAlarmAudio() async {
+    try {
+      final inCall = await RingtoneService.isInCall();
+      if (inCall) return; // Prevent playing over active or incoming phone calls
+
+      final soundType = ReminderScheduler.getSelectedRingtoneType();
+      final soundUri = ReminderScheduler.getSelectedRingtoneUri();
+      final volume = ReminderScheduler.getSoundVolume();
+
+      final uriToPlay = soundType == "adhan"
+          ? "resource://raw/adhan"
+          : (soundType == "default_sound"
+              ? "resource://raw/notification_sound"
+              : (soundUri ?? soundType));
+
+      await RingtoneService.playRingtone(
+        uriToPlay,
+        isAlarm: true,
+        loop: true,
+        volume: volume,
+      );
+
+      // Auto-silence safety timer after 10 minutes to protect device battery
+      _safetySilenceTimer = Timer(const Duration(minutes: 10), () {
+        RingtoneService.stopRingtone();
+      });
+    } catch (e) {
+      debugPrint("Error starting alarm audio: $e");
+    }
   }
 
   @override
   void dispose() {
     _clockTimer.cancel();
+    _safetySilenceTimer?.cancel();
     _pulseController.dispose();
     try {
       WakelockPlus.disable();
+      RingtoneService.stopRingtone();
     } catch (_) {}
     super.dispose();
   }
 
   Future<void> _dismissAlarm() async {
     HapticFeedback.mediumImpact();
+    _safetySilenceTimer?.cancel();
     try {
       await AwesomeNotifications().cancel(widget.notificationId);
       await RingtoneService.stopRingtone();
@@ -97,16 +136,18 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
 
   Future<void> _snoozeAlarm() async {
     HapticFeedback.lightImpact();
+    _safetySilenceTimer?.cancel();
     try {
       await AwesomeNotifications().cancel(widget.notificationId);
       await RingtoneService.stopRingtone();
       await ReminderScheduler.snoozePrayerAlarm(widget.prayer, minutes: 10);
     } catch (_) {}
     if (mounted) {
+      final l10n = AppLocalizations.of(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Snoozed for 10 minutes"),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text(l10n.snoozed10Min),
+          duration: const Duration(seconds: 2),
         ),
       );
       Navigator.of(context).pop();
@@ -259,68 +300,39 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
 
                   const Spacer(flex: 1),
 
-                  // Pulsating Glowing Icon
+                  // Mosque Dome Arch Illustration with Pulsing Celestial Halo
                   AnimatedBuilder(
                     animation: _pulseController,
                     builder: (context, child) {
-                      final scale = 1.0 + (_pulseController.value * 0.08);
-                      final glowOpacity = 0.2 + (_pulseController.value * 0.25);
-                      return Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Glow Ring Outer
-                          Container(
-                            width: 140 * scale,
-                            height: 140 * scale,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: accentColor.withValues(alpha: glowOpacity * 0.5),
-                            ),
-                          ),
-                          // Glow Ring Inner
-                          Container(
-                            width: 110,
-                            height: 110,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: accentColor.withValues(alpha: glowOpacity),
-                            ),
-                          ),
-                          // Icon Container
-                          Container(
-                            width: 88,
-                            height: 88,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white.withValues(alpha: 0.15),
-                              border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.3),
-                                width: 2,
-                              ),
-                            ),
-                            child: Icon(
-                              PrayerTimeHelper.getPrayerIcon(widget.prayer),
-                              color: Colors.white,
-                              size: 42,
-                            ),
-                          ),
-                        ],
+                      return CustomPaint(
+                        size: const Size(150, 150),
+                        painter: MosqueArchPainter(
+                          accentColor: accentColor,
+                          pulseValue: _pulseController.value,
+                        ),
                       );
                     },
                   ),
 
-                  const Gap(24),
+                  const Gap(20),
 
                   // Arabic Prayer Name
                   Text(
                     arabicName,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 34,
+                      fontSize: 38,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
+                      letterSpacing: 1.5,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black45,
+                          blurRadius: 10,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
-                  ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.2, end: 0),
+                  ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.15, end: 0),
 
                   const Gap(4),
 
@@ -329,7 +341,7 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
                     prayerName,
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.85),
-                      fontSize: 20,
+                      fontSize: 19,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.5,
                     ),
@@ -414,72 +426,96 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
                   const Spacer(flex: 2),
 
                   // Interactive Control Buttons: Dismiss & Snooze
-                  Column(
-                    children: [
-                      // Large Stop / Dismiss Alarm Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 58,
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: gradient.first,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                  Builder(builder: (context) {
+                    final l10n = AppLocalizations.of(context);
+                    return Column(
+                      children: [
+                        // Large Stop / Dismiss Alarm Button (Vibrant & Distinctive)
+                        SizedBox(
+                          width: double.infinity,
+                          height: 58,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFE11D48),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              elevation: 8,
+                              shadowColor: const Color(0xFFE11D48).withValues(alpha: 0.5),
                             ),
-                            elevation: 8,
-                            shadowColor: Colors.black.withValues(alpha: 0.4),
-                          ),
-                          onPressed: _dismissAlarm,
-                          icon: const Icon(
-                            FluentIcons.dismiss_circle_24_filled,
-                            color: Color(0xFFDC2626),
-                            size: 24,
-                          ),
-                          label: const Text(
-                            "Stop Alarm",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      const Gap(14),
-
-                      // Snooze (10 Min) Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: OutlinedButton.icon(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            side: BorderSide(
-                              color: Colors.white.withValues(alpha: 0.35),
-                              width: 1.5,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          onPressed: _snoozeAlarm,
-                          icon: const Icon(
-                            FluentIcons.snooze_24_regular,
-                            size: 20,
-                          ),
-                          label: const Text(
-                            "Snooze (10 min)",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
+                            onPressed: _dismissAlarm,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    FluentIcons.dismiss_24_filled,
+                                    color: Colors.white,
+                                    size: 18,
+                                  ),
+                                ),
+                                const Gap(10),
+                                Text(
+                                  l10n.stopAlarm,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+
+                        const Gap(14),
+
+                        // Snooze Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.white.withValues(alpha: 0.08),
+                              side: BorderSide(
+                                color: Colors.white.withValues(alpha: 0.25),
+                                width: 1.2,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            onPressed: _snoozeAlarm,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  FluentIcons.snooze_24_regular,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                                const Gap(8),
+                                Text(
+                                  l10n.snooze,
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                   const Gap(10),
                 ],
               ),
@@ -488,5 +524,144 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
         ),
       ),
     );
+  }
+}
+
+class MosqueArchPainter extends CustomPainter {
+  final Color accentColor;
+  final double pulseValue;
+
+  const MosqueArchPainter({
+    required this.accentColor,
+    required this.pulseValue,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    final center = Offset(w / 2, h / 2);
+
+    // 1. Soft radial ambient glow
+    final glowPaint = Paint()
+      ..shader = RadialGradient(
+        colors: [
+          accentColor.withValues(alpha: 0.35 + 0.15 * pulseValue),
+          accentColor.withValues(alpha: 0.12 * pulseValue),
+          Colors.transparent,
+        ],
+      ).createShader(Rect.fromCircle(center: center, radius: w * 0.55));
+    canvas.drawCircle(center, w * 0.55, glowPaint);
+
+    // 2. Circular celestial background disc
+    final discPaint = Paint()
+      ..shader = const LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF16203D),
+          Color(0xFF090D1A),
+        ],
+      ).createShader(Rect.fromCircle(center: center, radius: w * 0.42));
+    canvas.drawCircle(center, w * 0.42, discPaint);
+
+    // Border ring around disc
+    final ringPaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.18 + 0.1 * pulseValue)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+    canvas.drawCircle(center, w * 0.42, ringPaint);
+
+    // 3. Crescent Moon inside disk
+    final moonCenter = Offset(w * 0.5, h * 0.28);
+    final moonRadius = w * 0.10;
+    final moonPath = Path()
+      ..addOval(Rect.fromCircle(center: moonCenter, radius: moonRadius));
+    final moonCut = Path()
+      ..addOval(Rect.fromCircle(
+        center: Offset(moonCenter.dx + moonRadius * 0.35, moonCenter.dy - moonRadius * 0.2),
+        radius: moonRadius * 0.85,
+      ));
+    final crescent = Path.combine(PathOperation.difference, moonPath, moonCut);
+    final crescentPaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.85)
+      ..style = PaintingStyle.fill;
+    canvas.drawPath(crescent, crescentPaint);
+
+    // 4. Mosque silhouette (base, minarets, central dome)
+    final silhouettePaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.95)
+      ..style = PaintingStyle.fill;
+
+    final mosquePath = Path();
+    final baseY = h * 0.76;
+
+    // Base ground line
+    mosquePath.moveTo(w * 0.18, baseY);
+
+    // Left Minaret
+    mosquePath.lineTo(w * 0.24, baseY);
+    mosquePath.lineTo(w * 0.24, h * 0.44);
+    mosquePath.lineTo(w * 0.22, h * 0.44);
+    mosquePath.lineTo(w * 0.22, h * 0.42);
+    mosquePath.lineTo(w * 0.255, h * 0.34); // Spire peak
+    mosquePath.lineTo(w * 0.29, h * 0.42);
+    mosquePath.lineTo(w * 0.29, h * 0.44);
+    mosquePath.lineTo(w * 0.27, h * 0.44);
+    mosquePath.lineTo(w * 0.27, baseY);
+
+    // Left Wall
+    mosquePath.lineTo(w * 0.34, baseY);
+    mosquePath.lineTo(w * 0.34, h * 0.58);
+
+    // Central Dome (onion / oriental dome)
+    mosquePath.cubicTo(
+      w * 0.34, h * 0.46,
+      w * 0.42, h * 0.38,
+      w * 0.50, h * 0.34, // Dome apex
+    );
+    mosquePath.cubicTo(
+      w * 0.58, h * 0.38,
+      w * 0.66, h * 0.46,
+      w * 0.66, h * 0.58,
+    );
+
+    // Right Wall
+    mosquePath.lineTo(w * 0.66, baseY);
+    mosquePath.lineTo(w * 0.73, baseY);
+
+    // Right Minaret
+    mosquePath.lineTo(w * 0.73, h * 0.44);
+    mosquePath.lineTo(w * 0.71, h * 0.44);
+    mosquePath.lineTo(w * 0.71, h * 0.42);
+    mosquePath.lineTo(w * 0.745, h * 0.34); // Spire peak
+    mosquePath.lineTo(w * 0.78, h * 0.42);
+    mosquePath.lineTo(w * 0.78, h * 0.44);
+    mosquePath.lineTo(w * 0.76, h * 0.44);
+    mosquePath.lineTo(w * 0.76, baseY);
+    mosquePath.lineTo(w * 0.82, baseY);
+
+    mosquePath.close();
+    canvas.drawPath(mosquePath, silhouettePaint);
+
+    // Central Arched Doorway (cutout)
+    final doorPaint = Paint()
+      ..color = const Color(0xFF0D1426)
+      ..style = PaintingStyle.fill;
+    final doorPath = Path()
+      ..moveTo(w * 0.46, baseY)
+      ..lineTo(w * 0.46, h * 0.66)
+      ..arcToPoint(
+        Offset(w * 0.54, h * 0.66),
+        radius: Radius.circular(w * 0.04),
+      )
+      ..lineTo(w * 0.54, baseY)
+      ..close();
+    canvas.drawPath(doorPath, doorPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant MosqueArchPainter oldDelegate) {
+    return oldDelegate.pulseValue != pulseValue || oldDelegate.accentColor != accentColor;
   }
 }

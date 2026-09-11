@@ -1865,4 +1865,89 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get grantPermission => '権限を許可';
+
+  @override
+  String get adhanSound => 'アザーン';
+
+  @override
+  String get batteryOptimizationTitle => 'バッテリー最適化の除外';
+
+  @override
+  String get batteryOptimizationDesc => '礼拝アラームが定刻に鳴るようバックグラウンド実行を許可';
+
+  @override
+  String get prayerGuidanceSetupTitle => '礼拝リマインダーガイド＆設定';
+
+  @override
+  String get prayerGuidanceSetupDesc => '起床アラーム、アザーン音、権限を設定';
+
+  @override
+  String get neverMissAPrayer => 'お祈りを見逃さない';
+
+  @override
+  String get prayerGuidanceHeaderDesc => 'アザーン付きの全画面アラームか穏やかな通知を選択';
+
+  @override
+  String get howRemindersWork => 'リマインダーの仕組み';
+
+  @override
+  String get fullScreenAlarmModeTitle => '全画面アラーム';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'アザーン、書道、停止/スヌーズでロック画面越しに画面を起動。ファジュルに最適。';
+
+  @override
+  String get gentleNotificationModeTitle => '穏やかな通知';
+
+  @override
+  String get gentleNotificationModeDesc => '音声付きの標準バナー通知。仕事中に最適。';
+
+  @override
+  String get presetBalanced => 'バランス';
+
+  @override
+  String get presetBalancedSubtitle => 'ファジュル アラーム ⏰ + 他 通知 🔔';
+
+  @override
+  String get presetAllAlarms => 'すべてアラーム';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'すべての礼拝で全画面アラーム';
+
+  @override
+  String get presetAllNotifications => 'すべて通知';
+
+  @override
+  String get presetAllNotificationsSubtitle => '穏やかなバナー通知のみ';
+
+  @override
+  String get saveAndReturn => '保存して戻る';
+
+  @override
+  String get saveAndGetStarted => '保存して開始';
+
+  @override
+  String get granted => '許可済み';
+
+  @override
+  String get requiredPermissions => '必要な権限';
+
+  @override
+  String get skip => 'スキップ';
+
+  @override
+  String get skipForNow => '今はスキップ';
+
+  @override
+  String get exactAlarmPermission => '正確なアラーム';
+
+  @override
+  String get exactAlarmPermissionDesc => '礼拝の時間に正確に通知を作動させます';
+
+  @override
+  String get appDefaultTone => 'アプリのデフォルト音';
+
+  @override
+  String get systemAlarmTone => 'システムアラーム音';
 }
