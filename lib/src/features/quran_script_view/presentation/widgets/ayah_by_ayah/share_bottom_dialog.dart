@@ -54,7 +54,7 @@ void showShareBottomDialog(
     quranViewState.quranScriptType,
     ayahKey.split(":").first,
     ayahKey.split(":").last,
-    circleJojom: false,
+    circleJojom: quranViewState.circleJojom,
   );
 
   showModalBottomSheet(
