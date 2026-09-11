@@ -21,6 +21,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
+import "package:geocoding/geocoding.dart";
 import "package:geolocator/geolocator.dart";
 import "package:hive_ce/hive.dart";
 import "package:permission_handler/permission_handler.dart";
@@ -41,6 +42,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
   bool _hasNotificationPermission = false;
   bool _hasExactAlarmPermission = false;
   bool _isDetectingLocation = false;
+  LatLon? _cachedLatLon;
+  Future<String?>? _locationNameFuture;
 
   final List<Prayer> _corePrayers = [
     Prayer.fajr,
@@ -72,6 +75,43 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         context.read<PrayerReminderCubit>().checkAllPermissions();
       }
     }
+  }
+
+  Future<String?> _getLocationNameFuture(BuildContext context, LatLon latLon) {
+    if (_cachedLatLon?.latitude != latLon.latitude ||
+        _cachedLatLon?.longitude != latLon.longitude ||
+        _locationNameFuture == null) {
+      _cachedLatLon = latLon;
+      _locationNameFuture = _resolveLocationName(context, latLon);
+    }
+    return _locationNameFuture!;
+  }
+
+  Future<String?> _resolveLocationName(
+      BuildContext context, LatLon latLon) async {
+    try {
+      final Geocoding geocoding = Geocoding(locale: const Locale("en"));
+      final placemarks = await geocoding.placemarkFromCoordinates(
+        latLon.latitude,
+        latLon.longitude,
+      );
+      if (placemarks.isNotEmpty) {
+        final p = placemarks.first;
+        final city = p.locality ?? p.subAdministrativeArea ?? p.administrativeArea;
+        final country = p.country;
+        final parts = <String>[
+          if (city != null && city.trim().isNotEmpty) city.trim(),
+          if (country != null && country.trim().isNotEmpty) country.trim(),
+        ];
+
+        if (parts.isNotEmpty) {
+          return parts.join(", ");
+        }
+      }
+    } catch (e) {
+      log("Geocoding lookup error: $e");
+    }
+    return null;
   }
 
   Future<void> _checkPermissions() async {
@@ -114,8 +154,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           }
         }
       }
-      final granted = await AwesomeNotifications()
-          .requestPermissionToSendNotifications();
+      final granted =
+          await AwesomeNotifications().requestPermissionToSendNotifications();
       if (mounted) {
         setState(() {
           _hasNotificationPermission = _hasNotificationPermission || granted;
@@ -156,9 +196,12 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         Position position = await Geolocator.getCurrentPosition();
         if (mounted) {
           await context.read<LocationQiblaPrayerDataCubit>().saveLocationData(
-            LatLon(latitude: position.latitude, longitude: position.longitude),
-            save: true,
-          );
+                LatLon(
+                  latitude: position.latitude,
+                  longitude: position.longitude,
+                ),
+                save: true,
+              );
           Fluttertoast.showToast(msg: l10n.selectedLocation);
         }
       }
@@ -218,9 +261,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF121212)
-          : const Color(0xFFF8F9FA),
+      backgroundColor:
+          isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
           widget.isFromSettings
@@ -315,41 +357,74 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           ),
         ),
       ),
-      child: SizedBox(
-        height: 48,
-        child: ElevatedButton(
-          onPressed: _finishSetup,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: themeState.primary,
-            foregroundColor: Colors.white,
-            elevation: 1,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  widget.isFromSettings
-                      ? l10n.saveAndReturn
-                      : l10n.saveAndGetStarted,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+      child: Row(
+        children: [
+          if (!widget.isFromSettings) ...[
+            SizedBox(
+              height: 48,
+              child: OutlinedButton(
+                onPressed: _skipSetup,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor:
+                      isDark ? Colors.white70 : Colors.grey.shade700,
+                  side: BorderSide(
+                    color: isDark ? Colors.white24 : Colors.grey.shade300,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: Text(
+                  l10n.skip,
+                  style: const TextStyle(
+                    fontSize: 14.5,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-              const Gap(6),
-              const Icon(FluentIcons.arrow_right_24_filled, size: 16),
-            ],
+            ),
+            const Gap(10),
+          ],
+          Expanded(
+            child: SizedBox(
+              height: 48,
+              child: ElevatedButton(
+                onPressed: _finishSetup,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: themeState.primary,
+                  foregroundColor: Colors.white,
+                  elevation: 1,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.isFromSettings
+                            ? l10n.saveAndReturn
+                            : l10n.saveAndGetStarted,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const Gap(6),
+                    const Icon(FluentIcons.arrow_right_24_filled, size: 16),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -406,33 +481,67 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                   ),
                   const Gap(12),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          hasLocation
-                              ? l10n.selectedLocation
-                              : "Prayer Location Required",
-                          style: TextStyle(
-                            fontSize: 14.5,
-                            fontWeight: FontWeight.bold,
-                            color: isDark ? Colors.white : Colors.grey.shade900,
+                    child: hasLocation
+                        ? FutureBuilder<String?>(
+                            future: _getLocationNameFuture(context, latLon!),
+                            builder: (context, snapshot) {
+                              final placeName = snapshot.data;
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    placeName != null && placeName.isNotEmpty
+                                        ? placeName
+                                        : l10n.selectedLocation,
+                                    style: TextStyle(
+                                      fontSize: 14.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.grey.shade900,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const Gap(2),
+                                  Text(
+                                    "Lat: ${latLon.latitude.toStringAsFixed(2)}°, Lon: ${latLon.longitude.toStringAsFixed(2)}°",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Prayer Location Required",
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
+                                ),
+                              ),
+                              const Gap(2),
+                              Text(
+                                "Required to calculate prayer times and schedule alarms",
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        const Gap(2),
-                        Text(
-                          hasLocation
-                              ? "Lat: ${latLon!.latitude.toStringAsFixed(2)}°, Lon: ${latLon.longitude.toStringAsFixed(2)}°"
-                              : "Required to calculate prayer times and schedule alarms",
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade400
-                                : Colors.grey.shade600,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                   if (hasLocation)
                     TextButton(
@@ -462,9 +571,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                   children: [
                     Expanded(
                       child: FilledButton.tonalIcon(
-                        onPressed: _isDetectingLocation
-                            ? null
-                            : _detectGpsLocation,
+                        onPressed:
+                            _isDetectingLocation ? null : _detectGpsLocation,
                         icon: _isDetectingLocation
                             ? SizedBox(
                                 width: 14,
@@ -483,9 +591,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                         ),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
+                              horizontal: 10, vertical: 10),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -504,26 +610,21 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                             ),
                           );
                         },
-                        icon: const Icon(
-                          FluentIcons.search_16_regular,
-                          size: 16,
-                        ),
+                        icon: const Icon(FluentIcons.search_16_regular,
+                            size: 16),
                         label: Text(
                           l10n.manualLocation,
                           style: const TextStyle(fontSize: 12),
                         ),
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
+                              horizontal: 10, vertical: 10),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           side: BorderSide(
-                            color: isDark
-                                ? Colors.white24
-                                : Colors.grey.shade300,
+                            color:
+                                isDark ? Colors.white24 : Colors.grey.shade300,
                           ),
                         ),
                       ),
@@ -890,9 +991,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                 isDark: isDark,
                 onTap: () {
                   setState(() => _selectedPreset = "balanced");
-                  context.read<PrayerReminderCubit>().applyBulkPreset(
-                    "balanced",
-                  );
+                  context.read<PrayerReminderCubit>().applyBulkPreset("balanced");
                 },
               ),
               Divider(
@@ -909,9 +1008,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                 isDark: isDark,
                 onTap: () {
                   setState(() => _selectedPreset = "all_alarm");
-                  context.read<PrayerReminderCubit>().applyBulkPreset(
-                    "all_alarm",
-                  );
+                  context
+                      .read<PrayerReminderCubit>()
+                      .applyBulkPreset("all_alarm");
                 },
               ),
               Divider(
@@ -928,9 +1027,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                 isDark: isDark,
                 onTap: () {
                   setState(() => _selectedPreset = "all_notification");
-                  context.read<PrayerReminderCubit>().applyBulkPreset(
-                    "all_notification",
-                  );
+                  context
+                      .read<PrayerReminderCubit>()
+                      .applyBulkPreset("all_notification");
                 },
               ),
             ],
@@ -986,9 +1085,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                         title,
                         style: TextStyle(
                           fontSize: 14,
-                          fontWeight: isSelected
-                              ? FontWeight.bold
-                              : FontWeight.w600,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.w600,
                           color: isSelected
                               ? themeState.primary
                               : (isDark ? Colors.white : Colors.grey.shade900),
@@ -997,9 +1095,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                       if (badge != null)
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: themeState.primary.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(6),
@@ -1020,9 +1116,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                     subtitle,
                     style: TextStyle(
                       fontSize: 11,
-                      color: isDark
-                          ? Colors.grey.shade400
-                          : Colors.grey.shade600,
+                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                     ),
                   ),
                 ],
@@ -1080,9 +1174,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                     "🔕 Off  •  🔔 Notify  •  ⏰ Alarm",
                     style: TextStyle(
                       fontSize: 11,
-                      color: isDark
-                          ? Colors.grey.shade400
-                          : Colors.grey.shade600,
+                      color:
+                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -1090,12 +1183,11 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
               ),
               const Gap(12),
               ..._corePrayers.map((prayer) {
-                final mode =
-                    reminderState.prayerReminderModes?[prayer] ??
+                final mode = reminderState.prayerReminderModes?[prayer] ??
                     ReminderScheduler.getPrayerReminderMode(prayer);
                 final prayerName =
                     PrayerTimeHelper.localizedPrayerName(context, prayer) ??
-                    prayer.name;
+                        prayer.name;
 
                 return _buildPrayerRowItem(
                   prayer: prayer,
@@ -1182,10 +1274,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
             currentMode: mode,
             onChanged: (newMode) {
               setState(() => _selectedPreset = "custom");
-              context.read<PrayerReminderCubit>().setPrayerReminderMode(
-                prayer,
-                newMode,
-              );
+              context
+                  .read<PrayerReminderCubit>()
+                  .setPrayerReminderMode(prayer, newMode);
             },
             themeState: themeState,
             isDark: isDark,
@@ -1288,10 +1379,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     );
   }
 
-  String _getPrayerModeSubtitle(
-    PrayerReminderMode mode,
-    AppLocalizations l10n,
-  ) {
+  String _getPrayerModeSubtitle(PrayerReminderMode mode, AppLocalizations l10n) {
     switch (mode) {
       case PrayerReminderMode.off:
         return l10n.reminderModeOff;
