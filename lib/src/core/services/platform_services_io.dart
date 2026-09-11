@@ -149,17 +149,17 @@ Future<void> initializePlatform() async {
   }
 }
 
-Future<String?> getApplicationDataPath() async {
+Future<String> getApplicationDataPath() async {
   Directory? dir;
-  if (Platform.isAndroid) {
-    dir = await getExternalStorageDirectory();
-  } else if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
-    dir = await getDownloadsDirectory();
-  } else {
-    // Fallback for other platforms like iOS
-    dir = await getApplicationDocumentsDirectory();
-  }
-  return dir?.path;
+  try {
+    if (Platform.isAndroid) {
+      dir = await getExternalStorageDirectory();
+    } else if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+      dir = await getDownloadsDirectory();
+    }
+  } catch (_) {}
+  dir ??= await getApplicationDocumentsDirectory();
+  return dir.path;
 }
 
 enum PlatformOwn {

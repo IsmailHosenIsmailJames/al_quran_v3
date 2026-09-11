@@ -72,6 +72,16 @@ Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    log("FlutterError: ${details.exception}", stackTrace: details.stack, name: "CrashHandler");
+  };
+
+  PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+    log("Uncaught Platform Error: $error", stackTrace: stack, name: "CrashHandler");
+    return true;
+  };
+
   if (kIsWeb ||
       defaultTargetPlatform == TargetPlatform.android ||
       defaultTargetPlatform == TargetPlatform.iOS ||
@@ -111,9 +121,10 @@ Future<void> main() async {
   }
   applicationDataPath = await platform_services.getApplicationDataPath();
 
-  if (platformOwn == platform_services.PlatformOwn.isWindows ||
-      platformOwn == platform_services.PlatformOwn.isLinux) {
-    Hive.init("${applicationDataPath!}/db");
+  if ((platformOwn == platform_services.PlatformOwn.isWindows ||
+          platformOwn == platform_services.PlatformOwn.isLinux) &&
+      applicationDataPath != null) {
+    Hive.init("$applicationDataPath/db");
   } else {
     await Hive.initFlutter();
   }
@@ -134,12 +145,12 @@ Future<void> main() async {
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  await QuranScriptFunction.loadScript(
-    QuranScriptType.values.firstOrNullWhere(
-          (element) => scriptOnDb == element.name,
-        ) ??
-        QuranScriptType.uthmani,
-  );
+  final userScript = QuranScriptType.values.firstOrNullWhere(
+        (element) => scriptOnDb == element.name,
+      ) ??
+      QuranScriptType.uthmani;
+
+  await QuranScriptFunction.initAllScripts(initialScript: userScript);
 
   await ThemeFunctions.initThemeFunction();
 
@@ -149,8 +160,12 @@ Future<void> main() async {
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
-    await ReminderScheduler.init();
-    PrayerBackgroundWorker.registerWorker();
+    try {
+      await ReminderScheduler.init();
+      PrayerBackgroundWorker.registerWorker();
+    } catch (e) {
+      log("Reminder/Background worker initialization skipped: $e");
+    }
   }
 
   runApp(

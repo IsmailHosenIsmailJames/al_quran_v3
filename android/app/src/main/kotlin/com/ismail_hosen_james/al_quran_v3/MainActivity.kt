@@ -135,41 +135,43 @@ class MainActivity : AudioServiceActivity() {
     }
 
     private fun playRingtone(call: MethodCall, result: MethodChannel.Result) {
-        stopRingtone()
         val uriStr = call.argument<String>("uri")
 
-        try {
-            if (uriStr.isNullOrEmpty() || uriStr == "default" || uriStr == "resource://raw/notification_sound") {
-                val rawResId = resources.getIdentifier("notification_sound", "raw", packageName)
-                if (rawResId != 0) {
-                    currentMediaPlayer = MediaPlayer.create(this, rawResId)?.apply {
-                        setOnCompletionListener {
-                            stopRingtone()
+        Thread {
+            try {
+                stopRingtone()
+                if (uriStr.isNullOrEmpty() || uriStr == "default" || uriStr == "resource://raw/notification_sound") {
+                    val rawResId = resources.getIdentifier("notification_sound", "raw", packageName)
+                    if (rawResId != 0) {
+                        currentMediaPlayer = MediaPlayer.create(this@MainActivity, rawResId)?.apply {
+                            setOnCompletionListener {
+                                stopRingtone()
+                            }
+                            start()
                         }
-                        start()
+                        runOnUiThread { result.success(true) }
+                        return@Thread
                     }
-                    result.success(true)
-                    return
                 }
-            }
 
-            val uri = when (uriStr) {
-                "system_alarm" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                "system_ringtone" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-                "system_notification" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                else -> if (!uriStr.isNullOrEmpty()) Uri.parse(uriStr) else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            }
-
-            currentRingtone = RingtoneManager.getRingtone(applicationContext, uri)?.apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    isLooping = false
+                val uri = when (uriStr) {
+                    "system_alarm" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                    "system_ringtone" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+                    "system_notification" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                    else -> if (!uriStr.isNullOrEmpty()) Uri.parse(uriStr) else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                 }
-                play()
+
+                currentRingtone = RingtoneManager.getRingtone(applicationContext, uri)?.apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        isLooping = false
+                    }
+                    play()
+                }
+                runOnUiThread { result.success(true) }
+            } catch (e: Exception) {
+                runOnUiThread { result.error("PLAY_ERROR", e.message, null) }
             }
-            result.success(true)
-        } catch (e: Exception) {
-            result.error("PLAY_ERROR", e.message, null)
-        }
+        }.start()
     }
 
     private fun stopRingtone() {
@@ -186,21 +188,30 @@ class MainActivity : AudioServiceActivity() {
     }
 
     private fun getRingtones(result: MethodChannel.Result) {
-        try {
-            val ringtoneManager = RingtoneManager(this)
-            ringtoneManager.setType(RingtoneManager.TYPE_NOTIFICATION or RingtoneManager.TYPE_ALARM)
-            val cursor = ringtoneManager.cursor
-            val list = mutableListOf<Map<String, String>>()
+        Thread {
+            try {
+                val ringtoneManager = RingtoneManager(applicationContext)
+                ringtoneManager.setType(RingtoneManager.TYPE_NOTIFICATION or RingtoneManager.TYPE_ALARM)
+                val cursor = ringtoneManager.cursor
+                val list = mutableListOf<Map<String, String>>()
 
-            while (cursor.moveToNext()) {
-                val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
-                val uri = ringtoneManager.getRingtoneUri(cursor.position).toString()
-                list.add(mapOf("title" to title, "uri" to uri))
+                if (cursor != null) {
+                    while (cursor.moveToNext()) {
+                        val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
+                        val uri = ringtoneManager.getRingtoneUri(cursor.position)?.toString() ?: ""
+                        list.add(mapOf("title" to title, "uri" to uri))
+                    }
+                    cursor.close()
+                }
+                runOnUiThread {
+                    result.success(list)
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    result.error("QUERY_ERROR", e.message, null)
+                }
             }
-            result.success(list)
-        } catch (e: Exception) {
-            result.error("QUERY_ERROR", e.message, null)
-        }
+        }.start()
     }
 
     private fun createOrUpdateNotificationChannel(call: MethodCall, result: MethodChannel.Result) {

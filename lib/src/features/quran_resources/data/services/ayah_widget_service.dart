@@ -43,7 +43,10 @@ class AyahWidgetService {
       await init();
 
       final now = currentTime ?? DateTime.now();
-      await QuranScriptFunction.loadScript(QuranScriptType.uthmani);
+      await QuranScriptFunction.loadScript(
+        QuranScriptType.uthmani,
+        setCurrent: false,
+      );
 
       // Pre-warm / ensure Hive box for translations
       if (!Hive.isBoxOpen("user")) {

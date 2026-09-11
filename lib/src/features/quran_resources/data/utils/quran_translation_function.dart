@@ -314,19 +314,8 @@ class QuranTranslationFunction {
         response.data,
       );
 
-      int totalEntries = data.length;
-      int processedEntries = 0;
-      for (int i = 0; i < data.length; i++) {
-        String key = data.keys.elementAt(i);
-        await newTranslationBox.put(key, data[key]);
-        processedEntries++;
-        if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          updateProgress(
-            0.5 + (processedEntries / totalEntries * 0.5),
-            "Processing Translation",
-          );
-        }
-      }
+      updateProgress(0.7, "Saving Translation");
+      await newTranslationBox.putAll(data);
       await newTranslationBox.put("meta_data", translationBook.toMap());
 
       await setToListAlreadyDownloaded(translationBook);
@@ -401,11 +390,7 @@ class QuranTranslationFunction {
           (message) => jsonDecode(decodeBZip2String(message as String)),
           response.data,
         );
-        for (final key in data.keys) {
-          log(key, name: "Surah Info Key");
-          await box.put(key, data[key]);
-        }
-        // await box.close(); // Close after writing
+        await box.putAll(data);
         log(
           "Surah info for ${locale.languageCode} downloaded successfully.",
           name: "downloadSurahInfo",

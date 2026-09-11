@@ -4,19 +4,43 @@ import "package:al_quran_v3/src/core/resources/quran_resources/quran_ayah_count.
 import "package:al_quran_v3/src/features/tajweed_guide/domain/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:dartx/dartx.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
 
 import "package:al_quran_v3/src/core/resources/quran_resources/ayah_word_length_map.dart";
 
+Map<String, dynamic> _parseScriptJson(String jsonString) {
+  return Map<String, dynamic>.from(jsonDecode(jsonString));
+}
+
 class QuranScriptFunction {
-  static Map quranScriptMap = {};
+  static final Map<QuranScriptType, Map<String, dynamic>> _scripts = {};
   static QuranScriptType? currentScript;
 
-  static Future<void> loadScript(QuranScriptType scriptType) async {
-    if (currentScript != scriptType) {
-      quranScriptMap = {};
+  static Map get quranScriptMap =>
+      _scripts[currentScript] ??
+      _scripts[QuranScriptType.uthmani] ??
+      _scripts[QuranScriptType.indopak] ??
+      {};
+
+  static set quranScriptMap(Map map) {
+    if (currentScript != null) {
+      _scripts[currentScript!] = Map<String, dynamic>.from(map);
+    }
+  }
+
+  static Map<String, dynamic> getScriptMap([QuranScriptType? type]) {
+    return _scripts[type ?? currentScript ?? QuranScriptType.uthmani] ?? {};
+  }
+
+  static Future<void> loadScript(
+    QuranScriptType scriptType, {
+    bool setCurrent = true,
+  }) async {
+    if (setCurrent) {
       currentScript = scriptType;
-    } else {
+    }
+    if (_scripts.containsKey(scriptType) && _scripts[scriptType]!.isNotEmpty) {
       return;
     }
     String scriptAssetName = "";
@@ -29,7 +53,15 @@ class QuranScriptFunction {
         break;
     }
     final value = await rootBundle.loadString(scriptAssetName);
-    quranScriptMap = jsonDecode(value);
+    _scripts[scriptType] = await compute(_parseScriptJson, value);
+  }
+
+  static Future<void> initAllScripts({QuranScriptType? initialScript}) async {
+    currentScript = initialScript ?? QuranScriptType.uthmani;
+    await Future.wait([
+      loadScript(QuranScriptType.uthmani, setCurrent: false),
+      loadScript(QuranScriptType.indopak, setCurrent: false),
+    ]);
   }
 
   static List<String> getWordListOfAyah(
@@ -38,7 +70,11 @@ class QuranScriptFunction {
     String ayah, {
     required bool circleJojom,
   }) {
-    final ayahData = List<String>.from(quranScriptMap[surah][ayah]);
+    final scriptMap =
+        _scripts[type] ?? _scripts[currentScript] ?? quranScriptMap;
+    final ayahList = scriptMap[surah]?[ayah];
+    if (ayahList == null) return [];
+    final ayahData = List<String>.from(ayahList);
     for (int i = 0; i < ayahData.length; i++) {
       for (int j = tajweedRulesList.length - 1; 0 <= j; j--) {
         ayahData[i] = ayahData[i].replaceAll("r$j", tajweedRulesList[j]);
