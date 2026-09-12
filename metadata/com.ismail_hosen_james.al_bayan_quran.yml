@@ -6,12 +6,12 @@ AuthorName: MD. Ismail Hosen
 SourceCode: https://github.com/IsmailHosenIsmailJames/al_quran_v3
 IssueTracker: https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues
 
-AutoName: Al-Bayan Quran
+AutoName: "Al Quran: Audio, Tafsir, Qibla"
 
 Summary: Holy Quran, Tafsir, Audio Recitations, and Prayer Times (FOSS Edition)
 
 Description: |-
-  Al-Bayan Quran is an Islamic application for reading the Holy Quran, listening to recitations, calculating accurate prayer times, and finding the Qibla direction.
+  Al Quran: Audio, Tafsir, Qibla is an Islamic application for reading the Holy Quran, listening to recitations, calculating accurate prayer times, and finding the Qibla direction.
 
   Features:
   * Full Quran Mushaf & Script views with multiple Arabic typography fonts (Uthmani, Indopak).

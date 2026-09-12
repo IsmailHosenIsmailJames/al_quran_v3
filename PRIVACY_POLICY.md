@@ -2,7 +2,7 @@
 
 **Last Updated:** May 11, 2026
 
-**Quran's Tafsir, Audio and Prayer** ("the App") is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our mobile application.
+**Al Quran: Audio, Tafsir, Qibla** ("the App") is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our mobile application.
 
 ## 1. No Personal Data Collection
 We do not collect, store, or share any personal information from our users. 
