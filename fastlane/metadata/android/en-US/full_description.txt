@@ -1,4 +1,4 @@
-Al-Bayan Quran is a clean, feature-rich, and completely Free & Open Source (FOSS) Islamic application designed to be your daily companion for reading the Holy Quran, listening to recitations, and tracking prayer times.
+Al Quran: Audio, Tafsir, Qibla is a clean, feature-rich, and completely Free & Open Source (FOSS) Islamic application designed to be your daily companion for reading the Holy Quran, listening to recitations, and tracking prayer times.
 
 Key Features:
 • Multiple Quran Scripts: Read with Uthmani, Indopak, and Tajweed-guided scripts with adjustable typography, font size, and line spacing.

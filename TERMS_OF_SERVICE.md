@@ -2,7 +2,7 @@
 
 **Last Updated:** May 11, 2026
 
-By downloading or using **Quran's Tafsir, Audio and Prayer** ("the App"), these terms will automatically apply to you. Please read them carefully before using the App.
+By downloading or using **Al Quran: Audio, Tafsir, Qibla** ("the App"), these terms will automatically apply to you. Please read them carefully before using the App.
 
 ## 1. Use of the App
 - The App is provided for personal, non-commercial use to assist with Quranic reading, learning, and Islamic practices.
