@@ -2,6 +2,8 @@ import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
+import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
@@ -354,7 +356,7 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
       Fluttertoast.showToast(msg: l10n.enablePrayerReminders);
     } else {
       await context.read<PrayerReminderCubit>().disablePrayerRemindNotification();
-      Fluttertoast.showToast(msg: l10n.notificationsAndAudio);
+      Fluttertoast.showToast(msg: l10n.reminderModeOff);
     }
   }
 
@@ -381,8 +383,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
           builder: (context, reminderState) {
             final isMasterEnabled =
                 reminderState.isPrayerRemindNotificationEnabled ?? false;
-            final isPrayerEnabled =
-                isMasterEnabled && (reminderState.enabledPrayers?[prayer] ?? true);
+            final currentMode = reminderState.prayerReminderModes?[prayer] ??
+                ReminderScheduler.getPrayerReminderMode(prayer);
             final currentAdjustment =
                 reminderState.reminderTimeAdjustment?[prayer] ?? 0;
 
@@ -470,52 +472,105 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                   ),
                   const Gap(8),
 
-                  // Reminder Toggle Tile
+                  // 3-Mode Reminder Mode Selector
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            l10n.enablePrayerReminders,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: isDark ? Colors.white : Colors.grey.shade900,
-                            ),
-                          ),
-                          Text(
-                            isPrayerEnabled ? l10n.active : l10n.off,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: isPrayerEnabled
-                                  ? themeState.primary
-                                  : (isDark
-                                      ? Colors.grey.shade500
-                                      : Colors.grey.shade600),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        l10n.notificationsAndAudio,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
+                        ),
                       ),
-                      Switch(
-                        value: isPrayerEnabled,
-                        activeTrackColor: themeState.primary,
-                        onChanged: (value) async {
-                          if (!isMasterEnabled && value) {
+                      Text(
+                        currentMode == PrayerReminderMode.off
+                            ? l10n.reminderModeOff
+                            : (currentMode == PrayerReminderMode.alarm
+                                ? l10n.fullScreenAlarmModeTitle
+                                : l10n.reminderModeNotification),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: currentMode == PrayerReminderMode.off
+                              ? (isDark
+                                  ? Colors.grey.shade500
+                                  : Colors.grey.shade600)
+                              : (currentMode == PrayerReminderMode.alarm
+                                  ? const Color(0xFFE11D48)
+                                  : themeState.primary),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(10),
+                  Row(
+                    children: [
+                      _buildModeChip(
+                        label: l10n.reminderModeOff,
+                        icon: FluentIcons.alert_off_24_regular,
+                        isSelected: currentMode == PrayerReminderMode.off,
+                        selectedColor: isDark
+                            ? Colors.grey.shade500
+                            : Colors.grey.shade600,
+                        isDark: isDark,
+                        onTap: () async {
+                          await context
+                              .read<PrayerReminderCubit>()
+                              .setPrayerReminderMode(
+                                prayer,
+                                PrayerReminderMode.off,
+                              );
+                        },
+                      ),
+                      const Gap(8),
+                      _buildModeChip(
+                        label: l10n.reminderModeNotification,
+                        icon: FluentIcons.alert_badge_24_regular,
+                        isSelected:
+                            currentMode == PrayerReminderMode.notification,
+                        selectedColor: themeState.primary,
+                        isDark: isDark,
+                        onTap: () async {
+                          if (!isMasterEnabled) {
                             await context
                                 .read<PrayerReminderCubit>()
                                 .enablePrayerRemindNotification();
                           }
                           await context
                               .read<PrayerReminderCubit>()
-                              .togglePrayerReminder(prayer);
+                              .setPrayerReminderMode(
+                                prayer,
+                                PrayerReminderMode.notification,
+                              );
+                        },
+                      ),
+                      const Gap(8),
+                      _buildModeChip(
+                        label: l10n.reminderModeAlarm,
+                        icon: Icons.alarm,
+                        isSelected: currentMode == PrayerReminderMode.alarm,
+                        selectedColor: const Color(0xFFE11D48),
+                        isDark: isDark,
+                        onTap: () async {
+                          if (!isMasterEnabled) {
+                            await context
+                                .read<PrayerReminderCubit>()
+                                .enablePrayerRemindNotification();
+                          }
+                          await context
+                              .read<PrayerReminderCubit>()
+                              .setPrayerReminderMode(
+                                prayer,
+                                PrayerReminderMode.alarm,
+                              );
                         },
                       ),
                     ],
                   ),
 
-                  const Gap(12),
+                  const Gap(14),
 
                   // Timing Offset Adjustments
                   Text(
@@ -594,6 +649,71 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Widget _buildModeChip({
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required Color selectedColor,
+    required bool isDark,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? selectedColor.withValues(alpha: isDark ? 0.25 : 0.12)
+                : (isDark
+                    ? Colors.white.withValues(alpha: 0.04)
+                    : Colors.grey.shade100),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: isSelected
+                  ? selectedColor
+                  : (isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade300),
+              width: isSelected ? 1.5 : 1.0,
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 14,
+                color: isSelected
+                    ? selectedColor
+                    : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+              ),
+              const Gap(4),
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    color: isSelected
+                        ? (isDark ? Colors.white : selectedColor)
+                        : (isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade700),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -59,6 +59,49 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _checkPermissions();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        final reminderState = context.read<PrayerReminderCubit>().state;
+        final currentModes = reminderState.prayerReminderModes ??
+            ReminderScheduler.getPrayerReminderModes();
+        setState(() {
+          _selectedPreset = _detectCurrentPreset(currentModes);
+        });
+      }
+    });
+  }
+
+  String _detectCurrentPreset(Map<Prayer, PrayerReminderMode>? modes) {
+    if (modes == null || modes.isEmpty) return "balanced";
+
+    final fajr = modes[Prayer.fajr] ?? PrayerReminderMode.alarm;
+    final dhuhr = modes[Prayer.dhuhr] ?? PrayerReminderMode.notification;
+    final asr = modes[Prayer.asr] ?? PrayerReminderMode.notification;
+    final maghrib = modes[Prayer.maghrib] ?? PrayerReminderMode.notification;
+    final isha = modes[Prayer.isha] ?? PrayerReminderMode.notification;
+
+    final isAllAlarm = fajr == PrayerReminderMode.alarm &&
+        dhuhr == PrayerReminderMode.alarm &&
+        asr == PrayerReminderMode.alarm &&
+        maghrib == PrayerReminderMode.alarm &&
+        isha == PrayerReminderMode.alarm;
+    if (isAllAlarm) return "all_alarm";
+
+    final isAllNotification = fajr == PrayerReminderMode.notification &&
+        dhuhr == PrayerReminderMode.notification &&
+        asr == PrayerReminderMode.notification &&
+        maghrib == PrayerReminderMode.notification &&
+        isha == PrayerReminderMode.notification;
+    if (isAllNotification) return "all_notification";
+
+    final isBalanced = fajr == PrayerReminderMode.alarm &&
+        dhuhr == PrayerReminderMode.notification &&
+        asr == PrayerReminderMode.notification &&
+        maghrib == PrayerReminderMode.notification &&
+        isha == PrayerReminderMode.notification;
+    if (isBalanced) return "balanced";
+
+    return "custom";
   }
 
   @override
@@ -91,6 +134,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     BuildContext context,
     LatLon latLon,
   ) async {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) {
+      return null;
+    }
     try {
       final Geocoding geocoding = Geocoding(locale: const Locale("en"));
       final placemarks = await geocoding.placemarkFromCoordinates(
@@ -143,6 +189,18 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           _hasNotificationPermission = notifAllowed;
           _hasExactAlarmPermission = exactAlarmAllowed;
         });
+        if (notifAllowed && !widget.isFromSettings) {
+          final isEnabled = context
+                  .read<PrayerReminderCubit>()
+                  .state
+                  .isPrayerRemindNotificationEnabled ??
+              false;
+          if (!isEnabled) {
+            context
+                .read<PrayerReminderCubit>()
+                .enablePrayerRemindNotification();
+          }
+        }
       }
     } catch (_) {}
   }
@@ -154,6 +212,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         if (status.isGranted) {
           if (mounted) {
             setState(() => _hasNotificationPermission = true);
+            context
+                .read<PrayerReminderCubit>()
+                .enablePrayerRemindNotification();
           }
         }
       }
@@ -163,6 +224,11 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         setState(() {
           _hasNotificationPermission = _hasNotificationPermission || granted;
         });
+        if (_hasNotificationPermission) {
+          context
+              .read<PrayerReminderCubit>()
+              .enablePrayerRemindNotification();
+        }
       }
     } catch (_) {}
     await _checkPermissions();
@@ -221,6 +287,21 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         msg: "Please set your location to calculate prayer times, or tap Skip.",
       );
       return;
+    }
+
+    if (mounted) {
+      if (_hasNotificationPermission) {
+        await context.read<PrayerReminderCubit>().commitSetupConfiguration(
+              preset: _selectedPreset,
+            );
+      } else {
+        final modes =
+            context.read<PrayerReminderCubit>().state.prayerReminderModes ??
+                ReminderScheduler.getPrayerReminderModes();
+        for (final entry in modes.entries) {
+          await ReminderScheduler.setPrayerReminderMode(entry.key, entry.value);
+        }
+      }
     }
 
     final userBox = Hive.box("user");
@@ -848,12 +929,14 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                 color: themeState.primary,
               ),
               const Gap(8),
-              Text(
-                l10n.howRemindersWork,
-                style: TextStyle(
-                  fontSize: 13.5,
-                  fontWeight: FontWeight.bold,
-                  color: isDark ? Colors.white : Colors.grey.shade900,
+              Expanded(
+                child: Text(
+                  l10n.howRemindersWork,
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Colors.grey.shade900,
+                  ),
                 ),
               ),
             ],
@@ -1258,11 +1341,15 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           _buildSegmentedModePill(
             currentMode: mode,
             onChanged: (newMode) {
-              setState(() => _selectedPreset = "custom");
               context.read<PrayerReminderCubit>().setPrayerReminderMode(
                 prayer,
                 newMode,
               );
+              final currentModes = Map<Prayer, PrayerReminderMode>.from(
+                context.read<PrayerReminderCubit>().state.prayerReminderModes ?? {},
+              );
+              currentModes[prayer] = newMode;
+              setState(() => _selectedPreset = _detectCurrentPreset(currentModes));
             },
             themeState: themeState,
             isDark: isDark,

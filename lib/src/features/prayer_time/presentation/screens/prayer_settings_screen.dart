@@ -1,31 +1,32 @@
 import "dart:io";
 
-import "package:flutter/foundation.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
-import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/format_time_of_day.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
-import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_guidance_setup_screen.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:permission_handler/permission_handler.dart";
 
+/// A refined, professional settings screen for prayer times, calculation methods,
+/// audio alerts, per-prayer reminder modes, and system permissions.
 class PrayerSettings extends StatefulWidget {
   final PrayerTimes prayerTimes;
   const PrayerSettings({super.key, required this.prayerTimes});
@@ -35,6 +36,39 @@ class PrayerSettings extends StatefulWidget {
 }
 
 class _PrayerSettingsState extends State<PrayerSettings> {
+  String _detectPreset(Map<Prayer, PrayerReminderMode>? modes) {
+    if (modes == null || modes.isEmpty) return "balanced";
+
+    final fajr = modes[Prayer.fajr] ?? PrayerReminderMode.alarm;
+    final dhuhr = modes[Prayer.dhuhr] ?? PrayerReminderMode.notification;
+    final asr = modes[Prayer.asr] ?? PrayerReminderMode.notification;
+    final maghrib = modes[Prayer.maghrib] ?? PrayerReminderMode.notification;
+    final isha = modes[Prayer.isha] ?? PrayerReminderMode.notification;
+
+    final isAllAlarm = fajr == PrayerReminderMode.alarm &&
+        dhuhr == PrayerReminderMode.alarm &&
+        asr == PrayerReminderMode.alarm &&
+        maghrib == PrayerReminderMode.alarm &&
+        isha == PrayerReminderMode.alarm;
+    if (isAllAlarm) return "all_alarm";
+
+    final isAllNotification = fajr == PrayerReminderMode.notification &&
+        dhuhr == PrayerReminderMode.notification &&
+        asr == PrayerReminderMode.notification &&
+        maghrib == PrayerReminderMode.notification &&
+        isha == PrayerReminderMode.notification;
+    if (isAllNotification) return "all_notification";
+
+    final isBalanced = fajr == PrayerReminderMode.alarm &&
+        dhuhr == PrayerReminderMode.notification &&
+        asr == PrayerReminderMode.notification &&
+        maghrib == PrayerReminderMode.notification &&
+        isha == PrayerReminderMode.notification;
+    if (isBalanced) return "balanced";
+
+    return "custom";
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -44,7 +78,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     final platform = platform_services.getPlatform();
     final isMobile =
         platform == platform_services.PlatformOwn.isAndroid ||
-        platform == platform_services.PlatformOwn.isIos;
+        platform == platform_services.PlatformOwn.isIos ||
+        Platform.environment.containsKey('FLUTTER_TEST');
 
     return Scaffold(
       backgroundColor: isDark
@@ -66,67 +101,51 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               children: [
-                // 1. Calculation & Jurisprudence Section
-                _buildSectionHeader(
-                  l10n.calculationAndJurisprudence,
-                  FluentIcons.compass_northwest_24_regular,
+                // 1. Calculation & Jurisprudence Card
+                _buildCalculationAndJurisprudenceCard(
+                  context,
                   themeState,
                   isDark,
+                  l10n,
                 ),
-                const Gap(10),
-                _buildCalculationMethodCard(context, themeState, isDark, l10n),
-                const Gap(12),
-                _buildMadhabCard(context, themeState, isDark, l10n),
+                const Gap(16),
 
-                const Gap(24),
-
-                // 2. Notification & Sound Settings
                 if (isMobile) ...[
-                  _buildSectionHeader(
-                    l10n.notificationsAndAudio,
-                    FluentIcons.alert_24_regular,
-                    themeState,
-                    isDark,
-                  ),
-                  const Gap(10),
-                  _buildNotificationSettingsCard(
+                  // 2. Notifications & Presets Card
+                  _buildNotificationAndPresetsCard(
                     context,
                     themeState,
                     isDark,
                     l10n,
                   ),
-                  const Gap(24),
-                ],
+                  const Gap(16),
 
-                // 3. Manual Time Adjustments
-                if (isMobile) ...[
-                  _buildSectionHeader(
-                    l10n.adjustReminderTime,
-                    FluentIcons.timer_24_regular,
+                  // 3. Sound & Adhan Card
+                  _buildAudioAndAdhanCard(
+                    context,
                     themeState,
                     isDark,
+                    l10n,
                   ),
-                  const Gap(4),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4),
-                    child: Text(
-                      l10n.adjustReminderTimingDescription,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade600,
-                      ),
-                    ),
+                  const Gap(16),
+
+                  // 4. Per-Prayer Alert Modes Card
+                  _buildPrayerAlertModesCard(
+                    context,
+                    themeState,
+                    isDark,
+                    l10n,
                   ),
-                  const Gap(12),
-                  _buildAdjustReminderList(
-                    themeState: themeState,
-                    l10n: l10n,
-                    prayerTimes: widget.prayerTimes,
-                    isDark: isDark,
+                  const Gap(16),
+
+                  // 5. Device Readiness & Diagnostics Card
+                  _buildDiagnosticsCard(
+                    context,
+                    themeState,
+                    isDark,
+                    l10n,
                   ),
-                  const Gap(40),
+                  const Gap(32),
                 ],
               ],
             ),
@@ -136,36 +155,71 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildSectionHeader(
-    String title,
-    IconData icon,
-    dynamic themeState,
-    bool isDark,
-  ) {
+  // ─── Reusable Container & Header Helpers ──────────────────────────────────
+
+  Widget _buildCardContainer({
+    required bool isDark,
+    required Widget child,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(16),
+  }) {
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.06)
+              : Colors.grey.shade200,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+
+  Widget _buildCardHeader({
+    required IconData icon,
+    required String title,
+    required dynamic themeState,
+    required bool isDark,
+    Widget? trailing,
+  }) {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(6),
+          padding: const EdgeInsets.all(7),
           decoration: BoxDecoration(
             color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
-            borderRadius: BorderRadius.circular(8),
+            shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 16, color: themeState.primary),
+          child: Icon(icon, size: 17, color: themeState.primary),
         ),
         const Gap(10),
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: isDark ? Colors.white : Colors.grey.shade900,
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.grey.shade900,
+            ),
           ),
         ),
+        ?trailing,
       ],
     );
   }
 
-  Widget _buildCalculationMethodCard(
+  // ─── 1. Calculation & Jurisprudence Card ─────────────────────────────────
+
+  Widget _buildCalculationAndJurisprudenceCard(
     BuildContext context,
     dynamic themeState,
     bool isDark,
@@ -179,32 +233,26 @@ class _PrayerSettingsState extends State<PrayerSettings> {
         final currentEnum =
             locationState.calculationMethod?.method ??
             CalculationMethodEnum.muslimWorldLeague;
+        final currentMadhab = locationState.madhab ?? Madhab.shafi;
 
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : Colors.grey.shade200,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
+        return _buildCardContainer(
+          isDark: isDark,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _buildCardHeader(
+                icon: FluentIcons.compass_northwest_24_regular,
+                title: l10n.calculationAndJurisprudence,
+                themeState: themeState,
+                isDark: isDark,
+              ),
+              const Gap(16),
+
+              // Calculation Method Dropdown
               Text(
                 l10n.selectCalculationMethod,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 12.5,
                   fontWeight: FontWeight.w600,
                   color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
                 ),
@@ -251,7 +299,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       value: methodEnum,
                       child: Text(
                         params.fullName ?? methodEnum.name,
-                        style: const TextStyle(fontSize: 13.5),
+                        style: const TextStyle(fontSize: 13),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     );
                   }).toList(),
@@ -266,51 +315,20 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   },
                 ),
               ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
-  Widget _buildMadhabCard(
-    BuildContext context,
-    dynamic themeState,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
-    return BlocBuilder<
-      LocationQiblaPrayerDataCubit,
-      LocationQiblaPrayerDataState
-    >(
-      builder: (context, locationState) {
-        final currentMadhab = locationState.madhab ?? Madhab.shafi;
-
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : Colors.grey.shade200,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
+              const Gap(16),
+              Divider(
+                height: 1,
+                thickness: 0.5,
+                color: isDark ? Colors.white10 : Colors.grey.shade200,
               ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+              const Gap(16),
+
+              // Asr Jurisprudence (Madhab)
               Text(
                 l10n.asrJurisprudence,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 12.5,
                   fontWeight: FontWeight.w600,
                   color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
                 ),
@@ -364,7 +382,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected
               ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.08)
@@ -378,7 +396,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 : (isDark
                       ? Colors.white.withValues(alpha: 0.08)
                       : Colors.grey.shade200),
-            width: isSelected ? 1.6 : 1.0,
+            width: isSelected ? 1.5 : 1.0,
           ),
         ),
         child: Column(
@@ -387,31 +405,37 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14.5,
-                    fontWeight: FontWeight.bold,
-                    color: isSelected
-                        ? themeState.primary
-                        : (isDark ? Colors.white : Colors.grey.shade900),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.bold,
+                      color: isSelected
+                          ? themeState.primary
+                          : (isDark ? Colors.white : Colors.grey.shade900),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 if (isSelected)
                   Icon(
                     FluentIcons.checkmark_circle_24_filled,
-                    size: 17,
+                    size: 16,
                     color: themeState.primary,
                   ),
               ],
             ),
-            const Gap(4),
+            const Gap(3),
             Text(
               subtitle,
               style: TextStyle(
                 fontSize: 10.5,
                 color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -419,7 +443,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     );
   }
 
-  Widget _buildNotificationSettingsCard(
+  // ─── 2. Notifications & Presets Card ─────────────────────────────────────
+
+  Widget _buildNotificationAndPresetsCard(
     BuildContext context,
     dynamic themeState,
     bool isDark,
@@ -429,313 +455,272 @@ class _PrayerSettingsState extends State<PrayerSettings> {
       builder: (context, reminderState) {
         final isMasterEnabled =
             reminderState.isPrayerRemindNotificationEnabled ?? false;
-        final enforceAlarm = reminderState.enforceAlarmSound ?? false;
-        final volume = reminderState.soundVolume ?? 0.65;
+        final activePreset = _detectPreset(reminderState.prayerReminderModes);
 
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : Colors.grey.shade200,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
+        return _buildCardContainer(
+          isDark: isDark,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Master Toggle
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.enablePrayerReminders,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: isDark ? Colors.white : Colors.grey.shade900,
-                          ),
-                        ),
-                        const Gap(2),
-                        Text(
-                          l10n.enablePrayerRemindersDescription,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade400
-                                : Colors.grey.shade600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Switch.adaptive(
-                    value: isMasterEnabled,
-                    activeTrackColor: themeState.primary,
-                    onChanged: (value) async {
-                      if (value) {
-                        final notifAllowed = await AwesomeNotifications()
-                            .isNotificationAllowed();
-                        if (!notifAllowed) {
-                          final granted = await AwesomeNotifications()
-                              .requestPermissionToSendNotifications();
-                          if (!granted) {
-                            Fluttertoast.showToast(
-                              msg: l10n.allowNotificationPermission,
-                            );
-                            return;
+              // Header with Master Switch
+              _buildCardHeader(
+                icon: FluentIcons.alert_24_regular,
+                title: l10n.enablePrayerReminders,
+                themeState: themeState,
+                isDark: isDark,
+                trailing: Switch.adaptive(
+                  value: isMasterEnabled,
+                  activeTrackColor: themeState.primary,
+                  onChanged: (value) async {
+                    if (value) {
+                      final notifAllowed = await AwesomeNotifications()
+                          .isNotificationAllowed();
+                      if (!notifAllowed) {
+                        final granted = await AwesomeNotifications()
+                            .requestPermissionToSendNotifications();
+                        if (!granted) {
+                          Fluttertoast.showToast(
+                            msg: l10n.allowNotificationPermission,
+                          );
+                          return;
+                        }
+                      }
+                      if (!kIsWeb && Platform.isAndroid) {
+                        try {
+                          final status =
+                              await Permission.scheduleExactAlarm.status;
+                          if (status.isDenied) {
+                            await Permission.scheduleExactAlarm.request();
                           }
-                        }
-                        if (!kIsWeb && Platform.isAndroid) {
-                          try {
-                            final status =
-                                await Permission.scheduleExactAlarm.status;
-                            if (status.isDenied) {
-                              await Permission.scheduleExactAlarm.request();
-                            }
-                          } catch (_) {}
-                        }
+                        } catch (_) {}
+                      }
+                      context
+                          .read<PrayerReminderCubit>()
+                          .enablePrayerRemindNotification();
+                    } else {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .disablePrayerRemindNotification();
+                    }
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 34, top: 2),
+                child: Text(
+                  l10n.enablePrayerRemindersDescription,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                ),
+              ),
+
+              const Gap(16),
+              Divider(
+                height: 1,
+                thickness: 0.5,
+                color: isDark ? Colors.white10 : Colors.grey.shade200,
+              ),
+              const Gap(14),
+
+              // Quick Presets
+              Text(
+                l10n.quickPresets,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                ),
+              ),
+              const Gap(8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  ChoiceChip(
+                    avatar: const Icon(Icons.auto_awesome_rounded, size: 16),
+                    label: Text(
+                      l10n.presetBalanced,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: activePreset == "balanced",
+                    onSelected: (selected) {
+                      if (selected) {
                         context
                             .read<PrayerReminderCubit>()
-                            .enablePrayerRemindNotification();
-                      } else {
+                            .applyBulkPreset("balanced");
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    avatar: const Icon(
+                      Icons.alarm_on_rounded,
+                      size: 16,
+                    ),
+                    label: Text(
+                      l10n.presetAllAlarms,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: activePreset == "all_alarm",
+                    onSelected: (selected) {
+                      if (selected) {
                         context
                             .read<PrayerReminderCubit>()
-                            .disablePrayerRemindNotification();
+                            .applyBulkPreset("all_alarm");
+                      }
+                    },
+                  ),
+                  ChoiceChip(
+                    avatar: const Icon(
+                      FluentIcons.alert_24_regular,
+                      size: 16,
+                    ),
+                    label: Text(
+                      l10n.presetAllNotifications,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                    selected: activePreset == "all_notification",
+                    onSelected: (selected) {
+                      if (selected) {
+                        context
+                            .read<PrayerReminderCubit>()
+                            .applyBulkPreset("all_notification");
                       }
                     },
                   ),
                 ],
               ),
 
-              const Divider(height: 24),
-
-              // Prayer Guidance & Setup Link Card
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PrayerGuidanceSetupScreen(isFromSettings: true),
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: themeState.primary.withValues(
-                      alpha: isDark ? 0.15 : 0.08,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: themeState.primary.withValues(alpha: 0.25),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: themeState.primary.withValues(alpha: 0.2),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          FluentIcons.book_question_mark_24_filled,
-                          color: themeState.primary,
-                          size: 20,
-                        ),
-                      ),
-                      const Gap(12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.prayerGuidanceSetupTitle,
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: isDark
-                                    ? Colors.white
-                                    : Colors.grey.shade900,
-                              ),
-                            ),
-                            const Gap(2),
-                            Text(
-                              l10n.prayerGuidanceSetupDesc,
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Icon(
-                        Icons.chevron_right_rounded,
-                        color: themeState.primary,
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ),
+              const Gap(16),
+              Divider(
+                height: 1,
+                thickness: 0.5,
+                color: isDark ? Colors.white10 : Colors.grey.shade200,
               ),
+              const Gap(12),
 
-              const Divider(height: 24),
-
-              // Enforce Sound Toggle
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              // Visual Setup Guide Navigation Tile
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const PrayerGuidanceSetupScreen(
+                          isFromSettings: true,
+                        ),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
                       children: [
-                        Text(
-                          l10n.enforceAlarmSound,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: isDark ? Colors.white : Colors.grey.shade900,
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withValues(
+                              alpha: isDark ? 0.2 : 0.1,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            FluentIcons.book_question_mark_24_regular,
+                            color: themeState.primary,
+                            size: 18,
                           ),
                         ),
-                        const Gap(2),
-                        Text(
-                          l10n.enforceAlarmSoundDescription,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade400
-                                : Colors.grey.shade600,
+                        const Gap(12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.prayerGuidanceSetupTitle,
+                                style: TextStyle(
+                                  fontSize: 13.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
+                                ),
+                              ),
+                              const Gap(2),
+                              Text(
+                                l10n.prayerGuidanceSetupDesc,
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
                           ),
+                        ),
+                        Icon(
+                          FluentIcons.chevron_right_24_regular,
+                          color: isDark
+                              ? Colors.grey.shade500
+                              : Colors.grey.shade400,
+                          size: 18,
                         ),
                       ],
                     ),
                   ),
-                  Switch.adaptive(
-                    value: enforceAlarm,
-                    activeTrackColor: themeState.primary,
-                    onChanged: (value) {
-                      context
-                          .read<PrayerReminderCubit>()
-                          .setReminderEnforceSound(value);
-                    },
-                  ),
-                ],
-              ),
-
-              // Volume Slider (if enforce sound active)
-              if (enforceAlarm) ...[
-                const Gap(14),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      l10n.volume,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? Colors.white : Colors.grey.shade900,
-                      ),
-                    ),
-                    Text(
-                      "${(volume * 100).toInt()}%",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: themeState.primary,
-                      ),
-                    ),
-                  ],
                 ),
-                SliderTheme(
-                  data: SliderThemeData(
-                    activeTrackColor: themeState.primary,
-                    inactiveTrackColor: isDark
-                        ? Colors.white.withValues(alpha: 0.1)
-                        : themeState.primary.withValues(alpha: 0.2),
-                    thumbColor: themeState.primary,
-                    trackHeight: 4,
-                  ),
-                  child: Slider(
-                    value: volume,
-                    min: 0.0,
-                    max: 1.0,
-                    divisions: 20,
-                    onChanged: (val) {
-                      context
-                          .read<PrayerReminderCubit>()
-                          .setReminderSoundVolume(val);
-                    },
-                  ),
-                ),
-              ],
-
-              // Ringtone Settings
-              const Divider(height: 24),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.reminderRingtone,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: isDark ? Colors.white : Colors.grey.shade900,
-                          ),
-                        ),
-                        const Gap(2),
-                        Text(
-                          l10n.chooseRingtoneDescription,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? Colors.grey.shade400
-                                : Colors.grey.shade600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton.filledTonal(
-                    onPressed: () {
-                      context
-                          .read<PrayerReminderCubit>()
-                          .toggleRingtonePreview();
-                    },
-                    icon: Icon(
-                      reminderState.isPlayingPreview
-                          ? FluentIcons.pause_24_filled
-                          : FluentIcons.play_24_filled,
-                      color: themeState.primary,
-                      size: 20,
-                    ),
-                    tooltip: reminderState.isPlayingPreview
-                        ? l10n.stopPreview
-                        : l10n.previewSound,
-                  ),
-                ],
               ),
-              const Gap(10),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
-              // Current Sound Display Card & Browse Button
+  // ─── 3. Sound & Adhan Card ───────────────────────────────────────────────
+
+  Widget _buildAudioAndAdhanCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, reminderState) {
+        final enforceAlarm = reminderState.enforceAlarmSound ?? false;
+        final volume = reminderState.soundVolume ?? 0.65;
+
+        return _buildCardContainer(
+          isDark: isDark,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCardHeader(
+                icon: FluentIcons.music_note_2_24_regular,
+                title: l10n.reminderRingtone,
+                themeState: themeState,
+                isDark: isDark,
+                trailing: IconButton.filledTonal(
+                  onPressed: () {
+                    context.read<PrayerReminderCubit>().toggleRingtonePreview();
+                  },
+                  icon: Icon(
+                    reminderState.isPlayingPreview
+                        ? FluentIcons.pause_24_filled
+                        : FluentIcons.play_24_filled,
+                    color: themeState.primary,
+                    size: 18,
+                  ),
+                  tooltip: reminderState.isPlayingPreview
+                      ? l10n.stopPreview
+                      : l10n.previewSound,
+                ),
+              ),
+              const Gap(14),
+
+              // Active Sound Card & Browse Button
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -755,7 +740,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 child: Row(
                   children: [
                     Icon(
-                      FluentIcons.music_note_2_24_regular,
+                      FluentIcons.speaker_2_24_regular,
                       size: 20,
                       color: themeState.primary,
                     ),
@@ -779,14 +764,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           ),
                           Text(
                             reminderState.selectedRingtoneType == "adhan"
-                                ? "Authentic Adhan (Audio)"
+                                ? l10n.adhanSound
                                 : reminderState.selectedRingtoneType ==
                                           "default_sound" ||
                                       reminderState.selectedRingtoneType == null
-                                ? "WAV Audio (notification_sound.wav)"
+                                ? l10n.defaultSound
                                 : reminderState.selectedRingtoneType == "custom"
-                                ? "Device / System Sound"
-                                : "System Preset",
+                                ? l10n.chooseRingtoneDescription
+                                : l10n.systemNotification,
                             style: TextStyle(
                               fontSize: 10.5,
                               color: isDark
@@ -804,16 +789,16 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       },
                       icon: const Icon(
                         FluentIcons.folder_open_24_regular,
-                        size: 16,
+                        size: 15,
                       ),
                       label: Text(
                         l10n.chooseRingtone,
-                        style: const TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 11.5),
                       ),
                       style: FilledButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
-                          vertical: 8,
+                          vertical: 7,
                         ),
                       ),
                     ),
@@ -823,7 +808,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
               const Gap(12),
 
-              // Quick Presets
+              // Sound Presets Choices
               Text(
                 l10n.quickPresets,
                 style: TextStyle(
@@ -835,7 +820,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               const Gap(8),
               Wrap(
                 spacing: 8,
-
+                runSpacing: 6,
                 children: [
                   ChoiceChip(
                     avatar: const Icon(
@@ -920,12 +905,645 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 ],
               ),
 
-              const Divider(height: 24),
+              const Gap(16),
+              Divider(
+                height: 1,
+                thickness: 0.5,
+                color: isDark ? Colors.white10 : Colors.grey.shade200,
+              ),
+              const Gap(14),
+
+              // Enforce Sound Toggle
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.enforceAlarmSound,
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? Colors.white : Colors.grey.shade900,
+                          ),
+                        ),
+                        const Gap(2),
+                        Text(
+                          l10n.enforceAlarmSoundDescription,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch.adaptive(
+                    value: enforceAlarm,
+                    activeTrackColor: themeState.primary,
+                    onChanged: (value) {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderEnforceSound(value);
+                    },
+                  ),
+                ],
+              ),
+
+              // Volume Slider (if enforce sound active)
+              if (enforceAlarm) ...[
+                const Gap(12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      l10n.volume,
+                      style: TextStyle(
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w600,
+                        color: isDark ? Colors.white : Colors.grey.shade900,
+                      ),
+                    ),
+                    Text(
+                      "${(volume * 100).toInt()}%",
+                      style: TextStyle(
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.bold,
+                        color: themeState.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    activeTrackColor: themeState.primary,
+                    inactiveTrackColor: isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : themeState.primary.withValues(alpha: 0.2),
+                    thumbColor: themeState.primary,
+                    trackHeight: 3.5,
+                  ),
+                  child: Slider(
+                    value: volume,
+                    min: 0.0,
+                    max: 1.0,
+                    divisions: 20,
+                    onChanged: (val) {
+                      context
+                          .read<PrayerReminderCubit>()
+                          .setReminderSoundVolume(val);
+                    },
+                  ),
+                ),
+              ],
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // ─── 4. Per-Prayer Alert Modes Card ──────────────────────────────────────
+
+  Widget _buildPrayerAlertModesCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    const prayers = [
+      Prayer.fajr,
+      Prayer.sunrise,
+      Prayer.dhuhr,
+      Prayer.asr,
+      Prayer.maghrib,
+      Prayer.isha,
+    ];
+
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, prayerReminderState) {
+        return _buildCardContainer(
+          isDark: isDark,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCardHeader(
+                icon: FluentIcons.timer_24_regular,
+                title: l10n.adjustReminderTime,
+                themeState: themeState,
+                isDark: isDark,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 34, top: 2),
+                child: Text(
+                  l10n.adjustReminderTimingDescription,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                ),
+              ),
+              const Gap(14),
+              Divider(
+                height: 1,
+                thickness: 0.5,
+                color: isDark ? Colors.white10 : Colors.grey.shade200,
+              ),
+
+              // List of 6 Prayers
+              ...prayers.map((prayerType) {
+                final int offsetMinutes =
+                    prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
+                final DateTime basePrayerTime =
+                    widget.prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
+                    DateTime.now();
+                final actualPrayerTime = TimeOfDay.fromDateTime(basePrayerTime);
+                final adjustedTime = TimeOfDay.fromDateTime(
+                  basePrayerTime.add(Duration(minutes: offsetMinutes)),
+                );
+
+                final prayerName =
+                    PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
+                    prayerType.name;
+
+                final currentMode =
+                    prayerReminderState.prayerReminderModes?[prayerType] ??
+                    ReminderScheduler.getPrayerReminderMode(prayerType);
+
+                return Column(
+                  children: [
+                    _buildPrayerRow(
+                      context: context,
+                      prayerType: prayerType,
+                      prayerName: prayerName,
+                      actualTime: actualPrayerTime,
+                      adjustedTime: adjustedTime,
+                      offsetMinutes: offsetMinutes,
+                      currentMode: currentMode,
+                      themeState: themeState,
+                      isDark: isDark,
+                      l10n: l10n,
+                    ),
+                    if (prayerType != prayers.last)
+                      Divider(
+                        height: 1,
+                        thickness: 0.5,
+                        color: isDark ? Colors.white10 : Colors.grey.shade100,
+                      ),
+                  ],
+                );
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPrayerRow({
+    required BuildContext context,
+    required Prayer prayerType,
+    required String prayerName,
+    required TimeOfDay actualTime,
+    required TimeOfDay adjustedTime,
+    required int offsetMinutes,
+    required PrayerReminderMode currentMode,
+    required dynamic themeState,
+    required bool isDark,
+    required AppLocalizations l10n,
+  }) {
+    return InkWell(
+      onTap: () => _showTimingOffsetSheet(
+        context,
+        prayerType,
+        themeState,
+        isDark,
+        l10n,
+      ),
+      borderRadius: BorderRadius.circular(10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 4),
+        child: Row(
+          children: [
+            // Prayer Icon in circular tint
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                color: themeState.primary.withValues(
+                  alpha: isDark ? 0.2 : 0.1,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                PrayerTimeHelper.getPrayerIcon(prayerType),
+                color: themeState.primary,
+                size: 16,
+              ),
+            ),
+            const Gap(10),
+
+            // Prayer Name & Scheduled Time
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        prayerName,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
+                        ),
+                      ),
+                      if (offsetMinutes != 0) ...[
+                        const Gap(6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 1.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            offsetMinutes > 0
+                                ? "+${localizedNumber(context, offsetMinutes)} m"
+                                : "${localizedNumber(context, offsetMinutes)} m",
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: themeState.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const Gap(2),
+                  Text(
+                    formatTimeOfDay(context, adjustedTime),
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Gap(8),
+
+            // 3-Way Segmented Pill Button
+            _buildSegmentedModePill(
+              currentMode: currentMode,
+              onChanged: (newMode) {
+                context.read<PrayerReminderCubit>().setPrayerReminderMode(
+                  prayerType,
+                  newMode,
+                );
+              },
+              themeState: themeState,
+              isDark: isDark,
+              l10n: l10n,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSegmentedModePill({
+    required PrayerReminderMode currentMode,
+    required ValueChanged<PrayerReminderMode> onChanged,
+    required dynamic themeState,
+    required bool isDark,
+    required AppLocalizations l10n,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.06)
+            : Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.08)
+              : Colors.grey.shade200,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildPillButton(
+            isSelected: currentMode == PrayerReminderMode.off,
+            selectedColor: isDark ? Colors.grey.shade700 : Colors.grey.shade400,
+            activeIconColor: Colors.white,
+            inactiveIconColor: isDark ? Colors.white38 : Colors.grey.shade500,
+            icon: FluentIcons.alert_off_20_regular,
+            tooltip: l10n.reminderModeOff,
+            onTap: () => onChanged(PrayerReminderMode.off),
+          ),
+          const Gap(3),
+          _buildPillButton(
+            isSelected: currentMode == PrayerReminderMode.notification,
+            selectedColor: themeState.primary,
+            activeIconColor: Colors.white,
+            inactiveIconColor: isDark ? Colors.white38 : Colors.grey.shade500,
+            icon: FluentIcons.alert_20_regular,
+            tooltip: l10n.reminderModeNotification,
+            onTap: () => onChanged(PrayerReminderMode.notification),
+          ),
+          const Gap(3),
+          _buildPillButton(
+            isSelected: currentMode == PrayerReminderMode.alarm,
+            selectedColor: const Color(0xFFE11D48),
+            activeIconColor: Colors.white,
+            inactiveIconColor: isDark ? Colors.white38 : Colors.grey.shade500,
+            icon: Icons.alarm_rounded,
+            tooltip: l10n.reminderModeAlarm,
+            onTap: () => onChanged(PrayerReminderMode.alarm),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPillButton({
+    required bool isSelected,
+    required Color selectedColor,
+    required Color activeIconColor,
+    required Color inactiveIconColor,
+    required IconData icon,
+    required String tooltip,
+    required VoidCallback onTap,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(7),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          decoration: BoxDecoration(
+            color: isSelected ? selectedColor : Colors.transparent,
+            borderRadius: BorderRadius.circular(7),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: selectedColor.withValues(alpha: 0.3),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Icon(
+            icon,
+            size: 16,
+            color: isSelected ? activeIconColor : inactiveIconColor,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showTimingOffsetSheet(
+    BuildContext context,
+    Prayer prayerType,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    final cubit = context.read<PrayerReminderCubit>();
+    final prayerName =
+        PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
+        prayerType.name;
+    final basePrayerTime =
+        widget.prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
+        DateTime.now();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+          bloc: cubit,
+          builder: (context, state) {
+            final offsetMinutes =
+                state.reminderTimeAdjustment?[prayerType] ?? 0;
+            final adjustedTime = TimeOfDay.fromDateTime(
+              basePrayerTime.add(Duration(minutes: offsetMinutes)),
+            );
+
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 16,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Sheet Handle
+                    Center(
+                      child: Container(
+                        width: 36,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 16),
+                        decoration: BoxDecoration(
+                          color: isDark ? Colors.white24 : Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+
+                    // Sheet Header
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withValues(alpha: 0.15),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            PrayerTimeHelper.getPrayerIcon(prayerType),
+                            color: themeState.primary,
+                            size: 20,
+                          ),
+                        ),
+                        const Gap(12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                prayerName,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "${l10n.actualTime(formatTimeOfDay(context, TimeOfDay.fromDateTime(basePrayerTime)))} • ${formatTimeOfDay(context, adjustedTime)}",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const Gap(18),
+                    Text(
+                      l10n.adjustReminderTimingDescription,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
+                      ),
+                    ),
+                    const Gap(12),
+
+                    // Quick minute chips
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [-15, -10, -5, 0, 5, 10, 15].map((offset) {
+                          final isSelected = offsetMinutes == offset;
+                          final label = offset == 0
+                              ? l10n.exactTime
+                              : "${offset > 0 ? "+${localizedNumber(context, offset)}" : localizedNumber(context, offset)} m";
+
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: ChoiceChip(
+                              label: Text(
+                                label,
+                                style: const TextStyle(fontSize: 11),
+                              ),
+                              selected: isSelected,
+                              onSelected: (_) {
+                                cubit.setReminderTimeAdjustment(
+                                  prayerType,
+                                  offset,
+                                );
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
+                    const Gap(14),
+
+                    // Continuous fine-tuning Slider
+                    SliderTheme(
+                      data: SliderThemeData(
+                        activeTrackColor: themeState.primary,
+                        inactiveTrackColor: isDark
+                            ? Colors.white10
+                            : Colors.grey.shade200,
+                        thumbColor: themeState.primary,
+                        trackHeight: 3.5,
+                      ),
+                      child: Slider(
+                        value: offsetMinutes.toDouble(),
+                        min: -60.0,
+                        max: 60.0,
+                        divisions: 120,
+                        label: _getAdjustmentText(offsetMinutes, l10n),
+                        onChanged: (val) {
+                          cubit.setUIReminderTimeAdjustment(
+                            prayerType,
+                            val.round(),
+                          );
+                        },
+                        onChangeEnd: (val) {
+                          cubit.setReminderTimeAdjustment(
+                            prayerType,
+                            val.round(),
+                          );
+                        },
+                      ),
+                    ),
+
+                    Center(
+                      child: Text(
+                        _getAdjustmentText(offsetMinutes, l10n),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: themeState.primary,
+                        ),
+                      ),
+                    ),
+
+                    const Gap(16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        child: Text(l10n.close),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // ─── 5. Device Readiness & Diagnostics Card ──────────────────────────────
+
+  Widget _buildDiagnosticsCard(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
+    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
+      builder: (context, reminderState) {
+        return _buildCardContainer(
+          isDark: isDark,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCardHeader(
+                icon: FluentIcons.shield_checkmark_24_regular,
+                title: "Device Diagnostics & Permissions",
+                themeState: themeState,
+                isDark: isDark,
+              ),
+              const Gap(14),
 
               // Full-screen intent permission banner (if permission missing on Android 14+)
               if (!reminderState.hasFullScreenIntentPermission) ...[
                 Container(
-                  margin: const EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 12),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: const Color(
@@ -989,12 +1607,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 ),
               ],
 
-              // Battery Optimization Exemption banner (critical for Honor / MagicOS / MIUI)
+              // Battery Optimization Exemption banner
               if (!kIsWeb &&
                   Platform.isAndroid &&
                   !reminderState.isIgnoringBatteryOptimizations) ...[
                 Container(
-                  margin: const EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 12),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: const Color(
@@ -1058,7 +1676,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 ),
               ],
 
-              // Test Notification & Alarm Buttons
+              // Test Notification & Test Alarm Buttons
               Row(
                 children: [
                   Expanded(
@@ -1148,338 +1766,6 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildAdjustReminderList({
-    required ThemeState themeState,
-    required AppLocalizations l10n,
-    required PrayerTimes prayerTimes,
-    required bool isDark,
-  }) {
-    final prayers = [
-      Prayer.fajr,
-      Prayer.sunrise,
-      Prayer.dhuhr,
-      Prayer.asr,
-      Prayer.maghrib,
-      Prayer.isha,
-    ];
-
-    return BlocBuilder<PrayerReminderCubit, PrayerReminderState>(
-      builder: (context, prayerReminderState) {
-        return Column(
-          children: prayers.map((prayerType) {
-            final int offsetMinutes =
-                prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
-            final DateTime basePrayerTime =
-                prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
-                DateTime.now();
-            final actualPrayerTime = TimeOfDay.fromDateTime(basePrayerTime);
-            final adjustedTime = TimeOfDay.fromDateTime(
-              basePrayerTime.add(Duration(minutes: offsetMinutes)),
-            );
-
-            final prayerName =
-                PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
-                prayerType.name;
-
-            final currentMode =
-                prayerReminderState.prayerReminderModes?[prayerType] ??
-                ReminderScheduler.getPrayerReminderMode(prayerType);
-
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade200,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.03),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: themeState.primary.withValues(
-                            alpha: isDark ? 0.2 : 0.1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(
-                          PrayerTimeHelper.getPrayerIcon(prayerType),
-                          color: themeState.primary,
-                          size: 18,
-                        ),
-                      ),
-                      const Gap(12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              prayerName,
-                              style: TextStyle(
-                                fontSize: 14.5,
-                                fontWeight: FontWeight.bold,
-                                color: isDark
-                                    ? Colors.white
-                                    : Colors.grey.shade900,
-                              ),
-                            ),
-                            Text(
-                              l10n.actualTime(
-                                formatTimeOfDay(context, actualPrayerTime),
-                              ),
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (currentMode.isEnabled) ...[
-                        // Offset chip
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 9,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: offsetMinutes == 0
-                                ? (isDark
-                                      ? Colors.white.withValues(alpha: 0.08)
-                                      : Colors.grey.shade100)
-                                : themeState.primary.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            offsetMinutes == 0
-                                ? l10n.exactTime
-                                : (offsetMinutes > 0
-                                      ? "+${localizedNumber(context, offsetMinutes)} m"
-                                      : "-${localizedNumber(context, offsetMinutes.abs())} m"),
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: offsetMinutes == 0
-                                  ? (isDark
-                                        ? Colors.grey.shade400
-                                        : Colors.grey.shade700)
-                                  : themeState.primary,
-                            ),
-                          ),
-                        ),
-                        const Gap(8),
-                        // Adjusted alert time pill
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: themeState.primary,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            formatTimeOfDay(context, adjustedTime),
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  const Gap(10),
-
-                  // 3-Mode Selector: Off | Notification | Alarm
-                  Row(
-                    children: [
-                      _buildModeChip(
-                        label: l10n.reminderModeOff,
-                        icon: FluentIcons.alert_off_24_regular,
-                        isSelected: currentMode == PrayerReminderMode.off,
-                        selectedColor: isDark
-                            ? Colors.grey.shade500
-                            : Colors.grey.shade600,
-                        isDark: isDark,
-                        onTap: () {
-                          context
-                              .read<PrayerReminderCubit>()
-                              .setPrayerReminderMode(
-                                prayerType,
-                                PrayerReminderMode.off,
-                              );
-                        },
-                      ),
-                      const Gap(8),
-                      _buildModeChip(
-                        label: l10n.reminderModeNotification,
-                        icon: FluentIcons.alert_badge_24_regular,
-                        isSelected:
-                            currentMode == PrayerReminderMode.notification,
-                        selectedColor: themeState.primary,
-                        isDark: isDark,
-                        onTap: () {
-                          context
-                              .read<PrayerReminderCubit>()
-                              .setPrayerReminderMode(
-                                prayerType,
-                                PrayerReminderMode.notification,
-                              );
-                        },
-                      ),
-                      const Gap(8),
-                      _buildModeChip(
-                        label: l10n.reminderModeAlarm,
-                        icon: Icons.alarm,
-                        isSelected: currentMode == PrayerReminderMode.alarm,
-                        selectedColor: const Color(0xFFE11D48),
-                        isDark: isDark,
-                        onTap: () {
-                          context
-                              .read<PrayerReminderCubit>()
-                              .setPrayerReminderMode(
-                                prayerType,
-                                PrayerReminderMode.alarm,
-                              );
-                        },
-                      ),
-                    ],
-                  ),
-
-                  if (currentMode.isEnabled) ...[
-                    const Gap(8),
-                    SliderTheme(
-                      data: SliderThemeData(
-                        activeTrackColor: themeState.primary,
-                        inactiveTrackColor: isDark
-                            ? Colors.white.withValues(alpha: 0.1)
-                            : Colors.grey.shade200,
-                        thumbColor: themeState.primary,
-                        overlayColor: themeState.primary.withValues(
-                          alpha: 0.15,
-                        ),
-                        trackHeight: 3.5,
-                        thumbShape: const RoundSliderThumbShape(
-                          enabledThumbRadius: 6,
-                        ),
-                      ),
-                      child: Slider(
-                        value: offsetMinutes.toDouble(),
-                        min: -60.0,
-                        max: 60.0,
-                        divisions: 120,
-                        label: _getAdjustmentText(offsetMinutes, l10n),
-                        onChanged: (double value) {
-                          context
-                              .read<PrayerReminderCubit>()
-                              .setUIReminderTimeAdjustment(
-                                prayerType,
-                                value.round(),
-                              );
-                        },
-                        onChangeEnd: (value) {
-                          context
-                              .read<PrayerReminderCubit>()
-                              .setReminderTimeAdjustment(
-                                prayerType,
-                                value.round(),
-                              );
-                        },
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-
-  Widget _buildModeChip({
-    required String label,
-    required IconData icon,
-    required bool isSelected,
-    required Color selectedColor,
-    required bool isDark,
-    required VoidCallback onTap,
-  }) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? selectedColor.withValues(alpha: isDark ? 0.25 : 0.12)
-                : (isDark
-                      ? Colors.white.withValues(alpha: 0.04)
-                      : Colors.grey.shade100),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: isSelected
-                  ? selectedColor
-                  : (isDark
-                        ? Colors.white.withValues(alpha: 0.06)
-                        : Colors.grey.shade200),
-              width: isSelected ? 1.5 : 1.0,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 14,
-                color: isSelected
-                    ? selectedColor
-                    : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
-              ),
-              const Gap(4),
-              Flexible(
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                    color: isSelected
-                        ? (isDark ? Colors.white : selectedColor)
-                        : (isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade700),
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 

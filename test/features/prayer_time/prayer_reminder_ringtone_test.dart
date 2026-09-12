@@ -115,9 +115,9 @@ void main() {
     });
 
     test("ReminderScheduler prayer reminder modes can be set and retrieved", () async {
-      // Default should be notification for obligatory prayers, off for optional
+      // Default canonical preset: Fajr is alarm, other obligatory prayers are notification, sunrise/sunset off
       final defaultModes = ReminderScheduler.getPrayerReminderModes();
-      expect(defaultModes[Prayer.fajr], equals(PrayerReminderMode.notification));
+      expect(defaultModes[Prayer.fajr], equals(PrayerReminderMode.alarm));
       expect(defaultModes[Prayer.dhuhr], equals(PrayerReminderMode.notification));
       expect(defaultModes[Prayer.asr], equals(PrayerReminderMode.notification));
       expect(defaultModes[Prayer.maghrib], equals(PrayerReminderMode.notification));

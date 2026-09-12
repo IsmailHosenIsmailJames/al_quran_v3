@@ -34,14 +34,30 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   }
 
   Future<void> togglePrayerReminder(Prayer prayer) async {
-    final currentEnabled = state.enabledPrayers?[prayer] ??
-        ReminderScheduler.isPrayerEnabled(prayer);
-    final newEnabled = !currentEnabled;
-    final map = Map<Prayer, bool>.from(state.enabledPrayers ?? {});
-    map[prayer] = newEnabled;
-    emit(state.copyWith(enabledPrayers: map));
-    await ReminderScheduler.setPrayerEnabled(prayer, newEnabled);
-    await ReminderScheduler.scheduleNotification();
+    final currentMode = state.prayerReminderModes?[prayer] ??
+        ReminderScheduler.getPrayerReminderMode(prayer);
+    final isCurrentlyEnabled = currentMode.isEnabled;
+    final newMode = isCurrentlyEnabled
+        ? PrayerReminderMode.off
+        : (prayer == Prayer.fajr
+            ? PrayerReminderMode.alarm
+            : PrayerReminderMode.notification);
+
+    await setPrayerReminderMode(prayer, newMode);
+  }
+
+  Future<void> commitSetupConfiguration({String? preset}) async {
+    if (preset != null && preset != "custom") {
+      await applyBulkPreset(preset);
+    } else {
+      await enablePrayerRemindNotification();
+      final modes = state.prayerReminderModes ??
+          ReminderScheduler.getPrayerReminderModes();
+      for (final entry in modes.entries) {
+        await ReminderScheduler.setPrayerReminderMode(entry.key, entry.value);
+      }
+      await ReminderScheduler.scheduleNotification();
+    }
   }
 
   Future<void> enablePrayerRemindNotification() async {
