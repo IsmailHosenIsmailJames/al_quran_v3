@@ -1,0 +1,11 @@
+Al-Bayan Quran is a clean, feature-rich, and completely Free & Open Source (FOSS) Islamic application designed to be your daily companion for reading the Holy Quran, listening to recitations, and tracking prayer times.
+
+Key Features:
+• Multiple Quran Scripts: Read with Uthmani, Indopak, and Tajweed-guided scripts with adjustable typography, font size, and line spacing.
+• Translations & Tafsir: Read accurate translations and Tafsirs in multiple languages with seamless offline support.
+• Word-by-Word Analysis: Tap individual words to see translations, grammar details, and listen to correct pronunciations.
+• Audio Recitations: High quality segmented verse-by-verse recitation playback with multiple reciters and background audio support.
+• Accurate Prayer Times: Offline prayer schedule calculation based on your geographical coordinates, complete with Qibla compass.
+• Prayer Reminders: Multi-mode reminders supporting notifications or full-screen alarms with custom adhan tones.
+• Bookmarks & Notes: Save your reading reflections, pinned ayahs, and history privately on your local storage.
+• 100% FOSS & Private: Zero advertisements, zero tracking, zero Google Play Service dependencies, and no remote font fetching.

@@ -1,0 +1,4 @@
+• Added 3-mode prayer reminder selector (Off, Notification, and Alarm)
+• Added guidance setup screen for full-screen prayer alarm permissions
+• Upgraded dependencies and improved audio playback reliability
+• 100% FOSS offline release for F-Droid
