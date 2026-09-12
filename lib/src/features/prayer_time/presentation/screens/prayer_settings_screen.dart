@@ -1135,16 +1135,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           children: prayers.map((prayerType) {
             final int offsetMinutes =
                 prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
-            final DateTime? prayerTime =
-                prayerTimes.timeForPrayer(prayerType)?.toLocal();
-            final actualPrayerTime =
-                TimeOfDay.fromDateTime(prayerTime ?? DateTime.now());
-
-            final adjustedTime = TimeOfDay(
-              hour: (actualPrayerTime.hour +
-                      (actualPrayerTime.minute + offsetMinutes) ~/ 60) %
-                  24,
-              minute: (actualPrayerTime.minute + offsetMinutes) % 60,
+            final DateTime basePrayerTime =
+                prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
+                    DateTime.now();
+            final actualPrayerTime = TimeOfDay.fromDateTime(basePrayerTime);
+            final adjustedTime = TimeOfDay.fromDateTime(
+              basePrayerTime.add(Duration(minutes: offsetMinutes)),
             );
 
             final prayerName =
