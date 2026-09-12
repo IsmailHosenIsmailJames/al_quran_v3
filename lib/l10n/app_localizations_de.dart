@@ -1891,4 +1891,131 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get quickPresets => 'Schnellauswahl';
+
+  @override
+  String get reminderModeOff => 'Aus';
+
+  @override
+  String get reminderModeNotification => 'Benachrichtigung';
+
+  @override
+  String get reminderModeAlarm => 'Wecker';
+
+  @override
+  String get testAlarm => 'Wecker testen';
+
+  @override
+  String get testAlarmSent => 'Vollbild-Alarmtest gesendet';
+
+  @override
+  String get stopAlarm => 'Wecker stoppen';
+
+  @override
+  String get snooze => 'Schlummern';
+
+  @override
+  String get snoozed10Min => 'Für 10 Minuten geschlummert';
+
+  @override
+  String get fullScreenAlarmPermission => 'Vollbild-Alarm-Berechtigung';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Erlauben Sie dem Wecker, den Bildschirm bei gesperrtem Telefon zu aktivieren';
+
+  @override
+  String get grantPermission => 'Berechtigung erteilen';
+
+  @override
+  String get adhanSound => 'Authentischer Adhan';
+
+  @override
+  String get batteryOptimizationTitle => 'Ausnahme von Akku-Optimierung';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Ermöglichen Sie der App, im Hintergrund zu laufen, um pünktliche Gebetsalarme sicherzustellen';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Gebetserinnerungs-Leitfaden & Einrichtung';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Weckalarme, Adhan-Ton und Berechtigungen konfigurieren';
+
+  @override
+  String get neverMissAPrayer => 'Verpassen Sie kein Gebet';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Wählen Sie zwischen Vollbild-Alarmen mit Adhan oder sanften Benachrichtigungen';
+
+  @override
+  String get howRemindersWork => 'Wie Erinnerungen funktionieren';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Vollbild-Alarm';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Aktiviert den Bildschirm über dem Sperrbildschirm mit Adhan, Kalligrafie und Stopp/Schlummern. Perfekt für Fadschr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Sanfte Benachrichtigung';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Standard-Banner mit Ton. Unaufdringlich und ideal für Arbeitszeiten.';
+
+  @override
+  String get presetBalanced => 'Ausgewogen';
+
+  @override
+  String get presetBalancedSubtitle =>
+      'Fadschr-Wecker ⏰ + Andere Benachrichtigung 🔔';
+
+  @override
+  String get presetAllAlarms => 'Alle Alarme';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'Vollbild-Alarm für alle Gebete';
+
+  @override
+  String get presetAllNotifications => 'Alle Benachrichtigungen';
+
+  @override
+  String get presetAllNotificationsSubtitle =>
+      'Nur sanfte Banner-Benachrichtigungen';
+
+  @override
+  String get saveAndReturn => 'Speichern & Zurück';
+
+  @override
+  String get saveAndGetStarted => 'Speichern & Loslegen';
+
+  @override
+  String get granted => 'Gewährt';
+
+  @override
+  String get requiredPermissions => 'Erforderliche Berechtigungen';
+
+  @override
+  String get skip => 'Überspringen';
+
+  @override
+  String get skipForNow => 'Vorerst überspringen';
+
+  @override
+  String get exactAlarmPermission => 'Genaue Alarme';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Löst Benachrichtigungen genau zu den Gebetszeiten aus';
+
+  @override
+  String get appDefaultTone => 'Standard-App-Ton';
+
+  @override
+  String get systemAlarmTone => 'Systemalarm-Ton';
 }

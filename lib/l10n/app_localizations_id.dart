@@ -1872,4 +1872,130 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get quickPresets => 'Pilihan Cepat';
+
+  @override
+  String get reminderModeOff => 'Mati';
+
+  @override
+  String get reminderModeNotification => 'Notifikasi';
+
+  @override
+  String get reminderModeAlarm => 'Alarm';
+
+  @override
+  String get testAlarm => 'Uji Alarm';
+
+  @override
+  String get testAlarmSent => 'Uji alarm layar penuh terkirim';
+
+  @override
+  String get stopAlarm => 'Hentikan Alarm';
+
+  @override
+  String get snooze => 'Tunda';
+
+  @override
+  String get snoozed10Min => 'Ditunda selama 10 menit';
+
+  @override
+  String get fullScreenAlarmPermission => 'Izin Alarm Layar Penuh';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Izinkan alarm mengaktifkan layar saat ponsel terkunci';
+
+  @override
+  String get grantPermission => 'Beri Izin';
+
+  @override
+  String get adhanSound => 'Adzan Otentik';
+
+  @override
+  String get batteryOptimizationTitle => 'Pengecualian Optimasi Baterai';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Izinkan aplikasi berjalan di latar belakang agar alarm sholat berbunyi tepat waktu';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Panduan & Pengaturan Pengingat Sholat';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Konfigurasi alarm bangun, suara adzan, dan izin';
+
+  @override
+  String get neverMissAPrayer => 'Jangan Pernah Lewatkan Sholat';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Pilih antara Alarm Layar Penuh dengan Adzan atau Notifikasi Lembut';
+
+  @override
+  String get howRemindersWork => 'Cara Kerja Pengingat';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Alarm Layar Penuh';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Membangunkan layar di atas layar kunci dengan Adzan, kaligrafi, dan Berhenti/Tunda. Sangat cocok untuk Subuh.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Notifikasi Lembut';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Banner notifikasi standar dengan suara. Tidak mengganggu saat jam kerja.';
+
+  @override
+  String get presetBalanced => 'Seimbang';
+
+  @override
+  String get presetBalancedSubtitle => 'Alarm Subuh ⏰ + Lainnya Notifikasi 🔔';
+
+  @override
+  String get presetAllAlarms => 'Semua Alarm';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Alarm Layar Penuh untuk semua waktu sholat';
+
+  @override
+  String get presetAllNotifications => 'Semua Notifikasi';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Hanya notifikasi banner lembut';
+
+  @override
+  String get saveAndReturn => 'Simpan & Kembali';
+
+  @override
+  String get saveAndGetStarted => 'Simpan & Mulai';
+
+  @override
+  String get granted => 'Diberikan';
+
+  @override
+  String get requiredPermissions => 'Izin yang Diperlukan';
+
+  @override
+  String get skip => 'Lewati';
+
+  @override
+  String get skipForNow => 'Lewati sekarang';
+
+  @override
+  String get exactAlarmPermission => 'Alarm Tepat';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Memicu notifikasi tepat pada waktu shalat';
+
+  @override
+  String get appDefaultTone => 'Nada Default Aplikasi';
+
+  @override
+  String get systemAlarmTone => 'Nada Alarm Sistem';
 }

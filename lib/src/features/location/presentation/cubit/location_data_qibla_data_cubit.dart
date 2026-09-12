@@ -103,9 +103,11 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? jsonLocation = sharedPreferences.getString("user_location");
     if (jsonLocation == null) {
-      jsonLocation = Hive.box("user").get("user_location", defaultValue: null);
-      if (jsonLocation != null) {
-        await sharedPreferences.setString("user_location", jsonLocation);
+      if (Hive.isBoxOpen("user")) {
+        jsonLocation = Hive.box("user").get("user_location", defaultValue: null);
+        if (jsonLocation != null) {
+          await sharedPreferences.setString("user_location", jsonLocation);
+        }
       }
     }
 

@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 4.1.0+96
+version: 4.2.0+101
 
 environment:
   sdk: ^3.10.0
@@ -22,7 +22,7 @@ dependencies:
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.273
   intl: ^0.20.2
-  html: ^0.15.5
+  html: 0.15.6
   http: ^1.4.0
   archive: ^4.0.5
   meta: ^1.18.0
@@ -49,12 +49,12 @@ dependencies:
   share_plus: ^13.1.0
   flutter_html: ^3.0.0
   visibility_detector: ^0.4.0+2
-  cached_network_image: ^3.4.1
+  cached_network_image: ^4.0.0
   screenshot: ^3.0.0
   device_info_plus: ^13.1.0
   package_info_plus: ^10.1.0
   uuid: ^4.5.1
-  flex_color_picker: ^3.7.1
+  flex_color_picker: ^4.0.0
   window_manager: ^0.5.0
   awesome_notifications: ^0.12.1
   path: ^1.9.1

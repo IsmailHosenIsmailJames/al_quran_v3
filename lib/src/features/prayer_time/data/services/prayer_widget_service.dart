@@ -1,4 +1,5 @@
 import "dart:convert";
+import "dart:io";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
@@ -23,6 +24,7 @@ class PrayerWidgetService {
 
   /// Initializes HomeWidget configuration (App Group ID for iOS).
   static Future<void> init() async {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return;
     if (_isInitialized) return;
     try {
       await HomeWidget.setAppGroupId(appGroupId);
@@ -38,6 +40,7 @@ class PrayerWidgetService {
     DateTime? currentTime,
     String? locationNameOverride,
   }) async {
+    if (Platform.environment.containsKey('FLUTTER_TEST')) return;
     try {
       await init();
 

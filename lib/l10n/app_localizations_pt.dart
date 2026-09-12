@@ -1895,4 +1895,130 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get quickPresets => 'Predefinições rápidas';
+
+  @override
+  String get reminderModeOff => 'Desligado';
+
+  @override
+  String get reminderModeNotification => 'Notificação';
+
+  @override
+  String get reminderModeAlarm => 'Alarme';
+
+  @override
+  String get testAlarm => 'Testar alarme';
+
+  @override
+  String get testAlarmSent => 'Teste de alarme em tela cheia enviado';
+
+  @override
+  String get stopAlarm => 'Parar alarme';
+
+  @override
+  String get snooze => 'Soneca';
+
+  @override
+  String get snoozed10Min => 'Adiado por 10 minutos';
+
+  @override
+  String get fullScreenAlarmPermission => 'Permissão de alarme em tela cheia';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Permitir que os alarmes ativem a tela quando o telefone estiver bloqueado';
+
+  @override
+  String get grantPermission => 'Conceder permissão';
+
+  @override
+  String get adhanSound => 'Adhan autêntico';
+
+  @override
+  String get batteryOptimizationTitle => 'Isenção de otimização de bateria';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Permitir que o aplicativo funcione em segundo plano para garantir alarmes de oração no horário';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Guia e configuração de lembretes de oração';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Configurar alarmes de despertar, som do Adhan e permissões';
+
+  @override
+  String get neverMissAPrayer => 'Nunca perca uma oração';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Escolha entre alarmes de tela cheia com o Adhan ou notificações suaves';
+
+  @override
+  String get howRemindersWork => 'Como funcionam os lembretes';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Alarme em tela cheia';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Ativa a tela sobre o bloqueio com o Adhan, caligrafia e Parar/Soneca. Perfeito para Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Notificação suave';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Banner de notificação padrão com som. Não intrusivo para o trabalho.';
+
+  @override
+  String get presetBalanced => 'Equilibrado';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Alarme ⏰ + Outras Notificação 🔔';
+
+  @override
+  String get presetAllAlarms => 'Todos os alarmes';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Alarme em tela cheia para todas as orações';
+
+  @override
+  String get presetAllNotifications => 'Todas as notificações';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Apenas notificações suaves';
+
+  @override
+  String get saveAndReturn => 'Salvar e voltar';
+
+  @override
+  String get saveAndGetStarted => 'Salvar e começar';
+
+  @override
+  String get granted => 'Concedido';
+
+  @override
+  String get requiredPermissions => 'Permissões necessárias';
+
+  @override
+  String get skip => 'Pular';
+
+  @override
+  String get skipForNow => 'Pular por enquanto';
+
+  @override
+  String get exactAlarmPermission => 'Alarmes exatos';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Dispara notificações exatamente nos horários de oração';
+
+  @override
+  String get appDefaultTone => 'Tom padrão do app';
+
+  @override
+  String get systemAlarmTone => 'Tom de alarme do sistema';
 }

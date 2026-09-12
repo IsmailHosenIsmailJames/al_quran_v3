@@ -1883,4 +1883,130 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get quickPresets => 'Cài đặt nhanh';
+
+  @override
+  String get reminderModeOff => 'Tắt';
+
+  @override
+  String get reminderModeNotification => 'Thông báo';
+
+  @override
+  String get reminderModeAlarm => 'Báo thức';
+
+  @override
+  String get testAlarm => 'Kiểm tra báo thức';
+
+  @override
+  String get testAlarmSent => 'Đã gửi kiểm tra báo thức toàn màn hình';
+
+  @override
+  String get stopAlarm => 'Dừng báo thức';
+
+  @override
+  String get snooze => 'Báo lại';
+
+  @override
+  String get snoozed10Min => 'Đã báo lại trong 10 phút';
+
+  @override
+  String get fullScreenAlarmPermission => 'Quyền báo thức toàn màn hình';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Cho phép báo thức đánh thức màn hình khi điện thoại bị khóa';
+
+  @override
+  String get grantPermission => 'Cấp quyền';
+
+  @override
+  String get adhanSound => 'Âm Adhan';
+
+  @override
+  String get batteryOptimizationTitle => 'Miễn trừ tối ưu hóa pin';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Cho phép ứng dụng chạy dưới nền để đảm bảo báo thức giờ cầu nguyện kích hoạt đúng giờ';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Hướng dẫn & Thiết lập nhắc nhở cầu nguyện';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Định cấu hình báo thức thức dậy, âm thanh Adhan và quyền';
+
+  @override
+  String get neverMissAPrayer => 'Không bao giờ bỏ lỡ giờ cầu nguyện';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Chọn giữa Báo thức toàn màn hình với Adhan hoặc Thông báo nhẹ nhàng';
+
+  @override
+  String get howRemindersWork => 'Cách lời nhắc hoạt động';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Báo thức toàn màn hình';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Bật màn hình trên màn hình khóa với Adhan và nút Dừng/Báo lại. Lý tưởng cho giờ Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Thông báo nhẹ nhàng';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Biểu ngữ thông báo chuẩn có âm thanh. Không gây phiền khi làm việc.';
+
+  @override
+  String get presetBalanced => 'Cân bằng';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Báo thức ⏰ + Khác Thông báo 🔔';
+
+  @override
+  String get presetAllAlarms => 'Tất cả báo thức';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Báo thức toàn màn hình cho tất cả giờ cầu nguyện';
+
+  @override
+  String get presetAllNotifications => 'Tất cả thông báo';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Chỉ thông báo nhẹ nhàng';
+
+  @override
+  String get saveAndReturn => 'Lưu & Quay lại';
+
+  @override
+  String get saveAndGetStarted => 'Lưu & Bắt đầu';
+
+  @override
+  String get granted => 'Đã cấp';
+
+  @override
+  String get requiredPermissions => 'Quyền được yêu cầu';
+
+  @override
+  String get skip => 'Bỏ qua';
+
+  @override
+  String get skipForNow => 'Bỏ qua bây giờ';
+
+  @override
+  String get exactAlarmPermission => 'Báo thức chính xác';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Kích hoạt thông báo chính xác vào giờ cầu nguyện';
+
+  @override
+  String get appDefaultTone => 'Âm mặc định ứng dụng';
+
+  @override
+  String get systemAlarmTone => 'Chuông báo thức hệ thống';
 }

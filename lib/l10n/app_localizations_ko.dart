@@ -1832,4 +1832,123 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get quickPresets => '빠른 사전 설정';
+
+  @override
+  String get reminderModeOff => '꺼짐';
+
+  @override
+  String get reminderModeNotification => '알림';
+
+  @override
+  String get reminderModeAlarm => '알람';
+
+  @override
+  String get testAlarm => '알람 테스트';
+
+  @override
+  String get testAlarmSent => '전체 화면 알람 테스트 전송됨';
+
+  @override
+  String get stopAlarm => '알람 중지';
+
+  @override
+  String get snooze => '스누즈';
+
+  @override
+  String get snoozed10Min => '10분 동안 스누즈됨';
+
+  @override
+  String get fullScreenAlarmPermission => '전체 화면 알람 권한';
+
+  @override
+  String get fullScreenAlarmPermissionDesc => '휴대폰이 잠겨 있을 때 알람이 화면을 켜도록 허용';
+
+  @override
+  String get grantPermission => '권한 허용';
+
+  @override
+  String get adhanSound => '아잔';
+
+  @override
+  String get batteryOptimizationTitle => '배터리 최적화 예외';
+
+  @override
+  String get batteryOptimizationDesc => '기도 알람이 제시간에 울리도록 백그라운드 실행을 허용하세요';
+
+  @override
+  String get prayerGuidanceSetupTitle => '기도 알림 가이드 및 설정';
+
+  @override
+  String get prayerGuidanceSetupDesc => '기상 알람, 아잔 소리 및 권한 구성';
+
+  @override
+  String get neverMissAPrayer => '기도를 놓치지 마세요';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      '아잔이 포함된 전체 화면 알람 또는 부드러운 알림 중에서 선택하세요';
+
+  @override
+  String get howRemindersWork => '알림 작동 방식';
+
+  @override
+  String get fullScreenAlarmModeTitle => '전체 화면 알람';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      '아잔, 캘리그래피 및 중지/스누즈로 잠금 화면 위로 화면을 켭니다. 파즈르에 적합합니다.';
+
+  @override
+  String get gentleNotificationModeTitle => '부드러운 알림';
+
+  @override
+  String get gentleNotificationModeDesc => '소리가 포함된 기본 배너 알림. 근무 시간에 적합합니다.';
+
+  @override
+  String get presetBalanced => '균형';
+
+  @override
+  String get presetBalancedSubtitle => '파즈르 알람 ⏰ + 기타 알림 🔔';
+
+  @override
+  String get presetAllAlarms => '모든 알람';
+
+  @override
+  String get presetAllAlarmsSubtitle => '모든 기도에 전체 화면 알람';
+
+  @override
+  String get presetAllNotifications => '모든 알림';
+
+  @override
+  String get presetAllNotificationsSubtitle => '부드러운 배너 알림만';
+
+  @override
+  String get saveAndReturn => '저장 및 돌아가기';
+
+  @override
+  String get saveAndGetStarted => '저장 및 시작하기';
+
+  @override
+  String get granted => '허용됨';
+
+  @override
+  String get requiredPermissions => '필요한 권한';
+
+  @override
+  String get skip => '건너뛰기';
+
+  @override
+  String get skipForNow => '지금은 건너뛰기';
+
+  @override
+  String get exactAlarmPermission => '정확한 알람';
+
+  @override
+  String get exactAlarmPermissionDesc => '기도 시간에 정확히 알림을 울립니다';
+
+  @override
+  String get appDefaultTone => '앱 기본음';
+
+  @override
+  String get systemAlarmTone => '시스템 알람음';
 }

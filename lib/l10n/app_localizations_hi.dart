@@ -1876,4 +1876,128 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get quickPresets => 'त्वरित प्रीसेट';
+
+  @override
+  String get reminderModeOff => 'बंद';
+
+  @override
+  String get reminderModeNotification => 'अधिसूचना';
+
+  @override
+  String get reminderModeAlarm => 'अलार्म';
+
+  @override
+  String get testAlarm => 'अलार्म परीक्षण';
+
+  @override
+  String get testAlarmSent => 'फुल-स्क्रीन अलार्म टेस्ट भेजा गया';
+
+  @override
+  String get stopAlarm => 'अलार्म बंद करें';
+
+  @override
+  String get snooze => 'स्नूज़';
+
+  @override
+  String get snoozed10Min => '10 मिनट के लिए स्नूज़ किया गया';
+
+  @override
+  String get fullScreenAlarmPermission => 'फुल-स्क्रीन अलार्म अनुमति';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'फ़ोन लॉक होने पर अलार्म को स्क्रीन जगाने की अनुमति दें';
+
+  @override
+  String get grantPermission => 'अनुमति दें';
+
+  @override
+  String get adhanSound => 'अज़ान';
+
+  @override
+  String get batteryOptimizationTitle => 'बैटरी ऑप्टিमाइज़ेशन छूट';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'समय पर नमाज़ अलार्म सुनिश्चित करने के लिए ऐप को बैकग्राउंड में चलने दें';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'नमाज़ अनुस्मारक गाइड और सेटअप';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'अलार्म, अज़ान ध्वनि और अनुमतियाँ कॉन्फ़िगर करें';
+
+  @override
+  String get neverMissAPrayer => 'कोई भी नमाज़ न छोड़ें';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'अज़ान के साथ फुल-स्क्रीन अलार्म या सौम्य सूचनाओं में से चुनें';
+
+  @override
+  String get howRemindersWork => 'अनुस्मारक कैसे काम करते हैं';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'फुल-स्क्रीन अलार्म';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'अज़ान, सुलेख और स्टॉप/स्नूज़ के साथ स्क्रीन को जगाता है। फ़ज्र के लिए उत्तम।';
+
+  @override
+  String get gentleNotificationModeTitle => 'सौम्य सूचना';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'ध्वनि के साथ सामान्य सूचना बैनर। काम के घंटों के लिए उत्तम।';
+
+  @override
+  String get presetBalanced => 'संतुलित';
+
+  @override
+  String get presetBalancedSubtitle => 'फ़ज्र अलार्म ⏰ + अन्य सूचना 🔔';
+
+  @override
+  String get presetAllAlarms => 'सभी अलार्म';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'सभी नमाज़ों के लिए फुल-स्क्रीन अलार्म';
+
+  @override
+  String get presetAllNotifications => 'सभी सूचनाएं';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'केवल सामान्य सूचनाएं';
+
+  @override
+  String get saveAndReturn => 'सहेजें और वापस जाएं';
+
+  @override
+  String get saveAndGetStarted => 'सहेजें और शुरू करें';
+
+  @override
+  String get granted => 'अनुमति दी गई';
+
+  @override
+  String get requiredPermissions => 'आवश्यक अनुमतियाँ';
+
+  @override
+  String get skip => 'छोड़ें';
+
+  @override
+  String get skipForNow => 'अभी के लिए छोड़ें';
+
+  @override
+  String get exactAlarmPermission => 'सटीक अलार्म';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'नमाज़ के समय पर सटीक सूचनाएं चालू करता है';
+
+  @override
+  String get appDefaultTone => 'ऐप डिफ़ॉल्ट टोन';
+
+  @override
+  String get systemAlarmTone => 'सिस्टम अलार्म टोन';
 }

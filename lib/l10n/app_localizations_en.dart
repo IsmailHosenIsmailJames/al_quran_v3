@@ -1873,4 +1873,129 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quickPresets => 'Quick Presets';
+
+  @override
+  String get reminderModeOff => 'Off';
+
+  @override
+  String get reminderModeNotification => 'Notification';
+
+  @override
+  String get reminderModeAlarm => 'Alarm';
+
+  @override
+  String get testAlarm => 'Test Alarm';
+
+  @override
+  String get testAlarmSent => 'Full-screen alarm test sent';
+
+  @override
+  String get stopAlarm => 'Stop Alarm';
+
+  @override
+  String get snooze => 'Snooze';
+
+  @override
+  String get snoozed10Min => 'Snoozed for 10 minutes';
+
+  @override
+  String get fullScreenAlarmPermission => 'Full-Screen Alarm Permission';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Allow alarms to wake up the screen when your phone is locked';
+
+  @override
+  String get grantPermission => 'Grant Permission';
+
+  @override
+  String get adhanSound => 'Authentic Adhan';
+
+  @override
+  String get batteryOptimizationTitle => 'Battery Optimization Exemption';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Allow app to run in background to ensure prayer alarms trigger on time on your device';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'Prayer Reminders Guide & Setup';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Configure waking alarms, Adhan sound, and permissions';
+
+  @override
+  String get neverMissAPrayer => 'Never Miss a Prayer';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Choose between waking Full-Screen Alarms with the Adhan or gentle Heads-Up Notifications';
+
+  @override
+  String get howRemindersWork => 'How Reminders Work';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Full-Screen Alarm';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Wakes your screen over lockscreen with the Adhan, Arabic calligraphy, and Stop/Snooze buttons. Perfect for Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Gentle Notification';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Standard notification banner with reminder sound. Non-intrusive and ideal for work hours.';
+
+  @override
+  String get presetBalanced => 'Balanced';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Alarm ⏰ + Others Notification 🔔';
+
+  @override
+  String get presetAllAlarms => 'All Alarms';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'Full-Screen Alarm for all prayers';
+
+  @override
+  String get presetAllNotifications => 'All Notifications';
+
+  @override
+  String get presetAllNotificationsSubtitle =>
+      'Gentle banner notifications only';
+
+  @override
+  String get saveAndReturn => 'Save & Return';
+
+  @override
+  String get saveAndGetStarted => 'Save & Get Started';
+
+  @override
+  String get granted => 'Granted';
+
+  @override
+  String get requiredPermissions => 'Required Permissions';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get skipForNow => 'Skip for now';
+
+  @override
+  String get exactAlarmPermission => 'Exact Alarms';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Triggers notifications precisely at prayer times';
+
+  @override
+  String get appDefaultTone => 'App Default Tone';
+
+  @override
+  String get systemAlarmTone => 'System Alarm Tone';
 }

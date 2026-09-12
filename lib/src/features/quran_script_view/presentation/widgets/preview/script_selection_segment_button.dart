@@ -66,7 +66,7 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                   onSelectionChanged: (value) async {
                     await Hive.box(
                       "user",
-                    ).put("selected_script", value.first.name);
+                    ).put("selected_quran_script_type", value.first.name);
                     await QuranScriptFunction.loadScript(value.first);
                     if (context.mounted) {
                       context.read<QuranViewCubit>().changeQuranScriptType(

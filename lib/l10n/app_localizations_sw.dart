@@ -1888,4 +1888,129 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get quickPresets => 'Chaguo za Haraka';
+
+  @override
+  String get reminderModeOff => 'Zima';
+
+  @override
+  String get reminderModeNotification => 'Arifa';
+
+  @override
+  String get reminderModeAlarm => 'Kengele';
+
+  @override
+  String get testAlarm => 'Jaribu Kengele';
+
+  @override
+  String get testAlarmSent => 'Jaribio la kengele ya skrini nzima limetumwa';
+
+  @override
+  String get stopAlarm => 'Simamisha Kengele';
+
+  @override
+  String get snooze => 'Ahirisha';
+
+  @override
+  String get snoozed10Min => 'Imeahirishwa kwa dakika 10';
+
+  @override
+  String get fullScreenAlarmPermission => 'Ruhusa ya Kengele ya Skrini Nzima';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Ruhusu kengele kuamsha skrini wakati simu imefungwa';
+
+  @override
+  String get grantPermission => 'Toa Ruhusa';
+
+  @override
+  String get adhanSound => 'Adhana Halisi';
+
+  @override
+  String get batteryOptimizationTitle => 'Msamaha wa Betri';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Ruhusu programu ifanye kazi chinichini ili kuhakikisha kengele za sala zinalia kwa wakati';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Mwongozo na Usanidi wa Vikumbusho vya Sala';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Sanidi kengele za kuamka, sauti ya adhana na ruhusa';
+
+  @override
+  String get neverMissAPrayer => 'Usikose Sala Kamwe';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Chagua kati ya kengele za skrini nzima zenye adhana au arifa za upole';
+
+  @override
+  String get howRemindersWork => 'Jinsi Vikumbusho Vinavyofanya Kazi';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Kengele ya Skrini Nzima';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Huamsha skrini juu ya skrini iliyofungwa kwa adhana na vitufe. Nzuri kwa Alfajiri.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Arifa ya Upole';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Bango la kawaida la arifa lenye sauti. Zuri wakati wa kazi.';
+
+  @override
+  String get presetBalanced => 'Sawazishwa';
+
+  @override
+  String get presetBalancedSubtitle => 'Alfajiri Kengele ⏰ + Nyingine Arifa 🔔';
+
+  @override
+  String get presetAllAlarms => 'Kengele Zote';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'Kengele ya skrini nzima kwa sala zote';
+
+  @override
+  String get presetAllNotifications => 'Arifa Zote';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Arifa za upole pekee';
+
+  @override
+  String get saveAndReturn => 'Hifadhi na Urudi';
+
+  @override
+  String get saveAndGetStarted => 'Hifadhi na Anza';
+
+  @override
+  String get granted => 'Imeruhusiwa';
+
+  @override
+  String get requiredPermissions => 'Ruhusa Zinazohitajika';
+
+  @override
+  String get skip => 'Ruka';
+
+  @override
+  String get skipForNow => 'Ruka kwa sasa';
+
+  @override
+  String get exactAlarmPermission => 'Kengele Sahihi';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Hutoa arifa kwa usahihi wakati wa sala';
+
+  @override
+  String get appDefaultTone => 'Mlio Chaguomsingi wa Programu';
+
+  @override
+  String get systemAlarmTone => 'Mlio wa Kengele ya Mfumo';
 }

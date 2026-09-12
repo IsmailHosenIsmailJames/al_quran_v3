@@ -1894,4 +1894,131 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get quickPresets => 'Ajustes rápidos';
+
+  @override
+  String get reminderModeOff => 'Desactivado';
+
+  @override
+  String get reminderModeNotification => 'Notificación';
+
+  @override
+  String get reminderModeAlarm => 'Alarma';
+
+  @override
+  String get testAlarm => 'Probar alarma';
+
+  @override
+  String get testAlarmSent => 'Prueba de alarma de pantalla completa enviada';
+
+  @override
+  String get stopAlarm => 'Detener alarma';
+
+  @override
+  String get snooze => 'Posponer';
+
+  @override
+  String get snoozed10Min => 'Pospuesto por 10 minutos';
+
+  @override
+  String get fullScreenAlarmPermission =>
+      'Permiso de alarma de pantalla completa';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Permitir que las alarmas activen la pantalla cuando el teléfono está bloqueado';
+
+  @override
+  String get grantPermission => 'Conceder permiso';
+
+  @override
+  String get adhanSound => 'Adhan auténtico';
+
+  @override
+  String get batteryOptimizationTitle => 'Exención de optimización de batería';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Permitir que la app se ejecute en segundo plano para garantizar alarmas de oración puntuales';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Guía y configuración de recordatorios de oración';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Configurar alarmas, sonido de Adhan y permisos';
+
+  @override
+  String get neverMissAPrayer => 'Nunca te pierdas una oración';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Elija entre alarmas de pantalla completa con el Adhan o notificaciones suaves';
+
+  @override
+  String get howRemindersWork => 'Cómo funcionan los recordatorios';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Alarma de pantalla completa';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Activa la pantalla sobre el bloqueo con el Adhan, caligrafía y Parar/Posponer. Ideal para Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Notificación suave';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Banner estándar con sonido. No intrusivo e ideal para horas de trabajo.';
+
+  @override
+  String get presetBalanced => 'Equilibrado';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Alarma ⏰ + Otras Notificación 🔔';
+
+  @override
+  String get presetAllAlarms => 'Todas las alarmas';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Alarma de pantalla completa para todas las oraciones';
+
+  @override
+  String get presetAllNotifications => 'Todas las notificaciones';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Solo notificaciones suaves';
+
+  @override
+  String get saveAndReturn => 'Guardar y volver';
+
+  @override
+  String get saveAndGetStarted => 'Guardar y comenzar';
+
+  @override
+  String get granted => 'Concedido';
+
+  @override
+  String get requiredPermissions => 'Permisos requeridos';
+
+  @override
+  String get skip => 'Saltar';
+
+  @override
+  String get skipForNow => 'Omitir por ahora';
+
+  @override
+  String get exactAlarmPermission => 'Alarmas exactas';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Activa notificaciones precisamente a las horas de oración';
+
+  @override
+  String get appDefaultTone => 'Tono predeterminado de la app';
+
+  @override
+  String get systemAlarmTone => 'Tono de alarma del sistema';
 }

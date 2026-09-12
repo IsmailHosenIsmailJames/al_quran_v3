@@ -6,11 +6,14 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioFocusRequest
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
@@ -23,6 +26,32 @@ class MainActivity : AudioServiceActivity() {
     private var pendingResult: MethodChannel.Result? = null
     private var currentRingtone: Ringtone? = null
     private var currentMediaPlayer: MediaPlayer? = null
+    private var audioFocusRequest: AudioFocusRequest? = null
+
+    private val audioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
+        when (focusChange) {
+            AudioManager.AUDIOFOCUS_LOSS,
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                stopRingtone()
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            @Suppress("DEPRECATION")
+            window.addFlags(
+                android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            )
+        }
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -45,6 +74,21 @@ class MainActivity : AudioServiceActivity() {
                     }
                     "createOrUpdateNotificationChannel" -> {
                         createOrUpdateNotificationChannel(call, result)
+                    }
+                    "canUseFullScreenIntent" -> {
+                        canUseFullScreenIntent(result)
+                    }
+                    "openFullScreenIntentSettings" -> {
+                        openFullScreenIntentSettings(result)
+                    }
+                    "isIgnoringBatteryOptimizations" -> {
+                        isIgnoringBatteryOptimizations(result)
+                    }
+                    "requestIgnoreBatteryOptimizations" -> {
+                        requestIgnoreBatteryOptimizations(result)
+                    }
+                    "isInCall" -> {
+                        isInCall(result)
                     }
                     else -> {
                         result.notImplemented()
@@ -114,41 +158,93 @@ class MainActivity : AudioServiceActivity() {
     }
 
     private fun playRingtone(call: MethodCall, result: MethodChannel.Result) {
-        stopRingtone()
         val uriStr = call.argument<String>("uri")
+        val isAlarm = call.argument<Boolean>("isAlarm") ?: false
+        val loop = call.argument<Boolean>("loop") ?: false
+        val volume = call.argument<Double>("volume") ?: 1.0
 
-        try {
-            if (uriStr.isNullOrEmpty() || uriStr == "default" || uriStr == "resource://raw/notification_sound") {
-                val rawResId = resources.getIdentifier("notification_sound", "raw", packageName)
-                if (rawResId != 0) {
-                    currentMediaPlayer = MediaPlayer.create(this, rawResId)?.apply {
-                        setOnCompletionListener {
-                            stopRingtone()
+        Thread {
+            try {
+                stopRingtone()
+
+                if (isInCallInternal()) {
+                    runOnUiThread { result.success(false) }
+                    return@Thread
+                }
+
+                val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+                val audioAttributes = AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(if (isAlarm) AudioAttributes.USAGE_ALARM else AudioAttributes.USAGE_NOTIFICATION)
+                    .apply {
+                        if (isAlarm) {
+                            setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
                         }
-                        start()
                     }
-                    result.success(true)
-                    return
-                }
-            }
+                    .build()
 
-            val uri = when (uriStr) {
-                "system_alarm" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                "system_ringtone" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-                "system_notification" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                else -> if (!uriStr.isNullOrEmpty()) Uri.parse(uriStr) else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            }
-
-            currentRingtone = RingtoneManager.getRingtone(applicationContext, uri)?.apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    isLooping = false
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val req = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+                        .setAudioAttributes(audioAttributes)
+                        .setOnAudioFocusChangeListener(audioFocusChangeListener)
+                        .build()
+                    audioFocusRequest = req
+                    audioManager.requestAudioFocus(req)
+                } else {
+                    @Suppress("DEPRECATION")
+                    audioManager.requestAudioFocus(
+                        audioFocusChangeListener,
+                        if (isAlarm) AudioManager.STREAM_ALARM else AudioManager.STREAM_NOTIFICATION,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT
+                    )
                 }
-                play()
+
+                val isAdhan = uriStr == "adhan" || uriStr == "resource://raw/adhan"
+                val isDefault = uriStr.isNullOrEmpty() || uriStr == "default" || uriStr == "default_sound" || uriStr == "resource://raw/notification_sound"
+
+                if (isAdhan || isDefault) {
+                    val resName = if (isAdhan) "adhan" else "notification_sound"
+                    val rawResId = resources.getIdentifier(resName, "raw", packageName)
+                    if (rawResId != 0) {
+                        currentMediaPlayer = MediaPlayer.create(this@MainActivity, rawResId)?.apply {
+                            setAudioAttributes(audioAttributes)
+                            setVolume(volume.toFloat(), volume.toFloat())
+                            isLooping = loop
+                            setOnCompletionListener {
+                                if (!loop) {
+                                    stopRingtone()
+                                }
+                            }
+                            start()
+                        }
+                        runOnUiThread { result.success(true) }
+                        return@Thread
+                    }
+                }
+
+                val uri = when (uriStr) {
+                    "system_alarm" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                    "system_ringtone" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+                    "system_notification" -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                    else -> if (!uriStr.isNullOrEmpty()) Uri.parse(uriStr) else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                }
+
+                currentRingtone = RingtoneManager.getRingtone(applicationContext, uri)?.apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        this.audioAttributes = audioAttributes
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        this.isLooping = loop
+                        this.volume = volume.toFloat()
+                    }
+                    play()
+                }
+                runOnUiThread { result.success(true) }
+            } catch (e: Exception) {
+                runOnUiThread { result.error("PLAY_ERROR", e.message, null) }
             }
-            result.success(true)
-        } catch (e: Exception) {
-            result.error("PLAY_ERROR", e.message, null)
-        }
+        }.start()
     }
 
     private fun stopRingtone() {
@@ -162,24 +258,88 @@ class MainActivity : AudioServiceActivity() {
             currentMediaPlayer?.release()
             currentMediaPlayer = null
         } catch (_: Exception) {}
+
+        try {
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && audioFocusRequest != null) {
+                audioManager.abandonAudioFocusRequest(audioFocusRequest!!)
+                audioFocusRequest = null
+            } else {
+                @Suppress("DEPRECATION")
+                audioManager.abandonAudioFocus(audioFocusChangeListener)
+            }
+        } catch (_: Exception) {}
+    }
+
+    private fun isInCallInternal(): Boolean {
+        return try {
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            audioManager.mode == AudioManager.MODE_IN_CALL ||
+                    audioManager.mode == AudioManager.MODE_IN_COMMUNICATION ||
+                    audioManager.mode == AudioManager.MODE_RINGTONE
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    private fun isInCall(result: MethodChannel.Result) {
+        result.success(isInCallInternal())
+    }
+
+    private fun isIgnoringBatteryOptimizations(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            try {
+                val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+                result.success(powerManager.isIgnoringBatteryOptimizations(packageName))
+            } catch (e: Exception) {
+                result.success(true)
+            }
+        } else {
+            result.success(true)
+        }
+    }
+
+    private fun requestIgnoreBatteryOptimizations(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            try {
+                val intent = Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
+                    data = Uri.parse("package:$packageName")
+                }
+                startActivity(intent)
+                result.success(true)
+            } catch (e: Exception) {
+                result.error("BATTERY_ERROR", e.message, null)
+            }
+        } else {
+            result.success(true)
+        }
     }
 
     private fun getRingtones(result: MethodChannel.Result) {
-        try {
-            val ringtoneManager = RingtoneManager(this)
-            ringtoneManager.setType(RingtoneManager.TYPE_NOTIFICATION or RingtoneManager.TYPE_ALARM)
-            val cursor = ringtoneManager.cursor
-            val list = mutableListOf<Map<String, String>>()
+        Thread {
+            try {
+                val ringtoneManager = RingtoneManager(applicationContext)
+                ringtoneManager.setType(RingtoneManager.TYPE_NOTIFICATION or RingtoneManager.TYPE_ALARM)
+                val cursor = ringtoneManager.cursor
+                val list = mutableListOf<Map<String, String>>()
 
-            while (cursor.moveToNext()) {
-                val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
-                val uri = ringtoneManager.getRingtoneUri(cursor.position).toString()
-                list.add(mapOf("title" to title, "uri" to uri))
+                if (cursor != null) {
+                    while (cursor.moveToNext()) {
+                        val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
+                        val uri = ringtoneManager.getRingtoneUri(cursor.position)?.toString() ?: ""
+                        list.add(mapOf("title" to title, "uri" to uri))
+                    }
+                    cursor.close()
+                }
+                runOnUiThread {
+                    result.success(list)
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    result.error("QUERY_ERROR", e.message, null)
+                }
             }
-            result.success(list)
-        } catch (e: Exception) {
-            result.error("QUERY_ERROR", e.message, null)
-        }
+        }.start()
     }
 
     private fun createOrUpdateNotificationChannel(call: MethodCall, result: MethodChannel.Result) {
@@ -193,7 +353,15 @@ class MainActivity : AudioServiceActivity() {
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
                 val soundUri: Uri = when {
-                    soundUriStr.isNullOrEmpty() || soundUriStr == "default" || soundUriStr == "resource://raw/notification_sound" -> {
+                    soundUriStr == "adhan" || soundUriStr == "resource://raw/adhan" -> {
+                        val rawResId = resources.getIdentifier("adhan", "raw", packageName)
+                        if (rawResId != 0) {
+                            Uri.parse("android.resource://$packageName/$rawResId")
+                        } else {
+                            RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                        }
+                    }
+                    soundUriStr.isNullOrEmpty() || soundUriStr == "default" || soundUriStr == "default_sound" || soundUriStr == "resource://raw/notification_sound" -> {
                         val rawResId = resources.getIdentifier("notification_sound", "raw", packageName)
                         if (rawResId != 0) {
                             Uri.parse("android.resource://$packageName/$rawResId")
@@ -209,7 +377,12 @@ class MainActivity : AudioServiceActivity() {
 
                 val audioAttributes = AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .setUsage(if (isAlarm) AudioAttributes.USAGE_ALARM else AudioAttributes.USAGE_NOTIFICATION)
+                    .apply {
+                        if (isAlarm) {
+                            setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
+                        }
+                    }
                     .build()
 
                 // If channel exists, delete before recreating to ensure sound update is applied by Android OS
@@ -223,11 +396,14 @@ class MainActivity : AudioServiceActivity() {
                     channelName,
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
-                    description = "Notifications for prayer time reminders"
+                    description = if (isAlarm) "Full-screen alarm for prayer times" else "Notifications for prayer time reminders"
                     setSound(soundUri, audioAttributes)
                     enableVibration(true)
                     enableLights(true)
                     setShowBadge(true)
+                    if (isAlarm) {
+                        setBypassDnd(true)
+                    }
                 }
 
                 notificationManager.createNotificationChannel(channel)
@@ -237,6 +413,35 @@ class MainActivity : AudioServiceActivity() {
             }
         } else {
             result.success(true)
+        }
+    }
+
+    private fun canUseFullScreenIntent(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            try {
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                result.success(notificationManager.canUseFullScreenIntent())
+            } catch (e: Exception) {
+                result.success(true)
+            }
+        } else {
+            result.success(true)
+        }
+    }
+
+    private fun openFullScreenIntentSettings(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            try {
+                val intent = Intent(android.provider.Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT).apply {
+                    data = Uri.parse("package:$packageName")
+                }
+                startActivity(intent)
+                result.success(true)
+            } catch (e: Exception) {
+                result.error("SETTINGS_ERROR", e.message, null)
+            }
+        } else {
+            result.success(false)
         }
     }
 

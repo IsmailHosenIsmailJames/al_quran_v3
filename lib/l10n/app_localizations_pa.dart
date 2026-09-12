@@ -1873,4 +1873,127 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get quickPresets => 'ਤੁਰੰਤ ਪ੍ਰੀਸੈਟਸ';
+
+  @override
+  String get reminderModeOff => 'ਬੰਦ';
+
+  @override
+  String get reminderModeNotification => 'ਸੂਚਨਾ';
+
+  @override
+  String get reminderModeAlarm => 'ਅਲਾਰਮ';
+
+  @override
+  String get testAlarm => 'ਅਲਾਰਮ ਪਰਖੋ';
+
+  @override
+  String get testAlarmSent => 'ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਟੈਸਟ ਭੇਜਿਆ ਗਿਆ';
+
+  @override
+  String get stopAlarm => 'ਅਲਾਰਮ ਰੋਕੋ';
+
+  @override
+  String get snooze => 'ਸਨੂਜ਼';
+
+  @override
+  String get snoozed10Min => '10 ਮਿੰਟਾਂ ਲਈ ਸਨੂਜ਼ ਕੀਤਾ ਗਿਆ';
+
+  @override
+  String get fullScreenAlarmPermission => 'ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਆਗਿਆ';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'ਫੋਨ ਲੌਕ ਹੋਣ \'ਤੇ ਅਲਾਰਮ ਨੂੰ ਸਕ੍ਰੀਨ ਜਗਾਉਣ ਦੀ ਆਗਿਆ ਦਿਓ';
+
+  @override
+  String get grantPermission => 'ਆਗਿਆ ਦਿਓ';
+
+  @override
+  String get adhanSound => 'ਅਜ਼ਾਨ';
+
+  @override
+  String get batteryOptimizationTitle => 'ਬੈਟਰੀ ਓਪਟੀਮਾਈਜ਼ੇਸ਼ਨ ਛੋਟ';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'ਨਮਾਜ਼ ਦੇ ਅਲਾਰਮ ਸਮੇਂ ਸਿਰ ਵੱਜਣ ਲਈ ਐਪ ਨੂੰ ਬੈਕਗ੍ਰਾਊਂਡ ਵਿੱਚ ਚੱਲਣ ਦਿਓ';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'ਨਮਾਜ਼ ਰੀਮਾਈਂਡਰ ਗਾਈਡ ਅਤੇ ਸੈੱਟਅੱਪ';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'ਅਲਾਰਮ, ਅਜ਼ਾਨ ਆਵਾਜ਼ ਅਤੇ ਇਜਾਜ਼ਤਾਂ ਸੈੱਟ ਕਰੋ';
+
+  @override
+  String get neverMissAPrayer => 'ਕਦੇ ਵੀ ਨਮਾਜ਼ ਨਾ ਛੱਡੋ';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'ਅਜ਼ਾਨ ਵਾਲੇ ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ ਜਾਂ ਹਲਕੇ ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਵਿੱਚੋਂ ਚੁਣੋ';
+
+  @override
+  String get howRemindersWork => 'ਰੀਮਾਈਂਡਰ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'ਅਜ਼ਾਨ ਅਤੇ ਸਟਾਪ/ਸਨੂਜ਼ ਨਾਲ ਸਕ੍ਰੀਨ ਨੂੰ ਜਗਾਉਂਦਾ ਹੈ। ਫ਼ਜਰ ਲਈ ਸੰਪੂਰਨ।';
+
+  @override
+  String get gentleNotificationModeTitle => 'ਹਲਕਾ ਨੋਟੀਫਿਕੇਸ਼ਨ';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'ਆਵਾਜ਼ ਵਾਲਾ ਆਮ ਨੋਟੀਫਿਕੇਸ਼ਨ ਬੈਨਰ। ਕੰਮ ਦੇ ਸਮੇਂ ਲਈ ਵਧੀਆ।';
+
+  @override
+  String get presetBalanced => 'ਸੰਤੁਲਿਤ';
+
+  @override
+  String get presetBalancedSubtitle => 'ਫ਼ਜਰ ਅਲਾਰਮ ⏰ + ਬਾਕੀ ਨੋਟੀਫਿਕੇਸ਼ਨ 🔔';
+
+  @override
+  String get presetAllAlarms => 'ਸਾਰੇ ਅਲਾਰਮ';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'ਸਾਰੀਆਂ ਨਮਾਜ਼ਾਂ ਲਈ ਫੁੱਲ-ਸਕ੍ਰੀਨ ਅਲਾਰਮ';
+
+  @override
+  String get presetAllNotifications => 'ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'ਸਿਰਫ਼ ਹਲਕੇ ਨੋਟੀਫਿਕੇਸ਼ਨ';
+
+  @override
+  String get saveAndReturn => 'ਸੰਭਾਲੋ ਅਤੇ ਵਾਪਸ ਜਾਓ';
+
+  @override
+  String get saveAndGetStarted => 'ਸੰਭਾਲੋ ਅਤੇ ਸ਼ੁਰੂ ਕਰੋ';
+
+  @override
+  String get granted => 'ਆਗਿਆ ਦਿੱਤੀ ਗਈ';
+
+  @override
+  String get requiredPermissions => 'ਲੋੜੀਂਦੀਆਂ ਇਜਾਜ਼ਤਾਂ';
+
+  @override
+  String get skip => 'ਛੱਡੋ';
+
+  @override
+  String get skipForNow => 'ਹੁਣ ਲਈ ਛੱਡੋ';
+
+  @override
+  String get exactAlarmPermission => 'ਸਹੀ ਅਲਾਰਮ';
+
+  @override
+  String get exactAlarmPermissionDesc => 'ਨਮਾਜ਼ ਦੇ ਸਮੇਂ ਸਹੀ ਸੂਚਨਾਵਾਂ ਭੇਜਦਾ ਹੈ';
+
+  @override
+  String get appDefaultTone => 'ਐਪ ਡਿਫੌਲਟ ਟੋਨ';
+
+  @override
+  String get systemAlarmTone => 'ਸਿਸਟਮ ਅਲਾਰਮ ਟੋਨ';
 }
