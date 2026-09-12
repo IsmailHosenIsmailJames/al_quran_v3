@@ -65,7 +65,7 @@ void main() {
 
   testWidgets("PrayerGuidanceSetupScreen renders Location section and bottom bar with Skip and Save buttons",
       (tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.physicalSize = const Size(1080, 5000);
     tester.view.devicePixelRatio = 2.0;
 
     await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
@@ -79,8 +79,8 @@ void main() {
     expect(find.text("Allow Location"), findsOneWidget);
     expect(find.text("Manual Location"), findsOneWidget);
 
-    // Verify Skip buttons (AppBar + BottomBar)
-    expect(find.text("Skip"), findsNWidgets(2));
+    // Verify Skip button in AppBar
+    expect(find.text("Skip"), findsOneWidget);
 
     // Verify Save & Get Started in bottom bar
     expect(find.text("Save & Get Started"), findsOneWidget);

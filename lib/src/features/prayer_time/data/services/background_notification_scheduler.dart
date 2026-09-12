@@ -570,16 +570,28 @@ class ReminderScheduler {
   }
 
   static bool isPrayerEnabled(Prayer prayer) {
-    return _sharedPreferences.getBool("prayer_${prayer.name}_enabled") ??
-        (prayer == Prayer.fajr ||
-            prayer == Prayer.dhuhr ||
-            prayer == Prayer.asr ||
-            prayer == Prayer.maghrib ||
-            prayer == Prayer.isha);
+    return getPrayerReminderMode(prayer).isEnabled;
   }
 
   static Future<void> setPrayerEnabled(Prayer prayer, bool enabled) async {
     await _sharedPreferences.setBool("prayer_${prayer.name}_enabled", enabled);
+    if (!enabled) {
+      await _sharedPreferences.setString(
+        "prayer_${prayer.name}_reminder_mode",
+        PrayerReminderMode.off.name,
+      );
+    } else {
+      final currentMode = getPrayerReminderMode(prayer);
+      final newMode = currentMode.isOff
+          ? (prayer == Prayer.fajr
+              ? PrayerReminderMode.alarm
+              : PrayerReminderMode.notification)
+          : currentMode;
+      await _sharedPreferences.setString(
+        "prayer_${prayer.name}_reminder_mode",
+        newMode.name,
+      );
+    }
   }
 
   static Map<Prayer, bool> getEnabledPrayers() {
@@ -593,11 +605,32 @@ class ReminderScheduler {
   static PrayerReminderMode getPrayerReminderMode(Prayer prayer) {
     final savedModeStr =
         _sharedPreferences.getString("prayer_${prayer.name}_reminder_mode");
-    final legacyEnabled = isPrayerEnabled(prayer);
-    return PrayerReminderMode.fromString(
-      savedModeStr,
-      legacyEnabled: legacyEnabled,
-    );
+    if (savedModeStr != null) {
+      return PrayerReminderMode.fromString(savedModeStr);
+    }
+
+    final legacyEnabled =
+        _sharedPreferences.getBool("prayer_${prayer.name}_enabled");
+    if (legacyEnabled != null) {
+      return legacyEnabled
+          ? (prayer == Prayer.fajr
+              ? PrayerReminderMode.alarm
+              : PrayerReminderMode.notification)
+          : PrayerReminderMode.off;
+    }
+
+    // Default Canonical Preset ("Balanced"):
+    // Fajr is Alarm, other core obligatory prayers are Notification, non-obligatory are Off.
+    if (prayer == Prayer.fajr) {
+      return PrayerReminderMode.alarm;
+    } else if (prayer == Prayer.dhuhr ||
+        prayer == Prayer.asr ||
+        prayer == Prayer.maghrib ||
+        prayer == Prayer.isha) {
+      return PrayerReminderMode.notification;
+    } else {
+      return PrayerReminderMode.off;
+    }
   }
 
   static Map<Prayer, PrayerReminderMode> getPrayerReminderModes() {
@@ -616,7 +649,10 @@ class ReminderScheduler {
       "prayer_${prayer.name}_reminder_mode",
       mode.name,
     );
-    await setPrayerEnabled(prayer, mode.isEnabled);
+    await _sharedPreferences.setBool(
+      "prayer_${prayer.name}_enabled",
+      mode.isEnabled,
+    );
   }
 
   static Future<void> setAllPrayerReminderModes(PrayerReminderMode mode) async {
