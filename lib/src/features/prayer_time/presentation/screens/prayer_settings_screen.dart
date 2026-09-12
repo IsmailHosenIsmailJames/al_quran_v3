@@ -3,7 +3,8 @@ import "dart:io";
 import "package:flutter/foundation.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/services/platform_services.dart"
+    as platform_services;
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
@@ -41,11 +42,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
 
     final platform = platform_services.getPlatform();
-    final isMobile = platform == platform_services.PlatformOwn.isAndroid ||
+    final isMobile =
+        platform == platform_services.PlatformOwn.isAndroid ||
         platform == platform_services.PlatformOwn.isIos;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
+      backgroundColor: isDark
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
           l10n.prayerSettings,
@@ -85,7 +89,12 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     isDark,
                   ),
                   const Gap(10),
-                  _buildNotificationSettingsCard(context, themeState, isDark, l10n),
+                  _buildNotificationSettingsCard(
+                    context,
+                    themeState,
+                    isDark,
+                    l10n,
+                  ),
                   const Gap(24),
                 ],
 
@@ -104,7 +113,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       l10n.adjustReminderTimingDescription,
                       style: TextStyle(
                         fontSize: 12,
-                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
                       ),
                     ),
                   ),
@@ -160,9 +171,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     bool isDark,
     AppLocalizations l10n,
   ) {
-    return BlocBuilder<LocationQiblaPrayerDataCubit, LocationQiblaPrayerDataState>(
+    return BlocBuilder<
+      LocationQiblaPrayerDataCubit,
+      LocationQiblaPrayerDataState
+    >(
       builder: (context, locationState) {
-        final currentEnum = locationState.calculationMethod?.method ??
+        final currentEnum =
+            locationState.calculationMethod?.method ??
             CalculationMethodEnum.muslimWorldLeague;
 
         return Container(
@@ -200,8 +215,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   initialValue: currentEnum,
                   isExpanded: true,
                   decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
                     fillColor: isDark
                         ? Colors.white.withValues(alpha: 0.04)
                         : Colors.grey.shade50,
@@ -223,11 +240,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       ),
                     ),
                   ),
-                  dropdownColor:
-                      isDark ? const Color(0xFF252525) : Colors.white,
+                  dropdownColor: isDark
+                      ? const Color(0xFF252525)
+                      : Colors.white,
                   items: CalculationMethodEnum.values.map((methodEnum) {
-                    final params =
-                        CalculationMethodParameters.fromEnum(methodEnum);
+                    final params = CalculationMethodParameters.fromEnum(
+                      methodEnum,
+                    );
                     return DropdownMenuItem(
                       value: methodEnum,
                       child: Text(
@@ -260,7 +279,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     bool isDark,
     AppLocalizations l10n,
   ) {
-    return BlocBuilder<LocationQiblaPrayerDataCubit, LocationQiblaPrayerDataState>(
+    return BlocBuilder<
+      LocationQiblaPrayerDataCubit,
+      LocationQiblaPrayerDataState
+    >(
       builder: (context, locationState) {
         final currentMadhab = locationState.madhab ?? Madhab.shafi;
 
@@ -347,15 +369,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
           color: isSelected
               ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.08)
               : (isDark
-                  ? Colors.white.withValues(alpha: 0.03)
-                  : Colors.grey.shade50),
+                    ? Colors.white.withValues(alpha: 0.03)
+                    : Colors.grey.shade50),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : Colors.grey.shade200),
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade200),
             width: isSelected ? 1.6 : 1.0,
           ),
         ),
@@ -464,8 +486,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     activeTrackColor: themeState.primary,
                     onChanged: (value) async {
                       if (value) {
-                        final notifAllowed =
-                            await AwesomeNotifications().isNotificationAllowed();
+                        final notifAllowed = await AwesomeNotifications()
+                            .isNotificationAllowed();
                         if (!notifAllowed) {
                           final granted = await AwesomeNotifications()
                               .requestPermissionToSendNotifications();
@@ -505,9 +527,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const PrayerGuidanceSetupScreen(
-                        isFromSettings: true,
-                      ),
+                      builder: (context) =>
+                          const PrayerGuidanceSetupScreen(isFromSettings: true),
                     ),
                   );
                 },
@@ -515,7 +536,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+                    color: themeState.primary.withValues(
+                      alpha: isDark ? 0.15 : 0.08,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: themeState.primary.withValues(alpha: 0.25),
@@ -545,7 +568,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: isDark ? Colors.white : Colors.grey.shade900,
+                                color: isDark
+                                    ? Colors.white
+                                    : Colors.grey.shade900,
                               ),
                             ),
                             const Gap(2),
@@ -553,7 +578,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                               l10n.prayerGuidanceSetupDesc,
                               style: TextStyle(
                                 fontSize: 11,
-                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                           ],
@@ -710,8 +737,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
               // Current Sound Display Card & Browse Button
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: isDark
                       ? Colors.white.withValues(alpha: 0.04)
@@ -741,8 +770,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color:
-                                  isDark ? Colors.white : Colors.grey.shade900,
+                              color: isDark
+                                  ? Colors.white
+                                  : Colors.grey.shade900,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -750,12 +780,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           Text(
                             reminderState.selectedRingtoneType == "adhan"
                                 ? "Authentic Adhan (Audio)"
-                                : reminderState.selectedRingtoneType == "default_sound" ||
-                                        reminderState.selectedRingtoneType == null
-                                    ? "WAV Audio (notification_sound.wav)"
-                                    : reminderState.selectedRingtoneType == "custom"
-                                        ? "Device / System Sound"
-                                        : "System Preset",
+                                : reminderState.selectedRingtoneType ==
+                                          "default_sound" ||
+                                      reminderState.selectedRingtoneType == null
+                                ? "WAV Audio (notification_sound.wav)"
+                                : reminderState.selectedRingtoneType == "custom"
+                                ? "Device / System Sound"
+                                : "System Preset",
                             style: TextStyle(
                               fontSize: 10.5,
                               color: isDark
@@ -804,10 +835,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               const Gap(8),
               Wrap(
                 spacing: 8,
-                runSpacing: 8,
+
                 children: [
                   ChoiceChip(
-                    avatar: const Icon(FluentIcons.sound_wave_circle_24_regular, size: 16),
+                    avatar: const Icon(
+                      FluentIcons.sound_wave_circle_24_regular,
+                      size: 16,
+                    ),
                     label: Text(
                       l10n.adhanSound,
                       style: const TextStyle(fontSize: 11),
@@ -826,8 +860,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       l10n.defaultSound,
                       style: const TextStyle(fontSize: 11),
                     ),
-                    selected: reminderState.selectedRingtoneType ==
-                            "default_sound" ||
+                    selected:
+                        reminderState.selectedRingtoneType == "default_sound" ||
                         reminderState.selectedRingtoneType == null,
                     onSelected: (selected) {
                       if (selected) {
@@ -842,7 +876,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       l10n.systemNotification,
                       style: const TextStyle(fontSize: 11),
                     ),
-                    selected: reminderState.selectedRingtoneType ==
+                    selected:
+                        reminderState.selectedRingtoneType ==
                         "system_notification",
                     onSelected: (selected) {
                       if (selected) {
@@ -893,8 +928,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   margin: const EdgeInsets.only(bottom: 16),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF3C7)
-                        .withValues(alpha: isDark ? 0.15 : 0.9),
+                    color: const Color(
+                      0xFFFEF3C7,
+                    ).withValues(alpha: isDark ? 0.15 : 0.9),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: const Color(0xFFF59E0B).withValues(alpha: 0.5),
@@ -961,8 +997,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   margin: const EdgeInsets.only(bottom: 16),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEFF6FF)
-                        .withValues(alpha: isDark ? 0.15 : 0.9),
+                    color: const Color(
+                      0xFFEFF6FF,
+                    ).withValues(alpha: isDark ? 0.15 : 0.9),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: const Color(0xFF3B82F6).withValues(alpha: 0.5),
@@ -1137,7 +1174,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                 prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
             final DateTime basePrayerTime =
                 prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
-                    DateTime.now();
+                DateTime.now();
             final actualPrayerTime = TimeOfDay.fromDateTime(basePrayerTime);
             final adjustedTime = TimeOfDay.fromDateTime(
               basePrayerTime.add(Duration(minutes: offsetMinutes)),
@@ -1145,9 +1182,10 @@ class _PrayerSettingsState extends State<PrayerSettings> {
 
             final prayerName =
                 PrayerTimeHelper.localizedPrayerName(context, prayerType) ??
-                    prayerType.name;
+                prayerType.name;
 
-            final currentMode = prayerReminderState.prayerReminderModes?[prayerType] ??
+            final currentMode =
+                prayerReminderState.prayerReminderModes?[prayerType] ??
                 ReminderScheduler.getPrayerReminderMode(prayerType);
 
             return Container(
@@ -1176,8 +1214,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: themeState.primary
-                              .withValues(alpha: isDark ? 0.2 : 0.1),
+                          color: themeState.primary.withValues(
+                            alpha: isDark ? 0.2 : 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
@@ -1225,8 +1264,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                           decoration: BoxDecoration(
                             color: offsetMinutes == 0
                                 ? (isDark
-                                    ? Colors.white.withValues(alpha: 0.08)
-                                    : Colors.grey.shade100)
+                                      ? Colors.white.withValues(alpha: 0.08)
+                                      : Colors.grey.shade100)
                                 : themeState.primary.withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -1234,15 +1273,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             offsetMinutes == 0
                                 ? l10n.exactTime
                                 : (offsetMinutes > 0
-                                    ? "+${localizedNumber(context, offsetMinutes)} m"
-                                    : "-${localizedNumber(context, offsetMinutes.abs())} m"),
+                                      ? "+${localizedNumber(context, offsetMinutes)} m"
+                                      : "-${localizedNumber(context, offsetMinutes.abs())} m"),
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
                               color: offsetMinutes == 0
                                   ? (isDark
-                                      ? Colors.grey.shade400
-                                      : Colors.grey.shade700)
+                                        ? Colors.grey.shade400
+                                        : Colors.grey.shade700)
                                   : themeState.primary,
                             ),
                           ),
@@ -1337,11 +1376,13 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                             ? Colors.white.withValues(alpha: 0.1)
                             : Colors.grey.shade200,
                         thumbColor: themeState.primary,
-                        overlayColor:
-                            themeState.primary.withValues(alpha: 0.15),
+                        overlayColor: themeState.primary.withValues(
+                          alpha: 0.15,
+                        ),
                         trackHeight: 3.5,
-                        thumbShape:
-                            const RoundSliderThumbShape(enabledThumbRadius: 6),
+                        thumbShape: const RoundSliderThumbShape(
+                          enabledThumbRadius: 6,
+                        ),
                       ),
                       child: Slider(
                         value: offsetMinutes.toDouble(),
@@ -1396,15 +1437,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             color: isSelected
                 ? selectedColor.withValues(alpha: isDark ? 0.25 : 0.12)
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.04)
-                    : Colors.grey.shade100),
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.grey.shade100),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected
                   ? selectedColor
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.06)
-                      : Colors.grey.shade200),
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.grey.shade200),
               width: isSelected ? 1.5 : 1.0,
             ),
           ),
@@ -1427,7 +1468,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                     color: isSelected
                         ? (isDark ? Colors.white : selectedColor)
-                        : (isDark ? Colors.grey.shade400 : Colors.grey.shade700),
+                        : (isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -1443,12 +1486,16 @@ class _PrayerSettingsState extends State<PrayerSettings> {
   String _getAdjustmentText(int minutes, AppLocalizations l10n) {
     if (minutes == 0) return l10n.atPrayerTime;
     if (minutes < 0) {
-      return l10n.minBefore(minutes).replaceFirst(
+      return l10n
+          .minBefore(minutes)
+          .replaceFirst(
             minutes.toString(),
             localizedNumber(context, minutes.abs()),
           );
     }
-    return l10n.minAfter(minutes).replaceFirst(
+    return l10n
+        .minAfter(minutes)
+        .replaceFirst(
           minutes.toString(),
           localizedNumber(context, minutes.abs()),
         );
