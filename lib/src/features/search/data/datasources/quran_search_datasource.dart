@@ -23,8 +23,12 @@ class QuranSearchDataSource {
     if (_arabicLoaded && _plainArabicAyahs.isNotEmpty) return;
 
     try {
-      await QuranScriptFunction.loadScript(QuranScriptType.uthmani);
-      final scriptMap = QuranScriptFunction.quranScriptMap;
+      await QuranScriptFunction.loadScript(
+        QuranScriptType.uthmani,
+        setCurrent: false,
+      );
+      final scriptMap =
+          QuranScriptFunction.getScriptMap(QuranScriptType.uthmani);
 
       for (final surahKey in scriptMap.keys) {
         final surahMap = scriptMap[surahKey] as Map<String, dynamic>;

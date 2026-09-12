@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
+import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -100,6 +101,8 @@ class QuranViewCubit extends Cubit<QuranViewState> {
   }
 
   void changeQuranScriptType(QuranScriptType quranScriptType) {
+    QuranScriptFunction.currentScript = quranScriptType;
+    QuranScriptFunction.loadScript(quranScriptType);
     Hive.box("user").put("selected_quran_script_type", quranScriptType.name);
     emit(state.copyWith(quranScriptType: quranScriptType));
   }

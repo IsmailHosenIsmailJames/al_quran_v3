@@ -308,19 +308,8 @@ class WordByWordFunction {
         response.data,
       );
 
-      int totalEntries = jsonData.length;
-      int processedEntries = 0;
-
-      for (var entry in jsonData.entries) {
-        await newBox.put(entry.key, entry.value);
-        processedEntries++;
-        if (processedEntries % 50 == 0 || processedEntries == totalEntries) {
-          updateProgress(
-            0.5 + (processedEntries / totalEntries * 0.5),
-            "Processing WbW data for ${book.name}",
-          );
-        }
-      }
+      updateProgress(0.7, "Saving WbW data for ${book.name}");
+      await newBox.putAll(jsonData);
 
       await newBox.put("meta_data", {
         ...book.toMap(), // Store all info from the ResourcesModel

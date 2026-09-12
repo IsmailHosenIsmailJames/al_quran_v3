@@ -46,12 +46,20 @@ class RingtoneService {
     return null;
   }
 
-  /// Plays preview of sound.
-  static Future<bool> playRingtone(String? uri) async {
+  /// Plays preview or alarm sound.
+  static Future<bool> playRingtone(
+    String? uri, {
+    bool isAlarm = false,
+    bool loop = false,
+    double? volume,
+  }) async {
     if (!isSupported) return false;
     try {
       final res = await _channel.invokeMethod<bool>("playRingtone", {
         "uri": uri,
+        "isAlarm": isAlarm,
+        "loop": loop,
+        "volume": ?volume,
       });
       return res ?? false;
     } catch (e) {
@@ -60,7 +68,7 @@ class RingtoneService {
     }
   }
 
-  /// Stops preview.
+  /// Stops preview or alarm playback.
   static Future<bool> stopRingtone() async {
     if (!isSupported) return false;
     try {
@@ -68,6 +76,44 @@ class RingtoneService {
       return res ?? false;
     } catch (e) {
       debugPrint("Error stopping ringtone preview: $e");
+      return false;
+    }
+  }
+
+  /// Checks if an incoming or ongoing telephone / VoIP call is active.
+  static Future<bool> isInCall() async {
+    if (!isSupported) return false;
+    try {
+      final res = await _channel.invokeMethod<bool>("isInCall");
+      return res ?? false;
+    } catch (e) {
+      debugPrint("Error checking call status: $e");
+      return false;
+    }
+  }
+
+  /// Checks if battery optimization is disabled/ignored for this app.
+  static Future<bool> isIgnoringBatteryOptimizations() async {
+    if (!isSupported) return true;
+    try {
+      final res =
+          await _channel.invokeMethod<bool>("isIgnoringBatteryOptimizations");
+      return res ?? true;
+    } catch (e) {
+      debugPrint("Error checking battery optimization: $e");
+      return true;
+    }
+  }
+
+  /// Requests the user to disable battery optimizations (essential for Honor, Xiaomi, Huawei).
+  static Future<bool> requestIgnoreBatteryOptimizations() async {
+    if (!isSupported) return false;
+    try {
+      final res = await _channel
+          .invokeMethod<bool>("requestIgnoreBatteryOptimizations");
+      return res ?? false;
+    } catch (e) {
+      debugPrint("Error requesting battery optimization exemption: $e");
       return false;
     }
   }
@@ -107,6 +153,30 @@ class RingtoneService {
       return res ?? false;
     } catch (e) {
       debugPrint("Error creating native notification channel: $e");
+      return false;
+    }
+  }
+
+  /// Checks if the app is allowed to use full-screen intents (Android 14+).
+  static Future<bool> canUseFullScreenIntent() async {
+    if (!isSupported) return true;
+    try {
+      final res = await _channel.invokeMethod<bool>("canUseFullScreenIntent");
+      return res ?? true;
+    } catch (e) {
+      debugPrint("Error checking full-screen intent permission: $e");
+      return true;
+    }
+  }
+
+  /// Opens the system settings screen to grant full-screen intent permission (Android 14+).
+  static Future<bool> openFullScreenIntentSettings() async {
+    if (!isSupported) return false;
+    try {
+      final res = await _channel.invokeMethod<bool>("openFullScreenIntentSettings");
+      return res ?? false;
+    } catch (e) {
+      debugPrint("Error opening full-screen intent settings: $e");
       return false;
     }
   }

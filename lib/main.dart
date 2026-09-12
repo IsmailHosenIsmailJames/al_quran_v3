@@ -21,7 +21,10 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
+import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
+import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
+import "package:awesome_notifications/awesome_notifications.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_background_worker.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/setup/presentation/screens/setup_screen.dart";
@@ -51,6 +54,9 @@ import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
 
+import "package:al_quran_v3/src/core/utils/navigator_key.dart";
+export "package:al_quran_v3/src/core/utils/navigator_key.dart";
+
 import "package:al_quran_v3/src/features/location/presentation/models/location_data_qibla_data_state.dart";
 
 String? applicationDataPath;
@@ -62,6 +68,16 @@ Future<void> main() async {
 
   // Disable runtime fetching of fonts from Google servers for FOSS offline privacy
   GoogleFonts.config.allowRuntimeFetching = false;
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    log("FlutterError: ${details.exception}", stackTrace: details.stack, name: "CrashHandler");
+  };
+
+  PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+    log("Uncaught Platform Error: $error", stackTrace: stack, name: "CrashHandler");
+    return true;
+  };
 
   platform_services.initializePlatform();
 
@@ -88,9 +104,10 @@ Future<void> main() async {
   }
   applicationDataPath = await platform_services.getApplicationDataPath();
 
-  if (platformOwn == platform_services.PlatformOwn.isWindows ||
-      platformOwn == platform_services.PlatformOwn.isLinux) {
-    Hive.init("${applicationDataPath!}/db");
+  if ((platformOwn == platform_services.PlatformOwn.isWindows ||
+          platformOwn == platform_services.PlatformOwn.isLinux) &&
+      applicationDataPath != null) {
+    Hive.init("$applicationDataPath/db");
   } else {
     await Hive.initFlutter();
   }
@@ -111,12 +128,12 @@ Future<void> main() async {
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  await QuranScriptFunction.loadScript(
-    QuranScriptType.values.firstOrNullWhere(
-          (element) => scriptOnDb == element.name,
-        ) ??
-        QuranScriptType.uthmani,
-  );
+  final userScript = QuranScriptType.values.firstOrNullWhere(
+        (element) => scriptOnDb == element.name,
+      ) ??
+      QuranScriptType.uthmani;
+
+  await QuranScriptFunction.initAllScripts(initialScript: userScript);
 
   await ThemeFunctions.initThemeFunction();
 
@@ -126,8 +143,12 @@ Future<void> main() async {
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
-    await ReminderScheduler.init();
-    PrayerBackgroundWorker.registerWorker();
+    try {
+      await ReminderScheduler.init();
+      PrayerBackgroundWorker.registerWorker();
+    } catch (e) {
+      log("Reminder/Background worker initialization skipped: $e");
+    }
   }
 
   runApp(
@@ -138,8 +159,6 @@ Future<void> main() async {
   );
   platform_services.hideLoadingIndicator();
 }
-
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   final textTheme = isDarkMode
@@ -231,6 +250,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Check if launched directly from full-screen alarm notification
+    try {
+      AwesomeNotifications()
+          .getInitialNotificationAction(removeFromActionEvents: true)
+          .then((initialAction) {
+        if (initialAction != null && initialAction.payload?["type"] == "alarm") {
+          final prayerName = initialAction.payload?["prayer"];
+          final timeStr = initialAction.payload?["time"];
+          if (prayerName != null) {
+            final prayer = Prayer.values.cast<Prayer?>().firstWhere(
+                  (p) => p?.name.toLowerCase() == prayerName.toLowerCase(),
+                  orElse: () => null,
+                );
+            if (prayer != null) {
+              final time = timeStr != null ? DateTime.tryParse(timeStr) : null;
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                navigateToPrayerAlarmScreen(
+                  prayer,
+                  time ?? DateTime.now(),
+                  initialAction.id ?? 0,
+                );
+              });
+            }
+          }
+        }
+      });
+    } catch (_) {}
+  }
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();

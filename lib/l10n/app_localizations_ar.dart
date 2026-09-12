@@ -1873,4 +1873,127 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quickPresets => 'خيارات سريعة';
+
+  @override
+  String get reminderModeOff => 'إيقاف';
+
+  @override
+  String get reminderModeNotification => 'إشعار';
+
+  @override
+  String get reminderModeAlarm => 'منبه';
+
+  @override
+  String get testAlarm => 'تجربة المنبه';
+
+  @override
+  String get testAlarmSent => 'تم إرسال تجربة المنبه بملء الشاشة';
+
+  @override
+  String get stopAlarm => 'إيقاف المنبه';
+
+  @override
+  String get snooze => 'غفوة';
+
+  @override
+  String get snoozed10Min => 'تم التفعيل لـ 10 دقائق';
+
+  @override
+  String get fullScreenAlarmPermission => 'إذن المنبه بملء الشاشة';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'السماح للمنبه بإيقاظ الشاشة عندما يكون الهاتف مقفلاً';
+
+  @override
+  String get grantPermission => 'منح الإذن';
+
+  @override
+  String get adhanSound => 'أذان أصيل';
+
+  @override
+  String get batteryOptimizationTitle => 'إعفاء تحسين البطارية';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'السماح للتطبيق بالعمل في الخلفية لضمان عمل تنبيهات الصلاة في الوقت المحدد';
+
+  @override
+  String get prayerGuidanceSetupTitle => 'دليل وإعداد تنبيهات الصلاة';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'تكوين منبهات الاستيقاظ وصوت الأذان والأذونات';
+
+  @override
+  String get neverMissAPrayer => 'لا تفوت أي صلاة';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'اختر بين منبه ملء الشاشة مع الأذان أو إشعارات لطيفة';
+
+  @override
+  String get howRemindersWork => 'كيف تعمل التنبيهات';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'منبه ملء الشاشة';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'يوقظ الشاشة فوق شاشة القفل مع الأذان والخط وأزرار الإيقاف/الغفوة. مثالي للفجر.';
+
+  @override
+  String get gentleNotificationModeTitle => 'إشعار لطيف';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'شعار إشعار قياسي مع صوت تذكير. غير مزعج ومثالي لساعات العمل.';
+
+  @override
+  String get presetBalanced => 'متوازن';
+
+  @override
+  String get presetBalancedSubtitle => 'الفجر منبه ⏰ + الباقي إشعار 🔔';
+
+  @override
+  String get presetAllAlarms => 'جميع الصلوات منبه';
+
+  @override
+  String get presetAllAlarmsSubtitle => 'منبه ملء الشاشة لجميع الصلوات';
+
+  @override
+  String get presetAllNotifications => 'جميع الصلوات إشعارات';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'إشعارات بانر خفيفة فقط';
+
+  @override
+  String get saveAndReturn => 'حفظ والرجوع';
+
+  @override
+  String get saveAndGetStarted => 'حفظ والبدء';
+
+  @override
+  String get granted => 'تم المنح';
+
+  @override
+  String get requiredPermissions => 'الأذونات المطلوبة';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get skipForNow => 'تخطي الآن';
+
+  @override
+  String get exactAlarmPermission => 'التنبيهات الدقيقة';
+
+  @override
+  String get exactAlarmPermissionDesc => 'إطلاق التنبيهات في أوقات الصلاة بدقة';
+
+  @override
+  String get appDefaultTone => 'نغمة التطبيق الافتراضية';
+
+  @override
+  String get systemAlarmTone => 'نغمة منبه النظام';
 }

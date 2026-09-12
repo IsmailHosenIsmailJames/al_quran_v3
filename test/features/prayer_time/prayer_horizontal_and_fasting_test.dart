@@ -75,8 +75,11 @@ void main() {
       await tester.tap(find.text('Fajr'));
       await tester.pumpAndSettle();
 
-      // Modal bottom sheet should show up with title
-      expect(find.text('Enable Prayer Reminders'), findsOneWidget);
+      // Modal bottom sheet should show up with 3-mode selector
+      expect(find.text('Notifications & Audio'), findsOneWidget);
+      expect(find.text('Off'), findsOneWidget);
+      expect(find.text('Notification'), findsOneWidget);
+      expect(find.text('Alarm'), findsOneWidget);
     });
   });
 

@@ -1896,4 +1896,131 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get quickPresets => 'Preimpostazioni rapide';
+
+  @override
+  String get reminderModeOff => 'Disattivato';
+
+  @override
+  String get reminderModeNotification => 'Notifica';
+
+  @override
+  String get reminderModeAlarm => 'Sveglia';
+
+  @override
+  String get testAlarm => 'Testa sveglia';
+
+  @override
+  String get testAlarmSent => 'Test sveglia a schermo intero inviato';
+
+  @override
+  String get stopAlarm => 'Ferma sveglia';
+
+  @override
+  String get snooze => 'Posponi';
+
+  @override
+  String get snoozed10Min => 'Posposto per 10 minuti';
+
+  @override
+  String get fullScreenAlarmPermission =>
+      'Autorizzazione sveglia a schermo intero';
+
+  @override
+  String get fullScreenAlarmPermissionDesc =>
+      'Consenti alle sveglie di riattivare lo schermo quando il telefono è bloccato';
+
+  @override
+  String get grantPermission => 'Concedi autorizzazione';
+
+  @override
+  String get adhanSound => 'Adhan autentico';
+
+  @override
+  String get batteryOptimizationTitle => 'Esenzione ottimizzazione batteria';
+
+  @override
+  String get batteryOptimizationDesc =>
+      'Consenti all\'app di funzionare in background per garantire le sveglie di preghiera puntuali';
+
+  @override
+  String get prayerGuidanceSetupTitle =>
+      'Guida e configurazione promemoria di preghiera';
+
+  @override
+  String get prayerGuidanceSetupDesc =>
+      'Configura le sveglie, il suono dell\'Adhan e i permessi';
+
+  @override
+  String get neverMissAPrayer => 'Non perdere mai una preghiera';
+
+  @override
+  String get prayerGuidanceHeaderDesc =>
+      'Scegli tra sveglie a schermo intero con l\'Adhan o notifiche discrete';
+
+  @override
+  String get howRemindersWork => 'Come funzionano i promemoria';
+
+  @override
+  String get fullScreenAlarmModeTitle => 'Sveglia a schermo intero';
+
+  @override
+  String get fullScreenAlarmModeDesc =>
+      'Riattiva lo schermo sopra il blocco schermo con Adhan, calligrafia e Ferma/Posponi. Perfetto per Fajr.';
+
+  @override
+  String get gentleNotificationModeTitle => 'Notifica discreta';
+
+  @override
+  String get gentleNotificationModeDesc =>
+      'Banner di notifica standard con suono. Discreto e ideale per le ore di lavoro.';
+
+  @override
+  String get presetBalanced => 'Bilanciato';
+
+  @override
+  String get presetBalancedSubtitle => 'Fajr Sveglia ⏰ + Altre Notifica 🔔';
+
+  @override
+  String get presetAllAlarms => 'Tutte le sveglie';
+
+  @override
+  String get presetAllAlarmsSubtitle =>
+      'Sveglia a schermo intero per tutte le preghiere';
+
+  @override
+  String get presetAllNotifications => 'Tutte le notifiche';
+
+  @override
+  String get presetAllNotificationsSubtitle => 'Solo notifiche discrete';
+
+  @override
+  String get saveAndReturn => 'Salva e torna indietro';
+
+  @override
+  String get saveAndGetStarted => 'Salva e inizia';
+
+  @override
+  String get granted => 'Concesso';
+
+  @override
+  String get requiredPermissions => 'Autorizzazioni richieste';
+
+  @override
+  String get skip => 'Salta';
+
+  @override
+  String get skipForNow => 'Salta per ora';
+
+  @override
+  String get exactAlarmPermission => 'Allarmi esatti';
+
+  @override
+  String get exactAlarmPermissionDesc =>
+      'Attiva le notifiche esattamente agli orari di preghiera';
+
+  @override
+  String get appDefaultTone => 'Tono predefinito dell\'app';
+
+  @override
+  String get systemAlarmTone => 'Tono sveglia di sistema';
 }
