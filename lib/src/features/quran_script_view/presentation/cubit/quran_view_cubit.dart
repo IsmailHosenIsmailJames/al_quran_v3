@@ -1,5 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/core/utils/navigator_key.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";

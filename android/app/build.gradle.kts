@@ -43,7 +43,7 @@ android {
         multiDexEnabled = true
     }
 
-     packagingOptions {
+    packagingOptions {
         jniLibs {
             useLegacyPackaging = true
         }

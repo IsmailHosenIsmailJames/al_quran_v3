@@ -1,4 +1,4 @@
-import "package:al_quran_v3/main.dart";
+import "package:al_quran_v3/src/core/utils/navigator_key.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";

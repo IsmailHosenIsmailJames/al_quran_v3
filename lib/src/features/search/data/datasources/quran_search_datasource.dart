@@ -18,6 +18,10 @@ class QuranSearchDataSource {
   final Map<String, String> _normalizedArabicAyahs = {};
   bool _arabicLoaded = false;
 
+  // In-memory caches for downloaded translation and tafsir datasets
+  final Map<String, Map<String, Map<String, dynamic>>> _translationCache = {};
+  final Map<String, Map<String, String>> _tafsirCache = {};
+
   /// Loads and prepares the Arabic Quran text in memory for fast lookup.
   Future<void> ensureArabicScriptLoaded() async {
     if (_arabicLoaded && _plainArabicAyahs.isNotEmpty) return;
@@ -115,6 +119,10 @@ class QuranSearchDataSource {
       translationBook: book,
     );
 
+    if (_translationCache.containsKey(boxName)) {
+      return _translationCache[boxName]!;
+    }
+
     LazyBox box;
     if (Hive.isBoxOpen(boxName)) {
       box = Hive.lazyBox(boxName);
@@ -130,12 +138,17 @@ class QuranSearchDataSource {
         result[key.toString()] = Map<String, dynamic>.from(raw);
       }
     }
+    _translationCache[boxName] = result;
     return result;
   }
 
   /// Loads all verse texts from a specific Tafsir box into memory.
   Future<Map<String, String>> loadTafsirBoxData(ResourcesModel book) async {
     final boxName = QuranTafsirFunction.getTafsirBoxName(tafsirBook: book);
+
+    if (_tafsirCache.containsKey(boxName)) {
+      return _tafsirCache[boxName]!;
+    }
 
     LazyBox box;
     if (Hive.isBoxOpen(boxName)) {
@@ -156,7 +169,14 @@ class QuranSearchDataSource {
         }
       }
     }
+    _tafsirCache[boxName] = result;
     return result;
+  }
+
+  /// Clears in-memory translation and tafsir caches to release memory.
+  void clearMemoryCaches() {
+    _translationCache.clear();
+    _tafsirCache.clear();
   }
 
   // --------------------------------------------------------------------------
