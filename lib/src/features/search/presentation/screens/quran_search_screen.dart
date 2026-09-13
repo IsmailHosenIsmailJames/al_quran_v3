@@ -175,6 +175,26 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                         },
                       );
                     case SearchStatus.loading:
+                      if (state.results != null &&
+                          (state.results!.ayahResults.isNotEmpty ||
+                              state.results!.surahMatches.isNotEmpty ||
+                              state.results!.directJump != null)) {
+                        return Stack(
+                          children: [
+                            _buildResultsList(state, themeState, isDark, l10n),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              child: LinearProgressIndicator(
+                                color: themeState.primary,
+                                backgroundColor: Colors.transparent,
+                                minHeight: 2.5,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
                       return Center(
                         child: CircularProgressIndicator(color: themeState.primary),
                       );
@@ -240,15 +260,19 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
             size: 18,
             color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
           ),
-          suffixIcon: _searchController.text.isNotEmpty
-              ? IconButton(
-                  icon: const Icon(FluentIcons.dismiss_16_filled, size: 16),
-                  onPressed: () {
-                    _searchController.clear();
-                    context.read<QuranSearchCubit>().onQueryChanged("");
-                  },
-                )
-              : null,
+          suffixIcon: ValueListenableBuilder<TextEditingValue>(
+            valueListenable: _searchController,
+            builder: (context, value, _) {
+              if (value.text.isEmpty) return const SizedBox.shrink();
+              return IconButton(
+                icon: const Icon(FluentIcons.dismiss_16_filled, size: 16),
+                onPressed: () {
+                  _searchController.clear();
+                  context.read<QuranSearchCubit>().onQueryChanged("");
+                },
+              );
+            },
+          ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 10),
         ),

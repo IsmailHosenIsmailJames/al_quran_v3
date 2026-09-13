@@ -119,5 +119,34 @@ void main() {
 
       cubit.close();
     });
+
+    test("onQueryChanged does not immediately emit loading state", () {
+      final cubit = QuranSearchCubit(dataSource, useCase);
+      cubit.onQueryChanged("Yasin");
+
+      // Status should remain initial (not loading) immediately upon keystroke
+      expect(cubit.state.status, SearchStatus.initial);
+      expect(cubit.state.query, "Yasin");
+
+      cubit.close();
+    });
+
+    test("short query (<2 chars) returns surah matches and direct jump without full text scanning", () async {
+      final results = await useCase.execute(
+        query: "B",
+        filter: const SearchFilterModel(),
+      );
+
+      // Should find Surahs starting with or containing B (e.g. Baqarah, Balad, Buruj)
+      expect(results.surahMatches.isNotEmpty, isTrue);
+      // But full-text ayahResults should be empty to prevent heavy scans
+      expect(results.ayahResults.isEmpty, isTrue);
+    });
+
+    test("dataSource caching methods function properly", () {
+      dataSource.clearMemoryCaches();
+      // Verifies method can be called without exception
+      expect(dataSource.getDownloadedTranslations(), isNotNull);
+    });
   });
 }
