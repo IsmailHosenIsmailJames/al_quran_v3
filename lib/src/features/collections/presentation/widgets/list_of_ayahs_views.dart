@@ -23,42 +23,48 @@ class _ListOfAyahsViewsState extends State<ListOfAyahsViews> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        itemCount: widget.ayahsKey.length,
-        itemBuilder: (context, index) {
-          final TranslationWithWordByWord? translationData =
-              getTranslationFromCache(widget.ayahsKey[index]);
-          final Widget card = translationData != null
-              ? getAyahByAyahCard(
-                ayahKey: widget.ayahsKey[index],
-                context: context,
-                showFullKey: true,
-                translationListWithInfo: translationData.translationList,
-                wordByWord: translationData.wordByWord ?? [],
-              )
-              : FutureBuilder(
-                future: getTranslationWithWordByWord(widget.ayahsKey[index]),
-                builder: (context, asyncSnapshot) {
-                  if (asyncSnapshot.connectionState != ConnectionState.done) {
-                    return const SizedBox(height: 250);
-                  }
-                  return getAyahByAyahCard(
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 960),
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            itemCount: widget.ayahsKey.length,
+            itemBuilder: (context, index) {
+              final TranslationWithWordByWord? translationData =
+                  getTranslationFromCache(widget.ayahsKey[index]);
+              final Widget card = translationData != null
+                  ? getAyahByAyahCard(
                     ayahKey: widget.ayahsKey[index],
                     context: context,
                     showFullKey: true,
-                    translationListWithInfo:
-                        asyncSnapshot.data?.translationList ?? [],
-                    wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                    translationListWithInfo: translationData.translationList,
+                    wordByWord: translationData.wordByWord ?? [],
+                  )
+                  : FutureBuilder(
+                    future: getTranslationWithWordByWord(widget.ayahsKey[index]),
+                    builder: (context, asyncSnapshot) {
+                      if (asyncSnapshot.connectionState != ConnectionState.done) {
+                        return const SizedBox(height: 250);
+                      }
+                      return getAyahByAyahCard(
+                        ayahKey: widget.ayahsKey[index],
+                        context: context,
+                        showFullKey: true,
+                        translationListWithInfo:
+                            asyncSnapshot.data?.translationList ?? [],
+                        wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                      );
+                    },
                   );
-                },
-              );
 
-          return card
-              .animate(delay: (index * 40).ms)
-              .fadeIn(duration: 250.ms)
-              .slideY(begin: 0.05, end: 0);
-        },
+              return card
+                  .animate(delay: (index * 40).ms)
+                  .fadeIn(duration: 250.ms)
+                  .slideY(begin: 0.05, end: 0);
+            },
+          ),
+        ),
       ),
     );
   }
