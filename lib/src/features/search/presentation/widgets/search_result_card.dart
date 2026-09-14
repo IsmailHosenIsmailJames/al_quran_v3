@@ -60,6 +60,8 @@ class SearchResultCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
+          mouseCursor: SystemMouseCursors.click,
+          hoverColor: themeState.primary.withValues(alpha: isDark ? 0.05 : 0.03),
           onTap: () {
             onResultSelected?.call();
             Navigator.push(

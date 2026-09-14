@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/features/search/data/models/search_result_model.
 import "package:al_quran_v3/src/features/search/presentation/screens/quran_search_screen.dart";
 import "package:al_quran_v3/src/features/search/presentation/widgets/direct_jump_card.dart";
 import "package:al_quran_v3/src/features/search/presentation/widgets/search_result_card.dart";
+import "package:al_quran_v3/src/features/search/presentation/widgets/search_filter_sheet.dart";
 import "package:al_quran_v3/src/features/search/presentation/widgets/search_scope_tabs.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -158,6 +159,86 @@ void main() {
       expect(widget.startKey, equals("2:1"));
       expect(widget.endKey, equals("2:286"));
       expect(widget.toScrollKey, equals("2:9"));
+    });
+
+    testWidgets("Mobile layout (<700px) opens filter as a modal bottom sheet", (tester) async {
+      tester.view.physicalSize = const Size(400, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pump();
+
+      final filterBtn = find.byIcon(FluentIcons.options_20_regular);
+      expect(filterBtn, findsOneWidget);
+
+      await tester.tap(filterBtn);
+      await tester.pumpAndSettle();
+
+      // Verify bottom sheet modal
+      expect(find.byType(BottomSheet), findsOneWidget);
+      expect(find.text("Search Filters & Options"), findsOneWidget);
+    });
+
+    testWidgets("Tablet layout (700-980px) opens filter as a modal dialog", (tester) async {
+      tester.view.physicalSize = const Size(768, 1024);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pump();
+
+      final filterBtn = find.byIcon(FluentIcons.options_20_regular);
+      expect(filterBtn, findsOneWidget);
+
+      await tester.tap(filterBtn);
+      await tester.pumpAndSettle();
+
+      // Verify dialog modal
+      expect(find.byType(Dialog), findsOneWidget);
+      expect(find.text("Search Filters & Options"), findsOneWidget);
+    });
+
+    testWidgets("Desktop layout (>=980px) renders responsive sidebar and keyboard shortcut hint", (tester) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pump();
+
+      // Verify 'Esc' shortcut hint is visible on desktop
+      expect(find.text("Esc"), findsOneWidget);
+
+      // On 1200px width (>=1100px), sidebar is open by default
+      expect(find.byType(SearchFilterSheet), findsOneWidget);
+
+      // Tap toggle button to collapse sidebar
+      final toggleBtn = find.byIcon(FluentIcons.panel_right_contract_20_filled);
+      expect(toggleBtn, findsOneWidget);
+      await tester.tap(toggleBtn);
+      await tester.pumpAndSettle();
+
+      // Sidebar is now closed
+      expect(find.byType(SearchFilterSheet), findsNothing);
+
+      // Tap toggle button to open sidebar again
+      final expandBtn = find.byIcon(FluentIcons.panel_right_expand_20_regular);
+      expect(expandBtn, findsOneWidget);
+      await tester.tap(expandBtn);
+      await tester.pumpAndSettle();
+
+      // Sidebar is back
+      expect(find.byType(SearchFilterSheet), findsOneWidget);
     });
   });
 }

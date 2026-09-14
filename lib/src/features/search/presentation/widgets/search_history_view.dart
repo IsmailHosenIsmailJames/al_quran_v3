@@ -26,9 +26,13 @@ class SearchHistoryView extends StatelessWidget {
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
     final l10n = AppLocalizations.of(context);
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      children: [
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 780),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          children: [
         // 1. Recent Searches (if available)
         if (history.isNotEmpty) ...[
           Row(
@@ -206,6 +210,8 @@ class SearchHistoryView extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ),
+  ),
+);
   }
 }
