@@ -1,5 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/core/theme/widgets/theme_icon_button.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
@@ -44,265 +45,81 @@ class QuranScriptSettings extends StatelessWidget {
       builder: (context, quranViewState) {
         final cubit = context.read<QuranViewCubit>();
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 1. Script Style & Preview Card
-            _buildSectionContainer(
-              isDark: isDark,
-              child: Column(
+        final scriptCard = _buildScriptStyleCard(
+          context,
+          appLocalizations,
+          themeState,
+          isDark,
+        );
+        final typographyCard = _buildTypographyCard(
+          context,
+          appLocalizations,
+          themeState,
+          isDark,
+          quranViewState,
+          cubit,
+        );
+        final displayCard = _buildDisplayTogglesCard(
+          context,
+          appLocalizations,
+          themeState,
+          isDark,
+          quranViewState,
+          cubit,
+        );
+        final audioCard = _buildAudioReciterCard(
+          context,
+          appLocalizations,
+          themeState,
+          isDark,
+          quranViewState,
+          cubit,
+        );
+
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final isWide = constraints.maxWidth >= 840;
+
+            if (isWide) {
+              return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSectionHeader(
-                    icon: FluentIcons.book_letter_24_regular,
-                    title: appLocalizations.quranStyle,
-                    themePrimary: themeState.primary,
-                  ),
-                  const Gap(12),
-                  getScriptSelectionSegmentedButtons(context),
-                  const Gap(14),
-                  // Live Ayah Preview
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.03)
-                          : Colors.grey.shade50,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isDark
-                            ? Colors.white.withValues(alpha: 0.06)
-                            : Colors.grey.shade200,
-                      ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        scriptCard,
+                        const Gap(14),
+                        typographyCard,
+                      ],
                     ),
-                    child: getAyahByAyahCard(
-                      ayahKey: "1:2",
-                      context: context,
-                      translationListWithInfo: [],
-                      showTopOptions: false,
-                      showOnlyAyah: true,
-                      removeBorder: true,
-                      keepMargin: false,
-                      isCenter: true,
-                      wordByWord: [],
+                  ),
+                  const Gap(16),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        displayCard,
+                        const Gap(14),
+                        audioCard,
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
+              );
+            }
 
-            const Gap(14),
-
-            // 2. Typography & Fonts Card
-            _buildSectionContainer(
-              isDark: isDark,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader(
-                    icon: FluentIcons.text_font_24_regular,
-                    title: "Typography & Font Settings",
-                    themePrimary: themeState.primary,
-                  ),
-                  const Gap(14),
-                  const QuranFontSelectionWidget(),
-                  const Gap(16),
-
-                  // Quran Font Size
-                  _buildStepperSlider(
-                    context,
-                    label: appLocalizations.quranFontSize,
-                    value: quranViewState.fontSize,
-                    displayValue:
-                        "${localizedNumber(context, quranViewState.fontSize.toStringAsFixed(0))} pt",
-                    min: 10,
-                    max: 60,
-                    divisions: 50,
-                    themePrimary: themeState.primary,
-                    isDark: isDark,
-                    onChanged: (val) =>
-                        cubit.changeFontSize(double.parse(val.toStringAsFixed(1))),
-                  ),
-
-                  const Gap(16),
-
-                  // Quran Line Height
-                  _buildStepperSlider(
-                    context,
-                    label: appLocalizations.quranLineHeight,
-                    value: quranViewState.lineHeight,
-                    displayValue:
-                        "${localizedNumber(context, quranViewState.lineHeight.toStringAsFixed(1))}x",
-                    min: 0.8,
-                    max: 4.0,
-                    divisions: 32,
-                    themePrimary: themeState.primary,
-                    isDark: isDark,
-                    onChanged: (val) =>
-                        cubit.changeLineHeight(double.parse(val.toStringAsFixed(1))),
-                  ),
-
-                  const Gap(16),
-
-                  // Translation Font Size
-                  _buildStepperSlider(
-                    context,
-                    label: appLocalizations.translationAndTafsirFontSize,
-                    value: quranViewState.translationFontSize,
-                    displayValue:
-                        "${localizedNumber(context, quranViewState.translationFontSize.toStringAsFixed(0))} pt",
-                    min: 8,
-                    max: 50,
-                    divisions: 42,
-                    themePrimary: themeState.primary,
-                    isDark: isDark,
-                    onChanged: (val) =>
-                        cubit.changeTranslationFontSize(double.parse(val.toStringAsFixed(1))),
-                  ),
-                ],
-              ),
-            ),
-
-            const Gap(14),
-
-            // 3. Display & Content Toggles Card
-            _buildSectionContainer(
-              isDark: isDark,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader(
-                    icon: FluentIcons.eye_24_regular,
-                    title: "Display & Content Options",
-                    themePrimary: themeState.primary,
-                  ),
-                  const Gap(10),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.quranAyah,
-                    value: !quranViewState.hideQuranAyah,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.setViewOptions(hideQuranAyah: !v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.translation,
-                    value: !quranViewState.hideTranslation,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.setViewOptions(hideTranslation: !v),
-                  ),
-
-                  if (!quranViewState.hideTranslation) ...[
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                      child: DownloadedTranslationsSettings(),
-                    ),
-                    const Divider(height: 1),
-                  ],
-
-                  _buildSwitchRow(
-                    title: appLocalizations.wordByWord,
-                    value: !quranViewState.hideWordByWord,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.setViewOptions(hideWordByWord: !v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.keepOpenWordByWord,
-                    value: quranViewState.alwaysOpenWordByWord,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) =>
-                        cubit.setViewOptions(alwaysOpenWordByWord: v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.wordByWordHighlight,
-                    value: quranViewState.enableWordByWordHighlight,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) =>
-                        cubit.setViewOptions(enableWordByWordHighlight: v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.footnote,
-                    value: !quranViewState.hideFootnote,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.setViewOptions(hideFootnote: !v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.circleJojomInQuranScript,
-                    value: quranViewState.circleJojom,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.changeCircleJojom(v),
-                  ),
-
-                  const Divider(height: 1),
-
-                  _buildSwitchRow(
-                    title: appLocalizations.topToolbar,
-                    value: !quranViewState.hideToolbar,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) => cubit.setViewOptions(hideToolbar: !v),
-                  ),
-                ],
-              ),
-            ),
-
-            const Gap(14),
-
-            // 4. Recitation & Reader Audio Card
-            _buildSectionContainer(
-              isDark: isDark,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildSectionHeader(
-                    icon: FluentIcons.headphones_24_regular,
-                    title: appLocalizations.selectReciter,
-                    themePrimary: themeState.primary,
-                  ),
-                  const Gap(12),
-                  BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-                    builder: (context, reciter) {
-                      return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-                        builder: (context, ayahState) {
-                          return buildReciterOverViewWidget(
-                            context,
-                            reciter,
-                            ayahState,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  if (showAudioSpeedController) ...[
-                    const Gap(16),
-                    const PlayBackSpeedWidget(),
-                  ],
-                  const Gap(12),
-                  _buildSwitchRow(
-                    title: appLocalizations.scrollWithRecitation,
-                    subtitle: appLocalizations.scrollWithRecitationDesc,
-                    value: quranViewState.scrollWithRecitation,
-                    themePrimary: themeState.primary,
-                    onChanged: (v) =>
-                        cubit.setViewOptions(scrollWithRecitation: v),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                scriptCard,
+                const Gap(14),
+                typographyCard,
+                const Gap(14),
+                displayCard,
+                const Gap(14),
+                audioCard,
+              ],
+            );
+          },
         );
       },
     );
@@ -316,12 +133,310 @@ class QuranScriptSettings extends StatelessWidget {
               ),
               actions: [themeIconButton(context)],
             ),
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: SafeArea(child: bodyWidget),
+            body: SafeArea(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isWide = constraints.maxWidth >= 840;
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isWide ? 24 : 16,
+                      vertical: 14,
+                    ),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: isWide ? 1080 : 680,
+                        ),
+                        child: bodyWidget,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           )
         : bodyWidget;
+  }
+
+  Widget _buildScriptStyleCard(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    return _buildSectionContainer(
+      isDark: isDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            icon: FluentIcons.book_letter_24_regular,
+            title: appLocalizations.quranStyle,
+            themePrimary: themeState.primary,
+          ),
+          const Gap(12),
+          getScriptSelectionSegmentedButtons(context),
+          const Gap(14),
+          // Live Ayah Preview
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.03)
+                  : Colors.grey.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark
+                    ? Colors.white.withValues(alpha: 0.06)
+                    : Colors.grey.shade200,
+              ),
+            ),
+            child: getAyahByAyahCard(
+              ayahKey: "1:2",
+              context: context,
+              translationListWithInfo: [],
+              showTopOptions: false,
+              showOnlyAyah: true,
+              removeBorder: true,
+              keepMargin: false,
+              isCenter: true,
+              wordByWord: [],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTypographyCard(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+    ThemeState themeState,
+    bool isDark,
+    QuranViewState quranViewState,
+    QuranViewCubit cubit,
+  ) {
+    return _buildSectionContainer(
+      isDark: isDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            icon: FluentIcons.text_font_24_regular,
+            title: "Typography & Font Settings",
+            themePrimary: themeState.primary,
+          ),
+          const Gap(14),
+          const QuranFontSelectionWidget(),
+          const Gap(16),
+
+          // Quran Font Size
+          _buildStepperSlider(
+            context,
+            label: appLocalizations.quranFontSize,
+            value: quranViewState.fontSize,
+            displayValue:
+                "${localizedNumber(context, quranViewState.fontSize.toStringAsFixed(0))} pt",
+            min: 10,
+            max: 60,
+            divisions: 50,
+            themePrimary: themeState.primary,
+            isDark: isDark,
+            onChanged: (val) =>
+                cubit.changeFontSize(double.parse(val.toStringAsFixed(1))),
+          ),
+
+          const Gap(16),
+
+          // Quran Line Height
+          _buildStepperSlider(
+            context,
+            label: appLocalizations.quranLineHeight,
+            value: quranViewState.lineHeight,
+            displayValue:
+                "${localizedNumber(context, quranViewState.lineHeight.toStringAsFixed(1))}x",
+            min: 0.8,
+            max: 4.0,
+            divisions: 32,
+            themePrimary: themeState.primary,
+            isDark: isDark,
+            onChanged: (val) =>
+                cubit.changeLineHeight(double.parse(val.toStringAsFixed(1))),
+          ),
+
+          const Gap(16),
+
+          // Translation Font Size
+          _buildStepperSlider(
+            context,
+            label: appLocalizations.translationAndTafsirFontSize,
+            value: quranViewState.translationFontSize,
+            displayValue:
+                "${localizedNumber(context, quranViewState.translationFontSize.toStringAsFixed(0))} pt",
+            min: 8,
+            max: 50,
+            divisions: 42,
+            themePrimary: themeState.primary,
+            isDark: isDark,
+            onChanged: (val) =>
+                cubit.changeTranslationFontSize(double.parse(val.toStringAsFixed(1))),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDisplayTogglesCard(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+    ThemeState themeState,
+    bool isDark,
+    QuranViewState quranViewState,
+    QuranViewCubit cubit,
+  ) {
+    return _buildSectionContainer(
+      isDark: isDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            icon: FluentIcons.eye_24_regular,
+            title: "Display & Content Options",
+            themePrimary: themeState.primary,
+          ),
+          const Gap(10),
+
+          _buildSwitchRow(
+            title: appLocalizations.quranAyah,
+            value: !quranViewState.hideQuranAyah,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.setViewOptions(hideQuranAyah: !v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.translation,
+            value: !quranViewState.hideTranslation,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.setViewOptions(hideTranslation: !v),
+          ),
+
+          if (!quranViewState.hideTranslation) ...[
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              child: DownloadedTranslationsSettings(),
+            ),
+            const Divider(height: 1),
+          ],
+
+          _buildSwitchRow(
+            title: appLocalizations.wordByWord,
+            value: !quranViewState.hideWordByWord,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.setViewOptions(hideWordByWord: !v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.keepOpenWordByWord,
+            value: quranViewState.alwaysOpenWordByWord,
+            themePrimary: themeState.primary,
+            onChanged: (v) =>
+                cubit.setViewOptions(alwaysOpenWordByWord: v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.wordByWordHighlight,
+            value: quranViewState.enableWordByWordHighlight,
+            themePrimary: themeState.primary,
+            onChanged: (v) =>
+                cubit.setViewOptions(enableWordByWordHighlight: v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.footnote,
+            value: !quranViewState.hideFootnote,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.setViewOptions(hideFootnote: !v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.circleJojomInQuranScript,
+            value: quranViewState.circleJojom,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.changeCircleJojom(v),
+          ),
+
+          const Divider(height: 1),
+
+          _buildSwitchRow(
+            title: appLocalizations.topToolbar,
+            value: !quranViewState.hideToolbar,
+            themePrimary: themeState.primary,
+            onChanged: (v) => cubit.setViewOptions(hideToolbar: !v),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAudioReciterCard(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+    ThemeState themeState,
+    bool isDark,
+    QuranViewState quranViewState,
+    QuranViewCubit cubit,
+  ) {
+    return _buildSectionContainer(
+      isDark: isDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            icon: FluentIcons.headphones_24_regular,
+            title: appLocalizations.selectReciter,
+            themePrimary: themeState.primary,
+          ),
+          const Gap(12),
+          BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+            builder: (context, reciter) {
+              return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                builder: (context, ayahState) {
+                  return buildReciterOverViewWidget(
+                    context,
+                    reciter,
+                    ayahState,
+                  );
+                },
+              );
+            },
+          ),
+          if (showAudioSpeedController) ...[
+            const Gap(16),
+            const PlayBackSpeedWidget(),
+          ],
+          const Gap(12),
+          _buildSwitchRow(
+            title: appLocalizations.scrollWithRecitation,
+            subtitle: appLocalizations.scrollWithRecitationDesc,
+            value: quranViewState.scrollWithRecitation,
+            themePrimary: themeState.primary,
+            onChanged: (v) =>
+                cubit.setViewOptions(scrollWithRecitation: v),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildSectionContainer({
@@ -352,11 +467,13 @@ class QuranScriptSettings extends StatelessWidget {
       children: [
         Icon(icon, size: 18, color: themePrimary),
         const Gap(8),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -381,13 +498,16 @@ class QuranScriptSettings extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 13.5,
-                fontWeight: FontWeight.w600,
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 13.5,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
+            const Gap(8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
@@ -604,40 +724,46 @@ class QuranFontSelectionWidget extends StatelessWidget {
       builder: (context, state) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            state.quranScriptType == QuranScriptType.uthmani
-                ? l10n.uthmaniFont
-                : l10n.indopakFont,
-            style: titleStyle ??
-                const TextStyle(
-                  fontSize: 13.5,
-                  fontWeight: FontWeight.w600,
-                ),
+          Expanded(
+            child: Text(
+              state.quranScriptType == QuranScriptType.uthmani
+                  ? l10n.uthmaniFont
+                  : l10n.indopakFont,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: titleStyle ??
+                  const TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
           ),
           const Gap(10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.05)
-                  : Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 160),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+              decoration: BoxDecoration(
                 color: isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : Colors.grey.shade300,
-              ),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: state.quranScriptType == QuranScriptType.uthmani
-                    ? state.uthmaniFontName
-                    : state.indopakFontName,
-                isExpanded: false,
-                icon: const Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  size: 18,
+                    ? Colors.white.withValues(alpha: 0.05)
+                    : Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade300,
                 ),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: state.quranScriptType == QuranScriptType.uthmani
+                      ? state.uthmaniFontName
+                      : state.indopakFontName,
+                  isExpanded: true,
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    size: 18,
+                  ),
                 dropdownColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                 borderRadius: BorderRadius.circular(12),
                 style: TextStyle(
@@ -701,7 +827,8 @@ class QuranFontSelectionWidget extends StatelessWidget {
               ),
             ),
           ),
-        ],
+        ),
+      ],
       ),
     );
   }
