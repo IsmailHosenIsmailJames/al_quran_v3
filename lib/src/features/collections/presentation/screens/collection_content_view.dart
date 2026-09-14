@@ -327,95 +327,105 @@ class _CollectionContentViewState extends State<CollectionContentView> {
             if (_noteCollectionModel!.notes.isEmpty) {
               return _buildEmptyState(l10n.emptyNoteCollection);
             }
-            return ListView.builder(
-              padding: const EdgeInsets.all(14.0),
-              itemCount: _noteCollectionModel!.notes.length,
-              itemBuilder: (context, index) {
-                NoteModel noteModel = _noteCollectionModel!.notes[index];
-                return Dismissible(
-                  key: ValueKey(
-                    noteModel.id + index.toString(),
-                  ),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFDC2626),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    alignment: Alignment.centerRight,
-                    child: const Icon(
-                      FluentIcons.delete_24_regular,
-                      color: Colors.white,
-                    ),
-                  ),
-                  onDismissed: (direction) async {
-                    final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
-                      ..removeAt(index);
-                    _noteCollectionModel = _noteCollectionModel!.copyWith(
-                      notes: updatedNotes,
+            return Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 960),
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(14.0),
+                  itemCount: _noteCollectionModel!.notes.length,
+                  itemBuilder: (context, index) {
+                    NoteModel noteModel = _noteCollectionModel!.notes[index];
+                    return Dismissible(
+                      key: ValueKey(
+                        noteModel.id + index.toString(),
+                      ),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFDC2626),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        alignment: Alignment.centerRight,
+                        child: const Icon(
+                          FluentIcons.delete_24_regular,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onDismissed: (direction) async {
+                        final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
+                          ..removeAt(index);
+                        _noteCollectionModel = _noteCollectionModel!.copyWith(
+                          notes: updatedNotes,
+                        );
+                        await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
+                          _noteCollectionModel!,
+                        );
+                        setState(() {});
+                      },
+                      child: _buildNoteItem(
+                        noteModel,
+                        context,
+                        index > 0
+                            ? () async {
+                                final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
+                                final item = updatedNotes.removeAt(index);
+                                updatedNotes.insert(index - 1, item);
+                                _noteCollectionModel = _noteCollectionModel!.copyWith(
+                                  notes: updatedNotes,
+                                );
+                                await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
+                                  _noteCollectionModel!,
+                                );
+                                setState(() {});
+                                Fluttertoast.showToast(msg: l10n.success);
+                              }
+                            : null,
+                        index < _noteCollectionModel!.notes.length - 1
+                            ? () async {
+                                final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
+                                final item = updatedNotes.removeAt(index);
+                                updatedNotes.insert(index + 1, item);
+                                _noteCollectionModel = _noteCollectionModel!.copyWith(
+                                  notes: updatedNotes,
+                                );
+                                await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
+                                  _noteCollectionModel!,
+                                );
+                                setState(() {});
+                                Fluttertoast.showToast(msg: l10n.success);
+                              }
+                            : null,
+                        () async {
+                          final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
+                            ..removeAt(index);
+                          _noteCollectionModel = _noteCollectionModel!.copyWith(
+                            notes: updatedNotes,
+                          );
+                          await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
+                            _noteCollectionModel!,
+                          );
+                          setState(() {});
+                          Fluttertoast.showToast(msg: l10n.success);
+                        },
+                      ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
                     );
-                    await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                      _noteCollectionModel!,
-                    );
-                    setState(() {});
                   },
-                  child: _buildNoteItem(
-                    noteModel,
-                    context,
-                    index > 0
-                        ? () async {
-                            final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
-                            final item = updatedNotes.removeAt(index);
-                            updatedNotes.insert(index - 1, item);
-                            _noteCollectionModel = _noteCollectionModel!.copyWith(
-                              notes: updatedNotes,
-                            );
-                            await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                              _noteCollectionModel!,
-                            );
-                            setState(() {});
-                            Fluttertoast.showToast(msg: l10n.success);
-                          }
-                        : null,
-                    index < _noteCollectionModel!.notes.length - 1
-                        ? () async {
-                            final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
-                            final item = updatedNotes.removeAt(index);
-                            updatedNotes.insert(index + 1, item);
-                            _noteCollectionModel = _noteCollectionModel!.copyWith(
-                              notes: updatedNotes,
-                            );
-                            await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                              _noteCollectionModel!,
-                            );
-                            setState(() {});
-                            Fluttertoast.showToast(msg: l10n.success);
-                          }
-                        : null,
-                    () async {
-                      final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
-                        ..removeAt(index);
-                      _noteCollectionModel = _noteCollectionModel!.copyWith(
-                        notes: updatedNotes,
-                      );
-                      await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                        _noteCollectionModel!,
-                      );
-                      setState(() {});
-                      Fluttertoast.showToast(msg: l10n.success);
-                    },
-                  ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
-                );
-              },
+                ),
+              ),
             );
           } else if (_pinnedCollectionModel != null) {
             if (_pinnedCollectionModel!.pinned.isEmpty) {
               return _buildEmptyState(l10n.emptyPinnedCollection);
             }
-            return ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            return Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 960),
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               itemCount: _pinnedCollectionModel!.pinned.length,
               itemBuilder: (context, index) {
                 final pinnedItem = _pinnedCollectionModel!.pinned[index];
@@ -561,8 +571,10 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
                 );
               },
-            );
-          }
+            ),
+          ),
+        );
+      }
           return _buildEmptyState(l10n.noContentAvailable);
         },
       ),

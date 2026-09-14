@@ -111,132 +111,138 @@ class _CollectionPageState extends State<CollectionPage> {
     final themeState = context.read<ThemeCubit>().state;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (_selectedCollectionType != CollectionType.notes) {
-                  setState(() {
-                    _selectedCollectionType = CollectionType.notes;
-                  });
-                  _fetchData();
-                }
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color:
-                      _selectedCollectionType == CollectionType.notes
-                          ? themeState.primary
-                          : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow:
-                      _selectedCollectionType == CollectionType.notes
-                          ? [
-                            BoxShadow(
-                              color: themeState.primary.withValues(alpha: 0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ]
-                          : null,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FluentIcons.note_24_filled,
-                      size: 18,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 480),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (_selectedCollectionType != CollectionType.notes) {
+                      setState(() {
+                        _selectedCollectionType = CollectionType.notes;
+                      });
+                      _fetchData();
+                    }
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
                       color:
                           _selectedCollectionType == CollectionType.notes
-                              ? Colors.white
-                              : colorScheme.onSurfaceVariant,
+                              ? themeState.primary
+                              : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow:
+                          _selectedCollectionType == CollectionType.notes
+                              ? [
+                                BoxShadow(
+                                  color: themeState.primary.withValues(alpha: 0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                              : null,
                     ),
-                    const Gap(8),
-                    Text(
-                      l10n.notes,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color:
-                            _selectedCollectionType == CollectionType.notes
-                                ? Colors.white
-                                : colorScheme.onSurfaceVariant,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FluentIcons.note_24_filled,
+                          size: 18,
+                          color:
+                              _selectedCollectionType == CollectionType.notes
+                                  ? Colors.white
+                                  : colorScheme.onSurfaceVariant,
+                        ),
+                        const Gap(8),
+                        Text(
+                          l10n.notes,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color:
+                                _selectedCollectionType == CollectionType.notes
+                                    ? Colors.white
+                                    : colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                if (_selectedCollectionType != CollectionType.pinned) {
-                  setState(() {
-                    _selectedCollectionType = CollectionType.pinned;
-                  });
-                  _fetchData();
-                }
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color:
-                      _selectedCollectionType == CollectionType.pinned
-                          ? themeState.primary
-                          : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow:
-                      _selectedCollectionType == CollectionType.pinned
-                          ? [
-                            BoxShadow(
-                              color: themeState.primary.withValues(alpha: 0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ]
-                          : null,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FluentIcons.pin_24_filled,
-                      size: 18,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (_selectedCollectionType != CollectionType.pinned) {
+                      setState(() {
+                        _selectedCollectionType = CollectionType.pinned;
+                      });
+                      _fetchData();
+                    }
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
                       color:
                           _selectedCollectionType == CollectionType.pinned
-                              ? Colors.white
-                              : colorScheme.onSurfaceVariant,
+                              ? themeState.primary
+                              : Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow:
+                          _selectedCollectionType == CollectionType.pinned
+                              ? [
+                                BoxShadow(
+                                  color: themeState.primary.withValues(alpha: 0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                              : null,
                     ),
-                    const Gap(8),
-                    Text(
-                      l10n.pinned,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color:
-                            _selectedCollectionType == CollectionType.pinned
-                                ? Colors.white
-                                : colorScheme.onSurfaceVariant,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FluentIcons.pin_24_filled,
+                          size: 18,
+                          color:
+                              _selectedCollectionType == CollectionType.pinned
+                                  ? Colors.white
+                                  : colorScheme.onSurfaceVariant,
+                        ),
+                        const Gap(8),
+                        Text(
+                          l10n.pinned,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color:
+                                _selectedCollectionType == CollectionType.pinned
+                                    ? Colors.white
+                                    : colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -244,86 +250,99 @@ class _CollectionPageState extends State<CollectionPage> {
   Widget _buildSearchAndFilterBar(Color svgColor, AppLocalizations l10n) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      height: 48,
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(
-                  alpha: 0.5,
-                ),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-                ),
-              ),
-              child: TextFormField(
-                controller: _searchTextFieldController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  prefixIcon: Icon(
-                    FluentIcons.search_24_regular,
-                    color: colorScheme.onSurfaceVariant,
-                    size: 20,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: Container(
+          height: 48,
+          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest.withValues(
+                      alpha: 0.5,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                    ),
                   ),
-                  hintText: l10n.searchByCollectionName(
-                    StringCapitalizeExtension(
-                      _selectedCollectionType.name,
-                    ).capitalize(),
-                  ),
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                ),
-              ),
-            ),
-          ),
-          const Gap(10),
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: IconButton(
-              style: IconButton.styleFrom(
-                backgroundColor: colorScheme.surfaceContainerHighest
-                    .withValues(alpha: 0.5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(
-                    color: colorScheme.outlineVariant.withValues(alpha: 0.3),
-                  ),
-                ),
-              ),
-              icon: SvgPicture.asset(
-                "assets/img/adjust-horizontal-settings-svgrepo-com.svg",
-                height: 20,
-                width: 20,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).iconTheme.color ?? svgColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-              onPressed: () {
-                String sortMethod = Hive.box("user").get(
-                  "selected_sorting_method",
-                  defaultValue: SortingMethodsType.values.first.name,
-                );
-                showModalBottomSheet(
-                  context: context,
-                  backgroundColor: Colors.transparent,
-                  builder: (context) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(28),
-                        ),
+                  child: TextFormField(
+                    controller: _searchTextFieldController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        FluentIcons.search_24_regular,
+                        color: colorScheme.onSurfaceVariant,
+                        size: 20,
                       ),
+                      hintText: l10n.searchByCollectionName(
+                        StringCapitalizeExtension(
+                          _selectedCollectionType.name,
+                        ).capitalize(),
+                      ),
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+              ),
+              const Gap(10),
+              SizedBox(
+                width: 48,
+                height: 48,
+                child: IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: colorScheme.surfaceContainerHighest
+                        .withValues(alpha: 0.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                      ),
+                    ),
+                  ),
+                  icon: SvgPicture.asset(
+                    "assets/img/adjust-horizontal-settings-svgrepo-com.svg",
+                    height: 20,
+                    width: 20,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).iconTheme.color ?? svgColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  onPressed: () {
+                    String sortMethod = Hive.box("user").get(
+                      "selected_sorting_method",
+                      defaultValue: SortingMethodsType.values.first.name,
+                    );
+                    final isWide = MediaQuery.of(context).size.width >= 600;
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      constraints: BoxConstraints(
+                        maxWidth: isWide ? 480 : double.infinity,
+                      ),
+                      builder: (context) {
+                        return Container(
+                          margin: isWide
+                              ? const EdgeInsets.all(16.0)
+                              : EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: isWide
+                                ? BorderRadius.circular(28)
+                                : const BorderRadius.vertical(
+                                    top: Radius.circular(28),
+                                  ),
+                          ),
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -418,7 +437,9 @@ class _CollectionPageState extends State<CollectionPage> {
           ),
         ],
       ),
-    );
+    ),
+  ),
+);
   }
 
   Widget _buildEmptyState(Color svgColor, AppLocalizations l10n) {
@@ -521,30 +542,85 @@ class _CollectionPageState extends State<CollectionPage> {
                       ),
                     )
                     : hasItems
-                    ? ListView.builder(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14.0,
-                        vertical: 6.0,
-                      ),
-                      itemCount:
-                          isNotes
-                              ? _filteredNoteCollection.length
-                              : _filteredPinnedCollection.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final widgetItem =
-                            isNotes
-                                ? _getNoteCollectionWidget(
-                                  _filteredNoteCollection[index],
-                                  l10n,
-                                )
-                                : _getPinnedCollectionWidget(
-                                  _filteredPinnedCollection[index],
-                                  l10n,
-                                );
-                        return widgetItem
-                            .animate(delay: (index * 40).ms)
-                            .fadeIn(duration: 250.ms)
-                            .slideY(begin: 0.08, end: 0);
+                    ? LayoutBuilder(
+                      builder: (context, constraints) {
+                        final width = constraints.maxWidth;
+                        final isMultiColumn = width >= 640;
+                        final crossAxisCount = width >= 1024 ? 3 : 2;
+
+                        Widget content;
+                        if (isMultiColumn) {
+                          content = GridView.builder(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 10.0,
+                            ),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: crossAxisCount,
+                                  crossAxisSpacing: 12,
+                                  mainAxisSpacing: 12,
+                                  mainAxisExtent: 88,
+                                ),
+                            itemCount:
+                                isNotes
+                                    ? _filteredNoteCollection.length
+                                    : _filteredPinnedCollection.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final widgetItem =
+                                  isNotes
+                                      ? _getNoteCollectionWidget(
+                                        _filteredNoteCollection[index],
+                                        l10n,
+                                        margin: EdgeInsets.zero,
+                                      )
+                                      : _getPinnedCollectionWidget(
+                                        _filteredPinnedCollection[index],
+                                        l10n,
+                                        margin: EdgeInsets.zero,
+                                      );
+                              return widgetItem
+                                  .animate(delay: (index * 30).ms)
+                                  .fadeIn(duration: 250.ms)
+                                  .slideY(begin: 0.08, end: 0);
+                            },
+                          );
+                        } else {
+                          content = ListView.builder(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14.0,
+                              vertical: 6.0,
+                            ),
+                            itemCount:
+                                isNotes
+                                    ? _filteredNoteCollection.length
+                                    : _filteredPinnedCollection.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final widgetItem =
+                                  isNotes
+                                      ? _getNoteCollectionWidget(
+                                        _filteredNoteCollection[index],
+                                        l10n,
+                                      )
+                                      : _getPinnedCollectionWidget(
+                                        _filteredPinnedCollection[index],
+                                        l10n,
+                                      );
+                              return widgetItem
+                                  .animate(delay: (index * 40).ms)
+                                  .fadeIn(duration: 250.ms)
+                                  .slideY(begin: 0.08, end: 0);
+                            },
+                          );
+                        }
+
+                        return Align(
+                          alignment: Alignment.topCenter,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 1200),
+                            child: content,
+                          ),
+                        );
                       },
                     )
                     : _buildEmptyState(svgColor, l10n),
@@ -556,13 +632,14 @@ class _CollectionPageState extends State<CollectionPage> {
 
   Widget _getPinnedCollectionWidget(
     PinnedCollectionModel pinnedCollectionModel,
-    AppLocalizations l10n,
-  ) {
+    AppLocalizations l10n, {
+    EdgeInsetsGeometry? margin,
+  }) {
     final colorScheme = Theme.of(context).colorScheme;
     final folderColor = safeParseColor(pinnedCollectionModel.colorHex);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
+      margin: margin ?? const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -575,7 +652,6 @@ class _CollectionPageState extends State<CollectionPage> {
       ),
       child: Material(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
@@ -661,34 +737,36 @@ class _CollectionPageState extends State<CollectionPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    l10n.changeName,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Gap(14),
-                                  TextFormField(
-                                    controller: nameController,
-                                    autofocus: true,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 440),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      l10n.changeName,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
-                                  const Gap(18),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 44,
-                                    child: ElevatedButton.icon(
+                                    const Gap(14),
+                                    TextFormField(
+                                      controller: nameController,
+                                      autofocus: true,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                    ),
+                                    const Gap(18),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      height: 44,
+                                      child: ElevatedButton.icon(
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -729,8 +807,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                 ],
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        );
+                      },
                       );
                     },
                     child: Row(
@@ -816,13 +895,14 @@ class _CollectionPageState extends State<CollectionPage> {
 
   Widget _getNoteCollectionWidget(
     NoteCollectionModel noteCollectionModel,
-    AppLocalizations l10n,
-  ) {
+    AppLocalizations l10n, {
+    EdgeInsetsGeometry? margin,
+  }) {
     final colorScheme = Theme.of(context).colorScheme;
     final folderColor = safeParseColor(noteCollectionModel.colorHex);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
+      margin: margin ?? const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
@@ -835,7 +915,6 @@ class _CollectionPageState extends State<CollectionPage> {
       ),
       child: Material(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
@@ -919,34 +998,36 @@ class _CollectionPageState extends State<CollectionPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    l10n.changeName,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Gap(14),
-                                  TextFormField(
-                                    controller: nameController,
-                                    autofocus: true,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 440),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      l10n.changeName,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
-                                  const Gap(18),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 44,
-                                    child: ElevatedButton.icon(
+                                    const Gap(14),
+                                    TextFormField(
+                                      controller: nameController,
+                                      autofocus: true,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                    ),
+                                    const Gap(18),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      height: 44,
+                                      child: ElevatedButton.icon(
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -987,8 +1068,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                 ],
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        );
+                      },
                       );
                     },
                     child: Row(
