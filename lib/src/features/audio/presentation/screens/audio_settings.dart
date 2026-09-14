@@ -44,17 +44,51 @@ class _AudioSettingsState extends State<AudioSettings> {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: content,
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth >= 800;
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isWide ? 24 : 16,
+                  vertical: 14,
+                ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: isWide ? 960 : 650,
+                    ),
+                    child: content,
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       );
     }
 
     return widget.scrollable
-        ? SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: content,
+        ? LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth >= 800;
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isWide ? 24 : 16,
+                  vertical: 14,
+                ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: isWide ? 960 : 650,
+                    ),
+                    child: content,
+                  ),
+                ),
+              );
+            },
           )
         : content;
   }
@@ -64,73 +98,101 @@ class _AudioSettingsState extends State<AudioSettings> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // 1. Playback Speed Section
-        _buildSectionCard(
-          context,
-          isDark: isDark,
-          title: l10n.playbackSpeed,
-          icon: FluentIcons.play_circle_20_regular,
-          child: const PlayBackSpeedWidget(),
-        ),
+    final speedCard = _buildSectionCard(
+      context,
+      isDark: isDark,
+      title: l10n.playbackSpeed,
+      icon: FluentIcons.play_circle_20_regular,
+      child: const PlayBackSpeedWidget(),
+    );
 
-        const Gap(16),
-
-        // 2. Streaming & Network Section
-        _buildSectionCard(
-          context,
-          isDark: isDark,
-          title: l10n.streamingAndNetwork,
-          icon: FluentIcons.cellular_data_1_20_regular,
-          child: BlocBuilder<QuranViewCubit, QuranViewState>(
-            builder: (context, quranViewState) {
-              return SwitchListTile.adaptive(
-                contentPadding: EdgeInsets.zero,
-                title: Text(
-                  l10n.useAudioStream,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+    final streamCard = _buildSectionCard(
+      context,
+      isDark: isDark,
+      title: l10n.streamingAndNetwork,
+      icon: FluentIcons.cellular_data_1_20_regular,
+      child: BlocBuilder<QuranViewCubit, QuranViewState>(
+        builder: (context, quranViewState) {
+          return SwitchListTile.adaptive(
+            contentPadding: EdgeInsets.zero,
+            title: Text(
+              l10n.useAudioStream,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                l10n.useAudioStreamDesc,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                 ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Text(
-                    l10n.useAudioStreamDesc,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
-                    ),
-                  ),
-                ),
-                value: quranViewState.useAudioStream,
-                activeTrackColor: themeState.primary,
-                onChanged: (value) {
-                  context.read<QuranViewCubit>().setViewOptions(
-                        useAudioStream: value,
-                      );
-                  if (value) {
-                    Fluttertoast.showToast(msg: l10n.useAudioStreamDesc);
-                  } else {
-                    Fluttertoast.showToast(msg: l10n.notUseAudioStreamDesc);
-                  }
-                  AudioPlayerManager.stopListeningAudioPlayerState();
-                },
-              );
+              ),
+            ),
+            value: quranViewState.useAudioStream,
+            activeTrackColor: themeState.primary,
+            onChanged: (value) {
+              context.read<QuranViewCubit>().setViewOptions(
+                    useAudioStream: value,
+                  );
+              if (value) {
+                Fluttertoast.showToast(msg: l10n.useAudioStreamDesc);
+              } else {
+                Fluttertoast.showToast(msg: l10n.notUseAudioStreamDesc);
+              }
+              AudioPlayerManager.stopListeningAudioPlayerState();
             },
-          ),
-        ),
+          );
+        },
+      ),
+    );
 
-        const Gap(16),
+    final cacheCard = _buildSectionCard(
+      context,
+      isDark: isDark,
+      title: l10n.audioCached,
+      icon: FluentIcons.storage_20_regular,
+      child: _buildCacheSection(context, l10n, themeState, isDark),
+    );
 
-        // 3. Audio Cache Storage Section
-        _buildSectionCard(
-          context,
-          isDark: isDark,
-          title: l10n.audioCached,
-          icon: FluentIcons.storage_20_regular,
-          child: _buildCacheSection(context, l10n, themeState, isDark),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth >= 800;
+
+        if (isWide) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 5,
+                child: Column(
+                  children: [
+                    speedCard,
+                    const Gap(16),
+                    streamCard,
+                  ],
+                ),
+              ),
+              const Gap(16),
+              Expanded(
+                flex: 6,
+                child: cacheCard,
+              ),
+            ],
+          );
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            speedCard,
+            const Gap(16),
+            streamCard,
+            const Gap(16),
+            cacheCard,
+          ],
+        );
+      },
     );
   }
 
@@ -171,10 +233,12 @@ class _AudioSettingsState extends State<AudioSettings> {
             children: [
               Icon(icon, size: 20, color: themeState.primary),
               const Gap(8),
-              Text(
-                title,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -182,7 +246,10 @@ class _AudioSettingsState extends State<AudioSettings> {
           const Gap(12),
           const Divider(height: 1),
           const Gap(12),
-          child,
+          Material(
+            color: Colors.transparent,
+            child: child,
+          ),
         ],
       ),
     );
