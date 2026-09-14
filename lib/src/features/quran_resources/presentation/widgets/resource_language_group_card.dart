@@ -8,11 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ResourceLanguageGroupCard extends StatelessWidget {
   final ResourceGroupEntity group;
   final QuranResourcesState state;
+  final bool forceExpanded;
 
   const ResourceLanguageGroupCard({
     super.key,
     required this.group,
     required this.state,
+    this.forceExpanded = false,
   });
 
   @override
@@ -23,6 +25,8 @@ class ResourceLanguageGroupCard extends StatelessWidget {
         group.resources.where((r) => r.isDownloaded).length;
     final int selectedCount =
         group.resources.where((r) => r.isSelected).length;
+    final isSearchActive = state.searchQuery.trim().isNotEmpty;
+    final shouldExpand = isSearchActive || forceExpanded;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
@@ -48,7 +52,8 @@ class ResourceLanguageGroupCard extends StatelessWidget {
           dividerColor: Colors.transparent,
         ),
         child: ExpansionTile(
-          key: PageStorageKey(group.languageKey),
+          key: PageStorageKey("${group.languageKey}_$shouldExpand"),
+          initiallyExpanded: shouldExpand,
           tilePadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
           iconColor: themeState.primary,
           collapsedIconColor:
@@ -196,15 +201,73 @@ class ResourceLanguageGroupCard extends StatelessWidget {
             bottom: 12.0,
             top: 4.0,
           ),
-          children: group.resources.map((resource) {
-            final bool isDownloading =
-                state.downloadingResourcePath == resource.fullPath;
-            return ResourceItemTile(
-              resource: resource,
-              isDownloading: isDownloading,
-              downloadProgress: isDownloading ? state.downloadProgress : 0.0,
-            );
-          }).toList(),
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final isWide = constraints.maxWidth >= 640;
+                if (isWide) {
+                  final rows = <Widget>[];
+                  for (int i = 0; i < group.resources.length; i += 2) {
+                    final r1 = group.resources[i];
+                    final r2 = (i + 1 < group.resources.length)
+                        ? group.resources[i + 1]
+                        : null;
+
+                    final bool isDownloading1 =
+                        state.downloadingResourcePath == r1.fullPath;
+                    final bool isDownloading2 = r2 != null &&
+                        state.downloadingResourcePath == r2.fullPath;
+
+                    rows.add(
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ResourceItemTile(
+                                resource: r1,
+                                isDownloading: isDownloading1,
+                                downloadProgress: isDownloading1
+                                    ? state.downloadProgress
+                                    : 0.0,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: r2 != null
+                                  ? ResourceItemTile(
+                                      resource: r2,
+                                      isDownloading: isDownloading2,
+                                      downloadProgress: isDownloading2
+                                          ? state.downloadProgress
+                                          : 0.0,
+                                    )
+                                  : const SizedBox.shrink(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                  return Column(children: rows);
+                }
+
+                return Column(
+                  children: group.resources.map((resource) {
+                    final bool isDownloading =
+                        state.downloadingResourcePath == resource.fullPath;
+                    return ResourceItemTile(
+                      resource: resource,
+                      isDownloading: isDownloading,
+                      downloadProgress:
+                          isDownloading ? state.downloadProgress : 0.0,
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

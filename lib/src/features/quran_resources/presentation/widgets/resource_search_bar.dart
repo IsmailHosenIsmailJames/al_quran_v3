@@ -6,10 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourceSearchBar extends StatelessWidget {
   final TextEditingController searchController;
+  final FocusNode? focusNode;
 
   const ResourceSearchBar({
     super.key,
     required this.searchController,
+    this.focusNode,
   });
 
   @override
@@ -35,6 +37,7 @@ class ResourceSearchBar extends StatelessWidget {
           builder: (context, value, child) {
             return TextField(
               controller: searchController,
+              focusNode: focusNode,
               autofocus: true,
               onChanged: (val) => cubit.setSearchQuery(val),
               decoration: InputDecoration(

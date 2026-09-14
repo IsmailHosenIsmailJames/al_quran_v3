@@ -45,6 +45,7 @@ class ResourceItemTile extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
+          hoverColor: themeState.primary.withValues(alpha: isDark ? 0.08 : 0.04),
           onTap: () {
             if (isDownloading) return;
             if (!resource.isDownloaded) {
@@ -61,21 +62,28 @@ class ResourceItemTile extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         children: [
                           Flexible(
-                            child: Text(
-                              resource.name,
-                              style: TextStyle(
-                                fontWeight: resource.isSelected
-                                    ? FontWeight.bold
-                                    : FontWeight.w600,
-                                fontSize: 14.5,
-                                color: isDark
-                                    ? Colors.white
-                                    : Colors.grey.shade900,
+                            child: Tooltip(
+                              message: resource.name,
+                              waitDuration: const Duration(milliseconds: 500),
+                              child: Text(
+                                resource.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: resource.isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.w600,
+                                  fontSize: 14.5,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
+                                ),
                               ),
                             ),
                           ),
@@ -107,6 +115,8 @@ class ResourceItemTile extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           resource.englishName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 12,
                             color: isDark
@@ -164,6 +174,7 @@ class ResourceItemTile extends StatelessWidget {
                     onPressed: () => cubit.toggleSelection(resource),
                   ),
                   PopupMenuButton<String>(
+                    tooltip: "More options",
                     icon: Icon(
                       Icons.more_vert_rounded,
                       color:

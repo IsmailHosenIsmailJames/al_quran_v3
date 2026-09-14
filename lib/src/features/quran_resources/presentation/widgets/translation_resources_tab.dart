@@ -1,12 +1,21 @@
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_state.dart';
+import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_filter_chips.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_language_group_card.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resources_empty_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TranslationResourcesTab extends StatelessWidget {
+class TranslationResourcesTab extends StatefulWidget {
   const TranslationResourcesTab({super.key});
+
+  @override
+  State<TranslationResourcesTab> createState() =>
+      _TranslationResourcesTabState();
+}
+
+class _TranslationResourcesTabState extends State<TranslationResourcesTab> {
+  ResourceFilterType _filter = ResourceFilterType.all;
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +26,76 @@ class TranslationResourcesTab extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (state.translationGroups.isEmpty) {
+        if (state.translationGroups.isEmpty && state.searchQuery.isNotEmpty) {
           return ResourcesEmptyState(query: state.searchQuery);
         }
 
-        return ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics(),
+        int totalCount = 0;
+        int downloadedCount = 0;
+        int selectedCount = 0;
+
+        for (final g in state.translationGroups) {
+          for (final r in g.resources) {
+            totalCount++;
+            if (r.isDownloaded) downloadedCount++;
+            if (r.isSelected) selectedCount++;
+          }
+        }
+
+        final filteredGroups = state.translationGroups.map((g) {
+          if (_filter == ResourceFilterType.downloaded) {
+            return g.copyWith(
+              resources: g.resources.where((r) => r.isDownloaded).toList(),
+            );
+          } else if (_filter == ResourceFilterType.selected) {
+            return g.copyWith(
+              resources: g.resources.where((r) => r.isSelected).toList(),
+            );
+          }
+          return g;
+        }).where((g) => g.resources.isNotEmpty).toList();
+
+        return Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1040),
+            child: Column(
+              children: [
+                Center(
+                  child: ResourceFilterChips(
+                    activeFilter: _filter,
+                    onFilterChanged: (f) => setState(() => _filter = f),
+                    totalCount: totalCount,
+                    downloadedCount: downloadedCount,
+                    selectedCount: selectedCount,
+                  ),
+                ),
+                Expanded(
+                  child: filteredGroups.isEmpty
+                      ? ResourcesEmptyState(
+                          query: _filter == ResourceFilterType.downloaded
+                              ? "downloaded translations"
+                              : "active translations",
+                        )
+                      : ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics(),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
+                          itemCount: filteredGroups.length,
+                          itemBuilder: (context, index) {
+                            final group = filteredGroups[index];
+                            return ResourceLanguageGroupCard(
+                              group: group,
+                              state: state,
+                              forceExpanded: _filter != ResourceFilterType.all,
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
           ),
-          padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
-          itemCount: state.translationGroups.length,
-          itemBuilder: (context, index) {
-            final group = state.translationGroups[index];
-            return ResourceLanguageGroupCard(group: group, state: state);
-          },
         );
       },
     );
