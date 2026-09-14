@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -39,205 +40,251 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
     }).toList();
 
     return Scaffold(
+      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text(
           l10n.languageSettings,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocBuilder<LanguageCubit, MyAppLocalization>(
-        builder: (context, currentLanguage) {
-          return Column(
-            children: [
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Container(
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: isDark
-                          ? Colors.white.withValues(alpha: 0.08)
-                          : Colors.grey.shade300,
+      body: SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 820),
+            child: BlocBuilder<LanguageCubit, MyAppLocalization>(
+              builder: (context, currentLanguage) {
+                final width = MediaQuery.of(context).size.width;
+                final isWide = width >= 650;
+
+                return Column(
+                  children: [
+                    // Search Bar
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Container(
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? Colors.white.withValues(alpha: 0.05)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: isDark
+                                ? Colors.white.withValues(alpha: 0.08)
+                                : Colors.grey.shade300,
+                          ),
+                        ),
+                        child: TextField(
+                          controller: _searchController,
+                          style: const TextStyle(fontSize: 14),
+                          decoration: InputDecoration(
+                            hintText: l10n.selectAppLanguage,
+                            hintStyle: TextStyle(
+                              fontSize: 13,
+                              color: isDark
+                                  ? Colors.grey.shade500
+                                  : Colors.grey.shade400,
+                            ),
+                            prefixIcon: Icon(
+                              FluentIcons.search_20_regular,
+                              size: 18,
+                              color: isDark
+                                  ? Colors.grey.shade400
+                                  : Colors.grey.shade600,
+                            ),
+                            suffixIcon: query.isNotEmpty
+                                ? IconButton(
+                                    icon: const Icon(
+                                      FluentIcons.dismiss_circle_20_filled,
+                                      size: 16,
+                                    ),
+                                    onPressed: () {
+                                      _searchController.clear();
+                                      setState(() {});
+                                    },
+                                  )
+                                : null,
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 11,
+                            ),
+                          ),
+                          onChanged: (_) => setState(() {}),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: TextField(
-                    controller: _searchController,
-                    style: const TextStyle(fontSize: 14),
-                    decoration: InputDecoration(
-                      hintText: l10n.selectAppLanguage,
-                      hintStyle: TextStyle(
-                        fontSize: 13,
-                        color: isDark
-                            ? Colors.grey.shade500
-                            : Colors.grey.shade400,
-                      ),
-                      prefixIcon: Icon(
-                        FluentIcons.search_20_regular,
-                        size: 18,
-                        color: isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade600,
-                      ),
-                      suffixIcon: query.isNotEmpty
-                          ? IconButton(
-                              icon: const Icon(
-                                FluentIcons.dismiss_circle_20_filled,
-                                size: 16,
+
+                    const Gap(4),
+
+                    // Language List (2-column grid on wide screens, single column on mobile)
+                    Expanded(
+                      child: filteredLanguages.isEmpty
+                          ? Center(
+                              child: Text(
+                                "No languages found",
+                                style: TextStyle(
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
+                                ),
                               ),
-                              onPressed: () {
-                                _searchController.clear();
-                                setState(() {});
-                              },
                             )
-                          : null,
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 11,
-                      ),
+                          : (isWide
+                              ? GridView.builder(
+                                  controller: _scrollController,
+                                  padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisExtent: 68,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 8,
+                                  ),
+                                  itemCount: filteredLanguages.length,
+                                  itemBuilder: (context, index) {
+                                    final lang = filteredLanguages[index];
+                                    return _buildLanguageCard(
+                                      lang,
+                                      currentLanguage,
+                                      themeState,
+                                      isDark,
+                                    );
+                                  },
+                                )
+                              : ListView.separated(
+                                  controller: _scrollController,
+                                  padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
+                                  itemCount: filteredLanguages.length,
+                                  separatorBuilder: (context, index) => const Gap(8),
+                                  itemBuilder: (context, index) {
+                                    final lang = filteredLanguages[index];
+                                    return _buildLanguageCard(
+                                      lang,
+                                      currentLanguage,
+                                      themeState,
+                                      isDark,
+                                    );
+                                  },
+                                )),
                     ),
-                    onChanged: (_) => setState(() {}),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLanguageCard(
+    MyAppLocalization lang,
+    MyAppLocalization currentLanguage,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    final isSelected = currentLanguage.locale.languageCode == lang.locale.languageCode;
+
+    return Material(
+      color: isSelected
+          ? themeState.primary.withValues(
+              alpha: isDark ? 0.15 : 0.06,
+            )
+          : (isDark ? const Color(0xFF1E1E1E) : Colors.white),
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        mouseCursor: SystemMouseCursors.click,
+        onTap: () {
+          context.read<LanguageCubit>().changeLanguage(lang);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: isSelected
+                  ? themeState.primary
+                  : (isDark
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.grey.shade200),
+              width: isSelected ? 1.5 : 1.0,
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? themeState.primary
+                      : (isDark
+                          ? Colors.white.withValues(
+                              alpha: 0.08,
+                            )
+                          : Colors.grey.shade100),
+                  shape: BoxShape.circle,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  lang.locale.languageCode.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: isSelected
+                        ? Colors.white
+                        : (isDark
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade700),
                   ),
                 ),
               ),
-
-              const Gap(4),
-
-              // Language List
+              const Gap(14),
               Expanded(
-                child: filteredLanguages.isEmpty
-                    ? Center(
-                        child: Text(
-                          "No languages found",
-                          style: TextStyle(
-                            color: isDark
-                                ? Colors.grey.shade400
-                                : Colors.grey.shade600,
-                          ),
-                        ),
-                      )
-                    : ListView.separated(
-                        controller: _scrollController,
-                        padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
-                        itemCount: filteredLanguages.length,
-                        separatorBuilder: (context, index) => const Gap(8),
-                        itemBuilder: (context, index) {
-                          final lang = filteredLanguages[index];
-                          final isSelected = currentLanguage.locale.languageCode ==
-                              lang.locale.languageCode;
-
-                          return Material(
-                            color: isSelected
-                                ? themeState.primary.withValues(
-                                    alpha: isDark ? 0.15 : 0.06,
-                                  )
-                                : (isDark
-                                    ? const Color(0xFF1E1E1E)
-                                    : Colors.white),
-                            borderRadius: BorderRadius.circular(14),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(14),
-                              onTap: () {
-                                context.read<LanguageCubit>().changeLanguage(lang);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14),
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? themeState.primary
-                                        : (isDark
-                                            ? Colors.white.withValues(alpha: 0.06)
-                                            : Colors.grey.shade200),
-                                    width: isSelected ? 1.5 : 1.0,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 38,
-                                      height: 38,
-                                      decoration: BoxDecoration(
-                                        color: isSelected
-                                            ? themeState.primary
-                                            : (isDark
-                                                ? Colors.white.withValues(
-                                                    alpha: 0.08,
-                                                  )
-                                                : Colors.grey.shade100),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        lang.locale.languageCode.toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: isSelected
-                                              ? Colors.white
-                                              : (isDark
-                                                  ? Colors.grey.shade300
-                                                  : Colors.grey.shade700),
-                                        ),
-                                      ),
-                                    ),
-                                    const Gap(14),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            lang.native,
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: isSelected
-                                                  ? FontWeight.bold
-                                                  : FontWeight.w600,
-                                              color: isDark
-                                                  ? Colors.white
-                                                  : Colors.grey.shade900,
-                                            ),
-                                          ),
-                                          const Gap(2),
-                                          Text(
-                                            lang.english,
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: isDark
-                                                  ? Colors.grey.shade400
-                                                  : Colors.grey.shade600,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    if (isSelected)
-                                      Icon(
-                                        FluentIcons.checkmark_circle_24_filled,
-                                        color: themeState.primary,
-                                        size: 22,
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      lang.native,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 14.5,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                        color: isDark ? Colors.white : Colors.grey.shade900,
                       ),
+                    ),
+                    const Gap(2),
+                    Text(
+                      lang.english,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 11.5,
+                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              if (isSelected)
+                Icon(
+                  FluentIcons.checkmark_circle_24_filled,
+                  color: themeState.primary,
+                  size: 22,
+                ),
             ],
-          );
-        },
+          ),
+        ),
       ),
     );
   }
