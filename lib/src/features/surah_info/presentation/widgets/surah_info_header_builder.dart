@@ -14,6 +14,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/surah_h
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/screens/surah_info_view.dart";
+import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
@@ -32,6 +33,51 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
 
   const SurahInfoHeaderBuilder({super.key, required this.headerInfoModel});
 
+  static Future<void> openSurahInfo(
+    BuildContext context,
+    SurahInfoModel surahInfoModel,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final locale = context.read<LanguageCubit>().state.locale;
+
+    String? surahInfo = await QuranTranslationFunction.getInfoOfSurah(
+      surahInfoModel.id.toString(),
+      locale.languageCode,
+    );
+
+    if (surahInfo == null && context.mounted) {
+      // Try downloading English surah info on demand
+      final success = await QuranTranslationFunction.downloadSurahInfo(
+        const Locale("en"),
+      );
+      if (success) {
+        surahInfo = await QuranTranslationFunction.getInfoOfSurah(
+          surahInfoModel.id.toString(),
+        );
+      }
+    }
+
+    if (!context.mounted) return;
+
+    if (surahInfo == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.noResultsFound)),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder:
+            (context) => SurahInfoView(
+              html: surahInfo!,
+              surahInfoModel: surahInfoModel,
+            ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeState themeState = context.read<ThemeCubit>().state;
@@ -43,17 +89,18 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
         borderRadius: BorderRadius.circular(roundedRadius),
         color: themeState.primary.withValues(alpha: 0.05),
       ),
-      height: 80,
+      constraints: const BoxConstraints(minHeight: 84),
       child: Stack(
         children: [
           Row(
             children: [
               Container(
-                height: 80,
-                width: 80,
+                height: 84,
+                width: 84,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   image: DecorationImage(
+                    fit: BoxFit.cover,
                     image: AssetImage(
                       headerInfoModel.surahInfoModel.revelationPlace ==
                               "madinah"
@@ -63,78 +110,98 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                   ),
                 ),
               ),
-              const Gap(7),
+              const Gap(8),
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text:
-                                "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)}  - ",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text:
-                                "surah${headerInfoModel.surahInfoModel.id.toString().padLeft(3, '0')}",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontFamily: "surah-name-v1",
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text:
+                                  "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)}  - ",
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(l10n.verseCount),
-                        Text(
-                          headerInfoModel.surahInfoModel.versesCount.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                            TextSpan(
+                              text:
+                                  "surah${headerInfoModel.surahInfoModel.id.toString().padLeft(3, '0')}",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontFamily: "surah-name-v1",
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    if (QuranTranslationFunction.isInfoAvailable(
-                      context.read<LanguageCubit>().state.locale,
-                    ))
-                      SizedBox(
-                        height: 25,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: const RoundedRectangleBorder(),
+                      ),
+                      const Gap(4),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(l10n.verseCount),
+                              Text(
+                                headerInfoModel.surahInfoModel.versesCount.toString(),
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                          onPressed: () async {
-                            final String? surahInfo =
-                                await QuranTranslationFunction.getInfoOfSurah(
-                                  context.read<LanguageCubit>().state.locale,
-                                  headerInfoModel.surahInfoModel.id.toString(),
-                                );
-                            if (surahInfo == null || !context.mounted) return;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SurahInfoView(
-                                  html: surahInfo,
-                                  surahInfoModel:
-                                      headerInfoModel.surahInfoModel,
+                          if (QuranTranslationFunction.isInfoAvailable())
+                            InkWell(
+                              onTap:
+                                  () => openSurahInfo(
+                                    context,
+                                    headerInfoModel.surahInfoModel,
+                                  ),
+                              borderRadius: BorderRadius.circular(8),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: themeState.primary.withValues(
+                                    alpha: 0.12,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: themeState.primary.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      FluentIcons.info_16_regular,
+                                      size: 13,
+                                      color: themeState.primary,
+                                    ),
+                                    const Gap(4),
+                                    Text(
+                                      l10n.moreInfo,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: themeState.primary,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            );
-                          },
-                          child: Text(
-                            l10n.moreInfo,
-                            style: TextStyle(
-                              color: themeState.primary,
-                              decoration: TextDecoration.underline,
                             ),
-                          ),
-                        ),
+                        ],
                       ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
