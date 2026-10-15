@@ -16,7 +16,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^2.0.0
   flutter_bloc: ^9.1.0
   shared_preferences: ^2.5.3
   gap: ^3.0.1
@@ -64,7 +64,7 @@ dependencies:
   flutter_animate: ^4.5.2
   hive_ce: ^2.15.1
   hive_ce_flutter: ^2.3.3
-  google_fonts: ^8.0.2
+  google_fonts: ^9.0.0
   web: ^1.1.1
   flutter_native_splash: ^2.4.7
   adhan_dart:
@@ -77,11 +77,11 @@ dependencies:
   timezone: ^0.11.0
   workmanager: ^0.10.0+1
   flutter_inappwebview: ^6.1.5
-  home_widget: ^0.9.3
-  firebase_core: ^4.13.0
-  firebase_auth: ^6.1.2
+  home_widget: ^0.10.0
+  firebase_core: ^4.15.0
+  firebase_auth: ^6.7.0
   google_sign_in: ^7.2.0
-  firebase_database: ^12.4.7
+  firebase_database: ^12.6.0
 
 dev_dependencies:
   flutter_test:

@@ -2,39 +2,38 @@ PODS:
   - Flutter (1.0.0)
   - flutter_compass (0.0.1):
     - Flutter
-  - fluttertoast (0.0.2):
+  - flutter_inappwebview_ios (0.0.1):
     - Flutter
-  - permission_handler_apple (9.3.0):
+    - flutter_inappwebview_ios/Core (= 0.0.1)
+    - OrderedSet (~> 6.0.3)
+  - flutter_inappwebview_ios/Core (0.0.1):
     - Flutter
-  - vibration (3.0.0):
-    - Flutter
+    - OrderedSet (~> 6.0.3)
+  - OrderedSet (6.0.3)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_compass (from `.symlinks/plugins/flutter_compass/ios`)
-  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
-  - vibration (from `.symlinks/plugins/vibration/ios`)
+  - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - OrderedSet
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   flutter_compass:
     :path: ".symlinks/plugins/flutter_compass/ios"
-  fluttertoast:
-    :path: ".symlinks/plugins/fluttertoast/ios"
-  permission_handler_apple:
-    :path: ".symlinks/plugins/permission_handler_apple/ios"
-  vibration:
-    :path: ".symlinks/plugins/vibration/ios"
+  flutter_inappwebview_ios:
+    :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
 
 SPEC CHECKSUMS:
-  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
   flutter_compass: b236ab69b61545cce89fd58527f401a7587d5cc1
-  fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
-  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  vibration: 69774ad57825b11c951ee4c46155f455d7a592ce
+  flutter_inappwebview_ios: b89ba3482b96fb25e00c967aae065701b66e9b99
+  OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
 
 PODFILE CHECKSUM: 53a6aebc29ccee84c41f92f409fc20cd4ca011f1
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0
