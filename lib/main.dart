@@ -74,11 +74,19 @@ Future<void> main() async {
 
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
-    log("FlutterError: ${details.exception}", stackTrace: details.stack, name: "CrashHandler");
+    log(
+      "FlutterError: ${details.exception}",
+      stackTrace: details.stack,
+      name: "CrashHandler",
+    );
   };
 
   PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-    log("Uncaught Platform Error: $error", stackTrace: stack, name: "CrashHandler");
+    log(
+      "Uncaught Platform Error: $error",
+      stackTrace: stack,
+      name: "CrashHandler",
+    );
     return true;
   };
 
@@ -145,7 +153,8 @@ Future<void> main() async {
     defaultValue: QuranScriptType.values.first.name,
   );
 
-  final userScript = QuranScriptType.values.firstOrNullWhere(
+  final userScript =
+      QuranScriptType.values.firstOrNullWhere(
         (element) => scriptOnDb == element.name,
       ) ??
       QuranScriptType.uthmani;
@@ -177,79 +186,66 @@ Future<void> main() async {
   platform_services.hideLoadingIndicator();
 }
 
+TextTheme _applyGoogleFont(TextTheme base, TextStyle Function() fontGetter) {
+  final fontStyle = fontGetter();
+  return base.apply(
+    fontFamily: fontStyle.fontFamily,
+    fontFamilyFallback: fontStyle.fontFamilyFallback,
+  );
+}
+
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   final textTheme = isDarkMode
       ? ThemeData.dark().textTheme
       : ThemeData.light().textTheme;
-  TextTheme baseTextTheme;
+
   switch (locale.languageCode) {
     case "ar":
     case "fa":
     case "ug": // Uighur
-      baseTextTheme = GoogleFonts.notoSansArabicTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansArabic);
     case "ur":
-      baseTextTheme = GoogleFonts.notoNastaliqUrduTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoNastaliqUrdu);
     case "bn":
     case "as": // Assamese
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansBengali);
     case "hi":
     case "mr": // Marathi
     case "ne": // Nepali
-      baseTextTheme = GoogleFonts.notoSansDevanagariTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansDevanagari);
     case "ja":
-      baseTextTheme = GoogleFonts.notoSansJpTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansJp);
     case "ko":
-      baseTextTheme = GoogleFonts.notoSansKrTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKr);
     case "zh":
-      baseTextTheme = GoogleFonts.notoSansScTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansSc);
     case "ta": // Tamil
-      baseTextTheme = GoogleFonts.notoSansTamilTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTamil);
     case "te": // Telugu
-      baseTextTheme = GoogleFonts.notoSansTeluguTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTelugu);
     case "kn": // Kannada
-      baseTextTheme = GoogleFonts.notoSansKannadaTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKannada);
     case "ml": // Malayalam
-      baseTextTheme = GoogleFonts.notoSansMalayalamTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansMalayalam);
     case "gu": // Gujarati
-      baseTextTheme = GoogleFonts.notoSansGujaratiTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansGujarati);
     case "si": // Sinhala
-      baseTextTheme = GoogleFonts.notoSansSinhalaTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansSinhala);
     case "th": // Thai
-      baseTextTheme = GoogleFonts.notoSansThaiTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansThai);
     case "km": // Khmer
-      baseTextTheme = GoogleFonts.notoSansKhmerTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKhmer);
     case "he": // Hebrew
-      baseTextTheme = GoogleFonts.notoSansHebrewTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansHebrew);
     case "am": // Amharic
-      baseTextTheme = GoogleFonts.notoSansEthiopicTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansEthiopic);
     case "dv": // Divehi
-      baseTextTheme = GoogleFonts.notoSansThaanaTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansThaana);
     case "zgh": // Amazigh
-      baseTextTheme = GoogleFonts.notoSansTifinaghTextTheme(textTheme);
-      break;
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTifinagh);
     default:
-      baseTextTheme = GoogleFonts.notoSansBengaliTextTheme(textTheme);
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansBengali);
   }
-
-  return baseTextTheme;
 }
 
 class MyApp extends StatefulWidget {
@@ -295,27 +291,30 @@ class _MyAppState extends State<MyApp> {
       AwesomeNotifications()
           .getInitialNotificationAction(removeFromActionEvents: true)
           .then((initialAction) {
-        if (initialAction != null && initialAction.payload?["type"] == "alarm") {
-          final prayerName = initialAction.payload?["prayer"];
-          final timeStr = initialAction.payload?["time"];
-          if (prayerName != null) {
-            final prayer = Prayer.values.cast<Prayer?>().firstWhere(
+            if (initialAction != null &&
+                initialAction.payload?["type"] == "alarm") {
+              final prayerName = initialAction.payload?["prayer"];
+              final timeStr = initialAction.payload?["time"];
+              if (prayerName != null) {
+                final prayer = Prayer.values.cast<Prayer?>().firstWhere(
                   (p) => p?.name.toLowerCase() == prayerName.toLowerCase(),
                   orElse: () => null,
                 );
-            if (prayer != null) {
-              final time = timeStr != null ? DateTime.tryParse(timeStr) : null;
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                navigateToPrayerAlarmScreen(
-                  prayer,
-                  time ?? DateTime.now(),
-                  initialAction.id ?? 0,
-                );
-              });
+                if (prayer != null) {
+                  final time = timeStr != null
+                      ? DateTime.tryParse(timeStr)
+                      : null;
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    navigateToPrayerAlarmScreen(
+                      prayer,
+                      time ?? DateTime.now(),
+                      initialAction.id ?? 0,
+                    );
+                  });
+                }
+              }
             }
-          }
-        }
-      });
+          });
     } catch (_) {}
   }
 
@@ -358,7 +357,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),
         BlocProvider(
-          create: (context) => getIt<LanguageCubit>(param1: widget.initialLocale),
+          create: (context) =>
+              getIt<LanguageCubit>(param1: widget.initialLocale),
         ),
         BlocProvider(create: (context) => getIt<LandscapeScrollEffect>()),
         BlocProvider(create: (context) => getIt<QuickAccessCubit>()),
