@@ -1,7 +1,7 @@
 import "dart:async";
 import "dart:developer";
 
-import "package:al_quran_v3/firebase_options.dart";
+// import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
@@ -97,7 +97,7 @@ Future<void> main() async {
       defaultTargetPlatform == TargetPlatform.windows) {
     try {
       await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
+        // options: DefaultFirebaseOptions.currentPlatform,
       );
     } catch (e) {
       debugPrint("Firebase initialization skipped: $e");
