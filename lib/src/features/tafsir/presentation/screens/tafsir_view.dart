@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/qu
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_tafsir_function.dart";
-import "package:clipboard/clipboard.dart";
+import "package:flutter/services.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -95,7 +95,7 @@ class _TafsirViewState extends State<TafsirView>
                     String? text = tafsirData?.tafsir["text"] as String?;
                     text = text?.replaceAll('"', "").trim();
                     if (text != null && text.isNotEmpty) {
-                      await FlutterClipboard.copy(text);
+                      await Clipboard.setData(ClipboardData(text: text));
                       await Fluttertoast.showToast(msg: appLocalizations.copy);
                     }
                   },

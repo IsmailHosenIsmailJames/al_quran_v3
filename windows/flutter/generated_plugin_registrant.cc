@@ -7,7 +7,6 @@
 #include "generated_plugin_registrant.h"
 
 #include <awesome_notifications/awesome_notifications_plugin_c_api.h>
-#include <clipboard/clipboard_plugin.h>
 #include <firebase_auth/firebase_auth_plugin_c_api.h>
 #include <firebase_core/firebase_core_plugin_c_api.h>
 #include <firebase_database/firebase_database_plugin_c_api.h>
@@ -23,8 +22,6 @@
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   AwesomeNotificationsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("AwesomeNotificationsPluginCApi"));
-  ClipboardPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("ClipboardPlugin"));
   FirebaseAuthPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FirebaseAuthPluginCApi"));
   FirebaseCorePluginCApiRegisterWithRegistrar(

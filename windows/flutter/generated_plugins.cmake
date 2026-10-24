@@ -4,7 +4,6 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
-  clipboard
   firebase_auth
   firebase_core
   firebase_database
