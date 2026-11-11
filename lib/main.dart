@@ -392,7 +392,8 @@ class _MyAppState extends State<MyApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                onGenerateTitle: (context) => "Quran's Tafsir, Audio & Prayer",
+                onGenerateTitle: (context) =>
+                    AppLocalizations.of(context).appFullName,
                 theme: ThemeData(brightness: Brightness.light).copyWith(
                   scaffoldBackgroundColor: const Color(0xFFF9FAFB),
                   cardColor: Colors.white,

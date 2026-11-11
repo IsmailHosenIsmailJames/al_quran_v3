@@ -114,10 +114,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get unableToDownloadResources => 'リソースをダウンロードできませんでした…\n問題が発生しました';
 
   @override
-  String get downloadingSegmentedQuranRecitation => 'セグメント化されたコーランの読誦をダウンロード中';
+  String get downloadingSegmentedQuranRecitation => '単語ごとのコーラン読誦をダウンロード中';
 
   @override
-  String get processingSegmentedQuranRecitation => 'セグメント化されたコーランの読誦を処理中';
+  String get processingSegmentedQuranRecitation => '単語ごとのコーラン読誦を処理中';
 
   @override
   String get footnote => '脚注';
@@ -198,13 +198,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get parameters => 'パラメータ: ';
 
   @override
-  String get selectCalculationMethod => '計算方法を選択';
+  String get selectCalculationMethod => '礼拝時間の計算方法を選択';
 
   @override
   String get shareSelectAyahs => '選択した節を共有';
 
   @override
-  String get selectionEmpty => '何も選択されていません';
+  String get selectionEmpty => '節が選択されていません';
 
   @override
   String get generatingImagePleaseWait => '画像を生成中… お待ちください';

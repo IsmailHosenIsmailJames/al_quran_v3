@@ -114,10 +114,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get unableToDownloadResources => '리소스를 다운로드할 수 없습니다...\n문제가 발생했습니다';
 
   @override
-  String get downloadingSegmentedQuranRecitation => '구분된 꾸란 낭송 다운로드 중';
+  String get downloadingSegmentedQuranRecitation => '단어별 꾸란 낭송 다운로드 중';
 
   @override
-  String get processingSegmentedQuranRecitation => '구분된 꾸란 낭송 처리 중';
+  String get processingSegmentedQuranRecitation => '단어별 꾸란 낭송 처리 중';
 
   @override
   String get footnote => '각주';
@@ -198,13 +198,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get parameters => '매개변수: ';
 
   @override
-  String get selectCalculationMethod => '계산 방법 선택';
+  String get selectCalculationMethod => '예배 시간 계산 방법 선택';
 
   @override
   String get shareSelectAyahs => '선택한 아야 공유';
 
   @override
-  String get selectionEmpty => '선택 항목 없음';
+  String get selectionEmpty => '선택된 구절이 없습니다';
 
   @override
   String get generatingImagePleaseWait => '이미지 생성 중... 잠시만 기다려주세요';

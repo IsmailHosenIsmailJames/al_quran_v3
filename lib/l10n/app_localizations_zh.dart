@@ -114,10 +114,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get unableToDownloadResources => '无法下载资源...\n出了点问题';
 
   @override
-  String get downloadingSegmentedQuranRecitation => '下载分段古兰经朗诵';
+  String get downloadingSegmentedQuranRecitation => '正在下载逐字古兰经诵读';
 
   @override
-  String get processingSegmentedQuranRecitation => '处理分段古兰经朗诵';
+  String get processingSegmentedQuranRecitation => '正在处理逐字古兰经诵读';
 
   @override
   String get footnote => '脚注';
@@ -198,13 +198,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get parameters => '参数：';
 
   @override
-  String get selectCalculationMethod => '选择计算方法';
+  String get selectCalculationMethod => '选择祈祷时间计算方法';
 
   @override
   String get shareSelectAyahs => '分享选中的经节';
 
   @override
-  String get selectionEmpty => '选择为空';
+  String get selectionEmpty => '未选择任何经文';
 
   @override
   String get generatingImagePleaseWait => '生成图像... 请稍等';
@@ -948,7 +948,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      '我个人承诺在我的有生之年提供此应用的持续支持和维护，In Sha Allah。我的目标是确保此应用成为乌玛的有益资源多年。';
+      '在有生之年，因沙安拉（In Sha Allah），我个人承诺将为本应用提供持续的支持与维护，以确保它长久地成为乌玛（穆斯林群体）有益的资源。';
 
   @override
   String get fajr => '晨礼';
