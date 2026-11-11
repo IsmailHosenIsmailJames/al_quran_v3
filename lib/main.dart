@@ -202,6 +202,7 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   switch (locale.languageCode) {
     case "ar":
     case "fa":
+    case "ps": // Pashto
     case "ug": // Uighur
       return _applyGoogleFont(textTheme, GoogleFonts.notoSansArabic);
     case "ur":
@@ -209,6 +210,11 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
     case "bn":
     case "as": // Assamese
       return _applyGoogleFont(textTheme, GoogleFonts.notoSansBengali);
+    case "pa": // Punjabi
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSansGurmukhi);
+    case "ru": // Russian
+    case "kk": // Kazakh
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSans);
     case "hi":
     case "mr": // Marathi
     case "ne": // Nepali
@@ -244,7 +250,7 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
     case "zgh": // Amazigh
       return _applyGoogleFont(textTheme, GoogleFonts.notoSansTifinagh);
     default:
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansBengali);
+      return _applyGoogleFont(textTheme, GoogleFonts.notoSans);
   }
 }
 
