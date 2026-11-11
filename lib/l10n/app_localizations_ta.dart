@@ -118,11 +118,11 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'பிரித்த குர்ஆன் ஓதலைப் பதிவிறக்குகிறது';
+      'வார்த்தைக்கு வார்த்தை குர்ஆன் ஓதுதல் பதிவிறக்கப்படுகிறது';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'பிரித்த குர்ஆன் ஓதலைச் செயல்படுத்துகிறது';
+      'வார்த்தைக்கு வார்த்தை குர்ஆன் ஓதுதல் செயலாக்கப்படுகிறது';
 
   @override
   String get footnote => 'அடிக்குறிப்பு';
@@ -145,10 +145,11 @@ class AppLocalizationsTa extends AppLocalizations {
       'செயலி முகப்புத் திரையில் கடைசியாகத் திறந்த பக்கத்தை நினைவில் வைத்திருக்கும்.';
 
   @override
-  String get wakeLock => 'திரை விழிப்புப் பூட்டு';
+  String get wakeLock => 'திரையை ஒளிரச் செய்தல்';
 
   @override
-  String get wakeLockSubtitle => 'திரை தானாக அணைவதைத் தடுக்கவும்.';
+  String get wakeLockSubtitle =>
+      'குர்ஆன் ஓதும் போது திரை தானாக அணைவதைத் தவிர்க்கவும்.';
 
   @override
   String get settings => 'அமைப்புகள்';
@@ -205,13 +206,14 @@ class AppLocalizationsTa extends AppLocalizations {
   String get parameters => 'அளபுருக்கள்: ';
 
   @override
-  String get selectCalculationMethod => 'கணக்கீட்டு முறையைத் தேர்ந்தெடுக்கவும்';
+  String get selectCalculationMethod =>
+      'தொழுகை நேரக் கணக்கீட்டு முறையைத் தேர்ந்தெடுக்கவும்';
 
   @override
   String get shareSelectAyahs => 'தேர்ந்தெடுத்த ஆயத்துகளைப் பகிரவும்';
 
   @override
-  String get selectionEmpty => 'தேர்வு காலியாக உள்ளது';
+  String get selectionEmpty => 'வசனங்கள் எதுவும் தேர்ந்தெடுக்கப்படவில்லை';
 
   @override
   String get generatingImagePleaseWait =>

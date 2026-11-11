@@ -117,11 +117,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Descargando recitación segmentada del Corán';
+      'Descargando recitación palabra por palabra del Corán';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Procesando recitación segmentada del Corán';
+      'Procesando recitación palabra por palabra del Corán';
 
   @override
   String get footnote => 'Nota al pie';
@@ -144,11 +144,11 @@ class AppLocalizationsEs extends AppLocalizations {
       'La app recordará la última pestaña abierta en la pantalla de inicio.';
 
   @override
-  String get wakeLock => 'Bloqueo de pantalla';
+  String get wakeLock => 'Mantener pantalla encendida';
 
   @override
   String get wakeLockSubtitle =>
-      'Evita que la pantalla se apague automáticamente.';
+      'Evita que la pantalla se apague automáticamente durante la lectura.';
 
   @override
   String get settings => 'Configuraciones';
@@ -205,13 +205,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get parameters => 'Parámetros: ';
 
   @override
-  String get selectCalculationMethod => 'Selecciona el método de cálculo';
+  String get selectCalculationMethod =>
+      'Selecciona el método de cálculo de la oración';
 
   @override
   String get shareSelectAyahs => 'Compartir aleyas seleccionadas';
 
   @override
-  String get selectionEmpty => 'Selección vacía';
+  String get selectionEmpty => 'Ningún versículo seleccionado';
 
   @override
   String get generatingImagePleaseWait =>
@@ -435,10 +436,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get searchForACountry => 'Buscar un país';
 
   @override
-  String get selectYourAdministrator => 'Selecciona tu administrador';
+  String get selectYourAdministrator => 'Selecciona tu región administrativa';
 
   @override
-  String get searchForAnAdministrator => 'Buscar un administrador';
+  String get searchForAnAdministrator => 'Buscar región administrativa';
 
   @override
   String get searchForACity => 'Buscar una ciudad';

@@ -116,11 +116,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Baixando Recitação Segmentada do Alcorão';
+      'Baixando Recitação Palavra por Palavra do Alcorão';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Processando Recitação Segmentada do Alcorão';
+      'Processando Recitação Palavra por Palavra do Alcorão';
 
   @override
   String get footnote => 'Nota de Rodapé';
@@ -203,13 +203,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get parameters => 'Parâmetros: ';
 
   @override
-  String get selectCalculationMethod => 'Selecione o Método de Cálculo';
+  String get selectCalculationMethod =>
+      'Selecione o Método de Cálculo das Orações';
 
   @override
   String get shareSelectAyahs => 'Compartilhar Versículos Selecionados';
 
   @override
-  String get selectionEmpty => 'Seleção Vazia';
+  String get selectionEmpty => 'Nenhum versículo selecionado';
 
   @override
   String get generatingImagePleaseWait =>

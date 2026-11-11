@@ -117,11 +117,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Scaricamento recitazione segmentata del Corano';
+      'Scaricamento recitazione parola per parola del Corano';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Elaborazione recitazione segmentata del Corano';
+      'Elaborazione recitazione parola per parola del Corano';
 
   @override
   String get footnote => 'Nota a piè di pagina';
@@ -143,11 +143,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'L\'app ricorderà l\'ultima scheda aperta nella schermata principale.';
 
   @override
-  String get wakeLock => 'Blocco schermo attivo';
+  String get wakeLock => 'Mantieni schermo attivo';
 
   @override
   String get wakeLockSubtitle =>
-      'Impedisce allo schermo di spegnersi automaticamente.';
+      'Impedisce allo schermo di spegnersi automaticamente durante la lettura.';
 
   @override
   String get settings => 'Impostazioni';
@@ -204,13 +204,14 @@ class AppLocalizationsIt extends AppLocalizations {
   String get parameters => 'Parametri: ';
 
   @override
-  String get selectCalculationMethod => 'Seleziona metodo di calcolo';
+  String get selectCalculationMethod =>
+      'Seleziona metodo di calcolo della preghiera';
 
   @override
   String get shareSelectAyahs => 'Condividi i versetti selezionati';
 
   @override
-  String get selectionEmpty => 'Nessuna selezione';
+  String get selectionEmpty => 'Nessun versetto selezionato';
 
   @override
   String get generatingImagePleaseWait =>
