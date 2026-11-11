@@ -116,14 +116,14 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'د قرآن تقسیم شوي تلاوت ډاونلوډ کول';
+      'د قرآن لفظ په لفظ تلاوت کښته کیږي';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'د قرآن تقسیم شوي تلاوت پروسس کول';
+      'د قرآن لفظ په لفظ تلاوت پروسس کیږي';
 
   @override
-  String get footnote => 'فوټ نوټ';
+  String get footnote => 'حاشیه';
 
   @override
   String get tafsir => 'تفسیر';
@@ -143,10 +143,11 @@ class AppLocalizationsPs extends AppLocalizations {
       'اپلیکیشن به د کور سکرین کې وروستي خلاص شوي ټیب په یاد وساتي.';
 
   @override
-  String get wakeLock => 'ویک لاک';
+  String get wakeLock => 'سکرین روښانه ساتل';
 
   @override
-  String get wakeLockSubtitle => 'د سکرین اتومات بندیدو مخنیوی وکړئ.';
+  String get wakeLockSubtitle =>
+      'د قرائت پر مهال د سکرین پخپله مړ کېدو مخنیوی وکړئ.';
 
   @override
   String get settings => 'ترتیبات';
@@ -203,13 +204,14 @@ class AppLocalizationsPs extends AppLocalizations {
   String get parameters => 'پارامیټرونه: ';
 
   @override
-  String get selectCalculationMethod => 'د محاسبې میتود انتخاب کړئ';
+  String get selectCalculationMethod =>
+      'د لمانځه د وختونو د محاسبې میتود وټاکئ';
 
   @override
   String get shareSelectAyahs => 'انتخاب شوي آیاتونه شریک کړئ';
 
   @override
-  String get selectionEmpty => 'انتخاب خالي دی';
+  String get selectionEmpty => 'هیڅ آیت نه دی غوره شوی';
 
   @override
   String get generatingImagePleaseWait =>
@@ -429,10 +431,10 @@ class AppLocalizationsPs extends AppLocalizations {
   String get searchForACountry => 'یو هیواد لټون کړئ';
 
   @override
-  String get selectYourAdministrator => 'خپل اداري انتخاب کړئ';
+  String get selectYourAdministrator => 'خپله اداري سیمه وټاکئ';
 
   @override
-  String get searchForAnAdministrator => 'یو اداري لټون کړئ';
+  String get searchForAnAdministrator => 'اداري سیمه وپلټئ';
 
   @override
   String get searchForACity => 'یو ښار لټون کړئ';
@@ -973,11 +975,11 @@ class AppLocalizationsPs extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'زموږ د ژوند وعدې';
+  String get ourLifetimePromise => 'زموږ تلپاتې ژمنه';
 
   @override
   String get lifetimePromiseDescription =>
-      'زه شخصاً وعده کوم چې د دې اپلیکیشن لپاره دوامداره ملاتړ او ساتنه ورکړم په ټول ژوند کې، ان شاء الله. زما هدف دا دی چې دا اپلیکیشن د امت لپاره د کلونو لپاره یو ګټور وسیله پاتې شي.';
+      'زه په شخصي توګه ژمنه کوم چې ان شاء الله د خپل ژوند په اوږدو کې به د دې اپلیکیشن دوامداره ملاتړ او پالنه کوم، ترڅو دا د امت لپاره تلپاتې ګټور خدمت پاتې شي.';
 
   @override
   String get fajr => 'فجر';

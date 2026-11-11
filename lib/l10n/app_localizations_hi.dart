@@ -88,7 +88,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get selectTafsirLanguage => 'तफ़सीर की भाषा चुनें...';
 
   @override
-  String get quranTafsirBook => 'कुरान तफ़सीर की किताब';
+  String get quranTafsirBook => 'क़ुरआन की तफ़सीर की किताब';
 
   @override
   String get selectTafsirBook => 'तफ़सीर की किताब चुनें...';
@@ -116,14 +116,14 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'सेगमेंटेड कुरान तिलावत डाउनलोड कर रहे हैं';
+      'शब्द-दर-शब्द क़ुरआन तिलावत डाउनलोड हो रही है';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'सेगमेंटेड कुरान तिलावत प्रोसेस कर रहे हैं';
+      'शब्द-दर-शब्द क़ुरआन तिलावत तैयार की जा रही है';
 
   @override
-  String get footnote => 'फुटनोट';
+  String get footnote => 'पाद-टिप्पणी';
 
   @override
   String get tafsir => 'तफ़सीर';
@@ -142,10 +142,11 @@ class AppLocalizationsHi extends AppLocalizations {
       'ऐप होम स्क्रीन में आखिरी खोले गए टैब को याद रखेगा।';
 
   @override
-  String get wakeLock => 'वेक लॉक';
+  String get wakeLock => 'स्क्रीन चालू रखें';
 
   @override
-  String get wakeLockSubtitle => 'स्क्रीन को खुद बंद होने से रोकें।';
+  String get wakeLockSubtitle =>
+      'क़ुरआन पढ़ते समय स्क्रीन को अपने आप बंद होने से रोकें।';
 
   @override
   String get settings => 'सेटिंग्स';
@@ -202,13 +203,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get parameters => 'पैरामीटर: ';
 
   @override
-  String get selectCalculationMethod => 'कैलकुलेशन मेथड चुनें';
+  String get selectCalculationMethod => 'नमाज़ का समय गणना पद्धति चुनें';
 
   @override
   String get shareSelectAyahs => 'चुनी हुई आयतें शेयर करें';
 
   @override
-  String get selectionEmpty => 'चयन खाली है';
+  String get selectionEmpty => 'कोई आयत नहीं चुनी गई';
 
   @override
   String get generatingImagePleaseWait =>
@@ -313,7 +314,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get change => 'बदलें';
 
   @override
-  String get calculationMethod => 'कैलकुलेशन मेथड: ';
+  String get calculationMethod => 'गणना पद्धति: ';
 
   @override
   String get downloadPrayerTime => 'नमाज के समय डाउनलोड करें';
@@ -430,10 +431,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get searchForACountry => 'देश खोजें';
 
   @override
-  String get selectYourAdministrator => 'अपना एडमिनिस्ट्रेटर चुनें';
+  String get selectYourAdministrator => 'अपना प्रशासनिक क्षेत्र चुनें';
 
   @override
-  String get searchForAnAdministrator => 'एडमिनिस्ट्रेटर खोजें';
+  String get searchForAnAdministrator => 'प्रशासनिक क्षेत्र खोजें';
 
   @override
   String get searchForACity => 'शहर खोजें';
@@ -973,11 +974,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get windows => 'विंडोज';
 
   @override
-  String get ourLifetimePromise => 'हमारा लाइफटाइम प्रॉमिस';
+  String get ourLifetimePromise => 'हमारा आजीवन वादा';
 
   @override
   String get lifetimePromiseDescription =>
-      'मैं पर्सनली इस ऐप को अपनी जिंदगी भर सपोर्ट और मेंटेनेंस देने का वादा करता हूं, इंशा अल्लाह। मेरा गोल है कि यह ऐप उम्माह के लिए सालों तक फायदेमंद रिसोर्स बने।';
+      'मैं व्यक्तिगत रूप से वादा करता हूँ कि इंशाअल्लाह ज़िंदगी भर इस ऐप की निरंतर देखरेख और सुधार जारी रखूँगा। मेरा उद्देश्य यह सुनिश्चित करना है कि यह ऐप उम्मत के लिए हमेशा एक लाभदायक ज़रिया बना रहे।';
 
   @override
   String get fajr => 'फज्र';

@@ -116,11 +116,11 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Muat Turun Bacaan Al-Quran Bersegmen';
+      'Memuat Turun Tilawah Al-Quran Perkata';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Memproses Bacaan Al-Quran Bersegmen';
+      'Memproses Tilawah Al-Quran Perkata';
 
   @override
   String get footnote => 'Catatan Kaki';
@@ -142,10 +142,11 @@ class AppLocalizationsMs extends AppLocalizations {
       'Aplikasi akan ingat tab terakhir yang dibuka di skrin utama.';
 
   @override
-  String get wakeLock => 'Kunci Bangun';
+  String get wakeLock => 'Kekalkan Skrin Menyala';
 
   @override
-  String get wakeLockSubtitle => 'Cegah skrin mati secara automatik.';
+  String get wakeLockSubtitle =>
+      'Cegah skrin daripada mati secara automatik semasa membaca.';
 
   @override
   String get settings => 'Tetapan';
@@ -202,13 +203,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get parameters => 'Parameter: ';
 
   @override
-  String get selectCalculationMethod => 'Pilih Kaedah Pengiraan';
+  String get selectCalculationMethod => 'Pilih Kaedah Kiraan Waktu Solat';
 
   @override
   String get shareSelectAyahs => 'Kongsi Ayat Terpilih';
 
   @override
-  String get selectionEmpty => 'Pilihan Kosong';
+  String get selectionEmpty => 'Tiada ayat yang dipilih';
 
   @override
   String get generatingImagePleaseWait => 'Menjana Imej... Sila Tunggu';
@@ -427,10 +428,10 @@ class AppLocalizationsMs extends AppLocalizations {
   String get searchForACountry => 'Cari negara';
 
   @override
-  String get selectYourAdministrator => 'Pilih Pentadbir Anda';
+  String get selectYourAdministrator => 'Pilih Kawasan Pentadbiran';
 
   @override
-  String get searchForAnAdministrator => 'Cari pentadbir';
+  String get searchForAnAdministrator => 'Cari kawasan pentadbiran';
 
   @override
   String get searchForACity => 'Cari bandar';
@@ -971,11 +972,11 @@ class AppLocalizationsMs extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Janji Seumur Hidup Kami';
+  String get ourLifetimePromise => 'Komitmen Sepanjang Hayat Kami';
 
   @override
   String get lifetimePromiseDescription =>
-      'Saya secara peribadi berjanji untuk memberikan sokongan dan penyelenggaraan berterusan untuk aplikasi ini sepanjang hayat saya, In Sha Allah. Matlamat saya adalah memastikan aplikasi ini kekal sebagai sumber bermanfaat untuk Ummah untuk tahun-tahun mendatang.';
+      'Insya-Allah, saya secara peribadi berikrar untuk menyediakan sokongan dan penyelenggaraan berterusan untuk aplikasi ini sepanjang hayat saya. Matlamat saya adalah memastikan aplikasi ini kekal bermanfaat untuk Ummah bagi tahun-tahun mendatang.';
 
   @override
   String get fajr => 'Subuh';

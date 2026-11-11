@@ -116,14 +116,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'ਸੈਗਮੈਂਟਿਡ ਕੁਰਾਨ ਤਲਾਵਤ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ';
+      'ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਕੁਰਾਨ ਤਿਲਾਵਤ ਡਾਊਨਲੋਡ ਹੋ ਰਹੀ ਹੈ';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'ਸੈਗਮੈਂਟਿਡ ਕੁਰਾਨ ਤਲਾਵਤ ਪ੍ਰੋਸੈਸਿੰਗ ਕਰ ਰਿਹਾ ਹੈ';
+      'ਸ਼ਬਦ-ਦਰ-ਸ਼ਬਦ ਕੁਰਾਨ ਤਿਲਾਵਤ ਤਿਆਰ ਹੋ ਰਹੀ ਹੈ';
 
   @override
-  String get footnote => 'ਫੁਟਨੋਟ';
+  String get footnote => 'ਹਾਸ਼ੀਆ / ਟਿੱਪਣੀ';
 
   @override
   String get tafsir => 'ਤਫਸੀਰ';
@@ -142,10 +142,11 @@ class AppLocalizationsPa extends AppLocalizations {
       'ਐਪ ਹੋਮ ਸਕ੍ਰੀਨ ਵਿੱਚ ਆਖਰੀ ਖੋਲ੍ਹੀ ਟੈਬ ਨੂੰ ਯਾਦ ਰੱਖੇਗੀ।';
 
   @override
-  String get wakeLock => 'ਵੇਕ ਲਾਕ';
+  String get wakeLock => 'ਸਕ੍ਰੀਨ ਚਾਲੂ ਰੱਖੋ';
 
   @override
-  String get wakeLockSubtitle => 'ਸਕ੍ਰੀਨ ਨੂੰ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋਣ ਤੋਂ ਰੋਕੋ।';
+  String get wakeLockSubtitle =>
+      'ਪੜ੍ਹਨ ਦੌਰਾਨ ਸਕ੍ਰੀਨ ਨੂੰ ਆਪਣੇ ਆਪ ਬੰਦ ਹੋਣ ਤੋਂ ਰੋਕੋ।';
 
   @override
   String get settings => 'ਸੈਟਿੰਗਾਂ';
@@ -202,13 +203,13 @@ class AppLocalizationsPa extends AppLocalizations {
   String get parameters => 'ਪੈਰਾਮੀਟਰ: ';
 
   @override
-  String get selectCalculationMethod => 'ਗਣਨਾ ਵਿਧੀ ਚੁਣੋ';
+  String get selectCalculationMethod => 'ਨਮਾਜ਼ ਸਮਾਂ ਗਣਨਾ ਵਿਧੀ ਚੁਣੋ';
 
   @override
   String get shareSelectAyahs => 'ਚੁਣੀਆਂ ਆਇਤਾਂ ਸਾਂਝੀਆਂ ਕਰੋ';
 
   @override
-  String get selectionEmpty => 'ਚੋਣ ਖਾਲੀ ਹੈ';
+  String get selectionEmpty => 'ਕੋਈ ਆਇਤ ਨਹੀਂ ਚੁਣੀ ਗਈ';
 
   @override
   String get generatingImagePleaseWait =>
@@ -428,10 +429,10 @@ class AppLocalizationsPa extends AppLocalizations {
   String get searchForACountry => 'ਦੇਸ਼ ਖੋਜੋ';
 
   @override
-  String get selectYourAdministrator => 'ਆਪਣਾ ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਚੁਣੋ';
+  String get selectYourAdministrator => 'ਆਪਣਾ ਪ੍ਰਬੰਧਕੀ ਖੇਤਰ ਚੁਣੋ';
 
   @override
-  String get searchForAnAdministrator => 'ਐਡਮਿਨਿਸਟ੍ਰੇਟਰ ਖੋਜੋ';
+  String get searchForAnAdministrator => 'ਪ੍ਰਬੰਧਕੀ ਖੇਤਰ ਖੋਜੋ';
 
   @override
   String get searchForACity => 'ਸ਼ਹਿਰ ਖੋਜੋ';
@@ -975,7 +976,7 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      'ਮੈਂ ਵਿਅਕਤੀਗਤ ਤੌਰ ਤੇ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਨਿਰੰਤਰ ਸਪੋਰਟ ਅਤੇ ਮੇਨਟੇਨੈਂਸ ਪ੍ਰਦਾਨ ਕਰਨ ਦਾ ਵਾਅਦਾ ਕਰਦਾ ਹਾਂ, ਇੰਸ਼ਾ ਅੱਲ੍ਹਾ। ਮੇਰਾ ਟੀਚਾ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣਾ ਹੈ ਕਿ ਇਹ ਐਪ ਆਉਣ ਵਾਲੇ ਸਾਲਾਂ ਲਈ ਉਮਮਾ ਲਈ ਲਾਭਕਾਰੀ ਸਰੋਤ ਰਹੇ।';
+      'ਮੈਂ ਨਿੱਜੀ ਤੌਰ \'ਤੇ ਵਾਅਦਾ ਕਰਦਾ ਹਾਂ ਕਿ ਇੰਸ਼ਾ ਅੱਲ੍ਹਾ ਜ਼ਿੰਦਗੀ ਭਰ ਇਸ ਐਪ ਦੀ ਨਿਰੰਤਰ ਦੇਖਭਾਲ ਅਤੇ ਸੁਧਾਰ ਕਰਦਾ ਰਹਾਂਗਾ ਤਾਂ ਜੋ ਇਹ ਉਮਮਾ ਲਈ ਹਮੇਸ਼ਾ ਲਾਹੇਵੰਦ ਰਹੇ।';
 
   @override
   String get fajr => 'ਫਜਰ';

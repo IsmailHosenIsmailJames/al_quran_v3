@@ -116,11 +116,11 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'دانلود قرائت بخش‌بندی‌شده قرآن';
+      'در حال بارگیری تلاوت کلمه به کلمه قرآن';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'پردازش قرائت بخش‌بندی‌شده قرآن';
+      'در حال پردازش تلاوت کلمه به کلمه قرآن';
 
   @override
   String get footnote => 'پانویس';
@@ -143,10 +143,11 @@ class AppLocalizationsFa extends AppLocalizations {
       'برنامه آخرین تب باز شده در صفحه اصلی را به خاطر می‌سپارد.';
 
   @override
-  String get wakeLock => 'قفل بیداری';
+  String get wakeLock => 'روشن نگه داشتن صفحه';
 
   @override
-  String get wakeLockSubtitle => 'جلوگیری از خاموش شدن خودکار صفحه.';
+  String get wakeLockSubtitle =>
+      'جلوگیری از خاموش شدن خودکار صفحه هنگام قرائت قرآن.';
 
   @override
   String get settings => 'تنظیمات';
@@ -203,13 +204,13 @@ class AppLocalizationsFa extends AppLocalizations {
   String get parameters => 'پارامترها: ';
 
   @override
-  String get selectCalculationMethod => 'انتخاب روش محاسبه';
+  String get selectCalculationMethod => 'انتخاب روش محاسبه اوقات شرعی';
 
   @override
   String get shareSelectAyahs => 'اشتراک‌گذاری آیه‌های انتخاب‌شده';
 
   @override
-  String get selectionEmpty => 'انتخاب خالی است';
+  String get selectionEmpty => 'هیچ آیه‌ای انتخاب نشده است';
 
   @override
   String get generatingImagePleaseWait =>
@@ -429,10 +430,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get searchForACountry => 'جستجو برای یک کشور';
 
   @override
-  String get selectYourAdministrator => 'انتخاب مدیر شما';
+  String get selectYourAdministrator => 'منطقه اداری خود را انتخاب کنید';
 
   @override
-  String get searchForAnAdministrator => 'جستجو برای یک مدیر';
+  String get searchForAnAdministrator => 'جستجوی منطقه اداری';
 
   @override
   String get searchForACity => 'جستجو برای یک شهر';
@@ -973,11 +974,11 @@ class AppLocalizationsFa extends AppLocalizations {
   String get windows => 'ویندوز';
 
   @override
-  String get ourLifetimePromise => 'وعده مادام‌العمر ما';
+  String get ourLifetimePromise => 'تعهد مادام‌العمر ما';
 
   @override
   String get lifetimePromiseDescription =>
-      'من شخصاً قول می‌دهم که پشتیبانی و نگهداری مداوم برای این برنامه در طول عمرم ارائه دهم، ان شاء الله. هدف من اطمینان از این است که این برنامه منبع مفیدی برای امت برای سال‌های آینده باقی بماند.';
+      'من شخصاً متعهد می‌شوم که به فضل الهی، در طول زندگی خود از این برنامه پشتیبانی و نگهداری مداوم به عمل آورم تا خادم و منبعی ماندگار برای امت اسلامی باشد.';
 
   @override
   String get fajr => 'فجر';
