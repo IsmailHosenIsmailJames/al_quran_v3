@@ -116,11 +116,11 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Inapakua Usomaji wa Kurani Iliyogawanywa';
+      'Inapakua Usomaji wa Kurani Neno kwa Neno';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Inachakata Usomaji wa Kurani Iliyogawanywa';
+      'Inachakata Usomaji wa Kurani Neno kwa Neno';
 
   @override
   String get footnote => 'Maelezo ya Chini';
@@ -143,10 +143,11 @@ class AppLocalizationsSw extends AppLocalizations {
       'App itakumbuka tab iliyofunguliwa mwisho katika skrini ya nyumbani.';
 
   @override
-  String get wakeLock => 'Kufunga Skrini';
+  String get wakeLock => 'Weka Skrini Wazi';
 
   @override
-  String get wakeLockSubtitle => 'Zuia skrini kuzima moja kwa moja.';
+  String get wakeLockSubtitle =>
+      'Huzuia skrini kuzima yenyewe wakati wa usomaji.';
 
   @override
   String get settings => 'Mipangilio';
@@ -203,13 +204,14 @@ class AppLocalizationsSw extends AppLocalizations {
   String get parameters => 'Vigezo: ';
 
   @override
-  String get selectCalculationMethod => 'Chagua Njia ya Kuhesabu';
+  String get selectCalculationMethod =>
+      'Chagua Njia ya Kuhesabu Nyakati za Sala';
 
   @override
   String get shareSelectAyahs => 'Shiriki Aya Zilizochaguliwa';
 
   @override
-  String get selectionEmpty => 'Uchaguzi Tupu';
+  String get selectionEmpty => 'Hakuna aya iliyochaguliwa';
 
   @override
   String get generatingImagePleaseWait =>
@@ -431,10 +433,10 @@ class AppLocalizationsSw extends AppLocalizations {
   String get searchForACountry => 'Tafuta nchi';
 
   @override
-  String get selectYourAdministrator => 'Chagua Msimamizi Wako';
+  String get selectYourAdministrator => 'Chagua Eneo Lako la Utawala';
 
   @override
-  String get searchForAnAdministrator => 'Tafuta msimamizi';
+  String get searchForAnAdministrator => 'Tafuta eneo la utawala';
 
   @override
   String get searchForACity => 'Tafuta mji';
@@ -979,11 +981,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Ahadi Yetu ya Maisha';
+  String get ourLifetimePromise => 'Ahadi Yetu ya Daima';
 
   @override
   String get lifetimePromiseDescription =>
-      'Mimi binafsi naahidi kutoa usaidizi na matengenezo endelevu kwa programu hii katika maisha yangu yote, In Sha Allah. Lengo langu ni kuhakikisha app hii inabaki kuwa rasilimali yenye faida kwa Ummah kwa miaka ijayo.';
+      'Mimi binafsi ninaahidi kutoa usaidizi na uangalizi endelevu kwa programu hii maisha yangu yote, In Sha Allah. Lengo langu ni kuhakikisha programu hii inabaki kuwa chanzo chenye manufaa kwa Ummah kwa miaka mingi.';
 
   @override
   String get fajr => 'Fajr';

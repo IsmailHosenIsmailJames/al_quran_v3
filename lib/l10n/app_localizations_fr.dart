@@ -117,11 +117,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Téléchargement de la récitation segmentée du Coran';
+      'Téléchargement de la récitation mot à mot du Coran';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Traitement de la récitation segmentée du Coran';
+      'Traitement de la récitation mot à mot du Coran';
 
   @override
   String get footnote => 'Note de bas de page';
@@ -144,11 +144,11 @@ class AppLocalizationsFr extends AppLocalizations {
       'L\'app se souviendra du dernier onglet ouvert sur l\'écran d\'accueil.';
 
   @override
-  String get wakeLock => 'Verrouillage d\'écran';
+  String get wakeLock => 'Garder l\'écran allumé';
 
   @override
   String get wakeLockSubtitle =>
-      'Empêche l\'écran de s\'éteindre automatiquement.';
+      'Empêche l\'écran de s\'éteindre automatiquement pendant la lecture.';
 
   @override
   String get settings => 'Paramètres';
@@ -206,13 +206,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get parameters => 'Paramètres : ';
 
   @override
-  String get selectCalculationMethod => 'Sélectionnez la méthode de calcul';
+  String get selectCalculationMethod =>
+      'Sélectionnez la méthode de calcul des prières';
 
   @override
   String get shareSelectAyahs => 'Partager les versets sélectionnés';
 
   @override
-  String get selectionEmpty => 'Sélection vide';
+  String get selectionEmpty => 'Aucun verset sélectionné';
 
   @override
   String get generatingImagePleaseWait =>
@@ -437,10 +438,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchForACountry => 'Rechercher un pays';
 
   @override
-  String get selectYourAdministrator => 'Sélectionnez votre administrateur';
+  String get selectYourAdministrator =>
+      'Sélectionnez votre région administrative';
 
   @override
-  String get searchForAnAdministrator => 'Rechercher un administrateur';
+  String get searchForAnAdministrator => 'Rechercher une région administrative';
 
   @override
   String get searchForACity => 'Rechercher une ville';
@@ -984,11 +986,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Notre promesse à vie';
+  String get ourLifetimePromise => 'Notre engagement perpétuel';
 
   @override
   String get lifetimePromiseDescription =>
-      'Je promets personnellement de fournir un support et une maintenance continus pour cette application tout au long de ma vie, In Sha Allah. Mon objectif est de m\'assurer que cette app reste une ressource bénéfique pour l\'Ummah pendant des années.';
+      'Je promets personnellement, In Cha Allah, de maintenir et d\'améliorer continuellement cette application tout au long de ma vie, afin qu\'elle demeure une ressource bénéfique pour la communauté.';
 
   @override
   String get fajr => 'Fajr';

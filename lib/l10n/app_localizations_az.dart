@@ -116,11 +116,11 @@ class AppLocalizationsAz extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Hissəli Quran Tilavəti Yüklənir';
+      'Kəlmə-kəlmə Quran Tilavəti Yüklənir';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Hissəli Quran Tilavəti Emal Edilir';
+      'Kəlmə-kəlmə Quran Tilavəti Emal Edilir';
 
   @override
   String get footnote => 'Qeyd';
@@ -203,13 +203,13 @@ class AppLocalizationsAz extends AppLocalizations {
   String get parameters => 'Parametrlər: ';
 
   @override
-  String get selectCalculationMethod => 'Hesablama Metodunu Seçin';
+  String get selectCalculationMethod => 'Namaz Vaxtı Hesablama Metodunu Seçin';
 
   @override
   String get shareSelectAyahs => 'Seçilmiş Ayələri Paylaş';
 
   @override
-  String get selectionEmpty => 'Seçim Boşdur';
+  String get selectionEmpty => 'Heç bir ayə seçilməyib';
 
   @override
   String get generatingImagePleaseWait =>
@@ -978,11 +978,11 @@ class AppLocalizationsAz extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Ömürlük Sözümüz';
+  String get ourLifetimePromise => 'Ömürlük Əhdimiz';
 
   @override
   String get lifetimePromiseDescription =>
-      'Şəxsən söz verirəm ki, İn Şa Allah, ömrüm boyu bu tətbiq üçün davamlı dəstək və təmir təmin edəcəyəm. Məqsədim bu tətbiqin gələcək illər ərzində Ümmət üçün faydalı bir mənbə olaraq qalmasını təmin etməkdir.';
+      'İnşallah, ömrüm boyu bu tətbiq üçün davamlı dəstək və təkmilləşdirmə təmin edəcəyəm. Məqsədim bu tətbiqin illər boyu Ümmət üçün faydalı bir vəsilə olaraq qalmasıdır.';
 
   @override
   String get fajr => 'Sübh';

@@ -116,11 +116,11 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Бөлінген Құран оқуы жүктелуде';
+      'Құранның сөзбе-сөз оқылуы жүктелуде';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Бөлінген Құран оқуы өңделуде';
+      'Құранның сөзбе-сөз оқылуы өңделуде';
 
   @override
   String get footnote => 'Ескерту';
@@ -145,7 +145,8 @@ class AppLocalizationsKk extends AppLocalizations {
   String get wakeLock => 'Экранды өшірмеу';
 
   @override
-  String get wakeLockSubtitle => 'Экранның автоматты түрде өшуін болдырмау.';
+  String get wakeLockSubtitle =>
+      'Құран оқу кезінде экранның автоматты түрде өшуін болдырмайды.';
 
   @override
   String get settings => 'Параметрлер';
@@ -202,13 +203,13 @@ class AppLocalizationsKk extends AppLocalizations {
   String get parameters => 'Параметрлер: ';
 
   @override
-  String get selectCalculationMethod => 'Есептеу әдісін таңдаңыз';
+  String get selectCalculationMethod => 'Намаз уақытын есептеу әдісін таңдаңыз';
 
   @override
   String get shareSelectAyahs => 'Таңдалған аяттарды бөлісу';
 
   @override
-  String get selectionEmpty => 'Таңдау бос';
+  String get selectionEmpty => 'Ешбір аят таңдалмады';
 
   @override
   String get generatingImagePleaseWait => 'Сурет жасалуда... Күтіңіз';
@@ -427,10 +428,10 @@ class AppLocalizationsKk extends AppLocalizations {
   String get searchForACountry => 'Елді іздеу';
 
   @override
-  String get selectYourAdministrator => 'Әкімшіңізді таңдаңыз';
+  String get selectYourAdministrator => 'Әкімшілік аймақты таңдаңыз';
 
   @override
-  String get searchForAnAdministrator => 'Әкімшіні іздеу';
+  String get searchForAnAdministrator => 'Әкімшілік аймақты іздеу';
 
   @override
   String get searchForACity => 'Қаланы іздеу';
@@ -975,7 +976,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get lifetimePromiseDescription =>
-      'Мен жеке өмірім бойы бұл қолданбаны үздіксіз қолдау және күтім көрсетуге уәде беремін, Ин ша Аллаһ. Менің мақсатым - бұл қолданба жылдар бойы үммет үшін пайдалы ресурс болып қалуын қамтамасыз ету.';
+      'Ин ша Аллаһ, мен өмір бойы бұл қолданбаны үздіксіз қолдап, күтіп-ұстауға жеке уәде беремін. Мақсатым - бұл қолданбаның ұзақ жылдар бойы Үмметке пайдалы қызмет етуі.';
 
   @override
   String get fajr => 'Таң';

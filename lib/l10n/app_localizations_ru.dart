@@ -116,11 +116,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Скачивание сегментированного чтения Корана';
+      'Скачивание пословного чтения Корана';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Обработка сегментированного чтения Корана';
+      'Обработка пословного чтения Корана';
 
   @override
   String get footnote => 'Сноска';
@@ -143,11 +143,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Приложение запомнит последнюю открытую вкладку на главном экране.';
 
   @override
-  String get wakeLock => 'Блокировка выключения экрана';
+  String get wakeLock => 'Не выключать экран';
 
   @override
   String get wakeLockSubtitle =>
-      'Предотвращает автоматическое выключение экрана.';
+      'Предотвращает автоматическое выключение экрана во время чтения.';
 
   @override
   String get settings => 'Настройки';
@@ -204,13 +204,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get parameters => 'Параметры: ';
 
   @override
-  String get selectCalculationMethod => 'Выберите метод расчета';
+  String get selectCalculationMethod => 'Выберите метод расчета времени намаза';
 
   @override
   String get shareSelectAyahs => 'Поделиться выбранными аятами';
 
   @override
-  String get selectionEmpty => 'Выбор пуст';
+  String get selectionEmpty => 'Аяты не выбраны';
 
   @override
   String get generatingImagePleaseWait => 'Генерация изображения... Подождите';
@@ -430,10 +430,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get searchForACountry => 'Поиск страны';
 
   @override
-  String get selectYourAdministrator => 'Выберите администратора';
+  String get selectYourAdministrator => 'Выберите административный регион';
 
   @override
-  String get searchForAnAdministrator => 'Поиск администратора';
+  String get searchForAnAdministrator => 'Поиск административного региона';
 
   @override
   String get searchForACity => 'Поиск города';
@@ -980,11 +980,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Наше обещание на всю жизнь';
+  String get ourLifetimePromise => 'Наше бессрочное обязательство';
 
   @override
   String get lifetimePromiseDescription =>
-      'Я лично обещаю предоставлять непрерывную поддержку и обслуживание этого приложения на протяжении всей моей жизни, Инша Аллах. Моя цель - убедиться, что это приложение остается полезным ресурсом для Уммы на годы вперед.';
+      'ИншаАллах, я лично обещаю обеспечивать непрерывную поддержку и развитие этого приложения на протяжении всей своей жизни, чтобы оно оставалось полезным ресурсом для Уммы.';
 
   @override
   String get fajr => 'Фаджр';
