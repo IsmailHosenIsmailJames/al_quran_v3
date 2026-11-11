@@ -1486,20 +1486,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Tìm thấy $count Surah',
+      other: 'Tìm thấy $countString Surah',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Tìm thấy $count câu kinh',
+      other: 'Tìm thấy $countString câu kinh',
     );
     return '$_temp0';
   }

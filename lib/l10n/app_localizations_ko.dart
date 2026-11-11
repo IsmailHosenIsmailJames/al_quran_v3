@@ -1453,20 +1453,28 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count개의 장을 찾았습니다',
+      other: '$countString개의 장을 찾았습니다',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count개의 구절을 찾았습니다',
+      other: '$countString개의 구절을 찾았습니다',
     );
     return '$_temp0';
   }

@@ -1434,20 +1434,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '找到 $count 个苏拉',
+      other: '找到 $countString 个苏拉',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '找到 $count 条经文',
+      other: '找到 $countString 条经文',
     );
     return '$_temp0';
   }

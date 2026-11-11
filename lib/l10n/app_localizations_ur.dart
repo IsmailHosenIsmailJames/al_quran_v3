@@ -88,7 +88,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get selectTafsirLanguage => 'تفسیر کی زبان منتخب کریں...';
 
   @override
-  String get quranTafsirBook => 'قرآن کی تفسیر کتاب';
+  String get quranTafsirBook => 'کتبِ تفسیر قرآن';
 
   @override
   String get selectTafsirBook => 'تفسیر کی کتاب منتخب کریں...';
@@ -116,14 +116,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'قرآن کی تقسیم شدہ تلاوت ڈاؤن لوڈ ہو رہی ہے';
+      'کلمہ بہ کلمہ تلاوتِ قرآن ڈاؤن لوڈ ہو رہی ہے';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'قرآن کی تقسیم شدہ تلاوت پر عمل ہو رہا ہے';
+      'کلمہ بہ کلمہ تلاوتِ قرآن پر کارروائی ہو رہی ہے';
 
   @override
-  String get footnote => 'فٹ نوٹ';
+  String get footnote => 'حاشیہ';
 
   @override
   String get tafsir => 'تفسیر';
@@ -143,10 +143,11 @@ class AppLocalizationsUr extends AppLocalizations {
       'ایپ ہوم اسکرین میں آخری کھولی گئی ٹیب کو یاد رکھے گی۔';
 
   @override
-  String get wakeLock => 'ویک لاک';
+  String get wakeLock => 'اسکرین آن رکھیں';
 
   @override
-  String get wakeLockSubtitle => 'اسکرین کو خود بخود بند ہونے سے روکیں۔';
+  String get wakeLockSubtitle =>
+      'تلاوت کے دوران اسکرین کو خودکار بند ہونے سے روکیں۔';
 
   @override
   String get settings => 'ترتیبات';
@@ -209,7 +210,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get shareSelectAyahs => 'منتخب آیات شیئر کریں';
 
   @override
-  String get selectionEmpty => 'انتخاب خالی ہے';
+  String get selectionEmpty => 'کوئی آیت منتخب نہیں کی گئی';
 
   @override
   String get generatingImagePleaseWait =>
@@ -430,10 +431,10 @@ class AppLocalizationsUr extends AppLocalizations {
   String get searchForACountry => 'ملک تلاش کریں';
 
   @override
-  String get selectYourAdministrator => 'اپنا ایڈمنسٹریٹر منتخب کریں';
+  String get selectYourAdministrator => 'اپنا انتظامی علاقہ منتخب کریں';
 
   @override
-  String get searchForAnAdministrator => 'ایڈمنسٹریٹر تلاش کریں';
+  String get searchForAnAdministrator => 'انتظامی علاقہ تلاش کریں';
 
   @override
   String get searchForACity => 'شہر تلاش کریں';
@@ -975,11 +976,11 @@ class AppLocalizationsUr extends AppLocalizations {
   String get windows => 'ونڈوز';
 
   @override
-  String get ourLifetimePromise => 'ہمارا لائف ٹائم وعدہ';
+  String get ourLifetimePromise => 'ہماری تاحیات وابستگی';
 
   @override
   String get lifetimePromiseDescription =>
-      'میں ذاتی طور پر اس ایپلیکیشن کی لائف ٹائم سپورٹ اور مینٹیننس فراہم کرنے کا وعدہ کرتا ہوں، ان شاء اللہ۔ میرا مقصد یہ یقینی بنانا ہے کہ یہ ایپ امت کے لیے آنے والے سالوں میں ایک مفید وسیلہ رہے۔';
+      'میں ذاتی طور پر وعدہ کرتا ہوں کہ ان شاء اللہ زندگی بھر اس ایپ کی مسلسل دیکھ بھال اور بہتری جاری رکھوں گا۔ میرا مقصد یہ ہے کہ یہ ایپ امت کے لیے ہمیشہ ایک مفید وسیلہ بنی رہے۔';
 
   @override
   String get fajr => 'فجر';
@@ -1481,10 +1482,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count سورتیں ملیں',
+      other: '$countString سورتیں ملیں',
       one: '1 سورت ملی',
     );
     return '$_temp0';
@@ -1492,10 +1497,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count آیات ملیں',
+      other: '$countString آیات ملیں',
       one: '1 آیت ملی',
     );
     return '$_temp0';

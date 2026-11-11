@@ -1490,24 +1490,32 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count сур найдено',
-      few: '$count суры найдены',
-      one: '$count сура найдена',
+      other: '$countString сур найдено',
+      few: '$countString суры найдены',
+      one: '$countString сура найдена',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count аятов найдено',
-      few: '$count аята найдено',
-      one: '$count аят найден',
+      other: '$countString аятов найдено',
+      few: '$countString аята найдено',
+      one: '$countString аят найден',
     );
     return '$_temp0';
   }

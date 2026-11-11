@@ -1478,10 +1478,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count ਸੂਰਤਾਂ ਮਿਲੀਆਂ',
+      other: '$countString ਸੂਰਤਾਂ ਮਿਲੀਆਂ',
       one: '1 ਸੂਰਤ ਮਿਲੀ',
     );
     return '$_temp0';
@@ -1489,10 +1493,14 @@ class AppLocalizationsPa extends AppLocalizations {
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count ਆਇਤਾਂ ਮਿਲੀਆਂ',
+      other: '$countString ਆਇਤਾਂ ਮਿਲੀਆਂ',
       one: '1 ਆਇਤ ਮਿਲੀ',
     );
     return '$_temp0';
