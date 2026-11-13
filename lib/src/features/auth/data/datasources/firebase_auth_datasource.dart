@@ -1,5 +1,6 @@
 import "package:al_quran_v3/src/features/auth/domain/entities/user_entity.dart";
 import "package:firebase_auth/firebase_auth.dart";
+import "package:firebase_core/firebase_core.dart";
 import "package:firebase_database/firebase_database.dart";
 import "package:flutter/foundation.dart";
 import "package:google_sign_in/google_sign_in.dart";
@@ -27,12 +28,23 @@ abstract class FirebaseAuthDataSource {
 
 @LazySingleton(as: FirebaseAuthDataSource)
 class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
-  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  FirebaseAuth? get _firebaseAuth =>
+      Firebase.apps.isNotEmpty ? FirebaseAuth.instance : null;
+  GoogleSignIn get _googleSignIn => GoogleSignIn.instance;
+  FirebaseDatabase? get _database =>
+      Firebase.apps.isNotEmpty ? FirebaseDatabase.instance : null;
+
   bool _isGoogleSignInInitialized = false;
 
   FirebaseAuthDataSourceImpl();
+
+  FirebaseAuth _getRequiredAuth() {
+    final auth = _firebaseAuth;
+    if (auth == null) {
+      throw Exception("Authentication service is currently unavailable.");
+    }
+    return auth;
+  }
 
   Future<void> _ensureGoogleSignInInitialized() async {
     if (!_isGoogleSignInInitialized) {
@@ -46,13 +58,17 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
 
   @override
   UserEntity? get currentUser {
-    final user = _firebaseAuth.currentUser;
+    final user = _firebaseAuth?.currentUser;
     return user != null ? UserEntity.fromFirebaseUser(user) : null;
   }
 
   @override
   Stream<UserEntity?> get authStateChanges {
-    return _firebaseAuth.authStateChanges().map(
+    final auth = _firebaseAuth;
+    if (auth == null) {
+      return Stream.value(null);
+    }
+    return auth.authStateChanges().map(
       (user) => user != null ? UserEntity.fromFirebaseUser(user) : null,
     );
   }
@@ -60,6 +76,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<UserEntity> signInWithGoogle() async {
     try {
+      final auth = _getRequiredAuth();
       await _ensureGoogleSignInInitialized();
       final GoogleSignInAccount googleUser =
           await _googleSignIn.authenticate();
@@ -70,7 +87,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         idToken: googleAuth.idToken,
       );
 
-      final currentUser = _firebaseAuth.currentUser;
+      final currentUser = auth.currentUser;
       UserCredential userCredential;
 
       // If currently an anonymous guest, seamlessly upgrade/link account
@@ -81,14 +98,14 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
           if (e.code == "credential-already-in-use" ||
               e.code == "provider-already-linked") {
             userCredential =
-                await _firebaseAuth.signInWithCredential(credential);
+                await auth.signInWithCredential(credential);
           } else {
             rethrow;
           }
         }
       } else {
         userCredential =
-            await _firebaseAuth.signInWithCredential(credential);
+            await auth.signInWithCredential(credential);
       }
 
       final user = userCredential.user;
@@ -97,15 +114,18 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
       }
 
       // Record profile in Realtime Database
-      try {
-        await _database.ref("users/${user.uid}/profile").update({
-          "uid": user.uid,
-          "email": user.email,
-          "displayName": user.displayName,
-          "photoUrl": user.photoURL,
-          "lastLoginAt": ServerValue.timestamp,
-        });
-      } catch (_) {}
+      final db = _database;
+      if (db != null) {
+        try {
+          await db.ref("users/${user.uid}/profile").update({
+            "uid": user.uid,
+            "email": user.email,
+            "displayName": user.displayName,
+            "photoUrl": user.photoURL,
+            "lastLoginAt": ServerValue.timestamp,
+          });
+        } catch (_) {}
+      }
 
       return UserEntity.fromFirebaseUser(user);
     } catch (e) {
@@ -120,18 +140,22 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String password,
   }) async {
     try {
-      final UserCredential credential = await _firebaseAuth
+      final auth = _getRequiredAuth();
+      final UserCredential credential = await auth
           .signInWithEmailAndPassword(email: email.trim(), password: password);
       final user = credential.user;
       if (user == null) {
         throw Exception("Sign in failed. No user found.");
       }
 
-      try {
-        await _database.ref("users/${user.uid}/profile").update({
-          "lastLoginAt": ServerValue.timestamp,
-        });
-      } catch (_) {}
+      final db = _database;
+      if (db != null) {
+        try {
+          await db.ref("users/${user.uid}/profile").update({
+            "lastLoginAt": ServerValue.timestamp,
+          });
+        } catch (_) {}
+      }
 
       return UserEntity.fromFirebaseUser(user);
     } catch (e) {
@@ -147,7 +171,8 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     required String displayName,
   }) async {
     try {
-      final currentUser = _firebaseAuth.currentUser;
+      final auth = _getRequiredAuth();
+      final currentUser = auth.currentUser;
       UserCredential credential;
 
       if (currentUser != null && currentUser.isAnonymous) {
@@ -161,7 +186,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
           if (e.code == "credential-already-in-use" ||
               e.code == "email-already-in-use" ||
               e.code == "provider-already-linked") {
-            credential = await _firebaseAuth.createUserWithEmailAndPassword(
+            credential = await auth.createUserWithEmailAndPassword(
               email: email.trim(),
               password: password,
             );
@@ -170,7 +195,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
           }
         }
       } else {
-        credential = await _firebaseAuth.createUserWithEmailAndPassword(
+        credential = await auth.createUserWithEmailAndPassword(
           email: email.trim(),
           password: password,
         );
@@ -185,18 +210,21 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         await user.updateDisplayName(displayName.trim());
       }
 
-      try {
-        await _database.ref("users/${user.uid}/profile").update({
-          "uid": user.uid,
-          "email": user.email,
-          "displayName": displayName.trim(),
-          "createdAt": ServerValue.timestamp,
-          "lastLoginAt": ServerValue.timestamp,
-        });
-      } catch (_) {}
+      final db = _database;
+      if (db != null) {
+        try {
+          await db.ref("users/${user.uid}/profile").update({
+            "uid": user.uid,
+            "email": user.email,
+            "displayName": displayName.trim(),
+            "createdAt": ServerValue.timestamp,
+            "lastLoginAt": ServerValue.timestamp,
+          });
+        } catch (_) {}
+      }
 
       await user.reload();
-      final updatedUser = _firebaseAuth.currentUser ?? user;
+      final updatedUser = auth.currentUser ?? user;
       return UserEntity.fromFirebaseUser(updatedUser);
     } catch (e) {
       debugPrint("Error signing up: $e");
@@ -207,7 +235,8 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<UserEntity> signInAnonymously() async {
     try {
-      final UserCredential credential = await _firebaseAuth.signInAnonymously();
+      final auth = _getRequiredAuth();
+      final UserCredential credential = await auth.signInAnonymously();
       final user = credential.user;
       if (user == null) {
         throw Exception("Failed to sign in anonymously.");
@@ -222,7 +251,8 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<void> sendPasswordResetEmail(String email) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email.trim());
+      final auth = _getRequiredAuth();
+      await auth.sendPasswordResetEmail(email: email.trim());
     } catch (e) {
       debugPrint("Error sending password reset: $e");
       rethrow;
@@ -232,7 +262,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<void> signOut() async {
     try {
-      await _firebaseAuth.signOut();
+      await _firebaseAuth?.signOut();
       try {
         await _ensureGoogleSignInInitialized();
         await _googleSignIn.signOut();
@@ -246,17 +276,21 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<void> deleteAccount() async {
     try {
-      final user = _firebaseAuth.currentUser;
+      final auth = _firebaseAuth;
+      final user = auth?.currentUser;
       if (user == null) return;
 
       final uid = user.uid;
 
       // 1. Wipe all Realtime Database user data to satisfy GDPR / Google Play compliance
-      try {
-        final userRef = _database.ref("users/$uid");
-        await userRef.remove();
-      } catch (e) {
-        debugPrint("Error removing user database tree: $e");
+      final db = _database;
+      if (db != null) {
+        try {
+          final userRef = db.ref("users/$uid");
+          await userRef.remove();
+        } catch (e) {
+          debugPrint("Error removing user database tree: $e");
+        }
       }
 
       // 2. Clear user-specific Hive cache
