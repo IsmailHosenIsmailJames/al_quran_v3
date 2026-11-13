@@ -545,10 +545,22 @@ Widget drawerSection({
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(
-                FluentIcons.headphones_24_filled,
-                color: themeState.primary,
-                size: 20,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Image.asset(
+                    "assets/img/quran_audio_logo.png",
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) => Icon(
+                      FluentIcons.headphones_24_filled,
+                      color: themeState.primary,
+                      size: 20,
+                    ),
+                  ),
+                ),
               ),
             ),
             title: "Al Quran Audio",
