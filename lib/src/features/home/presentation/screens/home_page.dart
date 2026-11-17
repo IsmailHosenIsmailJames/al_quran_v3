@@ -20,6 +20,7 @@ import "package:al_quran_v3/src/features/search/presentation/screens/quran_searc
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/app_bar_streak_badge.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
@@ -347,6 +348,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
               centerTitle: true,
               actions: [
+                const AppBarStreakBadge(),
+                const Gap(4),
                 IconButton(
                   tooltip: l10n.search,
                   icon: const Icon(FluentIcons.search_24_regular),

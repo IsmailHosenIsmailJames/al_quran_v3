@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
 import "package:al_quran_v3/src/features/sync/data/services/cloud_sync_service.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
@@ -374,6 +375,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => getIt<AyahToHighlight>()),
         BlocProvider(create: (context) => getIt<AuthCubit>()),
         BlocProvider(create: (context) => getIt<SyncCubit>()),
+        BlocProvider(create: (context) => getIt<StreakCubit>()..loadStreak()),
       ],
 
       child: BlocBuilder<LanguageCubit, MyAppLocalization>(

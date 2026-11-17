@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_pages_info.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/today_plan_helper_card.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_page_shimmer.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/continue_reading_hero_card.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_access_bar.dart";
@@ -109,12 +110,14 @@ class _QuranPageState extends State<QuranPage>
                                 ),
                               ],
                             ),
+                            TodayPlanHelperCard(),
                             QuranQuickAccessBar(),
                           ],
                         )
                       : const Column(
                           children: [
                             ContinueReadingHeroCard(),
+                            TodayPlanHelperCard(),
                             QuranQuickActionsBar(),
                             QuranQuickAccessBar(),
                           ],
