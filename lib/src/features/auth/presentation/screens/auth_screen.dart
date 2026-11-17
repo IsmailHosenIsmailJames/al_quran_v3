@@ -287,40 +287,52 @@ class _AuthScreenState extends State<AuthScreen> {
   ) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isDark
-              ? [
-                  themeState.primary.withValues(alpha: 0.22),
-                  themeState.primary.withValues(alpha: 0.08),
-                ]
-              : [
-                  themeState.primaryShade100,
-                  themeState.primaryShade100.withValues(alpha: 0.45),
-                ],
-        ),
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.25),
-          width: 1.2,
+          color: isDark ? Colors.white12 : Colors.grey.shade200,
+          width: 1.1,
         ),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.03),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              color: themeState.primary.withValues(alpha: 0.18),
-              borderRadius: BorderRadius.circular(14),
+              gradient: LinearGradient(
+                colors: [
+                  themeState.primary,
+                  themeState.primary.withValues(alpha: 0.85),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(13),
+              boxShadow: [
+                BoxShadow(
+                  color: themeState.primary.withValues(alpha: 0.32),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
-            child: Icon(
+            child: const Icon(
               FluentIcons.cloud_sync_24_filled,
-              size: 26,
-              color: themeState.primary,
+              size: 23,
+              color: Colors.white,
             ),
           ),
           const Gap(14),
@@ -334,37 +346,52 @@ class _AuthScreenState extends State<AuthScreen> {
                     Text(
                       l10n.syncedCloudBackup,
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.bold,
                         fontSize: 15.5,
-                        color: themeState.primary,
+                        color: isDark ? Colors.white : const Color(0xFF111827),
                       ),
                     ),
                     const Spacer(),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
                       decoration: BoxDecoration(
-                        color: themeState.primary.withValues(alpha: 0.16),
+                        color: themeState.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        "FREE",
-                        style: TextStyle(
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.w900,
-                          color: themeState.primary,
-                          letterSpacing: 0.5,
+                        border: Border.all(
+                          color: themeState.primary.withValues(alpha: 0.22),
+                          width: 0.8,
                         ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            FluentIcons.checkmark_12_filled,
+                            size: 11,
+                            color: themeState.primary,
+                          ),
+                          const Gap(3),
+                          Text(
+                            "FREE",
+                            style: TextStyle(
+                              fontSize: 9.5,
+                              fontWeight: FontWeight.w800,
+                              color: themeState.primary,
+                              letterSpacing: 0.4,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-                const Gap(4),
+                const Gap(5),
                 Text(
-                  "Keep your notes, bookmarks, streaks, daily goals, and reading history securely synced across all your devices.",
+                  "Never lose your notes, bookmarks, streaks, or reading plans. Access everything seamlessly across all your devices.",
                   style: TextStyle(
                     fontSize: 12,
-                    height: 1.35,
-                    color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+                    height: 1.38,
+                    color: isDark ? Colors.grey.shade400 : const Color(0xFF4B5563),
                   ),
                 ),
               ],
