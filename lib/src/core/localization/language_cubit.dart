@@ -1,3 +1,4 @@
+import "dart:ui";
 import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -38,6 +39,13 @@ class LanguageCubit extends Cubit<MyAppLocalization> {
             (element) => element.locale.languageCode == languageCode,
           ) ??
           usedAppLanguageMap.first;
+    }
+    final systemLocale = PlatformDispatcher.instance.locale;
+    final matchedSystem = usedAppLanguageMap.firstOrNullWhere(
+      (element) => element.locale.languageCode == systemLocale.languageCode,
+    );
+    if (matchedSystem != null) {
+      return matchedSystem;
     }
     return usedAppLanguageMap.first;
   }

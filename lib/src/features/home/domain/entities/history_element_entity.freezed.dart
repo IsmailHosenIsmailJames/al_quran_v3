@@ -29,16 +29,21 @@ $HistoryElementEntityCopyWith<HistoryElementEntity> get copyWith => _$HistoryEle
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryElementEntity&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+  final _this = this as HistoryElementEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryElementEntity&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.ayahNumber, _this.ayahNumber) || other.ayahNumber == _this.ayahNumber)&&(identical(other.pageNumber, _this.pageNumber) || other.pageNumber == _this.pageNumber)&&(identical(other.timestamp, _this.timestamp) || other.timestamp == _this.timestamp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,pageNumber,timestamp);
+int get hashCode {
+  final _this = this as HistoryElementEntity;
+  return Object.hash(runtimeType,_this.surahNumber,_this.ayahNumber,_this.pageNumber,_this.timestamp);
+}
 
 @override
 String toString() {
-  return 'HistoryElementEntity(surahNumber: $surahNumber, ayahNumber: $ayahNumber, pageNumber: $pageNumber, timestamp: $timestamp)';
+  final _this = this as HistoryElementEntity;
+  return 'HistoryElementEntity(surahNumber: ${_this.surahNumber}, ayahNumber: ${_this.ayahNumber}, pageNumber: ${_this.pageNumber}, timestamp: ${_this.timestamp})';
 }
 
 
@@ -234,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryElementEntity&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryElementEntity&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&(identical(other.timestamp, timestamp) || other.timestamp == timestamp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,pageNumber,timestamp);
+int get hashCode {
+    return Object.hash(runtimeType,surahNumber,ayahNumber,pageNumber,timestamp);
+}
 
 @override
 String toString() {
-  return 'HistoryElementEntity(surahNumber: $surahNumber, ayahNumber: $ayahNumber, pageNumber: $pageNumber, timestamp: $timestamp)';
+    return 'HistoryElementEntity(surahNumber: $surahNumber, ayahNumber: $ayahNumber, pageNumber: $pageNumber, timestamp: $timestamp)';
 }
 
 

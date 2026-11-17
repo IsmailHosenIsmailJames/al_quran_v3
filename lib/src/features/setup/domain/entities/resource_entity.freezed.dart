@@ -29,16 +29,21 @@ $ResourceEntityCopyWith<ResourceEntity> get copyWith => _$ResourceEntityCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.type, type) || other.type == type)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded));
+  final _this = this as ResourceEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourceEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.englishName, _this.englishName) || other.englishName == _this.englishName)&&(identical(other.languageCode, _this.languageCode) || other.languageCode == _this.languageCode)&&(identical(other.language, _this.language) || other.language == _this.language)&&(identical(other.languageNative, _this.languageNative) || other.languageNative == _this.languageNative)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.fullPath, _this.fullPath) || other.fullPath == _this.fullPath)&&(identical(other.fileName, _this.fileName) || other.fileName == _this.fileName)&&(identical(other.isDownloaded, _this.isDownloaded) || other.isDownloaded == _this.isDownloaded));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,englishName,languageCode,language,languageNative,type,fullPath,fileName,isDownloaded);
+int get hashCode {
+  final _this = this as ResourceEntity;
+  return Object.hash(runtimeType,_this.id,_this.name,_this.englishName,_this.languageCode,_this.language,_this.languageNative,_this.type,_this.fullPath,_this.fileName,_this.isDownloaded);
+}
 
 @override
 String toString() {
-  return 'ResourceEntity(id: $id, name: $name, englishName: $englishName, languageCode: $languageCode, language: $language, languageNative: $languageNative, type: $type, fullPath: $fullPath, fileName: $fileName, isDownloaded: $isDownloaded)';
+  final _this = this as ResourceEntity;
+  return 'ResourceEntity(id: ${_this.id}, name: ${_this.name}, englishName: ${_this.englishName}, languageCode: ${_this.languageCode}, language: ${_this.language}, languageNative: ${_this.languageNative}, type: ${_this.type}, fullPath: ${_this.fullPath}, fileName: ${_this.fileName}, isDownloaded: ${_this.isDownloaded})';
 }
 
 
@@ -246,16 +251,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.type, type) || other.type == type)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.type, type) || other.type == type)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,englishName,languageCode,language,languageNative,type,fullPath,fileName,isDownloaded);
+int get hashCode {
+    return Object.hash(runtimeType,id,name,englishName,languageCode,language,languageNative,type,fullPath,fileName,isDownloaded);
+}
 
 @override
 String toString() {
-  return 'ResourceEntity(id: $id, name: $name, englishName: $englishName, languageCode: $languageCode, language: $language, languageNative: $languageNative, type: $type, fullPath: $fullPath, fileName: $fileName, isDownloaded: $isDownloaded)';
+    return 'ResourceEntity(id: $id, name: $name, englishName: $englishName, languageCode: $languageCode, language: $language, languageNative: $languageNative, type: $type, fullPath: $fullPath, fileName: $fileName, isDownloaded: $isDownloaded)';
 }
 
 

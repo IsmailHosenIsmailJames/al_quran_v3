@@ -26,16 +26,21 @@ $PrayerSettingsEntityCopyWith<PrayerSettingsEntity> get copyWith => _$PrayerSett
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerSettingsEntity&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.madhab, madhab) || other.madhab == madhab));
+  final _this = this as PrayerSettingsEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerSettingsEntity&&(identical(other.calculationMethod, _this.calculationMethod) || other.calculationMethod == _this.calculationMethod)&&(identical(other.madhab, _this.madhab) || other.madhab == _this.madhab));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,calculationMethod,madhab);
+int get hashCode {
+  final _this = this as PrayerSettingsEntity;
+  return Object.hash(runtimeType,_this.calculationMethod,_this.madhab);
+}
 
 @override
 String toString() {
-  return 'PrayerSettingsEntity(calculationMethod: $calculationMethod, madhab: $madhab)';
+  final _this = this as PrayerSettingsEntity;
+  return 'PrayerSettingsEntity(calculationMethod: ${_this.calculationMethod}, madhab: ${_this.madhab})';
 }
 
 
@@ -224,16 +229,18 @@ _$PrayerSettingsEntityCopyWith<_PrayerSettingsEntity> get copyWith => __$PrayerS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerSettingsEntity&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.madhab, madhab) || other.madhab == madhab));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerSettingsEntity&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.madhab, madhab) || other.madhab == madhab));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,calculationMethod,madhab);
+int get hashCode {
+    return Object.hash(runtimeType,calculationMethod,madhab);
+}
 
 @override
 String toString() {
-  return 'PrayerSettingsEntity(calculationMethod: $calculationMethod, madhab: $madhab)';
+    return 'PrayerSettingsEntity(calculationMethod: $calculationMethod, madhab: $madhab)';
 }
 
 

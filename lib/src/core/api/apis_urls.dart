@@ -1,5 +1,6 @@
 import "dart:math";
-import "package:al_quran_v3/src/core/services/platform_services.dart" as platform_services;
+import "package:al_quran_v3/src/core/services/platform_services.dart"
+    as platform_services;
 
 class ApisUrls {
   static String baseRender = "https://quran-backend-7hyd.onrender.com/";

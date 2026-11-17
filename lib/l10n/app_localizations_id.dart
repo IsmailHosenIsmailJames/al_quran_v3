@@ -116,11 +116,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Mengunduh Bacaan Al-Quran Tersegmentasi';
+      'Mengunduh Tilawah Al-Quran Kata demi Kata';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Memproses Bacaan Al-Quran Tersegmentasi';
+      'Memproses Tilawah Al-Quran Kata demi Kata';
 
   @override
   String get footnote => 'Catatan Kaki';
@@ -142,10 +142,10 @@ class AppLocalizationsId extends AppLocalizations {
       'Aplikasi akan ingat tab terakhir yang dibuka di layar beranda.';
 
   @override
-  String get wakeLock => 'Kunci Bangun';
+  String get wakeLock => 'Layar Tetap Menyala';
 
   @override
-  String get wakeLockSubtitle => 'Cegah layar mati secara otomatis.';
+  String get wakeLockSubtitle => 'Cegah layar mati otomatis saat membaca.';
 
   @override
   String get settings => 'Pengaturan';
@@ -208,7 +208,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get shareSelectAyahs => 'Bagikan Ayat yang Dipilih';
 
   @override
-  String get selectionEmpty => 'Pilihan Kosong';
+  String get selectionEmpty => 'Tidak ada ayat yang dipilih';
 
   @override
   String get generatingImagePleaseWait => 'Membuat Gambar... Tunggu Sebentar';
@@ -427,10 +427,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get searchForACountry => 'Cari negara';
 
   @override
-  String get selectYourAdministrator => 'Pilih Administrator Anda';
+  String get selectYourAdministrator => 'Pilih Wilayah Administratif';
 
   @override
-  String get searchForAnAdministrator => 'Cari administrator';
+  String get searchForAnAdministrator => 'Cari wilayah administratif';
 
   @override
   String get searchForACity => 'Cari kota';
@@ -971,11 +971,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Janji Seumur Hidup Kami';
+  String get ourLifetimePromise => 'Komitmen Seumur Hidup Kami';
 
   @override
   String get lifetimePromiseDescription =>
-      'Saya secara pribadi berjanji untuk memberikan dukungan dan pemeliharaan berkelanjutan untuk aplikasi ini sepanjang hidup saya, In Sha Allah. Tujuan saya adalah memastikan aplikasi ini tetap menjadi sumber daya bermanfaat bagi Ummah selama bertahun-tahun.';
+      'Insya Allah, saya secara pribadi berkomitmen untuk terus memelihara dan mengembangkan aplikasi ini sepanjang hayat saya. Harapan saya, aplikasi ini menjadi ladang kebaikan yang lestari bagi umat.';
 
   @override
   String get fajr => 'Subuh';
@@ -1479,20 +1479,28 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Surah ditemukan',
+      other: '$countString Surah ditemukan',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Ayat ditemukan',
+      other: '$countString Ayat ditemukan',
     );
     return '$_temp0';
   }

@@ -19,20 +19,27 @@ import "package:uuid/uuid.dart";
 const _uuid = Uuid();
 
 Future<void> showAddToPinnedPopup(BuildContext context, String ayahKey) async {
+  final isWide = MediaQuery.of(context).size.width >= 600;
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     useSafeArea: true,
+    constraints: BoxConstraints(
+      maxWidth: isWide ? 560 : double.infinity,
+    ),
     builder: (context) {
       return Padding(
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
+          margin: isWide ? const EdgeInsets.all(16.0) : EdgeInsets.zero,
           decoration: BoxDecoration(
             color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: isWide
+                ? BorderRadius.circular(28)
+                : const BorderRadius.vertical(top: Radius.circular(28)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.15),

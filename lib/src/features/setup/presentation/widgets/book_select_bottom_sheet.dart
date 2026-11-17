@@ -211,7 +211,12 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
               ? _buildEmptyState(context, appLocalizations)
               : ScrollablePositionedList.builder(
                   itemScrollController: _itemScrollController,
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                  padding: EdgeInsets.fromLTRB(
+                    16,
+                    12,
+                    16,
+                    MediaQuery.of(context).padding.bottom + 24,
+                  ),
                   itemCount: searchState.sortedLanguages.length,
                   itemBuilder: (context, index) {
                     String langCode = searchState.sortedLanguages[index];

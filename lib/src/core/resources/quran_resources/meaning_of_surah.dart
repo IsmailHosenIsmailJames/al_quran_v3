@@ -1,7 +1,7 @@
 import "dart:convert";
 
-import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
+import "package:al_quran_v3/src/core/utils/navigator_key.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";

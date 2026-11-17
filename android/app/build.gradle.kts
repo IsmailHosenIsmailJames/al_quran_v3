@@ -40,30 +40,49 @@ android {
         multiDexEnabled = true
     }
 
-     packagingOptions {
+    packaging {
         jniLibs {
             useLegacyPackaging = true
         }
-     }
+    }
 
     signingConfigs {
-        create("release") {
-            if (keystorePropertiesFile.exists()) {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-                storePassword = keystoreProperties["storePassword"] as String
+        if (keystorePropertiesFile.exists()) {
+            val keyConfig: com.android.build.api.dsl.ApkSigningConfig.() -> Unit = {
+                keyAlias = keystoreProperties["keyAlias"] as? String ?: ""
+                keyPassword = keystoreProperties["keyPassword"] as? String ?: ""
+                storeFile = keystoreProperties["storeFile"]?.let {
+                    val f = file(it)
+                    if (f.exists()) f else rootProject.file(it)
+                }
+                storePassword = keystoreProperties["storePassword"] as? String ?: ""
             }
+            create("release", keyConfig)
+            getByName("debug", keyConfig)
         }
     }
 
     buildTypes {
-        release {
+        val appSigningConfig = signingConfigs.findByName("release") ?: signingConfigs.findByName("debug")
+
+        getByName("debug") {
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
+            }
+        }
+        getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (keystorePropertiesFile.exists()) {
-                signingConfig = signingConfigs.getByName("release")
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
+            }
+        }
+        maybeCreate("profile").apply {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
             }
         }
     }

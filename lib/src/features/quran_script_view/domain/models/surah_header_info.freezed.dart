@@ -26,16 +26,21 @@ $SurahHeaderInfoModelCopyWith<SurahHeaderInfoModel> get copyWith => _$SurahHeade
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahHeaderInfoModel&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&(identical(other.startAyahKey, startAyahKey) || other.startAyahKey == startAyahKey)&&(identical(other.endAyahKey, endAyahKey) || other.endAyahKey == endAyahKey));
+  final _this = this as SurahHeaderInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahHeaderInfoModel&&(identical(other.surahInfoModel, _this.surahInfoModel) || other.surahInfoModel == _this.surahInfoModel)&&(identical(other.startAyahKey, _this.startAyahKey) || other.startAyahKey == _this.startAyahKey)&&(identical(other.endAyahKey, _this.endAyahKey) || other.endAyahKey == _this.endAyahKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahInfoModel,startAyahKey,endAyahKey);
+int get hashCode {
+  final _this = this as SurahHeaderInfoModel;
+  return Object.hash(runtimeType,_this.surahInfoModel,_this.startAyahKey,_this.endAyahKey);
+}
 
 @override
 String toString() {
-  return 'SurahHeaderInfoModel(surahInfoModel: $surahInfoModel, startAyahKey: $startAyahKey, endAyahKey: $endAyahKey)';
+  final _this = this as SurahHeaderInfoModel;
+  return 'SurahHeaderInfoModel(surahInfoModel: ${_this.surahInfoModel}, startAyahKey: ${_this.startAyahKey}, endAyahKey: ${_this.endAyahKey})';
 }
 
 
@@ -235,16 +240,18 @@ _$SurahHeaderInfoModelCopyWith<_SurahHeaderInfoModel> get copyWith => __$SurahHe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahHeaderInfoModel&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&(identical(other.startAyahKey, startAyahKey) || other.startAyahKey == startAyahKey)&&(identical(other.endAyahKey, endAyahKey) || other.endAyahKey == endAyahKey));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahHeaderInfoModel&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&(identical(other.startAyahKey, startAyahKey) || other.startAyahKey == startAyahKey)&&(identical(other.endAyahKey, endAyahKey) || other.endAyahKey == endAyahKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahInfoModel,startAyahKey,endAyahKey);
+int get hashCode {
+    return Object.hash(runtimeType,surahInfoModel,startAyahKey,endAyahKey);
+}
 
 @override
 String toString() {
-  return 'SurahHeaderInfoModel(surahInfoModel: $surahInfoModel, startAyahKey: $startAyahKey, endAyahKey: $endAyahKey)';
+    return 'SurahHeaderInfoModel(surahInfoModel: $surahInfoModel, startAyahKey: $startAyahKey, endAyahKey: $endAyahKey)';
 }
 
 

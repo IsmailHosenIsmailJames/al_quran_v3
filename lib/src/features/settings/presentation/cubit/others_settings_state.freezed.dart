@@ -26,16 +26,21 @@ $OthersSettingsStateCopyWith<OthersSettingsState> get copyWith => _$OthersSettin
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OthersSettingsState&&(identical(other.rememberLastTab, rememberLastTab) || other.rememberLastTab == rememberLastTab)&&(identical(other.tabIndex, tabIndex) || other.tabIndex == tabIndex)&&(identical(other.wakeLock, wakeLock) || other.wakeLock == wakeLock));
+  final _this = this as OthersSettingsState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OthersSettingsState&&(identical(other.rememberLastTab, _this.rememberLastTab) || other.rememberLastTab == _this.rememberLastTab)&&(identical(other.tabIndex, _this.tabIndex) || other.tabIndex == _this.tabIndex)&&(identical(other.wakeLock, _this.wakeLock) || other.wakeLock == _this.wakeLock));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,rememberLastTab,tabIndex,wakeLock);
+int get hashCode {
+  final _this = this as OthersSettingsState;
+  return Object.hash(runtimeType,_this.rememberLastTab,_this.tabIndex,_this.wakeLock);
+}
 
 @override
 String toString() {
-  return 'OthersSettingsState(rememberLastTab: $rememberLastTab, tabIndex: $tabIndex, wakeLock: $wakeLock)';
+  final _this = this as OthersSettingsState;
+  return 'OthersSettingsState(rememberLastTab: ${_this.rememberLastTab}, tabIndex: ${_this.tabIndex}, wakeLock: ${_this.wakeLock})';
 }
 
 
@@ -226,16 +231,18 @@ _$OthersSettingsStateCopyWith<_OthersSettingsState> get copyWith => __$OthersSet
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OthersSettingsState&&(identical(other.rememberLastTab, rememberLastTab) || other.rememberLastTab == rememberLastTab)&&(identical(other.tabIndex, tabIndex) || other.tabIndex == tabIndex)&&(identical(other.wakeLock, wakeLock) || other.wakeLock == wakeLock));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _OthersSettingsState&&(identical(other.rememberLastTab, rememberLastTab) || other.rememberLastTab == rememberLastTab)&&(identical(other.tabIndex, tabIndex) || other.tabIndex == tabIndex)&&(identical(other.wakeLock, wakeLock) || other.wakeLock == wakeLock));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,rememberLastTab,tabIndex,wakeLock);
+int get hashCode {
+    return Object.hash(runtimeType,rememberLastTab,tabIndex,wakeLock);
+}
 
 @override
 String toString() {
-  return 'OthersSettingsState(rememberLastTab: $rememberLastTab, tabIndex: $tabIndex, wakeLock: $wakeLock)';
+    return 'OthersSettingsState(rememberLastTab: $rememberLastTab, tabIndex: $tabIndex, wakeLock: $wakeLock)';
 }
 
 

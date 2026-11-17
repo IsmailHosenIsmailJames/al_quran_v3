@@ -204,12 +204,16 @@ Widget getReciterWidget({
                             color: themeState.primary,
                           ),
                           const Gap(4),
-                          Text(
-                            Uri.parse(audioTabScreenState.bio!).host,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: themeState.primary,
-                              fontWeight: FontWeight.w500,
-                              decoration: TextDecoration.underline,
+                          Flexible(
+                            child: Text(
+                              Uri.parse(audioTabScreenState.bio!).host,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: themeState.primary,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ],
@@ -263,12 +267,16 @@ Widget _buildBadge(
           Icon(icon, size: 11, color: fgColor),
           const Gap(4),
         ],
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: isAccent ? FontWeight.w600 : FontWeight.w500,
-            color: fgColor,
+        Flexible(
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: isAccent ? FontWeight.w600 : FontWeight.w500,
+              color: fgColor,
+            ),
           ),
         ),
       ],

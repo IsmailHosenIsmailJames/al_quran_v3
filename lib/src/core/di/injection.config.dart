@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:al_quran_v3/src/core/localization/language_cubit.dart' as _i178;
 import 'package:al_quran_v3/src/core/localization/languages.dart' as _i498;
 import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart'
@@ -24,7 +25,7 @@ import 'package:al_quran_v3/src/features/about/domain/usecases/get_app_info_usec
 import 'package:al_quran_v3/src/features/audio/data/datasources/audio_local_datasource.dart'
     as _i712;
 import 'package:al_quran_v3/src/features/audio/data/repositories/audio_repository_impl.dart'
-    as _i588;
+    as _i589;
 import 'package:al_quran_v3/src/features/audio/domain/repositories/i_audio_repository.dart'
     as _i818;
 import 'package:al_quran_v3/src/features/audio/domain/usecases/get_recitations_usecase.dart'
@@ -51,6 +52,14 @@ import 'package:al_quran_v3/src/features/collections/data/repositories/collectio
     as _i713;
 import 'package:al_quran_v3/src/features/collections/domain/repositories/collections_repository.dart'
     as _i1035;
+import 'package:al_quran_v3/src/features/daily_plan/data/datasources/streak_local_datasource.dart'
+    as _i25;
+import 'package:al_quran_v3/src/features/daily_plan/data/repositories/streak_repository_impl.dart'
+    as _i396;
+import 'package:al_quran_v3/src/features/daily_plan/domain/repositories/i_streak_repository.dart'
+    as _i588;
+import 'package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart'
+    as _i820;
 import 'package:al_quran_v3/src/features/home/data/datasources/history_local_datasource.dart'
     as _i151;
 import 'package:al_quran_v3/src/features/home/data/repositories/history_repository_impl.dart'
@@ -149,6 +158,8 @@ import 'package:al_quran_v3/src/features/quran_resources/domain/usecases/toggle_
     as _i130;
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart'
     as _i411;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart'
+    as _i992;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart'
     as _i775;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart'
@@ -276,6 +287,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i730.SegmentedQuranReciterCubit>(
       () => _i730.SegmentedQuranReciterCubit(),
     );
+    gh.lazySingleton<_i25.StreakLocalDataSource>(
+      () => _i25.StreakLocalDataSource(),
+    );
     gh.lazySingleton<_i151.HistoryLocalDataSource>(
       () => _i151.HistoryLocalDataSource(),
     );
@@ -292,6 +306,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i609.QuranResourcesRemoteDataSource>(
       () => _i609.QuranResourcesRemoteDataSource(),
     );
+    gh.lazySingleton<_i992.AutoScrollCubit>(() => _i992.AutoScrollCubit());
     gh.lazySingleton<_i775.AyahByAyahInScrollInfoCubit>(
       () => _i775.AyahByAyahInScrollInfoCubit(),
     );
@@ -328,6 +343,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i930.GetSetupResourcesUseCase>(
       () => _i930.GetSetupResourcesUseCase(gh<_i720.IResourceRepository>()),
+    );
+    gh.lazySingleton<_i588.IStreakRepository>(
+      () => _i396.StreakRepositoryImpl(gh<_i25.StreakLocalDataSource>()),
     );
     gh.lazySingleton<_i881.ISettingsRepository>(
       () => _i197.SettingsRepositoryImpl(gh<_i584.SettingsLocalDataSource>()),
@@ -419,6 +437,9 @@ extension GetItInjectableX on _i174.GetIt {
         localDataSource: gh<_i461.TajweedGuideLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i820.StreakCubit>(
+      () => _i820.StreakCubit(gh<_i588.IStreakRepository>()),
+    );
     gh.lazySingleton<_i144.SaveSetupPreferencesUseCase>(
       () => _i144.SaveSetupPreferencesUseCase(gh<_i670.ISetupRepository>()),
     );
@@ -437,7 +458,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i632.SurahInfoRepositoryImpl(gh<_i278.SurahInfoLocalDataSource>()),
     );
     gh.lazySingleton<_i818.IAudioRepository>(
-      () => _i588.AudioRepositoryImpl(gh<_i712.AudioLocalDataSource>()),
+      () => _i589.AudioRepositoryImpl(gh<_i712.AudioLocalDataSource>()),
     );
     gh.lazySingleton<_i1035.CollectionsRepository>(
       () => _i713.CollectionsRepositoryImpl(

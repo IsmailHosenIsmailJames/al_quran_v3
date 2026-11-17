@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_tafsir
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/get_ayah_card_for_share_as_image.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
-import "package:clipboard/clipboard.dart";
+import "package:flutter/services.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -171,10 +171,13 @@ void showShareBottomDialog(
                   backgroundColor: themeState.primaryShade200,
                 ),
                 onPressed: () async {
-                  await FlutterClipboard.copy(
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text:
                     "${getSurahName(context, surahInfoModel.id)}"
                     " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
                     "${l10n.translation}:\n$translationSingleString",
+                    ),
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);
@@ -397,11 +400,14 @@ void showShareBottomDialog(
                     ))?.tafsir,
                     returnAyahKeyIfLinked: false,
                   );
-                  await FlutterClipboard.copy(
+                  await Clipboard.setData(
+                    ClipboardData(
+                      text:
                     "${getSurahName(context, surahInfoModel.id)}"
                     " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
                     " ${l10n.translation}:\n$translationSingleString"
                     " \n${l10n.tafsir}:\n${tafsir ?? l10n.notFound}",
+                    ),
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
                   Navigator.pop(context);

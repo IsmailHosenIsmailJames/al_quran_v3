@@ -116,14 +116,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'جاري تنزيل تلاوة القرآن المقسمة';
+      'جاري تنزيل تلاوة القرآن (كلمة بكلمة)';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'جاري معالجة تلاوة القرآن المقسمة';
+      'جاري معالجة تلاوة القرآن (كلمة بكلمة)';
 
   @override
-  String get footnote => 'هامش';
+  String get footnote => 'حاشية';
 
   @override
   String get tafsir => 'تفسير';
@@ -142,10 +142,11 @@ class AppLocalizationsAr extends AppLocalizations {
       'سيحتفظ التطبيق بآخر علامة تبويب مفتوحة في الشاشة الرئيسية.';
 
   @override
-  String get wakeLock => 'قفل الاستيقاظ';
+  String get wakeLock => 'إبقاء الشاشة مضاءة';
 
   @override
-  String get wakeLockSubtitle => 'منع الشاشة من الإغلاق تلقائيًا.';
+  String get wakeLockSubtitle =>
+      'منع الشاشة من الإغلاق تلقائيًا أثناء القراءة.';
 
   @override
   String get settings => 'الإعدادات';
@@ -208,7 +209,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareSelectAyahs => 'مشاركة الآيات المختارة';
 
   @override
-  String get selectionEmpty => 'الاختيار فارغ';
+  String get selectionEmpty => 'لم يتم تحديد أي آية';
 
   @override
   String get generatingImagePleaseWait => 'جاري إنشاء الصورة... يرجى الانتظار';
@@ -427,10 +428,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchForACountry => 'ابحث عن بلد';
 
   @override
-  String get selectYourAdministrator => 'اختر الإدارة الخاصة بك';
+  String get selectYourAdministrator => 'اختر المنطقة الإدارية';
 
   @override
-  String get searchForAnAdministrator => 'ابحث عن إدارة';
+  String get searchForAnAdministrator => 'البحث عن المنطقة الإدارية';
 
   @override
   String get searchForACity => 'ابحث عن مدينة';
@@ -1475,12 +1476,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'تم العثور على $count سورة',
-      many: 'تم العثور على $count سورة',
-      few: 'تم العثور على $count سور',
+      other: 'تم العثور على $countString سورة',
+      many: 'تم العثور على $countString سورة',
+      few: 'تم العثور على $countString سور',
       two: 'تم العثور على سورتين',
       one: 'تم العثور على سورة واحدة',
     );
@@ -1489,12 +1494,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'تم العثور على $count آية',
-      many: 'تم العثور على $count آية',
-      few: 'تم العثور على $count آيات',
+      other: 'تم العثور على $countString آية',
+      many: 'تم العثور على $countString آية',
+      few: 'تم العثور على $countString آيات',
       two: 'تم العثور على آيتين',
       one: 'تم العثور على آية واحدة',
     );

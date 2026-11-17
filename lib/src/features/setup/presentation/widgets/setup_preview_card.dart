@@ -352,7 +352,17 @@ class SetupPreviewCard extends StatelessWidget {
 
                   const Gap(8),
 
-                  // 2. Framed Bismillah Ayah Preview
+                  // 2. Font Selection Row (placed above preview for instant visual feedback)
+                  const QuranFontSelectionWidget(
+                    titleStyle: TextStyle(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  const Gap(8),
+
+                  // 3. Framed Bismillah Ayah Preview
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
@@ -387,14 +397,6 @@ class SetupPreviewCard extends StatelessWidget {
 
                   const Gap(8),
 
-                  // 3. Font Selection Row
-                  const QuranFontSelectionWidget(
-                    titleStyle: TextStyle(
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-
                   const Gap(8),
 
                   // 4. Translation Tile
@@ -425,7 +427,50 @@ class SetupPreviewCard extends StatelessWidget {
                         _showBookSelectBottomSheet(context, isTafsir: true),
                   ),
 
-                  const Gap(14),
+                  const Gap(10),
+
+                  // Offline download info indicator
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.03)
+                          : Colors.grey.shade50,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.grey.shade200,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          FluentIcons.arrow_download_16_regular,
+                          size: 15,
+                          color: themeState.primary,
+                        ),
+                        const Gap(8),
+                        Expanded(
+                          child: Text(
+                            "Offline Quran text, font, translation & tafsir (~3.5 MB)",
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              color: isDark
+                                  ? Colors.grey.shade400
+                                  : Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const Gap(12),
 
                   // 6. Save & Download CTA Button
                   SizedBox(

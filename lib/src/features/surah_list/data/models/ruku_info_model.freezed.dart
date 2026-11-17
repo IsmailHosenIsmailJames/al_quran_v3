@@ -29,16 +29,21 @@ $RukuInfoModelCopyWith<RukuInfoModel> get copyWith => _$RukuInfoModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RukuInfoModel&&(identical(other.rukuNumber, rukuNumber) || other.rukuNumber == rukuNumber)&&(identical(other.surahRukuNumber, surahRukuNumber) || other.surahRukuNumber == surahRukuNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, verseMapping));
+  final _this = this as RukuInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RukuInfoModel&&(identical(other.rukuNumber, _this.rukuNumber) || other.rukuNumber == _this.rukuNumber)&&(identical(other.surahRukuNumber, _this.surahRukuNumber) || other.surahRukuNumber == _this.surahRukuNumber)&&(identical(other.versesCount, _this.versesCount) || other.versesCount == _this.versesCount)&&(identical(other.firstVerseKey, _this.firstVerseKey) || other.firstVerseKey == _this.firstVerseKey)&&(identical(other.lastVerseKey, _this.lastVerseKey) || other.lastVerseKey == _this.lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, _this.verseMapping));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,rukuNumber,surahRukuNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(verseMapping));
+int get hashCode {
+  final _this = this as RukuInfoModel;
+  return Object.hash(runtimeType,_this.rukuNumber,_this.surahRukuNumber,_this.versesCount,_this.firstVerseKey,_this.lastVerseKey,const DeepCollectionEquality().hash(_this.verseMapping));
+}
 
 @override
 String toString() {
-  return 'RukuInfoModel(rukuNumber: $rukuNumber, surahRukuNumber: $surahRukuNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
+  final _this = this as RukuInfoModel;
+  return 'RukuInfoModel(rukuNumber: ${_this.rukuNumber}, surahRukuNumber: ${_this.surahRukuNumber}, versesCount: ${_this.versesCount}, firstVerseKey: ${_this.firstVerseKey}, lastVerseKey: ${_this.lastVerseKey}, verseMapping: ${_this.verseMapping})';
 }
 
 
@@ -244,16 +249,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RukuInfoModel&&(identical(other.rukuNumber, rukuNumber) || other.rukuNumber == rukuNumber)&&(identical(other.surahRukuNumber, surahRukuNumber) || other.surahRukuNumber == surahRukuNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other._verseMapping, _verseMapping));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RukuInfoModel&&(identical(other.rukuNumber, rukuNumber) || other.rukuNumber == rukuNumber)&&(identical(other.surahRukuNumber, surahRukuNumber) || other.surahRukuNumber == surahRukuNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, _verseMapping));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,rukuNumber,surahRukuNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(_verseMapping));
+int get hashCode {
+    return Object.hash(runtimeType,rukuNumber,surahRukuNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(_verseMapping));
+}
 
 @override
 String toString() {
-  return 'RukuInfoModel(rukuNumber: $rukuNumber, surahRukuNumber: $surahRukuNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
+    return 'RukuInfoModel(rukuNumber: $rukuNumber, surahRukuNumber: $surahRukuNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
 }
 
 

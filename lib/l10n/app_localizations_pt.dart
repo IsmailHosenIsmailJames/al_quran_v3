@@ -116,11 +116,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Baixando Recitação Segmentada do Alcorão';
+      'Baixando Recitação Palavra por Palavra do Alcorão';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Processando Recitação Segmentada do Alcorão';
+      'Processando Recitação Palavra por Palavra do Alcorão';
 
   @override
   String get footnote => 'Nota de Rodapé';
@@ -203,13 +203,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get parameters => 'Parâmetros: ';
 
   @override
-  String get selectCalculationMethod => 'Selecione o Método de Cálculo';
+  String get selectCalculationMethod =>
+      'Selecione o Método de Cálculo das Orações';
 
   @override
   String get shareSelectAyahs => 'Compartilhar Versículos Selecionados';
 
   @override
-  String get selectionEmpty => 'Seleção Vazia';
+  String get selectionEmpty => 'Nenhum versículo selecionado';
 
   @override
   String get generatingImagePleaseWait =>
@@ -1496,10 +1497,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count suratas encontradas',
+      other: '$countString suratas encontradas',
       one: '1 surata encontrada',
     );
     return '$_temp0';
@@ -1507,10 +1512,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count versículos encontrados',
+      other: '$countString versículos encontrados',
       one: '1 versículo encontrado',
     );
     return '$_temp0';

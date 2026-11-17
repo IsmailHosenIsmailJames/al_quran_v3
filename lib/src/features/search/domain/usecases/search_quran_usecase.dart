@@ -44,8 +44,9 @@ class SearchQuranUseCase {
       surahMatches.addAll(_matchSurahs(trimmedQuery));
     }
 
-    // 4. If scope is only Surahs, return early
-    if (filter.scope == SearchScope.surahs) {
+    // 4. If scope is only Surahs, or query is too short for full-text search without direct jump, return early
+    if (filter.scope == SearchScope.surahs ||
+        (trimmedQuery.length < 2 && directJump == null)) {
       stopwatch.stop();
       return QuranSearchResults(
         query: query,
@@ -58,10 +59,28 @@ class SearchQuranUseCase {
 
     // 5. Full-Text Verse Search
     final Map<String, _AyahMatchCollector> collectedAyahs = {};
+    final isArabicQuery = ArabicTextNormalizer.containsArabic(trimmedQuery);
     final normalizedQuery = ArabicTextNormalizer.normalize(trimmedQuery);
 
+    final lowerQuery = trimmedQuery.toLowerCase();
+    final queryTokens = filter.matchExactPhrase
+        ? const <String>[]
+        : lowerQuery
+            .split(RegExp(r"\s+"))
+            .where((t) => t.trim().isNotEmpty)
+            .toList();
+
+    final shouldSearchArabic = filter.scope == SearchScope.arabic ||
+        (filter.scope == SearchScope.all && isArabicQuery);
+
+    final shouldSearchTranslations = filter.scope == SearchScope.translations ||
+        (filter.scope == SearchScope.all && !isArabicQuery);
+
+    final shouldSearchTafsirs = filter.scope == SearchScope.tafsir ||
+        (filter.scope == SearchScope.all && !isArabicQuery);
+
     // --- Search in Arabic Quran Script ---
-    if (filter.scope == SearchScope.all || filter.scope == SearchScope.arabic) {
+    if (shouldSearchArabic) {
       final normalizedMap = _dataSource.getAllNormalizedArabic();
       final plainMap = _dataSource.getAllPlainArabic();
 
@@ -84,7 +103,7 @@ class SearchQuranUseCase {
     }
 
     // --- Search in Translations ---
-    if (filter.scope == SearchScope.all || filter.scope == SearchScope.translations) {
+    if (shouldSearchTranslations) {
       final translationBooks = filter.selectedTranslations.isNotEmpty
           ? filter.selectedTranslations
           : _dataSource.getDownloadedTranslations();
@@ -102,7 +121,8 @@ class SearchQuranUseCase {
 
           final bool matchInTranslation = _textMatchesQuery(
             translationText,
-            trimmedQuery,
+            lowerQuery,
+            queryTokens,
             exactPhrase: filter.matchExactPhrase,
           );
 
@@ -113,7 +133,8 @@ class SearchQuranUseCase {
               final fnText = fnEntry.value.toString();
               if (_textMatchesQuery(
                 fnText,
-                trimmedQuery,
+                lowerQuery,
+                queryTokens,
                 exactPhrase: filter.matchExactPhrase,
               )) {
                 matchInFootnote = true;
@@ -143,7 +164,7 @@ class SearchQuranUseCase {
     }
 
     // --- Search in Tafsirs ---
-    if (filter.scope == SearchScope.all || filter.scope == SearchScope.tafsir) {
+    if (shouldSearchTafsirs) {
       final tafsirBooks = filter.selectedTafsirs.isNotEmpty
           ? filter.selectedTafsirs
           : _dataSource.getDownloadedTafsirs();
@@ -158,7 +179,8 @@ class SearchQuranUseCase {
           final String tafsirText = entry.value;
           if (_textMatchesQuery(
             tafsirText,
-            trimmedQuery,
+            lowerQuery,
+            queryTokens,
             exactPhrase: filter.matchExactPhrase,
           )) {
             final collector = collectedAyahs.putIfAbsent(
@@ -257,22 +279,16 @@ class SearchQuranUseCase {
 
   bool _textMatchesQuery(
     String sourceText,
-    String query, {
+    String lowerQuery,
+    List<String> queryTokens, {
     bool exactPhrase = false,
   }) {
     if (sourceText.isEmpty) return false;
     final lowerSource = sourceText.toLowerCase();
-    final lowerQuery = query.toLowerCase();
 
     if (exactPhrase) {
       return lowerSource.contains(lowerQuery);
     }
-
-    // Multi-token match: all words must be present
-    final queryTokens = lowerQuery
-        .split(RegExp(r"\s+"))
-        .where((t) => t.trim().isNotEmpty)
-        .toList();
 
     if (queryTokens.isEmpty) return false;
 

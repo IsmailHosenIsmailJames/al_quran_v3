@@ -116,11 +116,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Segmentierte Koranrezitation wird heruntergeladen';
+      'Wort-für-Wort-Koranrezitation wird heruntergeladen';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Segmentierte Koranrezitation wird verarbeitet';
+      'Wort-für-Wort-Koranrezitation wird verarbeitet';
 
   @override
   String get footnote => 'Fußnote';
@@ -204,13 +204,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get parameters => 'Parameter: ';
 
   @override
-  String get selectCalculationMethod => 'Berechnungsmethode auswählen';
+  String get selectCalculationMethod =>
+      'Gebetszeit-Berechnungsmethode auswählen';
 
   @override
   String get shareSelectAyahs => 'Ausgewählte Verse teilen';
 
   @override
-  String get selectionEmpty => 'Auswahl leer';
+  String get selectionEmpty => 'Keine Verse ausgewählt';
 
   @override
   String get generatingImagePleaseWait => 'Bild wird erstellt... Bitte warten';
@@ -1494,10 +1495,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Suren gefunden',
+      other: '$countString Suren gefunden',
       one: '1 Sure gefunden',
     );
     return '$_temp0';
@@ -1505,10 +1510,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Verse gefunden',
+      other: '$countString Verse gefunden',
       one: '1 Vers gefunden',
     );
     return '$_temp0';

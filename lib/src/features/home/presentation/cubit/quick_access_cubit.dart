@@ -1,3 +1,5 @@
+import "package:al_quran_v3/src/core/di/injection.dart";
+import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -97,6 +99,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
   void addQuickAccess(QuickAccessModel quickAccessModel) {
     emit([quickAccessModel, ...state]);
     Hive.box("user").put("quick_access", state.map((e) => e.toJson()).toList());
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   void removeQuickAccess(QuickAccessModel quickAccessModel) {
@@ -108,6 +111,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     Hive.box(
       "user",
     ).put("quick_access", copyState.map((e) => e.toJson()).toList());
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   void updateQuickAccess(QuickAccessModel quickAccessModel) {
@@ -124,6 +128,7 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     Hive.box(
       "user",
     ).put("quick_access", copyState.map((e) => e.toJson()).toList());
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   void reload() {

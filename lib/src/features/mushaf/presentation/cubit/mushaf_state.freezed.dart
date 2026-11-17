@@ -26,16 +26,21 @@ $MushafStateCopyWith<MushafState> get copyWith => _$MushafStateCopyWithImpl<Mush
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isExtracting, isExtracting) || other.isExtracting == isExtracting)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.isUiVisible, isUiVisible) || other.isUiVisible == isUiVisible));
+  final _this = this as MushafState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafState&&(identical(other.isChecking, _this.isChecking) || other.isChecking == _this.isChecking)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading)&&(identical(other.isExtracting, _this.isExtracting) || other.isExtracting == _this.isExtracting)&&(identical(other.downloadProgress, _this.downloadProgress) || other.downloadProgress == _this.downloadProgress)&&(identical(other.downloadStatus, _this.downloadStatus) || other.downloadStatus == _this.downloadStatus)&&(identical(other.hasError, _this.hasError) || other.hasError == _this.hasError)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage)&&(identical(other.dataReady, _this.dataReady) || other.dataReady == _this.dataReady)&&(identical(other.baseDirPath, _this.baseDirPath) || other.baseDirPath == _this.baseDirPath)&&(identical(other.currentPage, _this.currentPage) || other.currentPage == _this.currentPage)&&(identical(other.isUiVisible, _this.isUiVisible) || other.isUiVisible == _this.isUiVisible));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,isExtracting,downloadProgress,downloadStatus,hasError,errorMessage,dataReady,baseDirPath,currentPage,isUiVisible);
+int get hashCode {
+  final _this = this as MushafState;
+  return Object.hash(runtimeType,_this.isChecking,_this.isDownloading,_this.isExtracting,_this.downloadProgress,_this.downloadStatus,_this.hasError,_this.errorMessage,_this.dataReady,_this.baseDirPath,_this.currentPage,_this.isUiVisible);
+}
 
 @override
 String toString() {
-  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, isExtracting: $isExtracting, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, hasError: $hasError, errorMessage: $errorMessage, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage, isUiVisible: $isUiVisible)';
+  final _this = this as MushafState;
+  return 'MushafState(isChecking: ${_this.isChecking}, isDownloading: ${_this.isDownloading}, isExtracting: ${_this.isExtracting}, downloadProgress: ${_this.downloadProgress}, downloadStatus: ${_this.downloadStatus}, hasError: ${_this.hasError}, errorMessage: ${_this.errorMessage}, dataReady: ${_this.dataReady}, baseDirPath: ${_this.baseDirPath}, currentPage: ${_this.currentPage}, isUiVisible: ${_this.isUiVisible})';
 }
 
 
@@ -242,16 +247,18 @@ _$MushafStateCopyWith<_MushafState> get copyWith => __$MushafStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isExtracting, isExtracting) || other.isExtracting == isExtracting)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.isUiVisible, isUiVisible) || other.isUiVisible == isUiVisible));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafState&&(identical(other.isChecking, isChecking) || other.isChecking == isChecking)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.isExtracting, isExtracting) || other.isExtracting == isExtracting)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.downloadStatus, downloadStatus) || other.downloadStatus == downloadStatus)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dataReady, dataReady) || other.dataReady == dataReady)&&(identical(other.baseDirPath, baseDirPath) || other.baseDirPath == baseDirPath)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.isUiVisible, isUiVisible) || other.isUiVisible == isUiVisible));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isChecking,isDownloading,isExtracting,downloadProgress,downloadStatus,hasError,errorMessage,dataReady,baseDirPath,currentPage,isUiVisible);
+int get hashCode {
+    return Object.hash(runtimeType,isChecking,isDownloading,isExtracting,downloadProgress,downloadStatus,hasError,errorMessage,dataReady,baseDirPath,currentPage,isUiVisible);
+}
 
 @override
 String toString() {
-  return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, isExtracting: $isExtracting, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, hasError: $hasError, errorMessage: $errorMessage, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage, isUiVisible: $isUiVisible)';
+    return 'MushafState(isChecking: $isChecking, isDownloading: $isDownloading, isExtracting: $isExtracting, downloadProgress: $downloadProgress, downloadStatus: $downloadStatus, hasError: $hasError, errorMessage: $errorMessage, dataReady: $dataReady, baseDirPath: $baseDirPath, currentPage: $currentPage, isUiVisible: $isUiVisible)';
 }
 
 

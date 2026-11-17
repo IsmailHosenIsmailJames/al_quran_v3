@@ -29,16 +29,21 @@ $PinnedCollectionModelCopyWith<PinnedCollectionModel> get copyWith => _$PinnedCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.pinned, pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+  final _this = this as PinnedCollectionModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedCollectionModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.colorHex, _this.colorHex) || other.colorHex == _this.colorHex)&&const DeepCollectionEquality().equals(other.pinned, _this.pinned)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt)&&(identical(other.isDeleted, _this.isDeleted) || other.isDeleted == _this.isDeleted)&&(identical(other.deletedAt, _this.deletedAt) || other.deletedAt == _this.deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(pinned),createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+  final _this = this as PinnedCollectionModel;
+  return Object.hash(runtimeType,_this.id,_this.name,_this.colorHex,const DeepCollectionEquality().hash(_this.pinned),_this.createdAt,_this.updatedAt,_this.isDeleted,_this.deletedAt);
+}
 
 @override
 String toString() {
-  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+  final _this = this as PinnedCollectionModel;
+  return 'PinnedCollectionModel(id: ${_this.id}, name: ${_this.name}, colorHex: ${_this.colorHex}, pinned: ${_this.pinned}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt}, isDeleted: ${_this.isDeleted}, deletedAt: ${_this.deletedAt})';
 }
 
 
@@ -248,16 +253,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other._pinned, _pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedCollectionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.colorHex, colorHex) || other.colorHex == colorHex)&&const DeepCollectionEquality().equals(other.pinned, _pinned)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(_pinned),createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,name,colorHex,const DeepCollectionEquality().hash(_pinned),createdAt,updatedAt,isDeleted,deletedAt);
+}
 
 @override
 String toString() {
-  return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+    return 'PinnedCollectionModel(id: $id, name: $name, colorHex: $colorHex, pinned: $pinned, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
 }
 
 

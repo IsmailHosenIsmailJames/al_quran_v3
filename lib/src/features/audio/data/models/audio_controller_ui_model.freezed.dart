@@ -29,16 +29,21 @@ $AudioControllerUiStateCopyWith<AudioControllerUiState> get copyWith => _$AudioC
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioControllerUiState&&(identical(other.isExpanded, isExpanded) || other.isExpanded == isExpanded)&&(identical(other.showUi, showUi) || other.showUi == showUi)&&(identical(other.isPlayList, isPlayList) || other.isPlayList == isPlayList)&&(identical(other.isInsideQuranPlayer, isInsideQuranPlayer) || other.isInsideQuranPlayer == isInsideQuranPlayer));
+  final _this = this as AudioControllerUiState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioControllerUiState&&(identical(other.isExpanded, _this.isExpanded) || other.isExpanded == _this.isExpanded)&&(identical(other.showUi, _this.showUi) || other.showUi == _this.showUi)&&(identical(other.isPlayList, _this.isPlayList) || other.isPlayList == _this.isPlayList)&&(identical(other.isInsideQuranPlayer, _this.isInsideQuranPlayer) || other.isInsideQuranPlayer == _this.isInsideQuranPlayer));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isExpanded,showUi,isPlayList,isInsideQuranPlayer);
+int get hashCode {
+  final _this = this as AudioControllerUiState;
+  return Object.hash(runtimeType,_this.isExpanded,_this.showUi,_this.isPlayList,_this.isInsideQuranPlayer);
+}
 
 @override
 String toString() {
-  return 'AudioControllerUiState(isExpanded: $isExpanded, showUi: $showUi, isPlayList: $isPlayList, isInsideQuranPlayer: $isInsideQuranPlayer)';
+  final _this = this as AudioControllerUiState;
+  return 'AudioControllerUiState(isExpanded: ${_this.isExpanded}, showUi: ${_this.showUi}, isPlayList: ${_this.isPlayList}, isInsideQuranPlayer: ${_this.isInsideQuranPlayer})';
 }
 
 
@@ -234,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioControllerUiState&&(identical(other.isExpanded, isExpanded) || other.isExpanded == isExpanded)&&(identical(other.showUi, showUi) || other.showUi == showUi)&&(identical(other.isPlayList, isPlayList) || other.isPlayList == isPlayList)&&(identical(other.isInsideQuranPlayer, isInsideQuranPlayer) || other.isInsideQuranPlayer == isInsideQuranPlayer));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioControllerUiState&&(identical(other.isExpanded, isExpanded) || other.isExpanded == isExpanded)&&(identical(other.showUi, showUi) || other.showUi == showUi)&&(identical(other.isPlayList, isPlayList) || other.isPlayList == isPlayList)&&(identical(other.isInsideQuranPlayer, isInsideQuranPlayer) || other.isInsideQuranPlayer == isInsideQuranPlayer));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isExpanded,showUi,isPlayList,isInsideQuranPlayer);
+int get hashCode {
+    return Object.hash(runtimeType,isExpanded,showUi,isPlayList,isInsideQuranPlayer);
+}
 
 @override
 String toString() {
-  return 'AudioControllerUiState(isExpanded: $isExpanded, showUi: $showUi, isPlayList: $isPlayList, isInsideQuranPlayer: $isInsideQuranPlayer)';
+    return 'AudioControllerUiState(isExpanded: $isExpanded, showUi: $showUi, isPlayList: $isPlayList, isInsideQuranPlayer: $isInsideQuranPlayer)';
 }
 
 

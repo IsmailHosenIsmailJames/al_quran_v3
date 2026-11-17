@@ -29,16 +29,21 @@ $SetupConfigCopyWith<SetupConfig> get copyWith => _$SetupConfigCopyWithImpl<Setu
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupConfig&&(identical(other.appLanguageCode, appLanguageCode) || other.appLanguageCode == appLanguageCode)&&(identical(other.selectedTranslation, selectedTranslation) || other.selectedTranslation == selectedTranslation)&&(identical(other.selectedTafsir, selectedTafsir) || other.selectedTafsir == selectedTafsir)&&(identical(other.isSetupComplete, isSetupComplete) || other.isSetupComplete == isSetupComplete));
+  final _this = this as SetupConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupConfig&&(identical(other.appLanguageCode, _this.appLanguageCode) || other.appLanguageCode == _this.appLanguageCode)&&(identical(other.selectedTranslation, _this.selectedTranslation) || other.selectedTranslation == _this.selectedTranslation)&&(identical(other.selectedTafsir, _this.selectedTafsir) || other.selectedTafsir == _this.selectedTafsir)&&(identical(other.isSetupComplete, _this.isSetupComplete) || other.isSetupComplete == _this.isSetupComplete));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,appLanguageCode,selectedTranslation,selectedTafsir,isSetupComplete);
+int get hashCode {
+  final _this = this as SetupConfig;
+  return Object.hash(runtimeType,_this.appLanguageCode,_this.selectedTranslation,_this.selectedTafsir,_this.isSetupComplete);
+}
 
 @override
 String toString() {
-  return 'SetupConfig(appLanguageCode: $appLanguageCode, selectedTranslation: $selectedTranslation, selectedTafsir: $selectedTafsir, isSetupComplete: $isSetupComplete)';
+  final _this = this as SetupConfig;
+  return 'SetupConfig(appLanguageCode: ${_this.appLanguageCode}, selectedTranslation: ${_this.selectedTranslation}, selectedTafsir: ${_this.selectedTafsir}, isSetupComplete: ${_this.isSetupComplete})';
 }
 
 
@@ -258,16 +263,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupConfig&&(identical(other.appLanguageCode, appLanguageCode) || other.appLanguageCode == appLanguageCode)&&(identical(other.selectedTranslation, selectedTranslation) || other.selectedTranslation == selectedTranslation)&&(identical(other.selectedTafsir, selectedTafsir) || other.selectedTafsir == selectedTafsir)&&(identical(other.isSetupComplete, isSetupComplete) || other.isSetupComplete == isSetupComplete));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupConfig&&(identical(other.appLanguageCode, appLanguageCode) || other.appLanguageCode == appLanguageCode)&&(identical(other.selectedTranslation, selectedTranslation) || other.selectedTranslation == selectedTranslation)&&(identical(other.selectedTafsir, selectedTafsir) || other.selectedTafsir == selectedTafsir)&&(identical(other.isSetupComplete, isSetupComplete) || other.isSetupComplete == isSetupComplete));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,appLanguageCode,selectedTranslation,selectedTafsir,isSetupComplete);
+int get hashCode {
+    return Object.hash(runtimeType,appLanguageCode,selectedTranslation,selectedTafsir,isSetupComplete);
+}
 
 @override
 String toString() {
-  return 'SetupConfig(appLanguageCode: $appLanguageCode, selectedTranslation: $selectedTranslation, selectedTafsir: $selectedTafsir, isSetupComplete: $isSetupComplete)';
+    return 'SetupConfig(appLanguageCode: $appLanguageCode, selectedTranslation: $selectedTranslation, selectedTafsir: $selectedTafsir, isSetupComplete: $isSetupComplete)';
 }
 
 

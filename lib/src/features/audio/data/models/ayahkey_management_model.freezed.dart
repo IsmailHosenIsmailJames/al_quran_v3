@@ -29,16 +29,21 @@ $AyahKeyManagementCopyWith<AyahKeyManagement> get copyWith => _$AyahKeyManagemen
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AyahKeyManagement&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.current, current) || other.current == current)&&const DeepCollectionEquality().equals(other.ayahList, ayahList)&&(identical(other.lastScrolledPageNumber, lastScrolledPageNumber) || other.lastScrolledPageNumber == lastScrolledPageNumber));
+  final _this = this as AyahKeyManagement;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AyahKeyManagement&&(identical(other.start, _this.start) || other.start == _this.start)&&(identical(other.end, _this.end) || other.end == _this.end)&&(identical(other.current, _this.current) || other.current == _this.current)&&const DeepCollectionEquality().equals(other.ayahList, _this.ayahList)&&(identical(other.lastScrolledPageNumber, _this.lastScrolledPageNumber) || other.lastScrolledPageNumber == _this.lastScrolledPageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,start,end,current,const DeepCollectionEquality().hash(ayahList),lastScrolledPageNumber);
+int get hashCode {
+  final _this = this as AyahKeyManagement;
+  return Object.hash(runtimeType,_this.start,_this.end,_this.current,const DeepCollectionEquality().hash(_this.ayahList),_this.lastScrolledPageNumber);
+}
 
 @override
 String toString() {
-  return 'AyahKeyManagement(start: $start, end: $end, current: $current, ayahList: $ayahList, lastScrolledPageNumber: $lastScrolledPageNumber)';
+  final _this = this as AyahKeyManagement;
+  return 'AyahKeyManagement(start: ${_this.start}, end: ${_this.end}, current: ${_this.current}, ayahList: ${_this.ayahList}, lastScrolledPageNumber: ${_this.lastScrolledPageNumber})';
 }
 
 
@@ -242,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AyahKeyManagement&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.current, current) || other.current == current)&&const DeepCollectionEquality().equals(other._ayahList, _ayahList)&&(identical(other.lastScrolledPageNumber, lastScrolledPageNumber) || other.lastScrolledPageNumber == lastScrolledPageNumber));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AyahKeyManagement&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.current, current) || other.current == current)&&const DeepCollectionEquality().equals(other.ayahList, _ayahList)&&(identical(other.lastScrolledPageNumber, lastScrolledPageNumber) || other.lastScrolledPageNumber == lastScrolledPageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,start,end,current,const DeepCollectionEquality().hash(_ayahList),lastScrolledPageNumber);
+int get hashCode {
+    return Object.hash(runtimeType,start,end,current,const DeepCollectionEquality().hash(_ayahList),lastScrolledPageNumber);
+}
 
 @override
 String toString() {
-  return 'AyahKeyManagement(start: $start, end: $end, current: $current, ayahList: $ayahList, lastScrolledPageNumber: $lastScrolledPageNumber)';
+    return 'AyahKeyManagement(start: $start, end: $end, current: $current, ayahList: $ayahList, lastScrolledPageNumber: $lastScrolledPageNumber)';
 }
 
 

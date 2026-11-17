@@ -13,7 +13,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-/// A modern hero card displaying the user's latest reading position with quick resume.
+/// A compact, space-efficient hero card displaying the user's latest reading position.
 class ContinueReadingHeroCard extends StatelessWidget {
   const ContinueReadingHeroCard({super.key});
 
@@ -33,9 +33,8 @@ class ContinueReadingHeroCard extends StatelessWidget {
         final int? pageNumber = latest?.pageNumber;
 
         final surahData = metaDataSurah[surahNumber.toString()];
-        final surahInfo = surahData != null
-            ? SurahInfoModel.fromMap(surahData)
-            : null;
+        final surahInfo =
+            surahData != null ? SurahInfoModel.fromMap(surahData) : null;
         final String revelationPlace =
             surahInfo?.revelationPlace.toLowerCase() ?? "makkah";
         final isMakkah = revelationPlace == "makkah";
@@ -60,36 +59,41 @@ class ContinueReadingHeroCard extends StatelessWidget {
           );
         }
 
+        final double readingProgress =
+            (hasHistory && ayahNumber != null && versesCount > 0)
+                ? (ayahNumber / versesCount).clamp(0.01, 1.0)
+                : 0.0;
+
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22),
+            borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: isDark
                   ? [
-                      themeState.primary.withValues(alpha: 0.28),
-                      themeState.primary.withValues(alpha: 0.16),
-                      themeState.primary.withValues(alpha: 0.08),
+                      themeState.primary.withValues(alpha: 0.25),
+                      themeState.primary.withValues(alpha: 0.12),
+                      themeState.primary.withValues(alpha: 0.05),
                     ]
                   : [
                       themeState.primary.withValues(alpha: 0.10),
-                      themeState.primary.withValues(alpha: 0.04),
+                      themeState.primary.withValues(alpha: 0.03),
                       Colors.white,
                     ],
             ),
             border: Border.all(
-              color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.18),
-              width: 1.2,
+              color: themeState.primary.withValues(alpha: isDark ? 0.30 : 0.16),
+              width: 1.1,
             ),
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? themeState.primary.withValues(alpha: 0.14)
-                    : Colors.black.withValues(alpha: 0.03),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
+                    ? themeState.primary.withValues(alpha: 0.12)
+                    : Colors.black.withValues(alpha: 0.025),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
               ),
             ],
           ),
@@ -97,171 +101,175 @@ class ContinueReadingHeroCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: onResume,
-              borderRadius: BorderRadius.circular(22),
+              borderRadius: BorderRadius.circular(16),
               child: Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14.0,
+                  vertical: 10.0,
+                ),
                 child: Stack(
                   children: [
-                    // Watermark Quran Calligraphy icon in background
+                    // Watermark Quran Calligraphy in background
                     Positioned(
-                      right: -10,
-                      bottom: -15,
+                      right: 70,
+                      top: -12,
                       child: Opacity(
-                        opacity: isDark ? 0.07 : 0.05,
-                        child: Icon(
-                          FluentIcons.book_open_24_regular,
-                          size: 130,
-                          color: themeState.primary,
+                        opacity: isDark ? 0.09 : 0.05,
+                        child: Text(
+                          "surah${surahNumber.toString().padLeft(3, '0')}",
+                          style: TextStyle(
+                            fontFamily: "surah-name-v1",
+                            fontSize: 68,
+                            color: themeState.primary,
+                          ),
                         ),
                       ),
                     ),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        // Top row: Section title & Makki/Madani badge
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    color: themeState.primary.withValues(alpha: 0.15),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Icon(
-                                    FluentIcons.book_pulse_24_filled,
-                                    size: 16,
-                                    color: themeState.primary,
-                                  ),
+                        // Icon Container
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withValues(
+                              alpha: isDark ? 0.22 : 0.12,
+                            ),
+                            borderRadius: BorderRadius.circular(11),
+                          ),
+                          child: Icon(
+                            FluentIcons.book_pulse_24_filled,
+                            size: 19,
+                            color: themeState.primary,
+                          ),
+                        ),
+
+                        const Gap(12),
+
+                        // Title & Details
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                surahLocalized,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w800,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
                                 ),
-                                const Gap(8),
-                                Text(
-                                  hasHistory
-                                      ? l10n.lastRead.toUpperCase()
-                                      : l10n.startReading.toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.0,
-                                    color: themeState.primary,
+                              ),
+                              const Gap(3),
+                              Row(
+                                children: [
+                                  Text(
+                                    isMakkah
+                                        ? "🕋 ${l10n.makki}"
+                                        : "🕌 ${l10n.madani}",
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
+                                    ),
+                                  ),
+                                  const Gap(6),
+                                  Text(
+                                    "•",
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: isDark
+                                          ? Colors.grey.shade500
+                                          : Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  const Gap(6),
+                                  Expanded(
+                                    child: Text(
+                                      pageNumber != null
+                                          ? "${l10n.page} ${localizedNumber(context, pageNumber)}"
+                                          : (ayahNumber != null
+                                              ? "${l10n.ayah} ${localizedNumber(context, ayahNumber)} (${l10n.verses}: ${localizedNumber(context, versesCount)})"
+                                              : "${l10n.verses}: ${localizedNumber(context, versesCount)}"),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 11.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: isDark
+                                            ? Colors.grey.shade400
+                                            : Colors.grey.shade600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              if (hasHistory && ayahNumber != null) ...[
+                                const Gap(5),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(3),
+                                  child: LinearProgressIndicator(
+                                    value: readingProgress,
+                                    minHeight: 3.5,
+                                    backgroundColor: themeState.primary
+                                        .withValues(
+                                          alpha: isDark ? 0.2 : 0.12,
+                                        ),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      themeState.primary,
+                                    ),
                                   ),
                                 ),
                               ],
-                            ),
-
-                            // Revelation place pill
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 3,
-                              ),
-                              decoration: BoxDecoration(
-                                color: isDark
-                                    ? Colors.white.withValues(alpha: 0.08)
-                                    : Colors.white.withValues(alpha: 0.8),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: themeState.primary.withValues(alpha: 0.2),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    isMakkah ? "🕋" : "🕌",
-                                    style: const TextStyle(fontSize: 10),
-                                  ),
-                                  const Gap(4),
-                                  Text(
-                                    isMakkah ? l10n.makki : l10n.madani,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600,
-                                      color: isDark
-                                          ? Colors.grey.shade300
-                                          : Colors.grey.shade800,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
 
-                        const Gap(14),
+                        const Gap(10),
 
-                        // Surah Title & Verse / Page Detail
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    surahLocalized,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w800,
-                                      color: isDark
-                                          ? Colors.white
-                                          : Colors.grey.shade900,
-                                    ),
-                                  ),
-                                  const Gap(4),
-                                  Text(
-                                    pageNumber != null
-                                        ? "${l10n.page} ${localizedNumber(context, pageNumber)}"
-                                        : (ayahNumber != null
-                                            ? "${l10n.ayah} ${localizedNumber(context, ayahNumber)} (${l10n.verses}: ${localizedNumber(context, versesCount)})"
-                                            : "${l10n.verses}: ${localizedNumber(context, versesCount)}"),
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: isDark
-                                          ? Colors.grey.shade300
-                                          : Colors.grey.shade700,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                        // Action Button
+                        ElevatedButton(
+                          onPressed: onResume,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: themeState.primary,
+                            foregroundColor: Colors.white,
+                            elevation: 1.5,
+                            shadowColor: themeState.primary.withValues(
+                              alpha: 0.35,
                             ),
-
-                            // Resume Button Action Pill
-                            ElevatedButton.icon(
-                              onPressed: onResume,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: themeState.primary,
-                                foregroundColor: Colors.white,
-                                elevation: 2,
-                                shadowColor: themeState.primary.withValues(alpha: 0.4),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 10,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(14),
-                                ),
-                              ),
-                              icon: const Icon(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 7,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            minimumSize: const Size(0, 34),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
                                 FluentIcons.play_24_filled,
-                                size: 14,
+                                size: 12,
                               ),
-                              label: Text(
+                              const Gap(4),
+                              Text(
                                 hasHistory ? l10n.resume : l10n.startReading,
                                 style: const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 11.5,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

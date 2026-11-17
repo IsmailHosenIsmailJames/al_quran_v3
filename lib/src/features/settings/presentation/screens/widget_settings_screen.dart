@@ -185,9 +185,14 @@ class _WidgetSettingsScreenState extends State<WidgetSettingsScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Column(
+      body: SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 750),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Banner / Info Card
@@ -352,6 +357,9 @@ class _WidgetSettingsScreenState extends State<WidgetSettingsScreen> {
           ],
         ),
       ),
+    ),
+  ),
+),
     );
   }
 
@@ -369,6 +377,7 @@ class _WidgetSettingsScreenState extends State<WidgetSettingsScreen> {
     return InkWell(
       onTap: () => _saveMode(modeKey),
       borderRadius: BorderRadius.circular(12),
+      mouseCursor: SystemMouseCursors.click,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(

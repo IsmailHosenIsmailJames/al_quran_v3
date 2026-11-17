@@ -283,9 +283,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
   void _finishSetup() async {
     final locationState = context.read<LocationQiblaPrayerDataCubit>().state;
     if (locationState.latLon == null && !widget.isFromSettings) {
-      Fluttertoast.showToast(
-        msg: "Please set your location to calculate prayer times, or tap Skip.",
-      );
+      _showLocationRequiredDialog(context);
       return;
     }
 
@@ -317,6 +315,83 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
         (route) => false,
       );
     }
+  }
+
+  void _showLocationRequiredDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final themeState = context.read<ThemeCubit>().state;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: themeState.primary.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  FluentIcons.location_24_filled,
+                  color: themeState.primary,
+                  size: 22,
+                ),
+              ),
+              const Gap(12),
+              const Expanded(
+                child: Text(
+                  "Prayer Location",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            "Location is required to calculate accurate prayer times and Fajr alarm for your city. Would you like to set it now or continue anyway?",
+            style: TextStyle(
+              fontSize: 13.5,
+              color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+              height: 1.4,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                _skipSetup();
+              },
+              child: Text(
+                l10n.skipForNow,
+                style: TextStyle(
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                _detectGpsLocation();
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: themeState.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(l10n.allowLocation),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _skipSetup() async {
@@ -501,7 +576,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
             border: Border.all(
               color: hasLocation
                   ? const Color(0xFF10B981).withValues(alpha: 0.35)
-                  : const Color(0xFFF59E0B).withValues(alpha: 0.4),
+                  : themeState.primary.withValues(alpha: isDark ? 0.25 : 0.2),
               width: 1.2,
             ),
           ),
@@ -515,16 +590,16 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                     decoration: BoxDecoration(
                       color: hasLocation
                           ? const Color(0xFF10B981).withValues(alpha: 0.12)
-                          : const Color(0xFFF59E0B).withValues(alpha: 0.12),
+                          : themeState.primary.withValues(alpha: isDark ? 0.16 : 0.08),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       hasLocation
                           ? FluentIcons.location_24_filled
-                          : FluentIcons.location_dismiss_24_regular,
+                          : FluentIcons.location_24_regular,
                       color: hasLocation
                           ? const Color(0xFF10B981)
-                          : const Color(0xFFF59E0B),
+                          : themeState.primary,
                       size: 20,
                     ),
                   ),
@@ -739,6 +814,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
 
               // 1. Notifications Permission
               _buildPermissionTile(
+                icon: FluentIcons.alert_24_regular,
                 title: l10n.notification,
                 subtitle: l10n.allowNotificationPermission,
                 isGranted: _hasNotificationPermission,
@@ -757,6 +833,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
 
               // 2. Exact Alarm Permission (Android 12+)
               _buildPermissionTile(
+                icon: FluentIcons.clock_alarm_24_regular,
                 title: l10n.exactAlarmPermission,
                 subtitle: l10n.exactAlarmPermissionDesc,
                 isGranted: _hasExactAlarmPermission,
@@ -775,6 +852,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
 
               // 3. Full-Screen Intent Permission (Android 14+)
               _buildPermissionTile(
+                icon: FluentIcons.phone_vertical_scroll_24_regular,
                 title: l10n.fullScreenAlarmPermission,
                 subtitle: l10n.fullScreenAlarmPermissionDesc,
                 isGranted: state.hasFullScreenIntentPermission,
@@ -797,6 +875,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
 
               // 4. Battery Optimization Exemption (Honor, Xiaomi, Samsung)
               _buildPermissionTile(
+                icon: FluentIcons.battery_charge_24_regular,
                 title: l10n.batteryOptimizationTitle,
                 subtitle: l10n.batteryOptimizationDesc,
                 isGranted: state.isIgnoringBatteryOptimizations,
@@ -818,6 +897,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
   }
 
   Widget _buildPermissionTile({
+    required IconData icon,
     required String title,
     required String subtitle,
     required bool isGranted,
@@ -829,12 +909,22 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
   }) {
     return Row(
       children: [
-        Icon(
-          isGranted
-              ? FluentIcons.checkmark_circle_24_filled
-              : FluentIcons.warning_24_regular,
-          color: isGranted ? const Color(0xFF10B981) : const Color(0xFFF59E0B),
-          size: 20,
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: isGranted
+                ? const Color(0xFF10B981).withValues(alpha: 0.12)
+                : themeState.primary.withValues(alpha: isDark ? 0.12 : 0.06),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            isGranted ? FluentIcons.checkmark_16_regular : icon,
+            color: isGranted
+                ? const Color(0xFF10B981)
+                : themeState.primary,
+            size: 17,
+          ),
         ),
         const Gap(12),
         Expanded(

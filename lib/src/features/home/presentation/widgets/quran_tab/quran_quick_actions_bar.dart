@@ -21,7 +21,7 @@ class QuranQuickActionsBar extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       child: Row(
         children: [
           Expanded(
@@ -40,7 +40,7 @@ class QuranQuickActionsBar extends StatelessWidget {
               },
             ),
           ),
-          const Gap(10),
+          const Gap(8),
           Expanded(
             child: _ActionTile(
               label: l10n.jumpToAyah,
@@ -52,7 +52,7 @@ class QuranQuickActionsBar extends StatelessWidget {
               },
             ),
           ),
-          const Gap(10),
+          const Gap(8),
           Expanded(
             child: _ActionTile(
               label: l10n.pinned,
@@ -71,7 +71,7 @@ class QuranQuickActionsBar extends StatelessWidget {
               },
             ),
           ),
-          const Gap(10),
+          const Gap(8),
           Expanded(
             child: _ActionTile(
               label: l10n.resources,
@@ -113,14 +113,14 @@ class _ActionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(14),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 4),
         decoration: BoxDecoration(
           color: isDark
               ? Colors.white.withValues(alpha: 0.04)
               : Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isDark
                 ? Colors.white.withValues(alpha: 0.08)
@@ -139,26 +139,26 @@ class _ActionTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 42,
-              width: 42,
+              height: 36,
+              width: 36,
               decoration: BoxDecoration(
                 color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 icon,
-                size: 22,
+                size: 19,
                 color: themeState.primary,
               ),
             ),
-            const Gap(8),
+            const Gap(6),
             Text(
               label,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 11.5,
+                fontSize: 11,
                 fontWeight: FontWeight.w600,
                 color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
               ),

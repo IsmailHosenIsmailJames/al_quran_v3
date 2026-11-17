@@ -26,16 +26,21 @@ $QiblaStateCopyWith<QiblaState> get copyWith => _$QiblaStateCopyWithImpl<QiblaSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QiblaState&&(identical(other.compassHeading, compassHeading) || other.compassHeading == compassHeading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isSensorSupported, isSensorSupported) || other.isSensorSupported == isSensorSupported)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned)&&(identical(other.hasError, hasError) || other.hasError == hasError));
+  final _this = this as QiblaState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QiblaState&&(identical(other.compassHeading, _this.compassHeading) || other.compassHeading == _this.compassHeading)&&(identical(other.kaabaAngle, _this.kaabaAngle) || other.kaabaAngle == _this.kaabaAngle)&&(identical(other.isSensorSupported, _this.isSensorSupported) || other.isSensorSupported == _this.isSensorSupported)&&(identical(other.isAligned, _this.isAligned) || other.isAligned == _this.isAligned)&&(identical(other.hasError, _this.hasError) || other.hasError == _this.hasError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,compassHeading,kaabaAngle,isSensorSupported,isAligned,hasError);
+int get hashCode {
+  final _this = this as QiblaState;
+  return Object.hash(runtimeType,_this.compassHeading,_this.kaabaAngle,_this.isSensorSupported,_this.isAligned,_this.hasError);
+}
 
 @override
 String toString() {
-  return 'QiblaState(compassHeading: $compassHeading, kaabaAngle: $kaabaAngle, isSensorSupported: $isSensorSupported, isAligned: $isAligned, hasError: $hasError)';
+  final _this = this as QiblaState;
+  return 'QiblaState(compassHeading: ${_this.compassHeading}, kaabaAngle: ${_this.kaabaAngle}, isSensorSupported: ${_this.isSensorSupported}, isAligned: ${_this.isAligned}, hasError: ${_this.hasError})';
 }
 
 
@@ -230,16 +235,18 @@ _$QiblaStateCopyWith<_QiblaState> get copyWith => __$QiblaStateCopyWithImpl<_Qib
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QiblaState&&(identical(other.compassHeading, compassHeading) || other.compassHeading == compassHeading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isSensorSupported, isSensorSupported) || other.isSensorSupported == isSensorSupported)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned)&&(identical(other.hasError, hasError) || other.hasError == hasError));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QiblaState&&(identical(other.compassHeading, compassHeading) || other.compassHeading == compassHeading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isSensorSupported, isSensorSupported) || other.isSensorSupported == isSensorSupported)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned)&&(identical(other.hasError, hasError) || other.hasError == hasError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,compassHeading,kaabaAngle,isSensorSupported,isAligned,hasError);
+int get hashCode {
+    return Object.hash(runtimeType,compassHeading,kaabaAngle,isSensorSupported,isAligned,hasError);
+}
 
 @override
 String toString() {
-  return 'QiblaState(compassHeading: $compassHeading, kaabaAngle: $kaabaAngle, isSensorSupported: $isSensorSupported, isAligned: $isAligned, hasError: $hasError)';
+    return 'QiblaState(compassHeading: $compassHeading, kaabaAngle: $kaabaAngle, isSensorSupported: $isSensorSupported, isAligned: $isAligned, hasError: $hasError)';
 }
 
 

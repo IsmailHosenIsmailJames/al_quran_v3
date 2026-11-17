@@ -29,16 +29,21 @@ $TafsirItemEntityCopyWith<TafsirItemEntity> get copyWith => _$TafsirItemEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TafsirItemEntity&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
+  final _this = this as TafsirItemEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TafsirItemEntity&&(identical(other.bookName, _this.bookName) || other.bookName == _this.bookName)&&(identical(other.ayahKey, _this.ayahKey) || other.ayahKey == _this.ayahKey)&&(identical(other.text, _this.text) || other.text == _this.text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookName,ayahKey,text);
+int get hashCode {
+  final _this = this as TafsirItemEntity;
+  return Object.hash(runtimeType,_this.bookName,_this.ayahKey,_this.text);
+}
 
 @override
 String toString() {
-  return 'TafsirItemEntity(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
+  final _this = this as TafsirItemEntity;
+  return 'TafsirItemEntity(bookName: ${_this.bookName}, ayahKey: ${_this.ayahKey}, text: ${_this.text})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TafsirItemEntity&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TafsirItemEntity&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookName,ayahKey,text);
+int get hashCode {
+    return Object.hash(runtimeType,bookName,ayahKey,text);
+}
 
 @override
 String toString() {
-  return 'TafsirItemEntity(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
+    return 'TafsirItemEntity(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
 }
 
 

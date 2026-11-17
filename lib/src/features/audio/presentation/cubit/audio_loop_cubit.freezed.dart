@@ -26,16 +26,21 @@ $AudioLoopStateCopyWith<AudioLoopState> get copyWith => _$AudioLoopStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioLoopState&&(identical(other.loopMode, loopMode) || other.loopMode == loopMode)&&(identical(other.isRangeActive, isRangeActive) || other.isRangeActive == isRangeActive)&&(identical(other.startSurah, startSurah) || other.startSurah == startSurah)&&(identical(other.startAyah, startAyah) || other.startAyah == startAyah)&&(identical(other.endSurah, endSurah) || other.endSurah == endSurah)&&(identical(other.endAyah, endAyah) || other.endAyah == endAyah)&&(identical(other.repeatTargetCount, repeatTargetCount) || other.repeatTargetCount == repeatTargetCount)&&(identical(other.currentRangeCycle, currentRangeCycle) || other.currentRangeCycle == currentRangeCycle)&&(identical(other.repeatEachAyah, repeatEachAyah) || other.repeatEachAyah == repeatEachAyah)&&(identical(other.currentAyahRepeat, currentAyahRepeat) || other.currentAyahRepeat == currentAyahRepeat));
+  final _this = this as AudioLoopState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioLoopState&&(identical(other.loopMode, _this.loopMode) || other.loopMode == _this.loopMode)&&(identical(other.isRangeActive, _this.isRangeActive) || other.isRangeActive == _this.isRangeActive)&&(identical(other.startSurah, _this.startSurah) || other.startSurah == _this.startSurah)&&(identical(other.startAyah, _this.startAyah) || other.startAyah == _this.startAyah)&&(identical(other.endSurah, _this.endSurah) || other.endSurah == _this.endSurah)&&(identical(other.endAyah, _this.endAyah) || other.endAyah == _this.endAyah)&&(identical(other.repeatTargetCount, _this.repeatTargetCount) || other.repeatTargetCount == _this.repeatTargetCount)&&(identical(other.currentRangeCycle, _this.currentRangeCycle) || other.currentRangeCycle == _this.currentRangeCycle)&&(identical(other.repeatEachAyah, _this.repeatEachAyah) || other.repeatEachAyah == _this.repeatEachAyah)&&(identical(other.currentAyahRepeat, _this.currentAyahRepeat) || other.currentAyahRepeat == _this.currentAyahRepeat));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loopMode,isRangeActive,startSurah,startAyah,endSurah,endAyah,repeatTargetCount,currentRangeCycle,repeatEachAyah,currentAyahRepeat);
+int get hashCode {
+  final _this = this as AudioLoopState;
+  return Object.hash(runtimeType,_this.loopMode,_this.isRangeActive,_this.startSurah,_this.startAyah,_this.endSurah,_this.endAyah,_this.repeatTargetCount,_this.currentRangeCycle,_this.repeatEachAyah,_this.currentAyahRepeat);
+}
 
 @override
 String toString() {
-  return 'AudioLoopState(loopMode: $loopMode, isRangeActive: $isRangeActive, startSurah: $startSurah, startAyah: $startAyah, endSurah: $endSurah, endAyah: $endAyah, repeatTargetCount: $repeatTargetCount, currentRangeCycle: $currentRangeCycle, repeatEachAyah: $repeatEachAyah, currentAyahRepeat: $currentAyahRepeat)';
+  final _this = this as AudioLoopState;
+  return 'AudioLoopState(loopMode: ${_this.loopMode}, isRangeActive: ${_this.isRangeActive}, startSurah: ${_this.startSurah}, startAyah: ${_this.startAyah}, endSurah: ${_this.endSurah}, endAyah: ${_this.endAyah}, repeatTargetCount: ${_this.repeatTargetCount}, currentRangeCycle: ${_this.currentRangeCycle}, repeatEachAyah: ${_this.repeatEachAyah}, currentAyahRepeat: ${_this.currentAyahRepeat})';
 }
 
 
@@ -240,16 +245,18 @@ _$AudioLoopStateCopyWith<_AudioLoopState> get copyWith => __$AudioLoopStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioLoopState&&(identical(other.loopMode, loopMode) || other.loopMode == loopMode)&&(identical(other.isRangeActive, isRangeActive) || other.isRangeActive == isRangeActive)&&(identical(other.startSurah, startSurah) || other.startSurah == startSurah)&&(identical(other.startAyah, startAyah) || other.startAyah == startAyah)&&(identical(other.endSurah, endSurah) || other.endSurah == endSurah)&&(identical(other.endAyah, endAyah) || other.endAyah == endAyah)&&(identical(other.repeatTargetCount, repeatTargetCount) || other.repeatTargetCount == repeatTargetCount)&&(identical(other.currentRangeCycle, currentRangeCycle) || other.currentRangeCycle == currentRangeCycle)&&(identical(other.repeatEachAyah, repeatEachAyah) || other.repeatEachAyah == repeatEachAyah)&&(identical(other.currentAyahRepeat, currentAyahRepeat) || other.currentAyahRepeat == currentAyahRepeat));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioLoopState&&(identical(other.loopMode, loopMode) || other.loopMode == loopMode)&&(identical(other.isRangeActive, isRangeActive) || other.isRangeActive == isRangeActive)&&(identical(other.startSurah, startSurah) || other.startSurah == startSurah)&&(identical(other.startAyah, startAyah) || other.startAyah == startAyah)&&(identical(other.endSurah, endSurah) || other.endSurah == endSurah)&&(identical(other.endAyah, endAyah) || other.endAyah == endAyah)&&(identical(other.repeatTargetCount, repeatTargetCount) || other.repeatTargetCount == repeatTargetCount)&&(identical(other.currentRangeCycle, currentRangeCycle) || other.currentRangeCycle == currentRangeCycle)&&(identical(other.repeatEachAyah, repeatEachAyah) || other.repeatEachAyah == repeatEachAyah)&&(identical(other.currentAyahRepeat, currentAyahRepeat) || other.currentAyahRepeat == currentAyahRepeat));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loopMode,isRangeActive,startSurah,startAyah,endSurah,endAyah,repeatTargetCount,currentRangeCycle,repeatEachAyah,currentAyahRepeat);
+int get hashCode {
+    return Object.hash(runtimeType,loopMode,isRangeActive,startSurah,startAyah,endSurah,endAyah,repeatTargetCount,currentRangeCycle,repeatEachAyah,currentAyahRepeat);
+}
 
 @override
 String toString() {
-  return 'AudioLoopState(loopMode: $loopMode, isRangeActive: $isRangeActive, startSurah: $startSurah, startAyah: $startAyah, endSurah: $endSurah, endAyah: $endAyah, repeatTargetCount: $repeatTargetCount, currentRangeCycle: $currentRangeCycle, repeatEachAyah: $repeatEachAyah, currentAyahRepeat: $currentAyahRepeat)';
+    return 'AudioLoopState(loopMode: $loopMode, isRangeActive: $isRangeActive, startSurah: $startSurah, startAyah: $startAyah, endSurah: $endSurah, endAyah: $endAyah, repeatTargetCount: $repeatTargetCount, currentRangeCycle: $currentRangeCycle, repeatEachAyah: $repeatEachAyah, currentAyahRepeat: $currentAyahRepeat)';
 }
 
 

@@ -19,61 +19,104 @@ class SurahInfoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final width = MediaQuery.sizeOf(context).width;
+    final isWide = width >= 700;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "${getSurahName(context, surahInfoModel.id)} (${getSurahNameArabic(surahInfoModel.id)})",
         ),
       ),
-      body: SingleChildScrollView(
-        child: Html(
-          data: html,
-          onLinkTap: (url, attributes, element) {
-            log(url.toString());
-            try {
-              url ??= "";
-              int countOfSlash = url.characters.count(
-                (element) => element == "/",
-              );
-              int countOfDash = url.characters.count(
-                (element) => element == "-",
-              );
-              log(countOfSlash.toString());
-              log(countOfDash.toString());
-              if (countOfSlash == 1) {
-                int? surahNumber = int.tryParse(url.split("/").last);
-                if (surahNumber != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => QuranScriptView(
-                            startKey: "$surahNumber:${1}",
-                            endKey: getEndAyahKeyFromSurahNumber(surahNumber),
-                          ),
-                    ),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 860),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: isWide ? 32 : 16,
+              vertical: 20,
+            ),
+            child: Html(
+              data: html,
+              style: {
+                "body": Style(
+                  fontSize: FontSize(16),
+                  lineHeight: const LineHeight(1.6),
+                  color: theme.textTheme.bodyLarge?.color,
+                ),
+                "a": Style(
+                  color: theme.colorScheme.primary,
+                  textDecoration: TextDecoration.underline,
+                ),
+                "h1": Style(
+                  fontSize: FontSize(22),
+                  fontWeight: FontWeight.bold,
+                  margin: Margins.only(top: 16, bottom: 8),
+                ),
+                "h2": Style(
+                  fontSize: FontSize(19),
+                  fontWeight: FontWeight.bold,
+                  margin: Margins.only(top: 14, bottom: 6),
+                ),
+                "h3": Style(
+                  fontSize: FontSize(17),
+                  fontWeight: FontWeight.w600,
+                  margin: Margins.only(top: 12, bottom: 4),
+                ),
+                "p": Style(
+                  margin: Margins.only(bottom: 12),
+                ),
+              },
+              onLinkTap: (url, attributes, element) {
+                log(url.toString());
+                try {
+                  url ??= "";
+                  int countOfSlash = url.characters.count(
+                    (element) => element == "/",
                   );
-                }
-              } else if (countOfSlash == 2) {
-                String surahNumber = url.split("/")[1];
-                List<String> ayahsRange = url.split("/").last.split("-");
-                String startAyahKey = "$surahNumber:${ayahsRange.first}";
-                String endAyahKey = "$surahNumber:${ayahsRange.last}";
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => QuranScriptView(
-                          startKey: startAyahKey,
-                          endKey: endAyahKey,
+                  int countOfDash = url.characters.count(
+                    (element) => element == "-",
+                  );
+                  log(countOfSlash.toString());
+                  log(countOfDash.toString());
+                  if (countOfSlash == 1) {
+                    int? surahNumber = int.tryParse(url.split("/").last);
+                    if (surahNumber != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => QuranScriptView(
+                                startKey: "$surahNumber:${1}",
+                                endKey: getEndAyahKeyFromSurahNumber(surahNumber),
+                              ),
                         ),
-                  ),
-                );
-              }
-            } catch (e) {
-              log(e.toString());
-            }
-          },
+                      );
+                    }
+                  } else if (countOfSlash == 2) {
+                    String surahNumber = url.split("/")[1];
+                    List<String> ayahsRange = url.split("/").last.split("-");
+                    String startAyahKey = "$surahNumber:${ayahsRange.first}";
+                    String endAyahKey = "$surahNumber:${ayahsRange.last}";
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => QuranScriptView(
+                              startKey: startAyahKey,
+                              endKey: endAyahKey,
+                            ),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  log(e.toString());
+                }
+              },
+            ),
+          ),
         ),
       ),
     );

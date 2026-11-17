@@ -21,7 +21,7 @@ mixin _$SetupEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupEvent);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupEvent);
 }
 
 
@@ -30,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SetupEvent()';
+    return 'SetupEvent()';
 }
 
 
@@ -209,16 +209,18 @@ $SetupInitRequestedCopyWith<SetupInitRequested> get copyWith => _$SetupInitReque
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupInitRequested&&(identical(other.currentLocalization, currentLocalization) || other.currentLocalization == currentLocalization));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupInitRequested&&(identical(other.currentLocalization, currentLocalization) || other.currentLocalization == currentLocalization));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentLocalization);
+int get hashCode {
+    return Object.hash(runtimeType,currentLocalization);
+}
 
 @override
 String toString() {
-  return 'SetupEvent.initRequested(currentLocalization: $currentLocalization)';
+    return 'SetupEvent.initRequested(currentLocalization: $currentLocalization)';
 }
 
 
@@ -275,16 +277,18 @@ $SetupLanguageChangedCopyWith<SetupLanguageChanged> get copyWith => _$SetupLangu
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupLanguageChanged&&(identical(other.localization, localization) || other.localization == localization));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupLanguageChanged&&(identical(other.localization, localization) || other.localization == localization));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,localization);
+int get hashCode {
+    return Object.hash(runtimeType,localization);
+}
 
 @override
 String toString() {
-  return 'SetupEvent.languageChanged(localization: $localization)';
+    return 'SetupEvent.languageChanged(localization: $localization)';
 }
 
 
@@ -341,16 +345,18 @@ $SetupTranslationSelectedCopyWith<SetupTranslationSelected> get copyWith => _$Se
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupTranslationSelected&&(identical(other.translation, translation) || other.translation == translation));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupTranslationSelected&&(identical(other.translation, translation) || other.translation == translation));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,translation);
+int get hashCode {
+    return Object.hash(runtimeType,translation);
+}
 
 @override
 String toString() {
-  return 'SetupEvent.translationSelected(translation: $translation)';
+    return 'SetupEvent.translationSelected(translation: $translation)';
 }
 
 
@@ -416,16 +422,18 @@ $SetupTafsirSelectedCopyWith<SetupTafsirSelected> get copyWith => _$SetupTafsirS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupTafsirSelected&&(identical(other.tafsir, tafsir) || other.tafsir == tafsir));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupTafsirSelected&&(identical(other.tafsir, tafsir) || other.tafsir == tafsir));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,tafsir);
+int get hashCode {
+    return Object.hash(runtimeType,tafsir);
+}
 
 @override
 String toString() {
-  return 'SetupEvent.tafsirSelected(tafsir: $tafsir)';
+    return 'SetupEvent.tafsirSelected(tafsir: $tafsir)';
 }
 
 

@@ -116,11 +116,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Bölümlü Kur\'an Okuması İndiriliyor';
+      'Kelime Kelime Kur\'an Tilaveti İndiriliyor';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Bölümlü Kur\'an Okuması İşleniyor';
+      'Kelime Kelime Kur\'an Tilaveti İşleniyor';
 
   @override
   String get footnote => 'Dipnot';
@@ -142,10 +142,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'Uygulama, ana ekranda en son açılan sekmeyi hatırlar.';
 
   @override
-  String get wakeLock => 'Ekran Kilidi';
+  String get wakeLock => 'Ekranı Açık Tut';
 
   @override
-  String get wakeLockSubtitle => 'Ekranın otomatik kapanmasını önle.';
+  String get wakeLockSubtitle =>
+      'Okuma sırasında ekranın otomatik olarak kapanmasını engeller.';
 
   @override
   String get settings => 'Ayarlar';
@@ -208,7 +209,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareSelectAyahs => 'Seçili Ayetleri Paylaş';
 
   @override
-  String get selectionEmpty => 'Seçim Boş';
+  String get selectionEmpty => 'Hiçbir ayet seçilmedi';
 
   @override
   String get generatingImagePleaseWait =>
@@ -428,10 +429,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get searchForACountry => 'Bir ülke ara';
 
   @override
-  String get selectYourAdministrator => 'Yönetici Alanınızı Seçin';
+  String get selectYourAdministrator => 'İdari Bölgenizi Seçin';
 
   @override
-  String get searchForAnAdministrator => 'Bir yönetici ara';
+  String get searchForAnAdministrator => 'İdari bölge ara';
 
   @override
   String get searchForACity => 'Bir şehir ara';
@@ -973,11 +974,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get windows => 'Windows';
 
   @override
-  String get ourLifetimePromise => 'Ömür Boyu Sözümüz';
+  String get ourLifetimePromise => 'Ömür Boyu Taahhüdümüz';
 
   @override
   String get lifetimePromiseDescription =>
-      'Bu uygulamaya ömrüm boyunca sürekli destek ve bakım sağlayacağımı şahsen söz veriyorum, İnşallah. Amacım, bu uygulamanın Ümmet için yıllarca faydalı bir kaynak olarak kalmasını sağlamak.';
+      'İnşallah, ömrüm yettiğince bu uygulamaya sürekli destek ve geliştirme sağlayacağıma şahsen söz veriyorum. Amacım, bu uygulamanın ümmet için nesiller boyu faydalı bir kaynak olarak kalmasıdır.';
 
   @override
   String get fajr => 'Sabah';
@@ -1481,20 +1482,28 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Sure bulundu',
+      other: '$countString Sure bulundu',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Ayet bulundu',
+      other: '$countString Ayet bulundu',
     );
     return '$_temp0';
   }

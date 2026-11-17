@@ -116,11 +116,11 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get downloadingSegmentedQuranRecitation =>
-      'Đang tải xuống phần đọc Kinh Qur\'an theo đoạn';
+      'Đang tải xuống bản đọc Kinh Qur\'an từng từ';
 
   @override
   String get processingSegmentedQuranRecitation =>
-      'Đang xử lý phần đọc Kinh Qur\'an theo đoạn';
+      'Đang xử lý bản đọc Kinh Qur\'an từng từ';
 
   @override
   String get footnote => 'Chú thích cuối trang';
@@ -202,13 +202,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get parameters => 'Thông số: ';
 
   @override
-  String get selectCalculationMethod => 'Chọn Phương pháp Tính toán';
+  String get selectCalculationMethod => 'Chọn phương pháp tính giờ cầu nguyện';
 
   @override
   String get shareSelectAyahs => 'Chia sẻ các Ayah đã chọn';
 
   @override
-  String get selectionEmpty => 'Chưa chọn mục nào';
+  String get selectionEmpty => 'Chưa chọn câu kinh nào';
 
   @override
   String get generatingImagePleaseWait => 'Đang tạo ảnh... Vui lòng đợi';
@@ -1486,20 +1486,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String surahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Tìm thấy $count Surah',
+      other: 'Tìm thấy $countString Surah',
     );
     return '$_temp0';
   }
 
   @override
   String ayahsFound(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Tìm thấy $count câu kinh',
+      other: 'Tìm thấy $countString câu kinh',
     );
     return '$_temp0';
   }

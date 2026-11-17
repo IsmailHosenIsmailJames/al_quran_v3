@@ -26,16 +26,21 @@ $QuranResourceEntityCopyWith<QuranResourceEntity> get copyWith => _$QuranResourc
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress));
+  final _this = this as QuranResourceEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranResourceEntity&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.language, _this.language) || other.language == _this.language)&&(identical(other.languageNative, _this.languageNative) || other.languageNative == _this.languageNative)&&(identical(other.languageCode, _this.languageCode) || other.languageCode == _this.languageCode)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.englishName, _this.englishName) || other.englishName == _this.englishName)&&(identical(other.fileName, _this.fileName) || other.fileName == _this.fileName)&&(identical(other.fullPath, _this.fullPath) || other.fullPath == _this.fullPath)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.isTajweed, _this.isTajweed) || other.isTajweed == _this.isTajweed)&&(identical(other.isDownloaded, _this.isDownloaded) || other.isDownloaded == _this.isDownloaded)&&(identical(other.isSelected, _this.isSelected) || other.isSelected == _this.isSelected)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading)&&(identical(other.downloadProgress, _this.downloadProgress) || other.downloadProgress == _this.downloadProgress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed,isDownloaded,isSelected,isDownloading,downloadProgress);
+int get hashCode {
+  final _this = this as QuranResourceEntity;
+  return Object.hash(runtimeType,_this.id,_this.language,_this.languageNative,_this.languageCode,_this.name,_this.englishName,_this.fileName,_this.fullPath,_this.type,_this.isTajweed,_this.isDownloaded,_this.isSelected,_this.isDownloading,_this.downloadProgress);
+}
 
 @override
 String toString() {
-  return 'QuranResourceEntity(id: $id, language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed, isDownloaded: $isDownloaded, isSelected: $isSelected, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
+  final _this = this as QuranResourceEntity;
+  return 'QuranResourceEntity(id: ${_this.id}, language: ${_this.language}, languageNative: ${_this.languageNative}, languageCode: ${_this.languageCode}, name: ${_this.name}, englishName: ${_this.englishName}, fileName: ${_this.fileName}, fullPath: ${_this.fullPath}, type: ${_this.type}, isTajweed: ${_this.isTajweed}, isDownloaded: ${_this.isDownloaded}, isSelected: ${_this.isSelected}, isDownloading: ${_this.isDownloading}, downloadProgress: ${_this.downloadProgress})';
 }
 
 
@@ -248,16 +253,18 @@ _$QuranResourceEntityCopyWith<_QuranResourceEntity> get copyWith => __$QuranReso
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranResourceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed)&&(identical(other.isDownloaded, isDownloaded) || other.isDownloaded == isDownloaded)&&(identical(other.isSelected, isSelected) || other.isSelected == isSelected)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed,isDownloaded,isSelected,isDownloading,downloadProgress);
+int get hashCode {
+    return Object.hash(runtimeType,id,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed,isDownloaded,isSelected,isDownloading,downloadProgress);
+}
 
 @override
 String toString() {
-  return 'QuranResourceEntity(id: $id, language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed, isDownloaded: $isDownloaded, isSelected: $isSelected, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
+    return 'QuranResourceEntity(id: $id, language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed, isDownloaded: $isDownloaded, isSelected: $isSelected, isDownloading: $isDownloading, downloadProgress: $downloadProgress)';
 }
 
 

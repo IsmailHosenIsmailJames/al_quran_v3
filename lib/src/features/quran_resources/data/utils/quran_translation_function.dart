@@ -3,12 +3,10 @@ import "dart:developer";
 
 import "package:al_quran_v3/src/core/resources/quran_resources/language_resources.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
-import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "package:al_quran_v3/src/core/api/apis_urls.dart";
@@ -31,7 +29,17 @@ class QuranTranslationFunction {
       name: "QuranTranslationFunction.init",
     );
 
-    // open surah info box if not already open
+    // Open surah info boxes for any downloaded languages on disk
+    for (final lang in availableSurahInfoInLang) {
+      final infoBoxName = "surah_info_$lang";
+      if (await Hive.boxExists(infoBoxName)) {
+        if (!Hive.isBoxOpen(infoBoxName)) {
+          await Hive.openLazyBox(infoBoxName);
+        }
+      }
+    }
+
+    // open surah info box for current locale if not already open
     if (locale != null) {
       String infoBoxName = "surah_info_${locale.languageCode}";
       if (!Hive.isBoxOpen(infoBoxName)) {
@@ -54,14 +62,118 @@ class QuranTranslationFunction {
     }
   }
 
-  static bool isInfoAvailable(Locale locale) {
-    final boxName = "surah_info_${locale.languageCode}";
-    return Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty;
+  static bool isInfoAvailable([Locale? locale]) {
+    // 1. Check specific locale if provided
+    if (locale != null) {
+      final boxName = "surah_info_${locale.languageCode}";
+      if (Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty) {
+        return true;
+      }
+    }
+
+    // 2. Check if any available Surah info box is open and has items
+    for (final lang in availableSurahInfoInLang) {
+      final boxName = "surah_info_$lang";
+      if (Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  static Future<String?> getInfoOfSurah(Locale locale, String id) async {
-    final boxName = "surah_info_${locale.languageCode}";
-    final data = await Hive.lazyBox(boxName).get(id);
+  static String? getAvailableSurahInfoLanguage([Locale? preferredLocale]) {
+    if (preferredLocale != null &&
+        availableSurahInfoInLang.contains(preferredLocale.languageCode)) {
+      final boxName = "surah_info_${preferredLocale.languageCode}";
+      if (Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty) {
+        return preferredLocale.languageCode;
+      }
+    }
+
+    // Check selected translation languages
+    if (Hive.isBoxOpen("user")) {
+      final userBox = Hive.box("user");
+      final selectedList =
+          userBox.get(selectedTranslationListKey, defaultValue: []) as List;
+      for (final item in selectedList) {
+        try {
+          final book = ResourcesModel.fromMap(Map<String, dynamic>.from(item));
+          final code = languageToCodeMap[book.language.toLowerCase()];
+          if (code != null && availableSurahInfoInLang.contains(code)) {
+            final boxName = "surah_info_$code";
+            if (Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty) {
+              return code;
+            }
+          }
+        } catch (_) {}
+      }
+    }
+
+    // Check English fallback, then any open box
+    if (Hive.isBoxOpen("surah_info_en") &&
+        Hive.lazyBox("surah_info_en").isNotEmpty) {
+      return "en";
+    }
+
+    for (final lang in availableSurahInfoInLang) {
+      final boxName = "surah_info_$lang";
+      if (Hive.isBoxOpen(boxName) && Hive.lazyBox(boxName).isNotEmpty) {
+        return lang;
+      }
+    }
+
+    // If preferred locale is supported, return it even if not yet downloaded
+    if (preferredLocale != null &&
+        availableSurahInfoInLang.contains(preferredLocale.languageCode)) {
+      return preferredLocale.languageCode;
+    }
+
+    return "en";
+  }
+
+  static Future<String?> getInfoOfSurah(
+    dynamic localeOrId, [
+    String? optionalId,
+  ]) async {
+    Locale? locale;
+    String id;
+    if (localeOrId is Locale && optionalId != null) {
+      locale = localeOrId;
+      id = optionalId;
+    } else if (localeOrId is String) {
+      id = localeOrId;
+      if (optionalId != null) locale = Locale(optionalId);
+    } else {
+      id = localeOrId.toString();
+    }
+
+    String? lang = locale?.languageCode;
+    if (lang == null || !availableSurahInfoInLang.contains(lang)) {
+      lang = getAvailableSurahInfoLanguage(locale);
+    }
+    lang ??= "en";
+
+    final boxName = "surah_info_$lang";
+    LazyBox box;
+    if (Hive.isBoxOpen(boxName)) {
+      box = Hive.lazyBox(boxName);
+    } else if (await Hive.boxExists(boxName)) {
+      box = await Hive.openLazyBox(boxName);
+    } else {
+      // If not yet on disk, download on demand
+      if (availableSurahInfoInLang.contains(lang)) {
+        final success = await downloadSurahInfo(Locale(lang));
+        if (success && Hive.isBoxOpen(boxName)) {
+          box = Hive.lazyBox(boxName);
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    }
+
+    final data = await box.get(id);
     if (data == null) return null;
     return data["text"];
   }
@@ -323,17 +435,21 @@ class QuranTranslationFunction {
         await setTranslationSelection(translationBook);
       }
 
-      if (availableSurahInfoInLang.contains(
-        languageToCodeMap[translationBook.language.toLowerCase()],
-      )) {
+      final bookLangCode =
+          languageToCodeMap[translationBook.language.toLowerCase()];
+      if (bookLangCode != null &&
+          availableSurahInfoInLang.contains(bookLangCode)) {
         updateProgress(
           null,
           "Downloading Surah's Info (${translationBook.language})",
         );
-        if (context != null) {
-          try {
-            await downloadSurahInfo(context.read<LanguageCubit>().state.locale);
-          } catch (_) {}
+        try {
+          await downloadSurahInfo(Locale(bookLangCode));
+        } catch (e) {
+          log(
+            "Error downloading surah info for $bookLangCode: $e",
+            name: "downloadSurahInfo",
+          );
         }
       } else {
         log(
@@ -359,7 +475,7 @@ class QuranTranslationFunction {
     }
   }
 
-  static Future<void> downloadSurahInfo(Locale locale) async {
+  static Future<bool> downloadSurahInfo(Locale locale) async {
     final surahInfoBoxName = "surah_info_${locale.languageCode}";
     log(
       "Downloading surah info for ${locale.languageCode}",
@@ -373,8 +489,8 @@ class QuranTranslationFunction {
           "Surah info for ${locale.languageCode} already exists and is not empty.",
           name: "downloadSurahInfo",
         );
-        await box.close(); // Close if we opened it just for check
-        return;
+        // Keep box open so isInfoAvailable recognizes it immediately
+        return true;
       }
       await box.close(); // Close if it was empty and we opened it
     }
@@ -395,17 +511,20 @@ class QuranTranslationFunction {
           "Surah info for ${locale.languageCode} downloaded successfully.",
           name: "downloadSurahInfo",
         );
+        return true;
       } else {
         log(
           "Failed to download surah info for ${locale.languageCode}. Status: ${response.statusCode}",
           name: "downloadSurahInfo",
         );
+        return false;
       }
     } catch (e) {
       log(
         "Error downloading surah info for ${locale.languageCode}: $e",
         name: "downloadSurahInfo",
       );
+      return false;
     }
   }
 

@@ -29,16 +29,21 @@ $PageInfoModelCopyWith<PageInfoModel> get copyWith => _$PageInfoModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PageInfoModel&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber));
+  final _this = this as PageInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PageInfoModel&&(identical(other.start, _this.start) || other.start == _this.start)&&(identical(other.end, _this.end) || other.end == _this.end)&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.pageNumber, _this.pageNumber) || other.pageNumber == _this.pageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,start,end,surahNumber,pageNumber);
+int get hashCode {
+  final _this = this as PageInfoModel;
+  return Object.hash(runtimeType,_this.start,_this.end,_this.surahNumber,_this.pageNumber);
+}
 
 @override
 String toString() {
-  return 'PageInfoModel(start: $start, end: $end, surahNumber: $surahNumber, pageNumber: $pageNumber)';
+  final _this = this as PageInfoModel;
+  return 'PageInfoModel(start: ${_this.start}, end: ${_this.end}, surahNumber: ${_this.surahNumber}, pageNumber: ${_this.pageNumber})';
 }
 
 
@@ -234,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PageInfoModel&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PageInfoModel&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,start,end,surahNumber,pageNumber);
+int get hashCode {
+    return Object.hash(runtimeType,start,end,surahNumber,pageNumber);
+}
 
 @override
 String toString() {
-  return 'PageInfoModel(start: $start, end: $end, surahNumber: $surahNumber, pageNumber: $pageNumber)';
+    return 'PageInfoModel(start: $start, end: $end, surahNumber: $surahNumber, pageNumber: $pageNumber)';
 }
 
 

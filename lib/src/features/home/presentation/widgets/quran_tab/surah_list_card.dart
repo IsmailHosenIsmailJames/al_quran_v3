@@ -100,49 +100,73 @@ class SurahListCard extends StatelessWidget {
                         ),
                       ],
                       const Gap(4),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 1.5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: themeState.primary.withValues(
-                                alpha: isDark ? 0.15 : 0.08,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 1.5,
                               ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  isMakkah ? "🕋" : "🕌",
-                                  style: const TextStyle(fontSize: 9),
+                              decoration: BoxDecoration(
+                                color: themeState.primary.withValues(
+                                  alpha: isDark ? 0.15 : 0.08,
                                 ),
-                                const Gap(3),
-                                Text(
-                                  isMakkah ? l10n.makki : l10n.madani,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: themeState.primary,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    isMakkah ? "🕋" : "🕌",
+                                    style: const TextStyle(fontSize: 9),
                                   ),
-                                ),
-                              ],
+                                  const Gap(2.5),
+                                  Text(
+                                    isMakkah ? l10n.makki : l10n.madani,
+                                    style: TextStyle(
+                                      fontSize: 9.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeState.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const Gap(8),
-                          Text(
-                            "${localizedNumber(context, surah.versesCount)} ${l10n.verses}",
-                            style: TextStyle(
-                              fontSize: 11.5,
-                              color: isDark
-                                  ? Colors.grey.shade400
-                                  : Colors.grey.shade600,
+                            const Gap(6),
+                            Text(
+                              "${localizedNumber(context, surah.versesCount)} ${l10n.verses}",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
+                              ),
                             ),
-                          ),
-                        ],
+                            const Gap(5),
+                            Text(
+                              "•",
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: isDark
+                                    ? Colors.grey.shade600
+                                    : Colors.grey.shade400,
+                              ),
+                            ),
+                            const Gap(5),
+                            Text(
+                              "${l10n.page} ${localizedNumber(context, surah.pagesRange.split("-").first)}",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
