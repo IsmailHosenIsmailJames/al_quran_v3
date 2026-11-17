@@ -11,11 +11,13 @@ import "package:gap/gap.dart";
 class AutoScrollFloatingHud extends StatelessWidget {
   final VoidCallback? onTrigger;
   final VoidCallback? onDismiss;
+  final bool isFabVisible;
 
   const AutoScrollFloatingHud({
     super.key,
     this.onTrigger,
     this.onDismiss,
+    this.isFabVisible = true,
   });
 
   @override
@@ -58,36 +60,49 @@ class AutoScrollFloatingHud extends StatelessWidget {
         alignment: Alignment.bottomLeft,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 16, left: 16),
-          child: Material(
-            color: Colors.transparent,
-            shape: const CircleBorder(),
-            child: InkWell(
-              customBorder: const CircleBorder(),
-              onTap: () {
-                HapticFeedback.selectionClick();
-                onTrigger?.call();
-              },
-              child: Tooltip(
-                message: "Auto-Scroll Reading",
-                child: Container(
-                  width: 52,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: primary,
-                    boxShadow: [
-                      BoxShadow(
-                        color: primary.withValues(alpha: isDark ? 0.45 : 0.35),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
+          child: AnimatedSlide(
+            duration: const Duration(milliseconds: 260),
+            curve: Curves.easeInOutCubic,
+            offset: isFabVisible ? Offset.zero : const Offset(0, 1.8),
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 220),
+              curve: Curves.easeInOut,
+              opacity: isFabVisible ? 1.0 : 0.0,
+              child: IgnorePointer(
+                ignoring: !isFabVisible,
+                child: Material(
+                  color: Colors.transparent,
+                  shape: const CircleBorder(),
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () {
+                      HapticFeedback.selectionClick();
+                      onTrigger?.call();
+                    },
+                    child: Tooltip(
+                      message: "Auto-Scroll Reading",
+                      child: Container(
+                        width: 52,
+                        height: 52,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primary,
+                          boxShadow: [
+                            BoxShadow(
+                              color: primary.withValues(alpha: isDark ? 0.45 : 0.35),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.keyboard_double_arrow_down_rounded,
+                            color: Colors.white,
+                            size: 26,
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.keyboard_double_arrow_down_rounded,
-                      color: Colors.white,
-                      size: 26,
                     ),
                   ),
                 ),

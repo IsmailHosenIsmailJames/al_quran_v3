@@ -34,6 +34,7 @@ import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_i
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -94,6 +95,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   int? _lastTopPageIndex;
   Timer? _historyDebounceTimer;
   Timer? _autoScrollTimer;
+  bool _isAutoScrollFabVisible = true;
 
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
@@ -676,6 +678,35 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                 notification.dragDetails != null) {
               context.read<AutoScrollCubit>().pauseByTouch();
             }
+
+            // Scroll-aware FAB visibility: hides on scroll down (reading down)
+            // and reveals on scroll up (heading back), only while auto-scroll is not active.
+            final isAutoScrollActive =
+                context.read<AutoScrollCubit>().state.isActive;
+            if (!isAutoScrollActive) {
+              if (notification is UserScrollNotification) {
+                if (notification.direction == ScrollDirection.reverse) {
+                  // Scrolling down: hide floating button
+                  if (_isAutoScrollFabVisible) {
+                    setState(() => _isAutoScrollFabVisible = false);
+                  }
+                } else if (notification.direction == ScrollDirection.forward) {
+                  // Scrolling up: reveal floating button
+                  if (!_isAutoScrollFabVisible) {
+                    setState(() => _isAutoScrollFabVisible = true);
+                  }
+                }
+              } else if (notification is ScrollUpdateNotification &&
+                  notification.dragDetails != null &&
+                  notification.scrollDelta != null) {
+                final delta = notification.scrollDelta!;
+                if (delta > 8.0 && _isAutoScrollFabVisible) {
+                  setState(() => _isAutoScrollFabVisible = false);
+                } else if (delta < -8.0 && !_isAutoScrollFabVisible) {
+                  setState(() => _isAutoScrollFabVisible = true);
+                }
+              }
+            }
             return false;
           },
           child: quranScriptWidget(l10n),
@@ -687,8 +718,15 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           ),
         ),
         AutoScrollFloatingHud(
-          onTrigger: _startAutoScroll,
-          onDismiss: () => _autoScrollTimer?.cancel(),
+          isFabVisible: _isAutoScrollFabVisible,
+          onTrigger: () {
+            setState(() => _isAutoScrollFabVisible = true);
+            _startAutoScroll();
+          },
+          onDismiss: () {
+            setState(() => _isAutoScrollFabVisible = true);
+            _autoScrollTimer?.cancel();
+          },
         ),
       ],
     );
@@ -703,6 +741,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           _scheduleNextAutoScrollStep();
         } else {
           _autoScrollTimer?.cancel();
+        }
+
+        // When auto-scroll deactivates, restore FAB visibility
+        if (!autoScrollState.isActive && !_isAutoScrollFabVisible) {
+          setState(() => _isAutoScrollFabVisible = true);
         }
       },
       child: CallbackShortcuts(
