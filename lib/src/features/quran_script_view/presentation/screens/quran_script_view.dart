@@ -687,6 +687,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           ),
         ),
         AutoScrollFloatingHud(
+          onTrigger: _startAutoScroll,
           onDismiss: () => _autoScrollTimer?.cancel(),
         ),
       ],
@@ -738,7 +739,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
               getSurahInfoButton(themeState, context),
               getAyahsDropDown(themeState),
               getChangesViewButton(themeState),
-              getAutoScrollButton(themeState),
               getSettingsButton(themeState, context),
             ],
           ),
@@ -1400,39 +1400,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             state.isAyahByAyah
                 ? Icons.view_headline_rounded
                 : FluentIcons.book_24_regular,
-            size: 20,
-            color: themeState.primary,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget getAutoScrollButton(ThemeState themeState) {
-    return BlocBuilder<AutoScrollCubit, AutoScrollState>(
-      builder: (context, state) {
-        final isActive = state.isActive;
-        return IconButton(
-          padding: EdgeInsets.zero,
-          style: IconButton.styleFrom(
-            padding: EdgeInsets.zero,
-            backgroundColor: isActive
-                ? themeState.primary.withValues(alpha: 0.18)
-                : themeState.primaryShade100,
-          ),
-          onPressed: () {
-            HapticFeedback.selectionClick();
-            if (isActive) {
-              context.read<AutoScrollCubit>().deactivate();
-            } else {
-              _startAutoScroll();
-            }
-          },
-          tooltip: isActive ? "Close Auto-Scroll" : "Start Auto-Scroll",
-          icon: Icon(
-            isActive
-                ? Icons.motion_photos_auto_rounded
-                : Icons.keyboard_double_arrow_down_rounded,
             size: 20,
             color: themeState.primary,
           ),
