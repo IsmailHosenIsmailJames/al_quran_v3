@@ -26,16 +26,21 @@ $AyahByAyahInScrollInfoStateCopyWith<AyahByAyahInScrollInfoState> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AyahByAyahInScrollInfoState&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&const DeepCollectionEquality().equals(other.expandedForWordByWord, expandedForWordByWord)&&(identical(other.isAyahByAyah, isAyahByAyah) || other.isAyahByAyah == isAyahByAyah)&&const DeepCollectionEquality().equals(other.pageByPageList, pageByPageList)&&const DeepCollectionEquality().equals(other.dropdownAyahKey, dropdownAyahKey));
+  final _this = this as AyahByAyahInScrollInfoState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AyahByAyahInScrollInfoState&&(identical(other.surahInfoModel, _this.surahInfoModel) || other.surahInfoModel == _this.surahInfoModel)&&const DeepCollectionEquality().equals(other.expandedForWordByWord, _this.expandedForWordByWord)&&(identical(other.isAyahByAyah, _this.isAyahByAyah) || other.isAyahByAyah == _this.isAyahByAyah)&&const DeepCollectionEquality().equals(other.pageByPageList, _this.pageByPageList)&&const DeepCollectionEquality().equals(other.dropdownAyahKey, _this.dropdownAyahKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahInfoModel,const DeepCollectionEquality().hash(expandedForWordByWord),isAyahByAyah,const DeepCollectionEquality().hash(pageByPageList),const DeepCollectionEquality().hash(dropdownAyahKey));
+int get hashCode {
+  final _this = this as AyahByAyahInScrollInfoState;
+  return Object.hash(runtimeType,_this.surahInfoModel,const DeepCollectionEquality().hash(_this.expandedForWordByWord),_this.isAyahByAyah,const DeepCollectionEquality().hash(_this.pageByPageList),const DeepCollectionEquality().hash(_this.dropdownAyahKey));
+}
 
 @override
 String toString() {
-  return 'AyahByAyahInScrollInfoState(surahInfoModel: $surahInfoModel, expandedForWordByWord: $expandedForWordByWord, isAyahByAyah: $isAyahByAyah, pageByPageList: $pageByPageList, dropdownAyahKey: $dropdownAyahKey)';
+  final _this = this as AyahByAyahInScrollInfoState;
+  return 'AyahByAyahInScrollInfoState(surahInfoModel: ${_this.surahInfoModel}, expandedForWordByWord: ${_this.expandedForWordByWord}, isAyahByAyah: ${_this.isAyahByAyah}, pageByPageList: ${_this.pageByPageList}, dropdownAyahKey: ${_this.dropdownAyahKey})';
 }
 
 
@@ -258,16 +263,18 @@ _$AyahByAyahInScrollInfoStateCopyWith<_AyahByAyahInScrollInfoState> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AyahByAyahInScrollInfoState&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&const DeepCollectionEquality().equals(other._expandedForWordByWord, _expandedForWordByWord)&&(identical(other.isAyahByAyah, isAyahByAyah) || other.isAyahByAyah == isAyahByAyah)&&const DeepCollectionEquality().equals(other._pageByPageList, _pageByPageList)&&const DeepCollectionEquality().equals(other.dropdownAyahKey, dropdownAyahKey));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AyahByAyahInScrollInfoState&&(identical(other.surahInfoModel, surahInfoModel) || other.surahInfoModel == surahInfoModel)&&const DeepCollectionEquality().equals(other.expandedForWordByWord, _expandedForWordByWord)&&(identical(other.isAyahByAyah, isAyahByAyah) || other.isAyahByAyah == isAyahByAyah)&&const DeepCollectionEquality().equals(other.pageByPageList, _pageByPageList)&&const DeepCollectionEquality().equals(other.dropdownAyahKey, dropdownAyahKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahInfoModel,const DeepCollectionEquality().hash(_expandedForWordByWord),isAyahByAyah,const DeepCollectionEquality().hash(_pageByPageList),const DeepCollectionEquality().hash(dropdownAyahKey));
+int get hashCode {
+    return Object.hash(runtimeType,surahInfoModel,const DeepCollectionEquality().hash(_expandedForWordByWord),isAyahByAyah,const DeepCollectionEquality().hash(_pageByPageList),const DeepCollectionEquality().hash(dropdownAyahKey));
+}
 
 @override
 String toString() {
-  return 'AyahByAyahInScrollInfoState(surahInfoModel: $surahInfoModel, expandedForWordByWord: $expandedForWordByWord, isAyahByAyah: $isAyahByAyah, pageByPageList: $pageByPageList, dropdownAyahKey: $dropdownAyahKey)';
+    return 'AyahByAyahInScrollInfoState(surahInfoModel: $surahInfoModel, expandedForWordByWord: $expandedForWordByWord, isAyahByAyah: $isAyahByAyah, pageByPageList: $pageByPageList, dropdownAyahKey: $dropdownAyahKey)';
 }
 
 

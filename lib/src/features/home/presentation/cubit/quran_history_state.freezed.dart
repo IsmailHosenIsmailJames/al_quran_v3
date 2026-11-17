@@ -26,16 +26,21 @@ $QuranHistoryStateCopyWith<QuranHistoryState> get copyWith => _$QuranHistoryStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranHistoryState&&const DeepCollectionEquality().equals(other.history, history));
+  final _this = this as QuranHistoryState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranHistoryState&&const DeepCollectionEquality().equals(other.history, _this.history));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(history));
+int get hashCode {
+  final _this = this as QuranHistoryState;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.history));
+}
 
 @override
 String toString() {
-  return 'QuranHistoryState(history: $history)';
+  final _this = this as QuranHistoryState;
+  return 'QuranHistoryState(history: ${_this.history})';
 }
 
 
@@ -228,16 +233,18 @@ _$QuranHistoryStateCopyWith<_QuranHistoryState> get copyWith => __$QuranHistoryS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranHistoryState&&const DeepCollectionEquality().equals(other._history, _history));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranHistoryState&&const DeepCollectionEquality().equals(other.history, _history));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_history));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_history));
+}
 
 @override
 String toString() {
-  return 'QuranHistoryState(history: $history)';
+    return 'QuranHistoryState(history: $history)';
 }
 
 

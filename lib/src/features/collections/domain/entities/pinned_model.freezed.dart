@@ -29,16 +29,21 @@ $PinnedModelCopyWith<PinnedModel> get copyWith => _$PinnedModelCopyWithImpl<Pinn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+  final _this = this as PinnedModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PinnedModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.ayahKey, _this.ayahKey) || other.ayahKey == _this.ayahKey)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt)&&(identical(other.isDeleted, _this.isDeleted) || other.isDeleted == _this.isDeleted)&&(identical(other.deletedAt, _this.deletedAt) || other.deletedAt == _this.deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ayahKey,createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+  final _this = this as PinnedModel;
+  return Object.hash(runtimeType,_this.id,_this.ayahKey,_this.createdAt,_this.updatedAt,_this.isDeleted,_this.deletedAt);
+}
 
 @override
 String toString() {
-  return 'PinnedModel(id: $id, ayahKey: $ayahKey, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+  final _this = this as PinnedModel;
+  return 'PinnedModel(id: ${_this.id}, ayahKey: ${_this.ayahKey}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt}, isDeleted: ${_this.isDeleted}, deletedAt: ${_this.deletedAt})';
 }
 
 
@@ -238,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PinnedModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ayahKey,createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,ayahKey,createdAt,updatedAt,isDeleted,deletedAt);
+}
 
 @override
 String toString() {
-  return 'PinnedModel(id: $id, ayahKey: $ayahKey, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+    return 'PinnedModel(id: $id, ayahKey: $ayahKey, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
 }
 
 

@@ -29,16 +29,21 @@ $LocationCoordinatesCopyWith<LocationCoordinates> get copyWith => _$LocationCoor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationCoordinates&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.cityName, cityName) || other.cityName == cityName)&&(identical(other.countryName, countryName) || other.countryName == countryName));
+  final _this = this as LocationCoordinates;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationCoordinates&&(identical(other.latitude, _this.latitude) || other.latitude == _this.latitude)&&(identical(other.longitude, _this.longitude) || other.longitude == _this.longitude)&&(identical(other.cityName, _this.cityName) || other.cityName == _this.cityName)&&(identical(other.countryName, _this.countryName) || other.countryName == _this.countryName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude,cityName,countryName);
+int get hashCode {
+  final _this = this as LocationCoordinates;
+  return Object.hash(runtimeType,_this.latitude,_this.longitude,_this.cityName,_this.countryName);
+}
 
 @override
 String toString() {
-  return 'LocationCoordinates(latitude: $latitude, longitude: $longitude, cityName: $cityName, countryName: $countryName)';
+  final _this = this as LocationCoordinates;
+  return 'LocationCoordinates(latitude: ${_this.latitude}, longitude: ${_this.longitude}, cityName: ${_this.cityName}, countryName: ${_this.countryName})';
 }
 
 
@@ -234,16 +239,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocationCoordinates&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.cityName, cityName) || other.cityName == cityName)&&(identical(other.countryName, countryName) || other.countryName == countryName));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocationCoordinates&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude)&&(identical(other.cityName, cityName) || other.cityName == cityName)&&(identical(other.countryName, countryName) || other.countryName == countryName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude,cityName,countryName);
+int get hashCode {
+    return Object.hash(runtimeType,latitude,longitude,cityName,countryName);
+}
 
 @override
 String toString() {
-  return 'LocationCoordinates(latitude: $latitude, longitude: $longitude, cityName: $cityName, countryName: $countryName)';
+    return 'LocationCoordinates(latitude: $latitude, longitude: $longitude, cityName: $cityName, countryName: $countryName)';
 }
 
 

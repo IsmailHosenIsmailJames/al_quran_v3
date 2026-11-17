@@ -29,16 +29,21 @@ $AudioDownloadStateCopyWith<AudioDownloadState> get copyWith => _$AudioDownloadS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioDownloadState&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading));
+  final _this = this as AudioDownloadState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioDownloadState&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.progress, _this.progress) || other.progress == _this.progress)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,progress,isDownloading);
+int get hashCode {
+  final _this = this as AudioDownloadState;
+  return Object.hash(runtimeType,_this.surahNumber,_this.progress,_this.isDownloading);
+}
 
 @override
 String toString() {
-  return 'AudioDownloadState(surahNumber: $surahNumber, progress: $progress, isDownloading: $isDownloading)';
+  final _this = this as AudioDownloadState;
+  return 'AudioDownloadState(surahNumber: ${_this.surahNumber}, progress: ${_this.progress}, isDownloading: ${_this.isDownloading})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioDownloadState&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioDownloadState&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,progress,isDownloading);
+int get hashCode {
+    return Object.hash(runtimeType,surahNumber,progress,isDownloading);
+}
 
 @override
 String toString() {
-  return 'AudioDownloadState(surahNumber: $surahNumber, progress: $progress, isDownloading: $isDownloading)';
+    return 'AudioDownloadState(surahNumber: $surahNumber, progress: $progress, isDownloading: $isDownloading)';
 }
 
 

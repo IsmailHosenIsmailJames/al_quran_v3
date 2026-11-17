@@ -26,16 +26,21 @@ $ResourceGroupEntityCopyWith<ResourceGroupEntity> get copyWith => _$ResourceGrou
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourceGroupEntity&&(identical(other.languageKey, languageKey) || other.languageKey == languageKey)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageEnglish, languageEnglish) || other.languageEnglish == languageEnglish)&&const DeepCollectionEquality().equals(other.resources, resources));
+  final _this = this as ResourceGroupEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourceGroupEntity&&(identical(other.languageKey, _this.languageKey) || other.languageKey == _this.languageKey)&&(identical(other.languageNative, _this.languageNative) || other.languageNative == _this.languageNative)&&(identical(other.languageEnglish, _this.languageEnglish) || other.languageEnglish == _this.languageEnglish)&&const DeepCollectionEquality().equals(other.resources, _this.resources));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,languageKey,languageNative,languageEnglish,const DeepCollectionEquality().hash(resources));
+int get hashCode {
+  final _this = this as ResourceGroupEntity;
+  return Object.hash(runtimeType,_this.languageKey,_this.languageNative,_this.languageEnglish,const DeepCollectionEquality().hash(_this.resources));
+}
 
 @override
 String toString() {
-  return 'ResourceGroupEntity(languageKey: $languageKey, languageNative: $languageNative, languageEnglish: $languageEnglish, resources: $resources)';
+  final _this = this as ResourceGroupEntity;
+  return 'ResourceGroupEntity(languageKey: ${_this.languageKey}, languageNative: ${_this.languageNative}, languageEnglish: ${_this.languageEnglish}, resources: ${_this.resources})';
 }
 
 
@@ -234,16 +239,18 @@ _$ResourceGroupEntityCopyWith<_ResourceGroupEntity> get copyWith => __$ResourceG
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourceGroupEntity&&(identical(other.languageKey, languageKey) || other.languageKey == languageKey)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageEnglish, languageEnglish) || other.languageEnglish == languageEnglish)&&const DeepCollectionEquality().equals(other._resources, _resources));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourceGroupEntity&&(identical(other.languageKey, languageKey) || other.languageKey == languageKey)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageEnglish, languageEnglish) || other.languageEnglish == languageEnglish)&&const DeepCollectionEquality().equals(other.resources, _resources));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,languageKey,languageNative,languageEnglish,const DeepCollectionEquality().hash(_resources));
+int get hashCode {
+    return Object.hash(runtimeType,languageKey,languageNative,languageEnglish,const DeepCollectionEquality().hash(_resources));
+}
 
 @override
 String toString() {
-  return 'ResourceGroupEntity(languageKey: $languageKey, languageNative: $languageNative, languageEnglish: $languageEnglish, resources: $resources)';
+    return 'ResourceGroupEntity(languageKey: $languageKey, languageNative: $languageNative, languageEnglish: $languageEnglish, resources: $resources)';
 }
 
 

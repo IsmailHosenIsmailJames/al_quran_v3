@@ -26,16 +26,21 @@ $QiblaCompassDataCopyWith<QiblaCompassData> get copyWith => _$QiblaCompassDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QiblaCompassData&&(identical(other.heading, heading) || other.heading == heading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned));
+  final _this = this as QiblaCompassData;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QiblaCompassData&&(identical(other.heading, _this.heading) || other.heading == _this.heading)&&(identical(other.kaabaAngle, _this.kaabaAngle) || other.kaabaAngle == _this.kaabaAngle)&&(identical(other.isAligned, _this.isAligned) || other.isAligned == _this.isAligned));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,heading,kaabaAngle,isAligned);
+int get hashCode {
+  final _this = this as QiblaCompassData;
+  return Object.hash(runtimeType,_this.heading,_this.kaabaAngle,_this.isAligned);
+}
 
 @override
 String toString() {
-  return 'QiblaCompassData(heading: $heading, kaabaAngle: $kaabaAngle, isAligned: $isAligned)';
+  final _this = this as QiblaCompassData;
+  return 'QiblaCompassData(heading: ${_this.heading}, kaabaAngle: ${_this.kaabaAngle}, isAligned: ${_this.isAligned})';
 }
 
 
@@ -226,16 +231,18 @@ _$QiblaCompassDataCopyWith<_QiblaCompassData> get copyWith => __$QiblaCompassDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QiblaCompassData&&(identical(other.heading, heading) || other.heading == heading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QiblaCompassData&&(identical(other.heading, heading) || other.heading == heading)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.isAligned, isAligned) || other.isAligned == isAligned));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,heading,kaabaAngle,isAligned);
+int get hashCode {
+    return Object.hash(runtimeType,heading,kaabaAngle,isAligned);
+}
 
 @override
 String toString() {
-  return 'QiblaCompassData(heading: $heading, kaabaAngle: $kaabaAngle, isAligned: $isAligned)';
+    return 'QiblaCompassData(heading: $heading, kaabaAngle: $kaabaAngle, isAligned: $isAligned)';
 }
 
 

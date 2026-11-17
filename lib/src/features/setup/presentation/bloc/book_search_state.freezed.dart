@@ -26,16 +26,21 @@ $BookSearchStateCopyWith<BookSearchState> get copyWith => _$BookSearchStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookSearchState&&(identical(other.query, query) || other.query == query)&&(identical(other.isTafsir, isTafsir) || other.isTafsir == isTafsir)&&const DeepCollectionEquality().equals(other.groupedBooks, groupedBooks)&&const DeepCollectionEquality().equals(other.sortedLanguages, sortedLanguages));
+  final _this = this as BookSearchState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookSearchState&&(identical(other.query, _this.query) || other.query == _this.query)&&(identical(other.isTafsir, _this.isTafsir) || other.isTafsir == _this.isTafsir)&&const DeepCollectionEquality().equals(other.groupedBooks, _this.groupedBooks)&&const DeepCollectionEquality().equals(other.sortedLanguages, _this.sortedLanguages));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,query,isTafsir,const DeepCollectionEquality().hash(groupedBooks),const DeepCollectionEquality().hash(sortedLanguages));
+int get hashCode {
+  final _this = this as BookSearchState;
+  return Object.hash(runtimeType,_this.query,_this.isTafsir,const DeepCollectionEquality().hash(_this.groupedBooks),const DeepCollectionEquality().hash(_this.sortedLanguages));
+}
 
 @override
 String toString() {
-  return 'BookSearchState(query: $query, isTafsir: $isTafsir, groupedBooks: $groupedBooks, sortedLanguages: $sortedLanguages)';
+  final _this = this as BookSearchState;
+  return 'BookSearchState(query: ${_this.query}, isTafsir: ${_this.isTafsir}, groupedBooks: ${_this.groupedBooks}, sortedLanguages: ${_this.sortedLanguages})';
 }
 
 
@@ -240,16 +245,18 @@ _$BookSearchStateCopyWith<_BookSearchState> get copyWith => __$BookSearchStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookSearchState&&(identical(other.query, query) || other.query == query)&&(identical(other.isTafsir, isTafsir) || other.isTafsir == isTafsir)&&const DeepCollectionEquality().equals(other._groupedBooks, _groupedBooks)&&const DeepCollectionEquality().equals(other._sortedLanguages, _sortedLanguages));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookSearchState&&(identical(other.query, query) || other.query == query)&&(identical(other.isTafsir, isTafsir) || other.isTafsir == isTafsir)&&const DeepCollectionEquality().equals(other.groupedBooks, _groupedBooks)&&const DeepCollectionEquality().equals(other.sortedLanguages, _sortedLanguages));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,query,isTafsir,const DeepCollectionEquality().hash(_groupedBooks),const DeepCollectionEquality().hash(_sortedLanguages));
+int get hashCode {
+    return Object.hash(runtimeType,query,isTafsir,const DeepCollectionEquality().hash(_groupedBooks),const DeepCollectionEquality().hash(_sortedLanguages));
+}
 
 @override
 String toString() {
-  return 'BookSearchState(query: $query, isTafsir: $isTafsir, groupedBooks: $groupedBooks, sortedLanguages: $sortedLanguages)';
+    return 'BookSearchState(query: $query, isTafsir: $isTafsir, groupedBooks: $groupedBooks, sortedLanguages: $sortedLanguages)';
 }
 
 

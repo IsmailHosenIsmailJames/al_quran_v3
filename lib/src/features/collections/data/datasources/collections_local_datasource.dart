@@ -1,10 +1,12 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
 import "package:al_quran_v3/src/features/collections/presentation/helpers/collection_ui_helpers.dart";
+import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
@@ -230,6 +232,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
 
     final noteCollectionModel = Hive.box(CollectionType.notes.name);
     await noteCollectionModel.put(newCollection.id, newCollection.toJson());
+    getIt<SyncCubit>().triggerAutoSync();
     Fluttertoast.showToast(msg: l10n.addedNewCollection);
     return newCollection;
   }
@@ -256,7 +259,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
 
     final noteCollectionModel = Hive.box(CollectionType.pinned.name);
     await noteCollectionModel.put(newCollection.id, newCollection.toJson());
-
+    getIt<SyncCubit>().triggerAutoSync();
     Fluttertoast.showToast(msg: l10n.addedNewCollection);
     return newCollection;
   }
@@ -277,6 +280,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
     } else {
       await noteCollectionModel.delete(id);
     }
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   @override
@@ -295,6 +299,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
     } else {
       await pinnedCollectionModel.delete(id);
     }
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   @override
@@ -305,6 +310,7 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
     await Hive.box(
       CollectionType.notes.name,
     ).put(updatedCollection.id, updatedCollection.toJson());
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   @override
@@ -315,5 +321,6 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
     await Hive.box(
       CollectionType.pinned.name,
     ).put(updatedCollection.id, updatedCollection.toJson());
+    getIt<SyncCubit>().triggerAutoSync();
   }
 }

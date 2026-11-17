@@ -29,16 +29,21 @@ $ResourcesModelCopyWith<ResourcesModel> get copyWith => _$ResourcesModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourcesModel&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed));
+  final _this = this as ResourcesModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResourcesModel&&(identical(other.language, _this.language) || other.language == _this.language)&&(identical(other.languageNative, _this.languageNative) || other.languageNative == _this.languageNative)&&(identical(other.languageCode, _this.languageCode) || other.languageCode == _this.languageCode)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.englishName, _this.englishName) || other.englishName == _this.englishName)&&(identical(other.fileName, _this.fileName) || other.fileName == _this.fileName)&&(identical(other.fullPath, _this.fullPath) || other.fullPath == _this.fullPath)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.isTajweed, _this.isTajweed) || other.isTajweed == _this.isTajweed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed);
+int get hashCode {
+  final _this = this as ResourcesModel;
+  return Object.hash(runtimeType,_this.language,_this.languageNative,_this.languageCode,_this.name,_this.englishName,_this.fileName,_this.fullPath,_this.type,_this.isTajweed);
+}
 
 @override
 String toString() {
-  return 'ResourcesModel(language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed)';
+  final _this = this as ResourcesModel;
+  return 'ResourcesModel(language: ${_this.language}, languageNative: ${_this.languageNative}, languageCode: ${_this.languageCode}, name: ${_this.name}, englishName: ${_this.englishName}, fileName: ${_this.fileName}, fullPath: ${_this.fullPath}, type: ${_this.type}, isTajweed: ${_this.isTajweed})';
 }
 
 
@@ -244,16 +249,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourcesModel&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResourcesModel&&(identical(other.language, language) || other.language == language)&&(identical(other.languageNative, languageNative) || other.languageNative == languageNative)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.name, name) || other.name == name)&&(identical(other.englishName, englishName) || other.englishName == englishName)&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.fullPath, fullPath) || other.fullPath == fullPath)&&(identical(other.type, type) || other.type == type)&&(identical(other.isTajweed, isTajweed) || other.isTajweed == isTajweed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed);
+int get hashCode {
+    return Object.hash(runtimeType,language,languageNative,languageCode,name,englishName,fileName,fullPath,type,isTajweed);
+}
 
 @override
 String toString() {
-  return 'ResourcesModel(language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed)';
+    return 'ResourcesModel(language: $language, languageNative: $languageNative, languageCode: $languageCode, name: $name, englishName: $englishName, fileName: $fileName, fullPath: $fullPath, type: $type, isTajweed: $isTajweed)';
 }
 
 

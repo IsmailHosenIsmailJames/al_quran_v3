@@ -2,6 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
+import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/surah_list_card.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_cubit.dart";
@@ -54,7 +55,7 @@ class _SurahListViewState extends State<SurahListView> {
           return ListView(
             padding: const EdgeInsets.only(top: 8, bottom: 100),
             children: [
-              _buildSearchBar(l10n, isDark, langCode),
+              _buildSearchBar(l10n, isDark, langCode, 0),
               const Gap(48),
               Center(
                 child: Padding(
@@ -130,7 +131,7 @@ class _SurahListViewState extends State<SurahListView> {
           return ListView(
             padding: const EdgeInsets.only(top: 8, bottom: 100),
             children: [
-              _buildSearchBar(l10n, isDark, langCode),
+              _buildSearchBar(l10n, isDark, langCode, filteredSurah.length),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
                 child: GridView.builder(
@@ -158,7 +159,7 @@ class _SurahListViewState extends State<SurahListView> {
           itemCount: filteredSurah.length + 1,
           itemBuilder: (context, index) {
             if (index == 0) {
-              return _buildSearchBar(l10n, isDark, langCode);
+              return _buildSearchBar(l10n, isDark, langCode, filteredSurah.length);
             }
 
             final surah = filteredSurah[index - 1];
@@ -169,11 +170,16 @@ class _SurahListViewState extends State<SurahListView> {
     );
   }
 
-  Widget _buildSearchBar(AppLocalizations l10n, bool isDark, String langCode) {
+  Widget _buildSearchBar(
+    AppLocalizations l10n,
+    bool isDark,
+    String langCode,
+    int count,
+  ) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       child: Container(
-        height: 48,
+        height: 42,
         decoration: BoxDecoration(
           color: isDark
               ? Colors.white.withValues(alpha: 0.05)
@@ -185,46 +191,79 @@ class _SurahListViewState extends State<SurahListView> {
                 : Colors.grey.shade300,
           ),
         ),
-        child: TextField(
-          controller: searchController,
-          onChanged: (value) {
-            _searchCubit.onSearchChanged(
-              value,
-              languageCode: langCode,
-            );
-          },
-          decoration: InputDecoration(
-            hintText: l10n.searchForASurah,
-            hintStyle: TextStyle(
-              fontSize: 13.5,
-              color: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: searchController,
+                onChanged: (value) {
+                  _searchCubit.onSearchChanged(
+                    value,
+                    languageCode: langCode,
+                  );
+                },
+                style: const TextStyle(fontSize: 13.5),
+                decoration: InputDecoration(
+                  hintText: l10n.searchForASurah,
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+                  ),
+                  prefixIcon: Icon(
+                    FluentIcons.search_24_regular,
+                    size: 18,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  isDense: true,
+                ),
+              ),
             ),
-            prefixIcon: Icon(
-              FluentIcons.search_24_regular,
-              size: 20,
-              color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
-            ),
-            suffixIcon: searchController.text.isNotEmpty
-                ? IconButton(
-                    icon: const Icon(
-                      FluentIcons.dismiss_circle_24_filled,
-                      size: 18,
-                    ),
-                    onPressed: () {
-                      searchController.clear();
-                      _searchCubit.onSearchChanged(
-                        "",
-                        languageCode: langCode,
-                      );
-                    },
-                  )
-                : null,
-            border: InputBorder.none,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 12,
-            ),
-          ),
+            if (searchController.text.isNotEmpty)
+              IconButton(
+                icon: const Icon(
+                  FluentIcons.dismiss_circle_24_filled,
+                  size: 16,
+                ),
+                padding: const EdgeInsets.all(8),
+                constraints: const BoxConstraints(),
+                onPressed: () {
+                  searchController.clear();
+                  _searchCubit.onSearchChanged(
+                    "",
+                    languageCode: langCode,
+                  );
+                  setState(() {});
+                },
+              )
+            else
+              Container(
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 7,
+                  vertical: 2.5,
+                ),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  "${localizedNumber(context, count)} ${l10n.surah}",
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color:
+                        isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

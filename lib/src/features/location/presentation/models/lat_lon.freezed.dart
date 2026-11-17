@@ -29,16 +29,21 @@ $LatLonCopyWith<LatLon> get copyWith => _$LatLonCopyWithImpl<LatLon>(this as Lat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LatLon&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
+  final _this = this as LatLon;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LatLon&&(identical(other.latitude, _this.latitude) || other.latitude == _this.latitude)&&(identical(other.longitude, _this.longitude) || other.longitude == _this.longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude);
+int get hashCode {
+  final _this = this as LatLon;
+  return Object.hash(runtimeType,_this.latitude,_this.longitude);
+}
 
 @override
 String toString() {
-  return 'LatLon(latitude: $latitude, longitude: $longitude)';
+  final _this = this as LatLon;
+  return 'LatLon(latitude: ${_this.latitude}, longitude: ${_this.longitude})';
 }
 
 
@@ -230,16 +235,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LatLon&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LatLon&&(identical(other.latitude, latitude) || other.latitude == latitude)&&(identical(other.longitude, longitude) || other.longitude == longitude));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,latitude,longitude);
+int get hashCode {
+    return Object.hash(runtimeType,latitude,longitude);
+}
 
 @override
 String toString() {
-  return 'LatLon(latitude: $latitude, longitude: $longitude)';
+    return 'LatLon(latitude: $latitude, longitude: $longitude)';
 }
 
 

@@ -29,16 +29,21 @@ $TafsirItemModelCopyWith<TafsirItemModel> get copyWith => _$TafsirItemModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TafsirItemModel&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
+  final _this = this as TafsirItemModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TafsirItemModel&&(identical(other.bookName, _this.bookName) || other.bookName == _this.bookName)&&(identical(other.ayahKey, _this.ayahKey) || other.ayahKey == _this.ayahKey)&&(identical(other.text, _this.text) || other.text == _this.text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookName,ayahKey,text);
+int get hashCode {
+  final _this = this as TafsirItemModel;
+  return Object.hash(runtimeType,_this.bookName,_this.ayahKey,_this.text);
+}
 
 @override
 String toString() {
-  return 'TafsirItemModel(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
+  final _this = this as TafsirItemModel;
+  return 'TafsirItemModel(bookName: ${_this.bookName}, ayahKey: ${_this.ayahKey}, text: ${_this.text})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TafsirItemModel&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TafsirItemModel&&(identical(other.bookName, bookName) || other.bookName == bookName)&&(identical(other.ayahKey, ayahKey) || other.ayahKey == ayahKey)&&(identical(other.text, text) || other.text == text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,bookName,ayahKey,text);
+int get hashCode {
+    return Object.hash(runtimeType,bookName,ayahKey,text);
+}
 
 @override
 String toString() {
-  return 'TafsirItemModel(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
+    return 'TafsirItemModel(bookName: $bookName, ayahKey: $ayahKey, text: $text)';
 }
 
 

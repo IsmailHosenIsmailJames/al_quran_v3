@@ -1,4 +1,5 @@
 import "dart:async";
+import "dart:math";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/note_model.dart";
@@ -55,6 +56,8 @@ class CloudSyncService {
       await _syncLastRead(userRef);
       await _syncAppSettings(userRef);
       await _syncReciterPreference(userRef);
+      await _syncStreakData(userRef);
+      await _syncKhatamPlan(userRef);
 
       final userBox = Hive.box("user");
       await userBox.put(
@@ -509,6 +512,129 @@ class CloudSyncService {
     } else if (localReciter != null && localReciter is Map) {
       try {
         await docRef.set(_sanitize(Map<String, dynamic>.from(localReciter)));
+      } catch (_) {}
+    }
+  }
+
+  // 8. Synchronize Daily Streak & Active History
+  Future<void> _syncStreakData(DatabaseReference userRef) async {
+    final userBox = Hive.box("user");
+    final docRef = userRef.child("streak_data");
+
+    DataSnapshot? docSnap;
+    try {
+      docSnap = await docRef.get();
+    } catch (_) {}
+
+    final localStreakRaw = userBox.get("user_daily_streak_data");
+    Map<String, dynamic> localStreak = {};
+    if (localStreakRaw != null && localStreakRaw is Map) {
+      localStreak = Map<String, dynamic>.from(localStreakRaw);
+    }
+
+    if (docSnap != null && docSnap.exists && docSnap.value != null) {
+      final cloudData = docSnap.value;
+      if (cloudData is Map) {
+        final cloudMap = Map<String, dynamic>.from(cloudData);
+
+        // Merge active dates (union of local and cloud)
+        final localDates = (localStreak["activeDates"] as List<dynamic>?)
+                ?.map((e) => e.toString())
+                .toSet() ??
+            <String>{};
+        final cloudDates = (cloudMap["activeDates"] as List<dynamic>?)
+                ?.map((e) => e.toString())
+                .toSet() ??
+            <String>{};
+        final mergedDates = localDates.union(cloudDates).toList()..sort();
+
+        final localCurrent =
+            (localStreak["currentStreak"] as num?)?.toInt() ?? 0;
+        final cloudCurrent =
+            (cloudMap["currentStreak"] as num?)?.toInt() ?? 0;
+        final mergedCurrent = max(localCurrent, cloudCurrent);
+
+        final localBest = (localStreak["bestStreak"] as num?)?.toInt() ?? 0;
+        final cloudBest = (cloudMap["bestStreak"] as num?)?.toInt() ?? 0;
+        final mergedBest = max(localBest, cloudBest);
+
+        final localLastActive = localStreak["lastActiveDate"] as String?;
+        final cloudLastActive = cloudMap["lastActiveDate"] as String?;
+        String? mergedLastActive = localLastActive;
+        if (cloudLastActive != null) {
+          if (localLastActive == null ||
+              cloudLastActive.compareTo(localLastActive) > 0) {
+            mergedLastActive = cloudLastActive;
+          }
+        }
+
+        final mergedGrace = min(
+          (localStreak["graceDaysRemaining"] as num?)?.toInt() ?? 2,
+          (cloudMap["graceDaysRemaining"] as num?)?.toInt() ?? 2,
+        );
+
+        final mergedMap = {
+          "currentStreak": mergedCurrent,
+          "bestStreak": mergedBest,
+          "lastActiveDate": mergedLastActive,
+          "activeDates": mergedDates,
+          "graceDaysRemaining": mergedGrace,
+        };
+
+        // Update local
+        await userBox.put("user_daily_streak_data", mergedMap);
+
+        // Update cloud with merged record
+        try {
+          await docRef.set(_sanitize(mergedMap));
+        } catch (_) {}
+      }
+    } else if (localStreak.isNotEmpty) {
+      try {
+        await docRef.set(_sanitize(localStreak));
+      } catch (_) {}
+    }
+  }
+
+  // 9. Synchronize Khatam Plan
+  Future<void> _syncKhatamPlan(DatabaseReference userRef) async {
+    final userBox = Hive.box("user");
+    final docRef = userRef.child("khatam_plan");
+
+    DataSnapshot? docSnap;
+    try {
+      docSnap = await docRef.get();
+    } catch (_) {}
+
+    final localPlanRaw = userBox.get("user_khatam_plan_data");
+    Map<String, dynamic>? localPlan;
+    if (localPlanRaw != null && localPlanRaw is Map) {
+      localPlan = Map<String, dynamic>.from(localPlanRaw);
+    }
+
+    if (docSnap != null && docSnap.exists && docSnap.value != null) {
+      final cloudData = docSnap.value;
+      if (cloudData is Map) {
+        final cloudPlan = Map<String, dynamic>.from(cloudData);
+        if (localPlan != null) {
+          // Take the one with more progress or more recent start
+          final localCompleted =
+              (localPlan["completedPages"] as num?)?.toInt() ?? 0;
+          final cloudCompleted =
+              (cloudPlan["completedPages"] as num?)?.toInt() ?? 0;
+          final winner =
+              localCompleted >= cloudCompleted ? localPlan : cloudPlan;
+          await userBox.put("user_khatam_plan_data", winner);
+          try {
+            await docRef.set(_sanitize(winner));
+          } catch (_) {}
+        } else {
+          await userBox.put("user_khatam_plan_data", cloudPlan);
+        }
+      }
+    } else if (localPlan != null) {
+      try {
+        await docRef.set(_sanitize(localPlan));
       } catch (_) {}
     }
   }

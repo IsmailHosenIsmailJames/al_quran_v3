@@ -34,12 +34,16 @@ import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_i
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
+import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 
 import "package:al_quran_v3/src/features/audio/presentation/widgets/audio_controller_ui.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_state.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/auto_scroll/auto_scroll_floating_hud.dart";
 
 class QuranScriptView extends StatefulWidget {
   final String startKey;
@@ -90,6 +94,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   String? _lastTopAyahKey;
   int? _lastTopPageIndex;
   Timer? _historyDebounceTimer;
+  Timer? _autoScrollTimer;
+  bool _isAutoScrollFabVisible = true;
 
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
@@ -186,6 +192,104 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     }
   }
 
+  void _startAutoScroll() {
+    final isAyahByAyah =
+        context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah;
+    String startAyah = _lastTopAyahKey ?? widget.toScrollKey ?? widget.startKey;
+    int startIndex = ayahsList.indexOf(startAyah);
+    if (startIndex == -1) startIndex = 0;
+
+    if (!isAyahByAyah && _lastTopPageIndex != null) {
+      startIndex = _lastTopPageIndex!;
+      if (startIndex < pagesList.length && pagesList[startIndex].isNotEmpty) {
+        startAyah = pagesList[startIndex].first;
+      }
+    }
+
+    context.read<AutoScrollCubit>().activate(
+      initialAyahKey: startAyah,
+      initialIndex: startIndex,
+    );
+  }
+
+  void _scheduleNextAutoScrollStep() {
+    _autoScrollTimer?.cancel();
+    if (!mounted) return;
+
+    final autoScrollCubit = context.read<AutoScrollCubit>();
+    final state = autoScrollCubit.state;
+    if (!state.isActive || !state.isPlaying) return;
+
+    final isAyahByAyah =
+        context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah;
+
+    if (isAyahByAyah) {
+      int currentIndex = state.currentScrollIndex;
+      if (_lastTopAyahKey != null) {
+        final idx = ayahsList.indexOf(_lastTopAyahKey!);
+        if (idx != -1) currentIndex = idx;
+      }
+
+      if (currentIndex >= ayahsList.length - 1) {
+        autoScrollCubit.pause();
+        return;
+      }
+
+      final targetIndex = currentIndex + 1;
+      final targetAyahKey = ayahsList[targetIndex];
+      final Duration stepDuration = state.getAyahDuration(targetAyahKey);
+
+      if (itemScrollControllerAyahByAyah.isAttached) {
+        itemScrollControllerAyahByAyah.scrollTo(
+          index: targetIndex,
+          alignment: 0.15,
+          duration: stepDuration,
+          curve: Curves.linear,
+        );
+      }
+
+      context.read<AyahToHighlight>().changeAyah(targetAyahKey);
+      autoScrollCubit.updateCurrentIndex(targetIndex, ayahKey: targetAyahKey);
+
+      _autoScrollTimer = Timer(stepDuration, () {
+        if (mounted) {
+          _scheduleNextAutoScrollStep();
+        }
+      });
+    } else {
+      int currentIdx = state.currentScrollIndex;
+      if (_lastTopPageIndex != null) {
+        currentIdx = _lastTopPageIndex!;
+      }
+
+      if (currentIdx >= pagesList.length - 1) {
+        autoScrollCubit.pause();
+        return;
+      }
+
+      final targetIdx = currentIdx + 1;
+      final targetPage = pagesList[targetIdx];
+      final Duration stepDuration = state.getPageDuration(targetPage);
+
+      if (itemScrollControllerReadingMode.isAttached) {
+        itemScrollControllerReadingMode.scrollTo(
+          index: targetIdx,
+          alignment: 0.15,
+          duration: stepDuration,
+          curve: Curves.linear,
+        );
+      }
+
+      autoScrollCubit.updateCurrentIndex(targetIdx, ayahKey: targetPage.first);
+
+      _autoScrollTimer = Timer(stepDuration, () {
+        if (mounted) {
+          _scheduleNextAutoScrollStep();
+        }
+      });
+    }
+  }
+
   void _onAyahByAyahScrollPositionChanged() {
     final positions = itemPositionsListenerAyahByAyah.itemPositions.value;
     if (positions.isEmpty) return;
@@ -270,8 +374,12 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   void dispose() {
     _surahSearchController.dispose();
     _historyDebounceTimer?.cancel();
+    _autoScrollTimer?.cancel();
     _ayahKeyCubitSubscription?.cancel();
     _ayahScrollInfoSubscription?.cancel();
+    try {
+      context.read<AutoScrollCubit>().deactivate();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -564,68 +672,135 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     final mainContent = Stack(
       key: _mainContentKey,
       children: [
-        quranScriptWidget(l10n),
+        NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification is ScrollStartNotification &&
+                notification.dragDetails != null) {
+              context.read<AutoScrollCubit>().pauseByTouch();
+            }
+
+            // Scroll-aware FAB visibility: hides on scroll down (reading down)
+            // and reveals on scroll up (heading back), only while auto-scroll is not active.
+            final isAutoScrollActive =
+                context.read<AutoScrollCubit>().state.isActive;
+            if (!isAutoScrollActive) {
+              if (notification is UserScrollNotification) {
+                if (notification.direction == ScrollDirection.reverse) {
+                  // Scrolling down: hide floating button
+                  if (_isAutoScrollFabVisible) {
+                    setState(() => _isAutoScrollFabVisible = false);
+                  }
+                } else if (notification.direction == ScrollDirection.forward) {
+                  // Scrolling up: reveal floating button
+                  if (!_isAutoScrollFabVisible) {
+                    setState(() => _isAutoScrollFabVisible = true);
+                  }
+                }
+              } else if (notification is ScrollUpdateNotification &&
+                  notification.dragDetails != null &&
+                  notification.scrollDelta != null) {
+                final delta = notification.scrollDelta!;
+                if (delta > 8.0 && _isAutoScrollFabVisible) {
+                  setState(() => _isAutoScrollFabVisible = false);
+                } else if (delta < -8.0 && !_isAutoScrollFabVisible) {
+                  setState(() => _isAutoScrollFabVisible = true);
+                }
+              }
+            }
+            return false;
+          },
+          child: quranScriptWidget(l10n),
+        ),
         const SafeArea(
           child: Align(
             alignment: Alignment.bottomRight,
             child: AudioControllerUi(),
           ),
         ),
+        AutoScrollFloatingHud(
+          isFabVisible: _isAutoScrollFabVisible,
+          onTrigger: () {
+            setState(() => _isAutoScrollFabVisible = true);
+            _startAutoScroll();
+          },
+          onDismiss: () {
+            setState(() => _isAutoScrollFabVisible = true);
+            _autoScrollTimer?.cancel();
+          },
+        ),
       ],
     );
 
-    return CallbackShortcuts(
-      bindings: shortcuts,
-      child: Scaffold(
-        extendBodyBehindAppBar: false,
-        appBar: AppBar(
-          leadingWidth: isWide ? 96 : null,
-          leading: isWide
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const BackButton(),
-                    Tooltip(
-                      message: _isSidebarVisible
-                          ? "Hide sidebar (Ctrl+B)"
-                          : "Show sidebar (Ctrl+B)",
-                      child: IconButton(
-                        icon: Icon(
-                          _isSidebarVisible
-                              ? Icons.menu_open_rounded
-                              : Icons.menu_rounded,
-                        ),
-                        onPressed: () => setState(
-                          () => _isSidebarVisible = !_isSidebarVisible,
+    return BlocListener<AutoScrollCubit, AutoScrollState>(
+      listenWhen: (previous, current) =>
+          previous.isPlaying != current.isPlaying ||
+          previous.speed != current.speed ||
+          previous.isActive != current.isActive,
+      listener: (context, autoScrollState) {
+        if (autoScrollState.isActive && autoScrollState.isPlaying) {
+          _scheduleNextAutoScrollStep();
+        } else {
+          _autoScrollTimer?.cancel();
+        }
+
+        // When auto-scroll deactivates, restore FAB visibility
+        if (!autoScrollState.isActive && !_isAutoScrollFabVisible) {
+          setState(() => _isAutoScrollFabVisible = true);
+        }
+      },
+      child: CallbackShortcuts(
+        bindings: shortcuts,
+        child: Scaffold(
+          extendBodyBehindAppBar: false,
+          appBar: AppBar(
+            leadingWidth: isWide ? 96 : null,
+            leading: isWide
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const BackButton(),
+                      Tooltip(
+                        message: _isSidebarVisible
+                            ? "Hide sidebar (Ctrl+B)"
+                            : "Show sidebar (Ctrl+B)",
+                        child: IconButton(
+                          icon: Icon(
+                            _isSidebarVisible
+                                ? Icons.menu_open_rounded
+                                : Icons.menu_rounded,
+                          ),
+                          onPressed: () => setState(
+                            () => _isSidebarVisible = !_isSidebarVisible,
+                          ),
                         ),
                       ),
+                    ],
+                  )
+                : null,
+            title: appBarTitle(),
+            actions: [
+              getSurahInfoButton(themeState, context),
+              getAyahsDropDown(themeState),
+              getChangesViewButton(themeState),
+              getSettingsButton(themeState, context),
+            ],
+          ),
+          body: isLandScape
+              ? Row(
+                  children: [
+                    SafeArea(
+                      right: false,
+                      bottom: false,
+                      top: false,
+                      left: true,
+                      child: sideBarOfSurahAndAyah(themeState, context),
                     ),
+                    const VerticalDivider(width: 1, thickness: 1),
+                    Expanded(child: mainContent),
                   ],
                 )
-              : null,
-          title: appBarTitle(),
-          actions: [
-            getSurahInfoButton(themeState, context),
-            getAyahsDropDown(themeState),
-            getChangesViewButton(themeState),
-            getSettingsButton(themeState, context),
-          ],
+              : mainContent,
         ),
-        body: isLandScape
-            ? Row(
-                children: [
-                  SafeArea(
-                    right: false,
-                    bottom: false,
-                    top: false,
-                    left: true,
-                    child: sideBarOfSurahAndAyah(themeState, context),
-                  ),
-                  const VerticalDivider(width: 1, thickness: 1),
-                  Expanded(child: mainContent),
-                ],
-              )
-            : mainContent,
       ),
     );
   }

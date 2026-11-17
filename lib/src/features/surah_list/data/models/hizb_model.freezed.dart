@@ -29,16 +29,21 @@ $HizbModelCopyWith<HizbModel> get copyWith => _$HizbModelCopyWithImpl<HizbModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HizbModel&&(identical(other.hizbNumber, hizbNumber) || other.hizbNumber == hizbNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, verseMapping));
+  final _this = this as HizbModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HizbModel&&(identical(other.hizbNumber, _this.hizbNumber) || other.hizbNumber == _this.hizbNumber)&&(identical(other.versesCount, _this.versesCount) || other.versesCount == _this.versesCount)&&(identical(other.firstVerseKey, _this.firstVerseKey) || other.firstVerseKey == _this.firstVerseKey)&&(identical(other.lastVerseKey, _this.lastVerseKey) || other.lastVerseKey == _this.lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, _this.verseMapping));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,hizbNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(verseMapping));
+int get hashCode {
+  final _this = this as HizbModel;
+  return Object.hash(runtimeType,_this.hizbNumber,_this.versesCount,_this.firstVerseKey,_this.lastVerseKey,const DeepCollectionEquality().hash(_this.verseMapping));
+}
 
 @override
 String toString() {
-  return 'HizbModel(hizbNumber: $hizbNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
+  final _this = this as HizbModel;
+  return 'HizbModel(hizbNumber: ${_this.hizbNumber}, versesCount: ${_this.versesCount}, firstVerseKey: ${_this.firstVerseKey}, lastVerseKey: ${_this.lastVerseKey}, verseMapping: ${_this.verseMapping})';
 }
 
 
@@ -242,16 +247,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HizbModel&&(identical(other.hizbNumber, hizbNumber) || other.hizbNumber == hizbNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other._verseMapping, _verseMapping));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _HizbModel&&(identical(other.hizbNumber, hizbNumber) || other.hizbNumber == hizbNumber)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.firstVerseKey, firstVerseKey) || other.firstVerseKey == firstVerseKey)&&(identical(other.lastVerseKey, lastVerseKey) || other.lastVerseKey == lastVerseKey)&&const DeepCollectionEquality().equals(other.verseMapping, _verseMapping));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,hizbNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(_verseMapping));
+int get hashCode {
+    return Object.hash(runtimeType,hizbNumber,versesCount,firstVerseKey,lastVerseKey,const DeepCollectionEquality().hash(_verseMapping));
+}
 
 @override
 String toString() {
-  return 'HizbModel(hizbNumber: $hizbNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
+    return 'HizbModel(hizbNumber: $hizbNumber, versesCount: $versesCount, firstVerseKey: $firstVerseKey, lastVerseKey: $lastVerseKey, verseMapping: $verseMapping)';
 }
 
 

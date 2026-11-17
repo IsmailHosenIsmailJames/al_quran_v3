@@ -29,16 +29,21 @@ $NoteModelCopyWith<NoteModel> get copyWith => _$NoteModelCopyWithImpl<NoteModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoteModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.ayahKey, ayahKey)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+  final _this = this as NoteModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NoteModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.ayahKey, _this.ayahKey)&&(identical(other.text, _this.text) || other.text == _this.text)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt)&&(identical(other.isDeleted, _this.isDeleted) || other.isDeleted == _this.isDeleted)&&(identical(other.deletedAt, _this.deletedAt) || other.deletedAt == _this.deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(ayahKey),text,createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+  final _this = this as NoteModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.ayahKey),_this.text,_this.createdAt,_this.updatedAt,_this.isDeleted,_this.deletedAt);
+}
 
 @override
 String toString() {
-  return 'NoteModel(id: $id, ayahKey: $ayahKey, text: $text, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+  final _this = this as NoteModel;
+  return 'NoteModel(id: ${_this.id}, ayahKey: ${_this.ayahKey}, text: ${_this.text}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt}, isDeleted: ${_this.isDeleted}, deletedAt: ${_this.deletedAt})';
 }
 
 
@@ -246,16 +251,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoteModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._ayahKey, _ayahKey)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoteModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.ayahKey, _ayahKey)&&(identical(other.text, text) || other.text == text)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.isDeleted, isDeleted) || other.isDeleted == isDeleted)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_ayahKey),text,createdAt,updatedAt,isDeleted,deletedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_ayahKey),text,createdAt,updatedAt,isDeleted,deletedAt);
+}
 
 @override
 String toString() {
-  return 'NoteModel(id: $id, ayahKey: $ayahKey, text: $text, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
+    return 'NoteModel(id: $id, ayahKey: $ayahKey, text: $text, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt)';
 }
 
 

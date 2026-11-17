@@ -26,16 +26,21 @@ $ThemeStateCopyWith<ThemeState> get copyWith => _$ThemeStateCopyWithImpl<ThemeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeState&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.primary, primary) || other.primary == primary)&&(identical(other.primaryShade100, primaryShade100) || other.primaryShade100 == primaryShade100)&&(identical(other.primaryShade200, primaryShade200) || other.primaryShade200 == primaryShade200)&&(identical(other.primaryShade300, primaryShade300) || other.primaryShade300 == primaryShade300)&&(identical(other.secondary, secondary) || other.secondary == secondary)&&(identical(other.mutedGray, mutedGray) || other.mutedGray == mutedGray));
+  final _this = this as ThemeState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeState&&(identical(other.themeMode, _this.themeMode) || other.themeMode == _this.themeMode)&&(identical(other.primary, _this.primary) || other.primary == _this.primary)&&(identical(other.primaryShade100, _this.primaryShade100) || other.primaryShade100 == _this.primaryShade100)&&(identical(other.primaryShade200, _this.primaryShade200) || other.primaryShade200 == _this.primaryShade200)&&(identical(other.primaryShade300, _this.primaryShade300) || other.primaryShade300 == _this.primaryShade300)&&(identical(other.secondary, _this.secondary) || other.secondary == _this.secondary)&&(identical(other.mutedGray, _this.mutedGray) || other.mutedGray == _this.mutedGray));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,primary,primaryShade100,primaryShade200,primaryShade300,secondary,mutedGray);
+int get hashCode {
+  final _this = this as ThemeState;
+  return Object.hash(runtimeType,_this.themeMode,_this.primary,_this.primaryShade100,_this.primaryShade200,_this.primaryShade300,_this.secondary,_this.mutedGray);
+}
 
 @override
 String toString() {
-  return 'ThemeState(themeMode: $themeMode, primary: $primary, primaryShade100: $primaryShade100, primaryShade200: $primaryShade200, primaryShade300: $primaryShade300, secondary: $secondary, mutedGray: $mutedGray)';
+  final _this = this as ThemeState;
+  return 'ThemeState(themeMode: ${_this.themeMode}, primary: ${_this.primary}, primaryShade100: ${_this.primaryShade100}, primaryShade200: ${_this.primaryShade200}, primaryShade300: ${_this.primaryShade300}, secondary: ${_this.secondary}, mutedGray: ${_this.mutedGray})';
 }
 
 
@@ -234,16 +239,18 @@ _$ThemeStateCopyWith<_ThemeState> get copyWith => __$ThemeStateCopyWithImpl<_The
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThemeState&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.primary, primary) || other.primary == primary)&&(identical(other.primaryShade100, primaryShade100) || other.primaryShade100 == primaryShade100)&&(identical(other.primaryShade200, primaryShade200) || other.primaryShade200 == primaryShade200)&&(identical(other.primaryShade300, primaryShade300) || other.primaryShade300 == primaryShade300)&&(identical(other.secondary, secondary) || other.secondary == secondary)&&(identical(other.mutedGray, mutedGray) || other.mutedGray == mutedGray));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThemeState&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.primary, primary) || other.primary == primary)&&(identical(other.primaryShade100, primaryShade100) || other.primaryShade100 == primaryShade100)&&(identical(other.primaryShade200, primaryShade200) || other.primaryShade200 == primaryShade200)&&(identical(other.primaryShade300, primaryShade300) || other.primaryShade300 == primaryShade300)&&(identical(other.secondary, secondary) || other.secondary == secondary)&&(identical(other.mutedGray, mutedGray) || other.mutedGray == mutedGray));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,primary,primaryShade100,primaryShade200,primaryShade300,secondary,mutedGray);
+int get hashCode {
+    return Object.hash(runtimeType,themeMode,primary,primaryShade100,primaryShade200,primaryShade300,secondary,mutedGray);
+}
 
 @override
 String toString() {
-  return 'ThemeState(themeMode: $themeMode, primary: $primary, primaryShade100: $primaryShade100, primaryShade200: $primaryShade200, primaryShade300: $primaryShade300, secondary: $secondary, mutedGray: $mutedGray)';
+    return 'ThemeState(themeMode: $themeMode, primary: $primary, primaryShade100: $primaryShade100, primaryShade200: $primaryShade200, primaryShade300: $primaryShade300, secondary: $secondary, mutedGray: $mutedGray)';
 }
 
 

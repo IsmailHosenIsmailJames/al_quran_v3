@@ -26,16 +26,21 @@ $TajweedExampleModelCopyWith<TajweedExampleModel> get copyWith => _$TajweedExamp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedExampleModel&&(identical(other.arabicText, arabicText) || other.arabicText == arabicText)&&(identical(other.transliteration, transliteration) || other.transliteration == transliteration)&&(identical(other.surahAyahRef, surahAyahRef) || other.surahAyahRef == surahAyahRef)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex));
+  final _this = this as TajweedExampleModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedExampleModel&&(identical(other.arabicText, _this.arabicText) || other.arabicText == _this.arabicText)&&(identical(other.transliteration, _this.transliteration) || other.transliteration == _this.transliteration)&&(identical(other.surahAyahRef, _this.surahAyahRef) || other.surahAyahRef == _this.surahAyahRef)&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.ayahNumber, _this.ayahNumber) || other.ayahNumber == _this.ayahNumber)&&(identical(other.wordIndex, _this.wordIndex) || other.wordIndex == _this.wordIndex));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,arabicText,transliteration,surahAyahRef,surahNumber,ayahNumber,wordIndex);
+int get hashCode {
+  final _this = this as TajweedExampleModel;
+  return Object.hash(runtimeType,_this.arabicText,_this.transliteration,_this.surahAyahRef,_this.surahNumber,_this.ayahNumber,_this.wordIndex);
+}
 
 @override
 String toString() {
-  return 'TajweedExampleModel(arabicText: $arabicText, transliteration: $transliteration, surahAyahRef: $surahAyahRef, surahNumber: $surahNumber, ayahNumber: $ayahNumber, wordIndex: $wordIndex)';
+  final _this = this as TajweedExampleModel;
+  return 'TajweedExampleModel(arabicText: ${_this.arabicText}, transliteration: ${_this.transliteration}, surahAyahRef: ${_this.surahAyahRef}, surahNumber: ${_this.surahNumber}, ayahNumber: ${_this.ayahNumber}, wordIndex: ${_this.wordIndex})';
 }
 
 
@@ -232,16 +237,18 @@ _$TajweedExampleModelCopyWith<_TajweedExampleModel> get copyWith => __$TajweedEx
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TajweedExampleModel&&(identical(other.arabicText, arabicText) || other.arabicText == arabicText)&&(identical(other.transliteration, transliteration) || other.transliteration == transliteration)&&(identical(other.surahAyahRef, surahAyahRef) || other.surahAyahRef == surahAyahRef)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TajweedExampleModel&&(identical(other.arabicText, arabicText) || other.arabicText == arabicText)&&(identical(other.transliteration, transliteration) || other.transliteration == transliteration)&&(identical(other.surahAyahRef, surahAyahRef) || other.surahAyahRef == surahAyahRef)&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,arabicText,transliteration,surahAyahRef,surahNumber,ayahNumber,wordIndex);
+int get hashCode {
+    return Object.hash(runtimeType,arabicText,transliteration,surahAyahRef,surahNumber,ayahNumber,wordIndex);
+}
 
 @override
 String toString() {
-  return 'TajweedExampleModel(arabicText: $arabicText, transliteration: $transliteration, surahAyahRef: $surahAyahRef, surahNumber: $surahNumber, ayahNumber: $ayahNumber, wordIndex: $wordIndex)';
+    return 'TajweedExampleModel(arabicText: $arabicText, transliteration: $transliteration, surahAyahRef: $surahAyahRef, surahNumber: $surahNumber, ayahNumber: $ayahNumber, wordIndex: $wordIndex)';
 }
 
 
@@ -298,16 +305,21 @@ $TajweedRuleModelCopyWith<TajweedRuleModel> get copyWith => _$TajweedRuleModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedRuleModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ruleKey, ruleKey) || other.ruleKey == ruleKey)&&(identical(other.name, name) || other.name == name)&&(identical(other.arabicName, arabicName) || other.arabicName == arabicName)&&(identical(other.description, description) || other.description == description)&&(identical(other.howToPronounce, howToPronounce) || other.howToPronounce == howToPronounce)&&const DeepCollectionEquality().equals(other.examples, examples)&&(identical(other.lightColor, lightColor) || other.lightColor == lightColor)&&(identical(other.darkColor, darkColor) || other.darkColor == darkColor));
+  final _this = this as TajweedRuleModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedRuleModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.ruleKey, _this.ruleKey) || other.ruleKey == _this.ruleKey)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.arabicName, _this.arabicName) || other.arabicName == _this.arabicName)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.howToPronounce, _this.howToPronounce) || other.howToPronounce == _this.howToPronounce)&&const DeepCollectionEquality().equals(other.examples, _this.examples)&&(identical(other.lightColor, _this.lightColor) || other.lightColor == _this.lightColor)&&(identical(other.darkColor, _this.darkColor) || other.darkColor == _this.darkColor));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,ruleKey,name,arabicName,description,howToPronounce,const DeepCollectionEquality().hash(examples),lightColor,darkColor);
+int get hashCode {
+  final _this = this as TajweedRuleModel;
+  return Object.hash(runtimeType,_this.id,_this.ruleKey,_this.name,_this.arabicName,_this.description,_this.howToPronounce,const DeepCollectionEquality().hash(_this.examples),_this.lightColor,_this.darkColor);
+}
 
 @override
 String toString() {
-  return 'TajweedRuleModel(id: $id, ruleKey: $ruleKey, name: $name, arabicName: $arabicName, description: $description, howToPronounce: $howToPronounce, examples: $examples, lightColor: $lightColor, darkColor: $darkColor)';
+  final _this = this as TajweedRuleModel;
+  return 'TajweedRuleModel(id: ${_this.id}, ruleKey: ${_this.ruleKey}, name: ${_this.name}, arabicName: ${_this.arabicName}, description: ${_this.description}, howToPronounce: ${_this.howToPronounce}, examples: ${_this.examples}, lightColor: ${_this.lightColor}, darkColor: ${_this.darkColor})';
 }
 
 
@@ -516,16 +528,18 @@ _$TajweedRuleModelCopyWith<_TajweedRuleModel> get copyWith => __$TajweedRuleMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TajweedRuleModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ruleKey, ruleKey) || other.ruleKey == ruleKey)&&(identical(other.name, name) || other.name == name)&&(identical(other.arabicName, arabicName) || other.arabicName == arabicName)&&(identical(other.description, description) || other.description == description)&&(identical(other.howToPronounce, howToPronounce) || other.howToPronounce == howToPronounce)&&const DeepCollectionEquality().equals(other._examples, _examples)&&(identical(other.lightColor, lightColor) || other.lightColor == lightColor)&&(identical(other.darkColor, darkColor) || other.darkColor == darkColor));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TajweedRuleModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ruleKey, ruleKey) || other.ruleKey == ruleKey)&&(identical(other.name, name) || other.name == name)&&(identical(other.arabicName, arabicName) || other.arabicName == arabicName)&&(identical(other.description, description) || other.description == description)&&(identical(other.howToPronounce, howToPronounce) || other.howToPronounce == howToPronounce)&&const DeepCollectionEquality().equals(other.examples, _examples)&&(identical(other.lightColor, lightColor) || other.lightColor == lightColor)&&(identical(other.darkColor, darkColor) || other.darkColor == darkColor));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,ruleKey,name,arabicName,description,howToPronounce,const DeepCollectionEquality().hash(_examples),lightColor,darkColor);
+int get hashCode {
+    return Object.hash(runtimeType,id,ruleKey,name,arabicName,description,howToPronounce,const DeepCollectionEquality().hash(_examples),lightColor,darkColor);
+}
 
 @override
 String toString() {
-  return 'TajweedRuleModel(id: $id, ruleKey: $ruleKey, name: $name, arabicName: $arabicName, description: $description, howToPronounce: $howToPronounce, examples: $examples, lightColor: $lightColor, darkColor: $darkColor)';
+    return 'TajweedRuleModel(id: $id, ruleKey: $ruleKey, name: $name, arabicName: $arabicName, description: $description, howToPronounce: $howToPronounce, examples: $examples, lightColor: $lightColor, darkColor: $darkColor)';
 }
 
 

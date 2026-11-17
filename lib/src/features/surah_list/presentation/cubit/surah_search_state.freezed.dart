@@ -29,16 +29,21 @@ $SurahSearchStateCopyWith<SurahSearchState> get copyWith => _$SurahSearchStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahSearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other.filteredSurahs, filteredSurahs));
+  final _this = this as SurahSearchState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahSearchState&&(identical(other.query, _this.query) || other.query == _this.query)&&const DeepCollectionEquality().equals(other.filteredSurahs, _this.filteredSurahs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(filteredSurahs));
+int get hashCode {
+  final _this = this as SurahSearchState;
+  return Object.hash(runtimeType,_this.query,const DeepCollectionEquality().hash(_this.filteredSurahs));
+}
 
 @override
 String toString() {
-  return 'SurahSearchState(query: $query, filteredSurahs: $filteredSurahs)';
+  final _this = this as SurahSearchState;
+  return 'SurahSearchState(query: ${_this.query}, filteredSurahs: ${_this.filteredSurahs})';
 }
 
 
@@ -236,16 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahSearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other._filteredSurahs, _filteredSurahs));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahSearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other.filteredSurahs, _filteredSurahs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(_filteredSurahs));
+int get hashCode {
+    return Object.hash(runtimeType,query,const DeepCollectionEquality().hash(_filteredSurahs));
+}
 
 @override
 String toString() {
-  return 'SurahSearchState(query: $query, filteredSurahs: $filteredSurahs)';
+    return 'SurahSearchState(query: $query, filteredSurahs: $filteredSurahs)';
 }
 
 

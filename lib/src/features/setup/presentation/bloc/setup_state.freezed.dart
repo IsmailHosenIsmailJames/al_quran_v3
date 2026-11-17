@@ -26,16 +26,21 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.status, status) || other.status == status)&&(identical(other.config, config) || other.config == config)&&const DeepCollectionEquality().equals(other.allResources, allResources)&&const DeepCollectionEquality().equals(other.selectableTranslations, selectableTranslations)&&const DeepCollectionEquality().equals(other.selectableTafsirs, selectableTafsirs)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  final _this = this as SetupState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.config, _this.config) || other.config == _this.config)&&const DeepCollectionEquality().equals(other.allResources, _this.allResources)&&const DeepCollectionEquality().equals(other.selectableTranslations, _this.selectableTranslations)&&const DeepCollectionEquality().equals(other.selectableTafsirs, _this.selectableTafsirs)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,config,const DeepCollectionEquality().hash(allResources),const DeepCollectionEquality().hash(selectableTranslations),const DeepCollectionEquality().hash(selectableTafsirs),errorMessage);
+int get hashCode {
+  final _this = this as SetupState;
+  return Object.hash(runtimeType,_this.status,_this.config,const DeepCollectionEquality().hash(_this.allResources),const DeepCollectionEquality().hash(_this.selectableTranslations),const DeepCollectionEquality().hash(_this.selectableTafsirs),_this.errorMessage);
+}
 
 @override
 String toString() {
-  return 'SetupState(status: $status, config: $config, allResources: $allResources, selectableTranslations: $selectableTranslations, selectableTafsirs: $selectableTafsirs, errorMessage: $errorMessage)';
+  final _this = this as SetupState;
+  return 'SetupState(status: ${_this.status}, config: ${_this.config}, allResources: ${_this.allResources}, selectableTranslations: ${_this.selectableTranslations}, selectableTafsirs: ${_this.selectableTafsirs}, errorMessage: ${_this.errorMessage})';
 }
 
 
@@ -259,16 +264,18 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.status, status) || other.status == status)&&(identical(other.config, config) || other.config == config)&&const DeepCollectionEquality().equals(other._allResources, _allResources)&&const DeepCollectionEquality().equals(other._selectableTranslations, _selectableTranslations)&&const DeepCollectionEquality().equals(other._selectableTafsirs, _selectableTafsirs)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.status, status) || other.status == status)&&(identical(other.config, config) || other.config == config)&&const DeepCollectionEquality().equals(other.allResources, _allResources)&&const DeepCollectionEquality().equals(other.selectableTranslations, _selectableTranslations)&&const DeepCollectionEquality().equals(other.selectableTafsirs, _selectableTafsirs)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,config,const DeepCollectionEquality().hash(_allResources),const DeepCollectionEquality().hash(_selectableTranslations),const DeepCollectionEquality().hash(_selectableTafsirs),errorMessage);
+int get hashCode {
+    return Object.hash(runtimeType,status,config,const DeepCollectionEquality().hash(_allResources),const DeepCollectionEquality().hash(_selectableTranslations),const DeepCollectionEquality().hash(_selectableTafsirs),errorMessage);
+}
 
 @override
 String toString() {
-  return 'SetupState(status: $status, config: $config, allResources: $allResources, selectableTranslations: $selectableTranslations, selectableTafsirs: $selectableTafsirs, errorMessage: $errorMessage)';
+    return 'SetupState(status: $status, config: $config, allResources: $allResources, selectableTranslations: $selectableTranslations, selectableTafsirs: $selectableTafsirs, errorMessage: $errorMessage)';
 }
 
 

@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
+import "package:al_quran_v3/src/core/utils/hijri_date.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
@@ -19,6 +20,8 @@ import "package:al_quran_v3/src/features/search/presentation/screens/quran_searc
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_cubit.dart";
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/app_bar_streak_badge.dart";
+import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -36,13 +39,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   late PageController pageController;
   bool _hasCompassSensor = true;
   StreamSubscription<Uri?>? _widgetClickSubscription;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     // Read cached compass sensor state if available
     try {
       final cached = Hive.box("user").get("has_compass_sensor");
@@ -283,7 +287,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      try {
+        context.read<SyncCubit>().triggerAutoSync();
+      } catch (_) {}
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _widgetClickSubscription?.cancel();
     pageController.dispose();
     super.dispose();
@@ -310,9 +324,32 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               backgroundColor: Theme.of(context).colorScheme.surface,
-              title: Text(l10n.alQuran),
+              title: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l10n.alQuran,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    hijriDate(context),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
               centerTitle: true,
               actions: [
+                const AppBarStreakBadge(),
+                const Gap(4),
                 IconButton(
                   tooltip: l10n.search,
                   icon: const Icon(FluentIcons.search_24_regular),

@@ -12,6 +12,8 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_qura
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_overview.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
@@ -75,6 +77,11 @@ class QuranScriptSettings extends StatelessWidget {
           quranViewState,
           cubit,
         );
+        final autoScrollCard = _buildAutoScrollCard(
+          context,
+          themeState,
+          isDark,
+        );
 
         return LayoutBuilder(
           builder: (context, constraints) {
@@ -100,6 +107,8 @@ class QuranScriptSettings extends StatelessWidget {
                         displayCard,
                         const Gap(14),
                         audioCard,
+                        const Gap(14),
+                        autoScrollCard,
                       ],
                     ),
                   ),
@@ -117,6 +126,8 @@ class QuranScriptSettings extends StatelessWidget {
                 displayCard,
                 const Gap(14),
                 audioCard,
+                const Gap(14),
+                autoScrollCard,
               ],
             );
           },
@@ -433,6 +444,89 @@ class QuranScriptSettings extends StatelessWidget {
             themePrimary: themeState.primary,
             onChanged: (v) =>
                 cubit.setViewOptions(scrollWithRecitation: v),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAutoScrollCard(
+    BuildContext context,
+    ThemeState themeState,
+    bool isDark,
+  ) {
+    return _buildSectionContainer(
+      isDark: isDark,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            icon: Icons.motion_photos_auto_rounded,
+            title: "Auto-Scroll Reading",
+            themePrimary: themeState.primary,
+          ),
+          const Gap(8),
+          Text(
+            "Hands-free reading speed calibrated to word count for fluent recitation.",
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+            ),
+          ),
+          const Gap(14),
+          BlocBuilder<AutoScrollCubit, AutoScrollState>(
+            builder: (context, autoScrollState) {
+              return Row(
+                children: [
+                  Text(
+                    "Default Reading Speed",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 4,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove_rounded, size: 16),
+                          visualDensity: VisualDensity.compact,
+                          onPressed: () =>
+                              context.read<AutoScrollCubit>().decreaseSpeed(),
+                        ),
+                        Text(
+                          "${autoScrollState.speed.toStringAsFixed(autoScrollState.speed % 1 == 0 ? 0 : (autoScrollState.speed == 0.75 || autoScrollState.speed == 1.25 ? 2 : 1))}x",
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: themeState.primary,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add_rounded, size: 16),
+                          visualDensity: VisualDensity.compact,
+                          onPressed: () =>
+                              context.read<AutoScrollCubit>().increaseSpeed(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),

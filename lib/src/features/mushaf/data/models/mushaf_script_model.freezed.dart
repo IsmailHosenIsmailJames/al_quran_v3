@@ -29,16 +29,21 @@ $MushafScriptPageModelCopyWith<MushafScriptPageModel> get copyWith => _$MushafSc
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafScriptPageModel&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&const DeepCollectionEquality().equals(other.lines, lines));
+  final _this = this as MushafScriptPageModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafScriptPageModel&&(identical(other.pageNumber, _this.pageNumber) || other.pageNumber == _this.pageNumber)&&const DeepCollectionEquality().equals(other.lines, _this.lines));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,pageNumber,const DeepCollectionEquality().hash(lines));
+int get hashCode {
+  final _this = this as MushafScriptPageModel;
+  return Object.hash(runtimeType,_this.pageNumber,const DeepCollectionEquality().hash(_this.lines));
+}
 
 @override
 String toString() {
-  return 'MushafScriptPageModel(pageNumber: $pageNumber, lines: $lines)';
+  final _this = this as MushafScriptPageModel;
+  return 'MushafScriptPageModel(pageNumber: ${_this.pageNumber}, lines: ${_this.lines})';
 }
 
 
@@ -236,16 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafScriptPageModel&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&const DeepCollectionEquality().equals(other._lines, _lines));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafScriptPageModel&&(identical(other.pageNumber, pageNumber) || other.pageNumber == pageNumber)&&const DeepCollectionEquality().equals(other.lines, _lines));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,pageNumber,const DeepCollectionEquality().hash(_lines));
+int get hashCode {
+    return Object.hash(runtimeType,pageNumber,const DeepCollectionEquality().hash(_lines));
+}
 
 @override
 String toString() {
-  return 'MushafScriptPageModel(pageNumber: $pageNumber, lines: $lines)';
+    return 'MushafScriptPageModel(pageNumber: $pageNumber, lines: $lines)';
 }
 
 
@@ -301,16 +308,21 @@ $MushafLineCopyWith<MushafLine> get copyWith => _$MushafLineCopyWithImpl<MushafL
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafLine&&(identical(other.lineNumber, lineNumber) || other.lineNumber == lineNumber)&&(identical(other.lineType, lineType) || other.lineType == lineType)&&(identical(other.isCentered, isCentered) || other.isCentered == isCentered)&&const DeepCollectionEquality().equals(other.surahNumber, surahNumber)&&(identical(other.content, content) || other.content == content)&&(identical(other.firstWordId, firstWordId) || other.firstWordId == firstWordId)&&(identical(other.lastWordId, lastWordId) || other.lastWordId == lastWordId));
+  final _this = this as MushafLine;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MushafLine&&(identical(other.lineNumber, _this.lineNumber) || other.lineNumber == _this.lineNumber)&&(identical(other.lineType, _this.lineType) || other.lineType == _this.lineType)&&(identical(other.isCentered, _this.isCentered) || other.isCentered == _this.isCentered)&&const DeepCollectionEquality().equals(other.surahNumber, _this.surahNumber)&&(identical(other.content, _this.content) || other.content == _this.content)&&(identical(other.firstWordId, _this.firstWordId) || other.firstWordId == _this.firstWordId)&&(identical(other.lastWordId, _this.lastWordId) || other.lastWordId == _this.lastWordId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,lineNumber,lineType,isCentered,const DeepCollectionEquality().hash(surahNumber),content,firstWordId,lastWordId);
+int get hashCode {
+  final _this = this as MushafLine;
+  return Object.hash(runtimeType,_this.lineNumber,_this.lineType,_this.isCentered,const DeepCollectionEquality().hash(_this.surahNumber),_this.content,_this.firstWordId,_this.lastWordId);
+}
 
 @override
 String toString() {
-  return 'MushafLine(lineNumber: $lineNumber, lineType: $lineType, isCentered: $isCentered, surahNumber: $surahNumber, content: $content, firstWordId: $firstWordId, lastWordId: $lastWordId)';
+  final _this = this as MushafLine;
+  return 'MushafLine(lineNumber: ${_this.lineNumber}, lineType: ${_this.lineType}, isCentered: ${_this.isCentered}, surahNumber: ${_this.surahNumber}, content: ${_this.content}, firstWordId: ${_this.firstWordId}, lastWordId: ${_this.lastWordId})';
 }
 
 
@@ -512,16 +524,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafLine&&(identical(other.lineNumber, lineNumber) || other.lineNumber == lineNumber)&&(identical(other.lineType, lineType) || other.lineType == lineType)&&(identical(other.isCentered, isCentered) || other.isCentered == isCentered)&&const DeepCollectionEquality().equals(other.surahNumber, surahNumber)&&(identical(other.content, content) || other.content == content)&&(identical(other.firstWordId, firstWordId) || other.firstWordId == firstWordId)&&(identical(other.lastWordId, lastWordId) || other.lastWordId == lastWordId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MushafLine&&(identical(other.lineNumber, lineNumber) || other.lineNumber == lineNumber)&&(identical(other.lineType, lineType) || other.lineType == lineType)&&(identical(other.isCentered, isCentered) || other.isCentered == isCentered)&&const DeepCollectionEquality().equals(other.surahNumber, surahNumber)&&(identical(other.content, content) || other.content == content)&&(identical(other.firstWordId, firstWordId) || other.firstWordId == firstWordId)&&(identical(other.lastWordId, lastWordId) || other.lastWordId == lastWordId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,lineNumber,lineType,isCentered,const DeepCollectionEquality().hash(surahNumber),content,firstWordId,lastWordId);
+int get hashCode {
+    return Object.hash(runtimeType,lineNumber,lineType,isCentered,const DeepCollectionEquality().hash(surahNumber),content,firstWordId,lastWordId);
+}
 
 @override
 String toString() {
-  return 'MushafLine(lineNumber: $lineNumber, lineType: $lineType, isCentered: $isCentered, surahNumber: $surahNumber, content: $content, firstWordId: $firstWordId, lastWordId: $lastWordId)';
+    return 'MushafLine(lineNumber: $lineNumber, lineType: $lineType, isCentered: $isCentered, surahNumber: $surahNumber, content: $content, firstWordId: $firstWordId, lastWordId: $lastWordId)';
 }
 
 

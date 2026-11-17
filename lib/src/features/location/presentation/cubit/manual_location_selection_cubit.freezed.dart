@@ -26,16 +26,21 @@ $ManualLocationSelectionStateCopyWith<ManualLocationSelectionState> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ManualLocationSelectionState&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.country, country) || other.country == country)&&(identical(other.city, city) || other.city == city)&&const DeepCollectionEquality().equals(other.locationData, locationData)&&const DeepCollectionEquality().equals(other.cityList, cityList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
+  final _this = this as ManualLocationSelectionState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ManualLocationSelectionState&&(identical(other.downloadProgress, _this.downloadProgress) || other.downloadProgress == _this.downloadProgress)&&(identical(other.country, _this.country) || other.country == _this.country)&&(identical(other.city, _this.city) || other.city == _this.city)&&const DeepCollectionEquality().equals(other.locationData, _this.locationData)&&const DeepCollectionEquality().equals(other.cityList, _this.cityList)&&(identical(other.isLoading, _this.isLoading) || other.isLoading == _this.isLoading)&&(identical(other.isError, _this.isError) || other.isError == _this.isError)&&(identical(other.isSuccess, _this.isSuccess) || other.isSuccess == _this.isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,downloadProgress,country,city,const DeepCollectionEquality().hash(locationData),const DeepCollectionEquality().hash(cityList),isLoading,isError,isSuccess);
+int get hashCode {
+  final _this = this as ManualLocationSelectionState;
+  return Object.hash(runtimeType,_this.downloadProgress,_this.country,_this.city,const DeepCollectionEquality().hash(_this.locationData),const DeepCollectionEquality().hash(_this.cityList),_this.isLoading,_this.isError,_this.isSuccess);
+}
 
 @override
 String toString() {
-  return 'ManualLocationSelectionState(downloadProgress: $downloadProgress, country: $country, city: $city, locationData: $locationData, cityList: $cityList, isLoading: $isLoading, isError: $isError, isSuccess: $isSuccess)';
+  final _this = this as ManualLocationSelectionState;
+  return 'ManualLocationSelectionState(downloadProgress: ${_this.downloadProgress}, country: ${_this.country}, city: ${_this.city}, locationData: ${_this.locationData}, cityList: ${_this.cityList}, isLoading: ${_this.isLoading}, isError: ${_this.isError}, isSuccess: ${_this.isSuccess})';
 }
 
 
@@ -252,16 +257,18 @@ _$ManualLocationSelectionStateCopyWith<_ManualLocationSelectionState> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ManualLocationSelectionState&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.country, country) || other.country == country)&&(identical(other.city, city) || other.city == city)&&const DeepCollectionEquality().equals(other._locationData, _locationData)&&const DeepCollectionEquality().equals(other._cityList, _cityList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ManualLocationSelectionState&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.country, country) || other.country == country)&&(identical(other.city, city) || other.city == city)&&const DeepCollectionEquality().equals(other.locationData, _locationData)&&const DeepCollectionEquality().equals(other.cityList, _cityList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,downloadProgress,country,city,const DeepCollectionEquality().hash(_locationData),const DeepCollectionEquality().hash(_cityList),isLoading,isError,isSuccess);
+int get hashCode {
+    return Object.hash(runtimeType,downloadProgress,country,city,const DeepCollectionEquality().hash(_locationData),const DeepCollectionEquality().hash(_cityList),isLoading,isError,isSuccess);
+}
 
 @override
 String toString() {
-  return 'ManualLocationSelectionState(downloadProgress: $downloadProgress, country: $country, city: $city, locationData: $locationData, cityList: $cityList, isLoading: $isLoading, isError: $isError, isSuccess: $isSuccess)';
+    return 'ManualLocationSelectionState(downloadProgress: $downloadProgress, country: $country, city: $city, locationData: $locationData, cityList: $cityList, isLoading: $isLoading, isError: $isError, isSuccess: $isSuccess)';
 }
 
 

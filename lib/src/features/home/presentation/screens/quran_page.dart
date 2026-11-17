@@ -3,10 +3,9 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_juz.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_pages_info.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/today_plan_helper_card.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_page_shimmer.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/continue_reading_hero_card.dart";
-import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/hadith_companion_card.dart";
-import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_history_carousel.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_access_bar.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_quick_actions_bar.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_tab_bar_header.dart";
@@ -93,7 +92,7 @@ class _QuranPageState extends State<QuranPage>
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                // Top Sections: Continue Reading, Quick Actions, History, Shortcuts
+                // Top Sections: Continue Reading, Quick Actions, Shortcuts/History
                 SliverToBoxAdapter(
                   child: isWideHeader
                       ? const Column(
@@ -111,18 +110,16 @@ class _QuranPageState extends State<QuranPage>
                                 ),
                               ],
                             ),
-                            QuranHistoryCarousel(),
+                            TodayPlanHelperCard(),
                             QuranQuickAccessBar(),
-                            HadithCompanionCard(),
                           ],
                         )
                       : const Column(
                           children: [
                             ContinueReadingHeroCard(),
+                            TodayPlanHelperCard(),
                             QuranQuickActionsBar(),
-                            QuranHistoryCarousel(),
                             QuranQuickAccessBar(),
-                            HadithCompanionCard(),
                           ],
                         ),
                 ),

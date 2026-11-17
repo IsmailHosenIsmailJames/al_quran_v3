@@ -5,7 +5,7 @@ import java.io.FileInputStream
 plugins {
     id("com.android.application")
     // START: FlutterFire Configuration
-    // id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
     // END: FlutterFire Configuration
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
@@ -43,29 +43,44 @@ android {
         multiDexEnabled = true
     }
 
-    packagingOptions {
+    packaging {
         jniLibs {
             useLegacyPackaging = true
         }
-     }
+    }
 
     signingConfigs {
         if (keystorePropertiesFile.exists()) {
-            create("release") {
+            val keyConfig: com.android.build.api.dsl.ApkSigningConfig.() -> Unit = {
                 keyAlias = keystoreProperties["keyAlias"] as? String ?: ""
                 keyPassword = keystoreProperties["keyPassword"] as? String ?: ""
-                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+                storeFile = keystoreProperties["storeFile"]?.let {
+                    val f = file(it)
+                    if (f.exists()) f else rootProject.file(it)
+                }
                 storePassword = keystoreProperties["storePassword"] as? String ?: ""
             }
+            create("release", keyConfig)
+            getByName("debug", keyConfig)
         }
     }
 
     buildTypes {
-        release {
+        val appSigningConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+
+        getByName("debug") {
+            signingConfig = appSigningConfig
+        }
+        getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+            signingConfig = appSigningConfig
+        }
+        maybeCreate("profile").apply {
+            initWith(getByName("release"))
+            matchingFallbacks += listOf("release")
+            signingConfig = appSigningConfig
         }
     }
     buildToolsVersion = "36.1.0"

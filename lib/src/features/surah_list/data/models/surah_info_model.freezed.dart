@@ -29,16 +29,21 @@ $SurahInfoModelCopyWith<SurahInfoModel> get copyWith => _$SurahInfoModelCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahInfoModel&&(identical(other.id, id) || other.id == id)&&(identical(other.revelationOrder, revelationOrder) || other.revelationOrder == revelationOrder)&&(identical(other.revelationPlace, revelationPlace) || other.revelationPlace == revelationPlace)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.pagesRange, pagesRange) || other.pagesRange == pagesRange)&&(identical(other.noBismillah, noBismillah) || other.noBismillah == noBismillah));
+  final _this = this as SurahInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahInfoModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.revelationOrder, _this.revelationOrder) || other.revelationOrder == _this.revelationOrder)&&(identical(other.revelationPlace, _this.revelationPlace) || other.revelationPlace == _this.revelationPlace)&&(identical(other.versesCount, _this.versesCount) || other.versesCount == _this.versesCount)&&(identical(other.pagesRange, _this.pagesRange) || other.pagesRange == _this.pagesRange)&&(identical(other.noBismillah, _this.noBismillah) || other.noBismillah == _this.noBismillah));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,revelationOrder,revelationPlace,versesCount,pagesRange,noBismillah);
+int get hashCode {
+  final _this = this as SurahInfoModel;
+  return Object.hash(runtimeType,_this.id,_this.revelationOrder,_this.revelationPlace,_this.versesCount,_this.pagesRange,_this.noBismillah);
+}
 
 @override
 String toString() {
-  return 'SurahInfoModel(id: $id, revelationOrder: $revelationOrder, revelationPlace: $revelationPlace, versesCount: $versesCount, pagesRange: $pagesRange, noBismillah: $noBismillah)';
+  final _this = this as SurahInfoModel;
+  return 'SurahInfoModel(id: ${_this.id}, revelationOrder: ${_this.revelationOrder}, revelationPlace: ${_this.revelationPlace}, versesCount: ${_this.versesCount}, pagesRange: ${_this.pagesRange}, noBismillah: ${_this.noBismillah})';
 }
 
 
@@ -238,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahInfoModel&&(identical(other.id, id) || other.id == id)&&(identical(other.revelationOrder, revelationOrder) || other.revelationOrder == revelationOrder)&&(identical(other.revelationPlace, revelationPlace) || other.revelationPlace == revelationPlace)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.pagesRange, pagesRange) || other.pagesRange == pagesRange)&&(identical(other.noBismillah, noBismillah) || other.noBismillah == noBismillah));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahInfoModel&&(identical(other.id, id) || other.id == id)&&(identical(other.revelationOrder, revelationOrder) || other.revelationOrder == revelationOrder)&&(identical(other.revelationPlace, revelationPlace) || other.revelationPlace == revelationPlace)&&(identical(other.versesCount, versesCount) || other.versesCount == versesCount)&&(identical(other.pagesRange, pagesRange) || other.pagesRange == pagesRange)&&(identical(other.noBismillah, noBismillah) || other.noBismillah == noBismillah));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,revelationOrder,revelationPlace,versesCount,pagesRange,noBismillah);
+int get hashCode {
+    return Object.hash(runtimeType,id,revelationOrder,revelationPlace,versesCount,pagesRange,noBismillah);
+}
 
 @override
 String toString() {
-  return 'SurahInfoModel(id: $id, revelationOrder: $revelationOrder, revelationPlace: $revelationPlace, versesCount: $versesCount, pagesRange: $pagesRange, noBismillah: $noBismillah)';
+    return 'SurahInfoModel(id: $id, revelationOrder: $revelationOrder, revelationPlace: $revelationPlace, versesCount: $versesCount, pagesRange: $pagesRange, noBismillah: $noBismillah)';
 }
 
 

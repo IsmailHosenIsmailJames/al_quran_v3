@@ -26,16 +26,21 @@ $PrayerTimeEntityCopyWith<PrayerTimeEntity> get copyWith => _$PrayerTimeEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerTimeEntity&&(identical(other.fajr, fajr) || other.fajr == fajr)&&(identical(other.sunrise, sunrise) || other.sunrise == sunrise)&&(identical(other.dhuhr, dhuhr) || other.dhuhr == dhuhr)&&(identical(other.asr, asr) || other.asr == asr)&&(identical(other.maghrib, maghrib) || other.maghrib == maghrib)&&(identical(other.isha, isha) || other.isha == isha)&&(identical(other.nextPrayerName, nextPrayerName) || other.nextPrayerName == nextPrayerName)&&(identical(other.nextPrayerTime, nextPrayerTime) || other.nextPrayerTime == nextPrayerTime)&&(identical(other.timeRemaining, timeRemaining) || other.timeRemaining == timeRemaining));
+  final _this = this as PrayerTimeEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerTimeEntity&&(identical(other.fajr, _this.fajr) || other.fajr == _this.fajr)&&(identical(other.sunrise, _this.sunrise) || other.sunrise == _this.sunrise)&&(identical(other.dhuhr, _this.dhuhr) || other.dhuhr == _this.dhuhr)&&(identical(other.asr, _this.asr) || other.asr == _this.asr)&&(identical(other.maghrib, _this.maghrib) || other.maghrib == _this.maghrib)&&(identical(other.isha, _this.isha) || other.isha == _this.isha)&&(identical(other.nextPrayerName, _this.nextPrayerName) || other.nextPrayerName == _this.nextPrayerName)&&(identical(other.nextPrayerTime, _this.nextPrayerTime) || other.nextPrayerTime == _this.nextPrayerTime)&&(identical(other.timeRemaining, _this.timeRemaining) || other.timeRemaining == _this.timeRemaining));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fajr,sunrise,dhuhr,asr,maghrib,isha,nextPrayerName,nextPrayerTime,timeRemaining);
+int get hashCode {
+  final _this = this as PrayerTimeEntity;
+  return Object.hash(runtimeType,_this.fajr,_this.sunrise,_this.dhuhr,_this.asr,_this.maghrib,_this.isha,_this.nextPrayerName,_this.nextPrayerTime,_this.timeRemaining);
+}
 
 @override
 String toString() {
-  return 'PrayerTimeEntity(fajr: $fajr, sunrise: $sunrise, dhuhr: $dhuhr, asr: $asr, maghrib: $maghrib, isha: $isha, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, timeRemaining: $timeRemaining)';
+  final _this = this as PrayerTimeEntity;
+  return 'PrayerTimeEntity(fajr: ${_this.fajr}, sunrise: ${_this.sunrise}, dhuhr: ${_this.dhuhr}, asr: ${_this.asr}, maghrib: ${_this.maghrib}, isha: ${_this.isha}, nextPrayerName: ${_this.nextPrayerName}, nextPrayerTime: ${_this.nextPrayerTime}, timeRemaining: ${_this.timeRemaining})';
 }
 
 
@@ -238,16 +243,18 @@ _$PrayerTimeEntityCopyWith<_PrayerTimeEntity> get copyWith => __$PrayerTimeEntit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerTimeEntity&&(identical(other.fajr, fajr) || other.fajr == fajr)&&(identical(other.sunrise, sunrise) || other.sunrise == sunrise)&&(identical(other.dhuhr, dhuhr) || other.dhuhr == dhuhr)&&(identical(other.asr, asr) || other.asr == asr)&&(identical(other.maghrib, maghrib) || other.maghrib == maghrib)&&(identical(other.isha, isha) || other.isha == isha)&&(identical(other.nextPrayerName, nextPrayerName) || other.nextPrayerName == nextPrayerName)&&(identical(other.nextPrayerTime, nextPrayerTime) || other.nextPrayerTime == nextPrayerTime)&&(identical(other.timeRemaining, timeRemaining) || other.timeRemaining == timeRemaining));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerTimeEntity&&(identical(other.fajr, fajr) || other.fajr == fajr)&&(identical(other.sunrise, sunrise) || other.sunrise == sunrise)&&(identical(other.dhuhr, dhuhr) || other.dhuhr == dhuhr)&&(identical(other.asr, asr) || other.asr == asr)&&(identical(other.maghrib, maghrib) || other.maghrib == maghrib)&&(identical(other.isha, isha) || other.isha == isha)&&(identical(other.nextPrayerName, nextPrayerName) || other.nextPrayerName == nextPrayerName)&&(identical(other.nextPrayerTime, nextPrayerTime) || other.nextPrayerTime == nextPrayerTime)&&(identical(other.timeRemaining, timeRemaining) || other.timeRemaining == timeRemaining));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fajr,sunrise,dhuhr,asr,maghrib,isha,nextPrayerName,nextPrayerTime,timeRemaining);
+int get hashCode {
+    return Object.hash(runtimeType,fajr,sunrise,dhuhr,asr,maghrib,isha,nextPrayerName,nextPrayerTime,timeRemaining);
+}
 
 @override
 String toString() {
-  return 'PrayerTimeEntity(fajr: $fajr, sunrise: $sunrise, dhuhr: $dhuhr, asr: $asr, maghrib: $maghrib, isha: $isha, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, timeRemaining: $timeRemaining)';
+    return 'PrayerTimeEntity(fajr: $fajr, sunrise: $sunrise, dhuhr: $dhuhr, asr: $asr, maghrib: $maghrib, isha: $isha, nextPrayerName: $nextPrayerName, nextPrayerTime: $nextPrayerTime, timeRemaining: $timeRemaining)';
 }
 
 
