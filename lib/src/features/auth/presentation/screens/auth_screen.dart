@@ -155,9 +155,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   // 1. Compact Header Banner
                   _buildCompactHeader(l10n, themeState, isDark),
 
-                  const Gap(12),
+                  const Gap(14),
 
-                  // 2. Feature Value Chips Row
+                  // 2. Feature Value Showcase Grid
                   _buildFeatureChips(l10n, themeState, isDark),
 
                   const Gap(16),
@@ -165,7 +165,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   // 3. Google Sign-In Button
                   _buildGoogleSignInButton(l10n, isLoading, isDark),
 
-                  const Gap(14),
+                  const Gap(16),
 
                   // 4. Subtle OR Divider
                   Row(
@@ -176,12 +176,12 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
                           "OR",
                           style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w700,
                             color: isDark
                                 ? Colors.grey.shade500
                                 : Colors.grey.shade500,
@@ -196,12 +196,12 @@ class _AuthScreenState extends State<AuthScreen> {
                     ],
                   ),
 
-                  const Gap(14),
+                  const Gap(16),
 
                   // 5. Segmented Tab Switch (Sign In / Create Account)
                   _buildSegmentedSwitch(l10n, themeState, isDark),
 
-                  const Gap(14),
+                  const Gap(16),
 
                   // 6. Auth Form (Sign In or Sign Up)
                   AnimatedSwitcher(
@@ -211,33 +211,49 @@ class _AuthScreenState extends State<AuthScreen> {
                         : _buildSignUpForm(l10n, themeState, isDark, isLoading),
                   ),
 
-                  const Gap(12),
+                  const Gap(14),
 
-                  // 7. Continue as Guest (with transparent notice)
-                  TextButton.icon(
-                    onPressed: isLoading
-                        ? null
-                        : () => context.read<AuthCubit>().signInAnonymously(),
-                    icon: Icon(
-                      FluentIcons.person_question_mark_24_regular,
-                      size: 16,
-                      color: isDark
-                          ? Colors.grey.shade400
-                          : Colors.grey.shade700,
-                    ),
-                    label: Text(
-                      "${l10n.continueAsGuest} (Local storage only)",
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.w500,
+                  // 7. Continue as Guest (with clean button design)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 44,
+                    child: OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                        side: BorderSide(
+                          color: isDark ? Colors.white12 : Colors.grey.shade300,
+                          width: 1.1,
+                        ),
+                        backgroundColor: isDark
+                            ? Colors.white.withValues(alpha: 0.02)
+                            : Colors.white,
+                      ),
+                      onPressed: isLoading
+                          ? null
+                          : () => context.read<AuthCubit>().signInAnonymously(),
+                      icon: Icon(
+                        FluentIcons.person_question_mark_24_regular,
+                        size: 17,
                         color: isDark
-                            ? Colors.grey.shade300
+                            ? Colors.grey.shade400
                             : Colors.grey.shade700,
+                      ),
+                      label: Text(
+                        "${l10n.continueAsGuest} (Local storage only)",
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
+                        ),
                       ),
                     ),
                   ),
 
-                  const Gap(4),
+                  const Gap(12),
 
                   // 8. Privacy Policy notice
                   InkWell(
@@ -248,7 +264,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         l10n.privacyPolicyNotice,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 10.5,
+                          fontSize: 11,
                           color: themeState.primary,
                           decoration: TextDecoration.underline,
                         ),
@@ -271,24 +287,35 @@ class _AuthScreenState extends State<AuthScreen> {
   ) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark
-            ? themeState.primary.withValues(alpha: 0.14)
-            : themeState.primaryShade100,
-        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [
+                  themeState.primary.withValues(alpha: 0.22),
+                  themeState.primary.withValues(alpha: 0.08),
+                ]
+              : [
+                  themeState.primaryShade100,
+                  themeState.primaryShade100.withValues(alpha: 0.45),
+                ],
+        ),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: themeState.primary.withValues(alpha: isDark ? 0.3 : 0.2),
-          width: 1.1,
+          color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.25),
+          width: 1.2,
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: themeState.primary.withValues(alpha: 0.18),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               FluentIcons.cloud_sync_24_filled,
@@ -296,26 +323,47 @@ class _AuthScreenState extends State<AuthScreen> {
               color: themeState.primary,
             ),
           ),
-          const Gap(12),
+          const Gap(14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  l10n.syncedCloudBackup,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 15,
-                    color: themeState.primary,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      l10n.syncedCloudBackup,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15.5,
+                        color: themeState.primary,
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                      decoration: BoxDecoration(
+                        color: themeState.primary.withValues(alpha: 0.16),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        "FREE",
+                        style: TextStyle(
+                          fontSize: 9.5,
+                          fontWeight: FontWeight.w900,
+                          color: themeState.primary,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const Gap(2),
+                const Gap(4),
                 Text(
-                  l10n.syncedCloudBackupDesc,
+                  "Keep your notes, bookmarks, streaks, daily goals, and reading history securely synced across all your devices.",
                   style: TextStyle(
-                    fontSize: 11.5,
-                    height: 1.25,
+                    fontSize: 12,
+                    height: 1.35,
                     color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
                   ),
                 ),
@@ -333,50 +381,72 @@ class _AuthScreenState extends State<AuthScreen> {
     bool isDark,
   ) {
     final chips = [
-      ("📝", l10n.notes),
-      ("📌", l10n.pinned),
-      ("📖", l10n.history),
-      ("⚡", l10n.quickAccess),
+      (FluentIcons.notepad_24_filled, l10n.notes),
+      (FluentIcons.pin_24_filled, l10n.pinned),
+      (FluentIcons.history_24_filled, l10n.history),
+      (Icons.local_fire_department_rounded, "Streaks"),
+      (FluentIcons.book_star_24_filled, "Khatam"),
+      (FluentIcons.flash_24_filled, l10n.quickAccess),
     ];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: chips.map((chip) {
-        return Expanded(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 3),
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? Colors.white.withValues(alpha: 0.04)
-                  : Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: isDark
-                    ? Colors.white.withValues(alpha: 0.06)
-                    : Colors.grey.shade200,
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(chip.$1, style: const TextStyle(fontSize: 13)),
-                const Gap(3),
-                Text(
-                  chip.$2,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final cardWidth = (constraints.maxWidth - 16) / 3;
+        return Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: chips.map((chip) {
+            return SizedBox(
+              width: cardWidth,
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 6),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF1E1E1E)
+                      : Colors.white,
+                  borderRadius: BorderRadius.circular(13),
+                  border: Border.all(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade200,
                   ),
+                  boxShadow: isDark
+                      ? null
+                      : [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.02),
+                            blurRadius: 4,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
                 ),
-              ],
-            ),
-          ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      chip.$1,
+                      size: 20,
+                      color: themeState.primary,
+                    ),
+                    const Gap(5),
+                    Text(
+                      chip.$2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: isDark ? Colors.grey.shade200 : Colors.grey.shade800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 
@@ -387,19 +457,21 @@ class _AuthScreenState extends State<AuthScreen> {
   ) {
     return SizedBox(
       width: double.infinity,
-      height: 46,
+      height: 48,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(14),
           ),
           side: BorderSide(
             color: isDark ? Colors.white24 : Colors.grey.shade300,
             width: 1.1,
           ),
           backgroundColor: isDark
-              ? Colors.white.withValues(alpha: 0.03)
+              ? const Color(0xFF1E1E1E)
               : Colors.white,
+          elevation: isDark ? 0 : 0.5,
+          shadowColor: Colors.black.withValues(alpha: 0.1),
         ),
         onPressed: isLoading
             ? null
@@ -409,17 +481,17 @@ class _AuthScreenState extends State<AuthScreen> {
           children: [
             Image.asset(
               "assets/img/google.png",
-              height: 20,
-              width: 20,
+              height: 22,
+              width: 22,
               errorBuilder: (ctx, err, stack) =>
-                  const Icon(Icons.g_mobiledata_rounded, size: 24),
+                  const Icon(Icons.g_mobiledata_rounded, size: 26),
             ),
-            const Gap(10),
+            const Gap(12),
             Text(
               l10n.googleSignIn,
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 14,
+                fontSize: 14.5,
               ),
             ),
           ],
@@ -434,11 +506,11 @@ class _AuthScreenState extends State<AuthScreen> {
     bool isDark,
   ) {
     return Container(
-      height: 38,
-      padding: const EdgeInsets.all(3),
+      height: 42,
+      padding: const EdgeInsets.all(3.5),
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF1E1E1E) : Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isDark ? Colors.white12 : Colors.grey.shade300,
           width: 0.8,
@@ -449,7 +521,7 @@ class _AuthScreenState extends State<AuthScreen> {
           Expanded(
             child: InkWell(
               onTap: () => setState(() => _selectedTabIndex = 0),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(11),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 alignment: Alignment.center,
@@ -457,13 +529,13 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: _selectedTabIndex == 0
                       ? themeState.primary
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(11),
                   boxShadow: _selectedTabIndex == 0
                       ? [
                           BoxShadow(
-                            color: themeState.primary.withValues(alpha: 0.25),
-                            blurRadius: 4,
-                            offset: const Offset(0, 1),
+                            color: themeState.primary.withValues(alpha: 0.28),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
                           ),
                         ]
                       : null,
@@ -471,10 +543,10 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Text(
                   l10n.signIn,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.5,
                     fontWeight: _selectedTabIndex == 0
                         ? FontWeight.bold
-                        : FontWeight.w500,
+                        : FontWeight.w600,
                     color: _selectedTabIndex == 0
                         ? Colors.white
                         : (isDark
@@ -489,7 +561,7 @@ class _AuthScreenState extends State<AuthScreen> {
           Expanded(
             child: InkWell(
               onTap: () => setState(() => _selectedTabIndex = 1),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(11),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 alignment: Alignment.center,
@@ -497,13 +569,13 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: _selectedTabIndex == 1
                       ? themeState.primary
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(11),
                   boxShadow: _selectedTabIndex == 1
                       ? [
                           BoxShadow(
-                            color: themeState.primary.withValues(alpha: 0.25),
-                            blurRadius: 4,
-                            offset: const Offset(0, 1),
+                            color: themeState.primary.withValues(alpha: 0.28),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
                           ),
                         ]
                       : null,
@@ -511,10 +583,10 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Text(
                   l10n.signUp,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13.5,
                     fontWeight: _selectedTabIndex == 1
                         ? FontWeight.bold
-                        : FontWeight.w500,
+                        : FontWeight.w600,
                     color: _selectedTabIndex == 1
                         ? Colors.white
                         : (isDark
@@ -542,49 +614,79 @@ class _AuthScreenState extends State<AuthScreen> {
         TextField(
           controller: _signInEmailController,
           keyboardType: TextInputType.emailAddress,
-          style: const TextStyle(fontSize: 13.5),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             labelText: l10n.email,
             isDense: true,
-            prefixIcon: const Icon(FluentIcons.mail_24_regular, size: 19),
+            prefixIcon: const Icon(FluentIcons.mail_24_regular, size: 20),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 11,
+              horizontal: 16,
+              vertical: 13,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white12 : Colors.grey.shade300,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white10 : Colors.grey.shade300,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: themeState.primary, width: 1.6),
             ),
           ),
         ),
-        const Gap(10),
+        const Gap(12),
         TextField(
           controller: _signInPasswordController,
           obscureText: _obscureSignInPassword,
-          style: const TextStyle(fontSize: 13.5),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             labelText: l10n.password,
             isDense: true,
             prefixIcon: const Icon(
               FluentIcons.lock_closed_24_regular,
-              size: 19,
+              size: 20,
             ),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 11,
+              horizontal: 16,
+              vertical: 13,
             ),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureSignInPassword
                     ? FluentIcons.eye_24_regular
                     : FluentIcons.eye_off_24_regular,
-                size: 19,
+                size: 20,
               ),
               onPressed: () => setState(
                 () => _obscureSignInPassword = !_obscureSignInPassword,
               ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white12 : Colors.grey.shade300,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white10 : Colors.grey.shade300,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: themeState.primary, width: 1.6),
             ),
           ),
         ),
@@ -599,7 +701,7 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Text(
               l10n.forgotPassword,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 12.5,
                 color: themeState.primary,
                 fontWeight: FontWeight.w600,
               ),
@@ -609,14 +711,14 @@ class _AuthScreenState extends State<AuthScreen> {
         const Gap(4),
         SizedBox(
           width: double.infinity,
-          height: 44,
+          height: 48,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: themeState.primary,
               foregroundColor: Colors.white,
               elevation: 1.5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(14),
               ),
             ),
             onPressed: isLoading
@@ -633,8 +735,8 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
             child: isLoading
                 ? const SizedBox(
-                    height: 18,
-                    width: 18,
+                    height: 20,
+                    width: 20,
                     child: CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 2,
@@ -644,7 +746,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     l10n.signIn,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14.5,
+                      fontSize: 15,
                     ),
                   ),
           ),
@@ -664,81 +766,126 @@ class _AuthScreenState extends State<AuthScreen> {
       children: [
         TextField(
           controller: _signUpNameController,
-          style: const TextStyle(fontSize: 13.5),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             labelText: l10n.fullName,
             isDense: true,
-            prefixIcon: const Icon(FluentIcons.person_24_regular, size: 19),
+            prefixIcon: const Icon(FluentIcons.person_24_regular, size: 20),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 11,
+              horizontal: 16,
+              vertical: 13,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white12 : Colors.grey.shade300,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white10 : Colors.grey.shade300,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: themeState.primary, width: 1.6),
             ),
           ),
         ),
-        const Gap(10),
+        const Gap(12),
         TextField(
           controller: _signUpEmailController,
           keyboardType: TextInputType.emailAddress,
-          style: const TextStyle(fontSize: 13.5),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             labelText: l10n.email,
             isDense: true,
-            prefixIcon: const Icon(FluentIcons.mail_24_regular, size: 19),
+            prefixIcon: const Icon(FluentIcons.mail_24_regular, size: 20),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 11,
+              horizontal: 16,
+              vertical: 13,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white12 : Colors.grey.shade300,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white10 : Colors.grey.shade300,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: themeState.primary, width: 1.6),
             ),
           ),
         ),
-        const Gap(10),
+        const Gap(12),
         TextField(
           controller: _signUpPasswordController,
           obscureText: _obscureSignUpPassword,
-          style: const TextStyle(fontSize: 13.5),
+          style: const TextStyle(fontSize: 14),
           decoration: InputDecoration(
             labelText: l10n.password,
             isDense: true,
             prefixIcon: const Icon(
               FluentIcons.lock_closed_24_regular,
-              size: 19,
+              size: 20,
             ),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 11,
+              horizontal: 16,
+              vertical: 13,
             ),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureSignUpPassword
                     ? FluentIcons.eye_24_regular
                     : FluentIcons.eye_off_24_regular,
-                size: 19,
+                size: 20,
               ),
               onPressed: () => setState(
                 () => _obscureSignUpPassword = !_obscureSignUpPassword,
               ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white12 : Colors.grey.shade300,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                color: isDark ? Colors.white10 : Colors.grey.shade300,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: themeState.primary, width: 1.6),
             ),
           ),
         ),
-        const Gap(14),
+        const Gap(16),
         SizedBox(
           width: double.infinity,
-          height: 44,
+          height: 48,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: themeState.primary,
               foregroundColor: Colors.white,
               elevation: 1.5,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(14),
               ),
             ),
             onPressed: isLoading
@@ -757,8 +904,8 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
             child: isLoading
                 ? const SizedBox(
-                    height: 18,
-                    width: 18,
+                    height: 20,
+                    width: 20,
                     child: CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 2,
@@ -768,7 +915,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     l10n.signUp,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14.5,
+                      fontSize: 15,
                     ),
                   ),
           ),

@@ -6,6 +6,7 @@ import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -79,13 +80,20 @@ class ProfileAccountScreen extends StatelessWidget {
         }
 
         final user = authState.user;
-        final displayName = user.displayName ?? (user.isAnonymous ? l10n.guestUser : "User");
-        final email = user.email ?? (user.isAnonymous ? "Guest Session" : "No email linked");
+        final displayName = (user.displayName != null && user.displayName!.trim().isNotEmpty)
+            ? user.displayName!
+            : (user.isAnonymous ? l10n.guestUser : "User");
+        final email = (user.email != null && user.email!.trim().isNotEmpty)
+            ? user.email!
+            : (user.isAnonymous ? "Guest Session (Local data only)" : "No email linked");
 
         final notesCount = Hive.box(CollectionType.notes.name).length;
         final pinsCount = Hive.box(CollectionType.pinned.name).length;
         final historyList = Hive.box("user").get("quran_browse_history", defaultValue: []) as List;
         final quickAccessList = Hive.box("user").get("quick_access", defaultValue: []) as List;
+        final streakState = context.watch<StreakCubit>().state;
+        final streak = streakState.streak;
+        final khatam = streakState.khatamPlan;
 
         return Scaffold(
           appBar: AppBar(
@@ -290,7 +298,7 @@ class ProfileAccountScreen extends StatelessWidget {
                                     ),
                                     const Gap(2),
                                     Text(
-                                      "Sync notes, pins & reading history automatically",
+                                      "Sync notes, pins, history, streaks & goals automatically",
                                       style: TextStyle(
                                         fontSize: 11,
                                         color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
@@ -311,15 +319,20 @@ class ProfileAccountScreen extends StatelessWidget {
                           const Gap(12),
                           SizedBox(
                             width: double.infinity,
+                            height: 44,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: themeState.primary,
                                 foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                elevation: 1,
                               ),
                               onPressed: isSyncing ? null : () => context.read<SyncCubit>().sync(user.uid),
                               icon: const Icon(FluentIcons.arrow_sync_24_regular, size: 18),
-                              label: Text(isSyncing ? l10n.syncing : l10n.syncNow),
+                              label: Text(
+                                isSyncing ? l10n.syncing : l10n.syncNow,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -384,6 +397,32 @@ class ProfileAccountScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const Gap(10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCountCard(
+                        icon: Icons.local_fire_department_rounded,
+                        label: "Daily Streak",
+                        valueStr: "${streak.currentStreak} ${streak.currentStreak == 1 ? "Day" : "Days"}",
+                        themeState: themeState,
+                        isDark: isDark,
+                      ),
+                    ),
+                    const Gap(10),
+                    Expanded(
+                      child: _buildCountCard(
+                        icon: FluentIcons.book_star_24_filled,
+                        label: "Khatam Goal",
+                        valueStr: (khatam != null && khatam.isActive)
+                            ? "${khatam.completedPages}/${khatam.totalPages} p"
+                            : "No Plan",
+                        themeState: themeState,
+                        isDark: isDark,
+                      ),
+                    ),
+                  ],
+                ),
 
                 const Gap(28),
 
@@ -432,36 +471,62 @@ class ProfileAccountScreen extends StatelessWidget {
   Widget _buildCountCard({
     required IconData icon,
     required String label,
-    required int count,
+    int? count,
+    String? valueStr,
     required ThemeState themeState,
     required bool isDark,
   }) {
+    final displayValue = valueStr ?? "${count ?? 0}";
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E1E1E) : Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(14),
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: isDark ? Colors.white12 : Colors.grey.shade200),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.02),
+                  blurRadius: 4,
+                  offset: const Offset(0, 1),
+                ),
+              ],
       ),
       child: Row(
         children: [
-          Icon(icon, color: themeState.primary, size: 22),
-          const Gap(10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "$count",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 11.5,
-                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: themeState.primary.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: themeState.primary, size: 20),
+          ),
+          const Gap(12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  displayValue,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
+                const Gap(2),
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ],
       ),
