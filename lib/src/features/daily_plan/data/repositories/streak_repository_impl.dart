@@ -1,6 +1,8 @@
 import "package:al_quran_v3/src/features/daily_plan/data/datasources/streak_local_datasource.dart";
+import "package:al_quran_v3/src/features/daily_plan/data/models/khatam_plan_model.dart";
 import "package:al_quran_v3/src/features/daily_plan/data/models/streak_model.dart";
 import "package:al_quran_v3/src/features/daily_plan/domain/entities/daily_plan_entity.dart";
+import "package:al_quran_v3/src/features/daily_plan/domain/entities/khatam_plan_entity.dart";
 import "package:al_quran_v3/src/features/daily_plan/domain/entities/streak_entity.dart";
 import "package:al_quran_v3/src/features/daily_plan/domain/repositories/i_streak_repository.dart";
 import "package:injectable/injectable.dart";
@@ -76,5 +78,33 @@ class StreakRepositoryImpl implements IStreakRepository {
   Future<DailyPlanEntity> setPlanCollapsed(bool collapsed) async {
     await _localDataSource.setIsPlanCollapsed(collapsed);
     return getDailyPlan();
+  }
+
+  @override
+  KhatamPlanEntity? getKhatamPlan() {
+    return _localDataSource.getKhatamPlan();
+  }
+
+  @override
+  Future<void> saveKhatamPlan(KhatamPlanEntity plan) {
+    return _localDataSource.saveKhatamPlan(KhatamPlanModel.fromEntity(plan));
+  }
+
+  @override
+  Future<void> deleteKhatamPlan() {
+    return _localDataSource.deleteKhatamPlan();
+  }
+
+  @override
+  Future<KhatamPlanEntity?> updateKhatamPages(int completedPages) async {
+    final current = _localDataSource.getKhatamPlan();
+    if (current == null) return null;
+    final updated = KhatamPlanModel.fromEntity(
+      current.copyWith(
+        completedPages: completedPages.clamp(0, current.totalPages),
+      ),
+    );
+    await _localDataSource.saveKhatamPlan(updated);
+    return updated;
   }
 }

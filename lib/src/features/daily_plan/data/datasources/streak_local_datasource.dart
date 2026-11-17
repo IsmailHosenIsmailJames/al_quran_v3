@@ -1,3 +1,4 @@
+import "package:al_quran_v3/src/features/daily_plan/data/models/khatam_plan_model.dart";
 import "package:al_quran_v3/src/features/daily_plan/data/models/streak_model.dart";
 import "package:al_quran_v3/src/features/daily_plan/domain/entities/daily_plan_entity.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -10,6 +11,7 @@ class StreakLocalDataSource {
   static const String _todayDateKey = "user_daily_streak_today_date";
   static const String _todayAyahsKey = "user_daily_streak_today_ayahs";
   static const String _todayPagesKey = "user_daily_streak_today_pages";
+  static const String _khatamPlanKey = "user_khatam_plan_data";
 
   Box get _box => Hive.box(_userBoxName);
 
@@ -164,6 +166,20 @@ class StreakLocalDataSource {
 
     if (pageNumber != null && !pagesRead.contains(pageNumber)) {
       pagesRead.add(pageNumber);
+
+      // Auto-advance active Khatam plan progress on new page read
+      final activeKhatam = getKhatamPlan();
+      if (activeKhatam != null &&
+          activeKhatam.isActive &&
+          !activeKhatam.isCompleted) {
+        final updatedKhatam = KhatamPlanModel.fromEntity(
+          activeKhatam.copyWith(
+            completedPages:
+                (activeKhatam.completedPages + 1).clamp(0, activeKhatam.totalPages),
+          ),
+        );
+        await saveKhatamPlan(updatedKhatam);
+      }
     }
 
     // Auto-detect Sunnah Surahs: Al-Mulk (67) or Friday Al-Kahf (18)
@@ -264,5 +280,21 @@ class StreakLocalDataSource {
 
   Future<void> saveStreak(StreakModel streak) async {
     await _box.put(_streakKey, streak.toMap());
+  }
+
+  KhatamPlanModel? getKhatamPlan() {
+    final raw = _box.get(_khatamPlanKey);
+    if (raw != null && raw is Map) {
+      return KhatamPlanModel.fromMap(Map<String, dynamic>.from(raw));
+    }
+    return null;
+  }
+
+  Future<void> saveKhatamPlan(KhatamPlanModel plan) async {
+    await _box.put(_khatamPlanKey, plan.toMap());
+  }
+
+  Future<void> deleteKhatamPlan() async {
+    await _box.delete(_khatamPlanKey);
   }
 }

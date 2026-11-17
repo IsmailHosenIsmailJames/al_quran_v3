@@ -1,6 +1,7 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/khatam_planner_modal.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -133,7 +134,60 @@ class AppBarStreakBadge extends StatelessWidget {
                   ],
                 ),
 
-                const Gap(16),
+                const Gap(12),
+
+                // Khatam Planner Shortcut
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(bottomSheetContext);
+                    KhatamPlannerModal.show(context);
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: themeState.primary
+                          .withValues(alpha: isDark ? 0.15 : 0.08),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: themeState.primary
+                            .withValues(alpha: isDark ? 0.3 : 0.2),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          FluentIcons.book_star_20_filled,
+                          size: 18,
+                          color: themeState.primary,
+                        ),
+                        const Gap(10),
+                        Expanded(
+                          child: Text(
+                            state.khatamPlan != null
+                                ? "${state.khatamPlan!.title}: ${state.khatamPlan!.roundedDailyPagesQuota} p/day (${state.khatamPlan!.progressPercent.toStringAsFixed(0)}%)"
+                                : "Set a Khatam & Daily Reading Goal",
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600,
+                              color: isDark ? Colors.white : Colors.black87,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 12,
+                          color: themeState.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const Gap(14),
 
                 // Hadith Footer
                 Container(

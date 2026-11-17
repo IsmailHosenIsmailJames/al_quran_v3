@@ -1,8 +1,10 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/domain/entities/daily_plan_entity.dart";
+import "package:al_quran_v3/src/features/daily_plan/domain/entities/khatam_plan_entity.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/khatam_planner_modal.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
@@ -230,10 +232,16 @@ class TodayPlanHelperCard extends StatelessWidget {
                       _buildTaskRow(
                         context,
                         isDone: isQuranDone,
-                        title: "Daily Quran Reading",
+                        title: state.khatamPlan != null
+                            ? "Daily Quran (${state.khatamPlan!.roundedDailyPagesQuota} p/day goal)"
+                            : "Daily Quran Reading",
                         subtitle: streak.isActiveToday
-                            ? "${streak.todayAyahsRead} ayahs read today"
-                            : "Read at least 1 page or Ayah",
+                            ? (state.khatamPlan != null
+                                ? "${streak.todayPagesRead} of ${state.khatamPlan!.roundedDailyPagesQuota} pages read today (${streak.todayAyahsRead} ayahs)"
+                                : "${streak.todayAyahsRead} ayahs read today")
+                            : (state.khatamPlan != null
+                                ? "Target: ${state.khatamPlan!.roundedDailyPagesQuota} pages today (Adaptive)"
+                                : "Read at least 1 page or Ayah"),
                         isDark: isDark,
                         primary: primary,
                         actionLabel: streak.isActiveToday ? "Resume" : "Read",
@@ -264,6 +272,16 @@ class TodayPlanHelperCard extends StatelessWidget {
                       _buildPrayersRow(
                         context,
                         plan: plan,
+                        isDark: isDark,
+                        primary: primary,
+                      ),
+
+                      const Gap(10),
+
+                      // Task 4 / Goal Banner: Khatam Planner
+                      _buildKhatamGoalTile(
+                        context,
+                        khatamPlan: state.khatamPlan,
                         isDark: isDark,
                         primary: primary,
                       ),
@@ -495,6 +513,97 @@ class TodayPlanHelperCard extends StatelessWidget {
           }).toList(),
         ),
       ],
+    );
+  }
+
+  Widget _buildKhatamGoalTile(
+    BuildContext context, {
+    required KhatamPlanEntity? khatamPlan,
+    required bool isDark,
+    required Color primary,
+  }) {
+    final hasPlan = khatamPlan != null;
+
+    return InkWell(
+      onTap: () {
+        HapticFeedback.selectionClick();
+        KhatamPlannerModal.show(context);
+      },
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+        decoration: BoxDecoration(
+          color: hasPlan
+              ? primary.withValues(alpha: isDark ? 0.12 : 0.05)
+              : (isDark
+                  ? Colors.white.withValues(alpha: 0.03)
+                  : Colors.grey.shade50),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: hasPlan
+                ? primary.withValues(alpha: isDark ? 0.3 : 0.18)
+                : (isDark
+                    ? Colors.white.withValues(alpha: 0.06)
+                    : Colors.grey.shade200),
+            width: 0.8,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              hasPlan
+                  ? FluentIcons.target_arrow_20_filled
+                  : FluentIcons.book_star_20_regular,
+              size: 16,
+              color: hasPlan
+                  ? primary
+                  : (isDark ? Colors.grey.shade400 : Colors.grey.shade600),
+            ),
+            const Gap(8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    hasPlan ? khatamPlan.title : "Set Khatam Goal",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    hasPlan
+                        ? "${khatamPlan.completedPages}/${khatamPlan.totalPages} pages (${khatamPlan.progressPercent.toStringAsFixed(0)}%) • ${khatamPlan.daysRemaining} days left"
+                        : "Plan a 30, 60 or 90 day Khatam with adaptive quota",
+                    style: TextStyle(
+                      fontSize: 10.5,
+                      color:
+                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2.5),
+              decoration: BoxDecoration(
+                color: primary.withValues(alpha: isDark ? 0.2 : 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                hasPlan ? "${khatamPlan.roundedDailyPagesQuota} p/d" : "Setup",
+                style: TextStyle(
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.bold,
+                  color: primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
