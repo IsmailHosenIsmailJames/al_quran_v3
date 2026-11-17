@@ -27,19 +27,9 @@ RepoType: git
 Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
 
 Builds:
-  - versionName: 4.2.0
-    versionCode: 101
-    commit: v4.2.0
-    subdir: .
-    output: build/app/outputs/flutter-apk/app-release.apk
-    build:
-      - $$flutter$$/bin/flutter config --no-analytics
-      - $$flutter$$/bin/flutter pub get
-      - $$flutter$$/bin/flutter build apk --release
-
   - versionName: 4.3.0
     versionCode: 103
-    commit: v4.3.0-foss
+    commit: 1acf51518e33e125efdf6bea12a9970513f0d012
     subdir: .
     output: build/app/outputs/flutter-apk/app-release.apk
     build:
