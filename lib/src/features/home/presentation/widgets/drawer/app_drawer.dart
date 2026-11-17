@@ -1,6 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/main.dart";
 import "package:al_quran_v3/src/core/services/companion_apps_service.dart";
+import "package:al_quran_v3/src/features/backup/presentation/widgets/local_backup_dialog.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
@@ -176,51 +177,65 @@ Widget drawerSection({
                 horizontal: 14,
                 vertical: 6,
               ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color: themeState.primary.withValues(alpha: 0.06),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: themeState.primary.withValues(alpha: 0.15),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      FluentIcons.shield_checkmark_24_regular,
-                      size: 20,
-                      color: themeState.primary,
+                  onTap: () {
+                    if (!isDesktop) Navigator.pop(context);
+                    LocalBackupDialog.show(context);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 9,
                     ),
-                    const Gap(10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "FOSS Edition",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: themeState.primary,
-                            ),
-                          ),
-                          Text(
-                            "100% Offline & Private",
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: isDark
-                                  ? Colors.grey.shade400
-                                  : Colors.grey.shade600,
-                            ),
-                          ),
-                        ],
+                    decoration: BoxDecoration(
+                      color: themeState.primary.withValues(alpha: 0.06),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: themeState.primary.withValues(alpha: 0.15),
                       ),
                     ),
-                  ],
+                    child: Row(
+                      children: [
+                        Icon(
+                          FluentIcons.shield_checkmark_24_regular,
+                          size: 20,
+                          color: themeState.primary,
+                        ),
+                        const Gap(10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "FOSS Edition",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Text(
+                                "100% Offline • Tap to Backup & Restore",
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          FluentIcons.arrow_sync_24_regular,
+                          size: 16,
+                          color: themeState.primary,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -230,6 +245,22 @@ Widget drawerSection({
           // ─── 1. Main Menu Section ─────────────────────────────────────────
           if (!isJustIcon)
             _buildSectionHeader(l10n.mainMenu, themeState, isDark),
+
+          _buildDrawerTile(
+            context: context,
+            leading: _buildLeadingIcon(
+              FluentIcons.arrow_sync_24_filled,
+              themeState,
+              isDark,
+            ),
+            title: "Backup & Restore",
+            isJustIcon: isJustIcon,
+            isDesktop: isDesktop,
+            onTap: () {
+              if (!isDesktop) Navigator.pop(context);
+              LocalBackupDialog.show(context);
+            },
+          ),
 
           _buildDrawerTile(
             context: context,

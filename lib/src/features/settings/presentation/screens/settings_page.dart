@@ -3,6 +3,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/widgets/theme_icon_button.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
+import "package:al_quran_v3/src/features/backup/presentation/widgets/local_backup_dialog.dart";
 
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
@@ -748,12 +749,14 @@ class _SettingsPageState extends State<SettingsPage> {
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
         ),
         subtitle: Text(
-          "100% Offline & Private • Zero Tracking",
+          "100% Offline • Tap to Backup & Restore",
           style: TextStyle(
             fontSize: 12,
             color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
           ),
         ),
+        trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+        onTap: () => LocalBackupDialog.show(context),
       ),
     );
   }
