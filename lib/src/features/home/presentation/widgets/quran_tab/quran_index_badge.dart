@@ -41,9 +41,9 @@ class QuranIndexBadge extends StatelessWidget {
           CustomPaint(
             size: Size(size, size),
             painter: _OctagonStarPainter(
-              color: badgeColor.withValues(alpha: isDark ? 0.35 : 0.25),
-              fillColor: badgeColor.withValues(alpha: isDark ? 0.12 : 0.08),
-              strokeWidth: 1.2,
+              color: badgeColor.withValues(alpha: isDark ? 0.65 : 0.45),
+              fillColor: badgeColor.withValues(alpha: isDark ? 0.16 : 0.10),
+              strokeWidth: 1.4,
             ),
           ),
           Padding(
@@ -54,7 +54,7 @@ class QuranIndexBadge extends StatelessWidget {
                 localizedStr,
                 style: TextStyle(
                   fontSize: size * 0.38,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   color: textStyleColor,
                 ),
               ),

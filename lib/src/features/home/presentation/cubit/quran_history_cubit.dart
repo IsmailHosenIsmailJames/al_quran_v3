@@ -1,6 +1,8 @@
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/home/domain/usecases/add_history_usecase.dart";
 import "package:al_quran_v3/src/features/home/domain/usecases/get_history_usecase.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_state.dart";
+import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:injectable/injectable.dart";
 
@@ -25,6 +27,7 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
     );
 
     emit(QuranHistoryState(history: getHistoryUseCase()));
+    getIt<SyncCubit>().triggerAutoSync();
   }
 
   void reload() {

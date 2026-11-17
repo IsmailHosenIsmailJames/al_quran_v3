@@ -272,7 +272,43 @@ class ProfileAccountScreen extends StatelessWidget {
                               color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
                             ),
                           ),
-                          const Gap(14),
+                          const Gap(10),
+                          Divider(color: themeState.primary.withValues(alpha: 0.2)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Auto Cloud Sync",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 13.5,
+                                      ),
+                                    ),
+                                    const Gap(2),
+                                    Text(
+                                      "Sync notes, pins & reading history automatically",
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Switch.adaptive(
+                                value: context.watch<SyncCubit>().isAutoSyncEnabled,
+                                activeTrackColor: themeState.primary,
+                                onChanged: (val) {
+                                  context.read<SyncCubit>().setAutoSyncEnabled(val);
+                                },
+                              ),
+                            ],
+                          ),
+                          const Gap(12),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(

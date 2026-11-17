@@ -39,7 +39,7 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
     final appLocalizations = AppLocalizations.of(context);
     final themeState = context.watch<ThemeCubit>().state;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final topPadding = MediaQuery.of(context).padding.top + kToolbarHeight + 8;
+    final topPadding = MediaQuery.of(context).padding.top + 6;
 
     final query = _searchQuery.trim().toLowerCase();
     final List<MyAppLocalization> filteredList = query.isEmpty
@@ -63,57 +63,9 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                 widget.bottomPadding,
               ),
               children: [
-                // 1. Spiritual Welcome Card (shown when not searching)
-                if (query.isEmpty) ...[
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? themeState.primary.withValues(alpha: 0.08)
-                          : themeState.primary.withValues(alpha: 0.05),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: themeState.primary.withValues(
-                          alpha: isDark ? 0.2 : 0.12,
-                        ),
-                        width: 1,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,
-                            color: themeState.primary,
-                          ),
-                        ),
-                        const Gap(4),
-                        Text(
-                          appLocalizations.selectAppLanguage,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: isDark
-                                ? Colors.grey.shade300
-                                : Colors.grey.shade700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-
-                // 2. Search Field
+                // 1. Search Field
                 Container(
-                  margin: const EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 8),
                   decoration: BoxDecoration(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.05)
@@ -154,7 +106,7 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                           : null,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 14,
-                        vertical: 12,
+                        vertical: 10,
                       ),
                       border: InputBorder.none,
                     ),
