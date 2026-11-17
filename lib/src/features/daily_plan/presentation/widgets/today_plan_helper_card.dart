@@ -15,8 +15,51 @@ import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
-class TodayPlanHelperCard extends StatelessWidget {
+class TodayPlanHelperCard extends StatefulWidget {
   const TodayPlanHelperCard({super.key});
+
+  @override
+  State<TodayPlanHelperCard> createState() => _TodayPlanHelperCardState();
+}
+
+class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _expandAnimation;
+  late final Animation<double> _fadeAnimation;
+  late final Animation<double> _rotateAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    final isInitiallyCollapsed =
+        context.read<StreakCubit>().state.plan.isCollapsed;
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 320),
+      value: isInitiallyCollapsed ? 0.0 : 1.0,
+      vsync: this,
+    );
+    _expandAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOutCubic,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.2, 1.0, curve: Curves.easeIn),
+    );
+    _rotateAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOutCubic,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _openSurah(BuildContext context, int surahNumber) {
     Navigator.push(
@@ -67,7 +110,16 @@ class TodayPlanHelperCard extends StatelessWidget {
     final sunnahSurahSubtitle =
         isFriday ? "Friday Sunnah • Verses 1–110" : "Night Sunnah • 30 Verses";
 
-    return BlocBuilder<StreakCubit, StreakState>(
+    return BlocConsumer<StreakCubit, StreakState>(
+      listenWhen: (prev, curr) =>
+          prev.plan.isCollapsed != curr.plan.isCollapsed,
+      listener: (context, state) {
+        if (state.plan.isCollapsed) {
+          if (_controller.value > 0.0) _controller.reverse();
+        } else {
+          if (_controller.value < 1.0) _controller.forward();
+        }
+      },
       builder: (context, state) {
         final streak = state.streak;
         final plan = state.plan;
@@ -80,8 +132,6 @@ class TodayPlanHelperCard extends StatelessWidget {
         if (isQuranDone) completedGoals++;
         if (isSunnahDone) completedGoals++;
         if (isPrayersDone) completedGoals++;
-
-        final isCollapsed = plan.isCollapsed;
 
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -233,9 +283,8 @@ class TodayPlanHelperCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: AnimatedRotation(
-                          duration: const Duration(milliseconds: 200),
-                          turns: isCollapsed ? 0.0 : 0.5,
+                        child: RotationTransition(
+                          turns: _rotateAnimation,
                           child: Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: isDark
@@ -250,80 +299,93 @@ class TodayPlanHelperCard extends StatelessWidget {
                 ),
               ),
 
-              // Expanded Checklist Content
-              if (!isCollapsed) ...[
-                Divider(
-                  height: 1,
-                  thickness: 0.8,
-                  color: isDark
-                      ? Colors.white.withValues(alpha: 0.06)
-                      : Colors.grey.shade200,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
-                  child: Column(
-                    children: [
-                      // Task 1: Daily Quran Reading
-                      _buildTaskRow(
-                        context,
-                        isDone: isQuranDone,
-                        title: state.khatamPlan != null
-                            ? "Daily Quran (${state.khatamPlan!.roundedDailyPagesQuota} p/day goal)"
-                            : "Daily Quran Reading",
-                        subtitle: streak.isActiveToday
-                            ? (state.khatamPlan != null
-                                ? "${streak.todayPagesRead} of ${state.khatamPlan!.roundedDailyPagesQuota} pages read today (${streak.todayAyahsRead} ayahs)"
-                                : "${streak.todayAyahsRead} ayahs read today")
-                            : (state.khatamPlan != null
-                                ? "Target: ${state.khatamPlan!.roundedDailyPagesQuota} pages today (Adaptive)"
-                                : "Read at least 1 page or Ayah"),
-                        isDark: isDark,
-                        primary: primary,
-                        actionLabel: streak.isActiveToday ? "Resume" : "Read",
-                        onAction: () => _openLastReadOrFatihah(context),
-                      ),
+              // Animated Expandable Checklist Content
+              ClipRect(
+                child: SizeTransition(
+                  sizeFactor: _expandAnimation,
+                  alignment: Alignment.topCenter,
+                  child: FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Divider(
+                          height: 1,
+                          thickness: 0.8,
+                          color: isDark
+                              ? Colors.white.withValues(alpha: 0.06)
+                              : Colors.grey.shade200,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
+                          child: Column(
+                            children: [
+                              // Task 1: Daily Quran Reading
+                              _buildTaskRow(
+                                context,
+                                isDone: isQuranDone,
+                                title: state.khatamPlan != null
+                                    ? "Daily Quran (${state.khatamPlan!.roundedDailyPagesQuota} p/day goal)"
+                                    : "Daily Quran Reading",
+                                subtitle: streak.isActiveToday
+                                    ? (state.khatamPlan != null
+                                        ? "${streak.todayPagesRead} of ${state.khatamPlan!.roundedDailyPagesQuota} pages read today (${streak.todayAyahsRead} ayahs)"
+                                        : "${streak.todayAyahsRead} ayahs read today")
+                                    : (state.khatamPlan != null
+                                        ? "Target: ${state.khatamPlan!.roundedDailyPagesQuota} pages today (Adaptive)"
+                                        : "Read at least 1 page or Ayah"),
+                                isDark: isDark,
+                                primary: primary,
+                                actionLabel: streak.isActiveToday ? "Resume" : "Read",
+                                onAction: () => _openLastReadOrFatihah(context),
+                              ),
 
-                      const Gap(8),
+                              const Gap(8),
 
-                      // Task 2: Sunnah Surah (Al-Kahf on Friday / Al-Mulk daily)
-                      _buildTaskRow(
-                        context,
-                        isDone: isSunnahDone,
-                        title: sunnahSurahName,
-                        subtitle: sunnahSurahSubtitle,
-                        isDark: isDark,
-                        primary: primary,
-                        actionLabel: "Open",
-                        onToggleCheck: () {
-                          HapticFeedback.selectionClick();
-                          context.read<StreakCubit>().toggleSunnahSurah();
-                        },
-                        onAction: () => _openSurah(context, sunnahSurahNumber),
-                      ),
+                              // Task 2: Sunnah Surah (Al-Kahf on Friday / Al-Mulk daily)
+                              _buildTaskRow(
+                                context,
+                                isDone: isSunnahDone,
+                                title: sunnahSurahName,
+                                subtitle: sunnahSurahSubtitle,
+                                isDark: isDark,
+                                primary: primary,
+                                actionLabel: "Open",
+                                onToggleCheck: () {
+                                  HapticFeedback.selectionClick();
+                                  context.read<StreakCubit>().toggleSunnahSurah();
+                                },
+                                onAction: () =>
+                                    _openSurah(context, sunnahSurahNumber),
+                              ),
 
-                      const Gap(10),
+                              const Gap(10),
 
-                      // Task 3: 5 Daily Prayers
-                      _buildPrayersRow(
-                        context,
-                        plan: plan,
-                        isDark: isDark,
-                        primary: primary,
-                      ),
+                              // Task 3: 5 Daily Prayers
+                              _buildPrayersRow(
+                                context,
+                                plan: plan,
+                                isDark: isDark,
+                                primary: primary,
+                              ),
 
-                      const Gap(10),
+                              const Gap(10),
 
-                      // Task 4 / Goal Banner: Khatam Planner
-                      _buildKhatamGoalTile(
-                        context,
-                        khatamPlan: state.khatamPlan,
-                        isDark: isDark,
-                        primary: primary,
-                      ),
-                    ],
+                              // Task 4 / Goal Banner: Khatam Planner
+                              _buildKhatamGoalTile(
+                                context,
+                                khatamPlan: state.khatamPlan,
+                                isDark: isDark,
+                                primary: primary,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
+              ),
             ],
           ),
         );

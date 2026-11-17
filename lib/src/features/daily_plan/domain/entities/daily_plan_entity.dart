@@ -6,7 +6,7 @@ class DailyPlanEntity {
   const DailyPlanEntity({
     required this.prayersCompleted,
     this.isSunnahSurahCompleted = false,
-    this.isCollapsed = false,
+    this.isCollapsed = true,
   });
 
   static const List<String> prayerKeys = [
@@ -45,7 +45,7 @@ class DailyPlanEntity {
         "isha": false,
       },
       isSunnahSurahCompleted: false,
-      isCollapsed: false,
+      isCollapsed: true,
     );
   }
 }

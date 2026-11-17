@@ -54,11 +54,14 @@ class StreakLocalDataSource {
     await _box.put("user_daily_sunnah_surah_$_todayStr", completed);
   }
 
+  bool _isPlanCollapsed = true;
+
   bool getIsPlanCollapsed() {
-    return _box.get("user_daily_plan_collapsed", defaultValue: false) as bool;
+    return _isPlanCollapsed;
   }
 
   Future<void> setIsPlanCollapsed(bool collapsed) async {
+    _isPlanCollapsed = collapsed;
     await _box.put("user_daily_plan_collapsed", collapsed);
   }
 
