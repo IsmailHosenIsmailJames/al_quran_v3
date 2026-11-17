@@ -105,129 +105,148 @@ class TodayPlanHelperCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Header Row (Always visible, tap to collapse/expand)
-              InkWell(
-                onTap: () {
-                  HapticFeedback.selectionClick();
-                  context.read<StreakCubit>().togglePlanCollapsed();
-                },
-                borderRadius: BorderRadius.circular(16),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      // Circular Progress / Checkmark Indicator
-                      Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: completedGoals == 3
-                              ? Colors.green.withValues(alpha: 0.15)
-                              : primary.withValues(alpha: 0.12),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            completedGoals == 3
-                                ? Icons.check_circle_rounded
-                                : FluentIcons.task_list_square_ltr_20_regular,
-                            size: 18,
-                            color: completedGoals == 3 ? Colors.green : primary,
-                          ),
-                        ),
-                      ),
-                      const Gap(10),
-
-                      // Title & Subtitle
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              // Header Row (Always visible)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
+                child: Row(
+                  children: [
+                    // Tappable leading + title & subtitle to toggle expand/collapse
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          HapticFeedback.selectionClick();
+                          context.read<StreakCubit>().togglePlanCollapsed();
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: Row(
                           children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "Today's Plan",
-                                  style: TextStyle(
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                            // Circular Progress / Checkmark Indicator
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: completedGoals == 3
+                                    ? Colors.green.withValues(alpha: 0.15)
+                                    : primary.withValues(alpha: 0.12),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  completedGoals == 3
+                                      ? Icons.check_circle_rounded
+                                      : FluentIcons
+                                          .task_list_square_ltr_20_regular,
+                                  size: 18,
+                                  color: completedGoals == 3
+                                      ? Colors.green
+                                      : primary,
                                 ),
-                                const Gap(6),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 6,
-                                    vertical: 1.5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: (completedGoals == 3
-                                            ? Colors.green
-                                            : primary)
-                                        .withValues(
-                                          alpha: isDark ? 0.18 : 0.1,
+                              ),
+                            ),
+                            const Gap(10),
+
+                            // Title & Subtitle
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "Today's Plan",
+                                        style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                    borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      const Gap(6),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 1.5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: (completedGoals == 3
+                                                  ? Colors.green
+                                                  : primary)
+                                              .withValues(
+                                            alpha: isDark ? 0.18 : 0.1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                        child: Text(
+                                          "$completedGoals/3 Done",
+                                          style: TextStyle(
+                                            fontSize: 10.5,
+                                            fontWeight: FontWeight.bold,
+                                            color: completedGoals == 3
+                                                ? Colors.green
+                                                : primary,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  child: Text(
-                                    "$completedGoals/3 Done",
+                                  const Gap(2),
+                                  Text(
+                                    completedGoals == 3
+                                        ? "All spiritual tasks completed for today!"
+                                        : "Complete your daily reading & prayers",
                                     style: TextStyle(
-                                      fontSize: 10.5,
-                                      fontWeight: FontWeight.bold,
-                                      color: completedGoals == 3
-                                          ? Colors.green
-                                          : primary,
+                                      fontSize: 11.5,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const Gap(2),
-                            Text(
-                              completedGoals == 3
-                                  ? "All spiritual tasks completed for today!"
-                                  : "Complete your daily reading & prayers",
-                              style: TextStyle(
-                                fontSize: 11.5,
-                                color: isDark
-                                    ? Colors.grey.shade400
-                                    : Colors.grey.shade600,
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
+                    ),
 
-                      // Consistency Heatmap Calendar Button
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        icon:
-                            const Icon(Icons.calendar_month_rounded, size: 20),
-                        color: isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade600,
-                        tooltip: "Consistency Heatmap",
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          ConsistencyHeatmapCalendar.show(context);
-                        },
-                      ),
+                    // Consistency Heatmap Calendar Button (direct trigger)
+                    IconButton(
+                      visualDensity: VisualDensity.compact,
+                      icon: const Icon(Icons.calendar_month_rounded, size: 20),
+                      color:
+                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      tooltip: "Consistency Heatmap",
+                      onPressed: () {
+                        HapticFeedback.selectionClick();
+                        ConsistencyHeatmapCalendar.show(context);
+                      },
+                    ),
 
-                      // Expand / Collapse Chevron
-                      AnimatedRotation(
-                        duration: const Duration(milliseconds: 200),
-                        turns: isCollapsed ? 0.0 : 0.5,
-                        child: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade600,
-                          size: 22,
+                    // Expand / Collapse Chevron
+                    InkWell(
+                      onTap: () {
+                        HapticFeedback.selectionClick();
+                        context.read<StreakCubit>().togglePlanCollapsed();
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: AnimatedRotation(
+                          duration: const Duration(milliseconds: 200),
+                          turns: isCollapsed ? 0.0 : 0.5,
+                          child: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
+                            size: 22,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
 

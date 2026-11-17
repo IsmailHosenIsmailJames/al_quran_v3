@@ -350,9 +350,9 @@ class AppBarStreakBadge extends StatelessWidget {
           message: isActiveToday
               ? "Streak active! ($streakCount days)"
               : "Read today to keep streak active ($streakCount days)",
-          child: InkWell(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: () => _showStreakDetails(context, state),
-            borderRadius: BorderRadius.circular(20),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
               decoration: BoxDecoration(
