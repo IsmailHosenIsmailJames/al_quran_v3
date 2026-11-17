@@ -7,6 +7,7 @@ import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/profile_account_screen.dart";
+import "package:al_quran_v3/src/features/backup/presentation/widgets/local_backup_dialog.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
@@ -744,42 +745,75 @@ class _SettingsPageState extends State<SettingsPage> {
             ? (user?.email ?? "Cloud sync active")
             : "Sign in to sync notes, bookmarks & history";
 
-        return Material(
-          color: Colors.transparent,
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: CircleAvatar(
-              radius: 20,
-              backgroundColor: themeState.primaryShade200,
-              backgroundImage:
-                  user?.photoUrl != null ? NetworkImage(user!.photoUrl!) : null,
-              child: user?.photoUrl == null
-                  ? Icon(
-                      isAuth
-                          ? FluentIcons.person_24_filled
-                          : FluentIcons.cloud_arrow_up_24_regular,
-                      size: 20,
-                      color: themeState.primary,
-                    )
-                  : null,
-            ),
-            title: Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-            ),
-            subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
-            trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => isAuth
-                      ? const ProfileAccountScreen()
-                      : const AuthScreen(),
+        return Column(
+          children: [
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: themeState.primaryShade200,
+                  backgroundImage:
+                      user?.photoUrl != null ? NetworkImage(user!.photoUrl!) : null,
+                  child: user?.photoUrl == null
+                      ? Icon(
+                          isAuth
+                              ? FluentIcons.person_24_filled
+                              : FluentIcons.cloud_arrow_up_24_regular,
+                          size: 20,
+                          color: themeState.primary,
+                        )
+                      : null,
                 ),
-              );
-            },
-          ),
+                title: Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                ),
+                subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
+                trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => isAuth
+                          ? const ProfileAccountScreen()
+                          : const AuthScreen(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Divider(
+              height: 16,
+              color: isDark ? Colors.white10 : Colors.grey.shade200,
+            ),
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: themeState.primary.withValues(alpha: 0.12),
+                  child: Icon(
+                    FluentIcons.arrow_sync_24_regular,
+                    size: 20,
+                    color: themeState.primary,
+                  ),
+                ),
+                title: const Text(
+                  "Offline Backup & Restore",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                ),
+                subtitle: const Text(
+                  "Export or import JSON backup locally",
+                  style: TextStyle(fontSize: 12),
+                ),
+                trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+                onTap: () => LocalBackupDialog.show(context),
+              ),
+            ),
+          ],
         );
       },
     );

@@ -12,7 +12,8 @@ import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+  final bool isEmbedded;
+  const AuthScreen({super.key, this.isEmbedded = false});
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -125,12 +126,16 @@ class _AuthScreenState extends State<AuthScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is Authenticated) {
-          context.read<SyncCubit>().sync(state.user.uid);
+          if (!state.user.isAnonymous) {
+            context.read<SyncCubit>().sync(state.user.uid);
+          }
           Fluttertoast.showToast(
             msg:
-                "Welcome, ${state.user.displayName ?? state.user.email ?? 'User'}!",
+                "Welcome, ${state.user.displayName ?? state.user.email ?? (state.user.isAnonymous ? l10n.guestUser : 'User')}!",
           );
-          Navigator.pop(context);
+          if (!widget.isEmbedded && Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
         } else if (state is AuthError) {
           Fluttertoast.showToast(msg: state.message);
         }

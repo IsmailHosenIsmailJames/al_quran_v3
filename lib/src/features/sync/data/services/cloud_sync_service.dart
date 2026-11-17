@@ -325,7 +325,7 @@ class CloudSyncService {
 
     final rawLocal = userBox.get("quran_browse_history", defaultValue: []);
     final localList = List<Map<String, dynamic>>.from(
-      (rawLocal as List).map((e) => Map<String, dynamic>.from(e as Map)),
+      (rawLocal is List ? rawLocal : []).map((e) => Map<String, dynamic>.from(e as Map)),
     );
 
     List<Map<String, dynamic>> cloudItems = [];

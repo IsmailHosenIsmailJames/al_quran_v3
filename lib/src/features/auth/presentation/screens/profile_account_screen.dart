@@ -5,8 +5,10 @@ import "package:al_quran_v3/src/features/auth/domain/entities/user_entity.dart";
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
+import "package:al_quran_v3/src/features/backup/presentation/widgets/local_backup_dialog.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
@@ -76,7 +78,7 @@ class ProfileAccountScreen extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
         if (authState is! Authenticated) {
-          return const AuthScreen();
+          return const AuthScreen(isEmbedded: true);
         }
 
         final user = authState.user;
@@ -87,13 +89,27 @@ class ProfileAccountScreen extends StatelessWidget {
             ? user.email!
             : (user.isAnonymous ? "Guest Session (Local data only)" : "No email linked");
 
-        final notesCount = Hive.box(CollectionType.notes.name).length;
-        final pinsCount = Hive.box(CollectionType.pinned.name).length;
-        final historyList = Hive.box("user").get("quran_browse_history", defaultValue: []) as List;
-        final quickAccessList = Hive.box("user").get("quick_access", defaultValue: []) as List;
-        final streakState = context.watch<StreakCubit>().state;
-        final streak = streakState.streak;
-        final khatam = streakState.khatamPlan;
+        final notesCount = Hive.isBoxOpen(CollectionType.notes.name)
+            ? Hive.box(CollectionType.notes.name).length
+            : 0;
+        final pinsCount = Hive.isBoxOpen(CollectionType.pinned.name)
+            ? Hive.box(CollectionType.pinned.name).length
+            : 0;
+        final rawHistory = Hive.isBoxOpen("user")
+            ? Hive.box("user").get("quran_browse_history")
+            : null;
+        final historyCount = (rawHistory is List) ? rawHistory.length : 0;
+        final rawQuickAccess = Hive.isBoxOpen("user")
+            ? Hive.box("user").get("quick_access")
+            : null;
+        final quickAccessCount = (rawQuickAccess is List) ? rawQuickAccess.length : 0;
+
+        StreakState? streakState;
+        try {
+          streakState = context.watch<StreakCubit>().state;
+        } catch (_) {}
+        final streak = streakState?.streak;
+        final khatam = streakState?.khatamPlan;
 
         return Scaffold(
           appBar: AppBar(
@@ -217,136 +233,208 @@ class ProfileAccountScreen extends StatelessWidget {
                   ),
                 ],
 
-                const Gap(20),
+                if (!user.isAnonymous) ...[
+                  const Gap(20),
 
-                // Cloud Sync Card
-                BlocBuilder<SyncCubit, SyncState>(
-                  builder: (context, syncState) {
-                    final isSyncing = syncState is SyncInProgress;
-                    DateTime? lastSynced;
-                    if (syncState is SyncSuccess) {
-                      lastSynced = syncState.lastSynced;
-                    } else if (syncState is SyncInitial) {
-                      lastSynced = syncState.lastSynced;
-                    } else if (syncState is SyncFailed) {
-                      lastSynced = syncState.lastSynced;
-                    }
+                  // Cloud Sync Card
+                  BlocBuilder<SyncCubit, SyncState>(
+                    builder: (context, syncState) {
+                      final isSyncing = syncState is SyncInProgress;
+                      DateTime? lastSynced;
+                      if (syncState is SyncSuccess) {
+                        lastSynced = syncState.lastSynced;
+                      } else if (syncState is SyncInitial) {
+                        lastSynced = syncState.lastSynced;
+                      } else if (syncState is SyncFailed) {
+                        lastSynced = syncState.lastSynced;
+                      }
 
-                    final lastSyncedStr = lastSynced != null
-                        ? DateFormat("MMM d, yyyy • h:mm a").format(lastSynced)
-                        : "Not synced yet";
+                      final lastSyncedStr = lastSynced != null
+                          ? DateFormat("MMM d, yyyy • h:mm a").format(lastSynced)
+                          : "Not synced yet";
 
-                    return Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: isDark ? themeState.primary.withValues(alpha: 0.12) : themeState.primaryShade100,
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: themeState.primary.withValues(alpha: 0.25)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(FluentIcons.cloud_sync_24_filled, color: themeState.primary),
-                                  const Gap(8),
-                                  Text(
-                                    l10n.syncedCloudBackup,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: themeState.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              if (isSyncing)
-                                const SizedBox(
-                                  height: 18,
-                                  width: 18,
-                                  child: CircularProgressIndicator(strokeWidth: 2),
-                                ),
-                            ],
-                          ),
-                          const Gap(8),
-                          Text(
-                            "Last Synced: $lastSyncedStr",
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
-                            ),
-                          ),
-                          const Gap(10),
-                          Divider(color: themeState.primary.withValues(alpha: 0.2)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                      return Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: isDark ? themeState.primary.withValues(alpha: 0.12) : themeState.primaryShade100,
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: themeState.primary.withValues(alpha: 0.25)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
                                   children: [
-                                    const Text(
-                                      "Auto Cloud Sync",
+                                    Icon(FluentIcons.cloud_sync_24_filled, color: themeState.primary),
+                                    const Gap(8),
+                                    Text(
+                                      l10n.syncedCloudBackup,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 13.5,
-                                      ),
-                                    ),
-                                    const Gap(2),
-                                    Text(
-                                      "Sync notes, pins, history, streaks & goals automatically",
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                        fontSize: 15,
+                                        color: themeState.primary,
                                       ),
                                     ),
                                   ],
                                 ),
+                                if (isSyncing)
+                                  const SizedBox(
+                                    height: 18,
+                                    width: 18,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  ),
+                              ],
+                            ),
+                            const Gap(8),
+                            Text(
+                              "Last Synced: $lastSyncedStr",
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
                               ),
-                              Switch.adaptive(
-                                value: context.watch<SyncCubit>().isAutoSyncEnabled,
-                                activeTrackColor: themeState.primary,
-                                onChanged: (val) {
-                                  context.read<SyncCubit>().setAutoSyncEnabled(val);
-                                },
+                            ),
+                            const Gap(10),
+                            Divider(color: themeState.primary.withValues(alpha: 0.2)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Auto Cloud Sync",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13.5,
+                                        ),
+                                      ),
+                                      const Gap(2),
+                                      Text(
+                                        "Sync notes, pins, history, streaks & goals automatically",
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Switch.adaptive(
+                                  value: context.watch<SyncCubit>().isAutoSyncEnabled,
+                                  activeTrackColor: themeState.primary,
+                                  onChanged: (val) {
+                                    context.read<SyncCubit>().setAutoSyncEnabled(val);
+                                  },
+                                ),
+                              ],
+                            ),
+                            const Gap(12),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 44,
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: themeState.primary,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  elevation: 1,
+                                ),
+                                onPressed: isSyncing ? null : () => context.read<SyncCubit>().sync(user.uid),
+                                icon: const Icon(FluentIcons.arrow_sync_24_regular, size: 18),
+                                label: Text(
+                                  isSyncing ? l10n.syncing : l10n.syncNow,
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+
+                const Gap(16),
+
+                // Offline Local Backup & Restore Card
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(
+                      color: isDark ? Colors.white12 : Colors.grey.shade200,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            FluentIcons.arrow_sync_24_filled,
+                            color: themeState.primary,
+                            size: 20,
                           ),
-                          const Gap(12),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 44,
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: themeState.primary,
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                elevation: 1,
-                              ),
-                              onPressed: isSyncing ? null : () => context.read<SyncCubit>().sync(user.uid),
-                              icon: const Icon(FluentIcons.arrow_sync_24_regular, size: 18),
-                              label: Text(
-                                isSyncing ? l10n.syncing : l10n.syncNow,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                          const Gap(8),
+                          const Text(
+                            "Local Backup & Restore",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
                             ),
                           ),
                         ],
                       ),
-                    );
-                  },
+                      const Gap(6),
+                      Text(
+                        "Export notes, bookmarks, history, streaks & goals to a JSON file, or restore from a previous backup without internet.",
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                        ),
+                      ),
+                      const Gap(14),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 44,
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: themeState.primary,
+                            side: BorderSide(
+                              color: themeState.primary.withValues(alpha: 0.4),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () => LocalBackupDialog.show(context),
+                          icon: const Icon(
+                            FluentIcons.arrow_download_24_regular,
+                            size: 18,
+                          ),
+                          label: const Text(
+                            "Export / Import Local JSON",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const Gap(20),
 
                 // Synced Items Overview
-                const Text(
-                  "Synchronized Items",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                Text(
+                  user.isAnonymous ? "Stored Local Items" : "Synchronized Items",
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const Gap(10),
 
@@ -380,7 +468,7 @@ class ProfileAccountScreen extends StatelessWidget {
                       child: _buildCountCard(
                         icon: FluentIcons.history_24_filled,
                         label: "History",
-                        count: historyList.length,
+                        count: historyCount,
                         themeState: themeState,
                         isDark: isDark,
                       ),
@@ -390,7 +478,7 @@ class ProfileAccountScreen extends StatelessWidget {
                       child: _buildCountCard(
                         icon: FluentIcons.flash_24_filled,
                         label: "Quick Access",
-                        count: quickAccessList.length,
+                        count: quickAccessCount,
                         themeState: themeState,
                         isDark: isDark,
                       ),
@@ -404,7 +492,9 @@ class ProfileAccountScreen extends StatelessWidget {
                       child: _buildCountCard(
                         icon: Icons.local_fire_department_rounded,
                         label: "Daily Streak",
-                        valueStr: "${streak.currentStreak} ${streak.currentStreak == 1 ? "Day" : "Days"}",
+                        valueStr: streak != null
+                            ? "${streak.currentStreak} ${streak.currentStreak == 1 ? 'Day' : 'Days'}"
+                            : "0 Days",
                         themeState: themeState,
                         isDark: isDark,
                       ),

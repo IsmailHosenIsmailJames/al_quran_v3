@@ -13,6 +13,7 @@ import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/auth_screen.dart";
 import "package:al_quran_v3/src/features/auth/presentation/screens/profile_account_screen.dart";
+import "package:al_quran_v3/src/features/backup/presentation/widgets/local_backup_dialog.dart";
 import "package:al_quran_v3/src/features/collections/presentation/screens/collection_page.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/popup_jump_to_ayah.dart";
@@ -289,6 +290,22 @@ Widget drawerSection({
           // ─── 1. Main Menu Section ─────────────────────────────────────────
           if (!isJustIcon)
             _buildSectionHeader(l10n.mainMenu, themeState, isDark),
+
+          _buildDrawerTile(
+            context: context,
+            leading: _buildLeadingIcon(
+              FluentIcons.arrow_sync_24_filled,
+              themeState,
+              isDark,
+            ),
+            title: "Backup & Restore",
+            isJustIcon: isJustIcon,
+            isDesktop: isDesktop,
+            onTap: () {
+              if (!isDesktop) Navigator.pop(context);
+              LocalBackupDialog.show(context);
+            },
+          ),
 
           _buildDrawerTile(
             context: context,
