@@ -21,7 +21,7 @@ mixin _$TajweedGuideState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideState);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideState);
 }
 
 
@@ -30,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TajweedGuideState()';
+    return 'TajweedGuideState()';
 }
 
 
@@ -204,7 +204,7 @@ class TajweedGuideInitial implements TajweedGuideState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideInitial);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideInitial);
 }
 
 
@@ -213,7 +213,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TajweedGuideState.initial()';
+    return 'TajweedGuideState.initial()';
 }
 
 
@@ -236,7 +236,7 @@ class TajweedGuideLoading implements TajweedGuideState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideLoading);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideLoading);
 }
 
 
@@ -245,7 +245,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'TajweedGuideState.loading()';
+    return 'TajweedGuideState.loading()';
 }
 
 
@@ -287,16 +287,18 @@ $TajweedGuideLoadedCopyWith<TajweedGuideLoaded> get copyWith => _$TajweedGuideLo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideLoaded&&const DeepCollectionEquality().equals(other._rules, _rules)&&const DeepCollectionEquality().equals(other._filteredRules, _filteredRules)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideLoaded&&const DeepCollectionEquality().equals(other.rules, _rules)&&const DeepCollectionEquality().equals(other.filteredRules, _filteredRules)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_rules),const DeepCollectionEquality().hash(_filteredRules),searchQuery);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_rules),const DeepCollectionEquality().hash(_filteredRules),searchQuery);
+}
 
 @override
 String toString() {
-  return 'TajweedGuideState.loaded(rules: $rules, filteredRules: $filteredRules, searchQuery: $searchQuery)';
+    return 'TajweedGuideState.loaded(rules: $rules, filteredRules: $filteredRules, searchQuery: $searchQuery)';
 }
 
 
@@ -355,16 +357,18 @@ $TajweedGuideErrorCopyWith<TajweedGuideError> get copyWith => _$TajweedGuideErro
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideError&&(identical(other.message, message) || other.message == message));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is TajweedGuideError&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode {
+    return Object.hash(runtimeType,message);
+}
 
 @override
 String toString() {
-  return 'TajweedGuideState.error(message: $message)';
+    return 'TajweedGuideState.error(message: $message)';
 }
 
 

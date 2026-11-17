@@ -20,6 +20,7 @@ import "package:al_quran_v3/src/core/services/platform_services.dart"
 import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_download_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script_function.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
@@ -373,6 +374,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => getIt<AudioDownloadCubit>()),
         BlocProvider(create: (context) => getIt<AudioLoopCubit>()),
         BlocProvider(create: (context) => getIt<AyahToHighlight>()),
+        BlocProvider(create: (context) => getIt<AutoScrollCubit>()),
         BlocProvider(create: (context) => getIt<AuthCubit>()),
         BlocProvider(create: (context) => getIt<SyncCubit>()),
         BlocProvider(create: (context) => getIt<StreakCubit>()..loadStreak()),

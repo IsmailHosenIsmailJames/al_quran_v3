@@ -29,16 +29,21 @@ $AboutModelCopyWith<AboutModel> get copyWith => _$AboutModelCopyWithImpl<AboutMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AboutModel&&(identical(other.name, name) || other.name == name)&&(identical(other.version, version) || other.version == version)&&(identical(other.description, description) || other.description == description));
+  final _this = this as AboutModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AboutModel&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.version, _this.version) || other.version == _this.version)&&(identical(other.description, _this.description) || other.description == _this.description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,version,description);
+int get hashCode {
+  final _this = this as AboutModel;
+  return Object.hash(runtimeType,_this.name,_this.version,_this.description);
+}
 
 @override
 String toString() {
-  return 'AboutModel(name: $name, version: $version, description: $description)';
+  final _this = this as AboutModel;
+  return 'AboutModel(name: ${_this.name}, version: ${_this.version}, description: ${_this.description})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AboutModel&&(identical(other.name, name) || other.name == name)&&(identical(other.version, version) || other.version == version)&&(identical(other.description, description) || other.description == description));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AboutModel&&(identical(other.name, name) || other.name == name)&&(identical(other.version, version) || other.version == version)&&(identical(other.description, description) || other.description == description));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,version,description);
+int get hashCode {
+    return Object.hash(runtimeType,name,version,description);
+}
 
 @override
 String toString() {
-  return 'AboutModel(name: $name, version: $version, description: $description)';
+    return 'AboutModel(name: $name, version: $version, description: $description)';
 }
 
 

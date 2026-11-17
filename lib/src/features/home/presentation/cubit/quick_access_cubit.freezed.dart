@@ -29,16 +29,21 @@ $QuickAccessModelCopyWith<QuickAccessModel> get copyWith => _$QuickAccessModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuickAccessModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.scrollIndex, scrollIndex) || other.scrollIndex == scrollIndex)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  final _this = this as QuickAccessModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuickAccessModel&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.scrollIndex, _this.scrollIndex) || other.scrollIndex == _this.scrollIndex)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,scrollIndex,createdAt);
+int get hashCode {
+  final _this = this as QuickAccessModel;
+  return Object.hash(runtimeType,_this.surahNumber,_this.scrollIndex,_this.createdAt);
+}
 
 @override
 String toString() {
-  return 'QuickAccessModel(surahNumber: $surahNumber, scrollIndex: $scrollIndex, createdAt: $createdAt)';
+  final _this = this as QuickAccessModel;
+  return 'QuickAccessModel(surahNumber: ${_this.surahNumber}, scrollIndex: ${_this.scrollIndex}, createdAt: ${_this.createdAt})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuickAccessModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.scrollIndex, scrollIndex) || other.scrollIndex == scrollIndex)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuickAccessModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.scrollIndex, scrollIndex) || other.scrollIndex == scrollIndex)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,scrollIndex,createdAt);
+int get hashCode {
+    return Object.hash(runtimeType,surahNumber,scrollIndex,createdAt);
+}
 
 @override
 String toString() {
-  return 'QuickAccessModel(surahNumber: $surahNumber, scrollIndex: $scrollIndex, createdAt: $createdAt)';
+    return 'QuickAccessModel(surahNumber: $surahNumber, scrollIndex: $scrollIndex, createdAt: $createdAt)';
 }
 
 

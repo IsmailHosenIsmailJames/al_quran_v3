@@ -26,16 +26,21 @@ $ScriptInfoCopyWith<ScriptInfo> get copyWith => _$ScriptInfoCopyWithImpl<ScriptI
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScriptInfo&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.quranScriptType, quranScriptType) || other.quranScriptType == quranScriptType)&&(identical(other.textStyle, textStyle) || other.textStyle == textStyle)&&(identical(other.textAlign, textAlign) || other.textAlign == textAlign)&&(identical(other.limitWord, limitWord) || other.limitWord == limitWord)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex)&&(identical(other.showWordHighlights, showWordHighlights) || other.showWordHighlights == showWordHighlights)&&(identical(other.skipWordTap, skipWordTap) || other.skipWordTap == skipWordTap)&&(identical(other.forImage, forImage) || other.forImage == forImage));
+  final _this = this as ScriptInfo;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScriptInfo&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.ayahNumber, _this.ayahNumber) || other.ayahNumber == _this.ayahNumber)&&(identical(other.quranScriptType, _this.quranScriptType) || other.quranScriptType == _this.quranScriptType)&&(identical(other.textStyle, _this.textStyle) || other.textStyle == _this.textStyle)&&(identical(other.textAlign, _this.textAlign) || other.textAlign == _this.textAlign)&&(identical(other.limitWord, _this.limitWord) || other.limitWord == _this.limitWord)&&(identical(other.wordIndex, _this.wordIndex) || other.wordIndex == _this.wordIndex)&&(identical(other.showWordHighlights, _this.showWordHighlights) || other.showWordHighlights == _this.showWordHighlights)&&(identical(other.skipWordTap, _this.skipWordTap) || other.skipWordTap == _this.skipWordTap)&&(identical(other.forImage, _this.forImage) || other.forImage == _this.forImage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,quranScriptType,textStyle,textAlign,limitWord,wordIndex,showWordHighlights,skipWordTap,forImage);
+int get hashCode {
+  final _this = this as ScriptInfo;
+  return Object.hash(runtimeType,_this.surahNumber,_this.ayahNumber,_this.quranScriptType,_this.textStyle,_this.textAlign,_this.limitWord,_this.wordIndex,_this.showWordHighlights,_this.skipWordTap,_this.forImage);
+}
 
 @override
 String toString() {
-  return 'ScriptInfo(surahNumber: $surahNumber, ayahNumber: $ayahNumber, quranScriptType: $quranScriptType, textStyle: $textStyle, textAlign: $textAlign, limitWord: $limitWord, wordIndex: $wordIndex, showWordHighlights: $showWordHighlights, skipWordTap: $skipWordTap, forImage: $forImage)';
+  final _this = this as ScriptInfo;
+  return 'ScriptInfo(surahNumber: ${_this.surahNumber}, ayahNumber: ${_this.ayahNumber}, quranScriptType: ${_this.quranScriptType}, textStyle: ${_this.textStyle}, textAlign: ${_this.textAlign}, limitWord: ${_this.limitWord}, wordIndex: ${_this.wordIndex}, showWordHighlights: ${_this.showWordHighlights}, skipWordTap: ${_this.skipWordTap}, forImage: ${_this.forImage})';
 }
 
 
@@ -240,16 +245,18 @@ _$ScriptInfoCopyWith<_ScriptInfo> get copyWith => __$ScriptInfoCopyWithImpl<_Scr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScriptInfo&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.quranScriptType, quranScriptType) || other.quranScriptType == quranScriptType)&&(identical(other.textStyle, textStyle) || other.textStyle == textStyle)&&(identical(other.textAlign, textAlign) || other.textAlign == textAlign)&&(identical(other.limitWord, limitWord) || other.limitWord == limitWord)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex)&&(identical(other.showWordHighlights, showWordHighlights) || other.showWordHighlights == showWordHighlights)&&(identical(other.skipWordTap, skipWordTap) || other.skipWordTap == skipWordTap)&&(identical(other.forImage, forImage) || other.forImage == forImage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScriptInfo&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.quranScriptType, quranScriptType) || other.quranScriptType == quranScriptType)&&(identical(other.textStyle, textStyle) || other.textStyle == textStyle)&&(identical(other.textAlign, textAlign) || other.textAlign == textAlign)&&(identical(other.limitWord, limitWord) || other.limitWord == limitWord)&&(identical(other.wordIndex, wordIndex) || other.wordIndex == wordIndex)&&(identical(other.showWordHighlights, showWordHighlights) || other.showWordHighlights == showWordHighlights)&&(identical(other.skipWordTap, skipWordTap) || other.skipWordTap == skipWordTap)&&(identical(other.forImage, forImage) || other.forImage == forImage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,quranScriptType,textStyle,textAlign,limitWord,wordIndex,showWordHighlights,skipWordTap,forImage);
+int get hashCode {
+    return Object.hash(runtimeType,surahNumber,ayahNumber,quranScriptType,textStyle,textAlign,limitWord,wordIndex,showWordHighlights,skipWordTap,forImage);
+}
 
 @override
 String toString() {
-  return 'ScriptInfo(surahNumber: $surahNumber, ayahNumber: $ayahNumber, quranScriptType: $quranScriptType, textStyle: $textStyle, textAlign: $textAlign, limitWord: $limitWord, wordIndex: $wordIndex, showWordHighlights: $showWordHighlights, skipWordTap: $skipWordTap, forImage: $forImage)';
+    return 'ScriptInfo(surahNumber: $surahNumber, ayahNumber: $ayahNumber, quranScriptType: $quranScriptType, textStyle: $textStyle, textAlign: $textAlign, limitWord: $limitWord, wordIndex: $wordIndex, showWordHighlights: $showWordHighlights, skipWordTap: $skipWordTap, forImage: $forImage)';
 }
 
 

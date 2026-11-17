@@ -29,16 +29,21 @@ $DownloadProgressCopyWith<DownloadProgress> get copyWith => _$DownloadProgressCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadProgress&&(identical(other.stepName, stepName) || other.stepName == stepName)&&(identical(other.percentage, percentage) || other.percentage == percentage)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.totalSteps, totalSteps) || other.totalSteps == totalSteps)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  final _this = this as DownloadProgress;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadProgress&&(identical(other.stepName, _this.stepName) || other.stepName == _this.stepName)&&(identical(other.percentage, _this.percentage) || other.percentage == _this.percentage)&&(identical(other.currentStepIndex, _this.currentStepIndex) || other.currentStepIndex == _this.currentStepIndex)&&(identical(other.totalSteps, _this.totalSteps) || other.totalSteps == _this.totalSteps)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,stepName,percentage,currentStepIndex,totalSteps,status,errorMessage);
+int get hashCode {
+  final _this = this as DownloadProgress;
+  return Object.hash(runtimeType,_this.stepName,_this.percentage,_this.currentStepIndex,_this.totalSteps,_this.status,_this.errorMessage);
+}
 
 @override
 String toString() {
-  return 'DownloadProgress(stepName: $stepName, percentage: $percentage, currentStepIndex: $currentStepIndex, totalSteps: $totalSteps, status: $status, errorMessage: $errorMessage)';
+  final _this = this as DownloadProgress;
+  return 'DownloadProgress(stepName: ${_this.stepName}, percentage: ${_this.percentage}, currentStepIndex: ${_this.currentStepIndex}, totalSteps: ${_this.totalSteps}, status: ${_this.status}, errorMessage: ${_this.errorMessage})';
 }
 
 
@@ -238,16 +243,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadProgress&&(identical(other.stepName, stepName) || other.stepName == stepName)&&(identical(other.percentage, percentage) || other.percentage == percentage)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.totalSteps, totalSteps) || other.totalSteps == totalSteps)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadProgress&&(identical(other.stepName, stepName) || other.stepName == stepName)&&(identical(other.percentage, percentage) || other.percentage == percentage)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.totalSteps, totalSteps) || other.totalSteps == totalSteps)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,stepName,percentage,currentStepIndex,totalSteps,status,errorMessage);
+int get hashCode {
+    return Object.hash(runtimeType,stepName,percentage,currentStepIndex,totalSteps,status,errorMessage);
+}
 
 @override
 String toString() {
-  return 'DownloadProgress(stepName: $stepName, percentage: $percentage, currentStepIndex: $currentStepIndex, totalSteps: $totalSteps, status: $status, errorMessage: $errorMessage)';
+    return 'DownloadProgress(stepName: $stepName, percentage: $percentage, currentStepIndex: $currentStepIndex, totalSteps: $totalSteps, status: $status, errorMessage: $errorMessage)';
 }
 
 

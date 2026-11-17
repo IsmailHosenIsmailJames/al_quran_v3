@@ -162,6 +162,8 @@ import 'package:al_quran_v3/src/features/quran_resources/domain/usecases/toggle_
     as _i130;
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart'
     as _i411;
+import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart'
+    as _i992;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_by_ayah_in_scroll_info_cubit.dart'
     as _i775;
 import 'package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart'
@@ -312,6 +314,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i609.QuranResourcesRemoteDataSource>(
       () => _i609.QuranResourcesRemoteDataSource(),
     );
+    gh.lazySingleton<_i992.AutoScrollCubit>(() => _i992.AutoScrollCubit());
     gh.lazySingleton<_i775.AyahByAyahInScrollInfoCubit>(
       () => _i775.AyahByAyahInScrollInfoCubit(),
     );

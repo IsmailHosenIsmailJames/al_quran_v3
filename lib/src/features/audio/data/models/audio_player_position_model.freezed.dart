@@ -26,16 +26,21 @@ $AudioPlayerPositionModelCopyWith<AudioPlayerPositionModel> get copyWith => _$Au
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioPlayerPositionModel&&(identical(other.currentDuration, currentDuration) || other.currentDuration == currentDuration)&&(identical(other.totalDuration, totalDuration) || other.totalDuration == totalDuration)&&(identical(other.bufferDuration, bufferDuration) || other.bufferDuration == bufferDuration));
+  final _this = this as AudioPlayerPositionModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioPlayerPositionModel&&(identical(other.currentDuration, _this.currentDuration) || other.currentDuration == _this.currentDuration)&&(identical(other.totalDuration, _this.totalDuration) || other.totalDuration == _this.totalDuration)&&(identical(other.bufferDuration, _this.bufferDuration) || other.bufferDuration == _this.bufferDuration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentDuration,totalDuration,bufferDuration);
+int get hashCode {
+  final _this = this as AudioPlayerPositionModel;
+  return Object.hash(runtimeType,_this.currentDuration,_this.totalDuration,_this.bufferDuration);
+}
 
 @override
 String toString() {
-  return 'AudioPlayerPositionModel(currentDuration: $currentDuration, totalDuration: $totalDuration, bufferDuration: $bufferDuration)';
+  final _this = this as AudioPlayerPositionModel;
+  return 'AudioPlayerPositionModel(currentDuration: ${_this.currentDuration}, totalDuration: ${_this.totalDuration}, bufferDuration: ${_this.bufferDuration})';
 }
 
 
@@ -226,16 +231,18 @@ _$AudioPlayerPositionModelCopyWith<_AudioPlayerPositionModel> get copyWith => __
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioPlayerPositionModel&&(identical(other.currentDuration, currentDuration) || other.currentDuration == currentDuration)&&(identical(other.totalDuration, totalDuration) || other.totalDuration == totalDuration)&&(identical(other.bufferDuration, bufferDuration) || other.bufferDuration == bufferDuration));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioPlayerPositionModel&&(identical(other.currentDuration, currentDuration) || other.currentDuration == currentDuration)&&(identical(other.totalDuration, totalDuration) || other.totalDuration == totalDuration)&&(identical(other.bufferDuration, bufferDuration) || other.bufferDuration == bufferDuration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,currentDuration,totalDuration,bufferDuration);
+int get hashCode {
+    return Object.hash(runtimeType,currentDuration,totalDuration,bufferDuration);
+}
 
 @override
 String toString() {
-  return 'AudioPlayerPositionModel(currentDuration: $currentDuration, totalDuration: $totalDuration, bufferDuration: $bufferDuration)';
+    return 'AudioPlayerPositionModel(currentDuration: $currentDuration, totalDuration: $totalDuration, bufferDuration: $bufferDuration)';
 }
 
 

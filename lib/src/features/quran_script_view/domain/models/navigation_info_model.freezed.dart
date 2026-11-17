@@ -26,16 +26,21 @@ $NavigationInfoModelCopyWith<NavigationInfoModel> get copyWith => _$NavigationIn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NavigationInfoModel&&(identical(other.previousStartKey, previousStartKey) || other.previousStartKey == previousStartKey)&&(identical(other.previousEndKey, previousEndKey) || other.previousEndKey == previousEndKey)&&(identical(other.nextStartKey, nextStartKey) || other.nextStartKey == nextStartKey)&&(identical(other.nextEndKey, nextEndKey) || other.nextEndKey == nextEndKey));
+  final _this = this as NavigationInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NavigationInfoModel&&(identical(other.previousStartKey, _this.previousStartKey) || other.previousStartKey == _this.previousStartKey)&&(identical(other.previousEndKey, _this.previousEndKey) || other.previousEndKey == _this.previousEndKey)&&(identical(other.nextStartKey, _this.nextStartKey) || other.nextStartKey == _this.nextStartKey)&&(identical(other.nextEndKey, _this.nextEndKey) || other.nextEndKey == _this.nextEndKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,previousStartKey,previousEndKey,nextStartKey,nextEndKey);
+int get hashCode {
+  final _this = this as NavigationInfoModel;
+  return Object.hash(runtimeType,_this.previousStartKey,_this.previousEndKey,_this.nextStartKey,_this.nextEndKey);
+}
 
 @override
 String toString() {
-  return 'NavigationInfoModel(previousStartKey: $previousStartKey, previousEndKey: $previousEndKey, nextStartKey: $nextStartKey, nextEndKey: $nextEndKey)';
+  final _this = this as NavigationInfoModel;
+  return 'NavigationInfoModel(previousStartKey: ${_this.previousStartKey}, previousEndKey: ${_this.previousEndKey}, nextStartKey: ${_this.nextStartKey}, nextEndKey: ${_this.nextEndKey})';
 }
 
 
@@ -228,16 +233,18 @@ _$NavigationInfoModelCopyWith<_NavigationInfoModel> get copyWith => __$Navigatio
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigationInfoModel&&(identical(other.previousStartKey, previousStartKey) || other.previousStartKey == previousStartKey)&&(identical(other.previousEndKey, previousEndKey) || other.previousEndKey == previousEndKey)&&(identical(other.nextStartKey, nextStartKey) || other.nextStartKey == nextStartKey)&&(identical(other.nextEndKey, nextEndKey) || other.nextEndKey == nextEndKey));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigationInfoModel&&(identical(other.previousStartKey, previousStartKey) || other.previousStartKey == previousStartKey)&&(identical(other.previousEndKey, previousEndKey) || other.previousEndKey == previousEndKey)&&(identical(other.nextStartKey, nextStartKey) || other.nextStartKey == nextStartKey)&&(identical(other.nextEndKey, nextEndKey) || other.nextEndKey == nextEndKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,previousStartKey,previousEndKey,nextStartKey,nextEndKey);
+int get hashCode {
+    return Object.hash(runtimeType,previousStartKey,previousEndKey,nextStartKey,nextEndKey);
+}
 
 @override
 String toString() {
-  return 'NavigationInfoModel(previousStartKey: $previousStartKey, previousEndKey: $previousEndKey, nextStartKey: $nextStartKey, nextEndKey: $nextEndKey)';
+    return 'NavigationInfoModel(previousStartKey: $previousStartKey, previousEndKey: $previousEndKey, nextStartKey: $nextStartKey, nextEndKey: $nextEndKey)';
 }
 
 

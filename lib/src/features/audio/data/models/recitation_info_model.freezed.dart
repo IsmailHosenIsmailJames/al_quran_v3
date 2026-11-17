@@ -29,16 +29,21 @@ $ReciterInfoModelCopyWith<ReciterInfoModel> get copyWith => _$ReciterInfoModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReciterInfoModel&&(identical(other.link, link) || other.link == link)&&(identical(other.name, name) || other.name == name)&&(identical(other.supportWordSegmentation, supportWordSegmentation) || other.supportWordSegmentation == supportWordSegmentation)&&(identical(other.source, source) || other.source == source)&&(identical(other.style, style) || other.style == style)&&(identical(other.img, img) || other.img == img)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.segmentsUrl, segmentsUrl) || other.segmentsUrl == segmentsUrl)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.showAyahHighlight, showAyahHighlight) || other.showAyahHighlight == showAyahHighlight));
+  final _this = this as ReciterInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReciterInfoModel&&(identical(other.link, _this.link) || other.link == _this.link)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.supportWordSegmentation, _this.supportWordSegmentation) || other.supportWordSegmentation == _this.supportWordSegmentation)&&(identical(other.source, _this.source) || other.source == _this.source)&&(identical(other.style, _this.style) || other.style == _this.style)&&(identical(other.img, _this.img) || other.img == _this.img)&&(identical(other.bio, _this.bio) || other.bio == _this.bio)&&(identical(other.segmentsUrl, _this.segmentsUrl) || other.segmentsUrl == _this.segmentsUrl)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading)&&(identical(other.showAyahHighlight, _this.showAyahHighlight) || other.showAyahHighlight == _this.showAyahHighlight));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,link,name,supportWordSegmentation,source,style,img,bio,segmentsUrl,isDownloading,showAyahHighlight);
+int get hashCode {
+  final _this = this as ReciterInfoModel;
+  return Object.hash(runtimeType,_this.link,_this.name,_this.supportWordSegmentation,_this.source,_this.style,_this.img,_this.bio,_this.segmentsUrl,_this.isDownloading,_this.showAyahHighlight);
+}
 
 @override
 String toString() {
-  return 'ReciterInfoModel(link: $link, name: $name, supportWordSegmentation: $supportWordSegmentation, source: $source, style: $style, img: $img, bio: $bio, segmentsUrl: $segmentsUrl, isDownloading: $isDownloading, showAyahHighlight: $showAyahHighlight)';
+  final _this = this as ReciterInfoModel;
+  return 'ReciterInfoModel(link: ${_this.link}, name: ${_this.name}, supportWordSegmentation: ${_this.supportWordSegmentation}, source: ${_this.source}, style: ${_this.style}, img: ${_this.img}, bio: ${_this.bio}, segmentsUrl: ${_this.segmentsUrl}, isDownloading: ${_this.isDownloading}, showAyahHighlight: ${_this.showAyahHighlight})';
 }
 
 
@@ -246,16 +251,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReciterInfoModel&&(identical(other.link, link) || other.link == link)&&(identical(other.name, name) || other.name == name)&&(identical(other.supportWordSegmentation, supportWordSegmentation) || other.supportWordSegmentation == supportWordSegmentation)&&(identical(other.source, source) || other.source == source)&&(identical(other.style, style) || other.style == style)&&(identical(other.img, img) || other.img == img)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.segmentsUrl, segmentsUrl) || other.segmentsUrl == segmentsUrl)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.showAyahHighlight, showAyahHighlight) || other.showAyahHighlight == showAyahHighlight));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReciterInfoModel&&(identical(other.link, link) || other.link == link)&&(identical(other.name, name) || other.name == name)&&(identical(other.supportWordSegmentation, supportWordSegmentation) || other.supportWordSegmentation == supportWordSegmentation)&&(identical(other.source, source) || other.source == source)&&(identical(other.style, style) || other.style == style)&&(identical(other.img, img) || other.img == img)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.segmentsUrl, segmentsUrl) || other.segmentsUrl == segmentsUrl)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.showAyahHighlight, showAyahHighlight) || other.showAyahHighlight == showAyahHighlight));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,link,name,supportWordSegmentation,source,style,img,bio,segmentsUrl,isDownloading,showAyahHighlight);
+int get hashCode {
+    return Object.hash(runtimeType,link,name,supportWordSegmentation,source,style,img,bio,segmentsUrl,isDownloading,showAyahHighlight);
+}
 
 @override
 String toString() {
-  return 'ReciterInfoModel(link: $link, name: $name, supportWordSegmentation: $supportWordSegmentation, source: $source, style: $style, img: $img, bio: $bio, segmentsUrl: $segmentsUrl, isDownloading: $isDownloading, showAyahHighlight: $showAyahHighlight)';
+    return 'ReciterInfoModel(link: $link, name: $name, supportWordSegmentation: $supportWordSegmentation, source: $source, style: $style, img: $img, bio: $bio, segmentsUrl: $segmentsUrl, isDownloading: $isDownloading, showAyahHighlight: $showAyahHighlight)';
 }
 
 

@@ -29,16 +29,21 @@ $SegmentsInfoModelCopyWith<SegmentsInfoModel> get copyWith => _$SegmentsInfoMode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SegmentsInfoModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.audioUrl, audioUrl) || other.audioUrl == audioUrl)&&(identical(other.duration, duration) || other.duration == duration)&&const DeepCollectionEquality().equals(other.segments, segments));
+  final _this = this as SegmentsInfoModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SegmentsInfoModel&&(identical(other.surahNumber, _this.surahNumber) || other.surahNumber == _this.surahNumber)&&(identical(other.ayahNumber, _this.ayahNumber) || other.ayahNumber == _this.ayahNumber)&&(identical(other.audioUrl, _this.audioUrl) || other.audioUrl == _this.audioUrl)&&(identical(other.duration, _this.duration) || other.duration == _this.duration)&&const DeepCollectionEquality().equals(other.segments, _this.segments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,audioUrl,duration,const DeepCollectionEquality().hash(segments));
+int get hashCode {
+  final _this = this as SegmentsInfoModel;
+  return Object.hash(runtimeType,_this.surahNumber,_this.ayahNumber,_this.audioUrl,_this.duration,const DeepCollectionEquality().hash(_this.segments));
+}
 
 @override
 String toString() {
-  return 'SegmentsInfoModel(surahNumber: $surahNumber, ayahNumber: $ayahNumber, audioUrl: $audioUrl, duration: $duration, segments: $segments)';
+  final _this = this as SegmentsInfoModel;
+  return 'SegmentsInfoModel(surahNumber: ${_this.surahNumber}, ayahNumber: ${_this.ayahNumber}, audioUrl: ${_this.audioUrl}, duration: ${_this.duration}, segments: ${_this.segments})';
 }
 
 
@@ -244,16 +249,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SegmentsInfoModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.audioUrl, audioUrl) || other.audioUrl == audioUrl)&&(identical(other.duration, duration) || other.duration == duration)&&const DeepCollectionEquality().equals(other._segments, _segments));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SegmentsInfoModel&&(identical(other.surahNumber, surahNumber) || other.surahNumber == surahNumber)&&(identical(other.ayahNumber, ayahNumber) || other.ayahNumber == ayahNumber)&&(identical(other.audioUrl, audioUrl) || other.audioUrl == audioUrl)&&(identical(other.duration, duration) || other.duration == duration)&&const DeepCollectionEquality().equals(other.segments, _segments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahNumber,ayahNumber,audioUrl,duration,const DeepCollectionEquality().hash(_segments));
+int get hashCode {
+    return Object.hash(runtimeType,surahNumber,ayahNumber,audioUrl,duration,const DeepCollectionEquality().hash(_segments));
+}
 
 @override
 String toString() {
-  return 'SegmentsInfoModel(surahNumber: $surahNumber, ayahNumber: $ayahNumber, audioUrl: $audioUrl, duration: $duration, segments: $segments)';
+    return 'SegmentsInfoModel(surahNumber: $surahNumber, ayahNumber: $ayahNumber, audioUrl: $audioUrl, duration: $duration, segments: $segments)';
 }
 
 

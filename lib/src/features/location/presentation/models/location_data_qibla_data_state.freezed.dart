@@ -26,16 +26,21 @@ $LocationQiblaPrayerDataStateCopyWith<LocationQiblaPrayerDataState> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationQiblaPrayerDataState&&(identical(other.latLon, latLon) || other.latLon == latLon)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.isPrayerTimeDownloading, isPrayerTimeDownloading) || other.isPrayerTimeDownloading == isPrayerTimeDownloading)&&(identical(other.isGettingLocation, isGettingLocation) || other.isGettingLocation == isGettingLocation)&&(identical(other.madhab, madhab) || other.madhab == madhab)&&(identical(other.hasInitialLocationUpdated, hasInitialLocationUpdated) || other.hasInitialLocationUpdated == hasInitialLocationUpdated));
+  final _this = this as LocationQiblaPrayerDataState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocationQiblaPrayerDataState&&(identical(other.latLon, _this.latLon) || other.latLon == _this.latLon)&&(identical(other.kaabaAngle, _this.kaabaAngle) || other.kaabaAngle == _this.kaabaAngle)&&(identical(other.calculationMethod, _this.calculationMethod) || other.calculationMethod == _this.calculationMethod)&&(identical(other.isPrayerTimeDownloading, _this.isPrayerTimeDownloading) || other.isPrayerTimeDownloading == _this.isPrayerTimeDownloading)&&(identical(other.isGettingLocation, _this.isGettingLocation) || other.isGettingLocation == _this.isGettingLocation)&&(identical(other.madhab, _this.madhab) || other.madhab == _this.madhab)&&(identical(other.hasInitialLocationUpdated, _this.hasInitialLocationUpdated) || other.hasInitialLocationUpdated == _this.hasInitialLocationUpdated));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,latLon,kaabaAngle,calculationMethod,isPrayerTimeDownloading,isGettingLocation,madhab,hasInitialLocationUpdated);
+int get hashCode {
+  final _this = this as LocationQiblaPrayerDataState;
+  return Object.hash(runtimeType,_this.latLon,_this.kaabaAngle,_this.calculationMethod,_this.isPrayerTimeDownloading,_this.isGettingLocation,_this.madhab,_this.hasInitialLocationUpdated);
+}
 
 @override
 String toString() {
-  return 'LocationQiblaPrayerDataState(latLon: $latLon, kaabaAngle: $kaabaAngle, calculationMethod: $calculationMethod, isPrayerTimeDownloading: $isPrayerTimeDownloading, isGettingLocation: $isGettingLocation, madhab: $madhab, hasInitialLocationUpdated: $hasInitialLocationUpdated)';
+  final _this = this as LocationQiblaPrayerDataState;
+  return 'LocationQiblaPrayerDataState(latLon: ${_this.latLon}, kaabaAngle: ${_this.kaabaAngle}, calculationMethod: ${_this.calculationMethod}, isPrayerTimeDownloading: ${_this.isPrayerTimeDownloading}, isGettingLocation: ${_this.isGettingLocation}, madhab: ${_this.madhab}, hasInitialLocationUpdated: ${_this.hasInitialLocationUpdated})';
 }
 
 
@@ -246,16 +251,18 @@ _$LocationQiblaPrayerDataStateCopyWith<_LocationQiblaPrayerDataState> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocationQiblaPrayerDataState&&(identical(other.latLon, latLon) || other.latLon == latLon)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.isPrayerTimeDownloading, isPrayerTimeDownloading) || other.isPrayerTimeDownloading == isPrayerTimeDownloading)&&(identical(other.isGettingLocation, isGettingLocation) || other.isGettingLocation == isGettingLocation)&&(identical(other.madhab, madhab) || other.madhab == madhab)&&(identical(other.hasInitialLocationUpdated, hasInitialLocationUpdated) || other.hasInitialLocationUpdated == hasInitialLocationUpdated));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocationQiblaPrayerDataState&&(identical(other.latLon, latLon) || other.latLon == latLon)&&(identical(other.kaabaAngle, kaabaAngle) || other.kaabaAngle == kaabaAngle)&&(identical(other.calculationMethod, calculationMethod) || other.calculationMethod == calculationMethod)&&(identical(other.isPrayerTimeDownloading, isPrayerTimeDownloading) || other.isPrayerTimeDownloading == isPrayerTimeDownloading)&&(identical(other.isGettingLocation, isGettingLocation) || other.isGettingLocation == isGettingLocation)&&(identical(other.madhab, madhab) || other.madhab == madhab)&&(identical(other.hasInitialLocationUpdated, hasInitialLocationUpdated) || other.hasInitialLocationUpdated == hasInitialLocationUpdated));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,latLon,kaabaAngle,calculationMethod,isPrayerTimeDownloading,isGettingLocation,madhab,hasInitialLocationUpdated);
+int get hashCode {
+    return Object.hash(runtimeType,latLon,kaabaAngle,calculationMethod,isPrayerTimeDownloading,isGettingLocation,madhab,hasInitialLocationUpdated);
+}
 
 @override
 String toString() {
-  return 'LocationQiblaPrayerDataState(latLon: $latLon, kaabaAngle: $kaabaAngle, calculationMethod: $calculationMethod, isPrayerTimeDownloading: $isPrayerTimeDownloading, isGettingLocation: $isGettingLocation, madhab: $madhab, hasInitialLocationUpdated: $hasInitialLocationUpdated)';
+    return 'LocationQiblaPrayerDataState(latLon: $latLon, kaabaAngle: $kaabaAngle, calculationMethod: $calculationMethod, isPrayerTimeDownloading: $isPrayerTimeDownloading, isGettingLocation: $isGettingLocation, madhab: $madhab, hasInitialLocationUpdated: $hasInitialLocationUpdated)';
 }
 
 

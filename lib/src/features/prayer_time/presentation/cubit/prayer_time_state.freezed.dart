@@ -26,16 +26,21 @@ $PrayerTimeStateCopyWith<PrayerTimeState> get copyWith => _$PrayerTimeStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerTimeState&&(identical(other.todayPrayerTimes, todayPrayerTimes) || other.todayPrayerTimes == todayPrayerTimes)&&const DeepCollectionEquality().equals(other.monthlyPrayerTimes, monthlyPrayerTimes)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.hasError, hasError) || other.hasError == hasError));
+  final _this = this as PrayerTimeState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrayerTimeState&&(identical(other.todayPrayerTimes, _this.todayPrayerTimes) || other.todayPrayerTimes == _this.todayPrayerTimes)&&const DeepCollectionEquality().equals(other.monthlyPrayerTimes, _this.monthlyPrayerTimes)&&(identical(other.isLoading, _this.isLoading) || other.isLoading == _this.isLoading)&&(identical(other.hasError, _this.hasError) || other.hasError == _this.hasError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,todayPrayerTimes,const DeepCollectionEquality().hash(monthlyPrayerTimes),isLoading,hasError);
+int get hashCode {
+  final _this = this as PrayerTimeState;
+  return Object.hash(runtimeType,_this.todayPrayerTimes,const DeepCollectionEquality().hash(_this.monthlyPrayerTimes),_this.isLoading,_this.hasError);
+}
 
 @override
 String toString() {
-  return 'PrayerTimeState(todayPrayerTimes: $todayPrayerTimes, monthlyPrayerTimes: $monthlyPrayerTimes, isLoading: $isLoading, hasError: $hasError)';
+  final _this = this as PrayerTimeState;
+  return 'PrayerTimeState(todayPrayerTimes: ${_this.todayPrayerTimes}, monthlyPrayerTimes: ${_this.monthlyPrayerTimes}, isLoading: ${_this.isLoading}, hasError: ${_this.hasError})';
 }
 
 
@@ -246,16 +251,18 @@ _$PrayerTimeStateCopyWith<_PrayerTimeState> get copyWith => __$PrayerTimeStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerTimeState&&(identical(other.todayPrayerTimes, todayPrayerTimes) || other.todayPrayerTimes == todayPrayerTimes)&&const DeepCollectionEquality().equals(other._monthlyPrayerTimes, _monthlyPrayerTimes)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.hasError, hasError) || other.hasError == hasError));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrayerTimeState&&(identical(other.todayPrayerTimes, todayPrayerTimes) || other.todayPrayerTimes == todayPrayerTimes)&&const DeepCollectionEquality().equals(other.monthlyPrayerTimes, _monthlyPrayerTimes)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.hasError, hasError) || other.hasError == hasError));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,todayPrayerTimes,const DeepCollectionEquality().hash(_monthlyPrayerTimes),isLoading,hasError);
+int get hashCode {
+    return Object.hash(runtimeType,todayPrayerTimes,const DeepCollectionEquality().hash(_monthlyPrayerTimes),isLoading,hasError);
+}
 
 @override
 String toString() {
-  return 'PrayerTimeState(todayPrayerTimes: $todayPrayerTimes, monthlyPrayerTimes: $monthlyPrayerTimes, isLoading: $isLoading, hasError: $hasError)';
+    return 'PrayerTimeState(todayPrayerTimes: $todayPrayerTimes, monthlyPrayerTimes: $monthlyPrayerTimes, isLoading: $isLoading, hasError: $hasError)';
 }
 
 

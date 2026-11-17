@@ -26,16 +26,21 @@ $DownloadStateCopyWith<DownloadState> get copyWith => _$DownloadStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadState&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  final _this = this as DownloadState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadState&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.progress, _this.progress) || other.progress == _this.progress)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,progress,errorMessage);
+int get hashCode {
+  final _this = this as DownloadState;
+  return Object.hash(runtimeType,_this.status,_this.progress,_this.errorMessage);
+}
 
 @override
 String toString() {
-  return 'DownloadState(status: $status, progress: $progress, errorMessage: $errorMessage)';
+  final _this = this as DownloadState;
+  return 'DownloadState(status: ${_this.status}, progress: ${_this.progress}, errorMessage: ${_this.errorMessage})';
 }
 
 
@@ -235,16 +240,18 @@ _$DownloadStateCopyWith<_DownloadState> get copyWith => __$DownloadStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadState&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadState&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,progress,errorMessage);
+int get hashCode {
+    return Object.hash(runtimeType,status,progress,errorMessage);
+}
 
 @override
 String toString() {
-  return 'DownloadState(status: $status, progress: $progress, errorMessage: $errorMessage)';
+    return 'DownloadState(status: $status, progress: $progress, errorMessage: $errorMessage)';
 }
 
 

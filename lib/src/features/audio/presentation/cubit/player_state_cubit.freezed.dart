@@ -26,16 +26,21 @@ $PlayerStateCopyWith<PlayerState> get copyWith => _$PlayerStateCopyWithImpl<Play
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlayerState&&(identical(other.state, state) || other.state == state)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying));
+  final _this = this as PlayerState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlayerState&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.isPlaying, _this.isPlaying) || other.isPlaying == _this.isPlaying));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,state,isPlaying);
+int get hashCode {
+  final _this = this as PlayerState;
+  return Object.hash(runtimeType,_this.state,_this.isPlaying);
+}
 
 @override
 String toString() {
-  return 'PlayerState(state: $state, isPlaying: $isPlaying)';
+  final _this = this as PlayerState;
+  return 'PlayerState(state: ${_this.state}, isPlaying: ${_this.isPlaying})';
 }
 
 
@@ -224,16 +229,18 @@ _$PlayerStateCopyWith<_PlayerState> get copyWith => __$PlayerStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlayerState&&(identical(other.state, state) || other.state == state)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlayerState&&(identical(other.state, state) || other.state == state)&&(identical(other.isPlaying, isPlaying) || other.isPlaying == isPlaying));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,state,isPlaying);
+int get hashCode {
+    return Object.hash(runtimeType,state,isPlaying);
+}
 
 @override
 String toString() {
-  return 'PlayerState(state: $state, isPlaying: $isPlaying)';
+    return 'PlayerState(state: $state, isPlaying: $isPlaying)';
 }
 
 

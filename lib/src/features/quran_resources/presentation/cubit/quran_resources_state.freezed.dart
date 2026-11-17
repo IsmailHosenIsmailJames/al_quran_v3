@@ -26,16 +26,21 @@ $QuranResourcesStateCopyWith<QuranResourcesState> get copyWith => _$QuranResourc
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranResourcesState&&(identical(other.status, status) || other.status == status)&&(identical(other.activeTabIndex, activeTabIndex) || other.activeTabIndex == activeTabIndex)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&const DeepCollectionEquality().equals(other.translationGroups, translationGroups)&&const DeepCollectionEquality().equals(other.tafsirGroups, tafsirGroups)&&const DeepCollectionEquality().equals(other.wordByWordResources, wordByWordResources)&&(identical(other.downloadingResourcePath, downloadingResourcePath) || other.downloadingResourcePath == downloadingResourcePath)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  final _this = this as QuranResourcesState;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuranResourcesState&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.activeTabIndex, _this.activeTabIndex) || other.activeTabIndex == _this.activeTabIndex)&&(identical(other.searchQuery, _this.searchQuery) || other.searchQuery == _this.searchQuery)&&(identical(other.isSearching, _this.isSearching) || other.isSearching == _this.isSearching)&&const DeepCollectionEquality().equals(other.translationGroups, _this.translationGroups)&&const DeepCollectionEquality().equals(other.tafsirGroups, _this.tafsirGroups)&&const DeepCollectionEquality().equals(other.wordByWordResources, _this.wordByWordResources)&&(identical(other.downloadingResourcePath, _this.downloadingResourcePath) || other.downloadingResourcePath == _this.downloadingResourcePath)&&(identical(other.downloadProgress, _this.downloadProgress) || other.downloadProgress == _this.downloadProgress)&&(identical(other.errorMessage, _this.errorMessage) || other.errorMessage == _this.errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,activeTabIndex,searchQuery,isSearching,const DeepCollectionEquality().hash(translationGroups),const DeepCollectionEquality().hash(tafsirGroups),const DeepCollectionEquality().hash(wordByWordResources),downloadingResourcePath,downloadProgress,errorMessage);
+int get hashCode {
+  final _this = this as QuranResourcesState;
+  return Object.hash(runtimeType,_this.status,_this.activeTabIndex,_this.searchQuery,_this.isSearching,const DeepCollectionEquality().hash(_this.translationGroups),const DeepCollectionEquality().hash(_this.tafsirGroups),const DeepCollectionEquality().hash(_this.wordByWordResources),_this.downloadingResourcePath,_this.downloadProgress,_this.errorMessage);
+}
 
 @override
 String toString() {
-  return 'QuranResourcesState(status: $status, activeTabIndex: $activeTabIndex, searchQuery: $searchQuery, isSearching: $isSearching, translationGroups: $translationGroups, tafsirGroups: $tafsirGroups, wordByWordResources: $wordByWordResources, downloadingResourcePath: $downloadingResourcePath, downloadProgress: $downloadProgress, errorMessage: $errorMessage)';
+  final _this = this as QuranResourcesState;
+  return 'QuranResourcesState(status: ${_this.status}, activeTabIndex: ${_this.activeTabIndex}, searchQuery: ${_this.searchQuery}, isSearching: ${_this.isSearching}, translationGroups: ${_this.translationGroups}, tafsirGroups: ${_this.tafsirGroups}, wordByWordResources: ${_this.wordByWordResources}, downloadingResourcePath: ${_this.downloadingResourcePath}, downloadProgress: ${_this.downloadProgress}, errorMessage: ${_this.errorMessage})';
 }
 
 
@@ -258,16 +263,18 @@ _$QuranResourcesStateCopyWith<_QuranResourcesState> get copyWith => __$QuranReso
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranResourcesState&&(identical(other.status, status) || other.status == status)&&(identical(other.activeTabIndex, activeTabIndex) || other.activeTabIndex == activeTabIndex)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&const DeepCollectionEquality().equals(other._translationGroups, _translationGroups)&&const DeepCollectionEquality().equals(other._tafsirGroups, _tafsirGroups)&&const DeepCollectionEquality().equals(other._wordByWordResources, _wordByWordResources)&&(identical(other.downloadingResourcePath, downloadingResourcePath) || other.downloadingResourcePath == downloadingResourcePath)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuranResourcesState&&(identical(other.status, status) || other.status == status)&&(identical(other.activeTabIndex, activeTabIndex) || other.activeTabIndex == activeTabIndex)&&(identical(other.searchQuery, searchQuery) || other.searchQuery == searchQuery)&&(identical(other.isSearching, isSearching) || other.isSearching == isSearching)&&const DeepCollectionEquality().equals(other.translationGroups, _translationGroups)&&const DeepCollectionEquality().equals(other.tafsirGroups, _tafsirGroups)&&const DeepCollectionEquality().equals(other.wordByWordResources, _wordByWordResources)&&(identical(other.downloadingResourcePath, downloadingResourcePath) || other.downloadingResourcePath == downloadingResourcePath)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,activeTabIndex,searchQuery,isSearching,const DeepCollectionEquality().hash(_translationGroups),const DeepCollectionEquality().hash(_tafsirGroups),const DeepCollectionEquality().hash(_wordByWordResources),downloadingResourcePath,downloadProgress,errorMessage);
+int get hashCode {
+    return Object.hash(runtimeType,status,activeTabIndex,searchQuery,isSearching,const DeepCollectionEquality().hash(_translationGroups),const DeepCollectionEquality().hash(_tafsirGroups),const DeepCollectionEquality().hash(_wordByWordResources),downloadingResourcePath,downloadProgress,errorMessage);
+}
 
 @override
 String toString() {
-  return 'QuranResourcesState(status: $status, activeTabIndex: $activeTabIndex, searchQuery: $searchQuery, isSearching: $isSearching, translationGroups: $translationGroups, tafsirGroups: $tafsirGroups, wordByWordResources: $wordByWordResources, downloadingResourcePath: $downloadingResourcePath, downloadProgress: $downloadProgress, errorMessage: $errorMessage)';
+    return 'QuranResourcesState(status: $status, activeTabIndex: $activeTabIndex, searchQuery: $searchQuery, isSearching: $isSearching, translationGroups: $translationGroups, tafsirGroups: $tafsirGroups, wordByWordResources: $wordByWordResources, downloadingResourcePath: $downloadingResourcePath, downloadProgress: $downloadProgress, errorMessage: $errorMessage)';
 }
 
 

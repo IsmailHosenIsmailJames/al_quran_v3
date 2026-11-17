@@ -29,16 +29,21 @@ $SurahInfoDetailEntityCopyWith<SurahInfoDetailEntity> get copyWith => _$SurahInf
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahInfoDetailEntity&&(identical(other.surahId, surahId) || other.surahId == surahId)&&(identical(other.title, title) || other.title == title)&&(identical(other.htmlContent, htmlContent) || other.htmlContent == htmlContent));
+  final _this = this as SurahInfoDetailEntity;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SurahInfoDetailEntity&&(identical(other.surahId, _this.surahId) || other.surahId == _this.surahId)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.htmlContent, _this.htmlContent) || other.htmlContent == _this.htmlContent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahId,title,htmlContent);
+int get hashCode {
+  final _this = this as SurahInfoDetailEntity;
+  return Object.hash(runtimeType,_this.surahId,_this.title,_this.htmlContent);
+}
 
 @override
 String toString() {
-  return 'SurahInfoDetailEntity(surahId: $surahId, title: $title, htmlContent: $htmlContent)';
+  final _this = this as SurahInfoDetailEntity;
+  return 'SurahInfoDetailEntity(surahId: ${_this.surahId}, title: ${_this.title}, htmlContent: ${_this.htmlContent})';
 }
 
 
@@ -232,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahInfoDetailEntity&&(identical(other.surahId, surahId) || other.surahId == surahId)&&(identical(other.title, title) || other.title == title)&&(identical(other.htmlContent, htmlContent) || other.htmlContent == htmlContent));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SurahInfoDetailEntity&&(identical(other.surahId, surahId) || other.surahId == surahId)&&(identical(other.title, title) || other.title == title)&&(identical(other.htmlContent, htmlContent) || other.htmlContent == htmlContent));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,surahId,title,htmlContent);
+int get hashCode {
+    return Object.hash(runtimeType,surahId,title,htmlContent);
+}
 
 @override
 String toString() {
-  return 'SurahInfoDetailEntity(surahId: $surahId, title: $title, htmlContent: $htmlContent)';
+    return 'SurahInfoDetailEntity(surahId: $surahId, title: $title, htmlContent: $htmlContent)';
 }
 
 
