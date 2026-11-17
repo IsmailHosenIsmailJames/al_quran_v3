@@ -4,6 +4,7 @@ import "package:al_quran_v3/src/features/daily_plan/domain/entities/daily_plan_e
 import "package:al_quran_v3/src/features/daily_plan/domain/entities/khatam_plan_entity.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/consistency_heatmap_calendar.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/khatam_planner_modal.dart";
 import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
@@ -196,6 +197,21 @@ class TodayPlanHelperCard extends StatelessWidget {
                             ),
                           ],
                         ),
+                      ),
+
+                      // Consistency Heatmap Calendar Button
+                      IconButton(
+                        visualDensity: VisualDensity.compact,
+                        icon:
+                            const Icon(Icons.calendar_month_rounded, size: 20),
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
+                        tooltip: "Consistency Heatmap",
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          ConsistencyHeatmapCalendar.show(context);
+                        },
                       ),
 
                       // Expand / Collapse Chevron

@@ -1,6 +1,7 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
+import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/consistency_heatmap_calendar.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/khatam_planner_modal.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
@@ -181,6 +182,63 @@ class AppBarStreakBadge extends StatelessWidget {
                           Icons.arrow_forward_ios_rounded,
                           size: 12,
                           color: themeState.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const Gap(8),
+
+                // Heatmap Calendar Shortcut
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(bottomSheetContext);
+                    ConsistencyHeatmapCalendar.show(context);
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.04)
+                          : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade300,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_month_rounded,
+                          size: 18,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
+                        ),
+                        const Gap(10),
+                        Expanded(
+                          child: Text(
+                            "Monthly Consistency Heatmap",
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600,
+                              color: isDark ? Colors.white : Colors.black87,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 12,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
                         ),
                       ],
                     ),
