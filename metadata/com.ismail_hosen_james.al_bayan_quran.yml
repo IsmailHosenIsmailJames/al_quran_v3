@@ -15,6 +15,8 @@ Description: |-
 
   Features:
   * Full Quran Mushaf & Script views with multiple Arabic typography fonts (Uthmani, Indopak).
+  * Hands-free smooth Auto-Scroll reading with floating speed controls.
+  * Today's Plan, Khatam tracker, and Istiqamah habit streaks.
   * Word-by-word analysis and translations in dozens of languages.
   * Audio recitation playback with background audio support.
   * Offline prayer time calculations and Qibla compass.
@@ -35,7 +37,17 @@ Builds:
       - $$flutter$$/bin/flutter pub get
       - $$flutter$$/bin/flutter build apk --release
 
+  - versionName: 4.3.0
+    versionCode: 103
+    commit: v4.3.0-foss
+    subdir: .
+    output: build/app/outputs/flutter-apk/app-release.apk
+    build:
+      - $$flutter$$/bin/flutter config --no-analytics
+      - $$flutter$$/bin/flutter pub get
+      - $$flutter$$/bin/flutter build apk --release
+
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 4.2.0
-CurrentVersionCode: 101
+CurrentVersion: 4.3.0
+CurrentVersionCode: 103

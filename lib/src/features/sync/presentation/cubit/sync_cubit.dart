@@ -5,11 +5,10 @@ import "package:injectable/injectable.dart";
 
 @lazySingleton
 class SyncCubit extends Cubit<SyncState> {
-  final CloudSyncService _syncService;
+  final CloudSyncService syncService;
 
-  SyncCubit({required CloudSyncService syncService})
-      : _syncService = syncService,
-        super(const SyncInitial());
+  SyncCubit({required this.syncService})
+      : super(const SyncInitial());
 
   bool get isAutoSyncEnabled => false;
   void setAutoSyncEnabled(bool enabled) {}
