@@ -14,7 +14,7 @@ Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
 Builds:
   - versionName: 4.3.0
     versionCode: 103
-    commit: cec51a8b4d3f3d700d53d93642fbd830bbc342b1
+    commit: 298e5fe4caf2393d16f2e68f2e3b871101b17ca5
     output: build/app/outputs/flutter-apk/app-release.apk
     srclibs:
       - flutter@stable
