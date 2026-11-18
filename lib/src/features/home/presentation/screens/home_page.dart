@@ -23,10 +23,8 @@ import "package:al_quran_v3/src/features/settings/presentation/screens/settings_
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/app_bar_streak_badge.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_compass/flutter_compass.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -47,12 +45,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-    // Read cached compass sensor state if available
+    final bool isMobile =
+        platformOwn == platform_services.PlatformOwn.isAndroid ||
+        platformOwn == platform_services.PlatformOwn.isIos;
+    _hasCompassSensor = isMobile;
     try {
-      final cached = Hive.box("user").get("has_compass_sensor");
-      if (cached != null && cached is bool) {
-        _hasCompassSensor = cached;
-      }
+      Hive.box("user").put("has_compass_sensor", isMobile);
     } catch (_) {}
 
     pageController = PageController(
@@ -79,31 +77,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Future<void> _checkCompassAvailability() async {
-    if (kIsWeb ||
-        platformOwn == platform_services.PlatformOwn.isWindows ||
-        platformOwn == platform_services.PlatformOwn.isLinux ||
-        platformOwn == platform_services.PlatformOwn.isMac) {
-      _updateCompassSensor(false);
-      return;
-    }
-
-    try {
-      final events = FlutterCompass.events;
-      if (events == null) {
-        _updateCompassSensor(false);
-        return;
-      }
-      final hasHeading = await events
-          .map((e) => e.heading != null)
-          .first
-          .timeout(
-            const Duration(milliseconds: 1200),
-            onTimeout: () => false,
-          );
-      _updateCompassSensor(hasHeading);
-    } catch (_) {
-      _updateCompassSensor(false);
-    }
+    final bool isMobile =
+        platformOwn == platform_services.PlatformOwn.isAndroid ||
+        platformOwn == platform_services.PlatformOwn.isIos;
+    _updateCompassSensor(isMobile);
   }
 
   void _updateCompassSensor(bool hasSensor) {
@@ -124,9 +101,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ];
     }
 
-    if (_hasCompassSensor &&
-        (platformOwn == platform_services.PlatformOwn.isAndroid ||
-            platformOwn == platform_services.PlatformOwn.isIos)) {
+    if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+        platformOwn == platform_services.PlatformOwn.isIos) {
       return const [
         QuranPage(),
         PrayerTimePage(),
@@ -177,9 +153,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ];
     }
 
-    if (_hasCompassSensor &&
-        (platformOwn == platform_services.PlatformOwn.isAndroid ||
-            platformOwn == platform_services.PlatformOwn.isIos)) {
+    if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+        platformOwn == platform_services.PlatformOwn.isIos) {
       return [
         BottomNavigationBarItem(
           icon: Icon(
@@ -520,9 +495,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                         },
                       ),
                       // Settings shortcut (only when Settings is not in main rail destinations)
-                      if (_hasCompassSensor &&
-                          (platformOwn == platform_services.PlatformOwn.isAndroid ||
-                              platformOwn == platform_services.PlatformOwn.isIos))
+                      if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                          platformOwn == platform_services.PlatformOwn.isIos)
                         IconButton(
                           tooltip: l10n.settings,
                           icon: Icon(
@@ -584,9 +558,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           inactiveIcon: FluentIcons.person_accounts_24_regular,
         ),
       ];
-    } else if (_hasCompassSensor &&
-        (platformOwn == platform_services.PlatformOwn.isAndroid ||
-            platformOwn == platform_services.PlatformOwn.isIos)) {
+    } else if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+        platformOwn == platform_services.PlatformOwn.isIos) {
       items = [
         _RailDestinationItem(
           index: 0,
