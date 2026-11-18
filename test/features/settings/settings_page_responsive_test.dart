@@ -8,8 +8,6 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
-import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
@@ -28,13 +26,6 @@ import "package:shared_preferences/shared_preferences.dart";
 class FakeOthersSettingsCubit extends Cubit<OthersSettingsState>
     implements OthersSettingsCubit {
   FakeOthersSettingsCubit() : super(const OthersSettingsState());
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class FakeAuthCubit extends Cubit<AuthState> implements AuthCubit {
-  FakeAuthCubit() : super(const Unauthenticated());
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -64,7 +55,6 @@ void main() {
         BlocProvider<OthersSettingsCubit>(
           create: (context) => FakeOthersSettingsCubit(),
         ),
-        BlocProvider<AuthCubit>(create: (context) => FakeAuthCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
         BlocProvider(create: (context) => AyahToHighlight()),
         BlocProvider(create: (context) => AyahKeyCubit()),
