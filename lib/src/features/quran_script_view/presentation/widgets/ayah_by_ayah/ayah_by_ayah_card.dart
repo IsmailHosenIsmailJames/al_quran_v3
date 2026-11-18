@@ -169,11 +169,7 @@ class AyahByAyahCard extends StatelessWidget {
               decoration: removeBorder
                   ? null
                   : BoxDecoration(
-                      color: isHighlighted
-                          ? themeState.primary.withValues(
-                              alpha: isDark ? 0.12 : 0.06,
-                            )
-                          : (isDark ? const Color(0xFF181818) : Colors.white),
+                      color: isDark ? const Color(0xFF181818) : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: isHighlighted
@@ -184,7 +180,7 @@ class AyahByAyahCard extends StatelessWidget {
                         width: isHighlighted ? 1.5 : 1.0,
                       ),
                       boxShadow: [
-                        if (!isDark && !isHighlighted)
+                        if (!isDark)
                           BoxShadow(
                             color: Colors.black.withValues(alpha: 0.02),
                             blurRadius: 6,
