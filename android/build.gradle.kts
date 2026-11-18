@@ -15,8 +15,13 @@ if (platformsDir.exists()) {
             p37_0.copyRecursively(p37, overwrite = true)
             val props = File(p37, "source.properties")
             if (props.exists()) {
-                val content = props.readText().replace("ApiLevel=37.0", "ApiLevel=37")
+                val content = props.readText().replace("37.0", "37")
                 props.writeText(content)
+            }
+            val pkgXml = File(p37, "package.xml")
+            if (pkgXml.exists()) {
+                val content = pkgXml.readText().replace("37.0", "37")
+                pkgXml.writeText(content)
             }
         } catch (_: Exception) {}
     }
