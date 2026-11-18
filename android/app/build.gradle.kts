@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.ismail_hosen_james.al_bayan_quran"
-    compileSdk = 37
+    compileSdk = 36
     ndkVersion = "29.0.14206865"
 
     compileOptions {
