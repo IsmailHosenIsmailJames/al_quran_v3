@@ -7,19 +7,6 @@ SourceCode: https://github.com/IsmailHosenIsmailJames/al_quran_v3
 IssueTracker: https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues
 
 AutoName: 'Al Quran: Audio, Tafsir, Qibla'
-Summary: Holy Quran, Tafsir, Audio Recitations, and Prayer Times (FOSS Edition)
-Description: |-
-  Al Quran: Audio, Tafsir, Qibla is an Islamic application for reading the Holy Quran, listening to recitations, calculating accurate prayer times, and finding the Qibla direction.
-
-  Features:
-  * Full Quran Mushaf & Script views with multiple Arabic typography fonts (Uthmani, Indopak).
-  * Hands-free smooth Auto-Scroll reading with floating speed controls.
-  * Today's Plan, Khatam tracker, and Istiqamah habit streaks.
-  * Word-by-word analysis and translations in dozens of languages.
-  * Audio recitation playback with background audio support.
-  * Offline prayer time calculations and Qibla compass.
-  * Local notes, pinned ayahs, and reading history saved entirely offline on device.
-  * 100% Free and Open Source (FOSS) with zero ads, zero tracking, and no proprietary dependencies.
 
 RepoType: git
 Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
@@ -38,10 +25,10 @@ Builds:
     prebuild:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter pub get
-    build:
-      - $$flutter$$/bin/flutter build apk --release
+    build: $$flutter$$/bin/flutter build apk --release --android-skip-build-dependency-validation
 
 AutoUpdateMode: Version
-UpdateCheckMode: Tags
+UpdateCheckMode: Tags ^v[0-9.]+-foss$
+UpdateCheckData: pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
 CurrentVersion: 4.3.0
 CurrentVersionCode: 103

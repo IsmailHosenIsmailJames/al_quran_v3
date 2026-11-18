@@ -1,0 +1,6 @@
+• Added smooth hands-free Auto-Scroll reading with floating pacing HUD and touch-pause
+• Added Today's Plan, Khatam pace calculator, and Istiqamah spiritual habit streaks
+• Added 100% offline Local JSON Backup & Restore for notes, bookmarks, and preferences
+• Ensured permanent Qibla Compass bottom navigation tab on mobile
+• Updated active Ayah highlighting to clean themed border
+• Performance improvements and bug fixes
