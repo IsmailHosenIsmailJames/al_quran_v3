@@ -4,9 +4,6 @@ import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
-    // START: FlutterFire Configuration
-    id("com.google.gms.google-services")
-    // END: FlutterFire Configuration
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -19,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.ismail_hosen_james.al_bayan_quran"
-    compileSdk = 37
+    compileSdk = 36
     ndkVersion = "29.0.14206865"
 
     compileOptions {
@@ -66,21 +63,27 @@ android {
     }
 
     buildTypes {
-        val appSigningConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+        val appSigningConfig = signingConfigs.findByName("release") ?: signingConfigs.findByName("debug")
 
         getByName("debug") {
-            signingConfig = appSigningConfig
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
+            }
         }
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = appSigningConfig
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
+            }
         }
         maybeCreate("profile").apply {
             initWith(getByName("release"))
             matchingFallbacks += listOf("release")
-            signingConfig = appSigningConfig
+            if (appSigningConfig != null) {
+                signingConfig = appSigningConfig
+            }
         }
     }
     buildToolsVersion = "36.1.0"
