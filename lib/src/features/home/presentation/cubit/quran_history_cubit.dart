@@ -28,7 +28,11 @@ class QuranHistoryCubit extends Cubit<QuranHistoryState> {
     );
 
     emit(QuranHistoryState(history: getHistoryUseCase()));
-    getIt<SyncCubit>().triggerAutoSync();
+    try {
+      if (getIt.isRegistered<SyncCubit>()) {
+        getIt<SyncCubit>().triggerAutoSync();
+      }
+    } catch (_) {}
 
     try {
       getIt<StreakCubit>().recordReading(

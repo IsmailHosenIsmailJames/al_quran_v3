@@ -40,6 +40,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/audio_controller_ui.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_state.dart";
@@ -70,11 +71,15 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       ItemScrollController();
   final ItemPositionsListener itemPositionsListenerAyahByAyah =
       ItemPositionsListener.create();
+  final ScrollOffsetController scrollOffsetControllerAyahByAyah =
+      ScrollOffsetController();
 
   final ItemScrollController itemScrollControllerReadingMode =
       ItemScrollController();
   final ItemPositionsListener itemPositionsListenerReadingMode =
       ItemPositionsListener.create();
+  final ScrollOffsetController scrollOffsetControllerReadingMode =
+      ScrollOffsetController();
 
   final ItemScrollController itemScrollControllerSurahList =
       ItemScrollController();
@@ -96,6 +101,13 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   Timer? _historyDebounceTimer;
   Timer? _autoScrollTimer;
   bool _isAutoScrollFabVisible = true;
+  AutoScrollCubit? _autoScrollCubit;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _autoScrollCubit = _getAutoScrollCubit(context);
+  }
 
   late List<String> ayahsList;
   List<List<String>> pagesList = [];
@@ -206,13 +218,30 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       }
     }
 
+    if (isAyahByAyah) {
+      context.read<AyahToHighlight>().changeAyah(startAyah);
+    }
+
     context.read<AutoScrollCubit>().activate(
       initialAyahKey: startAyah,
       initialIndex: startIndex,
     );
   }
 
-  void _scheduleNextAutoScrollStep() {
+  AutoScrollCubit? _getAutoScrollCubit(BuildContext context) {
+    try {
+      return context.read<AutoScrollCubit>();
+    } catch (_) {
+      try {
+        if (getIt.isRegistered<AutoScrollCubit>()) {
+          return getIt<AutoScrollCubit>();
+        }
+      } catch (_) {}
+      return null;
+    }
+  }
+
+  void _startContinuousAutoScroll() {
     _autoScrollTimer?.cancel();
     if (!mounted) return;
 
@@ -223,70 +252,80 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     final isAyahByAyah =
         context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah;
 
+    // Boundary check: pause if we reached the bottom of the list
     if (isAyahByAyah) {
-      int currentIndex = state.currentScrollIndex;
-      if (_lastTopAyahKey != null) {
-        final idx = ayahsList.indexOf(_lastTopAyahKey!);
-        if (idx != -1) currentIndex = idx;
-      }
-
-      if (currentIndex >= ayahsList.length - 1) {
-        autoScrollCubit.pause();
-        return;
-      }
-
-      final targetIndex = currentIndex + 1;
-      final targetAyahKey = ayahsList[targetIndex];
-      final Duration stepDuration = state.getAyahDuration(targetAyahKey);
-
-      if (itemScrollControllerAyahByAyah.isAttached) {
-        itemScrollControllerAyahByAyah.scrollTo(
-          index: targetIndex,
-          alignment: 0.15,
-          duration: stepDuration,
-          curve: Curves.linear,
-        );
-      }
-
-      context.read<AyahToHighlight>().changeAyah(targetAyahKey);
-      autoScrollCubit.updateCurrentIndex(targetIndex, ayahKey: targetAyahKey);
-
-      _autoScrollTimer = Timer(stepDuration, () {
-        if (mounted) {
-          _scheduleNextAutoScrollStep();
+      final positions = itemPositionsListenerAyahByAyah.itemPositions.value;
+      if (positions.isNotEmpty) {
+        final lastVisible =
+            positions.reduce((a, b) => a.index > b.index ? a : b);
+        if (lastVisible.index >= ayahsList.length &&
+            lastVisible.itemTrailingEdge <= 1.0) {
+          autoScrollCubit.pause();
+          return;
         }
-      });
+      }
     } else {
-      int currentIdx = state.currentScrollIndex;
-      if (_lastTopPageIndex != null) {
-        currentIdx = _lastTopPageIndex!;
+      final positions = itemPositionsListenerReadingMode.itemPositions.value;
+      if (positions.isNotEmpty) {
+        final lastVisible =
+            positions.reduce((a, b) => a.index > b.index ? a : b);
+        if (lastVisible.index >= pagesList.length &&
+            lastVisible.itemTrailingEdge <= 1.0) {
+          autoScrollCubit.pause();
+          return;
+        }
       }
+    }
 
-      if (currentIdx >= pagesList.length - 1) {
-        autoScrollCubit.pause();
-        return;
-      }
+    const int stepDurationMs = 200;
+    const double basePixelsPerSecond = 36.0;
+    final double stepOffset =
+        (basePixelsPerSecond * state.speed) * (stepDurationMs / 1000.0);
 
-      final targetIdx = currentIdx + 1;
-      final targetPage = pagesList[targetIdx];
-      final Duration stepDuration = state.getPageDuration(targetPage);
+    final itemController = isAyahByAyah
+        ? itemScrollControllerAyahByAyah
+        : itemScrollControllerReadingMode;
+    final offsetController = isAyahByAyah
+        ? scrollOffsetControllerAyahByAyah
+        : scrollOffsetControllerReadingMode;
 
-      if (itemScrollControllerReadingMode.isAttached) {
-        itemScrollControllerReadingMode.scrollTo(
-          index: targetIdx,
-          alignment: 0.15,
-          duration: stepDuration,
+    if (itemController.isAttached) {
+      try {
+        offsetController.animateScroll(
+          offset: stepOffset,
+          duration: const Duration(milliseconds: stepDurationMs),
           curve: Curves.linear,
         );
+      } catch (_) {}
+    }
+
+    _autoScrollTimer = Timer(const Duration(milliseconds: stepDurationMs), () {
+      if (mounted) {
+        _startContinuousAutoScroll();
       }
+    });
+  }
 
-      autoScrollCubit.updateCurrentIndex(targetIdx, ayahKey: targetPage.first);
+  void _stopContinuousAutoScroll() {
+    _autoScrollTimer?.cancel();
+    _autoScrollTimer = null;
 
-      _autoScrollTimer = Timer(stepDuration, () {
-        if (mounted) {
-          _scheduleNextAutoScrollStep();
-        }
-      });
+    if (itemScrollControllerAyahByAyah.isAttached) {
+      try {
+        scrollOffsetControllerAyahByAyah.animateScroll(
+          offset: 0,
+          duration: const Duration(milliseconds: 1),
+        );
+      } catch (_) {}
+    }
+
+    if (itemScrollControllerReadingMode.isAttached) {
+      try {
+        scrollOffsetControllerReadingMode.animateScroll(
+          offset: 0,
+          duration: const Duration(milliseconds: 1),
+        );
+      } catch (_) {}
     }
   }
 
@@ -323,6 +362,12 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             context.read<QuranHistoryCubit>().addHistory(ayahKey: ayahKey);
           }
         });
+
+        final autoScrollCubit = _getAutoScrollCubit(context);
+        if (autoScrollCubit != null && autoScrollCubit.state.isActive) {
+          context.read<AyahToHighlight>().changeAyah(ayahKey);
+          autoScrollCubit.updateCurrentIndex(topItem.index, ayahKey: ayahKey);
+        }
       }
     }
   }
@@ -366,6 +411,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             );
           }
         });
+
+        final autoScrollCubit = _getAutoScrollCubit(context);
+        if (autoScrollCubit != null && autoScrollCubit.state.isActive) {
+          autoScrollCubit.updateCurrentIndex(pageIdx, ayahKey: firstAyah);
+        }
       }
     }
   }
@@ -374,11 +424,11 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   void dispose() {
     _surahSearchController.dispose();
     _historyDebounceTimer?.cancel();
-    _autoScrollTimer?.cancel();
+    _stopContinuousAutoScroll();
     _ayahKeyCubitSubscription?.cancel();
     _ayahScrollInfoSubscription?.cancel();
     try {
-      context.read<AutoScrollCubit>().deactivate();
+      _autoScrollCubit?.deactivate();
     } catch (_) {}
     super.dispose();
   }
@@ -608,6 +658,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   Widget build(BuildContext context) {
     AppLocalizations l10n = AppLocalizations.of(context);
     ThemeState themeState = context.read<ThemeCubit>().state;
+    final autoScrollCubit = _getAutoScrollCubit(context);
     double width = MediaQuery.of(context).size.width;
     final bool isWide = width >= 768;
     isLandScape = isWide && _isSidebarVisible;
@@ -676,13 +727,13 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           onNotification: (notification) {
             if (notification is ScrollStartNotification &&
                 notification.dragDetails != null) {
-              context.read<AutoScrollCubit>().pauseByTouch();
+              autoScrollCubit?.pauseByTouch();
             }
 
             // Scroll-aware FAB visibility: hides on scroll down (reading down)
             // and reveals on scroll up (heading back), only while auto-scroll is not active.
             final isAutoScrollActive =
-                context.read<AutoScrollCubit>().state.isActive;
+                autoScrollCubit?.state.isActive ?? false;
             if (!isAutoScrollActive) {
               if (notification is UserScrollNotification) {
                 if (notification.direction == ScrollDirection.reverse) {
@@ -725,83 +776,93 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           },
           onDismiss: () {
             setState(() => _isAutoScrollFabVisible = true);
-            _autoScrollTimer?.cancel();
+            _stopContinuousAutoScroll();
           },
         ),
       ],
     );
 
+    final scaffoldContent = CallbackShortcuts(
+      bindings: shortcuts,
+      child: Scaffold(
+        extendBodyBehindAppBar: false,
+        appBar: AppBar(
+          leadingWidth: isWide ? 96 : null,
+          leading: isWide
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const BackButton(),
+                    Tooltip(
+                      message: _isSidebarVisible
+                          ? "Hide sidebar (Ctrl+B)"
+                          : "Show sidebar (Ctrl+B)",
+                      child: IconButton(
+                        icon: Icon(
+                          _isSidebarVisible
+                              ? Icons.menu_open_rounded
+                              : Icons.menu_rounded,
+                        ),
+                        onPressed: () => setState(
+                          () => _isSidebarVisible = !_isSidebarVisible,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : null,
+          title: appBarTitle(),
+          actions: [
+            getSurahInfoButton(themeState, context),
+            getAyahsDropDown(themeState),
+            getChangesViewButton(themeState),
+            getSettingsButton(themeState, context),
+          ],
+        ),
+        body: isLandScape
+            ? Row(
+                children: [
+                  SafeArea(
+                    right: false,
+                    bottom: false,
+                    top: false,
+                    left: true,
+                    child: sideBarOfSurahAndAyah(themeState, context),
+                  ),
+                  const VerticalDivider(width: 1, thickness: 1),
+                  Expanded(child: mainContent),
+                ],
+              )
+            : mainContent,
+      ),
+    );
+
+    if (autoScrollCubit == null) {
+      return scaffoldContent;
+    }
+
     return BlocListener<AutoScrollCubit, AutoScrollState>(
+      bloc: autoScrollCubit,
       listenWhen: (previous, current) =>
           previous.isPlaying != current.isPlaying ||
           previous.speed != current.speed ||
           previous.isActive != current.isActive,
       listener: (context, autoScrollState) {
         if (autoScrollState.isActive && autoScrollState.isPlaying) {
-          _scheduleNextAutoScrollStep();
+          _startContinuousAutoScroll();
         } else {
-          _autoScrollTimer?.cancel();
+          _stopContinuousAutoScroll();
         }
 
-        // When auto-scroll deactivates, restore FAB visibility
-        if (!autoScrollState.isActive && !_isAutoScrollFabVisible) {
-          setState(() => _isAutoScrollFabVisible = true);
+        // When auto-scroll deactivates, restore FAB visibility and clear highlight
+        if (!autoScrollState.isActive) {
+          if (!_isAutoScrollFabVisible) {
+            setState(() => _isAutoScrollFabVisible = true);
+          }
+          context.read<AyahToHighlight>().clear();
         }
       },
-      child: CallbackShortcuts(
-        bindings: shortcuts,
-        child: Scaffold(
-          extendBodyBehindAppBar: false,
-          appBar: AppBar(
-            leadingWidth: isWide ? 96 : null,
-            leading: isWide
-                ? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const BackButton(),
-                      Tooltip(
-                        message: _isSidebarVisible
-                            ? "Hide sidebar (Ctrl+B)"
-                            : "Show sidebar (Ctrl+B)",
-                        child: IconButton(
-                          icon: Icon(
-                            _isSidebarVisible
-                                ? Icons.menu_open_rounded
-                                : Icons.menu_rounded,
-                          ),
-                          onPressed: () => setState(
-                            () => _isSidebarVisible = !_isSidebarVisible,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : null,
-            title: appBarTitle(),
-            actions: [
-              getSurahInfoButton(themeState, context),
-              getAyahsDropDown(themeState),
-              getChangesViewButton(themeState),
-              getSettingsButton(themeState, context),
-            ],
-          ),
-          body: isLandScape
-              ? Row(
-                  children: [
-                    SafeArea(
-                      right: false,
-                      bottom: false,
-                      top: false,
-                      left: true,
-                      child: sideBarOfSurahAndAyah(themeState, context),
-                    ),
-                    const VerticalDivider(width: 1, thickness: 1),
-                    Expanded(child: mainContent),
-                  ],
-                )
-              : mainContent,
-        ),
-      ),
+      child: scaffoldContent,
     );
   }
 
@@ -1229,6 +1290,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerAyahByAyah,
             itemPositionsListener: itemPositionsListenerAyahByAyah,
+            scrollOffsetController: scrollOffsetControllerAyahByAyah,
             initialScrollIndex: _getInitialAyahIndex(),
             initialAlignment: 0.15,
             itemCount: ayahsList.length + 1,
@@ -1316,6 +1378,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           return ScrollablePositionedList.builder(
             itemScrollController: itemScrollControllerReadingMode,
             itemPositionsListener: itemPositionsListenerReadingMode,
+            scrollOffsetController: scrollOffsetControllerReadingMode,
             initialScrollIndex: _getInitialPageIndex(),
             initialAlignment: 0.15,
             itemCount: pagesList.length + 1,

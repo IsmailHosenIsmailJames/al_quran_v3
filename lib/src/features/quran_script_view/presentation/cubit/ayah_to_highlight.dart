@@ -5,7 +5,11 @@ import "package:injectable/injectable.dart";
 class AyahToHighlight extends Cubit<String?> {
   AyahToHighlight() : super(null);
 
-  void changeAyah(String ayah) {
+  void changeAyah(String? ayah) {
     emit(ayah);
+  }
+
+  void clear() {
+    emit(null);
   }
 }
