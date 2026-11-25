@@ -1,4 +1,8 @@
+import "dart:async";
+
 import "package:adhan_dart/adhan_dart.dart";
+import "package:al_quran_v3/src/core/audio/audio_session_coordinator.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/ringtone_service.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_state.dart";
@@ -9,6 +13,8 @@ import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_remind
 
 @injectable
 class PrayerReminderCubit extends Cubit<PrayerReminderState> {
+  StreamSubscription<void>? _ringtoneStoppedSub;
+
   PrayerReminderCubit()
       : super(
           PrayerReminderState(
@@ -29,6 +35,11 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
             isIgnoringBatteryOptimizations: true,
           ),
         ) {
+    _ringtoneStoppedSub = RingtoneService.onRingtoneStopped.listen((_) {
+      if (!isClosed && state.isPlayingPreview) {
+        emit(state.copyWith(isPlayingPreview: false));
+      }
+    });
     checkFullScreenIntentPermission();
     checkBatteryOptimization();
   }
@@ -181,6 +192,11 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     if (state.isPlayingPreview) {
       await stopRingtonePreview();
     } else {
+      try {
+        if (getIt.isRegistered<AudioSessionCoordinator>()) {
+          await getIt<AudioSessionCoordinator>().releaseCurrentOwner();
+        }
+      } catch (_) {}
       emit(state.copyWith(isPlayingPreview: true));
       final soundType = state.selectedRingtoneType ?? "default_sound";
       final uri = soundType == "adhan"
@@ -190,7 +206,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
               : (state.selectedRingtoneUri ?? soundType));
 
       final success = await RingtoneService.playRingtone(uri);
-      if (!success) {
+      if (!success && !isClosed) {
         emit(state.copyWith(isPlayingPreview: false));
       }
     }
@@ -319,6 +335,7 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
 
   @override
   Future<void> close() {
+    _ringtoneStoppedSub?.cancel();
     stopRingtonePreview();
     return super.close();
   }

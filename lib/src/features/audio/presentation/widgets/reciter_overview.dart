@@ -4,12 +4,15 @@ import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_change_reciter.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
 import "package:url_launcher/url_launcher.dart";
 
@@ -36,20 +39,46 @@ Widget getReciterWidget({
           audioTabScreenState,
           onReciterChanged ??
               (ReciterInfoModel reciterInfoModel) async {
-                context.read<AudioTabReciterCubit>().changeReciter(
-                  reciterInfoModel,
-                );
-                if (ayahKeyState != null) {
-                  AudioPlayerManager.playMultipleAyahAsPlaylist(
-                    startAyahKey: ayahKeyState.ayahList.first,
-                    endAyahKey: ayahKeyState.ayahList.last,
-                    isInsideQuran: false,
-                    reciterInfoModel: reciterInfoModel,
-                    initialIndex: currentIndex ?? 0,
-                    instantPlay: AudioPlayerManager.audioPlayer.playing,
+                Navigator.pop(context);
+                final reciterCubit = context.read<ReciterCubit>();
+                final bool segmentsReady =
+                    await reciterCubit.changeReciter(reciterInfoModel);
+                if (!segmentsReady && reciterInfoModel.hasWordSegments) {
+                  Fluttertoast.showToast(
+                    msg:
+                        "Reciter changed (word-by-word sync unavailable offline)",
                   );
                 }
-                Navigator.pop(context);
+
+                if (ayahKeyState != null && context.mounted) {
+                  final audioUiState = context.read<AudioUiCubit>().state;
+                  final loopState = context.read<AudioLoopCubit>().state;
+                  final bool wasPlaying =
+                      AudioPlayerManager.hasActivePlayer &&
+                      AudioPlayerManager.audioPlayer.playing;
+                  if (wasPlaying || audioUiState.showUi) {
+                    if (ayahKeyState.ayahList.length > 1 ||
+                        loopState.isRangeActive) {
+                      await AudioPlayerManager.playMultipleAyahAsPlaylist(
+                        startAyahKey: ayahKeyState.ayahList.first,
+                        endAyahKey: ayahKeyState.ayahList.last,
+                        isInsideQuran: audioUiState.isInsideQuranPlayer,
+                        reciterInfoModel: reciterInfoModel,
+                        initialIndex: currentIndex ?? 0,
+                        instantPlay: wasPlaying,
+                        preserveRange: loopState.isRangeActive,
+                      );
+                    } else {
+                      await AudioPlayerManager.playSingleAyah(
+                        ayahKey: ayahKeyState.current,
+                        reciterInfoModel: reciterInfoModel,
+                        isInsideQuran: audioUiState.isInsideQuranPlayer,
+                        instantPlay: wasPlaying,
+                        preserveRange: loopState.isRangeActive,
+                      );
+                    }
+                  }
+                }
               },
           isWordByWord: isWordByWord,
         );

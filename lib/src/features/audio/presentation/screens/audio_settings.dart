@@ -14,8 +14,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:path/path.dart";
-import "package:path_provider/path_provider.dart";
 
 class AudioSettings extends StatefulWidget {
   final bool needAppBar;
@@ -31,6 +29,25 @@ class AudioSettings extends StatefulWidget {
 }
 
 class _AudioSettingsState extends State<AudioSettings> {
+  Future<Map<String, List<Map<String, dynamic>>>>? _cacheFuture;
+  Future<int>? _cacheSizeFuture;
+  bool _cacheInitialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_cacheInitialized) {
+      _cacheInitialized = true;
+      _reloadCacheFutures();
+    }
+  }
+
+  void _reloadCacheFutures() {
+    final l10n = AppLocalizations.of(context);
+    _cacheFuture = getCategorizedCacheFilesWithSize(context, l10n);
+    _cacheSizeFuture = justAudioCache();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -140,7 +157,7 @@ class _AudioSettingsState extends State<AudioSettings> {
               } else {
                 Fluttertoast.showToast(msg: l10n.notUseAudioStreamDesc);
               }
-              AudioPlayerManager.stopListeningAudioPlayerState();
+              AudioPlayerManager.stopPlayback(hideUi: true);
             },
           );
         },
@@ -262,7 +279,7 @@ class _AudioSettingsState extends State<AudioSettings> {
     bool isDark,
   ) {
     return FutureBuilder<Map<String, List<Map<String, dynamic>>>>(
-      future: getCategorizedCacheFilesWithSize(context, l10n),
+      future: _cacheFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -314,7 +331,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                         ),
                         const Gap(2),
                         FutureBuilder<int>(
-                          future: justAudioCache(),
+                          future: _cacheSizeFuture,
                           builder: (context, sizeSnapshot) {
                             final bytes = sizeSnapshot.data ?? 0;
                             return Text(
@@ -396,11 +413,16 @@ class _AudioSettingsState extends State<AudioSettings> {
                         iconSize: 18,
                         tooltip: l10n.clean,
                         onPressed: () async {
+                          await AudioPlayerManager.stopPlayback(hideUi: true);
                           for (final element in fileList) {
-                            final f = File(element["path"] as String);
-                            if (await f.exists()) await f.delete();
+                            final path = element["path"] as String;
+                            await _deleteCacheEntryWithSidecars(path);
                           }
-                          if (mounted) setState(() {});
+                          if (mounted) {
+                            setState(() {
+                              _reloadCacheFutures();
+                            });
+                          }
                         },
                         icon: const Icon(
                           FluentIcons.delete_16_regular,
@@ -454,15 +476,19 @@ class _AudioSettingsState extends State<AudioSettings> {
                 backgroundColor: const Color(0xFFDC2626),
               ),
               onPressed: () async {
+                await AudioPlayerManager.stopPlayback(hideUi: true);
                 for (final key in data.keys) {
                   final list = data[key] ?? [];
                   for (final el in list) {
-                    final f = File(el["path"] as String);
-                    if (await f.exists()) await f.delete();
+                    await _deleteCacheEntryWithSidecars(el["path"] as String);
                   }
                 }
-                Navigator.pop(dialogContext);
-                if (mounted) setState(() {});
+                if (dialogContext.mounted) Navigator.pop(dialogContext);
+                if (mounted) {
+                  setState(() {
+                    _reloadCacheFutures();
+                  });
+                }
               },
               child: Text(l10n.clean),
             ),
@@ -470,6 +496,17 @@ class _AudioSettingsState extends State<AudioSettings> {
         );
       },
     );
+  }
+
+  Future<void> _deleteCacheEntryWithSidecars(String filePath) async {
+    for (final candidate in [filePath, "$filePath.mime", "$filePath.part"]) {
+      final f = File(candidate);
+      try {
+        if (await f.exists()) {
+          await f.delete();
+        }
+      } catch (_) {}
+    }
   }
 }
 
@@ -540,7 +577,7 @@ class PlayBackSpeedWidget extends StatelessWidget {
                       context.read<QuranViewCubit>().setViewOptions(
                             playbackSpeed: speed,
                           );
-                      await AudioPlayerManager.audioPlayer.setSpeed(speed);
+                      await AudioPlayerManager.setSpeed(speed);
                     }
                   },
                 );
@@ -563,7 +600,7 @@ class PlayBackSpeedWidget extends StatelessWidget {
                           context.read<QuranViewCubit>().setViewOptions(
                                 playbackSpeed: value,
                               );
-                          await AudioPlayerManager.audioPlayer.setSpeed(value);
+                          await AudioPlayerManager.setSpeed(value);
                         }
                       : null,
                 ),
@@ -585,7 +622,7 @@ class PlayBackSpeedWidget extends StatelessWidget {
                           context.read<QuranViewCubit>().setViewOptions(
                                 playbackSpeed: value,
                               );
-                          await AudioPlayerManager.audioPlayer.setSpeed(value);
+                          await AudioPlayerManager.setSpeed(value);
                         }
                       : null,
                 ),
@@ -604,7 +641,7 @@ class PlayBackSpeedWidget extends StatelessWidget {
                     },
                     onChangeEnd: (value) async {
                       final parsed = double.parse(value.toStringAsFixed(2));
-                      await AudioPlayerManager.audioPlayer.setSpeed(parsed);
+                      await AudioPlayerManager.setSpeed(parsed);
                     },
                   ),
                 ),
@@ -623,24 +660,27 @@ Future<Map<String, List<Map<String, dynamic>>>>
   AppLocalizations l10n,
 ) async {
   final Map<String, List<Map<String, dynamic>>> categorizedFiles = {};
-  final tempDir = await getTemporaryDirectory();
-  final cacheDir = Directory(join(tempDir.path, "just_audio_cache", "remote"));
+  final cacheDir = await getJustAudioCacheDirectory();
 
   if (!await cacheDir.exists()) return categorizedFiles;
 
-  final files = cacheDir.listSync().whereType<File>();
   final now = DateTime.now();
 
-  for (final file in files) {
-    final lastModified = file.lastModifiedSync();
-    final differenceInDays = now.difference(lastModified).inDays;
-    final fileSize = file.lengthSync();
-
-    final fileInfo = {"path": file.path, "size": fileSize};
-    final timeKey = getTheTimeKey(context, l10n, differenceInDays);
-    final tem = categorizedFiles[timeKey] ?? [];
-    tem.add(fileInfo);
-    categorizedFiles[timeKey] = tem;
+  await for (final entity in cacheDir.list(followLinks: false)) {
+    if (entity is! File) continue;
+    // Group main cached audio tracks (sidecar .mime/.part are cleaned together)
+    if (entity.path.endsWith(".mime") || entity.path.endsWith(".part")) {
+      continue;
+    }
+    try {
+      final stat = await entity.stat();
+      final differenceInDays = now.difference(stat.modified).inDays;
+      final fileInfo = {"path": entity.path, "size": stat.size};
+      final timeKey = getTheTimeKey(context, l10n, differenceInDays);
+      final tem = categorizedFiles[timeKey] ?? [];
+      tem.add(fileInfo);
+      categorizedFiles[timeKey] = tem;
+    } catch (_) {}
   }
 
   return categorizedFiles;

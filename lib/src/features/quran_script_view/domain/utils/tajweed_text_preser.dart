@@ -115,24 +115,27 @@ TextSpan parseTajweedWord({
 
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
   final int wIndex = wordIndex is int ? wordIndex : (int.tryParse(wordIndex.toString()) ?? 0);
+  if (words.isEmpty || wIndex < 0 || wIndex >= words.length) {
+    return const TextSpan();
+  }
   final bool isLastWord = wIndex == words.length - 1;
   final String rawWord = words[wIndex];
 
   GestureRecognizer? recognizer;
-  if (!skipWordTap) {
+  if (!skipWordTap && !isLastWord && words.length > 1) {
     recognizer = TapGestureRecognizer()
       ..onTap = () async {
         final List<String> wordsKey = List.generate(
-          words.length,
+          words.length - 1,
           (index) => "$surahNumber:$ayahNumber:${index + 1}",
         );
         showPopupWordFunction(
           context: context,
           wordKeys: wordsKey,
-          initWordIndex: wIndex,
+          initWordIndex: wIndex.clamp(0, wordsKey.length - 1),
           wordByWordList:
               await WordByWordFunction.getAyahWordByWordData(
-                "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                "$surahNumber:$ayahNumber",
               ) ??
               [],
         );

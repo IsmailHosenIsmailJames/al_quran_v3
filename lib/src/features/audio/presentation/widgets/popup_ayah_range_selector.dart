@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -16,6 +16,7 @@ Future<void> popupAyahRangeSelector(
   int? initialSurah,
   int? initialStartAyah,
   int? initialEndAyah,
+  bool isInsideQuran = false,
 }) async {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
@@ -37,6 +38,7 @@ Future<void> popupAyahRangeSelector(
               initialSurah: initialSurah,
               initialStartAyah: initialStartAyah,
               initialEndAyah: initialEndAyah,
+              isInsideQuran: isInsideQuran,
             ),
           ),
         );
@@ -52,6 +54,7 @@ Future<void> popupAyahRangeSelector(
           initialSurah: initialSurah,
           initialStartAyah: initialStartAyah,
           initialEndAyah: initialEndAyah,
+          isInsideQuran: isInsideQuran,
         );
       },
     );
@@ -62,12 +65,14 @@ class AyahRangeSelectorSheet extends StatefulWidget {
   final int? initialSurah;
   final int? initialStartAyah;
   final int? initialEndAyah;
+  final bool isInsideQuran;
 
   const AyahRangeSelectorSheet({
     super.key,
     this.initialSurah,
     this.initialStartAyah,
     this.initialEndAyah,
+    this.isInsideQuran = false,
   });
 
   @override
@@ -79,14 +84,19 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
   late int _startAyah;
   late int _endAyah;
   int _repeatCount = -1; // -1 for infinite (infinity)
+  int _repeatEachAyah = 1;
+  int _pauseBetweenSeconds = 0;
 
   static const List<int> _repeatPresets = [-1, 1, 3, 5, 10, 20];
+  static const List<int> _eachAyahPresets = [1, 2, 3, 5, 10];
+  static const List<int> _pausePresets = [0, 2, 5, 10];
 
   @override
   void initState() {
     super.initState();
     final loopState = context.read<AudioLoopCubit>().state;
-    _selectedSurah = widget.initialSurah ?? (loopState.isRangeActive ? loopState.startSurah : 1);
+    _selectedSurah =
+        widget.initialSurah ?? (loopState.isRangeActive ? loopState.startSurah : 1);
     final totalVerses = quranAyahCount[_selectedSurah - 1];
 
     _startAyah = widget.initialStartAyah ??
@@ -97,6 +107,9 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
             : (_startAyah + 9).clamp(1, totalVerses));
 
     _repeatCount = loopState.isRangeActive ? loopState.repeatTargetCount : -1;
+    _repeatEachAyah = loopState.isRangeActive ? loopState.repeatEachAyah : 1;
+    _pauseBetweenSeconds =
+        loopState.isRangeActive ? loopState.pauseBetweenAyahsSeconds : 0;
 
     // Safety checks
     if (_startAyah < 1) _startAyah = 1;
@@ -177,7 +190,7 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                           ),
                         ),
                         Text(
-                          "Loop a specific range of verses for learning",
+                          "Loop a specific range of verses for Hifz practice",
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.hintColor,
                           ),
@@ -391,40 +404,60 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                   final isSelected = _repeatCount == count;
                   final label = count == -1 ? "Continuous (∞)" : "${count}x";
 
-                  return ChoiceChip(
-                    label: Text(label),
-                    selected: isSelected,
-                    selectedColor: themeState.primary,
-                    checkmarkColor: Colors.white,
-                    showCheckmark: true,
-                    backgroundColor: isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.white,
-                    side: BorderSide(
-                      color: isSelected
-                          ? Colors.transparent
-                          : (isDark
-                              ? Colors.white.withValues(alpha: 0.08)
-                              : Colors.grey.shade300),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    labelStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.w500,
-                      color: isSelected
-                          ? Colors.white
-                          : isDark
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade800,
-                    ),
-                    onSelected: (selected) {
-                      if (selected) {
-                        setState(() => _repeatCount = count);
-                      }
-                    },
+                  return _buildStyledChoiceChip(
+                    label: label,
+                    isSelected: isSelected,
+                    themeState: themeState,
+                    isDark: isDark,
+                    onSelected: () => setState(() => _repeatCount = count),
+                  );
+                }).toList(),
+              ),
+
+              const Gap(14),
+
+              // Repeat Each Ayah Presets
+              Text(
+                "Repeat Each Ayah",
+                style: theme.textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Gap(6),
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: _eachAyahPresets.map((count) {
+                  return _buildStyledChoiceChip(
+                    label: "${count}x",
+                    isSelected: _repeatEachAyah == count,
+                    themeState: themeState,
+                    isDark: isDark,
+                    onSelected: () => setState(() => _repeatEachAyah = count),
+                  );
+                }).toList(),
+              ),
+
+              const Gap(14),
+
+              // Inter-Ayah Pause Presets
+              Text(
+                "Pause Between Ayahs",
+                style: theme.textTheme.labelMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Gap(6),
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: _pausePresets.map((sec) {
+                  return _buildStyledChoiceChip(
+                    label: sec == 0 ? "None" : "${sec}s",
+                    isSelected: _pauseBetweenSeconds == sec,
+                    themeState: themeState,
+                    isDark: isDark,
+                    onSelected: () => setState(() => _pauseBetweenSeconds = sec),
                   );
                 }).toList(),
               ),
@@ -434,7 +467,6 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
               // Action Buttons
               Row(
                 children: [
-                  // Cancel / Clear button
                   if (context.read<AudioLoopCubit>().state.isRangeActive)
                     Expanded(
                       flex: 2,
@@ -457,7 +489,6 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                   if (context.read<AudioLoopCubit>().state.isRangeActive)
                     const Gap(10),
 
-                  // Start Loop Button
                   Expanded(
                     flex: 3,
                     child: FilledButton.icon(
@@ -471,28 +502,30 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                       ),
                       onPressed: () async {
                         final audioLoopCubit = context.read<AudioLoopCubit>();
+                        final reciter = context.read<ReciterCubit>().state;
                         await audioLoopCubit.setRange(
                           startSurah: _selectedSurah,
                           startAyah: _startAyah,
                           endSurah: _selectedSurah,
                           endAyah: _endAyah,
                           repeatTargetCount: _repeatCount,
+                          repeatEachAyah: _repeatEachAyah,
+                          pauseBetweenAyahsSeconds: _pauseBetweenSeconds,
                         );
 
-                        // Start playing the range
                         final startKey = "$_selectedSurah:$_startAyah";
                         final endKey = "$_selectedSurah:$_endAyah";
 
-                        AudioPlayerManager.playMultipleAyahAsPlaylist(
+                        if (context.mounted) Navigator.pop(context);
+
+                        await AudioPlayerManager.playMultipleAyahAsPlaylist(
                           startAyahKey: startKey,
                           endAyahKey: endKey,
-                          isInsideQuran: false,
+                          isInsideQuran: widget.isInsideQuran,
                           instantPlay: true,
-                          reciterInfoModel:
-                              context.read<AudioTabReciterCubit>().state,
+                          preserveRange: true,
+                          reciterInfoModel: reciter,
                         );
-
-                        if (context.mounted) Navigator.pop(context);
                       },
                       icon: const Icon(Icons.play_arrow_rounded, size: 22),
                       label: Text(
@@ -510,6 +543,47 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildStyledChoiceChip({
+    required String label,
+    required bool isSelected,
+    required ThemeState themeState,
+    required bool isDark,
+    required VoidCallback onSelected,
+  }) {
+    return ChoiceChip(
+      label: Text(label),
+      selected: isSelected,
+      selectedColor: themeState.primary,
+      checkmarkColor: Colors.white,
+      showCheckmark: true,
+      backgroundColor: isDark
+          ? Colors.white.withValues(alpha: 0.05)
+          : Colors.white,
+      side: BorderSide(
+        color: isSelected
+            ? Colors.transparent
+            : (isDark
+                ? Colors.white.withValues(alpha: 0.08)
+                : Colors.grey.shade300),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      labelStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+        color: isSelected
+            ? Colors.white
+            : isDark
+                ? Colors.grey.shade300
+                : Colors.grey.shade800,
+      ),
+      onSelected: (selected) {
+        if (selected) onSelected();
+      },
     );
   }
 

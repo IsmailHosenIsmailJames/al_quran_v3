@@ -2,36 +2,46 @@ import "dart:convert";
 import "dart:developer";
 
 import "package:al_quran_v3/src/core/api/apis_urls.dart";
-import "package:al_quran_v3/src/features/audio/data/utils/get_segments_supported_reciters.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
-import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/core/utils/encode_decode.dart";
-import "package:dartx/dartx.dart";
+import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
+import "package:al_quran_v3/src/features/audio/data/utils/get_segments_supported_reciters.dart";
 import "package:dio/dio.dart" as dio;
-import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter/widgets.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 class SegmentedResourcesManager {
-  static final String _selectedBox = "selected_segmented_recitation_box";
-  static final String _allBoxKey = "segmented_recitation_boxes";
-  static final String _metaKey = "meta_data";
+  static const String _selectedBox = "selected_segmented_recitation_box";
+  static const String _allBoxKey = "segmented_recitation_boxes";
+  static const String _metaKey = "meta_data";
   static Box? _segmentsBox;
+  static final dio.Dio _dio = dio.Dio(
+    dio.BaseOptions(
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 60),
+    ),
+  );
+
+  static Map segmentsCache = {};
 
   static Future<void> init() async {
     if (!Hive.isBoxOpen("user")) {
       await Hive.openBox("user");
     }
     String? selectedBox = getSelectedDataBoxName();
-    if (selectedBox != null) {
+    if (selectedBox != null && await Hive.boxExists(selectedBox)) {
       await changeSelectedBox(selectedBox);
     }
   }
 
-  static Map segmentsCache = {};
+  static bool isBoxLoadedForUrl(String? url) {
+    if (url == null || url.isEmpty) return false;
+    if (_segmentsBox == null || !_segmentsBox!.isOpen) return false;
+    return _segmentsBox!.name == praseStringToBoxName(url);
+  }
+
   static List? getAyahSegments(String ayahKey) {
-    if (_segmentsBox?.isOpen == false) return null;
+    if (_segmentsBox == null || !_segmentsBox!.isOpen) return null;
     final data = segmentsCache[ayahKey];
     if (data != null) {
       if (data == -1) return null;
@@ -94,10 +104,12 @@ class SegmentedResourcesManager {
     if (currentBoxName != null) {
       try {
         final supported = getSegmentsSupportedReciters();
-        return supported.firstOrNullWhere(
+        return supported.cast<ReciterInfoModel?>().firstWhere(
           (reciter) =>
+              reciter != null &&
               reciter.segmentsUrl != null &&
               praseStringToBoxName(reciter.segmentsUrl!) == currentBoxName,
+          orElse: () => null,
         );
       } catch (_) {}
     }
@@ -111,6 +123,23 @@ class SegmentedResourcesManager {
       if (Hive.isBoxOpen(boxName)) {
         await Hive.box(boxName).close();
       }
+    }
+    _segmentsBox = null;
+    segmentsCache.clear();
+  }
+
+  /// Clears active in-memory & selected segment box (used when switching to a
+  /// reciter without word segmentation so stale timings never bleed over).
+  static Future<void> clearActiveBox() async {
+    segmentsCache.clear();
+    if (_segmentsBox != null && _segmentsBox!.isOpen) {
+      try {
+        await _segmentsBox!.close();
+      } catch (_) {}
+    }
+    _segmentsBox = null;
+    if (Hive.isBoxOpen("user")) {
+      await Hive.box("user").delete(_selectedBox);
     }
   }
 
@@ -134,16 +163,16 @@ class SegmentedResourcesManager {
   }
 
   static Future<void> changeSelectedBox(String toOpenBox) async {
-    // close other opened boxes
+    // Close other opened boxes
     List<String> boxesNames = getDownloadedBoxesNames();
     for (String boxName in boxesNames) {
       if (boxName != toOpenBox && Hive.isBoxOpen(boxName)) {
         await Hive.box(boxName).close();
       }
     }
-    // save selected box to user DB
+    // Save selected box to user DB
     await saveSelectedBox(toOpenBox);
-    // open selected box
+    // Open selected box
     if (Hive.isBoxOpen(toOpenBox)) {
       _segmentsBox = Hive.box(toOpenBox);
     } else {
@@ -155,47 +184,54 @@ class SegmentedResourcesManager {
   static Future<bool> downloadResources(
     BuildContext? context,
     String url, {
+    ReciterInfoModel? reciterMeta,
     void Function(double? percentage, String processName)? onProgress,
   }) async {
-    final String boxName = praseStringToBoxName(url);
-    if (await isAlreadyDownloaded(url)) {
+    if (url.trim().isEmpty) return false;
+
+    final String rawUrl = url.trim();
+    final String boxName = praseStringToBoxName(rawUrl);
+
+    if (await isAlreadyDownloaded(rawUrl)) {
       await changeSelectedBox(boxName);
       return true;
-    } else {
-      url = ApisUrls.base + url;
-      final response = await dio.Dio().get(url);
-      if (response.statusCode == 200) {
-        _segmentsBox = await Hive.openBox(boxName);
+    }
+
+    final String fullUrl =
+        rawUrl.startsWith("http") ? rawUrl : "${ApisUrls.base}$rawUrl";
+
+    try {
+      final response = await _dio.get(fullUrl);
+      if (response.statusCode == 200 && response.data != null) {
         const processMsg = "Processing Audio Segments";
-        if (onProgress != null) {
-          onProgress(null, processMsg);
-        }
-        Map segmentsInfo = await compute(
+        onProgress?.call(null, processMsg);
+
+        final Map segmentsInfo = await compute(
           (message) => jsonDecode(decodeBZip2String(message)),
           response.data,
         );
 
+        _segmentsBox = await Hive.openBox(boxName);
         for (final ayahKey in segmentsInfo.keys) {
           await _segmentsBox!.put(ayahKey, segmentsInfo[ayahKey]);
         }
 
         // Save reciter metadata
-        ReciterInfoModel? reciterInfo = getSegmentsSupportedReciters().firstOrNullWhere(
-          (r) =>
-              r.segmentsUrl != null &&
-              (r.segmentsUrl == url ||
-                  url.endsWith(r.segmentsUrl!) ||
-                  praseStringToBoxName(r.segmentsUrl!) == boxName),
-        );
-        if (reciterInfo != null) {
-          await _segmentsBox?.put(_metaKey, reciterInfo.toJson());
-        } else if (context != null) {
-          try {
-            await _segmentsBox?.put(
-              _metaKey,
-              context.read<SegmentedQuranReciterCubit>().state.toJson(),
-            );
-          } catch (_) {}
+        ReciterInfoModel? resolvedMeta =
+            reciterMeta ??
+            getSegmentsSupportedReciters()
+                .cast<ReciterInfoModel?>()
+                .firstWhere(
+                  (r) =>
+                      r != null &&
+                      r.segmentsUrl != null &&
+                      (r.segmentsUrl == rawUrl ||
+                          rawUrl.endsWith(r.segmentsUrl!) ||
+                          praseStringToBoxName(r.segmentsUrl!) == boxName),
+                  orElse: () => null,
+                );
+        if (resolvedMeta != null) {
+          await _segmentsBox?.put(_metaKey, resolvedMeta.toJson());
         }
 
         // Track downloaded box
@@ -207,24 +243,27 @@ class SegmentedResourcesManager {
 
         await changeSelectedBox(boxName);
         return true;
-      } else {
-        return false;
       }
+      return false;
+    } catch (e, s) {
+      log(
+        "Failed to download/decode audio segments ($fullUrl): $e",
+        stackTrace: s,
+        name: "SegmentedResourcesManager",
+      );
+      return false;
     }
   }
 
   static Future<bool> isAlreadyDownloaded(String url) async {
+    if (url.trim().isEmpty) return false;
     return await Hive.boxExists(praseStringToBoxName(url));
   }
 
   static String praseStringToBoxName(String url) {
     final Uri uri = Uri.parse(url);
-    String boxName = uri.pathSegments.last.replaceAll(
-      RegExp(r"[^a-zA-Z0-9]"),
-      "_",
-    );
-    return boxName.isNotEmpty
-        ? boxName
-        : "default_box_name"; // Fallback if parsing fails or result is empty
+    final last = uri.pathSegments.isNotEmpty ? uri.pathSegments.last : url;
+    String boxName = last.replaceAll(RegExp(r"[^a-zA-Z0-9]"), "_");
+    return boxName.isNotEmpty ? boxName : "default_box_name";
   }
 }

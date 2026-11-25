@@ -1,8 +1,8 @@
 import "dart:async";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
@@ -116,7 +116,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     if (widget.toScrollKey != null) {
       final index = ayahsList.indexOf(widget.toScrollKey!);
       if (index != -1) return index;
-    } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+    } else if (AudioPlayerManager.hasActivePlayer &&
+        AudioPlayerManager.audioPlayer.currentIndex != null) {
       final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
       if (currentPlayingAyah.isNotEmpty) {
         final index = ayahsList.indexOf(currentPlayingAyah);
@@ -132,7 +133,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
         (element) => element.contains(widget.toScrollKey),
       );
       if (index != -1) return index;
-    } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+    } else if (AudioPlayerManager.hasActivePlayer &&
+        AudioPlayerManager.audioPlayer.currentIndex != null) {
       final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
       if (currentPlayingAyah.isNotEmpty) {
         final index = pagesList.indexWhere(
@@ -439,9 +441,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     if (widget.toScrollKey != null &&
         widget.toScrollKey != oldWidget.toScrollKey) {
       context.read<AyahToHighlight>().changeAyah(widget.toScrollKey!);
-      context
-          .read<SegmentedQuranReciterCubit>()
-          .temporaryHilightAyah(widget.toScrollKey!);
 
       final int surahNumber =
           int.tryParse(widget.toScrollKey!.split(":").first) ?? 1;
@@ -570,7 +569,18 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     _ayahKeyCubitSubscription = context.read<AyahKeyCubit>().stream.listen((
       event,
     ) {
-      context.read<AyahToHighlight>().changeAyah(event.current);
+      if (!mounted) return;
+      final isInsidePlayer =
+          context.read<AudioUiCubit>().state.isInsideQuranPlayer;
+      if (isInsidePlayer) {
+        context.read<AyahToHighlight>().changeAyah(event.current);
+      }
+
+      if (!context.read<QuranViewCubit>().state.scrollWithRecitation ||
+          !isInsidePlayer) {
+        return;
+      }
+
       if (scrolledAyahOnAudioPlay != null &&
           event.current == scrolledAyahOnAudioPlay) {
         return;
@@ -585,9 +595,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
           lastScrolledPageIndex = index;
           scrollToAyah(pagesList[index]);
         }
-        context.read<SegmentedQuranReciterCubit>().temporaryHilightAyah(
-          event.current,
-        );
       }
 
       scrolledAyahOnAudioPlay = event.current;
@@ -615,9 +622,6 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       final String? targetAyah = widget.toScrollKey;
       if (targetAyah != null) {
         context.read<AyahToHighlight>().changeAyah(targetAyah);
-        context
-            .read<SegmentedQuranReciterCubit>()
-            .temporaryHilightAyah(targetAyah);
         if (context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah) {
           scrollToAyah(targetAyah, duration: Duration.zero);
         } else {
@@ -628,7 +632,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             scrollToAyah(pagesList[index], duration: Duration.zero);
           }
         }
-      } else if (AudioPlayerManager.audioPlayer.currentIndex != null) {
+      } else if (AudioPlayerManager.hasActivePlayer &&
+          AudioPlayerManager.audioPlayer.currentIndex != null) {
         final currentPlayingAyah = context.read<AyahKeyCubit>().state.current;
 
         if (currentPlayingAyah.isNotEmpty &&

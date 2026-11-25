@@ -13,6 +13,8 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -24,16 +26,19 @@ class MainActivity : AudioServiceActivity() {
     private val RINGTONE_PICKER_REQUEST_CODE = 9912
 
     private var pendingResult: MethodChannel.Result? = null
+    private var ringtoneChannel: MethodChannel? = null
     private var currentRingtone: Ringtone? = null
     private var currentMediaPlayer: MediaPlayer? = null
     private var audioFocusRequest: AudioFocusRequest? = null
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private var ringtoneWatchRunnable: Runnable? = null
 
     private val audioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
         when (focusChange) {
             AudioManager.AUDIOFOCUS_LOSS,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                stopRingtone()
+                stopRingtone(notifyFlutter = true)
             }
         }
     }
@@ -56,8 +61,8 @@ class MainActivity : AudioServiceActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
-            .setMethodCallHandler { call, result ->
+        ringtoneChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).also { channel ->
+            channel.setMethodCallHandler { call, result ->
                 when (call.method) {
                     "openRingtonePicker" -> {
                         openRingtonePicker(call, result)
@@ -66,7 +71,7 @@ class MainActivity : AudioServiceActivity() {
                         playRingtone(call, result)
                     }
                     "stopRingtone" -> {
-                        stopRingtone()
+                        stopRingtone(notifyFlutter = false)
                         result.success(true)
                     }
                     "getRingtones" -> {
@@ -95,6 +100,7 @@ class MainActivity : AudioServiceActivity() {
                     }
                 }
             }
+        }
     }
 
     private fun openRingtonePicker(call: MethodCall, result: MethodChannel.Result) {
@@ -165,7 +171,7 @@ class MainActivity : AudioServiceActivity() {
 
         Thread {
             try {
-                stopRingtone()
+                stopRingtone(notifyFlutter = false)
 
                 if (isInCallInternal()) {
                     runOnUiThread { result.success(false) }
@@ -213,7 +219,7 @@ class MainActivity : AudioServiceActivity() {
                             isLooping = loop
                             setOnCompletionListener {
                                 if (!loop) {
-                                    stopRingtone()
+                                    stopRingtone(notifyFlutter = true)
                                 }
                             }
                             start()
@@ -240,6 +246,20 @@ class MainActivity : AudioServiceActivity() {
                     }
                     play()
                 }
+                if (!loop && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && currentRingtone != null) {
+                    val watcher = object : Runnable {
+                        override fun run() {
+                            val active = currentRingtone
+                            if (active != null && !active.isPlaying) {
+                                stopRingtone(notifyFlutter = true)
+                            } else if (active != null) {
+                                mainHandler.postDelayed(this, 400)
+                            }
+                        }
+                    }
+                    ringtoneWatchRunnable = watcher
+                    mainHandler.postDelayed(watcher, 500)
+                }
                 runOnUiThread { result.success(true) }
             } catch (e: Exception) {
                 runOnUiThread { result.error("PLAY_ERROR", e.message, null) }
@@ -247,7 +267,11 @@ class MainActivity : AudioServiceActivity() {
         }.start()
     }
 
-    private fun stopRingtone() {
+    private fun stopRingtone(notifyFlutter: Boolean = false) {
+        val hadActiveAudio = currentRingtone != null || currentMediaPlayer != null
+        ringtoneWatchRunnable?.let { mainHandler.removeCallbacks(it) }
+        ringtoneWatchRunnable = null
+
         try {
             currentRingtone?.stop()
             currentRingtone = null
@@ -269,6 +293,14 @@ class MainActivity : AudioServiceActivity() {
                 audioManager.abandonAudioFocus(audioFocusChangeListener)
             }
         } catch (_: Exception) {}
+
+        if (notifyFlutter && hadActiveAudio) {
+            mainHandler.post {
+                try {
+                    ringtoneChannel?.invokeMethod("onRingtoneStopped", null)
+                } catch (_: Exception) {}
+            }
+        }
     }
 
     private fun isInCallInternal(): Boolean {

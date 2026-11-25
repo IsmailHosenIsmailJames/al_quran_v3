@@ -292,6 +292,7 @@ List<Map<String, dynamic>> recitationsInfoList = [
   {
     "link": "https://everyayah.com/data/Ahmed_Neana_128kbps",
     "name": "Ahmed Nuaina",
+    "style": "Murattal",
     "img": "https://www.assabile.com/media/person/200x256/ahmed-nuinaa.png",
     "bio": "https://www.assabile.com/ahmed-nuinaa-75/ahmed-nuinaa.htm",
     "source": "EveryAyah.com",
@@ -450,7 +451,7 @@ List<Map<String, dynamic>> recitationsInfoList = [
 
   {
     "link":
-        "https://mirrors.quranicaudio.com/everyayah/Mohammad_al_Tablaway_128kbps/",
+        "https://mirrors.quranicaudio.com/everyayah/Mohammad_al_Tablaway_128kbps",
     "name": "Mohamed al-Tablawi",
     "segments_url":
         "$baseOfSegmentsAudioResource-mohamed-al-tablawi-recitation-murattal-hafs-73.json.txt",

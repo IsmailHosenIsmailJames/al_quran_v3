@@ -1,3 +1,4 @@
+import "dart:async";
 import "dart:io";
 import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
@@ -19,6 +20,24 @@ class RingtoneResult {
 class RingtoneService {
   static const MethodChannel _channel =
       MethodChannel("com.ismail_hosen_james.al_quran_v3/ringtone");
+  static final StreamController<void> _stoppedController =
+      StreamController<void>.broadcast();
+  static bool _handlerRegistered = false;
+
+  static void _ensureHandlerRegistered() {
+    if (_handlerRegistered || !isSupported) return;
+    _handlerRegistered = true;
+    _channel.setMethodCallHandler((call) async {
+      if (call.method == "onRingtoneStopped" && !_stoppedController.isClosed) {
+        _stoppedController.add(null);
+      }
+    });
+  }
+
+  static Stream<void> get onRingtoneStopped {
+    _ensureHandlerRegistered();
+    return _stoppedController.stream;
+  }
 
   static bool get isSupported => !kIsWeb && Platform.isAndroid;
 
@@ -54,6 +73,7 @@ class RingtoneService {
     double? volume,
   }) async {
     if (!isSupported) return false;
+    _ensureHandlerRegistered();
     try {
       final res = await _channel.invokeMethod<bool>("playRingtone", {
         "uri": uri,

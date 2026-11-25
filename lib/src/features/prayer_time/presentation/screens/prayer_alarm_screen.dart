@@ -1,6 +1,8 @@
 import "dart:async";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/audio/audio_session_coordinator.dart";
+import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/core/utils/navigator_key.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/ringtone_service.dart";
@@ -83,6 +85,12 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
     try {
       final inCall = await RingtoneService.isInCall();
       if (inCall) return; // Prevent playing over active or incoming phone calls
+
+      try {
+        if (getIt.isRegistered<AudioSessionCoordinator>()) {
+          await getIt<AudioSessionCoordinator>().releaseCurrentOwner();
+        }
+      } catch (_) {}
 
       final soundType = ReminderScheduler.getSelectedRingtoneType();
       final soundUri = ReminderScheduler.getSelectedRingtoneUri();

@@ -156,12 +156,17 @@ class ResourceRepositoryImpl implements IResourceRepository {
         }
 
         // Step 3: Audio Segments
-        emitProgress(0.0, "Downloading Audio Segments", 3);
-        bool success4 = await SegmentedResourcesManager.downloadResources(
-          null,
-          segmentsUrl,
-          onProgress: (perc, name) => emitProgress(perc, name, 3),
-        );
+        bool success4 = true;
+        if (segmentsUrl.trim().isNotEmpty) {
+          emitProgress(0.0, "Downloading Audio Segments", 3);
+          success4 = await SegmentedResourcesManager.downloadResources(
+            null,
+            segmentsUrl,
+            onProgress: (perc, name) => emitProgress(perc, name, 3),
+          );
+        } else {
+          emitProgress(1.0, "Audio Segments (Not applicable)", 3);
+        }
 
         // Step 4: Location Data
         emitProgress(0.0, "Downloading Location Data", 4);

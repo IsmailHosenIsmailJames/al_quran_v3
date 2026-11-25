@@ -3,6 +3,7 @@ import "dart:developer";
 
 // import "package:al_quran_v3/firebase_options.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart";
@@ -14,7 +15,7 @@ import "package:firebase_core/firebase_core.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
 import "package:al_quran_v3/src/core/localization/languages.dart";
@@ -27,7 +28,6 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_transl
 import "package:al_quran_v3/src/features/quran_resources/data/utils/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
@@ -113,12 +113,17 @@ Future<void> main() async {
       !kIsWeb) {
     await platform_services.initAwesomeNotification();
 
-    JustAudioBackground.init(
-      androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
-      androidNotificationChannelName: "Audio playback",
-      androidNotificationOngoing: true,
-      androidNotificationIcon: "mipmap/ic_launcher",
-    );
+    try {
+      await JustAudioBackground.init(
+        androidNotificationChannelId:
+            "com.ismail_hosen_james.al_quran_v3.channel.audio",
+        androidNotificationChannelName: "Quran Audio Playback",
+        androidNotificationOngoing: true,
+        androidNotificationIcon: "drawable/ic_stat_audio",
+      );
+    } catch (e) {
+      log("Unable To Config JustAudioBackground with error: $e");
+    }
   } else {
     // by default, windows and linux are enabled
     try {
@@ -130,6 +135,7 @@ Future<void> main() async {
     }
   }
   applicationDataPath = await platform_services.getApplicationDataPath();
+  platform_services.applicationDataPath = applicationDataPath;
 
   if ((platformOwn == platform_services.PlatformOwn.isWindows ||
           platformOwn == platform_services.PlatformOwn.isLinux) &&
@@ -149,6 +155,7 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
+  await getIt<ReciterCubit>().reload();
 
   final scriptOnDb = Hive.box("user").get(
     "selected_quran_script_type",
@@ -290,6 +297,7 @@ class _MyAppState extends State<MyApp> {
         try {
           getIt<QuranHistoryCubit>().reload();
           getIt<QuickAccessCubit>().reload();
+          getIt<ReciterCubit>().reload();
         } catch (_) {}
       });
     } catch (_) {}
@@ -357,10 +365,10 @@ class _MyAppState extends State<MyApp> {
             param1: widget.locationQiblaPrayerDataState,
           ),
         ),
-        BlocProvider(create: (context) => getIt<SegmentedQuranReciterCubit>()),
+        BlocProvider(create: (context) => getIt<ReciterCubit>()),
         BlocProvider(create: (context) => getIt<PlayerStateCubit>()),
         BlocProvider(create: (context) => getIt<WordPlayingStateCubit>()),
-        BlocProvider(create: (context) => getIt<AudioTabReciterCubit>()),
+        BlocProvider(create: (context) => getIt<AudioSleepTimerCubit>()),
         BlocProvider(create: (context) => getIt<QuranViewCubit>()),
         BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),

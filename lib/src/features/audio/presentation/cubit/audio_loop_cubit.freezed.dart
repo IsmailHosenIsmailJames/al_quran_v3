@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AudioLoopState {
 
- LoopMode get loopMode; bool get isRangeActive; int get startSurah; int get startAyah; int get endSurah; int get endAyah; int get repeatTargetCount; int get currentRangeCycle; int get repeatEachAyah; int get currentAyahRepeat;
+ LoopMode get loopMode; bool get isRangeActive; int get startSurah; int get startAyah; int get endSurah; int get endAyah; int get repeatTargetCount; int get currentRangeCycle; int get repeatEachAyah; int get currentAyahRepeat; int get pauseBetweenAyahsSeconds;
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $AudioLoopStateCopyWith<AudioLoopState> get copyWith => _$AudioLoopStateCopyWith
 @override
 bool operator ==(Object other) {
   final _this = this as AudioLoopState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioLoopState&&(identical(other.loopMode, _this.loopMode) || other.loopMode == _this.loopMode)&&(identical(other.isRangeActive, _this.isRangeActive) || other.isRangeActive == _this.isRangeActive)&&(identical(other.startSurah, _this.startSurah) || other.startSurah == _this.startSurah)&&(identical(other.startAyah, _this.startAyah) || other.startAyah == _this.startAyah)&&(identical(other.endSurah, _this.endSurah) || other.endSurah == _this.endSurah)&&(identical(other.endAyah, _this.endAyah) || other.endAyah == _this.endAyah)&&(identical(other.repeatTargetCount, _this.repeatTargetCount) || other.repeatTargetCount == _this.repeatTargetCount)&&(identical(other.currentRangeCycle, _this.currentRangeCycle) || other.currentRangeCycle == _this.currentRangeCycle)&&(identical(other.repeatEachAyah, _this.repeatEachAyah) || other.repeatEachAyah == _this.repeatEachAyah)&&(identical(other.currentAyahRepeat, _this.currentAyahRepeat) || other.currentAyahRepeat == _this.currentAyahRepeat));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioLoopState&&(identical(other.loopMode, _this.loopMode) || other.loopMode == _this.loopMode)&&(identical(other.isRangeActive, _this.isRangeActive) || other.isRangeActive == _this.isRangeActive)&&(identical(other.startSurah, _this.startSurah) || other.startSurah == _this.startSurah)&&(identical(other.startAyah, _this.startAyah) || other.startAyah == _this.startAyah)&&(identical(other.endSurah, _this.endSurah) || other.endSurah == _this.endSurah)&&(identical(other.endAyah, _this.endAyah) || other.endAyah == _this.endAyah)&&(identical(other.repeatTargetCount, _this.repeatTargetCount) || other.repeatTargetCount == _this.repeatTargetCount)&&(identical(other.currentRangeCycle, _this.currentRangeCycle) || other.currentRangeCycle == _this.currentRangeCycle)&&(identical(other.repeatEachAyah, _this.repeatEachAyah) || other.repeatEachAyah == _this.repeatEachAyah)&&(identical(other.currentAyahRepeat, _this.currentAyahRepeat) || other.currentAyahRepeat == _this.currentAyahRepeat)&&(identical(other.pauseBetweenAyahsSeconds, _this.pauseBetweenAyahsSeconds) || other.pauseBetweenAyahsSeconds == _this.pauseBetweenAyahsSeconds));
 }
 
 
 @override
 int get hashCode {
   final _this = this as AudioLoopState;
-  return Object.hash(runtimeType,_this.loopMode,_this.isRangeActive,_this.startSurah,_this.startAyah,_this.endSurah,_this.endAyah,_this.repeatTargetCount,_this.currentRangeCycle,_this.repeatEachAyah,_this.currentAyahRepeat);
+  return Object.hash(runtimeType,_this.loopMode,_this.isRangeActive,_this.startSurah,_this.startAyah,_this.endSurah,_this.endAyah,_this.repeatTargetCount,_this.currentRangeCycle,_this.repeatEachAyah,_this.currentAyahRepeat,_this.pauseBetweenAyahsSeconds);
 }
 
 @override
 String toString() {
   final _this = this as AudioLoopState;
-  return 'AudioLoopState(loopMode: ${_this.loopMode}, isRangeActive: ${_this.isRangeActive}, startSurah: ${_this.startSurah}, startAyah: ${_this.startAyah}, endSurah: ${_this.endSurah}, endAyah: ${_this.endAyah}, repeatTargetCount: ${_this.repeatTargetCount}, currentRangeCycle: ${_this.currentRangeCycle}, repeatEachAyah: ${_this.repeatEachAyah}, currentAyahRepeat: ${_this.currentAyahRepeat})';
+  return 'AudioLoopState(loopMode: ${_this.loopMode}, isRangeActive: ${_this.isRangeActive}, startSurah: ${_this.startSurah}, startAyah: ${_this.startAyah}, endSurah: ${_this.endSurah}, endAyah: ${_this.endAyah}, repeatTargetCount: ${_this.repeatTargetCount}, currentRangeCycle: ${_this.currentRangeCycle}, repeatEachAyah: ${_this.repeatEachAyah}, currentAyahRepeat: ${_this.currentAyahRepeat}, pauseBetweenAyahsSeconds: ${_this.pauseBetweenAyahsSeconds})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $AudioLoopStateCopyWith<$Res>  {
   factory $AudioLoopStateCopyWith(AudioLoopState value, $Res Function(AudioLoopState) _then) = _$AudioLoopStateCopyWithImpl;
 @useResult
 $Res call({
- LoopMode loopMode, bool isRangeActive, int startSurah, int startAyah, int endSurah, int endAyah, int repeatTargetCount, int currentRangeCycle, int repeatEachAyah, int currentAyahRepeat
+ LoopMode loopMode, bool isRangeActive, int startSurah, int startAyah, int endSurah, int endAyah, int repeatTargetCount, int currentRangeCycle, int repeatEachAyah, int currentAyahRepeat, int pauseBetweenAyahsSeconds
 });
 
 
@@ -68,7 +68,7 @@ class _$AudioLoopStateCopyWithImpl<$Res>
 
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? loopMode = null,Object? isRangeActive = null,Object? startSurah = null,Object? startAyah = null,Object? endSurah = null,Object? endAyah = null,Object? repeatTargetCount = null,Object? currentRangeCycle = null,Object? repeatEachAyah = null,Object? currentAyahRepeat = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? loopMode = null,Object? isRangeActive = null,Object? startSurah = null,Object? startAyah = null,Object? endSurah = null,Object? endAyah = null,Object? repeatTargetCount = null,Object? currentRangeCycle = null,Object? repeatEachAyah = null,Object? currentAyahRepeat = null,Object? pauseBetweenAyahsSeconds = null,}) {
   return _then(AudioLoopState(
 loopMode: null == loopMode ? _self.loopMode : loopMode // ignore: cast_nullable_to_non_nullable
 as LoopMode,isRangeActive: null == isRangeActive ? _self.isRangeActive : isRangeActive // ignore: cast_nullable_to_non_nullable
@@ -80,6 +80,7 @@ as int,repeatTargetCount: null == repeatTargetCount ? _self.repeatTargetCount : 
 as int,currentRangeCycle: null == currentRangeCycle ? _self.currentRangeCycle : currentRangeCycle // ignore: cast_nullable_to_non_nullable
 as int,repeatEachAyah: null == repeatEachAyah ? _self.repeatEachAyah : repeatEachAyah // ignore: cast_nullable_to_non_nullable
 as int,currentAyahRepeat: null == currentAyahRepeat ? _self.currentAyahRepeat : currentAyahRepeat // ignore: cast_nullable_to_non_nullable
+as int,pauseBetweenAyahsSeconds: null == pauseBetweenAyahsSeconds ? _self.pauseBetweenAyahsSeconds : pauseBetweenAyahsSeconds // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -165,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat,  int pauseBetweenAyahsSeconds)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AudioLoopState() when $default != null:
-return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat);case _:
+return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat,_that.pauseBetweenAyahsSeconds);case _:
   return orElse();
 
 }
@@ -186,10 +187,10 @@ return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startA
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat,  int pauseBetweenAyahsSeconds)  $default,) {final _that = this;
 switch (_that) {
 case _AudioLoopState():
-return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat);case _:
+return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat,_that.pauseBetweenAyahsSeconds);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +207,10 @@ return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startA
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoopMode loopMode,  bool isRangeActive,  int startSurah,  int startAyah,  int endSurah,  int endAyah,  int repeatTargetCount,  int currentRangeCycle,  int repeatEachAyah,  int currentAyahRepeat,  int pauseBetweenAyahsSeconds)?  $default,) {final _that = this;
 switch (_that) {
 case _AudioLoopState() when $default != null:
-return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat);case _:
+return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startAyah,_that.endSurah,_that.endAyah,_that.repeatTargetCount,_that.currentRangeCycle,_that.repeatEachAyah,_that.currentAyahRepeat,_that.pauseBetweenAyahsSeconds);case _:
   return null;
 
 }
@@ -221,7 +222,7 @@ return $default(_that.loopMode,_that.isRangeActive,_that.startSurah,_that.startA
 
 
 class _AudioLoopState extends AudioLoopState {
-  const _AudioLoopState({this.loopMode = LoopMode.off, this.isRangeActive = false, this.startSurah = 1, this.startAyah = 1, this.endSurah = 1, this.endAyah = 7, this.repeatTargetCount = -1, this.currentRangeCycle = 1, this.repeatEachAyah = 1, this.currentAyahRepeat = 1}): super._();
+  const _AudioLoopState({this.loopMode = LoopMode.off, this.isRangeActive = false, this.startSurah = 1, this.startAyah = 1, this.endSurah = 1, this.endAyah = 7, this.repeatTargetCount = -1, this.currentRangeCycle = 1, this.repeatEachAyah = 1, this.currentAyahRepeat = 1, this.pauseBetweenAyahsSeconds = 0}): super._();
   
 
 @override@JsonKey() final  LoopMode loopMode;
@@ -234,6 +235,7 @@ class _AudioLoopState extends AudioLoopState {
 @override@JsonKey() final  int currentRangeCycle;
 @override@JsonKey() final  int repeatEachAyah;
 @override@JsonKey() final  int currentAyahRepeat;
+@override@JsonKey() final  int pauseBetweenAyahsSeconds;
 
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
@@ -245,18 +247,18 @@ _$AudioLoopStateCopyWith<_AudioLoopState> get copyWith => __$AudioLoopStateCopyW
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioLoopState&&(identical(other.loopMode, loopMode) || other.loopMode == loopMode)&&(identical(other.isRangeActive, isRangeActive) || other.isRangeActive == isRangeActive)&&(identical(other.startSurah, startSurah) || other.startSurah == startSurah)&&(identical(other.startAyah, startAyah) || other.startAyah == startAyah)&&(identical(other.endSurah, endSurah) || other.endSurah == endSurah)&&(identical(other.endAyah, endAyah) || other.endAyah == endAyah)&&(identical(other.repeatTargetCount, repeatTargetCount) || other.repeatTargetCount == repeatTargetCount)&&(identical(other.currentRangeCycle, currentRangeCycle) || other.currentRangeCycle == currentRangeCycle)&&(identical(other.repeatEachAyah, repeatEachAyah) || other.repeatEachAyah == repeatEachAyah)&&(identical(other.currentAyahRepeat, currentAyahRepeat) || other.currentAyahRepeat == currentAyahRepeat));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioLoopState&&(identical(other.loopMode, loopMode) || other.loopMode == loopMode)&&(identical(other.isRangeActive, isRangeActive) || other.isRangeActive == isRangeActive)&&(identical(other.startSurah, startSurah) || other.startSurah == startSurah)&&(identical(other.startAyah, startAyah) || other.startAyah == startAyah)&&(identical(other.endSurah, endSurah) || other.endSurah == endSurah)&&(identical(other.endAyah, endAyah) || other.endAyah == endAyah)&&(identical(other.repeatTargetCount, repeatTargetCount) || other.repeatTargetCount == repeatTargetCount)&&(identical(other.currentRangeCycle, currentRangeCycle) || other.currentRangeCycle == currentRangeCycle)&&(identical(other.repeatEachAyah, repeatEachAyah) || other.repeatEachAyah == repeatEachAyah)&&(identical(other.currentAyahRepeat, currentAyahRepeat) || other.currentAyahRepeat == currentAyahRepeat)&&(identical(other.pauseBetweenAyahsSeconds, pauseBetweenAyahsSeconds) || other.pauseBetweenAyahsSeconds == pauseBetweenAyahsSeconds));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,loopMode,isRangeActive,startSurah,startAyah,endSurah,endAyah,repeatTargetCount,currentRangeCycle,repeatEachAyah,currentAyahRepeat);
+    return Object.hash(runtimeType,loopMode,isRangeActive,startSurah,startAyah,endSurah,endAyah,repeatTargetCount,currentRangeCycle,repeatEachAyah,currentAyahRepeat,pauseBetweenAyahsSeconds);
 }
 
 @override
 String toString() {
-    return 'AudioLoopState(loopMode: $loopMode, isRangeActive: $isRangeActive, startSurah: $startSurah, startAyah: $startAyah, endSurah: $endSurah, endAyah: $endAyah, repeatTargetCount: $repeatTargetCount, currentRangeCycle: $currentRangeCycle, repeatEachAyah: $repeatEachAyah, currentAyahRepeat: $currentAyahRepeat)';
+    return 'AudioLoopState(loopMode: $loopMode, isRangeActive: $isRangeActive, startSurah: $startSurah, startAyah: $startAyah, endSurah: $endSurah, endAyah: $endAyah, repeatTargetCount: $repeatTargetCount, currentRangeCycle: $currentRangeCycle, repeatEachAyah: $repeatEachAyah, currentAyahRepeat: $currentAyahRepeat, pauseBetweenAyahsSeconds: $pauseBetweenAyahsSeconds)';
 }
 
 
@@ -267,7 +269,7 @@ abstract mixin class _$AudioLoopStateCopyWith<$Res> implements $AudioLoopStateCo
   factory _$AudioLoopStateCopyWith(_AudioLoopState value, $Res Function(_AudioLoopState) _then) = __$AudioLoopStateCopyWithImpl;
 @override @useResult
 $Res call({
- LoopMode loopMode, bool isRangeActive, int startSurah, int startAyah, int endSurah, int endAyah, int repeatTargetCount, int currentRangeCycle, int repeatEachAyah, int currentAyahRepeat
+ LoopMode loopMode, bool isRangeActive, int startSurah, int startAyah, int endSurah, int endAyah, int repeatTargetCount, int currentRangeCycle, int repeatEachAyah, int currentAyahRepeat, int pauseBetweenAyahsSeconds
 });
 
 
@@ -284,7 +286,7 @@ class __$AudioLoopStateCopyWithImpl<$Res>
 
 /// Create a copy of AudioLoopState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? loopMode = null,Object? isRangeActive = null,Object? startSurah = null,Object? startAyah = null,Object? endSurah = null,Object? endAyah = null,Object? repeatTargetCount = null,Object? currentRangeCycle = null,Object? repeatEachAyah = null,Object? currentAyahRepeat = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? loopMode = null,Object? isRangeActive = null,Object? startSurah = null,Object? startAyah = null,Object? endSurah = null,Object? endAyah = null,Object? repeatTargetCount = null,Object? currentRangeCycle = null,Object? repeatEachAyah = null,Object? currentAyahRepeat = null,Object? pauseBetweenAyahsSeconds = null,}) {
   return _then(_AudioLoopState(
 loopMode: null == loopMode ? _self.loopMode : loopMode // ignore: cast_nullable_to_non_nullable
 as LoopMode,isRangeActive: null == isRangeActive ? _self.isRangeActive : isRangeActive // ignore: cast_nullable_to_non_nullable
@@ -296,6 +298,7 @@ as int,repeatTargetCount: null == repeatTargetCount ? _self.repeatTargetCount : 
 as int,currentRangeCycle: null == currentRangeCycle ? _self.currentRangeCycle : currentRangeCycle // ignore: cast_nullable_to_non_nullable
 as int,repeatEachAyah: null == repeatEachAyah ? _self.repeatEachAyah : repeatEachAyah // ignore: cast_nullable_to_non_nullable
 as int,currentAyahRepeat: null == currentAyahRepeat ? _self.currentAyahRepeat : currentAyahRepeat // ignore: cast_nullable_to_non_nullable
+as int,pauseBetweenAyahsSeconds: null == pauseBetweenAyahsSeconds ? _self.pauseBetweenAyahsSeconds : pauseBetweenAyahsSeconds // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

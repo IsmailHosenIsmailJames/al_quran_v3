@@ -1,11 +1,8 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_download_screen.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_overview.dart";
@@ -30,23 +27,13 @@ Widget getReciterViewWidget(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Expanded(
-        child: BlocBuilder<AudioUiCubit, AudioControllerUiState>(
-          builder: (context, audioUIState) {
-            return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-              builder: (context, quranInsideReciter) {
-                return BlocBuilder<AudioTabReciterCubit, ReciterInfoModel>(
-                  builder: (context, audioTabReciter) {
-                    return getReciterWidget(
-                      context: context,
-                      audioTabScreenState: audioUIState.isInsideQuranPlayer
-                          ? quranInsideReciter
-                          : audioTabReciter,
-                      ayahKeyState: ayahKeyState,
-                      currentIndex: currentIndex,
-                    );
-                  },
-                );
-              },
+        child: BlocBuilder<ReciterCubit, ReciterInfoModel>(
+          builder: (context, reciter) {
+            return getReciterWidget(
+              context: context,
+              audioTabScreenState: reciter,
+              ayahKeyState: ayahKeyState,
+              currentIndex: currentIndex,
             );
           },
         ),

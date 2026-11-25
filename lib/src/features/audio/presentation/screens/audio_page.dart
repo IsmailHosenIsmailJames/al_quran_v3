@@ -1,5 +1,3 @@
-import "dart:developer";
-
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
@@ -10,14 +8,14 @@ import "package:al_quran_v3/src/features/audio/data/models/audio_player_position
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_range_selector.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_view_widget.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/sleep_timer_sheet.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
@@ -68,10 +66,10 @@ class _AudioPageState extends State<AudioPage> {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-          buildWhen: (prev, curr) => prev.current != curr.current,
           builder: (context, ayahKeyState) {
-            final currentIndex =
-                int.parse(ayahKeyState.current.split(":")[1]) - 1;
+            final playlistIndex =
+                ayahKeyState.ayahList.indexOf(ayahKeyState.current);
+            final currentIndex = playlistIndex >= 0 ? playlistIndex : 0;
 
             return SafeArea(
               left: false,
@@ -234,9 +232,7 @@ class _AudioPageState extends State<AudioPage> {
                       startAyahKey: ayahList.first as String,
                       endAyahKey: ayahList.last as String,
                       isInsideQuran: false,
-                      reciterInfoModel: context
-                          .read<AudioTabReciterCubit>()
-                          .state,
+                      reciterInfoModel: context.read<ReciterCubit>().state,
                     );
                   }
                 : null,
@@ -269,9 +265,7 @@ class _AudioPageState extends State<AudioPage> {
                         isInsideQuran: false,
                         instantPlay: true,
                         initialIndex: toStartIndex,
-                        reciterInfoModel: context
-                            .read<SegmentedQuranReciterCubit>()
-                            .state,
+                        reciterInfoModel: context.read<ReciterCubit>().state,
                       );
                     },
                   );
@@ -355,9 +349,7 @@ class _AudioPageState extends State<AudioPage> {
                       startAyahKey: ayahList.first as String,
                       endAyahKey: ayahList.last as String,
                       isInsideQuran: false,
-                      reciterInfoModel: context
-                          .read<AudioTabReciterCubit>()
-                          .state,
+                      reciterInfoModel: context.read<ReciterCubit>().state,
                     );
                   }
                 : null,
@@ -381,6 +373,9 @@ class _AudioPageState extends State<AudioPage> {
         final cycleText = loopState.repeatTargetCount == -1
             ? "Cycle ${loopState.currentRangeCycle}/∞"
             : "Cycle ${loopState.currentRangeCycle}/${loopState.repeatTargetCount}";
+        final repeatText = loopState.repeatEachAyah > 1
+            ? " • Ayah ${loopState.currentAyahRepeat}/${loopState.repeatEachAyah}"
+            : "";
 
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
@@ -402,7 +397,7 @@ class _AudioPageState extends State<AudioPage> {
               const Gap(8),
               Expanded(
                 child: Text(
-                  "Memorizing: ${getSurahName(context, loopState.startSurah)} ${loopState.startAyah}–${loopState.endAyah} • $cycleText",
+                  "Memorizing: ${getSurahName(context, loopState.startSurah)} ${loopState.startAyah}–${loopState.endAyah} • $cycleText$repeatText",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -576,11 +571,20 @@ class _AudioPageState extends State<AudioPage> {
     return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
       builder: (context, state) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
+        var progress = state.currentDuration ?? Duration.zero;
+        var buffered = state.bufferDuration ?? Duration.zero;
+        var total = state.totalDuration ?? Duration.zero;
+
+        if (progress < Duration.zero) progress = Duration.zero;
+        if (total < Duration.zero) total = Duration.zero;
+        if (buffered < Duration.zero) buffered = Duration.zero;
+        if (progress > total) progress = total;
+        if (buffered > total) buffered = total;
 
         return ProgressBar(
-          progress: state.currentDuration ?? Duration.zero,
-          buffered: state.bufferDuration ?? Duration.zero,
-          total: state.totalDuration ?? Duration.zero,
+          progress: progress,
+          buffered: buffered,
+          total: total,
           thumbCanPaintOutsideBar: false,
           barHeight: 5,
           thumbRadius: 7,
@@ -602,7 +606,7 @@ class _AudioPageState extends State<AudioPage> {
             fontFeatures: const [FontFeature.tabularFigures()],
           ),
           onSeek: (duration) {
-            AudioPlayerManager.audioPlayer.seek(duration);
+            AudioPlayerManager.seekToPosition(duration);
           },
         );
       },
@@ -671,19 +675,19 @@ class _AudioPageState extends State<AudioPage> {
             icon: const Icon(Icons.skip_previous_rounded),
             onPressed: currentIndex > 0
                 ? () {
-                    if (AudioPlayerManager.audioPlayer.audioSource == null) {
+                    if (!AudioPlayerManager.hasActivePlayer) {
                       AudioPlayerManager.playMultipleAyahAsPlaylist(
                         startAyahKey: ayahKeyState.ayahList.first,
                         endAyahKey: ayahKeyState.ayahList.last,
                         isInsideQuran: false,
-                        reciterInfoModel: context
-                            .read<AudioTabReciterCubit>()
-                            .state,
+                        reciterInfoModel: context.read<ReciterCubit>().state,
                         instantPlay: true,
                         initialIndex: currentIndex - 1,
+                        preserveRange:
+                            context.read<AudioLoopCubit>().state.isRangeActive,
                       );
                     } else {
-                      AudioPlayerManager.audioPlayer.seekToPrevious();
+                      AudioPlayerManager.seekToPreviousAyah();
                     }
                   }
                 : null,
@@ -691,20 +695,19 @@ class _AudioPageState extends State<AudioPage> {
           const Gap(4),
 
           // Replay 5s
-          IconButton(
-            tooltip: "Replay 5s",
-            iconSize: 22,
-            icon: const Icon(Icons.replay_5_rounded),
-            onPressed: AudioPlayerManager.audioPlayer.audioSource == null
-                ? null
-                : () {
-                    final duration = AudioPlayerManager.audioPlayer.duration;
-                    var position = AudioPlayerManager.audioPlayer.position;
-                    position = position - const Duration(seconds: 5);
-                    if (duration == null) return;
-                    if (position < Duration.zero) position = Duration.zero;
-                    AudioPlayerManager.audioPlayer.seek(position);
-                  },
+          BlocBuilder<PlayerStateCubit, PlayerState>(
+            builder: (context, _) {
+              return IconButton(
+                tooltip: "Replay 5s",
+                iconSize: 22,
+                icon: const Icon(Icons.replay_5_rounded),
+                onPressed: !AudioPlayerManager.hasActivePlayer
+                    ? null
+                    : () => AudioPlayerManager.seekRelative(
+                          const Duration(seconds: -5),
+                        ),
+              );
+            },
           ),
           const Gap(8),
 
@@ -735,44 +738,43 @@ class _AudioPageState extends State<AudioPage> {
                   child: InkWell(
                     customBorder: const CircleBorder(),
                     onTap: () async {
-                      if (AudioPlayerManager.audioPlayer.audioSource == null) {
+                      if (!AudioPlayerManager.hasActivePlayer) {
+                        final loopState = context.read<AudioLoopCubit>().state;
                         var ayahKeysToPlay = ayahKeyState.ayahList;
-                        if (ayahKeyState.ayahList.length == 1) {
-                          final surahNumber = ayahKeyState.ayahList.first.split(
-                            ":",
-                          )[0];
-                          final startAyahKey = ayahKeyState.ayahList.first;
+                        var targetIndex = currentIndex;
+                        if (ayahKeysToPlay.length <= 1) {
+                          final surahNumber =
+                              int.tryParse(ayahKeyState.current.split(":")[0]) ??
+                              1;
+                          final ayahNum =
+                              int.tryParse(ayahKeyState.current.split(":")[1]) ??
+                              1;
+                          final startAyahKey = "$surahNumber:1";
                           final endAyahKey = getEndAyahKeyFromSurahNumber(
-                            int.parse(surahNumber),
+                            surahNumber,
                           );
                           final temList = getListOfAyahKey(
                             startAyahKey: startAyahKey,
                             endAyahKey: endAyahKey,
-                          )..removeWhere((e) => e.runtimeType != String);
+                          )..removeWhere((e) => e is! String);
                           ayahKeysToPlay = List<String>.from(temList);
+                          targetIndex =
+                              (ayahNum - 1).clamp(0, ayahKeysToPlay.length - 1);
                         }
 
-                        AudioPlayerManager.playMultipleAyahAsPlaylist(
+                        await AudioPlayerManager.playMultipleAyahAsPlaylist(
                           startAyahKey: ayahKeysToPlay.first,
                           endAyahKey: ayahKeysToPlay.last,
                           isInsideQuran: false,
-                          initialIndex: currentIndex,
+                          initialIndex: targetIndex,
                           instantPlay: true,
-                          reciterInfoModel: context
-                              .read<AudioTabReciterCubit>()
-                              .state,
+                          preserveRange: loopState.isRangeActive,
+                          reciterInfoModel: context.read<ReciterCubit>().state,
                         );
                         return;
-                      } else if (context
-                          .read<AudioUiCubit>()
-                          .state
-                          .isInsideQuranPlayer) {
-                        log("Inside Quran Player");
                       }
 
-                      AudioPlayerManager.audioPlayer.playing
-                          ? AudioPlayerManager.audioPlayer.pause()
-                          : AudioPlayerManager.audioPlayer.play();
+                      await AudioPlayerManager.togglePlayPause();
                     },
                     child: Center(
                       child: isLoading
@@ -802,20 +804,19 @@ class _AudioPageState extends State<AudioPage> {
           const Gap(8),
 
           // Forward 5s
-          IconButton(
-            tooltip: "Forward 5s",
-            iconSize: 22,
-            icon: const Icon(Icons.forward_5_rounded),
-            onPressed: AudioPlayerManager.audioPlayer.audioSource == null
-                ? null
-                : () {
-                    final duration = AudioPlayerManager.audioPlayer.duration;
-                    var position = AudioPlayerManager.audioPlayer.position;
-                    position = position + const Duration(seconds: 5);
-                    if (duration == null) return;
-                    if (position > duration) position = duration;
-                    AudioPlayerManager.audioPlayer.seek(position);
-                  },
+          BlocBuilder<PlayerStateCubit, PlayerState>(
+            builder: (context, _) {
+              return IconButton(
+                tooltip: "Forward 5s",
+                iconSize: 22,
+                icon: const Icon(Icons.forward_5_rounded),
+                onPressed: !AudioPlayerManager.hasActivePlayer
+                    ? null
+                    : () => AudioPlayerManager.seekRelative(
+                          const Duration(seconds: 5),
+                        ),
+              );
+            },
           ),
           const Gap(4),
 
@@ -826,19 +827,19 @@ class _AudioPageState extends State<AudioPage> {
             icon: const Icon(Icons.skip_next_rounded),
             onPressed: currentIndex < (ayahKeyState.ayahList.length - 1)
                 ? () {
-                    if (AudioPlayerManager.audioPlayer.audioSource == null) {
+                    if (!AudioPlayerManager.hasActivePlayer) {
                       AudioPlayerManager.playMultipleAyahAsPlaylist(
                         startAyahKey: ayahKeyState.ayahList.first,
                         endAyahKey: ayahKeyState.ayahList.last,
                         isInsideQuran: false,
-                        reciterInfoModel: context
-                            .read<AudioTabReciterCubit>()
-                            .state,
+                        reciterInfoModel: context.read<ReciterCubit>().state,
                         instantPlay: true,
                         initialIndex: currentIndex + 1,
+                        preserveRange:
+                            context.read<AudioLoopCubit>().state.isRangeActive,
                       );
                     } else {
-                      AudioPlayerManager.audioPlayer.seekToNext();
+                      AudioPlayerManager.seekToNextAyah();
                     }
                   }
                 : null,
@@ -863,6 +864,28 @@ class _AudioPageState extends State<AudioPage> {
                 context,
                 initialSurah: surahNumber,
                 initialStartAyah: ayahNumber,
+              );
+            },
+          ),
+
+          // Sleep Timer
+          BlocBuilder<AudioSleepTimerCubit, AudioSleepTimerState>(
+            builder: (context, sleepState) {
+              return IconButton(
+                tooltip: sleepState.mode == SleepTimerMode.timed
+                    ? "Sleep in ${formatSleepCountdown(sleepState.remainingSeconds)}"
+                    : "Sleep Timer",
+                iconSize: 21,
+                visualDensity: VisualDensity.compact,
+                icon: Icon(
+                  sleepState.isActive
+                      ? FluentIcons.weather_moon_20_filled
+                      : FluentIcons.weather_moon_20_regular,
+                  color: sleepState.isActive
+                      ? themeState.primary
+                      : (isDark ? Colors.grey.shade600 : Colors.grey.shade400),
+                ),
+                onPressed: () => showSleepTimerSheet(context),
               );
             },
           ),
