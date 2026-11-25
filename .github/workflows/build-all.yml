@@ -29,6 +29,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Linux test hook dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            pkg-config \
+            libgtk-3-dev \
+            libx11-dev \
+            libxi-dev
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -58,15 +68,27 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Locate Android SDK cmdline-tools
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          CMDLINE_BIN="$(find "$SDK_ROOT/cmdline-tools" -maxdepth 2 -type d -name bin 2>/dev/null | sort -r | head -n1)"
+          if [[ -z "$CMDLINE_BIN" ]]; then
+            echo "Error: Android cmdline-tools not found under $SDK_ROOT" >&2
+            exit 1
+          fi
+          echo "$CMDLINE_BIN" >> "$GITHUB_PATH"
+          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
 
       - name: Install Android SDK 37, Build-Tools 36.1.0 & NDK 29
         run: |
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platform-tools" "build-tools;36.1.0" "ndk;29.0.14206865"
           if ! sdkmanager "platforms;android-37"; then
-            sdkmanager "platforms;android-37.0"
+            sdkmanager "platforms;android-37.0" || \
+              sdkmanager --channel=3 "platforms;android-37" || \
+              sdkmanager --channel=3 "platforms;android-37.0"
           fi
           bash android/prepare_sdk.sh
 
