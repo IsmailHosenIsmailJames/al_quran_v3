@@ -53,6 +53,8 @@ jobs:
         run: flutter analyze --no-fatal-infos lib/ test/
 
       - name: Run unit and widget tests
+        env:
+          TZ: Asia/Dhaka
         run: flutter test -j 1
 
   build_android:
