@@ -101,5 +101,51 @@ void main() {
       expect(cubit.state.loopMode, equals(LoopMode.off));
       expect(cubit.state.currentRangeCycle, equals(1));
     });
+
+    test("single-ayah range keeps LoopMode.off and supports repeatEachAyah & pause", () async {
+      await cubit.setRange(
+        startSurah: 2,
+        startAyah: 255,
+        endSurah: 2,
+        endAyah: 255,
+        repeatTargetCount: 3,
+        repeatEachAyah: 1,
+        pauseBetweenAyahsSeconds: 2,
+      );
+
+      expect(cubit.state.isRangeActive, isTrue);
+      expect(cubit.state.loopMode, equals(LoopMode.off));
+      expect(cubit.state.repeatEachAyah, equals(1));
+      expect(cubit.state.pauseBetweenAyahsSeconds, equals(2));
+
+      expect(cubit.onPlaylistCycleFinished(), isTrue);
+      expect(cubit.state.currentRangeCycle, equals(2));
+      expect(cubit.onPlaylistCycleFinished(), isTrue);
+      expect(cubit.state.currentRangeCycle, equals(3));
+      expect(cubit.onPlaylistCycleFinished(), isFalse);
+      expect(cubit.state.isRangeActive, isFalse);
+    });
+
+    test("repeatEachAyah & clearRangeIfActive update state accurately", () async {
+      await cubit.setRange(
+        startSurah: 1,
+        startAyah: 1,
+        endSurah: 1,
+        endAyah: 7,
+        repeatTargetCount: 2,
+        repeatEachAyah: 3,
+      );
+
+      expect(cubit.state.repeatEachAyah, equals(3));
+      expect(cubit.state.loopMode, equals(LoopMode.all));
+
+      cubit.updateCurrentAyahRepeat(2);
+      expect(cubit.state.currentAyahRepeat, equals(2));
+
+      await cubit.clearRangeIfActive();
+      expect(cubit.state.isRangeActive, isFalse);
+      expect(cubit.state.repeatEachAyah, equals(1));
+      expect(cubit.state.pauseBetweenAyahsSeconds, equals(0));
+    });
   });
 }

@@ -8,7 +8,6 @@ import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:intl/intl.dart";
 
 class PrayerHeroCard extends StatefulWidget {
@@ -243,7 +242,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: Text(
                     ":",
-                    style: GoogleFonts.dmMono(
+                    style: TextStyle(
+                      fontFamily: "monospace",
+                      fontFeatures: const [FontFeature.tabularFigures()],
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
                       color: themeState.primary,
@@ -262,7 +263,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: Text(
                     ":",
-                    style: GoogleFonts.dmMono(
+                    style: TextStyle(
+                      fontFamily: "monospace",
+                      fontFeatures: const [FontFeature.tabularFigures()],
                       fontSize: 32,
                       fontWeight: FontWeight.w700,
                       color: themeState.primary,
@@ -339,7 +342,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
       children: [
         Text(
           value,
-          style: GoogleFonts.dmMono(
+          style: TextStyle(
+            fontFamily: "monospace",
+            fontFeatures: const [FontFeature.tabularFigures()],
             fontSize: 34,
             fontWeight: FontWeight.w700,
             letterSpacing: 1.0,

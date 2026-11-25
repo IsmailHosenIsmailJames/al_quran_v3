@@ -1,13 +1,12 @@
 import "dart:convert";
 
+import "package:al_quran_v3/src/core/resources/quran_resources/ayah_word_length_map.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/quran_ayah_count.dart";
-import "package:al_quran_v3/src/features/tajweed_guide/domain/utils/tajweed_rules.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
+import "package:al_quran_v3/src/features/tajweed_guide/domain/utils/tajweed_rules.dart";
 import "package:dartx/dartx.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/services.dart";
-
-import "package:al_quran_v3/src/core/resources/quran_resources/ayah_word_length_map.dart";
 
 Map<String, dynamic> _parseScriptJson(String jsonString) {
   return Map<String, dynamic>.from(jsonDecode(jsonString));
@@ -104,24 +103,31 @@ class QuranScriptFunction {
     required int wordId,
     required int page,
   }) {
-    int ayahCount = quranAyahCount[surah - 1];
-    for (int ayahNumber = 1; ayahNumber <= ayahCount; ayahNumber++) {
-      String ayahKey = "$surah:$ayahNumber";
-      if (ayahWordLengthMap[ayahKey]! > wordId) {
-        String previousAyahKey = "$surah:${ayahNumber - 1}";
-        String wordKey =
-            "$previousAyahKey:${wordId - ayahWordLengthMap[previousAyahKey]!}";
-        if (wordKey.endsWith("0")) {
-          return null;
-        }
-        return wordKey;
-      }
-    }
-    String lastAyahKey = "$surah:$ayahCount";
-    String wordKey = "$lastAyahKey:${wordId - ayahWordLengthMap[lastAyahKey]!}";
-    if (wordKey.endsWith("0")) {
+    if (surah < 1 || surah > quranAyahCount.length) return null;
+    final int ayahCount = quranAyahCount[surah - 1];
+    final int? firstAyahStart = ayahWordLengthMap["$surah:1"];
+    if (firstAyahStart == null || wordId <= firstAyahStart) {
       return null;
     }
-    return wordKey;
+
+    for (int ayahNumber = 2; ayahNumber <= ayahCount; ayahNumber++) {
+      final int? ayahStart = ayahWordLengthMap["$surah:$ayahNumber"];
+      if (ayahStart == null) continue;
+      if (ayahStart > wordId) {
+        final String previousAyahKey = "$surah:${ayahNumber - 1}";
+        final int? previousStart = ayahWordLengthMap[previousAyahKey];
+        if (previousStart == null) return null;
+        final int wordNumber = wordId - previousStart;
+        if (wordNumber <= 0) return null;
+        return "$previousAyahKey:$wordNumber";
+      }
+    }
+
+    final String lastAyahKey = "$surah:$ayahCount";
+    final int? lastStart = ayahWordLengthMap[lastAyahKey];
+    if (lastStart == null) return null;
+    final int wordNumber = wordId - lastStart;
+    if (wordNumber <= 0) return null;
+    return "$lastAyahKey:$wordNumber";
   }
 }

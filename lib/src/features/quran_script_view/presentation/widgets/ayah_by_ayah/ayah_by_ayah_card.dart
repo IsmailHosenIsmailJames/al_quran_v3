@@ -3,11 +3,13 @@ import "package:al_quran_v3/src/core/common_functions/remove_html_tag.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_sajda.dart"
     show metaDataSajda;
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
+import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_model.dart";
+import "package:al_quran_v3/src/features/audio/domain/utils/segment_highlight_helper.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/data/models/audio_player_position_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
@@ -505,98 +507,97 @@ class _AyahPlayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerStateCubit, PlayerState>(
-      builder: (context, playerState) {
-        return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-          builder: (context, ayahKeyManagement) {
-            final bool isPlaying = playerState.isPlaying;
-            final bool isCurrent =
-                ayahKeyManagement.current == ayahKey &&
-                context.read<AudioUiCubit>().state.isInsideQuranPlayer == true;
+    return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+      buildWhen: (prev, curr) =>
+          prev.isInsideQuranPlayer != curr.isInsideQuranPlayer ||
+          prev.isPlayList != curr.isPlayList,
+      builder: (context, audioUiState) {
+        return BlocBuilder<PlayerStateCubit, PlayerState>(
+          builder: (context, playerState) {
+            return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+              builder: (context, ayahKeyManagement) {
+                final bool isPlaying = playerState.isPlaying;
+                final bool isCurrent =
+                    ayahKeyManagement.current == ayahKey &&
+                    audioUiState.isInsideQuranPlayer;
 
-            return SizedBox(
-              height: 32,
-              width: 32,
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                style: IconButton.styleFrom(
-                  backgroundColor: isCurrent
-                      ? themeState.primary
-                      : (isDark
-                            ? Colors.white.withValues(alpha: 0.05)
-                            : Colors.grey.shade100),
-                  foregroundColor: isCurrent
-                      ? Colors.white
-                      : themeState.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(
-                      color: isCurrent
+                return SizedBox(
+                  height: 32,
+                  width: 32,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    style: IconButton.styleFrom(
+                      backgroundColor: isCurrent
                           ? themeState.primary
                           : (isDark
-                                ? Colors.white.withValues(alpha: 0.08)
-                                : Colors.grey.shade300),
-                    ),
-                  ),
-                ),
-                onPressed: () async {
-                  if (context.read<AudioUiCubit>().state.isInsideQuranPlayer ==
-                      false) {
-                    AudioPlayerManager.playSingleAyah(
-                      ayahKey: ayahKey,
-                      reciterInfoModel: context
-                          .read<SegmentedQuranReciterCubit>()
-                          .state,
-                      instantPlay: true,
-                      isInsideQuran: true,
-                    );
-                  } else if (isCurrent && isPlaying) {
-                    AudioPlayerManager.audioPlayer.pause();
-                  } else if (isCurrent) {
-                    AudioPlayerManager.audioPlayer.play();
-                  } else {
-                    bool isPlayList = context
-                        .read<AudioUiCubit>()
-                        .state
-                        .isPlayList;
-                    if (isPlayList &&
-                        ayahKeyManagement.current.split(":").first ==
-                            ayahKey.split(":").first) {
-                      await AudioPlayerManager.audioPlayer.seek(
-                        Duration.zero,
-                        index: ayahKeyManagement.ayahList.indexOf(ayahKey),
-                      );
-                      AudioPlayerManager.audioPlayer.play();
-                    } else {
-                      AudioPlayerManager.playSingleAyah(
-                        ayahKey: ayahKey,
-                        reciterInfoModel: context
-                            .read<SegmentedQuranReciterCubit>()
-                            .state,
-                        instantPlay: true,
-                        isInsideQuran: true,
-                      );
-                    }
-                  }
-                },
-                icon:
-                    (isCurrent &&
-                        playerState.state == just_audio.ProcessingState.loading)
-                    ? const SizedBox(
-                        height: 14,
-                        width: 14,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
+                                ? Colors.white.withValues(alpha: 0.05)
+                                : Colors.grey.shade100),
+                      foregroundColor: isCurrent
+                          ? Colors.white
+                          : themeState.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                          color: isCurrent
+                              ? themeState.primary
+                              : (isDark
+                                    ? Colors.white.withValues(alpha: 0.08)
+                                    : Colors.grey.shade300),
                         ),
-                      )
-                    : Icon(
-                        isPlaying && isCurrent
-                            ? Icons.pause_rounded
-                            : Icons.play_arrow_rounded,
-                        size: 18,
                       ),
-              ),
+                    ),
+                    onPressed: () async {
+                      final reciter = context.read<ReciterCubit>().state;
+                      if (!audioUiState.isInsideQuranPlayer) {
+                        await AudioPlayerManager.playSingleAyah(
+                          ayahKey: ayahKey,
+                          reciterInfoModel: reciter,
+                          instantPlay: true,
+                          isInsideQuran: true,
+                        );
+                      } else if (isCurrent && isPlaying) {
+                        await AudioPlayerManager.pausePlayback();
+                      } else if (isCurrent) {
+                        await AudioPlayerManager.togglePlayPause();
+                      } else {
+                        final int playlistIdx =
+                            ayahKeyManagement.ayahList.indexOf(ayahKey);
+                        if (audioUiState.isPlayList && playlistIdx != -1) {
+                          await AudioPlayerManager.seekToAyahKey(ayahKey);
+                          if (!AudioPlayerManager.audioPlayer.playing) {
+                            await AudioPlayerManager.audioPlayer.play();
+                          }
+                        } else {
+                          await AudioPlayerManager.playSingleAyah(
+                            ayahKey: ayahKey,
+                            reciterInfoModel: reciter,
+                            instantPlay: true,
+                            isInsideQuran: true,
+                          );
+                        }
+                      }
+                    },
+                    icon:
+                        (isCurrent &&
+                            playerState.state ==
+                                just_audio.ProcessingState.loading)
+                        ? const SizedBox(
+                            height: 14,
+                            width: 14,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : Icon(
+                            isPlaying && isCurrent
+                                ? Icons.pause_rounded
+                                : Icons.play_arrow_rounded,
+                            size: 18,
+                          ),
+                  ),
+                );
+              },
             );
           },
         );
@@ -968,52 +969,62 @@ class _WordByWordContent extends StatelessWidget {
 
         if (!isVisible) return const SizedBox.shrink();
 
-        return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
-          builder: (context, segmentsReciterState) {
-            String? highlightingWordIndex;
-            final List<List>? segments = context
-                .read<SegmentedQuranReciterCubit>()
-                .getAyahSegments(ayahKey);
+        return BlocBuilder<ReciterCubit, ReciterInfoModel>(
+          builder: (context, reciterState) {
+            final List<List>? segments =
+                context.read<ReciterCubit>().getAyahSegments(ayahKey);
 
-            return BlocBuilder<PlayerPositionCubit, AudioPlayerPositionModel>(
-              buildWhen: (previous, current) {
-                final currentAyahKey = context
-                    .read<AyahKeyCubit>()
-                    .state
-                    .current;
-                if (currentAyahKey == ayahKey && segments != null) {
-                  for (List word in segments) {
-                    final int start = word[1].toInt();
-                    final int end = word[2].toInt();
-                    final cur = current.currentDuration ?? Duration.zero;
-                    if (Duration(milliseconds: start) < cur &&
-                        Duration(milliseconds: end) > cur) {
-                      if (highlightingWordIndex !=
-                          "$currentAyahKey:${word[0]}") {
-                        highlightingWordIndex = "$currentAyahKey:${word[0]}";
-                        return true;
-                      }
-                      return false;
-                    }
-                  }
-                } else if (highlightingWordIndex != null) {
-                  highlightingWordIndex = null;
-                  return true;
-                }
-                return false;
-              },
-              builder: (context, playPositionState) {
-                return Align(
-                  alignment: Alignment.centerRight,
-                  child: Wrap(
-                    spacing: 6,
-                    runSpacing: 6,
-                    textDirection: TextDirection.rtl,
-                    children: List.generate(wordByWord.length, (index) {
-                      final String currentWordKey =
-                          "$surahNumber:$ayahNumber:${index + 1}";
-                      final bool isHighlighted =
-                          highlightingWordIndex == currentWordKey;
+            return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+              buildWhen: (prev, curr) =>
+                  prev.isInsideQuranPlayer != curr.isInsideQuranPlayer,
+              builder: (context, audioUiState) {
+                return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                  buildWhen: (prev, curr) =>
+                      prev.current != curr.current &&
+                      (prev.current == ayahKey || curr.current == ayahKey),
+                  builder: (context, ayahKeyState) {
+                    final bool isThisAyahActive =
+                        audioUiState.isInsideQuranPlayer &&
+                        quranViewState.enableWordByWordHighlight &&
+                        ayahKeyState.current == ayahKey &&
+                        segments != null;
+
+                    return BlocBuilder<PlayerPositionCubit,
+                        AudioPlayerPositionModel>(
+                      buildWhen: (previous, current) {
+                        if (!isThisAyahActive) return false;
+                        final prevWord = findActiveWordKeyForSegments(
+                          currentAyahKey: ayahKey,
+                          segments: segments,
+                          position: previous.currentDuration,
+                        );
+                        final nextWord = findActiveWordKeyForSegments(
+                          currentAyahKey: ayahKey,
+                          segments: segments,
+                          position: current.currentDuration,
+                        );
+                        return prevWord != nextWord;
+                      },
+                      builder: (context, playPositionState) {
+                        final String? activeWordKey = isThisAyahActive
+                            ? findActiveWordKeyForSegments(
+                                currentAyahKey: ayahKey,
+                                segments: segments,
+                                position: playPositionState.currentDuration,
+                              )
+                            : null;
+
+                        return Align(
+                          alignment: Alignment.centerRight,
+                          child: Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            textDirection: TextDirection.rtl,
+                            children: List.generate(wordByWord.length, (index) {
+                              final String currentWordKey =
+                                  "$surahNumber:$ayahNumber:${index + 1}";
+                              final bool isHighlighted =
+                                  activeWordKey == currentWordKey;
 
                       return InkWell(
                         borderRadius: BorderRadius.circular(10),
@@ -1096,6 +1107,10 @@ class _WordByWordContent extends StatelessWidget {
                       );
                     }),
                   ),
+                );
+                      },
+                    );
+                  },
                 );
               },
             );

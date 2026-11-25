@@ -1,10 +1,16 @@
 package com.ismail_hosen_james.al_quran_v3
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
@@ -13,27 +19,37 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.CancellationSignal
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
+import android.provider.Settings
+import androidx.core.content.ContextCompat
 import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import java.util.concurrent.atomic.AtomicBoolean
 
 class MainActivity : AudioServiceActivity() {
     private val CHANNEL = "com.ismail_hosen_james.al_quran_v3/ringtone"
+    private val LOCATION_CHANNEL = "com.ismail_hosen_james.al_quran_v3/location"
     private val RINGTONE_PICKER_REQUEST_CODE = 9912
 
     private var pendingResult: MethodChannel.Result? = null
+    private var ringtoneChannel: MethodChannel? = null
     private var currentRingtone: Ringtone? = null
     private var currentMediaPlayer: MediaPlayer? = null
     private var audioFocusRequest: AudioFocusRequest? = null
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private var ringtoneWatchRunnable: Runnable? = null
 
     private val audioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
         when (focusChange) {
             AudioManager.AUDIOFOCUS_LOSS,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                stopRingtone()
+                stopRingtone(notifyFlutter = true)
             }
         }
     }
@@ -56,8 +72,8 @@ class MainActivity : AudioServiceActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
-            .setMethodCallHandler { call, result ->
+        ringtoneChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).also { channel ->
+            channel.setMethodCallHandler { call, result ->
                 when (call.method) {
                     "openRingtonePicker" -> {
                         openRingtonePicker(call, result)
@@ -66,7 +82,7 @@ class MainActivity : AudioServiceActivity() {
                         playRingtone(call, result)
                     }
                     "stopRingtone" -> {
-                        stopRingtone()
+                        stopRingtone(notifyFlutter = false)
                         result.success(true)
                     }
                     "getRingtones" -> {
@@ -93,6 +109,17 @@ class MainActivity : AudioServiceActivity() {
                     else -> {
                         result.notImplemented()
                     }
+                }
+            }
+        }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, LOCATION_CHANNEL)
+            .setMethodCallHandler { call, result ->
+                when (call.method) {
+                    "isLocationServiceEnabled" -> isLocationServiceEnabled(result)
+                    "openLocationSettings" -> openLocationSettings(result)
+                    "getCurrentPosition" -> getCurrentPosition(result)
+                    else -> result.notImplemented()
                 }
             }
     }
@@ -165,7 +192,7 @@ class MainActivity : AudioServiceActivity() {
 
         Thread {
             try {
-                stopRingtone()
+                stopRingtone(notifyFlutter = false)
 
                 if (isInCallInternal()) {
                     runOnUiThread { result.success(false) }
@@ -213,7 +240,7 @@ class MainActivity : AudioServiceActivity() {
                             isLooping = loop
                             setOnCompletionListener {
                                 if (!loop) {
-                                    stopRingtone()
+                                    stopRingtone(notifyFlutter = true)
                                 }
                             }
                             start()
@@ -240,6 +267,20 @@ class MainActivity : AudioServiceActivity() {
                     }
                     play()
                 }
+                if (!loop && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && currentRingtone != null) {
+                    val watcher = object : Runnable {
+                        override fun run() {
+                            val active = currentRingtone
+                            if (active != null && !active.isPlaying) {
+                                stopRingtone(notifyFlutter = true)
+                            } else if (active != null) {
+                                mainHandler.postDelayed(this, 400)
+                            }
+                        }
+                    }
+                    ringtoneWatchRunnable = watcher
+                    mainHandler.postDelayed(watcher, 500)
+                }
                 runOnUiThread { result.success(true) }
             } catch (e: Exception) {
                 runOnUiThread { result.error("PLAY_ERROR", e.message, null) }
@@ -247,7 +288,11 @@ class MainActivity : AudioServiceActivity() {
         }.start()
     }
 
-    private fun stopRingtone() {
+    private fun stopRingtone(notifyFlutter: Boolean = false) {
+        val hadActiveAudio = currentRingtone != null || currentMediaPlayer != null
+        ringtoneWatchRunnable?.let { mainHandler.removeCallbacks(it) }
+        ringtoneWatchRunnable = null
+
         try {
             currentRingtone?.stop()
             currentRingtone = null
@@ -269,6 +314,14 @@ class MainActivity : AudioServiceActivity() {
                 audioManager.abandonAudioFocus(audioFocusChangeListener)
             }
         } catch (_: Exception) {}
+
+        if (notifyFlutter && hadActiveAudio) {
+            mainHandler.post {
+                try {
+                    ringtoneChannel?.invokeMethod("onRingtoneStopped", null)
+                } catch (_: Exception) {}
+            }
+        }
     }
 
     private fun isInCallInternal(): Boolean {
@@ -442,6 +495,158 @@ class MainActivity : AudioServiceActivity() {
             }
         } else {
             result.success(false)
+        }
+    }
+
+    private fun isLocationServiceEnabled(result: MethodChannel.Result) {
+        try {
+            val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val enabled = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                lm.isLocationEnabled
+            } else {
+                lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                    lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            }
+            result.success(enabled)
+        } catch (_: Exception) {
+            result.success(false)
+        }
+    }
+
+    private fun openLocationSettings(result: MethodChannel.Result) {
+        try {
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            result.success(true)
+        } catch (e: Exception) {
+            result.error("SETTINGS_ERROR", e.message, null)
+        }
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        val fine = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        val coarse = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        return fine || coarse
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun bestLastKnownLocation(lm: LocationManager): Location? {
+        val providers = buildList {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                add(LocationManager.FUSED_PROVIDER)
+            }
+            add(LocationManager.GPS_PROVIDER)
+            add(LocationManager.NETWORK_PROVIDER)
+            add(LocationManager.PASSIVE_PROVIDER)
+        }
+        var best: Location? = null
+        for (provider in providers) {
+            val loc = try {
+                lm.getLastKnownLocation(provider)
+            } catch (_: Exception) {
+                null
+            }
+            if (loc != null && (best == null || loc.time > best.time)) {
+                best = loc
+            }
+        }
+        return best
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getCurrentPosition(result: MethodChannel.Result) {
+        if (!hasLocationPermission()) {
+            result.error("PERMISSION_DENIED", "Location permission not granted", null)
+            return
+        }
+        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val lastKnown = bestLastKnownLocation(lm)
+        val twoMinutesMs = 2 * 60 * 1000L
+        if (lastKnown != null && System.currentTimeMillis() - lastKnown.time < twoMinutesMs) {
+            result.success(mapOf("latitude" to lastKnown.latitude, "longitude" to lastKnown.longitude))
+            return
+        }
+
+        val activeProviders = buildList {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                lm.isProviderEnabled(LocationManager.FUSED_PROVIDER)
+            ) {
+                add(LocationManager.FUSED_PROVIDER)
+            }
+            if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                add(LocationManager.NETWORK_PROVIDER)
+            }
+            if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                add(LocationManager.GPS_PROVIDER)
+            }
+        }
+
+        if (activeProviders.isEmpty()) {
+            if (lastKnown != null) {
+                result.success(mapOf("latitude" to lastKnown.latitude, "longitude" to lastKnown.longitude))
+            } else {
+                result.error("LOCATION_SERVICES_DISABLED", "No location providers enabled", null)
+            }
+            return
+        }
+
+        val replied = AtomicBoolean(false)
+        val cancellationSignal = CancellationSignal()
+        val legacyListeners = mutableListOf<LocationListener>()
+
+        fun deliver(loc: Location?) {
+            if (!replied.compareAndSet(false, true)) return
+            cancellationSignal.cancel()
+            for (listener in legacyListeners) {
+                try {
+                    lm.removeUpdates(listener)
+                } catch (_: Exception) {}
+            }
+            mainHandler.post {
+                if (loc != null) {
+                    result.success(mapOf("latitude" to loc.latitude, "longitude" to loc.longitude))
+                } else {
+                    result.error("LOCATION_UNAVAILABLE", "Unable to determine current location", null)
+                }
+            }
+        }
+
+        val timeoutRunnable = Runnable {
+            deliver(bestLastKnownLocation(lm) ?: lastKnown)
+        }
+        mainHandler.postDelayed(timeoutRunnable, 12_000L)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val executor = ContextCompat.getMainExecutor(this)
+            for (provider in activeProviders) {
+                try {
+                    lm.getCurrentLocation(provider, cancellationSignal, executor) { loc ->
+                        if (loc != null) {
+                            mainHandler.removeCallbacks(timeoutRunnable)
+                            deliver(loc)
+                        }
+                    }
+                } catch (_: Exception) {}
+            }
+        } else {
+            for (provider in activeProviders) {
+                val listener = object : LocationListener {
+                    override fun onLocationChanged(location: Location) {
+                        mainHandler.removeCallbacks(timeoutRunnable)
+                        deliver(location)
+                    }
+                }
+                legacyListeners.add(listener)
+                try {
+                    @Suppress("DEPRECATION")
+                    lm.requestSingleUpdate(provider, listener, Looper.getMainLooper())
+                } catch (_: Exception) {}
+            }
         }
     }
 

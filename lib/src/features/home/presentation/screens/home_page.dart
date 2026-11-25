@@ -8,6 +8,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/hijri_date.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_page.dart";
+import "package:al_quran_v3/src/features/audio/presentation/widgets/global_audio_mini_player.dart";
 import "package:al_quran_v3/src/features/home/presentation/screens/quran_page.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/drawer/app_drawer.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_surah.dart";
@@ -344,12 +345,29 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         children: [
           if (isSideNav) _buildNavigationRail(context, themeState, isDark, l10n),
           Expanded(
-            child: PageView(
-              onPageChanged: (value) {
-                context.read<OthersSettingsCubit>().setTabIndex(value);
-              },
-              controller: pageController,
-              children: getBody(),
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView(
+                    onPageChanged: (value) {
+                      context.read<OthersSettingsCubit>().setTabIndex(value);
+                    },
+                    controller: pageController,
+                    children: getBody(),
+                  ),
+                ),
+                BlocBuilder<OthersSettingsCubit, OthersSettingsState>(
+                  buildWhen: (prev, curr) => prev.tabIndex != curr.tabIndex,
+                  builder: (context, settingsState) {
+                    final body = getBody();
+                    final idx = settingsState.tabIndex.clamp(0, body.length - 1);
+                    if (body[idx] is AudioPage) {
+                      return const SizedBox.shrink();
+                    }
+                    return const GlobalAudioMiniPlayer();
+                  },
+                ),
+              ],
             ),
           ),
         ],

@@ -566,7 +566,7 @@ Widget drawerSection({
             isDesktop: isDesktop,
             onTap: () async {
               const String appLink =
-                  "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran";
+                  "https://f-droid.org/packages/com.ismail_hosen_james.al_bayan_quran/";
               final String message = l10n.shareAppBody(appLink);
               await SharePlus.instance.share(
                 ShareParams(text: message, subject: l10n.shareAppSubject),
@@ -588,7 +588,7 @@ Widget drawerSection({
               onTap: () async {
                 launchUrl(
                   Uri.parse(
-                    "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                    "https://github.com/IsmailHosenIsmailJames/al_quran_v3",
                   ),
                   mode: LaunchMode.externalApplication,
                 );

@@ -6,8 +6,8 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/prayer_widget
 import "package:al_quran_v3/src/features/qibla/data/repositories/qibla_repository_impl.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/compass_datasource.dart";
 import "package:al_quran_v3/src/features/qibla/data/datasources/vibration_datasource.dart";
+import "package:al_quran_v3/src/core/services/foss_location_service.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:geolocator/geolocator.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -26,7 +26,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
   Future<void> getLocation() async {
     emit(state.copyWith(isGettingLocation: true));
     try {
-      Position position = await Geolocator.getCurrentPosition();
+      FossPosition position = await FossLocationService.getCurrentPosition();
       await saveLocationData(
         LatLon(latitude: position.latitude, longitude: position.longitude),
         save: true,

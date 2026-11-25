@@ -251,7 +251,7 @@ class AboutAppPage extends StatelessWidget {
               callback: () {
                 launchUrl(
                   Uri.parse(
-                    "https://play.google.com/store/apps/details?id=com.ismail_hosen_james.al_bayan_quran",
+                    "https://f-droid.org/packages/com.ismail_hosen_james.al_bayan_quran/",
                   ),
                   mode: LaunchMode.externalApplication,
                 );

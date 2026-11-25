@@ -1,0 +1,342 @@
+name: Build & Package All Platforms
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_CHANNEL: stable
+
+jobs:
+  build_android:
+    name: Android (APK & AAB)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Locate Android SDK cmdline-tools
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          CMDLINE_BIN="$(find "$SDK_ROOT/cmdline-tools" -maxdepth 2 -type d -name bin 2>/dev/null | sort -r | head -n1)"
+          if [[ -z "$CMDLINE_BIN" ]]; then
+            echo "Error: Android cmdline-tools not found under $SDK_ROOT" >&2
+            exit 1
+          fi
+          echo "$CMDLINE_BIN" >> "$GITHUB_PATH"
+          echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+
+      - name: Install Android SDK 37, Build-Tools 36.1.0 & NDK 29
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "build-tools;36.1.0" "ndk;29.0.14206865"
+          if ! sdkmanager "platforms;android-37"; then
+            sdkmanager "platforms;android-37.0" || \
+              sdkmanager --channel=3 "platforms;android-37" || \
+              sdkmanager --channel=3 "platforms;android-37.0"
+          fi
+          bash android/prepare_sdk.sh
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Configure Android keystore signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEY_PROPERTIES_BASE64: ${{ secrets.ANDROID_KEY_PROPERTIES_BASE64 }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+        run: |
+          if [[ -n "${ANDROID_KEYSTORE_BASE64:-}" ]]; then
+            printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+            if [[ -n "${ANDROID_KEY_PROPERTIES_BASE64:-}" ]]; then
+              printf '%s' "$ANDROID_KEY_PROPERTIES_BASE64" | base64 --decode > android/key.properties
+            elif [[ -n "${ANDROID_KEY_ALIAS:-}" && -n "${ANDROID_KEY_PASSWORD:-}" && -n "${ANDROID_STORE_PASSWORD:-}" ]]; then
+              printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=upload-keystore.jks\n' \
+                "$ANDROID_STORE_PASSWORD" "$ANDROID_KEY_PASSWORD" "$ANDROID_KEY_ALIAS" > android/key.properties
+            fi
+          fi
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Android APKs (split-per-abi & universal) and App Bundle
+        run: |
+          RAW_VERSION="$(sed -nE 's/^version:[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' pubspec.yaml | head -n1)"
+          APP_VERSION="${RAW_VERSION:-1.0.0}"
+          mkdir -p dist/android
+          flutter build apk --release --split-per-abi
+          cp build/app/outputs/flutter-apk/app-*-release.apk dist/android/
+          flutter build apk --release
+          cp build/app/outputs/flutter-apk/app-release.apk "dist/android/Al-Quran-${APP_VERSION}-android-universal.apk"
+          flutter build appbundle --release
+          for f in build/app/outputs/bundle/release/*.aab; do
+            cp "$f" "dist/android/Al-Quran-${APP_VERSION}-android.aab"
+          done
+          ls -lh dist/android
+
+      - name: Upload Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-builds
+          path: dist/android/*
+
+  build_web:
+    name: Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Web release
+        run: flutter build web --release
+
+      - name: Package Web artifact
+        run: |
+          RAW_VERSION="$(sed -nE 's/^version:[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' pubspec.yaml | head -n1)"
+          APP_VERSION="${RAW_VERSION:-1.0.0}"
+          mkdir -p dist/web
+          tar -C build/web -czf "dist/web/Al-Quran-${APP_VERSION}-web.tar.gz" .
+          ls -lh dist/web
+
+      - name: Upload Web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: dist/web/*
+
+  build_linux:
+    name: Linux (tar.gz, .deb, .rpm, AppImage)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux build and packaging dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            cmake \
+            ninja-build \
+            pkg-config \
+            build-essential \
+            libgtk-3-dev \
+            liblzma-dev \
+            libstdc++-12-dev \
+            libxi-dev \
+            libx11-dev \
+            libsecret-1-dev \
+            libmpv-dev \
+            rpm \
+            desktop-file-utils \
+            file
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Linux release
+        run: flutter build linux --release
+
+      - name: Package Linux bundle, .deb, .rpm, and .AppImage
+        env:
+          DOWNLOAD_APPIMAGETOOL: "1"
+        run: bash .github/scripts/package_linux.sh
+
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-builds
+          path: dist/linux/*
+
+  build_windows:
+    name: Windows (Portable ZIP & MSIX)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        shell: pwsh
+        run: flutter pub get
+
+      - name: Build Windows release
+        shell: pwsh
+        run: flutter build windows --release
+
+      - name: Package Windows Portable ZIP and MSIX
+        shell: pwsh
+        run: |
+          $versionLine = (Get-Content pubspec.yaml | Select-String -Pattern '^version:\s*([0-9]+\.[0-9]+\.[0-9]+)').Matches[0].Groups[1].Value
+          $appVersion = if ($versionLine) { $versionLine } else { "1.0.0" }
+          $msixVersion = "$appVersion.0"
+          New-Item -ItemType Directory -Force -Path dist/windows | Out-Null
+          Compress-Archive -Path "build/windows/x64/runner/Release/*" -DestinationPath "dist/windows/Al-Quran-$appVersion-windows-x64-portable.zip" -Force
+          dart run msix:create --build-windows false --version "$msixVersion" --output-path dist/windows --output-name "Al-Quran-$appVersion-windows-x64"
+          Get-ChildItem dist/windows
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-builds
+          path: dist/windows/*
+
+  build_macos:
+    name: macOS (.app & .dmg)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build macOS release
+        run: flutter build macos --release
+
+      - name: Package macOS .app archive and .dmg
+        run: |
+          RAW_VERSION="$(sed -nE 's/^version:[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' pubspec.yaml | head -n1)"
+          APP_VERSION="${RAW_VERSION:-1.0.0}"
+          APP_PATH="$(find build/macos/Build/Products/Release -maxdepth 1 -name '*.app' -print -quit)"
+          if [[ -z "$APP_PATH" ]]; then
+            echo "Error: No .app bundle found in build/macos/Build/Products/Release" >&2
+            exit 1
+          fi
+          mkdir -p dist/macos
+          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "dist/macos/Al-Quran-${APP_VERSION}-macos.app.zip"
+          DMG_STAGE="$(mktemp -d)"
+          cp -a "$APP_PATH" "$DMG_STAGE/"
+          ln -s /Applications "$DMG_STAGE/Applications"
+          hdiutil create -volname "Al Quran" -srcfolder "$DMG_STAGE" -ov -format UDZO "dist/macos/Al-Quran-${APP_VERSION}-macos.dmg"
+          rm -rf "$DMG_STAGE"
+          ls -lh dist/macos
+
+      - name: Upload macOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-builds
+          path: dist/macos/*
+
+  build_ios:
+    name: iOS (unsigned .ipa)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: .fvmrc
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS release (no codesign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Package unsigned .ipa
+        run: |
+          RAW_VERSION="$(sed -nE 's/^version:[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' pubspec.yaml | head -n1)"
+          APP_VERSION="${RAW_VERSION:-1.0.0}"
+          mkdir -p dist/ios Payload
+          cp -a build/ios/iphoneos/Runner.app Payload/
+          zip -r -y "dist/ios/Al-Quran-${APP_VERSION}-ios-unsigned.ipa" Payload
+          rm -rf Payload
+          ls -lh dist/ios
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: dist/ios/*
+
+  publish_release:
+    name: Publish GitHub Release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs:
+      - build_android
+      - build_web
+      - build_linux
+      - build_windows
+      - build_macos
+      - build_ios
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+          merge-multiple: true
+
+      - name: List release files
+        run: ls -lh release-artifacts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/*
+          generate_release_notes: true

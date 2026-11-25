@@ -4,6 +4,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/manual_location_selection_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/models/lat_lon.dart";
+import "package:al_quran_v3/src/core/services/foss_location_service.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
@@ -13,7 +14,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
-import "package:geolocator/geolocator.dart";
 
 class LocationAcquire extends StatefulWidget {
   final bool backToPage;
@@ -93,20 +93,23 @@ class _LocationAcquireState extends State<LocationAcquire> {
           isGPSLocationLoading = true;
         });
         try {
-          bool isServiceAvailable = await Geolocator.isLocationServiceEnabled();
+          bool isServiceAvailable =
+              await FossLocationService.isLocationServiceEnabled();
           if (!isServiceAvailable) {
             Fluttertoast.showToast(msg: l10n.pleaseEnableLocationService);
-            await Geolocator.openLocationSettings();
+            await FossLocationService.openLocationSettings();
           }
-          LocationPermission permission = await Geolocator.checkPermission();
-          if (!(permission == LocationPermission.whileInUse ||
-              permission == LocationPermission.always)) {
-            permission = await Geolocator.requestPermission();
+          FossLocationPermission permission =
+              await FossLocationService.checkPermission();
+          if (!(permission == FossLocationPermission.whileInUse ||
+              permission == FossLocationPermission.always)) {
+            permission = await FossLocationService.requestPermission();
           }
-          permission = await Geolocator.checkPermission();
-          if (permission == LocationPermission.whileInUse ||
-              permission == LocationPermission.always) {
-            Position position = await Geolocator.getCurrentPosition();
+          permission = await FossLocationService.checkPermission();
+          if (permission == FossLocationPermission.whileInUse ||
+              permission == FossLocationPermission.always) {
+            FossPosition position =
+                await FossLocationService.getCurrentPosition();
             context.read<LocationQiblaPrayerDataCubit>().saveLocationData(
                   LatLon(
                     latitude: position.latitude,

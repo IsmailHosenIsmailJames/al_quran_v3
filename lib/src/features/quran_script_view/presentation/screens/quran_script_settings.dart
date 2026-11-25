@@ -7,8 +7,10 @@ import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settings.dart";
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_overview.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
@@ -419,7 +421,7 @@ class QuranScriptSettings extends StatelessWidget {
             themePrimary: themeState.primary,
           ),
           const Gap(12),
-          BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+          BlocBuilder<ReciterCubit, ReciterInfoModel>(
             builder: (context, reciter) {
               return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
                 builder: (context, ayahState) {
@@ -478,15 +480,17 @@ class QuranScriptSettings extends StatelessWidget {
             builder: (context, autoScrollState) {
               return Row(
                 children: [
-                  Text(
-                    "Default Reading Speed",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: isDark ? Colors.white : Colors.black87,
+                  Expanded(
+                    child: Text(
+                      "Default Reading Speed",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: isDark ? Colors.white : Colors.black87,
+                      ),
                     ),
                   ),
-                  const Spacer(),
+                  const Gap(8),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 4,
@@ -726,43 +730,72 @@ class QuranScriptSettings extends StatelessWidget {
     AyahKeyManagement ayahState,
   ) {
     final l10n = AppLocalizations.of(context);
-    return BlocBuilder<SegmentedQuranReciterCubit, ReciterInfoModel>(
+    return BlocBuilder<ReciterCubit, ReciterInfoModel>(
       builder: (context, state) {
-        Widget toReturn = getReciterWidget(
-          context: context,
-          audioTabScreenState: reciter,
-          ayahKeyState: ayahState,
-          isWordByWord: true,
-          onReciterChanged: (reciterInfoModel) async {
-            Navigator.pop(context);
-            bool isSuccess = await context
-                .read<SegmentedQuranReciterCubit>()
-                .changeReciter(context, reciterInfoModel);
+        final playlistIdx = ayahState.ayahList.indexOf(ayahState.current);
+        final currentIndex = playlistIdx >= 0 ? playlistIdx : 0;
 
-            if (!isSuccess) {
-              Fluttertoast.showToast(msg: l10n.unableToDownloadResources);
-              return;
-            } else {
-              Fluttertoast.showToast(msg: l10n.success);
-            }
+        Widget toReturn = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            getReciterWidget(
+              context: context,
+              audioTabScreenState: state,
+              ayahKeyState: ayahState,
+              currentIndex: currentIndex,
+              onReciterChanged: (reciterInfoModel) async {
+                Navigator.pop(context);
+                final reciterCubit = context.read<ReciterCubit>();
+                final bool isSuccess =
+                    await reciterCubit.changeReciter(reciterInfoModel);
 
-            if (AudioPlayerManager.audioPlayer.playing) {
-              if (AudioPlayerManager.audioPlayer.audioSources.length > 1) {
-                await AudioPlayerManager.playMultipleAyahAsPlaylist(
-                  startAyahKey: ayahState.start,
-                  endAyahKey: ayahState.end,
-                  isInsideQuran: true,
-                  reciterInfoModel: reciterInfoModel,
-                );
-              } else {
-                AudioPlayerManager.playSingleAyah(
-                  ayahKey: ayahState.current,
-                  reciterInfoModel: reciterInfoModel,
-                  isInsideQuran: true,
-                );
-              }
-            }
-          },
+                if (!isSuccess && reciterInfoModel.hasWordSegments) {
+                  Fluttertoast.showToast(
+                    msg:
+                        "Reciter changed (word-by-word sync unavailable offline)",
+                  );
+                } else {
+                  Fluttertoast.showToast(msg: l10n.success);
+                }
+
+                if (!context.mounted) return;
+                final bool wasPlaying = AudioPlayerManager.hasActivePlayer &&
+                    AudioPlayerManager.audioPlayer.playing;
+                if (wasPlaying) {
+                  final audioUiState = context.read<AudioUiCubit>().state;
+                  final loopState = context.read<AudioLoopCubit>().state;
+                  if (ayahState.ayahList.length > 1 || loopState.isRangeActive) {
+                    await AudioPlayerManager.playMultipleAyahAsPlaylist(
+                      startAyahKey: ayahState.ayahList.first,
+                      endAyahKey: ayahState.ayahList.last,
+                      initialIndex: currentIndex,
+                      isInsideQuran: audioUiState.isInsideQuranPlayer,
+                      preserveRange: loopState.isRangeActive,
+                      reciterInfoModel: reciterInfoModel,
+                    );
+                  } else {
+                    await AudioPlayerManager.playSingleAyah(
+                      ayahKey: ayahState.current,
+                      reciterInfoModel: reciterInfoModel,
+                      isInsideQuran: audioUiState.isInsideQuranPlayer,
+                      preserveRange: loopState.isRangeActive,
+                    );
+                  }
+                }
+              },
+            ),
+            if (!state.hasWordSegments)
+              Padding(
+                padding: const EdgeInsets.only(top: 6, left: 4),
+                child: Text(
+                  "Ayah highlight active (word-by-word timing unavailable for this reciter)",
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ),
+          ],
         );
         if (state.isDownloading) {
           return Container(

@@ -20,7 +20,9 @@ if (platformsDir.exists()) {
             }
             val pkgXml = File(p37, "package.xml")
             if (pkgXml.exists()) {
-                val content = pkgXml.readText().replace("37.0", "37")
+                val content = pkgXml.readText()
+                    .replace("37.0", "37")
+                    .replace("repository2/04", "repository2/03")
                 pkgXml.writeText(content)
             }
         } catch (_: Exception) {}

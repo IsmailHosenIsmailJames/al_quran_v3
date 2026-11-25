@@ -17,7 +17,6 @@ _ReciterInfoModel _$ReciterInfoModelFromJson(Map<String, dynamic> json) =>
       bio: json['bio'] as String?,
       segmentsUrl: json['segments_url'] as String?,
       isDownloading: json['isDownloading'] as bool? ?? false,
-      showAyahHighlight: json['showAyahHighlight'] as String?,
     );
 
 Map<String, dynamic> _$ReciterInfoModelToJson(_ReciterInfoModel instance) =>
@@ -31,5 +30,4 @@ Map<String, dynamic> _$ReciterInfoModelToJson(_ReciterInfoModel instance) =>
       'bio': instance.bio,
       'segments_url': instance.segmentsUrl,
       'isDownloading': instance.isDownloading,
-      'showAyahHighlight': instance.showAyahHighlight,
     };

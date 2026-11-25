@@ -3,11 +3,13 @@ import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
+import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
@@ -56,9 +58,11 @@ void main() {
           create: (context) => FakeOthersSettingsCubit(),
         ),
         BlocProvider(create: (context) => QuranViewCubit()),
+        BlocProvider(create: (context) => AutoScrollCubit()),
         BlocProvider(create: (context) => AyahToHighlight()),
         BlocProvider(create: (context) => AyahKeyCubit()),
-        BlocProvider(create: (context) => SegmentedQuranReciterCubit()),
+        BlocProvider(create: (context) => ReciterCubit()),
+        BlocProvider(create: (context) => AudioSleepTimerCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),
         BlocProvider(create: (context) => PlayerStateCubit()),

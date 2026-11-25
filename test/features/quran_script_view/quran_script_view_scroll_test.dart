@@ -3,11 +3,12 @@ import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/home/domain/entities/history_element_entity.dart";
 import "package:al_quran_v3/src/features/home/domain/repositories/i_history_repository.dart";
 import "package:al_quran_v3/src/features/home/domain/usecases/add_history_usecase.dart";
@@ -85,7 +86,8 @@ void main() {
         BlocProvider.value(value: ayahToHighlight),
         BlocProvider.value(value: ayahScrollInfoCubit),
         BlocProvider.value(value: quranHistoryCubit),
-        BlocProvider(create: (context) => SegmentedQuranReciterCubit()),
+        BlocProvider(create: (context) => ReciterCubit()),
+        BlocProvider(create: (context) => AudioSleepTimerCubit()),
         BlocProvider(create: (context) => QuranViewCubit()),
         BlocProvider(create: (context) => AudioUiCubit()),
         BlocProvider(create: (context) => PlayerPositionCubit()),

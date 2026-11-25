@@ -1,0 +1,6 @@
+• Unified reciter management and exclusive audio session coordination
+• Smooth continuous auto-scrolling and clean border-only Ayah highlighting
+• Updated to Flutter 3.50.1 and Gradle 9.3.1
+• Replaced Google Play Services location with native AOSP LocationManager
+• Disabled runtime Google Font fetching using bundled NotoSans
+• Bug fixes and stability improvements

@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_guidance_setup_screen.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
@@ -66,8 +66,7 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
       return;
     }
 
-    final segmentsUrl =
-        context.read<SegmentedQuranReciterCubit>().state.segmentsUrl ?? "";
+    final segmentsUrl = context.read<ReciterCubit>().state.segmentsUrl ?? "";
 
     showDialog(
       context: context,

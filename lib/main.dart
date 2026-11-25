@@ -2,6 +2,7 @@ import "dart:async";
 import "dart:developer";
 
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
@@ -9,7 +10,7 @@ import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cu
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_position_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/core/services/platform_services.dart"
     as platform_services;
 import "package:al_quran_v3/src/core/localization/languages.dart";
@@ -22,7 +23,6 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_transl
 import "package:al_quran_v3/src/features/quran_resources/data/utils/segmented_resources_manager.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word_function.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_tab_screen_cubit.dart";
 import "package:al_quran_v3/src/features/location/presentation/cubit/location_data_qibla_data_cubit.dart";
 import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/src/features/prayer_time/data/services/background_notification_scheduler.dart";
@@ -52,7 +52,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_native_splash/flutter_native_splash.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
 import "package:just_audio_background/just_audio_background.dart";
 import "package:just_audio_media_kit/just_audio_media_kit.dart";
@@ -68,9 +67,6 @@ platform_services.PlatformOwn platformOwn = platform_services.getPlatform();
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  // Disable runtime fetching of fonts from Google servers for FOSS offline privacy
-  GoogleFonts.config.allowRuntimeFetching = false;
 
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
@@ -98,12 +94,17 @@ Future<void> main() async {
       !kIsWeb) {
     await platform_services.initAwesomeNotification();
 
-    JustAudioBackground.init(
-      androidNotificationChannelId: "com.ryanheise.bg_demo.channel.audio",
-      androidNotificationChannelName: "Audio playback",
-      androidNotificationOngoing: true,
-      androidNotificationIcon: "mipmap/ic_launcher",
-    );
+    try {
+      await JustAudioBackground.init(
+        androidNotificationChannelId:
+            "com.ismail_hosen_james.al_quran_v3.channel.audio",
+        androidNotificationChannelName: "Quran Audio Playback",
+        androidNotificationOngoing: true,
+        androidNotificationIcon: "drawable/ic_stat_audio",
+      );
+    } catch (e) {
+      log("Unable To Config JustAudioBackground with error: $e");
+    }
   } else {
     // by default, windows and linux are enabled
     try {
@@ -115,6 +116,7 @@ Future<void> main() async {
     }
   }
   applicationDataPath = await platform_services.getApplicationDataPath();
+  platform_services.applicationDataPath = applicationDataPath;
 
   if ((platformOwn == platform_services.PlatformOwn.isWindows ||
           platformOwn == platform_services.PlatformOwn.isLinux) &&
@@ -134,6 +136,7 @@ Future<void> main() async {
   await Hive.openBox(CollectionType.notes.name);
   await Hive.openBox(CollectionType.pinned.name);
   await SegmentedResourcesManager.init();
+  await getIt<ReciterCubit>().reload();
 
   final scriptOnDb = Hive.box("user").get(
     "selected_quran_script_type",
@@ -173,14 +176,6 @@ Future<void> main() async {
   platform_services.hideLoadingIndicator();
 }
 
-TextTheme _applyGoogleFont(TextTheme base, TextStyle Function() fontGetter) {
-  final fontStyle = fontGetter();
-  return base.apply(
-    fontFamily: fontStyle.fontFamily,
-    fontFamilyFallback: fontStyle.fontFamilyFallback,
-  );
-}
-
 TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   final textTheme = isDarkMode
       ? ThemeData.dark().textTheme
@@ -189,55 +184,33 @@ TextTheme getTextTheme(Locale locale, bool isDarkMode) {
   switch (locale.languageCode) {
     case "ar":
     case "fa":
-    case "ps": // Pashto
-    case "ug": // Uighur
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansArabic);
+    case "ps":
+    case "ug":
     case "ur":
-      return _applyGoogleFont(textTheme, GoogleFonts.notoNastaliqUrdu);
     case "bn":
-    case "as": // Assamese
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansBengali);
-    case "pa": // Punjabi
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansGurmukhi);
-    case "ru": // Russian
-    case "kk": // Kazakh
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSans);
+    case "as":
+    case "pa":
     case "hi":
-    case "mr": // Marathi
-    case "ne": // Nepali
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansDevanagari);
+    case "mr":
+    case "ne":
     case "ja":
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansJp);
     case "ko":
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKr);
     case "zh":
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansSc);
-    case "ta": // Tamil
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTamil);
-    case "te": // Telugu
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTelugu);
-    case "kn": // Kannada
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKannada);
-    case "ml": // Malayalam
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansMalayalam);
-    case "gu": // Gujarati
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansGujarati);
-    case "si": // Sinhala
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansSinhala);
-    case "th": // Thai
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansThai);
-    case "km": // Khmer
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansKhmer);
-    case "he": // Hebrew
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansHebrew);
-    case "am": // Amharic
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansEthiopic);
-    case "dv": // Divehi
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansThaana);
-    case "zgh": // Amazigh
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSansTifinagh);
+    case "ta":
+    case "te":
+    case "kn":
+    case "ml":
+    case "gu":
+    case "si":
+    case "th":
+    case "km":
+    case "he":
+    case "am":
+    case "dv":
+    case "zgh":
+      return textTheme;
     default:
-      return _applyGoogleFont(textTheme, GoogleFonts.notoSans);
+      return textTheme.apply(fontFamily: "NotoSans");
   }
 }
 
@@ -315,10 +288,10 @@ class _MyAppState extends State<MyApp> {
             param1: widget.locationQiblaPrayerDataState,
           ),
         ),
-        BlocProvider(create: (context) => getIt<SegmentedQuranReciterCubit>()),
+        BlocProvider(create: (context) => getIt<ReciterCubit>()),
         BlocProvider(create: (context) => getIt<PlayerStateCubit>()),
         BlocProvider(create: (context) => getIt<WordPlayingStateCubit>()),
-        BlocProvider(create: (context) => getIt<AudioTabReciterCubit>()),
+        BlocProvider(create: (context) => getIt<AudioSleepTimerCubit>()),
         BlocProvider(create: (context) => getIt<QuranViewCubit>()),
         BlocProvider(create: (context) => getIt<PrayerReminderCubit>()),
         BlocProvider(create: (context) => getIt<OthersSettingsCubit>()),

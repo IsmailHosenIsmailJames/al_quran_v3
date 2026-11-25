@@ -5,12 +5,12 @@
 By downloading or using **Al Quran: Audio, Tafsir, Qibla** ("the App"), these terms will automatically apply to you. Please read them carefully before using the App.
 
 ## 1. Use of the App
-- The App is provided for personal, non-commercial use to assist with Quranic reading, learning, and Islamic practices.
+- The App is provided as Free and Open Source Software to assist with Quranic reading, learning, and Islamic practices.
 - You are responsible for ensuring your device meets the requirements to run the App.
 
 ## 2. Intellectual Property
-- All Quranic text, translations, and audio resources provided within the App are the property of their respective owners/providers. 
-- You may not redistribute, sell, or commercially exploit any content or software from this App.
+- All Quranic text, translations, and audio resources provided within the App are the property of their respective owners/providers.
+- The App source code is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later).
 
 ## 3. Accuracy of Data
 - While we strive for the highest accuracy in prayer time calculations and Qibla direction, environmental factors and device sensors may affect results. These features are provided for guidance only.
@@ -20,8 +20,8 @@ By downloading or using **Al Quran: Audio, Tafsir, Qibla** ("the App"), these te
 - The App is provided "as is" without any warranties. 
 - MD. Ismail Hosen (James) shall not be liable for any direct or indirect damages arising out of the use or inability to use the App.
 
-## 5. Non-Commercial License
-This App is licensed under a **Non-Commercial and No-Profit License**. You may not earn revenue, profit, or financial gain from this App or any derivatives/forks thereof.
+## 5. Open Source License
+This App is licensed under the **GNU General Public License v3.0 or later (GPL-3.0-or-later)**. See the `LICENSE` file in the repository for full terms.
 
 ## 6. Contact
 For any support or legal inquiries, please contact:

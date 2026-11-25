@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/background_no
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_alarm_screen.dart";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
-import "package:window_manager/window_manager.dart";
+import "package:window_manager/legacy.dart";
 
 import "package:awesome_notifications/awesome_notifications.dart";
 

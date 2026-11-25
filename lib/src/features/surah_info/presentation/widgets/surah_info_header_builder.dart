@@ -1,8 +1,9 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/features/audio/data/models/audio_controller_ui_model.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_ui_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/ayah_key_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_cubit.dart";
-import "package:al_quran_v3/src/features/audio/presentation/cubit/segmented_quran_reciter_cubit.dart";
+import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/audio/data/models/ayahkey_management_model.dart";
 import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.dart";
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
@@ -208,128 +209,111 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: BlocBuilder<PlayerStateCubit, PlayerState>(
-              builder: (context, playerState) {
-                return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
-                  builder: (context, ayahKeyManagement) {
-                    bool isPlaying = playerState.isPlaying;
-                    bool isCurrentSurah =
-                        int.tryParse(ayahKeyManagement.current.split(":")[0]) ==
-                        headerInfoModel.surahInfoModel.id;
-                    bool isCurrentPlaying =
-                        isPlaying &&
-                        isCurrentSurah &&
-                        context
-                                .read<AudioUiCubit>()
-                                .state
-                                .isInsideQuranPlayer ==
-                            true;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        if (!kIsWeb)
-                          IconButton(
-                            style: IconButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              backgroundColor: themeState.primary,
-                              foregroundColor: Colors.white,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AudioDownloadScreen(
-                                    initDownloadSurah:
-                                        headerInfoModel.surahInfoModel,
-                                    reciterInfoModel: context
-                                        .read<SegmentedQuranReciterCubit>()
-                                        .state,
-                                  ),
+            child: BlocBuilder<AudioUiCubit, AudioControllerUiState>(
+              builder: (context, audioUiState) {
+                return BlocBuilder<PlayerStateCubit, PlayerState>(
+                  builder: (context, playerState) {
+                    return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
+                      builder: (context, ayahKeyManagement) {
+                        bool isPlaying = playerState.isPlaying;
+                        bool isCurrentSurah =
+                            int.tryParse(ayahKeyManagement.current.split(":")[0]) ==
+                            headerInfoModel.surahInfoModel.id;
+                        bool isCurrentPlaying =
+                            isPlaying &&
+                            isCurrentSurah &&
+                            audioUiState.isInsideQuranPlayer;
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            if (!kIsWeb)
+                              IconButton(
+                                style: IconButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: themeState.primary,
+                                  foregroundColor: Colors.white,
                                 ),
-                              );
-                            },
-                            icon: const Icon(
-                              FluentIcons.arrow_download_24_filled,
-                            ),
-                          ),
-                        IconButton(
-                          style: IconButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: themeState.primary,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () {
-                            bool isPlayList = context
-                                .read<AudioUiCubit>()
-                                .state
-                                .isPlayList;
-                            bool isCompleted =
-                                playerState.state ==
-                                just_audio.ProcessingState.completed;
-
-                            if (context
-                                    .read<AudioUiCubit>()
-                                    .state
-                                    .isInsideQuranPlayer ==
-                                false) {
-                              String startAyahKey =
-                                  headerInfoModel.startAyahKey;
-                              String endAyahKey = headerInfoModel.endAyahKey;
-
-                              AudioPlayerManager.playMultipleAyahAsPlaylist(
-                                startAyahKey: startAyahKey,
-                                endAyahKey: endAyahKey,
-                                reciterInfoModel: context
-                                    .read<SegmentedQuranReciterCubit>()
-                                    .state,
-                                isInsideQuran: true,
-                              );
-                            } else if (isCurrentPlaying &&
-                                isPlayList &&
-                                !isCompleted) {
-                              AudioPlayerManager.audioPlayer.pause();
-                            } else if (isCurrentSurah &&
-                                isPlayList &&
-                                !isCompleted) {
-                              AudioPlayerManager.audioPlayer.play();
-                            } else {
-                              String startAyahKey =
-                                  headerInfoModel.startAyahKey;
-                              String endAyahKey = headerInfoModel.endAyahKey;
-
-                              AudioPlayerManager.playMultipleAyahAsPlaylist(
-                                startAyahKey: startAyahKey,
-                                endAyahKey: endAyahKey,
-                                reciterInfoModel: context
-                                    .read<SegmentedQuranReciterCubit>()
-                                    .state,
-                                isInsideQuran: true,
-                              );
-                            }
-                          },
-                          icon:
-                              (playerState.state ==
-                                      just_audio.ProcessingState.loading &&
-                                  isCurrentSurah)
-                              ? Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 4,
-                                    backgroundColor: context
-                                        .read<ThemeCubit>()
-                                        .state
-                                        .primaryShade100,
-                                  ),
-                                )
-                              : Icon(
-                                  isCurrentPlaying
-                                      ? Icons.pause_rounded
-                                      : Icons.play_arrow_rounded,
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AudioDownloadScreen(
+                                        initDownloadSurah:
+                                            headerInfoModel.surahInfoModel,
+                                        reciterInfoModel:
+                                            context.read<ReciterCubit>().state,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(
+                                  FluentIcons.arrow_download_24_filled,
                                 ),
-                        ),
-                      ],
+                              ),
+                            IconButton(
+                              style: IconButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                backgroundColor: themeState.primary,
+                                foregroundColor: Colors.white,
+                              ),
+                              onPressed: () {
+                                bool isPlayList = audioUiState.isPlayList;
+                                bool isCompleted =
+                                    playerState.state ==
+                                    just_audio.ProcessingState.completed;
+
+                                if (!audioUiState.isInsideQuranPlayer) {
+                                  AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                    startAyahKey: headerInfoModel.startAyahKey,
+                                    endAyahKey: headerInfoModel.endAyahKey,
+                                    reciterInfoModel:
+                                        context.read<ReciterCubit>().state,
+                                    isInsideQuran: true,
+                                  );
+                                } else if (isCurrentPlaying &&
+                                    isPlayList &&
+                                    !isCompleted) {
+                                  AudioPlayerManager.pausePlayback();
+                                } else if (isCurrentSurah &&
+                                    isPlayList &&
+                                    !isCompleted) {
+                                  AudioPlayerManager.togglePlayPause();
+                                } else {
+                                  AudioPlayerManager.playMultipleAyahAsPlaylist(
+                                    startAyahKey: headerInfoModel.startAyahKey,
+                                    endAyahKey: headerInfoModel.endAyahKey,
+                                    reciterInfoModel:
+                                        context.read<ReciterCubit>().state,
+                                    isInsideQuran: true,
+                                  );
+                                }
+                              },
+                              icon:
+                                  (playerState.state ==
+                                          just_audio.ProcessingState.loading &&
+                                      isCurrentSurah &&
+                                      audioUiState.isInsideQuranPlayer)
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 4,
+                                        backgroundColor: context
+                                            .read<ThemeCubit>()
+                                            .state
+                                            .primaryShade100,
+                                      ),
+                                    )
+                                  : Icon(
+                                      isCurrentPlaying
+                                          ? Icons.pause_rounded
+                                          : Icons.play_arrow_rounded,
+                                    ),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
                 );

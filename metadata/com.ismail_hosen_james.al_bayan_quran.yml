@@ -12,23 +12,30 @@ RepoType: git
 Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
 
 Builds:
-  - versionName: 4.3.0
-    versionCode: 103
-    commit: 298e5fe4caf2393d16f2e68f2e3b871101b17ca5
+  - versionName: 4.4.1
+    versionCode: 105
+    commit: v4.4.1-foss
     output: build/app/outputs/flutter-apk/app-release.apk
     srclibs:
-      - flutter@stable
+      - flutter@3.50.1
     rm:
       - ios
+      - linux
       - macos
+      - web
       - windows
     prebuild:
+      - (sdkmanager "platforms;android-37.0" || /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager
+        "platforms;android-37.0" || true)
+      - bash android/prepare_sdk.sh || true
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter pub get
     build: $$flutter$$/bin/flutter build apk --release --android-skip-build-dependency-validation
+      || (bash android/prepare_sdk.sh && $$flutter$$/bin/flutter build apk --release
+      --android-skip-build-dependency-validation)
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+-foss$
 UpdateCheckData: pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
-CurrentVersion: 4.3.0
-CurrentVersionCode: 103
+CurrentVersion: 4.4.1
+CurrentVersionCode: 105

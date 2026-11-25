@@ -22,6 +22,12 @@ class AutoScrollFloatingHud extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    try {
+      context.read<AutoScrollCubit>();
+    } catch (_) {
+      return const SizedBox.shrink();
+    }
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primary = context.watch<ThemeCubit>().state.primary;
 

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ReciterInfoModel {
 
- String get link; String get name; bool? get supportWordSegmentation; String? get source; String? get style; String? get img; String? get bio;@JsonKey(name: 'segments_url') String? get segmentsUrl; bool get isDownloading; String? get showAyahHighlight;
+ String get link; String get name; bool? get supportWordSegmentation; String? get source; String? get style; String? get img; String? get bio;@JsonKey(name: 'segments_url') String? get segmentsUrl; bool get isDownloading;
 /// Create a copy of ReciterInfoModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $ReciterInfoModelCopyWith<ReciterInfoModel> get copyWith => _$ReciterInfoModelCo
 @override
 bool operator ==(Object other) {
   final _this = this as ReciterInfoModel;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReciterInfoModel&&(identical(other.link, _this.link) || other.link == _this.link)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.supportWordSegmentation, _this.supportWordSegmentation) || other.supportWordSegmentation == _this.supportWordSegmentation)&&(identical(other.source, _this.source) || other.source == _this.source)&&(identical(other.style, _this.style) || other.style == _this.style)&&(identical(other.img, _this.img) || other.img == _this.img)&&(identical(other.bio, _this.bio) || other.bio == _this.bio)&&(identical(other.segmentsUrl, _this.segmentsUrl) || other.segmentsUrl == _this.segmentsUrl)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading)&&(identical(other.showAyahHighlight, _this.showAyahHighlight) || other.showAyahHighlight == _this.showAyahHighlight));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReciterInfoModel&&(identical(other.link, _this.link) || other.link == _this.link)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.supportWordSegmentation, _this.supportWordSegmentation) || other.supportWordSegmentation == _this.supportWordSegmentation)&&(identical(other.source, _this.source) || other.source == _this.source)&&(identical(other.style, _this.style) || other.style == _this.style)&&(identical(other.img, _this.img) || other.img == _this.img)&&(identical(other.bio, _this.bio) || other.bio == _this.bio)&&(identical(other.segmentsUrl, _this.segmentsUrl) || other.segmentsUrl == _this.segmentsUrl)&&(identical(other.isDownloading, _this.isDownloading) || other.isDownloading == _this.isDownloading));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as ReciterInfoModel;
-  return Object.hash(runtimeType,_this.link,_this.name,_this.supportWordSegmentation,_this.source,_this.style,_this.img,_this.bio,_this.segmentsUrl,_this.isDownloading,_this.showAyahHighlight);
+  return Object.hash(runtimeType,_this.link,_this.name,_this.supportWordSegmentation,_this.source,_this.style,_this.img,_this.bio,_this.segmentsUrl,_this.isDownloading);
 }
 
 @override
 String toString() {
   final _this = this as ReciterInfoModel;
-  return 'ReciterInfoModel(link: ${_this.link}, name: ${_this.name}, supportWordSegmentation: ${_this.supportWordSegmentation}, source: ${_this.source}, style: ${_this.style}, img: ${_this.img}, bio: ${_this.bio}, segmentsUrl: ${_this.segmentsUrl}, isDownloading: ${_this.isDownloading}, showAyahHighlight: ${_this.showAyahHighlight})';
+  return 'ReciterInfoModel(link: ${_this.link}, name: ${_this.name}, supportWordSegmentation: ${_this.supportWordSegmentation}, source: ${_this.source}, style: ${_this.style}, img: ${_this.img}, bio: ${_this.bio}, segmentsUrl: ${_this.segmentsUrl}, isDownloading: ${_this.isDownloading})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ReciterInfoModelCopyWith<$Res>  {
   factory $ReciterInfoModelCopyWith(ReciterInfoModel value, $Res Function(ReciterInfoModel) _then) = _$ReciterInfoModelCopyWithImpl;
 @useResult
 $Res call({
- String link, String name, bool? supportWordSegmentation, String? source, String? style, String? img, String? bio,@JsonKey(name: 'segments_url') String? segmentsUrl, bool isDownloading, String? showAyahHighlight
+ String link, String name, bool? supportWordSegmentation, String? source, String? style, String? img, String? bio,@JsonKey(name: 'segments_url') String? segmentsUrl, bool isDownloading
 });
 
 
@@ -71,7 +71,7 @@ class _$ReciterInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of ReciterInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? link = null,Object? name = null,Object? supportWordSegmentation = freezed,Object? source = freezed,Object? style = freezed,Object? img = freezed,Object? bio = freezed,Object? segmentsUrl = freezed,Object? isDownloading = null,Object? showAyahHighlight = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? link = null,Object? name = null,Object? supportWordSegmentation = freezed,Object? source = freezed,Object? style = freezed,Object? img = freezed,Object? bio = freezed,Object? segmentsUrl = freezed,Object? isDownloading = null,}) {
   return _then(ReciterInfoModel(
 link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -82,8 +82,7 @@ as String?,img: freezed == img ? _self.img : img // ignore: cast_nullable_to_non
 as String?,bio: freezed == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as String?,segmentsUrl: freezed == segmentsUrl ? _self.segmentsUrl : segmentsUrl // ignore: cast_nullable_to_non_nullable
 as String?,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
-as bool,showAyahHighlight: freezed == showAyahHighlight ? _self.showAyahHighlight : showAyahHighlight // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,
   ));
 }
 
@@ -168,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading,  String? showAyahHighlight)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReciterInfoModel() when $default != null:
-return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading,_that.showAyahHighlight);case _:
+return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading);case _:
   return orElse();
 
 }
@@ -189,10 +188,10 @@ return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading,  String? showAyahHighlight)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading)  $default,) {final _that = this;
 switch (_that) {
 case _ReciterInfoModel():
-return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading,_that.showAyahHighlight);case _:
+return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -209,10 +208,10 @@ return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading,  String? showAyahHighlight)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String link,  String name,  bool? supportWordSegmentation,  String? source,  String? style,  String? img,  String? bio, @JsonKey(name: 'segments_url')  String? segmentsUrl,  bool isDownloading)?  $default,) {final _that = this;
 switch (_that) {
 case _ReciterInfoModel() when $default != null:
-return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading,_that.showAyahHighlight);case _:
+return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source,_that.style,_that.img,_that.bio,_that.segmentsUrl,_that.isDownloading);case _:
   return null;
 
 }
@@ -224,7 +223,7 @@ return $default(_that.link,_that.name,_that.supportWordSegmentation,_that.source
 
 @JsonSerializable(explicitToJson: true)
 class _ReciterInfoModel extends ReciterInfoModel {
-  const _ReciterInfoModel({required this.link, required this.name, this.supportWordSegmentation, this.source, this.style, this.img, this.bio, @JsonKey(name: 'segments_url') this.segmentsUrl, this.isDownloading = false, this.showAyahHighlight}): super._();
+  const _ReciterInfoModel({required this.link, required this.name, this.supportWordSegmentation, this.source, this.style, this.img, this.bio, @JsonKey(name: 'segments_url') this.segmentsUrl, this.isDownloading = false}): super._();
   factory _ReciterInfoModel.fromJson(Map<String, dynamic> json) => _$ReciterInfoModelFromJson(json);
 
 @override final  String link;
@@ -236,7 +235,6 @@ class _ReciterInfoModel extends ReciterInfoModel {
 @override final  String? bio;
 @override@JsonKey(name: 'segments_url') final  String? segmentsUrl;
 @override@JsonKey() final  bool isDownloading;
-@override final  String? showAyahHighlight;
 
 /// Create a copy of ReciterInfoModel
 /// with the given fields replaced by the non-null parameter values.
@@ -251,18 +249,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReciterInfoModel&&(identical(other.link, link) || other.link == link)&&(identical(other.name, name) || other.name == name)&&(identical(other.supportWordSegmentation, supportWordSegmentation) || other.supportWordSegmentation == supportWordSegmentation)&&(identical(other.source, source) || other.source == source)&&(identical(other.style, style) || other.style == style)&&(identical(other.img, img) || other.img == img)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.segmentsUrl, segmentsUrl) || other.segmentsUrl == segmentsUrl)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading)&&(identical(other.showAyahHighlight, showAyahHighlight) || other.showAyahHighlight == showAyahHighlight));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReciterInfoModel&&(identical(other.link, link) || other.link == link)&&(identical(other.name, name) || other.name == name)&&(identical(other.supportWordSegmentation, supportWordSegmentation) || other.supportWordSegmentation == supportWordSegmentation)&&(identical(other.source, source) || other.source == source)&&(identical(other.style, style) || other.style == style)&&(identical(other.img, img) || other.img == img)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.segmentsUrl, segmentsUrl) || other.segmentsUrl == segmentsUrl)&&(identical(other.isDownloading, isDownloading) || other.isDownloading == isDownloading));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,link,name,supportWordSegmentation,source,style,img,bio,segmentsUrl,isDownloading,showAyahHighlight);
+    return Object.hash(runtimeType,link,name,supportWordSegmentation,source,style,img,bio,segmentsUrl,isDownloading);
 }
 
 @override
 String toString() {
-    return 'ReciterInfoModel(link: $link, name: $name, supportWordSegmentation: $supportWordSegmentation, source: $source, style: $style, img: $img, bio: $bio, segmentsUrl: $segmentsUrl, isDownloading: $isDownloading, showAyahHighlight: $showAyahHighlight)';
+    return 'ReciterInfoModel(link: $link, name: $name, supportWordSegmentation: $supportWordSegmentation, source: $source, style: $style, img: $img, bio: $bio, segmentsUrl: $segmentsUrl, isDownloading: $isDownloading)';
 }
 
 
@@ -273,7 +271,7 @@ abstract mixin class _$ReciterInfoModelCopyWith<$Res> implements $ReciterInfoMod
   factory _$ReciterInfoModelCopyWith(_ReciterInfoModel value, $Res Function(_ReciterInfoModel) _then) = __$ReciterInfoModelCopyWithImpl;
 @override @useResult
 $Res call({
- String link, String name, bool? supportWordSegmentation, String? source, String? style, String? img, String? bio,@JsonKey(name: 'segments_url') String? segmentsUrl, bool isDownloading, String? showAyahHighlight
+ String link, String name, bool? supportWordSegmentation, String? source, String? style, String? img, String? bio,@JsonKey(name: 'segments_url') String? segmentsUrl, bool isDownloading
 });
 
 
@@ -290,7 +288,7 @@ class __$ReciterInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of ReciterInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? link = null,Object? name = null,Object? supportWordSegmentation = freezed,Object? source = freezed,Object? style = freezed,Object? img = freezed,Object? bio = freezed,Object? segmentsUrl = freezed,Object? isDownloading = null,Object? showAyahHighlight = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? link = null,Object? name = null,Object? supportWordSegmentation = freezed,Object? source = freezed,Object? style = freezed,Object? img = freezed,Object? bio = freezed,Object? segmentsUrl = freezed,Object? isDownloading = null,}) {
   return _then(_ReciterInfoModel(
 link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -301,8 +299,7 @@ as String?,img: freezed == img ? _self.img : img // ignore: cast_nullable_to_non
 as String?,bio: freezed == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as String?,segmentsUrl: freezed == segmentsUrl ? _self.segmentsUrl : segmentsUrl // ignore: cast_nullable_to_non_nullable
 as String?,isDownloading: null == isDownloading ? _self.isDownloading : isDownloading // ignore: cast_nullable_to_non_nullable
-as bool,showAyahHighlight: freezed == showAyahHighlight ? _self.showAyahHighlight : showAyahHighlight // ignore: cast_nullable_to_non_nullable
-as String?,
+as bool,
   ));
 }
 

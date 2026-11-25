@@ -16,7 +16,6 @@ abstract class ReciterInfoModel with _$ReciterInfoModel {
     String? bio,
     @JsonKey(name: 'segments_url') String? segmentsUrl,
     @Default(false) bool isDownloading,
-    String? showAyahHighlight,
   }) = _ReciterInfoModel;
 
   factory ReciterInfoModel.fromJson(Map<String, dynamic> json) =>
@@ -26,6 +25,10 @@ abstract class ReciterInfoModel with _$ReciterInfoModel {
       ReciterInfoModel.fromJson(json);
 
   const ReciterInfoModel._();
+
+  bool get hasWordSegments => segmentsUrl != null && segmentsUrl!.isNotEmpty;
+
+  String get normalizedLink => link.replaceAll(RegExp(r'/+$'), '');
 
   Map<String, dynamic> toMap() => toJson();
 }

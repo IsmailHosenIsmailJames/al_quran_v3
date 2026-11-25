@@ -21,6 +21,7 @@ abstract class AudioLoopState with _$AudioLoopState {
     @Default(1) int currentRangeCycle,
     @Default(1) int repeatEachAyah,
     @Default(1) int currentAyahRepeat,
+    @Default(0) int pauseBetweenAyahsSeconds,
   }) = _AudioLoopState;
 
   bool get isInfinite => repeatTargetCount <= 0;
@@ -32,7 +33,9 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
 
   Future<void> setLoopMode(LoopMode mode) async {
     try {
-      await AudioPlayerManager.audioPlayer.setLoopMode(mode);
+      if (AudioPlayerManager.hasActivePlayer) {
+        await AudioPlayerManager.audioPlayer.setLoopMode(mode);
+      }
     } catch (_) {}
     if (!isClosed) {
       emit(state.copyWith(loopMode: mode));
@@ -62,10 +65,20 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
     required int endAyah,
     int repeatTargetCount = -1,
     int repeatEachAyah = 1,
+    int pauseBetweenAyahsSeconds = 0,
   }) async {
-    final loopMode = repeatTargetCount == 1 ? LoopMode.off : LoopMode.all;
+    final bool isSingleItemRange =
+        startSurah == endSurah && startAyah == endAyah && repeatEachAyah <= 1;
+    // A 1-item playlist with LoopMode.all never emits ProcessingState.completed or
+    // index wrap events, so we keep native LoopMode.off for single-ayah repeats
+    // and trigger each cycle deterministically on completion.
+    final loopMode = (repeatTargetCount == 1 || isSingleItemRange)
+        ? LoopMode.off
+        : LoopMode.all;
     try {
-      await AudioPlayerManager.audioPlayer.setLoopMode(loopMode);
+      if (AudioPlayerManager.hasActivePlayer) {
+        await AudioPlayerManager.audioPlayer.setLoopMode(loopMode);
+      }
     } catch (_) {}
 
     if (!isClosed) {
@@ -77,7 +90,8 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
           endSurah: endSurah,
           endAyah: endAyah,
           repeatTargetCount: repeatTargetCount,
-          repeatEachAyah: repeatEachAyah,
+          repeatEachAyah: repeatEachAyah.clamp(1, 20),
+          pauseBetweenAyahsSeconds: pauseBetweenAyahsSeconds.clamp(0, 30),
           currentRangeCycle: 1,
           currentAyahRepeat: 1,
           loopMode: loopMode,
@@ -86,9 +100,19 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
     }
   }
 
+  void updateCurrentAyahRepeat(int repeatNumber) {
+    if (!isClosed &&
+        state.isRangeActive &&
+        state.currentAyahRepeat != repeatNumber) {
+      emit(state.copyWith(currentAyahRepeat: repeatNumber));
+    }
+  }
+
   Future<void> clearRange() async {
     try {
-      await AudioPlayerManager.audioPlayer.setLoopMode(LoopMode.off);
+      if (AudioPlayerManager.hasActivePlayer) {
+        await AudioPlayerManager.audioPlayer.setLoopMode(LoopMode.off);
+      }
     } catch (_) {}
     if (!isClosed) {
       emit(
@@ -96,9 +120,19 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
           isRangeActive: false,
           loopMode: LoopMode.off,
           currentRangeCycle: 1,
+          repeatEachAyah: 1,
           currentAyahRepeat: 1,
+          pauseBetweenAyahsSeconds: 0,
         ),
       );
+    }
+  }
+
+  /// Clears active range state only if one is currently active (e.g., when
+  /// the user starts standard non-range playback).
+  Future<void> clearRangeIfActive() async {
+    if (state.isRangeActive) {
+      await clearRange();
     }
   }
 
@@ -115,11 +149,16 @@ class AudioLoopCubit extends Cubit<AudioLoopState> {
               isRangeActive: false,
               loopMode: LoopMode.off,
               currentRangeCycle: 1,
+              repeatEachAyah: 1,
+              currentAyahRepeat: 1,
+              pauseBetweenAyahsSeconds: 0,
             ),
           );
         }
         try {
-          AudioPlayerManager.audioPlayer.setLoopMode(LoopMode.off);
+          if (AudioPlayerManager.hasActivePlayer) {
+            AudioPlayerManager.audioPlayer.setLoopMode(LoopMode.off);
+          }
         } catch (_) {}
         return false;
       }

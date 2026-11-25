@@ -58,3 +58,6 @@ macos/Runner/GoogleService-Info.plist
 .firebase/
 *serviceAccountKey*.json
 *firebase-adminsdk*.json
+
+# FVM Version Cache
+.fvm/
